@@ -1,0 +1,16 @@
+# Node
+node_modules/
+
+# Environment
+.env
+
+# Editor
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# OS
+.DS_Store
+Thumbs.db
