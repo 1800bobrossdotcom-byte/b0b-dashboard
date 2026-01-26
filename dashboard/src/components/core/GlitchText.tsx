@@ -9,7 +9,7 @@
  * We're Bob Rossing this. 🎨
  */
 
-import { useState, useEffect, useCallback, ElementType } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { glitchText } from '@/utils/tenets';
 
 interface GlitchTextProps {
@@ -17,7 +17,7 @@ interface GlitchTextProps {
   intensity?: number;
   interval?: number;
   className?: string;
-  as?: ElementType;
+  as?: 'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div';
   glitchOnHover?: boolean;
 }
 
@@ -26,7 +26,7 @@ export function GlitchText({
   intensity = 0.1,
   interval = 3000,
   className = '',
-  as: Component = 'span',
+  as = 'span',
   glitchOnHover = false,
 }: GlitchTextProps) {
   const [displayText, setDisplayText] = useState(children);
@@ -67,8 +67,10 @@ export function GlitchText({
     }
   }, [children, glitchOnHover]);
   
+  const Tag = as;
+  
   return (
-    <Component
+    <Tag
       className={`${className} ${isGlitching ? 'glitch' : ''}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -78,7 +80,7 @@ export function GlitchText({
       }}
     >
       {displayText}
-    </Component>
+    </Tag>
   );
 }
 
