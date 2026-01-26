@@ -1,21 +1,16 @@
 {
   "name": "b0b-platform",
-  "version": "1.0.0",
-  "description": "b0b platform - Claude + BASE + MCP",
-  "main": "dashboard/server.js",
+  "version": "2.0.0",
+  "description": "B0B.DEV - An autonomous creative intelligence",
   "scripts": {
-    "start": "node dashboard/server.js",
-    "dev": "nodemon dashboard/server.js",
-    "build": "echo 'No build needed'"
+    "build": "cd dashboard && npm install && npm run build",
+    "start": "cd dashboard && npm run start",
+    "dev": "cd dashboard && npm run dev"
   },
-  "keywords": ["claude", "base", "blockchain", "mcp"],
+  "keywords": ["b0b", "autonomous", "ai", "creative", "agents"],
   "author": "BOBROSSDOTCOM",
   "license": "MIT",
-  "dependencies": {
-    "express": "^4.18.0",
-    "cors": "^2.8.5"
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.0"
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
