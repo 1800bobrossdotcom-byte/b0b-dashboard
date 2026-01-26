@@ -1,8 +1,11 @@
 # Node
 node_modules/
 
-# Environment
+# Environment - NEVER COMMIT SECRETS
 .env
+.env.local
+.env.*.local
+*.env
 
 # Editor
 .vscode/
@@ -14,3 +17,20 @@ node_modules/
 # OS
 .DS_Store
 Thumbs.db
+
+# Next.js
+.next/
+out/
+
+# Build
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+
+# API Keys - NEVER COMMIT
+config.json
+**/config.json
+credentials.json

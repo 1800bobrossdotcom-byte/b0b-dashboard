@@ -1,6 +1,15 @@
-# Claude + BASE API
+# b0b.dev API
 
-REST API for integrating Claude AI with BASE blockchain.
+Claude AI + BASE Blockchain API service for b0b.dev
+
+## Endpoints
+- `/api/chat` - Ask Claude AI questions
+- `/api/health` - Health check
+- `/api/base/balance/{address}` - Get BASE balance
+- `/api/claude/models` - List available Claude models
+
+## Deployment
+Deployed to Railway as api.b0b.dev
 
 ## Setup
 
@@ -14,8 +23,8 @@ pip install -r requirements.txt
 
 Create a `.env` file:
 ```
-CLAUDE_API_KEY=sk-...
-FLASK_ENV=production
+CLAUDE_API_KEY=sk-ant-api03-...
+PORT=5000
 ```
 
 ## Run
@@ -23,10 +32,3 @@ FLASK_ENV=production
 ```bash
 python app.py
 ```
-
-Server runs on port 5000 by default.
-
-## Endpoints
-
-- `POST /api/chat` - Send messages to Claude
-- `GET /api/health` - Health check

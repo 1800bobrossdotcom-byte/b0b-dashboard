@@ -9,8 +9,12 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
-# Initialize Anthropic client
-client = anthropic.Anthropic(api_key=os.getenv('CLAUDE_API_KEY'))
+def get_anthropic_client():
+    """Get or create Anthropic client"""
+    api_key = os.getenv('CLAUDE_API_KEY')
+    if not api_key:
+        raise ValueError("CLAUDE_API_KEY environment variable not set")
+    return anthropic.Anthropic(api_key=api_key)
 
 @app.route('/api/health', methods=['GET'])
 def health():
@@ -32,6 +36,9 @@ def chat():
         
         message = data['message']
         model = data.get('model', 'claude-3-5-sonnet-20241022')
+        
+        # Get client
+        client = get_anthropic_client()
         
         # Call Claude API
         response = client.messages.create(
@@ -63,6 +70,8 @@ def chat():
             }
         }), 200
         
+    except ValueError as e:
+        return jsonify({'error': str(e)}), 500
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
