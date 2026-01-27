@@ -14,10 +14,14 @@ export const AESTHETICS = {
     background: '#0A0A08',
     surface: '#1A1810',
     glow: 'rgba(245, 158, 11, 0.15)',
+    // Visual signature
     particleShape: 'square',
+    particlePattern: 'grid', // Ordered, military precision
+    font: 'mono', // JetBrains Mono - technical
     scanlines: false,
     glitch: false,
     crt: false,
+    noise: 'none',
   },
   ghost: {
     name: 'GH0ST',
@@ -29,10 +33,14 @@ export const AESTHETICS = {
     background: '#050808',
     surface: '#0A1210',
     glow: 'rgba(0, 255, 136, 0.1)',
+    // Visual signature
     particleShape: 'circle',
+    particlePattern: 'perlin', // Organic, flowing noise
+    font: 'terminal', // Hacker aesthetic
     scanlines: true,
     glitch: true,
     crt: false,
+    noise: 'static', // TV static overlay
   },
   anime: {
     name: 'ANIME',
@@ -44,55 +52,14 @@ export const AESTHETICS = {
     background: '#0D0A12',
     surface: '#1A1424',
     glow: 'rgba(255, 107, 157, 0.2)',
-    particleShape: 'circle',
+    // Visual signature
+    particleShape: 'star',
+    particlePattern: 'bloom', // Soft, dreamy clusters
+    font: 'display', // Space Grotesk - stylized
     scanlines: false,
     glitch: false,
     crt: true,
-  },
-  void: {
-    name: 'V0ID',
-    description: 'Deep nothing',
-    primary: '#8B5CF6',
-    secondary: '#7C3AED',
-    accent: '#A78BFA',
-    muted: '#52525B',
-    background: '#030303',
-    surface: '#0A0A0F',
-    glow: 'rgba(139, 92, 246, 0.1)',
-    particleShape: 'square',
-    scanlines: false,
-    glitch: false,
-    crt: false,
-  },
-  ice: {
-    name: 'ICE',
-    description: 'Arctic clarity',
-    primary: '#06B6D4',
-    secondary: '#0891B2',
-    accent: '#67E8F9',
-    muted: '#64748B',
-    background: '#050A0D',
-    surface: '#0A1418',
-    glow: 'rgba(6, 182, 212, 0.12)',
-    particleShape: 'circle',
-    scanlines: false,
-    glitch: false,
-    crt: false,
-  },
-  blood: {
-    name: 'BL00D',
-    description: 'Maximum alert',
-    primary: '#EF4444',
-    secondary: '#DC2626',
-    accent: '#FCA5A5',
-    muted: '#71717A',
-    background: '#080505',
-    surface: '#140A0A',
-    glow: 'rgba(239, 68, 68, 0.15)',
-    particleShape: 'square',
-    scanlines: true,
-    glitch: false,
-    crt: false,
+    noise: 'grain', // Film grain
   },
 } as const;
 
@@ -155,6 +122,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     root.setAttribute('data-scanlines', String(config.scanlines));
     root.setAttribute('data-glitch', String(config.glitch));
     root.setAttribute('data-crt', String(config.crt));
+    root.setAttribute('data-noise', config.noise);
+    root.setAttribute('data-font', config.font);
     
     localStorage.setItem('b0b-aesthetic', aesthetic);
   }, [aesthetic]);

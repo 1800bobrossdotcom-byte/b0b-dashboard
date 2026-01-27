@@ -143,6 +143,102 @@
 }
 
 /* ═══════════════════════════════════════════
+   FONT AESTHETICS
+   ═══════════════════════════════════════════ */
+
+/* MILSPEC: Technical mono font */
+[data-font="mono"] body {
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+}
+
+[data-font="mono"] h1,
+[data-font="mono"] h2,
+[data-font="mono"] h3 {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* GH0ST: Terminal hacker aesthetic */
+[data-font="terminal"] body {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+[data-font="terminal"] h1,
+[data-font="terminal"] h2,
+[data-font="terminal"] h3 {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+[data-font="terminal"] h1::before {
+  content: '> ';
+  opacity: 0.6;
+}
+
+/* ANIME: Stylized display font */
+[data-font="display"] body {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+}
+
+[data-font="display"] h1,
+[data-font="display"] h2,
+[data-font="display"] h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* ═══════════════════════════════════════════
+   NOISE EFFECTS
+   ═══════════════════════════════════════════ */
+
+/* Static noise overlay (GH0ST) */
+[data-noise="static"]::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9997;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  animation: staticNoise 0.1s steps(5) infinite;
+}
+
+@keyframes staticNoise {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-1px, 1px); }
+  50% { transform: translate(1px, -1px); }
+  75% { transform: translate(-1px, -1px); }
+}
+
+/* Film grain overlay (ANIME) */
+[data-noise="grain"]::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9997;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E");
+  animation: filmGrain 0.5s steps(10) infinite;
+}
+
+@keyframes filmGrain {
+  0%, 100% { opacity: 0.04; }
+  50% { opacity: 0.05; }
+}
+
+/* ═══════════════════════════════════════════
    BASE STYLES
    ═══════════════════════════════════════════ */
 
