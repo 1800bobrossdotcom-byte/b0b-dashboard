@@ -36,6 +36,9 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
 };
 
+import { ThemeProvider } from "@/contexts/ThemeContext";
+import ControlPanel from "@/components/core/ControlPanel";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -43,8 +46,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="antialiased bg-[#0a0a0f] text-[#f8fafc]">
-        {children}
+      <body className="antialiased bg-[var(--color-background)] text-[#f8fafc]">
+        <ThemeProvider>
+          {children}
+          <ControlPanel />
+        </ThemeProvider>
       </body>
     </html>
   );

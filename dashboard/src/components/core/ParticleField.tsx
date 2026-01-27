@@ -12,7 +12,7 @@
  * We're Bob Rossing this. 🎨
  */
 
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useEffect, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { COLORS, happyAccident } from '@/utils/tenets';
@@ -23,12 +23,37 @@ interface ParticleFieldProps {
   mouse?: { x: number; y: number };
 }
 
+// Hook to get CSS variable value
+function useCSSVariable(variableName: string, fallback: string = '#06b6d4') {
+  const [value, setValue] = useState(fallback);
+  
+  useEffect(() => {
+    const updateValue = () => {
+      const computed = getComputedStyle(document.documentElement).getPropertyValue(variableName).trim();
+      if (computed) setValue(computed);
+    };
+    
+    updateValue();
+    
+    // Listen for theme changes
+    const observer = new MutationObserver(updateValue);
+    observer.observe(document.documentElement, { 
+      attributes: true, 
+      attributeFilter: ['style'] 
+    });
+    
+    return () => observer.disconnect();
+  }, [variableName]);
+  
+  return value;
+}
+
 const STATE_CONFIG = {
-  contemplating: { speed: 0.2, spread: 5, color: COLORS.mindGlow },
-  sensing: { speed: 0.5, spread: 4, color: COLORS.flow },
-  deciding: { speed: 0.8, spread: 3, color: COLORS.mindPulse },
-  creating: { speed: 1.2, spread: 6, color: COLORS.emergence },
-  giving: { speed: 0.3, spread: 5, color: COLORS.heart },
+  contemplating: { speed: 0.2, spread: 5 },
+  sensing: { speed: 0.5, spread: 4 },
+  deciding: { speed: 0.8, spread: 3 },
+  creating: { speed: 1.2, spread: 6 },
+  giving: { speed: 0.3, spread: 5 },
 };
 
 export function ParticleField({ 
@@ -38,6 +63,9 @@ export function ParticleField({
 }: ParticleFieldProps) {
   const meshRef = useRef<THREE.Points>(null);
   const config = STATE_CONFIG[state];
+  
+  // Use theme color from CSS variables
+  const themeColor = useCSSVariable('--color-primary', '#06b6d4');
   
   // Generate initial particle positions
   const [positions, velocities] = useMemo(() => {
@@ -123,7 +151,7 @@ export function ParticleField({
       </bufferGeometry>
       <pointsMaterial
         size={0.05}
-        color={config.color}
+        color={themeColor}
         transparent
         opacity={0.6}
         sizeAttenuation

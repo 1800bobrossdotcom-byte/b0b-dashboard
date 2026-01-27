@@ -20,12 +20,40 @@ import { ParticleField } from '@/components/core/ParticleField';
 import B0BLogo from '@/components/core/B0BLogo';
 import { COLORS } from '@/utils/tenets';
 
+// Hook to get CSS variable value
+function useCSSVariable(variableName: string, fallback: string = '#06b6d4') {
+  const [value, setValue] = useState(fallback);
+  
+  useEffect(() => {
+    const updateValue = () => {
+      const computed = getComputedStyle(document.documentElement).getPropertyValue(variableName).trim();
+      if (computed) setValue(computed);
+    };
+    
+    updateValue();
+    
+    // Listen for theme changes
+    const observer = new MutationObserver(updateValue);
+    observer.observe(document.documentElement, { 
+      attributes: true, 
+      attributeFilter: ['style'] 
+    });
+    
+    return () => observer.disconnect();
+  }, [variableName]);
+  
+  return value;
+}
+
 export function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [agentState, setAgentState] = useState<'contemplating' | 'sensing' | 'deciding' | 'creating' | 'giving'>('contemplating');
+  
+  // Get theme color for sparkles
+  const themeColor = useCSSVariable('--color-primary', '#06b6d4');
   
   // Entrance animation
   useEffect(() => {
@@ -78,7 +106,7 @@ export function HeroSection() {
         <Canvas camera={{ position: [0, 0, 8], fov: 60 }}>
           <color attach="background" args={[COLORS.void]} />
           <ambientLight intensity={0.5} />
-          <pointLight position={[10, 10, 10]} intensity={1} color={COLORS.mindGlow} />
+          <pointLight position={[10, 10, 10]} intensity={1} color={themeColor} />
           
           <ParticleField count={3000} state={agentState} mouse={mousePos} />
           
@@ -88,7 +116,7 @@ export function HeroSection() {
               scale={10} 
               size={2} 
               speed={0.4} 
-              color={COLORS.joy}
+              color={themeColor}
               opacity={0.5}
             />
           </Float>
