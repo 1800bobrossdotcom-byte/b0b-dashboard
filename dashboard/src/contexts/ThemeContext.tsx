@@ -61,11 +61,12 @@ export const THEMES = {
 } as const;
 
 export type ThemeKey = keyof typeof THEMES;
+export type ThemeColors = typeof THEMES[ThemeKey];
 
 interface ThemeContextType {
   theme: ThemeKey;
   setTheme: (theme: ThemeKey) => void;
-  colors: typeof THEMES.cyan;
+  colors: ThemeColors;
   particleDensity: 'low' | 'medium' | 'high';
   setParticleDensity: (d: 'low' | 'medium' | 'high') => void;
   animationSpeed: 'slow' | 'normal' | 'fast';
