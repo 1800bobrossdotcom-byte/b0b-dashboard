@@ -2,6 +2,14 @@
   "mode": "turbo",
   "activatedAt": "2026-01-27T06:48:36.973Z",
   "activatedBy": "manual",
-  "actionsPerformed": 0,
-  "lastAction": null
+  "actionsPerformed": 4,
+  "lastAction": {
+    "action": "moveMouse",
+    "details": {
+      "x": 960,
+      "y": 540,
+      "method": "powershell"
+    },
+    "timestamp": "2026-01-27T06:49:56.762Z"
+  }
 }

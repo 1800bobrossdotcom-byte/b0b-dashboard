@@ -272,9 +272,9 @@ const Operations = {
       ControlInterface.logAction('moveMouse', { x, y });
       return true;
     } catch (e) {
-      // Fallback: use PowerShell
+      // Fallback: use PowerShell with assembly load
       try {
-        execSync(`powershell -Command "[System.Windows.Forms.Cursor]::Position = New-Object System.Drawing.Point(${x}, ${y})"`, { encoding: 'utf8' });
+        execSync(`powershell -Command "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.Cursor]::Position = New-Object System.Drawing.Point(${x}, ${y})"`, { encoding: 'utf8' });
         ControlInterface.logAction('moveMouse', { x, y, method: 'powershell' });
         return true;
       } catch (e2) {

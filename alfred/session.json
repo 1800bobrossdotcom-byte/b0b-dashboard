@@ -1,0 +1,38 @@
+{
+  "session": {
+    "id": "b0b-r0ss1ng-2026-01-27",
+    "started": "2026-01-27T06:00:00Z",
+    "lastActive": "2026-01-27T07:00:00Z",
+    "mode": "TURB0B00ST"
+  },
+  "machine": {
+    "healthy": true,
+    "cpu": "22%",
+    "ramFree": "38.41 GB",
+    "diskFree": "1243.4 GB",
+    "checkedAt": "2026-01-27T07:00:00Z"
+  },
+  "git": {
+    "lastCommit": "5d7b6c8",
+    "message": "b0b r0ss1ng: Alfred, visual-debug, control modes, autonomous system",
+    "filesChanged": 87
+  },
+  "capabilities": {
+    "mouseControl": true,
+    "mouseMethod": "powershell",
+    "windowControl": true,
+    "visualDebug": true,
+    "autonomous": true
+  },
+  "activeWork": {
+    "project": "0type",
+    "task": "Fix stroke preset rendering",
+    "status": "Library verified (5.5x variation), need UI connection test",
+    "files": [
+      "0type/src/lib/perfect-renderer.ts",
+      "0type/src/lib/stroke-engine.ts",
+      "0type/src/app/compare/page.tsx"
+    ]
+  },
+  "resumeInstructions": "Say 'Alfred is active. Continue.' to pick up where we left off. Check alfred/briefings/latest.md for full context."
+}
