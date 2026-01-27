@@ -1,0 +1,52 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- B0B Logo - Full size for OG/Social sharing -->
+  <rect width="512" height="512" fill="#0A0A0A"/>
+  
+  <!-- Subtle grid pattern -->
+  <defs>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#1a1a2e" stroke-width="0.5"/>
+    </pattern>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="cyan-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00D4FF"/>
+      <stop offset="50%" stop-color="#00FFFF"/>
+      <stop offset="100%" stop-color="#00D4FF"/>
+    </linearGradient>
+  </defs>
+  
+  <rect width="512" height="512" fill="url(#grid)"/>
+  
+  <!-- B0B Text -->
+  <g filter="url(#glow)" transform="translate(56, 156)">
+    <!-- B -->
+    <text x="0" y="160" font-family="monospace" font-size="200" font-weight="bold" fill="url(#cyan-gradient)">B</text>
+    
+    <!-- Slashed Zero -->
+    <g transform="translate(130, 20)">
+      <ellipse cx="70" cy="70" rx="55" ry="68" fill="none" stroke="url(#cyan-gradient)" stroke-width="16"/>
+      <line x1="30" y1="125" x2="110" y2="15" stroke="url(#cyan-gradient)" stroke-width="16" stroke-linecap="round"/>
+    </g>
+    
+    <!-- B -->
+    <text x="270" y="160" font-family="monospace" font-size="200" font-weight="bold" fill="url(#cyan-gradient)">B</text>
+  </g>
+  
+  <!-- Tagline -->
+  <text x="256" y="420" text-anchor="middle" font-family="monospace" font-size="24" fill="#64748b">
+    An Autonomous Creative Intelligence
+  </text>
+  
+  <!-- Floating particles -->
+  <circle cx="80" cy="80" r="3" fill="#00D4FF" opacity="0.6"/>
+  <circle cx="432" cy="100" r="2" fill="#00D4FF" opacity="0.4"/>
+  <circle cx="60" cy="400" r="2.5" fill="#00D4FF" opacity="0.5"/>
+  <circle cx="450" cy="420" r="3" fill="#00D4FF" opacity="0.6"/>
+  <circle cx="256" cy="60" r="2" fill="#00D4FF" opacity="0.3"/>
+</svg>
