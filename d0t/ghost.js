@@ -92,7 +92,19 @@ async function ocr(imagePath) {
     const worker = await initWorker();
     
     // Use blocks output to get REAL bounding boxes
-    const { data } = await worker.recognize(imagePath, {}, { blocks: true });
+    let data;
+    try {
+      const result = await worker.recognize(imagePath, {}, { blocks: true });
+      data = result.data;
+    } catch (recognizeErr) {
+      // Image might be truncated or corrupted - reinitialize worker
+      log('ERROR', 'OCR recognize failed, reinitializing...', recognizeErr.message);
+      if (state.worker) {
+        try { await state.worker.terminate(); } catch (e) {}
+        state.worker = null;
+      }
+      return { text: '', words: [] };
+    }
     
     const words = [];
     
@@ -307,6 +319,20 @@ process.on('SIGINT', () => {
   if (state.worker) state.worker.terminate();
   log('INFO', 'Stopped');
   process.exit(0);
+});
+
+// Crash resilience - don't die on uncaught errors
+process.on('uncaughtException', (err) => {
+  log('ERROR', 'Uncaught exception (recovering):', err.message);
+  // Reset worker on crash
+  if (state.worker) {
+    try { state.worker.terminate(); } catch (e) {}
+    state.worker = null;
+  }
+});
+
+process.on('unhandledRejection', (reason) => {
+  log('ERROR', 'Unhandled rejection (recovering):', String(reason));
 });
 
 start();
