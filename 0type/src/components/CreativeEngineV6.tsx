@@ -50,6 +50,88 @@ import {
   renderPerfectStrokeAnimated,
   renderPerfectStroke,
 } from '@/lib/perfect-renderer';
+import { getStroke, StrokeOptions } from 'perfect-freehand';
+
+// ═══════════════════════════════════════════════════════════════════════════
+// LIVE STROKE PREVIEW - Shows current preset in action
+// ═══════════════════════════════════════════════════════════════════════════
+
+// SVG path helper
+function getSmoothSvgPath(points: number[][]): string {
+  if (points.length < 4) return '';
+  let d = `M ${points[0][0].toFixed(2)},${points[0][1].toFixed(2)} `;
+  for (let i = 1; i < points.length - 2; i++) {
+    const xc = (points[i][0] + points[i + 1][0]) / 2;
+    const yc = (points[i][1] + points[i + 1][1]) / 2;
+    d += `Q ${points[i][0].toFixed(2)},${points[i][1].toFixed(2)} ${xc.toFixed(2)},${yc.toFixed(2)} `;
+  }
+  const last = points.length - 1;
+  d += `Q ${points[last - 1][0].toFixed(2)},${points[last - 1][1].toFixed(2)} ${points[last][0].toFixed(2)},${points[last][1].toFixed(2)}`;
+  return d + ' Z';
+}
+
+// Live preview test points - smooth S-curve
+const PREVIEW_POINTS: [number, number, number][] = [
+  [30, 15, 0.3], [50, 25, 0.5], [65, 40, 0.7], [60, 55, 0.8],
+  [45, 65, 0.7], [30, 75, 0.5], [25, 90, 0.6], [35, 105, 0.8],
+  [55, 115, 0.6], [75, 120, 0.4],
+];
+
+function LiveStrokePreview({ preset }: { preset: string }) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    
+    // Clear
+    ctx.fillStyle = '#0a0a0f';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    // Get preset style
+    const presetData = STROKE_PRESETS[preset];
+    const style = presetData?.style || {};
+    
+    // Build options
+    const options: StrokeOptions = {
+      size: style.size || 12,
+      thinning: style.thinning ?? 0.5,
+      smoothing: style.smoothing ?? 0.5,
+      streamline: style.streamline ?? 0.5,
+      simulatePressure: style.simulatePressure ?? true,
+      start: { taper: style.taperStart || 0, cap: style.capStart ?? true },
+      end: { taper: style.taperEnd || 0, cap: style.capEnd ?? true },
+      last: true,
+    };
+    
+    // Generate outline
+    const outlinePoints = getStroke(PREVIEW_POINTS, options);
+    if (outlinePoints.length < 3) return;
+    
+    // Draw stroke
+    const pathData = getSmoothSvgPath(outlinePoints);
+    const path = new Path2D(pathData);
+    
+    // Category-based color
+    const color = presetData?.category === 'expressive' ? '#ff6b9d' :
+                  presetData?.category === 'classic' ? '#6bc4ff' : '#c46bff';
+    
+    ctx.fillStyle = color;
+    ctx.fill(path);
+    
+  }, [preset]);
+  
+  return (
+    <canvas 
+      ref={canvasRef} 
+      width={100} 
+      height={130} 
+      className="rounded border border-[#222]"
+    />
+  );
+}
 
 // ═══════════════════════════════════════════════════════════════════════════
 // B0B & D0T - The Core Intelligence
@@ -887,141 +969,169 @@ export default function CreativeEngineV6() {
             
             {!isRunning && (
               <>
-                {/* Mode Selector */}
-                <div className="flex items-center gap-1 border border-[#333] rounded overflow-hidden">
+                {/* Style Category Selector */}
+                <div className="flex items-center gap-0.5 bg-[#111] border border-[#222] rounded-lg p-0.5">
                   <button
                     onClick={() => setStrokePreset('raw-gesture')}
-                    className={`px-3 py-2 text-xs font-mono transition-all ${
+                    className={`px-3 py-1.5 text-xs font-mono rounded-md transition-all ${
                       STROKE_PRESETS[strokePreset]?.category === 'expressive' 
-                        ? 'bg-pink-600 text-white' 
-                        : 'text-[#666] hover:text-white'
+                        ? 'bg-gradient-to-r from-pink-600 to-rose-600 text-white shadow-lg shadow-pink-900/30' 
+                        : 'text-[#555] hover:text-[#888] hover:bg-[#1a1a1a]'
                     }`}
-                    title="Pure Creation - Maximum expression"
+                    title="Expressive - Raw, gestural, calligraphic"
                   >
-                    🎨 Pure
+                    ✨ Expressive
                   </button>
                   <button
                     onClick={() => setStrokePreset('swiss-mono')}
-                    className={`px-3 py-2 text-xs font-mono transition-all ${
+                    className={`px-3 py-1.5 text-xs font-mono rounded-md transition-all ${
                       STROKE_PRESETS[strokePreset]?.category === 'classic' 
-                        ? 'bg-blue-600 text-white' 
-                        : 'text-[#666] hover:text-white'
+                        ? 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-lg shadow-blue-900/30' 
+                        : 'text-[#555] hover:text-[#888] hover:bg-[#1a1a1a]'
                     }`}
-                    title="Swiss Precision - Grilli-inspired"
+                    title="Classic - Swiss precision, clean lines"
                   >
-                    🇨🇭 Swiss
+                    ◆ Classic
                   </button>
                   <button
                     onClick={() => setStrokePreset('glitch')}
-                    className={`px-3 py-2 text-xs font-mono transition-all ${
+                    className={`px-3 py-1.5 text-xs font-mono rounded-md transition-all ${
                       STROKE_PRESETS[strokePreset]?.category === 'experimental' 
-                        ? 'bg-purple-600 text-white' 
-                        : 'text-[#666] hover:text-white'
+                        ? 'bg-gradient-to-r from-purple-600 to-violet-600 text-white shadow-lg shadow-purple-900/30' 
+                        : 'text-[#555] hover:text-[#888] hover:bg-[#1a1a1a]'
                     }`}
-                    title="Experimental - Breaking boundaries"
+                    title="Experimental - Glitch, distortion, chaos"
                   >
-                    ⚡ Exp
+                    ⚡ Experimental
                   </button>
                 </div>
                 
                 <button
                   onClick={runBrushLab}
-                  className="px-4 py-2 text-sm font-mono border border-[#333] hover:border-[#555] transition-all"
+                  className="px-4 py-2 text-sm font-mono border border-[#333] hover:border-[#555] hover:bg-[#111] rounded-lg transition-all"
                 >
-                  Brush Lab
+                  🧪 Brush Lab
                 </button>
                 <button
                   onClick={runFullCreation}
-                  className="px-4 py-2 text-sm font-mono bg-white text-black hover:bg-gray-100 transition-all"
+                  className="px-5 py-2 text-sm font-mono bg-white text-black hover:bg-gray-100 rounded-lg transition-all font-medium shadow-lg shadow-white/10"
                 >
-                  Create Font
+                  Create Font →
                 </button>
               </>
             )}
             
             {isRunning && (
-              <button
-                onClick={stopCreation}
-                className="px-4 py-2 text-sm font-mono bg-red-600 hover:bg-red-700 transition-all"
-              >
-                Stop
-              </button>
+              <div className="flex items-center gap-3">
+                <div className="text-right">
+                  <p className="text-xs text-[#555] font-mono">{phase}</p>
+                  <p className="text-[10px] text-[#444]">{completedGlyphs.length}/62 glyphs</p>
+                </div>
+                <div className="w-24 h-1.5 bg-[#222] rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-gradient-to-r from-pink-500 to-violet-500 transition-all duration-300"
+                    style={{ width: `${(completedGlyphs.length / 62) * 100}%` }}
+                  />
+                </div>
+                <button
+                  onClick={stopCreation}
+                  className="px-3 py-1.5 text-xs font-mono bg-red-600/80 hover:bg-red-600 rounded-lg transition-all"
+                >
+                  Stop
+                </button>
+              </div>
             )}
           </div>
         </div>
       </header>
 
       <div className="max-w-7xl mx-auto p-6">
-        <div className="grid lg:grid-cols-5 gap-6">
-          {/* Main Canvas */}
-          <div className="lg:col-span-3 space-y-4">
-            {/* Active designers */}
-            <div className="grid grid-cols-2 gap-2">
-              {activeDrawers.length > 0 ? (
-                activeDrawers.map((drawer, i) => (
+        <div className="flex flex-col lg:flex-row gap-6">
+          {/* Main Canvas - Centered */}
+          <div className="flex-1 lg:max-w-[700px] mx-auto space-y-4">
+            {/* Active designers - Only show when running */}
+            {activeDrawers.length > 0 ? (
+              <div className="grid grid-cols-2 gap-2">
+                {activeDrawers.map((drawer, i) => (
                   <div 
                     key={i}
-                    className="p-3 border border-[#1a1a1a] flex items-center gap-3"
+                    className="p-3 border border-[#1a1a1a] rounded-lg flex items-center gap-3 bg-[#0c0c0c]"
                     style={{ borderLeftColor: drawer.bot.color, borderLeftWidth: 3 }}
                   >
                     <span className="text-2xl" style={{ color: drawer.bot.color }}>{drawer.bot.avatar}</span>
-                    <div className="flex-1">
+                    <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium">{drawer.bot.name}</p>
-                      <p className="text-[10px] text-[#555]">{drawer.brush.name} • {drawer.strokeType}</p>
+                      <p className="text-[10px] text-[#555] truncate">{drawer.brush.name} • {drawer.strokeType}</p>
                     </div>
                   </div>
-                ))
-              ) : (
-                <div className="col-span-2 p-3 border border-[#1a1a1a] flex items-center gap-3">
-                  <span className="text-2xl" style={{ color: B0B.color }}>{B0B.avatar}</span>
-                  <span className="text-2xl" style={{ color: D0T.color }}>{D0T.avatar}</span>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium">B0B + D0T</p>
-                    <p className="text-[10px] text-[#555]">Creative Intelligence</p>
+                ))}
+              </div>
+            ) : currentChar ? (
+              <div className="flex items-center justify-between p-3 border border-[#1a1a1a] rounded-lg bg-[#0c0c0c]">
+                <div className="flex items-center gap-3">
+                  <div className="flex -space-x-1">
+                    <span className="text-xl" style={{ color: B0B.color }}>{B0B.avatar}</span>
+                    <span className="text-xl" style={{ color: D0T.color }}>{D0T.avatar}</span>
                   </div>
-                  <p className="text-4xl font-light" style={{ color: primaryColor }}>
-                    {currentChar || '—'}
-                  </p>
+                  <div>
+                    <p className="text-sm font-medium">Drawing</p>
+                    <p className="text-[10px] text-[#555]">{STROKE_PRESETS[strokePreset]?.name}</p>
+                  </div>
                 </div>
-              )}
-            </div>
+                <p className="text-5xl font-light" style={{ color: primaryColor }}>
+                  {currentChar}
+                </p>
+              </div>
+            ) : null}
 
-            {/* Canvas - Clean, no distracting animations */}
-            <div className="border border-[#1a1a1a] overflow-hidden bg-[#0a0a0a]">
-              <canvas ref={canvasRef} width={600} height={480} className="w-full" />
+            {/* Canvas - Clean, centered with subtle glow */}
+            <div className="border border-[#1a1a1a] overflow-hidden bg-[#050508] rounded-lg shadow-[0_0_60px_rgba(255,255,255,0.03)] flex items-center justify-center">
+              <canvas ref={canvasRef} width={600} height={480} className="w-full max-w-full" />
             </div>
 
             {/* Preview */}
-            <div className="border border-[#1a1a1a] p-4">
+            <div className="border border-[#1a1a1a] rounded-lg p-4 bg-[#0c0c0c]">
               <div className="flex items-center justify-between mb-3">
                 <p className="text-xs font-mono text-[#555]">
-                  Character Set ({completedGlyphs.length}/62)
+                  Character Set <span className="text-[#666]">({completedGlyphs.length}/62)</span>
                 </p>
                 {selectedCombo && (
-                  <p className="text-xs text-[#666]">Combo: {selectedCombo.name}</p>
+                  <p className="text-[10px] text-[#555] px-2 py-0.5 bg-[#111] rounded">Combo: {selectedCombo.name}</p>
                 )}
               </div>
-              <canvas ref={previewRef} width={560} height={192} className="w-full" />
+              <canvas ref={previewRef} width={560} height={192} className="w-full rounded" />
             </div>
 
-            {/* Specimen */}
-            {completedGlyphs.length > 26 && (
-              <div className="border border-[#1a1a1a] p-5 space-y-3">
-                <p className="text-xs font-mono text-[#555]">Type Specimen</p>
-                <p className="text-2xl tracking-wide" style={{ color: primaryColor }}>
-                  {completedGlyphs.filter(c => c >= 'A' && c <= 'Z').join('')}
-                </p>
-                <p className="text-lg text-[#888]">The quick brown fox jumps over the lazy dog.</p>
-              </div>
-            )}
+            {/* Specimen - always visible but with placeholder text when empty */}
+            <div className="border border-[#1a1a1a] rounded-lg p-5 space-y-3 bg-[#0c0c0c]">
+              <p className="text-xs font-mono text-[#555]">Type Specimen</p>
+              {completedGlyphs.length > 0 ? (
+                <>
+                  <p className="text-2xl tracking-wide" style={{ color: primaryColor }}>
+                    {completedGlyphs.filter(c => c >= 'A' && c <= 'Z').join('') || 'ABCDEFGHIJKLM'}
+                  </p>
+                  <p className="text-lg text-[#666]">
+                    {completedGlyphs.filter(c => c >= 'a' && c <= 'z').join('') || 'abcdefghijklm'}
+                  </p>
+                </>
+              ) : (
+                <p className="text-lg text-[#333] italic">Start creating to see your typeface here</p>
+              )}
+            </div>
           </div>
 
           {/* Sidebar */}
-          <div className="lg:col-span-2 space-y-4">
-            {/* Stroke Presets - NEW! */}
-            <div className="border border-[#1a1a1a]">
-              <div className="px-4 py-2 border-b border-[#1a1a1a] flex items-center justify-between">
-                <span className="text-xs font-mono text-[#555]">Stroke Engine</span>
+          <div className="lg:w-[340px] lg:flex-shrink-0 space-y-4">
+            {/* Stroke Presets with Live Preview */}
+            <div className="border border-[#1a1a1a] rounded-lg overflow-hidden">
+              <div className="px-4 py-3 border-b border-[#1a1a1a] flex items-center justify-between bg-[#0a0a0f]">
+                <div className="flex items-center gap-3">
+                  <LiveStrokePreview preset={strokePreset} />
+                  <div className="min-w-0 flex-1">
+                    <span className="text-sm font-medium text-white block">{STROKE_PRESETS[strokePreset]?.name || 'Stroke Engine'}</span>
+                    <span className="text-[10px] text-[#555] block truncate max-w-[180px]">{STROKE_PRESETS[strokePreset]?.description}</span>
+                  </div>
+                </div>
                 <span className={`text-[8px] px-1.5 py-0.5 rounded ${
                   creationMode === 'pure' 
                     ? 'bg-pink-900/50 text-pink-400' 
@@ -1067,10 +1177,10 @@ export default function CreativeEngineV6() {
             </div>
             
             {/* Brush Info */}
-            <div className="border border-[#1a1a1a] p-4" style={{ borderColor: primaryColor + '40' }}>
+            <div className="border border-[#1a1a1a] rounded-lg p-4 bg-[#0c0c0c]" style={{ borderColor: primaryColor + '40' }}>
               <p className="text-xs font-mono text-[#555] mb-3 flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full" style={{ backgroundColor: primaryColor }} />
-                {mode === 'brush-lab' ? 'Testing Brush' : 'Active Brush Combo'}
+                {mode === 'brush-lab' ? 'Testing Brush' : 'Active Brush'}
               </p>
               
               {testingBrush ? (
@@ -1101,8 +1211,8 @@ export default function CreativeEngineV6() {
             </div>
 
             {/* Chat */}
-            <div className="border border-[#1a1a1a]">
-              <div className="px-4 py-3 border-b border-[#1a1a1a] flex items-center gap-2">
+            <div className="border border-[#1a1a1a] rounded-lg overflow-hidden">
+              <div className="px-4 py-3 border-b border-[#1a1a1a] flex items-center gap-2 bg-[#0a0a0f]">
                 <span className={`w-2 h-2 rounded-full ${isRunning ? 'bg-green-500 animate-pulse' : 'bg-[#333]'}`} />
                 <span className="text-xs font-mono text-[#555]">
                   {mode === 'brush-lab' ? 'Brush Lab Session' : 'Creative Process'}
@@ -1111,10 +1221,16 @@ export default function CreativeEngineV6() {
               
               <div className="h-80 overflow-y-auto p-3 space-y-3">
                 {messages.length === 0 && (
-                  <div className="text-center py-8 space-y-2">
-                    <p className="text-xs text-[#333]">Choose a mode to begin:</p>
-                    <p className="text-[10px] text-[#444]"><strong>Brush Lab</strong> — Test experimental brushes</p>
-                    <p className="text-[10px] text-[#444]"><strong>Create Font</strong> — Full multi-designer creation</p>
+                  <div className="text-center py-8 space-y-4">
+                    <div className="flex justify-center gap-2 opacity-30">
+                      <span className="text-3xl" style={{ color: B0B.color }}>{B0B.avatar}</span>
+                      <span className="text-3xl" style={{ color: D0T.color }}>{D0T.avatar}</span>
+                    </div>
+                    <div className="space-y-2">
+                      <p className="text-xs text-[#555]">Ready to create</p>
+                      <p className="text-[10px] text-[#444]">Click <strong className="text-[#666]">Create Font</strong> to generate a complete typeface</p>
+                      <p className="text-[10px] text-[#444]">or <strong className="text-[#666]">Brush Lab</strong> to experiment with brushes</p>
+                    </div>
                   </div>
                 )}
                 {messages.map(msg => (
@@ -1148,30 +1264,30 @@ export default function CreativeEngineV6() {
 
             {/* Stats */}
             <div className="grid grid-cols-3 gap-2">
-              <div className="border border-[#1a1a1a] p-3 text-center">
-                <p className="text-2xl font-light" style={{ color: primaryColor }}>
+              <div className="border border-[#1a1a1a] rounded-lg p-3 text-center bg-[#0c0c0c]">
+                <p className="text-2xl font-light tabular-nums" style={{ color: primaryColor }}>
                   {completedGlyphs.length}
                 </p>
-                <p className="text-[10px] text-[#444] uppercase">Glyphs</p>
+                <p className="text-[10px] text-[#555] uppercase tracking-wide">Glyphs</p>
               </div>
-              <div className="border border-[#1a1a1a] p-3 text-center">
-                <p className="text-2xl font-light text-[#888]">
+              <div className="border border-[#1a1a1a] rounded-lg p-3 text-center bg-[#0c0c0c]">
+                <p className="text-2xl font-light text-[#888] tabular-nums">
                   {getApprovedBrushes().length}
                 </p>
-                <p className="text-[10px] text-[#444] uppercase">Brushes</p>
+                <p className="text-[10px] text-[#555] uppercase tracking-wide">Brushes</p>
               </div>
-              <div className="border border-[#1a1a1a] p-3 text-center">
-                <p className="text-2xl font-light text-[#888]">
+              <div className="border border-[#1a1a1a] rounded-lg p-3 text-center bg-[#0c0c0c]">
+                <p className="text-2xl font-light text-[#888] tabular-nums">
                   {getAllDesigners().length}
                 </p>
-                <p className="text-[10px] text-[#444] uppercase">Designers</p>
+                <p className="text-[10px] text-[#555] uppercase tracking-wide">Agents</p>
               </div>
             </div>
 
             {/* Brush Library */}
-            <div className="border border-[#1a1a1a]">
-              <div className="px-4 py-2 border-b border-[#1a1a1a]">
-                <span className="text-xs font-mono text-[#555]">Brush Library</span>
+            <div className="border border-[#1a1a1a] rounded-lg overflow-hidden">
+              <div className="px-4 py-2.5 border-b border-[#1a1a1a] bg-[#0a0a0f]">
+                <span className="text-xs font-mono text-[#666]">Brush Library</span>
               </div>
               <div className="max-h-48 overflow-y-auto p-2 space-y-1">
                 {Object.values(BRUSH_LIBRARY).map(brush => {
@@ -1183,10 +1299,11 @@ export default function CreativeEngineV6() {
                       selectedCombo.terminalBrush === brush.id
                     ));
                   return (
-                    <div
+                    <button
                       key={brush.id}
-                      className={`flex items-center justify-between p-2 rounded text-xs ${
-                        isActive ? 'bg-[#1a1a1a] border border-[#333]' : 'hover:bg-[#111]'
+                      onClick={() => setActiveBrush(brush)}
+                      className={`w-full flex items-center justify-between p-2 rounded text-xs transition-all ${
+                        isActive ? 'bg-[#1a1a1a] border border-[#333]' : 'hover:bg-[#151515] cursor-pointer'
                       }`}
                       style={isActive ? { borderColor: primaryColor + '60' } : {}}
                     >
@@ -1206,7 +1323,7 @@ export default function CreativeEngineV6() {
                           {brush.status}
                         </span>
                       </div>
-                    </div>
+                    </button>
                   );
                 })}
               </div>

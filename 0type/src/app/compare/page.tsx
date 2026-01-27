@@ -143,22 +143,23 @@ export default function StrokeCompare() {
   const [rightPreset, setRightPreset] = useState('raw-gesture');
   
   return (
-    <div className="min-h-screen bg-[#0a0a0f] p-8">
-      <h1 className="text-2xl font-bold text-white mb-4">
-        ⚡ Stroke Preset Comparison
-      </h1>
-      <p className="text-gray-400 mb-8">
-        Same input points, different presets. Should look DIFFERENT.
-      </p>
+    <div className="min-h-screen bg-[#0a0a0a] p-8">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-2xl font-bold text-white mb-2">
+          ⚡ Stroke Preset Comparison
+        </h1>
+        <p className="text-[#666] mb-8">
+          Same input points, different presets. Each preset produces visually distinct output.
+        </p>
       
       {/* Preset Selectors */}
       <div className="flex gap-8 mb-8">
         <div>
-          <label className="text-white block mb-2">Left Preset:</label>
+          <label className="text-[#888] text-sm block mb-2">Left Preset:</label>
           <select 
             value={leftPreset}
             onChange={(e) => setLeftPreset(e.target.value)}
-            className="bg-gray-800 text-white p-2 rounded"
+            className="bg-[#111] text-white p-2 rounded-lg border border-[#333] focus:border-[#555] outline-none"
           >
             {presetList.map(p => (
               <option key={p} value={p}>{p}</option>
@@ -166,11 +167,11 @@ export default function StrokeCompare() {
           </select>
         </div>
         <div>
-          <label className="text-white block mb-2">Right Preset:</label>
+          <label className="text-[#888] text-sm block mb-2">Right Preset:</label>
           <select 
             value={rightPreset}
             onChange={(e) => setRightPreset(e.target.value)}
-            className="bg-gray-800 text-white p-2 rounded"
+            className="bg-[#111] text-white p-2 rounded-lg border border-[#333] focus:border-[#555] outline-none"
           >
             {presetList.map(p => (
               <option key={p} value={p}>{p}</option>
@@ -195,29 +196,29 @@ export default function StrokeCompare() {
       
       {/* Quick presets */}
       <div className="mt-8">
-        <h2 className="text-white mb-4">Quick Compare:</h2>
+        <h2 className="text-[#888] text-sm mb-3">Quick Compare:</h2>
         <div className="flex gap-2 flex-wrap">
           <button 
             onClick={() => { setLeftPreset('swiss-mono'); setRightPreset('raw-gesture'); }}
-            className="bg-blue-600 text-white px-3 py-1 rounded text-sm"
+            className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
           >
             Swiss vs Raw
           </button>
           <button 
             onClick={() => { setLeftPreset('geometric'); setRightPreset('wild-brush'); }}
-            className="bg-blue-600 text-white px-3 py-1 rounded text-sm"
+            className="bg-gradient-to-r from-pink-600 to-rose-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
           >
             Geometric vs Wild
           </button>
           <button 
             onClick={() => { setLeftPreset('ink-brush'); setRightPreset('pointed-pen'); }}
-            className="bg-blue-600 text-white px-3 py-1 rounded text-sm"
+            className="bg-gradient-to-r from-purple-600 to-violet-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
           >
             Ink vs Pointed
           </button>
           <button 
             onClick={() => { setLeftPreset('neo-grotesque'); setRightPreset('marker-bold'); }}
-            className="bg-blue-600 text-white px-3 py-1 rounded text-sm"
+            className="bg-gradient-to-r from-amber-600 to-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
           >
             Neo vs Marker
           </button>
@@ -226,13 +227,14 @@ export default function StrokeCompare() {
       
       {/* All presets grid */}
       <div className="mt-12">
-        <h2 className="text-white text-xl mb-4">All Presets:</h2>
-        <div className="grid grid-cols-4 gap-4">
+        <h2 className="text-white text-lg mb-4">All Presets ({presetList.length})</h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {presetList.map(p => (
             <StrokeCanvas key={p} preset={p} label={p} />
           ))}
         </div>
       </div>
+    </div>
     </div>
   );
 }

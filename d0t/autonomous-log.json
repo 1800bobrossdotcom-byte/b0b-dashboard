@@ -1,0 +1,18 @@
+[
+  {
+    "time": "2026-01-27T20:59:10.705Z",
+    "action": "click",
+    "pattern": "Continue",
+    "x": 324,
+    "y": 890,
+    "scanTime": 3480
+  },
+  {
+    "time": "2026-01-27T20:59:37.274Z",
+    "action": "click",
+    "pattern": "Continue",
+    "x": 274,
+    "y": 890,
+    "scanTime": 3662
+  }
+]

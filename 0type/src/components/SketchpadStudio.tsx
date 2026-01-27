@@ -349,13 +349,13 @@ export default function SketchpadStudio() {
             </span>
             <button
               onClick={() => setIsActive(!isActive)}
-              className={`px-4 py-2 text-sm font-mono transition-all ${
+              className={`px-4 py-2 text-sm font-mono rounded-lg transition-all ${
                 isActive 
-                  ? 'bg-red-600/20 text-red-400 border border-red-600/50' 
-                  : 'bg-green-600/20 text-green-400 border border-green-600/50'
+                  ? 'bg-red-600/20 text-red-400 border border-red-600/50 hover:bg-red-600/30' 
+                  : 'bg-green-600/20 text-green-400 border border-green-600/50 hover:bg-green-600/30'
               }`}
             >
-              {isActive ? 'Pause' : 'Resume'}
+              {isActive ? '⏸ Pause' : '▶ Resume'}
             </button>
           </div>
         </div>
@@ -366,12 +366,12 @@ export default function SketchpadStudio() {
           
           {/* Main Sketchpad */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="border border-[#1a1a1a] overflow-hidden">
+            <div className="border border-[#1a1a1a] rounded-lg overflow-hidden bg-[#050508] shadow-[0_0_40px_rgba(255,255,255,0.02)]">
               <canvas ref={canvasRef} width={560} height={500} className="w-full" />
             </div>
             
             {/* Current brush preview */}
-            <div className="border border-[#1a1a1a] p-3">
+            <div className="border border-[#1a1a1a] rounded-lg p-3 bg-[#0c0c0c]">
               <div className="flex items-center justify-between mb-2">
                 <p className="text-xs font-mono text-[#555]">Current Brush</p>
                 <span className="text-xs" style={{ color: primaryColor }}>{currentBrush.name}</span>
@@ -388,9 +388,9 @@ export default function SketchpadStudio() {
 
           {/* Brush Library */}
           <div className="space-y-4">
-            <div className="border border-[#1a1a1a]">
-              <div className="px-3 py-2 border-b border-[#1a1a1a] flex items-center justify-between">
-                <span className="text-xs font-mono text-[#555]">Brush Library</span>
+            <div className="border border-[#1a1a1a] rounded-lg overflow-hidden">
+              <div className="px-3 py-2 border-b border-[#1a1a1a] flex items-center justify-between bg-[#0a0a0f]">
+                <span className="text-xs font-mono text-[#666]">Brush Library</span>
                 <span className="text-[10px] text-[#444]">{allBrushes.length} brushes</span>
               </div>
               
@@ -434,9 +434,9 @@ export default function SketchpadStudio() {
             </div>
             
             {/* Recent sessions */}
-            <div className="border border-[#1a1a1a]">
-              <div className="px-3 py-2 border-b border-[#1a1a1a]">
-                <span className="text-xs font-mono text-[#555]">Recent Sketches</span>
+            <div className="border border-[#1a1a1a] rounded-lg overflow-hidden">
+              <div className="px-3 py-2 border-b border-[#1a1a1a] bg-[#0a0a0f]">
+                <span className="text-xs font-mono text-[#666]">Recent Sketches</span>
               </div>
               <div className="max-h-[200px] overflow-y-auto p-2 space-y-1">
                 {sessions.slice(-10).reverse().map(session => (
@@ -459,10 +459,10 @@ export default function SketchpadStudio() {
 
           {/* Chat / Activity Feed */}
           <div className="space-y-4">
-            <div className="border border-[#1a1a1a]">
-              <div className="px-3 py-2 border-b border-[#1a1a1a] flex items-center gap-2">
+            <div className="border border-[#1a1a1a] rounded-lg overflow-hidden">
+              <div className="px-3 py-2 border-b border-[#1a1a1a] flex items-center gap-2 bg-[#0a0a0f]">
                 <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-xs font-mono text-[#555]">Studio Chat</span>
+                <span className="text-xs font-mono text-[#666]">Studio Chat</span>
               </div>
               
               <div className="h-[450px] overflow-y-auto p-2 space-y-2">
@@ -494,7 +494,7 @@ export default function SketchpadStudio() {
             </div>
 
             {/* Team status */}
-            <div className="border border-[#1a1a1a] p-3">
+            <div className="border border-[#1a1a1a] rounded-lg p-3 bg-[#0c0c0c]">
               <p className="text-xs font-mono text-[#555] mb-2">Active Designers</p>
               <div className="space-y-1">
                 {designers.slice(0, 5).map(d => (

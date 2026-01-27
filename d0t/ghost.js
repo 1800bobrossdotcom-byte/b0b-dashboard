@@ -21,14 +21,15 @@ const Tesseract = require('tesseract.js');
 // ══════════════════════════════════════════════════════════════
 
 const CONFIG = {
-  pollInterval: 3000,
+  pollInterval: 5000,  // Check every 5 seconds (less aggressive)
   
   // Buttons to watch for (in priority order)
   watchPatterns: ['Continue', 'Keep', 'Allow', 'Proceed', 'Yes', 'Run', 'OK'],
   
-  // NO hardcoded positions - we use real OCR bounding boxes only
+  // Require seeing the button TWICE before clicking (confirms it's real, not transient)
+  confirmScans: 2,
   
-  maxActionsPerMinute: 15,
+  maxActionsPerMinute: 10,
   noActionTimeout: 15000,
   verbose: true,
 };
@@ -46,6 +47,8 @@ let state = {
   lastClickedButton: null,
   lastClickedPos: null,
   sameButtonCount: 0,  // How many times we clicked the same button
+  pendingButton: null, // Button we saw last scan (need to see twice to confirm)
+  pendingCount: 0,     // How many scans we've seen this button
 };
 
 // ══════════════════════════════════════════════════════════════
@@ -202,18 +205,22 @@ function decide(ocrResult) {
     return { action: 'wait', reason: 'No buttons found' };
   }
   
-  // FILTER: Only click buttons on RIGHT side of screen (x > 1200) - that's the chat panel
-  // Buttons on left are just terminal output text, not clickable
-  const rightSideButtons = buttons.filter(b => b.x > 1200);
+  // FILTER 1: Only click buttons in the BOTTOM RIGHT of screen
+  // Real Claude "Continue" buttons are at x > 1200 AND y > 500 (bottom half)
+  // This avoids clicking on words in chat history
+  const bottomRightButtons = buttons.filter(b => b.x > 1200 && b.y > 500);
   
-  if (rightSideButtons.length > 0) {
-    buttons = rightSideButtons;
-    log('DEBUG', `${buttons.length} buttons in chat panel (x > 1200)`);
+  if (bottomRightButtons.length > 0) {
+    buttons = bottomRightButtons;
+    log('DEBUG', `${buttons.length} buttons in bottom-right (x>1200, y>500)`);
   } else {
-    // No buttons on right - check if there's a dialog popup (those can be anywhere)
-    // Dialog buttons usually have high confidence and specific text
+    // FILTER 2: Check for VS Code dialog popups (Allow/Keep dialogs)
+    // These appear in a specific Y range (roughly 400-600) and centered
     const dialogButtons = buttons.filter(b => 
-      ['Allow', 'Yes', 'OK', 'Keep'].includes(b.text) && b.confidence > 85
+      ['Allow', 'Yes', 'OK', 'Keep'].includes(b.text) && 
+      b.confidence > 90 &&
+      b.y > 350 && b.y < 650 &&
+      b.x > 400 && b.x < 900
     );
     if (dialogButtons.length > 0) {
       buttons = dialogButtons;
@@ -248,6 +255,25 @@ function decide(ocrResult) {
   
   const best = buttons[candidateIndex];
   
+  // CONFIRMATION: Must see the same button in same position twice before clicking
+  const buttonKey = `${best.text}@${Math.round(best.x/50)}x${Math.round(best.y/50)}`; // Bucket position
+  
+  if (state.pendingButton === buttonKey) {
+    state.pendingCount++;
+  } else {
+    state.pendingButton = buttonKey;
+    state.pendingCount = 1;
+  }
+  
+  if (state.pendingCount < CONFIG.confirmScans) {
+    log('DECIDE', `Saw "${best.text}" - waiting for confirmation (${state.pendingCount}/${CONFIG.confirmScans})`);
+    return { action: 'wait', reason: 'Confirming button is real' };
+  }
+  
+  // Reset pending after we decide to click
+  state.pendingButton = null;
+  state.pendingCount = 0;
+  
   // Track what we're clicking
   if (best.text === state.lastClickedButton) {
     state.sameButtonCount++;
@@ -257,8 +283,8 @@ function decide(ocrResult) {
   }
   state.lastClickedPos = { x: best.x, y: best.y };
   
-  log('FOUND', `"${best.text}" at REAL position (${best.x}, ${best.y})`);
-  return { action: 'click', x: best.x, y: best.y, reason: `Real bbox: "${best.match}"` };
+  log('FOUND', `"${best.text}" CONFIRMED at (${best.x}, ${best.y})`);
+  return { action: 'click', x: best.x, y: best.y, reason: `Confirmed: "${best.match}"` };
 }
 
 // ══════════════════════════════════════════════════════════════

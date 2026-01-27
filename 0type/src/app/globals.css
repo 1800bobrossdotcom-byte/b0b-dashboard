@@ -105,6 +105,26 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0.02em;
 }
 
+.specimen-terminus {
+  font-family: 'Courier New', 'Consolas', monospace;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: none;
+}
+
+.specimen-void {
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  font-weight: 200;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.specimen-proto {
+  font-family: 'Palatino Linotype', 'Book Antiqua', serif;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
 /* ═══════════════════════════════════════════
    ANIMATIONS
    ═══════════════════════════════════════════ */

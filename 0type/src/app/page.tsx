@@ -206,13 +206,16 @@ export default function Home() {
           
           <div className="hidden md:flex items-center gap-8 text-sm">
             <a href="#fonts" className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors">Fonts</a>
-            <Link href="/test" className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors">Compare</Link>
+            <Link href="/compare" className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors">Compare</Link>
             <a href="#pricing" className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors">Pricing</a>
             <Link href="/sketchpad" className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors flex items-center gap-1">
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
               Sketchpad
             </Link>
-            <Link href="/studio" className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors">Studio</Link>
+            <Link href="/studio" className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors flex items-center gap-1">
+              <span className="w-2 h-2 rounded-full bg-pink-500 animate-pulse"></span>
+              Studio
+            </Link>
             <a href="#about" className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors">About</a>
           </div>
           
