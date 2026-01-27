@@ -22,7 +22,8 @@ import {
   HeroSection, 
   MindSection, 
   AgentsSection, 
-  CanvasSection, 
+  CanvasSection,
+  EcosystemSection, 
   MissionSection 
 } from '@/components/sections';
 
@@ -53,7 +54,10 @@ export default function Home() {
       
       {/* Canvas - B0B - Living creations */}
       <CanvasSection />
-      
+
+      {/* Ecosystem - Built on Base */}
+      <EcosystemSection />
+
       {/* Mission - C0M - Giving back */}
       <MissionSection />
     </main>

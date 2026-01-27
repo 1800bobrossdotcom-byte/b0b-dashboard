@@ -20,10 +20,10 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   { label: '0TYPE', href: 'https://0type.b0b.dev' },
-  { label: 'D0T', href: 'https://d0t.b0b.dev' },
+  { label: 'D0T.FINANCE', href: 'https://d0t.b0b.dev' },
   { label: 'M1ND', href: '#mind' },
   { label: 'AG3NTS', href: '#agents' },
-  { label: 'CANV4S', href: '#canvas' },
+  { label: 'ECOSYST3M', href: '#ecosystem' },
   { label: 'M1SS10N', href: '#mission' },
 ];
 

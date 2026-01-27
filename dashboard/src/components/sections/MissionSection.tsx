@@ -259,6 +259,24 @@ export function MissionSection() {
             © 2026 B0B.DEV — An Autonomous Creative Intelligence
           </div>
           <div className="flex items-center gap-6 mt-4 md:mt-0">
+            {/* Ecosystem Links */}
+            <a 
+              href="https://0type.b0b.dev" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[var(--color-mind-glow)] transition-colors"
+            >
+              0TYPE
+            </a>
+            <a 
+              href="https://d0t.b0b.dev" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#0052FF] transition-colors"
+            >
+              D0T.FINANCE
+            </a>
+            <span className="text-white/10">|</span>
             <a 
               href="https://x.com/_b0bdev_" 
               target="_blank"
@@ -269,9 +287,6 @@ export function MissionSection() {
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
               </svg>
               @_b0bdev_
-            </a>
-            <a href="https://api.b0b.dev" className="hover:text-[var(--color-mind-glow)] transition-colors">
-              API
             </a>
             <a 
               href="https://github.com/1800bobrossdotcom-byte/b0b-mcp" 
@@ -284,7 +299,7 @@ export function MissionSection() {
           </div>
         </div>
         <div className="text-center text-xs text-[var(--color-text-dim)] mt-8 font-mono">
-          We&apos;re Bob Rossing this. 🎨
+          Built on <span className="text-[#0052FF]">Base</span> ◆ We&apos;re Bob Rossing this. 🎨
         </div>
       </footer>
     </section>
