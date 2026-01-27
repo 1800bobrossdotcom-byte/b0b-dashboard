@@ -7,11 +7,47 @@
 
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 
 // ══════════════════════════════════════════════════════════════
-// TYPES & DATA
+// TYPES
+// ══════════════════════════════════════════════════════════════
+
+interface TreasuryData {
+  timestamp: string;
+  treasury: {
+    total: number;
+    allocation: Record<string, number>;
+  };
+  performance: {
+    totalPnL: number;
+    wins: number;
+    losses: number;
+    winRate: number;
+    totalTrades: number;
+  };
+  today: {
+    pnl: number;
+    trades: number;
+    wins: number;
+    losses: number;
+  };
+  recentTrades: Array<{
+    timestamp: string;
+    direction: string;
+    market: string;
+    size: number;
+    price: number;
+  }>;
+  status: {
+    connected: boolean;
+    mode: string;
+  };
+}
+
+// ══════════════════════════════════════════════════════════════
+// STATIC DATA
 // ══════════════════════════════════════════════════════════════
 
 const AGENTS = [
@@ -29,13 +65,13 @@ const BLUECHIPS = [
   { symbol: 'CLAWD', name: 'Clawd', change: 15954 },
 ];
 
-const ALLOCATION = [
-  { name: 'Polymarket', pct: 30, color: '#8b5cf6' },
-  { name: 'Base Meme', pct: 25, color: '#3b82f6' },
-  { name: 'Bluechips', pct: 15, color: '#22c55e' },
-  { name: 'Treasury', pct: 15, color: '#f59e0b' },
-  { name: 'Savings', pct: 10, color: '#64748b' },
-  { name: 'Emergency', pct: 5, color: '#ef4444' },
+const ALLOCATION_CONFIG = [
+  { name: 'Polymarket', key: 'polymarket', color: '#8b5cf6' },
+  { name: 'Base Meme', key: 'baseMeme', color: '#3b82f6' },
+  { name: 'Bluechips', key: 'bluechips', color: '#22c55e' },
+  { name: 'Treasury', key: 'treasury', color: '#f59e0b' },
+  { name: 'Savings', key: 'savings', color: '#64748b' },
+  { name: 'Emergency', key: 'emergency', color: '#ef4444' },
 ];
 
 // ══════════════════════════════════════════════════════════════
@@ -45,12 +81,28 @@ const ALLOCATION = [
 export default function D0TFinance() {
   const [connected, setConnected] = useState(false);
   const [terminalLines, setTerminalLines] = useState<string[]>([]);
+  const [treasuryData, setTreasuryData] = useState<TreasuryData | null>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const timer = setTimeout(() => setConnected(true), 1000);
-    return () => clearTimeout(timer);
+  // Fetch treasury data
+  const fetchTreasury = useCallback(async () => {
+    try {
+      const res = await fetch('/api/treasury');
+      if (res.ok) {
+        const data = await res.json();
+        setTreasuryData(data);
+        setConnected(true);
+      }
+    } catch (e) {
+      console.error('Failed to fetch treasury:', e);
+    }
   }, []);
+
+  useEffect(() => {
+    fetchTreasury();
+    const interval = setInterval(fetchTreasury, 5000); // Refresh every 5s
+    return () => clearInterval(interval);
+  }, [fetchTreasury]);
 
   useEffect(() => {
     const messages = [
@@ -58,14 +110,14 @@ export default function D0TFinance() {
       '> 5 agents online: BULL, BEAR, QUANT, RISK, ARBITER',
       '> Connected to gamma-api.polymarket.com',
       '> Scanning Base pairs via Dexscreener',
-      '> Treasury mode: $300 paper balance',
+      `> Treasury mode: $${treasuryData?.treasury.total || 300} paper balance`,
       '> Finding Nash Equilibrium...',
       '> Bull: "Market sentiment bullish on prediction markets"',
       '> Bear: "Caution - volatility above threshold"',
       '> Quant: "Edge detected at 8.2% on sports markets"',
       '> Risk: "Position size approved: $15 max"',
       '> Arbiter: "Consensus reached. Executing trade."',
-      '> WIN: +$4.20 on Patriots YES @ 0.68',
+      `> Session P&L: ${(treasuryData?.performance?.totalPnL ?? 0) >= 0 ? '+' : ''}$${(treasuryData?.performance?.totalPnL ?? 0).toFixed(2)}`,
       '> Distributing: 40% reinvest | 30% treasury | 20% savings | 10% DCA',
     ];
     
@@ -76,7 +128,16 @@ export default function D0TFinance() {
     }, 2500);
     
     return () => clearInterval(interval);
-  }, []);
+  }, [treasuryData]);
+
+  // Computed values
+  const total = treasuryData?.treasury.total || 300;
+  const pnl = treasuryData?.performance.totalPnL || 0;
+  const trades = treasuryData?.performance.totalTrades || 0;
+  const winRate = treasuryData?.performance.winRate || 0;
+  const allocation = treasuryData?.treasury.allocation || {
+    polymarket: 90, baseMeme: 75, bluechips: 45, treasury: 45, savings: 30, emergency: 15
+  };
 
   useEffect(() => {
     if (terminalRef.current) {
@@ -127,24 +188,26 @@ export default function D0TFinance() {
             </h1>
           </div>
           
-          {/* Stats Row */}
+          {/* Stats Row - Live Data */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-[#2A2A2A] pt-8">
             <div>
-              <p className="text-4xl font-light">5</p>
-              <p className="text-sm text-[#888]">AI Agents</p>
-            </div>
-            <div>
-              <p className="text-4xl font-light">$300</p>
+              <p className="text-4xl font-light">${total.toFixed(0)}</p>
               <p className="text-sm text-[#888]">Paper Balance</p>
             </div>
             <div>
-              <p className="text-4xl font-light">Nash</p>
-              <p className="text-sm text-[#888]">Game Theory</p>
+              <p className={`text-4xl font-light ${pnl >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+                {pnl >= 0 ? '+' : ''}${pnl.toFixed(2)}
+              </p>
+              <p className="text-sm text-[#888]">Session P&L</p>
+            </div>
+            <div>
+              <p className="text-4xl font-light">{trades}</p>
+              <p className="text-sm text-[#888]">Trades Today</p>
             </div>
             <div>
               <p className="text-4xl font-light flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                Live
+                <span className={`w-2 h-2 rounded-full ${connected ? 'bg-green-500 animate-pulse' : 'bg-zinc-600'}`} />
+                {connected ? 'Live' : '...'}
               </p>
               <p className="text-sm text-[#888]">24/7 Autonomous</p>
             </div>
@@ -218,7 +281,7 @@ export default function D0TFinance() {
               <div className="text-green-500 mb-4">
                 ══════════════════════════════════════════════════════════<br />
                 &nbsp;&nbsp;🏦 D0T.FINANCE — NASH COOPERATIVE TRADING<br />
-                &nbsp;&nbsp;Budget: $300 | Agents: 5 | Mode: PAPER<br />
+                &nbsp;&nbsp;Budget: ${total.toFixed(0)} | Agents: 5 | Mode: PAPER<br />
                 ══════════════════════════════════════════════════════════
               </div>
               {terminalLines.map((line, i) => (
@@ -244,29 +307,37 @@ export default function D0TFinance() {
             {/* Allocation */}
             <div>
               <h2 className="text-sm font-mono text-[#888] mb-8">Treasury Allocation</h2>
-              <div className="text-6xl font-light mb-8">$300</div>
+              <div className="text-6xl font-light mb-8">${total.toFixed(2)}</div>
               
               {/* Allocation Bar */}
               <div className="h-3 rounded-full overflow-hidden flex mb-8">
-                {ALLOCATION.map(a => (
-                  <div 
-                    key={a.name}
-                    style={{ width: `${a.pct}%`, backgroundColor: a.color }}
-                    className="first:rounded-l-full last:rounded-r-full"
-                  />
-                ))}
+                {ALLOCATION_CONFIG.map(a => {
+                  const value = allocation[a.key as keyof typeof allocation] || 0;
+                  const pct = total > 0 ? (value / total) * 100 : 0;
+                  return (
+                    <div 
+                      key={a.name}
+                      style={{ width: `${pct}%`, backgroundColor: a.color }}
+                      className="first:rounded-l-full last:rounded-r-full"
+                    />
+                  );
+                })}
               </div>
               
               <div className="space-y-4">
-                {ALLOCATION.map(a => (
-                  <div key={a.name} className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <span className="w-3 h-3 rounded-full" style={{ backgroundColor: a.color }} />
-                      <span className="text-[#888]">{a.name}</span>
+                {ALLOCATION_CONFIG.map(a => {
+                  const value = allocation[a.key as keyof typeof allocation] || 0;
+                  const pct = total > 0 ? ((value / total) * 100).toFixed(0) : '0';
+                  return (
+                    <div key={a.name} className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <span className="w-3 h-3 rounded-full" style={{ backgroundColor: a.color }} />
+                        <span className="text-[#888]">{a.name}</span>
+                      </div>
+                      <span className="font-mono">{pct}% · ${value.toFixed(2)}</span>
                     </div>
-                    <span className="font-mono">{a.pct}% · ${(300 * a.pct / 100).toFixed(0)}</span>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
             
