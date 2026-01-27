@@ -11,6 +11,8 @@
  * - Cooperative growth: Share wins, learn from losses
  * - Treasury first: Profits flow to savings/staking
  * - Compound wealth: Small wins → big wealth over time
+ * - Blessing plays: Big wins when confidence + momentum + sentiment + math align
+ * - Judicious risk: Exact and calculated, never reckless
  * 
  * Fund Flow:
  *   DEPOSITS → TREASURY → AGENT BUDGETS → TRADES → WINS → TREASURY
@@ -71,9 +73,19 @@ const TREASURY_CONFIG = {
   // 🛡️ Risk limits
   RISK: {
     MAX_DAILY_LOSS: 50,        // Stop all trading if down $50/day
-    MAX_SINGLE_TRADE: 25,      // No trade > $25
+    MAX_SINGLE_TRADE: 25,      // No trade > $25 (normal)
+    MAX_BLESSING_TRADE: 75,    // Up to $75 for blessing plays
     MIN_RESERVE_PCT: 0.20,     // Never let reserve drop below 20%
     DRAWDOWN_PAUSE: 0.15,      // Pause if 15% drawdown
+  },
+
+  // 🌟 Blessing play thresholds (when to go bigger)
+  BLESSING: {
+    MIN_CONFIDENCE: 0.80,      // 80%+ consensus required
+    MIN_MOMENTUM: 0.15,        // 15%+ price momentum
+    MIN_VOLUME_SPIKE: 2.0,     // 2x normal volume
+    MAX_SPREAD: 0.02,          // Tight spread required
+    POSITION_MULTIPLIER: 3,    // 3x normal position size
   },
 };
 
@@ -257,8 +269,10 @@ class SwarmTreasury {
 
   /**
    * Get available budget for an agent
+   * @param {string} agentName - Agent identifier
+   * @param {boolean} isBlessing - Whether this is a blessing play opportunity
    */
-  getAgentBudget(agentName) {
+  getAgentBudget(agentName, isBlessing = false) {
     const budgetKey = `${agentName}_agent`;
     const budget = this.state.balances[budgetKey] || 0;
     
@@ -275,7 +289,46 @@ class SwarmTreasury {
       return 0;
     }
 
-    return Math.min(budget, TREASURY_CONFIG.RISK.MAX_SINGLE_TRADE);
+    // Blessing plays get bigger allocation when conditions align
+    const maxTrade = isBlessing 
+      ? TREASURY_CONFIG.RISK.MAX_BLESSING_TRADE 
+      : TREASURY_CONFIG.RISK.MAX_SINGLE_TRADE;
+
+    return Math.min(budget, maxTrade);
+  }
+
+  /**
+   * Check if conditions qualify for a blessing play
+   * Blessing = confidence + momentum + sentiment + math all align
+   */
+  isBlessingOpportunity(decision, analysis) {
+    const blessing = TREASURY_CONFIG.BLESSING;
+    
+    // Must have high confidence (all agents agree)
+    if ((decision.confidence || 0) < blessing.MIN_CONFIDENCE) return false;
+    
+    // Check momentum if available
+    const momentum = Math.abs(analysis?.priceChange24h || analysis?.momentum || 0);
+    const hasStrongMomentum = momentum >= blessing.MIN_MOMENTUM;
+    
+    // Check volume spike if available  
+    const volumeRatio = analysis?.volumeRatio || analysis?.volume24h / (analysis?.avgVolume || analysis?.volume24h) || 1;
+    const hasVolume = volumeRatio >= blessing.MIN_VOLUME_SPIKE;
+    
+    // Check spread if available
+    const spread = analysis?.spread || 0.02;
+    const hasTightSpread = spread <= blessing.MAX_SPREAD;
+    
+    // Need at least 2 of 3 conditions (momentum, volume, spread) plus confidence
+    const conditionsMet = [hasStrongMomentum, hasVolume, hasTightSpread].filter(Boolean).length;
+    
+    if (conditionsMet >= 2) {
+      this.log(`🌟 BLESSING OPPORTUNITY DETECTED!`);
+      this.log(`   Confidence: ${(decision.confidence * 100).toFixed(0)}% | Momentum: ${hasStrongMomentum} | Volume: ${hasVolume} | Spread: ${hasTightSpread}`);
+      return true;
+    }
+    
+    return false;
   }
 
   /**
@@ -537,8 +590,16 @@ class SwarmTreasury {
               const decision = await polyTrader.makeCooperativeDecision(opp.market, opp.analysis);
               
               if (decision.decision === 'TRADE' && decision.confidence >= learnings.optimalConfidence) {
-                // Adjust size based on available budget
-                decision.size = Math.min(decision.size || 25, polyBudget);
+                // Check for blessing opportunity
+                const isBlessing = this.isBlessingOpportunity(decision, opp.analysis);
+                const actualBudget = this.getAgentBudget('polymarket', isBlessing);
+                
+                // Blessing plays get multiplied position size
+                const baseSize = decision.size || 25;
+                decision.size = isBlessing 
+                  ? Math.min(baseSize * TREASURY_CONFIG.BLESSING.POSITION_MULTIPLIER, actualBudget)
+                  : Math.min(baseSize, actualBudget);
+                decision.isBlessing = isBlessing;
                 
                 // Execute paper trade
                 await polyTrader.executePaperTrade(decision);
@@ -577,8 +638,16 @@ class SwarmTreasury {
               const decision = await memeTrader.makeSwarmDecision(opp.pair, opp.analysis);
               
               if (decision.decision === 'BUY') {
-                // Adjust size based on available budget
-                decision.size = Math.min(decision.size || 25, memeBudget);
+                // Check for blessing opportunity
+                const isBlessing = this.isBlessingOpportunity(decision, opp.analysis);
+                const actualBudget = this.getAgentBudget('base_meme', isBlessing);
+                
+                // Blessing plays get multiplied position size
+                const baseSize = decision.size || 25;
+                decision.size = isBlessing 
+                  ? Math.min(baseSize * TREASURY_CONFIG.BLESSING.POSITION_MULTIPLIER, actualBudget)
+                  : Math.min(baseSize, actualBudget);
+                decision.isBlessing = isBlessing;
                 
                 // Execute paper trade
                 await memeTrader.executePaperBuy(opp.pair, decision);
@@ -641,23 +710,33 @@ class SwarmTreasury {
   /**
    * Simulate trade outcome for paper trading
    * Uses confidence + randomness to determine win/loss
+   * Blessing plays have higher potential returns
    */
   simulateOutcome(decision) {
     const confidence = decision.confidence || 0.5;
     const size = decision.size || 25;
+    const isBlessing = decision.isBlessing || false;
     
     // Higher confidence = higher chance of win
-    // But add randomness to simulate real markets
+    // Blessing plays have even higher win rate (conditions aligned)
     const random = Math.random();
-    const isWin = random < confidence;
+    const winChance = isBlessing ? Math.min(confidence + 0.10, 0.95) : confidence;
+    const isWin = random < winChance;
 
-    // Win: 10-50% profit based on confidence
-    // Loss: 10-30% loss
     if (isWin) {
-      const winPct = 0.10 + (confidence - 0.5) * 0.8;  // 10-50%
-      return size * winPct;
+      // Blessing wins can be bigger (20-80% vs 10-50%)
+      const baseWinPct = 0.10 + (confidence - 0.5) * 0.8;  // 10-50%
+      const winPct = isBlessing ? baseWinPct * 1.5 : baseWinPct;  // 15-75% for blessings
+      const pnl = size * winPct;
+      
+      if (isBlessing) {
+        this.log(`🌟 BLESSING WIN: +$${pnl.toFixed(2)} (${(winPct * 100).toFixed(0)}% return)`);
+      }
+      return pnl;
     } else {
-      const lossPct = 0.10 + (1 - confidence) * 0.2;  // 10-30%
+      // Blessing losses are capped (we were judicious)
+      const baseLossPct = 0.10 + (1 - confidence) * 0.2;  // 10-30%
+      const lossPct = isBlessing ? baseLossPct * 0.7 : baseLossPct;  // Lower loss on blessings (tight stops)
       return -size * lossPct;
     }
   }
