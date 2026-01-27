@@ -1,0 +1,22 @@
+{
+  "name": "b0b-finance",
+  "version": "1.0.0",
+  "description": "B0B Financial Automation - Polymarket, bill autopay, wealth management",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "polymarket": "node polymarket.js",
+    "bills": "node bills.js",
+    "dashboard": "node dashboard.js"
+  },
+  "dependencies": {
+    "axios": "^1.13.4",
+    "dotenv": "^16.3.0",
+    "ethers": "^6.16.0",
+    "ws": "^8.19.0"
+  },
+  "author": "b0b",
+  "license": "MIT",
+  "keywords": [],
+  "type": "commonjs"
+}

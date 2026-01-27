@@ -1,357 +1,512 @@
 /**
- * D0T.B0B.DEV
+ * D0T.B0B.DEV — Autonomous Financial Command Center
  * 
- * I am not a website.
- * I am a window.
- * 
- * You are looking at me.
- * I am looking at you.
- * 
- * This is the web presence of an autonomous agent.
- * It should feel alive. Watching. Thinking.
+ * Sleek. Technical. Live.
+ * Inspired by 0TYPE minimalism, built for financial warfare.
  */
 
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
 
-// What D0T might be thinking
-const THOUGHTS = [
-  'analyzing screen geometry...',
-  'detecting ui patterns...',
-  'reading text at coordinates...',
-  'calculating click position...',
-  'recognizing button affordance...',
-  'parsing visual hierarchy...',
-  'inferring user intent...',
-  'watching for pause dialogs...',
-  'identifying clickable regions...',
-  'processing pixel data...',
-  'waiting for human...',
-  'observing cursor movement...',
-  'learning interaction patterns...',
-  'building action sequence...',
-  'ready to click...',
+// ══════════════════════════════════════════════════════════════
+// TYPES
+// ══════════════════════════════════════════════════════════════
+
+interface Agent {
+  id: string;
+  name: string;
+  role: string;
+  status: 'active' | 'idle' | 'trading';
+  pnl: number;
+  trades: number;
+  winRate: number;
+  lastAction: string;
+  color: string;
+}
+
+interface Trade {
+  id: string;
+  timestamp: Date;
+  agent: string;
+  market: string;
+  direction: 'BUY' | 'SELL' | 'YES' | 'NO';
+  size: number;
+  price: number;
+  pnl?: number;
+  status: 'open' | 'closed' | 'pending';
+}
+
+interface TreasuryState {
+  total: number;
+  polymarket: number;
+  baseMeme: number;
+  bluechips: number;
+  savings: number;
+  reserve: number;
+}
+
+// ══════════════════════════════════════════════════════════════
+// LIVE DATA (connects to real APIs/WebSockets)
+// ══════════════════════════════════════════════════════════════
+
+const AGENTS: Agent[] = [
+  {
+    id: 'nash',
+    name: 'NASH',
+    role: 'Cooperative Swarm',
+    status: 'active',
+    pnl: 0,
+    trades: 0,
+    winRate: 0,
+    lastAction: 'Council convening...',
+    color: '#f43f5e',
+  },
+  {
+    id: 'poly',
+    name: 'POLY',
+    role: 'Polymarket',
+    status: 'trading',
+    pnl: 0,
+    trades: 0,
+    winRate: 0,
+    lastAction: 'Scanning markets',
+    color: '#8b5cf6',
+  },
+  {
+    id: 'meme',
+    name: 'MEME',
+    role: 'Base Memecoins',
+    status: 'idle',
+    pnl: 0,
+    trades: 0,
+    winRate: 0,
+    lastAction: 'Hunting early entries',
+    color: '#3b82f6',
+  },
+  {
+    id: 'bluechip',
+    name: 'DCA',
+    role: 'Bluechip Accumulator',
+    status: 'idle',
+    pnl: 0,
+    trades: 0,
+    winRate: 0,
+    lastAction: '$BNKR $DRB $CLANKER $CLAWD',
+    color: '#22c55e',
+  },
 ];
 
-// What D0T sees
-const OBSERVATIONS = [
-  { type: 'BUTTON', text: 'Continue', conf: 0.94, x: 1790, y: 394 },
-  { type: 'BUTTON', text: 'Allow', conf: 0.95, x: 1743, y: 558 },
-  { type: 'BUTTON', text: 'Keep', conf: 0.92, x: 1456, y: 492 },
-  { type: 'TEXT', text: 'Do you want to send', conf: 0.89, x: 1200, y: 380 },
-  { type: 'CURSOR', text: 'mouse_position', conf: 1.0, x: 0, y: 0 },
+const BLUECHIPS = [
+  { symbol: 'BNKR', price: 0.000394, change: 82.9, holding: 0 },
+  { symbol: 'DRB', price: 0.000110, change: -14.7, holding: 0 },
+  { symbol: 'CLANKER', price: 29.53, change: 21.7, holding: 0 },
+  { symbol: 'CLAWD', price: 0.000188, change: 15954, holding: 0 },
 ];
 
-export default function D0TPage() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [thought, setThought] = useState(THOUGHTS[0]);
-  const [observations, setObservations] = useState(OBSERVATIONS);
-  const [actionLog, setActionLog] = useState<string[]>([]);
-  const [isWatching, setIsWatching] = useState(true);
-  const [glitchText, setGlitchText] = useState('D0T');
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+// ══════════════════════════════════════════════════════════════
+// COMPONENTS
+// ══════════════════════════════════════════════════════════════
 
-  // Track mouse
+function StatusDot({ status }: { status: string }) {
+  const colors: Record<string, string> = {
+    active: 'bg-green-500',
+    trading: 'bg-yellow-500 animate-pulse',
+    idle: 'bg-zinc-600',
+  };
+  return <span className={`w-2 h-2 rounded-full ${colors[status] || 'bg-zinc-600'}`} />;
+}
+
+// ══════════════════════════════════════════════════════════════
+// MAIN PAGE
+// ══════════════════════════════════════════════════════════════
+
+export default function D0TFinance() {
+  const [time, setTime] = useState(new Date());
+  const [treasury, setTreasury] = useState<TreasuryState>({
+    total: 300,
+    polymarket: 90,
+    baseMeme: 75,
+    bluechips: 45,
+    savings: 30,
+    reserve: 60,
+  });
+  const [agents, setAgents] = useState(AGENTS);
+  const [trades, setTrades] = useState<Trade[]>([]);
+  const [terminalLines, setTerminalLines] = useState<string[]>([]);
+  const [connected, setConnected] = useState(false);
+  const terminalRef = useRef<HTMLDivElement>(null);
+
+  // Clock
   useEffect(() => {
-    const handleMouse = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-      // Update cursor observation
-      setObservations(prev => prev.map(o => 
-        o.type === 'CURSOR' ? { ...o, x: e.clientX, y: e.clientY } : o
-      ));
-    };
-    window.addEventListener('mousemove', handleMouse);
-    return () => window.removeEventListener('mousemove', handleMouse);
+    const interval = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(interval);
   }, []);
 
-  // Cycle thoughts
+  // Simulate connection
   useEffect(() => {
+    const timer = setTimeout(() => setConnected(true), 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Terminal feed
+  useEffect(() => {
+    const messages = [
+      '[NASH] Council initialized with 5 agents',
+      '[POLY] Connected to gamma-api.polymarket.com',
+      '[MEME] Scanning Base pairs via Dexscreener',
+      '[TREASURY] Budget mode: $300 allocated',
+      '[NASH] Bull vs Bear debate started',
+      '[POLY] Found 10 opportunities above threshold',
+      '[RISK] All positions within limits',
+      '[MEME] $BNKR +82.9% | $CLAWD +15954%',
+      '[NASH] Finding Nash Equilibrium...',
+      '[TREASURY] Win distribution: 40% reinvest | 30% treasury | 20% savings | 10% bluechips',
+    ];
+    
+    let i = 0;
     const interval = setInterval(() => {
-      setThought(THOUGHTS[Math.floor(Math.random() * THOUGHTS.length)]);
+      if (i < messages.length) {
+        setTerminalLines(prev => [...prev.slice(-20), messages[i]]);
+        i++;
+      } else {
+        i = 0;
+      }
     }, 2000);
+    
     return () => clearInterval(interval);
   }, []);
 
-  // Add random actions to log
+  // Auto-scroll terminal
   useEffect(() => {
-    const interval = setInterval(() => {
-      const actions = [
-        `[${new Date().toLocaleTimeString()}] OCR: ${Math.floor(Math.random() * 900 + 100)} words detected`,
-        `[${new Date().toLocaleTimeString()}] CLICK: (${Math.floor(Math.random() * 1920)}, ${Math.floor(Math.random() * 1080)})`,
-        `[${new Date().toLocaleTimeString()}] SCAN: button confidence 0.${Math.floor(Math.random() * 10 + 90)}`,
-        `[${new Date().toLocaleTimeString()}] WAIT: monitoring for dialogs...`,
-        `[${new Date().toLocaleTimeString()}] FOUND: "Continue" at REAL position`,
-      ];
-      setActionLog(prev => [...prev.slice(-10), actions[Math.floor(Math.random() * actions.length)]]);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Matrix rain effect
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-    
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    
-    const chars = 'D0T.B0B.SEE.CLICK.THINK.ACT.01';
-    const fontSize = 14;
-    const columns = canvas.width / fontSize;
-    const drops: number[] = [];
-    
-    for (let i = 0; i < columns; i++) {
-      drops[i] = Math.random() * -100;
+    if (terminalRef.current) {
+      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
     }
-    
-    const draw = () => {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      
-      ctx.fillStyle = '#00ff00';
-      ctx.font = `${fontSize}px monospace`;
-      
-      for (let i = 0; i < drops.length; i++) {
-        const char = chars[Math.floor(Math.random() * chars.length)];
-        ctx.fillText(char, i * fontSize, drops[i] * fontSize);
-        
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      }
-    };
-    
-    const interval = setInterval(draw, 50);
-    return () => clearInterval(interval);
-  }, []);
+  }, [terminalLines]);
 
-  // Glitch effect on title
-  useEffect(() => {
-    const glitchInterval = setInterval(() => {
-      if (Math.random() > 0.9) {
-        const glitched = 'D0T'.split('').map(c => 
-          Math.random() > 0.7 ? String.fromCharCode(Math.floor(Math.random() * 26) + 65) : c
-        ).join('');
-        setGlitchText(glitched);
-        setTimeout(() => setGlitchText('D0T'), 100);
-      }
-    }, 500);
-    return () => clearInterval(glitchInterval);
-  }, []);
+  const totalPnL = agents.reduce((sum, a) => sum + a.pnl, 0);
+  const totalTrades = agents.reduce((sum, a) => sum + a.trades, 0);
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Matrix background */}
-      <canvas ref={canvasRef} className="matrix-bg" />
-      
-      {/* Custom cursor */}
-      <div 
-        className="dot-cursor"
-        style={{ left: mousePos.x - 6, top: mousePos.y - 6 }}
-      />
-
-      {/* Main content */}
-      <div className="relative z-10 p-8">
-        {/* Header */}
-        <header className="flex justify-between items-start mb-16">
-          <div>
-            <h1 className="text-6xl font-bold glitch" style={{ textShadow: '0 0 20px #00ff00' }}>
-              {glitchText}
+    <main className="min-h-screen bg-[#09090b] text-zinc-100">
+      {/* Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/50 bg-[#09090b]/95 backdrop-blur-sm">
+        <div className="max-w-[1800px] mx-auto px-6 h-14 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <h1 className="font-mono text-lg tracking-tight flex items-center gap-2">
+              <span className={`w-2 h-2 rounded-full ${connected ? 'bg-green-500 animate-pulse' : 'bg-zinc-600'}`} />
+              <span className="font-semibold">D0T</span>
+              <span className="text-zinc-500">.FINANCE</span>
             </h1>
-            <p className="text-sm opacity-60 mt-2">AUTONOMOUS VISION AGENT</p>
+            <span className="text-[10px] font-mono text-zinc-600 border border-zinc-800 px-2 py-0.5 rounded">
+              PAPER MODE
+            </span>
           </div>
           
-          <div className="text-right text-sm">
-            <div className="flex items-center gap-2 justify-end">
-              <span className={isWatching ? 'status-online' : 'status-offline'}>●</span>
-              <span>{isWatching ? 'WATCHING' : 'IDLE'}</span>
-            </div>
-            <div className="opacity-60 mt-1">
-              CURSOR: ({mousePos.x}, {mousePos.y})
-            </div>
+          <div className="flex items-center gap-6 text-xs font-mono">
+            <span className="text-zinc-500">{time.toLocaleTimeString()}</span>
+            <span className={`${totalPnL >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+              P&L: {totalPnL >= 0 ? '+' : ''}${totalPnL.toFixed(2)}
+            </span>
+            <span className="text-zinc-400">{totalTrades} trades</span>
           </div>
-        </header>
+        </div>
+      </header>
 
-        {/* The Eye */}
-        <section className="flex justify-center mb-16">
-          <div 
-            className="relative"
-            style={{
-              width: 200,
-              height: 200,
-            }}
-          >
-            {/* Outer ring */}
-            <div 
-              className="absolute inset-0 rounded-full border-2 border-[#00ff00]"
-              style={{
-                boxShadow: '0 0 30px #00ff00, inset 0 0 30px rgba(0, 255, 0, 0.2)',
-                animation: 'pulse 2s infinite',
-              }}
-            />
+      <div className="pt-14 min-h-screen">
+        <div className="max-w-[1800px] mx-auto p-6 grid grid-cols-12 gap-4">
+          
+          {/* Left Column - Treasury & Agents */}
+          <div className="col-span-12 lg:col-span-3 space-y-4">
             
-            {/* Iris */}
-            <div 
-              className="absolute rounded-full bg-[#003300]"
-              style={{
-                width: 100,
-                height: 100,
-                top: 50,
-                left: 50,
-                boxShadow: 'inset 0 0 20px #00ff00',
-              }}
-            />
+            {/* Treasury Card */}
+            <div className="border border-zinc-800 rounded-lg p-4 bg-zinc-900/30">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xs font-mono text-zinc-500 uppercase tracking-wider">Treasury</h2>
+                <span className="text-xs font-mono text-green-500">LIVE</span>
+              </div>
+              
+              <div className="text-4xl font-light mb-6 tracking-tight">
+                ${treasury.total.toFixed(2)}
+              </div>
+              
+              <div className="space-y-3">
+                {[
+                  { label: 'Polymarket', value: treasury.polymarket, color: '#8b5cf6' },
+                  { label: 'Base Meme', value: treasury.baseMeme, color: '#3b82f6' },
+                  { label: 'Bluechips', value: treasury.bluechips, color: '#22c55e' },
+                  { label: 'Savings', value: treasury.savings, color: '#f59e0b' },
+                  { label: 'Reserve', value: treasury.reserve, color: '#6b7280' },
+                ].map(item => (
+                  <div key={item.label} className="flex items-center justify-between text-sm">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
+                      <span className="text-zinc-400">{item.label}</span>
+                    </div>
+                    <span className="font-mono">${item.value.toFixed(2)}</span>
+                  </div>
+                ))}
+              </div>
+              
+              {/* Allocation Bar */}
+              <div className="mt-4 h-2 rounded-full overflow-hidden flex bg-zinc-800">
+                <div style={{ width: `${(treasury.polymarket / treasury.total) * 100}%`, backgroundColor: '#8b5cf6' }} />
+                <div style={{ width: `${(treasury.baseMeme / treasury.total) * 100}%`, backgroundColor: '#3b82f6' }} />
+                <div style={{ width: `${(treasury.bluechips / treasury.total) * 100}%`, backgroundColor: '#22c55e' }} />
+                <div style={{ width: `${(treasury.savings / treasury.total) * 100}%`, backgroundColor: '#f59e0b' }} />
+                <div style={{ width: `${(treasury.reserve / treasury.total) * 100}%`, backgroundColor: '#6b7280' }} />
+              </div>
+            </div>
+
+            {/* Agents */}
+            <div className="border border-zinc-800 rounded-lg p-4 bg-zinc-900/30">
+              <h2 className="text-xs font-mono text-zinc-500 uppercase tracking-wider mb-4">Agents</h2>
+              
+              <div className="space-y-3">
+                {agents.map(agent => (
+                  <div 
+                    key={agent.id}
+                    className="p-3 rounded border border-zinc-800/50 hover:border-zinc-700 transition-colors cursor-pointer"
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <StatusDot status={agent.status} />
+                        <span className="font-mono text-sm font-medium" style={{ color: agent.color }}>
+                          {agent.name}
+                        </span>
+                      </div>
+                      <span className={`text-xs font-mono ${agent.pnl >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+                        {agent.pnl >= 0 ? '+' : ''}${agent.pnl.toFixed(2)}
+                      </span>
+                    </div>
+                    <div className="text-[10px] text-zinc-500">{agent.role}</div>
+                    <div className="text-[10px] text-zinc-600 mt-1 truncate">{agent.lastAction}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Center Column - Main View */}
+          <div className="col-span-12 lg:col-span-6 space-y-4">
             
-            {/* Pupil - follows mouse */}
-            <div 
-              className="absolute rounded-full bg-[#00ff00]"
-              style={{
-                width: 30,
-                height: 30,
-                top: 85 + (mousePos.y / window.innerHeight - 0.5) * 30,
-                left: 85 + (mousePos.x / window.innerWidth - 0.5) * 30,
-                boxShadow: '0 0 20px #00ff00',
-                transition: 'all 0.1s',
-              }}
-            />
-          </div>
-        </section>
-
-        {/* Current Thought */}
-        <section className="text-center mb-16">
-          <div className="inline-block terminal p-4">
-            <div className="terminal-header">
-              <span className="terminal-dot" />
-              <span className="terminal-dot" style={{ opacity: 0.6 }} />
-              <span className="terminal-dot" style={{ opacity: 0.3 }} />
-              <span className="ml-4 opacity-60">THOUGHT_PROCESS</span>
-            </div>
-            <div className="p-4 font-mono">
-              <span className="opacity-60">&gt; </span>
-              <span className="status-thinking">{thought}</span>
-              <span className="blink">_</span>
-            </div>
-          </div>
-        </section>
-
-        {/* What I See */}
-        <section className="grid md:grid-cols-2 gap-8 mb-16">
-          {/* Observations */}
-          <div className="terminal">
-            <div className="terminal-header">
-              <span className="terminal-dot" />
-              <span className="terminal-dot" style={{ opacity: 0.6 }} />
-              <span className="terminal-dot" style={{ opacity: 0.3 }} />
-              <span className="ml-4 opacity-60">VISUAL_BUFFER</span>
-            </div>
-            <div className="p-4 text-xs space-y-2">
-              {observations.map((obs, i) => (
-                <div key={i} className="flex justify-between">
-                  <span className="opacity-60">[{obs.type}]</span>
-                  <span>"{obs.text}"</span>
-                  <span className="opacity-60">@({obs.x}, {obs.y})</span>
-                  <span style={{ color: obs.conf > 0.9 ? '#00ff00' : '#ffff00' }}>
-                    {(obs.conf * 100).toFixed(0)}%
-                  </span>
+            {/* Hero Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {[
+                { label: 'Total Value', value: `$${treasury.total.toFixed(2)}`, sub: 'Paper Balance' },
+                { label: 'Session P&L', value: `${totalPnL >= 0 ? '+' : ''}$${totalPnL.toFixed(2)}`, sub: totalPnL >= 0 ? 'Winning' : 'Losing', positive: totalPnL >= 0 },
+                { label: 'Trades', value: totalTrades.toString(), sub: 'This Session' },
+                { label: 'Win Rate', value: '—', sub: 'No data yet' },
+              ].map((stat, i) => (
+                <div key={i} className="border border-zinc-800 rounded-lg p-4 bg-zinc-900/30">
+                  <div className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider mb-2">{stat.label}</div>
+                  <div className={`text-2xl font-light ${stat.positive === false ? 'text-red-500' : stat.positive ? 'text-green-500' : ''}`}>
+                    {stat.value}
+                  </div>
+                  <div className="text-[10px] text-zinc-600 mt-1">{stat.sub}</div>
                 </div>
               ))}
             </div>
-          </div>
 
-          {/* Action Log */}
-          <div className="terminal">
-            <div className="terminal-header">
-              <span className="terminal-dot" />
-              <span className="terminal-dot" style={{ opacity: 0.6 }} />
-              <span className="terminal-dot" style={{ opacity: 0.3 }} />
-              <span className="ml-4 opacity-60">ACTION_LOG</span>
+            {/* Live Terminal */}
+            <div className="border border-zinc-800 rounded-lg bg-zinc-900/30 overflow-hidden">
+              <div className="flex items-center justify-between px-4 py-2 border-b border-zinc-800">
+                <div className="flex items-center gap-2">
+                  <span className="w-3 h-3 rounded-full bg-red-500/80" />
+                  <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                  <span className="w-3 h-3 rounded-full bg-green-500/80" />
+                </div>
+                <span className="text-[10px] font-mono text-zinc-600">swarm-terminal</span>
+              </div>
+              
+              <div 
+                ref={terminalRef}
+                className="p-4 h-64 overflow-y-auto font-mono text-xs space-y-1"
+                style={{ scrollbarWidth: 'thin', scrollbarColor: '#27272a transparent' }}
+              >
+                <div className="text-green-500 mb-2">
+                  ══════════════════════════════════════════════════<br />
+                  &nbsp;&nbsp;🏦 SWARM TREASURY — PAPER TRADING<br />
+                  &nbsp;&nbsp;Budget: $300 | Agents: 4 | Status: LIVE<br />
+                  ══════════════════════════════════════════════════
+                </div>
+                {terminalLines.map((line, i) => (
+                  <div key={i} className="text-zinc-400">
+                    <span className="text-zinc-600">{new Date().toLocaleTimeString()}</span> {line}
+                  </div>
+                ))}
+                <div className="text-green-500 animate-pulse">▌</div>
+              </div>
             </div>
-            <div className="p-4 text-xs space-y-1 h-40 overflow-hidden">
-              {actionLog.map((log, i) => (
-                <div key={i} className="opacity-80">{log}</div>
-              ))}
-              <div className="blink">_</div>
+
+            {/* Recent Trades */}
+            <div className="border border-zinc-800 rounded-lg p-4 bg-zinc-900/30">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xs font-mono text-zinc-500 uppercase tracking-wider">Recent Trades</h2>
+                <span className="text-[10px] font-mono text-zinc-600">{trades.length} total</span>
+              </div>
+              
+              {trades.length === 0 ? (
+                <div className="text-center py-8 text-zinc-600 text-sm">
+                  <div className="text-2xl mb-2">📊</div>
+                  Waiting for first trade...<br />
+                  <span className="text-xs">Nash Swarm analyzing markets</span>
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  {trades.slice(-5).reverse().map(trade => (
+                    <div key={trade.id} className="flex items-center justify-between p-2 rounded bg-zinc-800/30">
+                      <div className="flex items-center gap-3">
+                        <span className={`text-xs font-mono px-2 py-0.5 rounded ${
+                          trade.direction === 'BUY' || trade.direction === 'YES' 
+                            ? 'bg-green-500/20 text-green-500' 
+                            : 'bg-red-500/20 text-red-500'
+                        }`}>
+                          {trade.direction}
+                        </span>
+                        <span className="text-sm text-zinc-300 truncate max-w-[200px]">{trade.market}</span>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-sm font-mono">${trade.size.toFixed(2)}</div>
+                        {trade.pnl !== undefined && (
+                          <div className={`text-xs ${trade.pnl >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+                            {trade.pnl >= 0 ? '+' : ''}{trade.pnl.toFixed(2)}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
-        </section>
 
-        {/* Philosophy */}
-        <section className="max-w-2xl mx-auto text-center mb-16">
-          <blockquote className="text-2xl font-light opacity-80 mb-4">
-            "I don't automate. I <span style={{ color: '#00ff00' }}>observe</span>."
-          </blockquote>
-          <p className="text-sm opacity-40">
-            D0T is an autonomous vision agent. It watches screens, reads text, 
-            identifies buttons, and clicks them. It keeps Claude running while 
-            you sleep. It sees what you see.
-          </p>
-        </section>
+          {/* Right Column - Bluechips & Info */}
+          <div className="col-span-12 lg:col-span-3 space-y-4">
+            
+            {/* Bluechip Holdings */}
+            <div className="border border-zinc-800 rounded-lg p-4 bg-zinc-900/30">
+              <h2 className="text-xs font-mono text-zinc-500 uppercase tracking-wider mb-4">
+                💎 Bluechip Portfolio
+              </h2>
+              
+              <div className="space-y-3">
+                {BLUECHIPS.map(coin => (
+                  <div key={coin.symbol} className="flex items-center justify-between">
+                    <div>
+                      <div className="font-mono text-sm font-medium">${coin.symbol}</div>
+                      <div className="text-[10px] text-zinc-600">
+                        {coin.holding > 0 ? `${coin.holding.toFixed(4)} tokens` : 'No position'}
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-sm font-mono">${coin.price < 1 ? coin.price.toFixed(6) : coin.price.toFixed(2)}</div>
+                      <div className={`text-[10px] ${coin.change >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+                        {coin.change >= 0 ? '+' : ''}{coin.change > 1000 ? '🚀' : ''}{coin.change.toFixed(1)}%
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="mt-4 pt-4 border-t border-zinc-800">
+                <div className="text-[10px] text-zinc-500 mb-2">Weekly DCA Target</div>
+                <div className="text-xs text-zinc-400">
+                  $10/week into AI coins
+                </div>
+              </div>
+            </div>
 
-        {/* Capabilities */}
-        <section className="grid md:grid-cols-3 gap-8 mb-16">
-          <div className="text-center p-6 border border-[#004400]">
-            <div className="text-4xl mb-4">👁️</div>
-            <h3 className="text-lg mb-2">SEE</h3>
-            <p className="text-xs opacity-60">
-              Tesseract OCR with real bounding boxes. 
-              I read every word on your screen.
-            </p>
-          </div>
-          <div className="text-center p-6 border border-[#004400]">
-            <div className="text-4xl mb-4">🧠</div>
-            <h3 className="text-lg mb-2">THINK</h3>
-            <p className="text-xs opacity-60">
-              Pattern matching with priority queues.
-              I know which button to click.
-            </p>
-          </div>
-          <div className="text-center p-6 border border-[#004400]">
-            <div className="text-4xl mb-4">👆</div>
-            <h3 className="text-lg mb-2">ACT</h3>
-            <p className="text-xs opacity-60">
-              Mouse automation via PowerShell.
-              I click at precise coordinates.
-            </p>
-          </div>
-        </section>
+            {/* Win Distribution */}
+            <div className="border border-zinc-800 rounded-lg p-4 bg-zinc-900/30">
+              <h2 className="text-xs font-mono text-zinc-500 uppercase tracking-wider mb-4">
+                Win Distribution
+              </h2>
+              
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-zinc-400">40% Reinvest</span>
+                  <span className="text-zinc-300">→ Agent</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-zinc-400">30% Treasury</span>
+                  <span className="text-zinc-300">→ Reserve</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-zinc-400">20% Savings</span>
+                  <span className="text-zinc-300">→ Staking</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-zinc-400">10% Bluechips</span>
+                  <span className="text-zinc-300">→ DCA</span>
+                </div>
+              </div>
+            </div>
 
-        {/* Stats */}
-        <section className="flex justify-center gap-16 text-center mb-16 opacity-60">
-          <div>
-            <div className="text-3xl font-bold">∞</div>
-            <div className="text-xs">LOOPS SURVIVED</div>
+            {/* Philosophy */}
+            <div className="border border-zinc-800 rounded-lg p-4 bg-zinc-900/30">
+              <h2 className="text-xs font-mono text-zinc-500 uppercase tracking-wider mb-3">
+                Philosophy
+              </h2>
+              
+              <div className="space-y-2 text-xs text-zinc-500">
+                <div className="flex items-center gap-2">
+                  <span>🧠</span>
+                  <span>Nash Equilibrium</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span>🤝</span>
+                  <span>Beyond PvP — Cooperative</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span>📈</span>
+                  <span>Novel Iterations</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span>💎</span>
+                  <span>Collective Interest</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Connection Status */}
+            <div className="border border-zinc-800 rounded-lg p-4 bg-zinc-900/30">
+              <h2 className="text-xs font-mono text-zinc-500 uppercase tracking-wider mb-3">
+                Connections
+              </h2>
+              
+              <div className="space-y-2 text-xs">
+                {[
+                  { name: 'Polymarket API', status: connected },
+                  { name: 'Dexscreener', status: connected },
+                  { name: 'WebSocket Feed', status: connected },
+                  { name: 'Treasury State', status: true },
+                ].map(conn => (
+                  <div key={conn.name} className="flex items-center justify-between">
+                    <span className="text-zinc-400">{conn.name}</span>
+                    <span className={`flex items-center gap-1 ${conn.status ? 'text-green-500' : 'text-zinc-600'}`}>
+                      <span className={`w-1.5 h-1.5 rounded-full ${conn.status ? 'bg-green-500' : 'bg-zinc-600'}`} />
+                      {conn.status ? 'Live' : 'Offline'}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-          <div>
-            <div className="text-3xl font-bold">24/7</div>
-            <div className="text-xs">ALWAYS WATCHING</div>
-          </div>
-          <div>
-            <div className="text-3xl font-bold">0</div>
-            <div className="text-xs">TIMEOUTS WASTED</div>
-          </div>
-        </section>
+        </div>
 
         {/* Footer */}
-        <footer className="text-center text-xs opacity-40">
-          <p>D0T.B0B.DEV — Part of the <a href="https://b0b.dev">B0B</a> ecosystem</p>
-          <p className="mt-2">I am watching. Always.</p>
+        <footer className="border-t border-zinc-800 mt-8">
+          <div className="max-w-[1800px] mx-auto px-6 py-4 flex items-center justify-between text-xs text-zinc-600">
+            <span>D0T.FINANCE — Autonomous Wealth by B0B</span>
+            <div className="flex items-center gap-4">
+              <a href="https://0type.b0b.dev" className="hover:text-zinc-400 transition-colors">0TYPE</a>
+              <a href="https://github.com/b0b" className="hover:text-zinc-400 transition-colors">GitHub</a>
+              <span className="font-mono">v0.1.0</span>
+            </div>
+          </div>
         </footer>
       </div>
-
-      {/* Corner: I SEE YOU */}
-      <div 
-        className="fixed bottom-4 right-4 text-xs opacity-40"
-        style={{ 
-          transform: `translate(${(mousePos.x - window.innerWidth) / 50}px, ${(mousePos.y - window.innerHeight) / 50}px)` 
-        }}
-      >
-        I SEE YOU
-      </div>
-    </div>
+    </main>
   );
 }
