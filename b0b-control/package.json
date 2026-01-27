@@ -1,0 +1,33 @@
+{
+  "name": "b0b-control",
+  "version": "1.0.0",
+  "description": "Mouse and window control modes for b0b autonomous operation",
+  "main": "control.js",
+  "bin": {
+    "b0b-control": "./control.js"
+  },
+  "scripts": {
+    "start": "node control.js",
+    "sword": "node control.js --mode sword",
+    "turbo": "node control.js --mode turbo",
+    "guardian": "node control.js --mode guardian",
+    "status": "node control.js --status",
+    "tray": "node tray.js"
+  },
+  "keywords": [
+    "automation",
+    "mouse-control",
+    "window-management",
+    "autonomous"
+  ],
+  "author": "b0b platform",
+  "license": "MIT",
+  "dependencies": {
+    "robotjs": "^0.6.0",
+    "active-win": "^8.1.0",
+    "node-global-key-listener": "^0.3.0"
+  },
+  "optionalDependencies": {
+    "systray2": "^2.1.0"
+  }
+}

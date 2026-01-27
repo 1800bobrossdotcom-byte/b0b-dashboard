@@ -1,0 +1,31 @@
+{
+  "name": "alfred",
+  "version": "1.0.0",
+  "description": "Autonomous Local Framework for Reliable Engineering & Development - Your trusted development partner",
+  "main": "alfred.js",
+  "bin": {
+    "alfred": "./alfred.js"
+  },
+  "scripts": {
+    "start": "node alfred.js start",
+    "status": "node alfred.js status",
+    "briefing": "node alfred.js briefing",
+    "clean": "node alfred.js clean",
+    "guard": "node alfred.js guard",
+    "queue": "node alfred.js queue"
+  },
+  "keywords": [
+    "automation",
+    "development",
+    "assistant",
+    "autonomous",
+    "trusted"
+  ],
+  "author": "b0b platform",
+  "license": "MIT",
+  "dependencies": {
+    "chokidar": "^3.5.3",
+    "chalk": "^4.1.2",
+    "glob": "^10.3.10"
+  }
+}

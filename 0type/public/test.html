@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>0TYPE Direct Library Test</title>
+  <style>
+    body {
+      background: #000;
+      color: #fff;
+      font-family: monospace;
+      padding: 20px;
+    }
+    .canvas-row {
+      display: flex;
+      gap: 20px;
+      margin: 20px 0;
+    }
+    canvas {
+      border: 1px solid #333;
+    }
+    .label {
+      text-align: center;
+      font-size: 12px;
+      color: #666;
+      margin-top: 5px;
+    }
+    #log {
+      background: #111;
+      padding: 10px;
+      border-radius: 4px;
+      max-height: 200px;
+      overflow-y: auto;
+      font-size: 11px;
+    }
+    .success { color: #4f4; }
+    .info { color: #88f; }
+    .warn { color: #ff4; }
+  </style>
+</head>
+<body>
+  <h1>0TYPE Direct Library Test</h1>
+  <p>Testing perfect-freehand directly without React/Next.js</p>
+  
+  <div class="canvas-row" id="canvasRow">
+    <!-- Canvases will be added here -->
+  </div>
+  
+  <div id="log"></div>
+
+  <!-- Load perfect-freehand from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/perfect-freehand@1.2.0/dist/browser.js"></script>
+  
+  <script>
+    // Perfect-freehand is available as `perfectFreehand` from CDN
+    const { getStroke } = window.perfectFreehand || {};
+    
+    function log(msg, type = 'info') {
+      const el = document.getElementById('log');
+      el.innerHTML += `<div class="${type}">${msg}</div>`;
+      el.scrollTop = el.scrollHeight;
+      console.log(msg);
+    }
+    
+    // Presets with VERY different settings
+    const PRESETS = {
+      'monoline-thin': {
+        size: 2,
+        thinning: 0,
+        smoothing: 0.5,
+        streamline: 0.5,
+        simulatePressure: false,
+      },
+      'brush-fat': {
+        size: 32,
+        thinning: 0.8,
+        smoothing: 0.2,
+        streamline: 0.1,
+        simulatePressure: true,
+      },
+      'calligraphy': {
+        size: 14,
+        thinning: 0.95,
+        smoothing: 0.6,
+        streamline: 0.5,
+        start: { taper: 100 },
+        end: { taper: 100 },
+        simulatePressure: true,
+      },
+      'marker-medium': {
+        size: 10,
+        thinning: 0.2,
+        smoothing: 0.7,
+        streamline: 0.6,
+        simulatePressure: true,
+      }
+    };
+    
+    // Test stroke - an S curve
+    const TEST_POINTS = [];
+    for (let i = 0; i <= 50; i++) {
+      const t = i / 50;
+      const x = 100 + Math.sin(t * Math.PI * 2) * 50;
+      const y = 50 + t * 300;
+      const pressure = 0.3 + Math.sin(t * Math.PI) * 0.7;
+      TEST_POINTS.push([x, y, pressure]);
+    }
+    
+    function getSmoothPath(points, closed = true) {
+      if (points.length < 4) return '';
+      const avg = (a, b) => (a + b) / 2;
+      let [a, b, c] = [points[0], points[1], points[2]];
+      let result = `M${a[0].toFixed(2)},${a[1].toFixed(2)} Q${b[0].toFixed(2)},${b[1].toFixed(2)} ${avg(b[0], c[0]).toFixed(2)},${avg(b[1], c[1]).toFixed(2)} T`;
+      for (let i = 2; i < points.length - 1; i++) {
+        a = points[i];
+        b = points[i + 1];
+        result += `${avg(a[0], b[0]).toFixed(2)},${avg(a[1], b[1]).toFixed(2)} `;
+      }
+      if (closed) result += 'Z';
+      return result;
+    }
+    
+    function runTest() {
+      if (!getStroke) {
+        log('❌ perfect-freehand not loaded!', 'warn');
+        return;
+      }
+      
+      log('🚀 Starting direct library test...', 'success');
+      log(`Test points: ${TEST_POINTS.length} points`);
+      
+      const row = document.getElementById('canvasRow');
+      row.innerHTML = '';
+      
+      const results = {};
+      
+      Object.entries(PRESETS).forEach(([name, options]) => {
+        // Create canvas
+        const wrapper = document.createElement('div');
+        const canvas = document.createElement('canvas');
+        canvas.width = 200;
+        canvas.height = 400;
+        const label = document.createElement('div');
+        label.className = 'label';
+        label.textContent = name;
+        wrapper.appendChild(canvas);
+        wrapper.appendChild(label);
+        row.appendChild(wrapper);
+        
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#0a0a0a';
+        ctx.fillRect(0, 0, 200, 400);
+        
+        // Get stroke from library
+        log(`📍 Testing "${name}": size=${options.size}, thinning=${options.thinning}`, 'info');
+        
+        const outlinePoints = getStroke(TEST_POINTS, options);
+        
+        // Measure
+        let minX = Infinity, maxX = -Infinity;
+        outlinePoints.forEach(([x]) => {
+          minX = Math.min(minX, x);
+          maxX = Math.max(maxX, x);
+        });
+        const strokeWidth = maxX - minX;
+        
+        results[name] = { points: outlinePoints.length, width: strokeWidth };
+        log(`   Output: ${outlinePoints.length} points, width=${strokeWidth.toFixed(1)}`, 'info');
+        
+        // Draw
+        const path = getSmoothPath(outlinePoints);
+        const path2d = new Path2D(path);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill(path2d);
+        
+        // Label on canvas
+        ctx.fillStyle = '#444';
+        ctx.font = '9px monospace';
+        ctx.fillText(`${outlinePoints.length}pts, w=${strokeWidth.toFixed(0)}`, 10, 390);
+      });
+      
+      // Compare
+      log('', 'info');
+      log('═══════════════════════════════════', 'success');
+      log('RESULTS COMPARISON:', 'success');
+      log('═══════════════════════════════════', 'success');
+      
+      const widths = Object.values(results).map(r => r.width);
+      const uniqueWidths = new Set(widths.map(w => Math.round(w)));
+      
+      Object.entries(results).forEach(([name, r]) => {
+        log(`${name.padEnd(20)}: ${r.points} points, width=${r.width.toFixed(1)}`, 'info');
+      });
+      
+      if (uniqueWidths.size === 1) {
+        log('❌ ALL PRESETS HAVE SAME WIDTH - LIBRARY BROKEN!', 'warn');
+      } else {
+        log(`✅ ${uniqueWidths.size} DIFFERENT WIDTHS - LIBRARY WORKS!`, 'success');
+        log('If you see DIFFERENT stroke widths, perfect-freehand is working.', 'success');
+      }
+    }
+    
+    // Run on load
+    window.onload = runTest;
+  </script>
+</body>
+</html>

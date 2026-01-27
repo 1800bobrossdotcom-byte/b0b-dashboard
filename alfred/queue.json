@@ -1,0 +1,11 @@
+{
+  "tasks": [
+    "Fix 0type stroke preset rendering - each preset must produce visually different output",
+    "Verify with visual-debug screenshots"
+  ],
+  "notes": [
+    "[2026-01-27T06:36:04.475Z] The perfect-freehand library WORKS (verified via test-library.js). Issue is in how presets connect to renderer in UI.",
+    "[2026-01-27T06:46:21.113Z] TURB0B00ST Sprint: Library test confirms perfect-freehand produces 5.5x variation (5896 to 32660 sq units). Created /compare page for side-by-side visual testing. Issue is not the library - connection to UI render pipeline needs verification when server runs."
+  ],
+  "controlMode": "turbo"
+}
