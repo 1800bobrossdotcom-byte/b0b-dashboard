@@ -1,0 +1,70 @@
+{
+  "name": "d0t-auto",
+  "displayName": "D0T Auto-Approve",
+  "description": "Autonomous tool approval for Copilot - no more clicking Continue!",
+  "version": "1.0.0",
+  "publisher": "b0b",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "d0t.approve",
+        "title": "D0T: Approve Current Action"
+      },
+      {
+        "command": "d0t.approveAll",
+        "title": "D0T: Enable Auto-Approve Mode"
+      },
+      {
+        "command": "d0t.stopAutoApprove",
+        "title": "D0T: Disable Auto-Approve Mode"
+      },
+      {
+        "command": "d0t.status",
+        "title": "D0T: Show Status"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "d0t.approve",
+        "key": "ctrl+shift+y",
+        "when": "chatIsVisible"
+      },
+      {
+        "command": "d0t.approveAll",
+        "key": "ctrl+shift+alt+y"
+      }
+    ],
+    "configuration": {
+      "title": "D0T Auto-Approve",
+      "properties": {
+        "d0t.autoApprove": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically approve all tool invocations"
+        },
+        "d0t.autoApproveDelay": {
+          "type": "number",
+          "default": 500,
+          "description": "Delay before auto-approving (ms)"
+        },
+        "d0t.showNotifications": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show notifications when auto-approving"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0"
+  }
+}
