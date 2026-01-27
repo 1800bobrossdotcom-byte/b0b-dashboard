@@ -15,7 +15,7 @@ const sizes = {
   md: { height: 32, fontSize: 24 },
   lg: { height: 48, fontSize: 36 },
   xl: { height: 64, fontSize: 48 },
-  hero: { height: 120, fontSize: 96 },
+  hero: { height: 180, fontSize: 140 },
 };
 
 export default function B0BLogo({

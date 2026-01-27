@@ -17,7 +17,7 @@ import { Canvas } from '@react-three/fiber';
 import { Float, Sparkles } from '@react-three/drei';
 import { gsap } from 'gsap';
 import { ParticleField } from '@/components/core/ParticleField';
-import { B0BLogo } from '@/components/core/StylizedText';
+import B0BLogo from '@/components/core/B0BLogo';
 import { COLORS } from '@/utils/tenets';
 
 export function HeroSection() {
@@ -97,13 +97,14 @@ export function HeroSection() {
       
       {/* Content Overlay */}
       <div className="relative z-10 text-center px-6 max-w-5xl">
-        <h1 
+        {/* B0B Logo with dot-zero and reveal animation */}
+        <div 
           ref={titleRef}
-          className="text-[clamp(4rem,15vw,12rem)] font-bold leading-none tracking-tight mb-6"
+          className="flex justify-center mb-8"
           style={{ opacity: 0 }}
         >
-          <B0BLogo />
-        </h1>
+          <B0BLogo size="hero" animate glow />
+        </div>
         
         <p 
           ref={subtitleRef}
