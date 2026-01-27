@@ -19,6 +19,11 @@
       <stop offset="50%" stop-color="#00FFFF"/>
       <stop offset="100%" stop-color="#00D4FF"/>
     </linearGradient>
+    <radialGradient id="core-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="40%" stop-color="#00FFFF"/>
+      <stop offset="100%" stop-color="#00D4FF"/>
+    </radialGradient>
   </defs>
   
   <rect width="512" height="512" fill="url(#grid)"/>
@@ -28,10 +33,10 @@
     <!-- B -->
     <text x="0" y="160" font-family="monospace" font-size="200" font-weight="bold" fill="url(#cyan-gradient)">B</text>
     
-    <!-- Slashed Zero -->
+    <!-- Dot-Zero ◉ -->
     <g transform="translate(130, 20)">
       <ellipse cx="70" cy="70" rx="55" ry="68" fill="none" stroke="url(#cyan-gradient)" stroke-width="16"/>
-      <line x1="30" y1="125" x2="110" y2="15" stroke="url(#cyan-gradient)" stroke-width="16" stroke-linecap="round"/>
+      <circle cx="70" cy="70" r="22" fill="url(#core-glow)"/>
     </g>
     
     <!-- B -->

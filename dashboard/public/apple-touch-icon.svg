@@ -1,11 +1,16 @@
 <svg viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
-  <!-- Apple Touch Icon - B0B slashed zero -->
+  <!-- Apple Touch Icon - B0B dot-zero -->
   <rect width="180" height="180" fill="#0A0A0A" rx="40"/>
   <defs>
     <linearGradient id="icon-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#00D4FF"/>
       <stop offset="100%" stop-color="#00FFFF"/>
     </linearGradient>
+    <radialGradient id="core-gradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="40%" stop-color="#00FFFF"/>
+      <stop offset="100%" stop-color="#00D4FF"/>
+    </radialGradient>
     <filter id="icon-glow">
       <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
       <feMerge>
@@ -16,6 +21,6 @@
   </defs>
   <g filter="url(#icon-glow)">
     <ellipse cx="90" cy="90" rx="45" ry="55" fill="none" stroke="url(#icon-gradient)" stroke-width="12"/>
-    <line x1="55" y1="135" x2="125" y2="45" stroke="url(#icon-gradient)" stroke-width="12" stroke-linecap="round"/>
+    <circle cx="90" cy="90" r="16" fill="url(#core-gradient)"/>
   </g>
 </svg>
