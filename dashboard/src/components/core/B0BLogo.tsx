@@ -4,18 +4,40 @@ import React, { useEffect, useState } from 'react';
 
 interface B0BLogoProps {
   size?: 'sm' | 'md' | 'lg' | 'xl' | 'hero';
-  variant?: 'full' | 'icon' | 'wordmark';
+  variant?: 'full' | 'icon';
   glow?: boolean;
   animate?: boolean;
   className?: string;
 }
 
 const sizes = {
-  sm: { height: 24, fontSize: 18 },
-  md: { height: 32, fontSize: 24 },
-  lg: { height: 48, fontSize: 36 },
-  xl: { height: 64, fontSize: 48 },
-  hero: { height: 180, fontSize: 140 },
+  sm: { scale: 0.3, dotSize: 2 },
+  md: { scale: 0.5, dotSize: 3 },
+  lg: { scale: 0.8, dotSize: 4 },
+  xl: { scale: 1, dotSize: 5 },
+  hero: { scale: 2, dotSize: 6 },
+};
+
+// Dot matrix patterns for each character (7 rows x 5 cols)
+const PATTERNS = {
+  B: [
+    [1,1,1,1,0],
+    [1,0,0,0,1],
+    [1,0,0,0,1],
+    [1,1,1,1,0],
+    [1,0,0,0,1],
+    [1,0,0,0,1],
+    [1,1,1,1,0],
+  ],
+  '0': [
+    [0,1,1,1,0],
+    [1,0,0,0,1],
+    [1,0,0,0,1],
+    [1,0,1,0,1], // Center dot for the "eye"
+    [1,0,0,0,1],
+    [1,0,0,0,1],
+    [0,1,1,1,0],
+  ],
 };
 
 export default function B0BLogo({
@@ -25,159 +47,142 @@ export default function B0BLogo({
   animate = true,
   className = '',
 }: B0BLogoProps) {
-  const { height, fontSize } = sizes[size];
+  const { scale, dotSize } = sizes[size];
   const [revealed, setRevealed] = useState(!animate);
+  const [dotStates, setDotStates] = useState<boolean[][]>([]);
 
+  // Initialize dot states for animation
   useEffect(() => {
     if (animate) {
-      const timer = setTimeout(() => setRevealed(true), 100);
+      // Start with all dots hidden
+      const totalDots = 7 * 5 * 3; // 3 characters
+      const initialStates: boolean[][] = [[], [], []];
+      
+      // Reveal dots with staggered timing
+      const timer = setTimeout(() => {
+        setRevealed(true);
+      }, 100);
+
       return () => clearTimeout(timer);
     }
   }, [animate]);
 
-  // Icon only - dot-zero ◉
+  const spacing = dotSize * 2.5;
+  const charWidth = 5 * spacing;
+  const charHeight = 7 * spacing;
+  const gap = spacing * 2;
+  
+  const totalWidth = variant === 'icon' ? charWidth : (charWidth * 3 + gap * 2);
+  const totalHeight = charHeight;
+
+  // Render a single character made of dots
+  const renderChar = (pattern: number[][], offsetX: number, charIndex: number) => {
+    const dots: JSX.Element[] = [];
+    
+    pattern.forEach((row, rowIdx) => {
+      row.forEach((dot, colIdx) => {
+        if (dot === 1) {
+          const x = offsetX + colIdx * spacing + dotSize;
+          const y = rowIdx * spacing + dotSize;
+          const delay = animate ? (charIndex * 150 + (rowIdx * 5 + colIdx) * 20) : 0;
+          
+          // Check if this is the center "eye" dot of the zero
+          const isEyeDot = pattern === PATTERNS['0'] && rowIdx === 3 && colIdx === 2;
+          
+          dots.push(
+            <circle
+              key={`${charIndex}-${rowIdx}-${colIdx}`}
+              cx={x}
+              cy={y}
+              r={isEyeDot ? dotSize * 1.5 : dotSize}
+              fill={isEyeDot ? '#FFFFFF' : '#00D4FF'}
+              opacity={revealed ? 1 : 0}
+              style={{
+                transition: `opacity 0.3s ease ${delay}ms, transform 0.3s ease ${delay}ms`,
+                transform: revealed ? 'scale(1)' : 'scale(0)',
+                transformOrigin: `${x}px ${y}px`,
+              }}
+            >
+              {isEyeDot && animate && (
+                <animate
+                  attributeName="r"
+                  values={`${dotSize * 1.2};${dotSize * 1.8};${dotSize * 1.2}`}
+                  dur="3s"
+                  repeatCount="indefinite"
+                />
+              )}
+            </circle>
+          );
+        }
+      });
+    });
+    
+    return dots;
+  };
+
+  // Icon variant - just the zero with eye
   if (variant === 'icon') {
     return (
       <svg
-        viewBox="0 0 100 100"
-        height={height}
-        width={height}
-        className={`${className} transition-all duration-1000 ${revealed ? 'opacity-100' : 'opacity-0'}`}
+        viewBox={`0 0 ${charWidth + dotSize * 2} ${charHeight + dotSize * 2}`}
+        width={(charWidth + dotSize * 2) * scale}
+        height={(charHeight + dotSize * 2) * scale}
+        className={className}
         aria-label="B0B"
       >
         <defs>
           {glow && (
-            <filter id="glow-icon" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+            <filter id="dot-glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="2" result="coloredBlur" />
               <feMerge>
                 <feMergeNode in="coloredBlur" />
                 <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
           )}
-          <radialGradient id="core-glow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#FFFFFF" />
-            <stop offset="40%" stopColor="#00FFFF" />
-            <stop offset="100%" stopColor="#00D4FF" />
-          </radialGradient>
         </defs>
-        
-        {/* Dot-Zero ◉ */}
-        <g filter={glow ? "url(#glow-icon)" : undefined}>
-          {/* Outer ring */}
-          <ellipse
-            cx="50"
-            cy="50"
-            rx="35"
-            ry="42"
-            fill="none"
-            stroke="#00D4FF"
-            strokeWidth="6"
-            className={`transition-all duration-1000 delay-300 ${revealed ? 'opacity-100' : 'opacity-0 scale-50'}`}
-            style={{ transformOrigin: 'center', transform: revealed ? 'scale(1)' : 'scale(0.5)' }}
-          />
-          {/* Inner glowing dot - the eye/core */}
-          <circle
-            cx="50"
-            cy="50"
-            r="12"
-            fill="url(#core-glow)"
-            className={`transition-all duration-700 delay-500 ${revealed ? 'opacity-100' : 'opacity-0 scale-0'}`}
-            style={{ transformOrigin: 'center' }}
-          >
-            {animate && <animate attributeName="r" values="10;14;10" dur="3s" repeatCount="indefinite" />}
-          </circle>
+        <g filter={glow ? "url(#dot-glow)" : undefined}>
+          {renderChar(PATTERNS['0'], dotSize, 0)}
         </g>
       </svg>
     );
   }
 
-  // Full logo - B ◉ B with reveal animation
+  // Full B0B logo
   return (
     <svg
-      viewBox="0 0 200 60"
-      height={height}
+      viewBox={`0 0 ${totalWidth + dotSize * 2} ${totalHeight + dotSize * 2}`}
+      width={(totalWidth + dotSize * 2) * scale}
+      height={(totalHeight + dotSize * 2) * scale}
       className={className}
       aria-label="B0B"
     >
       <defs>
         {glow && (
-          <filter id="glow-text" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+          <filter id="dot-glow-full" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation={dotSize / 2} result="coloredBlur" />
             <feMerge>
               <feMergeNode in="coloredBlur" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
         )}
-        
-        <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id="dot-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#00D4FF" />
           <stop offset="50%" stopColor="#00FFFF" />
           <stop offset="100%" stopColor="#00D4FF" />
         </linearGradient>
-        
-        <radialGradient id="dot-glow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#FFFFFF" />
-          <stop offset="30%" stopColor="#00FFFF" />
-          <stop offset="100%" stopColor="#00D4FF" />
-        </radialGradient>
       </defs>
-
-      <g filter={glow ? "url(#glow-text)" : undefined}>
-        {/* First B - slides in from left */}
-        <text
-          x="10"
-          y="46"
-          fontFamily="'JetBrains Mono', 'SF Mono', 'Fira Code', monospace"
-          fontSize={fontSize}
-          fontWeight="700"
-          fill="url(#logo-gradient)"
-          className={`transition-all duration-700 ease-out ${revealed ? 'opacity-100' : 'opacity-0'}`}
-          style={{ transform: revealed ? 'translateX(0)' : 'translateX(-20px)' }}
-        >
-          B
-        </text>
-
-        {/* Dot-Zero ◉ - scales in from center */}
-        <g 
-          className={`transition-all duration-500 delay-200 ${revealed ? 'opacity-100' : 'opacity-0'}`}
-          style={{ transformOrigin: '88px 30px', transform: revealed ? 'scale(1)' : 'scale(0)' }}
-        >
-          {/* Outer ring of zero */}
-          <ellipse
-            cx="88"
-            cy="30"
-            rx="22"
-            ry="26"
-            fill="none"
-            stroke="url(#logo-gradient)"
-            strokeWidth="5"
-          />
-          {/* Inner glowing dot */}
-          <circle
-            cx="88"
-            cy="30"
-            r="7"
-            fill="url(#dot-glow)"
-          >
-            {animate && <animate attributeName="r" values="6;9;6" dur="3s" repeatCount="indefinite" />}
-          </circle>
-        </g>
-
-        {/* Second B - slides in from right */}
-        <text
-          x="130"
-          y="46"
-          fontFamily="'JetBrains Mono', 'SF Mono', 'Fira Code', monospace"
-          fontSize={fontSize}
-          fontWeight="700"
-          fill="url(#logo-gradient)"
-          className={`transition-all duration-700 delay-300 ease-out ${revealed ? 'opacity-100' : 'opacity-0'}`}
-          style={{ transform: revealed ? 'translateX(0)' : 'translateX(20px)' }}
-        >
-          B
-        </text>
+      
+      <g filter={glow ? "url(#dot-glow-full)" : undefined}>
+        {/* First B */}
+        {renderChar(PATTERNS.B, dotSize, 0)}
+        
+        {/* Zero with eye */}
+        {renderChar(PATTERNS['0'], dotSize + charWidth + gap, 1)}
+        
+        {/* Second B */}
+        {renderChar(PATTERNS.B, dotSize + (charWidth + gap) * 2, 2)}
       </g>
     </svg>
   );
@@ -188,8 +193,27 @@ export function B0BFavicon() {
   return (
     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
       <rect width="32" height="32" fill="#0A0A0A" rx="6" />
-      <ellipse cx="16" cy="16" rx="9" ry="11" fill="none" stroke="#00D4FF" strokeWidth="2.5" />
-      <circle cx="16" cy="16" r="3.5" fill="#00FFFF" />
+      <defs>
+        <filter id="fav-glow">
+          <feGaussianBlur stdDeviation="1" result="coloredBlur" />
+          <feMerge>
+            <feMergeNode in="coloredBlur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+      <g filter="url(#fav-glow)" transform="translate(4, 4)">
+        {/* Dot matrix zero */}
+        <circle cx="12" cy="2" r="1.5" fill="#00D4FF" />
+        <circle cx="4" cy="6" r="1.5" fill="#00D4FF" />
+        <circle cx="20" cy="6" r="1.5" fill="#00D4FF" />
+        <circle cx="4" cy="12" r="1.5" fill="#00D4FF" />
+        <circle cx="12" cy="12" r="2" fill="#FFFFFF" /> {/* Eye */}
+        <circle cx="20" cy="12" r="1.5" fill="#00D4FF" />
+        <circle cx="4" cy="18" r="1.5" fill="#00D4FF" />
+        <circle cx="20" cy="18" r="1.5" fill="#00D4FF" />
+        <circle cx="12" cy="22" r="1.5" fill="#00D4FF" />
+      </g>
     </svg>
   );
 }
