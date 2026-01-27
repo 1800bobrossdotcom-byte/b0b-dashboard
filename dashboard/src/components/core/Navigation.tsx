@@ -60,13 +60,7 @@ export function Navigation() {
           <div className="flex items-center gap-5">
             {/* Claude - Anthropic */}
             <a href="https://anthropic.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:opacity-100 opacity-70 transition-opacity">
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none">
-                <path d="M13.827 3.52l3.603 10.108-3.603 2.162V3.52z" fill="#D4A27F"/>
-                <path d="M10.173 3.52L6.57 13.628l3.603 2.162V3.52z" fill="#D4A27F"/>
-                <path d="M13.827 15.79l3.603-2.162L13.827 20.48v-4.69z" fill="#D4A27F"/>
-                <path d="M10.173 15.79L6.57 13.628l3.603 6.852v-4.69z" fill="#D4A27F"/>
-                <path d="M12 12.93l-1.827 2.86L12 20.48l1.827-4.69L12 12.93z" fill="#D4A27F"/>
-              </svg>
+              <img src="https://www.anthropic.com/images/icons/safari-pinned-tab.svg" alt="Claude" className="w-4 h-4 invert" />
               <span className="text-[#D4A27F] font-medium">Claude</span>
             </a>
             <span className="text-white/10">|</span>
@@ -92,14 +86,7 @@ export function Navigation() {
             <span className="text-white/10">|</span>
             {/* Clanker */}
             <a href="https://clanker.world" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:opacity-100 opacity-70 transition-opacity">
-              <svg className="w-4 h-4" viewBox="0 0 100 100" fill="none">
-                <circle cx="50" cy="50" r="45" stroke="white" strokeWidth="6"/>
-                <circle cx="50" cy="50" r="20" fill="white"/>
-                <rect x="47" y="5" width="6" height="15" fill="white"/>
-                <rect x="47" y="80" width="6" height="15" fill="white"/>
-                <rect x="5" y="47" width="15" height="6" fill="white"/>
-                <rect x="80" y="47" width="15" height="6" fill="white"/>
-              </svg>
+              <img src="https://www.clanker.world/logo_circle.png" alt="Clanker" className="w-5 h-5 rounded-full" />
               <span className="text-white font-medium">Clanker</span>
             </a>
           </div>
