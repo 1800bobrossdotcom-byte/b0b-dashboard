@@ -91,6 +91,20 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
 }
 
+.specimen-brutalist {
+  font-family: 'Impact', 'Arial Black', sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.specimen-neural {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+
 /* ═══════════════════════════════════════════
    ANIMATIONS
    ═══════════════════════════════════════════ */

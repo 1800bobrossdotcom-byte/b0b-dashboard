@@ -1,0 +1,5323 @@
+[
+  {
+    "timestamp": "2026-01-27T09:19:14.486Z",
+    "level": "INFO",
+    "message": "Ghost mode started",
+    "detail": "Poll interval: 3000ms"
+  },
+  {
+    "timestamp": "2026-01-27T09:19:14.487Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:19:14.791Z",
+    "level": "ERROR",
+    "message": "OCR failed",
+    "detail": "vision.readScreen is not a function"
+  },
+  {
+    "timestamp": "2026-01-27T09:19:14.792Z",
+    "level": "DECIDE",
+    "message": "No patterns detected",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:19:17.801Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:19:18.100Z",
+    "level": "ERROR",
+    "message": "OCR failed",
+    "detail": "vision.readScreen is not a function"
+  },
+  {
+    "timestamp": "2026-01-27T09:19:18.101Z",
+    "level": "DECIDE",
+    "message": "No patterns detected",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:19:21.114Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:19:21.418Z",
+    "level": "ERROR",
+    "message": "OCR failed",
+    "detail": "vision.readScreen is not a function"
+  },
+  {
+    "timestamp": "2026-01-27T09:19:21.419Z",
+    "level": "DECIDE",
+    "message": "No patterns detected",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:19:24.434Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:19:24.732Z",
+    "level": "ERROR",
+    "message": "OCR failed",
+    "detail": "vision.readScreen is not a function"
+  },
+  {
+    "timestamp": "2026-01-27T09:19:24.733Z",
+    "level": "DECIDE",
+    "message": "No patterns detected",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:19:27.743Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:19:28.033Z",
+    "level": "ERROR",
+    "message": "OCR failed",
+    "detail": "vision.readScreen is not a function"
+  },
+  {
+    "timestamp": "2026-01-27T09:19:28.033Z",
+    "level": "DECIDE",
+    "message": "No patterns detected",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:19:31.048Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:19:31.346Z",
+    "level": "ERROR",
+    "message": "OCR failed",
+    "detail": "vision.readScreen is not a function"
+  },
+  {
+    "timestamp": "2026-01-27T09:19:31.346Z",
+    "level": "DECIDE",
+    "message": "No patterns detected",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:19:34.353Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:19:34.645Z",
+    "level": "ERROR",
+    "message": "OCR failed",
+    "detail": "vision.readScreen is not a function"
+  },
+  {
+    "timestamp": "2026-01-27T09:19:34.646Z",
+    "level": "DECIDE",
+    "message": "No patterns detected",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:19:37.648Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:19:37.945Z",
+    "level": "ERROR",
+    "message": "OCR failed",
+    "detail": "vision.readScreen is not a function"
+  },
+  {
+    "timestamp": "2026-01-27T09:19:37.946Z",
+    "level": "DECIDE",
+    "message": "No patterns detected",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:19:40.950Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:19:41.244Z",
+    "level": "ERROR",
+    "message": "OCR failed",
+    "detail": "vision.readScreen is not a function"
+  },
+  {
+    "timestamp": "2026-01-27T09:19:41.245Z",
+    "level": "DECIDE",
+    "message": "No patterns detected",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:19:44.248Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:19:44.543Z",
+    "level": "ERROR",
+    "message": "OCR failed",
+    "detail": "vision.readScreen is not a function"
+  },
+  {
+    "timestamp": "2026-01-27T09:19:44.544Z",
+    "level": "DECIDE",
+    "message": "No patterns detected",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:19:47.547Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:19:47.844Z",
+    "level": "ERROR",
+    "message": "OCR failed",
+    "detail": "vision.readScreen is not a function"
+  },
+  {
+    "timestamp": "2026-01-27T09:19:47.845Z",
+    "level": "DECIDE",
+    "message": "No patterns detected",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:19:50.850Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:19:51.145Z",
+    "level": "ERROR",
+    "message": "OCR failed",
+    "detail": "vision.readScreen is not a function"
+  },
+  {
+    "timestamp": "2026-01-27T09:19:51.145Z",
+    "level": "DECIDE",
+    "message": "No patterns detected",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:19:53.000Z",
+    "level": "INFO",
+    "message": "Ghost mode started",
+    "detail": "Poll interval: 3000ms"
+  },
+  {
+    "timestamp": "2026-01-27T09:19:53.002Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:19:57.704Z",
+    "level": "DECIDE",
+    "message": "Found \"Continue\" - trying Enter key",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:19:58.076Z",
+    "level": "ACTION",
+    "message": "Pressed: Enter",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:20:01.091Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:20:05.555Z",
+    "level": "DECIDE",
+    "message": "Found \"Continue\" - trying Enter key",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:20:05.926Z",
+    "level": "ACTION",
+    "message": "Pressed: Enter",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:20:08.931Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:20:13.553Z",
+    "level": "DECIDE",
+    "message": "Found \"Continue\" - trying Enter key",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:20:13.917Z",
+    "level": "ACTION",
+    "message": "Pressed: Enter",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:20:16.925Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:20:21.665Z",
+    "level": "DECIDE",
+    "message": "Found \"Continue\" - trying Enter key",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:20:22.029Z",
+    "level": "ACTION",
+    "message": "Pressed: Enter",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:20:25.037Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:20:29.689Z",
+    "level": "DECIDE",
+    "message": "Found \"Continue\" - trying Enter key",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:20:30.054Z",
+    "level": "ACTION",
+    "message": "Pressed: Enter",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:20:33.068Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:20:37.830Z",
+    "level": "DECIDE",
+    "message": "Found \"Continue\" - trying Enter key",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:20:38.205Z",
+    "level": "ACTION",
+    "message": "Pressed: Enter",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:20:41.218Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:20:46.064Z",
+    "level": "DECIDE",
+    "message": "Found \"Continue\" - trying Enter key",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:20:46.432Z",
+    "level": "ACTION",
+    "message": "Pressed: Enter",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:20:49.432Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:20:54.171Z",
+    "level": "DECIDE",
+    "message": "Found \"Continue\" - trying Enter key",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:20:54.533Z",
+    "level": "ACTION",
+    "message": "Pressed: Enter",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:20:57.544Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:21:02.391Z",
+    "level": "DECIDE",
+    "message": "Found \"Continue\" - trying Enter key",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:21:02.764Z",
+    "level": "ACTION",
+    "message": "Pressed: Enter",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:21:05.769Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:21:10.556Z",
+    "level": "DECIDE",
+    "message": "Found \"Continue\" - trying Enter key",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:21:10.916Z",
+    "level": "ACTION",
+    "message": "Pressed: Enter",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:21:13.918Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:21:18.817Z",
+    "level": "DECIDE",
+    "message": "Found \"Continue\" - trying Enter key",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:21:19.189Z",
+    "level": "ACTION",
+    "message": "Pressed: Enter",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:21:22.200Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:21:27.228Z",
+    "level": "DECIDE",
+    "message": "Found \"Continue\" - trying Enter key",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:21:27.595Z",
+    "level": "ACTION",
+    "message": "Pressed: Enter",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:21:30.609Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:21:35.641Z",
+    "level": "DECIDE",
+    "message": "Found \"Continue\" - trying Enter key",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:21:36.001Z",
+    "level": "ACTION",
+    "message": "Pressed: Enter",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:21:39.011Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:21:44.068Z",
+    "level": "DECIDE",
+    "message": "Found \"Continue\" - trying Enter key",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:21:44.435Z",
+    "level": "ACTION",
+    "message": "Pressed: Enter",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:21:47.450Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:21:52.531Z",
+    "level": "DECIDE",
+    "message": "Found \"Continue\" - trying Enter key",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:21:52.905Z",
+    "level": "ACTION",
+    "message": "Pressed: Enter",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:21:55.912Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:22:00.851Z",
+    "level": "DECIDE",
+    "message": "Found \"Continue\" - trying Enter key",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:22:01.255Z",
+    "level": "ACTION",
+    "message": "Pressed: Enter",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:22:04.259Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:22:09.202Z",
+    "level": "DECIDE",
+    "message": "Found \"Continue\" - trying Enter key",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:22:09.575Z",
+    "level": "ACTION",
+    "message": "Pressed: Enter",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:22:12.575Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:22:17.566Z",
+    "level": "DECIDE",
+    "message": "Found \"Continue\" - trying Enter key",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:22:17.938Z",
+    "level": "ACTION",
+    "message": "Pressed: Enter",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:22:20.950Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:22:26.008Z",
+    "level": "DECIDE",
+    "message": "Found \"Continue\" - trying Enter key",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:22:26.370Z",
+    "level": "ACTION",
+    "message": "Pressed: Enter",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:22:29.385Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:22:34.458Z",
+    "level": "DECIDE",
+    "message": "Found \"Continue\" - trying Enter key",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:22:34.839Z",
+    "level": "ACTION",
+    "message": "Pressed: Enter",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:22:37.843Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:22:42.922Z",
+    "level": "DECIDE",
+    "message": "Found \"Continue\" - trying Enter key",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:22:43.287Z",
+    "level": "ACTION",
+    "message": "Pressed: Enter",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:22:46.289Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:22:50.787Z",
+    "level": "DECIDE",
+    "message": "Found \"Continue\" - trying Enter key",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:22:51.164Z",
+    "level": "ACTION",
+    "message": "Pressed: Enter",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:22:54.178Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:22:59.046Z",
+    "level": "DECIDE",
+    "message": "Found \"Continue\" - trying Enter key",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:22:59.417Z",
+    "level": "ACTION",
+    "message": "Pressed: Enter",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:23:02.426Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:23:07.398Z",
+    "level": "DECIDE",
+    "message": "Found \"Continue\" - trying Enter key",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:23:07.758Z",
+    "level": "ACTION",
+    "message": "Pressed: Enter",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:23:10.759Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:53:00.889Z",
+    "level": "INFO",
+    "message": "Ghost mode started",
+    "detail": "Poll interval: 3000ms"
+  },
+  {
+    "timestamp": "2026-01-27T09:53:00.890Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:53:04.881Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:53:07.896Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:53:11.958Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:53:14.973Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:53:19.111Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:53:22.125Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:53:26.664Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:53:29.668Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:53:34.140Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:53:37.150Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:53:41.721Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:53:44.729Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:55:38.799Z",
+    "level": "INFO",
+    "message": "Ghost mode started",
+    "detail": "Poll interval: 3000ms"
+  },
+  {
+    "timestamp": "2026-01-27T09:55:38.801Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:55:43.257Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:55:46.262Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:55:50.974Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:55:53.980Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:55:58.884Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:01.888Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:06.813Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:09.823Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:14.684Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:17.700Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:21.120Z",
+    "level": "INFO",
+    "message": "Ghost mode started",
+    "detail": "Poll interval: 3000ms"
+  },
+  {
+    "timestamp": "2026-01-27T09:56:21.122Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:22.830Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:25.773Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:25.774Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:25.836Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:28.776Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:30.654Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:33.478Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:33.479Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:33.659Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:36.494Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:38.435Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:41.425Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:41.427Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:41.441Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:44.433Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:47.230Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:50.240Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:50.578Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:50.579Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:53.585Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:55.618Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:58.630Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:59.543Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:56:59.545Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:02.560Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:04.960Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:07.969Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:08.820Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:08.823Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:11.827Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:13.982Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:16.999Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:17.796Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:17.797Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:20.800Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:23.007Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:26.010Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:26.777Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:26.779Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:29.781Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:32.329Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:35.337Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:36.085Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:36.087Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:39.097Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:41.630Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:44.635Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:45.294Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:45.296Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:48.311Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:50.626Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:53.641Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:54.406Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:54.407Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:57:57.422Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:00.580Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:03.583Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:04.567Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:04.568Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:07.578Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:09.381Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:12.386Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:13.227Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:13.229Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:16.241Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:18.012Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:21.023Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:21.770Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:21.772Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:24.782Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:26.556Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:29.562Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:30.414Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:30.416Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:33.425Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:35.322Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:38.335Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:39.018Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:39.019Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:42.035Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:43.890Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:46.902Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:47.556Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:47.557Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:50.563Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:52.434Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:55.442Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:56.066Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:56.068Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:58:59.081Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:00.940Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:03.953Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:04.609Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:04.610Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:07.612Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:08.855Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:11.857Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:12.453Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:12.455Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:15.461Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:16.735Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:19.749Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:20.460Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:20.461Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:23.469Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:24.782Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:27.786Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:28.475Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:28.476Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:31.488Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:32.717Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:35.723Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:36.532Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:36.534Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:39.540Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:40.757Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:43.771Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:44.554Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:44.555Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:47.567Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:48.710Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:51.719Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:52.565Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:52.566Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:55.577Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:56.641Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T09:59:59.643Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:00:00.557Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:00:00.558Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:00:03.564Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:00:04.647Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:00:07.653Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:00:08.479Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:00:08.480Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:00:11.491Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:00:12.673Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:00:15.683Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:00:16.495Z",
+    "level": "DEBUG",
+    "message": "OCR found 0 words",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:00:16.497Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:00:20.722Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:00:23.724Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:00:28.668Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:00:31.670Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:00:36.555Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:00:39.561Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:00:44.578Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:00:47.586Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:00:52.788Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:00:55.803Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:01:00.915Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:01:03.932Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:01:08.868Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:01:11.880Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:01:16.948Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:01:19.958Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:01:25.037Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:01:28.049Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:01:33.105Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:01:36.106Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:01:41.220Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:01:44.232Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:01:49.237Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:01:52.247Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:01:57.153Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:02:00.168Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:02:05.013Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:02:08.022Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:02:12.948Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:02:15.951Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:02:20.896Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:02:23.904Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:02:28.853Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:02:31.858Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:02:36.786Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:02:39.790Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:02:44.761Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:02:47.777Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:02:52.720Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:02:55.721Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:03:00.728Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:03:03.740Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:03:08.698Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:03:11.704Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:03:16.675Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:03:19.679Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:03:24.739Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:03:27.746Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:03:32.945Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:03:35.960Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:03:41.296Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:03:44.309Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:03:49.844Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:03:52.861Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:03:57.921Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:04:00.924Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:04:06.578Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:04:09.586Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:04:15.597Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:04:18.615Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:04:23.610Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:04:26.618Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:04:32.309Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:04:35.314Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:04:41.964Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:04:44.969Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:04:50.231Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:04:53.245Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:04:58.531Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:05:01.542Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:05:07.343Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:05:10.348Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:05:16.126Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:05:19.137Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:05:24.807Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:05:27.819Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:05:33.487Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:05:36.493Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:05:42.118Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:05:45.125Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:05:50.664Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:05:53.669Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:05:59.260Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:06:02.264Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:06:07.748Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:06:10.763Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:06:16.581Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:06:19.591Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:06:25.108Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:06:28.111Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:06:33.887Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:06:36.890Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:06:42.393Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:06:45.397Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:06:50.985Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:06:53.995Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:06:59.554Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:07:02.564Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:07:07.952Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:07:10.968Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:07:16.448Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:07:19.459Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:07:24.922Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:07:27.933Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:07:33.410Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:07:36.424Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:07:41.880Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:07:44.891Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:07:50.373Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:07:53.386Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:07:58.931Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:08:01.943Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:08:07.639Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:08:10.641Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:08:16.145Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:08:19.156Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:08:24.706Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:08:27.715Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:08:33.319Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:08:36.326Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:08:42.079Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:08:45.083Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:08:50.700Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:08:53.710Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:08:59.459Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:09:02.460Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:09:08.163Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:09:11.166Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:09:16.850Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:09:19.865Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:09:25.471Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:09:28.488Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:09:34.323Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:09:37.324Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:09:43.078Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:09:46.086Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:09:51.880Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:09:54.884Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:10:00.649Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:10:03.655Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:10:09.392Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:10:12.396Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:10:17.493Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:10:20.506Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:10:25.628Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:10:28.632Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:10:33.913Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:10:36.922Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:10:42.176Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:10:45.177Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:10:50.611Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:10:53.616Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:10:59.216Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:11:02.230Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:11:07.808Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:11:10.814Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:11:16.456Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:11:19.463Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:11:23.729Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:11:26.740Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:11:31.400Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:11:34.408Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:11:39.283Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:11:42.285Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:11:47.360Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:11:50.370Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:11:55.577Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:11:58.591Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:12:03.331Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:12:06.346Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:12:11.210Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:12:14.225Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:12:19.177Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:12:22.186Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:12:27.481Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:12:30.485Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:12:35.864Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:12:38.875Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:12:43.823Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:12:46.836Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:12:51.947Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:12:54.955Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:13:00.024Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:13:03.031Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:13:08.258Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:13:11.269Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:13:16.522Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:13:19.535Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:13:24.780Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:13:27.796Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:13:33.082Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:13:36.083Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:13:41.119Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:13:44.123Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:13:48.538Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:13:51.542Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:13:56.485Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:13:59.497Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:14:04.400Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:14:07.402Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:14:11.949Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:14:14.959Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:14:19.186Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:14:22.198Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:14:26.433Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:14:29.447Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:14:33.680Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:14:36.691Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:14:40.954Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:14:43.964Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:14:48.211Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:14:51.229Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:14:55.487Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:14:58.496Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:15:02.852Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:15:05.861Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:15:09.833Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:15:12.845Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:15:17.047Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:15:20.058Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:15:24.381Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:15:27.385Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:15:31.739Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:15:34.742Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:15:39.135Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:15:42.138Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:15:46.497Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:15:49.512Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:15:53.952Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:15:56.954Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:16:01.340Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:16:04.354Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:16:08.735Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:16:11.748Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:16:16.151Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:16:19.156Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:16:23.345Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:16:26.352Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:16:30.619Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:16:33.636Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:16:38.112Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:16:41.114Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:16:45.780Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:16:48.786Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:16:53.609Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:16:56.617Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:17:01.929Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:17:04.937Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:17:10.267Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:17:13.275Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:17:18.978Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:17:21.979Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:17:27.531Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:17:30.547Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:17:36.455Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:17:39.463Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:17:45.826Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:17:48.836Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:17:55.020Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:17:58.032Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:18:04.013Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:18:07.020Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:18:13.152Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:18:16.158Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:18:22.168Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:18:25.181Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:18:31.531Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:18:34.541Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:18:40.699Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:18:43.704Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:18:50.102Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:18:53.107Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:18:59.702Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:19:02.715Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:19:09.570Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:19:12.579Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:19:18.282Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:19:21.288Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:19:27.069Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:19:30.081Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:19:35.943Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:19:38.958Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:19:44.091Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:19:47.093Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:19:52.757Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:19:55.760Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:20:01.513Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:20:04.517Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:20:10.274Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:20:13.279Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:20:19.512Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:20:22.521Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:20:28.873Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:20:31.879Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:20:37.953Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:20:40.964Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:20:46.682Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:20:49.692Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:20:55.440Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:20:58.452Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:21:04.204Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:21:07.206Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:21:12.932Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:21:15.945Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:21:21.820Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:21:24.822Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:21:30.619Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:21:33.634Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:21:39.421Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:21:42.428Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:21:48.180Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:21:51.188Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:21:57.204Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:22:00.207Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:22:05.779Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:22:08.792Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:22:14.576Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:22:17.590Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:22:23.184Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:22:26.196Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:22:31.168Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:22:34.181Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:22:39.477Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:22:42.485Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:22:47.618Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:22:50.622Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:22:55.605Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:22:58.613Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:23:03.818Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:23:06.829Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:23:11.947Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:23:14.962Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:23:20.248Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:23:23.257Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:23:28.710Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:23:31.725Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:23:36.106Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:23:39.116Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:23:44.018Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:23:47.025Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:23:52.597Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:23:55.599Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:24:01.410Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:24:04.413Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:24:10.469Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:24:13.481Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:24:19.619Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:24:22.622Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:24:29.027Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:24:32.035Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:24:38.338Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:24:41.346Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:24:47.711Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:24:50.725Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:24:55.259Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:24:58.272Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:25:03.578Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:25:06.589Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:25:12.179Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:25:15.193Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:25:21.228Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:25:24.235Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:25:30.609Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:25:33.616Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:25:40.367Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:25:43.368Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:25:50.128Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:25:53.131Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:25:59.692Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:26:02.697Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:26:09.116Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:26:12.126Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:26:18.483Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:26:21.500Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:26:27.515Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:26:30.517Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:26:34.866Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:26:37.872Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:26:42.424Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:26:45.438Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:26:49.877Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:26:52.881Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:26:57.227Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:27:00.239Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:27:05.173Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:27:08.176Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:27:13.635Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:27:16.649Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:27:22.423Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:27:25.428Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:27:31.395Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:27:34.410Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:27:40.005Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:27:43.008Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:27:49.076Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:27:52.080Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:27:57.847Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:28:00.848Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:28:06.516Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:28:09.531Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:28:15.405Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:28:18.410Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:28:24.396Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:28:27.402Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:28:33.121Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:28:36.128Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:28:41.785Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:28:44.798Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:28:50.665Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:28:53.671Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:28:59.443Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:29:02.458Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:29:08.050Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:29:11.062Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:29:16.714Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:29:19.719Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:29:25.430Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:29:28.437Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:29:34.267Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:29:37.269Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:29:43.022Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:29:46.038Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:29:51.802Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:29:54.805Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:30:00.565Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:30:03.570Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:30:08.402Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:30:11.419Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:30:16.243Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:30:19.249Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:30:24.172Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:30:27.184Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:30:33.925Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:30:36.932Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:30:42.011Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:30:45.015Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:30:51.314Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:30:54.325Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:30:59.408Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:31:02.419Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:31:06.868Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:31:09.876Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:31:14.242Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:31:17.255Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:31:21.687Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:31:24.699Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:31:29.568Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:31:32.575Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:31:37.272Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:31:40.282Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:31:46.659Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:31:49.663Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:31:55.960Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:31:58.968Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:32:05.418Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:32:08.424Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:32:14.939Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:32:17.940Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:32:24.084Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:32:27.089Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:32:33.471Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:32:36.474Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:32:42.826Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:32:45.834Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:32:52.152Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:32:55.158Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:33:00.734Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:33:03.739Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:33:09.736Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:33:12.739Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:33:18.690Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:33:21.695Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:33:27.993Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:33:31.004Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:33:37.344Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:33:40.354Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:33:46.534Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:33:49.539Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:33:55.746Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:33:58.748Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:34:05.010Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:34:08.027Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:34:14.603Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:34:17.609Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:34:24.052Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:34:27.070Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:34:33.693Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:34:36.709Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:34:42.987Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:34:45.993Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:34:52.228Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:34:55.238Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:35:01.606Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:35:04.609Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:35:11.006Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:35:14.021Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:35:20.577Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:35:23.584Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:35:29.881Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:35:32.882Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:35:38.563Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:35:41.575Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:35:47.361Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:35:50.366Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:35:56.544Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:35:59.553Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:36:05.626Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:36:08.635Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:36:15.072Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:36:18.077Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:36:23.889Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:36:26.903Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:36:35.199Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:36:38.204Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:36:43.745Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:36:46.755Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:36:52.397Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:36:55.406Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:37:00.653Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:37:03.656Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:37:09.072Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:37:12.079Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:37:17.535Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:37:20.546Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:37:26.044Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:37:29.057Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:37:34.527Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:37:37.540Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:37:42.962Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:37:45.965Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:37:51.270Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:37:54.282Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:37:59.687Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:38:02.698Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:38:07.985Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:38:11.000Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:38:16.408Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:38:19.424Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:38:24.727Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:38:27.737Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:38:33.459Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:38:36.476Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:38:41.827Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:38:44.835Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:38:50.500Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:38:53.502Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:38:58.872Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:39:01.888Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:39:07.638Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:39:10.652Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:39:16.471Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:39:19.474Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:39:25.055Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:39:28.070Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:39:33.442Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:39:36.450Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:39:41.954Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:39:44.960Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:39:50.668Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:39:53.681Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:39:59.299Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:40:02.301Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:40:07.391Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:40:10.400Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:40:15.067Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:40:18.076Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:40:22.537Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:40:25.551Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:40:30.103Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:40:33.113Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:40:37.889Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:40:40.897Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:40:45.692Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:40:48.701Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:40:53.480Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:40:56.489Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:41:00.916Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:41:03.932Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:41:08.520Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:41:11.524Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:41:15.999Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:41:19.014Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:41:23.701Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:41:26.714Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:41:31.317Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:41:34.319Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:41:38.889Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:41:41.893Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:41:46.447Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:41:49.456Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:41:53.855Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:41:56.857Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:42:01.628Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:42:04.632Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:42:08.840Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:42:11.846Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:42:16.205Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:42:19.212Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:42:23.561Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:42:26.567Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:42:30.617Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:42:33.631Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:42:38.061Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:42:41.072Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:42:45.750Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:42:48.754Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:42:54.000Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:42:57.017Z",
+    "level": "SCAN",
+    "message": "Checking screen...",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-01-27T10:43:02.431Z",
+    "level": "DECIDE",
+    "message": "Found elements but no valid click coordinates",
+    "detail": ""
+  },

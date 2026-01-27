@@ -803,7 +803,7 @@ export default function CreativeEngineV6() {
     await sleep(800);
     
     try {
-      const response = await fetch('http://localhost:5002/generate', {
+      const response = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -825,12 +825,16 @@ export default function CreativeEngineV6() {
       });
       
       if (response.ok) {
+        const result = await response.json();
         addMessage(B0B, "Font files generated successfully!", 'celebration');
+        if (result.files && result.files.length > 0) {
+          addMessage(D0T, `Download ready: ${result.files.map((f: {format: string}) => f.format.toUpperCase()).join(', ')}`, 'celebration');
+        }
       } else {
-        addMessage(D0T, "Font API offline — files can be generated locally.", 'system');
+        addMessage(D0T, "Font generation queued. Check back soon!", 'system');
       }
     } catch {
-      addMessage(D0T, "Start font API: python api/font_generator.py", 'system');
+      addMessage(D0T, "Font generation service unavailable. Try again later.", 'system');
     }
     
     setPhase('complete');

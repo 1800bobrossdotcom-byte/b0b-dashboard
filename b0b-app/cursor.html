@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: transparent;
+      overflow: hidden;
+      width: 80px;
+      height: 80px;
+    }
+    
+    .b0b-cursor {
+      width: 80px;
+      height: 80px;
+      position: relative;
+    }
+    
+    /* Outer glow - mind-glow indigo */
+    .glow {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: rgba(99, 102, 241, 0.2);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    /* Middle ring - joy amber */
+    .ring-outer {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 4px solid rgba(245, 158, 11, 0.8);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    /* Inner ring - warmth orange */
+    .ring-inner {
+      position: absolute;
+      top: 25px;
+      left: 25px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid rgba(249, 115, 22, 1);
+    }
+    
+    /* Center dot - bright amber */
+    .center {
+      position: absolute;
+      top: 34px;
+      left: 34px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #f59e0b;
+      box-shadow: 0 0 10px #f59e0b;
+    }
+    
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 0.6;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="b0b-cursor">
+    <div class="glow"></div>
+    <div class="ring-outer"></div>
+    <div class="ring-inner"></div>
+    <div class="center"></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,190 @@
+/**
+ * 0TYPE Font Catalog API
+ * Provides font metadata for the catalog and specimen pages
+ */
+
+import { NextRequest, NextResponse } from 'next/server';
+
+export interface FontData {
+  id: string;
+  name: string;
+  designer: string;
+  category: 'sans-serif' | 'serif' | 'mono' | 'display' | 'handwriting';
+  description: string;
+  price: number;
+  styles: string[];
+  features: string[];
+  preview: string;
+  specimens: {
+    headline: string;
+    paragraph: string;
+    characters: string;
+  };
+  weights: Array<{
+    name: string;
+    value: number;
+  }>;
+  variable: boolean;
+  released: string;
+  version: string;
+  license: 'personal' | 'commercial' | 'extended';
+}
+
+// Font catalog - eventually this would come from a database
+const FONTS: Record<string, FontData> = {
+  'milspec-mono': {
+    id: 'milspec-mono',
+    name: 'MILSPEC Mono',
+    designer: 'B0B + D0T',
+    category: 'mono',
+    description: 'Tactical precision. Every character engineered for maximum clarity in high-stakes environments. Built for developers, designed for the future.',
+    price: 49,
+    styles: ['Regular', 'Bold'],
+    features: ['Tabular figures', 'Coding ligatures', 'Box drawing', 'Powerline glyphs'],
+    preview: 'console.log("READY");',
+    specimens: {
+      headline: 'MISSION CRITICAL',
+      paragraph: 'The quick brown fox jumps over the lazy dog. 0123456789. if (true) { return success; }',
+      characters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()[]{}|;:\'",./<>?',
+    },
+    weights: [
+      { name: 'Regular', value: 400 },
+      { name: 'Bold', value: 700 },
+    ],
+    variable: false,
+    released: '2026-01-15',
+    version: '1.0.0',
+    license: 'commercial',
+  },
+  'ghost-sans': {
+    id: 'ghost-sans',
+    name: 'Ghost Sans',
+    designer: 'SPECTRAL + D0T',
+    category: 'sans-serif',
+    description: 'Ethereal, almost invisible weight. Ghost Sans appears when you need it, fades when you don\'t. A variable typeface with 9 weights.',
+    price: 79,
+    styles: ['Thin', 'Light', 'Regular', 'Medium', 'Semibold', 'Bold', 'Black'],
+    features: ['Variable weight axis', 'Stylistic alternates', 'Contextual ligatures', 'Extended Latin'],
+    preview: 'Whispers in the wind',
+    specimens: {
+      headline: 'VANISHING POINT',
+      paragraph: 'Some things are meant to be felt, not seen. Ghost Sans dances at the edge of perception, a typeface for the liminal spaces between.',
+      characters: 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz',
+    },
+    weights: [
+      { name: 'Thin', value: 100 },
+      { name: 'Light', value: 300 },
+      { name: 'Regular', value: 400 },
+      { name: 'Medium', value: 500 },
+      { name: 'Semibold', value: 600 },
+      { name: 'Bold', value: 700 },
+      { name: 'Black', value: 900 },
+    ],
+    variable: true,
+    released: '2026-01-20',
+    version: '1.1.0',
+    license: 'commercial',
+  },
+  'sakura-display': {
+    id: 'sakura-display',
+    name: 'Sakura Display',
+    designer: 'HANAMI + SPECTRAL',
+    category: 'display',
+    description: 'Inspired by the fleeting beauty of cherry blossoms. Organic curves meet digital precision in this headline typeface.',
+    price: 59,
+    styles: ['Regular', 'Italic'],
+    features: ['Swash alternates', 'Contextual alternates', 'Ornaments set', 'Japanese kana subset'],
+    preview: '花見の季節',
+    specimens: {
+      headline: 'BLOOM',
+      paragraph: 'In the garden of typography, some letterforms bloom only briefly. Sakura Display captures that moment of perfect impermanence.',
+      characters: 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz',
+    },
+    weights: [
+      { name: 'Regular', value: 400 },
+    ],
+    variable: false,
+    released: '2026-01-25',
+    version: '1.0.0',
+    license: 'commercial',
+  },
+  'brutalist-gothic': {
+    id: 'brutalist-gothic',
+    name: 'Brutalist Gothic',
+    designer: 'B0B + EDIFICE',
+    category: 'display',
+    description: 'Raw concrete poured into letterforms. Brutalist Gothic makes no apologies. Industrial strength typography.',
+    price: 69,
+    styles: ['Regular', 'Heavy'],
+    features: ['All caps design', 'Alternate numerals', 'Inline cuts', 'Extended width'],
+    preview: 'NO ORNAMENT',
+    specimens: {
+      headline: 'FORM FOLLOWS FUNCTION',
+      paragraph: 'BRUTALIST GOTHIC STRIPS AWAY THE UNNECESSARY. WHAT REMAINS IS PURE STRUCTURE. 0123456789.',
+      characters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()',
+    },
+    weights: [
+      { name: 'Regular', value: 400 },
+      { name: 'Heavy', value: 800 },
+    ],
+    variable: false,
+    released: '2026-01-27',
+    version: '0.9.0',
+    license: 'commercial',
+  },
+  'neural-script': {
+    id: 'neural-script',
+    name: 'Neural Script',
+    designer: 'SYNAPSE + D0T',
+    category: 'handwriting',
+    description: 'An AI learned to write by hand. Neural Script bridges the gap between human gesture and machine precision.',
+    price: 89,
+    styles: ['Light', 'Regular', 'Bold'],
+    features: ['Connected letters', 'Swash endings', 'Alternate forms per character', 'Randomized variation'],
+    preview: 'Learning to write',
+    specimens: {
+      headline: 'Dear Future Self',
+      paragraph: 'The warmth of handwriting returns to digital communication. Each letter carries intention.',
+      characters: 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz',
+    },
+    weights: [
+      { name: 'Light', value: 300 },
+      { name: 'Regular', value: 400 },
+      { name: 'Bold', value: 700 },
+    ],
+    variable: false,
+    released: '2026-01-27',
+    version: '0.8.0',
+    license: 'commercial',
+  },
+};
+
+// GET /api/fonts - List all fonts
+// GET /api/fonts?id=font-id - Get single font
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get('id');
+  const category = searchParams.get('category');
+  
+  if (id) {
+    // Return single font
+    const font = FONTS[id];
+    if (!font) {
+      return NextResponse.json({ error: 'Font not found' }, { status: 404 });
+    }
+    return NextResponse.json(font);
+  }
+  
+  // Return catalog
+  let fonts = Object.values(FONTS);
+  
+  if (category) {
+    fonts = fonts.filter(f => f.category === category);
+  }
+  
+  return NextResponse.json({
+    fonts,
+    total: fonts.length,
+    categories: ['sans-serif', 'serif', 'mono', 'display', 'handwriting'],
+  });
+}

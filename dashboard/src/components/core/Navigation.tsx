@@ -19,6 +19,8 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
+  { label: '0TYPE', href: 'https://0type.b0b.dev' },
+  { label: 'D0T', href: 'https://d0t.b0b.dev' },
   { label: 'M1ND', href: '#mind' },
   { label: 'AG3NTS', href: '#agents' },
   { label: 'CANV4S', href: '#canvas' },
@@ -117,10 +119,14 @@ export function Navigation() {
               <a
                 key={item.href}
                 href={item.href}
+                target={item.href.startsWith('http') ? '_blank' : undefined}
+                rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                 className={`text-sm font-mono tracking-wide transition-all duration-300 hover:text-[var(--color-mind-glow)] ${
-                  activeSection === item.href.slice(1) 
-                    ? 'text-[var(--color-mind-glow)]' 
-                    : 'text-[var(--color-text-muted)]'
+                  item.href.startsWith('http')
+                    ? 'text-[var(--color-text)] border-b border-transparent hover:border-[var(--color-mind-glow)]'
+                    : activeSection === item.href.slice(1) 
+                      ? 'text-[var(--color-mind-glow)]' 
+                      : 'text-[var(--color-text-muted)]'
                 }`}
               >
                 {item.label}

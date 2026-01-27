@@ -1,7 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import CheckoutModal from '@/components/CheckoutModal';
+import VariableFontPreview from '@/components/VariableFontPreview';
 
 // Font catalog
 const FONTS = [
@@ -38,6 +40,30 @@ const FONTS = [
     specimen: 'Neo-Tokyo Nights',
     specimenClass: 'specimen-sakura',
     price: 59,
+    released: '2026',
+    isNew: true,
+  },
+  {
+    id: 'brutalist-gothic',
+    name: 'Brutalist Gothic',
+    style: 'Display',
+    weights: '400–800',
+    description: 'Raw concrete poured into letterforms. Industrial strength typography.',
+    specimen: 'NO ORNAMENT',
+    specimenClass: 'specimen-brutalist',
+    price: 69,
+    released: '2026',
+    isNew: true,
+  },
+  {
+    id: 'neural-script',
+    name: 'Neural Script',
+    style: 'Handwriting',
+    weights: '300–700',
+    description: 'An AI learned to write by hand. Human gesture meets machine precision.',
+    specimen: 'Learning to write',
+    specimenClass: 'specimen-neural',
+    price: 89,
     released: '2026',
     isNew: true,
   },
@@ -138,18 +164,19 @@ export default function Home() {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-bg)]/90 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <a href="/" className="text-xl font-mono tracking-tight">
+          <Link href="/" className="text-xl font-mono tracking-tight">
             <span className="font-semibold">0</span>TYPE
-          </a>
+          </Link>
           
           <div className="hidden md:flex items-center gap-8 text-sm">
             <a href="#fonts" className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors">Fonts</a>
+            <Link href="/test" className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors">Compare</Link>
             <a href="#pricing" className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors">Pricing</a>
-            <a href="/sketchpad" className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors flex items-center gap-1">
+            <Link href="/sketchpad" className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors flex items-center gap-1">
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
               Sketchpad
-            </a>
-            <a href="/studio" className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors">Studio</a>
+            </Link>
+            <Link href="/studio" className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors">Studio</Link>
             <a href="#about" className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors">About</a>
           </div>
           
@@ -207,19 +234,26 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-sm font-mono text-[var(--color-text-muted)]">Type Tester</h2>
-            <select className="bg-transparent border border-[var(--color-border)] px-4 py-2 text-sm">
-              <option>MILSPEC Mono</option>
-              <option>GH0ST Sans</option>
-              <option>Sakura Display</option>
+            <select 
+              className="bg-transparent border border-[var(--color-border)] px-4 py-2 text-sm"
+              onChange={(e) => setPreviewText(e.target.value === 'milspec-mono' ? 'TACTICAL' : e.target.value === 'ghost-sans' ? 'SH4D0W' : 'SAKURA')}
+            >
+              <option value="milspec-mono">MILSPEC Mono</option>
+              <option value="ghost-sans">GH0ST Sans</option>
+              <option value="sakura-display">Sakura Display</option>
+              <option value="brutalist-gothic">Brutalist Gothic</option>
+              <option value="neural-script">Neural Script</option>
             </select>
           </div>
           
-          <input
-            type="text"
-            value={previewText}
-            onChange={(e) => setPreviewText(e.target.value)}
-            className="w-full bg-transparent text-6xl md:text-8xl font-light border-none outline-none placeholder-[var(--color-text-dim)]"
-            placeholder="Type something..."
+          <VariableFontPreview
+            text={previewText || "Type something..."}
+            fontFamily="inherit"
+            minWeight={100}
+            maxWeight={900}
+            initialWeight={400}
+            initialSize={64}
+            showControls={true}
           />
         </div>
       </section>
@@ -234,7 +268,8 @@ export default function Home() {
           
           <div className="space-y-1">
             {FONTS.map((font, index) => (
-              <div
+              <Link
+                href={`/fonts/${font.id}`}
                 key={font.id}
                 className="group block border-t border-[var(--color-border)] py-8 hover:bg-[var(--color-surface)] transition-colors -mx-6 px-6"
                 onMouseEnter={() => setHoveredFont(font.id)}
@@ -260,18 +295,21 @@ export default function Home() {
                     <span className="hidden sm:inline">{font.weights}</span>
                     <button 
                       className="btn py-2 px-4 text-xs"
-                      onClick={() => openCheckout({
-                        id: `font-${font.id}`,
-                        name: font.name,
-                        description: `${font.style} • ${font.weights} • Web + Desktop License`,
-                        price: font.price,
-                      })}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        openCheckout({
+                          id: `font-${font.id}`,
+                          name: font.name,
+                          description: `${font.style} • ${font.weights} • Web + Desktop License`,
+                          price: font.price,
+                        });
+                      }}
                     >
                       Buy ${font.price}
                     </button>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
