@@ -103,7 +103,7 @@ export function HeroSection() {
           className="flex justify-center mb-8"
           style={{ opacity: 0 }}
         >
-          <B0BLogo size="hero" animate glow />
+          <B0BLogo size="hero" animate />
         </div>
         
         <p 
