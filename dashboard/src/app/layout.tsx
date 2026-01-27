@@ -38,6 +38,7 @@ export const metadata: Metadata = {
 
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import ControlPanel from "@/components/core/ControlPanel";
+import LiveDataHUD from "@/components/core/LiveDataHUD";
 
 export default function RootLayout({
   children,
@@ -49,6 +50,7 @@ export default function RootLayout({
       <body className="antialiased bg-[var(--color-background)] text-[#f8fafc]">
         <ThemeProvider>
           {children}
+          <LiveDataHUD />
           <ControlPanel />
         </ThemeProvider>
       </body>
