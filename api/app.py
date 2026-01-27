@@ -16,6 +16,22 @@ def get_anthropic_client():
         raise ValueError("CLAUDE_API_KEY environment variable not set")
     return anthropic.Anthropic(api_key=api_key)
 
+@app.route('/', methods=['GET'])
+def root():
+    """Root endpoint - API info"""
+    return jsonify({
+        'name': 'B0B API',
+        'version': '2.0.0',
+        'description': 'An autonomous creative intelligence API',
+        'endpoints': {
+            '/': 'This info',
+            '/api/health': 'Health check',
+            '/api/chat': 'Chat with Claude (POST)',
+            '/api/v1/status': 'Platform status',
+        },
+        'mantra': "We're Bob Rossing this. 🎨"
+    }), 200
+
 @app.route('/api/health', methods=['GET'])
 def health():
     """Health check endpoint"""
