@@ -78,7 +78,7 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<ThemeKey>('cyan');
+  const [theme, setThemeState] = useState<ThemeKey>('amber');
   const [particleDensity, setParticleDensity] = useState<'low' | 'medium' | 'high'>('medium');
   const [animationSpeed, setAnimationSpeed] = useState<'slow' | 'normal' | 'fast'>('normal');
   const [reducedMotion, setReducedMotion] = useState(false);

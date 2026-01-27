@@ -16,7 +16,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Float, Sparkles } from '@react-three/drei';
 import { gsap } from 'gsap';
-import { ParticleField } from '@/components/core/ParticleField';
+import { LiveDataField } from '@/components/core/LiveDataField';
 import B0BLogo from '@/components/core/B0BLogo';
 import { COLORS } from '@/utils/tenets';
 
@@ -103,21 +103,22 @@ export function HeroSection() {
     >
       {/* 3D Canvas Background */}
       <div className="absolute inset-0 z-0">
-        <Canvas camera={{ position: [0, 0, 8], fov: 60 }}>
-          <color attach="background" args={[COLORS.void]} />
-          <ambientLight intensity={0.5} />
-          <pointLight position={[10, 10, 10]} intensity={1} color={themeColor} />
+        <Canvas camera={{ position: [0, 0, 15], fov: 60 }}>
+          <color attach="background" args={['#050505']} />
+          <ambientLight intensity={0.3} />
+          <pointLight position={[10, 10, 10]} intensity={0.5} color={themeColor} />
+          <pointLight position={[-10, -10, 5]} intensity={0.3} color={themeColor} />
           
-          <ParticleField count={3000} state={agentState} mouse={mousePos} />
+          <LiveDataField mouse={mousePos} />
           
-          <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
+          <Float speed={1.5} rotationIntensity={0.3} floatIntensity={0.5}>
             <Sparkles 
-              count={100} 
-              scale={10} 
-              size={2} 
-              speed={0.4} 
+              count={50} 
+              scale={15} 
+              size={1.5} 
+              speed={0.2} 
               color={themeColor}
-              opacity={0.5}
+              opacity={0.3}
             />
           </Float>
         </Canvas>

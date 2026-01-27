@@ -21,10 +21,10 @@
      THEME SYSTEM — MILSPEC Color Palettes
      ═══════════════════════════════════════════ */
   
-  /* Primary Theme Color (set by ThemeContext) */
-  --color-primary: #06b6d4;
-  --color-primary-glow: #22d3ee;
-  --color-primary-dim: #0891b2;
+  /* Primary Theme Color - Amber Tactical Default */
+  --color-primary: #F59E0B;
+  --color-primary-glow: #FBBF24;
+  --color-primary-dim: #D97706;
   
   /* Deep Space */
   --color-void: #0a0a0f;
