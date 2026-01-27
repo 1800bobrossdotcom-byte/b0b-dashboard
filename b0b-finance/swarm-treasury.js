@@ -40,6 +40,7 @@ const TREASURY_CONFIG = {
   // 📁 State files
   treasuryFile: path.join(__dirname, 'treasury-state.json'),
   learningsFile: path.join(__dirname, 'swarm-learnings.json'),
+  pulseFile: path.join(__dirname, 'swarm-pulse.json'),
   
   // 💰 Fund allocation (percentages)
   ALLOCATION: {
@@ -230,6 +231,90 @@ class SwarmTreasury {
   log(msg) {
     const ts = new Date().toISOString().split('T')[1].split('.')[0];
     console.log(`[${ts}] 🏦 ${msg}`);
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // PULSE SYSTEM - Live heartbeat for dashboard
+  // ═══════════════════════════════════════════════════════════
+
+  /**
+   * Emit pulse - write current thinking state to file
+   * Dashboard polls this to show live deliberation
+   */
+  emitPulse(data) {
+    const pulse = {
+      timestamp: new Date().toISOString(),
+      cycle: data.cycle || 0,
+      phase: data.phase || 'IDLE',  // SCANNING | DELIBERATING | DECIDING | EXECUTING | IDLE
+      market: data.market || null,
+      opportunity: data.opportunity || null,
+      agents: data.agents || {
+        BULL: { emoji: '🐂', vote: null, confidence: null, reasoning: null },
+        BEAR: { emoji: '🐻', vote: null, confidence: null, reasoning: null },
+        QUANT: { emoji: '📊', vote: null, confidence: null, reasoning: null },
+        RISK: { emoji: '🛡️', vote: null, confidence: null, reasoning: null },
+        ARBITER: { emoji: '⚖️', vote: null, confidence: null, reasoning: null },
+      },
+      consensus: data.consensus || 0,
+      blessing: data.blessing || false,
+      decision: data.decision || null,
+      treasury: {
+        total: this.state.balances.total,
+        todayPnL: this.state.daily.pnl,
+        winRate: this.state.performance.winCount / (this.state.performance.winCount + this.state.performance.lossCount || 1),
+      },
+    };
+
+    try {
+      fs.writeFileSync(TREASURY_CONFIG.pulseFile, JSON.stringify(pulse, null, 2));
+    } catch (e) {
+      // Pulse is non-critical, don't crash on write failure
+    }
+  }
+
+  /**
+   * Emit agent vote in real-time as deliberation happens
+   */
+  emitAgentVote(cycle, market, agentName, vote, confidence, reasoning, allVotes) {
+    const agents = {
+      BULL: { emoji: '🐂', vote: null, confidence: null, reasoning: null },
+      BEAR: { emoji: '🐻', vote: null, confidence: null, reasoning: null },
+      QUANT: { emoji: '📊', vote: null, confidence: null, reasoning: null },
+      RISK: { emoji: '🛡️', vote: null, confidence: null, reasoning: null },
+      ARBITER: { emoji: '⚖️', vote: null, confidence: null, reasoning: null },
+    };
+
+    // Fill in votes we have so far
+    for (const [name, data] of Object.entries(allVotes || {})) {
+      if (agents[name]) {
+        agents[name].vote = data.vote;
+        agents[name].confidence = data.confidence;
+        agents[name].reasoning = data.reasoning;
+      }
+    }
+
+    // Add current agent's vote
+    if (agents[agentName]) {
+      agents[agentName].vote = vote;
+      agents[agentName].confidence = confidence;
+      agents[agentName].reasoning = reasoning;
+    }
+
+    // Calculate running consensus
+    const votes = Object.values(agents).filter(a => a.vote !== null);
+    const yesVotes = votes.filter(a => a.vote === 'YES').length;
+    const consensus = votes.length > 0 ? yesVotes / votes.length : 0;
+
+    this.emitPulse({
+      cycle,
+      phase: 'DELIBERATING',
+      market,
+      opportunity: market,
+      agents,
+      consensus,
+      blessing: false,
+      decision: null,
+    });
   }
 
   // ═══════════════════════════════════════════════════════════
@@ -562,6 +647,9 @@ class SwarmTreasury {
         cycleCount++;
         this.log(`\n═══ Cycle ${cycleCount} ═══`);
 
+        // Emit scanning pulse
+        this.emitPulse({ cycle: cycleCount, phase: 'SCANNING', market: 'polymarket' });
+
         // Check daily limits
         if (this.state.daily.pnl <= -TREASURY_CONFIG.RISK.MAX_DAILY_LOSS) {
           this.log('⛔ Daily loss limit reached. Stopping all agents.');
@@ -587,12 +675,32 @@ class SwarmTreasury {
             
             if (opportunities.length > 0) {
               const opp = opportunities[0];
+              
+              // Emit deliberating pulse
+              this.emitPulse({ 
+                cycle: cycleCount, 
+                phase: 'DELIBERATING', 
+                market: 'polymarket',
+                opportunity: opp.market?.question?.slice(0, 60) || 'Analyzing opportunity...'
+              });
+              
               const decision = await polyTrader.makeCooperativeDecision(opp.market, opp.analysis);
               
               if (decision.decision === 'TRADE' && decision.confidence >= learnings.optimalConfidence) {
                 // Check for blessing opportunity
                 const isBlessing = this.isBlessingOpportunity(decision, opp.analysis);
                 const actualBudget = this.getAgentBudget('polymarket', isBlessing);
+                
+                // Emit deciding pulse with blessing detection
+                this.emitPulse({
+                  cycle: cycleCount,
+                  phase: 'DECIDING',
+                  market: 'polymarket',
+                  opportunity: opp.market?.question?.slice(0, 60),
+                  consensus: decision.confidence,
+                  blessing: isBlessing,
+                  agents: decision.votes || {},
+                });
                 
                 // Blessing plays get multiplied position size
                 const baseSize = decision.size || 25;

@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-01-27T22:50:00.000Z",
+  "cycle": 0,
+  "phase": "IDLE",
+  "market": "polymarket",
+  "opportunity": null,
+  "agents": {
+    "BULL": { "emoji": "🐂", "vote": null, "confidence": null, "reasoning": null },
+    "BEAR": { "emoji": "🐻", "vote": null, "confidence": null, "reasoning": null },
+    "QUANT": { "emoji": "📊", "vote": null, "confidence": null, "reasoning": null },
+    "RISK": { "emoji": "🛡️", "vote": null, "confidence": null, "reasoning": null },
+    "ARBITER": { "emoji": "⚖️", "vote": null, "confidence": null, "reasoning": null }
+  },
+  "consensus": 0,
+  "blessing": false,
+  "decision": null,
+  "treasury": {
+    "total": 300,
+    "todayPnL": 0
+  }
+}

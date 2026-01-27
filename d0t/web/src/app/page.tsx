@@ -46,6 +46,27 @@ interface TreasuryData {
   };
 }
 
+interface PulseData {
+  timestamp: string;
+  cycle: number;
+  phase: 'IDLE' | 'SCANNING' | 'DELIBERATING' | 'DECIDING' | 'EXECUTING' | 'OFFLINE' | 'ERROR';
+  market: string | null;
+  opportunity: string | null;
+  agents: Record<string, {
+    emoji: string;
+    vote: 'YES' | 'NO' | null;
+    confidence: number | null;
+    reasoning: string | null;
+  }>;
+  consensus: number;
+  blessing: boolean;
+  decision: string | null;
+  treasury: {
+    total: number;
+    todayPnL: number;
+  };
+}
+
 // ══════════════════════════════════════════════════════════════
 // STATIC DATA
 // ══════════════════════════════════════════════════════════════
@@ -82,6 +103,7 @@ export default function D0TFinance() {
   const [connected, setConnected] = useState(false);
   const [terminalLines, setTerminalLines] = useState<string[]>([]);
   const [treasuryData, setTreasuryData] = useState<TreasuryData | null>(null);
+  const [pulse, setPulse] = useState<PulseData | null>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
 
   // Fetch treasury data
@@ -98,11 +120,29 @@ export default function D0TFinance() {
     }
   }, []);
 
+  // Fetch pulse data (fast - every 1s)
+  const fetchPulse = useCallback(async () => {
+    try {
+      const res = await fetch('/api/pulse');
+      if (res.ok) {
+        const data = await res.json();
+        setPulse(data);
+      }
+    } catch (e) {
+      console.error('Failed to fetch pulse:', e);
+    }
+  }, []);
+
   useEffect(() => {
     fetchTreasury();
-    const interval = setInterval(fetchTreasury, 5000); // Refresh every 5s
-    return () => clearInterval(interval);
-  }, [fetchTreasury]);
+    fetchPulse();
+    const treasuryInterval = setInterval(fetchTreasury, 5000); // Refresh every 5s
+    const pulseInterval = setInterval(fetchPulse, 1000); // Pulse every 1s
+    return () => {
+      clearInterval(treasuryInterval);
+      clearInterval(pulseInterval);
+    };
+  }, [fetchTreasury, fetchPulse]);
 
   useEffect(() => {
     const messages = [
@@ -223,33 +263,122 @@ export default function D0TFinance() {
             <p className="text-sm text-[#555]">5 cooperative agents</p>
           </div>
           
-          <div className="space-y-1">
-            {AGENTS.map((agent) => (
-              <div
-                key={agent.id}
-                className="group block border-t border-[#2A2A2A] py-8 hover:bg-[#141414] transition-colors -mx-6 px-6"
-              >
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-4 mb-2">
-                      <span className="text-3xl">{agent.emoji}</span>
-                      <h3 className="text-3xl md:text-5xl font-light tracking-tight">
-                        {agent.name}
-                      </h3>
-                    </div>
-                    <p className="text-sm text-[#888]">{agent.role}</p>
+          {/* Live Pulse Visualization */}
+          {pulse && pulse.phase !== 'OFFLINE' && pulse.phase !== 'IDLE' && (
+            <div className={`mb-12 p-6 border ${pulse.blessing ? 'border-yellow-500/50 bg-yellow-500/5' : 'border-[#2A2A2A] bg-[#141414]'} rounded-lg`}>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <span className={`w-3 h-3 rounded-full animate-pulse ${
+                    pulse.phase === 'SCANNING' ? 'bg-blue-500' :
+                    pulse.phase === 'DELIBERATING' ? 'bg-yellow-500' :
+                    pulse.phase === 'DECIDING' ? 'bg-purple-500' :
+                    pulse.phase === 'EXECUTING' ? 'bg-green-500' : 'bg-zinc-500'
+                  }`} />
+                  <span className="text-sm font-mono uppercase">{pulse.phase}</span>
+                  {pulse.blessing && (
+                    <span className="text-xs font-mono text-yellow-500 border border-yellow-500/30 px-2 py-0.5 animate-pulse">
+                      🌟 BLESSING DETECTED
+                    </span>
+                  )}
+                </div>
+                <span className="text-xs text-[#555]">Cycle {pulse.cycle}</span>
+              </div>
+              
+              {pulse.opportunity && (
+                <p className="text-sm text-[#888] mb-4 truncate">
+                  {pulse.opportunity}
+                </p>
+              )}
+              
+              {/* Agent Votes */}
+              <div className="grid grid-cols-5 gap-2">
+                {Object.entries(pulse.agents).map(([name, agent]) => (
+                  <div 
+                    key={name}
+                    className={`p-3 border rounded text-center transition-all duration-300 ${
+                      agent.vote === 'YES' ? 'border-green-500/50 bg-green-500/10' :
+                      agent.vote === 'NO' ? 'border-red-500/50 bg-red-500/10' :
+                      'border-[#2A2A2A] bg-[#0A0A0A] opacity-50'
+                    }`}
+                  >
+                    <span className="text-xl">{agent.emoji}</span>
+                    <p className="text-xs font-mono mt-1">{name}</p>
+                    {agent.vote && (
+                      <p className={`text-xs font-bold mt-1 ${
+                        agent.vote === 'YES' ? 'text-green-500' : 'text-red-500'
+                      }`}>
+                        {agent.vote}
+                      </p>
+                    )}
+                    {agent.confidence !== null && (
+                      <p className="text-[10px] text-[#555]">{(agent.confidence * 100).toFixed(0)}%</p>
+                    )}
                   </div>
-                  
-                  <div className="flex items-center gap-8 text-sm">
-                    <div className="text-right">
-                      <p className="text-2xl font-light text-green-500">{agent.winRate}%</p>
-                      <p className="text-[#555]">Win Rate</p>
-                    </div>
-                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                  </div>
+                ))}
+              </div>
+              
+              {/* Consensus Bar */}
+              <div className="mt-4">
+                <div className="flex items-center justify-between text-xs mb-1">
+                  <span className="text-[#555]">Consensus</span>
+                  <span className={pulse.consensus >= 0.65 ? 'text-green-500' : 'text-[#888]'}>
+                    {(pulse.consensus * 100).toFixed(0)}%
+                  </span>
+                </div>
+                <div className="h-2 bg-[#2A2A2A] rounded-full overflow-hidden">
+                  <div 
+                    className={`h-full transition-all duration-500 ${
+                      pulse.blessing ? 'bg-yellow-500' :
+                      pulse.consensus >= 0.65 ? 'bg-green-500' : 'bg-zinc-500'
+                    }`}
+                    style={{ width: `${pulse.consensus * 100}%` }}
+                  />
                 </div>
               </div>
-            ))}
+            </div>
+          )}
+          
+          <div className="space-y-1">
+            {AGENTS.map((agent) => {
+              const pulseAgent = pulse?.agents[agent.name.toUpperCase()];
+              const isVoting = pulseAgent?.vote !== null;
+              
+              return (
+                <div
+                  key={agent.id}
+                  className={`group block border-t border-[#2A2A2A] py-8 transition-colors -mx-6 px-6 ${
+                    isVoting ? 'bg-[#141414]' : 'hover:bg-[#141414]'
+                  }`}
+                >
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-4 mb-2">
+                        <span className="text-3xl">{agent.emoji}</span>
+                        <h3 className="text-3xl md:text-5xl font-light tracking-tight">
+                          {agent.name}
+                        </h3>
+                        {isVoting && (
+                          <span className={`text-sm font-mono px-2 py-1 rounded ${
+                            pulseAgent?.vote === 'YES' ? 'bg-green-500/20 text-green-500' : 'bg-red-500/20 text-red-500'
+                          }`}>
+                            {pulseAgent?.vote}
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-sm text-[#888]">{agent.role}</p>
+                    </div>
+                    
+                    <div className="flex items-center gap-8 text-sm">
+                      <div className="text-right">
+                        <p className="text-2xl font-light text-green-500">{agent.winRate}%</p>
+                        <p className="text-[#555]">Win Rate</p>
+                      </div>
+                      <span className={`w-2 h-2 rounded-full ${isVoting ? 'bg-yellow-500' : 'bg-green-500'} animate-pulse`} />
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
