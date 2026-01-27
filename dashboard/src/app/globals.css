@@ -68,6 +68,78 @@
   --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-flow: cubic-bezier(0.65, 0, 0.35, 1);
   --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  
+  /* Glow */
+  --color-glow: rgba(245, 158, 11, 0.15);
+}
+
+/* ═══════════════════════════════════════════
+   AESTHETIC EFFECTS
+   ═══════════════════════════════════════════ */
+
+/* Scanlines overlay */
+[data-scanlines="true"]::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 1px,
+    rgba(0, 0, 0, 0.15) 1px,
+    rgba(0, 0, 0, 0.15) 2px
+  );
+}
+
+/* CRT curve + glow effect */
+[data-crt="true"] body {
+  text-shadow: 0 0 2px var(--color-primary), 0 0 5px var(--color-glow);
+}
+
+[data-crt="true"]::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    rgba(0, 0, 0, 0.2) 80%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+}
+
+/* Glitch effect on text */
+[data-glitch="true"] h1,
+[data-glitch="true"] h2 {
+  animation: glitch 3s infinite;
+}
+
+@keyframes glitch {
+  0%, 90%, 100% {
+    text-shadow: none;
+  }
+  91% {
+    text-shadow: -2px 0 var(--color-primary), 2px 0 var(--color-accent);
+  }
+  92% {
+    text-shadow: 2px 0 var(--color-primary), -2px 0 var(--color-accent);
+  }
+  93% {
+    text-shadow: none;
+  }
+  94% {
+    text-shadow: -1px 0 var(--color-primary), 1px 0 var(--color-accent);
+  }
 }
 
 /* ═══════════════════════════════════════════

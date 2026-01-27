@@ -2,71 +2,107 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-// MILSPEC color themes
-export const THEMES = {
-  cyan: {
-    name: 'Cyan // Default',
-    primary: '#00D4FF',
-    secondary: '#0891B2',
-    accent: '#06B6D4',
-    muted: '#64748B',
-    background: '#0A0A0F',
-    surface: '#141420',
-  },
-  amber: {
-    name: 'Amber // Tactical',
+// Aesthetic style presets — full vibe transformations
+export const AESTHETICS = {
+  milspec: {
+    name: 'MILSPEC',
+    description: 'Tactical precision',
     primary: '#F59E0B',
     secondary: '#D97706',
     accent: '#FBBF24',
     muted: '#78716C',
     background: '#0A0A08',
     surface: '#1A1810',
+    glow: 'rgba(245, 158, 11, 0.15)',
+    particleShape: 'square',
+    scanlines: false,
+    glitch: false,
+    crt: false,
   },
-  green: {
-    name: 'Green // Matrix',
-    primary: '#10B981',
-    secondary: '#059669',
-    accent: '#34D399',
-    muted: '#6B7280',
-    background: '#050A08',
-    surface: '#0A1410',
+  ghost: {
+    name: 'GH0ST',
+    description: 'Shadow protocol',
+    primary: '#00FF88',
+    secondary: '#00CC6A',
+    accent: '#88FFBB',
+    muted: '#4A5568',
+    background: '#050808',
+    surface: '#0A1210',
+    glow: 'rgba(0, 255, 136, 0.1)',
+    particleShape: 'circle',
+    scanlines: true,
+    glitch: true,
+    crt: false,
   },
-  red: {
-    name: 'Red // Alert',
+  anime: {
+    name: 'ANIME',
+    description: 'Neo-tokyo nights',
+    primary: '#FF6B9D',
+    secondary: '#C44569',
+    accent: '#FFB8D0',
+    muted: '#8B7E94',
+    background: '#0D0A12',
+    surface: '#1A1424',
+    glow: 'rgba(255, 107, 157, 0.2)',
+    particleShape: 'circle',
+    scanlines: false,
+    glitch: false,
+    crt: true,
+  },
+  void: {
+    name: 'V0ID',
+    description: 'Deep nothing',
+    primary: '#8B5CF6',
+    secondary: '#7C3AED',
+    accent: '#A78BFA',
+    muted: '#52525B',
+    background: '#030303',
+    surface: '#0A0A0F',
+    glow: 'rgba(139, 92, 246, 0.1)',
+    particleShape: 'square',
+    scanlines: false,
+    glitch: false,
+    crt: false,
+  },
+  ice: {
+    name: 'ICE',
+    description: 'Arctic clarity',
+    primary: '#06B6D4',
+    secondary: '#0891B2',
+    accent: '#67E8F9',
+    muted: '#64748B',
+    background: '#050A0D',
+    surface: '#0A1418',
+    glow: 'rgba(6, 182, 212, 0.12)',
+    particleShape: 'circle',
+    scanlines: false,
+    glitch: false,
+    crt: false,
+  },
+  blood: {
+    name: 'BL00D',
+    description: 'Maximum alert',
     primary: '#EF4444',
     secondary: '#DC2626',
-    accent: '#F87171',
+    accent: '#FCA5A5',
     muted: '#71717A',
-    background: '#0A0505',
+    background: '#080505',
     surface: '#140A0A',
-  },
-  purple: {
-    name: 'Purple // Phantom',
-    primary: '#A855F7',
-    secondary: '#9333EA',
-    accent: '#C084FC',
-    muted: '#71717A',
-    background: '#08050A',
-    surface: '#100A14',
-  },
-  white: {
-    name: 'White // Clean',
-    primary: '#F8FAFC',
-    secondary: '#E2E8F0',
-    accent: '#FFFFFF',
-    muted: '#94A3B8',
-    background: '#0A0A0F',
-    surface: '#141420',
+    glow: 'rgba(239, 68, 68, 0.15)',
+    particleShape: 'square',
+    scanlines: true,
+    glitch: false,
+    crt: false,
   },
 } as const;
 
-export type ThemeKey = keyof typeof THEMES;
-export type ThemeColors = typeof THEMES[ThemeKey];
+export type AestheticKey = keyof typeof AESTHETICS;
+export type AestheticConfig = typeof AESTHETICS[AestheticKey];
 
 interface ThemeContextType {
-  theme: ThemeKey;
-  setTheme: (theme: ThemeKey) => void;
-  colors: ThemeColors;
+  aesthetic: AestheticKey;
+  setAesthetic: (aesthetic: AestheticKey) => void;
+  config: AestheticConfig;
   particleDensity: 'low' | 'medium' | 'high';
   setParticleDensity: (d: 'low' | 'medium' | 'high') => void;
   animationSpeed: 'slow' | 'normal' | 'fast';
@@ -78,16 +114,16 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<ThemeKey>('amber');
+  const [aesthetic, setAestheticState] = useState<AestheticKey>('milspec');
   const [particleDensity, setParticleDensity] = useState<'low' | 'medium' | 'high'>('medium');
   const [animationSpeed, setAnimationSpeed] = useState<'slow' | 'normal' | 'fast'>('normal');
   const [reducedMotion, setReducedMotion] = useState(false);
 
   // Load from localStorage
   useEffect(() => {
-    const saved = localStorage.getItem('b0b-theme');
-    if (saved && saved in THEMES) {
-      setThemeState(saved as ThemeKey);
+    const saved = localStorage.getItem('b0b-aesthetic');
+    if (saved && saved in AESTHETICS) {
+      setAestheticState(saved as AestheticKey);
     }
     
     const savedDensity = localStorage.getItem('b0b-particle-density');
@@ -100,20 +136,28 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     if (savedMotion) setReducedMotion(savedMotion === 'true');
   }, []);
 
-  // Apply CSS variables when theme changes
+  // Apply CSS variables and effects when aesthetic changes
   useEffect(() => {
-    const colors = THEMES[theme];
+    const config = AESTHETICS[aesthetic];
     const root = document.documentElement;
     
-    root.style.setProperty('--color-primary', colors.primary);
-    root.style.setProperty('--color-secondary', colors.secondary);
-    root.style.setProperty('--color-accent', colors.accent);
-    root.style.setProperty('--color-muted', colors.muted);
-    root.style.setProperty('--color-background', colors.background);
-    root.style.setProperty('--color-surface', colors.surface);
+    // Colors
+    root.style.setProperty('--color-primary', config.primary);
+    root.style.setProperty('--color-secondary', config.secondary);
+    root.style.setProperty('--color-accent', config.accent);
+    root.style.setProperty('--color-muted', config.muted);
+    root.style.setProperty('--color-background', config.background);
+    root.style.setProperty('--color-surface', config.surface);
+    root.style.setProperty('--color-glow', config.glow);
     
-    localStorage.setItem('b0b-theme', theme);
-  }, [theme]);
+    // Visual effects
+    root.setAttribute('data-aesthetic', aesthetic);
+    root.setAttribute('data-scanlines', String(config.scanlines));
+    root.setAttribute('data-glitch', String(config.glitch));
+    root.setAttribute('data-crt', String(config.crt));
+    
+    localStorage.setItem('b0b-aesthetic', aesthetic);
+  }, [aesthetic]);
 
   useEffect(() => {
     localStorage.setItem('b0b-particle-density', particleDensity);
@@ -127,13 +171,13 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('b0b-reduced-motion', String(reducedMotion));
   }, [reducedMotion]);
 
-  const setTheme = (t: ThemeKey) => setThemeState(t);
+  const setAesthetic = (a: AestheticKey) => setAestheticState(a);
 
   return (
     <ThemeContext.Provider value={{
-      theme,
-      setTheme,
-      colors: THEMES[theme],
+      aesthetic,
+      setAesthetic,
+      config: AESTHETICS[aesthetic],
       particleDensity,
       setParticleDensity,
       animationSpeed,

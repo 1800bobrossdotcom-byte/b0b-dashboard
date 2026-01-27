@@ -1,12 +1,12 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useTheme, THEMES, ThemeKey } from '@/contexts/ThemeContext';
+import { useTheme, AESTHETICS, AestheticKey } from '@/contexts/ThemeContext';
 
 export default function ControlPanel() {
   const [isOpen, setIsOpen] = useState(false);
   const { 
-    theme, setTheme, 
+    aesthetic, setAesthetic, config,
     particleDensity, setParticleDensity,
     animationSpeed, setAnimationSpeed,
     reducedMotion, setReducedMotion 
@@ -42,35 +42,43 @@ export default function ControlPanel() {
         </div>
 
         <div className="p-4 space-y-5">
-          {/* Theme Selection */}
+          {/* Aesthetic Selection */}
           <div>
-            <label className="block text-xs font-mono uppercase tracking-wider text-[var(--color-muted)] mb-2">
-              Color Theme
+            <label className="block text-xs font-mono uppercase tracking-wider text-[var(--color-muted)] mb-3">
+              Aesthetic
             </label>
-            <div className="grid grid-cols-6 gap-2">
-              {(Object.keys(THEMES) as ThemeKey[]).map((key) => (
+            <div className="space-y-1.5">
+              {(Object.keys(AESTHETICS) as AestheticKey[]).map((key) => (
                 <button
                   key={key}
-                  onClick={() => setTheme(key)}
-                  className={`w-8 h-8 rounded-md border-2 transition-all ${
-                    theme === key 
-                      ? 'border-white scale-110' 
-                      : 'border-transparent hover:scale-105'
+                  onClick={() => setAesthetic(key)}
+                  className={`w-full flex items-center gap-3 px-3 py-2 rounded border transition-all ${
+                    aesthetic === key 
+                      ? 'border-[var(--color-primary)] bg-[var(--color-primary)]/10' 
+                      : 'border-[var(--color-muted)]/20 hover:border-[var(--color-muted)]/40'
                   }`}
-                  style={{ backgroundColor: THEMES[key].primary }}
-                  title={THEMES[key].name}
-                />
+                >
+                  <div 
+                    className="w-3 h-3 rounded-sm"
+                    style={{ backgroundColor: AESTHETICS[key].primary }}
+                  />
+                  <span className={`text-xs font-mono tracking-wider ${
+                    aesthetic === key ? 'text-[var(--color-primary)]' : 'text-[var(--color-muted)]'
+                  }`}>
+                    {AESTHETICS[key].name}
+                  </span>
+                  <span className="text-[10px] text-[var(--color-muted)]/60 ml-auto">
+                    {AESTHETICS[key].description}
+                  </span>
+                </button>
               ))}
             </div>
-            <p className="mt-1 text-xs text-[var(--color-muted)] font-mono">
-              {THEMES[theme].name}
-            </p>
           </div>
 
           {/* Particle Density */}
           <div>
             <label className="block text-xs font-mono uppercase tracking-wider text-[var(--color-muted)] mb-2">
-              Particle Density
+              Density
             </label>
             <div className="flex gap-2">
               {(['low', 'medium', 'high'] as const).map((d) => (
