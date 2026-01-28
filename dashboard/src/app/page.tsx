@@ -15,10 +15,25 @@ import Link from 'next/link';
 import TeamChat from '@/components/live/TeamChat';
 
 // BRIGHT palette — Base blue + warm backgrounds
+// Includes Base.org design system grays
 const colors = {
   // Core Base
   blue: '#0000FF',
   white: '#FFFFFF',
+  
+  // Base.org gray scale (from their design system)
+  gray100: '#0A0B0D',      // Darkest - text on light
+  gray90: '#141519',
+  gray80: '#1E1F25',
+  gray70: '#32353F',
+  gray60: '#5B616E',
+  gray50: '#8A919E',
+  gray40: '#AFB5C1',
+  gray30: '#CDD1D9',
+  gray20: '#E3E7ED',
+  gray15: '#EEF0F3',
+  gray10: '#F3F4F6',
+  gray5: '#F9FAFB',
   
   // BRIGHT backgrounds
   cream: '#FFFAF5',        // Warm cream
