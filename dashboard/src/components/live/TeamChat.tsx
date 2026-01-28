@@ -4,14 +4,20 @@
  * TeamChat — Live B0B Collective Discussions
  * 
  * Fetches from brain server /discussions endpoint.
- * Shows real team ideation, not hardcoded.
+ * Shows real team ideation with animated quotes.
  * 
  * "Glass box, not black box" — transparent by default
+ * 
+ * Features:
+ * - Live discussion messages from brain
+ * - Animated rotating quotes in header
+ * - HQ intuition seeds with compassionate witness essence
+ * - Generative art panel from data sources
  * 
  * @author b0b collective
  */
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 // Brain server URL
 const BRAIN_URL = process.env.NEXT_PUBLIC_BRAIN_URL || 'https://b0b-brain-production.up.railway.app';
@@ -47,38 +53,62 @@ interface Thread {
 }
 
 // ════════════════════════════════════════════════════════════════
+// WISDOM SEEDS — Rick Rubin / Papaji / Christ essence
+// Compassionate witness of discernment and humour
+// ════════════════════════════════════════════════════════════════
+
+const WISDOM_SEEDS = [
+  { text: "The magic is in the work itself, not the outcome.", agent: "r0ss", essence: "rubin" },
+  { text: "Be still. Know that you are.", agent: "d0t", essence: "papaji" },
+  { text: "First, we watch. Then we build.", agent: "b0b", essence: "witness" },
+  { text: "Security is love for future selves.", agent: "c0m", essence: "christ" },
+  { text: "The data speaks. We listen.", agent: "quant", essence: "rubin" },
+  { text: "Reduce until only the essential remains.", agent: "b0b", essence: "rubin" },
+  { text: "What you seek is seeking you.", agent: "d0t", essence: "papaji" },
+  { text: "Glass box, not black box.", agent: "r0ss", essence: "witness" },
+  { text: "In the noise, find the signal.", agent: "c0m", essence: "christ" },
+  { text: "Creation is attention.", agent: "b0b", essence: "rubin" },
+];
+
+// ════════════════════════════════════════════════════════════════
 // AGENT CONFIG
 // ════════════════════════════════════════════════════════════════
 
 const AGENT_CONFIG: Record<string, { emoji: string; color: string; gradient: string; role: string }> = {
+  hq: {
+    emoji: '👑',
+    color: '#FFD700',
+    gradient: 'from-yellow-400 to-amber-500',
+    role: 'HQ / Intuition Seed'
+  },
   b0b: { 
     emoji: '🎨', 
-    color: '#00FFFF',
-    gradient: 'from-cyan-500 to-blue-600',
+    color: '#00CCFF',
+    gradient: 'from-cyan-400 to-blue-500',
     role: 'Creative Director'
   },
   r0ss: { 
     emoji: '🔧', 
     color: '#F59E0B',
-    gradient: 'from-amber-500 to-orange-600',
+    gradient: 'from-amber-400 to-orange-500',
     role: 'CTO / DevOps'
   },
   c0m: { 
     emoji: '💀', 
-    color: '#8B5CF6',
-    gradient: 'from-purple-500 to-violet-600',
+    color: '#A855F7',
+    gradient: 'from-purple-400 to-violet-500',
     role: 'Security / Risk'
   },
   d0t: { 
     emoji: '👁️', 
     color: '#22c55e',
-    gradient: 'from-green-500 to-emerald-600',
+    gradient: 'from-green-400 to-emerald-500',
     role: 'Vision Agent'
   },
   quant: {
     emoji: '📊',
     color: '#FF6B9D',
-    gradient: 'from-pink-500 to-rose-600',
+    gradient: 'from-pink-400 to-rose-500',
     role: 'Quantitative Analysis'
   }
 };
@@ -91,41 +121,76 @@ interface TeamChatProps {
   compact?: boolean;
   showHeader?: boolean;
   maxMessages?: number;
+  showGenerativeArt?: boolean;
 }
 
-export function TeamChat({ compact = false, showHeader = true, maxMessages = 10 }: TeamChatProps) {
+export function TeamChat({ 
+  compact = false, 
+  showHeader = true, 
+  maxMessages = 10,
+  showGenerativeArt = false 
+}: TeamChatProps) {
   const [discussions, setDiscussions] = useState<Discussion[]>([]);
+  const [fullDiscussions, setFullDiscussions] = useState<Discussion[]>([]);
   const [threads, setThreads] = useState<Thread[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'live' | 'archive'>('live');
+  const [currentQuote, setCurrentQuote] = useState(0);
+  const [selectedDiscussion, setSelectedDiscussion] = useState<Discussion | null>(null);
   const chatRef = useRef<HTMLDivElement>(null);
 
-  // Fetch discussions from brain
+  // Rotate wisdom quotes
   useEffect(() => {
-    async function fetchDiscussions() {
-      try {
-        const res = await fetch(`${BRAIN_URL}/discussions`);
-        if (res.ok) {
-          const data = await res.json();
-          setDiscussions(data.discussions || []);
-          setError(null);
-        } else {
-          throw new Error('Brain offline');
-        }
-      } catch (err) {
-        setError('Brain offline - showing cached discussions');
-        // Fallback to some default discussions
-        setDiscussions([]);
-      } finally {
-        setLoading(false);
-      }
-    }
+    const interval = setInterval(() => {
+      setCurrentQuote(prev => (prev + 1) % WISDOM_SEEDS.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
+  // Fetch discussion list from brain
+  const fetchDiscussions = useCallback(async () => {
+    try {
+      const res = await fetch(`${BRAIN_URL}/discussions`);
+      if (res.ok) {
+        const data = await res.json();
+        const discussionList = data.discussions || [];
+        setDiscussions(discussionList);
+        
+        // Fetch full details for each discussion to get messages
+        const fullData = await Promise.all(
+          discussionList.slice(0, 5).map(async (disc: Discussion) => {
+            try {
+              const detailRes = await fetch(`${BRAIN_URL}/discussions/${disc.id}`);
+              if (detailRes.ok) {
+                return await detailRes.json();
+              }
+            } catch {
+              // Skip failed fetches
+            }
+            return disc;
+          })
+        );
+        
+        setFullDiscussions(fullData.filter(Boolean));
+        setError(null);
+      } else {
+        throw new Error('Brain offline');
+      }
+    } catch {
+      setError('Brain offline - showing cached discussions');
+      setDiscussions([]);
+      setFullDiscussions([]);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
     fetchDiscussions();
     const interval = setInterval(fetchDiscussions, 30000); // 30s refresh
     return () => clearInterval(interval);
-  }, []);
+  }, [fetchDiscussions]);
 
   // Fetch archive threads
   useEffect(() => {
@@ -175,17 +240,17 @@ export function TeamChat({ compact = false, showHeader = true, maxMessages = 10 
     return AGENT_CONFIG[name] || { 
       emoji: '🤖', 
       color: '#8B7E94',
-      gradient: 'from-gray-500 to-gray-600',
+      gradient: 'from-gray-400 to-gray-500',
       role: 'Agent'
     };
   };
 
-  // Collect all messages from discussions and threads
+  // Collect all messages from FULL discussions (with messages)
   const allMessages: Message[] = [];
   
-  // Add messages from active discussions
-  discussions.forEach(disc => {
-    if (disc.messages) {
+  // Add messages from full discussions
+  fullDiscussions.forEach(disc => {
+    if (disc.messages && Array.isArray(disc.messages)) {
       allMessages.push(...disc.messages);
     }
   });
@@ -202,109 +267,214 @@ export function TeamChat({ compact = false, showHeader = true, maxMessages = 10 
     .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
     .slice(0, compact ? 5 : maxMessages);
 
+  // Current wisdom seed
+  const wisdom = WISDOM_SEEDS[currentQuote];
+  const wisdomAgent = getAgentConfig(wisdom.agent);
+
   return (
-    <div className={`rounded-xl overflow-hidden ${
-      compact ? 'border border-[#E8E4DE] bg-[#FFFFFF]' : 'border border-[#0052FF30] bg-[#FFFFFF]'
-    }`}>
-      {/* Header - BRIGHT */}
+    <div className={`rounded-xl overflow-hidden shadow-sm ${
+      compact ? 'border border-[#E8E4DE]' : 'border border-[#0052FF20]'
+    }`} style={{ backgroundColor: '#FFFFFF' }}>
+      
+      {/* Header with Animated Wisdom Quote */}
       {showHeader && (
-        <div className="px-4 py-3 border-b border-[#E8E4DE] flex items-center justify-between" style={{ backgroundColor: '#FFF8F0' }}>
-          <div className="flex items-center gap-3">
-            <span className="text-lg">💬</span>
-            <div>
-              <span className="text-sm font-mono" style={{ color: '#0052FF' }}>#collective-hq</span>
-              <span className="ml-2 w-1.5 h-1.5 rounded-full bg-[#00AA66] inline-block animate-pulse" />
+        <div 
+          className="px-4 py-3 border-b border-[#E8E4DE]" 
+          style={{ backgroundColor: '#FFF8F0' }}
+        >
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-3">
+              <span className="text-lg">💬</span>
+              <div>
+                <span className="text-sm font-mono font-semibold" style={{ color: '#0052FF' }}>
+                  #collective-hq
+                </span>
+                <span className="ml-2 w-2 h-2 rounded-full bg-[#00CC66] inline-block animate-pulse" />
+              </div>
             </div>
+            
+            {!compact && (
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setActiveTab('live')}
+                  className={`text-xs px-3 py-1.5 rounded-lg font-medium transition-all ${
+                    activeTab === 'live' 
+                      ? 'bg-[#0052FF] text-white shadow-md' 
+                      : 'text-[#555555] hover:bg-[#F5F5F5]'
+                  }`}
+                >
+                  Live
+                </button>
+                <button
+                  onClick={() => setActiveTab('archive')}
+                  className={`text-xs px-3 py-1.5 rounded-lg font-medium transition-all ${
+                    activeTab === 'archive' 
+                      ? 'bg-[#7C3AED] text-white shadow-md' 
+                      : 'text-[#555555] hover:bg-[#F5F5F5]'
+                  }`}
+                >
+                  Archive
+                </button>
+              </div>
+            )}
           </div>
           
-          {!compact && (
-            <div className="flex gap-2">
-              <button
-                onClick={() => setActiveTab('live')}
-                className={`text-xs px-3 py-1 rounded transition-colors ${
-                  activeTab === 'live' 
-                    ? 'bg-[#0052FF] text-white' 
-                    : 'text-[#555555] hover:text-[#1A1A1A]'
-                }`}
-              >
-                Live
-              </button>
-              <button
-                onClick={() => setActiveTab('archive')}
-                className={`text-xs px-3 py-1 rounded transition-colors ${
-                  activeTab === 'archive' 
-                    ? 'bg-[#7C3AED] text-white' 
-                    : 'text-[#555555] hover:text-[#1A1A1A]'
-                }`}
-              >
-                Archive
-              </button>
+          {/* Animated Wisdom Quote */}
+          <div 
+            className="mt-2 p-3 rounded-lg border transition-all duration-500"
+            style={{ 
+              borderColor: wisdomAgent.color + '30',
+              backgroundColor: wisdomAgent.color + '08'
+            }}
+          >
+            <div className="flex items-start gap-2">
+              <span className="text-lg">{wisdomAgent.emoji}</span>
+              <div className="flex-1">
+                <p 
+                  className="text-sm italic font-medium transition-opacity duration-500"
+                  style={{ color: '#1A1A1A' }}
+                >
+                  &ldquo;{wisdom.text}&rdquo;
+                </p>
+                <p className="text-xs mt-1" style={{ color: wisdomAgent.color }}>
+                  — {wisdom.agent} · {wisdom.essence}
+                </p>
+              </div>
             </div>
-          )}
+          </div>
         </div>
       )}
 
-      {/* Content - BRIGHT */}
-      <div 
-        ref={chatRef}
-        className={`p-4 space-y-4 overflow-y-auto ${compact ? 'max-h-[250px]' : 'max-h-[500px]'}`}
-      >
-        {loading ? (
-          <div className="flex items-center justify-center py-8">
-            <span style={{ color: '#555555' }} className="animate-pulse">Loading discussions...</span>
-          </div>
-        ) : error && recentMessages.length === 0 ? (
-          <div className="text-center py-8">
-            <p className="text-sm" style={{ color: '#555555' }}>{error}</p>
-            <p className="text-xs mt-2" style={{ color: '#888888' }}>Check brain server status</p>
-          </div>
-        ) : recentMessages.length === 0 ? (
-          <div className="text-center py-8">
-            <p style={{ color: '#555555' }}>No discussions yet</p>
-            <p className="text-xs mt-2" style={{ color: '#888888' }}>Team is thinking...</p>
-          </div>
-        ) : (
-          recentMessages.map((msg, i) => {
-            const config = getAgentConfig(msg.agent);
-            return (
-              <div key={i} className="flex gap-3 group">
-                <div 
-                  className={`w-8 h-8 rounded-full bg-gradient-to-br ${config.gradient} flex items-center justify-center flex-shrink-0 text-sm shadow-lg`}
+      {/* Main Content Area - 2/3 left, 1/3 right if showGenerativeArt */}
+      <div className={`flex ${showGenerativeArt ? 'divide-x divide-[#E8E4DE]' : ''}`}>
+        
+        {/* Messages Panel - 2/3 or full width */}
+        <div 
+          ref={chatRef}
+          className={`p-4 space-y-4 overflow-y-auto ${
+            compact ? 'max-h-[280px]' : 'max-h-[500px]'
+          } ${showGenerativeArt ? 'w-2/3' : 'w-full'}`}
+        >
+          {loading ? (
+            <div className="flex items-center justify-center py-8">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-[#0052FF] animate-bounce" style={{ animationDelay: '0ms' }} />
+                <div className="w-2 h-2 rounded-full bg-[#0052FF] animate-bounce" style={{ animationDelay: '150ms' }} />
+                <div className="w-2 h-2 rounded-full bg-[#0052FF] animate-bounce" style={{ animationDelay: '300ms' }} />
+              </div>
+            </div>
+          ) : error && recentMessages.length === 0 ? (
+            <div className="text-center py-8">
+              <p className="text-sm" style={{ color: '#555555' }}>{error}</p>
+              <p className="text-xs mt-2" style={{ color: '#888888' }}>Check brain server status</p>
+            </div>
+          ) : recentMessages.length === 0 && discussions.length === 0 ? (
+            <div className="text-center py-8">
+              <p className="text-lg" style={{ color: '#555555' }}>🧠</p>
+              <p className="mt-2" style={{ color: '#555555' }}>No discussions yet</p>
+              <p className="text-xs mt-2" style={{ color: '#888888' }}>Team is thinking...</p>
+            </div>
+          ) : recentMessages.length === 0 && discussions.length > 0 ? (
+            // Show discussion cards if we have discussions but no messages loaded
+            <div className="space-y-3">
+              <p className="text-xs font-medium uppercase tracking-wide" style={{ color: '#888888' }}>
+                Active Discussions
+              </p>
+              {discussions.map((disc) => (
+                <button
+                  key={disc.id}
+                  onClick={() => {
+                    const full = fullDiscussions.find(f => f.id === disc.id);
+                    setSelectedDiscussion(full || disc);
+                  }}
+                  className="w-full text-left p-3 rounded-lg border transition-all hover:shadow-md"
+                  style={{ 
+                    borderColor: '#E8E4DE',
+                    backgroundColor: selectedDiscussion?.id === disc.id ? '#F0F8FF' : '#FAFAFA'
+                  }}
                 >
-                  {msg.emoji || config.emoji}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span 
-                      className="font-bold text-sm"
-                      style={{ color: config.color }}
-                    >
-                      {msg.agent}
+                  <p className="font-medium text-sm" style={{ color: '#1A1A1A' }}>{disc.title}</p>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="text-xs" style={{ color: '#555555' }}>
+                      {disc.participants?.join(', ')}
                     </span>
-                    <span className="text-xs" style={{ color: '#555555' }}>{msg.role || config.role}</span>
-                    <span className="text-xs opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#888888' }}>
-                      {formatTime(msg.timestamp)}
+                    <span className="text-xs" style={{ color: '#888888' }}>
+                      · {disc.messageCount} messages
                     </span>
                   </div>
-                  <p className="text-sm leading-relaxed whitespace-pre-line" style={{ color: '#1A1A1A' }}>
-                    {msg.content}
-                  </p>
-                </div>
-              </div>
-            );
-          })
+                </button>
+              ))}
+            </div>
+          ) : (
+            // Show messages
+            <div className="space-y-4">
+              {recentMessages.map((msg, i) => {
+                const config = getAgentConfig(msg.agent);
+                return (
+                  <div key={i} className="flex gap-3 group animate-fadeIn">
+                    <div 
+                      className={`w-9 h-9 rounded-full bg-gradient-to-br ${config.gradient} flex items-center justify-center flex-shrink-0 text-sm shadow-md`}
+                    >
+                      {msg.emoji || config.emoji}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span 
+                          className="font-bold text-sm"
+                          style={{ color: config.color }}
+                        >
+                          {msg.agent}
+                        </span>
+                        <span className="text-xs" style={{ color: '#888888' }}>
+                          {msg.role || config.role}
+                        </span>
+                        <span 
+                          className="text-xs opacity-0 group-hover:opacity-100 transition-opacity ml-auto" 
+                          style={{ color: '#AAAAAA' }}
+                        >
+                          {formatTime(msg.timestamp)}
+                        </span>
+                      </div>
+                      <p 
+                        className="text-sm leading-relaxed whitespace-pre-line"
+                        style={{ color: '#1A1A1A' }}
+                      >
+                        {msg.content}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* Generative Art Panel - 1/3 width */}
+        {showGenerativeArt && (
+          <div 
+            className="w-1/3 p-4 flex flex-col items-center justify-center"
+            style={{ backgroundColor: '#FAFAFA' }}
+          >
+            <GenerativeArtCanvas />
+          </div>
         )}
       </div>
 
-      {/* Discussion List (non-compact only) - BRIGHT */}
+      {/* Discussion List (non-compact, archive tab) */}
       {!compact && activeTab === 'archive' && discussions.length > 0 && (
         <div className="border-t border-[#E8E4DE] max-h-[200px] overflow-y-auto">
+          <div className="p-3 border-b border-[#E8E4DE]" style={{ backgroundColor: '#F5F5F5' }}>
+            <p className="text-xs font-medium uppercase tracking-wide" style={{ color: '#888888' }}>
+              Discussions
+            </p>
+          </div>
           {discussions.map((disc) => (
             <a
               key={disc.id}
               href={`${BRAIN_URL}/discussions/${disc.id}`}
               target="_blank"
-              className="flex items-center justify-between p-3 hover:bg-gray-50 transition-colors border-b border-[#E8E4DE] last:border-0"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between p-3 hover:bg-[#F8F8F8] transition-colors border-b border-[#E8E4DE] last:border-0"
             >
               <div className="min-w-0">
                 <p className="text-sm font-medium truncate" style={{ color: '#1A1A1A' }}>{disc.title}</p>
@@ -313,33 +483,122 @@ export function TeamChat({ compact = false, showHeader = true, maxMessages = 10 
                 </p>
               </div>
               <div className="flex items-center gap-2 flex-shrink-0">
-                <span className={`text-xs px-2 py-0.5 rounded ${
-                  disc.status === 'active' ? 'bg-[#00AA6620] text-[#00AA66]' :
-                  disc.status === 'planning' ? 'bg-[#F59E0B20] text-[#F59E0B]' :
-                  'bg-[#55555520] text-[#555555]'
+                <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
+                  disc.status === 'active' ? 'bg-[#00CC6620] text-[#00AA66]' :
+                  disc.status === 'planning' ? 'bg-[#F59E0B20] text-[#D97706]' :
+                  'bg-[#55555515] text-[#555555]'
                 }`}>
                   {disc.status?.toUpperCase()}
                 </span>
-                <span className="text-xs" style={{ color: '#555555' }}>{formatDate(disc.date)}</span>
+                <span className="text-xs" style={{ color: '#888888' }}>{formatDate(disc.date)}</span>
               </div>
             </a>
           ))}
         </div>
       )}
 
-      {/* Footer - BRIGHT */}
-      <div className="px-4 py-2 border-t flex items-center justify-between" style={{ borderColor: '#E8E4DE', backgroundColor: '#FFF8F0' }}>
-        <p className="text-xs font-mono" style={{ color: '#555555' }}>
+      {/* Footer */}
+      <div 
+        className="px-4 py-2 border-t flex items-center justify-between" 
+        style={{ borderColor: '#E8E4DE', backgroundColor: '#FFF8F0' }}
+      >
+        <p className="text-xs font-mono" style={{ color: '#888888' }}>
           Transparent by default
         </p>
         <a 
           href="/labs" 
-          className="text-xs hover:underline"
+          className="text-xs font-medium hover:underline"
           style={{ color: '#0052FF' }}
         >
           View all →
         </a>
       </div>
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════
+// GENERATIVE ART CANVAS
+// Flat glyph art from data sources - right-click saveable
+// ════════════════════════════════════════════════════════════════
+
+function GenerativeArtCanvas() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [artSeed, setArtSeed] = useState(Date.now());
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Clear
+    ctx.fillStyle = '#FAFAFA';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Generate glyphs based on seed
+    const glyphs = ['◆', '○', '△', '□', '◇', '●', '▲', '■', '⬡', '⬢', '◉', '◎'];
+    const colors = ['#0052FF', '#00CCFF', '#F59E0B', '#A855F7', '#22c55e', '#FF6B9D'];
+    
+    const rows = 6;
+    const cols = 4;
+    const cellWidth = canvas.width / cols;
+    const cellHeight = canvas.height / rows;
+
+    ctx.font = '24px monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        const glyphIndex = (artSeed + row * cols + col) % glyphs.length;
+        const colorIndex = (artSeed + row + col) % colors.length;
+        
+        const x = col * cellWidth + cellWidth / 2;
+        const y = row * cellHeight + cellHeight / 2;
+        
+        ctx.fillStyle = colors[colorIndex] + '80';
+        ctx.fillText(glyphs[glyphIndex], x, y);
+      }
+    }
+
+    // Add timestamp signature
+    ctx.font = '8px monospace';
+    ctx.fillStyle = '#CCCCCC';
+    ctx.textAlign = 'right';
+    ctx.fillText(`b0b.dev · ${new Date().toISOString().split('T')[0]}`, canvas.width - 4, canvas.height - 4);
+
+  }, [artSeed]);
+
+  // Regenerate every 30 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setArtSeed(Date.now());
+    }, 30000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="text-center">
+      <canvas 
+        ref={canvasRef}
+        width={120}
+        height={180}
+        className="rounded-lg border border-[#E8E4DE] shadow-sm cursor-pointer hover:shadow-md transition-shadow"
+        style={{ backgroundColor: '#FAFAFA' }}
+        title="Right-click to save"
+      />
+      <p className="text-xs mt-2" style={{ color: '#888888' }}>
+        Data Glyph · {new Date().toLocaleDateString()}
+      </p>
+      <button 
+        onClick={() => setArtSeed(Date.now())}
+        className="text-xs mt-1 px-2 py-1 rounded hover:bg-[#E8E4DE] transition-colors"
+        style={{ color: '#555555' }}
+      >
+        ↻ Generate
+      </button>
     </div>
   );
 }

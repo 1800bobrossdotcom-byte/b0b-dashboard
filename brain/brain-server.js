@@ -54,6 +54,32 @@ const IDEATION_CONFIG = {
   ],
 };
 
+// Media/Audio analysis config — for playlist endeavours
+const MEDIA_CONFIG = {
+  enabled: true,
+  // Audio signal analysis for recordings and videos
+  audioAnalysis: {
+    enabled: true,
+    // Could integrate with: Web Audio API, librosa (Python), or Whisper for transcription
+    supportedFormats: ['mp3', 'wav', 'ogg', 'm4a', 'webm'],
+  },
+  // Playlist research and curation
+  playlists: {
+    sources: [
+      { name: 'spotify', type: 'api' },
+      { name: 'soundcloud', type: 'api' },
+      { name: 'youtube', type: 'crawler' },
+    ],
+    analysisTypes: ['bpm', 'mood', 'energy', 'key', 'genre'],
+  },
+  // Video analysis for visual research
+  videoAnalysis: {
+    enabled: true,
+    // Frame extraction + vision AI
+    supportedFormats: ['mp4', 'webm', 'mov'],
+  },
+};
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -1517,6 +1543,190 @@ Be specific and actionable. What would you change?`;
   } catch (err) {
     console.log('Vision analysis error:', err.message);
     res.status(500).json({ error: err.message });
+  }
+});
+
+// =============================================================================
+// MEDIA & AUDIO ANALYSIS — Playlist endeavours
+// =============================================================================
+
+/**
+ * POST /media/analyze
+ * 
+ * Analyze audio/video media for patterns, mood, signals.
+ * For playlist curation, audio research, video analysis.
+ * 
+ * Body: { 
+ *   url: string,           // URL to audio/video 
+ *   type: 'audio' | 'video',
+ *   analysisType?: string[], // ['bpm', 'mood', 'transcription', 'visual']
+ *   agent?: string 
+ * }
+ */
+app.post('/media/analyze', async (req, res) => {
+  const { url, type = 'audio', analysisType = ['mood'], agent = 'd0t' } = req.body;
+  
+  if (!url) {
+    return res.status(400).json({ error: 'URL required' });
+  }
+  
+  const timestamp = new Date().toISOString();
+  const agentConfig = AGENTS[agent.toLowerCase()] || AGENTS.d0t;
+  
+  // Store analysis request for crawler processing
+  const analysisRequest = {
+    id: `media-${Date.now()}`,
+    url,
+    type,
+    analysisType,
+    agent,
+    status: 'queued',
+    createdAt: timestamp,
+  };
+  
+  // Queue for async processing (crawlers would pick this up)
+  const mediaQueueFile = path.join(DATA_DIR, 'media-queue.json');
+  try {
+    let queue = [];
+    try {
+      const existing = await fs.readFile(mediaQueueFile, 'utf8');
+      queue = JSON.parse(existing);
+    } catch { /* empty queue */ }
+    
+    queue.push(analysisRequest);
+    await fs.writeFile(mediaQueueFile, JSON.stringify(queue, null, 2));
+  } catch (err) {
+    console.log('Media queue error:', err.message);
+  }
+  
+  // Log activity
+  await logActivity({
+    type: 'media_analysis_queued',
+    agent,
+    mediaType: type,
+    url,
+    timestamp,
+  });
+  
+  res.json({
+    success: true,
+    agent: agentConfig.name,
+    emoji: agentConfig.emoji,
+    analysis: analysisRequest,
+    message: 'Media analysis queued for crawler processing',
+    capabilities: {
+      audio: MEDIA_CONFIG.audioAnalysis.supportedFormats,
+      video: MEDIA_CONFIG.videoAnalysis.supportedFormats,
+      analysisTypes: MEDIA_CONFIG.playlists.analysisTypes,
+    },
+  });
+});
+
+/**
+ * GET /media/queue
+ * 
+ * Get pending media analysis queue
+ */
+app.get('/media/queue', async (req, res) => {
+  const mediaQueueFile = path.join(DATA_DIR, 'media-queue.json');
+  try {
+    const data = await fs.readFile(mediaQueueFile, 'utf8');
+    const queue = JSON.parse(data);
+    res.json({
+      total: queue.length,
+      pending: queue.filter(q => q.status === 'queued').length,
+      queue: queue.slice(-20), // Last 20
+    });
+  } catch {
+    res.json({ total: 0, pending: 0, queue: [] });
+  }
+});
+
+/**
+ * POST /playlist/curate
+ * 
+ * Curate a playlist based on mood, theme, or data signals.
+ * Agents research and assemble.
+ * 
+ * Body: {
+ *   theme: string,      // "focus work", "late night trading", "creative flow"
+ *   mood?: string,      // "energetic", "calm", "intense"
+ *   duration?: number,  // Target duration in minutes
+ *   agent?: string
+ * }
+ */
+app.post('/playlist/curate', async (req, res) => {
+  const { theme, mood = 'balanced', duration = 60, agent = 'b0b' } = req.body;
+  
+  if (!theme) {
+    return res.status(400).json({ error: 'Theme required' });
+  }
+  
+  const timestamp = new Date().toISOString();
+  const agentConfig = AGENTS[agent.toLowerCase()] || AGENTS.b0b;
+  
+  // Create playlist curation task
+  const playlist = {
+    id: `playlist-${Date.now()}`,
+    theme,
+    mood,
+    targetDuration: duration,
+    curator: agent,
+    status: 'researching',
+    createdAt: timestamp,
+    tracks: [],
+    sources: MEDIA_CONFIG.playlists.sources.map(s => s.name),
+  };
+  
+  // Store for processing
+  const playlistsFile = path.join(DATA_DIR, 'playlists.json');
+  try {
+    let playlists = [];
+    try {
+      const existing = await fs.readFile(playlistsFile, 'utf8');
+      playlists = JSON.parse(existing);
+    } catch { /* empty */ }
+    
+    playlists.push(playlist);
+    await fs.writeFile(playlistsFile, JSON.stringify(playlists, null, 2));
+  } catch (err) {
+    console.log('Playlist save error:', err.message);
+  }
+  
+  // Log activity
+  await logActivity({
+    type: 'playlist_curation_started',
+    agent,
+    theme,
+    mood,
+    timestamp,
+  });
+  
+  res.json({
+    success: true,
+    agent: agentConfig.name,
+    emoji: agentConfig.emoji,
+    playlist,
+    message: `${agentConfig.name} is curating a ${mood} playlist for "${theme}"`,
+  });
+});
+
+/**
+ * GET /playlists
+ * 
+ * List all curated playlists
+ */
+app.get('/playlists', async (req, res) => {
+  const playlistsFile = path.join(DATA_DIR, 'playlists.json');
+  try {
+    const data = await fs.readFile(playlistsFile, 'utf8');
+    const playlists = JSON.parse(data);
+    res.json({
+      total: playlists.length,
+      playlists: playlists.slice(-10).reverse(), // Last 10, newest first
+    });
+  } catch {
+    res.json({ total: 0, playlists: [] });
   }
 });
 
