@@ -134,31 +134,6 @@ interface Activity {
   market?: string;
 }
 
-interface PaperTraderStatus {
-  running: boolean;
-  portfolio: {
-    startingCapital: number;
-    currentValue: number;
-    invested: number;
-    available: number;
-    totalPnL: number;
-    winRate: number;
-  };
-  positions: Array<{
-    id: string;
-    question: string;
-    side: string;
-    invested: number;
-    entryPrice: number;
-  }>;
-  stats: {
-    totalTrades: number;
-    wins: number;
-    losses: number;
-    startDate: string;
-  };
-}
-
 interface Discussion {
   id: string;
   title: string;
@@ -183,6 +158,21 @@ interface GitRepo {
     author: string;
     date: string;
   }>;
+}
+
+// Trending token from DexScreener
+interface TrendingToken {
+  symbol: string;
+  name: string;
+  address: string;
+  price: number;
+  priceChange24h: number;
+  volume24h: number;
+  liquidity: number;
+  url: string;
+  source: string;
+  tier?: number;
+  boosted?: boolean;
 }
 
 // 🔥 Live Trader interface - Real money trading
@@ -248,7 +238,7 @@ export default function LabsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [brainOnline, setBrainOnline] = useState(false);
-  const [paperTrader, setPaperTrader] = useState<PaperTraderStatus | null>(null);
+  const [trendingTokens, setTrendingTokens] = useState<TrendingToken[]>([]);
   const [liveTrader, setLiveTrader] = useState<LiveTraderStatus | null>(null);
   const [discussions, setDiscussions] = useState<Discussion[]>([]);
   const [gitRepos, setGitRepos] = useState<GitRepo[]>([]);
@@ -274,22 +264,22 @@ export default function LabsPage() {
     return () => clearInterval(interval);
   }, []);
 
-  // Fetch paper trader status
+  // Fetch trending tokens
   useEffect(() => {
-    async function fetchPaperTrader() {
+    async function fetchTrending() {
       try {
-        const res = await fetch(`${BRAIN_URL}/paper-trader`);
+        const res = await fetch(`${BRAIN_URL}/tokens/trending`);
         if (res.ok) {
           const data = await res.json();
-          setPaperTrader(data);
+          setTrendingTokens(data.tokens || []);
         }
       } catch (e) {
-        console.log('Paper trader not reachable');
+        console.log('Trending tokens not reachable');
       }
     }
 
-    fetchPaperTrader();
-    const interval = setInterval(fetchPaperTrader, 60000); // Check every 60s
+    fetchTrending();
+    const interval = setInterval(fetchTrending, 30000); // Refresh every 30s
     return () => clearInterval(interval);
   }, []);
 
@@ -583,71 +573,65 @@ export default function LabsPage() {
           )}
         </section>
 
-        {/* Paper Trader - BRIGHT */}
+        {/* 📈 TRENDING TOKENS — What we're watching */}
         <section className="mb-16">
-          <h2 className="text-xs font-mono mb-6 tracking-wider" style={{ color: '#555555' }}>PAPER TRADER</h2>
+          <h2 className="text-xs font-mono mb-6 tracking-wider flex items-center gap-2">
+            <span style={{ color: '#00AA66' }}>📈 TRENDING TOKENS</span>
+            <span style={{ color: '#555555' }}>— LIVE DISCOVERY FEED</span>
+          </h2>
           
-          <div className="rounded-lg" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E8E4DE' }}>
-            <div className="flex items-center justify-between p-6 border-b" style={{ borderColor: '#E8E4DE' }}>
-              <div>
-                <h3 className="font-medium text-lg" style={{ color: '#1A1A1A' }}>Simulated Trading</h3>
-                <p className="text-sm" style={{ color: '#555555' }}>Zero risk, infinite learning</p>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className={`w-2 h-2 rounded-full ${paperTrader?.running ? 'bg-[#00AA66] animate-pulse' : 'bg-[#888888]'}`} />
-                <span className="text-xs font-mono" style={{ color: '#555555' }}>
-                  {paperTrader?.running ? 'RUNNING' : 'STOPPED'}
-                </span>
-              </div>
+          <div className="rounded-lg overflow-hidden" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E8E4DE' }}>
+            <div className="p-4 border-b" style={{ borderColor: '#E8E4DE', backgroundColor: '#F0FFF4' }}>
+              <p className="text-sm" style={{ color: '#555555' }}>
+                Real-time token discovery from DexScreener. Showing boosted & top volume tokens on Base.
+              </p>
             </div>
-
-            {paperTrader ? (
-              <>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
-                  <div className="p-4 rounded-lg" style={{ backgroundColor: '#F0FFF4' }}>
-                    <p className="text-xs mb-1" style={{ color: '#555555' }}>Starting</p>
-                    <p className="text-lg font-mono" style={{ color: '#1A1A1A' }}>${paperTrader.portfolio.startingCapital.toLocaleString()}</p>
-                  </div>
-                  <div className="p-4 rounded-lg" style={{ backgroundColor: '#F0FFF4' }}>
-                    <p className="text-xs mb-1" style={{ color: '#555555' }}>Current</p>
-                    <p className={`text-lg font-mono ${paperTrader.portfolio.totalPnL >= 0 ? 'text-[#00AA66]' : 'text-[#DC2626]'}`}>
-                      ${paperTrader.portfolio.currentValue.toLocaleString()}
-                    </p>
-                  </div>
-                  <div className="p-4 rounded-lg" style={{ backgroundColor: '#F0FFF4' }}>
-                    <p className="text-xs mb-1" style={{ color: '#555555' }}>P&L</p>
-                    <p className={`text-lg font-mono ${paperTrader.portfolio.totalPnL >= 0 ? 'text-[#00AA66]' : 'text-[#DC2626]'}`}>
-                      {paperTrader.portfolio.totalPnL >= 0 ? '+' : ''}${paperTrader.portfolio.totalPnL.toFixed(2)}
-                    </p>
-                  </div>
-                  <div className="p-4 rounded-lg" style={{ backgroundColor: '#F0FFF4' }}>
-                    <p className="text-xs mb-1" style={{ color: '#555555' }}>Win Rate</p>
-                    <p className="text-lg font-mono" style={{ color: '#1A1A1A' }}>{(paperTrader.portfolio.winRate * 100).toFixed(1)}%</p>
-                  </div>
-                </div>
-
-                {paperTrader.positions.length > 0 && (
-                  <div className="p-4 border-t" style={{ borderColor: '#E8E4DE' }}>
-                    <p className="text-xs mb-3" style={{ color: '#555555' }}>OPEN POSITIONS ({paperTrader.positions.length})</p>
-                    <div className="space-y-2">
-                      {paperTrader.positions.slice(0, 5).map((pos) => (
-                        <div key={pos.id} className="flex items-center justify-between text-sm p-2 rounded" style={{ backgroundColor: '#FFFDF9' }}>
-                          <span className={`font-mono ${pos.side === 'YES' ? 'text-[#00AA66]' : 'text-[#DC2626]'}`}>
-                            {pos.side}
-                          </span>
-                          <span className="flex-1 mx-4 truncate" style={{ color: '#555555' }}>
-                            {pos.question?.slice(0, 50)}...
-                          </span>
-                          <span className="font-mono" style={{ color: '#1A1A1A' }}>${pos.invested}</span>
+            
+            {trendingTokens.length > 0 ? (
+              <div className="divide-y" style={{ borderColor: '#E8E4DE' }}>
+                {trendingTokens.slice(0, 8).map((token, i) => (
+                  <a
+                    key={`${token.symbol}-${i}`}
+                    href={token.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl">{token.boosted ? '🚀' : '🪙'}</span>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold" style={{ color: '#1A1A1A' }}>{token.symbol}</span>
+                          {token.boosted && (
+                            <span className="text-xs px-1.5 py-0.5 rounded" style={{ backgroundColor: '#FF6B0020', color: '#FF6B00' }}>BOOSTED</span>
+                          )}
+                          {token.tier && token.tier <= 2 && (
+                            <span className="text-xs px-1.5 py-0.5 rounded" style={{ backgroundColor: '#0052FF20', color: '#0052FF' }}>T{token.tier}</span>
+                          )}
                         </div>
-                      ))}
+                        <p className="text-xs" style={{ color: '#555555' }}>{token.name}</p>
+                      </div>
                     </div>
-                  </div>
-                )}
-              </>
+                    <div className="text-right">
+                      <p className="font-mono text-sm" style={{ color: '#1A1A1A' }}>
+                        ${token.price < 0.001 ? token.price.toExponential(2) : token.price.toFixed(6)}
+                      </p>
+                      <p className={`text-sm font-medium ${token.priceChange24h >= 0 ? 'text-[#00AA66]' : 'text-[#DC2626]'}`}>
+                        {token.priceChange24h >= 0 ? '+' : ''}{token.priceChange24h.toFixed(1)}%
+                      </p>
+                    </div>
+                  </a>
+                ))}
+              </div>
             ) : (
-              <div className="p-6" style={{ color: '#555555' }}>Loading...</div>
+              <div className="p-6 text-center" style={{ color: '#555555' }}>
+                <p>Loading trending tokens...</p>
+              </div>
             )}
+            
+            <div className="p-3 border-t text-xs text-center" style={{ borderColor: '#E8E4DE', color: '#888888' }}>
+              Data from DexScreener • Refreshes every 30s
+            </div>
           </div>
         </section>
 

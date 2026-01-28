@@ -103,6 +103,52 @@ const TRADING_GOALS: TradingGoal[] = [
 // FETCHERS
 // ════════════════════════════════════════════════════════════════
 
+// Parse Bankr raw response into structured holdings
+// Raw format: "BASEPOST - 52365559.881903580270423943 $692.52\nUSD Coin - 16.954814 $16.95\n..."
+function parseBankrRaw(raw: string): TokenHolding[] {
+  const tokens: TokenHolding[] = [];
+  if (!raw) return tokens;
+  
+  const lines = raw.split('\n').filter(line => line.trim());
+  for (const line of lines) {
+    // Parse format: "TOKEN_NAME - BALANCE $VALUE"
+    const match = line.match(/^(.+?)\s*-\s*([\d.]+)\s*\$?([\d.]+)?/);
+    if (match) {
+      const name = match[1].trim();
+      const balance = parseFloat(match[2]) || 0;
+      const usdValue = parseFloat(match[3]) || 0;
+      
+      // Determine symbol and type from name
+      let symbol = name.toUpperCase().replace(/\s+/g, '');
+      let type: 'native' | 'stablecoin' | 'memecoin' = 'memecoin';
+      
+      if (name.toLowerCase().includes('ethereum') || name.toLowerCase() === 'eth') {
+        symbol = 'ETH';
+        type = 'native';
+      } else if (name.toLowerCase().includes('usd coin') || name.toLowerCase() === 'usdc') {
+        symbol = 'USDC';
+        type = 'stablecoin';
+      } else if (symbol.length > 10) {
+        symbol = symbol.slice(0, 8);
+      }
+      
+      if (balance > 0 || usdValue > 0) {
+        tokens.push({
+          symbol,
+          name,
+          balance,
+          usdValue,
+          chain: 'base',
+          type
+        });
+      }
+    }
+  }
+  
+  // Sort by USD value descending
+  return tokens.sort((a, b) => b.usdValue - a.usdValue);
+}
+
 // Fetch all holdings from brain server (centralized source of truth)
 async function fetchHoldingsFromBrain(): Promise<{
   tokens: TokenHolding[];
@@ -112,88 +158,65 @@ async function fetchHoldingsFromBrain(): Promise<{
   ethPrice: number;
 }> {
   try {
-    const res = await fetch(`${BRAIN_URL}/live-trader/holdings`, {
+    // Try the new /holdings endpoint first (uses Bankr SDK)
+    const holdingsRes = await fetch(`${BRAIN_URL}/holdings`, {
       method: 'GET',
       headers: { 'Accept': 'application/json' },
     });
     
-    if (res.ok) {
-      const data = await res.json();
+    if (holdingsRes.ok) {
+      const holdingsData = await holdingsRes.json();
       
-      const tokens: TokenHolding[] = [];
-      
-      // ETH
-      if (data.holdings?.eth) {
-        tokens.push({
-          symbol: 'ETH',
-          name: 'Ethereum',
-          balance: data.holdings.eth.balance,
-          usdValue: data.holdings.eth.usd,
-          contractAddress: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
-          chain: 'base',
-          type: 'native'
-        });
+      // Parse raw Bankr response if available
+      let tokens: TokenHolding[] = [];
+      if (holdingsData.raw) {
+        tokens = parseBankrRaw(holdingsData.raw);
+      } else if (holdingsData.tokens && holdingsData.tokens.length > 0) {
+        tokens = holdingsData.tokens;
       }
       
-      // USDC
-      if (data.holdings?.usdc) {
-        tokens.push({
-          symbol: 'USDC',
-          name: 'USD Coin',
-          balance: data.holdings.usdc.balance,
-          usdValue: data.holdings.usdc.usd,
-          contractAddress: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
-          chain: 'base',
-          type: 'stablecoin'
-        });
-      }
+      // Also try to get quick holdings for positions
+      let positions: ActivePosition[] = [];
+      let stats: LiveTraderStats = { totalTrades: 0, totalPnL: 0, wins: 0, losses: 0, winRate: 0, dailyVolume: 0, maxDailyVolume: 5 };
       
-      // BNKR
-      if (data.holdings?.bnkr) {
-        tokens.push({
-          symbol: 'BNKR',
-          name: 'Bankr Token',
-          balance: data.holdings.bnkr.balance,
-          usdValue: data.holdings.bnkr.usd,
-          contractAddress: '0xE95Fa14Db9f1B6297Fc93b1c25535e487e24A6A1',
-          chain: 'base',
-          type: 'memecoin',
-          change24h: data.holdings.bnkr.change24h
-        });
-      }
-      
-      // Other memecoins
-      if (data.holdings?.memecoins) {
-        for (const coin of data.holdings.memecoins) {
-          tokens.push({
-            symbol: coin.symbol || '???',
-            name: coin.name || 'Unknown Token',
-            balance: coin.balance || 0,
-            usdValue: coin.usd || 0,
-            contractAddress: coin.address,
-            chain: 'base',
-            type: 'memecoin',
-            change24h: coin.change24h
-          });
+      try {
+        const quickRes = await fetch(`${BRAIN_URL}/holdings/quick`);
+        if (quickRes.ok) {
+          const quickData = await quickRes.json();
+          positions = (quickData.activePositions || []).map((p: Record<string, unknown>) => ({
+            symbol: p.symbol as string,
+            amount: p.amount as number,
+            entryPrice: p.entryPrice as number,
+            currentValue: p.currentValue as number || 0,
+            pnl: p.pnl as number || 0,
+            chain: p.chain as string || 'base'
+          }));
+          
+          if (quickData.stats) {
+            stats = {
+              totalTrades: quickData.stats.totalTrades || 0,
+              totalPnL: quickData.stats.totalPnL || 0,
+              wins: quickData.stats.wins || 0,
+              losses: quickData.stats.losses || 0,
+              winRate: quickData.stats.winRate || 0,
+              dailyVolume: quickData.stats.dailyVolume || 0,
+              maxDailyVolume: quickData.stats.maxDailyVolume || 5
+            };
+          }
         }
-      }
+      } catch {}
       
-      // Active positions from live trader
-      const positions: ActivePosition[] = (data.positions || []).map((p: Record<string, unknown>) => ({
-        symbol: p.symbol as string,
-        amount: p.amount as number,
-        entryPrice: p.entryPrice as number,
-        currentValue: p.currentValue as number,
-        pnl: p.pnl as number,
-        chain: p.chain as string || 'base'
-      }));
+      const totalUsd = tokens.reduce((sum, t) => sum + t.usdValue, 0);
+      const ethToken = tokens.find(t => t.symbol === 'ETH');
+      const ethBalance = ethToken ? Number(ethToken.balance) : 0;
+      const ethPrice = ethBalance > 0 && ethToken?.usdValue ? ethToken.usdValue / ethBalance : 3000;
       
       return {
         tokens,
         positions,
-        stats: data.stats || { totalTrades: 0, totalPnL: 0, wins: 0, losses: 0, winRate: 0, dailyVolume: 0, maxDailyVolume: 5 },
-        totalUsd: data.holdings?.totalUsd || tokens.reduce((sum, t) => sum + t.usdValue, 0),
-        ethPrice: data.holdings?.eth?.price || 3000
+        stats,
+        totalUsd,
+        ethPrice
       };
     }
   } catch (e) {
