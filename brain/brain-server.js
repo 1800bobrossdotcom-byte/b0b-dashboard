@@ -439,21 +439,21 @@ app.get('/live-trader', async (req, res) => {
         chain: p.chain || 'base',
         tier: p.tier,
       })),
-      // New config structure for ecosystem sniper
+      // Config - no min/max entry limits, aggressive qualification
       config: {
         entryPercent: CONFIG.SNIPER?.ENTRY_PERCENT || 0.20,
-        minEntry: CONFIG.SNIPER?.MIN_ENTRY_USD || 5,
-        maxEntry: CONFIG.SNIPER?.MAX_ENTRY_USD || 50,
         maxPositions: CONFIG.MAX_OPEN_POSITIONS,
-        scoreThreshold: 45,
         wageTarget: CONFIG.WAGE?.HOURLY_TARGET_USD || 40,
+        mode: 'aggressive', // No score threshold, multi-path qualification
       },
+      // Data sources
+      dataSources: ['Bankr SDK', 'Clanker API', 'DexScreener', 'Boosted'],
       // Ecosystem focus info
       ecosystem: {
-        focus: ['Top 100 Base', 'Bankr', 'Clanker', 'Clawd', 'AI'],
+        focus: ['Bankr', 'Clanker', 'Clawd', 'AI', 'DexScreener Gainers'],
         tiers: {
-          tier1: ['Bankr', 'Clawd'],
-          tier2: ['AI tokens'],
+          tier1: ['Bankr-deployed', 'Bankr-recommended'],
+          tier2: ['AI tokens', 'Clawd'],
           tier3: ['VIRTUAL', 'AERO', 'DEGEN', 'BRETT', 'TOSHI'],
         },
       },
@@ -470,7 +470,8 @@ app.get('/live-trader', async (req, res) => {
       stats: { totalTrades: 0, totalPnL: 0, wins: 0, losses: 0, winRate: 0, dailyVolume: 0 },
       wage: { hourlyTarget: 40, efficiency: '0%', rating: '🔴 OFFLINE' },
       positions: [],
-      config: { entryPercent: 0.20, minEntry: 5, maxEntry: 50, maxPositions: 5, scoreThreshold: 45 },
+      config: { entryPercent: 0.20, maxPositions: 5, mode: 'aggressive' },
+      dataSources: [],
       ecosystem: { focus: [], tiers: {} },
       lastTick: null,
       lastScan: null

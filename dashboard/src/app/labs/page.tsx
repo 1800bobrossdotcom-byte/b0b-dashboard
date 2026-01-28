@@ -206,11 +206,10 @@ interface LiveTraderStatus {
   }>;
   config: {
     entryPercent: number;
-    minEntry: number;
-    maxEntry: number;
     maxPositions: number;
-    scoreThreshold: number;
+    mode: string;
   };
+  dataSources: string[];
   ecosystem: {
     focus: string[];
     tiers: {
@@ -687,10 +686,13 @@ export default function LabsPage() {
                       BASE
                     </span>
                     <span className="text-xs px-2 py-0.5 rounded" style={{ backgroundColor: '#FF6B0020', color: '#FF6B00' }}>
-                      Entry: {((liveTrader.config?.entryPercent ?? 0.2) * 100).toFixed(0)}% (${liveTrader.config?.minEntry ?? 5}-${liveTrader.config?.maxEntry ?? 50})
+                      Entry: {((liveTrader.config?.entryPercent ?? 0.2) * 100).toFixed(0)}%
+                    </span>
+                    <span className="text-xs px-2 py-0.5 rounded" style={{ backgroundColor: '#DC262620', color: '#DC2626' }}>
+                      {liveTrader.config?.mode?.toUpperCase() ?? 'AGGRESSIVE'}
                     </span>
                     <span className="text-xs px-2 py-0.5 rounded" style={{ backgroundColor: '#00AA6620', color: '#00AA66' }}>
-                      No Volume Limit
+                      No Limits
                     </span>
                   </div>
                 </div>
@@ -781,9 +783,9 @@ export default function LabsPage() {
                       </span>
                     </div>
                     <div>
-                      <span style={{ color: '#555555' }}>Range: </span>
-                      <span className="font-mono" style={{ color: '#1A1A1A' }}>
-                        ${liveTrader.config?.minEntry ?? 5}-${liveTrader.config?.maxEntry ?? 50}
+                      <span style={{ color: '#555555' }}>Mode: </span>
+                      <span className="font-mono" style={{ color: '#DC2626' }}>
+                        {liveTrader.config?.mode?.toUpperCase() ?? 'AGGRESSIVE'}
                       </span>
                     </div>
                     <div>
@@ -795,14 +797,28 @@ export default function LabsPage() {
                       <span className="font-mono" style={{ color: '#1A1A1A' }}>10% holds</span>
                     </div>
                     <div>
-                      <span style={{ color: '#555555' }}>Threshold: </span>
-                      <span className="font-mono" style={{ color: '#00AA66' }}>{liveTrader.config?.scoreThreshold ?? 45}+ score</span>
+                      <span style={{ color: '#555555' }}>Max Positions: </span>
+                      <span className="font-mono" style={{ color: '#0052FF' }}>{liveTrader.config?.maxPositions ?? 3}</span>
                     </div>
                     <div>
                       <span style={{ color: '#555555' }}>Stop: </span>
                       <span className="font-mono text-[#DC2626]">-25%</span>
                     </div>
                   </div>
+                  
+                  {/* Data Sources */}
+                  {liveTrader.dataSources && liveTrader.dataSources.length > 0 && (
+                    <div className="mt-4">
+                      <p className="text-xs mb-2" style={{ color: '#555555' }}>DATA SOURCES</p>
+                      <div className="flex flex-wrap gap-2">
+                        {liveTrader.dataSources.map((source: string, i: number) => (
+                          <span key={i} className="text-xs px-2 py-1 rounded" style={{ backgroundColor: '#F0F7FF', color: '#0052FF' }}>
+                            {source}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {liveTrader.positions.length > 0 && (

@@ -87,12 +87,11 @@ const CONFIG = {
   MIN_LIQUIDITY: 10000,        // Minimum token liquidity
   
   // Blessing Sniper Config (Base chain memecoins)
-  // Entry size is DYNAMIC based on wallet balance
+  // Entry size is DYNAMIC based on wallet balance - NO ARTIFICIAL LIMITS
   SNIPER: {
     // Entry sizing - percentage of available balance
+    // NO MIN/MAX - trade what the signals say, let wallet balance dictate size
     ENTRY_PERCENT: 0.20,       // Use 20% of available balance per trade
-    MIN_ENTRY_USD: 5,          // Minimum $5 entry (micro-trades OK!)
-    MAX_ENTRY_USD: parseInt(process.env.MAX_POSITION_USD) || 50, // Cap at $50
     
     // ════════════════════════════════════════════════════════════════════════
     // MOMENTUM-AWARE EXITS — Ride the wave, lock profits, exit smart
@@ -1046,12 +1045,19 @@ async function blessingSniperTick(state) {
 }
 
 /**
- * SPECTRUM EVALUATION — Not just score threshold
- * Multiple ways to qualify for a trade:
- * 1. High score (45+) = ecosystem play
- * 2. Strong momentum (25%+ growth) with decent score (30+)
- * 3. Volume spike with positive growth
- * 4. Ecosystem token with any positive momentum
+ * SPECTRUM EVALUATION — Multi-signal qualification
+ * AGGRESSIVE MODE: Multiple paths to qualify, low barriers
+ * Data sources: Bankr, Clanker, DexScreener, Boosted
+ * 
+ * Paths:
+ * 1. Bankr recommended (any score)
+ * 2. Ecosystem token (Tier 1/2) with any momentum
+ * 3. Good score (30+) = quality signal
+ * 4. Momentum play (15%+ growth)
+ * 5. Volume spike with growth
+ * 6. Fresh Clanker with traction
+ * 7. Boosted token with growth
+ * 8. Any positive signal combination
  */
 function evaluateTradeQualification(token, score) {
   const priceChange = token.priceChange24h || 0;
@@ -1059,59 +1065,74 @@ function evaluateTradeQualification(token, score) {
   const liquidity = token.liquidity || 0;
   const tier = token.tier || 4;
   
-  // Safety floor - never trade if liquidity is too low
-  if (liquidity < 5000) {
-    return { pass: false, reason: `Liquidity too low ($${(liquidity/1000).toFixed(1)}k < $5k min)` };
+  // Safety floor - need SOME liquidity (lowered to $2k)
+  if (liquidity < 2000) {
+    return { pass: false, reason: `Liquidity too low ($${(liquidity/1000).toFixed(1)}k < $2k min)` };
   }
   
-  // Safety - avoid dumps
-  if (priceChange < -20) {
-    return { pass: false, reason: `Dumping (${priceChange.toFixed(0)}% 24h)` };
+  // Safety - avoid major dumps (but allow dips)
+  if (priceChange < -30) {
+    return { pass: false, reason: `Major dump (${priceChange.toFixed(0)}% 24h)` };
   }
   
   // ════════════════════════════════════════════════════════════════════════════
-  // QUALIFICATION PATHS (multiple ways to qualify)
+  // AGGRESSIVE QUALIFICATION PATHS — Trade more, let momentum decide
   // ════════════════════════════════════════════════════════════════════════════
   
-  // PATH 1: High Score — Ecosystem play (classic threshold)
-  if (score >= 45) {
-    return { pass: true, reason: `High score (${score.toFixed(0)}/100) - ecosystem play` };
+  // PATH 1: BANKR RECOMMENDED — Trust the ecosystem intelligence
+  if (token.bankrRecommended) {
+    return { pass: true, reason: `🏦 Bankr recommended - ecosystem pick` };
   }
   
-  // PATH 2: Tier 1/2 token + ANY positive momentum
-  // Bankr/Clawd/AI ecosystem tokens get benefit of the doubt
-  if (tier <= 2 && priceChange > 0) {
-    return { pass: true, reason: `Ecosystem token (T${tier}) + positive momentum (+${priceChange.toFixed(0)}%)` };
+  // PATH 2: BANKR DEPLOYED — Our ecosystem token
+  if (token.bankrDeployed) {
+    return { pass: true, reason: `🏦 Bankr-deployed token - ecosystem loyalty` };
   }
   
-  // PATH 3: Strong Momentum — Growth trumps score
-  // 25%+ 24h growth with reasonable score (30+) = momentum play
-  if (priceChange >= 25 && score >= 30 && liquidity >= 20000) {
-    return { pass: true, reason: `Strong momentum (+${priceChange.toFixed(0)}%) + decent score (${score.toFixed(0)})` };
+  // PATH 3: Tier 1/2 ecosystem token — Always trade our ecosystem
+  if (tier <= 2) {
+    return { pass: true, reason: `⭐ Ecosystem token (T${tier}) - auto-qualify` };
   }
   
-  // PATH 4: Volume Spike + Positive Growth
-  // High volume ($50k+) with positive price action = something brewing
-  if (volume >= 50000 && priceChange > 10 && score >= 25) {
-    return { pass: true, reason: `Volume spike ($${(volume/1000).toFixed(0)}k) + growth (+${priceChange.toFixed(0)}%)` };
+  // PATH 4: Good Score — Decent signal quality (lowered from 45 to 30)
+  if (score >= 30) {
+    return { pass: true, reason: `📊 Good score (${score.toFixed(0)}/100)` };
   }
   
-  // PATH 5: Top 100 with strong uptrend
-  // Established tokens with 15%+ growth are worth a micro-trade
-  if (token.source === 'top100' && priceChange >= 15 && liquidity >= 50000) {
-    return { pass: true, reason: `Top 100 Base + uptrend (+${priceChange.toFixed(0)}%)` };
+  // PATH 5: Momentum Play — 15%+ growth is tradeable
+  if (priceChange >= 15 && liquidity >= 5000) {
+    return { pass: true, reason: `📈 Momentum (+${priceChange.toFixed(0)}%)` };
   }
   
-  // PATH 6: Fresh Clanker launch with traction
-  // New tokens from Clanker with volume = early momentum play
-  if (token.clanker && volume >= 10000 && priceChange > 0 && liquidity >= 10000) {
-    return { pass: true, reason: `Fresh Clanker + traction ($${(volume/1000).toFixed(0)}k vol, +${priceChange.toFixed(0)}%)` };
+  // PATH 6: Volume Spike — Something brewing
+  if (volume >= 30000 && priceChange > 5) {
+    return { pass: true, reason: `📊 Volume spike ($${(volume/1000).toFixed(0)}k) + growth` };
   }
   
-  // Did not qualify via any path
+  // PATH 7: Fresh Clanker with ANY traction
+  if (token.clanker && volume >= 5000 && priceChange > 0) {
+    return { pass: true, reason: `🤖 Fresh Clanker + traction` };
+  }
+  
+  // PATH 8: Boosted token — Team paid for visibility
+  if (token.boosted && priceChange > 0) {
+    return { pass: true, reason: `🚀 Boosted + positive momentum` };
+  }
+  
+  // PATH 9: Any positive combination — Low bar
+  if (priceChange > 5 && volume >= 10000 && liquidity >= 5000) {
+    return { pass: true, reason: `✨ Positive signals (${priceChange.toFixed(0)}% / $${(volume/1000).toFixed(0)}k vol)` };
+  }
+  
+  // PATH 10: DexScreener momentum pick
+  if (token.source === 'dexscreener' && priceChange >= 10) {
+    return { pass: true, reason: `📊 DexScreener gainer (+${priceChange.toFixed(0)}%)` };
+  }
+  
+  // Did not qualify - but we have very low bars now
   return { 
     pass: false, 
-    reason: `Score ${score.toFixed(0)}/100, ${priceChange > 0 ? '+' : ''}${priceChange.toFixed(0)}% growth - needs stronger signal`
+    reason: `No signal match (${priceChange.toFixed(0)}% / $${(volume/1000).toFixed(0)}k vol / score ${score.toFixed(0)})`
   };
 }
 
@@ -1192,15 +1213,12 @@ function calculateEntrySize(walletBalanceUsd) {
   }
   
   // Calculate entry as percentage of available balance
+  // NO MIN/MAX - pure percentage-based sizing
   let entrySize = walletBalanceUsd * CONFIG.SNIPER.ENTRY_PERCENT;
   
-  // Apply min/max constraints
-  entrySize = Math.max(entrySize, CONFIG.SNIPER.MIN_ENTRY_USD);
-  entrySize = Math.min(entrySize, CONFIG.SNIPER.MAX_ENTRY_USD);
-  
-  // Don't trade if we'd use more than 50% of balance on one trade
-  if (entrySize > walletBalanceUsd * 0.5) {
-    entrySize = walletBalanceUsd * 0.5;
+  // Safety: Don't use more than 30% on one trade
+  if (entrySize > walletBalanceUsd * 0.30) {
+    entrySize = walletBalanceUsd * 0.30;
   }
   
   // Round to 2 decimals
@@ -1212,13 +1230,13 @@ async function executeEntry(token, state) {
   const balance = await bankr.getBalance(true);
   const walletBalanceUsd = balance?.usd || 0;
   
-  // Calculate dynamic entry size based on actual balance
+  // Calculate dynamic entry size based on actual balance - NO MIN/MAX
   const amount = calculateEntrySize(walletBalanceUsd);
   
-  if (amount < CONFIG.SNIPER.MIN_ENTRY_USD) {
-    console.log(`\n   ⚠️ Insufficient balance for ${token.symbol}`);
-    console.log(`      Wallet: $${walletBalanceUsd.toFixed(2)} | Min entry: $${CONFIG.SNIPER.MIN_ENTRY_USD}`);
-    return { success: false, reason: 'insufficient_balance' };
+  if (amount <= 0) {
+    console.log(`\n   ⚠️ No balance available for ${token.symbol}`);
+    console.log(`      Wallet: $${walletBalanceUsd.toFixed(2)}`);
+    return { success: false, reason: 'no_balance' };
   }
   
   console.log(`\n   🎯 ENTERING ${token.symbol}`);
