@@ -132,6 +132,38 @@
         "why": "Smart contract deployment, L2 specifics",
         "source": "https://docs.base.org",
         "status": "ongoing"
+      },
+      {
+        "title": "VCV Rack / Cardinal",
+        "why": "Modular synthesis paradigm - agents as modules, data as patch cables",
+        "source": "https://vcvrack.com, https://cardinal.kx.studio",
+        "status": "studying",
+        "verified": true,
+        "notes": "Open source, active community, GPL3. Perfect metaphor for B0B architecture."
+      },
+      {
+        "title": "TouchDesigner",
+        "why": "Node-based visual programming - data flow visualization inspiration",
+        "source": "https://derivative.ca",
+        "status": "studying",
+        "verified": true,
+        "notes": "Industry standard for real-time visuals. Operator paradigm: CHOP, TOP, SOP, DAT."
+      },
+      {
+        "title": "React Flow",
+        "why": "Build our own node graph UI for Labs page",
+        "source": "https://reactflow.dev",
+        "status": "studying",
+        "verified": true,
+        "notes": "MIT license, 19k+ stars, actively maintained. Used by Stripe, Notion."
+      },
+      {
+        "title": "Tone.js",
+        "why": "Web audio synthesis - could make B0B generate ambient soundscapes",
+        "source": "https://tonejs.github.io",
+        "status": "studying",
+        "verified": true,
+        "notes": "MIT license, professional-grade Web Audio framework."
       }
     ],
     "completed": [],
