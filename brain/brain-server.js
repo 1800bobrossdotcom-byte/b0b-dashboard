@@ -557,14 +557,53 @@ app.get('/holdings', async (req, res) => {
     console.log('   Bankr result status:', result?.status);
     
     if (result.status === 'completed') {
-      // Parse Bankr response for holdings
+      // Parse Bankr raw response into tokens array
+      // Format: "TOKEN_NAME - BALANCE $VALUE\n..."
+      const tokens = [];
+      let totalValueUSD = 0;
+      
+      if (result.response) {
+        const lines = result.response.split('\n').filter(l => l.trim());
+        for (const line of lines) {
+          // Match: "TOKEN - 123.45 $67.89" or "TOKEN - 123.45"
+          const match = line.match(/^(.+?)\s*-\s*([\d.,]+)\s*\$?([\d.,]+)?/);
+          if (match) {
+            const name = match[1].trim();
+            const balance = parseFloat(match[2].replace(/,/g, '')) || 0;
+            const usdValue = parseFloat(match[3]?.replace(/,/g, '') || '0') || 0;
+            
+            // Determine symbol from name
+            let symbol = name.toUpperCase().replace(/\s+/g, '');
+            let type = 'memecoin';
+            
+            if (name.toLowerCase().includes('ethereum') || name.toLowerCase() === 'eth') {
+              symbol = 'ETH';
+              type = 'native';
+            } else if (name.toLowerCase().includes('usd coin') || name.toLowerCase() === 'usdc') {
+              symbol = 'USDC';
+              type = 'stablecoin';
+            } else if (symbol.length > 12) {
+              symbol = symbol.slice(0, 10);
+            }
+            
+            if (balance > 0 || usdValue > 0) {
+              tokens.push({ symbol, name, balance, usdValue, chain: 'base', type });
+              totalValueUSD += usdValue;
+            }
+          }
+        }
+      }
+      
+      // Sort by USD value descending
+      tokens.sort((a, b) => b.usdValue - a.usdValue);
+      
       const holdings = {
         wallet: walletAddress,
         chain: 'base',
         timestamp: new Date().toISOString(),
         raw: result.response,
-        tokens: [],
-        totalValueUSD: 0,
+        tokens: tokens,
+        totalValueUSD: totalValueUSD,
         source: 'bankr-live',
       };
       
