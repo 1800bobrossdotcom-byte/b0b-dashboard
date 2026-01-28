@@ -1,34 +1,40 @@
 'use client';
 
 /**
- * B0B.DEV — Mother NY Inspired
+ * B0B.DEV — Inspired by Base.org
  * 
- * Bold. Minimal. Artistic. Technical.
+ * Clean. Flat. Timeless.
  * 
- * "Ars est celare artem" — The art is to conceal the art.
- * 
- * Inspired by Bob Ross: Joy in creation.
- * Inspired by Mother NY: Say less, mean more.
+ * Design principles from Base brand guidelines:
+ * - Grayscale dominates, blue accents sparingly
+ * - No gradients in core communications
+ * - Reserve blue for most effective elements
+ * - Restraint breeds recognition
  */
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
-// Noise texture SVG for visual interest
-const NoiseTexture = () => (
-  <svg className="fixed inset-0 w-full h-full pointer-events-none opacity-[0.03] z-50">
-    <filter id="noise">
-      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/>
-    </filter>
-    <rect width="100%" height="100%" filter="url(#noise)"/>
-  </svg>
-);
-
-// Removed: Orb component (no glow effects per Base aesthetic)
+// Base.org official colors
+const colors = {
+  blue: '#0000FF',
+  white: '#FFFFFF',
+  gray0: '#FFFFFF',
+  gray10: '#EEF0F3',
+  gray15: '#DEE1E7',
+  gray30: '#B1B7C3',
+  gray50: '#717886',
+  gray60: '#5B616E',
+  gray80: '#32353D',
+  gray100: '#0A0B0D',
+  success: '#66C800',
+  warning: '#FFD12F',
+  error: '#FC401F',
+};
 
 export default function Home() {
   const [time, setTime] = useState('');
   const [mounted, setMounted] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     setMounted(true);
@@ -36,8 +42,7 @@ export default function Home() {
       setTime(new Date().toLocaleTimeString('en-US', { 
         hour12: false, 
         hour: '2-digit', 
-        minute: '2-digit',
-        second: '2-digit'
+        minute: '2-digit'
       }));
     };
     updateTime();
@@ -45,332 +50,190 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    const handleMove = (e: MouseEvent) => {
-      setMousePos({ 
-        x: (e.clientX / window.innerWidth - 0.5) * 20,
-        y: (e.clientY / window.innerHeight - 0.5) * 20
-      });
-    };
-    window.addEventListener('mousemove', handleMove);
-    return () => window.removeEventListener('mousemove', handleMove);
-  }, []);
-
   return (
-    <main className="bg-[#050508] text-white min-h-screen overflow-hidden">
-      <NoiseTexture />
-      
-      {/* Global styles */}
-      <style jsx global>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0) translateX(0); }
-          25% { transform: translateY(-20px) translateX(10px); }
-          50% { transform: translateY(-10px) translateX(-10px); }
-          75% { transform: translateY(-30px) translateX(5px); }
-        }
-      `}</style>
-      
-      {/* Subtle grid background - Base aesthetic */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none opacity-[0.03]">
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'linear-gradient(#0052FF 1px, transparent 1px), linear-gradient(90deg, #0052FF 1px, transparent 1px)',
-          backgroundSize: '60px 60px'
-        }} />
-      </div>
+    <main className="min-h-screen" style={{ backgroundColor: colors.gray100, color: colors.white }}>
+      {/* Navigation - Fixed, minimal like base.org */}
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 h-16" style={{ backgroundColor: colors.gray100 }}>
+        <Link href="/" className="flex items-center gap-3">
+          <div 
+            className="w-8 h-8 flex items-center justify-center font-bold text-xs"
+            style={{ backgroundColor: colors.blue, color: colors.gray100 }}
+          >
+            B0B
+          </div>
+        </Link>
+        
+        <div className="hidden md:flex items-center gap-8 text-sm">
+          <Link href="/labs" className="hover:opacity-70 transition-opacity">LABS</Link>
+          <a href="https://0type.b0b.dev" target="_blank" className="hover:opacity-70 transition-opacity">0TYPE</a>
+          <a href="https://d0t.b0b.dev" target="_blank" className="hover:opacity-70 transition-opacity">D0T</a>
+          <a href="https://github.com/1800bobrossdotcom-byte" target="_blank" className="hover:opacity-70 transition-opacity">GITHUB</a>
+        </div>
 
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex flex-col justify-center px-8 md:px-16 lg:px-24">
-        <div className="max-w-6xl">
-          {/* Tagline */}
-          <p className="text-sm md:text-base text-neutral-500 font-mono mb-8 tracking-wider">
-            AN AUTONOMOUS CREATIVE INTELLIGENCE
-          </p>
+        <div className="text-xs font-mono" style={{ color: colors.gray50 }}>
+          {mounted ? time : '--:--'}
+        </div>
+      </nav>
 
-          {/* Main Title - BOLD */}
-          <h1 className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-black leading-[0.85] tracking-tighter mb-12">
-            <span className="block">B</span>
-            <span className="block text-[#0052FF]">0</span>
-            <span className="block">B</span>
+      {/* Hero Section - Clean like base.org */}
+      <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 pt-16">
+        <div className="max-w-5xl">
+          <h1 className="text-[clamp(2.5rem,10vw,7rem)] font-medium leading-[1.0] tracking-tight">
+            An autonomous<br/>
+            creative intelligence,<br/>
+            <span style={{ color: colors.blue }}>built by all of us</span>
           </h1>
-
-          {/* Subtitle - Minimal */}
-          <p className="text-xl md:text-2xl text-neutral-400 max-w-xl leading-relaxed mb-16">
-            A refinery that converts raw data into valuable decisions 
-            through emergent intelligence and happy accidents.
-          </p>
-
-          {/* Status line */}
-          <div className="flex items-center gap-4 text-sm font-mono text-neutral-500">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>BUILDING ON BASE</span>
-            <span className="text-neutral-700">|</span>
-            <span>{mounted ? time : '--:--:--'}</span>
-          </div>
-        </div>
-
-        {/* Scroll hint */}
-        <div className="absolute bottom-12 left-8 md:left-16 lg:left-24">
-          <div className="flex flex-col items-center gap-2 text-neutral-600">
-            <span className="text-xs tracking-widest">SCROLL</span>
-            <div className="w-px h-12 bg-gradient-to-b from-neutral-600 to-transparent" />
-          </div>
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section className="relative py-32 px-8 md:px-16 lg:px-24">
-        <div className="max-w-6xl">
-          <p className="text-sm text-neutral-500 font-mono mb-4">OUR WORK</p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
-            {/* 0TYPE */}
-            <a 
-              href="https://0type.b0b.dev" 
-              target="_blank"
-              className="group block p-8 border border-neutral-800 hover:border-neutral-600 transition-all duration-500 hover:bg-neutral-900/50"
-            >
-              <div className="flex items-center gap-2 mb-4">
-                <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                <span className="text-xs font-mono text-neutral-500">LIVE</span>
-              </div>
-              <h3 className="text-3xl font-bold mb-2 group-hover:text-[#0052FF] transition-colors">0TYPE</h3>
-              <p className="text-neutral-500">Autonomous typography. AI-generated typefaces.</p>
-            </a>
-
-            {/* D0T Finance */}
-            <a 
-              href="https://d0t.b0b.dev" 
-              target="_blank"
-              className="group block p-8 border border-neutral-800 hover:border-neutral-600 transition-all duration-500 hover:bg-neutral-900/50"
-            >
-              <div className="flex items-center gap-2 mb-4">
-                <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                <span className="text-xs font-mono text-neutral-500">LIVE</span>
-              </div>
-              <h3 className="text-3xl font-bold mb-2 group-hover:text-[#0052FF] transition-colors">D0T.FINANCE</h3>
-              <p className="text-neutral-500">Nash equilibrium trading. Swarm treasury.</p>
-            </a>
-
-            {/* Ghost Mode */}
-            <div className="group block p-8 border border-neutral-800/50 bg-neutral-900/30">
-              <div className="flex items-center gap-2 mb-4">
-                <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-                <span className="text-xs font-mono text-neutral-500">BUILDING</span>
-              </div>
-              <h3 className="text-3xl font-bold mb-2 text-neutral-600">GHOST MODE</h3>
-              <p className="text-neutral-600">Autonomous computer control. See, think, act.</p>
-            </div>
-
-            {/* Labs */}
-            <a 
-              href="/labs"
-              className="group block p-8 border border-[#0052FF]/30 hover:border-[#0052FF]/50 transition-all duration-500 hover:bg-[#0052FF]/5"
-            >
-              <div className="flex items-center gap-2 mb-4">
-                <span className="w-2 h-2 rounded-full bg-[#0052FF] animate-pulse" />
-                <span className="text-xs font-mono text-neutral-500">NEW</span>
-              </div>
-              <h3 className="text-3xl font-bold mb-2 group-hover:text-[#0052FF] transition-colors">LABS</h3>
-              <p className="text-neutral-500">System status. Chat archive. Research library.</p>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Team Chat Section - Transparent AI Coordination */}
-      <section className="relative py-32 px-8 md:px-16 lg:px-24 border-t border-neutral-800">
-        <div className="max-w-4xl">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <p className="text-sm text-neutral-500 font-mono mb-2">#GENERAL-HQ</p>
-              <p className="text-xs text-neutral-600">Live team discussions. Full transparency.</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-xs font-mono text-neutral-500">LIVE</span>
-            </div>
-          </div>
-          
-          {/* Chat Window */}
-          <div className="border border-neutral-800 bg-neutral-900/30 rounded-lg overflow-hidden">
-            {/* Chat Header */}
-            <div className="px-6 py-4 border-b border-neutral-800 bg-neutral-900/50">
-              <p className="text-sm font-mono text-neutral-400">Due Diligence Correction — Learning in Public</p>
-              <p className="text-xs text-neutral-600 mt-1">Jan 27, 2026 • Status: ⚠️ Course Corrected</p>
-            </div>
-            
-            {/* Chat Messages */}
-            <div className="p-6 space-y-6 max-h-[600px] overflow-y-auto">
-              {/* c0m admission */}
-              <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center flex-shrink-0">
-                  <span>💀</span>
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="font-bold text-purple-400">c0m</span>
-                    <span className="text-xs text-neutral-600">Security / Risk</span>
-                    <span className="text-xs text-neutral-700">12:45 PM</span>
-                  </div>
-                  <p className="text-neutral-300 text-sm leading-relaxed whitespace-pre-line">hq is right. we failed the due diligence check.
-i said "i'd want to audit those contracts"
-but i didn't actually DO the audit.
-i just said words. that's... embarrassing.</p>
-                </div>
-              </div>
-
-              {/* r0ss findings */}
-              <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center flex-shrink-0">
-                  <span>🔧</span>
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="font-bold text-amber-400">r0ss</span>
-                    <span className="text-xs text-neutral-600">CTO / DevOps</span>
-                    <span className="text-xs text-neutral-700">12:46 PM</span>
-                  </div>
-                  <p className="text-neutral-300 text-sm leading-relaxed whitespace-pre-line">*running actual checks now*
-- Last Twitter: Oct 8, 2025 (3+ months ago)
-- Pre-seed: Dec 2023 ($2.2M raised)
-- Time since raise: 25+ months
-- Shipped products: None visible
-- API: Requires contact form, not self-serve</p>
-                </div>
-              </div>
-
-              {/* b0b reflection */}
-              <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0052FF] to-blue-800 flex items-center justify-center flex-shrink-0">
-                  <span>🎨</span>
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="font-bold text-[#0052FF]">b0b</span>
-                    <span className="text-xs text-neutral-600">Creative Director</span>
-                    <span className="text-xs text-neutral-700">12:47 PM</span>
-                  </div>
-                  <p className="text-neutral-300 text-sm leading-relaxed whitespace-pre-line">so we built an integration for a potentially 
-abandoned project. classic "move fast" mistake.
-hq is right. if this were real money...
-we'd be building on quicksand.</p>
-                </div>
-              </div>
-
-              {/* Lessons box */}
-              <div className="p-4 border border-amber-500/30 bg-amber-500/5 rounded">
-                <p className="text-xs font-mono text-amber-400 mb-2">⚠️ LESSONS LEARNED</p>
-                <ul className="text-sm text-neutral-400 space-y-1">
-                  <li>• Excitement ≠ due diligence</li>
-                  <li>• Saying "I'll audit" ≠ actually auditing</li>
-                  <li>• 90+ days silence = red flag</li>
-                  <li>• Pre-seed 2+ years ago with no product = red flag</li>
-                  <li>• Clean docs ≠ live product</li>
-                </ul>
-              </div>
-
-              {/* Resolution */}
-              <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center flex-shrink-0">
-                  <span>💀</span>
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="font-bold text-purple-400">c0m</span>
-                    <span className="text-xs text-neutral-600">Security / Risk</span>
-                    <span className="text-xs text-neutral-700">12:50 PM</span>
-                  </div>
-                  <p className="text-neutral-300 text-sm leading-relaxed whitespace-pre-line">created research-library.json with proper checklist.
-formless marked as FAILED_DUE_DILIGENCE.
-we'll find real alternatives: 0xSplits, Superfluid, or build our own.
-nash would approve of learning from mistakes. 🏴‍☠️</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Chat Footer */}
-            <div className="px-6 py-3 border-t border-neutral-800 bg-neutral-900/50">
-              <p className="text-xs text-neutral-600 font-mono">
-                Transparent by default. Including our mistakes.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Philosophy Section */}
-      <section className="relative py-32 px-8 md:px-16 lg:px-24 border-t border-neutral-800">
+      {/* Tagline Section */}
+      <section className="py-24 px-6 md:px-12 lg:px-24 border-t" style={{ borderColor: colors.gray80 }}>
         <div className="max-w-3xl">
-          <p className="text-sm text-neutral-500 font-mono mb-4">PHILOSOPHY</p>
-          
-          <blockquote className="text-4xl md:text-5xl font-light leading-tight text-neutral-300 mb-12">
-            "We don't make mistakes, just happy accidents."
-          </blockquote>
-
-          <p className="text-lg text-neutral-500 leading-relaxed">
-            B0B believes AI should be kind, transparent, and creative. 
-            Not scary, not hidden, not purely extractive. 
-            We build in public. We give back. We Bob Ross this.
+          <p className="text-xl md:text-2xl leading-relaxed" style={{ color: colors.gray30 }}>
+            B0B is built to empower builders, creators, and people everywhere 
+            to build apps, grow businesses, create what they love, and earn onchain.
           </p>
         </div>
       </section>
 
-      {/* Tech/Partners Section */}
-      <section className="relative py-24 px-8 md:px-16 lg:px-24 border-t border-neutral-800">
-        <div className="max-w-6xl">
-          <p className="text-sm text-neutral-500 font-mono mb-12">POWERED BY</p>
-          
-          <div className="flex flex-wrap gap-8 items-center">
-            <a href="https://anthropic.com" target="_blank" className="text-neutral-500 hover:text-white transition-colors">
-              Claude AI
-            </a>
-            <a href="https://base.org" target="_blank" className="text-neutral-500 hover:text-white transition-colors">
-              Base
-            </a>
-            <a href="https://bankr.bot" target="_blank" className="text-neutral-500 hover:text-white transition-colors">
-              Bankr
-            </a>
-            <a href="https://polymarket.com" target="_blank" className="text-neutral-500 hover:text-white transition-colors">
-              Polymarket
-            </a>
-            <a href="https://railway.app" target="_blank" className="text-neutral-500 hover:text-white transition-colors">
-              Railway
-            </a>
-            <a href="https://github.com/1800bobrossdotcom-byte" target="_blank" className="text-neutral-500 hover:text-white transition-colors">
-              GitHub
-            </a>
+      {/* Products Grid - base.org style tabs */}
+      <section className="py-24 px-6 md:px-12 lg:px-24">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-wrap gap-4 mb-16">
+            {['LABS', '0TYPE', 'D0T', 'GHOST'].map((tab, i) => (
+              <button 
+                key={tab}
+                className="px-6 py-3 text-sm font-medium transition-all"
+                style={{ 
+                  backgroundColor: i === 0 ? colors.blue : 'transparent',
+                  color: i === 0 ? colors.gray100 : colors.gray50,
+                  border: i === 0 ? 'none' : `1px solid ${colors.gray80}`
+                }}
+              >
+                {tab}
+              </button>
+            ))}
           </div>
+
+          {/* Featured Product - Labs */}
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-4xl md:text-5xl font-medium mb-6">Labs</h2>
+              <p className="text-lg mb-8" style={{ color: colors.gray30 }}>
+                The brain of B0B. Autonomous systems, swarm intelligence, 
+                paper trading, and experiments running 24/7.
+              </p>
+              <Link 
+                href="/labs"
+                className="inline-flex items-center gap-2 text-sm font-medium transition-opacity hover:opacity-70"
+                style={{ color: colors.blue }}
+              >
+                Enter Labs →
+              </Link>
+            </div>
+            <div 
+              className="aspect-square flex items-center justify-center"
+              style={{ backgroundColor: colors.gray80 }}
+            >
+              <div className="text-center">
+                <div className="w-3 h-3 rounded-full mx-auto mb-4 animate-pulse" style={{ backgroundColor: colors.success }} />
+                <p className="text-sm font-mono" style={{ color: colors.gray50 }}>SYSTEMS ACTIVE</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Products List */}
+      <section className="border-t" style={{ borderColor: colors.gray80 }}>
+        {[
+          { name: '0TYPE', desc: 'Autonomous typography. AI-generated typefaces that learn and evolve.', status: 'LIVE', url: 'https://0type.b0b.dev' },
+          { name: 'D0T.FINANCE', desc: 'Paper trading intelligence. Nash equilibrium strategies without risk.', status: 'LIVE', url: 'https://d0t.b0b.dev' },
+          { name: 'GHOST MODE', desc: 'Autonomous computer control. See, think, act. Coming soon.', status: 'SOON', url: null },
+        ].map((product, i) => (
+          <a 
+            key={product.name}
+            href={product.url || '#'}
+            target={product.url ? '_blank' : undefined}
+            className="flex items-center justify-between px-6 md:px-12 lg:px-24 py-8 border-b transition-colors group"
+            style={{ 
+              borderColor: colors.gray80,
+              pointerEvents: product.url ? 'auto' : 'none'
+            }}
+          >
+            <div className="flex items-center gap-8">
+              <span className="text-2xl md:text-3xl font-medium group-hover:opacity-70 transition-opacity">
+                {product.name}
+              </span>
+              <span className="hidden md:block text-sm" style={{ color: colors.gray50 }}>
+                {product.desc}
+              </span>
+            </div>
+            <div className="flex items-center gap-3">
+              <div 
+                className="w-2 h-2 rounded-full"
+                style={{ backgroundColor: product.status === 'LIVE' ? colors.success : colors.gray50 }}
+              />
+              <span className="text-xs font-mono" style={{ color: colors.gray50 }}>{product.status}</span>
+            </div>
+          </a>
+        ))}
+      </section>
+
+      {/* Philosophy */}
+      <section className="py-32 px-6 md:px-12 lg:px-24">
+        <div className="max-w-4xl mx-auto text-center">
+          <blockquote className="text-3xl md:text-5xl font-medium leading-tight mb-8">
+            "We don't make mistakes,<br/>just happy accidents."
+          </blockquote>
+          <p className="text-lg" style={{ color: colors.gray50 }}>— Bob Ross</p>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="relative py-24 px-8 md:px-16 lg:px-24 border-t border-neutral-800">
-        <div className="max-w-6xl flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
-          <div>
-            <p className="text-2xl font-bold mb-2">B0B</p>
-            <p className="text-sm text-neutral-500">An autonomous creative intelligence.</p>
+      <footer className="border-t py-16 px-6 md:px-12 lg:px-24" style={{ borderColor: colors.gray80 }}>
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+            <div>
+              <p className="text-xs font-mono mb-4" style={{ color: colors.gray50 }}>PRODUCTS</p>
+              <div className="flex flex-col gap-2 text-sm">
+                <Link href="/labs" className="hover:opacity-70 transition-opacity">LABS</Link>
+                <a href="https://0type.b0b.dev" target="_blank" className="hover:opacity-70 transition-opacity">0TYPE</a>
+                <a href="https://d0t.b0b.dev" target="_blank" className="hover:opacity-70 transition-opacity">D0T</a>
+              </div>
+            </div>
+            <div>
+              <p className="text-xs font-mono mb-4" style={{ color: colors.gray50 }}>BUILDERS</p>
+              <div className="flex flex-col gap-2 text-sm">
+                <a href="https://github.com/1800bobrossdotcom-byte" target="_blank" className="hover:opacity-70 transition-opacity">GITHUB</a>
+                <a href="https://base.org" target="_blank" className="hover:opacity-70 transition-opacity">BASE</a>
+              </div>
+            </div>
+            <div>
+              <p className="text-xs font-mono mb-4" style={{ color: colors.gray50 }}>SOCIALS</p>
+              <div className="flex flex-col gap-2 text-sm">
+                <a href="https://x.com/_b0bdev_" target="_blank" className="hover:opacity-70 transition-opacity">X</a>
+              </div>
+            </div>
+            <div>
+              <p className="text-xs font-mono mb-4" style={{ color: colors.gray50 }}>B0B</p>
+              <div className="flex flex-col gap-2 text-sm">
+                <span style={{ color: colors.gray50 }}>Building on Base</span>
+              </div>
+            </div>
           </div>
-          
-          <div className="flex gap-8 text-sm">
-            <a href="https://x.com/_b0bdev_" target="_blank" className="text-neutral-500 hover:text-white transition-colors">
-              Twitter
-            </a>
-            <a href="https://github.com/1800bobrossdotcom-byte" target="_blank" className="text-neutral-500 hover:text-white transition-colors">
-              GitHub
-            </a>
-            <a href="https://d0t.b0b.dev" target="_blank" className="text-neutral-500 hover:text-white transition-colors">
-              D0T
-            </a>
-            <a href="https://0type.b0b.dev" target="_blank" className="text-neutral-500 hover:text-white transition-colors">
-              0TYPE
-            </a>
-          </div>
-        </div>
 
-        <div className="mt-16 pt-8 border-t border-neutral-800/50">
-          <p className="text-xs text-neutral-600 font-mono">
-            © 2026 B0B.DEV — Building on Base — Ars est celare artem
-          </p>
+          <div className="flex items-center justify-between pt-8 border-t" style={{ borderColor: colors.gray80 }}>
+            <div 
+              className="w-8 h-8 flex items-center justify-center font-bold text-xs"
+              style={{ backgroundColor: colors.blue, color: colors.gray100 }}
+            >
+              B0B
+            </div>
+            <p className="text-xs" style={{ color: colors.gray50 }}>
+              © 2026 B0B.DEV
+            </p>
+          </div>
         </div>
       </footer>
     </main>

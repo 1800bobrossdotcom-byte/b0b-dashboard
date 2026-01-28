@@ -2,51 +2,56 @@
  * B0B.DEV Global Styles
  * ═════════════════════
  * 
- * Tenet: Flow Over Force
- * Base styles that let everything breathe.
- * 
- * We're Bob Rossing this. 🎨
+ * Based on Base.org brand guidelines:
+ * - Base Blue: #0000FF (pure RGB blue)
+ * - Grayscale: Gray 0 (#FFFFFF) to Gray 100 (#0A0B0D)
+ * - Flat, clean, no gradients
+ * - Restraint breeds recognition
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Roboto+Mono:wght@300;400;500&display=swap');
 
 @import "tailwindcss";
 
 /* ═══════════════════════════════════════════
-   CSS CUSTOM PROPERTIES — Design Tokens
+   BASE.ORG COLOR SYSTEM
+   Official brand colors from base.org/brand/color
    ═══════════════════════════════════════════ */
 
 :root {
-  /* ═══════════════════════════════════════════
-     THEME SYSTEM — BASE AESTHETIC
-     Vintage tech + minimalism, no glow
-     ═══════════════════════════════════════════ */
+  /* PRIMARY — Base Blue (pure RGB) */
+  --color-blue: #0000FF;
+  --color-cerulean: #3C8AFF;
   
-  /* Primary Theme Color - Base Blue */
-  --color-primary: #0052FF;
-  --color-primary-light: #3B7CFF;
-  --color-primary-dim: #0040CC;
+  /* GRAYSCALE — Official Base grays */
+  --color-gray-0: #FFFFFF;
+  --color-gray-10: #EEF0F3;
+  --color-gray-15: #DEE1E7;
+  --color-gray-30: #B1B7C3;
+  --color-gray-50: #717886;
+  --color-gray-60: #5B616E;
+  --color-gray-80: #32353D;
+  --color-gray-100: #0A0B0D;
   
-  /* Deep Void - True blacks */
-  --color-void: #000000;
-  --color-deep: #0A0A0A;
-  --color-surface: #111111;
-  --color-surface-light: #1A1A1A;
+  /* SECONDARY — Accent colors */
+  --color-green: #66C800;
+  --color-lime: #B6F569;
+  --color-yellow: #FFD12F;
+  --color-red: #FC401F;
+  --color-pink: #FEA8CD;
+  --color-tan: #B8A581;
   
-  /* No glow - clean edges */
-  --color-mind-glow: transparent;
-  --color-mind-pulse: var(--color-primary);
-  
-  /* Accent Colors - Muted, technical */
-  --color-success: #22C55E;
-  --color-warning: #EAB308;
-  --color-error: #EF4444;
-  --color-info: var(--color-primary);
-  
-  /* Text - High contrast */
-  --color-text: #FFFFFF;
-  --color-text-muted: #888888;
-  --color-text-dim: #444444;
+  /* SEMANTIC ALIASES */
+  --color-primary: var(--color-blue);
+  --color-bg: var(--color-gray-100);
+  --color-bg-elevated: var(--color-gray-80);
+  --color-text: var(--color-gray-0);
+  --color-text-muted: var(--color-gray-50);
+  --color-text-dim: var(--color-gray-60);
+  --color-border: var(--color-gray-80);
+  --color-success: var(--color-green);
+  --color-warning: var(--color-yellow);
+  --color-error: var(--color-red);
   
   /* ═══════════════════════════════════════════
      CREATIVE CONTROLS — Animation Settings

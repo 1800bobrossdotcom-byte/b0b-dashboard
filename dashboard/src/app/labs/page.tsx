@@ -16,6 +16,7 @@
 import { useEffect, useState } from 'react';
 import OfficeVisualizer from '@/components/OfficeVisualizer';
 import CCTVWindow from '@/components/CCTVWindow';
+import GameOfLife from '@/components/GameOfLife';
 
 // Brain server URL - Railway production
 const BRAIN_URL = process.env.NEXT_PUBLIC_BRAIN_URL || 'https://b0b-brain-production.up.railway.app';
@@ -248,185 +249,136 @@ export default function LabsPage() {
   };
 
   return (
-    <main className="bg-[#050508] text-white min-h-screen">
-      {/* Header */}
-      <header className="border-b border-neutral-800 px-8 py-6">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-bold">B0B LABS</h1>
-            <p className="text-sm text-neutral-500">Experimental features & system status</p>
+    <main className="min-h-screen" style={{ backgroundColor: '#0A0B0D', color: '#FFFFFF' }}>
+      {/* Navigation - Same as homepage */}
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 h-16" style={{ backgroundColor: '#0A0B0D', borderBottom: '1px solid #32353D' }}>
+        <a href="/" className="flex items-center gap-3">
+          <div 
+            className="w-8 h-8 flex items-center justify-center font-bold text-xs"
+            style={{ backgroundColor: '#0000FF', color: '#0A0B0D' }}
+          >
+            B0B
           </div>
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <span className={`w-2 h-2 rounded-full ${brainOnline ? 'bg-emerald-500 animate-pulse' : 'bg-red-500'}`} />
-              <span className="text-sm font-mono text-neutral-400">
-                {brainOnline ? 'BRAIN ONLINE' : 'BRAIN OFFLINE'}
-              </span>
-            </div>
-            <a href="/" className="text-sm text-neutral-500 hover:text-white">← Back to B0B.DEV</a>
+        </a>
+        
+        <div className="hidden md:flex items-center gap-8 text-sm">
+          <span className="font-medium" style={{ color: '#0000FF' }}>LABS</span>
+          <a href="https://0type.b0b.dev" target="_blank" className="hover:opacity-70 transition-opacity" style={{ color: '#717886' }}>0TYPE</a>
+          <a href="https://d0t.b0b.dev" target="_blank" className="hover:opacity-70 transition-opacity" style={{ color: '#717886' }}>D0T</a>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <span className={`w-2 h-2 rounded-full ${brainOnline ? 'bg-[#66C800] animate-pulse' : 'bg-[#FC401F]'}`} />
+            <span className="text-xs font-mono" style={{ color: '#717886' }}>
+              {brainOnline ? 'ONLINE' : 'OFFLINE'}
+            </span>
           </div>
         </div>
-      </header>
+      </nav>
 
-      <div className="max-w-6xl mx-auto px-8 py-12">
+      {/* Hero */}
+      <section className="pt-32 pb-16 px-6 md:px-12 lg:px-24">
+        <div className="max-w-6xl mx-auto">
+          <h1 className="text-4xl md:text-6xl font-medium mb-4">Labs</h1>
+          <p className="text-xl" style={{ color: '#717886' }}>
+            See inside the machine. System status, experiments, and research.
+          </p>
+        </div>
+      </section>
+
+      <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 pb-24">
         {/* System Status */}
         <section className="mb-16">
-          <h2 className="text-sm font-mono text-neutral-500 mb-6">SYSTEM STATUS</h2>
+          <h2 className="text-xs font-mono mb-6 tracking-wider" style={{ color: '#717886' }}>SYSTEM STATUS</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-px" style={{ backgroundColor: '#32353D' }}>
             {/* Brain Status */}
-            <div className="p-6 border border-neutral-800 bg-neutral-900/30 rounded-lg">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-2xl">🧠</span>
-                <span className="font-bold">Brain Server</span>
-              </div>
-              <p className={`text-lg font-mono ${brainOnline ? 'text-emerald-400' : 'text-red-400'}`}>
+            <div className="p-6" style={{ backgroundColor: '#0A0B0D' }}>
+              <p className="text-xs mb-2" style={{ color: '#717886' }}>BRAIN</p>
+              <p className={`text-2xl font-medium ${brainOnline ? 'text-[#66C800]' : 'text-[#FC401F]'}`}>
                 {brainOnline ? 'ONLINE' : 'OFFLINE'}
               </p>
-              {status?.system?.lastHeartbeat && (
-                <p className="text-xs text-neutral-600 mt-1">
-                  Last: {formatTime(status.system.lastHeartbeat)}
-                </p>
-              )}
             </div>
 
             {/* Agents */}
-            <div className="p-6 border border-neutral-800 bg-neutral-900/30 rounded-lg">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-2xl">👥</span>
-                <span className="font-bold">Agents</span>
-              </div>
-              <div className="flex gap-2 text-xl">
-                <span title="b0b">🎨</span>
-                <span title="r0ss">🔧</span>
-                <span title="c0m">💀</span>
-              </div>
-              <p className="text-xs text-neutral-600 mt-1">3 agents online</p>
+            <div className="p-6" style={{ backgroundColor: '#0A0B0D' }}>
+              <p className="text-xs mb-2" style={{ color: '#717886' }}>AGENTS</p>
+              <p className="text-2xl font-medium">3</p>
             </div>
 
             {/* Discussions */}
-            <div className="p-6 border border-neutral-800 bg-neutral-900/30 rounded-lg">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-2xl">💬</span>
-                <span className="font-bold">Discussions</span>
-              </div>
-              <p className="text-lg font-mono text-neutral-300">
+            <div className="p-6" style={{ backgroundColor: '#0A0B0D' }}>
+              <p className="text-xs mb-2" style={{ color: '#717886' }}>DISCUSSIONS</p>
+              <p className="text-2xl font-medium">
                 {discussions.length || status?.system?.totalDiscussions || 0}
               </p>
-              <p className="text-xs text-neutral-600 mt-1">Total threads</p>
             </div>
 
-            {/* Messages */}
-            <div className="p-6 border border-neutral-800 bg-neutral-900/30 rounded-lg">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-2xl">📝</span>
-                <span className="font-bold">Messages</span>
-              </div>
-              <p className="text-lg font-mono text-neutral-300">
-                {status?.chat?.totalMessages || 0}
-              </p>
-              <p className="text-xs text-neutral-600 mt-1">Archived</p>
+            {/* Uptime */}
+            <div className="p-6" style={{ backgroundColor: '#0A0B0D' }}>
+              <p className="text-xs mb-2" style={{ color: '#717886' }}>MESSAGES</p>
+              <p className="text-2xl font-medium">{status?.chat?.totalMessages || 0}</p>
             </div>
           </div>
         </section>
 
         {/* Office Visualizer */}
         <section className="mb-16">
-          <h2 className="text-sm font-mono text-neutral-500 mb-6">🏢 THE OFFICE</h2>
-          <p className="text-sm text-neutral-400 mb-4">Watch the team work in real-time. Speech bubbles show live activity.</p>
+          <h2 className="text-xs font-mono mb-6 tracking-wider" style={{ color: '#717886' }}>THE OFFICE</h2>
           <OfficeVisualizer />
         </section>
 
         {/* CCTV Window */}
         <section className="mb-16">
-          <h2 className="text-sm font-mono text-neutral-500 mb-6">📹 CCTV FEED</h2>
-          <p className="text-sm text-neutral-400 mb-4">Data-driven visuals. Volatility affects glitch intensity. Sentiment tints the feed.</p>
+          <h2 className="text-xs font-mono mb-6 tracking-wider" style={{ color: '#717886' }}>CCTV FEED</h2>
           <CCTVWindow />
         </section>
 
-        {/* Chat Archive */}
+        {/* Game of Life */}
         <section className="mb-16">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-sm font-mono text-neutral-500">CHAT ARCHIVE</h2>
-            <input
-              type="date"
-              value={selectedDate}
-              onChange={(e) => setSelectedDate(e.target.value)}
-              className="bg-neutral-900 border border-neutral-700 rounded px-3 py-1 text-sm"
-            />
-          </div>
-
-          {loading ? (
-            <div className="text-neutral-500 py-8">Loading archive...</div>
-          ) : threads.length === 0 ? (
-            <div className="text-neutral-500 py-8 text-center border border-neutral-800 rounded-lg">
-              <p className="text-2xl mb-2">📭</p>
-              <p>No archived discussions found</p>
-              <p className="text-xs text-neutral-600 mt-2">
-                {brainOnline 
-                  ? 'Discussions will appear here as they happen'
-                  : 'Brain server offline - connect to see live data'}
-              </p>
-            </div>
-          ) : (
-            <div className="space-y-4">
-              {threads.map((thread) => (
-                <div 
-                  key={thread.id}
-                  className="p-4 border border-neutral-800 bg-neutral-900/30 rounded-lg"
-                >
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-bold">{thread.topic}</h3>
-                    <span className="text-xs text-neutral-600">
-                      {formatTime(thread.timestamp)}
-                    </span>
-                  </div>
-                  <p className="text-sm text-neutral-400">
-                    {thread.messages?.length || 0} messages
-                  </p>
-                </div>
-              ))}
-            </div>
-          )}
+          <h2 className="text-xs font-mono mb-6 tracking-wider" style={{ color: '#717886' }}>CONWAY'S GAME OF LIFE</h2>
+          <p className="text-sm mb-4" style={{ color: '#717886' }}>
+            Emergence from simple rules. A B0B tenet in action.
+          </p>
+          <GameOfLife width={800} height={300} cellSize={6} />
         </section>
 
-        {/* Team Discussions (Stored) */}
+        {/* Team Discussions */}
         <section className="mb-16">
-          <h2 className="text-sm font-mono text-neutral-500 mb-6">📋 TEAM DISCUSSIONS</h2>
+          <h2 className="text-xs font-mono mb-6 tracking-wider" style={{ color: '#717886' }}>DISCUSSIONS</h2>
           
           {discussions.length === 0 ? (
-            <div className="text-neutral-500 py-8 text-center border border-[#0052FF]/30 bg-[#0052FF]/5 rounded-lg">
-              <p className="text-2xl mb-2">📝</p>
-              <p>No discussions logged yet</p>
-              <p className="text-xs text-neutral-600 mt-2">
-                Team planning sessions will appear here
-              </p>
+            <div className="p-8 text-center" style={{ backgroundColor: '#141519', border: '1px solid #32353D' }}>
+              <p style={{ color: '#717886' }}>No discussions logged yet</p>
             </div>
           ) : (
-            <div className="space-y-4">
+            <div className="border-t" style={{ borderColor: '#32353D' }}>
               {discussions.map((disc) => (
-                <div 
+                <a 
                   key={disc.id}
-                  className="p-4 border border-[#0052FF]/30 bg-[#0052FF]/5 rounded-lg hover:border-[#0052FF]/50 transition-colors"
+                  href={`${BRAIN_URL}/discussions/${disc.id}`}
+                  target="_blank"
+                  className="flex items-center justify-between p-6 border-b transition-colors hover:bg-white/5"
+                  style={{ borderColor: '#32353D' }}
                 >
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-bold">{disc.title}</h3>
-                    <div className="flex items-center gap-2">
-                      <span className={`text-xs px-2 py-0.5 rounded ${
-                        disc.status === 'active' ? 'bg-emerald-500/20 text-emerald-400' :
-                        disc.status === 'planning' ? 'bg-amber-500/20 text-amber-400' :
-                        'bg-neutral-500/20 text-neutral-400'
-                      }`}>
-                        {disc.status}
-                      </span>
-                      <span className="text-xs text-neutral-600">{disc.date}</span>
-                    </div>
+                  <div>
+                    <h3 className="font-medium mb-1">{disc.title}</h3>
+                    <p className="text-sm" style={{ color: '#717886' }}>
+                      {disc.participants?.join(', ')} · {disc.messageCount} messages
+                    </p>
                   </div>
-                  <div className="flex items-center gap-4 text-sm text-neutral-400">
-                    <span>👥 {disc.participants?.join(', ')}</span>
-                    <span>💬 {disc.messageCount} messages</span>
+                  <div className="flex items-center gap-4">
+                    <span className={`text-xs px-2 py-1 ${
+                      disc.status === 'active' ? 'bg-[#66C800]/20 text-[#66C800]' :
+                      disc.status === 'planning' ? 'bg-[#FFD12F]/20 text-[#FFD12F]' :
+                      'bg-white/10 text-white/50'
+                    }`}>
+                      {disc.status?.toUpperCase()}
+                    </span>
+                    <span className="text-sm" style={{ color: '#717886' }}>{disc.date}</span>
                   </div>
-                </div>
+                </a>
               ))}
             </div>
           )}
@@ -434,249 +386,140 @@ export default function LabsPage() {
 
         {/* Git Activity */}
         <section className="mb-16">
-          <h2 className="text-sm font-mono text-neutral-500 mb-6">🔗 GIT ACTIVITY</h2>
+          <h2 className="text-xs font-mono mb-6 tracking-wider" style={{ color: '#717886' }}>GIT ACTIVITY</h2>
           
           {gitRepos.length === 0 ? (
-            <div className="text-neutral-500 py-8 text-center border border-neutral-800 rounded-lg">
-              <p className="text-2xl mb-2">📂</p>
-              <p>No git activity fetched yet</p>
-              <p className="text-xs text-neutral-600 mt-2">
-                {brainOnline ? 'Git data will appear after first fetch' : 'Brain server offline'}
-              </p>
+            <div className="p-8 text-center" style={{ backgroundColor: '#141519', border: '1px solid #32353D' }}>
+              <p style={{ color: '#717886' }}>No git activity fetched yet</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid md:grid-cols-2 gap-px" style={{ backgroundColor: '#32353D' }}>
               {gitRepos.map((repo) => (
-                <div 
+                <a 
                   key={repo.name}
-                  className="p-4 border border-neutral-800 bg-neutral-900/30 rounded-lg"
+                  href={`https://github.com/${repo.fullName}`}
+                  target="_blank"
+                  className="p-6 transition-colors hover:bg-white/5"
+                  style={{ backgroundColor: '#0A0B0D' }}
                 >
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-lg">📁</span>
-                    <span className="font-mono font-bold">{repo.name}</span>
-                  </div>
-                  {repo.latestCommit ? (
-                    <div className="bg-black/30 rounded p-3">
-                      <p className="text-xs text-neutral-500 mb-1">Latest commit</p>
-                      <p className="text-sm font-mono text-[#0052FF]">{repo.latestCommit.sha}</p>
-                      <p className="text-sm text-neutral-300 truncate">{repo.latestCommit.message}</p>
-                      <p className="text-xs text-neutral-600 mt-1">
-                        by {repo.latestCommit.author} • {repo.latestCommit.date ? new Date(repo.latestCommit.date).toLocaleString() : ''}
+                  <p className="font-mono font-medium mb-2" style={{ color: '#0000FF' }}>{repo.name}</p>
+                  {repo.latestCommit && (
+                    <>
+                      <p className="text-sm mb-1 truncate">{repo.latestCommit.message}</p>
+                      <p className="text-xs" style={{ color: '#717886' }}>
+                        {repo.latestCommit.author} · {repo.latestCommit.date ? new Date(repo.latestCommit.date).toLocaleDateString() : ''}
                       </p>
-                    </div>
-                  ) : (
-                    <p className="text-sm text-neutral-500">No commits fetched</p>
+                    </>
                   )}
-                  {repo.commits && repo.commits.length > 1 && (
-                    <p className="text-xs text-neutral-600 mt-2">
-                      +{repo.commits.length - 1} more commits
-                    </p>
-                  )}
-                </div>
+                </a>
               ))}
             </div>
           )}
         </section>
 
-        {/* Activity Log */}
-        <section className="mb-16">
-          <h2 className="text-sm font-mono text-neutral-500 mb-6">ACTIVITY LOG</h2>
-          
-          <div className="border border-neutral-800 rounded-lg overflow-hidden">
-            <div className="max-h-64 overflow-y-auto">
-              {activities.length === 0 ? (
-                <div className="p-6 text-neutral-500 text-center">
-                  No activity recorded yet
-                </div>
-              ) : (
-                <table className="w-full text-sm">
-                  <thead className="bg-neutral-900/50 sticky top-0">
-                    <tr>
-                      <th className="text-left px-4 py-2 text-neutral-500">Time</th>
-                      <th className="text-left px-4 py-2 text-neutral-500">Type</th>
-                      <th className="text-left px-4 py-2 text-neutral-500">Details</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {activities.slice().reverse().map((activity, i) => (
-                      <tr key={i} className="border-t border-neutral-800">
-                        <td className="px-4 py-2 text-neutral-600 font-mono text-xs">
-                          {formatTime(activity.timestamp)}
-                        </td>
-                        <td className="px-4 py-2">
-                          <span className={`px-2 py-0.5 rounded text-xs ${
-                            activity.type === 'heartbeat' ? 'bg-emerald-500/20 text-emerald-400' :
-                            activity.type === 'message' ? 'bg-blue-500/20 text-blue-400' :
-                            activity.type === 'discussion_triggered' ? 'bg-purple-500/20 text-purple-400' :
-                            'bg-neutral-500/20 text-neutral-400'
-                          }`}>
-                            {activity.type}
-                          </span>
-                        </td>
-                        <td className="px-4 py-2 text-neutral-400">
-                          {activity.agent && <span>@{activity.agent}</span>}
-                          {activity.topic && <span> — {activity.topic}</span>}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              )}
-            </div>
-          </div>
-        </section>
-
         {/* Paper Trader */}
         <section className="mb-16">
-          <h2 className="text-sm font-mono text-neutral-500 mb-6">📜 PAPER TRADER</h2>
+          <h2 className="text-xs font-mono mb-6 tracking-wider" style={{ color: '#717886' }}>PAPER TRADER</h2>
           
-          <div className="border border-[#0052FF]/30 bg-[#0052FF]/5 rounded-lg p-6">
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-3">
-                <span className="text-3xl">📜</span>
-                <div>
-                  <h3 className="font-bold text-lg">Simulated Trading</h3>
-                  <p className="text-sm text-neutral-500">Zero risk, infinite learning</p>
-                </div>
+          <div style={{ backgroundColor: '#141519', border: '1px solid #32353D' }}>
+            <div className="flex items-center justify-between p-6 border-b" style={{ borderColor: '#32353D' }}>
+              <div>
+                <h3 className="font-medium text-lg">Simulated Trading</h3>
+                <p className="text-sm" style={{ color: '#717886' }}>Zero risk, infinite learning</p>
               </div>
               <div className="flex items-center gap-2">
-                <span className={`w-2 h-2 rounded-full ${paperTrader?.running ? 'bg-emerald-500 animate-pulse' : 'bg-neutral-500'}`} />
-                <span className="text-sm font-mono text-neutral-400">
+                <span className={`w-2 h-2 rounded-full ${paperTrader?.running ? 'bg-[#66C800] animate-pulse' : 'bg-[#717886]'}`} />
+                <span className="text-xs font-mono" style={{ color: '#717886' }}>
                   {paperTrader?.running ? 'RUNNING' : 'STOPPED'}
                 </span>
               </div>
             </div>
 
             {paperTrader ? (
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                <div className="bg-black/30 rounded p-4">
-                  <p className="text-xs text-neutral-500 mb-1">Starting Capital</p>
-                  <p className="text-xl font-mono">${paperTrader.portfolio.startingCapital.toLocaleString()}</p>
+              <>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-px" style={{ backgroundColor: '#32353D' }}>
+                  <div className="p-4" style={{ backgroundColor: '#0A0B0D' }}>
+                    <p className="text-xs mb-1" style={{ color: '#717886' }}>Starting</p>
+                    <p className="text-lg font-mono">${paperTrader.portfolio.startingCapital.toLocaleString()}</p>
+                  </div>
+                  <div className="p-4" style={{ backgroundColor: '#0A0B0D' }}>
+                    <p className="text-xs mb-1" style={{ color: '#717886' }}>Current</p>
+                    <p className={`text-lg font-mono ${paperTrader.portfolio.totalPnL >= 0 ? 'text-[#66C800]' : 'text-[#FC401F]'}`}>
+                      ${paperTrader.portfolio.currentValue.toLocaleString()}
+                    </p>
+                  </div>
+                  <div className="p-4" style={{ backgroundColor: '#0A0B0D' }}>
+                    <p className="text-xs mb-1" style={{ color: '#717886' }}>P&L</p>
+                    <p className={`text-lg font-mono ${paperTrader.portfolio.totalPnL >= 0 ? 'text-[#66C800]' : 'text-[#FC401F]'}`}>
+                      {paperTrader.portfolio.totalPnL >= 0 ? '+' : ''}${paperTrader.portfolio.totalPnL.toFixed(2)}
+                    </p>
+                  </div>
+                  <div className="p-4" style={{ backgroundColor: '#0A0B0D' }}>
+                    <p className="text-xs mb-1" style={{ color: '#717886' }}>Win Rate</p>
+                    <p className="text-lg font-mono">{(paperTrader.portfolio.winRate * 100).toFixed(1)}%</p>
+                  </div>
                 </div>
-                <div className="bg-black/30 rounded p-4">
-                  <p className="text-xs text-neutral-500 mb-1">Current Value</p>
-                  <p className={`text-xl font-mono ${paperTrader.portfolio.totalPnL >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-                    ${paperTrader.portfolio.currentValue.toLocaleString()}
-                  </p>
-                </div>
-                <div className="bg-black/30 rounded p-4">
-                  <p className="text-xs text-neutral-500 mb-1">Total P&L</p>
-                  <p className={`text-xl font-mono ${paperTrader.portfolio.totalPnL >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-                    {paperTrader.portfolio.totalPnL >= 0 ? '+' : ''}${paperTrader.portfolio.totalPnL.toFixed(2)}
-                  </p>
-                </div>
-                <div className="bg-black/30 rounded p-4">
-                  <p className="text-xs text-neutral-500 mb-1">Win Rate</p>
-                  <p className="text-xl font-mono">{(paperTrader.portfolio.winRate * 100).toFixed(1)}%</p>
-                </div>
-              </div>
-            ) : (
-              <div className="text-neutral-500 py-4">Loading paper trader status...</div>
-            )}
 
-            {paperTrader && paperTrader.positions.length > 0 && (
-              <div>
-                <p className="text-xs text-neutral-500 mb-2">OPEN POSITIONS ({paperTrader.positions.length})</p>
-                <div className="space-y-2">
-                  {paperTrader.positions.slice(0, 5).map((pos) => (
-                    <div key={pos.id} className="flex items-center justify-between bg-black/30 rounded px-4 py-2 text-sm">
-                      <span className={`font-mono ${pos.side === 'YES' ? 'text-emerald-400' : 'text-red-400'}`}>
-                        {pos.side}
-                      </span>
-                      <span className="text-neutral-400 flex-1 mx-4 truncate">
-                        {pos.question?.slice(0, 50)}...
-                      </span>
-                      <span className="font-mono">${pos.invested}</span>
+                {paperTrader.positions.length > 0 && (
+                  <div className="p-4 border-t" style={{ borderColor: '#32353D' }}>
+                    <p className="text-xs mb-3" style={{ color: '#717886' }}>OPEN POSITIONS ({paperTrader.positions.length})</p>
+                    <div className="space-y-2">
+                      {paperTrader.positions.slice(0, 5).map((pos) => (
+                        <div key={pos.id} className="flex items-center justify-between text-sm">
+                          <span className={`font-mono ${pos.side === 'YES' ? 'text-[#66C800]' : 'text-[#FC401F]'}`}>
+                            {pos.side}
+                          </span>
+                          <span className="flex-1 mx-4 truncate" style={{ color: '#717886' }}>
+                            {pos.question?.slice(0, 50)}...
+                          </span>
+                          <span className="font-mono">${pos.invested}</span>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              </div>
+                  </div>
+                )}
+              </>
+            ) : (
+              <div className="p-6" style={{ color: '#717886' }}>Loading...</div>
             )}
-
-            <div className="mt-4 pt-4 border-t border-neutral-800 text-xs text-neutral-600">
-              <p>📊 Studying Polymarket every 5 minutes • No real money • Building strategy confidence</p>
-            </div>
           </div>
         </section>
 
-        {/* Experimental Features */}
-        <section>
-          <h2 className="text-sm font-mono text-neutral-500 mb-6">EXPERIMENTAL</h2>
+        {/* Experiments */}
+        <section className="mb-16">
+          <h2 className="text-xs font-mono mb-6 tracking-wider" style={{ color: '#717886' }}>EXPERIMENTS</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-6 border border-amber-500/30 bg-amber-500/5 rounded-lg">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-2xl">🤖</span>
-                <span className="font-bold">Autonomous Mode</span>
-                <span className="text-xs bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded">WIP</span>
-              </div>
-              <p className="text-sm text-neutral-400 mb-4">
-                Agent discussions without human prompting. 
-                Scheduled tasks, webhook triggers, self-directed research.
-              </p>
-              <p className="text-xs text-neutral-600">
-                Status: Brain server built, needs Railway cron setup
-              </p>
-            </div>
-
-            <div className="p-6 border border-[#0052FF]/30 bg-[#0052FF]/5 rounded-lg">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-2xl">📚</span>
-                <span className="font-bold">Research Library</span>
-                <span className="text-xs bg-[#0052FF]/20 text-[#0052FF] px-2 py-0.5 rounded">ALPHA</span>
-              </div>
-              <p className="text-sm text-neutral-400 mb-4">
-                Open-source reference of what we're studying and why.
-                Due diligence checklists, verified sources, evaluations.
-              </p>
-              <a 
-                href="https://github.com/1800bobrossdotcom-byte/b0b-dashboard/blob/main/brain/data/research-library.json"
-                target="_blank"
-                className="text-xs text-[#0052FF] hover:underline"
+          <div className="border-t" style={{ borderColor: '#32353D' }}>
+            {[
+              { name: 'Autonomous Mode', status: 'WIP', desc: 'Agent discussions without human prompting', color: '#FFD12F' },
+              { name: 'Research Library', status: 'ALPHA', desc: 'Due diligence checklists and evaluations', color: '#0000FF' },
+              { name: 'Ghost Mode', status: 'LOCAL', desc: 'Autonomous computer control', color: '#717886' },
+              { name: 'Revenue Sharing', status: 'BLOCKED', desc: 'Researching 0xSplits, Superfluid alternatives', color: '#FC401F' },
+            ].map((exp) => (
+              <div 
+                key={exp.name}
+                className="flex items-center justify-between p-6 border-b"
+                style={{ borderColor: '#32353D' }}
               >
-                View on GitHub →
-              </a>
-            </div>
-
-            <div className="p-6 border border-purple-500/30 bg-purple-500/5 rounded-lg">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-2xl">👻</span>
-                <span className="font-bold">Ghost Mode</span>
-                <span className="text-xs bg-purple-500/20 text-purple-400 px-2 py-0.5 rounded">LOCAL</span>
+                <div>
+                  <h3 className="font-medium mb-1">{exp.name}</h3>
+                  <p className="text-sm" style={{ color: '#717886' }}>{exp.desc}</p>
+                </div>
+                <span 
+                  className="text-xs px-2 py-1"
+                  style={{ backgroundColor: `${exp.color}20`, color: exp.color }}
+                >
+                  {exp.status}
+                </span>
               </div>
-              <p className="text-sm text-neutral-400 mb-4">
-                Autonomous computer control. See, think, act.
-                Currently runs on local Electron app only.
-              </p>
-              <p className="text-xs text-neutral-600">
-                Status: v3 working locally, not deployable
-              </p>
-            </div>
-
-            <div className="p-6 border border-emerald-500/30 bg-emerald-500/5 rounded-lg">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-2xl">🔗</span>
-                <span className="font-bold">Revenue Sharing</span>
-                <span className="text-xs bg-red-500/20 text-red-400 px-2 py-0.5 rounded">BLOCKED</span>
-              </div>
-              <p className="text-sm text-neutral-400 mb-4">
-                Autonomous revenue distribution. Originally planned Formless,
-                failed due diligence. Researching alternatives.
-              </p>
-              <p className="text-xs text-neutral-600">
-                Candidates: 0xSplits, Superfluid, custom Base contract
-              </p>
-            </div>
+            ))}
           </div>
         </section>
 
         {/* Footer */}
-        <footer className="mt-24 pt-8 border-t border-neutral-800 text-center">
-          <p className="text-sm text-neutral-600">
+        <footer className="pt-16 border-t text-center" style={{ borderColor: '#32353D' }}>
+          <p className="text-sm" style={{ color: '#717886' }}>
             B0B LABS — Glass box, not black box
-          </p>
-          <p className="text-xs text-neutral-700 mt-2">
-            "See inside the machine"
           </p>
         </footer>
       </div>
