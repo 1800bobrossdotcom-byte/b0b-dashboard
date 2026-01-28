@@ -1,8 +1,10 @@
 /**
  * D0T.FINANCE — Autonomous Wealth Intelligence
  * 
- * Inspired by 0TYPE minimalism.
- * Cooperative trading, collective wealth.
+ * MATCHING B0B.DEV AESTHETIC:
+ * - Inverted hero (Blue BG, White Text)
+ * - Partners section
+ * - Clean anime style
  */
 
 'use client';
@@ -10,6 +12,26 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import TeamChat from './components/TeamChat';
+
+// ANIME PALETTE — Matching b0b.dev
+const colors = {
+  blue: '#0052FF',
+  black: '#0A0A0A',
+  white: '#FFFFFF',
+  cream: '#FFFAF5',
+  dark: '#111111',
+  textMuted: '#64748B',
+  success: '#00FF88',
+  warning: '#FFD12F',
+  error: '#FC401F',
+};
+
+// Partners
+const PARTNERS = [
+  { name: 'Base', url: 'https://base.org', color: '#0052FF' },
+  { name: 'Bankr', url: 'https://bankr.bot', color: '#0052FF' },
+  { name: 'Polymarket', url: 'https://polymarket.com', color: '#22C55E' },
+];
 
 // ══════════════════════════════════════════════════════════════
 // TYPES
@@ -190,137 +212,142 @@ export default function D0TFinance() {
   return (
     <main className="min-h-screen bg-[#0A0A0A] text-[#FAFAFA]">
       
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-[#2A2A2A] bg-[#0A0A0A]/90 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="text-xl font-mono tracking-tight flex items-center gap-2">
-            <span className={`w-2 h-2 rounded-full ${connected ? 'bg-green-500 animate-pulse' : 'bg-zinc-600'}`} />
-            <span className="font-semibold">D0T</span>
-            <span className="text-[#888]">.FINANCE</span>
-          </Link>
-          
-          <div className="hidden md:flex items-center gap-8 text-sm">
-            <Link href="/dashboard" className="text-[#00CCFF] hover:text-white transition-colors font-medium">Dashboard</Link>
-            <a href="#agents" className="text-[#888] hover:text-white transition-colors">Agents</a>
-            <a href="#terminal" className="text-[#888] hover:text-white transition-colors">Terminal</a>
-            <a href="#portfolio" className="text-[#888] hover:text-white transition-colors">Portfolio</a>
-            <a href="#philosophy" className="text-[#888] hover:text-white transition-colors">Philosophy</a>
+      {/* Navigation - Matching b0b.dev */}
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 h-16"
+           style={{ backgroundColor: colors.white, borderBottom: '2px solid #0052FF' }}>
+        <Link href="/" className="flex items-center gap-3">
+          <div className="w-10 h-10 flex items-center justify-center font-black text-sm"
+               style={{ backgroundColor: colors.blue, color: colors.white }}>
+            D0T
           </div>
-          
-          <div className="flex items-center gap-4">
-            <span className="text-xs font-mono text-[#555] hidden sm:block">by B0B</span>
-            <a 
-              href="https://bankr.bot" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-xs font-mono text-[#0052FF] border border-[#0052FF]/30 px-3 py-1.5 hover:bg-[#0052FF]/10 transition-colors"
-            >
-              POWERED BY BANKR
-            </a>
+        </Link>
+        
+        <div className="hidden md:flex items-center gap-8 text-sm font-medium" style={{ color: colors.black }}>
+          <Link href="/dashboard" className="hover:text-[#0052FF] transition-colors">DASHBOARD</Link>
+          <a href="#agents" className="hover:text-[#0052FF] transition-colors">AGENTS</a>
+          <a href="#terminal" className="hover:text-[#0052FF] transition-colors">TERMINAL</a>
+          <a href="https://b0b.dev" target="_blank" className="hover:text-[#FF6B00] transition-colors">B0B</a>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <span className={`w-2 h-2 rounded-full ${connected ? 'animate-pulse' : ''}`}
+                  style={{ backgroundColor: connected ? colors.success : colors.error }} />
+            <span className="text-xs font-mono" style={{ color: connected ? colors.success : colors.error }}>
+              {connected ? 'LIVE' : 'OFFLINE'}
+            </span>
           </div>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="min-h-screen flex flex-col justify-center pt-16 px-6">
-        <div className="max-w-7xl mx-auto w-full">
-          <p className="text-sm font-mono text-[#888] mb-8 flex items-center gap-3">
-            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            Autonomous wealth intelligence by B0B
-          </p>
+      {/* Hero Section - INVERTED (Blue BG, White Text) */}
+      <section className="min-h-[70vh] flex flex-col justify-center px-6 md:px-12 lg:px-24 pt-20" style={{ backgroundColor: colors.blue }}>
+        <div className="max-w-5xl">
+          <h1 className="text-[clamp(2.5rem,8vw,6rem)] font-black leading-[0.95] tracking-tight" style={{ color: colors.white }}>
+            Nash Equilibrium<br/>
+            Trading Swarm<br/>
+            <span style={{ color: colors.cream }}>5 agents. One goal.</span>
+          </h1>
           
-          <div className="mb-16">
-            <h1 className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-light leading-[0.9] tracking-tight">
-              <span className="block">Bankr-First</span>
-              <span className="block">Architecture.</span>
-              <span className="block text-[#888]">You sign. We build.</span>
-            </h1>
-          </div>
-          
-          {/* Architecture Banner */}
-          <div className="mb-12 p-6 border border-[#0052FF]/30 bg-[#0052FF]/5 rounded-lg">
-            <div className="grid md:grid-cols-4 gap-6">
-              <div className="text-center">
-                <div className="text-3xl mb-2">🧊</div>
-                <div className="font-mono text-sm">COLD</div>
-                <div className="text-xs text-[#555]">Your hardware wallet</div>
+          {/* Live Data Strip */}
+          <div className="mt-10 flex flex-wrap gap-3">
+            {[
+              { icon: '●', label: `$${total.toFixed(0)} balance`, color: colors.success },
+              { icon: '📈', label: `${winRate.toFixed(0)}% win rate`, color: colors.white },
+              { icon: '🤖', label: '5 agents', color: colors.cream },
+            ].map((stat, i) => (
+              <div key={i} className="flex items-center gap-2 px-4 py-2 rounded-full font-mono text-sm font-medium"
+                   style={{ backgroundColor: 'rgba(255,255,255,0.15)', border: '2px solid rgba(255,255,255,0.3)', color: colors.white }}>
+                <span style={{ color: stat.color }}>{stat.icon}</span>
+                <span>{stat.label}</span>
               </div>
-              <div className="text-center">
-                <div className="text-3xl mb-2">🌡️</div>
-                <div className="font-mono text-sm">WARM</div>
-                <div className="text-xs text-[#555]">Your Phantom</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl mb-2">🏦</div>
-                <div className="font-mono text-sm">BANKR</div>
-                <div className="text-xs text-[#555]">TX Builder</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl mb-2">🔐</div>
-                <div className="font-mono text-sm">SECURE</div>
-                <div className="text-xs text-[#555]">No keys stored</div>
-              </div>
-            </div>
-          </div>
-          
-          {/* Stats Row - Live Data */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-[#2A2A2A] pt-8">
-            <div>
-              <p className="text-4xl font-light">${total.toFixed(0)}</p>
-              <p className="text-sm text-[#888]">Paper Balance</p>
-            </div>
-            <div>
-              <p className={`text-4xl font-light ${pnl >= 0 ? 'text-green-500' : 'text-red-500'}`}>
-                {pnl >= 0 ? '+' : ''}${pnl.toFixed(2)}
-              </p>
-              <p className="text-sm text-[#888]">Session P&L</p>
-            </div>
-            <div>
-              <p className="text-4xl font-light">{trades}</p>
-              <p className="text-sm text-[#888]">Trades Today</p>
-            </div>
-            <div>
-              <p className="text-4xl font-light flex items-center gap-2">
-                <span className={`w-2 h-2 rounded-full ${connected ? 'bg-green-500 animate-pulse' : 'bg-zinc-600'}`} />
-                {connected ? 'Live' : '...'}
-              </p>
-              <p className="text-sm text-[#888]">24/7 Autonomous</p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Agents Section */}
-      <section id="agents" className="py-24 px-6 border-t border-[#2A2A2A]">
-        <div className="max-w-7xl mx-auto">
+      {/* PARTNERS — Matching b0b.dev */}
+      <section className="py-12 px-6 md:px-12 lg:px-24" style={{ backgroundColor: colors.white }}>
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-xs font-mono tracking-widest mb-8" style={{ color: colors.textMuted }}>
+            POWERED BY
+          </h2>
+          
+          <div className="flex flex-wrap items-center gap-8">
+            {PARTNERS.map((partner) => (
+              <a 
+                key={partner.name} 
+                href={partner.url} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="font-bold text-lg hover:opacity-70 transition-opacity"
+                style={{ color: partner.color }}
+              >
+                {partner.name}
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Row */}
+      <section className="py-12 px-6 md:px-12 lg:px-24 border-t border-[#E5E5E5]" style={{ backgroundColor: colors.cream }}>
+        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div>
+            <p className="text-4xl font-black" style={{ color: colors.blue }}>${total.toFixed(0)}</p>
+            <p className="text-sm" style={{ color: colors.textMuted }}>Paper Balance</p>
+          </div>
+          <div>
+            <p className={`text-4xl font-black ${pnl >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+              {pnl >= 0 ? '+' : ''}${pnl.toFixed(2)}
+            </p>
+            <p className="text-sm" style={{ color: colors.textMuted }}>Session P&L</p>
+          </div>
+          <div>
+            <p className="text-4xl font-black" style={{ color: colors.black }}>{trades}</p>
+            <p className="text-sm" style={{ color: colors.textMuted }}>Trades</p>
+          </div>
+          <div>
+            <p className="text-4xl font-black flex items-center gap-2" style={{ color: connected ? '#16A34A' : colors.textMuted }}>
+              <span className={`w-3 h-3 rounded-full ${connected ? 'bg-green-500 animate-pulse' : 'bg-zinc-400'}`} />
+              {connected ? 'LIVE' : '...'}
+            </p>
+            <p className="text-sm" style={{ color: colors.textMuted }}>24/7 Status</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Agents Section - Updated styling */}
+      <section id="agents" className="py-24 px-6 md:px-12 lg:px-24" style={{ backgroundColor: colors.white }}>
+        <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-16">
-            <h2 className="text-sm font-mono text-[#888]">The Nash Council</h2>
-            <p className="text-sm text-[#555]">5 cooperative agents</p>
+            <h2 className="text-xs font-mono tracking-widest" style={{ color: colors.textMuted }}>THE NASH COUNCIL</h2>
+            <p className="text-sm" style={{ color: colors.textMuted }}>5 cooperative agents</p>
           </div>
           
           {/* Live Pulse Visualization */}
           {pulse && pulse.phase !== 'OFFLINE' && pulse.phase !== 'IDLE' && (
-            <div className={`mb-12 p-6 border ${pulse.blessing ? 'border-yellow-500/50 bg-yellow-500/5' : 'border-[#2A2A2A] bg-[#141414]'} rounded-lg`}>
+            <div className={`mb-12 p-6 border-2 rounded-lg ${pulse.blessing ? 'border-yellow-500 bg-yellow-50' : 'border-[#E5E5E5] bg-[#FAFAFA]'}`}>
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <span className={`w-3 h-3 rounded-full animate-pulse ${
                     pulse.phase === 'SCANNING' ? 'bg-blue-500' :
                     pulse.phase === 'DELIBERATING' ? 'bg-yellow-500' :
                     pulse.phase === 'DECIDING' ? 'bg-purple-500' :
-                    pulse.phase === 'EXECUTING' ? 'bg-green-500' : 'bg-zinc-500'
+                    pulse.phase === 'EXECUTING' ? 'bg-green-500' : 'bg-zinc-400'
                   }`} />
-                  <span className="text-sm font-mono uppercase">{pulse.phase}</span>
+                  <span className="text-sm font-mono uppercase font-bold" style={{ color: colors.black }}>{pulse.phase}</span>
                   {pulse.blessing && (
-                    <span className="text-xs font-mono text-yellow-500 border border-yellow-500/30 px-2 py-0.5 animate-pulse">
+                    <span className="text-xs font-mono text-yellow-600 border border-yellow-500 px-2 py-0.5 animate-pulse bg-yellow-100">
                       🌟 BLESSING DETECTED
                     </span>
                   )}
                 </div>
-                <span className="text-xs text-[#555]">Cycle {pulse.cycle}</span>
+                <span className="text-xs" style={{ color: colors.textMuted }}>Cycle {pulse.cycle}</span>
               </div>
               
               {pulse.opportunity && (
-                <p className="text-sm text-[#888] mb-4 truncate">
+                <p className="text-sm mb-4 truncate" style={{ color: colors.textMuted }}>
                   {pulse.opportunity}
                 </p>
               )}
@@ -330,23 +357,23 @@ export default function D0TFinance() {
                 {Object.entries(pulse.agents).map(([name, agent]) => (
                   <div 
                     key={name}
-                    className={`p-3 border rounded text-center transition-all duration-300 ${
-                      agent.vote === 'YES' ? 'border-green-500/50 bg-green-500/10' :
-                      agent.vote === 'NO' ? 'border-red-500/50 bg-red-500/10' :
-                      'border-[#2A2A2A] bg-[#0A0A0A] opacity-50'
+                    className={`p-3 border-2 rounded text-center transition-all duration-300 ${
+                      agent.vote === 'YES' ? 'border-green-500 bg-green-50' :
+                      agent.vote === 'NO' ? 'border-red-500 bg-red-50' :
+                      'border-[#E5E5E5] bg-white opacity-50'
                     }`}
                   >
                     <span className="text-xl">{agent.emoji}</span>
-                    <p className="text-xs font-mono mt-1">{name}</p>
+                    <p className="text-xs font-mono mt-1" style={{ color: colors.black }}>{name}</p>
                     {agent.vote && (
                       <p className={`text-xs font-bold mt-1 ${
-                        agent.vote === 'YES' ? 'text-green-500' : 'text-red-500'
+                        agent.vote === 'YES' ? 'text-green-600' : 'text-red-600'
                       }`}>
                         {agent.vote}
                       </p>
                     )}
                     {agent.confidence !== null && (
-                      <p className="text-[10px] text-[#555]">{(agent.confidence * 100).toFixed(0)}%</p>
+                      <p className="text-[10px]" style={{ color: colors.textMuted }}>{(agent.confidence * 100).toFixed(0)}%</p>
                     )}
                   </div>
                 ))}

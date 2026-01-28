@@ -585,7 +585,7 @@ export default function Home() {
           { name: 'LABS', desc: 'Autonomous systems, swarm intelligence, experiments running 24/7.', status: 'LIVE', url: '/labs', accent: colors.blue },
           { name: '0TYPE', desc: 'Autonomous typography. AI-generated typefaces that learn.', status: 'LIVE', url: 'https://0type.b0b.dev', accent: colors.orange },
           { name: 'D0T.FINANCE', desc: 'Paper trading. Nash equilibrium strategies without risk.', status: 'LIVE', url: 'https://d0t.b0b.dev', accent: colors.purple },
-          { name: 'GHOST MODE', desc: 'Autonomous computer control. See, think, act.', status: 'SOON', url: null, accent: colors.darkMuted },
+          { name: 'GHOST MODE', desc: 'Autonomous computer control. See, think, act.', status: 'SOON', url: '/labs', accent: colors.darkMuted },
         ].map((product) => (
           <a 
             key={product.name}
