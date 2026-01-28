@@ -1000,7 +1000,18 @@ async function blessingSniperTick(state) {
     
     console.log(`   ${tierEmoji} ${sourceTag} ${token.symbol}: score ${score.toFixed(0)}/100 | ${priceChange > 0 ? '+' : ''}${priceChange.toFixed(0)}% | $${(volume/1000).toFixed(0)}k vol | $${(liquidity/1000).toFixed(0)}k liq`);
     
-    if (score < 45) continue; // Need 45+ score (ecosystem tokens start at 40-50)
+    // ════════════════════════════════════════════════════════════════════════════
+    // SPECTRUM TRADING: Flexible entry criteria based on multiple signals
+    // Not just score threshold - momentum and growth can qualify too
+    // ════════════════════════════════════════════════════════════════════════════
+    const qualifies = evaluateTradeQualification(token, score);
+    
+    if (!qualifies.pass) {
+      console.log(`      └─ ${qualifies.reason}`);
+      continue;
+    }
+    
+    console.log(`   ✅ QUALIFIED: ${qualifies.reason}`);
     
     // EXECUTE ENTRY
     const entry = await executeEntry(token, state);
@@ -1010,6 +1021,76 @@ async function blessingSniperTick(state) {
       break;
     }
   }
+}
+
+/**
+ * SPECTRUM EVALUATION — Not just score threshold
+ * Multiple ways to qualify for a trade:
+ * 1. High score (45+) = ecosystem play
+ * 2. Strong momentum (25%+ growth) with decent score (30+)
+ * 3. Volume spike with positive growth
+ * 4. Ecosystem token with any positive momentum
+ */
+function evaluateTradeQualification(token, score) {
+  const priceChange = token.priceChange24h || 0;
+  const volume = token.volume24h || 0;
+  const liquidity = token.liquidity || 0;
+  const tier = token.tier || 4;
+  
+  // Safety floor - never trade if liquidity is too low
+  if (liquidity < 5000) {
+    return { pass: false, reason: `Liquidity too low ($${(liquidity/1000).toFixed(1)}k < $5k min)` };
+  }
+  
+  // Safety - avoid dumps
+  if (priceChange < -20) {
+    return { pass: false, reason: `Dumping (${priceChange.toFixed(0)}% 24h)` };
+  }
+  
+  // ════════════════════════════════════════════════════════════════════════════
+  // QUALIFICATION PATHS (multiple ways to qualify)
+  // ════════════════════════════════════════════════════════════════════════════
+  
+  // PATH 1: High Score — Ecosystem play (classic threshold)
+  if (score >= 45) {
+    return { pass: true, reason: `High score (${score.toFixed(0)}/100) - ecosystem play` };
+  }
+  
+  // PATH 2: Tier 1/2 token + ANY positive momentum
+  // Bankr/Clawd/AI ecosystem tokens get benefit of the doubt
+  if (tier <= 2 && priceChange > 0) {
+    return { pass: true, reason: `Ecosystem token (T${tier}) + positive momentum (+${priceChange.toFixed(0)}%)` };
+  }
+  
+  // PATH 3: Strong Momentum — Growth trumps score
+  // 25%+ 24h growth with reasonable score (30+) = momentum play
+  if (priceChange >= 25 && score >= 30 && liquidity >= 20000) {
+    return { pass: true, reason: `Strong momentum (+${priceChange.toFixed(0)}%) + decent score (${score.toFixed(0)})` };
+  }
+  
+  // PATH 4: Volume Spike + Positive Growth
+  // High volume ($50k+) with positive price action = something brewing
+  if (volume >= 50000 && priceChange > 10 && score >= 25) {
+    return { pass: true, reason: `Volume spike ($${(volume/1000).toFixed(0)}k) + growth (+${priceChange.toFixed(0)}%)` };
+  }
+  
+  // PATH 5: Top 100 with strong uptrend
+  // Established tokens with 15%+ growth are worth a micro-trade
+  if (token.source === 'top100' && priceChange >= 15 && liquidity >= 50000) {
+    return { pass: true, reason: `Top 100 Base + uptrend (+${priceChange.toFixed(0)}%)` };
+  }
+  
+  // PATH 6: Fresh Clanker launch with traction
+  // New tokens from Clanker with volume = early momentum play
+  if (token.clanker && volume >= 10000 && priceChange > 0 && liquidity >= 10000) {
+    return { pass: true, reason: `Fresh Clanker + traction ($${(volume/1000).toFixed(0)}k vol, +${priceChange.toFixed(0)}%)` };
+  }
+  
+  // Did not qualify via any path
+  return { 
+    pass: false, 
+    reason: `Score ${score.toFixed(0)}/100, ${priceChange > 0 ? '+' : ''}${priceChange.toFixed(0)}% growth - needs stronger signal`
+  };
 }
 
 // ════════════════════════════════════════════════════════════════════════════
