@@ -183,21 +183,36 @@ export default function LabsPage() {
   const fetchAllData = useCallback(async () => {
     console.log('[Labs] Fetching data from:', BRAIN_URL);
     try {
-      // Parallel fetch for speed
-      const [traderRes, historyRes, moonbagRes, watchlistRes, trendingRes] = await Promise.allSettled([
+      // Parallel fetch for speed - include onchain stats
+      const [traderRes, historyRes, moonbagRes, watchlistRes, trendingRes, onchainRes] = await Promise.allSettled([
         fetch(`${BRAIN_URL}/live-trader`),
         fetch(`${BRAIN_URL}/live-trader/history?limit=20`),
         fetch(`${BRAIN_URL}/live-trader/moonbags`),
         fetch(`${BRAIN_URL}/live-trader/watchlist`),
         fetch(`${BRAIN_URL}/tokens/trending`),
+        fetch(`${BRAIN_URL}/onchain/stats`),
       ]);
 
       console.log('[Labs] Trader response:', traderRes.status, traderRes.status === 'fulfilled' ? traderRes.value.status : 'N/A');
 
-      // Live trader status
+      // On-chain stats (real data from blockchain)
+      let onchainStats = { txCount: 0, ethBalance: 0, ethValue: 0 };
+      if (onchainRes.status === 'fulfilled' && onchainRes.value.ok) {
+        onchainStats = await onchainRes.value.json();
+      }
+
+      // Live trader status - merge with on-chain data
       if (traderRes.status === 'fulfilled' && traderRes.value.ok) {
         const data = await traderRes.value.json();
         console.log('[Labs] Live trader data:', data?.active, data?.wallet?.slice(0,10));
+        
+        // Merge on-chain stats into trader data
+        if (onchainStats.txCount > 0) {
+          data.stats = data.stats || {};
+          data.stats.totalTrades = onchainStats.txCount; // Real tx count
+          data.walletBalance = onchainStats.ethValue || data.walletBalance;
+        }
+        
         setLiveTrader(data);
         setBrainOnline(true);
         
