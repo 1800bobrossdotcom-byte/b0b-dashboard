@@ -660,89 +660,100 @@ async function discoverNewTokens() {
   
   try {
     // ════════════════════════════════════════════════════════════════════════════
-    // STEP 1: Fetch TOP 100 Base tokens by market cap/volume
-    // These are vetted, established tokens - our primary focus
+    // STEP 1: BANKR SDK — Ask Bankr what's trending (native ecosystem intelligence)
+    // Costs $0.10 but gives high-quality curated data from their ecosystem
     // ════════════════════════════════════════════════════════════════════════════
-    console.log(`   📊 Fetching top 100 Base tokens...`);
-    
-    const topTokensRes = await fetch(
-      'https://api.dexscreener.com/latest/dex/search?q=base',
-      { timeout: 15000, headers: { 'Accept': 'application/json' } }
-    );
-    const topTokensData = await topTokensRes.json();
-    
-    // Filter for Base chain and sort by liquidity (proxy for market cap)
-    const basePairs = (topTokensData.pairs || [])
-      .filter(p => p.chainId === 'base')
-      .sort((a, b) => parseFloat(b.liquidity?.usd || 0) - parseFloat(a.liquidity?.usd || 0))
-      .slice(0, 100);
-    
-    console.log(`   📊 Top 100 Base tokens: ${basePairs.length} found`);
-    
-    for (const pair of basePairs) {
-      const symbol = pair.baseToken?.symbol?.toUpperCase() || '';
-      const liquidity = parseFloat(pair.liquidity?.usd || 0);
-      const volume = parseFloat(pair.volume?.h24 || 0);
+    try {
+      console.log(`   🏦 Asking Bankr for trending tokens...`);
       
-      // Minimum $50k liquidity for top 100
-      if (liquidity < 50000) continue;
+      const bankrResult = await bankr.promptAndWait('What are the top trending tokens on Base right now? List the top 10 by volume.');
       
-      // Check if it's an ecosystem token
-      const ecosystemInfo = ECOSYSTEM_TOKENS[symbol];
-      
-      tokens.push({
-        symbol: pair.baseToken?.symbol,
-        name: pair.baseToken?.name,
-        address: pair.baseToken?.address,
-        price: parseFloat(pair.priceUsd || 0),
-        priceChange24h: parseFloat(pair.priceChange?.h24 || 0),
-        volume24h: volume,
-        liquidity: liquidity,
-        pairAddress: pair.pairAddress,
-        dex: pair.dexId,
-        url: pair.url,
-        source: 'top100',
-        tier: ecosystemInfo?.tier || 4,
-        ecosystem: ecosystemInfo?.ecosystem || null,
-        isEcosystemToken: !!ecosystemInfo,
-      });
+      if (bankrResult.status === 'completed' && bankrResult.richData?.length > 0) {
+        console.log(`   🏦 Bankr returned ${bankrResult.richData.length} trending tokens`);
+        
+        for (const item of bankrResult.richData) {
+          // Parse Bankr's rich data format
+          if (item.type === 'token' && item.data) {
+            const tokenData = item.data;
+            const address = tokenData.address || tokenData.contractAddress;
+            
+            if (!address || tokens.find(t => t.address?.toLowerCase() === address?.toLowerCase())) continue;
+            
+            tokens.push({
+              symbol: tokenData.symbol,
+              name: tokenData.name,
+              address: address,
+              price: parseFloat(tokenData.price || 0),
+              priceChange24h: parseFloat(tokenData.priceChange24h || tokenData.change24h || 0),
+              volume24h: parseFloat(tokenData.volume24h || tokenData.volume || 0),
+              liquidity: parseFloat(tokenData.liquidity || 0),
+              source: 'bankr',
+              bankrRecommended: true,
+              tier: 1, // Bankr recommendations get top tier
+              ecosystem: 'bankr',
+            });
+          }
+        }
+      } else {
+        console.log(`   🏦 Bankr: ${bankrResult.response?.substring(0, 100) || 'No structured data'}...`);
+      }
+    } catch (e) {
+      console.log(`   ⚠️ Bankr trending check skipped: ${e.message}`);
     }
     
     // ════════════════════════════════════════════════════════════════════════════
-    // STEP 2: CLANKER — Fresh deployments (Bankr/Clawd ecosystem priority)
-    // Lower liquidity threshold but ONLY if from trusted deployers
+    // STEP 2: CLANKER API — Filter for BANKR-DEPLOYED tokens specifically
+    // These are tokens deployed via Bankr bot - our core ecosystem
     // ════════════════════════════════════════════════════════════════════════════
     try {
-      console.log(`   🤖 Checking Clanker ecosystem...`);
+      console.log(`   🤖 Fetching Bankr-deployed tokens from Clanker...`);
       
       const clankerRes = await fetch(
         'https://www.clanker.world/api/tokens',
-        { timeout: 10000, headers: { 'Accept': 'application/json' } }
+        { timeout: 15000, headers: { 'Accept': 'application/json' } }
       );
       const clankerData = await clankerRes.json();
-      const clankerTokens = clankerData.data || [];
+      const allClankers = clankerData.data || [];
       
-      // Look at tokens from the last 24 hours
+      // Filter for BANKR-deployed tokens (social_context.interface === 'Bankr')
+      const bankrDeployedTokens = allClankers.filter(t => 
+        t.social_context?.interface === 'Bankr' ||
+        t.description?.toLowerCase().includes('bankr') ||
+        t.cast_hash === 'bankr deployment'
+      );
+      
+      // Also get recent tokens (last 24h) for fresh opportunities
       const oneDayAgo = Date.now() - (24 * 60 * 60 * 1000);
-      const recentClankers = clankerTokens.filter(t => {
+      const recentTokens = allClankers.filter(t => {
         const deployedAt = new Date(t.deployed_at || t.created_at).getTime();
         return deployedAt > oneDayAgo;
       });
       
-      console.log(`   🤖 Clanker: ${recentClankers.length} tokens in last 24h`);
+      console.log(`   🏦 Bankr-deployed: ${bankrDeployedTokens.length} tokens`);
+      console.log(`   🤖 Recent Clanker: ${recentTokens.length} tokens (24h)`);
       
-      // Count ecosystem tokens
+      // Process Bankr-deployed tokens FIRST (priority)
+      const processedAddresses = new Set();
       let bankrCount = 0, clawdCount = 0, aiCount = 0;
       
-      for (const token of recentClankers.slice(0, 20)) {
+      // Combine: Bankr tokens + recent tokens, dedupe
+      const tokensToProcess = [
+        ...bankrDeployedTokens.slice(0, 30), // More Bankr tokens
+        ...recentTokens.slice(0, 20)
+      ];
+      
+      for (const token of tokensToProcess) {
         try {
-          // Skip if already added
-          if (tokens.find(t => t.address?.toLowerCase() === token.contract_address?.toLowerCase())) continue;
+          const address = token.contract_address?.toLowerCase();
+          if (!address || processedAddresses.has(address)) continue;
+          if (tokens.find(t => t.address?.toLowerCase() === address)) continue;
           
-          // Check ecosystem affiliation
+          processedAddresses.add(address);
+          
+          // Check ecosystem affiliation from Clanker metadata
           const isBankrDeployed = token.social_context?.interface === 'Bankr' ||
-                                   token.name?.toLowerCase().includes('bankr') ||
-                                   token.description?.toLowerCase().includes('bankr');
+                                   token.description?.toLowerCase().includes('bankr') ||
+                                   token.cast_hash === 'bankr deployment';
           const isClawdDeployed = token.name?.toLowerCase().includes('clawd') || 
                                    token.name?.toLowerCase().includes('claude') ||
                                    token.description?.toLowerCase().includes('clawd');
@@ -754,7 +765,7 @@ async function discoverNewTokens() {
           if (isClawdDeployed) clawdCount++;
           if (isAIToken) aiCount++;
           
-          // Get DexScreener data
+          // Get DexScreener data for price/volume
           const pairRes = await fetch(
             `https://api.dexscreener.com/latest/dex/tokens/${token.contract_address}`,
             { timeout: 5000, headers: { 'Accept': 'application/json' } }
@@ -767,8 +778,8 @@ async function discoverNewTokens() {
           const liquidity = parseFloat(basePair.liquidity?.usd || 0);
           const volume = parseFloat(basePair.volume?.h24 || 0);
           
-          // Lower threshold for ecosystem tokens ($5k), higher for others ($20k)
-          const minLiquidity = (isBankrDeployed || isClawdDeployed || isAIToken) ? 5000 : 20000;
+          // LOWER threshold for Bankr ecosystem ($2k), moderate for others ($10k)
+          const minLiquidity = isBankrDeployed ? 2000 : (isClawdDeployed || isAIToken) ? 5000 : 10000;
           if (liquidity < minLiquidity) continue;
           
           tokens.push({
@@ -789,20 +800,83 @@ async function discoverNewTokens() {
             isAIToken: isAIToken,
             tier: isBankrDeployed ? 1 : isClawdDeployed ? 1 : isAIToken ? 2 : 3,
             description: token.description,
+            socialContext: token.social_context,
           });
         } catch (e) {
           // Skip individual token errors
         }
       }
       
-      console.log(`   🏦 Bankr ecosystem: ${bankrCount} | 🧠 Clawd: ${clawdCount} | 🤖 AI: ${aiCount}`);
+      console.log(`   ✅ Processed: 🏦 ${bankrCount} Bankr | 🧠 ${clawdCount} Clawd | 🤖 ${aiCount} AI`);
       
     } catch (e) {
       console.log(`   ⚠️ Clanker check failed: ${e.message}`);
     }
     
     // ════════════════════════════════════════════════════════════════════════════
-    // STEP 3: Boosted tokens (marketing spend = team commitment)
+    // STEP 3: DexScreener TOP GAINERS — Momentum plays on established tokens
+    // Query specific categories for more tokens
+    // ════════════════════════════════════════════════════════════════════════════
+    try {
+      console.log(`   📊 Fetching DexScreener top gainers...`);
+      
+      // Query multiple terms to get diverse results
+      const searchTerms = ['WETH', 'USDC', 'virtual', 'ai agent', 'meme'];
+      
+      for (const term of searchTerms) {
+        try {
+          const res = await fetch(
+            `https://api.dexscreener.com/latest/dex/search?q=${encodeURIComponent(term)}`,
+            { timeout: 10000, headers: { 'Accept': 'application/json' } }
+          );
+          const data = await res.json();
+          
+          // Filter for Base chain, sort by 24h change (gainers)
+          const basePairs = (data.pairs || [])
+            .filter(p => p.chainId === 'base' && parseFloat(p.priceChange?.h24 || 0) > 10)
+            .sort((a, b) => parseFloat(b.priceChange?.h24 || 0) - parseFloat(a.priceChange?.h24 || 0))
+            .slice(0, 10);
+          
+          for (const pair of basePairs) {
+            const address = pair.baseToken?.address?.toLowerCase();
+            if (!address || tokens.find(t => t.address?.toLowerCase() === address)) continue;
+            
+            const liquidity = parseFloat(pair.liquidity?.usd || 0);
+            const volume = parseFloat(pair.volume?.h24 || 0);
+            
+            // Minimum $20k liquidity for DexScreener picks
+            if (liquidity < 20000) continue;
+            
+            const symbol = pair.baseToken?.symbol?.toUpperCase() || '';
+            const ecosystemInfo = ECOSYSTEM_TOKENS[symbol];
+            
+            tokens.push({
+              symbol: pair.baseToken?.symbol,
+              name: pair.baseToken?.name,
+              address: pair.baseToken?.address,
+              price: parseFloat(pair.priceUsd || 0),
+              priceChange24h: parseFloat(pair.priceChange?.h24 || 0),
+              volume24h: volume,
+              liquidity: liquidity,
+              pairAddress: pair.pairAddress,
+              dex: pair.dexId,
+              url: pair.url,
+              source: 'dexscreener',
+              tier: ecosystemInfo?.tier || 4,
+              ecosystem: ecosystemInfo?.ecosystem || null,
+              isEcosystemToken: !!ecosystemInfo,
+            });
+          }
+        } catch (e) {
+          // Skip individual search errors
+        }
+      }
+    } catch (e) {
+      console.log(`   ⚠️ DexScreener gainers check failed: ${e.message}`);
+    }
+    
+    // ════════════════════════════════════════════════════════════════════════════
+    // STEP 4: Boosted tokens (marketing spend = team commitment)
     // ════════════════════════════════════════════════════════════════════════════
     try {
       const boostRes = await fetch(
@@ -816,9 +890,8 @@ async function discoverNewTokens() {
       
       console.log(`   🚀 Boosted tokens: ${baseBoosted.length} on Base`);
       
-      for (const boost of baseBoosted.slice(0, 10)) {
+      for (const boost of baseBoosted.slice(0, 15)) {
         try {
-          // Skip if already added
           if (tokens.find(t => t.address?.toLowerCase() === boost.tokenAddress?.toLowerCase())) continue;
           
           const pairRes = await fetch(
@@ -863,13 +936,17 @@ async function discoverNewTokens() {
     console.log(`   ⚠️ Token discovery error: ${error.message}`);
   }
   
-  // Sort by tier first (ecosystem priority), then by volume
+  // Sort by tier first (ecosystem priority), then by 24h gain (momentum)
   tokens.sort((a, b) => {
     if (a.tier !== b.tier) return a.tier - b.tier; // Lower tier = higher priority
-    return (b.volume24h || 0) - (a.volume24h || 0);
+    return (b.priceChange24h || 0) - (a.priceChange24h || 0); // Then by momentum
   });
   
   console.log(`   ✅ Found ${tokens.length} potential Base tokens`);
+  console.log(`      🏦 Bankr: ${tokens.filter(t => t.bankrDeployed || t.bankrRecommended).length}`);
+  console.log(`      🤖 Clanker: ${tokens.filter(t => t.clanker).length}`);
+  console.log(`      📊 DexScreener: ${tokens.filter(t => t.source === 'dexscreener').length}`);
+  console.log(`      🚀 Boosted: ${tokens.filter(t => t.boosted).length}`);
   
   return tokens;
 }
@@ -914,9 +991,10 @@ async function blessingSniperTick(state) {
   
   // Track scan stats for dashboard
   state.lastScan = {
-    top100: candidates.filter(t => t.source === 'top100').length,
+    bankr: candidates.filter(t => t.bankrDeployed || t.bankrRecommended).length,
     clanker: candidates.filter(t => t.clanker).length,
-    bankr: candidates.filter(t => t.bankrDeployed).length,
+    dexscreener: candidates.filter(t => t.source === 'dexscreener').length,
+    boosted: candidates.filter(t => t.boosted).length,
     clawd: candidates.filter(t => t.clawdDeployed).length,
     ai: candidates.filter(t => t.isAIToken).length,
     candidates: candidates.length,

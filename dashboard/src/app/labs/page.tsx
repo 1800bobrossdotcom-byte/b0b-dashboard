@@ -221,9 +221,10 @@ interface LiveTraderStatus {
   };
   lastTick: string | null;
   lastScan: {
-    top100: number;
-    clanker: number;
     bankr: number;
+    clanker: number;
+    dexscreener: number;
+    boosted: number;
     clawd: number;
     ai: number;
     candidates: number;
@@ -697,30 +698,34 @@ export default function LabsPage() {
                 {/* Last Scan Stats */}
                 {liveTrader.lastScan && (
                   <div className="p-4 border-b" style={{ borderColor: '#E8E4DE' }}>
-                    <p className="text-xs mb-2" style={{ color: '#FF6B00' }}>LAST SCAN</p>
-                    <div className="grid grid-cols-3 md:grid-cols-6 gap-2 text-xs">
-                      <div className="p-2 rounded text-center" style={{ backgroundColor: '#F0F7FF' }}>
-                        <p style={{ color: '#555555' }}>Top 100</p>
-                        <p className="font-mono font-medium" style={{ color: '#0052FF' }}>{liveTrader.lastScan.top100}</p>
-                      </div>
-                      <div className="p-2 rounded text-center" style={{ backgroundColor: '#FFF0F0' }}>
-                        <p style={{ color: '#555555' }}>Clanker</p>
-                        <p className="font-mono font-medium" style={{ color: '#DC2626' }}>{liveTrader.lastScan.clanker}</p>
-                      </div>
+                    <p className="text-xs mb-2" style={{ color: '#FF6B00' }}>LAST SCAN — Data Sources</p>
+                    <div className="grid grid-cols-3 md:grid-cols-7 gap-2 text-xs">
                       <div className="p-2 rounded text-center" style={{ backgroundColor: '#FFF8F0' }}>
-                        <p style={{ color: '#555555' }}>Bankr</p>
+                        <p style={{ color: '#555555' }}>🏦 Bankr</p>
                         <p className="font-mono font-medium" style={{ color: '#FF6B00' }}>{liveTrader.lastScan.bankr}</p>
                       </div>
+                      <div className="p-2 rounded text-center" style={{ backgroundColor: '#FFF0F0' }}>
+                        <p style={{ color: '#555555' }}>🤖 Clanker</p>
+                        <p className="font-mono font-medium" style={{ color: '#DC2626' }}>{liveTrader.lastScan.clanker}</p>
+                      </div>
+                      <div className="p-2 rounded text-center" style={{ backgroundColor: '#F0F7FF' }}>
+                        <p style={{ color: '#555555' }}>📊 DexScr</p>
+                        <p className="font-mono font-medium" style={{ color: '#0052FF' }}>{liveTrader.lastScan.dexscreener || 0}</p>
+                      </div>
+                      <div className="p-2 rounded text-center" style={{ backgroundColor: '#FEFCE8' }}>
+                        <p style={{ color: '#555555' }}>🚀 Boost</p>
+                        <p className="font-mono font-medium" style={{ color: '#CA8A04' }}>{liveTrader.lastScan.boosted || 0}</p>
+                      </div>
                       <div className="p-2 rounded text-center" style={{ backgroundColor: '#F0FFF4' }}>
-                        <p style={{ color: '#555555' }}>Clawd</p>
+                        <p style={{ color: '#555555' }}>🧠 Clawd</p>
                         <p className="font-mono font-medium" style={{ color: '#00AA66' }}>{liveTrader.lastScan.clawd}</p>
                       </div>
                       <div className="p-2 rounded text-center" style={{ backgroundColor: '#F5F0FF' }}>
-                        <p style={{ color: '#555555' }}>AI</p>
+                        <p style={{ color: '#555555' }}>🤖 AI</p>
                         <p className="font-mono font-medium" style={{ color: '#8B5CF6' }}>{liveTrader.lastScan.ai}</p>
                       </div>
                       <div className="p-2 rounded text-center" style={{ backgroundColor: '#FFFBEB' }}>
-                        <p style={{ color: '#555555' }}>Candidates</p>
+                        <p style={{ color: '#555555' }}>📦 Total</p>
                         <p className="font-mono font-medium" style={{ color: '#F59E0B' }}>{liveTrader.lastScan.candidates}</p>
                       </div>
                     </div>
