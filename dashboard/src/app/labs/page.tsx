@@ -115,6 +115,37 @@ interface GitRepo {
   }>;
 }
 
+// 🔥 Live Trader interface - Real money trading
+interface LiveTraderStatus {
+  active: boolean;
+  wallet: string;
+  chain: string;
+  stats: {
+    totalTrades: number;
+    totalPnL: number;
+    wins: number;
+    losses: number;
+    winRate: number;
+    dailyVolume: number;
+    maxDailyVolume: number;
+  };
+  positions: Array<{
+    symbol: string;
+    entryPrice: number;
+    amount: number;
+    targetPrice: number;
+    stopPrice: number;
+    enteredAt: string;
+    strategy: string;
+  }>;
+  config: {
+    maxPosition: number;
+    maxDaily: number;
+    maxPositions: number;
+  };
+  lastTick: string | null;
+}
+
 export default function LabsPage() {
   const [status, setStatus] = useState<SystemStatus | null>(null);
   const [threads, setThreads] = useState<Thread[]>([]);
@@ -124,6 +155,7 @@ export default function LabsPage() {
   const [error, setError] = useState<string | null>(null);
   const [brainOnline, setBrainOnline] = useState(false);
   const [paperTrader, setPaperTrader] = useState<PaperTraderStatus | null>(null);
+  const [liveTrader, setLiveTrader] = useState<LiveTraderStatus | null>(null);
   const [discussions, setDiscussions] = useState<Discussion[]>([]);
   const [gitRepos, setGitRepos] = useState<GitRepo[]>([]);
 
@@ -164,6 +196,25 @@ export default function LabsPage() {
 
     fetchPaperTrader();
     const interval = setInterval(fetchPaperTrader, 60000); // Check every 60s
+    return () => clearInterval(interval);
+  }, []);
+
+  // 🔥 Fetch LIVE trader status (real money)
+  useEffect(() => {
+    async function fetchLiveTrader() {
+      try {
+        const res = await fetch(`${BRAIN_URL}/live-trader`);
+        if (res.ok) {
+          const data = await res.json();
+          setLiveTrader(data);
+        }
+      } catch (e) {
+        console.log('Live trader not reachable');
+      }
+    }
+
+    fetchLiveTrader();
+    const interval = setInterval(fetchLiveTrader, 30000); // Check every 30s (more frequent for live)
     return () => clearInterval(interval);
   }, []);
 
@@ -481,6 +532,135 @@ export default function LabsPage() {
               </>
             ) : (
               <div className="p-6" style={{ color: '#717886' }}>Loading...</div>
+            )}
+          </div>
+        </section>
+
+        {/* 🔥 LIVE TRADER - Real Money */}
+        <section className="mb-16">
+          <h2 className="text-xs font-mono mb-6 tracking-wider flex items-center gap-2">
+            <span style={{ color: '#F59E0B' }}>🔥 LIVE TRADER</span>
+            <span style={{ color: '#717886' }}>— REAL MONEY</span>
+          </h2>
+          
+          <div style={{ backgroundColor: '#141519', border: '1px solid #F59E0B40' }}>
+            <div className="flex items-center justify-between p-6 border-b" style={{ borderColor: '#F59E0B40' }}>
+              <div>
+                <h3 className="font-medium text-lg" style={{ color: '#F59E0B' }}>Blessing Sniper</h3>
+                <p className="text-sm" style={{ color: '#717886' }}>
+                  Daoist observer • No emotion, full intuition
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className={`w-2 h-2 rounded-full ${liveTrader?.active ? 'bg-[#F59E0B] animate-pulse' : 'bg-[#717886]'}`} />
+                <span className="text-xs font-mono" style={{ color: liveTrader?.active ? '#F59E0B' : '#717886' }}>
+                  {liveTrader?.active ? 'ACTIVE' : 'OFFLINE'}
+                </span>
+              </div>
+            </div>
+
+            {liveTrader ? (
+              <>
+                {/* Wallet Info */}
+                <div className="p-4 border-b" style={{ borderColor: '#32353D', backgroundColor: '#0A0B0D' }}>
+                  <p className="text-xs mb-1" style={{ color: '#717886' }}>WALLET</p>
+                  <a 
+                    href={`https://basescan.org/address/${liveTrader.wallet}`}
+                    target="_blank"
+                    className="font-mono text-sm hover:underline"
+                    style={{ color: '#0000FF' }}
+                  >
+                    {liveTrader.wallet.slice(0, 10)}...{liveTrader.wallet.slice(-8)}
+                  </a>
+                  <span className="text-xs ml-2 px-2 py-0.5 rounded" style={{ backgroundColor: '#0000FF20', color: '#0000FF' }}>
+                    {liveTrader.chain.toUpperCase()}
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-px" style={{ backgroundColor: '#32353D' }}>
+                  <div className="p-4" style={{ backgroundColor: '#0A0B0D' }}>
+                    <p className="text-xs mb-1" style={{ color: '#717886' }}>Trades</p>
+                    <p className="text-lg font-mono">{liveTrader.stats.totalTrades}</p>
+                  </div>
+                  <div className="p-4" style={{ backgroundColor: '#0A0B0D' }}>
+                    <p className="text-xs mb-1" style={{ color: '#717886' }}>P&L</p>
+                    <p className={`text-lg font-mono ${liveTrader.stats.totalPnL >= 0 ? 'text-[#66C800]' : 'text-[#FC401F]'}`}>
+                      {liveTrader.stats.totalPnL >= 0 ? '+' : ''}${liveTrader.stats.totalPnL.toFixed(2)}
+                    </p>
+                  </div>
+                  <div className="p-4" style={{ backgroundColor: '#0A0B0D' }}>
+                    <p className="text-xs mb-1" style={{ color: '#717886' }}>Win Rate</p>
+                    <p className="text-lg font-mono">{(liveTrader.stats.winRate * 100).toFixed(1)}%</p>
+                  </div>
+                  <div className="p-4" style={{ backgroundColor: '#0A0B0D' }}>
+                    <p className="text-xs mb-1" style={{ color: '#717886' }}>Daily Vol</p>
+                    <p className="text-lg font-mono">${liveTrader.stats.dailyVolume.toFixed(0)}/{liveTrader.stats.maxDailyVolume}</p>
+                  </div>
+                </div>
+
+                {/* Strategy Details */}
+                <div className="p-4 border-t" style={{ borderColor: '#32353D' }}>
+                  <p className="text-xs mb-3" style={{ color: '#F59E0B' }}>STRATEGY: BLESSING SNIPER</p>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+                    <div>
+                      <span style={{ color: '#717886' }}>Entry: </span>
+                      <span className="font-mono">${liveTrader.config.maxPosition}</span>
+                    </div>
+                    <div>
+                      <span style={{ color: '#717886' }}>Exit: </span>
+                      <span className="font-mono">90% @ 2x</span>
+                    </div>
+                    <div>
+                      <span style={{ color: '#717886' }}>Moonbag: </span>
+                      <span className="font-mono">10% holds</span>
+                    </div>
+                    <div>
+                      <span style={{ color: '#717886' }}>Retrigger: </span>
+                      <span className="font-mono">@ 5x</span>
+                    </div>
+                    <div>
+                      <span style={{ color: '#717886' }}>Stop: </span>
+                      <span className="font-mono text-[#FC401F]">-25%</span>
+                    </div>
+                    <div>
+                      <span style={{ color: '#717886' }}>Time Exit: </span>
+                      <span className="font-mono">48h</span>
+                    </div>
+                  </div>
+                </div>
+
+                {liveTrader.positions.length > 0 && (
+                  <div className="p-4 border-t" style={{ borderColor: '#32353D' }}>
+                    <p className="text-xs mb-3" style={{ color: '#F59E0B' }}>OPEN POSITIONS ({liveTrader.positions.length})</p>
+                    <div className="space-y-2">
+                      {liveTrader.positions.map((pos, i) => (
+                        <div key={i} className="flex items-center justify-between text-sm p-2" style={{ backgroundColor: '#0A0B0D' }}>
+                          <span className="font-mono font-medium" style={{ color: '#F59E0B' }}>
+                            {pos.symbol}
+                          </span>
+                          <span style={{ color: '#717886' }}>
+                            ${pos.amount} @ ${pos.entryPrice.toFixed(6)}
+                          </span>
+                          <span className="font-mono text-xs" style={{ color: '#66C800' }}>
+                            → ${pos.targetPrice.toFixed(6)}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {liveTrader.lastTick && (
+                  <div className="p-3 border-t text-xs" style={{ borderColor: '#32353D', color: '#717886' }}>
+                    Last scan: {new Date(liveTrader.lastTick).toLocaleString()}
+                  </div>
+                )}
+              </>
+            ) : (
+              <div className="p-6" style={{ color: '#717886' }}>
+                <p>Connecting to live trader...</p>
+                <p className="text-xs mt-2">Wallet: 0xd06Aa956CEDA935060D9431D8B8183575c41072d</p>
+              </div>
             )}
           </div>
         </section>

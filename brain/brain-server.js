@@ -732,6 +732,71 @@ app.get('/swarm', async (req, res) => {
   });
 });
 
+// =============================================================================
+// 🔥 LIVE TRADER ENDPOINTS — Real Trading Status
+// =============================================================================
+
+app.get('/live-trader', async (req, res) => {
+  try {
+    const { loadState, CONFIG } = require('./live-trader.js');
+    const state = await loadState();
+    
+    res.json({
+      active: state.active,
+      wallet: CONFIG.PHANTOM_WALLET,
+      chain: CONFIG.CHAIN,
+      stats: {
+        totalTrades: state.totalTrades,
+        totalPnL: state.totalPnL,
+        wins: state.wins,
+        losses: state.losses,
+        winRate: state.totalTrades > 0 ? state.wins / state.totalTrades : 0,
+        dailyVolume: state.dailyVolume,
+        maxDailyVolume: CONFIG.MAX_DAILY_VOLUME,
+      },
+      positions: state.positions.map(p => ({
+        symbol: p.symbol,
+        entryPrice: p.entryPrice,
+        amount: p.amount,
+        targetPrice: p.targetPrice,
+        stopPrice: p.stopPrice,
+        enteredAt: p.enteredAt,
+        strategy: p.strategy,
+      })),
+      config: {
+        maxPosition: CONFIG.MAX_POSITION_USD,
+        maxDaily: CONFIG.MAX_DAILY_VOLUME,
+        maxPositions: CONFIG.MAX_OPEN_POSITIONS,
+        sniper: CONFIG.SNIPER,
+      },
+      lastTick: state.lastTick,
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message, active: false });
+  }
+});
+
+app.get('/live-trader/history', async (req, res) => {
+  try {
+    const historyFile = path.join(DATA_DIR, 'live-trade-history.json');
+    const data = await fs.readFile(historyFile, 'utf8');
+    const history = JSON.parse(data);
+    res.json({ trades: history.slice(-50), total: history.length });
+  } catch {
+    res.json({ trades: [], total: 0 });
+  }
+});
+
+app.get('/live-trader/moonbags', async (req, res) => {
+  try {
+    const { loadMoonbags } = require('./live-trader.js');
+    const moonbags = await loadMoonbags();
+    res.json(moonbags);
+  } catch {
+    res.json({ positions: [], totalValue: 0 });
+  }
+});
+
 app.get('/swarm/:strategy', async (req, res) => {
   const state = await loadSwarmState();
   const trader = state.traders[req.params.strategy];
@@ -1069,6 +1134,7 @@ app.listen(PORT, async () => {
   console.log(`  Status: ONLINE`);
   console.log(`  Agents: ${Object.keys(AGENTS).join(', ')}`);
   console.log(`  Paper Trader: STARTING...`);
+  console.log(`  Live Trader: STARTING...`);
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   
   // Initial heartbeat
@@ -1101,6 +1167,30 @@ app.listen(PORT, async () => {
   await swarmTick();
   setInterval(swarmTick, 2 * 60 * 1000);
   console.log('  🐝 Paper Swarm: RUNNING (4 strategies, 2min)');
+  
+  // ════════════════════════════════════════════════════════════════════════════
+  // 🔥 LIVE TRADER — Real money, real trades
+  // ════════════════════════════════════════════════════════════════════════════
+  try {
+    const { liveTraderTick, CONFIG } = require('./live-trader.js');
+    
+    console.log('');
+    console.log('  🔥 LIVE TRADER INITIALIZING');
+    console.log(`     Wallet: ${CONFIG.PHANTOM_WALLET}`);
+    console.log(`     Max Position: $${CONFIG.MAX_POSITION_USD}`);
+    console.log(`     Daily Limit: $${CONFIG.MAX_DAILY_VOLUME}`);
+    
+    // Initial tick
+    await liveTraderTick();
+    
+    // Run every 3 minutes (faster than paper, we want those snipes)
+    setInterval(liveTraderTick, 3 * 60 * 1000);
+    
+    await logActivity({ type: 'live_trader', action: 'auto_started', wallet: CONFIG.PHANTOM_WALLET });
+    console.log('  🔥 LIVE TRADER: ACTIVE (3min intervals)');
+  } catch (err) {
+    console.log(`  ⚠️ Live Trader not started: ${err.message}`);
+  }
 });
 
 module.exports = app;

@@ -1,0 +1,75 @@
+{
+  "title": "Trading Architecture Learnings - 2026-01-28",
+  "session": "critical-clarification",
+  "participants": ["HQ", "b0b"],
+  "timestamp": "2026-01-28T07:00:00.000Z",
+  "summary": "Clarified the difference between Paper Trading (simulation) and Live Trading (real money via Bankr)",
+  
+  "key_learnings": [
+    {
+      "topic": "Paper vs Live Trading",
+      "insight": "The 'paper swarm' in brain-server.js is SIMULATION ONLY with virtual money ($10K-$40K). This is for learning and strategy validation. LIVE trading requires Bankr integration for actual on-chain transactions.",
+      "action": "Created live-trader.js with real Bankr integration"
+    },
+    {
+      "topic": "Wallet Architecture",
+      "insight": "Our Phantom wallet 0xd06Aa956CEDA935060D9431D8B8183575c41072d is the trading wallet. Bankr handles signing - we never store private keys. This is BY DESIGN for security.",
+      "action": "Wallet is now connected to live-trader.js"
+    },
+    {
+      "topic": "Blessing Sniper Strategy",
+      "insight": "HQ requested a Daoist observer strategy: no emotion, full intuition. Early into new tokens, ride momentum, disciplined exit. 90% exit at 2x, 10% moonbag holds. Retrigger at 5x. Hard stop at -25%. Time exit at 48h.",
+      "parameters": {
+        "entry_size": "$50",
+        "exit_percent": "90%",
+        "target": "2x",
+        "moonbag": "10%",
+        "retrigger": "5x",
+        "stop_loss": "-25%",
+        "time_exit": "48 hours"
+      }
+    },
+    {
+      "topic": "Self-Funding Goals",
+      "insight": "Consistent sniper wins are for team self-funding and bills. Not about greed - about sustainability and independence.",
+      "importance": "critical"
+    }
+  ],
+  
+  "files_modified": [
+    "brain/live-trader.js - NEW: Real trading via Bankr",
+    "brain/brain-server.js - Added live trader integration + endpoints",
+    "dashboard/src/app/labs/page.tsx - Added Live Trader UI section"
+  ],
+  
+  "trading_setup": {
+    "paper_trading": {
+      "file": "brain/brain-server.js (paperTraderTick, swarmTick)",
+      "capital": "Virtual $10K-$40K",
+      "purpose": "Strategy testing, no risk",
+      "markets": "Polymarket"
+    },
+    "live_trading": {
+      "file": "brain/live-trader.js",
+      "wallet": "0xd06Aa956CEDA935060D9431D8B8183575c41072d",
+      "chain": "Base (8453)",
+      "signing": "Bankr API (bk_UQTZFYQEYDVVFDUXRJJG2TQGNTG5QVB6)",
+      "limits": {
+        "max_position": "$100",
+        "max_daily": "$500",
+        "max_open": 5
+      },
+      "strategy": "Blessing Sniper"
+    }
+  },
+  
+  "endpoints": {
+    "/paper-trader": "Simulated trading status",
+    "/swarm": "Paper swarm multi-strategy status",
+    "/live-trader": "REAL trading status (NEW)",
+    "/live-trader/history": "Real trade history",
+    "/live-trader/moonbags": "Moonbag positions held"
+  },
+  
+  "philosophical_note": "HQ described this as 'Daoist observer' trading - no emotion, full intuition. We observe, we act when the moment is right, we exit with discipline. Like painting - not every stroke needs to be dramatic, but each one should be intentional."
+}
