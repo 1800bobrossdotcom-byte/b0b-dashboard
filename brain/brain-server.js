@@ -306,6 +306,197 @@ app.get('/research', async (req, res) => {
 });
 
 // =============================================================================
+// PAPER TRADER INTEGRATION
+// =============================================================================
+
+const PAPER_PORTFOLIO_FILE = path.join(__dirname, '..', 'b0b-finance', 'paper-portfolio.json');
+const PAPER_HISTORY_FILE = path.join(__dirname, '..', 'b0b-finance', 'paper-history.json');
+const POLYMARKET_DATA = path.join(DATA_DIR, 'polymarket.json');
+
+// Paper trader state
+let paperTraderRunning = false;
+let paperTraderInterval = null;
+
+// Load paper portfolio
+async function loadPaperPortfolio() {
+  try {
+    const data = await fs.readFile(PAPER_PORTFOLIO_FILE, 'utf8');
+    return JSON.parse(data);
+  } catch {
+    return {
+      capital: 10000,
+      positions: [],
+      totalTrades: 0,
+      wins: 0,
+      losses: 0,
+      totalPnL: 0,
+      startDate: new Date().toISOString(),
+    };
+  }
+}
+
+async function savePaperPortfolio(portfolio) {
+  await fs.writeFile(PAPER_PORTFOLIO_FILE, JSON.stringify(portfolio, null, 2));
+}
+
+// Simple thesis generation
+function generateThesis(market) {
+  const price = parseFloat(market.outcomePrices?.[0] || 0.5);
+  let confidence = 0.5;
+  let side = 'YES';
+  let reasoning = 'Neutral baseline';
+  
+  // Contrarian on extremes
+  if (price < 0.15) {
+    confidence = 0.60;
+    side = 'YES';
+    reasoning = 'Extreme underpricing, potential mean reversion';
+  } else if (price > 0.85) {
+    confidence = 0.60;
+    side = 'NO';
+    reasoning = 'Extreme overpricing, potential mean reversion';
+  }
+  
+  // Volume boost
+  if (market.volume24h > 100000) {
+    confidence += 0.05;
+    reasoning += '. High volume indicates market interest.';
+  }
+  
+  return { side, confidence, reasoning, price: side === 'YES' ? price : 1 - price };
+}
+
+// Paper trader tick
+async function paperTraderTick() {
+  console.log(`[${new Date().toISOString()}] 📜 Paper Trader tick`);
+  
+  // Load data
+  let polyData = null;
+  try {
+    const raw = await fs.readFile(POLYMARKET_DATA, 'utf8');
+    polyData = JSON.parse(raw);
+  } catch {
+    console.log('   No Polymarket data available');
+    return;
+  }
+  
+  const portfolio = await loadPaperPortfolio();
+  const markets = polyData?.data?.markets || [];
+  
+  console.log(`   Evaluating ${markets.length} markets...`);
+  
+  // Evaluate markets
+  for (const market of markets.slice(0, 5)) {
+    const thesis = generateThesis(market);
+    
+    // Only trade if confident and have capital
+    if (thesis.confidence >= 0.60) {
+      const invested = portfolio.positions.reduce((sum, p) => sum + p.invested, 0);
+      const available = portfolio.capital - invested;
+      const amount = Math.min(200, available * 0.1);
+      
+      // Check if already in this market
+      const existing = portfolio.positions.find(p => p.marketId === market.id);
+      
+      if (!existing && amount >= 10 && portfolio.positions.length < 10) {
+        const position = {
+          id: `paper-${Date.now()}`,
+          marketId: market.id,
+          question: market.question,
+          side: thesis.side,
+          invested: amount,
+          entryPrice: thesis.price,
+          tokens: amount / thesis.price,
+          confidence: thesis.confidence,
+          thesis: thesis.reasoning,
+          openedAt: new Date().toISOString(),
+          status: 'open',
+        };
+        
+        portfolio.positions.push(position);
+        portfolio.totalTrades++;
+        
+        console.log(`   📝 Opened: ${thesis.side} $${amount.toFixed(0)} "${market.question?.slice(0, 40)}..."`);
+        
+        await logActivity({
+          type: 'paper_trade',
+          action: 'open',
+          side: thesis.side,
+          amount,
+          market: market.question?.slice(0, 60),
+        });
+      }
+    }
+  }
+  
+  await savePaperPortfolio(portfolio);
+  
+  // Summary
+  const invested = portfolio.positions.reduce((sum, p) => sum + p.invested, 0);
+  console.log(`   💼 Portfolio: $${(portfolio.capital + portfolio.totalPnL).toFixed(0)} | ${portfolio.positions.length} positions | $${invested.toFixed(0)} invested`);
+}
+
+// Paper trader status endpoint
+app.get('/paper-trader', async (req, res) => {
+  const portfolio = await loadPaperPortfolio();
+  const invested = portfolio.positions.reduce((sum, p) => sum + p.invested, 0);
+  
+  res.json({
+    running: paperTraderRunning,
+    portfolio: {
+      startingCapital: 10000,
+      currentValue: portfolio.capital + portfolio.totalPnL,
+      invested,
+      available: portfolio.capital - invested,
+      totalPnL: portfolio.totalPnL,
+      winRate: portfolio.totalTrades > 0 ? portfolio.wins / portfolio.totalTrades : 0,
+    },
+    positions: portfolio.positions,
+    stats: {
+      totalTrades: portfolio.totalTrades,
+      wins: portfolio.wins,
+      losses: portfolio.losses,
+      startDate: portfolio.startDate,
+    },
+  });
+});
+
+// Paper trade history endpoint
+app.get('/paper-trader/history', async (req, res) => {
+  try {
+    const data = await fs.readFile(PAPER_HISTORY_FILE, 'utf8');
+    const history = JSON.parse(data);
+    res.json({ trades: history.slice(-50), total: history.length });
+  } catch {
+    res.json({ trades: [], total: 0 });
+  }
+});
+
+// Start/stop paper trader
+app.post('/paper-trader/control', async (req, res) => {
+  const { action } = req.body;
+  
+  if (action === 'start' && !paperTraderRunning) {
+    paperTraderRunning = true;
+    await paperTraderTick(); // Initial tick
+    paperTraderInterval = setInterval(paperTraderTick, 5 * 60 * 1000); // Every 5 mins
+    
+    await logActivity({ type: 'paper_trader', action: 'started' });
+    res.json({ status: 'started', message: '📜 Paper trader is now running' });
+    
+  } else if (action === 'stop' && paperTraderRunning) {
+    paperTraderRunning = false;
+    if (paperTraderInterval) clearInterval(paperTraderInterval);
+    
+    await logActivity({ type: 'paper_trader', action: 'stopped' });
+    res.json({ status: 'stopped', message: '📜 Paper trader stopped' });
+    
+  } else {
+    res.json({ status: paperTraderRunning ? 'running' : 'stopped' });
+  }
+});
+
+// =============================================================================
 // SCHEDULED TASKS (would be triggered by Railway cron)
 // =============================================================================
 
@@ -333,6 +524,7 @@ app.listen(PORT, async () => {
   console.log(`  Port: ${PORT}`);
   console.log(`  Status: ONLINE`);
   console.log(`  Agents: ${Object.keys(AGENTS).join(', ')}`);
+  console.log(`  Paper Trader: STARTING...`);
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   
   // Initial heartbeat
@@ -340,6 +532,14 @@ app.listen(PORT, async () => {
   
   // Schedule heartbeat every 5 minutes
   setInterval(heartbeat, 5 * 60 * 1000);
+  
+  // Auto-start paper trader
+  paperTraderRunning = true;
+  await paperTraderTick();
+  paperTraderInterval = setInterval(paperTraderTick, 5 * 60 * 1000);
+  
+  await logActivity({ type: 'paper_trader', action: 'auto_started' });
+  console.log('  📜 Paper Trader: RUNNING');
 });
 
 module.exports = app;
