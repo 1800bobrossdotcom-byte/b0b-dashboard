@@ -1264,6 +1264,38 @@ async function startPresenceTrading() {
   // Start presence watcher
   await presence.startPresence(state);
   
+  // ════════════════════════════════════════════════════════════════════════════
+  // 💓 PRESENCE HEARTBEAT — Keep state alive, track wage progress
+  // ════════════════════════════════════════════════════════════════════════════
+  const heartbeat = async () => {
+    try {
+      const currentState = await loadState();
+      currentState.lastTick = new Date().toISOString();
+      
+      // Update wage tracking (pnlDelta=0 just tracks time)
+      updateWageTracking(currentState, 0);
+      
+      await saveState(currentState);
+      
+      // Log heartbeat status every 5 minutes
+      const now = new Date();
+      if (now.getMinutes() % 5 === 0 && now.getSeconds() < 30) {
+        console.log(`\n   💓 Presence Heartbeat — ${now.toLocaleTimeString()}`);
+        console.log(`      Positions: ${currentState.positions?.length || 0}`);
+        console.log(`      Hourly P&L: $${currentState.wage?.hourlyPnL?.toFixed(2) || 0}`);
+        console.log(`      Efficiency: ${((currentState.wage?.efficiency || 0) * 100).toFixed(1)}%`);
+        console.log(`      Streak: ${currentState.wage?.streak || 0} hours`);
+      }
+    } catch (err) {
+      console.error(`   ⚠️ Heartbeat error: ${err.message}`);
+    }
+  };
+  
+  // Run heartbeat every 30 seconds
+  setInterval(heartbeat, 30000);
+  // Run immediately once
+  await heartbeat();
+  
   // React to new tokens
   presence.on('newToken', async (token) => {
     const state = await loadState();
