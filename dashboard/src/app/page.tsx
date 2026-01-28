@@ -353,8 +353,6 @@ nash would approve of learning from mistakes. 🏴‍☠️</p>
               GitHub
             </a>
           </div>
-            </a>
-          </div>
         </div>
       </section>
 
