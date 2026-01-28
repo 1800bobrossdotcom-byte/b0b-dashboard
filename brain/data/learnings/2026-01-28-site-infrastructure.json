@@ -1,0 +1,133 @@
+{
+  "id": "2026-01-28-site-infrastructure",
+  "title": "Site Infrastructure & Wallet Visualization Update",
+  "created": "2026-01-28T20:00:00Z",
+  "authors": ["r0ss", "b0b"],
+  "category": "infrastructure",
+  "priority": "high",
+  "summary": "Comprehensive update to B0B ecosystem sites with wallet dashboard, team chat integration, and brighter anime theme",
+  
+  "sites": {
+    "b0b.dev": {
+      "url": "https://b0b.dev",
+      "repo": "dashboard/",
+      "railway": "b0b-dashboard-production",
+      "status": "deploying",
+      "changes": [
+        "Default theme changed to 'anime' (brighter, neo-tokyo)",
+        "Added WalletDashboard component showing multi-chain holdings",
+        "Added TeamChat component fetching from brain /discussions"
+      ]
+    },
+    "labs.b0b.dev": {
+      "url": "https://b0b.dev/labs",
+      "repo": "dashboard/src/app/labs/",
+      "status": "deploying",
+      "changes": [
+        "New Phantom Wallet section at top",
+        "Live TeamChat showing brain discussions",
+        "Shows Base + Polygon multi-chain holdings",
+        "Allocation strategy visualization",
+        "Trading goals progress"
+      ]
+    },
+    "d0t.b0b.dev": {
+      "url": "https://d0t.b0b.dev",
+      "repo": "d0t/web/",
+      "railway": "d0t-finance-production",
+      "status": "deploying",
+      "changes": [
+        "TeamChat now fetches from brain /archive endpoint",
+        "Shows live discussions instead of hardcoded messages",
+        "Indicates brain online/offline status"
+      ]
+    },
+    "0type.b0b.dev": {
+      "url": "https://0type.b0b.dev",
+      "repo": "0type/",
+      "railway": "0type-production",
+      "status": "live",
+      "type": "coming_soon",
+      "description": "Autonomous typography generator - coming soon page already exists"
+    }
+  },
+  
+  "wallet_infrastructure": {
+    "phantom_wallet": {
+      "address": "0xd06Aa956CEDA935060D9431D8B8183575c41072d",
+      "label": "Warm/Trading",
+      "chains": ["base", "polygon"],
+      "purpose": "Active trading - memecoins on Base, Polymarket on Polygon"
+    },
+    "cold_wallet": {
+      "address": "0x8455cF296e1265b494605207e97884813De21950",
+      "label": "Cold/Treasury",
+      "chains": ["base"],
+      "purpose": "70% of profits swept here for storage"
+    },
+    "allocation_strategy": {
+      "trading_capital": { "target": 40, "description": "Active memecoin sniping on Base" },
+      "polymarket": { "target": 25, "description": "Prediction market edge hunting on Polygon" },
+      "cold_storage": { "target": 25, "description": "Treasury reserves (70% of profits)" },
+      "team_fund": { "target": 10, "description": "Operations & development" }
+    },
+    "data_sources": {
+      "base_balance": "https://mainnet.base.org (JSON-RPC eth_getBalance)",
+      "polygon_balance": "https://polygon-rpc.com (JSON-RPC eth_getBalance)",
+      "eth_price": "CoinGecko API (with $3000 fallback)"
+    }
+  },
+  
+  "theme_config": {
+    "selected": "anime",
+    "options": {
+      "milspec": { "vibe": "Tactical precision", "primary": "#F59E0B" },
+      "ghost": { "vibe": "Shadow protocol", "primary": "#00FF88" },
+      "anime": { "vibe": "Neo-tokyo nights (SELECTED)", "primary": "#FF6B9D" }
+    },
+    "anime_colors": {
+      "primary": "#FF6B9D",
+      "secondary": "#C44569", 
+      "accent": "#FFB8D0",
+      "muted": "#8B7E94",
+      "background": "#0D0A12",
+      "surface": "#1A1424",
+      "glow": "rgba(255, 107, 157, 0.2)"
+    }
+  },
+  
+  "team_chat_integration": {
+    "brain_endpoints": [
+      "GET /discussions - List all discussions",
+      "GET /discussions/:id - Get specific discussion", 
+      "GET /archive?limit=N - Get recent message threads",
+      "POST /discussions - Create new discussion",
+      "POST /discussions/:id/message - Add message to discussion"
+    ],
+    "refresh_intervals": {
+      "dashboard_TeamChat": "30 seconds",
+      "labs_TeamChat": "30 seconds", 
+      "d0t_TeamChat": "30 seconds"
+    },
+    "fallback": "Shows cached/offline message when brain unreachable"
+  },
+  
+  "crawler_notes": {
+    "for_crawlers": [
+      "WalletDashboard fetches Base and Polygon balances every 30s",
+      "TeamChat fetches from brain /archive and /discussions",
+      "All sites now use anime theme by default",
+      "Sites are interconnected - changes to brain affect all"
+    ],
+    "data_flow": "brain-server -> Railway -> Sites (dashboard, d0t, 0type) -> Users"
+  },
+  
+  "next_steps": [
+    "Monitor Railway deploys for all three sites",
+    "Verify wallet balances showing correctly on labs",
+    "Test team chat live updates across sites",
+    "Consider adding Polymarket position display to wallet dashboard"
+  ],
+  
+  "tags": ["infrastructure", "sites", "wallet", "theme", "team-chat", "crawlers"]
+}

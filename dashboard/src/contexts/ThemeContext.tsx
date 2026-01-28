@@ -81,16 +81,20 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [aesthetic, setAestheticState] = useState<AestheticKey>('milspec');
+  // Default to 'anime' (brighter, neo-tokyo nights) — the third option
+  const [aesthetic, setAestheticState] = useState<AestheticKey>('anime');
   const [particleDensity, setParticleDensity] = useState<'low' | 'medium' | 'high'>('medium');
   const [animationSpeed, setAnimationSpeed] = useState<'slow' | 'normal' | 'fast'>('normal');
   const [reducedMotion, setReducedMotion] = useState(false);
 
-  // Load from localStorage
+  // Load from localStorage (but default is now anime)
   useEffect(() => {
     const saved = localStorage.getItem('b0b-aesthetic');
     if (saved && saved in AESTHETICS) {
       setAestheticState(saved as AestheticKey);
+    } else {
+      // First time visitor — set to anime
+      localStorage.setItem('b0b-aesthetic', 'anime');
     }
     
     const savedDensity = localStorage.getItem('b0b-particle-density');

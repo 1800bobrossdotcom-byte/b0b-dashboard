@@ -4,19 +4,21 @@
  * B0B LABS — Experimental Features & System Status
  * 
  * This page shows:
+ * - Phantom wallet holdings & allocations
  * - Live system status (brain server health)
- * - Chat archive browser with calendar
- * - Research library browser
- * - Activity log
+ * - Team discussions & ideation
+ * - Live trader status
  * - Experimental features
  * 
- * "See inside the machine."
+ * "See inside the machine. Glass box, not black box."
  */
 
 import { useEffect, useState } from 'react';
 import OfficeVisualizer from '@/components/OfficeVisualizer';
 import CCTVWindow from '@/components/CCTVWindow';
 import GameOfLife from '@/components/GameOfLife';
+import WalletDashboard from '@/components/live/WalletDashboard';
+import TeamChat from '@/components/live/TeamChat';
 
 // Brain server URL - Railway production
 const BRAIN_URL = process.env.NEXT_PUBLIC_BRAIN_URL || 'https://b0b-brain-production.up.railway.app';
@@ -374,6 +376,24 @@ export default function LabsPage() {
           </div>
         </section>
 
+        {/* WALLET DASHBOARD — NEW */}
+        <section className="mb-16">
+          <h2 className="text-xs font-mono mb-6 tracking-wider flex items-center gap-2">
+            <span style={{ color: '#FF6B9D' }}>👻 PHANTOM WALLET</span>
+            <span style={{ color: '#717886' }}>— MULTI-CHAIN HOLDINGS</span>
+          </h2>
+          <WalletDashboard />
+        </section>
+
+        {/* TEAM CHAT — LIVE DISCUSSIONS */}
+        <section className="mb-16">
+          <h2 className="text-xs font-mono mb-6 tracking-wider flex items-center gap-2">
+            <span style={{ color: '#00FFFF' }}>💬 TEAM CHAT</span>
+            <span style={{ color: '#717886' }}>— LIVE IDEATION</span>
+          </h2>
+          <TeamChat maxMessages={15} />
+        </section>
+
         {/* Office Visualizer */}
         <section className="mb-16">
           <h2 className="text-xs font-mono mb-6 tracking-wider" style={{ color: '#717886' }}>THE OFFICE</h2>
@@ -395,7 +415,7 @@ export default function LabsPage() {
           <GameOfLife width={800} height={300} cellSize={6} />
         </section>
 
-        {/* Team Discussions */}
+        {/* Team Discussions - OLD SECTION REMOVED, REPLACED BY TeamChat COMPONENT */}
         <section className="mb-16">
           <h2 className="text-xs font-mono mb-6 tracking-wider" style={{ color: '#717886' }}>DISCUSSIONS</h2>
           
