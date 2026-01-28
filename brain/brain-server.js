@@ -314,12 +314,87 @@ app.get('/research', async (req, res) => {
 });
 
 // =============================================================================
-// PAPER TRADER INTEGRATION
+// PAPER TRADER INTEGRATION — NASH SWARM
 // =============================================================================
 
 const PAPER_PORTFOLIO_FILE = path.join(DATA_DIR, 'paper-portfolio.json');
 const PAPER_HISTORY_FILE = path.join(DATA_DIR, 'paper-history.json');
 const POLYMARKET_DATA = path.join(DATA_DIR, 'polymarket.json');
+const SWARM_STATE_FILE = path.join(DATA_DIR, 'paper-swarm.json');
+
+// Nash-inspired trading strategies for swarm testing
+const STRATEGIES = {
+  contrarian: {
+    name: 'Contrarian',
+    emoji: '🔄',
+    description: 'Bet against extreme prices (mean reversion)',
+    threshold: 0.60,
+    evaluate: (market) => {
+      const price = parseFloat(market.outcomePrices?.[0] || 0.5);
+      if (price < 0.15) return { side: 'YES', confidence: 0.70, thesis: 'Extreme underpricing' };
+      if (price > 0.85) return { side: 'NO', confidence: 0.70, thesis: 'Extreme overpricing' };
+      return { side: 'YES', confidence: 0.40, thesis: 'No clear signal' };
+    }
+  },
+  momentum: {
+    name: 'Momentum',
+    emoji: '📈',
+    description: 'Follow the trend (volume indicates conviction)',
+    threshold: 0.55,
+    evaluate: (market) => {
+      const price = parseFloat(market.outcomePrices?.[0] || 0.5);
+      const volume = market.volume24h || 0;
+      // High volume + direction = momentum
+      if (volume > 50000) {
+        return { 
+          side: price > 0.5 ? 'YES' : 'NO', 
+          confidence: 0.65, 
+          thesis: `Momentum: $${Math.round(volume).toLocaleString()} volume supports ${price > 0.5 ? 'YES' : 'NO'}` 
+        };
+      }
+      return { side: 'YES', confidence: 0.40, thesis: 'Low volume, no momentum' };
+    }
+  },
+  equilibrium: {
+    name: 'Nash Equilibrium',
+    emoji: '⚖️',
+    description: 'Find mispriced markets where edge exists (John Nash)',
+    threshold: 0.65,
+    evaluate: (market) => {
+      const price = parseFloat(market.outcomePrices?.[0] || 0.5);
+      const liquidity = market.liquidity || 0;
+      // Nash: exploit imbalances, bet where liquidity creates inefficiency
+      const imbalance = Math.abs(price - 0.5);
+      if (imbalance > 0.3 && liquidity > 10000) {
+        // Market thinks it knows, but liquidity suggests opportunity
+        return { 
+          side: price > 0.5 ? 'NO' : 'YES', 
+          confidence: 0.68, 
+          thesis: `Nash: ${imbalance.toFixed(0)}% imbalance with $${Math.round(liquidity).toLocaleString()} liquidity` 
+        };
+      }
+      return { side: 'YES', confidence: 0.45, thesis: 'No equilibrium opportunity' };
+    }
+  },
+  volume: {
+    name: 'Volume Hunter',
+    emoji: '🔊',
+    description: 'Only trade high-activity markets',
+    threshold: 0.55,
+    evaluate: (market) => {
+      const price = parseFloat(market.outcomePrices?.[0] || 0.5);
+      const volume = market.volume24h || 0;
+      if (volume > 100000) {
+        return { 
+          side: price > 0.5 ? 'YES' : 'NO', 
+          confidence: 0.60, 
+          thesis: `High volume: $${Math.round(volume).toLocaleString()}` 
+        };
+      }
+      return { side: 'YES', confidence: 0.30, thesis: 'Volume too low' };
+    }
+  }
+};
 
 // Paper trader state
 let paperTraderRunning = false;
@@ -506,6 +581,166 @@ app.post('/paper-trader/control', async (req, res) => {
 });
 
 // =============================================================================
+// PAPER SWARM — Multiple Paper Traders with Different Strategies
+// =============================================================================
+
+async function loadSwarmState() {
+  try {
+    const data = await fs.readFile(SWARM_STATE_FILE, 'utf8');
+    return JSON.parse(data);
+  } catch {
+    return {
+      traders: {},
+      startDate: new Date().toISOString(),
+      totalTicks: 0
+    };
+  }
+}
+
+async function saveSwarmState(state) {
+  await fs.mkdir(DATA_DIR, { recursive: true });
+  await fs.writeFile(SWARM_STATE_FILE, JSON.stringify(state, null, 2));
+}
+
+// Initialize a paper trader for a strategy
+function initSwarmTrader(strategyKey) {
+  const strategy = STRATEGIES[strategyKey];
+  if (!strategy) return null;
+  
+  return {
+    id: `swarm-${strategyKey}`,
+    strategy: strategyKey,
+    name: strategy.name,
+    emoji: strategy.emoji,
+    capital: 10000,
+    positions: [],
+    totalTrades: 0,
+    wins: 0,
+    losses: 0,
+    totalPnL: 0,
+    createdAt: new Date().toISOString()
+  };
+}
+
+// Swarm tick - run all paper traders
+async function swarmTick() {
+  console.log(`[${new Date().toISOString()}] 🐝 Swarm tick - ${Object.keys(STRATEGIES).length} strategies`);
+  
+  let polyData = null;
+  try {
+    const raw = await fs.readFile(POLYMARKET_DATA, 'utf8');
+    polyData = JSON.parse(raw);
+  } catch {
+    console.log('   No Polymarket data');
+    return;
+  }
+  
+  const markets = polyData?.data?.markets || [];
+  const state = await loadSwarmState();
+  state.totalTicks++;
+  
+  // Initialize traders if missing
+  for (const key of Object.keys(STRATEGIES)) {
+    if (!state.traders[key]) {
+      state.traders[key] = initSwarmTrader(key);
+      console.log(`   🆕 Initialized ${STRATEGIES[key].emoji} ${STRATEGIES[key].name} trader`);
+    }
+  }
+  
+  // Run each strategy
+  for (const [key, strategy] of Object.entries(STRATEGIES)) {
+    const trader = state.traders[key];
+    
+    for (const market of markets.slice(0, 10)) {
+      const thesis = strategy.evaluate(market);
+      
+      if (thesis.confidence >= strategy.threshold) {
+        const invested = trader.positions.reduce((sum, p) => sum + p.invested, 0);
+        const available = trader.capital - invested;
+        const amount = Math.min(200, available * 0.1);
+        
+        const existing = trader.positions.find(p => p.marketId === market.id);
+        
+        if (!existing && amount >= 10 && trader.positions.length < 10) {
+          trader.positions.push({
+            id: `${trader.id}-${Date.now()}`,
+            marketId: market.id,
+            question: market.question,
+            side: thesis.side,
+            invested: amount,
+            entryPrice: thesis.side === 'YES' ? parseFloat(market.outcomePrices?.[0] || 0.5) : 1 - parseFloat(market.outcomePrices?.[0] || 0.5),
+            confidence: thesis.confidence,
+            thesis: thesis.thesis,
+            openedAt: new Date().toISOString()
+          });
+          trader.totalTrades++;
+          
+          console.log(`   ${strategy.emoji} ${strategy.name}: ${thesis.side} $${amount.toFixed(0)}`);
+        }
+      }
+    }
+  }
+  
+  await saveSwarmState(state);
+  
+  // Summary
+  console.log('   📊 Swarm Summary:');
+  for (const [key, trader] of Object.entries(state.traders)) {
+    const invested = trader.positions.reduce((sum, p) => sum + p.invested, 0);
+    console.log(`      ${STRATEGIES[key].emoji} ${STRATEGIES[key].name}: ${trader.positions.length} pos, $${invested.toFixed(0)} invested`);
+  }
+}
+
+// Swarm endpoints
+app.get('/swarm', async (req, res) => {
+  const state = await loadSwarmState();
+  
+  const summary = Object.entries(state.traders).map(([key, trader]) => {
+    const strategy = STRATEGIES[key];
+    const invested = trader.positions.reduce((sum, p) => sum + p.invested, 0);
+    return {
+      id: key,
+      name: strategy?.name || key,
+      emoji: strategy?.emoji || '🤖',
+      description: strategy?.description || '',
+      capital: trader.capital,
+      invested,
+      available: trader.capital - invested,
+      positions: trader.positions.length,
+      totalTrades: trader.totalTrades,
+      totalPnL: trader.totalPnL,
+      winRate: trader.totalTrades > 0 ? trader.wins / trader.totalTrades : 0
+    };
+  });
+  
+  res.json({
+    running: paperTraderRunning,
+    totalTicks: state.totalTicks,
+    strategies: Object.keys(STRATEGIES).length,
+    traders: summary
+  });
+});
+
+app.get('/swarm/:strategy', async (req, res) => {
+  const state = await loadSwarmState();
+  const trader = state.traders[req.params.strategy];
+  
+  if (!trader) {
+    return res.status(404).json({ error: 'Strategy not found' });
+  }
+  
+  res.json({
+    ...trader,
+    strategy: STRATEGIES[req.params.strategy]
+  });
+});
+
+// Available strategies
+app.get('/strategies', (req, res) => {
+  res.json(STRATEGIES);
+});
+
+// =============================================================================
 // POLYMARKET CRAWLER
 // =============================================================================
 
@@ -627,6 +862,11 @@ app.listen(PORT, async () => {
     setInterval(crawlPolymarket, 5 * 60 * 1000);
     console.log('  📊 Polymarket Crawler: RUNNING');
   }
+  
+  // Auto-start swarm trading
+  await swarmTick();
+  setInterval(swarmTick, 5 * 60 * 1000);
+  console.log('  🐝 Paper Swarm: RUNNING (4 strategies)');
 });
 
 module.exports = app;

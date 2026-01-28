@@ -1,0 +1,114 @@
+{
+  "meta": {
+    "name": "B0B Office Visualizer Concept",
+    "inspiration": ["Coffee Talk", "VA-11 Hall-A", "Papers Please", "Lo-fi pixel art"],
+    "purpose": "Make the machine visible, make the work tangible"
+  },
+  
+  "officeWindow": {
+    "description": "Pixel art office scene where agents visibly work",
+    "aesthetic": {
+      "style": "16-bit pixel art, lo-fi, cozy",
+      "mood": "Late night coffee shop meets tech startup",
+      "elements": [
+        "Rain on windows",
+        "Neon signs flickering",
+        "Coffee cups, plants",
+        "Retro terminals",
+        "Sticky notes on walls"
+      ],
+      "palette": {
+        "background": "#0A0A0A",
+        "primary": "#0052FF",
+        "accent": "#22C55E",
+        "warm": "#F59E0B",
+        "text": "#FFFFFF"
+      }
+    },
+    
+    "agents": {
+      "b0b": {
+        "sprite": "Artist at drafting table",
+        "position": "left side",
+        "animations": ["designing", "thinking", "celebrating"],
+        "speechBubbles": true,
+        "statusIndicator": "Color of current project"
+      },
+      "r0ss": {
+        "sprite": "Engineer at terminal",
+        "position": "center",
+        "animations": ["typing", "debugging", "deploying"],
+        "terminalOutput": true,
+        "statusIndicator": "Commit activity"
+      },
+      "c0m": {
+        "sprite": "Analyst at multiple monitors",
+        "position": "right side", 
+        "animations": ["analyzing", "alerting", "approving"],
+        "charts": true,
+        "statusIndicator": "Market sentiment"
+      }
+    },
+    
+    "interactivity": {
+      "clickAgent": "Shows current task and recent activity",
+      "hoverSpeechBubble": "Shows full message",
+      "realTimeUpdates": "Activity log feeds into scene"
+    },
+    
+    "dataBindings": {
+      "agentActivity": "/activity endpoint → speech bubbles",
+      "trades": "/paper-trader → c0m's charts",
+      "deployments": "Railway webhooks → r0ss's terminal",
+      "designs": "Git commits to design files → b0b's drafting table"
+    }
+  },
+  
+  "cctvWindow": {
+    "description": "Rotating feed of public webcams with data overlays",
+    "sources": [
+      "https://www.insecam.org (filtered, safe)",
+      "Public traffic cams",
+      "Weather cams",
+      "Landmark cams (Times Square, Shibuya, etc)"
+    ],
+    "dataOverlays": {
+      "marketData": {
+        "type": "glitch intensity based on volatility",
+        "example": "High volatility = more scanlines/noise"
+      },
+      "sentiment": {
+        "type": "Color tint based on market sentiment",
+        "bullish": "Green tint",
+        "bearish": "Red tint",
+        "neutral": "Blue tint"
+      },
+      "activity": {
+        "type": "Text crawl at bottom",
+        "content": "Recent trades, market movements"
+      }
+    },
+    "transitions": {
+      "duration": "15-30 seconds per feed",
+      "style": "Static/glitch transition between feeds"
+    },
+    "ethicalNotes": [
+      "Only use intentionally public cameras",
+      "No residential areas",
+      "Respect privacy - cityscapes and landmarks only"
+    ]
+  },
+  
+  "implementation": {
+    "tech": {
+      "pixelArt": "CSS + Canvas or Aseprite sprites",
+      "animations": "CSS keyframes or Framer Motion",
+      "realtime": "WebSocket to brain server",
+      "canvas": "HTML5 Canvas for complex scenes"
+    },
+    "pages": {
+      "labs/office": "Office visualizer",
+      "labs/cctv": "CCTV feed window"
+    }
+  }
+}
