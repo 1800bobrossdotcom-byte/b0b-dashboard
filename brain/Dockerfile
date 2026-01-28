@@ -5,8 +5,8 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install --production
+# Install only required dependencies (skip optional native modules)
+RUN npm install --omit=dev --omit=optional
 
 # Copy source
 COPY . .

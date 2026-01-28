@@ -22,11 +22,13 @@
   "author": "B0B",
   "license": "MIT",
   "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2"
+  },
+  "optionalDependencies": {
     "@xdevplatform/xdk": "^0.4.0",
     "canvas": "^3.2.1",
-    "cors": "^2.8.6",
-    "dotenv": "^17.2.3",
-    "express": "^4.22.1",
     "twitter-api-v2": "^1.29.0"
   }
 }
