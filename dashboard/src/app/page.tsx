@@ -362,6 +362,73 @@ export default function Home() {
         ))}
       </section>
 
+      {/* Trusted Partners */}
+      <section className="py-16 px-6 md:px-12 lg:px-24" style={{ backgroundColor: colors.white, borderTop: `1px solid ${colors.peach}` }}>
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-xs font-mono tracking-wider" style={{ color: colors.darkMuted }}>TRUSTED PARTNERS</h2>
+            <span className="text-xs font-mono" style={{ color: colors.darkMuted }}>Infrastructure & AI</span>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            <a 
+              href="https://anthropic.com" 
+              target="_blank"
+              className="group p-6 rounded-lg transition-all hover:scale-[1.02] text-center"
+              style={{ backgroundColor: colors.cream, border: `1px solid ${colors.peach}` }}
+            >
+              <div className="text-3xl mb-3">🧠</div>
+              <h3 className="font-mono text-sm mb-1" style={{ color: '#D97706' }}>Anthropic</h3>
+              <p className="text-xs" style={{ color: colors.darkMuted }}>Claude AI</p>
+            </a>
+            
+            <a 
+              href="https://x.ai" 
+              target="_blank"
+              className="group p-6 rounded-lg transition-all hover:scale-[1.02] text-center"
+              style={{ backgroundColor: colors.cream, border: `1px solid ${colors.peach}` }}
+            >
+              <div className="text-3xl mb-3">🤖</div>
+              <h3 className="font-mono text-sm mb-1" style={{ color: colors.dark }}>xAI</h3>
+              <p className="text-xs" style={{ color: colors.darkMuted }}>Grok-4</p>
+            </a>
+            
+            <a 
+              href="https://base.org" 
+              target="_blank"
+              className="group p-6 rounded-lg transition-all hover:scale-[1.02] text-center"
+              style={{ backgroundColor: colors.cream, border: `1px solid ${colors.peach}` }}
+            >
+              <div className="text-3xl mb-3">🔵</div>
+              <h3 className="font-mono text-sm mb-1" style={{ color: colors.blue }}>Base</h3>
+              <p className="text-xs" style={{ color: colors.darkMuted }}>L2 Chain</p>
+            </a>
+            
+            <a 
+              href="https://fileverse.io" 
+              target="_blank"
+              className="group p-6 rounded-lg transition-all hover:scale-[1.02] text-center"
+              style={{ backgroundColor: colors.cream, border: `1px solid ${colors.peach}` }}
+            >
+              <div className="text-3xl mb-3">📁</div>
+              <h3 className="font-mono text-sm mb-1" style={{ color: '#8B5CF6' }}>Fileverse</h3>
+              <p className="text-xs" style={{ color: colors.darkMuted }}>Decentralized Docs</p>
+            </a>
+            
+            <a 
+              href="https://polymarket.com" 
+              target="_blank"
+              className="group p-6 rounded-lg transition-all hover:scale-[1.02] text-center"
+              style={{ backgroundColor: colors.cream, border: `1px solid ${colors.peach}` }}
+            >
+              <div className="text-3xl mb-3">📊</div>
+              <h3 className="font-mono text-sm mb-1" style={{ color: '#22C55E' }}>Polymarket</h3>
+              <p className="text-xs" style={{ color: colors.darkMuted }}>Prediction Markets</p>
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Blue Chip AI Community - Partners */}
       <section className="py-16 px-6 md:px-12 lg:px-24" style={{ backgroundColor: colors.gray100 }}>
         <div className="max-w-6xl mx-auto">
@@ -370,7 +437,7 @@ export default function Home() {
             <span className="text-xs font-mono" style={{ color: colors.gray60 }}>Built on Base</span>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             <a 
               href="https://bankr.bot" 
               target="_blank"
@@ -379,7 +446,7 @@ export default function Home() {
             >
               <div className="text-3xl mb-3">🏦</div>
               <h3 className="font-mono text-lg mb-1" style={{ color: '#0052FF' }}>BANKR</h3>
-              <p className="text-xs" style={{ color: colors.gray50 }}>AI-powered trading agent</p>
+              <p className="text-xs" style={{ color: colors.gray50 }}>AI-powered trading</p>
               <p className="text-xs mt-2 font-mono" style={{ color: colors.gray60 }}>$BNKR</p>
             </a>
             
@@ -391,7 +458,7 @@ export default function Home() {
             >
               <div className="text-3xl mb-3">🤖</div>
               <h3 className="font-mono text-lg mb-1" style={{ color: '#8B5CF6' }}>CLANKER</h3>
-              <p className="text-xs" style={{ color: colors.gray50 }}>Token launch platform</p>
+              <p className="text-xs" style={{ color: colors.gray50 }}>Token launches</p>
               <p className="text-xs mt-2 font-mono" style={{ color: colors.gray60 }}>$CLANKER</p>
             </a>
             
@@ -403,7 +470,7 @@ export default function Home() {
             >
               <div className="text-3xl mb-3">🐾</div>
               <h3 className="font-mono text-lg mb-1" style={{ color: '#F97316' }}>CLAWD</h3>
-              <p className="text-xs" style={{ color: colors.gray50 }}>Claude-based AI agent</p>
+              <p className="text-xs" style={{ color: colors.gray50 }}>Claude agent</p>
               <p className="text-xs mt-2 font-mono" style={{ color: colors.gray60 }}>$CLAWD</p>
             </a>
             
@@ -415,8 +482,20 @@ export default function Home() {
             >
               <div className="text-3xl mb-3">🔮</div>
               <h3 className="font-mono text-lg mb-1" style={{ color: '#22C55E' }}>DRB</h3>
-              <p className="text-xs" style={{ color: colors.gray50 }}>Decentralized reasoning</p>
+              <p className="text-xs" style={{ color: colors.gray50 }}>Reasoning AI</p>
               <p className="text-xs mt-2 font-mono" style={{ color: colors.gray60 }}>$DRB</p>
+            </a>
+            
+            <a 
+              href="https://machines.xyz" 
+              target="_blank"
+              className="group p-6 rounded-lg transition-all hover:scale-[1.02]"
+              style={{ backgroundColor: colors.gray90, border: `1px solid ${colors.gray80}` }}
+            >
+              <div className="text-3xl mb-3">⚙️</div>
+              <h3 className="font-mono text-lg mb-1" style={{ color: '#00FFFF' }}>MACHINES</h3>
+              <p className="text-xs" style={{ color: colors.gray50 }}>Autonomous systems</p>
+              <p className="text-xs mt-2 font-mono" style={{ color: colors.gray60 }}>$MACHINES</p>
             </a>
           </div>
           
@@ -426,9 +505,17 @@ export default function Home() {
               <span className="text-xl">🧠</span>
               <span className="font-mono text-sm" style={{ color: colors.white }}>Anthropic</span>
             </a>
+            <a href="https://x.ai" target="_blank" className="flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity">
+              <span className="text-xl">🤖</span>
+              <span className="font-mono text-sm" style={{ color: colors.white }}>xAI / Grok</span>
+            </a>
             <a href="https://base.org" target="_blank" className="flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity">
               <span className="text-xl">🔵</span>
               <span className="font-mono text-sm" style={{ color: colors.white }}>Base</span>
+            </a>
+            <a href="https://fileverse.io" target="_blank" className="flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity">
+              <span className="text-xl">📁</span>
+              <span className="font-mono text-sm" style={{ color: colors.white }}>Fileverse</span>
             </a>
             <a href="https://polymarket.com" target="_blank" className="flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity">
               <span className="text-xl">📊</span>
