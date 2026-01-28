@@ -465,47 +465,116 @@ async function discoverNewTokens() {
   const tokens = [];
   
   try {
-    // Use DexScreener's latest pairs endpoint for Base chain
-    const res = await fetch(
-      'https://api.dexscreener.com/latest/dex/pairs/base',
-      { timeout: 10000 }
+    // Use DexScreener's token-profiles API (lists ALL new tokens with profiles)
+    const profileRes = await fetch(
+      'https://api.dexscreener.com/token-profiles/latest/v1',
+      { timeout: 10000, headers: { 'Accept': 'application/json' } }
     );
-    const data = await res.json();
+    const profiles = await profileRes.json();
     
-    console.log(`   📡 DexScreener returned ${data.pairs?.length || 0} Base pairs`);
+    // Filter for Base chain tokens
+    const baseTokens = Array.isArray(profiles) 
+      ? profiles.filter(t => t.chainId === 'base')
+      : [];
     
-    for (const pair of (data.pairs || []).slice(0, 50)) {
-      // Relaxed liquidity check - $5k minimum for memecoins
-      const liquidity = parseFloat(pair.liquidity?.usd || 0);
-      if (liquidity < 5000) continue;
-      
-      // Age check - less than 48 hours old for more opportunities
-      const pairAge = Date.now() - new Date(pair.pairCreatedAt).getTime();
-      const hoursSinceCreation = pairAge / (1000 * 60 * 60);
-      
-      // Skip if older than 48 hours
-      if (hoursSinceCreation > 48) continue;
-      
-      // Get price change
-      const priceChange = parseFloat(pair.priceChange?.h24 || 0);
-      
-      // Volume check - needs some activity
-      const volume = parseFloat(pair.volume?.h24 || 0);
-      if (volume < 1000) continue;
-      
-      tokens.push({
-        symbol: pair.baseToken?.symbol,
-        address: pair.baseToken?.address,
-        price: parseFloat(pair.priceUsd || 0),
-        priceChange24h: priceChange,
-        volume24h: volume,
-        liquidity: liquidity,
-        pairAddress: pair.pairAddress,
-        age: hoursSinceCreation,
-        dex: pair.dexId,
-        url: pair.url,
-      });
+    console.log(`   📡 DexScreener profiles: ${profiles?.length || 0} total, ${baseTokens.length} on Base`);
+    
+    // For each Base token, get pair data
+    for (const profile of baseTokens.slice(0, 10)) {
+      try {
+        // Get detailed pair data for this token
+        const pairRes = await fetch(
+          `https://api.dexscreener.com/latest/dex/tokens/${profile.tokenAddress}`,
+          { timeout: 5000, headers: { 'Accept': 'application/json' } }
+        );
+        const pairData = await pairRes.json();
+        
+        // Find the best Base pair
+        const basePair = (pairData.pairs || []).find(p => p.chainId === 'base');
+        if (!basePair) continue;
+        
+        const liquidity = parseFloat(basePair.liquidity?.usd || 0);
+        const volume = parseFloat(basePair.volume?.h24 || 0);
+        const priceChange = parseFloat(basePair.priceChange?.h24 || 0);
+        
+        // Relaxed liquidity check - $2k minimum for new tokens
+        if (liquidity < 2000) continue;
+        
+        // Skip if no volume
+        if (volume < 500) continue;
+        
+        tokens.push({
+          symbol: basePair.baseToken?.symbol,
+          address: basePair.baseToken?.address,
+          price: parseFloat(basePair.priceUsd || 0),
+          priceChange24h: priceChange,
+          volume24h: volume,
+          liquidity: liquidity,
+          pairAddress: basePair.pairAddress,
+          dex: basePair.dexId,
+          url: basePair.url,
+          icon: profile.icon,
+          description: profile.description,
+          links: profile.links,
+        });
+      } catch (e) {
+        // Skip individual token errors
+      }
     }
+    
+    // Also check boosted tokens (paid promotion = attention)
+    try {
+      const boostRes = await fetch(
+        'https://api.dexscreener.com/token-boosts/latest/v1',
+        { timeout: 10000, headers: { 'Accept': 'application/json' } }
+      );
+      const boosts = await boostRes.json();
+      const baseBoosted = Array.isArray(boosts) 
+        ? boosts.filter(t => t.chainId === 'base')
+        : [];
+      
+      console.log(`   🚀 Boosted tokens: ${baseBoosted.length} on Base`);
+      
+      for (const boost of baseBoosted.slice(0, 5)) {
+        try {
+          const pairRes = await fetch(
+            `https://api.dexscreener.com/latest/dex/tokens/${boost.tokenAddress}`,
+            { timeout: 5000, headers: { 'Accept': 'application/json' } }
+          );
+          const pairData = await pairRes.json();
+          
+          const basePair = (pairData.pairs || []).find(p => p.chainId === 'base');
+          if (!basePair) continue;
+          
+          // Skip if already added
+          if (tokens.find(t => t.address === basePair.baseToken?.address)) continue;
+          
+          const liquidity = parseFloat(basePair.liquidity?.usd || 0);
+          const volume = parseFloat(basePair.volume?.h24 || 0);
+          
+          if (liquidity < 1000) continue;
+          
+          tokens.push({
+            symbol: basePair.baseToken?.symbol,
+            address: basePair.baseToken?.address,
+            price: parseFloat(basePair.priceUsd || 0),
+            priceChange24h: parseFloat(basePair.priceChange?.h24 || 0),
+            volume24h: volume,
+            liquidity: liquidity,
+            pairAddress: basePair.pairAddress,
+            dex: basePair.dexId,
+            url: basePair.url,
+            boosted: true,
+            boostAmount: boost.amount,
+          });
+        } catch (e) {
+          // Skip individual token errors
+        }
+      }
+    } catch (e) {
+      console.log(`   ⚠️ Boost check failed: ${e.message}`);
+    }
+    
   } catch (error) {
     console.log(`   ⚠️ Token discovery error: ${error.message}`);
   }
@@ -513,7 +582,7 @@ async function discoverNewTokens() {
   // Sort by volume (active trading)
   tokens.sort((a, b) => b.volume24h - a.volume24h);
   
-  console.log(`   ✅ Found ${tokens.length} potential tokens`);
+  console.log(`   ✅ Found ${tokens.length} potential Base tokens`);
   
   return tokens;
 }
