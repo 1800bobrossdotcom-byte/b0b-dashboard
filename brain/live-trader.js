@@ -378,6 +378,90 @@ async function recordTrade(trade) {
 // Docs: https://www.npmjs.com/package/@bankr/sdk
 // ════════════════════════════════════════════════════════════════════════════
 
+// ════════════════════════════════════════════════════════════════════════════
+// RATE LIMITING & MUTEX — Prevent parallel API burn
+// Problem: Multiple entries firing at once = burning $0.10 per call
+// Solution: Sequential entries, cached API responses, rate limits
+// ════════════════════════════════════════════════════════════════════════════
+
+const _rateLimiter = {
+  // Entry mutex - only one entry at a time
+  entryLock: false,
+  entryQueue: [],
+  lastEntryTime: 0,
+  MIN_ENTRY_GAP_MS: 5000, // 5 seconds between entries
+  
+  // Trending tokens cache - don't fetch same data multiple times
+  trendingCache: null,
+  trendingCacheTime: 0,
+  TRENDING_CACHE_TTL_MS: 60000, // Cache trending for 1 minute
+  
+  // Balance cache - don't spam balance checks
+  balanceCache: null,
+  balanceCacheTime: 0,
+  BALANCE_CACHE_TTL_MS: 10000, // Cache balance for 10 seconds
+  
+  // API call tracker
+  apiCallsThisMinute: 0,
+  apiCallMinuteStart: Date.now(),
+  MAX_CALLS_PER_MINUTE: 10, // Max 10 Bankr calls per minute = $1/min max
+};
+
+/**
+ * Acquire entry lock - returns false if another entry is in progress
+ */
+function acquireEntryLock() {
+  if (_rateLimiter.entryLock) {
+    console.log(`   ⏸️ Entry already in progress, queuing...`);
+    return false;
+  }
+  
+  const timeSinceLastEntry = Date.now() - _rateLimiter.lastEntryTime;
+  if (timeSinceLastEntry < _rateLimiter.MIN_ENTRY_GAP_MS) {
+    console.log(`   ⏸️ Too soon since last entry (${(timeSinceLastEntry/1000).toFixed(1)}s < ${_rateLimiter.MIN_ENTRY_GAP_MS/1000}s)`);
+    return false;
+  }
+  
+  _rateLimiter.entryLock = true;
+  return true;
+}
+
+/**
+ * Release entry lock
+ */
+function releaseEntryLock() {
+  _rateLimiter.entryLock = false;
+  _rateLimiter.lastEntryTime = Date.now();
+}
+
+/**
+ * Check if API call is allowed (rate limit)
+ */
+function canMakeApiCall() {
+  const now = Date.now();
+  
+  // Reset counter every minute
+  if (now - _rateLimiter.apiCallMinuteStart > 60000) {
+    _rateLimiter.apiCallsThisMinute = 0;
+    _rateLimiter.apiCallMinuteStart = now;
+  }
+  
+  if (_rateLimiter.apiCallsThisMinute >= _rateLimiter.MAX_CALLS_PER_MINUTE) {
+    console.log(`   ⚠️ Rate limit reached (${_rateLimiter.apiCallsThisMinute}/${_rateLimiter.MAX_CALLS_PER_MINUTE} calls/min)`);
+    return false;
+  }
+  
+  return true;
+}
+
+/**
+ * Track API call
+ */
+function trackApiCall() {
+  _rateLimiter.apiCallsThisMinute++;
+  console.log(`   💸 API call #${_rateLimiter.apiCallsThisMinute}/${_rateLimiter.MAX_CALLS_PER_MINUTE} this minute`);
+}
+
 // Lazy-loaded SDK client
 let _bankrSdkClient = null;
 
@@ -735,8 +819,18 @@ class BankrClient {
   /**
    * Get wallet balance via Bankr x402 ($0.10 USDC per query)
    * Falls back to free RPC for ETH-only balance
+   * NOW WITH CACHING to prevent spam
    */
   async getBalance(useFreeRpc = true) {
+    // ════════════════════════════════════════════════════════════════════════════
+    // BALANCE CACHE — Don't spam balance checks
+    // ════════════════════════════════════════════════════════════════════════════
+    const now = Date.now();
+    if (_rateLimiter.balanceCache && (now - _rateLimiter.balanceCacheTime) < _rateLimiter.BALANCE_CACHE_TTL_MS) {
+      // Return cached balance (silent, no log spam)
+      return _rateLimiter.balanceCache;
+    }
+    
     // Default to free RPC to avoid costs
     if (useFreeRpc) {
       try {
@@ -782,12 +876,18 @@ class BankrClient {
         
         console.log(`   💰 Wallet: ${usdcBalance.toFixed(2)} USDC + ${ethBalance.toFixed(4)} ETH (~$${ethValueUsd.toFixed(2)}) = $${totalUsd.toFixed(2)}`);
         
-        return { 
+        const result = { 
           eth: ethBalance, 
           usdc: usdcBalance,
           usd: totalUsd, // Total tradeable value
           source: 'rpc_free' 
         };
+        
+        // Cache the result
+        _rateLimiter.balanceCache = result;
+        _rateLimiter.balanceCacheTime = now;
+        
+        return result;
       } catch (rpcError) {
         console.log(`   ⚠️ Free RPC failed: ${rpcError.message}`);
       }
@@ -869,50 +969,66 @@ async function discoverNewTokens() {
   
   try {
     // ════════════════════════════════════════════════════════════════════════════
+    // TRENDING CACHE — Don't spam Bankr for same data
+    // ════════════════════════════════════════════════════════════════════════════
+    const now = Date.now();
+    if (_rateLimiter.trendingCache && (now - _rateLimiter.trendingCacheTime) < _rateLimiter.TRENDING_CACHE_TTL_MS) {
+      console.log(`   📦 Using cached trending data (${Math.round((_rateLimiter.TRENDING_CACHE_TTL_MS - (now - _rateLimiter.trendingCacheTime))/1000)}s remaining)`);
+      return _rateLimiter.trendingCache;
+    }
+    
+    // ════════════════════════════════════════════════════════════════════════════
     // STEP 1: BANKR SDK — Ask Bankr what's trending (native ecosystem intelligence)
     // Costs $0.10 but gives high-quality curated data from their ecosystem
+    // RATE LIMITED: Only call if we have API budget
     // ════════════════════════════════════════════════════════════════════════════
-    try {
-      console.log(`   🏦 Asking Bankr for trending tokens...`);
-      
-      const bankrResult = await bankr.promptAndWait('What are the top trending tokens on Base right now? List the top 10 by volume.');
-      
-      if (bankrResult.status === 'completed' && bankrResult.richData?.length > 0) {
-        console.log(`   🏦 Bankr returned ${bankrResult.richData.length} trending tokens`);
+    if (canMakeApiCall()) {
+      try {
+        console.log(`   🏦 Asking Bankr for trending tokens...`);
+        trackApiCall();
         
-        for (const item of bankrResult.richData) {
-          // Parse Bankr's rich data format
-          if (item.type === 'token' && item.data) {
-            const tokenData = item.data;
-            const address = tokenData.address || tokenData.contractAddress;
-            
-            if (!address || tokens.find(t => t.address?.toLowerCase() === address?.toLowerCase())) continue;
-            
-            tokens.push({
-              symbol: tokenData.symbol,
-              name: tokenData.name,
-              address: address,
-              price: parseFloat(tokenData.price || 0),
-              priceChange24h: parseFloat(tokenData.priceChange24h || tokenData.change24h || 0),
-              volume24h: parseFloat(tokenData.volume24h || tokenData.volume || 0),
-              liquidity: parseFloat(tokenData.liquidity || 0),
-              source: 'bankr',
-              bankrRecommended: true,
-              tier: 1, // Bankr recommendations get top tier
-              ecosystem: 'bankr',
-            });
+        const bankrResult = await bankr.promptAndWait('What are the top trending tokens on Base right now? List the top 10 by volume.');
+        
+        if (bankrResult.status === 'completed' && bankrResult.richData?.length > 0) {
+          console.log(`   🏦 Bankr returned ${bankrResult.richData.length} trending tokens`);
+          
+          for (const item of bankrResult.richData) {
+            // Parse Bankr's rich data format
+            if (item.type === 'token' && item.data) {
+              const tokenData = item.data;
+              const address = tokenData.address || tokenData.contractAddress;
+              
+              if (!address || tokens.find(t => t.address?.toLowerCase() === address?.toLowerCase())) continue;
+              
+              tokens.push({
+                symbol: tokenData.symbol,
+                name: tokenData.name,
+                address: address,
+                price: parseFloat(tokenData.price || 0),
+                priceChange24h: parseFloat(tokenData.priceChange24h || tokenData.change24h || 0),
+                volume24h: parseFloat(tokenData.volume24h || tokenData.volume || 0),
+                liquidity: parseFloat(tokenData.liquidity || 0),
+                source: 'bankr',
+                bankrRecommended: true,
+                tier: 1, // Bankr recommendations get top tier
+                ecosystem: 'bankr',
+              });
+            }
           }
+        } else {
+          console.log(`   🏦 Bankr: ${bankrResult.response?.substring(0, 100) || 'No structured data'}...`);
         }
-      } else {
-        console.log(`   🏦 Bankr: ${bankrResult.response?.substring(0, 100) || 'No structured data'}...`);
+      } catch (e) {
+        console.log(`   ⚠️ Bankr trending check skipped: ${e.message}`);
       }
-    } catch (e) {
-      console.log(`   ⚠️ Bankr trending check skipped: ${e.message}`);
+    } else {
+      console.log(`   ⏸️ Skipping Bankr trending (rate limited)`);
     }
     
     // ════════════════════════════════════════════════════════════════════════════
     // STEP 2: CLANKER API — Filter for BANKR-DEPLOYED tokens specifically
     // These are tokens deployed via Bankr bot - our core ecosystem
+    // FREE API - no rate limiting needed
     // ════════════════════════════════════════════════════════════════════════════
     try {
       console.log(`   🤖 Fetching Bankr-deployed tokens from Clanker...`);
@@ -1156,6 +1272,10 @@ async function discoverNewTokens() {
   console.log(`      🤖 Clanker: ${tokens.filter(t => t.clanker).length}`);
   console.log(`      📊 DexScreener: ${tokens.filter(t => t.source === 'dexscreener').length}`);
   console.log(`      🚀 Boosted: ${tokens.filter(t => t.boosted).length}`);
+  
+  // Cache the results
+  _rateLimiter.trendingCache = tokens;
+  _rateLimiter.trendingCacheTime = Date.now();
   
   return tokens;
 }
@@ -1475,88 +1595,114 @@ function calculateEntrySize(walletBalanceUsd) {
 }
 
 async function executeEntry(token, state) {
-  // Get current wallet balance for dynamic sizing
-  const balance = await bankr.getBalance(true);
-  const walletBalanceUsd = balance?.usd || 0;
-  
-  // Calculate dynamic entry size based on actual balance - NO MIN/MAX
-  const amount = calculateEntrySize(walletBalanceUsd);
-  
-  if (amount <= 0) {
-    console.log(`\n   ⚠️ No balance available for ${token.symbol}`);
-    console.log(`      Wallet: $${walletBalanceUsd.toFixed(2)}`);
-    return { success: false, reason: 'no_balance' };
+  // ════════════════════════════════════════════════════════════════════════════
+  // ENTRY MUTEX — Only one entry at a time to prevent parallel burns
+  // ════════════════════════════════════════════════════════════════════════════
+  if (!acquireEntryLock()) {
+    return { success: false, reason: 'entry_in_progress' };
   }
   
-  console.log(`\n   🎯 ENTERING ${token.symbol}`);
-  console.log(`      Wallet: $${walletBalanceUsd.toFixed(2)} | Entry: $${amount} (${((amount/walletBalanceUsd)*100).toFixed(0)}% of balance)`);
-  console.log(`      Price: $${(token.price || 0).toFixed(6)}`);
-  console.log(`      Strategy: Ride momentum, trail stop, exit smart`);
-  console.log(`      Stop: -${CONFIG.SNIPER.STOP_LOSS * 100}% | Trail starts: +${CONFIG.SNIPER.MIN_PROFIT_TO_TRAIL * 100}%`);
-  
-  // Execute via Bankr - use TRADING_WALLET from config
-  const prompt = `Buy $${amount} worth of ${token.symbol} (${token.address}) on Base. Use wallet ${CONFIG.TRADING_WALLET}. This is a momentum play.`;
-  
-  // Pass token data for paper trade logging
-  const result = await bankr.executeTrade(prompt, {
-    symbol: token.symbol,
-    address: token.address,
-    price: token.price || 0,
-    score: token.score || 0,
-    liquidity: token.liquidity,
-    volume24h: token.volume24h,
-    boosted: token.boosted,
-  });
-  
-  if (result.success || result.mode === 'paper') {
-    // Record position (even for paper trades so we can track hypothetical performance)
-    const position = {
-      id: `sniper-${Date.now()}`,
-      strategy: 'blessing',
+  try {
+    // Double-check position limit (may have changed while queued)
+    if (state.positions?.length >= CONFIG.MAX_OPEN_POSITIONS) {
+      console.log(`   ⏸️ Max positions reached during queue (${state.positions.length})`);
+      return { success: false, reason: 'max_positions' };
+    }
+    
+    // Check rate limit
+    if (!canMakeApiCall()) {
+      return { success: false, reason: 'rate_limited' };
+    }
+    
+    // Get current wallet balance for dynamic sizing (with cache)
+    const balance = await bankr.getBalance(true);
+    const walletBalanceUsd = balance?.usd || 0;
+    
+    // Calculate dynamic entry size based on actual balance - NO MIN/MAX
+    const amount = calculateEntrySize(walletBalanceUsd);
+    
+    if (amount <= 0) {
+      console.log(`\n   ⚠️ No balance available for ${token.symbol}`);
+      console.log(`      Wallet: $${walletBalanceUsd.toFixed(2)}`);
+      return { success: false, reason: 'no_balance' };
+    }
+    
+    console.log(`\n   🎯 ENTERING ${token.symbol}`);
+    console.log(`      Wallet: $${walletBalanceUsd.toFixed(2)} | Entry: $${amount} (${((amount/walletBalanceUsd)*100).toFixed(0)}% of balance)`);
+    console.log(`      Price: $${(token.price || 0).toFixed(6)}`);
+    console.log(`      Strategy: Ride momentum, trail stop, exit smart`);
+    console.log(`      Stop: -${CONFIG.SNIPER.STOP_LOSS * 100}% | Trail starts: +${CONFIG.SNIPER.MIN_PROFIT_TO_TRAIL * 100}%`);
+    
+    // Track API call
+    trackApiCall();
+    
+    // Execute via Bankr - use TRADING_WALLET from config
+    const prompt = `Buy $${amount} worth of ${token.symbol} (${token.address}) on Base. Use wallet ${CONFIG.TRADING_WALLET}. This is a momentum play.`;
+    
+    // Pass token data for paper trade logging
+    const result = await bankr.executeTrade(prompt, {
       symbol: token.symbol,
       address: token.address,
-      entryPrice: token.price,
-      amount,
-      tokens: amount / token.price,
-      // No fixed target - we use momentum-aware trailing stops now
-      peakPrice: token.price,  // Track peak for trailing stop
-      stopPrice: token.price * (1 - CONFIG.SNIPER.STOP_LOSS),
-      enteredAt: new Date().toISOString(),
-      txHash: result.executedTxs?.find(t => t.status === 'submitted')?.hash || null,
-      status: result.mode === 'paper' ? 'paper' : 'open',
-      mode: result.mode || 'live',
-      partialTaken: false,  // Track if we've taken partial profits
-      tier: token.tier,
-      qualificationPath: token.qualificationReason,
-    };
-    
-    // Only add to state positions for live trades
-    if (result.mode !== 'paper') {
-      state.positions.push(position);
-      state.totalTrades++;
-      state.dailyVolume += amount;
-    }
-    
-    await recordTrade({
-      type: 'entry',
-      strategy: 'blessing',
-      symbol: token.symbol,
-      amount,
-      price: token.price,
-      txHash: position.txHash,
-      mode: result.mode || 'live',
+      price: token.price || 0,
+      score: token.score || 0,
+      liquidity: token.liquidity,
+      volume24h: token.volume24h,
+      boosted: token.boosted,
     });
     
-    if (result.mode === 'paper') {
-      console.log(`   📝 Paper entry recorded: ${token.symbol} @ $${token.price.toFixed(8)}`);
-    } else {
-      console.log(`   ✅ Entry confirmed: ${position.txHash || 'pending'}`);
+    if (result.success || result.mode === 'paper') {
+      // Record position (even for paper trades so we can track hypothetical performance)
+      const position = {
+        id: `sniper-${Date.now()}`,
+        strategy: 'blessing',
+        symbol: token.symbol,
+        address: token.address,
+        entryPrice: token.price,
+        amount,
+        tokens: amount / token.price,
+        // No fixed target - we use momentum-aware trailing stops now
+        peakPrice: token.price,  // Track peak for trailing stop
+        stopPrice: token.price * (1 - CONFIG.SNIPER.STOP_LOSS),
+        enteredAt: new Date().toISOString(),
+        txHash: result.executedTxs?.find(t => t.status === 'submitted')?.hash || null,
+        status: result.mode === 'paper' ? 'paper' : 'open',
+        mode: result.mode || 'live',
+        partialTaken: false,  // Track if we've taken partial profits
+        tier: token.tier,
+        qualificationPath: token.qualificationReason,
+      };
+      
+      // Only add to state positions for live trades
+      if (result.mode !== 'paper') {
+        state.positions.push(position);
+        state.totalTrades++;
+        state.dailyVolume += amount;
+      }
+      
+      await recordTrade({
+        type: 'entry',
+        strategy: 'blessing',
+        symbol: token.symbol,
+        amount,
+        price: token.price,
+        txHash: position.txHash,
+        mode: result.mode || 'live',
+      });
+      
+      if (result.mode === 'paper') {
+        console.log(`   📝 Paper entry recorded: ${token.symbol} @ $${token.price.toFixed(8)}`);
+      } else {
+        console.log(`   ✅ Entry confirmed: ${position.txHash || 'pending'}`);
+      }
+      
+      return { success: result.success, position, mode: result.mode };
     }
     
-    return { success: result.success, position, mode: result.mode };
+    return { success: false };
+  } finally {
+    // Always release the lock
+    releaseEntryLock();
   }
-  
-  return { success: false };
 }
 
 async function checkExistingPositions(state) {
