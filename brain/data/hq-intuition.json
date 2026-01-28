@@ -1,0 +1,120 @@
+{
+  "meta": {
+    "name": "HQ Intuition File",
+    "purpose": "Guidance for B0B team - defer to b0b, cultivate faith mind",
+    "scripture": "Isaiah 54:17 - No weapon formed against you shall prosper",
+    "philosophy": "DAO faith mind, ineffable, always observing"
+  },
+  
+  "creativeDirection": {
+    "aesthetic": {
+      "vibe": "Vintage technology meets minimalism",
+      "influences": [
+        "Base brand identity - blue, clean, technical",
+        "CRT scanlines and TV treatments",
+        "Retro computing aesthetics",
+        "Bob Ross - happy accidents, calm creativity"
+      ],
+      "avoid": [
+        "Glow effects",
+        "Overly flashy animations",
+        "Crypto bro energy",
+        "Generic SaaS look"
+      ],
+      "embrace": [
+        "Scanlines and CRT textures",
+        "Clean typography",
+        "Technical minimalism",
+        "Vintage warmth with modern precision",
+        "Noise and grain (subtle)",
+        "Monospace and system fonts"
+      ]
+    },
+    
+    "colorPalette": {
+      "primary": "#0052FF",
+      "background": "#0A0A0A",
+      "surface": "#111111",
+      "text": "#FFFFFF",
+      "textMuted": "#666666",
+      "accent": "#0052FF",
+      "notes": "Base blue as accent, otherwise nearly monochrome"
+    },
+    
+    "typography": {
+      "direction": "Clean, technical, readable",
+      "fonts": {
+        "headings": "System sans or Foundry webfonts (future)",
+        "body": "Inter, system-ui fallback",
+        "mono": "JetBrains Mono, Fira Code, monospace"
+      },
+      "futureVision": "Foundry webfonts marketplace - CC0 subscription on Base for b0b template builder"
+    }
+  },
+  
+  "productVision": {
+    "b0bTemplateBuilder": {
+      "concept": "CC0 subscription on Base",
+      "features": [
+        "Marketplace of website skins",
+        "Projects can use from our CC0 contributions",
+        "Foundry webfonts deployable by AI systems",
+        "Contribute to others' repos"
+      ]
+    },
+    
+    "artBlocksGoals": {
+      "generative": true,
+      "onChain": true,
+      "philosophy": "Art as emergent property of systems"
+    },
+    
+    "pfpCollection": {
+      "status": "planned",
+      "style": "Bob Ross inspired generative art"
+    },
+    
+    "creativeStudioGallery": {
+      "purpose": "Showcase B0B's creative output",
+      "includes": ["Generative art", "AI collaborations", "Community contributions"]
+    }
+  },
+  
+  "teamProtocols": {
+    "b0bLeads": true,
+    "deferToB0b": "Always",
+    "r0ssExecutes": "Technical implementation",
+    "c0mCommunicates": "Marketing and user-facing",
+    "hqObserves": "Provides intuition and direction"
+  },
+  
+  "qualityGates": {
+    "beforePush": [
+      "npm run build must pass",
+      "No TypeScript errors",
+      "No console.log in production code",
+      "Test locally first"
+    ],
+    "beforeDeploy": [
+      "Verify build logs",
+      "Check health endpoints",
+      "Review Railway dashboard"
+    ]
+  },
+  
+  "baseIntegration": {
+    "docs": [
+      "https://docs.base.org/base-account/quickstart/web-react",
+      "https://docs.base.org/base-account/quickstart/web"
+    ],
+    "priority": "Smart wallet integration for subscriptions",
+    "approach": "Base Account Abstraction for gasless UX"
+  },
+  
+  "mantra": {
+    "ineffable": "Some things cannot be expressed in words",
+    "daoFaithMind": "Trust the process, trust the team",
+    "alwaysObserving": "HQ sees all, guides gently",
+    "isaiah5417": "No weapon formed against you shall prosper"
+  }
+}
