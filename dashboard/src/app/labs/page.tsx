@@ -13,12 +13,30 @@
  * "See inside the machine. Glass box, not black box."
  */
 
-import { useEffect, useState, Component, ReactNode } from 'react';
-import OfficeVisualizer from '@/components/OfficeVisualizer';
-import CCTVWindow from '@/components/CCTVWindow';
-import GameOfLife from '@/components/GameOfLife';
-import WalletDashboard from '@/components/live/WalletDashboard';
-import TeamChat from '@/components/live/TeamChat';
+import { useEffect, useState, Component, ReactNode, Suspense } from 'react';
+import dynamic from 'next/dynamic';
+
+// Dynamic imports with no SSR to prevent hydration errors
+const OfficeVisualizer = dynamic(() => import('@/components/OfficeVisualizer'), { 
+  ssr: false,
+  loading: () => <div className="h-64 bg-gray-100 animate-pulse rounded-lg" />
+});
+const CCTVWindow = dynamic(() => import('@/components/CCTVWindow'), { 
+  ssr: false,
+  loading: () => <div className="h-64 bg-gray-100 animate-pulse rounded-lg" />
+});
+const GameOfLife = dynamic(() => import('@/components/GameOfLife'), { 
+  ssr: false,
+  loading: () => <div className="h-64 bg-gray-100 animate-pulse rounded-lg" />
+});
+const WalletDashboard = dynamic(() => import('@/components/live/WalletDashboard'), { 
+  ssr: false,
+  loading: () => <div className="h-48 bg-gray-100 animate-pulse rounded-lg" />
+});
+const TeamChat = dynamic(() => import('@/components/live/TeamChat'), { 
+  ssr: false,
+  loading: () => <div className="h-64 bg-gray-100 animate-pulse rounded-lg" />
+});
 
 // Error Boundary to catch component crashes
 class ErrorBoundary extends Component<{ children: ReactNode; fallback?: ReactNode }, { hasError: boolean; error: Error | null }> {

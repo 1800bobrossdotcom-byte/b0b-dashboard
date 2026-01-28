@@ -168,10 +168,11 @@ export function TeamChat({
     return () => clearInterval(quoteFetchInterval);
   }, []);
 
-  // Rotate team quotes
+  // Rotate team quotes (only if we have quotes)
   useEffect(() => {
+    if (teamQuotes.length === 0) return;
     const interval = setInterval(() => {
-      setCurrentQuote(prev => (prev + 1) % teamQuotes.length);
+      setCurrentQuote(prev => (prev + 1) % Math.max(1, teamQuotes.length));
     }, 5000);
     return () => clearInterval(interval);
   }, [teamQuotes.length]);
