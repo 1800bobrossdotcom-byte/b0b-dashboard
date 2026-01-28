@@ -379,15 +379,15 @@ async function getBankrSdkClient() {
     throw new Error('TRADING_PRIVATE_KEY not set - required for x402 payments');
   }
   
-  // ESM import - use default export
-  const bankrModule = await import('@bankr/sdk');
-  const SdkClient = bankrModule.BankrClient || bankrModule.default;
+  console.log(`   💳 Loading Bankr SDK...`);
+  
+  // Direct import of client.js to bypass Node ESM resolution bug
+  // The package has "type": "module" but Node 20-24 can fail on internal imports
+  const { BankrClient: SdkClient } = await import('@bankr/sdk/dist/client.js');
   
   if (!SdkClient) {
     throw new Error('Failed to load BankrClient from @bankr/sdk');
   }
-  
-  console.log(`   💳 Loading Bankr SDK...`);
   
   _bankrSdkClient = new SdkClient({
     privateKey: CONFIG.TRADING_PRIVATE_KEY,
