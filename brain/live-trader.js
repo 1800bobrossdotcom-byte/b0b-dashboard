@@ -94,13 +94,44 @@ const CONFIG = {
     MIN_ENTRY_USD: 5,          // Minimum $5 entry (micro-trades OK!)
     MAX_ENTRY_USD: parseInt(process.env.MAX_POSITION_USD) || 50, // Cap at $50
     
-    EXIT_PERCENT: 0.90,        // Exit 90% at target
-    HOLD_PERCENT: 0.10,        // Hold 10% for moonbag
-    TARGET_MULTIPLIER: 2,      // 2x target for exit
-    MOONBAG_RETRIGGER: 5,      // If moonbag hits 5x, buy more
+    // ════════════════════════════════════════════════════════════════════════
+    // MOMENTUM-AWARE EXITS — Ride the wave, lock profits, exit smart
+    // No fixed targets - trail the momentum and exit when it reverses
+    // ════════════════════════════════════════════════════════════════════════
+    
+    // Trailing stop tightens as we gain
+    TRAILING_STOPS: {
+      // Under 20% gain: wide stop (let it breathe)
+      INITIAL: 0.15,           // -15% from peak triggers exit
+      // 20-50% gain: tighten up
+      GAINING: 0.12,           // -12% from peak
+      // 50-100% gain: protect profits
+      PROFITABLE: 0.10,        // -10% from peak
+      // 100%+ gain: tight trailing
+      MOONING: 0.08,           // -8% from peak (ride it but don't give back)
+    },
+    
+    // Minimum profit to start protecting (activate trailing stop)
+    MIN_PROFIT_TO_TRAIL: 0.10, // After +10% gain, start trailing
+    
+    // Take partial profits on big moves
+    PARTIAL_TAKE: {
+      TRIGGER: 0.50,           // At +50% gain
+      AMOUNT: 0.30,            // Take 30% off the table
+    },
+    
+    // Hard stop loss (never let a trade destroy us)
+    STOP_LOSS: 0.25,           // Cut at -25% always
+    
+    // Moonbag settings (hold some for potential moonshot)
+    MOONBAG_PERCENT: 0.10,     // Keep 10% as moonbag
+    MOONBAG_TRIGGER: 2.0,      // Create moonbag after 2x
+    MOONBAG_RETRIGGER: 5,      // If moonbag hits 5x, consider rebuy
     MOONBAG_REBUY_PERCENT: 0.3,// Rebuy 30% position
+    
+    // Time-based exits
     MAX_HOLD_HOURS: 48,        // Force exit after 48h if no movement
-    STOP_LOSS: 0.25,           // Cut at -25%
+    STALE_THRESHOLD: 0.05,     // "No movement" = less than 5% change
   },
   
   // ══════════════════════════════════════════════════════════════════════════
@@ -1202,7 +1233,8 @@ async function executeEntry(token, state) {
   console.log(`\n   🎯 ENTERING ${token.symbol}`);
   console.log(`      Wallet: $${walletBalanceUsd.toFixed(2)} | Entry: $${amount} (${((amount/walletBalanceUsd)*100).toFixed(0)}% of balance)`);
   console.log(`      Price: $${(token.price || 0).toFixed(6)}`);
-  console.log(`      Target: ${CONFIG.SNIPER.TARGET_MULTIPLIER}x ($${((token.price || 0) * CONFIG.SNIPER.TARGET_MULTIPLIER).toFixed(6)})`);
+  console.log(`      Strategy: Ride momentum, trail stop, exit smart`);
+  console.log(`      Stop: -${CONFIG.SNIPER.STOP_LOSS * 100}% | Trail starts: +${CONFIG.SNIPER.MIN_PROFIT_TO_TRAIL * 100}%`);
   
   // Execute via Bankr - use TRADING_WALLET from config
   const prompt = `Buy $${amount} worth of ${token.symbol} (${token.address}) on Base. Use wallet ${CONFIG.TRADING_WALLET}. This is a momentum play.`;
@@ -1228,12 +1260,16 @@ async function executeEntry(token, state) {
       entryPrice: token.price,
       amount,
       tokens: amount / token.price,
-      targetPrice: token.price * CONFIG.SNIPER.TARGET_MULTIPLIER,
+      // No fixed target - we use momentum-aware trailing stops now
+      peakPrice: token.price,  // Track peak for trailing stop
       stopPrice: token.price * (1 - CONFIG.SNIPER.STOP_LOSS),
       enteredAt: new Date().toISOString(),
       txHash: result.transactions?.[0]?.hash || null,
       status: result.mode === 'paper' ? 'paper' : 'open',
       mode: result.mode || 'live',
+      partialTaken: false,  // Track if we've taken partial profits
+      tier: token.tier,
+      qualificationPath: token.qualificationReason,
     };
     
     // Only add to state positions for live trades
@@ -1271,59 +1307,141 @@ async function checkExistingPositions(state) {
   for (const position of state.positions) {
     if (position.status !== 'open') continue;
     
-    // Get current price
+    // Get current price and momentum data
     let currentPrice = position.entryPrice;
+    let priceChange5m = 0;
+    let priceChange1h = 0;
+    
     try {
       const res = await fetch(
         `https://api.dexscreener.com/latest/dex/tokens/${position.address}`,
         { timeout: 5000 }
       );
       const data = await res.json();
-      currentPrice = parseFloat(data.pairs?.[0]?.priceUsd || position.entryPrice);
+      const pair = data.pairs?.[0];
+      if (pair) {
+        currentPrice = parseFloat(pair.priceUsd || position.entryPrice);
+        priceChange5m = parseFloat(pair.priceChange?.m5 || 0);
+        priceChange1h = parseFloat(pair.priceChange?.h1 || 0);
+      }
     } catch {}
+    
+    // Track peak price for trailing stop
+    if (!position.peakPrice || currentPrice > position.peakPrice) {
+      position.peakPrice = currentPrice;
+      position.peakTime = new Date().toISOString();
+    }
     
     const pnlPercent = (currentPrice - position.entryPrice) / position.entryPrice;
     const pnlUsd = position.amount * pnlPercent;
-    
-    console.log(`   📊 ${position.symbol}: ${(pnlPercent * 100).toFixed(1)}% ($${pnlUsd.toFixed(2)})`);
-    
-    // Check exit conditions
+    const dropFromPeak = position.peakPrice ? (position.peakPrice - currentPrice) / position.peakPrice : 0;
     const hoursSinceEntry = (Date.now() - new Date(position.enteredAt).getTime()) / (1000 * 60 * 60);
     
-    // 1. Target hit - exit 90%, moonbag 10%
-    if (currentPrice >= position.targetPrice) {
-      console.log(`   🎯 TARGET HIT! Exiting 90%...`);
-      await executeExit(position, currentPrice, 0.90, state);
-      await createMoonbag(position, currentPrice, 0.10);
+    // ════════════════════════════════════════════════════════════════════════
+    // MOMENTUM-AWARE EXIT LOGIC — Brain-connected trading
+    // ════════════════════════════════════════════════════════════════════════
+    
+    const momentumEmoji = priceChange5m > 5 ? '🚀' : priceChange5m > 0 ? '📈' : priceChange5m > -5 ? '📊' : '📉';
+    console.log(`   ${momentumEmoji} ${position.symbol}: ${(pnlPercent * 100).toFixed(1)}% ($${pnlUsd.toFixed(2)}) | Peak: ${(position.peakPrice / position.entryPrice * 100 - 100).toFixed(1)}% | 5m: ${priceChange5m > 0 ? '+' : ''}${priceChange5m.toFixed(1)}%`);
+    
+    // Determine trailing stop level based on current gain
+    const trailingStop = getTrailingStopLevel(pnlPercent);
+    
+    // ════════════════════════════════════════════════════════════════════════
+    // EXIT DECISION TREE — Multiple paths to smart exits
+    // ════════════════════════════════════════════════════════════════════════
+    
+    // 1. HARD STOP LOSS — Never let it blow up
+    if (pnlPercent <= -CONFIG.SNIPER.STOP_LOSS) {
+      console.log(`   🛑 STOP LOSS: Cut the loss at ${(pnlPercent * 100).toFixed(1)}%`);
+      await executeExit(position, currentPrice, 1.0, state, 'stop_loss');
+      continue;
     }
-    // 2. Stop loss
-    else if (currentPrice <= position.stopPrice) {
-      console.log(`   🛑 STOP LOSS triggered`);
-      await executeExit(position, currentPrice, 1.0, state);
+    
+    // 2. TRAILING STOP TRIGGERED — Locked in profits, momentum reversed
+    if (pnlPercent >= CONFIG.SNIPER.MIN_PROFIT_TO_TRAIL && dropFromPeak >= trailingStop) {
+      console.log(`   🔒 TRAILING STOP: Peak was +${((position.peakPrice / position.entryPrice - 1) * 100).toFixed(1)}%, dropped ${(dropFromPeak * 100).toFixed(1)}% - locking ${(pnlPercent * 100).toFixed(1)}% profit`);
+      
+      // If we're up big, create moonbag
+      if (pnlPercent >= CONFIG.SNIPER.MOONBAG_TRIGGER - 1) {
+        await executeExit(position, currentPrice, 1 - CONFIG.SNIPER.MOONBAG_PERCENT, state, 'trailing_moonbag');
+        await createMoonbag(position, currentPrice, CONFIG.SNIPER.MOONBAG_PERCENT);
+      } else {
+        await executeExit(position, currentPrice, 1.0, state, 'trailing_stop');
+      }
+      continue;
     }
-    // 3. Time exit (48h no movement)
-    else if (hoursSinceEntry > CONFIG.SNIPER.MAX_HOLD_HOURS && pnlPercent < 0.1) {
-      console.log(`   ⏰ TIME EXIT: No movement after ${CONFIG.SNIPER.MAX_HOLD_HOURS}h`);
-      await executeExit(position, currentPrice, 1.0, state);
+    
+    // 3. PARTIAL TAKE — Lock some profits on big move, let rest ride
+    if (!position.partialTaken && pnlPercent >= CONFIG.SNIPER.PARTIAL_TAKE.TRIGGER) {
+      console.log(`   💰 PARTIAL TAKE: +${(pnlPercent * 100).toFixed(1)}% - taking ${CONFIG.SNIPER.PARTIAL_TAKE.AMOUNT * 100}% off the table`);
+      await executeExit(position, currentPrice, CONFIG.SNIPER.PARTIAL_TAKE.AMOUNT, state, 'partial_profit');
+      position.partialTaken = true;
+      position.amount *= (1 - CONFIG.SNIPER.PARTIAL_TAKE.AMOUNT); // Reduce tracked amount
+      continue;
+    }
+    
+    // 4. MOMENTUM REVERSAL — Was pumping, now dumping (exit even with small gain)
+    if (pnlPercent > 0.05 && priceChange5m < -10 && priceChange1h < -5) {
+      console.log(`   ⚠️ MOMENTUM REVERSAL: 5m=${priceChange5m.toFixed(1)}%, 1h=${priceChange1h.toFixed(1)}% - exiting with ${(pnlPercent * 100).toFixed(1)}% gain`);
+      await executeExit(position, currentPrice, 1.0, state, 'momentum_reversal');
+      continue;
+    }
+    
+    // 5. STALE POSITION — No movement, opportunity cost
+    if (hoursSinceEntry > CONFIG.SNIPER.MAX_HOLD_HOURS && Math.abs(pnlPercent) < CONFIG.SNIPER.STALE_THRESHOLD) {
+      console.log(`   ⏰ STALE: ${hoursSinceEntry.toFixed(0)}h, only ${(pnlPercent * 100).toFixed(1)}% move - freeing capital`);
+      await executeExit(position, currentPrice, 1.0, state, 'time_exit');
+      continue;
+    }
+    
+    // 6. STILL RIDING — Momentum looks good, hold
+    if (priceChange5m > 0 && pnlPercent > 0) {
+      console.log(`      └─ 🏄 Riding momentum... (trail stop at -${(trailingStop * 100).toFixed(0)}% from peak)`);
     }
   }
   
   // Remove closed positions
   state.positions = state.positions.filter(p => p.status === 'open');
+  await saveState(state);
 }
 
-async function executeExit(position, currentPrice, percentage, state) {
+/**
+ * Get dynamic trailing stop level based on current profit
+ * The more we're up, the tighter we trail
+ */
+function getTrailingStopLevel(pnlPercent) {
+  const stops = CONFIG.SNIPER.TRAILING_STOPS;
+  
+  if (pnlPercent >= 1.0) return stops.MOONING;      // 100%+ gain: tight trail
+  if (pnlPercent >= 0.5) return stops.PROFITABLE;   // 50-100%: protect profits
+  if (pnlPercent >= 0.2) return stops.GAINING;      // 20-50%: moderate trail
+  return stops.INITIAL;                              // Under 20%: let it breathe
+}
+
+async function executeExit(position, currentPrice, percentage, state, exitReason = 'manual') {
   const exitAmount = position.tokens * percentage;
   const usdValue = exitAmount * currentPrice;
   const pnl = usdValue - (position.amount * percentage);
   
-  const prompt = `Sell ${percentage * 100}% of my ${position.symbol} holdings (approximately ${exitAmount.toFixed(4)} tokens) on Base. Wallet: ${CONFIG.TRADING_WALLET}`;
+  const exitTypeEmoji = {
+    stop_loss: '🛑',
+    trailing_stop: '🔒',
+    trailing_moonbag: '🌙',
+    partial_profit: '💰',
+    momentum_reversal: '⚠️',
+    time_exit: '⏰',
+    manual: '👤',
+  }[exitReason] || '📤';
+  
+  const prompt = `Sell ${percentage * 100}% of my ${position.symbol} holdings (approximately ${exitAmount.toFixed(4)} tokens) on Base. Wallet: ${CONFIG.TRADING_WALLET}. Exit reason: ${exitReason}`;
   
   const result = await bankr.executeTrade(prompt);
   
   if (result.success) {
     state.totalPnL += pnl;
     state.dailyVolume += usdValue;
+    state.totalTrades++;
     
     if (pnl > 0) state.wins++;
     else state.losses++;
@@ -1334,7 +1452,8 @@ async function executeExit(position, currentPrice, percentage, state) {
     position.status = percentage >= 1.0 ? 'closed' : 'partial';
     position.exitPrice = currentPrice;
     position.exitedAt = new Date().toISOString();
-    position.realizedPnL = pnl;
+    position.realizedPnL = (position.realizedPnL || 0) + pnl;
+    position.exitReason = exitReason;
     
     await recordTrade({
       type: 'exit',
@@ -1344,10 +1463,48 @@ async function executeExit(position, currentPrice, percentage, state) {
       price: currentPrice,
       pnl,
       percentage: percentage * 100,
+      exitReason,
+      peakPrice: position.peakPrice,
       txHash: result.transactions?.[0]?.hash || null,
     });
     
-    console.log(`   ✅ Exit: $${usdValue.toFixed(2)} (${pnl >= 0 ? '+' : ''}$${pnl.toFixed(2)} PnL)`);
+    console.log(`   ${exitTypeEmoji} EXIT (${exitReason}): $${usdValue.toFixed(2)} (${pnl >= 0 ? '+' : ''}$${pnl.toFixed(2)} PnL)`);
+    
+    // Log to brain for learning
+    try {
+      await logToBrain('trade_exit', {
+        symbol: position.symbol,
+        exitReason,
+        pnl,
+        pnlPercent: (currentPrice - position.entryPrice) / position.entryPrice,
+        peakPercent: position.peakPrice ? (position.peakPrice - position.entryPrice) / position.entryPrice : 0,
+        holdTime: (Date.now() - new Date(position.enteredAt).getTime()) / (1000 * 60 * 60),
+      });
+    } catch {}
+  } else {
+    console.log(`   ❌ Exit failed: ${result.error || 'Unknown error'}`);
+  }
+}
+
+/**
+ * Log trading events to brain for learning
+ */
+async function logToBrain(eventType, data) {
+  try {
+    const fetch = (await import('node-fetch')).default;
+    await fetch('http://localhost:7777/learning', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        type: eventType,
+        data,
+        timestamp: new Date().toISOString(),
+        source: 'live-trader',
+      }),
+      timeout: 3000,
+    });
+  } catch {
+    // Brain offline, that's OK
   }
 }
 
