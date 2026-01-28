@@ -525,10 +525,14 @@ app.get('/holdings', async (req, res) => {
     const prompt = `Show me the token balances for wallet ${walletAddress} on Base chain. Include ETH, USDC, and any other tokens.`;
     
     console.log('📊 Fetching wallet holdings via Bankr...');
+    console.log('   Wallet:', walletAddress);
+    console.log('   Has private key:', !!process.env.TRADING_PRIVATE_KEY);
     
     const result = await bankr.promptAndWait(prompt, (msg) => {
       console.log(`   📡 ${msg}`);
     });
+    
+    console.log('   Bankr result status:', result?.status);
     
     if (result.status === 'completed') {
       // Parse Bankr response for holdings

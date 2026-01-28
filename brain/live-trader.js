@@ -379,14 +379,22 @@ async function getBankrSdkClient() {
     throw new Error('TRADING_PRIVATE_KEY not set - required for x402 payments');
   }
   
-  const { BankrClient: SdkClient } = await import('@bankr/sdk');
+  // ESM import - use default export
+  const bankrModule = await import('@bankr/sdk');
+  const SdkClient = bankrModule.BankrClient || bankrModule.default;
+  
+  if (!SdkClient) {
+    throw new Error('Failed to load BankrClient from @bankr/sdk');
+  }
+  
+  console.log(`   💳 Loading Bankr SDK...`);
   
   _bankrSdkClient = new SdkClient({
     privateKey: CONFIG.TRADING_PRIVATE_KEY,
     walletAddress: CONFIG.TRADING_WALLET,
   });
   
-  console.log(`   💳 Bankr SDK initialized for ${CONFIG.TRADING_WALLET}`);
+  console.log(`   ✅ Bankr SDK initialized for ${CONFIG.TRADING_WALLET}`);
   return _bankrSdkClient;
 }
 
