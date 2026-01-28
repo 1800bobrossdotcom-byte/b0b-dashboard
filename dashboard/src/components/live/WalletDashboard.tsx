@@ -59,7 +59,7 @@ interface TradingGoal {
 // ════════════════════════════════════════════════════════════════
 
 const PHANTOM_WALLET = '0xd06Aa956CEDA935060D9431D8B8183575c41072d';
-const COLD_WALLET = '0x8455cF296e1265b494605207e97884813De21950';
+const COLD_WALLET = '0x0B2de87D4996eA37075E2527BC236F5b069E623D'; // Treasury Cold Storage (Base)
 
 const ALLOCATIONS: Allocation[] = [
   { category: 'Trading Capital', target: 40, current: 0, color: '#FF6B9D', description: 'Active memecoin sniping on Base' },

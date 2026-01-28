@@ -27,7 +27,7 @@ const path = require('path');
 const CONFIG = {
   // Wallet Hierarchy — SAME WALLET, MULTIPLE CHAINS
   PHANTOM_WALLET: '0xd06Aa956CEDA935060D9431D8B8183575c41072d',  // Hot/Trading
-  COLD_WALLET: '0x8455cF296e1265b494605207e97884813De21950',     // Treasury/Storage
+  COLD_WALLET: '0x0B2de87D4996eA37075E2527BC236F5b069E623D',     // Treasury/Cold Storage (Base)
   
   // ══════════════════════════════════════════════════════════════════════════
   // MULTI-CHAIN CONFIG
