@@ -826,7 +826,64 @@ app.get('/learnings/catalyst', (req, res) => {
 });
 
 // =============================================================================
-// 💬 QUOTES/LIVE — Random inspirational quotes from Bob Ross + team
+// � TRADING INTELLIGENCE — Live Learning + Visual Data
+// =============================================================================
+
+let tradingIntelligence;
+try {
+  tradingIntelligence = require('./trading-intelligence.js');
+  console.log('[BRAIN] Trading intelligence loaded');
+} catch (e) {
+  console.log('[BRAIN] Trading intelligence not available:', e.message);
+}
+
+// Full intelligence summary
+app.get('/intelligence', (req, res) => {
+  if (!tradingIntelligence) {
+    return res.status(503).json({ error: 'Trading intelligence not available' });
+  }
+  
+  const summary = tradingIntelligence.getIntelligenceSummary();
+  res.json(summary);
+});
+
+// Visual data for dashboard charts and generative art
+app.get('/intelligence/visual', (req, res) => {
+  if (!tradingIntelligence) {
+    return res.status(503).json({ error: 'Trading intelligence not available' });
+  }
+  
+  const visual = tradingIntelligence.getVisualData();
+  res.json(visual);
+});
+
+// Pattern detection
+app.get('/intelligence/patterns', (req, res) => {
+  if (!tradingIntelligence) {
+    return res.status(503).json({ error: 'Trading intelligence not available' });
+  }
+  
+  const patterns = tradingIntelligence.detectPatterns();
+  res.json({ patterns, count: patterns.length });
+});
+
+// Learn from a trade (called after trade completes)
+app.post('/intelligence/learn', (req, res) => {
+  if (!tradingIntelligence) {
+    return res.status(503).json({ error: 'Trading intelligence not available' });
+  }
+  
+  const { trade } = req.body;
+  if (!trade) {
+    return res.status(400).json({ error: 'trade object required' });
+  }
+  
+  const insights = tradingIntelligence.learnFromTrade(trade);
+  res.json({ learned: true, insights });
+});
+
+// =============================================================================
+// �💬 QUOTES/LIVE — Random inspirational quotes from Bob Ross + team
 // =============================================================================
 const BOB_QUOTES = [
   "We don't make mistakes, just happy accidents.",

@@ -1996,6 +1996,30 @@ async function executeExit(position, currentPrice, percentage, state, exitReason
     console.log(`   ${exitTypeEmoji} EXIT (${exitReason}): $${usdValue.toFixed(2)} (${pnl >= 0 ? '+' : ''}$${pnl.toFixed(2)} PnL)`);
     
     // ════════════════════════════════════════════════════════════════════════
+    // TRADING INTELLIGENCE — Learn from this trade outcome
+    // ════════════════════════════════════════════════════════════════════════
+    try {
+      const tradingIntelligence = require('./trading-intelligence.js');
+      tradingIntelligence.learnFromTrade({
+        symbol: position.symbol,
+        address: position.address,
+        entryPrice: position.entryPrice,
+        exitPrice: currentPrice,
+        pnl,
+        pnlPercent: (currentPrice - position.entryPrice) / position.entryPrice,
+        holdTimeHours: (Date.now() - new Date(position.enteredAt).getTime()) / (1000 * 60 * 60),
+        exitReason,
+        liquidity: position.liquidity || 0,
+        boosted: position.boosted || false,
+        tier: position.tier,
+        priceChange24hAtEntry: position.priceChange24hAtEntry || 0,
+      });
+      console.log(`   📚 Trade learned by intelligence system`);
+    } catch (e) {
+      // Silent fail - intelligence is optional
+    }
+    
+    // ════════════════════════════════════════════════════════════════════════
     // MOMENTUM SWING RE-ENTRY WATCH — Track for potential re-entry
     // ════════════════════════════════════════════════════════════════════════
     if (exitReason !== 'stop_loss' && pnl > 0) {
