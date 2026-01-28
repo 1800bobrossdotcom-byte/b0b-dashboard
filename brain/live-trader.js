@@ -81,10 +81,11 @@ const CONFIG = {
   X402_MAX_PAYMENT: BigInt(1000000),  // Max $1.00 USDC per request (in 6 decimals)
   
   // Safety Limits (applies to all chains)
+  // Per 2026-01-28 incident: NEVER compromise on liquidity safety
   MAX_POSITION_USD: parseInt(process.env.MAX_POSITION_USD) || 100,
   MAX_DAILY_VOLUME: Infinity, // No daily limit - trade as opportunities arise
-  MAX_OPEN_POSITIONS: 5,       // Max concurrent positions
-  MIN_LIQUIDITY: 10000,        // Minimum token liquidity
+  MAX_OPEN_POSITIONS: 6,       // Max concurrent positions
+  MIN_LIQUIDITY: 10000,        // Minimum $10k liquidity - SAFETY FLOOR
   
   // Blessing Sniper Config (Base chain memecoins)
   // Entry size is DYNAMIC based on wallet balance - NO ARTIFICIAL LIMITS
@@ -1110,12 +1111,13 @@ function evaluateTradeQualification(token, score) {
   const liquidity = token.liquidity || 0;
   const tier = token.tier || 4;
   
-  // Safety floor - need SOME liquidity (lowered to $2k)
-  if (liquidity < 2000) {
-    return { pass: false, reason: `Liquidity too low ($${(liquidity/1000).toFixed(1)}k < $2k min)` };
+  // SAFETY FLOOR - Minimum $10k liquidity to avoid rugs/manipulation
+  // Per 2026-01-28 security incident: low liquidity = HIGH RISK
+  if (liquidity < 10000) {
+    return { pass: false, reason: `Liquidity too low ($${(liquidity/1000).toFixed(1)}k < $10k min) - SAFETY` };
   }
   
-  // Safety - avoid major dumps (but allow dips)
+  // Safety - avoid major dumps
   if (priceChange < -30) {
     return { pass: false, reason: `Major dump (${priceChange.toFixed(0)}% 24h)` };
   }
@@ -1139,39 +1141,49 @@ function evaluateTradeQualification(token, score) {
     return { pass: true, reason: `⭐ Ecosystem token (T${tier}) - auto-qualify` };
   }
   
-  // PATH 4: Good Score — Decent signal quality (lowered from 45 to 30)
-  if (score >= 30) {
+  // PATH 4: Good Score — Decent signal quality (score 25+)
+  if (score >= 25) {
     return { pass: true, reason: `📊 Good score (${score.toFixed(0)}/100)` };
   }
   
-  // PATH 5: Momentum Play — 15%+ growth is tradeable
-  if (priceChange >= 15 && liquidity >= 5000) {
+  // PATH 5: Momentum Play — 10%+ growth with safe liquidity
+  if (priceChange >= 10 && liquidity >= 15000) {
     return { pass: true, reason: `📈 Momentum (+${priceChange.toFixed(0)}%)` };
   }
   
-  // PATH 6: Volume Spike — Something brewing
-  if (volume >= 30000 && priceChange > 5) {
+  // PATH 6: Volume Spike — Real activity (safe thresholds)
+  if (volume >= 25000 && priceChange > 5 && liquidity >= 15000) {
     return { pass: true, reason: `📊 Volume spike ($${(volume/1000).toFixed(0)}k) + growth` };
   }
   
-  // PATH 7: Fresh Clanker with ANY traction
-  if (token.clanker && volume >= 5000 && priceChange > 0) {
-    return { pass: true, reason: `🤖 Fresh Clanker + traction` };
+  // PATH 7: Fresh Clanker with SAFE liquidity
+  if (token.clanker && volume >= 10000 && liquidity >= 15000) {
+    return { pass: true, reason: `🤖 Fresh Clanker + safe liquidity` };
   }
   
-  // PATH 8: Boosted token — Team paid for visibility
-  if (token.boosted && priceChange > 0) {
-    return { pass: true, reason: `🚀 Boosted + positive momentum` };
+  // PATH 8: Boosted token with safe liquidity
+  if (token.boosted && priceChange > -5 && liquidity >= 15000) {
+    return { pass: true, reason: `🚀 Boosted + safe liquidity` };
   }
   
-  // PATH 9: Any positive combination — Low bar
-  if (priceChange > 5 && volume >= 10000 && liquidity >= 5000) {
-    return { pass: true, reason: `✨ Positive signals (${priceChange.toFixed(0)}% / $${(volume/1000).toFixed(0)}k vol)` };
+  // PATH 9: Strong positive signals with safe liquidity
+  if (priceChange > 5 && volume >= 15000 && liquidity >= 20000) {
+    return { pass: true, reason: `✨ Strong signals (${priceChange.toFixed(0)}% / $${(volume/1000).toFixed(0)}k vol)` };
   }
   
-  // PATH 10: DexScreener momentum pick
-  if (token.source === 'dexscreener' && priceChange >= 10) {
+  // PATH 10: DexScreener gainer with safe liquidity
+  if (token.source === 'dexscreener' && priceChange >= 8 && liquidity >= 15000) {
     return { pass: true, reason: `📊 DexScreener gainer (+${priceChange.toFixed(0)}%)` };
+  }
+  
+  // PATH 11: Dip buy — ONLY with high liquidity (safe bounce plays)
+  if (priceChange >= -25 && priceChange < -10 && liquidity >= 50000) {
+    return { pass: true, reason: `💰 Dip buy (-${Math.abs(priceChange).toFixed(0)}% with $${(liquidity/1000).toFixed(0)}k liq)` };
+  }
+  
+  // PATH 12: Clanker with HIGH liquidity only
+  if (token.clanker && liquidity >= 25000) {
+    return { pass: true, reason: `🤖 Clanker with high liquidity` };
   }
   
   // Did not qualify - but we have very low bars now
