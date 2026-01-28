@@ -2263,9 +2263,12 @@ module.exports = {
   presence,
   loadState,
   saveState,
+  loadMoonbags,
+  saveMoonbags,
   discoverNewTokens,
   CONFIG,
   bankr,
+  BankrClient,
   // 💰 Wage tracking exports
   updateWageTracking,
   getWageStatus,
