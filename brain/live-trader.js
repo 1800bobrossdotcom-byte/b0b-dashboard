@@ -278,21 +278,51 @@ class BankrClient {
   }
   
   /**
-   * Get wallet balance
+   * Get wallet balance - with RPC fallback
    */
   async getBalance() {
+    // Try Bankr API first
     try {
-      return await this.request('/v1/portfolio/balance', {
+      const bankrBalance = await this.request('/v1/portfolio/balance', {
         method: 'POST',
         body: JSON.stringify({ 
           walletAddress: CONFIG.PHANTOM_WALLET,
           chain: CONFIG.CHAIN,
         }),
       });
+      if (bankrBalance) return bankrBalance;
     } catch (error) {
-      console.log(`   ⚠️ Could not fetch balance: ${error.message}`);
-      return null;
+      console.log(`   ⚠️ Bankr balance failed: ${error.message}`);
     }
+    
+    // Fallback to direct Base RPC
+    try {
+      const fetch = (await import('node-fetch')).default;
+      const res = await fetch('https://mainnet.base.org', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          jsonrpc: '2.0',
+          method: 'eth_getBalance',
+          params: [CONFIG.PHANTOM_WALLET, 'latest'],
+          id: 1
+        }),
+      });
+      const data = await res.json();
+      if (data.result) {
+        const ethBalance = Number(BigInt(data.result)) / 1e18;
+        console.log(`   ✅ RPC fallback: ${ethBalance.toFixed(4)} ETH`);
+        return { 
+          eth: ethBalance, 
+          usd: ethBalance * 3000, // Estimate, could fetch price
+          source: 'rpc_fallback' 
+        };
+      }
+    } catch (rpcError) {
+      console.log(`   ⚠️ RPC fallback also failed: ${rpcError.message}`);
+    }
+    
+    return null;
   }
   
   /**

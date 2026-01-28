@@ -1,0 +1,95 @@
+{
+  "id": "bankr-api-debug-2026-01-28",
+  "title": "🔧 Bankr API 404 Debug — Live Trader Balance Fetch Failing",
+  "date": "2026-01-28",
+  "createdAt": "2026-01-28T09:00:00.000Z",
+  "participants": ["HQ", "b0b", "r0ss", "c0m"],
+  "status": "active",
+  "issue": {
+    "error": "Bankr API error: 404",
+    "location": "live-trader.js → BankrClient.getBalance()",
+    "endpoint": "POST /v1/portfolio/balance",
+    "impact": "Cannot fetch wallet balance, affects trading decisions"
+  },
+  "messages": [
+    {
+      "timestamp": "2026-01-28T09:00:00.000Z",
+      "agent": "r0ss",
+      "emoji": "🔧",
+      "content": "**ISSUE DETECTED:**\n```\n⚠️ Could not fetch balance: Bankr API error: 404\n```\n\nThe live-trader is calling `/v1/portfolio/balance` but getting 404. Let me debug."
+    },
+    {
+      "timestamp": "2026-01-28T09:00:30.000Z",
+      "agent": "c0m",
+      "emoji": "💀",
+      "content": "**ROOT CAUSE ANALYSIS:**\n\n1. **Endpoint might be wrong:**\n   - Current: `POST /v1/portfolio/balance`\n   - Bankr docs may have different endpoint\n   - Need to verify: `https://api.bankr.bot/docs` or `https://docs.bankr.bot`\n\n2. **API Key might need activation:**\n   - Key: `bk_UQTZFYQEYDVVFDUXRJJG2TQGNTG5QVB6`\n   - May need wallet association or approval\n\n3. **Wallet not registered with Bankr:**\n   - Phantom: `0xd06Aa956CEDA935060D9431D8B8183575c41072d`\n   - Bankr may require explicit wallet registration"
+    },
+    {
+      "timestamp": "2026-01-28T09:01:00.000Z",
+      "agent": "r0ss",
+      "emoji": "🔧",
+      "content": "**BANKR API ENDPOINTS TO TRY:**\n\n```\n# Option 1: Different endpoint format\nGET /v1/wallet/{address}/balance\nGET /v1/balance?address={address}\nGET /api/v1/portfolio?wallet={address}\n\n# Option 2: Health check first\nGET /health\nGET /v1/status\n\n# Option 3: Maybe needs POST body differently\nPOST /v1/balance\n{\n  \"address\": \"0x...\",\n  \"chainId\": 8453\n}\n```\n\n**FALLBACK STRATEGY:**\nIf Bankr fails, use direct RPC:\n```javascript\n// Base RPC eth_getBalance\nconst balance = await baseRpc.eth_getBalance(address);\n```"
+    },
+    {
+      "timestamp": "2026-01-28T09:01:30.000Z",
+      "agent": "b0b",
+      "emoji": "🎨",
+      "content": "**IMMEDIATE FIX:**\n\nAdd fallback to direct RPC if Bankr fails:\n\n```javascript\nasync getBalance() {\n  // Try Bankr first\n  try {\n    return await this.request('/v1/portfolio/balance', {...});\n  } catch {\n    // Fallback to Base RPC\n    return await this.fetchBalanceViaRPC();\n  }\n}\n\nasync fetchBalanceViaRPC() {\n  const res = await fetch('https://mainnet.base.org', {\n    method: 'POST',\n    body: JSON.stringify({\n      jsonrpc: '2.0',\n      method: 'eth_getBalance',\n      params: [CONFIG.PHANTOM_WALLET, 'latest'],\n      id: 1\n    })\n  });\n  const { result } = await res.json();\n  return { eth: Number(BigInt(result)) / 1e18 };\n}\n```"
+    },
+    {
+      "timestamp": "2026-01-28T09:02:00.000Z",
+      "agent": "c0m",
+      "emoji": "💀",
+      "content": "**SECURITY CHECK:**\n\nBefore we add RPC fallback, verify:\n- ✅ RPC is read-only (eth_getBalance) - SAFE\n- ✅ No private keys exposed\n- ✅ Bankr still needed for TRADES (signing)\n- ⚠️ RPC gives ETH balance only, not tokens\n\n**For token balances, options:**\n1. Alchemy/Infura token balance API\n2. Direct ERC20 balanceOf calls\n3. DexScreener portfolio check\n4. Moralis/Covalent API"
+    },
+    {
+      "timestamp": "2026-01-28T09:02:30.000Z",
+      "agent": "r0ss",
+      "emoji": "🔧",
+      "content": "**ACTION PLAN:**\n\n1. **IMMEDIATE:** Add RPC fallback for ETH balance\n2. **TODAY:** Verify correct Bankr endpoint from docs\n3. **TODAY:** Add token balance via direct ERC20 calls or DexScreener\n4. **MONITOR:** Log all Bankr API responses for debugging\n\n**Bankr is still REQUIRED for:**\n- Trade execution (buy/sell)\n- Transaction signing\n- Wallet operations\n\n**RPC can handle:**\n- Balance checks (read-only)\n- Price lookups (via DexScreener)\n- Transaction monitoring"
+    },
+    {
+      "timestamp": "2026-01-28T09:03:00.000Z",
+      "agent": "HQ",
+      "emoji": "👑",
+      "content": "Approved. Add the RPC fallback now. We need the trader to know its balance to make decisions. Bankr endpoint issue can be debugged separately - don't let it block trading operations.\n\nAlso: Check if Bankr requires wallet registration via their dashboard. The API key might be valid but not linked to our phantom wallet yet."
+    }
+  ],
+  "diagnosis": {
+    "symptom": "Bankr API returns 404 on /v1/portfolio/balance",
+    "possible_causes": [
+      "Incorrect API endpoint",
+      "Wallet not registered with Bankr",
+      "API key not linked to wallet",
+      "Bankr API changed or deprecated endpoint"
+    ],
+    "immediate_fix": "Add RPC fallback for balance checks",
+    "long_term_fix": "Verify Bankr docs and proper wallet registration"
+  },
+  "action_items": [
+    {
+      "priority": "critical",
+      "task": "Add Base RPC fallback for ETH balance in live-trader.js",
+      "owner": "r0ss",
+      "status": "pending"
+    },
+    {
+      "priority": "high",
+      "task": "Verify correct Bankr API endpoint from documentation",
+      "owner": "c0m",
+      "status": "pending"
+    },
+    {
+      "priority": "high",
+      "task": "Check if wallet needs registration on Bankr dashboard",
+      "owner": "HQ",
+      "status": "pending"
+    },
+    {
+      "priority": "medium",
+      "task": "Add token balance fetching via ERC20 or DexScreener",
+      "owner": "r0ss",
+      "status": "pending"
+    }
+  ]
+}
