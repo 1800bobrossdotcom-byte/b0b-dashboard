@@ -1322,32 +1322,73 @@ app.listen(PORT, async () => {
   }
   
   // ════════════════════════════════════════════════════════════════════════════
-  // 🔥 LIVE TRADER — Presence Mode (Event-Driven, Not Interval-Polling)
+  // 🔥 LIVE TRADER — Dual Mode: Presence + Active Scanning
+  // ════════════════════════════════════════════════════════════════════════════
+  // 
+  // TWO MODES RUNNING SIMULTANEOUSLY:
+  // 1. PRESENCE MODE — Event-driven watching for NEW token launches (<60 min old)
+  // 2. SNIPER MODE — Periodic scanning of TOP 100 BASE TOKENS + ecosystem
+  //
+  // The user requested focus on TOP 100 coins which have plenty of moves.
+  // Presence mode alone only catches brand new tokens - we need liveTraderTick
+  // to scan established tokens with momentum.
   // ════════════════════════════════════════════════════════════════════════════
   try {
-    const { startPresenceTrading, CONFIG, treasurySweep, loadState } = require('./live-trader.js');
+    const { startPresenceTrading, liveTraderTick, CONFIG, treasurySweep, loadState } = require('./live-trader.js');
     
     console.log('');
-    console.log('  👁️ LIVE TRADER — PRESENCE MODE');
-    console.log(`     Wallet: ${CONFIG.PHANTOM_WALLET}`);
+    console.log('  🔥 LIVE TRADER — DUAL MODE ACTIVE');
+    console.log(`     Wallet: ${CONFIG.TRADING_WALLET}`);
     console.log(`     Cold Storage: ${CONFIG.COLD_WALLET}`);
+    console.log(`     Focus: Top 100 Base + Bankr/Clanker/Clawd/AI ecosystem`);
     console.log(`     "Watch without waiting. Act without hesitation."`);
     
-    // Start presence-based trading (event-driven, not polling)
+    // ══════════════════════════════════════════════════════════════════════════
+    // MODE 1: Presence Mode — Watch for new token launches (event-driven)
+    // ══════════════════════════════════════════════════════════════════════════
     await startPresenceTrading();
+    console.log('  👁️ PRESENCE MODE: Active — watching new token launches');
+    
+    // ══════════════════════════════════════════════════════════════════════════
+    // MODE 2: Sniper Mode — Scan Top 100 Base tokens every 2 minutes
+    // This is the KEY fix — blessingSniperTick scans established tokens
+    // ══════════════════════════════════════════════════════════════════════════
+    const SNIPER_INTERVAL = 2 * 60 * 1000; // 2 minutes
+    
+    // Run initial scan after 30 seconds (let services warm up)
+    setTimeout(async () => {
+      console.log('\n  🎯 SNIPER MODE: Running initial Top 100 scan...');
+      try {
+        await liveTraderTick();
+      } catch (err) {
+        console.log(`  ⚠️ Initial sniper scan error: ${err.message}`);
+      }
+    }, 30000);
+    
+    // Then run every 2 minutes
+    setInterval(async () => {
+      try {
+        await liveTraderTick();
+      } catch (err) {
+        console.log(`  ⚠️ Sniper tick error: ${err.message}`);
+      }
+    }, SNIPER_INTERVAL);
+    
+    console.log(`  🎯 SNIPER MODE: Active — scanning Top 100 every 2 minutes`);
     
     await logActivity({ 
       type: 'live_trader', 
-      action: 'presence_started', 
-      wallet: CONFIG.PHANTOM_WALLET,
-      mode: 'presence'
+      action: 'dual_mode_started', 
+      wallet: CONFIG.TRADING_WALLET,
+      mode: 'presence+sniper',
+      focus: ['Top 100 Base', 'Bankr', 'Clanker', 'Clawd', 'AI'],
     });
     
-    console.log('  👁️ LIVE TRADER: PRESENCE ACTIVE');
-    console.log('     → Watching new token launches');
-    console.log('     → Monitoring position prices');
-    console.log('     → Treasury sweep on threshold');
-    console.log(`     → Profit distribution: 70% cold, 20% reinvest, 10% team`);
+    console.log('  ✅ LIVE TRADER: DUAL MODE ACTIVE');
+    console.log('     → 👁️ Presence: Watching new token launches');
+    console.log('     → 🎯 Sniper: Scanning Top 100 Base every 2 min');
+    console.log('     → 💰 Treasury sweep on threshold');
+    console.log(`     → 📊 Profit distribution: 70% cold, 20% reinvest, 10% team`);
   } catch (err) {
     console.log(`  ⚠️ Live Trader not started: ${err.message}`);
   }
