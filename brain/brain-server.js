@@ -28,8 +28,7 @@ try {
 const GITHUB_CONFIG = {
   token: process.env.GITHUB_TOKEN || null,
   repos: [
-    { owner: 'B0B-Interactive', repo: 'b0b-platform', name: 'b0b-platform' },
-    { owner: 'B0B-Interactive', repo: 'b0b-dashboard', name: 'b0b-dashboard' },
+    { owner: '1800bobrossdotcom-byte', repo: 'b0b-dashboard', name: 'b0b-dashboard' },
   ],
   apiBase: 'https://api.github.com'
 };
