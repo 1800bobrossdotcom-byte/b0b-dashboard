@@ -24,7 +24,7 @@
       "Must have 'Agent API' feature ENABLED on the key",
       "Key is tied to your Bankr account and wallet"
     ],
-    "current_issue": "Our key (bk_UQTZFYQEYDVVFDUXRJJG2TQGNTG5QVB6) returns 500 Internal Server Error",
+    "current_issue": "Our key (REDACTED_KEY) returns 500 Internal Server Error",
     "probable_cause": "Agent API feature may not be enabled for this key",
     "action_required": "Go to https://bankr.bot/api and verify 'Agent API' is enabled"
   },
