@@ -309,8 +309,8 @@ app.get('/research', async (req, res) => {
 // PAPER TRADER INTEGRATION
 // =============================================================================
 
-const PAPER_PORTFOLIO_FILE = path.join(__dirname, '..', 'b0b-finance', 'paper-portfolio.json');
-const PAPER_HISTORY_FILE = path.join(__dirname, '..', 'b0b-finance', 'paper-history.json');
+const PAPER_PORTFOLIO_FILE = path.join(DATA_DIR, 'paper-portfolio.json');
+const PAPER_HISTORY_FILE = path.join(DATA_DIR, 'paper-history.json');
 const POLYMARKET_DATA = path.join(DATA_DIR, 'polymarket.json');
 
 // Paper trader state
@@ -336,6 +336,7 @@ async function loadPaperPortfolio() {
 }
 
 async function savePaperPortfolio(portfolio) {
+  await fs.mkdir(DATA_DIR, { recursive: true });
   await fs.writeFile(PAPER_PORTFOLIO_FILE, JSON.stringify(portfolio, null, 2));
 }
 
