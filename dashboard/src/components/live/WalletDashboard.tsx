@@ -13,6 +13,9 @@
 
 import { useState, useEffect } from 'react';
 
+// Brain server URL
+const BRAIN_URL = process.env.NEXT_PUBLIC_BRAIN_URL || 'https://b0b-brain-production.up.railway.app';
+
 // ════════════════════════════════════════════════════════════════
 // TYPES
 // ════════════════════════════════════════════════════════════════
@@ -20,11 +23,31 @@ import { useState, useEffect } from 'react';
 interface TokenHolding {
   symbol: string;
   name: string;
-  balance: number;
+  balance: number | string;
   usdValue: number;
   contractAddress?: string;
   chain?: 'base' | 'polygon' | 'solana';
-  type?: 'native' | 'erc20' | 'position';
+  type?: 'native' | 'erc20' | 'stablecoin' | 'memecoin' | 'position';
+  change24h?: number;
+}
+
+interface ActivePosition {
+  symbol: string;
+  amount: number;
+  entryPrice: number;
+  currentValue: number;
+  pnl: number;
+  chain: string;
+}
+
+interface LiveTraderStats {
+  totalTrades: number;
+  totalPnL: number;
+  wins: number;
+  losses: number;
+  winRate: number;
+  dailyVolume: number;
+  maxDailyVolume: number;
 }
 
 interface WalletState {
@@ -41,8 +64,8 @@ interface WalletState {
 
 interface Allocation {
   category: string;
-  target: number;    // Target percentage
-  current: number;   // Current percentage
+  target: number;
+  current: number;
   color: string;
   description: string;
 }
@@ -60,7 +83,7 @@ interface TradingGoal {
 // ════════════════════════════════════════════════════════════════
 
 const PHANTOM_WALLET = '0xd06Aa956CEDA935060D9431D8B8183575c41072d';
-const COLD_WALLET = '0x0B2de87D4996eA37075E2527BC236F5b069E623D'; // Treasury Cold Storage (Base)
+const COLD_WALLET = '0x0B2de87D4996eA37075E2527BC236F5b069E623D';
 
 const ALLOCATIONS: Allocation[] = [
   { category: 'Trading Capital', target: 40, current: 0, color: '#FF6B9D', description: 'Active memecoin sniping on Base' },
@@ -78,6 +101,165 @@ const TRADING_GOALS: TradingGoal[] = [
 // ════════════════════════════════════════════════════════════════
 // FETCHERS
 // ════════════════════════════════════════════════════════════════
+
+// Fetch all holdings from brain server (centralized source of truth)
+async function fetchHoldingsFromBrain(): Promise<{
+  tokens: TokenHolding[];
+  positions: ActivePosition[];
+  stats: LiveTraderStats;
+  totalUsd: number;
+  ethPrice: number;
+}> {
+  try {
+    const res = await fetch(`${BRAIN_URL}/live-trader/holdings`, {
+      method: 'GET',
+      headers: { 'Accept': 'application/json' },
+    });
+    
+    if (res.ok) {
+      const data = await res.json();
+      
+      const tokens: TokenHolding[] = [];
+      
+      // ETH
+      if (data.holdings?.eth) {
+        tokens.push({
+          symbol: 'ETH',
+          name: 'Ethereum',
+          balance: data.holdings.eth.balance,
+          usdValue: data.holdings.eth.usd,
+          contractAddress: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+          chain: 'base',
+          type: 'native'
+        });
+      }
+      
+      // USDC
+      if (data.holdings?.usdc) {
+        tokens.push({
+          symbol: 'USDC',
+          name: 'USD Coin',
+          balance: data.holdings.usdc.balance,
+          usdValue: data.holdings.usdc.usd,
+          contractAddress: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
+          chain: 'base',
+          type: 'stablecoin'
+        });
+      }
+      
+      // BNKR
+      if (data.holdings?.bnkr) {
+        tokens.push({
+          symbol: 'BNKR',
+          name: 'Bankr Token',
+          balance: data.holdings.bnkr.balance,
+          usdValue: data.holdings.bnkr.usd,
+          contractAddress: '0xE95Fa14Db9f1B6297Fc93b1c25535e487e24A6A1',
+          chain: 'base',
+          type: 'memecoin',
+          change24h: data.holdings.bnkr.change24h
+        });
+      }
+      
+      // Other memecoins
+      if (data.holdings?.memecoins) {
+        for (const coin of data.holdings.memecoins) {
+          tokens.push({
+            symbol: coin.symbol || '???',
+            name: coin.name || 'Unknown Token',
+            balance: coin.balance || 0,
+            usdValue: coin.usd || 0,
+            contractAddress: coin.address,
+            chain: 'base',
+            type: 'memecoin',
+            change24h: coin.change24h
+          });
+        }
+      }
+      
+      // Active positions from live trader
+      const positions: ActivePosition[] = (data.positions || []).map((p: Record<string, unknown>) => ({
+        symbol: p.symbol as string,
+        amount: p.amount as number,
+        entryPrice: p.entryPrice as number,
+        currentValue: p.currentValue as number,
+        pnl: p.pnl as number,
+        chain: p.chain as string || 'base'
+      }));
+      
+      return {
+        tokens,
+        positions,
+        stats: data.stats || { totalTrades: 0, totalPnL: 0, wins: 0, losses: 0, winRate: 0, dailyVolume: 0, maxDailyVolume: 5 },
+        totalUsd: data.holdings?.totalUsd || tokens.reduce((sum, t) => sum + t.usdValue, 0),
+        ethPrice: data.holdings?.eth?.price || 3000
+      };
+    }
+  } catch (e) {
+    console.error('[WalletDashboard] Brain fetch error:', e);
+  }
+  
+  // Fallback to direct RPC if brain is down
+  return fallbackDirectFetch();
+}
+
+// Fallback: Direct RPC fetch if brain server is unavailable
+async function fallbackDirectFetch(): Promise<{
+  tokens: TokenHolding[];
+  positions: ActivePosition[];
+  stats: LiveTraderStats;
+  totalUsd: number;
+  ethPrice: number;
+}> {
+  const tokens: TokenHolding[] = [];
+  
+  try {
+    // Fetch ETH balance
+    const ethRes = await fetch('https://mainnet.base.org', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        jsonrpc: '2.0',
+        method: 'eth_getBalance',
+        params: [PHANTOM_WALLET, 'latest'],
+        id: 1
+      })
+    });
+    
+    const ethData = await ethRes.json();
+    const ethBalance = Number(BigInt(ethData.result || '0x0')) / 1e18;
+    
+    // Fetch ETH price
+    let ethPrice = 3000;
+    try {
+      const priceRes = await fetch('https://api.dexscreener.com/latest/dex/tokens/0x4200000000000000000000000000000000000006');
+      const priceData = await priceRes.json();
+      if (priceData.pairs?.[0]?.priceUsd) {
+        ethPrice = parseFloat(priceData.pairs[0].priceUsd);
+      }
+    } catch {}
+    
+    tokens.push({
+      symbol: 'ETH',
+      name: 'Ethereum',
+      balance: ethBalance,
+      usdValue: ethBalance * ethPrice,
+      contractAddress: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+      chain: 'base',
+      type: 'native'
+    });
+    
+    return {
+      tokens,
+      positions: [],
+      stats: { totalTrades: 0, totalPnL: 0, wins: 0, losses: 0, winRate: 0, dailyVolume: 0, maxDailyVolume: 5 },
+      totalUsd: tokens.reduce((sum, t) => sum + t.usdValue, 0),
+      ethPrice
+    };
+  } catch {
+    return { tokens: [], positions: [], stats: { totalTrades: 0, totalPnL: 0, wins: 0, losses: 0, winRate: 0, dailyVolume: 0, maxDailyVolume: 5 }, totalUsd: 0, ethPrice: 3000 };
+  }
+}
 
 async function fetchBaseBalance(address: string): Promise<number> {
   try {
@@ -97,72 +279,6 @@ async function fetchBaseBalance(address: string): Promise<number> {
   } catch {
     return 0;
   }
-}
-
-// Fetch token balances via Bankr API (natural language) or fallback to RPC
-// NOTE: Bankr Agent API uses async job pattern with natural language prompts
-// For real-time balance checks, we use direct RPC fallback since Bankr jobs take time
-async function fetchTokenBalances(address: string): Promise<TokenHolding[]> {
-  const tokens: TokenHolding[] = [];
-  
-  // Use direct RPC for ETH balance (faster than Bankr job pattern)
-  try {
-    const rpcRes = await fetch('https://mainnet.base.org', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        jsonrpc: '2.0',
-        method: 'eth_getBalance',
-        params: [address, 'latest'],
-        id: 1
-      })
-    });
-    
-    if (rpcRes.ok) {
-      const data = await rpcRes.json();
-      if (data.result) {
-        const ethBalance = Number(BigInt(data.result)) / 1e18;
-        // Fetch ETH price from DexScreener
-        let ethPrice = 3000; // Default
-        try {
-          const priceRes = await fetch('https://api.dexscreener.com/latest/dex/tokens/0x4200000000000000000000000000000000000006'); // WETH on Base
-          const priceData = await priceRes.json();
-          if (priceData.pairs?.[0]?.priceUsd) {
-            ethPrice = parseFloat(priceData.pairs[0].priceUsd);
-          }
-        } catch {}
-        
-        tokens.push({
-          symbol: 'ETH',
-          name: 'Ethereum',
-          balance: ethBalance,
-          usdValue: ethBalance * ethPrice,
-          contractAddress: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
-          chain: 'base',
-          type: 'native'
-        });
-      }
-    }
-  } catch {
-    // RPC failed
-  }
-  
-  // Fallback: Check DexScreener for known tokens
-  if (tokens.length === 0) {
-    try {
-      // Check for common tokens the wallet might hold
-      // This is a simplified check - in production would use proper indexer
-      const dexRes = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${address}`);
-      if (dexRes.ok) {
-        const data = await dexRes.json();
-        // Process if relevant
-      }
-    } catch {
-      // Silent fail
-    }
-  }
-  
-  return tokens;
 }
 
 async function fetchPolygonBalance(address: string): Promise<{ matic: number; usdc: number }> {
@@ -216,32 +332,40 @@ export function WalletDashboard() {
   const [ethPrice, setEthPrice] = useState(3000);
   const [allocations, setAllocations] = useState(ALLOCATIONS);
   const [goals, setGoals] = useState(TRADING_GOALS);
+  const [positions, setPositions] = useState<ActivePosition[]>([]);
+  const [traderStats, setTraderStats] = useState<LiveTraderStats>({
+    totalTrades: 0, totalPnL: 0, wins: 0, losses: 0, winRate: 0, dailyVolume: 0, maxDailyVolume: 5
+  });
 
   useEffect(() => {
     const fetchAll = async () => {
       try {
-        const [baseEth, polygonBal, coldEth, price, tokens] = await Promise.all([
-          fetchBaseBalance(PHANTOM_WALLET),
-          fetchPolygonBalance(PHANTOM_WALLET),
+        // Fetch from brain server (primary) with direct RPC fallback
+        const brainData = await fetchHoldingsFromBrain();
+        
+        // Also fetch cold wallet and polygon separately
+        const [coldEth, polygonBal] = await Promise.all([
           fetchBaseBalance(COLD_WALLET),
-          fetchEthPrice(),
-          fetchTokenBalances(PHANTOM_WALLET),
+          fetchPolygonBalance(PHANTOM_WALLET),
         ]);
-
-        setEthPrice(price);
         
-        // Calculate token value
-        const tokenValue = tokens.reduce((sum, t) => sum + (t.usdValue || 0), 0);
+        setEthPrice(brainData.ethPrice);
+        setPositions(brainData.positions);
+        setTraderStats(brainData.stats);
         
-        const warmUsd = baseEth * price + polygonBal.matic * 0.5 + tokenValue; // MATIC ~$0.50
-        const coldUsd = coldEth * price;
+        // Get ETH balance from tokens
+        const ethToken = brainData.tokens.find(t => t.symbol === 'ETH');
+        const baseEth = ethToken ? Number(ethToken.balance) : 0;
+        
+        const warmUsd = brainData.totalUsd + polygonBal.matic * 0.5;
+        const coldUsd = coldEth * brainData.ethPrice;
         const totalUsd = warmUsd + coldUsd;
 
         setWallet({
           address: PHANTOM_WALLET,
           label: 'Phantom Trading',
           chains: {
-            base: { eth: baseEth, tokens: tokens },
+            base: { eth: baseEth, tokens: brainData.tokens },
             polygon: { matic: polygonBal.matic, usdc: polygonBal.usdc, positions: [] },
           },
           totalUsd: warmUsd,
@@ -252,9 +376,12 @@ export function WalletDashboard() {
         setColdBalance({ eth: coldEth, usd: coldUsd });
 
         // Update allocations based on actual holdings
+        const tradingCapital = brainData.tokens.filter(t => t.type === 'memecoin').reduce((sum, t) => sum + t.usdValue, 0);
+        const stableHoldings = brainData.tokens.filter(t => t.type === 'stablecoin').reduce((sum, t) => sum + t.usdValue, 0);
+        
         setAllocations([
-          { ...ALLOCATIONS[0], current: totalUsd > 0 ? (baseEth * price / totalUsd) * 100 : 0 },
-          { ...ALLOCATIONS[1], current: totalUsd > 0 ? (polygonBal.matic * 0.5 / totalUsd) * 100 : 0 },
+          { ...ALLOCATIONS[0], current: totalUsd > 0 ? ((baseEth * brainData.ethPrice + tradingCapital) / totalUsd) * 100 : 0 },
+          { ...ALLOCATIONS[1], current: totalUsd > 0 ? ((polygonBal.matic * 0.5 + stableHoldings) / totalUsd) * 100 : 0 },
           { ...ALLOCATIONS[2], current: totalUsd > 0 ? (coldUsd / totalUsd) * 100 : 0 },
           { ...ALLOCATIONS[3], current: 10 }, // Team fund estimate
         ]);
@@ -264,10 +391,17 @@ export function WalletDashboard() {
           if (g.name === 'Cold Wallet $5K') {
             return { ...g, current: coldUsd, status: coldUsd >= g.target ? 'achieved' : 'on_track' };
           }
+          if (g.name === 'Positive Win Rate') {
+            return { ...g, current: brainData.stats.winRate, status: brainData.stats.winRate >= 55 ? 'achieved' : 'on_track' };
+          }
+          if (g.name === 'First $1K Profit') {
+            return { ...g, current: brainData.stats.totalPnL, status: brainData.stats.totalPnL >= 1000 ? 'achieved' : 'on_track' };
+          }
           return g;
         }));
 
       } catch (err) {
+        console.error('[WalletDashboard] Fetch error:', err);
         setWallet(prev => ({ ...prev, status: 'error' }));
       }
     };
@@ -352,6 +486,7 @@ export function WalletDashboard() {
         </div>
       </div>
 
+
       {/* Token Holdings - Memecoins & $DRB */}
       {wallet.chains.base.tokens && wallet.chains.base.tokens.length > 0 && (
         <div className="p-4 rounded-xl" style={{ backgroundColor: '#FFFFFF', border: '1px solid #FF6B0040' }}>
@@ -374,6 +509,37 @@ export function WalletDashboard() {
                 <div className="text-right">
                   <p className="font-mono text-sm" style={{ color: '#1A1A1A' }}>{token.balance.toLocaleString()}</p>
                   <p className="text-xs" style={{ color: '#555555' }}>${(token.usdValue || 0).toFixed(2)}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Active Trades / Positions */}
+      {positions && positions.length > 0 && (
+        <div className="p-4 rounded-xl" style={{ backgroundColor: '#F0F8FF', border: '1px solid #7C3AED40' }}>
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="text-sm font-mono" style={{ color: '#7C3AED' }}>ACTIVE TRADES</h3>
+            <span className="text-xs px-2 py-0.5 rounded" style={{ backgroundColor: '#7C3AED20', color: '#7C3AED' }}>
+              {positions.length} open
+            </span>
+          </div>
+          <div className="space-y-2">
+            {positions.map((pos, i) => (
+              <div key={i} className="flex items-center justify-between p-2 rounded-lg" style={{ backgroundColor: '#F8F8FF' }}>
+                <div className="flex items-center gap-2">
+                  <span className="text-lg">📈</span>
+                  <div>
+                    <span className="font-bold text-sm" style={{ color: '#1A1A1A' }}>{pos.symbol}</span>
+                    <span className="text-xs ml-2" style={{ color: '#888888' }}>{pos.chain}</span>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="font-mono text-sm" style={{ color: '#1A1A1A' }}>{pos.amount.toLocaleString()}</p>
+                  <p className="text-xs" style={{ color: pos.pnl >= 0 ? '#00AA66' : '#DC2626' }}>
+                    PnL: ${pos.pnl.toFixed(2)}
+                  </p>
                 </div>
               </div>
             ))}

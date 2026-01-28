@@ -881,6 +881,167 @@ app.get('/live-trader/moonbags', async (req, res) => {
   }
 });
 
+// =============================================================================
+// 💰 WALLET HOLDINGS — Real-time on-chain balances via Bankr
+// =============================================================================
+
+// Cache for wallet holdings (refresh every 30s)
+let holdingsCache = null;
+let holdingsCacheTime = 0;
+const HOLDINGS_CACHE_TTL = 30000; // 30 seconds
+
+app.get('/holdings', async (req, res) => {
+  const walletAddress = '0xd06Aa956CEDA935060D9431D8B8183575c41072d';
+  
+  // Return cached if fresh
+  if (holdingsCache && Date.now() - holdingsCacheTime < HOLDINGS_CACHE_TTL) {
+    return res.json({ ...holdingsCache, cached: true });
+  }
+  
+  try {
+    // Try to get live holdings via Bankr
+    const { BankrClient, CONFIG: traderConfig } = require('./live-trader.js');
+    const bankr = new BankrClient();
+    
+    // Query wallet balances via natural language
+    const prompt = `Show me the token balances for wallet ${walletAddress} on Base chain. Include ETH, USDC, and any other tokens.`;
+    
+    console.log('📊 Fetching wallet holdings via Bankr...');
+    
+    const result = await bankr.promptAndWait(prompt, (msg) => {
+      console.log(`   📡 ${msg}`);
+    });
+    
+    if (result.status === 'completed') {
+      // Parse Bankr response for holdings
+      const holdings = {
+        wallet: walletAddress,
+        chain: 'base',
+        timestamp: new Date().toISOString(),
+        raw: result.response,
+        tokens: [],
+        totalValueUSD: 0,
+        source: 'bankr-live',
+      };
+      
+      // Extract token data from rich data if available
+      if (result.richData?.length > 0) {
+        holdings.richData = result.richData;
+      }
+      
+      // Cache it
+      holdingsCache = holdings;
+      holdingsCacheTime = Date.now();
+      
+      return res.json(holdings);
+    }
+    
+    throw new Error('Bankr query failed');
+    
+  } catch (err) {
+    console.log('Holdings fetch error:', err.message);
+    
+    // Fallback: Return known positions from state + cached data
+    try {
+      const { loadState, loadMoonbags } = require('./live-trader.js');
+      const state = await loadState();
+      const moonbags = await loadMoonbags();
+      
+      const fallbackHoldings = {
+        wallet: walletAddress,
+        chain: 'base',
+        timestamp: new Date().toISOString(),
+        source: 'local-state',
+        error: err.message,
+        // Known native balances (manually tracked)
+        tokens: [
+          { symbol: 'ETH', name: 'Ethereum', balance: '~0.003', valueUSD: 9.50, chain: 'base', type: 'native' },
+          { symbol: 'USDC', name: 'USD Coin', balance: '~9.67', valueUSD: 9.67, chain: 'base', type: 'stablecoin' },
+          { symbol: 'BNKR', name: 'Bankr', balance: '~0.49', valueUSD: 0.26, chain: 'base', type: 'memecoin' },
+        ],
+        positions: state.positions || [],
+        moonbags: moonbags?.positions || [],
+        totalValueUSD: 19.43,
+      };
+      
+      return res.json(fallbackHoldings);
+      
+    } catch {
+      return res.json({
+        wallet: walletAddress,
+        chain: 'base',
+        timestamp: new Date().toISOString(),
+        source: 'offline',
+        error: 'Unable to fetch holdings',
+        tokens: [],
+        totalValueUSD: 0,
+      });
+    }
+  }
+});
+
+// Quick balance check endpoint (doesn't use Bankr API - just state)
+app.get('/holdings/quick', async (req, res) => {
+  const walletAddress = '0xd06Aa956CEDA935060D9431D8B8183575c41072d';
+  
+  try {
+    const { loadState, loadMoonbags, CONFIG: traderConfig } = require('./live-trader.js');
+    const state = await loadState();
+    const moonbags = await loadMoonbags();
+    
+    // Read any cached holdings data
+    let cachedTokens = [];
+    try {
+      const holdingsFile = path.join(DATA_DIR, 'wallet-holdings.json');
+      const cached = await fs.readFile(holdingsFile, 'utf8');
+      const parsed = JSON.parse(cached);
+      cachedTokens = parsed.tokens || [];
+    } catch {}
+    
+    res.json({
+      wallet: walletAddress,
+      coldWallet: traderConfig.COLD_WALLET,
+      chain: 'base',
+      timestamp: new Date().toISOString(),
+      source: 'local-state',
+      // Active trading positions
+      activePositions: (state.positions || []).map(p => ({
+        symbol: p.symbol,
+        amount: p.amount,
+        entryPrice: p.entryPrice,
+        currentValue: p.amount * (p.currentPrice || p.entryPrice),
+        pnl: p.unrealizedPnL || 0,
+        chain: p.chain || 'base',
+      })),
+      // Moonbag holdings (long-term holds)
+      moonbags: (moonbags?.positions || []).map(m => ({
+        symbol: m.symbol,
+        amount: m.amount,
+        originalEntry: m.originalEntry,
+        currentPrice: m.currentPrice,
+        chain: m.chain || 'base',
+      })),
+      // Cached token balances
+      tokens: cachedTokens,
+      // Trading stats
+      stats: {
+        totalTrades: state.totalTrades || 0,
+        totalPnL: state.totalPnL || 0,
+        dailyVolume: state.dailyVolume || 0,
+        maxDailyVolume: traderConfig.MAX_DAILY_VOLUME,
+      },
+    });
+  } catch (err) {
+    res.json({
+      wallet: walletAddress,
+      error: err.message,
+      activePositions: [],
+      moonbags: [],
+      tokens: [],
+    });
+  }
+});
+
 app.get('/swarm/:strategy', async (req, res) => {
   const state = await loadSwarmState();
   const trader = state.traders[req.params.strategy];
