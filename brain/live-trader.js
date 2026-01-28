@@ -465,46 +465,55 @@ async function discoverNewTokens() {
   const tokens = [];
   
   try {
-    // Check DexScreener for new Base tokens
+    // Use DexScreener's latest pairs endpoint for Base chain
     const res = await fetch(
-      'https://api.dexscreener.com/latest/dex/search?q=base',
+      'https://api.dexscreener.com/latest/dex/pairs/base',
       { timeout: 10000 }
     );
     const data = await res.json();
     
-    for (const pair of (data.pairs || []).slice(0, 20)) {
-      // Filter criteria
-      if (pair.chainId !== 'base') continue;
-      if (pair.liquidity?.usd < CONFIG.MIN_LIQUIDITY) continue;
+    console.log(`   📡 DexScreener returned ${data.pairs?.length || 0} Base pairs`);
+    
+    for (const pair of (data.pairs || []).slice(0, 50)) {
+      // Relaxed liquidity check - $5k minimum for memecoins
+      const liquidity = parseFloat(pair.liquidity?.usd || 0);
+      if (liquidity < 5000) continue;
       
-      // Age check - less than 24 hours old
+      // Age check - less than 48 hours old for more opportunities
       const pairAge = Date.now() - new Date(pair.pairCreatedAt).getTime();
       const hoursSinceCreation = pairAge / (1000 * 60 * 60);
       
-      if (hoursSinceCreation > 24) continue;
+      // Skip if older than 48 hours
+      if (hoursSinceCreation > 48) continue;
       
-      // Momentum check - must be up
+      // Get price change
       const priceChange = parseFloat(pair.priceChange?.h24 || 0);
-      if (priceChange < 10) continue; // At least 10% up
+      
+      // Volume check - needs some activity
+      const volume = parseFloat(pair.volume?.h24 || 0);
+      if (volume < 1000) continue;
       
       tokens.push({
         symbol: pair.baseToken?.symbol,
         address: pair.baseToken?.address,
         price: parseFloat(pair.priceUsd || 0),
         priceChange24h: priceChange,
-        volume24h: parseFloat(pair.volume?.h24 || 0),
-        liquidity: parseFloat(pair.liquidity?.usd || 0),
+        volume24h: volume,
+        liquidity: liquidity,
         pairAddress: pair.pairAddress,
         age: hoursSinceCreation,
         dex: pair.dexId,
+        url: pair.url,
       });
     }
   } catch (error) {
     console.log(`   ⚠️ Token discovery error: ${error.message}`);
   }
   
-  // Sort by momentum (price change)
-  tokens.sort((a, b) => b.priceChange24h - a.priceChange24h);
+  // Sort by volume (active trading)
+  tokens.sort((a, b) => b.volume24h - a.volume24h);
+  
+  console.log(`   ✅ Found ${tokens.length} potential tokens`);
   
   return tokens;
 }
@@ -1301,9 +1310,9 @@ async function startPresenceTrading() {
   presence.on('newToken', async (token) => {
     const state = await loadState();
     
-    // Quick qualification
-    if (token.liquidity < CONFIG.MIN_LIQUIDITY) return;
-    if (token.age > 30) return; // Only fresh tokens
+    // Quick qualification - relaxed for memecoins
+    if (token.liquidity < 5000) return; // $5k minimum
+    if (token.age > 60) return; // Within 1 hour
     if (state.positions.length >= CONFIG.MAX_OPEN_POSITIONS) return;
     if (state.dailyVolume >= CONFIG.MAX_DAILY_VOLUME) return;
     
@@ -1311,17 +1320,22 @@ async function startPresenceTrading() {
     let score = 0;
     if (token.age < 5) score += 40;      // Super fresh
     else if (token.age < 15) score += 25;
+    else if (token.age < 30) score += 15;
     
     if (token.priceChange > 50) score += 30;
     else if (token.priceChange > 20) score += 20;
+    else if (token.priceChange > 0) score += 10;
     
     if (token.volume24h > 50000) score += 20;
+    else if (token.volume24h > 10000) score += 10;
+    
     if (token.liquidity > 30000) score += 10;
+    else if (token.liquidity > 10000) score += 5;
     
-    console.log(`   📊 Score: ${score}/100`);
+    console.log(`   📊 ${token.symbol}: Score ${score}/100 (age: ${token.age.toFixed(1)}min, liq: $${token.liquidity.toFixed(0)})`);
     
-    if (score >= 60) {
-      console.log(`   🎯 BLESSING OPPORTUNITY!`);
+    if (score >= 50) { // Lowered from 60 to 50
+      console.log(`   🎯 BLESSING OPPORTUNITY: ${token.symbol}!`);
       await executeEntry(token, state);
       presence.addToWatch(token.address);
     }
