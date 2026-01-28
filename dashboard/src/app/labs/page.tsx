@@ -181,6 +181,7 @@ export default function LabsPage() {
   // ══════════════════════════════════════════════════════════════════════════
 
   const fetchAllData = useCallback(async () => {
+    console.log('[Labs] Fetching data from:', BRAIN_URL);
     try {
       // Parallel fetch for speed
       const [traderRes, historyRes, moonbagRes, watchlistRes, trendingRes] = await Promise.allSettled([
@@ -191,9 +192,12 @@ export default function LabsPage() {
         fetch(`${BRAIN_URL}/tokens/trending`),
       ]);
 
+      console.log('[Labs] Trader response:', traderRes.status, traderRes.status === 'fulfilled' ? traderRes.value.status : 'N/A');
+
       // Live trader status
       if (traderRes.status === 'fulfilled' && traderRes.value.ok) {
         const data = await traderRes.value.json();
+        console.log('[Labs] Live trader data:', data?.active, data?.wallet?.slice(0,10));
         setLiveTrader(data);
         setBrainOnline(true);
         

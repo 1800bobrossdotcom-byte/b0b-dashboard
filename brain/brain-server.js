@@ -94,12 +94,24 @@ const ACTIVITY_LOG = path.join(DATA_DIR, 'activity-log.json');
 // =============================================================================
 
 app.use(cors({
-  origin: [
-    'https://b0b.dev',
-    'https://d0t.b0b.dev',
-    'https://0type.b0b.dev',
-    'http://localhost:3000',
-  ]
+  origin: function(origin, callback) {
+    // Allow requests with no origin (mobile apps, curl, etc)
+    if (!origin) return callback(null, true);
+    
+    // Allow all b0b.dev subdomains and localhost
+    const allowed = [
+      /^https:\/\/.*\.?b0b\.dev$/,
+      /^http:\/\/localhost:\d+$/,
+    ];
+    
+    if (allowed.some(pattern => pattern.test(origin))) {
+      return callback(null, true);
+    }
+    
+    console.log(`[CORS] Blocked: ${origin}`);
+    return callback(null, false);
+  },
+  credentials: true,
 }));
 app.use(express.json());
 
