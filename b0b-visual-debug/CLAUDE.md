@@ -1,5 +1,5 @@
 # CLAUDE.md - Visual Debug Instructions
-
+![alt text](image.png)
 ## What This Is
 
 You (Claude) cannot see browser output directly. This toolkit gives you visual feedback through automated screenshots and pixel analysis.

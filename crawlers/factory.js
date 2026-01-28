@@ -21,6 +21,9 @@ const path = require('path');
 // Import crawler types
 const PolymarketCrawler = require('./polymarket-crawler');
 const SolanaCrawler = require('./solana-crawler');
+const ContentCrawler = require('./content-crawler');
+const MusicCrawler = require('./music-crawler');
+const TwitterCrawler = require('./twitter-crawler');
 
 class CrawlerFactory {
   constructor() {
@@ -28,10 +31,13 @@ class CrawlerFactory {
     this.types = {
       polymarket: PolymarketCrawler,
       solana: SolanaCrawler,
-      // Add more as we build them
+      content: ContentCrawler,
+      music: MusicCrawler,
+      twitter: TwitterCrawler,
     };
     
     console.log('🏭 Crawler Factory initialized');
+    console.log(`   Available types: ${Object.keys(this.types).join(', ')}`);
   }
 
   // Create a crawler by type

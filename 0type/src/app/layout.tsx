@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-export const metadata: Metadata = {
+export const metadata:  _Metadata = {
   title: "0TYPE — Autonomous Typography",
   description: "Font foundry by B0B. Fresh typefaces generated continuously. Subscribe for unlimited access or buy individual fonts. Crypto-native. Open source = free.",
   keywords: ["fonts", "typography", "foundry", "typeface", "B0B", "autonomous", "AI", "generative"],

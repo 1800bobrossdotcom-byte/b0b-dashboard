@@ -1,0 +1,149 @@
+{
+  "timestamp": "2026-01-28T03:46:10.964Z",
+  "tasks": [
+    {
+      "priority": "P0",
+      "category": "DESIGN",
+      "task": "Redesign b0b.dev homepage - Mother NY aesthetic",
+      "status": "in-progress"
+    },
+    {
+      "priority": "P0",
+      "category": "DESIGN",
+      "task": "Create bold hero with minimal copy",
+      "status": "not-started"
+    },
+    {
+      "priority": "P0",
+      "category": "DESIGN",
+      "task": "Add visual texture/patterns (like tartan)",
+      "status": "not-started"
+    },
+    {
+      "priority": "P0",
+      "category": "DESIGN",
+      "task": "Implement flowing, breathing layouts",
+      "status": "not-started"
+    },
+    {
+      "priority": "P0",
+      "category": "INFRA",
+      "task": "d0t.b0b.dev Dockerfile deployment fix",
+      "status": "completed"
+    },
+    {
+      "priority": "P1",
+      "category": "INFRA",
+      "task": "Set up Railway cron for crawlers",
+      "status": "not-started"
+    },
+    {
+      "priority": "P1",
+      "category": "INFRA",
+      "task": "Create unified /api/live endpoint",
+      "status": "completed"
+    },
+    {
+      "priority": "P1",
+      "category": "CRAWLERS",
+      "task": "Polymarket crawler - WORKING",
+      "status": "completed"
+    },
+    {
+      "priority": "P1",
+      "category": "CRAWLERS",
+      "task": "Content crawler - GitHub repos",
+      "status": "completed"
+    },
+    {
+      "priority": "P1",
+      "category": "CRAWLERS",
+      "task": "Music crawler - playlists",
+      "status": "completed"
+    },
+    {
+      "priority": "P1",
+      "category": "CRAWLERS",
+      "task": "Twitter crawler - needs API key",
+      "status": "needs-config"
+    },
+    {
+      "priority": "P1",
+      "category": "CRAWLERS",
+      "task": "Solana crawler - needs wallet address",
+      "status": "needs-config"
+    },
+    {
+      "priority": "P1",
+      "category": "TRADING",
+      "task": "Configure Phantom wallet in Solana crawler",
+      "status": "not-started"
+    },
+    {
+      "priority": "P1",
+      "category": "TRADING",
+      "task": "Test Nash equilibrium trading strategy",
+      "status": "not-started"
+    },
+    {
+      "priority": "P2",
+      "category": "TRADING",
+      "task": "Set up automated trading loop",
+      "status": "not-started"
+    },
+    {
+      "priority": "P2",
+      "category": "FEATURES",
+      "task": "Port b0b.dev design to d0t.finance",
+      "status": "not-started"
+    },
+    {
+      "priority": "P2",
+      "category": "FEATURES",
+      "task": "Add live Polymarket data to homepage",
+      "status": "not-started"
+    },
+    {
+      "priority": "P2",
+      "category": "FEATURES",
+      "task": "Add music player component",
+      "status": "not-started"
+    },
+    {
+      "priority": "P2",
+      "category": "FEATURES",
+      "task": "Conversational AI chat (like Mother)",
+      "status": "not-started"
+    },
+    {
+      "priority": "P2",
+      "category": "BRANDING",
+      "task": "Design B0B logo for Clanker token",
+      "status": "not-started"
+    },
+    {
+      "priority": "P2",
+      "category": "BRANDING",
+      "task": "Create brand pattern/texture",
+      "status": "not-started"
+    },
+    {
+      "priority": "P3",
+      "category": "BRANDING",
+      "task": "Design d0t logo",
+      "status": "not-started"
+    },
+    {
+      "priority": "P3",
+      "category": "AUTOMATION",
+      "task": "24/7 autonomous operation when VS Code off",
+      "status": "not-started"
+    },
+    {
+      "priority": "P3",
+      "category": "AUTOMATION",
+      "task": "Self-healing deployment pipeline",
+      "status": "not-started"
+    }
+  ]
+}

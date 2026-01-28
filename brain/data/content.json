@@ -1,0 +1,301 @@
+{
+  "crawler": "content",
+  "timestamp": "2026-01-28T03:30:17.829Z",
+  "data": {
+    "repositories": [
+      {
+        "name": "anthropics/claude-cookbooks",
+        "description": "A collection of notebooks/recipes showcasing some fun and effective ways of using Claude.",
+        "stars": 32012,
+        "forks": 3293,
+        "language": "Jupyter Notebook",
+        "topics": [],
+        "updated": "2026-01-28T03:29:14Z",
+        "url": "https://github.com/anthropics/claude-cookbooks",
+        "readme": "# Claude Cookbooks\n\nThe Claude Cookbooks provide code and guides designed to help developers build with Claude, offering copy-able code snippets that you can easily integrate into your own projects.\n\n## Prerequisites\n\nTo make the most of the examples in this cookbook, you'll need a Claude API key (sign up for free [here](https://www.anthropic.com)).\n\nWhile the code examples are primarily written in Python, the concepts can be adapted to any programming language that supports interaction with the Claude API.\n\nIf you're new to working with the Claude API, we recommend starting with our [Claude API Fundamentals course](https://github.com/anthropics/courses/tree/master/anthropic_api_fundamentals) to get a solid foundation.\n\n## Explore Further\n\nLooking for more resources to enhance your experience with Claude and AI assistants? Check out these helpful links:\n\n- [Anthropic developer documentation](https://docs.claude.com/claude/docs/guide-to-anthropics-prompt-engineering-resources)\n- [Anthro",
+        "topFiles": [
+          {
+            "name": "CLAUDE.md",
+            "path": "CLAUDE.md",
+            "url": "https://github.com/anthropics/claude-cookbooks/blob/main/CLAUDE.md",
+            "type": "file"
+          },
+          {
+            "name": "CONTRIBUTING.md",
+            "path": "CONTRIBUTING.md",
+            "url": "https://github.com/anthropics/claude-cookbooks/blob/main/CONTRIBUTING.md",
+            "type": "file"
+          },
+          {
+            "name": "README.md",
+            "path": "README.md",
+            "url": "https://github.com/anthropics/claude-cookbooks/blob/main/README.md",
+            "type": "file"
+          },
+          {
+            "name": "requirements-dev.txt",
+            "path": "requirements-dev.txt",
+            "url": "https://github.com/anthropics/claude-cookbooks/blob/main/requirements-dev.txt",
+            "type": "file"
+          }
+        ],
+        "crawledAt": "2026-01-28T03:30:06.234Z"
+      },
+      {
+        "name": "anthropics/courses",
+        "description": "Anthropic's educational courses",
+        "stars": 18278,
+        "forks": 1731,
+        "language": "Jupyter Notebook",
+        "topics": [],
+        "updated": "2026-01-28T02:38:15Z",
+        "url": "https://github.com/anthropics/courses",
+        "readme": "# Anthropic courses\n\nWelcome to Anthropic's educational courses. This repository currently contains five courses.  We suggest completing the courses in the following order:\n\n1. [Anthropic API fundamentals](./anthropic_api_fundamentals/README.md) - teaches the essentials of working with the Claude SDK: getting an API key, working with model parameters, writing multimodal prompts, streaming responses, etc.\n2. [Prompt engineering interactive tutorial](./prompt_engineering_interactive_tutorial/README.md) - a comprehensive step-by-step guide to key prompting techniques. [[AWS Workshop version](https://catalog.us-east-1.prod.workshops.aws/workshops/0644c9e9-5b82-45f2-8835-3b5aa30b1848/en-US)]\n3. [Real world prompting](./real_world_prompting/README.md) - learn how to incorporate prompting techniques into complex, real world prompts. [[Google Vertex version](https://github.com/anthropics/courses/tree/vertex/real_world_prompting)] \n4. [Prompt evaluations](./prompt_evaluations/README.md) - learn",
+        "topFiles": [
+          {
+            "name": "README.md",
+            "path": "README.md",
+            "url": "https://github.com/anthropics/courses/blob/master/README.md",
+            "type": "file"
+          }
+        ],
+        "crawledAt": "2026-01-28T03:30:07.765Z"
+      },
+      {
+        "name": "base/guides",
+        "description": null,
+        "stars": 131,
+        "forks": 60,
+        "language": "JavaScript",
+        "topics": [],
+        "updated": "2026-01-24T17:23:16Z",
+        "url": "https://github.com/base/guides",
+        "readme": "<p><img src=\"./Base_Wordmark_Blue.svg\"/></p>\n\n# Build On [Base](https://base.org/)\n\n## Guides\n\nThese are a set of guides to help build on Base. Looking forward to seeing you onchain.\n\nBuilder Guides\n\n| Title                      | Description                                             |\n| -------------------------- | ------------------------------------------------------- |\n| [Based](./based/README.md) | Learn how Base is built through technical documentation |\n\nERC Guides\n\n| Title                        | Description                         |\n| ---------------------------- | ----------------------------------- |\n| [6551](./erc/6551/README.md) | How to deploy a token bound account |\n\nBridge Guides\n\n| Title                               | Description                  |\n| ----------------------------------- | ---------------------------- |\n| [Native](./bridge/native/README.md) | How to bridge tokens to base |\n\n## Troubleshooting\n\nIf you run into any troubles, please reach out for help o",
+        "topFiles": [
+          {
+            "name": "README.md",
+            "path": "README.md",
+            "url": "https://github.com/base/guides/blob/main/README.md",
+            "type": "file"
+          }
+        ],
+        "crawledAt": "2026-01-28T03:30:10.047Z"
+      },
+      {
+        "name": "coinbase/onchainkit",
+        "description": "React components and TypeScript utilities to help you build top-tier onchain apps.",
+        "stars": 1012,
+        "forks": 483,
+        "language": "TypeScript",
+        "topics": [
+          "coinbase",
+          "component-library",
+          "onchain",
+          "react",
+          "tailwindcss",
+          "typescript",
+          "ui",
+          "ui-components",
+          "wagmi",
+          "web3"
+        ],
+        "updated": "2026-01-28T01:10:27Z",
+        "url": "https://github.com/coinbase/onchainkit",
+        "readme": "<div align=\"center\">\n  <p>\n    <a href=\"https://onchainkit.xyz\">\n      <img src=\"./assets/read-me-banner.png\" width=\"100%\" height=\"100%\" alt=\"OnchainKit logo vibes\"/>\n    </a>\n  </p>\n\n  <h1 style=\"font-size: 3em; margin-bottom: 20px;\">\n    OnchainKit\n  </h1>\n\n  <p style=\"font-size: 1.2em; max-width: 600px; margin: 0 auto 20px;\">\n    React components and TypeScript utilities to help you build top-tier onchain apps.\n  </p>\n\n<p>\n  <a href=\"https://www.npmjs.com/package/@coinbase/onchainkit\" target=\"_blank\" rel=\"noopener noreferrer\">\n    <img src=\"https://img.shields.io/npm/v/@coinbase/onchainkit?style=flat-square&color=0052FF\" alt=\"Version\" />\n  </a>\n  <a href=\"https://github.com/coinbase/onchainkit/commits/main\">\n    <img src=\"https://img.shields.io/github/last-commit/coinbase/onchainkit?color=0052FF&style=flat-square\" alt=\"last update\" />\n  </a>\n  <a href=\"https://www.npmjs.com/package/@coinbase/onchainkit\" target=\"_blank\" rel=\"noopener noreferrer\">\n    <img src=\"https://img.shields.io/",
+        "topFiles": [
+          {
+            "name": "CLAUDE.md",
+            "path": "CLAUDE.md",
+            "url": "https://github.com/coinbase/onchainkit/blob/main/CLAUDE.md",
+            "type": "file"
+          },
+          {
+            "name": "LICENSE.md",
+            "path": "LICENSE.md",
+            "url": "https://github.com/coinbase/onchainkit/blob/main/LICENSE.md",
+            "type": "file"
+          },
+          {
+            "name": "README.md",
+            "path": "README.md",
+            "url": "https://github.com/coinbase/onchainkit/blob/main/README.md",
+            "type": "file"
+          },
+          {
+            "name": "alpha-api-changes.md",
+            "path": "alpha-api-changes.md",
+            "url": "https://github.com/coinbase/onchainkit/blob/main/alpha-api-changes.md",
+            "type": "file"
+          },
+          {
+            "name": "alpha-upgrade-guide.md",
+            "path": "alpha-upgrade-guide.md",
+            "url": "https://github.com/coinbase/onchainkit/blob/main/alpha-upgrade-guide.md",
+            "type": "file"
+          }
+        ],
+        "crawledAt": "2026-01-28T03:30:11.786Z"
+      },
+      {
+        "name": "paradigmxyz/reth",
+        "description": "Modular, contributor-friendly and blazing-fast implementation of the Ethereum protocol, in Rust",
+        "stars": 5366,
+        "forks": 2250,
+        "language": "Rust",
+        "topics": [
+          "blockchain",
+          "contributor-friendly",
+          "distributed-systems",
+          "ethereum",
+          "execution-layer",
+          "modular",
+          "p2p",
+          "rust"
+        ],
+        "updated": "2026-01-28T00:58:57Z",
+        "url": "https://github.com/paradigmxyz/reth",
+        "readme": "# reth\n\n[![bench status](https://github.com/paradigmxyz/reth/actions/workflows/bench.yml/badge.svg)](https://github.com/paradigmxyz/reth/actions/workflows/bench.yml)\n[![CI status](https://github.com/paradigmxyz/reth/workflows/unit/badge.svg)][gh-ci]\n[![cargo-lint status](https://github.com/paradigmxyz/reth/actions/workflows/lint.yml/badge.svg)][gh-lint]\n[![Telegram Chat][tg-badge]][tg-url]\n\n**Modular, contributor-friendly and blazing-fast implementation of the Ethereum protocol**\n\n![](./assets/reth-prod.png)\n\n**[Install](https://paradigmxyz.github.io/reth/installation/installation.html)**\n| [User Docs](https://reth.rs)\n| [Developer Docs](./docs)\n| [Crate Docs](https://reth.rs/docs)\n\n[gh-ci]: https://github.com/paradigmxyz/reth/actions/workflows/unit.yml\n[gh-lint]: https://github.com/paradigmxyz/reth/actions/workflows/lint.yml\n[tg-badge]: https://img.shields.io/endpoint?color=neon&logo=telegram&label=chat&url=https%3A%2F%2Ftg.sumanjay.workers.dev%2Fparadigm%5Freth\n\n## What is Reth?\n\nRet",
+        "topFiles": [
+          {
+            "name": "CLAUDE.md",
+            "path": "CLAUDE.md",
+            "url": "https://github.com/paradigmxyz/reth/blob/main/CLAUDE.md",
+            "type": "file"
+          },
+          {
+            "name": "CONTRIBUTING.md",
+            "path": "CONTRIBUTING.md",
+            "url": "https://github.com/paradigmxyz/reth/blob/main/CONTRIBUTING.md",
+            "type": "file"
+          },
+          {
+            "name": "HARDFORK-CHECKLIST.md",
+            "path": "HARDFORK-CHECKLIST.md",
+            "url": "https://github.com/paradigmxyz/reth/blob/main/HARDFORK-CHECKLIST.md",
+            "type": "file"
+          },
+          {
+            "name": "README.md",
+            "path": "README.md",
+            "url": "https://github.com/paradigmxyz/reth/blob/main/README.md",
+            "type": "file"
+          },
+          {
+            "name": "SECURITY.md",
+            "path": "SECURITY.md",
+            "url": "https://github.com/paradigmxyz/reth/blob/main/SECURITY.md",
+            "type": "file"
+          }
+        ],
+        "crawledAt": "2026-01-28T03:30:13.780Z"
+      },
+      {
+        "name": "solana-foundation/solana-web3.js",
+        "description": "Solana JavaScript SDK",
+        "stars": 2686,
+        "forks": 1032,
+        "language": "TypeScript",
+        "topics": [
+          "blockchain",
+          "javascript",
+          "js",
+          "node",
+          "nodejs",
+          "sdk",
+          "solana"
+        ],
+        "updated": "2026-01-28T02:45:28Z",
+        "url": "https://github.com/solana-foundation/solana-web3.js",
+        "readme": "[![npm][npm-image]][npm-url]\n[![npm-downloads][npm-downloads-image]][npm-url]\n[![semantic-release][semantic-release-image]][semantic-release-url]\n<br />\n[![code-style-prettier][code-style-prettier-image]][code-style-prettier-url]\n\n[code-style-prettier-image]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square\n[code-style-prettier-url]: https://github.com/prettier/prettier\n[npm-downloads-image]: https://img.shields.io/npm/dm/@solana/web3.js.svg?style=flat\n[npm-image]: https://img.shields.io/npm/v/@solana/web3.js.svg?style=flat\n[npm-url]: https://www.npmjs.com/package/@solana/web3.js\n[semantic-release-image]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg\n[semantic-release-url]: https://github.com/semantic-release/semantic-release\n\n> [!NOTE]\n> This is the maintenance branch for the 1.x line of `@solana/web3.js`. You can find the successor to this library here: [`@solana/kit`](https://l.anza.xyz/s/js-sdk-repo).\n\n# Solana",
+        "topFiles": [
+          {
+            "name": ".releaserc.json",
+            "path": ".releaserc.json",
+            "url": "https://github.com/solana-foundation/solana-web3.js/blob/maintenance/v1.x/.releaserc.json",
+            "type": "file"
+          },
+          {
+            "name": "README.md",
+            "path": "README.md",
+            "url": "https://github.com/solana-foundation/solana-web3.js/blob/maintenance/v1.x/README.md",
+            "type": "file"
+          },
+          {
+            "name": "SECURITY.md",
+            "path": "SECURITY.md",
+            "url": "https://github.com/solana-foundation/solana-web3.js/blob/maintenance/v1.x/SECURITY.md",
+            "type": "file"
+          },
+          {
+            "name": "babel.config.json",
+            "path": "babel.config.json",
+            "url": "https://github.com/solana-foundation/solana-web3.js/blob/maintenance/v1.x/babel.config.json",
+            "type": "file"
+          },
+          {
+            "name": "package.json",
+            "path": "package.json",
+            "url": "https://github.com/solana-foundation/solana-web3.js/blob/maintenance/v1.x/package.json",
+            "type": "file"
+          }
+        ],
+        "crawledAt": "2026-01-28T03:30:16.053Z"
+      },
+      {
+        "name": "project-serum/serum-dex",
+        "description": "Project Serum Rust Monorepo",
+        "stars": 700,
+        "forks": 359,
+        "language": "Rust",
+        "topics": [],
+        "updated": "2026-01-24T22:56:49Z",
+        "url": "https://github.com/project-serum/serum-dex",
+        "readme": "<div align=\"center\">\n  <img height=\"170\" src=\"http://github.com/project-serum/awesome-serum/blob/master/logo-serum.png?raw=true\" />\n\n  <h1>serum-dex</h1>\n\n  <p>\n    <strong>Project Serum Rust Monorepo</strong>\n  </p>\n\n  <p>\n    <a href=\"https://travis-ci.com/project-serum/serum-dex\"><img alt=\"Build Status\" src=\"https://travis-ci.com/project-serum/serum-dex.svg?branch=master\" /></a>\n    <a href=\"https://discord.com/channels/739225212658122886\"><img alt=\"Discord Chat\" src=\"https://img.shields.io/discord/739225212658122886?color=blueviolet\" /></a>\n    <a href=\"https://opensource.org/licenses/Apache-2.0\"><img alt=\"License\" src=\"https://img.shields.io/github/license/project-serum/serum-dex?color=blue\" /></a>\n  </p>\n\n  <h4>\n    <a href=\"https://projectserum.com/\">Website</a>\n    <span> | </span>\n    <a href=\"https://discord.gg/HSeFXbqsUX\">Discord</a>\n    <span> | </span>\n    <a href=\"https://github.com/project-serum/awesome-serum\">Awesome</a>\n    <span> | </span>\n    <a href=\"https://dex.pro",
+        "topFiles": [
+          {
+            "name": "README.md",
+            "path": "README.md",
+            "url": "https://github.com/project-serum/serum-dex/blob/master/README.md",
+            "type": "file"
+          }
+        ],
+        "crawledAt": "2026-01-28T03:30:17.828Z"
+      }
+    ],
+    "articles": [],
+    "timestamp": "2026-01-28T03:30:05.398Z",
+    "totalSources": 7,
+    "summary": {
+      "totalRepos": 7,
+      "totalStars": 60185,
+      "languages": [
+        "Jupyter Notebook",
+        "JavaScript",
+        "TypeScript",
+        "Rust"
+      ],
+      "topics": [
+        "coinbase",
+        "component-library",
+        "onchain",
+        "react",
+        "tailwindcss",
+        "typescript",
+        "ui",
+        "ui-components",
+        "wagmi",
+        "web3",
+        "blockchain",
+        "contributor-friendly",
+        "distributed-systems",
+        "ethereum",
+        "execution-layer",
+        "modular",
+        "p2p",
+        "rust",
+        "javascript",
+        "js"
+      ]
+    }
+  }
+}

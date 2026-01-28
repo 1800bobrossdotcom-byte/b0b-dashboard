@@ -1,0 +1,134 @@
+{
+  "timestamp": "2026-01-28T03:46:10.959Z",
+  "repos": {
+    "b0b-dashboard": {
+      "path": "dashboard/",
+      "github": "1800bobrossdotcom-byte/b0b-dashboard",
+      "branch": "main",
+      "domain": "b0b.dev",
+      "railway": "dependable-perfection",
+      "status": "live",
+      "tech": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Three.js"
+      ],
+      "localExists": true,
+      "hasGit": false
+    },
+    "d0t": {
+      "path": "d0t/",
+      "github": "1800bobrossdotcom-byte/d0t",
+      "branch": "master",
+      "domain": "d0t.b0b.dev",
+      "railway": "dependable-perfection",
+      "status": "live",
+      "tech": [
+        "Next.js",
+        "Electron",
+        "TypeScript"
+      ],
+      "localExists": true,
+      "hasGit": true
+    },
+    "0type": {
+      "path": "0type/",
+      "github": "1800bobrossdotcom-byte/0type",
+      "branch": "master",
+      "domain": "0type.b0b.dev",
+      "railway": "dependable-perfection",
+      "status": "live",
+      "tech": [
+        "Next.js",
+        "React",
+        "Stripe"
+      ],
+      "localExists": true,
+      "hasGit": true
+    },
+    "b0b-mcp": {
+      "path": "mcp/",
+      "github": "1800bobrossdotcom-byte/b0b-mcp",
+      "branch": "main",
+      "status": "development",
+      "tech": [
+        "Python",
+        "MCP Protocol"
+      ],
+      "localExists": true,
+      "hasGit": true
+    },
+    "b0b-api": {
+      "path": "api/",
+      "github": "1800bobrossdotcom-byte/b0b.api",
+      "branch": "main",
+      "status": "development",
+      "tech": [
+        "Python",
+        "FastAPI"
+      ],
+      "localExists": true,
+      "hasGit": true
+    },
+    "crawlers": {
+      "path": "crawlers/",
+      "github": null,
+      "status": "active",
+      "tech": [
+        "Node.js",
+        "APIs"
+      ],
+      "localExists": true,
+      "hasGit": false
+    },
+    "b0b-finance": {
+      "path": "b0b-finance/",
+      "github": null,
+      "status": "active",
+      "tech": [
+        "Node.js",
+        "Solana",
+        "Jupiter"
+      ],
+      "localExists": true,
+      "hasGit": false
+    }
+  },
+  "services": {
+    "b0b.dev": {
+      "status": "live",
+      "provider": "Railway"
+    },
+    "d0t.b0b.dev": {
+      "status": "live",
+      "provider": "Railway"
+    },
+    "0type.b0b.dev": {
+      "status": "live",
+      "provider": "Railway"
+    }
+  },
+  "crawlers": {},
+  "wallets": {
+    "phantom": {
+      "chain": "Solana",
+      "status": "active",
+      "purpose": "Trading & Treasury"
+    }
+  },
+  "issues": [
+    "crawlers: Not connected to GitHub",
+    "b0b-finance: Not connected to GitHub"
+  ],
+  "recommendations": [
+    "Redesign b0b.dev with Mother NY inspiration - bold, minimal, artistic",
+    "Port redesign aesthetic to d0t.finance for consistency",
+    "Set up Phantom wallet addresses in Solana crawler for live trading",
+    "Configure Twitter API credentials for social monitoring",
+    "Create Railway cron job for 24/7 crawler automation",
+    "Build unified data API that serves all crawler data",
+    "Design B0B logo for Clanker token launch",
+    "Set up monitoring/alerting for service health"
+  ]
+}

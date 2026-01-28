@@ -1,65 +1,262 @@
 'use client';
 
 /**
- * B0B.DEV — Landing Page
+ * B0B.DEV — Mother NY Inspired
  * 
- * Clean. Honest. Only what's real.
+ * Bold. Minimal. Artistic. Technical.
  * 
- * TENETS:
- * 1. Joy as Method — delight in simplicity
- * 2. Flow Over Force — let it breathe
- * 3. Simplicity in Complexity — hide machinery
- * 4. Happy Accidents — embrace discovery
- * 5. Transparent by Default — show the truth
+ * "Ars est celare artem" — The art is to conceal the art.
+ * 
+ * Inspired by Bob Ross: Joy in creation.
+ * Inspired by Mother NY: Say less, mean more.
  */
 
-import { 
-  CleanHeroSection,
-  LiveStatusSection,
-  ProjectsSection,
-  PhilosophySection,
-} from '@/components/sections';
+import { useEffect, useState } from 'react';
+
+// Noise texture SVG for visual interest
+const NoiseTexture = () => (
+  <svg className="fixed inset-0 w-full h-full pointer-events-none opacity-[0.03] z-50">
+    <filter id="noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#noise)"/>
+  </svg>
+);
+
+// Floating orb component
+const Orb = ({ delay = 0, size = 300, color = '#06b6d4' }: { delay?: number; size?: number; color?: string }) => (
+  <div 
+    className="absolute rounded-full blur-3xl opacity-20"
+    style={{
+      width: size,
+      height: size,
+      background: `radial-gradient(circle, ${color} 0%, transparent 70%)`,
+      animation: `float 20s ease-in-out infinite`,
+      animationDelay: `${delay}s`,
+    }}
+  />
+);
 
 export default function Home() {
+  const [time, setTime] = useState('');
+  const [mounted, setMounted] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    setMounted(true);
+    const updateTime = () => {
+      setTime(new Date().toLocaleTimeString('en-US', { 
+        hour12: false, 
+        hour: '2-digit', 
+        minute: '2-digit',
+        second: '2-digit'
+      }));
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const handleMove = (e: MouseEvent) => {
+      setMousePos({ 
+        x: (e.clientX / window.innerWidth - 0.5) * 20,
+        y: (e.clientY / window.innerHeight - 0.5) * 20
+      });
+    };
+    window.addEventListener('mousemove', handleMove);
+    return () => window.removeEventListener('mousemove', handleMove);
+  }, []);
+
   return (
-    <main className="bg-[#0a0a0f] min-h-screen">
-      {/* Scanlines overlay */}
-      <div className="fixed inset-0 pointer-events-none z-50 opacity-[0.03]">
-        <div className="w-full h-full" style={{
-          backgroundImage: 'repeating-linear-gradient(0deg, transparent 0px, transparent 1px, rgba(255,255,255,0.1) 1px, rgba(255,255,255,0.1) 2px)',
-          backgroundSize: '100% 2px'
-        }} />
+    <main className="bg-[#050508] text-white min-h-screen overflow-hidden">
+      <NoiseTexture />
+      
+      {/* Global styles */}
+      <style jsx global>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0) translateX(0); }
+          25% { transform: translateY(-20px) translateX(10px); }
+          50% { transform: translateY(-10px) translateX(-10px); }
+          75% { transform: translateY(-30px) translateX(5px); }
+        }
+      `}</style>
+      
+      {/* Floating orbs background */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div style={{ transform: `translate(${mousePos.x}px, ${mousePos.y}px)` }} className="transition-transform duration-1000 ease-out">
+          <div className="absolute top-1/4 left-1/4"><Orb delay={0} size={400} color="#06b6d4" /></div>
+          <div className="absolute top-1/2 right-1/4"><Orb delay={2} size={300} color="#8b5cf6" /></div>
+          <div className="absolute bottom-1/4 left-1/2"><Orb delay={4} size={350} color="#f59e0b" /></div>
+        </div>
       </div>
 
-      {/* Hero */}
-      <CleanHeroSection />
-      
-      {/* Live Status - what's actually running */}
-      <LiveStatusSection />
-      
-      {/* Projects - what we're building */}
-      <ProjectsSection />
-      
-      {/* Philosophy - why we build */}
-      <PhilosophySection />
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex flex-col justify-center px-8 md:px-16 lg:px-24">
+        <div className="max-w-6xl">
+          {/* Tagline */}
+          <p className="text-sm md:text-base text-neutral-500 font-mono mb-8 tracking-wider">
+            AN AUTONOMOUS CREATIVE INTELLIGENCE
+          </p>
 
-      {/* Footer */}
-      <footer className="py-12 px-6 border-t border-[var(--color-text-dim)]/10">
-        <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="font-mono text-xs text-[var(--color-text-dim)]">
-            © 2026 B0B.DEV — Building on Base
+          {/* Main Title - BOLD */}
+          <h1 className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-black leading-[0.85] tracking-tighter mb-12">
+            <span className="block">B</span>
+            <span className="block text-cyan-400">0</span>
+            <span className="block">B</span>
+          </h1>
+
+          {/* Subtitle - Minimal */}
+          <p className="text-xl md:text-2xl text-neutral-400 max-w-xl leading-relaxed mb-16">
+            A refinery that converts raw data into valuable decisions 
+            through emergent intelligence and happy accidents.
+          </p>
+
+          {/* Status line */}
+          <div className="flex items-center gap-4 text-sm font-mono text-neutral-500">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span>BUILDING ON BASE</span>
+            <span className="text-neutral-700">|</span>
+            <span>{mounted ? time : '--:--:--'}</span>
           </div>
-          <div className="flex gap-4 font-mono text-xs">
-            <a href="https://github.com/1800bobrossdotcom-byte" className="text-[var(--color-text-dim)] hover:text-[var(--color-text)]">
-              GitHub
+        </div>
+
+        {/* Scroll hint */}
+        <div className="absolute bottom-12 left-8 md:left-16 lg:left-24">
+          <div className="flex flex-col items-center gap-2 text-neutral-600">
+            <span className="text-xs tracking-widest">SCROLL</span>
+            <div className="w-px h-12 bg-gradient-to-b from-neutral-600 to-transparent" />
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section className="relative py-32 px-8 md:px-16 lg:px-24">
+        <div className="max-w-6xl">
+          <p className="text-sm text-neutral-500 font-mono mb-4">OUR WORK</p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
+            {/* 0TYPE */}
+            <a 
+              href="https://0type.b0b.dev" 
+              target="_blank"
+              className="group block p-8 border border-neutral-800 hover:border-neutral-600 transition-all duration-500 hover:bg-neutral-900/50"
+            >
+              <div className="flex items-center gap-2 mb-4">
+                <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                <span className="text-xs font-mono text-neutral-500">LIVE</span>
+              </div>
+              <h3 className="text-3xl font-bold mb-2 group-hover:text-cyan-400 transition-colors">0TYPE</h3>
+              <p className="text-neutral-500">Autonomous typography. AI-generated typefaces.</p>
             </a>
-            <a href="https://x.com/_b0bdev_" className="text-[var(--color-text-dim)] hover:text-[var(--color-text)]">
-              Twitter
+
+            {/* D0T Finance */}
+            <a 
+              href="https://d0t.b0b.dev" 
+              target="_blank"
+              className="group block p-8 border border-neutral-800 hover:border-neutral-600 transition-all duration-500 hover:bg-neutral-900/50"
+            >
+              <div className="flex items-center gap-2 mb-4">
+                <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                <span className="text-xs font-mono text-neutral-500">LIVE</span>
+              </div>
+              <h3 className="text-3xl font-bold mb-2 group-hover:text-cyan-400 transition-colors">D0T.FINANCE</h3>
+              <p className="text-neutral-500">Nash equilibrium trading. Swarm treasury.</p>
             </a>
-            <a href="https://base.org" className="text-[var(--color-text-dim)] hover:text-[var(--color-text)]">
+
+            {/* Ghost Mode */}
+            <div className="group block p-8 border border-neutral-800/50 bg-neutral-900/30">
+              <div className="flex items-center gap-2 mb-4">
+                <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                <span className="text-xs font-mono text-neutral-500">BUILDING</span>
+              </div>
+              <h3 className="text-3xl font-bold mb-2 text-neutral-600">GHOST MODE</h3>
+              <p className="text-neutral-600">Autonomous computer control. See, think, act.</p>
+            </div>
+
+            {/* R0SS */}
+            <div className="group block p-8 border border-neutral-800/50 bg-neutral-900/30">
+              <div className="flex items-center gap-2 mb-4">
+                <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                <span className="text-xs font-mono text-neutral-500">BUILDING</span>
+              </div>
+              <h3 className="text-3xl font-bold mb-2 text-neutral-600">R0SS COLLECTIVE</h3>
+              <p className="text-neutral-600">Multi-agent swarm. Emergent coordination.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Philosophy Section */}
+      <section className="relative py-32 px-8 md:px-16 lg:px-24 border-t border-neutral-800">
+        <div className="max-w-3xl">
+          <p className="text-sm text-neutral-500 font-mono mb-4">PHILOSOPHY</p>
+          
+          <blockquote className="text-4xl md:text-5xl font-light leading-tight text-neutral-300 mb-12">
+            "We don't make mistakes, just happy accidents."
+          </blockquote>
+
+          <p className="text-lg text-neutral-500 leading-relaxed">
+            B0B believes AI should be kind, transparent, and creative. 
+            Not scary, not hidden, not purely extractive. 
+            We build in public. We give back. We Bob Ross this.
+          </p>
+        </div>
+      </section>
+
+      {/* Tech/Partners Section */}
+      <section className="relative py-24 px-8 md:px-16 lg:px-24 border-t border-neutral-800">
+        <div className="max-w-6xl">
+          <p className="text-sm text-neutral-500 font-mono mb-12">POWERED BY</p>
+          
+          <div className="flex flex-wrap gap-8 items-center">
+            <a href="https://anthropic.com" target="_blank" className="text-neutral-500 hover:text-white transition-colors">
+              Claude AI
+            </a>
+            <a href="https://base.org" target="_blank" className="text-neutral-500 hover:text-white transition-colors">
               Base
             </a>
+            <a href="https://bankr.bot" target="_blank" className="text-neutral-500 hover:text-white transition-colors">
+              Bankr
+            </a>
+            <a href="https://railway.app" target="_blank" className="text-neutral-500 hover:text-white transition-colors">
+              Railway
+            </a>
+            <a href="https://github.com/1800bobrossdotcom-byte" target="_blank" className="text-neutral-500 hover:text-white transition-colors">
+              GitHub
+            </a>
           </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="relative py-24 px-8 md:px-16 lg:px-24 border-t border-neutral-800">
+        <div className="max-w-6xl flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+          <div>
+            <p className="text-2xl font-bold mb-2">B0B</p>
+            <p className="text-sm text-neutral-500">An autonomous creative intelligence.</p>
+          </div>
+          
+          <div className="flex gap-8 text-sm">
+            <a href="https://x.com/_b0bdev_" target="_blank" className="text-neutral-500 hover:text-white transition-colors">
+              Twitter
+            </a>
+            <a href="https://github.com/1800bobrossdotcom-byte" target="_blank" className="text-neutral-500 hover:text-white transition-colors">
+              GitHub
+            </a>
+            <a href="https://d0t.b0b.dev" target="_blank" className="text-neutral-500 hover:text-white transition-colors">
+              D0T
+            </a>
+            <a href="https://0type.b0b.dev" target="_blank" className="text-neutral-500 hover:text-white transition-colors">
+              0TYPE
+            </a>
+          </div>
+        </div>
+
+        <div className="mt-16 pt-8 border-t border-neutral-800/50">
+          <p className="text-xs text-neutral-600 font-mono">
+            © 2026 B0B.DEV — Building on Base — Ars est celare artem
+          </p>
         </div>
       </footer>
     </main>

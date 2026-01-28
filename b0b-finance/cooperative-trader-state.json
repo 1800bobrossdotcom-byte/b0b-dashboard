@@ -144,13 +144,13 @@
       },
       "analysis": {
         "viable": true,
-        "opportunityScore": 79.51374777777778,
+        "opportunityScore": 79.49700305555555,
         "price": 0.6815,
         "volume24h": 1099563.912200994,
         "liquidity": 1171614.71463,
         "edge": 0.3185
       },
-      "score": 79.51374777777778
+      "score": 79.49700305555555
     },
     {
       "market": {
@@ -301,13 +301,13 @@
       },
       "analysis": {
         "viable": true,
-        "opportunityScore": 79.46886361111112,
+        "opportunityScore": 79.45211888888889,
         "price": 0.317,
         "volume24h": 368050.80933600035,
         "liquidity": 1608919.23221,
         "edge": 0.317
       },
-      "score": 79.46886361111112
+      "score": 79.45211888888889
     },
     {
       "market": {
@@ -454,13 +454,13 @@
       },
       "analysis": {
         "viable": true,
-        "opportunityScore": 48.855080853555556,
+        "opportunityScore": 48.838336131333335,
         "price": 0.485,
         "volume24h": 43575.63941999999,
         "liquidity": 502067.6928,
         "edge": 0.485
       },
-      "score": 48.855080853555556
+      "score": 48.838336131333335
     },
     {
       "market": {
@@ -606,13 +606,13 @@
       },
       "analysis": {
         "viable": true,
-        "opportunityScore": 40.41297362211111,
+        "opportunityScore": 40.39622889988889,
         "price": 0.485,
         "volume24h": 5782.203949999999,
         "liquidity": 266379.8558,
         "edge": 0.485
       },
-      "score": 40.41297362211111
+      "score": 40.39622889988889
     },
     {
       "market": {
@@ -759,13 +759,13 @@
       },
       "analysis": {
         "viable": true,
-        "opportunityScore": 35.934678872233334,
+        "opportunityScore": 35.91793415001111,
         "price": 0.515,
         "volume24h": 2415.2526490000005,
         "liquidity": 59278.0137,
         "edge": 0.485
       },
-      "score": 35.934678872233334
+      "score": 35.91793415001111
     },
     {
       "market": {
@@ -914,13 +914,13 @@
       },
       "analysis": {
         "viable": true,
-        "opportunityScore": 35.46155230153333,
+        "opportunityScore": 35.44480757931111,
         "price": 0.52,
         "volume24h": 872.6203419999999,
         "liquidity": 50805.5967,
         "edge": 0.48
       },
-      "score": 35.46155230153333
+      "score": 35.44480757931111
     },
     {
       "market": {
@@ -1059,13 +1059,13 @@
       },
       "analysis": {
         "viable": true,
-        "opportunityScore": 34.20866385703333,
+        "opportunityScore": 34.19191913481111,
         "price": 0.54,
         "volume24h": 230.553737,
         "liquidity": 21431.5075,
         "edge": 0.45999999999999996
       },
-      "score": 34.20866385703333
+      "score": 34.19191913481111
     },
     {
       "market": {
@@ -1223,13 +1223,13 @@
       },
       "analysis": {
         "viable": true,
-        "opportunityScore": 34.0708526694,
+        "opportunityScore": 34.054107947177776,
         "price": 0.56,
         "volume24h": 508.214034,
         "liquidity": 43108.6883,
         "edge": 0.43999999999999995
       },
-      "score": 34.0708526694
+      "score": 34.054107947177776
     },
     {
       "market": {
@@ -1379,13 +1379,13 @@
       },
       "analysis": {
         "viable": true,
-        "opportunityScore": 32.25472829365555,
+        "opportunityScore": 32.23798357143333,
         "price": 0.64,
         "volume24h": 2254.784601,
         "liquidity": 66082.2139,
         "edge": 0.36
       },
-      "score": 32.25472829365555
+      "score": 32.23798357143333
     },
     {
       "market": {
@@ -1534,13 +1534,13 @@
       },
       "analysis": {
         "viable": true,
-        "opportunityScore": 30.54035211918889,
+        "opportunityScore": 30.523607396966664,
         "price": 0.8015,
         "volume24h": 42927.384394999994,
         "liquidity": 16628.61454,
         "edge": 0.1985
       },
-      "score": 30.54035211918889
+      "score": 30.523607396966664
     }
   ]
 }
