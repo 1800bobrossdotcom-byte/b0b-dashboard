@@ -170,3 +170,34 @@ These patterns can be integrated into `brain/live-trader.js`:
 3. **Whale tracking** → Monitor large wallet movements on BASE
 4. **Multi-market arb** → Cross-reference correlated tokens
 5. **Mistake logging** → Already logging trades, add post-mortem analysis
+
+---
+
+## 🔥 CRITICAL CONFIG TIP: Memory Superpowers
+
+**Source:** Community tip (January 28, 2026)
+
+By default, the 2 best Clawd memory features are turned OFF. Run this prompt to enable them:
+
+```
+Enable memory flush before compaction and session memory search in my Clawdbot config. 
+Set `compaction.memoryFlush.enabled` to true and set `memorySearch.experimental.sessionMemory` 
+to true with sources including both memory and sessions. Apply the config changes.
+```
+
+### What This Enables:
+
+**1. Memory Flush Before Compaction**
+- Config: `compaction.memoryFlush.enabled: true`
+- Your AI automatically saves everything important to a file **right before its context gets wiped**
+- Nothing slips through the cracks between compactions/sessions
+
+**2. Session Memory Search**
+- Config: `memorySearch.experimental.sessionMemory: true`
+- Sources: `memory` + `sessions`
+- Your AI can search through **every conversation it's ever had** with you
+- Even ones it no longer "remembers" in active context
+
+### Result: 10000x better memory
+
+This stops your AI from getting confused between compactions/sessions. Essential for long-running trading operations where context continuity is critical.
