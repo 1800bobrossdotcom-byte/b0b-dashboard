@@ -781,6 +781,8 @@ const ECOSYSTEM_TOKENS = {
   'TOSHI': { tier: 3, ecosystem: 'bluechip', address: '0xac1bd2486aaf3b5c0fc3fd868558b082a531b2b4' },
   'BRETT': { tier: 3, ecosystem: 'bluechip', address: '0x532f27101965dd16442e59d40670faf5ebb142e4' },
   'DEGEN': { tier: 3, ecosystem: 'bluechip', address: '0x4ed4e862860bed51a9570b96d89af5e1b0efefed' },
+  'BASEPOST': { tier: 3, ecosystem: 'bluechip', address: null }, // Base social token
+  'AERO': { tier: 3, ecosystem: 'bluechip', address: '0x940181a94a35a4569e4529a3cdfb74e38fd98631' }, // Aerodrome
 };
 
 async function discoverNewTokens() {
