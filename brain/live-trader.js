@@ -360,249 +360,117 @@ async function recordTrade(trade) {
 }
 
 // ════════════════════════════════════════════════════════════════════════════
-// BANKR CLIENT — x402 Payment Protocol
+// BANKR CLIENT — Using Official @bankr/sdk
 // ════════════════════════════════════════════════════════════════════════════
 // 
-// Bankr SDK uses x402 payment protocol (HTTP 402 Payment Required)
-// Each request costs $0.10 USDC, paid automatically via signed payment
+// Uses @bankr/sdk which handles x402 payment protocol automatically
+// Each request costs $0.10 USDC, paid from TRADING_WALLET
 // 
-// Flow:
-// 1. POST /v2/prompt → If 402, sign payment with private key
-// 2. Retry with payment header → Get jobId
-// 3. GET /v2/job/{jobId} → Poll until complete
-//
 // Docs: https://www.npmjs.com/package/@bankr/sdk
-// x402: https://www.x402.org/
 // ════════════════════════════════════════════════════════════════════════════
+
+// Lazy-loaded SDK client
+let _bankrSdkClient = null;
+
+async function getBankrSdkClient() {
+  if (_bankrSdkClient) return _bankrSdkClient;
+  
+  if (!CONFIG.TRADING_PRIVATE_KEY) {
+    throw new Error('TRADING_PRIVATE_KEY not set - required for x402 payments');
+  }
+  
+  const { BankrClient: SdkClient } = await import('@bankr/sdk');
+  
+  _bankrSdkClient = new SdkClient({
+    privateKey: CONFIG.TRADING_PRIVATE_KEY,
+    walletAddress: CONFIG.TRADING_WALLET,
+  });
+  
+  console.log(`   💳 Bankr SDK initialized for ${CONFIG.TRADING_WALLET}`);
+  return _bankrSdkClient;
+}
 
 class BankrClient {
   constructor() {
-    this.apiUrl = CONFIG.BANKR_API_URL;
-    this.privateKey = CONFIG.TRADING_PRIVATE_KEY;
     this.walletAddress = CONFIG.TRADING_WALLET;
-    this.fetchWithPay = null; // Lazy init
   }
   
   /**
-   * Initialize x402-fetch wrapper with payment capabilities
-   */
-  async initPaymentFetch() {
-    if (this.fetchWithPay) return;
-    
-    if (!this.privateKey) {
-      throw new Error('TRADING_PRIVATE_KEY not set - required for x402 payments');
-    }
-    
-    // Dynamic imports for ESM modules
-    const { createWalletClient, http, hashMessage } = await import('viem');
-    const { privateKeyToAccount } = await import('viem/accounts');
-    const { base } = await import('viem/chains');
-    const { wrapFetchWithPayment } = await import('x402-fetch');
-    const nodeFetch = (await import('node-fetch')).default;
-    
-    // Create wallet client from private key
-    const account = privateKeyToAccount(this.privateKey);
-    this.account = account;
-    this.walletClient = createWalletClient({
-      account,
-      transport: http('https://mainnet.base.org'),
-      chain: base,
-    });
-    
-    // Wrap fetch with x402 payment handling
-    // Max payment: 0.20 USDC (200000 in 6 decimals)
-    this.fetchWithPay = wrapFetchWithPayment(
-      nodeFetch, 
-      this.walletClient, 
-      CONFIG.X402_MAX_PAYMENT
-    );
-    
-    // Store native fetch for non-payment requests
-    this.nodeFetch = nodeFetch;
-    
-    console.log(`   💳 x402 payment initialized for ${account.address}`);
-  }
-  
-  /**
-   * Sign a message for authenticated endpoints
-   */
-  async signMessage(message) {
-    await this.initPaymentFetch();
-    return this.walletClient.signMessage({
-      account: this.account,
-      message,
-    });
-  }
-  
-  /**
-   * Make request with automatic x402 payment (for prompt submission)
-   */
-  async request(endpoint, options = {}) {
-    await this.initPaymentFetch();
-    const url = `${this.apiUrl}${endpoint}`;
-    
-    const response = await this.fetchWithPay(url, {
-      ...options,
-      headers: {
-        'Content-Type': 'application/json',
-        'wallet-address': this.walletAddress,
-        ...options.headers,
-      },
-    });
-    
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({}));
-      throw new Error(error.message || error.error || `Bankr API error: ${response.status}`);
-    }
-    
-    return response.json();
-  }
-  
-  /**
-   * Submit a prompt and get job ID (uses /v2/prompt for x402)
-   */
-  async submitPrompt(prompt, walletAddress = null) {
-    const targetWallet = walletAddress || this.walletAddress;
-    const data = await this.request('/v2/prompt', {
-      method: 'POST',
-      body: JSON.stringify({ 
-        prompt,
-        walletAddress: targetWallet,
-      }),
-    });
-    
-    if (!data.success) {
-      throw new Error(data.error || 'Failed to submit prompt');
-    }
-    
-    return { jobId: data.jobId, status: data.status };
-  }
-  
-  /**
-   * Get job status (requires signed message authentication)
-   */
-  async getJobStatus(jobId) {
-    await this.initPaymentFetch();
-    
-    // Create message to sign (as per Bankr SDK pattern)
-    const message = `Get job status for ${jobId}`;
-    const signature = await this.signMessage(message);
-    
-    const url = `${this.apiUrl}/v2/job/${jobId}`;
-    const response = await this.nodeFetch(url, {
-      method: 'GET',
-      headers: {
-        'wallet-address': this.account.address,
-        'x-signature': signature,
-        'x-message': message,
-      },
-    });
-    
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({}));
-      throw new Error(error.message || error.error || `Job status error: ${response.status}`);
-    }
-    
-    return response.json();
-  }
-  
-  /**
-   * Wait for job completion with status updates
-   */
-  async waitForCompletion(jobId, onProgress = null, maxAttempts = 150) {
-    const POLL_INTERVAL = 2000; // 2 seconds
-    let lastUpdateCount = 0;
-    
-    for (let attempt = 0; attempt < maxAttempts; attempt++) {
-      const status = await this.getJobStatus(jobId);
-      
-      // Report new status updates
-      if (onProgress && status.statusUpdates) {
-        for (let i = lastUpdateCount; i < status.statusUpdates.length; i++) {
-          onProgress(status.statusUpdates[i].message);
-        }
-        lastUpdateCount = status.statusUpdates.length;
-      }
-      
-      // Check for terminal states
-      if (['completed', 'failed', 'cancelled'].includes(status.status)) {
-        return status;
-      }
-      
-      await new Promise(r => setTimeout(r, POLL_INTERVAL));
-    }
-    
-    throw new Error('Job timed out after maximum attempts');
-  }
-  
-  /**
-   * Combined prompt + wait (recommended approach)
+   * Execute a prompt and wait for result using official SDK
    */
   async promptAndWait(prompt, onProgress = null) {
-    const { jobId } = await this.submitPrompt(prompt);
-    console.log(`   📋 Job ${jobId} submitted ($0.10 USDC paid)`);
-    return this.waitForCompletion(jobId, onProgress);
+    const client = await getBankrSdkClient();
+    
+    console.log(`   📋 Submitting prompt to Bankr ($0.10 USDC)...`);
+    
+    const result = await client.promptAndWait({
+      prompt,
+      walletAddress: this.walletAddress,
+    });
+    
+    console.log(`   ✅ Bankr job completed`);
+    return result;
   }
   
   /**
    * Execute a trade via natural language prompt
-   * Uses x402 payment protocol ($0.10 USDC per request)
-   * Falls back to paper trading if payment fails
+   * Uses official @bankr/sdk with automatic x402 payment
    */
   async executeTrade(prompt, tokenData = {}) {
-    console.log(`   🏦 Bankr x402: "${prompt}"`);
+    console.log(`   🏦 Bankr: "${prompt}"`);
     console.log(`   💰 Paying $0.10 USDC via x402 protocol...`);
     
     try {
-      // Use combined promptAndWait for simpler flow
-      const status = await this.promptAndWait(prompt, (msg) => {
-        console.log(`   📡 Bankr: ${msg}`);
-      });
+      const result = await this.promptAndWait(prompt);
       
-      if (status.status === 'completed') {
-        console.log(`   ✅ Bankr job completed: ${status.response?.substring(0, 100) || 'Success'}...`);
+      if (result.status === 'completed') {
+        console.log(`   ✅ Bankr job completed: ${result.response?.substring(0, 100) || 'Success'}...`);
         
-        // Execute transactions if any returned (Bankr returns tx data we need to sign & submit)
+        // Execute transactions if any returned
         // SDK format: transactions[].metadata.transaction contains { chainId, to, data, gas, value }
         let executedTxs = [];
-        if (status.transactions?.length > 0) {
-          console.log(`   📝 ${status.transactions.length} transaction(s) to execute`);
+        if (result.transactions?.length > 0) {
+          console.log(`   📝 ${result.transactions.length} transaction(s) to execute`);
           
-          for (const tx of status.transactions) {
+          // Get wallet client for signing
+          const { createWalletClient, http } = await import('viem');
+          const { privateKeyToAccount } = await import('viem/accounts');
+          const { base } = await import('viem/chains');
+          
+          const account = privateKeyToAccount(CONFIG.TRADING_PRIVATE_KEY);
+          const walletClient = createWalletClient({
+            account,
+            transport: http('https://mainnet.base.org'),
+            chain: base,
+          });
+          
+          for (const tx of result.transactions) {
             try {
-              // Bankr SDK format: tx.metadata.transaction has the actual tx data
-              // Also check legacy format: tx.__ORIGINAL_TX_DATA__
-              const txData = tx.metadata?.transaction || tx.__ORIGINAL_TX_DATA__ || tx.metadata?.__ORIGINAL_TX_DATA__;
+              // SDK returns tx.metadata.transaction with the actual tx data
+              const txData = tx.metadata?.transaction;
               
-              console.log(`   📋 TX type: ${tx.type}, has metadata: ${!!tx.metadata}, has txData: ${!!txData}`);
+              console.log(`   📋 TX type: ${tx.type}, has txData: ${!!txData}`);
               
               if (txData && txData.to && txData.data) {
                 console.log(`   🔏 Signing and submitting ${tx.type || 'swap'} transaction...`);
                 console.log(`      To: ${txData.to}`);
                 console.log(`      Value: ${txData.value || '0'} wei`);
                 
-                // Execute the transaction using our wallet
-                const hash = await this.walletClient.sendTransaction({
+                // Execute the transaction
+                const hash = await walletClient.sendTransaction({
                   to: txData.to,
                   data: txData.data,
                   value: txData.value ? BigInt(txData.value) : 0n,
                   gas: txData.gas ? BigInt(txData.gas) : undefined,
-                  chainId: txData.chainId || 8453, // Base chain
+                  chainId: txData.chainId || 8453,
                 });
                 
                 console.log(`   ✅ TX SUBMITTED: ${hash}`);
                 console.log(`   🔗 https://basescan.org/tx/${hash}`);
                 
                 executedTxs.push({ hash, type: tx.type || 'swap', status: 'submitted' });
-              } else if (tx.metadata?.__ORIGINAL_TX_DATA__) {
-                // Alternative format check
-                const altTxData = tx.metadata.__ORIGINAL_TX_DATA__;
-                console.log(`   ℹ️ Found __ORIGINAL_TX_DATA__ format (info): ${altTxData.humanReadableMessage || tx.type}`);
-                executedTxs.push({ type: tx.type || 'info', status: 'info_only', data: altTxData });
               } else {
                 console.log(`      - ${tx.type || 'action'}: No executable tx data`);
-                console.log(`        Available keys: ${Object.keys(tx).join(', ')}`);
-                if (tx.metadata) console.log(`        Metadata keys: ${Object.keys(tx.metadata).join(', ')}`);
               }
             } catch (txError) {
               console.log(`   ❌ TX execution failed: ${txError.message}`);
@@ -613,32 +481,25 @@ class BankrClient {
         
         return {
           success: executedTxs.length > 0 ? executedTxs.some(t => t.status === 'submitted') : true,
-          response: status.response,
-          transactions: status.transactions || [],
+          response: result.response,
+          transactions: result.transactions || [],
           executedTxs,
-          richData: status.richData || [],
+          richData: result.richData || [],
           mode: 'live',
-          processingTime: status.processingTime,
+          processingTime: result.processingTime,
           cost: '$0.10 USDC',
         };
       }
       
-      if (status.status === 'failed') {
-        console.log(`   ❌ Bankr failed: ${status.error}`);
-        return { success: false, error: status.error, mode: 'live' };
-      }
-      
-      if (status.status === 'cancelled') {
-        console.log(`   ⚠️ Bankr job cancelled`);
-        return { success: false, error: 'Job cancelled', mode: 'live' };
+      if (result.status === 'failed') {
+        console.log(`   ❌ Bankr failed: ${result.error}`);
+        return { success: false, error: result.error, mode: 'live' };
       }
       
       return { success: false, error: 'Unknown job status', mode: 'live' };
     } catch (error) {
-      // Payment or API failure - fall back to paper trading
       console.log(`   ⚠️ Bankr x402 failed: ${error.message}`);
       
-      // Check if it's a payment issue
       if (error.message.includes('402') || error.message.includes('payment') || error.message.includes('USDC')) {
         console.log(`   💸 Payment issue - check USDC balance in wallet`);
       }
