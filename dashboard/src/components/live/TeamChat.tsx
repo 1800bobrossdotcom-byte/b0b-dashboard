@@ -678,78 +678,49 @@ export function TeamChat({
 }
 
 // ════════════════════════════════════════════════════════════════
-// GENERATIVE ART CANVAS — Connected to Market Sentiment
-// Flat glyph art from LIVE data sources - right-click saveable
+// GENERATIVE ART CANVAS — Connected to Trading Intelligence
+// Live data-driven art from brain's trading + learning systems
 // ════════════════════════════════════════════════════════════════
 
-interface MarketSentiment {
-  polyVolume: number;
-  swarmTicks: number;
-  agentCount: number;
-  sentiment: 'bullish' | 'bearish' | 'neutral';
-  phase: string;
+interface ArtParams {
+  momentum: number;    // Current streak (neg = losing)
+  energy: number;      // Active positions × 20
+  harmony: number;     // Win rate 0-1
+  complexity: number;  // Total insights learned
+  pulse: number;       // API activity 0-1
+}
+
+interface VisualData {
+  pnlChart: { total: number; wins: number; losses: number; winRate: number };
+  artParams: ArtParams;
+  tokenBars: { symbol: string; pnl: number }[];
 }
 
 function GenerativeArtCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [artSeed, setArtSeed] = useState(Date.now());
-  const [marketData, setMarketData] = useState<MarketSentiment>({
-    polyVolume: 0,
-    swarmTicks: 0,
-    agentCount: 3,
-    sentiment: 'neutral',
-    phase: 'IDLE'
+  const [visualData, setVisualData] = useState<VisualData>({
+    pnlChart: { total: 0, wins: 0, losses: 0, winRate: 50 },
+    artParams: { momentum: 0, energy: 20, harmony: 0.5, complexity: 5, pulse: 0.3 },
+    tokenBars: []
   });
 
-  // Fetch market data for art generation
+  // Fetch trading intelligence for art generation
   useEffect(() => {
-    async function fetchMarketData() {
+    async function fetchVisualData() {
       try {
-        // Fetch from brain endpoints
-        const [statusRes, swarmRes, polyRes] = await Promise.all([
-          fetch(`${BRAIN_URL}/status`).catch(() => null),
-          fetch(`${BRAIN_URL}/swarm`).catch(() => null),
-          fetch(`${BRAIN_URL}/polymarket`).catch(() => null),
-        ]);
-        
-        let polyVolume = 0;
-        let swarmTicks = 0;
-        let agentCount = 3;
-        
-        if (statusRes?.ok) {
-          const status = await statusRes.json();
-          agentCount = status.agents?.length || 3;
+        const res = await fetch(`${BRAIN_URL}/intelligence/visual`);
+        if (res.ok) {
+          const data = await res.json();
+          setVisualData(data);
         }
-        
-        if (swarmRes?.ok) {
-          const swarm = await swarmRes.json();
-          swarmTicks = swarm.totalTicks || 0;
-        }
-        
-        if (polyRes?.ok) {
-          const poly = await polyRes.json();
-          polyVolume = poly.data?.volume24h || 0;
-        }
-        
-        // Calculate sentiment from data
-        let sentiment: 'bullish' | 'bearish' | 'neutral' = 'neutral';
-        if (polyVolume > 1000000) sentiment = 'bullish';
-        else if (polyVolume < 500000) sentiment = 'bearish';
-        
-        setMarketData({
-          polyVolume,
-          swarmTicks,
-          agentCount,
-          sentiment,
-          phase: swarmTicks > 0 ? 'ACTIVE' : 'IDLE'
-        });
       } catch (e) {
-        // Keep defaults
+        // Keep defaults - brain may be starting up
       }
     }
     
-    fetchMarketData();
-    const interval = setInterval(fetchMarketData, 15000);
+    fetchVisualData();
+    const interval = setInterval(fetchVisualData, 10000); // Every 10s
     return () => clearInterval(interval);
   }, []);
 
@@ -760,89 +731,144 @@ function GenerativeArtCanvas() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Background based on sentiment
-    const bgColors = {
-      bullish: '#F0FFF4',   // Light green tint
-      bearish: '#FEF2F2',   // Light red tint
-      neutral: '#FAFAFA'    // Neutral cream
-    };
-    ctx.fillStyle = bgColors[marketData.sentiment];
+    const { momentum, energy, harmony, complexity, pulse } = visualData.artParams;
+    const { winRate } = visualData.pnlChart;
+    
+    // Background gradient based on harmony (win rate)
+    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    if (harmony > 0.6) {
+      // Winning - cool blues/greens
+      gradient.addColorStop(0, '#E6F7FF');
+      gradient.addColorStop(1, '#F0FFF4');
+    } else if (harmony < 0.4) {
+      // Losing - warm warning
+      gradient.addColorStop(0, '#FFF7E6');
+      gradient.addColorStop(1, '#FEF2F2');
+    } else {
+      // Neutral - soft cream
+      gradient.addColorStop(0, '#FAFAF8');
+      gradient.addColorStop(1, '#F5F5F0');
+    }
+    ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Glyphs change based on market phase
-    const phaseGlyphs: Record<string, string[]> = {
-      ACTIVE: ['◉', '▲', '●', '◆', '⬢', '★'],
-      IDLE: ['○', '△', '□', '◇', '◎', '☆'],
-      DEFAULT: ['◆', '○', '△', '□', '◇', '●']
-    };
-    const glyphs = phaseGlyphs[marketData.phase] || phaseGlyphs.DEFAULT;
+    // Glyph sets based on momentum (streak)
+    const momentumGlyphs: string[] = momentum > 0 
+      ? ['◉', '▲', '★', '◆', '⬢', '●', '⬡']  // Winning - filled, upward
+      : momentum < 0 
+        ? ['○', '▽', '☆', '◇', '⬡', '○', '△']  // Losing - hollow, downward
+        : ['◆', '○', '△', '□', '◇', '●', '◎'];  // Neutral - mixed
     
-    // Colors based on sentiment
-    const sentimentColors: Record<string, string[]> = {
-      bullish: ['#22c55e', '#16a34a', '#15803d', '#0052FF', '#00CCFF'],
-      bearish: ['#ef4444', '#dc2626', '#b91c1c', '#f59e0b', '#a855f7'],
-      neutral: ['#0052FF', '#00CCFF', '#F59E0B', '#A855F7', '#64748b']
-    };
-    const colors = sentimentColors[marketData.sentiment];
+    // Color palette based on harmony + momentum
+    let colors: string[];
+    if (momentum > 2) {
+      colors = ['#00D26A', '#00CCFF', '#0052FF', '#22c55e', '#10b981']; // Strong green/blue
+    } else if (momentum < -2) {
+      colors = ['#FF6B6B', '#F59E0B', '#EF4444', '#F97316', '#DC2626']; // Warm warning
+    } else if (harmony > 0.5) {
+      colors = ['#0052FF', '#00CCFF', '#22c55e', '#3B82F6', '#06B6D4']; // Cool positive
+    } else {
+      colors = ['#6366F1', '#8B5CF6', '#A855F7', '#64748B', '#94A3B8']; // Neutral purple/gray
+    }
     
-    const rows = 6;
-    const cols = 4;
+    // Grid density based on complexity (more learnings = more detail)
+    const rows = Math.min(8, Math.max(4, Math.floor(complexity / 3)));
+    const cols = Math.min(6, Math.max(3, Math.floor(complexity / 4)));
     const cellWidth = canvas.width / cols;
     const cellHeight = canvas.height / rows;
 
-    ctx.font = '24px monospace';
+    // Base font size varies with energy
+    const baseFontSize = 16 + (energy / 20);
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
 
-    // Use swarm ticks and poly volume as seed modifiers
-    const dataSeed = artSeed + marketData.swarmTicks + Math.floor(marketData.polyVolume / 100000);
+    // Seed combines time + trading data for unique but consistent patterns
+    const dataSeed = artSeed + Math.floor(momentum * 100) + Math.floor(harmony * 1000);
 
+    // Draw glyphs
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < cols; col++) {
-        const glyphIndex = (dataSeed + row * cols + col) % glyphs.length;
-        const colorIndex = (dataSeed + row + col) % colors.length;
+        const glyphIndex = (dataSeed + row * cols + col) % momentumGlyphs.length;
+        const colorIndex = (dataSeed + row + col * 2) % colors.length;
         
         const x = col * cellWidth + cellWidth / 2;
         const y = row * cellHeight + cellHeight / 2;
         
-        // Size variation based on agent activity
-        const sizeMod = marketData.agentCount > 3 ? 1.2 : 1;
-        ctx.font = `${Math.floor(24 * sizeMod)}px monospace`;
+        // Size varies with position + pulse (API activity creates rhythm)
+        const pulseOffset = Math.sin((row + col + pulse * 10) * 0.5) * 4;
+        const fontSize = baseFontSize + pulseOffset;
+        ctx.font = `${Math.floor(fontSize)}px monospace`;
         
-        ctx.fillStyle = colors[colorIndex] + '80';
-        ctx.fillText(glyphs[glyphIndex], x, y);
+        // Opacity based on position (center more prominent)
+        const centerDist = Math.abs(col - cols/2) + Math.abs(row - rows/2);
+        const opacity = Math.max(0.3, 1 - centerDist * 0.1);
+        
+        ctx.fillStyle = colors[colorIndex] + Math.floor(opacity * 255).toString(16).padStart(2, '0');
+        ctx.fillText(momentumGlyphs[glyphIndex], x, y);
       }
     }
+    
+    // Draw accent lines based on momentum direction
+    ctx.strokeStyle = colors[0] + '40';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    if (momentum > 0) {
+      // Upward flowing lines
+      for (let i = 0; i < 3; i++) {
+        const startX = (i + 1) * (canvas.width / 4);
+        ctx.moveTo(startX, canvas.height);
+        ctx.lineTo(startX + momentum * 5, 0);
+      }
+    } else if (momentum < 0) {
+      // Downward flowing lines
+      for (let i = 0; i < 3; i++) {
+        const startX = (i + 1) * (canvas.width / 4);
+        ctx.moveTo(startX, 0);
+        ctx.lineTo(startX + momentum * 5, canvas.height);
+      }
+    }
+    ctx.stroke();
 
-    // Add data signature
+    // Data signature
     ctx.font = '8px monospace';
     ctx.fillStyle = '#888888';
     ctx.textAlign = 'right';
-    const volLabel = marketData.polyVolume > 0 ? `$${(marketData.polyVolume/1000000).toFixed(1)}M` : '—';
-    ctx.fillText(`${marketData.sentiment} · ${volLabel}`, canvas.width - 4, canvas.height - 4);
+    const streakLabel = momentum > 0 ? `+${momentum}🔥` : momentum < 0 ? `${momentum}` : '—';
+    ctx.fillText(`${winRate.toFixed(0)}% · ${streakLabel}`, canvas.width - 4, canvas.height - 4);
+    
+    // Token badge if we have positions
+    if (visualData.tokenBars.length > 0) {
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#0052FF88';
+      ctx.fillText(visualData.tokenBars[0].symbol, 4, canvas.height - 4);
+    }
 
-  }, [artSeed, marketData]);
+  }, [artSeed, visualData]);
 
-  // Regenerate every 30 seconds
+  // Regenerate with new seed periodically
   useEffect(() => {
     const interval = setInterval(() => {
       setArtSeed(Date.now());
-    }, 30000);
+    }, 20000); // Every 20s
     return () => clearInterval(interval);
   }, []);
+
+  // Determine status emoji
+  const { momentum, harmony } = visualData.artParams;
+  const statusEmoji = momentum > 2 ? '🔥' : momentum > 0 ? '📈' : momentum < -2 ? '❄️' : momentum < 0 ? '📉' : '◎';
 
   return (
     <div className="text-center">
       <canvas 
         ref={canvasRef}
-        width={120}
-        height={180}
+        width={140}
+        height={200}
         className="rounded-lg border border-[#E8E4DE] shadow-sm cursor-pointer hover:shadow-md transition-shadow"
         style={{ backgroundColor: '#FAFAFA' }}
-        title="Right-click to save · Connected to live data"
+        title="Trading intelligence art · Right-click to save"
       />
       <p className="text-xs mt-2" style={{ color: '#888888' }}>
-        {marketData.sentiment === 'bullish' ? '📈' : marketData.sentiment === 'bearish' ? '📉' : '—'} {marketData.sentiment}
+        {statusEmoji} {harmony > 0.6 ? 'in flow' : harmony < 0.4 ? 'recalibrating' : 'observing'}
       </p>
       <button 
         onClick={() => setArtSeed(Date.now())}
