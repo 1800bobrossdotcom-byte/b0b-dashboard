@@ -14,6 +14,18 @@ import { useEffect, useState, useCallback } from 'react';
 // Brain server URL
 const BRAIN_URL = process.env.NEXT_PUBLIC_BRAIN_URL || 'https://b0b-brain-production.up.railway.app';
 
+// Full team roster with personalities
+const TEAM_ROSTER = {
+  r0ss: { color: '#F59E0B', emoji: '🔧', role: 'CTO', trait: 'Builder' },
+  d0t: { color: '#22C55E', emoji: '🌊', role: 'Product', trait: 'Flow state' },
+  cl0ud: { color: '#60A5FA', emoji: '☁️', role: 'DevOps', trait: 'Infrastructure' },
+  pr0fit: { color: '#22C55E', emoji: '📈', role: 'Trader', trait: 'Alpha hunter' },
+  c0m: { color: '#9333EA', emoji: '💀', role: 'Security', trait: 'Watchdog' },
+  gl0w: { color: '#F472B6', emoji: '✨', role: 'Frontend', trait: 'Pixel perfect' },
+  n0va: { color: '#A855F7', emoji: '🚀', role: 'Marketing', trait: 'Hype machine' },
+  k1nk: { color: '#FF4444', emoji: '🔥', role: 'Degen', trait: 'Risk taker' },
+} as const;
+
 interface Activity {
   timestamp: string;
   type: string;
@@ -21,6 +33,22 @@ interface Activity {
   action?: string;
   message?: string;
   market?: string;
+}
+
+interface ActionItem {
+  id: string;
+  priority: string;
+  task: string;
+  owner: string;
+  status: string;
+}
+
+interface Discussion {
+  id: string;
+  title: string;
+  date: string;
+  participants: string[];
+  messageCount: number;
 }
 
 interface AgentState {
@@ -31,17 +59,14 @@ interface AgentState {
 }
 
 export default function OfficeVisualizer() {
-  const [agents, setAgents] = useState<{
-    b0b: AgentState;
-    r0ss: AgentState;
-    c0m: AgentState;
-  }>({
-    b0b: { status: 'idle' },
-    r0ss: { status: 'idle' },
-    c0m: { status: 'idle' },
-  });
+  const [agents, setAgents] = useState<Record<string, AgentState>>(
+    Object.fromEntries(Object.keys(TEAM_ROSTER).map(k => [k, { status: 'idle' as const }]))
+  );
   
   const [activities, setActivities] = useState<Activity[]>([]);
+  const [actionItems, setActionItems] = useState<ActionItem[]>([]);
+  const [discussions, setDiscussions] = useState<Discussion[]>([]);
+  const [wageStatus, setWageStatus] = useState<{ hourlyPnL: number; efficiency: number; streak: number } | null>(null);
   const [time, setTime] = useState(new Date());
   const [raindrops, setRaindrops] = useState<number[]>([]);
   
@@ -56,51 +81,59 @@ export default function OfficeVisualizer() {
     return () => clearInterval(interval);
   }, []);
   
-  // Fetch activity and update agents
+  // Fetch all brain data
   useEffect(() => {
-    async function fetchActivity() {
+    async function fetchBrainData() {
       try {
-        const res = await fetch(`${BRAIN_URL}/activity?limit=20`);
-        if (res.ok) {
-          const data = await res.json();
-          const acts = data.activities || [];
-          setActivities(acts);
+        // Fetch activity
+        const actRes = await fetch(`${BRAIN_URL}/activity?limit=20`);
+        if (actRes.ok) {
+          const data = await actRes.json();
+          setActivities(data.activities || []);
+        }
+        
+        // Fetch action items
+        const itemsRes = await fetch(`${BRAIN_URL}/action-items`);
+        if (itemsRes.ok) {
+          const data = await itemsRes.json();
+          setActionItems(data.items?.slice(0, 5) || []);
           
-          // Update agent states based on recent activity
-          const recent = acts.slice(-5);
-          const newAgents = { ...agents };
-          
-          for (const act of recent) {
-            if (act.type === 'paper_trade' || act.type === 'crawler') {
-              newAgents.c0m = { 
-                status: 'working', 
-                currentTask: 'Analyzing markets',
-                speechBubble: act.market ? `Watching: ${act.market.slice(0, 30)}...` : '📊 Scanning...'
-              };
-            }
-            if (act.type === 'git_fetch' || act.type === 'discussion_created') {
-              newAgents.r0ss = { 
-                status: 'working', 
-                currentTask: 'Managing systems',
-                speechBubble: '🔧 Deploying...'
-              };
-            }
-            if (act.type === 'heartbeat') {
-              newAgents.b0b = {
-                status: 'thinking',
-                currentTask: 'Creating',
-                speechBubble: '✨ Designing...'
-              };
-            }
+          // Update agents based on their action items
+          const newAgents: Record<string, AgentState> = {};
+          for (const [name, info] of Object.entries(TEAM_ROSTER)) {
+            const ownerItems = data.items?.filter((i: ActionItem) => i.owner === name) || [];
+            const hasWork = ownerItems.length > 0;
+            const hasCritical = ownerItems.some((i: ActionItem) => i.priority === 'critical');
+            
+            newAgents[name] = {
+              status: hasCritical ? 'working' : hasWork ? 'thinking' : 'idle',
+              currentTask: ownerItems[0]?.task,
+              speechBubble: hasCritical ? '🔴 Critical!' : ownerItems[0]?.task?.slice(0, 25)
+            };
           }
-          
-          setAgents(newAgents);
+          setAgents(prev => ({ ...prev, ...newAgents }));
+        }
+        
+        // Fetch discussions
+        const discRes = await fetch(`${BRAIN_URL}/discussions`);
+        if (discRes.ok) {
+          const data = await discRes.json();
+          setDiscussions(data.discussions?.slice(0, 3) || []);
+        }
+        
+        // Fetch wage status
+        const wageRes = await fetch(`${BRAIN_URL}/live-trader`);
+        if (wageRes.ok) {
+          const data = await wageRes.json();
+          if (data.wage) {
+            setWageStatus(data.wage);
+          }
         }
       } catch {}
     }
     
-    fetchActivity();
-    const interval = setInterval(fetchActivity, 10000);
+    fetchBrainData();
+    const interval = setInterval(fetchBrainData, 10000);
     return () => clearInterval(interval);
   }, []);
   
@@ -170,188 +203,78 @@ export default function OfficeVisualizer() {
         {/* Window Sill */}
         <div className="absolute -top-2 left-0 right-0 h-2 bg-[#2A2A34]" />
         
-        {/* Clock */}
-        <div className="absolute top-4 right-8 bg-[#1A1A24] px-3 py-1 rounded border border-[#2A2A34]">
-          <span className="font-mono text-[#0052FF] text-sm">
-            {time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
-          </span>
+        {/* Clock + Wage Status */}
+        <div className="absolute top-4 right-8 flex gap-4 items-center">
+          {wageStatus && (
+            <div className="bg-[#1A1A24] px-3 py-1 rounded border border-[#2A2A34]">
+              <span className={`font-mono text-sm ${wageStatus.hourlyPnL >= 40 ? 'text-[#22C55E]' : 'text-[#F59E0B]'}`}>
+                ${wageStatus.hourlyPnL?.toFixed(2) || '0.00'}/hr
+              </span>
+              {wageStatus.streak > 0 && <span className="ml-1 text-[8px]">🔥{wageStatus.streak}</span>}
+            </div>
+          )}
+          <div className="bg-[#1A1A24] px-3 py-1 rounded border border-[#2A2A34]">
+            <span className="font-mono text-[#0052FF] text-sm">
+              {time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
+            </span>
+          </div>
         </div>
         
-        {/* Agents Container */}
-        <div className="absolute bottom-0 left-0 right-0 h-48 flex justify-around items-end px-8">
-          
-          {/* B0B - Creative Director */}
-          <div className="relative group">
-            {/* Speech Bubble */}
-            {agents.b0b.speechBubble && (
-              <div className="absolute -top-16 left-1/2 -translate-x-1/2 bg-white text-black px-3 py-1 rounded-lg text-xs whitespace-nowrap animate-fade-in">
-                {agents.b0b.speechBubble}
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full border-8 border-transparent border-t-white" />
+        {/* Action Items Board */}
+        {actionItems.length > 0 && (
+          <div className="absolute top-4 left-8 bg-[#1A1A24] p-2 rounded border border-[#2A2A34] max-w-[200px]">
+            <div className="font-mono text-[8px] text-[#0052FF] mb-1">📋 ACTION ITEMS</div>
+            {actionItems.slice(0, 3).map((item, i) => (
+              <div key={item.id} className="text-[7px] text-neutral-400 truncate flex gap-1 items-center">
+                <span className={item.priority === 'critical' ? 'text-[#FF4444]' : item.priority === 'high' ? 'text-[#F59E0B]' : 'text-neutral-500'}>●</span>
+                <span style={{ color: TEAM_ROSTER[item.owner as keyof typeof TEAM_ROSTER]?.color || '#666' }}>{item.owner}:</span>
+                <span>{item.task.slice(0, 20)}...</span>
               </div>
-            )}
-            
-            {/* Desk */}
-            <div className="relative">
-              <div className="w-28 h-16 bg-[#3A2A1A] rounded-t-sm border-t-2 border-[#5A4A3A]" />
-              
-              {/* Drawing Tablet */}
-              <div className="absolute top-2 left-4 w-12 h-8 bg-[#2A2A34] rounded border border-[#3A3A44]">
-                <div className="w-full h-full bg-[#0052FF]/20 animate-pulse" />
-              </div>
-              
-              {/* Coffee */}
-              <div className="absolute top-2 right-3 w-4 h-5 bg-[#4A3A2A] rounded-b">
-                <div className="absolute -top-1 left-1/2 -translate-x-1/2 text-[8px]">☕</div>
-              </div>
-            </div>
-            
-            {/* B0B Character */}
-            <div className={`absolute -top-20 left-1/2 -translate-x-1/2 ${getAgentAnimation(agents.b0b.status)}`}>
-              <div className="w-16 h-20 relative">
-                {/* Head */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-10 bg-[#FFDBAC] rounded-full border-2 border-[#E5C99A]">
-                  {/* Eyes */}
-                  <div className="absolute top-3 left-2 w-2 h-2 bg-[#333] rounded-full" />
-                  <div className="absolute top-3 right-2 w-2 h-2 bg-[#333] rounded-full" />
-                  {/* Smile */}
-                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-4 h-1 border-b-2 border-[#333] rounded-full" />
-                </div>
-                {/* Body */}
-                <div className="absolute top-9 left-1/2 -translate-x-1/2 w-12 h-10 bg-[#0052FF] rounded-t-lg" />
-              </div>
-              {/* Emoji Badge */}
-              <div className="absolute -top-2 -right-2 text-lg">🎨</div>
-            </div>
-            
-            {/* Label */}
-            <div className="text-center mt-2">
-              <span className="text-[#0052FF] font-mono text-xs">b0b</span>
-              <p className="text-[8px] text-neutral-500">Creative</p>
-            </div>
+            ))}
           </div>
-          
-          {/* R0SS - CTO */}
-          <div className="relative group">
-            {/* Speech Bubble */}
-            {agents.r0ss.speechBubble && (
-              <div className="absolute -top-16 left-1/2 -translate-x-1/2 bg-white text-black px-3 py-1 rounded-lg text-xs whitespace-nowrap animate-fade-in">
-                {agents.r0ss.speechBubble}
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full border-8 border-transparent border-t-white" />
-              </div>
-            )}
-            
-            {/* Terminal Setup */}
-            <div className="relative">
-              {/* Monitors */}
-              <div className="flex gap-1 mb-1">
-                <div className="w-16 h-12 bg-[#1A1A24] rounded border border-[#2A2A34]">
-                  <div className="p-1 font-mono text-[6px] text-[#22C55E] leading-tight">
-                    $ deploying...<br/>
-                    ✓ brain<br/>
-                    ✓ swarm
+        )}
+        
+        {/* Agents Container - Dynamic Grid */}
+        <div className="absolute bottom-12 left-0 right-0 h-40 flex justify-around items-end px-4 overflow-hidden">
+          {Object.entries(TEAM_ROSTER).map(([name, info]) => {
+            const agentState = agents[name] || { status: 'idle' };
+            return (
+              <div key={name} className="relative group flex-shrink-0" style={{ minWidth: '60px' }}>
+                {/* Speech Bubble */}
+                {agentState.speechBubble && (
+                  <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-white text-black px-2 py-0.5 rounded-lg text-[8px] whitespace-nowrap animate-fade-in z-10">
+                    {agentState.speechBubble.slice(0, 20)}
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full border-4 border-transparent border-t-white" />
                   </div>
-                </div>
-                <div className="w-12 h-10 bg-[#1A1A24] rounded border border-[#2A2A34] mt-2">
-                  <div className="p-1 font-mono text-[6px] text-[#0052FF]">
-                    CPU: 42%<br/>
-                    MEM: 68%
+                )}
+                
+                {/* Agent Character */}
+                <div className={`relative ${getAgentAnimation(agentState.status)}`}>
+                  <div className="w-10 h-12 relative">
+                    {/* Head */}
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-7 h-7 bg-[#FFDBAC] rounded-full border border-[#E5C99A]">
+                      {/* Eyes */}
+                      <div className="absolute top-2 left-1 w-1.5 h-1.5 bg-[#333] rounded-full" />
+                      <div className="absolute top-2 right-1 w-1.5 h-1.5 bg-[#333] rounded-full" />
+                    </div>
+                    {/* Body */}
+                    <div className="absolute top-6 left-1/2 -translate-x-1/2 w-8 h-6 rounded-t-lg" style={{ backgroundColor: info.color }} />
                   </div>
+                  {/* Emoji Badge */}
+                  <div className="absolute -top-1 -right-1 text-sm">{info.emoji}</div>
+                </div>
+                
+                {/* Mini Desk */}
+                <div className="w-12 h-3 bg-[#2A2A34] rounded-t mt-1" />
+                
+                {/* Label */}
+                <div className="text-center mt-1">
+                  <span className="font-mono text-[8px]" style={{ color: info.color }}>{name}</span>
+                  <p className="text-[6px] text-neutral-600">{info.role}</p>
                 </div>
               </div>
-              
-              {/* Desk */}
-              <div className="w-32 h-8 bg-[#2A2A34] rounded-t" />
-            </div>
-            
-            {/* R0SS Character */}
-            <div className={`absolute -top-24 left-1/2 -translate-x-1/2 ${getAgentAnimation(agents.r0ss.status)}`}>
-              <div className="w-16 h-20 relative">
-                {/* Head */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-10 bg-[#FFDBAC] rounded-full border-2 border-[#E5C99A]">
-                  {/* Glasses */}
-                  <div className="absolute top-2 left-1 w-3 h-3 border-2 border-[#333] rounded-full" />
-                  <div className="absolute top-2 right-1 w-3 h-3 border-2 border-[#333] rounded-full" />
-                  <div className="absolute top-3 left-1/2 -translate-x-1/2 w-2 h-px bg-[#333]" />
-                  {/* Focus */}
-                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-3 h-px bg-[#333]" />
-                </div>
-                {/* Body */}
-                <div className="absolute top-9 left-1/2 -translate-x-1/2 w-12 h-10 bg-[#F59E0B] rounded-t-lg" />
-              </div>
-              {/* Emoji Badge */}
-              <div className="absolute -top-2 -right-2 text-lg">🔧</div>
-            </div>
-            
-            {/* Label */}
-            <div className="text-center mt-2">
-              <span className="text-[#F59E0B] font-mono text-xs">r0ss</span>
-              <p className="text-[8px] text-neutral-500">CTO</p>
-            </div>
-          </div>
-          
-          {/* C0M - Security */}
-          <div className="relative group">
-            {/* Speech Bubble */}
-            {agents.c0m.speechBubble && (
-              <div className="absolute -top-16 left-1/2 -translate-x-1/2 bg-white text-black px-3 py-1 rounded-lg text-xs whitespace-nowrap animate-fade-in">
-                {agents.c0m.speechBubble}
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full border-8 border-transparent border-t-white" />
-              </div>
-            )}
-            
-            {/* Charts Setup */}
-            <div className="relative">
-              {/* Multi-monitor */}
-              <div className="flex gap-1">
-                <div className="w-10 h-14 bg-[#1A1A24] rounded border border-[#2A2A34]">
-                  {/* Mini Chart */}
-                  <svg viewBox="0 0 40 50" className="w-full h-full p-1">
-                    <polyline
-                      points="5,40 15,30 20,35 30,15 35,20"
-                      fill="none"
-                      stroke="#22C55E"
-                      strokeWidth="2"
-                    />
-                  </svg>
-                </div>
-                <div className="w-14 h-16 bg-[#1A1A24] rounded border border-[#2A2A34]">
-                  <div className="p-1 font-mono text-[5px] text-[#FF4444]">
-                    ⚠️ WATCHING<br/>
-                    Markets: 20<br/>
-                    Positions: 10<br/>
-                    Risk: LOW
-                  </div>
-                </div>
-              </div>
-              
-              {/* Desk */}
-              <div className="w-28 h-6 bg-[#2A2A34] rounded-t mt-1" />
-            </div>
-            
-            {/* C0M Character */}
-            <div className={`absolute -top-20 left-1/2 -translate-x-1/2 ${getAgentAnimation(agents.c0m.status)}`}>
-              <div className="w-16 h-20 relative">
-                {/* Head */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-10 bg-[#FFDBAC] rounded-full border-2 border-[#E5C99A]">
-                  {/* Suspicious Eyes */}
-                  <div className="absolute top-4 left-2 w-2 h-1 bg-[#333] rounded-full" />
-                  <div className="absolute top-4 right-2 w-2 h-1 bg-[#333] rounded-full" />
-                  {/* Slight frown */}
-                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-3 h-px bg-[#333]" />
-                </div>
-                {/* Body - Hoodie */}
-                <div className="absolute top-9 left-1/2 -translate-x-1/2 w-12 h-10 bg-[#9333EA] rounded-t-lg" />
-              </div>
-              {/* Emoji Badge */}
-              <div className="absolute -top-2 -right-2 text-lg">💀</div>
-            </div>
-            
-            {/* Label */}
-            <div className="text-center mt-2">
-              <span className="text-[#9333EA] font-mono text-xs">c0m</span>
-              <p className="text-[8px] text-neutral-500">Security</p>
-            </div>
-          </div>
+            );
+          })}
         </div>
         
         {/* Floor */}
