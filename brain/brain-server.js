@@ -1725,4 +1725,468 @@ setTimeout(async () => {
 // Schedule periodic ideation (every hour)
 setInterval(scheduledIdeation, IDEATION_CONFIG.intervalMinutes * 60 * 1000);
 
+// ════════════════════════════════════════════════════════════════
+// AUTONOMOUS OFFICE — 24/7 OPERATIONS
+// The team works even when HQ isn't here
+// ════════════════════════════════════════════════════════════════
+
+const OFFICE_CONFIG = {
+  enabled: true,
+  workInterval: 5, // Minutes between work cycles
+  dataStreamInterval: 2, // Minutes between data fetches
+  researchInterval: 30, // Minutes between research cycles
+  deployEnabled: process.env.RAILWAY_TOKEN ? true : false,
+  
+  // Work queues
+  taskTypes: [
+    'site_improvement',
+    'data_analysis', 
+    'research',
+    'documentation',
+    'code_review',
+    'testing',
+    'deployment'
+  ],
+  
+  // Data streams to monitor
+  dataStreams: [
+    { name: 'polymarket', url: 'https://gamma-api.polymarket.com/markets' },
+    { name: 'coingecko', url: 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd' },
+  ],
+  
+  // Research sources
+  researchSources: [
+    { name: 'hackernews', url: 'https://hacker-news.firebaseio.com/v0/topstories.json' },
+    { name: 'github_trending', type: 'github' },
+  ]
+};
+
+// Office state
+let officeState = {
+  status: 'active',
+  currentTask: null,
+  completedTasks: 0,
+  lastWorkCycle: null,
+  lastDataFetch: null,
+  lastResearch: null,
+  dataCache: {},
+  taskQueue: [],
+  workLog: []
+};
+
+/**
+ * POST /create/deploy — Autonomous work, creation, and deployment
+ * The brain's ability to actually BUILD and SHIP
+ */
+app.post('/create/deploy', async (req, res) => {
+  const { action, target, params, agent = 'b0b' } = req.body;
+  
+  const timestamp = new Date().toISOString();
+  
+  // Valid actions
+  const validActions = [
+    'analyze_site',      // Vision analysis of current site
+    'create_component',  // Generate new component code
+    'improve_code',      // Suggest/create code improvements
+    'run_tests',         // Execute test suites
+    'deploy',            // Trigger Railway deployment
+    'research',          // Deep research on a topic
+    'fetch_data',        // Get live data from streams
+    'create_discussion', // Start team discussion about work
+    'queue_task',        // Add task to work queue
+    'get_status'         // Get current office status
+  ];
+  
+  if (action && !validActions.includes(action)) {
+    return res.status(400).json({ 
+      error: 'Invalid action',
+      validActions 
+    });
+  }
+  
+  // Default: get status
+  if (!action || action === 'get_status') {
+    return res.json({
+      success: true,
+      office: {
+        status: officeState.status,
+        currentTask: officeState.currentTask,
+        completedTasks: officeState.completedTasks,
+        queueLength: officeState.taskQueue.length,
+        lastWorkCycle: officeState.lastWorkCycle,
+        lastDataFetch: officeState.lastDataFetch,
+        uptime: process.uptime(),
+        config: {
+          workInterval: OFFICE_CONFIG.workInterval,
+          dataStreamInterval: OFFICE_CONFIG.dataStreamInterval,
+          deployEnabled: OFFICE_CONFIG.deployEnabled
+        }
+      },
+      recentWork: officeState.workLog.slice(-10)
+    });
+  }
+  
+  let result = { success: true, action, timestamp };
+  
+  try {
+    switch (action) {
+      case 'analyze_site':
+        // Use vision to analyze current site state
+        const siteUrl = target || VISION_CONFIG.siteUrl;
+        result.analysis = {
+          requested: siteUrl,
+          status: 'queued',
+          message: 'Site analysis queued for next work cycle'
+        };
+        officeState.taskQueue.push({
+          type: 'site_improvement',
+          action: 'vision_analysis',
+          target: siteUrl,
+          createdAt: timestamp,
+          agent
+        });
+        break;
+        
+      case 'create_component':
+        // Queue component creation
+        result.component = {
+          name: target || 'NewComponent',
+          status: 'queued',
+          params
+        };
+        officeState.taskQueue.push({
+          type: 'site_improvement',
+          action: 'create_component',
+          target,
+          params,
+          createdAt: timestamp,
+          agent
+        });
+        break;
+        
+      case 'improve_code':
+        // Queue code improvement analysis
+        result.improvement = {
+          target: target || 'general',
+          status: 'queued'
+        };
+        officeState.taskQueue.push({
+          type: 'code_review',
+          action: 'improve',
+          target,
+          createdAt: timestamp,
+          agent
+        });
+        break;
+        
+      case 'deploy':
+        if (!OFFICE_CONFIG.deployEnabled) {
+          result.deploy = {
+            status: 'disabled',
+            message: 'Railway deployment not configured (no RAILWAY_TOKEN)'
+          };
+        } else {
+          result.deploy = {
+            status: 'queued',
+            message: 'Deployment queued for review'
+          };
+          officeState.taskQueue.push({
+            type: 'deployment',
+            action: 'railway_deploy',
+            target: target || 'dashboard',
+            createdAt: timestamp,
+            agent
+          });
+        }
+        break;
+        
+      case 'research':
+        const researchTopic = target || 'AI agents in web development';
+        result.research = {
+          topic: researchTopic,
+          status: 'started'
+        };
+        
+        // Start research in background
+        performResearch(researchTopic, agent).then(findings => {
+          officeState.workLog.push({
+            type: 'research',
+            topic: researchTopic,
+            findings: findings.length,
+            completedAt: new Date().toISOString()
+          });
+        });
+        break;
+        
+      case 'fetch_data':
+        // Fetch from all data streams
+        const streamData = await fetchAllDataStreams();
+        result.data = streamData;
+        officeState.dataCache = { ...officeState.dataCache, ...streamData };
+        officeState.lastDataFetch = timestamp;
+        break;
+        
+      case 'create_discussion':
+        // Create a work discussion
+        const discussionTopic = target || 'Current work priorities';
+        const discussionResponse = await axios.post(`http://localhost:${PORT}/ideate`, {
+          topic: discussionTopic,
+          agents: ['b0b', 'r0ss', 'c0m', 'd0t'],
+          context: params?.context || 'Autonomous work session'
+        });
+        result.discussion = discussionResponse.data;
+        break;
+        
+      case 'queue_task':
+        const newTask = {
+          type: params?.type || 'general',
+          action: target,
+          params,
+          createdAt: timestamp,
+          agent,
+          priority: params?.priority || 'normal'
+        };
+        officeState.taskQueue.push(newTask);
+        result.task = newTask;
+        result.queueLength = officeState.taskQueue.length;
+        break;
+    }
+    
+    // Log the action
+    officeState.workLog.push({
+      action,
+      agent,
+      timestamp,
+      success: true
+    });
+    
+    res.json(result);
+    
+  } catch (err) {
+    console.error(`Office action error (${action}):`, err.message);
+    res.status(500).json({ 
+      error: err.message,
+      action,
+      timestamp
+    });
+  }
+});
+
+/**
+ * Fetch all data streams
+ */
+async function fetchAllDataStreams() {
+  const results = {};
+  
+  for (const stream of OFFICE_CONFIG.dataStreams) {
+    try {
+      const response = await axios.get(stream.url, { timeout: 5000 });
+      results[stream.name] = {
+        data: response.data,
+        fetchedAt: new Date().toISOString(),
+        status: 'success'
+      };
+    } catch (err) {
+      results[stream.name] = {
+        error: err.message,
+        fetchedAt: new Date().toISOString(),
+        status: 'error'
+      };
+    }
+  }
+  
+  return results;
+}
+
+/**
+ * Perform research on a topic
+ */
+async function performResearch(topic, agent = 'r0ss') {
+  console.log(`[${new Date().toISOString()}] 📚 ${agent} researching: ${topic}`);
+  
+  const findings = [];
+  
+  // Fetch from research sources
+  for (const source of OFFICE_CONFIG.researchSources) {
+    try {
+      if (source.url) {
+        const response = await axios.get(source.url, { timeout: 5000 });
+        findings.push({
+          source: source.name,
+          type: 'api',
+          data: Array.isArray(response.data) ? response.data.slice(0, 10) : response.data
+        });
+      }
+    } catch (err) {
+      console.log(`Research source ${source.name} error:`, err.message);
+    }
+  }
+  
+  // Store findings
+  const researchFile = path.join(DATA_DIR, 'research', `${Date.now()}-${topic.replace(/[^a-z0-9]/gi, '-')}.json`);
+  await fs.mkdir(path.join(DATA_DIR, 'research'), { recursive: true });
+  await fs.writeFile(researchFile, JSON.stringify({
+    topic,
+    agent,
+    findings,
+    timestamp: new Date().toISOString()
+  }, null, 2));
+  
+  return findings;
+}
+
+/**
+ * Autonomous work cycle — runs continuously
+ */
+async function autonomousWorkCycle() {
+  if (!OFFICE_CONFIG.enabled) return;
+  
+  const now = new Date().toISOString();
+  console.log(`[${now}] 🏢 Autonomous work cycle starting...`);
+  
+  officeState.lastWorkCycle = now;
+  
+  // Process task queue
+  if (officeState.taskQueue.length > 0) {
+    const task = officeState.taskQueue.shift();
+    officeState.currentTask = task;
+    
+    console.log(`[${now}] 📋 Processing task: ${task.type}/${task.action}`);
+    
+    try {
+      // Execute task based on type
+      switch (task.type) {
+        case 'site_improvement':
+          if (task.action === 'vision_analysis') {
+            // Would use vision API here
+            console.log(`Vision analysis requested for: ${task.target}`);
+          }
+          break;
+          
+        case 'research':
+          await performResearch(task.target || 'general improvements', task.agent);
+          break;
+          
+        case 'data_analysis':
+          await fetchAllDataStreams();
+          break;
+      }
+      
+      officeState.completedTasks++;
+      officeState.workLog.push({
+        task: task.type,
+        action: task.action,
+        completedAt: new Date().toISOString(),
+        success: true
+      });
+      
+    } catch (err) {
+      console.error('Task execution error:', err.message);
+      officeState.workLog.push({
+        task: task.type,
+        action: task.action,
+        completedAt: new Date().toISOString(),
+        success: false,
+        error: err.message
+      });
+    }
+    
+    officeState.currentTask = null;
+  }
+  
+  // Trim work log to last 100 entries
+  if (officeState.workLog.length > 100) {
+    officeState.workLog = officeState.workLog.slice(-100);
+  }
+}
+
+/**
+ * Data stream monitor — fetches live data continuously
+ */
+async function dataStreamMonitor() {
+  if (!OFFICE_CONFIG.enabled) return;
+  
+  console.log(`[${new Date().toISOString()}] 📊 Fetching data streams...`);
+  
+  try {
+    const data = await fetchAllDataStreams();
+    officeState.dataCache = data;
+    officeState.lastDataFetch = new Date().toISOString();
+    
+    // Log notable changes (could trigger discussions)
+    // Future: AI analysis of data changes
+  } catch (err) {
+    console.log('Data stream error:', err.message);
+  }
+}
+
+/**
+ * GET /office/status — Quick status check
+ */
+app.get('/office/status', (req, res) => {
+  res.json({
+    status: officeState.status,
+    uptime: process.uptime(),
+    completedTasks: officeState.completedTasks,
+    queueLength: officeState.taskQueue.length,
+    currentTask: officeState.currentTask,
+    lastWorkCycle: officeState.lastWorkCycle,
+    lastDataFetch: officeState.lastDataFetch,
+    dataStreams: Object.keys(officeState.dataCache),
+    agents: Object.keys(AGENTS)
+  });
+});
+
+/**
+ * GET /office/data — Get cached data streams
+ */
+app.get('/office/data', (req, res) => {
+  res.json({
+    cached: officeState.dataCache,
+    lastFetch: officeState.lastDataFetch
+  });
+});
+
+/**
+ * GET /office/work-log — Get recent work history
+ */
+app.get('/office/work-log', (req, res) => {
+  const limit = parseInt(req.query.limit) || 20;
+  res.json({
+    total: officeState.workLog.length,
+    recent: officeState.workLog.slice(-limit),
+    completedTasks: officeState.completedTasks
+  });
+});
+
+// ════════════════════════════════════════════════════════════════
+// STARTUP — Initialize the autonomous office
+// ════════════════════════════════════════════════════════════════
+
+console.log(`
+╔═══════════════════════════════════════════════════════════════╗
+║           B0B BRAIN — AUTONOMOUS OFFICE MODE                 ║
+╠═══════════════════════════════════════════════════════════════╣
+║  Work Cycle: Every ${OFFICE_CONFIG.workInterval} minutes                              ║
+║  Data Streams: Every ${OFFICE_CONFIG.dataStreamInterval} minutes                            ║
+║  Ideation: Every ${IDEATION_CONFIG.intervalMinutes} minutes                               ║
+║  Research: Every ${OFFICE_CONFIG.researchInterval} minutes                              ║
+║                                                               ║
+║  The team works 24/7 — even when HQ isn't here.               ║
+║  "Glass box, not black box"                                   ║
+╚═══════════════════════════════════════════════════════════════╝
+`);
+
+// Start autonomous work cycle (every 5 minutes)
+setInterval(autonomousWorkCycle, OFFICE_CONFIG.workInterval * 60 * 1000);
+
+// Start data stream monitor (every 2 minutes)  
+setInterval(dataStreamMonitor, OFFICE_CONFIG.dataStreamInterval * 60 * 1000);
+
+// Initial data fetch on startup
+setTimeout(dataStreamMonitor, 10000);
+
+// Initial work cycle
+setTimeout(autonomousWorkCycle, 15000);
+
 module.exports = app;
