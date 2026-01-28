@@ -211,90 +211,90 @@ export function WalletDashboard() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold flex items-center gap-3">
-            <span className="text-[#FF6B9D]">👻</span>
+          <h2 className="text-2xl font-bold flex items-center gap-3" style={{ color: '#1A1A1A' }}>
+            <span style={{ color: '#7C3AED' }}>👻</span>
             Phantom Wallet
           </h2>
-          <p className="text-sm text-[#8B7E94] mt-1">Multi-chain trading infrastructure</p>
+          <p className="text-sm mt-1" style={{ color: '#555555' }}>Multi-chain trading infrastructure</p>
         </div>
         <div className="flex items-center gap-2">
           <span className={`w-2 h-2 rounded-full ${
-            wallet.status === 'connected' ? 'bg-[#66C800] animate-pulse' :
-            wallet.status === 'error' ? 'bg-[#FC401F]' : 'bg-[#FFD12F] animate-pulse'
+            wallet.status === 'connected' ? 'bg-[#00AA66] animate-pulse' :
+            wallet.status === 'error' ? 'bg-[#DC2626]' : 'bg-[#F59E0B] animate-pulse'
           }`} />
-          <span className="text-xs font-mono text-[#8B7E94]">
+          <span className="text-xs font-mono" style={{ color: '#555555' }}>
             {wallet.status.toUpperCase()}
           </span>
         </div>
       </div>
 
-      {/* Total Value */}
+      {/* Total Value - BRIGHT */}
       <div className="p-6 rounded-xl" style={{ 
-        background: 'linear-gradient(135deg, rgba(255,107,157,0.15) 0%, rgba(139,92,246,0.15) 100%)',
-        border: '1px solid rgba(255,107,157,0.3)'
+        background: 'linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(0,82,255,0.1) 100%)',
+        border: '1px solid rgba(124,58,237,0.3)'
       }}>
-        <p className="text-sm text-[#FFB8D0] mb-2">TOTAL VALUE (WARM + COLD)</p>
+        <p className="text-sm mb-2" style={{ color: '#7C3AED' }}>TOTAL VALUE (WARM + COLD)</p>
         <div className="flex items-baseline gap-3">
-          <span className="text-5xl font-bold">
+          <span className="text-5xl font-bold" style={{ color: '#1A1A1A' }}>
             ${(wallet.totalUsd + coldBalance.usd).toLocaleString(undefined, { maximumFractionDigits: 2 })}
           </span>
-          <span className="text-xl text-[#8B7E94]">USD</span>
+          <span className="text-xl" style={{ color: '#555555' }}>USD</span>
         </div>
-        <p className="text-sm text-[#8B7E94] mt-2">
+        <p className="text-sm mt-2" style={{ color: '#555555' }}>
           ETH @ ${ethPrice.toLocaleString()}
         </p>
       </div>
 
-      {/* Chain Breakdown */}
+      {/* Chain Breakdown - BRIGHT */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Base */}
-        <div className="p-4 rounded-xl bg-[#1A1424] border border-[#32353D]">
+        <div className="p-4 rounded-xl" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E8E4DE' }}>
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-mono text-[#8B7E94]">BASE</span>
-            <span className="text-xs px-2 py-0.5 rounded bg-[#0000FF20] text-[#0000FF]">8453</span>
+            <span className="text-xs font-mono" style={{ color: '#555555' }}>BASE</span>
+            <span className="text-xs px-2 py-0.5 rounded" style={{ backgroundColor: '#0052FF20', color: '#0052FF' }}>8453</span>
           </div>
-          <p className="text-2xl font-bold mb-1">{wallet.chains.base.eth.toFixed(4)} ETH</p>
-          <p className="text-sm text-[#8B7E94]">≈ ${(wallet.chains.base.eth * ethPrice).toFixed(2)}</p>
-          <p className="text-xs text-[#FF6B9D] mt-2">Memecoin sniping 🎯</p>
+          <p className="text-2xl font-bold mb-1" style={{ color: '#1A1A1A' }}>{wallet.chains.base.eth.toFixed(4)} ETH</p>
+          <p className="text-sm" style={{ color: '#555555' }}>≈ ${(wallet.chains.base.eth * ethPrice).toFixed(2)}</p>
+          <p className="text-xs mt-2" style={{ color: '#0052FF' }}>Memecoin sniping 🎯</p>
         </div>
 
         {/* Polygon */}
-        <div className="p-4 rounded-xl bg-[#1A1424] border border-[#32353D]">
+        <div className="p-4 rounded-xl" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E8E4DE' }}>
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-mono text-[#8B7E94]">POLYGON</span>
-            <span className="text-xs px-2 py-0.5 rounded bg-[#8B5CF620] text-[#8B5CF6]">137</span>
+            <span className="text-xs font-mono" style={{ color: '#555555' }}>POLYGON</span>
+            <span className="text-xs px-2 py-0.5 rounded" style={{ backgroundColor: '#7C3AED20', color: '#7C3AED' }}>137</span>
           </div>
-          <p className="text-2xl font-bold mb-1">{wallet.chains.polygon.matic.toFixed(4)} MATIC</p>
-          <p className="text-sm text-[#8B7E94]">≈ ${(wallet.chains.polygon.matic * 0.5).toFixed(2)}</p>
-          <p className="text-xs text-[#8B5CF6] mt-2">Polymarket edge 🎲</p>
+          <p className="text-2xl font-bold mb-1" style={{ color: '#1A1A1A' }}>{wallet.chains.polygon.matic.toFixed(4)} MATIC</p>
+          <p className="text-sm" style={{ color: '#555555' }}>≈ ${(wallet.chains.polygon.matic * 0.5).toFixed(2)}</p>
+          <p className="text-xs mt-2" style={{ color: '#7C3AED' }}>Polymarket edge 🎲</p>
         </div>
 
         {/* Cold Storage */}
-        <div className="p-4 rounded-xl bg-[#1A1424] border border-[#22c55e40]">
+        <div className="p-4 rounded-xl" style={{ backgroundColor: '#FFFFFF', border: '1px solid #00AA6640' }}>
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-mono text-[#8B7E94]">COLD STORAGE</span>
-            <span className="text-xs px-2 py-0.5 rounded bg-[#22c55e20] text-[#22c55e]">🔒</span>
+            <span className="text-xs font-mono" style={{ color: '#555555' }}>COLD STORAGE</span>
+            <span className="text-xs px-2 py-0.5 rounded" style={{ backgroundColor: '#00AA6620', color: '#00AA66' }}>🔒</span>
           </div>
-          <p className="text-2xl font-bold mb-1">{coldBalance.eth.toFixed(4)} ETH</p>
-          <p className="text-sm text-[#8B7E94]">≈ ${coldBalance.usd.toFixed(2)}</p>
-          <p className="text-xs text-[#22c55e] mt-2">Treasury 70% sweep</p>
+          <p className="text-2xl font-bold mb-1" style={{ color: '#1A1A1A' }}>{coldBalance.eth.toFixed(4)} ETH</p>
+          <p className="text-sm" style={{ color: '#555555' }}>≈ ${coldBalance.usd.toFixed(2)}</p>
+          <p className="text-xs mt-2" style={{ color: '#00AA66' }}>Treasury 70% sweep</p>
         </div>
       </div>
 
-      {/* Allocations */}
-      <div className="p-4 rounded-xl bg-[#1A1424] border border-[#32353D]">
-        <h3 className="text-sm font-mono text-[#8B7E94] mb-4">ALLOCATION STRATEGY</h3>
+      {/* Allocations - BRIGHT */}
+      <div className="p-4 rounded-xl" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E8E4DE' }}>
+        <h3 className="text-sm font-mono mb-4" style={{ color: '#555555' }}>ALLOCATION STRATEGY</h3>
         <div className="space-y-3">
           {allocations.map((alloc) => (
             <div key={alloc.category}>
               <div className="flex items-center justify-between text-sm mb-1">
-                <span>{alloc.category}</span>
+                <span style={{ color: '#1A1A1A' }}>{alloc.category}</span>
                 <span className="font-mono">
                   <span style={{ color: alloc.color }}>{alloc.current.toFixed(1)}%</span>
-                  <span className="text-[#8B7E94]"> / {alloc.target}%</span>
+                  <span style={{ color: '#555555' }}> / {alloc.target}%</span>
                 </span>
               </div>
-              <div className="h-2 bg-[#0D0A12] rounded-full overflow-hidden">
+              <div className="h-2 rounded-full overflow-hidden" style={{ backgroundColor: '#F0F0F0' }}>
                 <div 
                   className="h-full rounded-full transition-all duration-500"
                   style={{ 
@@ -303,30 +303,30 @@ export function WalletDashboard() {
                   }}
                 />
               </div>
-              <p className="text-xs text-[#8B7E94] mt-1">{alloc.description}</p>
+              <p className="text-xs mt-1" style={{ color: '#555555' }}>{alloc.description}</p>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Goals */}
-      <div className="p-4 rounded-xl bg-[#1A1424] border border-[#32353D]">
-        <h3 className="text-sm font-mono text-[#8B7E94] mb-4">TRADING GOALS</h3>
+      {/* Goals - BRIGHT */}
+      <div className="p-4 rounded-xl" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E8E4DE' }}>
+        <h3 className="text-sm font-mono mb-4" style={{ color: '#555555' }}>TRADING GOALS</h3>
         <div className="space-y-4">
           {goals.map((goal) => (
             <div key={goal.name} className="flex items-center justify-between">
               <div>
-                <p className="font-medium">{goal.name}</p>
-                <p className="text-xs text-[#8B7E94]">{goal.deadline}</p>
+                <p className="font-medium" style={{ color: '#1A1A1A' }}>{goal.name}</p>
+                <p className="text-xs" style={{ color: '#555555' }}>{goal.deadline}</p>
               </div>
               <div className="text-right">
-                <p className="font-mono">
+                <p className="font-mono" style={{ color: '#1A1A1A' }}>
                   ${goal.current.toFixed(0)} / ${goal.target}
                 </p>
                 <span className={`text-xs px-2 py-0.5 rounded ${
-                  goal.status === 'achieved' ? 'bg-[#22c55e20] text-[#22c55e]' :
-                  goal.status === 'behind' ? 'bg-[#FC401F20] text-[#FC401F]' :
-                  'bg-[#FFD12F20] text-[#FFD12F]'
+                  goal.status === 'achieved' ? 'bg-[#00AA6620] text-[#00AA66]' :
+                  goal.status === 'behind' ? 'bg-[#DC262620] text-[#DC2626]' :
+                  'bg-[#F59E0B20] text-[#F59E0B]'
                 }`}>
                   {goal.status === 'achieved' ? '✓ ACHIEVED' : 
                    goal.status === 'behind' ? 'BEHIND' : 'ON TRACK'}
@@ -337,26 +337,28 @@ export function WalletDashboard() {
         </div>
       </div>
 
-      {/* Wallet Addresses */}
-      <div className="p-4 rounded-xl bg-[#0D0A12] border border-[#32353D]">
-        <h3 className="text-xs font-mono text-[#8B7E94] mb-3">WALLET ADDRESSES</h3>
+      {/* Wallet Addresses - BRIGHT */}
+      <div className="p-4 rounded-xl" style={{ backgroundColor: '#FFF8F0', border: '1px solid #E8E4DE' }}>
+        <h3 className="text-xs font-mono mb-3" style={{ color: '#555555' }}>WALLET ADDRESSES</h3>
         <div className="space-y-2 text-sm font-mono">
           <div className="flex items-center justify-between">
-            <span className="text-[#FF6B9D]">Warm (Trading)</span>
+            <span style={{ color: '#FF6B00' }}>Warm (Trading)</span>
             <a 
               href={`https://basescan.org/address/${PHANTOM_WALLET}`}
               target="_blank"
-              className="text-[#8B5CF6] hover:underline"
+              className="hover:underline"
+              style={{ color: '#0052FF' }}
             >
               {PHANTOM_WALLET.slice(0, 10)}...{PHANTOM_WALLET.slice(-8)}
             </a>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-[#22c55e]">Cold (Treasury)</span>
+            <span style={{ color: '#00AA66' }}>Cold (Treasury)</span>
             <a 
               href={`https://basescan.org/address/${COLD_WALLET}`}
               target="_blank"
-              className="text-[#8B5CF6] hover:underline"
+              className="hover:underline"
+              style={{ color: '#0052FF' }}
             >
               {COLD_WALLET.slice(0, 10)}...{COLD_WALLET.slice(-8)}
             </a>

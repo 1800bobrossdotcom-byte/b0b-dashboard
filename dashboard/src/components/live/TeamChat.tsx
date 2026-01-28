@@ -204,16 +204,16 @@ export function TeamChat({ compact = false, showHeader = true, maxMessages = 10 
 
   return (
     <div className={`rounded-xl overflow-hidden ${
-      compact ? 'border border-[#32353D] bg-[#0D0A12]/80' : 'border border-[#FF6B9D30] bg-[#1A1424]'
+      compact ? 'border border-[#E8E4DE] bg-[#FFFFFF]' : 'border border-[#0052FF30] bg-[#FFFFFF]'
     }`}>
-      {/* Header */}
+      {/* Header - BRIGHT */}
       {showHeader && (
-        <div className="px-4 py-3 border-b border-[#32353D] flex items-center justify-between bg-[#0D0A12]/50">
+        <div className="px-4 py-3 border-b border-[#E8E4DE] flex items-center justify-between" style={{ backgroundColor: '#FFF8F0' }}>
           <div className="flex items-center gap-3">
             <span className="text-lg">💬</span>
             <div>
-              <span className="text-sm font-mono text-[#FF6B9D]">#collective-hq</span>
-              <span className="ml-2 w-1.5 h-1.5 rounded-full bg-[#66C800] inline-block animate-pulse" />
+              <span className="text-sm font-mono" style={{ color: '#0052FF' }}>#collective-hq</span>
+              <span className="ml-2 w-1.5 h-1.5 rounded-full bg-[#00AA66] inline-block animate-pulse" />
             </div>
           </div>
           
@@ -223,8 +223,8 @@ export function TeamChat({ compact = false, showHeader = true, maxMessages = 10 
                 onClick={() => setActiveTab('live')}
                 className={`text-xs px-3 py-1 rounded transition-colors ${
                   activeTab === 'live' 
-                    ? 'bg-[#FF6B9D] text-white' 
-                    : 'text-[#8B7E94] hover:text-white'
+                    ? 'bg-[#0052FF] text-white' 
+                    : 'text-[#555555] hover:text-[#1A1A1A]'
                 }`}
               >
                 Live
@@ -233,8 +233,8 @@ export function TeamChat({ compact = false, showHeader = true, maxMessages = 10 
                 onClick={() => setActiveTab('archive')}
                 className={`text-xs px-3 py-1 rounded transition-colors ${
                   activeTab === 'archive' 
-                    ? 'bg-[#8B5CF6] text-white' 
-                    : 'text-[#8B7E94] hover:text-white'
+                    ? 'bg-[#7C3AED] text-white' 
+                    : 'text-[#555555] hover:text-[#1A1A1A]'
                 }`}
               >
                 Archive
@@ -244,24 +244,24 @@ export function TeamChat({ compact = false, showHeader = true, maxMessages = 10 
         </div>
       )}
 
-      {/* Content */}
+      {/* Content - BRIGHT */}
       <div 
         ref={chatRef}
         className={`p-4 space-y-4 overflow-y-auto ${compact ? 'max-h-[250px]' : 'max-h-[500px]'}`}
       >
         {loading ? (
           <div className="flex items-center justify-center py-8">
-            <span className="text-[#8B7E94] animate-pulse">Loading discussions...</span>
+            <span style={{ color: '#555555' }} className="animate-pulse">Loading discussions...</span>
           </div>
         ) : error && recentMessages.length === 0 ? (
           <div className="text-center py-8">
-            <p className="text-[#8B7E94] text-sm">{error}</p>
-            <p className="text-[#8B7E94] text-xs mt-2">Check brain server status</p>
+            <p className="text-sm" style={{ color: '#555555' }}>{error}</p>
+            <p className="text-xs mt-2" style={{ color: '#888888' }}>Check brain server status</p>
           </div>
         ) : recentMessages.length === 0 ? (
           <div className="text-center py-8">
-            <p className="text-[#8B7E94]">No discussions yet</p>
-            <p className="text-[#8B7E94] text-xs mt-2">Team is thinking...</p>
+            <p style={{ color: '#555555' }}>No discussions yet</p>
+            <p className="text-xs mt-2" style={{ color: '#888888' }}>Team is thinking...</p>
           </div>
         ) : (
           recentMessages.map((msg, i) => {
@@ -281,12 +281,12 @@ export function TeamChat({ compact = false, showHeader = true, maxMessages = 10 
                     >
                       {msg.agent}
                     </span>
-                    <span className="text-xs text-[#8B7E94]">{msg.role || config.role}</span>
-                    <span className="text-xs text-[#8B7E94] opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="text-xs" style={{ color: '#555555' }}>{msg.role || config.role}</span>
+                    <span className="text-xs opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#888888' }}>
                       {formatTime(msg.timestamp)}
                     </span>
                   </div>
-                  <p className="text-sm text-[#E5E5E5] leading-relaxed whitespace-pre-line">
+                  <p className="text-sm leading-relaxed whitespace-pre-line" style={{ color: '#1A1A1A' }}>
                     {msg.content}
                   </p>
                 </div>
@@ -296,45 +296,46 @@ export function TeamChat({ compact = false, showHeader = true, maxMessages = 10 
         )}
       </div>
 
-      {/* Discussion List (non-compact only) */}
+      {/* Discussion List (non-compact only) - BRIGHT */}
       {!compact && activeTab === 'archive' && discussions.length > 0 && (
-        <div className="border-t border-[#32353D] max-h-[200px] overflow-y-auto">
+        <div className="border-t border-[#E8E4DE] max-h-[200px] overflow-y-auto">
           {discussions.map((disc) => (
             <a
               key={disc.id}
               href={`${BRAIN_URL}/discussions/${disc.id}`}
               target="_blank"
-              className="flex items-center justify-between p-3 hover:bg-white/5 transition-colors border-b border-[#32353D] last:border-0"
+              className="flex items-center justify-between p-3 hover:bg-gray-50 transition-colors border-b border-[#E8E4DE] last:border-0"
             >
               <div className="min-w-0">
-                <p className="text-sm font-medium truncate">{disc.title}</p>
-                <p className="text-xs text-[#8B7E94]">
+                <p className="text-sm font-medium truncate" style={{ color: '#1A1A1A' }}>{disc.title}</p>
+                <p className="text-xs" style={{ color: '#555555' }}>
                   {disc.participants?.join(', ')} · {disc.messageCount} messages
                 </p>
               </div>
               <div className="flex items-center gap-2 flex-shrink-0">
                 <span className={`text-xs px-2 py-0.5 rounded ${
-                  disc.status === 'active' ? 'bg-[#66C800]/20 text-[#66C800]' :
-                  disc.status === 'planning' ? 'bg-[#FFD12F]/20 text-[#FFD12F]' :
-                  'bg-[#8B7E94]/20 text-[#8B7E94]'
+                  disc.status === 'active' ? 'bg-[#00AA6620] text-[#00AA66]' :
+                  disc.status === 'planning' ? 'bg-[#F59E0B20] text-[#F59E0B]' :
+                  'bg-[#55555520] text-[#555555]'
                 }`}>
                   {disc.status?.toUpperCase()}
                 </span>
-                <span className="text-xs text-[#8B7E94]">{formatDate(disc.date)}</span>
+                <span className="text-xs" style={{ color: '#555555' }}>{formatDate(disc.date)}</span>
               </div>
             </a>
           ))}
         </div>
       )}
 
-      {/* Footer */}
-      <div className="px-4 py-2 border-t border-[#32353D] bg-[#0D0A12]/50 flex items-center justify-between">
-        <p className="text-xs text-[#8B7E94] font-mono">
+      {/* Footer - BRIGHT */}
+      <div className="px-4 py-2 border-t flex items-center justify-between" style={{ borderColor: '#E8E4DE', backgroundColor: '#FFF8F0' }}>
+        <p className="text-xs font-mono" style={{ color: '#555555' }}>
           Transparent by default
         </p>
         <a 
           href="/labs" 
-          className="text-xs text-[#FF6B9D] hover:underline"
+          className="text-xs hover:underline"
+          style={{ color: '#0052FF' }}
         >
           View all →
         </a>
