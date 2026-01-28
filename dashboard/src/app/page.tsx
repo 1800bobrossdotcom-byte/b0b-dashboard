@@ -192,6 +192,14 @@ export default function Home() {
 
         {/* Live status indicator */}
         <div className="flex items-center gap-4">
+          {/* Partner logos */}
+          <div className="hidden lg:flex items-center gap-3 px-3 py-1 rounded-lg" style={{ backgroundColor: colors.gray10, border: `1px solid ${colors.gray20}` }}>
+            <a href="https://bankr.bot" target="_blank" className="text-xs font-mono hover:opacity-70" style={{ color: '#0052FF' }}>BANKR</a>
+            <span style={{ color: colors.gray30 }}>×</span>
+            <a href="https://anthropic.com" target="_blank" className="text-xs font-mono hover:opacity-70" style={{ color: '#D97706' }}>CLAUDE</a>
+            <span style={{ color: colors.gray30 }}>×</span>
+            <a href="https://base.org" target="_blank" className="text-xs font-mono hover:opacity-70" style={{ color: colors.blue }}>BASE</a>
+          </div>
           <div className="flex items-center gap-2">
             <span className={`w-2 h-2 rounded-full ${isOnline ? 'animate-pulse' : ''}`} style={{ backgroundColor: isOnline ? colors.lime : colors.error }} />
             <span className="text-xs font-mono" style={{ color: isOnline ? colors.lime : colors.error }}>
@@ -354,6 +362,86 @@ export default function Home() {
         ))}
       </section>
 
+      {/* Blue Chip AI Community - Partners */}
+      <section className="py-16 px-6 md:px-12 lg:px-24" style={{ backgroundColor: colors.gray100 }}>
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-xs font-mono tracking-wider" style={{ color: colors.gray50 }}>BLUE CHIP AI COMMUNITY</h2>
+            <span className="text-xs font-mono" style={{ color: colors.gray60 }}>Built on Base</span>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <a 
+              href="https://bankr.bot" 
+              target="_blank"
+              className="group p-6 rounded-lg transition-all hover:scale-[1.02]"
+              style={{ backgroundColor: colors.gray90, border: `1px solid ${colors.gray80}` }}
+            >
+              <div className="text-3xl mb-3">🏦</div>
+              <h3 className="font-mono text-lg mb-1" style={{ color: '#0052FF' }}>BANKR</h3>
+              <p className="text-xs" style={{ color: colors.gray50 }}>AI-powered trading agent</p>
+              <p className="text-xs mt-2 font-mono" style={{ color: colors.gray60 }}>$BNKR</p>
+            </a>
+            
+            <a 
+              href="https://clanker.world" 
+              target="_blank"
+              className="group p-6 rounded-lg transition-all hover:scale-[1.02]"
+              style={{ backgroundColor: colors.gray90, border: `1px solid ${colors.gray80}` }}
+            >
+              <div className="text-3xl mb-3">🤖</div>
+              <h3 className="font-mono text-lg mb-1" style={{ color: '#8B5CF6' }}>CLANKER</h3>
+              <p className="text-xs" style={{ color: colors.gray50 }}>Token launch platform</p>
+              <p className="text-xs mt-2 font-mono" style={{ color: colors.gray60 }}>$CLANKER</p>
+            </a>
+            
+            <a 
+              href="https://clawd.ai" 
+              target="_blank"
+              className="group p-6 rounded-lg transition-all hover:scale-[1.02]"
+              style={{ backgroundColor: colors.gray90, border: `1px solid ${colors.gray80}` }}
+            >
+              <div className="text-3xl mb-3">🐾</div>
+              <h3 className="font-mono text-lg mb-1" style={{ color: '#F97316' }}>CLAWD</h3>
+              <p className="text-xs" style={{ color: colors.gray50 }}>Claude-based AI agent</p>
+              <p className="text-xs mt-2 font-mono" style={{ color: colors.gray60 }}>$CLAWD</p>
+            </a>
+            
+            <a 
+              href="https://drb.gg" 
+              target="_blank"
+              className="group p-6 rounded-lg transition-all hover:scale-[1.02]"
+              style={{ backgroundColor: colors.gray90, border: `1px solid ${colors.gray80}` }}
+            >
+              <div className="text-3xl mb-3">🔮</div>
+              <h3 className="font-mono text-lg mb-1" style={{ color: '#22C55E' }}>DRB</h3>
+              <p className="text-xs" style={{ color: colors.gray50 }}>Decentralized reasoning</p>
+              <p className="text-xs mt-2 font-mono" style={{ color: colors.gray60 }}>$DRB</p>
+            </a>
+          </div>
+          
+          {/* Infrastructure Partners */}
+          <div className="mt-8 pt-8 border-t flex flex-wrap items-center justify-center gap-8" style={{ borderColor: colors.gray80 }}>
+            <a href="https://anthropic.com" target="_blank" className="flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity">
+              <span className="text-xl">🧠</span>
+              <span className="font-mono text-sm" style={{ color: colors.white }}>Anthropic</span>
+            </a>
+            <a href="https://base.org" target="_blank" className="flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity">
+              <span className="text-xl">🔵</span>
+              <span className="font-mono text-sm" style={{ color: colors.white }}>Base</span>
+            </a>
+            <a href="https://polymarket.com" target="_blank" className="flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity">
+              <span className="text-xl">📊</span>
+              <span className="font-mono text-sm" style={{ color: colors.white }}>Polymarket</span>
+            </a>
+            <a href="https://dexscreener.com" target="_blank" className="flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity">
+              <span className="text-xl">📈</span>
+              <span className="font-mono text-sm" style={{ color: colors.white }}>DEXScreener</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Philosophy - BRIGHT gradient */}
       <section className="py-32 px-6 md:px-12 lg:px-24" style={{ background: `linear-gradient(180deg, ${colors.white} 0%, ${colors.peach} 50%, ${colors.mint} 100%)` }}>
         <div className="max-w-4xl mx-auto text-center">
@@ -382,12 +470,16 @@ export default function Home() {
               <div className="flex flex-col gap-2 text-sm" style={{ color: colors.dark }}>
                 <a href="https://github.com/1800bobrossdotcom-byte" target="_blank" className="hover:opacity-70 transition-opacity">GITHUB</a>
                 <a href="https://base.org" target="_blank" className="hover:opacity-70 transition-opacity font-medium" style={{ color: colors.blue }}>BASE</a>
+                <a href="https://anthropic.com" target="_blank" className="hover:opacity-70 transition-opacity font-medium" style={{ color: '#D97706' }}>ANTHROPIC</a>
               </div>
             </div>
             <div>
-              <p className="text-xs font-mono mb-4" style={{ color: colors.darkMuted }}>SOCIALS</p>
+              <p className="text-xs font-mono mb-4" style={{ color: colors.darkMuted }}>AI COMMUNITY</p>
               <div className="flex flex-col gap-2 text-sm" style={{ color: colors.dark }}>
-                <a href="https://x.com/_b0bdev_" target="_blank" className="hover:opacity-70 transition-opacity">X</a>
+                <a href="https://bankr.bot" target="_blank" className="hover:opacity-70 transition-opacity font-medium" style={{ color: '#0052FF' }}>BANKR</a>
+                <a href="https://clanker.world" target="_blank" className="hover:opacity-70 transition-opacity font-medium" style={{ color: '#8B5CF6' }}>CLANKER</a>
+                <a href="https://clawd.ai" target="_blank" className="hover:opacity-70 transition-opacity font-medium" style={{ color: '#F97316' }}>CLAWD</a>
+                <a href="https://drb.gg" target="_blank" className="hover:opacity-70 transition-opacity font-medium" style={{ color: '#22C55E' }}>DRB</a>
               </div>
             </div>
             <div>
