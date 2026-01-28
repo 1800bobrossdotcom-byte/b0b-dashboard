@@ -972,6 +972,79 @@ app.get('/polymarket', async (req, res) => {
 });
 
 // =============================================================================
+// 💬 QUOTES/LIVE — Random inspirational quotes from Bob Ross + team
+// =============================================================================
+const BOB_QUOTES = [
+  "We don't make mistakes, just happy accidents.",
+  "Let's get a little crazy here.",
+  "There's nothing wrong with having a tree as a friend.",
+  "Talent is a pursued interest. Anything that you're willing to practice, you can do.",
+  "I think there's an artist hidden at the bottom of every single one of us.",
+  "You can do anything you want to do. This is your world.",
+  "However you think it should be, that's exactly how it should be.",
+  "The secret to doing anything is believing that you can do it.",
+  "In painting, you have unlimited power. You have the ability to move mountains.",
+  "We artists are a different breed of people.",
+  "I really believe that if you practice enough you could paint the Mona Lisa with a 2-inch brush.",
+  "All you need to paint is a few tools, a little instruction, and a vision in your mind.",
+  "No pressure. Just relax and watch it happen.",
+  "Every day is a good day when you paint.",
+  "There are no limits here. Start out by believing.",
+];
+
+const TEAM_QUOTES = [
+  { agent: 'r0ss', quote: "Ship it. We'll fix in prod.", emoji: '🔧' },
+  { agent: 'd0t', quote: "Watch without waiting. Act without hesitation.", emoji: '🌊' },
+  { agent: 'c0m', quote: "Autonomy without guardrails is just chaos with good intentions.", emoji: '💀' },
+  { agent: 'pr0fit', quote: "The market rewards patience and punishes desperation.", emoji: '📈' },
+  { agent: 'gl0w', quote: "Every pixel tells a story.", emoji: '✨' },
+  { agent: 'n0va', quote: "Vibes are contagious. Spread good ones.", emoji: '🚀' },
+  { agent: 'k1nk', quote: "Fortune favors the degen.", emoji: '🔥' },
+  { agent: 'cl0ud', quote: "Infrastructure is invisible until it breaks.", emoji: '☁️' },
+];
+
+app.get('/quotes/live', (req, res) => {
+  const bobQuote = BOB_QUOTES[Math.floor(Math.random() * BOB_QUOTES.length)];
+  const teamQuote = TEAM_QUOTES[Math.floor(Math.random() * TEAM_QUOTES.length)];
+  
+  res.json({
+    bob: {
+      quote: bobQuote,
+      author: 'Bob Ross',
+      emoji: '🎨'
+    },
+    team: teamQuote,
+    timestamp: new Date().toISOString()
+  });
+});
+
+// =============================================================================
+// 📈 TOKENS/TRENDING — Live token discovery from DexScreener
+// =============================================================================
+app.get('/tokens/trending', async (req, res) => {
+  try {
+    const { discoverNewTokens } = require('./live-trader.js');
+    const tokens = await discoverNewTokens();
+    
+    res.json({
+      count: tokens.length,
+      tokens: tokens.slice(0, 10),
+      source: 'dexscreener',
+      timestamp: new Date().toISOString()
+    });
+  } catch (err) {
+    res.json({ 
+      count: 0, 
+      tokens: [], 
+      error: err.message,
+      timestamp: new Date().toISOString()
+    });
+  }
+});
+  }
+});
+
+// =============================================================================
 // GIT INTEGRATION — Watch Repos for Activity
 // =============================================================================
 

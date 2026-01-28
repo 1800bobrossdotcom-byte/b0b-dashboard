@@ -68,7 +68,8 @@ const CONFIG = {
   },
   
   // Bankr — Signing layer (no hot keys stored)
-  BANKR_API_KEY: process.env.BANKR_API_KEY || 'bk_UQTZFYQEYDVVFDUXRJJG2TQGNTG5QVB6',
+  // ⚠️ NEVER commit API keys! Use Railway environment variables
+  BANKR_API_KEY: process.env.BANKR_API_KEY,
   BANKR_API_URL: process.env.BANKR_API_URL || 'https://api.bankr.bot',
   
   // Safety Limits (applies to all chains)
