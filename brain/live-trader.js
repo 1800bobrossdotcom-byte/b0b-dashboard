@@ -25,23 +25,59 @@ const path = require('path');
 // ════════════════════════════════════════════════════════════════════════════
 
 const CONFIG = {
-  // Wallet Hierarchy
+  // Wallet Hierarchy — SAME WALLET, MULTIPLE CHAINS
   PHANTOM_WALLET: '0xd06Aa956CEDA935060D9431D8B8183575c41072d',  // Hot/Trading
   COLD_WALLET: '0x8455cF296e1265b494605207e97884813De21950',     // Treasury/Storage
-  CHAIN: 'base',
-  CHAIN_ID: 8453,
   
-  // Bankr
+  // ══════════════════════════════════════════════════════════════════════════
+  // MULTI-CHAIN CONFIG
+  // Phantom wallet works on: Base (memecoins) + Polygon (Polymarket)
+  // ══════════════════════════════════════════════════════════════════════════
+  CHAINS: {
+    base: {
+      chainId: 8453,
+      rpc: 'https://mainnet.base.org',
+      native: 'ETH',
+      purpose: 'Blessing Sniper - memecoin momentum plays',
+    },
+    polygon: {
+      chainId: 137,
+      rpc: 'https://polygon-rpc.com',
+      native: 'MATIC',
+      purpose: 'Polymarket prediction markets',
+    },
+  },
+  
+  // ══════════════════════════════════════════════════════════════════════════
+  // POLYMARKET CONFIG — Your account is connected to Phantom wallet
+  // Per Polymarket ToS: API trading is allowed, no house to ban you
+  // ══════════════════════════════════════════════════════════════════════════
+  POLYMARKET: {
+    GAMMA_HOST: 'https://gamma-api.polymarket.com',
+    CLOB_HOST: 'https://clob.polymarket.com',
+    WS_HOST: 'wss://ws-subscriptions-clob.polymarket.com/ws/market',
+    
+    // Trading limits for prediction markets
+    MAX_POSITION_USD: 100,
+    MIN_EDGE_REQUIRED: 0.08,      // Need 8% edge to trade
+    MIN_LIQUIDITY: 5000,          // Minimum market liquidity
+    MAX_SPREAD: 0.05,             // Max 5% bid-ask spread
+    
+    // Strategy
+    STRATEGY: 'edge_hunter',       // Look for mispriced markets
+  },
+  
+  // Bankr — Signing layer (no hot keys stored)
   BANKR_API_KEY: process.env.BANKR_API_KEY || 'bk_UQTZFYQEYDVVFDUXRJJG2TQGNTG5QVB6',
   BANKR_API_URL: process.env.BANKR_API_URL || 'https://api.bankr.bot',
   
-  // Safety Limits
+  // Safety Limits (applies to all chains)
   MAX_POSITION_USD: 100,       // Max per trade
   MAX_DAILY_VOLUME: 500,       // Max daily trading volume
   MAX_OPEN_POSITIONS: 5,       // Max concurrent positions
   MIN_LIQUIDITY: 10000,        // Minimum token liquidity
   
-  // Blessing Sniper Config
+  // Blessing Sniper Config (Base chain memecoins)
   SNIPER: {
     ENTRY_SIZE_USD: 50,        // Initial entry
     EXIT_PERCENT: 0.90,        // Exit 90% at target
@@ -86,6 +122,7 @@ const CONFIG = {
   HISTORY_FILE: path.join(__dirname, 'data', 'live-trade-history.json'),
   MOONBAG_FILE: path.join(__dirname, 'data', 'moonbag-positions.json'),
   TREASURY_FILE: path.join(__dirname, 'data', 'treasury-log.json'),
+  POLYMARKET_FILE: path.join(__dirname, 'data', 'polymarket-positions.json'),
 };
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -740,9 +777,11 @@ class PresenceWatcher {
       newToken: [],
       priceMove: [],
       positionAlert: [],
+      polymarketEdge: [],
     };
     this.watchedTokens = new Set();
     this.lastPrices = new Map();
+    this.polymarketPositions = new Map(); // Track PM positions
     this.state = null;
   }
   
@@ -763,12 +802,14 @@ class PresenceWatcher {
     }
     
     // Start the watchers
-    this.watchNewTokens();
-    this.watchPriceMovements();
-    this.watchWalletBalance();
+    this.watchNewTokens();           // Base memecoins
+    this.watchPriceMovements();      // Position management
+    this.watchWalletBalance();       // Treasury sweeps
+    this.watchPolymarketEdges();     // Polygon prediction markets
     
     console.log(`   Watching ${this.watchedTokens.size} positions`);
     console.log(`   Observing new Base token launches`);
+    console.log(`   Scanning Polymarket for edge opportunities`);
   }
   
   /**
@@ -907,6 +948,89 @@ class PresenceWatcher {
     
     // First check after 1 minute
     setTimeout(check, 60000);
+  }
+  
+  /**
+   * Watch Polymarket for edge opportunities
+   * The edge hunter — find mispriced prediction markets
+   * 
+   * Philosophy: Same wallet, different chain (Polygon).
+   * API trading is allowed per ToS. P2P markets, no house.
+   */
+  async watchPolymarketEdges() {
+    const fetch = (await import('node-fetch')).default;
+    
+    const check = async () => {
+      if (!this.watching) return;
+      
+      try {
+        // Get active markets from Gamma API
+        const res = await fetch(
+          `${CONFIG.POLYMARKET.GAMMA_HOST}/markets?closed=false&limit=50`,
+          { timeout: 10000 }
+        );
+        const markets = await res.json();
+        
+        for (const market of markets) {
+          // Skip if too close to resolution
+          const endDate = new Date(market.endDateIso);
+          const hoursUntilEnd = (endDate - Date.now()) / (1000 * 60 * 60);
+          if (hoursUntilEnd < 24) continue; // Need 24h+ runway
+          
+          // Calculate edge on each outcome
+          for (const token of market.tokens || []) {
+            const impliedProb = parseFloat(token.price);
+            
+            // Our model's estimated probability (simple heuristic for now)
+            // TODO: Connect to brain's reasoning engine
+            const volumeSignal = parseFloat(market.volumeNum || 0);
+            const liquiditySignal = parseFloat(market.liquidityNum || 0);
+            
+            // Look for markets with high volume but extreme prices
+            // These often mean strong conviction from informed traders
+            const isHighVolume = volumeSignal > 100000;
+            const isExtreme = impliedProb < 0.15 || impliedProb > 0.85;
+            
+            if (isHighVolume && isExtreme) {
+              // Edge = difference between our estimate and market price
+              // For now, fade extreme positions (mean reversion)
+              const estimatedProb = impliedProb < 0.5 ? impliedProb + 0.10 : impliedProb - 0.10;
+              const edge = Math.abs(estimatedProb - impliedProb);
+              
+              if (edge >= CONFIG.POLYMARKET.MIN_EDGE_REQUIRED) {
+                console.log(`\n   🎲 POLYMARKET EDGE: ${market.question?.slice(0, 50)}...`);
+                console.log(`      Outcome: ${token.outcome}`);
+                console.log(`      Market: ${(impliedProb * 100).toFixed(1)}%`);
+                console.log(`      Edge: ${(edge * 100).toFixed(1)}%`);
+                console.log(`      Volume: $${volumeSignal.toLocaleString()}`);
+                
+                this.emit('polymarketEdge', {
+                  marketId: market.id,
+                  conditionId: market.conditionId,
+                  question: market.question,
+                  outcome: token.outcome,
+                  tokenId: token.token_id,
+                  impliedProb,
+                  estimatedProb,
+                  edge,
+                  volume: volumeSignal,
+                  liquidity: liquiditySignal,
+                  hoursUntilEnd,
+                });
+              }
+            }
+          }
+        }
+      } catch (err) {
+        console.log(`   ⚠️ Polymarket scan error: ${err.message}`);
+      }
+      
+      // Check every 5 minutes (markets move slower than memecoins)
+      setTimeout(check, 5 * 60 * 1000);
+    };
+    
+    // First check after 30 seconds
+    setTimeout(check, 30000);
   }
   
   emit(event, data) {
@@ -1049,6 +1173,83 @@ async function startPresenceTrading() {
     // Trailing update
     else {
       console.log(`   📈 ${move.symbol}: ${(pnlPercent * 100).toFixed(1)}% P&L`);
+    }
+  });
+  
+  // React to Polymarket edge opportunities (Polygon chain)
+  presence.on('polymarketEdge', async (edge) => {
+    const state = await loadState();
+    
+    // Check if we already have a position in this market
+    const existingPM = presence.polymarketPositions.get(edge.conditionId);
+    if (existingPM) {
+      console.log(`   ⏸️ Already have position in this market`);
+      return;
+    }
+    
+    // Check max positions
+    const maxPMPositions = CONFIG.POLYMARKET.MAX_OPEN_POSITIONS || 5;
+    if (presence.polymarketPositions.size >= maxPMPositions) {
+      console.log(`   ⏸️ Max Polymarket positions reached (${presence.polymarketPositions.size})`);
+      return;
+    }
+    
+    // Polymarket position sizing
+    const positionSize = CONFIG.POLYMARKET.MAX_POSITION_USD || 100;
+    
+    // Only take very high confidence edges
+    if (edge.edge < 0.10) {
+      console.log(`   📊 Edge ${(edge.edge * 100).toFixed(1)}% below threshold, passing`);
+      return;
+    }
+    
+    console.log(`\n   🎲 POLYMARKET ENTRY OPPORTUNITY`);
+    console.log(`      Question: ${edge.question?.slice(0, 60)}...`);
+    console.log(`      Outcome: ${edge.outcome}`);
+    console.log(`      Market Price: ${(edge.impliedProb * 100).toFixed(1)}%`);
+    console.log(`      Our Estimate: ${(edge.estimatedProb * 100).toFixed(1)}%`);
+    console.log(`      Edge: ${(edge.edge * 100).toFixed(1)}%`);
+    console.log(`      Position Size: $${positionSize}`);
+    
+    // Determine which side to buy
+    const side = edge.estimatedProb > edge.impliedProb ? 'YES' : 'NO';
+    
+    try {
+      // Execute via Bankr on Polygon
+      const tradePrompt = `Buy $${positionSize} of ${side} shares on Polymarket for: "${edge.question?.slice(0, 100)}" (token ID: ${edge.tokenId}) on Polygon network`;
+      
+      console.log(`   🏦 Executing via Bankr...`);
+      const result = await bankr.executeTrade(tradePrompt);
+      
+      if (result?.success) {
+        // Track the position
+        presence.polymarketPositions.set(edge.conditionId, {
+          marketId: edge.marketId,
+          conditionId: edge.conditionId,
+          question: edge.question,
+          outcome: edge.outcome,
+          side,
+          entryPrice: edge.impliedProb,
+          size: positionSize,
+          timestamp: Date.now(),
+          hoursUntilEnd: edge.hoursUntilEnd,
+        });
+        
+        console.log(`   ✅ Polymarket position opened`);
+        
+        await recordTrade({
+          type: 'polymarket_entry',
+          chain: 'polygon',
+          market: edge.question?.slice(0, 100),
+          outcome: edge.outcome,
+          side,
+          entryPrice: edge.impliedProb,
+          edge: edge.edge,
+          size: positionSize,
+        });
+      }
+    } catch (err) {
+      console.log(`   ❌ Polymarket entry failed: ${err.message}`);
     }
   });
   
