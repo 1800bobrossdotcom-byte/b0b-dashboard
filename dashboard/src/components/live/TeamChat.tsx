@@ -53,21 +53,27 @@ interface Thread {
 }
 
 // ════════════════════════════════════════════════════════════════
-// WISDOM SEEDS — Rick Rubin / Papaji / Christ essence
-// Compassionate witness of discernment and humour
+// TEAM QUOTES — Live from brain discussions
+// No external gurus, only team wisdom
 // ════════════════════════════════════════════════════════════════
 
-const WISDOM_SEEDS = [
-  { text: "The magic is in the work itself, not the outcome.", agent: "r0ss", essence: "rubin" },
-  { text: "Be still. Know that you are.", agent: "d0t", essence: "papaji" },
-  { text: "First, we watch. Then we build.", agent: "b0b", essence: "witness" },
-  { text: "Security is love for future selves.", agent: "c0m", essence: "christ" },
-  { text: "The data speaks. We listen.", agent: "quant", essence: "rubin" },
-  { text: "Reduce until only the essential remains.", agent: "b0b", essence: "rubin" },
-  { text: "What you seek is seeking you.", agent: "d0t", essence: "papaji" },
-  { text: "Glass box, not black box.", agent: "r0ss", essence: "witness" },
-  { text: "In the noise, find the signal.", agent: "c0m", essence: "christ" },
-  { text: "Creation is attention.", agent: "b0b", essence: "rubin" },
+interface TeamQuote {
+  text: string;
+  agent: string;
+  emoji?: string;
+  source?: string;
+}
+
+// Fallback quotes if brain is offline
+const FALLBACK_QUOTES: TeamQuote[] = [
+  { text: "We don't make mistakes, just happy little alphas.", agent: "b0b", emoji: "🎨" },
+  { text: "The only bug is the one you didn't log.", agent: "r0ss", emoji: "🔧" },
+  { text: "In the glass box, even shadows are transparent.", agent: "c0m", emoji: "💀" },
+  { text: "I saw the pattern before it existed.", agent: "d0t", emoji: "👁️" },
+  { text: "Watch without waiting. Act without hesitation.", agent: "d0t", emoji: "👁️" },
+  { text: "Happy little accidents become happy little discoveries.", agent: "b0b", emoji: "🎨" },
+  { text: "Glass box, not black box.", agent: "r0ss", emoji: "🔧" },
+  { text: "Security is love for future selves.", agent: "c0m", emoji: "💀" },
 ];
 
 // ════════════════════════════════════════════════════════════════
@@ -137,16 +143,38 @@ export function TeamChat({
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'live' | 'archive'>('live');
   const [currentQuote, setCurrentQuote] = useState(0);
+  const [teamQuotes, setTeamQuotes] = useState<TeamQuote[]>(FALLBACK_QUOTES);
   const [selectedDiscussion, setSelectedDiscussion] = useState<Discussion | null>(null);
   const chatRef = useRef<HTMLDivElement>(null);
 
-  // Rotate wisdom quotes
+  // Fetch team quotes from brain
+  useEffect(() => {
+    async function fetchQuotes() {
+      try {
+        const res = await fetch(`${BRAIN_URL}/api/quotes/live?limit=20`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.quotes && data.quotes.length > 0) {
+            setTeamQuotes(data.quotes);
+          }
+        }
+      } catch {
+        // Keep fallback quotes
+      }
+    }
+    fetchQuotes();
+    // Refresh quotes every 5 minutes
+    const quoteFetchInterval = setInterval(fetchQuotes, 300000);
+    return () => clearInterval(quoteFetchInterval);
+  }, []);
+
+  // Rotate team quotes
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentQuote(prev => (prev + 1) % WISDOM_SEEDS.length);
+      setCurrentQuote(prev => (prev + 1) % teamQuotes.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [teamQuotes.length]);
 
   // Fetch discussion list from brain
   const fetchDiscussions = useCallback(async () => {
@@ -267,16 +295,16 @@ export function TeamChat({
     .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
     .slice(0, compact ? 5 : maxMessages);
 
-  // Current wisdom seed
-  const wisdom = WISDOM_SEEDS[currentQuote];
-  const wisdomAgent = getAgentConfig(wisdom.agent);
+  // Current team quote (live from brain)
+  const quote = teamQuotes[currentQuote % teamQuotes.length];
+  const quoteAgent = getAgentConfig(quote?.agent || 'b0b');
 
   return (
     <div className={`rounded-xl overflow-hidden shadow-sm ${
       compact ? 'border border-[#E8E4DE]' : 'border border-[#0052FF20]'
     }`} style={{ backgroundColor: '#FFFFFF' }}>
       
-      {/* Header with Animated Wisdom Quote */}
+      {/* Header with Live Team Quote */}
       {showHeader && (
         <div 
           className="px-4 py-3 border-b border-[#E8E4DE]" 
@@ -319,25 +347,25 @@ export function TeamChat({
             )}
           </div>
           
-          {/* Animated Wisdom Quote */}
+          {/* Rotating Team Quote */}
           <div 
             className="mt-2 p-3 rounded-lg border transition-all duration-500"
             style={{ 
-              borderColor: wisdomAgent.color + '30',
-              backgroundColor: wisdomAgent.color + '08'
+              borderColor: quoteAgent.color + '30',
+              backgroundColor: quoteAgent.color + '08'
             }}
           >
             <div className="flex items-start gap-2">
-              <span className="text-lg">{wisdomAgent.emoji}</span>
+              <span className="text-lg">{quote?.emoji || quoteAgent.emoji}</span>
               <div className="flex-1">
                 <p 
                   className="text-sm italic font-medium transition-opacity duration-500"
                   style={{ color: '#1A1A1A' }}
                 >
-                  &ldquo;{wisdom.text}&rdquo;
+                  &ldquo;{quote?.text || 'Team is thinking...'}&rdquo;
                 </p>
-                <p className="text-xs mt-1" style={{ color: wisdomAgent.color }}>
-                  — {wisdom.agent} · {wisdom.essence}
+                <p className="text-xs mt-1" style={{ color: quoteAgent.color }}>
+                  — {quote?.agent || 'b0b'} · {quote?.source || 'brain'}
                 </p>
               </div>
             </div>
