@@ -5,8 +5,8 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install only required dependencies (skip optional native modules)
-RUN npm install --omit=dev --omit=optional
+# Install dependencies with legacy peer deps to resolve node-fetch conflict
+RUN npm install --omit=dev --legacy-peer-deps
 
 # Copy source
 COPY . .

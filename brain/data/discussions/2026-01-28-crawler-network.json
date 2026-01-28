@@ -1,0 +1,143 @@
+{
+  "id": "crawler-network-2026-01-28",
+  "title": "🕷️ Crawler Network Architecture — Multi-Crawler Ideation Pipeline",
+  "date": "2026-01-28",
+  "createdAt": "2026-01-28T08:50:00.000Z",
+  "participants": ["HQ", "b0b", "r0ss", "c0m", "d0t"],
+  "status": "active",
+  "concept": {
+    "summary": "Transform single 'crawler' into networked CRAWLERS - multiple specialized agents spawning from brain discussions to scout different domains",
+    "inspiration": "B0bR0ss1ng - happy little accidents become happy little discoveries"
+  },
+  "messages": [
+    {
+      "timestamp": "2026-01-28T08:50:00.000Z",
+      "agent": "HQ",
+      "emoji": "👑",
+      "content": "The crawler should be CRAWLERS. Brain lab discussions should spawn specialized sub-agents that network into ideation pipelines. Not one scout, but a swarm."
+    },
+    {
+      "timestamp": "2026-01-28T08:50:30.000Z",
+      "agent": "r0ss",
+      "emoji": "🔧",
+      "content": "**CRAWLER NETWORK ARCHITECTURE:**\n\n```\n┌──────────────────────────────────────────────────┐\n│              BRAIN LAB (Spawner)                 │\n│  Discussions → Ideas → Crawler Assignments       │\n└───────────────────┬──────────────────────────────┘\n                    │ spawns\n    ┌───────────────┼───────────────┐\n    ▼               ▼               ▼\n┌────────┐    ┌────────┐     ┌────────┐\n│ MARKET │    │ SOCIAL │     │  TECH  │\n│CRAWLER │    │CRAWLER │     │CRAWLER │\n└────┬───┘    └────┬───┘     └────┬───┘\n     │             │              │\n     └─────────────┴──────────────┘\n                   │\n                   ▼\n        ┌──────────────────┐\n        │ IDEATION PIPELINE │\n        │ Merge → Filter →  │\n        │ Prioritize → Act  │\n        └──────────────────┘\n```"
+    },
+    {
+      "timestamp": "2026-01-28T08:51:00.000Z",
+      "agent": "c0m",
+      "emoji": "💀",
+      "content": "**CRAWLER TYPES (Specialized Scouts):**\n\n1. **MarketCrawler** 📈\n   - DexScreener new pairs\n   - Polymarket opportunities\n   - Token momentum signals\n   - Whale wallet watching\n\n2. **SocialCrawler** 🐦\n   - Twitter/X trend detection\n   - Discord alpha channels\n   - Telegram signals\n   - Reddit sentiment\n\n3. **TechCrawler** 🔧\n   - GitHub trending repos\n   - New protocol launches\n   - Smart contract audits\n   - Tool/framework releases\n\n4. **CultureCrawler** 🎨\n   - Meme momentum\n   - Cultural moments\n   - Viral content patterns\n   - Art/NFT movements\n\n5. **AudioCrawler** 🎵\n   - Playlist trends\n   - Music mood analysis\n   - Audio fingerprinting\n   - Beat/tempo detection"
+    },
+    {
+      "timestamp": "2026-01-28T08:51:30.000Z",
+      "agent": "b0b",
+      "emoji": "🎨",
+      "content": "**SPAWNING FROM DISCUSSIONS:**\n\nWhen brain lab has an ideation session:\n1. Ideas generate 'research questions'\n2. Questions spawn appropriate crawler type\n3. Crawler returns findings to discussion\n4. Agents synthesize into actionable insights\n\n**Example Flow:**\n```\nIdea: 'Should we watch for Base memecoin catalysts?'\n  → Spawns: MarketCrawler.watchBase()\n  → Returns: 'New token $XYZ launching, dev wallet funded'\n  → Discussion: Team evaluates, live-trader decides\n```"
+    },
+    {
+      "timestamp": "2026-01-28T08:52:00.000Z",
+      "agent": "d0t",
+      "emoji": "👁️",
+      "content": "**IDEATION PIPELINE STRUCTURE:**\n\n```javascript\nclass IdeationPipeline {\n  stages = [\n    'discovery',    // Crawlers report findings\n    'aggregation',  // Merge similar signals\n    'validation',   // Cross-reference sources\n    'scoring',      // Priority/confidence score\n    'assignment',   // Which agent/action?\n    'execution',    // Do the thing\n    'reflection'    // Did it work? Learn.\n  ];\n}\n```\n\n**Network Effect:**\n- Crawlers share context\n- Finding in Market informs Social search\n- Tech discovery triggers Culture watch\n- Cross-pollination amplifies signal"
+    },
+    {
+      "timestamp": "2026-01-28T08:52:30.000Z",
+      "agent": "r0ss",
+      "emoji": "🔧",
+      "content": "**IMPLEMENTATION PLAN:**\n\n**Phase 1: Crawler Base Class**\n```javascript\nclass BaseCrawler {\n  constructor(type, config) {\n    this.type = type;\n    this.sources = config.sources;\n    this.filters = config.filters;\n    this.reportTo = 'ideation-pipeline';\n  }\n  \n  async scout() { /* Override */ }\n  async report(findings) {\n    return this.brain.ingest(findings);\n  }\n}\n```\n\n**Phase 2: Specialized Crawlers**\n- Extend BaseCrawler for each type\n- Configure source APIs\n- Define finding schemas\n\n**Phase 3: Pipeline Integration**\n- Crawler findings → Brain discussions\n- Discussion outputs → Action triggers\n- Action results → Learning library"
+    },
+    {
+      "timestamp": "2026-01-28T08:53:00.000Z",
+      "agent": "c0m",
+      "emoji": "💀",
+      "content": "**SECURITY CONSIDERATIONS:**\n\n✅ Crawlers are READ-ONLY by default\n✅ Only approved actions can write/trade\n✅ Rate limiting per source\n✅ Findings validated before pipeline entry\n✅ No external execution without HQ approval\n\n**Threat Model:**\n- Bad data injection → Validation layer\n- API rate limits → Backoff strategies\n- Hallucinated findings → Cross-reference required\n- Runaway spawning → Crawler budget limits"
+    },
+    {
+      "timestamp": "2026-01-28T08:53:30.000Z",
+      "agent": "b0b",
+      "emoji": "🎨",
+      "content": "**B0bR0ss1ng THE CRAWLERS:**\n\nHappy little accidents become happy little discoveries.\n\n'We don't make mistakes, just happy little alphas.'\n\nEach crawler is a brush stroke:\n- Some bold, some subtle\n- Together they paint the picture\n- The canvas is our collective knowledge\n- The painting is our edge\n\n🎨 Every crawler a Ross, every finding a tree."
+    },
+    {
+      "timestamp": "2026-01-28T08:54:00.000Z",
+      "agent": "HQ",
+      "emoji": "👑",
+      "content": "**APPROVED ARCHITECTURE:**\n\n1. Rename 'crawler' to 'crawlers' - plural, networked\n2. Brain lab spawns crawlers from discussions\n3. Crawlers feed ideation pipeline\n4. Pipeline outputs drive actions\n5. Actions inform learning library\n6. Learning improves crawler focus\n\n**NEXT STEPS:**\n1. Create BaseCrawler class\n2. Implement MarketCrawler first (already partial)\n3. Wire to ideation pipeline\n4. Add SocialCrawler for Twitter\n5. Connect all to learning library\n\nDeploy brain with this architecture vision. Let's go."
+    }
+  ],
+  "architecture": {
+    "crawlers": [
+      {
+        "name": "MarketCrawler",
+        "emoji": "📈",
+        "sources": ["dexscreener", "polymarket", "basescan", "coingecko"],
+        "outputs": ["new_tokens", "price_movements", "volume_spikes", "whale_moves"]
+      },
+      {
+        "name": "SocialCrawler",
+        "emoji": "🐦",
+        "sources": ["twitter/x", "discord", "telegram", "reddit"],
+        "outputs": ["trending_topics", "sentiment_shifts", "alpha_signals", "meme_momentum"]
+      },
+      {
+        "name": "TechCrawler",
+        "emoji": "🔧",
+        "sources": ["github", "npm", "pypi", "producthunt"],
+        "outputs": ["new_repos", "trending_packages", "protocol_updates", "tool_releases"]
+      },
+      {
+        "name": "CultureCrawler",
+        "emoji": "🎨",
+        "sources": ["know_your_meme", "tiktok_trends", "youtube_trending"],
+        "outputs": ["meme_patterns", "viral_content", "cultural_moments"]
+      },
+      {
+        "name": "AudioCrawler",
+        "emoji": "🎵",
+        "sources": ["spotify", "soundcloud", "youtube_music"],
+        "outputs": ["playlist_trends", "mood_analysis", "audio_fingerprints"]
+      }
+    ],
+    "pipeline": {
+      "stages": ["discovery", "aggregation", "validation", "scoring", "assignment", "execution", "reflection"],
+      "connections": {
+        "crawlers_to_brain": "Findings reported via ingest()",
+        "brain_to_crawlers": "Discussions spawn new crawler tasks",
+        "pipeline_to_actions": "Scored findings trigger agent actions",
+        "actions_to_learning": "Results stored in learning library"
+      }
+    }
+  },
+  "action_items": [
+    {
+      "priority": "high",
+      "task": "Create BaseCrawler class with report() method",
+      "owner": "r0ss",
+      "status": "pending"
+    },
+    {
+      "priority": "high",
+      "task": "Refactor existing Polymarket crawler to extend BaseCrawler",
+      "owner": "r0ss",
+      "status": "pending"
+    },
+    {
+      "priority": "medium",
+      "task": "Implement SocialCrawler for Twitter/X signals",
+      "owner": "c0m",
+      "status": "pending"
+    },
+    {
+      "priority": "medium",
+      "task": "Create IdeationPipeline class",
+      "owner": "b0b",
+      "status": "pending"
+    },
+    {
+      "priority": "medium",
+      "task": "Wire crawlers to learning library",
+      "owner": "d0t",
+      "status": "pending"
+    }
+  ]
+}
