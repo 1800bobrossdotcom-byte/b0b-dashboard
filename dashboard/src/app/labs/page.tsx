@@ -9,10 +9,10 @@
  * "Glass box, not black box."
  */
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, Component, ReactNode } from 'react';
 import dynamic from 'next/dynamic';
 
-// Dynamic imports
+// Dynamic imports with ssr:false to prevent hydration errors
 const WalletDashboard = dynamic(() => import('@/components/live/WalletDashboard'), { 
   ssr: false,
   loading: () => <div className="h-48 bg-gray-100 animate-pulse rounded-lg" />
@@ -24,6 +24,47 @@ const TeamChat = dynamic(() => import('@/components/live/TeamChat'), {
 
 // Brain server URL
 const BRAIN_URL = process.env.NEXT_PUBLIC_BRAIN_URL || 'https://b0b-brain-production.up.railway.app';
+
+// ════════════════════════════════════════════════════════════════════════════
+// ERROR BOUNDARY - Catches component crashes, prevents white screen
+// ════════════════════════════════════════════════════════════════════════════
+
+class ErrorBoundary extends Component<{ children: ReactNode; fallback?: ReactNode }, { hasError: boolean; error: Error | null }> {
+  constructor(props: { children: ReactNode; fallback?: ReactNode }) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.error('Labs ErrorBoundary caught:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback || (
+        <div className="p-6 rounded-lg" style={{ backgroundColor: '#1A1A1A', border: '1px solid #DC2626' }}>
+          <h3 className="text-lg font-bold mb-2" style={{ color: '#DC2626' }}>⚠️ Component Error</h3>
+          <p className="text-sm mb-2" style={{ color: '#888888' }}>Something crashed. Try refreshing.</p>
+          <pre className="text-xs p-2 rounded overflow-auto" style={{ backgroundColor: '#111111', color: '#FF6666' }}>
+            {this.state.error?.message}
+          </pre>
+          <button 
+            onClick={() => this.setState({ hasError: false, error: null })}
+            className="mt-3 px-4 py-2 rounded text-sm font-bold"
+            style={{ backgroundColor: '#FF6B00', color: '#000000' }}
+          >
+            Try Again
+          </button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 // ════════════════════════════════════════════════════════════════════════════
 // TYPES
@@ -247,6 +288,7 @@ export default function LabsPage() {
   // ══════════════════════════════════════════════════════════════════════════
 
   return (
+    <ErrorBoundary>
     <main className="min-h-screen" style={{ backgroundColor: '#0A0A0A', color: '#FFFFFF' }}>
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 md:px-8 h-14" 
@@ -652,5 +694,6 @@ export default function LabsPage() {
         </footer>
       </div>
     </main>
+    </ErrorBoundary>
   );
 }
