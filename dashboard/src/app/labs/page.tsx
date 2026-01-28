@@ -193,7 +193,12 @@ interface GitRepo {
 interface LiveTraderStatus {
   active: boolean;
   wallet: string;
-  chain: string;
+  chains: Record<string, {
+    chainId: number;
+    rpc: string;
+    native: string;
+    purpose: string;
+  }>;
   stats: {
     totalTrades: number;
     totalPnL: number;
@@ -673,10 +678,10 @@ export default function LabsPage() {
                     className="font-mono text-sm hover:underline"
                     style={{ color: '#0052FF' }}
                   >
-                    {liveTrader.wallet.slice(0, 10)}...{liveTrader.wallet.slice(-8)}
+                    {liveTrader.wallet?.slice(0, 10)}...{liveTrader.wallet?.slice(-8)}
                   </a>
                   <span className="text-xs ml-2 px-2 py-0.5 rounded" style={{ backgroundColor: '#0052FF20', color: '#0052FF' }}>
-                    {liveTrader.chain.toUpperCase()}
+                    {Object.keys(liveTrader.chains || {}).join(' + ').toUpperCase() || 'MULTI-CHAIN'}
                   </span>
                 </div>
 
