@@ -660,25 +660,6 @@ app.get('/holdings/quick', async (req, res) => {
   }
 });
 
-app.get('/swarm/:strategy', async (req, res) => {
-  const state = await loadSwarmState();
-  const trader = state.traders[req.params.strategy];
-  
-  if (!trader) {
-    return res.status(404).json({ error: 'Strategy not found' });
-  }
-  
-  res.json({
-    ...trader,
-    strategy: STRATEGIES[req.params.strategy]
-  });
-});
-
-// Available strategies
-app.get('/strategies', (req, res) => {
-  res.json(STRATEGIES);
-});
-
 // =============================================================================
 // POLYMARKET CRAWLER
 // =============================================================================
@@ -1315,7 +1296,6 @@ app.listen(PORT, async () => {
   console.log(`  Port: ${PORT}`);
   console.log(`  Status: ONLINE`);
   console.log(`  Agents: ${Object.keys(AGENTS).join(', ')}`);
-  console.log(`  Paper Trader: STARTING...`);
   console.log(`  Live Trader: STARTING...`);
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   
@@ -1324,14 +1304,6 @@ app.listen(PORT, async () => {
   
   // Schedule heartbeat every 5 minutes
   setInterval(heartbeat, 5 * 60 * 1000);
-  
-  // Auto-start paper trader - FAST MODE (2 min)
-  paperTraderRunning = true;
-  await paperTraderTick();
-  paperTraderInterval = setInterval(paperTraderTick, 2 * 60 * 1000);
-  
-  await logActivity({ type: 'paper_trader', action: 'auto_started' });
-  console.log('  📜 Paper Trader: RUNNING (2min intervals)');
   
   // Auto-start Polymarket crawler - FAST MODE (2 min)
   if (axios) {
@@ -1344,11 +1316,6 @@ app.listen(PORT, async () => {
     setInterval(fetchGitActivity, 5 * 60 * 1000);
     console.log('  🔗 Git Activity: RUNNING (5min)');
   }
-  
-  // Auto-start swarm trading - FAST MODE (2 min)
-  await swarmTick();
-  setInterval(swarmTick, 2 * 60 * 1000);
-  console.log('  🐝 Paper Swarm: RUNNING (4 strategies, 2min)');
   
   // ════════════════════════════════════════════════════════════════════════════
   // 🔥 LIVE TRADER — Presence Mode (Event-Driven, Not Interval-Polling)
