@@ -16,13 +16,23 @@ const cors = require('cors');
 const fs = require('fs').promises;
 const path = require('path');
 
-// For Polymarket crawler
+// For Polymarket crawler and git integration
 let axios;
 try {
   axios = require('axios');
 } catch {
   console.log('axios not available - Polymarket crawler disabled');
 }
+
+// GitHub integration config
+const GITHUB_CONFIG = {
+  token: process.env.GITHUB_TOKEN || null,
+  repos: [
+    { owner: 'B0B-Interactive', repo: 'b0b-platform', name: 'b0b-platform' },
+    { owner: 'B0B-Interactive', repo: 'b0b-dashboard', name: 'b0b-dashboard' },
+  ],
+  apiBase: 'https://api.github.com'
+};
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -321,6 +331,8 @@ const PAPER_PORTFOLIO_FILE = path.join(DATA_DIR, 'paper-portfolio.json');
 const PAPER_HISTORY_FILE = path.join(DATA_DIR, 'paper-history.json');
 const POLYMARKET_DATA = path.join(DATA_DIR, 'polymarket.json');
 const SWARM_STATE_FILE = path.join(DATA_DIR, 'paper-swarm.json');
+const DISCUSSIONS_DIR = path.join(DATA_DIR, 'discussions');
+const GIT_ACTIVITY_FILE = path.join(DATA_DIR, 'git-activity.json');
 
 // Nash-inspired trading strategies for swarm testing
 const STRATEGIES = {
@@ -812,6 +824,224 @@ app.get('/polymarket', async (req, res) => {
 });
 
 // =============================================================================
+// GIT INTEGRATION — Watch Repos for Activity
+// =============================================================================
+
+async function fetchGitActivity() {
+  if (!axios) return;
+  if (!GITHUB_CONFIG.token) {
+    console.log('   ⚠️ No GITHUB_TOKEN - git integration limited');
+  }
+  
+  console.log(`[${new Date().toISOString()}] 🔗 Fetching Git activity...`);
+  
+  const activity = {
+    fetchedAt: new Date().toISOString(),
+    repos: []
+  };
+  
+  const headers = GITHUB_CONFIG.token 
+    ? { 'Authorization': `token ${GITHUB_CONFIG.token}`, 'Accept': 'application/vnd.github.v3+json' }
+    : { 'Accept': 'application/vnd.github.v3+json' };
+  
+  for (const repo of GITHUB_CONFIG.repos) {
+    try {
+      // Fetch recent commits
+      const commitsRes = await axios.get(
+        `${GITHUB_CONFIG.apiBase}/repos/${repo.owner}/${repo.repo}/commits`,
+        { headers, params: { per_page: 10 }, timeout: 10000 }
+      );
+      
+      const commits = commitsRes.data.map(c => ({
+        sha: c.sha.slice(0, 7),
+        message: c.commit.message.split('\n')[0],
+        author: c.commit.author?.name || c.author?.login || 'unknown',
+        date: c.commit.author?.date
+      }));
+      
+      // Fetch recent activity/events  
+      let events = [];
+      try {
+        const eventsRes = await axios.get(
+          `${GITHUB_CONFIG.apiBase}/repos/${repo.owner}/${repo.repo}/events`,
+          { headers, params: { per_page: 10 }, timeout: 10000 }
+        );
+        events = eventsRes.data.map(e => ({
+          type: e.type,
+          actor: e.actor?.login,
+          created_at: e.created_at
+        }));
+      } catch {}
+      
+      activity.repos.push({
+        name: repo.name,
+        fullName: `${repo.owner}/${repo.repo}`,
+        commits,
+        events,
+        latestCommit: commits[0] || null
+      });
+      
+      console.log(`   📁 ${repo.name}: ${commits.length} commits fetched`);
+      
+    } catch (err) {
+      console.log(`   ❌ ${repo.name}: ${err.message}`);
+      activity.repos.push({
+        name: repo.name,
+        fullName: `${repo.owner}/${repo.repo}`,
+        error: err.message,
+        commits: [],
+        events: []
+      });
+    }
+  }
+  
+  // Save activity
+  await fs.mkdir(DATA_DIR, { recursive: true });
+  await fs.writeFile(GIT_ACTIVITY_FILE, JSON.stringify(activity, null, 2));
+  
+  await logActivity({ type: 'git_fetch', repos: activity.repos.length });
+  
+  return activity;
+}
+
+// Git activity endpoint
+app.get('/git', async (req, res) => {
+  try {
+    const data = await fs.readFile(GIT_ACTIVITY_FILE, 'utf8');
+    res.json(JSON.parse(data));
+  } catch {
+    // Try fresh fetch
+    const activity = await fetchGitActivity();
+    if (activity) {
+      res.json(activity);
+    } else {
+      res.json({ message: 'No git data yet', repos: [] });
+    }
+  }
+});
+
+// Manual refresh git data
+app.post('/git/refresh', async (req, res) => {
+  const activity = await fetchGitActivity();
+  res.json(activity || { message: 'Git fetch failed', repos: [] });
+});
+
+// =============================================================================
+// DISCUSSIONS SYSTEM — Stored Conversations
+// =============================================================================
+
+async function loadDiscussions() {
+  try {
+    const files = await fs.readdir(DISCUSSIONS_DIR);
+    const discussions = [];
+    
+    for (const file of files.filter(f => f.endsWith('.json'))) {
+      const data = await fs.readFile(path.join(DISCUSSIONS_DIR, file), 'utf8');
+      discussions.push(JSON.parse(data));
+    }
+    
+    return discussions.sort((a, b) => new Date(b.date) - new Date(a.date));
+  } catch {
+    return [];
+  }
+}
+
+async function saveDiscussion(discussion) {
+  await fs.mkdir(DISCUSSIONS_DIR, { recursive: true });
+  const filename = `${discussion.date}-${discussion.id.replace(/[^a-z0-9-]/gi, '-')}.json`;
+  await fs.writeFile(path.join(DISCUSSIONS_DIR, filename), JSON.stringify(discussion, null, 2));
+}
+
+// List all discussions
+app.get('/discussions', async (req, res) => {
+  const discussions = await loadDiscussions();
+  res.json({
+    total: discussions.length,
+    discussions: discussions.map(d => ({
+      id: d.id,
+      title: d.title,
+      date: d.date,
+      status: d.status,
+      participants: d.participants,
+      messageCount: d.messages?.length || 0
+    }))
+  });
+});
+
+// Get specific discussion
+app.get('/discussions/:id', async (req, res) => {
+  const discussions = await loadDiscussions();
+  const discussion = discussions.find(d => d.id === req.params.id);
+  
+  if (!discussion) {
+    return res.status(404).json({ error: 'Discussion not found' });
+  }
+  
+  res.json(discussion);
+});
+
+// Add message to discussion
+app.post('/discussions/:id/message', async (req, res) => {
+  const { agent, content, emoji } = req.body;
+  
+  if (!agent || !content) {
+    return res.status(400).json({ error: 'Agent and content required' });
+  }
+  
+  const discussions = await loadDiscussions();
+  const discussion = discussions.find(d => d.id === req.params.id);
+  
+  if (!discussion) {
+    return res.status(404).json({ error: 'Discussion not found' });
+  }
+  
+  const message = {
+    timestamp: new Date().toISOString(),
+    agent,
+    emoji: emoji || AGENTS[agent]?.emoji || '💬',
+    content
+  };
+  
+  discussion.messages = discussion.messages || [];
+  discussion.messages.push(message);
+  
+  await saveDiscussion(discussion);
+  await logActivity({ type: 'discussion_message', discussionId: discussion.id, agent });
+  
+  res.json({ success: true, message });
+});
+
+// Create new discussion
+app.post('/discussions', async (req, res) => {
+  const { title, participants = ['b0b', 'r0ss', 'c0m'], initialMessage } = req.body;
+  
+  if (!title) {
+    return res.status(400).json({ error: 'Title required' });
+  }
+  
+  const discussion = {
+    id: `disc-${Date.now()}`,
+    title,
+    date: new Date().toISOString().split('T')[0],
+    participants,
+    status: 'active',
+    messages: initialMessage ? [{
+      timestamp: new Date().toISOString(),
+      agent: initialMessage.agent || 'HQ',
+      content: initialMessage.content
+    }] : [],
+    topics: {},
+    actionItems: [],
+    createdAt: new Date().toISOString()
+  };
+  
+  await saveDiscussion(discussion);
+  await logActivity({ type: 'discussion_created', discussionId: discussion.id, title });
+  
+  res.json(discussion);
+});
+
+// =============================================================================
 // SCHEDULED TASKS (would be triggered by Railway cron)
 // =============================================================================
 
@@ -861,6 +1091,11 @@ app.listen(PORT, async () => {
     await crawlPolymarket();
     setInterval(crawlPolymarket, 5 * 60 * 1000);
     console.log('  📊 Polymarket Crawler: RUNNING');
+    
+    // Auto-start git activity fetcher (every 15 min)
+    await fetchGitActivity();
+    setInterval(fetchGitActivity, 15 * 60 * 1000);
+    console.log('  🔗 Git Activity: RUNNING (15min)');
   }
   
   // Auto-start swarm trading

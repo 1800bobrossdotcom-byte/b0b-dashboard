@@ -86,6 +86,32 @@ interface PaperTraderStatus {
   };
 }
 
+interface Discussion {
+  id: string;
+  title: string;
+  date: string;
+  status: string;
+  participants: string[];
+  messageCount: number;
+}
+
+interface GitRepo {
+  name: string;
+  fullName: string;
+  latestCommit?: {
+    sha: string;
+    message: string;
+    author: string;
+    date: string;
+  };
+  commits: Array<{
+    sha: string;
+    message: string;
+    author: string;
+    date: string;
+  }>;
+}
+
 export default function LabsPage() {
   const [status, setStatus] = useState<SystemStatus | null>(null);
   const [threads, setThreads] = useState<Thread[]>([]);
@@ -95,6 +121,8 @@ export default function LabsPage() {
   const [error, setError] = useState<string | null>(null);
   const [brainOnline, setBrainOnline] = useState(false);
   const [paperTrader, setPaperTrader] = useState<PaperTraderStatus | null>(null);
+  const [discussions, setDiscussions] = useState<Discussion[]>([]);
+  const [gitRepos, setGitRepos] = useState<GitRepo[]>([]);
 
   // Fetch system status
   useEffect(() => {
@@ -175,6 +203,44 @@ export default function LabsPage() {
     fetchActivity();
   }, []);
 
+  // Fetch discussions
+  useEffect(() => {
+    async function fetchDiscussions() {
+      try {
+        const res = await fetch(`${BRAIN_URL}/discussions`);
+        if (res.ok) {
+          const data = await res.json();
+          setDiscussions(data.discussions || []);
+        }
+      } catch {
+        setDiscussions([]);
+      }
+    }
+
+    fetchDiscussions();
+    const interval = setInterval(fetchDiscussions, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Fetch git activity
+  useEffect(() => {
+    async function fetchGit() {
+      try {
+        const res = await fetch(`${BRAIN_URL}/git`);
+        if (res.ok) {
+          const data = await res.json();
+          setGitRepos(data.repos || []);
+        }
+      } catch {
+        setGitRepos([]);
+      }
+    }
+
+    fetchGit();
+    const interval = setInterval(fetchGit, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
   const formatTime = (ts: string) => {
     return new Date(ts).toLocaleString();
   };
@@ -243,7 +309,7 @@ export default function LabsPage() {
                 <span className="font-bold">Discussions</span>
               </div>
               <p className="text-lg font-mono text-neutral-300">
-                {status?.system?.totalDiscussions || 0}
+                {discussions.length || status?.system?.totalDiscussions || 0}
               </p>
               <p className="text-xs text-neutral-600 mt-1">Total threads</p>
             </div>
@@ -302,6 +368,94 @@ export default function LabsPage() {
                   <p className="text-sm text-neutral-400">
                     {thread.messages?.length || 0} messages
                   </p>
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+
+        {/* Team Discussions (Stored) */}
+        <section className="mb-16">
+          <h2 className="text-sm font-mono text-neutral-500 mb-6">📋 TEAM DISCUSSIONS</h2>
+          
+          {discussions.length === 0 ? (
+            <div className="text-neutral-500 py-8 text-center border border-[#0052FF]/30 bg-[#0052FF]/5 rounded-lg">
+              <p className="text-2xl mb-2">📝</p>
+              <p>No discussions logged yet</p>
+              <p className="text-xs text-neutral-600 mt-2">
+                Team planning sessions will appear here
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {discussions.map((disc) => (
+                <div 
+                  key={disc.id}
+                  className="p-4 border border-[#0052FF]/30 bg-[#0052FF]/5 rounded-lg hover:border-[#0052FF]/50 transition-colors"
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-bold">{disc.title}</h3>
+                    <div className="flex items-center gap-2">
+                      <span className={`text-xs px-2 py-0.5 rounded ${
+                        disc.status === 'active' ? 'bg-emerald-500/20 text-emerald-400' :
+                        disc.status === 'planning' ? 'bg-amber-500/20 text-amber-400' :
+                        'bg-neutral-500/20 text-neutral-400'
+                      }`}>
+                        {disc.status}
+                      </span>
+                      <span className="text-xs text-neutral-600">{disc.date}</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4 text-sm text-neutral-400">
+                    <span>👥 {disc.participants?.join(', ')}</span>
+                    <span>💬 {disc.messageCount} messages</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+
+        {/* Git Activity */}
+        <section className="mb-16">
+          <h2 className="text-sm font-mono text-neutral-500 mb-6">🔗 GIT ACTIVITY</h2>
+          
+          {gitRepos.length === 0 ? (
+            <div className="text-neutral-500 py-8 text-center border border-neutral-800 rounded-lg">
+              <p className="text-2xl mb-2">📂</p>
+              <p>No git activity fetched yet</p>
+              <p className="text-xs text-neutral-600 mt-2">
+                {brainOnline ? 'Git data will appear after first fetch' : 'Brain server offline'}
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {gitRepos.map((repo) => (
+                <div 
+                  key={repo.name}
+                  className="p-4 border border-neutral-800 bg-neutral-900/30 rounded-lg"
+                >
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-lg">📁</span>
+                    <span className="font-mono font-bold">{repo.name}</span>
+                  </div>
+                  {repo.latestCommit ? (
+                    <div className="bg-black/30 rounded p-3">
+                      <p className="text-xs text-neutral-500 mb-1">Latest commit</p>
+                      <p className="text-sm font-mono text-[#0052FF]">{repo.latestCommit.sha}</p>
+                      <p className="text-sm text-neutral-300 truncate">{repo.latestCommit.message}</p>
+                      <p className="text-xs text-neutral-600 mt-1">
+                        by {repo.latestCommit.author} • {repo.latestCommit.date ? new Date(repo.latestCommit.date).toLocaleString() : ''}
+                      </p>
+                    </div>
+                  ) : (
+                    <p className="text-sm text-neutral-500">No commits fetched</p>
+                  )}
+                  {repo.commits && repo.commits.length > 1 && (
+                    <p className="text-xs text-neutral-600 mt-2">
+                      +{repo.commits.length - 1} more commits
+                    </p>
+                  )}
                 </div>
               ))}
             </div>

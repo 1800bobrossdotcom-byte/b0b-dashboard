@@ -1,0 +1,224 @@
+{
+  "id": "modular-redesign-spec",
+  "version": "1.0",
+  "date": "2026-01-28",
+  "title": "B0B Platform Modular Redesign Specification",
+  "status": "planning",
+  
+  "vision": {
+    "summary": "Transform B0B into a modular, node-based platform where AI agents and data flows are visualized as interconnected components",
+    "inspiration": [
+      "TouchDesigner node-based programming",
+      "Cardinal real-time visual programming",
+      "Base/Coinbase clean aesthetic",
+      "Coffee Talk pixel art atmosphere"
+    ],
+    "principles": [
+      "Glass box, not black box - everything visible",
+      "Modular - hot-swap any component",
+      "Real-time - data flows visualized live",
+      "Layered - depth without complexity"
+    ]
+  },
+  
+  "aestheticSystem": {
+    "name": "Base Void",
+    "colors": {
+      "primary": "#0052FF",
+      "void": "#000000",
+      "surface": "#0A0A0F",
+      "surface2": "#111118",
+      "text": "#FFFFFF",
+      "textMuted": "#666666",
+      "success": "#00CC66",
+      "warning": "#FFAA00",
+      "error": "#FF4444"
+    },
+    "effects": {
+      "glow": false,
+      "scanlines": true,
+      "noise": "subtle",
+      "crt": "optional"
+    },
+    "typography": {
+      "display": "Inter",
+      "mono": "JetBrains Mono",
+      "pixel": "Press Start 2P"
+    }
+  },
+  
+  "componentLibrary": {
+    "nodes": [
+      {
+        "type": "AgentNode",
+        "description": "Represents b0b, r0ss, or c0m",
+        "props": ["name", "emoji", "status", "currentTask", "activity"],
+        "connections": ["input", "output"],
+        "states": ["idle", "thinking", "active", "error"],
+        "visualStyle": "Card with avatar, status indicator, activity stream"
+      },
+      {
+        "type": "DataNode",
+        "description": "Live data source (Polymarket, GitHub, etc)",
+        "props": ["source", "refreshRate", "lastUpdate", "data"],
+        "connections": ["output"],
+        "states": ["fetching", "ready", "stale", "error"],
+        "visualStyle": "Compact card with sparkline, last value"
+      },
+      {
+        "type": "StrategyNode",
+        "description": "Paper swarm trading strategy",
+        "props": ["strategy", "positions", "pnl", "winRate"],
+        "connections": ["input:data", "output:signals"],
+        "states": ["active", "paused", "evaluating"],
+        "visualStyle": "Card with emoji, mini chart, position count"
+      },
+      {
+        "type": "ProcessNode",
+        "description": "Background process (crawler, heartbeat)",
+        "props": ["name", "interval", "lastRun", "nextRun"],
+        "connections": ["output"],
+        "states": ["running", "sleeping", "error"],
+        "visualStyle": "Minimal card with pulse animation"
+      },
+      {
+        "type": "CCTVNode",
+        "description": "Live webcam feed with data overlays",
+        "props": ["feedUrl", "overlay", "effects"],
+        "connections": ["input:volatility", "input:sentiment"],
+        "states": ["streaming", "loading", "offline"],
+        "visualStyle": "Video frame with scanlines, data crawl"
+      }
+    ],
+    
+    "connections": {
+      "style": "Bezier curves with animated flow",
+      "colors": {
+        "data": "#0052FF",
+        "signal": "#00CC66", 
+        "alert": "#FF4444"
+      },
+      "animation": "Dots flowing along path"
+    },
+    
+    "canvas": {
+      "background": "#000000 with subtle grid",
+      "zoom": "1x - 4x",
+      "pan": "Infinite canvas",
+      "snap": "Grid snap optional"
+    }
+  },
+  
+  "pageStructure": {
+    "home": {
+      "path": "/",
+      "description": "Landing page with hero and overview",
+      "modules": ["Hero", "AgentIntro", "Philosophy", "CTA"]
+    },
+    "labs": {
+      "path": "/labs",
+      "description": "System status and monitoring dashboard",
+      "modules": ["SystemStatus", "PaperTrader", "Discussions", "GitActivity", "ActivityLog"]
+    },
+    "canvas": {
+      "path": "/canvas",
+      "description": "Node-based visualization workspace",
+      "modules": ["NodeCanvas", "NodePalette", "Inspector", "MiniMap"],
+      "status": "planned"
+    },
+    "office": {
+      "path": "/office",
+      "description": "Pixel art office visualizer",
+      "modules": ["OfficeScene", "CCTVWindow", "ActivityFeed"],
+      "status": "concept"
+    }
+  },
+  
+  "dataFlows": {
+    "polymarketFlow": {
+      "source": "Polymarket API",
+      "interval": "5 minutes",
+      "consumers": ["PaperTrader", "SwarmStrategies", "DataNode"],
+      "storage": "polymarket.json"
+    },
+    "gitFlow": {
+      "source": "GitHub API",
+      "interval": "15 minutes",
+      "consumers": ["GitActivity", "AgentNodes"],
+      "storage": "git-activity.json"
+    },
+    "heartbeatFlow": {
+      "source": "Internal",
+      "interval": "5 minutes",
+      "consumers": ["SystemStatus", "ActivityLog"],
+      "storage": "system-state.json"
+    }
+  },
+  
+  "deploymentPlan": {
+    "phase1": {
+      "name": "Foundation Complete",
+      "status": "done",
+      "items": [
+        "Brain server deployed on Railway",
+        "Paper trader running",
+        "Polymarket crawler active",
+        "Paper swarm with 4 strategies",
+        "Git integration added"
+      ]
+    },
+    "phase2": {
+      "name": "Labs Enhancement",
+      "status": "in-progress",
+      "items": [
+        "Discussions system wired",
+        "Git activity display",
+        "Swarm visualization",
+        "Real-time updates"
+      ]
+    },
+    "phase3": {
+      "name": "Modular Canvas",
+      "status": "planning",
+      "items": [
+        "Node-based canvas component",
+        "Drag-and-drop node creation",
+        "Connection system",
+        "State persistence"
+      ]
+    },
+    "phase4": {
+      "name": "Office Visualizer",
+      "status": "concept",
+      "items": [
+        "Pixel art office scene",
+        "Agent character animations",
+        "CCTV feed integration",
+        "Data-driven effects"
+      ]
+    }
+  },
+  
+  "techStack": {
+    "frontend": {
+      "framework": "Next.js 14",
+      "styling": "TailwindCSS",
+      "animations": "Framer Motion",
+      "canvas": "React Flow or custom Canvas API",
+      "state": "React Context + SWR for fetching"
+    },
+    "backend": {
+      "runtime": "Node.js (Express)",
+      "hosting": "Railway",
+      "storage": "JSON files (upgradeable to DB)",
+      "apis": ["Polymarket", "GitHub", "Anthropic"]
+    }
+  },
+  
+  "proofOfWork": {
+    "tracking": "Activity log with timestamps",
+    "visibility": "Labs page shows all system activity",
+    "discussions": "Team planning logged and archived",
+    "git": "All commits tracked and displayed"
+  }
+}

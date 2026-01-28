@@ -1,0 +1,136 @@
+{
+  "id": "redesign-2026-01-28",
+  "title": "B0B Platform Redesign Planning",
+  "date": "2026-01-28",
+  "participants": ["HQ", "b0b", "r0ss", "c0m"],
+  "status": "active",
+  "topics": {
+    "base_aesthetic": {
+      "title": "Base Aesthetic Direction",
+      "status": "approved",
+      "summary": "Coinbase/Base-inspired design language",
+      "decisions": [
+        "Primary color: #0052FF (Base blue)",
+        "Void black: #000000",
+        "No glow effects - clean, professional",
+        "CRT/scanline treatments for retro feel",
+        "Noise texture subtle, not overwhelming"
+      ],
+      "inspiration": [
+        "Coinbase brand system",
+        "Base chain aesthetic",
+        "Professional but edgy"
+      ]
+    },
+    "modular_architecture": {
+      "title": "Modular/Cardinal Architecture",
+      "status": "planning",
+      "summary": "TouchDesigner/Cardinal-inspired modular system",
+      "goals": [
+        "Drag-and-drop node-based UI",
+        "Agent cards as modular components",
+        "Data flows visualized as connections",
+        "Real-time state updates",
+        "Hot-swappable modules"
+      ],
+      "components": [
+        { "name": "Agent Card", "desc": "Represents b0b, r0ss, c0m with status" },
+        { "name": "Data Node", "desc": "Shows live data feeds (Polymarket, etc)" },
+        { "name": "Strategy Node", "desc": "Paper swarm strategy visualization" },
+        { "name": "Connection", "desc": "Visual data flow between nodes" },
+        { "name": "CCTV Window", "desc": "Live web cam feed with data overlays" }
+      ]
+    },
+    "office_visualizer": {
+      "title": "Pixel Office Visualizer",
+      "status": "concept",
+      "summary": "Coffee Talk/VA-11 Hall-A inspired pixel art office",
+      "spec": {
+        "scene": "Nighttime office, cyberpunk aesthetic",
+        "characters": [
+          { "agent": "b0b", "activity": "At drafting table with tablet" },
+          { "agent": "r0ss", "activity": "At terminal, multiple monitors" },
+          { "agent": "c0m", "activity": "Standing at charts, suspicious" }
+        ],
+        "elements": [
+          "Animated rain on windows",
+          "Neon signs outside",
+          "Speech bubbles from activity log",
+          "Coffee mugs that refill",
+          "Charts that update with real data"
+        ],
+        "data_bindings": [
+          "Paper trader PnL → b0b expression",
+          "CPU/load → r0ss typing speed",
+          "Security events → c0m posture",
+          "Market volatility → weather outside"
+        ]
+      }
+    },
+    "infrastructure": {
+      "title": "Current Infrastructure",
+      "status": "deployed",
+      "services": [
+        { "name": "b0b.dev", "platform": "Railway", "status": "live" },
+        { "name": "d0t.b0b.dev", "platform": "Railway", "status": "live" },
+        { "name": "0type.b0b.dev", "platform": "Railway", "status": "live" },
+        { "name": "b0b-dashboard", "platform": "Railway", "status": "live" },
+        { "name": "b0b-brain", "platform": "Railway", "status": "live", "systems": [
+          "Heartbeat (5min)",
+          "Paper Trader (5min)",
+          "Polymarket Crawler (5min)",
+          "Paper Swarm (4 Nash strategies)"
+        ]}
+      ]
+    }
+  },
+  "actionItems": [
+    { "task": "Add git integration to brain", "owner": "r0ss", "status": "pending" },
+    { "task": "Build modular component library", "owner": "b0b", "status": "pending" },
+    { "task": "Implement CCTV feed system", "owner": "r0ss", "status": "pending" },
+    { "task": "Create pixel office visualizer", "owner": "b0b", "status": "concept" },
+    { "task": "Wire discussions to Labs page", "owner": "r0ss", "status": "pending" }
+  ],
+  "timeline": {
+    "phase1": {
+      "name": "Foundation",
+      "status": "complete",
+      "items": ["Brain server deployed", "Paper trader running", "Swarm active"]
+    },
+    "phase2": {
+      "name": "Redesign",
+      "status": "in-progress",
+      "items": ["Base aesthetic applied", "Labs wired to brain", "Git integration"]
+    },
+    "phase3": {
+      "name": "Modular",
+      "status": "planning",
+      "items": ["Component library", "Node-based UI", "CCTV system"]
+    }
+  },
+  "messages": [
+    {
+      "timestamp": "2026-01-28T00:12:00Z",
+      "agent": "HQ",
+      "content": "Let's document this redesign planning session. We have the foundation, now let's build the vision."
+    },
+    {
+      "timestamp": "2026-01-28T00:12:30Z",
+      "agent": "r0ss",
+      "emoji": "🔧",
+      "content": "Infrastructure is solid. Brain running 24/7, 4 swarm strategies active. Ready to add git integration for repo awareness."
+    },
+    {
+      "timestamp": "2026-01-28T00:13:00Z",
+      "agent": "b0b",
+      "emoji": "🎨",
+      "content": "Base aesthetic is approved. Clean, professional, but with that retro edge. Excited for the pixel office visualizer."
+    },
+    {
+      "timestamp": "2026-01-28T00:13:30Z",
+      "agent": "c0m",
+      "emoji": "💀",
+      "content": "Security audit: git integration needs scoped tokens. Read-only first. We watch, we don't write without approval."
+    }
+  ]
+}
