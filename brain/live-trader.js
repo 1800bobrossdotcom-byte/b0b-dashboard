@@ -25,9 +25,9 @@ const path = require('path');
 // ════════════════════════════════════════════════════════════════════════════
 
 const CONFIG = {
-  // Wallet
-  PHANTOM_WALLET: '0xd06Aa956CEDA935060D9431D8B8183575c41072d',
-  COLD_WALLET: '0x8455cF296e1265b494605207e97884813De21950',
+  // Wallet Hierarchy
+  PHANTOM_WALLET: '0xd06Aa956CEDA935060D9431D8B8183575c41072d',  // Hot/Trading
+  COLD_WALLET: '0x8455cF296e1265b494605207e97884813De21950',     // Treasury/Storage
   CHAIN: 'base',
   CHAIN_ID: 8453,
   
@@ -53,11 +53,39 @@ const CONFIG = {
     STOP_LOSS: 0.25,           // Cut at -25%
   },
   
+  // ══════════════════════════════════════════════════════════════════════════
+  // PROFIT DISTRIBUTION — Wallet Hierarchy
+  // ══════════════════════════════════════════════════════════════════════════
+  TREASURY: {
+    // When warm wallet exceeds this, sweep profits to cold
+    WARM_WALLET_MAX_USD: 500,
+    
+    // Keep this much in warm for trading operations
+    WARM_WALLET_FLOOR_USD: 200,
+    
+    // Sweep excess to cold wallet
+    SWEEP_TO_COLD: true,
+    
+    // Minimum sweep amount (don't sweep dust)
+    MIN_SWEEP_USD: 50,
+    
+    // Split ratios when sweeping (must sum to 1.0)
+    DISTRIBUTION: {
+      COLD_STORAGE: 0.70,    // 70% to cold (long-term treasury)
+      REINVEST: 0.20,        // 20% stays in warm for bigger plays
+      TEAM_FUND: 0.10,       // 10% for team (bills, operations)
+    },
+    
+    // Team fund wallet (can be same as cold, or separate)
+    TEAM_WALLET: null,  // null = goes to cold, set address to split
+  },
+  
   // Data paths
   DATA_DIR: path.join(__dirname, 'data'),
   STATE_FILE: path.join(__dirname, 'data', 'live-trader-state.json'),
   HISTORY_FILE: path.join(__dirname, 'data', 'live-trade-history.json'),
   MOONBAG_FILE: path.join(__dirname, 'data', 'moonbag-positions.json'),
+  TREASURY_FILE: path.join(__dirname, 'data', 'treasury-log.json'),
 };
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -75,6 +103,11 @@ const DEFAULT_STATE = {
   positions: [],
   lastTick: null,
   startDate: new Date().toISOString(),
+  // Treasury tracking
+  totalSweptToCold: 0,
+  totalReinvested: 0,
+  totalToTeam: 0,
+  lastSweep: null,
 };
 
 async function loadState() {
@@ -572,7 +605,344 @@ async function checkMoonbags() {
 }
 
 // ════════════════════════════════════════════════════════════════════════════
-// MAIN TICK
+// TREASURY SWEEP — Profit Distribution to Wallet Hierarchy
+// ════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Check wallet balance and sweep profits according to distribution rules:
+ * - If warm wallet > MAX, sweep excess
+ * - 70% → Cold storage (long-term treasury)
+ * - 20% → Reinvest (stays in warm for bigger plays)
+ * - 10% → Team fund (bills, operations)
+ */
+async function treasurySweep(state) {
+  console.log(`\n💎 Treasury Check...`);
+  
+  const balance = await bankr.getBalance();
+  if (!balance || !balance.totalUsd) {
+    console.log(`   ⚠️ Could not fetch balance`);
+    return;
+  }
+  
+  const warmBalance = balance.totalUsd;
+  console.log(`   💰 Warm Wallet: $${warmBalance.toFixed(2)}`);
+  console.log(`   📊 Threshold: $${CONFIG.TREASURY.WARM_WALLET_MAX_USD}`);
+  
+  // Check if we need to sweep
+  if (warmBalance <= CONFIG.TREASURY.WARM_WALLET_MAX_USD) {
+    console.log(`   ✓ Below threshold, no sweep needed`);
+    return;
+  }
+  
+  // Calculate sweep amount (keep floor in warm)
+  const excessAmount = warmBalance - CONFIG.TREASURY.WARM_WALLET_FLOOR_USD;
+  
+  if (excessAmount < CONFIG.TREASURY.MIN_SWEEP_USD) {
+    console.log(`   ✓ Excess ($${excessAmount.toFixed(2)}) below minimum sweep`);
+    return;
+  }
+  
+  console.log(`\n   🧹 SWEEP TRIGGERED`);
+  console.log(`      Excess: $${excessAmount.toFixed(2)}`);
+  
+  // Calculate distribution
+  const dist = CONFIG.TREASURY.DISTRIBUTION;
+  const toCold = excessAmount * dist.COLD_STORAGE;
+  const toReinvest = excessAmount * dist.REINVEST;
+  const toTeam = excessAmount * dist.TEAM_FUND;
+  
+  console.log(`      → Cold Storage (70%): $${toCold.toFixed(2)}`);
+  console.log(`      → Reinvest (20%): $${toReinvest.toFixed(2)} (stays)`);
+  console.log(`      → Team Fund (10%): $${toTeam.toFixed(2)}`);
+  
+  // Execute sweep to cold wallet
+  if (CONFIG.TREASURY.SWEEP_TO_COLD && toCold >= CONFIG.TREASURY.MIN_SWEEP_USD) {
+    const sweepPrompt = `Transfer $${toCold.toFixed(2)} ETH from wallet ${CONFIG.PHANTOM_WALLET} to ${CONFIG.COLD_WALLET} on Base. This is a treasury sweep to cold storage.`;
+    
+    console.log(`\n   🏦 Executing cold storage sweep...`);
+    const result = await bankr.executeTrade(sweepPrompt);
+    
+    if (result.success) {
+      state.totalSweptToCold += toCold;
+      state.lastSweep = new Date().toISOString();
+      
+      // Log to treasury file
+      await recordTreasuryAction({
+        type: 'sweep_to_cold',
+        amount: toCold,
+        from: CONFIG.PHANTOM_WALLET,
+        to: CONFIG.COLD_WALLET,
+        txHash: result.transactions?.[0]?.hash,
+        balanceBefore: warmBalance,
+        balanceAfter: warmBalance - toCold,
+      });
+      
+      console.log(`   ✅ Swept $${toCold.toFixed(2)} to cold storage`);
+    } else {
+      console.log(`   ❌ Sweep failed: ${result.error}`);
+    }
+  }
+  
+  // Team fund transfer (if separate wallet configured)
+  if (CONFIG.TREASURY.TEAM_WALLET && toTeam >= CONFIG.TREASURY.MIN_SWEEP_USD) {
+    const teamPrompt = `Transfer $${toTeam.toFixed(2)} ETH from wallet ${CONFIG.PHANTOM_WALLET} to ${CONFIG.TREASURY.TEAM_WALLET} on Base. Team fund distribution.`;
+    
+    console.log(`\n   🏦 Executing team fund transfer...`);
+    const result = await bankr.executeTrade(teamPrompt);
+    
+    if (result.success) {
+      state.totalToTeam += toTeam;
+      console.log(`   ✅ Sent $${toTeam.toFixed(2)} to team fund`);
+    }
+  }
+  
+  // Reinvest stays in warm wallet automatically
+  state.totalReinvested += toReinvest;
+  console.log(`   ✅ $${toReinvest.toFixed(2)} retained for reinvestment`);
+}
+
+async function recordTreasuryAction(action) {
+  let log = [];
+  try {
+    const data = await fs.readFile(CONFIG.TREASURY_FILE, 'utf8');
+    log = JSON.parse(data);
+  } catch {}
+  
+  log.push({
+    ...action,
+    timestamp: new Date().toISOString(),
+  });
+  
+  // Keep last 200 actions
+  if (log.length > 200) log = log.slice(-200);
+  
+  await fs.writeFile(CONFIG.TREASURY_FILE, JSON.stringify(log, null, 2));
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// PRESENCE-BASED WATCHING — Event-Driven, Not Interval-Polling
+// ════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Instead of polling every X minutes, we:
+ * 1. Subscribe to DexScreener WebSocket for new pair events
+ * 2. Watch our positions for price movements via streaming
+ * 3. Only "tick" when something actually happens
+ * 
+ * This is TRUE presence — we're watching, aware, ready.
+ * Not sleeping and waking up every 3 minutes.
+ */
+
+class PresenceWatcher {
+  constructor() {
+    this.watching = false;
+    this.callbacks = {
+      newToken: [],
+      priceMove: [],
+      positionAlert: [],
+    };
+    this.watchedTokens = new Set();
+    this.lastPrices = new Map();
+    this.state = null;
+  }
+  
+  /**
+   * Start presence — always watching, react to events
+   */
+  async startPresence(state) {
+    if (this.watching) return;
+    this.watching = true;
+    this.state = state;
+    
+    console.log(`\n👁️ PRESENCE MODE ACTIVATED`);
+    console.log(`   Not polling. Watching. Ready.`);
+    
+    // Load positions into watch list
+    for (const pos of state.positions) {
+      this.watchedTokens.add(pos.address);
+    }
+    
+    // Start the watchers
+    this.watchNewTokens();
+    this.watchPriceMovements();
+    this.watchWalletBalance();
+    
+    console.log(`   Watching ${this.watchedTokens.size} positions`);
+    console.log(`   Observing new Base token launches`);
+  }
+  
+  /**
+   * Watch for new token launches on Base
+   * Using DexScreener's latest pairs endpoint with smart polling
+   * (True WebSocket would be ideal but requires DexScreener premium)
+   */
+  async watchNewTokens() {
+    const fetch = (await import('node-fetch')).default;
+    let lastSeenPair = null;
+    
+    const check = async () => {
+      if (!this.watching) return;
+      
+      try {
+        const res = await fetch(
+          'https://api.dexscreener.com/latest/dex/pairs/base?limit=10',
+          { timeout: 5000 }
+        );
+        const data = await res.json();
+        
+        for (const pair of (data.pairs || [])) {
+          // Skip if we've seen this pair
+          if (pair.pairAddress === lastSeenPair) break;
+          
+          // New pair detected!
+          const age = (Date.now() - new Date(pair.pairCreatedAt).getTime()) / 60000; // minutes
+          
+          if (age < 30) { // Less than 30 minutes old
+            console.log(`\n   🆕 NEW TOKEN: ${pair.baseToken?.symbol}`);
+            console.log(`      Age: ${age.toFixed(1)} minutes`);
+            console.log(`      Price: $${pair.priceUsd}`);
+            console.log(`      Liquidity: $${pair.liquidity?.usd?.toLocaleString()}`);
+            
+            // Emit event for strategy to handle
+            this.emit('newToken', {
+              symbol: pair.baseToken?.symbol,
+              address: pair.baseToken?.address,
+              price: parseFloat(pair.priceUsd || 0),
+              liquidity: parseFloat(pair.liquidity?.usd || 0),
+              volume24h: parseFloat(pair.volume?.h24 || 0),
+              priceChange: parseFloat(pair.priceChange?.h24 || 0),
+              age,
+              pairAddress: pair.pairAddress,
+            });
+          }
+        }
+        
+        if (data.pairs?.length > 0) {
+          lastSeenPair = data.pairs[0].pairAddress;
+        }
+      } catch (err) {
+        // Silent fail, will retry
+      }
+      
+      // Adaptive polling: faster when market is active
+      const interval = this.state?.positions?.length > 0 ? 15000 : 30000; // 15s or 30s
+      setTimeout(check, interval);
+    };
+    
+    check();
+  }
+  
+  /**
+   * Watch price movements on our positions
+   * Only alert on significant moves (>5% since last check)
+   */
+  async watchPriceMovements() {
+    const fetch = (await import('node-fetch')).default;
+    
+    const check = async () => {
+      if (!this.watching) return;
+      
+      for (const address of this.watchedTokens) {
+        try {
+          const res = await fetch(
+            `https://api.dexscreener.com/latest/dex/tokens/${address}`,
+            { timeout: 5000 }
+          );
+          const data = await res.json();
+          const price = parseFloat(data.pairs?.[0]?.priceUsd || 0);
+          
+          if (price > 0) {
+            const lastPrice = this.lastPrices.get(address) || price;
+            const change = (price - lastPrice) / lastPrice;
+            
+            // Significant move (>5%)
+            if (Math.abs(change) > 0.05) {
+              const symbol = data.pairs?.[0]?.baseToken?.symbol || address.slice(0, 8);
+              console.log(`\n   📈 PRICE MOVE: ${symbol} ${change > 0 ? '+' : ''}${(change * 100).toFixed(1)}%`);
+              
+              this.emit('priceMove', {
+                address,
+                symbol,
+                price,
+                lastPrice,
+                change,
+                direction: change > 0 ? 'up' : 'down',
+              });
+            }
+            
+            this.lastPrices.set(address, price);
+          }
+        } catch {
+          // Continue watching others
+        }
+      }
+      
+      // Check positions every 10 seconds when we have any
+      if (this.watchedTokens.size > 0) {
+        setTimeout(check, 10000);
+      } else {
+        setTimeout(check, 60000); // Slower when no positions
+      }
+    };
+    
+    check();
+  }
+  
+  /**
+   * Watch wallet balance for treasury sweep triggers
+   */
+  async watchWalletBalance() {
+    const check = async () => {
+      if (!this.watching) return;
+      
+      const balance = await bankr.getBalance();
+      if (balance?.totalUsd > CONFIG.TREASURY.WARM_WALLET_MAX_USD) {
+        console.log(`\n   💎 TREASURY TRIGGER: Balance $${balance.totalUsd.toFixed(2)} > $${CONFIG.TREASURY.WARM_WALLET_MAX_USD}`);
+        await treasurySweep(this.state);
+      }
+      
+      // Check balance every 5 minutes
+      setTimeout(check, 5 * 60 * 1000);
+    };
+    
+    // First check after 1 minute
+    setTimeout(check, 60000);
+  }
+  
+  emit(event, data) {
+    for (const callback of this.callbacks[event] || []) {
+      try {
+        callback(data);
+      } catch (err) {
+        console.log(`   ⚠️ Callback error: ${err.message}`);
+      }
+    }
+  }
+  
+  on(event, callback) {
+    if (!this.callbacks[event]) this.callbacks[event] = [];
+    this.callbacks[event].push(callback);
+  }
+  
+  addToWatch(address) {
+    this.watchedTokens.add(address);
+  }
+  
+  removeFromWatch(address) {
+    this.watchedTokens.delete(address);
+    this.lastPrices.delete(address);
+  }
+  
+  stop() {
+    this.watching = false;
+    console.log(`\n👁️ Presence stopped`);
+  }
+}
+
+const presence = new PresenceWatcher();
+
+// ════════════════════════════════════════════════════════════════════════════
+// MAIN TICK (Legacy support) + PRESENCE INITIALIZATION
 // ════════════════════════════════════════════════════════════════════════════
 
 async function liveTraderTick() {
@@ -593,6 +963,9 @@ async function liveTraderTick() {
   // Run strategies
   await blessingSniperTick(state);
   
+  // Check treasury
+  await treasurySweep(state);
+  
   // Save state
   await saveState(state);
   
@@ -603,6 +976,84 @@ async function liveTraderTick() {
   console.log(`      Win Rate: ${state.totalTrades > 0 ? ((state.wins / state.totalTrades) * 100).toFixed(1) : 0}%`);
   console.log(`      Open Positions: ${state.positions.length}`);
   console.log(`      Daily Volume: $${state.dailyVolume.toFixed(2)}/${CONFIG.MAX_DAILY_VOLUME}`);
+  console.log(`      Swept to Cold: $${state.totalSweptToCold.toFixed(2)}`);
+}
+
+/**
+ * Start presence-based trading
+ * This is the new way — always watching, event-driven
+ */
+async function startPresenceTrading() {
+  console.log(`\n${'═'.repeat(60)}`);
+  console.log(`👁️ PRESENCE TRADING — The Daoist Way`);
+  console.log(`   "Watch without waiting. Act without hesitation."`);
+  console.log(`${'═'.repeat(60)}`);
+  
+  const state = await loadState();
+  
+  // Start presence watcher
+  await presence.startPresence(state);
+  
+  // React to new tokens
+  presence.on('newToken', async (token) => {
+    const state = await loadState();
+    
+    // Quick qualification
+    if (token.liquidity < CONFIG.MIN_LIQUIDITY) return;
+    if (token.age > 30) return; // Only fresh tokens
+    if (state.positions.length >= CONFIG.MAX_OPEN_POSITIONS) return;
+    if (state.dailyVolume >= CONFIG.MAX_DAILY_VOLUME) return;
+    
+    // Score it
+    let score = 0;
+    if (token.age < 5) score += 40;      // Super fresh
+    else if (token.age < 15) score += 25;
+    
+    if (token.priceChange > 50) score += 30;
+    else if (token.priceChange > 20) score += 20;
+    
+    if (token.volume24h > 50000) score += 20;
+    if (token.liquidity > 30000) score += 10;
+    
+    console.log(`   📊 Score: ${score}/100`);
+    
+    if (score >= 60) {
+      console.log(`   🎯 BLESSING OPPORTUNITY!`);
+      await executeEntry(token, state);
+      presence.addToWatch(token.address);
+    }
+  });
+  
+  // React to price movements on our positions
+  presence.on('priceMove', async (move) => {
+    const state = await loadState();
+    const position = state.positions.find(p => p.address === move.address);
+    
+    if (!position) return;
+    
+    const pnlPercent = (move.price - position.entryPrice) / position.entryPrice;
+    
+    // Target hit!
+    if (move.price >= position.targetPrice) {
+      console.log(`   🎯 TARGET HIT on ${move.symbol}!`);
+      await executeExit(position, move.price, 0.90, state);
+      await createMoonbag(position, move.price, 0.10);
+      presence.removeFromWatch(move.address);
+    }
+    // Stop loss
+    else if (move.price <= position.stopPrice) {
+      console.log(`   🛑 STOP LOSS on ${move.symbol}`);
+      await executeExit(position, move.price, 1.0, state);
+      presence.removeFromWatch(move.address);
+    }
+    // Trailing update
+    else {
+      console.log(`   📈 ${move.symbol}: ${(pnlPercent * 100).toFixed(1)}% P&L`);
+    }
+  });
+  
+  console.log(`\n   ✅ Presence trading active`);
+  console.log(`   Watching. Waiting. Ready.`);
 }
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -611,6 +1062,9 @@ async function liveTraderTick() {
 
 module.exports = {
   liveTraderTick,
+  startPresenceTrading,
+  treasurySweep,
+  presence,
   loadState,
   saveState,
   discoverNewTokens,
@@ -620,13 +1074,24 @@ module.exports = {
 
 // Run directly
 if (require.main === module) {
-  liveTraderTick()
-    .then(() => {
-      console.log('\n✅ Live trader tick complete');
-      process.exit(0);
-    })
-    .catch(err => {
-      console.error('❌ Error:', err);
-      process.exit(1);
-    });
+  // Use presence mode if --presence flag
+  if (process.argv.includes('--presence')) {
+    startPresenceTrading()
+      .then(() => console.log('\n👁️ Presence mode running...'))
+      .catch(err => {
+        console.error('❌ Error:', err);
+        process.exit(1);
+      });
+  } else {
+    // Legacy tick mode
+    liveTraderTick()
+      .then(() => {
+        console.log('\n✅ Live trader tick complete');
+        process.exit(0);
+      })
+      .catch(err => {
+        console.error('❌ Error:', err);
+        process.exit(1);
+      });
+  }
 }

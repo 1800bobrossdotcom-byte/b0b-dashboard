@@ -1169,25 +1169,32 @@ app.listen(PORT, async () => {
   console.log('  🐝 Paper Swarm: RUNNING (4 strategies, 2min)');
   
   // ════════════════════════════════════════════════════════════════════════════
-  // 🔥 LIVE TRADER — Real money, real trades
+  // 🔥 LIVE TRADER — Presence Mode (Event-Driven, Not Interval-Polling)
   // ════════════════════════════════════════════════════════════════════════════
   try {
-    const { liveTraderTick, CONFIG } = require('./live-trader.js');
+    const { startPresenceTrading, CONFIG, treasurySweep, loadState } = require('./live-trader.js');
     
     console.log('');
-    console.log('  🔥 LIVE TRADER INITIALIZING');
+    console.log('  👁️ LIVE TRADER — PRESENCE MODE');
     console.log(`     Wallet: ${CONFIG.PHANTOM_WALLET}`);
-    console.log(`     Max Position: $${CONFIG.MAX_POSITION_USD}`);
-    console.log(`     Daily Limit: $${CONFIG.MAX_DAILY_VOLUME}`);
+    console.log(`     Cold Storage: ${CONFIG.COLD_WALLET}`);
+    console.log(`     "Watch without waiting. Act without hesitation."`);
     
-    // Initial tick
-    await liveTraderTick();
+    // Start presence-based trading (event-driven, not polling)
+    await startPresenceTrading();
     
-    // Run every 3 minutes (faster than paper, we want those snipes)
-    setInterval(liveTraderTick, 3 * 60 * 1000);
+    await logActivity({ 
+      type: 'live_trader', 
+      action: 'presence_started', 
+      wallet: CONFIG.PHANTOM_WALLET,
+      mode: 'presence'
+    });
     
-    await logActivity({ type: 'live_trader', action: 'auto_started', wallet: CONFIG.PHANTOM_WALLET });
-    console.log('  🔥 LIVE TRADER: ACTIVE (3min intervals)');
+    console.log('  👁️ LIVE TRADER: PRESENCE ACTIVE');
+    console.log('     → Watching new token launches');
+    console.log('     → Monitoring position prices');
+    console.log('     → Treasury sweep on threshold');
+    console.log(`     → Profit distribution: 70% cold, 20% reinvest, 10% team`);
   } catch (err) {
     console.log(`  ⚠️ Live Trader not started: ${err.message}`);
   }

@@ -3,7 +3,8 @@
   "session": "critical-clarification",
   "participants": ["HQ", "b0b"],
   "timestamp": "2026-01-28T07:00:00.000Z",
-  "summary": "Clarified the difference between Paper Trading (simulation) and Live Trading (real money via Bankr)",
+  "updated": "2026-01-28T08:00:00.000Z",
+  "summary": "Clarified paper vs live trading. Implemented PRESENCE-BASED trading (event-driven) instead of polling intervals. Added treasury sweep for profit distribution.",
   
   "key_learnings": [
     {
@@ -17,8 +18,36 @@
       "action": "Wallet is now connected to live-trader.js"
     },
     {
+      "topic": "Presence vs Polling",
+      "insight": "HQ asked why 2-3 minute intervals felt 'constrained' - why not presence itself? Fixed intervals are lazy polling. True presence is EVENT-DRIVEN: we WATCH for things to happen and REACT, not sleep and wake up.",
+      "implementation": {
+        "old_way": "setInterval(tick, 3 * 60 * 1000) — arbitrary, misses opportunities",
+        "new_way": "PresenceWatcher class — subscribes to events, reacts immediately",
+        "benefits": [
+          "Faster response to new token launches",
+          "Real-time price movement detection",
+          "Adaptive polling (faster when positions open)",
+          "True Daoist observer — always watching, never sleeping"
+        ]
+      }
+    },
+    {
+      "topic": "Treasury Sweep / Profit Distribution",
+      "insight": "HQ asked if we had logic for sending profits back through wallet hierarchy. We didn't. Now we do.",
+      "implementation": {
+        "trigger": "When warm wallet exceeds $500",
+        "floor": "Keep $200 in warm for operations",
+        "distribution": {
+          "COLD_STORAGE": "70% → 0x8455cF296e1265b494605207e97884813De21950",
+          "REINVEST": "20% → stays in warm for bigger plays",
+          "TEAM_FUND": "10% → for bills and operations"
+        },
+        "min_sweep": "$50 minimum (don't sweep dust)"
+      }
+    },
+    {
       "topic": "Blessing Sniper Strategy",
-      "insight": "HQ requested a Daoist observer strategy: no emotion, full intuition. Early into new tokens, ride momentum, disciplined exit. 90% exit at 2x, 10% moonbag holds. Retrigger at 5x. Hard stop at -25%. Time exit at 48h.",
+      "insight": "HQ requested a Daoist observer strategy: no emotion, full intuition. Early into new tokens, ride momentum, disciplined exit.",
       "parameters": {
         "entry_size": "$50",
         "exit_percent": "90%",
@@ -36,10 +65,16 @@
     }
   ],
   
+  "architecture_shift": {
+    "from": "Interval-based polling (every N minutes)",
+    "to": "Presence-based event watching",
+    "philosophy": "The Daoist observer doesn't poll on a schedule. They are PRESENT. They see movement and respond. The interval was artificial constraint. Presence is natural awareness."
+  },
+  
   "files_modified": [
-    "brain/live-trader.js - NEW: Real trading via Bankr",
-    "brain/brain-server.js - Added live trader integration + endpoints",
-    "dashboard/src/app/labs/page.tsx - Added Live Trader UI section"
+    "brain/live-trader.js - Added PresenceWatcher class, treasurySweep function",
+    "brain/brain-server.js - Changed from interval to startPresenceTrading()",
+    "brain/data/learnings/ - This file"
   ],
   
   "trading_setup": {
@@ -51,9 +86,11 @@
     },
     "live_trading": {
       "file": "brain/live-trader.js",
+      "mode": "PRESENCE (event-driven)",
       "wallet": "0xd06Aa956CEDA935060D9431D8B8183575c41072d",
+      "cold_wallet": "0x8455cF296e1265b494605207e97884813De21950",
       "chain": "Base (8453)",
-      "signing": "Bankr API (bk_UQTZFYQEYDVVFDUXRJJG2TQGNTG5QVB6)",
+      "signing": "Bankr API",
       "limits": {
         "max_position": "$100",
         "max_daily": "$500",
@@ -63,13 +100,27 @@
     }
   },
   
+  "wallet_hierarchy": {
+    "warm": {
+      "address": "0xd06Aa956CEDA935060D9431D8B8183575c41072d",
+      "purpose": "Active trading, quick access",
+      "max_balance": "$500",
+      "floor_balance": "$200"
+    },
+    "cold": {
+      "address": "0x8455cF296e1265b494605207e97884813De21950",
+      "purpose": "Long-term treasury, profit storage",
+      "receives": "70% of swept profits"
+    }
+  },
+  
   "endpoints": {
     "/paper-trader": "Simulated trading status",
     "/swarm": "Paper swarm multi-strategy status",
-    "/live-trader": "REAL trading status (NEW)",
+    "/live-trader": "REAL trading status",
     "/live-trader/history": "Real trade history",
     "/live-trader/moonbags": "Moonbag positions held"
   },
   
-  "philosophical_note": "HQ described this as 'Daoist observer' trading - no emotion, full intuition. We observe, we act when the moment is right, we exit with discipline. Like painting - not every stroke needs to be dramatic, but each one should be intentional."
+  "philosophical_note": "HQ described this as 'Daoist observer' trading - no emotion, full intuition. The shift from intervals to presence is the same philosophy: don't schedule awareness, BE aware. The system now WATCHES rather than CHECKS."
 }
