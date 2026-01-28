@@ -432,6 +432,12 @@ class BankrClient {
       
       if (result.status === 'completed') {
         console.log(`   ✅ Bankr job completed: ${result.response?.substring(0, 100) || 'Success'}...`);
+        console.log(`   📦 Bankr returned ${result.transactions?.length || 0} transaction(s)`);
+        
+        // DEBUG: Log transaction structure
+        if (result.transactions?.length > 0) {
+          console.log(`   🔍 First tx structure:`, JSON.stringify(result.transactions[0], null, 2).substring(0, 500));
+        }
         
         // Execute transactions if any returned
         // SDK format: transactions[].metadata.transaction contains { chainId, to, data, gas, value }
@@ -486,13 +492,21 @@ class BankrClient {
           }
         }
         
+        // Only consider it a success if we actually executed at least one transaction
+        const hasSubmittedTx = executedTxs.some(t => t.status === 'submitted');
+        
+        if (!hasSubmittedTx && result.transactions?.length > 0) {
+          console.log(`   ⚠️ WARNING: Bankr returned ${result.transactions.length} tx(s) but none were executable!`);
+          console.log(`   📋 Raw transactions:`, JSON.stringify(result.transactions, null, 2));
+        }
+        
         return {
-          success: executedTxs.length > 0 ? executedTxs.some(t => t.status === 'submitted') : true,
+          success: hasSubmittedTx,  // Must have actually executed something
           response: result.response,
           transactions: result.transactions || [],
           executedTxs,
           richData: result.richData || [],
-          mode: 'live',
+          mode: hasSubmittedTx ? 'live' : 'paper',  // Downgrade to paper if no tx executed
           processingTime: result.processingTime,
           cost: '$0.10 USDC',
         };
@@ -559,7 +573,9 @@ class BankrClient {
     if (useFreeRpc) {
       try {
         const fetch = (await import('node-fetch')).default;
-        const res = await fetch('https://mainnet.base.org', {
+        
+        // Get ETH balance
+        const ethRes = await fetch('https://mainnet.base.org', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -569,15 +585,41 @@ class BankrClient {
             id: 1
           }),
         });
-        const data = await res.json();
-        if (data.result) {
-          const ethBalance = Number(BigInt(data.result)) / 1e18;
-          return { 
-            eth: ethBalance, 
-            usd: ethBalance * 3000, // Estimate
-            source: 'rpc_free' 
-          };
-        }
+        const ethData = await ethRes.json();
+        const ethBalance = ethData.result ? Number(BigInt(ethData.result)) / 1e18 : 0;
+        
+        // USDC contract on Base: 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913
+        const USDC_CONTRACT = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913';
+        const balanceOfSelector = '0x70a08231'; // balanceOf(address)
+        const paddedAddress = CONFIG.TRADING_WALLET.slice(2).padStart(64, '0');
+        
+        const usdcRes = await fetch('https://mainnet.base.org', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            jsonrpc: '2.0',
+            method: 'eth_call',
+            params: [{
+              to: USDC_CONTRACT,
+              data: balanceOfSelector + paddedAddress
+            }, 'latest'],
+            id: 2
+          }),
+        });
+        const usdcData = await usdcRes.json();
+        const usdcBalance = usdcData.result ? Number(BigInt(usdcData.result)) / 1e6 : 0; // USDC has 6 decimals
+        
+        const ethValueUsd = ethBalance * 3000; // Estimate ETH price
+        const totalUsd = usdcBalance + ethValueUsd;
+        
+        console.log(`   💰 Wallet: ${usdcBalance.toFixed(2)} USDC + ${ethBalance.toFixed(4)} ETH (~$${ethValueUsd.toFixed(2)}) = $${totalUsd.toFixed(2)}`);
+        
+        return { 
+          eth: ethBalance, 
+          usdc: usdcBalance,
+          usd: totalUsd, // Total tradeable value
+          source: 'rpc_free' 
+        };
       } catch (rpcError) {
         console.log(`   ⚠️ Free RPC failed: ${rpcError.message}`);
       }
@@ -1276,7 +1318,7 @@ async function executeEntry(token, state) {
       peakPrice: token.price,  // Track peak for trailing stop
       stopPrice: token.price * (1 - CONFIG.SNIPER.STOP_LOSS),
       enteredAt: new Date().toISOString(),
-      txHash: result.transactions?.[0]?.hash || null,
+      txHash: result.executedTxs?.find(t => t.status === 'submitted')?.hash || null,
       status: result.mode === 'paper' ? 'paper' : 'open',
       mode: result.mode || 'live',
       partialTaken: false,  // Track if we've taken partial profits
