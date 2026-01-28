@@ -155,11 +155,11 @@ export default function Home() {
   const isOnline = brainStatus?.system?.status === 'alive';
 
   return (
-    <main className="min-h-screen" style={{ backgroundColor: colors.gray100, color: colors.white }}>
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 h-20" style={{ backgroundColor: colors.gray100, borderBottom: `1px solid ${colors.gray80}` }}>
+    <main className="min-h-screen" style={{ backgroundColor: colors.cream, color: colors.dark }}>
+      {/* Navigation - Clean BRIGHT header */}
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 h-20" style={{ backgroundColor: colors.white, borderBottom: `1px solid ${colors.peach}`, boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}>
         <Link href="/" className="flex items-center gap-3">
-          {/* BIGGER LOGO */}
+          {/* BRIGHT LOGO */}
           <div 
             className="w-12 h-12 flex items-center justify-center font-bold text-sm tracking-wider"
             style={{ backgroundColor: colors.blue, color: colors.white }}
@@ -169,10 +169,10 @@ export default function Home() {
         </Link>
         
         <div className="hidden md:flex items-center gap-8 text-sm">
-          <Link href="/labs" className="hover:opacity-70 transition-opacity" style={{ color: colors.cyan }}>LABS</Link>
-          <a href="https://0type.b0b.dev" target="_blank" className="hover:opacity-70 transition-opacity">0TYPE</a>
-          <a href="https://d0t.b0b.dev" target="_blank" className="hover:opacity-70 transition-opacity">D0T</a>
-          <a href="https://github.com/1800bobrossdotcom-byte" target="_blank" className="hover:opacity-70 transition-opacity">GITHUB</a>
+          <Link href="/labs" className="hover:opacity-70 transition-opacity font-medium" style={{ color: colors.blue }}>LABS</Link>
+          <a href="https://0type.b0b.dev" target="_blank" className="hover:opacity-70 transition-opacity font-medium" style={{ color: colors.dark }}>0TYPE</a>
+          <a href="https://d0t.b0b.dev" target="_blank" className="hover:opacity-70 transition-opacity font-medium" style={{ color: colors.dark }}>D0T</a>
+          <a href="https://github.com/1800bobrossdotcom-byte" target="_blank" className="hover:opacity-70 transition-opacity font-medium" style={{ color: colors.dark }}>GITHUB</a>
         </div>
 
         {/* Live status indicator */}
@@ -183,48 +183,62 @@ export default function Home() {
               {isOnline ? 'LIVE' : 'OFFLINE'}
             </span>
           </div>
-          <div className="text-sm font-mono" style={{ color: colors.cyan }}>
+          <div className="text-sm font-mono" style={{ color: colors.blue }}>
             {mounted ? time : '--:--:--'}
           </div>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 pt-20">
+      {/* Hero Section - BRIGHT */}
+      <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 pt-20" style={{ backgroundColor: colors.cream }}>
         <div className="max-w-5xl">
-          <h1 className="text-[clamp(2.5rem,10vw,7rem)] font-medium leading-[1.0] tracking-tight">
+          <h1 className="text-[clamp(2.5rem,10vw,7rem)] font-medium leading-[1.0] tracking-tight" style={{ color: colors.dark }}>
             An autonomous<br/>
             creative intelligence,<br/>
             <span style={{ color: colors.blue }}>built by all of us</span>
           </h1>
           
-          {/* Live Data Strip */}
-          <div className="mt-12 flex flex-wrap gap-6">
-            <div className="flex items-center gap-2 px-4 py-2 rounded" style={{ backgroundColor: colors.gray80 }}>
+          {/* Live Data Strip - Bright cards */}
+          <div className="mt-12 flex flex-wrap gap-4">
+            <div className="flex items-center gap-2 px-4 py-3 rounded-lg shadow-sm" style={{ backgroundColor: colors.white, border: `1px solid ${colors.peach}` }}>
               <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: colors.lime }} />
-              <span className="text-sm font-mono">{brainStatus?.agents?.length || 0} agents online</span>
+              <span className="text-sm font-mono" style={{ color: colors.dark }}>{brainStatus?.agents?.length || 0} agents online</span>
             </div>
-            <div className="flex items-center gap-2 px-4 py-2 rounded" style={{ backgroundColor: colors.gray80 }}>
-              <span className="text-sm" style={{ color: colors.amber }}>🐝</span>
-              <span className="text-sm font-mono">{swarmData?.totalTicks || 0} swarm ticks</span>
+            <div className="flex items-center gap-2 px-4 py-3 rounded-lg shadow-sm" style={{ backgroundColor: colors.white, border: `1px solid ${colors.peach}` }}>
+              <span className="text-sm">🐝</span>
+              <span className="text-sm font-mono" style={{ color: colors.dark }}>{swarmData?.totalTicks || 0} swarm ticks</span>
             </div>
-            <div className="flex items-center gap-2 px-4 py-2 rounded" style={{ backgroundColor: colors.gray80 }}>
-              <span className="text-sm" style={{ color: colors.purple }}>📊</span>
-              <span className="text-sm font-mono">${(polyVolume / 1000000).toFixed(1)}M 24h vol</span>
+            <div className="flex items-center gap-2 px-4 py-3 rounded-lg shadow-sm" style={{ backgroundColor: colors.white, border: `1px solid ${colors.peach}` }}>
+              <span className="text-sm">📊</span>
+              <span className="text-sm font-mono" style={{ color: colors.dark }}>${(polyVolume / 1000000).toFixed(1)}M 24h vol</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Live Agent Status */}
-      <section className="py-16 px-6 md:px-12 lg:px-24 border-t" style={{ borderColor: colors.gray80 }}>
+      {/* Team Chat Section - NEW */}
+      <section className="py-16 px-6 md:px-12 lg:px-24" style={{ backgroundColor: colors.peach }}>
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-xs font-mono tracking-wider" style={{ color: colors.gray50 }}>ACTIVE AGENTS</h2>
-            <span className="text-xs font-mono" style={{ color: colors.gray50 }}>Updated {lastUpdate}</span>
+            <h2 className="text-xs font-mono tracking-wider" style={{ color: colors.darkMuted }}>TEAM CHAT</h2>
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: colors.lime }} />
+              <span className="text-xs font-mono" style={{ color: colors.lime }}>LIVE</span>
+            </div>
+          </div>
+          <TeamChat compact />
+        </div>
+      </section>
+
+      {/* Live Agent Status - BRIGHT */}
+      <section className="py-16 px-6 md:px-12 lg:px-24" style={{ backgroundColor: colors.mint }}>
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-xs font-mono tracking-wider" style={{ color: colors.darkMuted }}>ACTIVE AGENTS</h2>
+            <span className="text-xs font-mono" style={{ color: colors.darkMuted }}>Updated {lastUpdate}</span>
           </div>
           
-          <div className="grid grid-cols-3 gap-px" style={{ backgroundColor: colors.gray80 }}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {(brainStatus?.agents || [
               { name: 'b0b', emoji: '🎨', role: 'Creative Director', status: 'online' },
               { name: 'r0ss', emoji: '🔧', role: 'CTO / DevOps', status: 'online' },
@@ -232,15 +246,15 @@ export default function Home() {
             ]).map((agent, i) => (
               <div 
                 key={agent.name} 
-                className="p-6 flex items-center gap-4"
-                style={{ backgroundColor: colors.gray100 }}
+                className="p-6 flex items-center gap-4 rounded-lg shadow-sm"
+                style={{ backgroundColor: colors.white }}
               >
                 <span className="text-3xl">{agent.emoji}</span>
                 <div>
-                  <p className="font-medium" style={{ color: i === 0 ? colors.cyan : i === 1 ? colors.amber : colors.purple }}>
+                  <p className="font-medium" style={{ color: i === 0 ? colors.blue : i === 1 ? colors.orange : colors.purple }}>
                     {agent.name}
                   </p>
-                  <p className="text-xs" style={{ color: colors.gray50 }}>{agent.role}</p>
+                  <p className="text-xs" style={{ color: colors.darkMuted }}>{agent.role}</p>
                 </div>
                 <span className="ml-auto w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: colors.lime }} />
               </div>
@@ -249,55 +263,55 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Swarm Trading Live */}
-      <section className="py-16 px-6 md:px-12 lg:px-24 border-t" style={{ borderColor: colors.gray80 }}>
+      {/* Swarm Trading Live - BRIGHT */}
+      <section className="py-16 px-6 md:px-12 lg:px-24" style={{ backgroundColor: colors.white }}>
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-xs font-mono tracking-wider" style={{ color: colors.gray50 }}>NASH SWARM TRADING</h2>
+            <h2 className="text-xs font-mono tracking-wider" style={{ color: colors.darkMuted }}>NASH SWARM TRADING</h2>
             <div className="flex items-center gap-2">
-              <span className={`w-2 h-2 rounded-full ${swarmData?.running ? 'animate-pulse' : ''}`} style={{ backgroundColor: swarmData?.running ? colors.lime : colors.gray50 }} />
-              <span className="text-xs font-mono" style={{ color: swarmData?.running ? colors.lime : colors.gray50 }}>
+              <span className={`w-2 h-2 rounded-full ${swarmData?.running ? 'animate-pulse' : ''}`} style={{ backgroundColor: swarmData?.running ? colors.lime : colors.darkMuted }} />
+              <span className="text-xs font-mono" style={{ color: swarmData?.running ? colors.lime : colors.darkMuted }}>
                 {swarmData?.running ? 'ACTIVE' : 'PAUSED'}
               </span>
             </div>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-px" style={{ backgroundColor: colors.gray80 }}>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {(swarmData?.traders || []).map((trader) => (
               <div 
                 key={trader.id}
-                className="p-6"
-                style={{ backgroundColor: colors.gray100 }}
+                className="p-6 rounded-lg"
+                style={{ backgroundColor: colors.cream }}
               >
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-xl">{trader.emoji}</span>
-                  <span className="text-sm font-medium">{trader.name}</span>
+                  <span className="text-sm font-medium" style={{ color: colors.dark }}>{trader.name}</span>
                 </div>
-                <p className="text-2xl font-mono" style={{ color: colors.cyan }}>
+                <p className="text-2xl font-mono" style={{ color: colors.blue }}>
                   {trader.positions}
                 </p>
-                <p className="text-xs" style={{ color: colors.gray50 }}>positions</p>
+                <p className="text-xs" style={{ color: colors.darkMuted }}>positions</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Products List with bright accents */}
-      <section className="border-t" style={{ borderColor: colors.gray80 }}>
+      {/* Products List - BRIGHT */}
+      <section className="border-t" style={{ borderColor: colors.peach, backgroundColor: colors.cream }}>
         {[
-          { name: 'LABS', desc: 'Autonomous systems, swarm intelligence, experiments running 24/7.', status: 'LIVE', url: '/labs', accent: colors.cyan },
-          { name: '0TYPE', desc: 'Autonomous typography. AI-generated typefaces that learn.', status: 'LIVE', url: 'https://0type.b0b.dev', accent: colors.amber },
+          { name: 'LABS', desc: 'Autonomous systems, swarm intelligence, experiments running 24/7.', status: 'LIVE', url: '/labs', accent: colors.blue },
+          { name: '0TYPE', desc: 'Autonomous typography. AI-generated typefaces that learn.', status: 'LIVE', url: 'https://0type.b0b.dev', accent: colors.orange },
           { name: 'D0T.FINANCE', desc: 'Paper trading. Nash equilibrium strategies without risk.', status: 'LIVE', url: 'https://d0t.b0b.dev', accent: colors.purple },
-          { name: 'GHOST MODE', desc: 'Autonomous computer control. See, think, act.', status: 'SOON', url: null, accent: colors.gray50 },
+          { name: 'GHOST MODE', desc: 'Autonomous computer control. See, think, act.', status: 'SOON', url: null, accent: colors.darkMuted },
         ].map((product) => (
           <a 
             key={product.name}
             href={product.url || '#'}
             target={product.url?.startsWith('http') ? '_blank' : undefined}
-            className="flex items-center justify-between px-6 md:px-12 lg:px-24 py-8 border-b transition-all group hover:bg-white/5"
+            className="flex items-center justify-between px-6 md:px-12 lg:px-24 py-8 border-b transition-all group hover:bg-white/50"
             style={{ 
-              borderColor: colors.gray80,
+              borderColor: colors.peach,
               pointerEvents: product.url ? 'auto' : 'none'
             }}
           >
@@ -308,16 +322,16 @@ export default function Home() {
               >
                 {product.name}
               </span>
-              <span className="hidden md:block text-sm" style={{ color: colors.gray50 }}>
+              <span className="hidden md:block text-sm" style={{ color: colors.darkMuted }}>
                 {product.desc}
               </span>
             </div>
             <div className="flex items-center gap-3">
               <div 
                 className={`w-2 h-2 rounded-full ${product.status === 'LIVE' ? 'animate-pulse' : ''}`}
-                style={{ backgroundColor: product.status === 'LIVE' ? colors.lime : colors.gray50 }}
+                style={{ backgroundColor: product.status === 'LIVE' ? colors.lime : colors.darkMuted }}
               />
-              <span className="text-xs font-mono" style={{ color: product.status === 'LIVE' ? colors.lime : colors.gray50 }}>
+              <span className="text-xs font-mono" style={{ color: product.status === 'LIVE' ? colors.lime : colors.darkMuted }}>
                 {product.status}
               </span>
             </div>
@@ -325,60 +339,60 @@ export default function Home() {
         ))}
       </section>
 
-      {/* Philosophy with bright accent */}
-      <section className="py-32 px-6 md:px-12 lg:px-24" style={{ background: `linear-gradient(180deg, ${colors.gray100} 0%, #0a0a1a 100%)` }}>
+      {/* Philosophy - BRIGHT gradient */}
+      <section className="py-32 px-6 md:px-12 lg:px-24" style={{ background: `linear-gradient(180deg, ${colors.white} 0%, ${colors.peach} 50%, ${colors.mint} 100%)` }}>
         <div className="max-w-4xl mx-auto text-center">
-          <blockquote className="text-3xl md:text-5xl font-medium leading-tight mb-8">
+          <blockquote className="text-3xl md:text-5xl font-medium leading-tight mb-8" style={{ color: colors.dark }}>
             "We don't make mistakes,<br/>
-            <span style={{ color: colors.cyan }}>just happy accidents.</span>"
+            <span style={{ color: colors.blue }}>just happy accidents.</span>"
           </blockquote>
-          <p className="text-lg" style={{ color: colors.gray50 }}>— Bob Ross</p>
+          <p className="text-lg" style={{ color: colors.darkMuted }}>— Bob Ross</p>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t py-16 px-6 md:px-12 lg:px-24" style={{ borderColor: colors.gray80 }}>
+      {/* Footer - BRIGHT */}
+      <footer className="border-t py-16 px-6 md:px-12 lg:px-24" style={{ borderColor: colors.peach, backgroundColor: colors.white }}>
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
             <div>
-              <p className="text-xs font-mono mb-4" style={{ color: colors.gray50 }}>PRODUCTS</p>
+              <p className="text-xs font-mono mb-4" style={{ color: colors.darkMuted }}>PRODUCTS</p>
               <div className="flex flex-col gap-2 text-sm">
-                <Link href="/labs" className="hover:opacity-70 transition-opacity" style={{ color: colors.cyan }}>LABS</Link>
-                <a href="https://0type.b0b.dev" target="_blank" className="hover:opacity-70 transition-opacity" style={{ color: colors.amber }}>0TYPE</a>
-                <a href="https://d0t.b0b.dev" target="_blank" className="hover:opacity-70 transition-opacity" style={{ color: colors.purple }}>D0T</a>
+                <Link href="/labs" className="hover:opacity-70 transition-opacity font-medium" style={{ color: colors.blue }}>LABS</Link>
+                <a href="https://0type.b0b.dev" target="_blank" className="hover:opacity-70 transition-opacity font-medium" style={{ color: colors.orange }}>0TYPE</a>
+                <a href="https://d0t.b0b.dev" target="_blank" className="hover:opacity-70 transition-opacity font-medium" style={{ color: colors.purple }}>D0T</a>
               </div>
             </div>
             <div>
-              <p className="text-xs font-mono mb-4" style={{ color: colors.gray50 }}>BUILDERS</p>
-              <div className="flex flex-col gap-2 text-sm">
+              <p className="text-xs font-mono mb-4" style={{ color: colors.darkMuted }}>BUILDERS</p>
+              <div className="flex flex-col gap-2 text-sm" style={{ color: colors.dark }}>
                 <a href="https://github.com/1800bobrossdotcom-byte" target="_blank" className="hover:opacity-70 transition-opacity">GITHUB</a>
-                <a href="https://base.org" target="_blank" className="hover:opacity-70 transition-opacity" style={{ color: colors.blue }}>BASE</a>
+                <a href="https://base.org" target="_blank" className="hover:opacity-70 transition-opacity font-medium" style={{ color: colors.blue }}>BASE</a>
               </div>
             </div>
             <div>
-              <p className="text-xs font-mono mb-4" style={{ color: colors.gray50 }}>SOCIALS</p>
-              <div className="flex flex-col gap-2 text-sm">
+              <p className="text-xs font-mono mb-4" style={{ color: colors.darkMuted }}>SOCIALS</p>
+              <div className="flex flex-col gap-2 text-sm" style={{ color: colors.dark }}>
                 <a href="https://x.com/_b0bdev_" target="_blank" className="hover:opacity-70 transition-opacity">X</a>
               </div>
             </div>
             <div>
-              <p className="text-xs font-mono mb-4" style={{ color: colors.gray50 }}>LIVE DATA</p>
+              <p className="text-xs font-mono mb-4" style={{ color: colors.darkMuted }}>LIVE DATA</p>
               <div className="flex flex-col gap-2 text-sm">
                 <span style={{ color: colors.lime }}>● Brain Online</span>
-                <span style={{ color: colors.gray50 }}>{swarmData?.strategies || 4} strategies</span>
+                <span style={{ color: colors.darkMuted }}>{swarmData?.strategies || 4} strategies</span>
               </div>
             </div>
           </div>
 
-          <div className="flex items-center justify-between pt-8 border-t" style={{ borderColor: colors.gray80 }}>
-            {/* BIGGER FOOTER LOGO */}
+          <div className="flex items-center justify-between pt-8 border-t" style={{ borderColor: colors.peach }}>
+            {/* BRIGHT FOOTER LOGO */}
             <div 
               className="w-12 h-12 flex items-center justify-center font-bold text-sm tracking-wider"
               style={{ backgroundColor: colors.blue, color: colors.white }}
             >
               B0B
             </div>
-            <p className="text-xs" style={{ color: colors.gray50 }}>
+            <p className="text-xs" style={{ color: colors.darkMuted }}>
               © 2026 B0B.DEV — Building on Base
             </p>
           </div>
