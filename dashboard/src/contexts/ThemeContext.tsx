@@ -4,6 +4,29 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 
 // Aesthetic style presets — full vibe transformations
 export const AESTHETICS = {
+  bright: {
+    name: 'BRIGHT',
+    description: 'Base blue + warm energy',
+    primary: '#0000FF',        // Base blue
+    secondary: '#0052FF',      // Base blue lighter
+    accent: '#FF6B00',         // Bright orange
+    muted: '#64748B',
+    background: '#FFFAF5',     // Warm cream white
+    surface: '#FFF5EB',        // Soft peach
+    text: '#0A0B0D',           // Dark text
+    textMuted: '#64748B',
+    glow: 'rgba(0, 0, 255, 0.15)',
+    // Visual signature
+    particleShape: 'circle',
+    particlePattern: 'bloom',
+    font: 'display',
+    scanlines: false,
+    glitch: false,
+    crt: false,
+    noise: 'none',
+    // BRIGHT MODE
+    isDark: false,
+  },
   milspec: {
     name: 'MILSPEC',
     description: 'Tactical precision',
@@ -13,6 +36,8 @@ export const AESTHETICS = {
     muted: '#78716C',
     background: '#0A0A08',
     surface: '#1A1810',
+    text: '#FFFFFF',
+    textMuted: '#78716C',
     glow: 'rgba(245, 158, 11, 0.15)',
     // Visual signature
     particleShape: 'square',
@@ -22,6 +47,7 @@ export const AESTHETICS = {
     glitch: false,
     crt: false,
     noise: 'none',
+    isDark: true,
   },
   ghost: {
     name: 'GH0ST',
@@ -32,6 +58,8 @@ export const AESTHETICS = {
     muted: '#4A5568',
     background: '#050808',
     surface: '#0A1210',
+    text: '#FFFFFF',
+    textMuted: '#4A5568',
     glow: 'rgba(0, 255, 136, 0.1)',
     // Visual signature
     particleShape: 'circle',
@@ -41,6 +69,7 @@ export const AESTHETICS = {
     glitch: true,
     crt: false,
     noise: 'static', // TV static overlay
+    isDark: true,
   },
   anime: {
     name: 'ANIME',
@@ -51,6 +80,8 @@ export const AESTHETICS = {
     muted: '#8B7E94',
     background: '#0D0A12',
     surface: '#1A1424',
+    text: '#FFFFFF',
+    textMuted: '#8B7E94',
     glow: 'rgba(255, 107, 157, 0.2)',
     // Visual signature
     particleShape: 'star',
@@ -60,6 +91,7 @@ export const AESTHETICS = {
     glitch: false,
     crt: true,
     noise: 'grain', // Film grain
+    isDark: true,
   },
 } as const;
 
@@ -81,20 +113,20 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  // Default to 'anime' (brighter, neo-tokyo nights) — the third option
-  const [aesthetic, setAestheticState] = useState<AestheticKey>('anime');
+  // Default to 'bright' — Base blue with warm cream backgrounds
+  const [aesthetic, setAestheticState] = useState<AestheticKey>('bright');
   const [particleDensity, setParticleDensity] = useState<'low' | 'medium' | 'high'>('medium');
   const [animationSpeed, setAnimationSpeed] = useState<'slow' | 'normal' | 'fast'>('normal');
   const [reducedMotion, setReducedMotion] = useState(false);
 
-  // Load from localStorage (but default is now anime)
+  // Load from localStorage (but default is now bright)
   useEffect(() => {
     const saved = localStorage.getItem('b0b-aesthetic');
     if (saved && saved in AESTHETICS) {
       setAestheticState(saved as AestheticKey);
     } else {
-      // First time visitor — set to anime
-      localStorage.setItem('b0b-aesthetic', 'anime');
+      // First time visitor — set to bright
+      localStorage.setItem('b0b-aesthetic', 'bright');
     }
     
     const savedDensity = localStorage.getItem('b0b-particle-density');
@@ -120,6 +152,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     root.style.setProperty('--color-background', config.background);
     root.style.setProperty('--color-surface', config.surface);
     root.style.setProperty('--color-glow', config.glow);
+    root.style.setProperty('--color-text', config.text);
+    root.style.setProperty('--color-text-muted', config.textMuted);
+    
+    // Dark mode attribute for components that need it
+    root.setAttribute('data-theme-mode', config.isDark ? 'dark' : 'light');
     
     // Visual effects
     root.setAttribute('data-aesthetic', aesthetic);

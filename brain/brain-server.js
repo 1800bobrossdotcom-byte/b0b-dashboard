@@ -742,19 +742,19 @@ app.get('/live-trader', async (req, res) => {
     const state = await loadState();
     
     res.json({
-      active: state.active,
+      active: state.active !== false, // Default to true if not explicitly false
       wallet: CONFIG.PHANTOM_WALLET,
-      chain: CONFIG.CHAIN,
+      chains: CONFIG.CHAINS,
       stats: {
-        totalTrades: state.totalTrades,
-        totalPnL: state.totalPnL,
-        wins: state.wins,
-        losses: state.losses,
+        totalTrades: state.totalTrades || 0,
+        totalPnL: state.totalPnL || 0,
+        wins: state.wins || 0,
+        losses: state.losses || 0,
         winRate: state.totalTrades > 0 ? state.wins / state.totalTrades : 0,
-        dailyVolume: state.dailyVolume,
+        dailyVolume: state.dailyVolume || 0,
         maxDailyVolume: CONFIG.MAX_DAILY_VOLUME,
       },
-      positions: state.positions.map(p => ({
+      positions: (state.positions || []).map(p => ({
         symbol: p.symbol,
         entryPrice: p.entryPrice,
         amount: p.amount,
@@ -762,17 +762,27 @@ app.get('/live-trader', async (req, res) => {
         stopPrice: p.stopPrice,
         enteredAt: p.enteredAt,
         strategy: p.strategy,
+        chain: p.chain || 'base',
       })),
       config: {
         maxPosition: CONFIG.MAX_POSITION_USD,
         maxDaily: CONFIG.MAX_DAILY_VOLUME,
         maxPositions: CONFIG.MAX_OPEN_POSITIONS,
-        sniper: CONFIG.SNIPER,
+        polymarket: CONFIG.POLYMARKET,
       },
       lastTick: state.lastTick,
     });
   } catch (err) {
-    res.status(500).json({ error: err.message, active: false });
+    console.log('Live trader endpoint error:', err.message);
+    res.json({ 
+      active: false, 
+      error: err.message,
+      wallet: '0xd06Aa956CEDA935060D9431D8B8183575c41072d',
+      stats: { totalTrades: 0, totalPnL: 0, wins: 0, losses: 0, winRate: 0, dailyVolume: 0, maxDailyVolume: 500 },
+      positions: [],
+      config: {},
+      lastTick: null
+    });
   }
 });
 
@@ -1198,6 +1208,144 @@ app.listen(PORT, async () => {
   } catch (err) {
     console.log(`  ⚠️ Live Trader not started: ${err.message}`);
   }
+});
+
+// =============================================================================
+// 👁️ IMAGE ANALYSIS ENDPOINT — Ghost OCR for HQ
+// =============================================================================
+
+// Try to load Tesseract for OCR
+let Tesseract;
+try {
+  Tesseract = require('tesseract.js');
+  console.log('  👁️ Tesseract OCR: AVAILABLE');
+} catch {
+  console.log('  ⚠️ Tesseract OCR: Not available (install tesseract.js)');
+}
+
+/**
+ * POST /analyze-image
+ * 
+ * Analyze an image using Ghost OCR logic.
+ * Accepts base64 image or URL.
+ * 
+ * Body: { image: string (base64 or URL), mode: 'ocr' | 'full' }
+ * Returns: { text, words, buttons, notifications, confidence }
+ */
+app.post('/analyze-image', async (req, res) => {
+  if (!Tesseract) {
+    return res.status(501).json({ error: 'OCR not available on this server' });
+  }
+  
+  try {
+    const { image, mode = 'full' } = req.body;
+    
+    if (!image) {
+      return res.status(400).json({ error: 'No image provided' });
+    }
+    
+    // Handle base64 or URL
+    let imageData = image;
+    if (image.startsWith('http')) {
+      // Fetch image from URL
+      const response = await axios.get(image, { responseType: 'arraybuffer' });
+      imageData = Buffer.from(response.data);
+    } else if (image.startsWith('data:image')) {
+      // Extract base64 from data URL
+      const base64 = image.split(',')[1];
+      imageData = Buffer.from(base64, 'base64');
+    }
+    
+    // Run OCR
+    const worker = await Tesseract.createWorker('eng');
+    const { data } = await worker.recognize(imageData);
+    await worker.terminate();
+    
+    // Extract clickable words (from ghost.js logic)
+    const words = (data.words || [])
+      .filter(w => w.confidence > 60 && w.text.length > 1)
+      .map(w => ({
+        text: w.text,
+        x: Math.round(w.bbox.x0 + (w.bbox.x1 - w.bbox.x0) / 2),
+        y: Math.round(w.bbox.y0 + (w.bbox.y1 - w.bbox.y0) / 2),
+        width: w.bbox.x1 - w.bbox.x0,
+        height: w.bbox.y1 - w.bbox.y0,
+        confidence: Math.round(w.confidence),
+      }));
+    
+    // Find buttons (from ghost.js patterns)
+    const buttonPatterns = ['Continue', 'Keep', 'Allow', 'Proceed', 'Yes', 'Run', 'OK', 'Submit', 'Next', 'Accept', 'Confirm', 'Done', 'Save', 'Cancel', 'Close'];
+    const buttons = words.filter(w => 
+      buttonPatterns.some(p => w.text.toLowerCase().includes(p.toLowerCase()))
+    );
+    
+    // Find notifications (from ghost.js patterns)
+    const notificationPatterns = ['error', 'warning', 'alert', 'failed', 'exception', 'disabled', 'enable', 'configure', 'install', 'update', 'restart', 'permission'];
+    const notifications = [];
+    const lowerText = data.text.toLowerCase();
+    notificationPatterns.forEach(pattern => {
+      if (lowerText.includes(pattern)) {
+        const idx = lowerText.indexOf(pattern);
+        const start = Math.max(0, lowerText.lastIndexOf('.', idx) + 1);
+        const end = Math.min(data.text.length, lowerText.indexOf('.', idx + pattern.length) + 1 || data.text.length);
+        const context = data.text.slice(start, end).trim().slice(0, 200);
+        if (context && !notifications.includes(context)) {
+          notifications.push(context);
+        }
+      }
+    });
+    
+    // Calculate overall confidence
+    const avgConfidence = words.length > 0 
+      ? Math.round(words.reduce((sum, w) => sum + w.confidence, 0) / words.length)
+      : 0;
+    
+    // Log to activity
+    await logActivity({
+      type: 'image_analysis',
+      action: 'ocr_complete',
+      wordsFound: words.length,
+      buttonsFound: buttons.length,
+      notificationsFound: notifications.length,
+      confidence: avgConfidence,
+    });
+    
+    res.json({
+      success: true,
+      text: data.text,
+      words: mode === 'full' ? words : undefined,
+      buttons,
+      notifications,
+      stats: {
+        totalWords: words.length,
+        totalButtons: buttons.length,
+        totalNotifications: notifications.length,
+        avgConfidence,
+      },
+    });
+    
+  } catch (err) {
+    console.log('Image analysis error:', err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
+ * GET /analyze-image/patterns
+ * 
+ * Returns the patterns used for button/notification detection.
+ * Useful for clients to know what to expect.
+ */
+app.get('/analyze-image/patterns', (req, res) => {
+  res.json({
+    buttonPatterns: ['Continue', 'Keep', 'Allow', 'Proceed', 'Yes', 'Run', 'OK', 'Submit', 'Next', 'Accept', 'Confirm', 'Done', 'Save', 'Cancel', 'Close'],
+    notificationPatterns: ['error', 'warning', 'alert', 'failed', 'exception', 'disabled', 'enable', 'configure', 'install', 'update', 'restart', 'permission'],
+    capabilities: {
+      ocr: !!Tesseract,
+      imageFormats: ['png', 'jpg', 'jpeg', 'gif', 'webp'],
+      inputTypes: ['base64', 'dataUrl', 'url'],
+    },
+  });
 });
 
 module.exports = app;

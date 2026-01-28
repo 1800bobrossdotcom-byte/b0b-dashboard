@@ -3,34 +3,39 @@
 /**
  * B0B.DEV — Built on Base
  * 
- * BRIGHTER. Complementary colors to Base blue:
- * - Electric Cyan (#00FFFF) - complementary energy
- * - Lime Green (#66C800) - success, growth
- * - Warm Amber (#F59E0B) - action, warmth
- * - Soft Purple (#8B5CF6) - creativity
+ * BRIGHT MODE: Base blue + white/cream backgrounds
+ * - UI for team: Live status, brain activity, trades
+ * - UX for viewers: Toggle art creation, save configurations
  * 
- * Live data from brain server. Glass box.
+ * Glass box, not black box.
  */
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import TeamChat from '@/components/live/TeamChat';
 
-// Enhanced Base palette with bright accents
+// BRIGHT palette — Base blue + warm backgrounds
 const colors = {
   // Core Base
   blue: '#0000FF',
   white: '#FFFFFF',
-  gray100: '#0A0B0D',
-  gray80: '#32353D',
-  gray50: '#717886',
-  gray30: '#B1B7C3',
+  
+  // BRIGHT backgrounds
+  cream: '#FFFAF5',        // Warm cream
+  peach: '#FFF5EB',        // Soft peach surface
+  mint: '#E8FFF5',         // Fresh mint
+  
+  // Text on light
+  dark: '#0A0B0D',
+  darkMuted: '#64748B',
   
   // BRIGHT accents
-  cyan: '#00FFFF',      // Electric complement to blue
-  lime: '#66C800',      // Success/active
-  amber: '#F59E0B',     // Warmth/action
-  purple: '#8B5CF6',    // Creative
-  pink: '#EC4899',      // Energy
+  orange: '#FF6B00',       // Bright orange
+  lime: '#66C800',         // Success/active
+  green: '#00D84A',        // Fresh green
+  amber: '#F59E0B',        // Warmth/action
+  purple: '#8B5CF6',       // Creative
+  cyan: '#00FFFF',         // Electric
   
   // Status
   success: '#66C800',
