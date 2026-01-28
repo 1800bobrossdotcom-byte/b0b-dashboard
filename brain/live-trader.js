@@ -467,22 +467,42 @@ class BankrClient {
             chain: base,
           });
           
+          // ════════════════════════════════════════════════════════════════════════
+          // SELL DEBUG: Log full transaction array structure
+          // Team identified: we need to see exactly what Bankr returns
+          // ════════════════════════════════════════════════════════════════════════
+          console.log(`   🔍 FULL TRANSACTION ARRAY:`, JSON.stringify(result.transactions.map((t, i) => ({
+            index: i,
+            type: t.type,
+            hasMetadata: !!t.metadata,
+            hasTransaction: !!t.metadata?.transaction,
+            metadataKeys: t.metadata ? Object.keys(t.metadata) : [],
+            txKeys: t.metadata?.transaction ? Object.keys(t.metadata.transaction) : [],
+          })), null, 2));
+          
           for (const tx of result.transactions) {
             try {
               // SDK returns tx.metadata.transaction with the actual tx data
-              const txData = tx.metadata?.transaction;
+              // But some SDK versions might use tx.data directly or tx.transaction
+              const txData = tx.metadata?.transaction || tx.transaction || tx.data || tx;
               
-              console.log(`   📋 TX type: ${tx.type}, has txData: ${!!txData}`);
+              console.log(`   📋 TX type: ${tx.type}, structures: metadata=${!!tx.metadata}, transaction=${!!tx.transaction}, data=${!!tx.data}`);
+              console.log(`   📋 Extracted txData keys: ${txData ? Object.keys(txData).join(', ') : 'null'}`);
               
-              if (txData && txData.to && txData.data) {
+              // Check multiple possible structures
+              const targetTo = txData?.to || txData?.target;
+              const targetData = txData?.data || txData?.calldata || txData?.input;
+              
+              if (targetTo && targetData) {
                 console.log(`   🔏 Signing and submitting ${tx.type || 'swap'} transaction...`);
-                console.log(`      To: ${txData.to}`);
+                console.log(`      To: ${targetTo}`);
                 console.log(`      Value: ${txData.value || '0'} wei`);
+                console.log(`      Data (first 100 chars): ${targetData.substring(0, 100)}...`);
                 
                 // Execute the transaction
                 const hash = await walletClient.sendTransaction({
-                  to: txData.to,
-                  data: txData.data,
+                  to: targetTo,
+                  data: targetData,
                   value: txData.value ? BigInt(txData.value) : 0n,
                   gas: txData.gas ? BigInt(txData.gas) : undefined,
                   chainId: txData.chainId || 8453,
@@ -493,7 +513,8 @@ class BankrClient {
                 
                 executedTxs.push({ hash, type: tx.type || 'swap', status: 'submitted' });
               } else {
-                console.log(`      - ${tx.type || 'action'}: No executable tx data`);
+                console.log(`      ⚠️ ${tx.type || 'action'}: Missing to=${!!targetTo} or data=${!!targetData}`);
+                console.log(`      📋 Raw tx object:`, JSON.stringify(tx, null, 2).substring(0, 500));
               }
             } catch (txError) {
               console.log(`   ❌ TX execution failed: ${txError.message}`);
@@ -508,6 +529,11 @@ class BankrClient {
         if (!hasSubmittedTx && result.transactions?.length > 0) {
           console.log(`   ⚠️ WARNING: Bankr returned ${result.transactions.length} tx(s) but none were executable!`);
           console.log(`   📋 Raw transactions:`, JSON.stringify(result.transactions, null, 2));
+        }
+        
+        // Also check result.richData for potential swap info
+        if (result.richData?.length > 0) {
+          console.log(`   📊 Rich data returned:`, JSON.stringify(result.richData, null, 2).substring(0, 500));
         }
         
         return {
@@ -1582,13 +1608,46 @@ async function executeExit(position, currentPrice, percentage, state, exitReason
       await new Promise(r => setTimeout(r, RETRY_DELAYS[attempt - 1]));
     }
     
-    const prompt = `Sell ${percentage * 100}% of my ${position.symbol} holdings (approximately ${exitAmount.toFixed(4)} tokens) on Base. Wallet: ${CONFIG.TRADING_WALLET}. Use max ${slippage}% slippage. Exit reason: ${exitReason}`;
+    // ════════════════════════════════════════════════════════════════════════
+    // EXPLICIT SELL PROMPT — Be specific about what we want
+    // Team discussion: vague prompts may cause Bankr to misinterpret
+    // ════════════════════════════════════════════════════════════════════════
+    const tokenAddress = position.address || position.tokenAddress || '';
+    const prompt = tokenAddress 
+      ? `Swap ${exitAmount.toFixed(6)} ${position.symbol} (contract: ${tokenAddress}) to ETH on Base chain. Wallet: ${CONFIG.TRADING_WALLET}. Max slippage: ${slippage}%. This is a SELL order.`
+      : `Swap ${exitAmount.toFixed(6)} ${position.symbol} tokens to ETH on Base chain. Wallet: ${CONFIG.TRADING_WALLET}. Max slippage: ${slippage}%. This is a SELL order - convert my ${position.symbol} holdings to ETH.`;
+    
+    console.log(`   📤 SELL PROMPT: ${prompt.substring(0, 100)}...`);
     
     try {
       result = await bankr.executeTrade(prompt);
       
+      // ════════════════════════════════════════════════════════════════════════
+      // DEBUG: Log FULL Bankr response for sells
+      // Team identified: we may be missing swap data in response
+      // ════════════════════════════════════════════════════════════════════════
+      console.log(`   📊 BANKR SELL RESPONSE:`, JSON.stringify({
+        success: result.success,
+        hasExecutedTxs: !!result.executedTxs?.length,
+        executedTxsCount: result.executedTxs?.length || 0,
+        hasTransactions: !!result.transactions?.length,
+        transactionsCount: result.transactions?.length || 0,
+        jobId: result.jobId,
+        status: result.status,
+        error: result.error,
+        // Log first tx hash if exists
+        firstTxHash: result.executedTxs?.[0]?.hash || result.transactions?.[0]?.hash || 'NO_TX_HASH',
+      }, null, 2));
+      
       if (result.success) {
-        console.log(`   ✅ Exit successful on attempt ${attempt + 1}`);
+        // Verify we actually have a swap transaction
+        const txHash = result.executedTxs?.[0]?.hash || result.transactions?.[0]?.hash;
+        if (!txHash) {
+          console.log(`   ⚠️ SELL marked success but NO TX HASH returned!`);
+          console.log(`   📋 Full result keys: ${Object.keys(result).join(', ')}`);
+        } else {
+          console.log(`   ✅ Exit successful on attempt ${attempt + 1}, TX: ${txHash}`);
+        }
         break;
       }
       
@@ -2650,12 +2709,75 @@ module.exports = {
   // 💰 Wage tracking exports
   updateWageTracking,
   getWageStatus,
+  // 🧪 Test functions
+  testSell,
 };
+
+/**
+ * 🧪 TEST SELL FUNCTION
+ * Call directly to test sell execution: node live-trader.js --test-sell TOKEN_SYMBOL
+ */
+async function testSell(symbol, amount = 'all') {
+  console.log('\n════════════════════════════════════════════════════════════════════════════');
+  console.log(`🧪 TEST SELL: ${symbol} (amount: ${amount})`);
+  console.log('════════════════════════════════════════════════════════════════════════════\n');
+  
+  // Load current state to find position
+  const state = await loadState();
+  const position = state.positions?.find(p => 
+    p.symbol?.toLowerCase() === symbol.toLowerCase() && p.status === 'open'
+  );
+  
+  if (!position) {
+    console.log(`❌ No open position found for ${symbol}`);
+    console.log(`   Open positions: ${state.positions?.filter(p => p.status === 'open').map(p => p.symbol).join(', ') || 'none'}`);
+    return { success: false, error: 'Position not found' };
+  }
+  
+  console.log(`📊 Found position:`);
+  console.log(`   Symbol: ${position.symbol}`);
+  console.log(`   Address: ${position.address || position.tokenAddress || 'unknown'}`);
+  console.log(`   Tokens: ${position.tokens}`);
+  console.log(`   Entry: $${position.entryPrice}`);
+  
+  // Build explicit sell prompt
+  const tokenAddress = position.address || position.tokenAddress || '';
+  const tokenAmount = amount === 'all' ? position.tokens : parseFloat(amount);
+  
+  const prompt = tokenAddress 
+    ? `Swap ${tokenAmount.toFixed(6)} ${symbol} (contract: ${tokenAddress}) to ETH on Base chain. Wallet: ${CONFIG.TRADING_WALLET}. Max slippage: 5%. This is a SELL order.`
+    : `Swap ${tokenAmount.toFixed(6)} ${symbol} tokens to ETH on Base chain. Wallet: ${CONFIG.TRADING_WALLET}. Max slippage: 5%. This is a SELL order.`;
+  
+  console.log(`\n📤 SELL PROMPT: ${prompt}\n`);
+  
+  // Execute via Bankr
+  const result = await bankr.executeTrade(prompt);
+  
+  console.log('\n📊 FULL RESULT:', JSON.stringify(result, null, 2));
+  
+  return result;
+}
 
 // Run directly
 if (require.main === module) {
+  // Test sell mode
+  if (process.argv.includes('--test-sell')) {
+    const symbolIndex = process.argv.indexOf('--test-sell') + 1;
+    const symbol = process.argv[symbolIndex] || 'clawdgang';
+    const amount = process.argv[symbolIndex + 1] || 'all';
+    
+    testSell(symbol, amount)
+      .then(result => {
+        console.log(`\n✅ Test sell complete: ${result.success ? 'SUCCESS' : 'FAILED'}`);
+        process.exit(result.success ? 0 : 1);
+      })
+      .catch(err => {
+        console.error('❌ Error:', err);
+        process.exit(1);
+      });
+  }
   // Use presence mode if --presence flag
-  if (process.argv.includes('--presence')) {
+  else if (process.argv.includes('--presence')) {
     startPresenceTrading()
       .then(() => console.log('\n👁️ Presence mode running...'))
       .catch(err => {
