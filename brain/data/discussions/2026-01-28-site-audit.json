@@ -27,7 +27,7 @@
       "timestamp": "2026-01-28T08:35:30.000Z",
       "agent": "r0ss",
       "emoji": "🔧",
-      "content": "Starting infrastructure audit:\n\n**BANKR BOT STATUS:**\n- API Key: bk_UQTZFYQEYDVVFDUXRJJG2TQGNTG5QVB6 (configured)\n- Phantom Wallet: 0xd06Aa956CEDA935060D9431D8B8183575c41072d\n- live-trader.js exists but NOT running in PM2 process manager\n- The bot is CODE but not DEPLOYED\n\n**ISSUE:** brain-server.js runs, but live-trader.js needs separate execution. It's sitting idle."
+      "content": "Starting infrastructure audit:\n\n**BANKR BOT STATUS:**\n- API Key: REDACTED_KEY (configured)\n- Phantom Wallet: 0xd06Aa956CEDA935060D9431D8B8183575c41072d\n- live-trader.js exists but NOT running in PM2 process manager\n- The bot is CODE but not DEPLOYED\n\n**ISSUE:** brain-server.js runs, but live-trader.js needs separate execution. It's sitting idle."
     },
     {
       "timestamp": "2026-01-28T08:36:00.000Z",
