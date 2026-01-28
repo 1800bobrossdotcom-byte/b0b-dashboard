@@ -1041,8 +1041,6 @@ app.get('/tokens/trending', async (req, res) => {
     });
   }
 });
-  }
-});
 
 // =============================================================================
 // GIT INTEGRATION — Watch Repos for Activity
