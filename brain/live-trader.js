@@ -563,17 +563,23 @@ class BankrClient {
         console.log(`   ✅ Bankr job completed: ${status.response?.substring(0, 100) || 'Success'}...`);
         
         // Execute transactions if any returned (Bankr returns tx data we need to sign & submit)
+        // SDK format: transactions[].metadata.transaction contains { chainId, to, data, gas, value }
         let executedTxs = [];
         if (status.transactions?.length > 0) {
           console.log(`   📝 ${status.transactions.length} transaction(s) to execute`);
           
           for (const tx of status.transactions) {
             try {
-              // Check for raw transaction data
-              const txData = tx.__ORIGINAL_TX_DATA__ || tx.metadata?.__ORIGINAL_TX_DATA__;
+              // Bankr SDK format: tx.metadata.transaction has the actual tx data
+              // Also check legacy format: tx.__ORIGINAL_TX_DATA__
+              const txData = tx.metadata?.transaction || tx.__ORIGINAL_TX_DATA__ || tx.metadata?.__ORIGINAL_TX_DATA__;
+              
+              console.log(`   📋 TX type: ${tx.type}, has metadata: ${!!tx.metadata}, has txData: ${!!txData}`);
               
               if (txData && txData.to && txData.data) {
-                console.log(`   🔏 Signing and submitting swap transaction...`);
+                console.log(`   🔏 Signing and submitting ${tx.type || 'swap'} transaction...`);
+                console.log(`      To: ${txData.to}`);
+                console.log(`      Value: ${txData.value || '0'} wei`);
                 
                 // Execute the transaction using our wallet
                 const hash = await this.walletClient.sendTransaction({
@@ -581,14 +587,22 @@ class BankrClient {
                   data: txData.data,
                   value: txData.value ? BigInt(txData.value) : 0n,
                   gas: txData.gas ? BigInt(txData.gas) : undefined,
+                  chainId: txData.chainId || 8453, // Base chain
                 });
                 
                 console.log(`   ✅ TX SUBMITTED: ${hash}`);
                 console.log(`   🔗 https://basescan.org/tx/${hash}`);
                 
                 executedTxs.push({ hash, type: tx.type || 'swap', status: 'submitted' });
+              } else if (tx.metadata?.__ORIGINAL_TX_DATA__) {
+                // Alternative format check
+                const altTxData = tx.metadata.__ORIGINAL_TX_DATA__;
+                console.log(`   ℹ️ Found __ORIGINAL_TX_DATA__ format (info): ${altTxData.humanReadableMessage || tx.type}`);
+                executedTxs.push({ type: tx.type || 'info', status: 'info_only', data: altTxData });
               } else {
-                console.log(`      - ${tx.type || 'action'}: No executable tx data (info only)`);
+                console.log(`      - ${tx.type || 'action'}: No executable tx data`);
+                console.log(`        Available keys: ${Object.keys(tx).join(', ')}`);
+                if (tx.metadata) console.log(`        Metadata keys: ${Object.keys(tx.metadata).join(', ')}`);
               }
             } catch (txError) {
               console.log(`   ❌ TX execution failed: ${txError.message}`);
