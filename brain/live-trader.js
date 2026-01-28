@@ -1827,12 +1827,12 @@ async function treasurySweep(state) {
   console.log(`\n💎 Treasury Check...`);
   
   const balance = await bankr.getBalance();
-  if (!balance || !balance.totalUsd) {
+  if (!balance || (!balance.usd && balance.usd !== 0)) {
     console.log(`   ⚠️ Could not fetch balance`);
     return;
   }
   
-  const warmBalance = balance.totalUsd;
+  const warmBalance = balance.usd; // Use .usd not .totalUsd
   console.log(`   💰 Warm Wallet: $${warmBalance.toFixed(2)}`);
   console.log(`   📊 Threshold: $${CONFIG.TREASURY.WARM_WALLET_MAX_USD}`);
   
