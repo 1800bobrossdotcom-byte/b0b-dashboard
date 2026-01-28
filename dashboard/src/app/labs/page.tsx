@@ -1,30 +1,18 @@
 'use client';
 
 /**
- * B0B LABS — Experimental Features & System Status
+ * B0B LABS — Live Trading Command Center
  * 
- * This page shows:
- * - Phantom wallet holdings & allocations
- * - Live system status (brain server health)
- * - Team discussions & ideation
- * - Live trader status
- * - Experimental features
+ * Rebuilt for traders, by traders.
+ * Live Trader first. Everything else supports it.
  * 
- * "See inside the machine. Glass box, not black box."
+ * "Glass box, not black box."
  */
 
-import { useEffect, useState, Component, ReactNode, Suspense } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 
-// Dynamic imports with no SSR to prevent hydration errors
-const OfficeVisualizer = dynamic(() => import('@/components/OfficeVisualizer'), { 
-  ssr: false,
-  loading: () => <div className="h-64 bg-gray-100 animate-pulse rounded-lg" />
-});
-const CCTVWindow = dynamic(() => import('@/components/CCTVWindow'), { 
-  ssr: false,
-  loading: () => <div className="h-64 bg-gray-100 animate-pulse rounded-lg" />
-});
+// Dynamic imports
 const WalletDashboard = dynamic(() => import('@/components/live/WalletDashboard'), { 
   ssr: false,
   loading: () => <div className="h-48 bg-gray-100 animate-pulse rounded-lg" />
@@ -34,158 +22,17 @@ const TeamChat = dynamic(() => import('@/components/live/TeamChat'), {
   loading: () => <div className="h-64 bg-gray-100 animate-pulse rounded-lg" />
 });
 
-// Error Boundary to catch component crashes
-class ErrorBoundary extends Component<{ children: ReactNode; fallback?: ReactNode }, { hasError: boolean; error: Error | null }> {
-  constructor(props: { children: ReactNode; fallback?: ReactNode }) {
-    super(props);
-    this.state = { hasError: false, error: null };
-  }
-
-  static getDerivedStateFromError(error: Error) {
-    return { hasError: true, error };
-  }
-
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('Labs Error Boundary caught:', error, errorInfo);
-  }
-
-  render() {
-    if (this.state.hasError) {
-      if (this.props.fallback) {
-        return this.props.fallback;
-      }
-      return (
-        <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#FFFDF9' }}>
-          <div className="text-center p-8">
-            <h1 className="text-2xl font-bold mb-4" style={{ color: '#DC2626' }}>Labs Error</h1>
-            <p className="mb-4" style={{ color: '#555555' }}>Something went wrong loading this page.</p>
-            <pre className="text-xs text-left p-4 rounded overflow-auto max-w-xl" style={{ backgroundColor: '#FEE2E2', color: '#7F1D1D' }}>
-              {this.state.error?.message || 'Unknown error'}
-              {'\n'}
-              {this.state.error?.stack?.slice(0, 500)}
-            </pre>
-            <button 
-              onClick={() => window.location.reload()} 
-              className="mt-4 px-4 py-2 rounded"
-              style={{ backgroundColor: '#0052FF', color: '#FFFFFF' }}
-            >
-              Reload Page
-            </button>
-          </div>
-        </div>
-      );
-    }
-    return this.props.children;
-  }
-}
-
-// Section-level error boundary for graceful degradation
-function SectionFallback({ title }: { title: string }) {
-  return (
-    <div className="p-6 rounded-lg text-center" style={{ backgroundColor: '#FEF2F2', border: '1px solid #FCA5A5' }}>
-      <p className="text-sm" style={{ color: '#DC2626' }}>⚠️ Failed to load: {title}</p>
-    </div>
-  );
-}
-
-// Brain server URL - Railway production
+// Brain server URL
 const BRAIN_URL = process.env.NEXT_PUBLIC_BRAIN_URL || 'https://b0b-brain-production.up.railway.app';
 
-interface SystemStatus {
-  system: {
-    status: string;
-    lastHeartbeat: string;
-    lastDiscussion: string;
-    totalDiscussions: number;
-  };
-  agents: Array<{
-    id: string;
-    name: string;
-    emoji: string;
-    role: string;
-    status: string;
-  }>;
-  chat: {
-    totalThreads: number;
-    totalMessages: number;
-  };
-}
+// ════════════════════════════════════════════════════════════════════════════
+// TYPES
+// ════════════════════════════════════════════════════════════════════════════
 
-interface Thread {
-  id: string;
-  topic: string;
-  timestamp: string;
-  messages: Array<{
-    agent: string;
-    emoji: string;
-    content: string;
-    timestamp: string;
-  }>;
-}
-
-interface Activity {
-  timestamp: string;
-  type: string;
-  agent?: string;
-  topic?: string;
-  action?: string;
-  side?: string;
-  amount?: number;
-  market?: string;
-}
-
-interface Discussion {
-  id: string;
-  title: string;
-  date: string;
-  status: string;
-  participants: string[];
-  messageCount: number;
-}
-
-interface GitRepo {
-  name: string;
-  fullName: string;
-  latestCommit?: {
-    sha: string;
-    message: string;
-    author: string;
-    date: string;
-  };
-  commits: Array<{
-    sha: string;
-    message: string;
-    author: string;
-    date: string;
-  }>;
-}
-
-// Trending token from DexScreener
-interface TrendingToken {
-  symbol: string;
-  name: string;
-  address: string;
-  price: number;
-  priceChange24h: number;
-  volume24h: number;
-  liquidity: number;
-  url: string;
-  source: string;
-  tier?: number;
-  boosted?: boolean;
-}
-
-// 🔥 Live Trader interface - Real money trading
 interface LiveTraderStatus {
   active: boolean;
   wallet: string;
   walletBalance: number;
-  chains: Record<string, {
-    chainId: number;
-    rpc: string;
-    native: string;
-    purpose: string;
-  }>;
   stats: {
     totalTrades: number;
     totalPnL: number;
@@ -196,13 +43,19 @@ interface LiveTraderStatus {
   };
   positions: Array<{
     symbol: string;
+    address: string;
     entryPrice: number;
+    currentPrice?: number;
     amount: number;
+    tokens: number;
     targetPrice: number;
     stopPrice: number;
     enteredAt: string;
     strategy: string;
     tier?: string;
+    exitPending?: boolean;
+    exitAttempts?: number;
+    peakPrice?: number;
   }>;
   config: {
     entryPercent: number;
@@ -210,14 +63,6 @@ interface LiveTraderStatus {
     mode: string;
   };
   dataSources: string[];
-  ecosystem: {
-    focus: string[];
-    tiers: {
-      tier1: string[];
-      tier2: string[];
-      tier3: string[];
-    };
-  };
   lastTick: string | null;
   lastScan: {
     bankr: number;
@@ -230,672 +75,582 @@ interface LiveTraderStatus {
   } | null;
 }
 
-export default function LabsPage() {
-  const [status, setStatus] = useState<SystemStatus | null>(null);
-  const [threads, setThreads] = useState<Thread[]>([]);
-  const [activities, setActivities] = useState<Activity[]>([]);
-  const [selectedDate, setSelectedDate] = useState<string>('');
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [brainOnline, setBrainOnline] = useState(false);
-  const [trendingTokens, setTrendingTokens] = useState<TrendingToken[]>([]);
-  const [liveTrader, setLiveTrader] = useState<LiveTraderStatus | null>(null);
-  const [discussions, setDiscussions] = useState<Discussion[]>([]);
-  const [gitRepos, setGitRepos] = useState<GitRepo[]>([]);
+interface TradeHistory {
+  timestamp: string;
+  type: 'entry' | 'exit';
+  symbol: string;
+  amount: number;
+  price: number;
+  pnl?: number;
+  exitReason?: string;
+  txHash?: string;
+}
 
-  // Fetch system status
-  useEffect(() => {
-    async function fetchStatus() {
-      try {
-        const res = await fetch(`${BRAIN_URL}/status`);
-        if (res.ok) {
-          const data = await res.json();
-          setStatus(data);
-          setBrainOnline(true);
+interface MoonbagPosition {
+  symbol: string;
+  address: string;
+  tokens: number;
+  entryPrice: number;
+  currentPrice: number;
+  peakPrice: number;
+  createdAt: string;
+  status: string;
+}
+
+interface ReentryWatch {
+  symbol: string;
+  address: string;
+  exitPrice: number;
+  reentryTrigger: number;
+  exitedAt: string;
+  exitReason: string;
+}
+
+interface TrendingToken {
+  symbol: string;
+  name: string;
+  address: string;
+  price: number;
+  priceChange24h: number;
+  volume24h: number;
+  liquidity: number;
+  url: string;
+  tier?: number;
+  boosted?: boolean;
+  bankrDeployed?: boolean;
+  clanker?: boolean;
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// MAIN COMPONENT
+// ════════════════════════════════════════════════════════════════════════════
+
+export default function LabsPage() {
+  const [brainOnline, setBrainOnline] = useState(false);
+  const [liveTrader, setLiveTrader] = useState<LiveTraderStatus | null>(null);
+  const [tradeHistory, setTradeHistory] = useState<TradeHistory[]>([]);
+  const [moonbags, setMoonbags] = useState<MoonbagPosition[]>([]);
+  const [reentryWatchlist, setReentryWatchlist] = useState<ReentryWatch[]>([]);
+  const [trendingTokens, setTrendingTokens] = useState<TrendingToken[]>([]);
+  const [nextScanIn, setNextScanIn] = useState<number>(0);
+  const [expandedSection, setExpandedSection] = useState<string | null>(null);
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // DATA FETCHING
+  // ══════════════════════════════════════════════════════════════════════════
+
+  const fetchAllData = useCallback(async () => {
+    try {
+      // Parallel fetch for speed
+      const [traderRes, historyRes, moonbagRes, watchlistRes, trendingRes] = await Promise.allSettled([
+        fetch(`${BRAIN_URL}/live-trader`),
+        fetch(`${BRAIN_URL}/live-trader/history?limit=20`),
+        fetch(`${BRAIN_URL}/live-trader/moonbags`),
+        fetch(`${BRAIN_URL}/live-trader/watchlist`),
+        fetch(`${BRAIN_URL}/tokens/trending`),
+      ]);
+
+      // Live trader status
+      if (traderRes.status === 'fulfilled' && traderRes.value.ok) {
+        const data = await traderRes.value.json();
+        setLiveTrader(data);
+        setBrainOnline(true);
+        
+        // Calculate next scan countdown
+        if (data.lastTick) {
+          const lastTick = new Date(data.lastTick).getTime();
+          const scanInterval = 2 * 60 * 1000; // 2 minutes
+          const nextScan = lastTick + scanInterval;
+          setNextScanIn(Math.max(0, Math.floor((nextScan - Date.now()) / 1000)));
         }
-      } catch (e) {
-        console.log('Brain server not reachable - running in offline mode');
+      } else {
         setBrainOnline(false);
       }
-    }
 
-    fetchStatus();
-    const interval = setInterval(fetchStatus, 30000); // Check every 30s
+      // Trade history
+      if (historyRes.status === 'fulfilled' && historyRes.value.ok) {
+        const data = await historyRes.value.json();
+        setTradeHistory(data.trades || []);
+      }
+
+      // Moonbags
+      if (moonbagRes.status === 'fulfilled' && moonbagRes.value.ok) {
+        const data = await moonbagRes.value.json();
+        setMoonbags(data.positions || []);
+      }
+
+      // Re-entry watchlist
+      if (watchlistRes.status === 'fulfilled' && watchlistRes.value.ok) {
+        const data = await watchlistRes.value.json();
+        setReentryWatchlist(data || []);
+      }
+
+      // Trending tokens
+      if (trendingRes.status === 'fulfilled' && trendingRes.value.ok) {
+        const data = await trendingRes.value.json();
+        setTrendingTokens(data.tokens || []);
+      }
+
+    } catch (e) {
+      console.log('Data fetch error:', e);
+      setBrainOnline(false);
+    }
+  }, []);
+
+  // Initial fetch + polling
+  useEffect(() => {
+    fetchAllData();
+    const interval = setInterval(fetchAllData, 15000); // 15s refresh
+    return () => clearInterval(interval);
+  }, [fetchAllData]);
+
+  // Countdown timer
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setNextScanIn(prev => Math.max(0, prev - 1));
+    }, 1000);
     return () => clearInterval(interval);
   }, []);
 
-  // Fetch trending tokens
-  useEffect(() => {
-    async function fetchTrending() {
-      try {
-        const res = await fetch(`${BRAIN_URL}/tokens/trending`);
-        if (res.ok) {
-          const data = await res.json();
-          setTrendingTokens(data.tokens || []);
-        }
-      } catch (e) {
-        console.log('Trending tokens not reachable');
-      }
-    }
+  // ══════════════════════════════════════════════════════════════════════════
+  // HELPERS
+  // ══════════════════════════════════════════════════════════════════════════
 
-    fetchTrending();
-    const interval = setInterval(fetchTrending, 30000); // Refresh every 30s
-    return () => clearInterval(interval);
-  }, []);
-
-  // 🔥 Fetch LIVE trader status (real money)
-  useEffect(() => {
-    async function fetchLiveTrader() {
-      try {
-        const res = await fetch(`${BRAIN_URL}/live-trader`);
-        if (res.ok) {
-          const data = await res.json();
-          setLiveTrader(data);
-        }
-      } catch (e) {
-        console.log('Live trader not reachable');
-      }
-    }
-
-    fetchLiveTrader();
-    const interval = setInterval(fetchLiveTrader, 30000); // Check every 30s (more frequent for live)
-    return () => clearInterval(interval);
-  }, []);
-
-  // Fetch chat archive
-  useEffect(() => {
-    async function fetchArchive() {
-      try {
-        const url = selectedDate 
-          ? `${BRAIN_URL}/archive?date=${selectedDate}`
-          : `${BRAIN_URL}/archive?limit=20`;
-        const res = await fetch(url);
-        if (res.ok) {
-          const data = await res.json();
-          setThreads(data.threads || []);
-        }
-      } catch (e) {
-        // Offline mode - load from static data
-        setThreads([]);
-      }
-      setLoading(false);
-    }
-
-    fetchArchive();
-  }, [selectedDate]);
-
-  // Fetch activity log
-  useEffect(() => {
-    async function fetchActivity() {
-      try {
-        const res = await fetch(`${BRAIN_URL}/activity?limit=50`);
-        if (res.ok) {
-          const data = await res.json();
-          setActivities(data.activities || []);
-        }
-      } catch {
-        setActivities([]);
-      }
-    }
-
-    fetchActivity();
-  }, []);
-
-  // Fetch discussions
-  useEffect(() => {
-    async function fetchDiscussions() {
-      try {
-        const res = await fetch(`${BRAIN_URL}/discussions`);
-        if (res.ok) {
-          const data = await res.json();
-          setDiscussions(data.discussions || []);
-        }
-      } catch {
-        setDiscussions([]);
-      }
-    }
-
-    fetchDiscussions();
-    const interval = setInterval(fetchDiscussions, 60000);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Fetch git activity
-  useEffect(() => {
-    async function fetchGit() {
-      try {
-        const res = await fetch(`${BRAIN_URL}/git`);
-        if (res.ok) {
-          const data = await res.json();
-          setGitRepos(data.repos || []);
-        }
-      } catch {
-        setGitRepos([]);
-      }
-    }
-
-    fetchGit();
-    const interval = setInterval(fetchGit, 60000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const formatTime = (ts: string) => {
-    return new Date(ts).toLocaleString();
+  const formatTime = (seconds: number) => {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return `${m}:${s.toString().padStart(2, '0')}`;
   };
 
+  const formatPrice = (price: number) => {
+    if (price < 0.0001) return price.toExponential(2);
+    if (price < 0.01) return price.toFixed(6);
+    if (price < 1) return price.toFixed(4);
+    return price.toFixed(2);
+  };
+
+  const formatTimeAgo = (timestamp: string) => {
+    const diff = Date.now() - new Date(timestamp).getTime();
+    const mins = Math.floor(diff / 60000);
+    if (mins < 1) return 'just now';
+    if (mins < 60) return `${mins}m ago`;
+    const hours = Math.floor(mins / 60);
+    if (hours < 24) return `${hours}h ago`;
+    return `${Math.floor(hours / 24)}d ago`;
+  };
+
+  const stuckPositions = liveTrader?.positions.filter(p => p.exitPending) || [];
+  const hasAlerts = stuckPositions.length > 0;
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // RENDER
+  // ══════════════════════════════════════════════════════════════════════════
+
   return (
-    <ErrorBoundary>
-    <main className="min-h-screen" style={{ backgroundColor: '#FFFDF9', color: '#1A1A1A' }}>
-      {/* Navigation - BRIGHT theme */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 h-16" style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid #E8E4DE', boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}>
-        <a href="/" className="flex items-center gap-3">
-          <div 
-            className="w-8 h-8 flex items-center justify-center font-bold text-xs"
-            style={{ backgroundColor: '#0052FF', color: '#FFFFFF' }}
-          >
+    <main className="min-h-screen" style={{ backgroundColor: '#0A0A0A', color: '#FFFFFF' }}>
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 md:px-8 h-14" 
+           style={{ backgroundColor: '#111111', borderBottom: '1px solid #222222' }}>
+        <a href="/" className="flex items-center gap-2">
+          <div className="w-7 h-7 flex items-center justify-center font-bold text-xs rounded"
+               style={{ backgroundColor: '#FF6B00', color: '#000000' }}>
             B0B
           </div>
+          <span className="text-sm font-medium" style={{ color: '#FF6B00' }}>LABS</span>
         </a>
         
-        <div className="hidden md:flex items-center gap-8 text-sm">
-          <span className="font-medium" style={{ color: '#0052FF' }}>LABS</span>
-          <a href="https://0type.b0b.dev" target="_blank" className="hover:opacity-70 transition-opacity" style={{ color: '#555555' }}>0TYPE</a>
-          <a href="https://d0t.b0b.dev" target="_blank" className="hover:opacity-70 transition-opacity" style={{ color: '#555555' }}>D0T</a>
-        </div>
-
         <div className="flex items-center gap-4">
+          {/* Alert indicator */}
+          {hasAlerts && (
+            <div className="flex items-center gap-2 px-3 py-1 rounded animate-pulse"
+                 style={{ backgroundColor: '#DC262620', border: '1px solid #DC2626' }}>
+              <span className="text-xs" style={{ color: '#DC2626' }}>⚠️ {stuckPositions.length} STUCK</span>
+            </div>
+          )}
+          
+          {/* Brain status */}
           <div className="flex items-center gap-2">
-            <span className={`w-2 h-2 rounded-full ${brainOnline ? 'bg-[#00AA66] animate-pulse' : 'bg-[#DC2626]'}`} />
-            <span className="text-xs font-mono" style={{ color: '#555555' }}>
-              {brainOnline ? 'ONLINE' : 'OFFLINE'}
+            <span className={`w-2 h-2 rounded-full ${brainOnline ? 'bg-[#00FF88] animate-pulse' : 'bg-[#DC2626]'}`} />
+            <span className="text-xs font-mono" style={{ color: brainOnline ? '#00FF88' : '#DC2626' }}>
+              {brainOnline ? 'LIVE' : 'OFFLINE'}
             </span>
           </div>
+
+          {/* Next scan countdown */}
+          {brainOnline && nextScanIn > 0 && (
+            <div className="text-xs font-mono px-2 py-1 rounded" style={{ backgroundColor: '#1A1A1A', color: '#888888' }}>
+              SCAN: {formatTime(nextScanIn)}
+            </div>
+          )}
         </div>
       </nav>
 
-      {/* Hero - BRIGHT */}
-      <section className="pt-32 pb-16 px-6 md:px-12 lg:px-24" style={{ backgroundColor: '#FFF8F0' }}>
-        <div className="max-w-6xl mx-auto">
-          <h1 className="text-4xl md:text-6xl font-medium mb-4" style={{ color: '#1A1A1A' }}>Labs</h1>
-          <p className="text-xl" style={{ color: '#555555' }}>
-            See inside the machine. System status, experiments, and research.
-          </p>
-        </div>
-      </section>
-
-      <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 pb-24">
-        {/* System Status - BRIGHT cards */}
-        <section className="mb-16">
-          <h2 className="text-xs font-mono mb-6 tracking-wider" style={{ color: '#555555' }}>SYSTEM STATUS</h2>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {/* Brain Status */}
-            <div className="p-6 rounded-lg shadow-sm" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E8E4DE' }}>
-              <p className="text-xs mb-2" style={{ color: '#555555' }}>BRAIN</p>
-              <p className={`text-2xl font-medium ${brainOnline ? 'text-[#00AA66]' : 'text-[#DC2626]'}`}>
-                {brainOnline ? 'ONLINE' : 'OFFLINE'}
-              </p>
-            </div>
-
-            {/* Agents */}
-            <div className="p-6 rounded-lg shadow-sm" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E8E4DE' }}>
-              <p className="text-xs mb-2" style={{ color: '#555555' }}>AGENTS</p>
-              <p className="text-2xl font-medium" style={{ color: '#1A1A1A' }}>3</p>
-            </div>
-
-            {/* Discussions */}
-            <div className="p-6 rounded-lg shadow-sm" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E8E4DE' }}>
-              <p className="text-xs mb-2" style={{ color: '#555555' }}>DISCUSSIONS</p>
-              <p className="text-2xl font-medium" style={{ color: '#1A1A1A' }}>
-                {discussions.length || status?.system?.totalDiscussions || 0}
-              </p>
-            </div>
-
-            {/* Messages */}
-            <div className="p-6 rounded-lg shadow-sm" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E8E4DE' }}>
-              <p className="text-xs mb-2" style={{ color: '#555555' }}>MESSAGES</p>
-              <p className="text-2xl font-medium" style={{ color: '#1A1A1A' }}>{status?.chat?.totalMessages || 0}</p>
-            </div>
-          </div>
-        </section>
-
-        {/* WALLET DASHBOARD — BRIGHT */}
-        <section className="mb-16">
-          <h2 className="text-xs font-mono mb-6 tracking-wider flex items-center gap-2">
-            <span style={{ color: '#7C3AED' }}>👻 PHANTOM WALLET</span>
-            <span style={{ color: '#555555' }}>— MULTI-CHAIN HOLDINGS</span>
-          </h2>
-          <ErrorBoundary fallback={<SectionFallback title="Wallet Dashboard" />}>
-            <WalletDashboard />
-          </ErrorBoundary>
-        </section>
-
-        {/* TEAM CHAT — LIVE DISCUSSIONS */}
-        <section className="mb-16">
-          <h2 className="text-xs font-mono mb-6 tracking-wider flex items-center gap-2">
-            <span style={{ color: '#0052FF' }}>💬 TEAM CHAT</span>
-            <span style={{ color: '#555555' }}>— LIVE IDEATION</span>
-          </h2>
-          <ErrorBoundary fallback={<SectionFallback title="Team Chat" />}>
-            <TeamChat maxMessages={15} />
-          </ErrorBoundary>
-        </section>
-
-        {/* Office Visualizer */}
-        <section className="mb-16">
-          <h2 className="text-xs font-mono mb-6 tracking-wider" style={{ color: '#555555' }}>THE OFFICE</h2>
-          <ErrorBoundary fallback={<SectionFallback title="Office Visualizer" />}>
-            <OfficeVisualizer />
-          </ErrorBoundary>
-        </section>
-
-        {/* CCTV Window - Live EarthCam Feeds */}
-        <section className="mb-16">
-          <h2 className="text-xs font-mono mb-6 tracking-wider flex items-center gap-2" style={{ color: '#555555' }}>
-            <span>📺 LIVE CCTV</span>
-            <span style={{ color: '#888888' }}>— EARTHCAM FEEDS</span>
-          </h2>
-          <ErrorBoundary fallback={<SectionFallback title="CCTV Feed" />}>
-            <CCTVWindow />
-          </ErrorBoundary>
-        </section>
-
-        {/* Team Discussions - BRIGHT */}
-        <section className="mb-16">
-          <h2 className="text-xs font-mono mb-6 tracking-wider" style={{ color: '#555555' }}>DISCUSSIONS</h2>
-          
-          {discussions.length === 0 ? (
-            <div className="p-8 text-center rounded-lg" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E8E4DE' }}>
-              <p style={{ color: '#555555' }}>No discussions logged yet</p>
-            </div>
-          ) : (
-            <div className="border-t rounded-lg overflow-hidden" style={{ borderColor: '#E8E4DE', backgroundColor: '#FFFFFF' }}>
-              {discussions.map((disc) => (
-                <a 
-                  key={disc.id}
-                  href={`${BRAIN_URL}/discussions/${disc.id}`}
-                  target="_blank"
-                  className="flex items-center justify-between p-6 border-b transition-colors hover:bg-gray-50"
-                  style={{ borderColor: '#E8E4DE' }}
-                >
-                  <div>
-                    <h3 className="font-medium mb-1" style={{ color: '#1A1A1A' }}>{disc.title}</h3>
-                    <p className="text-sm" style={{ color: '#555555' }}>
-                      {disc.participants?.join(', ')} · {disc.messageCount} messages
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <span className={`text-xs px-2 py-1 rounded ${
-                      disc.status === 'active' ? 'bg-[#00AA66]/20 text-[#00AA66]' :
-                      disc.status === 'planning' ? 'bg-[#F59E0B]/20 text-[#F59E0B]' :
-                      'bg-gray-100 text-gray-500'
-                    }`}>
-                      {disc.status?.toUpperCase()}
-                    </span>
-                    <span className="text-sm" style={{ color: '#555555' }}>{disc.date}</span>
-                  </div>
-                </a>
-              ))}
-            </div>
-          )}
-        </section>
-
-        {/* Git Activity - BRIGHT */}
-        <section className="mb-16">
-          <h2 className="text-xs font-mono mb-6 tracking-wider" style={{ color: '#555555' }}>GIT ACTIVITY</h2>
-          
-          {gitRepos.length === 0 ? (
-            <div className="p-8 text-center rounded-lg" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E8E4DE' }}>
-              <p style={{ color: '#555555' }}>No git activity fetched yet</p>
-            </div>
-          ) : (
-            <div className="grid md:grid-cols-2 gap-4">
-              {gitRepos.map((repo) => (
-                <a 
-                  key={repo.name}
-                  href={`https://github.com/${repo.fullName}`}
-                  target="_blank"
-                  className="p-6 transition-colors hover:bg-gray-50 rounded-lg"
-                  style={{ backgroundColor: '#FFFFFF', border: '1px solid #E8E4DE' }}
-                >
-                  <p className="font-mono font-medium mb-2" style={{ color: '#0052FF' }}>{repo.name}</p>
-                  {repo.latestCommit && (
-                    <>
-                      <p className="text-sm mb-1 truncate" style={{ color: '#1A1A1A' }}>{repo.latestCommit.message}</p>
-                      <p className="text-xs" style={{ color: '#555555' }}>
-                        {repo.latestCommit.author} · {repo.latestCommit.date ? new Date(repo.latestCommit.date).toLocaleDateString() : ''}
-                      </p>
-                    </>
-                  )}
-                </a>
-              ))}
-            </div>
-          )}
-        </section>
-
-        {/* 📈 TRENDING TOKENS — What we're watching */}
-        <section className="mb-16">
-          <h2 className="text-xs font-mono mb-6 tracking-wider flex items-center gap-2">
-            <span style={{ color: '#00AA66' }}>📈 TRENDING TOKENS</span>
-            <span style={{ color: '#555555' }}>— LIVE DISCOVERY FEED</span>
-          </h2>
-          
-          <div className="rounded-lg overflow-hidden" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E8E4DE' }}>
-            <div className="p-4 border-b" style={{ borderColor: '#E8E4DE', backgroundColor: '#F0FFF4' }}>
-              <p className="text-sm" style={{ color: '#555555' }}>
-                Real-time token discovery from DexScreener. Showing boosted & top volume tokens on Base.
-              </p>
-            </div>
-            
-            {trendingTokens.length > 0 ? (
-              <div className="divide-y" style={{ borderColor: '#E8E4DE' }}>
-                {trendingTokens.slice(0, 8).map((token, i) => (
-                  <a
-                    key={`${token.symbol}-${i}`}
-                    href={token.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors"
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="text-2xl">{token.boosted ? '🚀' : '🪙'}</span>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="font-bold" style={{ color: '#1A1A1A' }}>{token.symbol}</span>
-                          {token.boosted && (
-                            <span className="text-xs px-1.5 py-0.5 rounded" style={{ backgroundColor: '#FF6B0020', color: '#FF6B00' }}>BOOSTED</span>
-                          )}
-                          {token.tier && token.tier <= 2 && (
-                            <span className="text-xs px-1.5 py-0.5 rounded" style={{ backgroundColor: '#0052FF20', color: '#0052FF' }}>T{token.tier}</span>
-                          )}
-                        </div>
-                        <p className="text-xs" style={{ color: '#555555' }}>{token.name}</p>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-mono text-sm" style={{ color: '#1A1A1A' }}>
-                        ${token.price < 0.001 ? token.price.toExponential(2) : token.price.toFixed(6)}
-                      </p>
-                      <p className={`text-sm font-medium ${token.priceChange24h >= 0 ? 'text-[#00AA66]' : 'text-[#DC2626]'}`}>
-                        {token.priceChange24h >= 0 ? '+' : ''}{token.priceChange24h.toFixed(1)}%
-                      </p>
-                    </div>
+      <div className="pt-14">
+        {/* ════════════════════════════════════════════════════════════════════ */}
+        {/* HERO: LIVE TRADER DASHBOARD */}
+        {/* ════════════════════════════════════════════════════════════════════ */}
+        <section className="px-4 md:px-8 py-6" style={{ backgroundColor: '#111111' }}>
+          <div className="max-w-6xl mx-auto">
+            {/* Header row */}
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">🔥</span>
+                <div>
+                  <h1 className="text-xl font-bold" style={{ color: '#FF6B00' }}>LIVE TRADER</h1>
+                  <p className="text-xs" style={{ color: '#666666' }}>
+                    Ecosystem Sniper • {liveTrader?.config?.mode?.toUpperCase() || 'AGGRESSIVE'} MODE
+                  </p>
+                </div>
+              </div>
+              
+              {liveTrader && (
+                <div className="text-right">
+                  <p className="text-2xl font-mono font-bold" style={{ color: '#00FF88' }}>
+                    ${(liveTrader.walletBalance ?? 0).toFixed(2)}
+                  </p>
+                  <a href={`https://basescan.org/address/${liveTrader.wallet}`}
+                     target="_blank"
+                     className="text-xs font-mono hover:underline"
+                     style={{ color: '#666666' }}>
+                    {liveTrader.wallet?.slice(0, 8)}...{liveTrader.wallet?.slice(-6)}
                   </a>
-                ))}
-              </div>
-            ) : (
-              <div className="p-6 text-center" style={{ color: '#555555' }}>
-                <p>Loading trending tokens...</p>
-              </div>
-            )}
-            
-            <div className="p-3 border-t text-xs text-center" style={{ borderColor: '#E8E4DE', color: '#888888' }}>
-              Data from DexScreener • Refreshes every 30s
-            </div>
-          </div>
-        </section>
-
-        {/* 🔥 LIVE TRADER - BRIGHT */}
-        <section className="mb-16">
-          <h2 className="text-xs font-mono mb-6 tracking-wider flex items-center gap-2">
-            <span style={{ color: '#FF6B00' }}>🔥 LIVE TRADER</span>
-            <span style={{ color: '#555555' }}>— REAL MONEY • ECOSYSTEM FOCUS</span>
-          </h2>
-          
-          <div className="rounded-lg" style={{ backgroundColor: '#FFFFFF', border: '2px solid #FF6B0040' }}>
-            <div className="flex items-center justify-between p-6 border-b" style={{ borderColor: '#FF6B0040' }}>
-              <div>
-                <h3 className="font-medium text-lg" style={{ color: '#FF6B00' }}>Ecosystem Sniper</h3>
-                <p className="text-sm" style={{ color: '#555555' }}>
-                  Top 100 Base + Bankr/Clanker/Clawd/AI • Wallet-aware micro-trading
-                </p>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className={`w-2 h-2 rounded-full ${liveTrader?.active ? 'bg-[#FF6B00] animate-pulse' : 'bg-[#888888]'}`} />
-                <span className="text-xs font-mono" style={{ color: liveTrader?.active ? '#FF6B00' : '#888888' }}>
-                  {liveTrader?.active ? 'ACTIVE' : 'OFFLINE'}
-                </span>
-              </div>
+                </div>
+              )}
             </div>
 
             {liveTrader ? (
               <>
-                {/* Wallet Info */}
-                <div className="p-4 border-b" style={{ borderColor: '#E8E4DE', backgroundColor: '#FFF8F0' }}>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-xs mb-1" style={{ color: '#555555' }}>WALLET</p>
-                      <a 
-                        href={`https://basescan.org/address/${liveTrader.wallet}`}
-                        target="_blank"
-                        className="font-mono text-sm hover:underline"
-                        style={{ color: '#0052FF' }}
-                      >
-                        {liveTrader.wallet?.slice(0, 10)}...{liveTrader.wallet?.slice(-8)}
-                      </a>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-xs mb-1" style={{ color: '#555555' }}>BALANCE</p>
-                      <p className="font-mono text-lg" style={{ color: '#00AA66' }}>
-                        ${(liveTrader.walletBalance ?? 0).toFixed(2)}
-                      </p>
-                    </div>
+                {/* Stats row */}
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
+                  <div className="p-3 rounded-lg" style={{ backgroundColor: '#1A1A1A' }}>
+                    <p className="text-xs mb-1" style={{ color: '#666666' }}>TRADES</p>
+                    <p className="text-xl font-mono font-bold">{liveTrader.stats?.totalTrades ?? 0}</p>
                   </div>
-                  <div className="mt-2 flex items-center gap-2 flex-wrap">
-                    <span className="text-xs px-2 py-0.5 rounded" style={{ backgroundColor: '#0052FF20', color: '#0052FF' }}>
-                      BASE
-                    </span>
-                    <span className="text-xs px-2 py-0.5 rounded" style={{ backgroundColor: '#FF6B0020', color: '#FF6B00' }}>
-                      Entry: {((liveTrader.config?.entryPercent ?? 0.2) * 100).toFixed(0)}%
-                    </span>
-                    <span className="text-xs px-2 py-0.5 rounded" style={{ backgroundColor: '#DC262620', color: '#DC2626' }}>
-                      {liveTrader.config?.mode?.toUpperCase() ?? 'AGGRESSIVE'}
-                    </span>
-                    <span className="text-xs px-2 py-0.5 rounded" style={{ backgroundColor: '#00AA6620', color: '#00AA66' }}>
-                      No Limits
-                    </span>
-                  </div>
-                </div>
-
-                {/* Last Scan Stats */}
-                {liveTrader.lastScan && (
-                  <div className="p-4 border-b" style={{ borderColor: '#E8E4DE' }}>
-                    <p className="text-xs mb-2" style={{ color: '#FF6B00' }}>LAST SCAN — Data Sources</p>
-                    <div className="grid grid-cols-3 md:grid-cols-7 gap-2 text-xs">
-                      <div className="p-2 rounded text-center" style={{ backgroundColor: '#FFF8F0' }}>
-                        <p style={{ color: '#555555' }}>🏦 Bankr</p>
-                        <p className="font-mono font-medium" style={{ color: '#FF6B00' }}>{liveTrader.lastScan.bankr}</p>
-                      </div>
-                      <div className="p-2 rounded text-center" style={{ backgroundColor: '#FFF0F0' }}>
-                        <p style={{ color: '#555555' }}>🤖 Clanker</p>
-                        <p className="font-mono font-medium" style={{ color: '#DC2626' }}>{liveTrader.lastScan.clanker}</p>
-                      </div>
-                      <div className="p-2 rounded text-center" style={{ backgroundColor: '#F0F7FF' }}>
-                        <p style={{ color: '#555555' }}>📊 DexScr</p>
-                        <p className="font-mono font-medium" style={{ color: '#0052FF' }}>{liveTrader.lastScan.dexscreener || 0}</p>
-                      </div>
-                      <div className="p-2 rounded text-center" style={{ backgroundColor: '#FEFCE8' }}>
-                        <p style={{ color: '#555555' }}>🚀 Boost</p>
-                        <p className="font-mono font-medium" style={{ color: '#CA8A04' }}>{liveTrader.lastScan.boosted || 0}</p>
-                      </div>
-                      <div className="p-2 rounded text-center" style={{ backgroundColor: '#F0FFF4' }}>
-                        <p style={{ color: '#555555' }}>🧠 Clawd</p>
-                        <p className="font-mono font-medium" style={{ color: '#00AA66' }}>{liveTrader.lastScan.clawd}</p>
-                      </div>
-                      <div className="p-2 rounded text-center" style={{ backgroundColor: '#F5F0FF' }}>
-                        <p style={{ color: '#555555' }}>🤖 AI</p>
-                        <p className="font-mono font-medium" style={{ color: '#8B5CF6' }}>{liveTrader.lastScan.ai}</p>
-                      </div>
-                      <div className="p-2 rounded text-center" style={{ backgroundColor: '#FFFBEB' }}>
-                        <p style={{ color: '#555555' }}>📦 Total</p>
-                        <p className="font-mono font-medium" style={{ color: '#F59E0B' }}>{liveTrader.lastScan.candidates}</p>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
-                  <div className="p-4 rounded-lg" style={{ backgroundColor: '#FFF8F0' }}>
-                    <p className="text-xs mb-1" style={{ color: '#555555' }}>Trades</p>
-                    <p className="text-lg font-mono" style={{ color: '#1A1A1A' }}>{liveTrader.stats?.totalTrades ?? 0}</p>
-                  </div>
-                  <div className="p-4 rounded-lg" style={{ backgroundColor: '#FFF8F0' }}>
-                    <p className="text-xs mb-1" style={{ color: '#555555' }}>P&L</p>
-                    <p className={`text-lg font-mono ${(liveTrader.stats?.totalPnL ?? 0) >= 0 ? 'text-[#00AA66]' : 'text-[#DC2626]'}`}>
+                  <div className="p-3 rounded-lg" style={{ backgroundColor: '#1A1A1A' }}>
+                    <p className="text-xs mb-1" style={{ color: '#666666' }}>P&L</p>
+                    <p className={`text-xl font-mono font-bold ${(liveTrader.stats?.totalPnL ?? 0) >= 0 ? 'text-[#00FF88]' : 'text-[#FF4444]'}`}>
                       {(liveTrader.stats?.totalPnL ?? 0) >= 0 ? '+' : ''}${(liveTrader.stats?.totalPnL ?? 0).toFixed(2)}
                     </p>
                   </div>
-                  <div className="p-4 rounded-lg" style={{ backgroundColor: '#FFF8F0' }}>
-                    <p className="text-xs mb-1" style={{ color: '#555555' }}>Win Rate</p>
-                    <p className="text-lg font-mono" style={{ color: '#1A1A1A' }}>{((liveTrader.stats?.winRate ?? 0) * 100).toFixed(1)}%</p>
+                  <div className="p-3 rounded-lg" style={{ backgroundColor: '#1A1A1A' }}>
+                    <p className="text-xs mb-1" style={{ color: '#666666' }}>WIN RATE</p>
+                    <p className="text-xl font-mono font-bold">{((liveTrader.stats?.winRate ?? 0) * 100).toFixed(0)}%</p>
                   </div>
-                  <div className="p-4 rounded-lg" style={{ backgroundColor: '#FFF8F0' }}>
-                    <p className="text-xs mb-1" style={{ color: '#555555' }}>Daily Vol</p>
-                    <p className="text-lg font-mono" style={{ color: '#1A1A1A' }}>${(liveTrader.stats?.dailyVolume ?? 0).toFixed(0)}</p>
+                  <div className="p-3 rounded-lg" style={{ backgroundColor: '#1A1A1A' }}>
+                    <p className="text-xs mb-1" style={{ color: '#666666' }}>POSITIONS</p>
+                    <p className="text-xl font-mono font-bold">{liveTrader.positions?.length ?? 0}/{liveTrader.config?.maxPositions ?? 3}</p>
+                  </div>
+                  <div className="p-3 rounded-lg" style={{ backgroundColor: '#1A1A1A' }}>
+                    <p className="text-xs mb-1" style={{ color: '#666666' }}>VOLUME</p>
+                    <p className="text-xl font-mono font-bold">${(liveTrader.stats?.dailyVolume ?? 0).toFixed(0)}</p>
                   </div>
                 </div>
 
-                {/* Strategy Details - Updated for Ecosystem Focus */}
-                <div className="p-4 border-t" style={{ borderColor: '#E8E4DE' }}>
-                  <p className="text-xs mb-3" style={{ color: '#FF6B00' }}>STRATEGY: ECOSYSTEM SNIPER</p>
-                  
-                  {/* Tier System */}
-                  <div className="mb-4">
-                    <p className="text-xs mb-2" style={{ color: '#555555' }}>SCORING TIERS</p>
-                    <div className="flex flex-wrap gap-2">
-                      <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: '#FF6B0030', color: '#FF6B00' }}>
-                        T1 (+50): Bankr, Clawd
-                      </span>
-                      <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: '#8B5CF630', color: '#8B5CF6' }}>
-                        T2 (+40): AI tokens
-                      </span>
-                      <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: '#0052FF30', color: '#0052FF' }}>
-                        T3 (+30): Blue chips (VIRTUAL, AERO, etc)
-                      </span>
-                    </div>
+                {/* Last scan sources */}
+                {liveTrader.lastScan && (
+                  <div className="flex flex-wrap items-center gap-2 mb-6">
+                    <span className="text-xs" style={{ color: '#666666' }}>LAST SCAN:</span>
+                    <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: '#FF6B0020', color: '#FF6B00' }}>
+                      🏦 Bankr: {liveTrader.lastScan.bankr}
+                    </span>
+                    <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: '#DC262620', color: '#FF6666' }}>
+                      🤖 Clanker: {liveTrader.lastScan.clanker}
+                    </span>
+                    <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: '#0052FF20', color: '#6699FF' }}>
+                      📊 DexScr: {liveTrader.lastScan.dexscreener || 0}
+                    </span>
+                    <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: '#00FF8820', color: '#00FF88' }}>
+                      📦 Total: {liveTrader.lastScan.candidates}
+                    </span>
                   </div>
+                )}
 
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
-                    <div>
-                      <span style={{ color: '#555555' }}>Entry: </span>
-                      <span className="font-mono" style={{ color: '#1A1A1A' }}>
-                        {((liveTrader.config?.entryPercent ?? 0.2) * 100).toFixed(0)}% of balance
-                      </span>
-                    </div>
-                    <div>
-                      <span style={{ color: '#555555' }}>Mode: </span>
-                      <span className="font-mono" style={{ color: '#DC2626' }}>
-                        {liveTrader.config?.mode?.toUpperCase() ?? 'AGGRESSIVE'}
-                      </span>
-                    </div>
-                    <div>
-                      <span style={{ color: '#555555' }}>Exit: </span>
-                      <span className="font-mono" style={{ color: '#1A1A1A' }}>90% @ 2x</span>
-                    </div>
-                    <div>
-                      <span style={{ color: '#555555' }}>Moonbag: </span>
-                      <span className="font-mono" style={{ color: '#1A1A1A' }}>10% holds</span>
-                    </div>
-                    <div>
-                      <span style={{ color: '#555555' }}>Max Positions: </span>
-                      <span className="font-mono" style={{ color: '#0052FF' }}>{liveTrader.config?.maxPositions ?? 3}</span>
-                    </div>
-                    <div>
-                      <span style={{ color: '#555555' }}>Stop: </span>
-                      <span className="font-mono text-[#DC2626]">-25%</span>
-                    </div>
-                  </div>
-                  
-                  {/* Data Sources */}
-                  {liveTrader.dataSources && liveTrader.dataSources.length > 0 && (
-                    <div className="mt-4">
-                      <p className="text-xs mb-2" style={{ color: '#555555' }}>DATA SOURCES</p>
-                      <div className="flex flex-wrap gap-2">
-                        {liveTrader.dataSources.map((source: string, i: number) => (
-                          <span key={i} className="text-xs px-2 py-1 rounded" style={{ backgroundColor: '#F0F7FF', color: '#0052FF' }}>
-                            {source}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
+                {/* Open positions */}
                 {liveTrader.positions.length > 0 && (
-                  <div className="p-4 border-t" style={{ borderColor: '#E8E4DE' }}>
-                    <p className="text-xs mb-3" style={{ color: '#FF6B00' }}>OPEN POSITIONS ({liveTrader.positions.length})</p>
-                    <div className="space-y-2">
-                      {liveTrader.positions.map((pos, i) => (
-                        <div key={i} className="flex items-center justify-between text-sm p-2 rounded" style={{ backgroundColor: '#FFFDF9' }}>
-                          <span className="font-mono font-medium" style={{ color: '#FF6B00' }}>
-                            {pos.symbol}
-                          </span>
-                          <span style={{ color: '#555555' }}>
-                            ${pos.amount} @ ${pos.entryPrice.toFixed(6)}
-                          </span>
-                          <span className="font-mono text-xs" style={{ color: '#00AA66' }}>
-                            → ${pos.targetPrice.toFixed(6)}
-                          </span>
-                        </div>
-                      ))}
+                  <div className="rounded-lg overflow-hidden" style={{ backgroundColor: '#1A1A1A', border: '1px solid #333333' }}>
+                    <div className="px-4 py-2 border-b" style={{ borderColor: '#333333' }}>
+                      <span className="text-xs font-bold" style={{ color: '#FF6B00' }}>OPEN POSITIONS</span>
+                    </div>
+                    <div className="divide-y" style={{ borderColor: '#222222' }}>
+                      {liveTrader.positions.map((pos, i) => {
+                        const pnlPercent = pos.currentPrice 
+                          ? ((pos.currentPrice - pos.entryPrice) / pos.entryPrice) * 100 
+                          : 0;
+                        const isStuck = pos.exitPending;
+                        
+                        return (
+                          <div key={i} className={`flex items-center justify-between p-3 ${isStuck ? 'bg-[#DC262610]' : ''}`}>
+                            <div className="flex items-center gap-3">
+                              {isStuck && <span className="text-lg animate-pulse">⚠️</span>}
+                              <div>
+                                <div className="flex items-center gap-2">
+                                  <span className="font-mono font-bold" style={{ color: '#FF6B00' }}>{pos.symbol}</span>
+                                  {pos.tier && (
+                                    <span className="text-xs px-1 rounded" style={{ backgroundColor: '#0052FF30', color: '#6699FF' }}>
+                                      T{pos.tier}
+                                    </span>
+                                  )}
+                                  {isStuck && (
+                                    <span className="text-xs px-1 rounded" style={{ backgroundColor: '#DC262630', color: '#FF6666' }}>
+                                      EXIT PENDING ({pos.exitAttempts})
+                                    </span>
+                                  )}
+                                </div>
+                                <p className="text-xs" style={{ color: '#666666' }}>
+                                  ${pos.amount.toFixed(2)} @ ${formatPrice(pos.entryPrice)} • {formatTimeAgo(pos.enteredAt)}
+                                </p>
+                              </div>
+                            </div>
+                            <div className="text-right">
+                              <p className={`font-mono font-bold ${pnlPercent >= 0 ? 'text-[#00FF88]' : 'text-[#FF4444]'}`}>
+                                {pnlPercent >= 0 ? '+' : ''}{pnlPercent.toFixed(1)}%
+                              </p>
+                              <p className="text-xs" style={{ color: '#666666' }}>
+                                Peak: {pos.peakPrice ? `+${(((pos.peakPrice - pos.entryPrice) / pos.entryPrice) * 100).toFixed(0)}%` : '-'}
+                              </p>
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 )}
 
-                {liveTrader.lastTick && (
-                  <div className="p-3 border-t text-xs" style={{ borderColor: '#E8E4DE', color: '#555555' }}>
-                    Last scan: {new Date(liveTrader.lastTick).toLocaleString()}
-                  </div>
-                )}
+                {/* Config badges */}
+                <div className="flex flex-wrap items-center gap-2 mt-4">
+                  <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: '#FF6B0020', color: '#FF6B00' }}>
+                    Entry: {((liveTrader.config?.entryPercent ?? 0.2) * 100).toFixed(0)}%
+                  </span>
+                  <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: '#00FF8820', color: '#00FF88' }}>
+                    Exit: 90% @ 2x
+                  </span>
+                  <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: '#8B5CF620', color: '#A78BFA' }}>
+                    Moonbag: 10%
+                  </span>
+                  <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: '#DC262620', color: '#FF6666' }}>
+                    Stop: -25%
+                  </span>
+                  {liveTrader.dataSources?.map((src, i) => (
+                    <span key={i} className="text-xs px-2 py-1 rounded" style={{ backgroundColor: '#33333380', color: '#888888' }}>
+                      {src}
+                    </span>
+                  ))}
+                </div>
               </>
             ) : (
-              <div className="p-6" style={{ color: '#555555' }}>
-                <p>Connecting to live trader...</p>
-                <p className="text-xs mt-2">Wallet: {process.env.NEXT_PUBLIC_TRADING_WALLET?.slice(0, 10)}...{process.env.NEXT_PUBLIC_TRADING_WALLET?.slice(-8) || 'Loading...'}</p>
+              <div className="text-center py-12" style={{ color: '#666666' }}>
+                <p className="text-lg mb-2">Connecting to Live Trader...</p>
+                <p className="text-sm">Make sure the brain server is running</p>
               </div>
             )}
           </div>
         </section>
 
-        {/* Experiments - BRIGHT */}
-        <section className="mb-16">
-          <h2 className="text-xs font-mono mb-6 tracking-wider" style={{ color: '#555555' }}>EXPERIMENTS</h2>
-          
-          <div className="border-t rounded-lg overflow-hidden" style={{ borderColor: '#E8E4DE', backgroundColor: '#FFFFFF' }}>
-            {[
-              { name: 'Autonomous Mode', status: 'WIP', desc: 'Agent discussions without human prompting', color: '#F59E0B' },
-              { name: 'Research Library', status: 'ALPHA', desc: 'Due diligence checklists and evaluations', color: '#0052FF' },
-              { name: 'Ghost Mode', status: 'LOCAL', desc: 'Autonomous computer control', color: '#888888' },
-              { name: 'Revenue Sharing', status: 'BLOCKED', desc: 'Researching 0xSplits, Superfluid alternatives', color: '#DC2626' },
-            ].map((exp) => (
-              <div 
-                key={exp.name}
-                className="flex items-center justify-between p-6 border-b"
-                style={{ borderColor: '#E8E4DE' }}
-              >
-                <div>
-                  <h3 className="font-medium mb-1" style={{ color: '#1A1A1A' }}>{exp.name}</h3>
-                  <p className="text-sm" style={{ color: '#555555' }}>{exp.desc}</p>
-                </div>
-                <span 
-                  className="text-xs px-2 py-1 rounded"
-                  style={{ backgroundColor: `${exp.color}20`, color: exp.color }}
+        {/* ════════════════════════════════════════════════════════════════════ */}
+        {/* TRADING ACTIVITY */}
+        {/* ════════════════════════════════════════════════════════════════════ */}
+        <section className="px-4 md:px-8 py-6">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-4">
+              
+              {/* Trade History */}
+              <div className="rounded-lg overflow-hidden" style={{ backgroundColor: '#111111', border: '1px solid #222222' }}>
+                <button 
+                  onClick={() => setExpandedSection(expandedSection === 'history' ? null : 'history')}
+                  className="w-full flex items-center justify-between px-4 py-3 border-b"
+                  style={{ borderColor: '#222222' }}
                 >
-                  {exp.status}
-                </span>
+                  <span className="text-xs font-bold" style={{ color: '#00FF88' }}>📜 TRADE HISTORY</span>
+                  <span className="text-xs" style={{ color: '#666666' }}>{tradeHistory.length}</span>
+                </button>
+                <div className={`divide-y overflow-y-auto ${expandedSection === 'history' ? 'max-h-96' : 'max-h-48'}`} style={{ borderColor: '#222222' }}>
+                  {tradeHistory.length > 0 ? tradeHistory.slice(0, expandedSection === 'history' ? 20 : 5).map((trade, i) => (
+                    <div key={i} className="flex items-center justify-between p-3">
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className={trade.type === 'entry' ? 'text-[#00FF88]' : 'text-[#FF6B00]'}>
+                            {trade.type === 'entry' ? '🟢' : '🔴'}
+                          </span>
+                          <span className="font-mono text-sm font-bold">{trade.symbol}</span>
+                        </div>
+                        <p className="text-xs" style={{ color: '#666666' }}>
+                          {formatTimeAgo(trade.timestamp)} {trade.exitReason && `• ${trade.exitReason}`}
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <p className="font-mono text-sm">${trade.amount.toFixed(2)}</p>
+                        {trade.pnl !== undefined && (
+                          <p className={`text-xs font-mono ${trade.pnl >= 0 ? 'text-[#00FF88]' : 'text-[#FF4444]'}`}>
+                            {trade.pnl >= 0 ? '+' : ''}${trade.pnl.toFixed(2)}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  )) : (
+                    <div className="p-4 text-center text-xs" style={{ color: '#666666' }}>No trades yet</div>
+                  )}
+                </div>
               </div>
-            ))}
+
+              {/* Moonbags */}
+              <div className="rounded-lg overflow-hidden" style={{ backgroundColor: '#111111', border: '1px solid #222222' }}>
+                <button 
+                  onClick={() => setExpandedSection(expandedSection === 'moonbags' ? null : 'moonbags')}
+                  className="w-full flex items-center justify-between px-4 py-3 border-b"
+                  style={{ borderColor: '#222222' }}
+                >
+                  <span className="text-xs font-bold" style={{ color: '#A78BFA' }}>🌙 MOONBAGS</span>
+                  <span className="text-xs" style={{ color: '#666666' }}>{moonbags.length}</span>
+                </button>
+                <div className={`divide-y overflow-y-auto ${expandedSection === 'moonbags' ? 'max-h-96' : 'max-h-48'}`} style={{ borderColor: '#222222' }}>
+                  {moonbags.length > 0 ? moonbags.map((bag, i) => {
+                    const multiplier = bag.currentPrice / bag.entryPrice;
+                    return (
+                      <div key={i} className="flex items-center justify-between p-3">
+                        <div>
+                          <span className="font-mono text-sm font-bold" style={{ color: '#A78BFA' }}>{bag.symbol}</span>
+                          <p className="text-xs" style={{ color: '#666666' }}>
+                            {bag.tokens.toFixed(2)} tokens
+                          </p>
+                        </div>
+                        <div className="text-right">
+                          <p className={`font-mono text-sm font-bold ${multiplier >= 1 ? 'text-[#00FF88]' : 'text-[#FF4444]'}`}>
+                            {multiplier.toFixed(1)}x
+                          </p>
+                          <p className="text-xs" style={{ color: '#666666' }}>
+                            Peak: {(bag.peakPrice / bag.entryPrice).toFixed(1)}x
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  }) : (
+                    <div className="p-4 text-center text-xs" style={{ color: '#666666' }}>No moonbags yet</div>
+                  )}
+                </div>
+              </div>
+
+              {/* Re-entry Watchlist */}
+              <div className="rounded-lg overflow-hidden" style={{ backgroundColor: '#111111', border: '1px solid #222222' }}>
+                <button 
+                  onClick={() => setExpandedSection(expandedSection === 'watchlist' ? null : 'watchlist')}
+                  className="w-full flex items-center justify-between px-4 py-3 border-b"
+                  style={{ borderColor: '#222222' }}
+                >
+                  <span className="text-xs font-bold" style={{ color: '#6699FF' }}>👀 RE-ENTRY WATCH</span>
+                  <span className="text-xs" style={{ color: '#666666' }}>{reentryWatchlist.length}</span>
+                </button>
+                <div className={`divide-y overflow-y-auto ${expandedSection === 'watchlist' ? 'max-h-96' : 'max-h-48'}`} style={{ borderColor: '#222222' }}>
+                  {reentryWatchlist.length > 0 ? reentryWatchlist.map((watch, i) => (
+                    <div key={i} className="flex items-center justify-between p-3">
+                      <div>
+                        <span className="font-mono text-sm font-bold" style={{ color: '#6699FF' }}>{watch.symbol}</span>
+                        <p className="text-xs" style={{ color: '#666666' }}>
+                          Exit: ${formatPrice(watch.exitPrice)} • {watch.exitReason}
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-xs" style={{ color: '#00FF88' }}>
+                          Trigger: ${formatPrice(watch.reentryTrigger)}
+                        </p>
+                        <p className="text-xs" style={{ color: '#666666' }}>
+                          {formatTimeAgo(watch.exitedAt)}
+                        </p>
+                      </div>
+                    </div>
+                  )) : (
+                    <div className="p-4 text-center text-xs" style={{ color: '#666666' }}>No active watches</div>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* Footer - BRIGHT */}
-        <footer className="pt-16 border-t text-center" style={{ borderColor: '#E8E4DE' }}>
-          <p className="text-sm" style={{ color: '#555555' }}>
-            B0B LABS — Glass box, not black box
+        {/* ════════════════════════════════════════════════════════════════════ */}
+        {/* MARKET SCANNER */}
+        {/* ════════════════════════════════════════════════════════════════════ */}
+        <section className="px-4 md:px-8 py-6">
+          <div className="max-w-6xl mx-auto">
+            <div className="rounded-lg overflow-hidden" style={{ backgroundColor: '#111111', border: '1px solid #222222' }}>
+              <div className="flex items-center justify-between px-4 py-3 border-b" style={{ borderColor: '#222222' }}>
+                <span className="text-xs font-bold" style={{ color: '#00FF88' }}>📈 MARKET SCANNER</span>
+                <span className="text-xs" style={{ color: '#666666' }}>Live from DexScreener + Bankr</span>
+              </div>
+              
+              {trendingTokens.length > 0 ? (
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-px" style={{ backgroundColor: '#222222' }}>
+                  {trendingTokens.slice(0, 8).map((token, i) => (
+                    <a
+                      key={`${token.symbol}-${i}`}
+                      href={token.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between p-3 hover:bg-[#1A1A1A] transition-colors"
+                      style={{ backgroundColor: '#111111' }}
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg">
+                          {token.bankrDeployed ? '🏦' : token.boosted ? '🚀' : token.clanker ? '🤖' : '🪙'}
+                        </span>
+                        <div>
+                          <div className="flex items-center gap-1">
+                            <span className="font-mono font-bold text-sm">{token.symbol}</span>
+                            {token.tier && token.tier <= 2 && (
+                              <span className="text-xs px-1 rounded" style={{ backgroundColor: '#0052FF30', color: '#6699FF' }}>
+                                T{token.tier}
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-xs truncate max-w-[100px]" style={{ color: '#666666' }}>{token.name}</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <p className="font-mono text-xs">${formatPrice(token.price)}</p>
+                        <p className={`text-xs font-mono ${token.priceChange24h >= 0 ? 'text-[#00FF88]' : 'text-[#FF4444]'}`}>
+                          {token.priceChange24h >= 0 ? '+' : ''}{token.priceChange24h.toFixed(0)}%
+                        </p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              ) : (
+                <div className="p-6 text-center text-xs" style={{ color: '#666666' }}>
+                  Loading market data...
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* ════════════════════════════════════════════════════════════════════ */}
+        {/* WALLET & TEAM */}
+        {/* ════════════════════════════════════════════════════════════════════ */}
+        <section className="px-4 md:px-8 py-6">
+          <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-6">
+            
+            {/* Wallet Dashboard */}
+            <div>
+              <h2 className="text-xs font-bold mb-4" style={{ color: '#666666' }}>👛 WALLET HOLDINGS</h2>
+              <WalletDashboard />
+            </div>
+
+            {/* Team Chat */}
+            <div>
+              <h2 className="text-xs font-bold mb-4" style={{ color: '#666666' }}>💬 TEAM CHAT</h2>
+              <TeamChat maxMessages={8} />
+            </div>
+          </div>
+        </section>
+
+        {/* ════════════════════════════════════════════════════════════════════ */}
+        {/* FOOTER */}
+        {/* ════════════════════════════════════════════════════════════════════ */}
+        <footer className="px-4 md:px-8 py-8 text-center border-t" style={{ borderColor: '#222222' }}>
+          <p className="text-xs" style={{ color: '#444444' }}>
+            B0B LABS — Glass box, not black box • {new Date().toLocaleDateString()}
           </p>
         </footer>
       </div>
     </main>
-    </ErrorBoundary>
   );
 }
