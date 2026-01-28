@@ -199,6 +199,7 @@ export default function D0TFinance() {
           </Link>
           
           <div className="hidden md:flex items-center gap-8 text-sm">
+            <Link href="/dashboard" className="text-[#00CCFF] hover:text-white transition-colors font-medium">Dashboard</Link>
             <a href="#agents" className="text-[#888] hover:text-white transition-colors">Agents</a>
             <a href="#terminal" className="text-[#888] hover:text-white transition-colors">Terminal</a>
             <a href="#portfolio" className="text-[#888] hover:text-white transition-colors">Portfolio</a>
