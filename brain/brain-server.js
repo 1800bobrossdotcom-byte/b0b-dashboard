@@ -16,6 +16,14 @@ const cors = require('cors');
 const fs = require('fs').promises;
 const path = require('path');
 
+// For Polymarket crawler
+let axios;
+try {
+  axios = require('axios');
+} catch {
+  console.log('axios not available - Polymarket crawler disabled');
+}
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -498,6 +506,77 @@ app.post('/paper-trader/control', async (req, res) => {
 });
 
 // =============================================================================
+// POLYMARKET CRAWLER
+// =============================================================================
+
+async function crawlPolymarket() {
+  if (!axios) return;
+  
+  console.log(`[${new Date().toISOString()}] 📊 Crawling Polymarket...`);
+  
+  const data = {
+    crawler: 'polymarket',
+    timestamp: new Date().toISOString(),
+    data: {
+      markets: [],
+      trending: [],
+      volume24h: 0,
+      fetchedAt: new Date().toISOString()
+    }
+  };
+
+  try {
+    const res = await axios.get('https://gamma-api.polymarket.com/markets', {
+      params: {
+        limit: 20,
+        active: true,
+        closed: false,
+        order: 'volume24hr',
+        ascending: false
+      },
+      timeout: 10000
+    });
+    
+    data.data.markets = res.data.map(m => ({
+      id: m.id,
+      question: m.question,
+      slug: m.slug,
+      volume24h: m.volume24hr || m.volume || 0,
+      liquidity: m.liquidity || 0,
+      endDate: m.endDate || m.end_date_iso,
+      outcomePrices: m.outcomePrices || m.outcomes_prices || null
+    }));
+    
+    data.data.volume24h = data.data.markets.reduce((sum, m) => sum + (m.volume24h || 0), 0);
+    data.data.trending = data.data.markets.slice(0, 5).map(m => ({
+      question: m.question?.slice(0, 80),
+      volume: m.volume24h
+    }));
+    
+    console.log(`   Found ${data.data.markets.length} markets, $${Math.round(data.data.volume24h).toLocaleString()} 24h volume`);
+    
+    // Save to data directory
+    await fs.mkdir(DATA_DIR, { recursive: true });
+    await fs.writeFile(POLYMARKET_DATA, JSON.stringify(data, null, 2));
+    
+    await logActivity({ type: 'crawler', action: 'polymarket', markets: data.data.markets.length });
+    
+  } catch (err) {
+    console.error(`   ❌ Polymarket crawler error:`, err.message);
+  }
+}
+
+// Polymarket data endpoint
+app.get('/polymarket', async (req, res) => {
+  try {
+    const data = await fs.readFile(POLYMARKET_DATA, 'utf8');
+    res.json(JSON.parse(data));
+  } catch {
+    res.json({ message: 'No Polymarket data yet', data: { markets: [] } });
+  }
+});
+
+// =============================================================================
 // SCHEDULED TASKS (would be triggered by Railway cron)
 // =============================================================================
 
@@ -541,6 +620,13 @@ app.listen(PORT, async () => {
   
   await logActivity({ type: 'paper_trader', action: 'auto_started' });
   console.log('  📜 Paper Trader: RUNNING');
+  
+  // Auto-start Polymarket crawler
+  if (axios) {
+    await crawlPolymarket();
+    setInterval(crawlPolymarket, 5 * 60 * 1000);
+    console.log('  📊 Polymarket Crawler: RUNNING');
+  }
 });
 
 module.exports = app;

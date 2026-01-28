@@ -15,8 +15,8 @@
 
 import { useEffect, useState } from 'react';
 
-// Brain server URL (Railway or local)
-const BRAIN_URL = process.env.NEXT_PUBLIC_BRAIN_URL || 'http://localhost:3001';
+// Brain server URL - Railway production
+const BRAIN_URL = process.env.NEXT_PUBLIC_BRAIN_URL || 'https://b0b-brain-production.up.railway.app';
 
 interface SystemStatus {
   system: {
@@ -55,6 +55,35 @@ interface Activity {
   type: string;
   agent?: string;
   topic?: string;
+  action?: string;
+  side?: string;
+  amount?: number;
+  market?: string;
+}
+
+interface PaperTraderStatus {
+  running: boolean;
+  portfolio: {
+    startingCapital: number;
+    currentValue: number;
+    invested: number;
+    available: number;
+    totalPnL: number;
+    winRate: number;
+  };
+  positions: Array<{
+    id: string;
+    question: string;
+    side: string;
+    invested: number;
+    entryPrice: number;
+  }>;
+  stats: {
+    totalTrades: number;
+    wins: number;
+    losses: number;
+    startDate: string;
+  };
 }
 
 export default function LabsPage() {
@@ -65,6 +94,7 @@ export default function LabsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [brainOnline, setBrainOnline] = useState(false);
+  const [paperTrader, setPaperTrader] = useState<PaperTraderStatus | null>(null);
 
   // Fetch system status
   useEffect(() => {
@@ -84,6 +114,25 @@ export default function LabsPage() {
 
     fetchStatus();
     const interval = setInterval(fetchStatus, 30000); // Check every 30s
+    return () => clearInterval(interval);
+  }, []);
+
+  // Fetch paper trader status
+  useEffect(() => {
+    async function fetchPaperTrader() {
+      try {
+        const res = await fetch(`${BRAIN_URL}/paper-trader`);
+        if (res.ok) {
+          const data = await res.json();
+          setPaperTrader(data);
+        }
+      } catch (e) {
+        console.log('Paper trader not reachable');
+      }
+    }
+
+    fetchPaperTrader();
+    const interval = setInterval(fetchPaperTrader, 60000); // Check every 60s
     return () => clearInterval(interval);
   }, []);
 
@@ -303,6 +352,79 @@ export default function LabsPage() {
                   </tbody>
                 </table>
               )}
+            </div>
+          </div>
+        </section>
+
+        {/* Paper Trader */}
+        <section className="mb-16">
+          <h2 className="text-sm font-mono text-neutral-500 mb-6">📜 PAPER TRADER</h2>
+          
+          <div className="border border-[#0052FF]/30 bg-[#0052FF]/5 rounded-lg p-6">
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <span className="text-3xl">📜</span>
+                <div>
+                  <h3 className="font-bold text-lg">Simulated Trading</h3>
+                  <p className="text-sm text-neutral-500">Zero risk, infinite learning</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className={`w-2 h-2 rounded-full ${paperTrader?.running ? 'bg-emerald-500 animate-pulse' : 'bg-neutral-500'}`} />
+                <span className="text-sm font-mono text-neutral-400">
+                  {paperTrader?.running ? 'RUNNING' : 'STOPPED'}
+                </span>
+              </div>
+            </div>
+
+            {paperTrader ? (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div className="bg-black/30 rounded p-4">
+                  <p className="text-xs text-neutral-500 mb-1">Starting Capital</p>
+                  <p className="text-xl font-mono">${paperTrader.portfolio.startingCapital.toLocaleString()}</p>
+                </div>
+                <div className="bg-black/30 rounded p-4">
+                  <p className="text-xs text-neutral-500 mb-1">Current Value</p>
+                  <p className={`text-xl font-mono ${paperTrader.portfolio.totalPnL >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                    ${paperTrader.portfolio.currentValue.toLocaleString()}
+                  </p>
+                </div>
+                <div className="bg-black/30 rounded p-4">
+                  <p className="text-xs text-neutral-500 mb-1">Total P&L</p>
+                  <p className={`text-xl font-mono ${paperTrader.portfolio.totalPnL >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                    {paperTrader.portfolio.totalPnL >= 0 ? '+' : ''}${paperTrader.portfolio.totalPnL.toFixed(2)}
+                  </p>
+                </div>
+                <div className="bg-black/30 rounded p-4">
+                  <p className="text-xs text-neutral-500 mb-1">Win Rate</p>
+                  <p className="text-xl font-mono">{(paperTrader.portfolio.winRate * 100).toFixed(1)}%</p>
+                </div>
+              </div>
+            ) : (
+              <div className="text-neutral-500 py-4">Loading paper trader status...</div>
+            )}
+
+            {paperTrader && paperTrader.positions.length > 0 && (
+              <div>
+                <p className="text-xs text-neutral-500 mb-2">OPEN POSITIONS ({paperTrader.positions.length})</p>
+                <div className="space-y-2">
+                  {paperTrader.positions.slice(0, 5).map((pos) => (
+                    <div key={pos.id} className="flex items-center justify-between bg-black/30 rounded px-4 py-2 text-sm">
+                      <span className={`font-mono ${pos.side === 'YES' ? 'text-emerald-400' : 'text-red-400'}`}>
+                        {pos.side}
+                      </span>
+                      <span className="text-neutral-400 flex-1 mx-4 truncate">
+                        {pos.question?.slice(0, 50)}...
+                      </span>
+                      <span className="font-mono">${pos.invested}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div className="mt-4 pt-4 border-t border-neutral-800 text-xs text-neutral-600">
+              <p>📊 Studying Polymarket every 5 minutes • No real money • Building strategy confidence</p>
             </div>
           </div>
         </section>
