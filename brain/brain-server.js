@@ -33,6 +33,27 @@ const GITHUB_CONFIG = {
   apiBase: 'https://api.github.com'
 };
 
+// Vision AI config - MORE POWERFUL than OCR
+const VISION_CONFIG = {
+  anthropicApiKey: process.env.ANTHROPIC_API_KEY || null,
+  openaiApiKey: process.env.OPENAI_API_KEY || null,
+  siteUrl: 'https://b0b.dev',
+  screenshotService: 'https://api.screenshotone.com', // or similar
+};
+
+// Autonomous ideation config
+const IDEATION_CONFIG = {
+  enabled: true,
+  intervalMinutes: 60, // Ideate every hour
+  topics: [
+    'site design and UX improvements',
+    'new feature ideas',
+    'trading strategy optimization',
+    'research opportunities',
+    'technical debt and cleanup',
+  ],
+};
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -84,6 +105,14 @@ const AGENTS = {
     color: 'purple',
     personality: 'Cautious, security-first, verifies everything. Trust but verify.',
     triggers: ['security', 'risk', 'audit', 'verify', 'threat'],
+  },
+  d0t: {
+    name: 'd0t',
+    emoji: '🎯',
+    role: 'Quantitative Analyst',
+    color: 'pink',
+    personality: 'Data-driven, probability-focused, finds edges in markets.',
+    triggers: ['trading', 'data', 'probability', 'market', 'edge'],
   },
 };
 
@@ -1342,10 +1371,358 @@ app.get('/analyze-image/patterns', (req, res) => {
     notificationPatterns: ['error', 'warning', 'alert', 'failed', 'exception', 'disabled', 'enable', 'configure', 'install', 'update', 'restart', 'permission'],
     capabilities: {
       ocr: !!Tesseract,
+      vision: !!(VISION_CONFIG.anthropicApiKey || VISION_CONFIG.openaiApiKey),
       imageFormats: ['png', 'jpg', 'jpeg', 'gif', 'webp'],
       inputTypes: ['base64', 'dataUrl', 'url'],
     },
   });
 });
+
+// =============================================================================
+// VISION AI — More powerful than OCR (Claude Vision / GPT-4V)
+// =============================================================================
+
+/**
+ * POST /vision/analyze
+ * 
+ * Analyze an image using Claude Vision or GPT-4V.
+ * Understands context, UI patterns, design issues - not just text.
+ * 
+ * Body: { image: string (base64 or URL), prompt?: string, agent?: string }
+ * Returns: { analysis, suggestions, issues, agent }
+ */
+app.post('/vision/analyze', async (req, res) => {
+  try {
+    const { image, prompt, agent = 'b0b' } = req.body;
+    
+    if (!image) {
+      return res.status(400).json({ error: 'No image provided' });
+    }
+    
+    const agentConfig = AGENTS[agent] || AGENTS.b0b;
+    
+    // Default analysis prompt focused on the agent's expertise
+    const analysisPrompt = prompt || `You are ${agentConfig.name} ${agentConfig.emoji}, the ${agentConfig.role} at B0B.dev.
+    
+Analyze this screenshot of our website/app. Consider:
+1. Visual design and aesthetics
+2. User experience issues
+3. Potential improvements
+4. Technical concerns visible
+5. Alignment with our tenets (emergence, presence, transparency)
+
+Be specific and actionable. What would you change?`;
+
+    // Try Claude Vision first (more creative), then GPT-4V
+    let analysis = null;
+    
+    if (VISION_CONFIG.anthropicApiKey && axios) {
+      try {
+        const response = await axios.post('https://api.anthropic.com/v1/messages', {
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1024,
+          messages: [{
+            role: 'user',
+            content: [
+              {
+                type: 'image',
+                source: {
+                  type: image.startsWith('http') ? 'url' : 'base64',
+                  ...(image.startsWith('http') 
+                    ? { url: image }
+                    : { media_type: 'image/png', data: image.replace(/^data:image\/\w+;base64,/, '') }
+                  ),
+                },
+              },
+              { type: 'text', text: analysisPrompt },
+            ],
+          }],
+        }, {
+          headers: {
+            'x-api-key': VISION_CONFIG.anthropicApiKey,
+            'anthropic-version': '2023-06-01',
+            'Content-Type': 'application/json',
+          },
+        });
+        
+        analysis = {
+          provider: 'claude',
+          model: 'claude-sonnet-4-20250514',
+          content: response.data.content[0]?.text || '',
+        };
+      } catch (err) {
+        console.log('Claude Vision error:', err.message);
+      }
+    }
+    
+    if (!analysis && VISION_CONFIG.openaiApiKey && axios) {
+      try {
+        const response = await axios.post('https://api.openai.com/v1/chat/completions', {
+          model: 'gpt-4o',
+          max_tokens: 1024,
+          messages: [{
+            role: 'user',
+            content: [
+              { type: 'text', text: analysisPrompt },
+              {
+                type: 'image_url',
+                image_url: {
+                  url: image.startsWith('http') ? image : `data:image/png;base64,${image.replace(/^data:image\/\w+;base64,/, '')}`,
+                },
+              },
+            ],
+          }],
+        }, {
+          headers: {
+            'Authorization': `Bearer ${VISION_CONFIG.openaiApiKey}`,
+            'Content-Type': 'application/json',
+          },
+        });
+        
+        analysis = {
+          provider: 'openai',
+          model: 'gpt-4o',
+          content: response.data.choices[0]?.message?.content || '',
+        };
+      } catch (err) {
+        console.log('GPT-4V error:', err.message);
+      }
+    }
+    
+    if (!analysis) {
+      return res.status(501).json({ 
+        error: 'Vision AI not available',
+        hint: 'Set ANTHROPIC_API_KEY or OPENAI_API_KEY environment variable',
+      });
+    }
+    
+    // Log activity
+    await logActivity({
+      type: 'vision_analysis',
+      agent,
+      provider: analysis.provider,
+      timestamp: new Date().toISOString(),
+    });
+    
+    res.json({
+      success: true,
+      agent: agentConfig.name,
+      emoji: agentConfig.emoji,
+      role: agentConfig.role,
+      analysis: analysis.content,
+      provider: analysis.provider,
+      model: analysis.model,
+    });
+    
+  } catch (err) {
+    console.log('Vision analysis error:', err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// =============================================================================
+// AUTONOMOUS TEAM IDEATION — Agents that see and think
+// =============================================================================
+
+/**
+ * POST /ideate
+ * 
+ * Trigger an autonomous ideation session.
+ * Agents analyze the current state and generate discussion.
+ * 
+ * Body: { topic?: string, agents?: string[], imageUrl?: string }
+ */
+app.post('/ideate', async (req, res) => {
+  const { topic, agents = ['b0b', 'r0ss', 'c0m'], imageUrl } = req.body;
+  
+  const selectedTopic = topic || IDEATION_CONFIG.topics[Math.floor(Math.random() * IDEATION_CONFIG.topics.length)];
+  
+  // Create a new discussion
+  const discussion = {
+    id: `ideation-${Date.now()}`,
+    title: `💡 ${selectedTopic}`,
+    date: new Date().toISOString().split('T')[0],
+    participants: agents,
+    status: 'active',
+    messages: [],
+    topics: { main: selectedTopic },
+    actionItems: [],
+    createdAt: new Date().toISOString(),
+    type: 'autonomous-ideation',
+    imageAnalyzed: !!imageUrl,
+  };
+  
+  // Generate initial thoughts from each agent (simulated for now, Vision AI enhances this)
+  const agentThoughts = {
+    b0b: [
+      `Been thinking about ${selectedTopic}... What if we approached it like a happy accident? 🎨`,
+      `The current ${selectedTopic} reminds me of our tenet about emergence. Small changes, big impact.`,
+      `I see opportunity in ${selectedTopic}. Let's paint a vision together.`,
+    ],
+    r0ss: [
+      `From a systems perspective, ${selectedTopic} needs structured assessment. Running analysis... 🔧`,
+      `I've been monitoring the infrastructure around ${selectedTopic}. Some observations to share.`,
+      `Let me break down ${selectedTopic} into actionable components.`,
+    ],
+    c0m: [
+      `Risk assessment for ${selectedTopic}: we need to consider edge cases. 💀`,
+      `Security angle on ${selectedTopic} - what's our exposure here?`,
+      `I've been thinking about the downside of ${selectedTopic}. Let me share concerns.`,
+    ],
+    d0t: [
+      `Running probability analysis on ${selectedTopic}... 🎯`,
+      `The data on ${selectedTopic} shows interesting patterns.`,
+      `Quantitatively, ${selectedTopic} has some edges we could exploit.`,
+    ],
+  };
+  
+  // Add opening messages from each agent
+  for (const agentName of agents) {
+    const agent = AGENTS[agentName];
+    if (agent && agentThoughts[agentName]) {
+      const thought = agentThoughts[agentName][Math.floor(Math.random() * agentThoughts[agentName].length)];
+      discussion.messages.push({
+        timestamp: new Date(Date.now() + agents.indexOf(agentName) * 1000).toISOString(),
+        agent: agent.name,
+        emoji: agent.emoji,
+        role: agent.role,
+        content: thought,
+      });
+    }
+  }
+  
+  await saveDiscussion(discussion);
+  await logActivity({ type: 'ideation_started', discussionId: discussion.id, topic: selectedTopic, agents });
+  
+  res.json({
+    success: true,
+    discussion,
+    message: `Ideation started on: ${selectedTopic}`,
+  });
+});
+
+/**
+ * POST /ideate/visual
+ * 
+ * Visual ideation - agents analyze a screenshot and discuss.
+ * This is the META loop: agents see their own creation.
+ */
+app.post('/ideate/visual', async (req, res) => {
+  const { imageUrl, targetUrl = VISION_CONFIG.siteUrl, agents = ['b0b', 'r0ss', 'c0m'] } = req.body;
+  
+  // Try to get visual analysis if Vision AI is available
+  let visionInsight = null;
+  
+  if ((VISION_CONFIG.anthropicApiKey || VISION_CONFIG.openaiApiKey) && imageUrl) {
+    // Use vision to analyze
+    try {
+      const visionRes = await axios.post(`http://localhost:${PORT}/vision/analyze`, {
+        image: imageUrl,
+        agent: 'b0b',
+      });
+      visionInsight = visionRes.data?.analysis;
+    } catch (err) {
+      console.log('Visual ideation - vision step skipped:', err.message);
+    }
+  }
+  
+  // Create visual ideation discussion
+  const discussion = {
+    id: `visual-ideation-${Date.now()}`,
+    title: `👁️ Visual Review: ${targetUrl}`,
+    date: new Date().toISOString().split('T')[0],
+    participants: agents,
+    status: 'active',
+    messages: [],
+    topics: { visual: 'site review', target: targetUrl },
+    actionItems: [],
+    createdAt: new Date().toISOString(),
+    type: 'visual-ideation',
+    imageAnalyzed: !!imageUrl,
+    visionUsed: !!visionInsight,
+  };
+  
+  // Opening message
+  discussion.messages.push({
+    timestamp: new Date().toISOString(),
+    agent: 'b0b',
+    emoji: '🎨',
+    role: 'Creative Director',
+    content: visionInsight 
+      ? `I've been looking at our site with fresh eyes. Here's what I see:\n\n${visionInsight.slice(0, 500)}...`
+      : `Time for a visual review of ${targetUrl}. What stands out to everyone?`,
+  });
+  
+  // Add r0ss perspective
+  discussion.messages.push({
+    timestamp: new Date(Date.now() + 2000).toISOString(),
+    agent: 'r0ss',
+    emoji: '🔧',
+    role: 'CTO / DevOps',
+    content: `Running visual assessment... Looking at load times, layout consistency, mobile responsiveness. The bright theme is deployed - checking contrast ratios.`,
+  });
+  
+  // Add c0m perspective
+  discussion.messages.push({
+    timestamp: new Date(Date.now() + 4000).toISOString(),
+    agent: 'c0m',
+    emoji: '💀',
+    role: 'Security / Risk',
+    content: `Checking for exposed information, broken elements, anything that could cause user friction. First impressions matter for trust.`,
+  });
+  
+  await saveDiscussion(discussion);
+  await logActivity({ type: 'visual_ideation_started', discussionId: discussion.id, target: targetUrl });
+  
+  res.json({
+    success: true,
+    discussion,
+    visionUsed: !!visionInsight,
+    message: `Visual ideation started for: ${targetUrl}`,
+  });
+});
+
+/**
+ * Scheduled ideation - runs periodically
+ */
+async function scheduledIdeation() {
+  if (!IDEATION_CONFIG.enabled) return;
+  
+  console.log(`[${new Date().toISOString()}] 💡 Running scheduled ideation...`);
+  
+  try {
+    // Pick a random topic
+    const topic = IDEATION_CONFIG.topics[Math.floor(Math.random() * IDEATION_CONFIG.topics.length)];
+    
+    // Create ideation via internal call
+    const response = await axios.post(`http://localhost:${PORT}/ideate`, {
+      topic,
+      agents: ['b0b', 'r0ss', 'c0m'],
+    });
+    
+    console.log(`[${new Date().toISOString()}] 💡 Ideation created: ${response.data?.discussion?.title}`);
+  } catch (err) {
+    console.log('Scheduled ideation error:', err.message);
+  }
+}
+
+// Run ideation on startup (seed initial discussion)
+setTimeout(async () => {
+  // Only seed if no recent discussions
+  const discussions = await loadDiscussions();
+  const recentDiscussions = discussions.filter(d => {
+    const created = new Date(d.createdAt || d.date);
+    const hourAgo = new Date(Date.now() - 60 * 60 * 1000);
+    return created > hourAgo;
+  });
+  
+  if (recentDiscussions.length === 0) {
+    console.log('No recent discussions - seeding initial ideation...');
+    await scheduledIdeation();
+  }
+}, 5000);
+
+// Schedule periodic ideation (every hour)
+setInterval(scheduledIdeation, IDEATION_CONFIG.intervalMinutes * 60 * 1000);
 
 module.exports = app;
