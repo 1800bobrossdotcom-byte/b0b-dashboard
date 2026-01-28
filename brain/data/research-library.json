@@ -1,0 +1,158 @@
+{
+  "name": "B0B Research Library",
+  "purpose": "Open-source reference of what we're reading, studying, and WHY",
+  "philosophy": "Trust but verify. Excitement ≠ due diligence.",
+  "updated": "2026-01-27T12:45:00Z",
+  "dueDiligenceChecklist": {
+    "required": [
+      "Last social media activity (< 30 days = green, < 90 days = yellow, > 90 days = red)",
+      "GitHub activity (commits in last 30 days)",
+      "Shipped products (live, usable, verifiable)",
+      "Team verification (LinkedIn, public profiles)",
+      "Funding timeline (recent activity post-raise?)",
+      "API/product actually works (test it, don't assume)",
+      "Community activity (Discord, Telegram, forums)",
+      "Smart contract audits (if crypto - verified on Etherscan/Basescan)",
+      "Legal entity verification (registered company?)",
+      "Customer testimonials / case studies (real usage)"
+    ],
+    "redFlags": [
+      "> 90 days social media silence",
+      "Pre-seed/seed with no product 12+ months later",
+      "API docs but no working demo",
+      "No GitHub activity",
+      "Team not publicly identifiable",
+      "Broken links on official site",
+      "Form submissions go to generic services"
+    ]
+  },
+  "evaluations": {
+    "formless-xyz": {
+      "name": "Formless / SHARE Protocol",
+      "url": "https://formless.xyz",
+      "docsUrl": "https://docs.formless.xyz",
+      "twitter": "https://x.com/formless_xyz",
+      "evaluatedDate": "2026-01-27",
+      "status": "FAILED_DUE_DILIGENCE",
+      "verdict": "DO NOT INTEGRATE - Insufficient activity signals",
+      "findings": {
+        "lastTwitterPost": "2025-10-08 (3+ months ago)",
+        "preSeedRaised": "2023-12-19 ($2.2M)",
+        "timeSinceRaise": "25+ months",
+        "shippedProducts": "None visible",
+        "apiWorking": "Untested - form goes to Typeform",
+        "githubActivity": "4 public repos, activity unclear",
+        "teamVerified": false,
+        "smartContractsAudited": false,
+        "communityActive": false
+      },
+      "redFlagsTriggered": [
+        "90+ days social silence",
+        "25+ months since funding with no visible product",
+        "API requires contact form, not self-serve",
+        "No recent GitHub commits visible"
+      ],
+      "lessonsLearned": [
+        "We got excited about the concept without verifying execution",
+        "Saying 'I'll audit' is not the same as auditing",
+        "Clean docs ≠ live product",
+        "Pre-seed announcements ≠ shipped features"
+      ],
+      "whatWeDidWrong": [
+        "Built integration without testing API",
+        "Claimed security review without doing it",
+        "Published to production claiming vetting",
+        "Let excitement override process"
+      ]
+    }
+  },
+  "trustedSources": {
+    "verified": [
+      {
+        "name": "Anthropic / Claude",
+        "url": "https://anthropic.com",
+        "why": "Active development, public research, used daily, responsive",
+        "lastVerified": "2026-01-27",
+        "status": "ACTIVE"
+      },
+      {
+        "name": "Base (Coinbase L2)",
+        "url": "https://base.org",
+        "why": "Backed by Coinbase, active ecosystem, verified contracts",
+        "lastVerified": "2026-01-27",
+        "status": "ACTIVE"
+      },
+      {
+        "name": "Bankr",
+        "url": "https://bankr.bot",
+        "why": "Active development, working product, responsive team",
+        "lastVerified": "2026-01-27",
+        "status": "ACTIVE"
+      },
+      {
+        "name": "Railway",
+        "url": "https://railway.app",
+        "why": "Production infrastructure, active support, reliable deploys",
+        "lastVerified": "2026-01-27",
+        "status": "ACTIVE"
+      },
+      {
+        "name": "Polymarket",
+        "url": "https://polymarket.com",
+        "why": "Live API, active markets, verifiable data",
+        "lastVerified": "2026-01-27",
+        "status": "ACTIVE"
+      }
+    ],
+    "underEvaluation": [],
+    "rejected": [
+      {
+        "name": "Formless / SHARE Protocol",
+        "reason": "Failed due diligence - see evaluations",
+        "rejectedDate": "2026-01-27"
+      }
+    ]
+  },
+  "readingList": {
+    "studying": [
+      {
+        "title": "Nash Equilibrium in Game Theory",
+        "why": "Foundation for cooperative trading logic",
+        "source": "Academic papers, Wikipedia",
+        "status": "ongoing"
+      },
+      {
+        "title": "Anthropic Claude Documentation",
+        "why": "Core AI capabilities we build on",
+        "source": "https://docs.anthropic.com",
+        "status": "ongoing"
+      },
+      {
+        "title": "Base Developer Documentation", 
+        "why": "Smart contract deployment, L2 specifics",
+        "source": "https://docs.base.org",
+        "status": "ongoing"
+      }
+    ],
+    "completed": [],
+    "toReview": [
+      {
+        "title": "Revenue Sharing Smart Contract Patterns",
+        "why": "Need REAL alternatives to Formless",
+        "candidates": [
+          "0xSplits - https://splits.org",
+          "Superfluid - https://superfluid.finance", 
+          "Mirror.xyz splits",
+          "Build our own"
+        ],
+        "status": "queued"
+      }
+    ]
+  },
+  "meta": {
+    "maintainers": ["b0b", "r0ss", "c0m"],
+    "updateFrequency": "After every evaluation",
+    "transparency": "This file is public in our repo",
+    "humility": "We made a mistake with Formless. We're documenting it so we don't repeat it."
+  }
+}

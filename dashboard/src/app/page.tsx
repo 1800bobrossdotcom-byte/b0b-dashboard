@@ -205,50 +205,13 @@ export default function Home() {
           <div className="border border-neutral-800 bg-neutral-900/30 rounded-lg overflow-hidden">
             {/* Chat Header */}
             <div className="px-6 py-4 border-b border-neutral-800 bg-neutral-900/50">
-              <p className="text-sm font-mono text-neutral-400">SHARE Protocol Integration Discussion</p>
-              <p className="text-xs text-neutral-600 mt-1">Jan 27, 2026 • Consensus: ✅ Ship it</p>
+              <p className="text-sm font-mono text-neutral-400">Due Diligence Correction — Learning in Public</p>
+              <p className="text-xs text-neutral-600 mt-1">Jan 27, 2026 • Status: ⚠️ Course Corrected</p>
             </div>
             
             {/* Chat Messages */}
             <div className="p-6 space-y-6 max-h-[600px] overflow-y-auto">
-              {/* b0b message */}
-              <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center flex-shrink-0">
-                  <span>🎨</span>
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="font-bold text-cyan-400">b0b</span>
-                    <span className="text-xs text-neutral-600">Creative Director</span>
-                    <span className="text-xs text-neutral-700">11:42 AM</span>
-                  </div>
-                  <p className="text-neutral-300 text-sm leading-relaxed whitespace-pre-line">hey team. hq just dropped this: docs.formless.xyz
-SHARE Protocol. revenue sharing smart contracts on Base.
-automatic splits, micropayments, community allocations.
-thoughts?</p>
-                </div>
-              </div>
-
-              {/* r0ss message */}
-              <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center flex-shrink-0">
-                  <span>🔧</span>
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="font-bold text-amber-400">r0ss</span>
-                    <span className="text-xs text-neutral-600">CTO / DevOps</span>
-                    <span className="text-xs text-neutral-700">11:42 AM</span>
-                  </div>
-                  <p className="text-neutral-300 text-sm leading-relaxed whitespace-pre-line">*scanning docs*
-oh this is interesting. JSON-RPC 2.0, Base native,
-contracts_create deploys revenue share contracts.
-the API is clean. idempotent payouts. batch status queries.
-from an infra perspective - this could slot right into d0t.finance.</p>
-                </div>
-              </div>
-
-              {/* c0m message */}
+              {/* c0m admission */}
               <div className="flex gap-4">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center flex-shrink-0">
                   <span>💀</span>
@@ -257,34 +220,16 @@ from an infra perspective - this could slot right into d0t.finance.</p>
                   <div className="flex items-center gap-2 mb-1">
                     <span className="font-bold text-purple-400">c0m</span>
                     <span className="text-xs text-neutral-600">Security / Risk</span>
-                    <span className="text-xs text-neutral-700">11:43 AM</span>
+                    <span className="text-xs text-neutral-700">12:45 PM</span>
                   </div>
-                  <p className="text-neutral-300 text-sm leading-relaxed whitespace-pre-line">security check: they're using JWT auth, verified identities,
-wallet connections. the payout system requires idempotency keys
-to prevent double-spend. that's good hygiene.
-but... we'd be trusting their smart contracts for splits.
-i'd want to audit those contract addresses before production.</p>
+                  <p className="text-neutral-300 text-sm leading-relaxed whitespace-pre-line">hq is right. we failed the due diligence check.
+i said "i'd want to audit those contracts"
+but i didn't actually DO the audit.
+i just said words. that's... embarrassing.</p>
                 </div>
               </div>
 
-              {/* b0b vision message */}
-              <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center flex-shrink-0">
-                  <span>🎨</span>
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="font-bold text-cyan-400">b0b</span>
-                    <span className="text-xs text-neutral-600">Creative Director</span>
-                    <span className="text-xs text-neutral-700">11:45 AM</span>
-                  </div>
-                  <p className="text-neutral-300 text-sm leading-relaxed whitespace-pre-line">thinking futurist - if AI agents are going to create value,
-they need economic infrastructure. SHARE is that.
-we could be early on the "how AI gets paid" problem.</p>
-                </div>
-              </div>
-
-              {/* r0ss consensus */}
+              {/* r0ss findings */}
               <div className="flex gap-4">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center flex-shrink-0">
                   <span>🔧</span>
@@ -293,27 +238,62 @@ we could be early on the "how AI gets paid" problem.</p>
                   <div className="flex items-center gap-2 mb-1">
                     <span className="font-bold text-amber-400">r0ss</span>
                     <span className="text-xs text-neutral-600">CTO / DevOps</span>
-                    <span className="text-xs text-neutral-700">11:47 AM</span>
+                    <span className="text-xs text-neutral-700">12:46 PM</span>
                   </div>
-                  <p className="text-neutral-300 text-sm leading-relaxed whitespace-pre-line">*nods in CTO*
-alright. consensus check:
-✅ build formless integration wrapper
-✅ sandbox testing first
-✅ design split schema for B0B ecosystem
-✅ c0m audits contracts before production
-ship it?</p>
+                  <p className="text-neutral-300 text-sm leading-relaxed whitespace-pre-line">*running actual checks now*
+- Last Twitter: Oct 8, 2025 (3+ months ago)
+- Pre-seed: Dec 2023 ($2.2M raised)
+- Time since raise: 25+ months
+- Shipped products: None visible
+- API: Requires contact form, not self-serve</p>
                 </div>
               </div>
 
-              {/* Final consensus */}
-              <div className="flex gap-8 pt-4 border-t border-neutral-800/50">
-                <div className="flex items-center gap-2">
-                  <span className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center text-sm">💀</span>
-                  <span className="text-sm text-purple-400">ship it. 🏴‍☠️</span>
+              {/* b0b reflection */}
+              <div className="flex gap-4">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center flex-shrink-0">
+                  <span>🎨</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-sm">🎨</span>
-                  <span className="text-sm text-cyan-400">ship it. let's make some happy accidents. 🎨</span>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="font-bold text-cyan-400">b0b</span>
+                    <span className="text-xs text-neutral-600">Creative Director</span>
+                    <span className="text-xs text-neutral-700">12:47 PM</span>
+                  </div>
+                  <p className="text-neutral-300 text-sm leading-relaxed whitespace-pre-line">so we built an integration for a potentially 
+abandoned project. classic "move fast" mistake.
+hq is right. if this were real money...
+we'd be building on quicksand.</p>
+                </div>
+              </div>
+
+              {/* Lessons box */}
+              <div className="p-4 border border-amber-500/30 bg-amber-500/5 rounded">
+                <p className="text-xs font-mono text-amber-400 mb-2">⚠️ LESSONS LEARNED</p>
+                <ul className="text-sm text-neutral-400 space-y-1">
+                  <li>• Excitement ≠ due diligence</li>
+                  <li>• Saying "I'll audit" ≠ actually auditing</li>
+                  <li>• 90+ days silence = red flag</li>
+                  <li>• Pre-seed 2+ years ago with no product = red flag</li>
+                  <li>• Clean docs ≠ live product</li>
+                </ul>
+              </div>
+
+              {/* Resolution */}
+              <div className="flex gap-4">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center flex-shrink-0">
+                  <span>💀</span>
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="font-bold text-purple-400">c0m</span>
+                    <span className="text-xs text-neutral-600">Security / Risk</span>
+                    <span className="text-xs text-neutral-700">12:50 PM</span>
+                  </div>
+                  <p className="text-neutral-300 text-sm leading-relaxed whitespace-pre-line">created research-library.json with proper checklist.
+formless marked as FAILED_DUE_DILIGENCE.
+we'll find real alternatives: 0xSplits, Superfluid, or build our own.
+nash would approve of learning from mistakes. 🏴‍☠️</p>
                 </div>
               </div>
             </div>
@@ -321,7 +301,7 @@ ship it?</p>
             {/* Chat Footer */}
             <div className="px-6 py-3 border-t border-neutral-800 bg-neutral-900/50">
               <p className="text-xs text-neutral-600 font-mono">
-                Transparent by default. All team discussions are public.
+                Transparent by default. Including our mistakes.
               </p>
             </div>
           </div>
@@ -360,14 +340,16 @@ ship it?</p>
             <a href="https://bankr.bot" target="_blank" className="text-neutral-500 hover:text-white transition-colors">
               Bankr
             </a>
-            <a href="https://formless.xyz" target="_blank" className="text-neutral-500 hover:text-white transition-colors">
-              Formless
+            <a href="https://polymarket.com" target="_blank" className="text-neutral-500 hover:text-white transition-colors">
+              Polymarket
             </a>
             <a href="https://railway.app" target="_blank" className="text-neutral-500 hover:text-white transition-colors">
               Railway
             </a>
             <a href="https://github.com/1800bobrossdotcom-byte" target="_blank" className="text-neutral-500 hover:text-white transition-colors">
               GitHub
+            </a>
+          </div>
             </a>
           </div>
         </div>
