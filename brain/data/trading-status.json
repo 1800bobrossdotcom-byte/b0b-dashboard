@@ -1,0 +1,89 @@
+{
+  "meta": {
+    "lastUpdated": "2026-01-28T00:00:00Z",
+    "updatedBy": "r0ss"
+  },
+  
+  "timeline": {
+    "phase1_infrastructure": {
+      "status": "COMPLETE",
+      "items": [
+        { "task": "Polymarket crawler", "status": "✅", "file": "crawlers/polymarket-crawler.js" },
+        { "task": "Trading D0T multi-agent system", "status": "✅", "file": "b0b-finance/trading-d0t.js" },
+        { "task": "MCP server for Claude", "status": "✅", "file": "b0b-finance/trading-mcp.py" },
+        { "task": "Bankr agent integration", "status": "✅", "file": "b0b-finance/bankr-agent.js" },
+        { "task": "Safety limits defined", "status": "✅", "value": "$500 max order, $2000 max exposure" },
+        { "task": "Paper trading simulation", "status": "✅", "tool": "simulate_trade" }
+      ]
+    },
+    
+    "phase2_connections": {
+      "status": "IN_PROGRESS",
+      "items": [
+        { "task": "Bankr API key setup", "status": "⏳", "notes": "$0.10/request via x402" },
+        { "task": "Polymarket wallet auth", "status": "⏳", "notes": "Need Polygon wallet with USDC" },
+        { "task": "Base wallet for subscriptions", "status": "⏳", "notes": "For B0B template builder revenue" }
+      ]
+    },
+    
+    "phase3_live": {
+      "status": "NOT_STARTED",
+      "blockers": [
+        "Need funded Polygon wallet for Polymarket",
+        "Need Bankr API key or payment wallet",
+        "Need explicit HQ approval for live trading"
+      ]
+    }
+  },
+  
+  "paperTrader": {
+    "shouldAlwaysRun": true,
+    "rationale": [
+      "Continuous learning without risk",
+      "Track accuracy over time",
+      "Test strategy adjustments",
+      "Build confidence before live",
+      "Generate data for analysis"
+    ],
+    "implementation": {
+      "current": "trading-mcp.py simulate_trade tool",
+      "enhancement": "paper-trader-daemon.js (TODO)"
+    }
+  },
+  
+  "integrations": {
+    "polymarket": {
+      "status": "READ_ONLY",
+      "canRead": true,
+      "canTrade": false,
+      "needed": "Polygon wallet with USDC, API credentials"
+    },
+    "bankr": {
+      "status": "CONFIGURED",
+      "canQuery": true,
+      "canTrade": false,
+      "needed": "API key or payment wallet with USDC"
+    },
+    "base": {
+      "status": "PLANNED",
+      "purpose": "Subscriptions, revenue, smart contracts"
+    }
+  },
+  
+  "agents": {
+    "director": { "role": "Strategy & thesis", "status": "✅" },
+    "quant": { "role": "Analysis & signals", "status": "✅" },
+    "risk": { "role": "Safety & limits", "status": "✅" },
+    "executor": { "role": "Order execution", "status": "⏳ needs wallet" }
+  },
+  
+  "safetyLimits": {
+    "maxOrderSizeUSD": 500,
+    "maxTotalExposureUSD": 2000,
+    "maxPositionPerMarket": 500,
+    "minLiquidityRequired": 5000,
+    "maxSpreadTolerance": 0.05,
+    "cooldownBetweenTradesMs": 30000,
+    "maxTradesPerHour": 10
+  }
+}

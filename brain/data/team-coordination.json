@@ -1,0 +1,96 @@
+{
+  "meta": {
+    "purpose": "Coordinate parallel work across B0B team",
+    "philosophy": "b0b asks → team replies and acts → delegates",
+    "lastUpdated": "2026-01-28T00:00:00Z"
+  },
+  
+  "workstreams": {
+    "infrastructure": {
+      "owner": "r0ss",
+      "focus": "Backend, APIs, servers, deploys",
+      "currentTask": null,
+      "blocked": false
+    },
+    "frontend": {
+      "owner": "r0ss",
+      "focus": "UI, components, pages",
+      "currentTask": null,
+      "blocked": false
+    },
+    "trading": {
+      "owner": "r0ss",
+      "focus": "Trading systems, crawlers, paper trader",
+      "currentTask": null,
+      "blocked": false
+    },
+    "content": {
+      "owner": "c0m",
+      "focus": "Copy, messaging, user-facing text",
+      "currentTask": null,
+      "blocked": false
+    },
+    "design": {
+      "owner": "c0m",
+      "focus": "Visual direction, aesthetics",
+      "currentTask": null,
+      "blocked": false
+    },
+    "research": {
+      "owner": "b0b",
+      "focus": "Evaluating tools, integrations, strategies",
+      "currentTask": null,
+      "blocked": false
+    }
+  },
+  
+  "parallelPatterns": {
+    "codeAndDesign": {
+      "description": "r0ss codes infrastructure while c0m defines visual direction",
+      "example": "r0ss deploys brain server while c0m writes CRT CSS"
+    },
+    "buildAndDocument": {
+      "description": "Build feature while documenting it simultaneously",
+      "example": "Build paper trader while writing README"
+    },
+    "testAndIterate": {
+      "description": "One task tests while another fixes",
+      "example": "Test Labs page while fixing build errors"
+    }
+  },
+  
+  "handoffProtocol": {
+    "steps": [
+      "1. r0ss completes infrastructure → signals c0m",
+      "2. c0m applies design/copy → signals b0b",
+      "3. b0b reviews/approves → signals HQ",
+      "4. HQ blesses or redirects"
+    ],
+    "async": true,
+    "notes": "Don't wait for approval on low-risk tasks"
+  },
+  
+  "lowRisk": [
+    "CSS changes",
+    "Copy updates",
+    "Documentation",
+    "Paper trading logic",
+    "Internal tools"
+  ],
+  
+  "requiresHQApproval": [
+    "Live trading activation",
+    "Smart contract deployment",
+    "External API integrations",
+    "Public commitments",
+    "Spending real money"
+  ],
+  
+  "velocityTips": [
+    "Test locally before pushing (npm run build)",
+    "Small commits, frequent pushes",
+    "If stuck >15 mins, ask team",
+    "Paper trade continuously while building",
+    "Parallel work = 2-3x speed"
+  ]
+}
