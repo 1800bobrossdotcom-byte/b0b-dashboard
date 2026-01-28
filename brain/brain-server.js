@@ -1109,6 +1109,147 @@ app.get('/discussions/:id', async (req, res) => {
   res.json(discussion);
 });
 
+// ════════════════════════════════════════════════════════════════════════════
+// LIVE QUOTES — Extract quotable lines from team discussions
+// ════════════════════════════════════════════════════════════════════════════
+app.get('/api/quotes/live', async (req, res) => {
+  const discussions = await loadDiscussions();
+  const quotes = [];
+  
+  // Agent emoji map
+  const agentEmoji = {
+    'HQ': '👑', 'hq': '👑',
+    'b0b': '🎨', 'B0B': '🎨',
+    'r0ss': '🔧', 'R0SS': '🔧',
+    'c0m': '💀', 'C0M': '💀',
+    'd0t': '👁️', 'D0T': '👁️',
+  };
+  
+  // Extract quotable lines from discussions
+  for (const disc of discussions) {
+    if (!disc.messages) continue;
+    
+    for (const msg of disc.messages) {
+      // Look for short, punchy lines
+      const lines = msg.content.split('\n');
+      for (const line of lines) {
+        const cleaned = line.replace(/^\*\*|\*\*$/g, '').replace(/^["']|["']$/g, '').trim();
+        
+        // Quotable criteria:
+        // - 20-120 chars
+        // - Not a code block or header
+        // - Not a bullet point list
+        // - Has some insight
+        if (
+          cleaned.length >= 20 && 
+          cleaned.length <= 120 &&
+          !cleaned.startsWith('```') &&
+          !cleaned.startsWith('#') &&
+          !cleaned.startsWith('-') &&
+          !cleaned.startsWith('*') &&
+          !cleaned.match(/^\d+\./) &&
+          !cleaned.includes('http') &&
+          !cleaned.includes('{') &&
+          cleaned.match(/[.!?]$/)
+        ) {
+          quotes.push({
+            text: cleaned,
+            agent: msg.agent,
+            emoji: agentEmoji[msg.agent] || msg.emoji || '💬',
+            source: disc.id,
+            timestamp: msg.timestamp
+          });
+        }
+      }
+    }
+  }
+  
+  // Add seed quotes from discussions that have them
+  for (const disc of discussions) {
+    if (disc.team_quotes_seed) {
+      for (const q of disc.team_quotes_seed) {
+        quotes.push({
+          text: q.text,
+          agent: q.agent,
+          emoji: q.emoji || agentEmoji[q.agent] || '💬',
+          source: disc.id,
+          category: q.category
+        });
+      }
+    }
+  }
+  
+  // Shuffle and return
+  const shuffled = quotes.sort(() => Math.random() - 0.5);
+  const limit = parseInt(req.query.limit) || 20;
+  
+  res.json({
+    total: quotes.length,
+    quotes: shuffled.slice(0, limit)
+  });
+});
+
+// ════════════════════════════════════════════════════════════════════════════
+// LEARNINGS API — Brain's knowledge library
+// ════════════════════════════════════════════════════════════════════════════
+const LEARNINGS_DIR = path.join(DATA_DIR, 'learnings');
+
+async function loadLearnings() {
+  try {
+    const files = await fs.readdir(LEARNINGS_DIR);
+    const jsonFiles = files.filter(f => f.endsWith('.json'));
+    
+    const learnings = await Promise.all(
+      jsonFiles.map(async (file) => {
+        try {
+          const content = await fs.readFile(path.join(LEARNINGS_DIR, file), 'utf8');
+          return JSON.parse(content);
+        } catch {
+          return null;
+        }
+      })
+    );
+    
+    return learnings.filter(Boolean);
+  } catch {
+    return [];
+  }
+}
+
+app.get('/api/learnings', async (req, res) => {
+  const learnings = await loadLearnings();
+  const limit = parseInt(req.query.limit) || 10;
+  
+  // Sort by date descending
+  const sorted = learnings.sort((a, b) => 
+    new Date(b.created || 0).getTime() - new Date(a.created || 0).getTime()
+  );
+  
+  res.json({
+    total: learnings.length,
+    learnings: sorted.slice(0, limit).map(l => ({
+      id: l.id,
+      title: l.title,
+      category: l.category,
+      priority: l.priority,
+      summary: l.summary,
+      authors: l.authors,
+      created: l.created
+    }))
+  });
+});
+
+app.get('/api/learnings/:id', async (req, res) => {
+  const learnings = await loadLearnings();
+  const learning = learnings.find(l => l.id === req.params.id);
+  
+  if (!learning) {
+    return res.status(404).json({ error: 'Learning not found' });
+  }
+  
+  res.json(learning);
+});
+
 // Add message to discussion
 app.post('/discussions/:id/message', async (req, res) => {
   const { agent, content, emoji } = req.body;
