@@ -1449,30 +1449,58 @@ async function startPresenceTrading() {
     const state = await loadState();
     
     // Quick qualification - relaxed for memecoins
-    if (token.liquidity < 5000) return; // $5k minimum
-    if (token.age > 60) return; // Within 1 hour
-    if (state.positions.length >= CONFIG.MAX_OPEN_POSITIONS) return;
-    if (state.dailyVolume >= CONFIG.MAX_DAILY_VOLUME) return;
+    if (token.liquidity < 5000) {
+      console.log(`   ⏭️ ${token.symbol}: Skipping - liquidity $${token.liquidity?.toFixed(0)} < $5k`);
+      return;
+    }
+    
+    // Boosted tokens get more leeway (they paid for visibility)
+    const maxAge = token.boosted ? 480 : 60; // 8 hours for boosted, 1 hour otherwise
+    if (token.age > maxAge) {
+      console.log(`   ⏭️ ${token.symbol}: Skipping - age ${token.age?.toFixed(0)}min > ${maxAge}min`);
+      return;
+    }
+    
+    if (state.positions.length >= CONFIG.MAX_OPEN_POSITIONS) {
+      console.log(`   ⏭️ ${token.symbol}: Skipping - max positions reached`);
+      return;
+    }
+    if (state.dailyVolume >= CONFIG.MAX_DAILY_VOLUME) {
+      console.log(`   ⏭️ ${token.symbol}: Skipping - daily volume limit reached`);
+      return;
+    }
     
     // Score it
     let score = 0;
-    if (token.age < 5) score += 40;      // Super fresh
-    else if (token.age < 15) score += 25;
-    else if (token.age < 30) score += 15;
     
+    // Age scoring - fresher = better
+    if (token.age < 5) score += 40;      // Super fresh
+    else if (token.age < 15) score += 30;
+    else if (token.age < 30) score += 20;
+    else if (token.age < 60) score += 10;
+    else if (token.age < 240) score += 5; // Still somewhat new
+    
+    // Price action
     if (token.priceChange > 50) score += 30;
     else if (token.priceChange > 20) score += 20;
     else if (token.priceChange > 0) score += 10;
     
     if (token.volume24h > 50000) score += 20;
     else if (token.volume24h > 10000) score += 10;
+    else if (token.volume24h > 1000) score += 5;
     
     if (token.liquidity > 30000) score += 10;
     else if (token.liquidity > 10000) score += 5;
     
-    console.log(`   📊 ${token.symbol}: Score ${score}/100 (age: ${token.age.toFixed(1)}min, liq: $${token.liquidity.toFixed(0)})`);
+    // Boosted tokens get bonus (they paid for visibility = more legitimate)
+    if (token.boosted) {
+      score += 15; // Boost bonus
+      if (token.boostAmount >= 10) score += 10; // Extra for high boost
+    }
     
-    if (score >= 50) { // Lowered from 60 to 50
+    console.log(`   📊 ${token.symbol}: Score ${score}/100 (age: ${token.age?.toFixed(1) || '?'}min, liq: $${token.liquidity?.toFixed(0) || '?'}, boosted: ${token.boosted || false})`);
+    
+    if (score >= 45) { // Lowered threshold for boosted tokens
       console.log(`   🎯 BLESSING OPPORTUNITY: ${token.symbol}!`);
       await executeEntry(token, state);
       presence.addToWatch(token.address);
