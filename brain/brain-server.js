@@ -793,7 +793,7 @@ app.get('/swarm', async (req, res) => {
 
 app.get('/live-trader', async (req, res) => {
   try {
-    const { loadState, CONFIG, getWageStatus } = require('./live-trader.js');
+    const { loadState, CONFIG, getWageStatus, BankrClient } = require('./live-trader.js');
     const state = await loadState();
     
     // Get wage status
@@ -802,9 +802,18 @@ app.get('/live-trader', async (req, res) => {
       wageStatus = getWageStatus(state);
     } catch {}
     
+    // Get wallet balance
+    let walletBalance = 0;
+    try {
+      const bankr = new BankrClient();
+      const balance = await bankr.getBalance(CONFIG.TRADING_WALLET);
+      walletBalance = parseFloat(balance?.usdcBalance || '0') / 1e6;
+    } catch {}
+    
     res.json({
-      active: state.active !== false, // Default to true if not explicitly false
-      wallet: CONFIG.PHANTOM_WALLET,
+      active: state.active !== false,
+      wallet: CONFIG.TRADING_WALLET,
+      walletBalance,
       chains: CONFIG.CHAINS,
       stats: {
         totalTrades: state.totalTrades || 0,
@@ -813,7 +822,6 @@ app.get('/live-trader', async (req, res) => {
         losses: state.losses || 0,
         winRate: state.totalTrades > 0 ? state.wins / state.totalTrades : 0,
         dailyVolume: state.dailyVolume || 0,
-        maxDailyVolume: CONFIG.MAX_DAILY_VOLUME,
       },
       // 💰 Wage incentive tracking
       wage: wageStatus || {
@@ -835,27 +843,43 @@ app.get('/live-trader', async (req, res) => {
         enteredAt: p.enteredAt,
         strategy: p.strategy,
         chain: p.chain || 'base',
+        tier: p.tier,
       })),
+      // New config structure for ecosystem sniper
       config: {
-        maxPosition: CONFIG.MAX_POSITION_USD,
-        maxDaily: CONFIG.MAX_DAILY_VOLUME,
+        entryPercent: CONFIG.SNIPER?.ENTRY_PERCENT || 0.20,
+        minEntry: CONFIG.SNIPER?.MIN_ENTRY_USD || 5,
+        maxEntry: CONFIG.SNIPER?.MAX_ENTRY_USD || 50,
         maxPositions: CONFIG.MAX_OPEN_POSITIONS,
-        polymarket: CONFIG.POLYMARKET,
+        scoreThreshold: 45,
         wageTarget: CONFIG.WAGE?.HOURLY_TARGET_USD || 40,
       },
+      // Ecosystem focus info
+      ecosystem: {
+        focus: ['Top 100 Base', 'Bankr', 'Clanker', 'Clawd', 'AI'],
+        tiers: {
+          tier1: ['Bankr', 'Clawd'],
+          tier2: ['AI tokens'],
+          tier3: ['VIRTUAL', 'AERO', 'DEGEN', 'BRETT', 'TOSHI'],
+        },
+      },
       lastTick: state.lastTick,
+      lastScan: state.lastScan || null,
     });
   } catch (err) {
     console.log('Live trader endpoint error:', err.message);
     res.json({ 
       active: false, 
       error: err.message,
-      wallet: '0xd06Aa956CEDA935060D9431D8B8183575c41072d',
-      stats: { totalTrades: 0, totalPnL: 0, wins: 0, losses: 0, winRate: 0, dailyVolume: 0, maxDailyVolume: 500 },
+      wallet: process.env.TRADING_WALLET || '',
+      walletBalance: 0,
+      stats: { totalTrades: 0, totalPnL: 0, wins: 0, losses: 0, winRate: 0, dailyVolume: 0 },
       wage: { hourlyTarget: 40, efficiency: '0%', rating: '🔴 OFFLINE' },
       positions: [],
-      config: {},
-      lastTick: null
+      config: { entryPercent: 0.20, minEntry: 5, maxEntry: 50, maxPositions: 5, scoreThreshold: 45 },
+      ecosystem: { focus: [], tiers: {} },
+      lastTick: null,
+      lastScan: null
     });
   }
 });

@@ -82,8 +82,9 @@ interface TradingGoal {
 // CONSTANTS
 // ════════════════════════════════════════════════════════════════
 
-const PHANTOM_WALLET = '0xd06Aa956CEDA935060D9431D8B8183575c41072d';
-const COLD_WALLET = '0x0B2de87D4996eA37075E2527BC236F5b069E623D';
+// Wallet addresses from environment variables (never hardcode!)
+const TRADING_WALLET = process.env.NEXT_PUBLIC_TRADING_WALLET || '';
+const COLD_WALLET = process.env.NEXT_PUBLIC_COLD_WALLET || '';
 
 const ALLOCATIONS: Allocation[] = [
   { category: 'Trading Capital', target: 40, current: 0, color: '#FF6B9D', description: 'Active memecoin sniping on Base' },
@@ -221,7 +222,7 @@ async function fallbackDirectFetch(): Promise<{
       body: JSON.stringify({
         jsonrpc: '2.0',
         method: 'eth_getBalance',
-        params: [PHANTOM_WALLET, 'latest'],
+        params: [TRADING_WALLET, 'latest'],
         id: 1
       })
     });
@@ -317,7 +318,7 @@ async function fetchEthPrice(): Promise<number> {
 
 export function WalletDashboard() {
   const [wallet, setWallet] = useState<WalletState>({
-    address: PHANTOM_WALLET,
+    address: TRADING_WALLET,
     label: 'Phantom Trading',
     chains: {
       base: { eth: 0, tokens: [] },
@@ -346,7 +347,7 @@ export function WalletDashboard() {
         // Also fetch cold wallet and polygon separately
         const [coldEth, polygonBal] = await Promise.all([
           fetchBaseBalance(COLD_WALLET),
-          fetchPolygonBalance(PHANTOM_WALLET),
+          fetchPolygonBalance(TRADING_WALLET),
         ]);
         
         setEthPrice(brainData.ethPrice);
@@ -362,7 +363,7 @@ export function WalletDashboard() {
         const totalUsd = warmUsd + coldUsd;
 
         setWallet({
-          address: PHANTOM_WALLET,
+          address: TRADING_WALLET,
           label: 'Phantom Trading',
           chains: {
             base: { eth: baseEth, tokens: brainData.tokens },
@@ -610,12 +611,12 @@ export function WalletDashboard() {
           <div className="flex items-center justify-between">
             <span style={{ color: '#FF6B00' }}>Warm (Trading)</span>
             <a 
-              href={`https://basescan.org/address/${PHANTOM_WALLET}`}
+              href={`https://basescan.org/address/${TRADING_WALLET}`}
               target="_blank"
               className="hover:underline"
               style={{ color: '#0052FF' }}
             >
-              {PHANTOM_WALLET.slice(0, 10)}...{PHANTOM_WALLET.slice(-8)}
+              {TRADING_WALLET.slice(0, 10)}...{TRADING_WALLET.slice(-8)}
             </a>
           </div>
           <div className="flex items-center justify-between">

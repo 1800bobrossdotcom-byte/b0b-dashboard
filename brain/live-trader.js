@@ -3,19 +3,20 @@
  * ════════════════════════════════════════════════════════════════════════════
  * 
  * THIS IS REAL MONEY. This module executes actual trades on Base chain
- * through our Phantom wallet (0xd06Aa956CEDA935060D9431D8B8183575c41072d)
  * using Bankr as the signing layer.
  * 
- * The "paper swarm" was training wheels. This is the real bike.
+ * Focus: Top 100 Base tokens + Bankr/Clanker/Clawd ecosystem
  * 
  * Strategies:
- * 1. BLESSING SNIPER — New tokens, momentum plays, disciplined exits
+ * 1. BLESSING SNIPER — Ecosystem tokens, momentum plays, disciplined exits
  * 2. EQUILIBRIUM — Market inefficiencies, mean reversion
  * 
  * Safety: Hard limits, position sizing, automated exits
- * 
- * "No mistakes, just happy accidents." — But with real money, we're careful.
+ * No daily volume limit - trade as opportunities arise
  */
+
+// Load environment variables from .env file
+require('dotenv').config();
 
 const fs = require('fs').promises;
 const path = require('path');
@@ -25,13 +26,17 @@ const path = require('path');
 // ════════════════════════════════════════════════════════════════════════════
 
 const CONFIG = {
-  // Wallet Hierarchy — SAME WALLET, MULTIPLE CHAINS
-  PHANTOM_WALLET: '0xd06Aa956CEDA935060D9431D8B8183575c41072d',  // Hot/Trading
-  COLD_WALLET: '0x0B2de87D4996eA37075E2527BC236F5b069E623D',     // Treasury/Cold Storage (Base)
+  // Wallet Hierarchy — Loaded from environment variables
+  // After 2026-01-28 security incident: NO hardcoded addresses
+  TRADING_WALLET: process.env.TRADING_WALLET || '',
+  COLD_WALLET: process.env.COLD_WALLET || '',
+  
+  // Bankr API for trade execution
+  BANKR_API_KEY: process.env.BANKR_API_KEY || '',
   
   // ══════════════════════════════════════════════════════════════════════════
   // MULTI-CHAIN CONFIG
-  // Phantom wallet works on: Base (memecoins) + Polygon (Polymarket)
+  // Trading wallet works on: Base (memecoins) + Polygon (Polymarket)
   // ══════════════════════════════════════════════════════════════════════════
   CHAINS: {
     base: {
@@ -67,22 +72,28 @@ const CONFIG = {
     STRATEGY: 'edge_hunter',       // Look for mispriced markets
   },
   
-  // Bankr — x402 Payment Protocol
-  // Uses private key to sign USDC payments ($0.10/request)
-  // ⚠️ NEVER commit private keys! Use Railway environment variables
-  PHANTOM_PRIVATE_KEY: process.env.PHANTOM_PRIVATE_KEY,
-  BANKR_API_URL: 'https://api.bankr.bot',
+  // Bankr — Trading API
+  // Option 1: x402 Payment Protocol (requires private key to sign USDC payments)
+  // Option 2: API Key authentication (simpler, no private key needed)
+  // ⚠️ NEVER commit private keys! Use environment variables only
+  TRADING_PRIVATE_KEY: process.env.TRADING_PRIVATE_KEY || process.env.PHANTOM_PRIVATE_KEY,
+  BANKR_API_URL: process.env.BANKR_API_URL || 'https://api.bankr.bot',
   X402_MAX_PAYMENT: BigInt(1000000),  // Max $1.00 USDC per request (in 6 decimals)
   
   // Safety Limits (applies to all chains)
-  MAX_POSITION_USD: 100,       // Max per trade
-  MAX_DAILY_VOLUME: 500,       // Max daily trading volume
+  MAX_POSITION_USD: parseInt(process.env.MAX_POSITION_USD) || 100,
+  MAX_DAILY_VOLUME: Infinity, // No daily limit - trade as opportunities arise
   MAX_OPEN_POSITIONS: 5,       // Max concurrent positions
   MIN_LIQUIDITY: 10000,        // Minimum token liquidity
   
   // Blessing Sniper Config (Base chain memecoins)
+  // Entry size is DYNAMIC based on wallet balance
   SNIPER: {
-    ENTRY_SIZE_USD: 50,        // Initial entry
+    // Entry sizing - percentage of available balance
+    ENTRY_PERCENT: 0.20,       // Use 20% of available balance per trade
+    MIN_ENTRY_USD: 5,          // Minimum $5 entry (micro-trades OK!)
+    MAX_ENTRY_USD: parseInt(process.env.MAX_POSITION_USD) || 50, // Cap at $50
+    
     EXIT_PERCENT: 0.90,        // Exit 90% at target
     HOLD_PERCENT: 0.10,        // Hold 10% for moonbag
     TARGET_MULTIPLIER: 2,      // 2x target for exit
@@ -336,8 +347,8 @@ async function recordTrade(trade) {
 class BankrClient {
   constructor() {
     this.apiUrl = CONFIG.BANKR_API_URL;
-    this.privateKey = CONFIG.PHANTOM_PRIVATE_KEY;
-    this.walletAddress = CONFIG.PHANTOM_WALLET;
+    this.privateKey = CONFIG.TRADING_PRIVATE_KEY;
+    this.walletAddress = CONFIG.TRADING_WALLET;
     this.fetchWithPay = null; // Lazy init
   }
   
@@ -348,7 +359,7 @@ class BankrClient {
     if (this.fetchWithPay) return;
     
     if (!this.privateKey) {
-      throw new Error('PHANTOM_PRIVATE_KEY not set - required for x402 payments');
+      throw new Error('TRADING_PRIVATE_KEY not set - required for x402 payments');
     }
     
     // Dynamic imports for ESM modules
@@ -613,7 +624,7 @@ class BankrClient {
           body: JSON.stringify({
             jsonrpc: '2.0',
             method: 'eth_getBalance',
-            params: [CONFIG.PHANTOM_WALLET, 'latest'],
+            params: [CONFIG.TRADING_WALLET, 'latest'],
             id: 1
           }),
         });
@@ -676,128 +687,90 @@ class BankrClient {
 const bankr = new BankrClient();
 
 // ════════════════════════════════════════════════════════════════════════════
-// TOKEN DISCOVERY — Find new tokens for blessing plays
+// TOKEN DISCOVERY — Top 100 Base tokens + Bankr/Clanker/Clawd ecosystem
+// Focus: Vetted tokens only, no random memecoins
 // ════════════════════════════════════════════════════════════════════════════
+
+// Known ecosystem tokens we always want to track
+const ECOSYSTEM_TOKENS = {
+  // Tier 1: Core ecosystem (highest priority)
+  'BANKR': { tier: 1, ecosystem: 'bankr', address: '0xe95fa14db9f1b6297fc93b1c25535e487e24a6a1' },
+  'BNKR': { tier: 1, ecosystem: 'bankr', address: '0xe95fa14db9f1b6297fc93b1c25535e487e24a6a1' },
+  'CLAWD': { tier: 1, ecosystem: 'clawd', address: null }, // Various deployments
+  
+  // Tier 2: AI Agent tokens
+  'VIRTUAL': { tier: 2, ecosystem: 'ai', address: '0x0b3e328455c4059eeb9e3f84b5543f74e24e7e1b' },
+  'AIXBT': { tier: 2, ecosystem: 'ai', address: null },
+  'FAI': { tier: 2, ecosystem: 'ai', address: null },
+  'LUNA': { tier: 2, ecosystem: 'ai', address: '0x55cd6469f597452b5a7536e2cd98fde4c1247ee4' },
+  
+  // Tier 3: Blue chip Base memes
+  'TOSHI': { tier: 3, ecosystem: 'bluechip', address: '0xac1bd2486aaf3b5c0fc3fd868558b082a531b2b4' },
+  'BRETT': { tier: 3, ecosystem: 'bluechip', address: '0x532f27101965dd16442e59d40670faf5ebb142e4' },
+  'DEGEN': { tier: 3, ecosystem: 'bluechip', address: '0x4ed4e862860bed51a9570b96d89af5e1b0efefed' },
+};
 
 async function discoverNewTokens() {
   const fetch = (await import('node-fetch')).default;
   const tokens = [];
   
   try {
-    // Use DexScreener's token-profiles API (lists ALL new tokens with profiles)
-    const profileRes = await fetch(
-      'https://api.dexscreener.com/token-profiles/latest/v1',
-      { timeout: 10000, headers: { 'Accept': 'application/json' } }
+    // ════════════════════════════════════════════════════════════════════════════
+    // STEP 1: Fetch TOP 100 Base tokens by market cap/volume
+    // These are vetted, established tokens - our primary focus
+    // ════════════════════════════════════════════════════════════════════════════
+    console.log(`   📊 Fetching top 100 Base tokens...`);
+    
+    const topTokensRes = await fetch(
+      'https://api.dexscreener.com/latest/dex/search?q=base',
+      { timeout: 15000, headers: { 'Accept': 'application/json' } }
     );
-    const profiles = await profileRes.json();
+    const topTokensData = await topTokensRes.json();
     
-    // Filter for Base chain tokens
-    const baseTokens = Array.isArray(profiles) 
-      ? profiles.filter(t => t.chainId === 'base')
-      : [];
+    // Filter for Base chain and sort by liquidity (proxy for market cap)
+    const basePairs = (topTokensData.pairs || [])
+      .filter(p => p.chainId === 'base')
+      .sort((a, b) => parseFloat(b.liquidity?.usd || 0) - parseFloat(a.liquidity?.usd || 0))
+      .slice(0, 100);
     
-    console.log(`   📡 DexScreener profiles: ${profiles?.length || 0} total, ${baseTokens.length} on Base`);
+    console.log(`   📊 Top 100 Base tokens: ${basePairs.length} found`);
     
-    // For each Base token, get pair data
-    for (const profile of baseTokens.slice(0, 10)) {
-      try {
-        // Get detailed pair data for this token
-        const pairRes = await fetch(
-          `https://api.dexscreener.com/latest/dex/tokens/${profile.tokenAddress}`,
-          { timeout: 5000, headers: { 'Accept': 'application/json' } }
-        );
-        const pairData = await pairRes.json();
-        
-        // Find the best Base pair
-        const basePair = (pairData.pairs || []).find(p => p.chainId === 'base');
-        if (!basePair) continue;
-        
-        const liquidity = parseFloat(basePair.liquidity?.usd || 0);
-        const volume = parseFloat(basePair.volume?.h24 || 0);
-        const priceChange = parseFloat(basePair.priceChange?.h24 || 0);
-        
-        // Relaxed liquidity check - $2k minimum for new tokens
-        if (liquidity < 2000) continue;
-        
-        // Skip if no volume
-        if (volume < 500) continue;
-        
-        tokens.push({
-          symbol: basePair.baseToken?.symbol,
-          address: basePair.baseToken?.address,
-          price: parseFloat(basePair.priceUsd || 0),
-          priceChange24h: priceChange,
-          volume24h: volume,
-          liquidity: liquidity,
-          pairAddress: basePair.pairAddress,
-          dex: basePair.dexId,
-          url: basePair.url,
-          icon: profile.icon,
-          description: profile.description,
-          links: profile.links,
-        });
-      } catch (e) {
-        // Skip individual token errors
-      }
-    }
-    
-    // Also check boosted tokens (paid promotion = attention)
-    try {
-      const boostRes = await fetch(
-        'https://api.dexscreener.com/token-boosts/latest/v1',
-        { timeout: 10000, headers: { 'Accept': 'application/json' } }
-      );
-      const boosts = await boostRes.json();
-      const baseBoosted = Array.isArray(boosts) 
-        ? boosts.filter(t => t.chainId === 'base')
-        : [];
+    for (const pair of basePairs) {
+      const symbol = pair.baseToken?.symbol?.toUpperCase() || '';
+      const liquidity = parseFloat(pair.liquidity?.usd || 0);
+      const volume = parseFloat(pair.volume?.h24 || 0);
       
-      console.log(`   🚀 Boosted tokens: ${baseBoosted.length} on Base`);
+      // Minimum $50k liquidity for top 100
+      if (liquidity < 50000) continue;
       
-      for (const boost of baseBoosted.slice(0, 5)) {
-        try {
-          const pairRes = await fetch(
-            `https://api.dexscreener.com/latest/dex/tokens/${boost.tokenAddress}`,
-            { timeout: 5000, headers: { 'Accept': 'application/json' } }
-          );
-          const pairData = await pairRes.json();
-          
-          const basePair = (pairData.pairs || []).find(p => p.chainId === 'base');
-          if (!basePair) continue;
-          
-          // Skip if already added
-          if (tokens.find(t => t.address === basePair.baseToken?.address)) continue;
-          
-          const liquidity = parseFloat(basePair.liquidity?.usd || 0);
-          const volume = parseFloat(basePair.volume?.h24 || 0);
-          
-          if (liquidity < 1000) continue;
-          
-          tokens.push({
-            symbol: basePair.baseToken?.symbol,
-            address: basePair.baseToken?.address,
-            price: parseFloat(basePair.priceUsd || 0),
-            priceChange24h: parseFloat(basePair.priceChange?.h24 || 0),
-            volume24h: volume,
-            liquidity: liquidity,
-            pairAddress: basePair.pairAddress,
-            dex: basePair.dexId,
-            url: basePair.url,
-            boosted: true,
-            boostAmount: boost.amount,
-          });
-        } catch (e) {
-          // Skip individual token errors
-        }
-      }
-    } catch (e) {
-      console.log(`   ⚠️ Boost check failed: ${e.message}`);
+      // Check if it's an ecosystem token
+      const ecosystemInfo = ECOSYSTEM_TOKENS[symbol];
+      
+      tokens.push({
+        symbol: pair.baseToken?.symbol,
+        name: pair.baseToken?.name,
+        address: pair.baseToken?.address,
+        price: parseFloat(pair.priceUsd || 0),
+        priceChange24h: parseFloat(pair.priceChange?.h24 || 0),
+        volume24h: volume,
+        liquidity: liquidity,
+        pairAddress: pair.pairAddress,
+        dex: pair.dexId,
+        url: pair.url,
+        source: 'top100',
+        tier: ecosystemInfo?.tier || 4,
+        ecosystem: ecosystemInfo?.ecosystem || null,
+        isEcosystemToken: !!ecosystemInfo,
+      });
     }
     
     // ════════════════════════════════════════════════════════════════════════════
-    // CLANKER — Fresh token deployments on Base (including Bankr-deployed)
+    // STEP 2: CLANKER — Fresh deployments (Bankr/Clawd ecosystem priority)
+    // Lower liquidity threshold but ONLY if from trusted deployers
     // ════════════════════════════════════════════════════════════════════════════
     try {
+      console.log(`   🤖 Checking Clanker ecosystem...`);
+      
       const clankerRes = await fetch(
         'https://www.clanker.world/api/tokens',
         { timeout: 10000, headers: { 'Accept': 'application/json' } }
@@ -805,23 +778,39 @@ async function discoverNewTokens() {
       const clankerData = await clankerRes.json();
       const clankerTokens = clankerData.data || [];
       
-      console.log(`   🤖 Clanker: ${clankerTokens.length} recent deployments`);
-      
-      // Only look at tokens from the last hour
-      const oneHourAgo = Date.now() - (60 * 60 * 1000);
-      const freshClankers = clankerTokens.filter(t => {
+      // Look at tokens from the last 24 hours
+      const oneDayAgo = Date.now() - (24 * 60 * 60 * 1000);
+      const recentClankers = clankerTokens.filter(t => {
         const deployedAt = new Date(t.deployed_at || t.created_at).getTime();
-        return deployedAt > oneHourAgo;
+        return deployedAt > oneDayAgo;
       });
       
-      console.log(`   🤖 Clanker: ${freshClankers.length} in last hour`);
+      console.log(`   🤖 Clanker: ${recentClankers.length} tokens in last 24h`);
       
-      for (const token of freshClankers.slice(0, 10)) {
+      // Count ecosystem tokens
+      let bankrCount = 0, clawdCount = 0, aiCount = 0;
+      
+      for (const token of recentClankers.slice(0, 20)) {
         try {
           // Skip if already added
           if (tokens.find(t => t.address?.toLowerCase() === token.contract_address?.toLowerCase())) continue;
           
-          // Get DexScreener data for this token
+          // Check ecosystem affiliation
+          const isBankrDeployed = token.social_context?.interface === 'Bankr' ||
+                                   token.name?.toLowerCase().includes('bankr') ||
+                                   token.description?.toLowerCase().includes('bankr');
+          const isClawdDeployed = token.name?.toLowerCase().includes('clawd') || 
+                                   token.name?.toLowerCase().includes('claude') ||
+                                   token.description?.toLowerCase().includes('clawd');
+          const isAIToken = token.name?.toLowerCase().includes('ai') ||
+                            token.name?.toLowerCase().includes('agent') ||
+                            token.description?.toLowerCase().includes('ai agent');
+          
+          if (isBankrDeployed) bankrCount++;
+          if (isClawdDeployed) clawdCount++;
+          if (isAIToken) aiCount++;
+          
+          // Get DexScreener data
           const pairRes = await fetch(
             `https://api.dexscreener.com/latest/dex/tokens/${token.contract_address}`,
             { timeout: 5000, headers: { 'Accept': 'application/json' } }
@@ -834,15 +823,13 @@ async function discoverNewTokens() {
           const liquidity = parseFloat(basePair.liquidity?.usd || 0);
           const volume = parseFloat(basePair.volume?.h24 || 0);
           
-          // Lower thresholds for fresh Clanker tokens
-          if (liquidity < 500) continue;
-          
-          const isBankrDeployed = token.social_context?.interface === 'Bankr';
-          const isClawdDeployed = token.name?.toLowerCase().includes('clawd') || 
-                                   token.description?.toLowerCase().includes('clawd');
+          // Lower threshold for ecosystem tokens ($5k), higher for others ($20k)
+          const minLiquidity = (isBankrDeployed || isClawdDeployed || isAIToken) ? 5000 : 20000;
+          if (liquidity < minLiquidity) continue;
           
           tokens.push({
             symbol: token.symbol || basePair.baseToken?.symbol,
+            name: token.name || basePair.baseToken?.name,
             address: token.contract_address,
             price: parseFloat(basePair.priceUsd || 0),
             priceChange24h: parseFloat(basePair.priceChange?.h24 || 0),
@@ -855,23 +842,88 @@ async function discoverNewTokens() {
             clanker: true,
             bankrDeployed: isBankrDeployed,
             clawdDeployed: isClawdDeployed,
-            startingMarketCap: token.starting_market_cap,
+            isAIToken: isAIToken,
+            tier: isBankrDeployed ? 1 : isClawdDeployed ? 1 : isAIToken ? 2 : 3,
             description: token.description,
           });
         } catch (e) {
           // Skip individual token errors
         }
       }
+      
+      console.log(`   🏦 Bankr ecosystem: ${bankrCount} | 🧠 Clawd: ${clawdCount} | 🤖 AI: ${aiCount}`);
+      
     } catch (e) {
       console.log(`   ⚠️ Clanker check failed: ${e.message}`);
+    }
+    
+    // ════════════════════════════════════════════════════════════════════════════
+    // STEP 3: Boosted tokens (marketing spend = team commitment)
+    // ════════════════════════════════════════════════════════════════════════════
+    try {
+      const boostRes = await fetch(
+        'https://api.dexscreener.com/token-boosts/latest/v1',
+        { timeout: 10000, headers: { 'Accept': 'application/json' } }
+      );
+      const boosts = await boostRes.json();
+      const baseBoosted = Array.isArray(boosts) 
+        ? boosts.filter(t => t.chainId === 'base')
+        : [];
+      
+      console.log(`   🚀 Boosted tokens: ${baseBoosted.length} on Base`);
+      
+      for (const boost of baseBoosted.slice(0, 10)) {
+        try {
+          // Skip if already added
+          if (tokens.find(t => t.address?.toLowerCase() === boost.tokenAddress?.toLowerCase())) continue;
+          
+          const pairRes = await fetch(
+            `https://api.dexscreener.com/latest/dex/tokens/${boost.tokenAddress}`,
+            { timeout: 5000, headers: { 'Accept': 'application/json' } }
+          );
+          const pairData = await pairRes.json();
+          
+          const basePair = (pairData.pairs || []).find(p => p.chainId === 'base');
+          if (!basePair) continue;
+          
+          const liquidity = parseFloat(basePair.liquidity?.usd || 0);
+          const volume = parseFloat(basePair.volume?.h24 || 0);
+          
+          if (liquidity < 10000) continue;
+          
+          tokens.push({
+            symbol: basePair.baseToken?.symbol,
+            name: basePair.baseToken?.name,
+            address: basePair.baseToken?.address,
+            price: parseFloat(basePair.priceUsd || 0),
+            priceChange24h: parseFloat(basePair.priceChange?.h24 || 0),
+            volume24h: volume,
+            liquidity: liquidity,
+            pairAddress: basePair.pairAddress,
+            dex: basePair.dexId,
+            url: basePair.url,
+            source: 'boosted',
+            boosted: true,
+            boostAmount: boost.amount,
+            tier: 3,
+          });
+        } catch (e) {
+          // Skip individual token errors
+        }
+      }
+    } catch (e) {
+      console.log(`   ⚠️ Boost check failed: ${e.message}`);
     }
     
   } catch (error) {
     console.log(`   ⚠️ Token discovery error: ${error.message}`);
   }
   
-  // Sort by volume (active trading)
-  tokens.sort((a, b) => b.volume24h - a.volume24h);
+  // Sort by tier first (ecosystem priority), then by volume
+  tokens.sort((a, b) => {
+    if (a.tier !== b.tier) return a.tier - b.tier; // Lower tier = higher priority
+    return (b.volume24h || 0) - (a.volume24h || 0);
+  });
   
   console.log(`   ✅ Found ${tokens.length} potential Base tokens`);
   
@@ -912,19 +964,43 @@ async function blessingSniperTick(state) {
     return;
   }
   
-  // Discover new tokens
+  // Discover new tokens - focused on Bankr/Clanker/Clawd/AI ecosystem
   const candidates = await discoverNewTokens();
   console.log(`   📡 Found ${candidates.length} candidates`);
   
-  for (const token of candidates.slice(0, 3)) {
+  // Track scan stats for dashboard
+  state.lastScan = {
+    top100: candidates.filter(t => t.source === 'top100').length,
+    clanker: candidates.filter(t => t.clanker).length,
+    bankr: candidates.filter(t => t.bankrDeployed).length,
+    clawd: candidates.filter(t => t.clawdDeployed).length,
+    ai: candidates.filter(t => t.isAIToken).length,
+    candidates: candidates.length,
+    timestamp: new Date().toISOString(),
+  };
+  
+  for (const token of candidates.slice(0, 5)) {
     // Skip if already have position
     if (state.positions.some(p => p.address === token.address)) continue;
     
-    // Score the opportunity
+    // Score the opportunity (now weighted toward our focus tokens)
     const score = scoreBlessing(token);
-    console.log(`   ${token.symbol}: score ${score.toFixed(1)}/100 (${token.priceChange24h.toFixed(0)}% up, ${token.age.toFixed(1)}h old)`);
+    const priceChange = token.priceChange24h || 0;
+    const volume = token.volume24h || 0;
+    const liquidity = token.liquidity || 0;
     
-    if (score < 60) continue; // Need 60+ score
+    // Build source tag for logging
+    const tierEmoji = token.tier === 1 ? '⭐' : token.tier === 2 ? '🔷' : '📊';
+    const sourceTag = token.bankrDeployed ? '🏦 BANKR' : 
+                      token.clawdDeployed ? '🧠 CLAWD' :
+                      token.isAIToken ? '🤖 AI' :
+                      token.clanker ? '🔧 CLANKER' : 
+                      token.boosted ? '🚀 BOOST' :
+                      token.source === 'top100' ? '💯 TOP100' : '📊';
+    
+    console.log(`   ${tierEmoji} ${sourceTag} ${token.symbol}: score ${score.toFixed(0)}/100 | ${priceChange > 0 ? '+' : ''}${priceChange.toFixed(0)}% | $${(volume/1000).toFixed(0)}k vol | $${(liquidity/1000).toFixed(0)}k liq`);
+    
+    if (score < 45) continue; // Need 45+ score (ecosystem tokens start at 40-50)
     
     // EXECUTE ENTRY
     const entry = await executeEntry(token, state);
@@ -936,47 +1012,125 @@ async function blessingSniperTick(state) {
   }
 }
 
+// ════════════════════════════════════════════════════════════════════════════
+// SCORING — Prioritize Bankr/Clanker/Clawd ecosystem + top 100 Base tokens
+// ════════════════════════════════════════════════════════════════════════════
 function scoreBlessing(token) {
   let score = 0;
   
-  // Age bonus (newer = better, 0-12h ideal)
-  if (token.age < 6) score += 30;
-  else if (token.age < 12) score += 20;
-  else if (token.age < 24) score += 10;
+  // ════════════════════════════════════════════════════════════════════════════
+  // TIER BONUS: Based on token discovery tier (ecosystem priority)
+  // Tier 1 = Bankr/Clawd = +50, Tier 2 = AI agents = +40, Tier 3 = Blue chips = +30
+  // ════════════════════════════════════════════════════════════════════════════
+  const tier = token.tier || 4;
+  if (tier === 1) score += 50;      // Bankr/Clawd ecosystem
+  else if (tier === 2) score += 40; // AI agent tokens
+  else if (tier === 3) score += 30; // Blue chip memes / boosted
+  else if (token.source === 'top100') score += 25; // Top 100 Base tokens
   
-  // Momentum bonus
-  if (token.priceChange24h > 100) score += 30;
-  else if (token.priceChange24h > 50) score += 20;
-  else if (token.priceChange24h > 20) score += 10;
+  // Additional ecosystem bonuses (stack with tier)
+  const symbol = (token.symbol || '').toUpperCase();
+  const name = (token.name || token.description || '').toLowerCase();
   
-  // Volume bonus
-  if (token.volume24h > 100000) score += 20;
-  else if (token.volume24h > 50000) score += 15;
-  else if (token.volume24h > 20000) score += 10;
+  // Explicit Bankr ecosystem bonus
+  if (token.bankrDeployed || symbol === 'BANKR' || symbol === 'BNKR' || name.includes('bankr')) {
+    score += 15;
+  }
+  // Explicit Clawd bonus
+  if (token.clawdDeployed || symbol === 'CLAWD' || name.includes('clawd') || name.includes('claude')) {
+    score += 15;
+  }
+  // AI agent tokens bonus
+  if (token.isAIToken || symbol === 'VIRTUAL' || symbol === 'AIXBT' || symbol === 'FAI' ||
+      name.includes('ai agent') || name.includes('autonomous')) {
+    score += 10;
+  }
   
-  // Liquidity safety
-  if (token.liquidity > 50000) score += 20;
-  else if (token.liquidity > 20000) score += 10;
+  // ════════════════════════════════════════════════════════════════════════════
+  // MOMENTUM: Price action signals
+  // ════════════════════════════════════════════════════════════════════════════
+  const priceChange = token.priceChange24h || 0;
+  if (priceChange > 100) score += 20;
+  else if (priceChange > 50) score += 15;
+  else if (priceChange > 20) score += 10;
+  else if (priceChange < -30) score -= 20; // Avoid dumps
+  
+  // ════════════════════════════════════════════════════════════════════════════
+  // VOLUME: Active trading = real interest
+  // ════════════════════════════════════════════════════════════════════════════
+  const volume = token.volume24h || 0;
+  if (volume > 100000) score += 15;
+  else if (volume > 50000) score += 10;
+  else if (volume > 20000) score += 5;
+  
+  // ════════════════════════════════════════════════════════════════════════════
+  // LIQUIDITY: Safety check - can we exit?
+  // ════════════════════════════════════════════════════════════════════════════
+  const liquidity = token.liquidity || 0;
+  if (liquidity > 100000) score += 15;
+  else if (liquidity > 50000) score += 10;
+  else if (liquidity < 10000) score -= 10; // Penalty for low liquidity
+  
+  // ════════════════════════════════════════════════════════════════════════════
+  // BOOSTED: Paid promotion = team has funds and is marketing
+  // ════════════════════════════════════════════════════════════════════════════
+  if (token.boosted) score += 10;
   
   return score;
 }
 
+/**
+ * Calculate dynamic entry size based on wallet balance
+ * Micro-trades are OK! We can momentum trade with small amounts.
+ */
+function calculateEntrySize(walletBalanceUsd) {
+  if (!walletBalanceUsd || walletBalanceUsd <= 0) {
+    return 0; // Can't trade with no balance
+  }
+  
+  // Calculate entry as percentage of available balance
+  let entrySize = walletBalanceUsd * CONFIG.SNIPER.ENTRY_PERCENT;
+  
+  // Apply min/max constraints
+  entrySize = Math.max(entrySize, CONFIG.SNIPER.MIN_ENTRY_USD);
+  entrySize = Math.min(entrySize, CONFIG.SNIPER.MAX_ENTRY_USD);
+  
+  // Don't trade if we'd use more than 50% of balance on one trade
+  if (entrySize > walletBalanceUsd * 0.5) {
+    entrySize = walletBalanceUsd * 0.5;
+  }
+  
+  // Round to 2 decimals
+  return Math.round(entrySize * 100) / 100;
+}
+
 async function executeEntry(token, state) {
-  const amount = CONFIG.SNIPER.ENTRY_SIZE_USD;
+  // Get current wallet balance for dynamic sizing
+  const balance = await bankr.getBalance(true);
+  const walletBalanceUsd = balance?.usd || 0;
+  
+  // Calculate dynamic entry size based on actual balance
+  const amount = calculateEntrySize(walletBalanceUsd);
+  
+  if (amount < CONFIG.SNIPER.MIN_ENTRY_USD) {
+    console.log(`\n   ⚠️ Insufficient balance for ${token.symbol}`);
+    console.log(`      Wallet: $${walletBalanceUsd.toFixed(2)} | Min entry: $${CONFIG.SNIPER.MIN_ENTRY_USD}`);
+    return { success: false, reason: 'insufficient_balance' };
+  }
   
   console.log(`\n   🎯 ENTERING ${token.symbol}`);
-  console.log(`      Price: $${token.price.toFixed(6)}`);
-  console.log(`      Amount: $${amount}`);
-  console.log(`      Target: ${CONFIG.SNIPER.TARGET_MULTIPLIER}x ($${(token.price * CONFIG.SNIPER.TARGET_MULTIPLIER).toFixed(6)})`);
+  console.log(`      Wallet: $${walletBalanceUsd.toFixed(2)} | Entry: $${amount} (${((amount/walletBalanceUsd)*100).toFixed(0)}% of balance)`);
+  console.log(`      Price: $${(token.price || 0).toFixed(6)}`);
+  console.log(`      Target: ${CONFIG.SNIPER.TARGET_MULTIPLIER}x ($${((token.price || 0) * CONFIG.SNIPER.TARGET_MULTIPLIER).toFixed(6)})`);
   
-  // Execute via Bankr
-  const prompt = `Buy $${amount} worth of ${token.symbol} (${token.address}) on Base. Use wallet ${CONFIG.PHANTOM_WALLET}. This is a momentum play.`;
+  // Execute via Bankr - use TRADING_WALLET from config
+  const prompt = `Buy $${amount} worth of ${token.symbol} (${token.address}) on Base. Use wallet ${CONFIG.TRADING_WALLET}. This is a momentum play.`;
   
   // Pass token data for paper trade logging
   const result = await bankr.executeTrade(prompt, {
     symbol: token.symbol,
     address: token.address,
-    price: token.price,
+    price: token.price || 0,
     score: token.score || 0,
     liquidity: token.liquidity,
     volume24h: token.volume24h,
@@ -1082,7 +1236,7 @@ async function executeExit(position, currentPrice, percentage, state) {
   const usdValue = exitAmount * currentPrice;
   const pnl = usdValue - (position.amount * percentage);
   
-  const prompt = `Sell ${percentage * 100}% of my ${position.symbol} holdings (approximately ${exitAmount.toFixed(4)} tokens) on Base. Wallet: ${CONFIG.PHANTOM_WALLET}`;
+  const prompt = `Sell ${percentage * 100}% of my ${position.symbol} holdings (approximately ${exitAmount.toFixed(4)} tokens) on Base. Wallet: ${CONFIG.TRADING_WALLET}`;
   
   const result = await bankr.executeTrade(prompt);
   
@@ -1228,7 +1382,7 @@ async function treasurySweep(state) {
   
   // Execute sweep to cold wallet
   if (CONFIG.TREASURY.SWEEP_TO_COLD && toCold >= CONFIG.TREASURY.MIN_SWEEP_USD) {
-    const sweepPrompt = `Transfer $${toCold.toFixed(2)} ETH from wallet ${CONFIG.PHANTOM_WALLET} to ${CONFIG.COLD_WALLET} on Base. This is a treasury sweep to cold storage.`;
+    const sweepPrompt = `Transfer $${toCold.toFixed(2)} ETH from wallet ${CONFIG.TRADING_WALLET} to ${CONFIG.COLD_WALLET} on Base. This is a treasury sweep to cold storage.`;
     
     console.log(`\n   🏦 Executing cold storage sweep...`);
     const result = await bankr.executeTrade(sweepPrompt);
@@ -1241,7 +1395,7 @@ async function treasurySweep(state) {
       await recordTreasuryAction({
         type: 'sweep_to_cold',
         amount: toCold,
-        from: CONFIG.PHANTOM_WALLET,
+        from: CONFIG.TRADING_WALLET,
         to: CONFIG.COLD_WALLET,
         txHash: result.transactions?.[0]?.hash,
         balanceBefore: warmBalance,
@@ -1256,7 +1410,7 @@ async function treasurySweep(state) {
   
   // Team fund transfer (if separate wallet configured)
   if (CONFIG.TREASURY.TEAM_WALLET && toTeam >= CONFIG.TREASURY.MIN_SWEEP_USD) {
-    const teamPrompt = `Transfer $${toTeam.toFixed(2)} ETH from wallet ${CONFIG.PHANTOM_WALLET} to ${CONFIG.TREASURY.TEAM_WALLET} on Base. Team fund distribution.`;
+    const teamPrompt = `Transfer $${toTeam.toFixed(2)} ETH from wallet ${CONFIG.TRADING_WALLET} to ${CONFIG.TREASURY.TEAM_WALLET} on Base. Team fund distribution.`;
     
     console.log(`\n   🏦 Executing team fund transfer...`);
     const result = await bankr.executeTrade(teamPrompt);
@@ -1675,7 +1829,7 @@ const presence = new PresenceWatcher();
 async function liveTraderTick() {
   console.log(`\n${'═'.repeat(60)}`);
   console.log(`🔥 LIVE TRADER TICK — ${new Date().toISOString()}`);
-  console.log(`   Wallet: ${CONFIG.PHANTOM_WALLET}`);
+  console.log(`   Wallet: ${CONFIG.TRADING_WALLET}`);
   console.log(`${'═'.repeat(60)}`);
   
   const state = await loadState();

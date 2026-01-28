@@ -189,6 +189,7 @@ interface GitRepo {
 interface LiveTraderStatus {
   active: boolean;
   wallet: string;
+  walletBalance: number;
   chains: Record<string, {
     chainId: number;
     rpc: string;
@@ -202,7 +203,6 @@ interface LiveTraderStatus {
     losses: number;
     winRate: number;
     dailyVolume: number;
-    maxDailyVolume: number;
   };
   positions: Array<{
     symbol: string;
@@ -212,13 +212,32 @@ interface LiveTraderStatus {
     stopPrice: number;
     enteredAt: string;
     strategy: string;
+    tier?: string;
   }>;
   config: {
-    maxPosition: number;
-    maxDaily: number;
+    entryPercent: number;
+    minEntry: number;
+    maxEntry: number;
     maxPositions: number;
+    scoreThreshold: number;
+  };
+  ecosystem: {
+    focus: string[];
+    tiers: {
+      tier1: string[];
+      tier2: string[];
+      tier3: string[];
+    };
   };
   lastTick: string | null;
+  lastScan: {
+    top100: number;
+    clanker: number;
+    bankr: number;
+    clawd: number;
+    ai: number;
+    candidates: number;
+  } | null;
 }
 
 export default function LabsPage() {
@@ -636,15 +655,15 @@ export default function LabsPage() {
         <section className="mb-16">
           <h2 className="text-xs font-mono mb-6 tracking-wider flex items-center gap-2">
             <span style={{ color: '#FF6B00' }}>🔥 LIVE TRADER</span>
-            <span style={{ color: '#555555' }}>— REAL MONEY</span>
+            <span style={{ color: '#555555' }}>— REAL MONEY • ECOSYSTEM FOCUS</span>
           </h2>
           
           <div className="rounded-lg" style={{ backgroundColor: '#FFFFFF', border: '2px solid #FF6B0040' }}>
             <div className="flex items-center justify-between p-6 border-b" style={{ borderColor: '#FF6B0040' }}>
               <div>
-                <h3 className="font-medium text-lg" style={{ color: '#FF6B00' }}>Blessing Sniper</h3>
+                <h3 className="font-medium text-lg" style={{ color: '#FF6B00' }}>Ecosystem Sniper</h3>
                 <p className="text-sm" style={{ color: '#555555' }}>
-                  Daoist observer • No emotion, full intuition
+                  Top 100 Base + Bankr/Clanker/Clawd/AI • Wallet-aware micro-trading
                 </p>
               </div>
               <div className="flex items-center gap-2">
@@ -659,19 +678,70 @@ export default function LabsPage() {
               <>
                 {/* Wallet Info */}
                 <div className="p-4 border-b" style={{ borderColor: '#E8E4DE', backgroundColor: '#FFF8F0' }}>
-                  <p className="text-xs mb-1" style={{ color: '#555555' }}>WALLET</p>
-                  <a 
-                    href={`https://basescan.org/address/${liveTrader.wallet}`}
-                    target="_blank"
-                    className="font-mono text-sm hover:underline"
-                    style={{ color: '#0052FF' }}
-                  >
-                    {liveTrader.wallet?.slice(0, 10)}...{liveTrader.wallet?.slice(-8)}
-                  </a>
-                  <span className="text-xs ml-2 px-2 py-0.5 rounded" style={{ backgroundColor: '#0052FF20', color: '#0052FF' }}>
-                    {Object.keys(liveTrader.chains || {}).join(' + ').toUpperCase() || 'MULTI-CHAIN'}
-                  </span>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-xs mb-1" style={{ color: '#555555' }}>WALLET</p>
+                      <a 
+                        href={`https://basescan.org/address/${liveTrader.wallet}`}
+                        target="_blank"
+                        className="font-mono text-sm hover:underline"
+                        style={{ color: '#0052FF' }}
+                      >
+                        {liveTrader.wallet?.slice(0, 10)}...{liveTrader.wallet?.slice(-8)}
+                      </a>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-xs mb-1" style={{ color: '#555555' }}>BALANCE</p>
+                      <p className="font-mono text-lg" style={{ color: '#00AA66' }}>
+                        ${(liveTrader.walletBalance ?? 0).toFixed(2)}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mt-2 flex items-center gap-2 flex-wrap">
+                    <span className="text-xs px-2 py-0.5 rounded" style={{ backgroundColor: '#0052FF20', color: '#0052FF' }}>
+                      BASE
+                    </span>
+                    <span className="text-xs px-2 py-0.5 rounded" style={{ backgroundColor: '#FF6B0020', color: '#FF6B00' }}>
+                      Entry: {((liveTrader.config?.entryPercent ?? 0.2) * 100).toFixed(0)}% (${liveTrader.config?.minEntry ?? 5}-${liveTrader.config?.maxEntry ?? 50})
+                    </span>
+                    <span className="text-xs px-2 py-0.5 rounded" style={{ backgroundColor: '#00AA6620', color: '#00AA66' }}>
+                      No Volume Limit
+                    </span>
+                  </div>
                 </div>
+
+                {/* Last Scan Stats */}
+                {liveTrader.lastScan && (
+                  <div className="p-4 border-b" style={{ borderColor: '#E8E4DE' }}>
+                    <p className="text-xs mb-2" style={{ color: '#FF6B00' }}>LAST SCAN</p>
+                    <div className="grid grid-cols-3 md:grid-cols-6 gap-2 text-xs">
+                      <div className="p-2 rounded text-center" style={{ backgroundColor: '#F0F7FF' }}>
+                        <p style={{ color: '#555555' }}>Top 100</p>
+                        <p className="font-mono font-medium" style={{ color: '#0052FF' }}>{liveTrader.lastScan.top100}</p>
+                      </div>
+                      <div className="p-2 rounded text-center" style={{ backgroundColor: '#FFF0F0' }}>
+                        <p style={{ color: '#555555' }}>Clanker</p>
+                        <p className="font-mono font-medium" style={{ color: '#DC2626' }}>{liveTrader.lastScan.clanker}</p>
+                      </div>
+                      <div className="p-2 rounded text-center" style={{ backgroundColor: '#FFF8F0' }}>
+                        <p style={{ color: '#555555' }}>Bankr</p>
+                        <p className="font-mono font-medium" style={{ color: '#FF6B00' }}>{liveTrader.lastScan.bankr}</p>
+                      </div>
+                      <div className="p-2 rounded text-center" style={{ backgroundColor: '#F0FFF4' }}>
+                        <p style={{ color: '#555555' }}>Clawd</p>
+                        <p className="font-mono font-medium" style={{ color: '#00AA66' }}>{liveTrader.lastScan.clawd}</p>
+                      </div>
+                      <div className="p-2 rounded text-center" style={{ backgroundColor: '#F5F0FF' }}>
+                        <p style={{ color: '#555555' }}>AI</p>
+                        <p className="font-mono font-medium" style={{ color: '#8B5CF6' }}>{liveTrader.lastScan.ai}</p>
+                      </div>
+                      <div className="p-2 rounded text-center" style={{ backgroundColor: '#FFFBEB' }}>
+                        <p style={{ color: '#555555' }}>Candidates</p>
+                        <p className="font-mono font-medium" style={{ color: '#F59E0B' }}>{liveTrader.lastScan.candidates}</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
                   <div className="p-4 rounded-lg" style={{ backgroundColor: '#FFF8F0' }}>
@@ -690,17 +760,42 @@ export default function LabsPage() {
                   </div>
                   <div className="p-4 rounded-lg" style={{ backgroundColor: '#FFF8F0' }}>
                     <p className="text-xs mb-1" style={{ color: '#555555' }}>Daily Vol</p>
-                    <p className="text-lg font-mono" style={{ color: '#1A1A1A' }}>${(liveTrader.stats?.dailyVolume ?? 0).toFixed(0)}/{liveTrader.stats?.maxDailyVolume ?? 500}</p>
+                    <p className="text-lg font-mono" style={{ color: '#1A1A1A' }}>${(liveTrader.stats?.dailyVolume ?? 0).toFixed(0)}</p>
                   </div>
                 </div>
 
-                {/* Strategy Details */}
+                {/* Strategy Details - Updated for Ecosystem Focus */}
                 <div className="p-4 border-t" style={{ borderColor: '#E8E4DE' }}>
-                  <p className="text-xs mb-3" style={{ color: '#FF6B00' }}>STRATEGY: BLESSING SNIPER</p>
+                  <p className="text-xs mb-3" style={{ color: '#FF6B00' }}>STRATEGY: ECOSYSTEM SNIPER</p>
+                  
+                  {/* Tier System */}
+                  <div className="mb-4">
+                    <p className="text-xs mb-2" style={{ color: '#555555' }}>SCORING TIERS</p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: '#FF6B0030', color: '#FF6B00' }}>
+                        T1 (+50): Bankr, Clawd
+                      </span>
+                      <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: '#8B5CF630', color: '#8B5CF6' }}>
+                        T2 (+40): AI tokens
+                      </span>
+                      <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: '#0052FF30', color: '#0052FF' }}>
+                        T3 (+30): Blue chips (VIRTUAL, AERO, etc)
+                      </span>
+                    </div>
+                  </div>
+
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
                     <div>
                       <span style={{ color: '#555555' }}>Entry: </span>
-                      <span className="font-mono" style={{ color: '#1A1A1A' }}>${liveTrader.config?.maxPosition ?? 100}</span>
+                      <span className="font-mono" style={{ color: '#1A1A1A' }}>
+                        {((liveTrader.config?.entryPercent ?? 0.2) * 100).toFixed(0)}% of balance
+                      </span>
+                    </div>
+                    <div>
+                      <span style={{ color: '#555555' }}>Range: </span>
+                      <span className="font-mono" style={{ color: '#1A1A1A' }}>
+                        ${liveTrader.config?.minEntry ?? 5}-${liveTrader.config?.maxEntry ?? 50}
+                      </span>
                     </div>
                     <div>
                       <span style={{ color: '#555555' }}>Exit: </span>
@@ -711,16 +806,12 @@ export default function LabsPage() {
                       <span className="font-mono" style={{ color: '#1A1A1A' }}>10% holds</span>
                     </div>
                     <div>
-                      <span style={{ color: '#555555' }}>Retrigger: </span>
-                      <span className="font-mono" style={{ color: '#1A1A1A' }}>@ 5x</span>
+                      <span style={{ color: '#555555' }}>Threshold: </span>
+                      <span className="font-mono" style={{ color: '#00AA66' }}>{liveTrader.config?.scoreThreshold ?? 45}+ score</span>
                     </div>
                     <div>
                       <span style={{ color: '#555555' }}>Stop: </span>
                       <span className="font-mono text-[#DC2626]">-25%</span>
-                    </div>
-                    <div>
-                      <span style={{ color: '#555555' }}>Time Exit: </span>
-                      <span className="font-mono" style={{ color: '#1A1A1A' }}>48h</span>
                     </div>
                   </div>
                 </div>
@@ -755,7 +846,7 @@ export default function LabsPage() {
             ) : (
               <div className="p-6" style={{ color: '#555555' }}>
                 <p>Connecting to live trader...</p>
-                <p className="text-xs mt-2">Wallet: 0xd06Aa956CEDA935060D9431D8B8183575c41072d</p>
+                <p className="text-xs mt-2">Wallet: {process.env.NEXT_PUBLIC_TRADING_WALLET?.slice(0, 10)}...{process.env.NEXT_PUBLIC_TRADING_WALLET?.slice(-8) || 'Loading...'}</p>
               </div>
             )}
           </div>

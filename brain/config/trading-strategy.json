@@ -1,0 +1,112 @@
+{
+  "_SECURITY_INCIDENT_2026_01_28": {
+    "incident": "Wallet drained via exposed Bankr API key",
+    "lesson": "NEVER commit API keys to git, even in JSON discussion files",
+    "action": "All credentials now via environment variables only"
+  },
+  
+  "strategy": {
+    "name": "TOP-100-ECOSYSTEM-FOCUS",
+    "focus": "Top 100 Base tokens + Bankr/Clanker/Clawd ecosystem",
+    "description": "Prioritize vetted ecosystem tokens with elevated scores, momentum plays on top 100",
+    "noDailyLimit": true
+  },
+  
+  "allowedTokenTypes": [
+    "bankr-ecosystem",
+    "clanker-launched", 
+    "clawd-ai",
+    "ai-agents",
+    "top-100-base",
+    "blue-chip-memes"
+  ],
+  
+  "tokenTiers": {
+    "tier1_ecosystem": {
+      "scoreBonus": 50,
+      "minLiquidity": 5000,
+      "tokens": [
+        "BANKR - Bankr Bot ecosystem",
+        "BNKR - Bankr alternative symbol",
+        "CLAWD - Claude AI token",
+        "Any Bankr-deployed token",
+        "Any Clawd-related token"
+      ]
+    },
+    "tier2_ai_agents": {
+      "scoreBonus": 40,
+      "minLiquidity": 10000,
+      "tokens": [
+        "VIRTUAL - Virtuals Protocol",
+        "AIXBT - AI X Bot",
+        "FAI - Freysa AI",
+        "LUNA - Luna on Base",
+        "AI agent tokens from Clanker"
+      ]
+    },
+    "tier3_established": {
+      "scoreBonus": 30,
+      "minLiquidity": 50000,
+      "tokens": [
+        "TOSHI - Toshi cat",
+        "BRETT - Brett memecoin",
+        "DEGEN - Degen token",
+        "Boosted tokens with marketing spend"
+      ]
+    },
+    "tier4_top100": {
+      "scoreBonus": 25,
+      "minLiquidity": 50000,
+      "criteria": "Top 100 Base tokens by liquidity from DexScreener"
+    }
+  },
+  
+  "scoringRules": {
+    "minScoreToTrade": 45,
+    "tierBonus": "Based on tier (50/40/30/25)",
+    "ecosystemStackBonus": "+15 for explicit Bankr/Clawd affiliation",
+    "momentumBonus": "+20 for >100% gain, +15 for >50%, +10 for >20%",
+    "volumeBonus": "+15 for >$100k, +10 for >$50k, +5 for >$20k",
+    "liquidityBonus": "+15 for >$100k, +10 for >$50k, -10 penalty for <$10k",
+    "boostedBonus": "+10 for paid promotion",
+    "dumpPenalty": "-20 for >30% drop"
+  },
+  
+  "tradingRules": {
+    "maxPositionSize": 50,
+    "maxDailyLoss": 100,
+    "maxOpenPositions": 3,
+    "stopLoss": 0.20,
+    "takeProfit": 0.30,
+    "trailingStop": 0.15,
+    "noDailyVolumeLimit": true,
+    
+    "entryConditions": {
+      "requireMinScore": 45,
+      "preferEcosystemTokens": true,
+      "requireVolume24h": 20000,
+      "maxSpread": 0.03,
+      "cooldownMinutes": 15
+    }
+  },
+  
+  "dataSource": {
+    "primary": "dexscreener",
+    "top100Url": "https://api.dexscreener.com/latest/dex/search?q=base",
+    "clankerUrl": "https://www.clanker.world/api/tokens",
+    "boostedUrl": "https://api.dexscreener.com/token-boosts/latest/v1",
+    "refreshIntervalSec": 60
+  },
+  
+  "securityEnforcedRules": {
+    "apiKeysFromEnvOnly": true,
+    "noHardcodedWallets": true,
+    "maxSingleTrade": 50,
+    "requireConfirmationAbove": 100,
+    "envVarsRequired": [
+      "BANKR_API_KEY",
+      "TRADING_WALLET",
+      "COLD_WALLET"
+    ]
+  }
+}

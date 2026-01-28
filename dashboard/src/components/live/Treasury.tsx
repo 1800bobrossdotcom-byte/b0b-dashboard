@@ -55,8 +55,9 @@ export function LiveTreasury() {
     status: 'loading'
   });
 
-  const WARM_WALLET = '0xd06Aa956CEDA935060D9431D8B8183575c41072d';
-  const COLD_WALLET = '0x8455cF296e1265b494605207e97884813De21950';
+  // Wallet addresses from environment variables (never hardcode!)
+  const WARM_WALLET = process.env.NEXT_PUBLIC_TRADING_WALLET || '';
+  const COLD_WALLET = process.env.NEXT_PUBLIC_COLD_WALLET || '';
 
   useEffect(() => {
     const fetchBalances = async () => {
