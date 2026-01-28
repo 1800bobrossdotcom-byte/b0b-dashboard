@@ -14,6 +14,8 @@
  */
 
 import { useEffect, useState } from 'react';
+import OfficeVisualizer from '@/components/OfficeVisualizer';
+import CCTVWindow from '@/components/CCTVWindow';
 
 // Brain server URL - Railway production
 const BRAIN_URL = process.env.NEXT_PUBLIC_BRAIN_URL || 'https://b0b-brain-production.up.railway.app';
@@ -326,6 +328,20 @@ export default function LabsPage() {
               <p className="text-xs text-neutral-600 mt-1">Archived</p>
             </div>
           </div>
+        </section>
+
+        {/* Office Visualizer */}
+        <section className="mb-16">
+          <h2 className="text-sm font-mono text-neutral-500 mb-6">🏢 THE OFFICE</h2>
+          <p className="text-sm text-neutral-400 mb-4">Watch the team work in real-time. Speech bubbles show live activity.</p>
+          <OfficeVisualizer />
+        </section>
+
+        {/* CCTV Window */}
+        <section className="mb-16">
+          <h2 className="text-sm font-mono text-neutral-500 mb-6">📹 CCTV FEED</h2>
+          <p className="text-sm text-neutral-400 mb-4">Data-driven visuals. Volatility affects glitch intensity. Sentiment tints the feed.</p>
+          <CCTVWindow />
         </section>
 
         {/* Chat Archive */}
