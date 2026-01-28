@@ -82,7 +82,7 @@ export default function ComingSoonPage() {
         {/* Logo */}
         <h1 
           className={`text-8xl md:text-[12rem] font-bold tracking-tighter mb-4 transition-all ${
-            glitch ? 'transform translate-x-1 text-cyan-400' : ''
+            glitch ? 'transform translate-x-1 text-[#0052FF]' : ''
           }`}
           style={{ fontFamily: 'monospace' }}
         >

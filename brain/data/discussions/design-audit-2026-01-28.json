@@ -1,0 +1,199 @@
+{
+  "id": "design-audit-2026-01-28",
+  "title": "B0B Platform Design Audit",
+  "date": "2026-01-28",
+  "auditor": "Team (b0b, r0ss, c0m)",
+  "guidelines": {
+    "source": "modular-redesign-spec.json",
+    "aesthetic": "Base Void",
+    "colors": {
+      "primary": "#0052FF",
+      "void": "#000000",
+      "surface": "#0A0A0F",
+      "surface2": "#111118",
+      "text": "#FFFFFF",
+      "textMuted": "#666666",
+      "success": "#00CC66",
+      "warning": "#FFAA00",
+      "error": "#FF4444"
+    },
+    "rules": [
+      "NO glow effects - clean edges only",
+      "Scanlines optional but consistent",
+      "Primary accent: #0052FF (Base blue)",
+      "Typography: Inter + JetBrains Mono",
+      "Minimal, professional, technical"
+    ]
+  },
+  
+  "pages": {
+    "b0b.dev": {
+      "path": "dashboard/src/app/page.tsx",
+      "status": "NEEDS_UPDATE",
+      "currentState": {
+        "colors": {
+          "primary": "#06b6d4 (cyan-400)",
+          "accents": ["cyan", "purple", "amber"],
+          "background": "#050508"
+        },
+        "effects": {
+          "orbs": true,
+          "noise": true,
+          "glow": "PRESENT - floating orbs have blur-3xl glow"
+        },
+        "typography": "Good - using Inter"
+      },
+      "issues": [
+        "❌ Using cyan (#06b6d4) instead of Base blue (#0052FF)",
+        "❌ Floating orbs with blur-3xl glow - violates 'no glow' rule",
+        "❌ Multiple accent colors (cyan, purple, amber) - should be Base blue primary",
+        "⚠️ 'hover:text-cyan-400' throughout - should be hover:text-[#0052FF]",
+        "⚠️ Hero '0' is cyan-400 - should be #0052FF"
+      ],
+      "fixes": [
+        "Replace all cyan-400 with #0052FF",
+        "Remove Orb component (floating glow balls)",
+        "Update hover states to use Base blue",
+        "Keep noise texture (subtle is good)",
+        "Add scanlines option"
+      ]
+    },
+    
+    "0type.b0b.dev": {
+      "path": "0type/src/app/page.tsx",
+      "status": "NEEDS_UPDATE",
+      "currentState": {
+        "colors": {
+          "primary": "cyan-400 (glitch effect)",
+          "background": "black",
+          "text": "white/80, white/60, white/40"
+        },
+        "effects": {
+          "grid": true,
+          "particles": true,
+          "glitch": "cyan-400 on glitch"
+        }
+      },
+      "issues": [
+        "❌ Glitch effect uses cyan-400 - should be #0052FF",
+        "⚠️ Status indicators use green-400/red-400 - OK for status",
+        "⚠️ Particles could stay but match aesthetic"
+      ],
+      "fixes": [
+        "Replace cyan-400 glitch with #0052FF",
+        "Update grid to be more subtle",
+        "Add 'PART OF B0B ECOSYSTEM' branding consistency"
+      ]
+    },
+    
+    "d0t.b0b.dev": {
+      "path": "d0t/web/src/app/page.tsx",
+      "status": "NEEDS_UPDATE",
+      "currentState": {
+        "colors": {
+          "allocation": ["#8b5cf6", "#3b82f6", "#22c55e", "#f59e0b", "#64748b", "#ef4444"],
+          "various": "Mixed color palette"
+        },
+        "effects": "Unknown - need deeper review"
+      },
+      "issues": [
+        "❌ Multiple accent colors for allocation chart",
+        "⚠️ Needs primary blue integration",
+        "⚠️ Check for glow effects"
+      ],
+      "fixes": [
+        "Make primary accent #0052FF",
+        "Keep functional colors for data viz (green/red for PnL)",
+        "Update hover states and highlights to Base blue"
+      ]
+    },
+    
+    "b0b.dev/labs": {
+      "path": "dashboard/src/app/labs/page.tsx",
+      "status": "MOSTLY_GOOD",
+      "currentState": {
+        "colors": {
+          "primary": "#0052FF (correct!)",
+          "background": "#050508",
+          "borders": "neutral-800"
+        },
+        "effects": {
+          "visualizers": "Office + CCTV have proper effects"
+        }
+      },
+      "issues": [
+        "⚠️ Some sections still use cyan-500/30, emerald-500/30",
+        "⚠️ Experimental section has mixed accent colors"
+      ],
+      "fixes": [
+        "Standardize all section accents to #0052FF or neutral",
+        "Keep functional colors (green for success, red for error)"
+      ]
+    },
+    
+    "globals.css": {
+      "path": "dashboard/src/app/globals.css",
+      "status": "GOOD",
+      "currentState": {
+        "cssVars": {
+          "--color-primary": "#0052FF",
+          "--color-void": "#000000",
+          "--color-mind-glow": "transparent"
+        },
+        "effects": {
+          "scanlines": "Implemented with data-scanlines attribute",
+          "crt": "Implemented with data-crt attribute",
+          "noise": "Implemented with data-noise attribute"
+        }
+      },
+      "issues": [
+        "✅ CSS vars are correctly set to Base aesthetic",
+        "✅ Glow is set to transparent",
+        "⚠️ But pages aren't using the CSS vars consistently"
+      ],
+      "fixes": [
+        "Pages should use var(--color-primary) instead of hardcoded colors"
+      ]
+    }
+  },
+  
+  "actionPlan": {
+    "priority1": {
+      "task": "Fix b0b.dev homepage",
+      "changes": [
+        "Remove Orb component entirely",
+        "Replace cyan-400 with #0052FF",
+        "Update all hover states",
+        "Keep noise texture"
+      ]
+    },
+    "priority2": {
+      "task": "Fix 0type page",
+      "changes": [
+        "Replace cyan-400 glitch with #0052FF",
+        "Simplify particles"
+      ]
+    },
+    "priority3": {
+      "task": "Audit d0t page deeply",
+      "changes": [
+        "Review full page",
+        "Update primary accents"
+      ]
+    },
+    "priority4": {
+      "task": "Labs page polish",
+      "changes": [
+        "Standardize section colors"
+      ]
+    }
+  },
+  
+  "summary": {
+    "totalPages": 4,
+    "needsWork": 3,
+    "good": 1,
+    "keyIssue": "Inconsistent use of cyan instead of Base blue #0052FF",
+    "keyFix": "Global find/replace cyan-400 → #0052FF, remove glow/blur effects"
+  }
+}

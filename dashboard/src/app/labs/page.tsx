@@ -619,11 +619,11 @@ export default function LabsPage() {
               </p>
             </div>
 
-            <div className="p-6 border border-cyan-500/30 bg-cyan-500/5 rounded-lg">
+            <div className="p-6 border border-[#0052FF]/30 bg-[#0052FF]/5 rounded-lg">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-2xl">📚</span>
                 <span className="font-bold">Research Library</span>
-                <span className="text-xs bg-cyan-500/20 text-cyan-400 px-2 py-0.5 rounded">ALPHA</span>
+                <span className="text-xs bg-[#0052FF]/20 text-[#0052FF] px-2 py-0.5 rounded">ALPHA</span>
               </div>
               <p className="text-sm text-neutral-400 mb-4">
                 Open-source reference of what we're studying and why.
@@ -632,7 +632,7 @@ export default function LabsPage() {
               <a 
                 href="https://github.com/1800bobrossdotcom-byte/b0b-dashboard/blob/main/brain/data/research-library.json"
                 target="_blank"
-                className="text-xs text-cyan-400 hover:underline"
+                className="text-xs text-[#0052FF] hover:underline"
               >
                 View on GitHub →
               </a>

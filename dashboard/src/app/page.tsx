@@ -23,19 +23,7 @@ const NoiseTexture = () => (
   </svg>
 );
 
-// Floating orb component
-const Orb = ({ delay = 0, size = 300, color = '#06b6d4' }: { delay?: number; size?: number; color?: string }) => (
-  <div 
-    className="absolute rounded-full blur-3xl opacity-20"
-    style={{
-      width: size,
-      height: size,
-      background: `radial-gradient(circle, ${color} 0%, transparent 70%)`,
-      animation: `float 20s ease-in-out infinite`,
-      animationDelay: `${delay}s`,
-    }}
-  />
-);
+// Removed: Orb component (no glow effects per Base aesthetic)
 
 export default function Home() {
   const [time, setTime] = useState('');
@@ -82,13 +70,12 @@ export default function Home() {
         }
       `}</style>
       
-      {/* Floating orbs background */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div style={{ transform: `translate(${mousePos.x}px, ${mousePos.y}px)` }} className="transition-transform duration-1000 ease-out">
-          <div className="absolute top-1/4 left-1/4"><Orb delay={0} size={400} color="#06b6d4" /></div>
-          <div className="absolute top-1/2 right-1/4"><Orb delay={2} size={300} color="#8b5cf6" /></div>
-          <div className="absolute bottom-1/4 left-1/2"><Orb delay={4} size={350} color="#f59e0b" /></div>
-        </div>
+      {/* Subtle grid background - Base aesthetic */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none opacity-[0.03]">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'linear-gradient(#0052FF 1px, transparent 1px), linear-gradient(90deg, #0052FF 1px, transparent 1px)',
+          backgroundSize: '60px 60px'
+        }} />
       </div>
 
       {/* Hero Section */}
@@ -102,7 +89,7 @@ export default function Home() {
           {/* Main Title - BOLD */}
           <h1 className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-black leading-[0.85] tracking-tighter mb-12">
             <span className="block">B</span>
-            <span className="block text-cyan-400">0</span>
+            <span className="block text-[#0052FF]">0</span>
             <span className="block">B</span>
           </h1>
 
@@ -146,7 +133,7 @@ export default function Home() {
                 <span className="w-2 h-2 rounded-full bg-emerald-500" />
                 <span className="text-xs font-mono text-neutral-500">LIVE</span>
               </div>
-              <h3 className="text-3xl font-bold mb-2 group-hover:text-cyan-400 transition-colors">0TYPE</h3>
+              <h3 className="text-3xl font-bold mb-2 group-hover:text-[#0052FF] transition-colors">0TYPE</h3>
               <p className="text-neutral-500">Autonomous typography. AI-generated typefaces.</p>
             </a>
 
@@ -160,7 +147,7 @@ export default function Home() {
                 <span className="w-2 h-2 rounded-full bg-emerald-500" />
                 <span className="text-xs font-mono text-neutral-500">LIVE</span>
               </div>
-              <h3 className="text-3xl font-bold mb-2 group-hover:text-cyan-400 transition-colors">D0T.FINANCE</h3>
+              <h3 className="text-3xl font-bold mb-2 group-hover:text-[#0052FF] transition-colors">D0T.FINANCE</h3>
               <p className="text-neutral-500">Nash equilibrium trading. Swarm treasury.</p>
             </a>
 
@@ -177,13 +164,13 @@ export default function Home() {
             {/* Labs */}
             <a 
               href="/labs"
-              className="group block p-8 border border-cyan-500/30 hover:border-cyan-500/50 transition-all duration-500 hover:bg-cyan-500/5"
+              className="group block p-8 border border-[#0052FF]/30 hover:border-[#0052FF]/50 transition-all duration-500 hover:bg-[#0052FF]/5"
             >
               <div className="flex items-center gap-2 mb-4">
-                <span className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
+                <span className="w-2 h-2 rounded-full bg-[#0052FF] animate-pulse" />
                 <span className="text-xs font-mono text-neutral-500">NEW</span>
               </div>
-              <h3 className="text-3xl font-bold mb-2 group-hover:text-cyan-400 transition-colors">LABS</h3>
+              <h3 className="text-3xl font-bold mb-2 group-hover:text-[#0052FF] transition-colors">LABS</h3>
               <p className="text-neutral-500">System status. Chat archive. Research library.</p>
             </a>
           </div>
@@ -254,12 +241,12 @@ i just said words. that's... embarrassing.</p>
 
               {/* b0b reflection */}
               <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0052FF] to-blue-800 flex items-center justify-center flex-shrink-0">
                   <span>🎨</span>
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="font-bold text-cyan-400">b0b</span>
+                    <span className="font-bold text-[#0052FF]">b0b</span>
                     <span className="text-xs text-neutral-600">Creative Director</span>
                     <span className="text-xs text-neutral-700">12:47 PM</span>
                   </div>
