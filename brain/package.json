@@ -2,14 +2,16 @@
   "name": "@b0b/brain",
   "version": "1.0.0",
   "description": "🧠 The Brain - 24/7 Autonomous Orchestrator for B0B ecosystem",
-  "main": "brain.js",
+  "main": "brain-server.js",
   "scripts": {
-    "start": "node brain.js",
-    "daemon": "pm2 start brain.js --name b0b-brain",
-    "stop": "node brain.js stop",
-    "status": "node brain.js status",
+    "start": "node brain-server.js",
+    "server": "node brain-server.js",
+    "daemon": "pm2 start brain-server.js --name b0b-brain",
+    "stop": "pm2 stop b0b-brain",
+    "status": "node brain-server.js status",
     "logs": "pm2 logs b0b-brain",
-    "monitor": "pm2 monit"
+    "monitor": "pm2 monit",
+    "r0ss": "node r0ss.js"
   },
   "keywords": [
     "autonomous",
@@ -22,7 +24,9 @@
   "dependencies": {
     "@xdevplatform/xdk": "^0.4.0",
     "canvas": "^3.2.1",
+    "cors": "^2.8.6",
     "dotenv": "^17.2.3",
+    "express": "^4.22.1",
     "twitter-api-v2": "^1.29.0"
   }
 }

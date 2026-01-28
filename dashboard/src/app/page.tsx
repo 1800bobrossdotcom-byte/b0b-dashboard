@@ -174,15 +174,18 @@ export default function Home() {
               <p className="text-neutral-600">Autonomous computer control. See, think, act.</p>
             </div>
 
-            {/* R0SS */}
-            <div className="group block p-8 border border-neutral-800/50 bg-neutral-900/30">
+            {/* Labs */}
+            <a 
+              href="/labs"
+              className="group block p-8 border border-cyan-500/30 hover:border-cyan-500/50 transition-all duration-500 hover:bg-cyan-500/5"
+            >
               <div className="flex items-center gap-2 mb-4">
-                <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-                <span className="text-xs font-mono text-neutral-500">BUILDING</span>
+                <span className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
+                <span className="text-xs font-mono text-neutral-500">NEW</span>
               </div>
-              <h3 className="text-3xl font-bold mb-2 text-neutral-600">R0SS COLLECTIVE</h3>
-              <p className="text-neutral-600">Multi-agent swarm. Emergent coordination.</p>
-            </div>
+              <h3 className="text-3xl font-bold mb-2 group-hover:text-cyan-400 transition-colors">LABS</h3>
+              <p className="text-neutral-500">System status. Chat archive. Research library.</p>
+            </a>
           </div>
         </div>
       </section>
