@@ -197,9 +197,24 @@ export function AgentsSection() {
             <GlitchText intensity={0.1}>The Collective</GlitchText>
           </h2>
           <p className="text-lg text-[var(--color-text-muted)] max-w-2xl">
-            Specialized agents working in harmony. Each one a master of their domain,
-            together creating something greater than the sum of parts.
+            Emergent intelligence, not programmed specialties. Each d0t starts as a blank slate.
+            <span className="text-[var(--color-emergence)]"> Identity forms through experience.</span>
           </p>
+        </div>
+        
+        {/* Emergent Philosophy Banner */}
+        <div className="mb-12 p-6 rounded-2xl border border-[var(--color-mind-glow)]/20 bg-[var(--color-mind-glow)]/5">
+          <div className="flex items-start gap-4">
+            <span className="text-3xl">🧬</span>
+            <div>
+              <h3 className="font-bold text-lg mb-2">The da0 Way</h3>
+              <p className="text-sm text-[var(--color-text-muted)]">
+                d0ts don&apos;t come pre-loaded with personalities. They observe, trade, learn, and 
+                naturally develop affinities for certain tokens and strategies. What emerges is 
+                authentic — born from real market experience, not artificial assignment.
+              </p>
+            </div>
+          </div>
         </div>
         
         {/* Agent Grid */}

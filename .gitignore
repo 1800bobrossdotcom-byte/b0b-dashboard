@@ -34,3 +34,5 @@ npm-debug.log*
 config.json
 **/config.json
 credentials.json
+
+**/swarm-wallets.json

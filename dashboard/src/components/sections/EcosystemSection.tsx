@@ -29,9 +29,9 @@ interface Product {
 const ECOSYSTEM: Product[] = [
   {
     name: '0TYPE',
-    tagline: 'Generative typography engine. Design at the speed of thought.',
+    tagline: 'Generative typography engine. Coming soon.',
     url: 'https://0type.b0b.dev',
-    status: 'live',
+    status: 'soon',
     icon: '🔤',
     color: '#00FF88',
   },
@@ -230,11 +230,39 @@ export function EcosystemSection() {
             </div>
             <div className="text-center">
               <div className="text-4xl mb-4">🔒</div>
-              <h3 className="text-xl font-bold mb-2">Ethereum Security</h3>
+              <h3 className="text-xl font-bold mb-2">Bankr-First Security</h3>
               <p className="text-sm text-[var(--color-text-muted)]">
-                L2 rollup backed by Ethereum mainnet. Your funds, always safe.
+                No private keys stored. You sign every transaction. Full control.
               </p>
             </div>
+          </div>
+        </div>
+        
+        {/* Tech Partners */}
+        <div className="mt-16 animate-in">
+          <h3 className="text-sm font-mono text-[var(--color-text-dim)] mb-6 text-center">
+            POWERED BY
+          </h3>
+          <div className="flex flex-wrap items-center justify-center gap-8 opacity-70">
+            <a href="https://anthropic.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-100 transition-opacity">
+              <span className="text-[#D4A27F] font-bold">Claude</span>
+              <span className="text-xs text-[var(--color-text-dim)]">AI</span>
+            </a>
+            <a href="https://base.org" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-100 transition-opacity">
+              <svg className="w-5 h-5" viewBox="0 0 111 111" fill="none">
+                <circle cx="55.5" cy="55.5" r="55.5" fill="#0052FF"/>
+                <path d="M55.5 91.4c-19.8 0-35.9-16.1-35.9-35.9s16.1-35.9 35.9-35.9c17.7 0 32.4 12.9 35.3 29.8H67.2c-2.6-8.1-10.2-14-19.2-14-11.1 0-20.2 9-20.2 20.2s9 20.2 20.2 20.2c9 0 16.6-5.9 19.2-14h23.6c-2.9 16.8-17.6 29.6-35.3 29.6z" fill="white"/>
+              </svg>
+              <span className="text-[#0052FF] font-bold">Base</span>
+            </a>
+            <a href="https://bankr.bot" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-100 transition-opacity">
+              <span className="font-bold">🏦 Bankr</span>
+              <span className="text-xs text-[var(--color-text-dim)]">TX Builder</span>
+            </a>
+            <a href="https://clanker.world" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-100 transition-opacity">
+              <span className="font-bold">⚙️ Clanker</span>
+              <span className="text-xs text-[var(--color-text-dim)]">Tokens</span>
+            </a>
           </div>
         </div>
         

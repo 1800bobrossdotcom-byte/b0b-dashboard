@@ -1,0 +1,28 @@
+{
+  "name": "@b0b/brain",
+  "version": "1.0.0",
+  "description": "🧠 The Brain - 24/7 Autonomous Orchestrator for B0B ecosystem",
+  "main": "brain.js",
+  "scripts": {
+    "start": "node brain.js",
+    "daemon": "pm2 start brain.js --name b0b-brain",
+    "stop": "node brain.js stop",
+    "status": "node brain.js status",
+    "logs": "pm2 logs b0b-brain",
+    "monitor": "pm2 monit"
+  },
+  "keywords": [
+    "autonomous",
+    "ai",
+    "agents",
+    "orchestrator"
+  ],
+  "author": "B0B",
+  "license": "MIT",
+  "dependencies": {
+    "@xdevplatform/xdk": "^0.4.0",
+    "canvas": "^3.2.1",
+    "dotenv": "^17.2.3",
+    "twitter-api-v2": "^1.29.0"
+  }
+}

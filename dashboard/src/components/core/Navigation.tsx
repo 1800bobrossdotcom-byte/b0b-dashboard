@@ -19,7 +19,7 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { label: '0TYPE', href: 'https://0type.b0b.dev' },
+  // { label: '0TYPE', href: 'https://0type.b0b.dev' }, // Coming soon - hidden for now
   { label: 'D0T.FINANCE', href: 'https://d0t.b0b.dev' },
   { label: 'M1ND', href: '#mind' },
   { label: 'AG3NTS', href: '#agents' },

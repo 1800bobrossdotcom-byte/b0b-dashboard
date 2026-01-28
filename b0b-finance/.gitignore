@@ -1,3 +1,12 @@
 
-b0b-finance/swarm-wallets.json
+# Sensitive wallet data - NEVER commit!
 swarm-wallets.json
+b0b-finance/swarm-wallets.json
+wallet-config.json
+
+# Encrypted vault files (old system - deprecated)
+# Config with API keys
+config.json
+
+# State files with potential sensitive data
+*-state.json

@@ -264,9 +264,10 @@ export function MissionSection() {
               href="https://0type.b0b.dev" 
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[var(--color-mind-glow)] transition-colors"
+              className="hover:text-[var(--color-text-muted)] transition-colors opacity-50"
+              title="Coming Soon"
             >
-              0TYPE
+              0TYPE <span className="text-xs">(soon)</span>
             </a>
             <a 
               href="https://d0t.b0b.dev" 

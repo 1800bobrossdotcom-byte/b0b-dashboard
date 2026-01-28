@@ -1,0 +1,195 @@
+{
+  "repos": {
+    "base-org/awesome-base": {
+      "lastStudied": "2026-01-27T23:33:55.382Z",
+      "fileCount": 0,
+      "patterns": []
+    },
+    "Uniswap/v3-core": {
+      "lastStudied": "2026-01-28T02:05:38.020Z",
+      "fileCount": 148,
+      "patterns": [
+        "fileType::8",
+        "fileType:.yml:6",
+        "fileType:.sol:69",
+        "fileType:.ts:23",
+        "fileType:.snap:12",
+        "directory:.github",
+        "directory:audits",
+        "directory:contracts",
+        "directory:test"
+      ]
+    },
+    "polymarket/polymarket-sdk": {
+      "lastStudied": "2026-01-28T01:33:41.198Z",
+      "fileCount": 0,
+      "patterns": []
+    }
+  },
+  "localRepos": {
+    "b0b-finance": {
+      "lastStudied": "2026-01-28T02:05:53.039Z",
+      "patterns": [
+        "func:const https",
+        "func:const crypto",
+        "func:const fs",
+        "func:const path",
+        "func:const CONFIG_FILE",
+        "func:const BANKR_API",
+        "func:function loadConfig",
+        "func:function saveConfig",
+        "func:function bankrRequest",
+        "func:const options",
+        "import:require('https'",
+        "import:require('crypto'",
+        "import:require('fs'",
+        "import:require('path'",
+        "func:const axios",
+        "func:const fs",
+        "func:const path",
+        "func:const CONFIG",
+        "func:const ts",
+        "import:require('axios'",
+        "import:require('fs'",
+        "import:require('path'",
+        "func:const fs",
+        "func:const path",
+        "func:const CONFIG",
+        "func:const today",
+        "func:const upcoming",
+        "func:const bill",
+        "func:const allocated",
+        "func:const sortedBills",
+        "func:const bill",
+        "func:const currentFunded",
+        "import:require('fs'",
+        "import:require('path'",
+        "func:const axios",
+        "func:const fs",
+        "func:const path",
+        "func:const CONFIG",
+        "func:const ts",
+        "func:async scanMarkets",
+        "func:const res",
+        "func:const opportunities",
+        "func:const market",
+        "func:const analysis",
+        "import:require('axios'",
+        "import:require('./nash-swarm'",
+        "import:require('./trading-d0t'",
+        "import:require('fs'",
+        "import:require('path'",
+        "func:const fs"
+      ]
+    },
+    "d0t": {
+      "lastStudied": "2026-01-28T02:05:53.061Z",
+      "patterns": [
+        "func:const path",
+        "func:const SCREENSHOT_PATH",
+        "func:async init",
+        "func:async cleanup",
+        "func:async see",
+        "func:const start",
+        "func:const ocrStart",
+        "func:const lines",
+        "func:const lineHeight",
+        "func:const charWidth",
+        "import:require('child_process'",
+        "import:require('tesseract.js'",
+        "import:require('path'",
+        "func:const D0TAgent",
+        "func:const D0TBrowser",
+        "func:const fs",
+        "func:const path",
+        "func:const WebSocket",
+        "func:const CONFIG",
+        "func:const state",
+        "func:function loadSession",
+        "func:function saveSession",
+        "func:function logAction",
+        "import:require('./agent'",
+        "import:require('./browser'",
+        "import:require('fs'",
+        "import:require('path'",
+        "import:require('child_process'",
+        "import:require('ws'",
+        "func:const browser",
+        "func:const http",
+        "func:const WebSocket",
+        "func:async connect",
+        "func:const targets",
+        "func:const wsUrl",
+        "func:const msg",
+        "func:const id",
+        "func:async goto",
+        "func:const result",
+        "import:require('./browser'",
+        "import:require('http'",
+        "import:require('ws'",
+        "func:const ws",
+        "func:const D0TBrowser",
+        "func:const browser",
+        "func:const url",
+        "func:const title",
+        "func:const info",
+        "func:const text",
+        "func:const exists"
+      ]
+    },
+    "alfred": {
+      "lastStudied": "2026-01-28T02:05:53.063Z",
+      "patterns": [
+        "func:const fs",
+        "func:const path",
+        "func:const ALFRED_HOME",
+        "func:const WORKSPACE",
+        "func:const STATE_FILE",
+        "func:const QUEUE_FILE",
+        "func:const LOG_DIR",
+        "func:const BRIEFINGS_DIR",
+        "func:function loadState",
+        "func:function saveState",
+        "import:require('fs'",
+        "import:require('path'",
+        "import:require('child_process'",
+        "localDir:briefings",
+        "localDir:logs"
+      ]
+    }
+  },
+  "patterns": [
+    "fileType::8",
+    "fileType:.yml:6",
+    "fileType:.sol:69",
+    "fileType:.ts:23",
+    "fileType:.snap:12",
+    "directory:.github",
+    "directory:audits",
+    "directory:contracts",
+    "directory:test"
+  ],
+  "insights": [],
+  "tradingLearnings": {
+    "bestHours": [],
+    "worstHours": [],
+    "winningPatterns": [],
+    "losingPatterns": []
+  },
+  "agentPerformance": {
+    "d0t": {
+      "successRate": 0,
+      "taskCount": 0
+    },
+    "treasury": {
+      "successRate": 0,
+      "taskCount": 0
+    },
+    "alfred": {
+      "successRate": 0,
+      "taskCount": 0
+    }
+  },
+  "evolvedCapabilities": [],
+  "lastUpdated": null
+}

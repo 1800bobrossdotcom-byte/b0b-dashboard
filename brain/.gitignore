@@ -1,0 +1,13 @@
+# Brain secrets - never commit
+.env
+*.log
+
+# Generated files
+briefings/
+agents/
+brain-signals.json
+brain-decisions.json
+brain-pulse.json
+
+# Node
+node_modules/

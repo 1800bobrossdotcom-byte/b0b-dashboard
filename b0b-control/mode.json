@@ -1,15 +1,9 @@
 {
   "mode": "turbo",
-  "activatedAt": "2026-01-27T06:52:42.920Z",
-  "activatedBy": "manual",
-  "actionsPerformed": 4,
-  "lastAction": {
-    "action": "moveMouse",
-    "details": {
-      "x": 960,
-      "y": 540,
-      "method": "powershell"
-    },
-    "timestamp": "2026-01-27T06:49:56.762Z"
-  }
+  "activatedAt": "2026-01-28T00:20:00.000Z",
+  "activatedBy": "user_permission",
+  "actionsPerformed": 0,
+  "lastAction": null,
+  "mouseEnabled": true,
+  "windowEnabled": true
 }

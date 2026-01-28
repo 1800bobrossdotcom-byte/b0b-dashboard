@@ -149,11 +149,31 @@ export function HeroSection() {
         </p>
         
         {/* Status Badge */}
-        <div className="inline-flex items-center gap-3 glass px-6 py-3 rounded-full">
+        <div className="inline-flex items-center gap-3 glass px-6 py-3 rounded-full mb-8">
           <span className="w-2 h-2 rounded-full bg-[var(--color-emergence)] animate-pulse" />
           <span className="text-sm font-mono text-[var(--color-text-muted)]">
             Currently <span className="text-[var(--color-text)]">{agentState}</span>
           </span>
+        </div>
+        
+        {/* Live Stats Row */}
+        <div className="flex flex-wrap justify-center gap-8 mt-8">
+          <div className="glass px-6 py-4 rounded-xl text-center">
+            <div className="text-2xl font-bold text-[var(--color-flow)]">Bankr-First</div>
+            <div className="text-xs text-[var(--color-text-dim)]">Architecture</div>
+          </div>
+          <div className="glass px-6 py-4 rounded-xl text-center">
+            <div className="text-2xl font-bold text-[var(--color-mind-glow)]">Base</div>
+            <div className="text-xs text-[var(--color-text-dim)]">Chain</div>
+          </div>
+          <div className="glass px-6 py-4 rounded-xl text-center">
+            <div className="text-2xl font-bold text-[var(--color-emergence)]">Emergent</div>
+            <div className="text-xs text-[var(--color-text-dim)]">d0t Philosophy</div>
+          </div>
+          <div className="glass px-6 py-4 rounded-xl text-center">
+            <div className="text-2xl font-bold text-[var(--color-heart)]">Open</div>
+            <div className="text-xs text-[var(--color-text-dim)]">Source</div>
+          </div>
         </div>
         
         {/* Scroll Indicator */}

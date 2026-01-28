@@ -206,9 +206,14 @@ export default function D0TFinance() {
           
           <div className="flex items-center gap-4">
             <span className="text-xs font-mono text-[#555] hidden sm:block">by B0B</span>
-            <span className="text-xs font-mono text-green-500 border border-green-500/30 px-3 py-1.5">
-              PAPER MODE
-            </span>
+            <a 
+              href="https://bankr.bot" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-xs font-mono text-[#0052FF] border border-[#0052FF]/30 px-3 py-1.5 hover:bg-[#0052FF]/10 transition-colors"
+            >
+              POWERED BY BANKR
+            </a>
           </div>
         </div>
       </nav>
@@ -216,16 +221,43 @@ export default function D0TFinance() {
       {/* Hero Section */}
       <section className="min-h-screen flex flex-col justify-center pt-16 px-6">
         <div className="max-w-7xl mx-auto w-full">
-          <p className="text-sm font-mono text-[#888] mb-8">
+          <p className="text-sm font-mono text-[#888] mb-8 flex items-center gap-3">
+            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
             Autonomous wealth intelligence by B0B
           </p>
           
           <div className="mb-16">
             <h1 className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-light leading-[0.9] tracking-tight">
-              <span className="block">Cooperative</span>
-              <span className="block">trading,</span>
-              <span className="block text-[#888]">collective wealth.</span>
+              <span className="block">Bankr-First</span>
+              <span className="block">Architecture.</span>
+              <span className="block text-[#888]">You sign. We build.</span>
             </h1>
+          </div>
+          
+          {/* Architecture Banner */}
+          <div className="mb-12 p-6 border border-[#0052FF]/30 bg-[#0052FF]/5 rounded-lg">
+            <div className="grid md:grid-cols-4 gap-6">
+              <div className="text-center">
+                <div className="text-3xl mb-2">🧊</div>
+                <div className="font-mono text-sm">COLD</div>
+                <div className="text-xs text-[#555]">Your hardware wallet</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl mb-2">🌡️</div>
+                <div className="font-mono text-sm">WARM</div>
+                <div className="text-xs text-[#555]">Your Phantom</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl mb-2">🏦</div>
+                <div className="font-mono text-sm">BANKR</div>
+                <div className="text-xs text-[#555]">TX Builder</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl mb-2">🔐</div>
+                <div className="font-mono text-sm">SECURE</div>
+                <div className="text-xs text-[#555]">No keys stored</div>
+              </div>
+            </div>
           </div>
           
           {/* Stats Row - Live Data */}
@@ -503,50 +535,49 @@ export default function D0TFinance() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-16">
             <div>
-              <h2 className="text-sm font-mono text-[#888] mb-4">Philosophy</h2>
+              <h2 className="text-sm font-mono text-[#888] mb-4">The da0 Way</h2>
               <h3 className="text-4xl md:text-5xl font-light mb-6">
-                Beyond PvP.<br />
-                <span className="text-[#888]">Cooperative intelligence.</span>
+                Emergent Intelligence.<br />
+                <span className="text-[#888]">Not programmed personalities.</span>
               </h3>
             </div>
             
             <div className="space-y-6 text-[#888]">
               <p>
-                D0T.FINANCE uses Nash Game Theory to coordinate multiple AI agents
-                that don&apos;t compete — they cooperate. Each agent brings unique
-                perspective: Bull sees opportunity, Bear sees risk, Quant finds
-                edge, Risk manages exposure, Arbiter reaches consensus.
+                D0T agents start as <span className="text-white">blank slates</span>. No pre-assigned 
+                specialties, no forced personalities. They observe markets, execute trades,
+                and naturally develop affinities through real experience.
               </p>
               <p>
-                No agent profits by defecting. The Nash Equilibrium ensures that
-                cooperative decisions outperform individual greed. Wins are
-                distributed: reinvest, treasury, savings, and bluechip DCA.
+                Using Nash Game Theory, the cooperative council doesn&apos;t compete — 
+                they collaborate. Each trade teaches. Patterns emerge. What you see
+                is authentic intelligence, not artificial assignment.
               </p>
               <p>
-                This is autonomous wealth building. Not trading for trading&apos;s
-                sake — building for the long term through collective intelligence.
+                <span className="text-[#0052FF]">Bankr-First Architecture:</span> We build transactions,
+                you sign them in Phantom. No private keys stored. Maximum security, full transparency.
               </p>
               
               <div className="grid grid-cols-2 gap-4 pt-4">
                 <div className="p-4 border border-[#2A2A2A]">
-                  <p className="text-2xl mb-1">🧠</p>
-                  <p className="text-white text-sm">Nash Equilibrium</p>
-                  <p className="text-xs text-[#555]">No agent profits by defecting</p>
+                  <p className="text-2xl mb-1">🌱</p>
+                  <p className="text-white text-sm">Blank Slate</p>
+                  <p className="text-xs text-[#555]">Identity emerges through experience</p>
                 </div>
                 <div className="p-4 border border-[#2A2A2A]">
-                  <p className="text-2xl mb-1">🤝</p>
-                  <p className="text-white text-sm">Cooperative Council</p>
-                  <p className="text-xs text-[#555]">5 agents, 1 consensus</p>
+                  <p className="text-2xl mb-1">🧬</p>
+                  <p className="text-white text-sm">Emergent Affinities</p>
+                  <p className="text-xs text-[#555]">Natural specialization</p>
                 </div>
                 <div className="p-4 border border-[#2A2A2A]">
-                  <p className="text-2xl mb-1">📈</p>
-                  <p className="text-white text-sm">Novel Iterations</p>
-                  <p className="text-xs text-[#555]">Learn from every trade</p>
+                  <p className="text-2xl mb-1">🔐</p>
+                  <p className="text-white text-sm">You Control Keys</p>
+                  <p className="text-xs text-[#555]">Bankr builds, you sign</p>
                 </div>
                 <div className="p-4 border border-[#2A2A2A]">
-                  <p className="text-2xl mb-1">💎</p>
-                  <p className="text-white text-sm">Collective Interest</p>
-                  <p className="text-xs text-[#555]">Swarm wealth &gt; individual</p>
+                  <p className="text-2xl mb-1">🐝</p>
+                  <p className="text-white text-sm">Swarm Learning</p>
+                  <p className="text-xs text-[#555]">One d0t&apos;s insight helps all</p>
                 </div>
               </div>
             </div>
