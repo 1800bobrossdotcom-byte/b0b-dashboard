@@ -13,12 +13,48 @@
  * "See inside the machine. Glass box, not black box."
  */
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Component, ReactNode } from 'react';
 import OfficeVisualizer from '@/components/OfficeVisualizer';
 import CCTVWindow from '@/components/CCTVWindow';
 import GameOfLife from '@/components/GameOfLife';
 import WalletDashboard from '@/components/live/WalletDashboard';
 import TeamChat from '@/components/live/TeamChat';
+
+// Error Boundary to catch component crashes
+class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean; error: Error | null }> {
+  constructor(props: { children: ReactNode }) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#FFFDF9' }}>
+          <div className="text-center p-8">
+            <h1 className="text-2xl font-bold mb-4" style={{ color: '#DC2626' }}>Labs Error</h1>
+            <p className="mb-4" style={{ color: '#555555' }}>Something went wrong loading this page.</p>
+            <pre className="text-xs text-left p-4 rounded overflow-auto max-w-xl" style={{ backgroundColor: '#FEE2E2', color: '#7F1D1D' }}>
+              {this.state.error?.message || 'Unknown error'}
+            </pre>
+            <button 
+              onClick={() => window.location.reload()} 
+              className="mt-4 px-4 py-2 rounded"
+              style={{ backgroundColor: '#0052FF', color: '#FFFFFF' }}
+            >
+              Reload Page
+            </button>
+          </div>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 // Brain server URL - Railway production
 const BRAIN_URL = process.env.NEXT_PUBLIC_BRAIN_URL || 'https://b0b-brain-production.up.railway.app';
@@ -302,6 +338,7 @@ export default function LabsPage() {
   };
 
   return (
+    <ErrorBoundary>
     <main className="min-h-screen" style={{ backgroundColor: '#FFFDF9', color: '#1A1A1A' }}>
       {/* Navigation - BRIGHT theme */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 h-16" style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid #E8E4DE', boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}>
@@ -724,5 +761,6 @@ export default function LabsPage() {
         </footer>
       </div>
     </main>
+    </ErrorBoundary>
   );
 }
