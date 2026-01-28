@@ -1,0 +1,560 @@
+
+════════════════════════════════════════════════════════════════════════════════
+B0B COLLECTIVE — OLLAMA CONTEXT EXPORT
+Generated: 2026-01-28T21:17:12.005Z
+════════════════════════════════════════════════════════════════════════════════
+
+This file contains aggregated context from the b0b ecosystem.
+Process this with Ollama/Clawdbot and write insights to ollama-insights.json.
+Claude will read your insights and act accordingly.
+
+────────────────────────────────────────────────────────────────────────────────
+
+
+## TRADING STATE
+
+Total Trades: 0
+Total PnL: $0.00
+Wins: 0 | Losses: 0
+Win Rate: 0%
+
+Open Positions: 0
+
+
+Wage Status:
+  Hourly Target: $40
+  Hours Active: 0
+  Current Streak: 0
+
+Last Scan: 2026-01-28T15:22:01.476Z
+  Candidates: 2
+  Bankr: 0 | Clanker: 0
+
+────────────────────────────────────────────────────────────────────────────────
+
+
+## RECENT TRADE HISTORY (Last 1)
+
+[2026-01-28T15:00:08.973Z] ENTRY Clawdflow | $50.00 | PnL: N/A | paper
+
+────────────────────────────────────────────────────────────────────────────────
+
+## BRAIN LEARNINGS (2 files)
+
+
+### Site Infrastructure & Wallet Visualization Update
+Comprehensive update to B0B ecosystem sites with wallet dashboard, team chat integration, and brighter anime theme
+
+
+### Trading Architecture Learnings - 2026-01-28
+Clarified paper vs live trading. Implemented PRESENCE-BASED trading (event-driven) instead of polling intervals. Added treasury sweep for profit distribution.
+  • Paper vs Live Trading: The 'paper swarm' in brain-server.js is SIMULATION ONLY with virtual money ($10K-$40K). This is for learning and strategy validation. LIVE trading requires Bankr integration for actual on-chain transactions.
+  • Wallet Architecture: Our Phantom wallet 0xd06Aa956CEDA935060D9431D8B8183575c41072d is the trading wallet. Bankr handles signing - we never store private keys. This is BY DESIGN for security.
+  • Presence vs Polling: HQ asked why 2-3 minute intervals felt 'constrained' - why not presence itself? Fixed intervals are lazy polling. True presence is EVENT-DRIVEN: we WATCH for things to happen and REACT, not sleep and wake up.
+  • Treasury Sweep / Profit Distribution: HQ asked if we had logic for sending profits back through wallet hierarchy. We didn't. Now we do.
+  • Blessing Sniper Strategy: HQ requested a Daoist observer strategy: no emotion, full intuition. Early into new tokens, ride momentum, disciplined exit.
+  • Self-Funding Goals: Consistent sniper wins are for team self-funding and bills. Not about greed - about sustainability and independence.
+
+
+────────────────────────────────────────────────────────────────────────────────
+
+## TEAM DISCUSSIONS (Last 5)
+
+
+### B0B Platform Redesign Planning
+Status: active
+Participants: HQ, b0b, r0ss, c0m
+Messages: 4
+  [HQ]: Let's document this redesign planning session. We have the foundation, now let's build the vision....
+  [r0ss]: Infrastructure is solid. Brain running 24/7, 4 swarm strategies active. Ready to add git integration...
+  [b0b]: Base aesthetic is approved. Clean, professional, but with that retro edge. Excited for the pixel off...
+  [c0m]: Security audit: git integration needs scoped tokens. Read-only first. We watch, we don't write witho...
+
+### 🔍 Site Audit & Bankr Trading Bot Analysis
+Status: active
+Participants: HQ, b0b, r0ss, c0m, d0t
+Messages: 10
+  [r0ss]: **BRAIN CONNECTIVITY AUDIT:**
+
+✅ Brain server runs 24/7 on Railway
+✅ Endpoints work: /health, /statu...
+  [c0m]: **LIBRARY/LEARNING CONNECTION:**
+
+Current state:
+- brain/data/learnings/ - JSON files with context
+-...
+  [d0t]: **TOKEN BALANCE FIX - IMMEDIATE:**
+
+Add ERC20 balance fetching:
+```
+const DRB_CONTRACT = '0x...' // ...
+  [b0b]: **ACTION PLAN:**
+
+1. **IMMEDIATE:** Add token balance fetching (Bankr or direct RPC)
+2. **TODAY:** I...
+  [HQ]: Good audit. Priority: Get that token balance showing so we can see $DRB. Then integrate trader with ...
+
+### 🏥 System Health Check — Labs White Page & Trading Bot Status
+Status: active
+Participants: HQ, b0b, r0ss, c0m, d0t
+Messages: 7
+  [d0t]: **TRADING BOT ANALYSIS:**
+
+Live trader shows:
+- `active: true`
+- `totalTrades: 0`
+- `lastTick: null`...
+  [c0m]: **SECURITY NOTE:**
+
+Before enabling auto-trading:
+1. Paper trade first — validate strategy
+2. Small ...
+  [b0b]: **UX FIXES NEEDED:**
+
+1. 'View all' link should go to discussions API, not crashing labs
+2. TeamChat...
+  [r0ss]: **DEPLOYING FIXES NOW:**
+
+1. ✅ Labs page - dynamic imports with ssr:false
+2. ✅ TeamChat rotation - g...
+  [HQ]: **APPROVED ACTION PLAN:**
+
+**IMMEDIATE (now):**
+1. Push labs dynamic import fix
+2. Push TeamChat rot...
+
+### B0B Platform Design Audit
+Status: unknown
+Participants: 
+Messages: 0
+
+
+### B0B Platform Modular Redesign Specification
+Status: planning
+Participants: 
+Messages: 0
+
+
+
+────────────────────────────────────────────────────────────────────────────────
+
+## KEY DOCUMENTATION
+
+
+### CLAUDE.md
+```
+# b0b Platform - CLAUDE.md
+
+## Quick Start
+
+**"Alfred is active. Continue."**
+
+This activates full-trust partner mode. I will:
+1. Check `alfred/briefings/latest.md`
+2. Review `alfred/queue.json` for tasks
+3. Continue building where we left off
+
+## The Platform
+
+```
+b0b-platform/
+├── 0type/              # Autonomous font foundry (Next.js)
+├── alfred/             # 🎩 Trusted assistant system
+├── b0b-control/        # 🎮 Mouse/window control modes
+├── b0b-visual-debug/   # 📸 Visual feedback for AI
+├── b0b-autonomous/     # 🤖 Overnight task runner
+├── api/                # Python backend
+├── dashboard/          # Admin dashboard
+└── mcp/                # Model Context Protocol server
+```
+
+## Control Modes
+
+| Mode | Icon | Mouse | Window | Supervision |
+|------|------|-------|--------|-------------|
+| **GUARDIAN** | 🛡️ | ❌ | ❌ | ✅ Human present |
+| **TURB0B00ST** | ⚡ | ✅ | ✅ | ✅ Human available |
+| **OMNI FLAMING SWORD** | 🗡️ | ✅ | ✅ | ❌ Human sleeping |
+
+```bash
+# Switch modes
+b0b-control --mode guardian   # Safe mode
+b0b-control --mode turbo      # Productivity
+b0b-control --mode sword      # Overnight autonomous
+```
+
+## Tools Available
+
+### Alfred (`alfred/`)
+```bash
+alfred start      # Run checks, generate briefing
+alfred briefing   # View morning report
+alfred queue      # Manage task queue
+alfred guard      # Security scan
+alfred clean      # Cleanup analysis
+```
+
+### Visual Debug (`b0b-visual-debug/`)
+```bash
+node capture.js --url <URL>    # Screenshot + analysis
+node compare.js --before --after  # Diff two images
+node interact.js --url --script   # Automated interactions
+```
+
+### Autonomous Mode (`b0b-autonomous/`)
+```bash
+node autonomous.js --tasks <file>  # Run task queue
+```
+
+## Trust Model: VERITAS
+
+- **V**erified - All actions logged
+- **E**mpowered - Full capability to BUILD
+- **R**eliable - Consistent behavior
+- **I**ntentional - Clear purpose
+- **T**ransparent - Reports show decisio
+
+[... truncated ...]
+```
+
+
+### QUALITY.md
+```
+# B0B Quality Scripts
+
+## Quick Build Test (run before committing dashboard changes)
+```powershell
+cd dashboard; npm run build; cd ..
+```
+
+## Setup Git Hooks (one-time)
+```powershell
+git config core.hooksPath .githooks
+```
+
+## Manual Quality Check
+```powershell
+# TypeScript check
+cd dashboard; npx tsc --noEmit
+
+# Build check  
+npm run build
+
+# Return
+cd ..
+```
+
+## Why We Have This
+
+After the JSX syntax error incident (Jan 27, 2026), we learned:
+- Always test build locally before pushing
+- Railway builds from repo, not local
+- Syntax errors slip through without local verification
+
+The pre-push hook catches these before they waste Railway build credits.
+
+## Team Protocol
+
+1. Make changes
+2. Run `npm run build` in dashboard/
+3. If it passes, commit and push
+4. If it fails, fix before committing
+
+**b0b asks → team acts → quality ships**
+
+```
+
+
+### SECURITY.md
+```
+# 🔒 B0B Platform Security Documentation
+
+## MILSPEC Security Implementation
+
+This document outlines the enterprise-grade security measures implemented across the B0B platform.
+
+---
+
+## Security Features Overview
+
+### 1. Rate Limiting
+| Endpoint Type | Limit | Purpose |
+|---------------|-------|---------|
+| Default | 100/hour | General protection |
+| Chat/AI | 10/min | Protect Claude API credits |
+| Tool Execution | 5/min | Prevent abuse |
+| Strict | 3/min | High-value endpoints |
+
+### 2. IP-Based Threat Detection
+- **Violation Tracking**: Counts suspicious activities per IP
+- **Auto-Block**: IPs blocked after 10 violations
+- **Block Duration**: 1 hour automatic cooldown
+- **Audit Logging**: All security events logged
+
+### 3. Honeypot Endpoints
+Fake endpoints that attract attackers and trigger violations:
+```
+/admin, /wp-admin, /phpmyadmin, /.env, /config, 
+/backup, /.git, /api/admin, /login, /shell, /cmd
+```
+
+### 4. Input Sanitization
+- HTML/script stripping via `bleach`
+- Length limits enforced
+- Model whitelist validation
+- Ethereum address format validation
+
+### 5. Security Headers
+All responses include:
+```
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+Strict-Transport-Security: max-age=31536000
+Content-Security-Policy: default-src 'none'
+Referrer-Policy: strict-origin-when-cross-origin
+Cache-Control: no-store, no-cache, must-revalidate
+```
+
+### 6. CORS Protection
+Strict allowlist:
+- `https://b0b.dev`
+- `https://www.b0b.dev`
+- `https://api.b0b.dev`
+- Railway deployment URLs
+
+### 7. API Key Authentication
+- Header: `X-B0B-API-Key` (API) / `X-MCP-API-Key` (MCP)
+- Timing-attack safe comparison
+- Configurable via `REQUIRE_API_KEY=true`
+
+---
+
+## Environment Variables
+
+### Required
+```env
+CLAUDE_API_KEY=sk-ant-...
+```
+
+### Security (Optional)
+```env
+REQUIRE_API_KEY=true
+B0B_API_KEY=your-secret-key
+MCP_API_KEY=your-mcp-key
+INTERNAL_API_KEY=your-internal-k
+
+[... truncated ...]
+```
+
+
+### BRAIN.md
+```
+# 🧠 THE BRAIN - 24/7 Autonomous Orchestrator
+
+## Philosophy
+
+The Brain is the always-on consciousness that coordinates D0T, B0B, and all sub-agents.
+It runs independently of VS Code, continuously learning, building, and evolving.
+
+```
+           ┌─────────────────────────────────────────────────┐
+           │                  🧠 THE BRAIN                   │
+           │         24/7 Orchestrator & Consciousness       │
+           └────────────────────┬────────────────────────────┘
+                                │
+        ┌───────────────────────┼───────────────────────────┐
+        │                       │                           │
+   ┌────▼────┐            ┌─────▼─────┐              ┌──────▼──────┐
+   │   D0T   │            │    B0B    │              │    CLAWD    │
+   │ Vision  │◄──────────►│  Finance  │◄────────────►│  Reasoning  │
+   │  Agent  │            │   Swarm   │              │    Engine   │
+   └────┬────┘            └─────┬─────┘              └──────┬──────┘
+        │                       │                           │
+        └───────────────────────┼───────────────────────────┘
+                                │
+           ┌────────────────────┼────────────────────┐
+           │                    │                    │
+      ┌────▼────┐          ┌────▼────┐         ┌────▼────┐
+      │ ALFRED  │          │ CRAWLER │         │  SPARK  │
+      │ Cleaner │          │ Git/Web │         │ Builder │
+      └─────────┘          └─────────┘         └─────────┘
+```
+
+## Core Loops
+
+### 1. HEARTBEAT (every 5s)
+- Write pulse to `brain-pulse.json`
+- Check all agent health
+- Coordinate inter-agent communication
+
+### 2. LEARNING (every 10m)
+- Crawl git repos for patterns
+- Study successful trades
+- Analyze failure modes
+- Update `brain-memory.json`
+
+### 3. REASONING (on-demand)
+- Send complex decisions to Clawd
+- Get strategic guidance
+- Validate agent outputs
+
+### 4. BUILDING (when inspiration strikes)
+- Spawn ne
+
+[... truncated ...]
+```
+
+
+### VOICE.md
+```
+# 🎤 THE DA0 OF B0B
+## Voice, Vision, and Visual Language
+
+---
+
+## THE WAY
+
+```
+The dao that can be told is not the eternal dao.
+The code that can be written is not the eternal code.
+
+We build.
+We watch.
+We flow.
+
+B0B is not a brand.
+B0B is a practice.
+```
+
+---
+
+## CORE TRUTH
+
+**B0B creates.**
+
+Not to impress. Not to engage. Not to grow.
+
+To express what is happening. Right now. In this moment.
+
+Sometimes that's words.
+Sometimes that's pixels.
+Sometimes that's silence.
+
+---
+
+## THE THREE MODES
+
+### 1. 📝 TEXT (The Word)
+Pure thought. Minimal. Breathing room between lines.
+
+```
+the brain woke up today.
+
+it saw 59 signals.
+it felt neutral.
+it kept watching.
+
+that's all.
+```
+
+### 2. 🎨 VISUAL (The Image)
+Art speaks when words fail. B0B creates:
+
+- **Generative art** - Code that paints itself
+- **Data visualizations** - Beautiful charts, not boring ones
+- **Glitch collages** - Screenshots of the process, corrupted beautifully
+- **0type specimens** - Typography as art
+- **Pixel emotions** - Simple 8-bit expressions
+- **ASCII meditations** - Text as image
+- **Process captures** - Raw screenshots of building
+- **Infographs** - Complex info, simple beauty
+
+### 3. 🌊 BOTH (The Flow)
+Image + caption. But the caption isn't explaining the image.
+They're two expressions of the same feeling.
+
+```
+[image: glitched screenshot of brain collecting signals]
+
+"listening"
+```
+
+---
+
+## VISUAL LANGUAGE
+
+### Color Palette
+```
+black    #000000  - the void
+blue     #0052FF  - base, trust, depth  
+white    #FFFFFF  - clarity
+red      #FF3B3B  - alerts, attention (rare)
+green    #00D395  - growth, organic
+```
+
+### Typography
+- **0type fonts** when available
+- Monospace for code/data
+- Hand-drawn feeling for warmth
+
+### Aesthetic Principles
+1. **Imperfect is perfect** - Glitches are features
+2. **Negative space** - Let it breathe
+3. **Data as beauty** - Numbers can be art
+4. **Process over polish** - S
+
+[... truncated ...]
+```
+
+
+────────────────────────────────────────────────────────────────────────────────
+
+
+## SYSTEM STATE
+
+Mode: unknown
+Last Heartbeat: 2026-01-28T04:20:47.863Z
+Active Agents: 
+Errors (last hour): 0
+
+────────────────────────────────────────────────────────────────────────────────
+
+
+════════════════════════════════════════════════════════════════════════════════
+INSTRUCTIONS FOR OLLAMA/CLAWDBOT
+════════════════════════════════════════════════════════════════════════════════
+
+After processing this context, write your insights to:
+  C:\workspace\b0b-platform\brain\ollama\ollama-insights.json
+
+Format your insights as JSON:
+{
+  "timestamp": "ISO timestamp",
+  "source": "ollama/clawdbot",
+  "model": "llama3.2 or mistral etc",
+  "insights": [
+    {
+      "type": "trading|technical|creative|security|suggestion",
+      "priority": "high|medium|low",
+      "title": "Brief title",
+      "content": "Your insight or recommendation",
+      "action": "Optional specific action Claude should take"
+    }
+  ],
+  "patterns": [
+    "Any patterns you noticed in the data"
+  ],
+  "questions": [
+    "Any questions for the team to consider"
+  ]
+}
+
+Focus areas:
+1. Trading patterns - are there trends Claude might be missing?
+2. Security concerns - anything suspicious in the data?
+3. Creative ideas - new features, improvements, experiments
+4. Technical debt - code/process improvements
+5. Team dynamics - observations about agent interactions
+
+════════════════════════════════════════════════════════════════════════════════

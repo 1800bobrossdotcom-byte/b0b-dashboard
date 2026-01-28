@@ -1,0 +1,20 @@
+{
+  "timestamp": "2026-01-28T00:00:00Z",
+  "source": "ollama/clawdbot",
+  "model": "mistral",
+  "version": "template",
+  "insights": [
+    {
+      "type": "example",
+      "priority": "low",
+      "title": "Template Insight",
+      "content": "This is a template file. Replace with real Ollama/Clawdbot insights.",
+      "action": null
+    }
+  ],
+  "patterns": [],
+  "questions": [
+    "What should Ollama focus on analyzing?"
+  ],
+  "instructions": "DELETE THIS FILE AFTER FIRST REAL INSIGHT SUBMISSION"
+}

@@ -468,10 +468,10 @@ export default function LabsPage() {
                     Entry: {((liveTrader.config?.entryPercent ?? 0.2) * 100).toFixed(0)}%
                   </span>
                   <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: '#00FF8820', color: '#00FF88' }}>
-                    Exit: 90% @ 2x
+                    Trailing Stop: 8-15%
                   </span>
                   <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: '#8B5CF620', color: '#A78BFA' }}>
-                    Moonbag: 10%
+                    Moonbag: 10% @ 2x
                   </span>
                   <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: '#DC262620', color: '#FF6666' }}>
                     Stop: -25%

@@ -930,19 +930,114 @@ app.get('/quotes/live', (req, res) => {
 });
 
 // =============================================================================
-// 📈 TOKENS/TRENDING — Live token discovery from DexScreener
+// 📈 TOKENS/TRENDING — Live token discovery (FAST - free APIs only)
 // =============================================================================
+
+// Cache for trending tokens
+let _trendingCache = { tokens: [], timestamp: 0 };
+const TRENDING_CACHE_TTL = 60 * 1000; // 60 seconds
+
 app.get('/tokens/trending', async (req, res) => {
   try {
-    const { discoverNewTokens } = require('./live-trader.js');
-    const tokens = await discoverNewTokens();
+    const now = Date.now();
+    
+    // Return cached if fresh
+    if (_trendingCache.tokens.length > 0 && (now - _trendingCache.timestamp) < TRENDING_CACHE_TTL) {
+      return res.json({
+        count: _trendingCache.tokens.length,
+        tokens: _trendingCache.tokens.slice(0, 10),
+        source: 'cached',
+        timestamp: new Date().toISOString()
+      });
+    }
+    
+    const fetch = (await import('node-fetch')).default;
+    const tokens = [];
+    
+    // ══════════════════════════════════════════════════════════════════════════
+    // FAST PATH: DexScreener top gainers (FREE, no rate limit)
+    // ══════════════════════════════════════════════════════════════════════════
+    try {
+      // Get Base chain top tokens
+      const dexRes = await fetch(
+        'https://api.dexscreener.com/latest/dex/search?q=base',
+        { timeout: 5000, headers: { 'Accept': 'application/json' } }
+      );
+      const dexData = await dexRes.json();
+      
+      const basePairs = (dexData.pairs || [])
+        .filter(p => p.chainId === 'base')
+        .filter(p => parseFloat(p.liquidity?.usd || 0) > 5000)
+        .sort((a, b) => parseFloat(b.volume?.h24 || 0) - parseFloat(a.volume?.h24 || 0))
+        .slice(0, 20);
+      
+      for (const pair of basePairs) {
+        if (tokens.find(t => t.address?.toLowerCase() === pair.baseToken?.address?.toLowerCase())) continue;
+        
+        tokens.push({
+          symbol: pair.baseToken?.symbol,
+          name: pair.baseToken?.name,
+          address: pair.baseToken?.address,
+          price: parseFloat(pair.priceUsd || 0),
+          priceChange24h: parseFloat(pair.priceChange?.h24 || 0),
+          volume24h: parseFloat(pair.volume?.h24 || 0),
+          liquidity: parseFloat(pair.liquidity?.usd || 0),
+          url: pair.url,
+          source: 'dexscreener',
+          tier: 3,
+        });
+      }
+    } catch (e) {
+      console.log('[Trending] DexScreener error:', e.message);
+    }
+    
+    // ══════════════════════════════════════════════════════════════════════════
+    // CLANKER: Recent tokens (FREE)
+    // ══════════════════════════════════════════════════════════════════════════
+    try {
+      const clankerRes = await fetch(
+        'https://www.clanker.world/api/tokens',
+        { timeout: 5000, headers: { 'Accept': 'application/json' } }
+      );
+      const clankerData = await clankerRes.json();
+      const clankerTokens = (clankerData.data || []).slice(0, 10);
+      
+      for (const token of clankerTokens) {
+        if (!token.contract_address) continue;
+        if (tokens.find(t => t.address?.toLowerCase() === token.contract_address?.toLowerCase())) continue;
+        
+        const isBankrDeployed = token.social_context?.interface === 'Bankr';
+        
+        tokens.push({
+          symbol: token.symbol,
+          name: token.name,
+          address: token.contract_address,
+          price: 0,
+          priceChange24h: 0,
+          volume24h: 0,
+          liquidity: 0,
+          url: `https://dexscreener.com/base/${token.contract_address}`,
+          source: 'clanker',
+          clanker: true,
+          bankrDeployed: isBankrDeployed,
+          tier: isBankrDeployed ? 1 : 2,
+        });
+      }
+    } catch (e) {
+      console.log('[Trending] Clanker error:', e.message);
+    }
+    
+    // Sort by volume, then cache
+    tokens.sort((a, b) => b.volume24h - a.volume24h);
+    _trendingCache = { tokens, timestamp: now };
     
     res.json({
       count: tokens.length,
       tokens: tokens.slice(0, 10),
-      source: 'dexscreener',
+      source: 'dexscreener+clanker',
       timestamp: new Date().toISOString()
     });
+    
   } catch (err) {
     res.json({ 
       count: 0, 
@@ -2674,5 +2769,112 @@ setTimeout(dataStreamMonitor, 10000);
 
 // Initial work cycle
 setTimeout(autonomousWorkCycle, 15000);
+
+// =============================================================================
+// 🦙 OLLAMA BRIDGE — Local AI Supplementary Layer
+// Claude + Ollama = Two minds thinking together
+// =============================================================================
+
+let ollamaBridge;
+try {
+  ollamaBridge = require('./ollama-bridge.js');
+  console.log('[BRAIN] Ollama bridge loaded');
+} catch (e) {
+  console.log('[BRAIN] Ollama bridge not available:', e.message);
+}
+
+// Export context for Ollama/Clawdbot to process
+app.post('/ollama/export', async (req, res) => {
+  if (!ollamaBridge) {
+    return res.status(503).json({ error: 'Ollama bridge not available' });
+  }
+  
+  try {
+    const result = await ollamaBridge.exportContext();
+    res.json({ 
+      success: true, 
+      ...result,
+      instructions: 'Feed ollama-context.txt to Ollama/Clawdbot, then write insights to ollama-insights.json'
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Read insights from Ollama/Clawdbot (Claude reads this)
+app.get('/ollama/insights', (req, res) => {
+  if (!ollamaBridge) {
+    return res.status(503).json({ error: 'Ollama bridge not available' });
+  }
+  
+  const insights = ollamaBridge.readInsights();
+  res.json(insights);
+});
+
+// Get urgent/high-priority insights
+app.get('/ollama/insights/urgent', (req, res) => {
+  if (!ollamaBridge) {
+    return res.status(503).json({ error: 'Ollama bridge not available' });
+  }
+  
+  const urgent = ollamaBridge.getUrgentInsights();
+  res.json({ urgent, count: urgent.length });
+});
+
+// Get insights by type (trading, technical, creative, etc)
+app.get('/ollama/insights/:type', (req, res) => {
+  if (!ollamaBridge) {
+    return res.status(503).json({ error: 'Ollama bridge not available' });
+  }
+  
+  const { type } = req.params;
+  const insights = ollamaBridge.getInsightsByType(type);
+  res.json({ type, insights, count: insights.length });
+});
+
+// Check Ollama status (if running locally)
+app.get('/ollama/status', async (req, res) => {
+  if (!ollamaBridge) {
+    return res.status(503).json({ error: 'Ollama bridge not available' });
+  }
+  
+  const status = await ollamaBridge.checkOllamaStatus();
+  res.json(status);
+});
+
+// Direct query to Ollama (optional, if running locally)
+app.post('/ollama/query', async (req, res) => {
+  if (!ollamaBridge) {
+    return res.status(503).json({ error: 'Ollama bridge not available' });
+  }
+  
+  const { prompt, model } = req.body;
+  if (!prompt) {
+    return res.status(400).json({ error: 'prompt required' });
+  }
+  
+  const result = await ollamaBridge.queryOllama(prompt, model);
+  res.json(result);
+});
+
+// Write insights (for Clawdbot to submit insights back)
+app.post('/ollama/insights', async (req, res) => {
+  if (!ollamaBridge) {
+    return res.status(503).json({ error: 'Ollama bridge not available' });
+  }
+  
+  try {
+    const insights = req.body;
+    if (!insights.timestamp || !insights.insights) {
+      return res.status(400).json({ error: 'Invalid insights format. Need timestamp and insights array.' });
+    }
+    
+    const fsSync = require('fs');
+    fsSync.writeFileSync(ollamaBridge.INSIGHTS_FILE, JSON.stringify(insights, null, 2));
+    res.json({ success: true, message: 'Insights saved. Claude will read them.' });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
 
 module.exports = app;
