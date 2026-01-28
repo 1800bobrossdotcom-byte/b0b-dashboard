@@ -688,21 +688,21 @@ export default function LabsPage() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
                   <div className="p-4 rounded-lg" style={{ backgroundColor: '#FFF8F0' }}>
                     <p className="text-xs mb-1" style={{ color: '#555555' }}>Trades</p>
-                    <p className="text-lg font-mono" style={{ color: '#1A1A1A' }}>{liveTrader.stats.totalTrades}</p>
+                    <p className="text-lg font-mono" style={{ color: '#1A1A1A' }}>{liveTrader.stats?.totalTrades ?? 0}</p>
                   </div>
                   <div className="p-4 rounded-lg" style={{ backgroundColor: '#FFF8F0' }}>
                     <p className="text-xs mb-1" style={{ color: '#555555' }}>P&L</p>
-                    <p className={`text-lg font-mono ${liveTrader.stats.totalPnL >= 0 ? 'text-[#00AA66]' : 'text-[#DC2626]'}`}>
-                      {liveTrader.stats.totalPnL >= 0 ? '+' : ''}${liveTrader.stats.totalPnL.toFixed(2)}
+                    <p className={`text-lg font-mono ${(liveTrader.stats?.totalPnL ?? 0) >= 0 ? 'text-[#00AA66]' : 'text-[#DC2626]'}`}>
+                      {(liveTrader.stats?.totalPnL ?? 0) >= 0 ? '+' : ''}${(liveTrader.stats?.totalPnL ?? 0).toFixed(2)}
                     </p>
                   </div>
                   <div className="p-4 rounded-lg" style={{ backgroundColor: '#FFF8F0' }}>
                     <p className="text-xs mb-1" style={{ color: '#555555' }}>Win Rate</p>
-                    <p className="text-lg font-mono" style={{ color: '#1A1A1A' }}>{(liveTrader.stats.winRate * 100).toFixed(1)}%</p>
+                    <p className="text-lg font-mono" style={{ color: '#1A1A1A' }}>{((liveTrader.stats?.winRate ?? 0) * 100).toFixed(1)}%</p>
                   </div>
                   <div className="p-4 rounded-lg" style={{ backgroundColor: '#FFF8F0' }}>
                     <p className="text-xs mb-1" style={{ color: '#555555' }}>Daily Vol</p>
-                    <p className="text-lg font-mono" style={{ color: '#1A1A1A' }}>${liveTrader.stats.dailyVolume.toFixed(0)}/{liveTrader.stats.maxDailyVolume}</p>
+                    <p className="text-lg font-mono" style={{ color: '#1A1A1A' }}>${(liveTrader.stats?.dailyVolume ?? 0).toFixed(0)}/{liveTrader.stats?.maxDailyVolume ?? 500}</p>
                   </div>
                 </div>
 
@@ -712,7 +712,7 @@ export default function LabsPage() {
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
                     <div>
                       <span style={{ color: '#555555' }}>Entry: </span>
-                      <span className="font-mono" style={{ color: '#1A1A1A' }}>${liveTrader.config.maxPosition}</span>
+                      <span className="font-mono" style={{ color: '#1A1A1A' }}>${liveTrader.config?.maxPosition ?? 100}</span>
                     </div>
                     <div>
                       <span style={{ color: '#555555' }}>Exit: </span>
