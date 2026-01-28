@@ -560,20 +560,48 @@ class BankrClient {
       });
       
       if (status.status === 'completed') {
-        console.log(`   ✅ Trade completed: ${status.response?.substring(0, 100) || 'Success'}...`);
+        console.log(`   ✅ Bankr job completed: ${status.response?.substring(0, 100) || 'Success'}...`);
         
-        // Log transactions if any
+        // Execute transactions if any returned (Bankr returns tx data we need to sign & submit)
+        let executedTxs = [];
         if (status.transactions?.length > 0) {
-          console.log(`   📝 ${status.transactions.length} transaction(s) returned`);
+          console.log(`   📝 ${status.transactions.length} transaction(s) to execute`);
+          
           for (const tx of status.transactions) {
-            console.log(`      - ${tx.type}: ${JSON.stringify(tx.metadata || {}).substring(0, 80)}...`);
+            try {
+              // Check for raw transaction data
+              const txData = tx.__ORIGINAL_TX_DATA__ || tx.metadata?.__ORIGINAL_TX_DATA__;
+              
+              if (txData && txData.to && txData.data) {
+                console.log(`   🔏 Signing and submitting swap transaction...`);
+                
+                // Execute the transaction using our wallet
+                const hash = await this.walletClient.sendTransaction({
+                  to: txData.to,
+                  data: txData.data,
+                  value: txData.value ? BigInt(txData.value) : 0n,
+                  gas: txData.gas ? BigInt(txData.gas) : undefined,
+                });
+                
+                console.log(`   ✅ TX SUBMITTED: ${hash}`);
+                console.log(`   🔗 https://basescan.org/tx/${hash}`);
+                
+                executedTxs.push({ hash, type: tx.type || 'swap', status: 'submitted' });
+              } else {
+                console.log(`      - ${tx.type || 'action'}: No executable tx data (info only)`);
+              }
+            } catch (txError) {
+              console.log(`   ❌ TX execution failed: ${txError.message}`);
+              executedTxs.push({ error: txError.message, type: tx.type || 'swap', status: 'failed' });
+            }
           }
         }
         
         return {
-          success: true,
+          success: executedTxs.length > 0 ? executedTxs.some(t => t.status === 'submitted') : true,
           response: status.response,
           transactions: status.transactions || [],
+          executedTxs,
           richData: status.richData || [],
           mode: 'live',
           processingTime: status.processingTime,
