@@ -678,13 +678,80 @@ export function TeamChat({
 }
 
 // ════════════════════════════════════════════════════════════════
-// GENERATIVE ART CANVAS
-// Flat glyph art from data sources - right-click saveable
+// GENERATIVE ART CANVAS — Connected to Market Sentiment
+// Flat glyph art from LIVE data sources - right-click saveable
 // ════════════════════════════════════════════════════════════════
+
+interface MarketSentiment {
+  polyVolume: number;
+  swarmTicks: number;
+  agentCount: number;
+  sentiment: 'bullish' | 'bearish' | 'neutral';
+  phase: string;
+}
 
 function GenerativeArtCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [artSeed, setArtSeed] = useState(Date.now());
+  const [marketData, setMarketData] = useState<MarketSentiment>({
+    polyVolume: 0,
+    swarmTicks: 0,
+    agentCount: 3,
+    sentiment: 'neutral',
+    phase: 'IDLE'
+  });
+
+  // Fetch market data for art generation
+  useEffect(() => {
+    async function fetchMarketData() {
+      try {
+        // Fetch from brain endpoints
+        const [statusRes, swarmRes, polyRes] = await Promise.all([
+          fetch(`${BRAIN_URL}/status`).catch(() => null),
+          fetch(`${BRAIN_URL}/swarm`).catch(() => null),
+          fetch(`${BRAIN_URL}/polymarket`).catch(() => null),
+        ]);
+        
+        let polyVolume = 0;
+        let swarmTicks = 0;
+        let agentCount = 3;
+        
+        if (statusRes?.ok) {
+          const status = await statusRes.json();
+          agentCount = status.agents?.length || 3;
+        }
+        
+        if (swarmRes?.ok) {
+          const swarm = await swarmRes.json();
+          swarmTicks = swarm.totalTicks || 0;
+        }
+        
+        if (polyRes?.ok) {
+          const poly = await polyRes.json();
+          polyVolume = poly.data?.volume24h || 0;
+        }
+        
+        // Calculate sentiment from data
+        let sentiment: 'bullish' | 'bearish' | 'neutral' = 'neutral';
+        if (polyVolume > 1000000) sentiment = 'bullish';
+        else if (polyVolume < 500000) sentiment = 'bearish';
+        
+        setMarketData({
+          polyVolume,
+          swarmTicks,
+          agentCount,
+          sentiment,
+          phase: swarmTicks > 0 ? 'ACTIVE' : 'IDLE'
+        });
+      } catch (e) {
+        // Keep defaults
+      }
+    }
+    
+    fetchMarketData();
+    const interval = setInterval(fetchMarketData, 15000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -693,13 +760,30 @@ function GenerativeArtCanvas() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Clear
-    ctx.fillStyle = '#FAFAFA';
+    // Background based on sentiment
+    const bgColors = {
+      bullish: '#F0FFF4',   // Light green tint
+      bearish: '#FEF2F2',   // Light red tint
+      neutral: '#FAFAFA'    // Neutral cream
+    };
+    ctx.fillStyle = bgColors[marketData.sentiment];
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Generate glyphs based on seed
-    const glyphs = ['◆', '○', '△', '□', '◇', '●', '▲', '■', '⬡', '⬢', '◉', '◎'];
-    const colors = ['#0052FF', '#00CCFF', '#F59E0B', '#A855F7', '#22c55e', '#FF6B9D'];
+    // Glyphs change based on market phase
+    const phaseGlyphs: Record<string, string[]> = {
+      ACTIVE: ['◉', '▲', '●', '◆', '⬢', '★'],
+      IDLE: ['○', '△', '□', '◇', '◎', '☆'],
+      DEFAULT: ['◆', '○', '△', '□', '◇', '●']
+    };
+    const glyphs = phaseGlyphs[marketData.phase] || phaseGlyphs.DEFAULT;
+    
+    // Colors based on sentiment
+    const sentimentColors: Record<string, string[]> = {
+      bullish: ['#22c55e', '#16a34a', '#15803d', '#0052FF', '#00CCFF'],
+      bearish: ['#ef4444', '#dc2626', '#b91c1c', '#f59e0b', '#a855f7'],
+      neutral: ['#0052FF', '#00CCFF', '#F59E0B', '#A855F7', '#64748b']
+    };
+    const colors = sentimentColors[marketData.sentiment];
     
     const rows = 6;
     const cols = 4;
@@ -710,26 +794,34 @@ function GenerativeArtCanvas() {
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
 
+    // Use swarm ticks and poly volume as seed modifiers
+    const dataSeed = artSeed + marketData.swarmTicks + Math.floor(marketData.polyVolume / 100000);
+
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < cols; col++) {
-        const glyphIndex = (artSeed + row * cols + col) % glyphs.length;
-        const colorIndex = (artSeed + row + col) % colors.length;
+        const glyphIndex = (dataSeed + row * cols + col) % glyphs.length;
+        const colorIndex = (dataSeed + row + col) % colors.length;
         
         const x = col * cellWidth + cellWidth / 2;
         const y = row * cellHeight + cellHeight / 2;
+        
+        // Size variation based on agent activity
+        const sizeMod = marketData.agentCount > 3 ? 1.2 : 1;
+        ctx.font = `${Math.floor(24 * sizeMod)}px monospace`;
         
         ctx.fillStyle = colors[colorIndex] + '80';
         ctx.fillText(glyphs[glyphIndex], x, y);
       }
     }
 
-    // Add timestamp signature
+    // Add data signature
     ctx.font = '8px monospace';
-    ctx.fillStyle = '#CCCCCC';
+    ctx.fillStyle = '#888888';
     ctx.textAlign = 'right';
-    ctx.fillText(`b0b.dev · ${new Date().toISOString().split('T')[0]}`, canvas.width - 4, canvas.height - 4);
+    const volLabel = marketData.polyVolume > 0 ? `$${(marketData.polyVolume/1000000).toFixed(1)}M` : '—';
+    ctx.fillText(`${marketData.sentiment} · ${volLabel}`, canvas.width - 4, canvas.height - 4);
 
-  }, [artSeed]);
+  }, [artSeed, marketData]);
 
   // Regenerate every 30 seconds
   useEffect(() => {
@@ -747,10 +839,10 @@ function GenerativeArtCanvas() {
         height={180}
         className="rounded-lg border border-[#E8E4DE] shadow-sm cursor-pointer hover:shadow-md transition-shadow"
         style={{ backgroundColor: '#FAFAFA' }}
-        title="Right-click to save"
+        title="Right-click to save · Connected to live data"
       />
       <p className="text-xs mt-2" style={{ color: '#888888' }}>
-        Data Glyph · {new Date().toLocaleDateString()}
+        {marketData.sentiment === 'bullish' ? '📈' : marketData.sentiment === 'bearish' ? '📉' : '—'} {marketData.sentiment}
       </p>
       <button 
         onClick={() => setArtSeed(Date.now())}

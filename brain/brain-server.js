@@ -16,6 +16,15 @@ const cors = require('cors');
 const fs = require('fs').promises;
 const path = require('path');
 
+// Learning Library — Brain Memory System
+let learningLibrary;
+try {
+  learningLibrary = require('./learning-library.js');
+  console.log('[BRAIN] Learning library loaded');
+} catch (e) {
+  console.log('[BRAIN] Learning library not available:', e.message);
+}
+
 // For Polymarket crawler and git integration
 let axios;
 try {
@@ -746,6 +755,74 @@ app.get('/polymarket', async (req, res) => {
   } catch {
     res.json({ message: 'No Polymarket data yet', data: { markets: [] } });
   }
+});
+
+// =============================================================================
+// 📚 LEARNING LIBRARY — Brain Memory System
+// =============================================================================
+
+app.get('/learnings', (req, res) => {
+  if (!learningLibrary) {
+    return res.status(503).json({ error: 'Learning library not available' });
+  }
+  
+  const stats = learningLibrary.getLibraryStats();
+  const learnings = learningLibrary.loadLearnings();
+  
+  res.json({
+    stats,
+    learnings: learnings.map(l => ({
+      title: l.title,
+      timestamp: l.timestamp,
+      summary: l.summary,
+      insightCount: l.key_learnings?.length || 0
+    }))
+  });
+});
+
+app.get('/learnings/query', (req, res) => {
+  if (!learningLibrary) {
+    return res.status(503).json({ error: 'Learning library not available' });
+  }
+  
+  const { q } = req.query;
+  if (!q) {
+    return res.status(400).json({ error: 'Query parameter "q" required' });
+  }
+  
+  const results = learningLibrary.queryLearnings(q);
+  res.json({ query: q, results });
+});
+
+app.post('/learnings', (req, res) => {
+  if (!learningLibrary) {
+    return res.status(503).json({ error: 'Learning library not available' });
+  }
+  
+  const { title, insights, summary } = req.body;
+  if (!title || !insights || !Array.isArray(insights)) {
+    return res.status(400).json({ error: 'title and insights array required' });
+  }
+  
+  const result = learningLibrary.storeLearning(title, insights, summary);
+  res.json(result);
+});
+
+app.get('/learnings/catalyst', (req, res) => {
+  if (!learningLibrary) {
+    return res.status(503).json({ error: 'Learning library not available' });
+  }
+  
+  // Parse token data from query or body
+  const token = req.query.token ? JSON.parse(req.query.token) : {
+    symbol: req.query.symbol,
+    liquidity: parseFloat(req.query.liquidity) || 0,
+    priceChange24h: parseFloat(req.query.priceChange) || 0,
+    clanker: req.query.clanker === 'true'
+  };
+  
+  const catalysts = learningLibrary.catalystDetector(token);
+  res.json({ token, catalysts });
 });
 
 // =============================================================================

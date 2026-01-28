@@ -21,6 +21,15 @@ require('dotenv').config();
 const fs = require('fs').promises;
 const path = require('path');
 
+// Learning Library — Brain Memory System
+let learningLibrary;
+try {
+  learningLibrary = require('./learning-library.js');
+  console.log('[TRADER] Learning library loaded');
+} catch (e) {
+  console.log('[TRADER] Learning library not available:', e.message);
+}
+
 // ════════════════════════════════════════════════════════════════════════════
 // CONFIGURATION
 // ════════════════════════════════════════════════════════════════════════════
@@ -1068,10 +1077,25 @@ async function blessingSniperTick(state) {
     console.log(`   ${tierEmoji} ${sourceTag} ${token.symbol}: score ${score.toFixed(0)}/100 | ${priceChange > 0 ? '+' : ''}${priceChange.toFixed(0)}% | $${(volume/1000).toFixed(0)}k vol | $${(liquidity/1000).toFixed(0)}k liq`);
     
     // ════════════════════════════════════════════════════════════════════════════
+    // LEARNING LIBRARY: Check for catalysts from past learnings
+    // ════════════════════════════════════════════════════════════════════════════
+    let catalysts = [];
+    if (learningLibrary) {
+      try {
+        catalysts = learningLibrary.catalystDetector(token);
+        if (catalysts.length > 0) {
+          console.log(`   📚 CATALYSTS: ${catalysts.map(c => c.type).join(', ')}`);
+        }
+      } catch (e) {
+        // Silent fail - learning library is optional
+      }
+    }
+    
+    // ════════════════════════════════════════════════════════════════════════════
     // SPECTRUM TRADING: Flexible entry criteria based on multiple signals
     // Not just score threshold - momentum and growth can qualify too
     // ════════════════════════════════════════════════════════════════════════════
-    const qualifies = evaluateTradeQualification(token, score);
+    const qualifies = evaluateTradeQualification(token, score, catalysts);
     
     if (!qualifies.pass) {
       console.log(`      └─ ${qualifies.reason}`);
@@ -1092,20 +1116,20 @@ async function blessingSniperTick(state) {
 
 /**
  * SPECTRUM EVALUATION — Multi-signal qualification
- * AGGRESSIVE MODE: Multiple paths to qualify, low barriers
- * Data sources: Bankr, Clanker, DexScreener, Boosted
+ * SAFE MODE: High liquidity requirements
+ * Data sources: Bankr, Clanker, DexScreener, Boosted, Learning Library
  * 
  * Paths:
  * 1. Bankr recommended (any score)
  * 2. Ecosystem token (Tier 1/2) with any momentum
- * 3. Good score (30+) = quality signal
- * 4. Momentum play (15%+ growth)
+ * 3. Good score (25+) = quality signal
+ * 4. Momentum play (10%+ growth)
  * 5. Volume spike with growth
  * 6. Fresh Clanker with traction
  * 7. Boosted token with growth
- * 8. Any positive signal combination
+ * 8. Learning Library catalyst detected
  */
-function evaluateTradeQualification(token, score) {
+function evaluateTradeQualification(token, score, catalysts = []) {
   const priceChange = token.priceChange24h || 0;
   const volume = token.volume24h || 0;
   const liquidity = token.liquidity || 0;
@@ -1123,7 +1147,17 @@ function evaluateTradeQualification(token, score) {
   }
   
   // ════════════════════════════════════════════════════════════════════════════
-  // AGGRESSIVE QUALIFICATION PATHS — Trade more, let momentum decide
+  // LEARNING LIBRARY CATALYST — Past learnings inform current decisions
+  // ════════════════════════════════════════════════════════════════════════════
+  if (catalysts.length > 0) {
+    const topCatalyst = catalysts.find(c => c.confidence >= 0.7);
+    if (topCatalyst) {
+      return { pass: true, reason: `📚 Learning catalyst: ${topCatalyst.type} (${(topCatalyst.confidence * 100).toFixed(0)}%)` };
+    }
+  }
+  
+  // ════════════════════════════════════════════════════════════════════════════
+  // SAFE QUALIFICATION PATHS — High liquidity requirements
   // ════════════════════════════════════════════════════════════════════════════
   
   // PATH 1: BANKR RECOMMENDED — Trust the ecosystem intelligence
