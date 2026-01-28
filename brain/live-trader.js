@@ -349,8 +349,9 @@ class BankrClient {
   
   /**
    * Execute a trade via natural language prompt
+   * Falls back to paper trading if Bankr API is unavailable
    */
-  async executeTrade(prompt) {
+  async executeTrade(prompt, tokenData = {}) {
     console.log(`   🏦 Bankr: "${prompt}"`);
     
     try {
@@ -372,22 +373,60 @@ class BankrClient {
             jobId,
             result: status.result,
             transactions: status.result?.transactions || [],
+            mode: 'live',
           };
         }
         
         if (status.status === 'failed') {
           console.log(`   ❌ Bankr failed: ${status.error}`);
-          return { success: false, error: status.error };
+          return { success: false, error: status.error, mode: 'live' };
         }
         
         // Wait 2s before next poll
         await new Promise(r => setTimeout(r, 2000));
       }
       
-      return { success: false, error: 'Timeout waiting for trade execution' };
+      return { success: false, error: 'Timeout waiting for trade execution', mode: 'live' };
     } catch (error) {
-      console.log(`   ❌ Bankr error: ${error.message}`);
-      return { success: false, error: error.message };
+      // Bankr API not available - fall back to paper trading
+      console.log(`   ⚠️ Bankr API unavailable: ${error.message}`);
+      console.log(`   📝 PAPER TRADE RECORDED (Bankr API in beta - will execute when live)`);
+      
+      // Record the paper trade
+      const paperTrade = {
+        timestamp: new Date().toISOString(),
+        prompt,
+        token: tokenData.symbol || 'Unknown',
+        address: tokenData.address || 'Unknown',
+        price: tokenData.price || 0,
+        amount: 50, // Default entry size
+        type: 'paper',
+        reason: 'Bankr API not available',
+        score: tokenData.score || 0,
+      };
+      
+      // Log to file for review
+      try {
+        const fs = require('fs').promises;
+        const logPath = path.join(CONFIG.DATA_DIR, 'paper-trades.json');
+        let trades = [];
+        try {
+          const existing = await fs.readFile(logPath, 'utf8');
+          trades = JSON.parse(existing);
+        } catch {}
+        trades.push(paperTrade);
+        await fs.writeFile(logPath, JSON.stringify(trades, null, 2));
+        console.log(`   📋 Paper trade logged: ${tokenData.symbol} @ $${tokenData.price}`);
+      } catch (e) {
+        console.log(`   ⚠️ Failed to log paper trade: ${e.message}`);
+      }
+      
+      return { 
+        success: false, 
+        error: 'Bankr API not available - paper trade recorded',
+        mode: 'paper',
+        paperTrade,
+      };
     }
   }
   
@@ -681,10 +720,19 @@ async function executeEntry(token, state) {
   // Execute via Bankr
   const prompt = `Buy $${amount} worth of ${token.symbol} (${token.address}) on Base. Use wallet ${CONFIG.PHANTOM_WALLET}. This is a momentum play.`;
   
-  const result = await bankr.executeTrade(prompt);
+  // Pass token data for paper trade logging
+  const result = await bankr.executeTrade(prompt, {
+    symbol: token.symbol,
+    address: token.address,
+    price: token.price,
+    score: token.score || 0,
+    liquidity: token.liquidity,
+    volume24h: token.volume24h,
+    boosted: token.boosted,
+  });
   
-  if (result.success) {
-    // Record position
+  if (result.success || result.mode === 'paper') {
+    // Record position (even for paper trades so we can track hypothetical performance)
     const position = {
       id: `sniper-${Date.now()}`,
       strategy: 'blessing',
@@ -697,12 +745,16 @@ async function executeEntry(token, state) {
       stopPrice: token.price * (1 - CONFIG.SNIPER.STOP_LOSS),
       enteredAt: new Date().toISOString(),
       txHash: result.transactions?.[0]?.hash || null,
-      status: 'open',
+      status: result.mode === 'paper' ? 'paper' : 'open',
+      mode: result.mode || 'live',
     };
     
-    state.positions.push(position);
-    state.totalTrades++;
-    state.dailyVolume += amount;
+    // Only add to state positions for live trades
+    if (result.mode !== 'paper') {
+      state.positions.push(position);
+      state.totalTrades++;
+      state.dailyVolume += amount;
+    }
     
     await recordTrade({
       type: 'entry',
@@ -711,11 +763,16 @@ async function executeEntry(token, state) {
       amount,
       price: token.price,
       txHash: position.txHash,
+      mode: result.mode || 'live',
     });
     
-    console.log(`   ✅ Entry confirmed: ${position.txHash || 'pending'}`);
+    if (result.mode === 'paper') {
+      console.log(`   📝 Paper entry recorded: ${token.symbol} @ $${token.price.toFixed(8)}`);
+    } else {
+      console.log(`   ✅ Entry confirmed: ${position.txHash || 'pending'}`);
+    }
     
-    return { success: true, position };
+    return { success: result.success, position, mode: result.mode };
   }
   
   return { success: false };

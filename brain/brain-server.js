@@ -1043,6 +1043,61 @@ app.get('/tokens/trending', async (req, res) => {
 });
 
 // =============================================================================
+// 📝 PAPER TRADES — View paper trades recorded when Bankr API is unavailable
+// =============================================================================
+app.get('/paper-trades', async (req, res) => {
+  try {
+    const fs = require('fs').promises;
+    const path = require('path');
+    const tradesPath = path.join(__dirname, 'data', 'paper-trades.json');
+    
+    let trades = [];
+    try {
+      const data = await fs.readFile(tradesPath, 'utf8');
+      trades = JSON.parse(data);
+    } catch {}
+    
+    // Calculate hypothetical PnL if we had these positions
+    const { default: fetch } = await import('node-fetch');
+    
+    for (const trade of trades) {
+      try {
+        const resp = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${trade.address}`, { timeout: 5000 });
+        const data = await resp.json();
+        const currentPrice = parseFloat(data.pairs?.[0]?.priceUsd || trade.price);
+        trade.currentPrice = currentPrice;
+        trade.hypotheticalPnL = ((currentPrice - trade.price) / trade.price * 100).toFixed(2) + '%';
+        trade.hypotheticalValue = (trade.amount * currentPrice / trade.price).toFixed(2);
+      } catch {
+        trade.currentPrice = trade.price;
+        trade.hypotheticalPnL = '0%';
+        trade.hypotheticalValue = trade.amount;
+      }
+    }
+    
+    const totalHypotheticalPnL = trades.reduce((sum, t) => {
+      const pnlPercent = parseFloat(t.hypotheticalPnL) || 0;
+      return sum + (pnlPercent * t.amount / 100);
+    }, 0);
+    
+    res.json({
+      count: trades.length,
+      trades: trades.slice(-20).reverse(), // Last 20, newest first
+      totalHypotheticalPnL: `$${totalHypotheticalPnL.toFixed(2)}`,
+      note: 'Paper trades recorded when Bankr API was unavailable. Will execute live when API is ready.',
+      timestamp: new Date().toISOString()
+    });
+  } catch (err) {
+    res.json({ 
+      count: 0, 
+      trades: [], 
+      error: err.message,
+      timestamp: new Date().toISOString()
+    });
+  }
+});
+
+// =============================================================================
 // GIT INTEGRATION — Watch Repos for Activity
 // =============================================================================
 
