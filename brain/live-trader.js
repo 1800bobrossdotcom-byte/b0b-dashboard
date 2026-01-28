@@ -123,6 +123,23 @@ const CONFIG = {
   MOONBAG_FILE: path.join(__dirname, 'data', 'moonbag-positions.json'),
   TREASURY_FILE: path.join(__dirname, 'data', 'treasury-log.json'),
   POLYMARKET_FILE: path.join(__dirname, 'data', 'polymarket-positions.json'),
+  
+  // ══════════════════════════════════════════════════════════════════════════
+  // 💰 WAGE INCENTIVE — B0BR0SSD0TC0M Z3N DISCIPLINE
+  // "Every hour is a chance to prove value."
+  // ══════════════════════════════════════════════════════════════════════════
+  WAGE: {
+    HOURLY_TARGET_USD: 40,        // Target profit per hour
+    TRACKING_WINDOW_HOURS: 24,    // Rolling window for efficiency calc
+    EFFICIENCY_THRESHOLDS: {
+      EXCELLENT: 1.0,             // 100%+ = crushing it
+      GOOD: 0.75,                 // 75%+ = solid work
+      FAIR: 0.50,                 // 50%+ = needs improvement
+      POOR: 0.25,                 // <50% = in debt
+    },
+    // Wage doesn't override safety - it incentivizes discipline
+    OVERRIDE_LIMITS: false,
+  },
 };
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -145,6 +162,19 @@ const DEFAULT_STATE = {
   totalReinvested: 0,
   totalToTeam: 0,
   lastSweep: null,
+  // 💰 Wage tracking — $40/hour incentive
+  wage: {
+    hourlyTarget: 40,
+    currentHour: new Date().getHours(),
+    hourlyPnL: 0,
+    hoursActive: 0,
+    totalWageEarned: 0,
+    wageOwed: 0,           // Accumulated "debt" when underperforming
+    efficiency: 0,         // totalWageEarned / (hoursActive * hourlyTarget)
+    streak: 0,             // Consecutive hours meeting target
+    bestStreak: 0,         // Record streak
+    lastHourReset: new Date().toISOString(),
+  },
 };
 
 async function loadState() {
@@ -168,6 +198,89 @@ async function loadState() {
 
 async function saveState(state) {
   await fs.writeFile(CONFIG.STATE_FILE, JSON.stringify(state, null, 2));
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// 💰 WAGE TRACKING — $40/hour profit incentive
+// "Every hour is a chance to prove value." — b0br0ssd0tc0m z3n
+// ════════════════════════════════════════════════════════════════════════════
+
+function updateWageTracking(state, pnlDelta = 0) {
+  // Initialize wage if missing
+  if (!state.wage) {
+    state.wage = { ...DEFAULT_STATE.wage };
+  }
+  
+  const currentHour = new Date().getHours();
+  const hourlyTarget = CONFIG.WAGE.HOURLY_TARGET_USD;
+  
+  // Check if we've moved to a new hour
+  if (state.wage.currentHour !== currentHour) {
+    // Finalize previous hour
+    const prevHourProfit = state.wage.hourlyPnL;
+    state.wage.hoursActive++;
+    
+    if (prevHourProfit >= hourlyTarget) {
+      // Met the target — earned our wage
+      state.wage.totalWageEarned += hourlyTarget;
+      state.wage.streak++;
+      if (state.wage.streak > state.wage.bestStreak) {
+        state.wage.bestStreak = state.wage.streak;
+      }
+      console.log(`   💰 HOUR ${state.wage.currentHour}: Earned $${prevHourProfit.toFixed(2)} (target: $${hourlyTarget}) ✅ Streak: ${state.wage.streak}`);
+    } else if (prevHourProfit > 0) {
+      // Partial wage
+      state.wage.totalWageEarned += prevHourProfit;
+      state.wage.wageOwed += (hourlyTarget - prevHourProfit);
+      state.wage.streak = 0;
+      console.log(`   💰 HOUR ${state.wage.currentHour}: Earned $${prevHourProfit.toFixed(2)} (target: $${hourlyTarget}) ⚠️ Partial`);
+    } else {
+      // No profit or loss
+      state.wage.wageOwed += hourlyTarget;
+      state.wage.streak = 0;
+      console.log(`   💰 HOUR ${state.wage.currentHour}: Earned $${prevHourProfit.toFixed(2)} (target: $${hourlyTarget}) ❌ In debt`);
+    }
+    
+    // Reset for new hour
+    state.wage.currentHour = currentHour;
+    state.wage.hourlyPnL = 0;
+    state.wage.lastHourReset = new Date().toISOString();
+  }
+  
+  // Add new P&L to current hour
+  state.wage.hourlyPnL += pnlDelta;
+  
+  // Update efficiency
+  if (state.wage.hoursActive > 0) {
+    const maxWage = state.wage.hoursActive * hourlyTarget;
+    state.wage.efficiency = state.wage.totalWageEarned / maxWage;
+  }
+  
+  return state.wage;
+}
+
+function getWageStatus(state) {
+  const wage = state.wage || DEFAULT_STATE.wage;
+  const hourlyTarget = CONFIG.WAGE.HOURLY_TARGET_USD;
+  const efficiency = wage.efficiency || 0;
+  
+  let rating = '🔴 POOR';
+  if (efficiency >= CONFIG.WAGE.EFFICIENCY_THRESHOLDS.EXCELLENT) rating = '🟢 EXCELLENT';
+  else if (efficiency >= CONFIG.WAGE.EFFICIENCY_THRESHOLDS.GOOD) rating = '🟡 GOOD';
+  else if (efficiency >= CONFIG.WAGE.EFFICIENCY_THRESHOLDS.FAIR) rating = '🟠 FAIR';
+  
+  return {
+    hourlyTarget,
+    hourlyPnL: wage.hourlyPnL,
+    hoursActive: wage.hoursActive,
+    totalEarned: wage.totalWageEarned,
+    wageOwed: wage.wageOwed,
+    efficiency: (efficiency * 100).toFixed(1) + '%',
+    rating,
+    streak: wage.streak,
+    bestStreak: wage.bestStreak,
+    thisHourProgress: Math.min(100, (wage.hourlyPnL / hourlyTarget) * 100).toFixed(0) + '%',
+  };
 }
 
 async function loadMoonbags() {
@@ -591,6 +704,9 @@ async function executeExit(position, currentPrice, percentage, state) {
     
     if (pnl > 0) state.wins++;
     else state.losses++;
+    
+    // 💰 Update wage tracking with this P&L
+    updateWageTracking(state, pnl);
     
     position.status = percentage >= 1.0 ? 'closed' : 'partial';
     position.exitPrice = currentPrice;
@@ -1301,6 +1417,9 @@ module.exports = {
   discoverNewTokens,
   CONFIG,
   bankr,
+  // 💰 Wage tracking exports
+  updateWageTracking,
+  getWageStatus,
 };
 
 // Run directly

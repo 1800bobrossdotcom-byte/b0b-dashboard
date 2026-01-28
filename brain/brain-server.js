@@ -793,8 +793,14 @@ app.get('/swarm', async (req, res) => {
 
 app.get('/live-trader', async (req, res) => {
   try {
-    const { loadState, CONFIG } = require('./live-trader.js');
+    const { loadState, CONFIG, getWageStatus } = require('./live-trader.js');
     const state = await loadState();
+    
+    // Get wage status
+    let wageStatus = null;
+    try {
+      wageStatus = getWageStatus(state);
+    } catch {}
     
     res.json({
       active: state.active !== false, // Default to true if not explicitly false
@@ -808,6 +814,17 @@ app.get('/live-trader', async (req, res) => {
         winRate: state.totalTrades > 0 ? state.wins / state.totalTrades : 0,
         dailyVolume: state.dailyVolume || 0,
         maxDailyVolume: CONFIG.MAX_DAILY_VOLUME,
+      },
+      // 💰 Wage incentive tracking
+      wage: wageStatus || {
+        hourlyTarget: 40,
+        hourlyPnL: 0,
+        hoursActive: 0,
+        totalEarned: 0,
+        efficiency: '0%',
+        rating: '🔴 STARTING',
+        streak: 0,
+        thisHourProgress: '0%',
       },
       positions: (state.positions || []).map(p => ({
         symbol: p.symbol,
@@ -824,6 +841,7 @@ app.get('/live-trader', async (req, res) => {
         maxDaily: CONFIG.MAX_DAILY_VOLUME,
         maxPositions: CONFIG.MAX_OPEN_POSITIONS,
         polymarket: CONFIG.POLYMARKET,
+        wageTarget: CONFIG.WAGE?.HOURLY_TARGET_USD || 40,
       },
       lastTick: state.lastTick,
     });
@@ -834,6 +852,7 @@ app.get('/live-trader', async (req, res) => {
       error: err.message,
       wallet: '0xd06Aa956CEDA935060D9431D8B8183575c41072d',
       stats: { totalTrades: 0, totalPnL: 0, wins: 0, losses: 0, winRate: 0, dailyVolume: 0, maxDailyVolume: 500 },
+      wage: { hourlyTarget: 40, efficiency: '0%', rating: '🔴 OFFLINE' },
       positions: [],
       config: {},
       lastTick: null
