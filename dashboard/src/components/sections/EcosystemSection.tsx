@@ -46,8 +46,8 @@ const ECOSYSTEM: Product[] = [
   {
     name: 'D0T VISION',
     tagline: 'Autonomous computer control. See, think, act.',
-    url: '/agents',
-    status: 'building',
+    url: 'https://d0t.b0b.dev',
+    status: 'live',
     icon: '👁️',
     color: '#FF6B6B',
   },

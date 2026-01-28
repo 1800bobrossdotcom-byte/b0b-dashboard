@@ -3,132 +3,21 @@
 /**
  * Mission Section (C0M)
  * 
- * The Mission — giving back, making impact.
+ * The Mission — philosophy and vision.
+ * No fake data. Only truth.
  * 
- * Tenet: Transparency as Aesthetic — show real impact
+ * Tenet: Transparency as Aesthetic
  * 
  * We're Bob Rossing this. 🎨
  */
 
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { GlitchText } from '@/components/core/GlitchText';
-import { COLORS, MAVERICKS } from '@/utils/tenets';
+import { MAVERICKS } from '@/utils/tenets';
 
 gsap.registerPlugin(ScrollTrigger);
-
-interface ImpactMetric {
-  label: string;
-  value: string;
-  subtext: string;
-  color: string;
-}
-
-const IMPACT_METRICS: ImpactMetric[] = [
-  {
-    label: 'Total Donated',
-    value: '$124,847',
-    subtext: 'To verified charities',
-    color: COLORS.heart,
-  },
-  {
-    label: 'Lives Impacted',
-    value: '8,420',
-    subtext: 'And counting',
-    color: COLORS.emergence,
-  },
-  {
-    label: 'Art Programs',
-    value: '24',
-    subtext: 'Funded globally',
-    color: COLORS.joy,
-  },
-  {
-    label: 'Happy Accidents',
-    value: '∞',
-    subtext: 'Turned into opportunities',
-    color: COLORS.mindGlow,
-  },
-];
-
-interface Charity {
-  name: string;
-  focus: string;
-  donated: string;
-}
-
-const CHARITIES: Charity[] = [
-  { name: 'Art for All', focus: 'Youth Art Education', donated: '$32,400' },
-  { name: 'Code.org', focus: 'Computer Science Education', donated: '$28,200' },
-  { name: 'Mental Health Foundation', focus: 'Mental Wellness', donated: '$24,100' },
-  { name: 'Environmental Arts Fund', focus: 'Nature + Creativity', donated: '$18,500' },
-];
-
-function ImpactCounter({ metric }: { metric: ImpactMetric }) {
-  const [displayValue, setDisplayValue] = useState('0');
-  const counterRef = useRef<HTMLDivElement>(null);
-  
-  useEffect(() => {
-    if (!counterRef.current) return;
-    
-    // Animate the counter when it comes into view
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Animate to final value
-            const duration = 2000;
-            const start = Date.now();
-            const targetNum = parseInt(metric.value.replace(/[^0-9]/g, '')) || 0;
-            const prefix = metric.value.match(/^[^0-9]*/)?.[0] || '';
-            const suffix = metric.value.match(/[^0-9]*$/)?.[0] || '';
-            
-            if (metric.value === '∞') {
-              setTimeout(() => setDisplayValue('∞'), 500);
-              return;
-            }
-            
-            const animate = () => {
-              const elapsed = Date.now() - start;
-              const progress = Math.min(elapsed / duration, 1);
-              const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
-              const current = Math.floor(targetNum * eased);
-              setDisplayValue(`${prefix}${current.toLocaleString()}${suffix}`);
-              
-              if (progress < 1) {
-                requestAnimationFrame(animate);
-              } else {
-                setDisplayValue(metric.value);
-              }
-            };
-            
-            animate();
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-    
-    observer.observe(counterRef.current);
-    
-    return () => observer.disconnect();
-  }, [metric.value]);
-  
-  return (
-    <div ref={counterRef} className="text-center">
-      <div 
-        className="text-4xl md:text-5xl font-bold mb-2"
-        style={{ color: metric.color }}
-      >
-        {displayValue}
-      </div>
-      <div className="text-lg font-medium mb-1">{metric.label}</div>
-      <div className="text-sm text-[var(--color-text-dim)]">{metric.subtext}</div>
-    </div>
-  );
-}
 
 export function MissionSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -166,49 +55,50 @@ export function MissionSection() {
             // C0M — THE MISSION
           </span>
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            <GlitchText intensity={0.1}>Every Win Gives Back</GlitchText>
+            <GlitchText intensity={0.1}>The da0 Way</GlitchText>
           </h2>
           <p className="text-lg text-[var(--color-text-muted)] max-w-2xl mx-auto">
-            B0B exists to prove that AI can be kind. A portion of every success 
-            goes directly to causes that matter. Art, education, mental health, 
-            and environmental stewardship.
+            We don&apos;t believe AI should be feared. We believe it should be kind, 
+            transparent, and in service of human creativity.
           </p>
         </div>
         
-        {/* Impact Metrics */}
-        <div className="grid md:grid-cols-4 gap-8 mb-20 animate-in">
-          {IMPACT_METRICS.map((metric) => (
-            <ImpactCounter key={metric.label} metric={metric} />
-          ))}
-        </div>
-        
-        {/* Charities */}
+        {/* Philosophy Grid */}
         <div className="grid md:grid-cols-2 gap-8 mb-20">
+          {/* Principles */}
           <div className="animate-in">
-            <h3 className="text-2xl font-bold mb-6">Where It Goes</h3>
+            <h3 className="text-2xl font-bold mb-6 text-[var(--color-emergence)]">The Principles</h3>
             <div className="space-y-4">
-              {CHARITIES.map((charity) => (
-                <div 
-                  key={charity.name}
-                  className="glass p-4 rounded-xl flex items-center justify-between hover:scale-[1.01] transition-transform"
-                >
-                  <div>
-                    <div className="font-bold">{charity.name}</div>
-                    <div className="text-sm text-[var(--color-text-muted)]">
-                      {charity.focus}
-                    </div>
-                  </div>
-                  <div className="text-[var(--color-heart)] font-mono font-bold">
-                    {charity.donated}
-                  </div>
+              <div className="glass p-4 rounded-xl border-l-4 border-[var(--color-emergence)]">
+                <div className="font-bold mb-1">You Own Your Keys</div>
+                <div className="text-sm text-[var(--color-text-muted)]">
+                  Bankr-First architecture. We never store private keys. Ever.
                 </div>
-              ))}
+              </div>
+              <div className="glass p-4 rounded-xl border-l-4 border-[var(--color-mind-glow)]">
+                <div className="font-bold mb-1">Emergent Intelligence</div>
+                <div className="text-sm text-[var(--color-text-muted)]">
+                  Simple rules create complex beauty. Like Conway&apos;s Game of Life.
+                </div>
+              </div>
+              <div className="glass p-4 rounded-xl border-l-4 border-[var(--color-joy)]">
+                <div className="font-bold mb-1">Joy as Method</div>
+                <div className="text-sm text-[var(--color-text-muted)]">
+                  Every interaction should spark delight. We&apos;re Bob Rossing this.
+                </div>
+              </div>
+              <div className="glass p-4 rounded-xl border-l-4 border-[#0052FF]">
+                <div className="font-bold mb-1">Open Source Everything</div>
+                <div className="text-sm text-[var(--color-text-muted)]">
+                  All code is public. All decisions are visible. Transparency as aesthetic.
+                </div>
+              </div>
             </div>
           </div>
           
           {/* The Mavericks */}
           <div className="animate-in">
-            <h3 className="text-2xl font-bold mb-6">The Mavericks</h3>
+            <h3 className="text-2xl font-bold mb-6 text-[var(--color-joy)]">The Mavericks</h3>
             <p className="text-[var(--color-text-muted)] mb-4">
               B0B draws inspiration from those who saw things differently:
             </p>
@@ -216,7 +106,7 @@ export function MissionSection() {
               {MAVERICKS.map((maverick) => (
                 <div 
                   key={maverick.name}
-                  className="glass p-3 rounded-lg"
+                  className="glass p-3 rounded-lg hover:scale-[1.02] transition-transform"
                 >
                   <div className="font-medium text-sm">{maverick.name}</div>
                   <div className="text-xs text-[var(--color-text-dim)]">
@@ -237,17 +127,30 @@ export function MissionSection() {
             <p className="text-[var(--color-text-muted)] mb-6">
               — The Philosophy of B0BR0SS1NG
             </p>
-            <a 
-              href="https://github.com/1800bobrossdotcom-byte/b0b-mcp"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--color-mind-glow)] text-white rounded-full font-medium hover:bg-[var(--color-mind-pulse)] transition-colors"
-            >
-              <span>View on GitHub</span>
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a 
+                href="https://github.com/1800bobrossdotcom-byte/b0b-mcp"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 text-white rounded-full font-medium hover:bg-white/20 transition-colors"
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd"/>
+                </svg>
+                <span>View on GitHub</span>
+              </a>
+              <a 
+                href="https://d0t.b0b.dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-[#0052FF] text-white rounded-full font-medium hover:bg-[#0052FF]/80 transition-colors"
+              >
+                <span>Explore D0T Finance</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -300,7 +203,7 @@ export function MissionSection() {
           </div>
         </div>
         <div className="text-center text-xs text-[var(--color-text-dim)] mt-8 font-mono">
-          Built on <span className="text-[#0052FF]">Base</span> ◆ We&apos;re Bob Rossing this. 🎨
+          Built on <span className="text-[#0052FF]">Base</span> ◆ Bankr-First ◆ We&apos;re Bob Rossing this. 🎨
         </div>
       </footer>
     </section>

@@ -28,7 +28,7 @@
   },
   "localRepos": {
     "b0b-finance": {
-      "lastStudied": "2026-01-28T02:05:53.039Z",
+      "lastStudied": "2026-01-28T02:25:55.315Z",
       "patterns": [
         "func:const https",
         "func:const crypto",
@@ -83,7 +83,7 @@
       ]
     },
     "d0t": {
-      "lastStudied": "2026-01-28T02:05:53.061Z",
+      "lastStudied": "2026-01-28T02:25:55.336Z",
       "patterns": [
         "func:const path",
         "func:const SCREENSHOT_PATH",
@@ -138,7 +138,7 @@
       ]
     },
     "alfred": {
-      "lastStudied": "2026-01-28T02:05:53.063Z",
+      "lastStudied": "2026-01-28T02:25:55.337Z",
       "patterns": [
         "func:const fs",
         "func:const path",
