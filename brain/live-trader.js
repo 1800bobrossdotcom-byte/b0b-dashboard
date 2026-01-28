@@ -407,6 +407,138 @@ async function getBankrSdkClient() {
   return _bankrSdkClient;
 }
 
+// ════════════════════════════════════════════════════════════════════════════
+// ERC20 APPROVAL HELPER
+// Before selling tokens on a DEX, we need to approve the router to spend them
+// ════════════════════════════════════════════════════════════════════════════
+
+const ERC20_ABI = [
+  { name: 'allowance', type: 'function', stateMutability: 'view', inputs: [{ name: 'owner', type: 'address' }, { name: 'spender', type: 'address' }], outputs: [{ name: '', type: 'uint256' }] },
+  { name: 'approve', type: 'function', stateMutability: 'nonpayable', inputs: [{ name: 'spender', type: 'address' }, { name: 'amount', type: 'uint256' }], outputs: [{ name: '', type: 'bool' }] },
+  { name: 'balanceOf', type: 'function', stateMutability: 'view', inputs: [{ name: 'account', type: 'address' }], outputs: [{ name: '', type: 'uint256' }] },
+];
+
+// Common DEX routers that might need approval
+const KNOWN_ROUTERS = {
+  // Base chain
+  uniswapV3: '0x2626664c2603336E57B271c5C0b26F421741e481', // Universal Router
+  uniswapV2: '0x4752ba5DBc23f44D87826276BF6Fd6b1C372aD24', // V2 Router
+  aerodrome: '0xcF77a3Ba9A5CA399B7c97c74d54e5b1Beb874E43', // Aerodrome Router
+  baseswap: '0x327Df1E6de05895d2ab08513aaDD9313Fe505d86', // BaseSwap Router
+};
+
+/**
+ * Check and approve tokens for a DEX router if needed
+ * @param {string} tokenAddress - The ERC20 token to approve
+ * @param {string} spenderAddress - The DEX router address (optional, will try common routers)
+ * @param {bigint} amount - Amount to approve (default: max uint256)
+ * @returns {Promise<{approved: boolean, txHash?: string, error?: string}>}
+ */
+async function ensureTokenApproval(tokenAddress, spenderAddress = null, amount = null) {
+  console.log(`   🔐 Checking token approval for ${tokenAddress}`);
+  
+  try {
+    const { createPublicClient, createWalletClient, http, parseUnits, maxUint256 } = await import('viem');
+    const { privateKeyToAccount } = await import('viem/accounts');
+    const { base } = await import('viem/chains');
+    
+    const account = privateKeyToAccount(CONFIG.TRADING_PRIVATE_KEY);
+    
+    const publicClient = createPublicClient({
+      chain: base,
+      transport: http('https://mainnet.base.org'),
+    });
+    
+    const walletClient = createWalletClient({
+      account,
+      chain: base,
+      transport: http('https://mainnet.base.org'),
+    });
+    
+    // Get token balance first
+    const balance = await publicClient.readContract({
+      address: tokenAddress,
+      abi: ERC20_ABI,
+      functionName: 'balanceOf',
+      args: [CONFIG.TRADING_WALLET],
+    });
+    
+    console.log(`      Token balance: ${balance.toString()}`);
+    
+    if (balance === 0n) {
+      return { approved: true, reason: 'No balance to approve' };
+    }
+    
+    // Amount to approve (default to max)
+    const approvalAmount = amount || maxUint256;
+    
+    // If specific spender provided, check and approve just that one
+    if (spenderAddress) {
+      const allowance = await publicClient.readContract({
+        address: tokenAddress,
+        abi: ERC20_ABI,
+        functionName: 'allowance',
+        args: [CONFIG.TRADING_WALLET, spenderAddress],
+      });
+      
+      console.log(`      Current allowance for ${spenderAddress}: ${allowance.toString()}`);
+      
+      if (allowance >= balance) {
+        console.log(`      ✅ Already approved for ${spenderAddress}`);
+        return { approved: true, allowance: allowance.toString() };
+      }
+      
+      // Need to approve
+      console.log(`      📝 Approving ${spenderAddress}...`);
+      const hash = await walletClient.writeContract({
+        address: tokenAddress,
+        abi: ERC20_ABI,
+        functionName: 'approve',
+        args: [spenderAddress, approvalAmount],
+      });
+      
+      console.log(`      ✅ Approval TX: ${hash}`);
+      return { approved: true, txHash: hash };
+    }
+    
+    // No specific spender - check/approve all known routers
+    const approvalResults = [];
+    for (const [name, router] of Object.entries(KNOWN_ROUTERS)) {
+      const allowance = await publicClient.readContract({
+        address: tokenAddress,
+        abi: ERC20_ABI,
+        functionName: 'allowance',
+        args: [CONFIG.TRADING_WALLET, router],
+      });
+      
+      if (allowance < balance) {
+        console.log(`      📝 Approving ${name} (${router})...`);
+        try {
+          const hash = await walletClient.writeContract({
+            address: tokenAddress,
+            abi: ERC20_ABI,
+            functionName: 'approve',
+            args: [router, approvalAmount],
+          });
+          console.log(`      ✅ ${name} approved: ${hash}`);
+          approvalResults.push({ router: name, hash, approved: true });
+        } catch (e) {
+          console.log(`      ⚠️ ${name} approval failed: ${e.message}`);
+          approvalResults.push({ router: name, error: e.message, approved: false });
+        }
+      } else {
+        console.log(`      ✅ ${name} already approved`);
+        approvalResults.push({ router: name, approved: true });
+      }
+    }
+    
+    return { approved: true, routers: approvalResults };
+  } catch (error) {
+    console.log(`   ❌ Approval check failed: ${error.message}`);
+    return { approved: false, error: error.message };
+  }
+}
+
 class BankrClient {
   constructor() {
     this.walletAddress = CONFIG.TRADING_WALLET;
@@ -1590,6 +1722,21 @@ async function executeExit(position, currentPrice, percentage, state, exitReason
   }[exitReason] || '📤';
   
   // ════════════════════════════════════════════════════════════════════════
+  // TOKEN APPROVAL — ERC20 tokens need approval before DEX can spend them
+  // ════════════════════════════════════════════════════════════════════════
+  const tokenAddress = position.address || position.tokenAddress || '';
+  if (tokenAddress && tokenAddress.startsWith('0x')) {
+    console.log(`   🔐 Checking token approval before sell...`);
+    const approval = await ensureTokenApproval(tokenAddress);
+    if (!approval.approved) {
+      console.log(`   ⚠️ Token approval failed: ${approval.error}`);
+      // Continue anyway - Bankr might handle approval itself
+    } else {
+      console.log(`   ✅ Token approved for DEX routers`);
+    }
+  }
+  
+  // ════════════════════════════════════════════════════════════════════════
   // ROBUST EXIT EXECUTION — Retry logic with escalating slippage
   // ════════════════════════════════════════════════════════════════════════
   
@@ -1612,7 +1759,6 @@ async function executeExit(position, currentPrice, percentage, state, exitReason
     // EXPLICIT SELL PROMPT — Be specific about what we want
     // Team discussion: vague prompts may cause Bankr to misinterpret
     // ════════════════════════════════════════════════════════════════════════
-    const tokenAddress = position.address || position.tokenAddress || '';
     const prompt = tokenAddress 
       ? `Swap ${exitAmount.toFixed(6)} ${position.symbol} (contract: ${tokenAddress}) to ETH on Base chain. Wallet: ${CONFIG.TRADING_WALLET}. Max slippage: ${slippage}%. This is a SELL order.`
       : `Swap ${exitAmount.toFixed(6)} ${position.symbol} tokens to ETH on Base chain. Wallet: ${CONFIG.TRADING_WALLET}. Max slippage: ${slippage}%. This is a SELL order - convert my ${position.symbol} holdings to ETH.`;
@@ -2711,6 +2857,8 @@ module.exports = {
   getWageStatus,
   // 🧪 Test functions
   testSell,
+  // 🔐 Token approval
+  ensureTokenApproval,
 };
 
 /**
