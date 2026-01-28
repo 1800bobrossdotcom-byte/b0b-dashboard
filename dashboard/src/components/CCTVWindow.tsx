@@ -16,36 +16,44 @@ import { useEffect, useState, useRef } from 'react';
 
 const BRAIN_URL = process.env.NEXT_PUBLIC_BRAIN_URL || 'https://b0b-brain-production.up.railway.app';
 
-// Curated public webcam feeds (landmarks, cityscapes only)
+// Real EarthCam feeds - live webcams from around the world
+// Using embed URLs that work with iframes
 const FEEDS = [
   {
     id: 'timessquare',
     name: 'Times Square, NYC',
-    // Using placeholder - in production would use actual feed
-    placeholder: true,
+    embedUrl: 'https://www.earthcam.com/cams/newyork/timessquare/?cam=tsrobo1',
+    iframeUrl: 'https://www.earthcam.com/js/video/embed.php?cam=tsrobo1',
     location: 'New York, USA',
-    timezone: 'EST'
+    timezone: 'EST',
+    placeholder: false
   },
   {
-    id: 'shibuya',
-    name: 'Shibuya Crossing',
-    placeholder: true,
-    location: 'Tokyo, Japan',
-    timezone: 'JST'
+    id: 'dublin',
+    name: 'Dublin, Ireland',
+    embedUrl: 'https://www.earthcam.com/world/ireland/dublin/?cam=templebar',
+    iframeUrl: 'https://www.earthcam.com/js/video/embed.php?cam=templebar',
+    location: 'Dublin, Ireland',
+    timezone: 'GMT',
+    placeholder: false
   },
   {
-    id: 'abbey',
-    name: 'Abbey Road',
-    placeholder: true,
-    location: 'London, UK',
-    timezone: 'GMT'
+    id: 'neworleans',
+    name: 'Bourbon Street, NOLA',
+    embedUrl: 'https://www.earthcam.com/usa/louisiana/neworleans/bourbonstreet/?cam=bourbonstreet',
+    iframeUrl: 'https://www.earthcam.com/js/video/embed.php?cam=catsmeow2',
+    location: 'New Orleans, USA',
+    timezone: 'CST',
+    placeholder: false
   },
   {
-    id: 'venice',
-    name: 'Venice Beach',
-    placeholder: true,
-    location: 'Los Angeles, USA',
-    timezone: 'PST'
+    id: 'nashville',
+    name: 'Nashville Broadway',
+    embedUrl: 'https://www.earthcam.com/usa/tennessee/nashville/?cam=nashville',
+    iframeUrl: 'https://www.earthcam.com/js/video/embed.php?cam=nashvilletn',
+    location: 'Nashville, USA',
+    timezone: 'CST',
+    placeholder: false
   }
 ];
 
@@ -183,28 +191,41 @@ export default function CCTVWindow() {
         </div>
       )}
       
-      {/* Feed Content - Placeholder with Noise */}
+      {/* Feed Content - Live EarthCam or Placeholder */}
       <div className="absolute inset-0 bg-[#0A0A0A]">
-        {/* Static noise background */}
-        <div 
-          className="absolute inset-0 opacity-30"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-            animation: 'noise 0.5s steps(10) infinite'
-          }}
-        />
-        
-        {/* Placeholder cityscape */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center">
-            <div className="text-6xl mb-4 opacity-50">📹</div>
-            <p className="text-neutral-500 font-mono text-sm">{feed.name}</p>
-            <p className="text-neutral-600 text-xs">{feed.location}</p>
-          </div>
-        </div>
+        {/* Live iframe feed */}
+        {feed.iframeUrl && !feed.placeholder ? (
+          <iframe
+            src={feed.iframeUrl}
+            className="w-full h-full border-0"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+            title={feed.name}
+          />
+        ) : (
+          <>
+            {/* Static noise background for placeholder */}
+            <div 
+              className="absolute inset-0 opacity-30"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                animation: 'noise 0.5s steps(10) infinite'
+              }}
+            />
+            
+            {/* Placeholder cityscape */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-center">
+                <div className="text-6xl mb-4 opacity-50">📹</div>
+                <p className="text-neutral-500 font-mono text-sm">{feed.name}</p>
+                <p className="text-neutral-600 text-xs">{feed.location}</p>
+              </div>
+            </div>
+          </>
+        )}
         
         {/* City silhouette animation */}
-        <div className="absolute bottom-0 left-0 right-0 h-1/3">
+        <div className="absolute bottom-0 left-0 right-0 h-1/3 pointer-events-none">
           <svg viewBox="0 0 800 200" className="w-full h-full opacity-20" preserveAspectRatio="none">
             <path 
               d="M0 200 L0 120 L40 120 L40 80 L80 80 L80 100 L120 100 L120 60 L180 60 L180 90 L220 90 L220 50 L280 50 L280 70 L340 70 L340 40 L400 40 L400 80 L460 80 L460 60 L520 60 L520 100 L580 100 L580 50 L640 50 L640 90 L700 90 L700 70 L760 70 L760 110 L800 110 L800 200 Z"

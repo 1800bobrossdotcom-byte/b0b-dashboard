@@ -501,32 +501,52 @@ export function TeamChat({
               Discussions
             </p>
           </div>
-          {discussions.map((disc) => (
-            <a
-              key={disc.id}
-              href={`${BRAIN_URL}/discussions/${disc.id}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-between p-3 hover:bg-[#F8F8F8] transition-colors border-b border-[#E8E4DE] last:border-0"
-            >
-              <div className="min-w-0">
-                <p className="text-sm font-medium truncate" style={{ color: '#1A1A1A' }}>{disc.title}</p>
-                <p className="text-xs" style={{ color: '#555555' }}>
-                  {disc.participants?.join(', ')} · {disc.messageCount} messages
-                </p>
-              </div>
-              <div className="flex items-center gap-2 flex-shrink-0">
-                <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                  disc.status === 'active' ? 'bg-[#00CC6620] text-[#00AA66]' :
-                  disc.status === 'planning' ? 'bg-[#F59E0B20] text-[#D97706]' :
-                  'bg-[#55555515] text-[#555555]'
-                }`}>
-                  {disc.status?.toUpperCase()}
-                </span>
-                <span className="text-xs" style={{ color: '#888888' }}>{formatDate(disc.date)}</span>
-              </div>
-            </a>
-          ))}
+          {discussions.map((disc) => {
+            // Find full discussion data if available
+            const fullDisc = fullDiscussions.find(f => f.id === disc.id);
+            return (
+              <button
+                key={disc.id}
+                onClick={async () => {
+                  if (fullDisc) {
+                    setSelectedDiscussion(fullDisc);
+                  } else {
+                    // Fetch full discussion
+                    try {
+                      const res = await fetch(`${BRAIN_URL}/discussions/${disc.id}`);
+                      if (res.ok) {
+                        const data = await res.json();
+                        setSelectedDiscussion(data);
+                        setFullDiscussions(prev => [...prev, data]);
+                      } else {
+                        setSelectedDiscussion(disc);
+                      }
+                    } catch {
+                      setSelectedDiscussion(disc);
+                    }
+                  }
+                }}
+                className="w-full flex items-center justify-between p-3 hover:bg-[#F8F8F8] transition-colors border-b border-[#E8E4DE] last:border-0 text-left"
+              >
+                <div className="min-w-0">
+                  <p className="text-sm font-medium truncate" style={{ color: '#1A1A1A' }}>{disc.title}</p>
+                  <p className="text-xs" style={{ color: '#555555' }}>
+                    {disc.participants?.join(', ')} · {disc.messageCount} messages
+                  </p>
+                </div>
+                <div className="flex items-center gap-2 flex-shrink-0">
+                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
+                    disc.status === 'active' ? 'bg-[#00CC6620] text-[#00AA66]' :
+                    disc.status === 'planning' ? 'bg-[#F59E0B20] text-[#D97706]' :
+                    'bg-[#55555515] text-[#555555]'
+                  }`}>
+                    {disc.status?.toUpperCase()}
+                  </span>
+                  <span className="text-xs" style={{ color: '#888888' }}>{formatDate(disc.date)}</span>
+                </div>
+              </button>
+            );
+          })}
         </div>
       )}
 
@@ -546,6 +566,113 @@ export function TeamChat({
           View all →
         </a>
       </div>
+
+      {/* Discussion Modal */}
+      {selectedDiscussion && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+          onClick={() => setSelectedDiscussion(null)}
+        >
+          <div 
+            className="bg-white rounded-xl max-w-2xl w-full max-h-[80vh] overflow-hidden shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="p-4 border-b border-[#E8E4DE] bg-gradient-to-r from-[#0052FF10] to-[#7C3AED10]">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="font-semibold text-lg" style={{ color: '#1A1A1A' }}>
+                    {selectedDiscussion.title}
+                  </h3>
+                  <p className="text-xs mt-1" style={{ color: '#555555' }}>
+                    {selectedDiscussion.participants?.join(', ')} · {selectedDiscussion.date}
+                  </p>
+                </div>
+                <button
+                  onClick={() => setSelectedDiscussion(null)}
+                  className="w-8 h-8 rounded-full hover:bg-[#F5F5F5] flex items-center justify-center"
+                >
+                  <span className="text-xl" style={{ color: '#555555' }}>×</span>
+                </button>
+              </div>
+              {selectedDiscussion.topic && (
+                <p className="text-sm mt-2 p-2 rounded bg-[#F5F5F5]" style={{ color: '#555555' }}>
+                  {selectedDiscussion.topic}
+                </p>
+              )}
+            </div>
+
+            {/* Modal Messages */}
+            <div className="p-4 overflow-y-auto max-h-[60vh] space-y-4">
+              {selectedDiscussion.messages && selectedDiscussion.messages.length > 0 ? (
+                selectedDiscussion.messages.map((msg, idx) => {
+                  const agentConfig = getAgentConfig(msg.agent);
+                  return (
+                    <div key={idx} className="flex gap-3">
+                      <div 
+                        className="w-8 h-8 rounded-full flex items-center justify-center text-sm flex-shrink-0"
+                        style={{ backgroundColor: agentConfig.color + '20' }}
+                      >
+                        {msg.emoji || agentConfig.emoji}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span 
+                            className="font-medium text-sm"
+                            style={{ color: agentConfig.color }}
+                          >
+                            {msg.agent}
+                          </span>
+                          <span className="text-xs" style={{ color: '#888888' }}>
+                            {msg.timestamp ? new Date(msg.timestamp).toLocaleTimeString() : ''}
+                          </span>
+                        </div>
+                        <div 
+                          className="text-sm whitespace-pre-wrap"
+                          style={{ color: '#1A1A1A' }}
+                        >
+                          {msg.content}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                <div className="text-center py-8">
+                  <p className="text-sm" style={{ color: '#555555' }}>
+                    Loading messages...
+                  </p>
+                  <a 
+                    href={`${BRAIN_URL}/discussions/${selectedDiscussion.id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs mt-2 inline-block hover:underline"
+                    style={{ color: '#0052FF' }}
+                  >
+                    View raw JSON →
+                  </a>
+                </div>
+              )}
+            </div>
+
+            {/* Modal Footer */}
+            <div className="p-3 border-t border-[#E8E4DE] bg-[#FAFAFA] flex justify-between items-center">
+              <span className="text-xs" style={{ color: '#888888' }}>
+                {selectedDiscussion.messages?.length || 0} messages
+              </span>
+              <a 
+                href={`${BRAIN_URL}/discussions/${selectedDiscussion.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-medium hover:underline"
+                style={{ color: '#0052FF' }}
+              >
+                Open in Brain →
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

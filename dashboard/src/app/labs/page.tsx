@@ -25,10 +25,6 @@ const CCTVWindow = dynamic(() => import('@/components/CCTVWindow'), {
   ssr: false,
   loading: () => <div className="h-64 bg-gray-100 animate-pulse rounded-lg" />
 });
-const GameOfLife = dynamic(() => import('@/components/GameOfLife'), { 
-  ssr: false,
-  loading: () => <div className="h-64 bg-gray-100 animate-pulse rounded-lg" />
-});
 const WalletDashboard = dynamic(() => import('@/components/live/WalletDashboard'), { 
   ssr: false,
   loading: () => <div className="h-48 bg-gray-100 animate-pulse rounded-lg" />
@@ -484,22 +480,14 @@ export default function LabsPage() {
           </ErrorBoundary>
         </section>
 
-        {/* CCTV Window */}
+        {/* CCTV Window - Live EarthCam Feeds */}
         <section className="mb-16">
-          <h2 className="text-xs font-mono mb-6 tracking-wider" style={{ color: '#555555' }}>CCTV FEED</h2>
+          <h2 className="text-xs font-mono mb-6 tracking-wider flex items-center gap-2" style={{ color: '#555555' }}>
+            <span>📺 LIVE CCTV</span>
+            <span style={{ color: '#888888' }}>— EARTHCAM FEEDS</span>
+          </h2>
           <ErrorBoundary fallback={<SectionFallback title="CCTV Feed" />}>
             <CCTVWindow />
-          </ErrorBoundary>
-        </section>
-
-        {/* Game of Life */}
-        <section className="mb-16">
-          <h2 className="text-xs font-mono mb-6 tracking-wider" style={{ color: '#555555' }}>CONWAY'S GAME OF LIFE</h2>
-          <p className="text-sm mb-4" style={{ color: '#555555' }}>
-            Emergence from simple rules. A B0B tenet in action.
-          </p>
-          <ErrorBoundary fallback={<SectionFallback title="Game of Life" />}>
-            <GameOfLife width={800} height={300} cellSize={6} />
           </ErrorBoundary>
         </section>
 

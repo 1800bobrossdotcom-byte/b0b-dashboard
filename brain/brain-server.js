@@ -1129,6 +1129,113 @@ app.get('/discussions/:id', async (req, res) => {
 });
 
 // ════════════════════════════════════════════════════════════════════════════
+// 🏗️ ACTION ITEMS — Aggregate pending work from all discussions
+// "Discuss → Build → Deploy → Observe → Discuss"
+// ════════════════════════════════════════════════════════════════════════════
+app.get('/action-items', async (req, res) => {
+  const discussions = await loadDiscussions();
+  const { status = 'pending', priority, owner } = req.query;
+  
+  const allItems = [];
+  
+  // Extract action items from all discussions
+  for (const disc of discussions) {
+    if (!disc.action_items) continue;
+    
+    for (const item of disc.action_items) {
+      allItems.push({
+        ...item,
+        discussion: {
+          id: disc.id,
+          title: disc.title,
+          date: disc.date
+        }
+      });
+    }
+  }
+  
+  // Filter by status
+  let filtered = allItems;
+  if (status && status !== 'all') {
+    filtered = filtered.filter(item => item.status === status);
+  }
+  
+  // Filter by priority
+  if (priority) {
+    filtered = filtered.filter(item => item.priority === priority);
+  }
+  
+  // Filter by owner
+  if (owner) {
+    filtered = filtered.filter(item => item.owner === owner);
+  }
+  
+  // Sort by priority
+  const priorityOrder = { critical: 0, high: 1, medium: 2, low: 3 };
+  filtered.sort((a, b) => {
+    const aOrder = priorityOrder[a.priority] ?? 4;
+    const bOrder = priorityOrder[b.priority] ?? 4;
+    return aOrder - bOrder;
+  });
+  
+  res.json({
+    total: filtered.length,
+    byPriority: {
+      critical: filtered.filter(i => i.priority === 'critical').length,
+      high: filtered.filter(i => i.priority === 'high').length,
+      medium: filtered.filter(i => i.priority === 'medium').length,
+      low: filtered.filter(i => i.priority === 'low').length
+    },
+    byOwner: filtered.reduce((acc, item) => {
+      acc[item.owner] = (acc[item.owner] || 0) + 1;
+      return acc;
+    }, {}),
+    items: filtered
+  });
+});
+
+// Update action item status
+app.post('/action-items/:id/status', async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+  
+  if (!status || !['pending', 'in-progress', 'completed', 'blocked'].includes(status)) {
+    return res.status(400).json({ error: 'Invalid status' });
+  }
+  
+  const discussions = await loadDiscussions();
+  let found = false;
+  
+  for (const disc of discussions) {
+    if (!disc.action_items) continue;
+    
+    const item = disc.action_items.find(i => i.id === id);
+    if (item) {
+      item.status = status;
+      item.updatedAt = new Date().toISOString();
+      found = true;
+      
+      // Save discussion
+      await saveDiscussion(disc);
+      
+      await logActivity({
+        type: 'action_item',
+        action: 'status_update',
+        itemId: id,
+        newStatus: status,
+        discussion: disc.id
+      });
+      
+      return res.json({ success: true, item });
+    }
+  }
+  
+  if (!found) {
+    return res.status(404).json({ error: 'Action item not found' });
+  }
+});
+
+// ════════════════════════════════════════════════════════════════════════════
 // LIVE QUOTES — Extract quotable lines from team discussions
 // ════════════════════════════════════════════════════════════════════════════
 app.get('/api/quotes/live', async (req, res) => {
