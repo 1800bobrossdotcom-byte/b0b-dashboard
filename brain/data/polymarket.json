@@ -1,0 +1,212 @@
+{
+  "crawler": "polymarket",
+  "timestamp": "2026-01-28T02:37:49.171Z",
+  "data": {
+    "markets": [
+      {
+        "id": "601697",
+        "question": "Fed decreases interest rates by 50+ bps after January 2026 meeting?",
+        "slug": "fed-decreases-interest-rates-by-50-bps-after-january-2026-meeting",
+        "volume24h": 17635365.814843994,
+        "liquidity": "7938851.43238",
+        "endDate": "2026-01-28T00:00:00Z",
+        "outcomePrices": "[\"0.0005\", \"0.9995\"]"
+      },
+      {
+        "id": "601699",
+        "question": "No change in Fed interest rates after January 2026 meeting?",
+        "slug": "no-change-in-fed-interest-rates-after-january-2026-meeting",
+        "volume24h": 14856866.995167116,
+        "liquidity": "2862772.37191",
+        "endDate": "2026-01-28T00:00:00Z",
+        "outcomePrices": "[\"0.9955\", \"0.0045\"]"
+      },
+      {
+        "id": "601700",
+        "question": "Fed increases interest rates by 25+ bps after January 2026 meeting?",
+        "slug": "fed-increases-interest-rates-by-25-bps-after-january-2026-meeting",
+        "volume24h": 14802182.532775,
+        "liquidity": "2606039.82772",
+        "endDate": "2026-01-28T00:00:00Z",
+        "outcomePrices": "[\"0.0005\", \"0.9995\"]"
+      },
+      {
+        "id": "601698",
+        "question": "Fed decreases interest rates by 25 bps after January 2026 meeting?",
+        "slug": "fed-decreases-interest-rates-by-25-bps-after-january-2026-meeting",
+        "volume24h": 8932646.216334011,
+        "liquidity": "4372731.53101",
+        "endDate": "2026-01-28T00:00:00Z",
+        "outcomePrices": "[\"0.0035\", \"0.9965\"]"
+      },
+      {
+        "id": "1082748",
+        "question": "Will Bitcoin reach $150,000 in January?",
+        "slug": "will-bitcoin-reach-150k-in-january-2026",
+        "volume24h": 5118273.432051996,
+        "liquidity": "766274.26337",
+        "endDate": "2026-02-01T05:00:00Z",
+        "outcomePrices": "[\"0.0015\", \"0.9985\"]"
+      },
+      {
+        "id": "680392",
+        "question": "US government shutdown Saturday?",
+        "slug": "will-there-be-another-us-government-shutdown-by-january-31",
+        "volume24h": 3587499.9388020034,
+        "liquidity": "622256.1732",
+        "endDate": "2026-01-31T00:00:00Z",
+        "outcomePrices": "[\"0.745\", \"0.255\"]"
+      },
+      {
+        "id": "1082749",
+        "question": "Will Ethereum reach $6,000 in January?",
+        "slug": "will-ethereum-reach-6000-in-january-2026",
+        "volume24h": 3070590.9098499934,
+        "liquidity": "944736.83731",
+        "endDate": "2026-02-01T05:00:00Z",
+        "outcomePrices": "[\"0.0015\", \"0.9985\"]"
+      },
+      {
+        "id": "1234908",
+        "question": "Trail Blazers vs. Wizards",
+        "slug": "nba-por-was-2026-01-27",
+        "volume24h": 2275849.9000239996,
+        "liquidity": "2404791.59602",
+        "endDate": "2026-01-28T00:00:00Z",
+        "outcomePrices": "[\"0.0005\", \"0.9995\"]"
+      },
+      {
+        "id": "559686",
+        "question": "Will Dwayne 'The Rock' Johnson win the 2028 Democratic presidential nomination?",
+        "slug": "will-dwayne-the-rock-johnson-win-the-2028-democratic-presidential-nomination",
+        "volume24h": 2176652.8794969996,
+        "liquidity": "223589.49345",
+        "endDate": "2028-11-07T00:00:00Z",
+        "outcomePrices": "[\"0.0125\", \"0.9875\"]"
+      },
+      {
+        "id": "1252876",
+        "question": "US strikes Iran by January 27, 2026?",
+        "slug": "us-strikes-iran-by-january-27-2026-458-884-547-617-932",
+        "volume24h": 1926516.1207940008,
+        "liquidity": "61730.28861",
+        "endDate": "2026-01-31T00:00:00Z",
+        "outcomePrices": "[\"0.0035\", \"0.9965\"]"
+      },
+      {
+        "id": "566192",
+        "question": "Will Tottenham win the 2025–26 English Premier League?",
+        "slug": "will-tottenham-win-the-202526-english-premier-league",
+        "volume24h": 1416744.28,
+        "liquidity": "783132.12982",
+        "endDate": "2026-05-27T00:00:00Z",
+        "outcomePrices": "[\"0.0015\", \"0.9985\"]"
+      },
+      {
+        "id": "1092199",
+        "question": "US strikes Iran by January 31, 2026?",
+        "slug": "us-strikes-iran-by-january-31-2026-165",
+        "volume24h": 1394176.458105,
+        "liquidity": "275224.4425",
+        "endDate": "2026-01-31T00:00:00Z",
+        "outcomePrices": "[\"0.095\", \"0.905\"]"
+      },
+      {
+        "id": "1074798",
+        "question": "Utah vs. Panthers",
+        "slug": "nhl-utah-fla-2026-01-27",
+        "volume24h": 1230734.08863,
+        "liquidity": "8752.9419",
+        "endDate": "2026-01-28T00:00:00Z",
+        "outcomePrices": "[\"0.83\", \"0.17\"]"
+      },
+      {
+        "id": "1074802",
+        "question": "Kings vs. Red Wings",
+        "slug": "nhl-lak-det-2026-01-27",
+        "volume24h": 1174796.3132089993,
+        "liquidity": "10050.19412",
+        "endDate": "2026-01-28T00:00:00Z",
+        "outcomePrices": "[\"0.985\", \"0.015\"]"
+      },
+      {
+        "id": "1271691",
+        "question": "Utah vs. Panthers: O/U 6.5",
+        "slug": "nhl-utah-fla-2026-01-27-total-6pt5",
+        "volume24h": 1169835.5946259997,
+        "liquidity": "950.9308",
+        "endDate": "2026-01-28T00:00:00Z",
+        "outcomePrices": "[\"0.285\", \"0.715\"]"
+      },
+      {
+        "id": "1106713",
+        "question": "Khamenei out as Supreme Leader of Iran by January 31?",
+        "slug": "khamenei-out-as-supreme-leader-of-iran-by-january-31",
+        "volume24h": 1139032.5238869998,
+        "liquidity": "330108.11814",
+        "endDate": "2026-01-31T00:00:00Z",
+        "outcomePrices": "[\"0.0215\", \"0.9785\"]"
+      },
+      {
+        "id": "540234",
+        "question": "Will the Seattle Seahawks win Super Bowl 2026?",
+        "slug": "will-the-seattle-seahawks-win-super-bowl-2026",
+        "volume24h": 1099563.912200994,
+        "liquidity": "1172138.31598",
+        "endDate": "2026-02-08T12:00:00Z",
+        "outcomePrices": "[\"0.6815\", \"0.3185\"]"
+      },
+      {
+        "id": "1082777",
+        "question": "Will Bitcoin reach $105,000 in January?",
+        "slug": "will-bitcoin-reach-105k-in-january-2026",
+        "volume24h": 1079757.106063999,
+        "liquidity": "65814.95734",
+        "endDate": "2026-02-01T05:00:00Z",
+        "outcomePrices": "[\"0.005\", \"0.995\"]"
+      },
+      {
+        "id": "1252884",
+        "question": "Zama FDV above $500M one day after launch?",
+        "slug": "zama-fdv-above-500m-one-day-after-launch-251",
+        "volume24h": 1033196.2648240001,
+        "liquidity": "12085.2957",
+        "endDate": "2027-01-01T05:00:00Z",
+        "outcomePrices": "[\"0.66\", \"0.34\"]"
+      },
+      {
+        "id": "694938",
+        "question": "Will Viking Therapeutics be acquired before 2027?",
+        "slug": "will-viking-therapeutics-be-acquired-before-2027-542",
+        "volume24h": 1005165.2537200002,
+        "liquidity": "762.4829",
+        "endDate": "2026-12-31T00:00:00Z",
+        "outcomePrices": "[\"0.35\", \"0.65\"]"
+      }
+    ],
+    "trending": [
+      {
+        "question": "Fed decreases interest rates by 50+ bps after January 2026 meeting?",
+        "volume": 17635365.814843994
+      },
+      {
+        "question": "No change in Fed interest rates after January 2026 meeting?",
+        "volume": 14856866.995167116
+      },
+      {
+        "question": "Fed increases interest rates by 25+ bps after January 2026 meeting?",
+        "volume": 14802182.532775
+      },
+      {
+        "question": "Fed decreases interest rates by 25 bps after January 2026 meeting?",
+        "volume": 8932646.216334011
+      },
+      {
+        "question": "Will Bitcoin reach $150,000 in January?",
+        "volume": 5118273.432051996
+      }
+    ],
+    "volume24h": 86125446.53540508,
+    "fetchedAt": "2026-01-28T02:37:49.018Z"
+  }
+}
