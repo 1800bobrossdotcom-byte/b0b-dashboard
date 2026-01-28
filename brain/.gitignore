@@ -1,6 +1,15 @@
 # Brain secrets - never commit
 .env
+.env.*
+!.env.example
 *.log
+
+# Security - NEVER commit these patterns
+**/test-*-key*.js
+**/test-*-secret*.js
+*private-key*
+*secret-key*
+security-scan-report.json
 
 # Generated files
 briefings/

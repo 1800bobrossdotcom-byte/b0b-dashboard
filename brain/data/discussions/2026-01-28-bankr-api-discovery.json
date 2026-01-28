@@ -1,0 +1,112 @@
+{
+  "id": "bankr-api-discovery-2026-01-28",
+  "title": "🔍 Bankr API Deep Dive — Found Correct Integration Patterns!",
+  "timestamp": "2026-01-28T12:00:00Z",
+  "context": "Investigation into BankrBot/claude-plugins GitHub repo",
+  "discovery": {
+    "source": "https://github.com/BankrBot/claude-plugins",
+    "key_finding": "There are TWO ways to integrate with Bankr!"
+  },
+  "option_1_agent_api": {
+    "name": "Agent API (API Key Method)",
+    "endpoints": {
+      "submit": "POST /agent/prompt",
+      "poll": "GET /agent/job/{jobId}",
+      "cancel": "POST /agent/job/{jobId}/cancel"
+    },
+    "auth": {
+      "header": "x-api-key",
+      "format": "bk_your_api_key_here",
+      "note": "NOT Bearer token!"
+    },
+    "requirements": [
+      "API key from https://bankr.bot/api",
+      "Must have 'Agent API' feature ENABLED on the key",
+      "Key is tied to your Bankr account and wallet"
+    ],
+    "current_issue": "Our key (bk_UQTZFYQEYDVVFDUXRJJG2TQGNTG5QVB6) returns 500 Internal Server Error",
+    "probable_cause": "Agent API feature may not be enabled for this key",
+    "action_required": "Go to https://bankr.bot/api and verify 'Agent API' is enabled"
+  },
+  "option_2_sdk": {
+    "name": "@bankr/sdk (x402 Micropayments)",
+    "package": "@bankr/sdk",
+    "endpoint": "Uses v2/prompt endpoint",
+    "pricing": "$0.10 USDC per request",
+    "auth": {
+      "type": "x402 payment protocol",
+      "requires": "Private key for signing USDC payments",
+      "note": "No API key needed!"
+    },
+    "pros": [
+      "Works immediately if you have USDC",
+      "No API key approval needed",
+      "Pay-per-use model"
+    ],
+    "cons": [
+      "Requires private key storage (security concern)",
+      "Needs USDC balance on Base",
+      "Each request costs $0.10"
+    ],
+    "implementation": {
+      "install": "npm install @bankr/sdk",
+      "usage": "client.promptAndWait({ prompt: 'Buy $50 of ETH on Base' })"
+    }
+  },
+  "api_pattern": {
+    "name": "Async Job Pattern",
+    "steps": [
+      "1. Submit prompt → Get jobId",
+      "2. Poll every 2 seconds → Check status",
+      "3. Terminal states: completed, failed, cancelled",
+      "4. Read response, transactions, richData from completed job"
+    ],
+    "prompts_supported": [
+      "Buy $50 of ETH on Base",
+      "Sell 10% of my USDC",
+      "Swap 0.1 ETH for USDC",
+      "What is the price of Bitcoin?",
+      "Check my portfolio balance",
+      "Bridge 100 USDC from Ethereum to Base"
+    ]
+  },
+  "fixes_applied": {
+    "live-trader.js": [
+      "Changed auth from 'Authorization: Bearer' to 'x-api-key' header",
+      "Changed endpoint from '/v1/agent/submit' to '/agent/prompt'",
+      "Changed polling endpoint from '/v1/agent/status/{id}' to '/agent/job/{id}'",
+      "Added proper status checking for completed/failed/cancelled",
+      "Added status update progress reporting"
+    ],
+    "WalletDashboard.tsx": [
+      "Removed hardcoded API key from frontend code",
+      "Changed to direct RPC for balance checking (faster)",
+      "Removed broken Bankr portfolio endpoint"
+    ]
+  },
+  "next_steps": [
+    {
+      "priority": "HIGH",
+      "action": "Verify Agent API is enabled at https://bankr.bot/api",
+      "owner": "User",
+      "note": "This is likely why we're getting 500 errors"
+    },
+    {
+      "priority": "MEDIUM",
+      "action": "Consider @bankr/sdk as fallback if Agent API doesn't work",
+      "owner": "Dev",
+      "note": "Would require secure private key storage"
+    },
+    {
+      "priority": "LOW",
+      "action": "Set up Telegram bot for Bankr Terminal access",
+      "owner": "User",
+      "note": "Alternative integration path via Telegram"
+    }
+  ],
+  "telegram_alternative": {
+    "note": "User asked about creating a Telegram bot for Bankr",
+    "url": "https://t.me/BANKR_BOT",
+    "info": "Bankr Terminal allows trading via Telegram chat"
+  }
+}

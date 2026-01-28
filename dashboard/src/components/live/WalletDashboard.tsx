@@ -99,39 +99,52 @@ async function fetchBaseBalance(address: string): Promise<number> {
   }
 }
 
-// Fetch token balances via Bankr API or fallback to DexScreener
+// Fetch token balances via Bankr API (natural language) or fallback to RPC
+// NOTE: Bankr Agent API uses async job pattern with natural language prompts
+// For real-time balance checks, we use direct RPC fallback since Bankr jobs take time
 async function fetchTokenBalances(address: string): Promise<TokenHolding[]> {
   const tokens: TokenHolding[] = [];
   
+  // Use direct RPC for ETH balance (faster than Bankr job pattern)
   try {
-    // Try Bankr API first
-    const bankrRes = await fetch('https://api.bankr.bot/v1/portfolio/balance', {
+    const rpcRes = await fetch('https://mainnet.base.org', {
       method: 'POST',
-      headers: { 
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer bk_UQTZFYQEYDVVFDUXRJJG2TQGNTG5QVB6'
-      },
-      body: JSON.stringify({ walletAddress: address, chain: 'base' })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        jsonrpc: '2.0',
+        method: 'eth_getBalance',
+        params: [address, 'latest'],
+        id: 1
+      })
     });
     
-    if (bankrRes.ok) {
-      const data = await bankrRes.json();
-      if (data.tokens) {
-        for (const t of data.tokens) {
-          tokens.push({
-            symbol: t.symbol,
-            name: t.name || t.symbol,
-            balance: t.balance || 0,
-            usdValue: t.usdValue || 0,
-            contractAddress: t.contractAddress || '',
-            chain: 'base',
-            type: 'erc20'
-          });
-        }
+    if (rpcRes.ok) {
+      const data = await rpcRes.json();
+      if (data.result) {
+        const ethBalance = Number(BigInt(data.result)) / 1e18;
+        // Fetch ETH price from DexScreener
+        let ethPrice = 3000; // Default
+        try {
+          const priceRes = await fetch('https://api.dexscreener.com/latest/dex/tokens/0x4200000000000000000000000000000000000006'); // WETH on Base
+          const priceData = await priceRes.json();
+          if (priceData.pairs?.[0]?.priceUsd) {
+            ethPrice = parseFloat(priceData.pairs[0].priceUsd);
+          }
+        } catch {}
+        
+        tokens.push({
+          symbol: 'ETH',
+          name: 'Ethereum',
+          balance: ethBalance,
+          usdValue: ethBalance * ethPrice,
+          contractAddress: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+          chain: 'base',
+          type: 'native'
+        });
       }
     }
   } catch {
-    // Bankr failed, try fallback
+    // RPC failed
   }
   
   // Fallback: Check DexScreener for known tokens

@@ -67,10 +67,12 @@ const CONFIG = {
     STRATEGY: 'edge_hunter',       // Look for mispriced markets
   },
   
-  // Bankr — Signing layer (no hot keys stored)
-  // ⚠️ NEVER commit API keys! Use Railway environment variables
-  BANKR_API_KEY: process.env.BANKR_API_KEY,
-  BANKR_API_URL: process.env.BANKR_API_URL || 'https://api.bankr.bot',
+  // Bankr — x402 Payment Protocol
+  // Uses private key to sign USDC payments ($0.10/request)
+  // ⚠️ NEVER commit private keys! Use Railway environment variables
+  PHANTOM_PRIVATE_KEY: process.env.PHANTOM_PRIVATE_KEY,
+  BANKR_API_URL: 'https://api.bankr.bot',
+  X402_MAX_PAYMENT: BigInt(1000000),  // Max $1.00 USDC per request (in 6 decimals)
   
   // Safety Limits (applies to all chains)
   MAX_POSITION_USD: 100,       // Max per trade
@@ -316,81 +318,248 @@ async function recordTrade(trade) {
 }
 
 // ════════════════════════════════════════════════════════════════════════════
-// BANKR CLIENT
+// BANKR CLIENT — x402 Payment Protocol
+// ════════════════════════════════════════════════════════════════════════════
+// 
+// Bankr SDK uses x402 payment protocol (HTTP 402 Payment Required)
+// Each request costs $0.10 USDC, paid automatically via signed payment
+// 
+// Flow:
+// 1. POST /v2/prompt → If 402, sign payment with private key
+// 2. Retry with payment header → Get jobId
+// 3. GET /v2/job/{jobId} → Poll until complete
+//
+// Docs: https://www.npmjs.com/package/@bankr/sdk
+// x402: https://www.x402.org/
 // ════════════════════════════════════════════════════════════════════════════
 
 class BankrClient {
   constructor() {
-    this.apiKey = CONFIG.BANKR_API_KEY;
     this.apiUrl = CONFIG.BANKR_API_URL;
+    this.privateKey = CONFIG.PHANTOM_PRIVATE_KEY;
+    this.walletAddress = CONFIG.PHANTOM_WALLET;
+    this.fetchWithPay = null; // Lazy init
   }
   
-  async request(endpoint, options = {}) {
-    const fetch = (await import('node-fetch')).default;
+  /**
+   * Initialize x402-fetch wrapper with payment capabilities
+   */
+  async initPaymentFetch() {
+    if (this.fetchWithPay) return;
     
+    if (!this.privateKey) {
+      throw new Error('PHANTOM_PRIVATE_KEY not set - required for x402 payments');
+    }
+    
+    // Dynamic imports for ESM modules
+    const { createWalletClient, http, hashMessage } = await import('viem');
+    const { privateKeyToAccount } = await import('viem/accounts');
+    const { base } = await import('viem/chains');
+    const { wrapFetchWithPayment } = await import('x402-fetch');
+    const nodeFetch = (await import('node-fetch')).default;
+    
+    // Create wallet client from private key
+    const account = privateKeyToAccount(this.privateKey);
+    this.account = account;
+    this.walletClient = createWalletClient({
+      account,
+      transport: http('https://mainnet.base.org'),
+      chain: base,
+    });
+    
+    // Wrap fetch with x402 payment handling
+    // Max payment: 0.20 USDC (200000 in 6 decimals)
+    this.fetchWithPay = wrapFetchWithPayment(
+      nodeFetch, 
+      this.walletClient, 
+      CONFIG.X402_MAX_PAYMENT
+    );
+    
+    // Store native fetch for non-payment requests
+    this.nodeFetch = nodeFetch;
+    
+    console.log(`   💳 x402 payment initialized for ${account.address}`);
+  }
+  
+  /**
+   * Sign a message for authenticated endpoints
+   */
+  async signMessage(message) {
+    await this.initPaymentFetch();
+    return this.walletClient.signMessage({
+      account: this.account,
+      message,
+    });
+  }
+  
+  /**
+   * Make request with automatic x402 payment (for prompt submission)
+   */
+  async request(endpoint, options = {}) {
+    await this.initPaymentFetch();
     const url = `${this.apiUrl}${endpoint}`;
     
-    const response = await fetch(url, {
+    const response = await this.fetchWithPay(url, {
       ...options,
       headers: {
-        'Authorization': `Bearer ${this.apiKey}`,
         'Content-Type': 'application/json',
+        'wallet-address': this.walletAddress,
         ...options.headers,
       },
     });
     
     if (!response.ok) {
       const error = await response.json().catch(() => ({}));
-      throw new Error(error.message || `Bankr API error: ${response.status}`);
+      throw new Error(error.message || error.error || `Bankr API error: ${response.status}`);
     }
     
     return response.json();
   }
   
   /**
-   * Execute a trade via natural language prompt
-   * Falls back to paper trading if Bankr API is unavailable
+   * Submit a prompt and get job ID (uses /v2/prompt for x402)
    */
-  async executeTrade(prompt, tokenData = {}) {
-    console.log(`   🏦 Bankr: "${prompt}"`);
+  async submitPrompt(prompt, walletAddress = null) {
+    const targetWallet = walletAddress || this.walletAddress;
+    const data = await this.request('/v2/prompt', {
+      method: 'POST',
+      body: JSON.stringify({ 
+        prompt,
+        walletAddress: targetWallet,
+      }),
+    });
     
-    try {
-      // Submit the job
-      const { jobId } = await this.request('/v1/agent/submit', {
-        method: 'POST',
-        body: JSON.stringify({ prompt }),
-      });
+    if (!data.success) {
+      throw new Error(data.error || 'Failed to submit prompt');
+    }
+    
+    return { jobId: data.jobId, status: data.status };
+  }
+  
+  /**
+   * Get job status (requires signed message authentication)
+   */
+  async getJobStatus(jobId) {
+    await this.initPaymentFetch();
+    
+    // Create message to sign (as per Bankr SDK pattern)
+    const message = `Get job status for ${jobId}`;
+    const signature = await this.signMessage(message);
+    
+    const url = `${this.apiUrl}/v2/job/${jobId}`;
+    const response = await this.nodeFetch(url, {
+      method: 'GET',
+      headers: {
+        'wallet-address': this.account.address,
+        'x-signature': signature,
+        'x-message': message,
+      },
+    });
+    
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}));
+      throw new Error(error.message || error.error || `Job status error: ${response.status}`);
+    }
+    
+    return response.json();
+  }
+  
+  /**
+   * Wait for job completion with status updates
+   */
+  async waitForCompletion(jobId, onProgress = null, maxAttempts = 150) {
+    const POLL_INTERVAL = 2000; // 2 seconds
+    let lastUpdateCount = 0;
+    
+    for (let attempt = 0; attempt < maxAttempts; attempt++) {
+      const status = await this.getJobStatus(jobId);
       
-      // Poll for completion (max 60s)
-      const startTime = Date.now();
-      while (Date.now() - startTime < 60000) {
-        const status = await this.request(`/v1/agent/status/${jobId}`);
-        
-        if (status.status === 'completed') {
-          console.log(`   ✅ Bankr completed: ${status.result?.message || 'Success'}`);
-          return {
-            success: true,
-            jobId,
-            result: status.result,
-            transactions: status.result?.transactions || [],
-            mode: 'live',
-          };
+      // Report new status updates
+      if (onProgress && status.statusUpdates) {
+        for (let i = lastUpdateCount; i < status.statusUpdates.length; i++) {
+          onProgress(status.statusUpdates[i].message);
         }
-        
-        if (status.status === 'failed') {
-          console.log(`   ❌ Bankr failed: ${status.error}`);
-          return { success: false, error: status.error, mode: 'live' };
-        }
-        
-        // Wait 2s before next poll
-        await new Promise(r => setTimeout(r, 2000));
+        lastUpdateCount = status.statusUpdates.length;
       }
       
-      return { success: false, error: 'Timeout waiting for trade execution', mode: 'live' };
+      // Check for terminal states
+      if (['completed', 'failed', 'cancelled'].includes(status.status)) {
+        return status;
+      }
+      
+      await new Promise(r => setTimeout(r, POLL_INTERVAL));
+    }
+    
+    throw new Error('Job timed out after maximum attempts');
+  }
+  
+  /**
+   * Combined prompt + wait (recommended approach)
+   */
+  async promptAndWait(prompt, onProgress = null) {
+    const { jobId } = await this.submitPrompt(prompt);
+    console.log(`   📋 Job ${jobId} submitted ($0.10 USDC paid)`);
+    return this.waitForCompletion(jobId, onProgress);
+  }
+  
+  /**
+   * Execute a trade via natural language prompt
+   * Uses x402 payment protocol ($0.10 USDC per request)
+   * Falls back to paper trading if payment fails
+   */
+  async executeTrade(prompt, tokenData = {}) {
+    console.log(`   🏦 Bankr x402: "${prompt}"`);
+    console.log(`   💰 Paying $0.10 USDC via x402 protocol...`);
+    
+    try {
+      // Use combined promptAndWait for simpler flow
+      const status = await this.promptAndWait(prompt, (msg) => {
+        console.log(`   📡 Bankr: ${msg}`);
+      });
+      
+      if (status.status === 'completed') {
+        console.log(`   ✅ Trade completed: ${status.response?.substring(0, 100) || 'Success'}...`);
+        
+        // Log transactions if any
+        if (status.transactions?.length > 0) {
+          console.log(`   📝 ${status.transactions.length} transaction(s) returned`);
+          for (const tx of status.transactions) {
+            console.log(`      - ${tx.type}: ${JSON.stringify(tx.metadata || {}).substring(0, 80)}...`);
+          }
+        }
+        
+        return {
+          success: true,
+          response: status.response,
+          transactions: status.transactions || [],
+          richData: status.richData || [],
+          mode: 'live',
+          processingTime: status.processingTime,
+          cost: '$0.10 USDC',
+        };
+      }
+      
+      if (status.status === 'failed') {
+        console.log(`   ❌ Bankr failed: ${status.error}`);
+        return { success: false, error: status.error, mode: 'live' };
+      }
+      
+      if (status.status === 'cancelled') {
+        console.log(`   ⚠️ Bankr job cancelled`);
+        return { success: false, error: 'Job cancelled', mode: 'live' };
+      }
+      
+      return { success: false, error: 'Unknown job status', mode: 'live' };
     } catch (error) {
-      // Bankr API not available - fall back to paper trading
-      console.log(`   ⚠️ Bankr API unavailable: ${error.message}`);
-      console.log(`   📝 PAPER TRADE RECORDED (Bankr API in beta - will execute when live)`);
+      // Payment or API failure - fall back to paper trading
+      console.log(`   ⚠️ Bankr x402 failed: ${error.message}`);
+      
+      // Check if it's a payment issue
+      if (error.message.includes('402') || error.message.includes('payment') || error.message.includes('USDC')) {
+        console.log(`   💸 Payment issue - check USDC balance in wallet`);
+      }
+      
+      console.log(`   📝 PAPER TRADE RECORDED (will execute when x402 payment works)`);
       
       // Record the paper trade
       const paperTrade = {
@@ -399,15 +568,14 @@ class BankrClient {
         token: tokenData.symbol || 'Unknown',
         address: tokenData.address || 'Unknown',
         price: tokenData.price || 0,
-        amount: 50, // Default entry size
+        amount: 50,
         type: 'paper',
-        reason: 'Bankr API not available',
+        reason: error.message,
         score: tokenData.score || 0,
       };
       
-      // Log to file for review
+      // Log to file
       try {
-        const fs = require('fs').promises;
         const logPath = path.join(CONFIG.DATA_DIR, 'paper-trades.json');
         let trades = [];
         try {
@@ -423,7 +591,7 @@ class BankrClient {
       
       return { 
         success: false, 
-        error: 'Bankr API not available - paper trade recorded',
+        error: error.message,
         mode: 'paper',
         paperTrade,
       };
@@ -431,62 +599,74 @@ class BankrClient {
   }
   
   /**
-   * Get wallet balance - with RPC fallback
+   * Get wallet balance via Bankr x402 ($0.10 USDC per query)
+   * Falls back to free RPC for ETH-only balance
    */
-  async getBalance() {
-    // Try Bankr API first
-    try {
-      const bankrBalance = await this.request('/v1/portfolio/balance', {
-        method: 'POST',
-        body: JSON.stringify({ 
-          walletAddress: CONFIG.PHANTOM_WALLET,
-          chain: CONFIG.CHAIN,
-        }),
-      });
-      if (bankrBalance) return bankrBalance;
-    } catch (error) {
-      console.log(`   ⚠️ Bankr balance failed: ${error.message}`);
+  async getBalance(useFreeRpc = true) {
+    // Default to free RPC to avoid costs
+    if (useFreeRpc) {
+      try {
+        const fetch = (await import('node-fetch')).default;
+        const res = await fetch('https://mainnet.base.org', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            jsonrpc: '2.0',
+            method: 'eth_getBalance',
+            params: [CONFIG.PHANTOM_WALLET, 'latest'],
+            id: 1
+          }),
+        });
+        const data = await res.json();
+        if (data.result) {
+          const ethBalance = Number(BigInt(data.result)) / 1e18;
+          return { 
+            eth: ethBalance, 
+            usd: ethBalance * 3000, // Estimate
+            source: 'rpc_free' 
+          };
+        }
+      } catch (rpcError) {
+        console.log(`   ⚠️ Free RPC failed: ${rpcError.message}`);
+      }
     }
     
-    // Fallback to direct Base RPC
+    // Try Bankr for full portfolio (costs $0.10)
     try {
-      const fetch = (await import('node-fetch')).default;
-      const res = await fetch('https://mainnet.base.org', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          jsonrpc: '2.0',
-          method: 'eth_getBalance',
-          params: [CONFIG.PHANTOM_WALLET, 'latest'],
-          id: 1
-        }),
-      });
-      const data = await res.json();
-      if (data.result) {
-        const ethBalance = Number(BigInt(data.result)) / 1e18;
-        console.log(`   ✅ RPC fallback: ${ethBalance.toFixed(4)} ETH`);
+      console.log(`   💰 Querying full portfolio via x402 ($0.10 USDC)...`);
+      const status = await this.promptAndWait('What are my token balances on Base?');
+      
+      if (status.status === 'completed' && status.response) {
+        console.log(`   ✅ Full portfolio: ${status.response.substring(0, 80)}...`);
         return { 
-          eth: ethBalance, 
-          usd: ethBalance * 3000, // Estimate, could fetch price
-          source: 'rpc_fallback' 
+          response: status.response,
+          richData: status.richData,
+          source: 'bankr_x402',
+          cost: '$0.10 USDC'
         };
       }
-    } catch (rpcError) {
-      console.log(`   ⚠️ RPC fallback also failed: ${rpcError.message}`);
+    } catch (error) {
+      console.log(`   ⚠️ Bankr portfolio query failed: ${error.message}`);
     }
     
     return null;
   }
   
   /**
-   * Get token price
+   * Get token price via natural language
    */
   async getPrice(symbol) {
     try {
-      return await this.request('/v1/market/price', {
-        method: 'POST',
-        body: JSON.stringify({ symbol, chain: CONFIG.CHAIN }),
-      });
+      const { jobId } = await this.submitPrompt(`What is the price of ${symbol}?`);
+      const status = await this.waitForCompletion(jobId, null, 30);
+      
+      if (status.status === 'completed') {
+        return {
+          response: status.response,
+          richData: status.richData,
+          source: 'bankr'
+        };
+      }
     } catch {
       return null;
     }
@@ -612,6 +792,78 @@ async function discoverNewTokens() {
       }
     } catch (e) {
       console.log(`   ⚠️ Boost check failed: ${e.message}`);
+    }
+    
+    // ════════════════════════════════════════════════════════════════════════════
+    // CLANKER — Fresh token deployments on Base (including Bankr-deployed)
+    // ════════════════════════════════════════════════════════════════════════════
+    try {
+      const clankerRes = await fetch(
+        'https://www.clanker.world/api/tokens',
+        { timeout: 10000, headers: { 'Accept': 'application/json' } }
+      );
+      const clankerData = await clankerRes.json();
+      const clankerTokens = clankerData.data || [];
+      
+      console.log(`   🤖 Clanker: ${clankerTokens.length} recent deployments`);
+      
+      // Only look at tokens from the last hour
+      const oneHourAgo = Date.now() - (60 * 60 * 1000);
+      const freshClankers = clankerTokens.filter(t => {
+        const deployedAt = new Date(t.deployed_at || t.created_at).getTime();
+        return deployedAt > oneHourAgo;
+      });
+      
+      console.log(`   🤖 Clanker: ${freshClankers.length} in last hour`);
+      
+      for (const token of freshClankers.slice(0, 10)) {
+        try {
+          // Skip if already added
+          if (tokens.find(t => t.address?.toLowerCase() === token.contract_address?.toLowerCase())) continue;
+          
+          // Get DexScreener data for this token
+          const pairRes = await fetch(
+            `https://api.dexscreener.com/latest/dex/tokens/${token.contract_address}`,
+            { timeout: 5000, headers: { 'Accept': 'application/json' } }
+          );
+          const pairData = await pairRes.json();
+          
+          const basePair = (pairData.pairs || []).find(p => p.chainId === 'base');
+          if (!basePair) continue;
+          
+          const liquidity = parseFloat(basePair.liquidity?.usd || 0);
+          const volume = parseFloat(basePair.volume?.h24 || 0);
+          
+          // Lower thresholds for fresh Clanker tokens
+          if (liquidity < 500) continue;
+          
+          const isBankrDeployed = token.social_context?.interface === 'Bankr';
+          const isClawdDeployed = token.name?.toLowerCase().includes('clawd') || 
+                                   token.description?.toLowerCase().includes('clawd');
+          
+          tokens.push({
+            symbol: token.symbol || basePair.baseToken?.symbol,
+            address: token.contract_address,
+            price: parseFloat(basePair.priceUsd || 0),
+            priceChange24h: parseFloat(basePair.priceChange?.h24 || 0),
+            volume24h: volume,
+            liquidity: liquidity,
+            pairAddress: basePair.pairAddress,
+            dex: basePair.dexId,
+            url: basePair.url,
+            source: 'clanker',
+            clanker: true,
+            bankrDeployed: isBankrDeployed,
+            clawdDeployed: isClawdDeployed,
+            startingMarketCap: token.starting_market_cap,
+            description: token.description,
+          });
+        } catch (e) {
+          // Skip individual token errors
+        }
+      }
+    } catch (e) {
+      console.log(`   ⚠️ Clanker check failed: ${e.message}`);
     }
     
   } catch (error) {
@@ -1555,9 +1807,31 @@ async function startPresenceTrading() {
       if (token.boostAmount >= 10) score += 10; // Extra for high boost
     }
     
-    console.log(`   📊 ${token.symbol}: Score ${score}/100 (age: ${token.age?.toFixed(1) || '?'}min, liq: $${token.liquidity?.toFixed(0) || '?'}, boosted: ${token.boosted || false})`);
+    // Clanker tokens get bonus (deployed via legit factory)
+    if (token.clanker) {
+      score += 10; // Clanker deployment bonus
+    }
     
-    if (score >= 45) { // Lowered threshold for boosted tokens
+    // Bankr-deployed tokens get extra bonus (AI agent ecosystem)
+    if (token.bankrDeployed) {
+      score += 15; // Bankr bonus
+    }
+    
+    // Clawd-deployed tokens also get bonus (AI agent)
+    if (token.clawdDeployed) {
+      score += 10; // Clawd bonus
+    }
+    
+    const sources = [
+      token.boosted ? 'boosted' : null,
+      token.clanker ? 'clanker' : null,
+      token.bankrDeployed ? 'bankr' : null,
+      token.clawdDeployed ? 'clawd' : null,
+    ].filter(Boolean).join(', ') || 'dexscreener';
+    
+    console.log(`   📊 ${token.symbol}: Score ${score}/100 (age: ${token.age?.toFixed(1) || '?'}min, liq: $${token.liquidity?.toFixed(0) || '?'}, source: ${sources})`);
+    
+    if (score >= 45) { // Lowered threshold for ecosystem tokens
       console.log(`   🎯 BLESSING OPPORTUNITY: ${token.symbol}!`);
       await executeEntry(token, state);
       presence.addToWatch(token.address);
