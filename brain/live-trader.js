@@ -1039,59 +1039,128 @@ class PresenceWatcher {
   
   /**
    * Watch for new token launches on Base
-   * Using DexScreener's latest pairs endpoint with smart polling
+   * Using DexScreener's token-profiles API (correct endpoint)
    * (True WebSocket would be ideal but requires DexScreener premium)
    */
   async watchNewTokens() {
     const fetch = (await import('node-fetch')).default;
-    let lastSeenPair = null;
+    const seenTokens = new Set();
     
     const check = async () => {
       if (!this.watching) return;
       
       try {
-        const res = await fetch(
-          'https://api.dexscreener.com/latest/dex/pairs/base?limit=10',
-          { timeout: 5000 }
+        // Use token-profiles for new tokens (this is what actually works)
+        const profileRes = await fetch(
+          'https://api.dexscreener.com/token-profiles/latest/v1',
+          { timeout: 8000, headers: { 'Accept': 'application/json' } }
         );
-        const data = await res.json();
+        const profiles = await profileRes.json();
         
-        for (const pair of (data.pairs || [])) {
-          // Skip if we've seen this pair
-          if (pair.pairAddress === lastSeenPair) break;
+        // Filter for Base chain tokens
+        const baseTokens = Array.isArray(profiles) 
+          ? profiles.filter(t => t.chainId === 'base')
+          : [];
+        
+        for (const profile of baseTokens) {
+          // Skip if we've seen this token
+          if (seenTokens.has(profile.tokenAddress)) continue;
+          seenTokens.add(profile.tokenAddress);
           
-          // New pair detected!
-          const age = (Date.now() - new Date(pair.pairCreatedAt).getTime()) / 60000; // minutes
-          
-          if (age < 30) { // Less than 30 minutes old
-            console.log(`\n   🆕 NEW TOKEN: ${pair.baseToken?.symbol}`);
-            console.log(`      Age: ${age.toFixed(1)} minutes`);
-            console.log(`      Price: $${pair.priceUsd}`);
-            console.log(`      Liquidity: $${pair.liquidity?.usd?.toLocaleString()}`);
+          // Get pair data for this token
+          try {
+            const pairRes = await fetch(
+              `https://api.dexscreener.com/latest/dex/tokens/${profile.tokenAddress}`,
+              { timeout: 5000, headers: { 'Accept': 'application/json' } }
+            );
+            const pairData = await pairRes.json();
             
-            // Emit event for strategy to handle
-            this.emit('newToken', {
-              symbol: pair.baseToken?.symbol,
-              address: pair.baseToken?.address,
-              price: parseFloat(pair.priceUsd || 0),
-              liquidity: parseFloat(pair.liquidity?.usd || 0),
-              volume24h: parseFloat(pair.volume?.h24 || 0),
-              priceChange: parseFloat(pair.priceChange?.h24 || 0),
-              age,
-              pairAddress: pair.pairAddress,
-            });
+            const basePair = (pairData.pairs || []).find(p => p.chainId === 'base');
+            if (!basePair) continue;
+            
+            const age = basePair.pairCreatedAt 
+              ? (Date.now() - new Date(basePair.pairCreatedAt).getTime()) / 60000 
+              : 999; // minutes
+            
+            // Only alert on relatively new tokens (less than 60 minutes)
+            if (age < 60) {
+              console.log(`\n   🆕 NEW TOKEN: ${basePair.baseToken?.symbol}`);
+              console.log(`      Age: ${age.toFixed(1)} minutes`);
+              console.log(`      Price: $${basePair.priceUsd}`);
+              console.log(`      Liquidity: $${basePair.liquidity?.usd?.toLocaleString()}`);
+              
+              // Emit event for strategy to handle
+              this.emit('newToken', {
+                symbol: basePair.baseToken?.symbol,
+                address: basePair.baseToken?.address,
+                price: parseFloat(basePair.priceUsd || 0),
+                liquidity: parseFloat(basePair.liquidity?.usd || 0),
+                volume24h: parseFloat(basePair.volume?.h24 || 0),
+                priceChange: parseFloat(basePair.priceChange?.h24 || 0),
+                age,
+                pairAddress: basePair.pairAddress,
+              });
+            }
+          } catch (e) {
+            // Skip individual token errors
           }
         }
         
-        if (data.pairs?.length > 0) {
-          lastSeenPair = data.pairs[0].pairAddress;
+        // Also check boosted tokens (paid = attention)
+        try {
+          const boostRes = await fetch(
+            'https://api.dexscreener.com/token-boosts/latest/v1',
+            { timeout: 5000, headers: { 'Accept': 'application/json' } }
+          );
+          const boosts = await boostRes.json();
+          const baseBoosted = Array.isArray(boosts) 
+            ? boosts.filter(t => t.chainId === 'base')
+            : [];
+          
+          for (const boost of baseBoosted) {
+            if (seenTokens.has(boost.tokenAddress)) continue;
+            seenTokens.add(boost.tokenAddress);
+            
+            const pairRes = await fetch(
+              `https://api.dexscreener.com/latest/dex/tokens/${boost.tokenAddress}`,
+              { timeout: 5000, headers: { 'Accept': 'application/json' } }
+            );
+            const pairData = await pairRes.json();
+            const basePair = (pairData.pairs || []).find(p => p.chainId === 'base');
+            if (!basePair) continue;
+            
+            const age = basePair.pairCreatedAt 
+              ? (Date.now() - new Date(basePair.pairCreatedAt).getTime()) / 60000 
+              : 999;
+            
+            console.log(`\n   🚀 BOOSTED TOKEN: ${basePair.baseToken?.symbol} (${boost.amount} boosts)`);
+            console.log(`      Price: $${basePair.priceUsd}`);
+            console.log(`      Liquidity: $${basePair.liquidity?.usd?.toLocaleString()}`);
+            
+            this.emit('newToken', {
+              symbol: basePair.baseToken?.symbol,
+              address: basePair.baseToken?.address,
+              price: parseFloat(basePair.priceUsd || 0),
+              liquidity: parseFloat(basePair.liquidity?.usd || 0),
+              volume24h: parseFloat(basePair.volume?.h24 || 0),
+              priceChange: parseFloat(basePair.priceChange?.h24 || 0),
+              age,
+              pairAddress: basePair.pairAddress,
+              boosted: true,
+              boostAmount: boost.amount,
+            });
+          }
+        } catch (e) {
+          // Silent fail on boosts
         }
+        
       } catch (err) {
         // Silent fail, will retry
+        console.log(`   ⚠️ Token watch error: ${err.message}`);
       }
       
       // Adaptive polling: faster when market is active
-      const interval = this.state?.positions?.length > 0 ? 15000 : 30000; // 15s or 30s
+      const interval = this.state?.positions?.length > 0 ? 20000 : 45000; // 20s or 45s
       setTimeout(check, interval);
     };
     
