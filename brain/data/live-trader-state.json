@@ -7,7 +7,7 @@
   "dailyVolume": 0,
   "dailyReset": "Wed Jan 28 2026",
   "positions": [],
-  "lastTick": "2026-01-28T15:16:52.794Z",
+  "lastTick": "2026-01-28T15:28:53.461Z",
   "startDate": "2026-01-28T14:59:20.889Z",
   "totalSweptToCold": 0,
   "totalReinvested": 0,
@@ -32,6 +32,6 @@
     "clawd": 0,
     "ai": 0,
     "candidates": 2,
-    "timestamp": "2026-01-28T15:16:54.615Z"
+    "timestamp": "2026-01-28T15:22:01.476Z"
   }
 }

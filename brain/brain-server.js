@@ -915,7 +915,7 @@ let holdingsCacheTime = 0;
 const HOLDINGS_CACHE_TTL = 30000; // 30 seconds
 
 app.get('/holdings', async (req, res) => {
-  const walletAddress = '0xd06Aa956CEDA935060D9431D8B8183575c41072d';
+  const walletAddress = process.env.TRADING_WALLET || '0xCA4Ca0c7b26e51805c20C95DF02Ea86feA938D78';
   
   // Return cached if fresh
   if (holdingsCache && Date.now() - holdingsCacheTime < HOLDINGS_CACHE_TTL) {
@@ -1006,7 +1006,7 @@ app.get('/holdings', async (req, res) => {
 
 // Quick balance check endpoint (doesn't use Bankr API - just state)
 app.get('/holdings/quick', async (req, res) => {
-  const walletAddress = '0xd06Aa956CEDA935060D9431D8B8183575c41072d';
+  const walletAddress = process.env.TRADING_WALLET || '0xCA4Ca0c7b26e51805c20C95DF02Ea86feA938D78';
   
   try {
     const { loadState, loadMoonbags, CONFIG: traderConfig } = require('./live-trader.js');
