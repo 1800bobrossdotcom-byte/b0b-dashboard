@@ -21,8 +21,8 @@ import WalletDashboard from '@/components/live/WalletDashboard';
 import TeamChat from '@/components/live/TeamChat';
 
 // Error Boundary to catch component crashes
-class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean; error: Error | null }> {
-  constructor(props: { children: ReactNode }) {
+class ErrorBoundary extends Component<{ children: ReactNode; fallback?: ReactNode }, { hasError: boolean; error: Error | null }> {
+  constructor(props: { children: ReactNode; fallback?: ReactNode }) {
     super(props);
     this.state = { hasError: false, error: null };
   }
@@ -31,8 +31,15 @@ class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boole
     return { hasError: true, error };
   }
 
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.error('Labs Error Boundary caught:', error, errorInfo);
+  }
+
   render() {
     if (this.state.hasError) {
+      if (this.props.fallback) {
+        return this.props.fallback;
+      }
       return (
         <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#FFFDF9' }}>
           <div className="text-center p-8">
@@ -40,6 +47,8 @@ class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boole
             <p className="mb-4" style={{ color: '#555555' }}>Something went wrong loading this page.</p>
             <pre className="text-xs text-left p-4 rounded overflow-auto max-w-xl" style={{ backgroundColor: '#FEE2E2', color: '#7F1D1D' }}>
               {this.state.error?.message || 'Unknown error'}
+              {'\n'}
+              {this.state.error?.stack?.slice(0, 500)}
             </pre>
             <button 
               onClick={() => window.location.reload()} 
@@ -54,6 +63,15 @@ class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boole
     }
     return this.props.children;
   }
+}
+
+// Section-level error boundary for graceful degradation
+function SectionFallback({ title }: { title: string }) {
+  return (
+    <div className="p-6 rounded-lg text-center" style={{ backgroundColor: '#FEF2F2', border: '1px solid #FCA5A5' }}>
+      <p className="text-sm" style={{ color: '#DC2626' }}>⚠️ Failed to load: {title}</p>
+    </div>
+  );
 }
 
 // Brain server URL - Railway production
@@ -419,7 +437,9 @@ export default function LabsPage() {
             <span style={{ color: '#7C3AED' }}>👻 PHANTOM WALLET</span>
             <span style={{ color: '#555555' }}>— MULTI-CHAIN HOLDINGS</span>
           </h2>
-          <WalletDashboard />
+          <ErrorBoundary fallback={<SectionFallback title="Wallet Dashboard" />}>
+            <WalletDashboard />
+          </ErrorBoundary>
         </section>
 
         {/* TEAM CHAT — LIVE DISCUSSIONS */}
@@ -428,19 +448,25 @@ export default function LabsPage() {
             <span style={{ color: '#0052FF' }}>💬 TEAM CHAT</span>
             <span style={{ color: '#555555' }}>— LIVE IDEATION</span>
           </h2>
-          <TeamChat maxMessages={15} />
+          <ErrorBoundary fallback={<SectionFallback title="Team Chat" />}>
+            <TeamChat maxMessages={15} />
+          </ErrorBoundary>
         </section>
 
         {/* Office Visualizer */}
         <section className="mb-16">
           <h2 className="text-xs font-mono mb-6 tracking-wider" style={{ color: '#555555' }}>THE OFFICE</h2>
-          <OfficeVisualizer />
+          <ErrorBoundary fallback={<SectionFallback title="Office Visualizer" />}>
+            <OfficeVisualizer />
+          </ErrorBoundary>
         </section>
 
         {/* CCTV Window */}
         <section className="mb-16">
           <h2 className="text-xs font-mono mb-6 tracking-wider" style={{ color: '#555555' }}>CCTV FEED</h2>
-          <CCTVWindow />
+          <ErrorBoundary fallback={<SectionFallback title="CCTV Feed" />}>
+            <CCTVWindow />
+          </ErrorBoundary>
         </section>
 
         {/* Game of Life */}
@@ -449,7 +475,9 @@ export default function LabsPage() {
           <p className="text-sm mb-4" style={{ color: '#555555' }}>
             Emergence from simple rules. A B0B tenet in action.
           </p>
-          <GameOfLife width={800} height={300} cellSize={6} />
+          <ErrorBoundary fallback={<SectionFallback title="Game of Life" />}>
+            <GameOfLife width={800} height={300} cellSize={6} />
+          </ErrorBoundary>
         </section>
 
         {/* Team Discussions - BRIGHT */}

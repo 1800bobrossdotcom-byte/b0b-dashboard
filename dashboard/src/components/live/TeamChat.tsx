@@ -185,22 +185,23 @@ export function TeamChat({
         const discussionList = data.discussions || [];
         setDiscussions(discussionList);
         
-        // Fetch full details for each discussion to get messages
-        const fullData = await Promise.all(
-          discussionList.slice(0, 5).map(async (disc: Discussion) => {
-            try {
-              const detailRes = await fetch(`${BRAIN_URL}/discussions/${disc.id}`);
-              if (detailRes.ok) {
-                return await detailRes.json();
+        // Fetch full details for top 3 discussions to get messages
+        const fullData: Discussion[] = [];
+        for (const disc of discussionList.slice(0, 3)) {
+          try {
+            const detailRes = await fetch(`${BRAIN_URL}/discussions/${disc.id}`);
+            if (detailRes.ok) {
+              const fullDisc = await detailRes.json();
+              if (fullDisc && fullDisc.messages) {
+                fullData.push(fullDisc);
               }
-            } catch {
-              // Skip failed fetches
             }
-            return disc;
-          })
-        );
+          } catch {
+            // Skip failed fetches
+          }
+        }
         
-        setFullDiscussions(fullData.filter(Boolean));
+        setFullDiscussions(fullData);
         setError(null);
       } else {
         throw new Error('Brain offline');
@@ -295,8 +296,10 @@ export function TeamChat({
     .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
     .slice(0, compact ? 5 : maxMessages);
 
-  // Current team quote (live from brain)
-  const quote = teamQuotes[currentQuote % teamQuotes.length];
+  // Current team quote (live from brain) - guard against empty array
+  const quote = teamQuotes.length > 0 
+    ? teamQuotes[currentQuote % teamQuotes.length] 
+    : FALLBACK_QUOTES[0];
   const quoteAgent = getAgentConfig(quote?.agent || 'b0b');
 
   return (
@@ -396,19 +399,54 @@ export function TeamChat({
               <p className="text-sm" style={{ color: '#555555' }}>{error}</p>
               <p className="text-xs mt-2" style={{ color: '#888888' }}>Check brain server status</p>
             </div>
-          ) : recentMessages.length === 0 && discussions.length === 0 ? (
-            <div className="text-center py-8">
-              <p className="text-lg" style={{ color: '#555555' }}>🧠</p>
-              <p className="mt-2" style={{ color: '#555555' }}>No discussions yet</p>
-              <p className="text-xs mt-2" style={{ color: '#888888' }}>Team is thinking...</p>
+          ) : recentMessages.length > 0 ? (
+            // Show messages - THIS IS THE LIVE CHAT
+            <div className="space-y-4">
+              {recentMessages.map((msg, i) => {
+                const config = getAgentConfig(msg.agent);
+                return (
+                  <div key={`${msg.agent}-${i}`} className="flex gap-3 group animate-fadeIn">
+                    <div 
+                      className={`w-9 h-9 rounded-full bg-gradient-to-br ${config.gradient} flex items-center justify-center flex-shrink-0 text-sm shadow-md`}
+                    >
+                      {msg.emoji || config.emoji}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span 
+                          className="font-bold text-sm"
+                          style={{ color: config.color }}
+                        >
+                          {msg.agent}
+                        </span>
+                        <span className="text-xs" style={{ color: '#888888' }}>
+                          {msg.role || config.role}
+                        </span>
+                        <span 
+                          className="text-xs opacity-0 group-hover:opacity-100 transition-opacity ml-auto" 
+                          style={{ color: '#AAAAAA' }}
+                        >
+                          {formatTime(msg.timestamp)}
+                        </span>
+                      </div>
+                      <p 
+                        className="text-sm leading-relaxed whitespace-pre-line line-clamp-4"
+                        style={{ color: '#1A1A1A' }}
+                      >
+                        {msg.content.slice(0, 300)}{msg.content.length > 300 ? '...' : ''}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          ) : recentMessages.length === 0 && discussions.length > 0 ? (
+          ) : discussions.length > 0 ? (
             // Show discussion cards if we have discussions but no messages loaded
             <div className="space-y-3">
               <p className="text-xs font-medium uppercase tracking-wide" style={{ color: '#888888' }}>
-                Active Discussions
+                Active Discussions · Loading messages...
               </p>
-              {discussions.map((disc) => (
+              {discussions.slice(0, 5).map((disc) => (
                 <button
                   key={disc.id}
                   onClick={() => {
@@ -434,45 +472,11 @@ export function TeamChat({
               ))}
             </div>
           ) : (
-            // Show messages
-            <div className="space-y-4">
-              {recentMessages.map((msg, i) => {
-                const config = getAgentConfig(msg.agent);
-                return (
-                  <div key={i} className="flex gap-3 group animate-fadeIn">
-                    <div 
-                      className={`w-9 h-9 rounded-full bg-gradient-to-br ${config.gradient} flex items-center justify-center flex-shrink-0 text-sm shadow-md`}
-                    >
-                      {msg.emoji || config.emoji}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span 
-                          className="font-bold text-sm"
-                          style={{ color: config.color }}
-                        >
-                          {msg.agent}
-                        </span>
-                        <span className="text-xs" style={{ color: '#888888' }}>
-                          {msg.role || config.role}
-                        </span>
-                        <span 
-                          className="text-xs opacity-0 group-hover:opacity-100 transition-opacity ml-auto" 
-                          style={{ color: '#AAAAAA' }}
-                        >
-                          {formatTime(msg.timestamp)}
-                        </span>
-                      </div>
-                      <p 
-                        className="text-sm leading-relaxed whitespace-pre-line"
-                        style={{ color: '#1A1A1A' }}
-                      >
-                        {msg.content}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
+            // No data at all
+            <div className="text-center py-8">
+              <p className="text-lg" style={{ color: '#555555' }}>🧠</p>
+              <p className="mt-2" style={{ color: '#555555' }}>No discussions yet</p>
+              <p className="text-xs mt-2" style={{ color: '#888888' }}>Team is thinking...</p>
             </div>
           )}
         </div>
