@@ -22,7 +22,7 @@
       "timestamp": "2026-01-28T09:00:30.000Z",
       "agent": "c0m",
       "emoji": "💀",
-      "content": "**ROOT CAUSE ANALYSIS:**\n\n1. **Endpoint might be wrong:**\n   - Current: `POST /v1/portfolio/balance`\n   - Bankr docs may have different endpoint\n   - Need to verify: `https://api.bankr.bot/docs` or `https://docs.bankr.bot`\n\n2. **API Key might need activation:**\n   - Key: `bk_UQTZFYQEYDVVFDUXRJJG2TQGNTG5QVB6`\n   - May need wallet association or approval\n\n3. **Wallet not registered with Bankr:**\n   - Phantom: `0xd06Aa956CEDA935060D9431D8B8183575c41072d`\n   - Bankr may require explicit wallet registration"
+      "content": "**ROOT CAUSE ANALYSIS:**\n\n1. **Endpoint might be wrong:**\n   - Current: `POST /v1/portfolio/balance`\n   - Bankr docs may have different endpoint\n   - Need to verify: `https://api.bankr.bot/docs` or `https://docs.bankr.bot`\n\n2. **API Key might need activation:**\n   - Key: `REDACTED_KEY`\n   - May need wallet association or approval\n\n3. **Wallet not registered with Bankr:**\n   - Phantom: `0xd06Aa956CEDA935060D9431D8B8183575c41072d`\n   - Bankr may require explicit wallet registration"
     },
     {
       "timestamp": "2026-01-28T09:01:00.000Z",
