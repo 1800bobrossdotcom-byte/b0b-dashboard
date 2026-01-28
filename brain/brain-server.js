@@ -1077,30 +1077,30 @@ app.listen(PORT, async () => {
   // Schedule heartbeat every 5 minutes
   setInterval(heartbeat, 5 * 60 * 1000);
   
-  // Auto-start paper trader
+  // Auto-start paper trader - FAST MODE (2 min)
   paperTraderRunning = true;
   await paperTraderTick();
-  paperTraderInterval = setInterval(paperTraderTick, 5 * 60 * 1000);
+  paperTraderInterval = setInterval(paperTraderTick, 2 * 60 * 1000);
   
   await logActivity({ type: 'paper_trader', action: 'auto_started' });
-  console.log('  📜 Paper Trader: RUNNING');
+  console.log('  📜 Paper Trader: RUNNING (2min intervals)');
   
-  // Auto-start Polymarket crawler
+  // Auto-start Polymarket crawler - FAST MODE (2 min)
   if (axios) {
     await crawlPolymarket();
-    setInterval(crawlPolymarket, 5 * 60 * 1000);
-    console.log('  📊 Polymarket Crawler: RUNNING');
+    setInterval(crawlPolymarket, 2 * 60 * 1000);
+    console.log('  📊 Polymarket Crawler: RUNNING (2min)');
     
-    // Auto-start git activity fetcher (every 15 min)
+    // Auto-start git activity fetcher - FAST MODE (5 min)
     await fetchGitActivity();
-    setInterval(fetchGitActivity, 15 * 60 * 1000);
-    console.log('  🔗 Git Activity: RUNNING (15min)');
+    setInterval(fetchGitActivity, 5 * 60 * 1000);
+    console.log('  🔗 Git Activity: RUNNING (5min)');
   }
   
-  // Auto-start swarm trading
+  // Auto-start swarm trading - FAST MODE (2 min)
   await swarmTick();
-  setInterval(swarmTick, 5 * 60 * 1000);
-  console.log('  🐝 Paper Swarm: RUNNING (4 strategies)');
+  setInterval(swarmTick, 2 * 60 * 1000);
+  console.log('  🐝 Paper Swarm: RUNNING (4 strategies, 2min)');
 });
 
 module.exports = app;
