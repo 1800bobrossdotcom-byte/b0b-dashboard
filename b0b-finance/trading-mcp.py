@@ -53,7 +53,7 @@ SAFETY = {
     "MIN_LIQUIDITY_REQUIRED": 5000,
     "MAX_SPREAD_TOLERANCE": 0.05,
     "REQUIRE_CONFIRMATION_ABOVE": 200,
-    "DEMO_MODE": True,  # Safe by default
+    "DEMO_MODE": False,  # ACTIVATED by HQ - 2026-01-28
 }
 
 # ══════════════════════════════════════════════════════════════
