@@ -967,11 +967,14 @@ async function discoverNewTokens() {
 async function blessingSniperTick(state) {
   console.log(`\n🎯 Blessing Sniper scanning...`);
   
-  // Check existing positions first
+  // Check existing positions first (includes retry for stuck exits)
   await checkExistingPositions(state);
   
   // Check moonbags for reentry
   await checkMoonbags();
+  
+  // Check re-entry watchlist for momentum swing opportunities
+  await checkReentryOpportunities(state);
   
   // Limits check
   if (state.positions.length >= CONFIG.MAX_OPEN_POSITIONS) {
@@ -1316,6 +1319,34 @@ async function checkExistingPositions(state) {
   for (const position of state.positions) {
     if (position.status !== 'open') continue;
     
+    // ════════════════════════════════════════════════════════════════════════
+    // RETRY STUCK EXITS — If previous exit failed, retry on next tick
+    // ════════════════════════════════════════════════════════════════════════
+    if (position.exitPending) {
+      const timeSinceLastAttempt = Date.now() - new Date(position.lastExitAttempt || 0).getTime();
+      const minRetryDelay = 60000; // Wait at least 1 minute between retries
+      
+      if (timeSinceLastAttempt > minRetryDelay) {
+        console.log(`   🔄 Retrying stuck exit for ${position.symbol} (attempt ${position.exitAttempts + 1})...`);
+        
+        // Get fresh price for retry
+        try {
+          const res = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${position.address}`, { timeout: 5000 });
+          const data = await res.json();
+          const currentPrice = parseFloat(data.pairs?.[0]?.priceUsd || position.entryPrice);
+          
+          // Retry the exit
+          await executeExit(position, currentPrice, 1.0, state, 'retry');
+          continue;
+        } catch (e) {
+          console.log(`   ⚠️ Failed to get price for retry: ${e.message}`);
+        }
+      } else {
+        console.log(`   ⏳ ${position.symbol} exit pending, waiting for retry cooldown...`);
+        continue;
+      }
+    }
+    
     // Get current price and momentum data
     let currentPrice = position.entryPrice;
     let priceChange5m = 0;
@@ -1441,11 +1472,57 @@ async function executeExit(position, currentPrice, percentage, state, exitReason
     momentum_reversal: '⚠️',
     time_exit: '⏰',
     manual: '👤',
+    retry: '🔄',
   }[exitReason] || '📤';
   
-  const prompt = `Sell ${percentage * 100}% of my ${position.symbol} holdings (approximately ${exitAmount.toFixed(4)} tokens) on Base. Wallet: ${CONFIG.TRADING_WALLET}. Exit reason: ${exitReason}`;
+  // ════════════════════════════════════════════════════════════════════════
+  // ROBUST EXIT EXECUTION — Retry logic with escalating slippage
+  // ════════════════════════════════════════════════════════════════════════
   
-  const result = await bankr.executeTrade(prompt);
+  const MAX_RETRIES = 3;
+  const SLIPPAGE_LEVELS = [1, 3, 5]; // Start 1%, escalate to 5%
+  const RETRY_DELAYS = [2000, 5000, 10000]; // 2s, 5s, 10s
+  
+  let result = { success: false };
+  let lastError = '';
+  
+  for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
+    const slippage = SLIPPAGE_LEVELS[attempt];
+    
+    if (attempt > 0) {
+      console.log(`   🔄 Retry ${attempt}/${MAX_RETRIES} with ${slippage}% slippage...`);
+      await new Promise(r => setTimeout(r, RETRY_DELAYS[attempt - 1]));
+    }
+    
+    const prompt = `Sell ${percentage * 100}% of my ${position.symbol} holdings (approximately ${exitAmount.toFixed(4)} tokens) on Base. Wallet: ${CONFIG.TRADING_WALLET}. Use max ${slippage}% slippage. Exit reason: ${exitReason}`;
+    
+    try {
+      result = await bankr.executeTrade(prompt);
+      
+      if (result.success) {
+        console.log(`   ✅ Exit successful on attempt ${attempt + 1}`);
+        break;
+      }
+      
+      lastError = result.error || 'Unknown error';
+      console.log(`   ⚠️ Attempt ${attempt + 1} failed: ${lastError}`);
+      
+      // If it's a slippage error, retry with higher tolerance
+      if (lastError.includes('slippage') || lastError.includes('price') || lastError.includes('insufficient')) {
+        continue;
+      }
+      
+      // If it's a different error, might not help to retry
+      if (lastError.includes('gas') || lastError.includes('nonce')) {
+        console.log(`   ⏳ Waiting for blockchain state to settle...`);
+        await new Promise(r => setTimeout(r, 15000)); // Wait 15s for gas/nonce issues
+      }
+      
+    } catch (err) {
+      lastError = err.message;
+      console.log(`   ❌ Attempt ${attempt + 1} exception: ${err.message}`);
+    }
+  }
   
   if (result.success) {
     state.totalPnL += pnl;
@@ -1474,10 +1551,18 @@ async function executeExit(position, currentPrice, percentage, state, exitReason
       percentage: percentage * 100,
       exitReason,
       peakPrice: position.peakPrice,
-      txHash: result.transactions?.[0]?.hash || null,
+      txHash: result.executedTxs?.[0]?.hash || result.transactions?.[0]?.hash || null,
     });
     
     console.log(`   ${exitTypeEmoji} EXIT (${exitReason}): $${usdValue.toFixed(2)} (${pnl >= 0 ? '+' : ''}$${pnl.toFixed(2)} PnL)`);
+    
+    // ════════════════════════════════════════════════════════════════════════
+    // MOMENTUM SWING RE-ENTRY WATCH — Track for potential re-entry
+    // ════════════════════════════════════════════════════════════════════════
+    if (exitReason !== 'stop_loss' && pnl > 0) {
+      // Add to watchlist for potential re-entry if momentum swings back
+      await addToReentryWatchlist(position, currentPrice, exitReason);
+    }
     
     // Log to brain for learning
     try {
@@ -1491,8 +1576,117 @@ async function executeExit(position, currentPrice, percentage, state, exitReason
       });
     } catch {}
   } else {
-    console.log(`   ❌ Exit failed: ${result.error || 'Unknown error'}`);
+    // ════════════════════════════════════════════════════════════════════════
+    // FAILED EXIT HANDLING — Mark position as exit_pending for manual review
+    // ════════════════════════════════════════════════════════════════════════
+    console.log(`   ❌ Exit failed after ${MAX_RETRIES} attempts: ${lastError}`);
+    console.log(`   ⚠️ Position marked as EXIT_PENDING - will retry next tick`);
+    
+    position.exitPending = true;
+    position.exitAttempts = (position.exitAttempts || 0) + 1;
+    position.lastExitError = lastError;
+    position.lastExitAttempt = new Date().toISOString();
+    
+    // If we've tried many times, alert for manual intervention
+    if (position.exitAttempts >= 5) {
+      console.log(`   🚨 CRITICAL: Position ${position.symbol} stuck - needs manual intervention!`);
+      await logToBrain('exit_stuck', {
+        symbol: position.symbol,
+        attempts: position.exitAttempts,
+        lastError,
+        position,
+      });
+    }
   }
+}
+
+/**
+ * Add exited position to re-entry watchlist
+ * If momentum swings back within 30min, consider re-entering
+ */
+async function addToReentryWatchlist(position, exitPrice, exitReason) {
+  const watchlistFile = path.join(CONFIG.DATA_DIR, 'reentry-watchlist.json');
+  let watchlist = [];
+  
+  try {
+    const data = await fs.readFile(watchlistFile, 'utf8');
+    watchlist = JSON.parse(data);
+  } catch {}
+  
+  // Remove old entries (> 30min)
+  const now = Date.now();
+  watchlist = watchlist.filter(w => now - new Date(w.exitedAt).getTime() < 30 * 60 * 1000);
+  
+  // Add new entry
+  watchlist.push({
+    symbol: position.symbol,
+    address: position.address,
+    exitPrice,
+    exitReason,
+    originalEntry: position.entryPrice,
+    peakPrice: position.peakPrice,
+    exitedAt: new Date().toISOString(),
+    reentryTrigger: exitPrice * 1.05, // Re-enter if price goes 5% above exit
+  });
+  
+  await fs.writeFile(watchlistFile, JSON.stringify(watchlist, null, 2));
+  console.log(`   👀 Added ${position.symbol} to re-entry watchlist (trigger: +5% from exit)`);
+}
+
+/**
+ * Check re-entry watchlist for momentum swing opportunities
+ */
+async function checkReentryOpportunities(state) {
+  const watchlistFile = path.join(CONFIG.DATA_DIR, 'reentry-watchlist.json');
+  let watchlist = [];
+  
+  try {
+    const data = await fs.readFile(watchlistFile, 'utf8');
+    watchlist = JSON.parse(data);
+  } catch { return; }
+  
+  if (watchlist.length === 0) return;
+  
+  const fetch = (await import('node-fetch')).default;
+  const now = Date.now();
+  
+  for (const watch of watchlist) {
+    // Skip if too old (> 30min)
+    if (now - new Date(watch.exitedAt).getTime() > 30 * 60 * 1000) continue;
+    
+    // Skip if already have position in this token
+    if (state.positions.some(p => p.address === watch.address && p.status === 'open')) continue;
+    
+    try {
+      const res = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${watch.address}`, { timeout: 5000 });
+      const data = await res.json();
+      const currentPrice = parseFloat(data.pairs?.[0]?.priceUsd || 0);
+      const priceChange5m = parseFloat(data.pairs?.[0]?.priceChange?.m5 || 0);
+      
+      // Re-entry trigger: price above trigger AND momentum positive
+      if (currentPrice >= watch.reentryTrigger && priceChange5m > 3) {
+        console.log(`   🔄 RE-ENTRY SIGNAL: ${watch.symbol} rebounding! +${((currentPrice / watch.exitPrice - 1) * 100).toFixed(1)}% from exit, 5m: +${priceChange5m.toFixed(1)}%`);
+        
+        // Execute re-entry with smaller size (30% of original)
+        const reentryAmount = CONFIG.SNIPER.MOONBAG_REBUY_PERCENT;
+        
+        await logToBrain('reentry_signal', {
+          symbol: watch.symbol,
+          exitPrice: watch.exitPrice,
+          currentPrice,
+          priceChange5m,
+          reentryTrigger: watch.reentryTrigger,
+        });
+        
+        // Mark as triggered to avoid duplicate entries
+        watch.triggered = true;
+      }
+    } catch {}
+  }
+  
+  // Update watchlist
+  watchlist = watchlist.filter(w => !w.triggered && now - new Date(w.exitedAt).getTime() < 30 * 60 * 1000);
+  await fs.writeFile(watchlistFile, JSON.stringify(watchlist, null, 2));
 }
 
 /**
