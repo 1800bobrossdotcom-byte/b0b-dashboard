@@ -25,6 +25,15 @@ try {
   console.log('[BRAIN] Learning library not available:', e.message);
 }
 
+// Knowledge Integrator — Unified Intelligence Layer
+let knowledgeIntegrator;
+try {
+  knowledgeIntegrator = require('./knowledge-integrator.js');
+  console.log('[BRAIN] Knowledge integrator loaded');
+} catch (e) {
+  console.log('[BRAIN] Knowledge integrator not available:', e.message);
+}
+
 // For Polymarket crawler and git integration
 let axios;
 try {
@@ -457,6 +466,111 @@ app.get('/activity', async (req, res) => {
     activities: log.slice(-parseInt(limit)),
     total: log.length,
   });
+});
+
+// ═══════════════════════════════════════════════════════════════
+// KNOWLEDGE API — Unified Intelligence Access
+// ═══════════════════════════════════════════════════════════════
+
+/**
+ * GET /knowledge
+ * Get complete knowledge context for a topic
+ */
+app.get('/knowledge', async (req, res) => {
+  const { topic } = req.query;
+  
+  if (!knowledgeIntegrator) {
+    return res.status(503).json({ error: 'Knowledge integrator not loaded' });
+  }
+  
+  try {
+    const context = knowledgeIntegrator.getContext(topic);
+    res.json({
+      success: true,
+      topic,
+      context,
+      generatedAt: new Date().toISOString(),
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/**
+ * GET /knowledge/prompt
+ * Get enriched prompt context for LLM discussions
+ */
+app.get('/knowledge/prompt', async (req, res) => {
+  const { topic } = req.query;
+  
+  if (!knowledgeIntegrator) {
+    return res.status(503).json({ error: 'Knowledge integrator not loaded' });
+  }
+  
+  try {
+    const prompt = knowledgeIntegrator.getEnrichedPromptContext(topic);
+    res.json({
+      success: true,
+      topic,
+      prompt,
+      characterCount: prompt.length,
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/**
+ * POST /knowledge/briefing
+ * Generate daily briefing from all knowledge
+ */
+app.post('/knowledge/briefing', async (req, res) => {
+  if (!knowledgeIntegrator) {
+    return res.status(503).json({ error: 'Knowledge integrator not loaded' });
+  }
+  
+  try {
+    const briefing = knowledgeIntegrator.generateDailyBriefing();
+    res.json({
+      success: true,
+      briefing,
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/**
+ * GET /knowledge/actions
+ * Get pending action items with context
+ */
+app.get('/knowledge/actions', async (req, res) => {
+  const { agent, limit = 50 } = req.query;
+  
+  if (!knowledgeIntegrator) {
+    return res.status(503).json({ error: 'Knowledge integrator not loaded' });
+  }
+  
+  try {
+    const context = knowledgeIntegrator.getContext();
+    let actions = context.pendingActions || [];
+    
+    if (agent) {
+      actions = actions.filter(a => a.agent === agent);
+    }
+    
+    res.json({
+      success: true,
+      actions: actions.slice(0, parseInt(limit)),
+      total: actions.length,
+      byAgent: actions.reduce((acc, a) => {
+        acc[a.agent] = (acc[a.agent] || 0) + 1;
+        return acc;
+      }, {}),
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
 });
 
 // ═══════════════════════════════════════════════════════════════
@@ -3595,6 +3709,7 @@ app.get('/brain/observations', async (req, res) => {
  * 
  * Trigger an autonomous ideation session.
  * Agents analyze the current state and generate discussion.
+ * NOW INFORMED BY: Knowledge Integrator - full context from all brain data
  * 
  * Body: { topic?: string, agents?: string[], imageUrl?: string }
  */
@@ -3602,6 +3717,18 @@ app.post('/ideate', async (req, res) => {
   const { topic, agents = ['b0b', 'r0ss', 'c0m'], imageUrl } = req.body;
   
   const selectedTopic = topic || IDEATION_CONFIG.topics[Math.floor(Math.random() * IDEATION_CONFIG.topics.length)];
+  
+  // Get enriched context from Knowledge Integrator
+  let knowledgeContext = null;
+  let contextSummary = '';
+  if (knowledgeIntegrator) {
+    try {
+      knowledgeContext = knowledgeIntegrator.getContext(selectedTopic);
+      contextSummary = `[Context: ${knowledgeContext.pendingActions.length} pending actions, ${knowledgeContext.signalsSummary.sentiment} market, ${knowledgeContext.financialState.treasury} treasury]`;
+    } catch (e) {
+      console.log('[IDEATE] Knowledge integrator error:', e.message);
+    }
+  }
   
   // Create a new discussion
   const discussion = {
@@ -3616,29 +3743,38 @@ app.post('/ideate', async (req, res) => {
     createdAt: new Date().toISOString(),
     type: 'autonomous-ideation',
     imageAnalyzed: !!imageUrl,
+    knowledgeContext: knowledgeContext ? {
+      pendingActionsCount: knowledgeContext.pendingActions.length,
+      signalsSentiment: knowledgeContext.signalsSummary.sentiment,
+      recentDiscussions: knowledgeContext.recentDiscussions.length,
+    } : null,
   };
   
-  // Generate initial thoughts from each agent (simulated for now, Vision AI enhances this)
+  // Generate INFORMED thoughts from each agent using knowledge context
+  const pendingCount = knowledgeContext?.pendingActions.length || 0;
+  const sentiment = knowledgeContext?.signalsSummary.sentiment || 'NEUTRAL';
+  const treasury = knowledgeContext?.financialState.treasury || 'unknown';
+  
   const agentThoughts = {
     b0b: [
-      `Been thinking about ${selectedTopic}... What if we approached it like a happy accident? 🎨`,
-      `The current ${selectedTopic} reminds me of our tenet about emergence. Small changes, big impact.`,
-      `I see opportunity in ${selectedTopic}. Let's paint a vision together.`,
+      `Been thinking about ${selectedTopic}... ${pendingCount > 10 ? 'We have ' + pendingCount + ' actions pending - let\'s prioritize.' : 'What if we approached it like a happy accident?'} 🎨`,
+      `The current ${selectedTopic} reminds me of our tenet about emergence. ${sentiment === 'BULLISH' ? 'Market is feeling good - time to ship!' : 'Let\'s focus on building.'}`,
+      `I see opportunity in ${selectedTopic}. Treasury at ${treasury}. Let's paint a vision together.`,
     ],
     r0ss: [
-      `From a systems perspective, ${selectedTopic} needs structured assessment. Running analysis... 🔧`,
-      `I've been monitoring the infrastructure around ${selectedTopic}. Some observations to share.`,
-      `Let me break down ${selectedTopic} into actionable components.`,
+      `From a systems perspective, ${selectedTopic} needs structured assessment. ${pendingCount > 0 ? 'Note: ' + pendingCount + ' tasks in queue.' : ''} Running analysis... 🔧`,
+      `I've been monitoring the infrastructure around ${selectedTopic}. ${sentiment} market signals noted. Some observations to share.`,
+      `Let me break down ${selectedTopic} into actionable components. Current treasury: ${treasury}.`,
     ],
     c0m: [
-      `Risk assessment for ${selectedTopic}: we need to consider edge cases. 💀`,
-      `Security angle on ${selectedTopic} - what's our exposure here?`,
-      `I've been thinking about the downside of ${selectedTopic}. Let me share concerns.`,
+      `Risk assessment for ${selectedTopic}: we need to consider edge cases. ${pendingCount > 5 ? 'Also, security backlog growing (' + pendingCount + ' items).' : ''} 💀`,
+      `Security angle on ${selectedTopic} - what's our exposure here? Market ${sentiment.toLowerCase()}, need to stay cautious.`,
+      `I've been thinking about the downside of ${selectedTopic}. Treasury at ${treasury} - let me share concerns.`,
     ],
     d0t: [
-      `Running probability analysis on ${selectedTopic}... 🎯`,
-      `The data on ${selectedTopic} shows interesting patterns.`,
-      `Quantitatively, ${selectedTopic} has some edges we could exploit.`,
+      `Running probability analysis on ${selectedTopic}... Market sentiment: ${sentiment}. 🎯`,
+      `The data on ${selectedTopic} shows interesting patterns. ${pendingCount} action items pending review.`,
+      `Quantitatively, ${selectedTopic} has some edges. Treasury: ${treasury}. Let's be data-driven.`,
     ],
   };
   
@@ -3658,12 +3794,23 @@ app.post('/ideate', async (req, res) => {
   }
   
   await saveDiscussion(discussion);
-  await logActivity({ type: 'ideation_started', discussionId: discussion.id, topic: selectedTopic, agents });
+  
+  // Extract any action items from the discussion
+  if (knowledgeIntegrator) {
+    try {
+      knowledgeIntegrator.extractAndQueueActions(discussion);
+    } catch (e) {
+      console.log('[IDEATE] Action extraction error:', e.message);
+    }
+  }
+  
+  await logActivity({ type: 'ideation_started', discussionId: discussion.id, topic: selectedTopic, agents, contextSummary });
   
   res.json({
     success: true,
     discussion,
     message: `Ideation started on: ${selectedTopic}`,
+    context: contextSummary,
   });
 });
 
