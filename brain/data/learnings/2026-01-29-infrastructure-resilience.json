@@ -1,0 +1,106 @@
+{
+  "id": "learning-2026-01-29-infrastructure",
+  "timestamp": "2026-01-29T11:45:00.000Z",
+  "category": "infrastructure",
+  "severity": "critical",
+  "title": "Infrastructure Resilience & Debugging Workflow",
+  "summary": "When production shows white screen but build passes locally, CHECK HOSTING PROVIDER STATUS FIRST before debugging code.",
+  
+  "incident": {
+    "date": "2026-01-29",
+    "symptom": "b0b.dev showing white screen after deploy",
+    "initial_assumption": "React hydration error or component bug",
+    "actual_cause": "Railway/GitHub rate limiting incident",
+    "time_wasted": "~30 minutes debugging code that was working fine",
+    "detection": "Screenshot of Railway dashboard showing GitHub rate limit banner"
+  },
+
+  "learnings": [
+    {
+      "id": 1,
+      "title": "Check infrastructure status FIRST",
+      "description": "Before debugging code, check: Railway status, GitHub status, DNS, CDN",
+      "action": "Add status checks to debugging workflow"
+    },
+    {
+      "id": 2, 
+      "title": "Local works ≠ Production works",
+      "description": "If build passes locally and site renders locally, issue is likely deployment/hosting",
+      "action": "Always test locally before assuming code is broken"
+    },
+    {
+      "id": 3,
+      "title": "Don't debug by disabling features one-by-one",
+      "description": "Inefficient to remove components, rebuild, deploy, test. Wastes time and creates messy git history",
+      "action": "Run locally first, check logs, check provider status"
+    },
+    {
+      "id": 4,
+      "title": "Need backup deployment targets",
+      "description": "Single point of failure with Railway. Need Vercel/Cloudflare as backup",
+      "action": "Set up Vercel as secondary deployment"
+    },
+    {
+      "id": 5,
+      "title": "Need uptime monitoring",
+      "description": "Should be alerted when sites go down, not discover via manual check",
+      "action": "Set up UptimeRobot or similar for all domains"
+    }
+  ],
+
+  "action_items": [
+    {
+      "priority": "high",
+      "task": "Set up Vercel as backup deployment for dashboard",
+      "status": "in_progress",
+      "owner": "r0ss"
+    },
+    {
+      "priority": "high", 
+      "task": "Create uptime monitoring for b0b.dev, d0t.b0b.dev, 0type.b0b.dev",
+      "status": "pending",
+      "owner": "c0m"
+    },
+    {
+      "priority": "medium",
+      "task": "Document debugging workflow: local test → provider status → then code debug",
+      "status": "pending",
+      "owner": "b0b"
+    },
+    {
+      "priority": "medium",
+      "task": "Add Dockerfile for self-hosted fallback option",
+      "status": "pending", 
+      "owner": "r0ss"
+    },
+    {
+      "priority": "low",
+      "task": "Subscribe to status pages: status.railway.app, githubstatus.com",
+      "status": "pending",
+      "owner": "c0m"
+    }
+  ],
+
+  "status_pages": [
+    "https://status.railway.app",
+    "https://www.githubstatus.com",
+    "https://www.cloudflarestatus.com",
+    "https://status.vercel.com"
+  ],
+
+  "backup_strategy": {
+    "primary": "Railway (current)",
+    "secondary": "Vercel (setting up)",
+    "tertiary": "Self-hosted Docker on Hetzner",
+    "dns_failover": "Cloudflare with health checks"
+  },
+
+  "debugging_workflow": [
+    "1. Check if site loads locally (npm run dev)",
+    "2. Check hosting provider status page",
+    "3. Check GitHub status (for CI/CD)",
+    "4. Check Railway deployment logs",
+    "5. Check browser console for JS errors",
+    "6. THEN debug code if above all clear"
+  ]
+}
