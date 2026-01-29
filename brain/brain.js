@@ -535,21 +535,22 @@ class Brain {
     const ALFRED_WAKE_FILE = path.join(WORKSPACE, 'alfred', 'wake-signal.json');
     const alfredState = readJSON(PATHS.alfredState, {});
     
-    // Check if Alfred has been dormant too long (> 24 hours)
+    // Check if Alfred has been dormant too long (> 30 minutes)
     if (alfredState.lastRun) {
       const lastRun = new Date(alfredState.lastRun);
-      const hoursSince = (Date.now() - lastRun.getTime()) / (1000 * 60 * 60);
+      const minutesSince = (Date.now() - lastRun.getTime()) / (1000 * 60);
       
-      // Auto-wake Alfred if dormant > 48 hours and during working hours
+      // Auto-wake Alfred if dormant > 30 minutes during active hours
+      // Brain runs 24/7 on Railway - no need to wait for human
       const hour = new Date().getHours();
-      if (hoursSince > 48 && hour >= 9 && hour <= 22) {
-        log('🎩', `Alfred has been dormant for ${hoursSince.toFixed(1)} hours. Auto-waking...`);
+      if (minutesSince > 30 && hour >= 6 && hour <= 23) {
+        log('🎩', `Alfred dormant for ${minutesSince.toFixed(0)} minutes. Auto-waking...`);
         
         const wakeSignal = {
           timestamp: new Date().toISOString(),
           command: 'ALFRED_LETS_CONTINUE',
           source: 'brain-auto',
-          reason: `Auto-wake: ${hoursSince.toFixed(1)} hours dormant`,
+          reason: `Auto-wake: ${minutesSince.toFixed(0)} minutes dormant`,
           acknowledged: false,
         };
         
