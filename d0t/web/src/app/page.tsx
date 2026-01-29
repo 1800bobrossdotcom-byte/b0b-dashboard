@@ -472,7 +472,7 @@ export default function D0TFinance() {
               <div className="text-green-500 mb-4">
                 ══════════════════════════════════════════════════════════<br />
                 &nbsp;&nbsp;🏦 D0T.FINANCE — NASH COOPERATIVE TRADING<br />
-                &nbsp;&nbsp;Budget: ${total.toFixed(0)} | Agents: 5 | Mode: PAPER<br />
+                &nbsp;&nbsp;Budget: ${total.toFixed(0)} | Agents: 5 | Mode: {treasuryData?.status?.mode?.toUpperCase() || 'PAPER'}<br />
                 ══════════════════════════════════════════════════════════
               </div>
               {terminalLines.map((line, i) => (
@@ -732,7 +732,10 @@ export default function D0TFinance() {
           
           <div className="mt-12 pt-8 border-t border-[#2A2A2A] flex flex-col md:flex-row justify-between gap-4 text-sm text-[#555]">
             <p>© 2026 D0T.FINANCE. A B0B project.</p>
-            <p>Paper trading mode · Built on Base · Powered by Bankr</p>
+            <p className="flex items-center gap-2">
+              <span className={`w-2 h-2 rounded-full ${treasuryData?.status?.mode === 'live' ? 'bg-green-500 animate-pulse' : 'bg-yellow-500'}`} />
+              {treasuryData?.status?.mode === 'live' ? 'Live trading' : 'Paper mode (Bankr Club pending)'} · Built on Base · Powered by Bankr
+            </p>
           </div>
         </div>
       </footer>

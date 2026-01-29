@@ -7,6 +7,10 @@ import { NextResponse } from 'next/server';
 import { readFileSync, existsSync } from 'fs';
 import { join } from 'path';
 
+// Trading mode - set via environment variable
+// When Bankr Club approves, set DOT_TRADING_MODE=live
+const TRADING_MODE = process.env.DOT_TRADING_MODE || 'paper';
+
 // Path to b0b-finance data files
 const FINANCE_DIR = join(process.cwd(), '..', '..', 'b0b-finance');
 
@@ -164,8 +168,9 @@ export async function GET() {
     learnings: state.learnings,
     status: {
       connected: true,
-      mode: 'paper',
+      mode: TRADING_MODE, // Reads from DOT_TRADING_MODE env var
       lastUpdate: new Date().toISOString(),
+      bankrClub: TRADING_MODE === 'live' ? 'approved' : 'pending',
     },
   };
 
