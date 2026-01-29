@@ -202,10 +202,10 @@ export default function Home() {
           {/* Live Data Strip */}
           <div className="mt-10 flex flex-wrap gap-3">
             {[
-              { icon: 'ΓùÅ', label: `${brainStatus?.agents?.length || 0} agents`, color: colors.success },
-              { icon: '≡ƒÉ¥', label: `${swarmData?.totalTicks || 0} ticks`, color: colors.white },
-              { icon: '≡ƒôè', label: `$${(polyVolume / 1000000).toFixed(1)}M vol`, color: colors.white },
-              { icon: '≡ƒÆ░', label: holdings ? `$${holdings.totalUSD.toFixed(2)}` : '...', color: colors.success },
+              { icon: '✅', label: `${brainStatus?.agents?.length || 0} agents`, color: colors.success },
+              { icon: '🐝', label: `${swarmData?.totalTicks || 0} ticks`, color: colors.white },
+              { icon: '📈', label: `$${((polyVolume || 0) / 1000000).toFixed(1)}M vol`, color: colors.white },
+              { icon: '💰', label: holdings?.totalUSD != null ? `$${holdings.totalUSD.toFixed(2)}` : '...', color: colors.success },
             ].map((stat, i) => (
               <div key={i} className="flex items-center gap-2 px-4 py-2 rounded-full font-mono text-sm font-medium"
                    style={{ backgroundColor: 'rgba(255,255,255,0.15)', border: '2px solid rgba(255,255,255,0.3)', color: colors.white }}>
@@ -246,13 +246,13 @@ export default function Home() {
               <div className="col-span-2 p-4 rounded-xl" style={{ backgroundColor: colors.blue }}>
                 <p className="text-xs font-mono opacity-70 mb-1" style={{ color: colors.white }}>TOTAL VALUE</p>
                 <p className="text-3xl font-black" style={{ color: colors.white }}>
-                  ${holdings.totalUSD.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  ${(holdings.totalUSD ?? 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </p>
-                <p className="text-xs font-mono opacity-50 mt-2" style={{ color: colors.white }}>{holdings.tokens.length} tokens</p>
+                <p className="text-xs font-mono opacity-50 mt-2" style={{ color: colors.white }}>{holdings.tokens?.length ?? 0} tokens</p>
               </div>
               
               {/* Token Cards */}
-              {holdings.tokens.slice(0, 4).map((token, i) => (
+              {(holdings.tokens ?? []).slice(0, 4).map((token, i) => (
                 <div key={i} className="p-3 rounded-xl" style={{ backgroundColor: colors.card, border: `1px solid ${colors.cardHover}` }}>
                   <div className="flex items-center justify-between mb-2">
                     <span className="font-bold text-sm" style={{ color: colors.text }}>{token.symbol}</span>
@@ -265,10 +265,10 @@ export default function Home() {
                     </span>
                   </div>
                   <p className="font-mono text-lg font-bold" style={{ color: colors.text }}>
-                    ${token.usdValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    ${(token.usdValue ?? 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                   </p>
                   <p className="text-xs font-mono" style={{ color: colors.textMuted }}>
-                    {token.balance.toLocaleString(undefined, { maximumFractionDigits: 4 })}
+                    {(token.balance ?? 0).toLocaleString(undefined, { maximumFractionDigits: 4 })}
                   </p>
                 </div>
               ))}
