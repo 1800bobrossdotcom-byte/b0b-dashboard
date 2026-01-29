@@ -72,5 +72,32 @@ module.exports = {
         PORT: 3000,
       },
     },
+    {
+      name: 'c0m-security-crawler',
+      script: 'c0m-security-crawler.js',
+      args: 'full',
+      cwd: './crawlers',
+      instances: 1,
+      autorestart: false,
+      watch: false,
+      // Run daily at 8am to gather fresh intel
+      cron_restart: '0 8 * * *',
+      env: {
+        NODE_ENV: 'production',
+      },
+    },
+    {
+      name: 'c0m-security-protocol',
+      script: 'c0m-security-protocol.js',
+      cwd: './crawlers',
+      instances: 1,
+      autorestart: false,
+      watch: false,
+      // Run every 6 hours to monitor our sites
+      cron_restart: '0 */6 * * *',
+      env: {
+        NODE_ENV: 'production',
+      },
+    },
   ],
 };

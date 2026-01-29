@@ -575,6 +575,211 @@ app.get('/knowledge/actions', async (req, res) => {
 });
 
 /**
+ * GET /security/research
+ * c0m's security research knowledge base
+ */
+app.get('/security/research', async (req, res) => {
+  try {
+    const data = await fs.readFile(path.join(__dirname, 'data', 'c0m-security-research.json'), 'utf8');
+    const research = JSON.parse(data);
+    
+    res.json({
+      success: true,
+      agent: 'c0m',
+      mission: research.mission,
+      resources: research.resources,
+      dorks: research.dork_library,
+      platforms: research.bug_bounty_platforms,
+      intel: research.threat_intel_jan_29_2026,
+      skills: research.skills_tracker,
+      roadmap: research.automation_roadmap,
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/**
+ * GET /security/dorks
+ * Google dork library for reconnaissance
+ */
+app.get('/security/dorks', async (req, res) => {
+  try {
+    const { category } = req.query;
+    const data = await fs.readFile(path.join(__dirname, 'data', 'c0m-security-research.json'), 'utf8');
+    const research = JSON.parse(data);
+    const dorks = research.dork_library;
+    
+    if (category && dorks[category]) {
+      res.json({ success: true, category, dorks: dorks[category] });
+    } else {
+      res.json({ success: true, categories: Object.keys(dorks), dorks });
+    }
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/**
+ * GET /security/intel
+ * Current threat intelligence
+ */
+app.get('/security/intel', async (req, res) => {
+  try {
+    const data = await fs.readFile(path.join(__dirname, 'data', 'c0m-security-research.json'), 'utf8');
+    const research = JSON.parse(data);
+    
+    res.json({
+      success: true,
+      date: new Date().toISOString().split('T')[0],
+      threats: research.threat_intel_jan_29_2026,
+      feeds: research.resources.intel_feeds,
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/**
+ * POST /security/crawl
+ * Trigger c0m's security research crawler
+ */
+app.post('/security/crawl', async (req, res) => {
+  try {
+    const crawler = require('../crawlers/c0m-security-crawler');
+    
+    console.log('[c0m] Starting security research crawl...');
+    res.json({ success: true, message: 'Crawl started', status: 'running' });
+    
+    // Run crawl in background
+    crawler.runFullCrawl().then(findings => {
+      console.log(`[c0m] Crawl complete: ${findings.github_repos.length} repos found`);
+    }).catch(e => {
+      console.error('[c0m] Crawl failed:', e.message);
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/**
+ * GET /security/findings
+ * Get latest crawler findings
+ */
+app.get('/security/findings', async (req, res) => {
+  try {
+    const data = await fs.readFile(path.join(__dirname, 'data', 'c0m-research-findings.json'), 'utf8');
+    const findings = JSON.parse(data);
+    
+    res.json({
+      success: true,
+      timestamp: findings.timestamp,
+      summary: {
+        github_repos: findings.github_repos?.length || 0,
+        nsa_repos: findings.nsa_repos?.length || 0,
+        awesome_lists: findings.awesome_lists?.length || 0,
+        cves: findings.cves?.length || 0,
+      },
+      findings,
+    });
+  } catch (e) {
+    // If no findings yet, return empty
+    res.json({
+      success: true,
+      message: 'No findings yet - run POST /security/crawl first',
+      findings: null,
+    });
+  }
+});
+
+/**
+ * GET /security/education
+ * Get security education resources
+ */
+app.get('/security/education', async (req, res) => {
+  try {
+    const crawler = require('../crawlers/c0m-security-crawler');
+    const education = crawler.getEducationResources();
+    const bounty = crawler.getBugBountyIntel();
+    
+    res.json({
+      success: true,
+      courses: education.free_courses,
+      youtube: education.youtube_channels,
+      certifications: education.certifications,
+      bug_bounty_platforms: bounty.platforms,
+      top_programs: bounty.top_programs,
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/**
+ * POST /security/recon
+ * Run reconnaissance on a target domain
+ */
+app.post('/security/recon', async (req, res) => {
+  const { domain, type = 'headers' } = req.body;
+  
+  if (!domain) {
+    return res.status(400).json({ error: 'Domain required' });
+  }
+  
+  try {
+    const recon = require('../crawlers/c0m-recon');
+    
+    let result;
+    switch (type) {
+      case 'full':
+        result = await recon.fullRecon(domain);
+        break;
+      case 'headers':
+        result = await recon.analyzeSecurityHeaders(`https://${domain}`);
+        break;
+      case 'tech':
+        result = await recon.fingerprintTechnology(`https://${domain}`);
+        break;
+      case 'subdomains':
+        result = await recon.enumerateSubdomains(domain);
+        break;
+      default:
+        result = await recon.analyzeSecurityHeaders(`https://${domain}`);
+    }
+    
+    res.json({ success: true, domain, type, result });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/**
+ * GET /security/xss
+ * Get XSS training materials
+ */
+app.get('/security/xss', async (req, res) => {
+  try {
+    const trainer = require('../crawlers/c0m-xss-trainer');
+    
+    res.json({
+      success: true,
+      types: trainer.XSS_KNOWLEDGE.types,
+      contexts: trainer.XSS_KNOWLEDGE.contexts,
+      bypass: trainer.XSS_KNOWLEDGE.bypassTechniques,
+      challenges: trainer.CHALLENGES,
+      payloads: {
+        basic: trainer.XSS_PAYLOADS.basic,
+        img: trainer.XSS_PAYLOADS.img,
+        svg: trainer.XSS_PAYLOADS.svg,
+        polyglots: trainer.XSS_PAYLOADS.polyglots,
+      },
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/**
  * POST /signals/refresh
  * Trigger signal collection from all senses
  */
@@ -2914,20 +3119,44 @@ app.get('/stream/discussions', async (req, res) => {
   res.setHeader('Connection', 'keep-alive');
   res.setHeader('Access-Control-Allow-Origin', '*');
   
-  // Send initial discussions
+  // Send initial discussions - prioritize today's content
   const discussions = await loadDiscussions();
-  const messages = discussions
-    .slice(0, 10)  // Most recent 10 discussions
+  const today = new Date().toISOString().split('T')[0];
+  const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+  
+  // Filter to recent discussions (last 2 days) to avoid cycling old convos
+  const recentDiscussions = discussions.filter(d => {
+    const discDate = d.date?.split('T')[0];
+    return discDate === today || discDate === yesterday;
+  });
+  
+  // Fallback to top 3 if no recent ones
+  const targetDiscussions = recentDiscussions.length > 0 
+    ? recentDiscussions.slice(0, 10) 
+    : discussions.slice(0, 3);
+  
+  const messages = targetDiscussions
     .flatMap(d => d.messages || [])
     .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
     .slice(0, 20);  // Most recent 20 messages
   
   res.write(`data: ${JSON.stringify({ type: 'initial', messages })}\n\n`);
   
-  // Keep connection alive and send updates every 2 seconds
+  // Keep connection alive and send updates every 5 seconds (was 2s - too frequent)
   const sendUpdates = async () => {
     const freshDiscussions = await loadDiscussions();
-    const freshMessages = freshDiscussions
+    
+    // Same filtering for updates
+    const freshRecent = freshDiscussions.filter(d => {
+      const discDate = d.date?.split('T')[0];
+      return discDate === today || discDate === yesterday;
+    });
+    
+    const targetFresh = freshRecent.length > 0 
+      ? freshRecent.slice(0, 10) 
+      : freshDiscussions.slice(0, 3);
+    
+    const freshMessages = targetFresh
       .flatMap(d => d.messages || [])
       .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
       .slice(0, 20);
@@ -2935,7 +3164,7 @@ app.get('/stream/discussions', async (req, res) => {
     res.write(`data: ${JSON.stringify({ type: 'update', messages: freshMessages })}\n\n`);
   };
   
-  const interval = setInterval(sendUpdates, 2000);
+  const interval = setInterval(sendUpdates, 5000); // 5 seconds instead of 2
   
   req.on('close', () => {
     clearInterval(interval);

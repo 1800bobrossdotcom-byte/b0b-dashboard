@@ -1,0 +1,221 @@
+{
+  "initialized": "2026-01-29T17:45:00.000Z",
+  "mission": "Become the best bug bounty hunters internationally",
+  "team_member": "c0m",
+  "skill_domains": [
+    "vulnerability_research",
+    "bug_bounty_hunting", 
+    "security_auditing",
+    "threat_intelligence",
+    "automated_recon"
+  ],
+  "resources": {
+    "local_guides": [
+      {
+        "name": "Whitehat Pentesters Guide",
+        "path": "research-library/security-guides/whitehat-pentesters-guide.pdf",
+        "topics": ["methodology", "ethics", "reconnaissance", "exploitation", "reporting"]
+      },
+      {
+        "name": "NSA Home Network Security",
+        "path": "research-library/security-guides/NSA-home-network-security.pdf",
+        "topics": ["network_hardening", "wifi_security", "router_config", "iot_isolation"]
+      }
+    ],
+    "external_databases": {
+      "hackdb": {
+        "url": "https://hackdb.com",
+        "access": "authenticated",
+        "login": "1800bobrossdotcom@gmail.com",
+        "purpose": "Offensive security tool directory"
+      },
+      "ghdb": {
+        "url": "https://exploit-db.com/google-hacking-database",
+        "access": "public",
+        "purpose": "Google dorks for reconnaissance"
+      },
+      "exploit_db": {
+        "url": "https://exploit-db.com",
+        "access": "public",
+        "purpose": "CVE database and proof of concepts"
+      },
+      "cve_mitre": {
+        "url": "https://cve.mitre.org",
+        "access": "public",
+        "purpose": "Official CVE registry"
+      }
+    },
+    "nsa_cyber_github": {
+      "url": "https://github.com/nsacyber",
+      "repo_count": 38,
+      "priority_repos": [
+        {
+          "name": "ELITEWOLF",
+          "focus": "OT/ICS intrusion detection signatures"
+        },
+        {
+          "name": "Mitigating-Web-Shells",
+          "stars": 981,
+          "focus": "Web shell detection and mitigation"
+        },
+        {
+          "name": "Hardware-and-Firmware-Security-Guidance",
+          "focus": "UEFI, Secure Boot guidance"
+        },
+        {
+          "name": "AppLocker-Guidance",
+          "focus": "Application whitelisting"
+        },
+        {
+          "name": "Unfetter",
+          "focus": "MITRE ATT&CK integration"
+        },
+        {
+          "name": "ghidra-data",
+          "focus": "Reverse engineering signatures"
+        }
+      ]
+    },
+    "intel_feeds": [
+      {
+        "name": "The Hacker News",
+        "url": "https://thehackernews.com",
+        "frequency": "daily",
+        "purpose": "CVE news, breach reports, tactics"
+      },
+      {
+        "name": "NSA Cybersecurity Advisories",
+        "url": "https://nsa.gov/Press-Room/Cybersecurity-Advisories-Guidance/",
+        "frequency": "as_released",
+        "purpose": "Zero Trust guides, malware analysis"
+      },
+      {
+        "name": "CISA KEV",
+        "url": "https://cisa.gov/known-exploited-vulnerabilities-catalog",
+        "frequency": "daily_updates",
+        "purpose": "Active exploitation tracking"
+      }
+    ]
+  },
+  "dork_library": {
+    "config_exposure": [
+      "filetype:env \"DB_PASSWORD\"",
+      "filetype:yml password site:github.com",
+      "filetype:json \"api_key\"",
+      "filetype:xml \"password\""
+    ],
+    "admin_panels": [
+      "inurl:admin/login",
+      "intitle:\"admin login\" -demo",
+      "inurl:wp-admin",
+      "inurl:administrator"
+    ],
+    "vulnerable_software": [
+      "inurl:wp-content/plugins",
+      "inurl:phpinfo.php",
+      "intitle:\"Apache Tomcat\" intext:\"Apache Tomcat/8.5\"",
+      "inurl:server-status \"Apache Server Status\""
+    ],
+    "database_exposure": [
+      "filetype:sql \"INSERT INTO\" password",
+      "inurl:backup.sql",
+      "filetype:mdb \"admin\"",
+      "inurl:dump.sql"
+    ]
+  },
+  "bug_bounty_platforms": {
+    "tier1_high_payout": [
+      {
+        "platform": "HackerOne",
+        "url": "https://hackerone.com",
+        "scope": "Web, mobile, API"
+      },
+      {
+        "platform": "Bugcrowd",
+        "url": "https://bugcrowd.com",
+        "scope": "Full spectrum"
+      },
+      {
+        "platform": "Immunefi",
+        "url": "https://immunefi.com",
+        "scope": "Smart contracts, DeFi protocols"
+      }
+    ],
+    "tier2_learning": [
+      {
+        "platform": "OWASP WebGoat",
+        "purpose": "Practice SQL injection, XSS"
+      },
+      {
+        "platform": "HackTheBox",
+        "purpose": "Full pentest methodology labs"
+      },
+      {
+        "platform": "TryHackMe",
+        "purpose": "Beginner-friendly guided paths"
+      }
+    ]
+  },
+  "threat_intel_jan_29_2026": [
+    {
+      "severity": "critical",
+      "title": "175K+ Ollama servers exposed",
+      "detail": "No authentication by default, publicly accessible",
+      "source": "The Hacker News"
+    },
+    {
+      "severity": "critical",
+      "title": "SolarWinds RCE vulnerability",
+      "detail": "Remote code execution, patch immediately",
+      "source": "The Hacker News"
+    },
+    {
+      "severity": "critical",
+      "title": "n8n RCE vulnerability",
+      "detail": "Workflow automation platform exploitation",
+      "source": "The Hacker News"
+    },
+    {
+      "severity": "high",
+      "title": "BRICKSTORM malware",
+      "detail": "VMware ESXi targeting, NSA advisory released",
+      "source": "NSA Cybersecurity Advisory"
+    }
+  ],
+  "automation_roadmap": {
+    "phase1_passive_recon": {
+      "status": "not_started",
+      "tasks": [
+        "Subdomain enumeration automation",
+        "Technology fingerprinting",
+        "Google dork automation",
+        "SSL/TLS certificate analysis"
+      ]
+    },
+    "phase2_active_testing": {
+      "status": "not_started",
+      "tasks": [
+        "Port scanning integration",
+        "Web spider/crawler",
+        "Parameter fuzzing",
+        "Header injection testing"
+      ]
+    },
+    "phase3_intelligence": {
+      "status": "not_started",
+      "tasks": [
+        "CVE monitoring for targets",
+        "Social media OSINT",
+        "Breach database checking",
+        "Dark web monitoring"
+      ]
+    }
+  },
+  "skills_tracker": {
+    "reconnaissance": { "level": 0, "max": 5 },
+    "web_testing": { "level": 0, "max": 5 },
+    "network_security": { "level": 0, "max": 5 },
+    "reporting": { "level": 0, "max": 5 },
+    "automation": { "level": 0, "max": 5 }
+  }
+}

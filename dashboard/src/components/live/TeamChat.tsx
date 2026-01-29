@@ -321,24 +321,46 @@ export function TeamChat({
     };
   };
 
-  // Collect all messages from FULL discussions (with messages)
+  // Collect messages from FULL discussions, prioritizing TODAY's discussions
   const allMessages: Message[] = [];
+  const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+  const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
   
-  // Add messages from full discussions
-  fullDiscussions.forEach(disc => {
+  // Sort discussions by date (most recent first), then add messages
+  const sortedDiscussions = [...fullDiscussions].sort((a, b) => 
+    new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+  
+  // Add messages from full discussions, prioritizing recent ones
+  sortedDiscussions.forEach(disc => {
     if (disc.messages && Array.isArray(disc.messages)) {
-      allMessages.push(...disc.messages);
+      // Only include discussions from last 2 days to avoid cycling old convos
+      const discDate = disc.date?.split('T')[0];
+      if (discDate === today || discDate === yesterday) {
+        allMessages.push(...disc.messages);
+      }
     }
   });
   
-  // Add messages from archive threads
-  threads.forEach(thread => {
-    if (thread.messages) {
-      allMessages.push(...thread.messages);
-    }
-  });
+  // Fallback: if no recent messages, take from any discussion (but mark as older)
+  if (allMessages.length === 0) {
+    sortedDiscussions.slice(0, 3).forEach(disc => {
+      if (disc.messages && Array.isArray(disc.messages)) {
+        allMessages.push(...disc.messages.slice(0, 5)); // Limit old messages
+      }
+    });
+  }
+  
+  // Add messages from archive threads (only if viewing archive tab)
+  if (activeTab === 'archive') {
+    threads.forEach(thread => {
+      if (thread.messages) {
+        allMessages.push(...thread.messages);
+      }
+    });
+  }
 
-  // Sort by timestamp and take most recent
+  // Sort by timestamp and take most recent - no cycling, just most recent first
   const recentMessages = allMessages
     .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
     .slice(0, compact ? 5 : maxMessages);

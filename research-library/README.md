@@ -1,6 +1,6 @@
 # 📚 B0B Research Library
 
-> Curated collection of trading frameworks, AI agents, and financial tools.
+> Curated collection of trading frameworks, AI agents, security research, and financial tools.
 
 ## Quick Clone All
 
@@ -8,6 +8,24 @@
 cd research-library
 ./clone-all.sh
 ```
+
+---
+
+## 🔒 Security Research (NEW!)
+
+> **Goal:** "lets become the best bug bounty hunters internationally"
+
+| Resource | Location | Purpose |
+|----------|----------|---------|
+| **Security Index** | [security-guides/SECURITY-RESEARCH-INDEX.md](security-guides/SECURITY-RESEARCH-INDEX.md) | Full research library |
+| **Whitehat Guide** | [security-guides/whitehat-pentesters-guide.pdf](security-guides/whitehat-pentesters-guide.pdf) | Pentesting methodology |
+| **NSA Network Guide** | [security-guides/NSA-home-network-security.pdf](security-guides/NSA-home-network-security.pdf) | Network hardening |
+
+### Key External Resources
+- **NSA Cyber GitHub:** github.com/nsacyber (38 repos)
+- **HackDB:** hackdb.com (team has login)
+- **GHDB:** exploit-db.com/google-hacking-database
+- **The Hacker News:** Daily CVE tracking
 
 ---
 
