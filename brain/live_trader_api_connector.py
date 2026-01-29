@@ -1,4 +1,2 @@
-# Live Trader API Connector
-
-class LiveTraderAPIConnector:
-    pass
+import email_command_center
+# integration code here
