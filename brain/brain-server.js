@@ -699,6 +699,126 @@ app.get('/github/activity', async (req, res) => {
 });
 
 // ═══════════════════════════════════════════════════════════════
+// BUILD LOGS — Aggregated activity for Labs page
+// ═══════════════════════════════════════════════════════════════
+
+/**
+ * GET /labs/activity
+ * Returns combined build logs from all sources for the Labs page
+ */
+app.get('/labs/activity', async (req, res) => {
+  const { limit = 50 } = req.query;
+  const logs = [];
+  
+  // 1. Recent commits from GitHub
+  try {
+    for (const repo of GITHUB_CONFIG.repos) {
+      const url = `${GITHUB_CONFIG.apiBase}/repos/${repo.owner}/${repo.repo}/commits?per_page=15`;
+      const headers = { 'User-Agent': 'B0B-Brain', 'Accept': 'application/vnd.github.v3+json' };
+      if (GITHUB_CONFIG.token) headers['Authorization'] = `token ${GITHUB_CONFIG.token}`;
+      
+      const response = await axios.get(url, { headers });
+      for (const commit of response.data) {
+        const msg = commit.commit.message.split('\n')[0];
+        // Infer agent from emoji/keywords
+        let agent = 'r0ss';
+        if (msg.includes('🎨') || msg.includes('design') || msg.includes('UI')) agent = 'b0b';
+        if (msg.includes('💀') || msg.includes('security') || msg.includes('audit')) agent = 'c0m';
+        if (msg.includes('📊') || msg.includes('data') || msg.includes('trading')) agent = 'd0t';
+        
+        logs.push({
+          timestamp: commit.commit.author.date,
+          agent,
+          emoji: agent === 'b0b' ? '🎨' : agent === 'r0ss' ? '🔧' : agent === 'c0m' ? '💀' : agent === 'd0t' ? '📊' : '🤖',
+          action: 'commit',
+          details: msg,
+          type: 'deploy',
+          source: 'github',
+          url: commit.html_url,
+        });
+      }
+    }
+  } catch {}
+  
+  // 2. Recent discussions
+  try {
+    const discussionsDir = path.join(DATA_DIR, 'discussions');
+    const files = require('fs').readdirSync(discussionsDir)
+      .filter(f => f.endsWith('.json'))
+      .sort()
+      .reverse()
+      .slice(0, 10);
+    
+    for (const file of files) {
+      const disc = JSON.parse(require('fs').readFileSync(path.join(discussionsDir, file), 'utf-8'));
+      logs.push({
+        timestamp: disc.createdAt || disc.date || file.split('-').slice(0, 3).join('-'),
+        agent: 'team',
+        emoji: '💬',
+        action: 'discussion',
+        details: disc.title || disc.topic || 'Team Discussion',
+        type: 'discussion',
+        source: 'brain',
+        id: disc.id,
+      });
+    }
+  } catch {}
+  
+  // 3. Recent signals refreshes
+  try {
+    const signalsPath = path.join(__dirname, 'brain-signals.json');
+    if (require('fs').existsSync(signalsPath)) {
+      const signals = JSON.parse(require('fs').readFileSync(signalsPath, 'utf-8'));
+      if (signals.timestamp) {
+        logs.push({
+          timestamp: signals.timestamp,
+          agent: 'd0t',
+          emoji: '📡',
+          action: 'signals',
+          details: `Collected ${signals.signalCount || 0} market signals`,
+          type: 'research',
+          source: 'senses',
+        });
+      }
+    }
+  } catch {}
+  
+  // 4. Knowledge briefings
+  try {
+    const briefingsDir = path.join(__dirname, 'briefings');
+    if (require('fs').existsSync(briefingsDir)) {
+      const files = require('fs').readdirSync(briefingsDir)
+        .filter(f => f.endsWith('.json'))
+        .sort()
+        .reverse()
+        .slice(0, 5);
+      
+      for (const file of files) {
+        const briefing = JSON.parse(require('fs').readFileSync(path.join(briefingsDir, file), 'utf-8'));
+        logs.push({
+          timestamp: briefing.generatedAt,
+          agent: 'brain',
+          emoji: '🧠',
+          action: 'briefing',
+          details: `Daily briefing: ${briefing.summary?.pendingActions || 0} actions, ${briefing.summary?.marketSentiment || 'unknown'} market`,
+          type: 'research',
+          source: 'knowledge',
+        });
+      }
+    }
+  } catch {}
+  
+  // Sort by timestamp, newest first
+  logs.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+  
+  res.json({
+    recent: logs.slice(0, parseInt(limit)),
+    total: logs.length,
+    sources: ['github', 'discussions', 'signals', 'briefings'],
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════
 // AUTONOMOUS ACTIONS — EXECUTED ACTION ITEMS LOG
 // ═══════════════════════════════════════════════════════════════
 

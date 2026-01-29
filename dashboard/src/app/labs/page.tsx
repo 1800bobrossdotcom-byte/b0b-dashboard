@@ -92,7 +92,7 @@ const EXPERIMENTS: Experiment[] = [
     description: 'Integrating Molt AI with Bankr for autonomous trading. Currently in paper mode awaiting Bankr Club approval.',
     startedAt: '2026-01-27',
     lastUpdate: '2026-01-29',
-    metrics: { 'paper_trades': 47, 'win_rate': '62%', 'status': 'Paper Mode' }
+    metrics: { 'paper_trades': 121, 'win_rate': '64%', 'status': 'Paper Mode' }
   },
   {
     id: '0type-gen',
@@ -117,6 +117,17 @@ const EXPERIMENTS: Experiment[] = [
     metrics: { 'agents': 5, 'consensus_rate': '78%', 'paper_pnl': '+$12.50' }
   },
   {
+    id: 'knowledge-integrator',
+    name: 'Knowledge Integrator',
+    owner: 'r0ss',
+    ownerEmoji: '🔧',
+    status: 'active',
+    description: 'Unified intelligence layer connecting all brain data for informed autonomous discussions.',
+    startedAt: '2026-01-29',
+    lastUpdate: '2026-01-29',
+    metrics: { 'data_sources': 7, 'api_endpoints': 4, 'briefings': 'Daily' }
+  },
+  {
     id: 'agentmail',
     name: 'AgentMail Integration',
     owner: 'c0m',
@@ -126,6 +137,17 @@ const EXPERIMENTS: Experiment[] = [
     startedAt: '2026-01-29',
     lastUpdate: '2026-01-29',
     metrics: { 'agents_enrolled': 0, 'emails_sent': 0, 'status': 'Setup' }
+  },
+  {
+    id: 'finance-sync',
+    name: 'Finance State Sync',
+    owner: 'd0t',
+    ownerEmoji: '📊',
+    status: 'active',
+    description: 'Real-time sync of paper trading state from local to Railway dashboard.',
+    startedAt: '2026-01-29',
+    lastUpdate: '2026-01-29',
+    metrics: { 'endpoints': 3, 'sync_types': 4, 'latency': '<1s' }
   },
 ];
 
@@ -169,16 +191,16 @@ export default function LabsPage() {
   useEffect(() => {
     async function fetchLogs() {
       try {
-        const res = await fetch(`${BRAIN_URL}/activity`);
+        const res = await fetch(`${BRAIN_URL}/labs/activity`);
         if (res.ok) {
           const data = await res.json();
           if (data.recent) {
-            setBuildLogs(data.recent.slice(0, 20).map((item: { timestamp: string; agent?: string; source?: string; action?: string; type?: string; content?: string; details?: string }) => ({
+            setBuildLogs(data.recent.slice(0, 20).map((item: { timestamp: string; agent?: string; emoji?: string; action?: string; type?: string; details?: string }) => ({
               timestamp: item.timestamp,
-              agent: item.agent || item.source || 'system',
-              emoji: item.agent === 'b0b' ? '🎨' : item.agent === 'r0ss' ? '🔧' : item.agent === 'c0m' ? '💀' : '🤖',
-              action: item.action || item.type || 'update',
-              details: item.content || item.details || '',
+              agent: item.agent || 'system',
+              emoji: item.emoji || '🤖',
+              action: item.action || 'update',
+              details: item.details || '',
               type: item.type || 'feature'
             })));
           }
