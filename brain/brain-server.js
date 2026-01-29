@@ -3367,6 +3367,56 @@ app.get('/playlists', async (req, res) => {
 // =============================================================================
 
 /**
+ * POST /brain/loop
+ * 
+ * Run the complete brain loop: Discussion → Actions → Execute
+ * This is THE interface to the swarm's decision-making.
+ * 
+ * Body: { question: string, autoExecute?: boolean }
+ */
+app.post('/brain/loop', async (req, res) => {
+  try {
+    const { question, autoExecute = false } = req.body;
+    
+    if (!question) {
+      return res.status(400).json({ error: 'Question required' });
+    }
+    
+    const brainLoop = require('./brain-loop.js');
+    const result = await brainLoop.runBrainLoop(question, { autoExecute });
+    
+    res.json({
+      success: true,
+      ...result.summary,
+      actionItems: result.actionItems,
+      queuedActions: result.queuedActions.map(a => ({ id: a.id, description: a.description, priority: a.priority })),
+    });
+  } catch (err) {
+    console.error('Brain loop error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
+ * GET /brain/queue
+ * 
+ * Get the current action queue
+ */
+app.get('/brain/queue', async (req, res) => {
+  try {
+    const brainLoop = require('./brain-loop.js');
+    const queue = await brainLoop.loadActionQueue();
+    res.json({
+      success: true,
+      count: queue.length,
+      actions: queue.slice(-20),
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
  * POST /ideate
  * 
  * Trigger an autonomous ideation session.

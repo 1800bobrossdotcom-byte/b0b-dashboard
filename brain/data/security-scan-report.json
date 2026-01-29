@@ -1,0 +1,63 @@
+{
+  "summary": {
+    "filesScanned": 58,
+    "totalFindings": 5,
+    "critical": 0,
+    "high": 5,
+    "medium": 0,
+    "timestamp": "2026-01-28T12:57:50.261Z"
+  },
+  "findings": [
+    {
+      "file": "C:\\workspace\\b0b-platform\\brain\\.env",
+      "line": 26,
+      "rule": "Bankr API Key",
+      "severity": "HIGH",
+      "description": "Bankr API key",
+      "remediation": "Use BANKR_API_KEY environment variable",
+      "snippet": "bk_U...QVB6",
+      "context": "BANK...QVB6"
+    },
+    {
+      "file": "C:\\workspace\\b0b-platform\\brain\\.env",
+      "line": 7,
+      "rule": "Anthropic API Key",
+      "severity": "HIGH",
+      "description": "Anthropic Claude API Key",
+      "remediation": "Use ANTHROPIC_API_KEY environment variable",
+      "snippet": "sk-a...XAAA",
+      "context": "ANTH...eAq6"
+    },
+    {
+      "file": "C:\\workspace\\b0b-platform\\brain\\data\\discussions\\2026-01-28-bankr-api-discovery.json",
+      "line": 27,
+      "rule": "Bankr API Key",
+      "severity": "HIGH",
+      "description": "Bankr API key",
+      "remediation": "Use BANKR_API_KEY environment variable",
+      "snippet": "bk_U...QVB6",
+      "context": "\"cur...or\","
+    },
+    {
+      "file": "C:\\workspace\\b0b-platform\\brain\\data\\discussions\\2026-01-28-bankr-debug.json",
+      "line": 25,
+      "rule": "Bankr API Key",
+      "severity": "HIGH",
+      "description": "Bankr API key",
+      "remediation": "Use BANKR_API_KEY environment variable",
+      "snippet": "bk_U...QVB6",
+      "context": "\"con.../por"
+    },
+    {
+      "file": "C:\\workspace\\b0b-platform\\brain\\data\\discussions\\2026-01-28-site-audit.json",
+      "line": 30,
+      "rule": "Bankr API Key",
+      "severity": "HIGH",
+      "description": "Bankr API key",
+      "remediation": "Use BANKR_API_KEY environment variable",
+      "snippet": "bk_U...QVB6",
+      "context": "\"con...DUXR"
+    }
+  ],
+  "environmentVariables": []
+}
