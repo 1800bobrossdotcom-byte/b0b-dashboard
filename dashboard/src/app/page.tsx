@@ -12,7 +12,20 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import TeamChat from '@/components/live/TeamChat';
+import dynamic from 'next/dynamic';
+
+// Dynamic import for TeamChat to prevent hydration issues
+const TeamChat = dynamic(() => import('@/components/live/TeamChat'), {
+  ssr: false,
+  loading: () => (
+    <div className="h-64 flex items-center justify-center" style={{ backgroundColor: '#1A1A1A' }}>
+      <div className="text-center">
+        <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
+        <p className="text-xs text-gray-500 font-mono">Loading chat...</p>
+      </div>
+    </div>
+  )
+});
 
 // DARK PALETTE — Inverted, Base blue flourishes
 const colors = {
@@ -352,7 +365,7 @@ export default function Home() {
                 onMouseLeave={(e) => e.currentTarget.style.borderColor = 'transparent'}
               >
                 <div className="w-12 h-12 mb-3 rounded-lg overflow-hidden bg-white/10 flex items-center justify-center">
-                  <Image src={partner.logo} alt={partner.name} width={40} height={40} className="object-contain" />
+                  <Image src={partner.logo} alt={partner.name} width={40} height={40} className="object-contain" unoptimized />
                 </div>
                 <span className="font-bold text-sm" style={{ color: partner.color }}>{partner.name}</span>
                 <span className="text-xs" style={{ color: colors.textMuted }}>{partner.desc}</span>
