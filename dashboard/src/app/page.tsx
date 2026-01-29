@@ -69,12 +69,22 @@ interface SwarmData {
   traders: Array<{ id: string; name: string; emoji: string; positions: number; totalPnL: number }>;
 }
 
+interface WalletHoldings {
+  wallet: string;
+  totalUSD: number;
+  tokens: Array<{ symbol: string; name: string; balance: number; usdValue: number; type: string }>;
+  lastUpdated: string;
+  cached?: boolean;
+}
+
 export default function Home() {
   const [time, setTime] = useState('');
   const [mounted, setMounted] = useState(false);
   const [brainStatus, setBrainStatus] = useState<BrainStatus | null>(null);
   const [swarmData, setSwarmData] = useState<SwarmData | null>(null);
   const [polyVolume, setPolyVolume] = useState<number>(0);
+  const [holdings, setHoldings] = useState<WalletHoldings | null>(null);
+  const [holdingsLoading, setHoldingsLoading] = useState(true);
 
   // Clock
   useEffect(() => {
@@ -129,6 +139,28 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
+  // Fetch wallet holdings - real-time
+  useEffect(() => {
+    async function fetchHoldings() {
+      try {
+        // Try quick endpoint first (faster)
+        let res = await fetch(`${BRAIN_URL}/holdings/quick`);
+        if (!res.ok) {
+          res = await fetch(`${BRAIN_URL}/holdings`);
+        }
+        if (res.ok) {
+          const data = await res.json();
+          setHoldings(data);
+        }
+      } catch { /* offline */ }
+      setHoldingsLoading(false);
+    }
+    fetchHoldings();
+    // Update every 10 seconds for real-time feel
+    const interval = setInterval(fetchHoldings, 10000);
+    return () => clearInterval(interval);
+  }, []);
+
   const isOnline = brainStatus?.system?.status === 'alive';
 
   return (
@@ -178,6 +210,7 @@ export default function Home() {
               { icon: '●', label: `${brainStatus?.agents?.length || 0} agents`, color: colors.success },
               { icon: '🐝', label: `${swarmData?.totalTicks || 0} ticks`, color: colors.white },
               { icon: '📊', label: `$${(polyVolume / 1000000).toFixed(1)}M vol`, color: colors.cream },
+              { icon: '💰', label: holdings ? `$${holdings.totalUSD.toFixed(2)} wallet` : 'Loading...', color: colors.success },
             ].map((stat, i) => (
               <div key={i} className="flex items-center gap-2 px-4 py-2 rounded-full font-mono text-sm font-medium"
                    style={{ backgroundColor: 'rgba(255,255,255,0.15)', border: '2px solid rgba(255,255,255,0.3)', color: colors.white }}>
@@ -186,6 +219,67 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════════════════ */}
+      {/* LIVE WALLET — Real-time holdings display */}
+      {/* ════════════════════════════════════════════════════════════════════ */}
+      <section className="py-8 px-6 md:px-12 lg:px-24" style={{ backgroundColor: colors.white, borderBottom: `2px solid ${colors.blue}` }}>
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <h2 className="text-xs font-mono tracking-widest" style={{ color: colors.textMuted }}>ACTIVE WALLET</h2>
+              {holdings && (
+                <span className="text-xs font-mono px-2 py-0.5 rounded" style={{ backgroundColor: colors.blue + '15', color: colors.blue }}>
+                  {holdings.wallet.slice(0, 6)}...{holdings.wallet.slice(-4)}
+                </span>
+              )}
+            </div>
+            <div className="flex items-center gap-2">
+              <span className={`w-2 h-2 rounded-full ${holdingsLoading ? 'animate-pulse' : ''}`} 
+                    style={{ backgroundColor: holdings ? colors.success : colors.warning }} />
+              <span className="text-xs font-mono" style={{ color: holdings?.cached ? colors.textMuted : colors.success }}>
+                {holdingsLoading ? 'LOADING' : holdings?.cached ? 'CACHED' : 'LIVE'}
+              </span>
+            </div>
+          </div>
+
+          {holdings ? (
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+              {/* Total Value Card */}
+              <div className="col-span-2 p-4 rounded-xl" style={{ backgroundColor: colors.blue, color: colors.white }}>
+                <p className="text-xs font-mono opacity-70 mb-1">TOTAL VALUE</p>
+                <p className="text-3xl font-black">${holdings.totalUSD.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                <p className="text-xs font-mono opacity-50 mt-2">{holdings.tokens.length} tokens</p>
+              </div>
+              
+              {/* Token Cards */}
+              {holdings.tokens.slice(0, 4).map((token, i) => (
+                <div key={i} className="p-3 rounded-xl" style={{ backgroundColor: colors.cream, border: '1px solid #E5E7EB' }}>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-bold text-sm" style={{ color: colors.text }}>{token.symbol}</span>
+                    <span className={`text-xs px-1.5 py-0.5 rounded ${token.type === 'stablecoin' ? 'bg-green-100 text-green-700' : token.type === 'native' ? 'bg-blue-100 text-blue-700' : 'bg-purple-100 text-purple-700'}`}>
+                      {token.type}
+                    </span>
+                  </div>
+                  <p className="font-mono text-lg font-bold" style={{ color: colors.text }}>
+                    ${token.usdValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  </p>
+                  <p className="text-xs font-mono" style={{ color: colors.textMuted }}>
+                    {token.balance.toLocaleString(undefined, { maximumFractionDigits: 4 })} {token.symbol}
+                  </p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="flex items-center justify-center py-8 rounded-xl" style={{ backgroundColor: colors.cream }}>
+              <div className="text-center">
+                <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+                <p className="text-sm font-mono" style={{ color: colors.textMuted }}>Fetching wallet data...</p>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
@@ -267,7 +361,7 @@ export default function Home() {
       <section style={{ backgroundColor: colors.cream }}>
         {[
           { name: 'LABS', desc: 'Live trading, swarm intelligence, experiments 24/7', status: 'LIVE', url: '/labs', color: colors.blue },
-          { name: '0TYPE', desc: 'AI-generated typography that learns', status: 'LIVE', url: 'https://0type.b0b.dev', color: colors.orange },
+          { name: '0TYPE', desc: 'AI-generated typography that learns', status: 'BETA', url: 'https://0type.b0b.dev', color: colors.orange },
           { name: 'D0T.FINANCE', desc: 'Paper trading with Nash equilibrium', status: 'LIVE', url: 'https://d0t.b0b.dev', color: colors.purple },
         ].map((product) => (
           <a 
