@@ -537,6 +537,111 @@ app.get('/trading/status', async (req, res) => {
   }
 });
 
+// =============================================================================
+// 📊 TRADING OVERVIEW — Exposes gem criteria, blue chips, Top 100 status
+// Added 2026-01-29 for dashboard transparency
+// =============================================================================
+
+app.get('/trading/overview', async (req, res) => {
+  try {
+    const { 
+      BLUE_CHIP_CRITERIA, 
+      GEM_CRITERIA,
+      fetchTop100BaseTokens,
+      isTradingPaused,
+      getTradingControl,
+      loadState,
+    } = require('./live-trader.js');
+    
+    const paused = await isTradingPaused();
+    const control = await getTradingControl();
+    const state = await loadState();
+    const top100 = await fetchTop100BaseTokens().catch(() => []);
+    
+    res.json({
+      status: {
+        paused,
+        ...control,
+        mode: paused ? 'paper' : 'live',
+      },
+      criteria: {
+        blueChip: BLUE_CHIP_CRITERIA,
+        gem: GEM_CRITERIA,
+      },
+      top100: {
+        count: top100.length,
+        tokens: top100.slice(0, 20).map(t => ({
+          symbol: t.symbol || t.baseToken?.symbol,
+          name: t.name || t.baseToken?.name,
+          address: t.address || t.baseToken?.address,
+          marketCap: t.marketCap || t.fdv,
+          liquidity: t.liquidity?.usd || t.liquidity,
+        })),
+      },
+      ecosystem: ['BANKR', 'CLAWD', 'CLANKER', 'BRETT', 'TOSHI', 'DEGEN'],
+      stats: {
+        totalTrades: state.totalTrades || 0,
+        totalPnL: state.totalPnL || 0,
+        wins: state.wins || 0,
+        losses: state.losses || 0,
+        openPositions: state.positions?.length || 0,
+      },
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// =============================================================================
+// 🐝 SWARM ENDPOINT — Dashboard swarm data
+// Added 2026-01-29 for dashboard integration
+// =============================================================================
+
+app.get('/swarm', async (req, res) => {
+  try {
+    const { loadState, getWageStatus } = require('./live-trader.js');
+    const state = await loadState();
+    const wage = await getWageStatus().catch(() => null);
+    
+    // Calculate active strategies
+    const strategies = [
+      { name: 'Blessing Sniper', active: !state.paused, desc: 'Ecosystem token momentum' },
+      { name: 'Gem Hunter', active: true, desc: 'Early-stage detection' },
+      { name: 'Top 100 Filter', active: true, desc: 'Blue chip prioritization' },
+    ];
+    
+    // Build traders list from active positions
+    const traders = (state.positions || []).map((p, i) => ({
+      id: `trader-${i + 1}`,
+      name: p.symbol || 'Unknown',
+      emoji: p.strategy === 'gem' ? '💎' : '🎯',
+      positions: 1,
+      totalPnL: p.unrealizedPnL || 0,
+    }));
+    
+    res.json({
+      running: !state.paused,
+      totalTicks: state.totalTrades || 0,
+      strategies: strategies.filter(s => s.active).length,
+      traders,
+      wage: wage ? {
+        hourlyTarget: wage.hourlyTarget || 40,
+        efficiency: wage.efficiency || 0,
+        streak: wage.streak || 0,
+      } : null,
+      lastTick: state.lastTick,
+    });
+  } catch (err) {
+    res.json({ 
+      running: false, 
+      totalTicks: 0, 
+      strategies: 0, 
+      traders: [],
+      error: err.message,
+    });
+  }
+});
+
 // Pause trading
 app.post('/trading/pause', async (req, res) => {
   try {
@@ -575,6 +680,162 @@ app.get('/polymarket/positions', async (req, res) => {
     });
   } catch {
     res.json({ positions: [], totalPositions: 0, totalCost: 0 });
+  }
+});
+
+// =============================================================================
+// 🆕 BANKR-POWERED TRADING API (from moltbot-skills learnings)
+// =============================================================================
+
+// 🎲 Polymarket bet via Bankr
+app.post('/trading/polymarket/bet', async (req, res) => {
+  try {
+    const { polymarketBet } = require('./live-trader.js');
+    const { market, position, amount } = req.body;
+    
+    if (!market || !position || !amount) {
+      return res.status(400).json({ success: false, error: 'Missing market, position, or amount' });
+    }
+    
+    const result = await polymarketBet(market, position, parseFloat(amount));
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// 📈 Setup DCA via Bankr
+app.post('/trading/dca/setup', async (req, res) => {
+  try {
+    const { setupDCA } = require('./live-trader.js');
+    const { token, amount, frequency } = req.body;
+    
+    if (!token || !amount) {
+      return res.status(400).json({ success: false, error: 'Missing token or amount' });
+    }
+    
+    const result = await setupDCA(token, parseFloat(amount), frequency || 'weekly');
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// 🔥 Open leverage position via Bankr
+app.post('/trading/leverage/open', async (req, res) => {
+  try {
+    const { openLeveragePosition } = require('./live-trader.js');
+    const { token, multiplier, amount, direction, stopLoss, takeProfit } = req.body;
+    
+    if (!token || !multiplier || !amount || !direction) {
+      return res.status(400).json({ success: false, error: 'Missing token, multiplier, amount, or direction' });
+    }
+    
+    const result = await openLeveragePosition(
+      token, 
+      parseInt(multiplier), 
+      parseFloat(amount), 
+      direction,
+      { stopLoss: stopLoss ? parseFloat(stopLoss) : null, takeProfit: takeProfit ? parseFloat(takeProfit) : null }
+    );
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// 🛡️ Set stop loss via Bankr
+app.post('/trading/stoploss', async (req, res) => {
+  try {
+    const { setStopLoss } = require('./live-trader.js');
+    const { token, price } = req.body;
+    
+    if (!token || !price) {
+      return res.status(400).json({ success: false, error: 'Missing token or price' });
+    }
+    
+    const result = await setStopLoss(token, parseFloat(price));
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// 🎯 Set limit order via Bankr
+app.post('/trading/limit', async (req, res) => {
+  try {
+    const { setLimitOrder } = require('./live-trader.js');
+    const { token, price, amount, side } = req.body;
+    
+    if (!token || !price || !amount) {
+      return res.status(400).json({ success: false, error: 'Missing token, price, or amount' });
+    }
+    
+    const result = await setLimitOrder(token, parseFloat(price), parseFloat(amount), side || 'buy');
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// 📊 Get portfolio via Bankr
+app.get('/trading/portfolio', async (req, res) => {
+  try {
+    const { getPortfolio } = require('./live-trader.js');
+    const result = await getPortfolio();
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// 🔍 Research token via Bankr
+app.get('/trading/research/:token', async (req, res) => {
+  try {
+    const { researchToken } = require('./live-trader.js');
+    const result = await researchToken(req.params.token);
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// 🔥 Get trending tokens via Bankr
+app.get('/trading/trending', async (req, res) => {
+  try {
+    const { getTrendingTokens } = require('./live-trader.js');
+    const chain = req.query.chain || 'Base';
+    const result = await getTrendingTokens(chain);
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// 📊 Get Top 100 Base tokens
+app.get('/trading/top100', async (req, res) => {
+  try {
+    const { fetchTop100BaseTokens } = require('./live-trader.js');
+    const tokens = await fetchTop100BaseTokens();
+    res.json({ tokens, count: tokens.length });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// 🎲 Get Polymarket activity log (all bids, executed or not)
+app.get('/polymarket/activity', async (req, res) => {
+  try {
+    const { getPolymarketActivity } = require('./live-trader.js');
+    const limit = parseInt(req.query.limit) || 50;
+    const activities = await getPolymarketActivity(limit);
+    res.json({ 
+      activities, 
+      count: activities.length,
+      note: 'All Polymarket bids are logged here for transparency'
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
   }
 });
 
@@ -1799,6 +2060,82 @@ async function heartbeat() {
   
   console.log(`[${new Date().toISOString()}] 💓 Heartbeat - Brain is alive`);
 }
+
+// =============================================================================
+// 📧 NOTIFICATIONS API
+// =============================================================================
+
+// Send a notification through all channels
+app.post('/notify', async (req, res) => {
+  try {
+    const notifications = require('./notifications.js');
+    const { type, title, message, data } = req.body;
+    
+    if (!title || !message) {
+      return res.status(400).json({ success: false, error: 'Missing title or message' });
+    }
+    
+    const result = await notifications.notify(type || 'INFO', title, message, data || {});
+    res.json({ success: true, alert: result });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Send a Telegram message directly
+app.post('/notify/telegram', async (req, res) => {
+  try {
+    const notifications = require('./notifications.js');
+    const { message } = req.body;
+    
+    if (!message) {
+      return res.status(400).json({ success: false, error: 'Missing message' });
+    }
+    
+    const result = await notifications.sendTelegramMessage(message);
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Get notification config status
+app.get('/notify/status', (req, res) => {
+  try {
+    const notifications = require('./notifications.js');
+    res.json({
+      telegram: notifications.CONFIG.TELEGRAM_ENABLED,
+      webhook: notifications.CONFIG.WEBHOOK_ENABLED,
+      email: notifications.CONFIG.EMAIL_ENABLED,
+    });
+  } catch (err) {
+    res.json({ telegram: false, webhook: false, email: false, error: err.message });
+  }
+});
+
+// Telegram webhook endpoint (for receiving messages)
+app.post('/telegram/webhook', async (req, res) => {
+  try {
+    const notifications = require('./notifications.js');
+    const update = req.body;
+    
+    if (update.message?.text) {
+      const text = update.message.text;
+      const [command, ...args] = text.split(' ');
+      
+      const response = await notifications.processTelegramCommand(command, args);
+      
+      // Send response back
+      if (response.text) {
+        await notifications.sendTelegramMessage(response.text);
+      }
+    }
+    
+    res.json({ ok: true });
+  } catch (err) {
+    res.status(500).json({ ok: false, error: err.message });
+  }
+});
 
 // =============================================================================
 // START SERVER

@@ -30,6 +30,24 @@ try {
   console.log('[TRADER] Learning library not available:', e.message);
 }
 
+// Notification System
+let notifications;
+try {
+  notifications = require('./notifications.js');
+  console.log('[TRADER] Notification system loaded');
+} catch (e) {
+  console.log('[TRADER] Notifications not available:', e.message);
+  notifications = {
+    notify: async () => {},
+    notifyTrade: async () => {},
+    notifyPositionOpened: async () => {},
+    notifyPositionClosed: async () => {},
+    notifyStopLoss: async () => {},
+    notifyError: async () => {},
+    notifyOpportunity: async () => {},
+  };
+}
+
 // ════════════════════════════════════════════════════════════════════════════
 // CONFIGURATION
 // ════════════════════════════════════════════════════════════════════════════
@@ -417,6 +435,40 @@ async function recordTrade(trade) {
 }
 
 // ════════════════════════════════════════════════════════════════════════════
+// POLYMARKET ACTIVITY LOG — Track all bids for transparency
+// Added 2026-01-29 per team request: "Does the bot post what it's bidding on?"
+// ════════════════════════════════════════════════════════════════════════════
+
+const POLYMARKET_ACTIVITY_FILE = path.join(__dirname, 'data', 'polymarket-activity.json');
+
+async function logPolymarketActivity(activity) {
+  let activities = [];
+  try {
+    const data = await fs.readFile(POLYMARKET_ACTIVITY_FILE, 'utf8');
+    activities = JSON.parse(data);
+  } catch {}
+  
+  activities.push(activity);
+  
+  // Keep last 200 activities
+  if (activities.length > 200) activities = activities.slice(-200);
+  
+  await fs.writeFile(POLYMARKET_ACTIVITY_FILE, JSON.stringify(activities, null, 2));
+  
+  console.log(`   📝 Logged Polymarket activity: ${activity.type} - ${activity.status}`);
+}
+
+async function getPolymarketActivity(limit = 50) {
+  try {
+    const data = await fs.readFile(POLYMARKET_ACTIVITY_FILE, 'utf8');
+    const activities = JSON.parse(data);
+    return activities.slice(-limit);
+  } catch {
+    return [];
+  }
+}
+
+// ════════════════════════════════════════════════════════════════════════════
 // BANKR CLIENT — Using Official @bankr/sdk
 // ════════════════════════════════════════════════════════════════════════════
 // 
@@ -782,6 +834,15 @@ class BankrClient {
                 console.log(`   ✅ TX SUBMITTED: ${hash}`);
                 console.log(`   🔗 https://basescan.org/tx/${hash}`);
                 
+                // 📧 Send notification
+                await notifications.notifyTrade(
+                  tx.type || 'swap',
+                  tokenData?.symbol || 'TOKEN',
+                  tokenData?.amount || 'N/A',
+                  tokenData?.price || 'N/A',
+                  hash
+                );
+                
                 executedTxs.push({ hash, type: tx.type || 'swap', status: 'submitted' });
               } else {
                 console.log(`      ⚠️ ${tx.type || 'action'}: Missing to=${!!targetTo} or data=${!!targetData}`);
@@ -789,6 +850,7 @@ class BankrClient {
               }
             } catch (txError) {
               console.log(`   ❌ TX execution failed: ${txError.message}`);
+              await notifications.notifyError('TX Execution', txError);
               executedTxs.push({ error: txError.message, type: tx.type || 'swap', status: 'failed' });
             }
           }
@@ -993,6 +1055,199 @@ class BankrClient {
 const bankr = new BankrClient();
 
 // ════════════════════════════════════════════════════════════════════════════
+// BLUE CHIP DETECTION — Dynamic criteria for established tokens
+// Added 2026-01-29 per team request
+// ════════════════════════════════════════════════════════════════════════════
+
+const BLUE_CHIP_CRITERIA = {
+  MIN_MARKET_CAP_USD: 10_000_000,    // $10M+ market cap
+  MIN_LIQUIDITY_USD: 500_000,         // $500k+ liquidity
+  MIN_VOLUME_24H_USD: 100_000,        // $100k+ daily volume
+  MIN_AGE_DAYS: 30,                   // 30+ days old
+  MIN_HOLDERS: 1000,                  // 1000+ unique holders
+};
+
+// ════════════════════════════════════════════════════════════════════════════
+// 💎 GEM DETECTION — Identify promising tokens BEFORE they become blue chips
+// "Happy little accidents become happy little gains" — b0br0ssd0tc0m z3n
+// Added 2026-01-29 per team request
+// ════════════════════════════════════════════════════════════════════════════
+
+const GEM_CRITERIA = {
+  // Sweet spot: Big enough to be real, small enough to 10x
+  MIN_MARKET_CAP_USD: 500_000,       // $500k+ (not too micro)
+  MAX_MARKET_CAP_USD: 10_000_000,    // Under $10M (room to grow)
+  
+  // Liquidity must be healthy relative to mcap
+  MIN_LIQUIDITY_USD: 50_000,          // $50k+ liquidity (safety)
+  MIN_LIQUIDITY_RATIO: 0.05,          // Liquidity >= 5% of mcap
+  
+  // Volume shows real interest
+  MIN_VOLUME_24H_USD: 50_000,         // $50k+ daily volume
+  
+  // Momentum indicators
+  MIN_PRICE_CHANGE_24H: 10,           // Rising 10%+ (momentum)
+  MAX_PRICE_CHANGE_24H: 200,          // But not already 3x'd (too late)
+  
+  // Age: Not too new (likely rug), not too old (probably dead)
+  MIN_AGE_HOURS: 12,                  // At least 12h old
+  MAX_AGE_DAYS: 14,                   // Under 2 weeks (still early)
+};
+
+/**
+ * 💎 Check if a token is a potential gem
+ * These are tokens that show promise of becoming blue chips
+ * @param {object} token - Token with metrics
+ * @returns {boolean} - Is potential gem
+ */
+function isPotentialGem(token) {
+  const marketCap = token.marketCap || token.fdv || 0;
+  const liquidity = token.liquidity || 0;
+  const volume = token.volume24h || 0;
+  const priceChange = token.priceChange24h || 0;
+  
+  // Market cap in sweet spot
+  if (marketCap < GEM_CRITERIA.MIN_MARKET_CAP_USD) return false;
+  if (marketCap > GEM_CRITERIA.MAX_MARKET_CAP_USD) return false;
+  
+  // Healthy liquidity
+  if (liquidity < GEM_CRITERIA.MIN_LIQUIDITY_USD) return false;
+  
+  // Liquidity ratio check (avoid tokens with fake mcap)
+  const liquidityRatio = marketCap > 0 ? liquidity / marketCap : 0;
+  if (liquidityRatio < GEM_CRITERIA.MIN_LIQUIDITY_RATIO) return false;
+  
+  // Active trading
+  if (volume < GEM_CRITERIA.MIN_VOLUME_24H_USD) return false;
+  
+  // Positive momentum but not overextended
+  if (priceChange < GEM_CRITERIA.MIN_PRICE_CHANGE_24H) return false;
+  if (priceChange > GEM_CRITERIA.MAX_PRICE_CHANGE_24H) return false;
+  
+  return true;
+}
+
+/**
+ * 💎 Get gem score for a token (0-100)
+ * Higher score = more promising gem characteristics
+ */
+function getGemScore(token) {
+  if (!isPotentialGem(token)) return 0;
+  
+  let score = 0;
+  const marketCap = token.marketCap || token.fdv || 0;
+  const liquidity = token.liquidity || 0;
+  const volume = token.volume24h || 0;
+  const priceChange = token.priceChange24h || 0;
+  
+  // Ideal market cap range: $1-5M (most room to grow)
+  if (marketCap >= 1_000_000 && marketCap <= 5_000_000) score += 25;
+  else if (marketCap >= 500_000 && marketCap <= 10_000_000) score += 15;
+  
+  // Strong liquidity ratio
+  const liquidityRatio = marketCap > 0 ? liquidity / marketCap : 0;
+  if (liquidityRatio >= 0.15) score += 25;
+  else if (liquidityRatio >= 0.10) score += 20;
+  else if (liquidityRatio >= 0.05) score += 10;
+  
+  // High volume relative to mcap shows strong interest
+  const volumeRatio = marketCap > 0 ? volume / marketCap : 0;
+  if (volumeRatio >= 0.30) score += 25;  // 30%+ volume/mcap = very active
+  else if (volumeRatio >= 0.15) score += 15;
+  else if (volumeRatio >= 0.05) score += 10;
+  
+  // Momentum sweet spot: 20-50% gain (rising but not pumped)
+  if (priceChange >= 20 && priceChange <= 50) score += 25;
+  else if (priceChange >= 10 && priceChange <= 100) score += 15;
+  
+  return Math.min(100, score);
+}
+
+/**
+ * Check if a token qualifies as a blue chip based on metrics
+ * @param {object} token - Token with metrics
+ * @returns {boolean} - Is blue chip
+ */
+function isBlueChip(token) {
+  const marketCap = token.marketCap || token.fdv || 0;
+  const liquidity = token.liquidity || 0;
+  const volume = token.volume24h || 0;
+  
+  // Must meet at least market cap + liquidity criteria
+  if (marketCap < BLUE_CHIP_CRITERIA.MIN_MARKET_CAP_USD) return false;
+  if (liquidity < BLUE_CHIP_CRITERIA.MIN_LIQUIDITY_USD) return false;
+  if (volume < BLUE_CHIP_CRITERIA.MIN_VOLUME_24H_USD) return false;
+  
+  return true;
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// TOP 100 BASE TOKENS — Only invest in established tokens
+// Added 2026-01-29 per team request
+// ════════════════════════════════════════════════════════════════════════════
+
+let _top100Cache = null;
+let _top100CacheTime = 0;
+const TOP100_CACHE_TTL = 15 * 60 * 1000; // 15 minutes
+
+/**
+ * Fetch Top 100 Base tokens by market cap from DexScreener
+ */
+async function fetchTop100BaseTokens() {
+  const now = Date.now();
+  if (_top100Cache && (now - _top100CacheTime) < TOP100_CACHE_TTL) {
+    return _top100Cache;
+  }
+  
+  try {
+    const fetch = (await import('node-fetch')).default;
+    
+    // DexScreener Base chain tokens sorted by volume
+    const res = await fetch('https://api.dexscreener.com/latest/dex/tokens/base?sortBy=volume&limit=100');
+    const data = await res.json();
+    
+    if (data.pairs) {
+      const tokens = new Map();
+      
+      for (const pair of data.pairs) {
+        const addr = pair.baseToken?.address?.toLowerCase();
+        if (!addr || tokens.has(addr)) continue;
+        
+        tokens.set(addr, {
+          address: addr,
+          symbol: pair.baseToken?.symbol,
+          name: pair.baseToken?.name,
+          marketCap: pair.marketCap || pair.fdv || 0,
+          liquidity: pair.liquidity?.usd || 0,
+          volume24h: pair.volume?.h24 || 0,
+          priceChange24h: pair.priceChange?.h24 || 0,
+          isTop100: true,
+        });
+      }
+      
+      _top100Cache = Array.from(tokens.values()).slice(0, 100);
+      _top100CacheTime = now;
+      
+      console.log(`   📊 Fetched Top ${_top100Cache.length} Base tokens`);
+      return _top100Cache;
+    }
+  } catch (e) {
+    console.log(`   ⚠️ Top 100 fetch failed: ${e.message}`);
+  }
+  
+  return _top100Cache || [];
+}
+
+/**
+ * Check if token is in Top 100 Base by market cap
+ */
+async function isTop100Token(address) {
+  if (!address) return false;
+  const top100 = await fetchTop100BaseTokens();
+  return top100.some(t => t.address?.toLowerCase() === address.toLowerCase());
+}
+
+// ════════════════════════════════════════════════════════════════════════════
 // TOKEN DISCOVERY — Top 100 Base tokens + Bankr/Clanker/Clawd ecosystem
 // Focus: Vetted tokens only, no random memecoins
 // ════════════════════════════════════════════════════════════════════════════
@@ -1011,10 +1266,11 @@ const ECOSYSTEM_TOKENS = {
   'LUNA': { tier: 2, ecosystem: 'ai', address: '0x55cd6469f597452b5a7536e2cd98fde4c1247ee4' },
   
   // Tier 3: Blue chip Base memes
+  // CRITERIA: $10M+ market cap, 30+ days old, $500k+ daily volume, established community
   'TOSHI': { tier: 3, ecosystem: 'bluechip', address: '0xac1bd2486aaf3b5c0fc3fd868558b082a531b2b4' },
   'BRETT': { tier: 3, ecosystem: 'bluechip', address: '0x532f27101965dd16442e59d40670faf5ebb142e4' },
   'DEGEN': { tier: 3, ecosystem: 'bluechip', address: '0x4ed4e862860bed51a9570b96d89af5e1b0efefed' },
-  'BASEPOST': { tier: 3, ecosystem: 'bluechip', address: null }, // Base social token
+  // REMOVED: 'BASEPOST' - Not a blue chip, team request 2026-01-29
   'AERO': { tier: 3, ecosystem: 'bluechip', address: '0x940181a94a35a4569e4529a3cdfb74e38fd98631' }, // Aerodrome
 };
 
@@ -1562,9 +1818,22 @@ function evaluateTradeQualification(token, score, catalysts = []) {
 
 // ════════════════════════════════════════════════════════════════════════════
 // SCORING — Prioritize Bankr/Clanker/Clawd ecosystem + top 100 Base tokens
+// Updated 2026-01-29: Added blue chip detection and Top 100 enforcement
 // ════════════════════════════════════════════════════════════════════════════
 function scoreBlessing(token) {
   let score = 0;
+  
+  // ════════════════════════════════════════════════════════════════════════════
+  // TOP 100 / BLUE CHIP CHECK — Must be established token
+  // Added 2026-01-29 per team request
+  // ════════════════════════════════════════════════════════════════════════════
+  const isEstablished = token.isTop100 || token.source === 'top100' || isBlueChip(token);
+  const isEcosystem = token.tier === 1 || token.tier === 2 || token.bankrDeployed || token.clawdDeployed;
+  
+  // If not Top 100 AND not ecosystem token, heavy penalty
+  if (!isEstablished && !isEcosystem) {
+    score -= 50; // Discourage random memecoins
+  }
   
   // ════════════════════════════════════════════════════════════════════════════
   // TIER BONUS: Based on token discovery tier (ecosystem priority)
@@ -1574,7 +1843,28 @@ function scoreBlessing(token) {
   if (tier === 1) score += 50;      // Bankr/Clawd ecosystem
   else if (tier === 2) score += 40; // AI agent tokens
   else if (tier === 3) score += 30; // Blue chip memes / boosted
-  else if (token.source === 'top100') score += 25; // Top 100 Base tokens
+  else if (token.source === 'top100' || token.isTop100) score += 25; // Top 100 Base tokens
+  
+  // Blue chip bonus (based on metrics, not hardcoded list)
+  if (isBlueChip(token)) {
+    score += 20;
+  }
+  
+  // ════════════════════════════════════════════════════════════════════════════
+  // 💎 GEM DETECTION — Bonus for promising early-stage tokens
+  // Added 2026-01-29: Identify gems before they reach blue chip status
+  // ════════════════════════════════════════════════════════════════════════════
+  const gemScore = getGemScore(token);
+  if (gemScore > 0) {
+    // Gems get bonus based on their score (max +30)
+    const gemBonus = Math.floor(gemScore * 0.30);
+    score += gemBonus;
+    
+    // If it's a high-quality gem AND ecosystem token, extra bonus
+    if (gemScore >= 50 && isEcosystem) {
+      score += 15; // Ecosystem gems are premium opportunities
+    }
+  }
   
   // Additional ecosystem bonuses (stack with tier)
   const symbol = (token.symbol || '').toUpperCase();
@@ -1850,6 +2140,15 @@ async function checkExistingPositions(state) {
     // 1. HARD STOP LOSS — Never let it blow up
     if (pnlPercent <= -CONFIG.SNIPER.STOP_LOSS) {
       console.log(`   🛑 STOP LOSS: Cut the loss at ${(pnlPercent * 100).toFixed(1)}%`);
+      
+      // 📧 NOTIFY: Stop loss hit
+      await notifications.notifyStopLoss(
+        position.symbol,
+        position.tokens,
+        currentPrice,
+        pnlUsd
+      );
+      
       await executeExit(position, currentPrice, 1.0, state, 'stop_loss');
       continue;
     }
@@ -3229,6 +3528,20 @@ async function startPresenceTrading() {
     // Determine which side to buy
     const side = edge.estimatedProb > edge.impliedProb ? 'YES' : 'NO';
     
+    // 📢 LOG THE BID for transparency (before execution)
+    const bidActivity = {
+      timestamp: new Date().toISOString(),
+      type: 'polymarket_bid',
+      market: edge.question,
+      side,
+      amount: positionSize,
+      marketPrice: edge.impliedProb,
+      ourEstimate: edge.estimatedProb,
+      edge: edge.edge,
+      status: 'pending',
+    };
+    await logPolymarketActivity(bidActivity);
+    
     try {
       // Execute via Bankr on Polygon
       const tradePrompt = `Buy $${positionSize} of ${side} shares on Polymarket for: "${edge.question?.slice(0, 100)}" (token ID: ${edge.tokenId}) on Polygon network`;
@@ -3252,6 +3565,18 @@ async function startPresenceTrading() {
         
         console.log(`   ✅ Polymarket position opened`);
         
+        // 📢 Update activity log with success
+        bidActivity.status = 'executed';
+        bidActivity.txHash = result.txHash;
+        await logPolymarketActivity(bidActivity);
+        
+        // 📧 Notify about the bet
+        await notifications.notify('MARKET_OPPORTUNITY', 
+          `Polymarket: ${side} on "${edge.question?.slice(0, 50)}..."`,
+          `Bet $${positionSize} at ${(edge.impliedProb * 100).toFixed(0)}% (edge: ${(edge.edge * 100).toFixed(1)}%)`,
+          bidActivity
+        );
+        
         await recordTrade({
           type: 'polymarket_entry',
           chain: 'polygon',
@@ -3262,14 +3587,137 @@ async function startPresenceTrading() {
           edge: edge.edge,
           size: positionSize,
         });
+      } else {
+        bidActivity.status = 'failed';
+        bidActivity.error = result?.error || 'Unknown error';
+        await logPolymarketActivity(bidActivity);
       }
     } catch (err) {
       console.log(`   ❌ Polymarket entry failed: ${err.message}`);
+      bidActivity.status = 'error';
+      bidActivity.error = err.message;
+      await logPolymarketActivity(bidActivity);
     }
   });
   
   console.log(`\n   ✅ Presence trading active`);
   console.log(`   Watching. Waiting. Ready.`);
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// BANKR-POWERED SIMPLIFIED TRADING (from moltbot-skills learnings)
+// These functions use Bankr's natural language API for cleaner execution
+// ════════════════════════════════════════════════════════════════════════════
+
+/**
+ * 🎲 Simplified Polymarket Trading via Bankr
+ * Instead of complex CLOB implementation, just ask Bankr
+ */
+async function polymarketBet(market, position, amount) {
+  if (await isTradingPaused()) {
+    const control = await getTradingControl();
+    return { success: false, paused: true, reason: control.reason };
+  }
+  
+  const prompt = `Bet $${amount} on ${position} for "${market}" on Polymarket`;
+  console.log(`   🎲 Polymarket: ${prompt}`);
+  return await bankr.executeTrade(prompt);
+}
+
+/**
+ * 📊 Get Polymarket Positions via Bankr
+ */
+async function getPolymarketPositions() {
+  const prompt = `Show my Polymarket positions`;
+  return await bankr.promptAndWait(prompt);
+}
+
+/**
+ * 📈 Setup DCA via Bankr
+ * @param {string} token - Token symbol (e.g., "ETH", "BNKR")
+ * @param {number} amount - USD amount per interval
+ * @param {string} frequency - "daily", "weekly", "monthly"
+ */
+async function setupDCA(token, amount, frequency = 'weekly') {
+  if (await isTradingPaused()) {
+    const control = await getTradingControl();
+    return { success: false, paused: true, reason: control.reason };
+  }
+  
+  const prompt = `DCA $${amount} into ${token} ${frequency} on Base`;
+  console.log(`   📈 Setting up DCA: ${prompt}`);
+  return await bankr.executeTrade(prompt);
+}
+
+/**
+ * 🔥 Open Leverage Position via Bankr (Avantis on Base)
+ * @param {string} token - Token symbol
+ * @param {number} multiplier - Leverage (1-50x for crypto)
+ * @param {number} amount - USD amount
+ * @param {string} direction - "long" or "short"
+ * @param {object} options - { stopLoss, takeProfit }
+ */
+async function openLeveragePosition(token, multiplier, amount, direction, options = {}) {
+  if (await isTradingPaused()) {
+    const control = await getTradingControl();
+    return { success: false, paused: true, reason: control.reason };
+  }
+  
+  let prompt = `Open ${multiplier}x ${direction} on ${token} with $${amount}`;
+  
+  if (options.stopLoss) {
+    prompt += ` with stop loss at $${options.stopLoss}`;
+  }
+  if (options.takeProfit) {
+    prompt += ` and take profit at $${options.takeProfit}`;
+  }
+  
+  console.log(`   🔥 Leverage: ${prompt}`);
+  return await bankr.executeTrade(prompt);
+}
+
+/**
+ * 🛡️ Set Stop Loss via Bankr
+ */
+async function setStopLoss(token, price) {
+  const prompt = `Set stop loss for my ${token} at $${price} on Base`;
+  console.log(`   🛡️ Stop Loss: ${prompt}`);
+  return await bankr.executeTrade(prompt);
+}
+
+/**
+ * 🎯 Set Limit Order via Bankr
+ */
+async function setLimitOrder(token, price, amount, side = 'buy') {
+  const prompt = side === 'buy' 
+    ? `Buy $${amount} of ${token} when price drops to $${price}`
+    : `Sell $${amount} of ${token} when price rises to $${price}`;
+  console.log(`   🎯 Limit Order: ${prompt}`);
+  return await bankr.executeTrade(prompt);
+}
+
+/**
+ * 📊 Get Portfolio via Bankr
+ */
+async function getPortfolio() {
+  const prompt = `Show my complete portfolio across all chains`;
+  return await bankr.promptAndWait(prompt);
+}
+
+/**
+ * 🔍 Research Token via Bankr
+ */
+async function researchToken(token) {
+  const prompt = `Do technical analysis on ${token}`;
+  return await bankr.promptAndWait(prompt);
+}
+
+/**
+ * 🔥 Get Trending Tokens via Bankr
+ */
+async function getTrendingTokens(chain = 'Base') {
+  const prompt = `What tokens are trending on ${chain}?`;
+  return await bankr.promptAndWait(prompt);
 }
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -3300,6 +3748,28 @@ module.exports = {
   isTradingPaused,
   getTradingControl,
   setTradingPaused,
+  // 🆕 Bankr-powered simplified trading (moltbot-skills learnings)
+  polymarketBet,
+  getPolymarketPositions,
+  setupDCA,
+  openLeveragePosition,
+  setStopLoss,
+  setLimitOrder,
+  getPortfolio,
+  researchToken,
+  getTrendingTokens,
+  // 🔵 Blue chip & Top 100 detection (audit fixes)
+  BLUE_CHIP_CRITERIA,
+  isBlueChip,
+  fetchTop100BaseTokens,
+  isTop100Token,
+  // � Gem detection (early-stage promising tokens)
+  GEM_CRITERIA,
+  isPotentialGem,
+  getGemScore,
+  // �📊 Polymarket transparency
+  logPolymarketActivity,
+  getPolymarketActivity,
 };
 
 /**

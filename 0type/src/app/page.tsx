@@ -1,11 +1,21 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 export default function ComingSoonPage() {
+  const searchParams = useSearchParams();
   const [mcpStatus, setMcpStatus] = useState<'checking' | 'online' | 'offline'>('checking');
   const [glitch, setGlitch] = useState(false);
   const [dots, setDots] = useState('');
+  const [showBetaMessage, setShowBetaMessage] = useState(false);
+
+  // Check if redirected for beta access
+  useEffect(() => {
+    if (searchParams.get('access') === 'beta') {
+      setShowBetaMessage(true);
+    }
+  }, [searchParams]);
 
   // Check MCP status
   useEffect(() => {
@@ -109,16 +119,31 @@ export default function ComingSoonPage() {
 
         {/* Coming soon message */}
         <div className="border border-white/10 bg-white/5 backdrop-blur-sm rounded-lg p-8 max-w-md mx-auto">
-          <p className="text-white/80 font-mono text-lg mb-4">
-            BUILDING{dots}
-          </p>
-          <p className="text-white/40 text-sm leading-relaxed">
-            Generative typefaces powered by B0B.
-            <br />
-            Subscribe for unlimited access.
-            <br />
-            Open source = free.
-          </p>
+          {showBetaMessage ? (
+            <>
+              <p className="text-[#0052FF] font-mono text-lg mb-4">
+                PRIVATE BETA
+              </p>
+              <p className="text-white/40 text-sm leading-relaxed">
+                0TYPE tools are currently in private beta.
+                <br />
+                Contact @_b0bdev_ for access.
+              </p>
+            </>
+          ) : (
+            <>
+              <p className="text-white/80 font-mono text-lg mb-4">
+                BUILDING{dots}
+              </p>
+              <p className="text-white/40 text-sm leading-relaxed">
+                Generative typefaces powered by B0B.
+                <br />
+                Subscribe for unlimited access.
+                <br />
+                Open source = free.
+              </p>
+            </>
+          )}
         </div>
 
         {/* Navigation */}

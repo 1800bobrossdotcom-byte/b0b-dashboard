@@ -44,14 +44,14 @@ const colors = {
   error: '#FC401F',
 };
 
-// Partner data with logos
+// Partner data with logos (using real downloaded logos)
 const PARTNERS = [
-  { name: 'Base', logo: '/partners/base.svg', url: 'https://base.org', color: '#0052FF', desc: 'L2 Chain' },
+  { name: 'Base', logo: '/partners/base.png', url: 'https://base.org', color: '#0052FF', desc: 'L2 Chain' },
   { name: 'Bankr', logo: '/partners/bankr.svg', url: 'https://bankr.bot', color: '#0052FF', desc: 'AI Trading' },
-  { name: 'Anthropic', logo: '/partners/anthropic.svg', url: 'https://anthropic.com', color: '#D97706', desc: 'Claude AI' },
-  { name: 'Clanker', logo: '/partners/clanker.svg', url: 'https://clanker.world', color: '#8B5CF6', desc: 'Token Launches' },
-  { name: 'Clawd', logo: '/partners/clawd.svg', url: 'https://clawd.ai', color: '#F97316', desc: 'Claude Agent' },
-  { name: 'Polymarket', logo: '/partners/polymarket.svg', url: 'https://polymarket.com', color: '#22C55E', desc: 'Predictions' },
+  { name: 'Anthropic', logo: '/partners/anthropic.png', url: 'https://anthropic.com', color: '#D97706', desc: 'Claude AI' },
+  { name: 'Clanker', logo: '/partners/clanker.ico', url: 'https://clanker.world', color: '#8B5CF6', desc: 'Token Launches' },
+  { name: 'Clawd', logo: '/partners/clawd.svg', url: 'https://clawd.fun', color: '#F97316', desc: 'Claude Agent' },
+  { name: 'Polymarket', logo: '/partners/polymarket_og.png', url: 'https://polymarket.com', color: '#22C55E', desc: 'Predictions' },
 ];
 
 // Brain server URL
