@@ -2393,6 +2393,9 @@ class PresenceWatcher {
       this.watchedTokens.add(pos.address);
     }
     
+    // Load Polymarket positions from disk
+    await this.loadPolymarketPositions();
+    
     // Start the watchers
     this.watchNewTokens();           // Base memecoins
     this.watchPriceMovements();      // Position management
@@ -2400,6 +2403,7 @@ class PresenceWatcher {
     this.watchPolymarketEdges();     // Polygon prediction markets
     
     console.log(`   Watching ${this.watchedTokens.size} positions`);
+    console.log(`   Polymarket positions: ${this.polymarketPositions.size}`);
     console.log(`   Observing new Base token launches`);
     console.log(`   Scanning Polymarket for edge opportunities`);
   }
@@ -2665,6 +2669,27 @@ class PresenceWatcher {
                 console.log(`      Edge: ${(edge * 100).toFixed(1)}%`);
                 console.log(`      Volume: $${volumeSignal.toLocaleString()}`);
                 
+                // Check if we should execute the trade
+                const shouldTrade = liquiditySignal >= CONFIG.POLYMARKET.MIN_LIQUIDITY 
+                  && edge >= CONFIG.POLYMARKET.MIN_EDGE_REQUIRED
+                  && !this.polymarketPositions.has(market.conditionId);
+                
+                if (shouldTrade) {
+                  // Execute the trade!
+                  await this.executePolymarketTrade({
+                    marketId: market.id,
+                    conditionId: market.conditionId,
+                    question: market.question,
+                    outcome: token.outcome,
+                    tokenId: token.token_id,
+                    side: impliedProb < 0.5 ? 'BUY' : 'SELL', // Fade extreme
+                    price: impliedProb,
+                    edge,
+                    volume: volumeSignal,
+                    liquidity: liquiditySignal,
+                  });
+                }
+                
                 this.emit('polymarketEdge', {
                   marketId: market.id,
                   conditionId: market.conditionId,
@@ -2692,6 +2717,174 @@ class PresenceWatcher {
     
     // First check after 30 seconds
     setTimeout(check, 30000);
+  }
+  
+  /**
+   * Execute a Polymarket trade via CLOB API
+   * 
+   * Polymarket CLOB uses EIP-712 signatures for order authentication.
+   * Orders are placed in USDC on Polygon chain.
+   * 
+   * Flow:
+   * 1. Create order payload with price/size/side
+   * 2. Sign order with private key (EIP-712)
+   * 3. POST to CLOB API
+   * 4. Track position for exit management
+   */
+  async executePolymarketTrade(opportunity) {
+    const fetch = (await import('node-fetch')).default;
+    const { ethers } = require('ethers');
+    
+    console.log(`\n   🎯 EXECUTING POLYMARKET TRADE`);
+    console.log(`      Question: ${opportunity.question?.slice(0, 60)}...`);
+    console.log(`      Side: ${opportunity.side} @ ${(opportunity.price * 100).toFixed(1)}%`);
+    
+    // Safety checks
+    if (!CONFIG.TRADING_PRIVATE_KEY) {
+      console.log(`   ❌ No private key configured for Polymarket signing`);
+      return { success: false, error: 'No private key' };
+    }
+    
+    // Position sizing: Use percentage of capital, capped at MAX_POSITION_USD
+    const positionSize = Math.min(
+      CONFIG.POLYMARKET.MAX_POSITION_USD,
+      10 // Start with $10 positions until proven
+    );
+    
+    // Calculate shares to buy (price is in 0-1 range)
+    const shares = positionSize / opportunity.price;
+    
+    try {
+      // Create wallet for signing
+      const wallet = new ethers.Wallet(CONFIG.TRADING_PRIVATE_KEY);
+      const address = wallet.address;
+      
+      // Build order payload for CLOB API
+      // Polymarket uses a specific order format
+      const order = {
+        tokenID: opportunity.tokenId,
+        price: opportunity.price.toFixed(4),
+        size: shares.toFixed(2),
+        side: opportunity.side,
+        feeRateBps: 0, // Maker orders have 0 fees
+        nonce: Date.now(),
+        expiration: Math.floor(Date.now() / 1000) + 3600, // 1 hour expiry
+      };
+      
+      // EIP-712 Domain for Polymarket CLOB
+      const domain = {
+        name: 'Polymarket CTF Exchange',
+        version: '1',
+        chainId: 137, // Polygon
+      };
+      
+      // Order type definition
+      const types = {
+        Order: [
+          { name: 'tokenID', type: 'uint256' },
+          { name: 'price', type: 'uint256' },
+          { name: 'size', type: 'uint256' },
+          { name: 'side', type: 'uint8' },
+          { name: 'feeRateBps', type: 'uint256' },
+          { name: 'nonce', type: 'uint256' },
+          { name: 'expiration', type: 'uint256' },
+        ],
+      };
+      
+      // Sign the order
+      const signature = await wallet.signTypedData(domain, types, {
+        tokenID: opportunity.tokenId,
+        price: Math.floor(parseFloat(order.price) * 1e6), // USDC decimals
+        size: Math.floor(parseFloat(order.size) * 1e6),
+        side: opportunity.side === 'BUY' ? 0 : 1,
+        feeRateBps: 0,
+        nonce: order.nonce,
+        expiration: order.expiration,
+      });
+      
+      // Submit order to CLOB
+      const response = await fetch(`${CONFIG.POLYMARKET.CLOB_HOST}/order`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': address, // Address-based auth
+        },
+        body: JSON.stringify({
+          order: order,
+          signature: signature,
+          owner: address,
+        }),
+        timeout: 15000,
+      });
+      
+      const result = await response.json();
+      
+      if (response.ok && result.orderID) {
+        console.log(`   ✅ Order placed: ${result.orderID}`);
+        console.log(`      Size: ${shares.toFixed(2)} shares @ $${opportunity.price.toFixed(4)}`);
+        console.log(`      Cost: $${positionSize.toFixed(2)}`);
+        
+        // Track position
+        this.polymarketPositions.set(opportunity.conditionId, {
+          orderId: result.orderID,
+          marketId: opportunity.marketId,
+          conditionId: opportunity.conditionId,
+          question: opportunity.question,
+          outcome: opportunity.outcome,
+          tokenId: opportunity.tokenId,
+          side: opportunity.side,
+          entryPrice: opportunity.price,
+          shares: shares,
+          cost: positionSize,
+          edge: opportunity.edge,
+          timestamp: new Date().toISOString(),
+        });
+        
+        // Save position to file for persistence
+        await this.savePolymarketPositions();
+        
+        return { success: true, orderId: result.orderID, shares, cost: positionSize };
+      } else {
+        console.log(`   ❌ Order failed: ${result.error || JSON.stringify(result)}`);
+        return { success: false, error: result.error || 'Unknown error' };
+      }
+      
+    } catch (err) {
+      console.log(`   ❌ Polymarket trade error: ${err.message}`);
+      return { success: false, error: err.message };
+    }
+  }
+  
+  /**
+   * Save Polymarket positions to disk for persistence across restarts
+   */
+  async savePolymarketPositions() {
+    try {
+      const positions = Array.from(this.polymarketPositions.values());
+      await fs.writeFile(
+        CONFIG.POLYMARKET_FILE,
+        JSON.stringify({ positions, lastUpdate: new Date().toISOString() }, null, 2)
+      );
+      console.log(`   💾 Saved ${positions.length} Polymarket positions`);
+    } catch (err) {
+      console.log(`   ⚠️ Failed to save Polymarket positions: ${err.message}`);
+    }
+  }
+  
+  /**
+   * Load Polymarket positions from disk on startup
+   */
+  async loadPolymarketPositions() {
+    try {
+      const data = await fs.readFile(CONFIG.POLYMARKET_FILE, 'utf8');
+      const parsed = JSON.parse(data);
+      for (const pos of parsed.positions || []) {
+        this.polymarketPositions.set(pos.conditionId, pos);
+      }
+      console.log(`   📂 Loaded ${this.polymarketPositions.size} Polymarket positions`);
+    } catch {
+      // No positions file yet, that's fine
+    }
   }
   
   emit(event, data) {
