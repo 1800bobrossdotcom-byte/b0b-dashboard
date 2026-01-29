@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'standalone', // For Docker self-hosted fallback
+  // Note: standalone output is for Docker deployments only
+  // Railway uses nixpacks which handles everything automatically
+  // output: 'standalone',
   images: {
     remotePatterns: [
       {
