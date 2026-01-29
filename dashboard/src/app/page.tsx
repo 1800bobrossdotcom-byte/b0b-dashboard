@@ -87,7 +87,8 @@ export default function Home() {
   const [holdings, setHoldings] = useState<WalletHoldings | null>(null);
   const [holdingsLoading, setHoldingsLoading] = useState(true);
   const [alfredStatus, setAlfredStatus] = useState<{ status: string; ageHours?: string } | null>(null);
-  const [alfredWaking, setAlfredWaking] = useState(false);
+  const [startingDiscussion, setStartingDiscussion] = useState(false);
+  const [discussionStarted, setDiscussionStarted] = useState(false);
 
   // Clock
   useEffect(() => {
@@ -170,24 +171,28 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
-  // Wake Alfred function
-  const wakeAlfred = async () => {
-    setAlfredWaking(true);
+  // Wake Alfred function - triggers a real discussion
+  const startDiscussion = async () => {
+    setStartingDiscussion(true);
+    setDiscussionStarted(false);
     try {
-      await fetch(`${BRAIN_URL}/alfred/wake`, {
+      const res = await fetch(`${BRAIN_URL}/ideate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ source: 'dashboard', reason: 'User clicked Wake Alfred button' }),
+        body: JSON.stringify({ 
+          topic: 'Current priorities and next steps',
+          agents: ['b0b', 'r0ss', 'c0m'],
+        }),
       });
-      // Refresh status after waking
-      setTimeout(async () => {
-        const res = await fetch(`${BRAIN_URL}/alfred/status`);
-        if (res.ok) setAlfredStatus(await res.json());
-        setAlfredWaking(false);
-      }, 1000);
+      if (res.ok) {
+        setDiscussionStarted(true);
+        // Reset after 3 seconds
+        setTimeout(() => setDiscussionStarted(false), 3000);
+      }
     } catch {
-      setAlfredWaking(false);
+      // Silent fail
     }
+    setStartingDiscussion(false);
   };
 
   const isOnline = brainStatus?.system?.status === 'alive';
@@ -363,29 +368,6 @@ export default function Home() {
               Learn More
             </a>
           </div>
-
-          {/* Alfred Control Panel */}
-          <div className="mt-4 p-4 rounded-xl flex items-center gap-4" style={{ backgroundColor: colors.card, border: `2px solid ${colors.amber}30` }}>
-            <span className="text-2xl">🎩</span>
-            <div className="flex-1">
-              <div className="flex items-center gap-2">
-                <p className="text-sm font-bold" style={{ color: colors.amber }}>Alfred</p>
-                <span className={`text-xs px-2 py-0.5 rounded ${alfredStatus?.status === 'active' ? 'bg-green-900/50 text-green-400' : 'bg-yellow-900/50 text-yellow-400'}`}>
-                  {alfredStatus?.status?.toUpperCase() || 'UNKNOWN'}
-                </span>
-              </div>
-              <p className="text-xs" style={{ color: colors.textMuted }}>
-                {alfredStatus?.ageHours ? `Last active ${alfredStatus.ageHours}h ago` : 'Session manager & autonomous butler'}
-              </p>
-            </div>
-            <button 
-              onClick={wakeAlfred}
-              disabled={alfredWaking}
-              className="text-xs font-mono px-4 py-2 rounded transition-all hover:scale-105 disabled:opacity-50"
-              style={{ backgroundColor: colors.amber, color: colors.black, fontWeight: 'bold' }}>
-              {alfredWaking ? '⏳ Waking...' : '🎩 Wake Alfred'}
-            </button>
-          </div>
         </div>
       </section>
 
@@ -425,9 +407,31 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xs font-mono tracking-widest" style={{ color: colors.textMuted }}>TEAM CHAT</h2>
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: colors.success }} />
-              <span className="text-xs font-mono" style={{ color: colors.success }}>LIVE</span>
+            <div className="flex items-center gap-4">
+              <button 
+                onClick={startDiscussion}
+                disabled={startingDiscussion}
+                className="text-xs font-mono px-4 py-2 rounded transition-all hover:scale-105 disabled:opacity-50 flex items-center gap-2"
+                style={{ 
+                  backgroundColor: discussionStarted ? colors.success : colors.blue, 
+                  color: colors.white, 
+                  fontWeight: 'bold' 
+                }}>
+                {startingDiscussion ? (
+                  <>
+                    <span className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    Starting...
+                  </>
+                ) : discussionStarted ? (
+                  <>✓ Discussion Started!</>
+                ) : (
+                  <>💬 Start Discussion</>
+                )}
+              </button>
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: colors.success }} />
+                <span className="text-xs font-mono" style={{ color: colors.success }}>LIVE</span>
+              </div>
             </div>
           </div>
           <div className="rounded-xl overflow-hidden" style={{ backgroundColor: colors.card, border: `1px solid ${colors.cardHover}` }}>
