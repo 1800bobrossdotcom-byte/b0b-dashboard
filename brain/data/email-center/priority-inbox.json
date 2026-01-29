@@ -1,0 +1,108 @@
+[
+  {
+    "type": "security",
+    "subject": "Security alert",
+    "from": "\"Google\" <no-reply@accounts.google.com>",
+    "preview": "[image: Google]\nApp password created to sign in to your account\n\n\n1800bobrossdotcom@gmail.com\nIf you didn't generate this password for b0b_G00GL3, someone might be using\nyour account. Check and secure your account now.\nCheck activity\n<https://accounts.google.com/AccountChooser?Email=1800bobrossdotcom@gmail.com&continue=https://myaccount.google.com/alert/nt/1769707679459?rfn%3D20%26rfnc%3D1%26eid%3D4852604977770628552%26et%3D0>\nYou can also see security activity at\nhttps://myaccount.google.com/no",
+    "receivedAt": "2026-01-29T17:27:59.000Z",
+    "addedAt": "2026-01-29T17:39:14.638Z",
+    "urgent": true
+  },
+  {
+    "type": "security",
+    "subject": "2-Step Verification turned on",
+    "from": "\"Google\" <no-reply@accounts.google.com>",
+    "preview": "[image: Google]\n2-Step Verification turned on\n\n\n1800bobrossdotcom@gmail.com\n\nYour Google Account 1800bobrossdotcom@gmail.com is now protected with\n2-Step Verification. When you sign in on a new or untrusted device, you’ll\nneed your second factor to verify your identity.\n\n*Don't get locked out!*\nYou can add a backup phone or get backup codes to use when you don’t have\nyour second factor with you.\nYou can review your 2SV settings\n<https://accounts.google.com/AccountChooser?Email=1800bobrossdotcom@",
+    "receivedAt": "2026-01-29T17:27:27.000Z",
+    "addedAt": "2026-01-29T17:39:14.637Z",
+    "urgent": true
+  },
+  {
+    "type": "security",
+    "subject": "Security alert",
+    "from": "\"Google\" <no-reply@accounts.google.com>",
+    "preview": "[image: Google]\nNew passkey added to your account\n\n\n1800bobrossdotcom@gmail.com\nIf you didn’t add a passkey, someone might be using your account. Check and\nsecure your account now.\nCheck activity\n<https://accounts.google.com/AccountChooser?Email=1800bobrossdotcom@gmail.com&continue=https://myaccount.google.com/alert/nt/1769707610037?rfn%3D364%26rfnc%3D1%26eid%3D-1219412994786753406%26et%3D0>\nYou can also see security activity at\nhttps://myaccount.google.com/notifications\nYou received this email ",
+    "receivedAt": "2026-01-29T17:26:50.000Z",
+    "addedAt": "2026-01-29T17:39:14.636Z",
+    "urgent": true
+  },
+  {
+    "type": "security",
+    "subject": "Security alert",
+    "from": "\"Google\" <no-reply@accounts.google.com>",
+    "preview": "[image: Google]\nYour password was changed\n\n\n1800bobrossdotcom@gmail.com\nThe password for your Google account 1800bobrossdotcom@gmail.com was\nchanged. If you didn't change it, you should recover your account\n<https://accounts.google.com/RecoverAccount?fpOnly=1&source=ancp&Email=1800bobrossdotcom@gmail.com&et=0>\n.\nYou can also see security activity at\nhttps://myaccount.google.com/notifications\nYou received this email to let you know about important changes to your\nGoogle Account and services.\n© 20",
+    "receivedAt": "2026-01-29T17:24:35.000Z",
+    "addedAt": "2026-01-29T17:39:14.636Z",
+    "urgent": true
+  },
+  {
+    "type": "security",
+    "subject": "Activate account for Discord Support",
+    "from": "\"Support\" <support@discord.com>",
+    "preview": "Welcome to Discord Support!\n\nWe received a support ticket submission/account creation request associated with this email address.\n\nIf you didn't perform these actions or don't recognize this request, please ignore this message.\n\nIf you did make the request, you must finalize the action by clicking the link below.\n\n\nhttps://support.discord.com/verification/email/rWpL4fLnCxSfkXhljd3DWP0jnLX0Lr4e\n\nWhen you’re signed in, you can access these websites.\n<a href=\"https://support.discord.com\">Discord Su",
+    "receivedAt": "2026-01-29T14:56:29.000Z",
+    "addedAt": "2026-01-29T17:39:14.635Z",
+    "urgent": true
+  },
+  {
+    "type": "security",
+    "subject": "New login to X from ChromeDesktop on Windows",
+    "from": "\"X\" <verify@x.com>",
+    "preview": "X\n\nWe noticed a login to your account @_b0bdev_ from a new device. Was this you?\n\nNew login\n\nLocation\n\nUnknown location\n*Location is approximate based on the login's IP address.\n\nDevice\n\n        ChromeDesktop on Windows\n\nIf this was you\nYou can ignore this message. There's no need to take any action.\n\nIf this wasn’t you\n\nComplete these steps now to protect your account.\n\nChange your password. You'll be logged out of all your active X sessions except the one you're using at this time.\n> https://t",
+    "receivedAt": "2026-01-29T06:39:56.000Z",
+    "addedAt": "2026-01-29T17:39:14.635Z",
+    "urgent": true
+  },
+  {
+    "type": "security",
+    "subject": "New login to X from ChromeDesktop on Windows",
+    "from": "\"X\" <verify@x.com>",
+    "preview": "X\n\nWe noticed a login to your account @_b0bdev_ from a new device. Was this you?\n\nNew login\n\nLocation\n\nUnknown location\n*Location is approximate based on the login's IP address.\n\nDevice\n\n        ChromeDesktop on Windows\n\nIf this was you\nYou can ignore this message. There's no need to take any action.\n\nIf this wasn’t you\n\nComplete these steps now to protect your account.\n\nChange your password. You'll be logged out of all your active X sessions except the one you're using at this time.\n> https://t",
+    "receivedAt": "2026-01-28T22:12:31.000Z",
+    "addedAt": "2026-01-29T17:39:14.634Z",
+    "urgent": true
+  },
+  {
+    "type": "security",
+    "subject": "Discord Password Changed",
+    "from": "\"Discord\" <noreply@discord.com>",
+    "preview": " What's up _b0bdev__20054,\n\nWe've channeled our psionic energy to change your Discord account password. Gonna go get a seltzer to calm down.\n\nIf this wasn't done by you, please immediately reset the password to your Discord account following the steps in this link: <https://click.discord.com/ls/click?upn=u001.a0NJ38DJJG1sulNx5wS1jjzYylRfR1dTnRDiglN63M9JpwXWMuGMijwHrVWCZECVfDzBWnMjeCD-2FBut6HfB4MQ-3D-3Db26h_C31eNFWnFNPqteAs3PY0iSoIga2qdLhqVcgpRYCxMnkT-2FAhem5s3RZxIstVLBb3uf9Vel-2B46Jcn-2BNX1u0Qs8",
+    "receivedAt": "2026-01-28T21:30:24.000Z",
+    "addedAt": "2026-01-29T17:39:14.633Z",
+    "urgent": true
+  },
+  {
+    "type": "security",
+    "subject": "Password Reset Request for Discord",
+    "from": "\"Discord\" <noreply@discord.com>",
+    "preview": " Hey _b0bdev__20054,\n\nYour Discord password can be reset by clicking the button below. If you did not request a new password, please ignore this email.\n\nReset Password: https://click.discord.com/ls/click?upn=u001.a0NJ38DJJG1sulNx5wS1jjC3-2FytEgbSbq-2FUmpxbpkbg14puiUN75BQU-2BrfLFYuAWBDJ6D4LEAihvdMvLiplQ75qTCnUiJ46817ERwORvkwV90HsCo5vB5-2B3qNs39BaBxNBl-2BmfVzlOiRLneCZ73JRDPcuisJL-2F5DbCqIw-2FdVoloEfEShhlYPP5LAzgnEiPmaxKNfp6JEOpJSDqKJAtN1MlmnTKCjMcy-2FnyE7WdbGJUI-3DOMwD_C31eNFWnFNPqteAs3PY0iSoIga2q",
+    "receivedAt": "2026-01-28T21:29:58.000Z",
+    "addedAt": "2026-01-29T17:39:14.633Z",
+    "urgent": true
+  },
+  {
+    "type": "security",
+    "subject": "Discord Account Disabled for Suspicious Activity",
+    "from": "\"Discord\" <noreply@discord.com>",
+    "preview": " Hey _b0bdev__20054,\n\nYou’re receiving this message because we detected suspicious activity on your account and believe your account may have been compromised. This can happen if your Discord password is the same password used on another website and that website was hacked, or you accidentally gave your access token to someone else.\n\nBecause of this, we've disabled your Discord account. Click below to set a new password to continue using your account. If that link is expired, check out this help",
+    "receivedAt": "2026-01-28T21:28:59.000Z",
+    "addedAt": "2026-01-29T17:39:14.633Z",
+    "urgent": true
+  },
+  {
+    "type": "trading",
+    "subject": "Your login code for Bankr",
+    "from": "no-reply@mail.privy.io",
+    "preview": " \n\nBankr\n\n**********************\nLog in to *Bankr*\n**********************\n\nYour code is\n\n493808\n\nThis code expires in 10 minutes. Do not share this code with anyone.\n\nWasn’t you? You can safely ignore",
+    "receivedAt": "2026-01-28T21:14:00.000Z",
+    "addedAt": "2026-01-29T17:39:14.631Z"
+  },
+  {
+    "type": "trading",
+    "subject": "Make your first trade in minutes",
+    "from": "\"Kalshi\" <no-reply@kalshi.com>",
+    "preview": "Kalshi ( https://kalshi.com/category/all?link_id=CIO--LINKID )\n\n*********************\nMake your first trade\n*********************\n\nStart with what you know\n\nStart trading ( https://kalshi.com/category",
+    "receivedAt": "2026-01-29T07:58:14.000Z",
+    "addedAt": "2026-01-29T17:39:14.635Z"
+  }
+]

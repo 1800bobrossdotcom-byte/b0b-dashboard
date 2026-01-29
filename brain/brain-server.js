@@ -676,6 +676,212 @@ app.get('/email/security', async (req, res) => {
   }
 });
 
+// =============================================================================
+// 📧 EMAIL COMMAND CENTER ENDPOINTS
+// =============================================================================
+
+// Get email digest - summary of everything
+app.get('/email/digest', async (req, res) => {
+  try {
+    const emailCenter = require('./agents/email-command-center.js');
+    await emailCenter.loadState();
+    const digest = await emailCenter.generateDailyDigest();
+    res.json({
+      success: true,
+      digest,
+      message: 'Daily digest generated',
+    });
+  } catch (e) {
+    res.json({
+      success: false,
+      error: e.message,
+      message: 'Email command center not available',
+    });
+  }
+});
+
+// Get priority inbox - urgent items
+app.get('/email/priority', async (req, res) => {
+  try {
+    const emailCenter = require('./agents/email-command-center.js');
+    await emailCenter.loadState();
+    const priorityInbox = await emailCenter.getPriorityInbox();
+    res.json({
+      success: true,
+      count: priorityInbox.length,
+      items: priorityInbox,
+      message: 'Priority inbox loaded',
+    });
+  } catch (e) {
+    res.json({
+      success: false,
+      error: e.message,
+      items: [],
+    });
+  }
+});
+
+// Get bills tracker
+app.get('/email/bills', async (req, res) => {
+  try {
+    const emailCenter = require('./agents/email-command-center.js');
+    await emailCenter.loadState();
+    const bills = await emailCenter.getBillsSummary();
+    res.json({
+      success: true,
+      ...bills,
+      message: 'Bills summary loaded',
+    });
+  } catch (e) {
+    res.json({
+      success: false,
+      error: e.message,
+      bills: [],
+      total: 0,
+    });
+  }
+});
+
+// Trigger email scan
+app.post('/email/scan', async (req, res) => {
+  try {
+    const emailCenter = require('./agents/email-command-center.js');
+    await emailCenter.loadState();
+    await emailCenter.processNewEmails();
+    res.json({
+      success: true,
+      message: 'Email scan completed',
+    });
+  } catch (e) {
+    res.json({
+      success: false,
+      error: e.message,
+    });
+  }
+});
+
+// Get email categories config
+app.get('/email/categories', async (req, res) => {
+  try {
+    const emailCenter = require('./agents/email-command-center.js');
+    res.json({
+      success: true,
+      categories: Object.entries(emailCenter.CATEGORIES).map(([id, cat]) => ({
+        id,
+        name: cat.name,
+        priority: cat.priority,
+        action: cat.action,
+      })),
+    });
+  } catch (e) {
+    res.json({
+      success: false,
+      error: e.message,
+      categories: [],
+    });
+  }
+});
+
+// Get daily briefing
+app.get('/email/briefing', async (req, res) => {
+  try {
+    const briefing = require('./agents/daily-briefing.js');
+    const data = await briefing.generateBriefing();
+    res.json({
+      success: true,
+      ...data,
+    });
+  } catch (e) {
+    res.json({
+      success: false,
+      error: e.message,
+    });
+  }
+});
+
+// Send daily briefing via email
+app.post('/email/briefing/send', async (req, res) => {
+  try {
+    const briefing = require('./agents/daily-briefing.js');
+    const { to } = req.body || {};
+    await briefing.sendBriefing(to);
+    res.json({
+      success: true,
+      message: 'Briefing sent',
+      to: to || process.env.GMAIL_USER,
+    });
+  } catch (e) {
+    res.json({
+      success: false,
+      error: e.message,
+    });
+  }
+});
+
+// Get pending auto-replies
+app.get('/email/auto-replies', async (req, res) => {
+  try {
+    const autoReply = require('./agents/auto-reply.js');
+    const pending = await autoReply.getPendingReplies();
+    const all = await autoReply.loadPending();
+    res.json({
+      success: true,
+      pending: pending.length,
+      total: all.length,
+      items: all.slice(-20),
+      rules: autoReply.REPLY_RULES.map(r => ({
+        id: r.id,
+        name: r.name,
+        description: r.description,
+        enabled: r.enabled !== false,
+        instant: r.instant,
+      })),
+    });
+  } catch (e) {
+    res.json({
+      success: false,
+      error: e.message,
+    });
+  }
+});
+
+// Approve pending auto-reply
+app.post('/email/auto-replies/:id/approve', async (req, res) => {
+  try {
+    const autoReply = require('./agents/auto-reply.js');
+    const reply = await autoReply.approvePendingReply(req.params.id);
+    res.json({
+      success: true,
+      message: 'Reply approved and sent',
+      reply,
+    });
+  } catch (e) {
+    res.json({
+      success: false,
+      error: e.message,
+    });
+  }
+});
+
+// Reject pending auto-reply
+app.post('/email/auto-replies/:id/reject', async (req, res) => {
+  try {
+    const autoReply = require('./agents/auto-reply.js');
+    const { reason } = req.body || {};
+    const reply = await autoReply.rejectPendingReply(req.params.id, reason);
+    res.json({
+      success: true,
+      message: 'Reply rejected',
+      reply,
+    });
+  } catch (e) {
+    res.json({
+      success: false,
+      error: e.message,
+    });
+  }
+});
+
 const POLYMARKET_DATA = path.join(DATA_DIR, 'polymarket.json');
 const DISCUSSIONS_DIR = path.join(DATA_DIR, 'discussions');
 const GIT_ACTIVITY_FILE = path.join(DATA_DIR, 'git-activity.json');

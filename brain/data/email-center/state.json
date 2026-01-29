@@ -1,0 +1,36 @@
+{
+  "processedIds": [
+    "<1JdOxLOZSj6N3azKDHvSIA@geopod-ismtpd-4>",
+    "<sz0xiU_7Ty6K5Pw_1eUryQ@geopod-ismtpd-23>",
+    "<zXgeVYi4Rl6PGTyN5iRCuQ@geopod-ismtpd-23>",
+    "<DW31Ni0-QY-6jZGaw-XF-A@geopod-ismtpd-34>",
+    "<IOWoWA7uSUGmQGnrgDyZLQ@geopod-ismtpd-9>",
+    "<0iUSooF6QuqNYfvCO7-mow@geopod-ismtpd-53>",
+    "<YAdbbacpTm6v8xKQzyOacQ@geopod-ismtpd-66>",
+    "<18.72.50011.FC98A796@x.com>",
+    "<XsNcObtJROi7RLIY6FoI0Q@geopod-ismtpd-58>",
+    "<4B.64.17392.CB00B796@x.com>",
+    "<20260129075814.b79cb7e336f0e133@cio73255.kalshi.com>",
+    "<697b751d44677_b01990519cd_sprut@zendesk.com>",
+    "<qEOJRqhWEfU10YXyieebNA@notifications.google.com>",
+    "<2def855f60b24e3baee809b0c40e0635@88570519>",
+    "<CRZxMR8zuZX7gT3GPCgUCw@notifications.google.com>",
+    "<LB8MQU8DncPlNx6HqyXMmA@notifications.google.com>",
+    "<903c75e3-fb87-c654-2016-7cf1875076eb@gmail.com>",
+    "<5baf46e3-24ef-cc9f-db10-bb74c05d5704@gmail.com>",
+    "<CA+93gaaxNFkAOJZ9KRZQj0g_d9riEPThwsYYmvBVOT3x7D0qyw@mail.gmail.com>",
+    "<N098cw7OuxmYWfpEEb_6Iw@notifications.google.com>"
+  ],
+  "stats": {
+    "totalProcessed": 20,
+    "byCategory": {
+      "trading": 2,
+      "social": 5,
+      "security": 10,
+      "bills": 1,
+      "github": 1,
+      "other": 1
+    },
+    "lastCheck": "2026-01-29T17:39:14.638Z"
+  }
+}
