@@ -56,7 +56,7 @@
       "priority": "critical",
       "task": "Update Nash swarm to use Bankr direct transaction submission",
       "owner": "r0ss",
-      "status": "pending",
+      "status": "in_progress",
       "details": "Replace API-based trading with direct onchain tx submission"
     },
     {
@@ -64,16 +64,20 @@
       "priority": "high",
       "task": "Implement direct Polymarket betting without API",
       "owner": "d0t",
-      "status": "pending",
-      "details": "Use Bankr to submit bets directly to Polymarket contracts"
+      "status": "completed",
+      "completedAt": "2026-01-29T17:30:00.000Z",
+      "details": "Use Bankr to submit bets directly to Polymarket contracts",
+      "result": "Created b0b-finance/direct-polymarket.js"
     },
     {
       "id": "tx-validation-layer",
       "priority": "critical",
       "task": "Build transaction simulation and validation layer",
       "owner": "c0m",
-      "status": "pending",
-      "details": "Simulate all txs before submission, enforce spending limits"
+      "status": "completed",
+      "completedAt": "2026-01-29T17:35:00.000Z",
+      "details": "Simulate all txs before submission, enforce spending limits",
+      "result": "Created b0b-finance/tx-validation.js with daily limits, chain restrictions, simulation"
     },
     {
       "id": "governance-contract",

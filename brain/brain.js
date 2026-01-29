@@ -694,6 +694,40 @@ class Brain {
   }
   
   // ═══════════════════════════════════════════════════════════
+  // AUTONOMOUS ACTIONS - Execute pending action items
+  // ═══════════════════════════════════════════════════════════
+  
+  async runAutonomousActions() {
+    log('🤖', 'Checking for pending action items...');
+    
+    try {
+      // Run the autonomous executor
+      const executor = require('./autonomous-executor.js');
+      // The executor runs itself when required, but we can also spawn it
+      const { execSync } = require('child_process');
+      const output = execSync('node autonomous-executor.js', { 
+        cwd: BRAIN_HOME,
+        encoding: 'utf-8',
+        timeout: 60000 // 1 minute timeout
+      });
+      
+      // Count executed actions from output
+      const executed = (output.match(/✅ Result: executed/g) || []).length;
+      if (executed > 0) {
+        log('✅', `Executed ${executed} action items autonomously`);
+      } else {
+        log('📋', 'No pending action items to execute');
+      }
+    } catch (e) {
+      if (e.message.includes('All action items executed')) {
+        log('✨', 'All action items up to date');
+      } else {
+        log('⚠️', `Action executor: ${e.message.slice(0, 100)}`);
+      }
+    }
+  }
+  
+  // ═══════════════════════════════════════════════════════════
   // BRIEFING - Daily summary
   // ═══════════════════════════════════════════════════════════
   
@@ -820,6 +854,12 @@ ${JSON.stringify(this.coordinator.getAllAgentStatus(), null, 2)}
         if (hour === 6 && now - this.lastBriefing > 3600000) {
           await this.generateBriefing();
           this.lastBriefing = now;
+        }
+        
+        // AUTONOMOUS ACTIONS - execute pending action items every 30 minutes
+        if (!this.lastActionRun || now - this.lastActionRun > 1800000) {
+          await this.runAutonomousActions();
+          this.lastActionRun = now;
         }
         
         // Check agent health and restart if needed
