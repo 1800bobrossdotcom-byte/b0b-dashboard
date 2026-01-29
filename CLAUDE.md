@@ -105,7 +105,25 @@ The swarm uses multiple AI providers for autonomous thinking. Keys stored in `br
 cd brain && node ai/provider-hub.js  # Check which providers work
 ```
 
-## 📧 Email System
+## � MANDATORY: Quality Check Before Deploy
+
+**NEVER push code without running the quality check first. See `QUALITY.md` for details.**
+
+```powershell
+# Before EVERY deploy:
+cd <project-folder>    # 0type, dashboard, or d0t/web
+npx tsc --noEmit       # TypeScript check
+npm run build          # Build check
+# If BOTH pass → commit and push
+# If EITHER fails → FIX FIRST
+
+# After push:
+railway redeploy --yes
+```
+
+This is **MANDATORY** for all agents (human and AI). The quality check caught the Suspense boundary bug (Jan 29, 2026) before it wasted Railway credits.
+
+## �📧 Email System
 
 Gmail integration for autonomous email handling:
 - `brain/agents/email-command-center.js` - Auto-categorization
