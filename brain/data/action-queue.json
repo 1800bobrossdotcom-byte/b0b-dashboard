@@ -38,5 +38,85 @@
     "fromDiscussion": "disc-1769709294208",
     "status": "queued",
     "queuedAt": "2026-01-29T17:54:54.214Z"
+  },
+  {
+    "id": "action-1769709570279-3eszzk",
+    "type": "task",
+    "agent": "r0ss",
+    "description": "Assess infrastructure for: 🔒 Security Alert: Security al",
+    "priority": "high",
+    "fromDiscussion": "disc-1769709570276",
+    "status": "queued",
+    "queuedAt": "2026-01-29T17:59:30.279Z"
+  },
+  {
+    "id": "action-1769709570280-n80sr0",
+    "type": "security_scan",
+    "agent": "c0m",
+    "description": "Security review for: 🔒 Security Alert: Security al",
+    "priority": "high",
+    "fromDiscussion": "disc-1769709570276",
+    "status": "queued",
+    "queuedAt": "2026-01-29T17:59:30.280Z"
+  },
+  {
+    "id": "action-1769709570281-ax6e3u",
+    "type": "task",
+    "agent": "d0t",
+    "description": "Data analysis for: 🔒 Security Alert: Security al",
+    "priority": "medium",
+    "fromDiscussion": "disc-1769709570276",
+    "status": "queued",
+    "queuedAt": "2026-01-29T17:59:30.281Z"
+  },
+  {
+    "id": "action-1769709570281-8v08o3",
+    "type": "task",
+    "agent": "b0b",
+    "description": "Design exploration for: 🔒 Security Alert: Security al",
+    "priority": "medium",
+    "fromDiscussion": "disc-1769709570276",
+    "status": "queued",
+    "queuedAt": "2026-01-29T17:59:30.281Z"
+  },
+  {
+    "id": "action-1769709570290-f1e4l5",
+    "type": "task",
+    "agent": "r0ss",
+    "description": "Assess infrastructure for: 📈 Trading signal from email: ",
+    "priority": "high",
+    "fromDiscussion": "disc-1769709570288",
+    "status": "queued",
+    "queuedAt": "2026-01-29T17:59:30.290Z"
+  },
+  {
+    "id": "action-1769709570290-4od2sj",
+    "type": "security_scan",
+    "agent": "c0m",
+    "description": "Security review for: 📈 Trading signal from email: ",
+    "priority": "high",
+    "fromDiscussion": "disc-1769709570288",
+    "status": "queued",
+    "queuedAt": "2026-01-29T17:59:30.290Z"
+  },
+  {
+    "id": "action-1769709570291-rw1yys",
+    "type": "task",
+    "agent": "d0t",
+    "description": "Data analysis for: 📈 Trading signal from email: ",
+    "priority": "medium",
+    "fromDiscussion": "disc-1769709570288",
+    "status": "queued",
+    "queuedAt": "2026-01-29T17:59:30.291Z"
+  },
+  {
+    "id": "action-1769709570292-4wb9vj",
+    "type": "task",
+    "agent": "b0b",
+    "description": "Design exploration for: 📈 Trading signal from email: ",
+    "priority": "medium",
+    "fromDiscussion": "disc-1769709570288",
+    "status": "queued",
+    "queuedAt": "2026-01-29T17:59:30.292Z"
   }
 ]

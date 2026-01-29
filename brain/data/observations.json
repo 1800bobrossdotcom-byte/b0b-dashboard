@@ -1,0 +1,48 @@
+{
+  "observations": [
+    {
+      "type": "security",
+      "count": 10,
+      "summary": "Security alert",
+      "timestamp": "2026-01-29T17:59:30.261Z"
+    },
+    {
+      "type": "trading",
+      "source": "email",
+      "signalStrength": 0.8,
+      "summary": "Your login code for Bankr",
+      "timestamp": "2026-01-29T17:59:30.261Z"
+    }
+  ],
+  "lastTriggers": {
+    "security_alert": 1769709570262,
+    "trading_signal": 1769709570262
+  },
+  "triggeredDiscussions": [
+    {
+      "triggerId": "security_alert",
+      "topic": "🔒 Security Alert: Security alert. What should we do?",
+      "priority": "critical",
+      "observation": {
+        "type": "security",
+        "count": 10,
+        "summary": "Security alert",
+        "timestamp": "2026-01-29T17:59:30.261Z"
+      },
+      "triggeredAt": "2026-01-29T17:59:30.262Z"
+    },
+    {
+      "triggerId": "trading_signal",
+      "topic": "📈 Trading signal from email: Your login code for Bankr. Should d0t act?",
+      "priority": "high",
+      "observation": {
+        "type": "trading",
+        "source": "email",
+        "signalStrength": 0.8,
+        "summary": "Your login code for Bankr",
+        "timestamp": "2026-01-29T17:59:30.261Z"
+      },
+      "triggeredAt": "2026-01-29T17:59:30.262Z"
+    }
+  ]
+}

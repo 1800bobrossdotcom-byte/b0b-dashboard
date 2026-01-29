@@ -2714,6 +2714,16 @@ async function heartbeat() {
   } catch (emailErr) {
     console.log(`[${new Date().toISOString()}] 📧 Email check error: ${emailErr.message}`);
   }
+  
+  // 👁️ OBSERVATION ENGINE — The swarm watches and triggers discussions
+  try {
+    const observationEngine = require('./observation-engine.js');
+    await observationEngine.loadState();
+    await observationEngine.runObservationCycle();
+    console.log(`[${new Date().toISOString()}] 👁️ Observation cycle complete`);
+  } catch (obsErr) {
+    console.log(`[${new Date().toISOString()}] 👁️ Observation error: ${obsErr.message}`);
+  }
 }
 
 // =============================================================================
@@ -3410,6 +3420,99 @@ app.get('/brain/queue', async (req, res) => {
       success: true,
       count: queue.length,
       actions: queue.slice(-20),
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// =============================================================================
+// 👁️ OBSERVATION ENGINE — The Swarm's Eyes
+// =============================================================================
+
+/**
+ * POST /brain/observe
+ * 
+ * Run an observation cycle manually.
+ * The swarm checks emails, trading, systems and triggers discussions if needed.
+ */
+app.post('/brain/observe', async (req, res) => {
+  try {
+    const observationEngine = require('./observation-engine.js');
+    await observationEngine.loadState();
+    await observationEngine.runObservationCycle();
+    
+    // Return what was observed
+    const state = require('./data/observations.json');
+    res.json({
+      success: true,
+      observations: state.observations || [],
+      triggeredDiscussions: state.triggeredDiscussions?.slice(-10) || [],
+    });
+  } catch (err) {
+    console.error('Observation error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
+ * GET /brain/triggers
+ * 
+ * Get the list of available triggers and their cooldown status.
+ */
+app.get('/brain/triggers', async (req, res) => {
+  try {
+    const observationEngine = require('./observation-engine.js');
+    const { TRIGGERS } = observationEngine;
+    
+    // Load state for cooldowns
+    let state = { lastTriggers: {} };
+    try {
+      state = require('./data/observations.json');
+    } catch {}
+    
+    const now = Date.now();
+    const triggers = Object.entries(TRIGGERS).map(([id, trigger]) => {
+      const lastTrigger = state.lastTriggers?.[id] || 0;
+      const cooldownRemaining = Math.max(0, (lastTrigger + trigger.cooldownMs) - now);
+      
+      return {
+        id,
+        source: trigger.source,
+        priority: trigger.priority,
+        cooldownMs: trigger.cooldownMs,
+        cooldownRemaining,
+        canFire: cooldownRemaining === 0,
+      };
+    });
+    
+    res.json({
+      success: true,
+      count: triggers.length,
+      triggers,
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
+ * GET /brain/observations
+ * 
+ * Get recent observations and triggered discussions.
+ */
+app.get('/brain/observations', async (req, res) => {
+  try {
+    let state = { observations: [], triggeredDiscussions: [] };
+    try {
+      state = require('./data/observations.json');
+    } catch {}
+    
+    res.json({
+      success: true,
+      observations: state.observations || [],
+      triggeredDiscussions: state.triggeredDiscussions || [],
+      lastTriggers: state.lastTriggers || {},
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
