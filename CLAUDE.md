@@ -80,6 +80,39 @@ Run `alfred briefing` to see:
 - Disk usage
 - Session notes
 
+## 🧠 AI Provider Hub
+
+The swarm uses multiple AI providers for autonomous thinking. Keys stored in `brain/.env`:
+
+```bash
+# Cost-optimized priority order:
+1. DeepSeek  (~$0.14/1M) - CHEAPEST!
+2. Groq      (FREE tier!)
+3. Kimi      (~$0.30/1M)
+4. Together  (~$0.88/1M)
+5. Anthropic (~$0.25/1M) - Claude Haiku
+6. OpenAI    (~$0.15/1M) - GPT-4o-mini
+```
+
+**Key files:**
+- `brain/ai/provider-hub.js` - Unified AI interface
+- `brain/team-discussion.js` - Multi-agent discussions
+- `brain/brain-loop.js` - Autonomous decision cycle
+- `brain/observation-engine.js` - Triggers discussions from observations
+
+**Test AI:**
+```bash
+cd brain && node ai/provider-hub.js  # Check which providers work
+```
+
+## 📧 Email System
+
+Gmail integration for autonomous email handling:
+- `brain/agents/email-command-center.js` - Auto-categorization
+- `brain/agents/gmail-agent.js` - Send/receive/threading
+- `brain/agents/daily-briefing.js` - Email summaries
+- Credentials in `brain/.env`
+
 ## The 25-Hour Day
 
 When you sleep:
@@ -96,10 +129,18 @@ When you sleep:
 - Port: 3001
 - Current: Fixing stroke preset rendering
 
+### Brain (Autonomous Core)
+- Location: `brain/`
+- Deployed: Railway (b0b-brain-production.up.railway.app)
+- Features: Team discussions, observation engine, email, trading
+- Monthly burn: $81 (Railway $10, Anthropic $50, OpenAI $20, Domain $1)
+
 ### Key Files
 - `0type/src/lib/perfect-renderer.ts` - Stroke rendering
 - `0type/src/lib/stroke-engine.ts` - 15 preset definitions
 - `0type/src/components/CreativeEngineV6.tsx` - Main canvas component
+- `brain/brain-server.js` - Main autonomous server
+- `brain/brain-loop.js` - Question → Discussion → Action cycle
 
 ---
 

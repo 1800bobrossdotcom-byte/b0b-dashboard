@@ -6,7 +6,8 @@
  * Real multi-agent discussion powered by AI.
  * Each agent has their personality and perspective.
  * 
- * AI Priority: DeepSeek (cheap!) → Anthropic → OpenAI → Grok → Fallback
+ * AI Priority (via Provider Hub):
+ * DeepSeek → Groq (FREE!) → Kimi → Together → Anthropic → OpenAI
  * 
  * @author The Swarm
  */
@@ -15,19 +16,13 @@ require('dotenv').config();
 const fs = require('fs').promises;
 const path = require('path');
 
-// Try to load AI clients (in order of preference for cost)
-let DeepSeekClient, GrokClient;
+// Load AI Provider Hub (unified interface for all AI providers)
+let getAIHub;
 try {
-  const deepseekModule = require('./ai/deepseek-client.js');
-  DeepSeekClient = deepseekModule.DeepSeekClient;
+  const providerHub = require('./ai/provider-hub.js');
+  getAIHub = providerHub.getAIHub;
 } catch (e) {
-  console.log('DeepSeek client not available');
-}
-try {
-  const grokModule = require('./ai/grok-client.js');
-  GrokClient = grokModule.GrokClient;
-} catch (e) {
-  console.log('Grok client not available');
+  console.log('AI Provider Hub not available:', e.message);
 }
 
 // ════════════════════════════════════════════════════════════════
@@ -83,91 +78,18 @@ Keep responses concise (2-4 sentences).`,
 };
 
 // ════════════════════════════════════════════════════════════════
-// AI CHAT FUNCTION — Multi-provider with cost optimization
+// AI CHAT FUNCTION — Uses Provider Hub for multi-provider support
 // ════════════════════════════════════════════════════════════════
 
 async function callAI(prompt, systemPrompt, options = {}) {
   const { temperature = 0.8, maxTokens = 300 } = options;
   
-  // 1. Try DeepSeek first (cheapest!)
-  if (DeepSeekClient) {
-    const deepseek = new DeepSeekClient();
-    if (deepseek.isConfigured()) {
-      const result = await deepseek.chat(prompt, { systemPrompt, temperature, maxTokens });
-      if (result.success) {
-        return { success: true, content: result.content, provider: 'deepseek' };
-      }
-    }
-  }
-  
-  // 2. Try Anthropic (Claude)
-  if (process.env.ANTHROPIC_API_KEY) {
-    try {
-      const response = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': process.env.ANTHROPIC_API_KEY,
-          'anthropic-version': '2023-06-01',
-        },
-        body: JSON.stringify({
-          model: 'claude-3-haiku-20240307', // Cheapest Claude
-          max_tokens: maxTokens,
-          system: systemPrompt,
-          messages: [{ role: 'user', content: prompt }],
-        }),
-      });
-      if (response.ok) {
-        const data = await response.json();
-        const content = data.content?.[0]?.text;
-        if (content) {
-          return { success: true, content, provider: 'anthropic' };
-        }
-      }
-    } catch (e) {
-      console.log(`Anthropic error: ${e.message}`);
-    }
-  }
-  
-  // 3. Try OpenAI
-  if (process.env.OPENAI_API_KEY) {
-    try {
-      const response = await fetch('https://api.openai.com/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-        },
-        body: JSON.stringify({
-          model: 'gpt-4o-mini', // Cheapest GPT-4
-          messages: [
-            { role: 'system', content: systemPrompt },
-            { role: 'user', content: prompt },
-          ],
-          temperature,
-          max_tokens: maxTokens,
-        }),
-      });
-      if (response.ok) {
-        const data = await response.json();
-        const content = data.choices?.[0]?.message?.content;
-        if (content) {
-          return { success: true, content, provider: 'openai' };
-        }
-      }
-    } catch (e) {
-      console.log(`OpenAI error: ${e.message}`);
-    }
-  }
-  
-  // 4. Try Grok
-  if (GrokClient) {
-    const grok = new GrokClient();
-    if (grok.isConfigured()) {
-      const result = await grok.chat(prompt, { systemPrompt, temperature, maxTokens });
-      if (result.success) {
-        return { success: true, content: result.content, provider: 'grok' };
-      }
+  // Use the AI Provider Hub (handles DeepSeek, Kimi, Groq, Together, Anthropic, OpenAI, etc.)
+  if (getAIHub) {
+    const hub = getAIHub();
+    const result = await hub.chat(prompt, { systemPrompt, temperature, maxTokens });
+    if (result.success) {
+      return result;
     }
   }
   
