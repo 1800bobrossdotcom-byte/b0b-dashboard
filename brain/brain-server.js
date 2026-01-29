@@ -564,12 +564,70 @@ app.get('/knowledge/actions', async (req, res) => {
       actions: actions.slice(0, parseInt(limit)),
       total: actions.length,
       byAgent: actions.reduce((acc, a) => {
-        acc[a.agent] = (acc[a.agent] || 0) + 1;
+        acc[a.agent] || (acc[a.agent] = 0);
+        acc[a.agent]++;
         return acc;
       }, {}),
     });
   } catch (e) {
     res.status(500).json({ error: e.message });
+  }
+});
+
+/**
+ * POST /signals/refresh
+ * Trigger signal collection from all senses
+ */
+app.post('/signals/refresh', async (req, res) => {
+  try {
+    const { BrainSenses } = require('./senses');
+    const senses = new BrainSenses();
+    
+    console.log('[SIGNALS] Starting signal refresh...');
+    const result = await senses.collectAllSignals();
+    
+    res.json({
+      success: true,
+      message: 'Signals refreshed',
+      signalCount: result.signalCount,
+      sentiment: result.sentiment,
+      sources: result.sources,
+      errors: result.errors,
+    });
+  } catch (e) {
+    console.error('[SIGNALS] Refresh failed:', e.message);
+    res.status(500).json({ 
+      success: false, 
+      error: e.message,
+      hint: 'Make sure brain/senses/ module is available',
+    });
+  }
+});
+
+/**
+ * GET /signals
+ * Get current cached signals
+ */
+app.get('/signals', async (req, res) => {
+  try {
+    const signalsFile = path.join(__dirname, 'brain-signals.json');
+    const data = await fs.readFile(signalsFile, 'utf8');
+    const signals = JSON.parse(data);
+    
+    res.json({
+      success: true,
+      timestamp: signals.timestamp,
+      signalCount: signals.signalCount,
+      sentiment: signals.sentiment,
+      signals: signals.signals?.slice(0, 20) || [], // Limit to 20 for response size
+      totalSignals: signals.signals?.length || 0,
+    });
+  } catch (e) {
+    res.json({ 
+      success: false, 
+      error: 'No signals cached',
+      hint: 'POST /signals/refresh to collect signals',
+    });
   }
 });
 
