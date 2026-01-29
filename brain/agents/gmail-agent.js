@@ -295,8 +295,17 @@ async function sendEmail(to, subject, body, options = {}) {
       subject,
       text: body,
       html: options.html || body.replace(/\n/g, '<br>'),
-      ...options,
     };
+    
+    // Thread support: reply in-thread if messageId provided
+    if (options.inReplyTo) {
+      mailOptions.inReplyTo = options.inReplyTo;
+      mailOptions.references = options.references || options.inReplyTo;
+    }
+    
+    // Add any other options
+    if (options.cc) mailOptions.cc = options.cc;
+    if (options.bcc) mailOptions.bcc = options.bcc;
     
     const result = await smtpTransport.sendMail(mailOptions);
     console.log(`📧 Sent email to ${to}: ${subject}`);

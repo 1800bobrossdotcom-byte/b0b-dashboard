@@ -882,6 +882,129 @@ app.post('/email/auto-replies/:id/reject', async (req, res) => {
   }
 });
 
+// =============================================================================
+// 💳 BILL PAYMENT ASSISTANT ENDPOINTS
+// =============================================================================
+
+// Get billing report
+app.get('/billing/report', async (req, res) => {
+  try {
+    const billing = require('./agents/bill-payment-assistant.js');
+    await billing.loadState();
+    const report = await billing.generateBillingReport();
+    res.json({
+      success: true,
+      ...report,
+    });
+  } catch (e) {
+    res.json({
+      success: false,
+      error: e.message,
+    });
+  }
+});
+
+// Get budget status
+app.get('/billing/budget', async (req, res) => {
+  try {
+    const billing = require('./agents/bill-payment-assistant.js');
+    await billing.loadState();
+    const budget = await billing.getBudgetStatus();
+    res.json({
+      success: true,
+      ...budget,
+    });
+  } catch (e) {
+    res.json({
+      success: false,
+      error: e.message,
+    });
+  }
+});
+
+// Get upcoming bills
+app.get('/billing/upcoming', async (req, res) => {
+  try {
+    const billing = require('./agents/bill-payment-assistant.js');
+    await billing.loadState();
+    const upcoming = await billing.checkUpcomingBills();
+    res.json({
+      success: true,
+      count: upcoming.length,
+      bills: upcoming,
+    });
+  } catch (e) {
+    res.json({
+      success: false,
+      error: e.message,
+    });
+  }
+});
+
+// Record a payment
+app.post('/billing/payment', async (req, res) => {
+  try {
+    const billing = require('./agents/bill-payment-assistant.js');
+    await billing.loadState();
+    const { billId, amount, method, notes } = req.body || {};
+    const payment = await billing.recordPayment(billId, { amount, method, notes });
+    res.json({
+      success: true,
+      payment,
+    });
+  } catch (e) {
+    res.json({
+      success: false,
+      error: e.message,
+    });
+  }
+});
+
+// Send bill reminder
+app.post('/billing/remind', async (req, res) => {
+  try {
+    const billing = require('./agents/bill-payment-assistant.js');
+    await billing.loadState();
+    const { billId, email } = req.body || {};
+    const bill = (await billing.generateBillingReport()).upcoming.find(b => b.id === billId) ||
+                 (await billing.generateBillingReport()).overdue.find(b => b.id === billId);
+    if (!bill) throw new Error('Bill not found');
+    await billing.sendBillReminder(bill, email);
+    res.json({
+      success: true,
+      message: 'Reminder sent',
+    });
+  } catch (e) {
+    res.json({
+      success: false,
+      error: e.message,
+    });
+  }
+});
+
+// Get known services
+app.get('/billing/services', async (req, res) => {
+  try {
+    const billing = require('./agents/bill-payment-assistant.js');
+    res.json({
+      success: true,
+      services: Object.entries(billing.KNOWN_SERVICES).map(([id, s]) => ({
+        id,
+        name: s.name,
+        type: s.type,
+        estimatedMonthly: s.estimatedMonthly,
+        critical: s.critical,
+        notes: s.notes,
+      })),
+    });
+  } catch (e) {
+    res.json({
+      success: false,
+      error: e.message,
+    });
+  }
+});
+
 const POLYMARKET_DATA = path.join(DATA_DIR, 'polymarket.json');
 const DISCUSSIONS_DIR = path.join(DATA_DIR, 'discussions');
 const GIT_ACTIVITY_FILE = path.join(DATA_DIR, 'git-activity.json');

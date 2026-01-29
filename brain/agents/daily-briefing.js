@@ -26,25 +26,30 @@ function generateBriefingHTML(data) {
   const priorityHTML = priorityItems.length > 0 
     ? priorityItems.slice(0, 5).map(item => `
       <tr>
-        <td style="padding: 8px; border-bottom: 1px solid #333;">
-          ${getTypeEmoji(item.type)} ${item.subject || item.vendor || 'Unknown'}
+        <td style="padding: 12px; border-bottom: 1px solid #333; word-wrap: break-word; max-width: 350px;">
+          <div style="font-size: 16px;">${getTypeEmoji(item.type)} <strong>${item.type.toUpperCase()}</strong></div>
+          <div style="color: #a0a0a0; margin-top: 4px; font-size: 14px;">${(item.subject || item.vendor || 'Unknown').slice(0, 60)}</div>
+          ${item.from ? `<div style="color: #666; font-size: 12px; margin-top: 2px;">From: ${item.from.slice(0, 40)}</div>` : ''}
         </td>
-        <td style="padding: 8px; border-bottom: 1px solid #333; color: ${getPriorityColor(item.type)};">
-          ${item.amount || item.type}
+        <td style="padding: 12px; border-bottom: 1px solid #333; color: ${getPriorityColor(item.type)}; text-align: right; white-space: nowrap;">
+          ${item.amount || ''}
         </td>
       </tr>
     `).join('')
-    : '<tr><td colspan="2" style="padding: 8px; color: #666;">No priority items 🎉</td></tr>';
+    : '<tr><td colspan="2" style="padding: 12px; color: #666;">No priority items 🎉</td></tr>';
 
   const billsHTML = bills.length > 0
     ? bills.slice(0, 5).map(bill => `
       <tr>
-        <td style="padding: 8px; border-bottom: 1px solid #333;">${bill.vendor}</td>
-        <td style="padding: 8px; border-bottom: 1px solid #333; color: #22c55e;">${bill.amount || 'TBD'}</td>
-        <td style="padding: 8px; border-bottom: 1px solid #333; color: #f59e0b;">${bill.dueDate || 'Unknown'}</td>
+        <td style="padding: 12px; border-bottom: 1px solid #333;">
+          <div style="font-weight: bold;">${bill.vendor}</div>
+          <div style="color: #666; font-size: 12px; margin-top: 2px;">${(bill.subject || '').slice(0, 50)}</div>
+        </td>
+        <td style="padding: 12px; border-bottom: 1px solid #333; color: #22c55e; font-weight: bold; font-size: 18px;">${bill.amount || 'TBD'}</td>
+        <td style="padding: 12px; border-bottom: 1px solid #333; color: #f59e0b;">${bill.dueDate || 'Unknown'}</td>
       </tr>
     `).join('')
-    : '<tr><td colspan="3" style="padding: 8px; color: #666;">No bills tracked</td></tr>';
+    : '<tr><td colspan="3" style="padding: 12px; color: #666;">No bills tracked yet</td></tr>';
 
   return `
 <!DOCTYPE html>
