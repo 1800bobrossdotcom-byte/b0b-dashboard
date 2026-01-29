@@ -2702,6 +2702,18 @@ async function heartbeat() {
   await logActivity({ type: 'heartbeat', status: 'alive' });
   
   console.log(`[${new Date().toISOString()}] 💓 Heartbeat - Brain is alive`);
+  
+  // 📧 EMAIL CHECK — Process new emails every heartbeat
+  try {
+    if (process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD) {
+      const emailCenter = require('./agents/email-command-center.js');
+      await emailCenter.loadState();
+      await emailCenter.processNewEmails();
+      console.log(`[${new Date().toISOString()}] 📧 Email check complete`);
+    }
+  } catch (emailErr) {
+    console.log(`[${new Date().toISOString()}] 📧 Email check error: ${emailErr.message}`);
+  }
 }
 
 // =============================================================================
