@@ -495,6 +495,70 @@ class Brain {
     this.lastSenses = 0;
     this.lastGitCrawl = 0;
     this.lastBriefing = 0;
+    this.lastAlfredCheck = 0;
+  }
+  
+  // Check and process Alfred wake signals
+  async checkAlfredWakeSignal() {
+    const ALFRED_WAKE_FILE = path.join(WORKSPACE, 'alfred', 'wake-signal.json');
+    
+    try {
+      if (!fs.existsSync(ALFRED_WAKE_FILE)) return;
+      
+      const signal = JSON.parse(fs.readFileSync(ALFRED_WAKE_FILE, 'utf8'));
+      
+      // Only process if not yet acknowledged
+      if (signal.acknowledged) return;
+      
+      log('🎩', `Alfred wake signal received: "${signal.command}" from ${signal.source}`);
+      
+      // Mark as acknowledged
+      signal.acknowledged = true;
+      signal.acknowledgedAt = new Date().toISOString();
+      fs.writeFileSync(ALFRED_WAKE_FILE, JSON.stringify(signal, null, 2));
+      
+      // Start Alfred
+      const started = await this.coordinator.startAgent('alfred');
+      
+      if (started) {
+        log('🎩', '"Very good, sir. I shall attend to it." — Alfred activated');
+      }
+      
+      return started;
+    } catch (e) {
+      // No signal or error, that's fine
+    }
+  }
+  
+  // Brain can autonomously decide to wake Alfred
+  async maybeWakeAlfred() {
+    const ALFRED_WAKE_FILE = path.join(WORKSPACE, 'alfred', 'wake-signal.json');
+    const alfredState = readJSON(PATHS.alfredState, {});
+    
+    // Check if Alfred has been dormant too long (> 24 hours)
+    if (alfredState.lastRun) {
+      const lastRun = new Date(alfredState.lastRun);
+      const hoursSince = (Date.now() - lastRun.getTime()) / (1000 * 60 * 60);
+      
+      // Auto-wake Alfred if dormant > 48 hours and during working hours
+      const hour = new Date().getHours();
+      if (hoursSince > 48 && hour >= 9 && hour <= 22) {
+        log('🎩', `Alfred has been dormant for ${hoursSince.toFixed(1)} hours. Auto-waking...`);
+        
+        const wakeSignal = {
+          timestamp: new Date().toISOString(),
+          command: 'ALFRED_LETS_CONTINUE',
+          source: 'brain-auto',
+          reason: `Auto-wake: ${hoursSince.toFixed(1)} hours dormant`,
+          acknowledged: false,
+        };
+        
+        fs.writeFileSync(ALFRED_WAKE_FILE, JSON.stringify(wakeSignal, null, 2));
+        return true;
+      }
+    }
+    
+    return false;
   }
   
   // Load senses on demand
@@ -515,9 +579,17 @@ class Brain {
   // HEARTBEAT - The pulse of consciousness
   // ═══════════════════════════════════════════════════════════
   
-  emitHeartbeat() {
+  async emitHeartbeat() {
     const agents = this.coordinator.getAllAgentStatus();
     const signals = readJSON(PATHS.signals, { sentiment: null });
+    
+    // Check for Alfred wake signals
+    await this.checkAlfredWakeSignal();
+    
+    // Every 10 heartbeats, check if we should auto-wake Alfred
+    if (state.heartbeats % 10 === 0) {
+      await this.maybeWakeAlfred();
+    }
     
     const pulse = {
       timestamp: new Date().toISOString(),

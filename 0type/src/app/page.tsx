@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-export default function ComingSoonPage() {
+function ComingSoonContent() {
   const searchParams = useSearchParams();
   const [mcpStatus, setMcpStatus] = useState<'checking' | 'online' | 'offline'>('checking');
   const [glitch, setGlitch] = useState(false);
@@ -182,5 +182,20 @@ export default function ComingSoonPage() {
         </div>
       </footer>
     </div>
+  );
+}
+
+export default function ComingSoonPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-6xl font-bold mb-4">0TYPE</div>
+          <div className="text-white/50">Loading...</div>
+        </div>
+      </div>
+    }>
+      <ComingSoonContent />
+    </Suspense>
   );
 }

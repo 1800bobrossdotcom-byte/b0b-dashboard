@@ -87,6 +87,26 @@ cd api && python font_generator.py
 | Creative engine | `src/components/CreativeEngineV6.tsx` |
 | Font compilation | `engine/font_engine.py` |
 
+## 🚨 MANDATORY: Quality Check Before Deploy
+
+**NEVER push without running this first:**
+
+```powershell
+# B0B Quality Check (MANDATORY)
+npx tsc --noEmit      # Must pass
+npm run build         # Must pass
+# If both pass → git add, commit, push
+# If either fails → FIX FIRST
+
+# After push:
+railway redeploy --yes
+
+# Verify deployment:
+curl.exe -s https://0type.b0b.dev | Select-String "title"
+```
+
+This caught the Suspense boundary bug (Jan 29, 2026). Always run before deploy!
+
 ## Pricing Model
 
 - Open Source: Free (must credit 0TYPE)

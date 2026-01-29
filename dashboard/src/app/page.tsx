@@ -86,6 +86,8 @@ export default function Home() {
   const [polyVolume, setPolyVolume] = useState<number>(0);
   const [holdings, setHoldings] = useState<WalletHoldings | null>(null);
   const [holdingsLoading, setHoldingsLoading] = useState(true);
+  const [alfredStatus, setAlfredStatus] = useState<{ status: string; ageHours?: string } | null>(null);
+  const [alfredWaking, setAlfredWaking] = useState(false);
 
   // Clock
   useEffect(() => {
@@ -154,6 +156,39 @@ export default function Home() {
     const interval = setInterval(fetchHoldings, 10000);
     return () => clearInterval(interval);
   }, []);
+
+  // Fetch Alfred status
+  useEffect(() => {
+    async function fetchAlfred() {
+      try {
+        const res = await fetch(`${BRAIN_URL}/alfred/status`);
+        if (res.ok) setAlfredStatus(await res.json());
+      } catch { /* offline */ }
+    }
+    fetchAlfred();
+    const interval = setInterval(fetchAlfred, 30000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Wake Alfred function
+  const wakeAlfred = async () => {
+    setAlfredWaking(true);
+    try {
+      await fetch(`${BRAIN_URL}/alfred/wake`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ source: 'dashboard', reason: 'User clicked Wake Alfred button' }),
+      });
+      // Refresh status after waking
+      setTimeout(async () => {
+        const res = await fetch(`${BRAIN_URL}/alfred/status`);
+        if (res.ok) setAlfredStatus(await res.json());
+        setAlfredWaking(false);
+      }, 1000);
+    } catch {
+      setAlfredWaking(false);
+    }
+  };
 
   const isOnline = brainStatus?.system?.status === 'alive';
 
@@ -327,6 +362,29 @@ export default function Home() {
                style={{ backgroundColor: colors.blue, color: colors.white }}>
               Learn More
             </a>
+          </div>
+
+          {/* Alfred Control Panel */}
+          <div className="mt-4 p-4 rounded-xl flex items-center gap-4" style={{ backgroundColor: colors.card, border: `2px solid ${colors.amber}30` }}>
+            <span className="text-2xl">🎩</span>
+            <div className="flex-1">
+              <div className="flex items-center gap-2">
+                <p className="text-sm font-bold" style={{ color: colors.amber }}>Alfred</p>
+                <span className={`text-xs px-2 py-0.5 rounded ${alfredStatus?.status === 'active' ? 'bg-green-900/50 text-green-400' : 'bg-yellow-900/50 text-yellow-400'}`}>
+                  {alfredStatus?.status?.toUpperCase() || 'UNKNOWN'}
+                </span>
+              </div>
+              <p className="text-xs" style={{ color: colors.textMuted }}>
+                {alfredStatus?.ageHours ? `Last active ${alfredStatus.ageHours}h ago` : 'Session manager & autonomous butler'}
+              </p>
+            </div>
+            <button 
+              onClick={wakeAlfred}
+              disabled={alfredWaking}
+              className="text-xs font-mono px-4 py-2 rounded transition-all hover:scale-105 disabled:opacity-50"
+              style={{ backgroundColor: colors.amber, color: colors.black, fontWeight: 'bold' }}>
+              {alfredWaking ? '⏳ Waking...' : '🎩 Wake Alfred'}
+            </button>
           </div>
         </div>
       </section>

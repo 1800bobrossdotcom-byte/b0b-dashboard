@@ -1,0 +1,39 @@
+{
+  "timestamp": "2026-01-29T19:59:35.692Z",
+  "url": "https://b0b.dev",
+  "screenshot": "C:\\workspace\\b0b-platform\\b0b-visual-debug\\screenshots\\b0b-prod-debug.png",
+  "page": {
+    "title": "",
+    "url": "https://b0b.dev/",
+    "elements": {
+      "buttons": 0,
+      "inputs": 0,
+      "canvases": 0,
+      "images": 0,
+      "links": 0
+    },
+    "text": {
+      "body": "Application error: a client-side exception has occurred while loading b0b.dev (see the browser console for more information)."
+    },
+    "errors": []
+  },
+  "canvas": null,
+  "consoleLogs": [
+    {
+      "type": "error",
+      "text": "Cannot read properties of undefined (reading 'toFixed')",
+      "timestamp": "2026-01-29T19:59:34.512Z"
+    }
+  ],
+  "config": {
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "timeout": 30000,
+    "waitUntil": "networkidle0",
+    "outputDir": "C:\\workspace\\b0b-platform\\b0b-visual-debug\\screenshots",
+    "url": "https://b0b.dev",
+    "name": "b0b-prod-debug"
+  }
+}

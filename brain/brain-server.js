@@ -242,6 +242,77 @@ app.get('/health', async (req, res) => {
   });
 });
 
+// ═══════════════════════════════════════════════════════════════
+// ALFRED CONTROL — "Alfred, let's continue"
+// ═══════════════════════════════════════════════════════════════
+
+const ALFRED_STATE_FILE = path.join(__dirname, '..', 'alfred', 'state.json');
+const ALFRED_WAKE_FILE = path.join(__dirname, '..', 'alfred', 'wake-signal.json');
+
+app.post('/alfred/wake', async (req, res) => {
+  const { source = 'api', reason = 'Manual wake request' } = req.body;
+  
+  try {
+    // Write wake signal that Alfred or brain can pick up
+    const wakeSignal = {
+      timestamp: new Date().toISOString(),
+      command: 'ALFRED_LETS_CONTINUE',
+      source,
+      reason,
+      acknowledged: false,
+    };
+    
+    await fs.writeFile(ALFRED_WAKE_FILE, JSON.stringify(wakeSignal, null, 2));
+    
+    await logActivity({
+      type: 'alfred_wake',
+      source,
+      reason,
+      message: '"Alfred, let\'s continue" — signal sent',
+    });
+    
+    res.json({
+      success: true,
+      message: 'Alfred, let\'s continue.',
+      signal: wakeSignal,
+      note: 'Wake signal written. Brain will pick this up on next heartbeat.',
+    });
+  } catch (e) {
+    res.status(500).json({ success: false, error: e.message });
+  }
+});
+
+app.get('/alfred/status', async (req, res) => {
+  try {
+    const stateData = await fs.readFile(ALFRED_STATE_FILE, 'utf8');
+    const state = JSON.parse(stateData);
+    
+    let wakeSignal = null;
+    try {
+      const wakeData = await fs.readFile(ALFRED_WAKE_FILE, 'utf8');
+      wakeSignal = JSON.parse(wakeData);
+    } catch { /* no wake signal */ }
+    
+    const lastRunTime = state.lastRun ? new Date(state.lastRun) : null;
+    const ageMs = lastRunTime ? Date.now() - lastRunTime.getTime() : null;
+    const ageHours = ageMs ? (ageMs / 1000 / 60 / 60).toFixed(1) : null;
+    
+    res.json({
+      status: ageMs && ageMs < 3600000 ? 'active' : 'dormant',
+      lastRun: state.lastRun,
+      ageHours,
+      sessions: state.sessions?.length || 0,
+      wakeSignal,
+      resumeInstructions: 'POST /alfred/wake to send "Alfred, let\'s continue"',
+    });
+  } catch (e) {
+    res.json({
+      status: 'unknown',
+      error: e.message,
+    });
+  }
+});
+
 // Get system status (for Labs page)
 app.get('/status', async (req, res) => {
   const state = await loadState();
