@@ -1506,6 +1506,73 @@ app.get('/finance/pulse', async (req, res) => {
   }
 });
 
+/**
+ * POST /finance/sync
+ * Sync finance state from local paper trader to brain
+ * Allows local trading to update Railway-hosted dashboard
+ */
+app.post('/finance/sync', async (req, res) => {
+  try {
+    const { type, data } = req.body;
+    
+    if (!type || !data) {
+      return res.status(400).json({ error: 'Missing type or data' });
+    }
+    
+    const financeDir = path.join(__dirname, '..', 'b0b-finance');
+    const fsSync = require('fs');
+    
+    // Ensure directory exists
+    if (!fsSync.existsSync(financeDir)) {
+      fsSync.mkdirSync(financeDir, { recursive: true });
+    }
+    
+    switch (type) {
+      case 'treasury':
+        fsSync.writeFileSync(
+          path.join(financeDir, 'treasury-state.json'),
+          JSON.stringify(data, null, 2)
+        );
+        break;
+      case 'pulse':
+        fsSync.writeFileSync(
+          path.join(financeDir, 'swarm-pulse.json'),
+          JSON.stringify(data, null, 2)
+        );
+        break;
+      case 'trade':
+        // Append to trade log
+        let trades = [];
+        const logPath = path.join(financeDir, 'trade-log.json');
+        if (fsSync.existsSync(logPath)) {
+          trades = JSON.parse(fsSync.readFileSync(logPath, 'utf-8'));
+        }
+        trades.push(data);
+        fsSync.writeFileSync(logPath, JSON.stringify(trades, null, 2));
+        break;
+      case 'cooperative':
+        fsSync.writeFileSync(
+          path.join(financeDir, 'cooperative-trader-state.json'),
+          JSON.stringify(data, null, 2)
+        );
+        break;
+      case 'nash':
+        fsSync.writeFileSync(
+          path.join(financeDir, 'nash-swarm-state.json'),
+          JSON.stringify(data, null, 2)
+        );
+        break;
+      default:
+        return res.status(400).json({ error: `Unknown type: ${type}` });
+    }
+    
+    console.log(`[FINANCE] Synced ${type} data`);
+    res.json({ success: true, type, timestamp: new Date().toISOString() });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 // =============================================================================
 // 🎮 TRADING CONTROL — Pause/Resume trading
 // =============================================================================

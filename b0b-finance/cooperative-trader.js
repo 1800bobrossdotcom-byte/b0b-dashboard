@@ -24,6 +24,9 @@ const { TradingD0t } = require('./trading-d0t');
 const fs = require('fs');
 const path = require('path');
 
+// Brain API for syncing state to Railway
+const BRAIN_API = process.env.BRAIN_API_URL || 'https://b0b-brain-production.up.railway.app';
+
 // ══════════════════════════════════════════════════════════════
 // CONFIG - Small Active Trading
 // ══════════════════════════════════════════════════════════════
@@ -83,6 +86,17 @@ class CooperativeTrader {
 
   saveState() {
     fs.writeFileSync(CONFIG.stateFile, JSON.stringify(this.state, null, 2));
+    // Sync to brain server for dashboard visibility
+    this.syncToBrain('cooperative', this.state).catch(() => {});
+  }
+
+  async syncToBrain(type, data) {
+    try {
+      await axios.post(`${BRAIN_API}/finance/sync`, { type, data });
+      this.log(`📡 Synced ${type} to brain`);
+    } catch (e) {
+      // Silent fail - brain might be down
+    }
   }
 
   log(msg) {
@@ -99,6 +113,8 @@ class CooperativeTrader {
     } catch (e) {}
     log.push(trade);
     fs.writeFileSync(CONFIG.logFile, JSON.stringify(log, null, 2));
+    // Sync trade to brain
+    this.syncToBrain('trade', trade).catch(() => {});
   }
 
   // ═══════════════════════════════════════════════════════════

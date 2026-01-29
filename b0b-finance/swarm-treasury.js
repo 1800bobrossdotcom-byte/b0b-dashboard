@@ -29,8 +29,12 @@
 
 const fs = require('fs');
 const path = require('path');
+const axios = require('axios');
 const { CooperativeTrader } = require('./cooperative-trader');
 const { BaseMemeTrader } = require('./base-meme-trader');
+
+// Brain API for syncing state to Railway dashboard
+const BRAIN_API = process.env.BRAIN_API_URL || 'https://b0b-brain-production.up.railway.app';
 
 // ══════════════════════════════════════════════════════════════
 // TREASURY CONFIG
@@ -173,6 +177,8 @@ class SwarmTreasury {
   saveState() {
     this.state.lastUpdated = new Date().toISOString();
     fs.writeFileSync(TREASURY_CONFIG.treasuryFile, JSON.stringify(this.state, null, 2));
+    // Sync treasury state to brain for Railway dashboard
+    this.syncToBrain('treasury', this.state).catch(() => {});
   }
 
   loadLearnings() {
@@ -267,8 +273,18 @@ class SwarmTreasury {
 
     try {
       fs.writeFileSync(TREASURY_CONFIG.pulseFile, JSON.stringify(pulse, null, 2));
+      // Sync pulse to brain for Railway dashboard
+      this.syncToBrain('pulse', pulse).catch(() => {});
     } catch (e) {
       // Pulse is non-critical, don't crash on write failure
+    }
+  }
+
+  async syncToBrain(type, data) {
+    try {
+      await axios.post(`${BRAIN_API}/finance/sync`, { type, data });
+    } catch (e) {
+      // Silent fail - brain might be down
     }
   }
 
