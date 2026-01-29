@@ -177,6 +177,7 @@ const CONFIG = {
   MOONBAG_FILE: path.join(__dirname, 'data', 'moonbag-positions.json'),
   TREASURY_FILE: path.join(__dirname, 'data', 'treasury-log.json'),
   POLYMARKET_FILE: path.join(__dirname, 'data', 'polymarket-positions.json'),
+  TRADING_CONTROL_FILE: path.join(__dirname, 'data', 'trading-control.json'),
   
   // ══════════════════════════════════════════════════════════════════════════
   // 💰 WAGE INCENTIVE — B0BR0SSD0TC0M Z3N DISCIPLINE
@@ -344,6 +345,53 @@ async function loadMoonbags() {
   } catch {
     return { positions: [], totalValue: 0 };
   }
+}
+
+/**
+ * Check if trading is paused
+ * Trading control file allows pausing without code changes
+ */
+async function isTradingPaused() {
+  try {
+    const data = await fs.readFile(CONFIG.TRADING_CONTROL_FILE, 'utf8');
+    const control = JSON.parse(data);
+    return control.paused === true;
+  } catch {
+    // If file doesn't exist, default to PAUSED for safety
+    return true;
+  }
+}
+
+/**
+ * Get trading control status
+ */
+async function getTradingControl() {
+  try {
+    const data = await fs.readFile(CONFIG.TRADING_CONTROL_FILE, 'utf8');
+    return JSON.parse(data);
+  } catch {
+    return {
+      paused: true,
+      reason: 'Waiting for Bankr Club membership',
+      pausedAt: new Date().toISOString(),
+      pausedBy: 'system'
+    };
+  }
+}
+
+/**
+ * Set trading pause state
+ */
+async function setTradingPaused(paused, reason = '', by = 'user') {
+  const control = {
+    paused,
+    reason: reason || (paused ? 'Manually paused' : 'Resumed'),
+    [paused ? 'pausedAt' : 'resumedAt']: new Date().toISOString(),
+    [paused ? 'pausedBy' : 'resumedBy']: by
+  };
+  await fs.writeFile(CONFIG.TRADING_CONTROL_FILE, JSON.stringify(control, null, 2));
+  console.log(`🎮 Trading ${paused ? 'PAUSED' : 'RESUMED'}: ${reason}`);
+  return control;
 }
 
 async function saveMoonbags(moonbags) {
@@ -650,6 +698,13 @@ class BankrClient {
    * Uses official @bankr/sdk with automatic x402 payment
    */
   async executeTrade(prompt, tokenData = {}) {
+    // Check if trading is paused
+    if (await isTradingPaused()) {
+      const control = await getTradingControl();
+      console.log(`   ⏸️ TRADING PAUSED: ${control.reason}`);
+      return { success: false, paused: true, reason: control.reason };
+    }
+    
     console.log(`   🏦 Bankr: "${prompt}"`);
     console.log(`   💰 Paying $0.10 USDC via x402 protocol...`);
     
@@ -1596,6 +1651,15 @@ function calculateEntrySize(walletBalanceUsd) {
 
 async function executeEntry(token, state) {
   // ════════════════════════════════════════════════════════════════════════════
+  // PAUSE CHECK — Don't trade if paused
+  // ════════════════════════════════════════════════════════════════════════════
+  if (await isTradingPaused()) {
+    const control = await getTradingControl();
+    console.log(`   ⏸️ ENTRY BLOCKED: Trading paused - ${control.reason}`);
+    return { success: false, reason: 'trading_paused', message: control.reason };
+  }
+  
+  // ════════════════════════════════════════════════════════════════════════════
   // ENTRY MUTEX — Only one entry at a time to prevent parallel burns
   // ════════════════════════════════════════════════════════════════════════════
   if (!acquireEntryLock()) {
@@ -1852,6 +1916,9 @@ function getTrailingStopLevel(pnlPercent) {
 }
 
 async function executeExit(position, currentPrice, percentage, state, exitReason = 'manual') {
+  // Check if trading is paused (allow exits even when paused for safety)
+  // Exits should always be allowed to protect capital
+  
   const exitAmount = position.tokens * percentage;
   const usdValue = exitAmount * currentPrice;
   const pnl = usdValue - (position.amount * percentage);
@@ -2732,6 +2799,13 @@ class PresenceWatcher {
    * 4. Track position for exit management
    */
   async executePolymarketTrade(opportunity) {
+    // Check if trading is paused
+    if (await isTradingPaused()) {
+      const control = await getTradingControl();
+      console.log(`   ⏸️ POLYMARKET TRADE BLOCKED: Trading paused - ${control.reason}`);
+      return { success: false, paused: true, reason: control.reason };
+    }
+    
     const fetch = (await import('node-fetch')).default;
     const { ethers } = require('ethers');
     
@@ -3222,6 +3296,10 @@ module.exports = {
   testSell,
   // 🔐 Token approval
   ensureTokenApproval,
+  // 🎮 Trading control (pause/resume)
+  isTradingPaused,
+  getTradingControl,
+  setTradingPaused,
 };
 
 /**

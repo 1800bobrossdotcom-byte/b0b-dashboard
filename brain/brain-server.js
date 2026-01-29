@@ -521,6 +521,46 @@ app.get('/live-trader/moonbags', async (req, res) => {
   }
 });
 
+// =============================================================================
+// 🎮 TRADING CONTROL — Pause/Resume trading
+// =============================================================================
+
+// Get current trading status
+app.get('/trading/status', async (req, res) => {
+  try {
+    const { getTradingControl, isTradingPaused } = require('./live-trader.js');
+    const control = await getTradingControl();
+    const paused = await isTradingPaused();
+    res.json({ ...control, paused });
+  } catch (err) {
+    res.json({ paused: true, reason: 'Unable to check status', error: err.message });
+  }
+});
+
+// Pause trading
+app.post('/trading/pause', async (req, res) => {
+  try {
+    const { setTradingPaused } = require('./live-trader.js');
+    const reason = req.body?.reason || 'Manually paused via API';
+    const result = await setTradingPaused(true, reason, 'api');
+    res.json({ success: true, ...result });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Resume trading
+app.post('/trading/resume', async (req, res) => {
+  try {
+    const { setTradingPaused } = require('./live-trader.js');
+    const reason = req.body?.reason || 'Resumed via API';
+    const result = await setTradingPaused(false, reason, 'api');
+    res.json({ success: true, ...result });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 // Polymarket positions endpoint
 app.get('/polymarket/positions', async (req, res) => {
   try {
