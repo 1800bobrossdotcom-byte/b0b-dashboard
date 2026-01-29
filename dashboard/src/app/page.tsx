@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 
 // Dynamic import for TeamChat to prevent hydration issues
 const TeamChat = dynamic(() => import('@/components/live/TeamChat'), {
@@ -375,8 +376,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Team Chat Section - TEMPORARILY DISABLED */}
-      {/* 
+      {/* Team Chat Section - Live agent discussions */}
       <section className="py-12 px-6 md:px-12 lg:px-24" style={{ backgroundColor: colors.bg }}>
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-6">
@@ -388,12 +388,13 @@ export default function Home() {
           </div>
           {mounted && (
             <div className="rounded-xl overflow-hidden" style={{ backgroundColor: colors.card, border: `1px solid ${colors.cardHover}` }}>
-              <TeamChat compact />
+              <ErrorBoundary fallback={<div className="p-8 text-center text-sm" style={{ color: colors.textMuted }}>Team chat loading...</div>}>
+                <TeamChat compact />
+              </ErrorBoundary>
             </div>
           )}
         </div>
       </section>
-      */}
 
       {/* Products List - Clean dark style */}
       <section style={{ backgroundColor: colors.surface }}>
