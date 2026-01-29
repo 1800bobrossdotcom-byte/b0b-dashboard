@@ -681,11 +681,10 @@ app.get('/holdings', async (req, res) => {
       // No more hardcoded $0 values!
       // ════════════════════════════════════════════════════════════════════════
       
-      // Known token contract addresses on Base
+      // Known token contract addresses on Base (verified from DexScreener)
       const tokenContracts = {
-        'BASEPOST': '0x41e47A847c30FF5C19C1c21E7bD88a4c67bC17F5',
-        'BNKR': '0xfA9f75A8E1B1A0C69Fa547CfE4D2B45f5A1B3a3E', // Update if different
-        '$HACHI': '0x2a73d19F4D6Aa28D8B2C8c4E9F2C7B9D3A5E1F7C', // Update if different
+        'BASEPOST': '0x7a78591cb7bC35D182Da6388192e7b31a776fb07', // Highest liquidity BASEPOST
+        'BNKR': '0x22aF33FE49fD1Fa80c7149773dDe5890D3c76F3b',     // Bankr token
       };
       
       // Fetch prices from DexScreener
@@ -708,27 +707,25 @@ app.get('/holdings', async (req, res) => {
       };
       
       // Fetch all token prices in parallel
-      const [basepostPrice, bnkrPrice, hachiPrice] = await Promise.all([
+      const [basepostPrice, bnkrPrice] = await Promise.all([
         fetchTokenPrice('BASEPOST', tokenContracts['BASEPOST']),
         fetchTokenPrice('BNKR', tokenContracts['BNKR']),
-        fetchTokenPrice('$HACHI', tokenContracts['$HACHI']),
       ]);
       
-      // Token balances (these should come from on-chain but using estimates for now)
+      // Token balances from Basescan (these are actual on-chain balances)
+      // TODO: Fetch these dynamically via multicall
       const tokenBalances = {
-        'BASEPOST': 108379802, // From Basescan
-        'BNKR': 98796,
-        '$HACHI': 141,
+        'BASEPOST': 108379802, // ~108M BASEPOST
+        'BNKR': 98796,         // ~99k BNKR
         'USDC': 4.86,
       };
       
       // Calculate USD values
       const basepostValue = tokenBalances['BASEPOST'] * basepostPrice;
       const bnkrValue = tokenBalances['BNKR'] * bnkrPrice;
-      const hachiValue = tokenBalances['$HACHI'] * hachiPrice;
       const usdcValue = tokenBalances['USDC'];
       
-      const totalTokenValue = ethValue + basepostValue + bnkrValue + hachiValue + usdcValue;
+      const totalTokenValue = ethValue + basepostValue + bnkrValue + usdcValue;
       
       const fallbackHoldings = {
         wallet: walletAddress,
@@ -736,12 +733,11 @@ app.get('/holdings', async (req, res) => {
         timestamp: new Date().toISOString(),
         source: 'onchain-fallback',
         tokens: [
+          { symbol: 'BASEPOST', name: 'BASEPOST', balance: tokenBalances['BASEPOST'].toLocaleString(), usdValue: basepostValue, price: basepostPrice, chain: 'base', type: 'memecoin' },
+          { symbol: 'BNKR', name: 'Bankr', balance: tokenBalances['BNKR'].toLocaleString(), usdValue: bnkrValue, price: bnkrPrice, chain: 'base', type: 'memecoin' },
           { symbol: 'ETH', name: 'Ethereum', balance: ethBalance.toFixed(6), usdValue: ethValue, chain: 'base', type: 'native' },
-          { symbol: 'BASEPOST', name: 'BASEPOST', balance: tokenBalances['BASEPOST'].toString(), usdValue: basepostValue, price: basepostPrice, chain: 'base', type: 'memecoin' },
-          { symbol: 'BNKR', name: 'Bankr', balance: tokenBalances['BNKR'].toString(), usdValue: bnkrValue, price: bnkrPrice, chain: 'base', type: 'memecoin' },
           { symbol: 'USDC', name: 'USD Coin', balance: tokenBalances['USDC'].toString(), usdValue: usdcValue, chain: 'base', type: 'stablecoin' },
-          { symbol: '$HACHI', name: '$HACHI', balance: tokenBalances['$HACHI'].toString(), usdValue: hachiValue, price: hachiPrice, chain: 'base', type: 'memecoin' },
-        ].filter(t => t.usdValue > 0.01).sort((a, b) => b.usdValue - a.usdValue), // Only show tokens worth > $0.01
+        ].filter(t => t.usdValue > 0.001).sort((a, b) => b.usdValue - a.usdValue),
         totalValueUSD: totalTokenValue,
         priceSource: 'dexscreener',
       };
