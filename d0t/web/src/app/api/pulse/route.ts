@@ -1,25 +1,30 @@
 /**
  * D0T.FINANCE — Pulse API
  * 
- * Live heartbeat from the swarm treasury.
+ * Fetches live heartbeat from the brain server.
  * Returns real-time deliberation state for dashboard visualization.
  */
 
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+
+// Brain API endpoint - works on Railway
+const BRAIN_API = process.env.BRAIN_API_URL || 'https://b0b-brain-production.up.railway.app';
 
 export async function GET() {
   try {
-    // Read pulse file from b0b-finance
-    const pulsePath = path.join(process.cwd(), '..', 'b0b-finance', 'swarm-pulse.json');
+    // Fetch from brain server
+    const res = await fetch(`${BRAIN_API}/finance/pulse`, {
+      next: { revalidate: 1 }, // Cache for 1 second
+    });
     
-    if (fs.existsSync(pulsePath)) {
-      const pulse = JSON.parse(fs.readFileSync(pulsePath, 'utf-8'));
+    if (res.ok) {
+      const pulse = await res.json();
       return NextResponse.json(pulse);
     }
     
-    // Return default idle state if no pulse file
+    throw new Error('Brain API unavailable');
+  } catch (error) {
+    // Return default offline state if brain unavailable
     return NextResponse.json({
       timestamp: new Date().toISOString(),
       cycle: 0,
@@ -36,14 +41,7 @@ export async function GET() {
       consensus: 0,
       blessing: false,
       decision: null,
-      treasury: { total: 0, todayPnL: 0 },
+      treasury: { total: 300, todayPnL: 0 },
     });
-    
-  } catch (error) {
-    console.error('Pulse API error:', error);
-    return NextResponse.json(
-      { error: 'Failed to read pulse', phase: 'ERROR' },
-      { status: 500 }
-    );
   }
 }

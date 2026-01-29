@@ -1372,6 +1372,141 @@ app.get('/live-trader/moonbags', async (req, res) => {
 });
 
 // =============================================================================
+// 💰 D0T FINANCE API — Combined treasury data for d0t.b0b.dev
+// =============================================================================
+
+/**
+ * GET /finance/treasury
+ * Main treasury endpoint for d0t dashboard
+ */
+app.get('/finance/treasury', async (req, res) => {
+  try {
+    const financeDir = path.join(__dirname, '..', 'b0b-finance');
+    
+    // Load treasury state
+    let treasuryState = null;
+    try {
+      const statePath = path.join(financeDir, 'treasury-state.json');
+      if (require('fs').existsSync(statePath)) {
+        treasuryState = JSON.parse(require('fs').readFileSync(statePath, 'utf-8'));
+      }
+    } catch {}
+    
+    // Load cooperative trader state
+    let coopState = null;
+    try {
+      const coopPath = path.join(financeDir, 'cooperative-trader-state.json');
+      if (require('fs').existsSync(coopPath)) {
+        coopState = JSON.parse(require('fs').readFileSync(coopPath, 'utf-8'));
+      }
+    } catch {}
+    
+    // Load trade log
+    let trades = [];
+    try {
+      const logPath = path.join(financeDir, 'trade-log.json');
+      if (require('fs').existsSync(logPath)) {
+        trades = JSON.parse(require('fs').readFileSync(logPath, 'utf-8'));
+      }
+    } catch {}
+    
+    // Load nash swarm state
+    let nashState = null;
+    try {
+      const nashPath = path.join(financeDir, 'nash-swarm-state.json');
+      if (require('fs').existsSync(nashPath)) {
+        nashState = JSON.parse(require('fs').readFileSync(nashPath, 'utf-8'));
+      }
+    } catch {}
+    
+    // Build response
+    const treasury = treasuryState || { balances: { total: 300 }, performance: {} };
+    const today = new Date().toISOString().split('T')[0];
+    
+    res.json({
+      timestamp: new Date().toISOString(),
+      treasury: {
+        total: treasury.balances?.total || 300,
+        allocation: {
+          polymarket: treasury.balances?.polymarket_agent || 90,
+          baseMeme: treasury.balances?.base_meme_agent || 75,
+          bluechips: treasury.balances?.bluechip_accumulator || 45,
+          treasury: treasury.balances?.treasury_reserve || 45,
+          savings: treasury.balances?.savings_staking || 30,
+          emergency: treasury.balances?.emergency_fund || 15,
+        },
+      },
+      performance: {
+        totalPnL: treasury.performance?.totalPnL || 0,
+        wins: treasury.performance?.winCount || nashState?.wins || 0,
+        losses: treasury.performance?.lossCount || nashState?.losses || 0,
+        winRate: nashState?.totalTrades > 0 ? (nashState.wins / nashState.totalTrades * 100) : 0,
+        totalTrades: nashState?.totalTrades || 0,
+      },
+      today: treasury.daily || { pnl: 0, trades: 0, wins: 0, losses: 0 },
+      session: coopState ? {
+        started: coopState.sessionStarted,
+        trades: coopState.tradesThisSession,
+        pnl: coopState.sessionPnL,
+        positions: coopState.positions?.length || 0,
+      } : null,
+      recentTrades: trades.slice(-10).reverse(),
+      opportunities: coopState?.opportunities?.slice(0, 5)?.map(o => ({
+        market: o.market?.question,
+        score: o.score,
+        price: o.analysis?.price,
+        liquidity: o.analysis?.liquidity,
+      })) || [],
+      bluechipHoldings: treasury.agentStats?.bluechip?.holdings || {},
+      status: {
+        connected: true,
+        mode: process.env.DOT_TRADING_MODE || 'paper',
+        lastUpdate: treasury.lastUpdated || new Date().toISOString(),
+      },
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/**
+ * GET /finance/pulse
+ * Real-time swarm pulse for live terminal
+ */
+app.get('/finance/pulse', async (req, res) => {
+  try {
+    const pulsePath = path.join(__dirname, '..', 'b0b-finance', 'swarm-pulse.json');
+    
+    if (require('fs').existsSync(pulsePath)) {
+      const pulse = JSON.parse(require('fs').readFileSync(pulsePath, 'utf-8'));
+      return res.json(pulse);
+    }
+    
+    // Default offline state
+    res.json({
+      timestamp: new Date().toISOString(),
+      cycle: 0,
+      phase: 'OFFLINE',
+      market: null,
+      opportunity: null,
+      agents: {
+        BULL: { emoji: '🐂', vote: null, confidence: null, reasoning: null },
+        BEAR: { emoji: '🐻', vote: null, confidence: null, reasoning: null },
+        QUANT: { emoji: '📊', vote: null, confidence: null, reasoning: null },
+        RISK: { emoji: '🛡️', vote: null, confidence: null, reasoning: null },
+        ARBITER: { emoji: '⚖️', vote: null, confidence: null, reasoning: null },
+      },
+      consensus: 0,
+      blessing: false,
+      decision: null,
+      treasury: { total: 300, todayPnL: 0 },
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message, phase: 'ERROR' });
+  }
+});
+
+// =============================================================================
 // 🎮 TRADING CONTROL — Pause/Resume trading
 // =============================================================================
 
