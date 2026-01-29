@@ -641,12 +641,39 @@ app.get('/email/signals', async (req, res) => {
 
 // Get email configuration status
 app.get('/email/status', async (req, res) => {
+  // Load security stats if available
+  let securityStats = null;
+  try {
+    const emailSecurity = require('./agents/email-security.js');
+    securityStats = await emailSecurity.getStats();
+  } catch {}
+  
   res.json({
     configured: !!process.env.GMAIL_USER && !!process.env.GMAIL_APP_PASSWORD,
     user: process.env.GMAIL_USER ? process.env.GMAIL_USER.replace(/(.{3}).*(@.*)/, '$1***$2') : null,
     agentLoaded: !!gmailAgent,
     triggers: gmailAgent?.TRIGGERS?.map(t => ({ name: t.name, priority: t.priority, action: t.action })) || [],
+    security: securityStats,
   });
+});
+
+// Get email security stats
+app.get('/email/security', async (req, res) => {
+  try {
+    const emailSecurity = require('./agents/email-security.js');
+    const stats = await emailSecurity.getStats();
+    res.json({
+      ...stats,
+      configured: true,
+      message: 'Security layer active',
+    });
+  } catch (e) {
+    res.json({
+      configured: false,
+      error: e.message,
+      message: 'Security layer not available',
+    });
+  }
 });
 
 const POLYMARKET_DATA = path.join(DATA_DIR, 'polymarket.json');
