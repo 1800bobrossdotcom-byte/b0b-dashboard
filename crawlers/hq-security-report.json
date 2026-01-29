@@ -1,0 +1,642 @@
+{
+  "timestamp": "2026-01-29T23:22:08.606Z",
+  "stats": {
+    "critical": 70,
+    "high": 6,
+    "medium": 7,
+    "low": 2,
+    "info": 5
+  },
+  "findings": [
+    {
+      "timestamp": "2026-01-29T23:22:03.308Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in 0type\\engine\\api.py",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.312Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in 0type\\package-lock.json",
+      "details": "514 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.313Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in 0type\\src\\app\\api\\fonts\\route.ts",
+      "details": "7 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.319Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in 0type\\src\\components\\CreativeEngine.tsx",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.320Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in 0type\\src\\components\\CreativeEngineV2.tsx",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.321Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in 0type\\src\\components\\CreativeEngineV3.tsx",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.323Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in 0type\\src\\components\\CreativeEngineV4.tsx",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.323Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in 0type\\src\\components\\CreativeEngineV5.tsx",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.325Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in 0type\\src\\components\\CreativeEngineV6.tsx",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.327Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in 0type\\src\\components\\LiveStudio.tsx",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.328Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in 0type\\src\\components\\SketchpadStudio.tsx",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.330Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in 0type\\src\\lib\\contracts.ts",
+      "details": "2 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.330Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in 0type\\src\\lib\\crawler.ts",
+      "details": "3 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.339Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in alfred\\package-lock.json",
+      "details": "118 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.342Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in b0b-app\\package-lock.json",
+      "details": "202 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.346Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in b0b-control\\package-lock.json",
+      "details": "326 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.347Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in b0b-finance\\bankr-agent.js",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.350Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in b0b-finance\\cooperative-trader-state.json",
+      "details": "87 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.351Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in b0b-finance\\direct-polymarket.js",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.353Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in b0b-finance\\package-lock.json",
+      "details": "68 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.358Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in b0b-finance\\tx-validation.js",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.361Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in b0b-visual-debug\\package-lock.json",
+      "details": "216 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.366Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in brain\\autonomous-executor.js",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.371Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in brain\\brain-server.js",
+      "details": "5 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.372Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in brain\\brain-signals.json",
+      "details": "23 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.374Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in brain\\clawdbody\\check-ralph-status.sh",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.378Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in brain\\clawdbody\\package-lock.json",
+      "details": "796 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.387Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in brain\\clawdbody\\scripts\\update-ralph.ts",
+      "details": "2 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.389Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in brain\\clawdbody\\src\\app\\api\\integrations\\communication\\route.ts",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.395Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in brain\\clawdbody\\src\\app\\api\\setup\\update-ralph\\route.ts",
+      "details": "2 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.400Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Access Key found in brain\\clawdbody\\src\\app\\select-vm\\page.tsx",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.403Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in brain\\clawdbody\\src\\components\\landing-page.tsx",
+      "details": "2 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.412Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in brain\\clawdbody\\update-ralph.sh",
+      "details": "3 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.413Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in brain\\config\\partners.js",
+      "details": "2 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.416Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in brain\\data\\content.json",
+      "details": "12 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.417Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in brain\\data\\discussions\\2026-01-28-bankr-debug.json",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.419Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in brain\\data\\discussions\\2026-01-28-next-steps.json",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.420Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in brain\\data\\discussions\\2026-01-28-site-audit.json",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.428Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in brain\\data\\email-center\\priority-inbox.json",
+      "details": "5 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.430Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in brain\\data\\learnings\\2026-01-28-site-infrastructure.json",
+      "details": "2 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.430Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in brain\\data\\learnings\\2026-01-28-trading-architecture.json",
+      "details": "6 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.439Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in brain\\live-trader.js",
+      "details": "14 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.446Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in brain\\package-lock.json",
+      "details": "1296 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.449Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in brain\\rss\\bankr-reader.js",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.454Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in brain\\test-bankr.js",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.459Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in crawlers\\logo-crawler.js",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.461Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in crawlers\\package-lock.json",
+      "details": "174 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.462Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in crawlers\\solana-crawler.js",
+      "details": "2 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.470Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in d0t\\package-lock.json",
+      "details": "228 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.474Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in d0t\\web\\package-lock.json",
+      "details": "194 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.478Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in d0t-vscode\\package-lock.json",
+      "details": "2 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.482Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in dashboard\\package-lock.json",
+      "details": "966 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.486Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in dashboard\\src\\components\\CCTVWindow.tsx",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.492Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in dashboard\\src\\components\\live\\WalletDashboard.tsx",
+      "details": "2 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.513Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in research-library\\repos\\anthropic-quickstarts\\browser-use-demo\\tests\\conftest.py",
+      "details": "2 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.534Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in research-library\\repos\\anthropic-quickstarts\\customer-support-agent\\package-lock.json",
+      "details": "1374 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.539Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in research-library\\repos\\anthropic-quickstarts\\financial-data-analyst\\components\\ui\\chart.tsx",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.545Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in research-library\\repos\\anthropic-quickstarts\\financial-data-analyst\\package-lock.json",
+      "details": "1044 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.547Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in research-library\\repos\\autohedge\\api\\api.py",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.547Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential Bearer Token found in research-library\\repos\\autohedge\\api\\api.py",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.554Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in research-library\\repos\\polymarket-agents\\agents\\polymarket\\polymarket.py",
+      "details": "14 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.559Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in research-library\\repos\\polymarket-mcp\\install.sh",
+      "details": "2 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.564Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in research-library\\repos\\polymarket-mcp\\src\\polymarket_mcp\\config.py",
+      "details": "5 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.572Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in research-library\\repos\\polymarket-mcp\\test-docker.sh",
+      "details": "2 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.573Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in research-library\\repos\\polymarket-mcp\\tests\\test_e2e.py",
+      "details": "2 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.575Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in research-library\\repos\\polymarket-mcp\\tests\\test_portfolio_tools.py",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.576Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in research-library\\repos\\polymarket-mcp\\tests\\test_websocket.py",
+      "details": "4 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.576Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in research-library\\repos\\polymarket-mcp\\TEST_EXAMPLES.py",
+      "details": "1 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.577Z",
+      "severity": "critical",
+      "category": "SECRETS",
+      "message": "Potential AWS Secret Key found in research-library\\repos\\polymarket-mcp\\test_mcp_connection.py",
+      "details": "2 occurrence(s) - REVIEW IMMEDIATELY"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:03.581Z",
+      "severity": "info",
+      "category": "SECRETS",
+      "message": "brain/.env exists and is properly gitignored",
+      "details": null
+    },
+    {
+      "timestamp": "2026-01-29T23:22:04.919Z",
+      "severity": "info",
+      "category": "ANTIVIRUS",
+      "message": "Windows Defender is enabled with real-time protection",
+      "details": null
+    },
+    {
+      "timestamp": "2026-01-29T23:22:07.509Z",
+      "severity": "info",
+      "category": "FIREWALL",
+      "message": "Windows Firewall is enabled",
+      "details": null
+    },
+    {
+      "timestamp": "2026-01-29T23:22:07.567Z",
+      "severity": "medium",
+      "category": "NETWORK",
+      "message": "12 services listening on all interfaces",
+      "details": "Consider binding to localhost only for dev services"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:08.543Z",
+      "severity": "info",
+      "category": "UPDATES",
+      "message": "Last Windows update: 15 days ago",
+      "details": null
+    },
+    {
+      "timestamp": "2026-01-29T23:22:08.544Z",
+      "severity": "high",
+      "category": "CREDENTIALS",
+      "message": "Potential secret files found in Downloads",
+      "details": "Files: Autism_Capital____-_If_you_want_to_understand_what_s_going_on_with_AI_watch_this._It_s_5_..._Tl4xPB (1).mp4, Autism_Capital____-_If_you_want_to_understand_what_s_going_on_with_AI_watch_this._It_s_5_..._Tl4xPB.mp4"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:08.603Z",
+      "severity": "info",
+      "category": "BROWSER",
+      "message": "Chrome has 7 extensions installed",
+      "details": "Review extensions for suspicious ones: chrome://extensions"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:08.603Z",
+      "severity": "medium",
+      "category": "BROWSER",
+      "message": "Reminder: Browser password sync can expose credentials",
+      "details": "Consider using a dedicated password manager like 1Password or Bitwarden"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:08.604Z",
+      "severity": "critical",
+      "category": "API_KEYS",
+      "message": "Never store API keys on Desktop/Documents",
+      "details": "Move to encrypted vault or environment variables only"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:08.604Z",
+      "severity": "high",
+      "category": "API_KEYS",
+      "message": "Use Railway/Vercel environment variables for production",
+      "details": "API keys should only exist in: 1) Railway env vars, 2) Local .env (gitignored)"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:08.604Z",
+      "severity": "high",
+      "category": "API_KEYS",
+      "message": "Enable 2FA on all API provider accounts",
+      "details": "AgentMail, OpenAI, Anthropic, GitHub - all need 2FA"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:08.604Z",
+      "severity": "medium",
+      "category": "API_KEYS",
+      "message": "Rotate API keys quarterly",
+      "details": "Set calendar reminder to rotate keys every 90 days"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:08.604Z",
+      "severity": "medium",
+      "category": "API_KEYS",
+      "message": "Use scoped/limited API keys when possible",
+      "details": "Create read-only keys for monitoring, write keys only where needed"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:08.604Z",
+      "severity": "low",
+      "category": "API_KEYS",
+      "message": "Monitor API usage for anomalies",
+      "details": "Check dashboards weekly for unexpected usage spikes"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:08.604Z",
+      "severity": "high",
+      "category": "HARDENING",
+      "message": "Enable BitLocker full-disk encryption",
+      "details": "Settings > Privacy & Security > Device encryption"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:08.605Z",
+      "severity": "high",
+      "category": "HARDENING",
+      "message": "Use Windows Hello or hardware security key",
+      "details": "Stronger than password alone"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:08.605Z",
+      "severity": "high",
+      "category": "HARDENING",
+      "message": "Enable Controlled Folder Access",
+      "details": "Windows Security > Ransomware protection"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:08.605Z",
+      "severity": "medium",
+      "category": "HARDENING",
+      "message": "Disable Remote Desktop if not needed",
+      "details": "Settings > System > Remote Desktop > Off"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:08.605Z",
+      "severity": "medium",
+      "category": "HARDENING",
+      "message": "Use a VPN on public networks",
+      "details": "Consider Mullvad, ProtonVPN, or Tailscale"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:08.605Z",
+      "severity": "medium",
+      "category": "HARDENING",
+      "message": "Enable Windows Sandbox for testing",
+      "details": "Run untrusted code in isolated environment"
+    },
+    {
+      "timestamp": "2026-01-29T23:22:08.605Z",
+      "severity": "low",
+      "category": "HARDENING",
+      "message": "Regular backups with encryption",
+      "details": "Use Windows Backup or Backblaze"
+    }
+  ]
+}

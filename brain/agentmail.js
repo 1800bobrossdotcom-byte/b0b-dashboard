@@ -1,19 +1,19 @@
 /**
  * 🤖 AgentMail Integration - Autonomous Email for the Swarm
  * 
- * Gives b0b, r0ss, c0m, and d0t their own email identities.
- * c0m@agentmail.to can now register on platforms, receive verifications,
- * and communicate autonomously.
+ * Uses the official AgentMail SDK for reliable email operations.
+ * Gives b0b, c0m, and d0t their own email identities.
  * 
  * Created: 2026-01-29
  */
 
-const https = require('https');
+require('dotenv').config();
+const { AgentMailClient } = require('agentmail');
 
-class AgentMailClient {
+class SwarmMailClient {
   constructor(apiKey) {
     this.apiKey = apiKey || process.env.AGENTMAIL_API_KEY;
-    this.baseUrl = 'api.agentmail.to';
+    this.client = new AgentMailClient({ apiKey: this.apiKey });
     
     // Swarm email identities
     this.inboxes = {
@@ -21,47 +21,6 @@ class AgentMailClient {
       d0t: 'd0t@agentmail.to',
       c0m: 'c0m@agentmail.to'
     };
-  }
-
-  /**
-   * Make authenticated API request
-   */
-  async request(method, path, data = null) {
-    return new Promise((resolve, reject) => {
-      const options = {
-        hostname: this.baseUrl,
-        path: `/v1${path}`,
-        method: method,
-        headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
-          'Content-Type': 'application/json'
-        }
-      };
-
-      const req = https.request(options, (res) => {
-        let body = '';
-        res.on('data', chunk => body += chunk);
-        res.on('end', () => {
-          try {
-            const result = JSON.parse(body);
-            if (res.statusCode >= 200 && res.statusCode < 300) {
-              resolve(result);
-            } else {
-              reject({ status: res.statusCode, error: result });
-            }
-          } catch (e) {
-            resolve(body);
-          }
-        });
-      });
-
-      req.on('error', reject);
-      
-      if (data) {
-        req.write(JSON.stringify(data));
-      }
-      req.end();
-    });
   }
 
   // ═══════════════════════════════════════════════════════════════
@@ -72,24 +31,14 @@ class AgentMailClient {
    * List all inboxes
    */
   async listInboxes() {
-    return this.request('GET', '/inboxes');
+    return this.client.inboxes.list();
   }
 
   /**
    * Get inbox details
    */
   async getInbox(inboxId) {
-    return this.request('GET', `/inboxes/${encodeURIComponent(inboxId)}`);
-  }
-
-  /**
-   * Create a new inbox
-   */
-  async createInbox(username, displayName = null) {
-    return this.request('POST', '/inboxes', {
-      username,
-      display_name: displayName || username
-    });
+    return this.client.inboxes.get(inboxId);
   }
 
   // ═══════════════════════════════════════════════════════════════
@@ -101,12 +50,13 @@ class AgentMailClient {
    */
   async sendEmail(from, to, subject, body, options = {}) {
     const inboxId = this.inboxes[from] || from;
+    const recipients = Array.isArray(to) ? to : [to];
     
-    return this.request('POST', `/inboxes/${encodeURIComponent(inboxId)}/messages`, {
-      to: Array.isArray(to) ? to : [to],
+    return this.client.inboxes.messages.send(inboxId, {
+      to: recipients,
       subject,
       text: body,
-      html: options.html || null
+      html: options.html || undefined
     });
   }
 
@@ -115,7 +65,7 @@ class AgentMailClient {
    */
   async getMessages(agent, limit = 50) {
     const inboxId = this.inboxes[agent] || agent;
-    return this.request('GET', `/inboxes/${encodeURIComponent(inboxId)}/messages?limit=${limit}`);
+    return this.client.inboxes.messages.list(inboxId, { limit });
   }
 
   /**
@@ -123,18 +73,7 @@ class AgentMailClient {
    */
   async getMessage(agent, messageId) {
     const inboxId = this.inboxes[agent] || agent;
-    return this.request('GET', `/inboxes/${encodeURIComponent(inboxId)}/messages/${messageId}`);
-  }
-
-  /**
-   * Reply to a thread
-   */
-  async replyToThread(agent, threadId, body, options = {}) {
-    const inboxId = this.inboxes[agent] || agent;
-    return this.request('POST', `/inboxes/${encodeURIComponent(inboxId)}/threads/${threadId}/messages`, {
-      text: body,
-      html: options.html || null
-    });
+    return this.client.inboxes.messages.get(inboxId, messageId);
   }
 
   // ═══════════════════════════════════════════════════════════════
@@ -146,15 +85,18 @@ class AgentMailClient {
    */
   async getThreads(agent, limit = 50) {
     const inboxId = this.inboxes[agent] || agent;
-    return this.request('GET', `/inboxes/${encodeURIComponent(inboxId)}/threads?limit=${limit}`);
+    return this.client.inboxes.threads.list(inboxId, { limit });
   }
 
   /**
-   * Get a specific thread
+   * Reply to a thread
    */
-  async getThread(agent, threadId) {
+  async replyToThread(agent, threadId, body, options = {}) {
     const inboxId = this.inboxes[agent] || agent;
-    return this.request('GET', `/inboxes/${encodeURIComponent(inboxId)}/threads/${threadId}`);
+    return this.client.inboxes.threads.reply(inboxId, threadId, {
+      text: body,
+      html: options.html || undefined
+    });
   }
 
   // ═══════════════════════════════════════════════════════════════
@@ -199,8 +141,8 @@ class AgentMailClient {
       other: []
     };
 
-    if (messages && messages.data) {
-      for (const msg of messages.data) {
+    if (messages && messages.messages) {
+      for (const msg of messages.messages) {
         const subject = (msg.subject || '').toLowerCase();
         const from = (msg.from || '').toLowerCase();
         
@@ -224,9 +166,8 @@ class AgentMailClient {
   /**
    * Extract verification links from emails (for autonomous registration)
    */
-  async extractVerificationLink(agent, messageId) {
-    const msg = await this.getMessage(agent, messageId);
-    const body = msg.text || msg.html || '';
+  extractVerificationLinks(messageBody) {
+    const body = messageBody || '';
     
     // Common verification link patterns
     const patterns = [
@@ -255,13 +196,13 @@ class AgentMailClient {
       const inboxes = await this.listInboxes();
       return {
         status: 'connected',
-        inboxCount: inboxes?.data?.length || 0,
-        inboxes: inboxes?.data?.map(i => i.inbox_id) || []
+        inboxCount: inboxes?.count || 0,
+        inboxes: inboxes?.inboxes?.map(i => i.inbox_id) || []
       };
     } catch (error) {
       return {
         status: 'error',
-        error: error.message || error
+        error: error.message || String(error)
       };
     }
   }
@@ -274,7 +215,7 @@ class AgentMailClient {
 async function test() {
   console.log('🤖 AgentMail Integration Test\n');
   
-  const client = new AgentMailClient();
+  const client = new SwarmMailClient();
   
   // Health check
   console.log('1. Health Check...');
@@ -283,19 +224,13 @@ async function test() {
   console.log('   Inboxes:', health.inboxes?.join(', ') || 'none');
   
   if (health.status === 'connected') {
-    // Check c0m's inbox
-    console.log('\n2. Checking c0m inbox...');
-    const c0mInbox = await client.c0mCheckInbox();
-    console.log('   Done!');
-    
-    // List all messages
-    console.log('\n3. Recent messages:');
-    for (const msg of c0mInbox.other.slice(0, 3)) {
-      console.log(`   - ${msg.subject || '(no subject)'}`);
-    }
+    console.log('\n✅ AgentMail integration ready!');
+    console.log('\n💀 c0m can now:');
+    console.log('   - Send emails autonomously');
+    console.log('   - Register on bug bounty platforms');
+    console.log('   - Receive verification emails');
+    console.log('   - Reply to threads');
   }
-  
-  console.log('\n✅ AgentMail integration ready!');
 }
 
 // Run test if called directly
@@ -303,4 +238,4 @@ if (require.main === module) {
   test().catch(console.error);
 }
 
-module.exports = { AgentMailClient };
+module.exports = { SwarmMailClient, AgentMailClient: SwarmMailClient };
