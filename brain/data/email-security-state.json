@@ -1,0 +1,18 @@
+{
+  "emailsSentThisHour": 1,
+  "emailsSentToday": 1,
+  "lastEmailTime": 1769711017655,
+  "hourStart": 1769711015944,
+  "dayStart": 1769711015944,
+  "blockedAttempts": [
+    {
+      "timestamp": "2026-01-29T18:23:39.068Z",
+      "to": "d0t@example.com",
+      "subject": "Profit Target Alert",
+      "errors": [
+        "❌ Too fast. Wait 29s"
+      ]
+    }
+  ],
+  "approvalQueue": []
+}

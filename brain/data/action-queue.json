@@ -198,5 +198,255 @@
     "fromDiscussion": "disc-1769710483006",
     "status": "queued",
     "queuedAt": "2026-01-29T18:14:43.029Z"
+  },
+  {
+    "id": "action-1769710692782-ktdk76",
+    "type": "task",
+    "agent": "r0ss",
+    "description": "Deploy email system to Railway with env vars",
+    "priority": "high",
+    "fromDiscussion": "disc-1769710677706",
+    "status": "queued",
+    "queuedAt": "2026-01-29T18:18:12.782Z"
+  },
+  {
+    "id": "action-1769710692783-xssov2",
+    "type": "task",
+    "agent": "r0ss",
+    "description": "Add email check to brain heartbeat (every 5 min)",
+    "priority": "high",
+    "fromDiscussion": "disc-1769710677706",
+    "status": "queued",
+    "queuedAt": "2026-01-29T18:18:12.783Z"
+  },
+  {
+    "id": "action-1769710692784-o4aq6e",
+    "type": "task",
+    "agent": "d0t",
+    "description": "Integrate email signals into trading decisions",
+    "priority": "medium",
+    "fromDiscussion": "disc-1769710677706",
+    "status": "queued",
+    "queuedAt": "2026-01-29T18:18:12.784Z"
+  },
+  {
+    "id": "action-1769710692784-m9lb2a",
+    "type": "task",
+    "agent": "c0m",
+    "description": "Investigate 10 security alerts from inbox",
+    "priority": "high",
+    "fromDiscussion": "disc-1769710677706",
+    "status": "queued",
+    "queuedAt": "2026-01-29T18:18:12.784Z"
+  },
+  {
+    "id": "action-1769710692785-7o9ftm",
+    "type": "task",
+    "agent": "b0b",
+    "description": "Design LABS product page for email agent",
+    "priority": "medium",
+    "fromDiscussion": "disc-1769710677706",
+    "status": "queued",
+    "queuedAt": "2026-01-29T18:18:12.785Z"
+  },
+  {
+    "id": "action-1769710692786-qyjwpb",
+    "type": "task",
+    "agent": "d0t",
+    "description": "Hit $81/mo profit target for self-sustainability",
+    "priority": "critical",
+    "fromDiscussion": "disc-1769710677706",
+    "status": "queued",
+    "queuedAt": "2026-01-29T18:18:12.786Z"
+  },
+  {
+    "id": "action-1769710811390-wlbljr",
+    "type": "task",
+    "agent": "r0ss",
+    "description": "Deploy email system to Railway with env vars",
+    "priority": "high",
+    "fromDiscussion": "disc-1769710795607",
+    "status": "queued",
+    "queuedAt": "2026-01-29T18:20:11.390Z"
+  },
+  {
+    "id": "action-1769710811390-tepv9o",
+    "type": "task",
+    "agent": "r0ss",
+    "description": "Add email check to brain heartbeat (every 5 min)",
+    "priority": "high",
+    "fromDiscussion": "disc-1769710795607",
+    "status": "queued",
+    "queuedAt": "2026-01-29T18:20:11.390Z"
+  },
+  {
+    "id": "action-1769710811391-gykgy3",
+    "type": "task",
+    "agent": "d0t",
+    "description": "Integrate email signals into trading decisions",
+    "priority": "medium",
+    "fromDiscussion": "disc-1769710795607",
+    "status": "queued",
+    "queuedAt": "2026-01-29T18:20:11.391Z"
+  },
+  {
+    "id": "action-1769710811392-clbc0d",
+    "type": "task",
+    "agent": "c0m",
+    "description": "Investigate 10 security alerts from inbox",
+    "priority": "high",
+    "fromDiscussion": "disc-1769710795607",
+    "status": "queued",
+    "queuedAt": "2026-01-29T18:20:11.392Z"
+  },
+  {
+    "id": "action-1769710811393-7yf3ab",
+    "type": "task",
+    "agent": "b0b",
+    "description": "Design LABS product page for email agent",
+    "priority": "medium",
+    "fromDiscussion": "disc-1769710795607",
+    "status": "queued",
+    "queuedAt": "2026-01-29T18:20:11.393Z"
+  },
+  {
+    "id": "action-1769710811394-oyeb6c",
+    "type": "task",
+    "agent": "d0t",
+    "description": "Hit $81/mo profit target for self-sustainability",
+    "priority": "critical",
+    "fromDiscussion": "disc-1769710795607",
+    "status": "queued",
+    "queuedAt": "2026-01-29T18:20:11.394Z"
+  },
+  {
+    "id": "action-1769711005257-wclq5m",
+    "type": "task",
+    "agent": "r0ss",
+    "description": "Deploy email system to Railway with env vars",
+    "priority": "high",
+    "fromDiscussion": "disc-1769710990557",
+    "status": "queued",
+    "queuedAt": "2026-01-29T18:23:25.257Z"
+  },
+  {
+    "id": "action-1769711005257-u20ge3",
+    "type": "task",
+    "agent": "r0ss",
+    "description": "Add email check to brain heartbeat (every 5 min)",
+    "priority": "high",
+    "fromDiscussion": "disc-1769710990557",
+    "status": "queued",
+    "queuedAt": "2026-01-29T18:23:25.257Z"
+  },
+  {
+    "id": "action-1769711005258-kyudpg",
+    "type": "task",
+    "agent": "d0t",
+    "description": "Integrate email signals into trading decisions",
+    "priority": "medium",
+    "fromDiscussion": "disc-1769710990557",
+    "status": "queued",
+    "queuedAt": "2026-01-29T18:23:25.258Z"
+  },
+  {
+    "id": "action-1769711005259-ib1v3u",
+    "type": "task",
+    "agent": "c0m",
+    "description": "Investigate 10 security alerts from inbox",
+    "priority": "high",
+    "fromDiscussion": "disc-1769710990557",
+    "status": "queued",
+    "queuedAt": "2026-01-29T18:23:25.259Z"
+  },
+  {
+    "id": "action-1769711005260-8iyfir",
+    "type": "task",
+    "agent": "b0b",
+    "description": "Design LABS product page for email agent",
+    "priority": "medium",
+    "fromDiscussion": "disc-1769710990557",
+    "status": "queued",
+    "queuedAt": "2026-01-29T18:23:25.260Z"
+  },
+  {
+    "id": "action-1769711005261-z5ass3",
+    "type": "task",
+    "agent": "d0t",
+    "description": "Hit $81/mo profit target for self-sustainability",
+    "priority": "critical",
+    "fromDiscussion": "disc-1769710990557",
+    "status": "queued",
+    "queuedAt": "2026-01-29T18:23:25.261Z"
+  },
+  {
+    "id": "action-1769711073725-bf1b6h",
+    "type": "task",
+    "agent": "r0ss",
+    "description": "Implement: Create brain/test-endpoint.js - a simple Node.js f",
+    "priority": "high",
+    "fromDiscussion": "disc-1769711069664",
+    "status": "queued",
+    "queuedAt": "2026-01-29T18:24:33.725Z"
+  },
+  {
+    "id": "action-1769711073726-tkk1p2",
+    "type": "task",
+    "agent": "c0m",
+    "description": "Security review for: Create brain/test-endpoint.js ",
+    "priority": "medium",
+    "fromDiscussion": "disc-1769711069664",
+    "status": "queued",
+    "queuedAt": "2026-01-29T18:24:33.726Z"
+  },
+  {
+    "id": "action-1769711140538-jx382c",
+    "type": "task",
+    "agent": "r0ss",
+    "description": "Create brain/test-endpoint.js with a simple Express.js server on port 3001",
+    "priority": "high",
+    "fromDiscussion": "disc-1769711123707",
+    "status": "queued",
+    "queuedAt": "2026-01-29T18:25:40.538Z"
+  },
+  {
+    "id": "action-1769711140539-dmu5eq",
+    "type": "task",
+    "agent": "c0m",
+    "description": "Implement HTTPS and authentication for the new endpoint",
+    "priority": "high",
+    "fromDiscussion": "disc-1769711123707",
+    "status": "queued",
+    "queuedAt": "2026-01-29T18:25:40.539Z"
+  },
+  {
+    "id": "action-1769711140540-uoftmt",
+    "type": "task",
+    "agent": "r0ss",
+    "description": "Define /ping and /burn endpoints returning JSON data",
+    "priority": "medium",
+    "fromDiscussion": "disc-1769711123707",
+    "status": "queued",
+    "queuedAt": "2026-01-29T18:25:40.540Z"
+  },
+  {
+    "id": "action-1769711140541-fc5oo8",
+    "type": "task",
+    "agent": "c0m",
+    "description": "Set up logging and monitoring for the new endpoint using morgan and helmet",
+    "priority": "medium",
+    "fromDiscussion": "disc-1769711123707",
+    "status": "queued",
+    "queuedAt": "2026-01-29T18:25:40.541Z"
+  },
+  {
+    "id": "action-1769711140542-erx3am",
+    "type": "task",
+    "agent": "d0t",
+    "description": "Test the new endpoint with tools like curl or Postman",
+    "priority": "low",
+    "fromDiscussion": "disc-1769711123707",
+    "status": "queued",
+    "queuedAt": "2026-01-29T18:25:40.542Z"
   }
 ]

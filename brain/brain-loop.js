@@ -30,6 +30,9 @@ const DATA_DIR = path.join(__dirname, 'data');
 const ACTION_QUEUE_FILE = path.join(DATA_DIR, 'action-queue.json');
 const EXECUTION_LOG_FILE = path.join(DATA_DIR, 'execution-log.json');
 
+// Protected files that should never be overwritten
+const PROTECTED_FILES = ['.env', '.env.local', '.gitignore', 'package.json', 'package-lock.json'];
+
 // ════════════════════════════════════════════════════════════════
 // ACTION TYPES — What the swarm can do autonomously
 // ════════════════════════════════════════════════════════════════
@@ -38,6 +41,11 @@ const ACTION_HANDLERS = {
   // Code actions
   'create_file': async (action) => {
     if (action.params?.path && action.params?.content) {
+      // Safety check: don't overwrite protected files
+      const filename = path.basename(action.params.path);
+      if (PROTECTED_FILES.includes(filename)) {
+        return { success: false, message: `Protected file: ${filename} - cannot overwrite` };
+      }
       await fs.mkdir(path.dirname(action.params.path), { recursive: true });
       await fs.writeFile(action.params.path, action.params.content);
       return { success: true, message: `Created ${action.params.path}` };
@@ -143,6 +151,89 @@ const ACTION_HANDLERS = {
       );
       return { success: true };
     } catch (e) {
+      return { success: false, error: e.message };
+    }
+  },
+  
+  // TASK — Generic task handler that uses AI to plan execution
+  'task': async (action) => {
+    const { getAIHub } = require('./ai/provider-hub.js');
+    const hub = getAIHub();
+    
+    console.log(`      🤖 AI planning task: ${action.description}`);
+    
+    try {
+      // Ask AI to break down the task into executable steps
+      const prompt = `You are an autonomous AI agent. Break down this task into concrete steps that can be executed programmatically.
+
+TASK: ${action.description}
+AGENT: ${action.agent}
+PRIORITY: ${action.priority}
+
+Available actions you can request:
+- create_file: Create/update a file (needs path, content)
+- run_command: Execute a shell command
+- git_commit: Commit changes to git
+- check_email: Process new emails
+- send_email: Send an email (needs to, subject, body)
+
+Respond with a JSON array of steps. Each step should have:
+- action: one of the available action types
+- params: object with required parameters
+- description: what this step does
+
+If the task requires human input or is too complex, respond with:
+{ "status": "needs_human", "reason": "explanation" }
+
+Keep it simple - 1-3 steps max. Focus on what can be automated NOW.`;
+
+      const response = await hub.chat(prompt, {
+        systemPrompt: 'You are an autonomous AI that plans executable tasks. Respond ONLY with valid JSON.',
+        temperature: 0.3,
+        maxTokens: 500,
+      });
+      
+      if (!response.success) {
+        return { success: false, error: response.error || 'AI call failed' };
+      }
+      
+      // Parse AI response
+      const text = response.content || '';
+      const jsonMatch = text.match(/\[[\s\S]*\]|\{[\s\S]*\}/);
+      
+      if (jsonMatch) {
+        const plan = JSON.parse(jsonMatch[0]);
+        
+        if (plan.status === 'needs_human') {
+          console.log(`      🧑 Needs human: ${plan.reason}`);
+          return { success: false, needsHuman: true, reason: plan.reason };
+        }
+        
+        // Execute each step
+        const steps = Array.isArray(plan) ? plan : [plan];
+        const results = [];
+        
+        for (const step of steps.slice(0, 3)) { // Max 3 steps
+          console.log(`      📝 Step: ${step.description || step.action}`);
+          
+          const handler = ACTION_HANDLERS[step.action];
+          if (handler && step.action !== 'task') { // Prevent infinite recursion
+            const result = await handler({ params: step.params, ...step });
+            results.push(result);
+            console.log(`         ${result.success ? '✅' : '❌'} ${result.message || ''}`);
+          }
+        }
+        
+        return { 
+          success: results.every(r => r.success), 
+          stepsExecuted: results.length,
+          results 
+        };
+      }
+      
+      return { success: false, message: 'Could not parse AI plan' };
+    } catch (e) {
+      console.log(`      ❌ Task planning failed: ${e.message}`);
       return { success: false, error: e.message };
     }
   },
@@ -294,6 +385,36 @@ async function runBrainLoop(question, options = {}) {
 
 // Inline team discussion (simplified)
 async function runTeamDiscussionInline(topic, rounds = 2) {
+  // USE THE REAL TEAM DISCUSSION WITH AI!
+  try {
+    const result = await teamDiscussion.runTeamDiscussion(topic, rounds);
+    
+    // Convert to expected format
+    return {
+      id: result.id || `disc-${Date.now()}`,
+      title: topic,
+      messages: result.messages || [],
+      actionItems: result.actionItems || generateDefaultActions(topic),
+      createdAt: new Date().toISOString(),
+    };
+  } catch (e) {
+    console.log(`Team discussion error: ${e.message}, using fallback`);
+    return runFallbackDiscussion(topic, rounds);
+  }
+}
+
+// Generate smart action items based on discussion content
+function generateDefaultActions(topic) {
+  return [
+    { agent: 'r0ss', action: `Assess infrastructure for: ${topic.slice(0, 30)}`, priority: 'high', type: 'task' },
+    { agent: 'c0m', action: `Security review for: ${topic.slice(0, 30)}`, priority: 'high', type: 'security_scan' },
+    { agent: 'd0t', action: `Data analysis for: ${topic.slice(0, 30)}`, priority: 'medium', type: 'task' },
+    { agent: 'b0b', action: `Design exploration for: ${topic.slice(0, 30)}`, priority: 'medium', type: 'task' },
+  ];
+}
+
+// Fallback discussion if AI fails
+function runFallbackDiscussion(topic, rounds = 2) {
   const AGENTS = {
     b0b: { name: 'b0b', emoji: '🎨', role: 'Creative Director' },
     r0ss: { name: 'r0ss', emoji: '🔧', role: 'CTO / Infrastructure' },
@@ -338,20 +459,7 @@ async function runTeamDiscussionInline(topic, rounds = 2) {
   }
   
   // Generate action items based on topic
-  discussion.actionItems = [
-    { agent: 'r0ss', action: `Assess infrastructure for: ${topic.slice(0, 30)}`, priority: 'high', type: 'task' },
-    { agent: 'c0m', action: `Security review for: ${topic.slice(0, 30)}`, priority: 'high', type: 'security_scan' },
-    { agent: 'd0t', action: `Data analysis for: ${topic.slice(0, 30)}`, priority: 'medium', type: 'task' },
-    { agent: 'b0b', action: `Design exploration for: ${topic.slice(0, 30)}`, priority: 'medium', type: 'task' },
-  ];
-  
-  // Save discussion
-  const discussionsDir = path.join(DATA_DIR, 'discussions');
-  await fs.mkdir(discussionsDir, { recursive: true });
-  await fs.writeFile(
-    path.join(discussionsDir, `${discussion.id}.json`),
-    JSON.stringify(discussion, null, 2)
-  );
+  discussion.actionItems = generateDefaultActions(topic);
   
   return discussion;
 }

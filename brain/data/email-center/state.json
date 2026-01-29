@@ -19,18 +19,20 @@
     "<903c75e3-fb87-c654-2016-7cf1875076eb@gmail.com>",
     "<5baf46e3-24ef-cc9f-db10-bb74c05d5704@gmail.com>",
     "<CA+93gaaxNFkAOJZ9KRZQj0g_d9riEPThwsYYmvBVOT3x7D0qyw@mail.gmail.com>",
-    "<N098cw7OuxmYWfpEEb_6Iw@notifications.google.com>"
+    "<N098cw7OuxmYWfpEEb_6Iw@notifications.google.com>",
+    "<4f01c69b-fe52-a927-8424-091ad64a4706@gmail.com>",
+    "<b8dffcbf-a496-7a77-a86f-ef07a85099f1@gmail.com>"
   ],
   "stats": {
-    "totalProcessed": 20,
+    "totalProcessed": 22,
     "byCategory": {
       "trading": 2,
       "social": 5,
-      "security": 10,
+      "security": 12,
       "bills": 1,
       "github": 1,
       "other": 1
     },
-    "lastCheck": "2026-01-29T17:39:14.638Z"
+    "lastCheck": "2026-01-29T18:23:35.940Z"
   }
 }

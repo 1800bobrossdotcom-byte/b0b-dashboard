@@ -6,5 +6,133 @@
       "message": "Security scan initiated"
     },
     "timestamp": "2026-01-29T17:59:30.284Z"
+  },
+  {
+    "actionId": "action-1769710811390-wlbljr",
+    "result": {
+      "success": false,
+      "error": "providerHub.selectModel is not a function"
+    },
+    "timestamp": "2026-01-29T18:20:11.395Z"
+  },
+  {
+    "actionId": "action-1769710811390-tepv9o",
+    "result": {
+      "success": false,
+      "error": "providerHub.selectModel is not a function"
+    },
+    "timestamp": "2026-01-29T18:20:11.396Z"
+  },
+  {
+    "actionId": "action-1769710811392-clbc0d",
+    "result": {
+      "success": false,
+      "error": "providerHub.selectModel is not a function"
+    },
+    "timestamp": "2026-01-29T18:20:11.397Z"
+  },
+  {
+    "actionId": "action-1769710811394-oyeb6c",
+    "result": {
+      "success": false,
+      "error": "providerHub.selectModel is not a function"
+    },
+    "timestamp": "2026-01-29T18:20:11.397Z"
+  },
+  {
+    "actionId": "action-1769711005257-wclq5m",
+    "result": {
+      "success": false,
+      "stepsExecuted": 3,
+      "results": [
+        {
+          "success": false,
+          "error": "Command failed: railway login\nCannot login in non-interactive mode\n"
+        },
+        {
+          "success": false,
+          "error": "Command failed: railway init && railway deploy\nNo template specified\n"
+        },
+        {
+          "success": true,
+          "message": "Created .env"
+        }
+      ]
+    },
+    "timestamp": "2026-01-29T18:23:30.551Z"
+  },
+  {
+    "actionId": "action-1769711005257-u20ge3",
+    "result": {
+      "success": false,
+      "stepsExecuted": 2,
+      "results": [
+        {
+          "success": false,
+          "error": "Command failed: echo 'check_email' >> /home/r0ss/brain_heartbeat.sh\nThe system cannot find the path specified.\r\n"
+        },
+        {
+          "success": false,
+          "error": "Command failed: chmod +x /home/r0ss/brain_heartbeat.sh && crontab -l | { cat; echo \"*/5 * * * * /home/r0ss/brain_heartbeat.sh\"; } | crontab -\n'chmod' is not recognized as an internal or external command,\r\noperable program or batch file.\r\n"
+        }
+      ]
+    },
+    "timestamp": "2026-01-29T18:23:31.792Z"
+  },
+  {
+    "actionId": "action-1769711005259-ib1v3u",
+    "result": {
+      "success": true,
+      "stepsExecuted": 3,
+      "results": [
+        {
+          "success": true,
+          "message": "Email check complete"
+        },
+        {
+          "success": true,
+          "message": "Created /tmp/security_alerts.txt"
+        },
+        {
+          "success": true,
+          "messageId": "<5a363b93-6aa1-c0b1-33c2-53aea87cf64f@gmail.com>"
+        }
+      ]
+    },
+    "timestamp": "2026-01-29T18:23:37.657Z"
+  },
+  {
+    "actionId": "action-1769711005261-z5ass3",
+    "result": {
+      "success": false,
+      "stepsExecuted": 3,
+      "results": [
+        {
+          "success": true,
+          "message": "Created profit_tracker.txt"
+        },
+        {
+          "success": true,
+          "output": ""
+        },
+        {
+          "success": false,
+          "error": "Blocked by security layer",
+          "details": [
+            "❌ Too fast. Wait 29s"
+          ],
+          "blocked": true
+        }
+      ]
+    },
+    "timestamp": "2026-01-29T18:23:39.068Z"
+  },
+  {
+    "actionId": "action-1769711073725-bf1b6h",
+    "result": {
+      "success": false,
+      "error": "No AI provider available or all failed"
+    },
+    "timestamp": "2026-01-29T18:24:33.727Z"
   }
 ]

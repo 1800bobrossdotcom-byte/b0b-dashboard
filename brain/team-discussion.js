@@ -156,6 +156,79 @@ function generateSimulatedResponse(agent, topic, history) {
 }
 
 // ════════════════════════════════════════════════════════════════
+// EXTRACT ACTION ITEMS USING AI
+// ════════════════════════════════════════════════════════════════
+
+async function extractActionItems(topic, messages) {
+  // Format the discussion for the AI
+  const discussionText = messages.map(m => 
+    `${m.agent} (${m.role}): ${m.content}`
+  ).join('\n\n');
+  
+  const prompt = `Based on this discussion, extract concrete action items.
+
+ORIGINAL TOPIC: ${topic}
+
+DISCUSSION:
+${discussionText}
+
+Extract 3-5 action items that emerged from this discussion. Each action should be:
+- Concrete and actionable (can be done programmatically)
+- Assigned to the most appropriate agent (b0b, r0ss, c0m, or d0t)
+- Prioritized (critical, high, medium, low)
+
+Respond with ONLY a JSON array like this:
+[
+  { "agent": "r0ss", "action": "Create test-endpoint.js file", "priority": "high", "type": "task" },
+  { "agent": "c0m", "action": "Review security of new endpoint", "priority": "medium", "type": "task" }
+]
+
+Focus on what the team agreed to DO, not general observations.`;
+
+  try {
+    if (!getAIHub) {
+      return getDefaultActions(topic);
+    }
+    
+    const hub = getAIHub();
+    const response = await hub.chat(prompt, {
+      systemPrompt: 'You extract action items from discussions. Respond ONLY with valid JSON array.',
+      temperature: 0.3,
+      maxTokens: 500,
+    });
+    
+    if (!response.success) {
+      console.log('Action extraction failed, using defaults');
+      return getDefaultActions(topic);
+    }
+    
+    const text = response.content || '';
+    const jsonMatch = text.match(/\[[\s\S]*\]/);
+    
+    if (jsonMatch) {
+      const items = JSON.parse(jsonMatch[0]);
+      return items.map(item => ({
+        ...item,
+        status: 'pending',
+        type: item.type || 'task',
+      }));
+    }
+    
+    return getDefaultActions(topic);
+  } catch (e) {
+    console.log(`Action extraction error: ${e.message}`);
+    return getDefaultActions(topic);
+  }
+}
+
+function getDefaultActions(topic) {
+  return [
+    { agent: 'r0ss', action: `Implement: ${topic.slice(0, 50)}`, priority: 'high', type: 'task', status: 'pending' },
+    { agent: 'c0m', action: `Security review for: ${topic.slice(0, 30)}`, priority: 'medium', type: 'task', status: 'pending' },
+  ];
+}
+
+// ════════════════════════════════════════════════════════════════
 // RUN DISCUSSION
 // ════════════════════════════════════════════════════════════════
 
@@ -226,24 +299,18 @@ Options discussed: billing dashboard, live-trader integration, calendar parsing,
     }
   }
   
-  // Extract action items
+  // Extract action items using AI
   console.log('\n' + '═'.repeat(70));
   console.log('📋 ACTION ITEMS EXTRACTED');
   console.log('═'.repeat(70) + '\n');
   
-  const actionItems = [
-    { agent: 'r0ss', action: 'Deploy email system to Railway with env vars', priority: 'high', status: 'pending' },
-    { agent: 'r0ss', action: 'Add email check to brain heartbeat (every 5 min)', priority: 'high', status: 'pending' },
-    { agent: 'd0t', action: 'Integrate email signals into trading decisions', priority: 'medium', status: 'pending' },
-    { agent: 'c0m', action: 'Investigate 10 security alerts from inbox', priority: 'high', status: 'pending' },
-    { agent: 'b0b', action: 'Design LABS product page for email agent', priority: 'medium', status: 'pending' },
-    { agent: 'd0t', action: 'Hit $81/mo profit target for self-sustainability', priority: 'critical', status: 'pending' },
-  ];
+  // Use AI to extract action items from the discussion
+  const actionItems = await extractActionItems(topic, discussion.messages);
   
   discussion.actionItems = actionItems;
   
   for (const item of actionItems) {
-    const agent = AGENTS[item.agent];
+    const agent = AGENTS[item.agent] || { emoji: '🤖' };
     console.log(`${agent.emoji} [${item.priority.toUpperCase()}] ${item.action}`);
   }
   
@@ -263,13 +330,25 @@ Options discussed: billing dashboard, live-trader integration, calendar parsing,
 }
 
 // ════════════════════════════════════════════════════════════════
-// RUN
+// EXPORTS
 // ════════════════════════════════════════════════════════════════
 
-const topic = process.argv[2] || 'Email Capabilities & Self-Sustainability: What should the swarm build next?';
+module.exports = {
+  runTeamDiscussion,
+  AGENTS,
+  getAgentResponse,
+};
 
-runTeamDiscussion(topic, 2).then(discussion => {
-  console.log('🧠 Brain discussion complete!');
-  console.log(`   Messages: ${discussion.messages.length}`);
-  console.log(`   Action items: ${discussion.actionItems.length}`);
-}).catch(console.error);
+// ════════════════════════════════════════════════════════════════
+// CLI
+// ════════════════════════════════════════════════════════════════
+
+if (require.main === module) {
+  const topic = process.argv[2] || 'Email Capabilities & Self-Sustainability: What should the swarm build next?';
+
+  runTeamDiscussion(topic, 2).then(discussion => {
+    console.log('🧠 Brain discussion complete!');
+    console.log(`   Messages: ${discussion.messages.length}`);
+    console.log(`   Action items: ${discussion.actionItems.length}`);
+  }).catch(console.error);
+}

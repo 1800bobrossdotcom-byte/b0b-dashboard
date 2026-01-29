@@ -1,0 +1,2 @@
+Current profit: $0
+Target profit: $81
