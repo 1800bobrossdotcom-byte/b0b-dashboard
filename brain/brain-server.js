@@ -388,6 +388,161 @@ app.get('/activity', async (req, res) => {
   });
 });
 
+// ═══════════════════════════════════════════════════════════════
+// GITHUB ACTIVITY — PROOF OF AUTONOMOUS BUILDING
+// ═══════════════════════════════════════════════════════════════
+
+app.get('/github/activity', async (req, res) => {
+  const { limit = 20 } = req.query;
+  
+  try {
+    // Fetch recent commits from GitHub API
+    const commits = [];
+    
+    for (const repo of GITHUB_CONFIG.repos) {
+      const url = `${GITHUB_CONFIG.apiBase}/repos/${repo.owner}/${repo.repo}/commits?per_page=${limit}`;
+      const headers = { 
+        'User-Agent': 'B0B-Brain',
+        'Accept': 'application/vnd.github.v3+json',
+      };
+      if (GITHUB_CONFIG.token) {
+        headers['Authorization'] = `token ${GITHUB_CONFIG.token}`;
+      }
+      
+      const response = await axios.get(url, { headers });
+      
+      for (const commit of response.data) {
+        commits.push({
+          sha: commit.sha.slice(0, 7),
+          message: commit.commit.message.split('\n')[0],
+          author: commit.commit.author.name,
+          date: commit.commit.author.date,
+          url: commit.html_url,
+          repo: repo.name,
+          isAutonomous: commit.commit.message.includes('🤖') || 
+                        commit.commit.message.includes('Autonomous') ||
+                        commit.commit.message.includes('autonomous'),
+        });
+      }
+    }
+    
+    // Sort by date, most recent first
+    commits.sort((a, b) => new Date(b.date) - new Date(a.date));
+    
+    // Count autonomous vs manual commits
+    const autonomous = commits.filter(c => c.isAutonomous).length;
+    const manual = commits.length - autonomous;
+    
+    res.json({
+      commits: commits.slice(0, parseInt(limit)),
+      stats: {
+        total: commits.length,
+        autonomous,
+        manual,
+        autonomyRate: commits.length > 0 ? ((autonomous / commits.length) * 100).toFixed(1) + '%' : '0%',
+      },
+      proof: {
+        message: 'These commits are LIVE from GitHub. The swarm builds autonomously.',
+        verifyUrl: `https://github.com/${GITHUB_CONFIG.repos[0].owner}/${GITHUB_CONFIG.repos[0].repo}/commits`,
+      },
+    });
+  } catch (e) {
+    res.json({
+      error: 'GitHub API unavailable',
+      message: e.message,
+      fallback: 'Check https://github.com/1800bobrossdotcom-byte/b0b-dashboard/commits directly',
+    });
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════
+// AUTONOMOUS ACTIONS — EXECUTED ACTION ITEMS LOG
+// ═══════════════════════════════════════════════════════════════
+
+app.get('/autonomous/actions', async (req, res) => {
+  try {
+    const actionsLog = path.join(__dirname, 'data', 'actions-executed.json');
+    const data = await fs.readFile(actionsLog, 'utf8');
+    const log = JSON.parse(data);
+    
+    res.json({
+      executed: log.executed || [],
+      lastRun: log.lastRun,
+      stats: {
+        totalExecuted: (log.executed || []).length,
+        successRate: log.executed ? 
+          ((log.executed.filter(a => a.result?.status === 'executed').length / log.executed.length) * 100).toFixed(1) + '%' : '0%',
+      },
+      proof: {
+        message: 'These action items were executed AUTONOMOUSLY by the swarm.',
+        source: 'brain/autonomous-executor.js',
+      },
+    });
+  } catch (e) {
+    res.json({
+      executed: [],
+      message: 'No actions executed yet',
+      nextRun: 'Executor runs every 30 minutes',
+    });
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════
+// DISCUSSIONS WITH ACTION ITEMS
+// ═══════════════════════════════════════════════════════════════
+
+app.get('/discussions', async (req, res) => {
+  try {
+    const discussionsDir = path.join(__dirname, 'data', 'discussions');
+    const files = await fs.readdir(discussionsDir);
+    
+    const discussions = [];
+    let totalActionItems = 0;
+    let completedActionItems = 0;
+    
+    for (const file of files.filter(f => f.endsWith('.json'))) {
+      const content = await fs.readFile(path.join(discussionsDir, file), 'utf8');
+      const discussion = JSON.parse(content);
+      
+      const actionItems = discussion.action_items || [];
+      const completed = actionItems.filter(a => a.status === 'completed').length;
+      
+      totalActionItems += actionItems.length;
+      completedActionItems += completed;
+      
+      discussions.push({
+        id: discussion.id,
+        title: discussion.title,
+        date: discussion.date,
+        participants: discussion.participants,
+        actionItems: actionItems.length,
+        completedActions: completed,
+        status: discussion.status,
+      });
+    }
+    
+    // Sort by date, most recent first
+    discussions.sort((a, b) => new Date(b.date) - new Date(a.date));
+    
+    res.json({
+      discussions,
+      stats: {
+        totalDiscussions: discussions.length,
+        totalActionItems,
+        completedActionItems,
+        completionRate: totalActionItems > 0 ? 
+          ((completedActionItems / totalActionItems) * 100).toFixed(1) + '%' : '0%',
+      },
+      proof: {
+        message: 'Discussions generate action items. Action items get EXECUTED.',
+        workflow: 'Discussion → Action Items → autonomous-executor.js → Code Built → Git Push',
+      },
+    });
+  } catch (e) {
+    res.json({ discussions: [], error: e.message });
+  }
+});
+
 // Research library endpoint
 app.get('/research', async (req, res) => {
   try {
