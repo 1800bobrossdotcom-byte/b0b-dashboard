@@ -553,6 +553,102 @@ app.get('/research', async (req, res) => {
   }
 });
 
+// ═══════════════════════════════════════════════════════════════
+// 📧 GMAIL / EMAIL ENDPOINTS
+// ═══════════════════════════════════════════════════════════════
+
+let gmailAgent = null;
+try {
+  gmailAgent = require('./agents/gmail-agent.js');
+  console.log('[BRAIN] Gmail agent loaded');
+} catch (e) {
+  console.log('[BRAIN] Gmail agent not available:', e.message);
+}
+
+// Get email activity log
+app.get('/email/activity', async (req, res) => {
+  const { limit = 50 } = req.query;
+  
+  try {
+    const logFile = path.join(DATA_DIR, 'emails', 'activity.json');
+    const data = await fs.readFile(logFile, 'utf8');
+    const log = JSON.parse(data);
+    
+    res.json({
+      activities: log.slice(-parseInt(limit)),
+      total: log.length,
+      configured: !!process.env.GMAIL_USER,
+    });
+  } catch {
+    res.json({ 
+      activities: [], 
+      total: 0, 
+      configured: !!process.env.GMAIL_USER,
+      message: 'No email activity yet' 
+    });
+  }
+});
+
+// Send an email
+app.post('/email/send', async (req, res) => {
+  const { to, subject, body, html } = req.body;
+  
+  if (!gmailAgent) {
+    return res.status(503).json({ error: 'Gmail agent not available' });
+  }
+  
+  if (!to || !subject || !body) {
+    return res.status(400).json({ error: 'Missing required fields: to, subject, body' });
+  }
+  
+  try {
+    const result = await gmailAgent.sendEmail(to, subject, body, { html });
+    res.json(result);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Check emails manually
+app.post('/email/check', async (req, res) => {
+  if (!gmailAgent) {
+    return res.status(503).json({ error: 'Gmail agent not available' });
+  }
+  
+  try {
+    await gmailAgent.checkEmails();
+    res.json({ success: true, message: 'Email check complete' });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Get email signals (notifications routed to agents)
+app.get('/email/signals', async (req, res) => {
+  try {
+    const signalsFile = path.join(__dirname, 'brain-signals.json');
+    const data = await fs.readFile(signalsFile, 'utf8');
+    const signals = JSON.parse(data);
+    
+    res.json({
+      signals: signals.emailSignals || [],
+      total: (signals.emailSignals || []).length,
+    });
+  } catch {
+    res.json({ signals: [], total: 0 });
+  }
+});
+
+// Get email configuration status
+app.get('/email/status', async (req, res) => {
+  res.json({
+    configured: !!process.env.GMAIL_USER && !!process.env.GMAIL_APP_PASSWORD,
+    user: process.env.GMAIL_USER ? process.env.GMAIL_USER.replace(/(.{3}).*(@.*)/, '$1***$2') : null,
+    agentLoaded: !!gmailAgent,
+    triggers: gmailAgent?.TRIGGERS?.map(t => ({ name: t.name, priority: t.priority, action: t.action })) || [],
+  });
+});
+
 const POLYMARKET_DATA = path.join(DATA_DIR, 'polymarket.json');
 const DISCUSSIONS_DIR = path.join(DATA_DIR, 'discussions');
 const GIT_ACTIVITY_FILE = path.join(DATA_DIR, 'git-activity.json');

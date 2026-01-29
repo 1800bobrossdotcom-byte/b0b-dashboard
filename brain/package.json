@@ -28,7 +28,10 @@
     "dotenv": "^16.3.1",
     "ethers": "^6.16.0",
     "express": "^4.18.2",
+    "imap": "^0.8.19",
+    "mailparser": "^3.9.3",
     "node-fetch": "^2.7.0",
+    "nodemailer": "^7.0.13",
     "tesseract.js": "^5.0.0",
     "viem": "^2.0.0"
   },
