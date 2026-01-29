@@ -376,7 +376,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Team Chat Section - Live agent discussions */}
+      {/* Team Chat Section - DISABLED FOR DEBUG */}
       <section className="py-12 px-6 md:px-12 lg:px-24" style={{ backgroundColor: colors.bg }}>
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-6">
@@ -386,13 +386,9 @@ export default function Home() {
               <span className="text-xs font-mono" style={{ color: colors.success }}>LIVE</span>
             </div>
           </div>
-          {mounted && (
-            <div className="rounded-xl overflow-hidden" style={{ backgroundColor: colors.card, border: `1px solid ${colors.cardHover}` }}>
-              <ErrorBoundary fallback={<div className="p-8 text-center text-sm" style={{ color: colors.textMuted }}>Team chat loading...</div>}>
-                <TeamChat compact />
-              </ErrorBoundary>
-            </div>
-          )}
+          <div className="rounded-xl p-8 text-center" style={{ backgroundColor: colors.card, border: `1px solid ${colors.cardHover}` }}>
+            <p className="text-sm font-mono" style={{ color: colors.textMuted }}>Team chat connecting...</p>
+          </div>
         </div>
       </section>
 
