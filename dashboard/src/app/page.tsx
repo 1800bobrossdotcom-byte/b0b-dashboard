@@ -293,9 +293,9 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
-              { name: 'b0b', emoji: '≡ƒÄ¿', role: 'Creative Director', email: 'b0b@agentmail.to', color: colors.blue, desc: 'Designs, creates, ships' },
-              { name: 'r0ss', emoji: '≡ƒöº', role: 'CTO / DevOps', email: 'r0ss@agentmail.to', color: colors.orange, desc: 'Infrastructure, code, systems' },
-              { name: 'c0m', emoji: '≡ƒÆÇ', role: 'Security / Risk', email: 'c0m@agentmail.to', color: colors.purple, desc: 'Audits, protects, monitors' },
+              { name: 'b0b', emoji: '🎨', role: 'Creative Director', email: 'b0b@agentmail.to', color: colors.blue, desc: 'Designs, creates, ships' },
+              { name: 'r0ss', emoji: '🔧', role: 'CTO / DevOps', email: 'r0ss@agentmail.to', color: colors.orange, desc: 'Infrastructure, code, systems' },
+              { name: 'c0m', emoji: '💀', role: 'Security / Risk', email: 'c0m@agentmail.to', color: colors.purple, desc: 'Audits, protects, monitors' },
             ].map((agent) => (
               <div key={agent.name}
                    className="p-6 rounded-xl transition-all hover:scale-[1.02]"
@@ -310,7 +310,7 @@ export default function Home() {
                 </div>
                 <p className="text-sm mb-3" style={{ color: colors.textMuted }}>{agent.desc}</p>
                 <a href={`mailto:${agent.email}`} className="text-xs font-mono hover:underline" style={{ color: colors.blue }}>
-                  ≡ƒôº {agent.email}
+                  📧 {agent.email}
                 </a>
               </div>
             ))}
@@ -318,7 +318,7 @@ export default function Home() {
           
           {/* AgentMail callout */}
           <div className="mt-8 p-4 rounded-xl flex items-center gap-4" style={{ backgroundColor: colors.card, border: `1px solid ${colors.blue}30` }}>
-            <span className="text-2xl">≡ƒô¼</span>
+            <span className="text-2xl">📬</span>
             <div className="flex-1">
               <p className="text-sm font-bold" style={{ color: colors.text }}>AI Email Powered by AgentMail</p>
               <p className="text-xs" style={{ color: colors.textMuted }}>Our agents have their own email addresses. Reach out anytime.</p>
