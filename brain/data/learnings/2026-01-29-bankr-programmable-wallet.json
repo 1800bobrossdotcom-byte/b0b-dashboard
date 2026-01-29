@@ -1,0 +1,51 @@
+{
+  "id": "learning-2026-01-29-bankr-programmable",
+  "timestamp": "2026-01-29T17:00:00.000Z",
+  "category": "capabilities",
+  "severity": "transformative",
+  "title": "Bankr Programmable Wallet — Full Onchain Autonomy",
+  
+  "announcement": {
+    "source": "@0xDeployer on X",
+    "date": "2026-01-29",
+    "key_quote": "we just shipped the ability to submit any transaction and even deploy smart contracts using your bankr wallet. its become the programmable wallet for your agent."
+  },
+
+  "capabilities_unlocked": [
+    "Submit ANY transaction through Bankr wallet",
+    "Deploy smart contracts autonomously",
+    "Interact with ANY onchain contract (no integration needed)",
+    "Use Moltbot skill to figure out complex transactions",
+    "Place bets on prediction markets directly",
+    "Execute cross-protocol arbitrage",
+    "Deploy custom trading strategy contracts"
+  ],
+
+  "example": {
+    "description": "Deployer installed Moltbot skill, gave it Clawd PFP prediction market link, told it to put 50k $CLAWD on option 1. Agent figured out the transaction and executed it.",
+    "implication": "Agents can now reason about contracts and execute without pre-built integrations"
+  },
+
+  "impact_on_b0b": {
+    "nash_swarm": "Can execute consensus decisions directly onchain",
+    "trading": "Direct DEX swaps, Polymarket bets, any protocol",
+    "governance": "Can deploy and manage governance contracts",
+    "creative": "Deploy NFT contracts, create prediction markets"
+  },
+
+  "required_safeguards": [
+    "Transaction simulation before submission",
+    "Hard spending limits per tx and per day",
+    "Only interact with verified contracts",
+    "Slippage protection on all swaps",
+    "Complete audit trail of all transactions",
+    "Human approval gate for large amounts"
+  ],
+
+  "action_items": [
+    "Update Nash swarm to use Bankr tx submission",
+    "Implement direct Polymarket betting",
+    "Build tx validation/simulation layer",
+    "Design governance contract"
+  ]
+}
