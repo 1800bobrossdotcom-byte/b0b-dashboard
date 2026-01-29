@@ -1735,6 +1735,42 @@ app.get('/discussions/:id', async (req, res) => {
   res.json(discussion);
 });
 
+// Stream discussions in real-time (SSE)
+app.get('/stream/discussions', async (req, res) => {
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  
+  // Send initial discussions
+  const discussions = await loadDiscussions();
+  const messages = discussions
+    .slice(0, 10)  // Most recent 10 discussions
+    .flatMap(d => d.messages || [])
+    .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+    .slice(0, 20);  // Most recent 20 messages
+  
+  res.write(`data: ${JSON.stringify({ type: 'initial', messages })}\n\n`);
+  
+  // Keep connection alive and send updates every 2 seconds
+  const sendUpdates = async () => {
+    const freshDiscussions = await loadDiscussions();
+    const freshMessages = freshDiscussions
+      .flatMap(d => d.messages || [])
+      .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+      .slice(0, 20);
+    
+    res.write(`data: ${JSON.stringify({ type: 'update', messages: freshMessages })}\n\n`);
+  };
+  
+  const interval = setInterval(sendUpdates, 2000);
+  
+  req.on('close', () => {
+    clearInterval(interval);
+    res.end();
+  });
+});
+
 // ════════════════════════════════════════════════════════════════════════════
 // 🏗️ ACTION ITEMS — Aggregate pending work from all discussions
 // "Discuss → Build → Deploy → Observe → Discuss"

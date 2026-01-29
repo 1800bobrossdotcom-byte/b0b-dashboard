@@ -177,7 +177,70 @@ export function TeamChat({
     return () => clearInterval(interval);
   }, [teamQuotes.length]);
 
-  // Fetch discussion list from brain
+  // Stream discussions in real-time from brain server
+  useEffect(() => {
+    let eventSource: EventSource;
+    let reconnectTimeout: NodeJS.Timeout;
+    
+    const connectStream = () => {
+      try {
+        eventSource = new EventSource(`${BRAIN_URL}/stream/discussions`);
+        
+        eventSource.onmessage = (event) => {
+          try {
+            const data = JSON.parse(event.data);
+            if (data.type === 'initial' || data.type === 'update') {
+              // Parse messages and group by discussion
+              const msgsByDiscussion: Record<string, any> = {};
+              
+              if (data.messages && Array.isArray(data.messages)) {
+                data.messages.forEach((msg: Message) => {
+                  const discId = msg.agent || 'general';
+                  if (!msgsByDiscussion[discId]) {
+                    msgsByDiscussion[discId] = {
+                      id: discId,
+                      title: `${msg.agent || 'General'} Discussion`,
+                      messages: [],
+                      status: 'active',
+                      participants: [msg.agent || 'system'],
+                      date: new Date().toISOString()
+                    };
+                  }
+                  msgsByDiscussion[discId].messages.push(msg);
+                });
+              }
+              
+              const fullDiscs = Object.values(msgsByDiscussion).slice(0, 5);
+              setFullDiscussions(fullDiscs);
+              setError(null);
+              setLoading(false);
+            }
+          } catch (e) {
+            console.error('Failed to parse stream message:', e);
+          }
+        };
+        
+        eventSource.onerror = () => {
+          eventSource.close();
+          setError('Brain stream offline');
+          // Reconnect after 5 seconds
+          reconnectTimeout = setTimeout(connectStream, 5000);
+        };
+      } catch (e) {
+        setError('Failed to connect to brain stream');
+        reconnectTimeout = setTimeout(connectStream, 5000);
+      }
+    };
+    
+    connectStream();
+    
+    return () => {
+      if (eventSource) eventSource.close();
+      if (reconnectTimeout) clearTimeout(reconnectTimeout);
+    };
+  }, []);
+
+  // Fallback polling for discussions every 5s if stream fails
   const fetchDiscussions = useCallback(async () => {
     try {
       const res = await fetch(`${BRAIN_URL}/discussions`);
@@ -216,30 +279,13 @@ export function TeamChat({
     }
   }, []);
 
+  // Fallback polling every 5s
   useEffect(() => {
-    fetchDiscussions();
-    const interval = setInterval(fetchDiscussions, 30000); // 30s refresh
-    return () => clearInterval(interval);
-  }, [fetchDiscussions]);
-
-  // Fetch archive threads
-  useEffect(() => {
-    async function fetchArchive() {
-      try {
-        const res = await fetch(`${BRAIN_URL}/archive?limit=${maxMessages}`);
-        if (res.ok) {
-          const data = await res.json();
-          setThreads(data.threads || []);
-        }
-      } catch {
-        setThreads([]);
-      }
+    if (error && error.includes('stream')) {
+      const interval = setInterval(fetchDiscussions, 5000);
+      return () => clearInterval(interval);
     }
-
-    fetchArchive();
-    const interval = setInterval(fetchArchive, 60000); // 1min refresh
-    return () => clearInterval(interval);
-  }, [maxMessages]);
+  }, [error, fetchDiscussions]);
 
   const formatTime = (timestamp: string) => {
     try {
