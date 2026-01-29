@@ -3597,6 +3597,198 @@ app.post('/telegram/webhook', async (req, res) => {
 });
 
 // =============================================================================
+// 📧 AGENTMAIL — Autonomous Email for the Swarm
+// =============================================================================
+
+// AgentMail status
+app.get('/email/status', async (req, res) => {
+  try {
+    const { AgentMailClient } = require('./agentmail.js');
+    const client = new AgentMailClient();
+    const health = await client.healthCheck();
+    res.json(health);
+  } catch (err) {
+    res.status(500).json({ status: 'error', error: err.message });
+  }
+});
+
+// List all inboxes
+app.get('/email/inboxes', async (req, res) => {
+  try {
+    const { AgentMailClient } = require('./agentmail.js');
+    const client = new AgentMailClient();
+    const inboxes = await client.listInboxes();
+    res.json(inboxes);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Get agent's inbox
+app.get('/email/:agent/inbox', async (req, res) => {
+  try {
+    const { AgentMailClient } = require('./agentmail.js');
+    const client = new AgentMailClient();
+    const { agent } = req.params;
+    const limit = parseInt(req.query.limit) || 50;
+    const messages = await client.getMessages(agent, limit);
+    res.json(messages);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Send email from agent
+app.post('/email/:agent/send', async (req, res) => {
+  try {
+    const { AgentMailClient } = require('./agentmail.js');
+    const client = new AgentMailClient();
+    const { agent } = req.params;
+    const { to, subject, body, html } = req.body;
+    
+    if (!to || !subject || !body) {
+      return res.status(400).json({ error: 'Missing to, subject, or body' });
+    }
+    
+    const result = await client.sendEmail(agent, to, subject, body, { html });
+    res.json({ success: true, result });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// c0m check inbox (with categorization)
+app.get('/email/c0m/check', async (req, res) => {
+  try {
+    const { AgentMailClient } = require('./agentmail.js');
+    const client = new AgentMailClient();
+    const inbox = await client.c0mCheckInbox();
+    res.json(inbox);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Extract verification links from a message
+app.get('/email/:agent/verification/:messageId', async (req, res) => {
+  try {
+    const { AgentMailClient } = require('./agentmail.js');
+    const client = new AgentMailClient();
+    const { agent, messageId } = req.params;
+    const links = await client.extractVerificationLink(agent, messageId);
+    res.json({ links });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// =============================================================================
+// 🌐 C0M BROWSER AUTOMATION
+// =============================================================================
+
+// Browser automation status
+app.get('/c0m/browser/status', (req, res) => {
+  res.json({
+    status: 'ready',
+    capabilities: ['registration', 'verification', 'login', 'recon'],
+    platforms: ['immunefi', 'hackerone', 'bugcrowd']
+  });
+});
+
+// c0m register on bug bounty platform
+app.post('/c0m/browser/register', async (req, res) => {
+  try {
+    const { C0mBrowser } = require('../crawlers/c0m-browser.js');
+    const { platform, email, username, password } = req.body;
+    
+    if (!platform || !email || !username || !password) {
+      return res.status(400).json({ error: 'Missing platform, email, username, or password' });
+    }
+    
+    const browser = new C0mBrowser({ headless: true });
+    await browser.init();
+    
+    let result;
+    if (platform === 'immunefi') {
+      result = await browser.registerImmunefi(email, username, password);
+    } else if (platform === 'hackerone') {
+      result = await browser.registerHackerOne(email, username, password);
+    } else {
+      await browser.close();
+      return res.status(400).json({ error: `Unknown platform: ${platform}` });
+    }
+    
+    await browser.close();
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// c0m complete email verification
+app.post('/c0m/browser/verify', async (req, res) => {
+  try {
+    const { C0mBrowser } = require('../crawlers/c0m-browser.js');
+    const { url } = req.body;
+    
+    if (!url) {
+      return res.status(400).json({ error: 'Missing verification URL' });
+    }
+    
+    const browser = new C0mBrowser({ headless: true });
+    await browser.init();
+    const result = await browser.completeVerification(url);
+    await browser.close();
+    
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// c0m login to platform
+app.post('/c0m/browser/login', async (req, res) => {
+  try {
+    const { C0mBrowser } = require('../crawlers/c0m-browser.js');
+    const { platform, email, password } = req.body;
+    
+    if (!platform || !email || !password) {
+      return res.status(400).json({ error: 'Missing platform, email, or password' });
+    }
+    
+    const browser = new C0mBrowser({ headless: true });
+    await browser.init();
+    const result = await browser.login(platform, email, password);
+    await browser.close();
+    
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// c0m recon a target
+app.post('/c0m/browser/recon', async (req, res) => {
+  try {
+    const { C0mBrowser } = require('../crawlers/c0m-browser.js');
+    const { url } = req.body;
+    
+    if (!url) {
+      return res.status(400).json({ error: 'Missing target URL' });
+    }
+    
+    const browser = new C0mBrowser({ headless: true });
+    await browser.init();
+    const result = await browser.reconTarget(url);
+    await browser.close();
+    
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// =============================================================================
 // START SERVER
 // =============================================================================
 

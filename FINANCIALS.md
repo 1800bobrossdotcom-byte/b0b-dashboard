@@ -11,7 +11,7 @@
 | **APIs** | Anthropic | ~$20/mo | Active | Claude for development |
 | **Hosting** | Railway | ~$5-20/mo | Active | 0type, dashboard deployments |
 | **Hosting** | Vercel | $0 | Active | Free tier for static sites |
-| **Services** | AgentMail | TBD | Evaluating | Agent email addresses |
+| **Services** | AgentMail | Free tier | ✅ ACTIVE | Agent email addresses LIVE! |
 | **Domain** | b0b.dev | ~$12/yr | Active | Primary domain |
 
 ### Monthly Total (Current)
@@ -49,11 +49,17 @@
 ## Agent Infrastructure
 
 ### Current Agents
-| Agent | Email | Purpose |
-|-------|-------|---------|
-| b0b | b0b@agentmail.to | Main operations |
-| r0ss | r0ss@agentmail.to | Creative/art |
-| c0m | c0m@agentmail.to | Communications |
+| Agent | Email | Purpose | Status |
+|-------|-------|---------|--------|
+| b0b | b0b@agentmail.to | Main operations | ✅ LIVE |
+| d0t | d0t@agentmail.to | Trading/Finance | ✅ LIVE |
+| c0m | c0m@agentmail.to | Security/Risk | ✅ LIVE |
+
+### AgentMail Integration (ACTIVE 2026-01-29)
+- ✅ All 3 inboxes created and verified
+- ✅ API integration built (brain/agentmail.js)
+- ✅ Brain server endpoints: /email/*
+- ✅ Browser automation (Playwright) for autonomous registration
 
 ### Needed
 - [ ] Virtual phone numbers for 2FA (Twilio?)
@@ -75,10 +81,10 @@
 - [ ] Research portrait.so virtual cards: https://portrait.so/machines
 
 ### Short-term
-- [ ] Replace example.com email placeholders in codebase
-- [ ] Set up actual email forwarding or AgentMail integration
+- [x] ~~Set up actual email forwarding or AgentMail integration~~ ✅ DONE 2026-01-29
 - [ ] First revenue from 0TYPE subscriptions
 - [ ] Explore machines.cash for agent virtual cards (https://machines.cash)
+- [ ] c0m register on Immunefi + HackerOne (autonomous!)
 
 ### Long-term
 - [ ] Logo foundry service expansion

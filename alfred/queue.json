@@ -1,13 +1,18 @@
 {
   "tasks": [
-    "Fix 0type stroke preset rendering - each preset must produce visually different output",
-    "Verify with visual-debug screenshots"
+    "c0m: Register on Immunefi TODAY",
+    "c0m: Register on HackerOne TODAY",
+    "c0m: First bug bounty submission by MONDAY Feb 3",
+    "c0m: Complete PortSwigger XSS labs this WEEKEND",
+    "b0b: 0TYPE pricing page LIVE by Sunday",
+    "d0t: Bankr Club application THIS WEEKEND (boss funding)",
+    "d0t: Signal API docs by Monday"
   ],
   "notes": [
-    "[2026-01-27T06:36:04.475Z] The perfect-freehand library WORKS (verified via test-library.js). Issue is in how presets connect to renderer in UI.",
-    "[2026-01-27T06:46:21.113Z] TURB0B00ST Sprint: Library test confirms perfect-freehand produces 5.5x variation (5896 to 32660 sq units). Created /compare page for side-by-side visual testing. Issue is not the library - connection to UI render pipeline needs verification when server runs.",
-    "[2026-01-27T06:49:19.648Z] FULL TEST: Git commit 5d7b6c8 saved. 87 files. Machine healthy: CPU 22%, 38GB RAM free, 1.2TB disk free. Ready for close/reopen test.",
-    "[2026-01-27T06:55:13.333Z] Mouse control WORKING! Created mouse.js with PowerShell-based control. Demo draws square pattern. No native compilation needed."
+    "[2026-01-29T18:30:00.000Z] ACCELERATED TIMELINE: Boss getting paid tomorrow/Saturday - funding available for Bankr + tools.",
+    "[2026-01-29T18:30:00.000Z] NEW TARGETS: First bounty submission MON Feb 3, 0TYPE live SUN Feb 2, Bankr app THIS WEEKEND.",
+    "[2026-01-29T18:30:00.000Z] c0m has full toolkit ready - just needs platform registration and first hunt."
   ],
   "controlMode": "turbo"
 }
+
