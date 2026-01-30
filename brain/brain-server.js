@@ -385,6 +385,102 @@ app.get('/l0re/lexicon', (req, res) => {
 });
 
 // ═══════════════════════════════════════════════════════════════
+// L0RE LLM — Library Language Model API
+// ═══════════════════════════════════════════════════════════════
+
+// Get L0RE LLM index (library + crawler knowledge)
+app.get('/l0re/llm', async (req, res) => {
+  try {
+    const indexPath = path.join(__dirname, 'data', 'l0re-llm-index.json');
+    const data = await fs.readFile(indexPath, 'utf8');
+    res.json(JSON.parse(data));
+  } catch (e) {
+    res.status(404).json({ 
+      error: 'L0RE LLM index not found',
+      hint: 'Run: node crawlers/l0re-llm.js sync'
+    });
+  }
+});
+
+// Get AI-ready context for an agent
+app.get('/l0re/llm/context/:agent?', async (req, res) => {
+  try {
+    const indexPath = path.join(__dirname, 'data', 'l0re-llm-index.json');
+    const data = JSON.parse(await fs.readFile(indexPath, 'utf8'));
+    const agent = req.params.agent;
+    
+    const context = {
+      timestamp: new Date().toISOString(),
+      swarm: 'w3 ar3',
+      agents: ['b0b', 'c0m', 'd0t', 'r0ss'],
+    };
+    
+    if (agent && data.agentKnowledge?.[agent]) {
+      const ak = data.agentKnowledge[agent];
+      context.focusAgent = agent;
+      context.agentCode = ak.code;
+      context.domains = ak.domains;
+      context.documentCount = ak.documents?.length || 0;
+      context.relevantDocs = ak.documents?.slice(0, 10) || [];
+      context.crawlerSources = ak.crawlerSources || [];
+    } else {
+      // Return all agent summaries
+      context.allAgents = {};
+      for (const [a, ak] of Object.entries(data.agentKnowledge || {})) {
+        context.allAgents[a] = {
+          code: ak.code,
+          domains: ak.domains,
+          docCount: ak.documents?.length || 0,
+        };
+      }
+    }
+    
+    res.json(context);
+  } catch (e) {
+    res.status(404).json({ error: 'L0RE LLM context not available' });
+  }
+});
+
+// Search L0RE library
+app.get('/l0re/llm/search', async (req, res) => {
+  const query = req.query.q;
+  if (!query) {
+    return res.status(400).json({ error: 'Missing query parameter ?q=' });
+  }
+  
+  try {
+    const indexPath = path.join(__dirname, 'data', 'l0re-llm-index.json');
+    const data = JSON.parse(await fs.readFile(indexPath, 'utf8'));
+    const lowerQuery = query.toLowerCase();
+    const results = [];
+    
+    for (const [category, catData] of Object.entries(data.library || {})) {
+      for (const doc of catData.documents || []) {
+        let score = 0;
+        if (doc.filename?.toLowerCase().includes(lowerQuery)) score += 5;
+        for (const topic of doc.topics || []) {
+          if (topic.toLowerCase().includes(lowerQuery)) score += 3;
+        }
+        if (category.includes(lowerQuery)) score += 2;
+        if (doc.excerpt?.toLowerCase().includes(lowerQuery)) score += 1;
+        
+        if (score > 0) {
+          results.push({ ...doc, category, score });
+        }
+      }
+    }
+    
+    res.json({
+      query,
+      count: results.length,
+      results: results.sort((a, b) => b.score - a.score).slice(0, 20),
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════
 // L0RE HOTKEYS — Cross-LLM Flow State Synchronicity
 // ═══════════════════════════════════════════════════════════════
 
