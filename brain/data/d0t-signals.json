@@ -2,10 +2,12 @@
   "timestamp": null,
   "agent": "d0t",
   "role": "Data Oracle",
-  "sentiment": null,
   "predictions": [],
   "onchain": null,
+  "dex": null,
   "patterns": [],
   "insights": [],
-  "note": "CLEAN STATE - No fake data. Only real signals from verified sources."
+  "l0re": null,
+  "turb0": null,
+  "note": "FORWARD-LOOKING DATA ONLY. No lagging indicators. Polymarket predictions, on-chain flows, volume spikes."
 }

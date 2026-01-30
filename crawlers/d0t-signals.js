@@ -52,13 +52,18 @@ class D0TSignalsCrawler extends BaseCrawler {
     this.l0reIntelligence = D0TIntelligence ? new D0TIntelligence() : null;
     this.turb0Engine = TURB0B00STEngine ? new TURB0B00STEngine() : null;
     
-    // Signal sources
+    // Signal sources — PRIORITIZED BY VALUE
+    // 1. Polymarket = FORWARD-LOOKING predictions (highest alpha)
+    // 2. DeFiLlama = REAL money flows (on-chain truth)
+    // 3. DexScreener = REAL-TIME trading activity
+    // 4. News = Breaking events BEFORE sentiment shifts
     this.sources = {
       polymarket: 'https://gamma-api.polymarket.com',
       defillama: 'https://api.llama.fi',
-      coingecko: 'https://api.coingecko.com/api/v3',
-      fear_greed: 'https://api.alternative.me/fng/',
+      dexscreener: 'https://api.dexscreener.com',
     };
+    
+    // NO lagging indicators (Fear & Greed is what happened, not what's coming)
   }
 
   async fetch() {
@@ -67,22 +72,22 @@ class D0TSignalsCrawler extends BaseCrawler {
       agent: 'd0t',
       role: 'Data Oracle',
       
-      // Market sentiment (raw from API)
-      sentiment: await this.fetchSentiment(),
-      
-      // Prediction markets
+      // FORWARD-LOOKING: What smart money is betting on
       predictions: await this.fetchPredictions(),
       
-      // On-chain signals
+      // REAL-TIME: On-chain money flows
       onchain: await this.fetchOnChain(),
       
-      // Pattern detection
+      // REAL-TIME: Volume spikes, whale moves, trending tokens
+      dex: await this.fetchDexActivity(),
+      
+      // OUR ANALYSIS: Pattern detection from raw data
       patterns: [],
       
-      // Actionable insights
+      // OUR INSIGHTS: Actionable alpha, not lagging sentiment
       insights: [],
       
-      // L0RE Intelligence classification (NOT just API parroting)
+      // L0RE Intelligence classification (OUR logic, not API parroting)
       l0re: null,
       
       // TURB0B00ST decision (if engine available)
@@ -109,10 +114,10 @@ class D0TSignalsCrawler extends BaseCrawler {
       }
     }
 
-    // Analyze patterns (legacy + L0RE enhanced)
+    // Analyze patterns from REAL data (not sentiment APIs)
     signals.patterns = this.detectPatterns(signals);
     
-    // Generate insights (L0RE-enhanced)
+    // Generate ACTIONABLE insights (forward-looking, not lagging)
     signals.insights = this.generateInsights(signals);
     
     // Save learning if significant
@@ -123,19 +128,46 @@ class D0TSignalsCrawler extends BaseCrawler {
     return signals;
   }
 
-  async fetchSentiment() {
+  // DexScreener: REAL trading activity happening NOW
+  async fetchDexActivity() {
     try {
-      const res = await axios.get(this.sources.fear_greed, { timeout: 5000 });
-      const data = res.data?.data?.[0];
+      // Get trending tokens on Base
+      const res = await axios.get(`${this.sources.dexscreener}/token-profiles/latest/v1`, {
+        timeout: 10000
+      });
+      
+      const baseTokens = (res.data || [])
+        .filter(t => t.chainId === 'base')
+        .slice(0, 10)
+        .map(t => ({
+          symbol: t.tokenAddress?.slice(0, 10),
+          url: t.url,
+          description: t.description?.slice(0, 100),
+        }));
+      
+      // Get volume spikes on Base pairs
+      const pairsRes = await axios.get(`${this.sources.dexscreener}/latest/dex/pairs/base`, {
+        timeout: 10000
+      });
+      
+      const volumeSpikes = (pairsRes.data?.pairs || [])
+        .filter(p => p.volume?.h6 > 50000 && p.priceChange?.h6 > 10)
+        .slice(0, 5)
+        .map(p => ({
+          symbol: p.baseToken?.symbol,
+          priceChange6h: p.priceChange?.h6,
+          volume6h: p.volume?.h6,
+          liquidity: p.liquidity?.usd,
+        }));
+      
       return {
-        index: parseInt(data?.value) || 50,
-        classification: data?.value_classification || 'Neutral',
-        timestamp: data?.timestamp,
-        trend: this.calculateTrend('fear_greed', parseInt(data?.value) || 50)
+        newTokens: baseTokens,
+        volumeSpikes,
+        timestamp: new Date().toISOString(),
       };
     } catch (e) {
-      this.log(`Sentiment fetch failed: ${e.message}`, 'warn');
-      return { index: 50, classification: 'Unknown', error: e.message };
+      this.log(`Dex fetch failed: ${e.message}`, 'warn');
+      return { error: e.message };
     }
   }
 
@@ -290,26 +322,66 @@ class D0TSignalsCrawler extends BaseCrawler {
       });
     }
     
-    // LEGACY: Fear/Greed extremes (kept for backwards compat but L0RE is better)
-    if (signals.sentiment?.index <= 20) {
-      patterns.push({ type: 'extreme_fear', confidence: 0.8, action: 'potential_buy_signal' });
-    } else if (signals.sentiment?.index >= 80) {
-      patterns.push({ type: 'extreme_greed', confidence: 0.8, action: 'potential_sell_signal' });
+    // VOLUME SPIKES: Real trading activity (high alpha)
+    if (signals.dex?.volumeSpikes?.length > 0) {
+      for (const spike of signals.dex.volumeSpikes) {
+        patterns.push({
+          type: 'volume_spike',
+          token: spike.symbol,
+          priceChange: spike.priceChange6h,
+          volume: spike.volume6h,
+          confidence: 0.9,
+          action: spike.priceChange6h > 20 ? 'momentum_play' : 'watch',
+        });
+      }
     }
     
-    // High volume predictions
-    const highVolume = signals.predictions?.filter(p => p.volume24h > 1000000);
-    if (highVolume?.length > 0) {
+    // HIGH CONVICTION PREDICTIONS: Smart money bets (forward-looking)
+    const highConviction = signals.predictions?.filter(p => {
+      const prob = p.probability;
+      return prob !== null && (prob > 0.8 || prob < 0.2);
+    });
+    if (highConviction?.length > 0) {
       patterns.push({ 
-        type: 'high_conviction_markets', 
-        count: highVolume.length,
-        markets: highVolume.map(p => p.question?.slice(0, 50))
+        type: 'high_conviction_bets', 
+        count: highConviction.length,
+        markets: highConviction.map(p => ({
+          question: p.question?.slice(0, 60),
+          probability: p.probability,
+          direction: p.probability > 0.5 ? 'YES' : 'NO',
+        }))
       });
     }
     
-    // Base chain momentum
-    if (signals.onchain?.base_change_1d > 10) {
-      patterns.push({ type: 'base_momentum', direction: 'up', change: signals.onchain.base_change_1d });
+    // TVL MOMENTUM: Real money flows
+    if (signals.onchain?.base_change_1d > 5) {
+      patterns.push({ 
+        type: 'tvl_inflow', 
+        chain: 'base', 
+        change: signals.onchain.base_change_1d,
+        tvl: signals.onchain.base_tvl,
+        confidence: 0.85,
+        action: 'base_ecosystem_growing'
+      });
+    } else if (signals.onchain?.base_change_1d < -5) {
+      patterns.push({ 
+        type: 'tvl_outflow', 
+        chain: 'base', 
+        change: signals.onchain.base_change_1d,
+        tvl: signals.onchain.base_tvl,
+        confidence: 0.85,
+        action: 'base_ecosystem_cooling'
+      });
+    }
+    
+    // NEW TOKEN ACTIVITY: Early signals
+    if (signals.dex?.newTokens?.length > 5) {
+      patterns.push({
+        type: 'high_token_activity',
+        count: signals.dex.newTokens.length,
+        confidence: 0.7,
+        action: 'increased_degen_activity'
+      });
     }
     
     return patterns;
@@ -331,7 +403,7 @@ class D0TSignalsCrawler extends BaseCrawler {
       });
     }
     
-    // L0RE-ENHANCED: d0t state insights
+    // L0RE-ENHANCED: d0t state insights (OUR analysis)
     if (signals.l0re) {
       insights.push({
         priority: 'high',
@@ -355,23 +427,63 @@ class D0TSignalsCrawler extends BaseCrawler {
       }
     }
     
-    // LEGACY: Pattern-based insights (for backwards compat)
+    // VOLUME SPIKES: Actionable trading signals
     for (const pattern of signals.patterns || []) {
-      if (pattern.type === 'extreme_fear' && !signals.l0re) {
+      if (pattern.type === 'volume_spike') {
         insights.push({
-          priority: 'high',
-          insight: 'Extreme fear detected — historically a good entry point',
-          action: 'Review buying opportunities',
-          confidence: pattern.confidence
+          priority: pattern.priceChange > 30 ? 'high' : 'medium',
+          insight: `🔥 ${pattern.token} up ${pattern.priceChange?.toFixed(1)}% with $${(pattern.volume/1000).toFixed(0)}k volume`,
+          action: pattern.action,
+          confidence: pattern.confidence,
+          source: 'dex_volume_analysis'
         });
       }
       
-      if (pattern.type === 'base_momentum' && pattern.direction === 'up') {
+      // HIGH CONVICTION PREDICTIONS: Forward-looking bets
+      if (pattern.type === 'high_conviction_bets') {
+        for (const market of pattern.markets || []) {
+          insights.push({
+            priority: 'high',
+            insight: `📊 ${market.question} → ${market.direction} (${(market.probability * 100).toFixed(0)}%)`,
+            action: 'Monitor for event outcome',
+            confidence: 0.85,
+            source: 'polymarket_conviction'
+          });
+        }
+      }
+      
+      // TVL FLOWS: Real money movements
+      if (pattern.type === 'tvl_inflow') {
         insights.push({
           priority: 'medium',
-          insight: `Base chain TVL up ${pattern.change.toFixed(1)}% — ecosystem growing`,
-          action: 'Monitor Base-native opportunities',
-          confidence: 0.7
+          insight: `💰 Base TVL +${pattern.change.toFixed(1)}% ($${(pattern.tvl/1e9).toFixed(2)}B total)`,
+          action: 'Ecosystem expanding — watch for opportunities',
+          confidence: pattern.confidence,
+          source: 'defillama_tvl'
+        });
+      }
+      
+      if (pattern.type === 'tvl_outflow') {
+        insights.push({
+          priority: 'medium',
+          insight: `⚠️ Base TVL ${pattern.change.toFixed(1)}% ($${(pattern.tvl/1e9).toFixed(2)}B total)`,
+          action: 'Capital rotating out — be cautious',
+          confidence: pattern.confidence,
+          source: 'defillama_tvl'
+        });
+      }
+    }
+    
+    // If no insights yet, at least report predictions status
+    if (insights.length === 0 && signals.predictions?.length > 0) {
+      const topPrediction = signals.predictions[0];
+      if (topPrediction?.question) {
+        insights.push({
+          priority: 'low',
+          insight: `Top market: ${topPrediction.question}`,
+          action: 'Monitoring',
+          confidence: 0.5,
+          source: 'polymarket'
         });
       }
     }
