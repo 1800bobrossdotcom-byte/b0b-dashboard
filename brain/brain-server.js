@@ -385,6 +385,74 @@ app.get('/l0re/lexicon', (req, res) => {
 });
 
 // ═══════════════════════════════════════════════════════════════
+// L0RE HOTKEYS — Cross-LLM Flow State Synchronicity
+// ═══════════════════════════════════════════════════════════════
+
+let L0REHotkeys;
+try {
+  L0REHotkeys = require('./l0re-hotkeys');
+  console.log('[BRAIN] L0RE Hotkeys loaded - cross-LLM sync ready');
+} catch (e) {
+  console.log('[BRAIN] L0RE Hotkeys not available:', e.message);
+}
+
+// List all hotkeys
+app.get('/l0re/hotkeys', (req, res) => {
+  if (!L0REHotkeys) {
+    return res.status(503).json({ error: 'L0RE Hotkeys not loaded' });
+  }
+  const hotkeys = Object.entries(L0REHotkeys.HOTKEYS).map(([key, val]) => ({
+    key,
+    name: val.name,
+    action: val.action
+  }));
+  res.json({
+    count: hotkeys.length,
+    hotkeys,
+    message: 'Synchronicity is the standard time zone - HQ'
+  });
+});
+
+// Invoke a hotkey
+app.get('/l0re/hotkey/:key', async (req, res) => {
+  if (!L0REHotkeys) {
+    return res.status(503).json({ error: 'L0RE Hotkeys not loaded' });
+  }
+  const { key } = req.params;
+  const result = await L0REHotkeys.invoke(key);
+  res.json(result);
+});
+
+// Encode flow state
+app.post('/l0re/flowstate/encode', async (req, res) => {
+  if (!L0REHotkeys) {
+    return res.status(503).json({ error: 'L0RE Hotkeys not loaded' });
+  }
+  const state = req.body;
+  const result = await L0REHotkeys.encode(state);
+  res.json(result);
+});
+
+// Decode flow state
+app.get('/l0re/flowstate/decode/:hash', async (req, res) => {
+  if (!L0REHotkeys) {
+    return res.status(503).json({ error: 'L0RE Hotkeys not loaded' });
+  }
+  const { hash } = req.params;
+  const result = await L0REHotkeys.decode(hash);
+  res.json(result);
+});
+
+// Get latest flow state
+app.get('/l0re/flowstate/latest', async (req, res) => {
+  if (!L0REHotkeys) {
+    return res.status(503).json({ error: 'L0RE Hotkeys not loaded' });
+  }
+  const latest = await L0REHotkeys.getLatest();
+  res.json(latest || { message: 'No flow state recorded yet' });
+});
+
+// ═══════════════════════════════════════════════════════════════
 // RESEARCH LIBRARY — Knowledge Base API
 // ═══════════════════════════════════════════════════════════════
 
