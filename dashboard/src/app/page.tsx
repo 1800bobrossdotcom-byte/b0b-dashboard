@@ -1,127 +1,88 @@
 'use client';
 
-/**
- * B0B.DEV — DATA VERIFICATION
- * No bullshit. Show the data or show the error.
- */
-
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 
 const BRAIN_URL = 'https://b0b-brain-production.up.railway.app';
+const WALLET = '0xCA4Ca0c7b26e51805c20C95DF02Ea86feA938D78';
 
 export default function B0bDev() {
-  const [health, setHealth] = useState<any>(null);
-  const [pulse, setPulse] = useState<any>(null);
-  const [turb0, setTurb0] = useState<string>('');
-  const [errors, setErrors] = useState<string[]>([]);
+  const [data, setData] = useState<any>(null);
+  const [wallet, setWallet] = useState('0 ETH');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const checkAll = async () => {
-      const newErrors: string[] = [];
-      
-      // Health
+    const load = async () => {
       try {
-        const res = await fetch(`${BRAIN_URL}/health`, { cache: 'no-store' });
-        const data = await res.json();
-        setHealth(data);
-      } catch (e: any) {
-        newErrors.push(`HEALTH: ${e.message}`);
+        const [pulse, walletRes] = await Promise.all([
+          fetch(`${BRAIN_URL}/pulse`, { cache: 'no-store' }).then(r => r.json()),
+          fetch(`https://base.blockscout.com/api/v2/addresses/${WALLET}`).then(r => r.json())
+        ]);
+        
+        setData(pulse);
+        setWallet(`${(parseFloat(walletRes.coin_balance || 0) / 1e18).toFixed(4)} ETH`);
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setLoading(false);
       }
-
-      // Pulse
-      try {
-        const res = await fetch(`${BRAIN_URL}/pulse`, { cache: 'no-store' });
-        const data = await res.json();
-        setPulse(data);
-      } catch (e: any) {
-        newErrors.push(`PULSE: ${e.message}`);
-      }
-
-      // TURB0
-      try {
-        const res = await fetch(`${BRAIN_URL}/turb0/dashboard`, { cache: 'no-store' });
-        const data = await res.text();
-        setTurb0(data);
-      } catch (e: any) {
-        newErrors.push(`TURB0: ${e.message}`);
-      }
-
-      setErrors(newErrors);
     };
     
-    checkAll();
-    const interval = setInterval(checkAll, 15000);
+    load();
+    const interval = setInterval(load, 15000);
     return () => clearInterval(interval);
   }, []);
 
+  if (loading) return <div className="min-h-screen bg-black text-white font-mono p-8"><div className="text-2xl">LOADING...</div></div>;
+
+  const signals = data?.d0t?.signals;
+  const topMarket = signals?.predictions?.[0];
+  const turb0 = signals?.turb0;
+
   return (
-    <main className="min-h-screen bg-black text-white font-mono p-8">
-      <header className="border border-white p-6 mb-8">
-        <h1 className="text-4xl mb-2">B0B.DEV</h1>
-        <p className="text-xl">LIVE DATA VERIFICATION</p>
-        <div className="flex gap-4 mt-4">
-          <Link href="/veritas" className="border border-white px-4 py-2 hover:bg-white hover:text-black">
-            VERITAS
-          </Link>
-          <Link href="/crawlers" className="border border-white px-4 py-2 hover:bg-white hover:text-black">
-            CRAWLERS
-          </Link>
-          <Link href="/integrity" className="border border-white px-4 py-2 hover:bg-white hover:text-black">
-            INTEGRITY
-          </Link>
-        </div>
-      </header>
+    <main className="min-h-screen bg-black text-white font-mono p-4 md:p-8">
+      {/* HEADER */}
+      <div className="border border-white p-4 mb-6">
+        <h1 className="text-3xl md:text-4xl">B0B.DEV</h1>
+        <div className="text-green-500 mt-2">{wallet}</div>
+      </div>
 
-      {/* ERRORS */}
-      {errors.length > 0 && (
-        <div className="border border-red-500 p-6 mb-8">
-          <div className="text-2xl text-red-500 mb-4">ERRORS</div>
-          {errors.map((err, i) => (
-            <div key={i} className="text-red-500 mb-2">{err}</div>
-          ))}
-        </div>
-      )}
-
-      {/* BRAIN HEALTH */}
-      {health && (
-        <div className="border border-green-500 p-6 mb-8">
-          <div className="text-2xl mb-4">BRAIN HEALTH</div>
-          <div className="grid grid-cols-2 gap-4">
-            <div>STATUS: {health.status}</div>
-            <div>UPTIME: {health.uptime}s</div>
-            <div>AGENTS: {health.agents?.join(', ')}</div>
-            <div>MEMORY: {(health.memory?.heapUsed / 1024 / 1024).toFixed(0)}MB</div>
-          </div>
-        </div>
-      )}
-
-      {/* PULSE DATA */}
-      {pulse?.d0t && (
-        <div className="border border-white p-6 mb-8">
-          <div className="text-2xl mb-4">d0t SIGNALS</div>
-          {pulse.d0t.signals?.predictions?.slice(0, 3).map((p: any, i: number) => (
-            <div key={i} className="mb-2 text-sm">
-              • {p.question} — ${(p.volume24h / 1000000).toFixed(1)}M
-            </div>
-          ))}
-          {pulse.d0t.signals?.onchain && (
-            <div className="mt-4 text-sm text-gray-500">
-              BASE TVL: ${(pulse.d0t.signals.onchain.base_tvl / 1000000000).toFixed(1)}B
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* TURB0 */}
+      {/* TURB0 DECISION */}
       {turb0 && (
-        <div className="border border-white p-6">
-          <div className="text-2xl mb-4">TURB0B00ST</div>
-          <pre className="text-xs overflow-auto whitespace-pre">
-            {turb0.split('\n').slice(0, 20).join('\n')}
-          </pre>
+        <div className="border border-yellow-500 p-4 mb-6">
+          <div className="text-xl mb-2">TURB0B00ST</div>
+          <div className="text-3xl text-yellow-500">{turb0.decision} {(turb0.confidence * 100).toFixed(0)}%</div>
+          <div className="text-sm mt-2 text-gray-400">{turb0.reasoning?.[0]}</div>
         </div>
       )}
+
+      {/* MARKET SIGNALS */}
+      {topMarket && (
+        <div className="border border-white p-4 mb-6">
+          <div className="text-xl mb-2">POLYMARKET</div>
+          <div className="text-sm">{topMarket.question}</div>
+          <div className="text-green-500 mt-1">${(topMarket.volume24h / 1e6).toFixed(1)}M volume</div>
+        </div>
+      )}
+
+      {/* ON-CHAIN */}
+      {signals?.onchain && (
+        <div className="border border-white p-4 mb-6">
+          <div className="text-xl mb-2">ON-CHAIN</div>
+          <div>Base TVL: ${(signals.onchain.base_tvl / 1e9).toFixed(2)}B</div>
+          <div>ETH TVL: ${(signals.onchain.eth_tvl / 1e9).toFixed(2)}B</div>
+        </div>
+      )}
+
+      {/* AGENTS */}
+      <div className="border border-white p-4">
+        <div className="text-xl mb-2">AGENTS</div>
+        <div className="grid grid-cols-2 gap-2 text-sm">
+          <div>d0t: {signals?.l0re?.d0t?.state || 'UNKNOWN'}</div>
+          <div>c0m: {turb0?.agents?.c0m?.state || 'UNKNOWN'}</div>
+          <div>b0b: {turb0?.agents?.b0b?.state || 'UNKNOWN'}</div>
+          <div>r0ss: {turb0?.agents?.r0ss?.state || 'UNKNOWN'}</div>
+        </div>
+      </div>
 
       <header className="mb-8">
         <h1 className="text-4xl font-bold text-[#00FF88]">B0B.DEV</h1>
