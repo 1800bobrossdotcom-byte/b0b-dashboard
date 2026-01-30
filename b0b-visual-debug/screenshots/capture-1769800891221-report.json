@@ -1,0 +1,38 @@
+{
+  "timestamp": "2026-01-30T19:21:31.289Z",
+  "url": "https://b0b-brain-production.up.railway.app/health",
+  "screenshot": "C:\\workspace\\b0b-platform\\b0b-visual-debug\\screenshots\\capture-1769800891221.png",
+  "page": {
+    "title": "",
+    "url": "https://b0b-brain-production.up.railway.app/health",
+    "elements": {
+      "buttons": 0,
+      "inputs": 0,
+      "canvases": 0,
+      "images": 0,
+      "links": 0
+    },
+    "text": {
+      "body": "{\"status\":\"alive\",\"timestamp\":\"2026-01-30T19:21:30.539Z\",\"uptime\":25,\"agents\":[\"b0b\",\"r0ss\",\"c0m\",\"d0t\"],\"memory\":{\"rss\":109871104,\"heapTotal\":45084672,\"heapUsed\":41933920,\"external\":4684581,\"arrayBuffers\":1111205},\"message\":\"B0B brain is thinking... 🧠\"}"
+    },
+    "errors": []
+  },
+  "canvas": null,
+  "consoleLogs": [
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 ()",
+      "timestamp": "2026-01-30T19:21:30.630Z"
+    }
+  ],
+  "config": {
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "timeout": 30000,
+    "waitUntil": "networkidle0",
+    "outputDir": "C:\\workspace\\b0b-platform\\b0b-visual-debug\\screenshots",
+    "url": "https://b0b-brain-production.up.railway.app/health"
+  }
+}

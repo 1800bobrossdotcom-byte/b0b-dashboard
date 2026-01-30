@@ -20,5 +20,262 @@
       "c0m"
     ],
     "contextSummary": "[Context: 20 pending actions, BEARISH market, $300 treasury]"
+  },
+  {
+    "timestamp": "2026-01-30T18:19:04.307Z",
+    "type": "heartbeat",
+    "status": "alive"
+  },
+  {
+    "timestamp": "2026-01-30T18:19:07.322Z",
+    "type": "live_trader",
+    "action": "dual_mode_started",
+    "wallet": "",
+    "mode": "presence+sniper",
+    "focus": [
+      "Top 100 Base",
+      "Bankr",
+      "Clanker",
+      "Clawd",
+      "AI"
+    ]
+  },
+  {
+    "timestamp": "2026-01-30T18:19:07.360Z",
+    "type": "ideation_started",
+    "discussionId": "ideation-1769797147357",
+    "topic": "research opportunities",
+    "agents": [
+      "b0b",
+      "r0ss",
+      "c0m"
+    ],
+    "contextSummary": "[Context: 20 pending actions, BEARISH market, $300 treasury]"
+  },
+  {
+    "timestamp": "2026-01-30T18:21:57.096Z",
+    "type": "crawler",
+    "action": "polymarket",
+    "markets": 20
+  },
+  {
+    "timestamp": "2026-01-30T18:21:57.426Z",
+    "type": "git_fetch",
+    "repos": 1
+  },
+  {
+    "timestamp": "2026-01-30T18:23:57.102Z",
+    "type": "crawler",
+    "action": "polymarket",
+    "markets": 20
+  },
+  {
+    "timestamp": "2026-01-30T18:25:57.106Z",
+    "type": "crawler",
+    "action": "polymarket",
+    "markets": 20
+  },
+  {
+    "timestamp": "2026-01-30T18:26:56.978Z",
+    "type": "heartbeat",
+    "status": "alive"
+  },
+  {
+    "timestamp": "2026-01-30T18:26:57.495Z",
+    "type": "git_fetch",
+    "repos": 1
+  },
+  {
+    "timestamp": "2026-01-30T18:27:57.211Z",
+    "type": "crawler",
+    "action": "polymarket",
+    "markets": 20
+  },
+  {
+    "timestamp": "2026-01-30T18:29:57.119Z",
+    "type": "crawler",
+    "action": "polymarket",
+    "markets": 20
+  },
+  {
+    "timestamp": "2026-01-30T18:31:56.981Z",
+    "type": "heartbeat",
+    "status": "alive"
+  },
+  {
+    "timestamp": "2026-01-30T18:31:57.112Z",
+    "type": "crawler",
+    "action": "polymarket",
+    "markets": 20
+  },
+  {
+    "timestamp": "2026-01-30T18:31:57.414Z",
+    "type": "git_fetch",
+    "repos": 1
+  },
+  {
+    "timestamp": "2026-01-30T18:33:57.115Z",
+    "type": "crawler",
+    "action": "polymarket",
+    "markets": 20
+  },
+  {
+    "timestamp": "2026-01-30T18:35:57.153Z",
+    "type": "crawler",
+    "action": "polymarket",
+    "markets": 20
+  },
+  {
+    "timestamp": "2026-01-30T18:36:56.983Z",
+    "type": "heartbeat",
+    "status": "alive"
+  },
+  {
+    "timestamp": "2026-01-30T18:36:57.354Z",
+    "type": "git_fetch",
+    "repos": 1
+  },
+  {
+    "timestamp": "2026-01-30T18:37:57.127Z",
+    "type": "crawler",
+    "action": "polymarket",
+    "markets": 20
+  },
+  {
+    "timestamp": "2026-01-30T18:39:57.123Z",
+    "type": "crawler",
+    "action": "polymarket",
+    "markets": 20
+  },
+  {
+    "timestamp": "2026-01-30T18:41:56.987Z",
+    "type": "heartbeat",
+    "status": "alive"
+  },
+  {
+    "timestamp": "2026-01-30T18:41:57.250Z",
+    "type": "crawler",
+    "action": "polymarket",
+    "markets": 20
+  },
+  {
+    "timestamp": "2026-01-30T18:41:57.479Z",
+    "type": "git_fetch",
+    "repos": 1
+  },
+  {
+    "timestamp": "2026-01-30T18:43:57.142Z",
+    "type": "crawler",
+    "action": "polymarket",
+    "markets": 20
+  },
+  {
+    "timestamp": "2026-01-30T18:45:30.128Z",
+    "type": "heartbeat",
+    "status": "alive"
+  },
+  {
+    "timestamp": "2026-01-30T18:45:30.300Z",
+    "type": "crawler",
+    "action": "polymarket",
+    "markets": 20
+  },
+  {
+    "timestamp": "2026-01-30T18:45:30.589Z",
+    "type": "git_fetch",
+    "repos": 1
+  },
+  {
+    "timestamp": "2026-01-30T18:45:33.140Z",
+    "type": "live_trader",
+    "action": "dual_mode_started",
+    "wallet": "",
+    "mode": "presence+sniper",
+    "focus": [
+      "Top 100 Base",
+      "Bankr",
+      "Clanker",
+      "Clawd",
+      "AI"
+    ]
+  },
+  {
+    "timestamp": "2026-01-30T18:46:24.620Z",
+    "type": "heartbeat",
+    "status": "alive"
+  },
+  {
+    "timestamp": "2026-01-30T18:46:24.803Z",
+    "type": "crawler",
+    "action": "polymarket",
+    "markets": 20
+  },
+  {
+    "timestamp": "2026-01-30T18:46:25.064Z",
+    "type": "git_fetch",
+    "repos": 1
+  },
+  {
+    "timestamp": "2026-01-30T18:46:27.634Z",
+    "type": "live_trader",
+    "action": "dual_mode_started",
+    "wallet": "",
+    "mode": "presence+sniper",
+    "focus": [
+      "Top 100 Base",
+      "Bankr",
+      "Clanker",
+      "Clawd",
+      "AI"
+    ]
+  },
+  {
+    "timestamp": "2026-01-30T18:48:48.218Z",
+    "type": "heartbeat",
+    "status": "alive"
+  },
+  {
+    "timestamp": "2026-01-30T18:48:48.413Z",
+    "type": "crawler",
+    "action": "polymarket",
+    "markets": 20
+  },
+  {
+    "timestamp": "2026-01-30T18:48:48.618Z",
+    "type": "git_fetch",
+    "repos": 1
+  },
+  {
+    "timestamp": "2026-01-30T18:48:51.230Z",
+    "type": "live_trader",
+    "action": "dual_mode_started",
+    "wallet": "",
+    "mode": "presence+sniper",
+    "focus": [
+      "Top 100 Base",
+      "Bankr",
+      "Clanker",
+      "Clawd",
+      "AI"
+    ]
+  },
+  {
+    "timestamp": "2026-01-30T18:49:26.656Z",
+    "type": "heartbeat",
+    "status": "alive"
+  },
+  {
+    "timestamp": "2026-01-30T18:49:29.671Z",
+    "type": "live_trader",
+    "action": "dual_mode_started",
+    "wallet": "",
+    "mode": "presence+sniper",
+    "focus": [
+      "Top 100 Base",
+      "Bankr",
+      "Clanker",
+      "Clawd",
+      "AI"
+    ]
   }
 ]

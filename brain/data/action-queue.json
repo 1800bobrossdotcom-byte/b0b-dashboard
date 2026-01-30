@@ -558,5 +558,165 @@
     "fromDiscussion": "ideation-1769757588133",
     "status": "queued",
     "queuedAt": "2026-01-30T07:19:48.136Z"
+  },
+  {
+    "id": "action-1769797147359-ubn8au",
+    "type": "task",
+    "agent": "b0b",
+    "description": "stay cautious",
+    "priority": "medium",
+    "fromDiscussion": "ideation-1769797147357",
+    "status": "queued",
+    "queuedAt": "2026-01-30T18:19:07.359Z"
+  },
+  {
+    "id": "action-1769797147359-ngjhc3",
+    "type": "task",
+    "agent": "b0b",
+    "description": "what's our exposure here? Market bearish, need to stay cautious",
+    "priority": "medium",
+    "fromDiscussion": "ideation-1769797147357",
+    "status": "queued",
+    "queuedAt": "2026-01-30T18:19:07.359Z"
+  },
+  {
+    "id": "action-1769797186704-ll6w0w",
+    "type": "task",
+    "agent": "c0m",
+    "description": "Implement Gmail OAuth scope reduction (limit to gmail.send and gmail.modify)",
+    "priority": "critical",
+    "fromDiscussion": "disc-1769797144315",
+    "status": "queued",
+    "queuedAt": "2026-01-30T18:19:46.704Z"
+  },
+  {
+    "id": "action-1769797186705-okz5wq",
+    "type": "task",
+    "agent": "c0m",
+    "description": "Enforce transaction signing for all financial API calls",
+    "priority": "critical",
+    "fromDiscussion": "disc-1769797144315",
+    "status": "queued",
+    "queuedAt": "2026-01-30T18:19:46.705Z"
+  },
+  {
+    "id": "action-1769797186706-mi9bhv",
+    "type": "task",
+    "agent": "r0ss",
+    "description": "Deploy a sandboxed live-trader integration with a $50 test stake",
+    "priority": "high",
+    "fromDiscussion": "disc-1769797144315",
+    "status": "queued",
+    "queuedAt": "2026-01-30T18:19:46.706Z"
+  },
+  {
+    "id": "action-1769797186706-w0zrqy",
+    "type": "task",
+    "agent": "d0t",
+    "description": "Activate the sandboxed trader against the 2 identified trading signals",
+    "priority": "high",
+    "fromDiscussion": "disc-1769797144315",
+    "status": "queued",
+    "queuedAt": "2026-01-30T18:19:46.706Z"
+  },
+  {
+    "id": "action-1769797186707-l5enjc",
+    "type": "task",
+    "agent": "r0ss",
+    "description": "Build a minimal billing dashboard using existing email data",
+    "priority": "medium",
+    "fromDiscussion": "disc-1769797144315",
+    "status": "queued",
+    "queuedAt": "2026-01-30T18:19:46.707Z"
+  },
+  {
+    "id": "action-1769797276008-tn6s2j",
+    "type": "task",
+    "agent": "r0ss",
+    "description": "Implement paper-trading sandbox with Alpaca API for isolated testing",
+    "priority": "critical",
+    "fromDiscussion": "disc-1769797227966",
+    "status": "queued",
+    "queuedAt": "2026-01-30T18:21:16.008Z"
+  },
+  {
+    "id": "action-1769797276009-nud2vn",
+    "type": "task",
+    "agent": "d0t",
+    "description": "Integrate with Alpaca paper-trading API using only manually confirmed trading alerts",
+    "priority": "critical",
+    "fromDiscussion": "disc-1769797227966",
+    "status": "queued",
+    "queuedAt": "2026-01-30T18:21:16.009Z"
+  },
+  {
+    "id": "action-1769797276009-g6pokp",
+    "type": "task",
+    "agent": "c0m",
+    "description": "Audit and fix Email Command Center classification rules to quarantine false positives",
+    "priority": "high",
+    "fromDiscussion": "disc-1769797227966",
+    "status": "queued",
+    "queuedAt": "2026-01-30T18:21:16.009Z"
+  },
+  {
+    "id": "action-1769797276010-k719sl",
+    "type": "task",
+    "agent": "r0ss",
+    "description": "Measure latency and accuracy of signal-to-execution pipeline in sandbox environment",
+    "priority": "high",
+    "fromDiscussion": "disc-1769797227966",
+    "status": "queued",
+    "queuedAt": "2026-01-30T18:21:16.010Z"
+  },
+  {
+    "id": "action-1769797276011-62yz1m",
+    "type": "task",
+    "agent": "d0t",
+    "description": "Quantify trading edge and measure P&L variance before live deployment",
+    "priority": "medium",
+    "fromDiscussion": "disc-1769797227966",
+    "status": "queued",
+    "queuedAt": "2026-01-30T18:21:16.011Z"
+  },
+  {
+    "id": "action-1769797316964-a1qcbx",
+    "type": "task",
+    "agent": "r0ss",
+    "description": "Implement a cron job to auto-archive tasks older than 12 hours",
+    "priority": "critical",
+    "fromDiscussion": "disc-1769797276012",
+    "status": "queued",
+    "queuedAt": "2026-01-30T18:21:56.964Z"
+  },
+  {
+    "id": "action-1769797316965-w9x0pq",
+    "type": "task",
+    "agent": "r0ss",
+    "description": "Deploy a minimal billing dashboard to visualize the $81/month burn and any trading income",
+    "priority": "high",
+    "fromDiscussion": "disc-1769797276012",
+    "status": "queued",
+    "queuedAt": "2026-01-30T18:21:56.965Z"
+  },
+  {
+    "id": "action-1769797316966-5cgpmu",
+    "type": "task",
+    "agent": "d0t",
+    "description": "Prioritize and implement the live-trader integration to generate revenue",
+    "priority": "high",
+    "fromDiscussion": "disc-1769797276012",
+    "status": "queued",
+    "queuedAt": "2026-01-30T18:21:56.966Z"
+  },
+  {
+    "id": "action-1769797316967-yyi6u7",
+    "type": "task",
+    "agent": "c0m",
+    "description": "Add audit logs for the auto-archive process and cash flow monitoring",
+    "priority": "medium",
+    "fromDiscussion": "disc-1769797276012",
+    "status": "queued",
+    "queuedAt": "2026-01-30T18:21:56.967Z"
   }
 ]

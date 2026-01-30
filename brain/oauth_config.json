@@ -1,0 +1,7 @@
+{
+  "scopes": [
+    "https://www.googleapis.com/auth/gmail.send",
+    "https://www.googleapis.com/auth/gmail.modify"
+  ],
+  "description": "Gmail OAuth configuration with reduced scopes for c0m agent"
+}

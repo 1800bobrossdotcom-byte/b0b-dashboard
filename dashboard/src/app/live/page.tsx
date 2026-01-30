@@ -59,14 +59,22 @@ interface LiveData {
 }
 
 export default function LiveTicker() {
+  const [mounted, setMounted] = useState(false);
   const [data, setData] = useState<LiveData | null>(null);
   const [freshness, setFreshness] = useState<any>(null);
   const [status, setStatus] = useState<'connecting' | 'online' | 'error'>('connecting');
   const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
   const [tick, setTick] = useState(0);
+  const [error, setError] = useState<string | null>(null);
+
+  // Mount check
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Fetch live data every 5 seconds
   useEffect(() => {
+    if (!mounted) return;
     const fetchAll = async () => {
       try {
         const [liveRes, freshRes] = await Promise.all([
@@ -81,11 +89,14 @@ export default function LiveTicker() {
           setFreshness(freshData);
           setStatus('online');
           setLastUpdate(new Date());
+          setError(null);
         } else {
           setStatus('error');
+          setError(`API error: live=${liveRes.status} fresh=${freshRes.status}`);
         }
-      } catch {
+      } catch (e) {
         setStatus('error');
+        setError(String(e));
       }
       setTick(t => t + 1);
     };
@@ -93,7 +104,16 @@ export default function LiveTicker() {
     fetchAll();
     const interval = setInterval(fetchAll, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [mounted]);
+
+  // Loading state
+  if (!mounted) {
+    return (
+      <main className="min-h-screen bg-black text-white font-mono p-4 flex items-center justify-center">
+        <div className="text-gray-500">Loading...</div>
+      </main>
+    );
+  }
 
   const statusColor = {
     connecting: 'bg-yellow-500',
@@ -138,6 +158,13 @@ export default function LiveTicker() {
       {/* Grid of tickers */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         
+        {/* Error display */}
+        {error && (
+          <div className="col-span-full bg-red-900/30 border border-red-800 rounded-lg p-3 text-sm text-red-400">
+            ⚠️ {error}
+          </div>
+        )}
+
         {/* DATA FRESHNESS */}
         <section className="bg-gray-900/50 border border-gray-800 rounded-lg p-4 col-span-full lg:col-span-2">
           <h2 className="text-sm font-bold text-[#00FF88] mb-3 flex items-center gap-2">
@@ -152,7 +179,11 @@ export default function LiveTicker() {
             ))}
           </div>
           {freshness?.l0re && (
-            <pre className="mt-3 text-xs text-gray-500 whitespace-pre overflow-x-auto">{freshness.l0re}</pre>
+            <div className="mt-3 text-xs text-gray-500">
+              {typeof freshness.l0re === 'string' 
+                ? freshness.l0re 
+                : `${freshness.l0re.emoji || ''} ${freshness.l0re.state || ''} [${freshness.l0re.code || ''}]`}
+            </div>
           )}
         </section>
 

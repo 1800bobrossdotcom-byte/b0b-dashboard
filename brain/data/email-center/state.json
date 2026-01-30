@@ -21,18 +21,39 @@
     "<CA+93gaaxNFkAOJZ9KRZQj0g_d9riEPThwsYYmvBVOT3x7D0qyw@mail.gmail.com>",
     "<N098cw7OuxmYWfpEEb_6Iw@notifications.google.com>",
     "<4f01c69b-fe52-a927-8424-091ad64a4706@gmail.com>",
-    "<b8dffcbf-a496-7a77-a86f-ef07a85099f1@gmail.com>"
+    "<b8dffcbf-a496-7a77-a86f-ef07a85099f1@gmail.com>",
+    "<20260130122539.f9dca99011179dfa@cio79999.notify.railway.app>",
+    "<20260130122730.17d710cc2a365609@cio79999.notify.railway.app>",
+    "<20260130123608.ed7cadc0fe3c5f69@cio79999.notify.railway.app>",
+    "<20260130123756.81e18c6c5f78f2f7@cio79999.notify.railway.app>",
+    "<20260130124103.e3f31f46f63dcf23@cio79999.notify.railway.app>",
+    "<20260130124532.cde23438ce574c7b@cio79999.notify.railway.app>",
+    "<20260130124849.8d9c074c1cd693e1@cio79999.notify.railway.app>",
+    "<20260130125438.2a767db4b26c68ca@cio79999.notify.railway.app>",
+    "<20260130131007.3b47c2fa6a0fa010@cio79999.notify.railway.app>",
+    "<20260130131523.46eafd4b40c5d77c@cio79999.notify.railway.app>",
+    "<20260130131521.036d3980435194b1@cio79999.notify.railway.app>",
+    "<20260130132013.d553eb1a760bdd63@cio79999.notify.railway.app>",
+    "<20260130132434.2d29fb1dd8d3670a@cio79999.notify.railway.app>",
+    "<20260130132933.a8ae9ba622bc0d10@cio79999.notify.railway.app>",
+    "<20260130132952.efc49514142935bd@cio79999.notify.railway.app>",
+    "<20260130133157.713ec5948b0a0fcf@cio79999.notify.railway.app>",
+    "<20260130133605.d3bf3afc86d5456e@cio79999.notify.railway.app>",
+    "<20260130134010.30400224b8bf7bdc@cio79999.notify.railway.app>",
+    "<20260130175532.53c5647cf924acd0@cio79999.notify.railway.app>",
+    "<697cf197836b3_f011189963d@sharedworker-58d456c55f-2rj9t.mail>"
   ],
   "stats": {
-    "totalProcessed": 22,
+    "totalProcessed": 42,
     "byCategory": {
       "trading": 2,
       "social": 5,
       "security": 12,
       "bills": 1,
-      "github": 1,
-      "other": 1
+      "github": 2,
+      "other": 1,
+      "railway": 19
     },
-    "lastCheck": "2026-01-29T18:23:35.940Z"
+    "lastCheck": "2026-01-30T18:41:58.998Z"
   }
 }

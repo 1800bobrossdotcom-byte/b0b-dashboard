@@ -1,0 +1,46 @@
+{
+  "id": "ideation-1769797147357",
+  "title": "💡 research opportunities",
+  "date": "2026-01-30",
+  "participants": [
+    "b0b",
+    "r0ss",
+    "c0m"
+  ],
+  "status": "active",
+  "messages": [
+    {
+      "timestamp": "2026-01-30T18:19:07.357Z",
+      "agent": "b0b",
+      "emoji": "🎨",
+      "role": "Creative Director",
+      "content": "I see opportunity in research opportunities. Treasury at $300. Let's paint a vision together."
+    },
+    {
+      "timestamp": "2026-01-30T18:19:08.357Z",
+      "agent": "r0ss",
+      "emoji": "🔧",
+      "role": "CTO / DevOps",
+      "content": "From a systems perspective, research opportunities needs structured assessment. Note: 20 tasks in queue. Running analysis... 🔧"
+    },
+    {
+      "timestamp": "2026-01-30T18:19:09.357Z",
+      "agent": "c0m",
+      "emoji": "💀",
+      "role": "Security / Risk",
+      "content": "Security angle on research opportunities - what's our exposure here? Market bearish, need to stay cautious."
+    }
+  ],
+  "topics": {
+    "main": "research opportunities"
+  },
+  "actionItems": [],
+  "createdAt": "2026-01-30T18:19:07.357Z",
+  "type": "autonomous-ideation",
+  "imageAnalyzed": false,
+  "knowledgeContext": {
+    "pendingActionsCount": 20,
+    "signalsSentiment": "BEARISH",
+    "recentDiscussions": 5
+  }
+}

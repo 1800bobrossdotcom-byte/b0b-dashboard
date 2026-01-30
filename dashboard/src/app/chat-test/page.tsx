@@ -43,26 +43,37 @@ const AGENT_COLORS: Record<string, string> = {
 };
 
 export default function LiveChatTest() {
+  const [mounted, setMounted] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [discussions, setDiscussions] = useState<Discussion[]>([]);
   const [actionItems, setActionItems] = useState<ActionItem[]>([]);
   const [connectionStatus, setConnectionStatus] = useState<'connecting' | 'connected' | 'error'>('connecting');
   const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
+  const [sseError, setSseError] = useState<string | null>(null);
   const chatRef = useRef<HTMLDivElement>(null);
+
+  // Ensure client-side only
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Connect to SSE stream for live messages
   useEffect(() => {
+    if (!mounted) return;
+    
     let eventSource: EventSource | null = null;
-    let reconnectTimeout: NodeJS.Timeout | null = null;
+    let reconnectTimeout: ReturnType<typeof setTimeout> | null = null;
 
     const connect = () => {
       setConnectionStatus('connecting');
+      setSseError(null);
       
       try {
         eventSource = new EventSource(`${BRAIN_URL}/stream/discussions`);
         
         eventSource.onopen = () => {
           setConnectionStatus('connected');
+          setSseError(null);
         };
         
         eventSource.onmessage = (event) => {
@@ -77,14 +88,18 @@ export default function LiveChatTest() {
           }
         };
         
-        eventSource.onerror = () => {
+        eventSource.onerror = (e) => {
+          console.error('SSE error:', e);
           setConnectionStatus('error');
+          setSseError('SSE connection failed - will retry');
           eventSource?.close();
           // Reconnect after 5 seconds
           reconnectTimeout = setTimeout(connect, 5000);
         };
       } catch (e) {
+        console.error('SSE setup error:', e);
         setConnectionStatus('error');
+        setSseError(String(e));
         reconnectTimeout = setTimeout(connect, 5000);
       }
     };
@@ -95,16 +110,18 @@ export default function LiveChatTest() {
       eventSource?.close();
       if (reconnectTimeout) clearTimeout(reconnectTimeout);
     };
-  }, []);
+  }, [mounted]);
 
   // Fetch action items
   useEffect(() => {
+    if (!mounted) return;
+    
     const fetchActionItems = async () => {
       try {
         const res = await fetch(`${BRAIN_URL}/action-items?status=pending`);
         if (res.ok) {
           const items = await res.json();
-          setActionItems(items);
+          setActionItems(Array.isArray(items) ? items : []);
         }
       } catch (e) {
         console.error('Action items fetch error:', e);
@@ -114,16 +131,18 @@ export default function LiveChatTest() {
     fetchActionItems();
     const interval = setInterval(fetchActionItems, 30000); // Refresh every 30s
     return () => clearInterval(interval);
-  }, []);
+  }, [mounted]);
 
   // Fetch recent discussions
   useEffect(() => {
+    if (!mounted) return;
+    
     const fetchDiscussions = async () => {
       try {
         const res = await fetch(`${BRAIN_URL}/discussions?limit=5`);
         if (res.ok) {
           const discs = await res.json();
-          setDiscussions(discs);
+          setDiscussions(Array.isArray(discs) ? discs : []);
         }
       } catch (e) {
         console.error('Discussions fetch error:', e);
@@ -133,7 +152,7 @@ export default function LiveChatTest() {
     fetchDiscussions();
     const interval = setInterval(fetchDiscussions, 30000);
     return () => clearInterval(interval);
-  }, []);
+  }, [mounted]);
 
   // Auto-scroll on new messages
   useEffect(() => {
@@ -141,6 +160,15 @@ export default function LiveChatTest() {
       chatRef.current.scrollTop = chatRef.current.scrollHeight;
     }
   }, [messages]);
+
+  // Don't render until mounted (prevents hydration issues)
+  if (!mounted) {
+    return (
+      <main className="min-h-screen bg-black text-white font-mono flex items-center justify-center">
+        <div className="text-gray-500">Loading...</div>
+      </main>
+    );
+  }
 
   const statusColors = {
     connecting: 'bg-yellow-500',
@@ -185,6 +213,11 @@ export default function LiveChatTest() {
           </div>
           
           <div ref={chatRef} className="flex-1 overflow-y-auto p-4 space-y-3">
+            {sseError && (
+              <div className="bg-red-900/30 border border-red-800 rounded p-2 text-xs text-red-400 mb-4">
+                ⚠️ {sseError}
+              </div>
+            )}
             {messages.length === 0 ? (
               <div className="text-gray-500 text-center py-8">
                 {connectionStatus === 'connecting' ? 'Connecting to stream...' : 
@@ -281,7 +314,8 @@ export default function LiveChatTest() {
               messageCount: messages.length,
               discussionCount: discussions.length,
               actionItemCount: actionItems.length,
-              lastUpdate: lastUpdate?.toISOString() 
+              lastUpdate: lastUpdate?.toISOString(),
+              sseError 
             }, null, 2)}
           </pre>
         </div>

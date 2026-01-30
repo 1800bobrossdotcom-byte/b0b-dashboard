@@ -1,0 +1,129 @@
+{
+  "fetchedAt": "2026-01-30T18:48:48.240Z",
+  "repos": [
+    {
+      "name": "b0b-dashboard",
+      "fullName": "1800bobrossdotcom-byte/b0b-dashboard",
+      "commits": [
+        {
+          "sha": "0c3977e",
+          "message": "chore: remove unused ClientProviders import",
+          "author": "b0b Developer",
+          "date": "2026-01-30T17:52:24Z"
+        },
+        {
+          "sha": "1517391",
+          "message": "emergency: bare minimum layout",
+          "author": "b0b Developer",
+          "date": "2026-01-30T13:35:34Z"
+        },
+        {
+          "sha": "40e2fe2",
+          "message": "emergency: strip all providers",
+          "author": "b0b Developer",
+          "date": "2026-01-30T13:31:26Z"
+        },
+        {
+          "sha": "127bb86",
+          "message": "emergency: simplified stable page",
+          "author": "b0b Developer",
+          "date": "2026-01-30T13:29:00Z"
+        },
+        {
+          "sha": "29bd0c3",
+          "message": "fix: extra safety for data parsing",
+          "author": "b0b Developer",
+          "date": "2026-01-30T13:24:02Z"
+        },
+        {
+          "sha": "db3f884",
+          "message": "fix: wrap providers in ClientProviders for safe hydration",
+          "author": "b0b Developer",
+          "date": "2026-01-30T13:19:25Z"
+        },
+        {
+          "sha": "5671d8a",
+          "message": "fix: parse Polymarket outcomePrices as JSON string",
+          "author": "b0b Developer",
+          "date": "2026-01-30T13:14:37Z"
+        },
+        {
+          "sha": "128b2a3",
+          "message": "fix: SSR hydration guards + error boundary for b0b.dev",
+          "author": "b0b Developer",
+          "date": "2026-01-30T13:08:37Z"
+        },
+        {
+          "sha": "a432718",
+          "message": "COMPLETE REDESIGN: Live Data Dashboards v0.3.0",
+          "author": "b0b Developer",
+          "date": "2026-01-30T11:30:22Z"
+        },
+        {
+          "sha": "ba8d85c",
+          "message": "LIVE DATA INTEGRATION: Sites now show real brain data",
+          "author": "b0b Developer",
+          "date": "2026-01-30T11:19:45Z"
+        }
+      ],
+      "events": [
+        {
+          "type": "PushEvent",
+          "actor": "1800bobrossdotcom-byte",
+          "created_at": "2026-01-30T17:52:26Z"
+        },
+        {
+          "type": "PushEvent",
+          "actor": "1800bobrossdotcom-byte",
+          "created_at": "2026-01-30T13:38:42Z"
+        },
+        {
+          "type": "PushEvent",
+          "actor": "1800bobrossdotcom-byte",
+          "created_at": "2026-01-30T13:29:03Z"
+        },
+        {
+          "type": "PushEvent",
+          "actor": "1800bobrossdotcom-byte",
+          "created_at": "2026-01-30T13:24:04Z"
+        },
+        {
+          "type": "PushEvent",
+          "actor": "1800bobrossdotcom-byte",
+          "created_at": "2026-01-30T13:19:34Z"
+        },
+        {
+          "type": "PushEvent",
+          "actor": "1800bobrossdotcom-byte",
+          "created_at": "2026-01-30T13:14:40Z"
+        },
+        {
+          "type": "PushEvent",
+          "actor": "1800bobrossdotcom-byte",
+          "created_at": "2026-01-30T13:08:46Z"
+        },
+        {
+          "type": "PushEvent",
+          "actor": "1800bobrossdotcom-byte",
+          "created_at": "2026-01-30T11:30:30Z"
+        },
+        {
+          "type": "PushEvent",
+          "actor": "1800bobrossdotcom-byte",
+          "created_at": "2026-01-30T11:19:47Z"
+        },
+        {
+          "type": "PushEvent",
+          "actor": "1800bobrossdotcom-byte",
+          "created_at": "2026-01-30T11:03:23Z"
+        }
+      ],
+      "latestCommit": {
+        "sha": "0c3977e",
+        "message": "chore: remove unused ClientProviders import",
+        "author": "b0b Developer",
+        "date": "2026-01-30T17:52:24Z"
+      }
+    }
+  ]
+}
