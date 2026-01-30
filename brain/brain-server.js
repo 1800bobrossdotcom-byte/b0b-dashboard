@@ -345,77 +345,153 @@ app.get('/pulse', async (req, res) => {
   try {
     const state = await loadState();
     
-    // Load d0t signals if available
+    // ═══════════════════════════════════════════════════════════════
+    // LOAD ALL BRAIN DATA PATHWAYS
+    // ═══════════════════════════════════════════════════════════════
+    
+    // 1. D0T SIGNALS - Market data
     let d0tSignals = null;
     try {
       const signalsPath = path.join(DATA_DIR, 'd0t-signals.json');
       const data = await fs.readFile(signalsPath, 'utf8');
-      d0tSignals = JSON.parse(data);
+      const parsed = JSON.parse(data);
+      d0tSignals = parsed.data || parsed;
     } catch (e) { /* d0t signals not available */ }
     
-    // Load brain pulse
-    let brainPulse = null;
-    try {
-      const pulsePath = path.join(__dirname, 'brain-pulse.json');
-      const data = await fs.readFile(pulsePath, 'utf8');
-      brainPulse = JSON.parse(data);
-    } catch (e) { /* pulse not available */ }
-    
-    // Load learnings
+    // 2. LEARNINGS - Agent knowledge
     let learnings = [];
     try {
       const learningsDir = path.join(DATA_DIR, 'learnings');
       const files = await fs.readdir(learningsDir);
-      const jsonFiles = files.filter(f => f.endsWith('.json')).slice(-5);
+      const jsonFiles = files.filter(f => f.endsWith('.json')).slice(-10);
       for (const file of jsonFiles) {
         try {
           const content = await fs.readFile(path.join(learningsDir, file), 'utf8');
           const parsed = JSON.parse(content);
           learnings.push({
             file,
-            title: parsed.title,
+            title: parsed.title || file,
             agent: parsed.agent,
-            summary: parsed.summary?.slice(0, 100)
+            summary: parsed.summary?.slice(0, 150) || '',
+            timestamp: parsed.timestamp
           });
         } catch (e) { /* skip bad files */ }
       }
     } catch (e) { /* no learnings dir */ }
     
+    // 3. LIBRARY INDEX - PDF/doc knowledge
+    let libraryIndex = [];
+    try {
+      const indexDir = path.join(DATA_DIR, 'library', 'index');
+      const files = await fs.readdir(indexDir);
+      const jsonFiles = files.filter(f => f.endsWith('.json')).slice(0, 5);
+      for (const file of jsonFiles) {
+        try {
+          const content = await fs.readFile(path.join(indexDir, file), 'utf8');
+          const parsed = JSON.parse(content);
+          libraryIndex.push({
+            filename: parsed.filename,
+            topics: parsed.topics || [],
+            agents: parsed.assignedAgents || [],
+            summary: parsed.summary?.slice(0, 100) || ''
+          });
+        } catch (e) { /* skip bad files */ }
+      }
+    } catch (e) { /* no library index */ }
+    
+    // 4. AGENT STATES - Current agent activities
+    const agentStates = {};
+    for (const agentName of Object.keys(AGENTS)) {
+      try {
+        const agentFile = path.join(DATA_DIR, `${agentName}-state.json`);
+        const content = await fs.readFile(agentFile, 'utf8');
+        const parsed = JSON.parse(content);
+        agentStates[agentName] = {
+          state: parsed.state || 'IDLE',
+          lastActive: parsed.timestamp,
+          focus: parsed.focus
+        };
+      } catch (e) {
+        agentStates[agentName] = { state: 'IDLE', lastActive: null };
+      }
+    }
+    
+    // 5. L0RE INTELLIGENCE - Pattern classification
+    let l0reState = null;
+    if (d0tSignals?.l0re) {
+      l0reState = {
+        d0t: d0tSignals.l0re.d0t,
+        code: d0tSignals.l0re.l0re?.code,
+        composite: d0tSignals.l0re.l0re?.composite
+      };
+    }
+    
+    // 6. TURB0 DECISION - Trading engine
+    let turb0Decision = null;
+    if (d0tSignals?.turb0) {
+      turb0Decision = {
+        decision: d0tSignals.turb0.decision,
+        confidence: d0tSignals.turb0.confidence,
+        reasoning: d0tSignals.turb0.reasoning,
+        agents: d0tSignals.turb0.agents
+      };
+    }
+    
+    // ═══════════════════════════════════════════════════════════════
+    // UNIFIED BRAIN PULSE
+    // ═══════════════════════════════════════════════════════════════
+    
     res.json({
       timestamp: new Date().toISOString(),
-      identity: brainPulse?.identity || 'w3 ar3',
+      identity: 'w3 ar3',
       status: 'alive',
+      
+      // SWARM STATUS
       swarm: {
         agents: Object.keys(AGENTS),
         active: Object.values(AGENTS).filter(a => a.active !== false).length,
-        identity: brainPulse?.identity || 'w3 ar3'
+        states: agentStates
       },
+      
+      // MARKET INTELLIGENCE
       d0t: {
         signals: d0tSignals ? {
           timestamp: d0tSignals.timestamp,
-          fearGreed: d0tSignals.fearGreed,
-          polymarket: d0tSignals.polymarket ? {
-            totalVolume: d0tSignals.polymarket.totalVolume,
-            topMarkets: (d0tSignals.polymarket.topMarkets || []).slice(0, 3)
-          } : null,
-          onChain: d0tSignals.onChain ? {
-            ethPrice: d0tSignals.onChain.ethPrice,
-            btcPrice: d0tSignals.onChain.btcPrice,
-            solPrice: d0tSignals.onChain.solPrice
-          } : null
+          predictions: d0tSignals.predictions || [],
+          onchain: d0tSignals.onchain,
+          dex: d0tSignals.dex,
+          turb0: turb0Decision,
+          l0re: l0reState
         } : null
       },
-      brainStats: {
-        uptime: state.uptime,
-        lastHeartbeat: state.lastHeartbeat,
-        memoryMB: Math.round(process.memoryUsage().heapUsed / 1024 / 1024)
+      
+      // KNOWLEDGE BASE
+      knowledge: {
+        learnings: learnings.slice(-5),
+        library: libraryIndex,
+        totalLearnings: learnings.length,
+        totalDocs: libraryIndex.length
       },
-      learnings,
-      message: '🧠 Swarm consciousness active'
+      
+      // SYSTEM HEALTH
+      brain: {
+        uptime: Math.floor(process.uptime()),
+        lastHeartbeat: state.lastHeartbeat,
+        memoryMB: Math.round(process.memoryUsage().heapUsed / 1024 / 1024),
+        dataPathways: {
+          d0tSignals: !!d0tSignals,
+          learnings: learnings.length > 0,
+          library: libraryIndex.length > 0,
+          agentStates: Object.keys(agentStates).length
+        }
+      },
+      
+      message: '🧠 All pathways connected'
     });
   } catch (error) {
     res.status(500).json({ 
       error: 'Pulse failed',
+      message: error.message,
       timestamp: new Date().toISOString()
     });
   }
