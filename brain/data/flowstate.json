@@ -7,14 +7,26 @@
       "session": "lat3knight-2026-01-30",
       "fearGreed": 16,
       "signature": "01f69af0"
+    },
+    {
+      "timestamp": "2026-01-30T08:55:16.030Z",
+      "identity": "w3 ar3",
+      "mode": "turb0b00st",
+      "iteration": 2,
+      "hotkeysLive": true,
+      "fearGreed": 16,
+      "session": "lat3knight-2026-01-30",
+      "signature": "182e5070"
     }
   ],
   "latest": {
-    "timestamp": "2026-01-30T08:52:44.288Z",
+    "timestamp": "2026-01-30T08:55:16.030Z",
     "identity": "w3 ar3",
     "mode": "turb0b00st",
-    "session": "lat3knight-2026-01-30",
+    "iteration": 2,
+    "hotkeysLive": true,
     "fearGreed": 16,
-    "signature": "01f69af0"
+    "session": "lat3knight-2026-01-30",
+    "signature": "182e5070"
   }
 }

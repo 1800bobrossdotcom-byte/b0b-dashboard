@@ -4,7 +4,7 @@
  * D0T.B0B.DEV — TURB0B00ST TRADING TERMINAL
  * ══════════════════════════════════════════════════════════════
  * 
- * L0RE v0.2.0 Aesthetic
+ * L0RE v0.2.1 Aesthetic — 2026-01-30 GYSIN VISION
  * Full-page generative ASCII + live trading data
  * 
  * "I SEE YOU" — The eye that never blinks

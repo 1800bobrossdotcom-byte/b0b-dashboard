@@ -1,0 +1,38 @@
+{
+  "timestamp": "2026-01-30T09:00:17.052Z",
+  "url": "https://d0t.b0b.dev",
+  "screenshot": "C:\\workspace\\b0b-platform\\b0b-visual-debug\\screenshots\\capture-1769763616926.png",
+  "page": {
+    "title": "D0T — I SEE YOU",
+    "url": "https://d0t.b0b.dev/",
+    "elements": {
+      "buttons": 0,
+      "inputs": 0,
+      "canvases": 0,
+      "images": 0,
+      "links": 29
+    },
+    "text": {
+      "body": "D0T\n.FINANCE\nDashboard\nAgents\nTerminal\nPortfolio\nPhilosophy\nby B0B\nPOWERED BY BANKR\n\nAutonomous wealth intelligence by B0B\n\nBankr-First\nArchitecture.\nYou sign. We build.\n🧊\nCOLD\nYour hardware wallet\n🌡️\nWARM\nYour Phantom\n🏦\nBANKR\nTX Builder\n🔐\nSECURE\nNo keys stored\n\n$300\n\nPaper Balance\n\n+$0.00\n\nSession P&L\n\n0\n\nTrades Today\n\nLive\n\n24/7 Autonomous\n\nThe Nash Council\n\n5 cooperative agents\n\n🐂\nBULL\n\nOptimism Maximizer\n\n58.2%\n\nWin Rate\n\n🐻\nBEAR\n\nRisk Assessor\n\n61.4%\n\nWin Rate\n\n📊\nQUANT\n\nStatistical Ed"
+    },
+    "errors": []
+  },
+  "canvas": null,
+  "consoleLogs": [
+    {
+      "type": "error",
+      "text": "Minified React error #418; visit https://react.dev/errors/418?args[]=text&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings.",
+      "timestamp": "2026-01-30T09:00:15.374Z"
+    }
+  ],
+  "config": {
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "timeout": 30000,
+    "waitUntil": "networkidle0",
+    "outputDir": "C:\\workspace\\b0b-platform\\b0b-visual-debug\\screenshots",
+    "url": "https://d0t.b0b.dev"
+  }
+}

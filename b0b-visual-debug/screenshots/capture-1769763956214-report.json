@@ -1,0 +1,32 @@
+{
+  "timestamp": "2026-01-30T09:05:56.281Z",
+  "url": "https://b0b.dev/api/live",
+  "screenshot": "c:\\workspace\\b0b-platform\\b0b-visual-debug\\screenshots\\capture-1769763956214.png",
+  "page": {
+    "title": "",
+    "url": "https://b0b.dev/api/live",
+    "elements": {
+      "buttons": 0,
+      "inputs": 0,
+      "canvases": 0,
+      "images": 0,
+      "links": 0
+    },
+    "text": {
+      "body": "{\"timestamp\":\"2026-01-30T09:05:55.616Z\",\"status\":\"operational\",\"brainConnected\":true,\"brainUrl\":\"https://b0b-brain-production.up.railway.app\",\"swarm\":{\"agents\":[\"b0b\",\"c0m\",\"d0t\",\"r0ss\"],\"identity\":\"w3 ar3\",\"l0reSignature\":\"f.sw4rm\",\"lastActivation\":\"2026-01-30T09:05:54.279Z\"},\"sources\":{},\"signals\":{\"polymarket\":null,\"lastUpdate\":\"2026-01-30T08:54:43.366Z\"},\"learnings\":[{\"file\":\"2026-01-29-infrastructure-resilience.json\",\"title\":\"Infrastructure Resilience & Debugging Workflow\",\"summary\":\"When p"
+    },
+    "errors": []
+  },
+  "canvas": null,
+  "consoleLogs": [],
+  "config": {
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "timeout": 30000,
+    "waitUntil": "networkidle0",
+    "outputDir": "c:\\workspace\\b0b-platform\\b0b-visual-debug\\screenshots",
+    "url": "https://b0b.dev/api/live"
+  }
+}

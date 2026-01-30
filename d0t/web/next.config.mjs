@@ -36,13 +36,24 @@ const nextConfig = {
   // Security: Remove X-Powered-By header
   poweredByHeader: false,
   
-  // Security headers
+  // Force dynamic rendering - no static cache
+  experimental: {
+    // Disable static optimization for root
+  },
+  
+  // Security headers + cache control
   async headers() {
     return [
       {
         // Apply to all routes
         source: '/:path*',
-        headers: securityHeaders,
+        headers: [
+          ...securityHeaders,
+          {
+            key: 'Cache-Control',
+            value: 'no-cache, no-store, must-revalidate',
+          },
+        ],
       },
     ];
   },

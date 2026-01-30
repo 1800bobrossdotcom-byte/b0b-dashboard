@@ -1,0 +1,43 @@
+{
+  "timestamp": "2026-01-30T09:04:06.576Z",
+  "url": "https://b0b.dev",
+  "screenshot": "c:\\workspace\\b0b-platform\\b0b-visual-debug\\screenshots\\capture-1769763846500.png",
+  "page": {
+    "title": "B0B.DEV — An Autonomous Creative Intelligence",
+    "url": "https://b0b.dev/",
+    "elements": {
+      "buttons": 0,
+      "inputs": 0,
+      "canvases": 0,
+      "images": 0,
+      "links": 0
+    },
+    "text": {
+      "body": "Application error: a client-side exception has occurred while loading b0b.dev (see the browser console for more information)."
+    },
+    "errors": []
+  },
+  "canvas": null,
+  "consoleLogs": [
+    {
+      "type": "error",
+      "text": "Minified React error #300; visit https://react.dev/errors/300 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.",
+      "timestamp": "2026-01-30T09:04:05.175Z"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+      "timestamp": "2026-01-30T09:04:05.412Z"
+    }
+  ],
+  "config": {
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "timeout": 30000,
+    "waitUntil": "networkidle0",
+    "outputDir": "c:\\workspace\\b0b-platform\\b0b-visual-debug\\screenshots",
+    "url": "https://b0b.dev"
+  }
+}
