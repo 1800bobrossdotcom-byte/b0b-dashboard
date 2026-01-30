@@ -4191,6 +4191,132 @@ app.post('/c0m/browser/recon', async (req, res) => {
 });
 
 // =============================================================================
+// SWARM LIVE DATA — All Crawler Data Unified
+// =============================================================================
+
+/**
+ * GET /swarm/live
+ * Returns all fresh crawler data in one unified response
+ * This is the source of truth for b0b.dev and d0t.b0b.dev
+ */
+app.get('/swarm/live', async (req, res) => {
+  const dataDir = path.join(__dirname, 'data');
+  
+  const readDataFile = async (filename) => {
+    try {
+      const data = await fs.readFile(path.join(dataDir, filename), 'utf8');
+      const parsed = JSON.parse(data);
+      const stat = await fs.stat(path.join(dataDir, filename));
+      return { ...parsed, _lastUpdated: stat.mtime.toISOString() };
+    } catch {
+      return null;
+    }
+  };
+  
+  try {
+    // Read all crawler data files
+    const [
+      d0tSignals,
+      r0ssResearch,
+      b0bCreative,
+      teamChat,
+      treasuryState,
+      turb0b00stState,
+      liveTraderState,
+      tradingStatus
+    ] = await Promise.all([
+      readDataFile('d0t-signals.json'),
+      readDataFile('r0ss-research.json'),
+      readDataFile('b0b-creative.json'),
+      readDataFile('team-chat.json'),
+      readDataFile('treasury-state.json'),
+      readDataFile('turb0b00st-state.json'),
+      readDataFile('live-trader-state.json'),
+      readDataFile('trading-status.json')
+    ]);
+    
+    res.json({
+      timestamp: new Date().toISOString(),
+      status: 'operational',
+      swarm: {
+        agents: ['b0b', 'c0m', 'd0t', 'r0ss'],
+        identity: 'w3 ar3'
+      },
+      d0t: d0tSignals,
+      r0ss: r0ssResearch,
+      b0b: b0bCreative,
+      teamChat: teamChat,
+      treasury: treasuryState,
+      turb0b00st: turb0b00stState,
+      liveTrader: liveTraderState,
+      tradingStatus: tradingStatus,
+      dataFreshness: {
+        d0t: d0tSignals?._lastUpdated || 'never',
+        r0ss: r0ssResearch?._lastUpdated || 'never',
+        b0b: b0bCreative?._lastUpdated || 'never',
+        treasury: treasuryState?._lastUpdated || 'never',
+        turb0b00st: turb0b00stState?._lastUpdated || 'never'
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
+ * GET /crawlers/d0t
+ * Get d0t signals data
+ */
+app.get('/crawlers/d0t', async (req, res) => {
+  try {
+    const data = await fs.readFile(path.join(__dirname, 'data', 'd0t-signals.json'), 'utf8');
+    res.json(JSON.parse(data));
+  } catch {
+    res.status(404).json({ error: 'No d0t signals data' });
+  }
+});
+
+/**
+ * GET /crawlers/r0ss
+ * Get r0ss research data
+ */
+app.get('/crawlers/r0ss', async (req, res) => {
+  try {
+    const data = await fs.readFile(path.join(__dirname, 'data', 'r0ss-research.json'), 'utf8');
+    res.json(JSON.parse(data));
+  } catch {
+    res.status(404).json({ error: 'No r0ss research data' });
+  }
+});
+
+/**
+ * GET /crawlers/b0b
+ * Get b0b creative data
+ */
+app.get('/crawlers/b0b', async (req, res) => {
+  try {
+    const data = await fs.readFile(path.join(__dirname, 'data', 'b0b-creative.json'), 'utf8');
+    res.json(JSON.parse(data));
+  } catch {
+    res.status(404).json({ error: 'No b0b creative data' });
+  }
+});
+
+/**
+ * POST /crawlers/run
+ * Trigger crawler runs from external sources (e.g., GitHub Actions)
+ */
+app.post('/crawlers/run', async (req, res) => {
+  const { crawler } = req.body;
+  // This would integrate with a crawler runner
+  // For now, just acknowledge
+  res.json({ 
+    message: `Crawler run requested: ${crawler || 'all'}`,
+    note: 'Crawlers run locally or via GitHub Actions'
+  });
+});
+
+// =============================================================================
 // START SERVER
 // =============================================================================
 
