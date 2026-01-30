@@ -193,8 +193,9 @@ export default function D0TTURB0B00ST() {
           color: '#FFAA00',
           textShadow: '0 0 20px rgba(255,170,0,0.2)',
         }}
+        suppressHydrationWarning
       >
-        {frame}
+        {mounted ? frame : ''}
       </pre>
       
       {/* OVERLAY UI */}
@@ -209,9 +210,9 @@ export default function D0TTURB0B00ST() {
               TURB0B00ST VISION TERMINAL
             </div>
           </div>
-          <div className="text-right">
-            <div className="text-lg font-bold" style={{ color: '#FFAA00' }}>
-              {time}
+          <div className="text-right" suppressHydrationWarning>
+            <div className="text-lg font-bold" style={{ color: '#FFAA00' }} suppressHydrationWarning>
+              {mounted ? time : '--:--:--'}
             </div>
             <div className="text-xs mt-1" style={{ color: '#666' }}>
               <span className="inline-block w-2 h-2 rounded-full mr-1 animate-pulse" style={{ backgroundColor: '#00FF00' }} />
