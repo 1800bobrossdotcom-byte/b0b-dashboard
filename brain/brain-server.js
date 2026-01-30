@@ -6292,4 +6292,185 @@ app.post('/ollama/insights', async (req, res) => {
   }
 });
 
+// =============================================================================
+// AI SWARM ENDPOINTS - SPECIALIZED PROVIDERS
+// =============================================================================
+
+app.get('/ai/insights', async (req, res) => {
+  try {
+    const signalsPath = path.join(DATA_DIR, 'd0t-signals.json');
+    const signalsData = JSON.parse(await fs.readFile(signalsPath, 'utf8'));
+    const signals = signalsData.data;
+    
+    const insights = {};
+    
+    // DEEPSEEK - Reasoning (find flaws in TURB0 logic)
+    if (process.env.DEEPSEEK_API_KEY) {
+      try {
+        const deepseekRes = await axios.post('https://api.deepseek.com/v1/chat/completions', {
+          model: 'deepseek-chat',
+          messages: [{
+            role: 'user',
+            content: `TURB0 says ${signals.turb0.decision} ${(signals.turb0.confidence * 100).toFixed(0)}% based on: ${signals.turb0.reasoning[0]}. Find the logical flaw. One sentence.`
+          }],
+          max_tokens: 100
+        }, {
+          headers: { 'Authorization': `Bearer ${process.env.DEEPSEEK_API_KEY}` }
+        });
+        insights.deepseek = {
+          task: 'REASONING',
+          response: deepseekRes.data.choices[0].message.content.trim()
+        };
+      } catch (e) {
+        insights.deepseek = { task: 'REASONING', error: e.message };
+      }
+    }
+    
+    // GROQ - Fast take (blazing speed)
+    if (process.env.GROQ_API_KEY) {
+      try {
+        const groqRes = await axios.post('https://api.groq.com/openai/v1/chat/completions', {
+          model: 'llama-3.3-70b-versatile',
+          messages: [{
+            role: 'user',
+            content: `${signals.predictions[0].question} - $${(signals.predictions[0].volume24h / 1e6).toFixed(1)}M volume. Bull or bear? 10 words max.`
+          }],
+          max_tokens: 50
+        }, {
+          headers: { 'Authorization': `Bearer ${process.env.GROQ_API_KEY}` }
+        });
+        insights.groq = {
+          task: 'FAST TAKE',
+          response: groqRes.data.choices[0].message.content.trim()
+        };
+      } catch (e) {
+        insights.groq = { task: 'FAST TAKE', error: e.message };
+      }
+    }
+    
+    // KIMI - Research depth
+    if (process.env.MOONSHOT_API_KEY) {
+      try {
+        const kimiRes = await axios.post('https://api.moonshot.cn/v1/chat/completions', {
+          model: 'moonshot-v1-8k',
+          messages: [{
+            role: 'user',
+            content: `Research: What are the key macro factors affecting ${signals.predictions[0].question}? 2 sentences.`
+          }],
+          max_tokens: 150
+        }, {
+          headers: { 'Authorization': `Bearer ${process.env.MOONSHOT_API_KEY}` }
+        });
+        insights.kimi = {
+          task: 'RESEARCH',
+          response: kimiRes.data.choices[0].message.content.trim()
+        };
+      } catch (e) {
+        insights.kimi = { task: 'RESEARCH', error: e.message };
+      }
+    }
+    
+    // CLAUDE - Risk analysis
+    if (process.env.ANTHROPIC_API_KEY) {
+      try {
+        const claudeRes = await axios.post('https://api.anthropic.com/v1/messages', {
+          model: 'claude-3-5-sonnet-20241022',
+          max_tokens: 150,
+          messages: [{
+            role: 'user',
+            content: `Risk analysis: What could go wrong with TURB0's ${signals.turb0.decision} decision at ${(signals.turb0.confidence * 100).toFixed(0)}% confidence? 2 sentences.`
+          }]
+        }, {
+          headers: {
+            'x-api-key': process.env.ANTHROPIC_API_KEY,
+            'anthropic-version': '2023-06-01'
+          }
+        });
+        insights.claude = {
+          task: 'RISK',
+          response: claudeRes.data.content[0].text.trim()
+        };
+      } catch (e) {
+        insights.claude = { task: 'RISK', error: e.message };
+      }
+    }
+    
+    res.json(insights);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// GROQ CHAT - Failsafe chat powered by free Groq
+app.post('/ai/chat', async (req, res) => {
+  try {
+    const { query } = req.body;
+    if (!query) {
+      return res.status(400).json({ error: 'query required' });
+    }
+    
+    if (!process.env.GROQ_API_KEY) {
+      return res.status(503).json({ error: 'Groq API key not configured' });
+    }
+    
+    const groqRes = await axios.post('https://api.groq.com/openai/v1/chat/completions', {
+      model: 'llama-3.3-70b-versatile',
+      messages: [{
+        role: 'system',
+        content: 'You are a helpful AI assistant for the b0b.dev autonomous trading swarm. Be concise and direct.'
+      }, {
+        role: 'user',
+        content: query
+      }],
+      max_tokens: 500
+    }, {
+      headers: { 'Authorization': `Bearer ${process.env.GROQ_API_KEY}` }
+    });
+    
+    res.json({
+      response: groqRes.data.choices[0].message.content.trim(),
+      model: 'llama-3.3-70b-versatile',
+      provider: 'groq'
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// TWITTER FEED - Live crypto tweets
+app.get('/twitter/feed', async (req, res) => {
+  try {
+    const query = req.query.q || 'crypto market';
+    
+    if (!process.env.TWITTER_BEARER_TOKEN) {
+      return res.status(503).json({ error: 'Twitter bearer token not configured' });
+    }
+    
+    const twitterRes = await axios.get('https://api.twitter.com/2/tweets/search/recent', {
+      params: {
+        query: query + ' -is:retweet lang:en',
+        max_results: 10,
+        'tweet.fields': 'created_at,public_metrics',
+        'expansions': 'author_id',
+        'user.fields': 'username'
+      },
+      headers: { 'Authorization': `Bearer ${process.env.TWITTER_BEARER_TOKEN}` }
+    });
+    
+    const tweets = twitterRes.data.data?.map(tweet => {
+      const author = twitterRes.data.includes?.users?.find(u => u.id === tweet.author_id);
+      return {
+        text: tweet.text,
+        author: author?.username,
+        created: tweet.created_at,
+        likes: tweet.public_metrics?.like_count
+      };
+    }) || [];
+    
+    res.json({ tweets });
+  } catch (e) {
+    res.status(500).json({ error: e.message, tweets: [] });
+  }
+});
+
 module.exports = app;
