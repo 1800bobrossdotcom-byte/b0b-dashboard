@@ -37,8 +37,8 @@ try {
 // L0RE Lexicon — Anti-crawler obfuscation system
 let L0RELexicon;
 try {
-  const lexiconModule = require('./l0re-lexicon.js');
-  L0RELexicon = new lexiconModule();
+  const { L0RELexicon: LexiconClass } = require('./l0re-lexicon.js');
+  L0RELexicon = new LexiconClass();
   console.log('[BRAIN] L0RE Lexicon loaded — words have power 🔮');
 } catch (e) {
   console.log('[BRAIN] L0RE Lexicon not available:', e.message);
