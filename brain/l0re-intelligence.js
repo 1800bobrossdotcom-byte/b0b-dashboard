@@ -704,13 +704,11 @@ module.exports = {
 if (require.main === module) {
   const intel = new L0REIntelligence();
   
-  // Test with sample data
+  // Test with empty data - no fake values
   const testData = {
-    sentiment: { index: 16, classification: 'Extreme Fear' },
-    onchain: { base_tvl: 4544725508, base_change_1d: 0, eth_tvl: 66030137367 },
-    predictions: [
-      { question: 'Test market', probability: 0.65, volume24h: 5000000 },
-    ],
+    sentiment: null,
+    onchain: null,
+    predictions: [],
   };
   
   const state = intel.analyze(testData);

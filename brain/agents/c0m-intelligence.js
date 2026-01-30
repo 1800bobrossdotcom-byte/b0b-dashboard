@@ -472,3 +472,4 @@ if (require.main === module) {
   console.log('\n\n=== THREAT CONDITIONS ===');
   console.log(intel.generateReport(threatData));
 }
+

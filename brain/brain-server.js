@@ -2365,21 +2365,21 @@ app.get('/finance/treasury', async (req, res) => {
       }
     } catch {}
     
-    // Build response
-    const treasury = treasuryState || { balances: { total: 300 }, performance: {} };
+    // Build response - NO FAKE DEFAULTS
+    const treasury = treasuryState || { balances: { total: 0 }, performance: {} };
     const today = new Date().toISOString().split('T')[0];
     
     res.json({
       timestamp: new Date().toISOString(),
       treasury: {
-        total: treasury.balances?.total || 300,
+        total: treasury.balances?.total || 0,
         allocation: {
-          polymarket: treasury.balances?.polymarket_agent || 90,
-          baseMeme: treasury.balances?.base_meme_agent || 75,
-          bluechips: treasury.balances?.bluechip_accumulator || 45,
-          treasury: treasury.balances?.treasury_reserve || 45,
-          savings: treasury.balances?.savings_staking || 30,
-          emergency: treasury.balances?.emergency_fund || 15,
+          polymarket: treasury.balances?.polymarket_agent || 0,
+          baseMeme: treasury.balances?.base_meme_agent || 0,
+          bluechips: treasury.balances?.bluechip_accumulator || 0,
+          treasury: treasury.balances?.treasury_reserve || 0,
+          savings: treasury.balances?.savings_staking || 0,
+          emergency: treasury.balances?.emergency_fund || 0,
         },
       },
       performance: {
@@ -2458,7 +2458,7 @@ app.get('/finance/pulse', async (req, res) => {
       consensus: 0,
       blessing: false,
       decision: null,
-      treasury: { total: 300, todayPnL: 0 },
+      treasury: { total: 0, todayPnL: 0 },
     });
   } catch (e) {
     res.status(500).json({ error: e.message, phase: 'ERROR' });

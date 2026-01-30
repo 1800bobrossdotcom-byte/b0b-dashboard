@@ -75,7 +75,7 @@ const D0T_MARKET_STATES = {
   
   CAPITULATION_ZONE: {
     code: 'd.c4pt',
-    description: 'Extreme fear + high volatility + cascade selling',
+    description: 'High fear + high volatility + cascade selling',
     action: 'Wait for stabilization before entry',
     emoji: '🩸📉',
     conditions: (data) =>
@@ -389,7 +389,7 @@ if (require.main === module) {
   
   // Test with current market data
   const testData = {
-    sentiment: { index: 16, classification: 'Extreme Fear' },
+    sentiment: null,
     onchain: { base_tvl: 4544725508, base_change_1d: 0, eth_tvl: 66030137367 },
     volumeChange: -15,
   };
@@ -420,3 +420,4 @@ if (require.main === module) {
   const turb0 = intel.turb0Decision(testData);
   console.log(`TURB0 Decision: ${turb0.decision} (size: ${turb0.size.toFixed(2)}, net: ${turb0.netSignal.toFixed(2)})`);
 }
+

@@ -436,10 +436,11 @@ module.exports = { TURB0B00STEngine, TURB0_CONFIG };
 if (require.main === module) {
   const engine = new TURB0B00STEngine();
   
+  // Empty test data - no fake values
   const testData = {
-    sentiment: { index: 16, classification: 'Extreme Fear' },
-    onchain: { base_tvl: 4544725508, base_change_1d: 0, eth_tvl: 66030137367 },
-    volumeChange: -15,
+    sentiment: null,
+    onchain: null,
+    volumeChange: 0,
   };
   
   console.log(engine.dashboard(testData));

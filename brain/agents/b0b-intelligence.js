@@ -452,7 +452,7 @@ if (require.main === module) {
   const intel = new B0BIntelligence();
   
   const testData = {
-    sentiment: { index: 16, classification: 'Extreme Fear' },
+    sentiment: null,
     onchain: { base_tvl: 4544725508, base_change_1d: 0 },
   };
   
@@ -482,3 +482,4 @@ if (require.main === module) {
   console.log(`╚════════════════════════════════════════════════════════════════════════════════╝
   `);
 }
+

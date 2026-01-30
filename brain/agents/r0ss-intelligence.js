@@ -478,7 +478,7 @@ if (require.main === module) {
   const intel = new R0SSIntelligence();
   
   const testData = {
-    sentiment: { index: 16, classification: 'Extreme Fear' },
+    sentiment: null,
     systemHealth: 0.85,
     cpuUsage: 0.3,
     memoryUsage: 0.4,
@@ -518,3 +518,4 @@ if (require.main === module) {
   console.log(`╚════════════════════════════════════════════════════════════════════════════════╝
   `);
 }
+

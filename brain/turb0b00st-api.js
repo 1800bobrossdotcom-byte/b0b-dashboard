@@ -61,8 +61,8 @@ app.get('/finance/treasury', (req, res) => {
     res.json({
       timestamp: new Date().toISOString(),
       treasury: {
-        total: treasuryState?.balances?.total || 300,
-        allocation: treasuryState?.balances || { total: 300 },
+        total: treasuryState?.balances?.total || 0,
+        allocation: treasuryState?.balances || { total: 0 },
       },
       performance: {
         totalPnL: treasuryState?.performance?.totalPnL || 0,
