@@ -146,13 +146,24 @@ class D0TSignalsCrawler extends BaseCrawler {
         timeout: 10000
       });
       
-      return res.data?.slice(0, 5).map(m => ({
-        question: m.question?.slice(0, 100),
-        probability: m.outcomePrices?.[0] || null,
-        volume24h: m.volume24hr || 0,
-        liquidity: m.liquidity || 0,
-        signal: this.interpretPrediction(m)
-      })) || [];
+      return res.data?.slice(0, 5).map(m => {
+        // Parse outcomePrices - Polymarket may return string or array
+        let prob = null;
+        try {
+          const prices = typeof m.outcomePrices === 'string' 
+            ? JSON.parse(m.outcomePrices) 
+            : m.outcomePrices;
+          prob = Array.isArray(prices) && typeof prices[0] === 'number' ? prices[0] : null;
+        } catch { prob = null; }
+        
+        return {
+          question: m.question?.slice(0, 100),
+          probability: prob,
+          volume24h: m.volume24hr || 0,
+          liquidity: m.liquidity || 0,
+          signal: this.interpretPrediction(m)
+        };
+      }) || [];
     } catch (e) {
       this.log(`Predictions fetch failed: ${e.message}`, 'warn');
       return [];
