@@ -1,0 +1,311 @@
+{
+  "source": "https://waitbutwhy.com/2015/01/artificial-intelligence-revolution-1.html",
+  "filename": "waitbutwhy-com-2015-01-artificial-intelligen.txt",
+  "fetchedAt": "2026-01-30T03:15:43.354Z",
+  "type": "webpage",
+  "meta": {
+    "source": "https://waitbutwhy.com/2015/01/artificial-intelligence-revolution-1.html",
+    "processedAt": "2026-01-30T03:15:43.354Z",
+    "originalLength": 50238,
+    "compressedLength": 7211,
+    "compressionRatio": "14.4%"
+  },
+  "keySentences": [
+    {
+      "text": "It hit me pretty quickly that what&#8217;s happening in the world of AI is not just an important topic, but by far THE most important topic for our future.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "No, in order for the 1750 guy to have as much fun as we had with him, he&#8217;d have to go much farther backmaybe all the way back to about 12,000 BC, before the First Agricultural Revolution gave rise to the first cities and to the concept of civilization.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "&#8221; For the 12,000 BC guy to have the same fun, he&#8217;d have to go back over 100,000 years and get someone he could show fire and language to for the first time.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "This patternhuman progress moving quicker and quicker as time goes onis what futurist Ray Kurzweil calls human history&#8217;s Law of Accelerating Returns.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "This is for the same reason we just discussedthe Law of Accelerating Returns.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "All in all, because of the Law of Accelerating Returns, Kurzweil believes that the 21st century will achieve 1,000 times the progress of the 20th century.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "It&#8217;s what many scientists smarter and more knowledgeable than you or I firmly believeand if you look at history, it&#8217;s what we should logically predict.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "It&#8217;s most intuitive for us to think linearly, when we should be thinking exponentially .",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "First, even a steep exponential curve seems linear when you only look at a tiny slice of it, the same way if you look at a little segment of a huge circle up close, it looks almost like a straight line.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Second, exponential growth isn&#8217;t totally smooth and uniform.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "2 When we hear a prediction about the future that contradicts our experience-based notion of how things work , our instinct is that the prediction must be naive.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "The fact is, if we&#8217;re being truly logical and expecting historical patterns to continue, we should conclude that much, much, much more should change in the coming decades than we intuitively expect.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "At the same time, it makes it sound like a pop concept from the past that never came to fruition.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Ray Kurzweil then muddled things a bit by defining the singularity as the time when the Law of Accelerating Returns has reached such an extreme pace that technological progress is happening at a seemingly-infinite pace, and after which we&#8217;ll be living in a whole new world.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "Finally, while there are many different types or forms of AI since AI is a broad concept, the critical categories we need to think about are based on an AI&#8217;s caliber .",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b",
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "A few examples: Cars are full of ANI systems, from the computer that figures out when the anti-lock brakes should kick in to the computer that tunes the parameters of the fuel injection systems.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "When your plane lands, it&#8217;s not a human that decides which gate it should go to.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "At worst, a glitchy or badly-programmed ANI can cause an isolated catastrophe like knocking out a power grid, causing a harmful nuclear power plant malfunction, or triggering a financial markets disaster (like the 2010 Flash Crash when an ANI program reacted the wrong way to an unexpected situation and caused the stock market to briefly plummet, taking $1 trillion of market value with it, only part of which was recovered when the mistake was corrected).",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "But while ANI doesn&#8217;t have the capability to cause an existential threat , we should see this increasingly large and complex ecosystem of relatively-harmless ANI as a precursor of the world-altering hurricane that&#8217;s on the way.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "First Key to Creating AGI: Increasing Computational Power One thing that definitely needs to happen for AGI to be a possibility is an increase in the power of computer hardware.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b",
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "One way to express this capacity is in the total calculations per second (cps) the brain could manage, and you could come to this number by figuring out the maximum cps of each structure in the brain and then adding them all together.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Sounds a little iffy, but he did this a bunch of times with various professional estimates of different regions, and the total always arrived in the same ballparkaround 10 16 , or 10 quadrillion cps.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "But Tianhe-2 is also a dick, taking up 720 square meters of space, using 24 megawatts of power (the brain runs on just 20 watts ), and costing $390 million to build.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "Kurzweil suggests that we think about the state of computers by looking at how many cps you can buy for $1,000.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "Moore&#8217;s Law is a historically-reliable rule that the world&#8217;s maximum computing power doubles approximately every two years, meaning computer hardware advancement, like general human advancement through history, grows exponentially.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "Looking at how this relates to Kurzweil&#8217;s cps/$1,000 metric, we&#8217;re currently at about 10 trillion cps/$1,000, right on pace with this graph&#8217;s predicted trajectory: 9 So the world&#8217;s $1,000 computers are now beating the mouse brain and they&#8217;re at about a thousandth of human level.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "Second Key to Creating AGI: Making It Smart This is the icky part.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b",
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "This is like scientists toiling over how that kid who sits next to them in class is so smart and keeps doing so well on the tests, and even though they keep studying diligently, they can&#8217;t do nearly as well as that kid, and then they finally decide &#8220;k fuck it I&#8217;m just gonna copy that kid&#8217;s answers.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "The way it &#8220;learns&#8221; is it tries to do a task, say handwriting recognition, and at first, its neural firings and subsequent guesses at deciphering each letter will be completely random.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "First, evolution has no foresight and works randomlyit produces more unhelpful mutations than helpful ones, but we would control the process so it would only be driven by beneficial glitches and targeted tweaks.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Third, to select for intelligence, evolution has to innovate in a bunch of other ways to facilitate intelligencelike revamping the ways cells produce energywhen we can remove those extra burdens and use things like electricity.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "10 AI, which will likely get to AGI by being programmed to self-improve, wouldn&#8217;t see &#8220;human-level intelligence&#8221; as some important milestoneit&#8217;s only a relevant marker from our point of viewand wouldn&#8217;t have any reason to &#8220;stop&#8221; at our level.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "This is called an Intelligence Explosion, 11 and it&#8217;s the ultimate example of The Law of Accelerating Returns.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "Likethis could happen: It takes decades for the first AI system to reach low-level general intelligence, but it finally happens.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "What we do know is that humans&#8217; utter dominance on this Earth suggests a clear rule: with intelligence comes power.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "If our meager brains were able to invent wifi, then something 100 or 1,000 or 1 billion times smarter than we are should have no problem controlling the positioning of each and every atom in the world in any way it likes, at any timeeverything we consider magic, every power we imagine a supreme God to have will be as mundane an activity for the ASI as flipping on a light switch is for us.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "As far as we&#8217;re concerned, if an ASI comes to being, there is now an omnipotent God on Earthand the all-important question for us is: Will it be a nice God?",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "The blue circles are the fun/interesting ones you should read.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "&#8617; This term was first used by one of history&#8217;s great AI thinkers, Irving John Good, in 1965.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    }
+  ],
+  "tags": [
+    "finance",
+    "philosophy",
+    "mathematics",
+    "physics",
+    "ai",
+    "accessible"
+  ],
+  "agentRelevance": {
+    "primary": "b0b",
+    "secondary": "r0ss",
+    "scores": {
+      "b0b": 20,
+      "c0m": 7,
+      "d0t": 13,
+      "r0ss": 14
+    }
+  },
+  "charCount": 50238
+}

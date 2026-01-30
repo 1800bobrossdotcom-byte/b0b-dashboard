@@ -1,0 +1,166 @@
+{
+  "meta": {
+    "source": "arxiv",
+    "arxivId": "1409.0813",
+    "title": "arxiv-1409.0813",
+    "sourceUrl": "https://arxiv.org/pdf/1409.0813.pdf",
+    "fetchedAt": "2026-01-30T03:12:19.144Z",
+    "processedAt": "2026-01-30T03:12:19.255Z",
+    "originalLength": 14508,
+    "compressedLength": 2045,
+    "compressionRatio": "14.1%"
+  },
+  "tags": [
+    "finance",
+    "philosophy",
+    "physics",
+    "ai"
+  ],
+  "agentRelevance": {
+    "primary": "b0b",
+    "secondary": "d0t",
+    "scores": {
+      "b0b": 15,
+      "c0m": 3,
+      "d0t": 9,
+      "r0ss": 9
+    }
+  },
+  "keySentences": [
+    {
+      "text": ", how should we strive to rearrange the particles of our Universe and shape its future?",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "THE TENSION BETWEEN WORLD MODELING AND GOAL RETENTION Humans undergo significant increases in intelligence as they grow up, but do not always retain their childhood goals.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "First it tries things like increasing peoples compassion and church attendance.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "We therefore choose to hack our reward mechanism by exploiting its loopholes.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "From my physics perspective, a key reason for this is that much of the literature (including Bostroms book [5]) uses the concept of a final goal for the friendly AI, even though such a notion is problematic.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Quan- tum effects aside, a truly well-defined goal would specify how all particles in our Universe should be arranged at the end of time.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "It is important to remember that, according to evo- lutionary psychology, the only reason that we humans have any preferences at all is because we are the solu- tion to an evolutionary optimization problem.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Thus all normative words in our human language, such as deli- cious, fragrant, beautiful, comfortable, interest- ing, sexy, good, meaningful and happy, trace their origin to this evolutionary optimization: there is therefore no guarantee that a superintelligent AI would find them rigorously definable.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "In summary, we have yet to identify any final goal for our Universe that appears both definable and desirable.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": ", how should we strive to shape the future of our Universe?",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "pdf [2] Good, Irving John 1965, Speculations Concerning the First Ultraintelligent Machine, in Advances in Comput- ers, edited by Franz L.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "2008, The Basic AI Drives, in Artificial General Intelligence 2008: proceedings of the First AGI Conference, edited by Pei Fang, Ben Goerzel B and Stan Franklin, 483-492, Frontiers in Artificial Intel- ligence and Applications 171, Amsterdam:IOS [5] Bostrom, Nick 2014, Superintelligence: Paths, Dangers, Strategies, Oxford: OUP [6] Russell, Stuart & Norvig, Peter 2010: Artificial Intelli- gence: A Modern Approach, New York: Prentice Hall [7] Wissner-Gross, Alexander D.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": 0,
+      "preview": "arXiv:1409.0813v2 [cs.CY] 3 Sep 2014 Friendly Artificial Intelligence: the Physics Challenge Max Tegmark Dept. of Physics & MIT Kavli Institute, Massachusetts Institute of Technology, Cambridge, MA 02139 (Dated: September 4, 2014) Relentless progress in artificial intelligence (AI) is increasingly r...",
+      "length": 14408,
+      "keyCount": 13
+    }
+  ],
+  "l0re": {
+    "thesis": [
+      {
+        "text": "In summary, we have yet to identify any final goal for our Universe that appears both definable and desirable.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      }
+    ],
+    "principles": [],
+    "actions": [
+      {
+        "text": ", how should we strive to rearrange the particles of our Universe and shape its future?",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "THE TENSION BETWEEN WORLD MODELING AND GOAL RETENTION Humans undergo significant increases in intelligence as they grow up, but do not always retain their childhood goals.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "Quan- tum effects aside, a truly well-defined goal would specify how all particles in our Universe should be arranged at the end of time.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": ", how should we strive to shape the future of our Universe?",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      }
+    ],
+    "stats": []
+  }
+}

@@ -1,0 +1,238 @@
+{
+  "meta": {
+    "source": "arxiv",
+    "arxivId": "1701.06903",
+    "title": "arxiv-1701.06903",
+    "sourceUrl": "https://arxiv.org/pdf/1701.06903.pdf",
+    "fetchedAt": "2026-01-30T03:05:02.570Z",
+    "processedAt": "2026-01-30T03:05:02.711Z",
+    "originalLength": 47824,
+    "compressedLength": 2679,
+    "compressionRatio": "5.6%"
+  },
+  "tags": [
+    "finance",
+    "mathematics",
+    "physics",
+    "ai",
+    "accessible",
+    "academic"
+  ],
+  "agentRelevance": {
+    "primary": "d0t",
+    "secondary": "r0ss",
+    "scores": {
+      "b0b": 0,
+      "c0m": 0,
+      "d0t": 9,
+      "r0ss": 3
+    }
+  },
+  "keySentences": [
+    {
+      "text": "Thus, we are able to extend the spectral ageing studies into a hitherto unexplored frequency band, adding more robustness to our results.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Consequently, their spectral index steepens ( < 1)1, and breaks appear in the radio spec- trum (Kardashev 1962; Pacholczyk 1970; Jaffe & Perola 1973; Komissarov & Gubanov 1994).",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Thus, radio studies enable us to identify the presence and the timescales of this type of cycle of activity.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "The first searches with LOFAR have already provided promising results with the percentage of remnants ranging be- tween 10% and 30% (Brienza et al.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b",
+        "\\d+%"
+      ]
+    },
+    {
+      "text": ": LOFAR studies of B2 0924+30 tial phase calibration model was derived from the VLSS4 cata- logue that covers the FoV out to the first null of the station beam, which contains spectral index information for each source in the model.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Finally, we divided the obtained cata- logue flux density at 140 MHz with the measured flux density from the LOFAR image.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Assuming power-law spectra, the ra- tio should be unity if the station beam correction gives correct fluxes over the FoV.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "We computed the magnetic field value for each lobe separately and then averaged the result.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "We therefore decide to adopt the equipar- tition value that we initially derived and assume a magnetic field strength of B = 1.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "The energy-loss term was taken to be the one described by Jaffe & Perola (1973); hence the JP suffix in the model label b  B2 [ 2 3 + ( BIC B )2] , (3) where BIC =  2 3 BCMB is the effective inverse Compton mag- netic field, and BCMB = 3.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "2004), we conclude that our spectral curvature and ageing derivation (for the lobe and core regions) is not affected by us using the uncorrected NVSS map.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "Consequently, for resolved sources, we can estimate the du- ration of their active phase as the difference between the old- est and youngest age read-off from the map: ton = tmax  tmin.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "In the same plot, we show the loci of points occupied by different ageing models, as well as a simple power law.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "We can reconstruct the global spectrum of the source by shifting the spectra (in the log(S )  log() plane) of each region so that, finally, all of the spectra line up.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "At the frequencies we study with LOFAR, we would expect that the spectrum is a power law that is representative of the injec- tion spectral index.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "Hence, it is uncer- tain how accurately we can determine the injection spectral in- dex.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Thus, the ages derived from the integrated flux density analysis may be different to that found using age mapping.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "This result highlights the value of high-resolution, high surface-brightness sensitivity LO- FAR maps obtained at low frequencies in studying remnant radio galaxies, disentangling their nature and activity history.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": 0,
+      "preview": "Astronomy & Astrophysics manuscript no. B20924+30 cESO 2017 January 25, 2017 Radiative age mapping of the remnant radio galaxy B2 0924+30: the LOFAR perspective? A. Shulevski1, 2, R. Morganti1, 2, J. J. Harwood1, P. D. Barthel2, M. Jamrozy3, M. Brienza1, 2, G. Brunetti4, H. J. A. Rttgering5, M. Murg...",
+      "length": 47459,
+      "keyCount": 20
+    }
+  ],
+  "l0re": {
+    "thesis": [
+      {
+        "text": "We computed the magnetic field value for each lobe separately and then averaged the result.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      },
+      {
+        "text": "2004), we conclude that our spectral curvature and ageing derivation (for the lobe and core regions) is not affected by us using the uncorrected NVSS map.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      },
+      {
+        "text": "This result highlights the value of high-resolution, high surface-brightness sensitivity LO- FAR maps obtained at low frequencies in studying remnant radio galaxies, disentangling their nature and activity history.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      }
+    ],
+    "principles": [
+      {
+        "text": "Assuming power-law spectra, the ra- tio should be unity if the station beam correction gives correct fluxes over the FoV.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b",
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "In the same plot, we show the loci of points occupied by different ageing models, as well as a simple power law.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b"
+        ]
+      },
+      {
+        "text": "At the frequencies we study with LOFAR, we would expect that the spectrum is a power law that is representative of the injec- tion spectral index.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b"
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "text": "Assuming power-law spectra, the ra- tio should be unity if the station beam correction gives correct fluxes over the FoV.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b",
+          "\\b(must|should|always|never)\\b"
+        ]
+      }
+    ],
+    "stats": [
+      {
+        "text": "The first searches with LOFAR have already provided promising results with the percentage of remnants ranging be- tween 10% and 30% (Brienza et al.",
+        "section": 0,
+        "markers": [
+          "\\b(first|second|third|finally)\\b",
+          "\\d+%"
+        ]
+      }
+    ]
+  }
+}

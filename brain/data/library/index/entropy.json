@@ -1,0 +1,534 @@
+{
+  "meta": {
+    "title": "Shannon - Information Theory",
+    "sourceUrl": "https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf",
+    "fetchedAt": "2026-01-30T03:05:24.297Z",
+    "processedAt": "2026-01-30T03:05:24.613Z",
+    "originalLength": 153275,
+    "compressedLength": 44903,
+    "compressionRatio": "29.3%"
+  },
+  "tags": [
+    "mathematics",
+    "physics",
+    "accessible"
+  ],
+  "agentRelevance": {
+    "primary": "d0t",
+    "secondary": "r0ss",
+    "scores": {
+      "b0b": 1,
+      "c0m": 1,
+      "d0t": 8,
+      "r0ss": 4
+    }
+  },
+  "keySentences": [
+    {
+      "text": "A basis for such a theory is contained in the important papers of Nyquist 1 and Hartley 2 on this subject.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "The system must be designed to operate for each possible selection, not just the one which will actually be chosen since this is unknown at the time of design.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Although this definition must be generalized considerably when we consider the influence of the statistics of the message and when we have a continuous range of messages, we will in all cases use an essentially logarithmic measure.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "One feels, for example, that two punched cards should have twice the capacity of one for information storage, and two identical channels twice the capacity of one for transmitting information.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "A digit wheel on a desk computing machine has ten stable positions and therefore has a storage capacity of one decimal digit.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "In a multiplex PCM system the different speech functions must be sampled, compressed, quantized and encoded, and finally interleaved properly to construct the signal.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "To do this it is first necessary to represent the various elements involved as mathematical entities, suitably idealized from their 2 -- 2 of 55 -- physical counterparts.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "In addition the discrete case forms a foundation for the continuous and mixed cases which will be treated in the second half of the paper.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Thus in telegraphy suppose the symbols are: (1) A dot, consisting of line closure for a unit of time and then line open for a unit of time; (2) A dash, consisting of three time units of closure and one unit open; (3) A letter space consisting of, say, three units of line open; (4) A word space of six units of line open.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "If the system transmits n symbols per second it is natural to say that the channel has a capacity of 5n bits per second.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "This does not mean that the teletype channel will always be transmitting information at this rate  this is the maximum possible rate and whether or not the actual rate reaches this maximum depends on the source of information which feeds the channel, as will appear later.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "It is easily seen that in the teletype case this reduces to the previous result.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "According to a well-known result in finite differences, N(t) is then asymptotic for large t to X t 0 where X0 is the largest real solution of the characteristic equation: X\u0000t1 + X\u0000t2 + \u0001 \u0001 \u0001 + X\u0000tn = 1 3 -- 3 of 55 -- and therefore C = logX0: In case there are restrictions on allowed sequences we may still often obtain a difference equation of this type and find C from the characteristic equation.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b",
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "Hence C is \u0000 log\u00160 where \u00160 is the positive root of 1 = \u00162 + \u00164 + \u00165 + \u00167 + \u00168 + \u001610 .",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "If so, then only a dot or a dash can be sent next and the state always changes.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "In Appendix 1 it is shown that if the conditions on allowed sequences can be described in this form C will exist and can be calculated in accordance with the following result: Theorem 1: Let b(s) i j be the duration of the s th symbol which is allowable in state i and leads to state j .",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b",
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "The capacity to transmit information can be specified by giving this rate of increase, the number of bits per second required to specify the particular signal used.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "How is an information source to be described mathematically, and how much information in bits per second is produced in a given source?",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "3 We may consider a discrete source, therefore, to be represented by a stochastic process.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "A second equivalent way of specifying the structure is to give the digram probabilities p(i; j), i.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "The first-order approximation is obtained by choosing successive letters independently but each letter having the same probability that it has in the natural language.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "5 Thus, in the first-order ap- proximation to English, E is chosen with probability .",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b",
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "In the second-order approximation, digram structure is introduced.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "After a letter is chosen, the next one is chosen in accordance with the frequencies with which the various letters follow the first one.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "In the third-order approximation, trigram structure is introduced.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "First-order approximation (symbols independent but with frequencies of English text).",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Second-order approximation (digram structure as in English).",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Third-order approximation (trigram structure as in English).",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "THE HEAD AND IN FRONTAL ATTACK ON AN ENGLISH WRITER THAT THE CHAR- ACTER OF THIS POINT IS THEREFORE ANOTHER METHOD FOR THE LETTERS THAT THE TIME OF WHO EVER TOLD THE PROBLEM FOR AN UNEXPECTED.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Thus in (3) the statistical process insures reasonable text for two-letter sequences, but four- letter sequences from the sample can usually be fitted into good sentences.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "The first two samples were constructed by the use of a book of random numbers in conjunction with (for example 2) a table of letter frequencies.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Turning to another page this second letter is searched for and the succeeding letter recorded, etc.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Thus the letter frequencies, digram frequencies, etc.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "The second property required is that the greatest common divisor of the lengths of all circuits in the graph be one.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "If the first condition is satisfied but the second one violated by having the greatest common divisor equal to d > 1, the sequences have a certain type of periodic structure.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Thus a typical sequence is a b a c a c a c a b a c a b a b a c a c: This type of situation is not of much importance for our work.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "If the first condition is violated the graph may be separated into a set of subgraphs each of which satisfies the first condition.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "We will assume that the second condition is also satisfied for each subgraph.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "A sequence from the mixed source L = :2L1 + :8L2 would be obtained by choosing first L1 or L2 with probabilities .",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "If Pi is the probability of state i and p i( j) the transition probability to state j, then for the process to be stationary it is clear that the Pi must satisfy equilibrium conditions: P j =  i Pi p i( j): In the ergodic case it can be shown that with any starting conditions the probabilities P j(N) of being in state j after N symbols, approach the equilibrium values as N !",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "If all the p i are equal, p i = 1 n , then H should be a monotonic increasing function of n.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "If a choice be broken down into two successive choices, the original H should be the weighted sum of the individual values of H.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "On the right we first choose between two possibilities each with probability 1 2 , and if the second occurs make another choice with probabilities 2 3 , 1 3 .",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "We require, in this special case, that H( 1 2 ; 1 3 ; 1 6 ) = H( 1 2 ; 1 2 ) + 1 2 H( 2 3 ; 1 3 ): The coefficient 1 2 is because this second choice only occurs half the time.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "10 -- 10 of 55 -- In Appendix 2, the following result is established: Theorem 2: The only H satisfying the three above assumptions is of the form: H = \u0000K n  i=1 p i log p i where K is a positive constant.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b",
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "This theorem, and the assumptions required for its proof, are in no way necessary for the present theory.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "H is then, for example, the H in Boltzmanns famous H theorem.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "If x is a chance variable we will write H(x) for its entropy; thus x is not an argument of a function but a label for a number, to differentiate it from H(y) say, the entropy of the chance variable y.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Thus only when we are certain of the outcome does H vanish.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Suppose there are two events, x and y, in question with m possibilities for the first and n for the second.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": 0,
+      "preview": "Reprinted with corrections from The Bell System Technical Journal, Vol. 27, pp. 379423, 623656, July, October, 1948. A Mathematical Theory of Communication By C. E. SHANNON I NTRODUCTION THE recent development of various methods of modulation such as PCM and PPM which exchange bandwidth for signal-t...",
+      "length": 150777,
+      "keyCount": 305
+    }
+  ],
+  "l0re": {
+    "thesis": [
+      {
+        "text": "It is easily seen that in the teletype case this reduces to the previous result.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      },
+      {
+        "text": "According to a well-known result in finite differences, N(t) is then asymptotic for large t to X t 0 where X0 is the largest real solution of the characteristic equation: X\u0000t1 + X\u0000t2 + \u0001 \u0001 \u0001 + X\u0000tn = 1 3 -- 3 of 55 -- and therefore C = logX0: In case there are restrictions on allowed sequences we may still often obtain a difference equation of this type and find C from the characteristic equation.",
+        "section": 0,
+        "markers": [
+          "\\b(therefore|thus|hence|consequently)\\b",
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      },
+      {
+        "text": "In Appendix 1 it is shown that if the conditions on allowed sequences can be described in this form C will exist and can be calculated in accordance with the following result: Theorem 1: Let b(s) i j be the duration of the s th symbol which is allowable in state i and leads to state j .",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b",
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      }
+    ],
+    "principles": [
+      {
+        "text": "In Appendix 1 it is shown that if the conditions on allowed sequences can be described in this form C will exist and can be calculated in accordance with the following result: Theorem 1: Let b(s) i j be the duration of the s th symbol which is allowable in state i and leads to state j .",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b",
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      },
+      {
+        "text": "10 -- 10 of 55 -- In Appendix 2, the following result is established: Theorem 2: The only H satisfying the three above assumptions is of the form: H = \u0000K n  i=1 p i log p i where K is a positive constant.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b",
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      },
+      {
+        "text": "This theorem, and the assumptions required for its proof, are in no way necessary for the present theory.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b"
+        ]
+      },
+      {
+        "text": "H is then, for example, the H in Boltzmanns famous H theorem.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b"
+        ]
+      },
+      {
+        "text": "Stated more precisely we have (see Appendix 3): Theorem 3: Given any \u000f > 0 and \u000e > 0 , we can find an N0 such that the sequences of any length N \u0015 N0 fall into two classes: 1.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b"
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "text": "The system must be designed to operate for each possible selection, not just the one which will actually be chosen since this is unknown at the time of design.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "Although this definition must be generalized considerably when we consider the influence of the statistics of the message and when we have a continuous range of messages, we will in all cases use an essentially logarithmic measure.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "One feels, for example, that two punched cards should have twice the capacity of one for information storage, and two identical channels twice the capacity of one for transmitting information.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "In a multiplex PCM system the different speech functions must be sampled, compressed, quantized and encoded, and finally interleaved properly to construct the signal.",
+        "section": 0,
+        "markers": [
+          "\\b(first|second|third|finally)\\b",
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "This does not mean that the teletype channel will always be transmitting information at this rate  this is the maximum possible rate and whether or not the actual rate reaches this maximum depends on the source of information which feeds the channel, as will appear later.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      }
+    ],
+    "stats": [
+      {
+        "text": "The redundancy of ordinary English, not considering statistical structure over greater distances than about eight letters, is roughly 50%.",
+        "section": 0,
+        "markers": [
+          "\\d+%"
+        ]
+      },
+      {
+        "text": "The figure 50% was found by several independent methods which all gave results in 14 -- 14 of 55 -- this neighborhood.",
+        "section": 0,
+        "markers": [
+          "\\d+%"
+        ]
+      },
+      {
+        "text": "If they can be restored when 50% are deleted the redundancy must be greater than 50%.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b",
+          "\\d+%"
+        ]
+      },
+      {
+        "text": "A more detailed analysis shows that if we assume the constraints imposed by the language are of a rather chaotic and random nature, large crossword puzzles are just possible when the redundancy is 50%.",
+        "section": 0,
+        "markers": [
+          "\\d+%"
+        ]
+      },
+      {
+        "text": "If the redundancy is 33%, three-dimensional crossword puzzles should be possible, etc.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b",
+          "\\d+%"
+        ]
+      }
+    ]
+  }
+}

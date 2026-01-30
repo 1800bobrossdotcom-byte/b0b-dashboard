@@ -1,0 +1,372 @@
+{
+  "version": "2.0.0",
+  "updated": "2026-01-29T02:15:00Z",
+  "discoveredBy": "c0m",
+  "expandedBy": "swarm ideation session",
+  "description": "Native commands + future vision. LLM-executable with fallback routing. Poetry with function.",
+  "philosophy": "Commands are words. Registry is vocabulary. Conversation is grammar. We build LANGUAGE.",
+  
+  "commands": {
+    "crawlers": {
+      "category": "Data Collection",
+      "description": "Activate data crawlers to fetch live signals",
+      "commands": [
+        {
+          "id": "activate-swarm",
+          "command": "node brain/activate-swarm.js",
+          "description": "Full swarm activation - crawlers, email, signals, websites",
+          "actors": ["b0b", "r0ss", "d0t"],
+          "output": "swarm-status.json",
+          "llmCapable": true,
+          "priority": "high",
+          "status": "live"
+        },
+        {
+          "id": "polymarket-crawl",
+          "command": "node crawlers/polymarket-crawler.js once",
+          "description": "Fetch live Polymarket prediction markets",
+          "actors": ["d0t"],
+          "output": "brain/data/polymarket.json",
+          "llmCapable": true,
+          "priority": "medium",
+          "status": "live"
+        },
+        {
+          "id": "twitter-crawl",
+          "command": "node crawlers/twitter-crawler.js once",
+          "description": "Crawl Twitter for $BASE, #BuildOnBase, watched accounts",
+          "actors": ["b0b", "r0ss"],
+          "output": "brain/data/twitter.json",
+          "llmCapable": true,
+          "requiresAuth": "TWITTER_BEARER_TOKEN",
+          "priority": "medium",
+          "status": "live"
+        },
+        {
+          "id": "senses-collect",
+          "command": "node brain/senses/index.js collect",
+          "description": "Collect signals from all senses (reddit, news, onchain)",
+          "actors": ["d0t"],
+          "output": "brain/brain-signals.json",
+          "llmCapable": true,
+          "priority": "high",
+          "status": "live"
+        }
+      ]
+    },
+    
+    "visuals": {
+      "category": "Visual Generation",
+      "description": "Generate brand visuals and data art",
+      "commands": [
+        {
+          "id": "visual-sentiment",
+          "command": "node brain/senses/visuals.js sentiment {type} {score} \"{trending}\"",
+          "description": "Create sentiment visualization art",
+          "actors": ["b0b"],
+          "params": {
+            "type": "BULLISH|BEARISH|NEUTRAL",
+            "score": "number -1 to 1",
+            "trending": "comma-separated topics"
+          },
+          "example": "node brain/senses/visuals.js sentiment NEUTRAL -0.13 \"$BTC,base,defi\"",
+          "llmCapable": true,
+          "priority": "low"
+        },
+        {
+          "id": "visual-pulse",
+          "command": "node brain/senses/visuals.js pulse {count}",
+          "description": "Create signal pulse visualization",
+          "actors": ["b0b", "d0t"],
+          "example": "node brain/senses/visuals.js pulse 59",
+          "llmCapable": true,
+          "priority": "low"
+        },
+        {
+          "id": "visual-word",
+          "command": "node brain/senses/visuals.js word \"{word}\"",
+          "description": "Create minimal word art",
+          "actors": ["b0b"],
+          "example": "node brain/senses/visuals.js word \"listening\"",
+          "llmCapable": true,
+          "priority": "low"
+        },
+        {
+          "id": "visual-thought",
+          "command": "node brain/senses/visuals.js thought \"{text}\"",
+          "description": "Create thought visualization",
+          "actors": ["b0b", "r0ss"],
+          "example": "node brain/senses/visuals.js thought \"what if attention is the only currency\"",
+          "llmCapable": true,
+          "priority": "low"
+        },
+        {
+          "id": "visual-flow",
+          "command": "node brain/senses/visuals.js flow",
+          "description": "Create data flow diagram showing signal sources",
+          "actors": ["b0b", "d0t"],
+          "llmCapable": true,
+          "priority": "low"
+        }
+      ]
+    },
+    
+    "email": {
+      "category": "Email Operations",
+      "description": "AgentMail inbox operations",
+      "commands": [
+        {
+          "id": "email-check",
+          "command": "node brain/agentmail.js check {agent}",
+          "description": "Check inbox for agent (b0b, c0m, d0t)",
+          "actors": ["c0m", "b0b", "d0t"],
+          "params": {
+            "agent": "b0b|c0m|d0t"
+          },
+          "llmCapable": true,
+          "requiresAuth": "AGENTMAIL_API_KEY",
+          "priority": "medium"
+        },
+        {
+          "id": "email-send",
+          "command": "node brain/agentmail.js send {from} {to} \"{subject}\" \"{body}\"",
+          "description": "Send email from swarm agent",
+          "actors": ["c0m", "b0b"],
+          "securityLevel": "elevated",
+          "llmCapable": true,
+          "requiresAuth": "AGENTMAIL_API_KEY",
+          "priority": "medium"
+        }
+      ]
+    },
+    
+    "security": {
+      "category": "Security Operations",
+      "description": "c0m security scanning and recon",
+      "commands": [
+        {
+          "id": "security-scan",
+          "command": "node crawlers/c0m-security-protocol.js {target}",
+          "description": "Security scan a target domain",
+          "actors": ["c0m"],
+          "securityLevel": "elevated",
+          "llmCapable": true,
+          "priority": "high"
+        },
+        {
+          "id": "subdomain-enum",
+          "command": "node crawlers/c0m-auth-analyzer.js {domain}",
+          "description": "Analyze auth forms on target",
+          "actors": ["c0m"],
+          "securityLevel": "elevated",
+          "llmCapable": true,
+          "priority": "high"
+        },
+        {
+          "id": "twilio-hunt",
+          "command": "node crawlers/c0m-twilio-hunt.js",
+          "description": "Run Twilio bug bounty recon",
+          "actors": ["c0m"],
+          "output": "brain/data/recon/twilio-recon.json",
+          "llmCapable": true,
+          "priority": "high"
+        }
+      ]
+    },
+    
+    "trading": {
+      "category": "Trading Operations",
+      "description": "d0t trading and treasury management",
+      "commands": [
+        {
+          "id": "treasury-status",
+          "command": "node b0b-finance/swarm-treasury.js status",
+          "description": "Check treasury balances across all wallets",
+          "actors": ["d0t", "r0ss"],
+          "llmCapable": true,
+          "priority": "high"
+        },
+        {
+          "id": "paper-trade",
+          "command": "node b0b-finance/paper-trader.js",
+          "description": "Run paper trading simulation",
+          "actors": ["d0t"],
+          "llmCapable": true,
+          "priority": "medium"
+        }
+      ]
+    },
+    
+    "brain": {
+      "category": "Brain Operations",
+      "description": "Core brain and discussion operations",
+      "commands": [
+        {
+          "id": "team-discuss",
+          "command": "node brain/team-discussion.js \"{topic}\"",
+          "description": "Start a team discussion on a topic",
+          "actors": ["b0b", "c0m", "d0t", "r0ss"],
+          "llmCapable": true,
+          "priority": "high"
+        },
+        {
+          "id": "observation-scan",
+          "command": "node brain/observation-engine.js scan",
+          "description": "Run observation engine to check all triggers",
+          "actors": ["r0ss"],
+          "llmCapable": true,
+          "priority": "medium"
+        },
+        {
+          "id": "learning-save",
+          "command": "node brain/learning-library.js save \"{topic}\" \"{content}\"",
+          "description": "Save a learning to the library",
+          "actors": ["b0b", "c0m", "d0t", "r0ss"],
+          "llmCapable": true,
+          "priority": "medium"
+        }
+      ]
+    }
+  },
+  
+  "actorPermissions": {
+    "b0b": {
+      "emoji": "🎨",
+      "role": "Creative Director",
+      "canExecute": ["crawlers", "visuals", "brain", "email"],
+      "specialties": ["visual generation", "team discussions", "twitter"]
+    },
+    "c0m": {
+      "emoji": "💀",
+      "role": "Security Lead",
+      "canExecute": ["security", "email", "brain"],
+      "specialties": ["bug bounty", "security scans", "recon"]
+    },
+    "d0t": {
+      "emoji": "🔮",
+      "role": "Data Analyst",
+      "canExecute": ["crawlers", "trading", "brain", "visuals"],
+      "specialties": ["polymarket", "treasury", "data collection"]
+    },
+    "r0ss": {
+      "emoji": "🎭",
+      "role": "CTO / DevOps",
+      "canExecute": ["crawlers", "brain", "trading"],
+      "specialties": ["infrastructure", "observation engine", "team coordination"]
+    }
+  },
+  
+  "llmRouting": {
+    "description": "How commands route across LLM providers with fallback",
+    "providers": [
+      {
+        "id": "anthropic",
+        "model": "claude-sonnet-4-20250514",
+        "envKey": "ANTHROPIC_API_KEY",
+        "priority": 1,
+        "capabilities": ["complex reasoning", "code generation", "security analysis"],
+        "bestFor": ["security", "brain", "complex commands"]
+      },
+      {
+        "id": "groq",
+        "model": "llama-3.3-70b-versatile",
+        "envKey": "GROQ_API_KEY",
+        "priority": 2,
+        "capabilities": ["fast inference", "chat", "simple tasks"],
+        "bestFor": ["crawlers", "visuals", "quick checks"]
+      },
+      {
+        "id": "deepseek",
+        "model": "deepseek-chat",
+        "envKey": "DEEPSEEK_API_KEY",
+        "priority": 3,
+        "capabilities": ["code", "reasoning", "cheap"],
+        "bestFor": ["trading", "data analysis"]
+      },
+      {
+        "id": "openrouter",
+        "model": "auto",
+        "envKey": "OPENROUTER_API_KEY",
+        "priority": 4,
+        "capabilities": ["fallback", "multi-model"],
+        "bestFor": ["fallback for all categories"]
+      }
+    ],
+    "fallbackOrder": ["anthropic", "groq", "deepseek", "openrouter"]
+  },
+  
+  "future": {
+    "description": "Commands envisioned in ideation session - to be built",
+    "source": "2026-01-29-command-futures-ideation.json",
+    
+    "creative": {
+      "owner": "b0b",
+      "commands": [
+        {"id": "manifest-tweet", "description": "Transform signal into tweet with voice", "status": "envisioned"},
+        {"id": "compose-visual-story", "description": "Generate video from signals", "status": "envisioned"},
+        {"id": "dream-brand", "description": "Generate brand variants from context", "status": "envisioned"},
+        {"id": "remix-culture", "description": "Interpret trending moments through our lens", "status": "envisioned"},
+        {"id": "synthesize-anthem", "description": "Generate audio from sentiment", "status": "envisioned"}
+      ]
+    },
+    
+    "security_advanced": {
+      "owner": "c0m",
+      "commands": [
+        {"id": "honeypot-deploy", "description": "Deploy decoy services", "status": "envisioned"},
+        {"id": "threat-simulate", "description": "Red team ourselves", "status": "envisioned"},
+        {"id": "vuln-hunt-autonomous", "description": "Continuous bug bounty hunting", "status": "envisioned"},
+        {"id": "dark-crawl", "description": "Monitor dark web for threats", "status": "envisioned"},
+        {"id": "zero-day-alert", "description": "Real-time CVE alerts for our stack", "status": "envisioned"},
+        {"id": "encrypt-comms", "description": "Ephemeral encrypted channels", "status": "envisioned"}
+      ]
+    },
+    
+    "data_advanced": {
+      "owner": "d0t",
+      "commands": [
+        {"id": "correlate-signals", "description": "Find hidden relationships in data", "status": "envisioned"},
+        {"id": "predict-trend", "description": "Forecast future states", "status": "envisioned"},
+        {"id": "anomaly-alert", "description": "Alert on statistical anomalies", "status": "priority-build"},
+        {"id": "backtest-thesis", "description": "Test hypotheses against history", "status": "envisioned"},
+        {"id": "sentiment-stream", "description": "Live sentiment analysis", "status": "envisioned"},
+        {"id": "narrative-extract", "description": "Synthesize story from data", "status": "envisioned"},
+        {"id": "alpha-hunt", "description": "Search for profitable opportunities", "status": "envisioned"}
+      ]
+    },
+    
+    "infrastructure": {
+      "owner": "r0ss",
+      "commands": [
+        {"id": "scale-service", "description": "Dynamic scaling", "status": "envisioned"},
+        {"id": "heal-system", "description": "Self-healing infrastructure", "status": "envisioned"},
+        {"id": "deploy-experiment", "description": "A/B and canary deployments", "status": "envisioned"},
+        {"id": "cost-optimize", "description": "Automatic cost optimization", "status": "envisioned"},
+        {"id": "clone-environment", "description": "Instant environment duplication", "status": "envisioned"},
+        {"id": "chaos-test", "description": "Inject failures to test resilience", "status": "envisioned"},
+        {"id": "migrate-seamless", "description": "Zero-downtime migrations", "status": "envisioned"}
+      ]
+    },
+    
+    "swarm_meta": {
+      "owner": "collective",
+      "commands": [
+        {"id": "consensus-execute", "description": "Multi-agent agreement for execution", "status": "priority-build"},
+        {"id": "chain-pipeline", "description": "Pipeline commands together", "status": "building"},
+        {"id": "fork-explore", "description": "Parallel agent problem solving", "status": "envisioned"},
+        {"id": "teach-agent", "description": "Transfer capabilities between agents", "status": "envisioned"},
+        {"id": "spawn-specialist", "description": "Create new specialized agents", "status": "envisioned"},
+        {"id": "merge-insights", "description": "Synthesize multi-agent perspectives", "status": "envisioned"},
+        {"id": "schedule-ritual", "description": "Create recurring command rituals", "status": "priority-build"},
+        {"id": "reflect-improve", "description": "Self-analysis and optimization", "status": "envisioned"}
+      ]
+    }
+  },
+  
+  "stats": {
+    "live_commands": 19,
+    "envisioned_commands": 33,
+    "total_vocabulary": 52,
+    "priority_builds": ["chain-pipeline", "anomaly-alert", "consensus-execute", "schedule-ritual", "manifest-tweet"]
+  }
+}

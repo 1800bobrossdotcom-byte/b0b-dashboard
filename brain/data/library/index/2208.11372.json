@@ -1,0 +1,334 @@
+{
+  "meta": {
+    "source": "arxiv",
+    "arxivId": "2208.11372",
+    "title": "arxiv-2208.11372",
+    "sourceUrl": "https://arxiv.org/pdf/2208.11372.pdf",
+    "fetchedAt": "2026-01-30T02:59:59.561Z",
+    "processedAt": "2026-01-30T02:59:59.734Z",
+    "originalLength": 37021,
+    "compressedLength": 5272,
+    "compressionRatio": "14.2%"
+  },
+  "tags": [
+    "finance",
+    "security",
+    "philosophy",
+    "physics",
+    "ai",
+    "academic"
+  ],
+  "agentRelevance": {
+    "primary": "d0t",
+    "secondary": "c0m",
+    "scores": {
+      "b0b": 2,
+      "c0m": 5,
+      "d0t": 7,
+      "r0ss": 3
+    }
+  },
+  "keySentences": [
+    {
+      "text": "As a result, a great deal of countries have adopted strict legislation to tackle this problem- atic [35].",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "Additionally, usually owing to poor security, the cameras are not immune from being accessed directly by malicious people, thus putting in jeopardy the private personal data they record.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Its principle is to guarantee personal information protection since the very conception of the devices.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "In this work, we explore the feasibility of privacy-aware cameras that respect the PbD principle by studying their impacts on CV processing tasks which are usually applied to images taken in the public sphere.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "The first consists in generating defocus blur so that the images correspond to the out- puts of a specially designed camera with fixed focal length, aperture and position of the in-focus plane; while the second distortion mimics a simple monochrome camera.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Our goal is thus to find out if there is a level of distortion that allows to process images automatically in an efficient way while preserving the privacy of people.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "In [14], Dodge and Karam study the influence of 5 different quality distortions on neural networks for image classi- fication and conclude they are specially sensitive to blur and noise.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "The first group of methods are more commonly adopted as they consist on a pre-processing phase and do not demand a specific camera [3,36,37,23].",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "This work features important improvements in the field and was followed by many contributions on the upsampling strategy to generate a high resolution output in [29,2,25,45,43].",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "These layers allow to enlarge the filters view field and thus improve the objects context information.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "It typically implicates differ- ent sub-tasks, including object detection (vehicle and license plate detection), semantic segmentation (character segmentation) and finally Optical Character Recognition (OCR).",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "[17] propose to use only two steps to detect and recognize LPs and thus, reduce error propagation between sub-tasks.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Finally, an OCR network is used on the rectified LP to translate the characters into text.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "The detected regions from this network are sent to a second stage where LPs are -- 4 of 15 -- On the Design of Privacy-Aware Cameras 5 simultaneously detected and classified with respect to their layout (e.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Finally, they apply LP recognition based on the extra information given by the precedent step.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Finally, related to our [1] proposes a an- notated license plate detection and recognition version of the Cityscapes dataset.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "To this aim, we propose two main experiments: (i) The first explores the effect of both defocus-blurred and grayscaled input images during training and inference, where we prove the potential of a deep network to extract useful contextual information despite the imposed visual aberrations (cf.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "2); (ii) The second compares the generalization capability of two deep neural mod- els, trained with standard colored and all-in-focus images, on a privacy sen- sitive task and a non-privacy sensitive one (Section 3.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Thus, we set it to a very low value, so the simulated camera has a very shallow depth of focus and is very sensitive to defocus.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Hence, when generating the depth maps, the corresponding pixels are set to zero.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Finally, we compare the resulting trained models across different input information with and without quality deformations.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Therefore, we generate out-of-focus images like the ones illustrated in the second row of Figure 3.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b",
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Therefore, we upsample the generated semantic segmentation maps using the nearest neighbor resampling method to the original size while producing metrics.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Finally, we trained our model with each one of the four versions of Cityscapes mentioned in the beginning of this section and performed inference metrics also on all versions for each model.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "The second and third column indicates if the model was trained with grayscale (G), defocus blur (B) deformations, both or none.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Following a similar pattern, the first column indicates the dataset related to the metrics during inference.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "From the results, we first compare the models trained and tested on the same version of the dataset and next we discuss about their generalization capability to out-of-distribution data.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "The present experiment shows that at the same time these visual distortions influence on the models capability to extract important information, they do not significantly weaken the models performance.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "The best model manages to find approximatelly 40% of the annotated LPs, however, the best model on out-of-focus data can only succeed at near 4% when in-focus plane is at 15 meters.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "Let that be clear that a privacy-aware model should have an in-focus plan in a position where identification of personal information should be impossible because of image resolution, for example.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Hence, we discuss the principles of Privacy by Design, which stands that a product should respect consumers personal in- formation since its very own conception.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Finally, we propose an approach to perform hardware-level anonymization by using defocus blur and grayscale im- ages as inputs to neural networks.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "To the best of our knowledge, our work is the first to propose coupling defocus blur and a DNN model to strategically hide identifiable information without compromising concurrent tasks of more general purposes.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": 0,
+      "preview": "On the Design of Privacy-Aware Cameras: a Study on Deep Neural Networks Marcela Carvalho, Oussama Ennaffi, Sylvain Chateau, and Samy Ait Bachir Upciti Abstract. In spite of the legal advances in personal data protection, the issue of private data being misused by unauthorized entities is still of ut...",
+      "length": 36909,
+      "keyCount": 38
+    }
+  ],
+  "l0re": {
+    "thesis": [
+      {
+        "text": "As a result, a great deal of countries have adopted strict legislation to tackle this problem- atic [35].",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      },
+      {
+        "text": "In [14], Dodge and Karam study the influence of 5 different quality distortions on neural networks for image classi- fication and conclude they are specially sensitive to blur and noise.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      }
+    ],
+    "principles": [
+      {
+        "text": "Its principle is to guarantee personal information protection since the very conception of the devices.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b"
+        ]
+      },
+      {
+        "text": "In this work, we explore the feasibility of privacy-aware cameras that respect the PbD principle by studying their impacts on CV processing tasks which are usually applied to images taken in the public sphere.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b"
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "text": "Let that be clear that a privacy-aware model should have an in-focus plan in a position where identification of personal information should be impossible because of image resolution, for example.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "Hence, we discuss the principles of Privacy by Design, which stands that a product should respect consumers personal in- formation since its very own conception.",
+        "section": 0,
+        "markers": [
+          "\\b(therefore|thus|hence|consequently)\\b",
+          "\\b(must|should|always|never)\\b"
+        ]
+      }
+    ],
+    "stats": [
+      {
+        "text": "The best model manages to find approximatelly 40% of the annotated LPs, however, the best model on out-of-focus data can only succeed at near 4% when in-focus plane is at 15 meters.",
+        "section": 0,
+        "markers": [
+          "\\d+%"
+        ]
+      }
+    ]
+  }
+}

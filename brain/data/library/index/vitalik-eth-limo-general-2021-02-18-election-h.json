@@ -1,0 +1,395 @@
+{
+  "source": "https://vitalik.eth.limo/general/2021/02/18/election.html",
+  "filename": "vitalik-eth-limo-general-2021-02-18-election-h.txt",
+  "fetchedAt": "2026-01-30T03:14:53.228Z",
+  "type": "webpage",
+  "meta": {
+    "source": "https://vitalik.eth.limo/general/2021/02/18/election.html",
+    "processedAt": "2026-01-30T03:14:53.227Z",
+    "originalLength": 30660,
+    "compressedLength": 13622,
+    "compressionRatio": "44.4%"
+  },
+  "keySentences": [
+    {
+      "text": "Dark Mode Toggle Prediction Markets: Tales from the Election 2021 Feb 18 See all posts Prediction Markets: Tales from the Election Special thanks to Jeff Coleman, Karl Floersch and Robin Hanson for critical feedback and review.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Closely related ideas, like futarchy , have always interested me as innovative tools that could improve governance and decision-making.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "And the 2020 US presidential election, it seems like prediction markets are finally entering the limelight, with blockchain-based markets in particular growing from near-zero in 2016 to millions of dollars of volume in 2020 .",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "At first, I was inclined to simply watch, and not participate myself: I am not an expert on US electoral politics, so why should I expect my opinion to be more correct than that of everyone else who was already trading?",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "But in my Twitter-sphere, I saw more and more arguments from Very Smart People whom I respected arguing that the markets were in fact being irrational and I should participate and bet against them if I can.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "I decided to make an experiment on the blockchain that I helped to create: I bought $2,000 worth of NTRUMP (tokens that pay $1 if Trump loses) on Augur.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "Little did I know then that my position would eventually increase to $308,249, earning me a profit of over $56,803, and that I would make all of these remaining bets, against willing counterparties, after Trump had already lost the election .",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "What would transpire over the next two months would prove to be a fascinating case study in social psychology, expertise, arbitrage, and the limits of market efficiency, with important ramifications to anyone who is deeply interested in the possibilities of economic institution design.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Before the Election My first bet on this election was actually not on a blockchain at all.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "I remember thinking at the time that this particular opinion of his was over-confident, perhaps even a result of over-internalizing the heuristic that if a viewpoint seems clever and contrarian then it is likely to be correct.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "So of course I offered to make a $200 bet, myself betting the boring conventional pro-Biden view, and he honorably accepted.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "The markets gave Trump a nearly 50% chance of winning, but I saw many Very Smart People in my Twitter-sphere whom I respected pointing out that this number seemed far too high.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "This of course led to the familiar \"efficient markets debate\": if you can buy a token that gives you $1 if Trump loses for $0.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "As a result, if a very smart individual or a professional organization saw a probability that they believed was wrong, they would only have a very limited ability to push the price in the direction that they believe to be correct.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "The most important restrictions that the paper points out are: Low limits (well under $1,000) on how much each person can bet High fees (eg.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b",
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "a 5% withdrawal fee on PredictIt) And this is where I pushed back against ne0liberal in September : although the stodgy old-world centralized prediction markets may have low limits and high fees, the crypto markets do not!",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "And so I bet $2,000 against Trump and went no further.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "After an initial scare where Trump at first won more seats than we expected, Biden turned out to be the eventual winner.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "On the one hand, by a standard Bayes rule application, I should decrease my confidence of prediction markets, at least relative to Nate Silver.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Prediction markets gave a 60% chance of Biden winning, Nate Silver gave a 90% chance of Biden winning .",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "The median of Nate's probability distribution was somewhere around 370 of 538 electoral college votes going to Biden: The Trump markets didn't give a probability distribution, but if you had to guess a probability distribution from the statistic \"40% chance Trump will win\", you would probably give one with a median somewhere around 300 EC votes for Biden.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "At the beginning, it seemed reasonable to guess that Trump had a 15% chance of overturning the results; after all, he had appointed three judges to the Supreme Court, at a time of heightened partisanship where many have come to favor team over principle.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b",
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "Over the next three weeks, however, it became more and more clear that the challenges were failing, and Trump's hopes continued to look grimmer with each passing day, but the NTRUMP price did not budge; in fact, it even briefly decreased to around $0.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "On December 11, more than five weeks after the election, the Supreme Court decisively and unanimously rejected Trump's attempts to overturn the vote, and the NTRUMP price finally rose....",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "It was in November that I was finally convinced that the market skeptics were right, and I plunged in and bet against Trump myself.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "There are two ways to bet against Trump with Catnip: Use DAI to buy NTRUMP on Catnip directly Use Foundry to access an Augur feature that allows you to convert 1 DAI into 1 NTRUMP + 1 YTUMP + 1ITRUMP (the \"I\" stands for \"invalid\", more on this later), and sell the YTRUMP on Catnip At first, I only knew about the first option.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "But then I discovered that Balancer has far more liquidity for YTRUMP, and so I switched to the second option.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "I had ETH, and I could have sold my ETH to get DAI, but I did not want to sacrifice my ETH exposure; it would have been a shame if I earned $50,000 betting against Trump but simultaneously lost $500,000 missing out on ETH price changes.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "If the value of the ETH collateral that you deposited drops to less than 150% the value of the DAI you withdrew, anyone can come in and \" liquidate \" the vault, forcibly selling the ETH to buy back the DAI and charging you a high penalty.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "Hence, it's a good idea to have a high collateralization ratio in case of sudden price movements; I had over $3 worth of ETH in my CDP for every $1 that I withdrew.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b",
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "Recapping the above, here's the pipeline in diagram form: I did this many times; the slippage on Catnip meant that I could normally make trades only up to about $5,000 to $10,000 at a time without prices becoming too unfavorable (when I had skipped Foundry and bought NTRUMP with DAI directly, the limit was closer to $1,000).",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "Capital costs are real, and while betting against something is easier in a prediction market than in a stock market because you know that prices will never go above $1, locking up capital nevertheless competes with other lucrative opportunities in the crypto markets.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b",
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "Fear of smart contract exploits At first, I thought that \"fear of smart contract exploits\" must have been a significant part of the explanation.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "In this market, the price of ITRUMP consistently stayed under $0.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "If someone wanted to earn a profit by attacking the market, it would be far more lucrative for them to not buy YTRUMP at $0.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "If people are willing to put their money into all sorts of risky and untested schemes even for a promise of mere 5-8% annual gains, why would they suddenly become over-cautious here?",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "Just looking at the Augur side of things, I needed to lock up 308,249 DAI for an average of about two months to make a $56,803 profit.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "This works out to about a 175% annualized interest rate; so far, quite a good deal, even compared to the various yield farming crazes of the summer of 2020.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "Hence, the total amount of capital I actually needed to lock up was somewhere around a million dollars.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "But even still, assuming a 3x lockup and a 3% chance of Augur breaking (I had bought ITRUMP to cover the possibility that it breaks in the \"invalid\" direction, so I needed only worry about the risk of breaks in the \"yes\" direction or the the funds being stolen outright), that works out to a risk-neutral rate of about 35%, and even lower once you take real human beings' views on risk into account.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "Trump supporters , on the other hand, faced none of these challenges: they cancelled out my $308,249 bet by throwing in a mere $60,000 (my winnings are less than this because of fees).",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "And this explains not just Trump; it's also the reason why all sorts of popular-among-a-niche candidates with no real chance of victory frequently get winning probabilities as high as 5%.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "Technical complexity I had at first tried buying NTRUMP on Augur, but technical glitches in the user interface prevented me from being able to make orders on Augur directly (other people I talked to did not have this issue...",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "My conclusion here is optimistic: technical complexity issues were a real barrier to participation this round, but things will be much easier in future rounds as technology improves.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "Intellectual underconfidence And now we have the final possibility: that many people (and smart people in particular) have a pathology that they suffer from excessive humility, and too easily conclude that if no one else has taken some action, then there must therefore be a good reason why that action is not worth taking.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b",
+        "\\b(conclude|conclusion|summary|result)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Eliezer Yudkowsky spends the second half of his excellent book Inadequate Equilibria making this case, arguing that too many people overuse \"modest epistemology\", and we should be much more willing to act on the results of our reasoning, even when the result suggests that the great majority of the population is irrational or lazy or wrong about something.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b",
+        "\\b(first|second|third|finally)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "When I read those sections for the first time, I was unconvinced; it seemed like Eliezer was simply being overly arrogant.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "This was not my first time seeing the virtues of trusting one's own reasoning first hand.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "When I had originally started working on Ethereum, I was at first beset by fear that there must be some very good reason the project was doomed to fail.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "A fully programmable smart-contract-capable blockchain, I reasoned, was clearly such a great improvement over what came before, that surely many other people must have thought of it before I did.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    }
+  ],
+  "tags": [
+    "finance",
+    "physics",
+    "crypto",
+    "accessible",
+    "academic"
+  ],
+  "agentRelevance": {
+    "primary": "b0b",
+    "secondary": "d0t",
+    "scores": {
+      "b0b": 12,
+      "c0m": 7,
+      "d0t": 9,
+      "r0ss": 6
+    }
+  },
+  "charCount": 30660
+}

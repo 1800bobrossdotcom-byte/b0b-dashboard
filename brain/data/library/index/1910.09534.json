@@ -1,0 +1,356 @@
+{
+  "meta": {
+    "source": "arxiv",
+    "arxivId": "1910.09534",
+    "title": "arxiv-1910.09534",
+    "sourceUrl": "https://arxiv.org/pdf/1910.09534.pdf",
+    "fetchedAt": "2026-01-30T02:59:13.738Z",
+    "processedAt": "2026-01-30T02:59:14.176Z",
+    "originalLength": 76817,
+    "compressedLength": 4859,
+    "compressionRatio": "6.3%"
+  },
+  "tags": [
+    "quantum",
+    "mathematics",
+    "physics",
+    "ai",
+    "accessible"
+  ],
+  "agentRelevance": {
+    "primary": "d0t",
+    "secondary": "r0ss",
+    "scores": {
+      "b0b": 1,
+      "c0m": 0,
+      "d0t": 7,
+      "r0ss": 3
+    }
+  },
+  "keySentences": [
+    {
+      "text": "As the hardware progresses, it is increasingly difficult to classically simulate the circuits that can be executed on existing chips, a crucial task to  among other things  verify that the degree to which hardware is behaving as expected.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Hyperedges between nodes represent shared indices that must be summed over.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Contraction deferral is a technique first introduced in [1].",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "To do so, we must use contraction deferral whenever we apply tensors corresponding to entangling gates between different subcircuits.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "This is particularly crucial when using secondary storage, which is slower than primary storage and must therefore be used sparingly; with tensor slicing, we reorganize the calculations so that only a few selected slices (rather than full tensors) reside in primary storage at any given time.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b",
+        "\\b(important|crucial|key|essential|critical)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "These transformations result in the 40-layer circuit depicted.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "Our paper discusses the classical simulation of circuits of this class; hence, we describe them here in more detail.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "These transformations result in the 40-layer circuit depicted.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "The difficulty of simulation is therefore determined entirely by the pattern of two-qubit gates in the circuit.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Thus, the first two layers of two-qubit gates illustrated correspond to the A cycle, the next two layers to the B cycle, and so on.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b",
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "In this representation, the first row corresponds to an ABCD sequence of cycles, the second row corresponds to a CDAB sequence of cycles, and the five rows illustrated in Figs.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "7 -- 7 of 39 -- Figure 5: Qubit numbering scheme and first-level tensor slicing strategy for 53- and 54-qubit Sycamore circuits.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "To this end, we first employ the in-memory methods of [14], aiming to maximize the number of gates that can be simulated using available aggregate mem- ory; the resulting quantum state is calculated in slices and written to secondary storage.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "3 and 4 illustrate the first level of circuit partitioning for 36-cycle Sycamore ABCDCDAB circuits with 53 and 54 qubits, respectively.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "In this first phase, we use the in-memory methods of [14] to simulate the subcircuits 1 and 2 illustrated in these figures, performing tensor contraction deferral on the gates labeled cd.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "5 illustrates the global qubits that are sliced in this first phase of simulation.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "In the second phase, qubits 2330 are sliced for the 53-qubit circuit and qubits 2331 are sliced for the 54-qubit circuit.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Thus, in the first phase of simulation for the 53-qubit circuit (i.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b",
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "In the second phase of simulation of the 53-qubit circuit (i.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "The above approach guarantees that individual logical files are always read or written in their entirety, and they are never read or written multiple times in a single read or write cycle.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "slices, to minimize the number of all-to-all communication steps that must be performed in order to simulate subcircuits 39, shown in Figs.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "To leverage the performance figures reported in [9], we therefore perform the same form of gate aggregation on Sycamore circuits.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "In the case of gate operations, the achieved PetaFLOPs per second column is the total number of floating-point operations without gate aggregation divided by the estimated compute time with gate aggregation.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "In the case of gate operations, the achieved PetaFLOPs per second column is the total number of floating-point operations without gate aggregation divided by the estimated compute time with gate aggregation.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Tensors 1 and 2, on the other hand, represent 30-qubit calculations or less; therefore, we use the 30-qubit performance figures from Tables 1 and 2 in [9] to obtain an estimated 0.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "As can be seen, the time estimates for gate operations yield results that are all near or below 11% of the 191 PetaFLOPs/sec peak double-precision performance expected across 8,192 sockets.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "Therefore, there is room to potentially improve upon these estimates by leveraging the capabilities of Summits NVIDA GPUs: this would allow the simulation of individual gate operations, without resorting to gate aggregation, and the use of cuBLAS routines to implement the corresponding matrix-vector operations.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "A key characteristic of this simulation strategy is that computations are dom- inated by very large tensor contractions across many tensor indices simultaneously.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Consequently, we directly use the performance figures reported in Table 1 in [17] to estimate contraction times.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "5 GB/sec per socket) should be easily achieved during an all-to-all across the entire machine.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "This figure represents  30% of the 23 GB/sec per node peak injection rate (11.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "Thus, the disk occupation is 64 PiB for 53-qubit circuits and 128 PiB for 54-qubit circuits, regardless of the number of cycles.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "define: the first define line indicates the total number of qubits, the second define line describes the qubit indices used to address logical files on disk.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "slice: lists the indices of the qubits that are sliced on the first level of the recursive scheme.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": 0,
+      "preview": "Leveraging Secondary Storage to Simulate Deep 54-qubit Sycamore Circuits Edwin Pednault1, John A. Gunnels1, Giacomo Nannicini1, Lior Horesh1, and Robert Wisnieff1 1IBM T.J. Watson Research Center, Yorktown Heights, NY Abstract In a recent paper, we showed that secondary storage can extend the range ...",
+      "length": 76452,
+      "keyCount": 64
+    }
+  ],
+  "l0re": {
+    "thesis": [
+      {
+        "text": "These transformations result in the 40-layer circuit depicted.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      },
+      {
+        "text": "These transformations result in the 40-layer circuit depicted.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      }
+    ],
+    "principles": [],
+    "actions": [
+      {
+        "text": "Hyperedges between nodes represent shared indices that must be summed over.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "To do so, we must use contraction deferral whenever we apply tensors corresponding to entangling gates between different subcircuits.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "This is particularly crucial when using secondary storage, which is slower than primary storage and must therefore be used sparingly; with tensor slicing, we reorganize the calculations so that only a few selected slices (rather than full tensors) reside in primary storage at any given time.",
+        "section": 0,
+        "markers": [
+          "\\b(therefore|thus|hence|consequently)\\b",
+          "\\b(important|crucial|key|essential|critical)\\b",
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "The above approach guarantees that individual logical files are always read or written in their entirety, and they are never read or written multiple times in a single read or write cycle.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "slices, to minimize the number of all-to-all communication steps that must be performed in order to simulate subcircuits 39, shown in Figs.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      }
+    ],
+    "stats": [
+      {
+        "text": "As can be seen, the time estimates for gate operations yield results that are all near or below 11% of the 191 PetaFLOPs/sec peak double-precision performance expected across 8,192 sockets.",
+        "section": 0,
+        "markers": [
+          "\\d+%"
+        ]
+      },
+      {
+        "text": "This figure represents  30% of the 23 GB/sec per node peak injection rate (11.",
+        "section": 0,
+        "markers": [
+          "\\d+%"
+        ]
+      }
+    ]
+  }
+}

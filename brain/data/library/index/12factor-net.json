@@ -1,0 +1,26 @@
+{
+  "source": "https://12factor.net/",
+  "filename": "12factor-net.txt",
+  "fetchedAt": "2026-01-30T03:35:16.756Z",
+  "type": "webpage",
+  "meta": {
+    "source": "https://12factor.net/",
+    "processedAt": "2026-01-30T03:35:16.756Z",
+    "originalLength": 3634,
+    "compressedLength": 0,
+    "compressionRatio": "0.0%"
+  },
+  "keySentences": [],
+  "tags": [],
+  "agentRelevance": {
+    "primary": "r0ss",
+    "secondary": "d0t",
+    "scores": {
+      "b0b": 3,
+      "c0m": 1,
+      "d0t": 4,
+      "r0ss": 10
+    }
+  },
+  "charCount": 3634
+}

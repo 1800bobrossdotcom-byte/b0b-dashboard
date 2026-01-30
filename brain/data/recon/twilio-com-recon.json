@@ -1,0 +1,259 @@
+{
+  "target": "twilio.com",
+  "depth": "deep",
+  "timestamp": "2026-01-30T02:23:33.888Z",
+  "status": "complete",
+  "findings": {
+    "subdomains": [
+      {
+        "subdomain": "www.twilio.com",
+        "status": "potential",
+        "note": "needs verification"
+      },
+      {
+        "subdomain": "api.twilio.com",
+        "status": "potential",
+        "note": "needs verification"
+      },
+      {
+        "subdomain": "app.twilio.com",
+        "status": "potential",
+        "note": "needs verification"
+      },
+      {
+        "subdomain": "dev.twilio.com",
+        "status": "potential",
+        "note": "needs verification"
+      },
+      {
+        "subdomain": "staging.twilio.com",
+        "status": "potential",
+        "note": "needs verification"
+      },
+      {
+        "subdomain": "beta.twilio.com",
+        "status": "potential",
+        "note": "needs verification"
+      },
+      {
+        "subdomain": "admin.twilio.com",
+        "status": "potential",
+        "note": "needs verification"
+      },
+      {
+        "subdomain": "dashboard.twilio.com",
+        "status": "potential",
+        "note": "needs verification"
+      },
+      {
+        "subdomain": "console.twilio.com",
+        "status": "potential",
+        "note": "needs verification"
+      },
+      {
+        "subdomain": "portal.twilio.com",
+        "status": "potential",
+        "note": "needs verification"
+      },
+      {
+        "subdomain": "docs.twilio.com",
+        "status": "potential",
+        "note": "needs verification"
+      },
+      {
+        "subdomain": "help.twilio.com",
+        "status": "potential",
+        "note": "needs verification"
+      },
+      {
+        "subdomain": "support.twilio.com",
+        "status": "potential",
+        "note": "needs verification"
+      },
+      {
+        "subdomain": "status.twilio.com",
+        "status": "potential",
+        "note": "needs verification"
+      },
+      {
+        "subdomain": "cdn.twilio.com",
+        "status": "potential",
+        "note": "needs verification"
+      },
+      {
+        "subdomain": "assets.twilio.com",
+        "status": "potential",
+        "note": "needs verification"
+      },
+      {
+        "subdomain": "static.twilio.com",
+        "status": "potential",
+        "note": "needs verification"
+      },
+      {
+        "subdomain": "mail.twilio.com",
+        "status": "potential",
+        "note": "needs verification"
+      },
+      {
+        "subdomain": "blog.twilio.com",
+        "status": "potential",
+        "note": "needs verification"
+      }
+    ],
+    "technologies": [
+      {
+        "tech": "Check for X-Powered-By header",
+        "status": "pending"
+      },
+      {
+        "tech": "Check for Server header",
+        "status": "pending"
+      },
+      {
+        "tech": "Analyze JavaScript frameworks",
+        "status": "pending"
+      },
+      {
+        "tech": "Check for common CMS signatures",
+        "status": "pending"
+      }
+    ],
+    "endpoints": [],
+    "authentication": [
+      {
+        "check": "Login endpoint discovery",
+        "status": "pending"
+      },
+      {
+        "check": "OAuth/SSO integration",
+        "status": "pending"
+      },
+      {
+        "check": "API key authentication",
+        "status": "pending"
+      },
+      {
+        "check": "JWT token analysis",
+        "status": "pending"
+      },
+      {
+        "check": "Session management",
+        "status": "pending"
+      },
+      {
+        "check": "2FA implementation",
+        "status": "pending"
+      }
+    ],
+    "api_endpoints": [
+      {
+        "path": "/api",
+        "status": "to_check",
+        "method": "GET"
+      },
+      {
+        "path": "/api/v1",
+        "status": "to_check",
+        "method": "GET"
+      },
+      {
+        "path": "/api/v2",
+        "status": "to_check",
+        "method": "GET"
+      },
+      {
+        "path": "/v1",
+        "status": "to_check",
+        "method": "GET"
+      },
+      {
+        "path": "/v2",
+        "status": "to_check",
+        "method": "GET"
+      },
+      {
+        "path": "/graphql",
+        "status": "to_check",
+        "method": "GET"
+      },
+      {
+        "path": "/graphiql",
+        "status": "to_check",
+        "method": "GET"
+      },
+      {
+        "path": "/swagger",
+        "status": "to_check",
+        "method": "GET"
+      },
+      {
+        "path": "/swagger-ui",
+        "status": "to_check",
+        "method": "GET"
+      },
+      {
+        "path": "/api-docs",
+        "status": "to_check",
+        "method": "GET"
+      },
+      {
+        "path": "/openapi.json",
+        "status": "to_check",
+        "method": "GET"
+      },
+      {
+        "path": "/swagger.json",
+        "status": "to_check",
+        "method": "GET"
+      },
+      {
+        "path": "/.well-known/security.txt",
+        "status": "to_check",
+        "method": "GET"
+      },
+      {
+        "path": "/robots.txt",
+        "status": "to_check",
+        "method": "GET"
+      },
+      {
+        "path": "/sitemap.xml",
+        "status": "to_check",
+        "method": "GET"
+      }
+    ],
+    "interesting": [
+      {
+        "check": "Git exposure (.git/)",
+        "status": "pending"
+      },
+      {
+        "check": "Environment file exposure (.env)",
+        "status": "pending"
+      },
+      {
+        "check": "Backup files (.bak, .old)",
+        "status": "pending"
+      },
+      {
+        "check": "Debug endpoints",
+        "status": "pending"
+      },
+      {
+        "check": "Admin panels",
+        "status": "pending"
+      },
+      {
+        "check": "CORS misconfiguration",
+        "status": "pending"
+      },
+      {
+        "check": "Rate limiting analysis",
+        "status": "pending"
+      }
+    ]
+  },
+  "notes": [],
+  "domain": "twilio.com"
+}

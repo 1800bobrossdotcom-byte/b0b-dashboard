@@ -1,0 +1,152 @@
+{
+  "source": "https://www.paulgraham.com/think.html",
+  "filename": "www-paulgraham-com-think-html.txt",
+  "fetchedAt": "2026-01-30T03:15:36.340Z",
+  "type": "webpage",
+  "meta": {
+    "source": "https://www.paulgraham.com/think.html",
+    "processedAt": "2026-01-30T03:15:36.340Z",
+    "originalLength": 20967,
+    "compressedLength": 2181,
+    "compressionRatio": "10.4%"
+  },
+  "keySentences": [
+    {
+      "text": "In most kinds of work  to be an administrator, for example  all you need is the first half.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "There's room for a little novelty in most kinds of work, but in practice there's a fairly sharp distinction between the kinds of work where it's essential to be independent-minded, and the kinds where it's not.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "I wish someone had told me about this distinction when I was a kid, because it's one of the most important things to think about when you're deciding what kind of work you want to do.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "If you later find yourself in a situation that makes you think \"this is like high school,\" you know you should get out.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "The founders and early employees are almost always independent-minded; otherwise the startup wouldn't be successful.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "So this game should be an exciting quest for novelty, not a boring protocol for intellectual hygiene.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "More generally your goal should be not to let anything into your head unexamined, and things don't always enter your head in the form of statements.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "[ 6 ] The independent-minded thus have a horror of ideologies, which require one to accept a whole collection of beliefs at once, and to treat them as articles of faith.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "And if it's like other forms of fastidiousness, it should also be possible to encourage in children.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "[ 8 ] The second component of independent-mindedness, resistance to being told what to think, is the most visible of the three.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "The third component of independent-mindedness, curiosity, may be the most interesting.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Because the components of independent-mindedness are so interchangeable, you can have them to varying degrees and still get the same result.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "If the answer is \"not much,\" maybe you should change something.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "The most important active step you can take to cultivate your curiosity is probably to seek out the topics that engage it.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Perhaps, if your goal is to discover novel ideas, your motto should not be \"do what you love\" so much as \"do what you're curious about.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": ") Perhaps the rule about outsourcing work that's not your \"core competency\" should be augmented by one about outsourcing work done by people who'd ruin your culture as employees.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "It's sort of like the definition of a gentleman as someone who is never unintentionally rude.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    }
+  ],
+  "tags": [
+    "finance",
+    "philosophy",
+    "physics",
+    "accessible"
+  ],
+  "agentRelevance": {
+    "primary": "b0b",
+    "secondary": "d0t",
+    "scores": {
+      "b0b": 13,
+      "c0m": 2,
+      "d0t": 8,
+      "r0ss": 3
+    }
+  },
+  "charCount": 20967
+}

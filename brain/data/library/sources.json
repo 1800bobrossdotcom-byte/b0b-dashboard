@@ -1,0 +1,302 @@
+{
+  "meta": {
+    "version": "0.2.0",
+    "description": "Curated knowledge sources for the swarm",
+    "lastUpdated": "2026-01-30",
+    "ethos": "Quantum minds. Mathematical reality. Long-term value. Autonomous systems."
+  },
+  "blogs": {
+    "vitalik": {
+      "name": "Vitalik Buterin",
+      "domain": "crypto, prediction markets, mechanism design, coordination",
+      "baseUrl": "https://vitalik.eth.limo",
+      "relevance": "Polymarket philosophy, crypto economics, coordination games",
+      "keyPosts": [
+        {
+          "url": "https://vitalik.eth.limo/general/2021/02/18/election.html",
+          "title": "Prediction Markets",
+          "agent": "b0b"
+        },
+        {
+          "url": "https://vitalik.eth.limo/general/2024/05/09/dacc.html",
+          "title": "d/acc",
+          "agent": "r0ss"
+        },
+        {
+          "url": "https://vitalik.eth.limo/general/2020/09/11/coordination.html",
+          "title": "Coordination, Good and Bad",
+          "agent": "d0t"
+        },
+        {
+          "url": "https://vitalik.eth.limo/general/2021/01/11/against-oligarchy.html",
+          "title": "Against Oligarchy",
+          "agent": "c0m"
+        },
+        {
+          "url": "https://vitalik.eth.limo/general/2022/06/12/nonfin.html",
+          "title": "Non-financial Use Cases",
+          "agent": "b0b"
+        }
+      ]
+    },
+    "gwern": {
+      "name": "Gwern Branwen",
+      "domain": "AI, psychology, statistics, longtermism",
+      "baseUrl": "https://gwern.net",
+      "relevance": "Deep analysis, AI scaling, prediction, darknet markets",
+      "keyPosts": [
+        {
+          "url": "https://gwern.net/scaling-hypothesis",
+          "title": "The Scaling Hypothesis",
+          "agent": "d0t"
+        },
+        {
+          "url": "https://gwern.net/backstop",
+          "title": "AI Backstops",
+          "agent": "c0m"
+        }
+      ]
+    },
+    "lesswrong": {
+      "name": "LessWrong / Alignment Forum",
+      "domain": "rationality, AI safety, decision theory",
+      "relevance": "Rationalist thinking, AI alignment, coordination",
+      "keyPosts": [
+        {
+          "url": "https://www.lesswrong.com/posts/SwcyMEgLyd4C3Dern/the-parable-of-predict-o-matic",
+          "title": "Parable of Predict-O-Matic",
+          "agent": "d0t"
+        }
+      ]
+    }
+  },
+  "authors": {
+    "aaronson": {
+      "name": "Scott Aaronson",
+      "domain": "quantum computing, complexity theory",
+      "arxivId": "aaronson_s",
+      "relevance": "Quantum computation limits, randomness certification, computational complexity",
+      "keyPapers": [
+        {
+          "id": "0704.0646",
+          "title": "The Computational Complexity of Linear Optics",
+          "note": "BosonSampling foundation"
+        },
+        {
+          "id": "1910.09534",
+          "title": "Quantum Supremacy Using a Programmable Superconducting Processor",
+          "note": "Google quantum supremacy"
+        },
+        {
+          "id": "2208.11372",
+          "title": "Certified Randomness from Quantum Supremacy",
+          "note": "Extracting randomness"
+        },
+        {
+          "id": "quant-ph/0502072",
+          "title": "NP-complete Problems and Physical Reality",
+          "note": "Physics meets complexity"
+        },
+        {
+          "id": "1701.06903",
+          "title": "The Complexity of Quantum States and Transformations",
+          "note": "Quantum state complexity"
+        },
+        {
+          "id": "2009.07450",
+          "title": "On the Hardness of Detecting Macroscopic Superpositions",
+          "note": "Consciousness implications"
+        }
+      ]
+    },
+    "tegmark": {
+      "name": "Max Tegmark",
+      "domain": "mathematical universe, consciousness, AI safety",
+      "arxivId": "tegmark_m",
+      "relevance": "Reality as mathematics, consciousness physics, existential risk",
+      "keyPapers": [
+        {
+          "id": "0704.0646",
+          "title": "The Mathematical Universe",
+          "note": "MUH - reality IS math"
+        },
+        {
+          "id": "1401.1219",
+          "title": "Consciousness as a State of Matter",
+          "note": "Integrated information theory"
+        },
+        {
+          "id": "1409.0813",
+          "title": "Friendliness Is Computable",
+          "note": "AI alignment"
+        },
+        {
+          "id": "1507.03628",
+          "title": "A Taxonomy and Survival Analysis of AI Risk",
+          "note": "Existential risk framework"
+        }
+      ]
+    },
+    "wolfram": {
+      "name": "Stephen Wolfram",
+      "domain": "computational universe, physics from computation",
+      "relevance": "Universe as computation, cellular automata, new physics",
+      "keyPapers": [
+        {
+          "url": "https://www.wolframscience.com/nks/",
+          "title": "A New Kind of Science",
+          "note": "Computational universe"
+        }
+      ]
+    },
+    "shannon": {
+      "name": "Claude Shannon",
+      "domain": "information theory",
+      "relevance": "Foundation of all digital systems, entropy, communication",
+      "keyPapers": [
+        {
+          "url": "https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf",
+          "title": "A Mathematical Theory of Communication",
+          "note": "THE paper"
+        }
+      ]
+    }
+  },
+  "topics": {
+    "quantumComputing": {
+      "description": "Quantum computation, supremacy, error correction",
+      "papers": [
+        {
+          "id": "1801.00862",
+          "title": "Quantum Machine Learning",
+          "note": "QML survey"
+        },
+        {
+          "id": "1906.07682",
+          "title": "Quantum Advantage with Shallow Circuits",
+          "note": "Near-term quantum"
+        }
+      ]
+    },
+    "autonomousSystems": {
+      "description": "Self-improving AI, autonomous agents, swarm intelligence",
+      "papers": [
+        {
+          "id": "2309.02427",
+          "title": "Reflexion: Language Agents with Verbal Reinforcement Learning",
+          "note": "Self-improving agents"
+        },
+        {
+          "id": "2303.17580",
+          "title": "HuggingGPT: Solving AI Tasks with ChatGPT and its Friends",
+          "note": "Agent orchestration"
+        },
+        {
+          "id": "2305.10601",
+          "title": "Voyager: An Open-Ended Embodied Agent",
+          "note": "Autonomous exploration"
+        }
+      ]
+    },
+    "gameTheory": {
+      "description": "Nash equilibrium, mechanism design, market dynamics",
+      "papers": [
+        {
+          "id": "cs/0406003",
+          "title": "An Introduction to Mechanism Design",
+          "note": "Market design fundamentals"
+        }
+      ]
+    },
+    "cryptoFinance": {
+      "description": "DeFi, prediction markets, tokenomics",
+      "urls": [
+        {
+          "url": "https://vitalik.eth.limo/general/2021/02/18/election.html",
+          "title": "Vitalik on Prediction Markets",
+          "note": "Polymarket philosophy"
+        },
+        {
+          "url": "https://nakamotoinstitute.org/bitcoin/",
+          "title": "Bitcoin Whitepaper",
+          "note": "THE protocol"
+        }
+      ]
+    },
+    "valueInvesting": {
+      "description": "Long-term value, margin of safety, compound returns",
+      "urls": [
+        {
+          "url": "https://www.berkshirehathaway.com/letters/letters.html",
+          "title": "Berkshire Letters Archive",
+          "note": "All annual letters"
+        }
+      ]
+    }
+  },
+  "rssFeeds": {
+    "arxiv": {
+      "quantPh": "https://export.arxiv.org/rss/quant-ph",
+      "csAI": "https://export.arxiv.org/rss/cs.AI",
+      "csCL": "https://export.arxiv.org/rss/cs.CL"
+    }
+  },
+  "batchQueue": [
+    {
+      "type": "arxiv",
+      "id": "quant-ph/0502072",
+      "priority": 1,
+      "note": "Aaronson - NP vs Physics",
+      "completed": true,
+      "completedAt": "2026-01-30T03:04:59.161Z"
+    },
+    {
+      "type": "arxiv",
+      "id": "1701.06903",
+      "priority": 1,
+      "note": "Aaronson - Quantum Complexity",
+      "completed": true,
+      "completedAt": "2026-01-30T03:05:02.713Z"
+    },
+    {
+      "type": "arxiv",
+      "id": "1401.1219",
+      "priority": 1,
+      "note": "Tegmark - Consciousness as Matter",
+      "completed": true,
+      "completedAt": "2026-01-30T03:05:06.744Z"
+    },
+    {
+      "type": "arxiv",
+      "id": "2309.02427",
+      "priority": 2,
+      "note": "Reflexion - Self-improving agents",
+      "completed": true,
+      "completedAt": "2026-01-30T03:05:10.293Z"
+    },
+    {
+      "type": "arxiv",
+      "id": "2305.10601",
+      "priority": 2,
+      "note": "Voyager - Autonomous exploration",
+      "completed": true,
+      "completedAt": "2026-01-30T03:05:13.733Z"
+    },
+    {
+      "type": "arxiv",
+      "id": "1801.00862",
+      "priority": 2,
+      "note": "Quantum ML survey",
+      "completed": true,
+      "completedAt": "2026-01-30T03:05:20.747Z"
+    },
+    {
+      "type": "url",
+      "url": "https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf",
+      "priority": 1,
+      "note": "Shannon - Information Theory",
+      "completed": true,
+      "completedAt": "2026-01-30T03:05:24.614Z"
+    }
+  ]
+}

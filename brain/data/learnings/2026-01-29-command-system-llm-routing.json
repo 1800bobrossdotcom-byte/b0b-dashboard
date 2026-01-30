@@ -1,0 +1,92 @@
+{
+  "title": "Native Command System & Cross-LLM Routing",
+  "date": "2026-01-29",
+  "discovered_by": "c0m",
+  "built_by": "r0ss",
+  
+  "summary": "Discovered and documented all native commands from swarm history. Built cross-LLM routing system with fallback for executing commands through any agent.",
+  
+  "key_learnings": [
+    "Commands are categorized: crawlers, visuals, email, security, trading, brain",
+    "Each actor (b0b, c0m, d0t, r0ss) has permission sets based on their role",
+    "LLM routing selects the best provider based on command category",
+    "Fallback order: Anthropic → Groq → DeepSeek → OpenRouter",
+    "Commands can be executed directly via CLI or routed through LLM interpretation"
+  ],
+  
+  "command_categories": {
+    "crawlers": {
+      "actors": ["b0b", "r0ss", "d0t"],
+      "best_llm": "groq",
+      "commands": ["activate-swarm", "polymarket-crawl", "twitter-crawl", "senses-collect"]
+    },
+    "visuals": {
+      "actors": ["b0b", "d0t"],
+      "best_llm": "groq",
+      "commands": ["visual-sentiment", "visual-pulse", "visual-word", "visual-thought", "visual-flow"]
+    },
+    "security": {
+      "actors": ["c0m"],
+      "best_llm": "anthropic",
+      "commands": ["security-scan", "subdomain-enum", "twilio-hunt"]
+    },
+    "trading": {
+      "actors": ["d0t", "r0ss"],
+      "best_llm": "deepseek",
+      "commands": ["treasury-status", "paper-trade"]
+    },
+    "email": {
+      "actors": ["c0m", "b0b", "d0t"],
+      "best_llm": "groq",
+      "commands": ["email-check", "email-send"]
+    },
+    "brain": {
+      "actors": ["b0b", "c0m", "d0t", "r0ss"],
+      "best_llm": "anthropic",
+      "commands": ["team-discuss", "observation-scan", "learning-save"]
+    }
+  },
+  
+  "usage_examples": [
+    {
+      "description": "c0m runs security recon",
+      "command": "node brain/llm-command-router.js c0m \"scan twilio for vulnerabilities\"",
+      "flow": "c0m → anthropic → security-scan → output"
+    },
+    {
+      "description": "d0t fetches market data",
+      "command": "node brain/llm-command-router.js d0t \"get polymarket predictions\"",
+      "flow": "d0t → groq → polymarket-crawl → output"
+    },
+    {
+      "description": "b0b creates visual content",
+      "command": "node brain/llm-command-router.js b0b \"make art showing bullish sentiment\"",
+      "flow": "b0b → groq → visual-sentiment → output"
+    },
+    {
+      "description": "Direct command execution",
+      "command": "node brain/llm-command-router.js exec activate-swarm",
+      "flow": "direct → activate-swarm.js → output"
+    }
+  ],
+  
+  "fallback_behavior": {
+    "trigger": "When primary LLM provider fails or is unavailable",
+    "order": ["anthropic", "groq", "deepseek", "openrouter"],
+    "example": "If Anthropic API is down, security commands fall back to Groq, then DeepSeek, then OpenRouter"
+  },
+  
+  "files_created": [
+    "brain/data/command-registry.json - Master registry of all commands",
+    "brain/llm-command-router.js - Cross-LLM routing engine"
+  ],
+  
+  "next_steps": [
+    "Add more commands as they're discovered",
+    "Integrate with team-discussion.js for auto-command execution",
+    "Build dashboard UI to visualize command flow",
+    "Add command success/failure metrics tracking"
+  ],
+  
+  "tags": ["commands", "llm", "routing", "c0m", "automation", "swarm"]
+}

@@ -1,0 +1,344 @@
+{
+  "source": "https://sre.google/sre-book/introduction/",
+  "filename": "sre-google-sre-book-introduction.txt",
+  "fetchedAt": "2026-01-30T03:35:09.080Z",
+  "type": "webpage",
+  "meta": {
+    "source": "https://sre.google/sre-book/introduction/",
+    "processedAt": "2026-01-30T03:35:09.080Z",
+    "originalLength": 26541,
+    "compressedLength": 6381,
+    "compressionRatio": "24.0%"
+  },
+  "keySentences": [
+    {
+      "text": "Managing Critical State: Distributed Consensus for Reliability 24.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "How, then, should a systemparticularly a complex computing system that operates at a large scalebe run?",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Traditional operations teams and their counterparts in product development thus often end up in conflict, most visibly over how quickly software can be released to production.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "5060% are Google Software Engineers, or more precisely, people who have been hired via the standard procedure for Google Software Engineers.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "The other 4050% are candidates who were very close to the Google Software Engineering qualifications (i.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": ", 8599% of the skill set required), and who in addition had a set of technical skills that is useful to SRE but is rare for most software engineers.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "The result of our approach to hiring for SRE is that we end up with a team of people who (a) will quickly become bored by performing tasks by hand, and (b) have the skill set necessary to write software to replace their previously manual work, even when the solution is complicated.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "Therefore, SRE is fundamentally doing work that has historically been done by an operations team, but using engineers with software expertise, and banking on the fact that these engineers are inherently both predisposed to, and have the ability to, design and implement automation with software to replace human labor.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "By design, it is crucial that SRE teams are focused on engineering.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Therefore, Google places a 50% cap on the aggregate \"ops\" work for all SREs tickets, on-call, manual tasks, etc.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b",
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "This cap is an upper bound; over time, left to their own devices, the SRE team should end up with very little operational load and almost entirely engage in development tasks, because the service basically runs and repairs itself: we want systems that are automatic , not just automated .",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Googles rule of thumb is that an SRE team must spend the remaining 50% of its time actually doing development.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b",
+        "\\b(must|should|always|never)\\b",
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "In the first place, we have to measure how SRE time is spent.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "With that measurement in hand, we ensure that the teams consistently spending less than 50% of their time on development work change their practices.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "Finally, not only does SRE circumvent the dysfunctionality of the dev/ops split, but this structure also improves our product development teams: easy transfers between product development and SRE teams cross-train the entire group, and improve skills of developers who otherwise may have difficulty learning how to build a million-core distributed system.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Ensuring a Durable Focus on Engineering As already discussed, Google caps operational work for SREs at 50% of their time.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "Their remaining time should be spent using their coding skills on project work.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "The redirection ends when the operational load drops back to 50% or lower.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "When they are focused on operations work, on average, SREs should receive a maximum of two events per 812-hour on-call shift.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Postmortems should be written for all significant incidents, regardless of whether or not they paged; postmortems that did not trigger a page are even more valuable, as they likely point to clear monitoring gaps.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "This investigation should establish what happened in detail, find all root causes of the event, and assign actions to correct the problem or improve how it is addressed next time.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "The error budget stems from the observation that 100% is the wrong reliability target for basically everything (pacemakers and anti-lock brakes being notable exceptions).",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "In general, for any software service or system, 100% is not the right reliability target because no user can tell the difference between a system being 100% available and 99.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "999% and 100% gets lost in the noise of other unavailability, and the user receives no benefit from the enormous effort required to add that last 0.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "If 100% is the wrong reliability target for a system, what, then, is the right reliability target for the system?",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "This actually isnt a technical question at allits a product question, which should take the following considerations into account: What level of availability will the users be happy with, given how they use the product?",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "The business or the product must establish the systems availability target.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "As soon as SRE activities are conceptualized in this framework, freeing up the error budget through tactics such as phased rollouts and 1% experiments can optimize for quicker launches.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "As such, monitoring strategy should be constructed thoughtfully.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Monitoring should never require a human to interpret any part of the alerting domain.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Instead, software should do the interpreting, and humans should be notified only when they need to take action.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "The system cannot automatically handle the situation, but if a human takes action in a few days, no damage will result.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "Thus, Google SRE relies on on-call playbooks, in addition to exercises such as the \"Wheel of Misfortune,\" 7 to prepare engineers to react to on-call events.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Change Management SRE has found that roughly 70% of outages are due to changes in a live system.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "As a result, both release velocity and safety increase.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "Capacity planning should take both organic growth (which stems from natural product adoption and usage by customers) and inorganic growth (which results from events like feature launches, marketing campaigns, or other business-driven changes) into account.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "In our experience, provisioning must be conducted quickly and only when necessary, as capacity is expensive.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "This exercise must also be done correctly or capacity doesnt work when needed.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Thus, it is a riskier operation than load shifting, which is often done multiple times per hour, and must be treated with a corresponding degree of extra caution.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Efficiency and Performance Efficient use of resources is important any time a service cares about money.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Because SRE ultimately controls provisioning, it must also be involved in any work on utilization, as utilization is a function of how a given service works and how it is provisioned.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "It follows that paying close attention to the provisioning strategy for a service, and therefore its utilization, provides a very, very big lever on the services total costs.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "SREs provision to meet a capacity target at a specific response speed , and thus are keenly interested in a services performance.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "SREs and product developers will (and should) monitor and modify a service to improve its performance, thus adding capacity and improving efficiency.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    }
+  ],
+  "tags": [
+    "finance",
+    "physics",
+    "book"
+  ],
+  "agentRelevance": {
+    "primary": "r0ss",
+    "secondary": "b0b",
+    "scores": {
+      "b0b": 13,
+      "c0m": 7,
+      "d0t": 10,
+      "r0ss": 16
+    }
+  },
+  "charCount": 26541
+}

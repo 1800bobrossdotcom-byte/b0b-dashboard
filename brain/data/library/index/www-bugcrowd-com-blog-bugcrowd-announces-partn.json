@@ -1,0 +1,29 @@
+{
+  "source": "https://www.bugcrowd.com/blog/bugcrowd-announces-partnership-with-us-department-of-defense/",
+  "filename": "www-bugcrowd-com-blog-bugcrowd-announces-partn.txt",
+  "fetchedAt": "2026-01-30T03:34:29.860Z",
+  "type": "webpage",
+  "meta": {
+    "source": "https://www.bugcrowd.com/blog/bugcrowd-announces-partnership-with-us-department-of-defense/",
+    "processedAt": "2026-01-30T03:34:29.859Z",
+    "originalLength": 2619,
+    "compressedLength": 0,
+    "compressionRatio": "0.0%"
+  },
+  "keySentences": [],
+  "tags": [
+    "finance",
+    "security"
+  ],
+  "agentRelevance": {
+    "primary": "c0m",
+    "secondary": "b0b",
+    "scores": {
+      "b0b": 4,
+      "c0m": 6,
+      "d0t": 3,
+      "r0ss": 1
+    }
+  },
+  "charCount": 2619
+}

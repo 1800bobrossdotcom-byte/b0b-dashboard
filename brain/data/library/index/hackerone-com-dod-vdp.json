@@ -1,0 +1,28 @@
+{
+  "source": "https://hackerone.com/dod_vdp",
+  "filename": "hackerone-com-dod-vdp.txt",
+  "fetchedAt": "2026-01-30T03:34:20.010Z",
+  "type": "webpage",
+  "meta": {
+    "source": "https://hackerone.com/dod_vdp",
+    "processedAt": "2026-01-30T03:34:20.009Z",
+    "originalLength": 170,
+    "compressedLength": 0,
+    "compressionRatio": "0.0%"
+  },
+  "keySentences": [],
+  "tags": [
+    "accessible"
+  ],
+  "agentRelevance": {
+    "primary": "c0m",
+    "secondary": "b0b",
+    "scores": {
+      "b0b": 1,
+      "c0m": 2,
+      "d0t": 1,
+      "r0ss": 1
+    }
+  },
+  "charCount": 170
+}

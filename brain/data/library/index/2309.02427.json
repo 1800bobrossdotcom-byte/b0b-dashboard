@@ -1,0 +1,484 @@
+{
+  "meta": {
+    "source": "arxiv",
+    "arxivId": "2309.02427",
+    "title": "arxiv-2309.02427",
+    "sourceUrl": "https://arxiv.org/pdf/2309.02427.pdf",
+    "fetchedAt": "2026-01-30T03:05:10.123Z",
+    "processedAt": "2026-01-30T03:05:10.292Z",
+    "originalLength": 122979,
+    "compressedLength": 8161,
+    "compressionRatio": "6.6%"
+  },
+  "tags": [
+    "finance",
+    "security",
+    "mathematics",
+    "physics",
+    "ai",
+    "academic"
+  ],
+  "agentRelevance": {
+    "primary": "d0t",
+    "secondary": "r0ss",
+    "scores": {
+      "b0b": 5,
+      "c0m": 5,
+      "d0t": 10,
+      "r0ss": 7
+    }
+  },
+  "keySentences": [
+    {
+      "text": "Each person reserves the right to list their name first.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Thus, we propose Cognitive Architectures for Language Agents (CoALA), a conceptual framework to characterize and design general purpose language agents.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "CoALA organizes agents along three key dimensions: their information storage (divided into working and long-term memories); their action space (divided into internal and external actions); and their decision-making procedure (which is structured as an interactive loop with planning and execution).",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "We first introduce production systems and cognitive architectures (Section 2) and show how these recent developments in LLMs and language agents recapitulate these historical ideas (Section 3).",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "2 -- 2 of 32 -- Published in Transactions on Machine Learning Research (02/2024) 2 Background: From Strings to Symbolic AGI We first introduce production systems and cognitive architectures, providing a historical perspective on cognitive science and artificial intelligence: beginning with theories of logic and computation (Post, 1943), and ending with attempts to build symbolic artificial general intelligence (Newell et al.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "1 Production systems for string manipulation In the first half of the twentieth century, a significant line of intellectual work led to the reduction of mathematics (Whitehead and Russell, 1997) and computation (Church, 1932; Turing et al.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "The following algorithm implements division-with-remainder by converting a number written as strokes | into the form Q  R, where Q is the quotient of division by 5 and R is the remainder: |||||  |         where the priority order runs from top to bottom, productions are applied to the first substring matching their preconditions when moving from left to right (including the empty substring, in the last production), and    indicates the algorithm halts after executing the rule.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b",
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "The first rule effectively subtracts five if possible; the second handles the termination condition when no more subtraction is possible; and the third handles the empty substring input case.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b",
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Simple productions can result in complex behavior  Markov algorithms can be shown to be Turing complete.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "Productions were generalized beyond string rewriting to logical operations: preconditions that could be checked against the agents goals and world state, and actions that should be taken if the preconditions were satisfied.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "First, new information can be stored directly in long-term memory: facts can be written to semantic memory, while experiences can be written to episodic memory (Derbinsky et al.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "First, they operate over arbitrary text, making them more flexible than logic-based systems.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Second, rather than requiring the user to specify productions, they learn a distribution over productions via pre-training on an internet corpus.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "LLMs can thus be viewed as probabilistic production systems that sample a possible completion each time they are called, e.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Prompting methods thus define a sequence of productions.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "An LLM call may result in one or more actions  for example, returning an answer, calling a function, or issuing motor commands.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "These approaches first transform multimodal input into text and pass it to the LLM.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "3), leveraging key concepts such as memory, grounding, learning, and decision-making.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Finally, recent advances in vision-language models (VLMs; Alayrac et al.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "The rest of this section details key concepts in CoALA: memory, actions (grounding, reasoning, retrieval, and learning), and decision-making.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "It thus serves as the central hub connecting different components of a language agent.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Unlike episodic or semantic memory that may be initially empty or even absent, procedural memory must be initialized by the designer with proper code to bootstrap the agent.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Finally, while learning new actions by writing to procedural memory is possible (Section 4.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "It is thus a convenient testbed for language agents and has been studied with increasing intensity in recent years.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": ", 2023) retrieves relevant events from episodic memory via a combination of recency (rule-based), importance (reasoning-based), and relevance (embedding-based) scores.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "While retrieval plays a key role in human decision-making (Zhou et al.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "In Section 6, we suggest a principled integration of decision-making and retrieval as an important future direction.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Fine-tuning the agents LLM is a costly form of learning; thus, present studies specify learning schedules.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "CoALA allows agents to update their source code, thus modifying the implementation of various procedures.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Finally, it is theoretically possible for CoALA agents to learn new procedures for learning or decision-making, thus providing significant adaptability.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b",
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Finally, while our discussion has mostly focused on adding to memory, modifying and deleting (a case of unlearning) are understudied in recent language agents.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "6 Decision making With various actions (grounding, learning, reasoning, retrieval) in the action space, how should a language agent choose which action to apply?",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "SayCan therefore employs the LLM (in conjunction with the learned value function) as a single-step planner.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Like SayCan, it lacks semantic or episodic memory and therefore has no retrieval or learning actions.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "During a decision cycle, Voyager first reasons to propose a new task objective if it is missing in the working memory, then reasons to propose a code-based grounding procedure to solve the task.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Perhaps our most important suggestion is that agents should be structured and modular.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Thus, it would be timely and impactful to also implement useful abstractions (e.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "CoALA thus suggests using code sparingly to implement generic algorithms that complement LLM limitations, e.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "In our example, the agent should have read and write access to episodic memory (so it can store new interactions with customers), but read-only access to semantic and procedural memory (since it should not update the inventory or its own code).",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Defining and building good working memory modules will also be an important direction of future research.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Such modules may be especially important for industry solutions where LLM reasoning needs to seamlessly integrate with large-scale code infrastructure.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Important future directions include:  Meta-learning by modifying agent code would allow agents to learn more effectively.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "As a result, these agents rely on more customized or hand-crafted decision procedures.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "Future work should develop mechanisms to estimate the utility of planning (Laidlaw et al.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "We briefly highlight the most interesting as important directions for future research and debate.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "LLMs vs VLMs: should reasoning be language-only or multimodal?",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": ", 2023), should it be considered a single agent or two collaborating simpler agents (proposer and evaluator)?",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "However, an offline version that only the agent may write to is controllable, and thus can be considered an internal memory.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Similarly, code execution on a internal virtual environment should be considered an internal reasoning action, whereas code execution on an external machine (which may possess security vulnerabilities) should be considered an external grounding action.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": ", a million web agents try different web paths), which may result in decision-making procedures different from current ones inspired by human cognition (Griffiths, 2020).",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": 0,
+      "preview": "Published in Transactions on Machine Learning Research (02/2024) Cognitive Architectures for Language Agents Theodore R. Sumers Shunyu Yao Karthik Narasimhan Thomas L. Griffiths Princeton University {sumers, shunyuy, karthikn, tomg}@princeton.edu Reviewed on OpenReview: https: // openreview. net/ fo...",
+      "length": 122470,
+      "keyCount": 62
+    }
+  ],
+  "l0re": {
+    "thesis": [
+      {
+        "text": "Simple productions can result in complex behavior  Markov algorithms can be shown to be Turing complete.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      },
+      {
+        "text": "An LLM call may result in one or more actions  for example, returning an answer, calling a function, or issuing motor commands.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      },
+      {
+        "text": "As a result, these agents rely on more customized or hand-crafted decision procedures.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      }
+    ],
+    "principles": [
+      {
+        "text": "The following algorithm implements division-with-remainder by converting a number written as strokes | into the form Q  R, where Q is the quotient of division by 5 and R is the remainder: |||||  |         where the priority order runs from top to bottom, productions are applied to the first substring matching their preconditions when moving from left to right (including the empty substring, in the last production), and    indicates the algorithm halts after executing the rule.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b",
+          "\\b(first|second|third|finally)\\b"
+        ]
+      },
+      {
+        "text": "The first rule effectively subtracts five if possible; the second handles the termination condition when no more subtraction is possible; and the third handles the empty substring input case.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b",
+          "\\b(first|second|third|finally)\\b"
+        ]
+      },
+      {
+        "text": ", 2023) retrieves relevant events from episodic memory via a combination of recency (rule-based), importance (reasoning-based), and relevance (embedding-based) scores.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b"
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "text": "Productions were generalized beyond string rewriting to logical operations: preconditions that could be checked against the agents goals and world state, and actions that should be taken if the preconditions were satisfied.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "Unlike episodic or semantic memory that may be initially empty or even absent, procedural memory must be initialized by the designer with proper code to bootstrap the agent.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "6 Decision making With various actions (grounding, learning, reasoning, retrieval) in the action space, how should a language agent choose which action to apply?",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "Perhaps our most important suggestion is that agents should be structured and modular.",
+        "section": 0,
+        "markers": [
+          "\\b(important|crucial|key|essential|critical)\\b",
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "In our example, the agent should have read and write access to episodic memory (so it can store new interactions with customers), but read-only access to semantic and procedural memory (since it should not update the inventory or its own code).",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      }
+    ],
+    "stats": []
+  }
+}

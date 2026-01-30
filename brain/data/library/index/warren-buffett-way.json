@@ -1,0 +1,528 @@
+{
+  "meta": {
+    "title": "warren-buffett-way.pdf",
+    "processedAt": "2026-01-30T02:51:48.756Z",
+    "originalLength": 514805,
+    "compressedLength": 107351,
+    "compressionRatio": "20.9%"
+  },
+  "tags": [
+    "finance",
+    "security",
+    "philosophy",
+    "mathematics",
+    "physics",
+    "accessible",
+    "academic",
+    "book",
+    "letter"
+  ],
+  "agentRelevance": {
+    "primary": "d0t",
+    "secondary": "c0m",
+    "scores": {
+      "b0b": 6,
+      "c0m": 8,
+      "d0t": 11,
+      "r0ss": 6
+    }
+  },
+  "keySentences": [
+    {
+      "text": "-- 1 of 267 -- More Praise for The Warren Buffett Way, First Edition The Warren Buf fett Way outlines his career and presents examples of how his investment techniques and methods evolved and the important individu- als in the process.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b",
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "It also details the key investment decisions that produced his unmatched record of performance.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Finally, the book contains the think- ing and the philosophy of an investor that consistently made money using the tools available to every citizen no matter what their level of wealth.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Bogle Chairman, The Vanguard Group Warren Buffett is surely the Greatest Investor of this centurynot so much because he built a great fortune with a free market as because he shared his important thinking with us and has openly demonstrated the sagacity and courage so vital to success.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Phil Fisher author, Common Stocks and Uncommon Profits -- 2 of 267 -- -- 3 of 267 -- THE W A R R E N B U F F E T T WAY -- 4 of 267 -- -- 5 of 267 -- THE W A R R E N B U F F E T T WAY Second Edition ROBERT G.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Requests to the Publisher for permission should be addressed to the Permissions Department, John Wiley & Sons, Inc.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "You should consult with a professional where appropriate.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "-- 7 of 267 -- v Contents Foreword to the Second Edition vii Bill Miller Foreword to the First Edition ix Peter S.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "We witnessed a high-f lying bubble that made many people rich, and then a steep crash into a protracted, painful bear market be- fore the market finally hit bottom in the spring of 2003 and started to turn back up.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "All along the way, Warren Buffetts investment approach never changed.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Since the recovery began in 2003, Berkshire Hathaway stock is up about $20,000 per share, more than 30 percent, far surpass- ing the returns of the overall market over the comparable period.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "And I am convinced that Roberts work shares with that classic book one critical quality: the advice may not make you rich, but it is highly unlikely to make you poor.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "If understood and intelli- gently implemented, the techniques and principles presented here should make you a better investor.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "B ILL M ILLER CEO, Legg Mason Capital Management -- 11 of 267 -- i x Foreword to the First Edition One weekday evening early in 1989 I was home when the tele- phone rang.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Our middle daughter, Annie, then eleven, was first to the phone.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "I have always wanted to do a book, but I never have gotten around to it.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "He spoke very rapidly with lots of enthusiasm and must have said forty words in fifteen or twenty seconds, including a couple of laughs and chuckles.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "After about an hour we went to a local restaurant where I followed his lead and had a terrific steak and my first cherry Coke in thirty years.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Warren discussed or answered questions about each stock and operation that Berkshire (he never called his company Berkshire Hathaway) owned.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "He is always searching for investments where risk is eliminated or minimized.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Warren Buffett is a great student of business and a wonderful lis- tener, and able to determine the key elements of a company or a com- plex issue with high speed and precision.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "He can make a decision not to invest in something in as little as two minutes and conclude that it is time to make a major purchase in just a few days of research.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "-- 13 of 267 -- F o r e w o r d t o t h e F i r s t E d i t i o n x i As a manager he almost never calls a division head or the chief exec- utive of a company but is delighted at any time of the day or night for them to call him to report something or seek counsel.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "After investing in a stock or purchasing an entire operation, he becomes a cheerleader and sounding board: At Berkshire we dont tell 400% hitters how to swing, using an analogy to baseball management.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "In the 1950s Warren invested $100 in a Dale Carnegie course not to prevent my knees from knocking when public speaking but to do public speaking while my knees are knocking.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "Warren Buffett stresses that the critical investment factor is deter- mining the intrinsic value of a business and paying a fair or bargain price.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "He purchased over $1 billion of Coca-Cola in 1988 and 1989 after the stock had risen over fivefold the prior six years and over five-hundredfold the previous sixty years.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "In 1976 he purchased a very major position in GEICO when the stock had declined from $61 to $2 and the general perception was that the stock was definitely going to zero.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "Warren Buffett never invests in businesses he cannot understand or that are outside his Circle of Competence.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Very few investors would have had the knowledge and courage to purchase GEICO at $2.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "However, Warren Buffetts pur- chase of Capital Cities/ABC, Gillette, Washington Post, Affiliated Pub- lications, Freddie Mac, or Coca-Cola (which have produced over $6 billion of profits for Berkshire Hathaway, or 60 percent of the $10 bil- lion of shareholders equity) were all well-run companies with strong histories of profitability, and were dominant business franchises.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "He has stated it will be a difficult standard to maintain due to the much larger size of the company, but there are always opportunities around and Berkshire keeps lots of cash ready to invest and it grows every year.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Warren Buffett has stated that he has always wanted to write a book on investing.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "And also in the interim we now have The Warren Buf fett Way, in which Robert Hagstrom outlines Buf- fetts career and presents examples of how his investment technique and methods evolved as well as the important individuals in that process.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "The book also details the key investment decisions that produced Buf- fetts unmatched record of performance.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Finally, it contains the think- ing and the philosophy of an investor that consistently made money using the tools available to every citizen no matter their level of wealth.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "The success of The Warren Buf fett Way, however, is first and foremost a testament to Warren Buffett.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "I had never met Warren Buffett before writing this book, and I did not consult with him while developing it.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "I cannot, therefore, discern with any confidence what Buffett might have thought of those companies economic conditions, other than to say that he clearly liked what he saw.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Here is a succinct and powerful lesson from the 1996 annual report: Your goal as an investor should be simply to purchase, at a rational price, a part interest in an easily understood business whose earnings are virtually certain to be materially higher, five, ten, and twenty years from now.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Over time, you will find only a few companies that meet those standardsso when you see one that qualifies, you should buy a mean- ingful amount of stock.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "For readers of The Warren Buf fett Way, I hope I can provide a very personal look into an important piece of investment history and some thoughts on how to best use this wonderful book.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Its well known that my father was an important inf luence on Warren Buffett and, as Mr.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "For his part, as my father became acquainted with Warren Buffett, he grew to admire qualities in him that he felt were essential to investing success but are rare among investment managers.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Warren Buffett as a young man was among the very, very few who impressed my father sufficiently in his first meeting to merit a second meeting and many more meetings after that.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "He was always very proud he picked Warren Buffett as an A before Buffett had won his much-deserved fame and acclaim.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "This is an unusual story that has never been told and perhaps says much about both my father and Warren Buffett.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "By the 1980s, my father finally had purged the word Howard from any sentence referencing Buffett.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Within professional in- vesting, most people learn in craft-like form some particular style of in- vesting and then never change.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "They build that craft and then never change, or change only marginally.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": 0,
+      "preview": "-- 1 of 267 -- More Praise for The Warren Buffett Way, First Edition The Warren Buf fett Way outlines his career and presents examples of how his investment techniques and methods evolved and the important individu- als in the process. It also details the key investment decisions that produced his u...",
+      "length": 510157,
+      "keyCount": 843
+    }
+  ],
+  "l0re": {
+    "thesis": [
+      {
+        "text": "He can make a decision not to invest in something in as little as two minutes and conclude that it is time to make a major purchase in just a few days of research.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      },
+      {
+        "text": "Knowing that Buffett likes to buy highly predictable economics at prices below the intrinsic value of the business, we can conclude that his -- 34 of 267 -- 8 T H E W A R R E N B U F F E T T W A Y buyers strike ref lects the lack of choices in this arena.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      },
+      {
+        "text": "If he reached a logical conclusion based on sound judgment, Graham coun- seled Buffett, he should not be dissuaded just because others disagree.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b",
+          "\\b(must|should|always|never)\\b"
+        ]
+      }
+    ],
+    "principles": [
+      {
+        "text": "The fourth principle states, Our preference would be able to reach our goal [of maximizing Berkshires average an- nual rate of gain in intrinsic value] by directly owning a diversified group of businesses that generate cash and consistently earn above- average returns on capital.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b"
+        ]
+      },
+      {
+        "text": "Munger, the son of a lawyer and grandson of a federal judge, had es- tablished a successful law practice in the Los Angeles area, but his inter- est in the stock market was already strong.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b"
+        ]
+      },
+      {
+        "text": "From then on, they communicated often, with Buffett frequently urging Munger to quit law and to concentrate on investing.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b"
+        ]
+      },
+      {
+        "text": "In 1962, he formed an investment partnership much like Buffetts, while maintaining his law practice.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b"
+        ]
+      },
+      {
+        "text": "Three very successful years later, he left the law altogether, although to this day he has an office in the firm that bears his name.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b"
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "text": "Requests to the Publisher for permission should be addressed to the Permissions Department, John Wiley & Sons, Inc.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "You should consult with a professional where appropriate.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "All along the way, Warren Buffetts investment approach never changed.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "If understood and intelli- gently implemented, the techniques and principles presented here should make you a better investor.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "I have always wanted to do a book, but I never have gotten around to it.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      }
+    ],
+    "stats": [
+      {
+        "text": "Since the recovery began in 2003, Berkshire Hathaway stock is up about $20,000 per share, more than 30 percent, far surpass- ing the returns of the overall market over the comparable period.",
+        "section": 0,
+        "markers": [
+          "\\$[\\d,]+"
+        ]
+      },
+      {
+        "text": "After investing in a stock or purchasing an entire operation, he becomes a cheerleader and sounding board: At Berkshire we dont tell 400% hitters how to swing, using an analogy to baseball management.",
+        "section": 0,
+        "markers": [
+          "\\d+%"
+        ]
+      },
+      {
+        "text": "In the 1950s Warren invested $100 in a Dale Carnegie course not to prevent my knees from knocking when public speaking but to do public speaking while my knees are knocking.",
+        "section": 0,
+        "markers": [
+          "\\$[\\d,]+"
+        ]
+      },
+      {
+        "text": "He purchased over $1 billion of Coca-Cola in 1988 and 1989 after the stock had risen over fivefold the prior six years and over five-hundredfold the previous sixty years.",
+        "section": 0,
+        "markers": [
+          "\\$[\\d,]+"
+        ]
+      },
+      {
+        "text": "In 1976 he purchased a very major position in GEICO when the stock had declined from $61 to $2 and the general perception was that the stock was definitely going to zero.",
+        "section": 0,
+        "markers": [
+          "\\$[\\d,]+"
+        ]
+      }
+    ]
+  }
+}

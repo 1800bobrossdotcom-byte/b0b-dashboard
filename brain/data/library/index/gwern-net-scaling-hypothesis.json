@@ -1,0 +1,390 @@
+{
+  "source": "https://gwern.net/scaling-hypothesis",
+  "filename": "gwern-net-scaling-hypothesis.txt",
+  "fetchedAt": "2026-01-30T03:14:45.302Z",
+  "type": "webpage",
+  "meta": {
+    "source": "https://gwern.net/scaling-hypothesis",
+    "processedAt": "2026-01-30T03:14:45.301Z",
+    "originalLength": 105486,
+    "compressedLength": 23919,
+    "compressionRatio": "22.7%"
+  },
+  "keySentences": [
+    {
+      "text": "(As a result, GPT-3 outputs & interaction are more fascinating & human-like than GPT-2.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": ") While the immediate applications of GPT-3, like my poetry or humor writings, are nice, the short-term implications of GPT-3 are much more important.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "First, while GPT-3 is expensive by conventional DL standards, it is cheap by scientific/commercial/military/government budget standards, and the results indicate that models could be made much larger.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Second, models can also be made much more powerful, as GPT is an old approach known to be flawed in both minor & major ways, and far from an ideal Transformer .",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Third, GPT-3s capabilities come from learning on raw (unsupervised) data; that has long been one of the weakest areas of DL, holding back progress in other areas like reinforcement learning or robotics.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Estimates of Moores law-like progress curves decades ago by pioneers like Hans Moravec indicated that it would take until the 2010s for the sufficiently-cheap compute for tiny insect-level prototype systems to be available, and the 2020s for the first sub-human systems to become feasible, and these forecasts are holding up.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b",
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "(Despite this vindication, the scaling hypothesis is so unpopular an idea, and difficult to prove in advance rather than as a fait accompli , that while the GPT-3 results finally drew some public notice after OpenAI enabled limited public access & people could experiment with it live, it is unlikely that many entities will modify their research philosophies, much less kick off an arms race.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": ") More concerningly, GPT-3s scaling curves, unpredicted meta-learning, and success on various anti-AI challenges suggests that in terms of futurology, AI researchers forecasts are an emperor sans garments: they have no coherent model of how AI progress happens or why GPT-3 was possible or what specific achievements should cause alarm, where intelligence comes from, and do not learn from any falsified predictions.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Depending on what investments are made into scaling DL, and how fast compute grows, the 2020s should be quite interestingsigmoid or singularity?",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Nothing in the raw metrics reported on, say, Penn Tree Bank or LAMBADA or WinoGrande would lead you to expect all of this hilarious and creative output; the meta-learning results might, but only if you already thought meta-learning was important.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "It is just a text prediction model, an idiot savant of text; but an idiot savant, we should remember, is only a genetic mutation or bit of brain damage away from a normal human.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "If RL is the cherry on the top of the supervised learning frosting, and supervised learning is the frosting on top of the unsupervised learning cake, well, it looks like the cake layers are finally rising.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Banko & Brill 2001 , Brants et al 2007 , Koehn & Knowles 2017 ), GPT-3 hits twice that without noticeable change in scaling factors: its scaling continues to be roughly logarithmic/ power-law , as it was for much smaller models & as forecast, and it has not hit a regime where gains effectively halt or start to require increases vastly beyond feasibility.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "That suggests that it would be both possible and useful to head to trillions of parameters (which are still well within available compute & budgets, requiring merely thousands of GPUs & perhaps $12.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "78 $100 2020 m budgets assuming no improvements which of course there will be, see Hernandez & Brown 2020 etc.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "GPT-3 is an extraordinarily expensive model by the standards of machine learning: it is estimated that training it may require the annual cost of more machine learning researchers than you can count on one hand (~ $6.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "73 $30 2020 of hard drive space to store the model (500800GB), and multiple pennies of electricity per 100 pages of output (0.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "The scaling papers suggest that the leaps we have seen over the past few years are not even half way there in terms of absolute likelihood loss, never mind what real-world capabilities each additional decrement translates into.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "2 ) If we see such striking gains in halving the validation loss but with so far left to go, what is left to emerge as we third or halve again?",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "If the model & data & compute are not big or varied enough, the optimization, by the end of the cursory training, will have only led to a sub-model which achieves a low loss but missed important pieces of the desired solution.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "While I was highly skeptical of scaling hypothesis advocates when I first became interested in AI 2004  6 2010 16ya (back when AI was stuck in the doldrums of hopelessly narrow tools and dates like 2028 seemed impossibly far away), which smacked of numerology and if you build it they will come logic (at the time, we certainly didnt have general algorithms that you could just throw compute at), in 2020, I have to admit, I was wrong and they were right.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "A model learning to predict must learn to understand all of that to get the best performance; as it predicts the easy things which are mere statistical pattern-matching, whats left are the hard things.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "AI critics often say that the long tail of scenarios for tasks like self-driving cars or natural language can only be solved by true generalization & reasoning; it follows then that if models solve the long tail, they must learn to generalize & reason.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "It doesnt know anything about meaning, but at least now when its asked to predict the second half of a word, it can actually do that to some degree, saving it a few more bits.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "If the word Jefferson is the last word, then Washington may not be far away, and it should hedge its bets on predicting that W is the next character, and then if it shows up, go all-in on ashington.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "(Around here, Markov chain & n -gram models start to fall behind; they can memorize increasingly large chunks of the training corpus, but they cant solve increasingly critical syntactic tasks like balancing parentheses or quotes, much less start to ascend from syntax to semantics.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Even subtler aspects of language must be modeled, such as keeping pronouns consistent.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "If we compared two models, one of which didnt understand gender pronouns at all and guessed he/she purely at random, and one which understood them perfectly and always guessed she, the second model would attain a lower average error of barely <0.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Nevertheless, as training continues, these problems and more, like imitating genres, get solved, and eventually at a loss of 12 (where a small char-RNN might converge on a small corpus like Shakespeare or some Project Gutenberg ebooks), we will finally get samples that sound humanat least, for a few sentences.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Where individuals differ is when they start running into the long tail of novel choices, rare choices, choices that take seconds but unfold over a lifetime, choices where we will never get any feedback (like after our death).",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "A small absolute average improvement in decision quality, if it is in those decisions, may be far more important than its quantity indicates, and give us some intuition for why those last bits are the hardest/deepest.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "never struck me as convincing, an argument admitting neither confutation nor conviction.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "If GPT-3 gained so much meta-learning and world knowledge by dropping its absolute loss ~50% when starting from GPT-2s level, what capabilities would another ~30% improvement over GPT-3 gain?",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "21 Prospects In the problem of decoding, the most important information which we can possess is the knowledge that the message which we are reading is not gibberishIn a similar way, when we consider a problem of nature such as that of atomic reactions and atomic explosives, the largest single item of information which we can make public is that they exist.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "He is already some 50% of his way toward that answer the one secret concerning the atomic bomb which might have been kept and which was given to the public and to all potential enemies without the least inhibition, was that of the possibility on its construction.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "Once you have [those two], then there is a third thing is that is neededand that is conviction .",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Chinese AI companies are a question mark: past the language barrier, I seem to discern interest in AGI & little of the reflexive Western opposition, and companies like Baidu occasionally release important research (such as the early scaling paper Hestness et al 2017 ), but overall, Chinese AI may be overestimated, and they seem to suffer from a kind of Dutch diseasefunding for surveillance technology, and for narrow e-commerce niches, is so plentiful that other areas are neglected.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "OA, lacking anything like DMs long-term funding from Google or its enormous headcount, is making a startup-like bet that they know an important truth which is a secret: the scaling hypothesis is true!",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "And if OA is wrong to trust in the God of Straight Lines On Graphs , well, they never could compete with DM directly using DMs favored approach, and were always going to be an also-ran footnote, so they have no regret.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "While all of this hypothetically can be replicated relatively easily (never underestimate the amount of tweaking and special sauce it takes) by competitors if they wished (the necessary amounts of compute budgets are still trivial in terms of Big Science or other investments like AlphaGo or AlphaStar or Waymo, after all), said competitors lack the very most important thing, which no amount of money or GPUs can ever cure: the courage of their convictions.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "25 A critical indicator will be whether organizations beyond the usual suspects (Microsoft ZeRO-2 team has reached 1t-scale training , but there is also Nvidia, Salesforce, Allen, Google DM/GB, Connor/EleutherAI, Facebook FAIR) start participating or if they continue to dismiss scaling.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Its remarkable to reflect that someone who started a PhD because they were excited by these new ResNets would still not have finished it by nowthat is how recent even resnets are, never mind Transformers, and how rapid the pace of progress is.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "That is, no one aside from a few diehard connectionists written off as willfully-deluded old-school fanatics by the rest of the AI community (never mind the world), such as Moravec , Schmidhuber, Sutskever , Legg, & Amodei.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "In 1998 28ya , 22 years ago, Moravec noted that AI research could be deceptive, and hardware limits meant that intelligent machine research did not make steady progress in its first 50 years, it marked time for 30 of them!",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": ", predicting that as Moores law continued, things will go much faster in the next 50 years than they have in the last 50.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "Moravec further observed that part of the reason for rapid progress was the hardware overhang: while supercomputers of the necessary power would exist long before the connectionist revolution began, no one would be allowed to use them 27 , as they would be devoted to more important (prestigious) hard STEM work, like physics simulations (ie.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "climate simulations & nuclear bombs) 28 , and AI research must wait for the power to become more affordable.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Affordable meaning a workstation roughly ~ $2,228.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "92 $1,000 1998 ; sufficiently cheap compute to rival a human would arrive sometime in the 2020s, with the 2010s seeing affordable systems in the lizardmouse range.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "As it happens, the start of the DL revolution is typically dated to AlexNet in 2012 14ya , by a grad student 29 using 2 GTX 580 3GB GPUs (launch list price of $789.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    }
+  ],
+  "tags": [
+    "quantum",
+    "finance",
+    "security",
+    "philosophy",
+    "mathematics",
+    "physics",
+    "ai",
+    "accessible",
+    "academic"
+  ],
+  "agentRelevance": {
+    "primary": "b0b",
+    "secondary": "d0t",
+    "scores": {
+      "b0b": 21,
+      "c0m": 14,
+      "d0t": 20,
+      "r0ss": 18
+    }
+  },
+  "charCount": 105486
+}

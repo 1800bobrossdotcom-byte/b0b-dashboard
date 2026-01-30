@@ -1,0 +1,216 @@
+{
+  "source": "https://nakamotoinstitute.org/bitcoin/",
+  "filename": "nakamotoinstitute-org-bitcoin.txt",
+  "fetchedAt": "2026-01-30T03:15:01.047Z",
+  "type": "webpage",
+  "meta": {
+    "source": "https://nakamotoinstitute.org/bitcoin/",
+    "processedAt": "2026-01-30T03:15:01.046Z",
+    "originalLength": 21219,
+    "compressedLength": 3355,
+    "compressionRatio": "15.8%"
+  },
+  "keySentences": [
+    {
+      "text": "Digital signatures provide part of the solution, but the main benefits are lost if a trusted third party is still required to prevent double-spending.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Introduction Commerce on the Internet has come to rely almost exclusively on financial institutions serving as trusted third parties to process electronic payments.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Merchants must be wary of their customers, hassling them for more information than they would otherwise need.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "What is needed is an electronic payment system based on cryptographic proof instead of trust, allowing any two willing parties to transact directly with each other without the need for a trusted third party.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Each owner transfers the coin to the next by digitally signing a hash of the previous transaction and the public key of the next owner and adding these to the end of the coin.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "After each transaction, the coin must be returned to the mint to issue a new coin, and only coins issued directly from the mint are trusted not to be double-spent.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "In the mint based model, the mint was aware of all transactions and decided which arrived first.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "To accomplish this without a trusted party, transactions must be publicly announced [1] , and we need a system for participants to agree on a single history of the order in which they were received.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "The payee needs proof that at the time of each transaction, the majority of nodes agreed it was the first received.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "The timestamp proves that the data must have existed at the time, obviously, in order to get into the hash.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Nodes always consider the longest chain to be the correct one and will keep working on extending it.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "If two nodes broadcast different versions of the next block simultaneously, some nodes may receive one or the other first.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "In that case, they work on the first one they received, but save the other branch in case it becomes longer.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Incentive By convention, the first transaction in a block is a special transaction that starts a new coin owned by the creator of the block.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "With computer systems typically selling with 2GB of RAM as of 2008, and Moores Law predicting current growth of 1.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "2GB per year, storage should not be a problem even if the block headers must be kept in memory.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "It should be noted that fan-out, where a transaction depends on several transactions, and those transactions depend on many more, is not a problem here.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "There is never the need to extract a complete standalone copy of a transactions history.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Privacy The traditional banking model achieves a level of privacy by limiting access to information to the parties involved and the trusted third party.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "As an additional firewall, a new key pair should be used for each transaction to keep them from being linked to a common owner.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "The risk is that if the owner of a key is revealed, linking could reveal other transactions that belonged to the same owner.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Even if this is accomplished, it does not throw the system open to arbitrary changes, such as creating value out of thin air or taking money that never belonged to the attacker.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Nodes are not going to accept an invalid transaction as payment, and honest nodes will never accept a block containing them.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "The receiver generates a new key pair and gives the public key to the sender shortly before signing.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Conclusion We have proposed a system for electronic transactions without relying on trust.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "Merkle, \"Protocols for public key cryptosystems,\" In Proc.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    }
+  ],
+  "tags": [
+    "finance",
+    "security",
+    "mathematics",
+    "physics",
+    "academic"
+  ],
+  "agentRelevance": {
+    "primary": "c0m",
+    "secondary": "d0t",
+    "scores": {
+      "b0b": 5,
+      "c0m": 11,
+      "d0t": 10,
+      "r0ss": 9
+    }
+  },
+  "charCount": 21219
+}

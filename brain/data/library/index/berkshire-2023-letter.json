@@ -1,0 +1,502 @@
+{
+  "meta": {
+    "title": "berkshire-2023-letter.pdf",
+    "processedAt": "2026-01-30T02:51:56.022Z",
+    "originalLength": 50637,
+    "compressedLength": 9216,
+    "compressionRatio": "18.2%"
+  },
+  "tags": [
+    "finance",
+    "philosophy",
+    "physics",
+    "accessible",
+    "letter"
+  ],
+  "agentRelevance": {
+    "primary": "d0t",
+    "secondary": "r0ss",
+    "scores": {
+      "b0b": 2,
+      "c0m": 3,
+      "d0t": 4,
+      "r0ss": 4
+    }
+  },
+  "keySentences": [
+    {
+      "text": "Though born and raised in Omaha, he spent 80% of his life domiciled elsewhere.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "Consequently, it was not until 1959 when he was 35 that I first met him.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b",
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "In 1962, he decided that he should take up money management.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Charlie never sought to take credit for his role as creator but instead let me take the bows and receive the accolades.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Even when he knew he was right, he gave me the reins, and when I blundered he never  never reminded me of my mistake.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Though I have long been in charge of the construction crew; Charlie should forever be credited with being the architect.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "We have never, however, had a shouting match or anything close to a ruptured relationship.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "She is sensible  very sensible  instinctively knowing that pundits should always be ignored.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "It is filled with a vast amount of information  some important, some trivial.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "The numbers read $90 billion for 2021, ($23 billion) for 2022 and $96 billion for 2023.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "At Berkshire, our view is that earnings should be a sensible concept that Bertie will find somewhat useful  but only as a starting point  in evaluating a business.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "4 -- 3 of 16 -- The primary difference between the mandated figures and the ones Berkshire prefers is that we exclude unrealized capital gains or losses that at times can exceed $5 billion a day.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "Ironically, our preference was pretty much the rule until 2018, when the improvement was mandated.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "Galileos experience, several centuries ago, should have taught us not to mess with mandates from on high.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "* * * * * * * * * * * * Make no mistake about the significance of capital gains: I expect them to be a very important component of Berkshires value accretion during the decades ahead.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "I cant remember a period since March 11, 1942  the date of my first stock purchase  that I have not had a majority of my net worth in equities, U.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "5 -- 4 of 16 -- In 1863, Hugh McCulloch, the first Comptroller of the United States, sent a letter to all national banks.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "His instructions included this warning: Never deal with a rascal under the expectation that you can prevent him from cheating you.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "If I missed one  and I missed plenty  another always came along.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Record operating income and a strong stock market led to a yearend figure of $561 billion.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "The total GAAP net worth for the other 499 S&P companies  a whos who of American business  was $8.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "(The 2023 number for the S&P has not yet been tallied but is unlikely to materially exceed $9.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": ") By this measure, Berkshire now occupies nearly 6% of the universe in which it operates.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "Nevertheless, managing Berkshire is mostly fun and always interesting.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "On the positive side, after 59 years of assemblage, the company now owns either a portion or 100% of various businesses that, on a weighted basis, have somewhat better prospects than exist at most large American companies.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "And we now have a small cadre of long-time managers who never muse about going elsewhere and who regard 65 as just another birthday.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "our allegiance will always be to our country and our shareholders.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "We never forget that, though your money is comingled with ours, it does not belong to us.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "6 -- 5 of 16 -- With that focus, and with our present mix of businesses, Berkshire should do a bit better than the average American corporation and, more important, should also operate with materially less risk of permanent loss of capital.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "One fact of financial life should never be forgotten.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "At such times, whatever foolishness can be marketed will be vigorously marketed  not by everyone but always by someone.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "One investment rule at Berkshire has not and will not change: Never risk permanent loss of capital.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Berkshire does not currently pay dividends, and its share repurchases are 100% discretionary.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "We did not predict the time of an economic paralysis but we were always prepared for one.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Each only accounts for 4-5% of Berkshires GAAP net worth.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "Indeed, our share of AMEX earnings in 2023 considerably exceeded the $1.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "Both AMEX and Coke will almost certainly increase their dividends in 2024  about 16% in the case of AMEX  and we will most certainly leave our holdings untouched throughout the year.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "To this obvious but often overlooked truth, I add my usual caveat: All stock repurchases should be price-dependent.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "8% of Occidental Petroleums common shares and also owned warrants that, for more than five years, give us the option to materially increase our ownership at a fixed price.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "However, the yen has weakened in recent years and our yearend unrealized gain in dollars was 61% or $8 billion.",
+      "section": 0,
+      "markers": [
+        "\\d+%",
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "Therefore, Berkshire has financed most of its Japanese position with the proceeds from 1.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "The weakened yen has produced a yearend gain for Berkshire of $1.",
+      "section": 0,
+      "markers": [
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "In certain important ways, all five companies  Itochu, Marubeni, Mitsubishi, Mitsui and Sumitomo  follow shareholder-friendly policies that are much superior to those customarily practiced in the U.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "And, on their side, the Japanese CEOs have the comfort of knowing that Berkshire will always possess huge liquid resources that can be instantly available for such partnerships, whatever their size may be.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "That is an important disadvantage which we did not face in our early days at Berkshire.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "$37,350 $30,853 At Berkshires annual gathering on May 6, 2023, I presented the first quarters results which had been released early that morning.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b",
+        "\\$[\\d,]+"
+      ]
+    },
+    {
+      "text": "I followed with a short summary of the outlook for the full year: (1) most of our non-insurance businesses faced lower earnings in 2023; (2) that decline would be cushioned by decent results at our two largest non-insurance businesses, BNSF and Berkshire Hathaway Energy (BHE) which, combined, had accounted for more than 30% of operating earnings in 2022; (3) our investment income was certain to materially grow because the huge U.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b",
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "Treasury bill position held by Berkshire had finally begun to pay us far more than the pittance we had been receiving and (4) insurance would likely do well, both because its underwriting earnings are not correlated to earnings elsewhere in the economy and, beyond that, property-casualty insurance prices had strengthened.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "* * * * * * * * * * * * Rail is essential to Americas economic future.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Trucking wins for short hauls, but many goods that Americans need must travel to customers many hundreds or even several thousands of miles away.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": 0,
+      "preview": "Charlie Munger  The Architect of Berkshire Hathaway Charlie Munger died on November 28, just 33 days before his 100 th birthday. Though born and raised in Omaha, he spent 80% of his life domiciled elsewhere. Consequently, it was not until 1959 when he was 35 that I first met him. In 1962, he decided...",
+      "length": 50101,
+      "keyCount": 82
+    }
+  ],
+  "l0re": {
+    "thesis": [
+      {
+        "text": "I followed with a short summary of the outlook for the full year: (1) most of our non-insurance businesses faced lower earnings in 2023; (2) that decline would be cushioned by decent results at our two largest non-insurance businesses, BNSF and Berkshire Hathaway Energy (BHE) which, combined, had accounted for more than 30% of operating earnings in 2022; (3) our investment income was certain to materially grow because the huge U.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b",
+          "\\d+%"
+        ]
+      },
+      {
+        "text": "Whatever the case at Berkshire, the final result for the utility industry may be ominous: Certain utilities might no longer attract the savings of American citizens and will be forced to adopt the public-power model.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      }
+    ],
+    "principles": [
+      {
+        "text": "Ironically, our preference was pretty much the rule until 2018, when the improvement was mandated.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b"
+        ]
+      },
+      {
+        "text": "One investment rule at Berkshire has not and will not change: Never risk permanent loss of capital.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b",
+          "\\b(must|should|always|never)\\b"
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "text": "In 1962, he decided that he should take up money management.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "Charlie never sought to take credit for his role as creator but instead let me take the bows and receive the accolades.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "Even when he knew he was right, he gave me the reins, and when I blundered he never  never reminded me of my mistake.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "Though I have long been in charge of the construction crew; Charlie should forever be credited with being the architect.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "We have never, however, had a shouting match or anything close to a ruptured relationship.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      }
+    ],
+    "stats": [
+      {
+        "text": "Though born and raised in Omaha, he spent 80% of his life domiciled elsewhere.",
+        "section": 0,
+        "markers": [
+          "\\d+%"
+        ]
+      },
+      {
+        "text": "The numbers read $90 billion for 2021, ($23 billion) for 2022 and $96 billion for 2023.",
+        "section": 0,
+        "markers": [
+          "\\$[\\d,]+"
+        ]
+      },
+      {
+        "text": "4 -- 3 of 16 -- The primary difference between the mandated figures and the ones Berkshire prefers is that we exclude unrealized capital gains or losses that at times can exceed $5 billion a day.",
+        "section": 0,
+        "markers": [
+          "\\$[\\d,]+"
+        ]
+      },
+      {
+        "text": "Record operating income and a strong stock market led to a yearend figure of $561 billion.",
+        "section": 0,
+        "markers": [
+          "\\$[\\d,]+"
+        ]
+      },
+      {
+        "text": "The total GAAP net worth for the other 499 S&P companies  a whos who of American business  was $8.",
+        "section": 0,
+        "markers": [
+          "\\$[\\d,]+"
+        ]
+      }
+    ]
+  }
+}

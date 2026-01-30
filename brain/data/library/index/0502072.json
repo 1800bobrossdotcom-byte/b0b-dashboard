@@ -1,0 +1,502 @@
+{
+  "meta": {
+    "source": "arxiv",
+    "arxivId": "quant-ph/0502072",
+    "title": "arxiv-quant-ph/0502072",
+    "sourceUrl": "https://arxiv.org/pdf/quant-ph/0502072.pdf",
+    "fetchedAt": "2026-01-30T03:04:58.917Z",
+    "processedAt": "2026-01-30T03:04:59.159Z",
+    "originalLength": 84175,
+    "compressedLength": 14400,
+    "compressionRatio": "17.1%"
+  },
+  "tags": [
+    "quantum",
+    "finance",
+    "philosophy",
+    "mathematics",
+    "physics",
+    "ai",
+    "academic"
+  ],
+  "agentRelevance": {
+    "primary": "d0t",
+    "secondary": "r0ss",
+    "scores": {
+      "b0b": 3,
+      "c0m": 1,
+      "d0t": 11,
+      "r0ss": 5
+    }
+  },
+  "keySentences": [
+    {
+      "text": "First, many computer scientists see the study of speculative models of computation as at best a diversion from more serious work; this might explain why the groundbreaking papers of Simon [67] and Bennett et al.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "And second, many physicists see computational complexity as about as relevant to the mysteries of Nature as dentistry or tax law.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b",
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "1 -- 1 of 23 -- eventually attain the same status as (say) the Second Law of Thermodynamics, or the impossibility of superluminal signalling.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b",
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "In other words, while experiment will always be the last appeal, the presumed intractability of NP-complete problems might be taken as a useful constraint in the search for new physical theories.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Some of the proposals are better known than others, but to my knowledge, even the folklore ones have never before been collected in one place.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Relativity and quantum mechanics finally meet in Section 7, on the computational complexity of quantum gravity theories, but the whole point of the section is to explain why this is a premature subject.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Sections 8 and 9 finally set aside the more sober ideas (like solving the halting problem using naked singularities), and give zaniness free reign.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Finally, Section 10 makes the case for taking the hardness of NP-complete problems to be a basic fact about the physical world; and weighs three possible objections against doing so.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "1Naturally, the points coordinates must be specified to some finite precision.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "And indeed, several posters pointed out that, although soap bubbles might reach a minimum-energy configuration with a small number of pegs, there is no magical reason why this should be true in general.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "By analogy, a rock in a mountain crevice could reach a lower-energy configuration by rolling up first and then down, but it is not observed to do so.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Id be willing to make a gentlemans bet that no one can site [sic] a paper which describes an experiment that shows that the global minimum is not always achieved with soap bubbles.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "The result was fascinating to watch: with 3 or 4 pegs, the optimum tree usually is found.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "However, by no means is it always found, especially with more pegs.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "However, I also sometimes found triangular bubbles of three Steiner verticeswhich is much harder to explain, since such a structure could never occur in a Steiner tree.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "4Some people have objected that, while all of this might be true in practice, I still have not shown that soap bubbles cannot solve NP-complete problems in principle.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "When quantum computing came along, it was hoped that finally we might have a type of parallelism commensurate with the difficulty of NP-complete problems.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "In particular, they showed that any quantum algorithm that searches an unordered database of N items for a single marked item must query the database  N times.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "s result says that any quantum algorithm needs at least  2n/2 steps to find a satisfying assignment of  with high probability, unless the algorithm exploits the structure of  in a nontrivial way.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "s original proof, we first run our quantum algorithm on a database with no marked items.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "The crucial property of quantum mechanics that all three proofs exploit is its linearity: the fact that, until a measurement is made, the vector of amplitudes can only evolve by means of linear transformations.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "[13] to prove a so-called direct product theorem, which upper-bounds the probability of solving many database search problems simultaneously.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "It then shows that this direct product theorem could be violated, if the search problem were efficiently solvable using quantum advice.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "The quantum adiabatic theorem says that if a quantum computer starts in the ground state of H0, then it must end in the ground state of H1, provided the transition from H0 to H1 is slow enough.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "In my opinion, the crucial experiment (which has not yet been done) would be to compare the adiabatic algorithm head-on against simulated annealing and other classical heuristics.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "showed that the spectral gap (that is, the gap between the 6 -- 6 of 23 -- smallest and second-smallest eigenvalues) of some intermediate Hamiltonian decreases exponentially in n.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "We have never seen a physical law valid to over a dozen decimals.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "If we then apply Hadamard gates to the first register and measure that register, one can show that we will obtain the outcome |0    0 with probability at least 1/4.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Furthermore, conditioned on the first register having the state |0    0, the second register will be 8Personally, I agree, and consider this the main motivation for trying to build a quantum computer.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "To solve this, we can first prepare the state 1 2n/2  x1,...",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "For even in nonlinear theories, the amplitude of any basis state at time t is an easily-computable function of a small number of amplitudes at time t  1, and can therefore be computed in polynomial space using depth-first recursion.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b",
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "But what if we allow error, as any physically reasonable model of computation must?",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Indeed, a key feature of hidden-variable theories is that they reproduce the usual quantum-mechanical probabilities at any individual time, and so are empirically indistinguishable from ordinary quantum mechanics.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "It does not seem, therefore, that a hidden-variable quantum computer could possibly be more powerful than a garden-variety one.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Then measuring the third register yields a state of the form |i | if G and H are not isomorphic, or (|0 | + |1 | ) /2 for some  6 =  if they are isomorphic.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "The key point is that seeing a hidden variables history would effectively let us simulate non- collapsing measurements.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Valentini argues that the ||2 probability law merely reflects a statistical equilibrium (analogous to thermal equilibrium), and that it might be possible to find nonequilibrium matter (presum- ably left over from the Big Bang) in which the hidden variables still obey a different distribution.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "6 Relativity and Analog Computing If quantum computers cannot solve NP-complete problems efficiently, then perhaps we should turn to the other great theory of twentieth-century physics: relativity.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "00  108m1kg0s1one can obtain a fundamental unit of length known as the 10An interesting property of relativity is that it is always you who has to go somewhere or do something in these proposals, while the computer stays behind.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "They assume that, even if there do exist naked singularities, these are simply places where general relativity breaks down on length scales of order P , and must be replaced by a quantum theory of gravity.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Indeed, Bekenstein [16] gave an upper bound on the total information content of any isolated, weakly gravitating physical system, by assuming the Second Law of Thermodynamics and then considering a thought experiment in which the system is slowly lowered into a black hole.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b",
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "But I should stress that the holographic bound itself, and the existence of a Planck scale at which classical ideas about space and time break down, are generic conclusions that stand independently of any specific quantum gravity theory.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "The reason I have taken this detour into Planck-scale physics is that our current understanding seems to rule out, not only the Malament-Hogarth proposal, but all similar proposals for solving the halting problem in finite time.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "Yet in the literature on hypercomputation [28, 46], one still reads about machines that could bypass the Turing barrier by performing the first step of a computation in one second, the second in 1/2 second, the third in 1/4 second, and so on, so that after two seconds an infinite number of steps has been performed.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "For in principle, one can generally translate theorems about Turing machines into statements about what Turing computers could or could not do within the time and space bounds of the physical universe.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "Intuitively, one can use the first 2(n) bits in a real numbers binary expansion to encode an instance of the Quantified Boolean Formula problem, then use arithmetic operations to calculate the answer in parallel, and finally extract the binary result.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b",
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "The one clear result is due to Freedman, Kitaev, Larsen, and Wang [36, 37], who studied topological quantum field theories (TQFTs).",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "12Note that the ability to apply the floor function (or equivalently, to access a specific bit in a real numbers binary expansion) is essential here.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "As a result, Preskill [61] has pointed out that even if M-theory remains based on standard quantum mechanics, it might allow the efficient implementation of unitary transformations that would require exponential time on an ordinary quantum computer.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "So two years ago I spoke with Dan Christensen, a mathematician who along with Greg Egan gave an efficient algorithm [27] for calculating 10j symbols that has been crucial in the numerical study of spin foams.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": 0,
+      "preview": "arXiv:quant-ph/0502072v2 21 Feb 2005 NP-complete Problems and Physical Reality Scott Aaronson Abstract Can NP-complete problems be solved efficiently in the physical universe? I survey proposals including soap bubbles, protein folding, quantum computing, quantum advice, quantum adia- batic algorithm...",
+      "length": 83564,
+      "keyCount": 88
+    }
+  ],
+  "l0re": {
+    "thesis": [
+      {
+        "text": "The result was fascinating to watch: with 3 or 4 pegs, the optimum tree usually is found.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      },
+      {
+        "text": "s result says that any quantum algorithm needs at least  2n/2 steps to find a satisfying assignment of  with high probability, unless the algorithm exploits the structure of  in a nontrivial way.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      },
+      {
+        "text": "Intuitively, one can use the first 2(n) bits in a real numbers binary expansion to encode an instance of the Quantified Boolean Formula problem, then use arithmetic operations to calculate the answer in parallel, and finally extract the binary result.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b",
+          "\\b(first|second|third|finally)\\b"
+        ]
+      }
+    ],
+    "principles": [
+      {
+        "text": "And second, many physicists see computational complexity as about as relevant to the mysteries of Nature as dentistry or tax law.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b",
+          "\\b(first|second|third|finally)\\b"
+        ]
+      },
+      {
+        "text": "1 -- 1 of 23 -- eventually attain the same status as (say) the Second Law of Thermodynamics, or the impossibility of superluminal signalling.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b",
+          "\\b(first|second|third|finally)\\b"
+        ]
+      },
+      {
+        "text": "4Some people have objected that, while all of this might be true in practice, I still have not shown that soap bubbles cannot solve NP-complete problems in principle.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b"
+        ]
+      },
+      {
+        "text": "[13] to prove a so-called direct product theorem, which upper-bounds the probability of solving many database search problems simultaneously.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b"
+        ]
+      },
+      {
+        "text": "It then shows that this direct product theorem could be violated, if the search problem were efficiently solvable using quantum advice.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b"
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "text": "In other words, while experiment will always be the last appeal, the presumed intractability of NP-complete problems might be taken as a useful constraint in the search for new physical theories.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "Some of the proposals are better known than others, but to my knowledge, even the folklore ones have never before been collected in one place.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "1Naturally, the points coordinates must be specified to some finite precision.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "And indeed, several posters pointed out that, although soap bubbles might reach a minimum-energy configuration with a small number of pegs, there is no magical reason why this should be true in general.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "Id be willing to make a gentlemans bet that no one can site [sic] a paper which describes an experiment that shows that the global minimum is not always achieved with soap bubbles.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      }
+    ],
+    "stats": []
+  }
+}

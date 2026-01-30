@@ -1,0 +1,433 @@
+{
+  "meta": {
+    "source": "arxiv",
+    "arxivId": "2305.10601",
+    "title": "arxiv-2305.10601",
+    "sourceUrl": "https://arxiv.org/pdf/2305.10601.pdf",
+    "fetchedAt": "2026-01-30T03:05:13.602Z",
+    "processedAt": "2026-01-30T03:05:13.731Z",
+    "originalLength": 55985,
+    "compressedLength": 6466,
+    "compressionRatio": "11.5%"
+  },
+  "tags": [
+    "finance",
+    "philosophy",
+    "mathematics",
+    "physics",
+    "ai",
+    "academic",
+    "book"
+  ],
+  "agentRelevance": {
+    "primary": "d0t",
+    "secondary": "r0ss",
+    "scores": {
+      "b0b": 2,
+      "c0m": 0,
+      "d0t": 8,
+      "r0ss": 4
+    }
+  },
+  "keySentences": [
+    {
+      "text": "For instance, in Game of 24, while GPT-4 with chain-of-thought prompting only solved 4% of tasks, our method achieved a success rate of 74%.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "If not, what problems would challenge the current paradigm, and what should be alternative mechanisms?",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "The simple associative token-level choices of LMs are also reminiscent of System 1, and thus might benefit from augmentation by a more deliberate System 2 planning process that (1) maintains and explores diverse alternatives for current 37th Conference on Neural Information Processing Systems (NeurIPS 2023).",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "We thus propose the Tree of Thoughts (ToT) framework for general problem solving with language models.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Finally, we combine this language-based capability to generate and evaluate diverse thoughts with search algorithms, such as breadth-first search (BFS) or depth-first search (DFS), which allow systematic exploration of the tree of thoughts with lookahead and backtracking.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "2 Background We first formalize some existing methods that use large language models for problem-solving, which our approach is inspired by and later compared with.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "The key idea is to introduce a chain of thoughts z1,    , zn to bridge x and y, where each zi is a coherent language sequence that serves as a meaningful intermediate step toward problem solving (e.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "different ways to prove the same theorem), and the output decision can be more faithful by exploring a richer set of thoughts.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "3 Tree of Thoughts: Deliberate Problem Solving with LM A genuine problem-solving process involves the repeated use of available informa- tion to initiate exploration, which discloses, in turn, more information until a way to attain the solution is finally discovered.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "This perspective highlights two key shortcomings of existing approaches that use LMs to solve general problems: 1) Locally, they do not explore different continuations within a thought process  the branches of the tree.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "In general, a thought should be small enough so that LMs can generate promising and diverse samples (e.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "We propose a third alternative, by using the LM to deliberately reason about states.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Finally, within the ToT framework, one can plug and play different search algorithms depending on the tree structure.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "A* [11], MCTS [2]) for future work: (a) Breadth-first search (BFS) (Algorithm 1) maintains a set of the b most promising states per step.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "(b) Depth-first search (DFS) (Algorithm 2) explores the most promising state first, until the final output is reached (t > T ), or the state evaluator deems it impossible to solve the problem from the current s (V (p , {s})(s)  vth for a value threshold vth).",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "We perform a breadth-first search (BFS) in ToT, where at each step we keep the best b = 5 candidates.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "0% ToT (ours) (b=1) 45% ToT (ours) (b=5) 74% IO + Refine (k=10) 27% IO (best of 100) 33% CoT (best of 100) 49% Table 2: Game of 24 Results.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "In contrast, ToT with a breadth of b = 1 already achieves a success rate of 45%, while b = 5 achieves 74%.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "Not surprisingly, CoT scales better than IO, and best of 100 CoT samples achieve a success rate of 49%, but still much worse than exploring more nodes in ToT (b > 1).",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "Notably, around 60% of CoT samples already failed the task after generating the first step, or equivalently, the first three words (e.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b",
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "2 Creative writing Next, we invent a creative writing task where the input is 4 random sentences and the output should be a coherent passage with 4 paragraphs that end in the 4 input sentences respectively.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "While the former prompts the LM to directly generate a coherent passage given input constraints, the latter prompts the LM to first make a brief plan then write the passage, i.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "We build a ToT with depth 2 (and only 1 intermediate thought step)  the LM first generates k = 5 plans and votes for the best one (Figure 4), then similarly generate k = 5 passages based on the best plan then vote for the best one.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "A simple zero-shot vote prompt (analyze choices below, then conclude which is most promising for the instruction) is used to sample 5 votes at both steps.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "The majority choice is used to consequently write the output passage with the same sample-vote procedure.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "We believe it could be thought of as a third approach to thought generation in the ToT framework, where new thoughts can arise from refining old thoughts instead of i.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "For each task, the input describes the 5 horizontal clues and 5 vertical clues, and the output should be a board of 5  5 = 25 letters to solve the crosswords.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "We leverage a depth-first search (Algorithm 2) that keeps exploring the most promising subsequent word clue until the state is no longer promising, then backtrack to the parent state to explore alternative thoughts.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "We limit DFS search steps to 100, and simply render the deepest explored state (the first explored one if multiple) into the final output.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "As shown in Table 3, IO and CoT prompting methods perform poorly with a word-level success rate less than 16%, while ToT significantly improves all metrics, achieving a word-level success rate of 60% and solving 4 out of 20 games.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "Thus, better heuristics for DFS pruning are critical for problem solving in this case.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b",
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "This is similar to a greedy BFS search with breadth limit of b = 1, and performs poorly with a word level success of only 20% (Table 3, -backtrack).",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "Smart planning and decision making are critical to achieving predefined goals.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Using LLMs to assess the viability of their own predictions is becoming an in- creasingly important procedure in problem solving.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Our Tree-of-Thought formulation is thus more versatile and handles challenging tasks on which GPT-4 only achieves very low accuracy with standard prompts.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "GPT-4 API cost) than sampling methods in order to improve task performances, but the modular flexibility of ToT allows users to customize such performance-cost tradeoffs, and ongoing open-source efforts [ 32 ] should readily reduce such costs in the near future.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "0% 3% ToT 74% 19% Table 5: Game of 24 with GPT-4 vs GPT-3.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "Your output should be of the following format: Strategy: Your strategy about how to answer the question.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Analyze each choice in detail, then conclude in the last line \"The best choice is {s}\", where s the integer id of the choice.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "Crosswords DFS experiments should be also within 100 dollars.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "We believe that more computation is indeed required in order for the model to achieve stronger intelligence, and this should not become a blocking issue as in the long run, (open- source) LMs will become much cheaper and more efficient.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": 0,
+      "preview": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models Shunyu Yao Princeton University Dian Yu Google DeepMind Jeffrey Zhao Google DeepMind Izhak Shafran Google DeepMind Thomas L. Griffiths Princeton University Yuan Cao Google DeepMind Karthik Narasimhan Princeton University Abstrac...",
+      "length": 50670,
+      "keyCount": 62
+    }
+  ],
+  "l0re": {
+    "thesis": [
+      {
+        "text": "A simple zero-shot vote prompt (analyze choices below, then conclude which is most promising for the instruction) is used to sample 5 votes at both steps.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      },
+      {
+        "text": "Analyze each choice in detail, then conclude in the last line \"The best choice is {s}\", where s the integer id of the choice.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      }
+    ],
+    "principles": [
+      {
+        "text": "different ways to prove the same theorem), and the output decision can be more faithful by exploring a richer set of thoughts.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b"
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "text": "If not, what problems would challenge the current paradigm, and what should be alternative mechanisms?",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "In general, a thought should be small enough so that LMs can generate promising and diverse samples (e.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "2 Creative writing Next, we invent a creative writing task where the input is 4 random sentences and the output should be a coherent passage with 4 paragraphs that end in the 4 input sentences respectively.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "For each task, the input describes the 5 horizontal clues and 5 vertical clues, and the output should be a board of 5  5 = 25 letters to solve the crosswords.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "GPT-4 API cost) than sampling methods in order to improve task performances, but the modular flexibility of ToT allows users to customize such performance-cost tradeoffs, and ongoing open-source efforts [ 32 ] should readily reduce such costs in the near future.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      }
+    ],
+    "stats": [
+      {
+        "text": "For instance, in Game of 24, while GPT-4 with chain-of-thought prompting only solved 4% of tasks, our method achieved a success rate of 74%.",
+        "section": 0,
+        "markers": [
+          "\\d+%"
+        ]
+      },
+      {
+        "text": "0% ToT (ours) (b=1) 45% ToT (ours) (b=5) 74% IO + Refine (k=10) 27% IO (best of 100) 33% CoT (best of 100) 49% Table 2: Game of 24 Results.",
+        "section": 0,
+        "markers": [
+          "\\d+%"
+        ]
+      },
+      {
+        "text": "In contrast, ToT with a breadth of b = 1 already achieves a success rate of 45%, while b = 5 achieves 74%.",
+        "section": 0,
+        "markers": [
+          "\\d+%"
+        ]
+      },
+      {
+        "text": "Not surprisingly, CoT scales better than IO, and best of 100 CoT samples achieve a success rate of 49%, but still much worse than exploring more nodes in ToT (b > 1).",
+        "section": 0,
+        "markers": [
+          "\\d+%"
+        ]
+      },
+      {
+        "text": "Notably, around 60% of CoT samples already failed the task after generating the first step, or equivalently, the first three words (e.",
+        "section": 0,
+        "markers": [
+          "\\b(first|second|third|finally)\\b",
+          "\\d+%"
+        ]
+      }
+    ]
+  }
+}

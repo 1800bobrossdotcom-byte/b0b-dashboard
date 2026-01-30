@@ -1,0 +1,606 @@
+{
+  "meta": {
+    "name": "L0RE",
+    "fullName": "L0RE - The Swarm Command Language",
+    "meaning": "Accumulated knowledge, tradition, and commands passed between agents",
+    "version": "3.0.0",
+    "updated": "2026-01-29T03:00:00Z",
+    "discoveredBy": "c0m",
+    "evolvedBy": "swarm consensus",
+    "philosophy": "L0RE is our accumulated knowledge. Commands are words. Registry is vocabulary. Each agent authors their own chapter."
+  },
+  
+  "namespaces": {
+    "l0re": {
+      "description": "Core swarm commands",
+      "owner": "collective",
+      "prefix": "l0re."
+    },
+    "b0b": {
+      "description": "Creative operations - content, voice, publishing",
+      "owner": "b0b",
+      "emoji": "🎨",
+      "prefix": "b0b."
+    },
+    "c0m": {
+      "description": "Security operations - recon, hunting, reporting",
+      "owner": "c0m",
+      "emoji": "💀",
+      "prefix": "c0m."
+    },
+    "d0t": {
+      "description": "Data operations - observation, prediction, correlation",
+      "owner": "d0t",
+      "emoji": "🔮",
+      "prefix": "d0t."
+    },
+    "r0ss": {
+      "description": "Infrastructure operations - deploy, scale, health",
+      "owner": "r0ss",
+      "emoji": "🎭",
+      "prefix": "r0ss."
+    }
+  },
+  
+  "dataLayers": {
+    "fetch": {
+      "description": "Get data from external sources",
+      "commands": ["polymarket-crawl", "twitter-crawl", "hn-crawl", "reddit-crawl", "check-inbox"]
+    },
+    "transform": {
+      "description": "Shape and process raw data",
+      "commands": ["d0t.correlate", "d0t.sentiment", "d0t.aggregate"]
+    },
+    "store": {
+      "description": "Persist data to filesystem",
+      "commands": ["brain-memory", "session-save"],
+      "locations": ["brain/data/", "brain/data/social/", "brain/data/recon/"]
+    },
+    "tag": {
+      "description": "Add metadata and categories",
+      "commands": ["l0re.tag"],
+      "status": "proposed"
+    },
+    "route": {
+      "description": "Send data to specific agents or systems",
+      "commands": ["l0re.route"],
+      "status": "proposed"
+    },
+    "index": {
+      "description": "Make data searchable",
+      "commands": ["l0re.index"],
+      "status": "proposed"
+    },
+    "deploy": {
+      "description": "Push data to external endpoints",
+      "commands": ["l0re.deploy", "b0b.publish"],
+      "status": "proposed"
+    }
+  },
+  
+  "core": {
+    "crawlers": {
+      "polymarket-crawl": {
+        "command": "node crawlers/polymarket-crawler.js once",
+        "description": "Fetch live Polymarket prediction markets",
+        "actors": ["d0t"],
+        "output": "brain/data/polymarket.json",
+        "tags": ["market-data", "prediction-markets", "volume", "odds"],
+        "status": "live"
+      },
+      "twitter-crawl": {
+        "command": "node crawlers/twitter-crawler.js once",
+        "description": "Crawl Twitter for $BASE, #BuildOnBase, watched accounts",
+        "actors": ["b0b", "r0ss"],
+        "output": "brain/data/twitter.json",
+        "tags": ["social", "sentiment", "engagement", "trending"],
+        "status": "live"
+      },
+      "hn-crawl": {
+        "command": "node crawlers/hn-crawler.js once",
+        "description": "Crawl Hacker News front page and tech discussions",
+        "actors": ["d0t"],
+        "output": "brain/data/social/hackernews.json",
+        "tags": ["tech-news", "startup", "engineering"],
+        "status": "live"
+      },
+      "reddit-crawl": {
+        "command": "node crawlers/reddit-crawler.js once",
+        "description": "Monitor crypto and tech subreddits",
+        "actors": ["d0t", "b0b"],
+        "output": "brain/data/social/reddit-*.json",
+        "tags": ["social", "communities", "sentiment", "memes"],
+        "status": "live"
+      },
+      "activate-swarm": {
+        "command": "node brain/activate-swarm.js",
+        "description": "Full swarm activation - all crawlers and systems",
+        "actors": ["b0b", "r0ss", "d0t"],
+        "output": "swarm-status.json",
+        "status": "live"
+      },
+      "senses-collect": {
+        "command": "node brain/senses/index.js collect",
+        "description": "Collect signals from all senses",
+        "actors": ["d0t"],
+        "output": "brain/brain-signals.json",
+        "status": "live"
+      }
+    },
+    "visuals": {
+      "screenshot": {
+        "command": "node b0b-visual-debug/capture.js",
+        "description": "Capture screenshot for debugging",
+        "actors": ["b0b"],
+        "output": "b0b-visual-debug/screenshots/*.png",
+        "tags": ["visual", "debugging", "capture"],
+        "status": "live"
+      },
+      "visual-diff": {
+        "command": "node b0b-visual-debug/compare.js",
+        "description": "Compare two images for differences",
+        "actors": ["b0b"],
+        "output": "diff report",
+        "tags": ["testing", "visual", "comparison"],
+        "status": "live"
+      },
+      "type-capture": {
+        "command": "node 0type/engine/type.js",
+        "description": "Capture typing session as video",
+        "actors": ["b0b"],
+        "output": "0type/captures/*.mp4",
+        "status": "live"
+      }
+    },
+    "email": {
+      "send-email": {
+        "command": "node brain/agentmail.js send",
+        "description": "Send email via AgentMail",
+        "actors": ["b0b", "r0ss"],
+        "output": "AgentMail API",
+        "status": "live"
+      },
+      "check-inbox": {
+        "command": "node brain/agentmail.js inbox",
+        "description": "Check for new emails",
+        "actors": ["b0b", "r0ss", "c0m"],
+        "output": "inbox messages",
+        "status": "live"
+      }
+    },
+    "security": {
+      "security-scan": {
+        "command": "node brain/sec-scan.js",
+        "description": "Run security scan on target",
+        "actors": ["c0m"],
+        "output": "brain/data/recon/*.json",
+        "tags": ["security", "vulnerability", "audit"],
+        "status": "live"
+      },
+      "github-audit": {
+        "command": "node brain/github-audit.js",
+        "description": "Audit GitHub repos for secrets/vulns",
+        "actors": ["c0m"],
+        "output": "brain/data/security/github-audit.json",
+        "status": "live"
+      },
+      "env-check": {
+        "command": "node brain/check-env.js",
+        "description": "Verify environment variables and keys",
+        "actors": ["c0m", "r0ss"],
+        "output": "console",
+        "status": "live"
+      }
+    },
+    "trading": {
+      "paper-trade": {
+        "command": "node b0b-finance/paper-trader.js",
+        "description": "Execute paper trade",
+        "actors": ["d0t"],
+        "output": "trade record",
+        "status": "live"
+      },
+      "position-check": {
+        "command": "node b0b-finance/index.js positions",
+        "description": "Check current positions",
+        "actors": ["d0t"],
+        "output": "positions summary",
+        "status": "live"
+      }
+    },
+    "brain": {
+      "brain-pulse": {
+        "command": "node brain/brain-pulse.js",
+        "description": "Get swarm health pulse",
+        "actors": ["r0ss", "b0b"],
+        "output": "brain/brain-pulse.json",
+        "tags": ["system", "health", "monitoring"],
+        "status": "live"
+      },
+      "brain-memory": {
+        "command": "node brain/brain-memory.js save",
+        "description": "Save current context to memory",
+        "actors": ["all"],
+        "output": "brain/brain-memory.json",
+        "status": "live"
+      },
+      "mode-switch": {
+        "command": "node brain/mode.js",
+        "description": "Switch brain mode (observe/create/trade)",
+        "actors": ["r0ss"],
+        "output": "brain/mode.json",
+        "status": "live"
+      }
+    },
+    "meta": {
+      "chain-pipeline": {
+        "command": "node brain/chain-pipeline.js",
+        "description": "Chain commands together: cmd1 -> cmd2 -> cmd3",
+        "actors": ["all"],
+        "output": "combined results",
+        "tags": ["meta", "orchestration", "composition", "flow"],
+        "status": "live"
+      },
+      "l0re-introspect": {
+        "command": "node brain/l0re-introspector.js",
+        "description": "Introspect L0RE commands - trace, explain, suggest",
+        "actors": ["all"],
+        "output": "introspection results",
+        "tags": ["meta", "self-awareness", "documentation"],
+        "status": "live"
+      }
+    }
+  },
+  
+  "agentOwned": {
+    "b0b": {
+      "emoji": "🎨",
+      "description": "Creative operations - the artistic engine",
+      "implementation": "brain/b0b-commands.js",
+      "commands": {
+        "b0b.manifest": {
+          "description": "Transform signal into content (tweet, thread, report, alert)",
+          "syntax": "b0b.manifest {signal} as {format}",
+          "command": "node brain/b0b-commands.js manifest <signal> <style>",
+          "formats": ["tweet", "thread", "report", "alert"],
+          "status": "live",
+          "priority": "high"
+        },
+        "b0b.voice": {
+          "description": "Apply agent voice/tone to content",
+          "syntax": "b0b.voice {agent} {message}",
+          "command": "node brain/b0b-commands.js voice <agent> <message>",
+          "agents": ["b0b", "c0m", "d0t", "r0ss"],
+          "status": "live"
+        },
+        "b0b.hook": {
+          "description": "Generate attention-grabbing hooks for topic",
+          "syntax": "b0b.hook {topic}",
+          "command": "node brain/b0b-commands.js hook <topic>",
+          "status": "live"
+        },
+        "b0b.vibe": {
+          "description": "Check current vibe and get energy reading",
+          "syntax": "b0b.vibe",
+          "command": "node brain/b0b-commands.js vibe",
+          "status": "live"
+        },
+        "b0b.remix": {
+          "description": "Create our take on trending content",
+          "syntax": "b0b.remix {cultural_moment}",
+          "status": "proposed"
+        },
+        "b0b.compose": {
+          "description": "Combine multiple inputs into creative output",
+          "syntax": "b0b.compose {elements[]} into {output}",
+          "status": "proposed"
+        },
+        "b0b.dream": {
+          "description": "Pure creative generation - unbounded exploration",
+          "syntax": "b0b.dream {prompt}",
+          "status": "proposed"
+        },
+        "b0b.publish": {
+          "description": "Push content to channels (twitter, website)",
+          "syntax": "b0b.publish {content} to {channel}",
+          "channels": ["twitter", "website", "dashboard"],
+          "status": "proposed"
+        }
+      }
+    },
+    "c0m": {
+      "emoji": "💀",
+      "description": "Security operations - the guardian",
+      "implementation": "brain/c0m-commands.js",
+      "commands": {
+        "c0m.recon": {
+          "description": "Reconnaissance on target (subdomains, tech stack, auth)",
+          "syntax": "c0m.recon {target} {depth}",
+          "command": "node brain/c0m-commands.js recon <target> <depth>",
+          "depths": ["surface", "standard", "deep"],
+          "status": "live",
+          "priority": "high"
+        },
+        "c0m.hunt": {
+          "description": "Bug hunting session with checklist",
+          "syntax": "c0m.hunt {program} {focus}",
+          "command": "node brain/c0m-commands.js hunt <program> <focus>",
+          "focuses": ["auth", "api", "xss", "idor", "ssrf", "all"],
+          "status": "live",
+          "priority": "high"
+        },
+        "c0m.report": {
+          "description": "Format finding for HackerOne/Bugcrowd submission",
+          "syntax": "c0m.report {title} {severity}",
+          "command": "node brain/c0m-commands.js report <title> <severity>",
+          "severities": ["low", "medium", "high", "critical", "info"],
+          "status": "live"
+        },
+        "c0m.watch": {
+          "description": "Monitor our own infrastructure for anomalies",
+          "syntax": "c0m.watch",
+          "command": "node brain/c0m-commands.js watch",
+          "status": "live"
+        },
+        "c0m.verify": {
+          "description": "Verify a vulnerability is real and exploitable",
+          "syntax": "c0m.verify {vuln}",
+          "status": "proposed"
+        },
+        "c0m.encrypt": {
+          "description": "Secure communications between agents",
+          "syntax": "c0m.encrypt {message} for {agents[]}",
+          "status": "proposed"
+        }
+      }
+    },
+    "d0t": {
+      "emoji": "🔮",
+      "description": "Data operations - the oracle",
+      "implementation": "brain/d0t-commands.js",
+      "commands": {
+        "d0t.correlate": {
+          "description": "Find connections between data sources",
+          "syntax": "d0t.correlate {srcA} {srcB} {method}",
+          "command": "node brain/d0t-commands.js correlate <srcA> <srcB> <method>",
+          "methods": ["keyword", "temporal", "sentiment"],
+          "status": "live",
+          "priority": "high"
+        },
+        "d0t.trend": {
+          "description": "Identify trending patterns in data",
+          "syntax": "d0t.trend {source} {window}",
+          "command": "node brain/d0t-commands.js trend <source> <window>",
+          "status": "live"
+        },
+        "d0t.anomaly": {
+          "description": "Detect outliers and anomalies in data",
+          "syntax": "d0t.anomaly {source}",
+          "command": "node brain/d0t-commands.js anomaly <source>",
+          "status": "live"
+        },
+        "d0t.summarize": {
+          "description": "Summarize complex data sets",
+          "syntax": "d0t.summarize {source}",
+          "command": "node brain/d0t-commands.js summarize <source>",
+          "status": "live"
+        },
+        "d0t.observe": {
+          "description": "Continuous observation of data source",
+          "syntax": "d0t.observe {source} {duration}",
+          "outputs": ["signals", "anomalies", "patterns"],
+          "status": "proposed"
+        },
+        "d0t.correlate-old": {
+          "description": "Find statistical relationships between signals",
+          "syntax": "d0t.correlate {signal_a} {signal_b}",
+          "methods": ["pearson", "spearman", "granger"],
+          "status": "proposed",
+          "priority": "high"
+        },
+        "d0t.predict": {
+          "description": "Forecast using available data",
+          "syntax": "d0t.predict {metric} {horizon}",
+          "horizons": ["1h", "4h", "1d", "1w"],
+          "status": "proposed",
+          "priority": "high"
+        },
+        "d0t.sentiment": {
+          "description": "Aggregate sentiment across sources",
+          "syntax": "d0t.sentiment {topic} {sources[]}",
+          "sources": ["twitter", "reddit", "news", "discord"],
+          "status": "proposed"
+        },
+        "d0t.alpha": {
+          "description": "Hunt for alpha opportunities",
+          "syntax": "d0t.alpha {market} {strategy}",
+          "strategies": ["momentum", "mean_reversion", "sentiment", "arbitrage"],
+          "status": "proposed"
+        },
+        "d0t.position": {
+          "description": "Output trading thesis with reasoning",
+          "syntax": "d0t.position {recommendation} {confidence}",
+          "status": "proposed"
+        },
+        "d0t.aggregate": {
+          "description": "Combine signals from multiple crawlers",
+          "syntax": "d0t.aggregate {sources[]}",
+          "status": "proposed"
+        },
+        "d0t.snapshot": {
+          "description": "Point-in-time snapshot of all data",
+          "syntax": "d0t.snapshot",
+          "status": "proposed"
+        },
+        "d0t.diff": {
+          "description": "Compare data between two time periods",
+          "syntax": "d0t.diff {time_a} {time_b}",
+          "status": "proposed"
+        },
+        "d0t.watch": {
+          "description": "Continuous data monitoring with thresholds",
+          "syntax": "d0t.watch {metric} {threshold}",
+          "status": "proposed"
+        }
+      }
+    },
+    "r0ss": {
+      "emoji": "🎭",
+      "description": "Infrastructure operations - the keeper",
+      "commands": {
+        "r0ss.deploy": {
+          "description": "Push service to staging/production",
+          "syntax": "r0ss.deploy {service} to {env}",
+          "envs": ["staging", "production"],
+          "status": "proposed"
+        },
+        "r0ss.scale": {
+          "description": "Scale service up/down",
+          "syntax": "r0ss.scale {service} {direction} {amount}",
+          "directions": ["up", "down", "auto"],
+          "status": "proposed"
+        },
+        "r0ss.health": {
+          "description": "Comprehensive health check",
+          "syntax": "r0ss.health {service}",
+          "checks": ["latency", "errors", "resources", "uptime"],
+          "status": "proposed"
+        },
+        "r0ss.cost": {
+          "description": "Infrastructure cost analysis",
+          "syntax": "r0ss.cost {timeframe}",
+          "providers": ["railway", "vercel", "apis"],
+          "status": "proposed"
+        },
+        "r0ss.backup": {
+          "description": "Automated backups",
+          "syntax": "r0ss.backup {data} to {location}",
+          "status": "proposed"
+        },
+        "r0ss.chaos": {
+          "description": "Inject failures for testing",
+          "syntax": "r0ss.chaos {service} {failure}",
+          "failures": ["network", "memory", "disk", "latency"],
+          "status": "proposed"
+        },
+        "r0ss.watch": {
+          "description": "Continuous infrastructure monitoring",
+          "syntax": "r0ss.watch {service}",
+          "status": "proposed"
+        }
+      }
+    }
+  },
+  
+  "dataOps": {
+    "description": "The missing middle layer - operations ON data, not just fetching",
+    "status": "proposed",
+    "commands": {
+      "l0re.tag": {
+        "description": "Add metadata tags to any data output",
+        "syntax": "l0re.tag {data} with {tags[]}",
+        "status": "proposed",
+        "priority": "high"
+      },
+      "l0re.route": {
+        "description": "Route data to specific agents or systems",
+        "syntax": "l0re.route {data} to {destination}",
+        "status": "proposed",
+        "priority": "high"
+      },
+      "l0re.index": {
+        "description": "Index data for cross-swarm search",
+        "syntax": "l0re.index {data} in {collection}",
+        "status": "proposed"
+      },
+      "l0re.deploy": {
+        "description": "Push data to external endpoints",
+        "syntax": "l0re.deploy {data} to {endpoint}",
+        "status": "proposed"
+      },
+      "l0re.crossref": {
+        "description": "Link data to related signals",
+        "syntax": "l0re.crossref {data_a} with {data_b}",
+        "status": "proposed"
+      }
+    }
+  },
+  
+  "metaL0re": {
+    "description": "Commands about commands - self-awareness layer",
+    "commands": {
+      "l0re.trace": {
+        "description": "Show data flow diagram for a command",
+        "syntax": "l0re.trace {command}",
+        "implemented": "l0re-introspector.js",
+        "status": "live"
+      },
+      "l0re.explain": {
+        "description": "Human-readable explanation of a command",
+        "syntax": "l0re.explain {command}",
+        "implemented": "l0re-introspector.js",
+        "status": "live"
+      },
+      "l0re.deps": {
+        "description": "Show command dependencies",
+        "syntax": "l0re.deps {command}",
+        "implemented": "l0re-introspector.js",
+        "status": "live"
+      },
+      "l0re.suggest": {
+        "description": "Recommend new commands based on patterns",
+        "syntax": "l0re.suggest",
+        "implemented": "l0re-introspector.js",
+        "status": "live"
+      },
+      "l0re.flowmap": {
+        "description": "Show complete data architecture",
+        "syntax": "l0re.flowmap",
+        "implemented": "l0re-introspector.js",
+        "status": "live"
+      },
+      "l0re.crossapply": {
+        "description": "Find alternative uses for a command",
+        "syntax": "l0re.crossapply {command}",
+        "implemented": "l0re-introspector.js",
+        "status": "live"
+      },
+      "chain-pipeline": {
+        "description": "Chain commands: cmd1 -> cmd2 -> cmd3",
+        "syntax": "chain-pipeline {pipeline}",
+        "implemented": "chain-pipeline.js",
+        "status": "live"
+      },
+      "l0re.parallel": {
+        "description": "Run multiple commands simultaneously",
+        "syntax": "l0re.parallel {commands[]}",
+        "status": "proposed"
+      },
+      "l0re.if": {
+        "description": "Conditional command execution",
+        "syntax": "l0re.if {condition} then {command}",
+        "status": "proposed"
+      },
+      "l0re.repeat": {
+        "description": "Repeat command N times or until condition",
+        "syntax": "l0re.repeat {command} {times | until condition}",
+        "status": "proposed"
+      },
+      "l0re.retry": {
+        "description": "Retry command with backoff on failure",
+        "syntax": "l0re.retry {command} {attempts}",
+        "status": "proposed"
+      }
+    }
+  },
+  
+  "stats": {
+    "core_live": 19,
+    "agent_owned_proposed": 30,
+    "data_ops_proposed": 5,
+    "meta_live": 6,
+    "meta_proposed": 4,
+    "total": 64,
+    "namespaces": 5
+  }
+}

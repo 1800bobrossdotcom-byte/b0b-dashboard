@@ -1,0 +1,505 @@
+{
+  "meta": {
+    "source": "arxiv",
+    "arxivId": "1801.00862",
+    "title": "arxiv-1801.00862",
+    "sourceUrl": "https://arxiv.org/pdf/1801.00862.pdf",
+    "fetchedAt": "2026-01-30T03:05:20.547Z",
+    "processedAt": "2026-01-30T03:05:20.746Z",
+    "originalLength": 68529,
+    "compressedLength": 11555,
+    "compressionRatio": "16.9%"
+  },
+  "tags": [
+    "quantum",
+    "finance",
+    "mathematics",
+    "physics",
+    "ai"
+  ],
+  "agentRelevance": {
+    "primary": "d0t",
+    "secondary": "r0ss",
+    "scores": {
+      "b0b": 3,
+      "c0m": 2,
+      "d0t": 12,
+      "r0ss": 4
+    }
+  },
+  "keySentences": [
+    {
+      "text": "NISQ devices will be useful tools for exploring many-body quantum physics, and may have other useful applications, but the 100-qubit quantum computer will not change the world right away  we should regard it as a significant step toward the more powerful quantum technologies of the future.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Quantum technologists should continue to strive for more accurate quantum gates and, eventually, fully fault-tolerant quantum computing.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "While this uncertainty fuels optimism, our optimism should be tempered with caution.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Now, for the first time in human history, we are acquiring and perfecting the tools to build and precisely control very complex, highly entangled quantum states of many particles, states so complex that we cant simulate them with our best digital computers or characterize them well using existing theoretical tools.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "With quantum computers we should be able to probe more deeply into the properties of complex molecules and exotic materials, and also to explore fundamental physics in new ways, for example by simulating the properties of elementary particles, or the quantum behavior of a black hole, or the evolution of the universe right after the big bang.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "For an ordinary classical 100-page book, every time you read another page you learn another 1% of the content of the book, and after you have read all of the pages one by one you know everything thats in the book.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "Thats quantum entanglement, the essential feature making information carried by quantum systems very different from information processed by ordinary digital computers.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "But to build highly complex entangled quantum systems, the fundamental information-carrying components of a quantum computer must be quantum bits, what we call qubits.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "It will never be possible, even in principle, to write that description down, or to faithfully describe the processing of a few hundred qubits using classical language.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "First, we know of problems that are believed to be hard for classical computers, but for which quantum algo- rithms have been discovered that could solve these problems easily.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "We should recognize in particular that the power of a quantum computer is not unlimited.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "At the same time, though, we want the qubits to strongly interact with one another so we can process the information; we also need to be able to control the system from the outside, and eventually read out the qubits so we can find the result of our computation.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "Eventually we expect to be able to protect quantum systems and scale up quantum computers using the principle of quantum error correction [10].",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "The essential idea of quantum error correction is that if we want to protect a quantum system from damage then we should encode it in a very highly entangled state; like that 100-page book I described earlier, this entangled state has the property that the environment, interacting with parts of the system one at a time, is unable to glimpse the encoded information and therefore cant damage it.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b",
+        "\\b(important|crucial|key|essential|critical)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Furthermore, weve understood in principle how to process quantum information which is encoded in a highly entangled state.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "We shouldnt expect NISQ is to change the world by itself; instead it should be regarded as a step toward more powerful quantum technologies well develop in the future.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "The time it takes to execute a single gate is also important for setting the time scale needed for a quantum computer to solve a problem, and it is noteworthy that superconducting circuits are about a thousand times faster than ion trap quantum processors.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "We need to be able to prepare and measure qubits accurately; currently the measurement error probability is about 1% for superconducting qubits, and much better than that for trapped ions.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "It is also important to know how reliably we can fabricate qubits  if we attempt to construct a many-qubit device, how many of the qubits actually perform well enough to be useful?",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "These considerations and others, too, should be kept in mind when we make comparisons across different quantum computing platforms.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "There are some very interesting and important aspects of quantum technology that Im not really going to talk about, but Ill mention them so youll know Im not going to talk about them.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "We foresee disruptive effects of quantum computers on how we protect our privacy  the public key cryptosystems that are in widespread use today will become obsolete in the years ahead because they can be easily broken by sufficiently powerful quantum computers.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "We should be thinking now about how were going to protect our privacy in the future.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "(2) Quantum key distribution, quantum networks, and quantum repeaters.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Quantum key distribution exploits the principle that you cannot eavesdrop on quantum communication without producing a detectable disturbance [17].",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b",
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "But we dont yet have the technology to distribute quantum entan- glement, and hence secret key, around the world; thats another interesting techno- logical challenge [18].",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b",
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "It is also notable that, aside from applications to key exchange, a global quantum network might be used for other purposes, like sharing information among quantum devices.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Quantum systems can sense weak forces with better sensitivity and higher spatial resolution than other sensing technologies [21]; thus quantum sensing could have relatively near-term high-impact applications, to medicine for example.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": ") In any case, we should recognize that the power of classical computers will continue to increase, with exascale systems (surpassing 1018 FLOPS) expected to be available in a few years.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "But from a commercial perspective, obviously we should pay at- tention to whether the task is useful!",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "We should also bear in mind that, because of the imperfect performance of NISQ technology, it may be hard to validate that a quantum computer is really giving the right answer.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "So its important for researchers to continue seeking better methods for verifying the output of a quantum computer.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "In particular, aside from the applications of quantum annealers to classical optimization problems, applications to quantum simulation problems should also be explored [34].",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Nevertheless, methods for mitigating the effects of noise may be an important consideration during the NISQ era.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "However, at least for some problems and algorithms, that conclusion might be too pessimistic.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "We should be wary, though, of a potential tradeoff  making a quantum circuit more noise resilient may also make it easier to simulate classically.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "First, though, Ill comment on the potential of quantum deep learning [39].",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "For applications to large classical data sets one should take into account the cost of encoding the input into QRAM, which can nullify the potential advantages.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Hence we might expect a quantum network to have advantages over a classical one when used, for example, to control a complex quantum system.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "The algorithm we call HHL [40] (after the three authors who first discussed it nine years ago) takes as input a succinct representation of a very large N N matrix A, which has to be sufficiently sparse and well conditioned, and also as input an N -component vector |b, encoded in QRAM as a quantum state of log N qubits.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "The output of the quantum algorithm is (with a small error) the quantum state |A1b, the result of applying the inverse of the matrix A to the input vector |b.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "However, aside from the caveat that the matrix A must be sparse and well conditioned, note that both the input vector |b and the output vector |A1b are quantum states.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "This small rank indicates that there are only a limited number of customer types; therefore, once we know a few of the preferences of a new customer, we can accurately recommend other products that customer will like.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "In the first stage, performed offline, a low rank approximation to the preference matrix P is constructed.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "In the second Accepted in Quantum 2018-07-30, click title to verify 11 -- 11 of 20 -- stage, performed online, a new customer reveals some preferences, and the system outputs a recommendation which that customer will like with high probability.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "It is this second online stage that admits a quantum speedup.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "For semidefinite programs with the right structure, the efficient preparation of the Gibbs state is possible, and therefore the exponential speedup really is feasible.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "It is not yet clear to what extent these properties apply to semidef- inite programs of practical interest; clarifying that issue is an important goal for further research.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "It is intriguing that the crucial step in the quantum algorithm is the preparation of a thermal state at a nonzero temperature.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Conceivably, then, a quantum solver 3Note added: After this paper was submitted, Tang [45] exhibited a quantum-inspired classical algo- rithm which returns a high-value recommendation in runtime O(poly(k)polylog(mn)); thus the quantum algorithm proposed in [44] does not in fact achieve an exponential speedup compared to the best classical algorithm performing the same task.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": 0,
+      "preview": "Quantum Computing in the NISQ era and beyond John Preskill Institute for Quantum Information and Matter and Walter Burke Institute for Theoretical Physics, California Institute of Technology, Pasadena CA 91125, USA 30 July 2018 Noisy Intermediate-Scale Quantum (NISQ) technology will be available in ...",
+      "length": 68312,
+      "keyCount": 68
+    }
+  ],
+  "l0re": {
+    "thesis": [
+      {
+        "text": "At the same time, though, we want the qubits to strongly interact with one another so we can process the information; we also need to be able to control the system from the outside, and eventually read out the qubits so we can find the result of our computation.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      },
+      {
+        "text": "However, at least for some problems and algorithms, that conclusion might be too pessimistic.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      },
+      {
+        "text": "The output of the quantum algorithm is (with a small error) the quantum state |A1b, the result of applying the inverse of the matrix A to the input vector |b.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      }
+    ],
+    "principles": [
+      {
+        "text": "It will never be possible, even in principle, to write that description down, or to faithfully describe the processing of a few hundred qubits using classical language.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b",
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "Eventually we expect to be able to protect quantum systems and scale up quantum computers using the principle of quantum error correction [10].",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b"
+        ]
+      },
+      {
+        "text": "Furthermore, weve understood in principle how to process quantum information which is encoded in a highly entangled state.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b"
+        ]
+      },
+      {
+        "text": "Quantum key distribution exploits the principle that you cannot eavesdrop on quantum communication without producing a detectable disturbance [17].",
+        "section": 0,
+        "markers": [
+          "\\b(important|crucial|key|essential|critical)\\b",
+          "\\b(principle|law|rule|theorem)\\b"
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "text": "NISQ devices will be useful tools for exploring many-body quantum physics, and may have other useful applications, but the 100-qubit quantum computer will not change the world right away  we should regard it as a significant step toward the more powerful quantum technologies of the future.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "Quantum technologists should continue to strive for more accurate quantum gates and, eventually, fully fault-tolerant quantum computing.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "While this uncertainty fuels optimism, our optimism should be tempered with caution.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "With quantum computers we should be able to probe more deeply into the properties of complex molecules and exotic materials, and also to explore fundamental physics in new ways, for example by simulating the properties of elementary particles, or the quantum behavior of a black hole, or the evolution of the universe right after the big bang.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "But to build highly complex entangled quantum systems, the fundamental information-carrying components of a quantum computer must be quantum bits, what we call qubits.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      }
+    ],
+    "stats": [
+      {
+        "text": "For an ordinary classical 100-page book, every time you read another page you learn another 1% of the content of the book, and after you have read all of the pages one by one you know everything thats in the book.",
+        "section": 0,
+        "markers": [
+          "\\d+%"
+        ]
+      },
+      {
+        "text": "We need to be able to prepare and measure qubits accurately; currently the measurement error probability is about 1% for superconducting qubits, and much better than that for trapped ions.",
+        "section": 0,
+        "markers": [
+          "\\d+%"
+        ]
+      }
+    ]
+  }
+}

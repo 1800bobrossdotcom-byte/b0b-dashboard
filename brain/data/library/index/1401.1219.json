@@ -1,0 +1,518 @@
+{
+  "meta": {
+    "source": "arxiv",
+    "arxivId": "1401.1219",
+    "title": "arxiv-1401.1219",
+    "sourceUrl": "https://arxiv.org/pdf/1401.1219.pdf",
+    "fetchedAt": "2026-01-30T03:05:06.301Z",
+    "processedAt": "2026-01-30T03:05:06.742Z",
+    "originalLength": 170189,
+    "compressedLength": 43560,
+    "compressionRatio": "25.6%"
+  },
+  "tags": [
+    "quantum",
+    "finance",
+    "philosophy",
+    "mathematics",
+    "physics",
+    "ai",
+    "accessible"
+  ],
+  "agentRelevance": {
+    "primary": "d0t",
+    "secondary": "r0ss",
+    "scores": {
+      "b0b": 2,
+      "c0m": 0,
+      "d0t": 11,
+      "r0ss": 4
+    }
+  },
+  "keySentences": [
+    {
+      "text": "Tensor factorization of matrices is found to play a central role, and our technical results include a theorem about Hamiltonian separability (defined using Hilbert-Schmidt superoperators) being maximized in the energy eigenbasis.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "Consciousness in physics A commonly held view is that consciousness is irrel- evant to physics and should therefore not be discussed in physics papers.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Another argument is that physics has been man- aged just fine for hundreds of years by avoiding this sub- ject, and should therefore keep doing so.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "This question lies at the heart of the contro- versies surrounding the holographic principle, black hole complementarity and firewalls, and depends crucially on the role of observers [1, 2].",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "Finally, out of all of the possible fac- torizations of Hilbert space, why is the particular factor- ization corresponding to classical space so special?",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "The key assumption in this paper is that consciousness is a property of certain physical systems, with no se- cret sauce or non-physical elements.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Rather, it is an investigation into the physical properties that conscious systems must have.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "It this approach should turn out to be successful, then all observed aspects of reality must emerge from the mathematical formalism alone: for example, the Born rule for subjective randomness associated with observation would emerge from the underlying deterministic density matrix evo- lution through Everetts approach, and both a semiclassical world and consciousness should somehow emerge as well, perhaps though processes generalizing decoherence.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "derstood what these physical properties were, then we could in principle answer all of the above-mentioned open physics questions by studying the equations of physics: we could identify all conscious entities in any physical system, and calculate what they would perceive.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "Integration: This information must be integrated into a unified whole, i.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": ", it must be impossible to decompose the system into nearly independent parts, because otherwise these parts would subjec- tively feel like two separate conscious entities.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "But when we view a brain or computer through our physi- cists eyes, as myriad moving particles, then what physical properties of the system should be interpreted as logical 2 Since its inception [8], IIT has been further developed [12].",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "I interpret as a bit both the po- sition of certain electrons in my computers RAM mem- ory (determining whether the micro-capacitor is charged) and the position of certain sodium ions in your brain (de- termining whether a neuron is firing), but on the basis of what principle?",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "Surely there should be some way of identifying consciousness from the particle motions alone, or from the quantum state evolution, even without this information interpretation?",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Consciousness as a state of matter Generations of physicists and chemists have studied what happens when you group together vast numbers of atoms, finding that their collective behavior depends on the pattern in which they are arranged: the key differ- ence between a solid, a liquid and a gas lies not in the types of atoms, but in their arrangement.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "However, this should not preclude us from identifying, quantifying, modeling and ultimately understanding the characteristic properties that all liquid forms of matter (or all conscious forms of matter) share.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "What are the corresponding physical parameters that can help us identify conscious matter, and what are the key physical features that characterize it?",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "If such param- eters can be identified, understood and measured, this will help us identify (or at least rule out) consciousness from the outside, without access to subjective intro- spection.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "This could be important for reaching consen- sus on many currently controversial topics, ranging from the future of artificial intelligence to determining when an animal, fetus or unresponsive patient can feel pain.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "If would also be important for fundamental theoretical physics, by allowing us to identify conscious observers in our universe by using the equations of physics and thereby answer thorny observation-related questions such as those mentioned in the introductory paragraph.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Memory As a first warmup step toward consciousness, let us first consider a state of matter that we would character- ize as memory3  what physical features does it have?",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "For example, solids have many long-lived states, whereas liquids and gases do not: if you engrave some- ones name on a gold ring, the information will still be there years later, but if you engrave it in the surface of a pond, it will be lost within a second as the water surface changes its shape.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Computronium As a second warmup step, what properties should we ascribe to what Margolus and Toffoli have termed com- 3 Neuroscience research has demonstrated that long-term mem- ory is not necessary for consciousness.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Rather than just remain immobile as a gold ring, it must exhibit com- plex dynamics so that its future state depends in some complicated (and hopefully controllable/programmable) way on the present state.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Its atom arrangement must be less ordered than a rigid solid where nothing interest- ing changes, but more ordered than a liquid or gas.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Computer vendors often parametrize computing power in FLOPS, floating-point operations per second for 64-bit numbers; more generically, we can parametrize computronium ca- pable of universal computation by FLIPS: the number of elementary logical operations such as bit flips that it can perform per second.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "If Tononi is right, then it should not merely be able to store and pro- cess information like computronium does, but it should also satisfy the principle that its information is inte- grated, forming a unified and indivisible whole.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Let us also conjecture another principle that conscious systems must satisfy: that of autonomy, i.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b",
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Autonomy is thus the combination of two separate properties: dynamics and independence.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Here dynamics means time dependence (hence informa- tion processing capacity) and independence means that the dynamics is dominated by forces from within rather than outside the system.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Our goal with isolating and studying these principles is Principle Definition Information A conscious system has substantial principle information storage capacity.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "Dynamics A conscious system has substantial principle information processing capacity.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "Independence A conscious system has substantial principle independence from the rest of the world.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "Integration A conscious system cannot consist of principle nearly independent parts.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "Autonomy A conscious system has substantial principle dynamics and independence.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "Utility An evolved conscious system records mainly principle information that is useful for it.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "The fifth principle simply combines the second and third.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b",
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "For example, the only property of consciousness that Hugh Everett needed to assume for his work on quantum measurement was that of the infor- mation principle: by applying the Schrodinger equation to systems that could record and store information, he inferred that they would perceive subjective randomness in accordance with the Born rule.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "In this spirit, we might hope that adding further simple requirements such as in the integration principle, the independence principle and the dynamics principle might suffice to solve currently open problems related to observation.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "The last princi- ple listed in Table II, the utility principle, is of a differ- ent character than the others: we consider it not as a necessary condition for consciousness, but as a potential unifying evolutionary explanation of the others.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "In Sec- tion II, we explore the integration principle by quanti- fying integrated information in physical systems, finding encouraging results for classical systems and interesting challenges introduced by quantum mechanics.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "In Sec- tion III, we explore the independence principle, finding that at least one additional principle is required to ac- count for the observed factorization of our physical world into an object hierarchy in three-dimensional space.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "In Section IV, we explore the dynamics principle and other possibilities for reconciling quantum-mechanical theory with our observation of a semiclassical world.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "We dis- cuss our conclusions in Section V, including applications of the utility principle, and cover various mathematical details in the three appendices.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "The more robust an object is, the more useful it is for us humans to perceive it as an object and coin a name for it, as per the above- mentioned utility principle.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "On the second line, we have decom- posed H into three terms: the internal energy of the proton-neutron nucleus, the internal (kinetic) energy of the electron, and the electromagnetic electron-nucleus in- teraction.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "We can therefore fruitfully approx- imate the nucleus and the electron as separate objects that are almost independent, interacting only weakly with one another.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "The key point here is that we could have performed this object-finding exercise of dividing the variables into two groups to find the greatest indepen- dence (analogous to what Tononi calls the cruelest cut) based on the functional form of H alone, without even having heard of electrons or nuclei, thereby identifying their degrees of freedom through a purely mathematical exercise.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "In summary, if a Hamiltonian can be decomposed without an interaction term (with H3 = 0), then it describes two perfectly independent systems.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "If H3 = 0, entanglement between the two systems thus cannot have any observable effects.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": 0,
+      "preview": "Consciousness as a State of Matter Max Tegmark Dept. of Physics & MIT Kavli Institute, Massachusetts Institute of Technology, Cambridge, MA 02139 (Dated: Accepted for publication in Chaos, Solitons & Fractals March 17, 2015) We examine the hypothesis that consciousness can be understood as a state o...",
+      "length": 168228,
+      "keyCount": 222
+    }
+  ],
+  "l0re": {
+    "thesis": [
+      {
+        "text": "In summary, if a Hamiltonian can be decomposed without an interaction term (with H3 = 0), then it describes two perfectly independent systems.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      },
+      {
+        "text": "We will see that the quantum results in the next section bolster the case for conclusion 3.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      },
+      {
+        "text": "Interestingly, there is also support for conclusion 2 in the large psychophysical literature on the illusion of the perceptual richness of the world.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      }
+    ],
+    "principles": [
+      {
+        "text": "Tensor factorization of matrices is found to play a central role, and our technical results include a theorem about Hamiltonian separability (defined using Hilbert-Schmidt superoperators) being maximized in the energy eigenbasis.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b"
+        ]
+      },
+      {
+        "text": "This question lies at the heart of the contro- versies surrounding the holographic principle, black hole complementarity and firewalls, and depends crucially on the role of observers [1, 2].",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b"
+        ]
+      },
+      {
+        "text": "It this approach should turn out to be successful, then all observed aspects of reality must emerge from the mathematical formalism alone: for example, the Born rule for subjective randomness associated with observation would emerge from the underlying deterministic density matrix evo- lution through Everetts approach, and both a semiclassical world and consciousness should somehow emerge as well, perhaps though processes generalizing decoherence.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b",
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "derstood what these physical properties were, then we could in principle answer all of the above-mentioned open physics questions by studying the equations of physics: we could identify all conscious entities in any physical system, and calculate what they would perceive.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b"
+        ]
+      },
+      {
+        "text": "I interpret as a bit both the po- sition of certain electrons in my computers RAM mem- ory (determining whether the micro-capacitor is charged) and the position of certain sodium ions in your brain (de- termining whether a neuron is firing), but on the basis of what principle?",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b"
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "text": "Consciousness in physics A commonly held view is that consciousness is irrel- evant to physics and should therefore not be discussed in physics papers.",
+        "section": 0,
+        "markers": [
+          "\\b(therefore|thus|hence|consequently)\\b",
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "Another argument is that physics has been man- aged just fine for hundreds of years by avoiding this sub- ject, and should therefore keep doing so.",
+        "section": 0,
+        "markers": [
+          "\\b(therefore|thus|hence|consequently)\\b",
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "Rather, it is an investigation into the physical properties that conscious systems must have.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "It this approach should turn out to be successful, then all observed aspects of reality must emerge from the mathematical formalism alone: for example, the Born rule for subjective randomness associated with observation would emerge from the underlying deterministic density matrix evo- lution through Everetts approach, and both a semiclassical world and consciousness should somehow emerge as well, perhaps though processes generalizing decoherence.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b",
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "Integration: This information must be integrated into a unified whole, i.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      }
+    ],
+    "stats": [
+      {
+        "text": "The point defined by the pair (S, ) can lie anywhere in the pyra- mid in the figure, whos top at (S, ) = (1, 1) (black star) gives maximum integration, and corresponds to per- fect correlation between the two bits: 50% probability for 00 and 11.",
+        "section": 0,
+        "markers": [
+          "\\d+%"
+        ]
+      },
+      {
+        "text": "The other two vertices of the classically allowed region are seen to be (S, ) = (0, 0) (100% probability for a sin- gle outcome) and (S, ) = (2, 0) (equal probability for all four outcomes).",
+        "section": 0,
+        "markers": [
+          "\\d+%"
+        ]
+      }
+    ]
+  }
+}

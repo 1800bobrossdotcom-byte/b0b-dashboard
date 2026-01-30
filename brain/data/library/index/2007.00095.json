@@ -1,0 +1,454 @@
+{
+  "meta": {
+    "source": "arxiv",
+    "arxivId": "2007.00095",
+    "title": "arxiv-2007.00095",
+    "sourceUrl": "https://arxiv.org/pdf/2007.00095.pdf",
+    "fetchedAt": "2026-01-30T03:34:38.791Z",
+    "processedAt": "2026-01-30T03:34:39.120Z",
+    "originalLength": 161331,
+    "compressedLength": 8880,
+    "compressionRatio": "5.5%"
+  },
+  "tags": [
+    "philosophy",
+    "mathematics",
+    "physics",
+    "ai"
+  ],
+  "agentRelevance": {
+    "primary": "d0t",
+    "secondary": "b0b",
+    "scores": {
+      "b0b": 16,
+      "c0m": 8,
+      "d0t": 18,
+      "r0ss": 16
+    }
+  },
+  "keySentences": [
+    {
+      "text": "It should be noted that due to the broad scope of this review and the large body of work on the vision-based prediction, this review will only focus on works that had been published since five years ago in major computer vision, robotics and machine learning venues.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "2 VISION-BASED PREDICTION Before reviewing the works on vision-based prediction al- gorithms, there are a number of points that should be considered.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "It should be noted that we only include an algorithm in each category arXiv:2007.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "It should be noted that many algorithms, especially trajectory prediction ones, only use ground truth data such as object trajectories without actual visual processing, e.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Hence, for example, if an algorithm uses a CNN model for pre-processing input data and a recurrent network for temporal reasoning, we consider this algorithm as recur- rent.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "In addition, it should be noted that many works propose alternative approaches using each architecture.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Therefore, we categorize them in more than one group.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "In [15], the authors use a two-step approach in which they first perform a coarse frame prediction followed by a fine frame prediction.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "[1] disentangle flow and pixel- level predictions into two steps: the algorithm first predicts the flow of the scene, and then uses it, in conjunction with the input frames, to predict the future.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "The second branch produces motion information by receiving two frames that are k steps apart (i.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "[18] first identify keypoints, which may correspond to important structures such as joints, and then predict their motion.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b",
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "1 Summary Video prediction algorithms are based on generative models that produce future images given a short observation, or in extreme cases a single view of the scene.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "This can be an issue for safety- critical applications such as autonomous driving in which the presence or absence of traffic elements and the interac- tions between them are essential for action planning.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "more complex features such as encodings of pedestrian appearances enter the network at the bottom layer, whereas location and speed features enter at the second-last and last layers respectively.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "In [75], the method uses a two-stage architecture: First information regarding the appearance of the scene, optical flow (pre-processed using a CNN) and vehicle dynamics are fed into individual LSTM units.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Before concluding this section, it is important to discuss the use of attention modules which have gained popularity in recent years [63], [64], [68], [74], [79], [82], [84], [87], [88], [89].",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Some of these modules are temporal attention [63], [82], [89] for identifying keyframes, modality attention [64], [68] to prioritize between different modalities of data input, spatial attention [79], [84] for highlighting the important parts of the scenes, and graph attention [88] for weighting nodes of the graph.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "1 Summary In the field of action anticipation, RNN architectures are strongly preferred.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "Feedforward models, on the other hand, can perform prediction in one shot, meaning that they can simultaneously perform temporal reasoning and spatial feature generation in a single framework, and as a result, potentially have a shorter processing time.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "As a result, the simultaneous learning of different tasks can be beneficial.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "The method of [105] uses a two-step LSTM architecture which first generates an encoding of the context using context-aware convolutional features and then combines these encodings with action-aware convolutional features to predict the action.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "1 Summary Early action detection methods have many commonali- ties with action anticipation algorithms in terms of archi- tectural design.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "For example, the method in [183] uses a two-stream LSTM encoder-decoder scheme: first stream encodes the current ego-vehicles odometry (steering angle and speed) and the last observation of the scene and predicts future odometry of the vehicle.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "The second stream is a trajectory stream that jointly encodes location information of pedestrians and the ego-vehicles odometry and then combines the encoding with the prediction of the odometry stream to predict the future trajectories of the pedestrians.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "[165] predict the future trajectories of vehicles in two steps: First, an encoder-decoder GRU architecture predicts future trajectories by observing the past ones.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "1 Summary Trajectory prediction is a widely studied field in the com- puter vision community.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "A number of approaches successfully have included a subset of these factors, but a more comprehensive approach should be considered.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "First, the input poses are fed into an autoencoder which is comprised of fully connected layerss (implemented by 1D convolutions with a kernel size of 1) and self-attention blocks.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "1 Summary Motion prediction algorithms primarily focus on the pre- diction of changes in the dynamics (i.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "can potentially result in more robust predictions, as shown in other prediction ap- plications.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "9 THE EVALUATION OF STATE-OF-THE-ART When it comes to the evaluation of algorithms, there are two important factors: metrics and datasets.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "A summary of the metrics can be found in Figure 1.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "1 Video prediction Video prediction is about generating realistic images, hence the best performance is achieved when the disparities be- tween the generated images and groundtruth images are minimal.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "The lower the error between two images, the higher the value of PSNR, and consequently, the higher the quality of the generated images.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "As a result, the similarity is measured by a combination of three comparisons, namely luminance, contrast, and structure.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "This then would result in a high accuracy measure because the metric only considers the ratio of correct predictions.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "A few works predict the orientations of pedestrians [131], [154], [234] or vehicles [77], therefore also report performance using Mean angular error (MAnE).",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "5 Other prediction applications Depending on the task objectives, the metrics used in other prediction applications are similar to the ones discussed thus far.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Given that OGM prediction algorithms are mainly used in safety-critical applications such as autonomous driv- ing, some algorithms are also evaluated in terms of their Run Time (RT) [205], [206], [209].",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "We provide a summary of the datasets and their characteristics in Tables 1 and 2 and briefly discuss more popular datasets in each field.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": ", Vehicle sensors x CMU Panoptic [270] Interaction RGBD, Multiview, 3D Pose, 3D facial landmark x x x First Person Personalized Activities (FPPA) [95] Activities (ego) RGB, Activity, Temporal seg.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "6M [237] Activities RGB, 3D Pose, Activity x x x MPII Human Pose [281] Activities RGB, Pose, Activity x Online RGBD Action Dataset (ORGBD) [282] Activities RGBD, BB, 3D Pose, Activity x Sports-1M [283] Sports RGB, Activity x x TABLE 1: A summary of common datasets from years 2014-2019 used in vision-based prediction applications, namely video (V), action (A), trajectory (T), motion (M) and others (O).",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": ", Gaze x 2006 Tuscan Arizona [330] Weather RGB x 2004 KTH [331] Activities Grayscale, Activity x 1981 Golden Colorado [332] Weather RGB x TABLE 2: A summary of common datasets from years 2013 and earlier used in vision-based prediction applications, namely video (V), action (A), trajectory (T), motion (M) and others (O).",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "For instance, video applications mainly rely on images but also take advantage of alternative rep- resentations, such as optical flow, poses, object-based key- points, and report improved results.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Mo- tion prediction algorithms are more focusing on individual movements in diverse context, therefore predominantly use Human3.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "The performances of action prediction algorithms are still sub-optimal, especially in safety critical and complex tasks such as event prediction in traffic scenes.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "To make predictions in such cases, many modalities of data and the relationships between them should be considered which is often not the case in the proposed approaches.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Kim, Unsupervised key- point learning for guiding class-conditional video prediction, in NeurIPS, 2019.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Kitani, First-person activity forecasting with online inverse reinforcement learning, in ICCV, 2017.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "Soo Park, Predicting behaviors of basketball players from first person videos, in CVPR, 2017.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": 0,
+      "preview": "1 Deep Learning for Vision-based Prediction: A Survey Amir Rasouli AbstractVision-based prediction algorithms have a wide range of applications including autonomous driving, surveillance, human-robot interaction, weather prediction. The objective of this paper is to provide an overview of the field ...",
+      "length": 159903,
+      "keyCount": 57
+    }
+  ],
+  "l0re": {
+    "thesis": [
+      {
+        "text": "1 Summary Video prediction algorithms are based on generative models that produce future images given a short observation, or in extreme cases a single view of the scene.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      },
+      {
+        "text": "1 Summary In the field of action anticipation, RNN architectures are strongly preferred.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      },
+      {
+        "text": "Feedforward models, on the other hand, can perform prediction in one shot, meaning that they can simultaneously perform temporal reasoning and spatial feature generation in a single framework, and as a result, potentially have a shorter processing time.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      }
+    ],
+    "principles": [],
+    "actions": [
+      {
+        "text": "It should be noted that due to the broad scope of this review and the large body of work on the vision-based prediction, this review will only focus on works that had been published since five years ago in major computer vision, robotics and machine learning venues.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "2 VISION-BASED PREDICTION Before reviewing the works on vision-based prediction al- gorithms, there are a number of points that should be considered.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "It should be noted that we only include an algorithm in each category arXiv:2007.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "It should be noted that many algorithms, especially trajectory prediction ones, only use ground truth data such as object trajectories without actual visual processing, e.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "In addition, it should be noted that many works propose alternative approaches using each architecture.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      }
+    ],
+    "stats": []
+  }
+}

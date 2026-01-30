@@ -1,0 +1,289 @@
+{
+  "meta": {
+    "source": "arxiv",
+    "arxivId": "1507.03628",
+    "title": "arxiv-1507.03628",
+    "sourceUrl": "https://arxiv.org/pdf/1507.03628.pdf",
+    "fetchedAt": "2026-01-30T03:12:50.556Z",
+    "processedAt": "2026-01-30T03:12:50.767Z",
+    "originalLength": 33940,
+    "compressedLength": 3774,
+    "compressionRatio": "11.1%"
+  },
+  "tags": [
+    "finance",
+    "philosophy",
+    "physics",
+    "accessible"
+  ],
+  "agentRelevance": {
+    "primary": "d0t",
+    "secondary": "b0b",
+    "scores": {
+      "b0b": 7,
+      "c0m": 4,
+      "d0t": 12,
+      "r0ss": 6
+    }
+  },
+  "keySentences": [
+    {
+      "text": "An important feature of these materials is that the electron pockets near the M points are almost completely gone via the topological Lif- shitz transition at x  0.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Thus, the electronic properties are governed by the three hole pockets near the  point.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Importantly, the su- perconducting critical temperature does not vary signif- icantly for doping levels just below or above the Lifshitz transition [23].",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Subsequent measurements [13] of the changes in the superconducting critical tem- perature with pressure P in KFe2As2 have revealed an evolution from a d-wave gap for P < Pc to a s gap for P > Pc.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "The resistivity measurements were carried out on samples with an ac electrical current Iab flowing in ab plane and with H always perpendicular to Iab.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "Thus, the measured specific heat can be expressed in terms of electronic and lattice contribu- tions as C  Ce + Cph.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Consequently, the temperature dependence of the entropy S is given by [45]: S =  6n 2kB   0 [f\u000flnf\u000f + (1  f\u000f)ln(1  f\u000f)]d\u000f, (1) where integration is over single particle energies \u000f, and f\u000f = [exp(\u000f2 + 2(T )/kB T ) + 1]1 is the Fermi-Dirac distribution function.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Based on this, we used a super- position of three different SC gaps 0i (i = 1, 2, 3), hence three different Ce with different relative contribu- tion weights ri: Ce(T ) = 3  i=1 riCe(0i, T ).",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "The field dependence of the zero-temperature Sommer- feld coefficient  for H||ab planes, in principle, allows us to probe the relative sign between two components of -- 3 of 7 -- 4 0 2 4 6 8 10 0.",
+      "section": 0,
+      "markers": [
+        "\\b(principle|law|rule|theorem)\\b"
+      ]
+    },
+    {
+      "text": "the superconducting order parameter, assuming that the third component has been fully suppressed by the mag- netic field.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "The impurity amount is about 6% since this value of c is only 6% of n.",
+      "section": 0,
+      "markers": [
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "As we discuss in detail in the next paragraph, the H dependence at low fields is the result of the change in the sign of the SC order parameter across different Fermi pockets [32] and also emphasizes the role of disorder-induced scattering.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "Therefore, a 6% disorder, as observed for this dop- ing, seems to be sufficient to give the H dependence in (H), i.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b",
+        "\\d+%"
+      ]
+    },
+    {
+      "text": "This result when compared with the other studies, in- cluding the most recent one by Kim et al.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "(Color online) The upper critical field Hc2 vs T phase diagram of Ba0.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "The presence of such an interplay is somewhat surpris- ing given that the field configuration H||ab should lead to the much more dominant role of the Pauli limiting effects down to small magnetic fields just as it happens in the 115 heavy-fermion superconductors such as CeCoIn5.",
+      "section": 0,
+      "markers": [
+        "\\b(must|should|always|never)\\b"
+      ]
+    },
+    {
+      "text": "In order to quantify the contributions the orbital and Pauli limiting effects, we study the temperature depen- dence of the upper critical field H|| c2(T ) for H||ab planes.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "The superconducting critical temperatures under dif- ferent fields with H||ab planes and H||c axis were de- termined using the isoentropic method discuss earlier and shown in Fig.",
+      "section": 0,
+      "markers": [
+        "\\b(important|crucial|key|essential|critical)\\b"
+      ]
+    },
+    {
+      "text": "Thus, we determined Tc(H) from the resistivity (T, H) data as the temperature of zero resistivity.",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "This behavior is a result of the increase of the vortex contribution to dissipation with increasing H.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "Thus, the zero-resistivity Tc(H) at higher field values is underestimating the thermodynamic Tc(H).",
+      "section": 0,
+      "markers": [
+        "\\b(therefore|thus|hence|consequently)\\b"
+      ]
+    },
+    {
+      "text": "Notice that this latter result only reproduces the Hc2(T ) data at low fields (H < 3.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "In summary, all these results clearly show that, for H||ab, the orbital effects dominate at low fields (H < 3.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    },
+    {
+      "text": "Usually, this type of behavior is a signature for an in- stability which ultimately results in a first order transi- tion manifested in discontinuous changes in thermody- namic quantities such as magnetization or thermal ex- pansion coefficient.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "However, the detailed investigation of a first order transition in magnetic field goes beyond the scope of this paper.",
+      "section": 0,
+      "markers": [
+        "\\b(first|second|third|finally)\\b"
+      ]
+    },
+    {
+      "text": "SUMMARY In summary, we have studied the bulk properties of Ba0.",
+      "section": 0,
+      "markers": [
+        "\\b(conclude|conclusion|summary|result)\\b"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": 0,
+      "preview": "Orbital and Pauli limiting effects in heavily doped Ba1xKxFe2As2 Shuai Zhang,1 Y. P. Singh,1 X. Y. Huang,1 X. J. Chen,2 M. Dzero,1, 3 and C. C. Almasan1 1Department of Physics, Kent State University, Kent, Ohio 44242, USA 2Center for High Pressure Science and Technology Advanced Research, Shanghai 2...",
+      "length": 33690,
+      "keyCount": 27
+    }
+  ],
+  "l0re": {
+    "thesis": [
+      {
+        "text": "As we discuss in detail in the next paragraph, the H dependence at low fields is the result of the change in the sign of the SC order parameter across different Fermi pockets [32] and also emphasizes the role of disorder-induced scattering.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      },
+      {
+        "text": "This result when compared with the other studies, in- cluding the most recent one by Kim et al.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      },
+      {
+        "text": "This behavior is a result of the increase of the vortex contribution to dissipation with increasing H.",
+        "section": 0,
+        "markers": [
+          "\\b(conclude|conclusion|summary|result)\\b"
+        ]
+      }
+    ],
+    "principles": [
+      {
+        "text": "The field dependence of the zero-temperature Sommer- feld coefficient  for H||ab planes, in principle, allows us to probe the relative sign between two components of -- 3 of 7 -- 4 0 2 4 6 8 10 0.",
+        "section": 0,
+        "markers": [
+          "\\b(principle|law|rule|theorem)\\b"
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "text": "The resistivity measurements were carried out on samples with an ac electrical current Iab flowing in ab plane and with H always perpendicular to Iab.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      },
+      {
+        "text": "The presence of such an interplay is somewhat surpris- ing given that the field configuration H||ab should lead to the much more dominant role of the Pauli limiting effects down to small magnetic fields just as it happens in the 115 heavy-fermion superconductors such as CeCoIn5.",
+        "section": 0,
+        "markers": [
+          "\\b(must|should|always|never)\\b"
+        ]
+      }
+    ],
+    "stats": [
+      {
+        "text": "The impurity amount is about 6% since this value of c is only 6% of n.",
+        "section": 0,
+        "markers": [
+          "\\d+%"
+        ]
+      },
+      {
+        "text": "Therefore, a 6% disorder, as observed for this dop- ing, seems to be sufficient to give the H dependence in (H), i.",
+        "section": 0,
+        "markers": [
+          "\\b(therefore|thus|hence|consequently)\\b",
+          "\\d+%"
+        ]
+      }
+    ]
+  }
+}
