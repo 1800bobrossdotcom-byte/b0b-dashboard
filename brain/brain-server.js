@@ -435,6 +435,28 @@ app.get('/pulse', async (req, res) => {
         reasoning: d0tSignals.turb0.reasoning,
         agents: d0tSignals.turb0.agents
       };
+    } else if (d0tSignals) {
+      // FALLBACK: Generate simple decision if TURB0 engine didn't run
+      const predictions = d0tSignals.predictions || [];
+      const topVolume = predictions[0]?.volume24h || 0;
+      const onchainTVL = d0tSignals.onchain?.base_tvl || 0;
+      
+      turb0Decision = {
+        decision: topVolume > 10000000 ? 'BUY' : 'HOLD',
+        confidence: topVolume > 10000000 ? 0.6 : 0.4,
+        reasoning: [
+          `Top market: ${predictions[0]?.question?.substring(0, 50) || 'N/A'}`,
+          `Volume: $${(topVolume / 1e6).toFixed(1)}M`,
+          `Base TVL: $${(onchainTVL / 1e9).toFixed(2)}B`,
+          'TURB0 engine initializing...'
+        ],
+        agents: {
+          d0t: { state: 'ANALYZING', vote: 'NEUTRAL' },
+          c0m: { state: 'MONITORING', vote: 'NEUTRAL' },
+          b0b: { state: 'WATCHING', vote: 'NEUTRAL' },
+          r0ss: { state: 'READY', vote: 'NEUTRAL' }
+        }
+      };
     }
     
     // ═══════════════════════════════════════════════════════════════
