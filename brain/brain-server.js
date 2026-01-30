@@ -261,8 +261,90 @@ app.get('/health', async (req, res) => {
     timestamp: state.lastHeartbeat,
     uptime: state.uptime,
     agents: Object.keys(AGENTS),
+    memory: process.memoryUsage(),
     message: "B0B brain is thinking... 🧠",
   });
+});
+
+// Main pulse endpoint - comprehensive swarm status for dashboards
+app.get('/pulse', async (req, res) => {
+  try {
+    const state = await loadState();
+    
+    // Load d0t signals if available
+    let d0tSignals = null;
+    try {
+      const signalsPath = path.join(DATA_DIR, 'd0t-signals.json');
+      const data = await fs.readFile(signalsPath, 'utf8');
+      d0tSignals = JSON.parse(data);
+    } catch (e) { /* d0t signals not available */ }
+    
+    // Load brain pulse
+    let brainPulse = null;
+    try {
+      const pulsePath = path.join(__dirname, 'brain-pulse.json');
+      const data = await fs.readFile(pulsePath, 'utf8');
+      brainPulse = JSON.parse(data);
+    } catch (e) { /* pulse not available */ }
+    
+    // Load learnings
+    let learnings = [];
+    try {
+      const learningsDir = path.join(DATA_DIR, 'learnings');
+      const files = await fs.readdir(learningsDir);
+      const jsonFiles = files.filter(f => f.endsWith('.json')).slice(-5);
+      for (const file of jsonFiles) {
+        try {
+          const content = await fs.readFile(path.join(learningsDir, file), 'utf8');
+          const parsed = JSON.parse(content);
+          learnings.push({
+            file,
+            title: parsed.title,
+            agent: parsed.agent,
+            summary: parsed.summary?.slice(0, 100)
+          });
+        } catch (e) { /* skip bad files */ }
+      }
+    } catch (e) { /* no learnings dir */ }
+    
+    res.json({
+      timestamp: new Date().toISOString(),
+      identity: brainPulse?.identity || 'w3 ar3',
+      status: 'alive',
+      swarm: {
+        agents: Object.keys(AGENTS),
+        active: Object.values(AGENTS).filter(a => a.active !== false).length,
+        identity: brainPulse?.identity || 'w3 ar3'
+      },
+      d0t: {
+        signals: d0tSignals ? {
+          timestamp: d0tSignals.timestamp,
+          fearGreed: d0tSignals.fearGreed,
+          polymarket: d0tSignals.polymarket ? {
+            totalVolume: d0tSignals.polymarket.totalVolume,
+            topMarkets: (d0tSignals.polymarket.topMarkets || []).slice(0, 3)
+          } : null,
+          onChain: d0tSignals.onChain ? {
+            ethPrice: d0tSignals.onChain.ethPrice,
+            btcPrice: d0tSignals.onChain.btcPrice,
+            solPrice: d0tSignals.onChain.solPrice
+          } : null
+        } : null
+      },
+      brainStats: {
+        uptime: state.uptime,
+        lastHeartbeat: state.lastHeartbeat,
+        memoryMB: Math.round(process.memoryUsage().heapUsed / 1024 / 1024)
+      },
+      learnings,
+      message: '🧠 Swarm consciousness active'
+    });
+  } catch (error) {
+    res.status(500).json({ 
+      error: 'Pulse failed',
+      timestamp: new Date().toISOString()
+    });
+  }
 });
 
 // ═══════════════════════════════════════════════════════════════

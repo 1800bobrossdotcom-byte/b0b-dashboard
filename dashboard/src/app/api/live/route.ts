@@ -1,193 +1,144 @@
 /**
  * Live Data API Route
  * 
- * Serves real-time data from our crawlers and swarm activity.
+ * Serves real-time data from the BRAIN API (Railway hosted)
  * Powers the living dashboard on b0b.dev
+ * 
+ * FIX: Now fetches from brain API instead of local filesystem
+ * The brain runs on Railway and exposes all data via HTTP endpoints
  */
 
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+
+// Brain API - the swarm's central nervous system
+const BRAIN_URL = process.env.BRAIN_URL || 'https://b0b-brain-production.up.railway.app';
+
+async function fetchBrainData(endpoint: string, fallback: any = null) {
+  try {
+    const res = await fetch(`${BRAIN_URL}${endpoint}`, {
+      next: { revalidate: 30 }, // Cache for 30 seconds
+      headers: { 'Accept': 'application/json' }
+    });
+    if (!res.ok) throw new Error(`Brain ${endpoint} returned ${res.status}`);
+    return await res.json();
+  } catch (e) {
+    console.error(`Brain fetch ${endpoint} failed:`, e);
+    return fallback;
+  }
+}
 
 export async function GET() {
   try {
-    // Read from brain/data if available
-    const brainPath = path.join(process.cwd(), '..', 'brain', 'data');
-    const brainRoot = path.join(process.cwd(), '..', 'brain');
-    
+    // Fetch from brain API in parallel for speed
+    const [health, pulse, crawlers, l0reEncode] = await Promise.all([
+      fetchBrainData('/health', { status: 'unknown' }),
+      fetchBrainData('/pulse', null),
+      fetchBrainData('/crawlers', { agents: [] }),
+      fetchBrainData('/l0re/encode/swarm', { codename: 'w3.ar3' })
+    ]);
+
     const data: Record<string, any> = {
       timestamp: new Date().toISOString(),
-      status: 'operational',
+      status: health?.status === 'alive' ? 'operational' : 'degraded',
+      brainConnected: health?.status === 'alive',
+      brainUrl: BRAIN_URL,
       swarm: {
         agents: ['b0b', 'c0m', 'd0t', 'r0ss'],
-        identity: 'w3 ar3'
+        identity: 'w3 ar3',
+        l0reSignature: l0reEncode?.codename || 'f.sw4rm'
       },
       sources: {},
       signals: {},
       learnings: []
     };
 
-    // Load polymarket data
-    try {
-      const polymarketPath = path.join(brainPath, 'polymarket.json');
-      if (fs.existsSync(polymarketPath)) {
-        const raw = fs.readFileSync(polymarketPath, 'utf8');
-        const polymarket = JSON.parse(raw);
-        data.sources.polymarket = {
-          active: true,
-          lastUpdate: polymarket.timestamp,
-          totalVolume24h: polymarket.data?.volume24h || 0,
-          marketCount: polymarket.data?.markets?.length || 0,
-          topMarkets: (polymarket.data?.markets || []).slice(0, 5).map((m: any) => ({
-            question: m.question,
-            volume24h: m.volume24h,
-            price: JSON.parse(m.outcomePrices || '[]')[0]
-          }))
-        };
-      }
-    } catch (e) {
-      data.sources.polymarket = { active: false };
-    }
-
-    // Load twitter data
-    try {
-      const twitterPath = path.join(brainPath, 'twitter.json');
-      if (fs.existsSync(twitterPath)) {
-        const raw = fs.readFileSync(twitterPath, 'utf8');
-        const twitter = JSON.parse(raw);
-        data.sources.twitter = {
-          active: true,
-          lastUpdate: twitter.timestamp,
-          totalTweets: twitter.data?.summary?.totalTweets || 0,
-          watchedAccounts: twitter.data?.summary?.totalAccounts || 0,
-          live: twitter.data?.summary?.hasRealData || false
-        };
-      }
-    } catch (e) {
-      data.sources.twitter = { active: false };
-    }
-
-    // Load brain signals
-    try {
-      const signalsPath = path.join(brainRoot, 'brain-signals.json');
-      if (fs.existsSync(signalsPath)) {
-        const raw = fs.readFileSync(signalsPath, 'utf8');
-        const signals = JSON.parse(raw);
+    // Extract data from pulse if available
+    if (pulse) {
+      data.swarm.lastActivation = pulse.timestamp;
+      data.swarm.identity = pulse.identity || 'w3 ar3';
+      
+      // Extract d0t signals if present
+      if (pulse.d0t?.signals) {
         data.signals = {
-          count: signals.signalCount || 0,
-          lastUpdate: signals.timestamp,
-          types: [...new Set((signals.signals || []).map((s: any) => s.type))],
-          recent: (signals.signals || []).slice(0, 5).map((s: any) => ({
-            type: s.type,
-            title: s.title?.slice(0, 60),
-            source: s.source
-          }))
+          fearGreed: pulse.d0t.signals.fearGreed,
+          polymarket: pulse.d0t.signals.polymarket,
+          lastUpdate: pulse.d0t.signals.timestamp
         };
       }
-    } catch (e) {
-      data.signals = { count: 0 };
+      
+      // Extract any learnings
+      if (pulse.learnings && Array.isArray(pulse.learnings)) {
+        data.learnings = pulse.learnings.slice(0, 5);
+      }
+      
+      // Brain stats
+      if (pulse.brainStats) {
+        data.brainStats = pulse.brainStats;
+      }
     }
 
-    // Load learnings
-    try {
-      const learningsPath = path.join(brainPath, 'learnings');
-      if (fs.existsSync(learningsPath)) {
-        const files = fs.readdirSync(learningsPath).filter(f => f.endsWith('.json')).slice(-5);
-        data.learnings = files.map(f => {
-          try {
-            const content = JSON.parse(fs.readFileSync(path.join(learningsPath, f), 'utf8'));
-            return {
-              file: f,
-              title: content.title,
-              summary: content.summary?.slice(0, 100),
-              date: content.date || f.slice(0, 10)
-            };
-          } catch {
-            return { file: f };
+    // Process crawler data
+    if (crawlers?.agents) {
+      data.crawlers = {
+        total: crawlers.agents.length,
+        agents: crawlers.agents.map((a: any) => ({
+          name: a.name,
+          focus: a.focus,
+          capabilities: a.capabilities?.length || 0
+        }))
+      };
+      
+      // Build sources from crawler capabilities
+      for (const agent of crawlers.agents) {
+        if (agent.capabilities) {
+          for (const cap of agent.capabilities) {
+            data.sources[cap] = { active: true, agent: agent.name };
           }
-        });
+        }
       }
-    } catch (e) {
-      data.learnings = [];
     }
 
-    // Load swarm status
-    try {
-      const statusPath = path.join(brainRoot, 'swarm-status.json');
-      if (fs.existsSync(statusPath)) {
-        const raw = fs.readFileSync(statusPath, 'utf8');
-        const status = JSON.parse(raw);
-        data.swarm.lastActivation = status.timestamp;
-        data.swarm.systems = Object.keys(status.systems || {}).length;
-        data.swarm.activeCount = Object.values(status.systems || {})
-          .filter((s: any) => s.active !== false).length;
-      }
-    } catch (e) {
-      // No status file
-    }
-    
-    // Load TURB0B00ST trading data (try local dev path first, then public folder for Vercel)
-    try {
-      let turbPath = path.join(process.cwd(), '..', 'b0b-finance', 'turb0b00st-state.json');
-      if (!fs.existsSync(turbPath)) {
-        turbPath = path.join(process.cwd(), 'public', 'data', 'turb0b00st-state.json');
-      }
-      if (fs.existsSync(turbPath)) {
-        const raw = fs.readFileSync(turbPath, 'utf8');
-        const turb = JSON.parse(raw);
-        data.turb0b00st = {
-          active: turb.activated || false,
-          mode: turb.mode || 'PAPER',
-          trades: turb.tradingHistory?.length || 0,
-          recentTrades: (turb.tradingHistory || []).slice(-3).reverse(),
-          dailyStats: turb.dailyStats,
-        };
-      } else {
-        // Hardcoded fallback for initial deployment
-        data.turb0b00st = { active: true, mode: 'LIVE', trades: 6 };
-      }
-    } catch (e) {
-      data.turb0b00st = { active: true, mode: 'LIVE', trades: 6 };
-    }
-    
-    // Load L0RE collection (try local dev path first, then public folder for Vercel)
-    try {
-      let l0rePath = path.join(process.cwd(), '..', 'b0b-finance', 'l0re-collection.json');
-      if (!fs.existsSync(l0rePath)) {
-        l0rePath = path.join(process.cwd(), 'public', 'data', 'l0re-collection.json');
-      }
-      if (fs.existsSync(l0rePath)) {
-        const raw = fs.readFileSync(l0rePath, 'utf8');
-        const l0re = JSON.parse(raw);
-        data.l0re = {
-          totalMinted: l0re.totalMinted || 0,
-          pieces: l0re.pieces || [],
-        };
-      } else {
-        data.l0re = { totalMinted: 1, pieces: [] };
-      }
-    } catch (e) {
-      data.l0re = { totalMinted: 1, pieces: [] };
-    }
-
-    // System health
+    // System health - check what's actually running
     data.system = {
+      brain: health?.status === 'alive',
+      uptime: health?.uptime || 0,
+      memory: health?.memory || {},
       crawlers: {
-        polymarket: data.sources.polymarket?.active || false,
-        twitter: data.sources.twitter?.active || false,
-        signals: data.signals?.count > 0
+        d0t: data.sources['market-sentiment'] || data.sources['polymarket'] ? true : false,
+        c0m: data.sources['cve-monitor'] || data.sources['security-advisories'] ? true : false,
+        b0b: data.sources['hn-trends'] || data.sources['color-palettes'] ? true : false,
+        r0ss: data.sources['arxiv-papers'] ? true : false
       },
       services: {
+        'brain.railway': health?.status === 'alive',
         'b0b.dev': true,
         'd0t.b0b.dev': true,
         '0type.b0b.dev': true
       }
     };
 
+    // Trading data placeholder - will come from brain finance endpoints
+    data.turb0b00st = {
+      active: true,
+      mode: 'PAPER',
+      trades: 0,
+      note: 'Connect to brain /finance endpoint for live data'
+    };
+
+    // L0RE collection placeholder
+    data.l0re = {
+      totalMinted: 1,
+      lexiconActive: true,
+      note: 'L0RE Lexicon available at /l0re/encode/:concept'
+    };
+
     return NextResponse.json(data);
   } catch (error) {
+    console.error('Live API error:', error);
     return NextResponse.json({ 
       error: 'Failed to fetch live data',
+      brainUrl: BRAIN_URL,
+      hint: 'Brain API may be unreachable',
       timestamp: new Date().toISOString() 
     }, { status: 500 });
   }
