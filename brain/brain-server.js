@@ -3818,105 +3818,108 @@ app.post('/c0m/browser/recon', async (req, res) => {
 // START SERVER
 // =============================================================================
 
-app.listen(PORT, async () => {
+app.listen(PORT, () => {
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   console.log('  B0B BRAIN SERVER — Autonomous Operation');
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   console.log(`  Port: ${PORT}`);
   console.log(`  Status: ONLINE`);
   console.log(`  Agents: ${Object.keys(AGENTS).join(', ')}`);
-  console.log(`  Live Trader: STARTING...`);
+  console.log(`  Live Trader: DEFERRED (non-blocking)`);
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   
-  // Initial heartbeat
-  await heartbeat();
+  // ═══════════════════════════════════════════════════════════════════════════
+  // MILSPEC PERFORMANCE: All startup tasks are now NON-BLOCKING
+  // Server is ONLINE and responding to health checks immediately
+  // Background tasks start after a 2-second delay to allow warmup
+  // ═══════════════════════════════════════════════════════════════════════════
   
-  // Schedule heartbeat every 5 minutes
-  setInterval(heartbeat, 5 * 60 * 1000);
-  
-  // Auto-start Polymarket crawler - FAST MODE (2 min)
-  if (axios) {
-    await crawlPolymarket();
-    setInterval(crawlPolymarket, 2 * 60 * 1000);
-    console.log('  📊 Polymarket Crawler: RUNNING (2min)');
+  setTimeout(async () => {
+    console.log('  ⏳ Starting background initialization...');
     
-    // Auto-start git activity fetcher - FAST MODE (5 min)
-    await fetchGitActivity();
-    setInterval(fetchGitActivity, 5 * 60 * 1000);
-    console.log('  🔗 Git Activity: RUNNING (5min)');
-  }
+    // Initial heartbeat
+    await heartbeat();
+    
+    // Schedule heartbeat every 5 minutes
+    setInterval(heartbeat, 5 * 60 * 1000);
+    
+    // Auto-start Polymarket crawler - FAST MODE (2 min)
+    if (axios) {
+      crawlPolymarket().catch(e => console.log('  ⚠️ Polymarket init:', e.message));
+      setInterval(crawlPolymarket, 2 * 60 * 1000);
+      console.log('  📊 Polymarket Crawler: RUNNING (2min)');
+      
+      // Auto-start git activity fetcher - FAST MODE (5 min)
+      fetchGitActivity().catch(e => console.log('  ⚠️ Git fetch init:', e.message));
+      setInterval(fetchGitActivity, 5 * 60 * 1000);
+      console.log('  🔗 Git Activity: RUNNING (5min)');
+    }
+    
+    console.log('  ✅ Background initialization complete');
+  }, 2000);
   
   // ════════════════════════════════════════════════════════════════════════════
-  // 🔥 LIVE TRADER — Dual Mode: Presence + Active Scanning
+  // 🔥 LIVE TRADER — Deferred startup (5 seconds after server online)
   // ════════════════════════════════════════════════════════════════════════════
-  // 
-  // TWO MODES RUNNING SIMULTANEOUSLY:
-  // 1. PRESENCE MODE — Event-driven watching for NEW token launches (<60 min old)
-  // 2. SNIPER MODE — Periodic scanning of TOP 100 BASE TOKENS + ecosystem
-  //
-  // The user requested focus on TOP 100 coins which have plenty of moves.
-  // Presence mode alone only catches brand new tokens - we need liveTraderTick
-  // to scan established tokens with momentum.
-  // ════════════════════════════════════════════════════════════════════════════
-  try {
-    const { startPresenceTrading, liveTraderTick, CONFIG, treasurySweep, loadState } = require('./live-trader.js');
-    
-    console.log('');
-    console.log('  🔥 LIVE TRADER — DUAL MODE ACTIVE');
-    console.log(`     Wallet: ${CONFIG.TRADING_WALLET}`);
-    console.log(`     Cold Storage: ${CONFIG.COLD_WALLET}`);
-    console.log(`     Focus: Top 100 Base + Bankr/Clanker/Clawd/AI ecosystem`);
-    console.log(`     "Watch without waiting. Act without hesitation."`);
-    
-    // ══════════════════════════════════════════════════════════════════════════
-    // MODE 1: Presence Mode — Watch for new token launches (event-driven)
-    // ══════════════════════════════════════════════════════════════════════════
-    await startPresenceTrading();
-    console.log('  👁️ PRESENCE MODE: Active — watching new token launches');
-    
-    // ══════════════════════════════════════════════════════════════════════════
-    // MODE 2: Sniper Mode — Scan Top 100 Base tokens every 2 minutes
-    // This is the KEY fix — blessingSniperTick scans established tokens
-    // ══════════════════════════════════════════════════════════════════════════
-    const SNIPER_INTERVAL = 2 * 60 * 1000; // 2 minutes
-    
-    // Run initial scan after 30 seconds (let services warm up)
-    setTimeout(async () => {
-      console.log('\n  🎯 SNIPER MODE: Running initial Top 100 scan...');
-      try {
-        await liveTraderTick();
-      } catch (err) {
-        console.log(`  ⚠️ Initial sniper scan error: ${err.message}`);
-      }
-    }, 30000);
-    
-    // Then run every 2 minutes
-    setInterval(async () => {
-      try {
-        await liveTraderTick();
-      } catch (err) {
-        console.log(`  ⚠️ Sniper tick error: ${err.message}`);
-      }
-    }, SNIPER_INTERVAL);
-    
-    console.log(`  🎯 SNIPER MODE: Active — scanning Top 100 every 2 minutes`);
-    
-    await logActivity({ 
-      type: 'live_trader', 
-      action: 'dual_mode_started', 
-      wallet: CONFIG.TRADING_WALLET,
-      mode: 'presence+sniper',
-      focus: ['Top 100 Base', 'Bankr', 'Clanker', 'Clawd', 'AI'],
-    });
-    
-    console.log('  ✅ LIVE TRADER: DUAL MODE ACTIVE');
-    console.log('     → 👁️ Presence: Watching new token launches');
-    console.log('     → 🎯 Sniper: Scanning Top 100 Base every 2 min');
-    console.log('     → 💰 Treasury sweep on threshold');
-    console.log(`     → 📊 Profit distribution: 70% cold, 20% reinvest, 10% team`);
-  } catch (err) {
-    console.log(`  ⚠️ Live Trader not started: ${err.message}`);
-  }
+  setTimeout(async () => {
+    try {
+      const { startPresenceTrading, liveTraderTick, CONFIG, treasurySweep, loadState } = require('./live-trader.js');
+      
+      console.log('');
+      console.log('  🔥 LIVE TRADER — INITIALIZING (deferred)');
+      console.log(`     Wallet: ${CONFIG.TRADING_WALLET}`);
+      console.log(`     Cold Storage: ${CONFIG.COLD_WALLET}`);
+      console.log(`     Focus: Top 100 Base + Bankr/Clanker/Clawd/AI ecosystem`);
+      
+      // ══════════════════════════════════════════════════════════════════════════
+      // MODE 1: Presence Mode — Watch for new token launches (event-driven)
+      // ══════════════════════════════════════════════════════════════════════════
+      await startPresenceTrading();
+      console.log('  👁️ PRESENCE MODE: Active — watching new token launches');
+      
+      // ══════════════════════════════════════════════════════════════════════════
+      // MODE 2: Sniper Mode — Scan Top 100 Base tokens every 2 minutes
+      // ══════════════════════════════════════════════════════════════════════════
+      const SNIPER_INTERVAL = 2 * 60 * 1000; // 2 minutes
+      
+      // Run initial scan after 30 seconds (let services warm up)
+      setTimeout(async () => {
+        console.log('\n  🎯 SNIPER MODE: Running initial Top 100 scan...');
+        try {
+          await liveTraderTick();
+        } catch (err) {
+          console.log(`  ⚠️ Initial sniper scan error: ${err.message}`);
+        }
+      }, 30000);
+      
+      // Then run every 2 minutes
+      setInterval(async () => {
+        try {
+          await liveTraderTick();
+        } catch (err) {
+          console.log(`  ⚠️ Sniper tick error: ${err.message}`);
+        }
+      }, SNIPER_INTERVAL);
+      
+      console.log(`  🎯 SNIPER MODE: Active — scanning Top 100 every 2 minutes`);
+      
+      await logActivity({ 
+        type: 'live_trader', 
+        action: 'dual_mode_started', 
+        wallet: CONFIG.TRADING_WALLET,
+        mode: 'presence+sniper',
+        focus: ['Top 100 Base', 'Bankr', 'Clanker', 'Clawd', 'AI'],
+      });
+      
+      console.log('  ✅ LIVE TRADER: DUAL MODE ACTIVE');
+      console.log('     → 👁️ Presence: Watching new token launches');
+      console.log('     → 🎯 Sniper: Scanning Top 100 Base every 2 min');
+      console.log('     → 💰 Treasury sweep on threshold');
+      console.log(`     → 📊 Profit distribution: 70% cold, 20% reinvest, 10% team`);
+    } catch (err) {
+      console.log(`  ⚠️ Live Trader not started: ${err.message}`);
+    }
+  }, 5000); // 5 second delay for live trader init
 });
 
 // =============================================================================
