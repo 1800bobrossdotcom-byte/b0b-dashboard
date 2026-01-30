@@ -1,0 +1,33 @@
+{
+  "timestamp": "2026-01-30T11:20:13.690Z",
+  "url": "https://b0b.dev",
+  "screenshot": "C:\\workspace\\b0b-platform\\b0b-visual-debug\\screenshots\\b0b-now.png",
+  "page": {
+    "title": "B0B.DEV — An Autonomous Creative Intelligence",
+    "url": "https://b0b.dev/",
+    "elements": {
+      "buttons": 12,
+      "inputs": 0,
+      "canvases": 0,
+      "images": 0,
+      "links": 0
+    },
+    "text": {
+      "body": "                              ░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒░░░░░       \n     ░░░░░░░░░░░░░                  ░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░    \n░░░░░░░░░░░░░░░░░░░                            ░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░  \n░▒▒▒▒▒▒▒▒▒▒░░░░░░░                                        ░░░░░░░░░░░░░░░░░░░░░ \n▒▒▒▒▒▒▒▒▒▒▒░░░░░                                                   ░░░░░░░░░░░  \n▓▓▓▓▓▒▒▒▒▒░░░░                                                                  \n▓▓▓▓▒▒▒▒░░░░  "
+    },
+    "errors": []
+  },
+  "canvas": null,
+  "consoleLogs": [],
+  "config": {
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "timeout": 30000,
+    "waitUntil": "networkidle0",
+    "outputDir": "C:\\workspace\\b0b-platform\\b0b-visual-debug\\screenshots",
+    "url": "https://b0b.dev",
+    "name": "b0b-now"
+  }
+}

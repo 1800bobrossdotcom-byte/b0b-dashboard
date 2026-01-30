@@ -1,405 +1,322 @@
 'use client';
 
 /**
- * B0B.DEV — L0RE v0.2.0
+ * B0B.DEV — SWARM COMMAND CENTER
+ * ══════════════════════════════════════════════════════════════
  * 
- * FULL PAGE GENERATIVE — The ASCII art IS the site.
- * Inspired by Andreas Gysin (ertdfgcvb)
+ * L0RE v0.3.0 — Live Data Dashboard
+ * Real-time swarm intelligence visualization
  * 
- * "The synthesis process depends on absolute coordinates."
+ * 2026-01-30 — Complete redesign for live coherence
  */
 
-import { useEffect, useState, useRef } from 'react';
-import L0RELoader from './components/L0RELoader';
+import { useEffect, useState } from 'react';
 
-// ═══════════════════════════════════════════════════════════════
-// DENSITY RAMPS (Gysin/ertdfgcvb play.core)
-// ═══════════════════════════════════════════════════════════════
+const BRAIN_URL = 'https://b0b-brain-production.up.railway.app';
 
-const RAMPS = {
-  standard: ' .:-=+*#%@',
-  blocks: ' ░▒▓█',
-  minimal: ' ·:;',
-  binary: ' █',
-};
-
-const BRAIN_URL = process.env.NEXT_PUBLIC_BRAIN_URL || 'https://b0b-brain-production.up.railway.app';
-
-// ═══════════════════════════════════════════════════════════════
-// FULL PAGE GENERATIVE ENGINE
-// ═══════════════════════════════════════════════════════════════
+interface SwarmData {
+  timestamp: string;
+  status: string;
+  swarm: { agents: string[]; identity: string };
+  d0t: any;
+  r0ss: any;
+  b0b: any;
+  treasury: any;
+  turb0b00st: any;
+  liveTrader: any;
+  freshness: any;
+  dataFreshness: any;
+}
 
 export default function B0bDev() {
-  const [loading, setLoading] = useState(true);
-  const [dimensions, setDimensions] = useState({ cols: 80, rows: 40 });
-  const [frame, setFrame] = useState('');
-  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
-  const [showInfo, setShowInfo] = useState(false);
+  const [data, setData] = useState<SwarmData | null>(null);
   const [time, setTime] = useState('');
   const [mounted, setMounted] = useState(false);
-  const [tradeCount, setTradeCount] = useState(0);
-  const [liveData, setLiveData] = useState<any>(null);
-  const preRef = useRef<HTMLPreElement>(null);
-  
-  // Mount
+  const [error, setError] = useState<string | null>(null);
+  const [lastFetch, setLastFetch] = useState<Date | null>(null);
+
   useEffect(() => {
     setMounted(true);
   }, []);
-  
-  // Fetch LIVE data from brain
-  useEffect(() => {
-    const fetchLive = async () => {
-      try {
-        const res = await fetch('/api/live');
-        const data = await res.json();
-        setLiveData(data);
-        if (data.turb0b00st?.trades) {
-          setTradeCount(data.turb0b00st.trades);
-        }
-      } catch {
-        // Silent
-      }
-    };
-    fetchLive();
-    const interval = setInterval(fetchLive, 10000); // Every 10s
-    return () => clearInterval(interval);
-  }, []);
-  
-  // Time
+
+  // Live clock
   useEffect(() => {
     const tick = () => setTime(new Date().toLocaleTimeString('en-US', { hour12: false }));
     tick();
     const interval = setInterval(tick, 1000);
     return () => clearInterval(interval);
   }, []);
-  
-  // Calculate grid dimensions based on window size
+
+  // Fetch swarm data
   useEffect(() => {
-    const calculateDimensions = () => {
-      const charWidth = 8.4;
-      const charHeight = 14;
-      const cols = Math.floor(window.innerWidth / charWidth);
-      const rows = Math.floor(window.innerHeight / charHeight);
-      setDimensions({ cols, rows });
-    };
-    
-    calculateDimensions();
-    window.addEventListener('resize', calculateDimensions);
-    return () => window.removeEventListener('resize', calculateDimensions);
-  }, []);
-  
-  // Track mouse position
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({
-        x: e.clientX / window.innerWidth,
-        y: e.clientY / window.innerHeight,
-      });
-    };
-    
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-  
-  // Main render loop
-  useEffect(() => {
-    const { cols, rows } = dimensions;
-    const ramp = RAMPS.standard;
-    let t = 0;
-    
-    const render = () => {
-      t += 0.015;
-      
-      let output = '';
-      const centerX = cols / 2;
-      const centerY = rows / 2;
-      
-      // Mouse influence
-      const mx = mousePos.x * cols;
-      const my = mousePos.y * rows;
-      
-      for (let y = 0; y < rows; y++) {
-        for (let x = 0; x < cols; x++) {
-          // Distance from center
-          const dx = (x - centerX) / cols;
-          const dy = (y - centerY) / rows;
-          const distCenter = Math.sqrt(dx * dx + dy * dy);
-          
-          // Distance from mouse
-          const dmx = (x - mx) / cols;
-          const dmy = (y - my) / rows;
-          const distMouse = Math.sqrt(dmx * dmx + dmy * dmy);
-          
-          // Wave interference patterns
-          const wave1 = Math.sin(x * 0.06 + t * 1.0);
-          const wave2 = Math.cos(y * 0.05 + t * 0.8);
-          const wave3 = Math.sin((x + y) * 0.04 + t * 0.6);
-          const wave4 = Math.cos(distCenter * 6 - t * 1.5); // Radial wave
-          const wave5 = Math.sin(distMouse * 10 - t * 2.5); // Mouse ripple
-          
-          // Combine waves with mouse influence
-          const mouseInfluence = Math.exp(-distMouse * 3);
-          const signal = (
-            wave1 * 0.25 +
-            wave2 * 0.25 +
-            wave3 * 0.2 +
-            wave4 * 0.2 +
-            wave5 * mouseInfluence * 0.4
-          );
-          
-          // Map to density ramp
-          const normalized = (signal + 1) / 2;
-          const idx = Math.floor(normalized * (ramp.length - 1));
-          const char = ramp[Math.max(0, Math.min(idx, ramp.length - 1))];
-          
-          output += char;
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`${BRAIN_URL}/swarm/live`);
+        if (res.ok) {
+          const json = await res.json();
+          setData(json);
+          setError(null);
+          setLastFetch(new Date());
+        } else {
+          setError(`Brain returned ${res.status}`);
         }
-        if (y < rows - 1) output += '\n';
+      } catch (e) {
+        setError('Brain offline');
       }
-      
-      setFrame(output);
     };
-    
-    render();
-    const interval = setInterval(render, 40); // ~25fps
+    fetchData();
+    const interval = setInterval(fetchData, 5000);
     return () => clearInterval(interval);
-  }, [dimensions, mousePos]);
-  
-  // Keyboard controls
-  useEffect(() => {
-    const handleKeyUp = (e: KeyboardEvent) => {
-      if (e.key === 'i' || e.key === 'I') setShowInfo(prev => !prev);
-      if (e.key === 'f' || e.key === 'F') {
-        document.body.requestFullscreen?.();
-      }
-    };
-    
-    window.addEventListener('keyup', handleKeyUp);
-    return () => window.removeEventListener('keyup', handleKeyUp);
   }, []);
-  
+
   if (!mounted) return null;
-  
-  // Show loader on first load (AFTER all hooks)
-  if (loading) {
-    return <L0RELoader message="B0B SYNTHESIZING" onComplete={() => setLoading(false)} minDuration={2000} />;
-  }
-  
+
+  const sentiment = data?.d0t?.data?.sentiment;
+  const trades = data?.turb0b00st?.tradingHistory || [];
+  const liveTrader = data?.liveTrader;
+  const freshness = data?.freshness?.visual?.bars || [];
+  const papers = data?.r0ss?.data?.papers?.relevant?.slice(0, 3) || [];
+  const predictions = data?.d0t?.data?.predictions?.slice(0, 3) || [];
+
   return (
-    <>
-      {/* Full page generative canvas */}
-      <pre
-        ref={preRef}
-        onClick={() => setShowInfo(prev => !prev)}
-        className="fixed inset-0 m-0 p-0 overflow-hidden cursor-pointer select-none"
-        style={{
-          fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace',
-          fontSize: '12px',
-          lineHeight: '14px',
-          letterSpacing: '0px',
-          backgroundColor: '#000',
-          color: '#d4d4d4',
-          whiteSpace: 'pre',
-        }}
-      >
-        {frame}
-      </pre>
-      
-      {/* Minimal corner branding - always visible */}
-      <div 
-        className="fixed top-4 left-4 pointer-events-none select-none"
-        style={{ color: '#444', fontSize: '11px', fontFamily: 'monospace' }}
-      >
-        b0b
-      </div>
-      
-      <div 
-        className="fixed top-4 right-4 flex items-center gap-3 pointer-events-none select-none"
-        style={{ color: '#444', fontSize: '11px', fontFamily: 'monospace' }}
-      >
-        <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-        <span>{time}</span>
-      </div>
-      
-      <div 
-        className="fixed bottom-4 left-4 pointer-events-none select-none"
-        style={{ color: '#333', fontSize: '10px', fontFamily: 'monospace' }}
-      >
-        L0RE v0.2.0 · click for info · [i] toggle · [f] fullscreen
-      </div>
-      
-      <div 
-        className="fixed bottom-4 right-4 pointer-events-none select-none"
-        style={{ color: '#333', fontSize: '10px', fontFamily: 'monospace' }}
-      >
-        ertdfgcvb
-      </div>
-      
-      {/* Info overlay - appears on click or 'i' key */}
-      <div
-        onClick={() => setShowInfo(false)}
-        className={`fixed inset-0 transition-all duration-500 ${
-          showInfo ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-        style={{ backgroundColor: 'rgba(0,0,0,0.92)' }}
-      >
-        <div className="h-full flex flex-col justify-center items-center text-center px-6">
-          
-          <h1 
-            className="text-7xl md:text-9xl font-bold tracking-tighter mb-6"
-            style={{ color: '#fff', fontFamily: 'monospace' }}
-          >
-            B0B
-          </h1>
-          
-          <p 
-            className="text-base md:text-lg mb-10 max-w-md"
-            style={{ color: '#888', fontFamily: 'monospace' }}
-          >
-            Autonomous collective. Multi-model intelligence.<br/>
-            Glass box, not black box.
-          </p>
-          
-          {/* Status */}
-          <div 
-            className="flex flex-wrap gap-4 justify-center mb-10 text-sm"
-            style={{ color: '#666', fontFamily: 'monospace' }}
-          >
-            <span>4 agents</span>
-            <span>·</span>
-            <span className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
-              live
-            </span>
-            <span>·</span>
-            <a 
-              href="https://basescan.org/address/0xCA4Ca0c7b26e51805c20C95DF02Ea86feA938D78"
-              target="_blank"
-              className="hover:text-white transition-colors"
-              onClick={e => e.stopPropagation()}
-            >
-              0xCA4C...8D78
-            </a>
-          </div>
-          
-          {/* Navigation */}
-          <nav className="flex flex-wrap gap-8 justify-center mb-12">
-            <a 
-              href="/labs" 
-              className="text-lg hover:text-white transition-colors"
-              style={{ color: '#888', fontFamily: 'monospace' }}
-              onClick={e => e.stopPropagation()}
-            >
-              labs
-            </a>
-            <a 
-              href="https://d0t.b0b.dev" 
-              className="text-lg hover:text-white transition-colors"
-              style={{ color: '#888', fontFamily: 'monospace' }}
-              onClick={e => e.stopPropagation()}
-            >
-              d0t
-            </a>
-            <a 
-              href="https://github.com/1800bobrossdotcom-byte" 
-              target="_blank"
-              className="text-lg hover:text-white transition-colors"
-              style={{ color: '#888', fontFamily: 'monospace' }}
-              onClick={e => e.stopPropagation()}
-            >
-              github
-            </a>
-            <a 
-              href="mailto:b0b@agentmail.to" 
-              className="text-lg hover:text-white transition-colors"
-              style={{ color: '#888', fontFamily: 'monospace' }}
-              onClick={e => e.stopPropagation()}
-            >
-              contact
-            </a>
-          </nav>
-          
-          {/* Intelligence Layer */}
-          <div className="mb-10">
-            <p 
-              className="text-xs uppercase tracking-widest mb-3"
-              style={{ color: '#444', fontFamily: 'monospace' }}
-            >
-              Intelligence Layer
-            </p>
-            <div 
-              className="flex flex-wrap gap-3 justify-center text-xs"
-              style={{ color: '#666', fontFamily: 'monospace' }}
-            >
-              <span>Anthropic</span>
-              <span style={{ color: '#444' }}>·</span>
-              <span>Groq</span>
-              <span style={{ color: '#444' }}>·</span>
-              <span>DeepSeek</span>
-              <span style={{ color: '#444' }}>·</span>
-              <span>OpenRouter</span>
-              <span style={{ color: '#444' }}>·</span>
-              <span>Kimi</span>
-            </div>
-          </div>
-          
-          {/* LIVE DATA PANEL */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 text-center" style={{ fontFamily: 'monospace' }}>
-            <div>
-              <div className="text-xs" style={{ color: '#666' }}>TRADES</div>
-              <div className="text-2xl" style={{ color: '#4f4' }}>{tradeCount}</div>
-            </div>
-            <div>
-              <div className="text-xs" style={{ color: '#666' }}>FEAR/GREED</div>
-              <div className="text-2xl" style={{ color: liveData?.signals?.fearGreed?.index < 30 ? '#f44' : liveData?.signals?.fearGreed?.index > 70 ? '#4f4' : '#fa0' }}>
-                {liveData?.signals?.fearGreed?.index || '?'}
-              </div>
-            </div>
-            <div>
-              <div className="text-xs" style={{ color: '#666' }}>WALLET</div>
-              <div className="text-2xl" style={{ color: '#4ff' }}>
-                {liveData?.turb0b00st?.walletBalance?.toFixed(4) || '0.00'}
-              </div>
-              <div className="text-xs" style={{ color: '#444' }}>ETH</div>
-            </div>
-            <div>
-              <div className="text-xs" style={{ color: '#666' }}>FRESHNESS</div>
-              <div className="text-2xl" style={{ color: (liveData?.freshness?.metrics?.avgFreshness || 0) > 50 ? '#4f4' : '#f44' }}>
-                {liveData?.freshness?.metrics?.avgFreshness || 0}%
-              </div>
-            </div>
-          </div>
-          
-          {/* TURB0B00ST Status */}
-          <div 
-            className="px-4 py-2 rounded border mb-10"
-            style={{ borderColor: '#333', backgroundColor: 'rgba(0,255,0,0.05)' }}
-          >
-            <span style={{ color: '#4f4', fontFamily: 'monospace', fontSize: '12px' }}>
-              TURB0B00ST LIVE · {tradeCount} trade{tradeCount !== 1 ? 's' : ''} executed
-            </span>
-          </div>
-          
-          <p style={{ color: '#333', fontSize: '11px', fontFamily: 'monospace' }}>
-            click anywhere to return
-          </p>
+    <main className="min-h-screen bg-black text-white font-mono p-4 md:p-8">
+      {/* HEADER */}
+      <header className="flex flex-wrap justify-between items-start mb-8 gap-4">
+        <div>
+          <h1 className="text-2xl md:text-4xl font-bold text-[#00FF88]">B0B.DEV</h1>
+          <p className="text-gray-500 text-sm mt-1">Autonomous Creative Intelligence</p>
         </div>
+        <div className="text-right">
+          <div className="text-2xl font-bold text-[#FFAA00]" suppressHydrationWarning>{time}</div>
+          <div className="text-xs text-gray-500 flex items-center justify-end gap-2">
+            <span className={`inline-block w-2 h-2 rounded-full ${data ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`} />
+            {data?.status || 'connecting...'}
+          </div>
+          {lastFetch && (
+            <div className="text-xs text-gray-600" suppressHydrationWarning>
+              Last sync: {lastFetch.toLocaleTimeString()}
+            </div>
+          )}
+        </div>
+      </header>
+
+      {error && (
+        <div className="mb-4 p-3 bg-red-900/50 border border-red-500 rounded text-red-300 text-sm">
+          ⚠️ {error}
+        </div>
+      )}
+
+      {/* MAIN GRID */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         
-        {/* Corner credits */}
-        <div 
-          className="absolute bottom-4 left-4"
-          style={{ color: '#333', fontSize: '10px', fontFamily: 'monospace' }}
-        >
-          L0RE v0.2.0 · inspired by ertdfgcvb
-        </div>
-        
-        <div 
-          className="absolute bottom-4 right-4"
-          style={{ color: '#333', fontSize: '10px', fontFamily: 'monospace' }}
-        >
-          b0b.dev · 2026
-        </div>
+        {/* TURB0B00ST TRADES */}
+        <section className="bg-gray-900/50 border border-gray-800 rounded-lg p-4">
+          <h2 className="text-lg font-bold text-[#FFAA00] mb-3 flex items-center gap-2">
+            <span className="text-xl">⚡</span> TURB0B00ST
+            <span className="text-xs px-2 py-0.5 bg-green-900 text-green-400 rounded ml-auto">
+              {data?.turb0b00st?.mode || 'LIVE'}
+            </span>
+          </h2>
+          <div className="space-y-2 max-h-64 overflow-y-auto">
+            {trades.length === 0 ? (
+              <p className="text-gray-500 text-sm">No trades yet</p>
+            ) : (
+              trades.slice(-5).reverse().map((trade: any, i: number) => (
+                <div key={i} className="text-xs p-2 bg-black/50 rounded border-l-2 border-l-[#FFAA00]">
+                  <div className="flex justify-between">
+                    <span className={trade.type === 'BUY' ? 'text-green-400' : 'text-red-400'}>
+                      {trade.type} {trade.token}
+                    </span>
+                    <span className="text-gray-500" suppressHydrationWarning>
+                      {new Date(trade.timestamp).toLocaleTimeString()}
+                    </span>
+                  </div>
+                  <div className="text-gray-400 mt-1">{trade.amountIn} → {trade.amountOut?.slice(0, 20)}...</div>
+                  {trade.txHash && (
+                    <a 
+                      href={`https://basescan.org/tx/${trade.txHash}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-400 hover:underline"
+                    >
+                      {trade.txHash.slice(0, 10)}...
+                    </a>
+                  )}
+                </div>
+              ))
+            )}
+          </div>
+          <div className="mt-3 pt-3 border-t border-gray-800 text-xs text-gray-500">
+            Total trades: {trades.length} | 
+            Daily: {data?.turb0b00st?.dailyStats?.trades || 0}
+          </div>
+        </section>
+
+        {/* MARKET SENTIMENT */}
+        <section className="bg-gray-900/50 border border-gray-800 rounded-lg p-4">
+          <h2 className="text-lg font-bold text-[#00FF88] mb-3 flex items-center gap-2">
+            <span className="text-xl">📊</span> D0T SIGNALS
+          </h2>
+          <div className="text-center py-4">
+            <div className={`text-5xl font-bold ${
+              (sentiment?.index || 0) < 25 ? 'text-red-500' :
+              (sentiment?.index || 0) < 50 ? 'text-orange-500' :
+              (sentiment?.index || 0) < 75 ? 'text-yellow-500' : 'text-green-500'
+            }`}>
+              {sentiment?.index ?? '?'}
+            </div>
+            <div className="text-gray-400 text-sm mt-1">
+              {sentiment?.classification || 'Loading...'}
+            </div>
+            <div className="text-gray-600 text-xs mt-2">
+              Fear & Greed Index
+            </div>
+          </div>
+          <div className="mt-4 space-y-2">
+            <div className="text-xs text-gray-400">
+              <span className="text-gray-600">Base TVL:</span> ${((data?.d0t?.data?.onchain?.base_tvl || 0) / 1e9).toFixed(2)}B
+            </div>
+            <div className="text-xs text-gray-400">
+              <span className="text-gray-600">ETH TVL:</span> ${((data?.d0t?.data?.onchain?.eth_tvl || 0) / 1e9).toFixed(2)}B
+            </div>
+          </div>
+        </section>
+
+        {/* LIVE TRADER STATUS */}
+        <section className="bg-gray-900/50 border border-gray-800 rounded-lg p-4">
+          <h2 className="text-lg font-bold text-[#FF6B6B] mb-3 flex items-center gap-2">
+            <span className="text-xl">🤖</span> LIVE TRADER
+            <span className={`text-xs px-2 py-0.5 rounded ml-auto ${
+              liveTrader?.active ? 'bg-green-900 text-green-400' : 'bg-red-900 text-red-400'
+            }`}>
+              {liveTrader?.active ? 'ACTIVE' : 'OFFLINE'}
+            </span>
+          </h2>
+          <div className="space-y-3">
+            <div className="flex justify-between text-sm">
+              <span className="text-gray-500">Hourly Target</span>
+              <span className="text-[#FFAA00]">${liveTrader?.wage?.hourlyTarget || 40}/hr</span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span className="text-gray-500">Wage Owed</span>
+              <span className="text-red-400">${liveTrader?.wage?.wageOwed || 0}</span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span className="text-gray-500">Hours Active</span>
+              <span>{liveTrader?.wage?.hoursActive || 0}</span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span className="text-gray-500">Efficiency</span>
+              <span>{liveTrader?.wage?.efficiency || 0}%</span>
+            </div>
+            <div className="text-xs text-gray-600 mt-2" suppressHydrationWarning>
+              Last tick: {liveTrader?.lastTick ? new Date(liveTrader.lastTick).toLocaleTimeString() : 'never'}
+            </div>
+          </div>
+        </section>
+
+        {/* POLYMARKET PREDICTIONS */}
+        <section className="bg-gray-900/50 border border-gray-800 rounded-lg p-4">
+          <h2 className="text-lg font-bold text-[#9D4EDD] mb-3 flex items-center gap-2">
+            <span className="text-xl">🎯</span> POLYMARKET
+          </h2>
+          <div className="space-y-2">
+            {predictions.length === 0 ? (
+              <p className="text-gray-500 text-sm">Loading predictions...</p>
+            ) : (
+              predictions.map((p: any, i: number) => (
+                <div key={i} className="text-xs p-2 bg-black/50 rounded">
+                  <div className="text-gray-300 line-clamp-2">{p.question}</div>
+                  <div className="flex justify-between mt-1 text-gray-500">
+                    <span>Vol: ${(p.volume24h / 1e6).toFixed(2)}M</span>
+                    <span className="text-[#9D4EDD]">{p.signal}</span>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </section>
+
+        {/* R0SS RESEARCH */}
+        <section className="bg-gray-900/50 border border-gray-800 rounded-lg p-4">
+          <h2 className="text-lg font-bold text-[#00D9FF] mb-3 flex items-center gap-2">
+            <span className="text-xl">📚</span> R0SS RESEARCH
+          </h2>
+          <div className="space-y-2">
+            {papers.length === 0 ? (
+              <p className="text-gray-500 text-sm">Loading papers...</p>
+            ) : (
+              papers.map((paper: any, i: number) => {
+                const parsed = typeof paper === 'string' 
+                  ? { title: paper.match(/title=([^;]+)/)?.[1] || 'Unknown', url: paper.match(/url=([^;]+)/)?.[1] }
+                  : paper;
+                return (
+                  <a 
+                    key={i}
+                    href={parsed.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-xs p-2 bg-black/50 rounded hover:bg-gray-800 transition"
+                  >
+                    <div className="text-[#00D9FF] line-clamp-2">{parsed.title?.slice(0, 60)}...</div>
+                  </a>
+                );
+              })
+            )}
+          </div>
+          <div className="mt-3 text-xs text-gray-600">
+            {data?.r0ss?.data?.papers?.total || 0} papers analyzed
+          </div>
+        </section>
+
+        {/* DATA FRESHNESS */}
+        <section className="bg-gray-900/50 border border-gray-800 rounded-lg p-4">
+          <h2 className="text-lg font-bold text-[#FFE66D] mb-3 flex items-center gap-2">
+            <span className="text-xl">🌡️</span> DATA FRESHNESS
+            <span className="text-xs text-gray-500 ml-auto">
+              {data?.freshness?.l0re?.code || 'f.??'}
+            </span>
+          </h2>
+          <div className="space-y-1.5 max-h-48 overflow-y-auto">
+            {freshness.map((item: any, i: number) => (
+              <div key={i} className="flex items-center gap-2 text-xs font-mono">
+                <span className="w-4">{item.status}</span>
+                <span className="text-gray-500 w-16 truncate">{item.file}</span>
+                <span className="flex-1 text-[#FFE66D]">{item.bar}</span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-3 pt-3 border-t border-gray-800 text-xs">
+            <span className="text-gray-500">Overall:</span>
+            <span className="text-[#FFE66D] ml-2">
+              {data?.freshness?.visual?.overall || '░░░░░░░░░░ 0%'}
+            </span>
+          </div>
+        </section>
+
       </div>
-    </>
+
+      {/* FOOTER */}
+      <footer className="mt-8 pt-4 border-t border-gray-800 flex flex-wrap justify-between items-center gap-4 text-xs text-gray-600">
+        <div className="flex gap-4">
+          <a href="https://d0t.b0b.dev" className="hover:text-[#FFAA00] transition">d0t.b0b.dev</a>
+          <a href="https://0type.b0b.dev" className="hover:text-[#00FF88] transition">0type.b0b.dev</a>
+          <a 
+            href="https://basescan.org/address/0xCA4Ca0c7b26e51805c20C95DF02Ea86feA938D78"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-blue-400 transition"
+          >
+            wallet
+          </a>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-[#00FF88]">{data?.freshness?.l0re?.emoji || '⏳'}</span>
+          <span>w3 ar3</span>
+          <span className="text-gray-700">|</span>
+          <span>L0RE v0.3.0</span>
+        </div>
+      </footer>
+    </main>
   );
 }

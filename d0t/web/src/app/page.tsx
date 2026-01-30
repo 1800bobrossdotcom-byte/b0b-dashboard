@@ -1,346 +1,383 @@
 'use client';
 
 /**
- * D0T.B0B.DEV — TURB0B00ST TRADING TERMINAL
+ * D0T.B0B.DEV — TRADING VISION TERMINAL
  * ══════════════════════════════════════════════════════════════
  * 
- * L0RE v0.2.1 Aesthetic — 2026-01-30 GYSIN VISION
- * Full-page generative ASCII + live trading data
+ * L0RE v0.3.0 — Live Trading Dashboard
+ * Real-time market signals + TURB0B00ST execution
  * 
- * "I SEE YOU" — The eye that never blinks
+ * 2026-01-30 — "I SEE YOU" — Complete redesign
  */
 
-import { useEffect, useState, useRef } from 'react';
-import Link from 'next/link';
-import L0RELoader from './components/L0RELoader';
+import { useEffect, useState } from 'react';
 
-// ═══════════════════════════════════════════════════════════════
-// DENSITY RAMPS (Gysin/ertdfgcvb)
-// ═══════════════════════════════════════════════════════════════
+const BRAIN_URL = 'https://b0b-brain-production.up.railway.app';
 
-const RAMPS = {
-  standard: ' .:-=+*#%@',
-  blocks: ' ░▒▓█',
-  minimal: ' ·:;|',
-};
-
-// ═══════════════════════════════════════════════════════════════
-// CONFIG
-// ═══════════════════════════════════════════════════════════════
-
-const BRAIN_URL = process.env.NEXT_PUBLIC_BRAIN_URL || 'https://b0b-brain-production.up.railway.app';
-
-// ═══════════════════════════════════════════════════════════════
-// MAIN COMPONENT
-// ═══════════════════════════════════════════════════════════════
-
-export default function D0TTURB0B00ST() {
-  const [loading, setLoading] = useState(true);
-  const [mounted, setMounted] = useState(false);
-  const [dimensions, setDimensions] = useState({ cols: 80, rows: 40 });
-  const [frame, setFrame] = useState('');
+export default function D0TTerminal() {
+  const [data, setData] = useState<any>(null);
   const [time, setTime] = useState('');
-  const [showInfo, setShowInfo] = useState(false);
-  const [turb0Data, setTurb0Data] = useState<any>(null);
-  const preRef = useRef<HTMLPreElement>(null);
-  
-  // Mount
+  const [mounted, setMounted] = useState(false);
+  const [pulseColor, setPulseColor] = useState('#00FF88');
+
   useEffect(() => {
     setMounted(true);
   }, []);
-  
-  // Time
+
+  // Live clock
   useEffect(() => {
     const tick = () => setTime(new Date().toLocaleTimeString('en-US', { hour12: false }));
     tick();
     const interval = setInterval(tick, 1000);
     return () => clearInterval(interval);
   }, []);
-  
-  // Calculate grid dimensions
+
+  // Pulse color based on sentiment
   useEffect(() => {
-    const calculateDimensions = () => {
-      const charWidth = 8.4;
-      const charHeight = 14;
-      const cols = Math.floor(window.innerWidth / charWidth);
-      const rows = Math.floor(window.innerHeight / charHeight);
-      setDimensions({ cols, rows });
-    };
-    
-    calculateDimensions();
-    window.addEventListener('resize', calculateDimensions);
-    return () => window.removeEventListener('resize', calculateDimensions);
-  }, []);
-  
-  // Fetch TURB0B00ST data
+    const sentiment = data?.d0t?.data?.sentiment?.index || 50;
+    if (sentiment < 25) setPulseColor('#FF4444');
+    else if (sentiment < 50) setPulseColor('#FFAA00');
+    else if (sentiment < 75) setPulseColor('#FFE66D');
+    else setPulseColor('#00FF88');
+  }, [data]);
+
+  // Fetch swarm data
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Get unified swarm data with freshness
         const res = await fetch(`${BRAIN_URL}/swarm/live`);
         if (res.ok) {
-          const data = await res.json();
-          setTurb0Data(data);
+          const json = await res.json();
+          setData(json);
         }
       } catch {
-        // Fallback
-        try {
-          const res = await fetch(`${BRAIN_URL}/finance/treasury`);
-          if (res.ok) {
-            const data = await res.json();
-            setTurb0Data(data);
-          }
-        } catch {}
+        // Silent
       }
     };
     fetchData();
-    const interval = setInterval(fetchData, 5000); // Every 5s for live feel
+    const interval = setInterval(fetchData, 3000);
     return () => clearInterval(interval);
   }, []);
-  
-  // Main render loop - Eye pattern
-  useEffect(() => {
-    if (loading) return;
-    
-    const { cols, rows } = dimensions;
-    const ramp = RAMPS.blocks;
-    let frameCount = 0;
-    
-    const render = () => {
-      frameCount++;
-      const t = frameCount * 0.02;
-      
-      let output = '';
-      const cx = cols / 2;
-      const cy = rows / 2;
-      
-      for (let y = 0; y < rows; y++) {
-        for (let x = 0; x < cols; x++) {
-          const dx = (x - cx) / (cols * 0.4);
-          const dy = (y - cy) / (rows * 0.3);
-          
-          // Eye shape
-          const eyeDist = Math.sqrt(dx * dx + dy * dy * 2.5);
-          const eyeShape = eyeDist < 1 ? 1 : 0;
-          
-          // Pupil
-          const pupilDist = Math.sqrt(dx * dx + dy * dy * 2.5);
-          const pupil = pupilDist < 0.3 ? 1 : 0;
-          
-          // Iris pattern
-          const angle = Math.atan2(dy, dx);
-          const iris = pupilDist < 0.6 && pupilDist > 0.25 
-            ? Math.sin(angle * 12 + t) * 0.5 + 0.5 
-            : 0;
-          
-          // Scan line effect
-          const scanLine = Math.sin(y * 0.3 + t * 3) * 0.1;
-          
-          // Combine
-          let value = 0;
-          if (pupil) {
-            value = 0.9 + scanLine;
-          } else if (iris) {
-            value = iris * 0.7 + scanLine;
-          } else if (eyeShape) {
-            value = 0.15 + scanLine;
-          } else {
-            // Background pattern
-            value = Math.sin(x * 0.05 + t) * Math.sin(y * 0.1 - t * 0.5) * 0.1 + 0.05;
-          }
-          
-          const charIndex = Math.floor(value * (ramp.length - 1));
-          output += ramp[Math.max(0, Math.min(charIndex, ramp.length - 1))];
-        }
-        output += '\n';
-      }
-      
-      setFrame(output);
-    };
-    
-    const interval = setInterval(render, 50);
-    render();
-    
-    return () => clearInterval(interval);
-  }, [loading, dimensions]);
-  
-  // Stats - LIVE DATA
-  const trades = turb0Data?.turb0b00st?.tradingHistory || [];
-  const tradeCount = trades.length || turb0Data?.turb0b00st?.dailyStats?.trades || 0;
-  const mode = turb0Data?.turb0b00st?.mode || 'LIVE';
-  const liveTrader = turb0Data?.liveTrader || {};
-  const d0tSignals = turb0Data?.d0t?.data || {};
-  const sentiment = d0tSignals?.sentiment || {};
-  const l0re = d0tSignals?.l0re || {};
-  const lastTrade = trades[trades.length - 1];
-  const freshness = turb0Data?.dataFreshness || {};
-  
+
   if (!mounted) return null;
-  
-  if (loading) {
-    return <L0RELoader message="D0T VISION INITIALIZING" onComplete={() => setLoading(false)} />;
-  }
-  
+
+  const sentiment = data?.d0t?.data?.sentiment;
+  const trades = data?.turb0b00st?.tradingHistory || [];
+  const liveTrader = data?.liveTrader;
+  const predictions = data?.d0t?.data?.predictions || [];
+  const insights = data?.d0t?.data?.insights || [];
+  const onchain = data?.d0t?.data?.onchain;
+
   return (
     <main 
-      className="relative w-screen h-screen overflow-hidden cursor-crosshair select-none"
-      style={{ 
-        backgroundColor: '#0A0A0A',
-        fontFamily: 'JetBrains Mono, SF Mono, Consolas, monospace',
-      }}
-      onClick={() => setShowInfo(!showInfo)}
+      className="min-h-screen bg-[#0A0A0A] text-white font-mono"
+      style={{ fontFamily: 'JetBrains Mono, SF Mono, Consolas, monospace' }}
     >
-      {/* GENERATIVE BACKGROUND */}
-      <pre
-        ref={preRef}
-        className="absolute inset-0 leading-none whitespace-pre overflow-hidden pointer-events-none"
+      {/* SCANNING LINE EFFECT */}
+      <div 
+        className="fixed inset-0 pointer-events-none opacity-5"
         style={{
-          fontSize: '14px',
-          lineHeight: '14px',
-          color: '#FFAA00',
-          textShadow: '0 0 20px rgba(255,170,0,0.2)',
+          background: `repeating-linear-gradient(0deg, transparent, transparent 2px, ${pulseColor}22 2px, ${pulseColor}22 4px)`,
         }}
-        suppressHydrationWarning
-      >
-        {mounted ? frame : ''}
-      </pre>
-      
-      {/* OVERLAY UI */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* TOP BAR */}
-        <div className="absolute top-0 left-0 right-0 p-4 flex justify-between items-start">
-          <div>
-            <div className="text-lg font-bold" style={{ color: '#FFAA00' }}>
-              D0T — I SEE YOU
+      />
+
+      {/* HEADER */}
+      <header className="sticky top-0 z-50 bg-[#0A0A0A]/95 backdrop-blur border-b border-gray-800">
+        <div className="flex justify-between items-center p-4">
+          <div className="flex items-center gap-4">
+            {/* EYE ICON */}
+            <div 
+              className="w-10 h-10 rounded-full flex items-center justify-center animate-pulse"
+              style={{ backgroundColor: pulseColor + '33', border: `2px solid ${pulseColor}` }}
+            >
+              <span className="text-lg">👁</span>
             </div>
-            <div className="text-xs mt-1" style={{ color: '#666' }}>
-              TURB0B00ST VISION TERMINAL
+            <div>
+              <h1 className="text-xl font-bold" style={{ color: pulseColor }}>D0T — I SEE YOU</h1>
+              <p className="text-xs text-gray-500">TURB0B00ST TRADING TERMINAL</p>
             </div>
           </div>
-          <div className="text-right" suppressHydrationWarning>
-            <div className="text-lg font-bold" style={{ color: '#FFAA00' }} suppressHydrationWarning>
-              {mounted ? time : '--:--:--'}
+          <div className="text-right">
+            <div className="text-xl font-bold" style={{ color: pulseColor }} suppressHydrationWarning>
+              {time}
             </div>
-            <div className="text-xs mt-1" style={{ color: '#666' }}>
-              <span className="inline-block w-2 h-2 rounded-full mr-1 animate-pulse" style={{ backgroundColor: '#00FF00' }} />
-              {mode} MODE
+            <div className="text-xs text-gray-500 flex items-center justify-end gap-2">
+              <span 
+                className="inline-block w-2 h-2 rounded-full animate-pulse"
+                style={{ backgroundColor: liveTrader?.active ? '#00FF88' : '#FF4444' }}
+              />
+              {data?.turb0b00st?.mode || 'CONNECTING...'}
             </div>
           </div>
         </div>
+      </header>
+
+      <div className="p-4 grid grid-cols-1 lg:grid-cols-3 gap-4">
         
-        {/* BOTTOM STATUS - LIVE DATA */}
-        <div className="absolute bottom-0 left-0 right-0 p-4">
-          <div className="flex justify-between items-end">
-            <div>
-              <div className="text-xs" style={{ color: '#00FF88' }}>
-                ● TURB0B00ST LIVE · {tradeCount} trade{tradeCount !== 1 ? 's' : ''} executed
+        {/* LEFT COLUMN - MARKET OVERVIEW */}
+        <div className="space-y-4">
+          
+          {/* FEAR & GREED */}
+          <section className="bg-gray-900/50 border border-gray-800 rounded-lg p-4">
+            <h2 className="text-sm font-bold text-gray-400 mb-4">MARKET SENTIMENT</h2>
+            <div className="text-center">
+              <div 
+                className="text-7xl font-bold mb-2"
+                style={{ 
+                  color: pulseColor,
+                  textShadow: `0 0 30px ${pulseColor}44`
+                }}
+              >
+                {sentiment?.index ?? '—'}
               </div>
-              {lastTrade && (
-                <div className="text-xs mt-1" style={{ color: '#FFAA00' }}>
-                  Last: {lastTrade.type} {lastTrade.token} @ {new Date(lastTrade.timestamp).toLocaleTimeString()}
-                </div>
-              )}
-              <div className="text-xs mt-1" style={{ color: '#666' }}>
-                Fear/Greed: {sentiment?.index || '?'} ({sentiment?.classification || 'Loading...'})
+              <div className="text-lg" style={{ color: pulseColor }}>
+                {sentiment?.classification || 'Loading...'}
               </div>
-              <div className="text-xs mt-1" style={{ color: '#444' }}>
-                L0RE: {l0re?.l0re?.code || 'initializing...'} | {l0re?.d0t?.emoji || '⏳'} {l0re?.d0t?.state || ''}
+              <div className="text-xs text-gray-600 mt-2">
+                Fear & Greed Index
               </div>
             </div>
             
-            <div className="text-right">
-              <div className="text-xs" style={{ color: liveTrader?.active ? '#00FF88' : '#FC401F' }}>
-                ● Live Trader: {liveTrader?.active ? 'ACTIVE' : 'OFFLINE'}
+            {/* GRADIENT BAR */}
+            <div className="mt-4 relative h-3 rounded-full overflow-hidden bg-gray-800">
+              <div className="absolute inset-0 bg-gradient-to-r from-red-500 via-yellow-500 to-green-500" />
+              <div 
+                className="absolute top-0 bottom-0 w-1 bg-white shadow-lg"
+                style={{ left: `${sentiment?.index || 50}%`, transform: 'translateX(-50%)' }}
+              />
+            </div>
+            <div className="flex justify-between text-xs text-gray-600 mt-1">
+              <span>Extreme Fear</span>
+              <span>Extreme Greed</span>
+            </div>
+          </section>
+
+          {/* ON-CHAIN STATS */}
+          <section className="bg-gray-900/50 border border-gray-800 rounded-lg p-4">
+            <h2 className="text-sm font-bold text-gray-400 mb-3">ON-CHAIN</h2>
+            <div className="space-y-3">
+              <div>
+                <div className="text-xs text-gray-500">Base TVL</div>
+                <div className="text-xl font-bold text-[#0052FF]">
+                  ${((onchain?.base_tvl || 0) / 1e9).toFixed(2)}B
+                </div>
               </div>
-              <div className="text-xs mt-1" style={{ color: '#666' }}>
-                Wage: ${liveTrader?.wage?.hourlyTarget || 40}/hr | Owed: ${liveTrader?.wage?.wageOwed || 0}
+              <div>
+                <div className="text-xs text-gray-500">Ethereum TVL</div>
+                <div className="text-xl font-bold text-[#627EEA]">
+                  ${((onchain?.eth_tvl || 0) / 1e9).toFixed(2)}B
+                </div>
               </div>
-              <div className="text-xs mt-1" style={{ color: '#666' }}>
-                <Link href="/dashboard" className="pointer-events-auto hover:underline">
-                  dashboard
-                </Link>
-                {' · '}
-                <a href="https://b0b.dev" className="pointer-events-auto hover:underline">
-                  b0b.dev
-                </a>
-              </div>
-              <div className="text-xs mt-1" style={{ color: '#444' }}>
-                L0RE v0.2.1 | data: {new Date(freshness?.d0t || Date.now()).toLocaleTimeString()}
+              <div className="text-xs text-gray-600 pt-2 border-t border-gray-800">
+                Signal: {onchain?.signal || 'stable'}
               </div>
             </div>
-          </div>
-        </div>
-        
-        {/* CENTER INFO (toggle on click) - LIVE DETAILS */}
-        {showInfo && (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div 
-              className="p-6 max-w-lg text-left"
-              style={{ 
-                backgroundColor: 'rgba(10,10,10,0.98)',
-                border: '1px solid #333',
-                fontFamily: 'monospace',
-              }}
-            >
-              <div className="text-xl font-bold mb-4" style={{ color: '#FFAA00' }}>
-                TURB0B00ST TRADING TERMINAL
-              </div>
-              
-              {/* Trading Stats */}
-              <div className="grid grid-cols-2 gap-4 mb-4">
-                <div>
-                  <div className="text-xs" style={{ color: '#666' }}>MODE</div>
-                  <div className="text-lg" style={{ color: mode === 'LIVE' ? '#00FF88' : '#FFAA00' }}>{mode}</div>
-                </div>
-                <div>
-                  <div className="text-xs" style={{ color: '#666' }}>TRADES</div>
-                  <div className="text-lg" style={{ color: '#FFAA00' }}>{tradeCount}</div>
-                </div>
-                <div>
-                  <div className="text-xs" style={{ color: '#666' }}>FEAR/GREED</div>
-                  <div className="text-lg" style={{ color: sentiment?.index < 30 ? '#FC401F' : sentiment?.index > 70 ? '#00FF88' : '#FFAA00' }}>
-                    {sentiment?.index || '?'}
+          </section>
+
+          {/* INSIGHTS */}
+          <section className="bg-gray-900/50 border border-gray-800 rounded-lg p-4">
+            <h2 className="text-sm font-bold text-gray-400 mb-3">D0T INSIGHTS</h2>
+            <div className="space-y-2">
+              {insights.length === 0 ? (
+                <p className="text-gray-500 text-xs">Scanning...</p>
+              ) : (
+                insights.map((insight: any, i: number) => (
+                  <div key={i} className="text-xs p-2 bg-black/50 rounded border-l-2 border-l-[#00FF88]">
+                    <div className="text-[#00FF88] font-bold">{insight.priority?.toUpperCase()}</div>
+                    <div className="text-gray-300 mt-1">{insight.insight}</div>
+                    <div className="text-gray-500 mt-1">→ {insight.action}</div>
                   </div>
+                ))
+              )}
+            </div>
+          </section>
+        </div>
+
+        {/* CENTER COLUMN - TRADES */}
+        <div className="space-y-4">
+          
+          {/* LIVE TRADES */}
+          <section className="bg-gray-900/50 border border-gray-800 rounded-lg p-4">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-sm font-bold text-[#FFAA00]">⚡ TURB0B00ST TRADES</h2>
+              <span className="text-xs px-2 py-0.5 bg-green-900/50 text-green-400 rounded">
+                {trades.length} executed
+              </span>
+            </div>
+            <div className="space-y-2 max-h-[400px] overflow-y-auto">
+              {trades.length === 0 ? (
+                <div className="text-center py-8 text-gray-500">
+                  <div className="text-3xl mb-2">⏳</div>
+                  <p>Waiting for trades...</p>
                 </div>
-                <div>
-                  <div className="text-xs" style={{ color: '#666' }}>L0RE STATE</div>
-                  <div className="text-lg" style={{ color: '#00FFFF' }}>{l0re?.d0t?.state || 'INIT'}</div>
-                </div>
-              </div>
-              
-              {/* Recent Trades */}
-              <div className="mb-4">
-                <div className="text-xs mb-2" style={{ color: '#666' }}>RECENT TRADES</div>
-                <div className="space-y-1 max-h-32 overflow-y-auto">
-                  {trades.slice(-5).reverse().map((t: any, i: number) => (
-                    <div key={i} className="text-xs flex justify-between" style={{ color: t.type === 'BUY' ? '#00FF88' : '#FC401F' }}>
-                      <span>{t.type} {t.token}</span>
-                      <span>{t.amountIn}</span>
-                      <span style={{ color: '#666' }}>{new Date(t.timestamp).toLocaleTimeString()}</span>
+              ) : (
+                [...trades].reverse().map((trade: any, i: number) => (
+                  <div 
+                    key={i} 
+                    className={`p-3 rounded border-l-4 ${
+                      trade.type === 'BUY' 
+                        ? 'bg-green-900/20 border-l-green-500' 
+                        : 'bg-red-900/20 border-l-red-500'
+                    }`}
+                  >
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <span className={`font-bold ${
+                          trade.type === 'BUY' ? 'text-green-400' : 'text-red-400'
+                        }`}>
+                          {trade.type}
+                        </span>
+                        <span className="text-white ml-2 font-bold">{trade.token}</span>
+                      </div>
+                      <span className="text-xs text-gray-500" suppressHydrationWarning>
+                        {new Date(trade.timestamp).toLocaleTimeString()}
+                      </span>
                     </div>
-                  ))}
-                  {trades.length === 0 && (
-                    <div className="text-xs" style={{ color: '#444' }}>No trades yet</div>
-                  )}
+                    <div className="text-sm text-gray-400 mt-1">
+                      {trade.amountIn}
+                    </div>
+                    <div className="text-xs text-gray-500 mt-1">
+                      → {trade.amountOut?.slice(0, 30)}...
+                    </div>
+                    {trade.txHash && (
+                      <a 
+                        href={`https://basescan.org/tx/${trade.txHash}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-blue-400 hover:underline mt-1 inline-block"
+                      >
+                        {trade.txHash.slice(0, 16)}...
+                      </a>
+                    )}
+                    {trade.note && (
+                      <div className="text-xs text-gray-600 mt-1 italic">{trade.note}</div>
+                    )}
+                  </div>
+                ))
+              )}
+            </div>
+          </section>
+
+          {/* LIVE TRADER STATS */}
+          <section className="bg-gray-900/50 border border-gray-800 rounded-lg p-4">
+            <h2 className="text-sm font-bold text-gray-400 mb-3">LIVE TRADER</h2>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <div className="text-xs text-gray-500">Status</div>
+                <div className={`font-bold ${liveTrader?.active ? 'text-green-400' : 'text-red-400'}`}>
+                  {liveTrader?.active ? '● ACTIVE' : '○ OFFLINE'}
                 </div>
               </div>
-              
-              {/* L0RE Intelligence */}
-              <div className="mb-4">
-                <div className="text-xs mb-2" style={{ color: '#666' }}>L0RE INTELLIGENCE</div>
-                <div className="text-xs" style={{ color: '#00FFFF' }}>
-                  Code: {l0re?.l0re?.code || 'n/a'}<br/>
-                  Nash: {l0re?.l0re?.nash || 'n/a'} | Entropy: {l0re?.l0re?.entropy || 'n/a'}
-                </div>
+              <div>
+                <div className="text-xs text-gray-500">Hourly Target</div>
+                <div className="font-bold text-[#FFAA00]">${liveTrader?.wage?.hourlyTarget || 40}/hr</div>
               </div>
-              
-              <div className="text-xs mt-4" style={{ color: '#444' }}>
-                click anywhere to dismiss
+              <div>
+                <div className="text-xs text-gray-500">Wage Owed</div>
+                <div className="font-bold text-red-400">${liveTrader?.wage?.wageOwed || 0}</div>
+              </div>
+              <div>
+                <div className="text-xs text-gray-500">Efficiency</div>
+                <div className="font-bold">{liveTrader?.wage?.efficiency || 0}%</div>
               </div>
             </div>
-          </div>
-        )}
+            <div className="text-xs text-gray-600 mt-3 pt-3 border-t border-gray-800" suppressHydrationWarning>
+              Last scan: {liveTrader?.lastScan?.timestamp 
+                ? new Date(liveTrader.lastScan.timestamp).toLocaleTimeString() 
+                : 'never'}
+            </div>
+          </section>
+        </div>
+
+        {/* RIGHT COLUMN - PREDICTIONS */}
+        <div className="space-y-4">
+          
+          {/* POLYMARKET */}
+          <section className="bg-gray-900/50 border border-gray-800 rounded-lg p-4">
+            <h2 className="text-sm font-bold text-[#9D4EDD] mb-4">🎯 POLYMARKET TOP MARKETS</h2>
+            <div className="space-y-3">
+              {predictions.length === 0 ? (
+                <p className="text-gray-500 text-xs">Loading markets...</p>
+              ) : (
+                predictions.slice(0, 5).map((p: any, i: number) => (
+                  <div key={i} className="p-3 bg-black/50 rounded">
+                    <div className="text-sm text-gray-200 line-clamp-2">{p.question}</div>
+                    <div className="flex justify-between items-center mt-2">
+                      <span className="text-xs text-gray-500">
+                        Vol: ${(p.volume24h / 1e6).toFixed(2)}M
+                      </span>
+                      <span className="text-xs text-gray-500">
+                        Liq: ${(parseFloat(p.liquidity) / 1e3).toFixed(0)}K
+                      </span>
+                      <span className={`text-xs px-2 py-0.5 rounded ${
+                        p.signal === 'uncertain' ? 'bg-gray-800 text-gray-400' :
+                        p.signal === 'bullish' ? 'bg-green-900 text-green-400' :
+                        'bg-red-900 text-red-400'
+                      }`}>
+                        {p.signal}
+                      </span>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          </section>
+
+          {/* TREASURY */}
+          <section className="bg-gray-900/50 border border-gray-800 rounded-lg p-4">
+            <h2 className="text-sm font-bold text-gray-400 mb-3">TREASURY</h2>
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-500">Total</span>
+                <span className="font-bold text-white">${data?.treasury?.balances?.total || 0}</span>
+              </div>
+              <div className="flex justify-between text-xs">
+                <span className="text-gray-600">Reserve</span>
+                <span className="text-gray-400">${data?.treasury?.balances?.treasury_reserve || 0}</span>
+              </div>
+              <div className="flex justify-between text-xs">
+                <span className="text-gray-600">Polymarket</span>
+                <span className="text-gray-400">${data?.treasury?.balances?.polymarket_agent || 0}</span>
+              </div>
+              <div className="flex justify-between text-xs">
+                <span className="text-gray-600">Base Meme</span>
+                <span className="text-gray-400">${data?.treasury?.balances?.base_meme_agent || 0}</span>
+              </div>
+            </div>
+          </section>
+
+          {/* WALLET LINK */}
+          <section className="bg-gray-900/50 border border-gray-800 rounded-lg p-4">
+            <h2 className="text-sm font-bold text-gray-400 mb-3">HOT WALLET</h2>
+            <a 
+              href="https://basescan.org/address/0xCA4Ca0c7b26e51805c20C95DF02Ea86feA938D78"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-blue-400 hover:underline break-all"
+            >
+              0xCA4Ca0c7b26e51805c20C95DF02Ea86feA938D78
+            </a>
+            <div className="text-xs text-gray-600 mt-2">
+              View all transactions on BaseScan
+            </div>
+          </section>
+        </div>
+
       </div>
+
+      {/* FOOTER */}
+      <footer className="border-t border-gray-800 p-4 flex flex-wrap justify-between items-center text-xs text-gray-600">
+        <div className="flex gap-4">
+          <a href="https://b0b.dev" className="hover:text-[#00FF88] transition">b0b.dev</a>
+          <a href="https://0type.b0b.dev" className="hover:text-[#00FF88] transition">0type.b0b.dev</a>
+        </div>
+        <div className="flex items-center gap-2">
+          <span style={{ color: pulseColor }}>{data?.freshness?.l0re?.emoji || '⏳'}</span>
+          <span>{data?.freshness?.l0re?.code || 'f.??'}</span>
+          <span className="text-gray-700">|</span>
+          <span>L0RE v0.3.0</span>
+        </div>
+      </footer>
     </main>
   );
 }
