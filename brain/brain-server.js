@@ -4223,7 +4223,11 @@ app.get('/swarm/live', async (req, res) => {
       treasuryState,
       turb0b00stState,
       liveTraderState,
-      tradingStatus
+      tradingStatus,
+      xConversations,
+      libraryIndex,
+      apiCosts,
+      swarmPulse
     ] = await Promise.all([
       readDataFile('d0t-signals.json'),
       readDataFile('r0ss-research.json'),
@@ -4232,7 +4236,11 @@ app.get('/swarm/live', async (req, res) => {
       readDataFile('treasury-state.json'),
       readDataFile('turb0b00st-state.json'),
       readDataFile('live-trader-state.json'),
-      readDataFile('trading-status.json')
+      readDataFile('trading-status.json'),
+      readDataFile('x-conversations.json'),
+      readDataFile('library-index.json'),
+      readDataFile('api-costs.json'),
+      readDataFile('swarm-pulse.json')
     ]);
     
     res.json({
@@ -4246,16 +4254,24 @@ app.get('/swarm/live', async (req, res) => {
       r0ss: r0ssResearch,
       b0b: b0bCreative,
       teamChat: teamChat,
+      xSocial: xConversations,
+      library: libraryIndex,
       treasury: treasuryState,
       turb0b00st: turb0b00stState,
       liveTrader: liveTraderState,
       tradingStatus: tradingStatus,
+      costs: apiCosts,
+      daemonPulse: swarmPulse,
       dataFreshness: {
         d0t: d0tSignals?._lastUpdated || 'never',
         r0ss: r0ssResearch?._lastUpdated || 'never',
         b0b: b0bCreative?._lastUpdated || 'never',
+        xSocial: xConversations?._lastUpdated || 'never',
+        library: libraryIndex?._lastUpdated || 'never',
         treasury: treasuryState?._lastUpdated || 'never',
-        turb0b00st: turb0b00stState?._lastUpdated || 'never'
+        turb0b00st: turb0b00stState?._lastUpdated || 'never',
+        costs: apiCosts?._lastUpdated || 'never',
+        daemon: swarmPulse?._lastUpdated || 'never'
       }
     });
   } catch (err) {
@@ -4299,6 +4315,64 @@ app.get('/crawlers/b0b', async (req, res) => {
     res.json(JSON.parse(data));
   } catch {
     res.status(404).json({ error: 'No b0b creative data' });
+  }
+});
+
+/**
+ * GET /crawlers/x-social
+ * Get X/Twitter conversation data
+ */
+app.get('/crawlers/x-social', async (req, res) => {
+  try {
+    const data = await fs.readFile(path.join(__dirname, 'data', 'x-conversations.json'), 'utf8');
+    res.json(JSON.parse(data));
+  } catch {
+    res.status(404).json({ error: 'No X conversation data' });
+  }
+});
+
+/**
+ * GET /crawlers/library
+ * Get library sync index
+ */
+app.get('/crawlers/library', async (req, res) => {
+  try {
+    const data = await fs.readFile(path.join(__dirname, 'data', 'library-index.json'), 'utf8');
+    res.json(JSON.parse(data));
+  } catch {
+    res.status(404).json({ error: 'No library index data' });
+  }
+});
+
+/**
+ * GET /swarm/costs
+ * Get API cost tracking data
+ */
+app.get('/swarm/costs', async (req, res) => {
+  try {
+    const data = await fs.readFile(path.join(__dirname, 'data', 'api-costs.json'), 'utf8');
+    res.json(JSON.parse(data));
+  } catch {
+    res.json({
+      message: 'No cost data yet',
+      hint: 'Run swarm-daemon to start tracking'
+    });
+  }
+});
+
+/**
+ * GET /swarm/pulse
+ * Get daemon heartbeat and crawler status
+ */
+app.get('/swarm/pulse', async (req, res) => {
+  try {
+    const data = await fs.readFile(path.join(__dirname, 'data', 'swarm-pulse.json'), 'utf8');
+    res.json(JSON.parse(data));
+  } catch {
+    res.json({
+      message: 'Daemon not running',
+      hint: 'Start with: node crawlers/swarm-daemon.js'
+    });
   }
 });
 
