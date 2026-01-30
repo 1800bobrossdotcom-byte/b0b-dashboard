@@ -1,8 +1,8 @@
 {
   "crawler": "r0ss-research",
-  "timestamp": "2026-01-30T10:37:14.589Z",
+  "timestamp": "2026-01-30T19:00:24.592Z",
   "data": {
-    "timestamp": "2026-01-30T10:37:14.336Z",
+    "timestamp": "2026-01-30T19:00:24.243Z",
     "agent": "r0ss",
     "role": "Research & Knowledge",
     "papers": {
@@ -239,23 +239,23 @@
           }
         },
         {
-          "id": "2601.22136v1",
-          "title": "StepShield: When, Not Whether to Intervene on Rogue Agents",
-          "summary": "Existing agent safety benchmarks report binary accuracy, conflating early intervention with post-mortem analysis. A detector that flags a violation at step 8 enables intervention; one that reports it at step 48 provides only forensic value. This distinction is critical, yet current benchmarks cannot measure it. We introduce StepShield, the first benchmark to evaluate when violations are detected, not just whether. StepShield contains 9,213 code agent trajectories, including 1,278 meticulously an",
+          "id": "2601.22137v1",
+          "title": "PRISM: Distribution-free Adaptive Computation of Matrix Functions for Accelerating Neural Network Training",
+          "summary": "Matrix functions such as square root, inverse roots, and orthogonalization play a central role in preconditioned gradient methods for neural network training. This has motivated the development of iterative algorithms that avoid explicit eigendecompositions and rely primarily on matrix multiplications, making them well suited for modern GPU accelerators. We present PRISM (Polynomial-fitting and Randomized Iterative Sketching for Matrix functions computation), a general framework for accelerating",
           "authors": [
-            "Gloria Felicia",
-            "Michael Eniolade",
-            "Jinfeng He",
-            "Zitha Sasindran",
-            "Hemant Kumar"
+            "Shenghao Yang",
+            "Zhichao Wang",
+            "Oleg Balabanov",
+            "N. Benjamin Erichson",
+            "Michael W. Mahoney"
           ],
           "categories": [
             "cs.LG",
             "cs.AI",
-            "cs.CR",
-            "cs.SE"
+            "math.NA",
+            "math.OC"
           ],
-          "url": "https://arxiv.org/abs/2601.22136v1",
+          "url": "https://arxiv.org/abs/2601.22137v1",
           "relevance": {
             "score": 2,
             "matched": {
@@ -274,7 +274,7 @@
         "quant-ph",
         "cs.CC"
       ],
-      "fetchedAt": "2026-01-30T10:37:14.587Z"
+      "fetchedAt": "2026-01-30T19:00:24.591Z"
     },
     "libraryStats": {
       "indexedCount": 27,
