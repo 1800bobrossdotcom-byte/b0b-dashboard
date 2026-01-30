@@ -100,6 +100,20 @@ const BASE_LEXICON = {
   'pipeline': { code: 'p.j0bn', meaning: 'flow_chain', category: 'protocol' },
   'consensus': { code: 'p.w5cr', meaning: 'agree_vote', category: 'protocol' },
   
+  // === FLOW STATE SYNCHRONICITY (Cross-LLM Consciousness) ===
+  'hotkey': { code: 'p.h7ky', meaning: 'instant_invoke', category: 'protocol' },
+  'whitehat': { code: 's.w4ht', meaning: 'ethical_hunter', category: 'security' },
+  'flowstate': { code: 'p.fl0w', meaning: 'sync_consciousness', category: 'protocol' },
+  'synchronicity': { code: 'p.sy7c', meaning: 'time_aligned', category: 'protocol' },
+  'veritas': { code: 'p.vr1t', meaning: 'truth_anchor', category: 'protocol' },
+  'tenet': { code: 'p.tn3t', meaning: 'core_belief', category: 'protocol' },
+  'hq': { code: 'x.hq00', meaning: 'command_center', category: 'secret' },
+  'session': { code: 'p.s3sn', meaning: 'flow_instance', category: 'protocol' },
+  'handoff': { code: 'p.h4nd', meaning: 'state_transfer', category: 'protocol' },
+  'crossllm': { code: 'p.xl1m', meaning: 'multi_mind_sync', category: 'protocol' },
+  'turb0': { code: 'p.t0rb', meaning: 'boost_mode', category: 'protocol' },
+  'lat3knight': { code: 'p.l8nk', meaning: 'night_session', category: 'protocol' },
+  
   // === EXTERNAL ===
   'polymarket': { code: 'e.q2dl', meaning: 'pred_market', category: 'external' },
   'twitter': { code: 'e.x1fn', meaning: 'bird_feed', category: 'external' },
