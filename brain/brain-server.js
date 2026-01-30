@@ -390,22 +390,24 @@ app.get('/library/search', async (req, res) => {
 // CRAWLERS — c0m Autonomous Recon
 // ═══════════════════════════════════════════════════════════════
 
-const CRAWLERS_DIR = path.join(__dirname, '..', 'crawlers');
 const RECON_DIR = path.join(DATA_DIR, 'recon');
 
-// List available crawlers
-app.get('/crawlers', async (req, res) => {
-  try {
-    const files = await fs.readdir(CRAWLERS_DIR);
-    const crawlers = files.filter(f => f.endsWith('.js')).map(f => ({
-      name: f.replace('.js', ''),
-      path: f,
-      type: f.startsWith('c0m-') ? 'security' : 'data'
-    }));
-    res.json({ count: crawlers.length, crawlers });
-  } catch (e) {
-    res.status(500).json({ error: 'Failed to list crawlers', details: e.message });
-  }
+// List available crawlers (informational - crawlers run locally)
+app.get('/crawlers', (req, res) => {
+  // Crawlers are in the local workspace, not deployed to Railway
+  // This endpoint provides info about what's available locally
+  res.json({
+    note: 'Crawlers run locally in workspace, not on Railway',
+    available: [
+      { name: 'c0m-recon', type: 'security', description: 'Subdomain enum, tech fingerprint, security headers' },
+      { name: 'c0m-security-crawler', type: 'security', description: 'Full security analysis' },
+      { name: 'c0m-twilio-hunt', type: 'security', description: 'Twilio bug bounty recon' },
+      { name: 'c0m-xss-trainer', type: 'security', description: 'XSS practice automation' },
+      { name: 'polymarket-crawler', type: 'data', description: 'Prediction market data' },
+      { name: 'content-crawler', type: 'data', description: 'General content extraction' }
+    ],
+    runCommand: 'cd crawlers && node <crawler-name>.js <target>'
+  });
 });
 
 // Get recon data for a target
