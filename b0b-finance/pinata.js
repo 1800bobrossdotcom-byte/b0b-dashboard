@@ -19,9 +19,12 @@
  *   node pinata.js trades         - Upload trading history
  */
 
-require('dotenv').config();
-const fs = require('fs');
 const path = require('path');
+// Load from local .env first, fallback to parent
+require('dotenv').config({ path: path.join(__dirname, '.env') });
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
+
+const fs = require('fs');
 const axios = require('axios');
 const FormData = require('form-data');
 

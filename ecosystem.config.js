@@ -99,5 +99,46 @@ module.exports = {
         NODE_ENV: 'production',
       },
     },
+    {
+      name: 'turb0b00st',
+      script: 'first-trade.js',
+      cwd: './b0b-finance',
+      instances: 1,
+      autorestart: false,
+      watch: false,
+      // Run every 4 hours to execute trading strategies
+      cron_restart: '0 */4 * * *',
+      env: {
+        NODE_ENV: 'production',
+      },
+    },
+    {
+      name: 'brain-autonomous',
+      script: 'brain-loop.js',
+      args: '"What should b0b focus on right now? Check trading status, team progress, and priorities." --execute',
+      cwd: './brain',
+      instances: 1,
+      autorestart: false,
+      watch: false,
+      // Run every 2 hours for autonomous thinking
+      cron_restart: '0 */2 * * *',
+      env: {
+        NODE_ENV: 'production',
+      },
+    },
+    {
+      name: 'alfred-briefing',
+      script: 'alfred.js',
+      args: 'brief',
+      cwd: './alfred',
+      instances: 1,
+      autorestart: false,
+      watch: false,
+      // Generate morning and evening briefings
+      cron_restart: '0 9,21 * * *',
+      env: {
+        NODE_ENV: 'production',
+      },
+    },
   ],
 };
