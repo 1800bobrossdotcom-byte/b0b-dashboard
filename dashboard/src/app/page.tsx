@@ -43,9 +43,21 @@ export default function B0bDev() {
     setMounted(true);
   }, []);
   
-  // Fetch real trade count from brain
+  // Fetch real trade count from local API (falls back to brain)
   useEffect(() => {
     const fetchTrades = async () => {
+      try {
+        // Try local API first (reads from filesystem)
+        const res = await fetch('/api/live');
+        const data = await res.json();
+        if (data.turb0b00st?.trades) {
+          setTradeCount(data.turb0b00st.trades);
+          return;
+        }
+      } catch {
+        // Fall back to brain API
+      }
+      
       try {
         const res = await fetch(`${BRAIN_URL}/finance/treasury`);
         const data = await res.json();

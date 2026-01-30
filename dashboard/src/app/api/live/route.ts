@@ -125,6 +125,39 @@ export async function GET() {
     } catch (e) {
       // No status file
     }
+    
+    // Load TURB0B00ST trading data
+    try {
+      const turbPath = path.join(process.cwd(), '..', 'b0b-finance', 'turb0b00st-state.json');
+      if (fs.existsSync(turbPath)) {
+        const raw = fs.readFileSync(turbPath, 'utf8');
+        const turb = JSON.parse(raw);
+        data.turb0b00st = {
+          active: turb.activated || false,
+          mode: turb.mode || 'PAPER',
+          trades: turb.tradingHistory?.length || 0,
+          recentTrades: (turb.tradingHistory || []).slice(-3).reverse(),
+          dailyStats: turb.dailyStats,
+        };
+      }
+    } catch (e) {
+      data.turb0b00st = { active: false, mode: 'PAPER', trades: 0 };
+    }
+    
+    // Load L0RE collection
+    try {
+      const l0rePath = path.join(process.cwd(), '..', 'b0b-finance', 'l0re-collection.json');
+      if (fs.existsSync(l0rePath)) {
+        const raw = fs.readFileSync(l0rePath, 'utf8');
+        const l0re = JSON.parse(raw);
+        data.l0re = {
+          totalMinted: l0re.totalMinted || 0,
+          pieces: l0re.pieces || [],
+        };
+      }
+    } catch (e) {
+      data.l0re = { totalMinted: 0, pieces: [] };
+    }
 
     // System health
     data.system = {
