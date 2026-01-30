@@ -1,11 +1,12 @@
 /**
- * 🎯 LIVE TRADER — Real On-Chain Trading via Bankr
+ * 🎯 LIVE TRADER — TURB0B00ST On-Chain Trading
  * ════════════════════════════════════════════════════════════════════════════
  * 
  * THIS IS REAL MONEY. This module executes actual trades on Base chain
- * using Bankr as the signing layer.
+ * using TURB0B00ST multi-agent intelligence (d0t, c0m, b0b, r0ss).
  * 
- * Focus: Top 100 Base tokens + Bankr/Clanker/Clawd ecosystem
+ * Focus: Top 100 Base tokens + Clanker/Clawd ecosystem
+ * Data: DexScreener (FREE), Clanker API (FREE), on-chain data
  * 
  * Strategies:
  * 1. BLESSING SNIPER — Ecosystem tokens, momentum plays, disciplined exits
@@ -1280,7 +1281,7 @@ async function discoverNewTokens() {
   
   try {
     // ════════════════════════════════════════════════════════════════════════════
-    // TRENDING CACHE — Don't spam Bankr for same data
+    // TRENDING CACHE — Don't fetch same data repeatedly
     // ════════════════════════════════════════════════════════════════════════════
     const now = Date.now();
     if (_rateLimiter.trendingCache && (now - _rateLimiter.trendingCacheTime) < _rateLimiter.TRENDING_CACHE_TTL_MS) {
@@ -1289,51 +1290,45 @@ async function discoverNewTokens() {
     }
     
     // ════════════════════════════════════════════════════════════════════════════
-    // STEP 1: BANKR SDK — Ask Bankr what's trending (native ecosystem intelligence)
-    // Costs $0.10 but gives high-quality curated data from their ecosystem
-    // RATE LIMITED: Only call if we have API budget
+    // STEP 1: DEXSCREENER API — FREE trending tokens on Base (replaces Bankr)
+    // TURB0B00ST uses free data sources, not paid APIs
     // ════════════════════════════════════════════════════════════════════════════
-    if (canMakeApiCall()) {
-      try {
-        console.log(`   🏦 Asking Bankr for trending tokens...`);
-        trackApiCall();
+    try {
+      console.log(`   📊 Fetching trending Base tokens (TURB0B00ST mode)...`);
+      
+      // DexScreener trending - FREE
+      const dexRes = await fetch('https://api.dexscreener.com/latest/dex/tokens/base', { timeout: 10000 });
+      const dexData = await dexRes.json();
+      
+      if (dexData.pairs && dexData.pairs.length > 0) {
+        // Sort by 24h volume
+        const sorted = dexData.pairs
+          .filter(p => p.chainId === 'base' && p.volume?.h24 > 10000)
+          .sort((a, b) => (b.volume?.h24 || 0) - (a.volume?.h24 || 0))
+          .slice(0, 20);
         
-        const bankrResult = await bankr.promptAndWait('What are the top trending tokens on Base right now? List the top 10 by volume.');
+        console.log(`   📊 DexScreener: ${sorted.length} trending Base tokens`);
         
-        if (bankrResult.status === 'completed' && bankrResult.richData?.length > 0) {
-          console.log(`   🏦 Bankr returned ${bankrResult.richData.length} trending tokens`);
+        for (const pair of sorted) {
+          const address = pair.baseToken?.address;
+          if (!address || tokens.find(t => t.address?.toLowerCase() === address?.toLowerCase())) continue;
           
-          for (const item of bankrResult.richData) {
-            // Parse Bankr's rich data format
-            if (item.type === 'token' && item.data) {
-              const tokenData = item.data;
-              const address = tokenData.address || tokenData.contractAddress;
-              
-              if (!address || tokens.find(t => t.address?.toLowerCase() === address?.toLowerCase())) continue;
-              
-              tokens.push({
-                symbol: tokenData.symbol,
-                name: tokenData.name,
-                address: address,
-                price: parseFloat(tokenData.price || 0),
-                priceChange24h: parseFloat(tokenData.priceChange24h || tokenData.change24h || 0),
-                volume24h: parseFloat(tokenData.volume24h || tokenData.volume || 0),
-                liquidity: parseFloat(tokenData.liquidity || 0),
-                source: 'bankr',
-                bankrRecommended: true,
-                tier: 1, // Bankr recommendations get top tier
-                ecosystem: 'bankr',
-              });
-            }
-          }
-        } else {
-          console.log(`   🏦 Bankr: ${bankrResult.response?.substring(0, 100) || 'No structured data'}...`);
+          tokens.push({
+            symbol: pair.baseToken?.symbol,
+            name: pair.baseToken?.name,
+            address: address,
+            price: parseFloat(pair.priceUsd || 0),
+            priceChange24h: parseFloat(pair.priceChange?.h24 || 0),
+            volume24h: parseFloat(pair.volume?.h24 || 0),
+            liquidity: parseFloat(pair.liquidity?.usd || 0),
+            source: 'dexscreener',
+            tier: 2,
+            ecosystem: 'base',
+          });
         }
-      } catch (e) {
-        console.log(`   ⚠️ Bankr trending check skipped: ${e.message}`);
       }
-    } else {
-      console.log(`   ⏸️ Skipping Bankr trending (rate limited)`);
+    } catch (e) {
+      console.log(`   ⚠️ DexScreener trending check failed: ${e.message}`);
     }
     
     // ════════════════════════════════════════════════════════════════════════════
