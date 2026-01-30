@@ -1,0 +1,96 @@
+{
+  "version": "1.0.0",
+  "description": "L0RE-driven crawl subjects — evolves via agent conversations",
+  "lastUpdated": "2026-01-30T00:00:00.000Z",
+  "subjects": [
+    {
+      "id": "prediction-markets",
+      "crawler": "polymarket",
+      "active": true,
+      "interval": 30000,
+      "priority": "critical",
+      "l0re": "e.q2dl",
+      "addedBy": "d0t",
+      "reason": "Forward-looking alpha — highest signal value"
+    },
+    {
+      "id": "market-signals",
+      "crawler": "d0t-signals",
+      "active": true,
+      "interval": 60000,
+      "priority": "critical",
+      "l0re": "d.x1dl",
+      "addedBy": "d0t",
+      "reason": "Core market data — position sizing inputs"
+    },
+    {
+      "id": "tech-research",
+      "crawler": "r0ss-research",
+      "active": true,
+      "interval": 300000,
+      "priority": "high",
+      "l0re": "d.h6vr",
+      "addedBy": "r0ss",
+      "reason": "Infrastructure intel — system evolution"
+    },
+    {
+      "id": "social-pulse",
+      "crawler": "x-conversations",
+      "active": true,
+      "interval": 180000,
+      "priority": "medium",
+      "l0re": "e.m8gt",
+      "addedBy": "b0b",
+      "reason": "Community engagement — narrative tracking"
+    },
+    {
+      "id": "chain-data",
+      "crawler": "solana",
+      "active": true,
+      "interval": 60000,
+      "priority": "high",
+      "l0re": "d.f1fn",
+      "addedBy": "d0t",
+      "reason": "On-chain activity — treasury tracking"
+    },
+    {
+      "id": "security-intel",
+      "crawler": "c0m-security",
+      "active": true,
+      "interval": 900000,
+      "priority": "high",
+      "l0re": "s.m8pt",
+      "addedBy": "c0m",
+      "reason": "Threat detection — system protection"
+    },
+    {
+      "id": "creative-culture",
+      "crawler": "b0b-creative",
+      "active": true,
+      "interval": 600000,
+      "priority": "medium",
+      "l0re": "a.v0rx",
+      "addedBy": "b0b",
+      "reason": "Art & memes — brand expression"
+    },
+    {
+      "id": "content-mining",
+      "crawler": "content",
+      "active": true,
+      "interval": 1800000,
+      "priority": "low",
+      "l0re": "d.q2cr",
+      "addedBy": "r0ss",
+      "reason": "Long-form content — knowledge base"
+    }
+  ],
+  "pendingSubjects": [],
+  "evolutionLog": [
+    {
+      "timestamp": "2026-01-30T00:00:00.000Z",
+      "action": "init",
+      "by": "system",
+      "note": "Initial library created from agent consensus"
+    }
+  ]
+}

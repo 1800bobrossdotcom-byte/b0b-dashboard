@@ -16,7 +16,14 @@
 const axios = require('axios');
 const fs = require('fs').promises;
 const path = require('path');
-const pdfParse = require('pdf-parse');
+
+// PDF Parse requires careful import - it's CommonJS
+let pdfParse;
+try {
+  pdfParse = require('pdf-parse');
+} catch (e) {
+  console.error('[LIBRARY] pdf-parse not available:', e.message);
+}
 
 class LibraryCrawler {
   constructor(options = {}) {
@@ -86,6 +93,12 @@ class LibraryCrawler {
       }
       
       console.log(`[LIBRARY] Processing ${filename}...`);
+      
+      // Check if pdfParse is available
+      if (!pdfParse) {
+        console.log(`[LIBRARY] pdf-parse not available, skipping ${filename}`);
+        return;
+      }
       
       // Extract text from PDF
       const dataBuffer = await fs.readFile(pdfPath);

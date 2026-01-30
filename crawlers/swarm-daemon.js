@@ -302,25 +302,73 @@ class SwarmDaemon {
   }
   
   initCrawlers() {
-    const crawlerMap = {
-      'd0t-signals':      './d0t-signals.js',
-      'r0ss-research':    './r0ss-research.js',
-      'b0b-creative':     './b0b-creative.js',
-      'twitter':          './twitter-crawler.js',
-      'x-conversations':  './x-conversation-crawler.js',
-      'content':          './content-crawler.js',
-      'polymarket':       './polymarket-crawler.js',
-      'solana':           './solana-crawler.js',
-      'library-sync':     './library-sync-crawler.js',
+    // ═══════════════════════════════════════════════════════════════
+    // LIBRARY-DRIVEN SUBJECTS — Dynamic, not hardcoded
+    // Load from brain/data/library/subjects.json which evolves via L0RE
+    // ═══════════════════════════════════════════════════════════════
+    
+    const librarySubjectsPath = path.join(__dirname, '..', 'brain', 'data', 'library', 'subjects.json');
+    let librarySubjects = [];
+    
+    try {
+      if (fs.existsSync(librarySubjectsPath)) {
+        const lib = JSON.parse(fs.readFileSync(librarySubjectsPath, 'utf-8'));
+        librarySubjects = lib.subjects || [];
+        console.log(`📚 [DAEMON] Loaded ${librarySubjects.length} subjects from library`);
+      }
+    } catch (e) {
+      console.log(`📚 [DAEMON] No library subjects yet — using core crawlers`);
+    }
+    
+    // Core crawlers (always active — infrastructure)
+    const coreCrawlers = {
+      'd0t-signals':      './d0t-signals.js',       // Market signals
+      'polymarket':       './polymarket-crawler.js', // Prediction markets
     };
     
-    for (const [name, file] of Object.entries(crawlerMap)) {
-      const fullPath = path.join(__dirname, file);
-      if (fs.existsSync(fullPath)) {
-        const interval = CONFIG.schedules[name] || 300000;
-        this.crawlers.set(name, new CrawlerRunner(name, fullPath, interval));
-        console.log(`📡 [DAEMON] Registered: ${name} (every ${interval/1000}s)`);
-      } else {
+    // Agent-specific crawlers (activated by conversations)
+    const agentCrawlers = {
+      'r0ss-research':    './r0ss-research.js',      // R0SS: Tech research
+      'b0b-creative':     './b0b-creative.js',       // B0B: Art/culture
+      'c0m-security':     './c0m-security.js',       // C0M: Security intel
+      'twitter':          './twitter-crawler.js',    // Social pulse
+      'x-conversations':  './x-conversation-crawler.js', // X threads
+      'solana':           './solana-crawler.js',     // Chain data
+      'content':          './content-crawler.js',    // Content mining
+      'library-sync':     './library-sync-crawler.js', // Library updates
+    };
+    
+    // Register core crawlers (always on)
+    for (const [name, file] of Object.entries(coreCrawlers)) {
+      this.registerCrawler(name, file);
+    }
+    
+    // Register library subjects as dynamic crawlers
+    for (const subject of librarySubjects) {
+      if (subject.crawler && subject.active) {
+        const crawlerFile = agentCrawlers[subject.crawler] || `./custom/${subject.crawler}.js`;
+        this.registerCrawler(subject.id, crawlerFile, subject.interval || CONFIG.schedules[subject.crawler]);
+        console.log(`📖 [LIBRARY] Subject: ${subject.id} → ${subject.crawler}`);
+      }
+    }
+    
+    // Fallback: register basic agent crawlers if no library yet
+    if (librarySubjects.length === 0) {
+      for (const [name, file] of Object.entries(agentCrawlers)) {
+        this.registerCrawler(name, file);
+      }
+    }
+  }
+  
+  registerCrawler(name, file, customInterval = null) {
+    const fullPath = path.join(__dirname, file);
+    if (fs.existsSync(fullPath)) {
+      const interval = customInterval || CONFIG.schedules[name] || 300000;
+      this.crawlers.set(name, new CrawlerRunner(name, fullPath, interval));
+      console.log(`📡 [DAEMON] Registered: ${name} (every ${interval/1000}s)`);
+    } else {
+      // Silent — custom crawlers may not exist yet
+      if (!file.includes('custom/')) {
         console.warn(`⚠️ [DAEMON] Crawler not found: ${file}`);
       }
     }

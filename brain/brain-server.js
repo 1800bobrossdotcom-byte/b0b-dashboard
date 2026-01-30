@@ -142,9 +142,10 @@ app.use(cors({
     // Allow requests with no origin (mobile apps, curl, etc)
     if (!origin) return callback(null, true);
     
-    // Allow all b0b.dev subdomains and localhost
+    // Allow all b0b.dev subdomains, Railway apps, and localhost
     const allowed = [
       /^https:\/\/.*\.?b0b\.dev$/,
+      /^https:\/\/.*\.up\.railway\.app$/,
       /^http:\/\/localhost:\d+$/,
     ];
     
@@ -4797,6 +4798,121 @@ app.post('/crawlers/data', async (req, res) => {
     });
   } catch (e) {
     console.error(`❌ [BRAIN] Crawler data error:`, e.message);
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// =============================================================================
+// LIBRARY EVOLUTION — L0RE-Driven Subject Management
+// =============================================================================
+
+/**
+ * GET /library/subjects
+ * Get current crawl subjects from L0RE library
+ */
+app.get('/library/subjects', async (req, res) => {
+  try {
+    const subjectsPath = path.join(__dirname, 'data', 'library', 'subjects.json');
+    const data = await fs.readFile(subjectsPath, 'utf8');
+    res.json(JSON.parse(data));
+  } catch (e) {
+    res.json({ subjects: [], error: 'No library yet' });
+  }
+});
+
+/**
+ * POST /library/subjects/add
+ * Agent adds a new crawl subject to the library
+ */
+app.post('/library/subjects/add', async (req, res) => {
+  try {
+    const { subject } = req.body;
+    if (!subject || !subject.id || !subject.crawler) {
+      return res.status(400).json({ error: 'Missing subject.id or subject.crawler' });
+    }
+    
+    const subjectsPath = path.join(__dirname, 'data', 'library', 'subjects.json');
+    let library;
+    try {
+      library = JSON.parse(await fs.readFile(subjectsPath, 'utf8'));
+    } catch {
+      library = { version: '1.0.0', subjects: [], evolutionLog: [] };
+    }
+    
+    // Check if already exists
+    if (library.subjects.find(s => s.id === subject.id)) {
+      return res.json({ success: false, message: 'Subject already exists' });
+    }
+    
+    // Add subject
+    library.subjects.push({
+      ...subject,
+      active: subject.active !== false,
+      addedAt: new Date().toISOString()
+    });
+    
+    // Log evolution
+    library.evolutionLog.push({
+      timestamp: new Date().toISOString(),
+      action: 'add',
+      subjectId: subject.id,
+      by: subject.addedBy || 'unknown',
+      reason: subject.reason || ''
+    });
+    
+    library.lastUpdated = new Date().toISOString();
+    await fs.writeFile(subjectsPath, JSON.stringify(library, null, 2));
+    
+    console.log(`📚 [LIBRARY] Subject added: ${subject.id} by ${subject.addedBy}`);
+    res.json({ success: true, subject });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/**
+ * POST /library/subjects/evolve
+ * Agent conversation triggers library evolution
+ * This is called after team discussions to update what gets crawled
+ */
+app.post('/library/subjects/evolve', async (req, res) => {
+  try {
+    const { discussion, actionItems } = req.body;
+    
+    const subjectsPath = path.join(__dirname, 'data', 'library', 'subjects.json');
+    let library;
+    try {
+      library = JSON.parse(await fs.readFile(subjectsPath, 'utf8'));
+    } catch {
+      library = { version: '1.0.0', subjects: [], evolutionLog: [] };
+    }
+    
+    // Extract crawler-related action items
+    const crawlerActions = actionItems?.filter(a => 
+      a.toLowerCase().includes('crawl') || 
+      a.toLowerCase().includes('monitor') || 
+      a.toLowerCase().includes('track') ||
+      a.toLowerCase().includes('research')
+    ) || [];
+    
+    // Log the evolution attempt
+    library.evolutionLog.push({
+      timestamp: new Date().toISOString(),
+      action: 'evolve',
+      source: 'discussion',
+      actionItems: crawlerActions.length,
+      note: discussion?.substring(0, 100) || 'Agent conversation triggered'
+    });
+    
+    library.lastUpdated = new Date().toISOString();
+    await fs.writeFile(subjectsPath, JSON.stringify(library, null, 2));
+    
+    res.json({ 
+      success: true, 
+      evolved: crawlerActions.length > 0,
+      pendingActions: crawlerActions
+    });
+  } catch (e) {
     res.status(500).json({ error: e.message });
   }
 });
