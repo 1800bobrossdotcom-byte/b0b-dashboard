@@ -11,11 +11,8 @@ RUN npm install --omit=dev --legacy-peer-deps
 # Copy source
 COPY . .
 
-# Create data directory and ensure it persists
+# Create data directory (data files are already copied with COPY . .)
 RUN mkdir -p data
-
-# Copy data files if they exist (for initial state)
-COPY data/*.json data/ 2>/dev/null || true
 
 EXPOSE 3001
 
