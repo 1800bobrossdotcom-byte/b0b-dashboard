@@ -20,8 +20,8 @@ const path = require('path');
 const FRESHNESS_RULES = {
   // Critical - must be fresh
   'd0t-signals': { maxAge: 120, priority: 'critical', agent: 'd0t' },
-  'live-trader': { maxAge: 60, priority: 'critical', agent: 'turb0' },
-  'turb0b00st': { maxAge: 300, priority: 'critical', agent: 'turb0' },
+  'live-trader-state': { maxAge: 60, priority: 'critical', agent: 'turb0' },
+  'turb0b00st-state': { maxAge: 300, priority: 'critical', agent: 'turb0' },
   
   // High - refresh frequently  
   'polymarket': { maxAge: 180, priority: 'high', agent: 'd0t' },

@@ -1,0 +1,455 @@
+{
+  "lastSweep": "2026-01-30T18:48:48.244Z",
+  "items": {
+    "d0t-signals.json": {
+      "file": "d0t-signals.json",
+      "exists": true,
+      "age": 29495,
+      "maxAge": 120,
+      "fresh": false,
+      "freshness": 0,
+      "priority": "critical",
+      "agent": "d0t",
+      "lastUpdate": "2026-01-30T10:37:13.320Z",
+      "status": "🔴"
+    },
+    "live-trader-state.json": {
+      "file": "live-trader-state.json",
+      "exists": true,
+      "age": 141,
+      "maxAge": 60,
+      "fresh": false,
+      "freshness": 0,
+      "priority": "critical",
+      "agent": "turb0",
+      "lastUpdate": "2026-01-30T18:46:27.634Z",
+      "status": "🔴"
+    },
+    "turb0b00st-state.json": {
+      "file": "turb0b00st-state.json",
+      "exists": false,
+      "age": null,
+      "fresh": false,
+      "freshness": 0,
+      "priority": "critical",
+      "agent": "turb0",
+      "status": "⚫",
+      "error": "Unexpected token '﻿', \"﻿{\r\n    \"a\"... is not valid JSON"
+    },
+    "polymarket.json": {
+      "file": "polymarket.json",
+      "exists": true,
+      "age": 144,
+      "maxAge": 180,
+      "fresh": true,
+      "freshness": 20,
+      "priority": "high",
+      "agent": "d0t",
+      "lastUpdate": "2026-01-30T18:46:24.626Z",
+      "status": "🟢"
+    },
+    "x-conversations.json": {
+      "file": "x-conversations.json",
+      "exists": true,
+      "age": 29484,
+      "maxAge": 300,
+      "fresh": false,
+      "freshness": 0,
+      "priority": "high",
+      "agent": "swarm",
+      "lastUpdate": "2026-01-30T10:37:23.840Z",
+      "status": "🔴"
+    },
+    "treasury-state.json": {
+      "file": "treasury-state.json",
+      "exists": false,
+      "age": null,
+      "fresh": false,
+      "freshness": 0,
+      "priority": "high",
+      "agent": "swarm",
+      "status": "⚫",
+      "error": "Unexpected token '﻿', \"﻿{\r\n    \"b\"... is not valid JSON"
+    },
+    "r0ss-research.json": {
+      "file": "r0ss-research.json",
+      "exists": true,
+      "age": 29494,
+      "maxAge": 3600,
+      "fresh": false,
+      "freshness": 0,
+      "priority": "medium",
+      "agent": "r0ss",
+      "lastUpdate": "2026-01-30T10:37:14.589Z",
+      "status": "🔴"
+    },
+    "b0b-creative.json": {
+      "file": "b0b-creative.json",
+      "exists": true,
+      "age": 29490,
+      "maxAge": 3600,
+      "fresh": false,
+      "freshness": 0,
+      "priority": "medium",
+      "agent": "b0b",
+      "lastUpdate": "2026-01-30T10:37:17.784Z",
+      "status": "🔴"
+    },
+    "library-sync.json": {
+      "file": "library-sync.json",
+      "exists": true,
+      "age": 31640,
+      "maxAge": 7200,
+      "fresh": false,
+      "freshness": 0,
+      "priority": "medium",
+      "agent": "swarm",
+      "lastUpdate": "2026-01-30T10:01:28.615Z",
+      "status": "🔴"
+    },
+    "l0re-llm.json": {
+      "file": "l0re-llm.json",
+      "exists": false,
+      "age": null,
+      "fresh": false,
+      "freshness": 0,
+      "priority": "low",
+      "agent": "swarm",
+      "status": "⚫",
+      "error": "ENOENT: no such file or directory, stat 'C:\\workspace\\b0b-platform\\brain\\data\\l0re-llm.json'"
+    },
+    "learnings.json": {
+      "file": "learnings.json",
+      "exists": false,
+      "age": null,
+      "fresh": false,
+      "freshness": 0,
+      "priority": "low",
+      "agent": "swarm",
+      "status": "⚫",
+      "error": "Unexpected token '﻿', \"﻿{\r\n    \"t\"... is not valid JSON"
+    }
+  },
+  "alerts": [
+    {
+      "level": "CRITICAL",
+      "file": "d0t-signals.json",
+      "age": 29495,
+      "message": "d0t-signals.json is 492min stale (max: 2min)"
+    },
+    {
+      "level": "CRITICAL",
+      "file": "live-trader-state.json",
+      "age": 141,
+      "message": "live-trader-state.json is 2min stale (max: 1min)"
+    },
+    {
+      "level": "CRITICAL",
+      "file": "turb0b00st-state.json",
+      "age": null,
+      "message": "turb0b00st-state.json is Infinitymin stale (max: NaNmin)"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-01-30T18:21:56.972Z",
+      "fresh": 0,
+      "stale": 7,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:22:26.975Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:22:56.990Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:23:26.992Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:23:57.007Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:24:27.010Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:24:57.025Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:25:27.041Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:25:57.043Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:26:27.058Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:26:57.060Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:27:27.075Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:27:57.077Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:28:27.078Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:28:57.094Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:29:27.095Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:29:57.096Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:30:27.113Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:30:57.113Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:31:27.129Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:31:57.130Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:32:27.143Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:32:57.146Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:33:27.147Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:33:57.165Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:34:27.165Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:34:57.166Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:35:27.165Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:35:57.165Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:36:27.182Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:36:57.183Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:37:27.197Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:37:57.208Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:38:27.214Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:38:57.214Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:39:27.219Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:39:57.220Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:40:27.233Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:40:57.234Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:41:27.242Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:41:57.246Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:42:27.258Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:42:57.269Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:43:27.269Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:43:57.285Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:44:27.286Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:44:57.294Z",
+      "fresh": 1,
+      "stale": 5,
+      "missing": 5
+    },
+    {
+      "timestamp": "2026-01-30T18:45:30.153Z",
+      "fresh": 2,
+      "stale": 5,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:46:24.646Z",
+      "fresh": 2,
+      "stale": 5,
+      "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T18:48:48.244Z",
+      "fresh": 1,
+      "stale": 6,
+      "missing": 4
+    }
+  ]
+}

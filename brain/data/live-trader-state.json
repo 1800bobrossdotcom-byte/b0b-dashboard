@@ -5,17 +5,17 @@
   "wins": 0,
   "losses": 0,
   "dailyVolume": 0,
-  "dailyReset": "Wed Jan 28 2026",
+  "dailyReset": "Fri Jan 30 2026",
   "positions": [],
-  "lastTick": "2026-01-28T15:28:53.461Z",
-  "startDate": "2026-01-28T14:59:20.889Z",
+  "lastTick": "2026-01-30T18:49:29.670Z",
+  "startDate": "2026-01-30T18:19:07.308Z",
   "totalSweptToCold": 0,
   "totalReinvested": 0,
   "totalToTeam": 0,
   "lastSweep": null,
   "wage": {
     "hourlyTarget": 40,
-    "currentHour": 9,
+    "currentHour": 13,
     "hourlyPnL": 0,
     "hoursActive": 0,
     "totalWageEarned": 0,
@@ -23,15 +23,16 @@
     "efficiency": 0,
     "streak": 0,
     "bestStreak": 0,
-    "lastHourReset": "2026-01-28T14:59:20.889Z"
+    "lastHourReset": "2026-01-30T18:19:07.308Z"
   },
   "lastScan": {
-    "top100": 2,
-    "clanker": 0,
     "bankr": 0,
+    "clanker": 0,
+    "dexscreener": 0,
+    "boosted": 0,
     "clawd": 0,
     "ai": 0,
-    "candidates": 2,
-    "timestamp": "2026-01-28T15:22:01.476Z"
+    "candidates": 0,
+    "timestamp": "2026-01-30T18:45:10.053Z"
   }
 }
