@@ -4796,8 +4796,52 @@ app.listen(PORT, () => {
       console.log('  🌿 Freshness Monitor: RUNNING (30s sweep)');
     }
     
-    // Auto-start Polymarket crawler - FAST MODE (2 min)
+    // ═══════════════════════════════════════════════════════════════════════════
+    // D0T SIGNALS CRAWLER — LIVE DATA FROM APIS (NOT LOCAL FILES)
+    // ═══════════════════════════════════════════════════════════════════════════
     if (axios) {
+      try {
+        const D0TSignalsCrawler = require('../crawlers/d0t-signals.js');
+        const d0tCrawler = new D0TSignalsCrawler({ 
+          outputDir: path.join(__dirname, 'data'),
+          runOnce: false 
+        });
+        
+        // Initial fetch
+        console.log('  🔮 D0T Signals: Fetching LIVE data...');
+        await d0tCrawler.run();
+        
+        // Run every 2 minutes (120 seconds)
+        setInterval(async () => {
+          try {
+            await d0tCrawler.run();
+          } catch (e) {
+            console.log('  ⚠️ D0T crawler error:', e.message);
+          }
+        }, 2 * 60 * 1000);
+        
+        console.log('  ✅ D0T Signals Crawler: RUNNING (2min, LIVE APIs)');
+      } catch (e) {
+        console.log('  ⚠️ D0T crawler init failed:', e.message);
+      }
+      
+      // ═══════════════════════════════════════════════════════════════════════════
+      // LIBRARY CRAWLER — PDF/DOC PARSER (GROQ/KIMI POWERED)
+      // ═══════════════════════════════════════════════════════════════════════════
+      try {
+        const LibraryCrawler = require('./library-crawler.js');
+        const libraryCrawler = new LibraryCrawler({
+          libraryDir: path.join(__dirname, 'data', 'library'),
+          interval: 3600000 // 1 hour
+        });
+        
+        await libraryCrawler.start();
+        console.log('  📚 Library Crawler: RUNNING (1hr, GROQ/KIMI parsing)');
+      } catch (e) {
+        console.log('  ⚠️ Library crawler init failed:', e.message);
+      }
+      
+      // Auto-start Polymarket crawler - FAST MODE (2 min)
       crawlPolymarket().catch(e => console.log('  ⚠️ Polymarket init:', e.message));
       setInterval(crawlPolymarket, 2 * 60 * 1000);
       console.log('  📊 Polymarket Crawler: RUNNING (2min)');
