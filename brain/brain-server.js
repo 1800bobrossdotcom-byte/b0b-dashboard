@@ -387,6 +387,64 @@ app.get('/library/search', async (req, res) => {
 });
 
 // ═══════════════════════════════════════════════════════════════
+// CRAWLERS — c0m Autonomous Recon
+// ═══════════════════════════════════════════════════════════════
+
+const CRAWLERS_DIR = path.join(__dirname, '..', 'crawlers');
+const RECON_DIR = path.join(DATA_DIR, 'recon');
+
+// List available crawlers
+app.get('/crawlers', async (req, res) => {
+  try {
+    const files = await fs.readdir(CRAWLERS_DIR);
+    const crawlers = files.filter(f => f.endsWith('.js')).map(f => ({
+      name: f.replace('.js', ''),
+      path: f,
+      type: f.startsWith('c0m-') ? 'security' : 'data'
+    }));
+    res.json({ count: crawlers.length, crawlers });
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to list crawlers', details: e.message });
+  }
+});
+
+// Get recon data for a target
+app.get('/recon/:target', async (req, res) => {
+  try {
+    const { target } = req.params;
+    const files = await fs.readdir(RECON_DIR);
+    const targetFiles = files.filter(f => f.toLowerCase().includes(target.toLowerCase()));
+    
+    const results = [];
+    for (const file of targetFiles) {
+      try {
+        const data = await fs.readFile(path.join(RECON_DIR, file), 'utf8');
+        results.push({ file, data: JSON.parse(data) });
+      } catch {}
+    }
+    
+    res.json({ target, count: results.length, files: results });
+  } catch (e) {
+    res.status(500).json({ error: 'Recon lookup failed', details: e.message });
+  }
+});
+
+// List all recon data
+app.get('/recon', async (req, res) => {
+  try {
+    const files = await fs.readdir(RECON_DIR);
+    const reconFiles = files.filter(f => f.endsWith('.json'));
+    res.json({ 
+      count: reconFiles.length, 
+      files: reconFiles,
+      message: '🔒 c0m security recon data'
+    });
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to list recon', details: e.message });
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════
 // ALFRED CONTROL — "Alfred, let's continue"
 // ═══════════════════════════════════════════════════════════════
 
