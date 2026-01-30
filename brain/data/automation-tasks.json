@@ -1,0 +1,263 @@
+{
+  "timestamp": "2026-01-30T22:25:18.062Z",
+  "stats": {
+    "corsBlocked": 7,
+    "apiCalls": 3,
+    "staleData": 6,
+    "errors": 0,
+    "freshSweeps": 6
+  },
+  "aggregated": {
+    "stale_data": {
+      "count": 6,
+      "severity": "low",
+      "agent": "d0t",
+      "fix": "Trigger crawler refresh for stale data sources",
+      "autoFixable": true,
+      "samples": [
+        "2",
+        "2",
+        "2"
+      ]
+    },
+    "missing_token": {
+      "count": 1,
+      "severity": "info",
+      "agent": "r0ss",
+      "fix": "Add missing env var to Railway",
+      "autoFixable": false,
+      "samples": [
+        "GITHUB"
+      ]
+    },
+    "cors_blocked": {
+      "count": 7,
+      "severity": "high",
+      "agent": "r0ss",
+      "fix": "Add origin to brain-server.js CORS allowedOrigins",
+      "autoFixable": true,
+      "samples": [
+        "https://b0bdev-production.up.railway.app",
+        "https://b0bdev-production.up.railway.app",
+        "https://b0bdev-production.up.railway.app"
+      ]
+    },
+    "bankr_api_cost": {
+      "count": 3,
+      "severity": "medium",
+      "agent": "c0m",
+      "fix": "Replace with DexScreener FREE API - already done in code, needs deploy",
+      "autoFixable": false,
+      "samples": [
+        "Asking Bankr for trending",
+        "API call #1/10",
+        "Submitting prompt to Bankr ($0.10"
+      ]
+    },
+    "entry_blocked": {
+      "count": 1,
+      "severity": "info",
+      "agent": "d0t",
+      "fix": "Trading paused - intentional, not an error",
+      "autoFixable": false,
+      "samples": [
+        "ENTRY BLOCKED: Trading paused - Waiting for Bankr Club membership - paused"
+      ]
+    }
+  },
+  "tasks": [
+    {
+      "id": "auto-stale_data-1769811918061",
+      "type": "stale_data",
+      "agent": "d0t",
+      "priority": "P2",
+      "title": "[AUTO] Fix 6x stale data",
+      "description": "Trigger crawler refresh for stale data sources",
+      "autoFixable": true,
+      "samples": [
+        "2",
+        "2",
+        "2"
+      ],
+      "createdAt": "2026-01-30T22:25:18.061Z",
+      "status": "not-started"
+    },
+    {
+      "id": "auto-missing_token-1769811918061",
+      "type": "missing_token",
+      "agent": "r0ss",
+      "priority": "P2",
+      "title": "[AUTO] Fix 1x missing token",
+      "description": "Add missing env var to Railway",
+      "autoFixable": false,
+      "samples": [
+        "GITHUB"
+      ],
+      "createdAt": "2026-01-30T22:25:18.061Z",
+      "status": "not-started"
+    },
+    {
+      "id": "auto-cors_blocked-1769811918061",
+      "type": "cors_blocked",
+      "agent": "r0ss",
+      "priority": "P0",
+      "title": "[AUTO] Fix 7x cors blocked",
+      "description": "Add origin to brain-server.js CORS allowedOrigins",
+      "autoFixable": true,
+      "samples": [
+        "https://b0bdev-production.up.railway.app",
+        "https://b0bdev-production.up.railway.app",
+        "https://b0bdev-production.up.railway.app"
+      ],
+      "createdAt": "2026-01-30T22:25:18.061Z",
+      "status": "not-started"
+    },
+    {
+      "id": "auto-bankr_api_cost-1769811918061",
+      "type": "bankr_api_cost",
+      "agent": "c0m",
+      "priority": "P1",
+      "title": "[AUTO] Fix 3x bankr api cost",
+      "description": "Replace with DexScreener FREE API - already done in code, needs deploy",
+      "autoFixable": false,
+      "samples": [
+        "Asking Bankr for trending",
+        "API call #1/10",
+        "Submitting prompt to Bankr ($0.10"
+      ],
+      "createdAt": "2026-01-30T22:25:18.061Z",
+      "status": "not-started"
+    },
+    {
+      "id": "auto-entry_blocked-1769811918061",
+      "type": "entry_blocked",
+      "agent": "d0t",
+      "priority": "P2",
+      "title": "[AUTO] Fix 1x entry blocked",
+      "description": "Trading paused - intentional, not an error",
+      "autoFixable": false,
+      "samples": [
+        "ENTRY BLOCKED: Trading paused - Waiting for Bankr Club membership - paused"
+      ],
+      "createdAt": "2026-01-30T22:25:18.061Z",
+      "status": "not-started"
+    }
+  ],
+  "codebaseAwareness": {
+    "brain": {
+      "path": "brain/",
+      "description": "Central orchestrator - all data flows TO and FROM here",
+      "keyFiles": {
+        "brain-server.js": {
+          "lines": 6600,
+          "purpose": "Main server, REST API, coordination",
+          "agents": [
+            "swarm"
+          ]
+        },
+        "live-trader.js": {
+          "lines": 3850,
+          "purpose": "TURB0B00ST trading engine",
+          "agents": [
+            "d0t",
+            "turb0"
+          ]
+        },
+        "l0re-intelligence.js": {
+          "lines": 700,
+          "purpose": "Multi-dimensional state classification",
+          "agents": [
+            "swarm"
+          ]
+        },
+        "l0re-lexicon.js": {
+          "lines": 605,
+          "purpose": "Internal language system",
+          "agents": [
+            "c0m"
+          ]
+        },
+        "l0re-data-ops.js": {
+          "lines": 738,
+          "purpose": "Data validation, tagging, routing",
+          "agents": [
+            "swarm"
+          ]
+        },
+        "l0re-automation.js": {
+          "lines": "self",
+          "purpose": "THIS FILE - self-maintenance",
+          "agents": [
+            "r0ss"
+          ]
+        },
+        "freshness-monitor.js": {
+          "lines": 252,
+          "purpose": "Stale data detection & sweep",
+          "agents": [
+            "r0ss"
+          ]
+        },
+        "c0m-commands.js": {
+          "lines": 530,
+          "purpose": "Security ops & bounty tracking",
+          "agents": [
+            "c0m"
+          ]
+        },
+        "turb0-decision-engine.js": {
+          "lines": 500,
+          "purpose": "Multi-agent Nash voting",
+          "agents": [
+            "turb0"
+          ]
+        }
+      },
+      "dataFiles": [
+        "d0t-signals.json",
+        "polymarket.json",
+        "treasury-state.json",
+        "c0m-bounties.json",
+        "r0ss-tasks.json",
+        "freshness-state.json",
+        "live-trader-state.json",
+        "turb0b00st-state.json"
+      ],
+      "railway": {
+        "service": "b0b-brain-production",
+        "url": "https://b0b-brain-production.up.railway.app"
+      }
+    },
+    "dashboard": {
+      "path": "dashboard/",
+      "description": "b0bdev-production - Visual interface for brain data",
+      "railway": {
+        "service": "b0bdev-production",
+        "url": "https://b0bdev-production.up.railway.app"
+      }
+    },
+    "d0t": {
+      "path": "d0t/",
+      "description": "d0t trading dashboard - L0RE visual language",
+      "railway": {
+        "service": "d0t-web",
+        "url": "https://d0t.b0b.dev"
+      }
+    },
+    "crawlers": {
+      "path": "crawlers/",
+      "description": "Push data TO brain via API",
+      "keyFiles": {
+        "d0t-signals.js": {
+          "purpose": "Market signals crawler"
+        },
+        "polymarket-crawler.js": {
+          "purpose": "Prediction market data"
+        },
+        "twitter-crawler.js": {
+          "purpose": "X/Twitter social signals"
+        }
+      }
+    }
+  }
+}

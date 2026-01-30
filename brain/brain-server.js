@@ -4867,6 +4867,63 @@ app.get('/freshness/sweep', async (req, res) => {
 });
 
 /**
+ * GET /automation/status
+ * L0RE Automation status - issues, tasks, codebase awareness
+ */
+app.get('/automation/status', async (req, res) => {
+  try {
+    const statePath = path.join(__dirname, 'data', 'l0re-automation-state.json');
+    const tasksPath = path.join(__dirname, 'data', 'automation-tasks.json');
+    
+    let state = null, tasks = null;
+    
+    if (fs.existsSync(statePath)) {
+      state = JSON.parse(fs.readFileSync(statePath, 'utf-8'));
+    }
+    if (fs.existsSync(tasksPath)) {
+      tasks = JSON.parse(fs.readFileSync(tasksPath, 'utf-8'));
+    }
+    
+    res.json({
+      automation: 'L0RE',
+      version: '0.1.0',
+      state: state ? {
+        lastRun: state.lastRun,
+        issuesCount: state.issuesFound?.length || 0,
+      } : null,
+      tasks: tasks ? {
+        timestamp: tasks.timestamp,
+        stats: tasks.stats,
+        aggregated: tasks.aggregated,
+        taskCount: tasks.tasks?.length || 0,
+      } : null,
+      codebaseAwareness: {
+        brainFiles: 15,
+        dataFiles: 30,
+        endpoints: 100,
+      }
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/**
+ * POST /automation/run
+ * Trigger L0RE automation cycle manually
+ */
+app.post('/automation/run', async (req, res) => {
+  try {
+    const { L0REAutomation } = require('./l0re-automation.js');
+    const automation = new L0REAutomation();
+    const result = await automation.run();
+    res.json(result);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/**
  * POST /crawlers/run
  * Trigger crawler runs from external sources (e.g., GitHub Actions)
  */
@@ -4953,6 +5010,42 @@ app.listen(PORT, () => {
     fetchGitActivity().catch(e => console.log('  ⚠️ Git fetch init:', e.message));
     setInterval(fetchGitActivity, 5 * 60 * 1000);
     console.log('  🔗 Git Activity: RUNNING (5min)');
+    
+    // ═══════════════════════════════════════════════════════════════════════════
+    // L0RE AUTOMATION — Self-maintenance cycle (every 5 minutes)
+    // Monitors logs, detects issues, generates agent tasks
+    // ═══════════════════════════════════════════════════════════════════════════
+    try {
+      const { L0REAutomation } = require('./l0re-automation.js');
+      const automation = new L0REAutomation();
+      
+      // Run initial automation cycle after 60 seconds
+      setTimeout(async () => {
+        try {
+          console.log('[L0RE-AUTO] Running initial automation cycle...');
+          const result = await automation.run();
+          console.log(`[L0RE-AUTO] Generated ${result.tasks.length} tasks`);
+        } catch (e) {
+          console.log(`[L0RE-AUTO] Initial cycle error: ${e.message}`);
+        }
+      }, 60000);
+      
+      // Then run every 5 minutes
+      setInterval(async () => {
+        try {
+          const result = await automation.run();
+          if (result.tasks.length > 0) {
+            console.log(`[L0RE-AUTO] ${result.tasks.length} tasks generated`);
+          }
+        } catch (e) {
+          console.log(`[L0RE-AUTO] Cycle error: ${e.message}`);
+        }
+      }, 5 * 60 * 1000);
+      
+      console.log('  🤖 L0RE Automation: RUNNING (5min)');
+    } catch (e) {
+      console.log('  ⚠️ L0RE Automation init failed:', e.message);
+    }
     
     console.log('  ✅ Background initialization complete');
   }, 2000);
