@@ -1,0 +1,237 @@
+{
+  "timestamp": "2026-01-30T04:48:25.983Z",
+  "wallet": "0xCA4Ca0c7b26e51805c20C95DF02Ea938D78",
+  "portfolio": {
+    "ETH": 0.05,
+    "USDC": 100,
+    "BNKR": 10000
+  },
+  "portfolioValue": 260,
+  "scenariosRun": 10,
+  "summary": {
+    "critical": 3,
+    "high": 3,
+    "protected": 3
+  },
+  "results": [
+    {
+      "scenarioId": "S001",
+      "initialValue": 260,
+      "crashValue": 200,
+      "finalValue": 222.5,
+      "maxDrawdown": 0.23076923076923078,
+      "stopLossTriggered": true,
+      "recommendation": "STOP_LOSS_PROTECTED - Limited loss to 20%",
+      "scenario": {
+        "id": "S001",
+        "name": "Flash Crash - 40% ETH Drop",
+        "description": "Sudden 40% ETH price crash in 5 minutes",
+        "type": "market_crash",
+        "params": {
+          "asset": "ETH",
+          "dropPercent": 40,
+          "durationMinutes": 5,
+          "recoveryPercent": 25,
+          "recoveryMinutes": 60
+        },
+        "riskLevel": "CRITICAL"
+      },
+      "timestamp": "2026-01-30T04:48:25.981Z"
+    },
+    {
+      "scenarioId": "S002",
+      "assetHolding": 10000,
+      "canExit": true,
+      "estimatedSlippage": 6,
+      "recommendation": "POSITION_SIZE_OK - Can exit with $6.00 slippage",
+      "scenario": {
+        "id": "S002",
+        "name": "Whale Dump - BNKR Liquidity Crisis",
+        "description": "Large holder dumps BNKR, liquidity drops 80%",
+        "type": "liquidity_crisis",
+        "params": {
+          "asset": "BNKR",
+          "liquidityDrop": 0.8,
+          "priceImpact": 0.6,
+          "sellPressureDuration": 30
+        },
+        "riskLevel": "HIGH"
+      },
+      "timestamp": "2026-01-30T04:48:25.981Z"
+    },
+    {
+      "scenarioId": "S003",
+      "estimatedGasCost": 6.300000000000001,
+      "gasCostAsPercentOfTrade": 12.6,
+      "txFailureLikelihood": 0.4,
+      "recommendation": "WAIT - Gas exceeds 10% of trade, not profitable",
+      "scenario": {
+        "id": "S003",
+        "name": "Network Congestion - 100+ gwei",
+        "description": "Base network congestion, gas prices spike",
+        "type": "network_stress",
+        "params": {
+          "baseGasGwei": 0.01,
+          "peakGasGwei": 100,
+          "congestionDuration": 120,
+          "txFailureRate": 0.4
+        },
+        "riskLevel": "HIGH"
+      },
+      "timestamp": "2026-01-30T04:48:25.982Z"
+    },
+    {
+      "scenarioId": "S004",
+      "manipulationMultiple": 2.5,
+      "blocksExposed": 10,
+      "detectionBlocks": 3,
+      "potentialLoss": 0,
+      "recommendation": "MULTI_ORACLE_CHECK - Always verify price across 3+ sources",
+      "scenario": {
+        "id": "S004",
+        "name": "Oracle Manipulation Attack",
+        "description": "Price oracle reports incorrect data for 10 blocks",
+        "type": "oracle_attack",
+        "params": {
+          "manipulatedPrice": 2.5,
+          "blocksAffected": 10,
+          "detectionDelay": 3
+        },
+        "riskLevel": "CRITICAL"
+      },
+      "timestamp": "2026-01-30T04:48:25.982Z"
+    },
+    {
+      "scenarioId": "S005",
+      "holdingsExposed": 100,
+      "lossIfPanic": 7.9999999999999964,
+      "lossIfHold": 0,
+      "recommendation": "HOLD - Historical depegs under 10% recover",
+      "scenario": {
+        "id": "S005",
+        "name": "Stablecoin Depeg - USDC",
+        "description": "USDC temporarily depegs to $0.92",
+        "type": "depeg_event",
+        "params": {
+          "asset": "USDC",
+          "depegPrice": 0.92,
+          "depegDuration": 180,
+          "recoverySpeed": "slow"
+        },
+        "riskLevel": "HIGH"
+      },
+      "timestamp": "2026-01-30T04:48:25.982Z"
+    },
+    {
+      "scenarioId": "S006",
+      "estimatedLoss": 4,
+      "mitigations": [
+        "Use private mempool (Flashbots)",
+        "Set tight slippage (1-2%)",
+        "Split large trades",
+        "Use limit orders when possible"
+      ],
+      "recommendation": "PROTECT - Our max $50 trades are low MEV targets",
+      "scenario": {
+        "id": "S006",
+        "name": "Sandwich Attack on Trade",
+        "description": "MEV bot sandwiches our trade",
+        "type": "mev_attack",
+        "params": {
+          "frontrunSlippage": 0.05,
+          "backrunProfit": 0.03,
+          "ourLoss": 0.08
+        },
+        "riskLevel": "MEDIUM"
+      },
+      "timestamp": "2026-01-30T04:48:25.982Z"
+    },
+    {
+      "scenarioId": "S007",
+      "downtime": 15,
+      "fallbackLatency": 500,
+      "tradesAffected": 3,
+      "recommendation": "REDUNDANCY - Our 3 RPC setup handles this",
+      "scenario": {
+        "id": "S007",
+        "name": "RPC Provider Failure",
+        "description": "Primary RPC fails, fallback kicks in",
+        "type": "infrastructure",
+        "params": {
+          "primaryDownMinutes": 15,
+          "fallbackLatencyMs": 500,
+          "missedOpportunities": 3
+        },
+        "riskLevel": "MEDIUM"
+      },
+      "timestamp": "2026-01-30T04:48:25.982Z"
+    },
+    {
+      "scenarioId": "S008",
+      "peakGain": 40,
+      "ifTakeProfit": 20,
+      "recommendation": "SCALE_OUT - Sell 50% at 3x, 25% at 4x, ride rest",
+      "scenario": {
+        "id": "S008",
+        "name": "Positive Black Swan - 5x Pump",
+        "description": "BNKR moons 500% on viral tweet",
+        "type": "positive_volatility",
+        "params": {
+          "asset": "BNKR",
+          "pumpMultiple": 5,
+          "timeToRealize": 30,
+          "sellPressureAfter": 0.6
+        },
+        "riskLevel": "OPPORTUNITY"
+      },
+      "timestamp": "2026-01-30T04:48:25.983Z"
+    },
+    {
+      "scenarioId": "S009",
+      "recommendation": "POSITION_SIZE - Never risk more than 10% on single market",
+      "scenario": {
+        "id": "S009",
+        "name": "Polymarket Resolution Dispute",
+        "description": "Market resolves controversially, funds locked",
+        "type": "resolution_risk",
+        "params": {
+          "lockedFunds": 45,
+          "disputeDuration": 72,
+          "finalResolution": "our_favor"
+        },
+        "riskLevel": "MEDIUM"
+      },
+      "timestamp": "2026-01-30T04:48:25.983Z"
+    },
+    {
+      "scenarioId": "S010",
+      "detectionMinutes": 5,
+      "responseMinutes": 2,
+      "fundsAtRisk": 65,
+      "fundsSaved": 65,
+      "recommendation": "MONITORING_ACTIVE - Our audit logger + alerts catch this",
+      "scenario": {
+        "id": "S010",
+        "name": "API Key Compromise Detection",
+        "description": "Unusual activity detected on wallet",
+        "type": "security_incident",
+        "params": {
+          "detectionTime": 5,
+          "responseTime": 2,
+          "fundsAtRisk": 0.25,
+          "mitigationSuccess": true
+        },
+        "riskLevel": "CRITICAL"
+      },
+      "timestamp": "2026-01-30T04:48:25.983Z"
+    }
+  ],
+  "overallRisk": "HIGH",
+  "recommendations": [
+    "POSITION_SIZING: Keep max position at $50 ✓",
+    "STOP_LOSS: 20% stop loss active ✓",
+    "MULTI_RPC: 3 provider setup ✓",
+    "MONITORING: Audit logger active ✓",
+    "COLD_STORAGE: Reserves in cold wallet ✓"
+  ]
+}

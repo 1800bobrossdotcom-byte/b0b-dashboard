@@ -206,6 +206,69 @@
         "actors": ["d0t"],
         "output": "positions summary",
         "status": "live"
+      },
+      "trading-sim": {
+        "command": "node b0b-finance/trading-simulator.js run-all",
+        "description": "Run all trading stress test scenarios",
+        "actors": ["d0t", "c0m"],
+        "output": "simulations/*.json",
+        "tags": ["simulation", "stress-test", "risk"],
+        "status": "live"
+      },
+      "trading-sim-scenario": {
+        "command": "node b0b-finance/trading-simulator.js scenario",
+        "description": "Run specific trading scenario",
+        "syntax": "trading-sim-scenario <S001-S010>",
+        "actors": ["d0t"],
+        "output": "console",
+        "tags": ["simulation", "scenario"],
+        "status": "live"
+      }
+    },
+    "lexicon": {
+      "lexicon-encode": {
+        "command": "node brain/l0re-lexicon.js encode",
+        "description": "Get L0RE codename for a concept",
+        "syntax": "lexicon-encode <concept>",
+        "actors": ["c0m", "all"],
+        "output": "codename",
+        "tags": ["lexicon", "obfuscation", "security"],
+        "status": "live"
+      },
+      "lexicon-decode": {
+        "command": "node brain/l0re-lexicon.js decode",
+        "description": "Reveal meaning of a L0RE codename",
+        "syntax": "lexicon-decode <codename>",
+        "actors": ["c0m", "all"],
+        "output": "concept",
+        "tags": ["lexicon", "translation"],
+        "status": "live"
+      },
+      "lexicon-dictionary": {
+        "command": "node brain/l0re-lexicon.js dictionary",
+        "description": "Show full L0RE lexicon dictionary",
+        "actors": ["all"],
+        "output": "console",
+        "tags": ["lexicon", "reference"],
+        "status": "live"
+      },
+      "lexicon-analyze": {
+        "command": "node brain/l0re-lexicon.js analyze",
+        "description": "Analyze file structure for obfuscation opportunities",
+        "syntax": "lexicon-analyze [directory]",
+        "actors": ["c0m"],
+        "output": "console",
+        "tags": ["lexicon", "security", "analysis"],
+        "status": "live"
+      },
+      "lexicon-translate": {
+        "command": "node brain/l0re-lexicon.js translate",
+        "description": "Translate message to internal L0RE language",
+        "syntax": "lexicon-translate <message>",
+        "actors": ["all"],
+        "output": "translated message",
+        "tags": ["lexicon", "translation"],
+        "status": "live"
       }
     },
     "payments": {
