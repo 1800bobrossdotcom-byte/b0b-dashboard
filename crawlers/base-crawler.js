@@ -54,8 +54,8 @@ class BaseCrawler {
     throw new Error('fetch() must be implemented by subclass');
   }
 
-  // Save data to brain/data/{name}.json
-  saveData(data) {
+  // Save data to brain/data/{name}.json AND push to brain API
+  async saveData(data) {
     const filePath = path.join(this.dataDir, `${this.name}.json`);
     const wrapped = {
       crawler: this.name,
@@ -64,7 +64,29 @@ class BaseCrawler {
     };
     fs.writeFileSync(filePath, JSON.stringify(wrapped, null, 2));
     console.log(`💾 [${this.name}] Data saved to ${filePath}`);
+    
+    // Push to brain API for Railway deployment sync
+    await this.pushToBrain(wrapped);
+    
     return wrapped;
+  }
+  
+  // Push data to brain API endpoint
+  async pushToBrain(data) {
+    const brainUrl = process.env.BRAIN_URL || 'https://b0b-brain-production.up.railway.app';
+    try {
+      await axios.post(`${brainUrl}/crawlers/data`, {
+        crawler: this.name,
+        data: data
+      }, {
+        timeout: 5000,
+        headers: { 'Content-Type': 'application/json' }
+      });
+      console.log(`📤 [${this.name}] Pushed to brain`);
+    } catch (e) {
+      // Non-fatal - local save succeeded
+      console.log(`⚠️ [${this.name}] Brain push failed: ${e.message}`);
+    }
   }
 
   // Load last saved data

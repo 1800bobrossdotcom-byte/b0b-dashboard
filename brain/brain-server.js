@@ -4610,6 +4610,38 @@ app.get('/swarm/pulse', async (req, res) => {
 });
 
 /**
+ * POST /crawlers/data
+ * Receive crawler data push from swarm-daemon (Railway)
+ */
+app.post('/crawlers/data', async (req, res) => {
+  try {
+    const { crawler, data } = req.body;
+    if (!crawler || !data) {
+      return res.status(400).json({ error: 'Missing crawler or data' });
+    }
+    
+    // Save to brain's data directory
+    const filePath = path.join(__dirname, 'data', `${crawler}.json`);
+    const wrapped = {
+      ...data,
+      _receivedAt: new Date().toISOString(),
+      _source: 'swarm-daemon'
+    };
+    await fs.writeFile(filePath, JSON.stringify(wrapped, null, 2));
+    
+    console.log(`📥 [BRAIN] Received ${crawler} data from daemon`);
+    res.json({ 
+      success: true, 
+      crawler,
+      timestamp: new Date().toISOString()
+    });
+  } catch (e) {
+    console.error(`❌ [BRAIN] Crawler data error:`, e.message);
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/**
  * GET /freshness
  * Full freshness inventory — like checking the fridge
  */

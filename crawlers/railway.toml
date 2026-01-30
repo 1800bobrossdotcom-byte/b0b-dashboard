@@ -5,8 +5,5 @@ dockerfilePath = "Dockerfile"
 [deploy]
 numReplicas = 1
 restartPolicyType = "always"
-healthcheckPath = "/"
-healthcheckTimeout = 30
 
-[[services]]
-name = "swarm-daemon"
+# No healthcheck - this is a background daemon, not a web server

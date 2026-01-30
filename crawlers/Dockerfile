@@ -11,11 +11,7 @@ RUN npm install --production
 # Copy crawler files
 COPY *.js ./
 
-# Copy brain intelligence agents (needed for L0RE logic)
-COPY ../brain/agents/ ./brain/agents/
-COPY ../brain/l0re-intelligence.js ./brain/
-
-# Create data directory
+# Create data directories (intelligence files are optional - graceful fallback)
 RUN mkdir -p data brain/data brain/data/learnings
 
 # Health check
