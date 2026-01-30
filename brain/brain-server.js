@@ -261,6 +261,68 @@ async function logActivity(activity) {
 // API ENDPOINTS
 // =============================================================================
 
+// Root endpoint - Brain status page
+app.get('/', async (req, res) => {
+  const state = await loadState();
+  res.send(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>B0B BRAIN - Live</title>
+      <style>
+        body { 
+          background: #000; 
+          color: #0f0; 
+          font-family: 'Courier New', monospace; 
+          padding: 40px;
+          line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { color: #0f0; text-shadow: 0 0 10px #0f0; }
+        .status { color: #0f0; font-weight: bold; }
+        .endpoint { color: #00ff88; margin: 10px 0; }
+        a { color: #00ffff; text-decoration: none; }
+        a:hover { text-shadow: 0 0 5px #00ffff; }
+        .agents { color: #ff00ff; }
+        pre { background: #111; padding: 10px; border: 1px solid #0f0; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <h1>🧠 B0B BRAIN - Neural Network Online</h1>
+        <p class="status">STATUS: ALIVE</p>
+        <p>Swarm: <span class="agents">${Object.keys(AGENTS).join(', ')}</span></p>
+        <p>Uptime: ${state.uptime}s</p>
+        
+        <h2>🔗 Live Endpoints</h2>
+        <div class="endpoint">→ <a href="/health">/health</a> - System health check</div>
+        <div class="endpoint">→ <a href="/pulse">/pulse</a> - Live swarm data</div>
+        <div class="endpoint">→ <a href="/turb0/dashboard">/turb0/dashboard</a> - Trading dashboard</div>
+        <div class="endpoint">→ <a href="/l0re/lexicon">/l0re/lexicon</a> - L0RE Intelligence</div>
+        
+        <h2>📡 Real Data Sources</h2>
+        <ul>
+          <li>Polymarket: Prediction markets</li>
+          <li>DeFiLlama: On-chain TVL</li>
+          <li>DexScreener: Live trading activity</li>
+          <li>L0RE Intelligence: Nash/Entropy/Fractal analysis</li>
+        </ul>
+        
+        <h2>🔮 Agent Status</h2>
+        <pre>d0t  - Data Oracle (market signals)
+c0m  - Security & Coordination  
+b0b  - Culture & Creative
+r0ss - Research & Development</pre>
+        
+        <p style="margin-top: 40px; color: #666;">
+          w3 ar3 | ${new Date().toISOString()}
+        </p>
+      </div>
+    </body>
+    </html>
+  `);
+});
+
 // Health check / heartbeat
 app.get('/health', async (req, res) => {
   const state = await loadState();
