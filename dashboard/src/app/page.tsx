@@ -1,52 +1,128 @@
 'use client';
 
 /**
- * B0B.DEV — SWARM COMMAND CENTER
- * Emergency stable version - 2026-01-30
+ * B0B.DEV — DATA VERIFICATION
+ * No bullshit. Show the data or show the error.
  */
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 const BRAIN_URL = 'https://b0b-brain-production.up.railway.app';
 
 export default function B0bDev() {
-  const [mounted, setMounted] = useState(false);
-  const [data, setData] = useState<any>(null);
-  const [status, setStatus] = useState('connecting...');
+  const [health, setHealth] = useState<any>(null);
+  const [pulse, setPulse] = useState<any>(null);
+  const [turb0, setTurb0] = useState<string>('');
+  const [errors, setErrors] = useState<string[]>([]);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!mounted) return;
-    
-    const fetchData = async () => {
+    const checkAll = async () => {
+      const newErrors: string[] = [];
+      
+      // Health
       try {
-        const res = await fetch(`${BRAIN_URL}/swarm/live`);
-        if (res.ok) {
-          const json = await res.json();
-          setData(json);
-          setStatus('online');
-        } else {
-          setStatus('brain error');
-        }
-      } catch {
-        setStatus('offline');
+        const res = await fetch(`${BRAIN_URL}/health`, { cache: 'no-store' });
+        const data = await res.json();
+        setHealth(data);
+      } catch (e: any) {
+        newErrors.push(`HEALTH: ${e.message}`);
       }
+
+      // Pulse
+      try {
+        const res = await fetch(`${BRAIN_URL}/pulse`, { cache: 'no-store' });
+        const data = await res.json();
+        setPulse(data);
+      } catch (e: any) {
+        newErrors.push(`PULSE: ${e.message}`);
+      }
+
+      // TURB0
+      try {
+        const res = await fetch(`${BRAIN_URL}/turb0/dashboard`, { cache: 'no-store' });
+        const data = await res.text();
+        setTurb0(data);
+      } catch (e: any) {
+        newErrors.push(`TURB0: ${e.message}`);
+      }
+
+      setErrors(newErrors);
     };
     
-    fetchData();
-    const interval = setInterval(fetchData, 10000);
+    checkAll();
+    const interval = setInterval(checkAll, 15000);
     return () => clearInterval(interval);
-  }, [mounted]);
-
-  if (!mounted) {
-    return null;
-  }
+  }, []);
 
   return (
     <main className="min-h-screen bg-black text-white font-mono p-8">
+      <header className="border border-white p-6 mb-8">
+        <h1 className="text-4xl mb-2">B0B.DEV</h1>
+        <p className="text-xl">LIVE DATA VERIFICATION</p>
+        <div className="flex gap-4 mt-4">
+          <Link href="/veritas" className="border border-white px-4 py-2 hover:bg-white hover:text-black">
+            VERITAS
+          </Link>
+          <Link href="/crawlers" className="border border-white px-4 py-2 hover:bg-white hover:text-black">
+            CRAWLERS
+          </Link>
+          <Link href="/integrity" className="border border-white px-4 py-2 hover:bg-white hover:text-black">
+            INTEGRITY
+          </Link>
+        </div>
+      </header>
+
+      {/* ERRORS */}
+      {errors.length > 0 && (
+        <div className="border border-red-500 p-6 mb-8">
+          <div className="text-2xl text-red-500 mb-4">ERRORS</div>
+          {errors.map((err, i) => (
+            <div key={i} className="text-red-500 mb-2">{err}</div>
+          ))}
+        </div>
+      )}
+
+      {/* BRAIN HEALTH */}
+      {health && (
+        <div className="border border-green-500 p-6 mb-8">
+          <div className="text-2xl mb-4">BRAIN HEALTH</div>
+          <div className="grid grid-cols-2 gap-4">
+            <div>STATUS: {health.status}</div>
+            <div>UPTIME: {health.uptime}s</div>
+            <div>AGENTS: {health.agents?.join(', ')}</div>
+            <div>MEMORY: {(health.memory?.heapUsed / 1024 / 1024).toFixed(0)}MB</div>
+          </div>
+        </div>
+      )}
+
+      {/* PULSE DATA */}
+      {pulse?.d0t && (
+        <div className="border border-white p-6 mb-8">
+          <div className="text-2xl mb-4">d0t SIGNALS</div>
+          {pulse.d0t.signals?.predictions?.slice(0, 3).map((p: any, i: number) => (
+            <div key={i} className="mb-2 text-sm">
+              • {p.question} — ${(p.volume24h / 1000000).toFixed(1)}M
+            </div>
+          ))}
+          {pulse.d0t.signals?.onchain && (
+            <div className="mt-4 text-sm text-gray-500">
+              BASE TVL: ${(pulse.d0t.signals.onchain.base_tvl / 1000000000).toFixed(1)}B
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* TURB0 */}
+      {turb0 && (
+        <div className="border border-white p-6">
+          <div className="text-2xl mb-4">TURB0B00ST</div>
+          <pre className="text-xs overflow-auto whitespace-pre">
+            {turb0.split('\n').slice(0, 20).join('\n')}
+          </pre>
+        </div>
+      )}
+
       <header className="mb-8">
         <h1 className="text-4xl font-bold text-[#00FF88]">B0B.DEV</h1>
         <p className="text-gray-500">Autonomous Creative Intelligence</p>

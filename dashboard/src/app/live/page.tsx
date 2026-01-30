@@ -1,13 +1,40 @@
 'use client';
 
 /**
- * LIVE DATA TICKER — Simple, clean, actual live data
- * The "eyes" - see what the swarm sees in real-time
+ * LIVE COMMAND CENTER
+ * Real data. Real agents. Real decisions.
  */
 
 import { useEffect, useState } from 'react';
 
 const BRAIN_URL = 'https://b0b-brain-production.up.railway.app';
+const WALLET = '0xCA4Ca0c7b26e51805c20C95DF02Ea86feA938D78';
+
+interface LiveState {
+  wallet: {
+    balance: string;
+    trades: number;
+  };
+  signals: {
+    polymarket: any[];
+    onchain: any;
+    dex: any;
+  };
+  agents: {
+    d0t: string;
+    c0m: string;
+    b0b: string;
+    r0ss: string;
+  };
+  ai: {
+    [key: string]: string;
+  };
+  turb0Decision: {
+    action: string;
+    confidence: string;
+    reasoning: string[];
+  };
+}
 
 interface LiveData {
   // Freshness
@@ -40,6 +67,7 @@ interface LiveData {
       sentiment?: { index: number; label: string };
       predictions?: any[];
     };
+    signals?: any;
   };
   // Research
   r0ss?: {
