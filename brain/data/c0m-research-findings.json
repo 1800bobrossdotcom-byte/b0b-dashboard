@@ -1,0 +1,2190 @@
+{
+  "timestamp": "2026-01-30T08:48:58.654Z",
+  "github_repos": [
+    {
+      "name": "Hack-with-Github/Awesome-Hacking",
+      "url": "https://github.com/Hack-with-Github/Awesome-Hacking",
+      "stars": 105640,
+      "description": "A collection of various awesome lists for hackers, pentesters and security researchers",
+      "topics": [
+        "android",
+        "awesome",
+        "bug-bounty",
+        "fuzzing",
+        "hacking",
+        "penetration-testing",
+        "pentesting-windows",
+        "reverse-engineering",
+        "security"
+      ],
+      "language": null,
+      "updated": "2026-01-30T08:47:51Z",
+      "source": "github",
+      "category": "penetration-testing"
+    },
+    {
+      "name": "The-Art-of-Hacking/h4cker",
+      "url": "https://github.com/The-Art-of-Hacking/h4cker",
+      "stars": 24910,
+      "description": "This repository is maintained by Omar Santos (@santosomar) and includes thousands of resources related to ethical hacking, bug bounties, digital forensics and incident response (DFIR), AI security, vulnerability research, exploit development, reverse engineering, and more. 🔥 Also check: https://hackertraining.org",
+      "topics": [
+        "ai",
+        "ai-security",
+        "artificial-intelligence",
+        "awesome-list",
+        "awesome-lists",
+        "cybersecurity",
+        "ethical-hacking",
+        "exploit",
+        "exploit-development",
+        "exploits",
+        "hacker",
+        "hackers",
+        "hacking",
+        "hacking-series",
+        "penetration-testing",
+        "training",
+        "vulnerability",
+        "vulnerability-assessment",
+        "vulnerability-identification",
+        "vulnerability-management"
+      ],
+      "language": "Jupyter Notebook",
+      "updated": "2026-01-30T05:50:55Z",
+      "source": "github",
+      "category": "exploit"
+    },
+    {
+      "name": "maurosoria/dirsearch",
+      "url": "https://github.com/maurosoria/dirsearch",
+      "stars": 13931,
+      "description": "Web path scanner",
+      "topics": [
+        "appsec",
+        "brute",
+        "bug-bounty",
+        "bugbounty",
+        "dirsearch",
+        "enumeration",
+        "fuzzer",
+        "fuzzing",
+        "hacking",
+        "hacking-tool",
+        "infosec",
+        "penetration-testing",
+        "pentest-tool",
+        "pentesting",
+        "python",
+        "red-teaming",
+        "redteam",
+        "scanner",
+        "security",
+        "wordlist"
+      ],
+      "language": "Python",
+      "updated": "2026-01-30T07:06:28Z",
+      "source": "github",
+      "category": "bug-bounty"
+    },
+    {
+      "name": "nahamsec/Resources-for-Beginner-Bug-Bounty-Hunters",
+      "url": "https://github.com/nahamsec/Resources-for-Beginner-Bug-Bounty-Hunters",
+      "stars": 11764,
+      "description": "A list of resources for those interested in getting started in bug bounties",
+      "topics": [
+        "bug-bounty",
+        "bug-bounty-hunters",
+        "bugbounty",
+        "education",
+        "hackers",
+        "hacking",
+        "learn2hack",
+        "pentest",
+        "ssrf",
+        "web-security",
+        "xss"
+      ],
+      "language": null,
+      "updated": "2026-01-29T15:59:27Z",
+      "source": "github",
+      "category": "bug-bounty"
+    },
+    {
+      "name": "edoardottt/awesome-hacker-search-engines",
+      "url": "https://github.com/edoardottt/awesome-hacker-search-engines",
+      "stars": 10099,
+      "description": "A curated list of awesome search engines useful during Penetration testing, Vulnerability assessments, Red/Blue Team operations, Bug Bounty and more",
+      "topics": [
+        "awesome",
+        "awesome-list",
+        "awesome-lists",
+        "bugbounty",
+        "cve",
+        "dns",
+        "exploit",
+        "hacking",
+        "hacking-tools",
+        "hacktoberfest",
+        "osint",
+        "osint-tool",
+        "redteam",
+        "redteaming",
+        "search-engine",
+        "security",
+        "security-tools",
+        "threat-intelligence",
+        "vulnerabilities",
+        "wifi-network"
+      ],
+      "language": "Shell",
+      "updated": "2026-01-30T07:00:23Z",
+      "source": "github",
+      "category": "blue-team"
+    },
+    {
+      "name": "swisskyrepo/PayloadsAllTheThings",
+      "url": "https://github.com/swisskyrepo/PayloadsAllTheThings",
+      "stars": 74763,
+      "description": "A list of useful payloads and bypass for Web Application Security and Pentest/CTF",
+      "topics": [
+        "bounty",
+        "bugbounty",
+        "bypass",
+        "cheatsheet",
+        "enumeration",
+        "hacking",
+        "hacktoberfest",
+        "methodology",
+        "payload",
+        "payloads",
+        "penetration-testing",
+        "pentest",
+        "privilege-escalation",
+        "redteam",
+        "security",
+        "vulnerability",
+        "web-application"
+      ],
+      "language": "Python",
+      "updated": "2026-01-30T08:13:33Z",
+      "source": "github",
+      "category": "web-security"
+    },
+    {
+      "name": "enaqx/awesome-pentest",
+      "url": "https://github.com/enaqx/awesome-pentest",
+      "stars": 25062,
+      "description": "A collection of awesome penetration testing resources, tools and other shiny things",
+      "topics": [
+        "awesome",
+        "awesome-list"
+      ],
+      "language": null,
+      "updated": "2026-01-30T03:03:53Z",
+      "source": "github",
+      "category": "penetration-testing"
+    },
+    {
+      "name": "usestrix/strix",
+      "url": "https://github.com/usestrix/strix",
+      "stars": 19517,
+      "description": "Open-source AI agents for penetration testing",
+      "topics": [
+        "agents",
+        "artificial-intelligence",
+        "cybersecurity",
+        "generative-ai",
+        "llm",
+        "penetration-testing"
+      ],
+      "language": "Python",
+      "updated": "2026-01-30T07:09:26Z",
+      "source": "github",
+      "category": "penetration-testing"
+    },
+    {
+      "name": "x64dbg/x64dbg",
+      "url": "https://github.com/x64dbg/x64dbg",
+      "stars": 47650,
+      "description": "An open-source user mode debugger for Windows. Optimized for reverse engineering and malware analysis.",
+      "topics": [
+        "binary-analysis",
+        "ctf",
+        "cybersecurity",
+        "debugger",
+        "debugging",
+        "disassembler",
+        "dynamic-analysis",
+        "exploit-development",
+        "hacking",
+        "malware-analysis",
+        "offensive-security",
+        "oscp",
+        "program-analysis",
+        "reverse-engineering",
+        "security",
+        "security-tools",
+        "windows",
+        "x64",
+        "x86",
+        "x86-64"
+      ],
+      "language": "C++",
+      "updated": "2026-01-30T07:48:53Z",
+      "source": "github",
+      "category": "malware-analysis"
+    },
+    {
+      "name": "Lissy93/web-check",
+      "url": "https://github.com/Lissy93/web-check",
+      "stars": 31414,
+      "description": "🕵️‍♂️ All-in-one OSINT tool for analysing any website",
+      "topics": [
+        "osint",
+        "privacy",
+        "security",
+        "security-tools",
+        "sysadmin"
+      ],
+      "language": "TypeScript",
+      "updated": "2026-01-30T08:48:52Z",
+      "source": "github",
+      "category": "osint"
+    },
+    {
+      "name": "aquasecurity/trivy",
+      "url": "https://github.com/aquasecurity/trivy",
+      "stars": 31184,
+      "description": "Find vulnerabilities, misconfigurations, secrets, SBOM in containers, Kubernetes, code repositories, clouds and more",
+      "topics": [
+        "containers",
+        "devsecops",
+        "docker",
+        "go",
+        "golang",
+        "hacktoberfest",
+        "iac",
+        "infrastructure-as-code",
+        "kubernetes",
+        "misconfiguration",
+        "security",
+        "security-tools",
+        "vulnerability",
+        "vulnerability-detection",
+        "vulnerability-scanners"
+      ],
+      "language": "Go",
+      "updated": "2026-01-30T08:23:30Z",
+      "source": "github",
+      "category": "security-tools"
+    },
+    {
+      "name": "gitleaks/gitleaks",
+      "url": "https://github.com/gitleaks/gitleaks",
+      "stars": 24744,
+      "description": "Find secrets with Gitleaks 🔑",
+      "topics": [
+        "ai-powered",
+        "ci-cd",
+        "cicd",
+        "cli",
+        "data-loss-prevention",
+        "devsecops",
+        "dlp",
+        "git",
+        "gitleaks",
+        "go",
+        "golang",
+        "hacktoberfest",
+        "llm",
+        "llm-inference",
+        "llm-training",
+        "nhi",
+        "open-source",
+        "secret",
+        "security",
+        "security-tools"
+      ],
+      "language": "Go",
+      "updated": "2026-01-30T03:09:02Z",
+      "source": "github",
+      "category": "security-tools"
+    },
+    {
+      "name": "Infisical/infisical",
+      "url": "https://github.com/Infisical/infisical",
+      "stars": 24650,
+      "description": "Infisical is the open-source platform for secrets, certificates, and privileged access management.",
+      "topics": [
+        "acme",
+        "certificate-management",
+        "cli",
+        "environment-variables",
+        "go",
+        "golang",
+        "node-js",
+        "open-source",
+        "pki",
+        "postgres",
+        "private-ca",
+        "secret-management",
+        "secret-manager",
+        "secret-scanning",
+        "secrets",
+        "secrets-management",
+        "security",
+        "security-tools",
+        "typescript",
+        "vault"
+      ],
+      "language": "TypeScript",
+      "updated": "2026-01-30T08:40:35Z",
+      "source": "github",
+      "category": "security-tools"
+    },
+    {
+      "name": "sqlmapproject/sqlmap",
+      "url": "https://github.com/sqlmapproject/sqlmap",
+      "stars": 36435,
+      "description": "Automatic SQL injection and database takeover tool",
+      "topics": [
+        "database",
+        "detection",
+        "exploitation",
+        "pentesting",
+        "python",
+        "sql-injection",
+        "sqlmap",
+        "takeover",
+        "vulnerability-scanner"
+      ],
+      "language": "Python",
+      "updated": "2026-01-30T05:46:33Z",
+      "source": "github",
+      "category": "vulnerability-scanner"
+    },
+    {
+      "name": "projectdiscovery/nuclei",
+      "url": "https://github.com/projectdiscovery/nuclei",
+      "stars": 26732,
+      "description": "Nuclei is a fast, customizable vulnerability scanner powered by the global security community and built on a simple YAML-based DSL, enabling collaboration to tackle trending vulnerabilities on the internet. It helps you find vulnerabilities in your applications, APIs, networks, DNS, and cloud configurations.",
+      "topics": [
+        "attack-surface",
+        "cve-scanner",
+        "dast",
+        "hacktoberfest",
+        "nuclei-engine",
+        "security",
+        "security-scanner",
+        "subdomain-takeover",
+        "vulnerability-assessment",
+        "vulnerability-detection",
+        "vulnerability-scanner"
+      ],
+      "language": "Go",
+      "updated": "2026-01-30T05:27:46Z",
+      "source": "github",
+      "category": "vulnerability-scanner"
+    },
+    {
+      "name": "future-architect/vuls",
+      "url": "https://github.com/future-architect/vuls",
+      "stars": 12029,
+      "description": "Agent-less vulnerability scanner for Linux, FreeBSD, Container, WordPress, Programming language libraries, Network devices",
+      "topics": [
+        "administrator",
+        "cybersecurity",
+        "freebsd",
+        "go",
+        "golang",
+        "linux",
+        "security",
+        "security-audit",
+        "security-automation",
+        "security-hardening",
+        "security-scanner",
+        "security-tools",
+        "security-vulnerability",
+        "vulnerabilities",
+        "vulnerability-assessment",
+        "vulnerability-detection",
+        "vulnerability-management",
+        "vulnerability-scanner",
+        "vulnerability-scanners",
+        "vuls"
+      ],
+      "language": "Go",
+      "updated": "2026-01-30T07:47:45Z",
+      "source": "github",
+      "category": "vulnerability-scanner"
+    },
+    {
+      "name": "anchore/grype",
+      "url": "https://github.com/anchore/grype",
+      "stars": 11448,
+      "description": "A vulnerability scanner for container images and filesystems",
+      "topics": [
+        "container-image",
+        "containers",
+        "cyclonedx",
+        "docker",
+        "go",
+        "golang",
+        "hacktoberfest",
+        "oci",
+        "openvex",
+        "security",
+        "static-analysis",
+        "tool",
+        "vex",
+        "vulnerabilities",
+        "vulnerability"
+      ],
+      "language": "Go",
+      "updated": "2026-01-30T08:45:15Z",
+      "source": "github",
+      "category": "vulnerability-scanner"
+    },
+    {
+      "name": "chaitin/xray",
+      "url": "https://github.com/chaitin/xray",
+      "stars": 11416,
+      "description": "一款长亭自研的完善的安全评估工具，支持常见 web 安全问题扫描和自定义 poc | 使用之前务必先阅读文档",
+      "topics": [
+        "passive-vulnerability-scanner",
+        "poc",
+        "security",
+        "sqlinjection",
+        "vulnerability",
+        "vulnerability-scanner",
+        "xss"
+      ],
+      "language": "Vue",
+      "updated": "2026-01-30T06:13:18Z",
+      "source": "github",
+      "category": "vulnerability-scanner"
+    },
+    {
+      "name": "sherlock-project/sherlock",
+      "url": "https://github.com/sherlock-project/sherlock",
+      "stars": 72280,
+      "description": "Hunt down social media accounts by username across social networks",
+      "topics": [
+        "cli",
+        "cti",
+        "cybersecurity",
+        "forensics",
+        "hacktoberfest",
+        "information-gathering",
+        "infosec",
+        "linux",
+        "osint",
+        "pentesting",
+        "python",
+        "python3",
+        "reconnaissance",
+        "redteam",
+        "sherlock",
+        "tools"
+      ],
+      "language": "Python",
+      "updated": "2026-01-30T08:12:59Z",
+      "source": "github",
+      "category": "osint"
+    },
+    {
+      "name": "jivoi/awesome-osint",
+      "url": "https://github.com/jivoi/awesome-osint",
+      "stars": 24560,
+      "description": ":scream: A curated list of amazingly awesome OSINT",
+      "topics": [
+        "awesome-list",
+        "osint",
+        "website"
+      ],
+      "language": null,
+      "updated": "2026-01-30T08:21:56Z",
+      "source": "github",
+      "category": "osint"
+    },
+    {
+      "name": "qeeqbox/social-analyzer",
+      "url": "https://github.com/qeeqbox/social-analyzer",
+      "stars": 20672,
+      "description": "API, CLI, and Web App for analyzing and finding a person's profile in 1000 social media \\ websites",
+      "topics": [
+        "analysis",
+        "analyzer",
+        "cli",
+        "information-gathering",
+        "javascript",
+        "nodejs",
+        "nodejs-cli",
+        "osint",
+        "pentest",
+        "pentesting",
+        "person-profile",
+        "profile",
+        "python",
+        "reconnaissance",
+        "security-tools",
+        "social-analyzer",
+        "social-media",
+        "sosint",
+        "username"
+      ],
+      "language": "JavaScript",
+      "updated": "2026-01-30T04:27:44Z",
+      "source": "github",
+      "category": "osint"
+    },
+    {
+      "name": "gildas-lormeau/SingleFile",
+      "url": "https://github.com/gildas-lormeau/SingleFile",
+      "stars": 20124,
+      "description": "Web Extension for saving a faithful copy of a complete web page in a single HTML file",
+      "topics": [
+        "annotations",
+        "archive",
+        "archiver",
+        "auto-save",
+        "browser",
+        "chrome",
+        "chrome-extension",
+        "cli",
+        "firefox",
+        "firefox-addon",
+        "javascript",
+        "offline-reading",
+        "osint",
+        "puppeteer",
+        "screenshot",
+        "selenium",
+        "self-extracting",
+        "self-extracting-zip",
+        "snapshot",
+        "web-clipper"
+      ],
+      "language": "JavaScript",
+      "updated": "2026-01-30T08:25:57Z",
+      "source": "github",
+      "category": "osint"
+    },
+    {
+      "name": "danielmiessler/SecLists",
+      "url": "https://github.com/danielmiessler/SecLists",
+      "stars": 68482,
+      "description": "SecLists is the security tester's companion. It's a collection of multiple types of lists used during security assessments, collected in one place. List types include usernames, passwords, URLs, sensitive data patterns, fuzzing payloads, web shells, and many more.",
+      "topics": [],
+      "language": "PHP",
+      "updated": "2026-01-30T07:53:03Z",
+      "source": "github",
+      "category": "web-security"
+    },
+    {
+      "name": "chaitin/SafeLine",
+      "url": "https://github.com/chaitin/SafeLine",
+      "stars": 20399,
+      "description": "SafeLine is a self-hosted WAF(Web Application Firewall) / reverse proxy to protect your web apps from attacks and exploits.",
+      "topics": [
+        "api-gateway",
+        "application-security",
+        "appsec",
+        "blueteam",
+        "bruteforce",
+        "captcha",
+        "cve",
+        "cybersecurity",
+        "firewall",
+        "hackers",
+        "http-flood",
+        "security",
+        "self-hosted",
+        "sql-injection",
+        "vulnerability",
+        "waf",
+        "web-application-firewall",
+        "web-security",
+        "websecurity",
+        "xss"
+      ],
+      "language": "Go",
+      "updated": "2026-01-30T07:24:13Z",
+      "source": "github",
+      "category": "exploit"
+    },
+    {
+      "name": "MobSF/Mobile-Security-Framework-MobSF",
+      "url": "https://github.com/MobSF/Mobile-Security-Framework-MobSF",
+      "stars": 20289,
+      "description": "Mobile Security Framework (MobSF) is an automated, all-in-one mobile application (Android/iOS/Windows) pen-testing, malware analysis and security assessment framework capable of performing static and dynamic analysis.",
+      "topics": [
+        "android-security",
+        "api-testing",
+        "apk",
+        "cwe",
+        "devsecops",
+        "dynamic-analysis",
+        "ios-security",
+        "malware-analysis",
+        "mastg",
+        "masvs",
+        "mobile-security",
+        "mobsf",
+        "mstg",
+        "owasp",
+        "rest",
+        "runtime-security",
+        "static-analysis",
+        "web-security",
+        "windows-mobile-security"
+      ],
+      "language": "JavaScript",
+      "updated": "2026-01-30T01:33:19Z",
+      "source": "github",
+      "category": "malware-analysis"
+    },
+    {
+      "name": "Hacker0x01/hacker101",
+      "url": "https://github.com/Hacker0x01/hacker101",
+      "stars": 14340,
+      "description": "Source code for Hacker101.com - a free online web and mobile security class.",
+      "topics": [
+        "clickjacking",
+        "csrf",
+        "education",
+        "hacker101",
+        "hackerone",
+        "hacking",
+        "mobile-security",
+        "security",
+        "session-fixation",
+        "sql-injection",
+        "unchecked-redirects",
+        "vulnerability",
+        "web-security",
+        "xss"
+      ],
+      "language": "SCSS",
+      "updated": "2026-01-29T19:18:50Z",
+      "source": "github",
+      "category": "web-security"
+    },
+    {
+      "name": "vitalysim/Awesome-Hacking-Resources",
+      "url": "https://github.com/vitalysim/Awesome-Hacking-Resources",
+      "stars": 16731,
+      "description": "A collection of hacking / penetration testing resources to make you better!",
+      "topics": [
+        "buffer-overflow",
+        "ctf",
+        "exploit",
+        "hacking",
+        "malware",
+        "mitm",
+        "owasp",
+        "penetration-testing",
+        "privilege-escalation",
+        "privilege-escalation-linux",
+        "reverse-engineering",
+        "windows-privilege-escalation"
+      ],
+      "language": null,
+      "updated": "2026-01-30T03:17:44Z",
+      "source": "github",
+      "category": "exploit"
+    },
+    {
+      "name": "Gallopsled/pwntools",
+      "url": "https://github.com/Gallopsled/pwntools",
+      "stars": 13212,
+      "description": "CTF framework and exploit development library",
+      "topics": [
+        "assembly",
+        "bsd",
+        "capture-the-flag",
+        "ctf",
+        "ctf-framework",
+        "defcon",
+        "exploit",
+        "hacktoberfest",
+        "linux",
+        "pwnable",
+        "pwntools",
+        "python",
+        "python2",
+        "python3",
+        "rop",
+        "shellcode",
+        "shellcode-development",
+        "shellcoding",
+        "wargame"
+      ],
+      "language": "Python",
+      "updated": "2026-01-29T14:25:50Z",
+      "source": "github",
+      "category": "exploit"
+    },
+    {
+      "name": "threat9/routersploit",
+      "url": "https://github.com/threat9/routersploit",
+      "stars": 12945,
+      "description": "Exploitation Framework for Embedded Devices",
+      "topics": [
+        "bruteforce",
+        "creds",
+        "dictionary-attack",
+        "embedded",
+        "exploits",
+        "infosec",
+        "python",
+        "router",
+        "router-exploitation-framework",
+        "routersploit",
+        "routersploit-framework",
+        "scanner",
+        "security"
+      ],
+      "language": "Python",
+      "updated": "2026-01-30T08:28:42Z",
+      "source": "github",
+      "category": "exploit"
+    },
+    {
+      "name": "elder-plinius/CL4R1T4S",
+      "url": "https://github.com/elder-plinius/CL4R1T4S",
+      "stars": 12650,
+      "description": "LEAKED SYSTEM PROMPTS FOR CHATGPT, GEMINI, GROK, CLAUDE, PERPLEXITY, CURSOR, DEVIN, REPLIT, AND MORE! - AI SYSTEMS TRANSPARENCY FOR ALL! 👐",
+      "topics": [
+        "agents",
+        "ai",
+        "chatgpt",
+        "gemini",
+        "google",
+        "grok",
+        "hacking",
+        "leak",
+        "leaked",
+        "openai",
+        "prompt",
+        "prompt-engineering",
+        "prompts",
+        "red-team",
+        "red-teaming",
+        "system",
+        "system-info",
+        "system-prompts",
+        "tools",
+        "transparency"
+      ],
+      "language": null,
+      "updated": "2026-01-30T07:02:45Z",
+      "source": "github",
+      "category": "red-team"
+    },
+    {
+      "name": "redcanaryco/atomic-red-team",
+      "url": "https://github.com/redcanaryco/atomic-red-team",
+      "stars": 11537,
+      "description": "Small and highly portable detection tests based on MITRE's ATT&CK.",
+      "topics": [
+        "mitre",
+        "mitre-attack"
+      ],
+      "language": "C",
+      "updated": "2026-01-30T02:37:13Z",
+      "source": "github",
+      "category": "red-team"
+    },
+    {
+      "name": "BishopFox/sliver",
+      "url": "https://github.com/BishopFox/sliver",
+      "stars": 10618,
+      "description": "Adversary Emulation Framework",
+      "topics": [
+        "adversarial-attacks",
+        "adversary-simulation",
+        "c2",
+        "command-and-control",
+        "dns",
+        "dns-server",
+        "golang",
+        "gplv3",
+        "http",
+        "implant",
+        "red-team",
+        "red-team-engagement",
+        "red-teaming",
+        "security-tools",
+        "sliver"
+      ],
+      "language": "Go",
+      "updated": "2026-01-30T05:01:27Z",
+      "source": "github",
+      "category": "red-team"
+    },
+    {
+      "name": "promptfoo/promptfoo",
+      "url": "https://github.com/promptfoo/promptfoo",
+      "stars": 10199,
+      "description": "Test your prompts, agents, and RAGs. AI Red teaming, pentesting, and vulnerability scanning for LLMs. Compare performance of GPT, Claude, Gemini, Llama, and more. Simple declarative configs with command line and CI/CD integration.",
+      "topics": [
+        "ci",
+        "ci-cd",
+        "cicd",
+        "evaluation",
+        "evaluation-framework",
+        "llm",
+        "llm-eval",
+        "llm-evaluation",
+        "llm-evaluation-framework",
+        "llmops",
+        "pentesting",
+        "prompt-engineering",
+        "prompt-testing",
+        "prompts",
+        "rag",
+        "red-teaming",
+        "testing",
+        "vulnerability-scanners"
+      ],
+      "language": "TypeScript",
+      "updated": "2026-01-30T07:48:52Z",
+      "source": "github",
+      "category": "red-team"
+    },
+    {
+      "name": "ihebski/DefaultCreds-cheat-sheet",
+      "url": "https://github.com/ihebski/DefaultCreds-cheat-sheet",
+      "stars": 6383,
+      "description": "One place for all the default credentials to assist the Blue/Red teamers identifying devices with default password 🛡️",
+      "topics": [
+        "blueteam",
+        "blueteam-tools",
+        "blueteaming",
+        "bugbounty",
+        "cheatsheet",
+        "cybersecurity",
+        "default-password",
+        "exploit",
+        "infosec",
+        "offensive-security",
+        "offensive-security-projects",
+        "pentest",
+        "pentesting",
+        "soc"
+      ],
+      "language": "Python",
+      "updated": "2026-01-27T02:37:46Z",
+      "source": "github",
+      "category": "blue-team"
+    },
+    {
+      "name": "decalage2/awesome-security-hardening",
+      "url": "https://github.com/decalage2/awesome-security-hardening",
+      "stars": 6092,
+      "description": "A collection of awesome security hardening guides, tools and other resources",
+      "topics": [
+        "awesome-list",
+        "best-practices",
+        "blue-team",
+        "blueteam",
+        "cis-benchmarks",
+        "computer-security",
+        "cyber-security",
+        "cybersecurity",
+        "infosec",
+        "linux-hardening",
+        "security",
+        "security-hardening",
+        "security-tools",
+        "windows-hardening"
+      ],
+      "language": null,
+      "updated": "2026-01-30T04:56:32Z",
+      "source": "github",
+      "category": "blue-team"
+    },
+    {
+      "name": "Trusted-AI/adversarial-robustness-toolbox",
+      "url": "https://github.com/Trusted-AI/adversarial-robustness-toolbox",
+      "stars": 5803,
+      "description": "Adversarial Robustness Toolbox (ART) - Python Library for Machine Learning Security - Evasion, Poisoning, Extraction, Inference - Red and Blue Teams",
+      "topics": [
+        "adversarial-attacks",
+        "adversarial-examples",
+        "adversarial-machine-learning",
+        "ai",
+        "artificial-intelligence",
+        "attack",
+        "blue-team",
+        "evasion",
+        "extraction",
+        "inference",
+        "machine-learning",
+        "poisoning",
+        "privacy",
+        "python",
+        "red-team",
+        "trusted-ai",
+        "trustworthy-ai"
+      ],
+      "language": "Python",
+      "updated": "2026-01-29T23:27:15Z",
+      "source": "github",
+      "category": "blue-team"
+    },
+    {
+      "name": "fabacab/awesome-cybersecurity-blueteam",
+      "url": "https://github.com/fabacab/awesome-cybersecurity-blueteam",
+      "stars": 5110,
+      "description": ":computer:🛡️ A curated collection of awesome resources, tools, and other shiny things for cybersecurity blue teams.",
+      "topics": [
+        "awesome-list",
+        "blue-team",
+        "computer-security",
+        "cybersecurity",
+        "defensive-security",
+        "infosec",
+        "security"
+      ],
+      "language": null,
+      "updated": "2026-01-29T20:28:53Z",
+      "source": "github",
+      "category": "blue-team"
+    },
+    {
+      "name": "radareorg/radare2",
+      "url": "https://github.com/radareorg/radare2",
+      "stars": 23009,
+      "description": "UNIX-like reverse engineering framework and command-line toolset",
+      "topics": [
+        "binary-analysis",
+        "c",
+        "commandline",
+        "disassembler",
+        "forensics",
+        "hacktoberfest",
+        "malware-analysis",
+        "radare2",
+        "reverse-engineering",
+        "security"
+      ],
+      "language": "C",
+      "updated": "2026-01-29T23:49:17Z",
+      "source": "github",
+      "category": "malware-analysis"
+    },
+    {
+      "name": "rshipp/awesome-malware-analysis",
+      "url": "https://github.com/rshipp/awesome-malware-analysis",
+      "stars": 13381,
+      "description": "Defund the Police.",
+      "topics": [
+        "analysis-framework",
+        "automated-analysis",
+        "awesome",
+        "awesome-list",
+        "chinese",
+        "chinese-translation",
+        "domain-analysis",
+        "drop-ice",
+        "dynamic-analysis",
+        "list",
+        "malware-analysis",
+        "malware-collection",
+        "malware-research",
+        "malware-samples",
+        "network-traffic",
+        "static-analysis",
+        "threat-intelligence",
+        "threat-sharing",
+        "threatintel"
+      ],
+      "language": null,
+      "updated": "2026-01-30T08:32:48Z",
+      "source": "github",
+      "category": "malware-analysis"
+    },
+    {
+      "name": "ytisf/theZoo",
+      "url": "https://github.com/ytisf/theZoo",
+      "stars": 12645,
+      "description": "A repository of LIVE malwares for your own joy and pleasure. theZoo is a project created to make the possibility of malware analysis open and available to the public.",
+      "topics": [
+        "malware",
+        "malware-analysis",
+        "malware-research",
+        "malware-samples",
+        "malwareanalysis",
+        "thezoo"
+      ],
+      "language": "Python",
+      "updated": "2026-01-29T23:36:16Z",
+      "source": "github",
+      "category": "malware-analysis"
+    }
+  ],
+  "nsa_repos": [
+    {
+      "name": "nsacyber/Pass-the-Hash-Guidance",
+      "url": "https://github.com/nsacyber/Pass-the-Hash-Guidance",
+      "stars": 201,
+      "description": "Configuration guidance for implementing Pass-the-Hash mitigations. #nsacyber",
+      "topics": [
+        "pass-the-hash",
+        "pth",
+        "windows"
+      ],
+      "language": "PowerShell",
+      "updated": "2026-01-01T12:27:41Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/Event-Forwarding-Guidance",
+      "url": "https://github.com/nsacyber/Event-Forwarding-Guidance",
+      "stars": 881,
+      "description": "Configuration guidance for implementing collection of security relevant Windows Event Log events by using Windows Event Forwarding. #nsacyber",
+      "topics": [
+        "event-log",
+        "siem",
+        "windows"
+      ],
+      "language": "PowerShell",
+      "updated": "2026-01-27T14:23:51Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/AppLocker-Guidance",
+      "url": "https://github.com/nsacyber/AppLocker-Guidance",
+      "stars": 231,
+      "description": "Configuration guidance for implementing application whitelisting with AppLocker. #nsacyber",
+      "topics": [
+        "application-whitelisting",
+        "applocker",
+        "microsoft-applocker",
+        "whitelisting",
+        "windows"
+      ],
+      "language": "PowerShell",
+      "updated": "2026-01-30T07:33:33Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/Control-Flow-Integrity",
+      "url": "https://github.com/nsacyber/Control-Flow-Integrity",
+      "stars": 156,
+      "description": "A proposed hardware-based method for stopping known memory corruption exploitation techniques. #nsacyber",
+      "topics": [
+        "control-flow",
+        "control-flow-analysis",
+        "control-flow-integrity"
+      ],
+      "language": "C",
+      "updated": "2025-10-17T15:20:44Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/Maplesyrup",
+      "url": "https://github.com/nsacyber/Maplesyrup",
+      "stars": 141,
+      "description": "Assesses CPU security of embedded devices. #nsacyber",
+      "topics": [
+        "arm",
+        "assessment",
+        "audit",
+        "auditing",
+        "cpu",
+        "security"
+      ],
+      "language": "C",
+      "updated": "2026-01-28T00:44:19Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/GRASSMARLIN",
+      "url": "https://github.com/nsacyber/GRASSMARLIN",
+      "stars": 1024,
+      "description": "Provides situational awareness of Industrial Control Systems (ICS) and Supervisory Control and Data Acquisition (SCADA) networks in support of network security assessments. #nsacyber",
+      "topics": [
+        "analysis",
+        "control-systems",
+        "ics",
+        "ics-scada",
+        "monitor",
+        "monitoring",
+        "network",
+        "networking",
+        "scada",
+        "scada-security",
+        "visualization"
+      ],
+      "language": "Java",
+      "updated": "2026-01-26T04:12:58Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/Windows-Secure-Host-Baseline",
+      "url": "https://github.com/nsacyber/Windows-Secure-Host-Baseline",
+      "stars": 1586,
+      "description": "Configuration guidance for implementing the Windows 10 and Windows Server 2016 DoD Secure Host Baseline settings. #nsacyber",
+      "topics": [
+        "adobe-reader",
+        "applocker",
+        "audit",
+        "auditing",
+        "certificates",
+        "chrome-browser",
+        "compliance",
+        "group-policy",
+        "internet-explorer",
+        "microsoft-office",
+        "nessus",
+        "windows",
+        "windows-10",
+        "windows-firewall",
+        "windows-server",
+        "windows-server-2016"
+      ],
+      "language": "HTML",
+      "updated": "2026-01-23T17:36:59Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/goSecure",
+      "url": "https://github.com/nsacyber/goSecure",
+      "stars": 989,
+      "description": "An easy to use and portable Virtual Private Network (VPN) system built with Linux and a Raspberry Pi. #nsacyber",
+      "topics": [
+        "linux",
+        "raspberry-pi",
+        "strongswan",
+        "vpn"
+      ],
+      "language": "Python",
+      "updated": "2026-01-13T11:17:58Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/LOCKLEVEL",
+      "url": "https://github.com/nsacyber/LOCKLEVEL",
+      "stars": 99,
+      "description": "A prototype that demonstrates a method for scoring how well Windows systems have implemented some of the top 10 Information Assurance mitigation strategies. #nsacyber",
+      "topics": [
+        "assessment",
+        "compliance",
+        "scoring",
+        "windows"
+      ],
+      "language": "JavaScript",
+      "updated": "2025-03-31T09:02:30Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/Splunk-Assessment-of-Mitigation-Implementations",
+      "url": "https://github.com/nsacyber/Splunk-Assessment-of-Mitigation-Implementations",
+      "stars": 76,
+      "description": "Automatically scores how well Windows systems have implemented some of the top 10 Information Assurance mitigation strategies. #nsacyber",
+      "topics": [
+        "assessment",
+        "audit",
+        "auditing",
+        "compliance",
+        "scoring",
+        "splunk",
+        "windows"
+      ],
+      "language": "Python",
+      "updated": "2025-03-14T02:46:02Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/Certificate-Authority-Situational-Awareness",
+      "url": "https://github.com/nsacyber/Certificate-Authority-Situational-Awareness",
+      "stars": 113,
+      "description": "Identifies unexpected and prohibited certificate authority certificates on Windows systems. #nsacyber",
+      "topics": [
+        "certificate",
+        "certificate-authorities",
+        "certificate-authority",
+        "certificates",
+        "splunk",
+        "windows"
+      ],
+      "language": "PowerShell",
+      "updated": "2025-10-04T17:37:28Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/WALKOFF",
+      "url": "https://github.com/nsacyber/WALKOFF",
+      "stars": 1228,
+      "description": "A flexible, easy to use, automation framework allowing users to integrate their capabilities and devices to cut through the repetitive, tedious tasks slowing them down. #nsacyber",
+      "topics": [
+        "administration",
+        "analytics",
+        "automation",
+        "automation-framework",
+        "cybersecurity",
+        "devops",
+        "framework",
+        "integration",
+        "orchestration",
+        "orchestration-framework",
+        "orchestrator",
+        "python",
+        "security",
+        "sysadmin",
+        "walkoff",
+        "walkoff-apps",
+        "walkoff-workflows",
+        "workflow"
+      ],
+      "language": "Python",
+      "updated": "2026-01-28T10:43:54Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/simon-speck",
+      "url": "https://github.com/nsacyber/simon-speck",
+      "stars": 168,
+      "description": "The SIMON and SPECK families of lightweight block ciphers. #nsacyber",
+      "topics": [
+        "cipher",
+        "ciphers",
+        "crypto",
+        "crypto-library",
+        "cryptography",
+        "cryptography-library",
+        "simon",
+        "speck"
+      ],
+      "language": null,
+      "updated": "2026-01-14T10:27:46Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/simon-speck-supercop",
+      "url": "https://github.com/nsacyber/simon-speck-supercop",
+      "stars": 50,
+      "description": "Fast implementations of the SIMON and SPECK lightweight block ciphers for the SUPERCOP benchmark toolkit. #nsacyber",
+      "topics": [
+        "cipher",
+        "ciphers",
+        "crypto",
+        "crypto-library",
+        "cryptography",
+        "cryptography-library",
+        "simon",
+        "speck",
+        "supercop"
+      ],
+      "language": "C",
+      "updated": "2026-01-01T12:20:41Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/Windows-Event-Log-Messages",
+      "url": "https://github.com/nsacyber/Windows-Event-Log-Messages",
+      "stars": 406,
+      "description": "Retrieves the definitions of Windows Event Log messages embedded in Windows binaries and provides them in discoverable formats. #nsacyber",
+      "topics": [
+        "event-log",
+        "windows"
+      ],
+      "language": "C#",
+      "updated": "2026-01-25T21:08:55Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/unfetter",
+      "url": "https://github.com/nsacyber/unfetter",
+      "stars": 164,
+      "description": "Identifies defensive gaps in security posture by leveraging Mitre's ATT&CK framework. #nsacyber",
+      "topics": [
+        "unfetter"
+      ],
+      "language": null,
+      "updated": "2025-12-04T15:13:00Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/netman",
+      "url": "https://github.com/nsacyber/netman",
+      "stars": 80,
+      "description": "A userland network manager with monitoring and limiting capabilities for macOS. #nsacyber",
+      "topics": [
+        "macos",
+        "macosx",
+        "monitor",
+        "monitoring",
+        "network",
+        "networking"
+      ],
+      "language": "C",
+      "updated": "2026-01-28T00:44:23Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/netfil",
+      "url": "https://github.com/nsacyber/netfil",
+      "stars": 112,
+      "description": "A kernel network manager with monitoring and limiting capabilities for macOS. #nsacyber",
+      "topics": [
+        "macos",
+        "macosx",
+        "monitor",
+        "monitoring",
+        "network",
+        "networking"
+      ],
+      "language": "C",
+      "updated": "2026-01-18T05:59:29Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/nsacyber.github.io",
+      "url": "https://github.com/nsacyber/nsacyber.github.io",
+      "stars": 287,
+      "description": "NSA Cybersecurity. Formerly known as NSA Information Assurance and the Information Assurance Directorate",
+      "topics": [
+        "github-pages"
+      ],
+      "language": "PowerShell",
+      "updated": "2026-01-17T20:58:08Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/WALKOFF-Apps",
+      "url": "https://github.com/nsacyber/WALKOFF-Apps",
+      "stars": 143,
+      "description": "WALKOFF-enabled applications. #nsacyber",
+      "topics": [
+        "administration",
+        "analytics",
+        "automation",
+        "cybersecurity",
+        "integration",
+        "iot",
+        "orchestration",
+        "orchestration-framework",
+        "orchestrator",
+        "python",
+        "security",
+        "walkoff",
+        "walkoff-apps"
+      ],
+      "language": "YARA",
+      "updated": "2025-10-04T22:46:24Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/AtomicWatch",
+      "url": "https://github.com/nsacyber/AtomicWatch",
+      "stars": 29,
+      "description": "Intel Atom C2000 series discovery tool that parses log files and returns results if a positive match is found. #nsacyber",
+      "topics": [
+        "atom",
+        "cpu",
+        "intel",
+        "processor"
+      ],
+      "language": "Python",
+      "updated": "2026-01-10T01:51:19Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/serial2pcap",
+      "url": "https://github.com/nsacyber/serial2pcap",
+      "stars": 82,
+      "description": "Converts serial IP data, typically collected from Industrial Control System devices, to the more commonly used Packet Capture (PCAP) format. #nsacyber",
+      "topics": [
+        "control-systems",
+        "conversion",
+        "convert",
+        "converter",
+        "ics-scada",
+        "pcap",
+        "scada"
+      ],
+      "language": "Python",
+      "updated": "2025-11-24T10:32:52Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/Driver-Collider",
+      "url": "https://github.com/nsacyber/Driver-Collider",
+      "stars": 50,
+      "description": "Blocks drivers from loading by using a name collision technique. #nsacyber",
+      "topics": [
+        "driver",
+        "windows"
+      ],
+      "language": "C",
+      "updated": "2025-08-29T11:14:44Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/HTTP-Connectivity-Tester",
+      "url": "https://github.com/nsacyber/HTTP-Connectivity-Tester",
+      "stars": 114,
+      "description": "Aids in discovering HTTP and HTTPS connectivity issues. #nsacyber",
+      "topics": [
+        "connection",
+        "connectivity",
+        "diagnostic",
+        "diagnostics",
+        "http",
+        "https",
+        "powershell-module",
+        "test",
+        "testing"
+      ],
+      "language": "PowerShell",
+      "updated": "2026-01-29T23:38:34Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/CodeGov",
+      "url": "https://github.com/nsacyber/CodeGov",
+      "stars": 30,
+      "description": "Creates a code.gov code inventory JSON file based on GitHub repository information. #nsacyber",
+      "topics": [
+        "gov",
+        "government",
+        "json",
+        "powershell-module"
+      ],
+      "language": "PowerShell",
+      "updated": "2025-12-22T21:42:37Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/Detect-CVE-2017-15361-TPM",
+      "url": "https://github.com/nsacyber/Detect-CVE-2017-15361-TPM",
+      "stars": 60,
+      "description": "Detects Windows and Linux systems with enabled Trusted Platform Modules (TPM) vulnerable to CVE-2017-15361. #nsacyber",
+      "topics": [
+        "audit",
+        "cve",
+        "nessus",
+        "rsa",
+        "tpm",
+        "trusted-platform-module",
+        "vulnerability"
+      ],
+      "language": "PowerShell",
+      "updated": "2026-01-28T00:44:02Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/Hardware-and-Firmware-Security-Guidance",
+      "url": "https://github.com/nsacyber/Hardware-and-Firmware-Security-Guidance",
+      "stars": 844,
+      "description": "Guidance for the Spectre, Meltdown, Speculative Store Bypass, Rogue System Register Read, Lazy FP State Restore, Bounds Check Bypass Store, TLBleed, and L1TF/Foreshadow vulnerabilities as well as general hardware and firmware security guidance. #nsacyber",
+      "topics": [
+        "audit",
+        "cve",
+        "cve-2017-5715",
+        "cve-2017-5753",
+        "cve-2017-5754",
+        "cve-2018-3639",
+        "cve-2018-3640",
+        "cve-2018-3665",
+        "cve-2018-3693",
+        "guidance",
+        "meltdown",
+        "nessus",
+        "spectre",
+        "vulnerability"
+      ],
+      "language": "C",
+      "updated": "2026-01-28T00:44:10Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/HIRS",
+      "url": "https://github.com/nsacyber/HIRS",
+      "stars": 204,
+      "description": "Trusted Computing based services supporting TPM provisioning and supply chain validation concepts. #nsacyber",
+      "topics": [
+        "integrity",
+        "provisioning",
+        "supply-chain",
+        "trusted-computing",
+        "trusted-platform-module",
+        "validation"
+      ],
+      "language": "JavaScript",
+      "updated": "2026-01-29T21:44:51Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/BitLocker-Guidance",
+      "url": "https://github.com/nsacyber/BitLocker-Guidance",
+      "stars": 127,
+      "description": "Configuration guidance for implementing BitLocker. #nsacyber",
+      "topics": [
+        "audit",
+        "bitlocker",
+        "bitlocker-drive-encryption",
+        "encryption",
+        "full-disk-encryption",
+        "guidance",
+        "microsoft",
+        "nessus",
+        "windows"
+      ],
+      "language": "HTML",
+      "updated": "2026-01-29T15:00:27Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/paccor",
+      "url": "https://github.com/nsacyber/paccor",
+      "stars": 70,
+      "description": "The Platform Attribute Certificate Creator can gather component details, create, sign, and validate the TCG-defined Platform Credential. #nsacyber",
+      "topics": [
+        "certificate",
+        "certificates",
+        "credential",
+        "trusted-computing"
+      ],
+      "language": "C#",
+      "updated": "2025-12-19T18:25:31Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/BAM",
+      "url": "https://github.com/nsacyber/BAM",
+      "stars": 163,
+      "description": "The Binary Analysis Metadata tool gathers information about Windows binaries to aid in their analysis. #nsacyber",
+      "topics": [
+        "binary",
+        "binary-analysis",
+        "metadata"
+      ],
+      "language": "Python",
+      "updated": "2025-12-08T12:10:05Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/Blocking-Outdated-Web-Technologies",
+      "url": "https://github.com/nsacyber/Blocking-Outdated-Web-Technologies",
+      "stars": 63,
+      "description": "Guidance for blocking outdated web technologies. #nsacyber",
+      "topics": [
+        "guidance",
+        "web"
+      ],
+      "language": "PowerShell",
+      "updated": "2025-08-09T13:31:52Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/RandPassGenerator",
+      "url": "https://github.com/nsacyber/RandPassGenerator",
+      "stars": 143,
+      "description": "A command-line utility  for generating random passwords, passphrases, and raw keys. #nsacyber",
+      "topics": [
+        "password",
+        "password-generator"
+      ],
+      "language": "Java",
+      "updated": "2026-01-13T11:19:54Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/PRUNE",
+      "url": "https://github.com/nsacyber/PRUNE",
+      "stars": 69,
+      "description": "Logs key Windows process performance metrics. #nsacyber",
+      "topics": [
+        "etw",
+        "performance",
+        "performance-metrics",
+        "process",
+        "windows"
+      ],
+      "language": "C#",
+      "updated": "2026-01-28T00:44:45Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/Mitigating-Web-Shells",
+      "url": "https://github.com/nsacyber/Mitigating-Web-Shells",
+      "stars": 981,
+      "description": "Guidance for mitigation web shells. #nsacyber",
+      "topics": [
+        "guidance",
+        "mitigation",
+        "webshell",
+        "webshells"
+      ],
+      "language": "YARA",
+      "updated": "2026-01-09T13:15:18Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/Mitigating-Obsolete-TLS",
+      "url": "https://github.com/nsacyber/Mitigating-Obsolete-TLS",
+      "stars": 271,
+      "description": "Guidance for mitigating obsolete Transport Layer Security configurations. #nsacyber",
+      "topics": [
+        "guidance",
+        "mitigations",
+        "snort-rules",
+        "ssl",
+        "tls"
+      ],
+      "language": "PowerShell",
+      "updated": "2025-12-12T12:00:17Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/Chinese-State-Sponsored-Cyber-Operations-Observed-TTPs",
+      "url": "https://github.com/nsacyber/Chinese-State-Sponsored-Cyber-Operations-Observed-TTPs",
+      "stars": 44,
+      "description": "Supporting files for the Chinese State-Sponsored Cyber Operations: Observed TTPs Cybersecurity Advisory. #nsacyber",
+      "topics": [
+        "mitre-attack",
+        "mitre-attack-navigator",
+        "procedures",
+        "tactics",
+        "techniques"
+      ],
+      "language": null,
+      "updated": "2025-05-15T20:15:18Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    },
+    {
+      "name": "nsacyber/ELITEWOLF",
+      "url": "https://github.com/nsacyber/ELITEWOLF",
+      "stars": 614,
+      "description": "OT security monitoring #nsacyber",
+      "topics": [],
+      "language": null,
+      "updated": "2026-01-13T11:24:33Z",
+      "source": "nsa_cyber",
+      "category": "official_guidance"
+    }
+  ],
+  "awesome_lists": [
+    {
+      "name": "awesome-hacking",
+      "url": "https://github.com/Hack-with-Github/Awesome-Hacking",
+      "stars": 105640,
+      "description": "A collection of various awesome lists for hackers, pentesters and security researchers",
+      "source": "awesome_list",
+      "category": "curated_collection"
+    },
+    {
+      "name": "awesome-pentest",
+      "url": "https://github.com/enaqx/awesome-pentest",
+      "stars": 25062,
+      "description": "A collection of awesome penetration testing resources, tools and other shiny things",
+      "source": "awesome_list",
+      "category": "curated_collection"
+    },
+    {
+      "name": "awesome-security",
+      "url": "https://github.com/sbilly/awesome-security",
+      "stars": 13932,
+      "description": "A collection of awesome software, libraries, documents, books, resources and cools stuffs about security.",
+      "source": "awesome_list",
+      "category": "curated_collection"
+    },
+    {
+      "name": "awesome-web-security",
+      "url": "https://github.com/qazbnm456/awesome-web-security",
+      "stars": 13018,
+      "description": "🐶 A curated list of Web Security materials and resources.",
+      "source": "awesome_list",
+      "category": "curated_collection"
+    },
+    {
+      "name": "awesome-osint",
+      "url": "https://github.com/jivoi/awesome-osint",
+      "stars": 24560,
+      "description": ":scream: A curated list of amazingly awesome OSINT",
+      "source": "awesome_list",
+      "category": "curated_collection"
+    },
+    {
+      "name": "awesome-ctf",
+      "url": "https://github.com/apsdehal/awesome-ctf",
+      "stars": 11201,
+      "description": "A curated list of CTF frameworks, libraries, resources and softwares",
+      "source": "awesome_list",
+      "category": "curated_collection"
+    },
+    {
+      "name": "awesome-bugbounty-tools",
+      "url": "https://github.com/vavkamil/awesome-bugbounty-tools",
+      "stars": 5742,
+      "description": "A curated list of various bug bounty tools",
+      "source": "awesome_list",
+      "category": "curated_collection"
+    },
+    {
+      "name": "awesome-red-teaming",
+      "url": "https://github.com/yeyintminthuhtut/Awesome-Red-Teaming",
+      "stars": 7736,
+      "description": "List of Awesome Red Teaming Resources",
+      "source": "awesome_list",
+      "category": "curated_collection"
+    },
+    {
+      "name": "PayloadsAllTheThings",
+      "url": "https://github.com/swisskyrepo/PayloadsAllTheThings",
+      "stars": 74763,
+      "description": "A list of useful payloads and bypass for Web Application Security and Pentest/CTF",
+      "source": "awesome_list",
+      "category": "curated_collection"
+    },
+    {
+      "name": "SecLists",
+      "url": "https://github.com/danielmiessler/SecLists",
+      "stars": 68482,
+      "description": "SecLists is the security tester's companion. It's a collection of multiple types of lists used during security assessments, collected in one place. List types include usernames, passwords, URLs, sensitive data patterns, fuzzing payloads, web shells, and many more.",
+      "source": "awesome_list",
+      "category": "curated_collection"
+    }
+  ],
+  "cves": [
+    {
+      "id": "CVE-1999-0095",
+      "description": "The debug command in Sendmail is enabled, allowing attackers to execute commands as root.",
+      "severity": "UNKNOWN",
+      "score": null,
+      "published": "1988-10-01T04:00:00.000",
+      "source": "nvd",
+      "category": "cve"
+    },
+    {
+      "id": "CVE-1999-0082",
+      "description": "CWD ~root command in ftpd allows root access.",
+      "severity": "UNKNOWN",
+      "score": null,
+      "published": "1988-11-11T05:00:00.000",
+      "source": "nvd",
+      "category": "cve"
+    },
+    {
+      "id": "CVE-1999-1471",
+      "description": "Buffer overflow in passwd in BSD based operating systems 4.3 and earlier allows local users to gain root privileges by specifying a long shell or GECOS field.",
+      "severity": "UNKNOWN",
+      "score": null,
+      "published": "1989-01-01T05:00:00.000",
+      "source": "nvd",
+      "category": "cve"
+    },
+    {
+      "id": "CVE-1999-1122",
+      "description": "Vulnerability in restore in SunOS 4.0.3 and earlier allows local users to gain privileges.",
+      "severity": "UNKNOWN",
+      "score": null,
+      "published": "1989-07-26T04:00:00.000",
+      "source": "nvd",
+      "category": "cve"
+    },
+    {
+      "id": "CVE-1999-1467",
+      "description": "Vulnerability in rcp on SunOS 4.0.x allows remote attackers from trusted hosts to execute arbitrary commands as root, possibly related to the configuration of the nobody user.",
+      "severity": "UNKNOWN",
+      "score": null,
+      "published": "1989-10-26T04:00:00.000",
+      "source": "nvd",
+      "category": "cve"
+    },
+    {
+      "id": "CVE-1999-1506",
+      "description": "Vulnerability in SMI Sendmail 4.0 and earlier, on SunOS up to 4.0.3, allows remote attackers to access user bin.",
+      "severity": "UNKNOWN",
+      "score": null,
+      "published": "1990-01-29T05:00:00.000",
+      "source": "nvd",
+      "category": "cve"
+    },
+    {
+      "id": "CVE-1999-0084",
+      "description": "Certain NFS servers allow users to use mknod to gain privileges by creating a writable kmem device and setting the UID to 0.",
+      "severity": "HIGH",
+      "score": 8.4,
+      "published": "1990-05-01T04:00:00.000",
+      "source": "nvd",
+      "category": "cve"
+    },
+    {
+      "id": "CVE-2000-0388",
+      "description": "Buffer overflow in FreeBSD libmytinfo library allows local users to execute commands via a long TERMCAP environmental variable.",
+      "severity": "UNKNOWN",
+      "score": null,
+      "published": "1990-05-09T04:00:00.000",
+      "source": "nvd",
+      "category": "cve"
+    },
+    {
+      "id": "CVE-1999-0209",
+      "description": "The SunView (SunTools) selection_svc facility allows remote users to read files.",
+      "severity": "UNKNOWN",
+      "score": null,
+      "published": "1990-08-14T04:00:00.000",
+      "source": "nvd",
+      "category": "cve"
+    },
+    {
+      "id": "CVE-1999-1198",
+      "description": "BuildDisk program on NeXT systems before 2.0 does not prompt users for the root password, which allows local users to gain root privileges.",
+      "severity": "UNKNOWN",
+      "score": null,
+      "published": "1990-10-03T04:00:00.000",
+      "source": "nvd",
+      "category": "cve"
+    },
+    {
+      "id": "CVE-1999-1391",
+      "description": "Vulnerability in NeXT 1.0a and 1.0 with publicly accessible printers allows local users to gain privileges via a combination of the npd program and weak directory permissions.",
+      "severity": "UNKNOWN",
+      "score": null,
+      "published": "1990-10-03T04:00:00.000",
+      "source": "nvd",
+      "category": "cve"
+    },
+    {
+      "id": "CVE-1999-1392",
+      "description": "Vulnerability in restore0.9 installation script in NeXT 1.0a and 1.0 allows local users to gain root privileges.",
+      "severity": "UNKNOWN",
+      "score": null,
+      "published": "1990-10-03T04:00:00.000",
+      "source": "nvd",
+      "category": "cve"
+    },
+    {
+      "id": "CVE-1999-1057",
+      "description": "VMS 4.0 through 5.3 allows local users to gain privileges via the ANALYZE/PROCESS_DUMP dcl command.",
+      "severity": "UNKNOWN",
+      "score": null,
+      "published": "1990-10-25T04:00:00.000",
+      "source": "nvd",
+      "category": "cve"
+    },
+    {
+      "id": "CVE-1999-1554",
+      "description": "/usr/sbin/Mail on SGI IRIX 3.3 and 3.3.1 does not properly set the group ID to the group ID of the user who started Mail, which allows local users to read the mail of other users.",
+      "severity": "UNKNOWN",
+      "score": null,
+      "published": "1990-10-31T05:00:00.000",
+      "source": "nvd",
+      "category": "cve"
+    },
+    {
+      "id": "CVE-1999-1197",
+      "description": "TIOCCONS in SunOS 4.1.1 does not properly check the permissions of a user who tries to redirect console output and input, which could allow a local user to gain privileges.",
+      "severity": "UNKNOWN",
+      "score": null,
+      "published": "1990-12-20T05:00:00.000",
+      "source": "nvd",
+      "category": "cve"
+    },
+    {
+      "id": "CVE-1999-1115",
+      "description": "Vulnerability in the /etc/suid_exec program in HP Apollo Domain/OS sr10.2 and sr10.3 beta, related to the Korn Shell (ksh).",
+      "severity": "UNKNOWN",
+      "score": null,
+      "published": "1990-12-31T05:00:00.000",
+      "source": "nvd",
+      "category": "cve"
+    },
+    {
+      "id": "CVE-1999-1258",
+      "description": "rpc.pwdauthd in SunOS 4.1.1 and earlier does not properly prevent remote access to the daemon, which allows remote attackers to obtain sensitive system information.",
+      "severity": "UNKNOWN",
+      "score": null,
+      "published": "1991-01-15T05:00:00.000",
+      "source": "nvd",
+      "category": "cve"
+    },
+    {
+      "id": "CVE-1999-1438",
+      "description": "Vulnerability in /bin/mail in SunOS 4.1.1 and earlier allows local users to gain root privileges via certain command line arguments.",
+      "severity": "UNKNOWN",
+      "score": null,
+      "published": "1991-02-22T05:00:00.000",
+      "source": "nvd",
+      "category": "cve"
+    },
+    {
+      "id": "CVE-1999-1211",
+      "description": "Vulnerability in in.telnetd in SunOS 4.1.1 and earlier allows local users to gain root privileges.",
+      "severity": "UNKNOWN",
+      "score": null,
+      "published": "1991-03-27T05:00:00.000",
+      "source": "nvd",
+      "category": "cve"
+    },
+    {
+      "id": "CVE-1999-1212",
+      "description": "Vulnerability in in.rlogind in SunOS 4.0.3 and 4.0.3c allows local users to gain root privileges.",
+      "severity": "UNKNOWN",
+      "score": null,
+      "published": "1991-03-27T05:00:00.000",
+      "source": "nvd",
+      "category": "cve"
+    }
+  ],
+  "pdf_searches": [
+    "filetype:pdf \"penetration testing\" methodology",
+    "filetype:pdf \"bug bounty\" writeup",
+    "filetype:pdf \"vulnerability assessment\" guide",
+    "filetype:pdf OWASP \"web application security\"",
+    "filetype:pdf \"red team\" operations",
+    "filetype:pdf \"threat modeling\" guide",
+    "site:microsoft.com filetype:pdf security whitepaper",
+    "site:google.com filetype:pdf security research",
+    "site:cloudflare.com filetype:pdf security",
+    "site:nist.gov filetype:pdf cybersecurity framework",
+    "site:cisa.gov filetype:pdf security guidance",
+    "site:enisa.europa.eu filetype:pdf security",
+    "site:blackhat.com filetype:pdf",
+    "site:defcon.org filetype:pdf",
+    "\"DEF CON\" filetype:pdf presentation",
+    "\"Black Hat\" filetype:pdf briefing"
+  ],
+  "education": {
+    "free_courses": [
+      {
+        "name": "PortSwigger Web Security Academy",
+        "url": "https://portswigger.net/web-security",
+        "topics": [
+          "XSS",
+          "SQLi",
+          "CSRF",
+          "SSRF",
+          "Authentication"
+        ],
+        "level": "beginner-advanced",
+        "cost": "FREE",
+        "priority": "HIGH"
+      },
+      {
+        "name": "TryHackMe",
+        "url": "https://tryhackme.com",
+        "topics": [
+          "Linux",
+          "Web",
+          "Network",
+          "Crypto",
+          "Forensics"
+        ],
+        "level": "beginner-intermediate",
+        "cost": "FREE tier available",
+        "priority": "HIGH"
+      },
+      {
+        "name": "HackTheBox Academy",
+        "url": "https://academy.hackthebox.com",
+        "topics": [
+          "Pentesting",
+          "Bug Bounty",
+          "Red Team"
+        ],
+        "level": "intermediate-advanced",
+        "cost": "FREE tier available",
+        "priority": "HIGH"
+      },
+      {
+        "name": "PentesterLab",
+        "url": "https://pentesterlab.com",
+        "topics": [
+          "Web",
+          "Code Review",
+          "Crypto"
+        ],
+        "level": "intermediate",
+        "cost": "Paid (affordable)",
+        "priority": "MEDIUM"
+      },
+      {
+        "name": "OWASP WebGoat",
+        "url": "https://owasp.org/www-project-webgoat/",
+        "topics": [
+          "OWASP Top 10",
+          "Web Vulnerabilities"
+        ],
+        "level": "beginner",
+        "cost": "FREE",
+        "priority": "HIGH"
+      }
+    ],
+    "youtube_channels": [
+      {
+        "name": "LiveOverflow",
+        "url": "https://youtube.com/@LiveOverflow",
+        "focus": "CTF, Exploitation"
+      },
+      {
+        "name": "IppSec",
+        "url": "https://youtube.com/@ippsec",
+        "focus": "HackTheBox Walkthroughs"
+      },
+      {
+        "name": "John Hammond",
+        "url": "https://youtube.com/@_JohnHammond",
+        "focus": "CTF, Malware"
+      },
+      {
+        "name": "NetworkChuck",
+        "url": "https://youtube.com/@NetworkChuck",
+        "focus": "Networking, Hacking Basics"
+      },
+      {
+        "name": "The Cyber Mentor",
+        "url": "https://youtube.com/@TCMSecurityAcademy",
+        "focus": "Pentesting"
+      },
+      {
+        "name": "STÖK",
+        "url": "https://youtube.com/@STOKfredrik",
+        "focus": "Bug Bounty"
+      },
+      {
+        "name": "NahamSec",
+        "url": "https://youtube.com/@NahamSec",
+        "focus": "Bug Bounty"
+      },
+      {
+        "name": "InsiderPHD",
+        "url": "https://youtube.com/@InsiderPhD",
+        "focus": "Bug Bounty for Beginners"
+      }
+    ],
+    "certifications": [
+      {
+        "name": "OSCP",
+        "org": "OffSec",
+        "focus": "Penetration Testing",
+        "difficulty": "Hard"
+      },
+      {
+        "name": "eJPT",
+        "org": "INE",
+        "focus": "Junior Pentester",
+        "difficulty": "Entry"
+      },
+      {
+        "name": "CEH",
+        "org": "EC-Council",
+        "focus": "Ethical Hacking",
+        "difficulty": "Medium"
+      },
+      {
+        "name": "PNPT",
+        "org": "TCM Security",
+        "focus": "Practical Pentesting",
+        "difficulty": "Medium"
+      }
+    ]
+  },
+  "bug_bounty": {
+    "top_programs": [
+      {
+        "name": "Google VRP",
+        "url": "https://bughunters.google.com",
+        "max_bounty": "$31,337+"
+      },
+      {
+        "name": "Meta Bug Bounty",
+        "url": "https://www.facebook.com/whitehat",
+        "max_bounty": "$50,000+"
+      },
+      {
+        "name": "Microsoft MSRC",
+        "url": "https://msrc.microsoft.com/bounty",
+        "max_bounty": "$250,000+"
+      },
+      {
+        "name": "Apple Security",
+        "url": "https://security.apple.com",
+        "max_bounty": "$1,000,000+"
+      },
+      {
+        "name": "GitHub Security",
+        "url": "https://bounty.github.com",
+        "max_bounty": "$30,000+"
+      }
+    ],
+    "platforms": [
+      {
+        "name": "HackerOne",
+        "url": "https://hackerone.com",
+        "programs": "2000+"
+      },
+      {
+        "name": "Bugcrowd",
+        "url": "https://bugcrowd.com",
+        "programs": "1000+"
+      },
+      {
+        "name": "Intigriti",
+        "url": "https://intigriti.com",
+        "programs": "500+"
+      },
+      {
+        "name": "YesWeHack",
+        "url": "https://yeswehack.com",
+        "programs": "500+"
+      },
+      {
+        "name": "Immunefi",
+        "url": "https://immunefi.com",
+        "focus": "Web3/DeFi",
+        "max_bounty": "$10M+"
+      }
+    ],
+    "writeup_sources": [
+      "https://pentester.land/list-of-bug-bounty-writeups.html",
+      "https://hackerone.com/hacktivity",
+      "https://infosecwriteups.com",
+      "https://medium.com/tag/bug-bounty",
+      "https://0xdf.gitlab.io/"
+    ]
+  }
+}
