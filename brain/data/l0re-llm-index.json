@@ -1,0 +1,839 @@
+{
+  "version": "0.1.0",
+  "created": "2026-01-30T10:03:31.746Z",
+  "lastSync": "2026-01-30T10:03:31.767Z",
+  "library": {
+    "security": {
+      "documents": [
+        {
+          "filename": "danielmiessler_SecLists.md",
+          "category": "security",
+          "type": "markdown",
+          "size": 4741,
+          "hash": "778f9314",
+          "indexed": "2026-01-30T10:03:31.751Z",
+          "topics": [
+            "About SecLists",
+            "Repository details",
+            "Install",
+            "Attribution",
+            "Contributing",
+            "Similar Projects",
+            "Wordlist Tools",
+            "💜 Support This Project",
+            "Licensing"
+          ],
+          "codeBlocks": 5,
+          "excerpt": "<div align=\"center\">\n    <a href=\"https://go.warp.dev/seclists\" target=\"_blank\">\n        <sup>Special thanks to:</sup>\n        <br>\n        <img alt=\"Warp sponsorship\" width=\"400\" src=\"https://github.com/warpdotdev/brand-assets/blob/main/Github/Sponsor/Warp-Github-LG-02.png\">\n        <br>\n        <h>Warp, built for coding with multiple AI agents</b>\n        <br>\n        <sup>Available for macOS, Linux and Windows</sup>\n    </a>\n</div>\n\n\n</div>\n\n---\n\n![seclists.png](SecLists.png \"seclists.png\")",
+          "l0reCode": "security",
+          "agent": "c0m"
+        },
+        {
+          "filename": "feed_krebsonsecurity_com.json",
+          "category": "security",
+          "type": "json",
+          "size": 2510,
+          "hash": "2bc34ec9",
+          "indexed": "2026-01-30T10:03:31.752Z",
+          "keys": [
+            "source",
+            "fetched",
+            "items"
+          ],
+          "itemCount": 10,
+          "l0reCode": "security",
+          "agent": "c0m"
+        },
+        {
+          "filename": "HackTricks-wiki_hacktricks.md",
+          "category": "security",
+          "type": "markdown",
+          "size": 10916,
+          "hash": "c4d01492",
+          "indexed": "2026-01-30T10:03:31.753Z",
+          "topics": [
+            "HackTricks",
+            "Run HackTricks Locally",
+            "Download latest version of hacktricks",
+            "Select the language you want to use",
+            "\"af\" for Afrikaans",
+            "\"de\" for German",
+            "\"el\" for Greek",
+            "\"es\" for Spanish",
+            "\"fr\" for French",
+            "\"hi\" for HindiP"
+          ],
+          "codeBlocks": 1,
+          "excerpt": "# HackTricks\n\n<figure><img src=\"images/hacktricks.gif\" alt=\"\"><figcaption></figcaption></figure>\n\n_Hacktricks logos & motion design by_ [_@ppieranacho_](https://www.instagram.com/ppieranacho/)_._\n\n### Run HackTricks Locally\n\n\n\nYour local copy of HackTricks will be **available at [http://localhost:3337](http://localhost:3337)** after <5 minutes (it needs to build the book, be patient).\n\n## Corporate Sponsors\n\n### [STM Cyber](https://www.stmcyber.com)\n\n<figure><img src=\"images/stm (1).png\" alt=\"\">",
+          "l0reCode": "security",
+          "agent": "c0m"
+        },
+        {
+          "filename": "OWASP_CheatSheetSeries.md",
+          "category": "security",
+          "type": "markdown",
+          "size": 4232,
+          "hash": "c4b22bd7",
+          "indexed": "2026-01-30T10:03:31.753Z",
+          "topics": [
+            "Welcome to the OWASP Cheat Sheet Series",
+            "Cheat Sheet Series Team",
+            "Project Leaders",
+            "Core team",
+            "Chat With Us",
+            "Contributions, Feature Requests, and Feedback",
+            "Automated Build",
+            "Local Build [![pyVersion3x](https://img.shields.io/badge/python-3.x-blue.svg)](https://www.python.org/downloads/)",
+            "Linting",
+            "Container Build"
+          ],
+          "codeBlocks": 5,
+          "excerpt": "# Welcome to the OWASP Cheat Sheet Series\n\n[![OWASP Flagship](https://img.shields.io/badge/owasp-flagship%20project-48A646.svg)](https://www.owasp.org/index.php/OWASP_Project_Inventory#tab=Flagship_Projects)\n[![Creative Commons License](https://img.shields.io/github/license/OWASP/CheatSheetSeries)](https://creativecommons.org/licenses/by-sa/4.0/ \"CC BY-SA 4.0\")\n\nWelcome to the official repository for the Open Worldwide Application Security Project® (OWASP) Cheat Sheet Series project. The project",
+          "l0reCode": "security",
+          "agent": "c0m"
+        },
+        {
+          "filename": "swisskyrepo_PayloadsAllTheThings.md",
+          "category": "security",
+          "type": "markdown",
+          "size": 3192,
+          "hash": "5f505e6d",
+          "indexed": "2026-01-30T10:03:31.754Z",
+          "topics": [
+            "Payloads All The Things",
+            ":book: Documentation",
+            ":technologist: Contributions",
+            ":beers: Sponsors"
+          ],
+          "codeBlocks": 0,
+          "excerpt": "# Payloads All The Things\n\nA list of useful payloads and bypasses for Web Application Security.\nFeel free to improve with your payloads and techniques!\n\nYou can also contribute with a :beers: IRL, or using the sponsor button.\n\n[![Sponsor](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&link=https://github.com/sponsors/swisskyrepo)](https://github.com/sponsors/swisskyrepo)\n[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.",
+          "l0reCode": "security",
+          "agent": "c0m"
+        },
+        {
+          "filename": "trimstray_the-book-of-secret-knowledge.md",
+          "category": "security",
+          "type": "markdown",
+          "size": 211640,
+          "hash": "72eb1dfb",
+          "indexed": "2026-01-30T10:03:31.755Z",
+          "topics": [
+            ":notebook_with_decorative_cover: &nbsp;What is it?",
+            ":restroom: &nbsp;For whom?",
+            ":information_source: &nbsp;Contributing",
+            "Code Contributors",
+            "Financial Contributors",
+            ":newspaper: &nbsp;RSS Feed & Updates",
+            ":ballot_box_with_check: &nbsp;ToDo",
+            ":anger: &nbsp;Table of Contents",
+            ":trident: &nbsp;The Book of Secret Knowledge (Chapters)",
+            "cat  >filename ... - overwrite the file"
+          ],
+          "codeBlocks": 294,
+          "excerpt": "<p align=\"center\">\n  <a href=\"https://github.com/trimstray/the-book-of-secret-knowledge\">\n    <img src=\"https://github.com/trimstray/the-book-of-secret-knowledge/blob/master/static/img/the-book-of-secret-knowledge-preview.png\" alt=\"Master\">\n  </a>\n</p>\n\n<p align=\"center\">\"<i>Knowledge is powerful, be careful how you use it!</i>\"</p>\n\n<h4 align=\"center\">A collection of inspiring lists, manuals, cheatsheets, blogs, hacks, one-liners, cli/web tools, and more.</h4>\n\n<br>\n\n<p align=\"center\">\n  <a hre",
+          "l0reCode": "security",
+          "agent": "c0m"
+        }
+      ],
+      "totalSize": 237294,
+      "lastUpdate": "2026-01-30T10:03:31.751Z"
+    },
+    "ai": {
+      "documents": [
+        {
+          "filename": "anthropics_anthropic-cookbook.md",
+          "category": "ai",
+          "type": "markdown",
+          "size": 5822,
+          "hash": "dfa734c9",
+          "indexed": "2026-01-30T10:03:31.759Z",
+          "topics": [
+            "Claude Cookbooks",
+            "Prerequisites",
+            "Explore Further",
+            "Contributing",
+            "Table of recipes",
+            "Capabilities",
+            "Tool Use and Integration",
+            "Third-Party Integrations",
+            "Multimodal Capabilities",
+            "Advanced Techniques"
+          ],
+          "codeBlocks": 0,
+          "excerpt": "# Claude Cookbooks\n\nThe Claude Cookbooks provide code and guides designed to help developers build with Claude, offering copy-able code snippets that you can easily integrate into your own projects.\n\n## Prerequisites\n\nTo make the most of the examples in this cookbook, you'll need a Claude API key (sign up for free [here](https://www.anthropic.com)).\n\nWhile the code examples are primarily written in Python, the concepts can be adapted to any programming language that supports interaction with the",
+          "l0reCode": "ai",
+          "agent": "r0ss"
+        },
+        {
+          "filename": "feed_arxiv_org.json",
+          "category": "ai",
+          "type": "json",
+          "size": 2216,
+          "hash": "0b7f2808",
+          "indexed": "2026-01-30T10:03:31.759Z",
+          "keys": [
+            "source",
+            "fetched",
+            "items"
+          ],
+          "itemCount": 10,
+          "l0reCode": "ai",
+          "agent": "r0ss"
+        },
+        {
+          "filename": "huggingface_transformers.md",
+          "category": "ai",
+          "type": "markdown",
+          "size": 17485,
+          "hash": "ed0d364d",
+          "indexed": "2026-01-30T10:03:31.759Z",
+          "topics": [
+            "Installation",
+            "venv",
+            "uv",
+            "pip",
+            "uv",
+            "pip",
+            "uv",
+            "Quickstart",
+            "Why should I use Transformers?",
+            "Why shouldn't I use Transformers?"
+          ],
+          "codeBlocks": 10,
+          "excerpt": "<!---\nCopyright 2020 The HuggingFace Team. All rights reserved.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the Li",
+          "l0reCode": "ai",
+          "agent": "r0ss"
+        },
+        {
+          "filename": "langchain-ai_langchain.md",
+          "category": "ai",
+          "type": "markdown",
+          "size": 6867,
+          "hash": "e2855822",
+          "indexed": "2026-01-30T10:03:31.760Z",
+          "topics": [
+            "Why use LangChain?",
+            "LangChain ecosystem",
+            "Additional resources"
+          ],
+          "codeBlocks": 1,
+          "excerpt": "<div align=\"center\">\n  <a href=\"https://www.langchain.com/\">\n    <picture>\n      <source media=\"(prefers-color-scheme: light)\" srcset=\".github/images/logo-dark.svg\">\n      <source media=\"(prefers-color-scheme: dark)\" srcset=\".github/images/logo-light.svg\">\n      <img alt=\"LangChain Logo\" src=\".github/images/logo-dark.svg\" width=\"80%\">\n    </picture>\n  </a>\n</div>\n\n<div align=\"center\">\n  <h3>The platform for reliable agents.</h3>\n</div>\n\n<div align=\"center\">\n  <a href=\"https://opensource.org/lice",
+          "l0reCode": "ai",
+          "agent": "r0ss"
+        },
+        {
+          "filename": "microsoft_autogen.md",
+          "category": "ai",
+          "type": "markdown",
+          "size": 18727,
+          "hash": "ff2bf1d1",
+          "indexed": "2026-01-30T10:03:31.760Z",
+          "topics": [
+            "AutoGen",
+            "Installation",
+            "Install AgentChat and OpenAI client from Extensions",
+            "Install AutoGen Studio for no-code GUI",
+            "Quickstart",
+            "Hello World",
+            "MCP Server",
+            "First run `npm install -g @playwright/mcp@latest` to install the MCP server.",
+            "Multi-Agent Orchestration",
+            "AutoGen Studio"
+          ],
+          "codeBlocks": 6,
+          "excerpt": "<a name=\"readme-top\"></a>\n\n<div align=\"center\">\n<img src=\"https://microsoft.github.io/autogen/0.2/img/ag.svg\" alt=\"AutoGen Logo\" width=\"100\">\n\n[![Twitter](https://img.shields.io/twitter/url/https/twitter.com/cloudposse.svg?style=social&label=Follow%20%40pyautogen)](https://twitter.com/pyautogen)\n[![LinkedIn](https://img.shields.io/badge/LinkedIn-Company?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/company/105812540)\n[![Discord](https://img.shields.io/badge/discord-chat-gre",
+          "l0reCode": "ai",
+          "agent": "r0ss"
+        },
+        {
+          "filename": "openai_openai-cookbook.md",
+          "category": "ai",
+          "type": "markdown",
+          "size": 1209,
+          "hash": "ea03bed6",
+          "indexed": "2026-01-30T10:03:31.761Z",
+          "topics": [
+            "License"
+          ],
+          "codeBlocks": 0,
+          "excerpt": "<a href=\"https://cookbook.openai.com\" target=\"_blank\">\n  <picture>\n    <source media=\"(prefers-color-scheme: dark)\" srcset=\"/images/openai-cookbook-white.png\" style=\"max-width: 100%; width: 400px; margin-bottom: 20px\">\n    <img alt=\"OpenAI Cookbook Logo\" src=\"/images/openai-cookbook.png\" width=\"400px\">\n  </picture>\n</a>\n\n<h3></h3>\n \n> ✨ Navigate at [cookbook.openai.com](https://cookbook.openai.com)\n\nExample code and guides for accomplishing common tasks with the [OpenAI API](https://platform.ope",
+          "l0reCode": "ai",
+          "agent": "r0ss"
+        }
+      ],
+      "totalSize": 52455,
+      "lastUpdate": "2026-01-30T10:03:31.759Z"
+    },
+    "design": {
+      "documents": [
+        {
+          "filename": "adobe-fonts_source-code-pro.md",
+          "category": "design",
+          "type": "markdown",
+          "size": 592,
+          "hash": "4b4480d8",
+          "indexed": "2026-01-30T10:03:31.761Z",
+          "topics": [
+            "Source Code Pro",
+            "Open source files",
+            "Getting involved",
+            "Releases"
+          ],
+          "codeBlocks": 0,
+          "excerpt": "# Source Code Pro\n\n[Source Code Pro](http://adobe-fonts.github.io/source-code-pro/) is a set of OpenType fonts that have been designed to work well in user interface (UI) environments.\n\n## Open source files\n\nThe fonts’ source files and build instructions are available in the [repository’s `main` branch](https://github.com/adobe-fonts/source-code-pro/tree/main).\n\n## Getting involved\n\nPlease [open an issue](https://github.com/adobe-fonts/source-code-pro/issues) in this repository, for consideratio",
+          "l0reCode": "design",
+          "agent": "b0b"
+        },
+        {
+          "filename": "andreas-gysin-reference.md",
+          "category": "design",
+          "type": "markdown",
+          "size": 3581,
+          "hash": "d7ff79af",
+          "indexed": "2026-01-30T10:03:31.761Z",
+          "topics": [
+            "Andreas Gysin — Design Reference",
+            "Core Principles",
+            "Studio Philosophy (ertdfgcvb)",
+            "Aesthetic Characteristics",
+            "Color Philosophy",
+            "ASCII Art Style",
+            "Key Works Referenced",
+            "Application to B0B/L0RE",
+            "What to AVOID",
+            "What to EMBRACE"
+          ],
+          "codeBlocks": 2,
+          "excerpt": "# Andreas Gysin — Design Reference\r\n\r\n**Crawled**: 2026-01-30\r\n**Source**: https://andreasgysin.com/, https://log.fakewhale.xyz/andreas-gysin/\r\n\r\n## Core Principles\r\n\r\n### Studio Philosophy (ertdfgcvb)\r\n- Procedural graphics and animations for screen and print\r\n- Research and development\r\n- Hardware prototyping\r\n- Interactive installations\r\n- Realtime visualisations\r\n\r\n### Aesthetic Characteristics\r\n\r\n1. **RESTRAINT** — Not everything needs to move or flash\r\n2. **MONOCHROME** — Single color pale",
+          "l0reCode": "design",
+          "agent": "b0b"
+        },
+        {
+          "filename": "google_fonts.md",
+          "category": "design",
+          "type": "markdown",
+          "size": 4791,
+          "hash": "712ff4a8",
+          "indexed": "2026-01-30T10:03:31.761Z",
+          "topics": [
+            "Google Fonts Files",
+            "Bug Reports and Improvement Requests",
+            "Contribute Fonts",
+            "Contributor Code of Conduct",
+            "Self Host Fonts Available From Google Fonts",
+            "Local installation package managers",
+            "Download All Google Fonts",
+            "License",
+            "Source Files"
+          ],
+          "codeBlocks": 0,
+          "excerpt": "[![CI Status](https://github.com/google/fonts/workflows/Continuous%20Test/badge.svg?branch=main)](https://github.com/google/fonts/actions/workflows/ci.yml?query=workflow%3ATest+branch%3Amain)\n\n# Google Fonts Files\n\nThis project mainly contains the binary font files served by Google Fonts ([fonts.google.com](https://fonts.google.com))\n\nThe top-level directories indicate the license of all files found within them.\nSubdirectories are named according to the family name of the fonts within.\n\nEach fam",
+          "l0reCode": "design",
+          "agent": "b0b"
+        },
+        {
+          "filename": "rsms_inter.md",
+          "category": "design",
+          "type": "markdown",
+          "size": 7830,
+          "hash": "7b8b2080",
+          "indexed": "2026-01-30T10:03:31.762Z",
+          "topics": [
+            "Inter",
+            "Quick questions",
+            "Using & installing Inter",
+            "Alternate distributions",
+            "Notable uses of Inter",
+            "Notable forks",
+            "Supporters & contributors",
+            "Contributing to this project",
+            "Creating derivative fonts",
+            "Design"
+          ],
+          "codeBlocks": 3,
+          "excerpt": "# Inter\n\nInter is a typeface carefully crafted & designed for computer screens.\nInter features a tall x-height to aid in readability of mixed-case and lower-case text.\nInter is a [variable font](https://rsms.me/inter/#variable) with\nseveral [OpenType features](https://rsms.me/inter/#features), like contextual alternates that adjusts punctuation depending on the shape of surrounding glyphs, slashed zero for when you need to disambiguate \"0\" from \"o\", tabular numbers, etc.\n\n[**Download Inter font",
+          "l0reCode": "design",
+          "agent": "b0b"
+        },
+        {
+          "filename": "tonsky_FiraCode.md",
+          "category": "design",
+          "type": "markdown",
+          "size": 12022,
+          "hash": "4bae64f3",
+          "indexed": "2026-01-30T10:03:31.762Z",
+          "topics": [
+            "Fira Code: free monospaced font with programming ligatures",
+            "Problem",
+            "Solution",
+            "Download & Install",
+            "What’s in the box?",
+            "How does it look?",
+            "Editor compatibility list",
+            "Terminal compatibility list",
+            "Browser support",
+            "Projects using Fira Code"
+          ],
+          "codeBlocks": 6,
+          "excerpt": "## Fira Code: free monospaced font with programming ligatures\n\n![Fira Code](./extras/logo.svg)\n\nRead in [Español](./LEEME.md) | [简体中文](./README_CN.md) | [日本語](./README_JA.md) | [Português brasileiro](./LEIAME.md)\n\n### Problem\n\nProgrammers use a lot of symbols, often encoded with several characters. For the human brain, sequences like `->`, `<=`, or `:=` are single logical tokens, even if they take two or three characters on the screen. Your eye spends a non-zero amount of energy to scan, parse a",
+          "l0reCode": "design",
+          "agent": "b0b"
+        }
+      ],
+      "totalSize": 28956,
+      "lastUpdate": "2026-01-30T10:03:31.761Z"
+    },
+    "trading": {
+      "documents": [
+        {
+          "filename": "base-org_guides.md",
+          "category": "trading",
+          "type": "markdown",
+          "size": 1179,
+          "hash": "2fb9cbef",
+          "indexed": "2026-01-30T10:03:31.763Z",
+          "topics": [
+            "Build On [Base](https://base.org/)",
+            "Guides",
+            "Troubleshooting",
+            "License"
+          ],
+          "codeBlocks": 0,
+          "excerpt": "<p><img src=\"./Base_Wordmark_Blue.svg\"/></p>\n\n# Build On [Base](https://base.org/)\n\n## Guides\n\nThese are a set of guides to help build on Base. Looking forward to seeing you onchain.\n\nBuilder Guides\n\n| Title                      | Description                                             |\n| -------------------------- | ------------------------------------------------------- |\n| [Based](./based/README.md) | Learn how Base is built through technical documentation |\n\nERC Guides\n\n| Title",
+          "l0reCode": "trading",
+          "agent": "d0t"
+        },
+        {
+          "filename": "coinbase_onchainkit.md",
+          "category": "trading",
+          "type": "markdown",
+          "size": 4638,
+          "hash": "2655678e",
+          "indexed": "2026-01-30T10:03:31.763Z",
+          "topics": [
+            "🚀 Quickstart",
+            "✨ Documentation",
+            "🛠️ Contributing",
+            "Overview",
+            "Requirements",
+            "Getting Started",
+            "Running packages",
+            "Shorthands",
+            "Development",
+            "🌁 Team and Community"
+          ],
+          "codeBlocks": 5,
+          "excerpt": "<div align=\"center\">\n  <p>\n    <a href=\"https://onchainkit.xyz\">\n      <img src=\"./assets/read-me-banner.png\" width=\"100%\" height=\"100%\" alt=\"OnchainKit logo vibes\"/>\n    </a>\n  </p>\n\n  <h1 style=\"font-size: 3em; margin-bottom: 20px;\">\n    OnchainKit\n  </h1>\n\n  <p style=\"font-size: 1.2em; max-width: 600px; margin: 0 auto 20px;\">\n    React components and TypeScript utilities to help you build top-tier onchain apps.\n  </p>\n\n<p>\n  <a href=\"https://www.npmjs.com/package/@coinbase/onchainkit\" target=",
+          "l0reCode": "trading",
+          "agent": "d0t"
+        },
+        {
+          "filename": "paradigmxyz_reth.md",
+          "category": "trading",
+          "type": "markdown",
+          "size": 11159,
+          "hash": "4a966513",
+          "indexed": "2026-01-30T10:03:31.763Z",
+          "topics": [
+            "reth",
+            "What is Reth?",
+            "Goals",
+            "Status",
+            "Database compatibility",
+            "For Users",
+            "For Developers",
+            "Using reth as a library",
+            "Contributing",
+            "Building and testing"
+          ],
+          "codeBlocks": 2,
+          "excerpt": "# reth\n\n[![bench status](https://github.com/paradigmxyz/reth/actions/workflows/bench.yml/badge.svg)](https://github.com/paradigmxyz/reth/actions/workflows/bench.yml)\n[![CI status](https://github.com/paradigmxyz/reth/workflows/unit/badge.svg)][gh-ci]\n[![cargo-lint status](https://github.com/paradigmxyz/reth/actions/workflows/lint.yml/badge.svg)][gh-lint]\n[![Telegram Chat][tg-badge]][tg-url]\n\n**Modular, contributor-friendly and blazing-fast implementation of the Ethereum protocol**\n\n![](./assets/r",
+          "l0reCode": "trading",
+          "agent": "d0t"
+        },
+        {
+          "filename": "Uniswap_v4-core.md",
+          "category": "trading",
+          "type": "markdown",
+          "size": 4310,
+          "hash": "58b8dea1",
+          "indexed": "2026-01-30T10:03:31.763Z",
+          "topics": [
+            "Uniswap v4 Core",
+            "Contributing",
+            "Whitepaper",
+            "Architecture",
+            "Repository Structure",
+            "Local deployment and Usage",
+            "License"
+          ],
+          "codeBlocks": 3,
+          "excerpt": "# Uniswap v4 Core\n\n[![Lint](https://github.com/Uniswap/v4-core/actions/workflows/lint.yml/badge.svg)](https://github.com/Uniswap/v4-core/actions/workflows/lint.yml)\n[![Tests](https://github.com/Uniswap/v4-core/actions/workflows/tests-merge.yml/badge.svg)](https://github.com/Uniswap/v4-core/actions/workflows/tests-merge.yml)\n\nUniswap v4 is a new automated market maker protocol that provides extensible and customizable pools. `v4-core` hosts the core pool logic for creating pools and executing poo",
+          "l0reCode": "trading",
+          "agent": "d0t"
+        }
+      ],
+      "totalSize": 21305,
+      "lastUpdate": "2026-01-30T10:03:31.763Z"
+    }
+  },
+  "crawlers": {
+    "d0t-signals.json": {
+      "lastModified": "2026-01-30T09:59:15.820Z",
+      "size": 2445,
+      "agent": "d0t",
+      "timestamp": "2026-01-30T09:59:15.819Z",
+      "keyFields": [
+        "crawler",
+        "timestamp",
+        "data"
+      ]
+    },
+    "r0ss-research.json": {
+      "lastModified": "2026-01-30T09:59:17.097Z",
+      "size": 14986,
+      "agent": "r0ss",
+      "timestamp": "2026-01-30T09:59:17.096Z",
+      "keyFields": [
+        "crawler",
+        "timestamp",
+        "data"
+      ]
+    },
+    "b0b-creative.json": {
+      "lastModified": "2026-01-30T09:59:21.243Z",
+      "size": 2310,
+      "agent": "b0b",
+      "timestamp": "2026-01-30T09:59:21.242Z",
+      "keyFields": [
+        "crawler",
+        "timestamp",
+        "data"
+      ]
+    },
+    "x-conversations.json": {
+      "lastModified": "2026-01-30T09:59:27.290Z",
+      "size": 389,
+      "agent": "swarm",
+      "timestamp": "2026-01-30T09:59:27.289Z",
+      "keyFields": [
+        "crawler",
+        "timestamp",
+        "data"
+      ]
+    },
+    "library-index.json": {
+      "lastModified": "2026-01-30T10:01:28.615Z",
+      "size": 623,
+      "agent": "swarm",
+      "keyFields": [
+        "lastSync",
+        "categories",
+        "totalItems",
+        "recentAdditions"
+      ]
+    },
+    "treasury-state.json": {
+      "lastModified": "2026-01-28T00:00:25.351Z",
+      "size": 1500,
+      "agent": "swarm",
+      "keyFields": [
+        "balances",
+        "performance",
+        "daily",
+        "weekly",
+        "agentStats",
+        "history",
+        "created",
+        "lastUpdated"
+      ]
+    }
+  },
+  "lexiconTerms": "unknown",
+  "totalDocuments": 21,
+  "agentKnowledge": {
+    "b0b": {
+      "agent": "b0b",
+      "code": "a.v0rx",
+      "domains": [
+        "design",
+        "creative",
+        "fonts",
+        "social",
+        "art"
+      ],
+      "documents": [
+        {
+          "filename": "adobe-fonts_source-code-pro.md",
+          "category": "design",
+          "topics": [
+            "Source Code Pro",
+            "Open source files",
+            "Getting involved",
+            "Releases"
+          ]
+        },
+        {
+          "filename": "andreas-gysin-reference.md",
+          "category": "design",
+          "topics": [
+            "Andreas Gysin — Design Reference",
+            "Core Principles",
+            "Studio Philosophy (ertdfgcvb)",
+            "Aesthetic Characteristics",
+            "Color Philosophy"
+          ]
+        },
+        {
+          "filename": "google_fonts.md",
+          "category": "design",
+          "topics": [
+            "Google Fonts Files",
+            "Bug Reports and Improvement Requests",
+            "Contribute Fonts",
+            "Contributor Code of Conduct",
+            "Self Host Fonts Available From Google Fonts"
+          ]
+        },
+        {
+          "filename": "rsms_inter.md",
+          "category": "design",
+          "topics": [
+            "Inter",
+            "Quick questions",
+            "Using & installing Inter",
+            "Alternate distributions",
+            "Notable uses of Inter"
+          ]
+        },
+        {
+          "filename": "tonsky_FiraCode.md",
+          "category": "design",
+          "topics": [
+            "Fira Code: free monospaced font with programming ligatures",
+            "Problem",
+            "Solution",
+            "Download & Install",
+            "What’s in the box?"
+          ]
+        }
+      ],
+      "crawlerSources": [
+        {
+          "source": "b0b-creative.json",
+          "lastUpdated": "2026-01-30T09:59:21.243Z"
+        }
+      ],
+      "totalKnowledge": 28816
+    },
+    "c0m": {
+      "agent": "c0m",
+      "code": "a.n4mk",
+      "domains": [
+        "security",
+        "hacking",
+        "recon",
+        "bounty",
+        "vulnerabilities"
+      ],
+      "documents": [
+        {
+          "filename": "danielmiessler_SecLists.md",
+          "category": "security",
+          "topics": [
+            "About SecLists",
+            "Repository details",
+            "Install",
+            "Attribution",
+            "Contributing"
+          ]
+        },
+        {
+          "filename": "feed_krebsonsecurity_com.json",
+          "category": "security"
+        },
+        {
+          "filename": "HackTricks-wiki_hacktricks.md",
+          "category": "security",
+          "topics": [
+            "HackTricks",
+            "Run HackTricks Locally",
+            "Download latest version of hacktricks",
+            "Select the language you want to use",
+            "\"af\" for Afrikaans"
+          ]
+        },
+        {
+          "filename": "OWASP_CheatSheetSeries.md",
+          "category": "security",
+          "topics": [
+            "Welcome to the OWASP Cheat Sheet Series",
+            "Cheat Sheet Series Team",
+            "Project Leaders",
+            "Core team",
+            "Chat With Us"
+          ]
+        },
+        {
+          "filename": "swisskyrepo_PayloadsAllTheThings.md",
+          "category": "security",
+          "topics": [
+            "Payloads All The Things",
+            ":book: Documentation",
+            ":technologist: Contributions",
+            ":beers: Sponsors"
+          ]
+        },
+        {
+          "filename": "trimstray_the-book-of-secret-knowledge.md",
+          "category": "security",
+          "topics": [
+            ":notebook_with_decorative_cover: &nbsp;What is it?",
+            ":restroom: &nbsp;For whom?",
+            ":information_source: &nbsp;Contributing",
+            "Code Contributors",
+            "Financial Contributors"
+          ]
+        }
+      ],
+      "crawlerSources": [],
+      "totalKnowledge": 237231
+    },
+    "d0t": {
+      "agent": "d0t",
+      "code": "a.z7ls",
+      "domains": [
+        "trading",
+        "markets",
+        "data",
+        "signals",
+        "predictions"
+      ],
+      "documents": [
+        {
+          "filename": "base-org_guides.md",
+          "category": "trading",
+          "topics": [
+            "Build On [Base](https://base.org/)",
+            "Guides",
+            "Troubleshooting",
+            "License"
+          ]
+        },
+        {
+          "filename": "coinbase_onchainkit.md",
+          "category": "trading",
+          "topics": [
+            "🚀 Quickstart",
+            "✨ Documentation",
+            "🛠️ Contributing",
+            "Overview",
+            "Requirements"
+          ]
+        },
+        {
+          "filename": "paradigmxyz_reth.md",
+          "category": "trading",
+          "topics": [
+            "reth",
+            "What is Reth?",
+            "Goals",
+            "Status",
+            "Database compatibility"
+          ]
+        },
+        {
+          "filename": "Uniswap_v4-core.md",
+          "category": "trading",
+          "topics": [
+            "Uniswap v4 Core",
+            "Contributing",
+            "Whitepaper",
+            "Architecture",
+            "Repository Structure"
+          ]
+        }
+      ],
+      "crawlerSources": [
+        {
+          "source": "d0t-signals.json",
+          "lastUpdated": "2026-01-30T09:59:15.820Z"
+        }
+      ],
+      "totalKnowledge": 21286
+    },
+    "r0ss": {
+      "agent": "r0ss",
+      "code": "a.k3nt",
+      "domains": [
+        "ai",
+        "infrastructure",
+        "research",
+        "papers",
+        "llm"
+      ],
+      "documents": [
+        {
+          "filename": "anthropics_anthropic-cookbook.md",
+          "category": "ai",
+          "topics": [
+            "Claude Cookbooks",
+            "Prerequisites",
+            "Explore Further",
+            "Contributing",
+            "Table of recipes"
+          ]
+        },
+        {
+          "filename": "feed_arxiv_org.json",
+          "category": "ai"
+        },
+        {
+          "filename": "huggingface_transformers.md",
+          "category": "ai",
+          "topics": [
+            "Installation",
+            "venv",
+            "uv",
+            "pip",
+            "uv"
+          ]
+        },
+        {
+          "filename": "langchain-ai_langchain.md",
+          "category": "ai",
+          "topics": [
+            "Why use LangChain?",
+            "LangChain ecosystem",
+            "Additional resources"
+          ]
+        },
+        {
+          "filename": "microsoft_autogen.md",
+          "category": "ai",
+          "topics": [
+            "AutoGen",
+            "Installation",
+            "Install AgentChat and OpenAI client from Extensions",
+            "Install AutoGen Studio for no-code GUI",
+            "Quickstart"
+          ]
+        },
+        {
+          "filename": "openai_openai-cookbook.md",
+          "category": "ai",
+          "topics": [
+            "License"
+          ]
+        }
+      ],
+      "crawlerSources": [
+        {
+          "source": "r0ss-research.json",
+          "lastUpdated": "2026-01-30T09:59:17.097Z"
+        }
+      ],
+      "totalKnowledge": 52326
+    }
+  }
+}
