@@ -1744,6 +1744,15 @@ app.get('/finance/treasury', async (req, res) => {
       }
     } catch {}
     
+    // Load TURB0B00ST state (LIVE trading)
+    let turb0State = null;
+    try {
+      const turbPath = path.join(financeDir, 'turb0b00st-state.json');
+      if (require('fs').existsSync(turbPath)) {
+        turb0State = JSON.parse(require('fs').readFileSync(turbPath, 'utf-8'));
+      }
+    } catch {}
+    
     // Build response
     const treasury = treasuryState || { balances: { total: 300 }, performance: {} };
     const today = new Date().toISOString().split('T')[0];
@@ -1766,9 +1775,22 @@ app.get('/finance/treasury', async (req, res) => {
         wins: treasury.performance?.winCount || nashState?.wins || 0,
         losses: treasury.performance?.lossCount || nashState?.losses || 0,
         winRate: nashState?.totalTrades > 0 ? (nashState.wins / nashState.totalTrades * 100) : 0,
-        totalTrades: nashState?.totalTrades || 0,
+        totalTrades: (nashState?.totalTrades || 0) + (turb0State?.tradingHistory?.length || 0),
       },
-      today: treasury.daily || { pnl: 0, trades: 0, wins: 0, losses: 0 },
+      turb0b00st: turb0State ? {
+        mode: turb0State.mode || 'PAPER',
+        activated: turb0State.activated,
+        activatedAt: turb0State.activatedAt,
+        trades: turb0State.tradingHistory?.length || 0,
+        dailyStats: turb0State.dailyStats,
+        recentTrades: turb0State.tradingHistory?.slice(-5).reverse() || [],
+      } : null,
+      today: {
+        pnl: (treasury.daily?.pnl || 0) + (turb0State?.dailyStats?.pnl || 0),
+        trades: (treasury.daily?.trades || 0) + (turb0State?.tradingHistory?.filter(t => t.timestamp?.startsWith(today))?.length || 0),
+        wins: treasury.daily?.wins || 0,
+        losses: treasury.daily?.losses || 0,
+      },
       session: coopState ? {
         started: coopState.sessionStarted,
         trades: coopState.tradesThisSession,

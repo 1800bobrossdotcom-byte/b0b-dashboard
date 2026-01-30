@@ -22,6 +22,8 @@ const RAMPS = {
   binary: ' █',
 };
 
+const BRAIN_URL = process.env.NEXT_PUBLIC_BRAIN_URL || 'https://brain.b0b.dev';
+
 // ═══════════════════════════════════════════════════════════════
 // FULL PAGE GENERATIVE ENGINE
 // ═══════════════════════════════════════════════════════════════
@@ -33,11 +35,28 @@ export default function B0bDev() {
   const [showInfo, setShowInfo] = useState(false);
   const [time, setTime] = useState('');
   const [mounted, setMounted] = useState(false);
+  const [tradeCount, setTradeCount] = useState(0);
   const preRef = useRef<HTMLPreElement>(null);
   
   // Mount
   useEffect(() => {
     setMounted(true);
+  }, []);
+  
+  // Fetch real trade count from brain
+  useEffect(() => {
+    const fetchTrades = async () => {
+      try {
+        const res = await fetch(`${BRAIN_URL}/finance/treasury`);
+        const data = await res.json();
+        setTradeCount(data.turb0b00st?.trades || data.performance?.totalTrades || 0);
+      } catch {
+        // Silent fail - show 0
+      }
+    };
+    fetchTrades();
+    const interval = setInterval(fetchTrades, 30000); // Refresh every 30s
+    return () => clearInterval(interval);
   }, []);
   
   // Time
@@ -319,7 +338,7 @@ export default function B0bDev() {
             style={{ borderColor: '#333', backgroundColor: 'rgba(0,255,0,0.05)' }}
           >
             <span style={{ color: '#4f4', fontFamily: 'monospace', fontSize: '12px' }}>
-              TURB0B00ST LIVE · 1 trade executed
+              TURB0B00ST LIVE · {tradeCount} trade{tradeCount !== 1 ? 's' : ''} executed
             </span>
           </div>
           
