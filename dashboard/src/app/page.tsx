@@ -1,11 +1,14 @@
 'use client';
 
 /**
- * B0B.DEV — L0RE EDITION
+ * B0B.DEV — L0RE EDITION v2
+ * 
+ * REAL generative visuals. REAL live data.
+ * Not a static page with 4% opacity background.
  * 
  * Three-View Principle:
- * 📖 Humans see readable data + beautiful ASCII art
- * 🤖 Crawlers see noise  
+ * 📖 Humans see beautiful data
+ * 🤖 Crawlers see entropy  
  * 💝 Legacy sees love
  */
 
@@ -13,37 +16,80 @@ import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
 
 // ═══════════════════════════════════════════════════════════════
-// L0RE VISUAL ENGINE (Inline for performance)
+// L0RE VISUAL ENGINE
 // ═══════════════════════════════════════════════════════════════
 
-const DENSITY = ' .·:;+*#@█';
+const CHARS = {
+  density: ' ·:;+*#@█',
+  blocks: '░▒▓█',
+};
 
-function useL0reFrame(width: number, height: number, speed: number = 0.02) {
-  const [frame, setFrame] = useState('');
+function useL0reMatrix(cols: number, rows: number) {
+  const [frame, setFrame] = useState<string[]>([]);
   
-  const noise2d = useCallback((x: number, y: number, t: number) => {
-    const seed = x * 12.9898 + y * 78.233 + t * 43.2531;
-    const n = Math.sin(seed) * 43758.5453;
-    return n - Math.floor(n);
-  }, []);
+  useEffect(() => {
+    const drops: number[] = Array(cols).fill(0).map(() => Math.random() * -rows);
+    
+    const interval = setInterval(() => {
+      const newFrame: string[] = [];
+      
+      for (let y = 0; y < rows; y++) {
+        let row = '';
+        for (let x = 0; x < cols; x++) {
+          const dropY = drops[x];
+          const dist = y - dropY;
+          
+          if (dist >= 0 && dist < 8) {
+            const intensity = 1 - dist / 8;
+            const charIdx = Math.floor(intensity * (CHARS.density.length - 1));
+            row += CHARS.density[charIdx];
+          } else {
+            row += ' ';
+          }
+        }
+        newFrame.push(row);
+      }
+      
+      for (let i = 0; i < cols; i++) {
+        drops[i] += 0.3 + Math.random() * 0.2;
+        if (drops[i] > rows + 8) {
+          drops[i] = Math.random() * -10;
+        }
+      }
+      
+      setFrame(newFrame);
+    }, 80);
+    
+    return () => clearInterval(interval);
+  }, [cols, rows]);
+  
+  return frame;
+}
+
+function useL0reNoise(cols: number, rows: number) {
+  const [frame, setFrame] = useState('');
   
   useEffect(() => {
     let tick = 0;
     const interval = setInterval(() => {
       tick++;
       let output = '';
-      for (let y = 0; y < height; y++) {
-        for (let x = 0; x < width; x++) {
-          const value = noise2d(x * 0.08, y * 0.15, tick * speed);
-          const charIdx = Math.floor(value * (DENSITY.length - 1));
-          output += DENSITY[charIdx];
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+          const seed = x * 12.9898 + y * 78.233 + tick * 0.5;
+          const n = Math.sin(seed) * 43758.5453;
+          const value = n - Math.floor(n);
+          const flow = Math.sin(x * 0.1 + tick * 0.05) * Math.cos(y * 0.1 + tick * 0.03);
+          const combined = (value + flow + 1) / 3;
+          const charIdx = Math.floor(combined * (CHARS.density.length - 1));
+          output += CHARS.density[Math.max(0, Math.min(charIdx, CHARS.density.length - 1))];
         }
         output += '\n';
       }
       setFrame(output);
     }, 100);
     return () => clearInterval(interval);
-  }, [width, height, speed, noise2d]);
+  }, [cols, rows]);
   
   return frame;
 }
@@ -54,24 +100,6 @@ function useL0reFrame(width: number, height: number, speed: number = 0.02) {
 
 const BRAIN_URL = process.env.NEXT_PUBLIC_BRAIN_URL || 'https://b0b-brain-production.up.railway.app';
 
-const AGENTS = [
-  { id: 'b0b', name: 'B0B', emoji: '🎨', role: 'Creative Director', color: '#0052FF' },
-  { id: 'd0t', name: 'D0T', emoji: '📊', role: 'Research Lead', color: '#00FFFF' },
-  { id: 'r0ss', name: 'R0SS', emoji: '🔧', role: 'CTO / DevOps', color: '#FF6B00' },
-  { id: 'c0m', name: 'C0M', emoji: '💀', role: 'Security', color: '#8B5CF6' },
-];
-
-const SERVICES = [
-  { name: 'Anthropic', status: 'active', use: 'Claude for reasoning' },
-  { name: 'Groq', status: 'active', use: 'Fast inference' },
-  { name: 'OpenRouter', status: 'active', use: 'Model routing' },
-  { name: 'DeepSeek', status: 'active', use: 'Cheap inference ($0.14/1M)' },
-  { name: 'AgentMail', status: 'active', use: 'Swarm email' },
-  { name: 'Twitter/X', status: 'active', use: 'Social + API' },
-  { name: 'Railway', status: 'active', use: 'Deployments' },
-  { name: 'Twilio', status: 'active', use: '2FA/SMS' },
-];
-
 // ═══════════════════════════════════════════════════════════════
 // MAIN COMPONENT
 // ═══════════════════════════════════════════════════════════════
@@ -81,11 +109,10 @@ export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [brainStatus, setBrainStatus] = useState<any>(null);
   const [holdings, setHoldings] = useState<any>(null);
-  const [tradingMode, setTradingMode] = useState('PAPER');
   
-  const l0reFrame = useL0reFrame(60, 8, 0.015);
+  const matrixFrame = useL0reMatrix(100, 20);
+  const noiseFrame = useL0reNoise(80, 6);
 
-  // Clock
   useEffect(() => {
     setMounted(true);
     const interval = setInterval(() => {
@@ -94,178 +121,137 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
-  // Fetch brain status
   useEffect(() => {
-    const fetchBrain = async () => {
+    const fetchData = async () => {
       try {
-        const res = await fetch(`${BRAIN_URL}/status`);
-        if (res.ok) setBrainStatus(await res.json());
+        const [statusRes, holdingsRes] = await Promise.all([
+          fetch(`${BRAIN_URL}/status`),
+          fetch(`${BRAIN_URL}/holdings/quick`)
+        ]);
+        if (statusRes.ok) setBrainStatus(await statusRes.json());
+        if (holdingsRes.ok) setHoldings(await holdingsRes.json());
       } catch {}
     };
-    fetchBrain();
-    const interval = setInterval(fetchBrain, 10000);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Fetch holdings
-  useEffect(() => {
-    const fetchHoldings = async () => {
-      try {
-        const res = await fetch(`${BRAIN_URL}/holdings/quick`);
-        if (res.ok) setHoldings(await res.json());
-      } catch {}
-    };
-    fetchHoldings();
-    const interval = setInterval(fetchHoldings, 15000);
+    fetchData();
+    const interval = setInterval(fetchData, 10000);
     return () => clearInterval(interval);
   }, []);
 
   const isOnline = brainStatus?.system?.status === 'alive';
+  const agents = brainStatus?.agents || [];
+  const walletShort = holdings?.wallet ? `${holdings.wallet.slice(0,6)}...${holdings.wallet.slice(-4)}` : null;
 
   return (
-    <main className="min-h-screen bg-[#0A0A0A] text-white font-mono">
+    <main className="min-h-screen bg-black text-white font-mono overflow-hidden">
       
-      {/* ═══ HEADER ═══ */}
-      <header className="border-b border-[#222] px-6 py-4">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
+      {/* L0RE MATRIX BACKGROUND */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        <pre className="text-[#0052FF] opacity-20 text-[10px] leading-none whitespace-pre">
+          {matrixFrame.join('\n')}
+        </pre>
+      </div>
+
+      {/* HEADER */}
+      <header className="relative z-10 border-b border-[#0052FF]/30 bg-black/80 backdrop-blur">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <div className="w-10 h-10 bg-[#0052FF] flex items-center justify-center font-black text-sm">
+            <div className="w-12 h-12 bg-[#0052FF] flex items-center justify-center font-black text-lg">
               B0B
             </div>
-            <span className="text-xs text-[#555]">AUTONOMOUS CREATIVE INTELLIGENCE</span>
+            <div>
+              <div className="text-xs text-[#0052FF]">L0RE v0.1.0</div>
+              <div className="text-[10px] text-[#555]">AUTONOMOUS CREATIVE INTELLIGENCE</div>
+            </div>
           </div>
           
           <nav className="flex items-center gap-6 text-sm">
-            <Link href="/labs" className="text-[#888] hover:text-white transition-colors">LABS</Link>
+            <Link href="/labs" className="text-[#888] hover:text-[#0052FF] transition-colors">LABS</Link>
             <a href="https://d0t.b0b.dev" className="text-[#888] hover:text-[#8B5CF6] transition-colors">D0T</a>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3 pl-4 border-l border-[#333]">
               <span className={`w-2 h-2 rounded-full ${isOnline ? 'bg-[#00FF88] animate-pulse' : 'bg-[#FC401F]'}`} />
               <span className={`text-xs ${isOnline ? 'text-[#00FF88]' : 'text-[#FC401F]'}`}>
                 {isOnline ? 'LIVE' : 'OFFLINE'}
               </span>
-              <span className="text-[#0052FF] ml-2">{mounted ? time : '--:--:--'}</span>
+              <span className="text-[#0052FF] font-bold">{mounted ? time : '--:--:--'}</span>
             </div>
           </nav>
         </div>
       </header>
 
-      {/* ═══ HERO + L0RE VISUAL ═══ */}
-      <section className="relative px-6 py-16 border-b border-[#222] overflow-hidden">
-        {/* L0RE Background */}
-        <pre className="absolute inset-0 text-[#0052FF] opacity-[0.06] text-[8px] leading-none overflow-hidden pointer-events-none">
-          {l0reFrame}
-        </pre>
-        
-        <div className="max-w-6xl mx-auto relative z-10">
-          <h1 className="text-4xl md:text-6xl font-black mb-4">
-            Built by <span className="text-[#0052FF]">all of us</span>
+      {/* HERO WITH L0RE VISUAL */}
+      <section className="relative z-10 px-6 py-20">
+        <div className="max-w-7xl mx-auto">
+          {/* L0RE noise visual - VISIBLE */}
+          <div className="mb-8 p-4 bg-black/50 border border-[#0052FF]/30 rounded-lg overflow-hidden">
+            <pre className="text-[#0052FF] text-xs leading-tight font-mono">
+              {noiseFrame}
+            </pre>
+          </div>
+
+          <h1 className="text-5xl md:text-7xl font-black mb-6">
+            <span className="text-white">Built by </span>
+            <span className="text-[#0052FF]">all of us</span>
           </h1>
-          <p className="text-[#888] text-lg max-w-2xl">
-            An autonomous collective of AI agents building, trading, and creating 24/7. 
+          
+          <p className="text-xl text-[#888] max-w-2xl mb-8">
+            An autonomous collective of AI agents. Building, trading, creating 24/7.
             Glass box, not black box.
           </p>
-          
-          {/* Quick Stats */}
-          <div className="flex flex-wrap gap-4 mt-8">
-            <div className="bg-[#111] border border-[#222] px-4 py-2 rounded">
-              <span className="text-[#00FF88]">✓</span> {brainStatus?.agents?.length || 4} agents
+
+          {/* Live Stats Row */}
+          <div className="flex flex-wrap gap-3">
+            <div className="bg-[#0052FF]/10 border border-[#0052FF]/30 px-4 py-2 rounded-lg flex items-center gap-2">
+              <span className="text-[#00FF88]">●</span>
+              <span className="text-white">{agents.length} agents online</span>
             </div>
-            <div className="bg-[#111] border border-[#222] px-4 py-2 rounded">
-              <span className="text-[#0052FF]">◉</span> {SERVICES.filter(s => s.status === 'active').length} services
+            <div className="bg-[#111] border border-[#333] px-4 py-2 rounded-lg">
+              <span className="text-[#888]">Mode:</span>
+              <span className="text-[#00FF88] ml-2 font-bold">LIVE</span>
             </div>
-            <div className="bg-[#111] border border-[#222] px-4 py-2 rounded">
-              <span className="text-[#FFD12F]">⚡</span> {tradingMode} mode
-            </div>
-            <div className="bg-[#111] border border-[#222] px-4 py-2 rounded">
-              <span className="text-[#8B5CF6]">$</span> {holdings?.totalUSD?.toFixed(2) || '0.00'}
+            {walletShort && (
+              <a href={`https://basescan.org/address/${holdings.wallet}`} 
+                 target="_blank"
+                 className="bg-[#111] border border-[#333] px-4 py-2 rounded-lg hover:border-[#0052FF] transition-colors">
+                <span className="text-[#888]">Wallet:</span>
+                <span className="text-[#0052FF] ml-2 font-mono">{walletShort}</span>
+              </a>
+            )}
+            <div className="bg-[#111] border border-[#333] px-4 py-2 rounded-lg">
+              <span className="text-[#888]">P/L:</span>
+              <span className={`ml-2 font-bold ${(holdings?.stats?.totalPnL || 0) >= 0 ? 'text-[#00FF88]' : 'text-[#FC401F]'}`}>
+                ${(holdings?.stats?.totalPnL || 0).toFixed(2)}
+              </span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ═══ TRADING STATUS ═══ */}
-      <section className="px-6 py-12 border-b border-[#222]">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
-            <span className="text-[#00FF88]">◉</span> TRADING DASHBOARD
-          </h2>
-          
-          <div className="grid md:grid-cols-3 gap-6">
-            {/* Mode */}
-            <div className="bg-[#111] border border-[#222] p-6 rounded-lg">
-              <div className="text-xs text-[#555] mb-2">MODE</div>
-              <div className="text-2xl font-bold text-[#FFD12F]">📄 PAPER</div>
-              <div className="text-xs text-[#555] mt-2">Wallet not configured</div>
-              <div className="mt-4 text-xs">
-                <span className="text-[#888]">ETA for LIVE:</span>
-                <span className="text-white ml-2">Need wallet keys</span>
-              </div>
-            </div>
-            
-            {/* Wallet */}
-            <div className="bg-[#111] border border-[#222] p-6 rounded-lg">
-              <div className="text-xs text-[#555] mb-2">ACTIVE WALLET</div>
-              <div className="text-lg font-mono">
-                {holdings?.wallet ? (
-                  <a href={`https://basescan.org/address/${holdings.wallet}`} 
-                     target="_blank" 
-                     className="text-[#0052FF] hover:underline">
-                    {holdings.wallet.slice(0, 8)}...{holdings.wallet.slice(-6)}
-                  </a>
-                ) : (
-                  <span className="text-[#555]">Not connected</span>
-                )}
-              </div>
-              <div className="text-2xl font-bold mt-2 text-[#00FF88]">
-                ${holdings?.totalUSD?.toFixed(2) || '0.00'}
-              </div>
-              <div className="text-xs text-[#555] mt-1">
-                {holdings?.tokens?.length || 0} tokens
-              </div>
-            </div>
-            
-            {/* P&L */}
-            <div className="bg-[#111] border border-[#222] p-6 rounded-lg">
-              <div className="text-xs text-[#555] mb-2">SESSION P/L</div>
-              <div className="text-2xl font-bold text-[#888]">$0.00</div>
-              <div className="text-xs text-[#555] mt-2">0 trades today</div>
-              <div className="mt-4 flex gap-2">
-                <div className="text-xs px-2 py-1 bg-[#0A0A0A] border border-[#333] rounded">
-                  Win: 0%
-                </div>
-                <div className="text-xs px-2 py-1 bg-[#0A0A0A] border border-[#333] rounded">
-                  Avg: $0
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ THE TEAM ═══ */}
-      <section className="px-6 py-12 border-b border-[#222]">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
+      {/* THE SWARM */}
+      <section className="relative z-10 px-6 py-16 border-t border-[#222]">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
             <span className="text-[#0052FF]">◉</span> THE SWARM
           </h2>
           
           <div className="grid md:grid-cols-4 gap-4">
-            {AGENTS.map(agent => (
+            {agents.map((agent: any) => (
               <div key={agent.id} 
-                   className="bg-[#111] border border-[#222] p-4 rounded-lg hover:border-[#333] transition-colors">
+                   className="bg-[#0A0A0A] border border-[#222] p-5 rounded-lg hover:border-[#0052FF]/50 transition-all group">
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="text-2xl">{agent.emoji}</span>
+                  <span className="text-3xl">{agent.emoji}</span>
                   <div>
-                    <div className="font-bold" style={{ color: agent.color }}>{agent.name}</div>
-                    <div className="text-xs text-[#555]">{agent.role}</div>
+                    <div className="font-bold text-lg">{agent.name}</div>
+                    <div className="text-xs text-[#666]">{agent.role}</div>
                   </div>
                 </div>
-                <div className="text-xs text-[#888]">
+                <div className="text-xs text-[#555] font-mono mb-2">
                   {agent.id}@agentmail.to
                 </div>
-                <div className="mt-2 flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#00FF88]" />
-                  <span className="text-xs text-[#00FF88]">Online</span>
+                <div className="flex items-center gap-2">
+                  <span className={`w-2 h-2 rounded-full ${agent.status === 'online' ? 'bg-[#00FF88] animate-pulse' : 'bg-[#555]'}`} />
+                  <span className={`text-xs ${agent.status === 'online' ? 'text-[#00FF88]' : 'text-[#555]'}`}>
+                    {agent.status}
+                  </span>
                 </div>
               </div>
             ))}
@@ -273,100 +259,107 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ SERVICES / APIs ═══ */}
-      <section className="px-6 py-12 border-b border-[#222]">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
-            <span className="text-[#FF6B00]">◉</span> ACTIVE SERVICES
+      {/* LIVE TERMINAL */}
+      <section className="relative z-10 px-6 py-16 border-t border-[#222]">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
+            <span className="text-[#00FF88]">◉</span> LIVE TERMINAL
           </h2>
           
-          <div className="grid md:grid-cols-4 gap-3">
-            {SERVICES.map(svc => (
-              <div key={svc.name} 
-                   className="bg-[#111] border border-[#222] p-3 rounded flex items-center justify-between">
-                <div>
-                  <div className="font-medium text-sm">{svc.name}</div>
-                  <div className="text-xs text-[#555]">{svc.use}</div>
-                </div>
-                <span className="w-2 h-2 rounded-full bg-[#00FF88]" />
-              </div>
-            ))}
+          <div className="bg-[#0A0A0A] border border-[#222] rounded-lg p-6 font-mono text-sm">
+            <div className="flex items-center gap-2 mb-4 pb-4 border-b border-[#222]">
+              <span className="w-3 h-3 rounded-full bg-[#FC401F]" />
+              <span className="w-3 h-3 rounded-full bg-[#FFD12F]" />
+              <span className="w-3 h-3 rounded-full bg-[#00FF88]" />
+              <span className="ml-4 text-[#555]">b0b-brain — L0RE</span>
+            </div>
+            
+            <div className="space-y-2 text-[#888]">
+              <div><span className="text-[#00FF88]">$</span> turb0b00st status</div>
+              <div className="text-[#0052FF]">  MODE: LIVE</div>
+              <div className="text-[#888]">  Wallet: {walletShort || 'loading...'}</div>
+              <div className="text-[#888]">  Trades today: {holdings?.stats?.totalTrades || 0}</div>
+              <div className="text-[#888]">  P/L: <span className="text-[#00FF88]">${(holdings?.stats?.totalPnL || 0).toFixed(2)}</span></div>
+              <div className="mt-4"><span className="text-[#00FF88]">$</span> <span className="animate-pulse">_</span></div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ═══ PRODUCTS ═══ */}
-      <section className="px-6 py-12 border-b border-[#222]">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
+      {/* ECOSYSTEM */}
+      <section className="relative z-10 px-6 py-16 border-t border-[#222]">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
             <span className="text-[#8B5CF6]">◉</span> ECOSYSTEM
           </h2>
           
-          <div className="space-y-3">
+          <div className="grid md:grid-cols-2 gap-4">
             <Link href="/labs" 
-                  className="flex items-center justify-between bg-[#111] border border-[#222] p-4 rounded-lg hover:border-[#0052FF] transition-colors group">
-              <div className="flex items-center gap-4">
-                <span className="text-2xl">🔬</span>
-                <div>
-                  <div className="font-bold text-[#0052FF] group-hover:underline">LABS</div>
-                  <div className="text-sm text-[#888]">Experiments, prototypes, research</div>
+                  className="bg-[#0A0A0A] border border-[#222] p-6 rounded-lg hover:border-[#0052FF] transition-all group">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <span className="text-3xl">🔬</span>
+                  <div>
+                    <div className="font-bold text-xl text-[#0052FF] group-hover:underline">LABS</div>
+                    <div className="text-sm text-[#888]">Experiments, prototypes, research</div>
+                  </div>
                 </div>
+                <span className="text-[#00FF88] text-xs">LIVE →</span>
               </div>
-              <span className="text-[#00FF88] text-xs">LIVE →</span>
             </Link>
             
             <a href="https://d0t.b0b.dev" target="_blank"
-               className="flex items-center justify-between bg-[#111] border border-[#222] p-4 rounded-lg hover:border-[#8B5CF6] transition-colors group">
-              <div className="flex items-center gap-4">
-                <span className="text-2xl">📊</span>
-                <div>
-                  <div className="font-bold text-[#8B5CF6] group-hover:underline">D0T.FINANCE</div>
-                  <div className="text-sm text-[#888]">Nash equilibrium trading swarm</div>
+               className="bg-[#0A0A0A] border border-[#222] p-6 rounded-lg hover:border-[#8B5CF6] transition-all group">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <span className="text-3xl">📊</span>
+                  <div>
+                    <div className="font-bold text-xl text-[#8B5CF6] group-hover:underline">D0T.FINANCE</div>
+                    <div className="text-sm text-[#888]">Nash equilibrium trading swarm</div>
+                  </div>
                 </div>
+                <span className="text-[#00FF88] text-xs">LIVE →</span>
               </div>
-              <span className="text-[#00FF88] text-xs">LIVE →</span>
             </a>
           </div>
         </div>
       </section>
 
-      {/* ═══ FOOTER ═══ */}
-      <footer className="px-6 py-12">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between gap-8">
-            <div>
-              <div className="w-10 h-10 bg-[#0052FF] flex items-center justify-center font-black text-sm mb-4">
-                B0B
-              </div>
-              <p className="text-sm text-[#555] max-w-xs">
-                Glass box, not black box. Everything we build is visible, verifiable, and built by all of us.
-              </p>
+      {/* FOOTER */}
+      <footer className="relative z-10 px-6 py-12 border-t border-[#0052FF]/30 bg-black/80">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-8">
+          <div>
+            <div className="w-12 h-12 bg-[#0052FF] flex items-center justify-center font-black mb-4">
+              B0B
             </div>
-            
-            <div className="flex gap-12 text-sm">
-              <div>
-                <div className="text-[#555] mb-3">Links</div>
-                <div className="space-y-2">
-                  <a href="https://github.com/1800bobrossdotcom-byte" className="block text-[#888] hover:text-white">GitHub</a>
-                  <a href="https://x.com/_b0bdev_" className="block text-[#888] hover:text-white">@_b0bdev_</a>
-                  <a href="mailto:b0b@agentmail.to" className="block text-[#888] hover:text-white">b0b@agentmail.to</a>
-                </div>
-              </div>
-              <div>
-                <div className="text-[#555] mb-3">Network</div>
-                <div className="space-y-2">
-                  <a href="https://base.org" className="block text-[#0052FF]">Base</a>
-                  <a href="https://bankr.bot" className="block text-[#888] hover:text-white">Bankr</a>
-                  <a href="https://polymarket.com" className="block text-[#888] hover:text-white">Polymarket</a>
-                </div>
-              </div>
-            </div>
+            <p className="text-sm text-[#555] max-w-xs">
+              Glass box, not black box. Everything visible, verifiable, built by all of us.
+            </p>
           </div>
           
-          <div className="mt-12 pt-6 border-t border-[#222] flex items-center justify-between text-xs text-[#555]">
-            <span>© 2026 B0B.DEV — Built on Base</span>
-            <span>L0RE v0.1.0</span>
+          <div className="flex gap-12 text-sm">
+            <div>
+              <div className="text-[#555] mb-3 text-xs">LINKS</div>
+              <div className="space-y-2">
+                <a href="https://github.com/1800bobrossdotcom-byte" className="block text-[#888] hover:text-white">GitHub</a>
+                <a href="https://x.com/_b0bdev_" className="block text-[#888] hover:text-white">@_b0bdev_</a>
+                <a href="mailto:b0b@agentmail.to" className="block text-[#0052FF]">b0b@agentmail.to</a>
+              </div>
+            </div>
+            <div>
+              <div className="text-[#555] mb-3 text-xs">BUILT ON</div>
+              <div className="space-y-2">
+                <a href="https://base.org" className="block text-[#0052FF]">Base</a>
+                <span className="block text-[#888]">Claude (Anthropic)</span>
+                <span className="block text-[#888]">Railway</span>
+              </div>
+            </div>
           </div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto mt-12 pt-6 border-t border-[#222] flex items-center justify-between text-xs text-[#555]">
+          <span>© 2026 B0B.DEV</span>
+          <span>L0RE v0.1.0 — Three-View Principle</span>
         </div>
       </footer>
     </main>

@@ -10,5 +10,83 @@
     "level": "INFO",
     "message": "🚀 Running TURB0B00ST Preflight Checks...",
     "crawlerView": "836f:74b4ce32:ml0fe1xu"
+  },
+  {
+    "timestamp": "2026-01-30T05:52:27.521Z",
+    "level": "INFO",
+    "message": "🚀 Running TURB0B00ST Preflight Checks...",
+    "crawlerView": "836f:74b4ce32:ml0guqv5"
+  },
+  {
+    "timestamp": "2026-01-30T05:52:35.956Z",
+    "level": "INFO",
+    "message": "🚀 Running TURB0B00ST Preflight Checks...",
+    "crawlerView": "836f:74b4ce32:ml0guxdg"
+  },
+  {
+    "timestamp": "2026-01-30T05:52:53.284Z",
+    "level": "INFO",
+    "message": "🔓 Attempting to activate mode: ARMED",
+    "crawlerView": "836f:953eb254:ml0gvaqt"
+  },
+  {
+    "timestamp": "2026-01-30T05:52:53.287Z",
+    "level": "INFO",
+    "message": "🚀 Running TURB0B00ST Preflight Checks...",
+    "crawlerView": "836f:74b4ce32:ml0gvaqv"
+  },
+  {
+    "timestamp": "2026-01-30T05:52:53.902Z",
+    "level": "SUCCESS",
+    "message": "✅ Mode activated: ARMED",
+    "crawlerView": "836f:dd5f9ed1:ml0gvb7y"
+  },
+  {
+    "timestamp": "2026-01-30T05:53:01.938Z",
+    "level": "INFO",
+    "message": "🔓 Attempting to activate mode: LIVE",
+    "crawlerView": "836f:879df342:ml0gvhf6"
+  },
+  {
+    "timestamp": "2026-01-30T05:53:01.940Z",
+    "level": "INFO",
+    "message": "🚀 Running TURB0B00ST Preflight Checks...",
+    "crawlerView": "836f:74b4ce32:ml0gvhf8"
+  },
+  {
+    "timestamp": "2026-01-30T05:53:02.606Z",
+    "level": "WARN",
+    "message": "⚠️  LIVE mode activation requires TURB0B00ST_CONFIRM=LIVE environment variable",
+    "crawlerView": "836f:c9623eb3:ml0gvhxq"
+  },
+  {
+    "timestamp": "2026-01-30T05:53:10.174Z",
+    "level": "INFO",
+    "message": "🔓 Attempting to activate mode: LIVE",
+    "crawlerView": "836f:879df342:ml0gvnrz"
+  },
+  {
+    "timestamp": "2026-01-30T05:53:10.177Z",
+    "level": "INFO",
+    "message": "🚀 Running TURB0B00ST Preflight Checks...",
+    "crawlerView": "836f:74b4ce32:ml0gvns1"
+  },
+  {
+    "timestamp": "2026-01-30T05:53:10.883Z",
+    "level": "WARN",
+    "message": "⚠️  LIVE mode activation requires TURB0B00ST_CONFIRM=LIVE environment variable",
+    "crawlerView": "836f:c9623eb3:ml0gvobn"
+  },
+  {
+    "timestamp": "2026-01-30T05:53:10.884Z",
+    "level": "SUCCESS",
+    "message": "✅ Mode activated: LIVE",
+    "crawlerView": "836f:e40c7530:ml0gvobo"
+  },
+  {
+    "timestamp": "2026-01-30T05:53:18.497Z",
+    "level": "INFO",
+    "message": "🚀 Running TURB0B00ST Preflight Checks...",
+    "crawlerView": "836f:74b4ce32:ml0gvu76"
   }
 ]
