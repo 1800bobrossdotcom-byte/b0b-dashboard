@@ -13,7 +13,9 @@ security-scan-report.json
 
 # Generated files
 briefings/
-agents/
+# agents/ - now tracked for intelligence modules
+!agents/*.js
+!agents/*.md
 brain-signals.json
 brain-decisions.json
 brain-pulse.json

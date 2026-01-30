@@ -4,6 +4,14 @@
  * 
  * d0t watches the signals. Patterns emerge from chaos.
  * 
+ * NOW WITH L0RE INTELLIGENCE:
+ * - Tegmark L2 Focus (Emergent Dynamics)
+ * - Nash game-theoretic classification
+ * - Shannon entropy analysis
+ * - Mandelbrot fractal patterns
+ * 
+ * NOT just parroting external APIs — we have our OWN logic.
+ * 
  * Data Sources:
  * - Polymarket (prediction markets)
  * - On-chain metrics (gas, volume, whale moves)
@@ -21,12 +29,28 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 
+// L0RE Intelligence Integration
+let D0TIntelligence = null;
+let TURB0B00STEngine = null;
+try {
+  const d0tIntel = require('../brain/agents/d0t-intelligence.js');
+  D0TIntelligence = d0tIntel.D0TIntelligence;
+  const turb0 = require('../brain/agents/turb0-decision-engine.js');
+  TURB0B00STEngine = turb0.TURB0B00STEngine;
+} catch (e) {
+  console.warn('[d0t-signals] L0RE Intelligence not available:', e.message);
+}
+
 class D0TSignalsCrawler extends BaseCrawler {
   constructor(options = {}) {
     super('d0t-signals', { interval: 300000, ...options }); // 5 min
     
     this.learningsDir = path.join(__dirname, '..', 'brain', 'data', 'learnings');
     this.l0reRegistry = path.join(__dirname, '..', 'brain', 'data', 'l0re-registry.json');
+    
+    // L0RE Intelligence
+    this.l0reIntelligence = D0TIntelligence ? new D0TIntelligence() : null;
+    this.turb0Engine = TURB0B00STEngine ? new TURB0B00STEngine() : null;
     
     // Signal sources
     this.sources = {
@@ -43,7 +67,7 @@ class D0TSignalsCrawler extends BaseCrawler {
       agent: 'd0t',
       role: 'Data Oracle',
       
-      // Market sentiment
+      // Market sentiment (raw from API)
       sentiment: await this.fetchSentiment(),
       
       // Prediction markets
@@ -56,13 +80,39 @@ class D0TSignalsCrawler extends BaseCrawler {
       patterns: [],
       
       // Actionable insights
-      insights: []
+      insights: [],
+      
+      // L0RE Intelligence classification (NOT just API parroting)
+      l0re: null,
+      
+      // TURB0B00ST decision (if engine available)
+      turb0: null
     };
 
-    // Analyze patterns
+    // L0RE Intelligence Analysis — Multi-dimensional classification
+    if (this.l0reIntelligence) {
+      try {
+        signals.l0re = this.l0reIntelligence.classify(signals);
+        this.log(`L0RE: ${signals.l0re.d0t.emoji} ${signals.l0re.d0t.state} — ${signals.l0re.l0re.code}`);
+      } catch (e) {
+        this.log(`L0RE analysis failed: ${e.message}`, 'warn');
+      }
+    }
+    
+    // TURB0B00ST Decision Engine
+    if (this.turb0Engine) {
+      try {
+        signals.turb0 = this.turb0Engine.decide(signals);
+        this.log(`TURB0: ${signals.turb0.decision} (${(signals.turb0.confidence * 100).toFixed(0)}%)`);
+      } catch (e) {
+        this.log(`TURB0 decision failed: ${e.message}`, 'warn');
+      }
+    }
+
+    // Analyze patterns (legacy + L0RE enhanced)
     signals.patterns = this.detectPatterns(signals);
     
-    // Generate insights
+    // Generate insights (L0RE-enhanced)
     signals.insights = this.generateInsights(signals);
     
     // Save learning if significant
@@ -187,7 +237,49 @@ class D0TSignalsCrawler extends BaseCrawler {
   detectPatterns(signals) {
     const patterns = [];
     
-    // Fear/Greed extremes
+    // L0RE-ENHANCED: If we have L0RE intelligence, use it as primary
+    if (signals.l0re) {
+      // Nash state pattern
+      patterns.push({
+        type: 'l0re_nash',
+        state: signals.l0re.l0re.nash,
+        code: signals.l0re.l0re.code,
+        source: 'l0re_intelligence',
+        confidence: 0.85,
+      });
+      
+      // d0t market state pattern
+      patterns.push({
+        type: 'l0re_d0t_state',
+        state: signals.l0re.d0t.state,
+        emoji: signals.l0re.d0t.emoji,
+        action: signals.l0re.d0t.action,
+        confidence: signals.l0re.d0t.confidence || 0.7,
+      });
+      
+      // Fractal pattern
+      patterns.push({
+        type: 'l0re_fractal',
+        pattern: signals.l0re.l0re.fractal,
+        source: 'mandelbrot_analysis',
+        confidence: 0.75,
+      });
+      
+      // Entropy classification
+      patterns.push({
+        type: 'l0re_entropy',
+        classification: signals.l0re.l0re.entropy,
+        meaning: signals.l0re.l0re.entropy === 'HIGH' 
+          ? 'High uncertainty — regime change possible'
+          : signals.l0re.l0re.entropy === 'LOW'
+            ? 'Low entropy — strong trend, high conviction'
+            : 'Moderate uncertainty — mixed signals',
+        source: 'shannon_entropy',
+        confidence: 0.8,
+      });
+    }
+    
+    // LEGACY: Fear/Greed extremes (kept for backwards compat but L0RE is better)
     if (signals.sentiment?.index <= 20) {
       patterns.push({ type: 'extreme_fear', confidence: 0.8, action: 'potential_buy_signal' });
     } else if (signals.sentiment?.index >= 80) {
@@ -215,8 +307,46 @@ class D0TSignalsCrawler extends BaseCrawler {
   generateInsights(signals) {
     const insights = [];
     
+    // L0RE-ENHANCED: Primary insights from TURB0B00ST decision
+    if (signals.turb0) {
+      insights.push({
+        priority: 'critical',
+        insight: `TURB0B00ST: ${signals.turb0.decision} (${(signals.turb0.confidence * 100).toFixed(0)}% confidence)`,
+        action: signals.turb0.l0re.nashAction,
+        confidence: signals.turb0.confidence,
+        source: 'turb0_decision_engine',
+        l0reCode: signals.turb0.l0re.code,
+        reasoning: signals.turb0.reasoning,
+      });
+    }
+    
+    // L0RE-ENHANCED: d0t state insights
+    if (signals.l0re) {
+      insights.push({
+        priority: 'high',
+        insight: `${signals.l0re.d0t.emoji} ${signals.l0re.d0t.description}`,
+        action: signals.l0re.d0t.action,
+        confidence: signals.l0re.d0t.confidence || 0.7,
+        source: 'l0re_d0t_intelligence',
+        l0reCode: signals.l0re.l0re.code,
+      });
+      
+      // Multi-signal synthesis
+      for (const signal of signals.l0re.signals || []) {
+        if (signal.type === 'NASH' || signal.type === 'COMPOSITE') {
+          insights.push({
+            priority: signal.type === 'COMPOSITE' ? 'high' : 'medium',
+            insight: signal.signal,
+            confidence: signal.confidence,
+            source: `l0re_${signal.type.toLowerCase()}`,
+          });
+        }
+      }
+    }
+    
+    // LEGACY: Pattern-based insights (for backwards compat)
     for (const pattern of signals.patterns || []) {
-      if (pattern.type === 'extreme_fear') {
+      if (pattern.type === 'extreme_fear' && !signals.l0re) {
         insights.push({
           priority: 'high',
           insight: 'Extreme fear detected — historically a good entry point',

@@ -1,0 +1,23 @@
+[
+  {
+    "timestamp": "2026-01-30T10:23:36.925Z",
+    "decision": "HOLD",
+    "confidence": 0.5,
+    "l0reCode": "n.3qlb/t.l2/e.m/f.rang",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-30T10:23:36.931Z",
+    "decision": "HOLD",
+    "confidence": 0.5,
+    "l0reCode": "n.3qlb/t.l2/e.m/f.rang",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-30T10:23:52.012Z",
+    "decision": "HOLD",
+    "confidence": 0.5,
+    "l0reCode": "n.3qlb/t.l2/e.m/f.rang",
+    "nash": "EQUILIBRIUM"
+  }
+]

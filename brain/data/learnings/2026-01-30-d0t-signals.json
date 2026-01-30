@@ -268,5 +268,105 @@
       "category": "d.x1dl",
       "source": "e.q2dl"
     }
+  },
+  {
+    "id": "learning-2026-01-30-d0t-signals",
+    "timestamp": "2026-01-30T10:23:50.614Z",
+    "agent": "d0t",
+    "category": "market_signals",
+    "title": "d0t Signal Analysis - 2026-01-30",
+    "summary": "Detected 6 patterns, generated 4 insights",
+    "patterns": [
+      {
+        "type": "l0re_nash",
+        "state": "EQUILIBRIUM",
+        "code": "n.3qlb/t.l2/e.m/f.rang",
+        "source": "l0re_intelligence",
+        "confidence": 0.85
+      },
+      {
+        "type": "l0re_d0t_state",
+        "state": "EQUILIBRIUM_HARVEST",
+        "emoji": "⚖️📊",
+        "action": "accumulate",
+        "confidence": 0.7
+      },
+      {
+        "type": "l0re_fractal",
+        "pattern": "RANGING",
+        "source": "mandelbrot_analysis",
+        "confidence": 0.75
+      },
+      {
+        "type": "l0re_entropy",
+        "classification": "MEDIUM",
+        "meaning": "Moderate uncertainty — mixed signals",
+        "source": "shannon_entropy",
+        "confidence": 0.8
+      },
+      {
+        "type": "extreme_fear",
+        "confidence": 0.8,
+        "action": "potential_buy_signal"
+      },
+      {
+        "type": "high_conviction_markets",
+        "count": 5,
+        "markets": [
+          "US government shutdown Saturday?",
+          "Will Trump nominate Judy Shelton as the next Fed c",
+          "Australian Open Men's: Carlos Alcaraz vs Alexander",
+          "Tesla launches unsupervised full self driving (FSD",
+          "Will Trump nominate Kevin Warsh as the next Fed ch"
+        ]
+      }
+    ],
+    "insights": [
+      {
+        "priority": "critical",
+        "insight": "TURB0B00ST: HOLD (50% confidence)",
+        "action": "accumulate",
+        "confidence": 0.5,
+        "source": "turb0_decision_engine",
+        "l0reCode": "n.3qlb/t.l2/e.m/f.rang",
+        "reasoning": [
+          "Mixed signals, no clear direction (net: 0.095)",
+          "Nash state: EQUILIBRIUM (multiplier: 1x)",
+          "Votes: d0t=NEUTRAL, c0m=BULLISH, b0b=BEARISH, r0ss=BULLISH",
+          "Low agent coherence: Reduced position size"
+        ]
+      },
+      {
+        "priority": "high",
+        "insight": "⚖️📊 Nash Equilibrium — stable state",
+        "action": "accumulate",
+        "confidence": 0.7,
+        "source": "l0re_d0t_intelligence",
+        "l0reCode": "n.3qlb/t.l2/e.m/f.rang"
+      },
+      {
+        "priority": "medium",
+        "insight": "accumulate",
+        "confidence": 0.5,
+        "source": "l0re_nash"
+      },
+      {
+        "priority": "high",
+        "insight": "BEARISH",
+        "confidence": 0.5,
+        "source": "l0re_composite"
+      }
+    ],
+    "raw_sentiment": {
+      "index": 16,
+      "classification": "Extreme Fear",
+      "timestamp": "1769731200",
+      "trend": "stable"
+    },
+    "l0re_codes": {
+      "agent": "a.z7ls",
+      "category": "d.x1dl",
+      "source": "e.q2dl"
+    }
   }
 ]

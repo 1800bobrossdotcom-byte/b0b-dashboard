@@ -492,6 +492,130 @@ try {
   console.log('[BRAIN] L0RE Hotkeys not available:', e.message);
 }
 
+// ═══════════════════════════════════════════════════════════════
+// L0RE INTELLIGENCE — Multi-Dimensional Classification
+// Max Tegmark + Nash + Shannon + Mandelbrot
+// ═══════════════════════════════════════════════════════════════
+
+let L0REIntelligence, TURB0B00STEngine, D0TIntelligence, B0BIntelligence, C0MIntelligence, R0SSIntelligence;
+try {
+  const l0reIntel = require('./l0re-intelligence.js');
+  L0REIntelligence = l0reIntel.L0REIntelligence;
+  
+  const turb0 = require('./agents/turb0-decision-engine.js');
+  TURB0B00STEngine = turb0.TURB0B00STEngine;
+  
+  const d0t = require('./agents/d0t-intelligence.js');
+  D0TIntelligence = d0t.D0TIntelligence;
+  
+  const b0b = require('./agents/b0b-intelligence.js');
+  B0BIntelligence = b0b.B0BIntelligence;
+  
+  const c0m = require('./agents/c0m-intelligence.js');
+  C0MIntelligence = c0m.C0MIntelligence;
+  
+  const r0ss = require('./agents/r0ss-intelligence.js');
+  R0SSIntelligence = r0ss.R0SSIntelligence;
+  
+  console.log('[BRAIN] L0RE Intelligence + TURB0B00ST loaded - multi-dimensional classification ready');
+} catch (e) {
+  console.log('[BRAIN] L0RE Intelligence not available:', e.message);
+}
+
+// L0RE Intelligence analyze endpoint
+app.post('/l0re/intelligence', async (req, res) => {
+  if (!L0REIntelligence) {
+    return res.status(503).json({ error: 'L0RE Intelligence not loaded' });
+  }
+  try {
+    const intel = new L0REIntelligence();
+    const state = intel.analyze(req.body);
+    res.json(state);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// TURB0B00ST decision endpoint
+app.post('/turb0/decide', async (req, res) => {
+  if (!TURB0B00STEngine) {
+    return res.status(503).json({ error: 'TURB0B00ST Engine not loaded' });
+  }
+  try {
+    const engine = new TURB0B00STEngine();
+    const decision = engine.decide(req.body);
+    res.json(decision);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// TURB0B00ST dashboard endpoint
+app.get('/turb0/dashboard', async (req, res) => {
+  if (!TURB0B00STEngine) {
+    return res.status(503).json({ error: 'TURB0B00ST Engine not loaded' });
+  }
+  try {
+    // Fetch current data from d0t-signals
+    const signalsPath = path.join(__dirname, 'data', 'd0t-signals.json');
+    let signals = {};
+    try {
+      signals = JSON.parse(await fs.readFile(signalsPath, 'utf8'));
+    } catch (e) {
+      signals = { sentiment: { index: 50 } };
+    }
+    
+    const engine = new TURB0B00STEngine();
+    const dashboard = engine.dashboard(signals);
+    res.type('text/plain').send(dashboard);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Agent-specific intelligence endpoints
+app.post('/l0re/agent/:agent', async (req, res) => {
+  const agentMap = {
+    d0t: D0TIntelligence,
+    b0b: B0BIntelligence,
+    c0m: C0MIntelligence,
+    r0ss: R0SSIntelligence,
+  };
+  
+  const AgentClass = agentMap[req.params.agent];
+  if (!AgentClass) {
+    return res.status(404).json({ 
+      error: `Unknown agent: ${req.params.agent}`,
+      available: Object.keys(agentMap),
+    });
+  }
+  
+  try {
+    const intel = new AgentClass();
+    const analysis = intel.analyze ? intel.analyze(req.body) : intel.classify?.(req.body);
+    res.json(analysis);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// L0RE Intelligence status
+app.get('/l0re/intelligence/status', (req, res) => {
+  res.json({
+    available: !!L0REIntelligence,
+    turb0Available: !!TURB0B00STEngine,
+    agents: {
+      d0t: !!D0TIntelligence,
+      b0b: !!B0BIntelligence,
+      c0m: !!C0MIntelligence,
+      r0ss: !!R0SSIntelligence,
+    },
+    tegmarkLevels: ['L1_MATHEMATICAL', 'L2_EMERGENT', 'L3_NARRATIVE', 'L4_META'],
+    nashStates: ['COOPERATIVE', 'COMPETITIVE', 'DEFECTION', 'EQUILIBRIUM', 'SCHELLING'],
+    message: '🔮 Multi-dimensional classification: Tegmark + Nash + Shannon + Mandelbrot',
+  });
+});
+
 // List all hotkeys
 app.get('/l0re/hotkeys', (req, res) => {
   if (!L0REHotkeys) {
