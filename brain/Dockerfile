@@ -8,11 +8,14 @@ COPY package*.json ./
 # Install dependencies with legacy peer deps to resolve node-fetch conflict
 RUN npm install --omit=dev --legacy-peer-deps
 
-# Copy source
+# Copy brain source
 COPY . .
 
-# Create data directory (data files are already copied with COPY . .)
-RUN mkdir -p data
+# Copy crawlers directory from parent
+COPY ../crawlers ../crawlers
+
+# Create data directories
+RUN mkdir -p data/learnings data/library/index
 
 EXPOSE 3001
 
