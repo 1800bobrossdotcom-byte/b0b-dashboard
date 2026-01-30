@@ -25,6 +25,11 @@ export function LiveDataHUD() {
   const [gasPrice, setGasPrice] = useState<number>(0);
   const [isLive, setIsLive] = useState(false);
   const [totalTx, setTotalTx] = useState(0);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const fetchData = useCallback(async () => {
     try {
@@ -99,12 +104,13 @@ export function LiveDataHUD() {
   }, []);
 
   useEffect(() => {
+    if (!mounted) return;
     fetchData();
     const interval = setInterval(fetchData, 2000);
     return () => clearInterval(interval);
-  }, [fetchData]);
+  }, [fetchData, mounted]);
 
-  if (!isLive) return null;
+  if (!mounted || !isLive) return null;
 
   return (
     <div className="fixed bottom-24 left-6 z-40 font-mono text-xs">
@@ -119,7 +125,7 @@ export function LiveDataHUD() {
         <div className="flex items-center gap-3">
           <span className="text-[var(--color-text-dim)]">block</span>
           <span className="text-[var(--color-primary)] tabular-nums">
-            {blockData?.number.toLocaleString()}
+            {blockData?.number?.toLocaleString() ?? '---'}
           </span>
         </div>
         

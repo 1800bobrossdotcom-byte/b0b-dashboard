@@ -121,64 +121,77 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   // Load from localStorage (but default is now bright)
   useEffect(() => {
-    const saved = localStorage.getItem('b0b-aesthetic');
-    if (saved && saved in AESTHETICS) {
-      setAestheticState(saved as AestheticKey);
-    } else {
-      // First time visitor — set to bright
-      localStorage.setItem('b0b-aesthetic', 'bright');
+    if (typeof window === 'undefined') return;
+    try {
+      const saved = localStorage.getItem('b0b-aesthetic');
+      if (saved && saved in AESTHETICS) {
+        setAestheticState(saved as AestheticKey);
+      } else {
+        // First time visitor — set to bright
+        localStorage.setItem('b0b-aesthetic', 'bright');
+      }
+      
+      const savedDensity = localStorage.getItem('b0b-particle-density');
+      if (savedDensity) setParticleDensity(savedDensity as 'low' | 'medium' | 'high');
+      
+      const savedSpeed = localStorage.getItem('b0b-animation-speed');
+      if (savedSpeed) setAnimationSpeed(savedSpeed as 'slow' | 'normal' | 'fast');
+      
+      const savedMotion = localStorage.getItem('b0b-reduced-motion');
+      if (savedMotion) setReducedMotion(savedMotion === 'true');
+    } catch (err) {
+      console.warn('ThemeContext localStorage error:', err);
     }
-    
-    const savedDensity = localStorage.getItem('b0b-particle-density');
-    if (savedDensity) setParticleDensity(savedDensity as 'low' | 'medium' | 'high');
-    
-    const savedSpeed = localStorage.getItem('b0b-animation-speed');
-    if (savedSpeed) setAnimationSpeed(savedSpeed as 'slow' | 'normal' | 'fast');
-    
-    const savedMotion = localStorage.getItem('b0b-reduced-motion');
-    if (savedMotion) setReducedMotion(savedMotion === 'true');
   }, []);
 
   // Apply CSS variables and effects when aesthetic changes
   useEffect(() => {
-    const config = AESTHETICS[aesthetic];
-    const root = document.documentElement;
-    
-    // Colors
-    root.style.setProperty('--color-primary', config.primary);
-    root.style.setProperty('--color-secondary', config.secondary);
-    root.style.setProperty('--color-accent', config.accent);
-    root.style.setProperty('--color-muted', config.muted);
-    root.style.setProperty('--color-background', config.background);
-    root.style.setProperty('--color-surface', config.surface);
-    root.style.setProperty('--color-glow', config.glow);
-    root.style.setProperty('--color-text', config.text);
-    root.style.setProperty('--color-text-muted', config.textMuted);
-    
-    // Dark mode attribute for components that need it
-    root.setAttribute('data-theme-mode', config.isDark ? 'dark' : 'light');
-    
-    // Visual effects
-    root.setAttribute('data-aesthetic', aesthetic);
-    root.setAttribute('data-scanlines', String(config.scanlines));
-    root.setAttribute('data-glitch', String(config.glitch));
-    root.setAttribute('data-crt', String(config.crt));
-    root.setAttribute('data-noise', config.noise);
-    root.setAttribute('data-font', config.font);
-    
-    localStorage.setItem('b0b-aesthetic', aesthetic);
+    if (typeof window === 'undefined') return;
+    try {
+      const config = AESTHETICS[aesthetic];
+      const root = document.documentElement;
+      
+      // Colors
+      root.style.setProperty('--color-primary', config.primary);
+      root.style.setProperty('--color-secondary', config.secondary);
+      root.style.setProperty('--color-accent', config.accent);
+      root.style.setProperty('--color-muted', config.muted);
+      root.style.setProperty('--color-background', config.background);
+      root.style.setProperty('--color-surface', config.surface);
+      root.style.setProperty('--color-glow', config.glow);
+      root.style.setProperty('--color-text', config.text);
+      root.style.setProperty('--color-text-muted', config.textMuted);
+      
+      // Dark mode attribute for components that need it
+      root.setAttribute('data-theme-mode', config.isDark ? 'dark' : 'light');
+      
+      // Visual effects
+      root.setAttribute('data-aesthetic', aesthetic);
+      root.setAttribute('data-scanlines', String(config.scanlines));
+      root.setAttribute('data-glitch', String(config.glitch));
+      root.setAttribute('data-crt', String(config.crt));
+      root.setAttribute('data-noise', config.noise);
+      root.setAttribute('data-font', config.font);
+      
+      localStorage.setItem('b0b-aesthetic', aesthetic);
+    } catch (err) {
+      console.warn('ThemeContext apply error:', err);
+    }
   }, [aesthetic]);
 
   useEffect(() => {
-    localStorage.setItem('b0b-particle-density', particleDensity);
+    if (typeof window === 'undefined') return;
+    try { localStorage.setItem('b0b-particle-density', particleDensity); } catch {}
   }, [particleDensity]);
 
   useEffect(() => {
-    localStorage.setItem('b0b-animation-speed', animationSpeed);
+    if (typeof window === 'undefined') return;
+    try { localStorage.setItem('b0b-animation-speed', animationSpeed); } catch {}
   }, [animationSpeed]);
 
   useEffect(() => {
-    localStorage.setItem('b0b-reduced-motion', String(reducedMotion));
+    if (typeof window === 'undefined') return;
+    try { localStorage.setItem('b0b-reduced-motion', String(reducedMotion)); } catch {}
   }, [reducedMotion]);
 
   const setAesthetic = (a: AestheticKey) => setAestheticState(a);

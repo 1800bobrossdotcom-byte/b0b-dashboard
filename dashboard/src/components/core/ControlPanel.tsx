@@ -1,16 +1,23 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTheme, AESTHETICS, AestheticKey } from '@/contexts/ThemeContext';
 
 export default function ControlPanel() {
   const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { 
     aesthetic, setAesthetic, config,
     particleDensity, setParticleDensity,
     animationSpeed, setAnimationSpeed,
     reducedMotion, setReducedMotion 
   } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   return (
     <>

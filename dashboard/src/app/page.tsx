@@ -14,6 +14,26 @@ import { useEffect, useState } from 'react';
 
 const BRAIN_URL = 'https://b0b-brain-production.up.railway.app';
 
+const asArray = (value: unknown) => Array.isArray(value) ? value : [];
+const safeNum = (v: unknown, fallback = 0) => {
+  if (typeof v === 'number' && !isNaN(v)) return v;
+  if (typeof v === 'string') {
+    const n = parseFloat(v);
+    return isNaN(n) ? fallback : n;
+  }
+  return fallback;
+};
+const safeStr = (v: unknown, fallback = '') => (typeof v === 'string' ? v : fallback);
+
+const logPayload = (payload: unknown) => {
+  try {
+    // Safe, minimal logging to surface production payload shapes
+    console.info('b0b.dev/swarm payload', JSON.stringify(payload).slice(0, 5000));
+  } catch (err) {
+    console.warn('b0b.dev/swarm payload log failed', err);
+  }
+};
+
 interface SwarmData {
   timestamp: string;
   status: string;
@@ -54,6 +74,7 @@ export default function B0bDev() {
         const res = await fetch(`${BRAIN_URL}/swarm/live`);
         if (res.ok) {
           const json = await res.json();
+          logPayload(json);
           setData(json);
           setError(null);
           setLastFetch(new Date());
@@ -72,14 +93,15 @@ export default function B0bDev() {
   if (!mounted) return null;
 
   const sentiment = data?.d0t?.data?.sentiment;
-  const trades = data?.turb0b00st?.tradingHistory || [];
+  const trades = asArray(data?.turb0b00st?.tradingHistory);
   const liveTrader = data?.liveTrader;
-  const freshness = data?.freshness?.visual?.bars || [];
-  const papers = data?.r0ss?.data?.papers?.relevant?.slice(0, 3) || [];
-  const predictions = data?.d0t?.data?.predictions?.slice(0, 3) || [];
+  const freshness = asArray(data?.freshness?.visual?.bars);
+  const papers = asArray(data?.r0ss?.data?.papers?.relevant).slice(0, 3);
+  const predictions = asArray(data?.d0t?.data?.predictions).slice(0, 3);
 
-  return (
-    <main className="min-h-screen bg-black text-white font-mono p-4 md:p-8">
+  try {
+    return (
+      <main className="min-h-screen bg-black text-white font-mono p-4 md:p-8">
       {/* HEADER */}
       <header className="flex flex-wrap justify-between items-start mb-8 gap-4">
         <div>
@@ -159,11 +181,11 @@ export default function B0bDev() {
           </h2>
           <div className="text-center py-4">
             <div className={`text-5xl font-bold ${
-              (sentiment?.index || 0) < 25 ? 'text-red-500' :
-              (sentiment?.index || 0) < 50 ? 'text-orange-500' :
-              (sentiment?.index || 0) < 75 ? 'text-yellow-500' : 'text-green-500'
+              safeNum(sentiment?.index) < 25 ? 'text-red-500' :
+              safeNum(sentiment?.index) < 50 ? 'text-orange-500' :
+              safeNum(sentiment?.index) < 75 ? 'text-yellow-500' : 'text-green-500'
             }`}>
-              {sentiment?.index ?? '?'}
+              {safeNum(sentiment?.index, NaN) || '?'}
             </div>
             <div className="text-gray-400 text-sm mt-1">
               {sentiment?.classification || 'Loading...'}
@@ -226,10 +248,10 @@ export default function B0bDev() {
             ) : (
               predictions.map((p: any, i: number) => (
                 <div key={i} className="text-xs p-2 bg-black/50 rounded">
-                  <div className="text-gray-300 line-clamp-2">{p.question}</div>
+                  <div className="text-gray-300 line-clamp-2">{safeStr(p.question, 'Unknown market')}</div>
                   <div className="flex justify-between mt-1 text-gray-500">
-                    <span>Vol: ${(p.volume24h / 1e6).toFixed(2)}M</span>
-                    <span className="text-[#9D4EDD]">{p.signal}</span>
+                    <span>Vol: ${(safeNum(p.volume24h) / 1e6).toFixed(2)}M</span>
+                    <span className="text-[#9D4EDD]">{safeStr(p.signal, '—')}</span>
                   </div>
                 </div>
               ))
@@ -317,6 +339,18 @@ export default function B0bDev() {
           <span>L0RE v0.3.0</span>
         </div>
       </footer>
-    </main>
-  );
+      </main>
+    );
+  } catch (err) {
+    console.error('Render error', err);
+    return (
+      <main className="min-h-screen bg-black text-white font-mono p-8">
+        <div className="max-w-xl mx-auto p-4 border border-red-500/40 bg-red-950/30 rounded">
+          <div className="text-red-400 font-bold mb-2">Client render glitch</div>
+          <div className="text-sm text-red-200">{(err as Error)?.message || 'unknown error'}</div>
+          <div className="text-xs text-red-300/80 mt-2">Check console for stack & payload.</div>
+        </div>
+      </main>
+    );
+  }
 }

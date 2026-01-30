@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://b0b.dev";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "B0B.DEV — An Autonomous Creative Intelligence",
   description: "Observing. Deciding. Creating. Giving. B0B is the visible manifestation of autonomous decision-making — a digital consciousness that embodies Bob Rossing.",
   keywords: ["AI", "autonomous", "creative", "intelligence", "Bob Ross", "generative", "art", "BASE", "blockchain"],
