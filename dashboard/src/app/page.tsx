@@ -10,6 +10,7 @@
  */
 
 import { useEffect, useState, useRef } from 'react';
+import L0RELoader from './components/L0RELoader';
 
 // ═══════════════════════════════════════════════════════════════
 // DENSITY RAMPS (Gysin/ertdfgcvb play.core)
@@ -29,6 +30,7 @@ const BRAIN_URL = process.env.NEXT_PUBLIC_BRAIN_URL || 'https://brain.b0b.dev';
 // ═══════════════════════════════════════════════════════════════
 
 export default function B0bDev() {
+  const [loading, setLoading] = useState(true);
   const [dimensions, setDimensions] = useState({ cols: 80, rows: 40 });
   const [frame, setFrame] = useState('');
   const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
@@ -42,6 +44,11 @@ export default function B0bDev() {
   useEffect(() => {
     setMounted(true);
   }, []);
+  
+  // Show loader on first load
+  if (loading && mounted) {
+    return <L0RELoader message="B0B SYNTHESIZING" onComplete={() => setLoading(false)} minDuration={2000} />;
+  }
   
   // Fetch real trade count from local API (falls back to brain)
   useEffect(() => {

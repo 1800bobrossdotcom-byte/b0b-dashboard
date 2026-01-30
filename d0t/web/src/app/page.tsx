@@ -1,296 +1,284 @@
 'use client';
 
 /**
- * D0T.FINANCE — Gysin-Inspired Edition
+ * D0T.B0B.DEV — TURB0B00ST TRADING TERMINAL
+ * ══════════════════════════════════════════════════════════════
  * 
- * Design Principles:
- * - Restraint over flash
- * - Monochrome / flat palettes  
- * - Typography as art
- * - Subtle procedural, not chaos
- * - Let content breathe
+ * L0RE v0.2.0 Aesthetic
+ * Full-page generative ASCII + live trading data
+ * 
+ * "I SEE YOU" — The eye that never blinks
  */
 
 import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
-import TeamChat from './components/TeamChat';
+import L0RELoader from './components/L0RELoader';
 
 // ═══════════════════════════════════════════════════════════════
-// PALETTE SYSTEM — Mindful, Flat, Switchable
+// DENSITY RAMPS (Gysin/ertdfgcvb)
 // ═══════════════════════════════════════════════════════════════
 
-const PALETTES = {
-  paper: {
-    name: 'Paper',
-    bg: '#FFFEF8',
-    surface: '#F5F4EE',
-    text: '#1A1A1A',
-    muted: '#666666',
-    accent: '#8B5A2B',
-    border: '#E5E4DE',
-  },
-  ink: {
-    name: 'Ink',
-    bg: '#0A0A0A',
-    surface: '#141414',
-    text: '#FAFAFA',
-    muted: '#888888',
-    accent: '#FAFAFA',
-    border: '#2A2A2A',
-  },
-  terminal: {
-    name: 'Terminal',
-    bg: '#000000',
-    surface: '#0A0A0A',
-    text: '#FFAA00',
-    muted: '#885500',
-    accent: '#FFAA00',
-    border: '#3A2A0A',
-  },
-  slate: {
-    name: 'Slate',
-    bg: '#1E1E24',
-    surface: '#26262E',
-    text: '#E8E8EC',
-    muted: '#8888A0',
-    accent: '#A0A0C0',
-    border: '#36363E',
-  },
+const RAMPS = {
+  standard: ' .:-=+*#%@',
+  blocks: ' ░▒▓█',
+  minimal: ' ·:;|',
 };
 
-type PaletteKey = keyof typeof PALETTES;
-
-const AGENTS = [
-  { id: 'bull', emoji: '🐂', name: 'Bull', role: 'Optimism' },
-  { id: 'bear', emoji: '🐻', name: 'Bear', role: 'Caution' },
-  { id: 'quant', emoji: '📊', name: 'Quant', role: 'Analysis' },
-  { id: 'risk', emoji: '🛡️', name: 'Risk', role: 'Protection' },
-  { id: 'arbiter', emoji: '⚖️', name: 'Arbiter', role: 'Decision' },
-];
-
 // ═══════════════════════════════════════════════════════════════
-// MAIN
+// CONFIG
 // ═══════════════════════════════════════════════════════════════
 
-const BRAIN_URL = 'https://b0b-brain-production.up.railway.app';
+const BRAIN_URL = process.env.NEXT_PUBLIC_BRAIN_URL || 'https://b0b-brain-production.up.railway.app';
 
-export default function D0TFinance() {
+// ═══════════════════════════════════════════════════════════════
+// MAIN COMPONENT
+// ═══════════════════════════════════════════════════════════════
+
+export default function D0TTURB0B00ST() {
+  const [loading, setLoading] = useState(true);
   const [mounted, setMounted] = useState(false);
-  const [palette, setPalette] = useState<PaletteKey>('ink');
+  const [dimensions, setDimensions] = useState({ cols: 80, rows: 40 });
+  const [frame, setFrame] = useState('');
   const [time, setTime] = useState('');
-  const [holdings, setHoldings] = useState<any>(null);
-  const [lines, setLines] = useState<string[]>([]);
-  const termRef = useRef<HTMLDivElement>(null);
+  const [showInfo, setShowInfo] = useState(false);
+  const [turb0Data, setTurb0Data] = useState<any>(null);
+  const preRef = useRef<HTMLPreElement>(null);
   
-  const colors = PALETTES[palette];
-
+  // Mount
   useEffect(() => {
     setMounted(true);
+  }, []);
+  
+  // Time
+  useEffect(() => {
     const tick = () => setTime(new Date().toLocaleTimeString('en-US', { hour12: false }));
     tick();
     const interval = setInterval(tick, 1000);
     return () => clearInterval(interval);
   }, []);
-
+  
+  // Calculate grid dimensions
+  useEffect(() => {
+    const calculateDimensions = () => {
+      const charWidth = 8.4;
+      const charHeight = 14;
+      const cols = Math.floor(window.innerWidth / charWidth);
+      const rows = Math.floor(window.innerHeight / charHeight);
+      setDimensions({ cols, rows });
+    };
+    
+    calculateDimensions();
+    window.addEventListener('resize', calculateDimensions);
+    return () => window.removeEventListener('resize', calculateDimensions);
+  }, []);
+  
+  // Fetch TURB0B00ST data
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const h = await fetch(`${BRAIN_URL}/holdings/quick`).then(r => r.ok ? r.json() : null);
-        setHoldings(h);
-      } catch {}
+        const res = await fetch(`${BRAIN_URL}/finance/treasury`);
+        if (res.ok) {
+          const data = await res.json();
+          setTurb0Data(data);
+        }
+      } catch {
+        // Try local API
+        try {
+          const res = await fetch('/api/live');
+          if (res.ok) {
+            const data = await res.json();
+            setTurb0Data(data);
+          }
+        } catch {}
+      }
     };
     fetchData();
-    const interval = setInterval(fetchData, 15000);
+    const interval = setInterval(fetchData, 10000);
     return () => clearInterval(interval);
   }, []);
-
-  // Simple terminal simulation
+  
+  // Main render loop - Eye pattern
   useEffect(() => {
-    const messages = [
-      'nash-council: scanning markets...',
-      'bull: sentiment analysis positive',
-      'bear: volatility check passed',
-      'quant: calculating edge...',
-      'risk: position sizing approved',
-      'arbiter: awaiting consensus',
-      `treasury: $${(holdings?.stats?.totalPnL || 0).toFixed(2)} p/l`,
-    ];
+    if (loading) return;
     
-    let i = 0;
-    const interval = setInterval(() => {
-      setLines(prev => [...prev.slice(-6), messages[i % messages.length]]);
-      i++;
-    }, 3000);
+    const { cols, rows } = dimensions;
+    const ramp = RAMPS.blocks;
+    let frameCount = 0;
+    
+    const render = () => {
+      frameCount++;
+      const t = frameCount * 0.02;
+      
+      let output = '';
+      const cx = cols / 2;
+      const cy = rows / 2;
+      
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+          const dx = (x - cx) / (cols * 0.4);
+          const dy = (y - cy) / (rows * 0.3);
+          
+          // Eye shape
+          const eyeDist = Math.sqrt(dx * dx + dy * dy * 2.5);
+          const eyeShape = eyeDist < 1 ? 1 : 0;
+          
+          // Pupil
+          const pupilDist = Math.sqrt(dx * dx + dy * dy * 2.5);
+          const pupil = pupilDist < 0.3 ? 1 : 0;
+          
+          // Iris pattern
+          const angle = Math.atan2(dy, dx);
+          const iris = pupilDist < 0.6 && pupilDist > 0.25 
+            ? Math.sin(angle * 12 + t) * 0.5 + 0.5 
+            : 0;
+          
+          // Scan line effect
+          const scanLine = Math.sin(y * 0.3 + t * 3) * 0.1;
+          
+          // Combine
+          let value = 0;
+          if (pupil) {
+            value = 0.9 + scanLine;
+          } else if (iris) {
+            value = iris * 0.7 + scanLine;
+          } else if (eyeShape) {
+            value = 0.15 + scanLine;
+          } else {
+            // Background pattern
+            value = Math.sin(x * 0.05 + t) * Math.sin(y * 0.1 - t * 0.5) * 0.1 + 0.05;
+          }
+          
+          const charIndex = Math.floor(value * (ramp.length - 1));
+          output += ramp[Math.max(0, Math.min(charIndex, ramp.length - 1))];
+        }
+        output += '\n';
+      }
+      
+      setFrame(output);
+    };
+    
+    const interval = setInterval(render, 50);
+    render();
     
     return () => clearInterval(interval);
-  }, [holdings]);
-
-  useEffect(() => {
-    if (termRef.current) {
-      termRef.current.scrollTop = termRef.current.scrollHeight;
-    }
-  }, [lines]);
-
-  const walletShort = holdings?.wallet 
-    ? `${holdings.wallet.slice(0,6)}…${holdings.wallet.slice(-4)}` 
-    : null;
-
+  }, [loading, dimensions]);
+  
+  // Stats
+  const tradeCount = turb0Data?.turb0b00st?.trades || turb0Data?.trades || 6;
+  const mode = turb0Data?.turb0b00st?.mode || 'LIVE';
+  const totalValue = turb0Data?.totalValue || turb0Data?.portfolio?.totalValue || 0;
+  
+  if (!mounted) return null;
+  
+  if (loading) {
+    return <L0RELoader message="D0T VISION INITIALIZING" onComplete={() => setLoading(false)} />;
+  }
+  
   return (
     <main 
-      className="min-h-screen font-mono transition-colors duration-500"
-      style={{ backgroundColor: colors.bg, color: colors.text }}
+      className="relative w-screen h-screen overflow-hidden cursor-crosshair select-none"
+      style={{ 
+        backgroundColor: '#0A0A0A',
+        fontFamily: 'JetBrains Mono, SF Mono, Consolas, monospace',
+      }}
+      onClick={() => setShowInfo(!showInfo)}
     >
-      {/* HEADER */}
-      <header 
-        className="border-b px-6 py-4"
-        style={{ borderColor: colors.border }}
+      {/* GENERATIVE BACKGROUND */}
+      <pre
+        ref={preRef}
+        className="absolute inset-0 leading-none whitespace-pre overflow-hidden pointer-events-none"
+        style={{
+          fontSize: '14px',
+          lineHeight: '14px',
+          color: '#FFAA00',
+          textShadow: '0 0 20px rgba(255,170,0,0.2)',
+        }}
       >
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <span className="text-xl font-bold">d0t</span>
-            <span className="text-xs" style={{ color: colors.muted }}>
-              nash equilibrium
-            </span>
+        {frame}
+      </pre>
+      
+      {/* OVERLAY UI */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* TOP BAR */}
+        <div className="absolute top-0 left-0 right-0 p-4 flex justify-between items-start">
+          <div>
+            <div className="text-lg font-bold" style={{ color: '#FFAA00' }}>
+              D0T — I SEE YOU
+            </div>
+            <div className="text-xs mt-1" style={{ color: '#666' }}>
+              TURB0B00ST VISION TERMINAL
+            </div>
           </div>
-          
-          <div className="flex items-center gap-6 text-sm">
-            <Link href="/dashboard" className="hover:underline" style={{ color: colors.muted }}>
-              dashboard
-            </Link>
-            <a href="https://b0b.dev" className="hover:underline" style={{ color: colors.muted }}>
-              b0b
-            </a>
-            <span style={{ color: colors.muted }}>{mounted ? time : '—'}</span>
-          </div>
-        </div>
-      </header>
-
-      {/* PALETTE SWITCHER */}
-      <div className="fixed top-20 right-6 z-50">
-        <div 
-          className="text-xs p-2 border"
-          style={{ backgroundColor: colors.surface, borderColor: colors.border }}
-        >
-          {Object.entries(PALETTES).map(([key, p]) => (
-            <button
-              key={key}
-              onClick={() => setPalette(key as PaletteKey)}
-              className={`block w-full text-left px-2 py-1 hover:underline ${palette === key ? 'font-bold' : ''}`}
-              style={{ color: palette === key ? colors.text : colors.muted }}
-            >
-              {p.name}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* HERO */}
-      <section className="px-6 py-24">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-8">
-            Five agents.<br/>
-            One goal.
-          </h1>
-          
-          <p 
-            className="text-lg md:text-xl max-w-xl mb-12 leading-relaxed"
-            style={{ color: colors.muted }}
-          >
-            Nash equilibrium trading swarm. Cooperative consensus. 
-            Each agent brings unique perspective to find optimal decisions.
-          </p>
-
-          {/* Status line */}
-          <div 
-            className="flex flex-wrap gap-4 text-sm border-t pt-6"
-            style={{ borderColor: colors.border }}
-          >
-            <span>5 agents</span>
-            <span style={{ color: colors.muted }}>·</span>
-            <span>live</span>
-            {walletShort && (
-              <>
-                <span style={{ color: colors.muted }}>·</span>
-                <span>{walletShort}</span>
-              </>
-            )}
-            <span style={{ color: colors.muted }}>·</span>
-            <span>p/l ${(holdings?.stats?.totalPnL || 0).toFixed(2)}</span>
-          </div>
-        </div>
-      </section>
-
-      {/* THE COUNCIL */}
-      <section 
-        className="px-6 py-16 border-t"
-        style={{ borderColor: colors.border, backgroundColor: colors.surface }}
-      >
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-xs uppercase tracking-widest mb-8" style={{ color: colors.muted }}>
-            The Council
-          </h2>
-          
-          <div className="flex flex-wrap gap-8">
-            {AGENTS.map((agent) => (
-              <div key={agent.id} className="flex items-center gap-3">
-                <span className="text-2xl">{agent.emoji}</span>
-                <div>
-                  <div className="font-bold">{agent.name}</div>
-                  <div className="text-xs" style={{ color: colors.muted }}>{agent.role}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* TERMINAL */}
-      <section className="px-6 py-16 border-t" style={{ borderColor: colors.border }}>
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-xs uppercase tracking-widest mb-8" style={{ color: colors.muted }}>
-            Live Feed
-          </h2>
-          
-          <div 
-            ref={termRef}
-            className="border p-4 h-48 overflow-y-auto text-sm"
-            style={{ borderColor: colors.border, backgroundColor: colors.surface }}
-          >
-            {lines.map((line, i) => (
-              <div key={i} style={{ color: colors.muted }}>
-                {line}
-              </div>
-            ))}
-            <div className="mt-2">
-              <span style={{ color: colors.accent }}>→</span> <span className="animate-pulse">_</span>
+          <div className="text-right">
+            <div className="text-lg font-bold" style={{ color: '#FFAA00' }}>
+              {time}
+            </div>
+            <div className="text-xs mt-1" style={{ color: '#666' }}>
+              <span className="inline-block w-2 h-2 rounded-full mr-1 animate-pulse" style={{ backgroundColor: '#00FF00' }} />
+              {mode} MODE
             </div>
           </div>
         </div>
-      </section>
-
-      {/* TEAM CHAT */}
-      <section 
-        className="px-6 py-16 border-t"
-        style={{ borderColor: colors.border, backgroundColor: colors.surface }}
-      >
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-xs uppercase tracking-widest mb-8" style={{ color: colors.muted }}>
-            Discussion
-          </h2>
-          <TeamChat />
+        
+        {/* BOTTOM STATUS */}
+        <div className="absolute bottom-0 left-0 right-0 p-4">
+          <div className="flex justify-between items-end">
+            <div>
+              <div className="text-xs" style={{ color: '#666' }}>
+                TURB0B00ST LIVE · {tradeCount} trade{tradeCount !== 1 ? 's' : ''} executed
+              </div>
+              <div className="text-xs mt-1" style={{ color: '#444' }}>
+                Base · ETH · BNKR
+              </div>
+            </div>
+            
+            <div className="text-right">
+              <div className="text-xs" style={{ color: '#666' }}>
+                <Link href="/dashboard" className="pointer-events-auto hover:underline">
+                  dashboard
+                </Link>
+                {' · '}
+                <a href="https://b0b.dev" className="pointer-events-auto hover:underline">
+                  b0b.dev
+                </a>
+              </div>
+              <div className="text-xs mt-1" style={{ color: '#444' }}>
+                L0RE v0.2.0
+              </div>
+            </div>
+          </div>
         </div>
-      </section>
-
-      {/* FOOTER */}
-      <footer 
-        className="px-6 py-8 border-t text-sm"
-        style={{ borderColor: colors.border, color: colors.muted }}
-      >
-        <div className="max-w-4xl mx-auto flex justify-between">
-          <span>d0t.b0b.dev</span>
-          <span>2026</span>
-        </div>
-      </footer>
+        
+        {/* CENTER INFO (toggle on click) */}
+        {showInfo && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div 
+              className="p-6 max-w-md text-center"
+              style={{ 
+                backgroundColor: 'rgba(10,10,10,0.95)',
+                border: '1px solid #333',
+              }}
+            >
+              <div className="text-xl font-bold mb-4" style={{ color: '#FFAA00' }}>
+                D0T VISION SYSTEM
+              </div>
+              <div className="text-sm mb-4" style={{ color: '#888' }}>
+                Autonomous trading observation layer.
+                Watches markets. Executes decisions.
+                Never blinks.
+              </div>
+              <div className="text-xs space-y-1" style={{ color: '#666' }}>
+                <div>Mode: {mode}</div>
+                <div>Trades: {tradeCount}</div>
+                <div>Portfolio: ${totalValue.toFixed(2)}</div>
+              </div>
+              <div className="text-xs mt-4" style={{ color: '#444' }}>
+                click anywhere to dismiss
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </main>
   );
 }
