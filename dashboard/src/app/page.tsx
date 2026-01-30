@@ -92,12 +92,24 @@ export default function B0bDev() {
 
   if (!mounted) return null;
 
-  const sentiment = data?.d0t?.data?.sentiment;
-  const trades = asArray(data?.turb0b00st?.tradingHistory);
-  const liveTrader = data?.liveTrader;
-  const freshness = asArray(data?.freshness?.visual?.bars);
-  const papers = asArray(data?.r0ss?.data?.papers?.relevant).slice(0, 3);
-  const predictions = asArray(data?.d0t?.data?.predictions).slice(0, 3);
+  // Extra safety: parse data with fallbacks for every nested property
+  let sentiment: any = null;
+  let trades: any[] = [];
+  let liveTrader: any = null;
+  let freshness: any[] = [];
+  let papers: any[] = [];
+  let predictions: any[] = [];
+
+  try {
+    sentiment = data?.d0t?.data?.sentiment || null;
+    trades = asArray(data?.turb0b00st?.tradingHistory);
+    liveTrader = data?.liveTrader || null;
+    freshness = asArray(data?.freshness?.visual?.bars);
+    papers = asArray(data?.r0ss?.data?.papers?.relevant).slice(0, 3);
+    predictions = asArray(data?.d0t?.data?.predictions).slice(0, 3);
+  } catch (parseErr) {
+    console.error('Data parse error:', parseErr);
+  }
 
   try {
     return (
