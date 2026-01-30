@@ -38,6 +38,7 @@ export default function B0bDev() {
   const [time, setTime] = useState('');
   const [mounted, setMounted] = useState(false);
   const [tradeCount, setTradeCount] = useState(0);
+  const [liveData, setLiveData] = useState<any>(null);
   const preRef = useRef<HTMLPreElement>(null);
   
   // Mount
@@ -45,31 +46,22 @@ export default function B0bDev() {
     setMounted(true);
   }, []);
   
-  // Fetch real trade count from local API (falls back to brain)
+  // Fetch LIVE data from brain
   useEffect(() => {
-    const fetchTrades = async () => {
+    const fetchLive = async () => {
       try {
-        // Try local API first (reads from filesystem)
         const res = await fetch('/api/live');
         const data = await res.json();
+        setLiveData(data);
         if (data.turb0b00st?.trades) {
           setTradeCount(data.turb0b00st.trades);
-          return;
         }
       } catch {
-        // Fall back to brain API
-      }
-      
-      try {
-        const res = await fetch(`${BRAIN_URL}/finance/treasury`);
-        const data = await res.json();
-        setTradeCount(data.turb0b00st?.trades || data.performance?.totalTrades || 0);
-      } catch {
-        // Silent fail - show 0
+        // Silent
       }
     };
-    fetchTrades();
-    const interval = setInterval(fetchTrades, 30000); // Refresh every 30s
+    fetchLive();
+    const interval = setInterval(fetchLive, 10000); // Every 10s
     return () => clearInterval(interval);
   }, []);
   
@@ -348,6 +340,33 @@ export default function B0bDev() {
               <span>OpenRouter</span>
               <span style={{ color: '#444' }}>·</span>
               <span>Kimi</span>
+            </div>
+          </div>
+          
+          {/* LIVE DATA PANEL */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 text-center" style={{ fontFamily: 'monospace' }}>
+            <div>
+              <div className="text-xs" style={{ color: '#666' }}>TRADES</div>
+              <div className="text-2xl" style={{ color: '#4f4' }}>{tradeCount}</div>
+            </div>
+            <div>
+              <div className="text-xs" style={{ color: '#666' }}>FEAR/GREED</div>
+              <div className="text-2xl" style={{ color: liveData?.signals?.fearGreed?.index < 30 ? '#f44' : liveData?.signals?.fearGreed?.index > 70 ? '#4f4' : '#fa0' }}>
+                {liveData?.signals?.fearGreed?.index || '?'}
+              </div>
+            </div>
+            <div>
+              <div className="text-xs" style={{ color: '#666' }}>WALLET</div>
+              <div className="text-2xl" style={{ color: '#4ff' }}>
+                {liveData?.turb0b00st?.walletBalance?.toFixed(4) || '0.00'}
+              </div>
+              <div className="text-xs" style={{ color: '#444' }}>ETH</div>
+            </div>
+            <div>
+              <div className="text-xs" style={{ color: '#666' }}>FRESHNESS</div>
+              <div className="text-2xl" style={{ color: (liveData?.freshness?.metrics?.avgFreshness || 0) > 50 ? '#4f4' : '#f44' }}>
+                {liveData?.freshness?.metrics?.avgFreshness || 0}%
+              </div>
             </div>
           </div>
           

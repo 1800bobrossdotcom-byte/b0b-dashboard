@@ -42,11 +42,12 @@ async function fetchWalletBalance(): Promise<number> {
 
 export async function GET() {
   try {
-    // Fetch unified swarm data + wallet balance in parallel
-    const [swarmLive, health, walletBalance] = await Promise.all([
+    // Fetch unified swarm data + wallet balance + freshness in parallel
+    const [swarmLive, health, walletBalance, freshness] = await Promise.all([
       fetchBrainData('/swarm/live', null),
       fetchBrainData('/health', { status: 'unknown' }),
-      fetchWalletBalance()
+      fetchWalletBalance(),
+      fetchBrainData('/freshness', null)
     ]);
 
     const data: Record<string, any> = {
@@ -108,6 +109,25 @@ export async function GET() {
       
       // Data freshness - expose when data was last updated
       dataFreshness: swarmLive?.dataFreshness || {},
+      
+      // Freshness monitor - visual bars
+      freshness: freshness ? {
+        l0re: freshness.l0re,
+        metrics: freshness.metrics,
+        visual: freshness.visual,
+        alerts: freshness.alerts?.length || 0,
+        items: Object.fromEntries(
+          Object.entries(freshness.items || {}).map(([k, v]: [string, any]) => [
+            k, { fresh: v.fresh, freshness: v.freshness, status: v.status, age: v.age }
+          ])
+        )
+      } : null,
+      
+      // Live trader stats
+      liveTrader: swarmLive?.liveTrader || null,
+      
+      // Trading history for gallery
+      tradingHistory: swarmLive?.turb0b00st?.tradingHistory || [],
       
       // System health
       system: {
