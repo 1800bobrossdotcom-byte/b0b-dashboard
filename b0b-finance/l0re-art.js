@@ -1,0 +1,349 @@
+#!/usr/bin/env node
+/**
+ * 🎨 L0RE ART — Generative ASCII Art for IPFS
+ * ══════════════════════════════════════════════════════════════
+ * 
+ * Generate ASCII art pieces in the L0RE aesthetic.
+ * Upload to IPFS via Pinata for on-chain collection.
+ * 
+ * Inspired by:
+ * - Andreas Gysin (ertdfgcvb)
+ * - Brion Gysin (Dream Machine)
+ * - ASCII art tradition
+ * 
+ * Usage:
+ *   node l0re-art.js generate         - Generate new art piece
+ *   node l0re-art.js mint             - Generate and upload to IPFS
+ *   node l0re-art.js collection       - View collection
+ */
+
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
+
+const fs = require('fs');
+const axios = require('axios');
+
+// ═══════════════════════════════════════════════════════════════
+// DENSITY RAMPS (Gysin/ertdfgcvb play.core)
+// ═══════════════════════════════════════════════════════════════
+
+const RAMPS = {
+  standard: ' .:-=+*#%@',
+  blocks: ' ░▒▓█',
+  minimal: ' ·:;|',
+  dots: ' ⋅∘○◎●',
+  binary: ' █',
+  box: ' ┌─┐│ │└─┘',
+};
+
+// ═══════════════════════════════════════════════════════════════
+// L0RE PATTERNS
+// ═══════════════════════════════════════════════════════════════
+
+const PATTERNS = {
+  wave: (x, y, t, params) => {
+    const dx = x - params.cx;
+    const dy = y - params.cy;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    return Math.sin(dist * params.freq - t) * 0.5 + 0.5;
+  },
+  
+  interference: (x, y, t, params) => {
+    const wave1 = Math.sin(x * params.freq + t);
+    const wave2 = Math.sin(y * params.freq - t * 0.7);
+    const wave3 = Math.sin((x + y) * params.freq * 0.5 + t * 0.3);
+    return (wave1 + wave2 + wave3) / 3 * 0.5 + 0.5;
+  },
+  
+  tunnel: (x, y, t, params) => {
+    const dx = x - params.cx;
+    const dy = y - params.cy;
+    const angle = Math.atan2(dy, dx);
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    return (Math.sin(dist * 0.1 - t) + Math.sin(angle * 8 + t * 2)) * 0.25 + 0.5;
+  },
+  
+  plasma: (x, y, t, params) => {
+    const v1 = Math.sin(x * params.freq);
+    const v2 = Math.sin(y * params.freq);
+    const v3 = Math.sin((x + y) * params.freq * 0.5);
+    const v4 = Math.sin(Math.sqrt((x - params.cx) ** 2 + (y - params.cy) ** 2) * params.freq);
+    return (v1 + v2 + v3 + v4 + 4) / 8;
+  },
+  
+  matrix: (x, y, t, params) => {
+    const rain = (y + t * params.speed) % params.height;
+    const column = Math.sin(x * 0.5) > 0 ? 1 : 0;
+    return column * (rain < 3 ? 1 : rain < 6 ? 0.7 : rain < 10 ? 0.3 : 0);
+  },
+  
+  gysin: (x, y, t, params) => {
+    // Dream Machine style - rotating slits
+    const dx = x - params.cx;
+    const dy = y - params.cy;
+    const angle = Math.atan2(dy, dx) + t * 0.5;
+    const slits = Math.abs(Math.sin(angle * params.slitCount));
+    const dist = Math.sqrt(dx * dx + dy * dy) / params.radius;
+    return slits * Math.max(0, 1 - dist);
+  },
+};
+
+// ═══════════════════════════════════════════════════════════════
+// ART GENERATOR
+// ═══════════════════════════════════════════════════════════════
+
+function generateFrame(cols, rows, pattern, ramp, time, params = {}) {
+  const defaultParams = {
+    cx: cols / 2,
+    cy: rows / 2,
+    freq: 0.15,
+    speed: 20,
+    height: rows,
+    slitCount: 12,
+    radius: Math.min(cols, rows) / 2,
+    ...params,
+  };
+  
+  const patternFn = PATTERNS[pattern] || PATTERNS.interference;
+  const chars = RAMPS[ramp] || RAMPS.standard;
+  
+  let output = '';
+  
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      const value = patternFn(x, y, time, defaultParams);
+      const charIndex = Math.floor(value * (chars.length - 1));
+      output += chars[Math.max(0, Math.min(chars.length - 1, charIndex))];
+    }
+    output += '\n';
+  }
+  
+  return output;
+}
+
+function generateArt(options = {}) {
+  const {
+    cols = 80,
+    rows = 40,
+    pattern = 'interference',
+    ramp = 'standard',
+    frames = 1,
+    title = `L0RE #${Date.now()}`,
+  } = options;
+  
+  const pieces = [];
+  
+  for (let f = 0; f < frames; f++) {
+    const time = f * 0.3;
+    const frame = generateFrame(cols, rows, pattern, ramp, time);
+    pieces.push({
+      frame: f,
+      time,
+      art: frame,
+    });
+  }
+  
+  const metadata = {
+    title,
+    artist: 'b0b collective',
+    generator: 'L0RE v0.2.0',
+    pattern,
+    ramp,
+    dimensions: { cols, rows },
+    frames: frames,
+    timestamp: new Date().toISOString(),
+    signature: `// ${title} — generated by b0b.dev`,
+  };
+  
+  return {
+    metadata,
+    pieces,
+    preview: pieces[0]?.art || '',
+  };
+}
+
+// ═══════════════════════════════════════════════════════════════
+// IPFS UPLOAD
+// ═══════════════════════════════════════════════════════════════
+
+async function uploadToIPFS(art) {
+  const jwt = process.env.PINATA_JWT;
+  if (!jwt) {
+    console.log('❌ PINATA_JWT not configured');
+    return null;
+  }
+  
+  const content = {
+    ...art.metadata,
+    art: art.preview,
+    pieces: art.pieces,
+  };
+  
+  try {
+    const res = await axios.post('https://api.pinata.cloud/pinning/pinJSONToIPFS', {
+      pinataContent: content,
+      pinataMetadata: {
+        name: art.metadata.title,
+      },
+    }, {
+      headers: {
+        'Authorization': `Bearer ${jwt}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    
+    return {
+      hash: res.data.IpfsHash,
+      gateway: `https://gateway.pinata.cloud/ipfs/${res.data.IpfsHash}`,
+    };
+  } catch (error) {
+    console.log('❌ IPFS upload failed:', error.response?.data || error.message);
+    return null;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// COLLECTION TRACKING
+// ═══════════════════════════════════════════════════════════════
+
+const COLLECTION_FILE = path.join(__dirname, 'l0re-collection.json');
+
+function loadCollection() {
+  try {
+    if (fs.existsSync(COLLECTION_FILE)) {
+      return JSON.parse(fs.readFileSync(COLLECTION_FILE, 'utf-8'));
+    }
+  } catch {}
+  return { pieces: [], totalMinted: 0 };
+}
+
+function saveCollection(collection) {
+  fs.writeFileSync(COLLECTION_FILE, JSON.stringify(collection, null, 2));
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CLI
+// ═══════════════════════════════════════════════════════════════
+
+async function main() {
+  const args = process.argv.slice(2);
+  const command = args[0];
+  
+  console.log('');
+  console.log('═══════════════════════════════════════════════════════════════');
+  console.log('  🎨 L0RE ART — Generative ASCII for IPFS');
+  console.log('═══════════════════════════════════════════════════════════════');
+  console.log('');
+  
+  switch (command) {
+    case 'generate': {
+      const patterns = Object.keys(PATTERNS);
+      const ramps = Object.keys(RAMPS);
+      
+      const pattern = patterns[Math.floor(Math.random() * patterns.length)];
+      const ramp = ramps[Math.floor(Math.random() * ramps.length)];
+      
+      const art = generateArt({
+        pattern,
+        ramp,
+        frames: 1,
+      });
+      
+      console.log('  Pattern:', pattern);
+      console.log('  Ramp:', ramp);
+      console.log('');
+      console.log(art.preview);
+      console.log('');
+      console.log('  ', art.metadata.signature);
+      break;
+    }
+    
+    case 'mint': {
+      const patterns = Object.keys(PATTERNS);
+      const ramps = Object.keys(RAMPS);
+      
+      const pattern = args[1] || patterns[Math.floor(Math.random() * patterns.length)];
+      const ramp = args[2] || ramps[Math.floor(Math.random() * ramps.length)];
+      
+      const collection = loadCollection();
+      const pieceNumber = collection.totalMinted + 1;
+      
+      const art = generateArt({
+        pattern,
+        ramp,
+        frames: 5,
+        title: `L0RE #${pieceNumber}`,
+      });
+      
+      console.log('  Generating L0RE #' + pieceNumber + '...');
+      console.log('  Pattern:', pattern);
+      console.log('  Ramp:', ramp);
+      console.log('');
+      console.log(art.preview);
+      console.log('');
+      
+      console.log('  📤 Uploading to IPFS...');
+      const result = await uploadToIPFS(art);
+      
+      if (result) {
+        collection.pieces.push({
+          number: pieceNumber,
+          title: art.metadata.title,
+          pattern,
+          ramp,
+          ipfsHash: result.hash,
+          gateway: result.gateway,
+          mintedAt: new Date().toISOString(),
+        });
+        collection.totalMinted = pieceNumber;
+        saveCollection(collection);
+        
+        console.log('');
+        console.log('  ═══════════════════════════════════════════════════════════════');
+        console.log('  ✅ L0RE #' + pieceNumber + ' MINTED');
+        console.log('  ═══════════════════════════════════════════════════════════════');
+        console.log('');
+        console.log('  IPFS Hash:', result.hash);
+        console.log('  Gateway:', result.gateway);
+        console.log('');
+      }
+      break;
+    }
+    
+    case 'collection': {
+      const collection = loadCollection();
+      
+      console.log('  Total Minted:', collection.totalMinted);
+      console.log('');
+      
+      if (collection.pieces.length === 0) {
+        console.log('  No pieces minted yet. Run: node l0re-art.js mint');
+      } else {
+        collection.pieces.forEach(p => {
+          console.log(`  ${p.title}`);
+          console.log(`    Pattern: ${p.pattern} | Ramp: ${p.ramp}`);
+          console.log(`    IPFS: ${p.ipfsHash}`);
+          console.log(`    Gateway: ${p.gateway}`);
+          console.log('');
+        });
+      }
+      break;
+    }
+    
+    default:
+      console.log('  Commands:');
+      console.log('    generate     - Generate random art piece');
+      console.log('    mint         - Generate and upload to IPFS');
+      console.log('    collection   - View minted collection');
+      console.log('');
+      console.log('  Examples:');
+      console.log('    node l0re-art.js generate');
+      console.log('    node l0re-art.js mint plasma blocks');
+      console.log('    node l0re-art.js collection');
+  }
+  
+  console.log('═══════════════════════════════════════════════════════════════');
+}
+
+main();
