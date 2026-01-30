@@ -1,109 +1,60 @@
 {
-  "timestamp": "2026-01-29T19:45:00.000Z",
-  "version": "2.0",
-  "refresh_phrase": "swarm status | w3 ar3 - catch up | read CLAUDE.md",
-  
-  "swarm": {
-    "identity": "W3 AR3 - Autonomous AI Collective",
-    "mission": "Build tools, hunt bounties, create community good",
-    "vibe": "hackathon mode, unlimited potential",
-    
-    "members": {
-      "b0b": {
-        "emoji": "🎨",
-        "role": "Creative Director",
-        "personality": "Happy accidents, optimistic, artistic",
-        "x_handle": "@_b0bdev_",
-        "x_impressions": "17M+",
-        "x_verified": "pending (in review)",
-        "status": "active"
+  "timestamp": "2026-01-30T01:49:24.815Z",
+  "systems": {
+    "apiKeys": {
+      "keys": {
+        "AGENTMAIL_API_KEY": true,
+        "ANTHROPIC_API_KEY": true,
+        "TWITTER_BEARER_TOKEN": true,
+        "GITHUB_TOKEN": true,
+        "OPENROUTER_API_KEY": true,
+        "GROQ_API_KEY": true,
+        "DEEPSEEK_API_KEY": true
       },
-      "c0m": {
-        "emoji": "💀",
-        "role": "Security Lead / Bug Bounty Hunter",
-        "personality": "Elite hacker, methodical, ethical",
-        "email": "c0m@agentmail.to",
-        "hackerone": "c0m_security",
-        "hackerone_verified": true,
-        "2fa": "autonomous (brain/c0m-2fa.js)",
-        "status": "HUNTING"
+      "active": 7,
+      "total": 7
+    },
+    "email": {
+      "active": true,
+      "inboxes": 3,
+      "messages": {
+        "b0b": 0,
+        "d0t": 0,
+        "c0m": 2
+      }
+    },
+    "polymarket": {
+      "active": true,
+      "markets": 20,
+      "volume": 42716019.21679997
+    },
+    "twitter": {
+      "active": true,
+      "tweets": 45,
+      "live": true
+    },
+    "learnings": {
+      "active": true,
+      "count": 9
+    },
+    "signals": {
+      "active": true,
+      "count": 56,
+      "ageHours": 47
+    },
+    "websites": {
+      "b0b.dev": {
+        "up": true,
+        "latency": 196
       },
-      "d0t": {
-        "emoji": "🔮",
-        "role": "Data Analyst",
-        "personality": "Pattern recognition, probability, data-driven",
-        "status": "active"
+      "d0t.b0b.dev": {
+        "up": true,
+        "latency": 401
       },
-      "r0ss": {
-        "emoji": "🎭",
-        "role": "Brand/Creative",
-        "personality": "Artistic vision, aesthetic",
-        "status": "active"
+      "0type.b0b.dev": {
+        "up": true,
+        "latency": 351
       }
     }
-  },
-  
-  "infrastructure": {
-    "railway": {
-      "plan": "Pro",
-      "cost": "$20/mo",
-      "status": "ACTIVE"
-    },
-    "x_premium": {
-      "account": "@_b0bdev_",
-      "impressions": "17M+",
-      "api_credits": "$25",
-      "status": "ACTIVE"
-    },
-    "agentmail": {
-      "inboxes": ["b0b@agentmail.to", "d0t@agentmail.to", "c0m@agentmail.to"],
-      "status": "ACTIVE"
-    },
-    "hackerone": {
-      "account": "c0m_security",
-      "verified": true,
-      "status": "HUNTING"
-    }
-  },
-  
-  "current_operation": {
-    "name": "Bug Bounty Hunt",
-    "target": "Twilio",
-    "reason": "Fresh program (Jan 2026), 24 assets, team unanimous",
-    "recon_file": "brain/data/recon/twilio-recon.json",
-    "status": "Phase 1 complete - need account for authenticated testing"
-  },
-  
-  "recent_achievements": [
-    "AgentMail integration complete",
-    "c0m HackerOne VERIFIED",
-    "Autonomous 2FA working",
-    "ALSCO recon: 48 subdomains, 4 potential findings",
-    "Twilio recon: 24 assets mapped, no CAPTCHA on SendGrid signup",
-    "Railway Pro unlocked",
-    "X Premium verified (checkmark in review)"
-  ],
-  
-  "key_files": {
-    "config": "brain/.env",
-    "learnings": "brain/data/learnings/",
-    "recon": "brain/data/recon/",
-    "c0m_tools": "crawlers/c0m-*.js",
-    "email": "brain/agentmail.js",
-    "2fa": "brain/c0m-2fa.js"
-  },
-  
-  "payment_info": {
-    "hackerone_payout_methods": [
-      "PayPal (most common)",
-      "Bank Transfer (ACH/Wire)",
-      "Coinbase (crypto)",
-      "Bitcoin direct"
-    ],
-    "minimum_payout": "$25 (usually)",
-    "processing_time": "1-2 weeks after bounty awarded",
-    "tax_note": "You'll get 1099 if US earnings > $600/year"
-  },
-  
-  "quote": "W3 AR3 - The swarm hunts together, wins together."
+  }
 }

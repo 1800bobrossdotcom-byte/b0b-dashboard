@@ -1,0 +1,44 @@
+{
+  "timestamp": "2026-01-30T02:16:36.718Z",
+  "source": "polymarket",
+  "markets": [
+    {
+      "question": "Will Bitcoin reach $100k?",
+      "probability": 0.73,
+      "volume": 1500000
+    },
+    {
+      "question": "US Election 2026",
+      "probability": 0.51,
+      "volume": 8900000
+    }
+  ],
+  "summary": {
+    "total_markets": 2,
+    "total_volume": 10400000,
+    "trending": "Bitcoin prediction markets heating up"
+  },
+  "_l0re": {
+    "id": "abac5f00990aae2e",
+    "version": 1,
+    "source": "polymarket-crawler",
+    "category": "markets",
+    "crawled_at": "2026-01-30T02:16:36.720Z",
+    "confidence": 0.92,
+    "freshness": "live",
+    "tags": [
+      "demo",
+      "prediction-markets",
+      "crypto",
+      "market-data"
+    ],
+    "relevance": {
+      "d0t": 0.8,
+      "b0b": 0,
+      "c0m": 0,
+      "r0ss": 0
+    },
+    "expires": "2026-01-30T03:16:36.720Z",
+    "checksum": "138905943d44be565da66a1337d3a4d3"
+  }
+}

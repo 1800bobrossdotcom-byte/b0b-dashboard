@@ -63,8 +63,6 @@ function LandingContent() {
 
   const currentBot = CREATIVE_TEAM[activeBot];
 
-  const currentBot = CREATIVE_TEAM[activeBot];
-
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
       {/* Animated grid background */}

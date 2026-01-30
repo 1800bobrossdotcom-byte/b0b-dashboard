@@ -1,0 +1,51 @@
+{
+  "program": "twilio",
+  "focus": "api",
+  "timestamp": "2026-01-30T02:23:39.870Z",
+  "status": "hunting",
+  "checklist": [
+    {
+      "id": 1,
+      "check": "API rate limiting",
+      "status": "pending",
+      "notes": ""
+    },
+    {
+      "id": 2,
+      "check": "Mass assignment",
+      "status": "pending",
+      "notes": ""
+    },
+    {
+      "id": 3,
+      "check": "BOLA/IDOR",
+      "status": "pending",
+      "notes": ""
+    },
+    {
+      "id": 4,
+      "check": "Excessive data exposure",
+      "status": "pending",
+      "notes": ""
+    },
+    {
+      "id": 5,
+      "check": "Injection in API params",
+      "status": "pending",
+      "notes": ""
+    },
+    {
+      "id": 6,
+      "check": "GraphQL introspection",
+      "status": "pending",
+      "notes": ""
+    },
+    {
+      "id": 7,
+      "check": "API versioning issues",
+      "status": "pending",
+      "notes": ""
+    }
+  ],
+  "findings": []
+}

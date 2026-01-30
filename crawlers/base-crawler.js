@@ -38,6 +38,17 @@ class BaseCrawler {
     console.log(`🕷️ [${this.name}] Crawler initialized`);
   }
 
+  // Logging helper
+  log(message, level = 'info') {
+    const emoji = level === 'warn' ? '⚠️' : level === 'error' ? '❌' : '📡';
+    console.log(`${emoji} [${this.name}] ${message}`);
+  }
+
+  // Rate limiting helper
+  async rateLimit(ms = 1000) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
   // Override in subclass
   async fetch() {
     throw new Error('fetch() must be implemented by subclass');

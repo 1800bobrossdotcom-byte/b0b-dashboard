@@ -77,9 +77,12 @@ class TwitterCrawler extends BaseCrawler {
    * Search recent tweets
    */
   async searchTweets(query, maxResults = 10) {
+    // Twitter API requires min 10, max 100
+    const apiMaxResults = Math.max(10, Math.min(100, maxResults));
+    
     const data = await this.makeRequest('/tweets/search/recent', {
       query: query,
-      max_results: maxResults,
+      max_results: apiMaxResults,
       'tweet.fields': 'created_at,public_metrics,author_id',
       'expansions': 'author_id',
       'user.fields': 'username,name,verified',
@@ -240,7 +243,7 @@ if (require.main === module) {
     }
     
     // Save to brain
-    crawler.save(data);
+    crawler.saveData(data);
     console.log('\nSaved to brain/data/twitter.json');
   }).catch(console.error);
 }

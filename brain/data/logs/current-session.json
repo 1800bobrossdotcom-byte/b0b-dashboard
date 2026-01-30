@@ -1,0 +1,133 @@
+{
+  "id": "session-1769741624647",
+  "started": "2026-01-30T02:53:44.647Z",
+  "commands": [
+    {
+      "id": "cmd-1769741625301-q21thl",
+      "timestamp": "2026-01-30T02:53:45.301Z",
+      "command": "c0m.library.list",
+      "agent": "c0m.library",
+      "args": [],
+      "status": "success",
+      "duration": 651,
+      "output": null,
+      "error": null,
+      "context": {
+        "caller": "l0re-cli",
+        "ritual": null,
+        "chain": null
+      }
+    },
+    {
+      "id": "cmd-1769741632852-4kk43k",
+      "timestamp": "2026-01-30T02:53:52.852Z",
+      "command": "c0m.library.query",
+      "agent": "c0m.library",
+      "args": [
+        "consciousness"
+      ],
+      "status": "success",
+      "duration": 647,
+      "output": null,
+      "error": null,
+      "context": {
+        "caller": "l0re-cli",
+        "ritual": null,
+        "chain": null
+      }
+    },
+    {
+      "id": "cmd-1769741653187-twz4u3",
+      "timestamp": "2026-01-30T02:54:13.187Z",
+      "command": "c0m.library.query",
+      "agent": "c0m.library",
+      "args": [
+        "computable"
+      ],
+      "status": "success",
+      "duration": 649,
+      "output": null,
+      "error": null,
+      "context": {
+        "caller": "l0re-cli",
+        "ritual": null,
+        "chain": null
+      }
+    },
+    {
+      "id": "cmd-1769741660431-at726t",
+      "timestamp": "2026-01-30T02:54:20.431Z",
+      "command": "c0m.library.query",
+      "agent": "c0m.library",
+      "args": [
+        "structure"
+      ],
+      "status": "success",
+      "duration": 650,
+      "output": null,
+      "error": null,
+      "context": {
+        "caller": "l0re-cli",
+        "ritual": null,
+        "chain": null
+      }
+    },
+    {
+      "id": "cmd-1769741984774-s7e11l",
+      "timestamp": "2026-01-30T02:59:44.774Z",
+      "command": "c0m.library.list",
+      "agent": "c0m.library",
+      "args": [],
+      "status": "success",
+      "duration": 660,
+      "output": null,
+      "error": null,
+      "context": {
+        "caller": "l0re-cli",
+        "ritual": null,
+        "chain": null
+      }
+    },
+    {
+      "id": "cmd-1769742025389-k54txq",
+      "timestamp": "2026-01-30T03:00:25.389Z",
+      "command": "c0m.crawl.arxiv",
+      "agent": "c0m.crawl",
+      "args": [
+        "2208.11372"
+      ],
+      "status": "success",
+      "duration": 30955,
+      "output": null,
+      "error": null,
+      "context": {
+        "caller": "l0re-cli",
+        "ritual": null,
+        "chain": null
+      }
+    }
+  ],
+  "agents": {
+    "b0b": {
+      "commands": 0,
+      "lastActive": null
+    },
+    "c0m": {
+      "commands": 0,
+      "lastActive": null
+    },
+    "d0t": {
+      "commands": 0,
+      "lastActive": null
+    },
+    "r0ss": {
+      "commands": 0,
+      "lastActive": null
+    }
+  },
+  "stats": {
+    "total": 6,
+    "successful": 6,
+    "failed": 0
+  }
+}

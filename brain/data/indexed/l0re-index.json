@@ -1,0 +1,76 @@
+{
+  "version": "0.1.0",
+  "created": "2026-01-30T02:16:36.716Z",
+  "entries": {
+    "abac5f00990aae2e": {
+      "id": "abac5f00990aae2e",
+      "source": "polymarket-crawler",
+      "category": "markets",
+      "tags": [
+        "demo",
+        "prediction-markets",
+        "crypto",
+        "market-data"
+      ],
+      "relevance": {
+        "d0t": 0.8,
+        "b0b": 0,
+        "c0m": 0,
+        "r0ss": 0
+      },
+      "timestamp": "2026-01-30T02:16:36.720Z",
+      "checksum": "138905943d44be565da66a1337d3a4d3"
+    },
+    "7bc3e0b40977c016": {
+      "id": "7bc3e0b40977c016",
+      "source": "polymarket",
+      "category": "general",
+      "tags": [
+        "prediction-markets",
+        "market-data"
+      ],
+      "relevance": {
+        "d0t": 0.9,
+        "b0b": 0,
+        "c0m": 0,
+        "r0ss": 0
+      },
+      "timestamp": "2026-01-30T02:17:44.888Z",
+      "checksum": "5a917f3c5512833fa3ca12d7ccc4e7da"
+    }
+  },
+  "tags": {
+    "demo": [
+      "abac5f00990aae2e"
+    ],
+    "prediction-markets": [
+      "abac5f00990aae2e",
+      "7bc3e0b40977c016"
+    ],
+    "crypto": [
+      "abac5f00990aae2e"
+    ],
+    "market-data": [
+      "abac5f00990aae2e",
+      "7bc3e0b40977c016"
+    ]
+  },
+  "sources": {
+    "polymarket-crawler": [
+      "abac5f00990aae2e"
+    ],
+    "polymarket": [
+      "7bc3e0b40977c016"
+    ]
+  },
+  "timeline": [
+    {
+      "id": "7bc3e0b40977c016",
+      "timestamp": "2026-01-30T02:17:44.888Z"
+    },
+    {
+      "id": "abac5f00990aae2e",
+      "timestamp": "2026-01-30T02:16:36.720Z"
+    }
+  ]
+}
