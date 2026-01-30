@@ -47,10 +47,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="antialiased bg-[var(--color-background)] text-[#f8fafc]">
-        <ClientProviders>
-          {children}
-        </ClientProviders>
+      <body className="antialiased bg-black text-white">
+        {children}
       </body>
     </html>
   );
