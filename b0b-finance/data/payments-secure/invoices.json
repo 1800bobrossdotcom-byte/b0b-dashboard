@@ -1,0 +1,22 @@
+{
+  "invoices": [
+    {
+      "id": "inv_ml0e197r_394725dc0ae67dd1",
+      "productId": "0type_pro",
+      "product": "0TYPE Pro",
+      "priceUSD": 12,
+      "amountInToken": 12,
+      "paymentToken": "USDC",
+      "tokenAddress": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "receivingWallet": "0xCA4Ca0c7b26e51805c20C95DF02Ea86feA938D78",
+      "customerEmail": "security@b0b.dev",
+      "status": "pending",
+      "createdAt": "2026-01-30T04:33:32.391Z",
+      "expiresAt": "2026-01-31T04:33:32.391Z",
+      "txHash": null,
+      "paidAt": null,
+      "verifiedAt": null,
+      "confirmations": 0
+    }
+  ]
+}

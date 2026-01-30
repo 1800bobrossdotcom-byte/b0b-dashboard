@@ -208,6 +208,46 @@
         "status": "live"
       }
     },
+    "payments": {
+      "payments-status": {
+        "command": "node b0b-finance/b0b-payments-secure.js status",
+        "description": "Payment system health and stats",
+        "actors": ["r0ss", "b0b"],
+        "output": "console",
+        "tags": ["payments", "revenue", "monitoring"],
+        "status": "live",
+        "security": "env-required"
+      },
+      "payments-invoice": {
+        "command": "node b0b-finance/b0b-payments-secure.js create-invoice",
+        "description": "Generate secure payment invoice",
+        "syntax": "payments-invoice <product> [email] [token]",
+        "actors": ["b0b"],
+        "output": "invoice object",
+        "tags": ["payments", "invoice", "revenue"],
+        "status": "live",
+        "security": "rate-limited"
+      },
+      "payments-verify": {
+        "command": "node b0b-finance/b0b-payments-secure.js verify",
+        "description": "Verify on-chain payment with confirmation depth",
+        "syntax": "payments-verify <txHash> [invoiceId]",
+        "actors": ["d0t", "b0b"],
+        "output": "verification result",
+        "tags": ["payments", "verification", "blockchain"],
+        "status": "live",
+        "security": "replay-protected"
+      },
+      "payments-check": {
+        "command": "node b0b-finance/b0b-payments-secure.js check",
+        "description": "Check wallet subscription status",
+        "syntax": "payments-check <walletAddress>",
+        "actors": ["b0b", "r0ss"],
+        "output": "subscription status",
+        "tags": ["payments", "subscription", "access"],
+        "status": "live"
+      }
+    },
     "brain": {
       "brain-pulse": {
         "command": "node brain/brain-pulse.js",
