@@ -398,15 +398,46 @@ app.get('/crawlers', (req, res) => {
   // This endpoint provides info about what's available locally
   res.json({
     note: 'Crawlers run locally in workspace, not on Railway',
-    available: [
-      { name: 'c0m-recon', type: 'security', description: 'Subdomain enum, tech fingerprint, security headers' },
-      { name: 'c0m-security-crawler', type: 'security', description: 'Full security analysis' },
-      { name: 'c0m-twilio-hunt', type: 'security', description: 'Twilio bug bounty recon' },
-      { name: 'c0m-xss-trainer', type: 'security', description: 'XSS practice automation' },
-      { name: 'polymarket-crawler', type: 'data', description: 'Prediction market data' },
-      { name: 'content-crawler', type: 'data', description: 'General content extraction' }
+    swarm: {
+      c0m: {
+        role: 'Security Lead',
+        l0re: 'a.n4mk',
+        crawlers: [
+          { name: 'c0m-recon', description: 'Subdomain enum, tech fingerprint, security headers' },
+          { name: 'c0m-security-crawler', description: 'Full security analysis' },
+          { name: 'c0m-twilio-hunt', description: 'Twilio bug bounty recon' },
+          { name: 'c0m-xss-trainer', description: 'XSS practice automation' }
+        ]
+      },
+      d0t: {
+        role: 'Data Oracle',
+        l0re: 'a.z7ls',
+        crawlers: [
+          { name: 'd0t-signals', description: 'Market sentiment, Polymarket, on-chain metrics' }
+        ]
+      },
+      b0b: {
+        role: 'Creative Director',
+        l0re: 'a.v0rx',
+        crawlers: [
+          { name: 'b0b-creative', description: 'HN trends, design inspiration, color palettes' }
+        ]
+      },
+      r0ss: {
+        role: 'Research & Knowledge',
+        l0re: 'a.k3nt',
+        crawlers: [
+          { name: 'r0ss-research', description: 'arXiv papers, academic research, knowledge graph' }
+        ]
+      }
+    },
+    shared: [
+      { name: 'polymarket-crawler', description: 'Prediction market data' },
+      { name: 'content-crawler', description: 'General content extraction' },
+      { name: 'twitter-crawler', description: 'Social signals' }
     ],
-    runCommand: 'cd crawlers && node <crawler-name>.js <target>'
+    runCommand: 'cd crawlers && node <crawler-name>.js once',
+    quote: 'The swarm sees all. Each agent has their domain.'
   });
 });
 
