@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-30T17:15:00.000Z",
+  "description": "c0m agent bounty list - opportunities, integrations, security research",
+  "bounties": [
+    {
+      "id": "bounty-001",
+      "title": "X Payments to Cold Wallet Integration",
+      "description": "Perfect way to interact on X - route our payments to cold wallet",
+      "source": "https://x.com/0xDeployer/status/2017336710208840092?s=20",
+      "category": "INTEGRATION",
+      "priority": "P1",
+      "status": "not-started",
+      "addedBy": "user",
+      "addedAt": "2026-01-30T17:15:00.000Z",
+      "tags": ["x-api", "payments", "cold-wallet", "security"],
+      "notes": "Could be great for receiving tips/payments directly to cold storage"
+    }
+  ],
+  "categories": {
+    "INTEGRATION": "External service integrations",
+    "SECURITY": "Security research and bug bounties",
+    "TOOLING": "Developer tools and utilities",
+    "MONETIZATION": "Revenue opportunities"
+  }
+}

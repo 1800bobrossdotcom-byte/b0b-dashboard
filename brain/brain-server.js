@@ -145,7 +145,9 @@ app.use(cors({
     // Allow all b0b.dev subdomains, Railway apps, and localhost
     const allowed = [
       /^https:\/\/.*\.?b0b\.dev$/,
-      /^https:\/\/.*\.up\.railway\.app$/,
+      /^https:\/\/[a-z0-9\-]+\.up\.railway\.app$/,
+      /^https:\/\/b0bdev-production\.up\.railway\.app$/,
+      /^https:\/\/b0b-brain-production\.up\.railway\.app$/,
       /^http:\/\/localhost:\d+$/,
     ];
     

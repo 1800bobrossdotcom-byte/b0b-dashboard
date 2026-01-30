@@ -119,6 +119,25 @@ const BASE_LEXICON = {
   'twitter': { code: 'e.x1fn', meaning: 'bird_feed', category: 'external' },
   'github': { code: 'e.f1hm', meaning: 'code_store', category: 'external' },
   'basescan': { code: 'e.v0rx', meaning: 'chain_view', category: 'external' },
+  'railway': { code: 'e.r4lw', meaning: 'deploy_host', category: 'external' },
+  'dexscreener': { code: 'e.dx5c', meaning: 'dex_oracle', category: 'external' },
+  
+  // === MAINTENANCE & DATAOPS (L0RE Automation) ===
+  'maintenance': { code: 'i.m4nt', meaning: 'health_keep', category: 'infra' },
+  'dataops': { code: 'd.op5d', meaning: 'data_flow_mgmt', category: 'data' },
+  'automation': { code: 'p.au7o', meaning: 'self_drive', category: 'protocol' },
+  'autofix': { code: 'i.fx3a', meaning: 'self_heal', category: 'infra' },
+  'sweep': { code: 'd.sw3p', meaning: 'clean_cycle', category: 'data' },
+  'freshness': { code: 'd.fr3h', meaning: 'data_age', category: 'data' },
+  'cors': { code: 'i.cr0s', meaning: 'origin_gate', category: 'infra' },
+  'healthcheck': { code: 'i.hc4k', meaning: 'pulse_verify', category: 'infra' },
+  'cron': { code: 'p.cr0n', meaning: 'time_trigger', category: 'protocol' },
+  'daemon': { code: 'p.dm0n', meaning: 'bg_worker', category: 'protocol' },
+  'bounty': { code: 'f.bn7y', meaning: 'reward_target', category: 'finance' },
+  'audit_log': { code: 'd.au1g', meaning: 'trace_record', category: 'data' },
+  'rate_limit': { code: 'i.rt1m', meaning: 'flow_throttle', category: 'infra' },
+  'cache': { code: 'd.ch3c', meaning: 'fast_store', category: 'data' },
+  'stale': { code: 'd.st4l', meaning: 'old_data', category: 'data' },
 };
 
 // ══════════════════════════════════════════════════════════════

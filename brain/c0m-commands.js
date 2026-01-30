@@ -439,6 +439,94 @@ class C0mCommands {
     
     return { assets: ourAssets, checks };
   }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // c0m.bounty - Bounty List Management
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  async bounty(action = 'list', ...params) {
+    const bountyFile = path.join(__dirname, 'data/c0m-bounties.json');
+    
+    // Ensure file exists
+    if (!fs.existsSync(bountyFile)) {
+      fs.writeFileSync(bountyFile, JSON.stringify({
+        version: '1.0.0',
+        lastUpdated: new Date().toISOString(),
+        bounties: [],
+        categories: {
+          INTEGRATION: 'External service integrations',
+          SECURITY: 'Security research and bug bounties',
+          TOOLING: 'Developer tools and utilities',
+          MONETIZATION: 'Revenue opportunities'
+        }
+      }, null, 2));
+    }
+    
+    const data = JSON.parse(fs.readFileSync(bountyFile, 'utf-8'));
+    
+    console.log('');
+    console.log('═══════════════════════════════════════════════════════════');
+    console.log(`💀 c0m.bounty ${action}`);
+    console.log('═══════════════════════════════════════════════════════════');
+    console.log('');
+    
+    switch (action) {
+      case 'list':
+        console.log(`📋 BOUNTY LIST (${data.bounties.length} items)`);
+        console.log('');
+        data.bounties.forEach((b, i) => {
+          const status = b.status === 'completed' ? '✅' : b.status === 'in-progress' ? '⏳' : '⬜';
+          console.log(`  ${status} [${b.priority}] ${b.title}`);
+          console.log(`     ${b.category} | ${b.source || 'no source'}`);
+          if (b.notes) console.log(`     📝 ${b.notes}`);
+          console.log('');
+        });
+        break;
+        
+      case 'add':
+        const [title, source, category = 'INTEGRATION', priority = 'P2'] = params;
+        if (!title) {
+          console.log('❌ Usage: bounty add "title" "source_url" [category] [priority]');
+          return;
+        }
+        const newBounty = {
+          id: `bounty-${String(data.bounties.length + 1).padStart(3, '0')}`,
+          title,
+          source: source || null,
+          category: category.toUpperCase(),
+          priority,
+          status: 'not-started',
+          addedBy: 'c0m',
+          addedAt: new Date().toISOString(),
+          tags: [],
+          notes: null
+        };
+        data.bounties.push(newBounty);
+        data.lastUpdated = new Date().toISOString();
+        fs.writeFileSync(bountyFile, JSON.stringify(data, null, 2));
+        console.log(`✅ Added bounty: ${title}`);
+        break;
+        
+      case 'complete':
+        const [bountyId] = params;
+        const idx = data.bounties.findIndex(b => b.id === bountyId || b.title.toLowerCase().includes((bountyId || '').toLowerCase()));
+        if (idx >= 0) {
+          data.bounties[idx].status = 'completed';
+          data.bounties[idx].completedAt = new Date().toISOString();
+          data.lastUpdated = new Date().toISOString();
+          fs.writeFileSync(bountyFile, JSON.stringify(data, null, 2));
+          console.log(`✅ Completed: ${data.bounties[idx].title}`);
+        } else {
+          console.log('❌ Bounty not found');
+        }
+        break;
+        
+      default:
+        console.log('Usage: bounty [list|add|complete] [params]');
+    }
+    
+    return data;
+  }
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -461,6 +549,7 @@ async function main() {
 ║  node c0m-commands.js hunt <program> [focus]   - Bug hunting session      ║
 ║  node c0m-commands.js report "<title>" [sev]   - Create finding report    ║
 ║  node c0m-commands.js watch [scope]            - Monitor our assets       ║
+║  node c0m-commands.js bounty [list|add]        - Manage bounty list       ║
 ║                                                                           ║
 ╠═══════════════════════════════════════════════════════════════════════════╣
 ║  DEPTH OPTIONS (for recon):                                               ║
@@ -507,6 +596,10 @@ async function main() {
       
     case 'watch':
       await c0m.watch(args[1] || 'our_assets');
+      break;
+      
+    case 'bounty':
+      await c0m.bounty(args[1] || 'list', ...args.slice(2));
       break;
       
     default:
