@@ -1,0 +1,371 @@
+{
+  "crawler": "r0ss-research",
+  "timestamp": "2026-01-30T08:46:14.830Z",
+  "data": {
+    "timestamp": "2026-01-30T08:46:14.419Z",
+    "agent": "r0ss",
+    "role": "Research & Knowledge",
+    "papers": {
+      "total": 20,
+      "relevant": [
+        {
+          "id": "2601.22156v1",
+          "title": "Hybrid Linear Attention Done Right: Efficient Distillation and Effective Architectures for Extremely Long Contexts",
+          "summary": "Hybrid Transformer architectures, which combine softmax attention blocks and recurrent neural networks (RNNs), have shown a desirable performance-throughput tradeoff for long-context modeling, but their adoption and studies are hindered by the prohibitive cost of large-scale pre-training from scratch. Some recent studies have shown that pre-trained softmax attention blocks can be converted into RNN blocks through parameter transfer and knowledge distillation. However, these transfer methods requ",
+          "authors": [
+            "Yingfa Chen",
+            "Zhen Leng Thai",
+            "Zihan Zhou",
+            "Zhu Zhang",
+            "Xingyu Shen"
+          ],
+          "categories": [
+            "cs.CL",
+            "cs.AI",
+            "cs.LG"
+          ],
+          "url": "https://arxiv.org/abs/2601.22156v1",
+          "relevance": {
+            "score": 6,
+            "matched": {
+              "keywords": [
+                "transformer",
+                "attention"
+              ],
+              "authors": []
+            }
+          }
+        },
+        {
+          "id": "2601.22129v1",
+          "title": "SWE-Replay: Efficient Test-Time Scaling for Software Engineering Agents",
+          "summary": "Test-time scaling has been widely adopted to enhance the capabilities of Large Language Model (LLM) agents in software engineering (SWE) tasks. However, the standard approach of repeatedly sampling trajectories from scratch is computationally expensive. While recent methods have attempted to mitigate costs using specialized value agents, they can suffer from model miscalibration and fail to generalize to modern agents that synthesize custom bash scripts as tools. In this paper, we introduce SWE-",
+          "authors": [
+            "Yifeng Ding",
+            "Lingming Zhang"
+          ],
+          "categories": [
+            "cs.SE",
+            "cs.AI",
+            "cs.LG"
+          ],
+          "url": "https://arxiv.org/abs/2601.22129v1",
+          "relevance": {
+            "score": 4,
+            "matched": {
+              "keywords": [
+                "scaling"
+              ],
+              "authors": []
+            }
+          }
+        },
+        {
+          "id": "2601.22154v1",
+          "title": "Exploring Reasoning Reward Model for Agents",
+          "summary": "Agentic Reinforcement Learning (Agentic RL) has achieved notable success in enabling agents to perform complex reasoning and tool use. However, most methods still relies on sparse outcome-based reward for training. Such feedback fails to differentiate intermediate reasoning quality, leading to suboptimal training results. In this paper, we introduce Agent Reasoning Reward Model (Agent-RRM), a multi-faceted reward model that produces structured feedback for agentic trajectories, including (1) an ",
+          "authors": [
+            "Kaixuan Fan",
+            "Kaituo Feng",
+            "Manyuan Zhang",
+            "Tianshuo Peng",
+            "Zhixun Li"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.CL"
+          ],
+          "url": "https://arxiv.org/abs/2601.22154v1",
+          "relevance": {
+            "score": 3,
+            "matched": {
+              "keywords": [
+                "reasoning"
+              ],
+              "authors": []
+            }
+          }
+        },
+        {
+          "id": "2601.22146v1",
+          "title": "FineInstructions: Scaling Synthetic Instructions to Pre-Training Scale",
+          "summary": "Due to limited supervised training data, large language models (LLMs) are typically pre-trained via a self-supervised \"predict the next word\" objective on a vast amount of unstructured text data. To make the resulting model useful to users, it is further trained on a far smaller amount of \"instruction-tuning\" data comprised of supervised training examples of instructions and responses. To overcome the limited amount of supervised data, we propose a procedure that can transform the knowledge in i",
+          "authors": [
+            "Ajay Patel",
+            "Colin Raffel",
+            "Chris Callison-Burch"
+          ],
+          "categories": [
+            "cs.CL",
+            "cs.LG"
+          ],
+          "url": "https://arxiv.org/abs/2601.22146v1",
+          "relevance": {
+            "score": 3,
+            "matched": {
+              "keywords": [
+                "scaling"
+              ],
+              "authors": []
+            }
+          }
+        },
+        {
+          "id": "2601.22139v1",
+          "title": "Reasoning While Asking: Transforming Reasoning Large Language Models from Passive Solvers to Proactive Inquirers",
+          "summary": "Reasoning-oriented Large Language Models (LLMs) have achieved remarkable progress with Chain-of-Thought (CoT) prompting, yet they remain fundamentally limited by a \\emph{blind self-thinking} paradigm: performing extensive internal reasoning even when critical information is missing or ambiguous. We propose Proactive Interactive Reasoning (PIR), a new reasoning paradigm that transforms LLMs from passive solvers into proactive inquirers that interleave reasoning with clarification. Unlike existing",
+          "authors": [
+            "Xin Chen",
+            "Feng Jiang",
+            "Yiqian Zhang",
+            "Hardy Chen",
+            "Shuo Yan"
+          ],
+          "categories": [
+            "cs.CL",
+            "cs.AI"
+          ],
+          "url": "https://arxiv.org/abs/2601.22139v1",
+          "relevance": {
+            "score": 3,
+            "matched": {
+              "keywords": [
+                "reasoning"
+              ],
+              "authors": []
+            }
+          }
+        },
+        {
+          "id": "2601.22132v1",
+          "title": "Pay for Hints, Not Answers: LLM Shepherding for Cost-Efficient Inference",
+          "summary": "Large Language Models (LLMs) deliver state-of-the-art performance on complex reasoning tasks, but their inference costs limit deployment at scale. Small Language Models (SLMs) offer dramatic cost savings yet lag substantially in accuracy. Existing approaches - routing and cascading - treat the LLM as an all-or-nothing resource: either the query bypasses the LLM entirely, or the LLM generates a complete response at full cost. We introduce LLM Shepherding, a framework that requests only a short pr",
+          "authors": [
+            "Ziming Dong",
+            "Hardik Sharma",
+            "Evan O'Toole",
+            "Jaya Prakash Champati",
+            "Kui Wu"
+          ],
+          "categories": [
+            "cs.LG"
+          ],
+          "url": "https://arxiv.org/abs/2601.22132v1",
+          "relevance": {
+            "score": 3,
+            "matched": {
+              "keywords": [
+                "reasoning"
+              ],
+              "authors": []
+            }
+          }
+        },
+        {
+          "id": "2601.22130v1",
+          "title": "World of Workflows: a Benchmark for Bringing World Models to Enterprise Systems",
+          "summary": "Frontier large language models (LLMs) excel as autonomous agents in many domains, yet they remain untested in complex enterprise systems where hidden workflows create cascading effects across interconnected databases. Existing enterprise benchmarks evaluate surface-level agentic task completion similar to general consumer benchmarks, ignoring true challenges in enterprises, such as limited observability, large database state, and hidden workflows with cascading side effects. We introduce World o",
+          "authors": [
+            "Lakshya Gupta",
+            "Litao Li",
+            "Yizhe Liu",
+            "Sriram Ganapathi Subramanian",
+            "Kaheer Suleman"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.SE"
+          ],
+          "url": "https://arxiv.org/abs/2601.22130v1",
+          "relevance": {
+            "score": 3,
+            "matched": {
+              "keywords": [
+                "autonomous agent"
+              ],
+              "authors": []
+            }
+          }
+        },
+        {
+          "id": "2601.22127v1",
+          "title": "EditYourself: Audio-Driven Generation and Manipulation of Talking Head Videos with Diffusion Transformers",
+          "summary": "Current generative video models excel at producing novel content from text and image prompts, but leave a critical gap in editing existing pre-recorded videos, where minor alterations to the spoken script require preserving motion, temporal coherence, speaker identity, and accurate lip synchronization. We introduce EditYourself, a DiT-based framework for audio-driven video-to-video (V2V) editing that enables transcript-based modification of talking head videos, including the seamless addition, r",
+          "authors": [
+            "John Flynn",
+            "Wolfgang Paier",
+            "Dimitar Dinev",
+            "Sam Nhut Nguyen",
+            "Hayk Poghosyan"
+          ],
+          "categories": [
+            "cs.CV",
+            "cs.GR",
+            "cs.LG",
+            "cs.MM"
+          ],
+          "url": "https://arxiv.org/abs/2601.22127v1",
+          "relevance": {
+            "score": 3,
+            "matched": {
+              "keywords": [
+                "transformer"
+              ],
+              "authors": []
+            }
+          }
+        },
+        {
+          "id": "2601.22141v1",
+          "title": "Routing the Lottery: Adaptive Subnetworks for Heterogeneous Data",
+          "summary": "In pruning, the Lottery Ticket Hypothesis posits that large networks contain sparse subnetworks, or winning tickets, that can be trained in isolation to match the performance of their dense counterparts. However, most existing approaches assume a single universal winning ticket shared across all inputs, ignoring the inherent heterogeneity of real-world data. In this work, we propose Routing the Lottery (RTL), an adaptive pruning framework that discovers multiple specialized subnetworks, called a",
+          "authors": [
+            "Grzegorz Stefanski",
+            "Alberto Presta",
+            "Michal Byra"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.CV",
+            "cs.LG"
+          ],
+          "url": "https://arxiv.org/abs/2601.22141v1",
+          "relevance": {
+            "score": 2,
+            "matched": {
+              "keywords": [],
+              "authors": []
+            }
+          }
+        },
+        {
+          "id": "2601.22136v1",
+          "title": "StepShield: When, Not Whether to Intervene on Rogue Agents",
+          "summary": "Existing agent safety benchmarks report binary accuracy, conflating early intervention with post-mortem analysis. A detector that flags a violation at step 8 enables intervention; one that reports it at step 48 provides only forensic value. This distinction is critical, yet current benchmarks cannot measure it. We introduce StepShield, the first benchmark to evaluate when violations are detected, not just whether. StepShield contains 9,213 code agent trajectories, including 1,278 meticulously an",
+          "authors": [
+            "Gloria Felicia",
+            "Michael Eniolade",
+            "Jinfeng He",
+            "Zitha Sasindran",
+            "Hemant Kumar"
+          ],
+          "categories": [
+            "cs.LG",
+            "cs.AI",
+            "cs.CR",
+            "cs.SE"
+          ],
+          "url": "https://arxiv.org/abs/2601.22136v1",
+          "relevance": {
+            "score": 2,
+            "matched": {
+              "keywords": [],
+              "authors": []
+            }
+          }
+        }
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.CR",
+        "cs.CL",
+        "q-fin.TR",
+        "quant-ph",
+        "cs.CC"
+      ],
+      "fetchedAt": "2026-01-30T08:46:14.828Z"
+    },
+    "libraryStats": {
+      "indexedCount": 27,
+      "documents": [
+        "0502072",
+        "0704.0646",
+        "12factor-net",
+        "1401.1219",
+        "1409.0813",
+        "1507.03628",
+        "1701.06903",
+        "1801.00862",
+        "1910.09534",
+        "2007.00095",
+        "2208.11372",
+        "2305.10601",
+        "2305.16291",
+        "2309.02427",
+        "berkshire-2023-letter",
+        "entropy",
+        "gwern-net-scaling-hypothesis",
+        "hackerone-com-dod-vdp",
+        "nakamotoinstitute-org-bitcoin",
+        "sre-google-sre-book-introduction",
+        "tegmark-mathematical-universe",
+        "vitalik-eth-limo-general-2021-02-18-election-h",
+        "vitalik-eth-limo-general-2024-05-09-dacc-html",
+        "waitbutwhy-com-2015-01-artificial-intelligen",
+        "warren-buffett-way",
+        "www-bugcrowd-com-blog-bugcrowd-announces-partn",
+        "www-paulgraham-com-think-html"
+      ],
+      "categories": [
+        "aaronson",
+        "tegmark",
+        "wolfram",
+        "shannon"
+      ],
+      "lastUpdated": "2026-01-30"
+    },
+    "connections": [
+      {
+        "paper1": "Hybrid Linear Attention Done Right: Efficient Dist",
+        "paper2": "EditYourself: Audio-Driven Generation and Manipula",
+        "sharedConcepts": [
+          "transformer"
+        ],
+        "strength": 1
+      },
+      {
+        "paper1": "SWE-Replay: Efficient Test-Time Scaling for Softwa",
+        "paper2": "FineInstructions: Scaling Synthetic Instructions t",
+        "sharedConcepts": [
+          "scaling"
+        ],
+        "strength": 1
+      },
+      {
+        "paper1": "Exploring Reasoning Reward Model for Agents",
+        "paper2": "Reasoning While Asking: Transforming Reasoning Lar",
+        "sharedConcepts": [
+          "reasoning"
+        ],
+        "strength": 1
+      },
+      {
+        "paper1": "Exploring Reasoning Reward Model for Agents",
+        "paper2": "Pay for Hints, Not Answers: LLM Shepherding for Co",
+        "sharedConcepts": [
+          "reasoning"
+        ],
+        "strength": 1
+      },
+      {
+        "paper1": "Reasoning While Asking: Transforming Reasoning Lar",
+        "paper2": "Pay for Hints, Not Answers: LLM Shepherding for Co",
+        "sharedConcepts": [
+          "reasoning"
+        ],
+        "strength": 1
+      }
+    ],
+    "recommendations": [
+      {
+        "type": "add_to_library",
+        "paper": "Hybrid Linear Attention Done Right: Efficient Distillation and Effective Architectures for Extremely Long Contexts",
+        "id": "2601.22156v1",
+        "url": "https://arxiv.org/abs/2601.22156v1",
+        "reason": "High relevance (6) - transformer, attention",
+        "priority": "medium"
+      }
+    ]
+  }
+}
