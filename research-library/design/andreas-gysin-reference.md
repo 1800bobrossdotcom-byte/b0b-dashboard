@@ -82,5 +82,52 @@
 
 ---
 
+## play.core — ASCII Playground Code Patterns
+
+### GitHub: ertdfgcvb/play.core (465 ⭐)
+Live: https://play.ertdfgcvb.xyz/
+
+### Core Technique: Density Ramps
+```javascript
+const density = 'Ñ@#W$9876543210?!abc;:+=-,._ '
+
+export function main(coord, context, cursor, buffer) {
+  const {cols, frame} = context
+  const {x, y} = coord
+  
+  const sign = y % 2 * 2 - 1
+  const index = (cols + y + x * sign + frame) % density.length
+  
+  return density[index]
+}
+```
+
+### Key Demos to Study
+- **10 PRINT** — Classic one-liner pattern
+- **Donut** — 3D rendered to ASCII
+- **Doom Flame** — Fire effect (also full color version)
+- **Plasma** — Classic demo effect
+- **Spiral** — Hypnotic looping
+- **Camera grayscale** — Real input to ASCII
+
+### What Makes It Work
+1. **Density ramps** — character sets ordered by visual weight
+2. **Simple math** — sin/cos, modulo, basic geometry
+3. **Frame counting** — animation through time parameter
+4. **Coord system** — (x, y, index) for each cell
+5. **Return simplicity** — just return a char or {char, color}
+
+### Density Ramp Examples
+```
+' .:-=+*#%@'           // Light to dark
+'Ñ@#W$9876543210?!abc;:+=-,._ '  // Varied
+' ░▒▓█'                // Block chars
+' ·:;+*#@█'            // Dots to solid
+'.·:;+=xX$&'           // Progressive
+```
+
+---
+
 *Reference for b0b, r0ss, c0m, d0t design decisions*
 *"Creativity involves recombining elements in novel ways"*
+*play.core is Apache-2.0 licensed*
