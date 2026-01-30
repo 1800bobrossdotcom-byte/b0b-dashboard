@@ -1,78 +1,78 @@
-﻿{
-    "activated":  true,
-    "activatedAt":  "2026-01-30T05:53:10.884Z",
-    "mode":  "LIVE",
-    "dailyStats":  {
-                       "date":  "2026-01-30",
-                       "trades":  1,
-                       "pnl":  0,
-                       "volume":  2.5
-                   },
-    "lastTradeTime":  0,
-    "emergencyStop":  false,
-    "tradingHistory":  [
-                           {
-                               "timestamp":  "2026-01-30T06:30:04.968Z",
-                               "type":  "BUY",
-                               "token":  "BNKR",
-                               "amountIn":  "0.001 ETH",
-                               "amountOut":  "5956.050676187132639641 BNKR",
-                               "txHash":  "0x002d69ad0b7183617b1d90a3114583ca139be16348de99d9aec736fd0911943d",
-                               "status":  "SUCCESS",
-                               "note":  "INAUGURAL TRADE - Swarm Council Decision"
-                           },
-                           {
-                               "timestamp":  "2026-01-30T06:46:28.726Z",
-                               "type":  "BUY",
-                               "token":  "BNKR",
-                               "amountIn":  "0.001 ETH",
-                               "amountOut":  "5876.020963506840288139 BNKR",
-                               "txHash":  "0xbff132ab261ef938f2753e2ee5cd67625d2112d40196ce77835d75eaaa370d2b",
-                               "status":  "SUCCESS",
-                               "note":  "INAUGURAL TRADE - Swarm Council Decision"
-                           },
-                           {
-                               "timestamp":  "2026-01-30T06:51:37.257Z",
-                               "type":  "SELL",
-                               "token":  "BNKR",
-                               "amountIn":  "1000 BNKR",
-                               "amountOut":  "0.000170983743469115 ETH",
-                               "txHash":  "0xa576202e89cb0be543b49d58bf23c3c0023898cfe75e1e60e2a7a18575b2438f",
-                               "status":  "SUCCESS",
-                               "note":  "PROFIT TAKING - TURB0B00ST",
-                               "sentToCold":  false
-                           },
-                           {
-                               "timestamp":  "2026-01-30T06:53:58.006Z",
-                               "type":  "SELL",
-                               "token":  "BNKR",
-                               "amountIn":  "2000 BNKR",
-                               "amountOut":  "0.000356977425205951 ETH",
-                               "txHash":  "0xdb7c4203fa3fc8aa9defda8bdaaccae72c9c6adef3b7dc5273a77d2d2cae3c18",
-                               "status":  "SUCCESS",
-                               "note":  "PROFIT TAKING - TURB0B00ST",
-                               "sentToCold":  true
-                           },
-                           {
-                               "timestamp":  "2026-01-30T06:56:18.177Z",
-                               "type":  "BUY",
-                               "token":  "BNKR",
-                               "amountIn":  "0.001 ETH",
-                               "amountOut":  "5410.597199006977776157 BNKR",
-                               "txHash":  "0xbc1cc2586d293f53e1a44a38c7d7ed9d17a90488f5ab79498f14e89a66014fcf",
-                               "status":  "SUCCESS",
-                               "note":  "INAUGURAL TRADE - Swarm Council Decision"
-                           },
-                           {
-                               "timestamp":  "2026-01-30T06:56:27.610Z",
-                               "type":  "BUY",
-                               "token":  "BNKR",
-                               "amountIn":  "0.001 ETH",
-                               "amountOut":  "5400.268756498952150824 BNKR",
-                               "txHash":  "0x4b15128f4cac99819e1dbd06e7a9e7ec597e697ba2287de481f19af60e2f8be5",
-                               "status":  "SUCCESS",
-                               "note":  "INAUGURAL TRADE - Swarm Council Decision"
-                           }
-                       ],
-    "timestamp":  "2026-01-30T18:44:38.906Z"
+{
+  "activated": true,
+  "activatedAt": "2026-01-30T05:53:10.884Z",
+  "mode": "LIVE",
+  "dailyStats": {
+    "date": "2026-01-30",
+    "trades": 1,
+    "pnl": 0,
+    "volume": 2.5
+  },
+  "lastTradeTime": 0,
+  "emergencyStop": false,
+  "tradingHistory": [
+    {
+      "timestamp": "2026-01-30T06:30:04.968Z",
+      "type": "BUY",
+      "token": "BNKR",
+      "amountIn": "0.001 ETH",
+      "amountOut": "5956.050676187132639641 BNKR",
+      "txHash": "0x002d69ad0b7183617b1d90a3114583ca139be16348de99d9aec736fd0911943d",
+      "status": "SUCCESS",
+      "note": "INAUGURAL TRADE - Swarm Council Decision"
+    },
+    {
+      "timestamp": "2026-01-30T06:46:28.726Z",
+      "type": "BUY",
+      "token": "BNKR",
+      "amountIn": "0.001 ETH",
+      "amountOut": "5876.020963506840288139 BNKR",
+      "txHash": "0xbff132ab261ef938f2753e2ee5cd67625d2112d40196ce77835d75eaaa370d2b",
+      "status": "SUCCESS",
+      "note": "INAUGURAL TRADE - Swarm Council Decision"
+    },
+    {
+      "timestamp": "2026-01-30T06:51:37.257Z",
+      "type": "SELL",
+      "token": "BNKR",
+      "amountIn": "1000 BNKR",
+      "amountOut": "0.000170983743469115 ETH",
+      "txHash": "0xa576202e89cb0be543b49d58bf23c3c0023898cfe75e1e60e2a7a18575b2438f",
+      "status": "SUCCESS",
+      "note": "PROFIT TAKING - TURB0B00ST",
+      "sentToCold": false
+    },
+    {
+      "timestamp": "2026-01-30T06:53:58.006Z",
+      "type": "SELL",
+      "token": "BNKR",
+      "amountIn": "2000 BNKR",
+      "amountOut": "0.000356977425205951 ETH",
+      "txHash": "0xdb7c4203fa3fc8aa9defda8bdaaccae72c9c6adef3b7dc5273a77d2d2cae3c18",
+      "status": "SUCCESS",
+      "note": "PROFIT TAKING - TURB0B00ST",
+      "sentToCold": true
+    },
+    {
+      "timestamp": "2026-01-30T06:56:18.177Z",
+      "type": "BUY",
+      "token": "BNKR",
+      "amountIn": "0.001 ETH",
+      "amountOut": "5410.597199006977776157 BNKR",
+      "txHash": "0xbc1cc2586d293f53e1a44a38c7d7ed9d17a90488f5ab79498f14e89a66014fcf",
+      "status": "SUCCESS",
+      "note": "INAUGURAL TRADE - Swarm Council Decision"
+    },
+    {
+      "timestamp": "2026-01-30T06:56:27.610Z",
+      "type": "BUY",
+      "token": "BNKR",
+      "amountIn": "0.001 ETH",
+      "amountOut": "5400.268756498952150824 BNKR",
+      "txHash": "0x4b15128f4cac99819e1dbd06e7a9e7ec597e697ba2287de481f19af60e2f8be5",
+      "status": "SUCCESS",
+      "note": "INAUGURAL TRADE - Swarm Council Decision"
+    }
+  ],
+  "timestamp": "2026-01-30T18:44:38.906Z"
 }

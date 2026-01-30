@@ -1,155 +1,151 @@
-﻿{
-    "crawler":  "library-sync",
-    "timestamp":  "2026-01-30T18:55:34.375Z",
-    "data":  {
-                 "timestamp":  "2026-01-30T10:01:12.514Z",
-                 "provider":  "none",
-                 "categories":  {
-                                    "security":  {
-                                                     "category":  "security",
-                                                     "agent":  "c0m",
-                                                     "repos":  [
-                                                                   {
-                                                                       "repo":  "OWASP/CheatSheetSeries",
-                                                                       "status":  "updated",
-                                                                       "size":  4232
-                                                                   },
-                                                                   {
-                                                                       "repo":  "swisskyrepo/PayloadsAllTheThings",
-                                                                       "status":  "updated",
-                                                                       "size":  3192
-                                                                   },
-                                                                   {
-                                                                       "repo":  "danielmiessler/SecLists",
-                                                                       "status":  "updated",
-                                                                       "size":  4741
-                                                                   },
-                                                                   {
-                                                                       "repo":  "HackTricks-wiki/hacktricks",
-                                                                       "status":  "updated",
-                                                                       "size":  10916
-                                                                   },
-                                                                   {
-                                                                       "repo":  "trimstray/the-book-of-secret-knowledge",
-                                                                       "status":  "updated",
-                                                                       "size":  211640
-                                                                   }
-                                                               ],
-                                                     "rss":  [
-                                                                 {
-                                                                     "url":  "https://krebsonsecurity.com/feed/",
-                                                                     "items":  10
-                                                                 }
-                                                             ],
-                                                     "newContent":  5
-                                                 },
-                                    "ai":  {
-                                               "category":  "ai",
-                                               "agent":  "r0ss",
-                                               "repos":  [
-                                                             {
-                                                                 "repo":  "anthropics/anthropic-cookbook",
-                                                                 "status":  "updated",
-                                                                 "size":  5822
-                                                             },
-                                                             {
-                                                                 "repo":  "openai/openai-cookbook",
-                                                                 "status":  "updated",
-                                                                 "size":  1209
-                                                             },
-                                                             {
-                                                                 "repo":  "microsoft/autogen",
-                                                                 "status":  "updated",
-                                                                 "size":  18727
-                                                             },
-                                                             {
-                                                                 "repo":  "langchain-ai/langchain",
-                                                                 "status":  "updated",
-                                                                 "size":  6867
-                                                             },
-                                                             {
-                                                                 "repo":  "huggingface/transformers",
-                                                                 "status":  "updated",
-                                                                 "size":  17485
-                                                             }
-                                                         ],
-                                               "rss":  [
-                                                           {
-                                                               "url":  "https://arxiv.org/rss/cs.AI",
-                                                               "items":  10
-                                                           },
-                                                           {
-                                                               "url":  "https://arxiv.org/rss/cs.LG",
-                                                               "items":  10
-                                                           }
-                                                       ],
-                                               "newContent":  5
-                                           },
-                                    "design":  {
-                                                   "category":  "design",
-                                                   "agent":  "b0b",
-                                                   "repos":  [
-                                                                 {
-                                                                     "repo":  "rsms/inter",
-                                                                     "status":  "updated",
-                                                                     "size":  7830
-                                                                 },
-                                                                 {
-                                                                     "repo":  "adobe-fonts/source-code-pro",
-                                                                     "status":  "updated",
-                                                                     "size":  592
-                                                                 },
-                                                                 {
-                                                                     "repo":  "google/fonts",
-                                                                     "status":  "updated",
-                                                                     "size":  4791
-                                                                 },
-                                                                 {
-                                                                     "repo":  "tonsky/FiraCode",
-                                                                     "status":  "updated",
-                                                                     "size":  12022
-                                                                 }
-                                                             ],
-                                                   "rss":  [
-
-                                                           ],
-                                                   "newContent":  4
-                                               },
-                                    "trading":  {
-                                                    "category":  "trading",
-                                                    "agent":  "d0t",
-                                                    "repos":  [
-                                                                  {
-                                                                      "repo":  "coinbase/onchainkit",
-                                                                      "status":  "updated",
-                                                                      "size":  4638
-                                                                  },
-                                                                  {
-                                                                      "repo":  "base-org/guides",
-                                                                      "status":  "updated",
-                                                                      "size":  1179
-                                                                  },
-                                                                  {
-                                                                      "repo":  "Uniswap/v4-core",
-                                                                      "status":  "updated",
-                                                                      "size":  4310
-                                                                  },
-                                                                  {
-                                                                      "repo":  "paradigmxyz/reth",
-                                                                      "status":  "updated",
-                                                                      "size":  11159
-                                                                  }
-                                                              ],
-                                                    "rss":  [
-
-                                                            ],
-                                                    "newContent":  4
-                                                }
-                                },
-                 "summary":  {
-                                 "totalRepos":  18,
-                                 "totalFeeds":  3,
-                                 "newContent":  18
-                             }
-             }
+{
+  "crawler": "library-sync",
+  "timestamp": "2026-01-30T18:55:34.375Z",
+  "data": {
+    "timestamp": "2026-01-30T10:01:12.514Z",
+    "provider": "none",
+    "categories": {
+      "security": {
+        "category": "security",
+        "agent": "c0m",
+        "repos": [
+          {
+            "repo": "OWASP/CheatSheetSeries",
+            "status": "updated",
+            "size": 4232
+          },
+          {
+            "repo": "swisskyrepo/PayloadsAllTheThings",
+            "status": "updated",
+            "size": 3192
+          },
+          {
+            "repo": "danielmiessler/SecLists",
+            "status": "updated",
+            "size": 4741
+          },
+          {
+            "repo": "HackTricks-wiki/hacktricks",
+            "status": "updated",
+            "size": 10916
+          },
+          {
+            "repo": "trimstray/the-book-of-secret-knowledge",
+            "status": "updated",
+            "size": 211640
+          }
+        ],
+        "rss": [
+          {
+            "url": "https://krebsonsecurity.com/feed/",
+            "items": 10
+          }
+        ],
+        "newContent": 5
+      },
+      "ai": {
+        "category": "ai",
+        "agent": "r0ss",
+        "repos": [
+          {
+            "repo": "anthropics/anthropic-cookbook",
+            "status": "updated",
+            "size": 5822
+          },
+          {
+            "repo": "openai/openai-cookbook",
+            "status": "updated",
+            "size": 1209
+          },
+          {
+            "repo": "microsoft/autogen",
+            "status": "updated",
+            "size": 18727
+          },
+          {
+            "repo": "langchain-ai/langchain",
+            "status": "updated",
+            "size": 6867
+          },
+          {
+            "repo": "huggingface/transformers",
+            "status": "updated",
+            "size": 17485
+          }
+        ],
+        "rss": [
+          {
+            "url": "https://arxiv.org/rss/cs.AI",
+            "items": 10
+          },
+          {
+            "url": "https://arxiv.org/rss/cs.LG",
+            "items": 10
+          }
+        ],
+        "newContent": 5
+      },
+      "design": {
+        "category": "design",
+        "agent": "b0b",
+        "repos": [
+          {
+            "repo": "rsms/inter",
+            "status": "updated",
+            "size": 7830
+          },
+          {
+            "repo": "adobe-fonts/source-code-pro",
+            "status": "updated",
+            "size": 592
+          },
+          {
+            "repo": "google/fonts",
+            "status": "updated",
+            "size": 4791
+          },
+          {
+            "repo": "tonsky/FiraCode",
+            "status": "updated",
+            "size": 12022
+          }
+        ],
+        "rss": [],
+        "newContent": 4
+      },
+      "trading": {
+        "category": "trading",
+        "agent": "d0t",
+        "repos": [
+          {
+            "repo": "coinbase/onchainkit",
+            "status": "updated",
+            "size": 4638
+          },
+          {
+            "repo": "base-org/guides",
+            "status": "updated",
+            "size": 1179
+          },
+          {
+            "repo": "Uniswap/v4-core",
+            "status": "updated",
+            "size": 4310
+          },
+          {
+            "repo": "paradigmxyz/reth",
+            "status": "updated",
+            "size": 11159
+          }
+        ],
+        "rss": [],
+        "newContent": 4
+      }
+    },
+    "summary": {
+      "totalRepos": 18,
+      "totalFeeds": 3,
+      "newContent": 18
+    }
+  }
 }

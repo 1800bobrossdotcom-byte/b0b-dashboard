@@ -1,40 +1,40 @@
-﻿{
-    "hotkeys":  {
-                    "lastUpdate":  null,
-                    "registered":  0
-                },
-    "version":  "1.0.0",
-    "lexicon":  {
-                    "terms":  0,
-                    "lastUpdate":  null
-                },
-    "timestamp":  "2026-01-30T18:55:43.679Z",
-    "description":  "L0RE LLM cross-model sync state",
-    "providers":  [
-                      {
-                          "lastSync":  null,
-                          "status":  "active",
-                          "id":  "groq"
-                      },
-                      {
-                          "lastSync":  null,
-                          "status":  "active",
-                          "id":  "deepseek"
-                      },
-                      {
-                          "lastSync":  null,
-                          "status":  "active",
-                          "id":  "kimi"
-                      },
-                      {
-                          "lastSync":  null,
-                          "status":  "active",
-                          "id":  "anthropic"
-                      },
-                      {
-                          "lastSync":  null,
-                          "status":  "active",
-                          "id":  "openrouter"
-                      }
-                  ]
+{
+  "hotkeys": {
+    "lastUpdate": null,
+    "registered": 0
+  },
+  "version": "1.0.0",
+  "lexicon": {
+    "terms": 0,
+    "lastUpdate": null
+  },
+  "timestamp": "2026-01-30T18:55:43.679Z",
+  "description": "L0RE LLM cross-model sync state",
+  "providers": [
+    {
+      "lastSync": null,
+      "status": "active",
+      "id": "groq"
+    },
+    {
+      "lastSync": null,
+      "status": "active",
+      "id": "deepseek"
+    },
+    {
+      "lastSync": null,
+      "status": "active",
+      "id": "kimi"
+    },
+    {
+      "lastSync": null,
+      "status": "active",
+      "id": "anthropic"
+    },
+    {
+      "lastSync": null,
+      "status": "active",
+      "id": "openrouter"
+    }
+  ]
 }
