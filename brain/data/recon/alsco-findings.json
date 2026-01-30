@@ -1,0 +1,76 @@
+{
+  "target": "ALSCO",
+  "hunter": "c0m_security",
+  "reconDate": "2026-01-29",
+  "status": "ACTIVE_HUNTING",
+  
+  "findings": [
+    {
+      "id": 1,
+      "title": "Potential Post-Auth Open Redirect",
+      "severity": "Low-Medium",
+      "location": "https://alscotoday.com/auth/index.php",
+      "parameter": "url",
+      "description": "The url parameter accepts various inputs. While Secure Gateway blocks direct external URLs, the parameter may be used for post-authentication redirect. Several bypass patterns return 200: //google.com, ////google.com, /\\google.com",
+      "status": "NEEDS_POST_AUTH_TEST",
+      "note": "Need to complete auth to see if redirect occurs after login"
+    },
+    {
+      "id": 2,
+      "title": "No CAPTCHA on Authentication",
+      "severity": "Low",
+      "location": "https://alscotoday.com/auth/index.php",
+      "description": "Login form has no CAPTCHA protection. May be vulnerable to credential stuffing if rate limiting is weak.",
+      "status": "NEEDS_RATE_LIMIT_TEST",
+      "note": "Program rules prohibit brute force - test rate limiting only"
+    },
+    {
+      "id": 3,
+      "title": "CSRF Token Analysis Needed",
+      "severity": "Unknown",
+      "location": "https://alscotoday.com/auth/index.php",
+      "parameter": "csrf_token_phone",
+      "token_sample": "2b6a041eedb377db9af7cc6f462426",
+      "description": "Hidden CSRF token present. Need to verify if token changes per session and is properly validated.",
+      "status": "NEEDS_VALIDATION_TEST"
+    },
+    {
+      "id": 4,
+      "title": "Phone Number Based Auth",
+      "severity": "Recon",
+      "location": "https://alscotoday.com/auth/check.php",
+      "description": "Auth uses phone number. Could test for user enumeration via response differences.",
+      "status": "NEEDS_ENUM_TEST"
+    }
+  ],
+  
+  "secureGatewayBehavior": {
+    "blockedPatterns": [
+      "https://external.com (503 with Rule G.S.36)",
+      "CRLF injection attempts (403 with Rule G.S.211080)",
+      "@-based URL auth bypass (403)"
+    ],
+    "allowedPatterns": [
+      "//google.com (200)",
+      "////google.com (200)", 
+      "/\\google.com (200)",
+      "Relative paths /admin (200)"
+    ],
+    "note": "Secure Gateway bypasses are marked Informative per program policy"
+  },
+  
+  "nextSteps": [
+    "1. Register test account (per program FAQ - they provide accounts)",
+    "2. Complete auth flow to test post-login redirect behavior",
+    "3. Check CSRF token rotation between sessions",
+    "4. Test for user enumeration on phone number field",
+    "5. Look for other endpoints on main domain"
+  ],
+  
+  "programNotes": {
+    "videoRequired": true,
+    "fullHackScenario": true,
+    "secureGatewayBypasses": "Informative only (not bugs)",
+    "testEnvironment": "checksw.com (currently offline)"
+  }
+}

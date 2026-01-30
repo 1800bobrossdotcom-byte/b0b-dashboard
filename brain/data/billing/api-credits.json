@@ -1,0 +1,109 @@
+{
+  "lastUpdated": "2026-01-29",
+  "updatedBy": "team",
+  
+  "apiCredits": {
+    "deepseek": {
+      "provider": "DeepSeek",
+      "initialCredit": 10.00,
+      "currency": "USD",
+      "status": "active",
+      "addedDate": "2026-01-29",
+      "notes": "Cheapest AI option (~$0.14/1M tokens)",
+      "apiUrl": "https://platform.deepseek.com",
+      "models": ["deepseek-chat", "deepseek-reasoner"],
+      "envKey": "DEEPSEEK_API_KEY",
+      "strengths": ["reasoning", "code", "math", "analysis"]
+    },
+    "kimi": {
+      "provider": "Kimi/Moonshot AI",
+      "initialCredit": 10.00,
+      "currency": "USD",
+      "status": "active",
+      "addedDate": "2026-01-29",
+      "notes": "API key stored on desktop notepad file",
+      "apiUrl": "https://platform.moonshot.cn",
+      "pricing": "~$0.30/1M tokens",
+      "envKey": "MOONSHOT_API_KEY",
+      "strengths": ["long-context", "research", "summarization"]
+    },
+    "groq": {
+      "provider": "Groq",
+      "initialCredit": "FREE TIER",
+      "status": "active",
+      "apiUrl": "https://console.groq.com",
+      "notes": "FREE! Blazing fast Llama/Mixtral inference - CONFIGURED",
+      "envKey": "GROQ_API_KEY",
+      "strengths": ["speed", "quick-tasks", "free"]
+    },
+    "openrouter": {
+      "provider": "OpenRouter",
+      "initialCredit": 10.00,
+      "currency": "USD",
+      "status": "pending-env",
+      "addedDate": "2026-01-29",
+      "apiUrl": "https://openrouter.ai",
+      "notes": "API key on desktop - multi-model gateway to 100+ models",
+      "envKey": "OPENROUTER_API_KEY",
+      "strengths": ["variety", "fallback", "model-selection", "claude", "gpt4", "llama"]
+    },
+    "grok": {
+      "provider": "xAI (Grok)",
+      "status": "active",
+      "addedDate": "2026-01-29",
+      "apiUrl": "https://console.x.ai",
+      "notes": "TWO X API apps active: b0b.dev (32310569) + 20162901228455618176_b0bdev_ (32310547)",
+      "envKey": "XAI_API_KEY",
+      "strengths": ["real-time", "current-events", "twitter", "creative"],
+      "apps": [
+        {"name": "b0b.dev", "id": "32310569", "status": "ACTIVE"},
+        {"name": "20162901228455618176_b0bdev_", "id": "32310547", "status": "ACTIVE"}
+      ]
+    },
+    "twilio": {
+      "provider": "Twilio",
+      "initialCredit": "Free tier",
+      "status": "active",
+      "addedDate": "2026-01-29",
+      "account": "1800bob@gmail.com",
+      "notes": "Login created - files on desktop, RECOVERY KEY on desktop",
+      "recoveryKey": "ON_DESKTOP",
+      "capabilities": ["SMS", "Voice", "2FA/Verify", "SendGrid"]
+    }
+  },
+
+  "existingCredits": {
+    "openai": {
+      "status": "active",
+      "estimatedMonthly": 20.00,
+      "notes": "GPT-4 for brain operations",
+      "envKey": "OPENAI_API_KEY"
+    },
+    "anthropic": {
+      "status": "active", 
+      "estimatedMonthly": 20.00,
+      "notes": "Claude for development",
+      "envKey": "ANTHROPIC_API_KEY"
+    },
+    "agentmail": {
+      "status": "active",
+      "cost": "Free tier",
+      "notes": "Agent email addresses LIVE"
+    }
+  },
+
+  "totalNewCredits": {
+    "amount": 30.00,
+    "currency": "USD",
+    "date": "2026-01-29",
+    "breakdown": "DeepSeek $10 + Kimi $10 + OpenRouter $10"
+  },
+  
+  "setupTodo": [
+    "Add DEEPSEEK_API_KEY to brain/.env",
+    "Add MOONSHOT_API_KEY to brain/.env (from desktop notepad)",
+    "Sign up for Groq free tier at console.groq.com",
+    "Add GROQ_API_KEY to brain/.env",
+    "Consider xAI/Grok if real-time X data needed"
+  ]
+}

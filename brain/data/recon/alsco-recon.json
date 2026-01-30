@@ -1,0 +1,110 @@
+{
+  "target": "ALSCO",
+  "hackeroneUrl": "https://hackerone.com/alsco",
+  "reconDate": "2026-01-29",
+  "hunter": "c0m_security",
+  
+  "programInfo": {
+    "avgBounty": "$200-$210",
+    "topBounty": "$1,000",
+    "responseRate": "100%",
+    "timeToTriage": "6 hours",
+    "timeToBounty": "7 hours",
+    "assetsInScope": 2,
+    "reportsReceived90Days": 98,
+    "reportsResolved90Days": 5
+  },
+  
+  "scope": {
+    "inScope": [
+      "alscotoday.com",
+      "checksw.com (test sandbox)"
+    ],
+    "outOfScope": [
+      "firewallgateway.com (redirect only)",
+      "Subdomain takeovers under *.checksw.com",
+      "SaaS applications under Secure Gateway",
+      "Third party marketplace apps"
+    ]
+  },
+  
+  "subdomains": {
+    "total": 48,
+    "live": [
+      "alscotoday.com",
+      "portal.alscotoday.com"
+    ],
+    "inactive": [
+      "analytics.alscotoday.com",
+      "new.alscotoday.com",
+      "checksw.com"
+    ],
+    "all": [
+      "mail.alscotoday.com",
+      "alscotoday.com",
+      "analytics.alscotoday.com",
+      "www.alscotoday.com",
+      "dnscluster.alscotoday.com",
+      "portal.alscotoday.com",
+      "link.alscotoday.com",
+      "go.alscotoday.com",
+      "new.alscotoday.com",
+      "doc.alscotoday.com",
+      "ads.alscotoday.com",
+      "sample.alscotoday.com",
+      "buckertlawfirm.alscotoday.com"
+    ]
+  },
+  
+  "techStack": {
+    "cdn": "Cloudflare",
+    "webServer": "hidden behind Cloudflare"
+  },
+  
+  "securityHeaders": {
+    "alscotoday.com": {
+      "CSP": "MISSING",
+      "X-Frame-Options": "SAMEORIGIN (duplicate!)",
+      "X-XSS-Protection": "1; mode=block",
+      "HSTS": "YES"
+    },
+    "portal.alscotoday.com": {
+      "status": "307 redirect",
+      "CSP": "MISSING",
+      "X-Frame-Options": "SAMEORIGIN",
+      "X-XSS-Protection": "1; mode=block",
+      "HSTS": "YES"
+    }
+  },
+  
+  "potentialVulnerabilities": [
+    {
+      "type": "Missing CSP",
+      "severity": "Low-Medium",
+      "note": "Content-Security-Policy missing - potential XSS if inputs found"
+    },
+    {
+      "type": "Duplicate Headers",
+      "severity": "Informational",
+      "note": "X-Frame-Options and X-XSS-Protection sent twice"
+    }
+  ],
+  
+  "requiredForReport": [
+    "VIDEO proof of concept required",
+    "Full hack scenario (edit page, download DB)",
+    "Clear steps to reproduce",
+    "Impact description"
+  ],
+  
+  "attackPlan": [
+    "1. Deep dive into portal.alscotoday.com - find login, test auth",
+    "2. Spider alscotoday.com for forms/inputs - test for XSS with missing CSP",
+    "3. Check for exposed endpoints/APIs",
+    "4. Test for IDOR on any user-specific resources",
+    "5. Check for subdomain takeover on inactive subdomains"
+  ],
+  
+  "status": "RECON_COMPLETE",
+  "nextStep": "Manual exploration of portal.alscotoday.com"
+}

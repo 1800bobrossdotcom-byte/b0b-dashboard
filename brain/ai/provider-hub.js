@@ -30,6 +30,7 @@ const PROVIDERS = {
     envKey: 'DEEPSEEK_API_KEY',
     defaultModel: 'deepseek-chat',
     costPer1M: 0.14, // Very cheap!
+    strengths: ['reasoning', 'code', 'math', 'analysis'],
   },
   kimi: {
     name: 'Kimi (Moonshot)',
@@ -37,6 +38,7 @@ const PROVIDERS = {
     envKey: 'MOONSHOT_API_KEY', // or KIMI_API_KEY
     defaultModel: 'kimi-k2-turbo-preview',
     costPer1M: 0.30, // Estimate
+    strengths: ['long-context', 'research', 'summarization', 'chinese'],
   },
   groq: {
     name: 'Groq',
@@ -44,6 +46,15 @@ const PROVIDERS = {
     envKey: 'GROQ_API_KEY',
     defaultModel: 'llama-3.3-70b-versatile', // or mixtral-8x7b-32768
     costPer1M: 0.00, // FREE tier!
+    strengths: ['speed', 'quick-tasks', 'simple-queries', 'chat'],
+  },
+  grok: {
+    name: 'Grok (xAI)',
+    baseUrl: 'https://api.x.ai/v1',
+    envKey: 'XAI_API_KEY',
+    defaultModel: 'grok-4-latest',
+    costPer1M: 5.00, // Premium but powerful
+    strengths: ['real-time', 'current-events', 'twitter', 'creative', 'humor'],
   },
   together: {
     name: 'Together AI',
@@ -51,6 +62,7 @@ const PROVIDERS = {
     envKey: 'TOGETHER_API_KEY',
     defaultModel: 'meta-llama/Llama-3.3-70B-Instruct-Turbo',
     costPer1M: 0.88,
+    strengths: ['open-models', 'fine-tuning', 'specialized'],
   },
   anthropic: {
     name: 'Anthropic',
@@ -59,6 +71,7 @@ const PROVIDERS = {
     defaultModel: 'claude-3-haiku-20240307',
     costPer1M: 0.25,
     isAnthropicFormat: true, // Different API format
+    strengths: ['safety', 'nuance', 'writing', 'complex-reasoning'],
   },
   openai: {
     name: 'OpenAI',
@@ -66,6 +79,7 @@ const PROVIDERS = {
     envKey: 'OPENAI_API_KEY',
     defaultModel: 'gpt-4o-mini',
     costPer1M: 0.15,
+    strengths: ['general', 'coding', 'structured-output', 'tool-use'],
   },
   openrouter: {
     name: 'OpenRouter',
@@ -73,6 +87,7 @@ const PROVIDERS = {
     envKey: 'OPENROUTER_API_KEY',
     defaultModel: 'meta-llama/llama-3.3-70b-instruct', // Can use any model!
     costPer1M: 0.50, // Varies by model
+    strengths: ['variety', 'fallback', 'model-selection'],
   },
 };
 
@@ -83,9 +98,23 @@ const PROVIDER_PRIORITY = [
   'kimi',       // Cheap, good for agent work
   'together',   // Cheap
   'openrouter', // Access to many models
-  'anthropic',  // Claude
   'openai',     // GPT
+  'anthropic',  // Claude
+  'grok',       // xAI - premium tier
 ];
+
+// Task-based routing — pick the best AI for specific jobs
+const TASK_ROUTING = {
+  'code':       ['deepseek', 'openai', 'anthropic'],      // Code generation/review
+  'reasoning':  ['deepseek', 'anthropic', 'grok'],         // Complex analysis
+  'speed':      ['groq', 'deepseek', 'openai'],            // Quick responses needed
+  'research':   ['kimi', 'grok', 'anthropic'],             // Long-context research
+  'creative':   ['grok', 'anthropic', 'openai'],           // Creative writing
+  'trading':    ['deepseek', 'groq', 'together'],          // Market analysis (d0t tasks)
+  'security':   ['anthropic', 'deepseek', 'grok'],         // Security analysis (c0m tasks)
+  'realtime':   ['grok', 'groq', 'openai'],                // Current events/X data
+  'default':    PROVIDER_PRIORITY,                         // Fallback to cost-optimized
+};
 
 // ════════════════════════════════════════════════════════════════
 // AI PROVIDER CLASS
@@ -122,6 +151,13 @@ class AIProviderHub {
   
   /**
    * Chat with the AI using the best available provider
+   * @param {string} prompt - The user prompt
+   * @param {Object} options - Configuration options
+   * @param {string} options.systemPrompt - System instructions
+   * @param {number} options.temperature - Creativity (0-1)
+   * @param {number} options.maxTokens - Max response length
+   * @param {string} options.preferredProvider - Force a specific provider
+   * @param {string} options.taskType - Task category for smart routing (code, reasoning, speed, research, creative, trading, security, realtime)
    */
   async chat(prompt, options = {}) {
     const {
@@ -129,10 +165,21 @@ class AIProviderHub {
       temperature = 0.7,
       maxTokens = 500,
       preferredProvider = null,
+      taskType = null,
     } = options;
     
-    // Build provider list (preferred first, then by priority)
-    let providerOrder = [...PROVIDER_PRIORITY];
+    // Build provider list based on task type or cost priority
+    let providerOrder;
+    if (taskType && TASK_ROUTING[taskType]) {
+      // Task-specific routing: use optimal providers for this task type
+      providerOrder = [...TASK_ROUTING[taskType], ...PROVIDER_PRIORITY];
+      // Deduplicate while preserving order
+      providerOrder = [...new Set(providerOrder)];
+    } else {
+      providerOrder = [...PROVIDER_PRIORITY];
+    }
+    
+    // Override with preferred provider if specified
     if (preferredProvider && this.availableProviders.includes(preferredProvider)) {
       providerOrder = [preferredProvider, ...providerOrder.filter(p => p !== preferredProvider)];
     }
@@ -258,9 +305,25 @@ class AIProviderHub {
         available: this.availableProviders.includes(id),
         model: config.defaultModel,
         costPer1M: config.costPer1M,
+        strengths: config.strengths || [],
       };
     }
     return status;
+  }
+  
+  /**
+   * Get best provider for a specific task type
+   * @param {string} taskType - Task category
+   * @returns {string|null} Best available provider ID
+   */
+  getBestProviderForTask(taskType) {
+    const routing = TASK_ROUTING[taskType] || TASK_ROUTING['default'];
+    for (const providerId of routing) {
+      if (this.availableProviders.includes(providerId)) {
+        return providerId;
+      }
+    }
+    return this.availableProviders[0] || null;
   }
 }
 
@@ -286,6 +349,7 @@ module.exports = {
   getAIHub,
   PROVIDERS,
   PROVIDER_PRIORITY,
+  TASK_ROUTING,
 };
 
 // ════════════════════════════════════════════════════════════════
@@ -303,7 +367,8 @@ if (require.main === module) {
     const status = hub.getStatus();
     for (const [id, info] of Object.entries(status)) {
       const icon = info.available ? '✅' : '❌';
-      console.log(`   ${icon} ${info.name}: ${info.available ? info.model : 'Not configured'}`);
+      const strengths = info.strengths.length ? ` [${info.strengths.slice(0,3).join(', ')}]` : '';
+      console.log(`   ${icon} ${info.name}: ${info.available ? info.model : 'Not configured'}${strengths}`);
     }
     
     if (hub.availableProviders.length === 0) {
@@ -315,10 +380,17 @@ if (require.main === module) {
       process.exit(1);
     }
     
+    console.log('\n🎯 Task Routing Examples:');
+    for (const taskType of ['code', 'trading', 'security', 'speed']) {
+      const best = hub.getBestProviderForTask(taskType);
+      console.log(`   ${taskType}: ${best ? PROVIDERS[best].name : 'none'}`);
+    }
+    
     console.log('\n🧪 Testing chat...');
     const result = await hub.chat('What is 2+2? Reply in one sentence.', {
       systemPrompt: 'You are a helpful math tutor. Be concise.',
       maxTokens: 50,
+      taskType: 'reasoning', // Use task-based routing
     });
     
     if (result.success) {

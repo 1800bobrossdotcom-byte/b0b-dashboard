@@ -1,0 +1,125 @@
+{
+  "target": "TWILIO",
+  "hackeroneUrl": "https://hackerone.com/twilio",
+  "reconDate": "2026-01-29",
+  "hunter": "c0m_security",
+  
+  "programInfo": {
+    "totalPaid": "$6,600",
+    "avgBounty": "$250-$350",
+    "topBounty": "$500-$700",
+    "responseRate": "99%",
+    "timeToTriage": "20 hours",
+    "timeToBounty": "3 days 11 hours",
+    "assetsInScope": 24,
+    "reportsReceived90Days": 443,
+    "reportsResolved": 2858,
+    "launchedDate": "Jan 2026"
+  },
+  
+  "scope": {
+    "primaryTargets": [
+      "api.twilio.com",
+      "Twilio APIs (Postman collection available!)",
+      "tsock.us1.twilio.com",
+      "*.sip.*.twilio.com",
+      "Twilio WebRTC Client",
+      "Twilio SDKs",
+      "Twilio Console (www.twilio.com/console)"
+    ],
+    "secondaryTargets": [
+      "static*.twilio.com (CDNs)",
+      "twilio.com/blog",
+      "help.twilio.com"
+    ],
+    "sendGridTargets": [
+      "sendgrid.com",
+      "app.sendgrid.com",
+      "signup.sendgrid.com",
+      "api.sendgrid.com",
+      "mc.sendgrid.com",
+      "smtp.sendgrid.net"
+    ],
+    "authyVerifyTargets": [
+      "Authy Android App",
+      "Authy iOS App",
+      "Twilio Verify API",
+      "Twilio Authy API"
+    ],
+    "segmentTargets": [
+      "app.segment.com",
+      "api.segment.io",
+      "Source code of Website/Mobile/Server Libraries"
+    ],
+    "otherTargets": [
+      "Any host/web property verified to be owned by Twilio"
+    ]
+  },
+  
+  "outOfScope": [
+    "DDoS/DoS attacks",
+    "Spam/phishing",
+    "Subdomain takeovers of demo/test TLDs",
+    "*.sendgrid.net click tracking",
+    "Wordpress findings",
+    "OpenVBX findings",
+    "Archived public repos",
+    "S3 bucket takeover from docs",
+    "Broken link hijacking on old docs"
+  ],
+  
+  "accountRequirements": {
+    "email": "Use @wearehackerone.com email",
+    "assetNaming": "hackerone-<email>-<random-string>",
+    "pocNaming": "twilio-hackerone-poc-<random-string>",
+    "customHeader": "X-Bug-Bounty: <username>-twilio"
+  },
+  
+  "techStack": {
+    "segment": "Node.js, React, GraphQL",
+    "apis": "REST APIs with Postman collection"
+  },
+  
+  "attackVectors": [
+    {
+      "target": "api.twilio.com",
+      "type": "API",
+      "notes": "Postman collection available - test auth, IDOR, injection"
+    },
+    {
+      "target": "app.sendgrid.com",
+      "type": "Web App",
+      "notes": "Email marketing platform - test account isolation"
+    },
+    {
+      "target": "Twilio Console",
+      "type": "Dashboard",
+      "notes": "Main user dashboard - IDOR, privilege escalation"
+    },
+    {
+      "target": "app.segment.com",
+      "type": "Analytics",
+      "notes": "Data platform - GraphQL endpoint, data sources"
+    },
+    {
+      "target": "signup.sendgrid.com",
+      "type": "Auth",
+      "notes": "Registration flow - account enum, bypass"
+    }
+  ],
+  
+  "status": "ACCOUNT_READY",
+  "accountInfo": {
+    "email": "1800bob@gmail.com",
+    "createdDate": "2026-01-29",
+    "credentialsLocation": "Desktop files",
+    "tier": "Free trial"
+  },
+  "nextSteps": [
+    "1. ✅ Create free Twilio account - DONE",
+    "2. Import Postman collection",
+    "3. Test API auth boundaries",
+    "4. Explore Segment GraphQL",
+    "5. Check SendGrid signup flow"
+  ]
+}

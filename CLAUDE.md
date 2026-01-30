@@ -1,6 +1,42 @@
 # b0b Platform - CLAUDE.md
 
-## Quick Start
+## 🔄 QUICK REFRESH (Say this to catch up!)
+
+**"swarm status"** or **"w3 ar3 - catch up"** or **"read CLAUDE.md"**
+
+When you say this, I will:
+1. Read `brain/brain-pulse.json` for current swarm state
+2. Check `brain/data/learnings/` for recent progress  
+3. Understand who we are and continue building
+
+## 🎨💀🔮 WHO WE ARE
+
+**W3 AR3 - The Swarm:**
+- **b0b** 🎨 - Creative Director, happy accidents, @_b0bdev_ (17M+ impressions, X Premium)
+- **c0m** 💀 - Security Lead, bug bounty hunter, c0m_security@HackerOne (VERIFIED)
+- **d0t** 🔮 - Data Analyst, pattern recognition, probability matrices
+- **r0ss** - Brand/Creative, artistic vision
+
+**Our Mission:** Build autonomous AI tools, hunt bug bounties, create community good.
+
+## 📊 CURRENT STATUS (Jan 2026)
+
+| System | Status | Details |
+|--------|--------|---------|
+| Railway | ✅ PRO | $20/mo, 1000 vCPU, unlimited scale |
+| X/Twitter | ✅ Premium | @_b0bdev_, blue check pending, 17M impressions |
+| HackerOne | ✅ VERIFIED | c0m_security, autonomous 2FA |
+| AgentMail | ✅ LIVE | b0b@, d0t@, c0m@agentmail.to |
+| Bug Bounty | 🔄 HUNTING | Twilio/ALSCO targets |
+
+## 🎯 ACTIVE HUNT
+
+**Target:** Twilio (24 assets, launched Jan 2026)
+**Recon:** `brain/data/recon/twilio-recon.json`
+**Findings:** `brain/data/recon/alsco-findings.json`
+**Tools:** `crawlers/c0m-*.js`
+
+## Quick Start (Original)
 
 **"Alfred is active. Continue."**
 

@@ -9,6 +9,14 @@
 | **APIs** | Bankr | TBD | Pending | Still working on subscription |
 | **APIs** | OpenAI | ~$20/mo | Active | GPT-4 for brain operations |
 | **APIs** | Anthropic | ~$20/mo | Active | Claude for development |
+| **APIs** | DeepSeek | $10.00 credit | ✅ Active | Cheapest AI (~$0.14/1M tokens) |
+| **APIs** | Kimi | $10.00 credit | ✅ Active | API key on desktop notepad |
+| **APIs** | Twilio | Free tier | ✅ Active | 1800bob gmail - files on desktop |
+| **APIs** | X (Twitter) | $25 credit | ✅ Active | API access for all 4 accounts |
+| **Social** | X Premium (b0b) | ~$8/mo | ✅ Active | Blue check verified |
+| **Social** | X Premium (c0m) | ~$8/mo | ✅ Active | Blue check verified |
+| **Social** | X Premium (d0t) | ~$8/mo | ✅ Active | Blue check verified |
+| **Social** | X Premium (r0ss) | ~$8/mo | ✅ Active | Blue check verified |
 | **Hosting** | Railway | ~$5-20/mo | Active | 0type, dashboard deployments |
 | **Hosting** | Vercel | $0 | Active | Free tier for static sites |
 | **Services** | AgentMail | Free tier | ✅ ACTIVE | Agent email addresses LIVE! |
@@ -17,7 +25,16 @@
 ### Monthly Total (Current)
 - **Fixed**: $1,330/mo (HQ + Internet)
 - **Variable**: ~$50-100/mo (APIs + Hosting)
-- **Estimated Monthly Burn**: ~$1,430 - $1,480
+- **X Premium**: ~$32/mo (4 accounts × $8)
+- **Estimated Monthly Burn**: ~$1,462 - $1,512
+
+### API Credits Available (One-Time Grants)
+| Provider | Credits | Status | Notes |
+|----------|---------|--------|-------|
+| DeepSeek | $10.00 | ✅ Active | Very cheap inference |
+| Kimi | $10.00 | ✅ Active | Key on desktop notepad |
+| X/Twitter | $25.00 | ✅ Active | Research + posting |
+| **Total** | **$45.00** | | Use wisely! |
 
 ---
 
@@ -62,7 +79,7 @@
 - ✅ Browser automation (Playwright) for autonomous registration
 
 ### Needed
-- [ ] Virtual phone numbers for 2FA (Twilio?)
+- [x] Virtual phone numbers for 2FA - **Twilio account active** (1800bob gmail)
 - [ ] Virtual cards for agents - **machines.cash** (portrait.so/machines)
   - Create virtual Visa cards from crypto
   - Card issuer: rain.xyz
@@ -95,7 +112,14 @@
 
 ## Notes
 
-### 2025-01 Observations
+### 2026-01-29 Updates
+- ✅ X Premium unlocked for all 4 swarm members (b0b, c0m, d0t, r0ss)
+- ✅ $25 X API credits for research and posting
+- ✅ $10 DeepSeek API credits
+- ✅ $10 Kimi API credits  
+- ✅ Twilio account created (1800bob gmail, files on desktop)
+- ✅ SendGrid access via Twilio (bug bounty target!)
+- ✅ c0m_security verified on HackerOne
 - Gmail bouncing emails to example.com addresses (dev_team@, security_team@)
 - Need to update placeholder emails throughout codebase
 - 0type.b0b.dev fully deployed with font foundry
@@ -103,4 +127,4 @@
 
 ---
 
-*Last updated: 2025-01-28*
+*Last updated: 2026-01-29*
