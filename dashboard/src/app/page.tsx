@@ -23,7 +23,7 @@ const RAMPS = {
   binary: ' █',
 };
 
-const BRAIN_URL = process.env.NEXT_PUBLIC_BRAIN_URL || 'https://brain.b0b.dev';
+const BRAIN_URL = process.env.NEXT_PUBLIC_BRAIN_URL || 'https://b0b-brain-production.up.railway.app';
 
 // ═══════════════════════════════════════════════════════════════
 // FULL PAGE GENERATIVE ENGINE
@@ -44,11 +44,6 @@ export default function B0bDev() {
   useEffect(() => {
     setMounted(true);
   }, []);
-  
-  // Show loader on first load
-  if (loading && mounted) {
-    return <L0RELoader message="B0B SYNTHESIZING" onComplete={() => setLoading(false)} minDuration={2000} />;
-  }
   
   // Fetch real trade count from local API (falls back to brain)
   useEffect(() => {
@@ -192,6 +187,11 @@ export default function B0bDev() {
   }, []);
   
   if (!mounted) return null;
+  
+  // Show loader on first load (AFTER all hooks)
+  if (loading) {
+    return <L0RELoader message="B0B SYNTHESIZING" onComplete={() => setLoading(false)} minDuration={2000} />;
+  }
   
   return (
     <>
