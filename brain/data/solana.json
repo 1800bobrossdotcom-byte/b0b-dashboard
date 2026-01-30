@@ -1,0 +1,11 @@
+{
+  "crawler": "solana",
+  "timestamp": "2026-01-30T10:37:39.531Z",
+  "data": {
+    "wallets": [],
+    "totalSol": 0,
+    "totalUsd": 0,
+    "solPrice": 0,
+    "fetchedAt": "2026-01-30T10:37:39.494Z"
+  }
+}

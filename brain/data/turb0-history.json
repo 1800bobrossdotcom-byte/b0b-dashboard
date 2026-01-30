@@ -19,5 +19,19 @@
     "confidence": 0.5,
     "l0reCode": "n.3qlb/t.l2/e.m/f.rang",
     "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-30T10:36:19.633Z",
+    "decision": "HOLD",
+    "confidence": 0.5,
+    "l0reCode": "n.3qlb/t.l2/e.m/f.rang",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-30T10:37:13.316Z",
+    "decision": "HOLD",
+    "confidence": 0.5,
+    "l0reCode": "n.3qlb/t.l2/e.m/f.rang",
+    "nash": "EQUILIBRIUM"
   }
 ]

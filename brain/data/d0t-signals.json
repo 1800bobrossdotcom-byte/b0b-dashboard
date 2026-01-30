@@ -1,8 +1,8 @@
 {
   "crawler": "d0t-signals",
-  "timestamp": "2026-01-30T10:23:52.016Z",
+  "timestamp": "2026-01-30T10:37:13.320Z",
   "data": {
-    "timestamp": "2026-01-30T10:23:50.614Z",
+    "timestamp": "2026-01-30T10:37:12.821Z",
     "agent": "d0t",
     "role": "Data Oracle",
     "sentiment": {
@@ -16,42 +16,42 @@
         "question": "US government shutdown Saturday?",
         "probability": "[",
         "volume24h": 9926677.48338102,
-        "liquidity": "235936.1961",
+        "liquidity": "260251.9486",
         "signal": "uncertain"
       },
       {
         "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
         "probability": "[",
         "volume24h": 5109718.668020005,
-        "liquidity": "286316.9791",
+        "liquidity": "308245.62704",
         "signal": "uncertain"
       },
       {
         "question": "Australian Open Men's: Carlos Alcaraz vs Alexander Zverev",
         "probability": "[",
         "volume24h": 4935067.930834998,
-        "liquidity": "2109269.37124",
+        "liquidity": "1961151.82213",
         "signal": "uncertain"
       },
       {
         "question": "Tesla launches unsupervised full self driving (FSD) by June 30?",
         "probability": "[",
         "volume24h": 4400193.233606,
-        "liquidity": "2161009.78844",
+        "liquidity": "2139722.99154",
         "signal": "uncertain"
       },
       {
         "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
         "probability": "[",
         "volume24h": 3912337.6698750183,
-        "liquidity": "413402.2219",
+        "liquidity": "383750.8273",
         "signal": "uncertain"
       }
     ],
     "onchain": {
-      "base_tvl": 4544479030.785606,
+      "base_tvl": 4534208848.684288,
       "base_change_1d": 0,
-      "eth_tvl": 66029507047.13213,
+      "eth_tvl": 65915763552.4443,
       "eth_change_1d": 0,
       "signal": "base_stable"
     },
@@ -208,8 +208,8 @@
         "momentum": -0.34,
         "regime": "ranging",
         "onchainChange": 0,
-        "baseTVL": 4544479030.785606,
-        "ethTVL": 66029507047.13213,
+        "baseTVL": 4534208848.684288,
+        "ethTVL": 65915763552.4443,
         "narrativeStrength": 0.5,
         "memeVelocity": 0,
         "volumeChange": 0,
@@ -217,7 +217,7 @@
       }
     },
     "turb0": {
-      "timestamp": "2026-01-30T10:23:52.012Z",
+      "timestamp": "2026-01-30T10:37:13.316Z",
       "decision": "HOLD",
       "confidence": 0.5,
       "size": 0,

@@ -1,212 +1,212 @@
 {
   "crawler": "polymarket",
-  "timestamp": "2026-01-30T02:35:07.102Z",
+  "timestamp": "2026-01-30T10:37:38.489Z",
   "data": {
     "markets": [
       {
         "id": "680392",
         "question": "US government shutdown Saturday?",
         "slug": "will-there-be-another-us-government-shutdown-by-january-31",
-        "volume24h": 9480512.933695968,
-        "liquidity": "167958.1075",
+        "volume24h": 9926677.48338102,
+        "liquidity": "260251.9486",
         "endDate": "2026-01-31T00:00:00Z",
-        "outcomePrices": "[\"0.565\", \"0.435\"]"
+        "outcomePrices": "[\"0.705\", \"0.295\"]"
       },
       {
-        "id": "694936",
-        "question": "Will Nebius Group be acquired before 2027?",
-        "slug": "will-nebius-group-be-acquired-before-2027-514",
-        "volume24h": 4200717.460237998,
-        "liquidity": "602.7285",
+        "id": "572473",
+        "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
+        "slug": "will-trump-nominate-judy-shelton-as-the-next-fed-chair",
+        "volume24h": 5109718.668020005,
+        "liquidity": "308245.62704",
         "endDate": "2026-12-31T00:00:00Z",
-        "outcomePrices": "[\"0.435\", \"0.565\"]"
+        "outcomePrices": "[\"0.025\", \"0.975\"]"
+      },
+      {
+        "id": "1276989",
+        "question": "Australian Open Men's: Carlos Alcaraz vs Alexander Zverev",
+        "slug": "atp-alcaraz-zverev-2026-01-30",
+        "volume24h": 4935067.930834998,
+        "liquidity": "1961151.82213",
+        "endDate": "2026-02-13T03:30:00Z",
+        "outcomePrices": "[\"0.9995\", \"0.0005\"]"
       },
       {
         "id": "565930",
         "question": "Tesla launches unsupervised full self driving (FSD) by June 30?",
         "slug": "tesla-launches-unsupervised-full-self-driving-fsd-by-october-31-717-337",
-        "volume24h": 3749340.9878849997,
-        "liquidity": "1531576.37469",
+        "volume24h": 4400193.233606,
+        "liquidity": "2140720.99154",
         "endDate": "2026-06-30T00:00:00Z",
         "outcomePrices": "[\"0.9985\", \"0.0015\"]"
       },
       {
-        "id": "654415",
-        "question": "Will the Fed increase interest rates by 25+ bps after the March 2026 meeting?",
-        "slug": "will-the-fed-increase-interest-rates-by-25-bps-after-the-march-2026-meeting",
-        "volume24h": 2679285.109233001,
-        "liquidity": "1832347.9147",
-        "endDate": "2026-03-18T00:00:00Z",
-        "outcomePrices": "[\"0.0075\", \"0.9925\"]"
+        "id": "572469",
+        "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
+        "slug": "will-trump-nominate-kevin-warsh-as-the-next-fed-chair",
+        "volume24h": 3912337.6698750183,
+        "liquidity": "383750.8273",
+        "endDate": "2026-12-31T00:00:00Z",
+        "outcomePrices": "[\"0.955\", \"0.045\"]"
+      },
+      {
+        "id": "572485",
+        "question": "Will Trump nominate Rick Rieder as the next Fed chair?",
+        "slug": "will-trump-nominate-rick-rieder-as-the-next-fed-chair",
+        "volume24h": 3668945.2202229984,
+        "liquidity": "167384.3308",
+        "endDate": "2026-12-31T00:00:00Z",
+        "outcomePrices": "[\"0.0155\", \"0.9845\"]"
+      },
+      {
+        "id": "572471",
+        "question": "Will Trump nominate Christopher Waller as the next Fed chair?",
+        "slug": "will-trump-nominate-christopher-waller-as-the-next-fed-chair",
+        "volume24h": 2716121.7052959995,
+        "liquidity": "94473.82904",
+        "endDate": "2026-12-31T00:00:00Z",
+        "outcomePrices": "[\"0.0025\", \"0.9975\"]"
+      },
+      {
+        "id": "572481",
+        "question": "Will Trump nominate Scott Bessent as the next Fed chair?",
+        "slug": "will-trump-nominate-scott-bessent-as-the-next-fed-chair",
+        "volume24h": 2383301.380263001,
+        "liquidity": "220213.09338",
+        "endDate": "2026-12-31T00:00:00Z",
+        "outcomePrices": "[\"0.0015\", \"0.9985\"]"
       },
       {
         "id": "1092199",
         "question": "US strikes Iran by January 31, 2026?",
         "slug": "us-strikes-iran-by-january-31-2026-165",
-        "volume24h": 2156039.1196339983,
-        "liquidity": "174955.0162",
+        "volume24h": 2271514.9070079997,
+        "liquidity": "189223.9521",
         "endDate": "2026-01-31T00:00:00Z",
-        "outcomePrices": "[\"0.135\", \"0.865\"]"
+        "outcomePrices": "[\"0.115\", \"0.885\"]"
       },
       {
-        "id": "1249370",
-        "question": "Kings vs. 76ers",
-        "slug": "nba-sac-phi-2026-01-29",
-        "volume24h": 1997738.608397001,
-        "liquidity": "9015.1023",
-        "endDate": "2026-01-30T00:00:00Z",
-        "outcomePrices": "[\"0.815\", \"0.185\"]"
+        "id": "654415",
+        "question": "Will the Fed increase interest rates by 25+ bps after the March 2026 meeting?",
+        "slug": "will-the-fed-increase-interest-rates-by-25-bps-after-the-march-2026-meeting",
+        "volume24h": 2211334.1310320063,
+        "liquidity": "1829362.46643",
+        "endDate": "2026-03-18T00:00:00Z",
+        "outcomePrices": "[\"0.0075\", \"0.9925\"]"
+      },
+      {
+        "id": "572470",
+        "question": "Will Trump nominate Kevin Hassett as the next Fed chair?",
+        "slug": "will-trump-nominate-kevin-hassett-as-the-next-fed-chair",
+        "volume24h": 2187682.582785,
+        "liquidity": "286092.89475",
+        "endDate": "2026-12-31T00:00:00Z",
+        "outcomePrices": "[\"0.0055\", \"0.9945\"]"
+      },
+      {
+        "id": "572486",
+        "question": "Will Trump nominate Michelle Bowman as the next Fed chair?",
+        "slug": "will-trump-nominate-michelle-bowman-as-the-next-fed-chair",
+        "volume24h": 2184615.383774998,
+        "liquidity": "205086.57725",
+        "endDate": "2026-12-31T00:00:00Z",
+        "outcomePrices": "[\"0.0025\", \"0.9975\"]"
+      },
+      {
+        "id": "572480",
+        "question": "Will Trump nominate Stephen Miran as the next Fed chair?",
+        "slug": "will-trump-nominate-stephen-miran-as-the-next-fed-chair",
+        "volume24h": 1751714.0664319994,
+        "liquidity": "472299.14087",
+        "endDate": "2026-12-31T00:00:00Z",
+        "outcomePrices": "[\"0.0005\", \"0.9995\"]"
       },
       {
         "id": "654412",
         "question": "Will the Fed decrease interest rates by 50+ bps after the March 2026 meeting?",
         "slug": "will-the-fed-decrease-interest-rates-by-50-bps-after-the-march-2026-meeting",
-        "volume24h": 1941669.052442001,
-        "liquidity": "844892.26532",
+        "volume24h": 1677540.9670410042,
+        "liquidity": "916974.46185",
         "endDate": "2026-03-18T00:00:00Z",
-        "outcomePrices": "[\"0.0155\", \"0.9845\"]"
+        "outcomePrices": "[\"0.0135\", \"0.9865\"]"
       },
       {
-        "id": "1252878",
-        "question": "US strikes Iran by January 29, 2026?",
-        "slug": "us-strikes-iran-by-january-29-2026-183-883-657-383-499",
-        "volume24h": 1756439.4267989998,
-        "liquidity": "42537.26938",
+        "id": "920396",
+        "question": "Will Trump talk to Emmanuel Macron in January?",
+        "slug": "will-trump-talk-to-emmanuel-macron-in-january",
+        "volume24h": 1413980.930514,
+        "liquidity": "2405390.64744",
         "endDate": "2026-01-31T00:00:00Z",
-        "outcomePrices": "[\"0.0045\", \"0.9955\"]"
+        "outcomePrices": "[\"0.9995\", \"0.0005\"]"
       },
       {
-        "id": "1249375",
-        "question": "Rockets vs. Hawks",
-        "slug": "nba-hou-atl-2026-01-29",
-        "volume24h": 1523543.4633250001,
-        "liquidity": "51790.1446",
-        "endDate": "2026-01-30T01:00:00Z",
-        "outcomePrices": "[\"0.855\", \"0.145\"]"
+        "id": "1082781",
+        "question": "Will Bitcoin reach $100,000 in January?",
+        "slug": "will-bitcoin-reach-100k-in-january-2026",
+        "volume24h": 1170494.1662659994,
+        "liquidity": "190505.10654",
+        "endDate": "2026-02-01T05:00:00Z",
+        "outcomePrices": "[\"0.0015\", \"0.9985\"]"
       },
       {
-        "id": "1249372",
-        "question": "Bucks vs. Wizards",
-        "slug": "nba-mil-was-2026-01-29",
-        "volume24h": 1398377.1658399948,
-        "liquidity": "65501.1615",
-        "endDate": "2026-01-30T00:00:00Z",
-        "outcomePrices": "[\"0.025\", \"0.975\"]"
+        "id": "553861",
+        "question": "Will the Indiana Pacers win the 2026 NBA Finals?",
+        "slug": "will-the-indiana-pacers-win-the-2026-nba-finals",
+        "volume24h": 1144689.8939999999,
+        "liquidity": "275948.8997",
+        "endDate": "2026-07-01T00:00:00Z",
+        "outcomePrices": "[\"0.0005\", \"0.9995\"]"
       },
       {
-        "id": "1249388",
-        "question": "Heat vs. Bulls",
-        "slug": "nba-mia-chi-2026-01-29",
-        "volume24h": 1314619.337912999,
-        "liquidity": "28032.4518",
-        "endDate": "2026-01-30T01:00:00Z",
-        "outcomePrices": "[\"0.805\", \"0.195\"]"
-      },
-      {
-        "id": "1249383",
-        "question": "Pistons vs. Suns",
-        "slug": "nba-det-phx-2026-01-29",
-        "volume24h": 1234563.9669450014,
-        "liquidity": "53592.6264",
-        "endDate": "2026-01-30T02:00:00Z",
-        "outcomePrices": "[\"0.515\", \"0.485\"]"
-      },
-      {
-        "id": "1249386",
-        "question": "Thunder vs. Timberwolves",
-        "slug": "nba-okc-min-2026-01-29",
-        "volume24h": 1231905.3990019986,
-        "liquidity": "164692.6469",
-        "endDate": "2026-01-30T02:30:00Z",
-        "outcomePrices": "[\"0.645\", \"0.355\"]"
-      },
-      {
-        "id": "654414",
-        "question": "Will there be no change in Fed interest rates after the March 2026 meeting?",
-        "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-march-2026-meeting",
-        "volume24h": 1160562.9298369999,
-        "liquidity": "529072.8007",
-        "endDate": "2026-03-18T00:00:00Z",
-        "outcomePrices": "[\"0.905\", \"0.095\"]"
-      },
-      {
-        "id": "1087861",
-        "question": "Islanders vs. Rangers",
-        "slug": "nhl-nyi-nyr-2026-01-29",
-        "volume24h": 936279.1014959994,
-        "liquidity": "6774.8578",
-        "endDate": "2026-01-30T00:00:00Z",
-        "outcomePrices": "[\"0.89\", \"0.11\"]"
-      },
-      {
-        "id": "704339",
-        "question": "Russia x Ukraine ceasefire by January 31, 2026?",
-        "slug": "russia-x-ukraine-ceasefire-by-january-31-2026",
-        "volume24h": 917444.7234340003,
-        "liquidity": "210414.72503",
-        "endDate": "2026-01-31T00:00:00Z",
-        "outcomePrices": "[\"0.005\", \"0.995\"]"
-      },
-      {
-        "id": "1249378",
-        "question": "Hornets vs. Mavericks",
-        "slug": "nba-cha-dal-2026-01-29",
-        "volume24h": 885528.6722770015,
-        "liquidity": "61611.868",
-        "endDate": "2026-01-30T01:30:00Z",
-        "outcomePrices": "[\"0.585\", \"0.415\"]"
+        "id": "1119646",
+        "question": "New \"Stranger Things\" episode released by January 31? ",
+        "slug": "new-stranger-things-episode-released-by-january-31-294",
+        "volume24h": 1139854.046325,
+        "liquidity": "274376.41013",
+        "endDate": "2026-01-07T00:00:00Z",
+        "outcomePrices": "[\"0.0015\", \"0.9985\"]"
       },
       {
         "id": "1106713",
         "question": "Khamenei out as Supreme Leader of Iran by January 31?",
         "slug": "khamenei-out-as-supreme-leader-of-iran-by-january-31",
-        "volume24h": 845316.4368419996,
-        "liquidity": "241945.80048",
+        "volume24h": 1126217.2500019993,
+        "liquidity": "271702.57483",
         "endDate": "2026-01-31T00:00:00Z",
-        "outcomePrices": "[\"0.0215\", \"0.9785\"]"
+        "outcomePrices": "[\"0.0105\", \"0.9895\"]"
       },
       {
-        "id": "1087859",
-        "question": "Jets vs. Lightning",
-        "slug": "nhl-wpg-tb-2026-01-29",
-        "volume24h": 840626.7268769986,
-        "liquidity": "7708.8987",
-        "endDate": "2026-01-30T00:00:00Z",
-        "outcomePrices": "[\"0.0185\", \"0.9815\"]"
-      },
-      {
-        "id": "1249382",
-        "question": "Nets vs. Nuggets",
-        "slug": "nba-bkn-den-2026-01-29",
-        "volume24h": 822835.020326999,
-        "liquidity": "75738.4163",
-        "endDate": "2026-01-30T02:00:00Z",
-        "outcomePrices": "[\"0.3\", \"0.7\"]"
+        "id": "572478",
+        "question": "Will Trump nominate Jerome Powell as the next Fed chair?",
+        "slug": "will-trump-nominate-jerome-powell-as-the-next-fed-chair",
+        "volume24h": 1100372.0099,
+        "liquidity": "967007.05148",
+        "endDate": "2026-12-31T00:00:00Z",
+        "outcomePrices": "[\"0.0005\", \"0.9995\"]"
       }
     ],
     "trending": [
       {
         "question": "US government shutdown Saturday?",
-        "volume": 9480512.933695968
+        "volume": 9926677.48338102
       },
       {
-        "question": "Will Nebius Group be acquired before 2027?",
-        "volume": 4200717.460237998
+        "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
+        "volume": 5109718.668020005
+      },
+      {
+        "question": "Australian Open Men's: Carlos Alcaraz vs Alexander Zverev",
+        "volume": 4935067.930834998
       },
       {
         "question": "Tesla launches unsupervised full self driving (FSD) by June 30?",
-        "volume": 3749340.9878849997
+        "volume": 4400193.233606
       },
       {
-        "question": "Will the Fed increase interest rates by 25+ bps after the March 2026 meeting?",
-        "volume": 2679285.109233001
-      },
-      {
-        "question": "US strikes Iran by January 31, 2026?",
-        "volume": 2156039.1196339983
+        "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
+        "volume": 3912337.6698750183
       }
     ],
-    "volume24h": 41073345.64243896,
-    "fetchedAt": "2026-01-30T02:35:06.765Z"
+    "volume24h": 56432373.626579046,
+    "fetchedAt": "2026-01-30T10:37:38.255Z"
   }
 }

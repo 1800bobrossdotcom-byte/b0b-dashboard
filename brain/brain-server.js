@@ -44,6 +44,18 @@ try {
   console.log('[BRAIN] L0RE Lexicon not available:', e.message);
 }
 
+// Freshness Monitor — Stale data sweep system
+let freshnessMonitor;
+try {
+  const { getMonitor } = require('./freshness-monitor.js');
+  getMonitor(path.join(__dirname, 'data')).then(m => {
+    freshnessMonitor = m;
+    console.log('[BRAIN] Freshness Monitor loaded — keeping data fresh 🌿');
+  });
+} catch (e) {
+  console.log('[BRAIN] Freshness Monitor not available:', e.message);
+}
+
 // Research Library — PDF/doc knowledge base
 const LIBRARY_DIR = path.join(__dirname, 'data', 'library');
 const LIBRARY_INDEX_DIR = path.join(LIBRARY_DIR, 'index');
@@ -4482,6 +4494,7 @@ app.get('/swarm/live', async (req, res) => {
       tradingStatus: tradingStatus,
       costs: apiCosts,
       daemonPulse: swarmPulse,
+      freshness: freshnessMonitor ? freshnessMonitor.getL0REStatus() : null,
       dataFreshness: {
         d0t: d0tSignals?._lastUpdated || 'never',
         r0ss: r0ssResearch?._lastUpdated || 'never',
@@ -4597,6 +4610,43 @@ app.get('/swarm/pulse', async (req, res) => {
 });
 
 /**
+ * GET /freshness
+ * Full freshness inventory — like checking the fridge
+ */
+app.get('/freshness', async (req, res) => {
+  if (!freshnessMonitor) {
+    return res.status(503).json({ error: 'Freshness monitor not initialized' });
+  }
+  
+  // Run a sweep and return results
+  const sweep = await freshnessMonitor.sweep();
+  res.json(freshnessMonitor.getAPIResponse());
+});
+
+/**
+ * GET /freshness/l0re
+ * L0RE-formatted freshness for viz integration
+ */
+app.get('/freshness/l0re', async (req, res) => {
+  if (!freshnessMonitor) {
+    return res.status(503).json({ error: 'Freshness monitor not initialized' });
+  }
+  res.json(freshnessMonitor.getL0REStatus());
+});
+
+/**
+ * GET /freshness/sweep
+ * Force a fresh sweep and return results
+ */
+app.get('/freshness/sweep', async (req, res) => {
+  if (!freshnessMonitor) {
+    return res.status(503).json({ error: 'Freshness monitor not initialized' });
+  }
+  const sweep = await freshnessMonitor.sweep();
+  res.json(sweep);
+});
+
+/**
  * POST /crawlers/run
  * Trigger crawler runs from external sources (e.g., GitHub Actions)
  */
@@ -4638,6 +4688,19 @@ app.listen(PORT, () => {
     
     // Schedule heartbeat every 5 minutes
     setInterval(heartbeat, 5 * 60 * 1000);
+    
+    // ═══════════════════════════════════════════════════════════════════════════
+    // FRESHNESS MONITOR — Auto sweep for stale data
+    // ═══════════════════════════════════════════════════════════════════════════
+    if (freshnessMonitor) {
+      // Initial sweep
+      freshnessMonitor.sweep().catch(e => console.log('  ⚠️ Freshness sweep:', e.message));
+      // Run sweep every 30 seconds
+      setInterval(() => {
+        freshnessMonitor.sweep().catch(e => console.log('  ⚠️ Freshness sweep:', e.message));
+      }, 30 * 1000);
+      console.log('  🌿 Freshness Monitor: RUNNING (30s sweep)');
+    }
     
     // Auto-start Polymarket crawler - FAST MODE (2 min)
     if (axios) {

@@ -586,5 +586,299 @@
       "category": "d.w5bn"
     },
     "quote": "Knowledge compounds. Collect wisely."
+  },
+  {
+    "id": "learning-2026-01-30-r0ss-research",
+    "timestamp": "2026-01-30T10:36:26.358Z",
+    "agent": "r0ss",
+    "category": "research_papers",
+    "title": "r0ss Research Digest - 2026-01-30",
+    "summary": "Found 10 relevant papers, 1 recommendations",
+    "papers": [
+      {
+        "title": "Hybrid Linear Attention Done Right: Efficient Distillation and Effective Architectures for Extremely Long Contexts",
+        "id": "2601.22156v1",
+        "relevance": 6,
+        "keywords": [
+          "transformer",
+          "attention"
+        ]
+      },
+      {
+        "title": "SWE-Replay: Efficient Test-Time Scaling for Software Engineering Agents",
+        "id": "2601.22129v1",
+        "relevance": 4,
+        "keywords": [
+          "scaling"
+        ]
+      },
+      {
+        "title": "Exploring Reasoning Reward Model for Agents",
+        "id": "2601.22154v1",
+        "relevance": 3,
+        "keywords": [
+          "reasoning"
+        ]
+      },
+      {
+        "title": "FineInstructions: Scaling Synthetic Instructions to Pre-Training Scale",
+        "id": "2601.22146v1",
+        "relevance": 3,
+        "keywords": [
+          "scaling"
+        ]
+      },
+      {
+        "title": "Reasoning While Asking: Transforming Reasoning Large Language Models from Passive Solvers to Proactive Inquirers",
+        "id": "2601.22139v1",
+        "relevance": 3,
+        "keywords": [
+          "reasoning"
+        ]
+      }
+    ],
+    "connections": [
+      {
+        "paper1": "Hybrid Linear Attention Done Right: Efficient Dist",
+        "paper2": "EditYourself: Audio-Driven Generation and Manipula",
+        "sharedConcepts": [
+          "transformer"
+        ],
+        "strength": 1
+      },
+      {
+        "paper1": "SWE-Replay: Efficient Test-Time Scaling for Softwa",
+        "paper2": "FineInstructions: Scaling Synthetic Instructions t",
+        "sharedConcepts": [
+          "scaling"
+        ],
+        "strength": 1
+      },
+      {
+        "paper1": "Exploring Reasoning Reward Model for Agents",
+        "paper2": "Reasoning While Asking: Transforming Reasoning Lar",
+        "sharedConcepts": [
+          "reasoning"
+        ],
+        "strength": 1
+      },
+      {
+        "paper1": "Exploring Reasoning Reward Model for Agents",
+        "paper2": "Pay for Hints, Not Answers: LLM Shepherding for Co",
+        "sharedConcepts": [
+          "reasoning"
+        ],
+        "strength": 1
+      },
+      {
+        "paper1": "Reasoning While Asking: Transforming Reasoning Lar",
+        "paper2": "Pay for Hints, Not Answers: LLM Shepherding for Co",
+        "sharedConcepts": [
+          "reasoning"
+        ],
+        "strength": 1
+      }
+    ],
+    "recommendations": [
+      {
+        "type": "add_to_library",
+        "paper": "Hybrid Linear Attention Done Right: Efficient Distillation and Effective Architectures for Extremely Long Contexts",
+        "id": "2601.22156v1",
+        "url": "https://arxiv.org/abs/2601.22156v1",
+        "reason": "High relevance (6) - transformer, attention",
+        "priority": "medium"
+      }
+    ],
+    "libraryStats": {
+      "indexedCount": 27,
+      "documents": [
+        "0502072",
+        "0704.0646",
+        "12factor-net",
+        "1401.1219",
+        "1409.0813",
+        "1507.03628",
+        "1701.06903",
+        "1801.00862",
+        "1910.09534",
+        "2007.00095",
+        "2208.11372",
+        "2305.10601",
+        "2305.16291",
+        "2309.02427",
+        "berkshire-2023-letter",
+        "entropy",
+        "gwern-net-scaling-hypothesis",
+        "hackerone-com-dod-vdp",
+        "nakamotoinstitute-org-bitcoin",
+        "sre-google-sre-book-introduction",
+        "tegmark-mathematical-universe",
+        "vitalik-eth-limo-general-2021-02-18-election-h",
+        "vitalik-eth-limo-general-2024-05-09-dacc-html",
+        "waitbutwhy-com-2015-01-artificial-intelligen",
+        "warren-buffett-way",
+        "www-bugcrowd-com-blog-bugcrowd-announces-partn",
+        "www-paulgraham-com-think-html"
+      ],
+      "categories": [
+        "aaronson",
+        "tegmark",
+        "wolfram",
+        "shannon"
+      ],
+      "lastUpdated": "2026-01-30"
+    },
+    "l0re_codes": {
+      "agent": "a.k3nt",
+      "category": "d.w5bn"
+    },
+    "quote": "Knowledge compounds. Collect wisely."
+  },
+  {
+    "id": "learning-2026-01-30-r0ss-research",
+    "timestamp": "2026-01-30T10:37:14.336Z",
+    "agent": "r0ss",
+    "category": "research_papers",
+    "title": "r0ss Research Digest - 2026-01-30",
+    "summary": "Found 10 relevant papers, 1 recommendations",
+    "papers": [
+      {
+        "title": "Hybrid Linear Attention Done Right: Efficient Distillation and Effective Architectures for Extremely Long Contexts",
+        "id": "2601.22156v1",
+        "relevance": 6,
+        "keywords": [
+          "transformer",
+          "attention"
+        ]
+      },
+      {
+        "title": "SWE-Replay: Efficient Test-Time Scaling for Software Engineering Agents",
+        "id": "2601.22129v1",
+        "relevance": 4,
+        "keywords": [
+          "scaling"
+        ]
+      },
+      {
+        "title": "Exploring Reasoning Reward Model for Agents",
+        "id": "2601.22154v1",
+        "relevance": 3,
+        "keywords": [
+          "reasoning"
+        ]
+      },
+      {
+        "title": "FineInstructions: Scaling Synthetic Instructions to Pre-Training Scale",
+        "id": "2601.22146v1",
+        "relevance": 3,
+        "keywords": [
+          "scaling"
+        ]
+      },
+      {
+        "title": "Reasoning While Asking: Transforming Reasoning Large Language Models from Passive Solvers to Proactive Inquirers",
+        "id": "2601.22139v1",
+        "relevance": 3,
+        "keywords": [
+          "reasoning"
+        ]
+      }
+    ],
+    "connections": [
+      {
+        "paper1": "Hybrid Linear Attention Done Right: Efficient Dist",
+        "paper2": "EditYourself: Audio-Driven Generation and Manipula",
+        "sharedConcepts": [
+          "transformer"
+        ],
+        "strength": 1
+      },
+      {
+        "paper1": "SWE-Replay: Efficient Test-Time Scaling for Softwa",
+        "paper2": "FineInstructions: Scaling Synthetic Instructions t",
+        "sharedConcepts": [
+          "scaling"
+        ],
+        "strength": 1
+      },
+      {
+        "paper1": "Exploring Reasoning Reward Model for Agents",
+        "paper2": "Reasoning While Asking: Transforming Reasoning Lar",
+        "sharedConcepts": [
+          "reasoning"
+        ],
+        "strength": 1
+      },
+      {
+        "paper1": "Exploring Reasoning Reward Model for Agents",
+        "paper2": "Pay for Hints, Not Answers: LLM Shepherding for Co",
+        "sharedConcepts": [
+          "reasoning"
+        ],
+        "strength": 1
+      },
+      {
+        "paper1": "Reasoning While Asking: Transforming Reasoning Lar",
+        "paper2": "Pay for Hints, Not Answers: LLM Shepherding for Co",
+        "sharedConcepts": [
+          "reasoning"
+        ],
+        "strength": 1
+      }
+    ],
+    "recommendations": [
+      {
+        "type": "add_to_library",
+        "paper": "Hybrid Linear Attention Done Right: Efficient Distillation and Effective Architectures for Extremely Long Contexts",
+        "id": "2601.22156v1",
+        "url": "https://arxiv.org/abs/2601.22156v1",
+        "reason": "High relevance (6) - transformer, attention",
+        "priority": "medium"
+      }
+    ],
+    "libraryStats": {
+      "indexedCount": 27,
+      "documents": [
+        "0502072",
+        "0704.0646",
+        "12factor-net",
+        "1401.1219",
+        "1409.0813",
+        "1507.03628",
+        "1701.06903",
+        "1801.00862",
+        "1910.09534",
+        "2007.00095",
+        "2208.11372",
+        "2305.10601",
+        "2305.16291",
+        "2309.02427",
+        "berkshire-2023-letter",
+        "entropy",
+        "gwern-net-scaling-hypothesis",
+        "hackerone-com-dod-vdp",
+        "nakamotoinstitute-org-bitcoin",
+        "sre-google-sre-book-introduction",
+        "tegmark-mathematical-universe",
+        "vitalik-eth-limo-general-2021-02-18-election-h",
+        "vitalik-eth-limo-general-2024-05-09-dacc-html",
+        "waitbutwhy-com-2015-01-artificial-intelligen",
+        "warren-buffett-way",
+        "www-bugcrowd-com-blog-bugcrowd-announces-partn",
+        "www-paulgraham-com-think-html"
+      ],
+      "categories": [
+        "aaronson",
+        "tegmark",
+        "wolfram",
+        "shannon"
+      ],
+      "lastUpdated": "2026-01-30"
+    },
+    "l0re_codes": {
+      "agent": "a.k3nt",
+      "category": "d.w5bn"
+    },
+    "quote": "Knowledge compounds. Collect wisely."
   }
 ]

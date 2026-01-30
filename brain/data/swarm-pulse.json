@@ -1,0 +1,155 @@
+{
+  "timestamp": "2026-01-30T10:37:41.680Z",
+  "uptime": 28915,
+  "crawlers": {
+    "d0t-signals": {
+      "name": "d0t-signals",
+      "running": false,
+      "lastRun": "2026-01-30T10:37:13.321Z",
+      "runCount": 1,
+      "errorCount": 0,
+      "interval": 60000,
+      "nextRun": "2026-01-30T10:38:13.321Z"
+    },
+    "r0ss-research": {
+      "name": "r0ss-research",
+      "running": false,
+      "lastRun": "2026-01-30T10:37:14.589Z",
+      "runCount": 1,
+      "errorCount": 0,
+      "interval": 300000,
+      "nextRun": "2026-01-30T10:42:14.589Z"
+    },
+    "b0b-creative": {
+      "name": "b0b-creative",
+      "running": false,
+      "lastRun": "2026-01-30T10:37:17.785Z",
+      "runCount": 1,
+      "errorCount": 0,
+      "interval": 600000,
+      "nextRun": "2026-01-30T10:47:17.785Z"
+    },
+    "twitter": {
+      "name": "twitter",
+      "running": false,
+      "lastRun": "2026-01-30T10:37:18.795Z",
+      "runCount": 1,
+      "errorCount": 0,
+      "interval": 120000,
+      "nextRun": "2026-01-30T10:39:18.795Z"
+    },
+    "x-conversations": {
+      "name": "x-conversations",
+      "running": false,
+      "lastRun": null,
+      "runCount": 0,
+      "errorCount": 1,
+      "interval": 180000,
+      "nextRun": "pending"
+    },
+    "content": {
+      "name": "content",
+      "running": false,
+      "lastRun": "2026-01-30T10:37:37.251Z",
+      "runCount": 1,
+      "errorCount": 0,
+      "interval": 1800000,
+      "nextRun": "2026-01-30T11:07:37.251Z"
+    },
+    "polymarket": {
+      "name": "polymarket",
+      "running": false,
+      "lastRun": "2026-01-30T10:37:38.490Z",
+      "runCount": 1,
+      "errorCount": 0,
+      "interval": 30000,
+      "nextRun": "2026-01-30T10:38:08.490Z"
+    },
+    "solana": {
+      "name": "solana",
+      "running": false,
+      "lastRun": "2026-01-30T10:37:39.531Z",
+      "runCount": 1,
+      "errorCount": 0,
+      "interval": 60000,
+      "nextRun": "2026-01-30T10:38:39.531Z"
+    },
+    "library-sync": {
+      "name": "library-sync",
+      "running": true,
+      "lastRun": null,
+      "runCount": 0,
+      "errorCount": 0,
+      "interval": 3600000,
+      "nextRun": "pending"
+    }
+  },
+  "costs": {
+    "timestamp": "2026-01-30T10:37:41.680Z",
+    "daily": {
+      "spend": 0,
+      "limit": 2,
+      "pct": 0
+    },
+    "monthly": {
+      "spend": 0,
+      "limit": 50,
+      "pct": 0
+    },
+    "warning": false,
+    "pause": false,
+    "providers": [
+      {
+        "id": "groq",
+        "cost": 0,
+        "budget": null,
+        "used": 0,
+        "label": "Groq (FREE)"
+      },
+      {
+        "id": "deepseek",
+        "cost": 0.14,
+        "budget": 10,
+        "used": 0,
+        "label": "DeepSeek"
+      },
+      {
+        "id": "kimi",
+        "cost": 0.3,
+        "budget": 10,
+        "used": 0,
+        "label": "Kimi/Moonshot"
+      },
+      {
+        "id": "openrouter",
+        "cost": 0.5,
+        "budget": 5,
+        "used": 0,
+        "label": "OpenRouter"
+      },
+      {
+        "id": "anthropic",
+        "cost": 0.25,
+        "budget": 20,
+        "used": 0,
+        "label": "Anthropic"
+      },
+      {
+        "id": "openai",
+        "cost": 0.15,
+        "budget": 20,
+        "used": 0,
+        "label": "OpenAI"
+      },
+      {
+        "id": "grok",
+        "cost": 5,
+        "budget": 25,
+        "used": 0,
+        "label": "Grok/xAI"
+      }
+    ],
+    "recommendation": "NORMAL_OPERATION"
+  },
+  "providers": []
+}

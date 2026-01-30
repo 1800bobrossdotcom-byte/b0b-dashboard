@@ -59,6 +59,26 @@
         "signal": "BEARISH"
       },
       "nash": "EQUILIBRIUM"
+    },
+    {
+      "timestamp": "2026-01-30T10:36:19.636Z",
+      "l0reCode": "n.3qlb/t.l2/e.m/f.rang",
+      "composite": {
+        "score": 0.3376150742265723,
+        "confidence": 0.5,
+        "signal": "BEARISH"
+      },
+      "nash": "EQUILIBRIUM"
+    },
+    {
+      "timestamp": "2026-01-30T10:37:13.318Z",
+      "l0reCode": "n.3qlb/t.l2/e.m/f.rang",
+      "composite": {
+        "score": 0.3376150742265723,
+        "confidence": 0.5,
+        "signal": "BEARISH"
+      },
+      "nash": "EQUILIBRIUM"
     }
   ]
 }
