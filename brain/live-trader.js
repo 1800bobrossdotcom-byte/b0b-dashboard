@@ -391,7 +391,7 @@ async function getTradingControl() {
   } catch {
     return {
       paused: true,
-      reason: 'Waiting for Bankr Club membership',
+      reason: 'No trading control file - create via /trading/control API',
       pausedAt: new Date().toISOString(),
       pausedBy: 'system'
     };

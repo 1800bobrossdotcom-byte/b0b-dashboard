@@ -4938,6 +4938,199 @@ app.post('/crawlers/run', async (req, res) => {
 });
 
 // =============================================================================
+// AGENT TOOLKIT — Remote agent capabilities
+// =============================================================================
+
+// Store for agent states (in-memory, persisted to disk)
+const agentStates = {};
+const AGENT_STATES_FILE = path.join(DATA_DIR, 'agent-states.json');
+
+// Load agent states on startup
+try {
+  if (fs.existsSync(AGENT_STATES_FILE)) {
+    const data = fs.readFileSync(AGENT_STATES_FILE, 'utf8');
+    Object.assign(agentStates, JSON.parse(data));
+    console.log('[BRAIN] Loaded agent states for:', Object.keys(agentStates).join(', '));
+  }
+} catch (e) {
+  console.log('[BRAIN] No existing agent states');
+}
+
+/**
+ * POST /api/agent-heartbeat
+ * Agents report their status periodically
+ */
+app.post('/api/agent-heartbeat', async (req, res) => {
+  try {
+    const { agentId, mode, localBridgeConnected, stats, timestamp } = req.body;
+    
+    if (!agentStates[agentId]) {
+      agentStates[agentId] = { history: [] };
+    }
+    
+    agentStates[agentId].lastHeartbeat = timestamp;
+    agentStates[agentId].mode = mode;
+    agentStates[agentId].localBridgeConnected = localBridgeConnected;
+    agentStates[agentId].stats = stats;
+    agentStates[agentId].history.push({ timestamp, mode, stats });
+    
+    // Keep last 100 heartbeats
+    if (agentStates[agentId].history.length > 100) {
+      agentStates[agentId].history = agentStates[agentId].history.slice(-100);
+    }
+    
+    // Persist
+    await fs.promises.writeFile(AGENT_STATES_FILE, JSON.stringify(agentStates, null, 2));
+    
+    res.json({ received: true, agentId });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/**
+ * POST /api/agent-sync
+ * Full state sync from agent
+ */
+app.post('/api/agent-sync', async (req, res) => {
+  try {
+    const { agentId, state, timestamp } = req.body;
+    
+    agentStates[agentId] = {
+      ...agentStates[agentId],
+      ...state,
+      lastSync: timestamp,
+    };
+    
+    await fs.promises.writeFile(AGENT_STATES_FILE, JSON.stringify(agentStates, null, 2));
+    
+    res.json({ synced: true, agentId });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/**
+ * GET /api/agents
+ * List all registered agents and their status
+ */
+app.get('/api/agents', (req, res) => {
+  const agents = Object.entries(agentStates).map(([id, state]) => ({
+    id,
+    ...state,
+    online: state.lastHeartbeat && (Date.now() - new Date(state.lastHeartbeat).getTime()) < 60000,
+  }));
+  
+  res.json({ agents, count: agents.length });
+});
+
+/**
+ * GET /api/agent/:id
+ * Get specific agent status
+ */
+app.get('/api/agent/:id', (req, res) => {
+  const { id } = req.params;
+  const state = agentStates[id];
+  
+  if (!state) {
+    return res.status(404).json({ error: 'Agent not found' });
+  }
+  
+  res.json({
+    id,
+    ...state,
+    online: state.lastHeartbeat && (Date.now() - new Date(state.lastHeartbeat).getTime()) < 60000,
+  });
+});
+
+/**
+ * POST /api/agent/:id/task
+ * Assign task to specific agent
+ */
+app.post('/api/agent/:id/task', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, description, priority } = req.body;
+    
+    // Save task to agent's task file
+    const taskFile = path.join(DATA_DIR, 'agents', id, 'tasks.json');
+    await fs.promises.mkdir(path.dirname(taskFile), { recursive: true });
+    
+    let tasks = { pending: [], inProgress: [], completed: [] };
+    try {
+      const existing = await fs.promises.readFile(taskFile, 'utf8');
+      tasks = JSON.parse(existing);
+    } catch {}
+    
+    const task = {
+      id: `${id}-${Date.now()}`,
+      title,
+      description,
+      priority: priority || 'medium',
+      createdAt: new Date().toISOString(),
+      createdBy: 'brain',
+    };
+    
+    tasks.pending.push(task);
+    await fs.promises.writeFile(taskFile, JSON.stringify(tasks, null, 2));
+    
+    res.json({ assigned: true, task });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/**
+ * GET /api/tasks
+ * Get all tasks across all agents
+ */
+app.get('/api/tasks', async (req, res) => {
+  try {
+    const agentsDir = path.join(DATA_DIR, 'agents');
+    const allTasks = [];
+    
+    // Also include alfred queue
+    const alfredQueuePath = path.join(__dirname, '..', 'alfred', 'queue.json');
+    try {
+      const alfredQueue = JSON.parse(await fs.promises.readFile(alfredQueuePath, 'utf8'));
+      if (alfredQueue.tasks) {
+        alfredQueue.tasks.forEach((t, i) => {
+          allTasks.push({
+            id: `alfred-${i}`,
+            title: t,
+            agent: 'alfred',
+            priority: 'medium',
+            status: 'pending',
+          });
+        });
+      }
+    } catch {}
+    
+    // Check agent task files
+    try {
+      const agents = await fs.promises.readdir(agentsDir);
+      for (const agent of agents) {
+        const taskFile = path.join(agentsDir, agent, 'tasks.json');
+        try {
+          const tasks = JSON.parse(await fs.promises.readFile(taskFile, 'utf8'));
+          for (const status of ['pending', 'inProgress', 'completed']) {
+            if (tasks[status]) {
+              tasks[status].forEach(t => {
+                allTasks.push({ ...t, agent, status });
+              });
+            }
+          }
+        } catch {}
+      }
+    } catch {}
+    
+    res.json(allTasks);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// =============================================================================
 // START SERVER
 // =============================================================================
 

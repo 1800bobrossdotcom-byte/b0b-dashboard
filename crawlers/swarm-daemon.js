@@ -414,6 +414,67 @@ class SwarmDaemon {
     return pulse;
   }
   
+  // HTTP Server for Railway health checks and API
+  startServer() {
+    const express = require('express');
+    const cors = require('cors');
+    const app = express();
+    const PORT = process.env.PORT || 3000;
+    
+    app.use(cors());
+    app.use(express.json());
+    
+    // Health check
+    app.get('/health', (req, res) => {
+      res.json({ status: 'ok', daemon: 'swarm', uptime: this.startTime ? Date.now() - this.startTime : 0 });
+    });
+    
+    // Status/pulse
+    app.get('/status', (req, res) => {
+      res.json(this.savePulse());
+    });
+    
+    app.get('/pulse', (req, res) => {
+      res.json(this.savePulse());
+    });
+    
+    // Crawlers
+    app.get('/crawlers', (req, res) => {
+      const crawlers = {};
+      for (const [name, crawler] of this.crawlers) {
+        crawlers[name] = crawler.getStatus();
+      }
+      res.json({ crawlers, count: this.crawlers.size });
+    });
+    
+    // Run specific crawler
+    app.post('/crawlers/:name/run', async (req, res) => {
+      const { name } = req.params;
+      try {
+        const result = await this.runCrawler(name);
+        res.json({ success: true, crawler: name, result });
+      } catch (e) {
+        res.status(500).json({ error: e.message });
+      }
+    });
+    
+    // Costs
+    app.get('/costs', (req, res) => {
+      res.json(this.costTracker.getReport());
+    });
+    
+    // Providers
+    app.get('/providers', (req, res) => {
+      res.json({ available: this.router.available, all: CONFIG.providers });
+    });
+    
+    app.listen(PORT, () => {
+      console.log(`🌐 [HTTP] Swarm daemon API listening on port ${PORT}`);
+    });
+    
+    return app;
+  }
+  
   async start() {
     if (this.running) {
       console.log('[DAEMON] Already running');
@@ -422,6 +483,9 @@ class SwarmDaemon {
     
     this.running = true;
     this.startTime = Date.now();
+    
+    // Start HTTP server
+    this.startServer();
     
     console.log(`
 ╔════════════════════════════════════════════════════════════════╗

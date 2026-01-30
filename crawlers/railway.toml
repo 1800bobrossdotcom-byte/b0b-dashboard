@@ -5,5 +5,8 @@ dockerfilePath = "Dockerfile"
 [deploy]
 numReplicas = 1
 restartPolicyType = "always"
+healthcheckPath = "/health"
+healthcheckTimeout = 30
 
-# No healthcheck - this is a background daemon, not a web server
+# Swarm daemon with HTTP healthcheck
+# Integrates with brain for agent orchestration

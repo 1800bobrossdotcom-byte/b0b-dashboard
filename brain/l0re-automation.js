@@ -207,18 +207,31 @@ class L0REAutomation {
   // ════════════════════════════════════════════════════════════════════════
   
   async fetchRailwayLogs(tail = 100) {
-    return new Promise((resolve, reject) => {
-      exec(`railway logs --tail ${tail}`, { cwd: __dirname }, (error, stdout, stderr) => {
-        if (error) {
-          console.log(`   ⚠️ Railway CLI error: ${error.message}`);
-          resolve([]);
-          return;
+    // Use internal log buffer instead of Railway CLI (not available in container)
+    // The brain maintains its own log buffer for self-monitoring
+    try {
+      const brainLogPath = path.join(__dirname, 'data', 'brain-activity-log.json');
+      if (fs.existsSync(brainLogPath)) {
+        const logData = JSON.parse(fs.readFileSync(brainLogPath, 'utf8'));
+        return (logData.entries || []).slice(-tail);
+      }
+      
+      // Fallback: Check recent freshness for stale data hints
+      const freshnessPath = path.join(__dirname, 'data', 'freshness-state.json');
+      if (fs.existsSync(freshnessPath)) {
+        const freshness = JSON.parse(fs.readFileSync(freshnessPath, 'utf8'));
+        const lines = [];
+        if (freshness.alerts) {
+          freshness.alerts.forEach(a => lines.push(`[ALERT] ${a.message}`));
         }
-        
-        const lines = stdout.split('\n').filter(l => l.trim());
-        resolve(lines);
-      });
-    });
+        return lines;
+      }
+      
+      return [];
+    } catch (e) {
+      console.log(`   ⚠️ Log fetch error: ${e.message}`);
+      return [];
+    }
   }
   
   parseRailwayLogs(logs) {

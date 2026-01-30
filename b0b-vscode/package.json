@@ -1,0 +1,147 @@
+{
+  "name": "b0b-dev-toolkit",
+  "displayName": "b0b.dev Toolkit",
+  "description": "Unified AI agent toolkit for b0b.dev - local control, Railway integration, GitHub, task management",
+  "version": "0.1.0",
+  "publisher": "b0b",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Machine Learning",
+    "Visualization"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "b0b.showDashboard",
+        "title": "b0b: Show Dashboard"
+      },
+      {
+        "command": "b0b.setMode",
+        "title": "b0b: Set Control Mode"
+      },
+      {
+        "command": "b0b.showTasks",
+        "title": "b0b: Show Tasks"
+      },
+      {
+        "command": "b0b.addTask",
+        "title": "b0b: Add Task"
+      },
+      {
+        "command": "b0b.runCrawler",
+        "title": "b0b: Run Crawler"
+      },
+      {
+        "command": "b0b.checkFreshness",
+        "title": "b0b: Check Data Freshness"
+      },
+      {
+        "command": "b0b.syncBrain",
+        "title": "b0b: Sync with Brain"
+      },
+      {
+        "command": "b0b.deployRailway",
+        "title": "b0b: Deploy to Railway"
+      },
+      {
+        "command": "b0b.visualDebug",
+        "title": "b0b: Visual Debug Screenshot"
+      },
+      {
+        "command": "b0b.startLocalBridge",
+        "title": "b0b: Start Local Bridge"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "b0b-toolkit",
+          "title": "b0b.dev",
+          "icon": "resources/b0b-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "b0b-toolkit": [
+        {
+          "id": "b0b-status",
+          "name": "Status"
+        },
+        {
+          "id": "b0b-tasks",
+          "name": "Tasks"
+        },
+        {
+          "id": "b0b-agents",
+          "name": "Agents"
+        },
+        {
+          "id": "b0b-freshness",
+          "name": "Data Freshness"
+        },
+        {
+          "id": "b0b-railway",
+          "name": "Railway Services"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "b0b.dev Toolkit",
+      "properties": {
+        "b0b.brainUrl": {
+          "type": "string",
+          "default": "https://b0b-brain-production.up.railway.app",
+          "description": "URL of the b0b brain server"
+        },
+        "b0b.railwayProjectId": {
+          "type": "string",
+          "default": "6333df84-47e3-4f62-973e-ab0b0d97e635",
+          "description": "Railway project ID"
+        },
+        "b0b.autoStartBridge": {
+          "type": "boolean",
+          "default": false,
+          "description": "Auto-start local bridge on VS Code launch"
+        },
+        "b0b.controlMode": {
+          "type": "string",
+          "enum": ["guardian", "turbo", "sword"],
+          "default": "guardian",
+          "description": "Default control mode for mouse/keyboard"
+        }
+      }
+    },
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "b0b.showDashboard",
+          "when": "true"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "test": "node ./out/test/runTest.js",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.22.0",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  }
+}
