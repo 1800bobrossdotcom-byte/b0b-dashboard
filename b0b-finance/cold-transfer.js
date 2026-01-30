@@ -12,7 +12,9 @@
  *   node cold-transfer.js transfer-token BNKR 1000 - Transfer tokens
  */
 
-require('dotenv').config();
+// Load from local .env first, fallback to parent
+require('dotenv').config({ path: require('path').join(__dirname, '.env') });
+require('dotenv').config({ path: require('path').join(__dirname, '..', '.env') });
 const { ethers } = require('ethers');
 
 // ═══════════════════════════════════════════════════════════════
