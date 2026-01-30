@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test 2 - JavaScript</title>
+  <style>
+    body {
+      background: #111;
+      color: #0f0;
+      font-family: monospace;
+      padding: 20px;
+    }
+    .result { margin: 10px 0; padding: 10px; background: #222; }
+  </style>
+</head>
+<body>
+  <h1>TEST 2: JavaScript</h1>
+  <div class="result" id="js-test">Waiting for JS...</div>
+  <div class="result" id="time-test">Waiting for time...</div>
+  
+  <script>
+    document.getElementById('js-test').textContent = 'JavaScript is WORKING';
+    document.getElementById('time-test').textContent = 'Time: ' + new Date().toISOString();
+  </script>
+</body>
+</html>

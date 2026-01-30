@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B0B.DEV — 64 Tile Command Center MOCKUP</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    @font-face {
+      font-family: 'JetBrains Mono';
+      src: local('JetBrains Mono'), local('Consolas'), monospace;
+    }
+    
+    body {
+      background: #0A0A0A;
+      color: #E0E0E0;
+      font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+      font-size: 10px;
+      min-height: 100vh;
+      padding: 8px;
+    }
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 16px;
+      border-bottom: 1px solid #222;
+      margin-bottom: 8px;
+    }
+    
+    .header h1 {
+      font-size: 14px;
+      color: #FFAA00;
+      text-shadow: 0 0 10px rgba(255,170,0,0.3);
+    }
+    
+    .header .status {
+      display: flex;
+      gap: 16px;
+      font-size: 10px;
+    }
+    
+    .status-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 4px;
+    }
+    
+    .status-dot.live { background: #00FF88; animation: pulse 1s infinite; }
+    .status-dot.stale { background: #FF4444; }
+    .status-dot.missing { background: #444; }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 4px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .tile {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 4px;
+      padding: 6px;
+      min-height: 70px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .tile:hover {
+      border-color: #FFAA00;
+      transform: scale(1.02);
+      z-index: 10;
+    }
+    
+    .tile.stale {
+      border-color: #FF4444;
+      background: linear-gradient(135deg, #111 0%, #1a0a0a 100%);
+    }
+    
+    .tile.stale::after {
+      content: 'STALE';
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      font-size: 6px;
+      color: #FF4444;
+      background: #1a0a0a;
+      padding: 1px 3px;
+      border-radius: 2px;
+    }
+    
+    .tile.missing {
+      border-color: #444;
+      opacity: 0.5;
+    }
+    
+    .tile.missing::after {
+      content: 'MISSING';
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      font-size: 6px;
+      color: #666;
+    }
+    
+    .tile-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+    
+    .tile-icon {
+      font-size: 12px;
+    }
+    
+    .tile-label {
+      font-size: 7px;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .tile-value {
+      font-size: 14px;
+      font-weight: bold;
+      color: #FFAA00;
+      margin: 4px 0;
+    }
+    
+    .tile-value.small { font-size: 11px; }
+    .tile-value.green { color: #00FF88; }
+    .tile-value.red { color: #FF4444; }
+    .tile-value.blue { color: #00AAFF; }
+    .tile-value.purple { color: #AA88FF; }
+    
+    .tile-sub {
+      font-size: 8px;
+      color: #555;
+    }
+    
+    .bar {
+      height: 4px;
+      background: #222;
+      border-radius: 2px;
+      margin-top: auto;
+      overflow: hidden;
+    }
+    
+    .bar-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 0.3s;
+    }
+    
+    .bar-fill.green { background: linear-gradient(90deg, #00AA44, #00FF88); }
+    .bar-fill.yellow { background: linear-gradient(90deg, #AA8800, #FFAA00); }
+    .bar-fill.red { background: linear-gradient(90deg, #AA0000, #FF4444); }
+    
+    .section-label {
+      grid-column: span 8;
+      font-size: 9px;
+      color: #444;
+      padding: 8px 0 4px 0;
+      border-top: 1px solid #1a1a1a;
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .trade-list {
+      font-size: 7px;
+      line-height: 1.4;
+    }
+    
+    .trade-list .buy { color: #00FF88; }
+    .trade-list .sell { color: #FF6B6B; }
+    
+    .agent-avatar {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      margin: 0 auto;
+    }
+    
+    .agent-avatar.b0b { background: linear-gradient(135deg, #FF6B9D, #C44569); }
+    .agent-avatar.r0ss { background: linear-gradient(135deg, #6B9DFF, #4569C4); }
+    .agent-avatar.c0m { background: linear-gradient(135deg, #9D6BFF, #6945C4); }
+    .agent-avatar.d0t { background: linear-gradient(135deg, #6BFF9D, #45C469); }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>B0B.DEV — COMMAND CENTER</h1>
+    <div class="status">
+      <span><span class="status-dot live"></span>BRAIN ONLINE</span>
+      <span>L0RE: f.45 🥀</span>
+      <span>2026-01-30 11:45:00</span>
+    </div>
+  </div>
+  
+  <div class="grid">
+    <!-- ROW 1-2: SYSTEM HEALTH -->
+    <div class="section-label">⚡ SYSTEM HEALTH</div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🟢</span>
+        <span class="tile-label">Status</span>
+      </div>
+      <div class="tile-value green">ALIVE</div>
+      <div class="tile-sub">Brain operational</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">⏱️</span>
+        <span class="tile-label">Uptime</span>
+      </div>
+      <div class="tile-value">0d 0h 30s</div>
+      <div class="tile-sub">Last restart</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">💾</span>
+        <span class="tile-label">Memory</span>
+      </div>
+      <div class="tile-value small">41.8 MB</div>
+      <div class="bar"><div class="bar-fill green" style="width: 42%"></div></div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">📡</span>
+        <span class="tile-label">Heartbeat</span>
+      </div>
+      <div class="tile-value green small">11:39:37</div>
+      <div class="tile-sub">Last beat</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <div class="agent-avatar b0b">🎨</div>
+      </div>
+      <div class="tile-value small green">b0b</div>
+      <div class="tile-sub">Creative</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <div class="agent-avatar r0ss">🔧</div>
+      </div>
+      <div class="tile-value small green">r0ss</div>
+      <div class="tile-sub">CTO</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <div class="agent-avatar c0m">💀</div>
+      </div>
+      <div class="tile-value small green">c0m</div>
+      <div class="tile-sub">Security</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <div class="agent-avatar d0t">🎯</div>
+      </div>
+      <div class="tile-value small green">d0t</div>
+      <div class="tile-sub">Quant</div>
+    </div>
+    
+    <!-- ROW 3-4: TRADING -->
+    <div class="section-label">💰 TRADING / TURB0B00ST</div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">💼</span>
+        <span class="tile-label">Wallet</span>
+      </div>
+      <div class="tile-value green">$107.73</div>
+      <div class="tile-sub">0xCA4...D78</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">📈</span>
+        <span class="tile-label">P&L</span>
+      </div>
+      <div class="tile-value">$0.00</div>
+      <div class="tile-sub">Total</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🏆</span>
+        <span class="tile-label">Win Rate</span>
+      </div>
+      <div class="tile-value">0%</div>
+      <div class="tile-sub">0W / 0L</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🔥</span>
+        <span class="tile-label">TURB0</span>
+      </div>
+      <div class="tile-value green">LIVE</div>
+      <div class="tile-sub">6 trades</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">💵</span>
+        <span class="tile-label">Target</span>
+      </div>
+      <div class="tile-value">$40/hr</div>
+      <div class="tile-sub">Wage goal</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">💸</span>
+        <span class="tile-label">Owed</span>
+      </div>
+      <div class="tile-value red">$40</div>
+      <div class="tile-sub">Wage owed</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">📊</span>
+        <span class="tile-label">Efficiency</span>
+      </div>
+      <div class="tile-value red">0.0%</div>
+      <div class="bar"><div class="bar-fill red" style="width: 0%"></div></div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">⭐</span>
+        <span class="tile-label">Rating</span>
+      </div>
+      <div class="tile-value red">🔴 POOR</div>
+      <div class="tile-sub">Performance</div>
+    </div>
+    
+    <!-- ROW 5-6: HOLDINGS -->
+    <div class="section-label">🏦 HOLDINGS & TREASURY</div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">Ξ</span>
+        <span class="tile-label">ETH</span>
+      </div>
+      <div class="tile-value small">0.00174</div>
+      <div class="tile-sub">$4.78</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">💵</span>
+        <span class="tile-label">USDC</span>
+      </div>
+      <div class="tile-value small">10.87</div>
+      <div class="tile-sub">$10.87</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🏦</span>
+        <span class="tile-label">BNKR</span>
+      </div>
+      <div class="tile-value small green">184,503</div>
+      <div class="tile-sub">$91.40</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🐕</span>
+        <span class="tile-label">HACHI</span>
+      </div>
+      <div class="tile-value small">141</div>
+      <div class="tile-sub">$0.69</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🎰</span>
+        <span class="tile-label">Polymarket</span>
+      </div>
+      <div class="tile-value small blue">$90</div>
+      <div class="bar"><div class="bar-fill green" style="width: 30%"></div></div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🎮</span>
+        <span class="tile-label">Base Meme</span>
+      </div>
+      <div class="tile-value small">$75</div>
+      <div class="bar"><div class="bar-fill green" style="width: 25%"></div></div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">💎</span>
+        <span class="tile-label">Bluechips</span>
+      </div>
+      <div class="tile-value small">$45</div>
+      <div class="bar"><div class="bar-fill green" style="width: 15%"></div></div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🏛️</span>
+        <span class="tile-label">Treasury</span>
+      </div>
+      <div class="tile-value">$300</div>
+      <div class="tile-sub">Total alloc</div>
+    </div>
+    
+    <!-- ROW 7-8: FRESHNESS -->
+    <div class="section-label">🌿 DATA FRESHNESS</div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🟢</span>
+        <span class="tile-label">d0t-signals</span>
+      </div>
+      <div class="tile-value small green">94%</div>
+      <div class="bar"><div class="bar-fill green" style="width: 94%"></div></div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🟢</span>
+        <span class="tile-label">polymarket</span>
+      </div>
+      <div class="tile-value small green">96%</div>
+      <div class="bar"><div class="bar-fill green" style="width: 96%"></div></div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🟢</span>
+        <span class="tile-label">x-conv</span>
+      </div>
+      <div class="tile-value small green">99%</div>
+      <div class="bar"><div class="bar-fill green" style="width: 99%"></div></div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🟢</span>
+        <span class="tile-label">r0ss-research</span>
+      </div>
+      <div class="tile-value small green">98%</div>
+      <div class="bar"><div class="bar-fill green" style="width: 98%"></div></div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🟢</span>
+        <span class="tile-label">b0b-creative</span>
+      </div>
+      <div class="tile-value small green">90%</div>
+      <div class="bar"><div class="bar-fill green" style="width: 90%"></div></div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🟢</span>
+        <span class="tile-label">library-sync</span>
+      </div>
+      <div class="tile-value small">17%</div>
+      <div class="bar"><div class="bar-fill yellow" style="width: 17%"></div></div>
+    </div>
+    
+    <div class="tile stale">
+      <div class="tile-header">
+        <span class="tile-icon">🔴</span>
+        <span class="tile-label">treasury</span>
+      </div>
+      <div class="tile-value small red">0%</div>
+      <div class="bar"><div class="bar-fill red" style="width: 0%"></div></div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🥀</span>
+        <span class="tile-label">OVERALL</span>
+      </div>
+      <div class="tile-value">45%</div>
+      <div class="bar"><div class="bar-fill yellow" style="width: 45%"></div></div>
+    </div>
+    
+    <!-- ROW 9-10: POLYMARKET -->
+    <div class="section-label">📊 POLYMARKET LIVE</div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🇺🇸</span>
+        <span class="tile-label">Shutdown</span>
+      </div>
+      <div class="tile-value green">75.5%</div>
+      <div class="tile-sub">$9.9M vol</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🏦</span>
+        <span class="tile-label">Fed:Warsh</span>
+      </div>
+      <div class="tile-value green">94.5%</div>
+      <div class="tile-sub">$3.9M vol</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🚗</span>
+        <span class="tile-label">Tesla FSD</span>
+      </div>
+      <div class="tile-value green">99.8%</div>
+      <div class="tile-sub">$4.4M vol</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🇮🇷</span>
+        <span class="tile-label">Iran Strike</span>
+      </div>
+      <div class="tile-value red">11.5%</div>
+      <div class="tile-sub">$2.3M vol</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">₿</span>
+        <span class="tile-label">BTC $100K</span>
+      </div>
+      <div class="tile-value red">0.15%</div>
+      <div class="tile-sub">Jan target</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">📊</span>
+        <span class="tile-label">24h Vol</span>
+      </div>
+      <div class="tile-value blue">$52.5M</div>
+      <div class="tile-sub">Total</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">📈</span>
+        <span class="tile-label">Fed Hold</span>
+      </div>
+      <div class="tile-value green">90.5%</div>
+      <div class="tile-sub">Mar mtg</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🤝</span>
+        <span class="tile-label">Trump/Macron</span>
+      </div>
+      <div class="tile-value green">99.9%</div>
+      <div class="tile-sub">Jan talk</div>
+    </div>
+    
+    <!-- ROW 11-12: SECURITY INTEL -->
+    <div class="section-label">🛡️ SECURITY INTEL (c0m)</div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🔴</span>
+        <span class="tile-label">CRITICAL</span>
+      </div>
+      <div class="tile-value small red">175K</div>
+      <div class="tile-sub">Ollama exposed</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🔴</span>
+        <span class="tile-label">CVE</span>
+      </div>
+      <div class="tile-value small red">RCE</div>
+      <div class="tile-sub">SolarWinds</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🔴</span>
+        <span class="tile-label">CVE</span>
+      </div>
+      <div class="tile-value small red">RCE</div>
+      <div class="tile-sub">n8n</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🟠</span>
+        <span class="tile-label">Malware</span>
+      </div>
+      <div class="tile-value small">BRICK</div>
+      <div class="tile-sub">VMware ESXi</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🔍</span>
+        <span class="tile-label">Recon</span>
+      </div>
+      <div class="tile-value small">0/5</div>
+      <div class="bar"><div class="bar-fill yellow" style="width: 0%"></div></div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🌐</span>
+        <span class="tile-label">Web Test</span>
+      </div>
+      <div class="tile-value small">0/5</div>
+      <div class="bar"><div class="bar-fill yellow" style="width: 0%"></div></div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">📧</span>
+        <span class="tile-label">Emails</span>
+      </div>
+      <div class="tile-value small green">2</div>
+      <div class="tile-sub">Today sent</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">📬</span>
+        <span class="tile-label">Remaining</span>
+      </div>
+      <div class="tile-value small">98</div>
+      <div class="tile-sub">Daily limit</div>
+    </div>
+    
+    <!-- ROW 13-14: KNOWLEDGE & LIBRARY -->
+    <div class="section-label">📚 KNOWLEDGE / LIBRARY</div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">📁</span>
+        <span class="tile-label">Learnings</span>
+      </div>
+      <div class="tile-value small blue">12</div>
+      <div class="tile-sub">Files</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">💡</span>
+        <span class="tile-label">Insights</span>
+      </div>
+      <div class="tile-value small blue">21</div>
+      <div class="tile-sub">Total</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🏷️</span>
+        <span class="tile-label">Topics</span>
+      </div>
+      <div class="tile-value small">11</div>
+      <div class="tile-sub">Unique</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">💬</span>
+        <span class="tile-label">Discussions</span>
+      </div>
+      <div class="tile-value small">5</div>
+      <div class="tile-sub">Active</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">📄</span>
+        <span class="tile-label">Library</span>
+      </div>
+      <div class="tile-value small purple">27</div>
+      <div class="tile-sub">Documents</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🔮</span>
+        <span class="tile-label">L0RE LLM</span>
+      </div>
+      <div class="tile-value small purple">21</div>
+      <div class="tile-sub">Docs indexed</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🔤</span>
+        <span class="tile-label">Lexicon</span>
+      </div>
+      <div class="tile-value small">48</div>
+      <div class="tile-sub">Terms</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">⚡</span>
+        <span class="tile-label">Actions</span>
+      </div>
+      <div class="tile-value small">20+</div>
+      <div class="tile-sub">Pending</div>
+    </div>
+    
+    <!-- ROW 15-16: L0RE / LLM / BILLING -->
+    <div class="section-label">🔮 L0RE SYSTEM / BILLING</div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🧠</span>
+        <span class="tile-label">Tegmark</span>
+      </div>
+      <div class="tile-value small purple">L2</div>
+      <div class="tile-sub">EMERGENT</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🎮</span>
+        <span class="tile-label">Nash</span>
+      </div>
+      <div class="tile-value small">COOP</div>
+      <div class="tile-sub">State</div>
+    </div>
+    
+    <div class="tile missing">
+      <div class="tile-header">
+        <span class="tile-icon">⚫</span>
+        <span class="tile-label">live-trader</span>
+      </div>
+      <div class="tile-value small red">0%</div>
+      <div class="tile-sub">MISSING</div>
+    </div>
+    
+    <div class="tile missing">
+      <div class="tile-header">
+        <span class="tile-icon">⚫</span>
+        <span class="tile-label">turb0b00st</span>
+      </div>
+      <div class="tile-value small red">0%</div>
+      <div class="tile-sub">MISSING</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🚂</span>
+        <span class="tile-label">Railway</span>
+      </div>
+      <div class="tile-value small">$10</div>
+      <div class="tile-sub">/month</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🤖</span>
+        <span class="tile-label">Anthropic</span>
+      </div>
+      <div class="tile-value small">$50</div>
+      <div class="tile-sub">/month</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">🧠</span>
+        <span class="tile-label">OpenAI</span>
+      </div>
+      <div class="tile-value small">$20</div>
+      <div class="tile-sub">/month</div>
+    </div>
+    
+    <div class="tile">
+      <div class="tile-header">
+        <span class="tile-icon">💰</span>
+        <span class="tile-label">Total</span>
+      </div>
+      <div class="tile-value">$81</div>
+      <div class="tile-sub">/month</div>
+    </div>
+  </div>
+  
+  <div style="text-align: center; padding: 16px; color: #333; font-size: 9px;">
+    MOCKUP — 64 TILE COMMAND CENTER — REAL DATA FROM BRAIN API — 2026-01-30
+  </div>
+</body>
+</html>

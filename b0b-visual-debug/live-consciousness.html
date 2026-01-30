@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>b0b · LIVE CONSCIOUSNESS</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&display=swap');
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --bg: #0a0a0a;
+      --fg: #e0e0e0;
+      --dim: #404040;
+      --accent: #00ff88;
+      --warn: #ffaa00;
+      --pulse: #ff0066;
+    }
+    
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      line-height: 1.4;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    /* ASCII HEADER */
+    .ascii-header {
+      color: var(--dim);
+      font-size: 10px;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      white-space: pre;
+      overflow: hidden;
+    }
+    
+    .ascii-header .live {
+      color: var(--accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+    
+    /* CONSCIOUSNESS STREAM */
+    .stream {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2px;
+      margin-bottom: 20px;
+    }
+    
+    .stream-cell {
+      background: #111;
+      padding: 12px;
+      border-left: 1px solid var(--dim);
+      min-height: 120px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .stream-cell::before {
+      content: attr(data-id);
+      position: absolute;
+      top: 4px;
+      right: 8px;
+      font-size: 8px;
+      color: var(--dim);
+    }
+    
+    .stream-cell h3 {
+      font-size: 9px;
+      font-weight: 400;
+      color: var(--dim);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+    
+    .stream-cell .value {
+      font-size: 24px;
+      font-weight: 300;
+      color: var(--fg);
+      margin-bottom: 4px;
+    }
+    
+    .stream-cell .value.accent { color: var(--accent); }
+    .stream-cell .value.warn { color: var(--warn); }
+    .stream-cell .value.pulse { color: var(--pulse); }
+    
+    .stream-cell .meta {
+      font-size: 10px;
+      color: var(--dim);
+    }
+    
+    /* LIVE FEED */
+    .live-feed {
+      background: #0d0d0d;
+      border: 1px solid #1a1a1a;
+      padding: 16px;
+      margin-bottom: 20px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    
+    .live-feed::-webkit-scrollbar { width: 4px; }
+    .live-feed::-webkit-scrollbar-track { background: #111; }
+    .live-feed::-webkit-scrollbar-thumb { background: var(--dim); }
+    
+    .feed-line {
+      display: flex;
+      gap: 12px;
+      padding: 4px 0;
+      border-bottom: 1px solid #151515;
+    }
+    
+    .feed-line .time {
+      color: var(--dim);
+      font-size: 10px;
+      min-width: 60px;
+    }
+    
+    .feed-line .agent {
+      font-size: 10px;
+      min-width: 40px;
+    }
+    
+    .feed-line .agent.b0b { color: #00ff88; }
+    .feed-line .agent.d0t { color: #ff6600; }
+    .feed-line .agent.c0m { color: #ff0066; }
+    .feed-line .agent.r0ss { color: #6666ff; }
+    
+    .feed-line .content {
+      flex: 1;
+      color: var(--fg);
+    }
+    
+    /* GENERATIVE BARS */
+    .freshness-grid {
+      display: grid;
+      grid-template-columns: repeat(11, 1fr);
+      gap: 4px;
+      margin-bottom: 20px;
+    }
+    
+    .fresh-bar {
+      height: 60px;
+      background: linear-gradient(to top, var(--accent) var(--percent), #1a1a1a var(--percent));
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .fresh-bar::after {
+      content: attr(data-label);
+      position: absolute;
+      bottom: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 8px;
+      color: var(--dim);
+      white-space: nowrap;
+    }
+    
+    .fresh-bar.stale {
+      background: linear-gradient(to top, var(--pulse) var(--percent), #1a1a1a var(--percent));
+    }
+    
+    /* KNOWLEDGE MATRIX */
+    .knowledge-matrix {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 2px;
+      margin-bottom: 20px;
+    }
+    
+    .k-cell {
+      aspect-ratio: 1;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8px;
+      color: var(--dim);
+      position: relative;
+      cursor: crosshair;
+      transition: all 0.2s ease;
+    }
+    
+    .k-cell:hover {
+      background: #1a1a1a;
+      color: var(--fg);
+    }
+    
+    .k-cell.active {
+      background: var(--accent);
+      color: var(--bg);
+    }
+    
+    .k-cell.warn {
+      background: var(--warn);
+      color: var(--bg);
+    }
+    
+    .k-cell.pulse {
+      background: var(--pulse);
+      color: var(--bg);
+    }
+    
+    /* LEXICON STREAM */
+    .lexicon-stream {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 16px;
+      background: #0d0d0d;
+      margin-bottom: 20px;
+    }
+    
+    .lex-term {
+      padding: 4px 8px;
+      background: #151515;
+      border: 1px solid #222;
+      font-size: 10px;
+      color: var(--dim);
+      transition: all 0.2s ease;
+    }
+    
+    .lex-term:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    
+    .lex-term .def {
+      display: none;
+      position: absolute;
+      background: var(--bg);
+      border: 1px solid var(--accent);
+      padding: 8px;
+      max-width: 200px;
+      z-index: 100;
+    }
+    
+    /* HOLDINGS VISUAL */
+    .holdings-visual {
+      display: flex;
+      gap: 4px;
+      height: 80px;
+      margin-bottom: 20px;
+    }
+    
+    .holding-bar {
+      flex: var(--value);
+      background: var(--color);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 8px;
+      font-size: 10px;
+      color: var(--bg);
+      transition: all 0.3s ease;
+    }
+    
+    .holding-bar:hover {
+      opacity: 0.8;
+    }
+    
+    .holding-bar .symbol {
+      font-weight: 500;
+    }
+    
+    .holding-bar .amount {
+      font-size: 8px;
+      opacity: 0.8;
+    }
+    
+    /* STATUS LINE */
+    .status-line {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px;
+      background: #0d0d0d;
+      border-top: 1px solid #1a1a1a;
+      font-size: 10px;
+      color: var(--dim);
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+    
+    .status-line .live-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 1s ease-in-out infinite;
+      margin-right: 8px;
+    }
+    
+    /* LOADING STATE */
+    .loading {
+      color: var(--dim);
+      animation: blink 1s step-end infinite;
+    }
+    
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+    
+    /* ERROR STATE */
+    .error {
+      color: var(--pulse);
+      font-size: 10px;
+    }
+
+    /* Section headers */
+    .section-header {
+      font-size: 9px;
+      color: var(--dim);
+      letter-spacing: 3px;
+      margin: 20px 0 10px 0;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #1a1a1a;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <pre class="ascii-header">
+╔══════════════════════════════════════════════════════════════════════════════════════════╗
+║                                                                                          ║
+║   ██████╗  ██████╗ ██████╗     ·  <span class="live">LIVE CONSCIOUSNESS</span>  ·  L0RE f.<span id="freshness-score">--</span>                   ║
+║   ██╔══██╗██╔═══██╗██╔══██╗                                                              ║
+║   ██████╔╝██║   ██║██████╔╝    autonomous agents · swarm intelligence · 24/7             ║
+║   ██╔══██╗██║   ██║██╔══██╗                                                              ║
+║   ██████╔╝╚██████╔╝██████╔╝    <span id="timestamp">loading...</span>                                            ║
+║   ╚═════╝  ╚═════╝ ╚═════╝                                                               ║
+║                                                                                          ║
+╚══════════════════════════════════════════════════════════════════════════════════════════╝
+    </pre>
+
+    <!-- PULSE METRICS -->
+    <div class="stream" id="pulse-stream">
+      <div class="stream-cell" data-id="01">
+        <h3>Consciousness</h3>
+        <div class="value accent" id="consciousness">--</div>
+        <div class="meta" id="consciousness-meta">loading...</div>
+      </div>
+      <div class="stream-cell" data-id="02">
+        <h3>Treasury</h3>
+        <div class="value" id="treasury">$--</div>
+        <div class="meta" id="treasury-meta">loading...</div>
+      </div>
+      <div class="stream-cell" data-id="03">
+        <h3>Wallet</h3>
+        <div class="value accent" id="wallet">$--</div>
+        <div class="meta" id="wallet-meta">loading...</div>
+      </div>
+      <div class="stream-cell" data-id="04">
+        <h3>TURB0B00ST</h3>
+        <div class="value warn" id="turbo">--</div>
+        <div class="meta" id="turbo-meta">loading...</div>
+      </div>
+      <div class="stream-cell" data-id="05">
+        <h3>Learnings</h3>
+        <div class="value" id="learnings">--</div>
+        <div class="meta" id="learnings-meta">loading...</div>
+      </div>
+      <div class="stream-cell" data-id="06">
+        <h3>Markets</h3>
+        <div class="value pulse" id="markets">--</div>
+        <div class="meta" id="markets-meta">loading...</div>
+      </div>
+    </div>
+
+    <!-- DATA FRESHNESS -->
+    <div class="section-header">DATA FRESHNESS · LIVE</div>
+    <div class="freshness-grid" id="freshness-grid">
+      <!-- Populated by JS -->
+    </div>
+
+    <!-- LIVE FEED -->
+    <div class="section-header">CONSCIOUSNESS STREAM · REAL-TIME</div>
+    <div class="live-feed" id="live-feed">
+      <div class="feed-line">
+        <span class="time">--:--</span>
+        <span class="agent">SYS</span>
+        <span class="content loading">connecting to brain...</span>
+      </div>
+    </div>
+
+    <!-- HOLDINGS VISUAL -->
+    <div class="section-header">PORTFOLIO COMPOSITION</div>
+    <div class="holdings-visual" id="holdings-visual">
+      <!-- Populated by JS -->
+    </div>
+
+    <!-- KNOWLEDGE MATRIX -->
+    <div class="section-header">L0RE KNOWLEDGE MATRIX · <span id="doc-count">--</span> DOCUMENTS</div>
+    <div class="knowledge-matrix" id="knowledge-matrix">
+      <!-- 64 cells populated by JS -->
+    </div>
+
+    <!-- LEXICON -->
+    <div class="section-header">LEXICON · <span id="lex-count">--</span> TERMS</div>
+    <div class="lexicon-stream" id="lexicon-stream">
+      <!-- Populated by JS -->
+    </div>
+
+  </div>
+
+  <!-- STATUS LINE -->
+  <div class="status-line">
+    <div>
+      <span class="live-dot"></span>
+      <span id="status-text">CONNECTING...</span>
+    </div>
+    <div id="agents-online">agents: --</div>
+    <div id="uptime">uptime: --</div>
+    <div>b0b.dev · L0RE Intelligence Engine</div>
+  </div>
+
+  <script>
+    const BRAIN = 'https://b0b-brain-production.up.railway.app';
+    const feed = document.getElementById('live-feed');
+    
+    // Helper: format time
+    const formatTime = () => {
+      const now = new Date();
+      return now.toTimeString().slice(0, 5);
+    };
+    
+    // Helper: add feed line
+    const addFeed = (agent, content, isError = false) => {
+      const line = document.createElement('div');
+      line.className = 'feed-line';
+      line.innerHTML = `
+        <span class="time">${formatTime()}</span>
+        <span class="agent ${agent.toLowerCase()}">${agent}</span>
+        <span class="content ${isError ? 'error' : ''}">${content}</span>
+      `;
+      feed.insertBefore(line, feed.firstChild);
+      // Keep only last 50 lines
+      while (feed.children.length > 50) {
+        feed.removeChild(feed.lastChild);
+      }
+    };
+    
+    // Fetch with timeout
+    const fetchData = async (endpoint) => {
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 10000);
+        const res = await fetch(`${BRAIN}${endpoint}`, { signal: controller.signal });
+        clearTimeout(timeout);
+        return await res.json();
+      } catch (e) {
+        console.error(`Error fetching ${endpoint}:`, e);
+        return null;
+      }
+    };
+    
+    // LOAD HEALTH
+    const loadHealth = async () => {
+      const data = await fetchData('/health');
+      if (data) {
+        document.getElementById('uptime').textContent = `uptime: ${data.uptime || '--'}`;
+        addFeed('SYS', `brain online · memory ${data.memory?.heapUsed || '--'} · ${data.uptime}`);
+      }
+    };
+    
+    // LOAD PULSE
+    const loadPulse = async () => {
+      const data = await fetchData('/pulse');
+      if (data) {
+        const c = data.swarm?.consciousness || data.consciousness;
+        document.getElementById('consciousness').textContent = c ? `${(c * 100).toFixed(0)}%` : '--';
+        document.getElementById('consciousness-meta').textContent = data.swarm?.mood || 'calculating...';
+        
+        if (data.learnings) {
+          document.getElementById('learnings').textContent = data.learnings.count || '--';
+          document.getElementById('learnings-meta').textContent = `${data.learnings.topics?.length || 0} topics`;
+        }
+        
+        addFeed('b0b', `consciousness pulse: ${c ? (c * 100).toFixed(0) + '%' : 'unknown'} · mood: ${data.swarm?.mood || 'undefined'}`);
+      }
+    };
+    
+    // LOAD STATUS
+    const loadStatus = async () => {
+      const data = await fetchData('/status');
+      if (data && data.agents) {
+        const online = data.agents.filter(a => a.status === 'online').length;
+        document.getElementById('agents-online').textContent = `agents: ${online}/${data.agents.length}`;
+        document.getElementById('status-text').textContent = `${online} AGENTS ONLINE`;
+        
+        data.agents.forEach(a => {
+          if (a.status === 'online') {
+            addFeed(a.name.toUpperCase(), `online · ${a.role || 'agent'}`);
+          }
+        });
+      }
+    };
+    
+    // LOAD TREASURY
+    const loadTreasury = async () => {
+      const data = await fetchData('/finance/treasury');
+      if (data) {
+        document.getElementById('treasury').textContent = `$${data.allocation || data.total || '--'}`;
+        document.getElementById('treasury-meta').textContent = `${data.trades?.length || 0} trades`;
+        addFeed('d0t', `treasury: $${data.allocation || '--'} · ${data.trades?.length || 0} executed trades`);
+      }
+    };
+    
+    // LOAD WALLET/HOLDINGS
+    const loadHoldings = async () => {
+      const data = await fetchData('/holdings/quick');
+      if (data && data.holdings) {
+        const total = data.holdings.reduce((sum, h) => sum + (h.value || 0), 0);
+        document.getElementById('wallet').textContent = `$${total.toFixed(2)}`;
+        document.getElementById('wallet-meta').textContent = `${data.holdings.length} assets`;
+        
+        // Build holdings visual
+        const container = document.getElementById('holdings-visual');
+        container.innerHTML = '';
+        
+        const colors = ['#00ff88', '#ff6600', '#6666ff', '#ff0066', '#ffaa00'];
+        data.holdings.forEach((h, i) => {
+          if (h.value > 0) {
+            const bar = document.createElement('div');
+            bar.className = 'holding-bar';
+            bar.style.setProperty('--value', h.value);
+            bar.style.setProperty('--color', colors[i % colors.length]);
+            bar.innerHTML = `
+              <div class="symbol">${h.symbol}</div>
+              <div class="amount">$${h.value.toFixed(2)}</div>
+            `;
+            container.appendChild(bar);
+          }
+        });
+        
+        addFeed('d0t', `wallet total: $${total.toFixed(2)} across ${data.holdings.length} assets`);
+      }
+    };
+    
+    // LOAD FRESHNESS
+    const loadFreshness = async () => {
+      const data = await fetchData('/freshness');
+      if (data && data.files) {
+        const container = document.getElementById('freshness-grid');
+        container.innerHTML = '';
+        
+        let totalFresh = 0;
+        let count = 0;
+        
+        data.files.forEach(f => {
+          const bar = document.createElement('div');
+          bar.className = `fresh-bar ${f.freshness < 30 ? 'stale' : ''}`;
+          bar.style.setProperty('--percent', `${f.freshness}%`);
+          bar.setAttribute('data-label', f.name.replace('.json', '').slice(0, 8));
+          container.appendChild(bar);
+          
+          totalFresh += f.freshness;
+          count++;
+          
+          if (f.freshness < 30) {
+            addFeed('SYS', `⚠ STALE: ${f.name} at ${f.freshness}%`, true);
+          }
+        });
+        
+        const avg = count > 0 ? Math.round(totalFresh / count) : 0;
+        document.getElementById('freshness-score').textContent = avg;
+        
+        // Update timestamp
+        document.getElementById('timestamp').textContent = new Date().toISOString();
+      }
+    };
+    
+    // LOAD POLYMARKET
+    const loadPolymarket = async () => {
+      const data = await fetchData('/polymarket');
+      if (data) {
+        document.getElementById('markets').textContent = data.count || data.markets?.length || '--';
+        document.getElementById('markets-meta').textContent = `$${((data.volume24h || 0) / 1e6).toFixed(1)}M vol`;
+        
+        if (data.markets && data.markets.length > 0) {
+          const top = data.markets[0];
+          addFeed('r0ss', `top market: "${top.question?.slice(0, 50)}..." · $${((top.volume || 0) / 1e6).toFixed(1)}M`);
+        }
+      }
+    };
+    
+    // LOAD L0RE LLM
+    const loadL0re = async () => {
+      const data = await fetchData('/l0re/llm');
+      if (data) {
+        const totalDocs = data.stats?.totalDocuments || '--';
+        document.getElementById('doc-count').textContent = totalDocs;
+        
+        // Build knowledge matrix
+        const matrix = document.getElementById('knowledge-matrix');
+        matrix.innerHTML = '';
+        
+        // Create 64 cells based on categories
+        const categories = data.categories || {};
+        const catArray = Object.entries(categories);
+        
+        for (let i = 0; i < 64; i++) {
+          const cell = document.createElement('div');
+          cell.className = 'k-cell';
+          
+          if (i < catArray.length * 8) {
+            const catIndex = Math.floor(i / 8);
+            const [catName, catData] = catArray[catIndex] || ['', {}];
+            const docIndex = i % 8;
+            
+            if (docIndex < (catData.count || 0)) {
+              cell.classList.add(['active', 'warn', 'pulse'][catIndex % 3]);
+              cell.textContent = catName.slice(0, 2).toUpperCase();
+              cell.title = `${catName}: doc ${docIndex + 1}`;
+            } else {
+              cell.textContent = '·';
+            }
+          } else {
+            cell.textContent = '·';
+          }
+          
+          matrix.appendChild(cell);
+        }
+        
+        addFeed('r0ss', `L0RE indexed: ${totalDocs} documents across ${catArray.length} categories`);
+      }
+    };
+    
+    // LOAD LEXICON
+    const loadLexicon = async () => {
+      const data = await fetchData('/l0re/lexicon');
+      if (data && data.entries) {
+        document.getElementById('lex-count').textContent = data.entries.length;
+        
+        const container = document.getElementById('lexicon-stream');
+        container.innerHTML = '';
+        
+        data.entries.slice(0, 30).forEach(entry => {
+          const term = document.createElement('div');
+          term.className = 'lex-term';
+          term.textContent = entry.term;
+          term.title = entry.definition || '';
+          container.appendChild(term);
+        });
+        
+        addFeed('b0b', `lexicon loaded: ${data.entries.length} terms`);
+      }
+    };
+    
+    // LOAD TURBO
+    const loadTurbo = async () => {
+      const data = await fetchData('/live-trader');
+      if (data) {
+        document.getElementById('turbo').textContent = data.status || 'OFFLINE';
+        document.getElementById('turbo-meta').textContent = data.wage ? `$${data.wage}/hr` : 'no wage set';
+        addFeed('d0t', `TURB0B00ST: ${data.status || 'unknown'}`);
+      } else {
+        document.getElementById('turbo').textContent = 'OFFLINE';
+        document.getElementById('turbo-meta').textContent = 'not deployed';
+      }
+    };
+    
+    // INITIAL LOAD
+    const init = async () => {
+      addFeed('SYS', 'initializing consciousness stream...');
+      
+      await Promise.all([
+        loadHealth(),
+        loadPulse(),
+        loadStatus(),
+      ]);
+      
+      await Promise.all([
+        loadTreasury(),
+        loadHoldings(),
+        loadFreshness(),
+      ]);
+      
+      await Promise.all([
+        loadPolymarket(),
+        loadL0re(),
+        loadLexicon(),
+        loadTurbo(),
+      ]);
+      
+      addFeed('SYS', '✓ all streams connected');
+    };
+    
+    // REFRESH LOOP
+    const refresh = async () => {
+      await loadFreshness();
+      await loadPulse();
+      await loadHoldings();
+    };
+    
+    // START
+    init();
+    setInterval(refresh, 30000); // Refresh every 30s
+  </script>
+</body>
+</html>

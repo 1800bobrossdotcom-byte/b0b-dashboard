@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>b0b · COMMAND</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap');
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --bg: #080808;
+      --surface: #0c0c0c;
+      --border: #1a1a1a;
+      --dim: #444;
+      --fg: #ccc;
+      --bright: #fff;
+      --b0b: #00ff88;
+      --d0t: #ff6600;
+      --c0m: #ff0066;
+      --r0ss: #6666ff;
+      --warn: #ffaa00;
+      --fresh: #00ff88;
+      --stale: #ff0044;
+    }
+    
+    html, body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      line-height: 1.5;
+      height: 100vh;
+      overflow: hidden;
+    }
+    
+    /* GRID LAYOUT */
+    .grid {
+      display: grid;
+      grid-template-columns: 280px 1fr 320px;
+      grid-template-rows: auto 1fr auto;
+      height: 100vh;
+      gap: 1px;
+      background: var(--border);
+    }
+    
+    /* HEADER */
+    .header {
+      grid-column: 1 / -1;
+      background: var(--surface);
+      padding: 8px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .logo {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--bright);
+      letter-spacing: 2px;
+    }
+    
+    .logo span { color: var(--b0b); }
+    
+    .nav {
+      display: flex;
+      gap: 24px;
+    }
+    
+    .nav a {
+      color: var(--dim);
+      text-decoration: none;
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    
+    .nav a:hover, .nav a.active { color: var(--bright); }
+    
+    .status-bar {
+      display: flex;
+      gap: 16px;
+      font-size: 10px;
+    }
+    
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 4px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    .status-dot.live { background: var(--fresh); }
+    .status-dot.warn { background: var(--warn); }
+    .status-dot.offline { background: var(--stale); }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+    
+    /* LEFT PANEL - AGENTS */
+    .left-panel {
+      background: var(--surface);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .panel-header {
+      padding: 12px;
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: var(--dim);
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: var(--surface);
+    }
+    
+    .agent-card {
+      padding: 12px;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .agent-card:hover { background: #111; }
+    .agent-card.selected { background: #151515; border-left: 2px solid var(--b0b); }
+    
+    .agent-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    
+    .agent-name {
+      font-weight: 500;
+      font-size: 12px;
+    }
+    
+    .agent-name.b0b { color: var(--b0b); }
+    .agent-name.d0t { color: var(--d0t); }
+    .agent-name.c0m { color: var(--c0m); }
+    .agent-name.r0ss { color: var(--r0ss); }
+    
+    .agent-status {
+      font-size: 9px;
+      padding: 2px 6px;
+      border-radius: 2px;
+      text-transform: uppercase;
+    }
+    
+    .agent-status.active { background: rgba(0, 255, 136, 0.2); color: var(--b0b); }
+    .agent-status.ready { background: rgba(102, 102, 255, 0.2); color: var(--r0ss); }
+    .agent-status.stale { background: rgba(255, 0, 68, 0.2); color: var(--stale); }
+    
+    .agent-role {
+      font-size: 10px;
+      color: var(--dim);
+      margin-bottom: 4px;
+    }
+    
+    .agent-stats {
+      display: flex;
+      gap: 12px;
+      font-size: 9px;
+      color: var(--dim);
+    }
+    
+    .agent-stat {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    
+    .agent-stat .value { color: var(--fg); }
+    
+    /* MODEL ROUTING */
+    .model-section {
+      padding: 12px;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+    }
+    
+    .model-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      font-size: 10px;
+    }
+    
+    .model-name { color: var(--dim); }
+    .model-status { color: var(--b0b); }
+    .model-status.warn { color: var(--warn); }
+    
+    /* CENTER - TEAM CHAT */
+    .center-panel {
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    
+    .chat-header {
+      padding: 12px 16px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .chat-title {
+      font-size: 12px;
+      font-weight: 500;
+    }
+    
+    .chat-meta {
+      font-size: 9px;
+      color: var(--dim);
+    }
+    
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+    }
+    
+    .message {
+      margin-bottom: 16px;
+      padding-left: 12px;
+      border-left: 2px solid var(--border);
+    }
+    
+    .message.b0b { border-color: var(--b0b); }
+    .message.d0t { border-color: var(--d0t); }
+    .message.c0m { border-color: var(--c0m); }
+    .message.r0ss { border-color: var(--r0ss); }
+    .message.hq { border-color: var(--warn); }
+    
+    .message-header {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 4px;
+      font-size: 10px;
+    }
+    
+    .message-author {
+      font-weight: 500;
+    }
+    
+    .message-author.b0b { color: var(--b0b); }
+    .message-author.d0t { color: var(--d0t); }
+    .message-author.c0m { color: var(--c0m); }
+    .message-author.r0ss { color: var(--r0ss); }
+    .message-author.hq { color: var(--warn); }
+    
+    .message-time {
+      color: var(--dim);
+    }
+    
+    .message-content {
+      color: var(--fg);
+      line-height: 1.6;
+    }
+    
+    .message-content code {
+      background: var(--surface);
+      padding: 2px 6px;
+      border-radius: 2px;
+      font-size: 10px;
+    }
+    
+    .chat-input {
+      padding: 12px 16px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 8px;
+    }
+    
+    .chat-input input {
+      flex: 1;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      color: var(--fg);
+      font-family: inherit;
+      font-size: 11px;
+      border-radius: 4px;
+    }
+    
+    .chat-input input:focus {
+      outline: none;
+      border-color: var(--b0b);
+    }
+    
+    .chat-input button {
+      background: var(--b0b);
+      color: var(--bg);
+      border: none;
+      padding: 8px 16px;
+      font-family: inherit;
+      font-size: 10px;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* RIGHT PANEL - LIVE DATA */
+    .right-panel {
+      background: var(--surface);
+      overflow-y: auto;
+    }
+    
+    .data-section {
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .data-header {
+      padding: 12px;
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: var(--dim);
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+    
+    .data-header:hover { background: #111; }
+    
+    .data-content {
+      padding: 0 12px 12px;
+    }
+    
+    /* FRESHNESS BARS */
+    .freshness-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 0;
+    }
+    
+    .freshness-label {
+      width: 80px;
+      font-size: 9px;
+      color: var(--dim);
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .freshness-bar {
+      flex: 1;
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    
+    .freshness-fill {
+      height: 100%;
+      background: var(--fresh);
+      transition: width 0.3s;
+    }
+    
+    .freshness-fill.stale { background: var(--stale); }
+    .freshness-fill.warn { background: var(--warn); }
+    
+    .freshness-value {
+      width: 32px;
+      font-size: 9px;
+      text-align: right;
+    }
+    
+    /* HOLDINGS */
+    .holding-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .holding-row:last-child { border: none; }
+    
+    .holding-symbol {
+      font-weight: 500;
+    }
+    
+    .holding-value {
+      color: var(--b0b);
+    }
+    
+    /* ACTIONS */
+    .action-item {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .action-item:last-child { border: none; }
+    
+    .action-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+    
+    .action-agent {
+      font-size: 9px;
+      font-weight: 500;
+    }
+    
+    .action-priority {
+      font-size: 8px;
+      padding: 1px 4px;
+      border-radius: 2px;
+      text-transform: uppercase;
+    }
+    
+    .action-priority.high { background: rgba(255, 0, 68, 0.2); color: var(--stale); }
+    .action-priority.medium { background: rgba(255, 170, 0, 0.2); color: var(--warn); }
+    
+    .action-desc {
+      font-size: 10px;
+      color: var(--dim);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    
+    /* FOOTER */
+    .footer {
+      grid-column: 1 / -1;
+      background: var(--surface);
+      padding: 8px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 9px;
+      color: var(--dim);
+      border-top: 1px solid var(--border);
+    }
+    
+    .footer a {
+      color: var(--dim);
+      text-decoration: none;
+    }
+    
+    .footer a:hover { color: var(--fg); }
+    
+    /* DISCUSSION LIST */
+    .discussion-item {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+    }
+    
+    .discussion-item:hover { background: #111; }
+    
+    .discussion-title {
+      font-size: 10px;
+      color: var(--fg);
+      margin-bottom: 4px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    
+    .discussion-meta {
+      display: flex;
+      gap: 8px;
+      font-size: 9px;
+      color: var(--dim);
+    }
+    
+    .discussion-participants {
+      display: flex;
+      gap: 4px;
+    }
+    
+    .participant-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+    
+    .participant-dot.b0b { background: var(--b0b); }
+    .participant-dot.d0t { background: var(--d0t); }
+    .participant-dot.c0m { background: var(--c0m); }
+    .participant-dot.r0ss { background: var(--r0ss); }
+    .participant-dot.hq { background: var(--warn); }
+    
+    /* LEARNINGS */
+    .learning-item {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .learning-title {
+      font-size: 10px;
+      color: var(--fg);
+      margin-bottom: 2px;
+    }
+    
+    .learning-meta {
+      font-size: 9px;
+      color: var(--dim);
+    }
+    
+    /* Loading */
+    .loading {
+      color: var(--dim);
+      padding: 12px;
+      text-align: center;
+    }
+    
+    .loading::after {
+      content: '';
+      animation: dots 1.5s infinite;
+    }
+    
+    @keyframes dots {
+      0%, 20% { content: '.'; }
+      40% { content: '..'; }
+      60%, 100% { content: '...'; }
+    }
+    
+    /* TWITTER FEED */
+    .tweet {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .tweet-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 9px;
+      margin-bottom: 4px;
+    }
+    
+    .tweet-author { color: var(--b0b); }
+    .tweet-time { color: var(--dim); }
+    
+    .tweet-content {
+      font-size: 10px;
+      color: var(--fg);
+      line-height: 1.5;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--dim); }
+  </style>
+</head>
+<body>
+  <div class="grid">
+    <!-- HEADER -->
+    <header class="header">
+      <div class="logo"><span>b0b</span> COMMAND</div>
+      <nav class="nav">
+        <a href="#" class="active">command</a>
+        <a href="https://b0b.dev" target="_blank">home</a>
+        <a href="https://d0t.b0b.dev" target="_blank">d0t</a>
+        <a href="https://0type.b0b.dev" target="_blank">0type</a>
+        <a href="#labs">labs</a>
+      </nav>
+      <div class="status-bar">
+        <div><span class="status-dot live"></span><span id="agent-count">--</span> online</div>
+        <div>L0RE f.<span id="freshness-avg">--</span></div>
+        <div id="timestamp">--:--:--</div>
+      </div>
+    </header>
+    
+    <!-- LEFT PANEL - AGENTS & MODELS -->
+    <aside class="left-panel">
+      <div class="panel-header">AGENTS</div>
+      <div id="agents-list">
+        <div class="loading">loading agents</div>
+      </div>
+      
+      <div class="panel-header" style="margin-top: auto;">DISCUSSIONS</div>
+      <div id="discussions-list" style="max-height: 200px; overflow-y: auto;">
+        <div class="loading">loading discussions</div>
+      </div>
+      
+      <div class="model-section">
+        <div class="panel-header" style="padding: 0 0 8px 0; border: none;">LLM ROUTING</div>
+        <div class="model-row">
+          <span class="model-name">Groq</span>
+          <span class="model-status">● FREE</span>
+        </div>
+        <div class="model-row">
+          <span class="model-name">DeepSeek</span>
+          <span class="model-status">● $0.14</span>
+        </div>
+        <div class="model-row">
+          <span class="model-name">Anthropic</span>
+          <span class="model-status">● $0.25</span>
+        </div>
+        <div class="model-row">
+          <span class="model-name">OpenRouter</span>
+          <span class="model-status warn">● fallback</span>
+        </div>
+      </div>
+    </aside>
+    
+    <!-- CENTER - TEAM CHAT -->
+    <main class="center-panel">
+      <div class="chat-header">
+        <div>
+          <div class="chat-title" id="chat-title">Team Discussion</div>
+          <div class="chat-meta" id="chat-meta">loading...</div>
+        </div>
+        <div class="chat-meta"><span id="msg-count">--</span> messages</div>
+      </div>
+      <div class="chat-messages" id="chat-messages">
+        <div class="loading">connecting to brain</div>
+      </div>
+      <div class="chat-input">
+        <input type="text" id="chat-input" placeholder="Ask the team something... (uses L0RE)" />
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </main>
+    
+    <!-- RIGHT PANEL - LIVE DATA -->
+    <aside class="right-panel">
+      <div class="data-section">
+        <div class="panel-header">DATA FRESHNESS</div>
+        <div class="data-content" id="freshness-list">
+          <div class="loading">loading</div>
+        </div>
+      </div>
+      
+      <div class="data-section">
+        <div class="panel-header">PORTFOLIO · <span id="portfolio-total">$--</span></div>
+        <div class="data-content" id="holdings-list">
+          <div class="loading">loading</div>
+        </div>
+      </div>
+      
+      <div class="data-section">
+        <div class="panel-header">PENDING ACTIONS · <span id="actions-count">--</span></div>
+        <div class="data-content" id="actions-list" style="max-height: 200px; overflow-y: auto;">
+          <div class="loading">loading</div>
+        </div>
+      </div>
+      
+      <div class="data-section">
+        <div class="panel-header">LEARNINGS · <span id="learnings-count">--</span></div>
+        <div class="data-content" id="learnings-list" style="max-height: 200px; overflow-y: auto;">
+          <div class="loading">loading</div>
+        </div>
+      </div>
+    </aside>
+    
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div>
+        <span id="brain-status">connecting...</span> ·
+        <span id="uptime">--</span>
+      </div>
+      <div>
+        <a href="https://github.com/b0b-dev" target="_blank">github</a> ·
+        <a href="https://x.com/b0bdotdev" target="_blank">x.com</a> ·
+        treasury: <span id="treasury">$--</span>
+      </div>
+      <div>L0RE Intelligence Engine · 2026</div>
+    </footer>
+  </div>
+
+  <script>
+    const BRAIN = 'https://b0b-brain-production.up.railway.app';
+    
+    // State
+    let currentDiscussion = null;
+    let knowledge = null;
+    
+    // Update timestamp
+    setInterval(() => {
+      document.getElementById('timestamp').textContent = new Date().toTimeString().slice(0, 8);
+    }, 1000);
+    
+    // Fetch helper
+    async function fetchBrain(endpoint) {
+      try {
+        const res = await fetch(`${BRAIN}${endpoint}`, { timeout: 10000 });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return await res.json();
+      } catch (e) {
+        console.error(`Error fetching ${endpoint}:`, e);
+        return null;
+      }
+    }
+    
+    // LOAD AGENTS
+    async function loadAgents() {
+      const data = await fetchBrain('/status');
+      const container = document.getElementById('agents-list');
+      
+      if (!data || !data.agents) {
+        container.innerHTML = '<div class="loading">offline</div>';
+        return;
+      }
+      
+      const online = data.agents.filter(a => a.status === 'online').length;
+      document.getElementById('agent-count').textContent = online;
+      document.getElementById('brain-status').textContent = `brain online · ${online} agents`;
+      
+      container.innerHTML = data.agents.map(a => `
+        <div class="agent-card ${a.name === 'b0b' ? 'selected' : ''}" onclick="selectAgent('${a.name}')">
+          <div class="agent-header">
+            <span class="agent-name ${a.name}">${a.name}</span>
+            <span class="agent-status ${a.status === 'online' ? 'active' : 'stale'}">${a.status}</span>
+          </div>
+          <div class="agent-role">${a.role || 'agent'}</div>
+          <div class="agent-stats">
+            <div class="agent-stat">
+              <span>knowledge:</span>
+              <span class="value">${a.knowledgeSize || '--'}</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+    
+    // LOAD KNOWLEDGE / DISCUSSIONS
+    async function loadKnowledge() {
+      knowledge = await fetchBrain('/knowledge');
+      
+      if (!knowledge || !knowledge.context) return;
+      
+      // Load discussions list
+      const discList = document.getElementById('discussions-list');
+      const discussions = knowledge.context.recentDiscussions || [];
+      
+      discList.innerHTML = discussions.slice(0, 10).map(d => `
+        <div class="discussion-item" onclick="loadDiscussion('${d.id}')">
+          <div class="discussion-title">${d.title}</div>
+          <div class="discussion-meta">
+            <div class="discussion-participants">
+              ${(d.participants || []).map(p => `<div class="participant-dot ${p.toLowerCase()}"></div>`).join('')}
+            </div>
+            <span>${d.messageCount || 0} msgs</span>
+          </div>
+        </div>
+      `).join('');
+      
+      // Load pending actions
+      const actionsList = document.getElementById('actions-list');
+      const actions = knowledge.context.pendingActions || [];
+      document.getElementById('actions-count').textContent = actions.length;
+      
+      actionsList.innerHTML = actions.slice(0, 10).map(a => `
+        <div class="action-item">
+          <div class="action-header">
+            <span class="action-agent" style="color: var(--${a.agent})">${a.agent}</span>
+            <span class="action-priority ${a.priority}">${a.priority}</span>
+          </div>
+          <div class="action-desc">${a.description}</div>
+        </div>
+      `).join('');
+      
+      // Load learnings
+      const learningsList = document.getElementById('learnings-list');
+      const learnings = knowledge.context.learnings || [];
+      document.getElementById('learnings-count').textContent = learnings.length;
+      
+      learningsList.innerHTML = learnings.map(l => `
+        <div class="learning-item">
+          <div class="learning-title">${l.title || l.file}</div>
+          <div class="learning-meta">${l.category || ''} · ${l.summary?.slice(0, 50) || ''}...</div>
+        </div>
+      `).join('');
+      
+      // Load first discussion
+      if (discussions.length > 0) {
+        loadDiscussion(discussions[0].id);
+      }
+    }
+    
+    // LOAD DISCUSSION
+    async function loadDiscussion(id) {
+      currentDiscussion = id;
+      const data = await fetchBrain(`/discussions/${id}`);
+      const container = document.getElementById('chat-messages');
+      
+      if (!data) {
+        container.innerHTML = '<div class="loading">failed to load</div>';
+        return;
+      }
+      
+      document.getElementById('chat-title').textContent = data.discussion?.title || 'Discussion';
+      document.getElementById('chat-meta').textContent = `${data.discussion?.participants?.join(', ') || ''} · ${data.discussion?.date || ''}`;
+      document.getElementById('msg-count').textContent = data.messages?.length || 0;
+      
+      const messages = data.messages || [];
+      
+      container.innerHTML = messages.map(m => `
+        <div class="message ${m.author?.toLowerCase() || ''}">
+          <div class="message-header">
+            <span class="message-author ${m.author?.toLowerCase() || ''}">${m.author || 'unknown'}</span>
+            <span class="message-time">${m.timestamp ? new Date(m.timestamp).toLocaleTimeString() : ''}</span>
+          </div>
+          <div class="message-content">${m.content || m.message || ''}</div>
+        </div>
+      `).join('') || '<div class="loading">no messages</div>';
+      
+      // Scroll to bottom
+      container.scrollTop = container.scrollHeight;
+    }
+    
+    // LOAD FRESHNESS
+    async function loadFreshness() {
+      const data = await fetchBrain('/freshness');
+      const container = document.getElementById('freshness-list');
+      
+      if (!data || !data.files) {
+        container.innerHTML = '<div class="loading">offline</div>';
+        return;
+      }
+      
+      let total = 0;
+      let count = 0;
+      
+      container.innerHTML = data.files.map(f => {
+        total += f.freshness;
+        count++;
+        const status = f.freshness < 30 ? 'stale' : f.freshness < 70 ? 'warn' : '';
+        return `
+          <div class="freshness-row">
+            <span class="freshness-label">${f.name.replace('.json', '')}</span>
+            <div class="freshness-bar">
+              <div class="freshness-fill ${status}" style="width: ${f.freshness}%"></div>
+            </div>
+            <span class="freshness-value">${f.freshness}%</span>
+          </div>
+        `;
+      }).join('');
+      
+      document.getElementById('freshness-avg').textContent = count > 0 ? Math.round(total / count) : '--';
+    }
+    
+    // LOAD HOLDINGS
+    async function loadHoldings() {
+      const data = await fetchBrain('/holdings/quick');
+      const container = document.getElementById('holdings-list');
+      
+      if (!data || !data.holdings) {
+        container.innerHTML = '<div class="loading">offline</div>';
+        return;
+      }
+      
+      const total = data.holdings.reduce((sum, h) => sum + (h.value || 0), 0);
+      document.getElementById('portfolio-total').textContent = `$${total.toFixed(2)}`;
+      
+      container.innerHTML = data.holdings.map(h => `
+        <div class="holding-row">
+          <span class="holding-symbol">${h.symbol}</span>
+          <span class="holding-value">$${(h.value || 0).toFixed(2)}</span>
+        </div>
+      `).join('');
+    }
+    
+    // LOAD TREASURY
+    async function loadTreasury() {
+      const data = await fetchBrain('/finance/treasury');
+      if (data) {
+        document.getElementById('treasury').textContent = `$${data.allocation || data.total || '--'}`;
+      }
+    }
+    
+    // LOAD HEALTH
+    async function loadHealth() {
+      const data = await fetchBrain('/health');
+      if (data) {
+        document.getElementById('uptime').textContent = `uptime: ${data.uptime || '--'}`;
+      }
+    }
+    
+    // SELECT AGENT
+    function selectAgent(name) {
+      document.querySelectorAll('.agent-card').forEach(el => el.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+      // Could load agent-specific view here
+    }
+    
+    // SEND MESSAGE
+    async function sendMessage() {
+      const input = document.getElementById('chat-input');
+      const message = input.value.trim();
+      if (!message) return;
+      
+      input.value = '';
+      
+      // Add message to chat immediately
+      const container = document.getElementById('chat-messages');
+      const msgEl = document.createElement('div');
+      msgEl.className = 'message hq';
+      msgEl.innerHTML = `
+        <div class="message-header">
+          <span class="message-author hq">you</span>
+          <span class="message-time">${new Date().toLocaleTimeString()}</span>
+        </div>
+        <div class="message-content">${message}</div>
+      `;
+      container.appendChild(msgEl);
+      container.scrollTop = container.scrollHeight;
+      
+      // Send to brain (if endpoint exists)
+      try {
+        const res = await fetch(`${BRAIN}/discussions/${currentDiscussion}/message`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ author: 'HQ', content: message })
+        });
+        // Refresh discussion
+        setTimeout(() => loadDiscussion(currentDiscussion), 1000);
+      } catch (e) {
+        console.error('Failed to send message:', e);
+      }
+    }
+    
+    // Enter key to send
+    document.getElementById('chat-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') sendMessage();
+    });
+    
+    // INIT
+    async function init() {
+      await Promise.all([
+        loadAgents(),
+        loadHealth(),
+        loadTreasury(),
+      ]);
+      
+      await Promise.all([
+        loadKnowledge(),
+        loadFreshness(),
+        loadHoldings(),
+      ]);
+    }
+    
+    // REFRESH
+    setInterval(() => {
+      loadFreshness();
+      loadAgents();
+    }, 30000);
+    
+    init();
+  </script>
+</body>
+</html>

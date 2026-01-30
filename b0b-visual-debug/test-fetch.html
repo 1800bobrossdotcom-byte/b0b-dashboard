@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test 3 - Fetch Brain</title>
+  <style>
+    body {
+      background: #111;
+      color: #0f0;
+      font-family: monospace;
+      padding: 20px;
+    }
+    .result { margin: 10px 0; padding: 10px; background: #222; }
+    .error { color: #f00; }
+    .success { color: #0f0; }
+  </style>
+</head>
+<body>
+  <h1>TEST 3: Fetch Brain API</h1>
+  <div class="result" id="health">Fetching /health...</div>
+  <div class="result" id="status">Fetching /status...</div>
+  <div class="result" id="freshness">Fetching /freshness...</div>
+  
+  <script>
+    const BRAIN = 'https://b0b-brain-production.up.railway.app';
+    
+    async function testEndpoint(id, endpoint) {
+      const el = document.getElementById(id);
+      try {
+        const res = await fetch(BRAIN + endpoint);
+        const data = await res.json();
+        el.className = 'result success';
+        el.textContent = endpoint + ' OK: ' + JSON.stringify(data).slice(0, 100) + '...';
+      } catch (e) {
+        el.className = 'result error';
+        el.textContent = endpoint + ' FAILED: ' + e.message;
+      }
+    }
+    
+    testEndpoint('health', '/health');
+    testEndpoint('status', '/status');
+    testEndpoint('freshness', '/freshness');
+  </script>
+</body>
+</html>

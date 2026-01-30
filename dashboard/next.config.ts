@@ -1,3 +1,4 @@
+import path from "path";
 import type { NextConfig } from "next";
 
 // Security headers — c0m auto-fix protocol
@@ -68,6 +69,8 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Point output tracing to repo root to avoid monorepo root inference warnings
+  outputFileTracingRoot: path.join(__dirname, ".."),
 };
 
 export default nextConfig;
