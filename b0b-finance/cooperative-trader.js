@@ -21,6 +21,7 @@
 const axios = require('axios');
 const { NashSwarm, CooperativeCouncil } = require('./nash-swarm');
 const { TradingD0t } = require('./trading-d0t');
+const { Turb0b00st } = require('./turb0b00st');
 const fs = require('fs');
 const path = require('path');
 
@@ -64,6 +65,7 @@ class CooperativeTrader {
   constructor() {
     this.swarm = new NashSwarm();
     this.tradingD0t = new TradingD0t();
+    this.turbo = new Turb0b00st();  // 🚀 TURB0B00ST integration
     this.state = this.loadState();
     this.running = false;
   }
@@ -283,6 +285,65 @@ class CooperativeTrader {
     return trade;
   }
 
+  // ═══════════════════════════════════════════════════════════
+  // 🚀 TURB0B00ST LIVE EXECUTION
+  // ═══════════════════════════════════════════════════════════
+
+  async executeLiveTrade(decision) {
+    this.log(`🚀 LIVE TRADE via TURB0B00ST: ${decision.direction} $${decision.size?.toFixed(2)}`);
+    
+    // Build signal for TURB0B00ST
+    const signal = {
+      side: decision.direction,
+      market: decision.market?.conditionId,
+      sizeUSD: decision.size,
+      price: decision.analysis?.price,
+      confidence: decision.confidence,
+      maxSlippage: 0.02,
+      source: 'CooperativeTrader',
+      swarmConsensus: {
+        method: 'Nash Cooperative Council',
+        agents: ['b0b', 'r0ss', 'd0t', 'c0m'],
+      },
+    };
+    
+    // Execute through TURB0B00ST
+    const result = await this.turbo.executeTrade(signal);
+    
+    if (result.success) {
+      this.log(`✅ Trade executed: ${result.txHash || 'pending'}`);
+      
+      const trade = {
+        timestamp: new Date().toISOString(),
+        type: 'LIVE',
+        market: decision.market?.question,
+        marketId: decision.market?.conditionId,
+        direction: decision.direction,
+        size: decision.size,
+        price: decision.analysis?.price,
+        confidence: decision.confidence,
+        method: 'TURB0B00ST → Nash Cooperative Council',
+        txHash: result.txHash,
+        turboMode: this.turbo.mode,
+      };
+      
+      this.logTrade(trade);
+      
+      this.state.tradesThisSession++;
+      this.state.lastTradeTime = Date.now();
+      this.state.positions.push({
+        ...trade,
+        entryPrice: decision.analysis?.price,
+      });
+      this.saveState();
+      
+      return trade;
+    } else {
+      this.log(`❌ Trade failed: ${result.error || result.message || 'Unknown error'}`);
+      return { success: false, ...result };
+    }
+  }
+
   async runTradingLoop(paperMode = true) {
     this.running = true;
     
@@ -323,8 +384,8 @@ class CooperativeTrader {
             if (paperMode) {
               await this.executePaperTrade(decision);
             } else {
-              // Live trading would go here
-              this.log('Live trading not yet implemented');
+              // 🚀 LIVE trading through TURB0B00ST
+              await this.executeLiveTrade(decision);
             }
             break;  // One trade per cycle
           }
@@ -408,6 +469,27 @@ async function main() {
       trader.printStatus();
       break;
 
+    case 'turbo':
+      // 🚀 Show TURB0B00ST status
+      trader.turbo.displayStatus();
+      const status = await trader.turbo.getStatus();
+      console.log('\n  PREFLIGHT CHECKS:');
+      console.log('  ─────────────────────────────────────────────────────────────────────────────');
+      for (const check of status.preflightResults) {
+        console.log(`  ${check.passed ? '✓' : '✗'} ${check.name}: ${check.message}`);
+      }
+      console.log('\n');
+      break;
+
+    case 'arm':
+      // 🔒 Arm TURB0B00ST for live trading
+      console.log('🔓 Arming TURB0B00ST...');
+      const armResult = await trader.turbo.activate('ARMED');
+      console.log(armResult.success 
+        ? `✅ Armed: ${armResult.mode}` 
+        : `❌ Failed: ${armResult.error}`);
+      break;
+
     default:
       console.log(`
 🤝 COOPERATIVE TRADER - Nash Swarm Live Trading
@@ -418,6 +500,8 @@ Commands:
   paper     Run paper trading loop
   trade     Run live trading loop
   status    Show session status
+  turbo     Show TURB0B00ST status
+  arm       Arm TURB0B00ST for live trading
 
 Tonight's Limits:
   • Max $${CONFIG.MAX_POSITION_SIZE} per trade
