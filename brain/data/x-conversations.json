@@ -1,0 +1,21 @@
+{
+  "crawler": "x-conversations",
+  "timestamp": "2026-01-30T09:59:27.289Z",
+  "data": {
+    "timestamp": "2026-01-30T09:59:27.289Z",
+    "mentions": {
+      "total": 0,
+      "byAgent": {},
+      "items": []
+    },
+    "keywords": [],
+    "watchlist": [],
+    "sentiment": {
+      "positive": 0,
+      "negative": 0,
+      "neutral": 0,
+      "score": 0
+    },
+    "actionItems": []
+  }
+}

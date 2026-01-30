@@ -1,8 +1,8 @@
 {
   "crawler": "d0t-signals",
-  "timestamp": "2026-01-30T09:50:33.398Z",
+  "timestamp": "2026-01-30T09:59:15.819Z",
   "data": {
-    "timestamp": "2026-01-30T09:50:32.769Z",
+    "timestamp": "2026-01-30T09:59:15.110Z",
     "agent": "d0t",
     "role": "Data Oracle",
     "sentiment": {
@@ -16,35 +16,35 @@
         "question": "US government shutdown Saturday?",
         "probability": "[",
         "volume24h": 9926677.48338102,
-        "liquidity": "189378.2045",
+        "liquidity": "178531.3625",
         "signal": "uncertain"
       },
       {
         "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
         "probability": "[",
         "volume24h": 5109718.668020005,
-        "liquidity": "338079.33051",
+        "liquidity": "360105.30337",
         "signal": "uncertain"
       },
       {
         "question": "Australian Open Men's: Carlos Alcaraz vs Alexander Zverev",
         "probability": "[",
         "volume24h": 4935067.930834998,
-        "liquidity": "2363202.83601",
+        "liquidity": "2138829.00444",
         "signal": "uncertain"
       },
       {
         "question": "Tesla launches unsupervised full self driving (FSD) by June 30?",
         "probability": "[",
         "volume24h": 4400193.233606,
-        "liquidity": "2213612.83638",
+        "liquidity": "2183501.51861",
         "signal": "uncertain"
       },
       {
         "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
         "probability": "[",
         "volume24h": 3912337.6698750183,
-        "liquidity": "419832.8574",
+        "liquidity": "424084.0435",
         "signal": "uncertain"
       }
     ],
