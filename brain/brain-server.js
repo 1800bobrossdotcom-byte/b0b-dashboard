@@ -56,6 +56,20 @@ try {
   console.log('[BRAIN] Freshness Monitor not available:', e.message);
 }
 
+// Self-Healing Loop — Solves Brain/L0RE/Live Data Paradoxes
+let selfHealingLoop;
+try {
+  selfHealingLoop = require('./self-healing-loop.js');
+  // Start self-healing in background (non-blocking)
+  selfHealingLoop.startHealing().then(() => {
+    console.log('[BRAIN] Self-Healing Loop started — paradoxes dissolving 🔄');
+  }).catch(e => {
+    console.log('[BRAIN] Self-Healing Loop warning:', e.message);
+  });
+} catch (e) {
+  console.log('[BRAIN] Self-Healing Loop not available:', e.message);
+}
+
 // Research Library — PDF/doc knowledge base
 const LIBRARY_DIR = path.join(__dirname, 'data', 'library');
 const LIBRARY_INDEX_DIR = path.join(LIBRARY_DIR, 'index');
@@ -1098,6 +1112,16 @@ app.get('/status', async (req, res) => {
   const state = await loadState();
   const archive = await loadChatArchive();
   
+  // Get self-healing status if available
+  let healingStatus = null;
+  if (selfHealingLoop) {
+    try {
+      healingStatus = await selfHealingLoop.getStatus();
+    } catch (e) {
+      healingStatus = { error: e.message };
+    }
+  }
+  
   res.json({
     system: {
       status: state.status || 'unknown',
@@ -1105,6 +1129,7 @@ app.get('/status', async (req, res) => {
       lastDiscussion: state.lastDiscussion,
       totalDiscussions: state.totalDiscussions || 0,
     },
+    selfHealing: healingStatus,
     agents: Object.entries(AGENTS).map(([id, agent]) => ({
       id,
       name: agent.name,

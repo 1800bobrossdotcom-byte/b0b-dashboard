@@ -1,153 +1,145 @@
 {
-  "lastSweep": "2026-01-30T18:48:48.244Z",
+  "lastSweep": "2026-01-30T23:46:11.201Z",
   "items": {
     "d0t-signals.json": {
       "file": "d0t-signals.json",
       "exists": true,
-      "age": 29495,
+      "age": 13,
       "maxAge": 120,
-      "fresh": false,
-      "freshness": 0,
+      "fresh": true,
+      "freshness": 89,
       "priority": "critical",
       "agent": "d0t",
-      "lastUpdate": "2026-01-30T10:37:13.320Z",
-      "status": "🔴"
+      "lastUpdate": "2026-01-30T23:45:58.565Z",
+      "status": "🟢"
     },
     "live-trader-state.json": {
       "file": "live-trader-state.json",
       "exists": true,
-      "age": 141,
+      "age": 17802,
       "maxAge": 60,
       "fresh": false,
       "freshness": 0,
       "priority": "critical",
       "agent": "turb0",
-      "lastUpdate": "2026-01-30T18:46:27.634Z",
+      "lastUpdate": "2026-01-30T18:49:29.671Z",
       "status": "🔴"
     },
     "turb0b00st-state.json": {
       "file": "turb0b00st-state.json",
-      "exists": false,
-      "age": null,
+      "exists": true,
+      "age": 13606,
+      "maxAge": 3600,
       "fresh": false,
       "freshness": 0,
-      "priority": "critical",
+      "priority": "high",
       "agent": "turb0",
-      "status": "⚫",
-      "error": "Unexpected token '﻿', \"﻿{\r\n    \"a\"... is not valid JSON"
+      "lastUpdate": "2026-01-30T19:59:25.610Z",
+      "status": "🔴"
     },
     "polymarket.json": {
       "file": "polymarket.json",
       "exists": true,
-      "age": 144,
+      "age": 17843,
       "maxAge": 180,
-      "fresh": true,
-      "freshness": 20,
+      "fresh": false,
+      "freshness": 0,
       "priority": "high",
       "agent": "d0t",
-      "lastUpdate": "2026-01-30T18:46:24.626Z",
-      "status": "🟢"
+      "lastUpdate": "2026-01-30T18:48:48.224Z",
+      "status": "🔴"
     },
     "x-conversations.json": {
       "file": "x-conversations.json",
       "exists": true,
-      "age": 29484,
+      "age": 33,
       "maxAge": 300,
-      "fresh": false,
-      "freshness": 0,
+      "fresh": true,
+      "freshness": 89,
       "priority": "high",
       "agent": "swarm",
-      "lastUpdate": "2026-01-30T10:37:23.840Z",
-      "status": "🔴"
+      "lastUpdate": "2026-01-30T23:45:38.298Z",
+      "status": "🟢"
     },
     "treasury-state.json": {
       "file": "treasury-state.json",
-      "exists": false,
-      "age": null,
+      "exists": true,
+      "age": 13606,
+      "maxAge": 600,
       "fresh": false,
       "freshness": 0,
       "priority": "high",
       "agent": "swarm",
-      "status": "⚫",
-      "error": "Unexpected token '﻿', \"﻿{\r\n    \"b\"... is not valid JSON"
+      "lastUpdate": "2026-01-30T19:59:25.610Z",
+      "status": "🔴"
     },
     "r0ss-research.json": {
       "file": "r0ss-research.json",
       "exists": true,
-      "age": 29494,
+      "age": 12,
       "maxAge": 3600,
-      "fresh": false,
-      "freshness": 0,
+      "fresh": true,
+      "freshness": 100,
       "priority": "medium",
       "agent": "r0ss",
-      "lastUpdate": "2026-01-30T10:37:14.589Z",
-      "status": "🔴"
+      "lastUpdate": "2026-01-30T23:45:59.501Z",
+      "status": "🟢"
     },
     "b0b-creative.json": {
       "file": "b0b-creative.json",
       "exists": true,
-      "age": 29490,
+      "age": 9,
       "maxAge": 3600,
-      "fresh": false,
-      "freshness": 0,
+      "fresh": true,
+      "freshness": 100,
       "priority": "medium",
       "agent": "b0b",
-      "lastUpdate": "2026-01-30T10:37:17.784Z",
-      "status": "🔴"
+      "lastUpdate": "2026-01-30T23:46:01.918Z",
+      "status": "🟢"
     },
     "library-sync.json": {
       "file": "library-sync.json",
       "exists": true,
-      "age": 31640,
+      "age": 17437,
       "maxAge": 7200,
       "fresh": false,
       "freshness": 0,
       "priority": "medium",
       "agent": "swarm",
-      "lastUpdate": "2026-01-30T10:01:28.615Z",
+      "lastUpdate": "2026-01-30T18:55:34.375Z",
       "status": "🔴"
     },
     "l0re-llm.json": {
       "file": "l0re-llm.json",
-      "exists": false,
-      "age": null,
-      "fresh": false,
-      "freshness": 0,
+      "exists": true,
+      "age": 17428,
+      "maxAge": 86400,
+      "fresh": true,
+      "freshness": 80,
       "priority": "low",
       "agent": "swarm",
-      "status": "⚫",
-      "error": "ENOENT: no such file or directory, stat 'C:\\workspace\\b0b-platform\\brain\\data\\l0re-llm.json'"
+      "lastUpdate": "2026-01-30T18:55:43.679Z",
+      "status": "🟢"
     },
     "learnings.json": {
       "file": "learnings.json",
-      "exists": false,
-      "age": null,
-      "fresh": false,
-      "freshness": 0,
+      "exists": true,
+      "age": 18065,
+      "maxAge": 86400,
+      "fresh": true,
+      "freshness": 79,
       "priority": "low",
       "agent": "swarm",
-      "status": "⚫",
-      "error": "Unexpected token '﻿', \"﻿{\r\n    \"t\"... is not valid JSON"
+      "lastUpdate": "2026-01-30T18:45:06.058Z",
+      "status": "🟢"
     }
   },
   "alerts": [
     {
       "level": "CRITICAL",
-      "file": "d0t-signals.json",
-      "age": 29495,
-      "message": "d0t-signals.json is 492min stale (max: 2min)"
-    },
-    {
-      "level": "CRITICAL",
       "file": "live-trader-state.json",
-      "age": 141,
-      "message": "live-trader-state.json is 2min stale (max: 1min)"
-    },
-    {
-      "level": "CRITICAL",
-      "file": "turb0b00st-state.json",
-      "age": null,
-      "message": "turb0b00st-state.json is Infinitymin stale (max: NaNmin)"
+      "age": 17802,
+      "message": "live-trader-state.json is 297min stale (max: 1min)"
     }
   ],
   "history": [
@@ -450,6 +442,18 @@
       "fresh": 1,
       "stale": 6,
       "missing": 4
+    },
+    {
+      "timestamp": "2026-01-30T23:44:31.815Z",
+      "fresh": 2,
+      "stale": 9,
+      "missing": 0
+    },
+    {
+      "timestamp": "2026-01-30T23:46:11.201Z",
+      "fresh": 6,
+      "stale": 5,
+      "missing": 0
     }
   ]
 }

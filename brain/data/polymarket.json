@@ -1,6 +1,6 @@
 {
   "crawler": "polymarket",
-  "timestamp": "2026-01-30T18:48:48.224Z",
+  "timestamp": "2026-01-30T23:46:35.173Z",
   "data": {
     "markets": [
       {
@@ -8,43 +8,43 @@
         "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
         "slug": "will-trump-nominate-judy-shelton-as-the-next-fed-chair",
         "volume24h": 15965299.060382042,
-        "liquidity": "670889.90496",
+        "liquidity": "414301.26268",
         "endDate": "2026-12-31T00:00:00Z",
-        "outcomePrices": "[\"0.006\", \"0.994\"]"
+        "outcomePrices": "[\"0.0115\", \"0.9885\"]"
       },
       {
         "id": "680392",
         "question": "US government shutdown Saturday?",
         "slug": "will-there-be-another-us-government-shutdown-by-january-31",
         "volume24h": 10685134.17284598,
-        "liquidity": "399595.8573",
+        "liquidity": "197060.4373",
         "endDate": "2026-01-31T00:00:00Z",
-        "outcomePrices": "[\"0.865\", \"0.135\"]"
+        "outcomePrices": "[\"0.86\", \"0.14\"]"
       },
       {
         "id": "572469",
         "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
         "slug": "will-trump-nominate-kevin-warsh-as-the-next-fed-chair",
         "volume24h": 8849810.158127027,
-        "liquidity": "347402.11259",
+        "liquidity": "141993.41473",
         "endDate": "2026-12-31T00:00:00Z",
-        "outcomePrices": "[\"0.9925\", \"0.0075\"]"
+        "outcomePrices": "[\"0.9825\", \"0.0175\"]"
       },
       {
         "id": "572485",
         "question": "Will Trump nominate Rick Rieder as the next Fed chair?",
         "slug": "will-trump-nominate-rick-rieder-as-the-next-fed-chair",
         "volume24h": 5331808.333866005,
-        "liquidity": "477966.6484",
+        "liquidity": "309701.66562",
         "endDate": "2026-12-31T00:00:00Z",
-        "outcomePrices": "[\"0.0005\", \"0.9995\"]"
+        "outcomePrices": "[\"0.0015\", \"0.9985\"]"
       },
       {
         "id": "572486",
         "question": "Will Trump nominate Michelle Bowman as the next Fed chair?",
         "slug": "will-trump-nominate-michelle-bowman-as-the-next-fed-chair",
         "volume24h": 4591614.909368,
-        "liquidity": "447592.04973",
+        "liquidity": "234124.32477",
         "endDate": "2026-12-31T00:00:00Z",
         "outcomePrices": "[\"0.0005\", \"0.9995\"]"
       },
@@ -53,25 +53,25 @@
         "question": "Will Trump nominate Christopher Waller as the next Fed chair?",
         "slug": "will-trump-nominate-christopher-waller-as-the-next-fed-chair",
         "volume24h": 4560362.275196004,
-        "liquidity": "415181.44787",
+        "liquidity": "186204.46936",
         "endDate": "2026-12-31T00:00:00Z",
-        "outcomePrices": "[\"0.0005\", \"0.9995\"]"
+        "outcomePrices": "[\"0.0015\", \"0.9985\"]"
       },
       {
         "id": "565930",
         "question": "Tesla launches unsupervised full self driving (FSD) by June 30?",
         "slug": "tesla-launches-unsupervised-full-self-driving-fsd-by-october-31-717-337",
         "volume24h": 3897872.1943689976,
-        "liquidity": "198280.55826",
+        "liquidity": "562388.86922",
         "endDate": "2026-06-30T00:00:00Z",
-        "outcomePrices": "[\"0.996\", \"0.004\"]"
+        "outcomePrices": "[\"0.997\", \"0.003\"]"
       },
       {
         "id": "572470",
         "question": "Will Trump nominate Kevin Hassett as the next Fed chair?",
         "slug": "will-trump-nominate-kevin-hassett-as-the-next-fed-chair",
         "volume24h": 3693319.1700999974,
-        "liquidity": "1298117.47869",
+        "liquidity": "545222.00857",
         "endDate": "2026-12-31T00:00:00Z",
         "outcomePrices": "[\"0.0005\", \"0.9995\"]"
       },
@@ -80,25 +80,25 @@
         "question": "Will Trump nominate Scott Bessent as the next Fed chair?",
         "slug": "will-trump-nominate-scott-bessent-as-the-next-fed-chair",
         "volume24h": 3236304.6575110042,
-        "liquidity": "1053931.21288",
+        "liquidity": "165175.75789",
         "endDate": "2026-12-31T00:00:00Z",
-        "outcomePrices": "[\"0.0005\", \"0.9995\"]"
+        "outcomePrices": "[\"0.0015\", \"0.9985\"]"
       },
       {
         "id": "1092199",
         "question": "US strikes Iran by January 31, 2026?",
         "slug": "us-strikes-iran-by-january-31-2026-165",
         "volume24h": 2506900.0024360046,
-        "liquidity": "282931.4099",
+        "liquidity": "163973.8255",
         "endDate": "2026-01-31T00:00:00Z",
-        "outcomePrices": "[\"0.075\", \"0.925\"]"
+        "outcomePrices": "[\"0.095\", \"0.905\"]"
       },
       {
         "id": "920396",
         "question": "Will Trump talk to Emmanuel Macron in January?",
         "slug": "will-trump-talk-to-emmanuel-macron-in-january",
         "volume24h": 2211631.613655,
-        "liquidity": "1576065.73521",
+        "liquidity": "830614.16709",
         "endDate": "2026-01-31T00:00:00Z",
         "outcomePrices": "[\"0.9995\", \"0.0005\"]"
       },
@@ -107,7 +107,7 @@
         "question": "Will the Fed increase interest rates by 25+ bps after the March 2026 meeting?",
         "slug": "will-the-fed-increase-interest-rates-by-25-bps-after-the-march-2026-meeting",
         "volume24h": 1840653.534147996,
-        "liquidity": "2213214.99772",
+        "liquidity": "2174762.19849",
         "endDate": "2026-03-18T00:00:00Z",
         "outcomePrices": "[\"0.0075\", \"0.9925\"]"
       },
@@ -116,7 +116,7 @@
         "question": "Will Trump nominate Stephen Miran as the next Fed chair?",
         "slug": "will-trump-nominate-stephen-miran-as-the-next-fed-chair",
         "volume24h": 1663927.584094,
-        "liquidity": "1589774.66275",
+        "liquidity": "1715738.055",
         "endDate": "2026-12-31T00:00:00Z",
         "outcomePrices": "[\"0.0005\", \"0.9995\"]"
       },
@@ -125,34 +125,34 @@
         "question": "Will Gretchen Whitmer win the 2028 US Presidential Election?",
         "slug": "will-gretchen-whitmer-win-the-2028-us-presidential-election",
         "volume24h": 1527447.4371510001,
-        "liquidity": "411838.05144",
+        "liquidity": "411116.5351",
         "endDate": "2028-11-07T00:00:00Z",
-        "outcomePrices": "[\"0.0145\", \"0.9855\"]"
+        "outcomePrices": "[\"0.013\", \"0.987\"]"
       },
       {
         "id": "1082781",
         "question": "Will Bitcoin reach $100,000 in January?",
         "slug": "will-bitcoin-reach-100k-in-january-2026",
         "volume24h": 1303049.0947800016,
-        "liquidity": "142546.29092",
+        "liquidity": "121346.58894",
         "endDate": "2026-02-01T05:00:00Z",
-        "outcomePrices": "[\"0.002\", \"0.998\"]"
+        "outcomePrices": "[\"0.0015\", \"0.9985\"]"
       },
       {
         "id": "1106713",
         "question": "Khamenei out as Supreme Leader of Iran by January 31?",
         "slug": "khamenei-out-as-supreme-leader-of-iran-by-january-31",
         "volume24h": 1265690.5634819993,
-        "liquidity": "252185.37541",
+        "liquidity": "304911.05702",
         "endDate": "2026-01-31T00:00:00Z",
-        "outcomePrices": "[\"0.0065\", \"0.9935\"]"
+        "outcomePrices": "[\"0.0095\", \"0.9905\"]"
       },
       {
         "id": "572506",
         "question": "Will Trump nominate no one before 2027?",
         "slug": "will-trump-nominate-no-one-before-2027",
         "volume24h": 1244726.4029999997,
-        "liquidity": "1250275.29195",
+        "liquidity": "1196532.03512",
         "endDate": "2026-12-31T00:00:00Z",
         "outcomePrices": "[\"0.0005\", \"0.9995\"]"
       },
@@ -161,7 +161,7 @@
         "question": "Will Trump nominate Jerome Powell as the next Fed chair?",
         "slug": "will-trump-nominate-jerome-powell-as-the-next-fed-chair",
         "volume24h": 1187995.1398999998,
-        "liquidity": "2054969.55011",
+        "liquidity": "2092958.9228",
         "endDate": "2026-12-31T00:00:00Z",
         "outcomePrices": "[\"0.0005\", \"0.9995\"]"
       },
@@ -170,16 +170,16 @@
         "question": "Will the Fed decrease interest rates by 50+ bps after the March 2026 meeting?",
         "slug": "will-the-fed-decrease-interest-rates-by-50-bps-after-the-march-2026-meeting",
         "volume24h": 1144095.4127670005,
-        "liquidity": "1155415.97937",
+        "liquidity": "772139.20924",
         "endDate": "2026-03-18T00:00:00Z",
-        "outcomePrices": "[\"0.0125\", \"0.9875\"]"
+        "outcomePrices": "[\"0.0195\", \"0.9805\"]"
       },
       {
         "id": "1273683",
         "question": "Will the US not strike another country before 2027?",
         "slug": "will-the-us-not-strike-another-country-before-2027-472",
         "volume24h": 1091367.65,
-        "liquidity": "15268574.74046",
+        "liquidity": "14905303.16889",
         "endDate": "2026-12-31T00:00:00Z",
         "outcomePrices": "[\"0.0005\", \"0.9995\"]"
       }
@@ -207,6 +207,6 @@
       }
     ],
     "volume24h": 77799009.36717805,
-    "fetchedAt": "2026-01-30T18:48:48.224Z"
+    "fetchedAt": "2026-01-30T23:46:35.011Z"
   }
 }

@@ -1,8 +1,8 @@
 {
   "crawler": "library-sync",
-  "timestamp": "2026-01-30T18:55:34.375Z",
+  "timestamp": "2026-01-30T23:46:34.724Z",
   "data": {
-    "timestamp": "2026-01-30T10:01:12.514Z",
+    "timestamp": "2026-01-30T23:46:18.975Z",
     "provider": "none",
     "categories": {
       "security": {
@@ -11,28 +11,23 @@
         "repos": [
           {
             "repo": "OWASP/CheatSheetSeries",
-            "status": "updated",
-            "size": 4232
+            "status": "unchanged"
           },
           {
             "repo": "swisskyrepo/PayloadsAllTheThings",
-            "status": "updated",
-            "size": 3192
+            "status": "unchanged"
           },
           {
             "repo": "danielmiessler/SecLists",
-            "status": "updated",
-            "size": 4741
+            "status": "unchanged"
           },
           {
             "repo": "HackTricks-wiki/hacktricks",
-            "status": "updated",
-            "size": 10916
+            "status": "unchanged"
           },
           {
             "repo": "trimstray/the-book-of-secret-knowledge",
-            "status": "updated",
-            "size": 211640
+            "status": "unchanged"
           }
         ],
         "rss": [
@@ -41,7 +36,7 @@
             "items": 10
           }
         ],
-        "newContent": 5
+        "newContent": 0
       },
       "ai": {
         "category": "ai",
@@ -49,28 +44,23 @@
         "repos": [
           {
             "repo": "anthropics/anthropic-cookbook",
-            "status": "updated",
-            "size": 5822
+            "status": "unchanged"
           },
           {
             "repo": "openai/openai-cookbook",
-            "status": "updated",
-            "size": 1209
+            "status": "unchanged"
           },
           {
             "repo": "microsoft/autogen",
-            "status": "updated",
-            "size": 18727
+            "status": "unchanged"
           },
           {
             "repo": "langchain-ai/langchain",
-            "status": "updated",
-            "size": 6867
+            "status": "unchanged"
           },
           {
             "repo": "huggingface/transformers",
-            "status": "updated",
-            "size": 17485
+            "status": "unchanged"
           }
         ],
         "rss": [
@@ -83,7 +73,7 @@
             "items": 10
           }
         ],
-        "newContent": 5
+        "newContent": 0
       },
       "design": {
         "category": "design",
@@ -91,27 +81,23 @@
         "repos": [
           {
             "repo": "rsms/inter",
-            "status": "updated",
-            "size": 7830
+            "status": "unchanged"
           },
           {
             "repo": "adobe-fonts/source-code-pro",
-            "status": "updated",
-            "size": 592
+            "status": "unchanged"
           },
           {
             "repo": "google/fonts",
-            "status": "updated",
-            "size": 4791
+            "status": "unchanged"
           },
           {
             "repo": "tonsky/FiraCode",
-            "status": "updated",
-            "size": 12022
+            "status": "unchanged"
           }
         ],
         "rss": [],
-        "newContent": 4
+        "newContent": 0
       },
       "trading": {
         "category": "trading",
@@ -119,33 +105,29 @@
         "repos": [
           {
             "repo": "coinbase/onchainkit",
-            "status": "updated",
-            "size": 4638
+            "status": "unchanged"
           },
           {
             "repo": "base-org/guides",
-            "status": "updated",
-            "size": 1179
+            "status": "unchanged"
           },
           {
             "repo": "Uniswap/v4-core",
-            "status": "updated",
-            "size": 4310
+            "status": "unchanged"
           },
           {
             "repo": "paradigmxyz/reth",
-            "status": "updated",
-            "size": 11159
+            "status": "unchanged"
           }
         ],
         "rss": [],
-        "newContent": 4
+        "newContent": 0
       }
     },
     "summary": {
       "totalRepos": 18,
       "totalFeeds": 3,
-      "newContent": 18
+      "newContent": 0
     }
   }
 }

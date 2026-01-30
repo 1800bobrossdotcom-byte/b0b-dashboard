@@ -1,8 +1,8 @@
 {
   "crawler": "d0t-signals",
-  "timestamp": "2026-01-30T21:17:20.743Z",
+  "timestamp": "2026-01-30T23:45:58.565Z",
   "data": {
-    "timestamp": "2026-01-30T21:17:19.699Z",
+    "timestamp": "2026-01-30T23:45:58.075Z",
     "agent": "d0t",
     "role": "Data Oracle",
     "predictions": [
@@ -10,21 +10,21 @@
         "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
         "probability": null,
         "volume24h": 15965299.060382042,
-        "liquidity": "414405.96146",
+        "liquidity": "417800.60144",
         "signal": "uncertain"
       },
       {
         "question": "US government shutdown Saturday?",
         "probability": null,
         "volume24h": 10685134.17284598,
-        "liquidity": "329460.1983",
+        "liquidity": "193936.8274",
         "signal": "uncertain"
       },
       {
         "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
         "probability": null,
         "volume24h": 8849810.158127027,
-        "liquidity": "84383.36026",
+        "liquidity": "140953.55703",
         "signal": "uncertain"
       },
       {
@@ -38,14 +38,14 @@
         "question": "Will Trump nominate Rick Rieder as the next Fed chair?",
         "probability": null,
         "volume24h": 5331808.333866005,
-        "liquidity": "363713.01045",
+        "liquidity": "312006.11985",
         "signal": "uncertain"
       }
     ],
     "onchain": {
-      "base_tvl": 4561147434.468707,
+      "base_tvl": 4563388494.435095,
       "base_change_1d": 0,
-      "eth_tvl": 65909018475.74527,
+      "eth_tvl": 65810874936.52061,
       "eth_change_1d": 0,
       "signal": "base_stable"
     },
@@ -60,7 +60,7 @@
         }
       ],
       "volumeSpikes": [],
-      "timestamp": "2026-01-30T21:17:20.737Z"
+      "timestamp": "2026-01-30T23:45:58.559Z"
     },
     "patterns": [
       {
@@ -199,8 +199,8 @@
         "momentum": 0,
         "regime": "dormant",
         "onchainChange": 0,
-        "baseTVL": 4561147434.468707,
-        "ethTVL": 65909018475.74527,
+        "baseTVL": 4563388494.435095,
+        "ethTVL": 65810874936.52061,
         "narrativeStrength": 0.5,
         "memeVelocity": 0,
         "volumeChange": 0,
@@ -208,7 +208,7 @@
       }
     },
     "turb0": {
-      "timestamp": "2026-01-30T21:17:20.739Z",
+      "timestamp": "2026-01-30T23:45:58.560Z",
       "decision": "BUY",
       "confidence": 0.644,
       "size": 0.0205,
