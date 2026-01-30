@@ -1,0 +1,76 @@
+{
+  "balances": {
+    "total": 300,
+    "treasury_reserve": 45,
+    "savings_staking": 30,
+    "emergency_fund": 15,
+    "polymarket_agent": 90,
+    "base_meme_agent": 75,
+    "bluechip_accumulator": 0
+  },
+  "performance": {
+    "totalDeposits": 1000,
+    "totalWithdrawals": 0,
+    "totalPnL": 0,
+    "totalWins": 0,
+    "totalLosses": 0,
+    "winCount": 0,
+    "lossCount": 0,
+    "bestTrade": null,
+    "worstTrade": null
+  },
+  "daily": {
+    "date": "2026-01-28",
+    "pnl": 0,
+    "trades": 0,
+    "wins": 0,
+    "losses": 0
+  },
+  "weekly": {
+    "weekStart": "2026-01-27",
+    "pnl": 0,
+    "trades": 0,
+    "savingsContribution": 0,
+    "bluechipDCA": 45
+  },
+  "agentStats": {
+    "polymarket": {
+      "trades": 0,
+      "pnl": 0,
+      "winRate": 0,
+      "avgReturn": 0
+    },
+    "baseMeme": {
+      "trades": 0,
+      "pnl": 0,
+      "winRate": 0,
+      "avgReturn": 0
+    },
+    "bluechip": {
+      "trades": 0,
+      "pnl": 0,
+      "avgCost": 0,
+      "holdings": {
+        "BNKR": {
+          "amount": 26620.91812588736,
+          "totalCost": 11.25
+        },
+        "DRB": {
+          "amount": 95581.98810535259,
+          "totalCost": 11.25
+        },
+        "CLANKER": {
+          "amount": 0.38789090783712027,
+          "totalCost": 11.25
+        },
+        "CLAWD": {
+          "amount": 44696.066746126344,
+          "totalCost": 11.25
+        }
+      }
+    }
+  },
+  "history": [],
+  "created": "2026-01-27T22:24:57.927Z",
+  "lastUpdated": "2026-01-28T00:00:25.351Z"
+}

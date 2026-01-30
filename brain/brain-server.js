@@ -1745,9 +1745,13 @@ app.get('/finance/treasury', async (req, res) => {
     } catch {}
     
     // Load TURB0B00ST state (LIVE trading)
+    // Try local data folder first (Railway), then b0b-finance (local dev)
     let turb0State = null;
     try {
-      const turbPath = path.join(financeDir, 'turb0b00st-state.json');
+      let turbPath = path.join(DATA_DIR, 'turb0b00st-state.json');
+      if (!require('fs').existsSync(turbPath)) {
+        turbPath = path.join(financeDir, 'turb0b00st-state.json');
+      }
       if (require('fs').existsSync(turbPath)) {
         turb0State = JSON.parse(require('fs').readFileSync(turbPath, 'utf-8'));
       }
