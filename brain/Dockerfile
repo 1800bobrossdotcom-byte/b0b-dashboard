@@ -2,19 +2,17 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Copy package files from brain
-COPY brain/package*.json ./
+# Copy package files (context is already brain/)
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install --omit=dev --legacy-peer-deps
 
-# Copy entire project structure
+# Copy source (context is brain/)
 COPY . .
 
 # Ensure data directories exist
-RUN mkdir -p brain/data/learnings brain/data/library/index
-
-WORKDIR /app/brain
+RUN mkdir -p data/learnings data/library/index
 
 EXPOSE 3001
 

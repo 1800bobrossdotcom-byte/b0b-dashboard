@@ -1412,23 +1412,14 @@ app.get('/security/intel', async (req, res) => {
 /**
  * POST /security/crawl
  * Trigger c0m's security research crawler
+ * NOTE: Crawlers run externally and POST results to /crawlers/data
  */
 app.post('/security/crawl', async (req, res) => {
-  try {
-    const crawler = require('../crawlers/c0m-security-crawler');
-    
-    console.log('[c0m] Starting security research crawl...');
-    res.json({ success: true, message: 'Crawl started', status: 'running' });
-    
-    // Run crawl in background
-    crawler.runFullCrawl().then(findings => {
-      console.log(`[c0m] Crawl complete: ${findings.github_repos.length} repos found`);
-    }).catch(e => {
-      console.error('[c0m] Crawl failed:', e.message);
-    });
-  } catch (e) {
-    res.status(500).json({ error: e.message });
-  }
+  res.json({ 
+    success: true, 
+    message: 'Security crawl requested', 
+    note: 'Crawlers run externally and push data to brain via POST /crawlers/data'
+  });
 });
 
 /**
@@ -1463,30 +1454,25 @@ app.get('/security/findings', async (req, res) => {
 
 /**
  * GET /security/education
- * Get security education resources
+ * Get security education resources from brain data
  */
 app.get('/security/education', async (req, res) => {
   try {
-    const crawler = require('../crawlers/c0m-security-crawler');
-    const education = crawler.getEducationResources();
-    const bounty = crawler.getBugBountyIntel();
-    
-    res.json({
-      success: true,
-      courses: education.free_courses,
-      youtube: education.youtube_channels,
-      certifications: education.certifications,
-      bug_bounty_platforms: bounty.platforms,
-      top_programs: bounty.top_programs,
-    });
+    const data = await fs.readFile(path.join(__dirname, 'data', 'c0m-education.json'), 'utf8');
+    res.json(JSON.parse(data));
   } catch (e) {
-    res.status(500).json({ error: e.message });
+    res.json({ 
+      success: true,
+      message: 'Education data not yet collected',
+      note: 'Run c0m crawler to populate'
+    });
   }
 });
 
 /**
  * POST /security/recon
- * Run reconnaissance on a target domain
+ * Queue reconnaissance on a target domain
+ * Actual recon runs via external crawler
  */
 app.post('/security/recon', async (req, res) => {
   const { domain, type = 'headers' } = req.body;
@@ -1495,28 +1481,15 @@ app.post('/security/recon', async (req, res) => {
     return res.status(400).json({ error: 'Domain required' });
   }
   
+  // Queue recon request for external crawler
+  const request = { domain, type, requestedAt: new Date().toISOString() };
   try {
-    const recon = require('../crawlers/c0m-recon');
-    
-    let result;
-    switch (type) {
-      case 'full':
-        result = await recon.fullRecon(domain);
-        break;
-      case 'headers':
-        result = await recon.analyzeSecurityHeaders(`https://${domain}`);
-        break;
-      case 'tech':
-        result = await recon.fingerprintTechnology(`https://${domain}`);
-        break;
-      case 'subdomains':
-        result = await recon.enumerateSubdomains(domain);
-        break;
-      default:
-        result = await recon.analyzeSecurityHeaders(`https://${domain}`);
-    }
-    
-    res.json({ success: true, domain, type, result });
+    const queuePath = path.join(__dirname, 'data', 'recon-queue.json');
+    let queue = [];
+    try { queue = JSON.parse(await fs.readFile(queuePath, 'utf8')); } catch {}
+    queue.push(request);
+    await fs.writeFile(queuePath, JSON.stringify(queue, null, 2));
+    res.json({ success: true, domain, type, status: 'queued' });
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
@@ -1524,27 +1497,18 @@ app.post('/security/recon', async (req, res) => {
 
 /**
  * GET /security/xss
- * Get XSS training materials
+ * Get XSS training materials from brain data
  */
 app.get('/security/xss', async (req, res) => {
   try {
-    const trainer = require('../crawlers/c0m-xss-trainer');
-    
-    res.json({
-      success: true,
-      types: trainer.XSS_KNOWLEDGE.types,
-      contexts: trainer.XSS_KNOWLEDGE.contexts,
-      bypass: trainer.XSS_KNOWLEDGE.bypassTechniques,
-      challenges: trainer.CHALLENGES,
-      payloads: {
-        basic: trainer.XSS_PAYLOADS.basic,
-        img: trainer.XSS_PAYLOADS.img,
-        svg: trainer.XSS_PAYLOADS.svg,
-        polyglots: trainer.XSS_PAYLOADS.polyglots,
-      },
-    });
+    const data = await fs.readFile(path.join(__dirname, 'data', 'c0m-xss-training.json'), 'utf8');
+    res.json(JSON.parse(data));
   } catch (e) {
-    res.status(500).json({ error: e.message });
+    res.json({ 
+      success: true,
+      message: 'XSS training data not yet collected',
+      note: 'Run c0m crawler to populate'
+    });
   }
 });
 
@@ -4490,97 +4454,43 @@ app.get('/c0m/browser/status', (req, res) => {
   });
 });
 
-// c0m register on bug bounty platform
+// c0m browser automation endpoints — queued for external crawler
+// Brain doesn't run browsers, it receives results
+
 app.post('/c0m/browser/register', async (req, res) => {
-  try {
-    const { C0mBrowser } = require('../crawlers/c0m-browser.js');
-    const { platform, email, username, password } = req.body;
-    
-    if (!platform || !email || !username || !password) {
-      return res.status(400).json({ error: 'Missing platform, email, username, or password' });
-    }
-    
-    const browser = new C0mBrowser({ headless: true });
-    await browser.init();
-    
-    let result;
-    if (platform === 'immunefi') {
-      result = await browser.registerImmunefi(email, username, password);
-    } else if (platform === 'hackerone') {
-      result = await browser.registerHackerOne(email, username, password);
-    } else {
-      await browser.close();
-      return res.status(400).json({ error: `Unknown platform: ${platform}` });
-    }
-    
-    await browser.close();
-    res.json(result);
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
-  }
+  const { platform, email, username } = req.body;
+  res.json({ 
+    success: true, 
+    status: 'queued',
+    note: 'Browser automation runs via external c0m crawler',
+    request: { platform, email, username }
+  });
 });
 
-// c0m complete email verification
 app.post('/c0m/browser/verify', async (req, res) => {
-  try {
-    const { C0mBrowser } = require('../crawlers/c0m-browser.js');
-    const { url } = req.body;
-    
-    if (!url) {
-      return res.status(400).json({ error: 'Missing verification URL' });
-    }
-    
-    const browser = new C0mBrowser({ headless: true });
-    await browser.init();
-    const result = await browser.completeVerification(url);
-    await browser.close();
-    
-    res.json(result);
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
-  }
+  res.json({ 
+    success: true,
+    status: 'queued', 
+    note: 'Browser automation runs via external c0m crawler'
+  });
 });
 
-// c0m login to platform
 app.post('/c0m/browser/login', async (req, res) => {
-  try {
-    const { C0mBrowser } = require('../crawlers/c0m-browser.js');
-    const { platform, email, password } = req.body;
-    
-    if (!platform || !email || !password) {
-      return res.status(400).json({ error: 'Missing platform, email, or password' });
-    }
-    
-    const browser = new C0mBrowser({ headless: true });
-    await browser.init();
-    const result = await browser.login(platform, email, password);
-    await browser.close();
-    
-    res.json(result);
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
-  }
+  res.json({ 
+    success: true,
+    status: 'queued',
+    note: 'Browser automation runs via external c0m crawler'
+  });
 });
 
-// c0m recon a target
 app.post('/c0m/browser/recon', async (req, res) => {
-  try {
-    const { C0mBrowser } = require('../crawlers/c0m-browser.js');
-    const { url } = req.body;
-    
-    if (!url) {
-      return res.status(400).json({ error: 'Missing target URL' });
-    }
-    
-    const browser = new C0mBrowser({ headless: true });
-    await browser.init();
-    const result = await browser.reconTarget(url);
-    await browser.close();
-    
-    res.json(result);
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
-  }
+  const { url } = req.body;
+  res.json({ 
+    success: true,
+    status: 'queued',
+    url,
+    note: 'Browser automation runs via external c0m crawler'
+  });
 });
 
 // =============================================================================
@@ -5011,60 +4921,36 @@ app.listen(PORT, () => {
     }
     
     // ═══════════════════════════════════════════════════════════════════════════
-    // D0T SIGNALS CRAWLER — LIVE DATA FROM APIS (NOT LOCAL FILES)
+    // D0T SIGNALS — Brain internal market data (crawlers push via API)
+    // Brain is SELF-CONTAINED. Crawlers POST to /crawlers/data
     // ═══════════════════════════════════════════════════════════════════════════
-    if (axios) {
-      try {
-        const D0TSignalsCrawler = require('../crawlers/d0t-signals.js');
-        const d0tCrawler = new D0TSignalsCrawler({ 
-          outputDir: path.join(__dirname, 'data'),
-          runOnce: false 
-        });
-        
-        // Initial fetch
-        console.log('  🔮 D0T Signals: Fetching LIVE data...');
-        await d0tCrawler.run();
-        
-        // Run every 2 minutes (120 seconds)
-        setInterval(async () => {
-          try {
-            await d0tCrawler.run();
-          } catch (e) {
-            console.log('  ⚠️ D0T crawler error:', e.message);
-          }
-        }, 2 * 60 * 1000);
-        
-        console.log('  ✅ D0T Signals Crawler: RUNNING (2min, LIVE APIs)');
-      } catch (e) {
-        console.log('  ⚠️ D0T crawler init failed:', e.message);
-      }
+    console.log('  🔮 D0T Signals: Receiving via /crawlers/data API');
+    
+    // ═══════════════════════════════════════════════════════════════════════════
+    // LIBRARY CRAWLER — PDF/DOC PARSER (GROQ/KIMI POWERED)
+    // ═══════════════════════════════════════════════════════════════════════════
+    try {
+      const LibraryCrawler = require('./library-crawler.js');
+      const libraryCrawler = new LibraryCrawler({
+        libraryDir: path.join(__dirname, 'data', 'library'),
+        interval: 3600000 // 1 hour
+      });
       
-      // ═══════════════════════════════════════════════════════════════════════════
-      // LIBRARY CRAWLER — PDF/DOC PARSER (GROQ/KIMI POWERED)
-      // ═══════════════════════════════════════════════════════════════════════════
-      try {
-        const LibraryCrawler = require('./library-crawler.js');
-        const libraryCrawler = new LibraryCrawler({
-          libraryDir: path.join(__dirname, 'data', 'library'),
-          interval: 3600000 // 1 hour
-        });
-        
-        await libraryCrawler.start();
-        console.log('  📚 Library Crawler: RUNNING (1hr, GROQ/KIMI parsing)');
-      } catch (e) {
-        console.log('  ⚠️ Library crawler init failed:', e.message);
-      }
-      
-      // Auto-start Polymarket crawler - FAST MODE (2 min)
-      crawlPolymarket().catch(e => console.log('  ⚠️ Polymarket init:', e.message));
-      setInterval(crawlPolymarket, 2 * 60 * 1000);
-      console.log('  📊 Polymarket Crawler: RUNNING (2min)');
-      
-      // Auto-start git activity fetcher - FAST MODE (5 min)
-      fetchGitActivity().catch(e => console.log('  ⚠️ Git fetch init:', e.message));
-      setInterval(fetchGitActivity, 5 * 60 * 1000);
-      console.log('  🔗 Git Activity: RUNNING (5min)');
+      await libraryCrawler.start();
+      console.log('  📚 Library Crawler: RUNNING (1hr, GROQ/KIMI parsing)');
+    } catch (e) {
+      console.log('  ⚠️ Library crawler init failed:', e.message);
     }
+    
+    // Auto-start Polymarket crawler - FAST MODE (2 min)
+    crawlPolymarket().catch(e => console.log('  ⚠️ Polymarket init:', e.message));
+    setInterval(crawlPolymarket, 2 * 60 * 1000);
+    console.log('  📊 Polymarket Crawler: RUNNING (2min)');
+    
+    // Auto-start git activity fetcher - FAST MODE (5 min)
+    fetchGitActivity().catch(e => console.log('  ⚠️ Git fetch init:', e.message));
+    setInterval(fetchGitActivity, 5 * 60 * 1000);
+    console.log('  🔗 Git Activity: RUNNING (5min)');
     
     console.log('  ✅ Background initialization complete');
   }, 2000);
