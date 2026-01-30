@@ -34,6 +34,20 @@ try {
   console.log('[BRAIN] Knowledge integrator not available:', e.message);
 }
 
+// L0RE Lexicon — Anti-crawler obfuscation system
+let L0RELexicon;
+try {
+  const lexiconModule = require('./l0re-lexicon.js');
+  L0RELexicon = new lexiconModule();
+  console.log('[BRAIN] L0RE Lexicon loaded — words have power 🔮');
+} catch (e) {
+  console.log('[BRAIN] L0RE Lexicon not available:', e.message);
+}
+
+// Research Library — PDF/doc knowledge base
+const LIBRARY_DIR = path.join(__dirname, 'data', 'library');
+const LIBRARY_INDEX_DIR = path.join(LIBRARY_DIR, 'index');
+
 // For Polymarket crawler and git integration
 let axios;
 try {
@@ -249,6 +263,127 @@ app.get('/health', async (req, res) => {
     agents: Object.keys(AGENTS),
     message: "B0B brain is thinking... 🧠",
   });
+});
+
+// ═══════════════════════════════════════════════════════════════
+// L0RE LEXICON — Cryptographic Internal Language
+// ═══════════════════════════════════════════════════════════════
+
+// Encode a concept to L0RE codename
+app.get('/l0re/encode/:concept', (req, res) => {
+  if (!L0RELexicon) {
+    return res.status(503).json({ error: 'L0RE Lexicon not loaded' });
+  }
+  const { concept } = req.params;
+  const code = L0RELexicon.encode(concept);
+  res.json({ concept, code, message: 'Words have power. Our words are for us alone.' });
+});
+
+// Decode a L0RE codename
+app.get('/l0re/decode/:codename', (req, res) => {
+  if (!L0RELexicon) {
+    return res.status(503).json({ error: 'L0RE Lexicon not loaded' });
+  }
+  const { codename } = req.params;
+  const result = L0RELexicon.decode(codename);
+  res.json(result);
+});
+
+// Get full lexicon (for swarm members only)
+app.get('/l0re/lexicon', (req, res) => {
+  if (!L0RELexicon) {
+    return res.status(503).json({ error: 'L0RE Lexicon not loaded' });
+  }
+  res.json({
+    version: '1.0.0',
+    entries: L0RELexicon.lexicon ? Object.keys(L0RELexicon.lexicon).length : 0,
+    categories: ['agent', 'finance', 'security', 'data', 'infra', 'protocol', 'external'],
+    message: '🔮 The swarm speaks in tongues unknown to crawlers'
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════
+// RESEARCH LIBRARY — Knowledge Base API
+// ═══════════════════════════════════════════════════════════════
+
+// List all indexed documents
+app.get('/library/sources', async (req, res) => {
+  try {
+    const sourcesPath = path.join(LIBRARY_DIR, 'sources.json');
+    const data = await fs.readFile(sourcesPath, 'utf8');
+    const sources = JSON.parse(data);
+    res.json(sources);
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to load sources', details: e.message });
+  }
+});
+
+// List indexed documents
+app.get('/library/index', async (req, res) => {
+  try {
+    const files = await fs.readdir(LIBRARY_INDEX_DIR);
+    const indexed = files.filter(f => f.endsWith('.json')).map(f => f.replace('.json', ''));
+    res.json({ 
+      count: indexed.length, 
+      documents: indexed,
+      message: 'Quantum minds. Mathematical reality. Long-term value.'
+    });
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to list index', details: e.message });
+  }
+});
+
+// Get a specific indexed document
+app.get('/library/doc/:docId', async (req, res) => {
+  try {
+    const { docId } = req.params;
+    const docPath = path.join(LIBRARY_INDEX_DIR, `${docId}.json`);
+    const data = await fs.readFile(docPath, 'utf8');
+    res.json(JSON.parse(data));
+  } catch (e) {
+    res.status(404).json({ error: 'Document not found', docId: req.params.docId });
+  }
+});
+
+// Search library by keyword
+app.get('/library/search', async (req, res) => {
+  const { q } = req.query;
+  if (!q) {
+    return res.status(400).json({ error: 'Query parameter q required' });
+  }
+  
+  try {
+    const files = await fs.readdir(LIBRARY_INDEX_DIR);
+    const results = [];
+    const query = q.toLowerCase();
+    
+    for (const file of files.filter(f => f.endsWith('.json'))) {
+      try {
+        const data = await fs.readFile(path.join(LIBRARY_INDEX_DIR, file), 'utf8');
+        const doc = JSON.parse(data);
+        
+        // Search in title, summary, or content
+        const searchText = [
+          doc.title || '',
+          doc.summary || '',
+          doc.content?.slice(0, 2000) || ''
+        ].join(' ').toLowerCase();
+        
+        if (searchText.includes(query)) {
+          results.push({
+            id: file.replace('.json', ''),
+            title: doc.title,
+            relevance: (searchText.match(new RegExp(query, 'gi')) || []).length
+          });
+        }
+      } catch {}
+    }
+    
+    results.sort((a, b) => b.relevance - a.relevance);
+    res.json({ query: q, count: results.length, results: results.slice(0, 20) });
+  } catch (e) {
+    res.status(500).json({ error: 'Search failed', details: e.message });
+  }
 });
 
 // ═══════════════════════════════════════════════════════════════
