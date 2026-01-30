@@ -127,9 +127,10 @@ INITIALIZING SWARM...`}</pre>
 
   const signals = data?.d0t?.signals;
   const topMarket = signals?.predictions?.[0];
-  const turb0 = signals?.turb0;
-  const l0re = signals?.l0re?.d0t;
-  const onchain = signals?.onchain;
+  const turb0 = signals?.turb0 || { decision: 'HOLD', confidence: 0, reasoning: ['Waiting for TURB0 engine initialization...'] };
+  const l0re = signals?.l0re?.d0t || { state: 'INITIALIZING' };
+  const onchain = signals?.onchain || { base_tvl: 0, eth_tvl: 0 };
+  const agentStates = data?.swarm?.states || {};
 
   return (
     <main className="min-h-screen bg-black text-white font-mono p-2 md:p-4">
@@ -193,10 +194,10 @@ ${tweets.map(t => `║  @${(t.author || 'unknown').substring(0, 15).padEnd(15)}:
 ╔═══════════════════════════════════════════════════════════════════════════════╗
 ║  🐝 AGENT SWARM                                                               ║
 ╠═══════════════════════════════════════════════════════════════════════════════╣
-║  d0t:  ${(l0re?.state?.substring(0, 70) || 'IDLE').padEnd(70)}  ║
-║  c0m:  ${(turb0?.agents?.c0m?.state?.substring(0, 70) || 'IDLE').padEnd(70)}  ║
-║  b0b:  ${(turb0?.agents?.b0b?.state?.substring(0, 70) || 'IDLE').padEnd(70)}  ║
-║  r0ss: ${(turb0?.agents?.r0ss?.state?.substring(0, 70) || 'IDLE').padEnd(70)}  ║
+║  d0t:  ${(l0re?.state?.substring(0, 70) || agentStates?.d0t?.state || 'IDLE').padEnd(70)}  ║
+║  c0m:  ${(agentStates?.c0m?.state?.substring(0, 70) || 'IDLE').padEnd(70)}  ║
+║  b0b:  ${(agentStates?.b0b?.state?.substring(0, 70) || 'IDLE').padEnd(70)}  ║
+║  r0ss: ${(agentStates?.r0ss?.state?.substring(0, 70) || 'IDLE').padEnd(70)}  ║
 ╚═══════════════════════════════════════════════════════════════════════════════╝`}</pre>
           </div>
 
@@ -204,11 +205,15 @@ ${tweets.map(t => `║  @${(t.author || 'unknown').substring(0, 15).padEnd(15)}:
           <div className="border border-white p-3">
             <div className="text-xs font-bold mb-2">💬 GROQ FAILSAFE CHAT</div>
             <div className="h-[400px] overflow-y-auto mb-2 space-y-2 text-xs">
+              {chatMessages.length === 0 && (
+                <div className="text-gray-600">Ask me anything about the markets...</div>
+              )}
               {chatMessages.map((msg, i) => (
                 <div key={i} className={msg.role === 'user' ? 'text-green-400' : 'text-gray-300'}>
                   <span className="font-bold">{msg.role === 'user' ? '>' : '▸'}</span> {msg.content}
                 </div>
               ))}
+              {chatLoading && <div className="text-yellow-500">⏳ Thinking...</div>}
               <div ref={chatEndRef} />
             </div>
             <div className="flex gap-2">
