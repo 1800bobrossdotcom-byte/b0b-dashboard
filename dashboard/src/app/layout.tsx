@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import ClientProviders from '@/components/ClientProviders';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://b0b.dev";
 
@@ -39,10 +40,6 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
 };
 
-import { ThemeProvider } from "@/contexts/ThemeContext";
-import ControlPanel from "@/components/core/ControlPanel";
-import LiveDataHUD from "@/components/core/LiveDataHUD";
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -51,11 +48,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className="antialiased bg-[var(--color-background)] text-[#f8fafc]">
-        <ThemeProvider>
+        <ClientProviders>
           {children}
-          <LiveDataHUD />
-          <ControlPanel />
-        </ThemeProvider>
+        </ClientProviders>
       </body>
     </html>
   );
