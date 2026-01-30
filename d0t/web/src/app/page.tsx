@@ -682,8 +682,8 @@ export default function D0TFinance() {
             <a href="#terminal" className="border border-white px-8 py-4 text-sm hover:bg-white hover:text-black transition-colors">
               Watch Live Terminal
             </a>
-            <a href="https://0type.b0b.dev" className="border border-[#2A2A2A] px-8 py-4 text-sm text-[#888] hover:border-[#888] transition-colors">
-              Visit 0TYPE
+            <a href="https://b0b.dev" className="border border-[#2A2A2A] px-8 py-4 text-sm text-[#888] hover:border-[#888] transition-colors">
+              Visit B0B.DEV
             </a>
           </div>
         </div>
@@ -705,8 +705,8 @@ export default function D0TFinance() {
             <div className="flex gap-12 text-sm">
               <div className="space-y-2">
                 <p className="text-[#888]">B0B Ecosystem</p>
-                <a href="https://0type.b0b.dev" className="block text-[#555] hover:text-white">0TYPE</a>
                 <a href="https://b0b.dev" className="block text-[#555] hover:text-white">B0B.DEV</a>
+                <a href="https://b0b.dev/labs" className="block text-[#555] hover:text-white">LABS</a>
                 <a href="https://github.com/1800bobrossdotcom-byte" className="block text-[#555] hover:text-white">GitHub</a>
               </div>
               

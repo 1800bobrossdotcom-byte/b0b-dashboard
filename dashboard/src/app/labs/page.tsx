@@ -95,17 +95,6 @@ const EXPERIMENTS: Experiment[] = [
     metrics: { 'paper_trades': 121, 'win_rate': '64%', 'status': 'Paper Mode' }
   },
   {
-    id: '0type-gen',
-    name: '0TYPE Generative Fonts',
-    owner: 'b0b',
-    ownerEmoji: '🎨',
-    status: 'active',
-    description: 'Training typography models on Bob Ross aesthetics. Beta access only.',
-    startedAt: '2026-01-15',
-    lastUpdate: '2026-01-28',
-    metrics: { 'fonts_generated': 156, 'styles': 12, 'subscribers': 0 }
-  },
-  {
     id: 'nash-swarm',
     name: 'Nash Equilibrium Swarm',
     owner: 'r0ss',
@@ -251,7 +240,6 @@ export default function LabsPage() {
         
         <div className="hidden md:flex items-center gap-8 text-sm font-medium">
           <Link href="/" className="hover:text-[#0052FF] transition-colors" style={{ color: colors.textMuted }}>HOME</Link>
-          <a href="https://0type.b0b.dev" target="_blank" className="hover:text-[#FF6B00] transition-colors" style={{ color: colors.text }}>0TYPE</a>
           <a href="https://d0t.b0b.dev" target="_blank" className="hover:text-[#8B5CF6] transition-colors" style={{ color: colors.text }}>D0T</a>
         </div>
 
@@ -438,11 +426,6 @@ export default function LabsPage() {
                className="px-4 py-2 rounded-lg text-sm font-medium transition-all hover:scale-105"
                style={{ backgroundColor: colors.purple + '20', color: colors.purple, border: `1px solid ${colors.purple}40` }}>
               🎯 D0T Trading Dashboard
-            </a>
-            <a href="https://0type.b0b.dev" target="_blank"
-               className="px-4 py-2 rounded-lg text-sm font-medium transition-all hover:scale-105"
-               style={{ backgroundColor: colors.orange + '20', color: colors.orange, border: `1px solid ${colors.orange}40` }}>
-              ✏️ 0TYPE Typography
             </a>
             <a href="https://x.com/_b0bdev_" target="_blank"
                className="px-4 py-2 rounded-lg text-sm font-medium transition-all hover:scale-105"

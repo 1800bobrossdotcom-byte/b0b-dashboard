@@ -1,10 +1,10 @@
 ﻿'use client';
 
 /**
- * B0B.DEV ΓÇö Built on Base
+ * B0B.DEV — Built on Base
  * 
- * INVERTED DARK THEME ΓÇö Matches d0t.b0b.dev style
- * Base blue flourishes, clean anime aesthetic
+ * L0RE VISUAL DESIGN — Generative ASCII art meets trading dashboard
+ * Three-View Principle: Humans see beauty, crawlers see noise
  * 
  * Glass box, not black box.
  */
@@ -13,8 +13,9 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import TeamChat from '@/components/live/TeamChat';
+import { L0reBackground } from '@/components/L0reVisual';
 
-// DARK PALETTE ΓÇö Inverted, Base blue flourishes
+// DARK PALETTE — Inverted, Base blue flourishes
 const colors = {
   // Core
   blue: '#0052FF',        // Base blue - THE accent
@@ -212,7 +213,10 @@ export default function Home() {
   const isOnline = brainStatus?.system?.status === 'alive';
 
   return (
-    <main className="min-h-screen" style={{ backgroundColor: colors.bg, color: colors.text }}>
+    <main className="min-h-screen relative" style={{ backgroundColor: colors.bg, color: colors.text }}>
+      
+      {/* L0RE Generative Background */}
+      <L0reBackground scene="matrix" opacity={0.04} color={colors.blue} fps={8} />
       
       {/* Navigation - Dark with blue accent */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 h-16"
@@ -226,7 +230,6 @@ export default function Home() {
         
         <div className="hidden md:flex items-center gap-8 text-sm font-medium">
           <Link href="/labs" className="hover:text-[#0052FF] transition-colors" style={{ color: colors.text }}>LABS</Link>
-          <a href="https://0type.b0b.dev" target="_blank" className="hover:text-[#FF6B00] transition-colors" style={{ color: colors.text }}>0TYPE</a>
           <a href="https://d0t.b0b.dev" target="_blank" className="hover:text-[#8B5CF6] transition-colors" style={{ color: colors.text }}>D0T</a>
         </div>
 
@@ -459,9 +462,8 @@ export default function Home() {
       {/* Products List - Clean dark style */}
       <section style={{ backgroundColor: colors.surface }}>
         {[
-          { name: 'LABS', desc: 'Where our team actively builds ΓÇö experiments, prototypes, research', status: 'LIVE', url: '/labs', color: colors.blue },
-          { name: '0TYPE', desc: 'AI-generated typography that learns your style', status: 'BETA', url: 'https://0type.b0b.dev', color: colors.orange },
-          { name: 'D0T.FINANCE', desc: 'Nash equilibrium trading swarm ΓÇö 5 agents, one goal', status: 'LIVE', url: 'https://d0t.b0b.dev', color: colors.purple },
+          { name: 'LABS', desc: 'Where our team actively builds — experiments, prototypes, research', status: 'LIVE', url: '/labs', color: colors.blue },
+          { name: 'D0T.FINANCE', desc: 'Nash equilibrium trading swarm — 5 agents, one goal', status: 'LIVE', url: 'https://d0t.b0b.dev', color: colors.purple },
         ].map((product) => (
           <a
             key={product.name}
@@ -509,7 +511,6 @@ export default function Home() {
               <p className="text-xs font-mono mb-4 tracking-widest" style={{ color: colors.textMuted }}>PRODUCTS</p>
               <div className="flex flex-col gap-2 text-sm font-medium">
                 <Link href="/labs" style={{ color: colors.blue }}>LABS</Link>
-                <a href="https://0type.b0b.dev" target="_blank" style={{ color: colors.orange }}>0TYPE</a>
                 <a href="https://d0t.b0b.dev" target="_blank" style={{ color: colors.purple }}>D0T</a>
               </div>
             </div>

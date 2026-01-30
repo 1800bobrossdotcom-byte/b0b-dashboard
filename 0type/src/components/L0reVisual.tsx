@@ -36,20 +36,18 @@ const PALETTES = {
 // ═══════════════════════════════════════════════════════════════════════════════
 
 class L0reVisualEngine {
+  width: number;
+  height: number;
+  canvas: string[][] = [];
+  frame: number = 0;
+  seed: number;
+
   constructor(width: number, height: number) {
     this.width = width;
     this.height = height;
-    this.canvas: string[][] = [];
-    this.frame = 0;
     this.seed = Date.now();
     this.initCanvas();
   }
-
-  width: number;
-  height: number;
-  canvas: string[][];
-  frame: number;
-  seed: number;
 
   initCanvas() {
     this.canvas = Array(this.height).fill(null).map(() => 
