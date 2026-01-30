@@ -33,5 +33,19 @@
     "confidence": 0.5,
     "l0reCode": "n.3qlb/t.l2/e.m/f.rang",
     "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-30T20:17:50.107Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-30T20:18:39.568Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
   }
 ]

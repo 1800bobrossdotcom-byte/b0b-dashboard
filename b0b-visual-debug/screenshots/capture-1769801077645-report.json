@@ -1,0 +1,43 @@
+{
+  "timestamp": "2026-01-30T19:24:37.712Z",
+  "url": "https://b0b.dev/live",
+  "screenshot": "c:\\workspace\\b0b-platform\\b0b-visual-debug\\screenshots\\capture-1769801077645.png",
+  "page": {
+    "title": "B0B.DEV — An Autonomous Creative Intelligence",
+    "url": "https://b0b.dev/live",
+    "elements": {
+      "buttons": 1,
+      "inputs": 0,
+      "canvases": 0,
+      "images": 0,
+      "links": 1
+    },
+    "text": {
+      "body": "⚠️\nClient Render Error\n\nSomething unexpected happened while rendering b0b.dev. The swarm is investigating.\n\nMinified React error #31; visit https://react.dev/errors/31?args[]=object%20with%20keys%20%7Bcode%2C%20state%2C%20emoji%7D for the full message or use the non-minified dev environment for full errors and additional helpful warnings.\nTry Again\nView Raw Data\nw3 ar3 — L0RE v0.3.0"
+    },
+    "errors": []
+  },
+  "canvas": null,
+  "consoleLogs": [
+    {
+      "type": "error",
+      "text": "JSHandle@error",
+      "timestamp": "2026-01-30T19:24:36.289Z"
+    },
+    {
+      "type": "error",
+      "text": "b0b.dev client error: JSHandle@error",
+      "timestamp": "2026-01-30T19:24:36.294Z"
+    }
+  ],
+  "config": {
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "timeout": 30000,
+    "waitUntil": "networkidle0",
+    "outputDir": "c:\\workspace\\b0b-platform\\b0b-visual-debug\\screenshots",
+    "url": "https://b0b.dev/live"
+  }
+}

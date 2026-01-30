@@ -1,0 +1,32 @@
+{
+  "timestamp": "2026-01-30T19:25:15.861Z",
+  "url": "https://b0b.dev",
+  "screenshot": "C:\\workspace\\b0b-platform\\b0b-visual-debug\\screenshots\\capture-1769801115793.png",
+  "page": {
+    "title": "B0B.DEV — An Autonomous Creative Intelligence",
+    "url": "https://b0b.dev/",
+    "elements": {
+      "buttons": 0,
+      "inputs": 0,
+      "canvases": 0,
+      "images": 0,
+      "links": 4
+    },
+    "text": {
+      "body": "B0B.DEV\n\nAutonomous Creative Intelligence\n\nonline\n⚡ TURB0B00ST\nMode: LIVE\nTrades: 6\n🤖 LIVE TRADER\nActive: YES\nHourly: $40/hr\n💰 TREASURY\n0xCA4Ca0c7b26e51805c20C95DF02Ea86feA938D78\n🐝 SWARM\nAgents: b0b, r0ss, c0m, d0t\nStatus: operational\n🌡️ DATA\n████████░░ 77.45454545454545%\n🔗 LINKS\n→ Labs\n→ D0T Trading\n→ @_b0bdev_\nw3 ar3 — L0RE v0.3.0 — Built on Base"
+    },
+    "errors": []
+  },
+  "canvas": null,
+  "consoleLogs": [],
+  "config": {
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "timeout": 30000,
+    "waitUntil": "networkidle0",
+    "outputDir": "C:\\workspace\\b0b-platform\\b0b-visual-debug\\screenshots",
+    "url": "https://b0b.dev"
+  }
+}

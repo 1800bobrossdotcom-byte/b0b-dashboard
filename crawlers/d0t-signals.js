@@ -131,37 +131,44 @@ class D0TSignalsCrawler extends BaseCrawler {
   // DexScreener: REAL trading activity happening NOW
   async fetchDexActivity() {
     try {
-      // Get trending tokens on Base
-      const res = await axios.get(`${this.sources.dexscreener}/token-profiles/latest/v1`, {
+      // Get boosted tokens (projects paying for visibility = potential alpha)
+      const boostsRes = await axios.get(`${this.sources.dexscreener}/token-boosts/top/v1`, {
         timeout: 10000
       });
       
-      const baseTokens = (res.data || [])
-        .filter(t => t.chainId === 'base')
-        .slice(0, 10)
+      const boostedTokens = (Array.isArray(boostsRes.data) ? boostsRes.data : [boostsRes.data])
+        .filter(t => t && t.chainId === 'base')
+        .slice(0, 5)
         .map(t => ({
-          symbol: t.tokenAddress?.slice(0, 10),
+          address: t.tokenAddress,
+          chain: t.chainId,
+          boostAmount: t.totalAmount,
           url: t.url,
           description: t.description?.slice(0, 100),
         }));
       
-      // Get volume spikes on Base pairs
-      const pairsRes = await axios.get(`${this.sources.dexscreener}/latest/dex/pairs/base`, {
+      // Search for Base memecoins with volume
+      const searchRes = await axios.get(`${this.sources.dexscreener}/latest/dex/search`, {
+        params: { q: 'base chain' },
         timeout: 10000
       });
       
-      const volumeSpikes = (pairsRes.data?.pairs || [])
-        .filter(p => p.volume?.h6 > 50000 && p.priceChange?.h6 > 10)
+      const volumeSpikes = (searchRes.data?.pairs || [])
+        .filter(p => p.chainId === 'base' && p.volume?.h6 > 50000)
+        .sort((a, b) => (b.priceChange?.h6 || 0) - (a.priceChange?.h6 || 0))
         .slice(0, 5)
         .map(p => ({
           symbol: p.baseToken?.symbol,
+          name: p.baseToken?.name,
+          priceUsd: p.priceUsd,
           priceChange6h: p.priceChange?.h6,
           volume6h: p.volume?.h6,
           liquidity: p.liquidity?.usd,
+          url: p.url,
         }));
       
       return {
-        newTokens: baseTokens,
+        boostedTokens,
         volumeSpikes,
         timestamp: new Date().toISOString(),
       };
