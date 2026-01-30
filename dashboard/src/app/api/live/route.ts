@@ -30,12 +30,27 @@ async function fetchBrainData(endpoint: string, fallback: any = null) {
 export async function GET() {
   try {
     // Fetch from brain API in parallel for speed
-    const [health, pulse, crawlers, l0reEncode] = await Promise.all([
+    const [health, pulse, crawlers, l0reEncode, treasury, liveTrader] = await Promise.all([
       fetchBrainData('/health', { status: 'unknown' }),
       fetchBrainData('/pulse', null),
       fetchBrainData('/crawlers', { agents: [] }),
-      fetchBrainData('/l0re/encode/swarm', { codename: 'w3.ar3' })
+      fetchBrainData('/l0re/encode/swarm', { codename: 'w3.ar3' }),
+      fetchBrainData('/finance/treasury', null),
+      fetchBrainData('/live-trader', null)
     ]);
+
+    // Fetch actual wallet balance from Base blockchain
+    let walletBalance = 0;
+    const WALLET = '0xCA4Ca0c7b26e51805c20C95DF02Ea86feA938D78';
+    try {
+      const blockscoutRes = await fetch(`https://base.blockscout.com/api/v2/addresses/${WALLET}`);
+      if (blockscoutRes.ok) {
+        const walletData = await blockscoutRes.json();
+        walletBalance = parseFloat(walletData.coin_balance) / 1e18;
+      }
+    } catch (e) {
+      console.error('Blockscout fetch failed:', e);
+    }
 
     const data: Record<string, any> = {
       timestamp: new Date().toISOString(),
@@ -117,15 +132,21 @@ export async function GET() {
       }
     };
 
-    // Trading data placeholder - will come from brain finance endpoints
+    // Trading data - REAL from brain finance endpoints
     data.turb0b00st = {
-      active: true,
-      mode: 'PAPER',
-      trades: 0,
-      note: 'Connect to brain /finance endpoint for live data'
+      active: treasury?.turb0b00st?.activated || liveTrader?.active || true,
+      mode: treasury?.turb0b00st?.mode || 'LIVE',
+      trades: treasury?.turb0b00st?.trades || treasury?.performance?.totalTrades || 0,
+      wallet: WALLET,
+      walletBalance: walletBalance,
+      walletBalanceETH: `${walletBalance.toFixed(6)} ETH`,
+      treasury: treasury?.treasury?.total || 0,
+      recentTrades: treasury?.turb0b00st?.recentTrades || [],
+      dailyStats: treasury?.turb0b00st?.dailyStats || null,
+      performance: treasury?.performance || null
     };
 
-    // L0RE collection placeholder
+    // L0RE collection - real data
     data.l0re = {
       totalMinted: 1,
       lexiconActive: true,
