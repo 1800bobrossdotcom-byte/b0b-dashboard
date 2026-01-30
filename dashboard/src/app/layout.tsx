@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import ClientProviders from '@/components/ClientProviders';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://b0b.dev";
 
