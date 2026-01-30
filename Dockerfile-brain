@@ -1,0 +1,24 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Copy brain package files
+COPY brain/package*.json ./brain/
+
+# Install brain dependencies
+WORKDIR /app/brain
+RUN npm install --omit=dev --legacy-peer-deps
+
+# Copy entire project structure (brain + crawlers)
+WORKDIR /app
+COPY . .
+
+# Ensure data directories exist
+RUN mkdir -p /app/brain/data/learnings /app/brain/data/library/index
+
+# Set working directory to brain
+WORKDIR /app/brain
+
+EXPOSE 3001
+
+CMD ["node", "brain-server.js"]
