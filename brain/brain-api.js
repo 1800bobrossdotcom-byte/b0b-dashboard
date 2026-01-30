@@ -141,6 +141,54 @@ const server = http.createServer((req, res) => {
       return;
     }
     
+    // GET /library - L0RE library stats
+    if (pathname === '/library' && req.method === 'GET') {
+      try {
+        const libraryIndexDir = path.join(BRAIN_HOME, 'data/library/index');
+        const wisdomDir = path.join(BRAIN_HOME, 'data/wisdom');
+        
+        // Count documents
+        let documentCount = 0;
+        let byAgent = { b0b: 0, c0m: 0, d0t: 0, r0ss: 0 };
+        
+        if (fs.existsSync(libraryIndexDir)) {
+          const files = fs.readdirSync(libraryIndexDir).filter(f => f.endsWith('.json'));
+          documentCount = files.length;
+          
+          files.forEach(file => {
+            const idx = readJSON(path.join(libraryIndexDir, file));
+            if (idx?.agentRelevance?.primary) {
+              byAgent[idx.agentRelevance.primary] = (byAgent[idx.agentRelevance.primary] || 0) + 1;
+            }
+          });
+        }
+        
+        // Get latest synthesis
+        let synthesis = null;
+        if (fs.existsSync(wisdomDir)) {
+          const synthFiles = fs.readdirSync(wisdomDir)
+            .filter(f => f.startsWith('synthesis-'))
+            .sort()
+            .reverse();
+          if (synthFiles[0]) {
+            synthesis = readJSON(path.join(wisdomDir, synthFiles[0]));
+          }
+        }
+        
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({
+          documents: documentCount,
+          sentences: synthesis?.totalSentences || 0,
+          byAgent,
+          lastSynthesis: synthesis?.generatedAt,
+        }));
+      } catch (e) {
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: e.message }));
+      }
+      return;
+    }
+    
     // Default: 404
     res.writeHead(404, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ 
@@ -161,6 +209,7 @@ server.listen(PORT, () => {
   console.log('  GET  /memory     - Brain memory');
   console.log('  GET  /decisions  - Recent decisions');
   console.log('  GET  /briefing   - Latest daily briefing');
+  console.log('  GET  /library    - L0RE library stats');
   console.log('  POST /queue      - Add task to queue');
   console.log('  POST /stop       - Stop the brain');
   console.log('  GET  /health     - Health check');

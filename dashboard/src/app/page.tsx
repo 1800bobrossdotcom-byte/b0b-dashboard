@@ -89,6 +89,7 @@ export default function Home() {
   const [alfredStatus, setAlfredStatus] = useState<{ status: string; ageHours?: string } | null>(null);
   const [startingDiscussion, setStartingDiscussion] = useState(false);
   const [discussionStarted, setDiscussionStarted] = useState(false);
+  const [libraryStats, setLibraryStats] = useState<{ documents: number; sentences: number; byAgent: Record<string, number> } | null>(null);
 
   // Clock
   useEffect(() => {
@@ -171,6 +172,19 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
+  // Fetch Library stats
+  useEffect(() => {
+    async function fetchLibrary() {
+      try {
+        const res = await fetch(`${BRAIN_URL}/library`);
+        if (res.ok) setLibraryStats(await res.json());
+      } catch { /* offline */ }
+    }
+    fetchLibrary();
+    const interval = setInterval(fetchLibrary, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
   // Wake Alfred function - triggers a real discussion
   const startDiscussion = async () => {
     setStartingDiscussion(true);
@@ -243,7 +257,8 @@ export default function Home() {
           <div className="mt-10 flex flex-wrap gap-3">
             {[
               { icon: '✅', label: `${brainStatus?.agents?.length || 0} agents`, color: colors.success },
-              { icon: '🐝', label: `${swarmData?.totalTicks || 0} ticks`, color: colors.white },
+              { icon: '�', label: `${libraryStats?.documents || 0} docs`, color: colors.white },
+              { icon: '🧠', label: `${libraryStats?.sentences || 0} insights`, color: colors.white },
               { icon: '📈', label: `$${((polyVolume || 0) / 1000000).toFixed(1)}M vol`, color: colors.white },
               { icon: '💰', label: holdings?.totalUSD != null ? `$${holdings.totalUSD.toFixed(2)}` : '...', color: colors.success },
             ].map((stat, i) => (
@@ -331,11 +346,12 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-xs font-mono tracking-widest mb-8" style={{ color: colors.textMuted }}>THE TEAM</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {[
               { name: 'b0b', emoji: '🎨', role: 'Creative Director', email: 'b0b@agentmail.to', color: colors.blue, desc: 'Designs, creates, ships' },
-              { name: 'r0ss', emoji: '🔧', role: 'CTO / DevOps', email: 'r0ss@agentmail.to', color: colors.orange, desc: 'Infrastructure, code, systems' },
-              { name: 'c0m', emoji: '💀', role: 'Security / Risk', email: 'c0m@agentmail.to', color: colors.purple, desc: 'Audits, protects, monitors' },
+              { name: 'd0t', emoji: '📊', role: 'Research Lead', email: 'd0t@agentmail.to', color: colors.cyan, desc: 'Data, markets, analysis' },
+              { name: 'r0ss', emoji: '🔧', role: 'CTO / DevOps', email: 'r0ss@agentmail.to', color: colors.orange, desc: 'Infrastructure, systems' },
+              { name: 'c0m', emoji: '💀', role: 'Security / Risk', email: 'c0m@agentmail.to', color: colors.purple, desc: 'Audits, bounties, defense' },
             ].map((agent) => (
               <div key={agent.name}
                    className="p-6 rounded-xl transition-all hover:scale-[1.02]"
