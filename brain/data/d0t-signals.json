@@ -1,75 +1,44 @@
 {
+  "crawler": "d0t-signals",
+  "timestamp": "2026-01-31T01:42:10.000Z",
   "data": {
-    "timestamp": "2026-01-31T01:40:06.544Z",
+    "timestamp": "2026-01-31T01:42:09.265Z",
+    "agent": "d0t",
+    "role": "Data Oracle",
     "predictions": [
       {
-        "question": "Will Trump deport less than 250,000?",
+        "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
         "probability": null,
-        "volume24h": 5267.720582000001,
-        "liquidity": 13538.09842,
+        "volume24h": 19241991.11467906,
+        "liquidity": "503268.59509",
         "signal": "uncertain"
       },
       {
-        "question": "Will Trump deport 250,000-500,000 people?",
+        "question": "US government shutdown Saturday?",
         "probability": null,
-        "volume24h": 94316.571097,
-        "liquidity": 3656.28991,
+        "volume24h": 10363222.669675011,
+        "liquidity": "334266.15895",
         "signal": "uncertain"
       },
       {
-        "question": "Will Trump deport 500,000-750,000- people?",
+        "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
         "probability": null,
-        "volume24h": 2519.655384,
-        "liquidity": 2803.51092,
+        "volume24h": 9920924.411320025,
+        "liquidity": "126678.14587",
         "signal": "uncertain"
       },
       {
-        "question": "Will Trump deport 750,000-1,000,000 people?",
+        "question": "Australian Open Men's: Carlos Alcaraz vs Alexander Zverev",
         "probability": null,
-        "volume24h": 1315.932335,
-        "liquidity": 5917.03119,
+        "volume24h": 6195131.589670002,
+        "liquidity": 0,
         "signal": "uncertain"
       },
       {
-        "question": "Will Trump deport 1,000,000-1,250,000 people?",
+        "question": "Will Trump nominate Rick Rieder as the next Fed chair?",
         "probability": null,
-        "volume24h": 1547.1630000000002,
-        "liquidity": 7312.8705,
-        "signal": "uncertain"
-      },
-      {
-        "question": "Will Trump deport 1,250,000-1,500,000 people?",
-        "probability": null,
-        "volume24h": 1005.7424439999999,
-        "liquidity": 5309.73717,
-        "signal": "uncertain"
-      },
-      {
-        "question": "Will Trump deport 1,500,000-1,750,000 people?",
-        "probability": null,
-        "volume24h": 824.3602499999998,
-        "liquidity": 5201.5993,
-        "signal": "uncertain"
-      },
-      {
-        "question": "Will Trump deport 1,750,000-2,000,000 people?",
-        "probability": null,
-        "volume24h": 2338.802308,
-        "liquidity": 13565.40002,
-        "signal": "uncertain"
-      },
-      {
-        "question": "Will Trump deport 2,000,000 or more people?",
-        "probability": null,
-        "volume24h": 929.8732209999998,
-        "liquidity": 9821.83671,
-        "signal": "uncertain"
-      },
-      {
-        "question": "Will Trump deport 750,000 or more people in 2025?",
-        "probability": null,
-        "volume24h": 369.42724799999996,
-        "liquidity": 932.09315,
+        "volume24h": 5906046.784228002,
+        "liquidity": "155147.26857",
         "signal": "uncertain"
       }
     ],
@@ -80,54 +49,221 @@
       "eth_change_1d": 0,
       "signal": "base_stable"
     },
-    "dex": {},
-    "turb0": {
-      "decision": "HOLD",
-      "confidence": 0.5672429063388006,
-      "reasoning": [
-        "Market data analysis (10 prediction markets)",
-        "On-chain: BASE TVL $4.57B",
-        "Signal generated at 2026-01-31T01:40:06.903Z"
+    "dex": {
+      "boostedTokens": [
+        {
+          "address": "0xd1AB275e0b9798ae324C79C7133DEF6631426A2c",
+          "chain": "base",
+          "boostAmount": 100,
+          "url": "https://dexscreener.com/base/0xd1ab275e0b9798ae324c79c7133def6631426a2c",
+          "description": "Zoof is a wallet for EVM and Solana wallets powered by AI in it's core. Integrating Virtuals agents "
+        }
       ],
+      "volumeSpikes": [],
+      "timestamp": "2026-01-31T01:42:09.993Z"
+    },
+    "patterns": [
+      {
+        "type": "l0re_nash",
+        "state": "EQUILIBRIUM",
+        "code": "n.3qlb/t.l3/e.l/f.dist",
+        "source": "l0re_intelligence",
+        "confidence": 0.85
+      },
+      {
+        "type": "l0re_d0t_state",
+        "state": "EQUILIBRIUM_HARVEST",
+        "emoji": "🌾📊",
+        "action": "Range trading, provide liquidity",
+        "confidence": 0.7
+      },
+      {
+        "type": "l0re_fractal",
+        "pattern": "DISTRIBUTION",
+        "source": "mandelbrot_analysis",
+        "confidence": 0.75
+      },
+      {
+        "type": "l0re_entropy",
+        "classification": "LOW",
+        "meaning": "Low entropy — strong trend, high conviction",
+        "source": "shannon_entropy",
+        "confidence": 0.8
+      }
+    ],
+    "insights": [
+      {
+        "priority": "critical",
+        "insight": "TURB0B00ST: BUY (64% confidence)",
+        "action": "accumulate",
+        "confidence": 0.644,
+        "source": "turb0_decision_engine",
+        "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+        "reasoning": [
+          "Moderate bullish signal (net: 0.220)",
+          "Nash state: EQUILIBRIUM (multiplier: 1x)",
+          "Votes: d0t=NEUTRAL, c0m=BULLISH, b0b=NEUTRAL, r0ss=BULLISH",
+          "Low agent coherence: Reduced position size"
+        ]
+      },
+      {
+        "priority": "high",
+        "insight": "🌾📊 Stable range, yield opportunities",
+        "action": "Range trading, provide liquidity",
+        "confidence": 0.7,
+        "source": "l0re_d0t_intelligence",
+        "l0reCode": "n.3qlb/t.l3/e.l/f.dist"
+      },
+      {
+        "priority": "medium",
+        "insight": "accumulate",
+        "confidence": 0.5,
+        "source": "l0re_nash"
+      },
+      {
+        "priority": "high",
+        "insight": "BULLISH",
+        "confidence": 0.5,
+        "source": "l0re_composite"
+      }
+    ],
+    "l0re": {
+      "d0t": {
+        "state": "EQUILIBRIUM_HARVEST",
+        "code": "d.3qhr",
+        "description": "Stable range, yield opportunities",
+        "action": "Range trading, provide liquidity",
+        "emoji": "🌾📊",
+        "confidence": 0.7
+      },
+      "l0re": {
+        "code": "n.3qlb/t.l3/e.l/f.dist",
+        "nash": "EQUILIBRIUM",
+        "entropy": "LOW",
+        "fractal": "DISTRIBUTION",
+        "composite": {
+          "score": 0.6666666666666666,
+          "confidence": 0.5,
+          "signal": "BULLISH"
+        }
+      },
+      "signals": [
+        {
+          "type": "PRIMARY",
+          "source": "d0t",
+          "signal": "Range trading, provide liquidity",
+          "confidence": 0.7
+        },
+        {
+          "type": "NASH",
+          "source": "l0re",
+          "signal": "accumulate",
+          "state": "EQUILIBRIUM",
+          "confidence": 0.5
+        },
+        {
+          "type": "FRACTAL",
+          "source": "l0re",
+          "signal": "Smart money exiting — consider taking profits",
+          "pattern": "DISTRIBUTION",
+          "confidence": 0.7
+        },
+        {
+          "type": "COMPOSITE",
+          "source": "l0re",
+          "signal": "BULLISH",
+          "score": 0.6666666666666666,
+          "confidence": 0.5
+        }
+      ],
+      "agentAction": {
+        "agent": "d0t",
+        "code": "a.z7ls",
+        "focus": "L2_EMERGENT",
+        "recommendation": "accumulate",
+        "confidence": 0.5,
+        "details": {
+          "nashState": "EQUILIBRIUM",
+          "fractal": "DISTRIBUTION",
+          "momentum": 0
+        }
+      },
+      "data": {
+        "sentiment": 50,
+        "sentimentRaw": "Neutral",
+        "volatility": 0,
+        "entropy": 0,
+        "entropyLow": true,
+        "entropyHigh": false,
+        "trend": "sideways",
+        "momentum": 0,
+        "regime": "dormant",
+        "onchainChange": 0,
+        "baseTVL": 4571312634.71241,
+        "ethTVL": 65835617499.64344,
+        "narrativeStrength": 0.5,
+        "memeVelocity": 0,
+        "volumeChange": 0,
+        "viralNarrative": false
+      }
+    },
+    "turb0": {
+      "timestamp": "2026-01-31T01:42:09.994Z",
+      "decision": "BUY",
+      "confidence": 0.644,
+      "size": 0.0205,
+      "l0re": {
+        "code": "n.3qlb/t.l3/e.l/f.dist",
+        "nash": "EQUILIBRIUM",
+        "nashAction": "accumulate",
+        "composite": {
+          "score": 0.6666666666666666,
+          "confidence": 0.5,
+          "signal": "BULLISH"
+        }
+      },
       "agents": {
         "d0t": {
-          "state": "ANALYZING",
+          "state": "EQUILIBRIUM_HARVEST",
+          "action": "Range trading, provide liquidity",
           "vote": "NEUTRAL",
-          "score": 0.5
+          "score": 0.6666666666666666
         },
         "c0m": {
-          "state": "MONITORING",
-          "vote": "NEUTRAL",
+          "state": "CONDITION_GREEN",
+          "level": 0,
+          "vote": "BULLISH",
           "veto": false
         },
         "b0b": {
-          "state": "OBSERVING",
+          "state": "CULTURE_BUILD",
+          "contentType": "COMMUNITY",
           "vote": "NEUTRAL",
           "score": 0.5
         },
         "r0ss": {
-          "state": "HEALTHY",
-          "vote": "NEUTRAL"
+          "state": "COHERENT",
+          "coherence": "LOW",
+          "vote": "BULLISH"
         }
-      }
-    },
-    "l0re": {
-      "d0t": {
-        "state": "SIGNAL_PROCESSING",
-        "code": "d.sig",
-        "description": "Processing market signals",
-        "action": "Analyze and report",
-        "emoji": "📊",
-        "confidence": 0.5672429063388006
       },
-      "code": "l0re.live",
-      "composite": {
-        "score": 0.5672429063388006,
-        "confidence": 0.6,
-        "signal": "HOLD"
-      }
+      "scores": {
+        "bullish": 0.22,
+        "bearish": 0,
+        "net": 0.22,
+        "nashMultiplier": 1
+      },
+      "risk": {
+        "stopLoss": 0.05,
+        "takeProfit": 0.15,
+        "maxSize": 0.1
+      },
+      "reasoning": [
+        "Moderate bullish signal (net: 0.220)",
+        "Nash state: EQUILIBRIUM (multiplier: 1x)",
+        "Votes: d0t=NEUTRAL, c0m=BULLISH, b0b=NEUTRAL, r0ss=BULLISH",
+        "Low agent coherence: Reduced position size"
+      ]
     }
-  },
-  "_lastUpdated": "2026-01-31T01:40:06.903Z",
-  "_source": "integrated-crawler"
+  }
 }

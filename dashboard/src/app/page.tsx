@@ -5,11 +5,62 @@
  * 
  * Not pretty art. USEFUL DATA.
  * Every tool. Every data point. Everything we've built.
+ * 
+ * PASSWORD PROTECTED - For authorized eyes only
  */
 
 import { useEffect, useState } from 'react';
 
 const BRAIN_URL = 'https://b0b-brain-production.up.railway.app';
+const ACCESS_PASSWORD = 'l0re-sw4rm-2026';  // Emailed to 1800bobrossdotcom@gmail.com
+
+// Password screen
+function PasswordScreen({ onUnlock }: { onUnlock: () => void }) {
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
+  
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password === ACCESS_PASSWORD) {
+      localStorage.setItem('l0re-auth', 'true');
+      onUnlock();
+    } else {
+      setError(true);
+      setTimeout(() => setError(false), 2000);
+    }
+  };
+  
+  return (
+    <main className="min-h-screen bg-black text-white font-mono flex items-center justify-center">
+      <div className="text-center">
+        <h1 className="text-2xl mb-2">
+          <span className="text-green-400">L0RE</span> Operations Center
+        </h1>
+        <p className="text-white/40 text-sm mb-8">Authorized access only</p>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter password"
+            className={`bg-white/5 border ${error ? 'border-red-500' : 'border-white/20'} rounded px-4 py-2 text-center w-64 focus:outline-none focus:border-green-500`}
+            autoFocus
+          />
+          <div>
+            <button
+              type="submit"
+              className="bg-green-500/20 border border-green-500/30 text-green-400 px-6 py-2 rounded hover:bg-green-500/30 transition"
+            >
+              Access
+            </button>
+          </div>
+          {error && <p className="text-red-400 text-sm">❌ Invalid password</p>}
+        </form>
+        <p className="text-white/20 text-xs mt-8">w3 ar3 — l0re v0.3.0</p>
+      </div>
+    </main>
+  );
+}
 
 // Status badge component
 function StatusBadge({ status, label }: { status: 'ok' | 'warn' | 'error' | 'stale'; label: string }) {
@@ -73,11 +124,20 @@ function KV({ label, value, warn }: { label: string; value: any; warn?: boolean 
 }
 
 export default function L0reOperations() {
+  const [authenticated, setAuthenticated] = useState(false);
   const [platform, setPlatform] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
   const [refreshing, setRefreshing] = useState(false);
+
+  // Check auth on mount
+  useEffect(() => {
+    const auth = localStorage.getItem('l0re-auth');
+    if (auth === 'true') {
+      setAuthenticated(true);
+    }
+  }, []);
 
   const loadData = async () => {
     try {
@@ -113,10 +173,17 @@ export default function L0reOperations() {
   };
 
   useEffect(() => {
-    loadData();
-    const interval = setInterval(loadData, 15000);
-    return () => clearInterval(interval);
-  }, []);
+    if (authenticated) {
+      loadData();
+      const interval = setInterval(loadData, 15000);
+      return () => clearInterval(interval);
+    }
+  }, [authenticated]);
+
+  // Show password screen if not authenticated
+  if (!authenticated) {
+    return <PasswordScreen onUnlock={() => setAuthenticated(true)} />;
+  }
 
   if (loading) {
     return (
@@ -241,7 +308,7 @@ export default function L0reOperations() {
               <KV label="ETH TVL" value={`$${((s.d0t.onchain.eth_tvl || 0) / 1e9).toFixed(1)}B`} />
             </>
           )}
-          {s.polymarket?.slice(0, 3).map((m: any, i: number) => (
+          {Array.isArray(s.polymarket) && s.polymarket.slice(0, 3).map((m: any, i: number) => (
             <div key={i} className="text-xs text-white/40 mt-1 truncate">
               • {m.question?.slice(0, 50)}...
             </div>
@@ -250,12 +317,12 @@ export default function L0reOperations() {
 
         {/* SECURITY */}
         <Section title="💀 Security (c0m)" badge={
-          <StatusBadge status={sec.findings?.length > 0 ? 'warn' : 'ok'} label={`${sec.findings?.length || 0} findings`} />
+          <StatusBadge status={Array.isArray(sec.findings) && sec.findings.length > 0 ? 'warn' : 'ok'} label={`${Array.isArray(sec.findings) ? sec.findings.length : 0} findings`} />
         }>
-          <KV label="Bounty Targets" value={sec.bounties?.length || 0} />
-          <KV label="Findings" value={sec.findings?.length || 0} />
-          <KV label="Bounties Age" value={`${sec.bountiesAge || '--'}m`} />
-          {sec.bounties?.slice(0, 3).map((b: any, i: number) => (
+          <KV label="Bounty Targets" value={Array.isArray(sec.bounties) ? sec.bounties.length : 0} />
+          <KV label="Findings" value={Array.isArray(sec.findings) ? sec.findings.length : 0} />
+          <KV label="Bounties Age" value={`${sec.bountiesAge || '--'}s`} />
+          {Array.isArray(sec.bounties) && sec.bounties.slice(0, 3).map((b: any, i: number) => (
             <div key={i} className="text-xs text-white/40 mt-1">
               • {b.platform || 'Unknown'}: {b.target || b.name || 'N/A'} ({b.maxBounty || b.reward || 'N/A'})
             </div>
@@ -271,7 +338,7 @@ export default function L0reOperations() {
           <KV label="Freshness Age" value={`${infra.freshnessAge || '--'}m`} />
           <KV label="Tasks" value={infra.tasks?.length || 0} />
           <KV label="Recent Executions" value={infra.executions?.length || 0} />
-          {infra.recentActivity?.slice(0, 3).map((a: any, i: number) => (
+          {Array.isArray(infra.recentActivity) && infra.recentActivity.slice(0, 3).map((a: any, i: number) => (
             <div key={i} className="text-xs text-white/40 mt-1 truncate">
               • {a.event || a.action || JSON.stringify(a).slice(0, 40)}
             </div>
@@ -284,8 +351,8 @@ export default function L0reOperations() {
         }>
           <KV label="Total Documents" value={lib.totalDocs || 0} />
           <KV label="Indexed" value={lib.indexedCount || 0} />
-          <KV label="Hot Files" value={lib.hotFiles?.length || 0} />
-          {lib.recentFiles?.slice(0, 5).map((f: any, i: number) => (
+          <KV label="Hot Files" value={Array.isArray(lib.hotFiles) ? lib.hotFiles.length : 0} />
+          {Array.isArray(lib.recentFiles) && lib.recentFiles.slice(0, 5).map((f: any, i: number) => (
             <div key={i} className="text-xs text-white/40 mt-1 truncate">
               • {f.name} ({f.ageMinutes}m ago)
             </div>
@@ -297,9 +364,9 @@ export default function L0reOperations() {
           <span className="text-xs text-white/50">{learn.totalLearnings || 0} total</span>
         }>
           <KV label="Total Learnings" value={learn.totalLearnings || 0} />
-          <KV label="Observations" value={learn.observations?.length || 0} />
-          <KV label="Wisdom Files" value={learn.wisdomFiles?.length || 0} />
-          {learn.learnings?.slice(0, 3).map((l: any, i: number) => (
+          <KV label="Observations" value={Array.isArray(learn.observations) ? learn.observations.length : 0} />
+          <KV label="Wisdom Files" value={Array.isArray(learn.wisdomFiles) ? learn.wisdomFiles.length : 0} />
+          {Array.isArray(learn.learnings) && learn.learnings.slice(0, 3).map((l: any, i: number) => (
             <div key={i} className="text-xs text-white/40 mt-1 truncate">
               • {l.title || l.summary?.slice(0, 40) || 'Learning'}
             </div>
@@ -311,10 +378,10 @@ export default function L0reOperations() {
           <StatusBadge status={l0re.pendingActions > 0 ? 'warn' : 'ok'} label={`${l0re.pendingActions || 0} pending`} />
         }>
           <KV label="Pending Actions" value={l0re.pendingActions || 0} />
-          <KV label="Action Queue" value={l0re.actionQueue?.length || 0} />
-          <KV label="Automation Tasks" value={l0re.automationTasks?.length || 0} />
-          <KV label="Pipeline Executions" value={l0re.pipelineHistory?.length || 0} />
-          {l0re.actionQueue?.slice(0, 3).map((a: any, i: number) => (
+          <KV label="Action Queue" value={Array.isArray(l0re.actionQueue) ? l0re.actionQueue.length : 0} />
+          <KV label="Automation Tasks" value={Array.isArray(l0re.automationTasks) ? l0re.automationTasks.length : 0} />
+          <KV label="Pipeline Executions" value={Array.isArray(l0re.pipelineHistory) ? l0re.pipelineHistory.length : 0} />
+          {Array.isArray(l0re.actionQueue) && l0re.actionQueue.slice(0, 3).map((a: any, i: number) => (
             <div key={i} className="text-xs text-white/40 mt-1 truncate">
               • [{a.status}] {a.type || a.action || 'action'}
             </div>
@@ -326,9 +393,9 @@ export default function L0reOperations() {
           <span className="text-xs text-white/50">{p?.email?.threads || 0} threads</span>
         }>
           <KV label="Email Threads" value={p?.email?.threads || 0} />
-          <KV label="X Conversations" value={p?.email?.xConversations?.length || 0} />
-          <KV label="Team Chat Messages" value={p?.email?.teamChat?.length || 0} />
-          {p?.email?.recentThreads?.slice(0, 3).map((t: any, i: number) => (
+          <KV label="X Conversations" value={Array.isArray(p?.email?.xConversations) ? p.email.xConversations.length : 0} />
+          <KV label="Team Chat Messages" value={Array.isArray(p?.email?.teamChat) ? p.email.teamChat.length : 0} />
+          {Array.isArray(p?.email?.recentThreads) && p.email.recentThreads.slice(0, 3).map((t: any, i: number) => (
             <div key={i} className="text-xs text-white/40 mt-1 truncate">
               • {t.name} ({t.ageMinutes}m ago)
             </div>
