@@ -1,6 +1,6 @@
 {
   "running": true,
-  "lastCheck": "2026-01-31T08:16:27.583Z",
+  "lastCheck": "2026-01-31T08:18:54.643Z",
   "healingActions": [
     {
       "timestamp": "2026-01-31T07:22:37.767Z",
@@ -985,12 +985,54 @@
       "file": "library-sync.json",
       "crawler": "library-sync-crawler.js",
       "success": true
+    },
+    {
+      "timestamp": "2026-01-31T08:17:15.703Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T08:17:31.687Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T08:18:04.662Z",
+      "file": "d0t-signals.json",
+      "crawler": "d0t-signals.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T08:18:06.751Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T08:18:22.637Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T08:18:54.721Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T08:19:10.647Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
     }
   ],
   "crawlerProcesses": [],
   "stats": {
-    "checks": 65,
-    "heals": 164,
+    "checks": 68,
+    "heals": 171,
     "failures": 0
   }
 }
