@@ -5,7 +5,7 @@
 nixPkgs = ["nodejs_20"]
 
 [phases.install]
-cmds = ["npm ci"]
+cmds = ["npm install --legacy-peer-deps"]
 
 [phases.build]
 cmds = ["npm run build"]
@@ -16,3 +16,4 @@ cmd = "npm run start"
 [variables]
 NODE_ENV = "production"
 NEXT_TELEMETRY_DISABLED = "1"
+NPM_CONFIG_LEGACY_PEER_DEPS = "true"
