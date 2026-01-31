@@ -1,7 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════════════════════════════════════════
+ * L0RE DESIGN SYSTEM — Procedural Aesthetic Tokens
+ * Kim Asendorf / Andreas Gysin inspired
+ * ═══════════════════════════════════════════════════════════════════════════════ */
+
 :root {
+  /* Core Palette */
   --bg: #0b0b0b;
   --bg-soft: #121212;
   --fg: #f2f2f2;
@@ -10,6 +16,39 @@
   --accent: #e9e9e9;
   --border: rgba(242, 242, 242, 0.12);
   --border-strong: rgba(242, 242, 242, 0.35);
+  
+  /* L0RE Agent Colors */
+  --l0re-b0b: #00FF88;      /* Creative - green */
+  --l0re-d0t: #22C55E;      /* Signals - emerald */
+  --l0re-c0m: #A855F7;      /* Security - purple */
+  --l0re-r0ss: #00D9FF;     /* Infrastructure - cyan */
+  --l0re-turb0: #FFD12F;    /* Trading - gold */
+  
+  /* Nash States */
+  --nash-cooperative: #00FF88;
+  --nash-competitive: #FFD12F;
+  --nash-defection: #FF4444;
+  --nash-equilibrium: #22C55E;
+  --nash-schelling: #00D9FF;
+  
+  /* Tegmark Levels */
+  --tegmark-l1: #22C55E;    /* Mathematical - c0m */
+  --tegmark-l2: #00D9FF;    /* Emergent - d0t */
+  --tegmark-l3: #FFD12F;    /* Narrative - b0b */
+  --tegmark-l4: #A855F7;    /* Meta - r0ss */
+  
+  /* Status Colors */
+  --status-fresh: #00FF88;
+  --status-stale: #FC401F;
+  --status-warn: #FFD12F;
+  --status-offline: #555555;
+  
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 64px;
 }
 
 * {
