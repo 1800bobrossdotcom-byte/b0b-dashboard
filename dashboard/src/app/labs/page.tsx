@@ -1,15 +1,16 @@
 'use client';
 
 /**
- * /labs — Active experiments and autonomous research
+ * /labs — Active experiments, live swarm chat, and project execution
  * Live data from brain, procedural aesthetic
  * 
  * "Glass box, not black box."
  */
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
 import Header from '../components/Header';
+import { LiveSwarmChat } from '@/components/LiveSwarmChat';
 
 interface Experiment {
   id: string;
@@ -19,6 +20,7 @@ interface Experiment {
   description: string;
   badge?: string;
   metrics?: Record<string, number>;
+  actions?: { execute?: string; view?: string };
 }
 
 interface Tool {
@@ -26,6 +28,16 @@ interface Tool {
   description: string;
   ageHours: number;
   lines: number;
+}
+
+interface TradeLog {
+  timestamp: string;
+  type: string;
+  token?: string;
+  amount?: number;
+  price?: number;
+  pnl?: number;
+  status: string;
 }
 
 interface ActivityItem {
@@ -42,25 +54,30 @@ interface LabsData {
   experiments: Experiment[];
   status?: { system?: { status: string }; agents?: Array<{ id: string; name: string; emoji: string; role: string }> };
   activity: ActivityItem[];
+  tradingLogs?: TradeLog[];
   health?: { dataFreshness: number; freshFiles: number; staleFiles: number; toolCount: number; tradingEnabled: boolean };
   freshness?: { files: Array<{ file: string; fresh: boolean; actualAge: number }>; healthPercent: number };
   tools?: Tool[];
   actions?: { pending: number; executed: number };
   crawlers?: { loopRunning: boolean; intervalSeconds: number };
+  turb0?: { mode: string; trades: number; dailyPnl: number; recentTrades: TradeLog[] };
 }
 
 const AGENT_MAP: Record<string, { role: string; emoji: string; color: string }> = {
-  b0b: { role: 'Creative Director', emoji: '🎨', color: 'var(--accent-purple, #a78bfa)' },
-  d0t: { role: 'Signal Hunter', emoji: '📊', color: 'var(--accent-cyan, #22d3ee)' },
-  c0m: { role: 'Security Shield', emoji: '💀', color: 'var(--accent-red, #f87171)' },
-  r0ss: { role: 'Infrastructure', emoji: '🔧', color: 'var(--accent-green, #4ade80)' },
+  b0b: { role: 'Creative Director', emoji: '🎨', color: 'var(--l0re-b0b, #00FF88)' },
+  d0t: { role: 'Signal Hunter', emoji: '📊', color: 'var(--l0re-d0t, #22C55E)' },
+  c0m: { role: 'Security Shield', emoji: '💀', color: 'var(--l0re-c0m, #A855F7)' },
+  r0ss: { role: 'Infrastructure', emoji: '🔧', color: 'var(--l0re-r0ss, #00D9FF)' },
 };
+
+const BRAIN_URL = process.env.NEXT_PUBLIC_BRAIN_URL || 'https://b0b-brain-production.up.railway.app';
 
 export default function LabsPage() {
   const [data, setData] = useState<LabsData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'experiments' | 'activity' | 'tools' | 'freshness'>('experiments');
+  const [activeTab, setActiveTab] = useState<'experiments' | 'activity' | 'tools' | 'freshness' | 'swarm' | 'trading'>('experiments');
   const [expandedExp, setExpandedExp] = useState<string | null>(null);
+  const [executing, setExecuting] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -81,8 +98,30 @@ export default function LabsPage() {
     return () => clearInterval(interval);
   }, []);
 
+  // Execute an experiment action
+  const executeExperiment = useCallback(async (expId: string, action: string) => {
+    setExecuting(expId);
+    try {
+      const res = await fetch(`${BRAIN_URL}/l0re/actions/execute`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ experiment: expId, action }),
+      });
+      if (res.ok) {
+        // Refresh data after execution
+        const refreshRes = await fetch('/api/labs');
+        if (refreshRes.ok) setData(await refreshRes.json());
+      }
+    } catch (e) {
+      console.error('Execution failed:', e);
+    } finally {
+      setExecuting(null);
+    }
+  }, []);
+
   const isOnline = data?.status?.system?.status === 'alive';
   const healthPercent = data?.health?.dataFreshness || data?.freshness?.healthPercent || 0;
+  const turb0Mode = data?.turb0?.mode || 'PAPER';
 
   return (
     <main className="page">
@@ -96,13 +135,21 @@ export default function LabsPage() {
           {data?.crawlers?.loopRunning && (
             <span className="crawler-badge">🔄 CRAWLERS ACTIVE</span>
           )}
+          {turb0Mode === 'LIVE' && (
+            <span className="live-badge">🔴 LIVE TRADING</span>
+          )}
         </div>
         <div className="live-status-right">
           <span className="health-badge" style={{ 
-            color: healthPercent >= 80 ? '#4ade80' : healthPercent >= 50 ? '#fbbf24' : '#f87171' 
+            color: healthPercent >= 80 ? 'var(--status-fresh)' : healthPercent >= 50 ? 'var(--status-warn)' : 'var(--status-stale)' 
           }}>
             {healthPercent}% FRESH
           </span>
+          {data?.turb0 && (
+            <span className="turb0-badge">
+              ⚡ {data.turb0.trades} trades | ${data.turb0.dailyPnl?.toFixed(2) || '0.00'} P&L
+            </span>
+          )}
         </div>
       </section>
 
@@ -136,6 +183,10 @@ export default function LabsPage() {
           <div className="metric-value">{data?.actions?.pending || 0}</div>
           <div className="metric-label">Pending Actions</div>
         </div>
+        <div className="metric turb0">
+          <div className="metric-value">{data?.turb0?.trades || 0}</div>
+          <div className="metric-label">Trades Today</div>
+        </div>
       </section>
 
       {/* Tabs */}
@@ -144,25 +195,37 @@ export default function LabsPage() {
           className={`tab ${activeTab === 'experiments' ? 'active' : ''}`}
           onClick={() => setActiveTab('experiments')}
         >
-          Experiments
+          🧪 Experiments
+        </button>
+        <button 
+          className={`tab ${activeTab === 'swarm' ? 'active' : ''}`}
+          onClick={() => setActiveTab('swarm')}
+        >
+          🤖 Live Swarm
+        </button>
+        <button 
+          className={`tab ${activeTab === 'trading' ? 'active' : ''}`}
+          onClick={() => setActiveTab('trading')}
+        >
+          📈 Trading Log
         </button>
         <button 
           className={`tab ${activeTab === 'activity' ? 'active' : ''}`}
           onClick={() => setActiveTab('activity')}
         >
-          Activity Log
+          📋 Activity
         </button>
         <button 
           className={`tab ${activeTab === 'tools' ? 'active' : ''}`}
           onClick={() => setActiveTab('tools')}
         >
-          Brain Tools
+          🛠️ Tools
         </button>
         <button 
           className={`tab ${activeTab === 'freshness' ? 'active' : ''}`}
           onClick={() => setActiveTab('freshness')}
         >
-          Data Freshness
+          ⏱️ Freshness
         </button>
       </section>
 
@@ -207,8 +270,86 @@ export default function LabsPage() {
                     <span className="owner-id" style={{ color: AGENT_MAP[exp.owner]?.color }}>{exp.owner}</span>
                     <span className="owner-role">{AGENT_MAP[exp.owner]?.role || 'Agent'}</span>
                   </div>
+                  
+                  {/* Execute Actions */}
+                  {exp.actions && (
+                    <div className="experiment-actions">
+                      {exp.actions.execute && (
+                        <button 
+                          className="action-btn execute"
+                          onClick={(e) => { e.stopPropagation(); executeExperiment(exp.id, exp.actions!.execute!); }}
+                          disabled={executing === exp.id}
+                        >
+                          {executing === exp.id ? '⏳' : '⚡'} {exp.actions.execute}
+                        </button>
+                      )}
+                      {exp.actions.view && (
+                        <Link href={exp.actions.view} className="action-btn view" onClick={(e) => e.stopPropagation()}>
+                          👁️ View
+                        </Link>
+                      )}
+                    </div>
+                  )}
                 </article>
               ))}
+            </div>
+          )}
+        </section>
+      )}
+
+      {/* LIVE SWARM TAB */}
+      {activeTab === 'swarm' && (
+        <section className="swarm-section">
+          <div className="swarm-container">
+            <LiveSwarmChat compact={false} showHealth={true} />
+          </div>
+        </section>
+      )}
+
+      {/* TRADING LOG TAB */}
+      {activeTab === 'trading' && (
+        <section className="trading-section">
+          <div className="trading-header">
+            <h2>Live Trading Log</h2>
+            <div className="trading-mode" style={{ 
+              color: turb0Mode === 'LIVE' ? 'var(--status-stale)' : 'var(--status-fresh)' 
+            }}>
+              {turb0Mode === 'LIVE' ? '🔴 LIVE' : '📝 PAPER'} MODE
+            </div>
+          </div>
+          
+          {data?.turb0?.recentTrades?.length ? (
+            <div className="trading-grid">
+              {data.turb0.recentTrades.map((trade, i) => (
+                <div key={i} className={`trade-row ${trade.pnl && trade.pnl > 0 ? 'profit' : trade.pnl && trade.pnl < 0 ? 'loss' : ''}`}>
+                  <span className="trade-time">{new Date(trade.timestamp).toLocaleTimeString()}</span>
+                  <span className="trade-type">{trade.type}</span>
+                  <span className="trade-token">{trade.token || '-'}</span>
+                  <span className="trade-amount">{trade.amount?.toFixed(4) || '-'}</span>
+                  <span className="trade-price">${trade.price?.toFixed(6) || '-'}</span>
+                  <span className={`trade-pnl ${trade.pnl && trade.pnl > 0 ? 'positive' : trade.pnl && trade.pnl < 0 ? 'negative' : ''}`}>
+                    {trade.pnl ? `${trade.pnl > 0 ? '+' : ''}${trade.pnl.toFixed(2)}%` : '-'}
+                  </span>
+                  <span className="trade-status">{trade.status}</span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="empty">No recent trades. TURB0B00ST is analyzing signals...</div>
+          )}
+          
+          {data?.tradingLogs && data.tradingLogs.length > 0 && (
+            <div className="trading-full-log">
+              <h3>Full Trading Activity</h3>
+              <div className="log-scroll">
+                {data.tradingLogs.slice(0, 100).map((log, i) => (
+                  <div key={i} className="log-entry">
+                    <span className="log-time">{new Date(log.timestamp).toLocaleString()}</span>
+                    <span className="log-type">{log.type}</span>
+                    <span className="log-details">{log.token} - {log.status}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </section>
@@ -314,6 +455,32 @@ export default function LabsPage() {
       </footer>
 
       <style jsx>{`
+        .live-badge {
+          margin-left: 0.5rem;
+          padding: 0.25rem 0.5rem;
+          background: rgba(252, 64, 31, 0.15);
+          border: 1px solid rgba(252, 64, 31, 0.4);
+          border-radius: 4px;
+          font-size: 0.7rem;
+          color: var(--status-stale);
+          animation: pulse-red 1.5s infinite;
+        }
+        
+        @keyframes pulse-red {
+          0%, 100% { opacity: 1; box-shadow: 0 0 8px rgba(252, 64, 31, 0.3); }
+          50% { opacity: 0.7; box-shadow: 0 0 16px rgba(252, 64, 31, 0.5); }
+        }
+        
+        .turb0-badge {
+          font-family: var(--font-mono);
+          font-size: 0.75rem;
+          color: var(--l0re-turb0, #FFD12F);
+          padding: 0.25rem 0.5rem;
+          background: rgba(255, 209, 47, 0.1);
+          border: 1px solid rgba(255, 209, 47, 0.2);
+          border-radius: 4px;
+        }
+        
         .crawler-badge {
           margin-left: 1rem;
           padding: 0.25rem 0.5rem;
@@ -321,7 +488,7 @@ export default function LabsPage() {
           border: 1px solid rgba(34, 211, 238, 0.3);
           border-radius: 4px;
           font-size: 0.7rem;
-          color: #22d3ee;
+          color: var(--l0re-r0ss);
           animation: pulse 2s infinite;
         }
         
@@ -340,6 +507,10 @@ export default function LabsPage() {
           display: flex;
           align-items: center;
           gap: 1rem;
+        }
+        
+        .metric.turb0 .metric-value {
+          color: var(--l0re-turb0, #FFD12F);
         }
         
         .experiments-grid {
@@ -364,7 +535,7 @@ export default function LabsPage() {
         }
         
         .experiment.expanded {
-          border-color: var(--accent-cyan, #22d3ee);
+          border-color: var(--l0re-d0t);
         }
         
         .experiment-header {
@@ -389,13 +560,13 @@ export default function LabsPage() {
         }
         
         .experiment-status.active {
-          background: rgba(74, 222, 128, 0.2);
-          color: #4ade80;
+          background: rgba(0, 255, 136, 0.2);
+          color: var(--status-fresh);
         }
         
         .experiment-status.standby {
-          background: rgba(251, 191, 36, 0.2);
-          color: #fbbf24;
+          background: rgba(255, 209, 47, 0.2);
+          color: var(--status-warn);
         }
         
         .experiment-status.idle {
@@ -445,7 +616,7 @@ export default function LabsPage() {
           font-family: var(--font-mono);
           font-size: 1rem;
           font-weight: 600;
-          color: #22d3ee;
+          color: var(--l0re-d0t);
         }
         
         .exp-metric-label {
@@ -474,6 +645,177 @@ export default function LabsPage() {
           color: rgba(255, 255, 255, 0.4);
         }
         
+        .experiment-actions {
+          display: flex;
+          gap: 0.5rem;
+          margin-top: 1rem;
+          padding-top: 1rem;
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .action-btn {
+          padding: 0.5rem 1rem;
+          border-radius: 4px;
+          font-size: 0.75rem;
+          font-family: var(--font-mono);
+          cursor: pointer;
+          transition: all 0.2s;
+          border: none;
+        }
+        
+        .action-btn.execute {
+          background: rgba(0, 255, 136, 0.15);
+          color: var(--status-fresh);
+          border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+        
+        .action-btn.execute:hover:not(:disabled) {
+          background: rgba(0, 255, 136, 0.25);
+        }
+        
+        .action-btn.execute:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+        
+        .action-btn.view {
+          background: rgba(0, 217, 255, 0.15);
+          color: var(--l0re-r0ss);
+          border: 1px solid rgba(0, 217, 255, 0.3);
+          text-decoration: none;
+        }
+        
+        .action-btn.view:hover {
+          background: rgba(0, 217, 255, 0.25);
+        }
+        
+        /* Swarm Section */
+        .swarm-section {
+          padding: 1rem;
+        }
+        
+        .swarm-container {
+          height: 600px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 8px;
+          overflow: hidden;
+        }
+        
+        /* Trading Section */
+        .trading-section {
+          padding: 1rem;
+        }
+        
+        .trading-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 1.5rem;
+        }
+        
+        .trading-header h2 {
+          font-size: 1.2rem;
+          font-weight: 500;
+        }
+        
+        .trading-mode {
+          font-family: var(--font-mono);
+          font-size: 0.9rem;
+          font-weight: 600;
+        }
+        
+        .trading-grid {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+        
+        .trade-row {
+          display: grid;
+          grid-template-columns: 100px 80px 120px 100px 100px 80px auto;
+          gap: 1rem;
+          align-items: center;
+          padding: 0.75rem 1rem;
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          border-radius: 4px;
+          font-size: 0.8rem;
+          font-family: var(--font-mono);
+        }
+        
+        .trade-row.profit {
+          border-left: 2px solid var(--status-fresh);
+        }
+        
+        .trade-row.loss {
+          border-left: 2px solid var(--status-stale);
+        }
+        
+        .trade-time {
+          color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .trade-type {
+          text-transform: uppercase;
+          font-weight: 600;
+        }
+        
+        .trade-token {
+          color: var(--l0re-turb0);
+        }
+        
+        .trade-pnl.positive {
+          color: var(--status-fresh);
+        }
+        
+        .trade-pnl.negative {
+          color: var(--status-stale);
+        }
+        
+        .trade-status {
+          color: rgba(255, 255, 255, 0.4);
+          text-transform: uppercase;
+          font-size: 0.7rem;
+        }
+        
+        .trading-full-log {
+          margin-top: 2rem;
+          padding-top: 1.5rem;
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .trading-full-log h3 {
+          font-size: 1rem;
+          margin-bottom: 1rem;
+          color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .log-scroll {
+          max-height: 300px;
+          overflow-y: auto;
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+        }
+        
+        .log-entry {
+          display: flex;
+          gap: 1rem;
+          padding: 0.5rem;
+          font-size: 0.75rem;
+          font-family: var(--font-mono);
+          color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .log-time {
+          min-width: 150px;
+        }
+        
+        .log-type {
+          min-width: 80px;
+          text-transform: uppercase;
+        }
+        
         /* Activity styles */
         .activity-list {
           display: flex;
@@ -495,11 +837,11 @@ export default function LabsPage() {
         }
         
         .activity-item.deploy {
-          border-left: 2px solid #4ade80;
+          border-left: 2px solid var(--status-fresh);
         }
         
         .activity-item.discussion {
-          border-left: 2px solid #a78bfa;
+          border-left: 2px solid var(--l0re-c0m);
         }
         
         .activity-emoji {
@@ -526,7 +868,7 @@ export default function LabsPage() {
         }
         
         .activity-details a {
-          color: #22d3ee;
+          color: var(--l0re-r0ss);
           text-decoration: none;
         }
         
@@ -558,7 +900,7 @@ export default function LabsPage() {
         .tool-name {
           font-family: var(--font-mono);
           font-size: 0.9rem;
-          color: #22d3ee;
+          color: var(--l0re-r0ss);
           margin-bottom: 0.5rem;
         }
         
@@ -606,9 +948,9 @@ export default function LabsPage() {
           font-weight: 700;
         }
         
-        .freshness-percent.good { color: #4ade80; }
-        .freshness-percent.warn { color: #fbbf24; }
-        .freshness-percent.bad { color: #f87171; }
+        .freshness-percent.good { color: var(--status-fresh); }
+        .freshness-percent.warn { color: var(--status-warn); }
+        .freshness-percent.bad { color: var(--status-stale); }
         
         .freshness-grid {
           display: grid;
@@ -626,11 +968,11 @@ export default function LabsPage() {
         }
         
         .freshness-file.fresh {
-          border-left: 2px solid #4ade80;
+          border-left: 2px solid var(--status-fresh);
         }
         
         .freshness-file.stale {
-          border-left: 2px solid #fbbf24;
+          border-left: 2px solid var(--status-warn);
         }
         
         .freshness-icon {
@@ -687,6 +1029,15 @@ export default function LabsPage() {
           
           .activity-time {
             grid-column: 1 / -1;
+          }
+          
+          .trade-row {
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto auto;
+          }
+          
+          .swarm-container {
+            height: 400px;
           }
         }
       `}</style>
