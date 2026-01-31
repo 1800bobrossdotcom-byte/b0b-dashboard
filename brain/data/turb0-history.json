@@ -1,12 +1,5 @@
 [
   {
-    "timestamp": "2026-01-31T00:27:49.542Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
     "timestamp": "2026-01-31T00:30:00.962Z",
     "decision": "BUY",
     "confidence": 0.644,
@@ -694,6 +687,13 @@
   },
   {
     "timestamp": "2026-01-31T04:32:15.032Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T04:34:43.479Z",
     "decision": "BUY",
     "confidence": 0.644,
     "l0reCode": "n.3qlb/t.l3/e.l/f.dist",

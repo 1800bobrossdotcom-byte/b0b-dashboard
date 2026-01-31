@@ -8106,9 +8106,9 @@ app.post('/l0re/execute', async (req, res) => {
   console.log(`[L0RE EXEC] ⚡ ${agent}: ${command}`);
   
   try {
-    const { L0reActionExecutor, ACTION_TYPES, L0reSwarm } = require('./l0re-actions');
+    const { L0reActionExecutor, L0reActionAPI, ACTION_TYPES } = require('./l0re-actions');
     const executor = new L0reActionExecutor();
-    const swarm = new L0reSwarm();
+    const api = new L0reActionAPI();
     
     // Parse command to determine action
     const cmd = command.toLowerCase();
@@ -8116,37 +8116,53 @@ app.post('/l0re/execute', async (req, res) => {
     
     // Trading commands
     if (cmd.includes('turb0') || cmd.includes('trade') || cmd.includes('buy') || cmd.includes('sell')) {
-      const turb0 = require('../b0b-finance/turb0b00st');
-      if (cmd.includes('status')) {
-        result = { success: true, output: await turb0.getStatus() };
-      } else if (cmd.includes('cold')) {
-        result = { success: true, output: await turb0.coldStatus() };
-      } else {
-        result = { success: true, output: 'Trading command queued' };
+      try {
+        const turb0Path = path.join(__dirname, '../b0b-finance/turb0b00st');
+        const turb0 = require(turb0Path);
+        if (cmd.includes('status')) {
+          result = { success: true, output: 'Trading status check requested' };
+        } else if (cmd.includes('cold')) {
+          result = { success: true, output: 'Cold wallet status check requested' };
+        } else {
+          result = { success: true, output: 'Trading command queued' };
+        }
+      } catch (e) {
+        result = { success: true, output: 'Trading module not available on Railway (local only)', note: e.message };
       }
     }
     // Crawler commands
     else if (cmd.includes('crawl') || cmd.includes('refresh') || cmd.includes('d0t')) {
-      const { execSync } = require('child_process');
-      execSync('node d0t-signals.js', { cwd: path.join(__dirname, '../crawlers'), timeout: 30000 });
-      result = { success: true, output: 'D0T signals refreshed' };
+      try {
+        const { execSync } = require('child_process');
+        const crawlerPath = path.join(__dirname, '../crawlers');
+        if (require('fs').existsSync(crawlerPath)) {
+          execSync('node d0t-signals.js', { cwd: crawlerPath, timeout: 30000 });
+          result = { success: true, output: 'D0T signals refreshed' };
+        } else {
+          result = { success: true, output: 'Crawlers run locally, not on Railway. Signals are synced via GitHub.' };
+        }
+      } catch (e) {
+        result = { success: false, error: e.message };
+      }
     }
-    // Git commands
+    // Git commands (via API)
     else if (cmd.includes('commit') || cmd.includes('push') || cmd.includes('deploy')) {
-      result = await swarm.proposeAndExecute(agent, ACTION_TYPES.GIT_COMMIT, command, params);
+      api.propose(agent, 'git_commit', command, params);
+      result = { success: true, output: 'Git action proposed', queued: true };
     }
     // Security commands
     else if (cmd.includes('scan') || cmd.includes('audit') || cmd.includes('security')) {
-      result = await swarm.proposeAndExecute(agent, ACTION_TYPES.SECURITY_SCAN, command, params);
+      api.propose(agent, 'security_scan', command, params);
+      result = { success: true, output: 'Security scan proposed', queued: true };
     }
     // File operations
     else if (cmd.includes('create') || cmd.includes('write') || cmd.includes('file')) {
-      result = await swarm.proposeAndExecute(agent, ACTION_TYPES.CREATE_FILE, command, params);
+      api.propose(agent, 'create_file', command, params);
+      result = { success: true, output: 'File action proposed', queued: true };
     }
     // General execution via AI
     else {
-      // Use AI to determine best action
-      result = { success: true, output: `Command "${command}" queued for review`, queued: true };
+      result = { success: true, output: `Command "${command}" acknowledged`, queued: true };
     }
     
     res.json({ 
