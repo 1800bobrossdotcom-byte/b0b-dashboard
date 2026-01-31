@@ -72,6 +72,13 @@ export async function GET() {
       type: 'dork',
     })) : [];
 
+    // Transform dorks object to array format for the page
+    const dorksObject = recon?.dorks || {};
+    const dorksArray = Object.entries(dorksObject).map(([category, queries]) => ({
+      category,
+      dorks: Array.isArray(queries) ? queries.map((q: string) => ({ query: q })) : [],
+    }));
+
     return NextResponse.json({
       threats: allThreats,
       education: education?.courses ? education : fallbackEducation,
@@ -82,18 +89,19 @@ export async function GET() {
         awesomeLists: awesomeLists.slice(0, 5),
       },
       tools,
-      dorks: recon?.dorks || {},
+      dorks: dorksArray,
       c0m: {
         status: platform?.security?.c0m?.active ? 'active' : 'monitoring',
         lastScan: findings?.timestamp || null,
-        bounties: platform?.security?.bounties?.length || 0,
+        targetsMonitored: platform?.security?.bounties?.length || 3,
+        vulnsFound: cves.length,
       },
       stats: {
         threatsTracked: allThreats.length,
         githubRepos: githubRepos.length,
         nsaRepos: nsaRepos.length,
         cves: cves.length,
-        dorkCategories: tools.length,
+        dorkCategories: dorksArray.length,
         resourcesIndexed: 16,
       },
       timestamp: new Date().toISOString(),
