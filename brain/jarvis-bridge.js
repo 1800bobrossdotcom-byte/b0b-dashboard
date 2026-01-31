@@ -17,7 +17,10 @@
 
 const fs = require('fs').promises;
 const path = require('path');
-const { nanoid } = require('nanoid');
+const crypto = require('crypto');
+
+// Use built-in crypto for IDs (no external dependency)
+const nanoid = (size = 8) => crypto.randomBytes(size).toString('hex').slice(0, size);
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // SECURITY CONSTANTS — c0m approved limits (mirrored from ExecutionAPI.ts)
