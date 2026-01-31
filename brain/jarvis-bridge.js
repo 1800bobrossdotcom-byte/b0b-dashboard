@@ -262,7 +262,64 @@ class JarvisBridge {
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // 💀 c0m TX VALIDATION — Security Layer
+  // �️ d0t SIGNALS — Decision Engine Output
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  /**
+   * Get d0t signals from decision engine
+   * Synthesizes: d0t + c0m + b0b + r0ss
+   */
+  async getD0tSignals() {
+    // Read live signals from d0t-signals.json if available
+    try {
+      const signalsPath = path.join(DATA_DIR, 'd0t-signals.json');
+      const data = await fs.readFile(signalsPath, 'utf8');
+      const signals = JSON.parse(data);
+      return {
+        decision: signals.decision || 'HOLD',
+        confidence: signals.confidence || 0.5,
+        size: signals.size || 0.02,
+        l0reCode: signals.l0reCode || 'n.3qlb/t.l3/e.l/f.dist',
+        nashState: signals.nashState || 'EQUILIBRIUM',
+        agents: signals.agents || {
+          d0t: { state: 'EQUILIBRIUM_HARVEST', vote: 'NEUTRAL' },
+          c0m: { level: 1, veto: false },
+          b0b: { state: 'MEME_MOMENTUM', vote: 'BULLISH' },
+          r0ss: { coherence: 'ALIGNED', vote: 'NEUTRAL' },
+        },
+      };
+    } catch {
+      // Return defaults if no signals file
+      return {
+        decision: 'HOLD',
+        confidence: 0.5,
+        size: 0.02,
+        l0reCode: 'n.3qlb/t.l3/e.l/f.dist',
+        nashState: 'EQUILIBRIUM',
+        agents: {
+          d0t: { state: 'EQUILIBRIUM_HARVEST', vote: 'NEUTRAL' },
+          c0m: { level: 1, veto: false },
+          b0b: { state: 'MEME_MOMENTUM', vote: 'BULLISH' },
+          r0ss: { coherence: 'ALIGNED', vote: 'NEUTRAL' },
+        },
+      };
+    }
+  }
+
+  /**
+   * Get current trading stats
+   */
+  getTradingStats() {
+    return {
+      dailySpend: this.dailySpend,
+      remainingBudget: TX_LIMITS.maxDailySpendUSD - this.dailySpend,
+      lastTxTime: this.lastTxTime ? new Date(this.lastTxTime).toISOString() : null,
+      limits: TX_LIMITS,
+    };
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // �💀 c0m TX VALIDATION — Security Layer
   // ═══════════════════════════════════════════════════════════════════════════
 
   /**
@@ -376,6 +433,19 @@ class JarvisBridge {
       ethReceived: mockEthReceived,
       usdValue: mockUsdValue,
       moonbagRetained: moonbagPercent,
+    };
+  }
+
+  /**
+   * Get profit quote without executing
+   */
+  async getProfitQuote(tokenAddress, amount) {
+    // Would call Aerodrome getAmountsOut in production
+    const mockEthOut = amount * 0.0001;
+    return {
+      ethOut: mockEthOut,
+      usdValue: mockEthOut * 2500,
+      priceImpact: 0.5,
     };
   }
 

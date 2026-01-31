@@ -1179,6 +1179,52 @@ app.get('/jarvis/memory/query', async (req, res) => {
   }
 });
 
+// Get d0t signals from decision engine
+app.get('/jarvis/signals', async (req, res) => {
+  if (!jarvisBridge) {
+    return res.status(503).json({ error: 'Jarvis Bridge not loaded' });
+  }
+  try {
+    const signals = await jarvisBridge.getD0tSignals();
+    res.json(signals);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Get trading stats
+app.get('/jarvis/stats', async (req, res) => {
+  if (!jarvisBridge) {
+    return res.status(503).json({ error: 'Jarvis Bridge not loaded' });
+  }
+  try {
+    const stats = jarvisBridge.getTradingStats();
+    res.json(stats);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Get profit quote
+app.post('/jarvis/profit/quote', async (req, res) => {
+  if (!jarvisBridge) {
+    return res.status(503).json({ error: 'Jarvis Bridge not loaded' });
+  }
+  try {
+    const { token, amount } = req.body;
+    if (!token || !amount) {
+      return res.status(400).json({ error: 'token and amount required' });
+    }
+    const quote = await jarvisBridge.getProfitQuote(token, parseFloat(amount));
+    res.json({
+      success: true,
+      quote,
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 // L0RE Pulse history - periodic swarm discussions
 app.get('/l0re/pulse/history', async (req, res) => {
   try {
