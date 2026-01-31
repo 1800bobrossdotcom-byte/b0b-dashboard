@@ -2751,6 +2751,52 @@ app.get('/finance/treasury', async (req, res) => {
 });
 
 /**
+ * GET /turb0/live
+ * 🚀 TURB0B00ST LIVE TRADING STATUS - Direct read from brain/data
+ * This endpoint reads ONLY from the Railway container's data folder
+ */
+app.get('/turb0/live', async (req, res) => {
+  try {
+    const turbPath = path.join(DATA_DIR, 'turb0b00st-state.json');
+    
+    const result = {
+      timestamp: new Date().toISOString(),
+      source: 'brain/data/turb0b00st-state.json',
+      path: turbPath,
+      exists: require('fs').existsSync(turbPath),
+      data: null,
+      error: null,
+    };
+    
+    if (result.exists) {
+      try {
+        const content = require('fs').readFileSync(turbPath, 'utf-8');
+        const parsed = JSON.parse(content);
+        result.data = {
+          mode: parsed.mode,
+          activated: parsed.activated,
+          activatedAt: parsed.activatedAt,
+          emergencyStop: parsed.emergencyStop,
+          totalTrades: parsed.tradingHistory?.length || 0,
+          dailyStats: parsed.dailyStats,
+          tradingHistory: parsed.tradingHistory || [],
+          _buildNote: parsed._buildNote,
+          _rebuildAt: parsed._rebuildAt,
+        };
+      } catch (e) {
+        result.error = `Parse error: ${e.message}`;
+      }
+    } else {
+      result.error = 'File not found in container';
+    }
+    
+    res.json(result);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/**
  * GET /d0t/signals
  * d0t Decision engine signals - Nash equilibrium trading data
  */

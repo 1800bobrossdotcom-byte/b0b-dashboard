@@ -69,6 +69,45 @@ const TURB0_CONFIG = {
     b0b: 0.25,   // Narrative momentum
     r0ss: 0.20,  // System coherence
   },
+  
+  // ═══════════════════════════════════════════════════════════════════════════
+  // 🎯 MICROTRADING STRATEGIES — Daily Wins Focus
+  // ═══════════════════════════════════════════════════════════════════════════
+  MICROTRADE: {
+    // Daily win targets (consistent small gains > big swings)
+    DAILY_WIN_TARGET_USD: 5.00,       // $5/day = $150/month = $1,825/year
+    DAILY_WIN_TARGET_PERCENT: 0.5,    // 0.5% daily growth
+    
+    // Microtrade sizing (smaller, more frequent)
+    MICRO_TRADE_SIZE: 0.02,           // 2% per microtrade
+    MICRO_TAKE_PROFIT: 0.03,          // 3% take profit (quick wins)
+    MICRO_STOP_LOSS: 0.02,            // 2% stop loss (tight risk)
+    
+    // Scalping parameters
+    SCALP_MIN_SPREAD: 0.001,          // Minimum 0.1% spread to scalp
+    SCALP_QUICK_EXIT_MS: 300000,      // 5 min max hold for scalps
+    
+    // Momentum riding
+    MOMENTUM_FOLLOW_THRESHOLD: 0.6,   // Follow momentum at 60%+ confidence
+    MOMENTUM_SIZE_MULTIPLIER: 1.2,    // Slightly larger on momentum
+    
+    // Range trading (equilibrium states)
+    RANGE_BUY_LEVEL: -0.15,           // Buy at -15% from recent high
+    RANGE_SELL_LEVEL: 0.10,           // Sell at +10% from entry
+    
+    // Compound gains tracking
+    COMPOUND_REINVEST_PERCENT: 0.5,   // Reinvest 50% of wins
+    COMPOUND_COLD_PERCENT: 0.25,      // 25% to cold storage
+    COMPOUND_RESERVE_PERCENT: 0.25,   // 25% to reserve
+  },
+  
+  // Daily performance thresholds
+  DAILY_LIMITS: {
+    MAX_TRADES: 20,                    // Max 20 trades/day
+    STOP_AFTER_WINS: 3,               // Consider stopping after 3 wins
+    STOP_AFTER_LOSSES: 2,             // STOP after 2 consecutive losses
+    COOLDOWN_AFTER_LOSS_MS: 900000,   // 15 min cooldown after loss
+  },
 };
 
 // ═══════════════════════════════════════════════════════════════════════════════

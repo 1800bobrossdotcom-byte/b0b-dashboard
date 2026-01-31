@@ -10,6 +10,8 @@ The TURB0B00ST API provides real-time access to the trading intelligence system,
 - Nash equilibrium state
 - Multi-agent consensus voting
 - Swarm wallet status
+- 🎯 **Microtrading strategies** (NEW)
+- 📈 **Daily wins tracking** (NEW)
 
 ## Running
 
@@ -34,7 +36,7 @@ FINANCE_PORT=3003 node turb0b00st-api.js
 | `/l0re/collection` | GET | L0RE art collection |
 | `/trading/history` | GET | Trade history |
 
-### Intelligence (NEW 🆕)
+### Intelligence
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
@@ -44,6 +46,14 @@ FINANCE_PORT=3003 node turb0b00st-api.js
 | `/d0t/swarm` | GET | d0t swarm wallet status |
 | `/d0t/history` | GET | Decision history |
 | `/trading/decide` | POST | Run TURB0B00ST decision engine |
+
+### 🎯 Microtrading & Daily Wins (NEW)
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/trading/daily-wins` | GET | Daily wins tracking & performance |
+| `/trading/microstrategy` | GET | Active microtrading strategy |
+| `/trading/weekly` | GET | Weekly performance summary |
 
 ## Response Examples
 
@@ -195,9 +205,88 @@ The d0t-vscode extension polls this API for live signals display in the VS Code 
 - Displays Nash equilibrium state
 - Real-time updates every 60 seconds
 
+## 🎯 Microtrading Strategies
+
+### GET /trading/daily-wins
+
+Track daily performance and win streaks:
+
+```json
+{
+  "timestamp": "2026-01-31T10:00:00.000Z",
+  "date": "2026-01-31",
+  "mode": "LIVE",
+  "today": {
+    "trades": 3,
+    "buys": 2,
+    "sells": 1,
+    "wins": 1,
+    "losses": 0,
+    "winRate": "100.0%",
+    "streak": "BBW",
+    "pnl": 0,
+    "volume": 89.78
+  },
+  "allTime": {
+    "totalTrades": 7,
+    "totalBuys": 4,
+    "totalSells": 3,
+    "tradingDays": 2
+  },
+  "targets": {
+    "dailyWinTargetUSD": 5.00,
+    "dailyWinTargetPercent": 0.5,
+    "recommendation": "CONTINUE"
+  }
+}
+```
+
+### GET /trading/microstrategy
+
+Get active microtrading strategy based on Nash state:
+
+```json
+{
+  "nashState": "EQUILIBRIUM",
+  "activeStrategy": "RANGE_TRADE",
+  "confidence": 0.68,
+  "strategies": {
+    "RANGE_TRADE": { "active": true, "description": "Buy at support, sell at resistance" },
+    "MOMENTUM_RIDE": { "active": false, "description": "Follow strong trends" },
+    "SCALP": { "active": false, "description": "Quick in-and-out trades" },
+    "DEFENSIVE": { "active": false, "description": "Protect capital" }
+  },
+  "reasoning": [
+    "Nash EQUILIBRIUM: Range trading optimal",
+    "Buy dips, sell rallies within range"
+  ]
+}
+```
+
+### Microtrading Parameters
+
+```javascript
+MICROTRADE: {
+  // Daily targets
+  DAILY_WIN_TARGET_USD: 5.00,       // $5/day = $1,825/year
+  DAILY_WIN_TARGET_PERCENT: 0.5,    // 0.5% daily growth
+  
+  // Position sizing
+  MICRO_TRADE_SIZE: 0.02,           // 2% per microtrade
+  MICRO_TAKE_PROFIT: 0.03,          // 3% quick wins
+  MICRO_STOP_LOSS: 0.02,            // 2% tight stop
+  
+  // Daily limits
+  MAX_TRADES: 20,
+  STOP_AFTER_WINS: 3,               // Consider stopping
+  STOP_AFTER_LOSSES: 2,             // STOP trading
+}
+```
+
 ## Security Notes
 
 - 💀 c0m SECURITY: All transactions require human approval
 - MAX_SINGLE_TRADE: 10% of portfolio
+- MAX_SELL_SIZE: 10% (no full exits without human)
 - STOP_LOSS: 5%
 - TAKE_PROFIT: 15%

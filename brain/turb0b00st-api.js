@@ -443,6 +443,225 @@ app.get('/d0t/history', (req, res) => {
   }
 });
 
+// ═══════════════════════════════════════════════════════════════════════════════
+// 🎯 MICROTRADING & DAILY WINS ENDPOINTS
+// ═══════════════════════════════════════════════════════════════════════════════
+
+// 📈 Daily Wins tracking endpoint
+app.get('/trading/daily-wins', (req, res) => {
+  try {
+    const turbPath = path.join(financeDir, 'turb0b00st-state.json');
+    let state = null;
+    if (fs.existsSync(turbPath)) {
+      state = JSON.parse(fs.readFileSync(turbPath, 'utf-8'));
+    }
+    
+    const today = new Date().toISOString().split('T')[0];
+    const trades = state?.tradingHistory || [];
+    const todayTrades = trades.filter(t => t.timestamp?.startsWith(today));
+    
+    // Calculate wins/losses from today's trades
+    let wins = 0;
+    let losses = 0;
+    let totalPnL = 0;
+    const winStreak = [];
+    
+    // Analyze trades for profitability
+    todayTrades.forEach(trade => {
+      // For now, track trade counts (PnL calculation needs price data)
+      if (trade.type === 'SELL') {
+        // Assume SELL = taking profit = win for now
+        wins++;
+        winStreak.push('W');
+      } else if (trade.type === 'BUY') {
+        winStreak.push('B');
+      }
+    });
+    
+    // Calculate all-time stats
+    const buyTrades = trades.filter(t => t.type === 'BUY');
+    const sellTrades = trades.filter(t => t.type === 'SELL');
+    
+    res.json({
+      timestamp: new Date().toISOString(),
+      date: today,
+      mode: state?.mode || 'PAPER',
+      
+      // Today's performance
+      today: {
+        trades: todayTrades.length,
+        buys: todayTrades.filter(t => t.type === 'BUY').length,
+        sells: todayTrades.filter(t => t.type === 'SELL').length,
+        wins,
+        losses,
+        winRate: todayTrades.length > 0 ? ((wins / Math.max(1, wins + losses)) * 100).toFixed(1) + '%' : 'N/A',
+        streak: winStreak.join(''),
+        pnl: state?.dailyStats?.pnl || 0,
+        volume: state?.dailyStats?.volume || 0,
+      },
+      
+      // All-time stats
+      allTime: {
+        totalTrades: trades.length,
+        totalBuys: buyTrades.length,
+        totalSells: sellTrades.length,
+        firstTrade: trades[0]?.timestamp || null,
+        lastTrade: trades[trades.length - 1]?.timestamp || null,
+        tradingDays: [...new Set(trades.map(t => t.timestamp?.split('T')[0]))].length,
+      },
+      
+      // Microtrading targets
+      targets: {
+        dailyWinTargetUSD: 5.00,
+        dailyWinTargetPercent: 0.5,
+        progressToTarget: 'tracking',
+        recommendation: wins >= 3 ? 'CONSIDER_STOP' : losses >= 2 ? 'STOP_TRADING' : 'CONTINUE',
+      },
+      
+      // Recent trades
+      recentTrades: todayTrades.slice(-5).reverse(),
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// 🎯 Microtrading strategy status
+app.get('/trading/microstrategy', (req, res) => {
+  try {
+    const signalsPath = path.join(dataDir, 'd0t-signals.json');
+    let signals = {};
+    if (fs.existsSync(signalsPath)) {
+      const raw = JSON.parse(fs.readFileSync(signalsPath, 'utf-8'));
+      signals = raw.data?.turb0 || {};
+    }
+    
+    const nashState = signals?.l0re?.nash || 'EQUILIBRIUM';
+    
+    // Determine active strategy based on market state
+    let activeStrategy = 'HOLD';
+    let reasoning = [];
+    
+    if (nashState === 'EQUILIBRIUM') {
+      activeStrategy = 'RANGE_TRADE';
+      reasoning.push('Nash EQUILIBRIUM: Range trading optimal');
+      reasoning.push('Buy dips, sell rallies within range');
+    } else if (nashState === 'COOPERATIVE') {
+      activeStrategy = 'MOMENTUM_RIDE';
+      reasoning.push('Nash COOPERATIVE: Momentum following');
+      reasoning.push('Ride the wave, compound gains');
+    } else if (nashState === 'COMPETITIVE') {
+      activeStrategy = 'SCALP';
+      reasoning.push('Nash COMPETITIVE: Quick scalps only');
+      reasoning.push('Fast in, fast out, small positions');
+    } else if (nashState === 'DEFECTION') {
+      activeStrategy = 'DEFENSIVE';
+      reasoning.push('Nash DEFECTION: Defensive mode');
+      reasoning.push('No new positions, protect capital');
+    } else if (nashState === 'SCHELLING') {
+      activeStrategy = 'COORDINATION';
+      reasoning.push('Nash SCHELLING: Coordination play');
+      reasoning.push('Watch for breakout, accumulate quietly');
+    }
+    
+    res.json({
+      timestamp: new Date().toISOString(),
+      nashState,
+      activeStrategy,
+      confidence: signals?.confidence || 0.5,
+      
+      strategies: {
+        RANGE_TRADE: {
+          active: activeStrategy === 'RANGE_TRADE',
+          description: 'Buy at support, sell at resistance',
+          params: { buyLevel: -0.15, sellLevel: 0.10 },
+        },
+        MOMENTUM_RIDE: {
+          active: activeStrategy === 'MOMENTUM_RIDE',
+          description: 'Follow strong trends, compound gains',
+          params: { threshold: 0.6, sizeMultiplier: 1.2 },
+        },
+        SCALP: {
+          active: activeStrategy === 'SCALP',
+          description: 'Quick in-and-out trades',
+          params: { minSpread: 0.001, maxHoldMs: 300000 },
+        },
+        DEFENSIVE: {
+          active: activeStrategy === 'DEFENSIVE',
+          description: 'Protect capital, no new positions',
+          params: { maxSize: 0 },
+        },
+        COORDINATION: {
+          active: activeStrategy === 'COORDINATION',
+          description: 'Watch for Schelling point breakout',
+          params: { accumulateQuietly: true },
+        },
+      },
+      
+      // Quick trade sizing guide
+      sizing: {
+        microTrade: '2% position',
+        standardTrade: '5% position',
+        turb0Trade: '10% position (max)',
+      },
+      
+      reasoning,
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// 📊 Weekly performance summary
+app.get('/trading/weekly', (req, res) => {
+  try {
+    const turbPath = path.join(financeDir, 'turb0b00st-state.json');
+    let state = null;
+    if (fs.existsSync(turbPath)) {
+      state = JSON.parse(fs.readFileSync(turbPath, 'utf-8'));
+    }
+    
+    const trades = state?.tradingHistory || [];
+    const now = new Date();
+    const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+    
+    const weekTrades = trades.filter(t => new Date(t.timestamp) >= weekAgo);
+    
+    // Group by day
+    const byDay = {};
+    weekTrades.forEach(trade => {
+      const day = trade.timestamp.split('T')[0];
+      if (!byDay[day]) byDay[day] = { buys: 0, sells: 0, trades: [] };
+      byDay[day].trades.push(trade);
+      if (trade.type === 'BUY') byDay[day].buys++;
+      if (trade.type === 'SELL') byDay[day].sells++;
+    });
+    
+    res.json({
+      timestamp: new Date().toISOString(),
+      period: {
+        start: weekAgo.toISOString().split('T')[0],
+        end: now.toISOString().split('T')[0],
+      },
+      summary: {
+        totalTrades: weekTrades.length,
+        totalBuys: weekTrades.filter(t => t.type === 'BUY').length,
+        totalSells: weekTrades.filter(t => t.type === 'SELL').length,
+        activeDays: Object.keys(byDay).length,
+        avgTradesPerDay: (weekTrades.length / 7).toFixed(1),
+      },
+      dailyBreakdown: byDay,
+      consistency: {
+        streakDays: Object.keys(byDay).length,
+        target: 'Trade daily for consistent growth',
+        recommendation: weekTrades.length >= 7 ? 'CONSISTENT' : 'INCREASE_FREQUENCY',
+      },
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(TURB0_ASCII);
   console.log('═══════════════════════════════════════════════════════════════');
@@ -461,6 +680,10 @@ app.listen(PORT, () => {
   console.log(`    GET  /d0t/swarm           - d0t swarm wallet status`);
   console.log(`    GET  /d0t/intelligence    - Full d0t analysis`);
   console.log(`    GET  /d0t/history         - Decision history`);
+  console.log('  🎯 Microtrading:');
+  console.log(`    GET  /trading/daily-wins  - Daily wins tracking`);
+  console.log(`    GET  /trading/microstrategy - Active microstrategy`);
+  console.log(`    GET  /trading/weekly      - Weekly performance`);
   console.log('═══════════════════════════════════════════════════════════════');
   console.log('');
 });

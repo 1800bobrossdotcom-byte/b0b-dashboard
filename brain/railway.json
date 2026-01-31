@@ -3,11 +3,13 @@
   "build": {
     "builder": "DOCKERFILE",
     "dockerfilePath": "Dockerfile",
+    "buildCommand": "docker build --build-arg CACHE_BUST=$(date -u +%Y-%m-%dT%H:%M:%SZ) -t brain .",
     "watchPatterns": [
       "brain-server.js",
       "agents/**",
       "l0re*.js",
       "data/**",
+      "data/turb0b00st-state.json",
       "package.json",
       "Dockerfile"
     ]

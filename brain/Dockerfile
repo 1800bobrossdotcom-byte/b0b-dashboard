@@ -21,14 +21,25 @@ COPY security/ ./security/
 COPY senses/ ./senses/
 COPY visuals/ ./visuals/
 
+# ═══════════════════════════════════════════════════════════════════════════════
+# CACHE BUSTER — Forces rebuild when data changes
+# Update this timestamp to force Railway to rebuild data layer
+# ═══════════════════════════════════════════════════════════════════════════════
+ARG CACHE_BUST=2026-01-31T15:15:00Z
+RUN echo "Cache bust: ${CACHE_BUST}"
+
 # Copy data LAST to prevent cache issues
 # This layer will rebuild every time data changes
 COPY data/ ./data/
 
-# Verify data files are present
-RUN echo "=== TURB0B00ST DATA VERIFICATION ===" && \
-    cat data/turb0b00st-state.json | head -20 && \
-    echo "=== END VERIFICATION ==="
+# Verify TURB0B00ST trading data is present
+RUN echo "═══════════════════════════════════════════════════════" && \
+    echo "  TURB0B00ST DATA VERIFICATION" && \
+    echo "═══════════════════════════════════════════════════════" && \
+    echo "Mode:" && grep -o '"mode": "[^"]*"' data/turb0b00st-state.json && \
+    echo "Trade count:" && grep -c '"timestamp":' data/turb0b00st-state.json && \
+    echo "First trade:" && grep -m1 '"timestamp":' data/turb0b00st-state.json && \
+    echo "═══════════════════════════════════════════════════════"
 
 EXPOSE 3001
 
