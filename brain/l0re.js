@@ -368,8 +368,76 @@ PHILOSOPHY:
       // Error already printed
     }
   }
+  
+  // ════════════════════════════════════════════════════════════════
+  // 🔮 L0RE INTEGRATION HUB — Connect All Modules
+  // ════════════════════════════════════════════════════════════════
+  
+  static async getFullContext() {
+    // Import all L0RE modules
+    const modules = {};
+    
+    try { modules.live = require('./l0re-live.js'); } catch {}
+    try { modules.actions = require('./l0re-actions.js'); } catch {}
+    try { modules.tools = require('./l0re-tools.js'); } catch {}
+    try { modules.backend = require('./b0b-creative-backend.js'); } catch {}
+    
+    // Get context from each
+    const context = {
+      timestamp: new Date().toISOString(),
+      agents: {},
+    };
+    
+    if (modules.live?.L0reLive) {
+      const live = new modules.live.L0reLive();
+      context.agents = await live.getAllContexts();
+    }
+    
+    if (modules.actions?.L0reActionAPI) {
+      const api = new modules.actions.L0reActionAPI();
+      context.pendingActions = api.getPending().length;
+      context.actionHistory = api.getHistory(5).length;
+    }
+    
+    if (modules.backend?.CreativeBackend) {
+      const backend = new modules.backend.CreativeBackend();
+      context.contentLibrary = backend.getStats();
+    }
+    
+    return context;
+  }
+  
+  static getModules() {
+    return {
+      'l0re.js': 'CLI and Integration Hub',
+      'l0re-live.js': 'Fast refresh cycles, live agent context',
+      'l0re-actions.js': 'Action proposal/voting/execution',
+      'l0re-tools.js': 'Agent-specific tools',
+      'b0b-creative-backend.js': 'Content management for Gianni',
+      'l0re-lexicon.js': 'Anti-crawler encoding',
+      'l0re-logger.js': 'Transparent logging',
+      'l0re-rituals.js': 'Scheduled operations',
+      'l0re-grammar.js': 'L0RE language parsing',
+    };
+  }
 }
 
 // Main
 const cli = new L0reCLI();
-cli.execute(process.argv.slice(2));
+
+// Handle special commands
+if (process.argv[2] === 'context') {
+  L0reCLI.getFullContext().then(ctx => {
+    console.log(JSON.stringify(ctx, null, 2));
+  });
+} else if (process.argv[2] === 'modules') {
+  console.log('\n🔮 L0RE MODULES:\n');
+  const modules = L0reCLI.getModules();
+  for (const [file, desc] of Object.entries(modules)) {
+    console.log(`  ${file.padEnd(30)} — ${desc}`);
+  }
+  console.log();
+} else {
+  cli.execute(process.argv.slice(2));
+}
+

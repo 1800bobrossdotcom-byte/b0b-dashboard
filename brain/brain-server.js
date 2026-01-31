@@ -7496,4 +7496,100 @@ setTimeout(l0reActionLoop, 5 * 60 * 1000);
 
 console.log('  🎭 L0RE Action Loop: RUNNING (15min)');
 
+// =============================================================================
+// 🎨 B0B CREATIVE BACKEND — Gianni's Content Portal
+// =============================================================================
+
+try {
+  const creativeBackend = require('./b0b-creative-backend.js');
+  creativeBackend.setupRoutes(app);
+  console.log('[BRAIN] b0b Creative Backend loaded — Gianni can now direct 🎨');
+} catch (e) {
+  console.log('[BRAIN] b0b Creative Backend not available:', e.message);
+}
+
+// =============================================================================
+// 🔮 L0RE LIVE — Fast Refresh Integration
+// =============================================================================
+
+let l0reLive;
+try {
+  const { L0reLive, D0T_LIVE, C0M_LIVE } = require('./l0re-live.js');
+  l0reLive = new L0reLive();
+  
+  // d0t Nash Swarm endpoints
+  app.post('/d0t/swarm/request', async (req, res) => {
+    const { email, purpose } = req.body;
+    if (!email || !purpose) {
+      return res.status(400).json({ error: 'email and purpose required' });
+    }
+    const request = await D0T_LIVE.nashSwarm.requestNewD0t(email, purpose);
+    res.json({ success: true, request, message: 'Request submitted. Gianni will create a Phantom wallet and approve.' });
+  });
+  
+  app.post('/d0t/swarm/approve', async (req, res) => {
+    // Protected by admin password
+    const { requestId, walletAddress, adminPassword } = req.body;
+    
+    // Simple password check
+    if (adminPassword !== process.env.B0B_ADMIN_PASSWORD) {
+      return res.status(401).json({ error: 'Invalid admin password' });
+    }
+    
+    const result = await D0T_LIVE.nashSwarm.approveNewD0t(requestId, walletAddress);
+    res.json(result);
+  });
+  
+  app.get('/d0t/swarm/status', (req, res) => {
+    const state = D0T_LIVE.nashSwarm.getState();
+    res.json({
+      totalD0ts: state.wallets?.length || 0,
+      totalFunded: state.totalFunded || 0,
+      pendingRequests: state.pendingRequests?.filter(r => r.status === 'pending_approval').length || 0,
+    });
+  });
+  
+  // c0m Shield endpoints
+  app.get('/c0m/shield/status', (req, res) => {
+    res.json(C0M_LIVE.shield.getStatus());
+  });
+  
+  app.post('/c0m/shield/scan', async (req, res) => {
+    const results = await C0M_LIVE.shield.runScan();
+    res.json(results);
+  });
+  
+  app.get('/c0m/bounties/active', (req, res) => {
+    res.json({ targets: C0M_LIVE.bountyTargets.getActive() });
+  });
+  
+  // L0RE Live context endpoint
+  app.get('/l0re/live/context', async (req, res) => {
+    const contexts = await l0reLive.getAllContexts();
+    res.json(contexts);
+  });
+  
+  console.log('[BRAIN] L0RE Live loaded — fast refresh cycles ready 🔮');
+} catch (e) {
+  console.log('[BRAIN] L0RE Live not available:', e.message);
+}
+
+// =============================================================================
+// 📚 FAST LIBRARY REFRESH — 10 min instead of 1 hour
+// =============================================================================
+
+// Library refresh every 10 minutes
+setInterval(async () => {
+  try {
+    console.log(`[${new Date().toISOString()}] 📚 Fast library sync starting...`);
+    const { execSync } = require('child_process');
+    execSync('node library-sync.js', { cwd: __dirname, timeout: 60000, stdio: 'pipe' });
+    console.log(`[${new Date().toISOString()}] 📚 Fast library sync complete`);
+  } catch (e) {
+    // Silent fail
+  }
+}, 10 * 60 * 1000);
+
+console.log('  📚 Fast Library Refresh: RUNNING (10min)');
+
 module.exports = app;
