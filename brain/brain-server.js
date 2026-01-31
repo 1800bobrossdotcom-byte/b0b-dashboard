@@ -7563,6 +7563,45 @@ try {
     res.json({ targets: C0M_LIVE.bountyTargets.getActive() });
   });
   
+  // r0ss Deploy monitoring endpoints
+  app.get('/r0ss/deploy/status', (req, res) => {
+    res.json(R0SS_LIVE.deployMonitor.getStatus());
+  });
+  
+  app.post('/r0ss/deploy/webhook', (req, res) => {
+    // Railway webhook for deploy notifications
+    const { status, commit, service, logs } = req.body;
+    
+    // Parse errors if failed
+    let parsedErrors = null;
+    if (status === 'failed' && logs) {
+      parsedErrors = R0SS_LIVE.deployMonitor.parseBuildError(logs);
+    }
+    
+    R0SS_LIVE.deployMonitor.recordDeploy({
+      status: status || 'unknown',
+      commit: commit || 'unknown',
+      service: service || 'b0b.dev',
+      errors: parsedErrors,
+    });
+    
+    console.log(`[r0ss] 📡 Deploy ${status}: ${service} @ ${commit}`);
+    if (parsedErrors?.hasErrors) {
+      console.log(`[r0ss] ❌ Build errors detected:`, parsedErrors.errors.slice(0, 3));
+    }
+    
+    res.json({ received: true, analyzed: parsedErrors });
+  });
+  
+  app.post('/r0ss/deploy/analyze', (req, res) => {
+    // Analyze raw build logs
+    const { logs } = req.body;
+    if (!logs) return res.status(400).json({ error: 'logs required' });
+    
+    const analysis = R0SS_LIVE.deployMonitor.parseBuildError(logs);
+    res.json(analysis);
+  });
+  
   // L0RE Live context endpoint
   app.get('/l0re/live/context', async (req, res) => {
     const contexts = await l0reLive.getAllContexts();

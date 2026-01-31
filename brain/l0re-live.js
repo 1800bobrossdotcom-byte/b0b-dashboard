@@ -299,9 +299,96 @@ const R0SS_LIVE = {
       tasks = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'r0ss-tasks.json'), 'utf8'));
     } catch {}
     
+    // Check for recent deploy failures
+    let deployStatus = 'healthy';
+    try {
+      const deploys = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'railway-deploys.json'), 'utf8'));
+      const recent = deploys.slice(-5);
+      const failures = recent.filter(d => d.status === 'failed');
+      if (failures.length > 0) {
+        deployStatus = `${failures.length} recent failures`;
+      }
+    } catch {}
+    
     const pending = tasks.filter?.(t => t.status === 'pending')?.length || 0;
     
-    return `Brain server on Railway (24/7). ${pending} pending tasks. Running: self-healing, freshness monitor, L0RE pulse, action loop. GitHub Actions auto-deploy active.`;
+    return `Brain server on Railway (24/7). Deploy status: ${deployStatus}. ${pending} pending tasks. Running: self-healing, freshness monitor, L0RE pulse, action loop.`;
+  },
+  
+  // Railway deployment monitoring
+  deployMonitor: {
+    // Store deploy history
+    history: [],
+    
+    // Record a deploy attempt
+    recordDeploy: (deploy) => {
+      R0SS_LIVE.deployMonitor.history.push({
+        ...deploy,
+        timestamp: new Date().toISOString(),
+      });
+      
+      // Keep last 50 deploys
+      if (R0SS_LIVE.deployMonitor.history.length > 50) {
+        R0SS_LIVE.deployMonitor.history.shift();
+      }
+      
+      // Save to disk
+      try {
+        fs.writeFileSync(
+          path.join(DATA_DIR, 'railway-deploys.json'),
+          JSON.stringify(R0SS_LIVE.deployMonitor.history, null, 2)
+        );
+      } catch {}
+    },
+    
+    // Parse Railway build logs for errors
+    parseBuildError: (logText) => {
+      const errors = [];
+      
+      // Look for common patterns
+      const patterns = [
+        /Error: (.+)/g,
+        /Build Failed: (.+)/g,
+        /Parsing ecmascript source code failed/g,
+        /at (.+\.tsx?:\d+:\d+)/g,
+        /Expression expected/g,
+        /Unterminated/g,
+      ];
+      
+      for (const pattern of patterns) {
+        const matches = logText.match(pattern);
+        if (matches) {
+          errors.push(...matches.slice(0, 3)); // Limit to first 3 matches per pattern
+        }
+      }
+      
+      return {
+        hasErrors: errors.length > 0,
+        errors: errors.slice(0, 10), // Limit total errors
+        summary: errors.length > 0 ? `Found ${errors.length} errors in build log` : 'No errors detected',
+      };
+    },
+    
+    // Get recent deploy status
+    getStatus: () => {
+      try {
+        const history = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'railway-deploys.json'), 'utf8'));
+        const recent = history.slice(-10);
+        const failures = recent.filter(d => d.status === 'failed');
+        const successes = recent.filter(d => d.status === 'success');
+        
+        return {
+          total: history.length,
+          recent: recent.length,
+          failures: failures.length,
+          successes: successes.length,
+          lastDeploy: recent[recent.length - 1] || null,
+          healthy: failures.length < 3,
+        };
+      } catch {
+        return { total: 0, recent: 0, failures: 0, successes: 0, lastDeploy: null, healthy: true };
+      }
+    },
   },
   
   // Recursive deployment - auto-improve site based on swarm decisions
