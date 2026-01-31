@@ -1,187 +1,212 @@
 {
-  "timestamp": "2026-01-31T01:40:07.639Z",
-  "markets": [
-    {
-      "id": "517310",
-      "question": "Will Trump deport less than 250,000?",
-      "slug": "will-trump-deport-less-than-250000",
-      "volume24h": 5267.720582000001,
-      "liquidity": 13538.09842,
-      "outcomes": "[\"Yes\", \"No\"]",
-      "prices": "[\"0.0545\", \"0.9455\"]"
-    },
-    {
-      "id": "517311",
-      "question": "Will Trump deport 250,000-500,000 people?",
-      "slug": "will-trump-deport-250000-500000-people",
-      "volume24h": 94316.571097,
-      "liquidity": 3656.28991,
-      "outcomes": "[\"Yes\", \"No\"]",
-      "prices": "[\"0.842\", \"0.158\"]"
-    },
-    {
-      "id": "517313",
-      "question": "Will Trump deport 500,000-750,000- people?",
-      "slug": "will-trump-deport-500000-750000-people",
-      "volume24h": 2519.655384,
-      "liquidity": 2803.51092,
-      "outcomes": "[\"Yes\", \"No\"]",
-      "prices": "[\"0.0855\", \"0.9145\"]"
-    },
-    {
-      "id": "517314",
-      "question": "Will Trump deport 750,000-1,000,000 people?",
-      "slug": "will-trump-deport-750000-1000000-people",
-      "volume24h": 1315.932335,
-      "liquidity": 5917.03119,
-      "outcomes": "[\"Yes\", \"No\"]",
-      "prices": "[\"0.011\", \"0.989\"]"
-    },
-    {
-      "id": "517315",
-      "question": "Will Trump deport 1,000,000-1,250,000 people?",
-      "slug": "will-trump-deport-1000000-1250000-people",
-      "volume24h": 1547.1630000000002,
-      "liquidity": 7312.8705,
-      "outcomes": "[\"Yes\", \"No\"]",
-      "prices": "[\"0.0045\", \"0.9955\"]"
-    },
-    {
-      "id": "517316",
-      "question": "Will Trump deport 1,250,000-1,500,000 people?",
-      "slug": "will-trump-deport-1250000-1500000-people",
-      "volume24h": 1005.7424439999999,
-      "liquidity": 5309.73717,
-      "outcomes": "[\"Yes\", \"No\"]",
-      "prices": "[\"0.0055\", \"0.9945\"]"
-    },
-    {
-      "id": "517317",
-      "question": "Will Trump deport 1,500,000-1,750,000 people?",
-      "slug": "will-trump-deport-1500000-1750000-people",
-      "volume24h": 824.3602499999998,
-      "liquidity": 5201.5993,
-      "outcomes": "[\"Yes\", \"No\"]",
-      "prices": "[\"0.0105\", \"0.9895\"]"
-    },
-    {
-      "id": "517318",
-      "question": "Will Trump deport 1,750,000-2,000,000 people?",
-      "slug": "will-trump-deport-1750000-2000000-people",
-      "volume24h": 2338.802308,
-      "liquidity": 13565.40002,
-      "outcomes": "[\"Yes\", \"No\"]",
-      "prices": "[\"0.005\", \"0.995\"]"
-    },
-    {
-      "id": "517319",
-      "question": "Will Trump deport 2,000,000 or more people?",
-      "slug": "will-trump-deport-2000000-or-more-people",
-      "volume24h": 929.8732209999998,
-      "liquidity": 9821.83671,
-      "outcomes": "[\"Yes\", \"No\"]",
-      "prices": "[\"0.005\", \"0.995\"]"
-    },
-    {
-      "id": "517321",
-      "question": "Will Trump deport 750,000 or more people in 2025?",
-      "slug": "will-trump-deport-750000-or-more-people-in-2025",
-      "volume24h": 369.42724799999996,
-      "liquidity": 932.09315,
-      "outcomes": "[\"Yes\", \"No\"]",
-      "prices": "[\"0.037\", \"0.963\"]"
-    },
-    {
-      "id": "521944",
-      "question": "Will Elon and DOGE cut less than $50b in federal spending in 2025?",
-      "slug": "will-elon-and-doge-cut-less-than-50b-in-federal-spending-in-2025",
-      "volume24h": 962.165878,
-      "liquidity": 2304.64249,
-      "outcomes": "[\"Yes\", \"No\"]",
-      "prices": "[\"0.973\", \"0.027\"]"
-    },
-    {
-      "id": "521945",
-      "question": "Will Elon and DOGE cut between $50-100b in federal spending in 2025?",
-      "slug": "will-elon-and-doge-cut-between-50-100b-in-federal-spending-in-2025",
-      "volume24h": 67.03999999999999,
-      "liquidity": 6983.85884,
-      "outcomes": "[\"Yes\", \"No\"]",
-      "prices": "[\"0.0055\", \"0.9945\"]"
-    },
-    {
-      "id": "521946",
-      "question": "Will Elon and DOGE cut between $100-150b in federal spending in 2025?",
-      "slug": "will-elon-and-doge-cut-between-100-150b-in-federal-spending-in-2025",
-      "volume24h": 0,
-      "liquidity": 8283.09223,
-      "outcomes": "[\"Yes\", \"No\"]",
-      "prices": "[\"0.005\", \"0.995\"]"
-    },
-    {
-      "id": "521947",
-      "question": "Will Elon and DOGE cut between $150-200b in federal spending in 2025?",
-      "slug": "will-elon-and-doge-cut-between-150-200b-in-federal-spending-in-2025",
-      "volume24h": 0,
-      "liquidity": 6220.18108,
-      "outcomes": "[\"Yes\", \"No\"]",
-      "prices": "[\"0.005\", \"0.995\"]"
-    },
-    {
-      "id": "521948",
-      "question": "Will Elon and DOGE cut between $200-250b in federal spending in 2025?",
-      "slug": "will-elon-and-doge-cut-between-200-250b-in-federal-spending-in-2025",
-      "volume24h": 108.91,
-      "liquidity": 8650.99565,
-      "outcomes": "[\"Yes\", \"No\"]",
-      "prices": "[\"0.0055\", \"0.9945\"]"
-    },
-    {
-      "id": "521949",
-      "question": "Will Elon and DOGE cut more than $250b in federal spending in 2025?",
-      "slug": "will-elon-and-doge-cut-more-than-250b-in-federal-spending-in-2025",
-      "volume24h": 382.05,
-      "liquidity": 12835.31559,
-      "outcomes": "[\"Yes\", \"No\"]",
-      "prices": "[\"0.0075\", \"0.9925\"]"
-    },
-    {
-      "id": "521963",
-      "question": "Will Elon cut the budget by at least 10% in 2025?",
-      "slug": "will-elon-cut-the-budget-by-at-least-10-in-2025",
-      "volume24h": 32.28299999999999,
-      "liquidity": 11086.67992,
-      "outcomes": "[\"Yes\", \"No\"]",
-      "prices": "[\"0.011\", \"0.989\"]"
-    },
-    {
-      "id": "521964",
-      "question": "Will Elon cut the budget by at least 5% in 2025?",
-      "slug": "will-elon-cut-the-budget-by-at-least-5-in-2025",
-      "volume24h": 866.5123079999998,
-      "liquidity": 5165.70707,
-      "outcomes": "[\"Yes\", \"No\"]",
-      "prices": "[\"0.0345\", \"0.9655\"]"
-    },
-    {
-      "id": "526939",
-      "question": "Brazil unemployment below 6.3% for Q4 2025?",
-      "slug": "brazil-unemployment-below-6pt3-for-q4-2025",
-      "volume24h": 1202.032173,
-      "liquidity": 858.16721,
-      "outcomes": "[\"Yes\", \"No\"]",
-      "prices": "[\"0.9535\", \"0.0465\"]"
-    },
-    {
-      "id": "527079",
-      "question": "Will GTA 6 cost $100+?",
-      "slug": "will-gta-6-cost-100",
-      "volume24h": 59333.787052000065,
-      "liquidity": 67062.66165,
-      "outcomes": "[\"Yes\", \"No\"]",
-      "prices": "[\"0.0105\", \"0.9895\"]"
-    }
-  ],
-  "_lastUpdated": "2026-01-31T01:40:07.639Z",
-  "_source": "integrated-crawler"
+  "crawler": "polymarket",
+  "timestamp": "2026-01-31T06:03:34.898Z",
+  "data": {
+    "markets": [
+      {
+        "id": "572473",
+        "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
+        "slug": "will-trump-nominate-judy-shelton-as-the-next-fed-chair",
+        "volume24h": 19241991.11467906,
+        "liquidity": "1032134.78359",
+        "endDate": "2026-12-31T00:00:00Z",
+        "outcomePrices": "[\"0.0065\", \"0.9935\"]"
+      },
+      {
+        "id": "680392",
+        "question": "US government shutdown Saturday?",
+        "slug": "will-there-be-another-us-government-shutdown-by-january-31",
+        "volume24h": 10363222.669675011,
+        "liquidity": "1610151.64643",
+        "endDate": "2026-01-31T00:00:00Z",
+        "outcomePrices": "[\"0.9995\", \"0.0005\"]"
+      },
+      {
+        "id": "572469",
+        "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
+        "slug": "will-trump-nominate-kevin-warsh-as-the-next-fed-chair",
+        "volume24h": 9920924.411320025,
+        "liquidity": "276756.60091",
+        "endDate": "2026-12-31T00:00:00Z",
+        "outcomePrices": "[\"0.9815\", \"0.0185\"]"
+      },
+      {
+        "id": "572485",
+        "question": "Will Trump nominate Rick Rieder as the next Fed chair?",
+        "slug": "will-trump-nominate-rick-rieder-as-the-next-fed-chair",
+        "volume24h": 5906046.784228002,
+        "liquidity": "195711.97671",
+        "endDate": "2026-12-31T00:00:00Z",
+        "outcomePrices": "[\"0.0025\", \"0.9975\"]"
+      },
+      {
+        "id": "572486",
+        "question": "Will Trump nominate Michelle Bowman as the next Fed chair?",
+        "slug": "will-trump-nominate-michelle-bowman-as-the-next-fed-chair",
+        "volume24h": 4943250.794920001,
+        "liquidity": "200178.73676",
+        "endDate": "2026-12-31T00:00:00Z",
+        "outcomePrices": "[\"0.0025\", \"0.9975\"]"
+      },
+      {
+        "id": "572471",
+        "question": "Will Trump nominate Christopher Waller as the next Fed chair?",
+        "slug": "will-trump-nominate-christopher-waller-as-the-next-fed-chair",
+        "volume24h": 4734712.4980329955,
+        "liquidity": "167633.48321",
+        "endDate": "2026-12-31T00:00:00Z",
+        "outcomePrices": "[\"0.0025\", \"0.9975\"]"
+      },
+      {
+        "id": "572481",
+        "question": "Will Trump nominate Scott Bessent as the next Fed chair?",
+        "slug": "will-trump-nominate-scott-bessent-as-the-next-fed-chair",
+        "volume24h": 4256383.031711002,
+        "liquidity": "603289.22938",
+        "endDate": "2026-12-31T00:00:00Z",
+        "outcomePrices": "[\"0.0005\", \"0.9995\"]"
+      },
+      {
+        "id": "572470",
+        "question": "Will Trump nominate Kevin Hassett as the next Fed chair?",
+        "slug": "will-trump-nominate-kevin-hassett-as-the-next-fed-chair",
+        "volume24h": 4166405.160061998,
+        "liquidity": "573675.48877",
+        "endDate": "2026-12-31T00:00:00Z",
+        "outcomePrices": "[\"0.0005\", \"0.9995\"]"
+      },
+      {
+        "id": "1092199",
+        "question": "US strikes Iran by January 31, 2026?",
+        "slug": "us-strikes-iran-by-january-31-2026-165",
+        "volume24h": 3737637.925115999,
+        "liquidity": "268707.3514",
+        "endDate": "2026-01-31T00:00:00Z",
+        "outcomePrices": "[\"0.055\", \"0.945\"]"
+      },
+      {
+        "id": "565930",
+        "question": "Tesla launches unsupervised full self driving (FSD) by June 30?",
+        "slug": "tesla-launches-unsupervised-full-self-driving-fsd-by-october-31-717-337",
+        "volume24h": 3375128.0833139997,
+        "liquidity": "2741450.95529",
+        "endDate": "2026-06-30T00:00:00Z",
+        "outcomePrices": "[\"0.9985\", \"0.0015\"]"
+      },
+      {
+        "id": "1258607",
+        "question": "Clippers vs. Nuggets",
+        "slug": "nba-lac-den-2026-01-30",
+        "volume24h": 2572428.4995829957,
+        "liquidity": "1295133.08969",
+        "endDate": "2026-01-31T02:00:00Z",
+        "outcomePrices": "[\"0.0005\", \"0.9995\"]"
+      },
+      {
+        "id": "1258604",
+        "question": "Nets vs. Jazz",
+        "slug": "nba-bkn-uta-2026-01-30",
+        "volume24h": 2108961.9061510065,
+        "liquidity": "1802626.80078",
+        "endDate": "2026-01-31T02:30:00Z",
+        "outcomePrices": "[\"0.9995\", \"0.0005\"]"
+      },
+      {
+        "id": "654415",
+        "question": "Will the Fed increase interest rates by 25+ bps after the March 2026 meeting?",
+        "slug": "will-the-fed-increase-interest-rates-by-25-bps-after-the-march-2026-meeting",
+        "volume24h": 1927728.3117109973,
+        "liquidity": "1845815.75686",
+        "endDate": "2026-03-18T00:00:00Z",
+        "outcomePrices": "[\"0.0075\", \"0.9925\"]"
+      },
+      {
+        "id": "1252879",
+        "question": "US strikes Iran by January 30, 2026?",
+        "slug": "us-strikes-iran-by-january-30-2026-273-584-555-114-476",
+        "volume24h": 1747391.0493460004,
+        "liquidity": "86565.47745",
+        "endDate": "2026-01-31T00:00:00Z",
+        "outcomePrices": "[\"0.0005\", \"0.9995\"]"
+      },
+      {
+        "id": "654412",
+        "question": "Will the Fed decrease interest rates by 50+ bps after the March 2026 meeting?",
+        "slug": "will-the-fed-decrease-interest-rates-by-50-bps-after-the-march-2026-meeting",
+        "volume24h": 1717918.5872149998,
+        "liquidity": "877833.36808",
+        "endDate": "2026-03-18T00:00:00Z",
+        "outcomePrices": "[\"0.0145\", \"0.9855\"]"
+      },
+      {
+        "id": "561236",
+        "question": "Will Gretchen Whitmer win the 2028 US Presidential Election?",
+        "slug": "will-gretchen-whitmer-win-the-2028-us-presidential-election",
+        "volume24h": 1527992.7673240006,
+        "liquidity": "409478.66189",
+        "endDate": "2028-11-07T00:00:00Z",
+        "outcomePrices": "[\"0.014\", \"0.986\"]"
+      },
+      {
+        "id": "1258602",
+        "question": "Cavaliers vs. Suns",
+        "slug": "nba-cle-phx-2026-01-30",
+        "volume24h": 1498239.608509007,
+        "liquidity": "712938.05349",
+        "endDate": "2026-01-31T02:00:00Z",
+        "outcomePrices": "[\"0.0005\", \"0.9995\"]"
+      },
+      {
+        "id": "1273683",
+        "question": "Will the US not strike another country before 2027?",
+        "slug": "will-the-us-not-strike-another-country-before-2027-472",
+        "volume24h": 1413147.5,
+        "liquidity": "14807120.24973",
+        "endDate": "2026-12-31T00:00:00Z",
+        "outcomePrices": "[\"0.0005\", \"0.9995\"]"
+      },
+      {
+        "id": "1258612",
+        "question": "Pistons vs. Warriors",
+        "slug": "nba-det-gsw-2026-01-30",
+        "volume24h": 1405276.4697480022,
+        "liquidity": "2469315.50176",
+        "endDate": "2026-01-31T03:00:00Z",
+        "outcomePrices": "[\"0.9995\", \"0.0005\"]"
+      },
+      {
+        "id": "1082781",
+        "question": "Will Bitcoin reach $100,000 in January?",
+        "slug": "will-bitcoin-reach-100k-in-january-2026",
+        "volume24h": 1363674.213277002,
+        "liquidity": "162087.17043",
+        "endDate": "2026-02-01T05:00:00Z",
+        "outcomePrices": "[\"0.0015\", \"0.9985\"]"
+      }
+    ],
+    "trending": [
+      {
+        "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
+        "volume": 19241991.11467906
+      },
+      {
+        "question": "US government shutdown Saturday?",
+        "volume": 10363222.669675011
+      },
+      {
+        "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
+        "volume": 9920924.411320025
+      },
+      {
+        "question": "Will Trump nominate Rick Rieder as the next Fed chair?",
+        "volume": 5906046.784228002
+      },
+      {
+        "question": "Will Trump nominate Michelle Bowman as the next Fed chair?",
+        "volume": 4943250.794920001
+      }
+    ],
+    "volume24h": 87928461.38592212,
+    "fetchedAt": "2026-01-31T06:03:34.734Z"
+  }
 }

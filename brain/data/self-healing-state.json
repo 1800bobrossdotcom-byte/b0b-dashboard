@@ -1,6 +1,6 @@
 {
   "running": true,
-  "lastCheck": "2026-01-31T05:37:44.759Z",
+  "lastCheck": "2026-01-31T06:04:36.431Z",
   "healingActions": [
     {
       "timestamp": "2026-01-31T00:07:40.707Z",
@@ -5473,12 +5473,456 @@
       "file": "library-sync.json",
       "crawler": "library-sync-crawler.js",
       "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:38:36.284Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:38:52.236Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:39:24.329Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:39:40.222Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:40:13.306Z",
+      "file": "d0t-signals.json",
+      "crawler": "d0t-signals.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:40:15.392Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:40:21.809Z",
+      "file": "x-conversations.json",
+      "crawler": "x-conversation-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:40:37.822Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:41:09.915Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:41:25.951Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:41:58.046Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:42:14.153Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:42:47.524Z",
+      "file": "d0t-signals.json",
+      "crawler": "d0t-signals.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:42:49.605Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:43:05.560Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:43:37.660Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:43:53.683Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:44:25.783Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:44:41.482Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:45:14.602Z",
+      "file": "d0t-signals.json",
+      "crawler": "d0t-signals.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:45:16.698Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:45:32.620Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:46:04.719Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:46:11.022Z",
+      "file": "x-conversations.json",
+      "crawler": "x-conversation-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:46:27.063Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:46:59.152Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:47:15.064Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:47:48.432Z",
+      "file": "d0t-signals.json",
+      "crawler": "d0t-signals.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:47:50.519Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:48:06.333Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:48:38.426Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:48:54.446Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:49:26.559Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:49:42.577Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:49:45.311Z",
+      "file": "r0ss-research.json",
+      "crawler": "r0ss-research.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:49:50.288Z",
+      "file": "b0b-creative.json",
+      "crawler": "b0b-creative.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:50:23.232Z",
+      "file": "d0t-signals.json",
+      "crawler": "d0t-signals.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:50:25.316Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:50:41.381Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:51:13.468Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:51:19.791Z",
+      "file": "x-conversations.json",
+      "crawler": "x-conversation-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:51:35.581Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:52:07.677Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:52:23.494Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:52:56.991Z",
+      "file": "d0t-signals.json",
+      "crawler": "d0t-signals.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:52:59.079Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:53:15.346Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:54:01.122Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:54:48.855Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:55:21.946Z",
+      "file": "d0t-signals.json",
+      "crawler": "d0t-signals.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:55:39.500Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:56:26.905Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:57:03.256Z",
+      "file": "x-conversations.json",
+      "crawler": "x-conversation-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:57:19.072Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:57:52.026Z",
+      "file": "d0t-signals.json",
+      "crawler": "d0t-signals.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:57:54.114Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:58:11.042Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:58:43.137Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:59:01.453Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:59:33.554Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T05:59:50.703Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T06:00:24.001Z",
+      "file": "d0t-signals.json",
+      "crawler": "d0t-signals.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T06:00:26.089Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T06:00:43.783Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T06:01:15.868Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T06:01:31.887Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T06:02:03.988Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T06:02:10.321Z",
+      "file": "x-conversations.json",
+      "crawler": "x-conversation-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T06:02:27.279Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T06:03:00.271Z",
+      "file": "d0t-signals.json",
+      "crawler": "d0t-signals.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T06:03:02.364Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T06:03:18.091Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T06:04:04.405Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T06:04:50.410Z",
+      "file": "library-sync.json",
+      "crawler": "library-sync-crawler.js",
+      "success": true
     }
   ],
   "crawlerProcesses": [],
   "stats": {
-    "checks": 453,
-    "heals": 912,
+    "checks": 485,
+    "heals": 986,
     "failures": 0
   }
 }

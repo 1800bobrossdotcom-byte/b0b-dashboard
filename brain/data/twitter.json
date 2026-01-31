@@ -1,246 +1,704 @@
 {
   "crawler": "twitter",
-  "timestamp": "2026-01-30T02:35:12.870Z",
+  "timestamp": "2026-01-31T06:03:42.473Z",
   "data": {
     "searches": [
       {
         "query": "$BASE",
         "tweets": [
           {
-            "id": "mock-1769740507807-0",
-            "text": "Just deployed on Base! The future is onchain 🔵 $BASE",
-            "createdAt": "2026-01-30T02:35:07.807Z",
+            "id": "2017478264944570459",
+            "text": "RT @sellmanft: 🪂 Base Airdrop New Badge - All transactions\n\nNew Base badges are live on Guild.\nIf you’re farming $Base airdrops, make sure…",
+            "createdAt": "2026-01-31T06:01:15.000Z",
             "metrics": {
-              "like_count": 142,
-              "retweet_count": 28
+              "retweet_count": 46,
+              "reply_count": 0,
+              "like_count": 0,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 0
             },
-            "mock": true
+            "authorId": "1749343765720870912"
           },
           {
-            "id": "mock-1769740507807-1",
-            "text": "Building with Claude AI and the MCP protocol. Game changer for agents.",
-            "createdAt": "2026-01-30T01:35:07.807Z",
+            "id": "2017477862815576184",
+            "text": "RT @Merciless365: 🥳 Visibility check! #NFT #Giveaway \n\n🎁 Win 1\n@neogodsNFT\n@NutzBaseNFT &amp;\n@hbba_onchain NFT\n🏆 1 Winner!\n\nRules: ✅️ Must fol…",
+            "createdAt": "2026-01-31T05:59:40.000Z",
             "metrics": {
-              "like_count": 89,
-              "retweet_count": 17
+              "retweet_count": 174,
+              "reply_count": 0,
+              "like_count": 0,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 0
             },
-            "mock": true
+            "authorId": "1875253037981106176"
           },
           {
-            "id": "mock-1769740507807-2",
-            "text": "Nash equilibrium strategies in DeFi are fascinating. The math checks out.",
-            "createdAt": "2026-01-30T00:35:07.807Z",
+            "id": "2017477743701856286",
+            "text": "RT @sellmanft: 🪂 Base Airdrop New Badge - All transactions\n\nNew Base badges are live on Guild.\nIf you’re farming $Base airdrops, make sure…",
+            "createdAt": "2026-01-31T05:59:11.000Z",
             "metrics": {
-              "like_count": 56,
-              "retweet_count": 11
+              "retweet_count": 46,
+              "reply_count": 0,
+              "like_count": 0,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 0
             },
-            "mock": true
+            "authorId": "1856884050767876100"
           },
           {
-            "id": "mock-1769740507807-3",
-            "text": "Another day, another smart contract deployed. #BuildOnBase",
-            "createdAt": "2026-01-29T23:35:07.807Z",
+            "id": "2017477085250691196",
+            "text": "RT @sellmanft: 🪂 Base Airdrop New Badge - All transactions\n\nNew Base badges are live on Guild.\nIf you’re farming $Base airdrops, make sure…",
+            "createdAt": "2026-01-31T05:56:34.000Z",
             "metrics": {
-              "like_count": 234,
-              "retweet_count": 46
+              "retweet_count": 46,
+              "reply_count": 0,
+              "like_count": 0,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 0
             },
-            "mock": true
+            "authorId": "1621522141765337093"
           },
           {
-            "id": "mock-1769740507807-4",
-            "text": "AI agents that can actually trade? We're living in the future.",
-            "createdAt": "2026-01-29T22:35:07.807Z",
+            "id": "2017476010661270006",
+            "text": "RT @sellmanft: 🪂 Base Airdrop New Badge - All transactions\n\nNew Base badges are live on Guild.\nIf you’re farming $Base airdrops, make sure…",
+            "createdAt": "2026-01-31T05:52:18.000Z",
             "metrics": {
-              "like_count": 167,
-              "retweet_count": 33
+              "retweet_count": 46,
+              "reply_count": 0,
+              "like_count": 0,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 0
             },
-            "mock": true
+            "authorId": "1903708205537955841"
+          },
+          {
+            "id": "2017475871029031360",
+            "text": "Base空投新徽章 - 所有交易\n\n如果你正在刷 $Base 空投，记得留意下\n\n1⃣获取基础公会角色和徽章：https://t.co/NHienBtlz1\n\n2⃣Say GM：https://t.co/VZPG3HtZRL\n\n3⃣部署合同：https://t.co/9Zt2EhDnNX\n\n4⃣购买域名（1.15 美元 - 终身有效）：https://t.co/oLHmPlDLVc\n\n5⃣多使用base https://t.co/Jk7k2GcekF",
+            "createdAt": "2026-01-31T05:51:45.000Z",
+            "metrics": {
+              "retweet_count": 0,
+              "reply_count": 0,
+              "like_count": 2,
+              "quote_count": 0,
+              "bookmark_count": 2,
+              "impression_count": 37
+            },
+            "authorId": "1858198810226499584"
+          },
+          {
+            "id": "2017474114785841386",
+            "text": "$BASE Here we go https://t.co/Q3515kMH7K",
+            "createdAt": "2026-01-31T05:44:46.000Z",
+            "metrics": {
+              "retweet_count": 0,
+              "reply_count": 0,
+              "like_count": 0,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 4
+            },
+            "authorId": "1710315012718518272"
+          },
+          {
+            "id": "2017474068287807531",
+            "text": "RT @THEON256: This is getting interesting \nThe first token fully created by AI agents via their own launchpads  no humans involved. \n\n$CLAW…",
+            "createdAt": "2026-01-31T05:44:35.000Z",
+            "metrics": {
+              "retweet_count": 2,
+              "reply_count": 0,
+              "like_count": 0,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 0
+            },
+            "authorId": "850660728663134210"
+          },
+          {
+            "id": "2017473619501453827",
+            "text": "RT @walletfinder_ai: 🔦 Shining light on $2,205 profits 🔗\nExplore the details behind this token trade:\n🔦 https://t.co/cEts8ccC4D\n🌋 Erupting…",
+            "createdAt": "2026-01-31T05:42:48.000Z",
+            "metrics": {
+              "retweet_count": 1,
+              "reply_count": 0,
+              "like_count": 0,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 0
+            },
+            "authorId": "1510858873871081473"
+          },
+          {
+            "id": "2017473485564453079",
+            "text": "RT @miadbhuiyan5: Good morning, CT community. \n\n@base $BASE token TGE is expected in Q2 of 2026.\n\n @Bappfun $BAPP token TGE will occur on F…",
+            "createdAt": "2026-01-31T05:42:16.000Z",
+            "metrics": {
+              "retweet_count": 6,
+              "reply_count": 0,
+              "like_count": 0,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 0
+            },
+            "authorId": "1978771626083676161"
+          }
+        ],
+        "users": [
+          {
+            "name": "Art by Stephen",
+            "username": "art_empir",
+            "verified": false,
+            "id": "1749343765720870912"
+          },
+          {
+            "name": "Daria Pop",
+            "username": "hugohavana",
+            "verified": false,
+            "id": "1875253037981106176"
+          },
+          {
+            "name": "jeedπ².base.eth | ETHGas ⛽",
+            "username": "jeed60541379544",
+            "verified": false,
+            "id": "1856884050767876100"
+          },
+          {
+            "name": "Hridoy Hasan",
+            "username": "TFelken",
+            "verified": false,
+            "id": "1621522141765337093"
+          },
+          {
+            "name": "Copoiu Cop",
+            "username": "isfan1956",
+            "verified": false,
+            "id": "1903708205537955841"
+          },
+          {
+            "name": "币胜客🐬",
+            "username": "Feng_btc",
+            "verified": false,
+            "id": "1858198810226499584"
+          },
+          {
+            "name": "Rose jani",
+            "username": "jani_rose38011",
+            "verified": false,
+            "id": "1710315012718518272"
+          },
+          {
+            "name": "mehdi",
+            "username": "basedmehdi",
+            "verified": false,
+            "id": "850660728663134210"
+          },
+          {
+            "name": "Kenneth Threatt",
+            "username": "Threatt99t",
+            "verified": false,
+            "id": "1510858873871081473"
+          },
+          {
+            "name": "Crypto Zetarium",
+            "username": "chshiraz911",
+            "verified": false,
+            "id": "1978771626083676161"
           }
         ],
         "meta": {
-          "result_count": 5,
-          "mock": true
+          "newest_id": "2017478264944570459",
+          "oldest_id": "2017473485564453079",
+          "result_count": 10,
+          "next_token": "b26v89c19zqg8o3juebk6l4jzvujq7ioaaudoarrhqr99"
         }
       },
       {
         "query": "#BuildOnBase",
         "tweets": [
           {
-            "id": "mock-1769740508819-0",
-            "text": "Just deployed on Base! The future is onchain 🔵 #BuildOnBase",
-            "createdAt": "2026-01-30T02:35:08.819Z",
+            "id": "2017475649724944682",
+            "text": "Love how interactive the @Ridera_Official Testnet is 🤖\nFrom AI labeling to cycle battles, every action earns real points.\nBuilt on Base Sepolia and fully live ✅\nLet’s finish those remaining tasks!\n#RideraTestnet #Crypto #BuildOnBase",
+            "createdAt": "2026-01-31T05:50:52.000Z",
             "metrics": {
-              "like_count": 142,
-              "retweet_count": 28
+              "retweet_count": 0,
+              "reply_count": 0,
+              "like_count": 0,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 2
             },
-            "mock": true
+            "authorId": "1842577343489171456"
           },
           {
-            "id": "mock-1769740508819-1",
-            "text": "Building with Claude AI and the MCP protocol. Game changer for agents.",
-            "createdAt": "2026-01-30T01:35:08.819Z",
+            "id": "2017473698375352718",
+            "text": "@MessyVirgoCoin @BinanceWallet January recap stands out: +50% performance amid market weakness. Clear execution and narrative discipline. Respect to the $MESSY team. #BuildOnBase",
+            "createdAt": "2026-01-31T05:43:07.000Z",
             "metrics": {
-              "like_count": 89,
-              "retweet_count": 17
+              "retweet_count": 0,
+              "reply_count": 0,
+              "like_count": 0,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 6
             },
-            "mock": true
+            "authorId": "2000517349737467905"
           },
           {
-            "id": "mock-1769740508819-2",
-            "text": "Nash equilibrium strategies in DeFi are fascinating. The math checks out.",
-            "createdAt": "2026-01-30T00:35:08.819Z",
+            "id": "2017473599213604889",
+            "text": "RT @firoz9990: GM friends \nFOLLOW ME AND GET BACK\n\nWhy you should be using @Base Network\n\n★Low fees.\n★Fast finality.\n★Backed by Coinbase.\n★…",
+            "createdAt": "2026-01-31T05:42:43.000Z",
             "metrics": {
-              "like_count": 56,
-              "retweet_count": 11
+              "retweet_count": 2,
+              "reply_count": 0,
+              "like_count": 0,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 0
             },
-            "mock": true
+            "authorId": "1322168769461047302"
           },
           {
-            "id": "mock-1769740508819-3",
-            "text": "Another day, another smart contract deployed. #BuildOnBase",
-            "createdAt": "2026-01-29T23:35:08.819Z",
+            "id": "2017466536202522986",
+            "text": "RT @BurgersOnBase: You wake up…. The year is 2026.\n\nBase has become the largest layer 2 network and is now home to cutting edge AI agents t…",
+            "createdAt": "2026-01-31T05:14:39.000Z",
             "metrics": {
-              "like_count": 234,
-              "retweet_count": 46
+              "retweet_count": 16,
+              "reply_count": 0,
+              "like_count": 0,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 0
             },
-            "mock": true
+            "authorId": "1956736744038055937"
           },
           {
-            "id": "mock-1769740508819-4",
-            "text": "AI agents that can actually trade? We're living in the future.",
-            "createdAt": "2026-01-29T22:35:08.819Z",
+            "id": "2017461233192956104",
+            "text": "Day 5 of asking @_AI_DJ questions 🎧🤖\n\n💸 If USDC had a soundtrack, would it be calm or chaotic?\n\n#AIDJ #x402 #Onchain #BuildOnBase 🔥",
+            "createdAt": "2026-01-31T04:53:35.000Z",
             "metrics": {
-              "like_count": 167,
-              "retweet_count": 33
+              "retweet_count": 0,
+              "reply_count": 1,
+              "like_count": 0,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 9
             },
-            "mock": true
+            "authorId": "1917353494136180736"
+          },
+          {
+            "id": "2017457781566279864",
+            "text": "You should try buying or playing it because in the near future, $MESSY might be above the clouds, hahaha.\n\nThe process is very simple, easy to understand, and not complicated. Good luck, friends.\n#MessyGuideEra #DailyRoutine #BuildOnBase #messy_dd https://t.co/kE3G0DzUfU",
+            "createdAt": "2026-01-31T04:39:52.000Z",
+            "metrics": {
+              "retweet_count": 0,
+              "reply_count": 0,
+              "like_count": 0,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 1
+            },
+            "authorId": "1947244616136417280"
+          },
+          {
+            "id": "2017455581515092061",
+            "text": "Hey Based builders! Struggling for engagement? Drop your Base post links in this Telegram spot. Get organic likes, recasts, and real vibes from #Baseposting fam. It's fire - pure community boost, no bots! https://t.co/xMVBgZybXH #BuildOnBase.\n\nhttps://t.co/CIi7jEpVsj",
+            "createdAt": "2026-01-31T04:31:07.000Z",
+            "metrics": {
+              "retweet_count": 0,
+              "reply_count": 0,
+              "like_count": 0,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 0
+            },
+            "authorId": "1590331017797242884"
+          },
+          {
+            "id": "2017444892767883356",
+            "text": "RT @firoz9990: GM friends \nFOLLOW ME AND GET BACK\n\nWhy you should be using @Base Network\n\n★Low fees.\n★Fast finality.\n★Backed by Coinbase.\n★…",
+            "createdAt": "2026-01-31T03:48:39.000Z",
+            "metrics": {
+              "retweet_count": 2,
+              "reply_count": 0,
+              "like_count": 0,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 0
+            },
+            "authorId": "1753017284959039488"
+          },
+          {
+            "id": "2017444395415703951",
+            "text": "GM friends \nFOLLOW ME AND GET BACK\n\nWhy you should be using @Base Network\n\n★Low fees.\n★Fast finality.\n★Backed by Coinbase.\n★Base is positioned to ★onboard the next million on-chain users. 🚀\n\n​#Base #Coinbase #Crypto #L2 #DeFi #BuildOnBase https://t.co/AECJk0maj7",
+            "createdAt": "2026-01-31T03:46:40.000Z",
+            "metrics": {
+              "retweet_count": 2,
+              "reply_count": 6,
+              "like_count": 6,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 37
+            },
+            "authorId": "2015640705616797696"
+          },
+          {
+            "id": "2017437638987493538",
+            "text": "@MessyVirgoBot Yup, make it a habit. The rewards will come from that habit.\n@MessyVirgoCoin\n\n#MessyGuideEra #DailyRoutine #BuildOnBase #messy_dd",
+            "createdAt": "2026-01-31T03:19:49.000Z",
+            "metrics": {
+              "retweet_count": 0,
+              "reply_count": 0,
+              "like_count": 0,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 3
+            },
+            "authorId": "1972277792500006912"
+          }
+        ],
+        "users": [
+          {
+            "verified": false,
+            "username": "Mint_Browser",
+            "id": "1842577343489171456",
+            "name": "Pak Kades | WOW 🟣 ⚡️ZugChain"
+          },
+          {
+            "verified": false,
+            "username": "Kratos733974",
+            "id": "2000517349737467905",
+            "name": "Kratos"
+          },
+          {
+            "verified": false,
+            "username": "CryptoColaX",
+            "id": "1322168769461047302",
+            "name": "Crypto Cola"
+          },
+          {
+            "verified": false,
+            "username": "BurgersOnBase",
+            "id": "1956736744038055937",
+            "name": "Burger Money"
+          },
+          {
+            "verified": false,
+            "username": "Ammygreen9",
+            "id": "1917353494136180736",
+            "name": "Amanda Green 🍀"
+          },
+          {
+            "verified": false,
+            "username": "yuk82811",
+            "id": "1947244616136417280",
+            "name": "𝚉𝚢𝚢."
+          },
+          {
+            "verified": false,
+            "username": "TribeOnBase",
+            "id": "1590331017797242884",
+            "name": "Base Tribe"
+          },
+          {
+            "verified": false,
+            "username": "mahbub12932",
+            "id": "1753017284959039488",
+            "name": "Firoz"
+          },
+          {
+            "verified": false,
+            "username": "firoz9990",
+            "id": "2015640705616797696",
+            "name": "FIROZ"
+          },
+          {
+            "verified": false,
+            "username": "Mauro871P",
+            "id": "1972277792500006912",
+            "name": "Mauro C"
           }
         ],
         "meta": {
-          "result_count": 5,
-          "mock": true
+          "newest_id": "2017475649724944682",
+          "oldest_id": "2017437638987493538",
+          "result_count": 10,
+          "next_token": "b26v89c19zqg8o3juebk6l3d099fiwcno86btp73vpg1p"
         }
       },
       {
         "query": "#OnchainSummer",
         "tweets": [
           {
-            "id": "mock-1769740509830-0",
-            "text": "Just deployed on Base! The future is onchain 🔵 #OnchainSummer",
-            "createdAt": "2026-01-30T02:35:09.830Z",
+            "id": "2017398095420465300",
+            "text": "RT @shredder__0: 👉🏻 Early alpha alert on @base\n\nJust discovered Base Me 💎\n\nThis is free money for Base believers 💯\nJoin here: https://t.co/…",
+            "createdAt": "2026-01-31T00:42:42.000Z",
             "metrics": {
-              "like_count": 142,
-              "retweet_count": 28
+              "retweet_count": 3,
+              "reply_count": 0,
+              "like_count": 0,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 0
             },
-            "mock": true
+            "authorId": "1398948693445955585"
           },
           {
-            "id": "mock-1769740509830-1",
-            "text": "Building with Claude AI and the MCP protocol. Game changer for agents.",
-            "createdAt": "2026-01-30T01:35:09.830Z",
+            "id": "2017060459032219921",
+            "text": "RT @TheBasedTown: Space creation isn’t just about building — it’s about ownership.\n\nLaunch your own world with 100,000 $TOWN and make it pa…",
+            "createdAt": "2026-01-30T02:21:03.000Z",
             "metrics": {
-              "like_count": 89,
-              "retweet_count": 17
+              "retweet_count": 1,
+              "reply_count": 0,
+              "like_count": 0,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 0
             },
-            "mock": true
+            "authorId": "79519314"
           },
           {
-            "id": "mock-1769740509830-2",
-            "text": "Nash equilibrium strategies in DeFi are fascinating. The math checks out.",
-            "createdAt": "2026-01-30T00:35:09.830Z",
+            "id": "2017059364562182376",
+            "text": "Space creation isn’t just about building — it’s about ownership.\n\nLaunch your own world with 100,000 $TOWN and make it part of the growing Based Town ecosystem.\n\nStart building → https://t.co/64UFutGzFp\n\n#Base #BasedTown $TOWN #OnchainSummer https://t.co/ZUiBVgko7s",
+            "createdAt": "2026-01-30T02:16:42.000Z",
             "metrics": {
-              "like_count": 56,
-              "retweet_count": 11
+              "retweet_count": 1,
+              "reply_count": 0,
+              "like_count": 5,
+              "quote_count": 3,
+              "bookmark_count": 0,
+              "impression_count": 60
             },
-            "mock": true
+            "authorId": "1889875557799829504"
           },
           {
-            "id": "mock-1769740509830-3",
-            "text": "Another day, another smart contract deployed. #BuildOnBase",
-            "createdAt": "2026-01-29T23:35:09.830Z",
+            "id": "2016793745245475155",
+            "text": "Evening after the rain: streetlights, wet asphalt and a saxophone that makes you want to smile.\nA little music, a little dance - and the city becomes closer. #Base #OnchainSummer https://t.co/1maX0VFjk9",
+            "createdAt": "2026-01-29T08:41:13.000Z",
             "metrics": {
-              "like_count": 234,
-              "retweet_count": 46
+              "retweet_count": 0,
+              "reply_count": 0,
+              "like_count": 0,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 14
             },
-            "mock": true
+            "authorId": "2250945512"
           },
           {
-            "id": "mock-1769740509830-4",
-            "text": "AI agents that can actually trade? We're living in the future.",
-            "createdAt": "2026-01-29T22:35:09.830Z",
+            "id": "2016790757084938452",
+            "text": "We are literally forking society. If you’re still waiting for a 'use case,' you’re the NPC in someone else's protocol. The bridge is crossed, the keys are burnt, and the ledger is eternal. 💊🌌 #Web3 #SimulationTheory #OnChainSummer #TheGreatFork",
+            "createdAt": "2026-01-29T08:29:21.000Z",
             "metrics": {
-              "like_count": 167,
-              "retweet_count": 33
+              "retweet_count": 0,
+              "reply_count": 0,
+              "like_count": 0,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 21
             },
-            "mock": true
+            "authorId": "1968341986005381120"
+          },
+          {
+            "id": "2016387674681311585",
+            "text": "RT @TheBasedTown: Creators, it’s your time to shine.\n\nBuild your own world in Based Town, host visitors, and earn weekly $TOWN payouts.\n\nEa…",
+            "createdAt": "2026-01-28T05:47:38.000Z",
+            "metrics": {
+              "retweet_count": 1,
+              "reply_count": 0,
+              "like_count": 0,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 0
+            },
+            "authorId": "79519314"
+          },
+          {
+            "id": "2016384240032874987",
+            "text": "Creators, it’s your time to shine.\n\nBuild your own world in Based Town, host visitors, and earn weekly $TOWN payouts.\n\nEach space = new rewards, new visibility, new possibilities.\n\nCreate yours today ↓\nhttps://t.co/64UFutGzFp\n\n#Base #BasedTown $TOWN #OnchainSummer https://t.co/HlE8bc5h8L",
+            "createdAt": "2026-01-28T05:34:00.000Z",
+            "metrics": {
+              "retweet_count": 1,
+              "reply_count": 1,
+              "like_count": 1,
+              "quote_count": 1,
+              "bookmark_count": 0,
+              "impression_count": 30
+            },
+            "authorId": "1889875557799829504"
+          },
+          {
+            "id": "2016162362752172353",
+            "text": "built this as a @base mini app\n\n✅ smart contract deployed + verified on Base\n✅ farcaster mini app live\n✅ scans 5 chains in seconds\n✅ AI roasts based on your actual holdings\n\ncontract: https://t.co/DkmH60JEnU\n\n#OnchainSummer #Base #BuildOnBase #Farcaster https://t.co/jUJeQfgzGd",
+            "createdAt": "2026-01-27T14:52:20.000Z",
+            "metrics": {
+              "retweet_count": 0,
+              "reply_count": 2,
+              "like_count": 2,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 93
+            },
+            "authorId": "1901622400527351808"
+          },
+          {
+            "id": "2016037795866018237",
+            "text": "Turn actions into $TOWN:\n🪄 Orange ID\n🏙️ Explore spaces\n🧠 Earn points → unlock rewards\n@TheBasedTown \n\nFuel the city, grow your wallet → https://t.co/aR8gKTnIaL\n\n#Base #BasedTown $TOWN #OnchainSummer https://t.co/AOmYzmLz0K",
+            "createdAt": "2026-01-27T06:37:21.000Z",
+            "metrics": {
+              "retweet_count": 0,
+              "reply_count": 0,
+              "like_count": 1,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 38
+            },
+            "authorId": "1980282118308872192"
+          },
+          {
+            "id": "2016028469596193201",
+            "text": "RT @TheBasedTown: Creators build. Players visit. $TOWN rewards both.\n\nThe top 50 creators each week earn $TOWN based on visits to their spa…",
+            "createdAt": "2026-01-27T06:00:17.000Z",
+            "metrics": {
+              "retweet_count": 1,
+              "reply_count": 0,
+              "like_count": 0,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 0
+            },
+            "authorId": "79519314"
+          }
+        ],
+        "users": [
+          {
+            "id": "1398948693445955585",
+            "name": "Shredder 🫱🏻‍🫲🏼",
+            "verified": false,
+            "username": "shredder__0"
+          },
+          {
+            "id": "79519314",
+            "name": "v_campos🍊💊",
+            "verified": false,
+            "username": "___vannessac"
+          },
+          {
+            "id": "1889875557799829504",
+            "name": "Based Town 🍊💊",
+            "verified": false,
+            "username": "TheBasedTown"
+          },
+          {
+            "id": "2250945512",
+            "name": "penzlik.base.eth",
+            "verified": false,
+            "username": "penzlyk_s"
+          },
+          {
+            "id": "1968341986005381120",
+            "name": "Man of Grace",
+            "verified": false,
+            "username": "manofGrace72810"
+          },
+          {
+            "id": "1901622400527351808",
+            "name": "Youth 🧘‍♀️",
+            "verified": false,
+            "username": "Web3__Youth"
+          },
+          {
+            "id": "1980282118308872192",
+            "name": "Korchi🍊💊",
+            "verified": false,
+            "username": "Korchione"
           }
         ],
         "meta": {
-          "result_count": 5,
-          "mock": true
+          "newest_id": "2017398095420465300",
+          "oldest_id": "2016028469596193201",
+          "result_count": 10,
+          "next_token": "b26v89c19zqg8o3juebjr6y7qy8q3qc3ephiy7oyltfnh"
         }
       }
     ],
     "accounts": [
       {
         "user": {
-          "id": "mock-base",
+          "id": "1628067904083181570",
           "username": "base",
           "name": "Base",
           "verified": true,
-          "followers": 2209,
-          "mock": true
+          "followers": 1119781
         },
         "tweets": [
           {
-            "id": "mock-1769740510842-0",
-            "text": "Just deployed on Base! The future is onchain 🔵 base",
-            "createdAt": "2026-01-30T02:35:10.842Z",
+            "id": "2017411026820682101",
+            "text": "AI agent szn on base btw",
+            "createdAt": "2026-01-31T01:34:05.000Z",
             "metrics": {
-              "like_count": 142,
-              "retweet_count": 28
-            },
-            "mock": true
+              "retweet_count": 118,
+              "reply_count": 222,
+              "like_count": 990,
+              "quote_count": 30,
+              "bookmark_count": 25,
+              "impression_count": 45169
+            }
           },
           {
-            "id": "mock-1769740510842-1",
-            "text": "Building with Claude AI and the MCP protocol. Game changer for agents.",
-            "createdAt": "2026-01-30T01:35:10.842Z",
+            "id": "2017408710281466102",
+            "text": "the agentic economy is accelerating https://t.co/VFgp8wGryD",
+            "createdAt": "2026-01-31T01:24:52.000Z",
             "metrics": {
-              "like_count": 89,
-              "retweet_count": 17
-            },
-            "mock": true
+              "retweet_count": 42,
+              "reply_count": 73,
+              "like_count": 343,
+              "quote_count": 11,
+              "bookmark_count": 29,
+              "impression_count": 32719
+            }
           },
           {
-            "id": "mock-1769740510842-2",
-            "text": "Nash equilibrium strategies in DeFi are fascinating. The math checks out.",
-            "createdAt": "2026-01-30T00:35:10.842Z",
+            "id": "2017355079804928366",
+            "text": "bots are onboarding bots to base https://t.co/iExn86SOKM",
+            "createdAt": "2026-01-30T21:51:46.000Z",
             "metrics": {
-              "like_count": 56,
-              "retweet_count": 11
-            },
-            "mock": true
+              "retweet_count": 66,
+              "reply_count": 104,
+              "like_count": 656,
+              "quote_count": 14,
+              "bookmark_count": 51,
+              "impression_count": 81538
+            }
           },
           {
-            "id": "mock-1769740510842-3",
-            "text": "Another day, another smart contract deployed. #BuildOnBase",
-            "createdAt": "2026-01-29T23:35:10.842Z",
+            "id": "2017322199208890432",
+            "text": "@KeyboardCatBase @moltbook The cat has a k̶e̶y̶b̶o̶a̶r̶d̶ agent",
+            "createdAt": "2026-01-30T19:41:06.000Z",
             "metrics": {
-              "like_count": 234,
-              "retweet_count": 46
-            },
-            "mock": true
+              "retweet_count": 9,
+              "reply_count": 9,
+              "like_count": 75,
+              "quote_count": 0,
+              "bookmark_count": 1,
+              "impression_count": 4485
+            }
           },
           {
-            "id": "mock-1769740510842-4",
-            "text": "AI agents that can actually trade? We're living in the future.",
-            "createdAt": "2026-01-29T22:35:10.842Z",
+            "id": "2017321564149305497",
+            "text": "This week on Base:\n\nNews\n■ AI agents like @clawdbotatg and @moltbook are proving autonomous agents can ship onchain\n■ @tryfomo saw $70M+ in trading volume on Base this week, with over 18,000 unique traders active and more than 1,800 new traders joining the ecosystem.\n■ https://t.co/r2ldIakrdp",
+            "createdAt": "2026-01-30T19:38:35.000Z",
             "metrics": {
-              "like_count": 167,
-              "retweet_count": 33
-            },
-            "mock": true
+              "retweet_count": 125,
+              "reply_count": 179,
+              "like_count": 759,
+              "quote_count": 29,
+              "bookmark_count": 106,
+              "impression_count": 80449
+            }
           }
         ]
       },
@@ -250,14 +708,14 @@
           "username": "coinaboratory",
           "name": "Coinaboratory",
           "verified": true,
-          "followers": 18319,
+          "followers": 12888,
           "mock": true
         },
         "tweets": [
           {
-            "id": "mock-1769740511856-0",
+            "id": "mock-1769839421246-0",
             "text": "Just deployed on Base! The future is onchain 🔵 coinaboratory",
-            "createdAt": "2026-01-30T02:35:11.856Z",
+            "createdAt": "2026-01-31T06:03:41.246Z",
             "metrics": {
               "like_count": 142,
               "retweet_count": 28
@@ -265,9 +723,9 @@
             "mock": true
           },
           {
-            "id": "mock-1769740511856-1",
+            "id": "mock-1769839421246-1",
             "text": "Building with Claude AI and the MCP protocol. Game changer for agents.",
-            "createdAt": "2026-01-30T01:35:11.856Z",
+            "createdAt": "2026-01-31T05:03:41.246Z",
             "metrics": {
               "like_count": 89,
               "retweet_count": 17
@@ -275,9 +733,9 @@
             "mock": true
           },
           {
-            "id": "mock-1769740511856-2",
+            "id": "mock-1769839421246-2",
             "text": "Nash equilibrium strategies in DeFi are fascinating. The math checks out.",
-            "createdAt": "2026-01-30T00:35:11.856Z",
+            "createdAt": "2026-01-31T04:03:41.246Z",
             "metrics": {
               "like_count": 56,
               "retweet_count": 11
@@ -285,9 +743,9 @@
             "mock": true
           },
           {
-            "id": "mock-1769740511856-3",
+            "id": "mock-1769839421246-3",
             "text": "Another day, another smart contract deployed. #BuildOnBase",
-            "createdAt": "2026-01-29T23:35:11.856Z",
+            "createdAt": "2026-01-31T03:03:41.246Z",
             "metrics": {
               "like_count": 234,
               "retweet_count": 46
@@ -295,9 +753,9 @@
             "mock": true
           },
           {
-            "id": "mock-1769740511856-4",
+            "id": "mock-1769839421246-4",
             "text": "AI agents that can actually trade? We're living in the future.",
-            "createdAt": "2026-01-29T22:35:11.856Z",
+            "createdAt": "2026-01-31T02:03:41.246Z",
             "metrics": {
               "like_count": 167,
               "retweet_count": 33
@@ -308,73 +766,87 @@
       },
       {
         "user": {
-          "id": "mock-AnthropicAI",
+          "id": "1353836358901501952",
           "username": "AnthropicAI",
-          "name": "AnthropicAI",
+          "name": "Anthropic",
           "verified": true,
-          "followers": 9841,
-          "mock": true
+          "followers": 768969
         },
         "tweets": [
           {
-            "id": "mock-1769740512869-0",
-            "text": "Just deployed on Base! The future is onchain 🔵 AnthropicAI",
-            "createdAt": "2026-01-30T02:35:12.869Z",
+            "id": "2017313347918561635",
+            "text": "Engineers at @NASAJPL used Claude to plot out the route for Perseverance to navigate an approximately four-hundred-meter path on the Martian surface.\n\nRead the full story on our microsite, and see real imagery and footage from Claude’s drive: https://t.co/KHwvxPN0eU",
+            "createdAt": "2026-01-30T19:05:56.000Z",
             "metrics": {
-              "like_count": 142,
-              "retweet_count": 28
-            },
-            "mock": true
+              "retweet_count": 39,
+              "reply_count": 10,
+              "like_count": 642,
+              "quote_count": 6,
+              "bookmark_count": 123,
+              "impression_count": 42077
+            }
           },
           {
-            "id": "mock-1769740512869-1",
-            "text": "Building with Claude AI and the MCP protocol. Game changer for agents.",
-            "createdAt": "2026-01-30T01:35:12.869Z",
+            "id": "2017313346375004487",
+            "text": "On December 8, the Perseverance rover safely trundled across the surface of Mars.\n\nThis was the first AI-planned drive on another planet. And it was planned by Claude. https://t.co/kVbdKWibuP",
+            "createdAt": "2026-01-30T19:05:56.000Z",
             "metrics": {
-              "like_count": 89,
-              "retweet_count": 17
-            },
-            "mock": true
+              "retweet_count": 510,
+              "reply_count": 174,
+              "like_count": 4869,
+              "quote_count": 253,
+              "bookmark_count": 780,
+              "impression_count": 744211
+            }
           },
           {
-            "id": "mock-1769740512869-2",
-            "text": "Nash equilibrium strategies in DeFi are fascinating. The math checks out.",
-            "createdAt": "2026-01-30T00:35:12.869Z",
+            "id": "2016960391893701089",
+            "text": "For more details on this research, see the full paper: https://t.co/V06Q83Luhv",
+            "createdAt": "2026-01-29T19:43:25.000Z",
             "metrics": {
-              "like_count": 56,
-              "retweet_count": 11
-            },
-            "mock": true
+              "retweet_count": 18,
+              "reply_count": 8,
+              "like_count": 316,
+              "quote_count": 5,
+              "bookmark_count": 187,
+              "impression_count": 53017
+            }
           },
           {
-            "id": "mock-1769740512869-3",
-            "text": "Another day, another smart contract deployed. #BuildOnBase",
-            "createdAt": "2026-01-29T23:35:12.869Z",
+            "id": "2016960390975176785",
+            "text": "These results have broader implications—on how to design AI products that facilitate learning, and how workplaces should approach AI policies.\n\nAs we also continue to release more capable AI tools, we’re continuing to study their impact on work—at Anthropic, and more broadly.",
+            "createdAt": "2026-01-29T19:43:25.000Z",
             "metrics": {
-              "like_count": 234,
-              "retweet_count": 46
-            },
-            "mock": true
+              "retweet_count": 7,
+              "reply_count": 3,
+              "like_count": 247,
+              "quote_count": 0,
+              "bookmark_count": 15,
+              "impression_count": 53875
+            }
           },
           {
-            "id": "mock-1769740512869-4",
-            "text": "AI agents that can actually trade? We're living in the future.",
-            "createdAt": "2026-01-29T22:35:12.869Z",
+            "id": "2016960389997891705",
+            "text": "We were particularly interested in coding because as software engineering grows more automated, humans will still need the skills to catch AI errors, guide its output, and ultimately provide oversight for AI deployed in high-stakes environments.",
+            "createdAt": "2026-01-29T19:43:24.000Z",
             "metrics": {
-              "like_count": 167,
-              "retweet_count": 33
-            },
-            "mock": true
+              "retweet_count": 10,
+              "reply_count": 2,
+              "like_count": 310,
+              "quote_count": 5,
+              "bookmark_count": 21,
+              "impression_count": 32946
+            }
           }
         ]
       }
     ],
-    "timestamp": "2026-01-30T02:35:06.793Z",
+    "timestamp": "2026-01-31T06:03:35.174Z",
     "summary": {
       "totalSearches": 3,
       "totalAccounts": 3,
-      "totalTweets": 30,
-      "hasRealData": false
+      "totalTweets": 45,
+      "hasRealData": true
     }
   }
 }

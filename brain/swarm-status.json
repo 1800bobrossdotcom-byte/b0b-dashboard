@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-30T01:49:24.815Z",
+  "timestamp": "2026-01-31T05:53:38.560Z",
   "systems": {
     "apiKeys": {
       "keys": {
@@ -18,7 +18,7 @@
       "active": true,
       "inboxes": 3,
       "messages": {
-        "b0b": 0,
+        "b0b": 3,
         "d0t": 0,
         "c0m": 2
       }
@@ -26,7 +26,7 @@
     "polymarket": {
       "active": true,
       "markets": 20,
-      "volume": 42716019.21679997
+      "volume": 87928461.38592212
     },
     "twitter": {
       "active": true,
@@ -35,25 +35,24 @@
     },
     "learnings": {
       "active": true,
-      "count": 9
+      "count": 13
     },
     "signals": {
       "active": true,
-      "count": 56,
-      "ageHours": 47
+      "count": 60,
+      "ageHours": 0
     },
     "websites": {
       "b0b.dev": {
         "up": true,
-        "latency": 196
+        "latency": 253
       },
       "d0t.b0b.dev": {
         "up": true,
-        "latency": 401
+        "latency": 316
       },
       "0type.b0b.dev": {
-        "up": true,
-        "latency": 351
+        "up": false
       }
     }
   }

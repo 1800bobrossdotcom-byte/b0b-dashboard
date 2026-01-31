@@ -1,82 +1,5 @@
 [
   {
-    "timestamp": "2026-01-31T01:26:03.131Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T01:28:21.403Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T01:30:32.812Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T01:34:51.009Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T01:38:02.712Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T01:42:09.994Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T01:44:23.862Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T01:46:35.514Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T01:49:04.783Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T01:51:38.670Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T01:54:19.411Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
     "timestamp": "2026-01-31T01:56:48.686Z",
     "decision": "BUY",
     "confidence": 0.644,
@@ -694,6 +617,83 @@
   },
   {
     "timestamp": "2026-01-31T05:37:45.868Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T05:40:13.036Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T05:42:47.303Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T05:45:14.387Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T05:47:48.228Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T05:50:23.019Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T05:52:56.773Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T05:55:21.726Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T05:57:51.835Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T06:00:23.802Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T06:03:00.077Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T06:03:13.413Z",
     "decision": "BUY",
     "confidence": 0.644,
     "l0reCode": "n.3qlb/t.l3/e.l/f.dist",

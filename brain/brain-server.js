@@ -5644,6 +5644,30 @@ app.post('/l0re/actions/execute/:proposalId', async (req, res) => {
 });
 
 // =============================================================================
+// PIPELINE EXECUTION LOGS — Chain pipeline activity
+// =============================================================================
+
+app.get('/pipelines/recent', async (req, res) => {
+  try {
+    const pipelineLog = path.join(DATA_DIR, 'pipeline-executions.json');
+    const data = await fs.readFile(pipelineLog, 'utf8');
+    const executions = JSON.parse(data);
+    
+    // Return last 10 executions
+    const recent = executions.slice(-10).reverse();
+    
+    res.json({
+      total: executions.length,
+      recent,
+      lastRun: recent[0]?.timestamp || null,
+      successRate: executions.filter(e => e.status === 'success').length / executions.length * 100,
+    });
+  } catch (e) {
+    res.json({ total: 0, recent: [], lastRun: null, successRate: 0, error: e.message });
+  }
+});
+
+// =============================================================================
 // START SERVER
 // =============================================================================
 

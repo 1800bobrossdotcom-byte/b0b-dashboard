@@ -14,7 +14,7 @@ export async function GET() {
   try {
     // Fetch all data in parallel for speed
     // NOTE: /turb0/dashboard returns text/plain (ASCII art), use /swarm/live for JSON data instead
-    const [statusRes, activityRes, platformRes, actionsRes, securityRes, crawlersRes, swarmLiveRes] = await Promise.all([
+    const [statusRes, activityRes, platformRes, actionsRes, securityRes, crawlersRes, swarmLiveRes, quotesRes, pipelinesRes] = await Promise.all([
       fetch(`${BRAIN_URL}/status`, { cache: 'no-store' }).catch(() => null),
       fetch(`${BRAIN_URL}/labs/activity`, { cache: 'no-store' }).catch(() => null),
       fetch(`${BRAIN_URL}/l0re/platform`, { cache: 'no-store' }).catch(() => null),
@@ -22,6 +22,8 @@ export async function GET() {
       fetch(`${BRAIN_URL}/security/findings`, { cache: 'no-store' }).catch(() => null),
       fetch(`${BRAIN_URL}/l0re/crawlers/status`, { cache: 'no-store' }).catch(() => null),
       fetch(`${BRAIN_URL}/swarm/live`, { cache: 'no-store' }).catch(() => null),
+      fetch(`${BRAIN_URL}/quotes/live`, { cache: 'no-store' }).catch(() => null),
+      fetch(`${BRAIN_URL}/pipelines/recent`, { cache: 'no-store' }).catch(() => null),
     ]);
 
     const status = statusRes?.ok ? await statusRes.json() : null;
@@ -31,9 +33,14 @@ export async function GET() {
     const security = securityRes?.ok ? await securityRes.json() : null;
     const crawlers = crawlersRes?.ok ? await crawlersRes.json() : null;
     const swarmLive = swarmLiveRes?.ok ? await swarmLiveRes.json() : null;
+    const quotes = quotesRes?.ok ? await quotesRes.json() : null;
+    const pipelines = pipelinesRes?.ok ? await pipelinesRes.json() : null;
     
     // Extract turb0 data from swarm/live instead of the text-only /turb0/dashboard endpoint
     const turb0Data = swarmLive?.turb0b00st || null;
+    
+    // Extract library data from swarm/live
+    const libraryData = swarmLive?.library || null;
 
     // Build dynamic experiments from live platform data
     const tradingMode = turb0Data?.mode || platform?.trading?.mode || platform?.turb0?.mode || 'paper';
@@ -196,6 +203,13 @@ export async function GET() {
       wallet: swarmLive?.treasury?.wallet || null,
     };
 
+    // Library stats from swarm/live
+    const library = {
+      totalDocs: libraryData?.totalDocs || 0,
+      documents: libraryData?.documents?.slice(0, 10) || [],
+      lastIndexed: libraryData?.lastIndexed || null,
+    };
+
     return NextResponse.json({
       experiments,
       status,
@@ -215,6 +229,9 @@ export async function GET() {
       freshness: swarmLive?.freshness || platform?.freshness || {},
       turb0: turb0Summary,
       tradingLogs,
+      library,
+      quotes: quotes || null,
+      pipelines: pipelines || { total: 0, recent: [] },
       swarmLive, // Include raw swarmLive for debugging
       timestamp: new Date().toISOString(),
     });

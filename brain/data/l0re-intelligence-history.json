@@ -1481,6 +1481,116 @@
         "signal": "BULLISH"
       },
       "nash": "EQUILIBRIUM"
+    },
+    {
+      "timestamp": "2026-01-31T05:40:13.039Z",
+      "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+      "composite": {
+        "score": 0.6666666666666666,
+        "confidence": 0.5,
+        "signal": "BULLISH"
+      },
+      "nash": "EQUILIBRIUM"
+    },
+    {
+      "timestamp": "2026-01-31T05:42:47.306Z",
+      "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+      "composite": {
+        "score": 0.6666666666666666,
+        "confidence": 0.5,
+        "signal": "BULLISH"
+      },
+      "nash": "EQUILIBRIUM"
+    },
+    {
+      "timestamp": "2026-01-31T05:45:14.390Z",
+      "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+      "composite": {
+        "score": 0.6666666666666666,
+        "confidence": 0.5,
+        "signal": "BULLISH"
+      },
+      "nash": "EQUILIBRIUM"
+    },
+    {
+      "timestamp": "2026-01-31T05:47:48.232Z",
+      "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+      "composite": {
+        "score": 0.6666666666666666,
+        "confidence": 0.5,
+        "signal": "BULLISH"
+      },
+      "nash": "EQUILIBRIUM"
+    },
+    {
+      "timestamp": "2026-01-31T05:50:23.022Z",
+      "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+      "composite": {
+        "score": 0.6666666666666666,
+        "confidence": 0.5,
+        "signal": "BULLISH"
+      },
+      "nash": "EQUILIBRIUM"
+    },
+    {
+      "timestamp": "2026-01-31T05:52:56.776Z",
+      "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+      "composite": {
+        "score": 0.6666666666666666,
+        "confidence": 0.5,
+        "signal": "BULLISH"
+      },
+      "nash": "EQUILIBRIUM"
+    },
+    {
+      "timestamp": "2026-01-31T05:55:21.729Z",
+      "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+      "composite": {
+        "score": 0.6666666666666666,
+        "confidence": 0.5,
+        "signal": "BULLISH"
+      },
+      "nash": "EQUILIBRIUM"
+    },
+    {
+      "timestamp": "2026-01-31T05:57:51.838Z",
+      "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+      "composite": {
+        "score": 0.6666666666666666,
+        "confidence": 0.5,
+        "signal": "BULLISH"
+      },
+      "nash": "EQUILIBRIUM"
+    },
+    {
+      "timestamp": "2026-01-31T06:00:23.804Z",
+      "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+      "composite": {
+        "score": 0.6666666666666666,
+        "confidence": 0.5,
+        "signal": "BULLISH"
+      },
+      "nash": "EQUILIBRIUM"
+    },
+    {
+      "timestamp": "2026-01-31T06:03:00.081Z",
+      "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+      "composite": {
+        "score": 0.6666666666666666,
+        "confidence": 0.5,
+        "signal": "BULLISH"
+      },
+      "nash": "EQUILIBRIUM"
+    },
+    {
+      "timestamp": "2026-01-31T06:03:13.416Z",
+      "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+      "composite": {
+        "score": 0.6666666666666666,
+        "confidence": 0.5,
+        "signal": "BULLISH"
+      },
+      "nash": "EQUILIBRIUM"
     }
   ]
 }
