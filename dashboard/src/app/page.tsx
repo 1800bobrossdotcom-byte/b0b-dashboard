@@ -7,27 +7,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-
-function Header() {
-  return (
-    <header className="site-header">
-      <div className="brand">
-        <span className="brand-mark">b0b</span>
-        <span className="brand-dot">•</span>
-        <span className="brand-tag">swarm</span>
-      </div>
-      <nav className="nav">
-        <Link href="/live">Live</Link>
-        <Link href="/hq">HQ</Link>
-        <Link href="/labs">Labs</Link>
-        <Link href="/security">Security</Link>
-      </nav>
-      <Link className="cta" href="/hq">
-        Enter
-      </Link>
-    </header>
-  );
-}
+import Header from './components/Header';
 
 function Hero() {
   return (

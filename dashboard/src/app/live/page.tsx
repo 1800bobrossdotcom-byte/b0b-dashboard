@@ -1,130 +1,88 @@
 'use client';
 
 /**
- * LIVE COMMAND CENTER
- * Real data. Real agents. Real decisions.
+ * /live — Real-time swarm telemetry
+ * Procedural aesthetic, live data from brain
  */
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import Header from '../components/Header';
 
-const BRAIN_URL = 'https://b0b-brain-production.up.railway.app';
-const WALLET = '0xCA4Ca0c7b26e51805c20C95DF02Ea86feA938D78';
-
-interface LiveState {
-  wallet: {
-    balance: string;
-    trades: number;
-  };
-  signals: {
-    polymarket: any[];
-    onchain: any;
-    dex: any;
-  };
-  agents: {
-    d0t: string;
-    c0m: string;
-    b0b: string;
-    r0ss: string;
-  };
-  ai: {
-    [key: string]: string;
-  };
-  turb0Decision: {
-    action: string;
-    confidence: string;
-    reasoning: string[];
-  };
+interface FreshnessItem {
+  fresh: boolean;
+  freshness: number;
+  status: string;
+  age: string;
 }
 
 interface LiveData {
-  // Freshness
   freshness?: {
-    l0re?: string;
-    metrics?: {
-      fresh: number;
-      total: number;
-      stale: string[];
-    };
-    items?: Record<string, {
-      fresh: boolean;
-      freshness: number;
-      status: string;
-      age: string;
-    }>;
+    l0re?: { emoji: string; state: string; code: string } | string;
+    metrics?: { fresh: number; total: number; stale: string[] };
+    items?: Record<string, FreshnessItem>;
   };
-  // Trader
-  turb0b00st?: {
-    mode?: string;
-    tradingHistory?: any[];
-  };
-  liveTrader?: {
-    active: boolean;
-    wage?: { hourlyTarget: number };
-  };
-  // Signals
-  d0t?: {
-    data?: {
-      sentiment?: { index: number; label: string };
-      predictions?: any[];
-    };
-    signals?: any;
-  };
-  // Research
-  r0ss?: {
-    data?: {
-      github?: any[];
-      hackernews?: any[];
-    };
-  };
-  // Treasury
-  treasury?: {
-    treasury?: {
-      total?: number;
-    };
-  };
-  // System
+  turb0b00st?: { mode?: string; tradingHistory?: any[] };
+  liveTrader?: { active: boolean; wage?: { hourlyTarget: number } };
+  d0t?: { data?: { sentiment?: { index: number; label: string }; predictions?: any[] }; signals?: any };
+  r0ss?: { data?: { github?: any[]; hackernews?: any[] } };
+  treasury?: { treasury?: { total?: number } };
   status?: string;
 }
 
-export default function LiveTicker() {
-  const [mounted, setMounted] = useState(false);
+function Metric({ label, value, sublabel }: { label: string; value: string | number; sublabel?: string }) {
+  return (
+    <div className="metric">
+      <div className="metric-value">{value}</div>
+      <div className="metric-label">{label}</div>
+      {sublabel && <div className="metric-sub">{sublabel}</div>}
+    </div>
+  );
+}
+
+function DataBar({ name, fresh, pct }: { name: string; fresh: boolean; pct: number }) {
+  return (
+    <div className="data-bar">
+      <span className="data-bar-name">{name}</span>
+      <div className="data-bar-track">
+        <div 
+          className="data-bar-fill" 
+          style={{ width: `${pct}%`, opacity: fresh ? 1 : 0.4 }} 
+        />
+      </div>
+      <span className="data-bar-pct">{pct}%</span>
+      <span className="data-bar-status">{fresh ? '●' : '○'}</span>
+    </div>
+  );
+}
+
+export default function LivePage() {
   const [data, setData] = useState<LiveData | null>(null);
   const [freshness, setFreshness] = useState<any>(null);
   const [status, setStatus] = useState<'connecting' | 'online' | 'error'>('connecting');
   const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
   const [tick, setTick] = useState(0);
-  const [error, setError] = useState<string | null>(null);
 
-  // Mount check
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Fetch live data every 5 seconds
-  useEffect(() => {
-    if (!mounted) return;
     const fetchAll = async () => {
       try {
         const [liveRes, freshRes] = await Promise.all([
-          fetch(`${BRAIN_URL}/swarm/live`),
-          fetch(`${BRAIN_URL}/freshness`)
+          fetch('/api/live'),
+          fetch('/api/platform')
         ]);
         
-        if (liveRes.ok && freshRes.ok) {
+        if (liveRes.ok) {
           const liveData = await liveRes.json();
-          const freshData = await freshRes.json();
           setData(liveData);
-          setFreshness(freshData);
-          setStatus('online');
-          setLastUpdate(new Date());
-          setError(null);
-        } else {
-          setStatus('error');
-          setError(`API error: live=${liveRes.status} fresh=${freshRes.status}`);
         }
-      } catch (e) {
+        if (freshRes.ok) {
+          const freshData = await freshRes.json();
+          setFreshness(freshData?.freshness);
+        }
+        setStatus('online');
+        setLastUpdate(new Date());
+      } catch {
         setStatus('error');
-        setError(String(e));
       }
       setTick(t => t + 1);
     };
@@ -132,210 +90,138 @@ export default function LiveTicker() {
     fetchAll();
     const interval = setInterval(fetchAll, 5000);
     return () => clearInterval(interval);
-  }, [mounted]);
+  }, []);
 
-  // Loading state
-  if (!mounted) {
-    return (
-      <main className="min-h-screen bg-black text-white font-mono p-4 flex items-center justify-center">
-        <div className="text-gray-500">Loading...</div>
-      </main>
-    );
-  }
-
-  const statusColor = {
-    connecting: 'bg-yellow-500',
-    online: 'bg-green-500',
-    error: 'bg-red-500'
-  };
-
-  const FreshnessBar = ({ name, item }: { name: string; item: any }) => {
-    const pct = Math.round((item?.freshness || 0) * 100);
-    const color = item?.fresh ? 'bg-green-500' : pct > 30 ? 'bg-yellow-500' : 'bg-red-500';
-    return (
-      <div className="flex items-center gap-2 text-xs">
-        <span className="w-32 truncate text-gray-400">{name}</span>
-        <div className="flex-1 h-2 bg-gray-800 rounded-full overflow-hidden">
-          <div className={`h-full ${color} transition-all duration-500`} style={{ width: `${pct}%` }} />
-        </div>
-        <span className="w-10 text-right font-mono">{pct}%</span>
-        <span className="w-4">{item?.fresh ? '🟢' : '🔴'}</span>
-      </div>
-    );
-  };
+  const freshnessItems = freshness?.files || data?.freshness?.items || {};
+  const freshCount = freshness?.fresh ?? data?.freshness?.metrics?.fresh ?? 0;
+  const totalCount = Array.isArray(freshnessItems) ? freshnessItems.length : Object.keys(freshnessItems).length;
 
   return (
-    <main className="min-h-screen bg-black text-white font-mono p-4">
-      {/* Header */}
-      <header className="mb-6 flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-[#00FF88]">🔴 LIVE DATA</h1>
-          <p className="text-xs text-gray-500">Real-time swarm telemetry • refresh every 5s</p>
-        </div>
-        <div className="text-right">
-          <div className="flex items-center gap-2">
-            <span className={`w-2 h-2 rounded-full ${statusColor[status]} ${status === 'online' ? 'animate-pulse' : ''}`} />
-            <span className="text-sm uppercase">{status}</span>
-          </div>
-          <div className="text-xs text-gray-500">
+    <main className="page">
+      <Header />
+
+      {/* Status Bar */}
+      <section className="live-status">
+        <div className="live-status-left">
+          <span className={`status-dot ${status}`} />
+          <span className="status-label">{status.toUpperCase()}</span>
+          <span className="status-time">
             {lastUpdate ? lastUpdate.toLocaleTimeString() : '--:--:--'}
+          </span>
+        </div>
+        <div className="live-status-right">
+          <span className="tick">#{tick}</span>
+        </div>
+      </section>
+
+      {/* Hero Section */}
+      <section className="live-hero">
+        <div className="live-art" aria-hidden="true">
+          <div className="noise" />
+          <div className="scan" />
+          <div className="pulse-ring" />
+        </div>
+        <div className="live-title">
+          <h1>Live Telemetry</h1>
+          <p>Real-time swarm data. Refreshing every 5 seconds.</p>
+        </div>
+      </section>
+
+      {/* Metrics Grid */}
+      <section className="metrics-grid">
+        <Metric 
+          label="Data Sources" 
+          value={`${freshCount}/${totalCount}`} 
+          sublabel="fresh" 
+        />
+        <Metric 
+          label="Trading Mode" 
+          value={data?.turb0b00st?.mode || '---'} 
+        />
+        <Metric 
+          label="Trades" 
+          value={data?.turb0b00st?.tradingHistory?.length || 0} 
+        />
+        <Metric 
+          label="Live Trader" 
+          value={data?.liveTrader?.active ? 'ACTIVE' : 'OFF'} 
+        />
+        <Metric 
+          label="Fear/Greed" 
+          value={data?.d0t?.data?.sentiment?.index || '---'} 
+          sublabel={data?.d0t?.data?.sentiment?.label}
+        />
+        <Metric 
+          label="Treasury" 
+          value={`$${(data?.treasury?.treasury?.total || 0).toFixed(2)}`} 
+        />
+      </section>
+
+      {/* Data Freshness */}
+      <section className="data-section">
+        <h2>Data Freshness</h2>
+        <div className="data-bars">
+          {Array.isArray(freshnessItems) 
+            ? freshnessItems.map((item: any) => (
+                <DataBar 
+                  key={item.file}
+                  name={item.file}
+                  fresh={item.fresh}
+                  pct={item.fresh ? 100 : Math.max(0, 100 - (item.actualAge / item.maxAge) * 100)}
+                />
+              ))
+            : Object.entries(freshnessItems).map(([name, item]: [string, any]) => (
+                <DataBar 
+                  key={name}
+                  name={name}
+                  fresh={item?.fresh}
+                  pct={Math.round((item?.freshness || 0) * 100)}
+                />
+              ))
+          }
+        </div>
+      </section>
+
+      {/* Agents Status */}
+      <section className="agents">
+        <h2>Swarm Status</h2>
+        <div className="agents-grid">
+          <div className="agent">
+            <span className="agent-id">d0t</span>
+            <span className="agent-role">Signal Hunter</span>
+            <p>{data?.d0t?.data?.predictions?.length || 0} active predictions</p>
+          </div>
+          <div className="agent">
+            <span className="agent-id">r0ss</span>
+            <span className="agent-role">Infrastructure</span>
+            <p>{data?.r0ss?.data?.github?.length || 0} repos tracked</p>
+          </div>
+          <div className="agent">
+            <span className="agent-id">c0m</span>
+            <span className="agent-role">Security</span>
+            <p>Perimeter secure</p>
+          </div>
+          <div className="agent">
+            <span className="agent-id">b0b</span>
+            <span className="agent-role">Creative</span>
+            <p>Orchestrating swarm</p>
           </div>
         </div>
-      </header>
+      </section>
 
-      {/* Grid of tickers */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        
-        {/* Error display */}
-        {error && (
-          <div className="col-span-full bg-red-900/30 border border-red-800 rounded-lg p-3 text-sm text-red-400">
-            ⚠️ {error}
-          </div>
-        )}
-
-        {/* DATA FRESHNESS */}
-        <section className="bg-gray-900/50 border border-gray-800 rounded-lg p-4 col-span-full lg:col-span-2">
-          <h2 className="text-sm font-bold text-[#00FF88] mb-3 flex items-center gap-2">
-            📊 DATA FRESHNESS
-            <span className="text-xs text-gray-500 font-normal">
-              {freshness?.metrics?.fresh || 0}/{freshness?.metrics?.total || 0} sources fresh
-            </span>
-          </h2>
-          <div className="space-y-1">
-            {freshness?.items && Object.entries(freshness.items).map(([name, item]: [string, any]) => (
-              <FreshnessBar key={name} name={name} item={item} />
-            ))}
-          </div>
-          {freshness?.l0re && (
-            <div className="mt-3 text-xs text-gray-500">
-              {typeof freshness.l0re === 'string' 
-                ? freshness.l0re 
-                : `${freshness.l0re.emoji || ''} ${freshness.l0re.state || ''} [${freshness.l0re.code || ''}]`}
-            </div>
-          )}
-        </section>
-
-        {/* TRADING STATS */}
-        <section className="bg-gray-900/50 border border-gray-800 rounded-lg p-4">
-          <h2 className="text-sm font-bold text-[#FFAA00] mb-3">⚡ TRADING</h2>
-          <div className="space-y-2 text-sm">
-            <div className="flex justify-between">
-              <span className="text-gray-400">Mode</span>
-              <span className={data?.turb0b00st?.mode === 'LIVE' ? 'text-green-400' : 'text-yellow-400'}>
-                {data?.turb0b00st?.mode || '---'}
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-400">Trades</span>
-              <span className="font-bold">{data?.turb0b00st?.tradingHistory?.length || 0}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-400">Live Trader</span>
-              <span className={data?.liveTrader?.active ? 'text-green-400' : 'text-gray-500'}>
-                {data?.liveTrader?.active ? 'ACTIVE' : 'OFFLINE'}
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-400">Target</span>
-              <span>${data?.liveTrader?.wage?.hourlyTarget || 40}/hr</span>
-            </div>
-          </div>
-        </section>
-
-        {/* MARKET SIGNALS */}
-        <section className="bg-gray-900/50 border border-gray-800 rounded-lg p-4">
-          <h2 className="text-sm font-bold text-[#FF6B6B] mb-3">📈 MARKET SIGNALS</h2>
-          <div className="space-y-2 text-sm">
-            <div className="flex justify-between">
-              <span className="text-gray-400">Fear/Greed</span>
-              <span className="font-bold">
-                {data?.d0t?.data?.sentiment?.index || '---'}
-                <span className="text-xs text-gray-500 ml-1">
-                  ({data?.d0t?.data?.sentiment?.label || '---'})
-                </span>
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-400">Predictions</span>
-              <span>{data?.d0t?.data?.predictions?.length || 0} active</span>
-            </div>
-          </div>
-        </section>
-
-        {/* RESEARCH FEED */}
-        <section className="bg-gray-900/50 border border-gray-800 rounded-lg p-4">
-          <h2 className="text-sm font-bold text-[#9D4EDD] mb-3">🔬 RESEARCH</h2>
-          <div className="space-y-2 text-sm">
-            <div className="flex justify-between">
-              <span className="text-gray-400">GitHub Repos</span>
-              <span>{data?.r0ss?.data?.github?.length || 0}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-400">HackerNews</span>
-              <span>{data?.r0ss?.data?.hackernews?.length || 0}</span>
-            </div>
-          </div>
-        </section>
-
-        {/* TREASURY */}
-        <section className="bg-gray-900/50 border border-gray-800 rounded-lg p-4">
-          <h2 className="text-sm font-bold text-[#00D9FF] mb-3">💰 TREASURY</h2>
-          <div className="space-y-2 text-sm">
-            <div className="flex justify-between">
-              <span className="text-gray-400">Total</span>
-              <span className="font-bold text-[#00D9FF]">
-                ${(data?.treasury?.treasury?.total || 0).toFixed(2)}
-              </span>
-            </div>
-            <div className="text-xs text-gray-500 break-all">
-              <a 
-                href="https://basescan.org/address/0xCA4Ca0c7b26e51805c20C95DF02Ea86feA938D78"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-400 hover:underline"
-              >
-                0xCA4C...8D78
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* SYSTEM STATUS */}
-        <section className="bg-gray-900/50 border border-gray-800 rounded-lg p-4">
-          <h2 className="text-sm font-bold text-gray-400 mb-3">🖥️ SYSTEM</h2>
-          <div className="space-y-2 text-sm">
-            <div className="flex justify-between">
-              <span className="text-gray-400">Brain</span>
-              <span className={status === 'online' ? 'text-green-400' : 'text-red-400'}>
-                {status === 'online' ? 'CONNECTED' : 'DISCONNECTED'}
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-400">Swarm Status</span>
-              <span className="uppercase">{data?.status || '---'}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-400">Refresh</span>
-              <span className="text-gray-500">#{tick}</span>
-            </div>
-          </div>
-        </section>
-
-      </div>
-
-      {/* Raw JSON toggle for debugging */}
-      <details className="mt-6">
-        <summary className="text-xs text-gray-600 cursor-pointer hover:text-gray-400">
-          🔧 Raw Data (debug)
-        </summary>
-        <pre className="mt-2 p-4 bg-gray-900 rounded text-xs overflow-auto max-h-96">
-          {JSON.stringify({ data, freshness }, null, 2)}
-        </pre>
+      {/* Debug */}
+      <details className="debug-panel">
+        <summary>Raw Data</summary>
+        <pre>{JSON.stringify({ data, freshness }, null, 2)}</pre>
       </details>
 
       {/* Footer */}
-      <footer className="mt-8 text-center text-xs text-gray-600">
-        <p>b0b.dev • swarm eyes • live data ticker</p>
+      <footer className="footer">
+        <span>b0b.dev</span>
+        <div className="footer-right">
+          <Link href="/">Home</Link>
+          <Link href="/hq">HQ</Link>
+        </div>
       </footer>
     </main>
   );
