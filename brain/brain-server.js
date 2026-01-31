@@ -389,6 +389,55 @@ app.get('/health', async (req, res) => {
   });
 });
 
+// Debug endpoint - check data files on Railway
+app.get('/debug/files', async (req, res) => {
+  const dataDir = path.join(__dirname, 'data');
+  const financeDir = path.join(__dirname, '..', 'b0b-finance');
+  
+  const result = {
+    __dirname,
+    dataDir,
+    financeDir,
+    dataDirExists: require('fs').existsSync(dataDir),
+    financeDirExists: require('fs').existsSync(financeDir),
+    dataFiles: [],
+    turb0Check: {},
+  };
+  
+  try {
+    result.dataFiles = require('fs').readdirSync(dataDir);
+  } catch (e) {
+    result.dataFiles = `Error: ${e.message}`;
+  }
+  
+  // Check turb0b00st-state.json specifically
+  const turbDataPath = path.join(dataDir, 'turb0b00st-state.json');
+  const turbFinancePath = path.join(financeDir, 'turb0b00st-state.json');
+  
+  result.turb0Check = {
+    dataPath: turbDataPath,
+    dataExists: require('fs').existsSync(turbDataPath),
+    financePath: turbFinancePath,
+    financeExists: require('fs').existsSync(turbFinancePath),
+  };
+  
+  if (result.turb0Check.dataExists) {
+    try {
+      const content = require('fs').readFileSync(turbDataPath, 'utf-8');
+      const parsed = JSON.parse(content);
+      result.turb0Check.dataContent = {
+        mode: parsed.mode,
+        activated: parsed.activated,
+        trades: parsed.tradingHistory?.length || 0,
+      };
+    } catch (e) {
+      result.turb0Check.dataError = e.message;
+    }
+  }
+  
+  res.json(result);
+});
+
 // Main pulse endpoint - comprehensive swarm status for dashboards
 app.get('/pulse', async (req, res) => {
   try {

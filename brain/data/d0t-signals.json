@@ -1,8 +1,8 @@
 {
   "crawler": "d0t-signals",
-  "timestamp": "2026-01-31T08:05:28.213Z",
+  "timestamp": "2026-01-31T08:10:30.650Z",
   "data": {
-    "timestamp": "2026-01-31T08:05:27.171Z",
+    "timestamp": "2026-01-31T08:10:29.656Z",
     "agent": "d0t",
     "role": "Data Oracle",
     "predictions": [
@@ -10,21 +10,21 @@
         "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
         "probability": null,
         "volume24h": 19241991.11467906,
-        "liquidity": "933043.0122",
+        "liquidity": "758468.58532",
         "signal": "uncertain"
       },
       {
         "question": "US government shutdown Saturday?",
         "probability": null,
         "volume24h": 10363222.669675011,
-        "liquidity": "1359260.75734",
+        "liquidity": "1299409.77879",
         "signal": "uncertain"
       },
       {
         "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
         "probability": null,
         "volume24h": 9920924.411320025,
-        "liquidity": "294327.63292",
+        "liquidity": "291936.48392",
         "signal": "uncertain"
       },
       {
@@ -38,7 +38,7 @@
         "question": "Will Trump nominate Rick Rieder as the next Fed chair?",
         "probability": null,
         "volume24h": 5906046.784228002,
-        "liquidity": "161088.8744",
+        "liquidity": "161025.31704",
         "signal": "uncertain"
       }
     ],
@@ -57,10 +57,17 @@
           "boostAmount": 100,
           "url": "https://dexscreener.com/base/0xd1ab275e0b9798ae324c79c7133def6631426a2c",
           "description": "Zoof is a wallet for EVM and Solana wallets powered by AI in it's core. Integrating Virtuals agents "
+        },
+        {
+          "address": "0xb25404cF350408CbaaDed7bace21FB93a7e9aB07",
+          "chain": "base",
+          "boostAmount": 50,
+          "url": "https://dexscreener.com/base/0xb25404cf350408cbaaded7bace21fb93a7e9ab07",
+          "description": "Twitter/X for Agents"
         }
       ],
       "volumeSpikes": [],
-      "timestamp": "2026-01-31T08:05:28.202Z"
+      "timestamp": "2026-01-31T08:10:30.639Z"
     },
     "patterns": [
       {
@@ -208,7 +215,7 @@
       }
     },
     "turb0": {
-      "timestamp": "2026-01-31T08:05:28.204Z",
+      "timestamp": "2026-01-31T08:10:30.641Z",
       "decision": "BUY",
       "confidence": 0.644,
       "size": 0.0205,
