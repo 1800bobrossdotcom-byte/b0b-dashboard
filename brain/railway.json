@@ -7,8 +7,9 @@
       "brain-server.js",
       "agents/**",
       "l0re*.js",
-      "data/*.json",
-      "package.json"
+      "data/**",
+      "package.json",
+      "Dockerfile"
     ]
   },
   "deploy": {
