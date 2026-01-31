@@ -169,6 +169,12 @@ class FreshnessMonitor {
     this.state.lastSweep = sweep.timestamp;
     this.state.items = Object.fromEntries(results.map(r => [r.file, r]));
     this.state.alerts = sweep.alerts;
+    
+    // Defensive: ensure history array exists
+    if (!Array.isArray(this.state.history)) {
+      this.state.history = [];
+    }
+    
     this.state.history.push({
       timestamp: sweep.timestamp,
       fresh: sweep.fresh,
