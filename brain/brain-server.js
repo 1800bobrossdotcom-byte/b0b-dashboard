@@ -2702,6 +2702,9 @@ app.get('/finance/treasury', async (req, res) => {
       }
     } catch {}
     
+    // Get all trades from either tradingHistory or trades array
+    const allTrades = turb0State?.tradingHistory || turb0State?.trades || [];
+    
     // Build response - NO FAKE DEFAULTS
     const treasury = treasuryState || { balances: { total: 0 }, performance: {} };
     const today = new Date().toISOString().split('T')[0];
@@ -2724,19 +2727,19 @@ app.get('/finance/treasury', async (req, res) => {
         wins: treasury.performance?.winCount || nashState?.wins || 0,
         losses: treasury.performance?.lossCount || nashState?.losses || 0,
         winRate: nashState?.totalTrades > 0 ? (nashState.wins / nashState.totalTrades * 100) : 0,
-        totalTrades: (nashState?.totalTrades || 0) + (turb0State?.tradingHistory?.length || 0),
+        totalTrades: (nashState?.totalTrades || 0) + allTrades.length,
       },
       turb0b00st: turb0State ? {
         mode: turb0State.mode || 'PAPER',
         activated: turb0State.activated,
         activatedAt: turb0State.activatedAt,
-        trades: turb0State.tradingHistory?.length || 0,
+        trades: allTrades.length,
         dailyStats: turb0State.dailyStats,
-        recentTrades: turb0State.tradingHistory?.slice(-5).reverse() || [],
+        recentTrades: allTrades.slice(-5).reverse(),
       } : null,
       today: {
         pnl: (treasury.daily?.pnl || 0) + (turb0State?.dailyStats?.pnl || 0),
-        trades: (treasury.daily?.trades || 0) + (turb0State?.tradingHistory?.filter(t => t.timestamp?.startsWith(today))?.length || 0),
+        trades: (treasury.daily?.trades || 0) + allTrades.filter(t => t.timestamp?.startsWith(today))?.length,
         wins: treasury.daily?.wins || 0,
         losses: treasury.daily?.losses || 0,
       },

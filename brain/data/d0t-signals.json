@@ -1,8 +1,8 @@
 {
   "crawler": "d0t-signals",
-  "timestamp": "2026-01-31T15:20:25.647Z",
+  "timestamp": "2026-01-31T15:33:03.900Z",
   "data": {
-    "timestamp": "2026-01-31T15:20:24.471Z",
+    "timestamp": "2026-01-31T15:33:02.597Z",
     "agent": "d0t",
     "role": "Data Oracle",
     "predictions": [
@@ -10,21 +10,21 @@
         "question": "US government shutdown Saturday?",
         "probability": null,
         "volume24h": 20825570.793470968,
-        "liquidity": "2109322.71026",
+        "liquidity": "2108066.58",
         "signal": "uncertain"
       },
       {
         "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
         "probability": null,
         "volume24h": 16992684.161560055,
-        "liquidity": "771682.01965",
+        "liquidity": "733100.49858",
         "signal": "uncertain"
       },
       {
         "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
         "probability": null,
         "volume24h": 7150177.923924987,
-        "liquidity": "210297.40868",
+        "liquidity": "213360.05317",
         "signal": "uncertain"
       },
       {
@@ -67,7 +67,7 @@
         }
       ],
       "volumeSpikes": [],
-      "timestamp": "2026-01-31T15:20:25.634Z"
+      "timestamp": "2026-01-31T15:33:03.886Z"
     },
     "patterns": [
       {
@@ -215,7 +215,7 @@
       }
     },
     "turb0": {
-      "timestamp": "2026-01-31T15:20:25.635Z",
+      "timestamp": "2026-01-31T15:33:03.888Z",
       "decision": "BUY",
       "confidence": 0.644,
       "size": 0.0205,

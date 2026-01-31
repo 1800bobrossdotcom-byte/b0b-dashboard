@@ -159,33 +159,43 @@ async function crawlD0tSignals() {
 
 // ══════════════════════════════════════════════════════════════════════════════
 // 💰 TURB0B00ST STATE CRAWLER
+// Preserves ALL trading data - only updates timestamp
 // ══════════════════════════════════════════════════════════════════════════════
 
 async function crawlTurb0State() {
   console.log('[CRAWL] 💰 turb0-state starting...');
   
-  // Read existing state
+  // Read existing state - PRESERVE ALL DATA
   let existing = {};
   try {
     const data = await fs.readFile(path.join(DATA_DIR, 'turb0b00st-state.json'), 'utf8');
     existing = JSON.parse(data);
   } catch {}
   
+  // CRITICAL: Preserve ALL trading data, only update timestamp
   const state = {
+    ...existing, // Keep ALL existing fields including trades, tradingHistory, etc.
     timestamp: new Date().toISOString(),
     mode: existing.mode || 'paper',
+    activated: existing.activated ?? false,
     enabled: existing.enabled ?? false,
     positions: existing.positions || [],
     lastTrade: existing.lastTrade || null,
+    // Preserve trade arrays
+    trades: existing.trades || [],
+    tradingHistory: existing.tradingHistory || [],
+    // Preserve performance
     performance: {
-      totalTrades: existing.performance?.totalTrades || 0,
+      totalTrades: existing.trades?.length || existing.performance?.totalTrades || 0,
       winRate: existing.performance?.winRate || 0,
-      pnl: existing.performance?.pnl || 0
-    }
+      pnl: existing.performance?.pnl || 0,
+      dailyPnl: existing.performance?.dailyPnl || 0,
+    },
+    _source: 'integrated-crawler',
   };
   
   await saveData('turb0b00st-state.json', state);
-  console.log('[CRAWL] ✅ turb0-state saved');
+  console.log(`[CRAWL] ✅ turb0-state saved (${state.trades?.length || 0} trades, mode: ${state.mode})`);
   return state;
 }
 

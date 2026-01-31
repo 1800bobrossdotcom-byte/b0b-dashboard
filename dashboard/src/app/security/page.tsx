@@ -1,52 +1,28 @@
 'use client';
 
 /**
- * /security — c0m's LIVE Command Center
- * 
- * ACTIONABLE security operations:
- * - Real-time threat monitoring
- * - One-click recon execution  
- * - Live vulnerability scanning
- * - Dork execution with results
- * - Bug bounty submission pipeline
- * 
- * L0RE AESTHETIC: Electric cyan (#00ffff) with red threat accents
+ * /security — DEPRECATED 
+ * Redirects to main page. Security operations moved to internal tools.
  */
 
-import { useEffect, useState, useCallback } from 'react';
-import Link from 'next/link';
-import Header from '../components/Header';
-import ActionBar from '../components/ActionBar';
-import { useExecution } from '../hooks/useExecution';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
-// ==================== Types ====================
-
-interface Threat {
-  id?: string;
-  severity: 'critical' | 'high' | 'medium' | 'low';
-  title: string;
-  detail: string;
-  source: string;
-  timestamp?: string;
-  actionable?: boolean;
-}
-
-interface ScanJob {
-  id: string;
-  type: 'subdomain' | 'port' | 'vuln' | 'dork' | 'full';
-  target: string;
-  status: 'queued' | 'running' | 'complete' | 'failed';
-  progress?: number;
-  findings?: any[];
-  startedAt?: string;
-}
-
-interface C0mStatus {
-  active: boolean;
-  currentTask?: string;
-  targetsMonitored: number;
-  vulnsFound: number;
-  lastScan?: string;
+export default function SecurityPage() {
+  const router = useRouter();
+  
+  useEffect(() => {
+    // Redirect to labs page
+    router.replace('/labs');
+  }, [router]);
+  
+  return (
+    <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="text-center">
+        <p className="text-gray-500">Redirecting...</p>
+      </div>
+    </div>
+  );
 }
 
 interface SecurityData {
