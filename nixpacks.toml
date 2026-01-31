@@ -1,0 +1,19 @@
+# B0B.DEV Root Nixpacks Configuration
+# ═══════════════════════════════════════════════════════════════
+# Builds the dashboard from the root directory
+
+[phases.setup]
+nixPkgs = ["nodejs_20"]
+
+[phases.install]
+cmds = ["npm install --prefix dashboard"]
+
+[phases.build]
+cmds = ["npm run build --prefix dashboard"]
+
+[start]
+cmd = "npm run start --prefix dashboard"
+
+[variables]
+NODE_ENV = "production"
+NEXT_TELEMETRY_DISABLED = "1"
