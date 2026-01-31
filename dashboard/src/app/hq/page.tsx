@@ -574,7 +574,6 @@ export default function B0bHQ() {
               )}
               <div ref={chatEndRef} />
             </div>
-            </div>
             
             {/* Input */}
             <div className="p-6 border-t border-white/5">
