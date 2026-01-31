@@ -1179,6 +1179,95 @@ app.get('/jarvis/memory/query', async (req, res) => {
   }
 });
 
+// ═══════════════════════════════════════════════════════════════════════════════
+// 🐦 X/TWITTER API — Generative ASCII Art Posts
+// ═══════════════════════════════════════════════════════════════════════════════
+
+let xPoster;
+try {
+  xPoster = require('./x-post.js');
+  console.log('[BRAIN] X/Twitter poster loaded — ASCII art ready 🎨');
+} catch (e) {
+  console.log('[BRAIN] X/Twitter poster not available:', e.message);
+}
+
+// Generate X post preview (don't send)
+app.get('/x/preview', async (req, res) => {
+  if (!xPoster) {
+    return res.status(503).json({ error: 'X poster not loaded' });
+  }
+  try {
+    const post = await xPoster.generatePost({ post: false });
+    res.json({
+      success: true,
+      ...post,
+      canPost: xPoster.canPost,
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Generate and post to X
+app.post('/x/post', async (req, res) => {
+  if (!xPoster) {
+    return res.status(503).json({ error: 'X poster not loaded' });
+  }
+  if (!xPoster.canPost) {
+    return res.status(503).json({ 
+      error: 'X write credentials not configured',
+      required: ['TWITTER_API_KEY', 'TWITTER_API_SECRET', 'TWITTER_ACCESS_TOKEN', 'TWITTER_ACCESS_SECRET'],
+    });
+  }
+  try {
+    const { text } = req.body;
+    const post = await xPoster.generatePost({ post: true, text });
+    res.json({
+      success: post.result?.success || false,
+      ...post,
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Get X posting status
+app.get('/x/status', (req, res) => {
+  res.json({
+    available: !!xPoster,
+    canPost: xPoster?.canPost || false,
+    credentials: {
+      apiKey: !!process.env.TWITTER_API_KEY,
+      apiSecret: !!process.env.TWITTER_API_SECRET,
+      accessToken: !!process.env.TWITTER_ACCESS_TOKEN,
+      accessSecret: !!process.env.TWITTER_ACCESS_SECRET,
+      bearerToken: !!process.env.TWITTER_BEARER_TOKEN,
+    },
+    message: xPoster?.canPost 
+      ? '🐦 X posting ready — generative ASCII art enabled'
+      : '🐦 X reading only — need OAuth 1.0a credentials for posting',
+  });
+});
+
+// Just get ASCII art (no posting)
+app.get('/x/art', (req, res) => {
+  if (!xPoster) {
+    return res.status(503).json({ error: 'X poster not loaded' });
+  }
+  try {
+    const { style } = req.query;
+    if (style === 'full') {
+      const result = xPoster.generateAsciiArt('auto');
+      res.json({ success: true, ...result });
+    } else {
+      const art = xPoster.generateCompactArt();
+      res.json({ success: true, art, charCount: art.length });
+    }
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 // Get d0t signals from decision engine
 app.get('/jarvis/signals', async (req, res) => {
   if (!jarvisBridge) {
