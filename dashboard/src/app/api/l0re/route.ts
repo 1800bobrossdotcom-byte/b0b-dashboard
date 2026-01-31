@@ -17,9 +17,10 @@ export async function GET(request: Request) {
     const endpoints: Record<string, string> = {
       lexicon: '/l0re/lexicon',
       hotkeys: '/l0re/hotkeys',
-      intelligence: '/l0re/intelligence',
+      intelligence: '/l0re/intelligence/status',
       rituals: '/l0re/rituals',
       platform: '/l0re/platform',
+      pulseHistory: '/l0re/pulse/history?limit=5',
     };
 
     if (type === 'all') {

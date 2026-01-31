@@ -18,8 +18,28 @@
  */
 
 import { useEffect, useState, useRef, useCallback } from 'react';
+import Link from 'next/link';
 
 const BRAIN_URL = 'https://b0b-brain-production.up.railway.app';
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// L0RE INTELLIGENCE CLASSIFICATIONS
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const TEGMARK_LEVELS = {
+  L1_MATHEMATICAL: { name: 'L1 · Mathematical', color: '#22C55E', agent: 'c0m' },
+  L2_EMERGENT: { name: 'L2 · Emergent', color: '#00D9FF', agent: 'd0t' },
+  L3_NARRATIVE: { name: 'L3 · Narrative', color: '#FFD12F', agent: 'b0b' },
+  L4_META: { name: 'L4 · Meta', color: '#A855F7', agent: 'r0ss' },
+};
+
+const NASH_STATES = {
+  COOPERATIVE: { code: 'n.c00p', label: 'Cooperative', color: '#00FF88' },
+  COMPETITIVE: { code: 'n.c0mp', label: 'Competitive', color: '#FFD12F' },
+  DEFECTION: { code: 'n.d3f3', label: 'Defection', color: '#FF4444' },
+  EQUILIBRIUM: { code: 'n.3qlb', label: 'Equilibrium', color: '#22C55E' },
+  SCHELLING: { code: 'n.sch3', label: 'Schelling Point', color: '#00D9FF' },
+};
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // DENSITY RAMPS (Gysin's play.core technique)
@@ -238,6 +258,80 @@ function AgentOrb({ agent, state, activity = 0 }: {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// L0RE INTELLIGENCE PANEL: Tegmark + Nash visualization
+// ═══════════════════════════════════════════════════════════════════════════════
+
+function IntelligencePanel({ signals }: { signals: any }) {
+  const nashState = signals?.l0re?.nash?.state || 'EQUILIBRIUM';
+  const tegmarkActive = signals?.l0re?.tegmark?.active || 'L2_EMERGENT';
+  const entropy = signals?.l0re?.entropy || 0.5;
+  const fractalDim = signals?.l0re?.fractal || 1.5;
+  
+  const nash = NASH_STATES[nashState as keyof typeof NASH_STATES] || NASH_STATES.EQUILIBRIUM;
+  const tegmark = TEGMARK_LEVELS[tegmarkActive as keyof typeof TEGMARK_LEVELS] || TEGMARK_LEVELS.L2_EMERGENT;
+  
+  return (
+    <div className="space-y-4">
+      {/* Nash State */}
+      <div className="flex items-center justify-between">
+        <span className="text-xs text-white/30">NASH STATE</span>
+        <span className="text-xs font-mono" style={{ color: nash.color }}>
+          {nash.code} · {nash.label}
+        </span>
+      </div>
+      
+      {/* Tegmark Level */}
+      <div className="flex items-center justify-between">
+        <span className="text-xs text-white/30">TEGMARK</span>
+        <span className="text-xs font-mono" style={{ color: tegmark.color }}>
+          {tegmark.name} ({tegmark.agent})
+        </span>
+      </div>
+      
+      {/* Tegmark Level Bars */}
+      <div className="space-y-2">
+        {Object.entries(TEGMARK_LEVELS).map(([key, level]) => {
+          const isActive = key === tegmarkActive;
+          return (
+            <div key={key} className="flex items-center gap-3">
+              <span className="text-[10px] w-8" style={{ color: level.color, opacity: isActive ? 1 : 0.3 }}>
+                {key.replace('_', '')}
+              </span>
+              <div className="flex-1 h-1 bg-white/5 rounded">
+                <div 
+                  className="h-full rounded transition-all duration-500"
+                  style={{ 
+                    width: isActive ? '100%' : `${Math.random() * 60 + 10}%`,
+                    backgroundColor: level.color,
+                    opacity: isActive ? 1 : 0.2
+                  }}
+                />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      
+      {/* Metrics */}
+      <div className="grid grid-cols-2 gap-4 pt-2 border-t border-white/5">
+        <div>
+          <div className="text-[10px] text-white/30">ENTROPY</div>
+          <div className="text-lg font-light text-green-400">
+            {(entropy * 100).toFixed(0)}%
+          </div>
+        </div>
+        <div>
+          <div className="text-[10px] text-white/30">FRACTAL DIM</div>
+          <div className="text-lg font-light text-cyan-400">
+            {fractalDim.toFixed(2)}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // SIGNAL WAVE: Real-time visualization of trading signals
 // ═══════════════════════════════════════════════════════════════════════════════
 
@@ -414,16 +508,21 @@ export default function B0bHQ() {
       {/* CONTENT */}
       <div className="relative z-10 min-h-screen flex flex-col">
         
-        {/* HEADER: L0RE-style */}
+        {/* HEADER: L0RE-style with nav */}
         <header className="p-8 border-b border-white/10">
           <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-light tracking-widest text-white/90">
-                <span className="text-green-400">L</span>0RE<span className="text-white/30">.DEV</span>
-              </h1>
-              <p className="text-xs text-white/30 mt-1 tracking-wider">
-                LIBRARY OF RECURSIVE ENCRYPTION • AUTONOMOUS SWARM
-              </p>
+            <div className="flex items-center gap-8">
+              <Link href="/">
+                <h1 className="text-3xl font-light tracking-widest text-white/90">
+                  <span className="text-green-400">L</span>0RE<span className="text-white/30">.DEV</span>
+                </h1>
+              </Link>
+              <nav className="hidden md:flex items-center gap-6 text-white/40 text-sm">
+                <Link href="/live" className="hover:text-white/70 transition-colors">Live</Link>
+                <Link href="/hq" className="text-green-400">HQ</Link>
+                <Link href="/labs" className="hover:text-white/70 transition-colors">Labs</Link>
+                <Link href="/security" className="hover:text-white/70 transition-colors">Security</Link>
+              </nav>
             </div>
             
             {/* Live indicator */}
@@ -500,6 +599,14 @@ export default function B0bHQ() {
                     activity={0.5}
                   />
                 ))}
+              </div>
+            </section>
+
+            {/* L0RE INTELLIGENCE: Tegmark + Nash */}
+            <section>
+              <div className="text-xs text-white/30 mb-4 tracking-wider">L0RE INTELLIGENCE</div>
+              <div className="bg-black/50 rounded p-4 border border-white/5">
+                <IntelligencePanel signals={signals} />
               </div>
             </section>
 
