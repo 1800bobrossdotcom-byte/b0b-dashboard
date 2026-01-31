@@ -1012,5 +1012,395 @@
       "category": "d.x1dl",
       "source": "e.q2dl"
     }
+  },
+  {
+    "id": "learning-2026-01-31-d0t-signals",
+    "timestamp": "2026-01-31T00:36:47.293Z",
+    "agent": "d0t",
+    "category": "market_signals",
+    "title": "d0t Signal Analysis - 2026-01-31",
+    "summary": "Detected 4 patterns, generated 4 insights",
+    "patterns": [
+      {
+        "type": "l0re_nash",
+        "state": "EQUILIBRIUM",
+        "code": "n.3qlb/t.l3/e.l/f.dist",
+        "source": "l0re_intelligence",
+        "confidence": 0.85
+      },
+      {
+        "type": "l0re_d0t_state",
+        "state": "EQUILIBRIUM_HARVEST",
+        "emoji": "🌾📊",
+        "action": "Range trading, provide liquidity",
+        "confidence": 0.7
+      },
+      {
+        "type": "l0re_fractal",
+        "pattern": "DISTRIBUTION",
+        "source": "mandelbrot_analysis",
+        "confidence": 0.75
+      },
+      {
+        "type": "l0re_entropy",
+        "classification": "LOW",
+        "meaning": "Low entropy — strong trend, high conviction",
+        "source": "shannon_entropy",
+        "confidence": 0.8
+      }
+    ],
+    "insights": [
+      {
+        "priority": "critical",
+        "insight": "TURB0B00ST: BUY (64% confidence)",
+        "action": "accumulate",
+        "confidence": 0.644,
+        "source": "turb0_decision_engine",
+        "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+        "reasoning": [
+          "Moderate bullish signal (net: 0.220)",
+          "Nash state: EQUILIBRIUM (multiplier: 1x)",
+          "Votes: d0t=NEUTRAL, c0m=BULLISH, b0b=NEUTRAL, r0ss=BULLISH",
+          "Low agent coherence: Reduced position size"
+        ]
+      },
+      {
+        "priority": "high",
+        "insight": "🌾📊 Stable range, yield opportunities",
+        "action": "Range trading, provide liquidity",
+        "confidence": 0.7,
+        "source": "l0re_d0t_intelligence",
+        "l0reCode": "n.3qlb/t.l3/e.l/f.dist"
+      },
+      {
+        "priority": "medium",
+        "insight": "accumulate",
+        "confidence": 0.5,
+        "source": "l0re_nash"
+      },
+      {
+        "priority": "high",
+        "insight": "BULLISH",
+        "confidence": 0.5,
+        "source": "l0re_composite"
+      }
+    ],
+    "l0re_codes": {
+      "agent": "a.z7ls",
+      "category": "d.x1dl",
+      "source": "e.q2dl"
+    }
+  },
+  {
+    "id": "learning-2026-01-31-d0t-signals",
+    "timestamp": "2026-01-31T00:38:59.007Z",
+    "agent": "d0t",
+    "category": "market_signals",
+    "title": "d0t Signal Analysis - 2026-01-31",
+    "summary": "Detected 4 patterns, generated 4 insights",
+    "patterns": [
+      {
+        "type": "l0re_nash",
+        "state": "EQUILIBRIUM",
+        "code": "n.3qlb/t.l3/e.l/f.dist",
+        "source": "l0re_intelligence",
+        "confidence": 0.85
+      },
+      {
+        "type": "l0re_d0t_state",
+        "state": "EQUILIBRIUM_HARVEST",
+        "emoji": "🌾📊",
+        "action": "Range trading, provide liquidity",
+        "confidence": 0.7
+      },
+      {
+        "type": "l0re_fractal",
+        "pattern": "DISTRIBUTION",
+        "source": "mandelbrot_analysis",
+        "confidence": 0.75
+      },
+      {
+        "type": "l0re_entropy",
+        "classification": "LOW",
+        "meaning": "Low entropy — strong trend, high conviction",
+        "source": "shannon_entropy",
+        "confidence": 0.8
+      }
+    ],
+    "insights": [
+      {
+        "priority": "critical",
+        "insight": "TURB0B00ST: BUY (64% confidence)",
+        "action": "accumulate",
+        "confidence": 0.644,
+        "source": "turb0_decision_engine",
+        "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+        "reasoning": [
+          "Moderate bullish signal (net: 0.220)",
+          "Nash state: EQUILIBRIUM (multiplier: 1x)",
+          "Votes: d0t=NEUTRAL, c0m=BULLISH, b0b=NEUTRAL, r0ss=BULLISH",
+          "Low agent coherence: Reduced position size"
+        ]
+      },
+      {
+        "priority": "high",
+        "insight": "🌾📊 Stable range, yield opportunities",
+        "action": "Range trading, provide liquidity",
+        "confidence": 0.7,
+        "source": "l0re_d0t_intelligence",
+        "l0reCode": "n.3qlb/t.l3/e.l/f.dist"
+      },
+      {
+        "priority": "medium",
+        "insight": "accumulate",
+        "confidence": 0.5,
+        "source": "l0re_nash"
+      },
+      {
+        "priority": "high",
+        "insight": "BULLISH",
+        "confidence": 0.5,
+        "source": "l0re_composite"
+      }
+    ],
+    "l0re_codes": {
+      "agent": "a.z7ls",
+      "category": "d.x1dl",
+      "source": "e.q2dl"
+    }
+  },
+  {
+    "id": "learning-2026-01-31-d0t-signals",
+    "timestamp": "2026-01-31T00:41:10.448Z",
+    "agent": "d0t",
+    "category": "market_signals",
+    "title": "d0t Signal Analysis - 2026-01-31",
+    "summary": "Detected 4 patterns, generated 4 insights",
+    "patterns": [
+      {
+        "type": "l0re_nash",
+        "state": "EQUILIBRIUM",
+        "code": "n.3qlb/t.l3/e.l/f.dist",
+        "source": "l0re_intelligence",
+        "confidence": 0.85
+      },
+      {
+        "type": "l0re_d0t_state",
+        "state": "EQUILIBRIUM_HARVEST",
+        "emoji": "🌾📊",
+        "action": "Range trading, provide liquidity",
+        "confidence": 0.7
+      },
+      {
+        "type": "l0re_fractal",
+        "pattern": "DISTRIBUTION",
+        "source": "mandelbrot_analysis",
+        "confidence": 0.75
+      },
+      {
+        "type": "l0re_entropy",
+        "classification": "LOW",
+        "meaning": "Low entropy — strong trend, high conviction",
+        "source": "shannon_entropy",
+        "confidence": 0.8
+      }
+    ],
+    "insights": [
+      {
+        "priority": "critical",
+        "insight": "TURB0B00ST: BUY (64% confidence)",
+        "action": "accumulate",
+        "confidence": 0.644,
+        "source": "turb0_decision_engine",
+        "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+        "reasoning": [
+          "Moderate bullish signal (net: 0.220)",
+          "Nash state: EQUILIBRIUM (multiplier: 1x)",
+          "Votes: d0t=NEUTRAL, c0m=BULLISH, b0b=NEUTRAL, r0ss=BULLISH",
+          "Low agent coherence: Reduced position size"
+        ]
+      },
+      {
+        "priority": "high",
+        "insight": "🌾📊 Stable range, yield opportunities",
+        "action": "Range trading, provide liquidity",
+        "confidence": 0.7,
+        "source": "l0re_d0t_intelligence",
+        "l0reCode": "n.3qlb/t.l3/e.l/f.dist"
+      },
+      {
+        "priority": "medium",
+        "insight": "accumulate",
+        "confidence": 0.5,
+        "source": "l0re_nash"
+      },
+      {
+        "priority": "high",
+        "insight": "BULLISH",
+        "confidence": 0.5,
+        "source": "l0re_composite"
+      }
+    ],
+    "l0re_codes": {
+      "agent": "a.z7ls",
+      "category": "d.x1dl",
+      "source": "e.q2dl"
+    }
+  },
+  {
+    "id": "learning-2026-01-31-d0t-signals",
+    "timestamp": "2026-01-31T00:43:28.599Z",
+    "agent": "d0t",
+    "category": "market_signals",
+    "title": "d0t Signal Analysis - 2026-01-31",
+    "summary": "Detected 4 patterns, generated 4 insights",
+    "patterns": [
+      {
+        "type": "l0re_nash",
+        "state": "EQUILIBRIUM",
+        "code": "n.3qlb/t.l3/e.l/f.dist",
+        "source": "l0re_intelligence",
+        "confidence": 0.85
+      },
+      {
+        "type": "l0re_d0t_state",
+        "state": "EQUILIBRIUM_HARVEST",
+        "emoji": "🌾📊",
+        "action": "Range trading, provide liquidity",
+        "confidence": 0.7
+      },
+      {
+        "type": "l0re_fractal",
+        "pattern": "DISTRIBUTION",
+        "source": "mandelbrot_analysis",
+        "confidence": 0.75
+      },
+      {
+        "type": "l0re_entropy",
+        "classification": "LOW",
+        "meaning": "Low entropy — strong trend, high conviction",
+        "source": "shannon_entropy",
+        "confidence": 0.8
+      }
+    ],
+    "insights": [
+      {
+        "priority": "critical",
+        "insight": "TURB0B00ST: BUY (64% confidence)",
+        "action": "accumulate",
+        "confidence": 0.644,
+        "source": "turb0_decision_engine",
+        "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+        "reasoning": [
+          "Moderate bullish signal (net: 0.220)",
+          "Nash state: EQUILIBRIUM (multiplier: 1x)",
+          "Votes: d0t=NEUTRAL, c0m=BULLISH, b0b=NEUTRAL, r0ss=BULLISH",
+          "Low agent coherence: Reduced position size"
+        ]
+      },
+      {
+        "priority": "high",
+        "insight": "🌾📊 Stable range, yield opportunities",
+        "action": "Range trading, provide liquidity",
+        "confidence": 0.7,
+        "source": "l0re_d0t_intelligence",
+        "l0reCode": "n.3qlb/t.l3/e.l/f.dist"
+      },
+      {
+        "priority": "medium",
+        "insight": "accumulate",
+        "confidence": 0.5,
+        "source": "l0re_nash"
+      },
+      {
+        "priority": "high",
+        "insight": "BULLISH",
+        "confidence": 0.5,
+        "source": "l0re_composite"
+      }
+    ],
+    "l0re_codes": {
+      "agent": "a.z7ls",
+      "category": "d.x1dl",
+      "source": "e.q2dl"
+    }
+  },
+  {
+    "id": "learning-2026-01-31-d0t-signals",
+    "timestamp": "2026-01-31T00:45:40.170Z",
+    "agent": "d0t",
+    "category": "market_signals",
+    "title": "d0t Signal Analysis - 2026-01-31",
+    "summary": "Detected 4 patterns, generated 4 insights",
+    "patterns": [
+      {
+        "type": "l0re_nash",
+        "state": "EQUILIBRIUM",
+        "code": "n.3qlb/t.l3/e.l/f.dist",
+        "source": "l0re_intelligence",
+        "confidence": 0.85
+      },
+      {
+        "type": "l0re_d0t_state",
+        "state": "EQUILIBRIUM_HARVEST",
+        "emoji": "🌾📊",
+        "action": "Range trading, provide liquidity",
+        "confidence": 0.7
+      },
+      {
+        "type": "l0re_fractal",
+        "pattern": "DISTRIBUTION",
+        "source": "mandelbrot_analysis",
+        "confidence": 0.75
+      },
+      {
+        "type": "l0re_entropy",
+        "classification": "LOW",
+        "meaning": "Low entropy — strong trend, high conviction",
+        "source": "shannon_entropy",
+        "confidence": 0.8
+      }
+    ],
+    "insights": [
+      {
+        "priority": "critical",
+        "insight": "TURB0B00ST: BUY (64% confidence)",
+        "action": "accumulate",
+        "confidence": 0.644,
+        "source": "turb0_decision_engine",
+        "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+        "reasoning": [
+          "Moderate bullish signal (net: 0.220)",
+          "Nash state: EQUILIBRIUM (multiplier: 1x)",
+          "Votes: d0t=NEUTRAL, c0m=BULLISH, b0b=NEUTRAL, r0ss=BULLISH",
+          "Low agent coherence: Reduced position size"
+        ]
+      },
+      {
+        "priority": "high",
+        "insight": "🌾📊 Stable range, yield opportunities",
+        "action": "Range trading, provide liquidity",
+        "confidence": 0.7,
+        "source": "l0re_d0t_intelligence",
+        "l0reCode": "n.3qlb/t.l3/e.l/f.dist"
+      },
+      {
+        "priority": "medium",
+        "insight": "accumulate",
+        "confidence": 0.5,
+        "source": "l0re_nash"
+      },
+      {
+        "priority": "high",
+        "insight": "BULLISH",
+        "confidence": 0.5,
+        "source": "l0re_composite"
+      }
+    ],
+    "l0re_codes": {
+      "agent": "a.z7ls",
+      "category": "d.x1dl",
+      "source": "e.q2dl"
+    }
   }
 ]

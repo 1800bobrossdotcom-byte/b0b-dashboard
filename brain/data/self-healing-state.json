@@ -1,6 +1,6 @@
 {
   "running": true,
-  "lastCheck": "2026-01-31T00:35:36.603Z",
+  "lastCheck": "2026-01-31T00:47:34.601Z",
   "healingActions": [
     {
       "timestamp": "2026-01-31T00:07:40.707Z",
@@ -421,12 +421,192 @@
       "file": "x-conversations.json",
       "crawler": "x-conversation-crawler.js",
       "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:36:15.187Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:36:48.511Z",
+      "file": "d0t-signals.json",
+      "crawler": "d0t-signals.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:36:50.602Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:37:22.703Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:37:54.801Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:38:26.896Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:38:59.961Z",
+      "file": "d0t-signals.json",
+      "crawler": "d0t-signals.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:39:02.051Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:39:34.152Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:40:06.252Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:40:38.337Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:41:11.710Z",
+      "file": "d0t-signals.json",
+      "crawler": "d0t-signals.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:41:13.809Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:41:20.198Z",
+      "file": "x-conversations.json",
+      "crawler": "x-conversation-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:41:52.292Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:42:24.385Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:42:56.491Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:43:29.682Z",
+      "file": "d0t-signals.json",
+      "crawler": "d0t-signals.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:43:31.775Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:44:03.872Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:44:35.968Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:45:08.067Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:45:41.214Z",
+      "file": "d0t-signals.json",
+      "crawler": "d0t-signals.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:45:43.299Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:46:15.409Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:46:19.566Z",
+      "file": "r0ss-research.json",
+      "crawler": "r0ss-research.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:46:24.136Z",
+      "file": "b0b-creative.json",
+      "crawler": "b0b-creative.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:46:56.237Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:47:02.584Z",
+      "file": "x-conversations.json",
+      "crawler": "x-conversation-crawler.js",
+      "success": true
+    },
+    {
+      "timestamp": "2026-01-31T00:47:34.680Z",
+      "file": "polymarket.json",
+      "crawler": "polymarket-crawler.js",
+      "success": true
     }
   ],
   "crawlerProcesses": [],
   "stats": {
-    "checks": 51,
-    "heals": 70,
+    "checks": 72,
+    "heals": 100,
     "failures": 0
   }
 }

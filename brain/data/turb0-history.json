@@ -159,5 +159,40 @@
     "confidence": 0.644,
     "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
     "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T00:36:48.102Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T00:38:59.724Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T00:41:11.506Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T00:43:29.281Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T00:45:40.960Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
   }
 ]

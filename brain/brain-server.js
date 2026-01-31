@@ -7207,4 +7207,232 @@ app.get('/twitter/feed', async (req, res) => {
   }
 });
 
+// =============================================================================
+// 🎭 L0RE ACTION SYSTEM — Swarm ACTS, not just TALKS
+// =============================================================================
+
+let l0reActionAPI;
+try {
+  const { L0reActionAPI } = require('./l0re-actions.js');
+  l0reActionAPI = new L0reActionAPI();
+  console.log('[BRAIN] L0RE Action System loaded — swarm can now ACT 🎭');
+} catch (e) {
+  console.log('[BRAIN] L0RE Action System not available:', e.message);
+}
+
+// Propose an action
+app.post('/l0re/action/propose', async (req, res) => {
+  if (!l0reActionAPI) {
+    return res.status(503).json({ error: 'L0RE Action System not available' });
+  }
+  
+  try {
+    const { agent, type, description, params } = req.body;
+    
+    if (!agent || !type || !description) {
+      return res.status(400).json({ error: 'agent, type, and description required' });
+    }
+    
+    const proposal = l0reActionAPI.propose(agent, type, description, params || {});
+    res.json({ success: true, proposal });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Vote on a proposal
+app.post('/l0re/action/vote', async (req, res) => {
+  if (!l0reActionAPI) {
+    return res.status(503).json({ error: 'L0RE Action System not available' });
+  }
+  
+  try {
+    const { proposalId, agent, vote, reason } = req.body;
+    
+    if (!proposalId || !agent || !vote) {
+      return res.status(400).json({ error: 'proposalId, agent, and vote required' });
+    }
+    
+    const result = l0reActionAPI.vote(proposalId, agent, vote, reason || '');
+    res.json({ success: true, result });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Get pending proposals
+app.get('/l0re/action/pending', (req, res) => {
+  if (!l0reActionAPI) {
+    return res.status(503).json({ error: 'L0RE Action System not available' });
+  }
+  
+  res.json({ pending: l0reActionAPI.getPending() });
+});
+
+// Get action history
+app.get('/l0re/action/history', (req, res) => {
+  if (!l0reActionAPI) {
+    return res.status(503).json({ error: 'L0RE Action System not available' });
+  }
+  
+  const limit = parseInt(req.query.limit) || 50;
+  res.json({ history: l0reActionAPI.getHistory(limit) });
+});
+
+// Execute approved actions
+app.post('/l0re/action/execute', async (req, res) => {
+  if (!l0reActionAPI) {
+    return res.status(503).json({ error: 'L0RE Action System not available' });
+  }
+  
+  try {
+    const results = await l0reActionAPI.executeApproved();
+    res.json({ success: true, results });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Auto-vote on a proposal
+app.post('/l0re/action/autovote', async (req, res) => {
+  if (!l0reActionAPI) {
+    return res.status(503).json({ error: 'L0RE Action System not available' });
+  }
+  
+  try {
+    const { proposalId } = req.body;
+    if (!proposalId) {
+      return res.status(400).json({ error: 'proposalId required' });
+    }
+    
+    const results = await l0reActionAPI.autoVote(proposalId);
+    res.json({ success: true, votes: results });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Full cycle: propose → vote → execute
+app.post('/l0re/action/full-cycle', async (req, res) => {
+  if (!l0reActionAPI) {
+    return res.status(503).json({ error: 'L0RE Action System not available' });
+  }
+  
+  try {
+    const { agent, type, description, params } = req.body;
+    
+    if (!agent || !type || !description) {
+      return res.status(400).json({ error: 'agent, type, and description required' });
+    }
+    
+    const result = await l0reActionAPI.proposeAndExecute(agent, type, description, params || {});
+    res.json(result);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// =============================================================================
+// 🔄 L0RE AUTONOMOUS ACTION LOOP — Swarm discussions lead to actions
+// =============================================================================
+
+async function l0reActionLoop() {
+  if (!l0reActionAPI) return;
+  
+  try {
+    console.log(`[${new Date().toISOString()}] 🎭 L0RE Action Loop starting...`);
+    
+    // 1. Get latest pulse discussion
+    const pulsePath = path.join(DATA_DIR, 'swarm-pulse.json');
+    let pulseData;
+    try {
+      pulseData = JSON.parse(await fs.readFile(pulsePath, 'utf8'));
+    } catch { pulseData = { discussions: [] }; }
+    
+    const lastPulse = pulseData.discussions[pulseData.discussions.length - 1];
+    if (!lastPulse) {
+      console.log('  No pulse discussions to process');
+      return;
+    }
+    
+    // 2. Extract action items from discussion
+    const actionPatterns = [
+      /should\s+(create|build|update|add|implement|fix|deploy|improve)\s+(.+?)(?:\.|$)/gi,
+      /need\s+to\s+(create|build|update|add|implement|fix|deploy|improve)\s+(.+?)(?:\.|$)/gi,
+      /let's\s+(create|build|update|add|implement|fix|deploy|improve)\s+(.+?)(?:\.|$)/gi,
+    ];
+    
+    const proposedActions = [];
+    
+    for (const response of lastPulse.responses || []) {
+      const content = response.response || '';
+      
+      for (const pattern of actionPatterns) {
+        const matches = [...content.matchAll(pattern)];
+        for (const match of matches) {
+          const action = match[1].toLowerCase();
+          const target = match[2].trim().slice(0, 100);
+          
+          // Map action verbs to action types
+          let actionType = 'update_file';
+          if (action === 'deploy') actionType = 'deploy_railway';
+          else if (action === 'create' || action === 'build') actionType = 'create_file';
+          else if (action === 'add') actionType = 'add_endpoint';
+          
+          proposedActions.push({
+            agent: response.agent,
+            type: actionType,
+            description: `${action} ${target}`,
+            params: { action, target }
+          });
+        }
+      }
+    }
+    
+    if (proposedActions.length === 0) {
+      console.log('  No actionable items found in latest pulse');
+      return;
+    }
+    
+    console.log(`  Found ${proposedActions.length} potential actions`);
+    
+    // 3. Propose and auto-vote on top 3 actions
+    const results = [];
+    for (const action of proposedActions.slice(0, 3)) {
+      try {
+        const result = await l0reActionAPI.proposeAndExecute(
+          action.agent,
+          action.type,
+          action.description,
+          action.params
+        );
+        results.push({ action: action.description, result });
+      } catch (e) {
+        results.push({ action: action.description, error: e.message });
+      }
+    }
+    
+    console.log(`  Processed ${results.length} actions`);
+    
+    // 4. Log activity
+    await logActivity({ 
+      type: 'l0re_action_loop', 
+      actionsFound: proposedActions.length,
+      actionsProcessed: results.length,
+      results
+    });
+    
+  } catch (e) {
+    console.log(`[${new Date().toISOString()}] 🎭 L0RE Action Loop error: ${e.message}`);
+  }
+}
+
+// Run action loop every 15 minutes (after pulse runs)
+setInterval(l0reActionLoop, 15 * 60 * 1000);
+
+// Initial action loop after 5 minutes
+setTimeout(l0reActionLoop, 5 * 60 * 1000);
+
+console.log('  🎭 L0RE Action Loop: RUNNING (15min)');
+
 module.exports = app;
