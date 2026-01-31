@@ -1,8 +1,8 @@
 {
   "crawler": "d0t-signals",
-  "timestamp": "2026-01-31T15:33:03.900Z",
+  "timestamp": "2026-01-31T16:01:16.493Z",
   "data": {
-    "timestamp": "2026-01-31T15:33:02.597Z",
+    "timestamp": "2026-01-31T16:01:15.663Z",
     "agent": "d0t",
     "role": "Data Oracle",
     "predictions": [
@@ -10,21 +10,21 @@
         "question": "US government shutdown Saturday?",
         "probability": null,
         "volume24h": 20825570.793470968,
-        "liquidity": "2108066.58",
+        "liquidity": "133715.81161",
         "signal": "uncertain"
       },
       {
         "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
         "probability": null,
         "volume24h": 16992684.161560055,
-        "liquidity": "733100.49858",
+        "liquidity": "505964.81175",
         "signal": "uncertain"
       },
       {
         "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
         "probability": null,
         "volume24h": 7150177.923924987,
-        "liquidity": "213360.05317",
+        "liquidity": "215416.35177",
         "signal": "uncertain"
       },
       {
@@ -43,9 +43,9 @@
       }
     ],
     "onchain": {
-      "base_tvl": 4417821803.8147545,
+      "base_tvl": 4391706826.904553,
       "base_change_1d": 0,
-      "eth_tvl": 63980692478.252014,
+      "eth_tvl": 63272122000.90947,
       "eth_change_1d": 0,
       "signal": "base_stable"
     },
@@ -67,7 +67,7 @@
         }
       ],
       "volumeSpikes": [],
-      "timestamp": "2026-01-31T15:33:03.886Z"
+      "timestamp": "2026-01-31T16:01:16.479Z"
     },
     "patterns": [
       {
@@ -206,8 +206,8 @@
         "momentum": 0,
         "regime": "dormant",
         "onchainChange": 0,
-        "baseTVL": 4417821803.8147545,
-        "ethTVL": 63980692478.252014,
+        "baseTVL": 4391706826.904553,
+        "ethTVL": 63272122000.90947,
         "narrativeStrength": 0.5,
         "memeVelocity": 0,
         "volumeChange": 0,
@@ -215,7 +215,7 @@
       }
     },
     "turb0": {
-      "timestamp": "2026-01-31T15:33:03.888Z",
+      "timestamp": "2026-01-31T16:01:16.481Z",
       "decision": "BUY",
       "confidence": 0.644,
       "size": 0.0205,

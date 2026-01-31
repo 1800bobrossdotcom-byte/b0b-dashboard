@@ -17,6 +17,7 @@
  */
 
 import { useEffect, useState } from 'react';
+import { TeamChat } from '@/components/live/TeamChatGysin';
 
 // ASCII Art Banner
 const TURB0_ASCII = `████████╗██╗   ██╗██████╗ ██████╗  ██████╗ ██████╗  ██████╗  ██████╗ ███████╗████████╗
@@ -377,6 +378,12 @@ export default function TURB0B00STDashboard() {
             <span className="agent-state">SYSTEM: {agentConsensus?.r0ss?.coherence || 'ALIGNED'}</span>
           </div>
         </div>
+      </section>
+
+      {/* Team Chat — Live Discussions from /labs data */}
+      <section className="team-chat-section">
+        <h2>💬 TEAM DISCUSSIONS</h2>
+        <TeamChat compact={true} maxMessages={8} showAscii={false} />
       </section>
 
       {/* Security Footer */}
