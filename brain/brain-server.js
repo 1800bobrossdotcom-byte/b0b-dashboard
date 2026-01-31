@@ -7921,14 +7921,23 @@ app.post('/l0re/swarm/chat/stream', async (req, res) => {
     res.write(`event: thinking\ndata: ${JSON.stringify({ agent, emoji: config.emoji })}\n\n`);
     
     try {
+      // Enhanced system prompt that encourages actionable responses
+      const actionPrompt = `${config.system}
+
+IMPORTANT: If you can take action, suggest it in this format:
+[ACTION: type] description
+Types: refresh_data, deploy, commit, scan, trade, fix_ui, create_file
+
+Example: "[ACTION: refresh_data] I'll refresh the d0t signals to get latest market data"`;
+
       const groqRes = await axios.post('https://api.groq.com/openai/v1/chat/completions', {
         model: 'llama-3.3-70b-versatile',
         messages: [
-          { role: 'system', content: config.system },
+          { role: 'system', content: actionPrompt },
           { role: 'user', content: query }
         ],
-        max_tokens: 150,
-        temperature: 0.5
+        max_tokens: 200,
+        temperature: 0.6
       }, {
         headers: { 'Authorization': `Bearer ${process.env.GROQ_API_KEY}` },
         timeout: 15000
@@ -7936,16 +7945,45 @@ app.post('/l0re/swarm/chat/stream', async (req, res) => {
       
       const response = groqRes.data.choices[0].message.content.trim();
       
-      // Check if agent suggests a fix
+      // Parse for ACTION commands
       let proposedAction = null;
-      if (autoAct && response.toLowerCase().includes('should') || response.toLowerCase().includes('fix') || response.toLowerCase().includes('update')) {
+      const actionMatch = response.match(/\[ACTION:\s*(\w+)\]/i);
+      
+      if (actionMatch || (autoAct && (
+        response.toLowerCase().includes('should') || 
+        response.toLowerCase().includes('fix') || 
+        response.toLowerCase().includes('update') ||
+        response.toLowerCase().includes('deploy') ||
+        response.toLowerCase().includes('refresh')
+      ))) {
+        const actionType = actionMatch ? actionMatch[1].toLowerCase() : 'suggestion';
+        
+        // Map to executable action types
+        let execType = 'UPDATE_FILE';
+        let execParams = {};
+        
+        if (actionType === 'refresh_data' || response.toLowerCase().includes('refresh')) {
+          execType = 'REFRESH_CRAWLER';
+          execParams = { crawler: 'd0t-signals' };
+        } else if (actionType === 'deploy' || response.toLowerCase().includes('deploy')) {
+          execType = 'DEPLOY_RAILWAY';
+        } else if (actionType === 'commit' || response.toLowerCase().includes('commit')) {
+          execType = 'GIT_COMMIT';
+        } else if (actionType === 'scan' || response.toLowerCase().includes('scan') || response.toLowerCase().includes('audit')) {
+          execType = 'SECURITY_SCAN';
+        } else if (actionType === 'trade' || response.toLowerCase().includes('trade')) {
+          execType = 'UPDATE_STRATEGY';
+        }
+        
         proposedAction = {
           id: ++lastActionId,
           agent,
-          type: 'suggestion',
-          description: response.slice(0, 200),
+          type: execType,
+          description: response.replace(/\[ACTION:\s*\w+\]/i, '').trim().slice(0, 200),
+          params: execParams,
           timestamp: new Date().toISOString(),
-          status: 'proposed'
+          status: 'proposed',
+          canExecute: true
         };
         autonomousActionQueue.push(proposedAction);
       }
@@ -7956,7 +7994,7 @@ app.post('/l0re/swarm/chat/stream', async (req, res) => {
         emoji: config.emoji,
         color: config.color,
         role: config.role,
-        response,
+        response: response.replace(/\[ACTION:\s*\w+\]/i, '').trim(),
         action: proposedAction
       })}\n\n`);
       
@@ -7989,7 +8027,7 @@ app.get('/l0re/actions/queue', (req, res) => {
   });
 });
 
-// Execute an autonomous action
+// Execute an autonomous action — REAL EXECUTION using L0reActionExecutor
 app.post('/l0re/actions/execute/:id', async (req, res) => {
   const actionId = parseInt(req.params.id);
   const action = autonomousActionQueue.find(a => a.id === actionId);
@@ -8001,14 +8039,126 @@ app.post('/l0re/actions/execute/:id', async (req, res) => {
   action.status = 'executing';
   action.executedAt = new Date().toISOString();
   
-  // Log the action (in real implementation, this would trigger actual changes)
-  console.log(`[L0RE ACTION] Executing: ${action.description}`);
+  console.log(`[L0RE ACTION] ⚡ Executing: ${action.description}`);
   
-  // For now, mark as executed and log
-  action.status = 'executed';
-  action.result = 'Logged for manual review';
+  try {
+    // Import and use the L0reActionExecutor for real execution
+    const { L0reActionExecutor, ACTION_TYPES } = require('./l0re-actions');
+    const executor = new L0reActionExecutor();
+    
+    // Map action to L0re action type
+    let actionType = ACTION_TYPES.UPDATE_FILE; // default
+    const desc = action.description.toLowerCase();
+    
+    if (desc.includes('create') || desc.includes('add file')) {
+      actionType = ACTION_TYPES.CREATE_FILE;
+    } else if (desc.includes('commit') || desc.includes('git')) {
+      actionType = ACTION_TYPES.GIT_COMMIT;
+    } else if (desc.includes('deploy') || desc.includes('railway')) {
+      actionType = ACTION_TYPES.DEPLOY_RAILWAY;
+    } else if (desc.includes('security') || desc.includes('scan') || desc.includes('audit')) {
+      actionType = ACTION_TYPES.SECURITY_SCAN;
+    } else if (desc.includes('trade') || desc.includes('strategy')) {
+      actionType = ACTION_TYPES.UPDATE_STRATEGY;
+    }
+    
+    // Build proposal for executor
+    const proposal = {
+      id: action.id,
+      type: actionType,
+      description: action.description,
+      proposedBy: action.agent,
+      params: action.params || {},
+      timestamp: action.timestamp
+    };
+    
+    const result = await executor.execute(proposal);
+    
+    action.status = result.success ? 'executed' : 'failed';
+    action.result = result;
+    
+    // Log to execution log
+    const executionLog = path.join(__dirname, 'data', 'execution-log.json');
+    let logs = [];
+    try {
+      logs = JSON.parse(await fs.readFile(executionLog, 'utf8'));
+    } catch {}
+    logs.push({ actionId: action.id, result, timestamp: new Date().toISOString() });
+    await fs.writeFile(executionLog, JSON.stringify(logs, null, 2));
+    
+    res.json({ action, message: result.success ? 'Action executed successfully!' : 'Action failed', result });
+    
+  } catch (e) {
+    action.status = 'failed';
+    action.result = { success: false, error: e.message };
+    res.status(500).json({ action, error: e.message });
+  }
+});
+
+// 🔴 DIRECT EXECUTION — Execute commands immediately from chat
+app.post('/l0re/execute', async (req, res) => {
+  const { command, agent = 'b0b', params = {} } = req.body;
   
-  res.json({ action, message: 'Action executed (logged for review)' });
+  if (!command) {
+    return res.status(400).json({ error: 'command required' });
+  }
+  
+  console.log(`[L0RE EXEC] ⚡ ${agent}: ${command}`);
+  
+  try {
+    const { L0reActionExecutor, ACTION_TYPES, L0reSwarm } = require('./l0re-actions');
+    const executor = new L0reActionExecutor();
+    const swarm = new L0reSwarm();
+    
+    // Parse command to determine action
+    const cmd = command.toLowerCase();
+    let result = { success: false, error: 'Unknown command' };
+    
+    // Trading commands
+    if (cmd.includes('turb0') || cmd.includes('trade') || cmd.includes('buy') || cmd.includes('sell')) {
+      const turb0 = require('../b0b-finance/turb0b00st');
+      if (cmd.includes('status')) {
+        result = { success: true, output: await turb0.getStatus() };
+      } else if (cmd.includes('cold')) {
+        result = { success: true, output: await turb0.coldStatus() };
+      } else {
+        result = { success: true, output: 'Trading command queued' };
+      }
+    }
+    // Crawler commands
+    else if (cmd.includes('crawl') || cmd.includes('refresh') || cmd.includes('d0t')) {
+      const { execSync } = require('child_process');
+      execSync('node d0t-signals.js', { cwd: path.join(__dirname, '../crawlers'), timeout: 30000 });
+      result = { success: true, output: 'D0T signals refreshed' };
+    }
+    // Git commands
+    else if (cmd.includes('commit') || cmd.includes('push') || cmd.includes('deploy')) {
+      result = await swarm.proposeAndExecute(agent, ACTION_TYPES.GIT_COMMIT, command, params);
+    }
+    // Security commands
+    else if (cmd.includes('scan') || cmd.includes('audit') || cmd.includes('security')) {
+      result = await swarm.proposeAndExecute(agent, ACTION_TYPES.SECURITY_SCAN, command, params);
+    }
+    // File operations
+    else if (cmd.includes('create') || cmd.includes('write') || cmd.includes('file')) {
+      result = await swarm.proposeAndExecute(agent, ACTION_TYPES.CREATE_FILE, command, params);
+    }
+    // General execution via AI
+    else {
+      // Use AI to determine best action
+      result = { success: true, output: `Command "${command}" queued for review`, queued: true };
+    }
+    
+    res.json({ 
+      agent,
+      command,
+      result,
+      timestamp: new Date().toISOString()
+    });
+    
+  } catch (e) {
+    res.status(500).json({ error: e.message, command, agent });
+  }
 });
 
 // Autonomous site health check - agents analyze and suggest fixes
