@@ -117,6 +117,20 @@ try {
   console.log('[BRAIN] Discussion scheduler not available:', e.message);
 }
 
+// 🤖 JARVIS BRIDGE — Clawdbot Integration (d0t spawning, Nash consensus, tx validation)
+let jarvisBridge;
+try {
+  const { getJarvisBridge } = require('./jarvis-bridge.js');
+  jarvisBridge = getJarvisBridge({
+    tradingEnabled: process.env.TRADING_ENABLED === 'true',
+    nashSwarmEnabled: true,
+    tenantId: 'b0b-swarm',
+  });
+  console.log('[BRAIN] Jarvis Bridge loaded — Clawdbot integration active 🤖');
+} catch (e) {
+  console.log('[BRAIN] Jarvis Bridge not available:', e.message);
+}
+
 // Research Library — PDF/doc knowledge base
 const LIBRARY_DIR = path.join(__dirname, 'data', 'library');
 const LIBRARY_INDEX_DIR = path.join(LIBRARY_DIR, 'index');
@@ -946,6 +960,7 @@ app.get('/l0re/intelligence/status', (req, res) => {
   res.json({
     available: !!L0REIntelligence,
     turb0Available: !!TURB0B00STEngine,
+    jarvisAvailable: !!jarvisBridge,
     agents: {
       d0t: !!D0TIntelligence,
       b0b: !!B0BIntelligence,
@@ -956,6 +971,212 @@ app.get('/l0re/intelligence/status', (req, res) => {
     nashStates: ['COOPERATIVE', 'COMPETITIVE', 'DEFECTION', 'EQUILIBRIUM', 'SCHELLING'],
     message: '🔮 Multi-dimensional classification: Tegmark + Nash + Shannon + Mandelbrot',
   });
+});
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// 🤖 JARVIS API — Clawdbot Integration Endpoints
+// d0t Spawning | Nash Consensus | TX Validation | Task Management
+// ═══════════════════════════════════════════════════════════════════════════════
+
+// Get Jarvis/Clawdbot status
+app.get('/jarvis/status', async (req, res) => {
+  if (!jarvisBridge) {
+    return res.status(503).json({ error: 'Jarvis Bridge not loaded' });
+  }
+  try {
+    const dashboard = await jarvisBridge.getSwarmDashboardData();
+    res.json({
+      status: 'online',
+      version: '1.0.0',
+      ...dashboard,
+      message: '🤖 Jarvis Clawdbot integration active',
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Request new d0t wallet
+app.post('/jarvis/d0t/request', async (req, res) => {
+  if (!jarvisBridge) {
+    return res.status(503).json({ error: 'Jarvis Bridge not loaded' });
+  }
+  try {
+    const { email, purpose, type } = req.body;
+    if (!email || !purpose) {
+      return res.status(400).json({ error: 'email and purpose required' });
+    }
+    const d0t = await jarvisBridge.requestNewD0t(email, purpose, type || 'trading');
+    res.json({
+      success: true,
+      message: 'D0t wallet request submitted',
+      d0t,
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Approve d0t wallet request
+app.post('/jarvis/d0t/approve', async (req, res) => {
+  if (!jarvisBridge) {
+    return res.status(503).json({ error: 'Jarvis Bridge not loaded' });
+  }
+  try {
+    const { requestId, walletAddress } = req.body;
+    if (!requestId || !walletAddress) {
+      return res.status(400).json({ error: 'requestId and walletAddress required' });
+    }
+    const d0t = await jarvisBridge.approveD0t(requestId, walletAddress);
+    res.json({
+      success: true,
+      message: 'D0t wallet approved',
+      d0t,
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Fund d0t wallet
+app.post('/jarvis/d0t/fund', async (req, res) => {
+  if (!jarvisBridge) {
+    return res.status(503).json({ error: 'Jarvis Bridge not loaded' });
+  }
+  try {
+    const { d0tId, amountETH } = req.body;
+    if (!d0tId || !amountETH) {
+      return res.status(400).json({ error: 'd0tId and amountETH required' });
+    }
+    const result = await jarvisBridge.fundD0t(d0tId, amountETH);
+    res.json(result);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Get d0t swarm status
+app.get('/jarvis/d0t/swarm', async (req, res) => {
+  if (!jarvisBridge) {
+    return res.status(503).json({ error: 'Jarvis Bridge not loaded' });
+  }
+  try {
+    const swarm = jarvisBridge.getD0tSwarmStatus();
+    res.json({
+      success: true,
+      ...swarm,
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Validate transaction (c0m security layer)
+app.post('/jarvis/tx/validate', async (req, res) => {
+  if (!jarvisBridge) {
+    return res.status(503).json({ error: 'Jarvis Bridge not loaded' });
+  }
+  try {
+    const validation = await jarvisBridge.validateTransaction(req.body);
+    res.json(validation);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Nash consensus vote
+app.post('/jarvis/nash/vote', async (req, res) => {
+  if (!jarvisBridge) {
+    return res.status(503).json({ error: 'Jarvis Bridge not loaded' });
+  }
+  try {
+    const { decision, context } = req.body;
+    if (!decision) {
+      return res.status(400).json({ error: 'decision required (BUY/SELL/HOLD)' });
+    }
+    const result = await jarvisBridge.nashConsensusVote(decision, context || {});
+    res.json(result);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Take profit execution
+app.post('/jarvis/profit/take', async (req, res) => {
+  if (!jarvisBridge) {
+    return res.status(503).json({ error: 'Jarvis Bridge not loaded' });
+  }
+  try {
+    const { tokenAddress, percentToSell, options } = req.body;
+    if (!tokenAddress || !percentToSell) {
+      return res.status(400).json({ error: 'tokenAddress and percentToSell required' });
+    }
+    const result = await jarvisBridge.takeProfit(tokenAddress, percentToSell, options || {});
+    res.json(result);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Submit task
+app.post('/jarvis/task/submit', async (req, res) => {
+  if (!jarvisBridge) {
+    return res.status(503).json({ error: 'Jarvis Bridge not loaded' });
+  }
+  try {
+    const { instruction, options } = req.body;
+    if (!instruction) {
+      return res.status(400).json({ error: 'instruction required' });
+    }
+    const task = await jarvisBridge.submitTask(instruction, options || {});
+    res.json({
+      success: true,
+      task,
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Store memory
+app.post('/jarvis/memory/store', async (req, res) => {
+  if (!jarvisBridge) {
+    return res.status(503).json({ error: 'Jarvis Bridge not loaded' });
+  }
+  try {
+    const { content, metadata } = req.body;
+    if (!content) {
+      return res.status(400).json({ error: 'content required' });
+    }
+    const memory = await jarvisBridge.storeMemory(content, metadata || {});
+    res.json({
+      success: true,
+      memory,
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Query memory
+app.get('/jarvis/memory/query', async (req, res) => {
+  if (!jarvisBridge) {
+    return res.status(503).json({ error: 'Jarvis Bridge not loaded' });
+  }
+  try {
+    const { q, limit } = req.query;
+    if (!q) {
+      return res.status(400).json({ error: 'q (query) required' });
+    }
+    const results = await jarvisBridge.queryMemory(q, parseInt(limit) || 10);
+    res.json({
+      success: true,
+      count: results.length,
+      results,
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
 });
 
 // L0RE Pulse history - periodic swarm discussions
