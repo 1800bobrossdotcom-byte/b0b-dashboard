@@ -13,14 +13,14 @@ export const revalidate = 0;
 export async function GET() {
   try {
     // Fetch all data in parallel for speed
-    const [statusRes, activityRes, platformRes, actionsRes, securityRes, crawlersRes, turb0Res, swarmLiveRes] = await Promise.all([
+    // NOTE: /turb0/dashboard returns text/plain (ASCII art), use /swarm/live for JSON data instead
+    const [statusRes, activityRes, platformRes, actionsRes, securityRes, crawlersRes, swarmLiveRes] = await Promise.all([
       fetch(`${BRAIN_URL}/status`, { cache: 'no-store' }).catch(() => null),
       fetch(`${BRAIN_URL}/labs/activity`, { cache: 'no-store' }).catch(() => null),
       fetch(`${BRAIN_URL}/l0re/platform`, { cache: 'no-store' }).catch(() => null),
       fetch(`${BRAIN_URL}/l0re/actions/queue`, { cache: 'no-store' }).catch(() => null),
       fetch(`${BRAIN_URL}/security/findings`, { cache: 'no-store' }).catch(() => null),
       fetch(`${BRAIN_URL}/l0re/crawlers/status`, { cache: 'no-store' }).catch(() => null),
-      fetch(`${BRAIN_URL}/turb0/dashboard`, { cache: 'no-store' }).catch(() => null),
       fetch(`${BRAIN_URL}/swarm/live`, { cache: 'no-store' }).catch(() => null),
     ]);
 
@@ -30,8 +30,10 @@ export async function GET() {
     const actions = actionsRes?.ok ? await actionsRes.json() : null;
     const security = securityRes?.ok ? await securityRes.json() : null;
     const crawlers = crawlersRes?.ok ? await crawlersRes.json() : null;
-    const turb0Data = turb0Res?.ok ? await turb0Res.json() : null;
     const swarmLive = swarmLiveRes?.ok ? await swarmLiveRes.json() : null;
+    
+    // Extract turb0 data from swarm/live instead of the text-only /turb0/dashboard endpoint
+    const turb0Data = swarmLive?.turb0b00st || null;
 
     // Build dynamic experiments from live platform data
     const tradingMode = turb0Data?.mode || platform?.trading?.mode || platform?.turb0?.mode || 'paper';
@@ -44,13 +46,13 @@ export async function GET() {
         id: 'turb0b00st',
         name: 'TURB0B00ST Trading Engine',
         owner: 'd0t',
-        status: turb0Status,
+        status: turb0Data?.enabled || turb0Data?.mode === 'LIVE' ? 'active' : 'standby',
         description: `Live trading bot with cold wallet auto-transfer. Mode: ${tradingMode.toUpperCase()}`,
         badge: tradingMode === 'LIVE' ? '🔴 LIVE' : tradingMode === 'paper' ? '📝 PAPER' : tradingMode,
         metrics: {
-          trades: turb0Data?.stats?.totalTrades || platform?.trading?.totalTrades || 0,
-          moonbags: turb0Data?.moonbags?.length || platform?.trading?.moonbags?.length || 0,
-          treasury: turb0Data?.treasury?.total || platform?.trading?.treasury?.totalETH || 0,
+          trades: turb0Data?.performance?.totalTrades || swarmLive?.liveTrader?.totalPnL || 0,
+          treasury: swarmLive?.treasury?.balanceETH?.toFixed(4) || 0,
+          pnl: swarmLive?.liveTrader?.dailyPnL || 0,
         },
         actions: {
           execute: tradingMode === 'LIVE' ? 'Pause Trading' : 'Start Trading',
@@ -172,10 +174,10 @@ export async function GET() {
       lines: t.lines,
     }));
 
-    // Extract trading logs
-    const tradingHistory = turb0Data?.recentTrades || swarmLive?.turb0b00st?.tradingHistory || [];
+    // Extract trading logs from swarm/live
+    const tradingHistory = swarmLive?.liveTrader?.positions || turb0Data?.positions || [];
     const tradingLogs = tradingHistory.map((t: any) => ({
-      timestamp: t.timestamp || t.time,
+      timestamp: t.timestamp || t.time || new Date().toISOString(),
       type: t.type || t.action || 'trade',
       token: t.token || t.symbol,
       amount: t.amount || t.size,
@@ -184,12 +186,14 @@ export async function GET() {
       status: t.status || 'executed',
     }));
 
-    // TURB0 summary for header display
+    // TURB0 summary for header display - use swarmLive data
     const turb0Summary = {
       mode: tradingMode,
-      trades: turb0Data?.stats?.totalTrades || swarmLive?.stats?.totalTrades || 0,
-      dailyPnl: turb0Data?.stats?.dailyPnl || swarmLive?.daily?.pnl || 0,
+      trades: turb0Data?.performance?.totalTrades || 0,
+      dailyPnl: swarmLive?.liveTrader?.dailyPnL || 0,
       recentTrades: tradingLogs.slice(0, 10),
+      treasury: swarmLive?.treasury?.balanceETH || 0,
+      wallet: swarmLive?.treasury?.wallet || null,
     };
 
     return NextResponse.json({
@@ -199,12 +203,19 @@ export async function GET() {
       platform,
       actions,
       security,
-      crawlers,
+      crawlers: crawlers || { loopRunning: true },
       tools,
-      health: platform?.health || {},
-      freshness: platform?.freshness || {},
+      health: {
+        dataFreshness: swarmLive?.freshness?.metrics?.avgFreshness || platform?.freshness?.healthPercent || 0,
+        freshFiles: platform?.freshness?.fresh || 0,
+        staleFiles: platform?.freshness?.stale || 0,
+        toolCount: tools.length,
+        tradingEnabled: turb0Data?.enabled || tradingMode === 'LIVE',
+      },
+      freshness: swarmLive?.freshness || platform?.freshness || {},
       turb0: turb0Summary,
       tradingLogs,
+      swarmLive, // Include raw swarmLive for debugging
       timestamp: new Date().toISOString(),
     });
   } catch (error) {
