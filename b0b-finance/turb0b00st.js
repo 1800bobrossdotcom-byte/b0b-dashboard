@@ -532,6 +532,98 @@ class Turb0b00st {
   }
 
   // ─────────────────────────────────────────────────────────────────────────────
+  // COLD WALLET TRANSFERS - Auto-secure profits
+  // ─────────────────────────────────────────────────────────────────────────────
+  
+  async transferToCold(amountETH) {
+    const coldWallet = process.env.COLD_WALLET_ADDRESS;
+    if (!coldWallet) {
+      this.log('❌ COLD_WALLET_ADDRESS not configured', 'ERROR');
+      return { success: false, error: 'Cold wallet not configured' };
+    }
+    
+    if (!this.wallet) {
+      const initResult = await this.initializeWallet();
+      if (!initResult.success) {
+        return { success: false, error: initResult.error };
+      }
+    }
+    
+    try {
+      const provider = this.providers.base;
+      const connectedWallet = this.wallet.connect(provider);
+      
+      // Check balance
+      const balance = await provider.getBalance(this.wallet.address);
+      const balanceETH = parseFloat(ethers.formatEther(balance));
+      const minReserve = parseFloat(CONFIG.SAFETY.MIN_BALANCE_BUFFER_USD) / 3000; // ~$25 in ETH
+      
+      if (balanceETH - amountETH < minReserve) {
+        this.log(`❌ Would leave insufficient gas reserve (need ${minReserve} ETH)`, 'ERROR');
+        return { success: false, error: 'Insufficient balance after reserve' };
+      }
+      
+      // Execute transfer
+      const tx = await connectedWallet.sendTransaction({
+        to: coldWallet,
+        value: ethers.parseEther(amountETH.toString()),
+      });
+      
+      this.log(`🧊 Cold transfer initiated: ${amountETH} ETH → ${L0RE.hash(coldWallet)}`, 'TRANSFER');
+      
+      // Wait for confirmation
+      const receipt = await tx.wait();
+      
+      this.log(`✅ Cold transfer confirmed: ${receipt.hash}`, 'SUCCESS');
+      
+      // Log the transfer
+      this.state.coldTransfers = this.state.coldTransfers || [];
+      this.state.coldTransfers.push({
+        timestamp: new Date().toISOString(),
+        amount: amountETH,
+        txHash: receipt.hash,
+        crawlerView: L0RE.crawler('cold-transfer', { amount: amountETH }),
+      });
+      this.saveState();
+      
+      return { 
+        success: true, 
+        txHash: receipt.hash,
+        amount: amountETH,
+        explorer: `https://basescan.org/tx/${receipt.hash}`,
+      };
+    } catch (e) {
+      this.log(`❌ Cold transfer failed: ${e.message}`, 'ERROR');
+      return { success: false, error: e.message };
+    }
+  }
+  
+  async checkAndTransferProfits(profitThreshold = 0.01) {
+    // Auto-transfer profits above threshold to cold wallet
+    const coldWallet = process.env.COLD_WALLET_ADDRESS;
+    if (!coldWallet) return { skipped: true, reason: 'No cold wallet configured' };
+    
+    try {
+      const provider = this.providers.base;
+      const balance = await provider.getBalance(this.wallet.address);
+      const balanceETH = parseFloat(ethers.formatEther(balance));
+      
+      // Calculate safe transfer amount (keep reserve for gas)
+      const minReserve = 0.01; // Keep 0.01 ETH for gas
+      const transferable = balanceETH - minReserve;
+      
+      if (transferable >= profitThreshold) {
+        this.log(`💰 Profits detected: ${transferable.toFixed(4)} ETH. Auto-transferring to cold...`, 'PROFIT');
+        return await this.transferToCold(transferable);
+      }
+      
+      return { skipped: true, reason: 'Below threshold', balance: balanceETH, threshold: profitThreshold };
+    } catch (e) {
+      return { success: false, error: e.message };
+    }
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────────
   // MODE CONTROL
   // ─────────────────────────────────────────────────────────────────────────────
   
@@ -719,6 +811,49 @@ async function main() {
       turbo.clearEmergencyStop();
       break;
 
+    case 'cold-status':
+      // Check cold wallet and profit status
+      await turbo.initializeWallet();
+      const coldResult = await turbo.checkAndTransferProfits(999999); // High threshold = just check
+      console.log('\n  🧊 COLD WALLET STATUS');
+      console.log('  ─────────────────────────────────────────────────────────────────────────────');
+      console.log(`  Cold Wallet: ${process.env.COLD_WALLET_ADDRESS || 'NOT CONFIGURED'}`);
+      console.log(`  Trading Balance: ${coldResult.balance?.toFixed(4) || '?'} ETH`);
+      console.log(`  Cold Transfers: ${turbo.state.coldTransfers?.length || 0}`);
+      console.log('\n');
+      break;
+      
+    case 'cold-transfer':
+      // Manual cold transfer: node turb0b00st.js cold-transfer 0.01
+      const transferAmount = parseFloat(args[0]);
+      if (!transferAmount || transferAmount <= 0) {
+        console.log('\n❌ Usage: node turb0b00st.js cold-transfer <amount_eth>\n');
+        break;
+      }
+      const txResult = await turbo.transferToCold(transferAmount);
+      if (txResult.success) {
+        console.log(`\n✅ Transferred ${transferAmount} ETH to cold wallet`);
+        console.log(`   TX: ${txResult.explorer}\n`);
+      } else {
+        console.log(`\n❌ Transfer failed: ${txResult.error}\n`);
+      }
+      break;
+      
+    case 'auto-profit':
+      // Auto-transfer profits above threshold
+      const threshold = parseFloat(args[0]) || 0.01;
+      const profitResult = await turbo.checkAndTransferProfits(threshold);
+      if (profitResult.success) {
+        console.log(`\n✅ Auto-transferred ${profitResult.amount} ETH to cold wallet`);
+        console.log(`   TX: ${profitResult.explorer}\n`);
+      } else if (profitResult.skipped) {
+        console.log(`\n⏸️  Skipped: ${profitResult.reason}`);
+        console.log(`   Balance: ${profitResult.balance?.toFixed(4) || '?'} ETH, Threshold: ${threshold} ETH\n`);
+      } else {
+        console.log(`\n❌ Failed: ${profitResult.error}\n`);
+      }
+      break;
+
     default:
       console.log(`
   TURB0B00ST - Live Wallet Activation System
@@ -730,6 +865,11 @@ async function main() {
     execute <json>  - Execute a trade signal
     emergency [msg] - Emergency stop all trading
     clear-emergency - Clear emergency stop
+    
+  Cold Wallet:
+    cold-status    - Check cold wallet & profit status
+    cold-transfer <eth> - Transfer ETH to cold wallet
+    auto-profit [threshold] - Auto-transfer profits (default 0.01 ETH)
       `);
   }
 }
