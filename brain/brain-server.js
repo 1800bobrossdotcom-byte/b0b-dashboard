@@ -102,6 +102,21 @@ try {
   console.log('[BRAIN] Integrated crawlers not available:', e.message);
 }
 
+// 🧠 AUTONOMOUS DISCUSSION SCHEDULER — Team thinking loop
+let discussionScheduler;
+try {
+  discussionScheduler = require('./discussion-scheduler.js');
+  console.log('[BRAIN] Discussion scheduler loaded — swarm thinking autonomously 🧠');
+  
+  // Start scheduler after 30 seconds (let other systems initialize)
+  setTimeout(() => {
+    discussionScheduler.startScheduler();
+    console.log('[BRAIN] Discussion scheduler started — team never stops thinking');
+  }, 30000);
+} catch (e) {
+  console.log('[BRAIN] Discussion scheduler not available:', e.message);
+}
+
 // Research Library — PDF/doc knowledge base
 const LIBRARY_DIR = path.join(__dirname, 'data', 'library');
 const LIBRARY_INDEX_DIR = path.join(LIBRARY_DIR, 'index');
@@ -4592,6 +4607,66 @@ app.post('/discussions', async (req, res) => {
   await logActivity({ type: 'discussion_created', discussionId: discussion.id, title });
   
   res.json(discussion);
+});
+
+// ═════════════════════════════════════════════════════════════════════════════
+// 🧠 AUTONOMOUS DISCUSSIONS — Run team discussions via API
+// ═════════════════════════════════════════════════════════════════════════════
+
+// Trigger an autonomous discussion
+app.post('/discussions/autonomous', async (req, res) => {
+  try {
+    if (!discussionScheduler) {
+      return res.status(503).json({ error: 'Discussion scheduler not available' });
+    }
+    
+    const { topic, rounds = 2 } = req.body;
+    const discussionTopic = topic || discussionScheduler.getScheduledTopic();
+    
+    // Run async - don't block the request
+    discussionScheduler.runAutonomousDiscussion(discussionTopic, '', rounds)
+      .then(disc => {
+        if (disc) {
+          console.log(`[BRAIN] Autonomous discussion ${disc.id} completed`);
+        }
+      })
+      .catch(e => console.error('[BRAIN] Autonomous discussion error:', e.message));
+    
+    res.json({ 
+      status: 'started',
+      topic: discussionTopic,
+      message: 'Discussion running in background - check /discussions for results'
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Get scheduler status
+app.get('/discussions/scheduler', async (req, res) => {
+  try {
+    if (!discussionScheduler) {
+      return res.status(503).json({ error: 'Discussion scheduler not available' });
+    }
+    
+    const statePath = path.join(__dirname, 'data', 'scheduler-state.json');
+    let state = {};
+    try {
+      const data = await fs.readFile(statePath, 'utf-8');
+      state = JSON.parse(data);
+    } catch (e) {
+      // No state yet
+    }
+    
+    res.json({
+      status: 'active',
+      config: discussionScheduler.CONFIG,
+      state,
+      nextScheduledTopic: discussionScheduler.getScheduledTopic(),
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
 });
 
 // =============================================================================

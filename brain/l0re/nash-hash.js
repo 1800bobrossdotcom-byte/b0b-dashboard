@@ -569,6 +569,47 @@ async function main() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// ANALYSIS METHODS (L0RE pattern)
+// ═══════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Analyze Nash Hash system - returns metadata on players, strategies, and security
+ * @param {NashHash} instance - Optional NashHash instance to analyze
+ * @returns {Object} Analysis object with cryptographic metadata
+ */
+function analyzeNashHash(instance = null) {
+  const nash = instance || new NashHash();
+  
+  const analysis = {
+    system: 'nash-hash',
+    version: '1.0.0',
+    players: {
+      active: nash.players,
+      count: nash.players.length,
+      threshold: nash.threshold,
+      rounds: nash.rounds
+    },
+    availablePlayers: Object.keys(HASH_PLAYERS),
+    playerProfiles: Object.entries(PLAYER_PROFILES).map(([name, profile]) => ({
+      name,
+      family: profile.family,
+      strength: profile.strength,
+      role: profile.role
+    })),
+    security: {
+      minBits: Math.min(...nash.players.map(p => PLAYER_PROFILES[p]?.strength || 0)),
+      maxBits: Math.max(...nash.players.map(p => PLAYER_PROFILES[p]?.strength || 0)),
+      families: [...new Set(nash.players.map(p => PLAYER_PROFILES[p]?.family))]
+    },
+    recordCount: nash.players.length,
+    analyzedAt: new Date().toISOString(),
+    analyzedBy: 'c0m'
+  };
+  
+  return { success: true, analysis };
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // EXPORTS
 // ═══════════════════════════════════════════════════════════════════════════════
 
@@ -578,6 +619,7 @@ module.exports = {
   HASH_PLAYERS,
   PLAYER_PROFILES,
   displayNashHash,
+  analyzeNashHash,
 };
 
 if (require.main === module) {

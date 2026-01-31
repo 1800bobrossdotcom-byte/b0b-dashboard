@@ -247,6 +247,35 @@ function formatArticles(articles) {
 }
 
 /**
+ * Analyze Bankr content - L0RE analysis pattern
+ * Returns metadata, record counts, and statistics
+ * @returns {Object} Analysis object
+ */
+function analyzeBankrData() {
+  const articles = get101Articles();
+  const news = getNews();
+  const integrations = getIntegrations();
+  
+  const analysis = {
+    source: 'bankr-reader',
+    url: CONFIG.BANKR_URL,
+    recordCount: articles.length + news.length + integrations.length,
+    breakdown: {
+      articles: articles.length,
+      news: news.length,
+      integrations: integrations.length
+    },
+    categories: [...new Set([...articles, ...news].map(a => a.category))],
+    allTags: [...new Set([...articles, ...news].flatMap(a => a.tags || []))],
+    stats: BANKR_STATS,
+    analyzedAt: new Date().toISOString(),
+    analyzedBy: 'd0t'
+  };
+  
+  return { success: true, analysis };
+}
+
+/**
  * Generate RSS-like feed
  * @returns {Object} Feed object
  */
@@ -425,6 +454,7 @@ module.exports = {
   formatArticles,
   generateFeed,
   getFeaturesSummary,
+  analyzeBankrData,
   BANKR_101_ARTICLES,
   BANKR_NEWS,
   BANKR_INTEGRATIONS,

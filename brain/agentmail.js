@@ -206,6 +206,80 @@ class SwarmMailClient {
       };
     }
   }
+
+  // ═══════════════════════════════════════════════════════════════
+  // ANALYSIS METHODS (L0RE pattern)
+  // ═══════════════════════════════════════════════════════════════
+
+  /**
+   * Analyze inbox data - L0RE analysis pattern
+   * @param {string} agent - Agent name (b0b, c0m, d0t)
+   * @returns {Object} Analysis object with metadata and statistics
+   */
+  async analyzeInbox(agent) {
+    const inboxId = this.inboxes[agent] || agent;
+    const messages = await this.getMessages(agent, 100);
+    const threads = await this.getThreads(agent, 100);
+    
+    const analysis = {
+      inbox: inboxId,
+      agent: agent,
+      messageCount: messages?.messages?.length || 0,
+      threadCount: threads?.threads?.length || 0,
+      recordCount: (messages?.messages?.length || 0) + (threads?.threads?.length || 0),
+      categories: {
+        verifications: 0,
+        bountyNotifications: 0,
+        trading: 0,
+        other: 0
+      },
+      analyzedAt: new Date().toISOString(),
+      analyzedBy: 'd0t'
+    };
+    
+    // Categorize messages
+    if (messages?.messages) {
+      for (const msg of messages.messages) {
+        const subject = (msg.subject || '').toLowerCase();
+        const from = (msg.from || '').toLowerCase();
+        
+        if (subject.includes('verify') || subject.includes('confirm')) {
+          analysis.categories.verifications++;
+        } else if (from.includes('immunefi') || subject.includes('bounty')) {
+          analysis.categories.bountyNotifications++;
+        } else if (subject.includes('trade') || subject.includes('swap')) {
+          analysis.categories.trading++;
+        } else {
+          analysis.categories.other++;
+        }
+      }
+    }
+    
+    return { success: true, analysis };
+  }
+
+  /**
+   * Analyze all swarm inboxes
+   * @returns {Object} Combined analysis for all agents
+   */
+  async analyzeSwarm() {
+    const agents = Object.keys(this.inboxes);
+    const results = {};
+    
+    for (const agent of agents) {
+      try {
+        results[agent] = await this.analyzeInbox(agent);
+      } catch (e) {
+        results[agent] = { success: false, error: e.message };
+      }
+    }
+    
+    return {
+      swarmAnalysis: results,
+      totalAgents: agents.length,
+      analyzedAt: new Date().toISOString()
+    };
+  }
 }
 
 // ═══════════════════════════════════════════════════════════════

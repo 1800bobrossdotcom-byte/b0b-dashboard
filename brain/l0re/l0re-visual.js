@@ -684,6 +684,43 @@ async function main() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// ANALYSIS METHODS (L0RE pattern)
+// ═══════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Analyze L0RE visual engine - returns metadata and statistics
+ * @param {L0reVisual} visual - Optional visual instance to analyze
+ * @returns {Object} Analysis object
+ */
+function analyzeVisualEngine(visual = null) {
+  const instance = visual || new L0reVisual();
+  
+  const analysis = {
+    engine: 'l0re-visual',
+    version: '1.0.0',
+    canvasSize: {
+      width: instance.width,
+      height: instance.height,
+      totalPixels: instance.width * instance.height
+    },
+    palettes: {
+      available: Object.keys(PALETTES),
+      count: Object.keys(PALETTES).length,
+      totalChars: Object.values(PALETTES).join('').length
+    },
+    capabilities: [
+      'noiseField', 'flowField', 'pixelSort', 'gradient',
+      'swarmVisualization', 'tradingDashboard', 'animation'
+    ],
+    recordCount: Object.keys(PALETTES).length,
+    analyzedAt: new Date().toISOString(),
+    analyzedBy: 'b0b'
+  };
+  
+  return { success: true, analysis };
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // EXPORTS
 // ═══════════════════════════════════════════════════════════════════════════════
 
@@ -691,6 +728,7 @@ module.exports = {
   L0reVisual,
   L0reAnimation,
   PALETTES,
+  analyzeVisualEngine,
 };
 
 if (require.main === module) {
