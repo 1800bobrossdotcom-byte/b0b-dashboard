@@ -1,12 +1,11 @@
 # B0B Dashboard - Railway Configuration
 # ═══════════════════════════════════════════════════════════════
-# Root directory: dashboard/
-# This deploys the Next.js dashboard at b0b.dev
+# Builds dashboard/ Next.js app for b0b.dev
+# Uses NIXPACKS with explicit config
 
 [build]
 builder = "nixpacks"
-nixpacksConfigPath = "dashboard/nixpacks.toml"
-watchPatterns = ["dashboard/**"]
+nixpacksConfigPath = "nixpacks.toml"
 
 [deploy]
 startCommand = "cd dashboard && npm run start"
