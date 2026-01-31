@@ -2,7 +2,7 @@
 
 /**
  * Global Error Boundary for B0B.DEV
- * Catches client-side rendering errors and displays a graceful fallback.
+ * Terminal-style error display
  */
 
 import { useEffect } from 'react';
@@ -15,51 +15,56 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    // Log error to console for debugging
     console.error('b0b.dev client error:', error);
   }, [error]);
 
   return (
-    <main className="min-h-screen bg-black text-white font-mono flex items-center justify-center p-8">
+    <main className="min-h-screen bg-black text-[#0f0] font-mono flex items-center justify-center p-8">
       <div className="max-w-lg w-full">
-        <div className="border border-red-500/40 bg-red-950/20 rounded-lg p-6">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="text-2xl">⚠️</span>
-            <h1 className="text-xl font-bold text-red-400">Client Render Error</h1>
-          </div>
-          
-          <p className="text-gray-400 text-sm mb-4">
-            Something unexpected happened while rendering b0b.dev.
-            The swarm is investigating.
+        <pre className="text-red-500 text-xs mb-4">{`
+╔══════════════════════════════════════════════════════════╗
+║  ⚠ SYSTEM ERROR                                          ║
+╚══════════════════════════════════════════════════════════╝
+        `}</pre>
+        
+        <div className="border border-red-500/40 p-4 mb-4">
+          <p className="text-[#0f0]/60 text-sm mb-4">
+            Client render exception detected. Swarm investigating.
           </p>
           
-          <div className="bg-black/50 rounded p-3 mb-4 text-xs font-mono">
-            <div className="text-red-300 break-all">{error.message}</div>
+          <div className="bg-black border border-[#0f0]/20 p-3 mb-4 text-xs">
+            <div className="text-red-400 break-all">&gt; {error.message}</div>
             {error.digest && (
-              <div className="text-gray-600 mt-1">Digest: {error.digest}</div>
+              <div className="text-[#0f0]/40 mt-1">digest: {error.digest}</div>
             )}
           </div>
           
           <div className="flex gap-3">
             <button
               onClick={reset}
-              className="px-4 py-2 bg-red-900/50 hover:bg-red-900 border border-red-500/50 rounded text-sm transition"
+              className="px-4 py-2 border border-[#0f0]/50 hover:bg-[#0f0]/10 text-sm transition"
             >
-              Try Again
+              [RETRY]
             </button>
             <a
               href="https://b0b-brain-production.up.railway.app/swarm/live"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 bg-gray-900/50 hover:bg-gray-800 border border-gray-700 rounded text-sm transition"
+              className="px-4 py-2 border border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/10 text-sm transition"
             >
-              View Raw Data
+              [RAW DATA]
+            </a>
+            <a
+              href="/"
+              className="px-4 py-2 border border-yellow-500/50 text-yellow-400 hover:bg-yellow-500/10 text-sm transition"
+            >
+              [HOME]
             </a>
           </div>
         </div>
         
-        <div className="mt-6 text-center text-xs text-gray-600">
-          <span className="text-[#00FF88]">w3 ar3</span> — L0RE v0.3.0
+        <div className="text-center text-xs text-[#0f0]/30">
+          w3 ar3 — L0RE v0.5.0
         </div>
       </div>
     </main>

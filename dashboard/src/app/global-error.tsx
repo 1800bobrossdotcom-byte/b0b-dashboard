@@ -2,7 +2,7 @@
 
 /**
  * Global Error Boundary for Layout Errors
- * This catches errors that happen in the root layout itself.
+ * Terminal-style for root layout crashes
  */
 
 export default function GlobalError({
@@ -16,8 +16,8 @@ export default function GlobalError({
     <html lang="en">
       <body style={{ 
         backgroundColor: '#000', 
-        color: '#fff', 
-        fontFamily: 'monospace',
+        color: '#0f0', 
+        fontFamily: 'JetBrains Mono, monospace',
         minHeight: '100vh',
         display: 'flex',
         alignItems: 'center',
@@ -25,50 +25,61 @@ export default function GlobalError({
         padding: '2rem'
       }}>
         <div style={{ maxWidth: '500px', textAlign: 'center' }}>
-          <h1 style={{ color: '#FF6B6B', fontSize: '1.5rem', marginBottom: '1rem' }}>
-            ⚠️ Critical Error
-          </h1>
-          <p style={{ color: '#888', marginBottom: '1rem' }}>
-            Something broke at the layout level. The swarm is on it.
+          <pre style={{ color: '#f00', fontSize: '10px', marginBottom: '1rem' }}>{`
+╔══════════════════════════════════════════════════════════╗
+║  ⚠ CRITICAL SYSTEM FAILURE                               ║
+╚══════════════════════════════════════════════════════════╝
+          `}</pre>
+          
+          <p style={{ color: '#0f0', opacity: 0.6, marginBottom: '1rem', fontSize: '12px' }}>
+            Layout-level exception. Root component failed.
           </p>
+          
           <div style={{ 
             backgroundColor: '#111', 
+            border: '1px solid #333',
             padding: '1rem', 
-            borderRadius: '8px',
             marginBottom: '1rem',
-            fontSize: '0.75rem',
-            wordBreak: 'break-all'
+            fontSize: '11px',
+            wordBreak: 'break-all',
+            textAlign: 'left'
           }}>
-            {error.message}
+            <span style={{ color: '#f00' }}>&gt; </span>{error.message}
           </div>
-          <button
-            onClick={reset}
-            style={{
-              backgroundColor: '#333',
-              color: '#fff',
-              border: '1px solid #555',
-              padding: '0.5rem 1rem',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              marginRight: '0.5rem'
-            }}
-          >
-            Try Again
-          </button>
-          <a 
-            href="/labs"
-            style={{
-              backgroundColor: '#1a1a2e',
-              color: '#00FF88',
-              border: '1px solid #00FF88',
-              padding: '0.5rem 1rem',
-              borderRadius: '4px',
-              textDecoration: 'none',
-              display: 'inline-block'
-            }}
-          >
-            Go to Labs
-          </a>
+          
+          <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
+            <button
+              onClick={reset}
+              style={{
+                backgroundColor: 'transparent',
+                color: '#0f0',
+                border: '1px solid #0f03',
+                padding: '0.5rem 1rem',
+                cursor: 'pointer',
+                fontFamily: 'inherit',
+                fontSize: '12px'
+              }}
+            >
+              [RETRY]
+            </button>
+            <a 
+              href="/"
+              style={{
+                backgroundColor: 'transparent',
+                color: '#ff0',
+                border: '1px solid #ff03',
+                padding: '0.5rem 1rem',
+                textDecoration: 'none',
+                fontSize: '12px'
+              }}
+            >
+              [REBOOT]
+            </a>
+          </div>
+          
+          <p style={{ color: '#0f0', opacity: 0.3, marginTop: '2rem', fontSize: '10px' }}>
+            w3 ar3 — L0RE v0.5.0
+          </p>
         </div>
       </body>
     </html>

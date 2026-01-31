@@ -26,6 +26,9 @@ const ACCESS_PASSWORD = 'l0re-sw4rm-2026';
 // ASCII Characters for animation (density gradient)
 const ASCII_CHARS = ' .:-=+*#%@';
 
+// Version
+const VERSION = '0.5.0';
+
 // ═══════════════════════════════════════════════════════════════════════════════
 // ASCII CANVAS — Procedural animation renderer
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -130,10 +133,30 @@ function PasswordScreen({ onUnlock }: { onUnlock: () => void }) {
           {error && <p className="text-red-500 text-sm">ACCESS DENIED</p>}
         </form>
         
-        <p className="text-[#0f0]/20 text-xs mt-12">w3 ar3 — l0re v0.4.0</p>
+        <p className="text-[#0f0]/20 text-xs mt-12">w3 ar3 — l0re v{VERSION}</p>
       </div>
     </main>
   );
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// CLOCK COMPONENT
+// ═══════════════════════════════════════════════════════════════════════════════
+
+function TerminalClock() {
+  const [time, setTime] = useState('--:--:--');
+  
+  useEffect(() => {
+    const update = () => {
+      const now = new Date();
+      setTime(now.toLocaleTimeString('en-US', { hour12: false }));
+    };
+    update();
+    const interval = setInterval(update, 1000);
+    return () => clearInterval(interval);
+  }, []);
+  
+  return <span className="text-[#0f0]/60">{time}</span>;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -144,6 +167,11 @@ interface FreshnessFile {
   file: string;
   fresh: boolean;
   actualAge: number;
+}
+
+interface TreasuryData {
+  total?: number;
+  allocation?: Record<string, number>;
 }
 
 interface PlatformData {
@@ -159,6 +187,8 @@ interface PlatformData {
     d0t?: { onchain?: { base_tvl?: number; eth_tvl?: number } };
   };
   tools?: Array<{ name: string }>;
+  treasury?: TreasuryData;
+  error?: string;
 }
 
 export default function L0reTerminal() {
@@ -168,6 +198,8 @@ export default function L0reTerminal() {
   const [loading, setLoading] = useState(true);
   const [tick, setTick] = useState(0);
   const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
   const asciiFrame = useAsciiCanvas(120, 30);
   
   // Mount check
@@ -188,11 +220,20 @@ export default function L0reTerminal() {
     
     const fetchData = async () => {
       try {
-        const res = await fetch(`${BRAIN_URL}/l0re/platform`, { cache: 'no-store' });
+        const res = await fetch(`${BRAIN_URL}/l0re/platform`, { 
+          cache: 'no-store',
+          signal: AbortSignal.timeout(15000) // 15s timeout
+        });
         if (res.ok) {
-          setData(await res.json());
+          const json = await res.json();
+          setData(json);
+          setError(null);
+          setLastUpdate(new Date());
+        } else {
+          setError(`Brain returned ${res.status}`);
         }
       } catch (e) {
+        setError(e instanceof Error ? e.message : 'Connection failed');
         console.error('Fetch error:', e);
       } finally {
         setLoading(false);
@@ -229,6 +270,11 @@ export default function L0reTerminal() {
   const trading = data?.trading;
   const signals = data?.signals;
   const tools = data?.tools || [];
+  const treasury = data?.treasury;
+  
+  // Status indicator
+  const status = error ? 'ERROR' : loading ? 'SYNC' : 'LIVE';
+  const statusColor = error ? 'text-red-500' : loading ? 'text-yellow-500' : 'text-[#0f0]';
   
   return (
     <main className="min-h-screen bg-black text-[#0f0] font-mono p-4 relative overflow-hidden">
@@ -245,21 +291,29 @@ export default function L0reTerminal() {
         <header className="mb-8">
           <pre className="text-[#0f0] text-[10px] leading-tight hidden md:block">{`
 ╔══════════════════════════════════════════════════════════════════════════════╗
-║  b0b.dev — L0RE Operations Center                                            ║
+║  b0b.dev — L0RE Operations Center                              v${VERSION.padEnd(10)}║
 ║  ════════════════════════════════════════════════════════════════════════════║
-║  HEALTH: ${String(health).padStart(3)}%  │  FRESH: ${String(fresh?.fresh || 0).padStart(2)}/${String(fresh?.files?.length || 0).padStart(2)}  │  TICK: ${String(tick).padStart(5)}  │  STATUS: ${loading ? 'SYNC' : 'LIVE'}        ║
+║  HEALTH: ${String(health).padStart(3)}%  │  FRESH: ${String(fresh?.fresh || 0).padStart(2)}/${String(fresh?.files?.length || 0).padStart(2)}  │  TICK: ${String(tick).padStart(5)}  │  STATUS: ${status.padEnd(5)}        ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
           `}</pre>
           
           <div className="md:hidden flex justify-between items-center border border-[#0f0]/30 p-2">
             <span>b0b.dev</span>
+            <span className={statusColor}>{status}</span>
             <span>{health}% fresh</span>
           </div>
+          
+          {/* Error Banner */}
+          {error && (
+            <div className="mt-2 p-2 border border-red-500/50 bg-red-900/20 text-red-400 text-xs">
+              ⚠ CONNECTION: {error}
+            </div>
+          )}
         </header>
         
         {/* Navigation */}
         <nav className="mb-6 flex flex-wrap gap-2 text-sm">
-          {['status', 'trading', 'signals', 'tools', 'agents'].map(section => (
+          {['status', 'trading', 'signals', 'treasury', 'tools', 'agents'].map(section => (
             <button
               key={section}
               onClick={() => setActiveSection(activeSection === section ? null : section)}
@@ -272,6 +326,18 @@ export default function L0reTerminal() {
               [{section.toUpperCase()}]
             </button>
           ))}
+          <a
+            href="/hq"
+            className="px-3 py-1 border border-cyan-500/30 text-cyan-400 hover:border-cyan-500/60"
+          >
+            [HQ]
+          </a>
+          <a
+            href="/live"
+            className="px-3 py-1 border border-yellow-500/30 text-yellow-400 hover:border-yellow-500/60"
+          >
+            [LIVE]
+          </a>
           <button
             onClick={logout}
             className="px-3 py-1 border border-red-500/30 text-red-500 hover:border-red-500/60 ml-auto"
@@ -330,7 +396,7 @@ export default function L0reTerminal() {
               </h2>
               <div className="text-xs space-y-1">
                 {signals?.d0t?.onchain && (
-                  <div className="flex gap-4">
+                  <div className="flex gap-4 mb-2">
                     <span>BASE_TVL: ${((signals.d0t.onchain.base_tvl || 0) / 1e9).toFixed(2)}B</span>
                     <span>ETH_TVL: ${((signals.d0t.onchain.eth_tvl || 0) / 1e9).toFixed(1)}B</span>
                   </div>
@@ -340,7 +406,30 @@ export default function L0reTerminal() {
                     ├─ {m.question?.slice(0, 60)}...
                   </div>
                 ))}
+                {(!signals?.polymarket || signals.polymarket.length === 0) && (
+                  <div className="text-[#0f0]/40">No market data available</div>
+                )}
               </div>
+            </section>
+          )}
+          
+          {/* TREASURY */}
+          {(activeSection === 'treasury') && (
+            <section className="border border-[#0f0]/30 p-4">
+              <h2 className="text-sm mb-3 border-b border-[#0f0]/20 pb-1">
+                ▸ TREASURY [${(treasury?.total || 0).toFixed(2)}]
+              </h2>
+              <pre className="text-xs text-[#0f0]/80">{`
+┌─────────────────────────────────────┐
+│ TOTAL: $${String((treasury?.total || 0).toFixed(2)).padEnd(26)}│
+│ ─────────────────────────────────── │
+│ ALLOCATIONS:                        │`}
+{treasury?.allocation ? Object.entries(treasury.allocation).map(([k, v]) => 
+`│   ${k.padEnd(12)} ${String((v as number).toFixed(2)).padStart(18)} │`
+).join('\n') : '│   No allocation data               │'}
+{`
+└─────────────────────────────────────┘`}
+              </pre>
             </section>
           )}
           
@@ -388,6 +477,7 @@ export default function L0reTerminal() {
 ────────────────────────────────────────────────────────────────
                     w3 ar3 — ars est celare artem
                          b0b.dev © 2026
+${lastUpdate ? `              Last sync: ${lastUpdate.toLocaleTimeString()}` : ''}
 ────────────────────────────────────────────────────────────────
           `}</pre>
         </footer>
