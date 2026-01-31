@@ -2,11 +2,88 @@
 // ═══════════════════════════════════════════════════════════════════════════
 // b0b VISUAL DEBUG - CAPTURE
 // Screenshot capture with analysis for AI visual debugging
+// Now with L0RE DataOps integration for tagging & indexing
 // ═══════════════════════════════════════════════════════════════════════════
 
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 const path = require('path');
+
+// ═══════════════════════════════════════════════════════════════════════════
+// L0RE INTEGRATION
+// ═══════════════════════════════════════════════════════════════════════════
+
+let L0reDataOps;
+let dataOps;
+
+try {
+  L0reDataOps = require('../brain/l0re-data-ops.js');
+  dataOps = new L0reDataOps();
+  console.log('✅ L0RE DataOps loaded');
+} catch (e) {
+  dataOps = null;
+}
+
+// L0RE visual pattern generators (ASCII art from L0RE design)
+const L0RE_PATTERNS = {
+  density: ' .·:;+*#@█',
+  blocks: '░▒▓█',
+  geometric: '○◐◑◒◓●◔◕◖◗',
+  braille: '⠀⠁⠂⠃⠄⠅⠆⠇⠈⠉⠊⠋⠌⠍⠎⠏',
+  arrows: '→↗↑↖←↙↓↘',
+  circuit: '┃━┏┓┗┛┣┫┳┻╋',
+  agents: { b0b: '◉', r0ss: '▓', d0t: '◈', c0m: '⚡' }
+};
+
+function generateL0reOverlay(analysis, width = 60, height = 20) {
+  // Generate ASCII visualization of the capture analysis
+  const lines = [];
+  const border = '═'.repeat(width);
+  
+  lines.push(`╔${border}╗`);
+  lines.push(`║ L0RE VISUAL DEBUG CAPTURE ${' '.repeat(width - 29)}║`);
+  lines.push(`╠${border}╣`);
+  
+  // Page info
+  const title = (analysis.page?.title || 'Unknown').substring(0, width - 10);
+  lines.push(`║ 📄 ${title}${' '.repeat(width - title.length - 5)}║`);
+  
+  // Element counts as mini bar chart
+  const elements = analysis.page?.elements || {};
+  const maxCount = Math.max(...Object.values(elements).filter(v => typeof v === 'number'), 1);
+  
+  for (const [type, count] of Object.entries(elements)) {
+    if (typeof count !== 'number') continue;
+    const barWidth = Math.round((count / maxCount) * (width - 20));
+    const bar = L0RE_PATTERNS.blocks[3].repeat(barWidth);
+    const label = `${type}: ${count}`.padEnd(15);
+    lines.push(`║ ${label}${bar}${' '.repeat(width - label.length - barWidth - 2)}║`);
+  }
+  
+  // Canvas analysis if available
+  if (analysis.canvas) {
+    lines.push(`╠${border}╣`);
+    lines.push(`║ 🎨 Canvas Analysis ${' '.repeat(width - 20)}║`);
+    const coverage = analysis.canvas.contentCoverage || '0%';
+    lines.push(`║    Coverage: ${coverage}${' '.repeat(width - 16 - coverage.length)}║`);
+  }
+  
+  // Agent relevance (if L0RE tagged)
+  if (analysis._l0re?.relevance) {
+    lines.push(`╠${border}╣`);
+    lines.push(`║ 🤖 Agent Relevance ${' '.repeat(width - 20)}║`);
+    for (const [agent, score] of Object.entries(analysis._l0re.relevance)) {
+      const icon = L0RE_PATTERNS.agents[agent] || '•';
+      const barLen = Math.round(score * 20);
+      const bar = L0RE_PATTERNS.density.charAt(Math.min(Math.round(score * 9), 9)).repeat(barLen);
+      lines.push(`║  ${icon} ${agent}: ${bar}${' '.repeat(width - agent.length - barLen - 7)}║`);
+    }
+  }
+  
+  lines.push(`╚${border}╝`);
+  
+  return lines.join('\n');
+}
 
 // ═══════════════════════════════════════════════════════════════════════════
 // CONFIGURATION
@@ -339,4 +416,45 @@ Options:
   });
 }
 
-module.exports = { capture, analyzeCanvas, analyzePage };
+// ═══════════════════════════════════════════════════════════════════════════
+// L0RE TAGGED CAPTURE — Enhanced capture with DataOps integration
+// ═══════════════════════════════════════════════════════════════════════════
+
+async function captureWithL0re(options = {}) {
+  const result = await capture(options);
+  
+  if (!dataOps || !result) {
+    return result;
+  }
+  
+  // Tag the capture result with L0RE metadata
+  const tagged = dataOps.tag(result, {
+    source: 'b0b-visual-debug',
+    confidence: result.status === 'success' ? 0.9 : 0.5,
+    tags: ['visual-debug', 'screenshot', 'capture'],
+    category: 'visual'
+  });
+  
+  // Store to L0RE index
+  try {
+    await dataOps.store(tagged);
+    console.log(`🔮 L0RE indexed: ${tagged._l0re.id}`);
+  } catch (e) {
+    console.log(`⚠️  L0RE store failed: ${e.message}`);
+  }
+  
+  // Generate and display L0RE visual overlay
+  const overlay = generateL0reOverlay(tagged);
+  console.log('\n' + overlay + '\n');
+  
+  // Save overlay to file
+  const overlayPath = path.join(
+    options.outputDir || DEFAULT_CONFIG.outputDir,
+    `${options.name || 'capture'}-l0re.txt`
+  );
+  fs.writeFileSync(overlayPath, overlay);
+  
+  return tagged;
+}
+
+module.exports = { capture, captureWithL0re, analyzeCanvas, analyzePage, generateL0reOverlay };

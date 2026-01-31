@@ -23,9 +23,12 @@
   "author": "b0b platform",
   "license": "MIT",
   "dependencies": {
-    "robotjs": "^0.6.0",
     "active-win": "^8.1.0",
-    "node-global-key-listener": "^0.3.0"
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "node-global-key-listener": "^0.3.0",
+    "robotjs": "^0.6.0",
+    "screenshot-desktop": "^1.15.3"
   },
   "optionalDependencies": {
     "systray2": "^2.1.0"

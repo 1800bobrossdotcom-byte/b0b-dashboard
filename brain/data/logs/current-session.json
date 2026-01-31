@@ -105,6 +105,22 @@
         "ritual": null,
         "chain": null
       }
+    },
+    {
+      "id": "cmd-1769819111451-cccm2w",
+      "timestamp": "2026-01-31T00:25:11.451Z",
+      "command": "r0ss.status",
+      "agent": "r0ss",
+      "args": [],
+      "status": "success",
+      "duration": 53,
+      "output": null,
+      "error": null,
+      "context": {
+        "caller": "l0re-cli",
+        "ritual": null,
+        "chain": null
+      }
     }
   ],
   "agents": {
@@ -121,13 +137,13 @@
       "lastActive": null
     },
     "r0ss": {
-      "commands": 0,
-      "lastActive": null
+      "commands": 1,
+      "lastActive": "2026-01-31T00:25:11.451Z"
     }
   },
   "stats": {
-    "total": 6,
-    "successful": 6,
+    "total": 7,
+    "successful": 7,
     "failed": 0
   }
 }

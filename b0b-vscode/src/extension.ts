@@ -43,6 +43,23 @@ interface Task {
   status: string;
 }
 
+interface L0reEntry {
+  id: string;
+  source: string;
+  category: string;
+  tags: string[];
+  freshness: string;
+  relevance: Record<string, number>;
+  crawled_at: string;
+}
+
+interface L0rePipelineResult {
+  success: boolean;
+  processed: number;
+  errors: string[];
+  output?: any;
+}
+
 // Global state
 let localBridgeProcess: ChildProcess | null = null;
 let statusBarItem: vscode.StatusBarItem;
@@ -83,6 +100,14 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.commands.registerCommand('b0b.deployRailway', deployRailway),
     vscode.commands.registerCommand('b0b.visualDebug', visualDebug),
     vscode.commands.registerCommand('b0b.startLocalBridge', startLocalBridge),
+    // L0RE Commands
+    vscode.commands.registerCommand('b0b.l0rePipeline', runL0rePipeline),
+    vscode.commands.registerCommand('b0b.l0reSearch', l0reSearch),
+    vscode.commands.registerCommand('b0b.l0reRitual', executeL0reRitual),
+    // Integration Commands  
+    vscode.commands.registerCommand('b0b.runAutonomous', runAutonomous),
+    vscode.commands.registerCommand('b0b.runShield', runShield),
+    vscode.commands.registerCommand('b0b.syncFinance', syncFinance),
   ];
   
   commands.forEach(cmd => context.subscriptions.push(cmd));
@@ -93,12 +118,14 @@ export function activate(context: vscode.ExtensionContext) {
   const agentsProvider = new AgentsTreeDataProvider();
   const freshnessProvider = new FreshnessTreeDataProvider();
   const railwayProvider = new RailwayTreeDataProvider();
+  const l0reProvider = new L0reTreeDataProvider();
 
   vscode.window.registerTreeDataProvider('b0b-status', statusProvider);
   vscode.window.registerTreeDataProvider('b0b-tasks', tasksProvider);
   vscode.window.registerTreeDataProvider('b0b-agents', agentsProvider);
   vscode.window.registerTreeDataProvider('b0b-freshness', freshnessProvider);
   vscode.window.registerTreeDataProvider('b0b-railway', railwayProvider);
+  vscode.window.registerTreeDataProvider('b0b-l0re', l0reProvider);
 
   // Auto-start bridge if configured
   if (getConfig().autoStartBridge) {
@@ -109,6 +136,7 @@ export function activate(context: vscode.ExtensionContext) {
   setInterval(() => {
     statusProvider.refresh();
     freshnessProvider.refresh();
+    l0reProvider.refresh();
   }, 30000);
 
   outputChannel.appendLine('✅ b0b.dev Toolkit activated');
@@ -345,6 +373,228 @@ async function startLocalBridge() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
+// L0RE COMMANDS
+// ═══════════════════════════════════════════════════════════════════════════
+
+async function runL0rePipeline() {
+  const pipelines = [
+    { label: '📊 d0t.correlate', description: 'Find correlations between data sources', value: 'd0t.correlate' },
+    { label: '📈 d0t.trend', description: 'Identify trending patterns', value: 'd0t.trend' },
+    { label: '🚨 d0t.anomaly', description: 'Detect outliers', value: 'd0t.anomaly' },
+    { label: '📝 d0t.summarize', description: 'Summarize data set', value: 'd0t.summarize' },
+    { label: '🔐 c0m.recon', description: 'Security reconnaissance', value: 'c0m.recon' },
+    { label: '📚 c0m.library.query', description: 'Query knowledge base', value: 'c0m.library.query' },
+    { label: '🤖 b0b.manifest', description: 'Transform signal into content', value: 'b0b.manifest' },
+    { label: '🏗️ r0ss.health', description: 'Infrastructure health check', value: 'r0ss.health' },
+  ];
+
+  const selected = await vscode.window.showQuickPick(pipelines, {
+    placeHolder: 'Select L0RE pipeline to run'
+  });
+
+  if (!selected) return;
+
+  const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+  if (!workspaceRoot) return;
+
+  const terminal = vscode.window.createTerminal('L0RE Pipeline');
+  terminal.sendText(`cd "${path.join(workspaceRoot, 'brain')}" && node l0re.js ${selected.value}`);
+  terminal.show();
+  log(`[L0RE] Running pipeline: ${selected.value}`);
+}
+
+async function l0reSearch() {
+  const query = await vscode.window.showInputBox({
+    prompt: 'L0RE Search Query',
+    placeHolder: 'e.g., market signals, security alerts, trading data'
+  });
+
+  if (!query) return;
+
+  const config = getConfig();
+  try {
+    const response = await axios.get(`${config.brainUrl}/l0re/search`, {
+      params: { q: query },
+      timeout: 10000
+    });
+    
+    const results = response.data;
+    
+    const panel = vscode.window.createWebviewPanel(
+      'l0reSearch',
+      `L0RE: ${query}`,
+      vscode.ViewColumn.One,
+      { enableScripts: true }
+    );
+    
+    panel.webview.html = getL0reSearchHtml(query, results);
+    log(`[L0RE] Search: ${query} - ${results.length || 0} results`);
+  } catch (e) {
+    vscode.window.showErrorMessage('L0RE search failed - using local index');
+    log(`[L0RE] Search error: ${e}`);
+    
+    // Fallback to local brain search
+    const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+    if (workspaceRoot) {
+      const terminal = vscode.window.createTerminal('L0RE Search');
+      terminal.sendText(`cd "${path.join(workspaceRoot, 'brain')}" && node l0re.js search "${query}"`);
+      terminal.show();
+    }
+  }
+}
+
+async function executeL0reRitual() {
+  const rituals = [
+    { label: '🌅 Morning Briefing', description: 'Daily status across all agents', value: 'morning' },
+    { label: '🌙 Evening Report', description: 'End of day summary & next steps', value: 'evening' },
+    { label: '⚡ Market Pulse', description: 'Real-time market status', value: 'pulse' },
+    { label: '🔐 Security Check', description: 'Quick security posture review', value: 'security' },
+    { label: '💰 Treasury Status', description: 'Financial overview', value: 'treasury' },
+    { label: '🧹 Data Sweep', description: 'Clean stale data, update indexes', value: 'sweep' },
+    { label: '🔄 Full Sync', description: 'Sync all agents with brain', value: 'sync' },
+  ];
+
+  const selected = await vscode.window.showQuickPick(rituals, {
+    placeHolder: 'Select L0RE ritual to execute'
+  });
+
+  if (!selected) return;
+
+  const config = getConfig();
+  vscode.window.withProgress({
+    location: vscode.ProgressLocation.Notification,
+    title: `Executing L0RE ritual: ${selected.label}`,
+    cancellable: false
+  }, async () => {
+    try {
+      const response = await axios.post(`${config.brainUrl}/l0re/ritual/${selected.value}`, {}, {
+        timeout: 30000
+      });
+      
+      vscode.window.showInformationMessage(`✅ ${selected.label} complete`);
+      
+      // Show results in output channel
+      outputChannel.appendLine(`\n═══ L0RE RITUAL: ${selected.label} ═══`);
+      outputChannel.appendLine(JSON.stringify(response.data, null, 2));
+      outputChannel.show();
+      
+      log(`[L0RE] Ritual complete: ${selected.value}`);
+    } catch (e) {
+      vscode.window.showErrorMessage(`Ritual failed - running locally`);
+      log(`[L0RE] Ritual error: ${e}`);
+      
+      // Fallback to local execution
+      const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+      if (workspaceRoot) {
+        const terminal = vscode.window.createTerminal('L0RE Ritual');
+        terminal.sendText(`cd "${path.join(workspaceRoot, 'brain')}" && node l0re.js ritual ${selected.value}`);
+        terminal.show();
+      }
+    }
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// INTEGRATION COMMANDS (Autonomous, Shield, Finance)
+// ═══════════════════════════════════════════════════════════════════════════
+
+async function runAutonomous() {
+  const modes = [
+    { label: '🌙 Overnight Mode', description: 'Full autonomous overnight run', value: 'overnight' },
+    { label: '⚡ Quick Tasks', description: 'Run pending tasks only', value: 'quick' },
+    { label: '🔄 Continuous', description: 'Keep running until stopped', value: 'continuous' },
+  ];
+
+  const selected = await vscode.window.showQuickPick(modes, {
+    placeHolder: 'Select autonomous mode'
+  });
+
+  if (!selected) return;
+
+  const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+  if (!workspaceRoot) return;
+
+  // Check for tasks file
+  const tasksFile = await vscode.window.showInputBox({
+    prompt: 'Tasks file (leave empty for default)',
+    placeHolder: 'tasks.json'
+  }) || 'tasks.json';
+
+  const terminal = vscode.window.createTerminal('b0b Autonomous');
+  terminal.sendText(`cd "${path.join(workspaceRoot, 'b0b-autonomous')}" && node autonomous.js "${tasksFile}" --mode=${selected.value}`);
+  terminal.show();
+  
+  log(`[AUTONOMOUS] Started in ${selected.value} mode`);
+  updateStatusBar('🤖 b0b 🗡️', `Autonomous: ${selected.value}`);
+}
+
+async function runShield() {
+  const scans = [
+    { label: '🔍 Full Scan', description: 'Complete security scan', value: 'full' },
+    { label: '🌐 Browser Check', description: 'Scan for browser hijacks', value: 'browser' },
+    { label: '💰 Wallet Security', description: 'Check wallet folder permissions', value: 'wallet' },
+    { label: '⚙️ Process Monitor', description: 'Scan running processes', value: 'processes' },
+    { label: '🔒 Quick Check', description: 'Fast essential checks only', value: 'quick' },
+  ];
+
+  const selected = await vscode.window.showQuickPick(scans, {
+    placeHolder: 'Select B0B Shield scan type'
+  });
+
+  if (!selected) return;
+
+  const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+  if (!workspaceRoot) return;
+
+  const terminal = vscode.window.createTerminal('B0B Shield');
+  terminal.sendText(`cd "${path.join(workspaceRoot, 'b0b-shield')}" && powershell -ExecutionPolicy Bypass -File shield.ps1 -Mode ${selected.value}`);
+  terminal.show();
+  
+  log(`[SHIELD] Running ${selected.value} scan`);
+}
+
+async function syncFinance() {
+  const options = [
+    { label: '💰 Full Sync', description: 'Sync all financial state to brain', value: 'all' },
+    { label: '🏦 Treasury Only', description: 'Sync treasury state', value: 'treasury' },
+    { label: '📊 Pulse Only', description: 'Sync swarm pulse data', value: 'pulse' },
+    { label: '🤝 Cooperative State', description: 'Sync cooperative trader', value: 'cooperative' },
+  ];
+
+  const selected = await vscode.window.showQuickPick(options, {
+    placeHolder: 'Select finance data to sync'
+  });
+
+  if (!selected) return;
+
+  const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+  if (!workspaceRoot) return;
+
+  const config = getConfig();
+  vscode.window.withProgress({
+    location: vscode.ProgressLocation.Notification,
+    title: `Syncing finance: ${selected.label}`,
+    cancellable: false
+  }, async () => {
+    try {
+      if (selected.value === 'all') {
+        const terminal = vscode.window.createTerminal('Finance Sync');
+        terminal.sendText(`cd "${path.join(workspaceRoot, 'b0b-finance')}" && node sync-to-brain.js`);
+        terminal.show();
+      } else {
+        const terminal = vscode.window.createTerminal('Finance Sync');
+        terminal.sendText(`cd "${path.join(workspaceRoot, 'b0b-finance')}" && node sync-to-brain.js ${selected.value}`);
+        terminal.show();
+      }
+      
+      log(`[FINANCE] Syncing ${selected.value}`);
+    } catch (e) {
+      vscode.window.showErrorMessage(`Finance sync failed: ${e}`);
+    }
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
 // TREE DATA PROVIDERS
 // ═══════════════════════════════════════════════════════════════════════════
 
@@ -487,6 +737,95 @@ class RailwayTreeDataProvider implements vscode.TreeDataProvider<vscode.TreeItem
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
+// L0RE TREE DATA PROVIDER
+// ═══════════════════════════════════════════════════════════════════════════
+
+class L0reTreeDataProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
+  private _onDidChangeTreeData = new vscode.EventEmitter<vscode.TreeItem | undefined>();
+  readonly onDidChangeTreeData = this._onDidChangeTreeData.event;
+
+  refresh() {
+    this._onDidChangeTreeData.fire(undefined);
+  }
+
+  getTreeItem(element: vscode.TreeItem): vscode.TreeItem {
+    return element;
+  }
+
+  async getChildren(): Promise<vscode.TreeItem[]> {
+    const config = getConfig();
+    const items: vscode.TreeItem[] = [];
+    const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+
+    // L0RE Status Header
+    items.push(new vscode.TreeItem('═══ L0RE DataOps ═══'));
+
+    // Try to get L0RE status from brain
+    try {
+      const response = await axios.get(`${config.brainUrl}/l0re/status`, { timeout: 5000 });
+      const status = response.data;
+
+      // Index stats
+      if (status.index) {
+        items.push(new vscode.TreeItem(`📊 Index: ${status.index.entries || 0} entries`));
+        items.push(new vscode.TreeItem(`🏷️ Tags: ${status.index.tags || 0} unique`));
+      }
+
+      // Pipeline status
+      if (status.pipelines) {
+        items.push(new vscode.TreeItem(`⚡ Pipelines: ${status.pipelines.active || 0} active`));
+      }
+
+      // Agent relevance
+      items.push(new vscode.TreeItem(''));
+      items.push(new vscode.TreeItem('═══ Agent Relevance ═══'));
+      const agentIcons: Record<string, string> = { d0t: '📈', b0b: '🤖', c0m: '🔐', r0ss: '🏗️' };
+      
+      if (status.relevance) {
+        for (const [agent, score] of Object.entries(status.relevance)) {
+          const icon = agentIcons[agent] || '•';
+          const bar = '█'.repeat(Math.round((score as number) * 10));
+          items.push(new vscode.TreeItem(`${icon} ${agent}: ${bar} ${Math.round((score as number) * 100)}%`));
+        }
+      }
+
+    } catch {
+      // Fallback to local status
+      items.push(new vscode.TreeItem('⚠️ Brain offline - local mode'));
+      
+      if (workspaceRoot) {
+        try {
+          const indexPath = path.join(workspaceRoot, 'brain', 'data', 'indexed', 'l0re-index.json');
+          if (fs.existsSync(indexPath)) {
+            const index = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
+            items.push(new vscode.TreeItem(`📊 Local Index: ${Object.keys(index.entries || {}).length} entries`));
+            items.push(new vscode.TreeItem(`🏷️ Tags: ${Object.keys(index.tags || {}).length} unique`));
+          }
+        } catch {}
+      }
+    }
+
+    // Quick Actions
+    items.push(new vscode.TreeItem(''));
+    items.push(new vscode.TreeItem('═══ Quick Actions ═══'));
+    
+    const pipelineItem = new vscode.TreeItem('▶️ Run Pipeline');
+    pipelineItem.command = { command: 'b0b.l0rePipeline', title: 'Run L0RE Pipeline' };
+    items.push(pipelineItem);
+
+    const searchItem = new vscode.TreeItem('🔍 Search Data');
+    searchItem.command = { command: 'b0b.l0reSearch', title: 'L0RE Search' };
+    items.push(searchItem);
+
+    const ritualItem = new vscode.TreeItem('🔮 Execute Ritual');
+    ritualItem.command = { command: 'b0b.l0reRitual', title: 'Execute L0RE Ritual' };
+    items.push(ritualItem);
+
+    return items;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
 // HTML GENERATORS
 // ═══════════════════════════════════════════════════════════════════════════
 
@@ -590,6 +929,66 @@ function getTasksHtml(tasks: Task[]): string {
 <body>
   <h1>📋 Tasks</h1>
   ${taskList || '<p>No tasks</p>'}
+</body>
+</html>`;
+}
+
+function getL0reSearchHtml(query: string, results: any[]): string {
+  const resultList = (results || []).map((r: any) => {
+    const l0re = r._l0re || {};
+    const relevanceBar = Object.entries(l0re.relevance || {})
+      .map(([agent, score]) => {
+        const icons: Record<string, string> = { d0t: '📈', b0b: '🤖', c0m: '🔐', r0ss: '🏗️' };
+        return `<span class="relevance" title="${agent}: ${Math.round((score as number) * 100)}%">${icons[agent] || agent}</span>`;
+      }).join('');
+    
+    const tags = (l0re.tags || []).map((t: string) => `<span class="tag">${t}</span>`).join('');
+    const freshnessColors: Record<string, string> = {
+      live: '#00ff88', hot: '#ffaa00', warm: '#ff6b00', stale: '#888', cold: '#444'
+    };
+    
+    return `
+      <div class="result">
+        <div class="header">
+          <span class="freshness" style="color: ${freshnessColors[l0re.freshness] || '#888'}">${l0re.freshness || 'unknown'}</span>
+          <span class="source">${l0re.source || 'unknown'}</span>
+          <span class="id">${l0re.id || ''}</span>
+        </div>
+        <div class="relevance-bar">${relevanceBar}</div>
+        <div class="tags">${tags}</div>
+        <pre class="data">${JSON.stringify(r, null, 2).substring(0, 500)}...</pre>
+      </div>
+    `;
+  }).join('');
+
+  return `<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: 'JetBrains Mono', 'Fira Code', monospace; padding: 20px; background: #0a0a0a; color: #d4d4d4; }
+    h1 { color: #00ff88; border-bottom: 2px solid #00ff88; padding-bottom: 10px; }
+    .query { color: #00d9ff; font-size: 14px; margin-bottom: 20px; }
+    .result { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 15px; margin: 10px 0; }
+    .result:hover { border-color: #00ff88; }
+    .header { display: flex; gap: 15px; margin-bottom: 10px; }
+    .freshness { font-weight: bold; text-transform: uppercase; font-size: 12px; }
+    .source { color: #a855f7; }
+    .id { color: #666; font-size: 11px; }
+    .relevance-bar { margin: 10px 0; font-size: 18px; }
+    .relevance { margin-right: 5px; opacity: 0.5; }
+    .relevance:hover { opacity: 1; }
+    .tags { margin: 10px 0; }
+    .tag { background: #333; padding: 2px 8px; border-radius: 4px; font-size: 11px; margin-right: 5px; color: #00d9ff; }
+    .data { background: #111; padding: 10px; border-radius: 4px; font-size: 11px; overflow-x: auto; max-height: 200px; overflow-y: auto; }
+    .no-results { color: #666; text-align: center; padding: 40px; }
+    .stats { color: #666; font-size: 12px; margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+  <h1>🔍 L0RE Search</h1>
+  <div class="query">Query: "${query}"</div>
+  <div class="stats">${results?.length || 0} results found</div>
+  ${resultList || '<div class="no-results">No results found. Try a different query.</div>'}
 </body>
 </html>`;
 }

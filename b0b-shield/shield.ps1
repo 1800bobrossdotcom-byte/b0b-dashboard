@@ -416,6 +416,9 @@ function Start-Shield {
         
         $allThreats | Format-Table -AutoSize
         
+        # Log to L0RE brain
+        Send-ToL0re -Threats $allThreats -ScanType $(if ($Quick) { "quick" } else { "full" })
+        
         if ($Fix) {
             Write-Shield "Auto-fix enabled - removing threats..." "WARN"
             foreach ($threat in $allThreats) {
@@ -429,9 +432,84 @@ function Start-Shield {
     return $allThreats
 }
 
+# ═══════════════════════════════════════════════════════════════════════════
+# L0RE INTEGRATION — Log threats to brain with L0RE tagging
+# ═══════════════════════════════════════════════════════════════════════════
+
+function Send-ToL0re {
+    param(
+        [Parameter(Mandatory=$true)]
+        [array]$Threats,
+        [string]$ScanType = "full"
+    )
+    
+    $brainUrl = $env:BRAIN_API_URL
+    if (-not $brainUrl) { $brainUrl = "https://b0b-brain-production.up.railway.app" }
+    
+    $l0rePayload = @{
+        source = "b0b-shield"
+        category = "security"
+        scan_type = $ScanType
+        timestamp = (Get-Date -Format "o")
+        threats = $Threats | ForEach-Object {
+            @{
+                type = $_.Type
+                location = $_.Location
+                threat = $_.Threat
+                severity = if ($_.Type -match "Wallet|Crypto") { "critical" } 
+                          elseif ($_.Type -match "Browser|Search") { "high" }
+                          else { "medium" }
+            }
+        }
+        system_info = @{
+            hostname = $env:COMPUTERNAME
+            user = $env:USERNAME
+            os = [System.Environment]::OSVersion.VersionString
+        }
+        _l0re = @{
+            tags = @("security", "shield", "scan", $ScanType)
+            confidence = 0.95
+            agent_relevance = @{
+                c0m = 1.0
+                r0ss = 0.5
+                b0b = 0.1
+                d0t = 0.1
+            }
+        }
+    }
+    
+    try {
+        $json = $l0rePayload | ConvertTo-Json -Depth 10
+        Invoke-RestMethod -Uri "$brainUrl/l0re/ingest" -Method POST -Body $json -ContentType "application/json" -TimeoutSec 10
+        Write-Shield "Threats logged to L0RE brain" "OK"
+    } catch {
+        Write-Shield "Failed to log to L0RE (brain may be offline): $_" "WARN"
+        
+        # Fallback: Save to local log
+        $localLogPath = "$Script:LogPath\l0re-threats-$(Get-Date -Format 'yyyyMMdd-HHmmss').json"
+        $json | Out-File -FilePath $localLogPath -Encoding UTF8
+        Write-Shield "Saved to local L0RE log: $localLogPath" "INFO"
+    }
+}
+
+function Get-L0reThreatSummary {
+    param([string]$Days = "7")
+    
+    $brainUrl = $env:BRAIN_API_URL
+    if (-not $brainUrl) { $brainUrl = "https://b0b-brain-production.up.railway.app" }
+    
+    try {
+        $response = Invoke-RestMethod -Uri "$brainUrl/l0re/search?source=b0b-shield&days=$Days" -Method GET -TimeoutSec 10
+        return $response
+    } catch {
+        Write-Shield "Could not fetch L0RE threat history" "WARN"
+        return @()
+    }
+}
+
 # Export for module use (only when loaded as module)
 if ($MyInvocation.MyCommand.ScriptBlock.Module) {
-    Export-ModuleMember -Function Start-Shield, Scan-*, Remove-Threat -Variable Threats
+    Export-ModuleMember -Function Start-Shield, Scan-*, Remove-Threat, Send-ToL0re, Get-L0reThreatSummary -Variable Threats
 }
 #endregion
 

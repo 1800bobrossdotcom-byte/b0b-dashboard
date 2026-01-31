@@ -7,7 +7,7 @@
   "dailyVolume": 0,
   "dailyReset": "Fri Jan 30 2026",
   "positions": [],
-  "lastTick": "2026-01-30T18:49:29.670Z",
+  "lastTick": "2026-01-31T00:34:58.634Z",
   "startDate": "2026-01-30T18:19:07.308Z",
   "totalSweptToCold": 0,
   "totalReinvested": 0,
@@ -15,15 +15,15 @@
   "lastSweep": null,
   "wage": {
     "hourlyTarget": 40,
-    "currentHour": 13,
+    "currentHour": 19,
     "hourlyPnL": 0,
-    "hoursActive": 0,
+    "hoursActive": 1,
     "totalWageEarned": 0,
-    "wageOwed": 0,
+    "wageOwed": 40,
     "efficiency": 0,
     "streak": 0,
     "bestStreak": 0,
-    "lastHourReset": "2026-01-30T18:19:07.308Z"
+    "lastHourReset": "2026-01-31T00:34:07.972Z"
   },
   "lastScan": {
     "bankr": 0,

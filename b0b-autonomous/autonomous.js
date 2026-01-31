@@ -106,6 +106,165 @@ const taskHandlers = {
     return { success: true, result };
   },
   
+  // ═══════════════════════════════════════════════════════════════════════════
+  // L0RE TASK HANDLERS
+  // ═══════════════════════════════════════════════════════════════════════════
+  
+  // L0RE Pipeline execution
+  l0re_pipeline: async (task) => {
+    try {
+      const L0reDataOps = require('../brain/l0re-data-ops.js');
+      const dataOps = new L0reDataOps();
+      
+      const result = await dataOps.pipeline(task.pipeline, {
+        source: task.source,
+        filters: task.filters || {},
+        outputFormat: task.outputFormat || 'json'
+      });
+      
+      log('info', `L0RE Pipeline: ${task.pipeline}`, { entries: result.length || 0 });
+      return { success: true, result };
+    } catch (e) {
+      return { success: false, error: e.message };
+    }
+  },
+  
+  // L0RE Search & Index
+  l0re_search: async (task) => {
+    try {
+      const L0reDataOps = require('../brain/l0re-data-ops.js');
+      const dataOps = new L0reDataOps();
+      
+      const results = await dataOps.search(task.query, {
+        agent: task.agent,
+        freshness: task.freshness,
+        limit: task.limit || 50
+      });
+      
+      log('info', `L0RE Search: "${task.query}"`, { results: results.length });
+      return { success: true, results };
+    } catch (e) {
+      return { success: false, error: e.message };
+    }
+  },
+  
+  // L0RE Data Validation
+  l0re_validate: async (task) => {
+    try {
+      const L0reDataOps = require('../brain/l0re-data-ops.js');
+      const dataOps = new L0reDataOps();
+      
+      const data = task.data || (task.file ? 
+        JSON.parse(fs.readFileSync(task.file, 'utf-8')) : null);
+      
+      if (!data) {
+        return { success: false, error: 'No data provided' };
+      }
+      
+      const result = dataOps.validate(data, {
+        maxSize: task.maxSize,
+        requireFields: task.requireFields,
+        sanitize: task.sanitize !== false
+      });
+      
+      log('info', `L0RE Validate: ${result.valid ? 'PASS' : 'FAIL'}`, { 
+        errors: result.errors.length,
+        warnings: result.warnings.length
+      });
+      
+      return { success: result.valid, ...result };
+    } catch (e) {
+      return { success: false, error: e.message };
+    }
+  },
+  
+  // L0RE Tag & Index
+  l0re_tag: async (task) => {
+    try {
+      const L0reDataOps = require('../brain/l0re-data-ops.js');
+      const dataOps = new L0reDataOps();
+      
+      const data = task.data || (task.file ?
+        JSON.parse(fs.readFileSync(task.file, 'utf-8')) : null);
+        
+      if (!data) {
+        return { success: false, error: 'No data provided' };
+      }
+      
+      const tagged = dataOps.tag(data, {
+        source: task.source || 'autonomous',
+        confidence: task.confidence || 0.7,
+        tags: task.tags || [],
+        category: task.category || 'general'
+      });
+      
+      // Optionally store
+      if (task.store !== false) {
+        await dataOps.store(tagged);
+      }
+      
+      log('info', `L0RE Tag: ${tagged._l0re.id}`, {
+        tags: tagged._l0re.tags.length,
+        freshness: tagged._l0re.freshness
+      });
+      
+      return { success: true, tagged };
+    } catch (e) {
+      return { success: false, error: e.message };
+    }
+  },
+  
+  // L0RE Ritual execution
+  l0re_ritual: async (task) => {
+    try {
+      const L0reRituals = require('../brain/l0re-rituals.js');
+      const rituals = new L0reRituals();
+      
+      const result = await rituals.execute(task.ritual, task.params || {});
+      
+      log('info', `L0RE Ritual: ${task.ritual}`, { 
+        success: result.success,
+        duration: result.duration
+      });
+      
+      return result;
+    } catch (e) {
+      return { success: false, error: e.message };
+    }
+  },
+  
+  // Sync finance data with L0RE tagging
+  l0re_finance_sync: async (task) => {
+    try {
+      const L0reDataOps = require('../brain/l0re-data-ops.js');
+      const dataOps = new L0reDataOps();
+      
+      // Read finance state files
+      const financeDir = path.join(__dirname, '..', 'b0b-finance');
+      const files = ['treasury-state.json', 'swarm-pulse.json', 'cooperative-trader-state.json'];
+      
+      let synced = 0;
+      for (const file of files) {
+        const filepath = path.join(financeDir, file);
+        if (fs.existsSync(filepath)) {
+          const data = JSON.parse(fs.readFileSync(filepath, 'utf-8'));
+          const tagged = dataOps.tag(data, {
+            source: 'b0b-finance',
+            tags: ['finance', file.replace('.json', '')],
+            category: 'finance'
+          });
+          await dataOps.store(tagged);
+          synced++;
+        }
+      }
+      
+      log('info', `L0RE Finance Sync: ${synced} files`);
+      return { success: true, synced };
+    } catch (e) {
+      return { success: false, error: e.message };
+    }
+  },
+  
   // Compare two screenshots
   compare: async (task) => {
     const { compare } = require('../b0b-visual-debug/compare');

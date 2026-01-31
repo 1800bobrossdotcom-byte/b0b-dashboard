@@ -57,6 +57,30 @@
       {
         "command": "b0b.startLocalBridge",
         "title": "b0b: Start Local Bridge"
+      },
+      {
+        "command": "b0b.l0rePipeline",
+        "title": "b0b: Run L0RE Pipeline"
+      },
+      {
+        "command": "b0b.l0reSearch",
+        "title": "b0b: L0RE Search Data"
+      },
+      {
+        "command": "b0b.l0reRitual",
+        "title": "b0b: Execute L0RE Ritual"
+      },
+      {
+        "command": "b0b.runAutonomous",
+        "title": "b0b: Run Autonomous Mode"
+      },
+      {
+        "command": "b0b.runShield",
+        "title": "b0b: Run B0B Shield Scan"
+      },
+      {
+        "command": "b0b.syncFinance",
+        "title": "b0b: Sync Finance State"
       }
     ],
     "viewsContainers": {
@@ -89,6 +113,10 @@
         {
           "id": "b0b-railway",
           "name": "Railway Services"
+        },
+        {
+          "id": "b0b-l0re",
+          "name": "L0RE DataOps"
         }
       ]
     },

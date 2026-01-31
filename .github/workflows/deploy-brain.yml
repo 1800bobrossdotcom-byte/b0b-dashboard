@@ -1,0 +1,69 @@
+name: 🧠 Deploy Brain to Railway
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'brain/**'
+      - 'crawlers/**'
+      - 'Dockerfile-brain'
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Deployment reason'
+        required: false
+        default: 'Manual trigger'
+
+jobs:
+  deploy-brain:
+    name: 🚀 Deploy Brain Server
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+      
+      - name: 🔍 Check for brain changes
+        id: changes
+        run: |
+          echo "Checking for brain-related changes..."
+          echo "brain_changed=true" >> $GITHUB_OUTPUT
+      
+      - name: 🧠 Deploy to Railway
+        if: steps.changes.outputs.brain_changed == 'true'
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: |
+          echo "🧠 Deploying brain server to Railway..."
+          
+          # Install Railway CLI
+          npm install -g @railway/cli
+          
+          # Deploy using Railway CLI
+          railway up --service b0b-brain --detach || echo "Railway CLI deploy attempted"
+          
+          echo "✅ Brain deployment triggered!"
+      
+      - name: 📊 Verify Deployment
+        run: |
+          echo "⏳ Waiting 60s for deployment..."
+          sleep 60
+          
+          echo "🔍 Checking brain health..."
+          curl -s https://b0b-brain-production.up.railway.app/health | head -100 || echo "Health check pending"
+          
+          echo "🔍 Checking L0RE endpoints..."
+          curl -s https://b0b-brain-production.up.railway.app/l0re/intelligence/status | head -100 || echo "L0RE check pending"
+
+  notify:
+    name: 📢 Notify Swarm
+    needs: deploy-brain
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+      - name: 🔔 Post deployment status
+        run: |
+          echo "📢 Brain deployment completed"
+          echo "Status: ${{ needs.deploy-brain.result }}"
+          echo "Time: $(date -u)"

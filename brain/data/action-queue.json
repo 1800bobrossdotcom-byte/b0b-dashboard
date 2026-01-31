@@ -718,5 +718,25 @@
     "fromDiscussion": "disc-1769797276012",
     "status": "queued",
     "queuedAt": "2026-01-30T18:21:56.967Z"
+  },
+  {
+    "id": "action-1769819648007-ge0mux",
+    "type": "task",
+    "agent": "b0b",
+    "description": "let's prioritize",
+    "priority": "medium",
+    "fromDiscussion": "ideation-1769819648006",
+    "status": "queued",
+    "queuedAt": "2026-01-31T00:34:08.007Z"
+  },
+  {
+    "id": "action-1769819648007-0lw1cr",
+    "type": "task",
+    "agent": "b0b",
+    "description": "what's our exposure here? Market unknown, need to stay cautious",
+    "priority": "medium",
+    "fromDiscussion": "ideation-1769819648006",
+    "status": "queued",
+    "queuedAt": "2026-01-31T00:34:08.007Z"
   }
 ]
