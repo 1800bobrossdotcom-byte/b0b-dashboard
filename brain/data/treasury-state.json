@@ -1,35 +1,10 @@
 {
-  "balances": {
-    "total": 0,
-    "note": "REAL balances only - no placeholders"
-  },
-  "performance": {
-    "totalDeposits": 0,
-    "totalWithdrawals": 0,
-    "totalPnL": 0,
-    "totalWins": 0,
-    "totalLosses": 0,
-    "winCount": 0,
-    "lossCount": 0,
-    "bestTrade": null,
-    "worstTrade": null
-  },
-  "daily": {
-    "date": null,
-    "pnl": 0,
-    "trades": 0,
-    "wins": 0,
-    "losses": 0
-  },
-  "weekly": {
-    "weekStart": null,
-    "pnl": 0,
-    "trades": 0,
-    "savingsContribution": 0
-  },
-  "agentStats": {},
-  "history": [],
-  "created": "2026-01-30T20:00:00.000Z",
-  "lastUpdated": "2026-01-30T20:00:00.000Z",
-  "note": "CLEAN STATE - All fake $300/$1000 removed. Only real data goes here."
+  "timestamp": "2026-01-31T01:32:47.164Z",
+  "wallet": "0xCA4Ca0c7b26e51805c20C95DF02Ea86feA938D78",
+  "chain": "base",
+  "balanceETH": 0.001747325566140149,
+  "balanceUSD": 5.241976698420447,
+  "lastUpdated": "2026-01-31T01:32:47.164Z",
+  "_lastUpdated": "2026-01-31T01:32:47.164Z",
+  "_source": "integrated-crawler"
 }

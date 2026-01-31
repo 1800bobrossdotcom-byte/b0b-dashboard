@@ -77,6 +77,7 @@ export default function L0reOperations() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
 
   const loadData = async () => {
     try {
@@ -90,6 +91,24 @@ export default function L0reOperations() {
       setError(e.message);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const triggerCrawlers = async () => {
+    setRefreshing(true);
+    try {
+      const res = await fetch(`${BRAIN_URL}/l0re/crawlers/run`, { 
+        method: 'POST',
+        cache: 'no-store' 
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      // Wait a moment for data to be written
+      await new Promise(r => setTimeout(r, 1000));
+      await loadData();
+    } catch (e: any) {
+      console.error('Crawler trigger failed:', e);
+    } finally {
+      setRefreshing(false);
     }
   };
 
@@ -137,14 +156,27 @@ export default function L0reOperations() {
           </h1>
           <p className="text-xs text-white/40">b0b-platform • {p?.tools?.length || 0} tools • All data live</p>
         </div>
-        <div className="text-right">
-          <div className="text-xs text-white/50">
-            Last update: {lastUpdate?.toLocaleTimeString() || '--'}
-          </div>
-          <div className="flex gap-2 mt-1">
-            <StatusBadge status={h.dataFreshness >= 70 ? 'ok' : h.dataFreshness >= 40 ? 'warn' : 'error'} label={`${h.dataFreshness || 0}% fresh`} />
-            <StatusBadge status={h.selfHealingActive ? 'ok' : 'warn'} label={h.selfHealingActive ? 'healing' : 'idle'} />
-            <StatusBadge status={h.tradingEnabled ? 'ok' : 'stale'} label={h.tradingEnabled ? 'trading' : 'paper'} />
+        <div className="text-right flex items-center gap-4">
+          <button 
+            onClick={triggerCrawlers}
+            disabled={refreshing}
+            className={`px-3 py-1.5 text-xs rounded border transition ${
+              refreshing 
+                ? 'bg-yellow-500/20 border-yellow-500/30 text-yellow-400 cursor-wait' 
+                : 'bg-green-500/20 border-green-500/30 text-green-400 hover:bg-green-500/30'
+            }`}
+          >
+            {refreshing ? '🔄 Crawling...' : '🔄 Refresh Data'}
+          </button>
+          <div>
+            <div className="text-xs text-white/50">
+              Last update: {lastUpdate?.toLocaleTimeString() || '--'}
+            </div>
+            <div className="flex gap-2 mt-1">
+              <StatusBadge status={h.dataFreshness >= 70 ? 'ok' : h.dataFreshness >= 40 ? 'warn' : 'error'} label={`${h.dataFreshness || 0}% fresh`} />
+              <StatusBadge status={h.selfHealingActive ? 'ok' : 'warn'} label={h.selfHealingActive ? 'healing' : 'idle'} />
+              <StatusBadge status={h.tradingEnabled ? 'ok' : 'stale'} label={h.tradingEnabled ? 'trading' : 'paper'} />
+            </div>
           </div>
         </div>
       </header>
@@ -155,6 +187,9 @@ export default function L0reOperations() {
         <Section title="📊 Data Freshness" badge={
           <StatusBadge status={h.dataFreshness >= 70 ? 'ok' : 'error'} label={`${fresh.fresh}/${fresh.files?.length} fresh`} />
         }>
+          <div className="text-xs text-white/60 mb-2 italic">
+            🔄 Integrated crawlers run every 2 minutes on Railway
+          </div>
           <div className="space-y-1 text-xs">
             {fresh.files?.map((f: any) => (
               <div key={f.file} className="flex justify-between">

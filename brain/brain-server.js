@@ -70,6 +70,38 @@ try {
   console.log('[BRAIN] Self-Healing Loop not available:', e.message);
 }
 
+// 🔄 INTEGRATED CRAWLERS — Solves the Railway Paradox
+// These run INSIDE brain-server, not as external processes
+let integratedCrawlers;
+let crawlerInterval = null;
+const CRAWLER_INTERVAL_MS = 2 * 60 * 1000; // 2 minutes
+try {
+  integratedCrawlers = require('./integrated-crawlers.js');
+  console.log('[BRAIN] Integrated crawlers loaded — Railway Paradox solution active 🔄');
+  
+  // Run crawlers immediately on startup
+  setTimeout(() => {
+    console.log('[BRAIN] Running initial crawler sweep...');
+    integratedCrawlers.runAllCrawlers().then(() => {
+      console.log('[BRAIN] Initial crawler sweep complete ✅');
+    }).catch(e => {
+      console.log('[BRAIN] Initial crawler sweep error:', e.message);
+    });
+  }, 5000); // 5 second delay to let server start
+  
+  // Start crawler loop
+  crawlerInterval = setInterval(() => {
+    console.log('[BRAIN] Running scheduled crawler sweep...');
+    integratedCrawlers.runAllCrawlers().catch(e => {
+      console.log('[BRAIN] Scheduled crawler error:', e.message);
+    });
+  }, CRAWLER_INTERVAL_MS);
+  
+  console.log(`[BRAIN] Crawler loop started — refreshing every ${CRAWLER_INTERVAL_MS / 1000}s`);
+} catch (e) {
+  console.log('[BRAIN] Integrated crawlers not available:', e.message);
+}
+
 // Research Library — PDF/doc knowledge base
 const LIBRARY_DIR = path.join(__dirname, 'data', 'library');
 const LIBRARY_INDEX_DIR = path.join(LIBRARY_DIR, 'index');
@@ -5305,6 +5337,74 @@ try {
 } catch (e) {
   console.log('[BRAIN] L0RE Platform not available:', e.message);
 }
+
+// =============================================================================
+// 🔄 INTEGRATED CRAWLERS ENDPOINTS — Manual Trigger & Status
+// =============================================================================
+
+app.get('/l0re/crawlers/status', async (req, res) => {
+  try {
+    const status = {
+      enabled: !!integratedCrawlers,
+      intervalMs: CRAWLER_INTERVAL_MS,
+      intervalSeconds: CRAWLER_INTERVAL_MS / 1000,
+      loopRunning: !!crawlerInterval,
+      lastRun: new Date().toISOString(),
+      paradox: 'SOLVED — crawlers run inside brain-server'
+    };
+    res.json(status);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+app.post('/l0re/crawlers/run', async (req, res) => {
+  try {
+    if (!integratedCrawlers) {
+      return res.status(503).json({ error: 'Integrated crawlers not loaded' });
+    }
+    console.log('[API] Manual crawler run triggered');
+    const results = await integratedCrawlers.runAllCrawlers();
+    res.json({
+      success: true,
+      message: 'All crawlers executed',
+      results
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+app.post('/l0re/crawlers/run/:crawler', async (req, res) => {
+  try {
+    if (!integratedCrawlers) {
+      return res.status(503).json({ error: 'Integrated crawlers not loaded' });
+    }
+    
+    const crawler = req.params.crawler;
+    const crawlerMap = {
+      'd0t-signals': integratedCrawlers.crawlD0tSignals,
+      'turb0': integratedCrawlers.crawlTurb0State,
+      'treasury': integratedCrawlers.crawlTreasuryState,
+      'polymarket': integratedCrawlers.crawlPolymarket,
+      'freshness': integratedCrawlers.crawlFreshnessState,
+      'self-healing': integratedCrawlers.crawlSelfHealingState,
+    };
+    
+    if (!crawlerMap[crawler]) {
+      return res.status(400).json({
+        error: 'Unknown crawler',
+        available: Object.keys(crawlerMap)
+      });
+    }
+    
+    console.log(`[API] Manual run: ${crawler}`);
+    const result = await crawlerMap[crawler]();
+    res.json({ success: true, crawler, result });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
 
 // =============================================================================
 // START SERVER

@@ -1,15 +1,14 @@
 {
-  "activated": false,
-  "activatedAt": null,
+  "timestamp": "2026-01-31T01:32:46.325Z",
   "mode": "DISABLED",
-  "dailyStats": {
-    "date": null,
-    "trades": 0,
-    "pnl": 0,
-    "volume": 0
+  "enabled": false,
+  "positions": [],
+  "lastTrade": null,
+  "performance": {
+    "totalTrades": 0,
+    "winRate": 0,
+    "pnl": 0
   },
-  "lastTradeTime": 0,
-  "emergencyStop": true,
-  "tradingHistory": [],
-  "note": "CLEAN STATE - All placeholder data removed 2026-01-30"
+  "_lastUpdated": "2026-01-31T01:32:46.325Z",
+  "_source": "integrated-crawler"
 }
