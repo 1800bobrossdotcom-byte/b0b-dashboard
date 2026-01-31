@@ -1,9 +1,9 @@
 {
-  "emailsSentThisHour": 2,
-  "emailsSentToday": 2,
+  "emailsSentThisHour": 0,
+  "emailsSentToday": 0,
   "lastEmailTime": 1769711537437,
-  "hourStart": 1769711015944,
-  "dayStart": 1769711015944,
+  "hourStart": 1769825646658,
+  "dayStart": 1769825646658,
   "blockedAttempts": [
     {
       "timestamp": "2026-01-29T18:23:39.068Z",
@@ -11,6 +11,14 @@
       "subject": "Profit Target Alert",
       "errors": [
         "❌ Too fast. Wait 29s"
+      ]
+    },
+    {
+      "timestamp": "2026-01-31T02:14:06.658Z",
+      "to": "1800bobrossdotcom@gmail.com",
+      "subject": " L0RE Operations Center Password",
+      "errors": [
+        "❌ BLOCKED: Content contains sensitive pattern (password)"
       ]
     }
   ],
