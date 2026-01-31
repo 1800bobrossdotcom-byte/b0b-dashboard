@@ -7941,7 +7941,7 @@ app.post('/l0re/swarm/chat/stream', async (req, res) => {
         emoji: config.emoji,
         color: config.color,
         role: config.role,
-        response: \`[\${agent} is offline...]\`,
+        response: `[${agent} is offline...]`,
         error: e.message
       })}\n\n`);
     }
@@ -7977,7 +7977,7 @@ app.post('/l0re/actions/execute/:id', async (req, res) => {
   action.executedAt = new Date().toISOString();
   
   // Log the action (in real implementation, this would trigger actual changes)
-  console.log(\`[L0RE ACTION] Executing: \${action.description}\`);
+  console.log(`[L0RE ACTION] Executing: ${action.description}`);
   
   // For now, mark as executed and log
   action.status = 'executed';
@@ -8010,7 +8010,7 @@ app.get('/l0re/site/health', async (req, res) => {
     health.checks.push({
       name: 'data-freshness',
       status: staleItems.length > 3 ? 'warning' : 'healthy',
-      message: \`\${staleItems.length} stale data files\`,
+      message: `${staleItems.length} stale data files`,
       details: staleItems.slice(0, 5).map(i => i.file)
     });
     
@@ -8018,7 +8018,7 @@ app.get('/l0re/site/health', async (req, res) => {
       health.suggestions.push({
         agent: 'r0ss',
         action: 'refresh-crawlers',
-        description: \`Refresh stale data: \${staleItems.map(i => i.file).join(', ')}\`
+        description: `Refresh stale data: ${staleItems.map(i => i.file).join(', ')}`
       });
     }
   } catch {}
@@ -8033,7 +8033,7 @@ app.get('/l0re/site/health', async (req, res) => {
     health.checks.push({
       name: 'recent-errors',
       status: 'warning',
-      message: \`\${recentErrors.length} errors in last hour\`
+      message: `${recentErrors.length} errors in last hour`
     });
   }
   
