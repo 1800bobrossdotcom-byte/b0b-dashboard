@@ -2121,6 +2121,16 @@
         "signal": "BULLISH"
       },
       "nash": "EQUILIBRIUM"
+    },
+    {
+      "timestamp": "2026-01-31T08:13:03.285Z",
+      "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+      "composite": {
+        "score": 0.6666666666666666,
+        "confidence": 0.5,
+        "signal": "BULLISH"
+      },
+      "nash": "EQUILIBRIUM"
     }
   ]
 }
