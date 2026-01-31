@@ -30,7 +30,64 @@ const RAMPS = {
   blocks: ' ░▒▓█',
   minimal: ' ·:;|',
   braille: '⠀⠁⠃⠇⡇⡏⡟⡿⣿',
+  circuit: '┃━┏┓┗┛┣┫┳┻╋',
+  agents: '◉▓◈⚡',
 };
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// MATRIX RAIN: L0RE-style falling characters
+// ═══════════════════════════════════════════════════════════════════════════════
+
+function MatrixRain({ width = 40, height = 8 }: { width?: number; height?: number }) {
+  const [frame, setFrame] = useState<string[][]>([]);
+  const columnsRef = useRef<{ pos: number; speed: number; char: string }[]>([]);
+  
+  useEffect(() => {
+    // Initialize columns
+    const chars = '01アイウエオカキクケコサシスセソタチツテト';
+    columnsRef.current = Array(width).fill(0).map(() => ({
+      pos: Math.random() * height,
+      speed: 0.1 + Math.random() * 0.3,
+      char: chars[Math.floor(Math.random() * chars.length)]
+    }));
+    
+    const interval = setInterval(() => {
+      const newFrame: string[][] = Array(height).fill(0).map(() => Array(width).fill(' '));
+      
+      columnsRef.current.forEach((col, x) => {
+        col.pos += col.speed;
+        if (col.pos >= height + 3) {
+          col.pos = -Math.random() * 5;
+          col.char = chars[Math.floor(Math.random() * chars.length)];
+        }
+        
+        const y = Math.floor(col.pos);
+        if (y >= 0 && y < height) {
+          newFrame[y][x] = col.char;
+        }
+        // Trailing fade
+        for (let i = 1; i < 3; i++) {
+          const ty = y - i;
+          if (ty >= 0 && ty < height) {
+            newFrame[ty][x] = RAMPS.blocks[4 - i] || '░';
+          }
+        }
+      });
+      
+      setFrame(newFrame);
+    }, 80);
+    
+    return () => clearInterval(interval);
+  }, [width, height]);
+  
+  return (
+    <pre className="font-mono text-[10px] leading-none text-green-500/30 select-none overflow-hidden">
+      {frame.map((row, i) => (
+        <div key={i}>{row.join('')}</div>
+      ))}
+    </pre>
+  );
+}
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // GENERATIVE ART: Driven by Real Data
@@ -278,7 +335,7 @@ export default function B0bHQ() {
     return () => clearInterval(interval);
   }, [mounted]);
 
-  // Chat handler
+  // Chat handler - NOW USES L0RE SWARM CHAT
   const sendChat = async () => {
     if (!chatInput.trim() || chatLoading) return;
     
@@ -288,20 +345,38 @@ export default function B0bHQ() {
     setChatLoading(true);
     
     try {
-      const res = await fetch(`${BRAIN_URL}/ai/chat`, {
+      // Use L0RE Swarm Chat - all 4 agents respond!
+      const res = await fetch(`${BRAIN_URL}/l0re/swarm/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query: userMsg })
+        body: JSON.stringify({ 
+          query: userMsg,
+          agents: ['b0b', 'd0t', 'c0m', 'r0ss']
+        })
       });
       const data = await res.json();
-      setChatMessages(prev => [...prev, { 
-        role: 'assistant', 
-        content: data.response || 'No response'
-      }]);
+      
+      // Add each agent's response as a separate message
+      if (data.swarm && data.swarm.length > 0) {
+        data.swarm.forEach((agentResponse: any) => {
+          setChatMessages(prev => [...prev, { 
+            role: 'agent',
+            agent: agentResponse.agent,
+            emoji: agentResponse.emoji,
+            color: agentResponse.color,
+            content: agentResponse.response
+          }]);
+        });
+      } else {
+        setChatMessages(prev => [...prev, { 
+          role: 'assistant', 
+          content: data.response || 'Swarm is sleeping...'
+        }]);
+      }
     } catch (e) {
       setChatMessages(prev => [...prev, { 
         role: 'assistant', 
-        content: '⚠️ Connection error'
+        content: '⚠️ Swarm connection error'
       }]);
     } finally {
       setChatLoading(false);
@@ -326,20 +401,29 @@ export default function B0bHQ() {
 
   return (
     <main className="min-h-screen bg-black text-white font-mono relative overflow-hidden">
-      {/* GENERATIVE BACKGROUND — Driven by actual signal data */}
-      <div className="absolute inset-0 opacity-30 pointer-events-none overflow-hidden">
+      {/* L0RE MATRIX RAIN BACKGROUND */}
+      <div className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden">
+        <MatrixRain width={150} height={50} />
+      </div>
+
+      {/* GENERATIVE DATA ART OVERLAY */}
+      <div className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden">
         <DataDrivenArt data={signals} width={120} height={40} />
       </div>
 
       {/* CONTENT */}
       <div className="relative z-10 min-h-screen flex flex-col">
         
-        {/* HEADER: Minimal, Gysin-style */}
+        {/* HEADER: L0RE-style */}
         <header className="p-8 border-b border-white/10">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-light tracking-widest text-white/90">B0B.DEV</h1>
-              <p className="text-xs text-white/30 mt-1 tracking-wider">AUTONOMOUS TRADING SWARM</p>
+              <h1 className="text-3xl font-light tracking-widest text-white/90">
+                <span className="text-green-400">L</span>0RE<span className="text-white/30">.DEV</span>
+              </h1>
+              <p className="text-xs text-white/30 mt-1 tracking-wider">
+                LIBRARY OF RECURSIVE ENCRYPTION • AUTONOMOUS SWARM
+              </p>
             </div>
             
             {/* Live indicator */}
@@ -439,29 +523,57 @@ export default function B0bHQ() {
           {/* RIGHT: Chat Interface */}
           <div className="flex flex-col">
             <div className="p-6 border-b border-white/5">
-              <div className="text-xs text-white/30 tracking-wider">SWARM CHAT</div>
+              <div className="text-xs text-white/30 tracking-wider">L0RE SWARM CHAT</div>
+              <div className="text-xs text-white/10 mt-1">b0b • d0t • c0m • r0ss</div>
             </div>
             
             {/* Messages */}
             <div className="flex-1 overflow-y-auto p-6 space-y-4">
               {chatMessages.length === 0 && (
-                <div className="text-white/20 text-sm">
-                  Ask the swarm anything...
+                <div className="text-white/20 text-sm space-y-2">
+                  <div>Ask the swarm anything...</div>
+                  <div className="text-xs text-white/10">
+                    All 4 agents will respond with their unique perspectives
+                  </div>
                 </div>
               )}
               {chatMessages.map((msg, i) => (
                 <div 
                   key={i}
-                  className={`text-sm ${msg.role === 'user' ? 'text-green-400' : 'text-white/70'}`}
+                  className={`text-sm ${
+                    msg.role === 'user' 
+                      ? 'text-green-400 border-l-2 border-green-500/30 pl-3' 
+                      : msg.role === 'agent'
+                      ? 'border-l-2 pl-3'
+                      : 'text-white/70'
+                  }`}
+                  style={msg.role === 'agent' ? { 
+                    color: msg.color,
+                    borderColor: `${msg.color}50`
+                  } : undefined}
                 >
-                  <span className="text-white/30 mr-2">{msg.role === 'user' ? '>' : '▸'}</span>
-                  {msg.content}
+                  {msg.role === 'user' && (
+                    <span className="text-white/30 mr-2">▸</span>
+                  )}
+                  {msg.role === 'agent' && (
+                    <div className="flex items-center gap-2 mb-1">
+                      <span>{msg.emoji}</span>
+                      <span className="font-bold text-xs uppercase tracking-wider">{msg.agent}</span>
+                    </div>
+                  )}
+                  <div className={msg.role === 'agent' ? 'text-white/70 leading-relaxed' : ''}>
+                    {msg.content}
+                  </div>
                 </div>
               ))}
               {chatLoading && (
-                <div className="text-yellow-500/50 text-sm">thinking...</div>
+                <div className="text-yellow-500/50 text-sm flex items-center gap-2">
+                  <span className="animate-pulse">◉</span>
+                  swarm is thinking...
+                </div>
               )}
               <div ref={chatEndRef} />
+            </div>
             </div>
             
             {/* Input */}
@@ -472,25 +584,33 @@ export default function B0bHQ() {
                   value={chatInput}
                   onChange={e => setChatInput(e.target.value)}
                   onKeyDown={e => e.key === 'Enter' && sendChat()}
-                  placeholder="ask anything..."
+                  placeholder="ask the swarm..."
                   className="flex-1 bg-transparent border-b border-white/20 text-white text-sm py-2 px-0 focus:outline-none focus:border-green-500/50"
                 />
                 <button
                   onClick={sendChat}
                   disabled={chatLoading}
-                  className="text-white/30 hover:text-white transition-colors disabled:opacity-50"
+                  className="text-white/30 hover:text-green-400 transition-colors disabled:opacity-50"
                 >
-                  →
+                  ⚡
                 </button>
               </div>
             </div>
           </div>
         </div>
 
-        {/* FOOTER: Minimal */}
-        <footer className="p-6 border-t border-white/5 text-xs text-white/20 flex justify-between">
-          <span>we are</span>
-          <span>{new Date().toISOString().split('T')[0]}</span>
+        {/* FOOTER: L0RE Philosophy */}
+        <footer className="p-6 border-t border-white/5 text-xs text-white/20 flex justify-between items-center">
+          <span className="italic">
+            &ldquo;The Great Way is not difficult for those who have no preferences.&rdquo;
+          </span>
+          <div className="flex items-center gap-4">
+            <span className="text-green-500/30">◉ b0b</span>
+            <span className="text-green-500/30">◈ d0t</span>
+            <span className="text-purple-500/30">⚡ c0m</span>
+            <span className="text-cyan-500/30">▓ r0ss</span>
+            <span className="text-white/30 ml-4">{new Date().toISOString().split('T')[0]}</span>
+          </div>
         </footer>
       </div>
     </main>

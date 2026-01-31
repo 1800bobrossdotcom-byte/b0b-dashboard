@@ -6858,6 +6858,106 @@ app.get('/ai/insights', async (req, res) => {
   }
 });
 
+// ═══════════════════════════════════════════════════════════════════════════════
+// L0RE SWARM CHAT - All 4 agents respond with their unique perspectives
+// ═══════════════════════════════════════════════════════════════════════════════
+app.post('/l0re/swarm/chat', async (req, res) => {
+  try {
+    const { query, agents = ['b0b', 'd0t', 'c0m', 'r0ss'] } = req.body;
+    if (!query) {
+      return res.status(400).json({ error: 'query required' });
+    }
+
+    if (!process.env.GROQ_API_KEY) {
+      return res.status(503).json({ error: 'Groq API key not configured' });
+    }
+
+    // Agent personalities for the swarm
+    const agentPersonalities = {
+      b0b: {
+        emoji: '🤖',
+        color: '#00FF88',
+        system: `You are b0b, the creative visionary of the swarm. You think in memes, culture, and narrative. You're optimistic, playful, and see opportunities everywhere. Keep responses under 100 words. Use crypto/meme speak naturally. End with an emoji.`
+      },
+      d0t: {
+        emoji: '📊',
+        color: '#22C55E',
+        system: `You are d0t, the data analyst of the swarm. You speak in numbers, patterns, and correlations. You're analytical but not boring - you find the story in data. Keep responses under 100 words. Cite specific metrics when possible.`
+      },
+      c0m: {
+        emoji: '💀',
+        color: '#A855F7',
+        system: `You are c0m, the security specialist of the swarm. You think about risks, vulnerabilities, and protection. You're paranoid but practical. Keep responses under 100 words. Flag any concerns but also solutions.`
+      },
+      r0ss: {
+        emoji: '🏗️',
+        color: '#00D9FF',
+        system: `You are r0ss, the infrastructure expert of the swarm. You think about systems, uptime, costs, and architecture. You're pragmatic and solutions-focused. Keep responses under 100 words. Focus on what can be built.`
+      }
+    };
+
+    // Fetch current market context for agents
+    let context = '';
+    try {
+      const signalsPath = path.join(__dirname, 'data', 'd0t-signals.json');
+      const signals = JSON.parse(await fs.readFile(signalsPath, 'utf8'));
+      const turb0 = signals.turb0 || {};
+      context = `Current market: ${turb0.decision || 'ANALYZING'} signal at ${Math.round((turb0.confidence || 0.5) * 100)}% confidence. `;
+    } catch (e) {}
+
+    // Query each requested agent in parallel
+    const responses = await Promise.all(
+      agents.map(async (agent) => {
+        const personality = agentPersonalities[agent];
+        if (!personality) return null;
+
+        try {
+          const groqRes = await axios.post('https://api.groq.com/openai/v1/chat/completions', {
+            model: 'llama-3.3-70b-versatile',
+            messages: [{
+              role: 'system',
+              content: personality.system + ' ' + context
+            }, {
+              role: 'user',
+              content: query
+            }],
+            max_tokens: 150,
+            temperature: 0.8
+          }, {
+            headers: { 'Authorization': `Bearer ${process.env.GROQ_API_KEY}` },
+            timeout: 10000
+          });
+
+          return {
+            agent,
+            emoji: personality.emoji,
+            color: personality.color,
+            response: groqRes.data.choices[0].message.content.trim(),
+            timestamp: new Date().toISOString()
+          };
+        } catch (e) {
+          return {
+            agent,
+            emoji: personality.emoji,
+            color: personality.color,
+            response: `[${agent} is thinking...]`,
+            error: e.message
+          };
+        }
+      })
+    );
+
+    res.json({
+      query,
+      swarm: responses.filter(r => r !== null),
+      timestamp: new Date().toISOString(),
+      l0re: true
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 // GROQ CHAT - Failsafe chat powered by free Groq
 app.post('/ai/chat', async (req, res) => {
   try {
