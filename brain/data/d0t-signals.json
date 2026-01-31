@@ -1,6 +1,6 @@
 {
   "data": {
-    "timestamp": "2026-01-31T01:32:45.851Z",
+    "timestamp": "2026-01-31T01:36:01.384Z",
     "predictions": [
       {
         "question": "Will Trump deport less than 250,000?",
@@ -82,12 +82,12 @@
     },
     "dex": {},
     "turb0": {
-      "decision": "HOLD",
-      "confidence": 0.5542743375962624,
+      "decision": "BUY",
+      "confidence": 0.7878942822348964,
       "reasoning": [
         "Market data analysis (10 prediction markets)",
         "On-chain: BASE TVL $4.57B",
-        "Signal generated at 2026-01-31T01:32:46.324Z"
+        "Signal generated at 2026-01-31T01:36:01.711Z"
       ],
       "agents": {
         "d0t": {
@@ -118,16 +118,16 @@
         "description": "Processing market signals",
         "action": "Analyze and report",
         "emoji": "📊",
-        "confidence": 0.5542743375962624
+        "confidence": 0.7878942822348964
       },
       "code": "l0re.live",
       "composite": {
-        "score": 0.5542743375962624,
+        "score": 0.7878942822348964,
         "confidence": 0.6,
-        "signal": "HOLD"
+        "signal": "BUY"
       }
     }
   },
-  "_lastUpdated": "2026-01-31T01:32:46.324Z",
+  "_lastUpdated": "2026-01-31T01:36:01.711Z",
   "_source": "integrated-crawler"
 }

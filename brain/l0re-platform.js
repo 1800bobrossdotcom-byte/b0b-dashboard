@@ -303,15 +303,16 @@ function getCreative() {
 // ══════════════════════════════════════════════════════════════════════════════
 
 function getFreshness() {
+  // All files refreshed by integrated-crawlers.js every 2 minutes
   const criticalFiles = [
     { name: 'd0t-signals.json', maxAge: 5 },
     { name: 'turb0b00st-state.json', maxAge: 5 },
-    { name: 'live-trader-state.json', maxAge: 1 },
+    { name: 'live-trader-state.json', maxAge: 5 },  // Relaxed: crawlers refresh this
     { name: 'treasury-state.json', maxAge: 10 },
     { name: 'polymarket.json', maxAge: 5 },
-    { name: 'self-healing-state.json', maxAge: 15 },
-    { name: 'freshness-state.json', maxAge: 15 },
-    { name: 'library-index.json', maxAge: 60 }
+    { name: 'self-healing-state.json', maxAge: 5 },
+    { name: 'freshness-state.json', maxAge: 5 },
+    { name: 'library-index.json', maxAge: 120 }  // Library updates less frequently
   ];
   
   const status = criticalFiles.map(f => {

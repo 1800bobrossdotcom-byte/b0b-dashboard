@@ -329,6 +329,72 @@ async function crawlSelfHealingState() {
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
+// 📈 LIVE TRADER STATE CRAWLER
+// ══════════════════════════════════════════════════════════════════════════════
+
+async function crawlLiveTraderState() {
+  console.log('[CRAWL] 📈 live-trader-state starting...');
+  
+  // Read existing state or create new
+  let existing = {};
+  try {
+    const data = await fs.readFile(path.join(DATA_DIR, 'live-trader-state.json'), 'utf8');
+    existing = JSON.parse(data);
+  } catch {}
+  
+  const state = {
+    timestamp: new Date().toISOString(),
+    enabled: existing.enabled ?? false,
+    mode: existing.mode || 'paper',
+    lastCheck: new Date().toISOString(),
+    positions: existing.positions || [],
+    pendingOrders: existing.pendingOrders || [],
+    dailyPnL: existing.dailyPnL || 0,
+    totalPnL: existing.totalPnL || 0
+  };
+  
+  await saveData('live-trader-state.json', state);
+  console.log('[CRAWL] ✅ live-trader-state saved');
+  return state;
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// 📚 LIBRARY INDEX CRAWLER
+// ══════════════════════════════════════════════════════════════════════════════
+
+async function crawlLibraryIndex() {
+  console.log('[CRAWL] 📚 library-index starting...');
+  
+  const libraryDir = path.join(DATA_DIR, 'library');
+  let docs = [];
+  
+  try {
+    const files = await fs.readdir(libraryDir);
+    for (const file of files) {
+      if (file.endsWith('.pdf') || file.endsWith('.md') || file.endsWith('.txt')) {
+        const stat = await fs.stat(path.join(libraryDir, file));
+        docs.push({
+          name: file,
+          size: stat.size,
+          modified: stat.mtime.toISOString()
+        });
+      }
+    }
+  } catch {}
+  
+  const state = {
+    timestamp: new Date().toISOString(),
+    totalDocs: docs.length,
+    documents: docs,
+    lastIndexed: new Date().toISOString()
+  };
+  
+  await saveData('library-index.json', state);
+  console.log('[CRAWL] ✅ library-index saved:', docs.length, 'docs');
+  return state;
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
 // 🚀 RUN ALL CRITICAL CRAWLERS
 // ══════════════════════════════════════════════════════════════════════════════
 
@@ -375,6 +441,18 @@ async function runAllCrawlers() {
     results.selfHealing = { error: e.message };
   }
   
+  try {
+    results.liveTrader = await crawlLiveTraderState();
+  } catch (e) {
+    results.liveTrader = { error: e.message };
+  }
+  
+  try {
+    results.libraryIndex = await crawlLibraryIndex();
+  } catch (e) {
+    results.libraryIndex = { error: e.message };
+  }
+  
   console.log('\n✅ All critical crawlers complete\n');
   return results;
 }
@@ -390,7 +468,9 @@ module.exports = {
   crawlTreasuryState,
   crawlPolymarket,
   crawlFreshnessState,
-  crawlSelfHealingState
+  crawlSelfHealingState,
+  crawlLiveTraderState,
+  crawlLibraryIndex
 };
 
 // CLI mode

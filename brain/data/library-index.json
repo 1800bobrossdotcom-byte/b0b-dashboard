@@ -1,32 +1,144 @@
 {
-  "lastSync": "2026-01-30T23:46:34.724Z",
-  "categories": {
-    "security": {
-      "lastSync": "2026-01-30T23:46:23.526Z",
-      "items": 6,
-      "agent": "c0m"
-    },
-    "ai": {
-      "lastSync": "2026-01-30T23:46:28.040Z",
-      "items": 7,
-      "agent": "r0ss"
-    },
-    "design": {
-      "lastSync": "2026-01-30T23:46:31.540Z",
-      "items": 4,
-      "agent": "b0b"
-    },
-    "trading": {
-      "lastSync": "2026-01-30T23:46:34.724Z",
-      "items": 4,
-      "agent": "d0t"
-    }
-  },
-  "totalItems": 21,
-  "recentAdditions": [
+  "timestamp": "2026-01-31T01:36:02.540Z",
+  "totalDocs": 27,
+  "documents": [
     {
-      "timestamp": "2026-01-30T10:01:28.614Z",
-      "count": 18
+      "name": "0502072.pdf",
+      "size": 299143,
+      "modified": "2026-01-30T03:04:58.915Z"
+    },
+    {
+      "name": "0704.0646.pdf",
+      "size": 827986,
+      "modified": "2026-01-30T02:58:40.238Z"
+    },
+    {
+      "name": "12factor-net.txt",
+      "size": 3721,
+      "modified": "2026-01-30T03:35:16.754Z"
+    },
+    {
+      "name": "1401.1219.pdf",
+      "size": 6689512,
+      "modified": "2026-01-30T03:05:06.299Z"
+    },
+    {
+      "name": "1409.0813.pdf",
+      "size": 80947,
+      "modified": "2026-01-30T03:12:19.142Z"
+    },
+    {
+      "name": "1507.03628.pdf",
+      "size": 615269,
+      "modified": "2026-01-30T03:12:50.554Z"
+    },
+    {
+      "name": "1701.06903.pdf",
+      "size": 1271543,
+      "modified": "2026-01-30T03:05:02.570Z"
+    },
+    {
+      "name": "1801.00862.pdf",
+      "size": 470175,
+      "modified": "2026-01-30T03:05:20.545Z"
+    },
+    {
+      "name": "1910.09534.pdf",
+      "size": 872025,
+      "modified": "2026-01-30T02:59:13.735Z"
+    },
+    {
+      "name": "2007.00095.pdf",
+      "size": 2735547,
+      "modified": "2026-01-30T03:34:38.788Z"
+    },
+    {
+      "name": "2208.11372.pdf",
+      "size": 11203892,
+      "modified": "2026-01-30T02:59:59.557Z"
+    },
+    {
+      "name": "2305.10601.pdf",
+      "size": 799685,
+      "modified": "2026-01-30T03:05:13.602Z"
+    },
+    {
+      "name": "2305.16291.pdf",
+      "size": 18830859,
+      "modified": "2026-01-30T03:05:52.105Z"
+    },
+    {
+      "name": "2309.02427.pdf",
+      "size": 2785564,
+      "modified": "2026-01-30T03:05:10.122Z"
+    },
+    {
+      "name": "berkshire-2023-letter.pdf",
+      "size": 122415,
+      "modified": "2026-01-30T02:43:05.627Z"
+    },
+    {
+      "name": "entropy.pdf",
+      "size": 366296,
+      "modified": "2026-01-30T03:05:24.296Z"
+    },
+    {
+      "name": "gwern-net-scaling-hypothesis.txt",
+      "size": 107061,
+      "modified": "2026-01-30T03:14:45.288Z"
+    },
+    {
+      "name": "hackerone-com-dod-vdp.txt",
+      "size": 172,
+      "modified": "2026-01-30T03:34:20.009Z"
+    },
+    {
+      "name": "nakamotoinstitute-org-bitcoin.txt",
+      "size": 21341,
+      "modified": "2026-01-30T03:15:01.043Z"
+    },
+    {
+      "name": "sre-google-sre-book-introduction.txt",
+      "size": 26662,
+      "modified": "2026-01-30T03:35:09.075Z"
+    },
+    {
+      "name": "tegmark-mathematical-universe.pdf",
+      "size": 827986,
+      "modified": "2026-01-30T02:43:47.523Z"
+    },
+    {
+      "name": "vitalik-eth-limo-general-2021-02-18-election-h.txt",
+      "size": 30661,
+      "modified": "2026-01-30T03:14:53.223Z"
+    },
+    {
+      "name": "vitalik-eth-limo-general-2024-05-09-dacc-html.txt",
+      "size": 205,
+      "modified": "2026-01-30T03:12:03.068Z"
+    },
+    {
+      "name": "waitbutwhy-com-2015-01-artificial-intelligen.txt",
+      "size": 50456,
+      "modified": "2026-01-30T03:15:43.345Z"
+    },
+    {
+      "name": "warren-buffett-way.pdf",
+      "size": 1784754,
+      "modified": "2026-01-30T02:43:07.444Z"
+    },
+    {
+      "name": "www-bugcrowd-com-blog-bugcrowd-announces-partn.txt",
+      "size": 2622,
+      "modified": "2026-01-30T03:34:29.857Z"
+    },
+    {
+      "name": "www-paulgraham-com-think-html.txt",
+      "size": 20979,
+      "modified": "2026-01-30T03:15:36.336Z"
     }
-  ]
+  ],
+  "lastIndexed": "2026-01-31T01:36:02.540Z",
+  "_lastUpdated": "2026-01-31T01:36:02.540Z",
+  "_source": "integrated-crawler"
 }

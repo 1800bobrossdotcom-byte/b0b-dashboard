@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-01-31T01:32:47.164Z",
+  "timestamp": "2026-01-31T01:36:02.328Z",
   "wallet": "0xCA4Ca0c7b26e51805c20C95DF02Ea86feA938D78",
   "chain": "base",
   "balanceETH": 0.001747325566140149,
   "balanceUSD": 5.241976698420447,
-  "lastUpdated": "2026-01-31T01:32:47.164Z",
-  "_lastUpdated": "2026-01-31T01:32:47.164Z",
+  "lastUpdated": "2026-01-31T01:36:02.328Z",
+  "_lastUpdated": "2026-01-31T01:36:02.328Z",
   "_source": "integrated-crawler"
 }

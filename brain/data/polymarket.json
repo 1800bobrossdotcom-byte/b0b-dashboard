@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-01-31T01:32:47.525Z",
+  "timestamp": "2026-01-31T01:36:02.535Z",
   "markets": [
     {
       "id": "517310",
       "question": "Will Trump deport less than 250,000?",
       "slug": "will-trump-deport-less-than-250000",
       "volume24h": 5267.720582000001,
-      "liquidity": 12606.22316,
+      "liquidity": 13791.40732,
       "outcomes": "[\"Yes\", \"No\"]",
       "prices": "[\"0.0545\", \"0.9455\"]"
     },
@@ -15,7 +15,7 @@
       "question": "Will Trump deport 250,000-500,000 people?",
       "slug": "will-trump-deport-250000-500000-people",
       "volume24h": 94316.571097,
-      "liquidity": 3623.56574,
+      "liquidity": 3646.85028,
       "outcomes": "[\"Yes\", \"No\"]",
       "prices": "[\"0.842\", \"0.158\"]"
     },
@@ -24,7 +24,7 @@
       "question": "Will Trump deport 500,000-750,000- people?",
       "slug": "will-trump-deport-500000-750000-people",
       "volume24h": 2519.655384,
-      "liquidity": 2828.42449,
+      "liquidity": 2803.49449,
       "outcomes": "[\"Yes\", \"No\"]",
       "prices": "[\"0.0855\", \"0.9145\"]"
     },
@@ -42,7 +42,7 @@
       "question": "Will Trump deport 1,000,000-1,250,000 people?",
       "slug": "will-trump-deport-1000000-1250000-people",
       "volume24h": 1547.1630000000002,
-      "liquidity": 7335.1655,
+      "liquidity": 7323.4175,
       "outcomes": "[\"Yes\", \"No\"]",
       "prices": "[\"0.0045\", \"0.9955\"]"
     },
@@ -51,7 +51,7 @@
       "question": "Will Trump deport 1,250,000-1,500,000 people?",
       "slug": "will-trump-deport-1250000-1500000-people",
       "volume24h": 1005.7424439999999,
-      "liquidity": 5318.68217,
+      "liquidity": 5318.71217,
       "outcomes": "[\"Yes\", \"No\"]",
       "prices": "[\"0.0055\", \"0.9945\"]"
     },
@@ -60,7 +60,7 @@
       "question": "Will Trump deport 1,500,000-1,750,000 people?",
       "slug": "will-trump-deport-1500000-1750000-people",
       "volume24h": 824.3602499999998,
-      "liquidity": 5201.4043,
+      "liquidity": 5201.4493,
       "outcomes": "[\"Yes\", \"No\"]",
       "prices": "[\"0.0105\", \"0.9895\"]"
     },
@@ -69,7 +69,7 @@
       "question": "Will Trump deport 1,750,000-2,000,000 people?",
       "slug": "will-trump-deport-1750000-2000000-people",
       "volume24h": 2338.802308,
-      "liquidity": 13555.48002,
+      "liquidity": 13555.60002,
       "outcomes": "[\"Yes\", \"No\"]",
       "prices": "[\"0.005\", \"0.995\"]"
     },
@@ -78,7 +78,7 @@
       "question": "Will Trump deport 2,000,000 or more people?",
       "slug": "will-trump-deport-2000000-or-more-people",
       "volume24h": 929.8732209999998,
-      "liquidity": 9848.59671,
+      "liquidity": 9822.01671,
       "outcomes": "[\"Yes\", \"No\"]",
       "prices": "[\"0.005\", \"0.995\"]"
     },
@@ -87,16 +87,16 @@
       "question": "Will Trump deport 750,000 or more people in 2025?",
       "slug": "will-trump-deport-750000-or-more-people-in-2025",
       "volume24h": 369.42724799999996,
-      "liquidity": 927.85093,
+      "liquidity": 928.65763,
       "outcomes": "[\"Yes\", \"No\"]",
-      "prices": "[\"0.038\", \"0.962\"]"
+      "prices": "[\"0.037\", \"0.963\"]"
     },
     {
       "id": "521944",
       "question": "Will Elon and DOGE cut less than $50b in federal spending in 2025?",
       "slug": "will-elon-and-doge-cut-less-than-50b-in-federal-spending-in-2025",
       "volume24h": 962.165878,
-      "liquidity": 2304.61083,
+      "liquidity": 2304.8023,
       "outcomes": "[\"Yes\", \"No\"]",
       "prices": "[\"0.973\", \"0.027\"]"
     },
@@ -123,7 +123,7 @@
       "question": "Will Elon and DOGE cut between $150-200b in federal spending in 2025?",
       "slug": "will-elon-and-doge-cut-between-150-200b-in-federal-spending-in-2025",
       "volume24h": 0,
-      "liquidity": 6220.21804,
+      "liquidity": 6220.21806,
       "outcomes": "[\"Yes\", \"No\"]",
       "prices": "[\"0.005\", \"0.995\"]"
     },
@@ -132,7 +132,7 @@
       "question": "Will Elon and DOGE cut between $200-250b in federal spending in 2025?",
       "slug": "will-elon-and-doge-cut-between-200-250b-in-federal-spending-in-2025",
       "volume24h": 108.91,
-      "liquidity": 8120.94422,
+      "liquidity": 8652.99362,
       "outcomes": "[\"Yes\", \"No\"]",
       "prices": "[\"0.0055\", \"0.9945\"]"
     },
@@ -150,7 +150,7 @@
       "question": "Will Elon cut the budget by at least 10% in 2025?",
       "slug": "will-elon-cut-the-budget-by-at-least-10-in-2025",
       "volume24h": 32.28299999999999,
-      "liquidity": 10896.96658,
+      "liquidity": 10896.96876,
       "outcomes": "[\"Yes\", \"No\"]",
       "prices": "[\"0.011\", \"0.989\"]"
     },
@@ -159,7 +159,7 @@
       "question": "Will Elon cut the budget by at least 5% in 2025?",
       "slug": "will-elon-cut-the-budget-by-at-least-5-in-2025",
       "volume24h": 866.5123079999998,
-      "liquidity": 5041.52103,
+      "liquidity": 5042.621,
       "outcomes": "[\"Yes\", \"No\"]",
       "prices": "[\"0.0345\", \"0.9655\"]"
     },
@@ -177,11 +177,11 @@
       "question": "Will GTA 6 cost $100+?",
       "slug": "will-gta-6-cost-100",
       "volume24h": 59333.787052000065,
-      "liquidity": 67264.31105,
+      "liquidity": 67262.46165,
       "outcomes": "[\"Yes\", \"No\"]",
       "prices": "[\"0.0105\", \"0.9895\"]"
     }
   ],
-  "_lastUpdated": "2026-01-31T01:32:47.525Z",
+  "_lastUpdated": "2026-01-31T01:36:02.536Z",
   "_source": "integrated-crawler"
 }

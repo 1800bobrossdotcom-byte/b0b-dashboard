@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-31T01:32:47.526Z",
+  "timestamp": "2026-01-31T01:36:02.537Z",
   "files": [
     {
       "file": "d0t-signals.json",
@@ -32,7 +32,7 @@
     {
       "file": "self-healing-state.json",
       "exists": true,
-      "ageSeconds": 28,
+      "ageSeconds": 7,
       "maxAgeSeconds": 120,
       "fresh": true
     }
@@ -40,6 +40,6 @@
   "fresh": 5,
   "stale": 0,
   "total": 5,
-  "_lastUpdated": "2026-01-31T01:32:47.527Z",
+  "_lastUpdated": "2026-01-31T01:36:02.537Z",
   "_source": "integrated-crawler"
 }
