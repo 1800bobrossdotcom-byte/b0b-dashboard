@@ -8,8 +8,6 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
-const BRAIN_URL = 'https://b0b-brain-production.up.railway.app';
-
 function Header() {
   return (
     <header className="site-header">
@@ -117,10 +115,10 @@ export default function HomePage() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const res = await fetch(`${BRAIN_URL}/l0re/platform`, { cache: 'no-store' });
+        const res = await fetch('/api/platform', { cache: 'no-store' });
         if (!res.ok) return;
         const snapshot = await res.json();
-        setHealth(snapshot?.health?.dataFreshness ?? 100);
+        setHealth(snapshot?.freshness?.healthPercent ?? 100);
         setFresh(snapshot?.freshness?.fresh ?? 0);
         setTotal(snapshot?.freshness?.files?.length ?? 0);
       } catch {
