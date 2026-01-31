@@ -1,8 +1,8 @@
 {
   "crawler": "d0t-signals",
-  "timestamp": "2026-01-31T04:22:14.948Z",
+  "timestamp": "2026-01-31T04:24:35.931Z",
   "data": {
-    "timestamp": "2026-01-31T04:22:14.090Z",
+    "timestamp": "2026-01-31T04:24:35.148Z",
     "agent": "d0t",
     "role": "Data Oracle",
     "predictions": [
@@ -60,7 +60,7 @@
         }
       ],
       "volumeSpikes": [],
-      "timestamp": "2026-01-31T04:22:14.939Z"
+      "timestamp": "2026-01-31T04:24:35.923Z"
     },
     "patterns": [
       {
@@ -208,7 +208,7 @@
       }
     },
     "turb0": {
-      "timestamp": "2026-01-31T04:22:14.941Z",
+      "timestamp": "2026-01-31T04:24:35.925Z",
       "decision": "BUY",
       "confidence": 0.644,
       "size": 0.0205,

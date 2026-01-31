@@ -1,55 +1,55 @@
 {
-  "source": "https://arxiv.org/rss/cs.AI",
-  "fetched": "2026-01-31T04:24:03.430Z",
+  "source": "https://arxiv.org/rss/cs.LG",
+  "fetched": "2026-01-31T04:24:51.945Z",
   "items": [
     {
-      "title": "NeuroAI and Beyond",
-      "link": "https://arxiv.org/abs/2601.19955",
+      "title": "Rethinking LLM-Driven Heuristic Design: Generating Efficient and Specialized Solvers via Dynamics-Aware Optimization",
+      "link": "https://arxiv.org/abs/2601.20868",
       "pubDate": "Fri, 30 Jan 2026 00:00:00 -0500"
     },
     {
-      "title": "Teaching LLMs to Ask: Self-Querying Category-Theoretic Planning for Under-Specified Reasoning",
-      "link": "https://arxiv.org/abs/2601.20014",
+      "title": "Finetune-Informed Pretraining Boosts Downstream Performance",
+      "link": "https://arxiv.org/abs/2601.20884",
       "pubDate": "Fri, 30 Jan 2026 00:00:00 -0500"
     },
     {
-      "title": "Fuzzy Categorical Planning: Autonomous Goal Satisfaction with Graded Semantic Constraints",
-      "link": "https://arxiv.org/abs/2601.20021",
+      "title": "A generative machine learning model for designing metal hydrides applied to hydrogen storage",
+      "link": "https://arxiv.org/abs/2601.20892",
       "pubDate": "Fri, 30 Jan 2026 00:00:00 -0500"
     },
     {
-      "title": "Insight Agents: An LLM-Based Multi-Agent System for Data Insights",
-      "link": "https://arxiv.org/abs/2601.20048",
+      "title": "Is Parameter Isolation Better for Prompt-Based Continual Learning?",
+      "link": "https://arxiv.org/abs/2601.20894",
       "pubDate": "Fri, 30 Jan 2026 00:00:00 -0500"
     },
     {
-      "title": "Should I Have Expressed a Different Intent? Counterfactual Generation for LLM-Based Autonomous Control",
-      "link": "https://arxiv.org/abs/2601.20090",
+      "title": "Faster Predictive Coding Networks via Better Initialization",
+      "link": "https://arxiv.org/abs/2601.20895",
       "pubDate": "Fri, 30 Jan 2026 00:00:00 -0500"
     },
     {
-      "title": "Towards Intelligent Urban Park Development Monitoring: LLM Agents for Multi-Modal Information Fusion and Analysis",
-      "link": "https://arxiv.org/abs/2601.20206",
+      "title": "TwinWeaver: An LLM-Based Foundation Model Framework for Pan-Cancer Digital Twins",
+      "link": "https://arxiv.org/abs/2601.20906",
       "pubDate": "Fri, 30 Jan 2026 00:00:00 -0500"
     },
     {
-      "title": "Scaling Medical Reasoning Verification via Tool-Integrated Reinforcement Learning",
-      "link": "https://arxiv.org/abs/2601.20221",
+      "title": "Noisy but Valid: Robust Statistical Evaluation of LLMs with Imperfect Judges",
+      "link": "https://arxiv.org/abs/2601.20913",
       "pubDate": "Fri, 30 Jan 2026 00:00:00 -0500"
     },
     {
-      "title": "Endogenous Reprompting: Self-Evolving Cognitive Alignment for Unified Multimodal Models",
-      "link": "https://arxiv.org/abs/2601.20305",
+      "title": "Noninvasive Intracranial Pressure Estimation Using Subspace System Identification and Bespoke Machine Learning Algorithms: A Learning-to-Rank Approach",
+      "link": "https://arxiv.org/abs/2601.20916",
       "pubDate": "Fri, 30 Jan 2026 00:00:00 -0500"
     },
     {
-      "title": "ECG-Agent: On-Device Tool-Calling Agent for ECG Multi-Turn Dialogue",
-      "link": "https://arxiv.org/abs/2601.20323",
+      "title": "A Theory of Universal Agnostic Learning",
+      "link": "https://arxiv.org/abs/2601.20961",
       "pubDate": "Fri, 30 Jan 2026 00:00:00 -0500"
     },
     {
-      "title": "AMA: Adaptive Memory via Multi-Agent Collaboration",
-      "link": "https://arxiv.org/abs/2601.20352",
+      "title": "Monotone Optimisation with Learned Projections",
+      "link": "https://arxiv.org/abs/2601.20983",
       "pubDate": "Fri, 30 Jan 2026 00:00:00 -0500"
     }
   ]
