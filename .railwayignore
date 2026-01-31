@@ -1,0 +1,16 @@
+# Ignore Dockerfiles that shouldn't be auto-detected by Railway
+d0t/Dockerfile
+0type/Dockerfile
+api/Dockerfile
+Dockerfile-brain
+
+# Ignore non-deployable folders
+crawlers/
+research-library/
+zips/
+b0b-command/
+b0b-control/
+b0b-vscode/
+d0t-vscode/
+alfred/
+mcp/

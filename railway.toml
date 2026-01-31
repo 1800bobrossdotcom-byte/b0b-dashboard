@@ -1,10 +1,15 @@
+# B0B Dashboard - Railway Configuration
+# ═══════════════════════════════════════════════════════════════
+# Root directory: dashboard/
+# This deploys the Next.js dashboard at b0b.dev
+
 [build]
 builder = "nixpacks"
-buildCommand = "npm install && npm run build"
+nixpacksConfigPath = "dashboard/nixpacks.toml"
 watchPatterns = ["dashboard/**"]
 
 [deploy]
-startCommand = "npm run start"
+startCommand = "cd dashboard && npm run start"
 healthcheckPath = "/"
 healthcheckTimeout = 300
 restartPolicyType = "on_failure"
