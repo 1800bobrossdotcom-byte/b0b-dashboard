@@ -52,10 +52,15 @@ const TURB0_CONFIG = {
   HIGH_CONFIDENCE: 0.75,
   ULTRA_CONFIDENCE: 0.9,
   
+  // 💀 c0m SECURITY: Hard risk limits (NEVER override)
   // Risk limits
-  MAX_SINGLE_TRADE: 0.1,  // 10% of portfolio
+  MAX_SINGLE_TRADE: 0.1,  // 10% of portfolio - HARD LIMIT
+  MAX_SELL_SIZE: 0.1,     // 💀 c0m: NEVER sell more than 10% without human approval
   STOP_LOSS: 0.05,        // 5% max loss
   TAKE_PROFIT: 0.15,      // 15% target
+  
+  // 💀 c0m: Full exit requires explicit human command
+  FULL_EXIT_REQUIRES_HUMAN: true,
   
   // Signal weights
   WEIGHTS: {
@@ -346,12 +351,15 @@ class TURB0B00STEngine {
     } else if (net < -0.4) {
       action = 'TURB0_SELL';
       confidence = Math.min(0.95, 0.7 + Math.abs(net) * 0.3);
-      size = Math.min(TURB0_CONFIG.MAX_SINGLE_TRADE, 0.05 + Math.abs(net) * 0.1);
+      // 💀 c0m: CAP sell size at MAX_SELL_SIZE - NO full exits without human
+      size = Math.min(TURB0_CONFIG.MAX_SELL_SIZE, 0.05 + Math.abs(net) * 0.05);
       reasoning.push(`Strong bearish consensus (net: ${net.toFixed(3)})`);
+      reasoning.push(`💀 c0m: Sell capped at ${(TURB0_CONFIG.MAX_SELL_SIZE * 100).toFixed(0)}% - full exits require HQ`);
     } else if (net < -0.2) {
       action = 'SELL';
       confidence = 0.6 + Math.abs(net) * 0.2;
-      size = Math.min(TURB0_CONFIG.MAX_SINGLE_TRADE, 0.03 + Math.abs(net) * 0.05);
+      // 💀 c0m: CAP sell size
+      size = Math.min(TURB0_CONFIG.MAX_SELL_SIZE, 0.03 + Math.abs(net) * 0.03);
       reasoning.push(`Moderate bearish signal (net: ${net.toFixed(3)})`);
     } else {
       action = 'HOLD';

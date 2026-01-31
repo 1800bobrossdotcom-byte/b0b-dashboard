@@ -534,9 +534,15 @@ class Turb0b00st {
       
       if (signal.side.toUpperCase() === 'SELL') {
         // SELL token for ETH
+        // 💀 c0m SECURITY: Log if selling entire balance
+        const sellingAll = !signal.amountTokens;
+        if (sellingAll && !signal.forcedFullExit) {
+          this.log('⚠️ c0m: Full exit attempted without forcedFullExit flag - limiting to 10%', 'WARN');
+        }
+        
         const amountIn = signal.amountTokens 
           ? ethers.parseUnits(signal.amountTokens.toString(), decimals)
-          : balance; // Sell all if no amount specified
+          : (signal.forcedFullExit ? balance : balance * BigInt(10) / BigInt(100)); // 💀 c0m: Default to 10% max sell
         
         if (amountIn > balance) {
           return { success: false, error: `Insufficient balance: have ${ethers.formatUnits(balance, decimals)}, need ${ethers.formatUnits(amountIn, decimals)}` };
@@ -992,18 +998,37 @@ async function main() {
       break;
 
     case 'sell':
-      // Sell a token: node turb0b00st.js sell <token_address> [amount]
-      // If no amount, sells entire balance
+      // Sell a token: node turb0b00st.js sell <token_address> <amount> [--force]
+      // 💀 c0m SECURITY: Amount is NOW REQUIRED. Use --all for full exit (requires --force)
       const tokenAddress = args[0];
-      const sellAmount = args[1]; // Optional - if not provided, sells all
+      const sellAmount = args[1];
+      const forceFlag = args.includes('--force');
+      const sellAll = args.includes('--all');
       
       if (!tokenAddress) {
-        console.log('\n❌ Usage: node turb0b00st.js sell <token_address> [amount]\n');
-        console.log('  Common tokens on Base:');
+        console.log('\n❌ Usage: node turb0b00st.js sell <token_address> <amount>\n');
+        console.log('  💀 c0m SECURITY: Amount is REQUIRED to prevent accidental full exits.');
+        console.log('\n  Common tokens on Base:');
         console.log('    BNKR: 0x22aF33FE49fD1Fa80c7149773dDe5890D3c76F3b');
         console.log('    USDC: 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913');
-        console.log('\n  Example: node turb0b00st.js sell 0x22aF33FE49fD1Fa80c7149773dDe5890D3c76F3b');
-        console.log('  (Sells entire BNKR balance for ETH)\n');
+        console.log('\n  Examples:');
+        console.log('    node turb0b00st.js sell 0x22aF... 1000      (Sell 1000 tokens)');
+        console.log('    node turb0b00st.js sell 0x22aF... --all --force  (⚠️ Full exit - DANGEROUS)');
+        break;
+      }
+      
+      // 💀 c0m SECURITY CHECK: Require explicit amount OR --all --force
+      if (!sellAmount && !sellAll) {
+        console.log('\n🚨 c0m SECURITY BLOCK: Amount required.');
+        console.log('   To sell a specific amount: node turb0b00st.js sell <token> <amount>');
+        console.log('   To sell ALL (⚠️ DANGEROUS): node turb0b00st.js sell <token> --all --force\n');
+        break;
+      }
+      
+      if (sellAll && !forceFlag) {
+        console.log('\n🚨 c0m SECURITY BLOCK: --all requires --force flag.');
+        console.log('   This prevents accidental full position exits.');
+        console.log('   Use: node turb0b00st.js sell <token> --all --force\n');
         break;
       }
       
@@ -1017,12 +1042,19 @@ async function main() {
       console.log('\n  🔄 EXECUTING TOKEN SELL');
       console.log('  ─────────────────────────────────────────────────────────────────────────────');
       
+      // 💀 c0m: Log security decision
+      if (sellAll) {
+        console.log('\n  ⚠️  c0m SECURITY WARNING: Full position exit requested with --force');
+        console.log('  📋 Recording in audit log for review.\n');
+      }
+      
       const sellSignal = {
         type: 'TOKEN',
         side: 'SELL',
         token: tokenAddress,
-        amountTokens: sellAmount || null, // null = sell all
+        amountTokens: sellAll ? null : sellAmount, // null = sell all (only with --all --force)
         sizeUSD: 0, // Will be calculated
+        forcedFullExit: sellAll, // c0m audit trail
       };
       
       const sellResult = await turbo.executeTokenTrade(sellSignal);
