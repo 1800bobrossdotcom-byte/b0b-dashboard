@@ -5432,6 +5432,218 @@ app.post('/l0re/crawlers/run/:crawler', async (req, res) => {
 });
 
 // =============================================================================
+// 🎭 L0RE ACTION SYSTEM — Agents Code from Conversation
+// =============================================================================
+
+let l0reActions;
+try {
+  l0reActions = require('./l0re-actions.js');
+  console.log('[BRAIN] L0RE Actions loaded — swarm can execute 🎭');
+} catch (e) {
+  console.log('[BRAIN] L0RE Actions not available:', e.message);
+}
+
+// Get pending action proposals
+app.get('/l0re/actions/pending', (req, res) => {
+  try {
+    const proposalsFile = path.join(DATA_DIR, 'action-proposals.json');
+    const data = fs.existsSync(proposalsFile) 
+      ? JSON.parse(fs.readFileSync(proposalsFile, 'utf8'))
+      : { pending: [], history: [] };
+    res.json({ pending: data.pending || [] });
+  } catch (e) {
+    res.json({ pending: [], error: e.message });
+  }
+});
+
+// Get action history
+app.get('/l0re/actions/history', (req, res) => {
+  try {
+    const proposalsFile = path.join(DATA_DIR, 'action-proposals.json');
+    const data = fs.existsSync(proposalsFile) 
+      ? JSON.parse(fs.readFileSync(proposalsFile, 'utf8'))
+      : { pending: [], history: [] };
+    res.json({ history: data.history || [] });
+  } catch (e) {
+    res.json({ history: [], error: e.message });
+  }
+});
+
+// Propose a new action
+app.post('/l0re/actions/propose', async (req, res) => {
+  try {
+    const { agent, type, description, params, conversation, source } = req.body;
+    
+    if (!agent || !type || !description) {
+      return res.status(400).json({ error: 'Missing: agent, type, description' });
+    }
+    
+    // Load or create proposals file
+    const proposalsFile = path.join(DATA_DIR, 'action-proposals.json');
+    let data = { pending: [], history: [] };
+    if (fs.existsSync(proposalsFile)) {
+      data = JSON.parse(fs.readFileSync(proposalsFile, 'utf8'));
+    }
+    
+    // Create proposal
+    const proposal = {
+      id: `action-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+      proposedBy: agent,
+      type,
+      description,
+      params: params || {},
+      conversation,
+      source: source || 'api',
+      proposedAt: new Date().toISOString(),
+      votes: {
+        [agent]: { vote: 'yes', reason: 'Proposer', timestamp: new Date().toISOString() }
+      },
+      status: 'proposed'
+    };
+    
+    data.pending.push(proposal);
+    fs.writeFileSync(proposalsFile, JSON.stringify(data, null, 2));
+    
+    console.log(`[L0RE] 📋 ${agent} proposed: ${description}`);
+    
+    res.json({ 
+      success: true, 
+      proposal,
+      message: `Action proposed. Needs 2+ votes for consensus.`
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Vote on a proposal
+app.post('/l0re/actions/vote', async (req, res) => {
+  try {
+    const { proposalId, agent, vote, reason } = req.body;
+    
+    if (!proposalId || !agent || !vote) {
+      return res.status(400).json({ error: 'Missing: proposalId, agent, vote' });
+    }
+    
+    const proposalsFile = path.join(DATA_DIR, 'action-proposals.json');
+    if (!fs.existsSync(proposalsFile)) {
+      return res.status(404).json({ error: 'No proposals found' });
+    }
+    
+    const data = JSON.parse(fs.readFileSync(proposalsFile, 'utf8'));
+    const idx = data.pending.findIndex(p => p.id === proposalId);
+    
+    if (idx === -1) {
+      return res.status(404).json({ error: 'Proposal not found' });
+    }
+    
+    const proposal = data.pending[idx];
+    proposal.votes[agent] = { vote, reason, timestamp: new Date().toISOString() };
+    
+    // Check consensus
+    const votes = Object.values(proposal.votes);
+    const yesVotes = votes.filter(v => v.vote === 'yes').length;
+    const noVotes = votes.filter(v => v.vote === 'no').length;
+    
+    let consensus = { reached: false, approved: false, reason: 'Voting in progress' };
+    
+    if (votes.length >= 2) {
+      if (yesVotes > noVotes) {
+        proposal.status = 'approved';
+        consensus = { reached: true, approved: true, reason: 'Majority approved' };
+        console.log(`[L0RE] ✅ Consensus reached: ${proposal.description}`);
+        
+        // Auto-execute if approved (optional - could wait for manual trigger)
+        // TODO: Call l0reActions executor here
+      } else if (noVotes >= yesVotes && votes.length >= 3) {
+        proposal.status = 'rejected';
+        consensus = { reached: true, approved: false, reason: 'Majority rejected' };
+      }
+    }
+    
+    fs.writeFileSync(proposalsFile, JSON.stringify(data, null, 2));
+    
+    res.json({ success: true, consensus, votes: votes.length, yesVotes, noVotes });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Execute an approved action
+app.post('/l0re/actions/execute/:proposalId', async (req, res) => {
+  try {
+    const { proposalId } = req.params;
+    
+    const proposalsFile = path.join(DATA_DIR, 'action-proposals.json');
+    if (!fs.existsSync(proposalsFile)) {
+      return res.status(404).json({ error: 'No proposals found' });
+    }
+    
+    const data = JSON.parse(fs.readFileSync(proposalsFile, 'utf8'));
+    const idx = data.pending.findIndex(p => p.id === proposalId);
+    
+    if (idx === -1) {
+      return res.status(404).json({ error: 'Proposal not found' });
+    }
+    
+    const proposal = data.pending[idx];
+    
+    if (proposal.status !== 'approved') {
+      return res.status(400).json({ error: 'Proposal not approved yet' });
+    }
+    
+    // Execute the action
+    console.log(`[L0RE] ⚡ Executing: ${proposal.description}`);
+    
+    let result = { success: false, error: 'Unknown action type' };
+    
+    // Basic execution based on type
+    if (proposal.type === 'update_file' && proposal.params?.path && proposal.params?.content) {
+      try {
+        const fullPath = path.join(path.dirname(__dirname), proposal.params.path);
+        fs.writeFileSync(fullPath, proposal.params.content);
+        result = { success: true, message: `Updated ${proposal.params.path}` };
+      } catch (e) {
+        result = { success: false, error: e.message };
+      }
+    } else if (proposal.type === 'create_file' && proposal.params?.path && proposal.params?.content) {
+      try {
+        const fullPath = path.join(path.dirname(__dirname), proposal.params.path);
+        fs.mkdirSync(path.dirname(fullPath), { recursive: true });
+        fs.writeFileSync(fullPath, proposal.params.content);
+        result = { success: true, message: `Created ${proposal.params.path}` };
+      } catch (e) {
+        result = { success: false, error: e.message };
+      }
+    } else if (proposal.type === 'git_commit' && proposal.params?.message) {
+      try {
+        const { execSync } = require('child_process');
+        execSync('git add -A', { cwd: path.dirname(__dirname) });
+        execSync(`git commit -m "${proposal.params.message}"`, { cwd: path.dirname(__dirname) });
+        result = { success: true, message: 'Committed changes' };
+      } catch (e) {
+        result = { success: false, error: e.message };
+      }
+    } else {
+      result = { success: false, error: `Action type '${proposal.type}' not yet implemented` };
+    }
+    
+    // Move to history
+    proposal.status = result.success ? 'executed' : 'failed';
+    proposal.result = result;
+    proposal.executedAt = new Date().toISOString();
+    
+    data.history.push(proposal);
+    data.pending.splice(idx, 1);
+    fs.writeFileSync(proposalsFile, JSON.stringify(data, null, 2));
+    
+    res.json({ success: result.success, result, proposal });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// =============================================================================
 // START SERVER
 // =============================================================================
 
