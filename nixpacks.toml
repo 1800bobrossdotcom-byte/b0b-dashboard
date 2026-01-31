@@ -6,7 +6,7 @@
 nixPkgs = ["nodejs_20"]
 
 [phases.install]
-cmds = ["cd dashboard && npm install"]
+cmds = ["npm ci && cd dashboard && npm ci"]
 
 [phases.build]
 cmds = ["cd dashboard && npm run build"]
@@ -17,5 +17,3 @@ cmd = "cd dashboard && npm run start"
 [variables]
 NODE_ENV = "production"
 NEXT_TELEMETRY_DISABLED = "1"
-NIXPACKS_NO_CACHE = "1"
-CI = "false"
