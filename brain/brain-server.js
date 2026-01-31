@@ -841,6 +841,57 @@ app.post('/turb0/decide', async (req, res) => {
   }
 });
 
+// TURB0B00ST state sync endpoint - allows pushing full trading state
+app.post('/turb0/sync', async (req, res) => {
+  try {
+    const statePath = path.join(__dirname, 'data', 'turb0b00st-state.json');
+    const incomingState = req.body;
+    
+    // Validate incoming state has required fields
+    if (!incomingState || typeof incomingState !== 'object') {
+      return res.status(400).json({ error: 'Invalid state object' });
+    }
+    
+    // Read existing state to preserve any server-side additions
+    let existingState = {};
+    try {
+      existingState = JSON.parse(await fs.readFile(statePath, 'utf8'));
+    } catch (e) {
+      existingState = {};
+    }
+    
+    // Merge: incoming state takes precedence but preserve server-added fields
+    const mergedState = {
+      ...existingState,
+      ...incomingState,
+      // Ensure critical arrays are preserved
+      trades: incomingState.trades || existingState.trades || [],
+      tradingHistory: incomingState.tradingHistory || existingState.tradingHistory || [],
+      positions: incomingState.positions || existingState.positions || {},
+      syncedAt: new Date().toISOString(),
+      syncSource: req.headers['x-sync-source'] || 'external',
+    };
+    
+    await fs.writeFile(statePath, JSON.stringify(mergedState, null, 2));
+    
+    console.log(`[TURB0] State synced: ${mergedState.tradingHistory?.length || 0} trades, mode=${mergedState.mode}`);
+    
+    res.json({
+      success: true,
+      message: 'TURB0B00ST state synced',
+      state: {
+        mode: mergedState.mode,
+        activated: mergedState.activated,
+        totalTrades: mergedState.tradingHistory?.length || mergedState.trades?.length || 0,
+        syncedAt: mergedState.syncedAt,
+      }
+    });
+  } catch (e) {
+    console.error('[TURB0] Sync error:', e);
+    res.status(500).json({ error: e.message });
+  }
+});
+
 // TURB0B00ST dashboard endpoint
 app.get('/turb0/dashboard', async (req, res) => {
   if (!TURB0B00STEngine) {
