@@ -4,11 +4,11 @@
   "mode": "LIVE",
   "dailyStats": {
     "date": "2026-01-31",
-    "trades": 0,
+    "trades": 1,
     "pnl": 0,
-    "volume": 0
+    "volume": 89.78211168195791
   },
-  "lastTradeTime": 0,
+  "lastTradeTime": 1769843288346,
   "emergencyStop": false,
   "tradingHistory": [
     {
@@ -72,6 +72,15 @@
       "txHash": "0x4b15128f4cac99819e1dbd06e7a9e7ec597e697ba2287de481f19af60e2f8be5",
       "status": "SUCCESS",
       "note": "INAUGURAL TRADE - Swarm Council Decision"
+    },
+    {
+      "timestamp": "2026-01-31T07:08:08.346Z",
+      "type": "SELL",
+      "token": "BNKR",
+      "tokenAddress": "0x22aF33FE49fD1Fa80c7149773dDe5890D3c76F3b",
+      "amountIn": "184503.578687792368890283",
+      "amountOut": "0.029927370560652637",
+      "txHash": "0xcecd1c936d5ef2dae01c55f841a38aa5702c866967f4a49fa694f337ea7df922"
     }
   ]
 }

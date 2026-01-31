@@ -1,0 +1,14 @@
+{
+  "pieces": [
+    {
+      "number": 1,
+      "title": "L0RE #1",
+      "pattern": "gysin",
+      "ramp": "blocks",
+      "ipfsHash": "QmXwimndrUgnaMCnuqt5XCZi8KxjD6yHDEsxb6GiGcPWB5",
+      "gateway": "https://gateway.pinata.cloud/ipfs/QmXwimndrUgnaMCnuqt5XCZi8KxjD6yHDEsxb6GiGcPWB5",
+      "mintedAt": "2026-01-30T07:09:53.342Z"
+    }
+  ],
+  "totalMinted": 1
+}
