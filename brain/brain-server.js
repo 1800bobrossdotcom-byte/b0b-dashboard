@@ -8445,4 +8445,64 @@ app.get('/l0re/site/health', async (req, res) => {
 
 console.log('[BRAIN] Live Swarm Chat + Autonomous Actions loaded 🔴');
 
+// ════════════════════════════════════════════════════════════════════════════
+// c0m SECURITY TOOLS ENDPOINT
+// ════════════════════════════════════════════════════════════════════════════
+
+// Execute security tool
+app.post('/security/execute', async (req, res) => {
+  const { tool, target, params = {} } = req.body;
+  
+  if (!tool || !target) {
+    return res.status(400).json({ error: 'tool and target required' });
+  }
+  
+  console.log(`[c0m] 🛡️ Executing ${tool} on ${target}`);
+  
+  try {
+    const { executeSecurityTool } = require('./security/c0m-security-toolkit');
+    const result = await executeSecurityTool(tool, { target, ...params });
+    
+    // Log execution
+    const logPath = path.join(__dirname, 'data', 'security-scans.json');
+    let logs = [];
+    try {
+      logs = JSON.parse(await fs.readFile(logPath, 'utf8'));
+    } catch {}
+    logs.push({
+      tool,
+      target,
+      timestamp: new Date().toISOString(),
+      success: !result.error
+    });
+    await fs.writeFile(logPath, JSON.stringify(logs.slice(-100), null, 2));
+    
+    res.json(result);
+  } catch (e) {
+    res.status(500).json({ error: e.message, tool, target });
+  }
+});
+
+// Get available security tools
+app.get('/security/tools', (req, res) => {
+  res.json({
+    recon: ['subdomain', 'port_scan', 'tech_detect', 'wayback'],
+    osint: ['dns_enum', 'github_dork', 'shodan', 'email_harvest'],
+    vuln: ['xss_scan', 'sqli_scan', 'ssrf_scan', 'lfi_scan'],
+    full: ['full'],
+    description: 'c0m Security Toolkit — Use responsibly on authorized targets only'
+  });
+});
+
+// Get scan history
+app.get('/security/scans', async (req, res) => {
+  try {
+    const logPath = path.join(__dirname, 'data', 'security-scans.json');
+    const logs = JSON.parse(await fs.readFile(logPath, 'utf8'));
+    res.json({ scans: logs.slice(-20), total: logs.length });
+  } catch {
+    res.json({ scans: [], total: 0 });
+  }
+});
+
 module.exports = app;

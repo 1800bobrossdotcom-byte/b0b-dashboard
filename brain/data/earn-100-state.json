@@ -1,0 +1,26 @@
+{
+  "startTime": "2026-01-31T05:26:23.061Z",
+  "earnedUSDC": 0,
+  "trades": [],
+  "positions": [],
+  "status": "active",
+  "team": {
+    "r0ss": {
+      "status": "ready",
+      "tasks": 0
+    },
+    "d0t": {
+      "status": "watching",
+      "signals": 0
+    },
+    "c0m": {
+      "status": "guarding",
+      "alerts": 0
+    },
+    "pr0fit": {
+      "status": "hunting",
+      "positions": 0
+    }
+  },
+  "lastUpdate": "2026-01-31T05:28:01.866Z"
+}
