@@ -1,43 +1,44 @@
 /*
  * ═══════════════════════════════════════════════════════════════════════════════
- *  B0B.DEV — ASCII Terminal Aesthetic
- *  Inspired by ertdfgcvb.xyz
+ *  B0B.DEV — Modern Design System
+ *  Inspired by Base.org
  * ═══════════════════════════════════════════════════════════════════════════════
  */
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 @import "tailwindcss";
 
 /* ═══════════════════════════════════════════
-   TERMINAL COLOR SYSTEM
+   COLOR SYSTEM
    ═══════════════════════════════════════════ */
 
 :root {
-  /* PRIMARY — Terminal Green */
-  --color-primary: #00FF00;
-  --color-primary-dim: #00FF0080;
-  --color-primary-glow: #00FF0020;
+  /* PRIMARY — Base Blue */
+  --color-primary: #0052FF;
+  --color-primary-light: #3B7DFF;
+  --color-primary-dark: #0041CC;
   
-  /* BACKGROUND — Pure Black */
+  /* BACKGROUND */
   --color-bg: #000000;
-  --color-bg-elevated: #0a0a0a;
+  --color-bg-elevated: #0A0A0A;
   --color-bg-card: #111111;
+  --color-bg-hover: #1A1A1A;
   
   /* TEXT */
-  --color-text: #00FF00;
-  --color-text-muted: #00FF0080;
-  --color-text-dim: #00FF0040;
-  
-  /* ACCENT */
-  --color-red: #FF0040;
-  --color-yellow: #FFFF00;
-  --color-cyan: #00FFFF;
-  --color-white: #FFFFFF;
+  --color-text: #FFFFFF;
+  --color-text-secondary: rgba(255, 255, 255, 0.7);
+  --color-text-muted: rgba(255, 255, 255, 0.5);
+  --color-text-dim: rgba(255, 255, 255, 0.3);
   
   /* BORDERS */
-  --color-border: #00FF0030;
-  --color-border-hover: #00FF0060;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-hover: rgba(255, 255, 255, 0.2);
+  
+  /* STATUS */
+  --color-success: #00D395;
+  --color-warning: #FFB800;
+  --color-error: #FF4D4D;
 }
 
 /* ═══════════════════════════════════════════
@@ -51,11 +52,12 @@
 }
 
 html {
-  font-family: 'JetBrains Mono', 'Courier New', monospace;
-  font-size: 14px;
-  line-height: 1.5;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -71,16 +73,16 @@ body {
 
 ::selection {
   background: var(--color-primary);
-  color: var(--color-bg);
+  color: white;
 }
 
 /* ═══════════════════════════════════════════
-   SCROLLBAR — Terminal style
+   SCROLLBAR — Modern minimal
    ═══════════════════════════════════════════ */
 
 ::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -88,12 +90,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-primary-dim);
-  border-radius: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 /* ═══════════════════════════════════════════
@@ -101,38 +103,9 @@ body {
    ═══════════════════════════════════════════ */
 
 a {
-  color: var(--color-primary);
+  color: inherit;
   text-decoration: none;
-  transition: all 0.1s;
-}
-
-a:hover {
-  text-decoration: underline;
-  text-shadow: 0 0 10px var(--color-primary);
-}
-
-/* ═══════════════════════════════════════════
-   INPUTS
-   ═══════════════════════════════════════════ */
-
-input, textarea {
-  font-family: inherit;
-  font-size: inherit;
-  background: transparent;
-  border: 1px solid var(--color-border);
-  color: var(--color-text);
-  padding: 0.5rem 1rem;
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-input:focus, textarea:focus {
-  border-color: var(--color-primary);
-  box-shadow: 0 0 10px var(--color-primary-glow);
-}
-
-input::placeholder, textarea::placeholder {
-  color: var(--color-text-dim);
+  transition: color 0.2s ease;
 }
 
 /* ═══════════════════════════════════════════
@@ -142,116 +115,148 @@ input::placeholder, textarea::placeholder {
 button {
   font-family: inherit;
   font-size: inherit;
-  background: transparent;
-  border: 1px solid var(--color-border);
-  color: var(--color-text);
-  padding: 0.5rem 1rem;
   cursor: pointer;
-  transition: all 0.1s;
-}
-
-button:hover {
-  border-color: var(--color-primary);
-  background: var(--color-primary-glow);
-  box-shadow: 0 0 10px var(--color-primary-glow);
-}
-
-button:active {
-  transform: scale(0.98);
+  border: none;
+  background: none;
+  transition: all 0.2s ease;
 }
 
 /* ═══════════════════════════════════════════
-   PRE / CODE — Core terminal element
+   INPUTS
    ═══════════════════════════════════════════ */
 
-pre, code {
-  font-family: 'JetBrains Mono', 'Courier New', monospace;
+input, textarea {
+  font-family: inherit;
   font-size: inherit;
-  line-height: inherit;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  outline: none;
+  transition: all 0.2s ease;
 }
 
-pre {
-  white-space: pre;
-  overflow: hidden;
+input:focus, textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(0, 82, 255, 0.2);
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--color-text-dim);
+}
+
+/* ═══════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════ */
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.05);
+  }
+}
+
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* ═══════════════════════════════════════════
+   GLASS EFFECTS
+   ═══════════════════════════════════════════ */
+
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-strong {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+}
+
+/* ═══════════════════════════════════════════
+   CARD STYLES
+   ═══════════════════════════════════════════ */
+
+.card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  background: var(--color-bg-hover);
+  border-color: var(--color-border-hover);
+  transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════════
+   GRADIENT TEXT
+   ═══════════════════════════════════════════ */
+
+.gradient-text {
+  background: linear-gradient(135deg, #0052FF 0%, #00D395 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* ═══════════════════════════════════════════
    GLOW EFFECTS
    ═══════════════════════════════════════════ */
 
-.glow {
-  text-shadow: 0 0 10px var(--color-primary);
+.glow-blue {
+  box-shadow: 0 0 40px rgba(0, 82, 255, 0.3);
 }
 
-.glow-intense {
-  text-shadow: 
-    0 0 5px var(--color-primary),
-    0 0 10px var(--color-primary),
-    0 0 20px var(--color-primary);
-}
-
-/* ═══════════════════════════════════════════
-   SCANLINE EFFECT (optional)
-   ═══════════════════════════════════════════ */
-
-.scanlines::after {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.1) 2px,
-    rgba(0, 0, 0, 0.1) 4px
-  );
-  z-index: 9999;
-}
-
-/* ═══════════════════════════════════════════
-   CRT FLICKER (subtle)
-   ═══════════════════════════════════════════ */
-
-@keyframes flicker {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.98; }
-}
-
-.crt {
-  animation: flicker 0.15s infinite;
-}
-
-/* ═══════════════════════════════════════════
-   BLINK CURSOR
-   ═══════════════════════════════════════════ */
-
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
-}
-
-.cursor-blink::after {
-  content: '█';
-  animation: blink 1s infinite;
-}
-
-/* ═══════════════════════════════════════════
-   ASCII BORDERS
-   ═══════════════════════════════════════════ */
-
-.ascii-border {
-  border: 1px solid var(--color-border);
-  padding: 1rem;
-}
-
-.ascii-border-glow {
-  border: 1px solid var(--color-border);
-  padding: 1rem;
-  box-shadow: 0 0 10px var(--color-primary-glow);
+.glow-text {
+  text-shadow: 0 0 30px rgba(0, 82, 255, 0.5);
 }
 
 /* ═══════════════════════════════════════════
@@ -261,70 +266,98 @@ pre {
 .text-primary { color: var(--color-primary); }
 .text-muted { color: var(--color-text-muted); }
 .text-dim { color: var(--color-text-dim); }
-.text-red { color: var(--color-red); }
-.text-yellow { color: var(--color-yellow); }
-.text-cyan { color: var(--color-cyan); }
+.text-success { color: var(--color-success); }
+.text-warning { color: var(--color-warning); }
+.text-error { color: var(--color-error); }
 
+.bg-primary { background: var(--color-primary); }
 .bg-card { background: var(--color-bg-card); }
 .bg-elevated { background: var(--color-bg-elevated); }
 
-.border-primary { border-color: var(--color-primary); }
-.border-dim { border-color: var(--color-border); }
+.border-subtle { border-color: var(--color-border); }
 
 /* ═══════════════════════════════════════════
-   RESPONSIVE FONT SIZES
+   RESPONSIVE
    ═══════════════════════════════════════════ */
 
-@media (max-width: 640px) {
-  html {
-    font-size: 12px;
-  }
-}
-
-@media (min-width: 1280px) {
+@media (max-width: 768px) {
   html {
     font-size: 14px;
   }
+  
+  .card {
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
 }
 
 /* ═══════════════════════════════════════════
-   ANIMATIONS
+   BUTTON VARIANTS
    ═══════════════════════════════════════════ */
 
-@keyframes pulse-green {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
-.animate-pulse-green {
-  animation: pulse-green 2s ease-in-out infinite;
+.btn-primary:hover {
+  background: var(--color-primary-light);
+  transform: translateY(-1px);
 }
 
-@keyframes typewriter {
-  from { width: 0; }
-  to { width: 100%; }
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.2s ease;
 }
 
-.typewriter {
-  overflow: hidden;
-  white-space: nowrap;
-  animation: typewriter 2s steps(40) forwards;
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 /* ═══════════════════════════════════════════
-   MATRIX RAIN EFFECT (for backgrounds)
+   LOADING STATES
    ═══════════════════════════════════════════ */
 
-@keyframes matrix-fall {
-  0% { transform: translateY(-100%); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { transform: translateY(100vh); opacity: 0; }
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-card) 25%,
+    var(--color-bg-hover) 50%,
+    var(--color-bg-card) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
 }
 
-.matrix-char {
-  position: absolute;
-  color: var(--color-primary);
-  font-size: 14px;
-  animation: matrix-fall linear infinite;
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   TERMINAL STYLES (for HQ/Live pages)
+   ═══════════════════════════════════════════ */
+
+.font-mono {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+.terminal-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
 }
