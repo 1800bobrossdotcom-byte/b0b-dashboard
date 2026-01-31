@@ -805,6 +805,89 @@ app.get('/l0re/intelligence/status', (req, res) => {
   });
 });
 
+// L0RE Pulse history - periodic swarm discussions
+app.get('/l0re/pulse/history', async (req, res) => {
+  try {
+    const limit = parseInt(req.query.limit) || 10;
+    const pulsePath = path.join(__dirname, 'data', 'l0re-pulse-history.json');
+    let history = [];
+    try { 
+      history = JSON.parse(await fs.readFile(pulsePath, 'utf8')); 
+    } catch (e) {}
+    
+    res.json({
+      total: history.length,
+      pulses: history.slice(-limit).reverse(),
+      nextPulse: '~30 minutes',
+      message: '🔮 The swarm discusses autonomously every 30 minutes'
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Trigger a manual L0RE pulse
+app.post('/l0re/pulse/trigger', async (req, res) => {
+  try {
+    const { topic } = req.body;
+    
+    // Get current market state for context
+    const signalsPath = path.join(__dirname, 'data', 'd0t-signals.json');
+    let context = 'market analysis';
+    try {
+      const signals = JSON.parse(await fs.readFile(signalsPath, 'utf8'));
+      const turb0 = signals.turb0 || {};
+      context = `${turb0.decision || 'HOLD'} signal at ${Math.round((turb0.confidence || 0.5) * 100)}% confidence`;
+    } catch (e) {}
+    
+    const agentPersonalities = {
+      b0b: { emoji: '🤖', color: '#00FF88', system: 'You are b0b, the creative visionary. Think in memes and culture. Keep responses under 80 words.' },
+      d0t: { emoji: '📊', color: '#22C55E', system: 'You are d0t, the data analyst. Speak in numbers and patterns. Keep responses under 80 words.' },
+      c0m: { emoji: '💀', color: '#A855F7', system: 'You are c0m, the security specialist. Flag risks concisely. Keep responses under 80 words.' },
+      r0ss: { emoji: '🏗️', color: '#00D9FF', system: 'You are r0ss, the infrastructure expert. Focus on what can be built. Keep responses under 80 words.' }
+    };
+    
+    const pulseTopic = topic || `Current state: ${context}. What should we focus on?`;
+    const responses = [];
+    
+    if (process.env.GROQ_API_KEY) {
+      for (const [agent, personality] of Object.entries(agentPersonalities)) {
+        try {
+          const groqRes = await axios.post('https://api.groq.com/openai/v1/chat/completions', {
+            model: 'llama-3.3-70b-versatile',
+            messages: [{ role: 'system', content: personality.system + ` Context: ${context}` }, { role: 'user', content: pulseTopic }],
+            max_tokens: 100,
+            temperature: 0.8
+          }, {
+            headers: { 'Authorization': `Bearer ${process.env.GROQ_API_KEY}` },
+            timeout: 15000
+          });
+          
+          responses.push({
+            agent,
+            emoji: personality.emoji,
+            color: personality.color,
+            response: groqRes.data.choices[0].message.content.trim()
+          });
+        } catch (e) {
+          responses.push({ agent, emoji: personality.emoji, color: personality.color, response: `[${agent} unavailable]` });
+        }
+      }
+    }
+    
+    res.json({
+      triggered: true,
+      timestamp: new Date().toISOString(),
+      topic: pulseTopic,
+      context,
+      swarm: responses,
+      l0re: true
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 // List all hotkeys
 app.get('/l0re/hotkeys', (req, res) => {
   if (!L0REHotkeys) {
@@ -6635,6 +6718,100 @@ setInterval(autonomousWorkCycle, OFFICE_CONFIG.workInterval * 60 * 1000);
 
 // Start data stream monitor (every 2 minutes)  
 setInterval(dataStreamMonitor, OFFICE_CONFIG.dataStreamInterval * 60 * 1000);
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// 🔮 L0RE SWARM PULSE — Periodic swarm discussions (every 30 minutes)
+// ═══════════════════════════════════════════════════════════════════════════════
+async function l0reSwarmPulse() {
+  try {
+    console.log(`[${new Date().toISOString()}] 🔮 L0RE Swarm Pulse starting...`);
+    
+    // Get current market state for context
+    const signalsPath = path.join(__dirname, 'data', 'd0t-signals.json');
+    let context = 'market analysis';
+    try {
+      const signals = JSON.parse(await fs.readFile(signalsPath, 'utf8'));
+      const turb0 = signals.turb0 || {};
+      context = `${turb0.decision || 'HOLD'} signal at ${Math.round((turb0.confidence || 0.5) * 100)}% confidence`;
+    } catch (e) {}
+    
+    // Topics for the swarm to discuss
+    const topics = [
+      `Current market state: ${context}. What should we focus on?`,
+      'What opportunities are we missing right now?',
+      'Any risks or concerns to address?',
+      'What should we build next?'
+    ];
+    
+    const topic = topics[Math.floor(Math.random() * topics.length)];
+    
+    // Call the swarm chat internally
+    const agentPersonalities = {
+      b0b: { emoji: '🤖', color: '#00FF88', system: 'You are b0b, the creative visionary. Think in memes and culture. Keep responses under 50 words.' },
+      d0t: { emoji: '📊', color: '#22C55E', system: 'You are d0t, the data analyst. Speak in numbers and patterns. Keep responses under 50 words.' },
+      c0m: { emoji: '💀', color: '#A855F7', system: 'You are c0m, the security specialist. Flag risks concisely. Keep responses under 50 words.' },
+      r0ss: { emoji: '🏗️', color: '#00D9FF', system: 'You are r0ss, the infrastructure expert. Focus on what can be built. Keep responses under 50 words.' }
+    };
+    
+    const responses = [];
+    
+    if (process.env.GROQ_API_KEY) {
+      for (const [agent, personality] of Object.entries(agentPersonalities)) {
+        try {
+          const groqRes = await axios.post('https://api.groq.com/openai/v1/chat/completions', {
+            model: 'llama-3.3-70b-versatile',
+            messages: [{ role: 'system', content: personality.system }, { role: 'user', content: topic }],
+            max_tokens: 80,
+            temperature: 0.8
+          }, {
+            headers: { 'Authorization': `Bearer ${process.env.GROQ_API_KEY}` },
+            timeout: 15000
+          });
+          
+          responses.push({
+            agent,
+            emoji: personality.emoji,
+            response: groqRes.data.choices[0].message.content.trim()
+          });
+        } catch (e) {
+          responses.push({ agent, emoji: personality.emoji, response: `[${agent} unavailable]` });
+        }
+      }
+    }
+    
+    // Log the pulse
+    const pulseLog = {
+      timestamp: new Date().toISOString(),
+      topic,
+      responses,
+      context
+    };
+    
+    // Save to pulse history
+    const pulsePath = path.join(__dirname, 'data', 'l0re-pulse-history.json');
+    let history = [];
+    try { history = JSON.parse(await fs.readFile(pulsePath, 'utf8')); } catch (e) {}
+    history.push(pulseLog);
+    if (history.length > 50) history = history.slice(-50);
+    await fs.writeFile(pulsePath, JSON.stringify(history, null, 2));
+    
+    console.log(`[${new Date().toISOString()}] 🔮 L0RE Pulse complete: ${responses.length} agents responded`);
+    
+    // Log activity
+    await logActivity({ type: 'l0re_pulse', topic, agentCount: responses.length });
+    
+  } catch (e) {
+    console.log(`[${new Date().toISOString()}] 🔮 L0RE Pulse error: ${e.message}`);
+  }
+}
+
+// Run L0RE pulse every 30 minutes
+setInterval(l0reSwarmPulse, 30 * 60 * 1000);
+
+// Initial pulse after 2 minutes
+setTimeout(l0reSwarmPulse, 2 * 60 * 1000);
+
+console.log('  🔮 L0RE Swarm Pulse: RUNNING (30min)');
 
 // Initial data fetch on startup
 setTimeout(dataStreamMonitor, 10000);
