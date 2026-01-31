@@ -2696,6 +2696,92 @@ app.get('/finance/treasury', async (req, res) => {
 });
 
 /**
+ * GET /d0t/signals
+ * d0t Decision engine signals - Nash equilibrium trading data
+ */
+app.get('/d0t/signals', async (req, res) => {
+  try {
+    const signalsPath = path.join(DATA_DIR, 'd0t-signals.json');
+    let signals = null;
+    
+    if (require('fs').existsSync(signalsPath)) {
+      const raw = JSON.parse(require('fs').readFileSync(signalsPath, 'utf-8'));
+      signals = raw.data?.turb0 || {};
+    }
+    
+    res.json({
+      timestamp: new Date().toISOString(),
+      decision: signals?.decision || 'HOLD',
+      confidence: signals?.confidence || 0.5,
+      size: signals?.size || 0.02,
+      l0reCode: signals?.l0re?.code || 'n.3qlb/t.l3/e.l/f.dist',
+      nashState: signals?.nash || 'EQUILIBRIUM',
+      agents: {
+        d0t: {
+          state: signals?.agents?.d0t?.state || 'EQUILIBRIUM_HARVEST',
+          vote: signals?.agents?.d0t?.vote || 'NEUTRAL',
+        },
+        c0m: {
+          level: signals?.agents?.c0m?.level || 1,
+          veto: signals?.agents?.c0m?.veto || false,
+        },
+        b0b: {
+          state: signals?.agents?.b0b?.state || 'MEME_MOMENTUM',
+          vote: signals?.agents?.b0b?.vote || 'BULLISH',
+        },
+        r0ss: {
+          coherence: signals?.agents?.r0ss?.coherence || 'ALIGNED',
+          vote: signals?.agents?.r0ss?.vote || 'NEUTRAL',
+        },
+      },
+      reasoning: signals?.reasoning || [],
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/**
+ * GET /d0t/swarm
+ * d0t swarm wallet status - multi-wallet management
+ */
+app.get('/d0t/swarm', async (req, res) => {
+  try {
+    // Load nash-swarm-state for real wallet data
+    let nashState = null;
+    try {
+      let nashPath = path.join(DATA_DIR, 'nash-swarm-state.json');
+      if (!require('fs').existsSync(nashPath)) {
+        nashPath = path.join(__dirname, '..', 'b0b-finance', 'nash-swarm-state.json');
+      }
+      if (require('fs').existsSync(nashPath)) {
+        nashState = JSON.parse(require('fs').readFileSync(nashPath, 'utf-8'));
+      }
+    } catch {}
+    
+    res.json({
+      timestamp: new Date().toISOString(),
+      totalD0ts: nashState?.wallets?.length || 1,
+      activeD0ts: nashState?.wallets?.filter(w => w.status === 'active')?.length || 1,
+      pendingRequests: nashState?.wallets?.filter(w => w.status === 'pending_approval')?.length || 0,
+      wallets: nashState?.wallets || [
+        {
+          id: 'd0t_01',
+          address: process.env.TRADING_WALLET || '0x...',
+          status: 'active',
+          type: 'trading',
+          purpose: 'TURB0B00ST Trading',
+          balance: 0.05,
+          funded: true,
+        },
+      ],
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/**
  * GET /finance/pulse
  * Real-time swarm pulse for live terminal
  */
