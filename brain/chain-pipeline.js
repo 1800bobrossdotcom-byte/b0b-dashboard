@@ -83,7 +83,7 @@ class ChainPipeline {
     try {
       const { stdout, stderr } = await execAsync(cmdString, {
         cwd: path.join(__dirname, '..'),
-        timeout: 120000, // 2 min timeout per command
+        timeout: 300000, // 5 min timeout per command (crawlers can be slow)
         env: {
           ...process.env,
           PIPELINE_INPUT: inputData ? JSON.stringify(inputData) : ''
