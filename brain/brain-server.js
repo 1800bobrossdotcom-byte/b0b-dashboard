@@ -429,6 +429,12 @@ app.get('/debug/files', async (req, res) => {
         mode: parsed.mode,
         activated: parsed.activated,
         trades: parsed.tradingHistory?.length || 0,
+        _buildNote: parsed._buildNote,
+        _rebuildAt: parsed._rebuildAt,
+        hasHistory: !!parsed.tradingHistory,
+        historyType: typeof parsed.tradingHistory,
+        firstTradeTime: parsed.tradingHistory?.[0]?.timestamp,
+        rawContentLength: content.length,
       };
     } catch (e) {
       result.turb0Check.dataError = e.message;
