@@ -5239,6 +5239,74 @@ app.get('/api/tasks', async (req, res) => {
 });
 
 // =============================================================================
+// 🔮 L0RE PLATFORM — Complete Operations Center
+// =============================================================================
+
+let l0rePlatform;
+try {
+  l0rePlatform = require('./l0re-platform.js');
+  
+  // Full platform state - everything we have
+  app.get('/l0re/platform', (req, res) => {
+    try {
+      const state = l0rePlatform.getPlatformState();
+      res.json(state);
+    } catch (e) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+  
+  // Individual sections
+  app.get('/l0re/platform/trading', (req, res) => {
+    res.json(l0rePlatform.getTradingState());
+  });
+  
+  app.get('/l0re/platform/signals', (req, res) => {
+    res.json(l0rePlatform.getSignals());
+  });
+  
+  app.get('/l0re/platform/security', (req, res) => {
+    res.json(l0rePlatform.getSecurity());
+  });
+  
+  app.get('/l0re/platform/library', (req, res) => {
+    res.json(l0rePlatform.getLibrary());
+  });
+  
+  app.get('/l0re/platform/email', (req, res) => {
+    res.json(l0rePlatform.getEmailCenter());
+  });
+  
+  app.get('/l0re/platform/infrastructure', (req, res) => {
+    res.json(l0rePlatform.getInfrastructure());
+  });
+  
+  app.get('/l0re/platform/learnings', (req, res) => {
+    res.json(l0rePlatform.getLearnings());
+  });
+  
+  app.get('/l0re/platform/l0re', (req, res) => {
+    res.json(l0rePlatform.getL0reState());
+  });
+  
+  app.get('/l0re/platform/creative', (req, res) => {
+    res.json(l0rePlatform.getCreative());
+  });
+  
+  app.get('/l0re/platform/freshness', (req, res) => {
+    res.json(l0rePlatform.getFreshness());
+  });
+  
+  app.get('/l0re/platform/tools', (req, res) => {
+    res.json(l0rePlatform.getTools());
+  });
+  
+  console.log('[BRAIN] L0RE Platform loaded — full operations center ready 🔮');
+} catch (e) {
+  console.log('[BRAIN] L0RE Platform not available:', e.message);
+}
+
+// =============================================================================
 // START SERVER
 // =============================================================================
 

@@ -1,617 +1,331 @@
 'use client';
 
 /**
- * ═══════════════════════════════════════════════════════════════════════════════
+ * 🔮 L0RE OPERATIONS CENTER — The REAL b0b-platform Dashboard
  * 
- *  B0B HQ — Living Dashboard
- *  
- *  Design Philosophy (from Andreas Gysin / Kim Asendorf research):
- *  - RESTRAINT: Not everything needs to move or flash
- *  - MONOCHROME: Single color palette, not rainbow tech-bro
- *  - DATA IS ART: Generative visuals driven by actual agent data
- *  - KINETIC BUT CALM: Movement with purpose, not chaos
- *  
- *  The agents don't just display data — they USE it
- *  The visuals ARE the computation, not decoration
- * 
- * ═══════════════════════════════════════════════════════════════════════════════
+ * Not pretty art. USEFUL DATA.
+ * Every tool. Every data point. Everything we've built.
  */
 
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 
 const BRAIN_URL = 'https://b0b-brain-production.up.railway.app';
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// DENSITY RAMPS (Gysin's play.core technique)
-// ═══════════════════════════════════════════════════════════════════════════════
-
-const RAMPS = {
-  standard: ' .:-=+*#%@',
-  blocks: ' ░▒▓█',
-  minimal: ' ·:;|',
-  braille: '⠀⠁⠃⠇⡇⡏⡟⡿⣿',
-  circuit: '┃━┏┓┗┛┣┫┳┻╋',
-  agents: '◉▓◈⚡',
-};
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// MATRIX RAIN: L0RE-style falling characters
-// ═══════════════════════════════════════════════════════════════════════════════
-
-function MatrixRain({ width = 40, height = 8 }: { width?: number; height?: number }) {
-  const [frame, setFrame] = useState<string[][]>([]);
-  const columnsRef = useRef<{ pos: number; speed: number; char: string }[]>([]);
-  
-  useEffect(() => {
-    // Initialize columns
-    const chars = '01アイウエオカキクケコサシスセソタチツテト';
-    columnsRef.current = Array(width).fill(0).map(() => ({
-      pos: Math.random() * height,
-      speed: 0.1 + Math.random() * 0.3,
-      char: chars[Math.floor(Math.random() * chars.length)]
-    }));
-    
-    const interval = setInterval(() => {
-      const newFrame: string[][] = Array(height).fill(0).map(() => Array(width).fill(' '));
-      
-      columnsRef.current.forEach((col, x) => {
-        col.pos += col.speed;
-        if (col.pos >= height + 3) {
-          col.pos = -Math.random() * 5;
-          col.char = chars[Math.floor(Math.random() * chars.length)];
-        }
-        
-        const y = Math.floor(col.pos);
-        if (y >= 0 && y < height) {
-          newFrame[y][x] = col.char;
-        }
-        // Trailing fade
-        for (let i = 1; i < 3; i++) {
-          const ty = y - i;
-          if (ty >= 0 && ty < height) {
-            newFrame[ty][x] = RAMPS.blocks[4 - i] || '░';
-          }
-        }
-      });
-      
-      setFrame(newFrame);
-    }, 80);
-    
-    return () => clearInterval(interval);
-  }, [width, height]);
-  
-  return (
-    <pre className="font-mono text-[10px] leading-none text-green-500/30 select-none overflow-hidden">
-      {frame.map((row, i) => (
-        <div key={i}>{row.join('')}</div>
-      ))}
-    </pre>
-  );
-}
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// GENERATIVE ART: Driven by Real Data
-// ═══════════════════════════════════════════════════════════════════════════════
-
-function DataDrivenArt({ data, width = 60, height = 12, animate = true }: {
-  data: any;
-  width?: number;
-  height?: number;
-  animate?: boolean;
-}) {
-  const canvasRef = useRef<HTMLPreElement>(null);
-  const frameRef = useRef(0);
-  
-  // Create hash from data for deterministic but unique patterns
-  const dataHash = useCallback((input: any): number => {
-    const str = JSON.stringify(input);
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-      hash = ((hash << 5) - hash) + str.charCodeAt(i);
-      hash = hash & hash;
-    }
-    return Math.abs(hash);
-  }, []);
-
-  // Seeded random from data
-  const seededRandom = useCallback((x: number, y: number, seed: number) => {
-    const val = Math.sin(x * 12.9898 + y * 78.233 + seed) * 43758.5453;
-    return val - Math.floor(val);
-  }, []);
-
-  // Generate art based on data characteristics
-  const generateFrame = useCallback(() => {
-    const frame = frameRef.current;
-    const hash = dataHash(data);
-    const ramp = RAMPS.standard;
-    const lines: string[] = [];
-    
-    // Extract data characteristics to drive the art
-    const confidence = data?.turb0?.confidence ?? data?.confidence ?? 0.5;
-    const decision = data?.turb0?.decision ?? data?.decision ?? 'HOLD';
-    const sentiment = decision === 'BUY' ? 1 : decision === 'SELL' ? -1 : 0;
-    
-    for (let y = 0; y < height; y++) {
-      let line = '';
-      for (let x = 0; x < width; x++) {
-        // Combine multiple wave functions driven by actual data
-        const wave1 = Math.sin((x + frame * 0.1) * 0.15 + hash * 0.001) * confidence;
-        const wave2 = Math.cos((y + frame * 0.05) * 0.2 + sentiment) * 0.5;
-        const noise = seededRandom(x, y, hash + frame * 0.01) * 0.3;
-        
-        // Combined value normalized to 0-1
-        const value = (wave1 + wave2 + noise + 1.5) / 3;
-        const charIndex = Math.floor(value * (ramp.length - 1));
-        line += ramp[Math.max(0, Math.min(charIndex, ramp.length - 1))];
-      }
-      lines.push(line);
-    }
-    
-    return lines.join('\n');
-  }, [data, width, height, dataHash, seededRandom]);
-
-  useEffect(() => {
-    if (!animate) {
-      if (canvasRef.current) {
-        canvasRef.current.textContent = generateFrame();
-      }
-      return;
-    }
-    
-    const interval = setInterval(() => {
-      frameRef.current++;
-      if (canvasRef.current) {
-        canvasRef.current.textContent = generateFrame();
-      }
-    }, 100);
-    
-    return () => clearInterval(interval);
-  }, [animate, generateFrame]);
-
-  return (
-    <pre
-      ref={canvasRef}
-      className="font-mono text-[10px] leading-none text-green-500/40 select-none"
-      style={{ letterSpacing: '0.1em' }}
-    />
-  );
-}
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// AGENT ORBS: Visual representation of agent activity
-// ═══════════════════════════════════════════════════════════════════════════════
-
-function AgentOrb({ agent, state, activity = 0 }: {
-  agent: string;
-  state: string;
-  activity?: number;
-}) {
-  const colors: Record<string, string> = {
-    b0b: '#00FF88',
-    r0ss: '#00D9FF',
-    c0m: '#A855F7',
-    d0t: '#22C55E',
-    quant: '#FF6B9D',
+// Status badge component
+function StatusBadge({ status, label }: { status: 'ok' | 'warn' | 'error' | 'stale'; label: string }) {
+  const colors = {
+    ok: 'bg-green-500/20 text-green-400 border-green-500/30',
+    warn: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
+    error: 'bg-red-500/20 text-red-400 border-red-500/30',
+    stale: 'bg-gray-500/20 text-gray-400 border-gray-500/30'
   };
-  
-  const color = colors[agent] || '#888';
-  const isActive = state !== 'IDLE';
-  
   return (
-    <div className="relative flex flex-col items-center gap-2">
-      {/* Orb with pulse based on activity */}
+    <span className={`px-2 py-0.5 text-xs rounded border ${colors[status]}`}>
+      {label}
+    </span>
+  );
+}
+
+// Data freshness indicator
+function FreshnessIndicator({ ageMinutes, maxAge }: { ageMinutes: number | undefined; maxAge: number }) {
+  if (ageMinutes === undefined) return <span className="text-gray-600">--</span>;
+  const fresh = ageMinutes <= maxAge;
+  return (
+    <span className={fresh ? 'text-green-400' : 'text-red-400'}>
+      {ageMinutes}m {fresh ? '✓' : '⚠'}
+    </span>
+  );
+}
+
+// Collapsible section
+function Section({ title, badge, children, defaultOpen = true }: { 
+  title: string; 
+  badge?: React.ReactNode;
+  children: React.ReactNode;
+  defaultOpen?: boolean;
+}) {
+  const [open, setOpen] = useState(defaultOpen);
+  return (
+    <div className="border border-white/10 rounded mb-4">
       <div 
-        className="relative w-16 h-16 rounded-full flex items-center justify-center"
-        style={{ 
-          backgroundColor: `${color}11`,
-          border: `2px solid ${color}${isActive ? 'aa' : '33'}`,
-        }}
+        className="flex items-center justify-between p-3 cursor-pointer hover:bg-white/5"
+        onClick={() => setOpen(!open)}
       >
-        {/* Activity pulse ring */}
-        {isActive && (
-          <div 
-            className="absolute inset-0 rounded-full animate-ping"
-            style={{ 
-              backgroundColor: `${color}22`,
-              animationDuration: `${2 - activity}s`,
-            }}
-          />
-        )}
-        
-        {/* Agent symbol */}
-        <span className="text-2xl font-bold" style={{ color }}>
-          {agent[0].toUpperCase()}
-        </span>
-      </div>
-      
-      {/* Agent name and state */}
-      <div className="text-center">
-        <div className="text-sm font-mono" style={{ color }}>
-          {agent}
+        <div className="flex items-center gap-3">
+          <span className="text-white/50">{open ? '▼' : '▶'}</span>
+          <span className="font-mono text-sm text-white/90">{title}</span>
         </div>
-        <div className="text-xs text-gray-500 font-mono truncate max-w-20">
-          {state}
-        </div>
+        {badge}
       </div>
+      {open && <div className="p-3 border-t border-white/5">{children}</div>}
     </div>
   );
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// SIGNAL WAVE: Real-time visualization of trading signals
-// ═══════════════════════════════════════════════════════════════════════════════
-
-function SignalWave({ signal, width = 40 }: { signal: any; width?: number }) {
-  const canvasRef = useRef<HTMLPreElement>(null);
-  const historyRef = useRef<number[]>([]);
-  
-  useEffect(() => {
-    const confidence = signal?.confidence ?? 0.5;
-    const decision = signal?.decision ?? 'HOLD';
-    const sentiment = decision === 'BUY' ? 1 : decision === 'SELL' ? -1 : 0;
-    
-    // Add new value to history
-    historyRef.current.push(confidence * (1 + sentiment * 0.3));
-    if (historyRef.current.length > width) {
-      historyRef.current.shift();
-    }
-    
-    // Render as ASCII wave
-    const height = 5;
-    const lines: string[] = Array(height).fill('');
-    
-    for (let x = 0; x < historyRef.current.length; x++) {
-      const value = historyRef.current[x];
-      const y = Math.floor((1 - value) * (height - 1));
-      
-      for (let row = 0; row < height; row++) {
-        lines[row] += row === y ? '█' : row === Math.floor(height / 2) ? '·' : ' ';
-      }
-    }
-    
-    // Pad remaining width
-    for (let row = 0; row < height; row++) {
-      while (lines[row].length < width) {
-        lines[row] += row === Math.floor(height / 2) ? '·' : ' ';
-      }
-    }
-    
-    if (canvasRef.current) {
-      canvasRef.current.textContent = lines.join('\n');
-    }
-  }, [signal, width]);
-  
+// Key-value display
+function KV({ label, value, warn }: { label: string; value: any; warn?: boolean }) {
   return (
-    <pre
-      ref={canvasRef}
-      className="font-mono text-xs leading-none text-green-400"
-    />
+    <div className="flex justify-between text-xs py-1 border-b border-white/5">
+      <span className="text-white/50">{label}</span>
+      <span className={warn ? 'text-yellow-400' : 'text-white/80'}>{String(value)}</span>
+    </div>
   );
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// MAIN L0RE.DEV COMPONENT — THE UNIFIED DASHBOARD
-// ═══════════════════════════════════════════════════════════════════════════════
-
-export default function L0reDev() {
-  const [mounted, setMounted] = useState(false);
-  const [pulse, setPulse] = useState<any>(null);
-  const [wallet, setWallet] = useState('0.0000');
+export default function L0reOperations() {
+  const [platform, setPlatform] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
-  const [chatInput, setChatInput] = useState('');
-  const [chatMessages, setChatMessages] = useState<any[]>([]);
-  const [chatLoading, setChatLoading] = useState(false);
-  const chatEndRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Fetch data
-  useEffect(() => {
-    if (!mounted) return;
-    
-    const load = async () => {
-      try {
-        const [pulseRes, walletRes] = await Promise.all([
-          fetch(`${BRAIN_URL}/pulse`, { cache: 'no-store' }).then(r => r.json()),
-          fetch('https://base.blockscout.com/api/v2/addresses/0xCA4Ca0c7b26e51805c20C95DF02Ea86feA938D78')
-            .then(r => r.json()).catch(() => ({ coin_balance: 0 }))
-        ]);
-        
-        setPulse(pulseRes);
-        setWallet((parseFloat(walletRes.coin_balance || 0) / 1e18).toFixed(4));
-        setLastUpdate(new Date());
-      } catch (e) {
-        console.error('Load error:', e);
-      } finally {
-        setLoading(false);
-      }
-    };
-    
-    load();
-    const interval = setInterval(load, 15000);
-    return () => clearInterval(interval);
-  }, [mounted]);
-
-  // Chat handler - NOW USES L0RE SWARM CHAT
-  const sendChat = async () => {
-    if (!chatInput.trim() || chatLoading) return;
-    
-    const userMsg = chatInput;
-    setChatInput('');
-    setChatMessages(prev => [...prev, { role: 'user', content: userMsg }]);
-    setChatLoading(true);
-    
+  const loadData = async () => {
     try {
-      // Use L0RE Swarm Chat - all 4 agents respond!
-      const res = await fetch(`${BRAIN_URL}/l0re/swarm/chat`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          query: userMsg,
-          agents: ['b0b', 'd0t', 'c0m', 'r0ss']
-        })
-      });
+      const res = await fetch(`${BRAIN_URL}/l0re/platform`, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      
-      // Add each agent's response as a separate message
-      if (data.swarm && data.swarm.length > 0) {
-        data.swarm.forEach((agentResponse: any) => {
-          setChatMessages(prev => [...prev, { 
-            role: 'agent',
-            agent: agentResponse.agent,
-            emoji: agentResponse.emoji,
-            color: agentResponse.color,
-            content: agentResponse.response
-          }]);
-        });
-      } else {
-        setChatMessages(prev => [...prev, { 
-          role: 'assistant', 
-          content: data.response || 'Swarm is sleeping...'
-        }]);
-      }
-    } catch (e) {
-      setChatMessages(prev => [...prev, { 
-        role: 'assistant', 
-        content: '⚠️ Swarm connection error'
-      }]);
+      setPlatform(data);
+      setLastUpdate(new Date());
+      setError(null);
+    } catch (e: any) {
+      setError(e.message);
     } finally {
-      setChatLoading(false);
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [chatMessages]);
+    loadData();
+    const interval = setInterval(loadData, 15000);
+    return () => clearInterval(interval);
+  }, []);
 
-  if (!mounted) {
+  if (loading) {
     return (
-      <main className="min-h-screen bg-black text-white font-mono flex items-center justify-center">
-        <div className="text-gray-600">...</div>
+      <main className="min-h-screen bg-black text-white font-mono p-4">
+        <div className="text-center text-white/50">Loading L0RE Platform...</div>
       </main>
     );
   }
 
-  const signals = pulse?.d0t?.signals;
-  const turb0 = signals?.turb0 || { decision: 'HOLD', confidence: 0 };
-  const agentStates = pulse?.swarm?.states || {};
+  if (error) {
+    return (
+      <main className="min-h-screen bg-black text-white font-mono p-4">
+        <div className="text-red-400">Error: {error}</div>
+        <button onClick={loadData} className="mt-4 px-4 py-2 bg-white/10 rounded">Retry</button>
+      </main>
+    );
+  }
+
+  const p = platform;
+  const h = p?.health || {};
+  const t = p?.trading || {};
+  const s = p?.signals || {};
+  const sec = p?.security || {};
+  const lib = p?.library || {};
+  const infra = p?.infrastructure || {};
+  const learn = p?.learnings || {};
+  const l0re = p?.l0re || {};
+  const fresh = p?.freshness || {};
 
   return (
-    <main className="min-h-screen bg-black text-white font-mono relative overflow-hidden">
-      {/* L0RE MATRIX RAIN BACKGROUND */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden">
-        <MatrixRain width={150} height={50} />
-      </div>
-
-      {/* GENERATIVE DATA ART OVERLAY */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden">
-        <DataDrivenArt data={signals} width={120} height={40} />
-      </div>
-
-      {/* CONTENT */}
-      <div className="relative z-10 min-h-screen flex flex-col">
-        
-        {/* HEADER: L0RE-style */}
-        <header className="p-8 border-b border-white/10">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-light tracking-widest text-white/90">
-                <span className="text-green-400">L</span>0RE<span className="text-white/30">.DEV</span>
-              </h1>
-              <p className="text-xs text-white/30 mt-1 tracking-wider">
-                LIBRARY OF RECURSIVE ENCRYPTION • AUTONOMOUS SWARM
-              </p>
-            </div>
-            
-            {/* Live indicator */}
-            <div className="flex items-center gap-3">
-              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-              <span className="text-xs text-white/50">
-                {lastUpdate?.toLocaleTimeString() || 'connecting...'}
-              </span>
-            </div>
+    <main className="min-h-screen bg-black text-white font-mono">
+      {/* Header */}
+      <header className="p-4 border-b border-white/10 flex items-center justify-between">
+        <div>
+          <h1 className="text-xl font-bold">
+            <span className="text-green-400">L0RE</span> Operations Center
+          </h1>
+          <p className="text-xs text-white/40">b0b-platform • {p?.tools?.length || 0} tools • All data live</p>
+        </div>
+        <div className="text-right">
+          <div className="text-xs text-white/50">
+            Last update: {lastUpdate?.toLocaleTimeString() || '--'}
           </div>
-        </header>
-
-        {/* MAIN GRID: Spacious, not cramped */}
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-3 gap-0">
-          
-          {/* LEFT: Signal & Market Intelligence */}
-          <div className="lg:col-span-2 p-8 space-y-8 border-r border-white/5">
-            
-            {/* PRIMARY SIGNAL */}
-            <section>
-              <div className="text-xs text-white/30 mb-4 tracking-wider">TURB0 SIGNAL</div>
-              <div className="flex items-center gap-8">
-                <div>
-                  <span 
-                    className="text-6xl font-light"
-                    style={{ 
-                      color: turb0.decision === 'BUY' ? '#00FF88' : 
-                             turb0.decision === 'SELL' ? '#FF4444' : '#888'
-                    }}
-                  >
-                    {turb0.decision}
-                  </span>
-                  <div className="text-sm text-white/40 mt-2">
-                    {Math.round((turb0.confidence || 0) * 100)}% confidence
-                  </div>
-                </div>
-                
-                {/* Signal waveform */}
-                <div className="flex-1">
-                  <SignalWave signal={turb0} width={50} />
-                </div>
-              </div>
-              
-              {/* Reasoning */}
-              {turb0.reasoning && (
-                <div className="mt-4 text-sm text-white/50 leading-relaxed max-w-xl">
-                  {turb0.reasoning[0]}
-                </div>
-              )}
-            </section>
-
-            {/* WALLET STATUS */}
-            <section className="flex items-center gap-8 text-white/70">
-              <div>
-                <div className="text-xs text-white/30 mb-1">TREASURY</div>
-                <div className="text-2xl font-light">{wallet} ETH</div>
-              </div>
-              <div className="h-8 w-px bg-white/10" />
-              <div>
-                <div className="text-xs text-white/30 mb-1">CHAIN</div>
-                <div className="text-lg">BASE</div>
-              </div>
-            </section>
-
-            {/* AGENT SWARM */}
-            <section>
-              <div className="text-xs text-white/30 mb-6 tracking-wider">SWARM ACTIVITY</div>
-              <div className="flex gap-8">
-                {['d0t', 'b0b', 'r0ss', 'c0m'].map(agent => (
-                  <AgentOrb 
-                    key={agent}
-                    agent={agent}
-                    state={agentStates[agent]?.state || signals?.l0re?.d0t?.state || 'IDLE'}
-                    activity={0.5}
-                  />
-                ))}
-              </div>
-            </section>
-
-            {/* DATA VISUALIZATION: Art from actual market data */}
-            <section>
-              <div className="text-xs text-white/30 mb-4 tracking-wider">MARKET FIELD</div>
-              <div className="bg-black/50 rounded p-4 border border-white/5">
-                <DataDrivenArt 
-                  data={{ 
-                    ...signals?.onchain,
-                    ...signals?.polymarket?.[0],
-                    timestamp: Date.now()
-                  }} 
-                  width={80} 
-                  height={8}
-                />
-              </div>
-            </section>
-          </div>
-
-          {/* RIGHT: Chat Interface */}
-          <div className="flex flex-col">
-            <div className="p-6 border-b border-white/5">
-              <div className="text-xs text-white/30 tracking-wider">L0RE SWARM CHAT</div>
-              <div className="text-xs text-white/10 mt-1">b0b • d0t • c0m • r0ss</div>
-            </div>
-            
-            {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-6 space-y-4">
-              {chatMessages.length === 0 && (
-                <div className="text-white/20 text-sm space-y-2">
-                  <div>Ask the swarm anything...</div>
-                  <div className="text-xs text-white/10">
-                    All 4 agents will respond with their unique perspectives
-                  </div>
-                </div>
-              )}
-              {chatMessages.map((msg, i) => (
-                <div 
-                  key={i}
-                  className={`text-sm ${
-                    msg.role === 'user' 
-                      ? 'text-green-400 border-l-2 border-green-500/30 pl-3' 
-                      : msg.role === 'agent'
-                      ? 'border-l-2 pl-3'
-                      : 'text-white/70'
-                  }`}
-                  style={msg.role === 'agent' ? { 
-                    color: msg.color,
-                    borderColor: `${msg.color}50`
-                  } : undefined}
-                >
-                  {msg.role === 'user' && (
-                    <span className="text-white/30 mr-2">▸</span>
-                  )}
-                  {msg.role === 'agent' && (
-                    <div className="flex items-center gap-2 mb-1">
-                      <span>{msg.emoji}</span>
-                      <span className="font-bold text-xs uppercase tracking-wider">{msg.agent}</span>
-                    </div>
-                  )}
-                  <div className={msg.role === 'agent' ? 'text-white/70 leading-relaxed' : ''}>
-                    {msg.content}
-                  </div>
-                </div>
-              ))}
-              {chatLoading && (
-                <div className="text-yellow-500/50 text-sm flex items-center gap-2">
-                  <span className="animate-pulse">◉</span>
-                  swarm is thinking...
-                </div>
-              )}
-              <div ref={chatEndRef} />
-            </div>
-            
-            {/* Input */}
-            <div className="p-6 border-t border-white/5">
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  value={chatInput}
-                  onChange={e => setChatInput(e.target.value)}
-                  onKeyDown={e => e.key === 'Enter' && sendChat()}
-                  placeholder="ask the swarm..."
-                  className="flex-1 bg-transparent border-b border-white/20 text-white text-sm py-2 px-0 focus:outline-none focus:border-green-500/50"
-                />
-                <button
-                  onClick={sendChat}
-                  disabled={chatLoading}
-                  className="text-white/30 hover:text-green-400 transition-colors disabled:opacity-50"
-                >
-                  ⚡
-                </button>
-              </div>
-            </div>
+          <div className="flex gap-2 mt-1">
+            <StatusBadge status={h.dataFreshness >= 70 ? 'ok' : h.dataFreshness >= 40 ? 'warn' : 'error'} label={`${h.dataFreshness || 0}% fresh`} />
+            <StatusBadge status={h.selfHealingActive ? 'ok' : 'warn'} label={h.selfHealingActive ? 'healing' : 'idle'} />
+            <StatusBadge status={h.tradingEnabled ? 'ok' : 'stale'} label={h.tradingEnabled ? 'trading' : 'paper'} />
           </div>
         </div>
+      </header>
 
-        {/* FOOTER: L0RE Philosophy */}
-        <footer className="p-6 border-t border-white/5 text-xs text-white/20 flex justify-between items-center">
-          <span className="italic">
-            &ldquo;The Great Way is not difficult for those who have no preferences.&rdquo;
-          </span>
-          <div className="flex items-center gap-4">
-            <span className="text-green-500/30">◉ b0b</span>
-            <span className="text-green-500/30">◈ d0t</span>
-            <span className="text-purple-500/30">⚡ c0m</span>
-            <span className="text-cyan-500/30">▓ r0ss</span>
-            <span className="text-white/30 ml-4">{new Date().toISOString().split('T')[0]}</span>
+      <div className="p-4 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+        
+        {/* DATA FRESHNESS */}
+        <Section title="📊 Data Freshness" badge={
+          <StatusBadge status={h.dataFreshness >= 70 ? 'ok' : 'error'} label={`${fresh.fresh}/${fresh.files?.length} fresh`} />
+        }>
+          <div className="space-y-1 text-xs">
+            {fresh.files?.map((f: any) => (
+              <div key={f.file} className="flex justify-between">
+                <span className="text-white/50">{f.file}</span>
+                <span className={f.fresh ? 'text-green-400' : f.exists ? 'text-red-400' : 'text-gray-600'}>
+                  {f.exists ? `${f.actualAge}m / ${f.maxAge}m` : 'MISSING'}
+                </span>
+              </div>
+            ))}
           </div>
-        </footer>
+        </Section>
+
+        {/* TRADING */}
+        <Section title="💰 Trading (TURB0B00ST)" badge={
+          <StatusBadge 
+            status={t.turb0?.decision === 'BUY' ? 'ok' : t.turb0?.decision === 'SELL' ? 'error' : 'stale'} 
+            label={t.turb0?.decision || 'HOLD'} 
+          />
+        }>
+          <KV label="Decision" value={t.turb0?.decision || 'HOLD'} />
+          <KV label="Confidence" value={`${Math.round((t.turb0?.confidence || 0) * 100)}%`} />
+          <KV label="Mode" value={t.mode || 'paper'} warn={t.mode === 'paper'} />
+          <KV label="Total Trades" value={t.totalTrades || 0} />
+          <KV label="TURB0 Age" value={`${t.turb0Age || '--'}m`} warn={t.turb0Age > 5} />
+          <KV label="Treasury Age" value={`${t.treasuryAge || '--'}m`} warn={t.treasuryAge > 10} />
+          {t.turb0?.reasoning?.[0] && (
+            <div className="mt-2 text-xs text-white/40 italic">{t.turb0.reasoning[0]}</div>
+          )}
+          {t.moonbags?.length > 0 && (
+            <div className="mt-2">
+              <div className="text-xs text-white/50 mb-1">Moonbags:</div>
+              {t.moonbags.map((m: any, i: number) => (
+                <div key={i} className="text-xs text-white/30">{m.token}: {m.amount}</div>
+              ))}
+            </div>
+          )}
+        </Section>
+
+        {/* SIGNALS */}
+        <Section title="📡 Signals (d0t)" badge={
+          <FreshnessIndicator ageMinutes={s.d0tAge} maxAge={5} />
+        }>
+          <KV label="Polymarket Markets" value={s.polymarket?.length || 0} />
+          <KV label="d0t Age" value={`${s.d0tAge || '--'}m`} />
+          <KV label="Polymarket Age" value={`${s.polymarketAge || '--'}m`} />
+          {s.d0t?.onchain && (
+            <>
+              <KV label="BASE TVL" value={`$${((s.d0t.onchain.base_tvl || 0) / 1e9).toFixed(2)}B`} />
+              <KV label="ETH TVL" value={`$${((s.d0t.onchain.eth_tvl || 0) / 1e9).toFixed(1)}B`} />
+            </>
+          )}
+          {s.polymarket?.slice(0, 3).map((m: any, i: number) => (
+            <div key={i} className="text-xs text-white/40 mt-1 truncate">
+              • {m.question?.slice(0, 50)}...
+            </div>
+          ))}
+        </Section>
+
+        {/* SECURITY */}
+        <Section title="💀 Security (c0m)" badge={
+          <StatusBadge status={sec.findings?.length > 0 ? 'warn' : 'ok'} label={`${sec.findings?.length || 0} findings`} />
+        }>
+          <KV label="Bounty Targets" value={sec.bounties?.length || 0} />
+          <KV label="Findings" value={sec.findings?.length || 0} />
+          <KV label="Bounties Age" value={`${sec.bountiesAge || '--'}m`} />
+          {sec.bounties?.slice(0, 3).map((b: any, i: number) => (
+            <div key={i} className="text-xs text-white/40 mt-1">
+              • {b.platform || 'Unknown'}: {b.target || b.name || 'N/A'} ({b.maxBounty || b.reward || 'N/A'})
+            </div>
+          ))}
+        </Section>
+
+        {/* INFRASTRUCTURE */}
+        <Section title="🔧 Infrastructure (r0ss)" badge={
+          <StatusBadge status={infra.selfHealing?.running ? 'ok' : 'warn'} label={infra.selfHealing?.running ? 'healing' : 'idle'} />
+        }>
+          <KV label="Self-Healing" value={infra.selfHealing?.running ? 'ACTIVE' : 'IDLE'} warn={!infra.selfHealing?.running} />
+          <KV label="Self-Healing Age" value={`${infra.selfHealingAge || '--'}m`} />
+          <KV label="Freshness Age" value={`${infra.freshnessAge || '--'}m`} />
+          <KV label="Tasks" value={infra.tasks?.length || 0} />
+          <KV label="Recent Executions" value={infra.executions?.length || 0} />
+          {infra.recentActivity?.slice(0, 3).map((a: any, i: number) => (
+            <div key={i} className="text-xs text-white/40 mt-1 truncate">
+              • {a.event || a.action || JSON.stringify(a).slice(0, 40)}
+            </div>
+          ))}
+        </Section>
+
+        {/* LIBRARY */}
+        <Section title="📚 Library" badge={
+          <span className="text-xs text-white/50">{lib.totalDocs || 0} docs</span>
+        }>
+          <KV label="Total Documents" value={lib.totalDocs || 0} />
+          <KV label="Indexed" value={lib.indexedCount || 0} />
+          <KV label="Hot Files" value={lib.hotFiles?.length || 0} />
+          {lib.recentFiles?.slice(0, 5).map((f: any, i: number) => (
+            <div key={i} className="text-xs text-white/40 mt-1 truncate">
+              • {f.name} ({f.ageMinutes}m ago)
+            </div>
+          ))}
+        </Section>
+
+        {/* LEARNINGS */}
+        <Section title="🧠 Learnings" badge={
+          <span className="text-xs text-white/50">{learn.totalLearnings || 0} total</span>
+        }>
+          <KV label="Total Learnings" value={learn.totalLearnings || 0} />
+          <KV label="Observations" value={learn.observations?.length || 0} />
+          <KV label="Wisdom Files" value={learn.wisdomFiles?.length || 0} />
+          {learn.learnings?.slice(0, 3).map((l: any, i: number) => (
+            <div key={i} className="text-xs text-white/40 mt-1 truncate">
+              • {l.title || l.summary?.slice(0, 40) || 'Learning'}
+            </div>
+          ))}
+        </Section>
+
+        {/* L0RE STATE */}
+        <Section title="⚡ L0RE Automation" badge={
+          <StatusBadge status={l0re.pendingActions > 0 ? 'warn' : 'ok'} label={`${l0re.pendingActions || 0} pending`} />
+        }>
+          <KV label="Pending Actions" value={l0re.pendingActions || 0} />
+          <KV label="Action Queue" value={l0re.actionQueue?.length || 0} />
+          <KV label="Automation Tasks" value={l0re.automationTasks?.length || 0} />
+          <KV label="Pipeline Executions" value={l0re.pipelineHistory?.length || 0} />
+          {l0re.actionQueue?.slice(0, 3).map((a: any, i: number) => (
+            <div key={i} className="text-xs text-white/40 mt-1 truncate">
+              • [{a.status}] {a.type || a.action || 'action'}
+            </div>
+          ))}
+        </Section>
+
+        {/* EMAIL CENTER */}
+        <Section title="📧 Communications" badge={
+          <span className="text-xs text-white/50">{p?.email?.threads || 0} threads</span>
+        }>
+          <KV label="Email Threads" value={p?.email?.threads || 0} />
+          <KV label="X Conversations" value={p?.email?.xConversations?.length || 0} />
+          <KV label="Team Chat Messages" value={p?.email?.teamChat?.length || 0} />
+          {p?.email?.recentThreads?.slice(0, 3).map((t: any, i: number) => (
+            <div key={i} className="text-xs text-white/40 mt-1 truncate">
+              • {t.name} ({t.ageMinutes}m ago)
+            </div>
+          ))}
+        </Section>
+
+        {/* TOOLS */}
+        <Section title="🛠️ Brain Tools" badge={
+          <span className="text-xs text-white/50">{p?.tools?.length || 0} tools</span>
+        } defaultOpen={false}>
+          <div className="max-h-60 overflow-y-auto">
+            {p?.tools?.map((tool: any, i: number) => (
+              <div key={i} className="text-xs py-1 border-b border-white/5">
+                <div className="flex justify-between">
+                  <span className="text-green-400">{tool.name}</span>
+                  <span className="text-white/30">{tool.ageHours}h ago</span>
+                </div>
+                {tool.description && (
+                  <div className="text-white/30 truncate">{tool.description}</div>
+                )}
+              </div>
+            ))}
+          </div>
+        </Section>
+
       </div>
+
+      {/* Footer */}
+      <footer className="p-4 border-t border-white/10 text-xs text-white/30 flex justify-between">
+        <span>L0RE Operations Center • Real data, not art</span>
+        <span>{new Date().toISOString()}</span>
+      </footer>
     </main>
   );
 }
