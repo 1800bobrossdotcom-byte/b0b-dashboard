@@ -392,6 +392,59 @@ function PulseHistory({ pulses }: { pulses: any[] }) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// L0RE HOTKEYS PANEL: Quick actions
+// ═══════════════════════════════════════════════════════════════════════════════
+
+function HotkeysPanel({ onInvoke }: { onInvoke: (key: string) => void }) {
+  const [hotkeys, setHotkeys] = useState<any[]>([]);
+  const [invoking, setInvoking] = useState<string | null>(null);
+  
+  useEffect(() => {
+    fetch(`${BRAIN_URL}/l0re/hotkeys`)
+      .then(r => r.json())
+      .then(data => setHotkeys(data.hotkeys || []))
+      .catch(() => {});
+  }, []);
+  
+  const invoke = async (key: string) => {
+    setInvoking(key);
+    try {
+      await onInvoke(key);
+    } finally {
+      setInvoking(null);
+    }
+  };
+  
+  const quickHotkeys = ['w3ar3', 'turb0', 'safu', 'sync'];
+  
+  return (
+    <div className="space-y-2">
+      <div className="flex flex-wrap gap-2">
+        {quickHotkeys.map(key => {
+          const hotkey = hotkeys.find(h => h.key === key);
+          return (
+            <button
+              key={key}
+              onClick={() => invoke(key)}
+              disabled={invoking === key}
+              className="px-3 py-1 text-[10px] font-mono border border-green-500/20 rounded hover:border-green-500/50 hover:bg-green-500/10 transition-all disabled:opacity-50"
+              title={hotkey?.name || key}
+            >
+              {invoking === key ? '...' : key}
+            </button>
+          );
+        })}
+      </div>
+      {hotkeys.length > 0 && (
+        <div className="text-[10px] text-white/20">
+          {hotkeys.length} hotkeys loaded
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // SIGNAL WAVE: Real-time visualization of trading signals
 // ═══════════════════════════════════════════════════════════════════════════════
 
@@ -655,6 +708,20 @@ export default function B0bHQ() {
               <div>
                 <div className="text-xs text-white/30 mb-1">CHAIN</div>
                 <div className="text-lg">BASE</div>
+              </div>
+              <div className="h-8 w-px bg-white/10" />
+              <div className="flex-1">
+                <div className="text-xs text-white/30 mb-1">HOTKEYS</div>
+                <HotkeysPanel onInvoke={async (key) => {
+                  const res = await fetch(`${BRAIN_URL}/l0re/hotkey/${key}`);
+                  const data = await res.json();
+                  if (data.response) {
+                    setChatMessages(prev => [...prev, { 
+                      role: 'assistant', 
+                      content: `🔮 [${key}] ${data.response}`
+                    }]);
+                  }
+                }} />
               </div>
             </section>
 
