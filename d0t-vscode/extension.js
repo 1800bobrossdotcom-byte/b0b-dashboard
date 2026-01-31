@@ -1,42 +1,62 @@
 const vscode = require('vscode');
 const { exec } = require('child_process');
 const path = require('path');
+const https = require('https');
+const http = require('http');
 
 let autoApproveInterval = null;
 let statusBarItem = null;
+let signalsStatusItem = null;
 let approvalCount = 0;
 let lastApprovalAttempt = 0;
+let lastSignals = null;
 
 // D0T scripts path (for keyboard fallback)
 const D0T_PATH = path.join(__dirname, '..', 'd0t');
 
+// TURB0B00ST API
+const TURB0_API = 'http://localhost:3002';
+
 /**
  * D0T Auto-Approve Extension
  * 
- * HYBRID APPROACH:
+ * FEATURES:
+ * 1. Auto-approve tool invocations (instant, ~0ms)
+ * 2. Live trading signals display
+ * 3. L0RE intelligence status
+ * 
+ * HYBRID APPROACH for approvals:
  * 1. Try VS Code internal commands (instant, ~0ms)
  * 2. Fallback to keyboard simulation (Enter key, ~50ms)
  * 3. Last resort: Use D0T agent click (OCR, ~4s)
- * 
- * Much faster than OCR-based screen reading!
  */
 
 function activate(context) {
-    console.log('D0T Auto-Approve activated!');
+    console.log('D0T Auto-Approve + Signals activated!');
 
-    // Create status bar item
+    // Create status bar item for approvals
     statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
     statusBarItem.command = 'd0t.status';
     updateStatusBar();
     statusBarItem.show();
     context.subscriptions.push(statusBarItem);
+    
+    // Create status bar item for signals
+    signalsStatusItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 99);
+    signalsStatusItem.command = 'd0t.showSignals';
+    signalsStatusItem.text = '$(pulse) d0t';
+    signalsStatusItem.tooltip = 'Click to view d0t signals';
+    signalsStatusItem.show();
+    context.subscriptions.push(signalsStatusItem);
 
     // Register commands
     context.subscriptions.push(
         vscode.commands.registerCommand('d0t.approve', approveOnce),
         vscode.commands.registerCommand('d0t.approveAll', startAutoApprove),
         vscode.commands.registerCommand('d0t.stopAutoApprove', stopAutoApprove),
-        vscode.commands.registerCommand('d0t.status', showStatus)
+        vscode.commands.registerCommand('d0t.status', showStatus),
+        vscode.commands.registerCommand('d0t.showSignals', showSignals),
+        vscode.commands.registerCommand('d0t.fetchSignals', fetchSignals)
     );
 
     // Check if auto-approve should be enabled on startup
@@ -44,6 +64,9 @@ function activate(context) {
     if (config.get('autoApprove')) {
         startAutoApprove();
     }
+    
+    // Start signals polling
+    startSignalsPolling();
 
     // Listen for config changes
     context.subscriptions.push(
@@ -201,6 +224,100 @@ function deactivate() {
     if (autoApproveInterval) {
         clearInterval(autoApproveInterval);
     }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// d0t SIGNALS INTEGRATION
+// ═══════════════════════════════════════════════════════════════════════════════
+
+let signalsInterval = null;
+
+function startSignalsPolling() {
+    // Initial fetch
+    fetchSignals();
+    
+    // Poll every 60 seconds
+    signalsInterval = setInterval(fetchSignals, 60000);
+}
+
+function fetchSignals() {
+    const req = http.get(`${TURB0_API}/d0t/signals`, (res) => {
+        let data = '';
+        res.on('data', chunk => data += chunk);
+        res.on('end', () => {
+            try {
+                lastSignals = JSON.parse(data);
+                updateSignalsStatus();
+            } catch (e) {
+                console.error('d0t signals parse error:', e);
+            }
+        });
+    });
+    
+    req.on('error', (e) => {
+        // API not running, that's OK
+        signalsStatusItem.text = '$(pulse) d0t offline';
+        signalsStatusItem.tooltip = 'TURB0B00ST API not running';
+    });
+    
+    req.setTimeout(5000, () => req.destroy());
+}
+
+function updateSignalsStatus() {
+    if (!lastSignals) return;
+    
+    const decision = lastSignals.decision || 'HOLD';
+    const confidence = ((lastSignals.confidence || 0.5) * 100).toFixed(0);
+    const nashState = lastSignals.nashState || 'EQUILIBRIUM';
+    
+    // Emoji based on decision
+    let emoji = '⏸️';
+    if (decision === 'BUY') emoji = '🟢';
+    else if (decision === 'SELL') emoji = '🔴';
+    
+    signalsStatusItem.text = `${emoji} ${decision} ${confidence}%`;
+    signalsStatusItem.tooltip = `d0t Signal: ${decision} (${confidence}% confidence)\nNash: ${nashState}\nL0RE: ${lastSignals.l0reCode || 'n/a'}\n\nClick for details`;
+}
+
+async function showSignals() {
+    if (!lastSignals) {
+        await fetchSignals();
+    }
+    
+    if (!lastSignals) {
+        vscode.window.showInformationMessage('d0t signals not available. Is TURB0B00ST API running?');
+        return;
+    }
+    
+    const decision = lastSignals.decision || 'HOLD';
+    const confidence = ((lastSignals.confidence || 0.5) * 100).toFixed(0);
+    
+    // Build detailed message
+    const lines = [
+        `📊 d0t Trading Intelligence`,
+        ``,
+        `Decision: ${decision} (${confidence}% confidence)`,
+        `Size: ${(lastSignals.size || 0.02) * 100}%`,
+        ``,
+        `═══ L0RE Classification ═══`,
+        `Code: ${lastSignals.l0reCode || 'n/a'}`,
+        `Nash State: ${lastSignals.nashState || 'EQUILIBRIUM'}`,
+        ``,
+        `═══ Agent Consensus ═══`,
+    ];
+    
+    const agents = lastSignals.agents || {};
+    if (agents.d0t) lines.push(`d0t: ${agents.d0t.state} → ${agents.d0t.vote}`);
+    if (agents.c0m) lines.push(`c0m: Level ${agents.c0m.level} ${agents.c0m.veto ? '⛔ VETO' : '✓'}`);
+    if (agents.b0b) lines.push(`b0b: ${agents.b0b.state} → ${agents.b0b.vote}`);
+    if (agents.r0ss) lines.push(`r0ss: ${agents.r0ss.coherence} → ${agents.r0ss.vote}`);
+    
+    if (lastSignals.reasoning?.length > 0) {
+        lines.push(``, `═══ Reasoning ═══`);
+        lastSignals.reasoning.slice(0, 3).forEach(r => lines.push(`• ${r}`));
+    }
+    
+    vscode.window.showInformationMessage(lines.join('\n'), { modal: true });
 }
 
 module.exports = {

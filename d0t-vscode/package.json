@@ -1,8 +1,8 @@
 {
   "name": "d0t-auto",
-  "displayName": "D0T Auto-Approve",
-  "description": "Autonomous tool approval for Copilot - no more clicking Continue!",
-  "version": "1.0.0",
+  "displayName": "D0T Auto-Approve + Signals",
+  "description": "Autonomous tool approval + live trading signals from TURB0B00ST",
+  "version": "1.1.0",
   "publisher": "b0b",
   "engines": {
     "vscode": "^1.85.0"
@@ -27,6 +27,14 @@
       {
         "command": "d0t.status",
         "title": "D0T: Show Status"
+      },
+      {
+        "command": "d0t.showSignals",
+        "title": "D0T: Show Trading Signals"
+      },
+      {
+        "command": "d0t.fetchSignals",
+        "title": "D0T: Refresh Signals"
       }
     ],
     "keybindings": [
@@ -38,10 +46,14 @@
       {
         "command": "d0t.approveAll",
         "key": "ctrl+shift+alt+y"
+      },
+      {
+        "command": "d0t.showSignals",
+        "key": "ctrl+shift+d"
       }
     ],
     "configuration": {
-      "title": "D0T Auto-Approve",
+      "title": "D0T Auto-Approve + Signals",
       "properties": {
         "d0t.autoApprove": {
           "type": "boolean",
@@ -57,6 +69,16 @@
           "type": "boolean",
           "default": true,
           "description": "Show notifications when auto-approving"
+        },
+        "d0t.turb0ApiUrl": {
+          "type": "string",
+          "default": "http://localhost:3002",
+          "description": "TURB0B00ST API URL for signals"
+        },
+        "d0t.signalsRefreshInterval": {
+          "type": "number",
+          "default": 60000,
+          "description": "Signals refresh interval (ms)"
         }
       }
     }
