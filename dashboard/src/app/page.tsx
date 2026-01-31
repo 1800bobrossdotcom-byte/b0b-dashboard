@@ -1,23 +1,84 @@
 'use client';
 
 /**
- * 🔮 L0RE OPERATIONS CENTER — The REAL b0b-platform Dashboard
+ * ═══════════════════════════════════════════════════════════════════════════════
  * 
- * Not pretty art. USEFUL DATA.
- * Every tool. Every data point. Everything we've built.
+ *  ██████╗  ██████╗ ██████╗    ██████╗ ███████╗██╗   ██╗
+ *  ██╔══██╗██╔═══██╗██╔══██╗   ██╔══██╗██╔════╝██║   ██║
+ *  ██████╔╝██║   ██║██████╔╝   ██║  ██║█████╗  ██║   ██║
+ *  ██╔══██╗██║   ██║██╔══██╗   ██║  ██║██╔══╝  ╚██╗ ██╔╝
+ *  ██████╔╝╚██████╔╝██████╔╝██╗██████╔╝███████╗ ╚████╔╝ 
+ *  ╚═════╝  ╚═════╝ ╚═════╝ ╚═╝╚═════╝ ╚══════╝  ╚═══╝  
  * 
- * PASSWORD PROTECTED - For authorized eyes only
+ *  L0RE Operations Center — ASCII Terminal Interface
+ *  Inspired by ertdfgcvb.xyz
+ * 
+ *  "ars est celare artem" — true art conceals its art
+ * 
+ * ═══════════════════════════════════════════════════════════════════════════════
  */
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 
 const BRAIN_URL = 'https://b0b-brain-production.up.railway.app';
-const ACCESS_PASSWORD = 'l0re-sw4rm-2026';  // Emailed to 1800bobrossdotcom@gmail.com
+const ACCESS_PASSWORD = 'l0re-sw4rm-2026';
 
-// Password screen
+// ASCII Characters for animation (density gradient)
+const ASCII_CHARS = ' .:-=+*#%@';
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// ASCII CANVAS — Procedural animation renderer
+// ═══════════════════════════════════════════════════════════════════════════════
+
+function useAsciiCanvas(width: number, height: number) {
+  const [frame, setFrame] = useState<string[][]>([]);
+  const frameRef = useRef(0);
+  
+  const render = useCallback(() => {
+    const t = frameRef.current * 0.02;
+    const newFrame: string[][] = [];
+    
+    for (let y = 0; y < height; y++) {
+      const row: string[] = [];
+      for (let x = 0; x < width; x++) {
+        // Procedural noise pattern
+        const nx = x / width;
+        const ny = y / height;
+        
+        // Wave interference pattern
+        const v1 = Math.sin(nx * 10 + t) * Math.cos(ny * 8 + t * 0.7);
+        const v2 = Math.sin((nx + ny) * 6 + t * 1.3);
+        const v3 = Math.cos(Math.sqrt((nx - 0.5) ** 2 + (ny - 0.5) ** 2) * 12 - t * 2);
+        
+        const value = (v1 + v2 + v3) / 3;
+        const normalized = (value + 1) / 2;
+        const charIndex = Math.floor(normalized * (ASCII_CHARS.length - 1));
+        
+        row.push(ASCII_CHARS[charIndex]);
+      }
+      newFrame.push(row);
+    }
+    
+    setFrame(newFrame);
+    frameRef.current++;
+  }, [width, height]);
+  
+  useEffect(() => {
+    const interval = setInterval(render, 50);
+    return () => clearInterval(interval);
+  }, [render]);
+  
+  return frame;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// PASSWORD SCREEN
+// ═══════════════════════════════════════════════════════════════════════════════
+
 function PasswordScreen({ onUnlock }: { onUnlock: () => void }) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
+  const asciiFrame = useAsciiCanvas(60, 15);
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,403 +92,306 @@ function PasswordScreen({ onUnlock }: { onUnlock: () => void }) {
   };
   
   return (
-    <main className="min-h-screen bg-black text-white font-mono flex items-center justify-center">
-      <div className="text-center">
-        <h1 className="text-2xl mb-2">
-          <span className="text-green-400">L0RE</span> Operations Center
-        </h1>
-        <p className="text-white/40 text-sm mb-8">Authorized access only</p>
+    <main className="min-h-screen bg-black text-[#0f0] font-mono flex flex-col items-center justify-center p-4">
+      {/* ASCII Background */}
+      <pre className="absolute inset-0 text-[#0f0]/10 text-[8px] leading-[8px] overflow-hidden select-none pointer-events-none">
+        {asciiFrame.map((row) => row.join('')).join('\n')}
+      </pre>
+      
+      <div className="relative z-10 text-center">
+        <pre className="text-[#0f0] text-xs mb-8 hidden sm:block">{`
+ ██████╗  ██████╗ ██████╗    ██████╗ ███████╗██╗   ██╗
+ ██╔══██╗██╔═══██╗██╔══██╗   ██╔══██╗██╔════╝██║   ██║
+ ██████╔╝██║   ██║██████╔╝   ██║  ██║█████╗  ██║   ██║
+ ██╔══██╗██║   ██║██╔══██╗   ██║  ██║██╔══╝  ╚██╗ ██╔╝
+ ██████╔╝╚██████╔╝██████╔╝██╗██████╔╝███████╗ ╚████╔╝ 
+ ╚═════╝  ╚═════╝ ╚═════╝ ╚═╝╚═════╝ ╚══════╝  ╚═══╝  
+        `}</pre>
+        
+        <p className="text-[#0f0]/60 text-sm mb-8">L0RE Operations Center</p>
+        
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter password"
-            className={`bg-white/5 border ${error ? 'border-red-500' : 'border-white/20'} rounded px-4 py-2 text-center w-64 focus:outline-none focus:border-green-500`}
+            placeholder="enter access code"
+            className={`bg-black border ${error ? 'border-red-500' : 'border-[#0f0]/30'} text-[#0f0] rounded px-4 py-2 text-center w-64 focus:outline-none focus:border-[#0f0] placeholder-[#0f0]/30`}
             autoFocus
           />
           <div>
             <button
               type="submit"
-              className="bg-green-500/20 border border-green-500/30 text-green-400 px-6 py-2 rounded hover:bg-green-500/30 transition"
+              className="border border-[#0f0]/30 text-[#0f0] px-6 py-2 hover:bg-[#0f0]/10 transition"
             >
-              Access
+              [ENTER]
             </button>
           </div>
-          {error && <p className="text-red-400 text-sm">❌ Invalid password</p>}
+          {error && <p className="text-red-500 text-sm">ACCESS DENIED</p>}
         </form>
-        <p className="text-white/20 text-xs mt-8">w3 ar3 — l0re v0.3.0</p>
+        
+        <p className="text-[#0f0]/20 text-xs mt-12">w3 ar3 — l0re v0.4.0</p>
       </div>
     </main>
   );
 }
 
-// Status badge component
-function StatusBadge({ status, label }: { status: 'ok' | 'warn' | 'error' | 'stale'; label: string }) {
-  const colors = {
-    ok: 'bg-green-500/20 text-green-400 border-green-500/30',
-    warn: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-    error: 'bg-red-500/20 text-red-400 border-red-500/30',
-    stale: 'bg-gray-500/20 text-gray-400 border-gray-500/30'
+// ═══════════════════════════════════════════════════════════════════════════════
+// MAIN TERMINAL INTERFACE
+// ═══════════════════════════════════════════════════════════════════════════════
+
+interface FreshnessFile {
+  file: string;
+  fresh: boolean;
+  actualAge: number;
+}
+
+interface PlatformData {
+  health?: { dataFreshness?: number };
+  freshness?: { files?: FreshnessFile[]; fresh?: number };
+  trading?: {
+    turb0?: { decision?: string; confidence?: number; reasoning?: string[] };
+    mode?: string;
+    totalTrades?: number;
   };
-  return (
-    <span className={`px-2 py-0.5 text-xs rounded border ${colors[status]}`}>
-      {label}
-    </span>
-  );
+  signals?: {
+    polymarket?: Array<{ question?: string }>;
+    d0t?: { onchain?: { base_tvl?: number; eth_tvl?: number } };
+  };
+  tools?: Array<{ name: string }>;
 }
 
-// Data freshness indicator
-function FreshnessIndicator({ ageMinutes, maxAge }: { ageMinutes: number | undefined; maxAge: number }) {
-  if (ageMinutes === undefined) return <span className="text-gray-600">--</span>;
-  const fresh = ageMinutes <= maxAge;
-  return (
-    <span className={fresh ? 'text-green-400' : 'text-red-400'}>
-      {ageMinutes}m {fresh ? '✓' : '⚠'}
-    </span>
-  );
-}
-
-// Collapsible section
-function Section({ title, badge, children, defaultOpen = true }: { 
-  title: string; 
-  badge?: React.ReactNode;
-  children: React.ReactNode;
-  defaultOpen?: boolean;
-}) {
-  const [open, setOpen] = useState(defaultOpen);
-  return (
-    <div className="border border-white/10 rounded mb-4">
-      <div 
-        className="flex items-center justify-between p-3 cursor-pointer hover:bg-white/5"
-        onClick={() => setOpen(!open)}
-      >
-        <div className="flex items-center gap-3">
-          <span className="text-white/50">{open ? '▼' : '▶'}</span>
-          <span className="font-mono text-sm text-white/90">{title}</span>
-        </div>
-        {badge}
-      </div>
-      {open && <div className="p-3 border-t border-white/5">{children}</div>}
-    </div>
-  );
-}
-
-// Key-value display
-function KV({ label, value, warn }: { label: string; value: any; warn?: boolean }) {
-  return (
-    <div className="flex justify-between text-xs py-1 border-b border-white/5">
-      <span className="text-white/50">{label}</span>
-      <span className={warn ? 'text-yellow-400' : 'text-white/80'}>{String(value)}</span>
-    </div>
-  );
-}
-
-export default function L0reOperations() {
+export default function L0reTerminal() {
   const [authenticated, setAuthenticated] = useState(false);
-  const [platform, setPlatform] = useState<any>(null);
+  const [mounted, setMounted] = useState(false);
+  const [data, setData] = useState<PlatformData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
-  const [refreshing, setRefreshing] = useState(false);
-
-  // Check auth on mount
+  const [tick, setTick] = useState(0);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+  const asciiFrame = useAsciiCanvas(120, 30);
+  
+  // Mount check
   useEffect(() => {
-    const auth = localStorage.getItem('l0re-auth');
-    if (auth === 'true') {
-      setAuthenticated(true);
-    }
+    setMounted(true);
   }, []);
-
-  const loadData = async () => {
-    try {
-      const res = await fetch(`${BRAIN_URL}/l0re/platform`, { cache: 'no-store' });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      setPlatform(data);
-      setLastUpdate(new Date());
-      setError(null);
-    } catch (e: any) {
-      setError(e.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const triggerCrawlers = async () => {
-    setRefreshing(true);
-    try {
-      const res = await fetch(`${BRAIN_URL}/l0re/crawlers/run`, { 
-        method: 'POST',
-        cache: 'no-store' 
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      // Wait a moment for data to be written
-      await new Promise(r => setTimeout(r, 1000));
-      await loadData();
-    } catch (e: any) {
-      console.error('Crawler trigger failed:', e);
-    } finally {
-      setRefreshing(false);
-    }
-  };
-
+  
+  // Auth check
   useEffect(() => {
-    if (authenticated) {
-      loadData();
-      const interval = setInterval(loadData, 15000);
-      return () => clearInterval(interval);
-    }
-  }, [authenticated]);
-
-  // Show password screen if not authenticated
+    if (!mounted) return;
+    const auth = localStorage.getItem('l0re-auth');
+    if (auth === 'true') setAuthenticated(true);
+  }, [mounted]);
+  
+  // Fetch data
+  useEffect(() => {
+    if (!authenticated || !mounted) return;
+    
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`${BRAIN_URL}/l0re/platform`, { cache: 'no-store' });
+        if (res.ok) {
+          setData(await res.json());
+        }
+      } catch (e) {
+        console.error('Fetch error:', e);
+      } finally {
+        setLoading(false);
+      }
+      setTick(t => t + 1);
+    };
+    
+    fetchData();
+    const interval = setInterval(fetchData, 10000);
+    return () => clearInterval(interval);
+  }, [authenticated, mounted]);
+  
+  // Logout handler
+  const logout = () => {
+    localStorage.removeItem('l0re-auth');
+    setAuthenticated(false);
+  };
+  
+  // Loading state
+  if (!mounted) {
+    return (
+      <main className="min-h-screen bg-black text-[#0f0] font-mono flex items-center justify-center">
+        <div className="animate-pulse">INITIALIZING...</div>
+      </main>
+    );
+  }
+  
   if (!authenticated) {
     return <PasswordScreen onUnlock={() => setAuthenticated(true)} />;
   }
-
-  if (loading) {
-    return (
-      <main className="min-h-screen bg-black text-white font-mono p-4">
-        <div className="text-center text-white/50">Loading L0RE Platform...</div>
-      </main>
-    );
-  }
-
-  if (error) {
-    return (
-      <main className="min-h-screen bg-black text-white font-mono p-4">
-        <div className="text-red-400">Error: {error}</div>
-        <button onClick={loadData} className="mt-4 px-4 py-2 bg-white/10 rounded">Retry</button>
-      </main>
-    );
-  }
-
-  const p = platform;
-  const h = p?.health || {};
-  const t = p?.trading || {};
-  const s = p?.signals || {};
-  const sec = p?.security || {};
-  const lib = p?.library || {};
-  const infra = p?.infrastructure || {};
-  const learn = p?.learnings || {};
-  const l0re = p?.l0re || {};
-  const fresh = p?.freshness || {};
-
+  
+  const fresh = data?.freshness;
+  const health = data?.health?.dataFreshness || 0;
+  const trading = data?.trading;
+  const signals = data?.signals;
+  const tools = data?.tools || [];
+  
   return (
-    <main className="min-h-screen bg-black text-white font-mono">
-      {/* Header */}
-      <header className="p-4 border-b border-white/10 flex items-center justify-between">
-        <div>
-          <h1 className="text-xl font-bold">
-            <span className="text-green-400">L0RE</span> Operations Center
-          </h1>
-          <p className="text-xs text-white/40">b0b-platform • {p?.tools?.length || 0} tools • All data live</p>
-        </div>
-        <div className="text-right flex items-center gap-4">
-          <button 
-            onClick={triggerCrawlers}
-            disabled={refreshing}
-            className={`px-3 py-1.5 text-xs rounded border transition ${
-              refreshing 
-                ? 'bg-yellow-500/20 border-yellow-500/30 text-yellow-400 cursor-wait' 
-                : 'bg-green-500/20 border-green-500/30 text-green-400 hover:bg-green-500/30'
-            }`}
-          >
-            {refreshing ? '🔄 Crawling...' : '🔄 Refresh Data'}
-          </button>
-          <div>
-            <div className="text-xs text-white/50">
-              Last update: {lastUpdate?.toLocaleTimeString() || '--'}
-            </div>
-            <div className="flex gap-2 mt-1">
-              <StatusBadge status={h.dataFreshness >= 70 ? 'ok' : h.dataFreshness >= 40 ? 'warn' : 'error'} label={`${h.dataFreshness || 0}% fresh`} />
-              <StatusBadge status={h.selfHealingActive ? 'ok' : 'warn'} label={h.selfHealingActive ? 'healing' : 'idle'} />
-              <StatusBadge status={h.tradingEnabled ? 'ok' : 'stale'} label={h.tradingEnabled ? 'trading' : 'paper'} />
-            </div>
+    <main className="min-h-screen bg-black text-[#0f0] font-mono p-4 relative overflow-hidden">
+      {/* ASCII Background Animation */}
+      <pre 
+        className="fixed inset-0 text-[#0f0]/5 text-[6px] leading-[6px] overflow-hidden select-none pointer-events-none z-0"
+        aria-hidden="true"
+      >
+        {asciiFrame.map((row) => row.join('')).join('\n')}
+      </pre>
+      
+      <div className="relative z-10 max-w-4xl mx-auto">
+        {/* Header */}
+        <header className="mb-8">
+          <pre className="text-[#0f0] text-[10px] leading-tight hidden md:block">{`
+╔══════════════════════════════════════════════════════════════════════════════╗
+║  b0b.dev — L0RE Operations Center                                            ║
+║  ════════════════════════════════════════════════════════════════════════════║
+║  HEALTH: ${String(health).padStart(3)}%  │  FRESH: ${String(fresh?.fresh || 0).padStart(2)}/${String(fresh?.files?.length || 0).padStart(2)}  │  TICK: ${String(tick).padStart(5)}  │  STATUS: ${loading ? 'SYNC' : 'LIVE'}        ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+          `}</pre>
+          
+          <div className="md:hidden flex justify-between items-center border border-[#0f0]/30 p-2">
+            <span>b0b.dev</span>
+            <span>{health}% fresh</span>
           </div>
-        </div>
-      </header>
-
-      <div className="p-4 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+        </header>
         
-        {/* DATA FRESHNESS */}
-        <Section title="📊 Data Freshness" badge={
-          <StatusBadge status={h.dataFreshness >= 70 ? 'ok' : 'error'} label={`${fresh.fresh}/${fresh.files?.length} fresh`} />
-        }>
-          <div className="text-xs text-white/60 mb-2 italic">
-            🔄 Integrated crawlers run every 10 SECONDS on Railway
-          </div>
-          <div className="space-y-1 text-xs">
-            {fresh.files?.map((f: any) => (
-              <div key={f.file} className="flex justify-between">
-                <span className="text-white/50">{f.file}</span>
-                <span className={f.fresh ? 'text-green-400' : f.exists ? 'text-red-400' : 'text-gray-600'}>
-                  {f.exists ? `${f.actualAge}s / ${f.maxAge}s` : 'MISSING'}
-                </span>
+        {/* Navigation */}
+        <nav className="mb-6 flex flex-wrap gap-2 text-sm">
+          {['status', 'trading', 'signals', 'tools', 'agents'].map(section => (
+            <button
+              key={section}
+              onClick={() => setActiveSection(activeSection === section ? null : section)}
+              className={`px-3 py-1 border transition ${
+                activeSection === section 
+                  ? 'border-[#0f0] bg-[#0f0]/10' 
+                  : 'border-[#0f0]/30 hover:border-[#0f0]/60'
+              }`}
+            >
+              [{section.toUpperCase()}]
+            </button>
+          ))}
+          <button
+            onClick={logout}
+            className="px-3 py-1 border border-red-500/30 text-red-500 hover:border-red-500/60 ml-auto"
+          >
+            [EXIT]
+          </button>
+        </nav>
+        
+        {/* Content Sections */}
+        <div className="space-y-4">
+          
+          {/* STATUS */}
+          {(activeSection === 'status' || !activeSection) && (
+            <section className="border border-[#0f0]/30 p-4">
+              <h2 className="text-sm mb-3 border-b border-[#0f0]/20 pb-1">
+                ▸ DATA FRESHNESS [{fresh?.fresh || 0}/{fresh?.files?.length || 0} SOURCES]
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-1 text-xs">
+                {Array.isArray(fresh?.files) && fresh.files.map((f) => (
+                  <div key={f.file} className="flex justify-between">
+                    <span className="text-[#0f0]/60">{f.file.replace('.json', '')}</span>
+                    <span className={f.fresh ? 'text-[#0f0]' : 'text-red-500'}>
+                      {f.actualAge}s {f.fresh ? '█' : '░'}
+                    </span>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </Section>
-
-        {/* TRADING */}
-        <Section title="💰 Trading (TURB0B00ST)" badge={
-          <StatusBadge 
-            status={t.turb0?.decision === 'BUY' ? 'ok' : t.turb0?.decision === 'SELL' ? 'error' : 'stale'} 
-            label={t.turb0?.decision || 'HOLD'} 
-          />
-        }>
-          <KV label="Decision" value={t.turb0?.decision || 'HOLD'} />
-          <KV label="Confidence" value={`${Math.round((t.turb0?.confidence || 0) * 100)}%`} />
-          <KV label="Mode" value={t.mode || 'paper'} warn={t.mode === 'paper'} />
-          <KV label="Total Trades" value={t.totalTrades || 0} />
-          <KV label="TURB0 Age" value={`${t.turb0Age || '--'}m`} warn={t.turb0Age > 5} />
-          <KV label="Treasury Age" value={`${t.treasuryAge || '--'}m`} warn={t.treasuryAge > 10} />
-          {t.turb0?.reasoning?.[0] && (
-            <div className="mt-2 text-xs text-white/40 italic">{t.turb0.reasoning[0]}</div>
+            </section>
           )}
-          {t.moonbags?.length > 0 && (
-            <div className="mt-2">
-              <div className="text-xs text-white/50 mb-1">Moonbags:</div>
-              {t.moonbags.map((m: any, i: number) => (
-                <div key={i} className="text-xs text-white/30">{m.token}: {m.amount}</div>
-              ))}
-            </div>
+          
+          {/* TRADING */}
+          {(activeSection === 'trading' || !activeSection) && (
+            <section className="border border-[#0f0]/30 p-4">
+              <h2 className="text-sm mb-3 border-b border-[#0f0]/20 pb-1">
+                ▸ TURB0B00ST [{trading?.turb0?.decision || 'HOLD'}]
+              </h2>
+              <pre className="text-xs text-[#0f0]/80">{`
+┌─────────────────────────────────────┐
+│ DECISION: ${String(trading?.turb0?.decision || 'HOLD').padEnd(24)}│
+│ CONFIDENCE: ${String(Math.round((trading?.turb0?.confidence || 0) * 100) + '%').padEnd(22)}│
+│ MODE: ${String(trading?.mode || 'paper').padEnd(28)}│
+│ TRADES: ${String(trading?.totalTrades || 0).padEnd(26)}│
+└─────────────────────────────────────┘
+              `}</pre>
+              {trading?.turb0?.reasoning?.[0] && (
+                <p className="text-xs text-[#0f0]/50 mt-2">→ {trading.turb0.reasoning[0]}</p>
+              )}
+            </section>
           )}
-        </Section>
-
-        {/* SIGNALS */}
-        <Section title="📡 Signals (d0t)" badge={
-          <FreshnessIndicator ageMinutes={s.d0tAge} maxAge={5} />
-        }>
-          <KV label="Polymarket Markets" value={s.polymarket?.length || 0} />
-          <KV label="d0t Age" value={`${s.d0tAge || '--'}m`} />
-          <KV label="Polymarket Age" value={`${s.polymarketAge || '--'}m`} />
-          {s.d0t?.onchain && (
-            <>
-              <KV label="BASE TVL" value={`$${((s.d0t.onchain.base_tvl || 0) / 1e9).toFixed(2)}B`} />
-              <KV label="ETH TVL" value={`$${((s.d0t.onchain.eth_tvl || 0) / 1e9).toFixed(1)}B`} />
-            </>
-          )}
-          {Array.isArray(s.polymarket) && s.polymarket.slice(0, 3).map((m: any, i: number) => (
-            <div key={i} className="text-xs text-white/40 mt-1 truncate">
-              • {m.question?.slice(0, 50)}...
-            </div>
-          ))}
-        </Section>
-
-        {/* SECURITY */}
-        <Section title="💀 Security (c0m)" badge={
-          <StatusBadge status={Array.isArray(sec.findings) && sec.findings.length > 0 ? 'warn' : 'ok'} label={`${Array.isArray(sec.findings) ? sec.findings.length : 0} findings`} />
-        }>
-          <KV label="Bounty Targets" value={Array.isArray(sec.bounties) ? sec.bounties.length : 0} />
-          <KV label="Findings" value={Array.isArray(sec.findings) ? sec.findings.length : 0} />
-          <KV label="Bounties Age" value={`${sec.bountiesAge || '--'}s`} />
-          {Array.isArray(sec.bounties) && sec.bounties.slice(0, 3).map((b: any, i: number) => (
-            <div key={i} className="text-xs text-white/40 mt-1">
-              • {b.platform || 'Unknown'}: {b.target || b.name || 'N/A'} ({b.maxBounty || b.reward || 'N/A'})
-            </div>
-          ))}
-        </Section>
-
-        {/* INFRASTRUCTURE */}
-        <Section title="🔧 Infrastructure (r0ss)" badge={
-          <StatusBadge status={infra.selfHealing?.running ? 'ok' : 'warn'} label={infra.selfHealing?.running ? 'healing' : 'idle'} />
-        }>
-          <KV label="Self-Healing" value={infra.selfHealing?.running ? 'ACTIVE' : 'IDLE'} warn={!infra.selfHealing?.running} />
-          <KV label="Self-Healing Age" value={`${infra.selfHealingAge || '--'}m`} />
-          <KV label="Freshness Age" value={`${infra.freshnessAge || '--'}m`} />
-          <KV label="Tasks" value={infra.tasks?.length || 0} />
-          <KV label="Recent Executions" value={infra.executions?.length || 0} />
-          {Array.isArray(infra.recentActivity) && infra.recentActivity.slice(0, 3).map((a: any, i: number) => (
-            <div key={i} className="text-xs text-white/40 mt-1 truncate">
-              • {a.event || a.action || JSON.stringify(a).slice(0, 40)}
-            </div>
-          ))}
-        </Section>
-
-        {/* LIBRARY */}
-        <Section title="📚 Library" badge={
-          <span className="text-xs text-white/50">{lib.totalDocs || 0} docs</span>
-        }>
-          <KV label="Total Documents" value={lib.totalDocs || 0} />
-          <KV label="Indexed" value={lib.indexedCount || 0} />
-          <KV label="Hot Files" value={Array.isArray(lib.hotFiles) ? lib.hotFiles.length : 0} />
-          {Array.isArray(lib.recentFiles) && lib.recentFiles.slice(0, 5).map((f: any, i: number) => (
-            <div key={i} className="text-xs text-white/40 mt-1 truncate">
-              • {f.name} ({f.ageMinutes}m ago)
-            </div>
-          ))}
-        </Section>
-
-        {/* LEARNINGS */}
-        <Section title="🧠 Learnings" badge={
-          <span className="text-xs text-white/50">{learn.totalLearnings || 0} total</span>
-        }>
-          <KV label="Total Learnings" value={learn.totalLearnings || 0} />
-          <KV label="Observations" value={Array.isArray(learn.observations) ? learn.observations.length : 0} />
-          <KV label="Wisdom Files" value={Array.isArray(learn.wisdomFiles) ? learn.wisdomFiles.length : 0} />
-          {Array.isArray(learn.learnings) && learn.learnings.slice(0, 3).map((l: any, i: number) => (
-            <div key={i} className="text-xs text-white/40 mt-1 truncate">
-              • {l.title || l.summary?.slice(0, 40) || 'Learning'}
-            </div>
-          ))}
-        </Section>
-
-        {/* L0RE STATE */}
-        <Section title="⚡ L0RE Automation" badge={
-          <StatusBadge status={l0re.pendingActions > 0 ? 'warn' : 'ok'} label={`${l0re.pendingActions || 0} pending`} />
-        }>
-          <KV label="Pending Actions" value={l0re.pendingActions || 0} />
-          <KV label="Action Queue" value={Array.isArray(l0re.actionQueue) ? l0re.actionQueue.length : 0} />
-          <KV label="Automation Tasks" value={Array.isArray(l0re.automationTasks) ? l0re.automationTasks.length : 0} />
-          <KV label="Pipeline Executions" value={Array.isArray(l0re.pipelineHistory) ? l0re.pipelineHistory.length : 0} />
-          {Array.isArray(l0re.actionQueue) && l0re.actionQueue.slice(0, 3).map((a: any, i: number) => (
-            <div key={i} className="text-xs text-white/40 mt-1 truncate">
-              • [{a.status}] {a.type || a.action || 'action'}
-            </div>
-          ))}
-        </Section>
-
-        {/* EMAIL CENTER */}
-        <Section title="📧 Communications" badge={
-          <span className="text-xs text-white/50">{p?.email?.threads || 0} threads</span>
-        }>
-          <KV label="Email Threads" value={p?.email?.threads || 0} />
-          <KV label="X Conversations" value={Array.isArray(p?.email?.xConversations) ? p.email.xConversations.length : 0} />
-          <KV label="Team Chat Messages" value={Array.isArray(p?.email?.teamChat) ? p.email.teamChat.length : 0} />
-          {Array.isArray(p?.email?.recentThreads) && p.email.recentThreads.slice(0, 3).map((t: any, i: number) => (
-            <div key={i} className="text-xs text-white/40 mt-1 truncate">
-              • {t.name} ({t.ageMinutes}m ago)
-            </div>
-          ))}
-        </Section>
-
-        {/* TOOLS */}
-        <Section title="🛠️ Brain Tools" badge={
-          <span className="text-xs text-white/50">{p?.tools?.length || 0} tools</span>
-        } defaultOpen={false}>
-          <div className="max-h-60 overflow-y-auto">
-            {p?.tools?.map((tool: any, i: number) => (
-              <div key={i} className="text-xs py-1 border-b border-white/5">
-                <div className="flex justify-between">
-                  <span className="text-green-400">{tool.name}</span>
-                  <span className="text-white/30">{tool.ageHours}h ago</span>
-                </div>
-                {tool.description && (
-                  <div className="text-white/30 truncate">{tool.description}</div>
+          
+          {/* SIGNALS */}
+          {(activeSection === 'signals' || !activeSection) && (
+            <section className="border border-[#0f0]/30 p-4">
+              <h2 className="text-sm mb-3 border-b border-[#0f0]/20 pb-1">
+                ▸ D0T SIGNALS [{Array.isArray(signals?.polymarket) ? signals.polymarket.length : 0} MARKETS]
+              </h2>
+              <div className="text-xs space-y-1">
+                {signals?.d0t?.onchain && (
+                  <div className="flex gap-4">
+                    <span>BASE_TVL: ${((signals.d0t.onchain.base_tvl || 0) / 1e9).toFixed(2)}B</span>
+                    <span>ETH_TVL: ${((signals.d0t.onchain.eth_tvl || 0) / 1e9).toFixed(1)}B</span>
+                  </div>
                 )}
+                {Array.isArray(signals?.polymarket) && signals.polymarket.slice(0, 5).map((m, i: number) => (
+                  <div key={i} className="text-[#0f0]/60 truncate">
+                    ├─ {m.question?.slice(0, 60)}...
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </Section>
-
+            </section>
+          )}
+          
+          {/* AGENTS */}
+          {activeSection === 'agents' && (
+            <section className="border border-[#0f0]/30 p-4">
+              <h2 className="text-sm mb-3 border-b border-[#0f0]/20 pb-1">
+                ▸ SWARM AGENTS [4 ACTIVE]
+              </h2>
+              <pre className="text-xs">{`
+┌────────┬──────────────────────────────────────────┐
+│  b0b   │ Creative Director — Design & Vision     │
+├────────┼──────────────────────────────────────────┤
+│  d0t   │ Signal Hunter — Markets & Data          │
+├────────┼──────────────────────────────────────────┤
+│  c0m   │ Security Shield — Defense & Recon       │
+├────────┼──────────────────────────────────────────┤
+│  r0ss  │ Infrastructure — Deploy & Monitor       │
+└────────┴──────────────────────────────────────────┘
+              `}</pre>
+            </section>
+          )}
+          
+          {/* TOOLS */}
+          {activeSection === 'tools' && (
+            <section className="border border-[#0f0]/30 p-4">
+              <h2 className="text-sm mb-3 border-b border-[#0f0]/20 pb-1">
+                ▸ BRAIN TOOLS [{tools.length} LOADED]
+              </h2>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-1 text-xs max-h-60 overflow-y-auto">
+                {tools.map((tool, i: number) => (
+                  <div key={i} className="text-[#0f0]/60 truncate">
+                    ├─ {tool.name}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+          
+        </div>
+        
+        {/* Footer */}
+        <footer className="mt-8 text-center text-xs text-[#0f0]/30">
+          <pre>{`
+────────────────────────────────────────────────────────────────
+                    w3 ar3 — ars est celare artem
+                         b0b.dev © 2026
+────────────────────────────────────────────────────────────────
+          `}</pre>
+        </footer>
       </div>
-
-      {/* Footer */}
-      <footer className="p-4 border-t border-white/10 text-xs text-white/30 flex justify-between">
-        <span>L0RE Operations Center • Real data, not art</span>
-        <span>{new Date().toISOString()}</span>
-      </footer>
     </main>
   );
 }
