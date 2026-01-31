@@ -47,11 +47,14 @@
  * ═══════════════════════════════════════════════════════════════════════════════
  */
 
-require('dotenv').config();
+const path = require('path');
+// Load from brain/.env which has the trading wallet keys
+require('dotenv').config({ path: path.join(__dirname, '../brain/.env') });
+// Also load root .env for cold wallet
+require('dotenv').config({ path: path.join(__dirname, '../.env') });
 const { ethers } = require('ethers');
 const crypto = require('crypto');
 const fs = require('fs');
-const path = require('path');
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // CONFIGURATION
@@ -130,7 +133,8 @@ class Turb0b00st {
     this.state = this.loadState();
     this.providers = {};
     this.wallet = null;
-    this.mode = CONFIG.MODE;
+    // Load mode from state file if activated, otherwise use env/default
+    this.mode = this.state.activated ? this.state.mode : CONFIG.MODE;
   }
 
   // ─────────────────────────────────────────────────────────────────────────────
