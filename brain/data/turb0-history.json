@@ -1,250 +1,5 @@
 [
   {
-    "timestamp": "2026-01-31T01:56:48.686Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T01:59:22.717Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T02:01:53.344Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T02:04:27.425Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T02:06:55.867Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T02:09:23.818Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T02:11:58.283Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T02:14:25.966Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T02:17:00.258Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T02:19:28.049Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T02:22:02.788Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T02:24:30.674Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T02:26:58.306Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T02:29:31.835Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T02:31:59.812Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T02:34:34.087Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T02:37:01.797Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T02:39:35.897Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T02:42:03.792Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T02:44:31.267Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T02:47:05.308Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T02:49:42.170Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T02:52:22.415Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T02:54:55.068Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T02:57:31.509Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T02:59:59.707Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T03:02:35.948Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T03:05:04.522Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T03:07:39.366Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T03:10:07.656Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T03:11:29.879Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T03:13:31.834Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T03:16:01.124Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T03:18:28.883Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
-    "timestamp": "2026-01-31T03:21:03.073Z",
-    "decision": "BUY",
-    "confidence": 0.644,
-    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
-    "nash": "EQUILIBRIUM"
-  },
-  {
     "timestamp": "2026-01-31T03:23:31.047Z",
     "decision": "BUY",
     "confidence": 0.644,
@@ -694,6 +449,251 @@
   },
   {
     "timestamp": "2026-01-31T06:03:13.413Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T06:05:23.345Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T06:07:48.122Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T06:10:20.670Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T06:12:49.978Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T06:15:23.426Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T06:17:50.898Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T06:20:24.708Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T06:22:51.892Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T06:25:18.821Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T06:29:16.264Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T06:31:49.622Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T06:34:16.969Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T06:36:44.035Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T06:39:17.801Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T06:41:45.106Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T06:44:19.056Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T06:46:46.549Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T06:49:20.334Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T06:51:54.870Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T06:54:28.438Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T06:56:58.492Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T06:59:36.758Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T07:02:05.056Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T07:04:31.848Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T07:07:06.535Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T07:09:33.656Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T07:12:11.138Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T07:14:40.024Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T07:17:14.804Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T07:22:37.566Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T07:25:10.719Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T07:27:39.000Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.l/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T07:28:03.713Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.m/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T07:28:03.719Z",
+    "decision": "BUY",
+    "confidence": 0.644,
+    "l0reCode": "n.3qlb/t.l3/e.m/f.dist",
+    "nash": "EQUILIBRIUM"
+  },
+  {
+    "timestamp": "2026-01-31T07:30:12.318Z",
     "decision": "BUY",
     "confidence": 0.644,
     "l0reCode": "n.3qlb/t.l3/e.l/f.dist",

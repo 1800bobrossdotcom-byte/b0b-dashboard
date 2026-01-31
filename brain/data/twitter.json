@@ -1,11 +1,25 @@
 {
   "crawler": "twitter",
-  "timestamp": "2026-01-31T06:03:42.473Z",
+  "timestamp": "2026-01-31T06:05:48.632Z",
   "data": {
     "searches": [
       {
         "query": "$BASE",
         "tweets": [
+          {
+            "id": "2017478846803587402",
+            "text": "@base Every day is $BASE day",
+            "createdAt": "2026-01-31T06:03:34.000Z",
+            "metrics": {
+              "retweet_count": 0,
+              "reply_count": 0,
+              "like_count": 0,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 0
+            },
+            "authorId": "1703647597280329728"
+          },
           {
             "id": "2017478264944570459",
             "text": "RT @sellmanft: 🪂 Base Airdrop New Badge - All transactions\n\nNew Base badges are live on Guild.\nIf you’re farming $Base airdrops, make sure…",
@@ -86,7 +100,7 @@
               "like_count": 2,
               "quote_count": 0,
               "bookmark_count": 2,
-              "impression_count": 37
+              "impression_count": 43
             },
             "authorId": "1858198810226499584"
           },
@@ -131,94 +145,94 @@
               "impression_count": 0
             },
             "authorId": "1510858873871081473"
-          },
-          {
-            "id": "2017473485564453079",
-            "text": "RT @miadbhuiyan5: Good morning, CT community. \n\n@base $BASE token TGE is expected in Q2 of 2026.\n\n @Bappfun $BAPP token TGE will occur on F…",
-            "createdAt": "2026-01-31T05:42:16.000Z",
-            "metrics": {
-              "retweet_count": 6,
-              "reply_count": 0,
-              "like_count": 0,
-              "quote_count": 0,
-              "bookmark_count": 0,
-              "impression_count": 0
-            },
-            "authorId": "1978771626083676161"
           }
         ],
         "users": [
           {
-            "name": "Art by Stephen",
+            "id": "1703647597280329728",
+            "username": "Zainabid555",
+            "name": "zainabid.base.eth",
+            "verified": false
+          },
+          {
+            "id": "1749343765720870912",
             "username": "art_empir",
-            "verified": false,
-            "id": "1749343765720870912"
+            "name": "Art by Stephen",
+            "verified": false
           },
           {
-            "name": "Daria Pop",
+            "id": "1875253037981106176",
             "username": "hugohavana",
-            "verified": false,
-            "id": "1875253037981106176"
+            "name": "Daria Pop",
+            "verified": false
           },
           {
-            "name": "jeedπ².base.eth | ETHGas ⛽",
+            "id": "1856884050767876100",
             "username": "jeed60541379544",
-            "verified": false,
-            "id": "1856884050767876100"
+            "name": "jeedπ².base.eth | ETHGas ⛽",
+            "verified": false
           },
           {
-            "name": "Hridoy Hasan",
+            "id": "1621522141765337093",
             "username": "TFelken",
-            "verified": false,
-            "id": "1621522141765337093"
+            "name": "Hridoy Hasan",
+            "verified": false
           },
           {
-            "name": "Copoiu Cop",
+            "id": "1903708205537955841",
             "username": "isfan1956",
-            "verified": false,
-            "id": "1903708205537955841"
+            "name": "Copoiu Cop",
+            "verified": false
           },
           {
-            "name": "币胜客🐬",
+            "id": "1858198810226499584",
             "username": "Feng_btc",
-            "verified": false,
-            "id": "1858198810226499584"
+            "name": "币胜客🐬",
+            "verified": false
           },
           {
-            "name": "Rose jani",
+            "id": "1710315012718518272",
             "username": "jani_rose38011",
-            "verified": false,
-            "id": "1710315012718518272"
+            "name": "Rose jani",
+            "verified": false
           },
           {
-            "name": "mehdi",
+            "id": "850660728663134210",
             "username": "basedmehdi",
-            "verified": false,
-            "id": "850660728663134210"
+            "name": "mehdi",
+            "verified": false
           },
           {
-            "name": "Kenneth Threatt",
+            "id": "1510858873871081473",
             "username": "Threatt99t",
-            "verified": false,
-            "id": "1510858873871081473"
-          },
-          {
-            "name": "Crypto Zetarium",
-            "username": "chshiraz911",
-            "verified": false,
-            "id": "1978771626083676161"
+            "name": "Kenneth Threatt",
+            "verified": false
           }
         ],
         "meta": {
-          "newest_id": "2017478264944570459",
-          "oldest_id": "2017473485564453079",
+          "newest_id": "2017478846803587402",
+          "oldest_id": "2017473619501453827",
           "result_count": 10,
-          "next_token": "b26v89c19zqg8o3juebk6l4jzvujq7ioaaudoarrhqr99"
+          "next_token": "b26v89c19zqg8o3juebk6l4jzw9p8j6l8eu49zu9hl9bx"
         }
       },
       {
         "query": "#BuildOnBase",
         "tweets": [
+          {
+            "id": "2017479126383472799",
+            "text": "People still think Base is “early”.\n\nMeanwhile on Base 👇\n• Builders are shipping daily\n• Users are growing fast\n• Real apps are going live\n\nBase isn’t coming.\nIt’s already here. 🔵⚡\n\n#Base #BaseChain #Crypto #Web3 #BuildOnBase @base https://t.co/wgZhdZ7SiC",
+            "createdAt": "2026-01-31T06:04:41.000Z",
+            "metrics": {
+              "retweet_count": 0,
+              "reply_count": 1,
+              "like_count": 0,
+              "quote_count": 0,
+              "bookmark_count": 0,
+              "impression_count": 6
+            },
+            "authorId": "1755188689393926144"
+          },
           {
             "id": "2017475649724944682",
             "text": "Love how interactive the @Ridera_Official Testnet is 🤖\nFrom AI labeling to cycle battles, every action earns real points.\nBuilt on Base Sepolia and fully live ✅\nLet’s finish those remaining tasks!\n#RideraTestnet #Crypto #BuildOnBase",
@@ -243,7 +257,7 @@
               "like_count": 0,
               "quote_count": 0,
               "bookmark_count": 0,
-              "impression_count": 6
+              "impression_count": 7
             },
             "authorId": "2000517349737467905"
           },
@@ -266,7 +280,7 @@
             "text": "RT @BurgersOnBase: You wake up…. The year is 2026.\n\nBase has become the largest layer 2 network and is now home to cutting edge AI agents t…",
             "createdAt": "2026-01-31T05:14:39.000Z",
             "metrics": {
-              "retweet_count": 16,
+              "retweet_count": 15,
               "reply_count": 0,
               "like_count": 0,
               "quote_count": 0,
@@ -341,92 +355,78 @@
               "like_count": 6,
               "quote_count": 0,
               "bookmark_count": 0,
-              "impression_count": 37
+              "impression_count": 38
             },
             "authorId": "2015640705616797696"
-          },
-          {
-            "id": "2017437638987493538",
-            "text": "@MessyVirgoBot Yup, make it a habit. The rewards will come from that habit.\n@MessyVirgoCoin\n\n#MessyGuideEra #DailyRoutine #BuildOnBase #messy_dd",
-            "createdAt": "2026-01-31T03:19:49.000Z",
-            "metrics": {
-              "retweet_count": 0,
-              "reply_count": 0,
-              "like_count": 0,
-              "quote_count": 0,
-              "bookmark_count": 0,
-              "impression_count": 3
-            },
-            "authorId": "1972277792500006912"
           }
         ],
         "users": [
           {
             "verified": false,
-            "username": "Mint_Browser",
+            "id": "1755188689393926144",
+            "name": "ABUHANIF",
+            "username": "hanifgaming123"
+          },
+          {
+            "verified": false,
             "id": "1842577343489171456",
-            "name": "Pak Kades | WOW 🟣 ⚡️ZugChain"
+            "name": "Pak Kades | WOW 🟣 ⚡️ZugChain",
+            "username": "Mint_Browser"
           },
           {
             "verified": false,
-            "username": "Kratos733974",
             "id": "2000517349737467905",
-            "name": "Kratos"
+            "name": "Kratos",
+            "username": "Kratos733974"
           },
           {
             "verified": false,
-            "username": "CryptoColaX",
             "id": "1322168769461047302",
-            "name": "Crypto Cola"
+            "name": "Crypto Cola",
+            "username": "CryptoColaX"
           },
           {
             "verified": false,
-            "username": "BurgersOnBase",
             "id": "1956736744038055937",
-            "name": "Burger Money"
+            "name": "Burger Money",
+            "username": "BurgersOnBase"
           },
           {
             "verified": false,
-            "username": "Ammygreen9",
             "id": "1917353494136180736",
-            "name": "Amanda Green 🍀"
+            "name": "Amanda Green 🍀",
+            "username": "Ammygreen9"
           },
           {
             "verified": false,
-            "username": "yuk82811",
             "id": "1947244616136417280",
-            "name": "𝚉𝚢𝚢."
+            "name": "𝚉𝚢𝚢.",
+            "username": "yuk82811"
           },
           {
             "verified": false,
-            "username": "TribeOnBase",
             "id": "1590331017797242884",
-            "name": "Base Tribe"
+            "name": "Base Tribe",
+            "username": "TribeOnBase"
           },
           {
             "verified": false,
-            "username": "mahbub12932",
             "id": "1753017284959039488",
-            "name": "Firoz"
+            "name": "Firoz",
+            "username": "mahbub12932"
           },
           {
             "verified": false,
-            "username": "firoz9990",
             "id": "2015640705616797696",
-            "name": "FIROZ"
-          },
-          {
-            "verified": false,
-            "username": "Mauro871P",
-            "id": "1972277792500006912",
-            "name": "Mauro C"
+            "name": "FIROZ",
+            "username": "firoz9990"
           }
         ],
         "meta": {
-          "newest_id": "2017475649724944682",
-          "oldest_id": "2017437638987493538",
+          "newest_id": "2017479126383472799",
+          "oldest_id": "2017444395415703951",
           "result_count": 10,
-          "next_token": "b26v89c19zqg8o3juebk6l3d099fiwcno86btp73vpg1p"
+          "next_token": "b26v89c19zqg8o3juebk6l3no44tpk3n8hc3a1h74mb25"
         }
       },
       {
@@ -575,46 +575,46 @@
         ],
         "users": [
           {
-            "id": "1398948693445955585",
             "name": "Shredder 🫱🏻‍🫲🏼",
             "verified": false,
-            "username": "shredder__0"
+            "username": "shredder__0",
+            "id": "1398948693445955585"
           },
           {
-            "id": "79519314",
             "name": "v_campos🍊💊",
             "verified": false,
-            "username": "___vannessac"
+            "username": "___vannessac",
+            "id": "79519314"
           },
           {
-            "id": "1889875557799829504",
             "name": "Based Town 🍊💊",
             "verified": false,
-            "username": "TheBasedTown"
+            "username": "TheBasedTown",
+            "id": "1889875557799829504"
           },
           {
-            "id": "2250945512",
             "name": "penzlik.base.eth",
             "verified": false,
-            "username": "penzlyk_s"
+            "username": "penzlyk_s",
+            "id": "2250945512"
           },
           {
-            "id": "1968341986005381120",
             "name": "Man of Grace",
             "verified": false,
-            "username": "manofGrace72810"
+            "username": "manofGrace72810",
+            "id": "1968341986005381120"
           },
           {
-            "id": "1901622400527351808",
             "name": "Youth 🧘‍♀️",
             "verified": false,
-            "username": "Web3__Youth"
+            "username": "Web3__Youth",
+            "id": "1901622400527351808"
           },
           {
-            "id": "1980282118308872192",
             "name": "Korchi🍊💊",
             "verified": false,
-            "username": "Korchione"
+            "username": "Korchione",
+            "id": "1980282118308872192"
           }
         ],
         "meta": {
@@ -632,7 +632,7 @@
           "username": "base",
           "name": "Base",
           "verified": true,
-          "followers": 1119781
+          "followers": 1119782
         },
         "tweets": [
           {
@@ -642,10 +642,10 @@
             "metrics": {
               "retweet_count": 118,
               "reply_count": 222,
-              "like_count": 990,
+              "like_count": 994,
               "quote_count": 30,
               "bookmark_count": 25,
-              "impression_count": 45169
+              "impression_count": 45428
             }
           },
           {
@@ -658,7 +658,7 @@
               "like_count": 343,
               "quote_count": 11,
               "bookmark_count": 29,
-              "impression_count": 32719
+              "impression_count": 32766
             }
           },
           {
@@ -668,10 +668,10 @@
             "metrics": {
               "retweet_count": 66,
               "reply_count": 104,
-              "like_count": 656,
+              "like_count": 657,
               "quote_count": 14,
               "bookmark_count": 51,
-              "impression_count": 81538
+              "impression_count": 81636
             }
           },
           {
@@ -684,7 +684,7 @@
               "like_count": 75,
               "quote_count": 0,
               "bookmark_count": 1,
-              "impression_count": 4485
+              "impression_count": 4492
             }
           },
           {
@@ -697,7 +697,7 @@
               "like_count": 759,
               "quote_count": 29,
               "bookmark_count": 106,
-              "impression_count": 80449
+              "impression_count": 80548
             }
           }
         ]
@@ -708,14 +708,14 @@
           "username": "coinaboratory",
           "name": "Coinaboratory",
           "verified": true,
-          "followers": 12888,
+          "followers": 87845,
           "mock": true
         },
         "tweets": [
           {
-            "id": "mock-1769839421246-0",
+            "id": "mock-1769839547401-0",
             "text": "Just deployed on Base! The future is onchain 🔵 coinaboratory",
-            "createdAt": "2026-01-31T06:03:41.246Z",
+            "createdAt": "2026-01-31T06:05:47.401Z",
             "metrics": {
               "like_count": 142,
               "retweet_count": 28
@@ -723,9 +723,9 @@
             "mock": true
           },
           {
-            "id": "mock-1769839421246-1",
+            "id": "mock-1769839547401-1",
             "text": "Building with Claude AI and the MCP protocol. Game changer for agents.",
-            "createdAt": "2026-01-31T05:03:41.246Z",
+            "createdAt": "2026-01-31T05:05:47.401Z",
             "metrics": {
               "like_count": 89,
               "retweet_count": 17
@@ -733,9 +733,9 @@
             "mock": true
           },
           {
-            "id": "mock-1769839421246-2",
+            "id": "mock-1769839547401-2",
             "text": "Nash equilibrium strategies in DeFi are fascinating. The math checks out.",
-            "createdAt": "2026-01-31T04:03:41.246Z",
+            "createdAt": "2026-01-31T04:05:47.401Z",
             "metrics": {
               "like_count": 56,
               "retweet_count": 11
@@ -743,9 +743,9 @@
             "mock": true
           },
           {
-            "id": "mock-1769839421246-3",
+            "id": "mock-1769839547401-3",
             "text": "Another day, another smart contract deployed. #BuildOnBase",
-            "createdAt": "2026-01-31T03:03:41.246Z",
+            "createdAt": "2026-01-31T03:05:47.401Z",
             "metrics": {
               "like_count": 234,
               "retweet_count": 46
@@ -753,9 +753,9 @@
             "mock": true
           },
           {
-            "id": "mock-1769839421246-4",
+            "id": "mock-1769839547401-4",
             "text": "AI agents that can actually trade? We're living in the future.",
-            "createdAt": "2026-01-31T02:03:41.246Z",
+            "createdAt": "2026-01-31T02:05:47.401Z",
             "metrics": {
               "like_count": 167,
               "retweet_count": 33
@@ -770,7 +770,7 @@
           "username": "AnthropicAI",
           "name": "Anthropic",
           "verified": true,
-          "followers": 768969
+          "followers": 768974
         },
         "tweets": [
           {
@@ -780,10 +780,10 @@
             "metrics": {
               "retweet_count": 39,
               "reply_count": 10,
-              "like_count": 642,
+              "like_count": 643,
               "quote_count": 6,
               "bookmark_count": 123,
-              "impression_count": 42077
+              "impression_count": 42126
             }
           },
           {
@@ -791,12 +791,12 @@
             "text": "On December 8, the Perseverance rover safely trundled across the surface of Mars.\n\nThis was the first AI-planned drive on another planet. And it was planned by Claude. https://t.co/kVbdKWibuP",
             "createdAt": "2026-01-30T19:05:56.000Z",
             "metrics": {
-              "retweet_count": 510,
-              "reply_count": 174,
-              "like_count": 4869,
+              "retweet_count": 512,
+              "reply_count": 175,
+              "like_count": 4874,
               "quote_count": 253,
-              "bookmark_count": 780,
-              "impression_count": 744211
+              "bookmark_count": 782,
+              "impression_count": 745108
             }
           },
           {
@@ -809,7 +809,7 @@
               "like_count": 316,
               "quote_count": 5,
               "bookmark_count": 187,
-              "impression_count": 53017
+              "impression_count": 53052
             }
           },
           {
@@ -822,7 +822,7 @@
               "like_count": 247,
               "quote_count": 0,
               "bookmark_count": 15,
-              "impression_count": 53875
+              "impression_count": 53904
             }
           },
           {
@@ -835,13 +835,13 @@
               "like_count": 310,
               "quote_count": 5,
               "bookmark_count": 21,
-              "impression_count": 32946
+              "impression_count": 32965
             }
           }
         ]
       }
     ],
-    "timestamp": "2026-01-31T06:03:35.174Z",
+    "timestamp": "2026-01-31T06:05:41.419Z",
     "summary": {
       "totalSearches": 3,
       "totalAccounts": 3,

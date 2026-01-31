@@ -1,8 +1,8 @@
 {
   "crawler": "r0ss-research",
-  "timestamp": "2026-01-31T05:49:45.122Z",
+  "timestamp": "2026-01-31T06:50:29.501Z",
   "data": {
-    "timestamp": "2026-01-31T05:49:44.662Z",
+    "timestamp": "2026-01-31T06:50:28.950Z",
     "agent": "r0ss",
     "role": "Research & Knowledge",
     "papers": {
@@ -274,7 +274,7 @@
         "quant-ph",
         "cs.CC"
       ],
-      "fetchedAt": "2026-01-31T05:49:45.120Z"
+      "fetchedAt": "2026-01-31T06:50:29.499Z"
     },
     "libraryStats": {
       "indexedCount": 27,

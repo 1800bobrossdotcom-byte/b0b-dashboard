@@ -275,15 +275,24 @@ def root():
     """Root endpoint - API info"""
     return jsonify({
         'name': 'B0B API',
-        'version': '2.1.0',
-        'description': 'An autonomous creative intelligence API',
+        'version': '3.0.0',
+        'description': 'Swarm intelligence gateway - connects to the brain',
         'security': 'MILSPEC 🔒',
         'endpoints': {
             '/': 'This info',
             '/api/health': 'Health check',
             '/api/chat': 'Chat with Claude (POST, rate limited)',
             '/api/v1/status': 'Platform status',
+            '/api/swarm/pulse': '🧠 Full swarm status (agents, signals, treasury)',
+            '/api/swarm/agents': '🤖 Agent states (d0t, b0b, r0ss, c0m)',
+            '/api/swarm/treasury': '💰 Treasury balance',
+            '/api/swarm/signals': '📡 D0T market signals',
+            '/api/swarm/chat': '💬 Chat with the swarm',
+            '/api/swarm/tasks': '📋 Pending tasks',
+            '/api/swarm/turb0': '⚡ TURB0 trading dashboard',
+            '/api/crawlers': '🔄 Crawler status',
         },
+        'brain_url': os.getenv('BRAIN_URL', 'https://brain.b0b.dev'),
         'mantra': "We're Bob Rossing this. 🎨"
     }), 200
 
@@ -443,6 +452,136 @@ def platform_status():
         'active_blocks': len(blocked_ips),
         'timestamp': datetime.utcnow().isoformat(),
     }), 200
+
+# =============================================================================
+# BRAIN PROXY ENDPOINTS — Connect to the real swarm
+# =============================================================================
+
+BRAIN_URL = os.getenv('BRAIN_URL', 'https://brain.b0b.dev')
+
+@app.route('/api/swarm/pulse', methods=['GET'])
+@limiter.limit("30 per minute")
+def swarm_pulse():
+    """Proxy to brain /pulse - comprehensive swarm status"""
+    try:
+        import requests
+        response = requests.get(f'{BRAIN_URL}/pulse', timeout=10)
+        return jsonify(response.json()), response.status_code
+    except Exception as e:
+        logger.error(f"Brain pulse error: {str(e)}")
+        return jsonify({'error': 'Brain unreachable', 'details': str(e)}), 503
+
+@app.route('/api/swarm/agents', methods=['GET'])
+@limiter.limit("30 per minute")
+def swarm_agents():
+    """Get swarm agent states"""
+    try:
+        import requests
+        response = requests.get(f'{BRAIN_URL}/pulse', timeout=10)
+        data = response.json()
+        return jsonify({
+            'agents': data.get('agentStates', {}),
+            'swarmActivity': data.get('swarmActivity', {}),
+            'timestamp': datetime.utcnow().isoformat()
+        }), 200
+    except Exception as e:
+        logger.error(f"Agents fetch error: {str(e)}")
+        return jsonify({'error': 'Brain unreachable'}), 503
+
+@app.route('/api/swarm/treasury', methods=['GET'])
+@limiter.limit("30 per minute")
+def swarm_treasury():
+    """Get treasury balance from brain"""
+    try:
+        import requests
+        response = requests.get(f'{BRAIN_URL}/pulse', timeout=10)
+        data = response.json()
+        return jsonify({
+            'treasury': data.get('treasury', {}),
+            'chain': 'BASE',
+            'timestamp': datetime.utcnow().isoformat()
+        }), 200
+    except Exception as e:
+        logger.error(f"Treasury fetch error: {str(e)}")
+        return jsonify({'error': 'Brain unreachable'}), 503
+
+@app.route('/api/swarm/signals', methods=['GET'])
+@limiter.limit("30 per minute")
+def swarm_signals():
+    """Get D0T signals and market data"""
+    try:
+        import requests
+        response = requests.get(f'{BRAIN_URL}/pulse', timeout=10)
+        data = response.json()
+        return jsonify({
+            'd0tSignals': data.get('d0tSignals', {}),
+            'turb0Decision': data.get('turb0Decision', {}),
+            'l0reState': data.get('l0reState', {}),
+            'timestamp': datetime.utcnow().isoformat()
+        }), 200
+    except Exception as e:
+        logger.error(f"Signals fetch error: {str(e)}")
+        return jsonify({'error': 'Brain unreachable'}), 503
+
+@app.route('/api/swarm/chat', methods=['POST'])
+@limiter.limit(SecurityConfig.RATE_LIMIT_CHAT)
+def swarm_chat():
+    """Send a message to the swarm brain"""
+    try:
+        import requests
+        data = request.get_json()
+        
+        if not data or 'message' not in data:
+            return jsonify({'error': 'Message required'}), 400
+        
+        message = sanitize_input(data['message'], max_length=SecurityConfig.MAX_MESSAGE_LENGTH)
+        agent = data.get('agent', 'swarm')
+        
+        response = requests.post(
+            f'{BRAIN_URL}/chat',
+            json={'message': message, 'agent': agent},
+            timeout=30
+        )
+        return jsonify(response.json()), response.status_code
+    except Exception as e:
+        logger.error(f"Swarm chat error: {str(e)}")
+        return jsonify({'error': 'Brain unreachable'}), 503
+
+@app.route('/api/swarm/tasks', methods=['GET'])
+@limiter.limit("30 per minute")
+def swarm_tasks():
+    """Get pending swarm tasks"""
+    try:
+        import requests
+        response = requests.get(f'{BRAIN_URL}/tasks', timeout=10)
+        return jsonify(response.json()), response.status_code
+    except Exception as e:
+        logger.error(f"Tasks fetch error: {str(e)}")
+        return jsonify({'error': 'Brain unreachable'}), 503
+
+@app.route('/api/swarm/turb0', methods=['GET'])
+@limiter.limit("30 per minute") 
+def swarm_turb0():
+    """Get TURB0 trading dashboard"""
+    try:
+        import requests
+        response = requests.get(f'{BRAIN_URL}/turb0/dashboard', timeout=10)
+        return jsonify(response.json()), response.status_code
+    except Exception as e:
+        logger.error(f"TURB0 fetch error: {str(e)}")
+        return jsonify({'error': 'Brain unreachable'}), 503
+
+@app.route('/api/crawlers', methods=['GET'])
+@limiter.limit("30 per minute")
+def get_crawlers():
+    """Get crawler status"""
+    try:
+        import requests
+        response = requests.get(f'{BRAIN_URL}/crawlers', timeout=10)
+        return jsonify(response.json()), response.status_code
+    except Exception as e:
+        logger.error(f"Crawlers fetch error: {str(e)}")
+        return jsonify({'error': 'Brain unreachable'}), 503
 
 # =============================================================================
 # SECURITY ADMIN ENDPOINTS (Internal use only)

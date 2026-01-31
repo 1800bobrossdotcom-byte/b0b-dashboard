@@ -178,5 +178,119 @@
     "level": "INFO",
     "message": "🚀 Running TURB0B00ST Preflight Checks...",
     "crawlerView": "836f:74b4ce32:ml1t48a6"
+  },
+  {
+    "timestamp": "2026-01-31T07:02:08.032Z",
+    "level": "INFO",
+    "message": "🚀 Running TURB0B00ST Preflight Checks...",
+    "crawlerView": "836f:74b4ce32:ml1ys78h"
+  },
+  {
+    "timestamp": "2026-01-31T07:04:28.652Z",
+    "level": "TRADE",
+    "message": "💹 Executing token trade: SELL $0 of 0x22aF33FE49fD1Fa80c7149773dDe5890D3c76F3b",
+    "crawlerView": "836f:203c87da:ml1yv7qk"
+  },
+  {
+    "timestamp": "2026-01-31T07:04:28.831Z",
+    "level": "ERROR",
+    "message": "❌ Token trade failed: missing revert data (action=\"call\", data=null, reason=null, transaction={ \"data\": \"0x70a08231000000000000000000000000ca4ca0c7b26e51805c20c95df02ea86fea938d78\", \"from\": \"0xCA4Ca0c7b26e51805c20C95DF02Ea86feA938D78\", \"to\": \"0x22aF33FE49fD1Fa80c7149773dDe5890D3c76F3b\" }, invocation=null, revert=null, code=CALL_EXCEPTION, version=6.16.0)",
+    "crawlerView": "836f:6a48ddb8:ml1yv7vj"
+  },
+  {
+    "timestamp": "2026-01-31T07:06:22.298Z",
+    "level": "TRADE",
+    "message": "💹 Executing token trade: SELL $0 of 0x22aF33FE49fD1Fa80c7149773dDe5890D3c76F3b",
+    "crawlerView": "836f:203c87da:ml1yxnfe"
+  },
+  {
+    "timestamp": "2026-01-31T07:06:22.495Z",
+    "level": "INFO",
+    "message": "📊 Token: BNKR, Balance: 184503.578687792368890283",
+    "crawlerView": "836f:e889a9df:ml1yxnkv"
+  },
+  {
+    "timestamp": "2026-01-31T07:06:22.590Z",
+    "level": "WARN",
+    "message": "⚠️ Direct path failed, trying with intermediate...",
+    "crawlerView": "836f:0ab86ff2:ml1yxnni"
+  },
+  {
+    "timestamp": "2026-01-31T07:06:22.682Z",
+    "level": "ERROR",
+    "message": "❌ Token trade failed: execution reverted (no data present; likely require(false) occurred (action=\"call\", data=\"0x\", reason=\"require(false)\", transaction={ \"data\": \"0xd06ca61f000000000000000000000000000000000000000000002711f583cab1147cb1ab0000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000000300000000000000000000000022af33fe49fd1fa80c7149773dde5890d3c76f3b000000000000000000000000833589fcd6edb6e08f4c7c32d4f71b54bda029130000000000000000000000004200000000000000000000000000000000000006\", \"to\": \"0x4752ba5DBc23f44D87826276BF6Fd6b1C372aD24\" }, invocation=null, revert=null, code=CALL_EXCEPTION, version=6.16.0)",
+    "crawlerView": "836f:92c8a7fe:ml1yxnq2"
+  },
+  {
+    "timestamp": "2026-01-31T07:08:07.361Z",
+    "level": "TRADE",
+    "message": "💹 Executing token trade: SELL $0 of 0x22aF33FE49fD1Fa80c7149773dDe5890D3c76F3b",
+    "crawlerView": "836f:203c87da:ml1yzwht"
+  },
+  {
+    "timestamp": "2026-01-31T07:08:07.592Z",
+    "level": "INFO",
+    "message": "📊 Token: BNKR, Balance: 184503.578687792368890283",
+    "crawlerView": "836f:e889a9df:ml1yzwo8"
+  },
+  {
+    "timestamp": "2026-01-31T07:08:07.687Z",
+    "level": "INFO",
+    "message": "📊 Direct route quote: 0.029927370560652637 ETH",
+    "crawlerView": "836f:d5b1595f:ml1yzwqv"
+  },
+  {
+    "timestamp": "2026-01-31T07:08:07.688Z",
+    "level": "INFO",
+    "message": "💰 Expected: 0.029927370560652637 ETH (min: 0.029029549443833057 with 3% slippage)",
+    "crawlerView": "836f:58293d6b:ml1yzwqw"
+  },
+  {
+    "timestamp": "2026-01-31T07:08:07.801Z",
+    "level": "TRADE",
+    "message": "🔄 Swapping 184503.578687792368890283 BNKR → ETH via Aerodrome...",
+    "crawlerView": "836f:2f2d00cc:ml1yzwu1"
+  },
+  {
+    "timestamp": "2026-01-31T07:08:08.252Z",
+    "level": "INFO",
+    "message": "📤 TX sent: 0xcecd1c936d5ef2dae01c55f841a38aa5702c866967f4a49fa694f337ea7df922",
+    "crawlerView": "836f:14911b16:ml1yzx6k"
+  },
+  {
+    "timestamp": "2026-01-31T07:08:08.347Z",
+    "level": "SUCCESS",
+    "message": "✅ Swap complete! Received ~0.029927370560652637 ETH",
+    "crawlerView": "836f:bea25f94:ml1yzx97"
+  },
+  {
+    "timestamp": "2026-01-31T07:08:15.131Z",
+    "level": "INFO",
+    "message": "🚀 Running TURB0B00ST Preflight Checks...",
+    "crawlerView": "836f:74b4ce32:ml1z02hn"
+  },
+  {
+    "timestamp": "2026-01-31T07:09:57.307Z",
+    "level": "INFO",
+    "message": "🔓 Attempting to activate mode: LIVE",
+    "crawlerView": "836f:879df342:ml1z29bw"
+  },
+  {
+    "timestamp": "2026-01-31T07:09:57.310Z",
+    "level": "INFO",
+    "message": "🚀 Running TURB0B00ST Preflight Checks...",
+    "crawlerView": "836f:74b4ce32:ml1z29by"
+  },
+  {
+    "timestamp": "2026-01-31T07:09:57.895Z",
+    "level": "WARN",
+    "message": "⚠️  LIVE mode activation requires TURB0B00ST_CONFIRM=LIVE environment variable",
+    "crawlerView": "836f:c9623eb3:ml1z29s7"
+  },
+  {
+    "timestamp": "2026-01-31T07:27:43.917Z",
+    "level": "INFO",
+    "message": "🚀 Running TURB0B00ST Preflight Checks...",
+    "crawlerView": "836f:74b4ce32:ml1zp4bx"
   }
 ]

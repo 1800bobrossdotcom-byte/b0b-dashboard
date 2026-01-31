@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-31T05:53:38.560Z",
+  "timestamp": "2026-01-31T06:05:40.220Z",
   "systems": {
     "apiKeys": {
       "keys": {
@@ -45,11 +45,11 @@
     "websites": {
       "b0b.dev": {
         "up": true,
-        "latency": 253
+        "latency": 261
       },
       "d0t.b0b.dev": {
         "up": true,
-        "latency": 316
+        "latency": 403
       },
       "0type.b0b.dev": {
         "up": false

@@ -498,15 +498,148 @@ class Turb0b00st {
   async executeTokenTrade(signal) {
     this.log(`💹 Executing token trade: ${signal.side} $${signal.sizeUSD} of ${signal.token}`, 'TRADE');
     
-    // TODO: Implement actual DEX swap
-    // This would use Uniswap/Aerodrome router
-    
-    return {
-      success: false,
-      message: 'Token swap execution not yet implemented',
-      signal,
-      implementation: 'PENDING',
-    };
+    try {
+      const provider = this.providers.base;
+      const connectedWallet = this.wallet.connect(provider);
+      
+      // Aerodrome Router V2 on Base (main DEX for BNKR and many Base tokens)
+      const AERODROME_ROUTER = '0xcF77a3Ba9A5CA399B7c97c74d54e5b1Beb874E43';
+      const WETH = '0x4200000000000000000000000000000000000006';
+      
+      // Aerodrome uses (tokenIn, tokenOut, stable, factory) routes
+      const routerABI = [
+        'function swapExactTokensForETH(uint amountIn, uint amountOutMin, (address from, address to, bool stable, address factory)[] routes, address to, uint deadline) returns (uint[] amounts)',
+        'function getAmountsOut(uint amountIn, (address from, address to, bool stable, address factory)[] routes) view returns (uint[] amounts)',
+      ];
+      
+      const erc20ABI = [
+        'function approve(address spender, uint256 amount) returns (bool)',
+        'function allowance(address owner, address spender) view returns (uint256)',
+        'function balanceOf(address owner) view returns (uint256)',
+        'function decimals() view returns (uint8)',
+        'function symbol() view returns (string)',
+      ];
+      
+      const router = new ethers.Contract(AERODROME_ROUTER, routerABI, connectedWallet);
+      const tokenContract = new ethers.Contract(signal.token, erc20ABI, connectedWallet);
+      
+      // Get token info
+      const [decimals, symbol, balance] = await Promise.all([
+        tokenContract.decimals(),
+        tokenContract.symbol(),
+        tokenContract.balanceOf(this.wallet.address),
+      ]);
+      
+      this.log(`📊 Token: ${symbol}, Balance: ${ethers.formatUnits(balance, decimals)}`, 'INFO');
+      
+      if (signal.side.toUpperCase() === 'SELL') {
+        // SELL token for ETH
+        const amountIn = signal.amountTokens 
+          ? ethers.parseUnits(signal.amountTokens.toString(), decimals)
+          : balance; // Sell all if no amount specified
+        
+        if (amountIn > balance) {
+          return { success: false, error: `Insufficient balance: have ${ethers.formatUnits(balance, decimals)}, need ${ethers.formatUnits(amountIn, decimals)}` };
+        }
+        
+        // Aerodrome route struct: { from, to, stable, factory }
+        // factory address for Aerodrome V2 on Base
+        const AERODROME_FACTORY = '0x420DD381b31aEf6683db6B902084cB0FFECe40Da';
+        
+        // Route: Token -> WETH (volatile pool)
+        const routes = [{
+          from: signal.token,
+          to: WETH,
+          stable: false, // volatile pool
+          factory: AERODROME_FACTORY,
+        }];
+        
+        // Get quote
+        let amountsOut;
+        try {
+          amountsOut = await router.getAmountsOut(amountIn, routes);
+          this.log(`📊 Direct route quote: ${ethers.formatEther(amountsOut[amountsOut.length - 1])} ETH`, 'INFO');
+        } catch (e) {
+          this.log(`⚠️ Direct route failed: ${e.message.slice(0, 100)}`, 'WARN');
+          // Try through USDC
+          const USDC = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913';
+          routes.length = 0;
+          routes.push(
+            { from: signal.token, to: USDC, stable: false, factory: AERODROME_FACTORY },
+            { from: USDC, to: WETH, stable: false, factory: AERODROME_FACTORY }
+          );
+          amountsOut = await router.getAmountsOut(amountIn, routes);
+          this.log(`📊 Multi-hop route quote: ${ethers.formatEther(amountsOut[amountsOut.length - 1])} ETH`, 'INFO');
+        }
+        
+        const expectedOut = amountsOut[amountsOut.length - 1];
+        const minOut = expectedOut * BigInt(100 - CONFIG.SAFETY.MAX_SLIPPAGE_PERCENT) / BigInt(100);
+        
+        this.log(`💰 Expected: ${ethers.formatEther(expectedOut)} ETH (min: ${ethers.formatEther(minOut)} with ${CONFIG.SAFETY.MAX_SLIPPAGE_PERCENT}% slippage)`, 'INFO');
+        
+        // Check and approve
+        const allowance = await tokenContract.allowance(this.wallet.address, AERODROME_ROUTER);
+        if (allowance < amountIn) {
+          this.log(`🔓 Approving ${symbol} for Aerodrome router...`, 'INFO');
+          const approveTx = await tokenContract.approve(AERODROME_ROUTER, ethers.MaxUint256);
+          await approveTx.wait();
+          this.log(`✅ Approved`, 'SUCCESS');
+        }
+        
+        // Execute swap
+        const deadline = Math.floor(Date.now() / 1000) + 300; // 5 minutes
+        this.log(`🔄 Swapping ${ethers.formatUnits(amountIn, decimals)} ${symbol} → ETH via Aerodrome...`, 'TRADE');
+        
+        const tx = await router.swapExactTokensForETH(
+          amountIn,
+          minOut,
+          routes,
+          this.wallet.address,
+          deadline,
+          { gasLimit: 500000 }
+        );
+        
+        this.log(`📤 TX sent: ${tx.hash}`, 'INFO');
+        const receipt = await tx.wait();
+        
+        // Calculate actual output from logs
+        const actualOut = ethers.formatEther(expectedOut);
+        
+        // Update state
+        this.state.dailyStats.trades++;
+        this.state.dailyStats.volume += parseFloat(actualOut) * 3000; // Approx USD
+        this.state.lastTradeTime = Date.now();
+        this.state.tradingHistory.push({
+          timestamp: new Date().toISOString(),
+          type: 'SELL',
+          token: symbol,
+          tokenAddress: signal.token,
+          amountIn: ethers.formatUnits(amountIn, decimals),
+          amountOut: actualOut,
+          txHash: receipt.hash,
+        });
+        this.saveState();
+        
+        this.log(`✅ Swap complete! Received ~${actualOut} ETH`, 'SUCCESS');
+        
+        return {
+          success: true,
+          txHash: receipt.hash,
+          explorer: `https://basescan.org/tx/${receipt.hash}`,
+          amountIn: ethers.formatUnits(amountIn, decimals),
+          amountOut: actualOut,
+          token: symbol,
+        };
+        
+      } else {
+        // BUY token with ETH
+        return { success: false, error: 'BUY not implemented yet - use SELL' };
+      }
+      
+    } catch (e) {
+      this.log(`❌ Token trade failed: ${e.message}`, 'ERROR');
+      return { success: false, error: e.message };
+    }
   }
 
   simulateTrade(signal) {
@@ -858,6 +991,79 @@ async function main() {
       }
       break;
 
+    case 'sell':
+      // Sell a token: node turb0b00st.js sell <token_address> [amount]
+      // If no amount, sells entire balance
+      const tokenAddress = args[0];
+      const sellAmount = args[1]; // Optional - if not provided, sells all
+      
+      if (!tokenAddress) {
+        console.log('\n❌ Usage: node turb0b00st.js sell <token_address> [amount]\n');
+        console.log('  Common tokens on Base:');
+        console.log('    BNKR: 0x22aF33FE49fD1Fa80c7149773dDe5890D3c76F3b');
+        console.log('    USDC: 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913');
+        console.log('\n  Example: node turb0b00st.js sell 0x22aF33FE49fD1Fa80c7149773dDe5890D3c76F3b');
+        console.log('  (Sells entire BNKR balance for ETH)\n');
+        break;
+      }
+      
+      // Initialize wallet
+      const initRes = await turbo.initializeWallet();
+      if (!initRes.success) {
+        console.log(`\n❌ Wallet init failed: ${initRes.error}\n`);
+        break;
+      }
+      
+      console.log('\n  🔄 EXECUTING TOKEN SELL');
+      console.log('  ─────────────────────────────────────────────────────────────────────────────');
+      
+      const sellSignal = {
+        type: 'TOKEN',
+        side: 'SELL',
+        token: tokenAddress,
+        amountTokens: sellAmount || null, // null = sell all
+        sizeUSD: 0, // Will be calculated
+      };
+      
+      const sellResult = await turbo.executeTokenTrade(sellSignal);
+      
+      if (sellResult.success) {
+        console.log(`\n  ✅ SOLD ${sellResult.amountIn} ${sellResult.token}`);
+        console.log(`  💰 Received: ~${sellResult.amountOut} ETH`);
+        console.log(`  📜 TX: ${sellResult.explorer}\n`);
+      } else {
+        console.log(`\n  ❌ Sell failed: ${sellResult.error}\n`);
+      }
+      break;
+      
+    case 'balance':
+      // Check token balance: node turb0b00st.js balance <token_address>
+      const balanceToken = args[0];
+      await turbo.initializeWallet();
+      
+      const erc20ABI = [
+        'function balanceOf(address owner) view returns (uint256)',
+        'function decimals() view returns (uint8)',
+        'function symbol() view returns (string)',
+      ];
+      
+      const provider = turbo.providers.base;
+      const tokenContract = new ethers.Contract(balanceToken || '0x22aF33FE49fD1Fa80c7149773dDe5890D3c76F3b', erc20ABI, provider);
+      
+      try {
+        const [decimals, symbol, balance] = await Promise.all([
+          tokenContract.decimals(),
+          tokenContract.symbol(),
+          tokenContract.balanceOf(turbo.wallet.address),
+        ]);
+        const formatted = ethers.formatUnits(balance, decimals);
+        console.log(`\n  💰 ${symbol} Balance: ${formatted}`);
+        console.log(`     Wallet: ${turbo.wallet.address}\n`);
+      } catch (e) {
+        console.log(`\n❌ Error: ${e.message}\n`);
+      }
+      break;
+
     default:
       console.log(`
   TURB0B00ST - Live Wallet Activation System
@@ -869,6 +1075,10 @@ async function main() {
     execute <json>  - Execute a trade signal
     emergency [msg] - Emergency stop all trading
     clear-emergency - Clear emergency stop
+    
+  Token Trading:
+    sell <token> [amt] - Sell token for ETH (sells all if no amount)
+    balance [token]    - Check token balance (default: BNKR)
     
   Cold Wallet:
     cold-status    - Check cold wallet & profit status
