@@ -54,9 +54,16 @@ class FreshnessMonitor {
   async init() {
     try {
       const data = await fs.readFile(this.statePath, 'utf-8');
-      this.state = JSON.parse(data);
+      const loaded = JSON.parse(data);
+      // Merge with defaults to ensure all properties exist
+      this.state = {
+        lastSweep: loaded.lastSweep || null,
+        items: loaded.items || {},
+        alerts: loaded.alerts || [],
+        history: loaded.history || [],
+      };
     } catch {
-      // Fresh start
+      // Fresh start - state already has defaults from constructor
     }
     console.log('[FRESHNESS] Monitor initialized');
     return this;

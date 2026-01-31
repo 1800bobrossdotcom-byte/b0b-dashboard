@@ -19,6 +19,7 @@
 
 import { useEffect, useState, useRef, useCallback } from 'react';
 import Link from 'next/link';
+import { LiveSwarmChat } from '@/components/LiveSwarmChat';
 
 const BRAIN_URL = 'https://b0b-brain-production.up.railway.app';
 
@@ -508,10 +509,6 @@ export default function B0bHQ() {
   const [wallet, setWallet] = useState('0.0000');
   const [loading, setLoading] = useState(true);
   const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
-  const [chatInput, setChatInput] = useState('');
-  const [chatMessages, setChatMessages] = useState<any[]>([]);
-  const [chatLoading, setChatLoading] = useState(false);
-  const chatEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -552,58 +549,6 @@ export default function B0bHQ() {
     const interval = setInterval(load, 15000);
     return () => clearInterval(interval);
   }, [mounted]);
-
-  // Chat handler - NOW USES L0RE SWARM CHAT
-  const sendChat = async () => {
-    if (!chatInput.trim() || chatLoading) return;
-    
-    const userMsg = chatInput;
-    setChatInput('');
-    setChatMessages(prev => [...prev, { role: 'user', content: userMsg }]);
-    setChatLoading(true);
-    
-    try {
-      // Use L0RE Swarm Chat - all 4 agents respond!
-      const res = await fetch(`${BRAIN_URL}/l0re/swarm/chat`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          query: userMsg,
-          agents: ['b0b', 'd0t', 'c0m', 'r0ss']
-        })
-      });
-      const data = await res.json();
-      
-      // Add each agent's response as a separate message
-      if (data.swarm && data.swarm.length > 0) {
-        data.swarm.forEach((agentResponse: any) => {
-          setChatMessages(prev => [...prev, { 
-            role: 'agent',
-            agent: agentResponse.agent,
-            emoji: agentResponse.emoji,
-            color: agentResponse.color,
-            content: agentResponse.response
-          }]);
-        });
-      } else {
-        setChatMessages(prev => [...prev, { 
-          role: 'assistant', 
-          content: data.response || 'Swarm is sleeping...'
-        }]);
-      }
-    } catch (e) {
-      setChatMessages(prev => [...prev, { 
-        role: 'assistant', 
-        content: '⚠️ Swarm connection error'
-      }]);
-    } finally {
-      setChatLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [chatMessages]);
 
   if (!mounted) {
     return (
@@ -715,12 +660,7 @@ export default function B0bHQ() {
                 <HotkeysPanel onInvoke={async (key) => {
                   const res = await fetch(`${BRAIN_URL}/l0re/hotkey/${key}`);
                   const data = await res.json();
-                  if (data.response) {
-                    setChatMessages(prev => [...prev, { 
-                      role: 'assistant', 
-                      content: `🔮 [${key}] ${data.response}`
-                    }]);
-                  }
+                  console.log(`[HOTKEY] ${key}:`, data.response);
                 }} />
               </div>
             </section>
@@ -775,81 +715,14 @@ export default function B0bHQ() {
             </section>
           </div>
 
-          {/* RIGHT: Chat Interface */}
-          <div className="flex flex-col">
-            <div className="p-6 border-b border-white/5">
-              <div className="text-xs text-white/30 tracking-wider">L0RE SWARM CHAT</div>
-              <div className="text-xs text-white/10 mt-1">b0b • d0t • c0m • r0ss</div>
-            </div>
-            
-            {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-6 space-y-4">
-              {chatMessages.length === 0 && (
-                <div className="text-white/20 text-sm space-y-2">
-                  <div>Ask the swarm anything...</div>
-                  <div className="text-xs text-white/10">
-                    All 4 agents will respond with their unique perspectives
-                  </div>
-                </div>
-              )}
-              {chatMessages.map((msg, i) => (
-                <div 
-                  key={i}
-                  className={`text-sm ${
-                    msg.role === 'user' 
-                      ? 'text-green-400 border-l-2 border-green-500/30 pl-3' 
-                      : msg.role === 'agent'
-                      ? 'border-l-2 pl-3'
-                      : 'text-white/70'
-                  }`}
-                  style={msg.role === 'agent' ? { 
-                    color: msg.color,
-                    borderColor: `${msg.color}50`
-                  } : undefined}
-                >
-                  {msg.role === 'user' && (
-                    <span className="text-white/30 mr-2">▸</span>
-                  )}
-                  {msg.role === 'agent' && (
-                    <div className="flex items-center gap-2 mb-1">
-                      <span>{msg.emoji}</span>
-                      <span className="font-bold text-xs uppercase tracking-wider">{msg.agent}</span>
-                    </div>
-                  )}
-                  <div className={msg.role === 'agent' ? 'text-white/70 leading-relaxed' : ''}>
-                    {msg.content}
-                  </div>
-                </div>
-              ))}
-              {chatLoading && (
-                <div className="text-yellow-500/50 text-sm flex items-center gap-2">
-                  <span className="animate-pulse">◉</span>
-                  swarm is thinking...
-                </div>
-              )}
-              <div ref={chatEndRef} />
-            </div>
-            
-            {/* Input */}
-            <div className="p-6 border-t border-white/5">
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  value={chatInput}
-                  onChange={e => setChatInput(e.target.value)}
-                  onKeyDown={e => e.key === 'Enter' && sendChat()}
-                  placeholder="ask the swarm..."
-                  className="flex-1 bg-transparent border-b border-white/20 text-white text-sm py-2 px-0 focus:outline-none focus:border-green-500/50"
-                />
-                <button
-                  onClick={sendChat}
-                  disabled={chatLoading}
-                  className="text-white/30 hover:text-green-400 transition-colors disabled:opacity-50"
-                >
-                  ⚡
-                </button>
-              </div>
-            </div>
+          {/* RIGHT: Live Swarm Chat with Streaming + Autonomous Actions */}
+          <div className="flex flex-col min-h-[500px]">
+            <LiveSwarmChat 
+              showHealth={true}
+              onAction={(action) => {
+                console.log('[HQ] Action proposed:', action);
+              }}
+            />
           </div>
         </div>
 

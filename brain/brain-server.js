@@ -7799,4 +7799,247 @@ setInterval(async () => {
 
 console.log('  📚 Fast Library Refresh: RUNNING (10min)');
 
+// =============================================================================
+// 🔴 LIVE SWARM CHAT — Real-time Streaming + Autonomous Actions
+// =============================================================================
+
+// Action queue for autonomous site fixes
+const autonomousActionQueue = [];
+let lastActionId = 0;
+
+// SSE endpoint for live chat streaming
+app.get('/l0re/swarm/stream', (req, res) => {
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  
+  // Send heartbeat every 15s
+  const heartbeat = setInterval(() => {
+    res.write(`event: heartbeat\ndata: ${JSON.stringify({ time: Date.now() })}\n\n`);
+  }, 15000);
+  
+  // Send current action queue status
+  res.write(`event: queue\ndata: ${JSON.stringify({ actions: autonomousActionQueue.slice(-10) })}\n\n`);
+  
+  req.on('close', () => {
+    clearInterval(heartbeat);
+  });
+});
+
+// Streaming swarm chat - agents respond one at a time with real-time updates
+app.post('/l0re/swarm/chat/stream', async (req, res) => {
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  
+  const { query, agents = ['b0b', 'd0t', 'c0m', 'r0ss'], autoAct = false } = req.body;
+  
+  if (!query) {
+    res.write(`event: error\ndata: ${JSON.stringify({ error: 'query required' })}\n\n`);
+    res.end();
+    return;
+  }
+  
+  // Send start event
+  res.write(`event: start\ndata: ${JSON.stringify({ query, agents, timestamp: new Date().toISOString() })}\n\n`);
+  
+  // Get real context for agents
+  let d0tContext = 'Running TURB0B00ST trading bot';
+  let siteContext = 'b0b.dev dashboard running on Vercel/Railway';
+  
+  try {
+    const signals = JSON.parse(await fs.readFile(path.join(__dirname, 'data', 'd0t-signals.json'), 'utf8'));
+    const turb0 = signals.turb0 || {};
+    d0tContext = `TURB0B00ST: ${turb0.decision || 'HOLD'} @ ${Math.round((turb0.confidence || 0.5) * 100)}% conf`;
+  } catch {}
+  
+  // Agent configs with site-fix capabilities
+  const agentConfigs = {
+    b0b: {
+      emoji: '🎨',
+      color: '#00FF88',
+      role: 'Creative Director',
+      system: `You are b0b, creative director for b0b.dev. Context: ${siteContext}. You can suggest UI/UX improvements. Be specific about what to change. Under 100 words.`,
+      canFix: ['design', 'ui', 'css', 'layout', 'animation']
+    },
+    d0t: {
+      emoji: '👁️',
+      color: '#22C55E',
+      role: 'Data Oracle',
+      system: `You are d0t, data oracle. Live data: ${d0tContext}. You monitor dashboards and can suggest data display fixes. Under 100 words.`,
+      canFix: ['data', 'charts', 'api', 'fetch', 'display']
+    },
+    c0m: {
+      emoji: '💀',
+      color: '#A855F7',
+      role: 'Security',
+      system: `You are c0m, security specialist. You audit the site for vulnerabilities and suggest security fixes. Under 100 words.`,
+      canFix: ['security', 'auth', 'validation', 'sanitize', 'cors']
+    },
+    r0ss: {
+      emoji: '🔧',
+      color: '#00D9FF',
+      role: 'Infrastructure',
+      system: `You are r0ss, infrastructure engineer. You fix deployment issues, server errors, and infrastructure problems. Under 100 words.`,
+      canFix: ['deploy', 'server', 'build', 'error', 'infra', 'crash']
+    }
+  };
+  
+  // Process each agent sequentially (streaming)
+  for (const agent of agents) {
+    const config = agentConfigs[agent];
+    if (!config) continue;
+    
+    // Send "thinking" event
+    res.write(`event: thinking\ndata: ${JSON.stringify({ agent, emoji: config.emoji })}\n\n`);
+    
+    try {
+      const groqRes = await axios.post('https://api.groq.com/openai/v1/chat/completions', {
+        model: 'llama-3.3-70b-versatile',
+        messages: [
+          { role: 'system', content: config.system },
+          { role: 'user', content: query }
+        ],
+        max_tokens: 150,
+        temperature: 0.5
+      }, {
+        headers: { 'Authorization': `Bearer ${process.env.GROQ_API_KEY}` },
+        timeout: 15000
+      });
+      
+      const response = groqRes.data.choices[0].message.content.trim();
+      
+      // Check if agent suggests a fix
+      let proposedAction = null;
+      if (autoAct && response.toLowerCase().includes('should') || response.toLowerCase().includes('fix') || response.toLowerCase().includes('update')) {
+        proposedAction = {
+          id: ++lastActionId,
+          agent,
+          type: 'suggestion',
+          description: response.slice(0, 200),
+          timestamp: new Date().toISOString(),
+          status: 'proposed'
+        };
+        autonomousActionQueue.push(proposedAction);
+      }
+      
+      // Send agent response
+      res.write(`event: response\ndata: ${JSON.stringify({
+        agent,
+        emoji: config.emoji,
+        color: config.color,
+        role: config.role,
+        response,
+        action: proposedAction
+      })}\n\n`);
+      
+    } catch (e) {
+      res.write(`event: response\ndata: ${JSON.stringify({
+        agent,
+        emoji: config.emoji,
+        color: config.color,
+        role: config.role,
+        response: \`[\${agent} is offline...]\`,
+        error: e.message
+      })}\n\n`);
+    }
+    
+    // Small delay between agents for natural feel
+    await new Promise(r => setTimeout(r, 500));
+  }
+  
+  // Send end event
+  res.write(`event: end\ndata: ${JSON.stringify({ timestamp: new Date().toISOString() })}\n\n`);
+  res.end();
+});
+
+// Get autonomous action queue
+app.get('/l0re/actions/queue', (req, res) => {
+  res.json({
+    actions: autonomousActionQueue.slice(-20),
+    pending: autonomousActionQueue.filter(a => a.status === 'proposed').length,
+    executed: autonomousActionQueue.filter(a => a.status === 'executed').length
+  });
+});
+
+// Execute an autonomous action
+app.post('/l0re/actions/execute/:id', async (req, res) => {
+  const actionId = parseInt(req.params.id);
+  const action = autonomousActionQueue.find(a => a.id === actionId);
+  
+  if (!action) {
+    return res.status(404).json({ error: 'Action not found' });
+  }
+  
+  action.status = 'executing';
+  action.executedAt = new Date().toISOString();
+  
+  // Log the action (in real implementation, this would trigger actual changes)
+  console.log(\`[L0RE ACTION] Executing: \${action.description}\`);
+  
+  // For now, mark as executed and log
+  action.status = 'executed';
+  action.result = 'Logged for manual review';
+  
+  res.json({ action, message: 'Action executed (logged for review)' });
+});
+
+// Autonomous site health check - agents analyze and suggest fixes
+app.get('/l0re/site/health', async (req, res) => {
+  const health = {
+    timestamp: new Date().toISOString(),
+    checks: [],
+    suggestions: []
+  };
+  
+  // Check brain health
+  health.checks.push({
+    name: 'brain-server',
+    status: 'healthy',
+    message: 'Brain is running'
+  });
+  
+  // Check data freshness
+  try {
+    const freshnessPath = path.join(__dirname, 'data', 'freshness-state.json');
+    const freshness = JSON.parse(await fs.readFile(freshnessPath, 'utf8'));
+    const staleItems = Object.values(freshness.items || {}).filter(i => !i.fresh);
+    
+    health.checks.push({
+      name: 'data-freshness',
+      status: staleItems.length > 3 ? 'warning' : 'healthy',
+      message: \`\${staleItems.length} stale data files\`,
+      details: staleItems.slice(0, 5).map(i => i.file)
+    });
+    
+    if (staleItems.length > 0) {
+      health.suggestions.push({
+        agent: 'r0ss',
+        action: 'refresh-crawlers',
+        description: \`Refresh stale data: \${staleItems.map(i => i.file).join(', ')}\`
+      });
+    }
+  } catch {}
+  
+  // Check for recent errors in action queue
+  const recentErrors = autonomousActionQueue.filter(a => 
+    a.status === 'error' && 
+    new Date(a.timestamp) > new Date(Date.now() - 3600000)
+  );
+  
+  if (recentErrors.length > 0) {
+    health.checks.push({
+      name: 'recent-errors',
+      status: 'warning',
+      message: \`\${recentErrors.length} errors in last hour\`
+    });
+  }
+  
+  res.json(health);
+});
+
+console.log('[BRAIN] Live Swarm Chat + Autonomous Actions loaded 🔴');
+
 module.exports = app;
