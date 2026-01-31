@@ -59,11 +59,35 @@ interface D0TSignals {
   l0reCode: string;
 }
 
+interface D0TWallet {
+  id: string;
+  address: string;
+  status: string;
+  type: string;
+  purpose: string;
+  balance: number;
+  funded: boolean;
+}
+
+interface D0TSwarm {
+  totalD0ts: number;
+  activeD0ts: number;
+  pendingRequests: number;
+  wallets: D0TWallet[];
+}
+
 export default function TURB0B00STDashboard() {
   const [tradingState, setTradingState] = useState<TradingState | null>(null);
   const [signals, setSignals] = useState<D0TSignals | null>(null);
+  const [swarm, setSwarm] = useState<D0TSwarm | null>(null);
   const [loading, setLoading] = useState(true);
   const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
+  const [agentConsensus, setAgentConsensus] = useState<{
+    d0t: { state: string; vote: string };
+    c0m: { level: number; veto: boolean };
+    b0b: { state: string; vote: string };
+    r0ss: { coherence: string; vote: string };
+  } | null>(null);
 
   // Fetch trading data
   useEffect(() => {
@@ -102,14 +126,68 @@ export default function TURB0B00STDashboard() {
           });
         }
 
-        // Default signals (from d0t-signals.json data)
-        setSignals({
-          decision: 'BUY',
-          confidence: 0.64,
-          size: 0.02,
-          nashState: 'EQUILIBRIUM',
-          l0reCode: 'n.3qlb/t.l3/e.l/f.dist',
-        });
+        // Fetch LIVE d0t signals from Railway
+        try {
+          const signalsEndpoints = [
+            'https://b0b-brain-production.up.railway.app/d0t/signals',
+            'http://localhost:3002/d0t/signals',
+          ];
+          for (const endpoint of signalsEndpoints) {
+            try {
+              const signalsRes = await fetch(endpoint, { 
+                cache: 'no-store',
+                signal: AbortSignal.timeout(5000),
+              });
+              if (signalsRes.ok) {
+                const signalsData = await signalsRes.json();
+                setSignals({
+                  decision: signalsData.decision || 'HOLD',
+                  confidence: signalsData.confidence || 0.5,
+                  size: signalsData.size || 0.02,
+                  nashState: signalsData.nashState || 'EQUILIBRIUM',
+                  l0reCode: signalsData.l0reCode || 'n.3qlb/t.l3/e.l/f.dist',
+                });
+                // Also capture agent consensus
+                if (signalsData.agents) {
+                  setAgentConsensus(signalsData.agents);
+                }
+                break;
+              }
+            } catch { continue; }
+          }
+        } catch {
+          // Fallback defaults
+          setSignals({
+            decision: 'HOLD',
+            confidence: 0.5,
+            size: 0.02,
+            nashState: 'EQUILIBRIUM',
+            l0reCode: 'n.3qlb/t.l3/e.l/f.dist',
+          });
+        }
+
+        // Fetch d0t swarm status
+        try {
+          const swarmEndpoints = [
+            'https://b0b-brain-production.up.railway.app/d0t/swarm',
+            'http://localhost:3002/d0t/swarm',
+          ];
+          for (const endpoint of swarmEndpoints) {
+            try {
+              const swarmRes = await fetch(endpoint, { 
+                cache: 'no-store',
+                signal: AbortSignal.timeout(5000),
+              });
+              if (swarmRes.ok) {
+                const swarmData = await swarmRes.json();
+                setSwarm(swarmData);
+                break;
+              }
+            } catch { continue; }
+          }
+        } catch {
+          // Keep swarm null
+        }
 
         setLastUpdate(new Date());
       } catch {
@@ -232,20 +310,39 @@ export default function TURB0B00STDashboard() {
 
       {/* d0t Swarm Status */}
       <section className="d0t-swarm">
-        <h2>👁️ d0t SWARM</h2>
+        <h2>👁️ d0t SWARM ({swarm?.totalD0ts || 0} wallets)</h2>
         <div className="swarm-grid">
-          <div className="swarm-card active">
-            <div className="swarm-id">d0t_01</div>
-            <div className="swarm-status">🟢 ACTIVE</div>
-            <div className="swarm-purpose">Trading Sentinel</div>
-            <div className="swarm-balance">0.05 ETH</div>
-          </div>
-          <div className="swarm-card pending">
-            <div className="swarm-id">d0t_02</div>
-            <div className="swarm-status">🟡 SPAWNING</div>
-            <div className="swarm-purpose">Market Research</div>
-            <div className="swarm-balance">Awaiting funding...</div>
-          </div>
+          {swarm?.wallets?.length ? (
+            swarm.wallets.map((wallet, i) => (
+              <div key={wallet.id || i} className={`swarm-card ${wallet.status}`}>
+                <div className="swarm-id">{wallet.id || `d0t_0${i+1}`}</div>
+                <div className="swarm-status">
+                  {wallet.status === 'active' ? '🟢' : wallet.status === 'funded' ? '🟢' : '🟡'} {wallet.status?.toUpperCase()}
+                </div>
+                <div className="swarm-purpose">{wallet.purpose || 'Trading'}</div>
+                <div className="swarm-balance">{wallet.balance || 0} ETH</div>
+                {wallet.address && (
+                  <a 
+                    href={`https://basescan.org/address/${wallet.address}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="swarm-address"
+                  >
+                    {wallet.address.slice(0, 8)}...{wallet.address.slice(-4)}
+                  </a>
+                )}
+              </div>
+            ))
+          ) : (
+            <>
+              <div className="swarm-card active">
+                <div className="swarm-id">d0t_01</div>
+                <div className="swarm-status">🟢 ACTIVE</div>
+                <div className="swarm-purpose">Trading Sentinel</div>
+                <div className="swarm-balance">0.05 ETH</div>
+              </div>
+            </>
+          )}
           <div className="swarm-card template">
             <div className="swarm-id">+ New d0t</div>
             <div className="swarm-status">Request wallet</div>
@@ -257,25 +354,27 @@ export default function TURB0B00STDashboard() {
       <section className="agent-consensus">
         <h2>🤝 MULTI-AGENT CONSENSUS</h2>
         <div className="agents-grid">
-          <div className="agent-vote" data-vote="BULLISH">
+          <div className="agent-vote" data-vote={agentConsensus?.d0t?.vote || 'NEUTRAL'}>
             <span className="agent-name">d0t</span>
             <span className="agent-weight">35%</span>
-            <span className="agent-state">EQUILIBRIUM_HARVEST</span>
+            <span className="agent-state">{agentConsensus?.d0t?.state || 'ANALYZING'}</span>
           </div>
-          <div className="agent-vote" data-vote="NEUTRAL">
+          <div className="agent-vote" data-vote={agentConsensus?.c0m?.veto ? 'BEARISH' : 'NEUTRAL'}>
             <span className="agent-name">c0m</span>
             <span className="agent-weight">20%</span>
-            <span className="agent-state">SECURITY: OK</span>
+            <span className="agent-state">
+              SECURITY: {agentConsensus?.c0m?.veto ? 'VETO' : 'OK'} (L{agentConsensus?.c0m?.level || 1})
+            </span>
           </div>
-          <div className="agent-vote" data-vote="BULLISH">
+          <div className="agent-vote" data-vote={agentConsensus?.b0b?.vote || 'NEUTRAL'}>
             <span className="agent-name">b0b</span>
             <span className="agent-weight">25%</span>
-            <span className="agent-state">MEME_MOMENTUM</span>
+            <span className="agent-state">{agentConsensus?.b0b?.state || 'OBSERVING'}</span>
           </div>
-          <div className="agent-vote" data-vote="NEUTRAL">
+          <div className="agent-vote" data-vote={agentConsensus?.r0ss?.vote || 'NEUTRAL'}>
             <span className="agent-name">r0ss</span>
             <span className="agent-weight">20%</span>
-            <span className="agent-state">SYSTEM: ALIGNED</span>
+            <span className="agent-state">SYSTEM: {agentConsensus?.r0ss?.coherence || 'ALIGNED'}</span>
           </div>
         </div>
       </section>
