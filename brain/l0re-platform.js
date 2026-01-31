@@ -31,6 +31,7 @@ function safeLoad(filename) {
         data: content,
         exists: true,
         lastModified: stat.mtime,
+        ageSeconds: Math.round((Date.now() - stat.mtime.getTime()) / 1000),
         ageMinutes: Math.round((Date.now() - stat.mtime.getTime()) / 60000)
       };
     }
@@ -303,16 +304,17 @@ function getCreative() {
 // ══════════════════════════════════════════════════════════════════════════════
 
 function getFreshness() {
-  // All files refreshed by integrated-crawlers.js every 2 minutes
+  // All files refreshed by integrated-crawlers.js every 10 SECONDS
+  // maxAge in SECONDS (30s = 3x refresh rate buffer)
   const criticalFiles = [
-    { name: 'd0t-signals.json', maxAge: 5 },
-    { name: 'turb0b00st-state.json', maxAge: 5 },
-    { name: 'live-trader-state.json', maxAge: 5 },  // Relaxed: crawlers refresh this
-    { name: 'treasury-state.json', maxAge: 10 },
-    { name: 'polymarket.json', maxAge: 5 },
-    { name: 'self-healing-state.json', maxAge: 5 },
-    { name: 'freshness-state.json', maxAge: 5 },
-    { name: 'library-index.json', maxAge: 120 }  // Library updates less frequently
+    { name: 'd0t-signals.json', maxAge: 30 },
+    { name: 'turb0b00st-state.json', maxAge: 30 },
+    { name: 'live-trader-state.json', maxAge: 30 },
+    { name: 'treasury-state.json', maxAge: 60 },  // External API, slightly slower
+    { name: 'polymarket.json', maxAge: 30 },
+    { name: 'self-healing-state.json', maxAge: 30 },
+    { name: 'freshness-state.json', maxAge: 30 },
+    { name: 'library-index.json', maxAge: 120 }  // Library changes rarely
   ];
   
   const status = criticalFiles.map(f => {
@@ -320,9 +322,10 @@ function getFreshness() {
     return {
       file: f.name,
       maxAge: f.maxAge,
-      actualAge: loaded.ageMinutes || 999,
-      fresh: loaded.exists && loaded.ageMinutes <= f.maxAge,
-      exists: loaded.exists
+      actualAge: loaded.ageSeconds || 999,
+      fresh: loaded.exists && (loaded.ageSeconds || 999) <= f.maxAge,
+      exists: loaded.exists,
+      unit: 'seconds'
     };
   });
   

@@ -188,14 +188,14 @@ export default function L0reOperations() {
           <StatusBadge status={h.dataFreshness >= 70 ? 'ok' : 'error'} label={`${fresh.fresh}/${fresh.files?.length} fresh`} />
         }>
           <div className="text-xs text-white/60 mb-2 italic">
-            🔄 Integrated crawlers run every 2 minutes on Railway
+            🔄 Integrated crawlers run every 10 SECONDS on Railway
           </div>
           <div className="space-y-1 text-xs">
             {fresh.files?.map((f: any) => (
               <div key={f.file} className="flex justify-between">
                 <span className="text-white/50">{f.file}</span>
                 <span className={f.fresh ? 'text-green-400' : f.exists ? 'text-red-400' : 'text-gray-600'}>
-                  {f.exists ? `${f.actualAge}m / ${f.maxAge}m` : 'MISSING'}
+                  {f.exists ? `${f.actualAge}s / ${f.maxAge}s` : 'MISSING'}
                 </span>
               </div>
             ))}

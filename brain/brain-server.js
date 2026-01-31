@@ -74,7 +74,7 @@ try {
 // These run INSIDE brain-server, not as external processes
 let integratedCrawlers;
 let crawlerInterval = null;
-const CRAWLER_INTERVAL_MS = 2 * 60 * 1000; // 2 minutes
+const CRAWLER_INTERVAL_MS = 10 * 1000; // 10 seconds — FAST REFRESH
 try {
   integratedCrawlers = require('./integrated-crawlers.js');
   console.log('[BRAIN] Integrated crawlers loaded — Railway Paradox solution active 🔄');

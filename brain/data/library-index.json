@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-31T01:36:02.540Z",
+  "timestamp": "2026-01-31T01:40:07.644Z",
   "totalDocs": 27,
   "documents": [
     {
@@ -138,7 +138,7 @@
       "modified": "2026-01-30T03:15:36.336Z"
     }
   ],
-  "lastIndexed": "2026-01-31T01:36:02.540Z",
-  "_lastUpdated": "2026-01-31T01:36:02.540Z",
+  "lastIndexed": "2026-01-31T01:40:07.644Z",
+  "_lastUpdated": "2026-01-31T01:40:07.644Z",
   "_source": "integrated-crawler"
 }

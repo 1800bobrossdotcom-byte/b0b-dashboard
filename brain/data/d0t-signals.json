@@ -1,75 +1,75 @@
 {
   "data": {
-    "timestamp": "2026-01-31T01:36:01.384Z",
+    "timestamp": "2026-01-31T01:40:06.544Z",
     "predictions": [
       {
         "question": "Will Trump deport less than 250,000?",
         "probability": null,
         "volume24h": 5267.720582000001,
-        "liquidity": 13791.40732,
+        "liquidity": 13538.09842,
         "signal": "uncertain"
       },
       {
         "question": "Will Trump deport 250,000-500,000 people?",
         "probability": null,
         "volume24h": 94316.571097,
-        "liquidity": 3646.85028,
+        "liquidity": 3656.28991,
         "signal": "uncertain"
       },
       {
         "question": "Will Trump deport 500,000-750,000- people?",
         "probability": null,
         "volume24h": 2519.655384,
-        "liquidity": 2803.49449,
+        "liquidity": 2803.51092,
         "signal": "uncertain"
       },
       {
         "question": "Will Trump deport 750,000-1,000,000 people?",
         "probability": null,
         "volume24h": 1315.932335,
-        "liquidity": 5918.90968,
+        "liquidity": 5917.03119,
         "signal": "uncertain"
       },
       {
         "question": "Will Trump deport 1,000,000-1,250,000 people?",
         "probability": null,
         "volume24h": 1547.1630000000002,
-        "liquidity": 7323.4175,
+        "liquidity": 7312.8705,
         "signal": "uncertain"
       },
       {
         "question": "Will Trump deport 1,250,000-1,500,000 people?",
         "probability": null,
         "volume24h": 1005.7424439999999,
-        "liquidity": 5318.71217,
+        "liquidity": 5309.73717,
         "signal": "uncertain"
       },
       {
         "question": "Will Trump deport 1,500,000-1,750,000 people?",
         "probability": null,
         "volume24h": 824.3602499999998,
-        "liquidity": 5201.4493,
+        "liquidity": 5201.5993,
         "signal": "uncertain"
       },
       {
         "question": "Will Trump deport 1,750,000-2,000,000 people?",
         "probability": null,
         "volume24h": 2338.802308,
-        "liquidity": 13555.60002,
+        "liquidity": 13565.40002,
         "signal": "uncertain"
       },
       {
         "question": "Will Trump deport 2,000,000 or more people?",
         "probability": null,
         "volume24h": 929.8732209999998,
-        "liquidity": 9822.01671,
+        "liquidity": 9821.83671,
         "signal": "uncertain"
       },
       {
         "question": "Will Trump deport 750,000 or more people in 2025?",
         "probability": null,
         "volume24h": 369.42724799999996,
-        "liquidity": 928.65763,
+        "liquidity": 932.09315,
         "signal": "uncertain"
       }
     ],
@@ -82,12 +82,12 @@
     },
     "dex": {},
     "turb0": {
-      "decision": "BUY",
-      "confidence": 0.7878942822348964,
+      "decision": "HOLD",
+      "confidence": 0.5672429063388006,
       "reasoning": [
         "Market data analysis (10 prediction markets)",
         "On-chain: BASE TVL $4.57B",
-        "Signal generated at 2026-01-31T01:36:01.711Z"
+        "Signal generated at 2026-01-31T01:40:06.903Z"
       ],
       "agents": {
         "d0t": {
@@ -118,16 +118,16 @@
         "description": "Processing market signals",
         "action": "Analyze and report",
         "emoji": "📊",
-        "confidence": 0.7878942822348964
+        "confidence": 0.5672429063388006
       },
       "code": "l0re.live",
       "composite": {
-        "score": 0.7878942822348964,
+        "score": 0.5672429063388006,
         "confidence": 0.6,
-        "signal": "BUY"
+        "signal": "HOLD"
       }
     }
   },
-  "_lastUpdated": "2026-01-31T01:36:01.711Z",
+  "_lastUpdated": "2026-01-31T01:40:06.903Z",
   "_source": "integrated-crawler"
 }

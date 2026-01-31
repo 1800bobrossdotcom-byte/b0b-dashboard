@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-01-31T01:36:02.538Z",
+  "timestamp": "2026-01-31T01:40:07.642Z",
   "enabled": false,
   "mode": "paper",
-  "lastCheck": "2026-01-31T01:36:02.538Z",
+  "lastCheck": "2026-01-31T01:40:07.642Z",
   "positions": [],
   "pendingOrders": [],
   "dailyPnL": 0,
   "totalPnL": 0,
-  "_lastUpdated": "2026-01-31T01:36:02.538Z",
+  "_lastUpdated": "2026-01-31T01:40:07.642Z",
   "_source": "integrated-crawler"
 }
