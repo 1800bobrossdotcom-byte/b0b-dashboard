@@ -102,7 +102,9 @@ export default function SecurityPage() {
   }, []);
 
   const totalRepos = (data?.findings?.githubRepos?.length || 0) + (data?.findings?.nsaRepos?.length || 0);
-  const totalDorks = data?.dorks?.reduce((acc, cat) => acc + cat.dorks.length, 0) || 0;
+  const totalDorks = Array.isArray(data?.dorks) 
+    ? data.dorks.reduce((acc, cat) => acc + (Array.isArray(cat?.dorks) ? cat.dorks.length : 0), 0) 
+    : 0;
 
   return (
     <main className="page">
