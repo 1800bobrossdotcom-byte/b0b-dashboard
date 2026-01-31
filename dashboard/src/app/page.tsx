@@ -1,173 +1,301 @@
 'use client';
 
 /**
- * b0b.dev — Rebuilt with a minimal generative aesthetic
- * Inspired by Kim Asendorf's pixel-sorting / procedural art ethos
+ * ═══════════════════════════════════════════════════════════════════════════════
+ * 
+ *  ████████╗██╗   ██╗██████╗ ██████╗  ██████╗ ██████╗  ██████╗  ██████╗ ███████╗████████╗
+ *  ╚══██╔══╝██║   ██║██╔══██╗██╔══██╗██╔═══██╗██╔══██╗██╔═══██╗██╔════╝ ╚══██╔══╝
+ *     ██║   ██║   ██║██████╔╝██████╔╝██║   ██║██████╔╝██║   ██║██║  ███╗   ██║   
+ *     ██║   ██║   ██║██╔══██╗██╔══██╗██║   ██║██╔══██╗██║   ██║██║   ██║   ██║   
+ *     ██║   ╚██████╔╝██║  ██║██████╔╝╚██████╔╝██████╔╝╚██████╔╝╚██████╔╝   ██║   
+ *     ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚═════╝  ╚═════╝  ╚═════╝    ╚═╝   
+ * 
+ *  b0b.dev — TURB0B00ST LIVE TRADING DASHBOARD
+ *  d0t swarm | Nash equilibrium | Multi-agent consensus
+ * 
+ * ═══════════════════════════════════════════════════════════════════════════════
  */
 
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import Header from './components/Header';
 
-function Hero() {
-  return (
-    <section className="hero">
-      <div className="hero-art" aria-hidden="true">
-        <div className="noise" />
-        <div className="scan" />
-        <div className="grain" />
-        <div className="sorter" />
-        <div className="drift" />
-      </div>
-      <div className="hero-copy">
-        <h1>
-          Systems that
-          <br />
-          <span>sort the signal</span>
-        </h1>
-        <p>
-          b0b.dev is a swarm of four agents — building, protecting, trading, and
-          creating. A live system shaped by data and constraints.
-        </p>
-        <div className="hero-actions">
-          <Link className="button primary" href="/live">
-            Watch Live
-          </Link>
-          <Link className="button ghost" href="/hq">
-            Open HQ
-          </Link>
-        </div>
-        <div className="hero-meta">
-          <span>Always on</span>
-          <span>Procedural design</span>
-          <span>Onchain-native</span>
-        </div>
-      </div>
-    </section>
-  );
+// ASCII Art Banner
+const TURB0_ASCII = `████████╗██╗   ██╗██████╗ ██████╗  ██████╗ ██████╗  ██████╗  ██████╗ ███████╗████████╗
+╚══██╔══╝██║   ██║██╔══██╗██╔══██╗██╔═══██╗██╔══██╗██╔═══██╗██╔════╝ ╚══██╔══╝
+   ██║   ██║   ██║██████╔╝██████╔╝██║   ██║██████╔╝██║   ██║██║  ███╗   ██║   
+   ██║   ██║   ██║██╔══██╗██╔══██╗██║   ██║██╔══██╗██║   ██║██║   ██║   ██║   
+   ██║   ╚██████╔╝██║  ██║██████╔╝╚██████╔╝██████╔╝╚██████╔╝╚██████╔╝   ██║   
+   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚═════╝  ╚═════╝  ╚═════╝    ╚═╝`;
+
+interface Trade {
+  timestamp: string;
+  type: 'BUY' | 'SELL';
+  token: string;
+  amountIn: string;
+  amountOut: string;
+  txHash: string;
+  status?: string;
+  note?: string;
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="stat">
-      <div className="stat-value">{value}</div>
-      <div className="stat-label">{label}</div>
-    </div>
-  );
+interface TradingState {
+  mode: 'LIVE' | 'PAPER';
+  activated: boolean;
+  activatedAt: string;
+  trades: number;
+  dailyStats: {
+    date: string;
+    trades: number;
+    pnl: number;
+    volume: number;
+  };
+  recentTrades: Trade[];
 }
 
-function Agents() {
-  return (
-    <section className="agents">
-      <h2>Swarm Agents</h2>
-      <div className="agents-grid">
-        <div className="agent">
-          <span className="agent-id">b0b</span>
-          <span className="agent-role">Creative Director</span>
-          <p>Visual systems, narrative, and orchestration.</p>
-        </div>
-        <div className="agent">
-          <span className="agent-id">d0t</span>
-          <span className="agent-role">Signal Hunter</span>
-          <p>Markets, correlations, and predictive patterns.</p>
-        </div>
-        <div className="agent">
-          <span className="agent-id">c0m</span>
-          <span className="agent-role">Security Shield</span>
-          <p>Defense, reconnaissance, and hardening.</p>
-        </div>
-        <div className="agent">
-          <span className="agent-id">r0ss</span>
-          <span className="agent-role">Infrastructure</span>
-          <p>Deployments, uptime, and reliability.</p>
-        </div>
-      </div>
-    </section>
-  );
+interface D0TSignals {
+  decision: 'BUY' | 'SELL' | 'HOLD';
+  confidence: number;
+  size: number;
+  nashState: string;
+  l0reCode: string;
 }
 
-export default function HomePage() {
-  const [health, setHealth] = useState(100);
-  const [fresh, setFresh] = useState(0);
-  const [total, setTotal] = useState(0);
+export default function TURB0B00STDashboard() {
+  const [tradingState, setTradingState] = useState<TradingState | null>(null);
+  const [signals, setSignals] = useState<D0TSignals | null>(null);
   const [loading, setLoading] = useState(true);
+  const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
 
+  // Fetch trading data
   useEffect(() => {
-    const fetchStats = async () => {
+    const fetchData = async () => {
       try {
-        const res = await fetch('/api/platform', { cache: 'no-store' });
-        if (!res.ok) return;
-        const snapshot = await res.json();
-        setHealth(snapshot?.freshness?.healthPercent ?? 100);
-        setFresh(snapshot?.freshness?.fresh ?? 0);
-        setTotal(snapshot?.freshness?.files?.length ?? 0);
+        // Try Railway brain first, fallback to local
+        const endpoints = [
+          'https://b0b-brain-production.up.railway.app/finance/treasury',
+          'http://localhost:3002/finance/treasury',
+        ];
+
+        let data = null;
+        for (const endpoint of endpoints) {
+          try {
+            const res = await fetch(endpoint, { 
+              cache: 'no-store',
+              signal: AbortSignal.timeout(5000),
+            });
+            if (res.ok) {
+              data = await res.json();
+              break;
+            }
+          } catch {
+            continue;
+          }
+        }
+
+        if (data?.turb0b00st) {
+          setTradingState({
+            mode: data.turb0b00st.mode || 'PAPER',
+            activated: data.turb0b00st.activated,
+            activatedAt: data.turb0b00st.activatedAt,
+            trades: data.turb0b00st.trades || 0,
+            dailyStats: data.turb0b00st.dailyStats || { date: '', trades: 0, pnl: 0, volume: 0 },
+            recentTrades: data.turb0b00st.recentTrades || [],
+          });
+        }
+
+        // Default signals (from d0t-signals.json data)
+        setSignals({
+          decision: 'BUY',
+          confidence: 0.64,
+          size: 0.02,
+          nashState: 'EQUILIBRIUM',
+          l0reCode: 'n.3qlb/t.l3/e.l/f.dist',
+        });
+
+        setLastUpdate(new Date());
       } catch {
-        // Keep last known state
+        // Keep defaults
       } finally {
         setLoading(false);
       }
     };
 
-    fetchStats();
-    const interval = setInterval(fetchStats, 30000);
+    fetchData();
+    const interval = setInterval(fetchData, 10000);
     return () => clearInterval(interval);
   }, []);
 
+  const formatTime = (timestamp: string) => {
+    const date = new Date(timestamp);
+    return date.toLocaleTimeString('en-US', { hour12: false });
+  };
+
+  const formatTxHash = (hash: string) => {
+    if (!hash) return '—';
+    return `${hash.slice(0, 10)}...${hash.slice(-6)}`;
+  };
+
   return (
-    <main className="page">
-      <Header />
-      <Hero />
+    <main className="turb0-dashboard">
+      {/* ASCII Header */}
+      <header className="turb0-header">
+        <pre className="ascii-banner">{TURB0_ASCII}</pre>
+        <div className="header-meta">
+          <span className="mode-badge" data-mode={tradingState?.mode || 'PAPER'}>
+            {tradingState?.mode || 'PAPER'} MODE
+          </span>
+          <span className="last-update">
+            {lastUpdate ? `Updated ${lastUpdate.toLocaleTimeString()}` : 'Syncing...'}
+          </span>
+        </div>
+      </header>
 
-      <section className="stats">
-        <Stat label="System Health" value={loading ? '—' : `${health}%`} />
-        <Stat label="Data Freshness" value={loading ? '—' : `${fresh}/${total}`} />
-        <Stat label="Agents" value="4" />
-        <Stat label="Status" value={loading ? 'SYNC' : 'LIVE'} />
-      </section>
-
-      <section className="split">
-        <div className="split-copy">
-          <h2>Procedural by design</h2>
-          <p>
-            Each surface is composed with minimal rules: density, direction, and
-            rhythm. The interface stays calm while the system moves beneath it.
-          </p>
-          <div className="split-actions">
-            <Link className="button primary" href="/live">
-              Explore Signals
-            </Link>
-            <Link className="button ghost" href="/security">
-              Security Status
-            </Link>
+      {/* Main Stats Grid */}
+      <section className="stats-grid">
+        <div className="stat-card primary">
+          <div className="stat-icon">👁️</div>
+          <div className="stat-content">
+            <div className="stat-value">{signals?.decision || '—'}</div>
+            <div className="stat-label">d0t Signal</div>
+          </div>
+          <div className="stat-confidence">
+            {signals ? `${Math.round(signals.confidence * 100)}%` : '—'}
           </div>
         </div>
-        <div className="split-art" aria-hidden="true">
-          <div className="lines" />
-          <div className="blocks" />
+
+        <div className="stat-card">
+          <div className="stat-icon">📊</div>
+          <div className="stat-content">
+            <div className="stat-value">{tradingState?.trades || 0}</div>
+            <div className="stat-label">Total Trades</div>
+          </div>
+        </div>
+
+        <div className="stat-card">
+          <div className="stat-icon">💰</div>
+          <div className="stat-content">
+            <div className="stat-value">
+              ${tradingState?.dailyStats?.volume?.toFixed(2) || '0.00'}
+            </div>
+            <div className="stat-label">Daily Volume</div>
+          </div>
+        </div>
+
+        <div className="stat-card">
+          <div className="stat-icon">🧠</div>
+          <div className="stat-content">
+            <div className="stat-value">{signals?.nashState || 'EQUILIBRIUM'}</div>
+            <div className="stat-label">Nash State</div>
+          </div>
         </div>
       </section>
 
-      <Agents />
-
-      <section className="cta-block">
-        <div>
-          <h2>Build inside the swarm</h2>
-          <p>
-            Live dashboards, agent workflows, and autonomous loops — all visible,
-            all evolving.
-          </p>
+      {/* L0RE Code Display */}
+      <section className="l0re-code-section">
+        <div className="l0re-code">
+          <span className="code-label">L0RE:</span>
+          <code>{signals?.l0reCode || 'n.3qlb/t.l3/e.l/f.dist'}</code>
         </div>
-        <Link className="button primary" href="/hq">
-          Enter HQ
-        </Link>
       </section>
 
-      <footer className="footer">
-        <div className="footer-left">b0b.dev — 2026</div>
-        <div className="footer-right">
-          <Link href="/live">Live</Link>
-          <Link href="/hq">HQ</Link>
-          <Link href="/labs">Labs</Link>
+      {/* Live Trade Feed */}
+      <section className="trade-feed">
+        <h2>
+          <span className="pulse" /> LIVE TRADE FEED
+        </h2>
+        <div className="trades-list">
+          {loading ? (
+            <div className="loading">Loading trades...</div>
+          ) : tradingState?.recentTrades && tradingState.recentTrades.length > 0 ? (
+            tradingState.recentTrades.map((trade, i) => (
+              <div key={i} className="trade-row" data-type={trade.type}>
+                <div className="trade-time">{formatTime(trade.timestamp)}</div>
+                <div className="trade-type">{trade.type}</div>
+                <div className="trade-token">{trade.token || 'BNKR'}</div>
+                <div className="trade-amount">{trade.amountIn}</div>
+                <div className="trade-arrow">→</div>
+                <div className="trade-received">{trade.amountOut}</div>
+                <a
+                  href={`https://basescan.org/tx/${trade.txHash}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="trade-hash"
+                >
+                  {formatTxHash(trade.txHash)}
+                </a>
+              </div>
+            ))
+          ) : (
+            <div className="no-trades">No trades yet. System is ready.</div>
+          )}
+        </div>
+      </section>
+
+      {/* d0t Swarm Status */}
+      <section className="d0t-swarm">
+        <h2>👁️ d0t SWARM</h2>
+        <div className="swarm-grid">
+          <div className="swarm-card active">
+            <div className="swarm-id">d0t_01</div>
+            <div className="swarm-status">🟢 ACTIVE</div>
+            <div className="swarm-purpose">Trading Sentinel</div>
+            <div className="swarm-balance">0.05 ETH</div>
+          </div>
+          <div className="swarm-card pending">
+            <div className="swarm-id">d0t_02</div>
+            <div className="swarm-status">🟡 SPAWNING</div>
+            <div className="swarm-purpose">Market Research</div>
+            <div className="swarm-balance">Awaiting funding...</div>
+          </div>
+          <div className="swarm-card template">
+            <div className="swarm-id">+ New d0t</div>
+            <div className="swarm-status">Request wallet</div>
+          </div>
+        </div>
+      </section>
+
+      {/* Agent Consensus */}
+      <section className="agent-consensus">
+        <h2>🤝 MULTI-AGENT CONSENSUS</h2>
+        <div className="agents-grid">
+          <div className="agent-vote" data-vote="BULLISH">
+            <span className="agent-name">d0t</span>
+            <span className="agent-weight">35%</span>
+            <span className="agent-state">EQUILIBRIUM_HARVEST</span>
+          </div>
+          <div className="agent-vote" data-vote="NEUTRAL">
+            <span className="agent-name">c0m</span>
+            <span className="agent-weight">20%</span>
+            <span className="agent-state">SECURITY: OK</span>
+          </div>
+          <div className="agent-vote" data-vote="BULLISH">
+            <span className="agent-name">b0b</span>
+            <span className="agent-weight">25%</span>
+            <span className="agent-state">MEME_MOMENTUM</span>
+          </div>
+          <div className="agent-vote" data-vote="NEUTRAL">
+            <span className="agent-name">r0ss</span>
+            <span className="agent-weight">20%</span>
+            <span className="agent-state">SYSTEM: ALIGNED</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Security Footer */}
+      <footer className="turb0-footer">
+        <div className="security-badge">
+          💀 c0m protected | Max $50/trade | 10% max sell
+        </div>
+        <div className="footer-links">
+          <span>Base Chain (8453)</span>
+          <span>|</span>
+          <span>Aerodrome DEX</span>
+          <span>|</span>
+          <a href="https://basescan.org" target="_blank" rel="noopener noreferrer">
+            BaseScan
+          </a>
+        </div>
+        <div className="copyright">
+          b0b.dev — 2026 | TURB0B00ST v1.0
         </div>
       </footer>
     </main>

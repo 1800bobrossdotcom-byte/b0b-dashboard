@@ -1,8 +1,8 @@
 {
   "crawler": "d0t-signals",
-  "timestamp": "2026-01-31T07:32:39.351Z",
+  "timestamp": "2026-01-31T07:47:43.178Z",
   "data": {
-    "timestamp": "2026-01-31T07:32:38.372Z",
+    "timestamp": "2026-01-31T07:47:42.365Z",
     "agent": "d0t",
     "role": "Data Oracle",
     "predictions": [
@@ -10,21 +10,21 @@
         "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
         "probability": null,
         "volume24h": 19241991.11467906,
-        "liquidity": "933678.74955",
+        "liquidity": "892766.8614",
         "signal": "uncertain"
       },
       {
         "question": "US government shutdown Saturday?",
         "probability": null,
         "volume24h": 10363222.669675011,
-        "liquidity": "1797296.89326",
+        "liquidity": "1505301.29415",
         "signal": "uncertain"
       },
       {
         "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
         "probability": null,
         "volume24h": 9920924.411320025,
-        "liquidity": "342413.31852",
+        "liquidity": "327038.60402",
         "signal": "uncertain"
       },
       {
@@ -38,7 +38,7 @@
         "question": "Will Trump nominate Rick Rieder as the next Fed chair?",
         "probability": null,
         "volume24h": 5906046.784228002,
-        "liquidity": "173427.36757",
+        "liquidity": "157407.14846",
         "signal": "uncertain"
       }
     ],
@@ -60,7 +60,7 @@
         }
       ],
       "volumeSpikes": [],
-      "timestamp": "2026-01-31T07:32:39.342Z"
+      "timestamp": "2026-01-31T07:47:43.169Z"
     },
     "patterns": [
       {
@@ -208,7 +208,7 @@
       }
     },
     "turb0": {
-      "timestamp": "2026-01-31T07:32:39.343Z",
+      "timestamp": "2026-01-31T07:47:43.170Z",
       "decision": "BUY",
       "confidence": 0.644,
       "size": 0.0205,

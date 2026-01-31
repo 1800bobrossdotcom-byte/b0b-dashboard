@@ -1,10 +1,18 @@
 #!/usr/bin/env node
 /**
- * 💰 TURB0B00ST FINANCE API — Standalone Data Server
- * ══════════════════════════════════════════════════════════════
+ * ═══════════════════════════════════════════════════════════════════════════════
  * 
- * Serves TURB0B00ST trading data for dashboards
- * Runs independently of brain-server for quick startup
+ *  ████████╗██╗   ██╗██████╗ ██████╗  ██████╗ ██████╗  ██████╗  ██████╗ ███████╗████████╗
+ *  ╚══██╔══╝██║   ██║██╔══██╗██╔══██╗██╔═══██╗██╔══██╗██╔═══██╗██╔════╝ ╚══██╔══╝
+ *     ██║   ██║   ██║██████╔╝██████╔╝██║   ██║██████╔╝██║   ██║██║  ███╗   ██║   
+ *     ██║   ██║   ██║██╔══██╗██╔══██╗██║   ██║██╔══██╗██║   ██║██║   ██║   ██║   
+ *     ██║   ╚██████╔╝██║  ██║██████╔╝╚██████╔╝██████╔╝╚██████╔╝╚██████╔╝   ██║   
+ *     ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚═════╝  ╚═════╝  ╚═════╝    ╚═╝   
+ * 
+ *  TURB0B00ST FINANCE API — Live Trading Data Server
+ *  d0t swarm | Nash equilibrium | Multi-agent consensus
+ * 
+ * ═══════════════════════════════════════════════════════════════════════════════
  */
 
 const express = require('express');
@@ -19,6 +27,17 @@ app.use(cors());
 app.use(express.json());
 
 const financeDir = path.join(__dirname, '..', 'b0b-finance');
+const dataDir = path.join(__dirname, 'data');
+
+// ASCII Banner on startup
+const TURB0_ASCII = `
+████████╗██╗   ██╗██████╗ ██████╗  ██████╗ ██████╗  ██████╗  ██████╗ ███████╗████████╗
+╚══██╔══╝██║   ██║██╔══██╗██╔══██╗██╔═══██╗██╔══██╗██╔═══██╗██╔════╝ ╚══██╔══╝
+   ██║   ██║   ██║██████╔╝██████╔╝██║   ██║██████╔╝██║   ██║██║  ███╗   ██║   
+   ██║   ██║   ██║██╔══██╗██╔══██╗██║   ██║██╔══██╗██║   ██║██║   ██║   ██║   
+   ██║   ╚██████╔╝██║  ██║██████╔╝╚██████╔╝██████╔╝╚██████╔╝╚██████╔╝   ██║   
+   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚═════╝  ╚═════╝  ╚═════╝    ╚═╝
+`;
 
 // Health check
 app.get('/health', (req, res) => {
@@ -134,8 +153,87 @@ app.get('/trading/history', (req, res) => {
   }
 });
 
+// 👁️ d0t Signals endpoint — Decision engine output
+app.get('/d0t/signals', (req, res) => {
+  try {
+    const signalsPath = path.join(dataDir, 'd0t-signals.json');
+    let signals = null;
+    
+    if (fs.existsSync(signalsPath)) {
+      const raw = JSON.parse(fs.readFileSync(signalsPath, 'utf-8'));
+      signals = raw.data?.turb0 || {};
+    }
+    
+    res.json({
+      timestamp: new Date().toISOString(),
+      decision: signals?.decision || 'HOLD',
+      confidence: signals?.confidence || 0.5,
+      size: signals?.size || 0.02,
+      l0reCode: signals?.l0re?.code || 'n.3qlb/t.l3/e.l/f.dist',
+      nashState: signals?.l0re?.nash || 'EQUILIBRIUM',
+      agents: {
+        d0t: {
+          state: signals?.agents?.d0t?.state || 'EQUILIBRIUM_HARVEST',
+          vote: signals?.agents?.d0t?.vote || 'NEUTRAL',
+        },
+        c0m: {
+          level: signals?.agents?.c0m?.level || 1,
+          veto: signals?.agents?.c0m?.veto || false,
+        },
+        b0b: {
+          state: signals?.agents?.b0b?.state || 'MEME_MOMENTUM',
+          vote: signals?.agents?.b0b?.vote || 'BULLISH',
+        },
+        r0ss: {
+          coherence: signals?.agents?.r0ss?.coherence || 'ALIGNED',
+          vote: signals?.agents?.r0ss?.vote || 'NEUTRAL',
+        },
+      },
+      reasoning: signals?.reasoning || [],
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// 👁️ d0t Swarm status endpoint
+app.get('/d0t/swarm', (req, res) => {
+  try {
+    // For now, return mock swarm data
+    // In production, this would read from nash-swarm-state.json
+    res.json({
+      timestamp: new Date().toISOString(),
+      totalD0ts: 2,
+      activeD0ts: 1,
+      pendingRequests: 1,
+      wallets: [
+        {
+          id: 'd0t_01',
+          address: '0x1234...', // Actual trading wallet
+          status: 'active',
+          type: 'trading',
+          purpose: 'Trading Sentinel',
+          balance: 0.05,
+          funded: true,
+        },
+        {
+          id: 'd0t_02',
+          address: '',
+          status: 'pending_approval',
+          type: 'research',
+          purpose: 'Market Research',
+          balance: 0,
+          funded: false,
+        },
+      ],
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 app.listen(PORT, () => {
-  console.log('');
+  console.log(TURB0_ASCII);
   console.log('═══════════════════════════════════════════════════════════════');
   console.log('  💰 TURB0B00ST FINANCE API — ONLINE');
   console.log('═══════════════════════════════════════════════════════════════');
@@ -145,6 +243,8 @@ app.listen(PORT, () => {
   console.log(`    GET /finance/treasury  - Treasury & trading data`);
   console.log(`    GET /l0re/collection   - L0RE art collection`);
   console.log(`    GET /trading/history   - Trade history`);
+  console.log(`    GET /d0t/signals       - d0t decision engine signals`);
+  console.log(`    GET /d0t/swarm         - d0t swarm wallet status`);
   console.log('═══════════════════════════════════════════════════════════════');
   console.log('');
 });
