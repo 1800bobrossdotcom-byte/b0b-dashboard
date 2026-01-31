@@ -2788,6 +2788,31 @@ app.post('/finance/sync', async (req, res) => {
           JSON.stringify(data, null, 2)
         );
         break;
+      case 'turb0':
+      case 'turb0b00st':
+        // Also write to data dir for /swarm/live endpoint
+        fsSync.writeFileSync(
+          path.join(financeDir, 'turb0b00st-state.json'),
+          JSON.stringify(data, null, 2)
+        );
+        fsSync.writeFileSync(
+          path.join(DATA_DIR, 'turb0b00st-state.json'),
+          JSON.stringify({
+            timestamp: new Date().toISOString(),
+            mode: data.mode || 'PAPER',
+            enabled: data.activated || false,
+            positions: data.positions || [],
+            lastTrade: data.tradingHistory?.[data.tradingHistory?.length - 1] || null,
+            performance: {
+              totalTrades: data.tradingHistory?.length || 0,
+              pnl: data.dailyStats?.pnl || 0,
+              volume: data.dailyStats?.volume || 0
+            },
+            _lastUpdated: new Date().toISOString(),
+            _source: 'finance-sync'
+          }, null, 2)
+        );
+        break;
       default:
         return res.status(400).json({ error: `Unknown type: ${type}` });
     }
