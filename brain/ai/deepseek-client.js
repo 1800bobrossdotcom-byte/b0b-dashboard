@@ -37,9 +37,14 @@ class DeepSeekClient {
       temperature = 0.7,
       maxTokens = 500,
       model = this.model,
+      timeout = 30000, // 30 second default timeout
     } = options;
     
     try {
+      // Create AbortController for timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), timeout);
+      
       const response = await fetch(`${this.baseUrl}/chat/completions`, {
         method: 'POST',
         headers: {
@@ -55,7 +60,10 @@ class DeepSeekClient {
           temperature,
           max_tokens: maxTokens,
         }),
+        signal: controller.signal,
       });
+      
+      clearTimeout(timeoutId);
       
       if (!response.ok) {
         const error = await response.text();
@@ -72,6 +80,9 @@ class DeepSeekClient {
         model: data.model,
       };
     } catch (error) {
+      if (error.name === 'AbortError') {
+        return { success: false, error: 'Request timed out' };
+      }
       return { success: false, error: error.message };
     }
   }
@@ -89,6 +100,7 @@ class DeepSeekClient {
       temperature = 0.7,
       maxTokens = 500,
       model = this.model,
+      timeout = 30000, // 30 second default timeout
     } = options;
     
     try {
@@ -99,6 +111,10 @@ class DeepSeekClient {
           content: m.content,
         })),
       ];
+      
+      // Create AbortController for timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), timeout);
       
       const response = await fetch(`${this.baseUrl}/chat/completions`, {
         method: 'POST',
@@ -112,7 +128,10 @@ class DeepSeekClient {
           temperature,
           max_tokens: maxTokens,
         }),
+        signal: controller.signal,
       });
+      
+      clearTimeout(timeoutId);
       
       if (!response.ok) {
         const error = await response.text();
@@ -129,6 +148,9 @@ class DeepSeekClient {
         model: data.model,
       };
     } catch (error) {
+      if (error.name === 'AbortError') {
+        return { success: false, error: 'Request timed out' };
+      }
       return { success: false, error: error.message };
     }
   }
