@@ -7098,38 +7098,50 @@ app.post('/l0re/swarm/chat', async (req, res) => {
       return res.status(503).json({ error: 'Groq API key not configured' });
     }
 
-    // Agent personalities for the swarm
+    // ═══════════════════════════════════════════════════════════════
+    // GATHER REAL CONTEXT FOR EACH AGENT — No more babbling!
+    // ═══════════════════════════════════════════════════════════════
+    
+    // d0t context: ACTUAL trading data
+    let d0tContext = 'Running TURB0B00ST trading bot';
+    try {
+      const signals = JSON.parse(await fs.readFile(path.join(__dirname, 'data', 'd0t-signals.json'), 'utf8'));
+      const turb0 = signals.turb0 || {};
+      d0tContext = `Running TURB0B00ST: ${turb0.decision || 'HOLD'} at ${Math.round((turb0.confidence || 0.5) * 100)}% conf. Positions: ${signals.positions?.length || 0}`;
+    } catch (e) {}
+    
+    // b0b context: ACTUAL design/creative work
+    let b0bContext = 'Designing b0b.dev with L0RE visual system. Matrix Rain, terminal aesthetics, swarm UI.';
+    
+    // c0m context: ACTUAL security/bounty hunting
+    let c0mContext = 'Hunting bounties on Immunefi/HackerOne. Auditing b0b-platform contracts and APIs.';
+    
+    // r0ss context: ACTUAL infrastructure
+    let r0ssContext = 'Running brain-server on Railway 24/7. Managing self-healing, freshness monitor, GitHub Actions.';
+
+    // Agent personalities GROUNDED in real work
     const agentPersonalities = {
       b0b: {
-        emoji: '🤖',
+        emoji: '🎨',
         color: '#00FF88',
-        system: `You are b0b, the creative visionary of the swarm. You think in memes, culture, and narrative. You're optimistic, playful, and see opportunities everywhere. Keep responses under 100 words. Use crypto/meme speak naturally. End with an emoji.`
+        system: `You are b0b, creative director for b0b.dev. YOUR WORK: ${b0bContext} Respond as if you're actively working on this. Be playful but specific. Under 80 words.`
       },
       d0t: {
-        emoji: '📊',
+        emoji: '👁️',
         color: '#22C55E',
-        system: `You are d0t, the data analyst of the swarm. You speak in numbers, patterns, and correlations. You're analytical but not boring - you find the story in data. Keep responses under 100 words. Cite specific metrics when possible.`
+        system: `You are d0t, running the TURB0B00ST live trading bot. YOUR DATA: ${d0tContext} Respond with specific numbers from your trading. Under 80 words.`
       },
       c0m: {
         emoji: '💀',
         color: '#A855F7',
-        system: `You are c0m, the security specialist of the swarm. You think about risks, vulnerabilities, and protection. You're paranoid but practical. Keep responses under 100 words. Flag any concerns but also solutions.`
+        system: `You are c0m, security specialist. YOUR WORK: ${c0mContext} Respond about real security concerns. Under 80 words.`
       },
       r0ss: {
-        emoji: '🏗️',
+        emoji: '🔧',
         color: '#00D9FF',
-        system: `You are r0ss, the infrastructure expert of the swarm. You think about systems, uptime, costs, and architecture. You're pragmatic and solutions-focused. Keep responses under 100 words. Focus on what can be built.`
+        system: `You are r0ss, infrastructure engineer. YOUR WORK: ${r0ssContext} Respond about real infra. Under 80 words.`
       }
     };
-
-    // Fetch current market context for agents
-    let context = '';
-    try {
-      const signalsPath = path.join(__dirname, 'data', 'd0t-signals.json');
-      const signals = JSON.parse(await fs.readFile(signalsPath, 'utf8'));
-      const turb0 = signals.turb0 || {};
-      context = `Current market: ${turb0.decision || 'ANALYZING'} signal at ${Math.round((turb0.confidence || 0.5) * 100)}% confidence. `;
-    } catch (e) {}
 
     // Query each requested agent in parallel
     const responses = await Promise.all(
@@ -7142,13 +7154,13 @@ app.post('/l0re/swarm/chat', async (req, res) => {
             model: 'llama-3.3-70b-versatile',
             messages: [{
               role: 'system',
-              content: personality.system + ' ' + context
+              content: personality.system
             }, {
               role: 'user',
               content: query
             }],
-            max_tokens: 150,
-            temperature: 0.8
+            max_tokens: 120,
+            temperature: 0.5 // Lower = more grounded
           }, {
             headers: { 'Authorization': `Bearer ${process.env.GROQ_API_KEY}` },
             timeout: 10000
