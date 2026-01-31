@@ -261,7 +261,7 @@ function AgentOrb({ agent, state, activity = 0 }: {
 // L0RE INTELLIGENCE PANEL: Tegmark + Nash visualization
 // ═══════════════════════════════════════════════════════════════════════════════
 
-function IntelligencePanel({ signals }: { signals: any }) {
+function IntelligencePanel({ signals, intel }: { signals: any; intel: any }) {
   const nashState = signals?.l0re?.nash?.state || 'EQUILIBRIUM';
   const tegmarkActive = signals?.l0re?.tegmark?.active || 'L2_EMERGENT';
   const entropy = signals?.l0re?.entropy || 0.5;
@@ -269,6 +269,9 @@ function IntelligencePanel({ signals }: { signals: any }) {
   
   const nash = NASH_STATES[nashState as keyof typeof NASH_STATES] || NASH_STATES.EQUILIBRIUM;
   const tegmark = TEGMARK_LEVELS[tegmarkActive as keyof typeof TEGMARK_LEVELS] || TEGMARK_LEVELS.L2_EMERGENT;
+  
+  // Agent availability from intel
+  const agents = intel?.agents || { d0t: false, b0b: false, c0m: false, r0ss: false };
   
   return (
     <div className="space-y-4">
@@ -286,6 +289,24 @@ function IntelligencePanel({ signals }: { signals: any }) {
         <span className="text-xs font-mono" style={{ color: tegmark.color }}>
           {tegmark.name} ({tegmark.agent})
         </span>
+      </div>
+      
+      {/* Agent Intelligence Status */}
+      <div className="flex items-center gap-3 pt-2 border-t border-white/5">
+        {Object.entries(TEGMARK_LEVELS).map(([key, level]) => {
+          const agentActive = agents[level.agent as keyof typeof agents];
+          return (
+            <div key={key} className="flex items-center gap-1" title={`${level.agent}: ${level.name}`}>
+              <span 
+                className="w-2 h-2 rounded-full"
+                style={{ backgroundColor: agentActive ? level.color : '#333' }}
+              />
+              <span className="text-[10px]" style={{ color: agentActive ? level.color : '#555' }}>
+                {level.agent}
+              </span>
+            </div>
+          );
+        })}
       </div>
       
       {/* Tegmark Level Bars */}
@@ -327,6 +348,45 @@ function IntelligencePanel({ signals }: { signals: any }) {
           </div>
         </div>
       </div>
+      
+      {/* Intel message if available */}
+      {intel?.message && (
+        <div className="text-[10px] text-white/20 pt-2 border-t border-white/5">
+          {intel.message}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// L0RE PULSE HISTORY: Recent swarm discussions
+// ═══════════════════════════════════════════════════════════════════════════════
+
+function PulseHistory({ pulses }: { pulses: any[] }) {
+  if (!pulses || pulses.length === 0) {
+    return (
+      <div className="text-white/20 text-xs">
+        No recent swarm pulses
+      </div>
+    );
+  }
+  
+  return (
+    <div className="space-y-3">
+      {pulses.slice(0, 3).map((pulse, i) => (
+        <div key={i} className="border-l-2 border-green-500/20 pl-3">
+          <div className="text-xs text-white/40 mb-1">
+            {pulse.topic || 'Swarm Pulse'}
+          </div>
+          <div className="text-[10px] text-white/60 line-clamp-2">
+            {pulse.summary || pulse.responses?.[0]?.content?.slice(0, 100) || '...'}
+          </div>
+          <div className="text-[10px] text-white/20 mt-1">
+            {new Date(pulse.timestamp).toLocaleTimeString()}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
@@ -390,6 +450,8 @@ function SignalWave({ signal, width = 40 }: { signal: any; width?: number }) {
 export default function B0bHQ() {
   const [mounted, setMounted] = useState(false);
   const [pulse, setPulse] = useState<any>(null);
+  const [l0reIntel, setL0reIntel] = useState<any>(null);
+  const [l0rePulses, setL0rePulses] = useState<any[]>([]);
   const [wallet, setWallet] = useState('0.0000');
   const [loading, setLoading] = useState(true);
   const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
@@ -408,15 +470,24 @@ export default function B0bHQ() {
     
     const load = async () => {
       try {
-        const [pulseRes, walletRes] = await Promise.all([
+        const [pulseRes, walletRes, l0reRes] = await Promise.all([
           fetch(`${BRAIN_URL}/pulse`, { cache: 'no-store' }).then(r => r.json()),
           fetch('https://base.blockscout.com/api/v2/addresses/0xCA4Ca0c7b26e51805c20C95DF02Ea86feA938D78')
-            .then(r => r.json()).catch(() => ({ coin_balance: 0 }))
+            .then(r => r.json()).catch(() => ({ coin_balance: 0 })),
+          fetch(`${BRAIN_URL}/l0re/intelligence/status`, { cache: 'no-store' })
+            .then(r => r.json()).catch(() => null),
         ]);
         
         setPulse(pulseRes);
         setWallet((parseFloat(walletRes.coin_balance || 0) / 1e18).toFixed(4));
+        if (l0reRes) setL0reIntel(l0reRes);
         setLastUpdate(new Date());
+        
+        // Fetch L0RE pulse history (less frequently)
+        const pulsesRes = await fetch(`${BRAIN_URL}/l0re/pulse/history?limit=3`, { cache: 'no-store' })
+          .then(r => r.json()).catch(() => ({ pulses: [] }));
+        if (pulsesRes.pulses) setL0rePulses(pulsesRes.pulses);
+        
       } catch (e) {
         console.error('Load error:', e);
       } finally {
@@ -606,9 +677,19 @@ export default function B0bHQ() {
             <section>
               <div className="text-xs text-white/30 mb-4 tracking-wider">L0RE INTELLIGENCE</div>
               <div className="bg-black/50 rounded p-4 border border-white/5">
-                <IntelligencePanel signals={signals} />
+                <IntelligencePanel signals={signals} intel={l0reIntel} />
               </div>
             </section>
+
+            {/* L0RE PULSE HISTORY */}
+            {l0rePulses.length > 0 && (
+              <section>
+                <div className="text-xs text-white/30 mb-4 tracking-wider">SWARM PULSES</div>
+                <div className="bg-black/50 rounded p-4 border border-white/5">
+                  <PulseHistory pulses={l0rePulses} />
+                </div>
+              </section>
+            )}
 
             {/* DATA VISUALIZATION: Art from actual market data */}
             <section>
