@@ -305,6 +305,7 @@
 
 <div class="search-box">
   <input type="text" id="searchInput" placeholder="Search locations..." />
+  <button onclick="resetFilters()" style="background:#0a0a0a;color:#00ff41;border:1px solid #333;padding:4px 8px;font-family:Courier New,monospace;font-size:0.7rem;cursor:pointer;margin-left:4px" title="Reset all filters">RESET</button>
 </div>
 
 <div class="mobile-controls">
@@ -1108,7 +1109,12 @@ locations.forEach(function(loc) {
     '<hr style="border-color:#333;margin:6px 0">' +
     '<div class="popup-context">' + loc.ctx + '</div>' +
     '<hr style="border-color:#333;margin:6px 0">' +
-    '<a class="popup-link" href="/report#' + loc.section + '" target="_blank">→ View in Report</a>',
+    '<a class="popup-link" href="/report#' + loc.section + '" target="_blank">→ View in Report</a>' +
+    '<div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap">' +
+    '<a class="popup-link" href="#" onclick="isolateType(\'' + loc.type + '\');return false" style="font-size:0.65rem">⊕ Show only ' + typeLabel + '</a>' +
+    '<a class="popup-link" href="#" onclick="isolateSection(\'' + loc.section + '\');return false" style="font-size:0.65rem">⊕ Section ' + loc.section + ' only</a>' +
+    '<a class="popup-link" href="#" onclick="showConnected(' + loc.lat + ',' + loc.lng + ');return false" style="font-size:0.65rem">⊕ Connected nodes</a>' +
+    '</div>',
     { maxWidth: 350, minWidth: 250 }
   );
 
@@ -1165,6 +1171,80 @@ document.querySelectorAll('[data-section], [data-type]').forEach(function(cb) {
 });
 
 document.getElementById('searchInput').addEventListener('input', applyFilters);
+
+// ===================== PATTERN ISOLATION =====================
+function isolateType(type) {
+  // Uncheck all types, check only this one
+  document.querySelectorAll('[data-type]').forEach(function(cb) {
+    if (cb.dataset.type === 'all-types') { cb.checked = false; }
+    else { cb.checked = (cb.dataset.type === type); }
+  });
+  // Make sure all sections are checked
+  document.querySelectorAll('[data-section]').forEach(function(cb) { cb.checked = true; });
+  document.getElementById('searchInput').value = '';
+  applyFilters();
+  map.closePopup();
+}
+
+function isolateSection(section) {
+  // Uncheck all sections, check only this one
+  document.querySelectorAll('[data-section]').forEach(function(cb) {
+    if (cb.dataset.section === 'all') { cb.checked = false; }
+    else { cb.checked = (cb.dataset.section === section); }
+  });
+  // Make sure all types are checked
+  document.querySelectorAll('[data-type]').forEach(function(cb) { cb.checked = true; });
+  document.getElementById('searchInput').value = '';
+  applyFilters();
+  map.closePopup();
+}
+
+function showConnected(lat, lng) {
+  // Find all markers connected via connection lines to this lat/lng
+  var connectedCoords = [];
+  if (typeof connectionLines !== 'undefined') {
+    connectionLines.forEach(function(conn) {
+      var from = conn[0], to = conn[1];
+      var threshold = 0.05; // ~5km tolerance for coordinate matching
+      if (Math.abs(from[0] - lat) < threshold && Math.abs(from[1] - lng) < threshold) {
+        connectedCoords.push(to);
+      }
+      if (Math.abs(to[0] - lat) < threshold && Math.abs(to[1] - lng) < threshold) {
+        connectedCoords.push(from);
+      }
+    });
+  }
+  // Show only connected markers + the source marker
+  markerLayer.clearLayers();
+  var shown = 0;
+  allMarkers.forEach(function(m) {
+    var d = m._locData;
+    var isSource = Math.abs(d.lat - lat) < 0.01 && Math.abs(d.lng - lng) < 0.01;
+    var isConnected = connectedCoords.some(function(c) {
+      return Math.abs(d.lat - c[0]) < 0.05 && Math.abs(d.lng - c[1]) < 0.05;
+    });
+    if (isSource || isConnected) {
+      m.addTo(markerLayer);
+      shown++;
+    }
+  });
+  updateStats(shown);
+  map.closePopup();
+  // Fit bounds to visible markers
+  if (shown > 1) {
+    var bounds = [];
+    markerLayer.eachLayer(function(l) { bounds.push(l.getLatLng()); });
+    map.fitBounds(L.latLngBounds(bounds), { padding: [50, 50] });
+  }
+}
+
+// Reset button — restore all filters
+function resetFilters() {
+  document.querySelectorAll('[data-section]').forEach(function(cb) { cb.checked = true; });
+  document.querySelectorAll('[data-type]').forEach(function(cb) { cb.checked = true; });
+  document.getElementById('searchInput').value = '';
+  applyFilters();
+}
 
 function updateStats(shown) {
   shown = shown !== undefined ? shown : allMarkers.length;
@@ -1653,6 +1733,116 @@ function toggleDataLayer(layer) {
       drawTimeline();
     }
   });
+})();
+
+// ===================== DEEP-LINK URL PARAMETERS =====================
+// Supports: ?type=obelisk&section=VIII&search=cia&marker=DIA&lat=39&lng=-104&zoom=10
+(function() {
+  var params = new URLSearchParams(window.location.search);
+
+  // Set search box
+  var searchParam = params.get('search') || params.get('q');
+  if (searchParam) {
+    document.getElementById('searchInput').value = searchParam;
+  }
+
+  // Filter by section — uncheck all, then check only specified
+  var sectionParam = params.get('section');
+  if (sectionParam) {
+    var wantedSections = sectionParam.split(',');
+    document.querySelectorAll('[data-section]').forEach(function(cb) {
+      if (cb.dataset.section === 'all') {
+        cb.checked = false;
+      } else {
+        cb.checked = wantedSections.indexOf(cb.dataset.section) !== -1;
+      }
+    });
+  }
+
+  // Filter by type — uncheck all, then check only specified
+  var typeParam = params.get('type');
+  if (typeParam) {
+    var wantedTypes = typeParam.split(',');
+    document.querySelectorAll('[data-type]').forEach(function(cb) {
+      if (cb.dataset.type === 'all-types') {
+        cb.checked = false;
+      } else {
+        cb.checked = wantedTypes.indexOf(cb.dataset.type) !== -1;
+      }
+    });
+  }
+
+  // Apply filters if any param was set
+  if (searchParam || sectionParam || typeParam) {
+    applyFilters();
+  }
+
+  // Zoom to coordinates
+  var lat = params.get('lat'), lng = params.get('lng'), zoom = params.get('zoom');
+  if (lat && lng) {
+    map.setView([parseFloat(lat), parseFloat(lng)], parseInt(zoom) || 12);
+  }
+
+  // Focus on specific marker by name (partial match)
+  var markerParam = params.get('marker');
+  if (markerParam) {
+    var needle = markerParam.toLowerCase();
+    var found = null;
+    allMarkers.forEach(function(m) {
+      if (!found && m._locData.name.toLowerCase().indexOf(needle) !== -1) {
+        found = m;
+      }
+    });
+    if (found) {
+      map.setView(found.getLatLng(), parseInt(zoom) || 14);
+      setTimeout(function() { found.openPopup(); }, 400);
+    }
+  }
+})();
+
+// ===================== SHAREABLE LINK GENERATOR =====================
+(function() {
+  var btn = document.createElement('button');
+  btn.id = 'shareLinkBtn';
+  btn.textContent = '🔗 Share Link';
+  btn.style.cssText = 'position:fixed;bottom:12px;right:12px;z-index:1100;background:#0a0a0a;color:#00ff41;border:1px solid #00ff41;padding:6px 12px;font-family:Courier New,monospace;font-size:0.75rem;cursor:pointer;letter-spacing:1px';
+  btn.addEventListener('mouseenter', function() { btn.style.background = '#00ff41'; btn.style.color = '#0a0a0a'; });
+  btn.addEventListener('mouseleave', function() { btn.style.background = '#0a0a0a'; btn.style.color = '#00ff41'; });
+  btn.addEventListener('click', function() {
+    var p = [];
+    var search = document.getElementById('searchInput').value;
+    if (search) p.push('search=' + encodeURIComponent(search));
+    // Collect active types — only if not all checked
+    var allTypes = document.querySelectorAll('[data-type]:not([data-type="all-types"])');
+    var checkedTypes = document.querySelectorAll('[data-type]:checked:not([data-type="all-types"])');
+    if (checkedTypes.length < allTypes.length) {
+      var types = [];
+      checkedTypes.forEach(function(el) { types.push(el.dataset.type); });
+      if (types.length) p.push('type=' + types.join(','));
+    }
+    // Collect active sections — only if not all checked
+    var allSections = document.querySelectorAll('[data-section]:not([data-section="all"])');
+    var checkedSections = document.querySelectorAll('[data-section]:checked:not([data-section="all"])');
+    if (checkedSections.length < allSections.length) {
+      var secs = [];
+      checkedSections.forEach(function(el) { secs.push(el.dataset.section); });
+      if (secs.length) p.push('section=' + secs.join(','));
+    }
+    // Current view
+    var c = map.getCenter();
+    p.push('lat=' + c.lat.toFixed(4));
+    p.push('lng=' + c.lng.toFixed(4));
+    p.push('zoom=' + map.getZoom());
+    var baseUrl = window.location.origin + '/map';
+    var link = baseUrl + '?' + p.join('&');
+    navigator.clipboard.writeText(link).then(function() {
+      btn.textContent = '✓ COPIED';
+      setTimeout(function() { btn.textContent = '🔗 Share Link'; }, 2000);
+    }).catch(function() {
+      prompt('Copy this link:', link);
+    });
+  });
+  document.body.appendChild(btn);
 })();
 </script>
 <script>

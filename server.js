@@ -411,6 +411,55 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
 
+// ===================== PUBLIC DATA API =====================
+// Serves map data as JSON for researchers — no auth required
+app.get('/api/data', (req, res) => {
+  const fs = require('fs');
+  try {
+    const html = fs.readFileSync(path.join(__dirname, 'public', 'map.html'), 'utf8');
+    // Extract locations array
+    const locMatch = html.match(/var locations\s*=\s*\[([\s\S]*?)\];/);
+    if (!locMatch) return res.status(500).json({ error: 'Data extraction failed' });
+    // Parse entries using regex — each entry is {name:"...",lat:...,lng:...,section:"...",type:"...",ctx:"..."}
+    const entries = [];
+    const entryRe = /\{name:"([^"]*)",lat:([-\d.]+),lng:([-\d.]+),section:"([^"]*)",type:"([^"]*)",ctx:"([^"]*)"\}/g;
+    let m;
+    while ((m = entryRe.exec(locMatch[1])) !== null) {
+      entries.push({ name: m[1], lat: parseFloat(m[2]), lng: parseFloat(m[3]), section: m[4], type: m[5], ctx: m[6] });
+    }
+    // Extract connection lines
+    const connMatch = html.match(/var connectionPairs\s*=\s*\[([\s\S]*?)\];/);
+    let connections = 0;
+    if (connMatch) {
+      connections = (connMatch[1].match(/\[/g) || []).length;
+    }
+    // Extract tunnel paths
+    const tunnelMatch = html.match(/var tunnelPaths\s*=\s*\[([\s\S]*?)\];/);
+    let tunnels = 0;
+    if (tunnelMatch) {
+      tunnels = (tunnelMatch[1].match(/\{name:/g) || []).length;
+    }
+    const typeCounts = {};
+    entries.forEach(e => { typeCounts[e.type] = (typeCounts[e.type] || 0) + 1; });
+    res.json({
+      meta: {
+        title: 'b0b OSINT Dataset',
+        description: 'Cross-referenced open-source intelligence — locations, types, connections, and context',
+        totalLocations: entries.length,
+        totalConnections: connections,
+        totalTunnelPaths: tunnels,
+        types: typeCounts,
+        exportDate: new Date().toISOString(),
+        license: 'Public domain — use freely, cite if possible',
+        methodology: 'See b0b.dev/report Section XI for sourcing methodology and verification guide'
+      },
+      locations: entries
+    });
+  } catch (err) {
+    res.status(500).json({ error: 'Data extraction failed' });
+  }
+});
+
 // Auth middleware — protect all routes below
 app.use((req, res, next) => {
   if (req.cookies.b0b_auth === makeAuthToken()) {
@@ -575,7 +624,8 @@ app.get('/report', (req, res) => {
 });
 
 app.get('/map', (req, res) => {
-  res.send(getShellHTML('/map'));
+  const qs = req.originalUrl.indexOf('?') !== -1 ? req.originalUrl.substring(req.originalUrl.indexOf('?')) : '';
+  res.send(getShellHTML('/map' + qs));
 });
 
 // Raw content routes — serve actual pages into iframe
