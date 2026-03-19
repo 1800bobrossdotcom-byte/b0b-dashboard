@@ -3,6 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="">
+  <meta property="og:title" content="">
+  <meta property="og:description" content="">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="">
+  <meta name="twitter:description" content="">
   <title>b0b.dev — OSINT Map</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
@@ -170,6 +179,58 @@
     }
     .panel-overlay.visible { display: block; }
 
+    /* ===================== TIMELINE PANEL ===================== */
+    .timeline-panel {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 1002;
+      background: rgba(10,10,10,0.96);
+      border-top: 1px solid #333;
+      max-height: 340px;
+      font-family: 'Courier New', monospace;
+    }
+    .timeline-panel.visible { display: block; }
+    .timeline-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 16px;
+      border-bottom: 1px solid #222;
+      cursor: pointer;
+    }
+    .timeline-header h3 {
+      color: #00ff41; font-size: 0.75rem; letter-spacing: 2px; margin: 0;
+    }
+    .timeline-close {
+      color: #555; font-size: 1rem; cursor: pointer; padding: 0 4px;
+    }
+    .timeline-close:hover { color: #ff4444; }
+    .timeline-body {
+      padding: 8px 16px 12px;
+      position: relative;
+    }
+    #timelineCanvas {
+      width: 100%; height: 220px;
+      display: block;
+    }
+    .timeline-legend-bar {
+      display: flex; gap: 20px; justify-content: center;
+      font-size: 0.65rem; letter-spacing: 1px; margin-top: 6px;
+      flex-wrap: wrap;
+    }
+    .timeline-tooltip {
+      display: none;
+      position: absolute;
+      background: rgba(10,10,10,0.95);
+      border: 1px solid #00ff41;
+      color: #d4d4d4;
+      font-size: 0.7rem;
+      padding: 6px 10px;
+      pointer-events: none;
+      max-width: 320px;
+      z-index: 10;
+      line-height: 1.4;
+    }
+
     /* ===================== MOBILE RESPONSIVE ===================== */
     @media (max-width: 768px) {
       .header { padding: 0.4rem 0.8rem; height: 50px; }
@@ -300,6 +361,8 @@
   <h3 style="margin-top:10px">DATA LAYERS</h3>
   <div class="filter-item"><label><input type="checkbox" checked id="toggleConnections" onchange="toggleDataLayer('connections')"> Connection Lines</label></div>
   <div class="filter-item"><label><input type="checkbox" checked id="toggleTunnels" onchange="toggleDataLayer('tunnels')"> Tunnel Paths</label></div>
+  <h3 style="margin-top:10px">ANALYSIS</h3>
+  <div class="filter-item"><label><input type="checkbox" id="toggleTimeline" onchange="toggleTimelinePanel()"> Correlation Timeline</label></div>
   </div>
 </div>
 
@@ -326,6 +389,23 @@
   <div class="legend-item"><div class="legend-dot" style="background:#888"></div> Other</div>
   <div class="legend-item"><div class="legend-dot" style="background:#ff3366"></div> Suspicious Airport</div>
   <div class="legend-item"><div style="width:24px;height:0;border-top:3px dashed #ff6600;margin-right:8px;flex-shrink:0"></div> Tunnel Path</div>
+  </div>
+</div>
+
+<!-- ===================== CORRELATION TIMELINE PANEL ===================== -->
+<div class="timeline-panel" id="timelinePanel">
+  <div class="timeline-header" onclick="toggleTimelineCollapse()">
+    <h3>CORRELATION TIMELINE</h3>
+    <span class="timeline-close" onclick="event.stopPropagation();closeTimelinePanel()">✕</span>
+  </div>
+  <div class="timeline-body" id="timelineBody">
+    <canvas id="timelineCanvas"></canvas>
+    <div class="timeline-legend-bar">
+      <span style="color:#00ccff">■ AERIAL PARTICULATES</span>
+      <span style="color:#ff4444">■ NEUROLOGICAL ANOMALIES</span>
+      <span style="color:#ffcc00">■ DIRECTED ENERGY / NEUROTECH</span>
+    </div>
+    <div class="timeline-tooltip" id="timelineTooltip"></div>
   </div>
 </div>
 
@@ -1147,6 +1227,258 @@ function toggleDataLayer(layer) {
     else map.addLayer(tunnelLayer);
   }
 }
+
+// ===================== CORRELATION TIMELINE =====================
+(function(){
+  // Timeline data: [year, intensity 0-1, label]
+  // Graph 1: Aerial Particulate Programs — public visibility
+  var aerialData = [
+    [1946, 0.05, 'Project Cirrus — first cloud seeding (GE/military)'],
+    [1947, 0.08, 'Project Cirrus Hurricane modification attempt'],
+    [1953, 0.10, 'UK Operation Cumulus — rainmaking over Lynmouth'],
+    [1962, 0.15, 'Project Stormfury — hurricane modification (Navy/NOAA)'],
+    [1966, 0.18, 'Project Popeye — cloud seeding over Vietnam (classified)'],
+    [1967, 0.20, 'Operation Popeye expanded — extend monsoon season, Ho Chi Minh Trail'],
+    [1972, 0.15, 'Popeye exposed by Jack Anderson column'],
+    [1974, 0.12, 'Weather modification reporting required (P.L. 92-205)'],
+    [1977, 0.20, 'ENMOD Treaty — UN bans weather warfare (tacit admission it works)'],
+    [1985, 0.15, 'China begins large-scale cloud seeding program'],
+    [1990, 0.22, 'Expanded military weather research — USAF 2025 paper begins'],
+    [1996, 0.30, '"Weather as a Force Multiplier: Owning the Weather in 2025" — USAF report'],
+    [1999, 0.35, 'Chemtrail terminology enters public discourse'],
+    [2003, 0.40, 'China Weather Modification Office — 37,000 employees'],
+    [2006, 0.50, 'BBC reports on contrail/cirrus connection to warming'],
+    [2009, 0.55, 'Royal Society "Geoengineering the Climate" report'],
+    [2010, 0.58, 'Eyjafjallajökull eruption reveals airspace aerosol sensitivity'],
+    [2013, 0.62, 'CIA funds NAS geoengineering study'],
+    [2015, 0.68, 'Harvard SAI Research Program announced (Solar Geoengineering)'],
+    [2017, 0.72, 'Harvard SCoPEx balloon experiment proposed'],
+    [2019, 0.78, 'UN Environment report acknowledges geoengineering risks'],
+    [2021, 0.82, 'SCoPEx postponed after Swedish backlash — public awareness peaks'],
+    [2022, 0.85, 'White House OSTP report on solar radiation management'],
+    [2023, 0.90, 'Mexico bans geoengineering after startup releases particles'],
+    [2024, 0.93, 'Multiple nations announce SAI research programs'],
+    [2025, 0.95, 'Geoengineering normalization — mainstream discussion'],
+  ];
+
+  // Graph 2: Neurological Anomalies — reported increases
+  var neuroData = [
+    [1950, 0.05, 'Korean War POW "brainwashing" reports'],
+    [1953, 0.08, 'MK-Ultra begins — CIA neurological experimentation'],
+    [1962, 0.10, 'Moscow Signal — USSR microwave irradiation of U.S. Embassy'],
+    [1968, 0.12, 'Moscow Signal health effects documented (blood abnormalities)'],
+    [1975, 0.15, 'Church Committee exposes MK-Ultra — neurological damage confirmed'],
+    [1980, 0.18, 'Vietnam veterans report unexplained neurological symptoms'],
+    [1991, 0.25, 'Gulf War Syndrome — 250,000+ veterans, unexplained neurological/immune'],
+    [1995, 0.30, 'Chronic fatigue / fibromyalgia diagnoses surge'],
+    [1998, 0.35, 'Autism rate: 1 in 500 (was 1 in 10,000 in 1970)'],
+    [2000, 0.38, 'Electromagnetic hypersensitivity (EHS) reported in multiple countries'],
+    [2004, 0.42, 'Autism rate hits 1 in 166'],
+    [2007, 0.45, 'First "Havana Syndrome" precursors — unexplained symptoms in gov personnel'],
+    [2010, 0.50, 'Neurological disease rates rising globally — WHO reports'],
+    [2012, 0.55, 'Autism rate: 1 in 88'],
+    [2014, 0.58, 'Alzheimer\'s becomes 6th leading cause of death in U.S.'],
+    [2016, 0.65, 'Havana Syndrome — U.S. diplomats in Cuba, directed energy suspected'],
+    [2018, 0.72, 'Havana Syndrome spreads — China, Russia, Austria, multiple countries'],
+    [2019, 0.75, 'NIH study finds brain differences in Havana Syndrome patients'],
+    [2020, 0.80, 'Neurological COVID effects — "brain fog" affects millions'],
+    [2021, 0.85, 'Havana Syndrome cases reach 200+ across agencies, worldwide'],
+    [2022, 0.88, 'NAS confirms Havana Syndrome consistent with directed RF energy'],
+    [2023, 0.90, 'Autism rate: 1 in 36. Neurological sensitivity reports spike'],
+    [2024, 0.93, 'Unexplained cognitive phenomena reported across multiple demographics'],
+    [2025, 0.95, 'Neurological anomaly reports at historic levels — no single explanation'],
+  ];
+
+  // Graph 3: Directed Energy / Neurotechnology Development
+  var deTechData = [
+    [1945, 0.05, 'Magnetron research — microwave technology from WWII radar'],
+    [1953, 0.10, 'Moscow Signal begins — pulsed microwave at U.S. Embassy'],
+    [1958, 0.12, 'DARPA founded — directed energy research begins'],
+    [1961, 0.15, 'Frey Effect — Allan Frey demonstrates microwave auditory effect'],
+    [1965, 0.18, 'Project Pandora — Pentagon studies Moscow Signal bioeffects'],
+    [1970, 0.20, 'ARPA behavioral research — electromagnetic effects on organisms'],
+    [1975, 0.22, 'Sanguine/ELF submarine communication — biological interaction noted'],
+    [1980, 0.28, 'USSR reports on bioeffects of non-ionizing radiation'],
+    [1983, 0.32, 'SDI (Star Wars) — directed energy weapons systems funded'],
+    [1987, 0.35, 'Non-lethal weapons concept formalized — electromagnetic focus'],
+    [1993, 0.40, 'Los Alamos non-lethal weapons program — RF, acoustic, microwave'],
+    [1996, 0.45, 'Air Force Research Lab — directed energy directorate'],
+    [2000, 0.50, 'Active Denial System (ADS) — 95 GHz millimeter-wave weapon'],
+    [2002, 0.55, 'JASON advisory group studies bioeffects of RF/directed energy'],
+    [2004, 0.58, 'ADS deployed for testing — first operational directed energy weapon'],
+    [2007, 0.62, 'DARPA Brain-Machine Interface programs expand'],
+    [2010, 0.65, 'Optogenetics breakthrough — light-controlled neural manipulation'],
+    [2013, 0.70, 'BRAIN Initiative launched — $6B+ federal neurotech'],
+    [2014, 0.73, 'DARPA ElectRx — bioelectronic medicine / neural modulation'],
+    [2016, 0.78, 'Havana attacks begin — directed energy weapon suspected'],
+    [2018, 0.82, 'DARPA N3 — non-surgical brain-computer interfaces'],
+    [2019, 0.85, 'Neuralink demo — commercial neurotechnology accelerates'],
+    [2020, 0.88, 'Directed energy weapons deployed on USS Portland (LWSD)'],
+    [2022, 0.90, 'NAS confirms RF energy consistent with Havana Syndrome'],
+    [2023, 0.93, 'Neurotech/BCI industry reaches $8B+'],
+    [2024, 0.95, 'AI + neurotech convergence — autonomous neural interaction systems'],
+    [2025, 0.97, 'Directed energy and neurotechnology now parallel capabilities'],
+  ];
+
+  var canvas = document.getElementById('timelineCanvas');
+  var ctx, tooltip = document.getElementById('timelineTooltip');
+  var allData = [
+    {data: aerialData, color: '#00ccff', label: 'Aerial Particulates'},
+    {data: neuroData, color: '#ff4444', label: 'Neurological Anomalies'},
+    {data: deTechData, color: '#ffcc00', label: 'Directed Energy / Neurotech'}
+  ];
+  var startYear = 1945, endYear = 2026;
+  var PAD_L = 48, PAD_R = 16, PAD_T = 16, PAD_B = 32;
+
+  function resizeCanvas() {
+    var rect = canvas.parentElement.getBoundingClientRect();
+    canvas.width = rect.width - 32;
+    canvas.height = 220;
+    ctx = canvas.getContext('2d');
+  }
+
+  function xForYear(y) {
+    return PAD_L + ((y - startYear) / (endYear - startYear)) * (canvas.width - PAD_L - PAD_R);
+  }
+  function yForVal(v) {
+    return PAD_T + (1 - v) * (canvas.height - PAD_T - PAD_B);
+  }
+
+  function drawTimeline() {
+    if (!ctx) return;
+    var W = canvas.width, H = canvas.height;
+    ctx.clearRect(0, 0, W, H);
+
+    // Grid lines
+    ctx.strokeStyle = '#222';
+    ctx.lineWidth = 0.5;
+    for (var yr = 1950; yr <= 2025; yr += 10) {
+      var x = xForYear(yr);
+      ctx.beginPath(); ctx.moveTo(x, PAD_T); ctx.lineTo(x, H - PAD_B); ctx.stroke();
+      ctx.fillStyle = '#555';
+      ctx.font = '10px Courier New';
+      ctx.textAlign = 'center';
+      ctx.fillText(yr, x, H - PAD_B + 14);
+    }
+    // Y axis labels
+    ctx.textAlign = 'right';
+    for (var v = 0; v <= 1; v += 0.25) {
+      var yy = yForVal(v);
+      ctx.beginPath(); ctx.moveTo(PAD_L, yy); ctx.lineTo(W - PAD_R, yy); ctx.stroke();
+      ctx.fillStyle = '#444';
+      ctx.fillText(Math.round(v * 100) + '%', PAD_L - 6, yy + 3);
+    }
+
+    // Draw each dataset
+    allData.forEach(function(ds) {
+      ctx.strokeStyle = ds.color;
+      ctx.lineWidth = 2;
+      ctx.globalAlpha = 0.85;
+      ctx.beginPath();
+      ds.data.forEach(function(pt, i) {
+        var x = xForYear(pt[0]), y = yForVal(pt[1]);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+      ctx.stroke();
+
+      // Fill area under curve
+      ctx.globalAlpha = 0.08;
+      ctx.fillStyle = ds.color;
+      ctx.lineTo(xForYear(ds.data[ds.data.length - 1][0]), yForVal(0));
+      ctx.lineTo(xForYear(ds.data[0][0]), yForVal(0));
+      ctx.closePath();
+      ctx.fill();
+      ctx.globalAlpha = 1;
+
+      // Data points
+      ds.data.forEach(function(pt) {
+        var x = xForYear(pt[0]), y = yForVal(pt[1]);
+        ctx.fillStyle = ds.color;
+        ctx.beginPath();
+        ctx.arc(x, y, 2.5, 0, Math.PI * 2);
+        ctx.fill();
+      });
+    });
+  }
+
+  // Tooltip on hover
+  canvas.addEventListener('mousemove', function(e) {
+    var rect = canvas.getBoundingClientRect();
+    var mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    var hit = null, hitDist = 20;
+    allData.forEach(function(ds) {
+      ds.data.forEach(function(pt) {
+        var x = xForYear(pt[0]), y = yForVal(pt[1]);
+        var d = Math.sqrt((mx - x) * (mx - x) + (my - y) * (my - y));
+        if (d < hitDist) { hitDist = d; hit = {label: ds.label, color: ds.color, year: pt[0], val: pt[1], desc: pt[2]}; }
+      });
+    });
+    if (hit) {
+      tooltip.style.display = 'block';
+      tooltip.style.left = Math.min(mx + 12, canvas.width - 200) + 'px';
+      tooltip.style.top = (my - 40) + 'px';
+      tooltip.innerHTML = '<span style="color:' + hit.color + '">' + hit.label.toUpperCase() + '</span><br>' +
+        '<strong>' + hit.year + '</strong> — ' + hit.desc;
+    } else {
+      tooltip.style.display = 'none';
+    }
+  });
+  canvas.addEventListener('mouseleave', function() { tooltip.style.display = 'none'; });
+
+  // Touch tooltip
+  canvas.addEventListener('touchstart', function(e) {
+    var touch = e.touches[0];
+    var rect = canvas.getBoundingClientRect();
+    var mx = touch.clientX - rect.left, my = touch.clientY - rect.top;
+    var hit = null, hitDist = 30;
+    allData.forEach(function(ds) {
+      ds.data.forEach(function(pt) {
+        var x = xForYear(pt[0]), y = yForVal(pt[1]);
+        var d = Math.sqrt((mx - x) * (mx - x) + (my - y) * (my - y));
+        if (d < hitDist) { hitDist = d; hit = {label: ds.label, color: ds.color, year: pt[0], val: pt[1], desc: pt[2]}; }
+      });
+    });
+    if (hit) {
+      tooltip.style.display = 'block';
+      tooltip.style.left = Math.min(mx + 12, canvas.width - 200) + 'px';
+      tooltip.style.top = (my - 40) + 'px';
+      tooltip.innerHTML = '<span style="color:' + hit.color + '">' + hit.label.toUpperCase() + '</span><br>' +
+        '<strong>' + hit.year + '</strong> — ' + hit.desc;
+    }
+  });
+
+  // Panel controls
+  window.toggleTimelinePanel = function() {
+    var panel = document.getElementById('timelinePanel');
+    var cb = document.getElementById('toggleTimeline');
+    if (panel.classList.contains('visible')) {
+      panel.classList.remove('visible');
+      cb.checked = false;
+    } else {
+      panel.classList.add('visible');
+      cb.checked = true;
+      resizeCanvas();
+      drawTimeline();
+    }
+  };
+  window.closeTimelinePanel = function() {
+    document.getElementById('timelinePanel').classList.remove('visible');
+    document.getElementById('toggleTimeline').checked = false;
+  };
+  window.toggleTimelineCollapse = function() {
+    var body = document.getElementById('timelineBody');
+    body.style.display = body.style.display === 'none' ? 'block' : 'none';
+  };
+
+  // Redraw on resize
+  window.addEventListener('resize', function() {
+    if (document.getElementById('timelinePanel').classList.contains('visible')) {
+      resizeCanvas();
+      drawTimeline();
+    }
+  });
+})();
 </script>
 
 </body>

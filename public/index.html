@@ -3,6 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="">
+  <meta property="og:title" content="">
+  <meta property="og:description" content="">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="">
+  <meta name="twitter:description" content="">
   <title>b0b</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -62,6 +71,42 @@
       margin-top: 1rem;
     }
     .status span { color: #00ff41; }
+
+    /* ===================== AUDIO PLAYER ===================== */
+    .player {
+      margin-top: 2rem; border: 1px solid #222; padding: 12px 20px;
+      background: rgba(0,255,65,0.02); max-width: 380px; width: 90vw;
+    }
+    .player-label {
+      font-size: 0.65rem; color: #555; letter-spacing: 2px; margin-bottom: 6px;
+    }
+    .player-track {
+      font-size: 0.8rem; color: #00ff41; letter-spacing: 1px; margin-bottom: 10px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .player-controls {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .player-btn {
+      background: transparent; border: 1px solid #00ff41; color: #00ff41;
+      font-family: 'Courier New', monospace; font-size: 0.85rem;
+      width: 36px; height: 36px; cursor: pointer; display: flex;
+      align-items: center; justify-content: center; transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .player-btn:hover { background: #00ff41; color: #0a0a0a; }
+    .player-time {
+      font-size: 0.65rem; color: #555; flex-shrink: 0; min-width: 80px;
+      text-align: right;
+    }
+    .player-bar-wrap {
+      flex: 1; height: 4px; background: #222; cursor: pointer;
+      position: relative;
+    }
+    .player-bar {
+      height: 100%; width: 0%; background: #00ff41;
+      transition: width 0.1s linear;
+    }
     @keyframes flicker {
       0%, 95% { opacity: 1; }
       96% { opacity: 0.8; }
@@ -87,6 +132,60 @@
       <a href="/logout" class="secondary">LOGOUT</a>
     </div>
     <div class="status">STATUS: <span>ACTIVE</span> &nbsp;|&nbsp; LAST UPDATED: MARCH 2026</div>
+
+    <div class="player">
+      <div class="player-label">NOW PLAYING</div>
+      <div class="player-track">FAITH NO MORE — WE CARE A LOT</div>
+      <div class="player-controls">
+        <button class="player-btn" id="playBtn" onclick="togglePlay()" title="Play/Pause">▶</button>
+        <div class="player-bar-wrap" id="barWrap">
+          <div class="player-bar" id="bar"></div>
+        </div>
+        <div class="player-time" id="pTime">0:00 / 0:00</div>
+      </div>
+    </div>
   </div>
+
+  <audio id="audio" preload="metadata"
+    src="https://dn710700.ca.archive.org/0/items/Faith_No_More_We_Care_A_Lot/Faith_No_More_We_Care_A_Lot.mp4"></audio>
+
+  <script>
+  (function(){
+    var a = document.getElementById('audio');
+    var btn = document.getElementById('playBtn');
+    var bar = document.getElementById('bar');
+    var wrap = document.getElementById('barWrap');
+    var time = document.getElementById('pTime');
+
+    function fmt(s){
+      if(isNaN(s)) return '0:00';
+      var m = Math.floor(s/60), sec = Math.floor(s%60);
+      return m + ':' + (sec<10?'0':'') + sec;
+    }
+
+    a.addEventListener('timeupdate', function(){
+      if(a.duration){
+        bar.style.width = (a.currentTime/a.duration*100)+'%';
+        time.textContent = fmt(a.currentTime) + ' / ' + fmt(a.duration);
+      }
+    });
+
+    a.addEventListener('ended', function(){
+      btn.textContent = '▶';
+    });
+
+    wrap.addEventListener('click', function(e){
+      if(a.duration){
+        var rect = wrap.getBoundingClientRect();
+        a.currentTime = ((e.clientX - rect.left) / rect.width) * a.duration;
+      }
+    });
+
+    window.togglePlay = function(){
+      if(a.paused){ a.play(); btn.textContent = '⏸'; }
+      else { a.pause(); btn.textContent = '▶'; }
+    };
+  })();
+  </script>
 </body>
 </html>

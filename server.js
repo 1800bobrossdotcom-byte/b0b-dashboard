@@ -79,6 +79,12 @@ function getLoginHTML(challenge) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="">
+<meta property="og:title" content="">
+<meta property="og:description" content="">
+<meta property="og:type" content="website">
+<meta property="og:image" content="">
 <title>b0b.dev — Human Check</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -439,7 +445,7 @@ app.use((req, res, next) => {
   } else if (req.path === '/report' || req.path === '/report.html') {
     res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'");
   } else {
-    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'");
+    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; media-src 'self' https://*.archive.org; frame-ancestors 'self'; base-uri 'self'; form-action 'self'");
   }
   // Prevent caching of sensitive content
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
