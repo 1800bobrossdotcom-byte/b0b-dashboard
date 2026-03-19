@@ -24,8 +24,16 @@ const LOGIN_HTML = `<!DOCTYPE html>
 <title>b0b.dev — Access</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #0a0a0a; color: #00ff41; font-family: 'Courier New', monospace; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-  .login-box { border: 1px solid #00ff41; padding: 2rem; max-width: 400px; width: 90%; }
+  body { background: #0a0a0a; color: #00ff41; font-family: 'Courier New', monospace; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; position: relative; }
+  .float-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+  .float-word { position: absolute; white-space: nowrap; font-family: 'Courier New', monospace; opacity: 0; animation: drift linear infinite; }
+  @keyframes drift {
+    0% { transform: translateY(0) rotate(var(--rot)); opacity: 0; }
+    5% { opacity: var(--peak); }
+    90% { opacity: var(--peak); }
+    100% { transform: translateY(calc(-100vh - 60px)) rotate(var(--rot)); opacity: 0; }
+  }
+  .login-box { border: 1px solid #00ff41; padding: 2rem; max-width: 400px; width: 90%; position: relative; z-index: 1; background: rgba(10,10,10,0.92); backdrop-filter: blur(2px); }
   h1 { font-size: 1.2rem; margin-bottom: 1.5rem; text-align: center; letter-spacing: 2px; }
   input[type="password"] { width: 100%; padding: 0.75rem; background: #111; border: 1px solid #333; color: #00ff41; font-family: inherit; font-size: 1rem; margin-bottom: 1rem; outline: none; }
   input[type="password"]:focus { border-color: #00ff41; }
@@ -35,6 +43,7 @@ const LOGIN_HTML = `<!DOCTYPE html>
 </style>
 </head>
 <body>
+<div class="float-layer" id="floatLayer"></div>
 <div class="login-box">
   <h1>b0b.dev</h1>
   __ERROR__
@@ -43,6 +52,41 @@ const LOGIN_HTML = `<!DOCTYPE html>
     <button type="submit">ENTER</button>
   </form>
 </div>
+<script>
+(function(){
+  var phrases = [
+    'send me','envíame','envoyez-moi','schick mich','mandami',
+    '送我','送って','보내줘','пошли меня','أرسلني',
+    'skicka mig','stuur mij','wyślij mnie','pošli mě','küld el',
+    'gönder beni','送我去','שלח אותי','ส่งฉัน','gửi tôi',
+    'trimite-mă','pošlji me','kirim aku','stuur my',' послати мене',
+    'envie-me','послај ме','haniraha ahy','tuma mimi','pateik mane',
+    'sūti mani','lähetä minut','send mig','στείλε με','भेजो मुझे',
+    'மனுப்பு','పంపు నన్ను','ಕಳುಹಿಸು','manda-me','invia me',
+    'inirim mich','hanfon fi','anfonwch fi','cuir me','послати ме',
+    'trimite-mă','siuntykite mane','saada mind','senda mig',
+    'sendi min','wyślij mnie','nahantar ahy','أرسلني'
+  ];
+  var colors = ['#00ff41','#00cc33','#009926','#33ff66','#00ff41','#66ffaa','#00e639','#1aff5c','#00b33c','#4dff88'];
+  var layer = document.getElementById('floatLayer');
+  function spawn(){
+    var el = document.createElement('span');
+    el.className = 'float-word';
+    el.textContent = phrases[Math.floor(Math.random()*phrases.length)];
+    var size = 10 + Math.random()*18;
+    var x = Math.random()*100;
+    var dur = 12 + Math.random()*28;
+    var delay = Math.random()*-dur;
+    var rot = (Math.random()-0.5)*14;
+    var peak = 0.06 + Math.random()*0.14;
+    var c = colors[Math.floor(Math.random()*colors.length)];
+    el.style.cssText = 'left:'+x+'%;bottom:-40px;font-size:'+size+'px;color:'+c+';animation-duration:'+dur+'s;animation-delay:'+delay+'s;--rot:'+rot+'deg;--peak:'+peak+';';
+    layer.appendChild(el);
+    el.addEventListener('animationend', function(){ el.remove(); spawn(); });
+  }
+  for(var i=0;i<45;i++) spawn();
+})();
+</script>
 </body>
 </html>`;
 
