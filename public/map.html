@@ -287,6 +287,10 @@
   <div class="filter-item"><label><input type="checkbox" checked data-type="blacksite"> Black Sites / Rendition</label></div>
   <div class="filter-item"><label><input type="checkbox" checked data-type="obelisk"> Obelisks / Symbols</label></div>
   <div class="filter-item"><label><input type="checkbox" checked data-type="organized-crime"> Organized Crime</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="submarine-cable"> Submarine Cables</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="satellite"> Satellite Networks</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="mining"> Mining / Drilling</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="private-island"> Private Islands</label></div>
   <div class="filter-item"><label><input type="checkbox" checked data-type="other"> Other</label></div>
   </div>
 </div>
@@ -308,6 +312,10 @@
   <div class="legend-item"><div class="legend-dot" style="background:#ff8800"></div> Black Site / Rendition</div>
   <div class="legend-item"><div class="legend-dot" style="background:#e6c200"></div> Obelisk / Symbol</div>
   <div class="legend-item"><div class="legend-dot" style="background:#ff00ff"></div> Organized Crime</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#00e5ff"></div> Submarine Cable</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#76ff03"></div> Satellite Network</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ff9100"></div> Mining / Drilling</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ea80fc"></div> Private Island</div>
   <div class="legend-item"><div class="legend-dot" style="background:#888"></div> Other</div>
   </div>
 </div>
@@ -378,6 +386,10 @@ var colorMap = {
   blacksite: '#ff8800',
   obelisk: '#e6c200',
   'organized-crime': '#ff00ff',
+  'submarine-cable': '#00e5ff',
+  'satellite': '#76ff03',
+  'mining': '#ff9100',
+  'private-island': '#ea80fc',
   other: '#888888'
 };
 
@@ -568,7 +580,83 @@ var locations = [
   {name:"São Paulo, Brazil — PCC-'Ndrangheta Nexus",lat:-23.5505,lng:-46.6333,section:"XII",type:"organized-crime",ctx:"Primeiro Comando da Capital (PCC) alliance with 'Ndrangheta — cocaine flows from Andean production through Brazilian ports to Calabrian distribution networks in Europe. São Paulo serves as the logistics and financial coordination hub."},
   {name:"Bologna, Italy — Strategy of Tension",lat:44.4949,lng:11.3426,section:"XII",type:"organized-crime",ctx:"August 2, 1980: Bologna train station bombing — 85 dead, 200+ wounded. Carried out by neo-fascist NAR with P2 Lodge and Gladio involvement. Vincenzo Vinciguerra (convicted Gladio operative) testified that NATO stay-behind networks organized false flag attacks to blame the left and justify authoritarian state responses."},
   {name:"Managua, Nicaragua — Dual-Funding",lat:12.1150,lng:-86.2362,section:"XII",type:"organized-crime",ctx:"Banco Ambrosiano funds flowed to both the Contras and Sandinista government — the same bank funded both sides. CIA cocaine flights from Ilopango supplied the Contras while Argentina trained them with Exocet missile profits from the Falklands War. Vatican Bank, P2, CIA, and Mafia financial streams converged here."},
-  {name:"Medellín, Colombia — CENTRA SPIKE / ISA",lat:6.2476,lng:-75.5658,section:"XII",type:"organized-crime",ctx:"ISA (Intelligence Support Activity) operation CENTRA SPIKE tracked Pablo Escobar using signals intelligence. The same U.S. intelligence apparatus that facilitated drug trafficking through the Contra pipeline simultaneously hunted Escobar — the competitor to CIA-allied cartels."}
+  {name:"Medellín, Colombia — CENTRA SPIKE / ISA",lat:6.2476,lng:-75.5658,section:"XII",type:"organized-crime",ctx:"ISA (Intelligence Support Activity) operation CENTRA SPIKE tracked Pablo Escobar using signals intelligence. The same U.S. intelligence apparatus that facilitated drug trafficking through the Contra pipeline simultaneously hunted Escobar — the competitor to CIA-allied cartels."},
+
+  // ===== SECTION VII: Private Islands =====
+  {name:"Necker Island, BVI (Richard Branson)",lat:18.5150,lng:-64.3550,section:"VII",type:"private-island",ctx:"74 acres. Purchased 1978 for $180,000. Virgin Group operates from BVI — near-zero corporate tax. Obama vacationed here post-presidency (Feb 2017). Two fires (2011, 2017). The billionaire's island in the tax haven."},
+  {name:"Moskito Island, BVI (Branson)",lat:18.5250,lng:-64.3400,section:"VII",type:"private-island",ctx:"120 acres. Second BVI island owned by Branson. $25,000+/night rental. Adjacent to Necker. Multiple private territories, same jurisdiction, same owner."},
+  {name:"Skorpios, Greece (Onassis → Rybolovlev)",lat:38.6500,lng:20.7200,section:"VII",type:"private-island",ctx:"200 acres. Purchased 1963 by Aristotle Onassis. Jackie Kennedy married Onassis here (1968). Sold to Russian oligarch Rybolovlev for ~$150M (2013). Shipping dynasty → Russian potash billionaire."},
+  {name:"Tetiaroa, French Polynesia (Brando)",lat:-17.0200,lng:-149.5700,section:"VII",type:"private-island",ctx:"12 islets, 1,325 acres. Purchased 1967 by Marlon Brando from last Tahitian royal family. Now 'The Brando' resort ($3,000+/night). Obama spent a month here (2017). Former president on a private island bought from displaced royals."},
+  {name:"Lanai, Hawaii (Larry Ellison)",lat:20.8300,lng:-156.9200,section:"VII",type:"private-island",ctx:"90,000 acres — 98% of the island. Purchased 2012 for $300M. Population ~3,200 live on Ellison's property. Oracle founder owns an entire Hawaiian island including its residents' homes and water system."},
+  {name:"Musha Cay, Bahamas (David Copperfield)",lat:23.8850,lng:-76.1500,section:"VII",type:"private-island",ctx:"150 acres + 10 surrounding islands (700 acres total). Purchased 2006 for $50M. Same Bahamas jurisdiction as FTX (Bankman-Fried). The illusionist who makes things disappear owns an archipelago."},
+  {name:"Peter Island, BVI (Van Andel / Amway)",lat:18.3600,lng:-64.5800,section:"VII",type:"private-island",ctx:"1,800 acres. Owned by Amway co-founder family. DeVos-Van Andel connection — Betsy DeVos became Trump's Education Secretary. The BVI tax haven island owned by the family whose member ran American public education."},
+  {name:"Mustique, St. Vincent (Tennant / British Royals)",lat:12.8830,lng:-61.1830,section:"VII",type:"private-island",ctx:"1,400 acres. Developed by Colin Tennant who gave a plot to Princess Margaret (1960). Jagger, Bowie, Hilfiger, Prince William regular visitors. Private governance — The Mustique Company controls the island."},
+  {name:"Makepeace Island, Australia (Branson)",lat:-26.3900,lng:153.0600,section:"VII",type:"private-island",ctx:"25 acres. Heart-shaped island in the Noosa River. Branson's third private island, different hemisphere. Global distribution of private territory by a single individual."},
+  {name:"Great Saint James, USVI (Epstein)",lat:18.3130,lng:-64.8500,section:"VII",type:"private-island",ctx:"165 acres. Purchased 2016 for $18M. Adjacent to Little Saint James. Construction activity documented by drones. Epstein expanded territorial control to second island before death. USVI sued estate 2020."},
+  {name:"Île Sainte-Marguerite, France (Man in the Iron Mask)",lat:43.5170,lng:7.0470,section:"VII",type:"private-island",ctx:"Fort Royal prison — Man in the Iron Mask held here 1687-1698. Historical precedent: islands as both sanctuary and prison. Same geography protects the powerful and imprisons the inconvenient."},
+  {name:"Robben Island, South Africa (Mandela)",lat:-33.8060,lng:18.3660,section:"VII",type:"private-island",ctx:"Mandela imprisoned 18 years (1964-1982). Island-as-control pattern: powerful retreat to islands, inconvenient are confined on them. Same geography, inverse purpose."},
+  {name:"Poveglia, Venice, Italy",lat:45.3830,lng:12.3330,section:"VII",type:"private-island",ctx:"Plague quarantine island (1793), then psychiatric hospital (1922-1968). Closed, restricted. Islands as zones where normal rules and observation do not apply."},
+  {name:"Nauru — Mining + Detention Island",lat:-0.5228,lng:166.9315,section:"VII",type:"private-island",ctx:"8.1 sq mi. Smallest republic. Phosphate mining stripped 80% of surface. Australia's offshore detention center — asylum seekers held on a stripped-mining island. Resource extraction and human containment share coordinates."},
+
+  // ===== SUBMARINE CABLE LANDING STATIONS =====
+  {name:"Porthcurno, Cornwall, UK — Cable Landing Station",lat:50.0420,lng:-5.6540,section:"V",type:"submarine-cable",ctx:"Historic submarine cable station since 1870. First transatlantic telegraph cables. GCHQ/NSA tap point — Operation Tempora (Snowden documents, 2013). Over 200 fiber optic cables pass through British waters. The UK's geographic position makes it a mandatory chokepoint for transatlantic data."},
+  {name:"Bude, Cornwall, UK — GCHQ Cable Tap",lat:50.8307,lng:-4.5432,section:"V",type:"submarine-cable",ctx:"GCHQ Bude — Tempora program intercept station. Snowden documents confirmed GCHQ taps submarine cables with 200+ probes, buffering 3 days of internet traffic and 30 days of metadata. Shared with NSA. The Five Eyes cables tap."},
+  {name:"Marseille, France — Cable Landing Hub",lat:43.2965,lng:5.3698,section:"V",type:"submarine-cable",ctx:"Major Mediterranean cable landing hub. 13+ submarine cable systems terminate here. Connects Europe to Africa, Middle East, and Asia. French DGSE intelligence maintains intercept capabilities at cable landing points."},
+  {name:"Fujairah, UAE — Cable Landing Station",lat:25.1288,lng:56.3264,section:"V",type:"submarine-cable",ctx:"Strategic Gulf cable landing point. 10+ cables terminate here including Asia-Africa-Europe 1 (AAE-1) and FLAG. Connects Middle East to global internet backbone. UAE signals intelligence monitors traffic."},
+  {name:"Mumbai, India — TATA Landing Station",lat:19.0760,lng:72.8777,section:"V",type:"submarine-cable",ctx:"Major submarine cable hub for South Asia. Multiple cable systems including TGN-Eurasia, i2i, and SEACOM. India's RAW intelligence maintains monitoring at cable landing stations."},
+  {name:"Singapore — Cable Landing Hub",lat:1.3521,lng:103.8198,section:"V",type:"submarine-cable",ctx:"Southeast Asia's primary cable hub. 30+ submarine cable systems. Changi North cable landing station. Singapore's geographic position makes it a mandatory transit point for Asia-Pacific data — the digital Strait of Malacca."},
+  {name:"Tuas, Singapore — Equinix Cable Station",lat:1.3100,lng:103.6400,section:"V",type:"submarine-cable",ctx:"Major cable landing for trans-Pacific and intra-Asian cables. Equinix data center colocation. Where submarine cables meet cloud infrastructure."},
+  {name:"Manasquan, New Jersey — TAT-14 Landing",lat:40.1262,lng:-74.0486,section:"V",type:"submarine-cable",ctx:"Transatlantic cable landing station. TAT-14 and other major cables connect here. NSA's proximity to cable landing stations in the northeastern U.S. documented in Snowden disclosures."},
+  {name:"Tuckerton, New Jersey — Cable Landing",lat:39.6037,lng:-74.3402,section:"V",type:"submarine-cable",ctx:"Historic and active submarine cable landing. Multiple transatlantic cables terminate here. NSA intercept point. New Jersey coast is a primary transatlantic cable corridor."},
+  {name:"Long Island, New York — Cable Landing",lat:40.7891,lng:-73.1350,section:"V",type:"submarine-cable",ctx:"Multiple submarine cables terminate on Long Island's shores. Connects to Manhattan data centers. Dense concentration of transatlantic cable landings along the northeastern U.S. coast."},
+  {name:"Miami, Florida — AMPATH Cable Landing",lat:25.7617,lng:-80.1918,section:"V",type:"submarine-cable",ctx:"Americas cable hub. ARCOS, Bahamas Internet Cable System, and multiple Latin American cables terminate here. Connects North America to Caribbean, Central and South America. NAP of the Americas data center."},
+  {name:"Fortaleza, Brazil — Cable Landing",lat:-3.7172,lng:-38.5433,section:"V",type:"submarine-cable",ctx:"South American cable hub. SACS (South Atlantic Cable System) connects directly to Angola. EllaLink connects to Europe. Brazil's northeastern coast is the landing point for South Atlantic cables."},
+  {name:"Luzon, Philippines — Cable Landing",lat:14.5995,lng:120.9842,section:"V",type:"submarine-cable",ctx:"Major Asia-Pacific cable landing. Multiple cables including Asia-America Gateway (AAG) and Southeast Asia-Japan Cable (SJC). Strategic Pacific data hub."},
+  {name:"Lantau Island, Hong Kong — Cable Landing",lat:22.2588,lng:113.9440,section:"V",type:"submarine-cable",ctx:"China's primary international cable hub. Asia-Pacific Gateway (APG), Asia Submarine-cable Express (ASE), and multiple cable systems. Chinese government maintains monitoring at all cable landing stations."},
+  {name:"Busan, South Korea — Cable Landing",lat:35.1796,lng:129.0756,section:"V",type:"submarine-cable",ctx:"East Asian cable hub. Korea-Japan Cable Network, Flag Pacific-1, and Unity cables terminate here. Connects Korean peninsula to trans-Pacific backbone."},
+  {name:"Sydney, Australia — Cable Landing Hub",lat:-33.8688,lng:151.2093,section:"V",type:"submarine-cable",ctx:"Australia's primary cable landing. Southern Cross Cable, Australia-Japan Cable, and multiple systems terminate here. ASD (Australian Signals Directorate) intercept capabilities. Five Eyes southern node."},
+  {name:"Djibouti — Cable Chokepoint",lat:11.5721,lng:43.1456,section:"V",type:"submarine-cable",ctx:"Critical submarine cable chokepoint — 10+ cables transit the narrow strait between Africa and Arabia. Same location as Camp Lemonnier (U.S. military / rendition hub). Military base and cable chokepoint share coordinates."},
+  {name:"Egypt — Suez Canal Cable Corridor",lat:30.0444,lng:32.1746,section:"V",type:"submarine-cable",ctx:"15+ submarine cables transit Egyptian territory through the Suez Canal zone. Cable cuts in 2008 and 2013 disrupted internet for millions in the Middle East and South Asia. Single geographic chokepoint for Europe-Asia data."},
+  {name:"Strait of Malacca — Cable Transit",lat:2.5000,lng:101.5000,section:"V",type:"submarine-cable",ctx:"Critical strait transited by multiple Asia-Pacific submarine cables. One of the world's busiest shipping lanes is also a critical data transit corridor. 40% of global trade and significant cable infrastructure share the same chokepoint."},
+  {name:"Vladivostok, Russia — ROTACS Landing",lat:43.1332,lng:131.9113,section:"V",type:"submarine-cable",ctx:"Russia's Pacific cable landing. ROTACS (Russia Optical Trans-Arctic Cable System) will connect to Russian Arctic infrastructure. Russia building alternative cable routes independent of Five Eyes chokepoints."},
+
+  // ===== SATELLITE GROUND STATIONS & NETWORKS =====
+  {name:"Cape Canaveral / Kennedy Space Center, FL",lat:28.3922,lng:-80.6077,section:"V",type:"satellite",ctx:"Primary U.S. satellite launch facility. SpaceX (Musk) launches Starlink constellation here — 6,000+ satellites providing global internet coverage. NRO reconnaissance satellites also launch from here. The surveillance constellation and the commercial constellation share the same launchpad."},
+  {name:"Vandenberg Space Force Base, CA",lat:34.7420,lng:-120.5724,section:"V",type:"satellite",ctx:"West coast satellite launch facility. NRO, Space Force, and SpaceX launches. Starlink polar orbit launches. Military and commercial satellite infrastructure co-located."},
+  {name:"Buckley Space Force Base, Aurora, CO",lat:39.7170,lng:-104.7520,section:"V",type:"satellite",ctx:"NRO satellite operations center — processes imagery from spy satellites worldwide. Space-Based Infrared System (SBIRS) missile warning. The ground station that sees everything."},
+  {name:"Schriever Space Force Base, Colorado Springs, CO",lat:38.8058,lng:-104.5286,section:"V",type:"satellite",ctx:"GPS Master Control Station — controls the entire Global Positioning System constellation (24+ satellites). AFSPC (Air Force Space Command). The facility that controls global positioning for military and civilian use."},
+  {name:"Pine Gap, NT, Australia — Satellite Ground Station",lat:-23.7981,lng:133.7370,section:"V",type:"satellite",ctx:"Joint CIA/ASD satellite ground station. Processes signals from geostationary SIGINT satellites. Five Eyes southern hemisphere signals intelligence hub. Already documented as ECHELON station — dual-purpose: satellite control and signals intercept."},
+  {name:"Menwith Hill, UK — Satellite Ground Station",lat:54.0016,lng:-1.6874,section:"V",type:"satellite",ctx:"NSA satellite ground station. 33 satellite tracking domes (radomes). Largest electronic monitoring station outside the U.S. Operated by Lockheed Martin. Taps both fiber cables and satellite communications."},
+  {name:"Weilheim Ground Station, Bavaria, Germany",lat:47.8808,lng:11.0806,section:"V",type:"satellite",ctx:"DLR (German Aerospace Center) satellite ground station. Controls European satellite programs including Copernicus Earth observation and Galileo navigation. EU's independent satellite control."},
+  {name:"Fucino Space Centre, Abruzzo, Italy",lat:41.9774,lng:13.6008,section:"V",type:"satellite",ctx:"Telespazio ground station. Controls Galileo (EU GPS alternative), COSMO-SkyMed (Italian military radar satellites), and commercial communications satellites. Europe's largest commercial satellite ground station."},
+  {name:"Svalbard Satellite Station (SvalSat), Arctic Norway",lat:78.2306,lng:15.3894,section:"V",type:"satellite",ctx:"Northernmost satellite ground station on Earth. Only station that can contact polar-orbiting satellites on every pass. Used by NASA, NOAA, ESA, and NRO. Same Svalbard that houses the seed vault — data and genetics preserved at the same coordinates."},
+  {name:"GCHQ Bude, Cornwall, UK — Satellite Intercept",lat:50.8307,lng:-4.5432,section:"V",type:"satellite",ctx:"GCHQ satellite communications intercept station. Linked to Echelon. Taps Intelsat and other commercial satellite traffic. Dual-function: cable tap and satellite intercept at same facility."},
+  {name:"Starlink Gateway, Merrillan, WI",lat:44.4500,lng:-90.8330,section:"V",type:"satellite",ctx:"SpaceX Starlink ground gateway station. Routes internet traffic between Starlink satellites and the terrestrial internet backbone. Musk's satellite network requires terrestrial ground stations — each one is a potential intercept point."},
+  {name:"Starlink Gateway, Conrad, MT",lat:48.1700,lng:-111.9460,section:"V",type:"satellite",ctx:"SpaceX Starlink ground station. Northern U.S. gateway. Starlink operates 6,000+ satellites — the largest satellite constellation in history, owned by a single individual (Musk, Tier 5)."},
+  {name:"OneWeb Ground Station, Fairbanks, AK",lat:64.8400,lng:-147.7200,section:"V",type:"satellite",ctx:"OneWeb satellite ground station. Bharti Global (India) and UK government joint venture. Competitor to Starlink with 630+ satellites. Arctic ground station for polar orbit coverage."},
+  {name:"Beijing Satellite Control Center, China",lat:39.9667,lng:116.3333,section:"V",type:"satellite",ctx:"Controls China's BeiDou navigation constellation (55 satellites — alternative to GPS), Tiangong space station, Chang'e lunar missions, and military reconnaissance satellites. China's sovereign satellite control infrastructure."},
+  {name:"Baikonur Cosmodrome, Kazakhstan",lat:45.9650,lng:63.3050,section:"V",type:"satellite",ctx:"Russia's primary satellite launch facility. GLONASS navigation constellation, military reconnaissance satellites, and ISS crew launches. Soviet-era facility on sovereign Kazakh soil, leased to Russia. The satellite launch site is in another country."},
+
+  // ===== MINING & DRILLING OPERATIONS =====
+  {name:"Kolwezi, DRC — Cobalt Mining",lat:-10.7167,lng:25.4667,section:"IX",type:"mining",ctx:"Heart of the cobalt belt. Glencore's Mutanda and Kamoto mines. 70% of global cobalt comes from DRC. Children as young as 6 in artisanal mining. Cobalt → batteries → smartphones → surveillance cameras → smart cities. The supply chain for Section V's surveillance cities starts in child labor mines."},
+  {name:"Lubumbashi, DRC — Copper/Cobalt Hub",lat:-11.6647,lng:27.4794,section:"IX",type:"mining",ctx:"Mining capital of southern DRC. Gécamines state mining company + Chinese-owned operations (CMOC, China Moly). $74B in Chinese mining investment. The minerals for the technology stack (Section V) are extracted by near-slave labor and purchased by Chinese state-connected firms."},
+  {name:"Kipushi, DRC — Zinc/Copper Mine",lat:-11.7603,lng:27.2453,section:"IX",type:"mining",ctx:"Historic mining complex since 1924 (Belgian colonial extraction). Ivanhoe Mines (Robert Friedland — sanctions controversies). Colonial extraction patterns continued post-independence under different names."},
+  {name:"Salar de Atacama, Chile — Lithium Triangle",lat:-23.5000,lng:-68.2500,section:"IX",type:"mining",ctx:"World's largest lithium reserve. Albemarle and SQM extraction. Lithium → EV batteries (Tesla/Musk, Tier 5). Chile's Atacama Desert is being drained for the batteries that power the vehicles that the Tier 5 individual manufactures. Water table destruction for indigenous communities."},
+  {name:"Salar de Uyuni, Bolivia — Lithium Triangle",lat:-20.1338,lng:-67.4891,section:"IX",type:"mining",ctx:"Largest salt flat on Earth — estimated 21 million tonnes of lithium. Bolivia nationalized lithium reserves. 2019 coup against Evo Morales occurred after he cancelled a lithium deal with a German company. The coup followed the cancelled mining contract."},
+  {name:"Salta Province, Argentina — Lithium Triangle",lat:-24.7859,lng:-65.4117,section:"IX",type:"mining",ctx:"Third vertex of the lithium triangle. Livent (now Arcadium Lithium), Posco, and Chinese firms. Argentina, Bolivia, Chile together hold 58% of global lithium. The 'triangle' isn't a coincidence — it's a single geological formation being divided by three governments."},
+  {name:"Bayan Obo, Inner Mongolia, China — Rare Earths",lat:41.7808,lng:109.9697,section:"IX",type:"mining",ctx:"World's largest rare earth mine. China controls 60% of global rare earth production. Rare earths → fighter jets, guided missiles, satellites, smartphones, MRI machines. The material basis for both Section V surveillance technology and military hardware."},
+  {name:"Mount Weld, Western Australia — Rare Earths",lat:-28.7500,lng:122.5500,section:"IX",type:"mining",ctx:"Lynas Corporation — largest non-Chinese rare earth mine. Australia attempting to break China's rare earth monopoly. Strategic minerals for defense and technology sectors."},
+  {name:"Permian Basin, Texas/New Mexico — Oil & Gas",lat:31.9500,lng:-102.1700,section:"IX",type:"mining",ctx:"Largest oil-producing basin in the U.S. Pioneer Natural Resources, ConocoPhillips, Chevron (Rice, Tier 3). Fracking revolution transformed U.S. energy geopolitics. The energy that powers the infrastructure documented in this report."},
+  {name:"Ghawar Field, Saudi Arabia — World's Largest Oil",lat:25.4000,lng:49.5000,section:"IX",type:"mining",ctx:"World's largest conventional oil field. Saudi Aramco (IPO 2019 — valued at $2T, world's most valuable company). The PIF that funded Kushner's Affinity Partners (Tier 5) derives from this oil. Energy → sovereign wealth → political influence → enclave real estate."},
+  {name:"Groningen Gas Field, Netherlands",lat:53.3500,lng:6.8500,section:"IX",type:"mining",ctx:"Western Europe's largest natural gas field. Extraction caused 1,600+ earthquakes, damaged 100,000+ homes. Production halted 2024 after decades of community destruction. The government extracted the resource until the infrastructure above it collapsed."},
+  {name:"Niger Delta, Nigeria — Oil Extraction",lat:4.8156,lng:6.4457,section:"IX",type:"mining",ctx:"Shell, ExxonMobil, Chevron extraction since 1956. 13,000+ oil spills documented. Ogoni crisis: Ken Saro-Wiwa (writer, environmental activist) executed by Nigerian military government (1995) after protesting Shell's environmental destruction. The writer killed for documenting the extraction."},
+  {name:"Grasberg Mine, Papua, Indonesia",lat:-4.0620,lng:137.1112,section:"IX",type:"mining",ctx:"Freeport-McMoRan — world's largest gold mine and second-largest copper mine. Former Kissinger Associates client (Henry Kissinger sat on Freeport's board). Indonesian military provides security. Indigenous Amungme and Kamoro people displaced. The Kissinger connection: advisory → mining board → indigenous displacement."},
+  {name:"Carajás Mine, Pará, Brazil — Iron Ore",lat:-6.0800,lng:-50.1500,section:"IX",type:"mining",ctx:"Vale SA — world's largest iron ore mine. Produced 300M+ tonnes/year. Brumadinho dam collapse (2019) killed 270 people — Vale knew the dam was at risk. The extraction company that knew the dam would fail and kept operating."},
+  {name:"Oyu Tolgoi, Mongolia — Copper/Gold",lat:43.0000,lng:106.8500,section:"IX",type:"mining",ctx:"Rio Tinto — underground copper-gold mine in the Gobi Desert. $16B development cost. Nomadic herder displacement. Water table depletion in a desert. Rio Tinto also destroyed Juukan Gorge (46,000-year-old Aboriginal sacred site) in Western Australia — the mining company that destroys archaeological evidence (Section VIII pattern)."},
+  {name:"Cerrejón, Colombia — Coal Mine",lat:11.0833,lng:-72.6667,section:"IX",type:"mining",ctx:"One of world's largest open-pit coal mines. BHP, Anglo American, Glencore (now South32). Wayuu indigenous community displacement. River diversion. The coal that powers the grid that powers the surveillance cities that monitors the populations displaced by the coal."},
+  {name:"Escondida Mine, Chile — Copper",lat:-24.2667,lng:-69.0667,section:"IX",type:"mining",ctx:"BHP — world's largest copper mine. Produces 5% of global copper. Copper → electrical wiring, circuit boards, data centers, submarine cables. Every cable documented in this map contains copper extracted here."},
+  {name:"South China Sea — Offshore Drilling",lat:15.0000,lng:115.0000,section:"X",type:"mining",ctx:"Disputed maritime territory with massive hydrocarbon reserves. China, Vietnam, Philippines, Malaysia, Brunei all claim drilling rights. Artificial islands constructed by China for military/extraction purposes. The conflict zone is the extraction zone."},
+  {name:"Arctic — Drilling Frontier",lat:71.0000,lng:25.0000,section:"IX",type:"mining",ctx:"Arctic drilling by Russia (Gazprom), Norway (Equinor), and others as ice melts. Same Arctic region as Svalbard seed vault and SvalSat satellite station. The vault, the satellite, and the drill — all at the same latitude, preparing for the same future."}
 ];
 
 // ===================== LAYER GROUPS =====================
@@ -715,6 +803,28 @@ var connectionLines = [
   [[43.463,11.878],[44.495,11.343],'#ff00ff','Arezzo (P2) → Bologna (strategy of tension)'],
   [[49.612,6.130],[38.864,-77.016],'#ff00ff','BCCI Luxembourg ↔ CIA Langley'],
   [[51.505,-0.019],[24.809,-107.394],'#ff00ff','HSBC London → Sinaloa ($881M laundered)'],
+  // Submarine cable routes
+  [[50.042,-5.654],[40.126,-74.049],'#00e5ff','UK Cornwall → New Jersey (transatlantic cable)'],
+  [[50.042,-5.654],[43.297,5.370],'#00e5ff','Cornwall → Marseille (Europe backbone)'],
+  [[43.297,5.370],[30.044,32.175],'#00e5ff','Marseille → Egypt/Suez (Europe-Asia cable)'],
+  [[30.044,32.175],[11.572,43.146],'#00e5ff','Suez → Djibouti (cable chokepoint)'],
+  [[11.572,43.146],[25.129,56.326],'#00e5ff','Djibouti → Fujairah (Middle East)'],
+  [[25.129,56.326],[19.076,72.878],'#00e5ff','Fujairah → Mumbai (South Asia)'],
+  [[19.076,72.878],[1.352,103.820],'#00e5ff','Mumbai → Singapore (Indian Ocean)'],
+  [[1.352,103.820],[22.259,113.944],'#00e5ff','Singapore → Hong Kong (South China Sea)'],
+  [[22.259,113.944],[35.180,129.076],'#00e5ff','Hong Kong → Busan (East Asia)'],
+  [[35.180,129.076],[-33.869,151.209],'#00e5ff','Busan → Sydney (trans-Pacific south)'],
+  [[14.600,120.984],[40.789,-73.135],'#00e5ff','Philippines → Long Island (trans-Pacific)'],
+  [[25.762,-80.192],[-3.717,-38.543],'#00e5ff','Miami → Fortaleza (Americas cable)'],
+  // Satellite network connections
+  [[28.392,-80.608],[34.742,-120.572],'#76ff03','Cape Canaveral ↔ Vandenberg (launch sites)'],
+  [[38.806,-104.529],[39.717,-104.752],'#76ff03','Schriever (GPS) ↔ Buckley (NRO)'],
+  [[78.231,15.389],[78.236,15.494],'#76ff03','SvalSat ↔ Svalbard Seed Vault (same coordinates)'],
+  // Mining supply chains
+  [[-10.717,25.467],[-11.665,27.479],'#ff9100','Kolwezi ↔ Lubumbashi (DRC cobalt belt)'],
+  [[-23.500,-68.250],[-20.134,-67.489],'#ff9100','Atacama ↔ Uyuni (lithium triangle)'],
+  [[-20.134,-67.489],[-24.786,-65.412],'#ff9100','Uyuni ↔ Salta (lithium triangle)'],
+  [[-4.062,137.111],[40.769,-73.968],'#ff9100','Grasberg (Kissinger/Freeport) → CFR New York'],
 ];
 
 var lineLayer = L.layerGroup().addTo(map);
