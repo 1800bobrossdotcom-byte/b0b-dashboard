@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>b0b.dev — OSINT Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0a0a0a; color: #d4d4d4; font-family: 'Courier New', monospace; }
+    #map { width: 100%; height: calc(100vh - 60px); }
+    .header {
+      background: #0a0a0a;
+      border-bottom: 1px solid #333;
+      padding: 0.5rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .header h1 { color: #00ff41; font-size: 1.2rem; letter-spacing: 2px; }
+    .header nav a {
+      color: #00ccff;
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-size: 0.9rem;
+      border: 1px solid #00ccff;
+      padding: 0.3rem 0.8rem;
+      transition: all 0.3s;
+    }
+    .header nav a:hover { background: #00ccff; color: #000; }
+    .legend {
+      position: absolute;
+      bottom: 30px;
+      left: 10px;
+      z-index: 1000;
+      background: rgba(10,10,10,0.95);
+      border: 1px solid #333;
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      color: #d4d4d4;
+      max-height: 50vh;
+      overflow-y: auto;
+    }
+    .legend-header {
+      padding: 10px 14px; cursor: pointer; user-select: none;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .legend-header:hover { background: rgba(0,255,65,0.05); }
+    .legend-body { padding: 0 14px 10px; }
+    .legend-body.collapsed { display: none; }
+    .legend h3 { color: #00ff41; margin-bottom: 0; font-size: 0.85rem; }
+    .legend-item { display: flex; align-items: center; margin: 4px 0; cursor: pointer; }
+    .legend-item:hover { color: #fff; }
+    .legend-dot {
+      width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+    .filter-panel {
+      position: absolute;
+      top: 70px;
+      right: 10px;
+      z-index: 1000;
+      background: rgba(10,10,10,0.95);
+      border: 1px solid #333;
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      color: #d4d4d4;
+      max-height: 85vh;
+      overflow-y: auto;
+      transition: width 0.2s;
+      scrollbar-width: thin; scrollbar-color: #333 #0d0d0d;
+    }
+    .filter-panel::-webkit-scrollbar { width: 3px; }
+    .filter-panel::-webkit-scrollbar-thumb { background: #333; }
+    .filter-header {
+      padding: 8px 14px; cursor: pointer; user-select: none;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid #222;
+    }
+    .filter-header:hover { background: rgba(0,255,65,0.05); }
+    .filter-header h3 { color: #00ff41; font-size: 0.8rem; margin: 0; }
+    .filter-header .chevron { color: #555; font-size: 0.7rem; transition: transform 0.2s; }
+    .filter-header .chevron.collapsed { transform: rotate(-90deg); }
+    .filter-body { padding: 6px 14px 10px; }
+    .filter-body.collapsed { display: none; }
+    .filter-panel h3 { color: #ffcc00; margin-bottom: 8px; font-size: 0.85rem; }
+    .filter-item { margin: 3px 0; }
+    .filter-item label { cursor: pointer; }
+    .filter-item input { margin-right: 6px; }
+    .stats-bar {
+      position: absolute;
+      top: 70px;
+      left: 10px;
+      z-index: 1000;
+      background: rgba(10,10,10,0.92);
+      border: 1px solid #333;
+      padding: 8px 14px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      color: #00ff41;
+    }
+    /* Custom popup styling */
+    .leaflet-popup-content-wrapper {
+      background: #111 !important;
+      color: #d4d4d4 !important;
+      border: 1px solid #00ccff !important;
+      border-radius: 4px !important;
+      font-family: 'Courier New', monospace !important;
+      font-size: 0.8rem !important;
+    }
+    .leaflet-popup-tip { background: #111 !important; border: 1px solid #00ccff !important; }
+    .leaflet-popup-content { margin: 10px 14px !important; }
+    .popup-title { color: #00ff41; font-weight: bold; font-size: 0.9rem; margin-bottom: 6px; }
+    .popup-section { color: #ffcc00; font-size: 0.75rem; margin-bottom: 4px; }
+    .popup-type { color: #ff6600; font-size: 0.75rem; margin-bottom: 6px; }
+    .popup-context { color: #ccc; font-size: 0.75rem; line-height: 1.5; }
+    .popup-link { color: #00ccff; text-decoration: none; font-size: 0.75rem; }
+    .popup-link:hover { text-decoration: underline; }
+    .search-box {
+      position: absolute;
+      top: 70px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+    }
+    .search-box input {
+      background: rgba(10,10,10,0.92);
+      border: 1px solid #00ccff;
+      color: #00ff41;
+      padding: 6px 14px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      width: 320px;
+      outline: none;
+    }
+    .search-box input::placeholder { color: #555; }
+    .search-box input:focus { border-color: #00ff41; }
+
+    /* ===================== MOBILE TOGGLE BUTTONS ===================== */
+    .mobile-controls {
+      display: none;
+      position: absolute;
+      top: 70px;
+      right: 10px;
+      z-index: 1001;
+      gap: 6px;
+    }
+    .mobile-btn {
+      background: rgba(10,10,10,0.95);
+      border: 1px solid #333;
+      color: #00ff41;
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      padding: 6px 10px;
+      cursor: pointer;
+      letter-spacing: 1px;
+    }
+    .mobile-btn:hover, .mobile-btn.active {
+      border-color: #00ff41;
+      background: rgba(0,255,65,0.1);
+    }
+
+    /* Overlay backdrop for mobile panels */
+    .panel-overlay {
+      display: none;
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 999;
+    }
+    .panel-overlay.visible { display: block; }
+
+    /* ===================== MOBILE RESPONSIVE ===================== */
+    @media (max-width: 768px) {
+      .header { padding: 0.4rem 0.8rem; height: 50px; }
+      .header h1 { font-size: 0.85rem; letter-spacing: 1px; }
+      .header nav a { font-size: 0.7rem; padding: 0.2rem 0.5rem; margin-left: 0.6rem; }
+      #map { height: calc(100vh - 50px); }
+
+      .search-box { top: 58px; }
+      .search-box input { width: calc(100vw - 100px); max-width: 280px; font-size: 0.75rem; padding: 5px 10px; }
+
+      .stats-bar {
+        top: auto; bottom: 8px; left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.65rem; padding: 4px 10px;
+        white-space: nowrap;
+        border-radius: 2px;
+      }
+
+      .mobile-controls { display: flex; }
+
+      .filter-panel {
+        position: fixed; top: 0; right: 0;
+        width: 260px; height: 100vh;
+        max-height: 100vh;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        border: none; border-left: 1px solid #333;
+        background: rgba(10,10,10,0.98);
+      }
+      .filter-panel.mobile-open {
+        transform: translateX(0);
+      }
+
+      .legend {
+        bottom: 36px; left: 8px;
+        max-width: 180px;
+        font-size: 0.65rem;
+      }
+      .legend-body { display: none; }
+      .legend-header { padding: 6px 10px; }
+      .legend h3 { font-size: 0.75rem; }
+      .legend-dot { width: 10px; height: 10px; margin-right: 6px; }
+
+      .leaflet-popup-content-wrapper { font-size: 0.75rem !important; }
+      .leaflet-popup-content { margin: 8px 10px !important; max-width: 250px; }
+      .popup-title { font-size: 0.8rem; }
+      .popup-context { font-size: 0.7rem; }
+
+      .filter-item { margin: 5px 0; }
+      .filter-item label { font-size: 0.8rem; }
+      .filter-item input { width: 16px; height: 16px; margin-right: 8px; }
+    }
+
+    @media (max-width: 400px) {
+      .header h1 { font-size: 0.75rem; }
+      .header nav a { font-size: 0.6rem; padding: 0.15rem 0.4rem; margin-left: 0.4rem; }
+      .search-box input { max-width: 200px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>b0b.dev — OSINT MAP</h1>
+  <nav>
+    <a href="/">HOME</a>
+    <a href="/report">REPORT</a>
+  </nav>
+</div>
+
+<div id="map"></div>
+
+<div class="search-box">
+  <input type="text" id="searchInput" placeholder="Search locations..." />
+</div>
+
+<div class="mobile-controls">
+  <button class="mobile-btn" id="mobileFilterBtn" onclick="toggleMobileFilter()">FILTERS</button>
+</div>
+
+<div class="panel-overlay" id="panelOverlay" onclick="closeMobileFilter()"></div>
+
+<div class="stats-bar" id="statsBar">Loading...</div>
+
+<div class="filter-panel" id="filterPanel">
+  <div class="filter-header" onclick="toggleFilterPanel()">
+    <h3>FILTERS</h3>
+    <span class="chevron" id="filterChevron">▾</span>
+  </div>
+  <div class="filter-body" id="filterBody">
+  <h3 style="margin-top:4px">BY SECTION</h3>
+  <div class="filter-item"><label><input type="checkbox" checked data-section="all" onchange="toggleAll(this)"> All Sections</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-section="II"> II — Control Architecture</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-section="III"> III — 51% Threshold</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-section="IV"> IV — Underground</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-section="V"> V — Surveillance Cities</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-section="VI"> VI — "New" Pattern</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-section="VII"> VII — Enclaves</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-section="VIII"> VIII — Cyclical Patterns</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-section="IX"> IX — Slavery Systems</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-section="X"> X — Conflicts</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-section="XI"> XI — FOIA</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-section="XII"> XII — Organized Crime</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-section="XIII"> XIII — Spiritual Exit</label></div>
+  <h3 style="margin-top:10px">BY TYPE</h3>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="all-types" onchange="toggleAllTypes(this)"> All Types</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="financial"> Financial / Banking</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="military"> Military / Intelligence</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="underground"> Underground / D.U.M.B.</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="surveillance"> Surveillance / Smart Cities</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="enclave"> Enclaves / Private Islands</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="archaeological"> Archaeological / Ancient</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="conflict"> Conflict Zones</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="governance"> Governance / Policy Orgs</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="blacksite"> Black Sites / Rendition</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="obelisk"> Obelisks / Symbols</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="organized-crime"> Organized Crime</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="other"> Other</label></div>
+  </div>
+</div>
+
+<div class="legend">
+  <div class="legend-header" onclick="document.getElementById('legendBody').classList.toggle('collapsed'); this.querySelector('.chevron').classList.toggle('collapsed');">
+    <h3>MARKER COLORS</h3>
+    <span class="chevron" style="color:#555;font-size:0.7rem;transition:transform 0.2s;">▾</span>
+  </div>
+  <div class="legend-body" id="legendBody">
+  <div class="legend-item"><div class="legend-dot" style="background:#ff4444"></div> Military / Intelligence</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ffcc00"></div> Financial / Banking</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ff6600"></div> Underground / D.U.M.B.</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#00ccff"></div> Surveillance / Smart City</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#cc88ff"></div> Enclave / Private Island</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#00ff41"></div> Archaeological / Ancient</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ff0066"></div> Conflict Zone</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ffffff"></div> Governance / Policy Org</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ff8800"></div> Black Site / Rendition</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#e6c200"></div> Obelisk / Symbol</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ff00ff"></div> Organized Crime</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#888"></div> Other</div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// ===================== MAP INIT =====================
+// Filter panel toggle (desktop)
+function toggleFilterPanel() {
+  var body = document.getElementById('filterBody');
+  var chevron = document.getElementById('filterChevron');
+  body.classList.toggle('collapsed');
+  chevron.classList.toggle('collapsed');
+}
+
+// Mobile filter panel
+function toggleMobileFilter() {
+  var panel = document.getElementById('filterPanel');
+  var overlay = document.getElementById('panelOverlay');
+  var btn = document.getElementById('mobileFilterBtn');
+  var isOpen = panel.classList.toggle('mobile-open');
+  overlay.classList.toggle('visible', isOpen);
+  btn.classList.toggle('active', isOpen);
+  // Ensure filter body is expanded when opening on mobile
+  if (isOpen) {
+    document.getElementById('filterBody').classList.remove('collapsed');
+    document.getElementById('filterChevron').classList.remove('collapsed');
+  }
+}
+function closeMobileFilter() {
+  document.getElementById('filterPanel').classList.remove('mobile-open');
+  document.getElementById('panelOverlay').classList.remove('visible');
+  document.getElementById('mobileFilterBtn').classList.remove('active');
+}
+
+// Auto-collapse filter panel on mobile load
+if (window.innerWidth <= 768) {
+  document.getElementById('filterBody').classList.add('collapsed');
+  document.getElementById('filterChevron').classList.add('collapsed');
+}
+
+var map = L.map('map', {
+  center: [25, 15],
+  zoom: 3,
+  minZoom: 2,
+  maxZoom: 18,
+  zoomControl: true,
+  worldCopyJump: true
+});
+
+// Dark satellite-style tile layer
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
+  subdomains: 'abcd',
+  maxZoom: 19
+}).addTo(map);
+
+// ===================== COLOR MAP =====================
+var colorMap = {
+  financial: '#ffcc00',
+  military: '#ff4444',
+  underground: '#ff6600',
+  surveillance: '#00ccff',
+  enclave: '#cc88ff',
+  archaeological: '#00ff41',
+  conflict: '#ff0066',
+  governance: '#ffffff',
+  blacksite: '#ff8800',
+  obelisk: '#e6c200',
+  'organized-crime': '#ff00ff',
+  other: '#888888'
+};
+
+function makeIcon(color, size) {
+  size = size || 8;
+  return L.divIcon({
+    className: '',
+    html: '<div style="width:'+size+'px;height:'+size+'px;border-radius:50%;background:'+color+';border:1.5px solid rgba(255,255,255,0.5);box-shadow:0 0 6px '+color+';"></div>',
+    iconSize: [size, size],
+    iconAnchor: [size/2, size/2]
+  });
+}
+
+// ===================== LOCATION DATA =====================
+var locations = [
+  // ===== SECTION II: Control Architecture =====
+  {name:"Bank for International Settlements (BIS)",lat:47.5476,lng:7.5886,section:"II",type:"financial",ctx:"Founded May 17, 1930. 63 member central banks. Sovereign immunity on Swiss soil. Transferred 23 tons Czech gold to Nazi Germany (March 1939). Bretton Woods voted to dissolve it — it survived."},
+  {name:"Basel, Switzerland",lat:47.5596,lng:7.5886,section:"II",type:"financial",ctx:"BIS headquarters. The central bank of central banks operates from Swiss soil with diplomatic immunity."},
+  {name:"Jekyll Island, Georgia",lat:31.0654,lng:-81.4201,section:"II",type:"financial",ctx:"November 1910: Six men met secretly at JP Morgan's exclusive club. Their plan became the Federal Reserve Act (1913). They denied the meeting for 20+ years."},
+  {name:"Federal Reserve, Washington D.C.",lat:38.8927,lng:-77.0455,section:"II",type:"financial",ctx:"Created by Federal Reserve Act, Dec 23, 1913 — signed during Congressional recess. Network of private member banks with government-appointed board."},
+  {name:"JP Morgan HQ, New York",lat:40.7566,lng:-73.9753,section:"II",type:"financial",ctx:"JP Morgan likely arranged Jekyll Island Club access. 77 years later, Greenspan (Morgan board member) became Fed Chair."},
+  {name:"Kuhn, Loeb & Co., New York",lat:40.7074,lng:-74.0113,section:"II",type:"financial",ctx:"Paul Warburg's firm. Warburg designed the Federal Reserve, became first Board member (1914). CFR director 1921-1932."},
+  {name:"Chase Manhattan / Rockefeller, New York",lat:40.7057,lng:-74.0088,section:"II",type:"financial",ctx:"David Rockefeller's bank. Volcker alternated between Chase and U.S. government. Chase → Treasury → Chase → Treasury → NY Fed → Fed Chair."},
+  {name:"Council on Foreign Relations (CFR), New York",lat:40.7686,lng:-73.9679,section:"II",type:"governance",ctx:"Founded 1921. 500+ members served in U.S. government. 21+ Secretaries of Defense/War, 22+ Secretaries of State, 16+ CIA Directors. Harold Pratt House, 58 E 68th St."},
+  {name:"Bilderberg Hotel, Oosterbeek, Netherlands",lat:51.9867,lng:5.8403,section:"II",type:"governance",ctx:"First Bilderberg Meeting: May 29-31, 1954. Annual meetings of 120-150 heads of state, bankers, media editors. Chatham House Rule — content is secret."},
+  {name:"Trilateral Commission, New York",lat:40.7540,lng:-73.9723,section:"II",type:"governance",ctx:"Founded July 1973 by David Rockefeller. Published 'Crisis of Democracy' (1975) arguing too much participation is the problem."},
+  {name:"Vatican City — St. Peter's Square",lat:41.9022,lng:12.4539,section:"II",type:"obelisk",ctx:"Spiritual control hub. Independent city-state since 1929. Egyptian obelisk from Heliopolis brought by Caligula 37 AD. Absolute monarchy. 1.3B Catholic adherents."},
+  {name:"City of London Corporation (Square Mile)",lat:51.5155,lng:-0.0922,section:"II",type:"financial",ctx:"Governing body of the Square Mile since 1067. Own police, own Lord Mayor. Businesses outvote residents 24,000 to 9,000. Processes $2.7T forex daily."},
+  {name:"Cleopatra's Needle, Victoria Embankment, London",lat:51.5085,lng:-0.1166,section:"II",type:"obelisk",ctx:"Egyptian obelisk from Heliopolis (1450 BC, Pharaoh Thutmose III). Brought to London 1878. Same origin as Vatican obelisk."},
+  {name:"Washington Monument, Washington D.C.",lat:38.8895,lng:-77.0353,section:"II",type:"obelisk",ctx:"555 ft 5.125 in. Egyptian obelisk design — NPS: 'evoking timelessness of ancient civilizations'. Aluminum cap inscribed 'Laus Deo'. Masonic cornerstone July 4, 1848."},
+  {name:"Place de la Concorde Obelisk, Paris",lat:48.8656,lng:2.3212,section:"II",type:"obelisk",ctx:"Egyptian obelisk from Luxor. Companion to London and New York obelisks. Four Egyptian obelisks across four Western capitals."},
+  {name:"Cleopatra's Needle, Central Park, New York",lat:40.7796,lng:-73.9654,section:"II",type:"obelisk",ctx:"Egyptian obelisk from Heliopolis. Third of three obelisks distributed across three Western capitals (London, Paris, New York)."},
+  {name:"East India Company, London",lat:51.5128,lng:-0.0830,section:"II",type:"financial",ctx:"Founded 1600. Own military (260,000 troops), own courts, own currency. Operated 274 years. Prototype for modern corporate sovereignty."},
+  {name:"Hamburg, Germany — M.M. Warburg",lat:53.5511,lng:9.9937,section:"II",type:"financial",ctx:"Warburg family banking dynasty HQ. Paul and Max Warburg operated banks on both sides of the Atlantic through both World Wars."},
+  {name:"Citadel HQ, Chicago",lat:41.8884,lng:-87.6270,section:"II",type:"financial",ctx:"Ken Griffin's hedge fund. Bernanke (Fed Chair 2006-14) became senior advisor after bailing out Wall Street with public money."},
+  {name:"Carlyle Group, Washington D.C.",lat:38.9050,lng:-77.0423,section:"II",type:"financial",ctx:"Fed Chair Jerome Powell was Carlyle partner. Co-founder David Rubenstein simultaneously chairs CFR and sits on Trilateral Commission."},
+  {name:"General Dynamics HQ, Reston, VA",lat:38.9526,lng:-77.3478,section:"II",type:"military",ctx:"Crown Family acquired 1959. Sole manufacturer of MK-80 series bombs used in Gaza. Sold electronics division to Carlyle Group (1992)."},
+  {name:"Aspen Institute, Washington D.C.",lat:38.9078,lng:-77.0388,section:"II",type:"governance",ctx:"Henry Crown Fellowship connects Crown Family (GD) → Jonathan Greenblatt (ADL CEO). Think tank bridging defense industry to advocacy."},
+  {name:"ADL Headquarters, New York",lat:40.7527,lng:-73.9772,section:"II",type:"governance",ctx:"Anti-Defamation League. CEO Jonathan Greenblatt is a Henry Crown Fellow (Aspen Institute) — connected to the Crown Family that owns General Dynamics."},
+
+  // Dershowitz Network
+  {name:"Harvard Law School, Cambridge, MA",lat:42.3770,lng:-71.1167,section:"IV",type:"governance",ctx:"Dershowitz: youngest full professor in Harvard Law history (age 28). Felix Frankfurter Professor of Law, 1964-2013. 49 years at the institution. Same Harvard whose scientists Epstein surrounded himself with."},
+  {name:"Palm Beach County, FL — Epstein NPA",lat:26.7153,lng:-80.0534,section:"IV",type:"governance",ctx:"2008: Dershowitz helped negotiate Epstein's non-prosecution agreement with U.S. Attorney Alexander Acosta. Deal shielded unnamed co-conspirators. Victims not notified. Federal judge later ruled it violated victims' rights (2019)."},
+
+  // ===== SECTION III: 51% Threshold =====
+  {name:"New Jersey Turnpike — Nash Crash Site",lat:40.3032,lng:-74.5169,section:"III",type:"other",ctx:"May 23, 2015: John Nash and wife Alicia killed in taxi crash returning from Norway (Abel Prize). Both ejected — not wearing seatbelts."},
+  {name:"Temple City, California — Hal Finney",lat:34.1073,lng:-118.0579,section:"III",type:"other",ctx:"Hal Finney lived here. 10 blocks from Dorian Satoshi Nakamoto. Received first Bitcoin transaction from Satoshi (2009). Both dead within 9 months of Nash."},
+  {name:"Alcor, Scottsdale, Arizona",lat:33.4590,lng:-111.9269,section:"III",type:"other",ctx:"Alcor Life Extension Foundation. Finney's body cryopreserved at -196°C. The operational builder of Bitcoin is frozen in a desert facility."},
+
+  // ===== SECTION IV: Underground / D.U.M.B. =====
+  {name:"Cheyenne Mountain, Colorado",lat:38.7446,lng:-104.8467,section:"IV",type:"underground",ctx:"NORAD/USNORTHCOM. 2,000 ft below granite. 5.1 acres floor space. Operational 1966. Military moved BACK IN and hardened against EMP."},
+  {name:"Raven Rock (Site R), Pennsylvania",lat:39.7365,lng:-77.4247,section:"IV",type:"underground",ctx:"Alternate National Military Command Center. Built 1951-53. 6 miles from Camp David with underground corridor connection."},
+  {name:"Camp David, Maryland",lat:39.6484,lng:-77.4650,section:"IV",type:"underground",ctx:"Presidential retreat. Connected to Site R via underground corridor. 6 miles from the alternate Pentagon."},
+  {name:"Mount Weather, Bluemont, Virginia",lat:39.0938,lng:-77.8872,section:"IV",type:"underground",ctx:"Emergency Operations Center. FEMA High Point Special Facility. Classified continuity-of-government facility."},
+  {name:"The Greenbrier, White Sulphur Springs, WV",lat:37.7880,lng:-80.3016,section:"IV",type:"underground",ctx:"Project Greek Island — secret Congressional bunker built 1958-61 beneath luxury resort. Decommissioned 1992 after media exposure."},
+  {name:"Mount Yamantau, Urals, Russia",lat:54.2500,lng:58.1000,section:"IV",type:"underground",ctx:"~400 sq mi underground facility. Construction began 1960s, expanded 1990s. Closed city of Mezhgorye (~17,000 pop) services it."},
+  {name:"Kosvinsky Kamen, Urals, Russia",lat:59.4833,lng:58.9667,section:"IV",type:"underground",ctx:"Russian nuclear command facility inside granite mountain. 'Dead Hand' Perimeter system — designed to launch without human authorization."},
+  {name:"Moscow — Metro-2 / D-6",lat:55.7558,lng:37.6173,section:"IV",type:"underground",ctx:"Secret parallel metro system connecting Kremlin, Ministry of Defense, FSB HQ, Vnukovo-2 airport. Underground command facilities at Sharapovo & Chekhov (30,000 capacity each)."},
+  {name:"Project 131, Hubei Province, China",lat:30.5928,lng:114.3055,section:"IV",type:"underground",ctx:"Underground command HQ built for Mao Zedong, 1969-71. Chinese government D.U.M.B. program."},
+  {name:"Beijing Underground City",lat:39.9042,lng:116.4074,section:"IV",type:"underground",ctx:"Built 1969-79. Capacity 300,000 people. Beneath the capital of the world's most populous country."},
+  {name:"816 Nuclear Military Plant, Chongqing, China",lat:29.4316,lng:107.9511,section:"IV",type:"underground",ctx:"18 years construction by 60,000 soldiers. Nuclear weapons production facility carved into mountain."},
+  {name:"Burlington / Corsham, Wiltshire, UK",lat:51.4327,lng:-2.1878,section:"IV",type:"underground",ctx:"Central Government War HQ in former quarry. 35 acres, capacity 4,000 officials. British deep state continuity facility."},
+  {name:"Jerusalem Underground Command, Israel",lat:31.7683,lng:35.2137,section:"IV",type:"underground",ctx:"Crisis command center beneath the Judaean Mountains. Israeli continuity-of-government facility."},
+  {name:"Klara Bunker, Stockholm, Sweden",lat:59.3293,lng:18.0686,section:"IV",type:"underground",ctx:"Capacity 8,000-12,000 people. Sweden has 65,000+ fallout shelters for 10 million population."},
+  {name:"Svalbard Global Seed Vault, Arctic Norway",lat:78.2355,lng:15.4942,section:"IV",type:"underground",ctx:"Funded by Gates Foundation, Rockefeller, Monsanto, Syngenta, DuPont. 'Backup' for global seed supply. Norwegian government bunker also here."},
+  {name:"Diefenbunker, Ottawa, Canada",lat:45.3510,lng:-76.0457,section:"IV",type:"underground",ctx:"CFS Carp. Primary Canadian nuclear bunker, 1958-63. Now a Cold War museum. The bunker was built; the question is what replaced it."},
+  {name:"COFAS, Taverny, France",lat:49.0175,lng:2.2028,section:"IV",type:"underground",ctx:"French Air Force nuclear command center inside mountain. French force de frappe command facility."},
+  {name:"Mont Verdun, near Lyon, France",lat:45.8735,lng:4.7780,section:"IV",type:"underground",ctx:"Combined air defense and nuclear command facility. French deep state continuity infrastructure."},
+  {name:"Regierungsbunker, Ahrweiler, Germany",lat:50.5457,lng:7.1093,section:"IV",type:"underground",ctx:"Federal government bunker built 1960-72. 17.3 km of tunnels. 203m section now a museum. The rest was demolished — allegedly."},
+  {name:"K-116, Zlíchov, Prague, Czech Republic",lat:50.0624,lng:14.4025,section:"IV",type:"underground",ctx:"Cold War-era underground command bunker beneath Zlíchov hill. Eastern Bloc continuity infrastructure."},
+  {name:"REGAN Vest, Jutland, Denmark",lat:56.2639,lng:9.5018,section:"IV",type:"underground",ctx:"Government nuclear bunker, western Denmark. Scandinavian D.U.M.B. network."},
+
+  // Black Sites / Rendition
+  {name:"Salt Pit / 'The Dark Prison', North Kabul, Afghanistan",lat:34.5964,lng:69.1618,section:"IV",type:"blacksite",ctx:"CIA facility. Detainee Gul Rahman froze to death November 2002. 'Enhanced interrogation' — the U.S. government's euphemism for torture."},
+  {name:"Stare Kiejkuty, Poland",lat:53.8098,lng:21.2753,section:"IV",type:"blacksite",ctx:"Former intelligence facility converted to CIA black site. Confirmed by European Court of Human Rights 2014."},
+  {name:"Mihail Kogălniceanu, Romania",lat:44.3622,lng:28.4865,section:"IV",type:"blacksite",ctx:"CIA detention at military airbase. Confirmed ECHR 2018. European NATO ally hosting secret U.S. torture facility."},
+  {name:"Antaviliai, Lithuania",lat:54.7484,lng:25.3163,section:"IV",type:"blacksite",ctx:"Former riding school converted to CIA detention facility. Confirmed ECHR 2018. Another EU/NATO state hosting black sites."},
+  {name:"Ramasun Station / 'Detention Site Green', Thailand",lat:17.4069,lng:102.7708,section:"IV",type:"blacksite",ctx:"CIA's first black site (2002). Former Five Eyes SIGINT facility converted to detention. Surveillance infrastructure repurposed for torture."},
+  {name:"Camp Lemonnier, Djibouti",lat:11.5469,lng:43.1464,section:"IV",type:"blacksite",ctx:"U.S. military base serving as rendition transit hub. 1,245 documented CIA flights in the rendition network."},
+  {name:"Diego Garcia, British Indian Ocean Territory",lat:-7.3195,lng:72.4229,section:"IV",type:"blacksite",ctx:"UK-administered, leased to U.S. Rendition flights confirmed. Chagossian population forcibly removed 1960s to make room for the base."},
+  {name:"Negev Nuclear Research Center, Dimona, Israel",lat:31.0013,lng:35.1445,section:"IV",type:"underground",ctx:"31.0013°N, 35.1445°E. 13 km SE of Dimona. Israel installed false walls before U.S. inspections (1965-69). Inspectors called inspections 'useless'."},
+  {name:"Little Saint James Island, U.S. Virgin Islands",lat:18.3000,lng:-64.8253,section:"IV",type:"enclave",ctx:"Jeffrey Epstein's island (70-78 acres). Sally port military doors. Dedicated fiber optic cable to St. Thomas. Structure containing portrait with a Pope. 18°18'N, 64°49'W."},
+
+  // ===== SECTION V: Surveillance / Smart Cities =====
+  {name:"New Administrative Capital (NAC/Memphis), Egypt",lat:30.0197,lng:31.7636,section:"V",type:"surveillance",ctx:"700 km². 45 km east of Cairo. 6,000+ AI cameras. Military 51% ownership. Renamed 'Memphis' Feb 2026. Octagon (largest MoD complex in Middle East). Iconic Tower (393.8m, tallest in Africa)."},
+  {name:"NEOM / THE LINE, Saudi Arabia",lat:27.9500,lng:35.3000,section:"V",type:"surveillance",ctx:"170km linear city, 200m wide, 500m tall mirrored glass walls. AI-managed population. OXAGON floating industrial city. TROJENA ski resort. Huwaitat tribe killed for resisting."},
+  {name:"Songdo International Business District, South Korea",lat:37.3818,lng:126.6593,section:"V",type:"surveillance",ctx:"Built on 1,500 acres reclaimed from Yellow Sea. 'Ubiquitous city' with ubiquitous sensing. Population ~180,000 (below 300,000 target)."},
+  {name:"Masdar City, Abu Dhabi, UAE",lat:24.4265,lng:54.6154,section:"V",type:"surveillance",ctx:"Zero-carbon planned city by Foster + Partners. Population ~5,000 vs 50,000 target. The smart city that couldn't attract residents."},
+  {name:"Quayside / Sidewalk Toronto, Canada",lat:43.6426,lng:-79.3602,section:"V",type:"surveillance",ctx:"Proposed 12-acre smart district by Google/Sidewalk Labs. Cancelled 2020 after public backlash over data harvesting. Toronto said no."},
+  {name:"Amaravati, Andhra Pradesh, India",lat:16.5150,lng:80.5180,section:"V",type:"surveillance",ctx:"New state capital — 217 sq km by Foster + Partners. Stalled after 2019 elections. 33+ villages displaced. The displaced don't get the smart city."},
+  {name:"Nusantara, Borneo, Indonesia",lat:-1.2834,lng:116.8312,section:"V",type:"surveillance",ctx:"New national capital replacing Jakarta. 256,000 hectares. Government relocation began 2024. Moving the capital to the jungle."},
+  {name:"Forest City, Johor, Malaysia",lat:1.3487,lng:103.6310,section:"V",type:"surveillance",ctx:"$100B development by Country Garden. Largely empty ghost city. The smart city that no one moved to."},
+  {name:"Microsoft HQ, Redmond, Washington",lat:47.6405,lng:-122.1267,section:"V",type:"surveillance",ctx:"Windows 72% desktops, Azure cloud, GitHub (100M+ developers), LinkedIn (1B users), VS Code, PowerShell. The operating system layer."},
+  {name:"Amazon / AWS HQ, Seattle",lat:47.6223,lng:-122.3364,section:"V",type:"surveillance",ctx:"Jeff Bezos. AWS hosts ~33% global cloud. Ring doorbell surveillance. Whole Foods. Washington Post. The infrastructure layer."},
+  {name:"Google / Alphabet HQ, Mountain View, CA",lat:37.4220,lng:-122.0841,section:"V",type:"surveillance",ctx:"92% search, Chrome 65%, Android 72%, YouTube 2B users. Project Maven (military AI). Project Nimbus ($1.2B Israeli AI targeting)."},
+  {name:"Meta HQ, Menlo Park, CA",lat:37.4530,lng:-122.1817,section:"V",type:"surveillance",ctx:"Zuckerberg: 57.7% voting control. Facebook, Instagram, WhatsApp: 3.07B monthly users. One person controls the social graph of half of humanity."},
+  {name:"Menwith Hill, UK",lat:54.0016,lng:-1.6874,section:"V",type:"military",ctx:"Largest NSA facility outside USA. ECHELON station. Operated by Lockheed Martin. The arms manufacturer runs the listening post."},
+  {name:"Pine Gap, Northern Territory, Australia",lat:-23.7981,lng:133.7370,section:"V",type:"military",ctx:"Joint CIA/ASD facility. ECHELON intercept station. Five Eyes southern hemisphere signals intelligence hub."},
+  {name:"Waihopai Station, New Zealand",lat:-41.8000,lng:173.6167,section:"V",type:"military",ctx:"ECHELON intercept station. New Zealand node of the Five Eyes surveillance network."},
+  {name:"Misawa Air Base, Japan",lat:40.7031,lng:141.3686,section:"V",type:"military",ctx:"ECHELON intercept station. Five Eyes Asian Pacific signals intelligence node."},
+  {name:"Sugar Grove, West Virginia",lat:38.5120,lng:-79.2830,section:"V",type:"military",ctx:"NSA intercept station. Domestic SIGINT collection facility."},
+  {name:"Yakima Research Station, Washington",lat:46.6818,lng:-120.5286,section:"V",type:"military",ctx:"NSA intercept station. Pacific Northwest signals intelligence facility."},
+  {name:"Gaza — Gaza Marine Gas Field",lat:31.5000,lng:34.4667,section:"V",type:"conflict",ctx:"Natural gas reserves discovered 2000 beneath Gaza territory. Mass civilian casualties. General Dynamics MK-80 bombs. Nimbus AI targeting."},
+
+  // ===== SECTION VI: "New" Pattern =====
+  {name:"Wall Street / New Amsterdam, Manhattan",lat:40.7069,lng:-74.0089,section:"VI",type:"financial",ctx:"Dutch West India Company settlement (1624-1664). Wall Street named after colony fortification wall. The financial capital sits on the extraction company's foundation."},
+  {name:"New Albany, Ohio",lat:40.0812,lng:-82.8085,section:"VI",type:"surveillance",ctx:"Pop. 414 (1980) → 10,825 (2020). 2,500% growth. Wexner/Epstein designed community. Facebook data center. Google data center. Intel 926-acre fab plant."},
+  {name:"New Canaan, Connecticut",lat:41.1478,lng:-73.4951,section:"VI",type:"enclave",ctx:"Gold Coast. Median household income $141,788. Philip Johnson Glass House. Harmony Lodge No. 67 (Masonic, 1763). Waveny Park: 300-acre former Texaco founder estate."},
+
+  // ===== SECTION VII: Enclaves =====
+  {name:"Indian Creek Island, Florida",lat:25.8510,lng:-80.1590,section:"VII",type:"enclave",ctx:"0.47 sq mi. Single bridge with police checkpoint. 84 residents, 13-officer police force (1:6.5 ratio). Bezos ($170M), Zuckerberg, Kushner, Andreessen."},
+  {name:"Fisher Island, Florida",lat:25.7637,lng:-80.1425,section:"VII",type:"enclave",ctx:"0.27 sq mi. Ferry/helicopter only. Wealthiest zip code in America. Nixon/Rebozo/Smathers ownership chain. ~561 residents."},
+  {name:"Zorro Ranch, New Mexico",lat:32.6375,lng:-105.5350,section:"VII",type:"enclave",ctx:"Jeffrey Epstein's 33,339-acre ranch. NYT confirmed: planned to 'seed human race with his DNA' by impregnating women here. Transhumanism base."},
+
+  // ===== SECTION VIII: Cyclical Patterns =====
+  {name:"Library of Alexandria, Egypt",lat:31.2001,lng:29.9187,section:"VIII",type:"archaeological",ctx:"Destroyed in stages: 48 BC fire, 270 AD, 391 AD, 642 AD. The ancient world's greatest library — burned four times across seven centuries."},
+  {name:"House of Wisdom, Baghdad, Iraq",lat:33.3405,lng:44.4009,section:"VIII",type:"archaeological",ctx:"Destroyed 1258 during Mongol sack. 9 million manuscripts. Tigris River ran black with ink. 800 years of knowledge destroyed in one siege."},
+  {name:"Nalanda University, Bihar, India",lat:25.1357,lng:85.4428,section:"VIII",type:"archaeological",ctx:"800+ year Buddhist center burned 1193. 9 million manuscripts destroyed. Knowledge purge by conquest — the pattern repeats."},
+  {name:"Great Pyramid of Giza, Egypt",lat:29.9792,lng:31.1342,section:"VIII",type:"archaeological",ctx:"2.3 million limestone blocks. 4,500 years old. Aligned to true north within 3/60 degree. Precision that challenges industrial explanation."},
+  {name:"Puma Punku, Tiwanaku, Bolivia",lat:-16.5617,lng:-68.6805,section:"VIII",type:"archaeological",ctx:"H-blocks with 1/50 inch precision tolerances. Interlocking modular design. 12,500 ft altitude. Technology that shouldn't exist at the stated date."},
+  {name:"Baalbek, Lebanon",lat:34.0047,lng:36.2110,section:"VIII",type:"archaeological",ctx:"Trilithon: three 800-ton stones at 20+ ft height. Stone of the Pregnant Woman: ~1,000 tons, unfinished in quarry. No modern crane can replicate the placement."},
+  {name:"Göbekli Tepe, Turkey",lat:37.2231,lng:38.9222,section:"VIII",type:"archaeological",ctx:"Pre-12,000 years old (9500 BC). Multi-ton carved pillars. Deliberately buried by its builders. The oldest known temple — intentionally hidden."},
+  {name:"Monte Verde, Chile",lat:-41.5062,lng:-72.5812,section:"VIII",type:"archaeological",ctx:"Pre-Clovis site, 18,500 years old. Resisted by archaeological establishment for years. Proof humans were in the Americas far earlier than the accepted timeline."},
+  {name:"Visočica Hill (Bosnian Pyramid), Bosnia",lat:43.9767,lng:18.1764,section:"VIII",type:"archaeological",ctx:"Proposed pyramid complex. Dismissed without investigation by establishment archaeologists. Anomalous structure — uninvestigated by design."},
+  {name:"Point Nemo, South Pacific",lat:-48.8767,lng:-123.3933,section:"VIII",type:"archaeological",ctx:"48°52.6'S, 123°23.6'W. Oceanic pole of inaccessibility. Spacecraft cemetery. ISS orbits closer than any land. Lovecraft placed R'lyeh here in 1928, 64 years before identification."},
+  {name:"Pine Ridge Reservation, South Dakota",lat:43.1000,lng:-102.5500,section:"VIII",type:"other",ctx:"North American pole of inaccessibility. Oglala Lakota Sioux territory. The most inaccessible point on the continent is an Indigenous reservation."},
+  {name:"Smithsonian Institution, Washington D.C.",lat:38.8881,lng:-77.0259,section:"VIII",type:"other",ctx:"Alleged sequestration of anomalous archaeological artifacts. The institution tasked with preserving knowledge accused of suppressing it."},
+
+  // ===== SECTION IX: Slavery Systems =====
+  {name:"Eastern Congo / DRC — Cobalt Mines",lat:-3.4500,lng:28.0000,section:"IX",type:"conflict",ctx:"Children as young as 6 in artisanal cobalt mining. Cobalt → batteries → surveillance cameras → smart cities. The supply chain is built on child labor."},
+
+  // ===== SECTION X: Active Conflicts =====
+  {name:"Ukraine — Active Conflict Zone",lat:48.3794,lng:31.1656,section:"X",type:"conflict",ctx:"Russia-Ukraine war (2022-present). Largest land war in Europe since 1945. Richest agricultural land and energy infrastructure. Grain supply chains disrupted."},
+  {name:"Gaza — Active Conflict Zone",lat:31.3547,lng:34.3088,section:"X",type:"conflict",ctx:"Gaza-Israel conflict (Oct 2023-present). Mass civilian casualties. Infrastructure destruction. Forced displacement. GD MK-80 bombs + Nimbus AI targeting."},
+  {name:"Sudan — Active Conflict Zone",lat:15.5007,lng:32.5599,section:"X",type:"conflict",ctx:"Civil War (April 2023-present). 10+ million displaced. Ethnic violence in Darfur. Significant gold reserves. SAF vs RSF."},
+  {name:"Myanmar — Active Conflict Zone",lat:19.7633,lng:96.0785,section:"X",type:"conflict",ctx:"Civil War (Feb 2021-present). Military junta. Airstrikes against civilians. Millions displaced. Rare earth mineral supply chain."},
+  {name:"Darfur, Sudan",lat:13.5000,lng:25.0000,section:"X",type:"conflict",ctx:"Ethnic violence region within Sudan conflict. Pattern of displacement and resource extraction beneath the violence."},
+
+  // ===== SECTION XI: FOIA / Legal =====
+  {name:"Amsterdam Court of Appeal, Netherlands",lat:52.3611,lng:4.8850,section:"XI",type:"governance",ctx:"March 9, 2026: Lawyer Peter W.H. Stassen argued multi-century elite architecture in formal court proceedings. Now part of the official legal record."},
+  {name:"Pentagon, Washington D.C.",lat:38.8711,lng:-77.0562,section:"XI",type:"military",ctx:"Operation Northwoods (1962): Joint Chiefs proposed false flag attacks on U.S. soil to justify Cuba invasion. Kennedy rejected it."},
+  {name:"Gulf of Tonkin, Vietnam",lat:20.5000,lng:107.5000,section:"XI",type:"military",ctx:"1964 incident. NSA declassified (2005): second attack did not occur. Basis for Vietnam War escalation. Intelligence fabrication to justify war."},
+
+  // ===== SECTION XII: Spiritual Exit =====
+  {name:"Svalbard Seed Vault (Gates/Rockefeller)",lat:78.2355,lng:15.4942,section:"XII",type:"other",ctx:"Gates Foundation + Rockefeller Foundation + Monsanto + Syngenta + DuPont fund the vault. Gates owns 270,000 acres U.S. farmland across 19 states."},
+
+  // ===== SECTION II: Handler Networks / Manufactured Leaders =====
+  {name:"Fort Moore (formerly Fort Benning) — School of the Americas / WHINSEC",lat:32.3537,lng:-84.9649,section:"II",type:"military",ctx:"School of the Americas (renamed WHINSEC 2001). Trained officers who became Latin American dictators: Noriega, Galtieri, D'Aubuisson, Rios Montt (convicted genocide), Banzer. The rebranding pattern — the training continued, the name changed."},
+  {name:"Carlisle Barracks, PA — U.S. Army War College",lat:40.2026,lng:-77.1886,section:"II",type:"military",ctx:"Sisi attended International Fellows Program (2006). Became head of Egyptian Military Intelligence (2010), led 2013 coup, now constructing NAC — 700 km² AI-surveilled city. Carlisle produced the architect of Memphis."},
+  {name:"National Defense University, Washington D.C.",lat:38.8640,lng:-77.0160,section:"II",type:"military",ctx:"International officers program trains foreign military leaders in U.S. doctrine. Graduates return carrying the architecture in their training."},
+  {name:"Fort Leavenworth, KS — Command and General Staff College",lat:39.3553,lng:-94.9217,section:"II",type:"military",ctx:"International Military Student program. Foreign officers trained in U.S. command philosophy and strategic doctrine."},
+  {name:"Royal Military Academy Sandhurst, UK",lat:51.3484,lng:-0.7693,section:"II",type:"military",ctx:"Trained King Abdullah II (Jordan), King Hamad (Bahrain), Sultan Qaboos (Oman), Crown Prince Hussein (Jordan), Gulf state royals. British Empire ended. The officer pipeline did not."},
+  {name:"Tehran, Iran — 1953 Operation Ajax",lat:35.6892,lng:51.3890,section:"II",type:"military",ctx:"CIA-MI6 joint operation. Democratically elected Mossadegh removed, Shah installed. SAVAK trained by CIA and Mossad. Blowback: 1979 Islamic Revolution."},
+  {name:"Guatemala City — 1954 Operation PBSUCCESS",lat:14.6349,lng:-90.5069,section:"II",type:"military",ctx:"Democratically elected Arbenz removed. Dulles brothers (CIA Director + Secretary of State) both had United Fruit Company financial ties. The brothers who ordered the coup profited from it."},
+  {name:"Kinshasa, Congo — 1961 Lumumba Assassination",lat:-4.3250,lng:15.3222,section:"II",type:"military",ctx:"Patrice Lumumba — first democratically elected leader — assassinated. CIA documented involvement. Mobutu installed, ruled 32 years, looted est. $5 billion."},
+  {name:"Jakarta, Indonesia — 1965 CIA Kill Lists",lat:-6.1751,lng:106.8650,section:"II",type:"military",ctx:"Sukarno removed, Suharto installed. CIA provided kill lists. U.S. Embassy supplied names. 500,000–1,000,000 killed. Suharto ruled 31 years."},
+  {name:"Santiago, Chile — 1973 Allende Coup",lat:-33.4489,lng:-70.6693,section:"II",type:"military",ctx:"Democratically elected Allende died in palace during Sept 11, 1973 coup. CIA documented (Church Committee), $8M+ covert funding. Pinochet disappeared 3,000+ people."},
+  {name:"Congress for Cultural Freedom HQ, Paris",lat:48.8606,lng:2.3376,section:"II",type:"governance",ctx:"Established 1950 as CIA front, operated in 35 countries. Funded literary magazines, art exhibitions, conferences. Exposed 1967 by Ramparts. The Western cultural apparatus as intelligence operation. Kosinski was embedded in this network."},
+  // ===== SECTION II: ISA / Task Force Orange =====
+  {name:"Fort Belvoir, VA — ISA / Task Force Orange HQ",lat:38.7119,lng:-77.1454,section:"II",type:"military",ctx:"Intelligence Support Activity (ISA) headquarters. The most classified U.S. military intelligence unit — JSOC's field intelligence arm. Known by 12+ codenames (CENTRA SPIKE, GRAY FOX, CEMETERY WIND, etc.), changed every ~2 years. Nicknamed 'The Activity' and 'Army of Northern Virginia.' Created 1980 after Operation Eagle Claw failure. Provides SIGINT/HUMINT to Delta Force and DEVGRU. The unit that finds the targets."},
+  {name:"Arlington, VA — ISA First Secret HQ",lat:38.8799,lng:-77.1060,section:"II",type:"surveillance",ctx:"ISA's original secret headquarters (1981). Arlington sits on land confiscated from Robert E. Lee's estate. The unit nicknamed 'Army of Northern Virginia' was first headquartered on the Confederate general's seized ground. SAP codename: OPTIMIZE TALENT. Budget: $7M classified."},
+  {name:"Tegucigalpa, Honduras — SEASPRAY/ISA Operations Base",lat:14.0723,lng:-87.1921,section:"II",type:"military",ctx:"ISA SIGINT specialists operated from Honduras (1982-85+) during Operation Queens Hunter. SEASPRAY clandestine aviation flew Beechcraft King Airs. Monitored Salvadoran guerrilla communications while School of the Americas graduates ran counter-guerrilla death squads in the same theater. Same government funded both the intelligence and the killing."},
+  {name:"Medellín, Colombia — CENTRA SPIKE / Pablo Escobar Hunt",lat:6.2476,lng:-75.5658,section:"II",type:"military",ctx:"ISA's SIGINT team (codename CENTRA SPIKE) tracked Pablo Escobar's communications (1989-93), providing geolocation intelligence leading to his death December 1993. Documented in Mark Bowden's Killing Pablo. The classified targeting capability deployed against a drug lord for a foreign government."},
+  // ===== SECTION XI: Strategic Personnel Disappearances / Mondaloy Triangle =====
+  {name:"Mount Waterman, Angeles National Forest, CA — Reza LKP",lat:34.3496,lng:-117.9628,section:"XI",type:"military",ctx:"Monica Jacinto Reza — Mondaloy alloy co-inventor (US Patent 2010/0266442 A1), Columbia PhD, UCLA postdoc, Aerojet Rocketdyne Technical Fellow, then JPL. Last known position June 22 2025. FLIR-negative (no thermal signature). Scent trail terminated. Find a Grave memorial created 4 days later — 'green burial' designation while SAR still active. 65 miles from Edwards AFB."},
+  {name:"Sandia Mountains, Albuquerque, NM — McCasland Disappearance",lat:35.2107,lng:-106.4510,section:"XI",type:"military",ctx:"Maj. Gen. William Neil McCasland — AFRL Commander 2011-2013, oversaw $4.4B R&D portfolio that funded Reza's Mondaloy work. Vanished hiking February 27 2026. Left all electronics behind. Named in DeLonge-Podesta email (Wikileaks ID 2125) re: UFO/UAP phenomenon. Second vertex of the Mondaloy triangle to disappear."},
+  {name:"Wright-Patterson AFB, Dayton, OH — AFRL HQ",lat:39.8261,lng:-84.0483,section:"XI",type:"military",ctx:"Air Force Research Laboratory headquarters. Dallis Hardwick — first Mondaloy co-inventor — served at AFRL Materials and Manufacturing Directorate. Died 2014 (cancer). First vertex of the Mondaloy chain of custody to be eliminated. Every person in the alloy's chain — Hardwick, Reza, McCasland — dead or missing by 2026."},
+  {name:"Edwards AFB, CA — USAF Flight Test Center",lat:34.9054,lng:-117.8839,section:"XI",type:"military",ctx:"USAF primary flight test and DEW development center. 65 miles from Reza's last known position in Angeles National Forest. Anonymous source (South Korean LinkedIn, March 2026): DEW operating at extreme wattage, 'same signal as when lightning is made.' Edwards proximity to Reza's FLIR-negative disappearance is noted."},
+  {name:"JPL / La Cañada Flintridge, CA — Reza's Employer",lat:34.2014,lng:-118.1714,section:"XI",type:"military",ctx:"Jet Propulsion Laboratory — Reza's employer at time of disappearance. JPL issued no public statement. NASA headquarters silent. Aerojet Rocketdyne (former employer) silent. AIAA silent. SpaceNews silent. The institutional perimeter holds."},
+
+  // ===== SECTION XII: Organized Crime as Infrastructure =====
+  {name:"Mena, Arkansas — CIA Cocaine Transshipment",lat:34.5862,lng:-94.2394,section:"XII",type:"organized-crime",ctx:"Barry Seal's base of operations. CIA-linked cocaine flights from Central America through Mena's Intermountain Municipal Airport. Seal ran an estimated $3-5B in cocaine. Assassinated Feb 19, 1986 in Baton Rouge. State Police investigator Russell Welch shot with military-grade anthrax after documenting flights."},
+  {name:"Ilopango Air Base, El Salvador",lat:13.6995,lng:-89.1199,section:"XII",type:"organized-crime",ctx:"CIA cocaine logistics hub. Contra supply flights returned loaded with cocaine. Oliver North's notebooks reference the operation. Kerry Committee (1989) confirmed Contra drug trafficking as state-facilitated policy."},
+  {name:"Culiacán, Sinaloa, Mexico — Cartel HQ",lat:24.8094,lng:-107.3940,section:"XII",type:"organized-crime",ctx:"Sinaloa Cartel headquarters. Jesús Vicente Zambada-Niebla testified (2013) the cartel had an agreement with DEA and DOJ — immunity in exchange for intelligence on rival cartels. U.S. government provided cartel leadership with protection while publicly fighting the drug war."},
+  {name:"Otay Mesa, California — Cartel Tunnel",lat:32.5547,lng:-116.9386,section:"XII",type:"organized-crime",ctx:"Major tunnel corridor between Tijuana and San Diego. Sinaloa Cartel operated sophisticated drug tunnels with rail systems, ventilation, and electricity. Distribution hub connecting Mexican production to U.S. market."},
+  {name:"Chicago, Illinois — Sinaloa Distribution Hub",lat:41.8781,lng:-87.6298,section:"XII",type:"organized-crime",ctx:"DEA identified Chicago as the primary Sinaloa Cartel distribution hub in the United States. The cartel used Chicago as a central node to supply cocaine, heroin, and methamphetamine to the entire eastern seaboard and Midwest."},
+  {name:"Arezzo, Italy — P2 Lodge / Villa Wanda",lat:43.4633,lng:11.8781,section:"XII",type:"organized-crime",ctx:"Licio Gelli's Villa Wanda — headquarters of Propaganda Due (P2) Masonic lodge. 962 members including 44 parliamentarians, military commanders, intelligence chiefs, financiers, media editors. Gelli's 'Plan of Democratic Rebirth' — a 53-point manifesto for authoritarian capture of Italian democracy through media control, judicial infiltration, and constitutional amendment."},
+  {name:"Milan, Italy — Banco Ambrosiano",lat:45.4642,lng:9.1900,section:"XII",type:"organized-crime",ctx:"Banco Ambrosiano headquarters. Italy's largest private bank collapsed in 1982 with a $1.287 billion hole. Chairman Roberto Calvi found hanged under Blackfriars Bridge, London. Vatican Bank (IOR) was the principal shareholder. P2 Lodge controlled the bank through Gelli and Calvi."},
+  {name:"Blackfriars Bridge, London — Calvi Murder",lat:51.5106,lng:-0.1036,section:"XII",type:"organized-crime",ctx:"Roberto Calvi — 'God's Banker' — found hanging under Blackfriars Bridge, June 18, 1982. Pockets filled with bricks and cash. Initially ruled suicide, reclassified as murder (2002). Calvi was fleeing with evidence connecting Vatican Bank, P2 Lodge, Mafia, and CIA funding of Solidarity and the Contras through Ambrosiano."},
+  {name:"Reggio Calabria, Italy — 'Ndrangheta HQ",lat:38.1147,lng:15.6501,section:"XII",type:"organized-crime",ctx:"'Ndrangheta homeland. Estimated revenue €44-53 billion/year — 3% of Italian GDP. Controls 80% of European cocaine trade. Decentralized 'ndrine (family clans) make it nearly impossible to dismantle. Global operations in 30+ countries."},
+  {name:"Gioia Tauro, Italy — 'Ndrangheta Port",lat:38.4262,lng:15.8983,section:"XII",type:"organized-crime",ctx:"Calabrian port controlled by 'Ndrangheta. Primary cocaine entry point for European distribution. Largest transshipment port in the Mediterranean used as a logistics hub for narcotics trafficking."},
+  {name:"San Luca, Italy — 'Ndrangheta Origin",lat:38.1475,lng:16.0719,section:"XII",type:"organized-crime",ctx:"Spiritual and organizational homeland of the 'Ndrangheta. Annual pilgrimage to the Sanctuary of Our Lady of Polsi serves as the organization's annual meeting for strategic decisions. Duisburg massacre (2007) — six 'Ndrangheta members killed in Germany — originated from a San Luca clan feud."},
+  {name:"Duisburg, Germany — 'Ndrangheta Massacre",lat:51.4344,lng:6.7623,section:"XII",type:"organized-crime",ctx:"August 15, 2007: six men from San Luca 'Ndrangheta clans shot dead outside Da Bruno restaurant. The massacre exposed 'Ndrangheta's deep presence in Germany and broader European operations. Led to increased European law enforcement focus on Calabrian organized crime."},
+  {name:"Rotterdam, Netherlands — Cocaine Port",lat:51.9244,lng:4.4777,section:"XII",type:"organized-crime",ctx:"Europe's largest port. Primary 'Ndrangheta cocaine entry point for Northern Europe. Record seizures of 60+ tons annually, with authorities estimating they intercept only 10-20% of total flow."},
+  {name:"Antwerp, Belgium — Cocaine Port",lat:51.2194,lng:4.4025,section:"XII",type:"organized-crime",ctx:"Europe's second-largest port. Massive cocaine transshipment hub, often exceeding Rotterdam in seizure volumes. 'Ndrangheta and Albanian organized crime networks coordinate distribution through the port."},
+  {name:"HSBC HQ, London — Cartel Laundering",lat:51.5047,lng:-0.0194,section:"XII",type:"organized-crime",ctx:"HSBC fined $1.9 billion (2012) for laundering $881 million for Sinaloa and Norte del Valle cartels. Bank processed $660 billion in wire transfers from Mexico. No criminal charges against any individual. The fine represented approximately five weeks of profit."},
+  {name:"Luxembourg — BCCI",lat:49.6117,lng:6.1300,section:"XII",type:"organized-crime",ctx:"BCCI (Bank of Credit and Commerce International) — the most corrupt bank in history. $13 billion in fraud. CIA's primary off-book banking channel. Laundered for Medellín Cartel, Noriega, Abu Nidal, and nuclear proliferation networks. Founded 1972, collapsed 1991."},
+  {name:"São Paulo, Brazil — PCC-'Ndrangheta Nexus",lat:-23.5505,lng:-46.6333,section:"XII",type:"organized-crime",ctx:"Primeiro Comando da Capital (PCC) alliance with 'Ndrangheta — cocaine flows from Andean production through Brazilian ports to Calabrian distribution networks in Europe. São Paulo serves as the logistics and financial coordination hub."},
+  {name:"Bologna, Italy — Strategy of Tension",lat:44.4949,lng:11.3426,section:"XII",type:"organized-crime",ctx:"August 2, 1980: Bologna train station bombing — 85 dead, 200+ wounded. Carried out by neo-fascist NAR with P2 Lodge and Gladio involvement. Vincenzo Vinciguerra (convicted Gladio operative) testified that NATO stay-behind networks organized false flag attacks to blame the left and justify authoritarian state responses."},
+  {name:"Managua, Nicaragua — Dual-Funding",lat:12.1150,lng:-86.2362,section:"XII",type:"organized-crime",ctx:"Banco Ambrosiano funds flowed to both the Contras and Sandinista government — the same bank funded both sides. CIA cocaine flights from Ilopango supplied the Contras while Argentina trained them with Exocet missile profits from the Falklands War. Vatican Bank, P2, CIA, and Mafia financial streams converged here."},
+  {name:"Medellín, Colombia — CENTRA SPIKE / ISA",lat:6.2476,lng:-75.5658,section:"XII",type:"organized-crime",ctx:"ISA (Intelligence Support Activity) operation CENTRA SPIKE tracked Pablo Escobar using signals intelligence. The same U.S. intelligence apparatus that facilitated drug trafficking through the Contra pipeline simultaneously hunted Escobar — the competitor to CIA-allied cartels."}
+];
+
+// ===================== LAYER GROUPS =====================
+var allMarkers = [];
+var markerLayer = L.layerGroup().addTo(map);
+
+// Create markers
+locations.forEach(function(loc) {
+  var color = colorMap[loc.type] || '#888';
+  var marker = L.marker([loc.lat, loc.lng], { icon: makeIcon(color, 10) });
+
+  var sectionLabel = 'Section ' + loc.section;
+  var typeLabel = loc.type.charAt(0).toUpperCase() + loc.type.slice(1);
+
+  marker.bindPopup(
+    '<div class="popup-title">' + loc.name + '</div>' +
+    '<div class="popup-section">' + sectionLabel + '</div>' +
+    '<div class="popup-type">' + typeLabel + '</div>' +
+    '<hr style="border-color:#333;margin:6px 0">' +
+    '<div class="popup-context">' + loc.ctx + '</div>' +
+    '<hr style="border-color:#333;margin:6px 0">' +
+    '<a class="popup-link" href="/report#' + loc.section + '" target="_blank">→ View in Report</a>',
+    { maxWidth: 350, minWidth: 250 }
+  );
+
+  marker._locData = loc;
+  allMarkers.push(marker);
+  marker.addTo(markerLayer);
+});
+
+updateStats();
+
+// ===================== FILTERING =====================
+function getActiveFilters() {
+  var sections = [];
+  var types = [];
+  document.querySelectorAll('[data-section]:checked').forEach(function(el) {
+    if (el.dataset.section !== 'all') sections.push(el.dataset.section);
+  });
+  document.querySelectorAll('[data-type]:checked').forEach(function(el) {
+    if (el.dataset.type !== 'all-types') types.push(el.dataset.type);
+  });
+  return { sections: sections, types: types };
+}
+
+function applyFilters() {
+  var f = getActiveFilters();
+  var search = document.getElementById('searchInput').value.toLowerCase();
+  markerLayer.clearLayers();
+  var shown = 0;
+  allMarkers.forEach(function(m) {
+    var d = m._locData;
+    var sectionMatch = f.sections.indexOf(d.section) !== -1;
+    var typeMatch = f.types.indexOf(d.type) !== -1;
+    var searchMatch = !search || d.name.toLowerCase().indexOf(search) !== -1 || d.ctx.toLowerCase().indexOf(search) !== -1;
+    if (sectionMatch && typeMatch && searchMatch) {
+      m.addTo(markerLayer);
+      shown++;
+    }
+  });
+  updateStats(shown);
+}
+
+function toggleAll(el) {
+  document.querySelectorAll('[data-section]').forEach(function(cb) { cb.checked = el.checked; });
+  applyFilters();
+}
+function toggleAllTypes(el) {
+  document.querySelectorAll('[data-type]').forEach(function(cb) { cb.checked = el.checked; });
+  applyFilters();
+}
+
+// Attach filter listeners
+document.querySelectorAll('[data-section], [data-type]').forEach(function(cb) {
+  cb.addEventListener('change', applyFilters);
+});
+
+document.getElementById('searchInput').addEventListener('input', applyFilters);
+
+function updateStats(shown) {
+  shown = shown !== undefined ? shown : allMarkers.length;
+  document.getElementById('statsBar').textContent =
+    'LOCATIONS: ' + shown + ' / ' + allMarkers.length +
+    ' | SECTIONS: 15 | DATA SOURCE: b0b.dev/report';
+}
+
+// ===================== CONNECTION LINES =====================
+// Draw lines between related locations
+var connectionLines = [
+  // Jekyll Island → Federal Reserve → CFR chain
+  [[31.065,-81.420],[38.893,-77.046],'#ffcc00','Jekyll Island → Federal Reserve'],
+  [[38.893,-77.046],[40.769,-73.968],'#ffcc00','Federal Reserve → CFR'],
+  // Three Obelisks
+  [[41.902,12.454],[51.509,-0.117],'#e6c200','Vatican Obelisk ↔ London Obelisk'],
+  [[51.509,-0.117],[48.866,2.321],'#e6c200','London Obelisk ↔ Paris Obelisk'],
+  [[48.866,2.321],[40.780,-73.965],'#e6c200','Paris Obelisk ↔ NYC Obelisk'],
+  [[38.890,-77.035],[41.902,12.454],'#e6c200','Washington Monument ↔ Vatican'],
+  // Rendition network
+  [[34.596,69.162],[53.810,21.275],'#ff8800','Afghanistan → Poland black sites'],
+  [[53.810,21.275],[44.362,28.487],'#ff8800','Poland → Romania black sites'],
+  [[44.362,28.487],[54.748,25.316],'#ff8800','Romania → Lithuania black sites'],
+  [[11.547,43.146],[-7.320,72.423],'#ff8800','Djibouti → Diego Garcia rendition'],
+  // ECHELON network
+  [[54.002,-1.687],[-23.798,133.737],'#ff4444','Menwith Hill ↔ Pine Gap'],
+  [[-23.798,133.737],[-41.800,173.617],'#ff4444','Pine Gap ↔ Waihopai'],
+  [[54.002,-1.687],[40.703,141.369],'#ff4444','Menwith Hill ↔ Misawa'],
+  // Enclave → Tech Stack
+  [[25.851,-80.159],[37.422,-122.084],'#cc88ff','Indian Creek → Google HQ'],
+  [[25.851,-80.159],[47.622,-122.336],'#cc88ff','Indian Creek → Amazon HQ'],
+  [[25.851,-80.159],[37.453,-122.182],'#cc88ff','Indian Creek → Meta HQ'],
+  // Handler network: training pipelines → manufactured leaders
+  [[32.354,-84.965],[-33.449,-70.669],'#ff6600','School of Americas → Santiago (Pinochet)'],
+  [[32.354,-84.965],[14.635,-90.507],'#ff6600','School of Americas → Guatemala City (Armas)'],
+  [[32.354,-84.965],[-4.325,15.322],'#ff6600','School of Americas → Kinshasa pattern'],
+  [[40.203,-77.189],[30.044,31.236],'#ff6600','Carlisle (Army War College) → Cairo (Sisi → NAC)'],
+  [[51.348,-0.769],[31.951,35.934],'#ff6600','Sandhurst → Amman (Abdullah II)'],
+  [[38.864,-77.016],[35.689,51.389],'#ff6600','CIA/NDU → Tehran (1953 Ajax)'],
+  [[38.864,-77.016],[-6.175,106.865],'#ff6600','CIA → Jakarta (1965 kill lists)'],
+  // Congress for Cultural Freedom network
+  [[48.861,2.338],[38.864,-77.016],'#cc88ff','CCF Paris HQ ↔ CIA Langley'],
+  // ISA / Task Force Orange connections
+  [[38.712,-77.145],[38.880,-77.106],'#ff6600','Fort Belvoir (ISA HQ) ↔ Arlington (original ISA HQ)'],
+  [[38.712,-77.145],[14.072,-87.192],'#ff6600','ISA → Honduras (Operation Queens Hunter)'],
+  [[14.072,-87.192],[32.354,-84.965],'#ff6600','Honduras ops ↔ School of Americas (same theater)'],
+  [[38.712,-77.145],[6.248,-75.566],'#ff6600','ISA → Medellín (CENTRA SPIKE / Escobar hunt)'],
+  // Mondaloy Triangle — strategic personnel disappearances
+  [[39.826,-84.048],[34.201,-118.171],'#ff0000','Wright-Patterson (Hardwick/AFRL) → JPL (Reza)'],
+  [[39.826,-84.048],[35.211,-106.451],'#ff0000','Wright-Patterson (Hardwick) → Sandia (McCasland)'],
+  [[34.201,-118.171],[35.211,-106.451],'#ff0000','JPL (Reza) ↔ Sandia (McCasland)'],
+  [[34.905,-117.884],[34.350,-117.963],'#ffcc00','Edwards AFB → Reza LKP (65 mi)'],
+  [[34.201,-118.171],[34.350,-117.963],'#ffcc00','JPL → Angeles Natl Forest (Reza LKP)'],
+  // Organized Crime — Cartel-Intelligence-Banking nexus
+  [[34.586,-94.239],[13.700,-89.120],'#ff00ff','Mena, AR ↔ Ilopango (CIA cocaine pipeline)'],
+  [[13.700,-89.120],[12.115,-86.236],'#ff00ff','Ilopango → Managua (Contra supply)'],
+  [[24.809,-107.394],[41.878,-87.630],'#ff00ff','Culiacán (Sinaloa) → Chicago (distribution hub)'],
+  [[24.809,-107.394],[32.555,-116.939],'#ff00ff','Culiacán → Otay Mesa (tunnel corridor)'],
+  [[38.114,15.650],[38.426,15.898],'#ff00ff','Reggio Calabria ↔ Gioia Tauro (ʼNdrangheta port)'],
+  [[38.426,15.898],[51.924,4.478],'#ff00ff','Gioia Tauro → Rotterdam (cocaine route)'],
+  [[38.426,15.898],[51.219,4.403],'#ff00ff','Gioia Tauro → Antwerp (cocaine route)'],
+  [[38.114,15.650],[-23.551,-46.633],'#ff00ff','ʼNdrangheta → São Paulo (PCC alliance)'],
+  [[45.464,9.190],[51.511,-0.104],'#ff00ff','Banco Ambrosiano (Milan) → Blackfriars Bridge (Calvi)'],
+  [[45.464,9.190],[41.902,12.454],'#ff00ff','Banco Ambrosiano → Vatican Bank'],
+  [[43.463,11.878],[45.464,9.190],'#ff00ff','Arezzo (P2/Gelli) → Milan (Banco Ambrosiano)'],
+  [[43.463,11.878],[44.495,11.343],'#ff00ff','Arezzo (P2) → Bologna (strategy of tension)'],
+  [[49.612,6.130],[38.864,-77.016],'#ff00ff','BCCI Luxembourg ↔ CIA Langley'],
+  [[51.505,-0.019],[24.809,-107.394],'#ff00ff','HSBC London → Sinaloa ($881M laundered)'],
+];
+
+var lineLayer = L.layerGroup().addTo(map);
+connectionLines.forEach(function(conn) {
+  var line = L.polyline([conn[0], conn[1]], {
+    color: conn[2],
+    weight: 1,
+    opacity: 0.35,
+    dashArray: '6,4'
+  });
+  line.bindTooltip(conn[3], {sticky: true, className: 'line-tooltip'});
+  line.addTo(lineLayer);
+});
+</script>
+
+</body>
+</html>
