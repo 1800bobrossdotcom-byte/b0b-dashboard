@@ -8,10 +8,45 @@ const PORT = process.env.PORT || 3000;
 const SITE_PASSWORD = process.env.SITE_PASSWORD || 'PaulGabrielle';
 const AUTH_SECRET = process.env.AUTH_SECRET || crypto.randomBytes(32).toString('hex');
 
-app.use(express.urlencoded({ extended: false }));
+// ===================== BLUE TEAM — DEFENSIVE HARDENING =====================
+
+// Disable Express fingerprint (X-Powered-By header reveals stack)
+app.disable('x-powered-by');
+
+// Trust Railway's proxy for correct req.ip (required for rate limiting behind reverse proxy)
+app.set('trust proxy', 1);
+
+// Body parser with size limit (prevents oversized POST payloads / memory exhaustion)
+app.use(express.urlencoded({ extended: false, limit: '1kb' }));
 app.use(cookieParser());
 
-// ===================== AUTHENTICATION =====================
+// ===================== RED TEAM — BRUTE FORCE PROTECTION =====================
+
+// Login-specific rate limiter: 5 attempts per IP per 15-minute window
+const loginAttempts = new Map();
+const LOGIN_WINDOW = 15 * 60 * 1000; // 15 minutes
+const LOGIN_MAX = 5;
+
+function checkLoginRate(ip) {
+  const now = Date.now();
+  const record = loginAttempts.get(ip);
+  if (!record || now - record.start > LOGIN_WINDOW) {
+    loginAttempts.set(ip, { start: now, count: 1 });
+    return true;
+  }
+  record.count++;
+  return record.count <= LOGIN_MAX;
+}
+
+// Clean login attempts every 15 minutes
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, record] of loginAttempts) {
+    if (now - record.start > LOGIN_WINDOW) loginAttempts.delete(ip);
+  }
+}, LOGIN_WINDOW);
+
+// ===================== GREY TEAM — TIMING-SAFE AUTH =====================
 function makeToken() {
   return crypto.createHmac('sha256', AUTH_SECRET).update(SITE_PASSWORD).digest('hex');
 }
@@ -96,8 +131,31 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
+  const ip = req.ip || req.connection.remoteAddress;
+
+  // RED TEAM — Login-specific rate limiting (brute force protection)
+  if (!checkLoginRate(ip)) {
+    console.log(`[AUTH] Login RATE LIMITED — IP: ${ip} — ${new Date().toISOString()}`);
+    return res.status(429).send('Too many login attempts. Try again in 15 minutes.');
+  }
+
   const { password } = req.body;
-  if (password === SITE_PASSWORD) {
+
+  // RED TEAM — Reject oversized input before comparison
+  if (!password || typeof password !== 'string' || password.length > 200) {
+    console.log(`[AUTH] Login REJECTED (invalid input) — IP: ${ip} — ${new Date().toISOString()}`);
+    res.status(401);
+    res.setHeader('Content-Type', 'text/html');
+    return res.send(LOGIN_HTML.replace('__ERROR__', '<p class="error">Incorrect password.</p>'));
+  }
+
+  // GREY TEAM — Timing-safe comparison (prevents timing attacks)
+  const supplied = Buffer.from(password, 'utf8');
+  const expected = Buffer.from(SITE_PASSWORD, 'utf8');
+  const match = supplied.length === expected.length && crypto.timingSafeEqual(supplied, expected);
+
+  if (match) {
+    console.log(`[AUTH] Login SUCCESS — IP: ${ip} — ${new Date().toISOString()}`);
     res.cookie('b0b_auth', makeToken(), {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
@@ -106,6 +164,9 @@ app.post('/login', (req, res) => {
     });
     return res.redirect('/');
   }
+
+  // GREY TEAM — Log failed attempt with IP for audit trail
+  console.log(`[AUTH] Login FAILED — IP: ${ip} — ${new Date().toISOString()}`);
   res.status(401);
   res.setHeader('Content-Type', 'text/html');
   res.send(LOGIN_HTML.replace('__ERROR__', '<p class="error">Incorrect password.</p>'));
@@ -116,6 +177,33 @@ app.get('/logout', (req, res) => {
   res.redirect('/login');
 });
 
+// ===================== RAINBOW — PUBLIC WELL-KNOWN ENDPOINTS =====================
+// These are BEFORE auth middleware — intentionally public
+
+// RFC 9116 security.txt
+app.get('/.well-known/security.txt', (req, res) => {
+  res.type('text/plain').send(
+    'Contact: mailto:security@b0b.dev\n' +
+    'Preferred-Languages: en\n' +
+    'Canonical: https://b0b.dev/.well-known/security.txt\n'
+  );
+});
+
+// Robots.txt — block crawlers from authenticated content
+app.get('/robots.txt', (req, res) => {
+  res.type('text/plain').send(
+    'User-agent: *\n' +
+    'Disallow: /report\n' +
+    'Disallow: /map\n' +
+    'Allow: /login\n'
+  );
+});
+
+// Health check — for uptime monitoring
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
+
 // Auth middleware — protect all routes below
 app.use((req, res, next) => {
   if (req.cookies.b0b_auth === makeToken()) {
@@ -124,20 +212,26 @@ app.use((req, res, next) => {
   res.redirect('/login');
 });
 
-// ===================== SECURITY HEADERS =====================
+// ===================== SECURITY HEADERS (BLUE TEAM) =====================
 app.use((req, res, next) => {
+  // RAINBOW — Request ID for incident correlation
+  const requestId = crypto.randomUUID();
+  res.setHeader('X-Request-ID', requestId);
   // Prevent MIME type sniffing
   res.setHeader('X-Content-Type-Options', 'nosniff');
   // Prevent clickjacking — only allow same-origin framing
   res.setHeader('X-Frame-Options', 'SAMEORIGIN');
   // XSS protection (legacy browsers)
   res.setHeader('X-XSS-Protection', '1; mode=block');
-  // Enforce HTTPS (1 year, include subdomains)
+  // Enforce HTTPS (1 year, include subdomains, preload-ready)
   res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
   // Restrict referrer information
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   // Restrict browser features
   res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=()');
+  // BLUE TEAM — Cross-origin isolation headers
+  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+  res.setHeader('Cross-Origin-Resource-Policy', 'same-origin');
   // Content Security Policy
   if (req.path === '/map' || req.path === '/map.html') {
     res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; img-src 'self' https://*.basemaps.cartocdn.com https://*.tile.openstreetmap.org data:; font-src 'self'; connect-src 'self' https://*.basemaps.cartocdn.com https://*.tile.openstreetmap.org; frame-ancestors 'self'; base-uri 'self'; form-action 'self'");
@@ -199,9 +293,11 @@ app.get('/map', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'map.html'));
 });
 
-// ===================== 404 HANDLER =====================
+// ===================== 404 HANDLER (RAINBOW) =====================
 app.use((req, res) => {
-  res.status(404).send('Not found.');
+  res.status(404);
+  res.setHeader('Content-Type', 'text/html');
+  res.send('<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>404</title><style>body{background:#0a0a0a;color:#00ff41;font-family:"Courier New",monospace;display:flex;justify-content:center;align-items:center;min-height:100vh;margin:0}div{text-align:center}h1{font-size:3rem;margin-bottom:1rem}a{color:#00ff41}</style></head><body><div><h1>404</h1><p>Not found.</p><p><a href="/">Return</a></p></div></body></html>');
 });
 
 app.listen(PORT, '0.0.0.0', () => {
