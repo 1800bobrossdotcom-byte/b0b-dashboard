@@ -367,6 +367,40 @@
   <div class="filter-item"><label><input type="checkbox" checked id="toggleTunnels" onchange="toggleDataLayer('tunnels')"> Tunnel Paths</label></div>
   <h3 style="margin-top:10px">ANALYSIS</h3>
   <div class="filter-item"><label><input type="checkbox" id="toggleTimeline" onchange="toggleTimelinePanel()"> Correlation Timeline</label></div>
+  <h3 style="margin-top:10px">PATTERN SEARCH</h3>
+  <div class="filter-item">
+    <input type="text" id="patternInput" placeholder="e.g. Palantir, CIA, obelisk..." style="background:#111;border:1px solid #333;color:#00ff41;padding:4px 8px;font-family:Courier New,monospace;font-size:0.7rem;width:100%;margin-bottom:4px" />
+  </div>
+  <div class="filter-item">
+    <button onclick="patternSearchKeyword()" style="background:transparent;border:1px solid #00ccff;color:#00ccff;padding:3px 8px;font-family:Courier New,monospace;font-size:0.65rem;cursor:pointer;margin-right:4px">SEARCH CONNECTIONS</button>
+  </div>
+  <div class="filter-item" style="margin-top:4px">
+    <label style="color:#888;font-size:0.65rem">PROXIMITY SEARCH</label>
+  </div>
+  <div class="filter-item">
+    <select id="proximityType" style="background:#111;border:1px solid #333;color:#00ff41;padding:3px 6px;font-family:Courier New,monospace;font-size:0.65rem;width:100%">
+      <option value="">— select type —</option>
+      <option value="obelisk">Obelisks</option>
+      <option value="military">Military</option>
+      <option value="underground">Underground</option>
+      <option value="blacksite">Black Sites</option>
+      <option value="financial">Financial</option>
+      <option value="surveillance">Surveillance</option>
+      <option value="organized-crime">Organized Crime</option>
+      <option value="conflict">Conflict Zones</option>
+      <option value="museum">Museums</option>
+      <option value="governance">Governance</option>
+    </select>
+  </div>
+  <div class="filter-item" style="display:flex;gap:4px;align-items:center;margin-top:4px">
+    <input type="number" id="proximityKm" value="50" min="1" max="500" style="background:#111;border:1px solid #333;color:#00ff41;padding:3px 6px;font-family:Courier New,monospace;font-size:0.65rem;width:60px" />
+    <span style="color:#888;font-size:0.65rem">km radius</span>
+    <button onclick="proximitySearch()" style="background:transparent;border:1px solid #00ccff;color:#00ccff;padding:3px 8px;font-family:Courier New,monospace;font-size:0.65rem;cursor:pointer">FIND</button>
+  </div>
+  <h3 style="margin-top:10px">RESEARCHER TOOLS</h3>
+  <div class="filter-item"><a href="/api/data" target="_blank" style="color:#00ff41;text-decoration:none;font-size:0.7rem">⬇ EXPORT JSON DATA</a></div>
+  <div class="filter-item" style="margin-top:2px"><a href="/report#methodology" target="_blank" style="color:#00ccff;text-decoration:none;font-size:0.7rem">📋 SOURCE METHODOLOGY</a></div>
+  <div class="filter-item" style="margin-top:2px;color:#888;font-size:0.6rem">Deep Links: /map?type=X&section=Y&marker=Z</div>
   </div>
 </div>
 
@@ -908,6 +942,18 @@ var locations = [
   {name:"Perm-36, Ural Region, Russia",lat:57.6200,lng:56.7300,section:"IV",type:"blacksite",ctx:"Last operating Soviet Gulag camp — closed 1988. Political prisoners until the final years of the USSR. Now a museum, though Russian government attempted to change its narrative from 'political repression' to 'traitors justly imprisoned.' The camp they tried to rename."},
   {name:"Kapustin Yar, Astrakhan Oblast, Russia",lat:48.5700,lng:45.7550,section:"IV",type:"military",ctx:"Soviet rocket testing range since 1946. First Soviet missile launches. Underground test facilities. Russia's original Cape Canaveral. The site where captured V-2 rocket scientists (paralleling U.S. Operation Paperclip) launched the Soviet space and missile program."},
   {name:"Vladivostok — Pacific Fleet Submarine Bases",lat:42.9000,lng:132.7300,section:"II",type:"military",ctx:"Pacific Fleet nuclear submarine bases: Rybachiy (SSBN base, Kamchatka) and Pavlovskoye. Borei-class SSBNs carrying Bulava SLBMs (10 MIRV warheads each). Russia's Pacific nuclear deterrent hides in these ports."},
+  {name:"Sarov / Arzamas-16, Russia (VNIIEF)",lat:54.9353,lng:43.3235,section:"IV",type:"underground",ctx:"Russia's primary nuclear weapons design facility — VNIIEF (All-Russian Scientific Research Institute of Experimental Physics). Soviet 'Los Alamos.' First Soviet atomic bomb (RDS-1, 1949) and hydrogen bomb (RDS-6, 1953) designed here. Closed city — 92,000 residents behind barbed wire. No road signs, no maps, no entry without FSB clearance. The city that does not officially exist built the weapon that changed everything."},
+  {name:"Novaya Zemlya, Arctic Russia — Nuclear Test Site",lat:73.3500,lng:54.9833,section:"IV",type:"military",ctx:"Arctic nuclear weapons testing range. 224 nuclear detonations (1955-1990). Site of the Tsar Bomba (October 30, 1961): 50-megaton thermonuclear weapon — largest man-made explosion in history. Shockwave circled the Earth three times. Mushroom cloud rose 64 km. Windows shattered 900 km away. Seismic wave measurable on third pass. Indigenous Nenets people forcibly relocated 1955."},
+  {name:"Lubyanka Building, Moscow — FSB/KGB HQ",lat:55.7600,lng:37.6276,section:"V",type:"surveillance",ctx:"Federal Security Service (FSB) headquarters. Previously KGB, NKVD, OGPU, Cheka — the address changed occupants but kept the function since 1919. Internal prison in basement. Stalin's purge orders originated here. Every Russian intelligence directorate traces lineage to this building. The yellow building on the square that has watched Moscow for a century."},
+  {name:"Plesetsk Cosmodrome, Arkhangelsk Oblast, Russia",lat:62.9271,lng:40.5777,section:"II",type:"military",ctx:"World's most active launch site by total launches (~1,600+). Originally SS-7 ICBM base (1957). Now launches military satellites, GLONASS navigation constellation, and Angara rockets. Northernmost orbital launch facility. Existence denied until 1983 despite Western intelligence tracking launches since 1966."},
+  {name:"Norilsk, Krasnoyarsk Krai, Russia",lat:69.3535,lng:88.2027,section:"IX",type:"mining",ctx:"Most polluted city on Earth. Nornickel — world's largest producer of palladium and refined nickel. Built by Gulag labor (Norillag: ~500,000 prisoners, estimated 17,000-18,000 deaths). Closed city until 2001. No roads connecting to outside — only air and rail. Environmental dead zone 30 km in every direction: acid rain, sulfur dioxide, soil contamination. The minerals the world needs extracted from a place the world pretends doesn't exist."},
+  {name:"Magadan, Russia — Gateway to the Gulag",lat:59.5680,lng:150.8083,section:"IV",type:"blacksite",ctx:"Transit point to Kolyma gold mines — the deadliest Gulag network. 'Road of Bones' (R504 Kolyma Highway): 2,032 km road literally built on the bones of prisoners who died during construction. Dalstroy administered the Kolyma camps: estimated 1-2 million prisoners, hundreds of thousands died. Gold, tin, uranium extraction at -50°C. Mask of Sorrow monument (1996). The road paved with the dead."},
+  {name:"Vorkuta, Komi Republic, Russia",lat:67.4965,lng:64.0602,section:"IV",type:"blacksite",ctx:"Arctic Gulag coal mining center. Vorkutlag: one of the largest Soviet forced labor camps, ~73,000 prisoners at peak. 1953 Vorkuta uprising — one of the first large-scale Gulag revolts. Coal still mined. Population collapsed from 117,000 (1991) to ~54,000 (2024). The Arctic mining city that survived the Gulag but not the free market."},
+  {name:"Semipalatinsk Test Site (The Polygon), Kazakhstan",lat:50.0700,lng:78.4300,section:"IV",type:"military",ctx:"Soviet nuclear weapons test site. 456 nuclear tests (1949-1989) including the first Soviet atomic bomb. 18,500 km² — larger than some countries. 1.5 million people exposed to fallout. Birth defects, cancers, and genetic damage persist through generations. 'The Polygon' — the geometry of contamination. Closed 1991 by Kazakhstan's first act of independence. The land that absorbed 456 nuclear explosions and the people who absorbed them too."},
+  {name:"Kronstadt Naval Fortress, St. Petersburg, Russia",lat:59.9961,lng:29.7714,section:"II",type:"military",ctx:"Baltic Fleet base since 1704 (Peter the Great). Island fortress guarding St. Petersburg. 1921 Kronstadt Rebellion — sailors who made the Revolution revolted against it; crushed by Trotsky. Forts across the Gulf of Finland created kill zones for any naval approach. The fortress that guards the city that guards the Baltic."},
+  {name:"Severodvinsk / Sevmash, Arkhangelsk Oblast, Russia",lat:64.5635,lng:39.8302,section:"II",type:"military",ctx:"Sevmash shipyard — Russia's sole nuclear submarine construction facility. Every Russian nuclear submarine ever built was constructed here. Borei-class (SSBN), Yasen-class (SSGN), Belgorod (special missions submarine carrying Poseidon nuclear torpedo). Closed city. One shipyard builds the entire undersea nuclear deterrent."},
+  {name:"Nizhny Tagil — Uralvagonzavod, Russia",lat:56.9225,lng:60.0544,section:"II",type:"military",ctx:"World's largest tank factory. T-72, T-90, T-14 Armata production. 30,000+ employees. Built during WWII industrial evacuation east of Urals. Also manufactures rail cars (civilian cover for military production line). The factory floor that has produced more main battle tanks than any facility in history."},
+  {name:"Yamantau Mountain, Bashkortostan, Russia",lat:54.2500,lng:58.1000,section:"IV",type:"underground",ctx:"Massive underground facility inside Mt. Yamantau (1,640m). Construction began 1960s, expanded 1990s-2000s. Purpose officially denied. Western intelligence assessments: nuclear command bunker, continuity of government facility, or nuclear warhead storage. The mountain Russia hollowed out and refuses to explain. Workers report underground city-scale construction — rail lines, warehouses, living quarters."},
 
   // ===== NARCO-LOGISTICS TUNNELS AND CORRIDORS =====
   {name:"Nogales, Arizona-Sonora — Tunnel Corridor",lat:31.3400,lng:-110.9400,section:"XII",type:"organized-crime",ctx:"Major narco-tunnel corridor. 130+ tunnels discovered since 1990. Storm drain system exploited for smuggling. Sinaloa and CJNG cartels. The tunnels they find and the tunnels they don't — border infrastructure as smuggling infrastructure."},
@@ -1255,11 +1301,112 @@ function showConnected(lat, lng) {
   }
 }
 
+// ===================== PATTERN SEARCH =====================
+// Keyword connection search — finds all markers where ctx or name mentions the keyword,
+// PLUS all markers connected to those markers via connection lines
+function patternSearchKeyword() {
+  var query = (document.getElementById('patternInput').value || '').toLowerCase().trim();
+  if (!query) return;
+  // Step 1: Find all markers matching the keyword
+  var matchedCoords = [];
+  var matchedIndices = new Set();
+  allMarkers.forEach(function(m, idx) {
+    var d = m._locData;
+    if (d.name.toLowerCase().indexOf(query) !== -1 || d.ctx.toLowerCase().indexOf(query) !== -1) {
+      matchedCoords.push([d.lat, d.lng]);
+      matchedIndices.add(idx);
+    }
+  });
+  // Step 2: Find all markers connected to matched markers via connection lines
+  var connectedCoords = [];
+  matchedCoords.forEach(function(coord) {
+    connectionLines.forEach(function(conn) {
+      var from = conn[0], to = conn[1];
+      var threshold = 0.05;
+      if (Math.abs(from[0] - coord[0]) < threshold && Math.abs(from[1] - coord[1]) < threshold) {
+        connectedCoords.push(to);
+      }
+      if (Math.abs(to[0] - coord[0]) < threshold && Math.abs(to[1] - coord[1]) < threshold) {
+        connectedCoords.push(from);
+      }
+    });
+  });
+  // Step 3: Show matched + connected markers
+  markerLayer.clearLayers();
+  var shown = 0;
+  allMarkers.forEach(function(m, idx) {
+    var d = m._locData;
+    var isMatched = matchedIndices.has(idx);
+    var isConnected = connectedCoords.some(function(c) {
+      return Math.abs(d.lat - c[0]) < 0.05 && Math.abs(d.lng - c[1]) < 0.05;
+    });
+    if (isMatched || isConnected) {
+      m.addTo(markerLayer);
+      shown++;
+    }
+  });
+  updateStats(shown);
+  if (shown > 1) {
+    var bounds = [];
+    markerLayer.eachLayer(function(l) { bounds.push(l.getLatLng()); });
+    map.fitBounds(L.latLngBounds(bounds), { padding: [50, 50] });
+  } else if (shown === 0) {
+    alert('No results for "' + query + '"');
+  }
+}
+
+// Proximity search — show all markers within N km of any marker of specified type
+function proximitySearch() {
+  var targetType = document.getElementById('proximityType').value;
+  if (!targetType) { alert('Select a type first'); return; }
+  var radiusKm = parseFloat(document.getElementById('proximityKm').value) || 50;
+  // Haversine distance in km
+  function haversine(lat1, lng1, lat2, lng2) {
+    var R = 6371;
+    var dLat = (lat2 - lat1) * Math.PI / 180;
+    var dLng = (lng2 - lng1) * Math.PI / 180;
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) * Math.sin(dLng/2) * Math.sin(dLng/2);
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  }
+  // Collect all anchor points (markers of the target type)
+  var anchors = [];
+  allMarkers.forEach(function(m) {
+    if (m._locData.type === targetType) anchors.push(m._locData);
+  });
+  if (anchors.length === 0) { alert('No markers of type "' + targetType + '" found'); return; }
+  // Show markers within radius of any anchor (including the anchors themselves)
+  markerLayer.clearLayers();
+  var shown = 0;
+  allMarkers.forEach(function(m) {
+    var d = m._locData;
+    var near = anchors.some(function(a) {
+      return haversine(d.lat, d.lng, a.lat, a.lng) <= radiusKm;
+    });
+    if (near) {
+      m.addTo(markerLayer);
+      shown++;
+    }
+  });
+  updateStats(shown);
+  if (shown > 1) {
+    var bounds = [];
+    markerLayer.eachLayer(function(l) { bounds.push(l.getLatLng()); });
+    map.fitBounds(L.latLngBounds(bounds), { padding: [50, 50] });
+  }
+}
+
+// Allow Enter key on pattern search input
+document.getElementById('patternInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') { e.preventDefault(); patternSearchKeyword(); }
+});
+
 // Reset button — restore all filters
 function resetFilters() {
   document.querySelectorAll('[data-section]').forEach(function(cb) { cb.checked = true; });
   document.querySelectorAll('[data-type]').forEach(function(cb) { cb.checked = true; });
   document.getElementById('searchInput').value = '';
+  document.getElementById('patternInput').value = '';
+  document.getElementById('proximityType').value = '';
   applyFilters();
 }
 
@@ -1388,6 +1535,23 @@ var connectionLines = [
   // Rendition flight paths
   [[38.953,-77.457],[52.702,-8.925],'#ff3366','Dulles ↔ Shannon (rendition transit route)'],
   [[52.702,-8.925],[39.552,2.739],'#ff3366','Shannon ↔ Palma (rendition transit route)'],
+  // Russia — Nuclear/Military/Intelligence Network
+  [[55.760,37.628],[54.935,43.324],'#ff4444','Lubyanka (FSB HQ) → Sarov/Arzamas-16 (nuclear weapons design)'],
+  [[54.935,43.324],[55.713,60.705],'#ff4444','Sarov → Mayak/Chelyabinsk-40 (plutonium production)'],
+  [[55.713,60.705],[56.250,93.533],'#ff4444','Mayak → Krasnoyarsk-26 (underground plutonium/satellite)'],
+  [[55.713,60.705],[56.923,60.054],'#ff4444','Mayak → Uralvagonzavod (Ural military-industrial belt)'],
+  [[56.923,60.054],[54.250,58.100],'#ff4444','Uralvagonzavod → Yamantau Mountain (underground command)'],
+  [[68.959,33.083],[64.564,39.830],'#ff4444','Murmansk (Northern Fleet) → Severodvinsk/Sevmash (submarine construction)'],
+  [[64.564,39.830],[62.927,40.578],'#ff4444','Sevmash → Plesetsk Cosmodrome (Arctic military axis)'],
+  [[68.959,33.083],[73.350,54.983],'#ff4444','Murmansk → Novaya Zemlya (Northern Fleet nuclear test corridor)'],
+  [[59.996,29.771],[54.710,20.452],'#ff4444','Kronstadt (Baltic) ↔ Kaliningrad (Baltic Fleet axis)'],
+  [[55.760,37.628],[59.996,29.771],'#cc88ff','Moscow → Kronstadt/St. Petersburg (power axis)'],
+  [[55.760,37.628],[68.959,33.083],'#cc88ff','Moscow → Murmansk (nuclear submarine command)'],
+  [[42.900,132.730],[54.853,83.094],'#ff4444','Vladivostok (Pacific Fleet) ↔ Novosibirsk/Akademgorodok (Trans-Siberian)'],
+  [[69.354,88.203],[56.250,93.533],'#ff9100','Norilsk (minerals) → Krasnoyarsk-26 (Siberian extraction corridor)'],
+  [[54.935,43.324],[50.070,78.430],'#ff4444','Sarov → Semipalatinsk (nuclear weapons design → testing pipeline)'],
+  [[59.568,150.808],[67.497,64.060],'#ff0000','Magadan (Kolyma Gulag) ↔ Vorkuta (Arctic Gulag) — forced labor axis'],
+  [[44.617,33.525],[44.499,33.597],'#ff4444','Sevastopol (Black Sea Fleet) ↔ Balaklava (underground submarine base)'],
 ];
 
 var lineLayer = L.layerGroup().addTo(map);
