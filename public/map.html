@@ -292,6 +292,15 @@
   <div class="filter-item"><label><input type="checkbox" checked data-type="mining"> Mining / Drilling</label></div>
   <div class="filter-item"><label><input type="checkbox" checked data-type="private-island"> Private Islands</label></div>
   <div class="filter-item"><label><input type="checkbox" checked data-type="other"> Other</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="airport"> Suspicious Airports</label></div>
+  <h3 style="margin-top:10px">MAP STYLE</h3>
+  <div class="filter-item"><label><input type="radio" name="mapStyle" value="dark" checked onchange="switchMapStyle(this.value)"> Dark</label></div>
+  <div class="filter-item"><label><input type="radio" name="mapStyle" value="satellite" onchange="switchMapStyle(this.value)"> Satellite</label></div>
+  <div class="filter-item"><label><input type="radio" name="mapStyle" value="terrain" onchange="switchMapStyle(this.value)"> Terrain</label></div>
+  <div class="filter-item"><label><input type="radio" name="mapStyle" value="street" onchange="switchMapStyle(this.value)"> Street</label></div>
+  <h3 style="margin-top:10px">DATA LAYERS</h3>
+  <div class="filter-item"><label><input type="checkbox" checked id="toggleConnections" onchange="toggleDataLayer('connections')"> Connection Lines</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked id="toggleTunnels" onchange="toggleDataLayer('tunnels')"> Tunnel Paths</label></div>
   </div>
 </div>
 
@@ -317,6 +326,8 @@
   <div class="legend-item"><div class="legend-dot" style="background:#ff9100"></div> Mining / Drilling</div>
   <div class="legend-item"><div class="legend-dot" style="background:#ea80fc"></div> Private Island</div>
   <div class="legend-item"><div class="legend-dot" style="background:#888"></div> Other</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ff3366"></div> Suspicious Airport</div>
+  <div class="legend-item"><div style="width:24px;height:0;border-top:3px dashed #ff6600;margin-right:8px;flex-shrink:0"></div> Tunnel Path</div>
   </div>
 </div>
 
@@ -366,12 +377,34 @@ var map = L.map('map', {
   worldCopyJump: true
 });
 
-// Dark satellite-style tile layer
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+// Base tile layers (switchable)
+var darkTile = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
-  subdomains: 'abcd',
-  maxZoom: 19
-}).addTo(map);
+  subdomains: 'abcd', maxZoom: 19
+});
+var satelliteTile = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+  attribution: '&copy; Esri, Maxar, Earthstar Geographics', maxZoom: 19
+});
+var terrainTile = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="https://opentopomap.org">OpenTopoMap</a>', maxZoom: 17
+});
+var streetTile = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
+  subdomains: 'abcd', maxZoom: 19
+});
+var currentTile = darkTile;
+darkTile.addTo(map);
+
+function switchMapStyle(style) {
+  map.removeLayer(currentTile);
+  switch(style) {
+    case 'satellite': currentTile = satelliteTile; break;
+    case 'terrain': currentTile = terrainTile; break;
+    case 'street': currentTile = streetTile; break;
+    default: currentTile = darkTile;
+  }
+  currentTile.addTo(map);
+}
 
 // ===================== COLOR MAP =====================
 var colorMap = {
@@ -390,6 +423,7 @@ var colorMap = {
   'satellite': '#76ff03',
   'mining': '#ff9100',
   'private-island': '#ea80fc',
+  'airport': '#ff3366',
   other: '#888888'
 };
 
@@ -680,7 +714,58 @@ var locations = [
   {name:"Concordia Station, Antarctica (France/Italy)",lat:-75.1000,lng:123.3500,section:"IV",type:"military",ctx:"Dome C, East Antarctic Plateau. ESA Mars conditions analog — testing Mars habitation protocols in Antarctica. The space agency rehearses planetary colonization at the bottom of this planet."},
   {name:"Rothera Station, Antarctica (UK)",lat:-67.5700,lng:-68.1300,section:"IV",type:"military",ctx:"Adelaide Island. British Antarctic Survey. Blue-ice runway for intercontinental flights. A military-grade runway on a continent that bans military operations. The research station with more capability than its treaty allows."},
   {name:"Palmer Station, Antarctica (US)",lat:-64.7740,lng:-64.0540,section:"IV",type:"military",ctx:"Anvers Island, Antarctic Peninsula. Marine and terrestrial biology. The northernmost U.S. Antarctic station — closest to South America, easiest access, least controlled."},
-  {name:"Pine Island Glacier, Antarctica",lat:-75.1670,lng:-100.0000,section:"IV",type:"other",ctx:"Fastest-melting glacier on Earth. If Pine Island + Thwaites ('Doomsday Glacier') collapse: +3m sea level rise. The glacier named 'Doomsday' is monitored by the nations whose emissions are melting it."}
+  {name:"Pine Island Glacier, Antarctica",lat:-75.1670,lng:-100.0000,section:"IV",type:"other",ctx:"Fastest-melting glacier on Earth. If Pine Island + Thwaites ('Doomsday Glacier') collapse: +3m sea level rise. The glacier named 'Doomsday' is monitored by the nations whose emissions are melting it."},
+
+  // ===== SECTION II: GLOBAL BASING NETWORK =====
+  // EUROPE
+  {name:"Ramstein Air Base, Germany",lat:49.4369,lng:7.6003,section:"II",type:"military",ctx:"USAFE-AFAFRICA headquarters. Key drone operations relay station — kill commands for Africa/Middle East routed through Ramstein. Largest U.S. military community outside the U.S. (~57,000 personnel + dependents). If the drone strikes a target in Yemen, the signal passes through Ramstein."},
+  {name:"Aviano Air Base, Italy",lat:46.0319,lng:12.5965,section:"II",type:"military",ctx:"31st Fighter Wing. NATO forward deployment for Mediterranean and Middle East operations. Used in Kosovo, Libya, Afghanistan campaigns. Southern European power projection."},
+  {name:"Naval Support Activity Naples, Italy",lat:40.8150,lng:14.2815,section:"II",type:"military",ctx:"U.S. Naval Forces Europe / Naval Forces Africa / Sixth Fleet headquarters. Commands naval operations across Europe and Africa from Italian soil."},
+  {name:"NAS Sigonella, Sicily, Italy",lat:37.4017,lng:14.9222,section:"II",type:"military",ctx:"'Hub of the Med.' Primary logistics and ISR hub for Mediterranean, North Africa, and Middle East. Drone operations base. The surveillance eye in the center of the Mediterranean."},
+  {name:"RAF Lakenheath, Suffolk, UK",lat:52.4093,lng:0.5608,section:"II",type:"military",ctx:"48th Fighter Wing — only U.S. F-35A unit in Europe. Nuclear weapons storage capability. American nuclear weapons on British soil."},
+  {name:"Naval Station Rota, Spain",lat:36.6375,lng:-6.3500,section:"II",type:"military",ctx:"Four Aegis BMD destroyers forward-deployed. Supports Sixth Fleet Mediterranean operations. Gateway between Atlantic and Mediterranean."},
+  {name:"Souda Bay, Crete, Greece",lat:35.4875,lng:24.1194,section:"II",type:"military",ctx:"NATO naval facility. Deepest natural harbor in the Mediterranean. U.S. munitions storage and logistics for eastern Mediterranean operations. Ancient Minoan territory now hosts missile storage."},
+  {name:"Camp Bondsteel, Kosovo",lat:42.3592,lng:21.2467,section:"II",type:"military",ctx:"Largest U.S. military base in the Balkans. Built 1999 by Halliburton/KBR (Dick Cheney was Halliburton CEO 1995-2000). The VP's company built the base the U.S. operates. 955 acres."},
+  {name:"Thule Air Base, Greenland",lat:76.5312,lng:-68.7031,section:"II",type:"military",ctx:"Northernmost U.S. base. Ballistic missile early warning (BMEWS). Space surveillance. Project Iceworm (1960s): secret nuclear missile tunnels under Greenland ice — Camp Century. Danish government was not informed."},
+  {name:"Aegis Ashore, Deveselu, Romania",lat:44.0342,lng:24.3389,section:"II",type:"military",ctx:"U.S. missile defense site on Romanian soil. Mk 41 launch system can also fire Tomahawk cruise missiles. The 'defensive' system with offensive capability. Russia cites this as justification for its own deployments."},
+  {name:"Aegis Ashore, Redzikowo, Poland",lat:54.4781,lng:17.1003,section:"II",type:"military",ctx:"Second European Aegis Ashore site. Operational 2023, 200 km from Russian Kaliningrad exclave. Same dual-use Mk 41 launchers as Deveselu."},
+  {name:"U.S. AFRICOM / EUCOM, Stuttgart, Germany",lat:48.6914,lng:9.1178,section:"II",type:"military",ctx:"Kelley Barracks — headquarters for both U.S. Africa Command and U.S. European Command. AFRICOM commands operations across 53 African nations from European soil — the command structure never left the continent."},
+  {name:"Landstuhl Regional Medical Center, Germany",lat:49.3914,lng:7.5422,section:"II",type:"military",ctx:"Largest U.S. military hospital outside the U.S. All combat casualties from Middle East/Africa theaters transit through Landstuhl. The hospital that receives the bodies from the wars commanded by Stuttgart."},
+  {name:"Grafenwöhr Training Area, Germany",lat:49.6903,lng:11.9322,section:"II",type:"military",ctx:"Largest U.S. military training area in Europe. 232 sq km. Used continuously since 1910 — through both World Wars, Cold War, and present. American soldiers train on the same Bavarian ground the Imperial German Army used."},
+  // MIDDLE EAST
+  {name:"Al Udeid Air Base, Qatar",lat:25.1174,lng:51.3150,section:"II",type:"military",ctx:"Combined Air Operations Center (CAOC) — commands all U.S. air operations across Middle East. 10,000+ U.S. personnel. Qatar hosts both Al Udeid AND Al Jazeera — the base that commands the bombing and the network that broadcasts it in the same 4,468 sq mi country."},
+  {name:"Camp Arifjan, Kuwait",lat:29.1819,lng:48.0822,section:"II",type:"military",ctx:"U.S. Army Central (ARCENT) forward headquarters. Third Army. Largest ground force concentration in the Middle East. Pre-positioned equipment for rapid regional deployment."},
+  {name:"NSA Bahrain — U.S. Fifth Fleet HQ",lat:26.2361,lng:50.5650,section:"II",type:"military",ctx:"Commander, Naval Forces Central Command / U.S. Fifth Fleet. Controls naval operations from the Suez Canal to the Strait of Hormuz. Based in a Sunni-ruled kingdom with a Shia majority population."},
+  {name:"Incirlik Air Base, Turkey",lat:37.0017,lng:35.4258,section:"II",type:"military",ctx:"NATO nuclear weapons storage — estimated 50 B61 nuclear bombs. U.S. has stored nuclear weapons in Turkey since 1959. Turkey threatened to deny access during 2003 Iraq invasion and 2019 Syria operation."},
+  {name:"Al Dhafra Air Base, UAE",lat:24.2481,lng:54.5475,section:"II",type:"military",ctx:"U.S., French, and UAE Air Forces co-located. RQ-4 Global Hawk and U-2 reconnaissance aircraft. Spy planes from three countries share one runway."},
+  // AFRICA
+  {name:"Air Base 201, Agadez, Niger",lat:16.9667,lng:7.9869,section:"II",type:"military",ctx:"$110M U.S. drone base. MQ-9 Reaper operations. Niger's 2023 coup expelled U.S. forces — base handed over. Russia/Wagner Group moved in. The $110M drone base evacuated in months, now occupied by the competitor."},
+  // ASIA-PACIFIC
+  {name:"Camp Humphreys, South Korea",lat:36.9628,lng:127.0314,section:"II",type:"military",ctx:"Largest overseas U.S. military base. $11B construction. USFK headquarters. 3,500 acres, 42,000 personnel. The largest U.S. foreign base on the planet, 35 miles from the DMZ."},
+  {name:"Osan Air Base, South Korea",lat:37.0908,lng:127.0300,section:"II",type:"military",ctx:"51st Fighter Wing. Closest U.S. air base to North Korea. Nuclear-capable aircraft. 48 miles from Seoul, 64 miles from DMZ."},
+  {name:"Fleet Activities Yokosuka, Japan",lat:35.2833,lng:139.6536,section:"II",type:"military",ctx:"Home port of the U.S. Seventh Fleet. Forward-deployed carrier strike group. The only forward-deployed U.S. carrier is based in Japan. Commands the Pacific from another nation's harbor."},
+  {name:"Kadena Air Base, Okinawa, Japan",lat:26.3517,lng:127.7681,section:"II",type:"military",ctx:"Largest U.S. air base in the Pacific. 18th Wing. Okinawa hosts 70% of U.S. military facilities in Japan on 0.6% of Japan's land. The island is 0.6% of territory hosting 70% of the bases."},
+  {name:"MCAS Futenma, Okinawa, Japan",lat:26.2742,lng:127.7553,section:"II",type:"military",ctx:"Marine Corps Air Station in the center of Ginowan city (pop. 100,000). 'Most dangerous base in the world.' Agreed to relocate in 1996. Still there in 2026. 30 years of promising to move."},
+  {name:"Yokota Air Base, Tokyo, Japan",lat:35.7485,lng:139.3487,section:"II",type:"military",ctx:"USFJ headquarters and Fifth Air Force. Located in western Tokyo — the capital of a sovereign nation hosts foreign military command. Yokota controls the airspace over greater Tokyo. Japanese commercial aircraft route around U.S. military airspace over their own capital."},
+  {name:"Andersen AFB + Naval Base Guam",lat:13.5839,lng:144.9244,section:"II",type:"military",ctx:"Pacific power projection hub. B-52, B-1, B-2 bomber rotations. $8.7B military buildup underway. Nuclear submarine port. Guam has no vote in Congress but hosts bombers projecting power across the Pacific."},
+  // AMERICAS
+  {name:"Guantanamo Bay Naval Base, Cuba",lat:19.9023,lng:-75.0961,section:"II",type:"military",ctx:"45 sq mi on Cuban soil. Lease since 1903 — $4,085/year (Cuba refuses to cash checks since 1959). Detention facility since 2002 — outside U.S. legal jurisdiction. 780 detainees total; 9 ever convicted."},
+  {name:"Soto Cano Air Base, Honduras",lat:14.3822,lng:-87.6212,section:"II",type:"military",ctx:"Joint Task Force-Bravo. U.S. military presence in Central America since Cold War. Same Honduras where ISA ran Operation Queens Hunter. Proximity to School of Americas graduates who governed the region."},
+  // FIVE EYES SIGINT
+  {name:"CFS Leitrim, Ottawa, Canada",lat:45.3414,lng:-75.6300,section:"II",type:"military",ctx:"Canadian Forces Station Leitrim. CSE (Communications Security Establishment) SIGINT facility. Five Eyes Canadian signals intelligence node. Canada's primary electronic surveillance station."},
+  // NON-WESTERN EXPANSION
+  {name:"Chinese Naval Support Base, Djibouti",lat:11.5925,lng:43.0581,section:"II",type:"military",ctx:"China's first overseas military base, operational 2017. 2 km from Camp Lemonnier (U.S.). The two largest economies have military bases within 2 km of each other on African soil."},
+  {name:"Fiery Cross Reef, South China Sea (China)",lat:9.5500,lng:112.8900,section:"II",type:"military",ctx:"Artificial island on submerged reef. 3,000m runway, hangars, radar, missile systems. The Hague ruled China's claims have 'no legal basis' (2016). China rejected the ruling."},
+  {name:"Naval Facility Tartus, Syria (Russia)",lat:34.8900,lng:35.8867,section:"II",type:"military",ctx:"Russia's only Mediterranean naval base. Russia's entire Mediterranean naval presence depends on this Syrian port since 1971."},
+  {name:"Khmeimim Air Base, Syria (Russia)",lat:35.4131,lng:35.9456,section:"II",type:"military",ctx:"Russian air operations base since September 2015. Su-35, Su-34, Su-24 combat aircraft. Latakia province — the Assad family's home territory hosts Russia's air force."},
+
+  // ===== SUSPICIOUS AIRPORTS =====
+  {name:"Denver International Airport (DIA)",lat:39.8561,lng:-104.6737,section:"IV",type:"airport",ctx:"Opened 1995, $4.8B over budget. 33,531 acres (53 sq mi — twice Manhattan). Masonic capstone dated March 19, 1994 ('New World Airport Commission'). 'Blue Mustang' ('Blucifer') — 32-ft blue horse with glowing red eyes, killed its sculptor. Underground baggage system abandoned. Murals depicting gas-masked soldiers, burning cities, dead children. Fuel system: 5 underground storage buildings with subterranean pipes to 28 hydrant pits. Underground tunnels extend far beyond operational need. Sits directly between Buckley SFB (NRO satellite ops) and Cheyenne Mountain (NORAD)."},
+  {name:"Dulles International Airport (IAD), Virginia",lat:38.9531,lng:-77.4565,section:"IV",type:"airport",ctx:"27 miles from CIA headquarters at Langley. Named after John Foster Dulles (Secretary of State, brother of CIA Director Allen Dulles — who orchestrated coups in Guatemala, Iran, Congo). CIA shuttle bus ran between Langley and Dulles. Documented CIA rendition flights."},
+  {name:"Shannon Airport, Ireland — Rendition Transit",lat:52.7020,lng:-8.9247,section:"IV",type:"airport",ctx:"Documented CIA rendition flight transit point. Irish neutrality did not prevent use as refueling stop for extraordinary rendition flights. Over 1,000 CIA-linked flights transited Shannon (2001-2008). The neutral country's airport as logistics node in the torture pipeline."},
+  {name:"Palma de Mallorca Airport, Spain — Rendition Transit",lat:39.5517,lng:2.7389,section:"IV",type:"airport",ctx:"Documented CIA rendition flight hub. Jeppesen Dataplan (Boeing subsidiary, Denver-based) provided flight planning for rendition aircraft. European Parliament investigation confirmed rendition flights through Spanish territory."},
+  {name:"Johnston Atoll, Pacific — Chemical/Military",lat:16.7295,lng:-169.5339,section:"IV",type:"airport",ctx:"Remote Pacific atoll, 1,328 km from Honolulu. Chemical weapons storage/destruction (VX, sarin, mustard gas) until 2000. Nuclear weapons testing (1962). Biological weapons open-air testing. Now 'wildlife refuge' on contaminated soil."},
+  {name:"Groom Lake / Area 51 Airstrip, Nevada",lat:37.2350,lng:-115.8111,section:"IV",type:"airport",ctx:"CIA/USAF classified flight test facility. 12,000-ft runway. U-2, SR-71, F-117 all tested here. JANET airlines flies workers daily from Las Vegas. Government denied existence until 2013 CIA declassification. On Western Shoshone land (Treaty of Ruby Valley, 1863 — never ceded)."}
 ];
 
 // ===================== LAYER GROUPS =====================
@@ -867,6 +952,24 @@ var connectionLines = [
   [[-78.464,106.837],[-75.100,123.350],'#ffffff','Vostok ↔ Concordia'],
   // Deep earth connection
   [[69.396,33.344],[-78.464,106.837],'#ff6600','Kola Superdeep (12.2km) ↔ Vostok (4km ice drill)'],
+  // Global basing network connections
+  [[49.437,7.600],[49.391,7.542],'#ff4444','Ramstein ↔ Landstuhl (evacuation corridor)'],
+  [[49.437,7.600],[48.691,9.118],'#ff4444','Ramstein ↔ Stuttgart AFRICOM/EUCOM'],
+  [[25.117,51.315],[26.236,50.565],'#ff4444','Al Udeid (Qatar) ↔ NSA Bahrain (Fifth Fleet)'],
+  [[36.963,127.031],[37.091,127.030],'#ff4444','Camp Humphreys ↔ Osan (Korea defense axis)'],
+  [[26.352,127.768],[26.274,127.755],'#ff4444','Kadena ↔ Futenma (Okinawa concentration)'],
+  [[35.283,139.654],[26.352,127.768],'#ff4444','Yokosuka ↔ Kadena (Japan-Okinawa chain)'],
+  [[35.749,139.349],[35.283,139.654],'#ff4444','Yokota ↔ Yokosuka (Tokyo-harbor axis)'],
+  [[11.547,43.146],[11.593,43.058],'#ff0066','Camp Lemonnier ↔ Chinese Base Djibouti (competing powers, 2 km)'],
+  [[34.890,35.887],[35.413,35.946],'#ff4444','Tartus ↔ Khmeimim (Russian Syria axis)'],
+  [[37.002,35.426],[44.034,24.339],'#ff4444','Incirlik ↔ Deveselu (Turkey-Romania BMD axis)'],
+  [[19.902,-75.096],[14.382,-87.621],'#ff4444','Guantanamo ↔ Soto Cano (Caribbean corridor)'],
+  // DIA suspicious corridor
+  [[39.856,-104.674],[39.717,-104.752],'#ff3366','DIA ↔ Buckley SFB (NRO satellite ops, 10 mi)'],
+  [[39.717,-104.752],[38.745,-104.847],'#ff3366','Buckley SFB ↔ Cheyenne Mountain (NORAD, 70 mi)'],
+  // Rendition flight paths
+  [[38.953,-77.457],[52.702,-8.925],'#ff3366','Dulles ↔ Shannon (rendition transit route)'],
+  [[52.702,-8.925],[39.552,2.739],'#ff3366','Shannon ↔ Palma (rendition transit route)'],
 ];
 
 var lineLayer = L.layerGroup().addTo(map);
@@ -880,6 +983,67 @@ connectionLines.forEach(function(conn) {
   line.bindTooltip(conn[3], {sticky: true, className: 'line-tooltip'});
   line.addTo(lineLayer);
 });
+
+// ===================== TUNNEL PATHS =====================
+var tunnelPaths = [
+  // Confirmed underground corridors
+  {path:[[39.6484,-77.4650],[39.7365,-77.4247]], color:'#ff6600', label:'Camp David ↔ Raven Rock (Site R) — confirmed corridor, 6 miles'},
+  {path:[[38.8977,-77.0365],[38.8899,-77.0091]], color:'#ff6600', label:'White House ↔ U.S. Capitol — documented tunnel system'},
+  {path:[[38.8977,-77.0365],[38.8711,-77.0562]], color:'#ff6600', label:'White House area ↔ Pentagon — alleged underground link'},
+  {path:[[41.9022,12.4539],[41.9031,12.4663]], color:'#ff6600', label:'Vatican ↔ Castel Sant\'Angelo — Passetto di Borgo (confirmed, built 1277)'},
+  // DIA / Colorado underground corridor (alleged)
+  {path:[[39.8561,-104.6737],[39.7170,-104.7520]], color:'#ff6600', label:'DIA ↔ Buckley SFB — alleged underground tunnel (10 mi)'},
+  {path:[[39.7170,-104.7520],[38.8058,-104.5286]], color:'#ff6600', label:'Buckley SFB ↔ Schriever SFB — alleged underground corridor'},
+  {path:[[38.8058,-104.5286],[38.7446,-104.8467]], color:'#ff6600', label:'Schriever SFB ↔ Cheyenne Mountain (NORAD) — alleged corridor'},
+  // Moscow Metro-2 / D-6
+  {path:[[55.7520,37.6175],[55.7394,37.6150]], color:'#ff6600', label:'Kremlin ↔ Ministry of Defense — Metro-2 (alleged parallel metro)'},
+  {path:[[55.7520,37.6175],[55.7603,37.6285]], color:'#ff6600', label:'Kremlin ↔ Lubyanka (FSB HQ) — Metro-2'},
+  {path:[[55.7520,37.6175],[55.5956,37.2617]], color:'#ff6600', label:'Kremlin ↔ Vnukovo-2 Airport — Metro-2 (~30 km deep tunnel)'},
+  // Beijing Underground City
+  {path:[[39.9042,116.4074],[39.8800,116.3900]], color:'#ff6600', label:'Beijing Underground City — southern network (300,000 capacity)'},
+  {path:[[39.9042,116.4074],[39.9200,116.4300]], color:'#ff6600', label:'Beijing Underground City — eastern extension'},
+  // Cross-border drug tunnels
+  {path:[[32.5547,-116.9386],[32.5409,-117.0201]], color:'#ff00ff', label:'Otay Mesa ↔ Tijuana — cartel tunnel corridor (rail, ventilation, electricity)'},
+  // London government tunnels
+  {path:[[51.5023,-0.1264],[51.5074,-0.1278]], color:'#ff6600', label:'Whitehall ↔ MoD Main Building — confirmed WWII tunnel network'},
+  {path:[[51.5023,-0.1264],[51.4995,-0.1248]], color:'#ff6600', label:'Downing Street ↔ Parliament — underground passage'},
+  // Cappadocia underground cities (confirmed)
+  {path:[[38.3740,34.7345],[38.3920,34.7100]], color:'#ff6600', label:'Derinkuyu ↔ Kaymakli underground cities — confirmed tunnel (~8 km)'},
+  // Swiss National Redoubt
+  {path:[[46.9481,7.4474],[46.8000,8.2275]], color:'#ff6600', label:'Bern ↔ Gotthard region — Swiss National Redoubt military tunnel system'},
+  // Israel underground command
+  {path:[[31.7683,35.2137],[31.7800,35.2300]], color:'#ff6600', label:'Jerusalem underground command center — tunnel network'},
+  // Dulce alleged connectors
+  {path:[[36.9336,-106.9989],[35.8800,-106.2990]], color:'#ff6600', label:'Dulce (Archuleta Mesa) ↔ Los Alamos — alleged underground connector'},
+  // Thule / Project Iceworm
+  {path:[[76.5312,-68.7031],[77.1667,-61.1333]], color:'#ff6600', label:'Thule ↔ Camp Century — Project Iceworm nuclear missile tunnels under ice'},
+  // Greenbriar tunnel
+  {path:[[37.7880,-80.3016],[38.8977,-77.0365]], color:'#ff6600', label:'Greenbrier bunker ↔ Washington D.C. — alleged continuity corridor'},
+  // Raven Rock ↔ Mount Weather
+  {path:[[39.7365,-77.4247],[39.0938,-77.8872]], color:'#ff6600', label:'Raven Rock (Site R) ↔ Mount Weather — continuity-of-government axis'},
+];
+
+var tunnelLayer = L.layerGroup().addTo(map);
+tunnelPaths.forEach(function(t) {
+  var line = L.polyline(t.path, {
+    color: t.color,
+    weight: 3,
+    opacity: 0.55,
+    dashArray: '8,6'
+  });
+  line.bindTooltip(t.label, {sticky: true, className: 'line-tooltip'});
+  line.addTo(tunnelLayer);
+});
+
+function toggleDataLayer(layer) {
+  if (layer === 'connections') {
+    if (map.hasLayer(lineLayer)) map.removeLayer(lineLayer);
+    else map.addLayer(lineLayer);
+  } else if (layer === 'tunnels') {
+    if (map.hasLayer(tunnelLayer)) map.removeLayer(tunnelLayer);
+    else map.addLayer(tunnelLayer);
+  }
+}
 </script>
 
 </body>
