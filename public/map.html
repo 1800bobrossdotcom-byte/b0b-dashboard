@@ -1480,6 +1480,9 @@ function toggleDataLayer(layer) {
   });
 })();
 </script>
+<script>
+(function(){if(window.parent!==window){document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var h=a.getAttribute('href');if(!h)return;if(h==='/logout'){e.preventDefault();window.top.location.href='/logout'}else if(h==='/'||h==='/report'||h==='/map'){e.preventDefault();window.parent.postMessage({navigate:h},location.origin)}})}})();
+</script>
 
 </body>
 </html>

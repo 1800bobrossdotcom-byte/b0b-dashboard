@@ -437,12 +437,21 @@ app.use((req, res, next) => {
   // Restrict browser features
   res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=()');
   // BLUE TEAM — Cross-origin isolation headers
-  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+  // Skip COOP for /_page routes — they load inside same-origin iframes
+  if (!req.path.startsWith('/_page')) {
+    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+  }
   res.setHeader('Cross-Origin-Resource-Policy', 'same-origin');
   // Content Security Policy
-  if (req.path === '/map' || req.path === '/map.html') {
+  var isMap = req.path === '/map' || req.path === '/_page/map';
+  var isReport = req.path === '/report' || req.path === '/_page/report';
+  var isShell = req.path === '/' || req.path === '/report' || req.path === '/map';
+  if (isShell) {
+    // Shell pages: need frame-src for iframe, media-src for audio player
+    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; frame-src 'self'; media-src 'self' https://*.archive.org; frame-ancestors 'self'; base-uri 'self'; form-action 'self'");
+  } else if (isMap) {
     res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; img-src 'self' https://*.basemaps.cartocdn.com https://*.tile.openstreetmap.org https://server.arcgisonline.com https://*.tile.opentopomap.org data:; font-src 'self'; connect-src 'self' https://*.basemaps.cartocdn.com https://*.tile.openstreetmap.org https://server.arcgisonline.com https://*.tile.opentopomap.org; frame-ancestors 'self'; base-uri 'self'; form-action 'self'");
-  } else if (req.path === '/report' || req.path === '/report.html') {
+  } else if (isReport) {
     res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'");
   } else {
     res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; media-src 'self' https://*.archive.org; frame-ancestors 'self'; base-uri 'self'; form-action 'self'");
@@ -488,15 +497,97 @@ setInterval(() => {
 // ===================== STATIC FILES =====================
 app.use(express.static(path.join(__dirname, 'public')));
 
+// ===================== PERSISTENT PLAYER SHELL =====================
+function getShellHTML(contentPath) {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="">
+<meta property="og:title" content="">
+<meta property="og:description" content="">
+<meta property="og:type" content="website">
+<meta property="og:image" content="">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="">
+<meta name="twitter:description" content="">
+<title>b0b</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden;background:#0a0a0a}
+#frame{width:100%;border:none;height:calc(100% - 48px);display:block}
+.player-bar{position:fixed;bottom:0;left:0;right:0;height:48px;background:#0a0a0a;border-top:1px solid #222;display:flex;align-items:center;padding:0 16px;gap:10px;font-family:'Courier New',monospace;z-index:9999}
+.p-track{color:#00ff41;font-size:0.7rem;letter-spacing:1px;white-space:nowrap;flex-shrink:0}
+.p-btn{background:transparent;border:1px solid #00ff41;color:#00ff41;font-family:inherit;font-size:0.8rem;width:32px;height:32px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.p-btn:hover{background:#00ff41;color:#0a0a0a}
+.p-wrap{flex:1;height:4px;background:#222;cursor:pointer;position:relative;min-width:60px}
+.p-fill{height:100%;width:0%;background:#00ff41;transition:width 0.1s linear}
+.p-time{font-size:0.6rem;color:#555;flex-shrink:0;min-width:72px;text-align:right;font-family:'Courier New',monospace}
+@media(max-width:480px){.p-track{display:none}}
+</style>
+</head>
+<body>
+<iframe id="frame" src="/_page${contentPath}"></iframe>
+<div class="player-bar">
+  <button class="p-btn" id="pb" onclick="tp()">▶</button>
+  <div class="p-track">FAITH NO MORE — WE CARE A LOT</div>
+  <div class="p-wrap" id="pw"><div class="p-fill" id="pf"></div></div>
+  <div class="p-time" id="pt">0:00 / 0:00</div>
+</div>
+<audio id="a" preload="metadata" src="https://dn710700.ca.archive.org/0/items/Faith_No_More_We_Care_A_Lot/Faith_No_More_We_Care_A_Lot.mp4"></audio>
+<script>
+(function(){
+var a=document.getElementById('a'),pb=document.getElementById('pb'),pf=document.getElementById('pf'),pw=document.getElementById('pw'),pt=document.getElementById('pt'),fr=document.getElementById('frame');
+function fmt(s){if(isNaN(s))return'0:00';var m=Math.floor(s/60),sec=Math.floor(s%60);return m+':'+(sec<10?'0':'')+sec}
+a.addEventListener('timeupdate',function(){if(a.duration){pf.style.width=(a.currentTime/a.duration*100)+'%';pt.textContent=fmt(a.currentTime)+' / '+fmt(a.duration)}});
+a.addEventListener('ended',function(){pb.textContent='▶'});
+pw.addEventListener('click',function(e){if(a.duration){var r=pw.getBoundingClientRect();a.currentTime=((e.clientX-r.left)/r.width)*a.duration}});
+window.tp=function(){if(a.paused){a.play();pb.textContent='⏸'}else{a.pause();pb.textContent='▶'}};
+// Listen for navigation messages from iframe content
+window.addEventListener('message',function(e){
+  if(e.origin===location.origin && e.data && e.data.navigate){
+    fr.src='/_page'+e.data.navigate;
+    history.replaceState(null,'',e.data.navigate);
+  }
+});
+// Sync URL when iframe navigates via links
+fr.addEventListener('load',function(){
+  try{
+    var p=new URL(fr.contentWindow.location.href).pathname;
+    if(p.indexOf('/_page')===0){var real=p.replace('/_page','');if(real==='')real='/';history.replaceState(null,'',real)}
+  }catch(e){}
+});
+})();
+</script>
+</body>
+</html>`;
+}
+
+// Shell routes — serve persistent player wrapper
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.send(getShellHTML('/'));
 });
 
 app.get('/report', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'report.html'));
+  res.send(getShellHTML('/report'));
 });
 
 app.get('/map', (req, res) => {
+  res.send(getShellHTML('/map'));
+});
+
+// Raw content routes — serve actual pages into iframe
+app.get('/_page/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.get('/_page/report', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'report.html'));
+});
+
+app.get('/_page/map', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'map.html'));
 });
 
