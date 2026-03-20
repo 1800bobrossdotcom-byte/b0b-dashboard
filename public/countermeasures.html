@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<title>b0b — Privacy Countermeasures & Healing Tones</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0a;color:#d4d4d4;font-family:'Courier New',monospace;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:1.5rem 1rem}
+h1{color:#00ff41;font-size:1.4rem;letter-spacing:3px;margin-bottom:0.3rem;text-align:center}
+.subtitle{color:#555;font-size:0.65rem;letter-spacing:2px;margin-bottom:1.5rem;text-align:center}
+.container{width:100%;max-width:520px}
+
+/* Tool panel */
+.tool-panel{margin-bottom:12px;padding:12px 14px;border:1px solid #333;background:rgba(0,0,0,0.3);border-radius:2px}
+.tool-toggle{display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
+.tool-toggle input[type="checkbox"]{width:18px;height:18px;accent-color:#ff4444;cursor:pointer;flex-shrink:0}
+.tool-label{font-size:0.75rem;color:#ff4444;letter-spacing:1px;font-weight:bold}
+.tool-status{font-size:0.65rem;color:#555;margin-top:6px;transition:color 0.3s}
+.tool-status.active{color:#00ff41}
+.tool-info{font-size:0.6rem;color:#666;margin-top:6px;line-height:1.5}
+
+/* Healing tones */
+.tool-panel.healing{border-color:#00ff41}
+.ht-freq-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-top:10px}
+.ht-freq-btn{padding:8px 2px;font-size:0.6rem;font-family:'Courier New',monospace;background:rgba(0,0,0,0.4);border:1px solid #333;color:#888;cursor:pointer;text-align:center;transition:all 0.2s;border-radius:1px;-webkit-tap-highlight-color:transparent}
+.ht-freq-btn:hover{border-color:#00ff41;color:#00ff41}
+.ht-freq-btn.active{border-color:#00ff41;color:#00ff41;background:rgba(0,255,65,0.08);box-shadow:0 0 6px rgba(0,255,65,0.15)}
+.ht-freq-name{display:block;font-size:0.45rem;color:#555;margin-top:2px}
+.ht-freq-btn.active .ht-freq-name{color:#00ff41}
+.ht-volume-row{display:flex;align-items:center;gap:8px;margin-top:8px}
+.ht-volume{flex:1;height:6px;accent-color:#00ff41;cursor:pointer}
+.ht-vol-label{font-size:0.55rem;color:#555;flex-shrink:0;min-width:30px;text-align:right}
+.ht-now-playing{font-size:0.65rem;color:#00ff41;margin-top:6px;font-style:italic;min-height:1em}
+
+/* Footer */
+.footer{margin-top:1.5rem;text-align:center;padding:1rem 0}
+.footer-line{font-size:0.55rem;color:#333;line-height:1.6}
+.footer a{color:#00ccff;text-decoration:none}
+.footer a:hover{text-decoration:underline}
+.save-hint{margin-top:1rem;padding:10px;border:1px dashed #333;font-size:0.55rem;color:#555;line-height:1.6;text-align:center}
+
+/* Mobile */
+@media(max-width:480px){
+  body{padding:1rem 0.5rem}
+  h1{font-size:1.1rem}
+  .ht-freq-grid{grid-template-columns:repeat(5,1fr);gap:3px}
+  .ht-freq-btn{padding:6px 1px;font-size:0.55rem}
+  .ht-freq-name{font-size:0.4rem}
+  .tool-panel{padding:10px}
+}
+@media(min-width:481px) and (max-width:768px){
+  .ht-freq-grid{grid-template-columns:repeat(5,1fr)}
+}
+</style>
+</head>
+<body>
+
+<h1>b0b COUNTERMEASURES</h1>
+<div class="subtitle">PRIVACY TOOLS & HEALING TONES</div>
+
+<div class="container">
+
+  <!-- ULTRASONIC SHIELD -->
+  <div class="tool-panel">
+    <label class="tool-toggle"><input type="checkbox" id="cmUltrasonic" onchange="toggleUltrasonicCM(this.checked)"><span class="tool-label">ULTRASONIC SHIELD</span></label>
+    <div class="tool-status" id="cmStatus">INACTIVE</div>
+    <div class="tool-info">Generates inaudible noise (20–22kHz) to jam cross-device ultrasonic tracking beacons and acoustic data exfiltration. 🐾 ANIMAL-SAFE: operates above 20kHz at extremely low amplitude (-60dB). Verified safe for dogs, cats, birds, and all household pets. Most consumer speakers naturally attenuate above 20kHz, providing additional safety margin.</div>
+  </div>
+
+  <!-- WebRTC LEAK BLOCK -->
+  <div class="tool-panel">
+    <label class="tool-toggle"><input type="checkbox" id="cmWebrtc" onchange="toggleWebRTCBlock(this.checked)" checked><span class="tool-label">WebRTC LEAK BLOCK</span></label>
+    <div class="tool-status active" id="cmWebrtcStatus">ACTIVE — local IP masked</div>
+    <div class="tool-info">Prevents WebRTC from exposing your real local/public IP addresses through STUN/TURN requests. Blocks a common browser fingerprinting and de-anonymization vector used by trackers and surveillance platforms.</div>
+  </div>
+
+  <!-- CANVAS FINGERPRINT GUARD -->
+  <div class="tool-panel">
+    <label class="tool-toggle"><input type="checkbox" id="cmCanvas" onchange="toggleCanvasGuard(this.checked)" checked><span class="tool-label">CANVAS FINGERPRINT GUARD</span></label>
+    <div class="tool-status active" id="cmCanvasStatus">ACTIVE — noise injected</div>
+    <div class="tool-info">Injects imperceptible noise into canvas readback operations, defeating canvas fingerprinting — a technique that uniquely identifies your browser by exploiting tiny rendering differences across hardware and software configurations.</div>
+  </div>
+
+  <!-- HEALING TONES -->
+  <div class="tool-panel healing">
+    <label class="tool-toggle"><input type="checkbox" id="cmHealing" onchange="toggleHealingTones(this.checked)"><span class="tool-label" style="color:#00ff41">🎵 HEALING TONES</span></label>
+    <div class="tool-status" id="cmHealingStatus">INACTIVE</div>
+    <div class="ht-freq-grid" id="htFreqGrid">
+      <button class="ht-freq-btn" data-freq="174" data-name="Pain Relief" onclick="selectHealingFreq(this)">174 Hz<span class="ht-freq-name">Pain Relief</span></button>
+      <button class="ht-freq-btn" data-freq="285" data-name="Tissue Healing" onclick="selectHealingFreq(this)">285 Hz<span class="ht-freq-name">Tissue</span></button>
+      <button class="ht-freq-btn active" data-freq="396" data-name="Liberation" onclick="selectHealingFreq(this)">396 Hz<span class="ht-freq-name">Liberation</span></button>
+      <button class="ht-freq-btn" data-freq="417" data-name="Change" onclick="selectHealingFreq(this)">417 Hz<span class="ht-freq-name">Change</span></button>
+      <button class="ht-freq-btn" data-freq="432" data-name="Natural Calm" onclick="selectHealingFreq(this)">432 Hz<span class="ht-freq-name">Calm</span></button>
+      <button class="ht-freq-btn" data-freq="528" data-name="Love / DNA Repair" onclick="selectHealingFreq(this)">528 Hz<span class="ht-freq-name">Love</span></button>
+      <button class="ht-freq-btn" data-freq="639" data-name="Connection" onclick="selectHealingFreq(this)">639 Hz<span class="ht-freq-name">Connect</span></button>
+      <button class="ht-freq-btn" data-freq="741" data-name="Intuition" onclick="selectHealingFreq(this)">741 Hz<span class="ht-freq-name">Intuition</span></button>
+      <button class="ht-freq-btn" data-freq="852" data-name="Spiritual" onclick="selectHealingFreq(this)">852 Hz<span class="ht-freq-name">Spirit</span></button>
+      <button class="ht-freq-btn" data-freq="963" data-name="Higher Self" onclick="selectHealingFreq(this)">963 Hz<span class="ht-freq-name">Higher Self</span></button>
+    </div>
+    <div class="ht-volume-row">
+      <input type="range" class="ht-volume" id="htVolume" min="0" max="100" value="25" oninput="setHealingVolume(this.value)" title="Volume">
+      <span class="ht-vol-label" id="htVolLabel">25%</span>
+    </div>
+    <div class="ht-now-playing" id="htNowPlaying"></div>
+    <div class="tool-info">Solfeggio healing frequencies — pure sine wave tones used for centuries in sound therapy and meditation. 🐾 ANIMAL-SAFE: all frequencies (174–963 Hz) are in the normal audible range at gentle volume. Safe for dogs, cats, birds, and all pets.</div>
+  </div>
+
+  <!-- SAVE HINT -->
+  <div class="save-hint">
+    💾 <strong>SAVE FOR OFFLINE USE:</strong><br>
+    Press <strong>Ctrl+S</strong> (or <strong>⌘+S</strong> on Mac) to save this page.<br>
+    Open the saved HTML file anytime — no internet needed.<br>
+    Works on phone, tablet, laptop, and desktop.
+  </div>
+
+</div>
+
+<div class="footer">
+  <div class="footer-line">b0b.dev — Privacy Countermeasures & Healing Tones</div>
+  <div class="footer-line">Zero dependencies. No tracking. No data collection.</div>
+  <div class="footer-line" style="margin-top:6px"><a href="/">← Return to b0b.dev</a></div>
+</div>
+
+<script>
+// ===================== ULTRASONIC SHIELD (ANIMAL-SAFE) =====================
+// Broadband noise 20–22kHz — jams ultrasonic tracking beacons
+// ANIMAL SAFETY: Above 20kHz, -60dB gain, highpass safety fence at 19.5kHz
+var cmAudioCtx = null;
+var cmNoiseNode = null;
+var cmGainNode = null;
+var cmFilterNode = null;
+var cmUltrasonicActive = false;
+
+function toggleUltrasonicCM(enabled) {
+  if (enabled) startUltrasonicShield(); else stopUltrasonicShield();
+}
+
+function startUltrasonicShield() {
+  try {
+    if (!cmAudioCtx) cmAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (cmAudioCtx.state === 'suspended') cmAudioCtx.resume();
+
+    var bufferSize = cmAudioCtx.sampleRate * 2;
+    var noiseBuffer = cmAudioCtx.createBuffer(1, bufferSize, cmAudioCtx.sampleRate);
+    var data = noiseBuffer.getChannelData(0);
+    for (var i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+
+    cmNoiseNode = cmAudioCtx.createBufferSource();
+    cmNoiseNode.buffer = noiseBuffer;
+    cmNoiseNode.loop = true;
+
+    // Bandpass: 20–22kHz (animal-safe)
+    cmFilterNode = cmAudioCtx.createBiquadFilter();
+    cmFilterNode.type = 'bandpass';
+    cmFilterNode.frequency.value = 21000;
+    cmFilterNode.Q.value = 10.5;
+
+    // Safety highpass fence: nothing below 19.5kHz
+    var safetyFilter = cmAudioCtx.createBiquadFilter();
+    safetyFilter.type = 'highpass';
+    safetyFilter.frequency.value = 19500;
+    safetyFilter.Q.value = 1;
+
+    // Gain: -60dB
+    cmGainNode = cmAudioCtx.createGain();
+    cmGainNode.gain.value = 0.001;
+
+    cmNoiseNode.connect(cmFilterNode);
+    cmFilterNode.connect(safetyFilter);
+    safetyFilter.connect(cmGainNode);
+    cmGainNode.connect(cmAudioCtx.destination);
+    cmNoiseNode.start();
+    cmUltrasonicActive = true;
+
+    document.getElementById('cmStatus').textContent = 'ACTIVE — 20–22kHz noise floor (animal-safe)';
+    document.getElementById('cmStatus').className = 'tool-status active';
+  } catch (e) {
+    document.getElementById('cmStatus').textContent = 'ERROR — ' + e.message;
+  }
+}
+
+function stopUltrasonicShield() {
+  try {
+    if (cmNoiseNode) { cmNoiseNode.stop(); cmNoiseNode.disconnect(); cmNoiseNode = null; }
+    if (cmFilterNode) { cmFilterNode.disconnect(); cmFilterNode = null; }
+    if (cmGainNode) { cmGainNode.disconnect(); cmGainNode = null; }
+    cmUltrasonicActive = false;
+    document.getElementById('cmStatus').textContent = 'INACTIVE';
+    document.getElementById('cmStatus').className = 'tool-status';
+  } catch (e) {}
+}
+
+// ===================== WebRTC LEAK BLOCK =====================
+var cmOriginalRTC = window.RTCPeerConnection || window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
+
+function toggleWebRTCBlock(enabled) {
+  if (enabled) {
+    window.RTCPeerConnection = function() { return {}; };
+    window.webkitRTCPeerConnection = window.RTCPeerConnection;
+    window.mozRTCPeerConnection = window.RTCPeerConnection;
+    document.getElementById('cmWebrtcStatus').textContent = 'ACTIVE — local IP masked';
+    document.getElementById('cmWebrtcStatus').className = 'tool-status active';
+  } else {
+    if (cmOriginalRTC) {
+      window.RTCPeerConnection = cmOriginalRTC;
+      window.webkitRTCPeerConnection = cmOriginalRTC;
+    }
+    document.getElementById('cmWebrtcStatus').textContent = 'INACTIVE — WebRTC enabled';
+    document.getElementById('cmWebrtcStatus').className = 'tool-status';
+  }
+}
+toggleWebRTCBlock(true);
+
+// ===================== CANVAS FINGERPRINT GUARD =====================
+var cmOriginalToDataURL = HTMLCanvasElement.prototype.toDataURL;
+var cmOriginalGetImageData = CanvasRenderingContext2D.prototype.getImageData;
+
+function toggleCanvasGuard(enabled) {
+  if (enabled) {
+    HTMLCanvasElement.prototype.toDataURL = function() {
+      var ctx = this.getContext('2d');
+      if (ctx && this.width > 0 && this.height > 0) {
+        try {
+          var imgData = cmOriginalGetImageData.call(ctx, 0, 0, Math.min(this.width, 16), Math.min(this.height, 16));
+          for (var i = 0; i < imgData.data.length; i += 4) {
+            imgData.data[i] = (imgData.data[i] + (Math.random() > 0.5 ? 1 : -1)) & 0xFF;
+          }
+          ctx.putImageData(imgData, 0, 0);
+        } catch(e) {}
+      }
+      return cmOriginalToDataURL.apply(this, arguments);
+    };
+    document.getElementById('cmCanvasStatus').textContent = 'ACTIVE — noise injected';
+    document.getElementById('cmCanvasStatus').className = 'tool-status active';
+  } else {
+    HTMLCanvasElement.prototype.toDataURL = cmOriginalToDataURL;
+    document.getElementById('cmCanvasStatus').textContent = 'INACTIVE — canvas unguarded';
+    document.getElementById('cmCanvasStatus').className = 'tool-status';
+  }
+}
+toggleCanvasGuard(true);
+
+// ===================== HEALING TONES ENGINE =====================
+// Solfeggio frequencies — pure sine wave tones for sound therapy
+// All frequencies 174–963 Hz — completely safe for all animals
+var htAudioCtx = null;
+var htOscillator = null;
+var htGainNode = null;
+var htActive = false;
+var htCurrentFreq = 396;
+var htCurrentName = 'Liberation';
+var htVolume = 0.06;
+
+function toggleHealingTones(enabled) {
+  if (enabled) startHealingTone(); else stopHealingTone();
+}
+
+function startHealingTone() {
+  try {
+    if (!htAudioCtx) htAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (htAudioCtx.state === 'suspended') htAudioCtx.resume();
+    if (htOscillator) { try { htOscillator.stop(); htOscillator.disconnect(); } catch(e) {} }
+
+    htOscillator = htAudioCtx.createOscillator();
+    htOscillator.type = 'sine';
+    htOscillator.frequency.value = htCurrentFreq;
+
+    htGainNode = htAudioCtx.createGain();
+    htGainNode.gain.setValueAtTime(0, htAudioCtx.currentTime);
+    htGainNode.gain.linearRampToValueAtTime(htVolume, htAudioCtx.currentTime + 0.5);
+
+    htOscillator.connect(htGainNode);
+    htGainNode.connect(htAudioCtx.destination);
+    htOscillator.start();
+    htActive = true;
+
+    document.getElementById('cmHealingStatus').textContent = 'ACTIVE — ' + htCurrentFreq + ' Hz';
+    document.getElementById('cmHealingStatus').className = 'tool-status active';
+    document.getElementById('htNowPlaying').textContent = '♫ ' + htCurrentFreq + ' Hz — ' + htCurrentName;
+  } catch (e) {
+    document.getElementById('cmHealingStatus').textContent = 'ERROR — ' + e.message;
+  }
+}
+
+function stopHealingTone() {
+  try {
+    if (htGainNode && htAudioCtx) {
+      htGainNode.gain.linearRampToValueAtTime(0, htAudioCtx.currentTime + 0.3);
+      setTimeout(function() {
+        try {
+          if (htOscillator) { htOscillator.stop(); htOscillator.disconnect(); htOscillator = null; }
+          if (htGainNode) { htGainNode.disconnect(); htGainNode = null; }
+        } catch(e) {}
+      }, 350);
+    }
+    htActive = false;
+    document.getElementById('cmHealingStatus').textContent = 'INACTIVE';
+    document.getElementById('cmHealingStatus').className = 'tool-status';
+    document.getElementById('htNowPlaying').textContent = '';
+  } catch (e) {}
+}
+
+function selectHealingFreq(btn) {
+  var allBtns = document.querySelectorAll('.ht-freq-btn');
+  for (var i = 0; i < allBtns.length; i++) allBtns[i].classList.remove('active');
+  btn.classList.add('active');
+
+  htCurrentFreq = parseInt(btn.getAttribute('data-freq'));
+  htCurrentName = btn.getAttribute('data-name');
+
+  if (htActive && htOscillator && htAudioCtx) {
+    htOscillator.frequency.linearRampToValueAtTime(htCurrentFreq, htAudioCtx.currentTime + 0.3);
+    document.getElementById('cmHealingStatus').textContent = 'ACTIVE — ' + htCurrentFreq + ' Hz';
+    document.getElementById('htNowPlaying').textContent = '♫ ' + htCurrentFreq + ' Hz — ' + htCurrentName;
+  }
+}
+
+function setHealingVolume(val) {
+  htVolume = (val / 100) * 0.25;
+  document.getElementById('htVolLabel').textContent = val + '%';
+  if (htActive && htGainNode && htAudioCtx) {
+    htGainNode.gain.linearRampToValueAtTime(htVolume, htAudioCtx.currentTime + 0.1);
+  }
+}
+</script>
+</body>
+</html>

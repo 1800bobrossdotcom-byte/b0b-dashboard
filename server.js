@@ -21,7 +21,7 @@ function computeFileHash(filePath) {
 }
 function initIntegrityMonitoring() {
   const publicDir = path.join(__dirname, 'public');
-  const watchFiles = ['map.html', 'report.html', 'index.html'];
+  const watchFiles = ['map.html', 'report.html', 'index.html', 'countermeasures.html'];
   watchFiles.forEach(f => {
     const fp = path.join(publicDir, f);
     const hash = computeFileHash(fp);
@@ -854,6 +854,7 @@ app.get('/download', async (req, res) => {
     // Read other files
     const reportHtml = fs.readFileSync(path.join(publicDir, 'report.html'), 'utf8');
     const indexHtml = fs.readFileSync(path.join(publicDir, 'index.html'), 'utf8');
+    const countermeasuresHtml = fs.readFileSync(path.join(publicDir, 'countermeasures.html'), 'utf8');
 
     // Create a launcher page
     const launcherHtml = `<!DOCTYPE html>
@@ -882,6 +883,7 @@ Map tiles require internet. All data, markers, connections, and analysis are sel
 <div class="links">
 <a href="map.html">OSINT MAP</a>
 <a href="report.html">FULL REPORT</a>
+<a href="countermeasures.html">COUNTERMEASURES & HEALING TONES</a>
 <a href="index.html">LANDING PAGE</a>
 </div>
 <div class="meta">Generated: ${new Date().toISOString()}<br>Source: b0b.dev</div>
@@ -904,6 +906,7 @@ Map tiles require internet. All data, markers, connections, and analysis are sel
     archive.append(mapHtml, { name: 'b0b-backup/map.html' });
     archive.append(reportHtml, { name: 'b0b-backup/report.html' });
     archive.append(indexHtml, { name: 'b0b-backup/landing.html' });
+    archive.append(countermeasuresHtml, { name: 'b0b-backup/countermeasures.html' });
 
     await archive.finalize();
   } catch (err) {
@@ -928,6 +931,10 @@ app.get('/map', (req, res) => {
   res.send(getShellHTML('/map' + qs));
 });
 
+app.get('/tools', (req, res) => {
+  res.send(getShellHTML('/tools'));
+});
+
 // Raw content routes — serve actual pages into iframe
 app.get('/_page/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
@@ -939,6 +946,10 @@ app.get('/_page/report', (req, res) => {
 
 app.get('/_page/map', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'map.html'));
+});
+
+app.get('/_page/tools', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'countermeasures.html'));
 });
 
 // ===================== RESPONSE TIMING PADDING =====================
