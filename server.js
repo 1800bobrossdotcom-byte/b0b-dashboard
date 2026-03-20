@@ -754,9 +754,17 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
 .p-wrap{flex:1;height:6px;background:#222;cursor:pointer;position:relative;min-width:60px;-webkit-tap-highlight-color:transparent}
 .p-fill{height:100%;width:0%;background:#00ff41;transition:width 0.1s linear}
 .p-time{font-size:0.6rem;color:#555;flex-shrink:0;min-width:72px;text-align:right;font-family:'Courier New',monospace}
-#ytContainer{position:fixed;left:16px;bottom:56px;width:280px;height:158px;z-index:10000;border:1px solid #333;background:#000;display:none;box-shadow:0 -2px 12px rgba(0,0,0,0.7)}
+#ytContainer{position:fixed;left:16px;bottom:56px;width:280px;height:auto;z-index:10000;border:1px solid #333;background:#000;display:none;box-shadow:0 -2px 12px rgba(0,0,0,0.7);cursor:default}
 #ytContainer.yt-show{display:block}
-#ytContainer iframe{width:100%;height:100%}
+#ytContainer iframe{width:100%;height:158px;display:block}
+.yt-drag{height:20px;background:#111;border-bottom:1px solid #333;cursor:grab;display:flex;align-items:center;justify-content:space-between;padding:0 8px;user-select:none}
+.yt-drag:active{cursor:grabbing}
+.yt-drag-dots{color:#555;font-size:0.55rem;letter-spacing:2px}
+.yt-close{color:#555;font-size:0.7rem;cursor:pointer;background:none;border:none;font-family:inherit;padding:0 2px}
+.yt-close:hover{color:#ff4444}
+.yt-vol-bar{height:24px;background:#111;border-top:1px solid #333;display:flex;align-items:center;gap:6px;padding:0 8px}
+.yt-vol-icon{color:#555;font-size:0.6rem;flex-shrink:0}
+.yt-vol-slider{flex:1;height:3px;accent-color:#00ff41;cursor:pointer}
 /* CM Drawer — persistent countermeasures above player bar */
 .cm-drawer{position:fixed;bottom:48px;left:0;right:0;z-index:9998;background:rgba(10,10,10,0.98);border-top:1px solid #333;font-family:'Courier New',monospace}
 .cm-drawer-bar{height:36px;display:flex;align-items:center;padding:0 16px;cursor:pointer;user-select:none;gap:12px}
@@ -792,7 +800,8 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
 .pt-freq-btn.active{border-color:#00ccff;color:#00ccff;background:rgba(0,204,255,0.08);box-shadow:0 0 6px rgba(0,204,255,0.15)}
 .pt-volume{width:100%;height:4px;margin-top:6px;accent-color:#00ccff;cursor:pointer}
 .pt-now-playing{font-size:0.55rem;color:#00ccff;margin-top:4px;font-style:italic}
-@media(max-width:480px){.p-track{display:none}.player-bar{padding:0 10px;height:44px}.p-btn{width:32px;height:32px;font-size:0.7rem}.p-time{min-width:60px;font-size:0.55rem}#frame{height:calc(100% - 80px)}.cm-drawer{bottom:44px}.cm-drawer-bar{height:32px;padding:0 10px;gap:8px}.cm-drawer-bar h3{font-size:0.6rem;letter-spacing:1px}.cm-dot{width:6px;height:6px}.cm-dot-label{display:none}.cm-drawer.expanded .cm-drawer-content{grid-template-columns:1fr;max-height:60vh}.ht-freq-grid{grid-template-columns:repeat(3,1fr)}.pt-freq-grid{grid-template-columns:repeat(3,1fr)}}
+.cm-dl-panel{border-color:#ff4444;margin-top:0}.cm-dl-title{font-size:0.65rem;color:#ff4444;letter-spacing:1px;font-weight:bold;margin-bottom:8px}.cm-dl-info{font-size:0.55rem;color:#666;margin-bottom:8px;line-height:1.4}.cm-dl-btns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}.cm-dl-btn{flex:1;min-width:120px;padding:8px;background:transparent;border:1px solid #00ff41;color:#00ff41;font-family:'Courier New',monospace;font-size:0.6rem;cursor:pointer;letter-spacing:1px;text-align:center}.cm-dl-btn:hover{background:#00ff41;color:#0a0a0a}.cm-dl-btn.blue{border-color:#00ccff;color:#00ccff}.cm-dl-btn.blue:hover{background:#00ccff;color:#0a0a0a}.cm-embed-label{font-size:0.55rem;color:#cc88ff;letter-spacing:1px;margin-bottom:4px}.cm-embed-wrap{position:relative;margin-bottom:8px}.cm-embed-pre{background:#111;border:1px solid #333;padding:6px;font-size:0.5rem;color:#888;overflow-x:auto;white-space:pre-wrap;word-break:break-all;margin:0;font-family:'Courier New',monospace}.cm-embed-copy{position:absolute;top:3px;right:3px;background:#0a0a0a;border:1px solid #cc88ff;color:#cc88ff;font-family:'Courier New',monospace;font-size:0.5rem;padding:2px 6px;cursor:pointer}
+@media(max-width:480px){.p-track{display:none}.player-bar{padding:0 10px;height:44px}.p-btn{width:32px;height:32px;font-size:0.7rem}.p-time{min-width:60px;font-size:0.55rem}#frame{height:calc(100% - 80px)}.cm-drawer{bottom:44px}.cm-drawer-bar{height:32px;padding:0 10px;gap:8px}.cm-drawer-bar h3{font-size:0.6rem;letter-spacing:1px}.cm-dot{width:6px;height:6px}.cm-dot-label{display:none}.cm-drawer.expanded .cm-drawer-content{grid-template-columns:1fr;max-height:60vh}.ht-freq-grid{grid-template-columns:repeat(3,1fr)}.pt-freq-grid{grid-template-columns:repeat(3,1fr)}#ytContainer{width:220px}#ytContainer iframe{height:124px}.cm-dl-btns{flex-direction:column}}
 </style>
 </head>
 <body>
@@ -866,6 +875,26 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
     <div class="pt-now-playing" id="ptNowPlaying"></div>
     <div class="cm-info">\uD83C\uDF0A 7.83 Hz Schumann is Earth\u2019s electromagnetic heartbeat. Use headphones for binaural entrainment. \uD83D\uDC3E ANIMAL-SAFE.</div>
   </div>
+  <div class="cm-panel cm-dl-panel">
+    <div class="cm-dl-title">\u2B07 DOWNLOAD STANDALONE APPS</div>
+    <div class="cm-dl-info">Self-contained HTML files. Zero dependencies. No server needed. Open in any browser, any device.</div>
+    <div class="cm-dl-btns">
+      <button class="cm-dl-btn" onclick="downloadToneApp('healing')">\u2B07 HEALING TONES</button>
+      <button class="cm-dl-btn blue" onclick="downloadToneApp('protective')">\u2B07 PROTECTIVE TONES</button>
+    </div>
+    <div class="cm-dl-title" style="color:#cc88ff;margin-top:8px">\uD83D\uDD17 INSTALL ON YOUR SITE</div>
+    <div class="cm-dl-info">Copy embed code to add tone tools to any website.</div>
+    <div class="cm-embed-label">IFRAME EMBED:</div>
+    <div class="cm-embed-wrap">
+      <pre class="cm-embed-pre" id="shellEmbedIframe">&lt;iframe src="https://b0b.dev/tools" style="width:100%;max-width:540px;height:600px;border:1px solid #333;background:#0a0a0a" title="b0b Countermeasures &amp; Healing Tones" loading="lazy"&gt;&lt;/iframe&gt;</pre>
+      <button class="cm-embed-copy" onclick="copyShellEmbed('shellEmbedIframe',this)">COPY</button>
+    </div>
+    <div class="cm-embed-label">SCRIPT TAG:</div>
+    <div class="cm-embed-wrap">
+      <pre class="cm-embed-pre" id="shellEmbedScript">&lt;script&gt;(function(){var d=document.createElement('div');d.innerHTML='&lt;iframe src="https://b0b.dev/tools" style="width:100%;max-width:540px;height:600px;border:1px solid #333;background:#0a0a0a" title="b0b Countermeasures" loading="lazy"&gt;&lt;/iframe&gt;';document.currentScript.parentNode.insertBefore(d,document.currentScript)})()&lt;/script&gt;</pre>
+      <button class="cm-embed-copy" onclick="copyShellEmbed('shellEmbedScript',this)">COPY</button>
+    </div>
+  </div>
   </div>
 </div>
 <div class="player-bar">
@@ -873,7 +902,7 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
   <div class="p-track">HIDDEN ORCHESTRA — EAST LONDON STREET <a href="https://www.tru-thoughts.co.uk" target="_blank" rel="noopener noreferrer" style="color:#ff6600;text-decoration:none;font-size:0.6rem;margin-left:6px" title="Tru Thoughts Records">TRU THOUGHTS</a></div>
   <div class="p-wrap" id="pw"><div class="p-fill" id="pf"></div></div>
   <div class="p-time" id="pt">0:00 / 11:13</div>
-  <div id="ytContainer"><div id="ytPlayer"></div></div>
+  <div id="ytContainer"><div class="yt-drag" id="ytDrag"><span class="yt-drag-dots">≡≡≡</span><button class="yt-close" onclick="document.getElementById('ytContainer').classList.remove('yt-show')" title="Hide">✕</button></div><div id="ytPlayer"></div><div class="yt-vol-bar"><span class="yt-vol-icon">🔊</span><input type="range" class="yt-vol-slider" id="ytVol" min="0" max="100" value="100" oninput="setYtVol(this.value)" title="Volume"></div></div>
 </div>
 <script>
 var tag=document.createElement('script');tag.src='https://www.youtube.com/iframe_api';document.head.appendChild(tag);
@@ -893,6 +922,70 @@ function ytUpdateProgress(){
 var pb=document.getElementById('pb'),pf=document.getElementById('pf'),pw=document.getElementById('pw'),pt=document.getElementById('pt'),fr=document.getElementById('frame');
 pw.addEventListener('click',function(e){if(ytP&&ytReady){var r=pw.getBoundingClientRect();var ratio=(e.clientX-r.left)/r.width;ytP.seekTo(ratio*(ytP.getDuration()||ytDuration),true)}});
 window.tp=function(){if(!ytP||!ytReady)return;var state=ytP.getPlayerState();if(state===YT.PlayerState.PLAYING){ytP.pauseVideo();pb.textContent='▶';clearInterval(ytTimer);document.getElementById('ytContainer').classList.remove('yt-show')}else{ytP.playVideo();pb.textContent='⏸';ytTimer=setInterval(ytUpdateProgress,250);document.getElementById('ytContainer').classList.add('yt-show')}};
+window.setYtVol=function(v){if(ytP&&ytReady)ytP.setVolume(parseInt(v))};
+// Draggable YT widget
+(function(){var c=document.getElementById('ytContainer'),h=document.getElementById('ytDrag'),ox=0,oy=0,sx=0,sy=0,dragging=false;
+h.addEventListener('mousedown',function(e){dragging=true;ox=e.clientX;oy=e.clientY;var r=c.getBoundingClientRect();sx=r.left;sy=r.top;e.preventDefault()});
+h.addEventListener('touchstart',function(e){var t=e.touches[0];dragging=true;ox=t.clientX;oy=t.clientY;var r=c.getBoundingClientRect();sx=r.left;sy=r.top;e.preventDefault()},{passive:false});
+function onMove(cx,cy){if(!dragging)return;var nx=sx+(cx-ox),ny=sy+(cy-oy);nx=Math.max(0,Math.min(window.innerWidth-c.offsetWidth,nx));ny=Math.max(0,Math.min(window.innerHeight-c.offsetHeight,ny));c.style.left=nx+'px';c.style.top=ny+'px';c.style.bottom='auto';c.style.right='auto'}
+document.addEventListener('mousemove',function(e){onMove(e.clientX,e.clientY)});
+document.addEventListener('touchmove',function(e){if(dragging){onMove(e.touches[0].clientX,e.touches[0].clientY);e.preventDefault()}},{passive:false});
+document.addEventListener('mouseup',function(){dragging=false});
+document.addEventListener('touchend',function(){dragging=false});
+})();
+// Copy embed code
+window.copyShellEmbed=function(id,btn){var text=document.getElementById(id).textContent;navigator.clipboard.writeText(text).then(function(){btn.textContent='\u2713 COPIED';setTimeout(function(){btn.textContent='COPY'},2000)}).catch(function(){var ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);btn.textContent='\u2713 COPIED';setTimeout(function(){btn.textContent='COPY'},2000)})};
+// Download standalone tone app
+window.downloadToneApp=function(type){var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>b0b '+type+' Tones</title><style>';
+html+='*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;display:flex;align-items:center;justify-content:center;min-height:100vh}';
+html+='.app{max-width:500px;width:90%;padding:24px;border:1px solid #333}.app h1{color:#ff4444;font-size:1rem;letter-spacing:2px;margin-bottom:16px}';
+html+='.btn{display:inline-block;padding:8px 14px;margin:4px;background:transparent;border:1px solid #00ff41;color:#00ff41;font-family:inherit;font-size:0.8rem;cursor:pointer}';
+html+='.btn:hover,.btn.active{background:#00ff41;color:#0a0a0a}.status{margin:12px 0;color:#555;font-size:0.8rem}';
+html+='.toggle{display:flex;align-items:center;gap:8px;margin:12px 0;cursor:pointer}.toggle input{width:18px;height:18px}';
+html+='input[type=range]{width:100%;margin:12px 0;accent-color:#00ff41}';
+html+='.credit{margin-top:24px;color:#333;font-size:0.6rem;text-align:center}';
+html+='</style></head><body><div class="app">';
+if(type==="healing"){
+html+='<h1>\uD83C\uDFB5 b0b HEALING TONES</h1>';
+html+='<label class="toggle"><input type="checkbox" id="tog" onchange="toggle(this.checked)"><span>ACTIVATE</span></label>';
+html+='<div class="status" id="st">INACTIVE</div><div id="grid">';
+var hf=[[174,"Pain Relief"],[285,"Tissue Healing"],[396,"Liberation"],[417,"Change"],[432,"Natural Calm"],[528,"Love / DNA Repair"],[639,"Connection"],[741,"Intuition"],[852,"Spiritual"],[963,"Higher Self"]];
+for(var i=0;i<hf.length;i++){html+='<button class="btn'+(hf[i][0]===396?' active':'')+'" data-f="'+hf[i][0]+'" data-n="'+hf[i][1]+'" onclick="sel(this)">'+hf[i][0]+' Hz</button>'}
+html+='</div><input type="range" min="0" max="100" value="25" oninput="vol(this.value)">';
+html+='<scr'+'ipt>';
+html+='var ctx,osc,sub,gain,on=false,freq=396,name="Liberation",v=0.06;';
+html+='function toggle(e){if(e){if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();if(ctx.state==="suspended")ctx.resume();if(osc){try{osc.stop();osc.disconnect()}catch(x){}}if(sub){try{sub.stop();sub.disconnect()}catch(x){}}osc=ctx.createOscillator();osc.type="sine";osc.frequency.value=freq;gain=ctx.createGain();gain.gain.setValueAtTime(0,ctx.currentTime);gain.gain.linearRampToValueAtTime(v,ctx.currentTime+0.5);osc.connect(gain);sub=ctx.createOscillator();sub.type="sine";sub.frequency.value=freq/2;var sg=ctx.createGain();sg.gain.value=0.15;sub.connect(sg);sg.connect(gain);gain.connect(ctx.destination);osc.start();sub.start();on=true;document.getElementById("st").textContent="ACTIVE \\u2014 "+freq+" Hz";document.getElementById("st").style.color="#00ff41"}else{if(gain&&ctx){gain.gain.linearRampToValueAtTime(0,ctx.currentTime+0.3);setTimeout(function(){try{if(osc){osc.stop();osc.disconnect();osc=null}if(sub){sub.stop();sub.disconnect();sub=null}if(gain){gain.disconnect();gain=null}}catch(x){}},350)}on=false;document.getElementById("st").textContent="INACTIVE";document.getElementById("st").style.color="#555"}}';
+html+='function sel(b){document.querySelectorAll(".btn").forEach(function(x){x.classList.remove("active")});b.classList.add("active");freq=parseInt(b.dataset.f);name=b.dataset.n;if(on&&osc&&ctx){osc.frequency.linearRampToValueAtTime(freq,ctx.currentTime+0.3);if(sub)sub.frequency.linearRampToValueAtTime(freq/2,ctx.currentTime+0.3);document.getElementById("st").textContent="ACTIVE \\u2014 "+freq+" Hz"}}';
+html+='function vol(val){v=(val/100)*0.25;if(on&&gain&&ctx)gain.gain.linearRampToValueAtTime(v,ctx.currentTime+0.1)}';
+html+='<\\/scr'+'ipt>';
+}else{
+html+='<h1>\uD83D\uDEE1\uFE0F b0b PROTECTIVE TONES</h1>';
+html+='<label class="toggle"><input type="checkbox" id="tog" onchange="toggle(this.checked)"><span>ACTIVATE</span></label>';
+html+='<div class="status" id="st">INACTIVE</div><div id="grid">';
+html+='<button class="btn active" data-f="7.83" data-n="Schumann Resonance" data-t="binaural" onclick="sel(this)">7.83 Hz</button>';
+html+='<button class="btn" data-f="10" data-n="Alpha" data-t="binaural" onclick="sel(this)">10 Hz</button>';
+html+='<button class="btn" data-f="14" data-n="Beta" data-t="binaural" onclick="sel(this)">14 Hz</button>';
+html+='<button class="btn" data-f="40" data-n="Gamma" data-t="binaural" onclick="sel(this)">40 Hz</button>';
+html+='<button class="btn" data-f="0" data-n="Pink Noise" data-t="pink" onclick="sel(this)">PINK</button>';
+html+='<button class="btn" data-f="0" data-n="Brown Noise" data-t="brown" onclick="sel(this)">BROWN</button>';
+html+='<button class="btn" data-f="0" data-n="Ocean Waves" data-t="ocean" onclick="sel(this)">\uD83C\uDF0A OCEAN</button>';
+html+='</div><input type="range" min="0" max="100" value="30" oninput="vol(this.value)">';
+html+='<scr'+'ipt>';
+html+='var ctx,oscL,oscR,noise,lfo,gain,on=false,freq=7.83,name="Schumann Resonance",type="binaural",v=0.075;';
+html+='function cleanup(){try{if(oscL){oscL.stop();oscL.disconnect();oscL=null}if(oscR){oscR.stop();oscR.disconnect();oscR=null}if(noise){noise.stop();noise.disconnect();noise=null}if(lfo){lfo.stop();lfo.disconnect();lfo=null}if(gain){gain.disconnect();gain=null}}catch(x){}}';
+html+='function toggle(e){if(e){if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();if(ctx.state==="suspended")ctx.resume();cleanup();gain=ctx.createGain();gain.gain.setValueAtTime(0,ctx.currentTime);gain.gain.linearRampToValueAtTime(v,ctx.currentTime+0.8);gain.connect(ctx.destination);';
+html+='if(type==="binaural"){var m=ctx.createChannelMerger(2);m.connect(gain);oscL=ctx.createOscillator();oscL.type="sine";oscL.frequency.value=200;oscL.connect(m,0,0);oscR=ctx.createOscillator();oscR.type="sine";oscR.frequency.value=200+freq;oscR.connect(m,0,1);oscL.start();oscR.start()}';
+html+='else if(type==="pink"){var bs=ctx.sampleRate*2,bf=ctx.createBuffer(1,bs,ctx.sampleRate),d=bf.getChannelData(0),b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0;for(var i=0;i<bs;i++){var w=Math.random()*2-1;b0=0.99886*b0+w*0.0555179;b1=0.99332*b1+w*0.0750759;b2=0.96900*b2+w*0.1538520;b3=0.86650*b3+w*0.3104856;b4=0.55000*b4+w*0.5329522;b5=-0.7616*b5-w*0.0168980;d[i]=(b0+b1+b2+b3+b4+b5+b6+w*0.5362)*0.11;b6=w*0.115926}noise=ctx.createBufferSource();noise.buffer=bf;noise.loop=true;noise.connect(gain);noise.start()}';
+html+='else if(type==="brown"){var bs2=ctx.sampleRate*2,bf2=ctx.createBuffer(1,bs2,ctx.sampleRate),d2=bf2.getChannelData(0),last=0;for(var j=0;j<bs2;j++){var wn=Math.random()*2-1;last=(last+(0.02*wn))/1.02;d2[j]=last*3.5}noise=ctx.createBufferSource();noise.buffer=bf2;noise.loop=true;noise.connect(gain);noise.start()}';
+html+='else if(type==="ocean"){var obs=ctx.sampleRate*4,ob=ctx.createBuffer(1,obs,ctx.sampleRate),od=ob.getChannelData(0),ol=0;for(var k=0;k<obs;k++){var ow=Math.random()*2-1;ol=(ol+(0.02*ow))/1.02;od[k]=ol*3.5}noise=ctx.createBufferSource();noise.buffer=ob;noise.loop=true;var lp=ctx.createBiquadFilter();lp.type="lowpass";lp.frequency.value=500;lp.Q.value=0.7;lfo=ctx.createOscillator();lfo.type="sine";lfo.frequency.value=0.08;var wd=ctx.createGain();wd.gain.value=0.4;lfo.connect(wd);wd.connect(gain.gain);lfo.start();noise.connect(lp);lp.connect(gain);noise.start()}';
+html+='on=true;document.getElementById("st").textContent="ACTIVE \\u2014 "+name;document.getElementById("st").style.color="#00ccff"}';
+html+='else{if(gain&&ctx){gain.gain.linearRampToValueAtTime(0,ctx.currentTime+0.4);setTimeout(cleanup,450)}else cleanup();on=false;document.getElementById("st").textContent="INACTIVE";document.getElementById("st").style.color="#555"}}';
+html+='function sel(b){document.querySelectorAll(".btn").forEach(function(x){x.classList.remove("active")});b.classList.add("active");freq=parseFloat(b.dataset.f);name=b.dataset.n;type=b.dataset.t;if(on){toggle(false);setTimeout(function(){document.getElementById("tog").checked=true;toggle(true)},500)}}';
+html+='function vol(val){v=(val/100)*0.25;if(on&&gain&&ctx)gain.gain.linearRampToValueAtTime(v,ctx.currentTime+0.1)}';
+html+='<\\/scr'+'ipt>';
+}
+html+='<div class="credit">b0b.dev \u2014 COUNTERMEASURES</div></div></body></html>';
+var blob=new Blob([html],{type:'text/html'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='b0b-'+type+'-tones.html';a.click();URL.revokeObjectURL(url)};
 // Listen for navigation messages from iframe content
 window.addEventListener('message',function(e){
   if(e.origin===location.origin && e.data && e.data.navigate){
