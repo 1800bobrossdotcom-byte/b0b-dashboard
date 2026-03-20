@@ -718,6 +718,56 @@ function showTileFailoverNotice(label) {
   setTimeout(function() { notice.remove(); failoverActive = false; }, 5000);
 }
 
+// ===================== PROACTIVE TILE HEALTH PROBE =====================
+// On load: test every provider with a single tile fetch before the user sees blank tiles
+// Dead providers get pre-marked in failedProviders so the default view loads clean
+(function probeTileHealth() {
+  var probeZoom = 3, probeX = 4, probeY = 2; // center-ish tile at zoom 3
+  var probeTargets = {
+    dark: 'https://a.basemaps.cartocdn.com/dark_all/' + probeZoom + '/' + probeX + '/' + probeY + '.png',
+    satellite: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/' + probeZoom + '/' + probeY + '/' + probeX,
+    terrain: 'https://a.tile.opentopomap.org/' + probeZoom + '/' + probeX + '/' + probeY + '.png',
+    street: 'https://a.tile.openstreetmap.org/' + probeZoom + '/' + probeX + '/' + probeY + '.png'
+  };
+
+  Object.keys(probeTargets).forEach(function(style) {
+    var img = new Image();
+    var timeout = setTimeout(function() {
+      // Timed out — provider is dead or blocked
+      if (!failedProviders[style]) {
+        failedProviders[style] = true;
+        console.log('[TILE PROBE] ' + tileProviders[style].label + ' UNREACHABLE — pre-marked for fallback');
+        // If this is the currently active style, swap now
+        if (currentStyle === style) {
+          map.removeLayer(currentTile);
+          currentTile = tileProviders[style].fallback;
+          currentTile.addTo(map);
+          showTileFailoverNotice(tileProviders[style].label);
+        }
+      }
+    }, 5000); // 5 second timeout — generous enough for slow connections
+
+    img.onload = function() {
+      clearTimeout(timeout);
+      console.log('[TILE PROBE] ' + tileProviders[style].label + ' OK');
+    };
+    img.onerror = function() {
+      clearTimeout(timeout);
+      if (!failedProviders[style]) {
+        failedProviders[style] = true;
+        console.log('[TILE PROBE] ' + tileProviders[style].label + ' BLOCKED/DOWN — pre-marked for fallback');
+        if (currentStyle === style) {
+          map.removeLayer(currentTile);
+          currentTile = tileProviders[style].fallback;
+          currentTile.addTo(map);
+          showTileFailoverNotice(tileProviders[style].label);
+        }
+      }
+    };
+    img.src = probeTargets[style];
+  });
+})();
+
 // Add default tile
 darkTile.addTo(map);
 
@@ -3233,6 +3283,139 @@ function setProtectiveVolume(val) {
     ptGainNode.gain.linearRampToValueAtTime(ptVolume, ptAudioCtx.currentTime + 0.1);
   }
 }
+
+// ===================== DOM MUTATION WATCHDOG =====================
+// Detects unauthorized text/attribute changes to critical page elements
+// Catches: injected scripts, MITM content replacement, extension tampering, proxy rewriting
+(function() {
+  if (!window.MutationObserver) return; // ancient browser bail
+
+  // Snapshot critical text content at load time — this is the source of truth
+  var watchTargets = [
+    { sel: '.header h1', label: 'HEADER TITLE' },
+    { sel: '.header nav', label: 'NAV LINKS' },
+    { sel: '.filter-header h3', label: 'FILTER HEADING' },
+    { sel: '#statsBar', label: 'STATS BAR', dynamic: true }, // updates legitimately via updateStats()
+    { sel: 'h3[style*="color:#ff4444"]', label: 'COUNTERMEASURES HEADING' }
+  ];
+
+  var snapshots = {};
+  var mutationLog = [];
+  var watchdogFired = false;
+
+  // Take initial snapshots after a brief delay (let filters/stats populate)
+  setTimeout(function() {
+    watchTargets.forEach(function(t) {
+      var el = document.querySelector(t.sel);
+      if (el) {
+        snapshots[t.sel] = {
+          text: el.textContent,
+          html: el.innerHTML,
+          label: t.label,
+          dynamic: t.dynamic || false
+        };
+      }
+    });
+    console.log('[DOM WATCHDOG] Initial snapshots captured for ' + Object.keys(snapshots).length + ' elements');
+    startWatching();
+  }, 2000);
+
+  function startWatching() {
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(m) {
+        // Find which watched element this mutation belongs to
+        var target = m.target;
+        var matchedSel = null;
+        Object.keys(snapshots).forEach(function(sel) {
+          var el = document.querySelector(sel);
+          if (el && (el === target || el.contains(target))) {
+            matchedSel = sel;
+          }
+        });
+
+        if (!matchedSel) return; // mutation in unwatched area
+
+        var snap = snapshots[matchedSel];
+        var el = document.querySelector(matchedSel);
+        if (!el) return;
+
+        var newText = el.textContent;
+
+        // Skip dynamic elements that change legitimately (stats bar updates from filter changes)
+        if (snap.dynamic) {
+          // Only flag if the change pattern doesn't match expected format
+          if (/^LOCATIONS:.*DATA SOURCE:/.test(newText) || newText === 'Loading...') {
+            snap.text = newText; // update snapshot — legitimate
+            return;
+          }
+        }
+
+        // Check if text actually changed from snapshot
+        if (newText !== snap.text) {
+          var entry = {
+            element: snap.label,
+            expected: snap.text.substring(0, 100),
+            found: newText.substring(0, 100),
+            time: new Date().toISOString(),
+            type: m.type
+          };
+          mutationLog.push(entry);
+          console.warn('[DOM WATCHDOG] ⚠ UNAUTHORIZED MUTATION DETECTED', entry);
+
+          // Visual alert — only fire once to avoid spam
+          if (!watchdogFired) {
+            watchdogFired = true;
+            showWatchdogAlert(snap.label);
+          }
+        }
+      });
+    });
+
+    // Watch the entire body for text changes, child additions, attribute changes
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+      attributes: true,
+      attributeFilter: ['href', 'src', 'action', 'onclick', 'onchange']
+    });
+
+    // Also monitor for injected script tags — these should NEVER appear after load
+    var scriptObserver = new MutationObserver(function(mutations) {
+      mutations.forEach(function(m) {
+        m.addedNodes.forEach(function(node) {
+          if (node.nodeName === 'SCRIPT' && node !== document.currentScript) {
+            var src = node.src || '(inline)';
+            console.error('[DOM WATCHDOG] ⚠ SCRIPT INJECTION DETECTED: ' + src);
+            mutationLog.push({
+              element: 'INJECTED SCRIPT',
+              found: src.substring(0, 200),
+              time: new Date().toISOString(),
+              type: 'script-injection'
+            });
+            if (!watchdogFired) {
+              watchdogFired = true;
+              showWatchdogAlert('SCRIPT INJECTION');
+            }
+          }
+        });
+      });
+    });
+    scriptObserver.observe(document.documentElement, { childList: true, subtree: true });
+  }
+
+  function showWatchdogAlert(label) {
+    var alert = document.createElement('div');
+    alert.style.cssText = 'position:fixed;top:60px;left:50%;transform:translateX(-50%);z-index:10000;background:#1a0000;border:1px solid #ff0000;color:#ff0000;padding:10px 20px;font-family:Courier New,monospace;font-size:0.75rem;letter-spacing:1px;border-radius:2px;pointer-events:none;opacity:1;transition:opacity 2s;text-align:center';
+    alert.innerHTML = '⚠ DOM INTEGRITY VIOLATION<br><span style="font-size:0.6rem;color:#ff6666">' + label + ' — content altered after load</span>';
+    document.body.appendChild(alert);
+    setTimeout(function() { alert.style.opacity = '0'; }, 8000);
+    setTimeout(function() { alert.remove(); }, 10000);
+  }
+
+  // Expose log for console inspection
+  window.__domWatchdogLog = function() { return mutationLog; };
+})();
 
 // --- DEVTOOLS DETECTION ---
 // Detect debugger/devtools attachment (common in browser-based surveillance injection)
