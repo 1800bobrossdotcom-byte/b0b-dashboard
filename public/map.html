@@ -1685,16 +1685,15 @@ locations.forEach(function(loc) {
     '<div class="popup-title">' + loc.name + '</div>' +
     '<div class="popup-section">' + sectionLabel + '</div>' +
     '<div class="popup-type">' + typeLabel + '</div>' +
+    '<div style="margin:6px 0;display:flex;gap:8px;align-items:center;flex-wrap:wrap">' +
+    '<a class="popup-link" href="/report#' + loc.section + '" target="_blank" style="font-weight:bold">→ View in Report</a>' +
+    '<a class="popup-link" href="#" onclick="isolateType(\'' + loc.type + '\');return false" style="font-size:0.65rem">⊕ ' + typeLabel + '</a>' +
+    '<a class="popup-link" href="#" onclick="isolateSection(\'' + loc.section + '\');return false" style="font-size:0.65rem">⊕ Section ' + loc.section + '</a>' +
+    '<a class="popup-link" href="#" onclick="showConnected(' + loc.lat + ',' + loc.lng + ');return false" style="font-size:0.65rem">⊕ Connected</a>' +
+    '</div>' +
     '<hr style="border-color:#333;margin:6px 0">' +
-    '<div class="popup-context">' + loc.ctx + '</div>' +
-    '<hr style="border-color:#333;margin:6px 0">' +
-    '<a class="popup-link" href="/report#' + loc.section + '" target="_blank">→ View in Report</a>' +
-    '<div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap">' +
-    '<a class="popup-link" href="#" onclick="isolateType(\'' + loc.type + '\');return false" style="font-size:0.65rem">⊕ Show only ' + typeLabel + '</a>' +
-    '<a class="popup-link" href="#" onclick="isolateSection(\'' + loc.section + '\');return false" style="font-size:0.65rem">⊕ Section ' + loc.section + ' only</a>' +
-    '<a class="popup-link" href="#" onclick="showConnected(' + loc.lat + ',' + loc.lng + ');return false" style="font-size:0.65rem">⊕ Connected nodes</a>' +
-    '</div>',
-    { maxWidth: 350, minWidth: 250 }
+    '<div class="popup-context">' + loc.ctx + '</div>',
+    { maxWidth: 350, minWidth: 250, maxHeight: 300 }
   );
 
   marker._locData = loc;
