@@ -867,7 +867,7 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
 </div>
 <div class="player-bar">
   <button class="p-btn" id="pb" onclick="tp()">▶</button>
-  <div class="p-track">HIDDEN ORCHESTRA — EAST LONDON STREET</div>
+  <div class="p-track">HIDDEN ORCHESTRA — EAST LONDON STREET <a href="https://www.tru-thoughts.co.uk" target="_blank" rel="noopener noreferrer" style="color:#ff6600;text-decoration:none;font-size:0.6rem;margin-left:6px" title="Tru Thoughts Records">TRU THOUGHTS</a></div>
   <div class="p-wrap" id="pw"><div class="p-fill" id="pf"></div></div>
   <div class="p-time" id="pt">0:00 / 11:13</div>
   <div id="ytContainer" style="position:absolute;left:16px;bottom:48px;width:1px;height:1px;overflow:hidden;opacity:0.01"><div id="ytPlayer"></div></div>
