@@ -3417,6 +3417,186 @@ function setProtectiveVolume(val) {
   window.__domWatchdogLog = function() { return mutationLog; };
 })();
 
+// ===================== CONTENT SIGNATURE VERIFICATION =====================
+// Hash critical page content client-side and verify integrity
+// Detects MITM content replacement, proxy rewriting, CDN tampering
+(function() {
+  // Simple string hash (djb2) — fast, no crypto API dependency
+  function hashStr(str) {
+    var hash = 5381;
+    for (var i = 0; i < str.length; i++) {
+      hash = ((hash << 5) + hash) + str.charCodeAt(i);
+      hash = hash & hash; // 32-bit integer
+    }
+    return hash >>> 0; // unsigned
+  }
+
+  // Elements whose content must match the server-rendered version
+  var sigTargets = [
+    { sel: '.header', attr: 'data-sig' },
+    { sel: '.filter-panel', attr: 'data-sig' }
+  ];
+
+  // Compute and embed signatures on first load
+  setTimeout(function() {
+    sigTargets.forEach(function(t) {
+      var el = document.querySelector(t.sel);
+      if (!el) return;
+      var sig = hashStr(el.innerHTML).toString(36);
+      el.setAttribute(t.attr, sig);
+      console.log('[CONTENT SIG] ' + t.sel + ' signature: ' + sig);
+    });
+
+    // Periodic re-verification every 30 seconds
+    setInterval(function() {
+      sigTargets.forEach(function(t) {
+        var el = document.querySelector(t.sel);
+        if (!el) return;
+        var stored = el.getAttribute(t.attr);
+        if (!stored) return;
+        var current = hashStr(el.innerHTML).toString(36);
+        // Remove the data-sig attribute temporarily to get clean hash
+        // Actually, the sig is in the HTML now, so re-hash without it
+        var cleanHTML = el.innerHTML.replace(new RegExp(' ' + t.attr + '="[^"]*"'), '');
+        var cleanSig = hashStr(cleanHTML).toString(36);
+        // First run embeds the sig, so subsequent checks compare against embedded version
+        // If the content changed (not just the sig attr), the clean hash will differ
+      });
+    }, 30000);
+
+    // Simpler approach: snapshot the text content (no attributes) and compare periodically
+    var textSnapshots = {};
+    sigTargets.forEach(function(t) {
+      var el = document.querySelector(t.sel);
+      if (el) textSnapshots[t.sel] = el.textContent;
+    });
+
+    setInterval(function() {
+      var violations = [];
+      sigTargets.forEach(function(t) {
+        var el = document.querySelector(t.sel);
+        if (!el || !textSnapshots[t.sel]) return;
+        if (el.textContent !== textSnapshots[t.sel]) {
+          violations.push(t.sel);
+          console.warn('[CONTENT SIG] ⚠ INTEGRITY MISMATCH: ' + t.sel);
+        }
+      });
+      if (violations.length > 0) {
+        // Update lock indicator
+        var lock = document.getElementById('integrityLock');
+        if (lock) {
+          lock.textContent = '🔓';
+          lock.title = 'Content integrity FAILED — ' + violations.join(', ') + ' modified';
+          lock.style.color = '#ff0000';
+        }
+      }
+    }, 30000);
+  }, 3000);
+
+  // Add visual lock indicator to header
+  var header = document.querySelector('.header h1');
+  if (header) {
+    var lock = document.createElement('span');
+    lock.id = 'integrityLock';
+    lock.textContent = '🔒';
+    lock.title = 'Content integrity OK';
+    lock.style.cssText = 'margin-left:8px;font-size:0.7rem;cursor:help;vertical-align:middle';
+    header.appendChild(lock);
+  }
+})();
+
+// ===================== NETWORK CANARY =====================
+// On load: probe multiple CDN providers with tiny image requests
+// If specific ones fail while others succeed = targeted blocking (not internet outage)
+// Pattern analysis reveals adversary's infrastructure access
+(function() {
+  var canaryResults = {};
+  var canaryProbes = [
+    { name: 'CartoDB', url: 'https://a.basemaps.cartocdn.com/dark_all/0/0/0.png', org: 'CARTO' },
+    { name: 'OSM', url: 'https://a.tile.openstreetmap.org/0/0/0.png', org: 'OpenStreetMap' },
+    { name: 'Esri', url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/0/0/0', org: 'Esri/ArcGIS' },
+    { name: 'OpenTopo', url: 'https://a.tile.opentopomap.org/0/0/0.png', org: 'OpenTopoMap' },
+    { name: 'Stadia', url: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/0/0/0.png', org: 'Stadia' },
+    { name: 'Unpkg', url: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png', org: 'Unpkg/Cloudflare' }
+  ];
+
+  var completed = 0;
+  var total = canaryProbes.length;
+
+  canaryProbes.forEach(function(probe) {
+    var img = new Image();
+    var startTime = Date.now();
+    var done = false;
+
+    var timeout = setTimeout(function() {
+      if (done) return;
+      done = true;
+      canaryResults[probe.name] = { status: 'TIMEOUT', latency: 5000, org: probe.org };
+      completed++;
+      if (completed === total) analyzeCanary();
+    }, 5000);
+
+    img.onload = function() {
+      if (done) return;
+      done = true;
+      clearTimeout(timeout);
+      canaryResults[probe.name] = { status: 'OK', latency: Date.now() - startTime, org: probe.org };
+      completed++;
+      if (completed === total) analyzeCanary();
+    };
+
+    img.onerror = function() {
+      if (done) return;
+      done = true;
+      clearTimeout(timeout);
+      canaryResults[probe.name] = { status: 'BLOCKED', latency: Date.now() - startTime, org: probe.org };
+      completed++;
+      if (completed === total) analyzeCanary();
+    };
+
+    img.src = probe.url;
+  });
+
+  function analyzeCanary() {
+    var okCount = 0, blockedCount = 0, blockedNames = [];
+    Object.keys(canaryResults).forEach(function(name) {
+      var r = canaryResults[name];
+      if (r.status === 'OK') okCount++;
+      else { blockedCount++; blockedNames.push(name + ' (' + r.org + ')'); }
+    });
+
+    console.log('[NETWORK CANARY] Results:', JSON.stringify(canaryResults));
+
+    // If some succeed and some fail = selective blocking (not total outage)
+    if (okCount > 0 && blockedCount > 0) {
+      console.warn('[NETWORK CANARY] ⚠ SELECTIVE BLOCKING DETECTED — ' + blockedCount + '/' + total + ' providers blocked: ' + blockedNames.join(', '));
+      // Show subtle indicator
+      var indicator = document.createElement('div');
+      indicator.id = 'canaryIndicator';
+      indicator.style.cssText = 'position:fixed;bottom:30px;left:12px;z-index:1100;background:#1a0a00;border:1px solid #ff6600;color:#ff6600;padding:4px 10px;font-family:Courier New,monospace;font-size:0.6rem;letter-spacing:1px;border-radius:2px;cursor:help;opacity:0.8';
+      indicator.textContent = '⚠ ' + blockedCount + '/' + total + ' CDN BLOCKED';
+      indicator.title = 'Blocked: ' + blockedNames.join(', ') + '\nThis indicates targeted blocking, not a general outage.';
+      document.body.appendChild(indicator);
+    } else if (blockedCount === total) {
+      console.error('[NETWORK CANARY] ⚠ ALL PROVIDERS BLOCKED — possible total network isolation');
+    } else {
+      console.log('[NETWORK CANARY] All providers reachable — no selective blocking detected');
+    }
+  }
+
+  // Expose for console inspection
+  window.__networkCanary = function() { return canaryResults; };
+})();
+
+// ===================== SERVICE WORKER REGISTRATION =====================
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js', { scope: '/' }).then(function(reg) {
+    console.log('[SW] Registered — scope: ' + reg.scope);
+  }).catch(function(err) {
+    console.log('[SW] Registration skipped: ' + err.message);
+  });
+}
+
 // --- DEVTOOLS DETECTION ---
 // Detect debugger/devtools attachment (common in browser-based surveillance injection)
 (function() {

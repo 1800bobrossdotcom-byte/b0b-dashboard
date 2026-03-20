@@ -86,6 +86,7 @@ app.set('trust proxy', 1);
 
 // Body parser with size limit (prevents oversized POST payloads / memory exhaustion)
 app.use(express.urlencoded({ extended: false, limit: '1kb' }));
+app.use(express.json({ limit: '10kb', type: ['application/json', 'application/csp-report'] }));
 app.use(cookieParser());
 
 // ===================== RED TEAM — RATE PROTECTION =====================
@@ -486,6 +487,21 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
 
+// ===================== CSP VIOLATION REPORTING =====================
+// Receives browser reports when Content-Security-Policy is violated
+// Intel: reveals WHO is trying to inject scripts from unauthorized origins
+app.post('/csp-report', (req, res) => {
+  const ip = req.ip || req.connection.remoteAddress;
+  const report = req.body ? (req.body['csp-report'] || req.body) : {};
+  const blockedUri = report['blocked-uri'] || report.blockedURL || 'unknown';
+  const violatedDirective = report['violated-directive'] || report.effectiveDirective || 'unknown';
+  const documentUri = report['document-uri'] || report.documentURL || 'unknown';
+  const sourceFile = report['source-file'] || report.sourceFile || '';
+  console.log(`[CSP VIOLATION] IP: ${ip} — Blocked: ${String(blockedUri).substring(0, 200)} — Directive: ${violatedDirective} — Page: ${String(documentUri).substring(0, 100)} — Source: ${String(sourceFile).substring(0, 100)} — ${new Date().toISOString()}`);
+  recordSuspicion(ip, 'csp-violation:' + String(blockedUri).substring(0, 50));
+  res.status(204).end();
+});
+
 // ===================== HONEYPOT ROUTES =====================
 // Trap common attack paths — no legitimate user would request these
 // Log detailed attacker fingerprint for threat intelligence
@@ -623,15 +639,16 @@ app.use((req, res, next) => {
   var isMap = req.path === '/map' || req.path === '/_page/map';
   var isReport = req.path === '/report' || req.path === '/_page/report';
   var isShell = req.path === '/' || req.path === '/report' || req.path === '/map';
+  var cspReport = "; report-uri /csp-report";
   if (isShell) {
     // Shell pages: need frame-src for iframe, media-src for audio player
-    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; frame-src 'self'; media-src 'self' https://*.archive.org; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests");
+    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; frame-src 'self'; media-src 'self' https://*.archive.org; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests" + cspReport);
   } else if (isMap) {
-    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; img-src 'self' https://*.basemaps.cartocdn.com https://*.tile.openstreetmap.org https://server.arcgisonline.com https://*.tile.opentopomap.org data:; font-src 'self'; connect-src 'self' https://*.basemaps.cartocdn.com https://*.tile.openstreetmap.org https://server.arcgisonline.com https://*.tile.opentopomap.org; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests");
+    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; img-src 'self' https://*.basemaps.cartocdn.com https://*.tile.openstreetmap.org https://server.arcgisonline.com https://*.tile.opentopomap.org https://tiles.stadiamaps.com data:; font-src 'self'; connect-src 'self' https://*.basemaps.cartocdn.com https://*.tile.openstreetmap.org https://server.arcgisonline.com https://*.tile.opentopomap.org https://tiles.stadiamaps.com; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests" + cspReport);
   } else if (isReport) {
-    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests");
+    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests" + cspReport);
   } else {
-    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; media-src 'self' https://*.archive.org; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests");
+    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; media-src 'self' https://*.archive.org; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests" + cspReport);
   }
   // Prevent caching of sensitive content
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
@@ -694,6 +711,12 @@ app.use((req, res, next) => {
     return res.status(414).send('URI too long');
   }
   next();
+});
+
+// ===================== SERVICE WORKER — OFFLINE SHELL =====================
+// Serve SW from root scope so it can cache the entire origin
+app.get('/sw.js', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'sw.js'));
 });
 
 // ===================== STATIC FILES =====================
