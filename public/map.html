@@ -622,32 +622,111 @@ var map = L.map('map', {
   worldCopyJump: true
 });
 
-// Base tile layers (switchable)
-var darkTile = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
-  subdomains: 'abcd', maxZoom: 19
-});
-var satelliteTile = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-  attribution: '&copy; Esri, Maxar, Earthstar Geographics', maxZoom: 19
-});
-var terrainTile = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; <a href="https://opentopomap.org">OpenTopoMap</a>', maxZoom: 17
-});
-var streetTile = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
-  subdomains: 'abcd', maxZoom: 19
-});
+// ===================== RESILIENT TILE SYSTEM =====================
+// Multi-provider with automatic failover — no single provider takedown kills the map
+// Each style: primary tile source + fallback from a DIFFERENT CDN/org
+
+var tileProviders = {
+  dark: {
+    primary: L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
+      subdomains: 'abcd', maxZoom: 19
+    }),
+    fallback: L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://stadiamaps.com/">Stadia</a> &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>',
+      maxZoom: 20
+    }),
+    label: 'DARK'
+  },
+  satellite: {
+    primary: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      attribution: '&copy; Esri, Maxar, Earthstar Geographics', maxZoom: 19
+    }),
+    fallback: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>',
+      maxZoom: 19
+    }),
+    label: 'SATELLITE'
+  },
+  terrain: {
+    primary: L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://opentopomap.org">OpenTopoMap</a>', maxZoom: 17
+    }),
+    fallback: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+      attribution: '&copy; Esri, USGS, NOAA', maxZoom: 19
+    }),
+    label: 'TERRAIN'
+  },
+  street: {
+    primary: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>',
+      maxZoom: 19
+    }),
+    fallback: L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
+      subdomains: 'abcd', maxZoom: 19
+    }),
+    label: 'STREET'
+  }
+};
+
+// Backwards compat aliases
+var darkTile = tileProviders.dark.primary;
+var satelliteTile = tileProviders.satellite.primary;
+var terrainTile = tileProviders.terrain.primary;
+var streetTile = tileProviders.street.primary;
+
+var currentStyle = 'dark';
 var currentTile = darkTile;
+var failedProviders = {}; // track which primaries have failed
+var failoverActive = false;
+
+// Tile health monitor — detect tile load failures and auto-failover
+function attachTileHealthMonitor(style) {
+  var provider = tileProviders[style];
+  var errorCount = 0;
+  var errorThreshold = 4; // fire failover after 4 tile errors (not just 1 flaky tile)
+  provider.primary.on('tileerror', function() {
+    errorCount++;
+    if (errorCount >= errorThreshold && !failedProviders[style]) {
+      failedProviders[style] = true;
+      console.log('[TILE FAILOVER] ' + provider.label + ' primary failed — switching to fallback');
+      if (currentStyle === style) {
+        map.removeLayer(provider.primary);
+        provider.fallback.addTo(map);
+        currentTile = provider.fallback;
+        showTileFailoverNotice(provider.label);
+      }
+    }
+  });
+}
+
+// Attach monitors to all providers
+Object.keys(tileProviders).forEach(function(style) {
+  attachTileHealthMonitor(style);
+});
+
+// Failover notification
+function showTileFailoverNotice(label) {
+  if (failoverActive) return;
+  failoverActive = true;
+  var notice = document.createElement('div');
+  notice.style.cssText = 'position:fixed;top:60px;left:50%;transform:translateX(-50%);z-index:9999;background:#1a0a00;border:1px solid #ff6600;color:#ff6600;padding:8px 16px;font-family:Courier New,monospace;font-size:0.7rem;letter-spacing:1px;border-radius:2px;pointer-events:none;opacity:1;transition:opacity 1s';
+  notice.textContent = '⚡ ' + label + ' TILE SOURCE SWITCHED TO FALLBACK';
+  document.body.appendChild(notice);
+  setTimeout(function() { notice.style.opacity = '0'; }, 4000);
+  setTimeout(function() { notice.remove(); failoverActive = false; }, 5000);
+}
+
+// Add default tile
 darkTile.addTo(map);
 
 function switchMapStyle(style) {
   map.removeLayer(currentTile);
-  switch(style) {
-    case 'satellite': currentTile = satelliteTile; break;
-    case 'terrain': currentTile = terrainTile; break;
-    case 'street': currentTile = streetTile; break;
-    default: currentTile = darkTile;
-  }
+  currentStyle = style || 'dark';
+  var provider = tileProviders[currentStyle] || tileProviders.dark;
+  // Use fallback if primary already known-failed
+  currentTile = failedProviders[currentStyle] ? provider.fallback : provider.primary;
   currentTile.addTo(map);
 }
 
@@ -3155,9 +3234,6 @@ function setProtectiveVolume(val) {
   }
 }
 
-// --- LOVE TONE ENGINE ---
-// 528 Hz "Love Frequency" with harmonics and heart-coherence pulse
-// Layers: 528 Hz fundamental + 264 Hz sub-octave (soft) + 1056 Hz overtone (very soft)
 // --- DEVTOOLS DETECTION ---
 // Detect debugger/devtools attachment (common in browser-based surveillance injection)
 (function() {
