@@ -387,7 +387,7 @@
     .pt-volume { width: 100%; height: 4px; margin-top: 6px; accent-color: #00ccff; cursor: pointer; }
     .pt-now-playing { font-size: 0.55rem; color: #00ccff; margin-top: 4px; font-style: italic; }
     /* Dark tile fallback — invert OSM for dark mode */
-    .dark-osm-tiles { filter: invert(1) hue-rotate(180deg) brightness(0.7) contrast(1.3); }
+    .dark-osm-tiles { filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(1.3); }
   </style>
 </head>
 <body>
@@ -3722,7 +3722,7 @@ if ('serviceWorker' in navigator) {
 })();
 </script>
 <script>
-(function(){if(window.parent!==window){document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var h=a.getAttribute('href');if(!h)return;if(h==='/logout'){e.preventDefault();window.top.location.href='/logout'}else if(h==='/'||h==='/report'||h==='/map'){e.preventDefault();window.parent.postMessage({navigate:h},location.origin)}})}})();
+(function(){if(window.parent!==window){var cm=document.getElementById('cmDrawer');if(cm)cm.style.display='none';document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var h=a.getAttribute('href');if(!h)return;if(h==='/logout'){e.preventDefault();window.top.location.href='/logout'}else if(h==='/'||h==='/report'||h==='/map'){e.preventDefault();window.parent.postMessage({navigate:h},location.origin)}})}})();
 </script>
 
 </body>
