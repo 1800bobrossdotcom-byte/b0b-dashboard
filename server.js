@@ -639,6 +639,7 @@ app.use((req, res, next) => {
   var isMap = req.path === '/map' || req.path === '/_page/map';
   var isReport = req.path === '/report' || req.path === '/_page/report';
   var isShell = req.path === '/' || req.path === '/report' || req.path === '/map' || req.path === '/tools';
+  var isTones = req.path.startsWith('/tones/');
   var isSW = req.path === '/sw.js';
   var cspReport = "; report-uri /csp-report";
   if (isSW) {
@@ -651,6 +652,8 @@ app.use((req, res, next) => {
     res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; img-src 'self' https://*.basemaps.cartocdn.com https://*.tile.openstreetmap.org https://server.arcgisonline.com https://*.tile.opentopomap.org https://tiles.stadiamaps.com https://unpkg.com data:; font-src 'self'; connect-src 'self' https://*.basemaps.cartocdn.com https://*.tile.openstreetmap.org https://server.arcgisonline.com https://*.tile.opentopomap.org https://tiles.stadiamaps.com https://earthquake.usgs.gov https://eonet.gsfc.nasa.gov; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests" + cspReport);
   } else if (isReport) {
     res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests" + cspReport);
+  } else if (isTones) {
+    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests" + cspReport);
   } else {
     res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; media-src 'self' https://*.archive.org; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests" + cspReport);
   }
@@ -859,11 +862,15 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
     <div class="cm-info">\uD83C\uDF0A 7.83 Hz Schumann is Earth\u2019s electromagnetic heartbeat. Use headphones for binaural entrainment. \uD83D\uDC3E ANIMAL-SAFE.</div>
   </div>
   <div class="cm-panel cm-dl-panel">
-    <div class="cm-dl-title">\u2B07 DOWNLOAD STANDALONE APPS</div>
-    <div class="cm-dl-info">Self-contained HTML files. Zero dependencies. No server needed. Open in any browser, any device.</div>
+    <div class="cm-dl-title">\u2B07 DOWNLOAD / INSTALL APPS</div>
+    <div class="cm-dl-info">Install to home screen on mobile. Download HTML files on desktop. Zero dependencies.</div>
     <div class="cm-dl-btns">
-      <button class="cm-dl-btn" onclick="downloadToneApp('healing')">\u2B07 HEALING TONES</button>
-      <button class="cm-dl-btn blue" onclick="downloadToneApp('protective')">\u2B07 PROTECTIVE TONES</button>
+      <a class="cm-dl-btn" href="/tones/healing" target="_blank" style="text-decoration:none;text-align:center">\uD83D\uDCF1 INSTALL HEALING</a>
+      <a class="cm-dl-btn blue" href="/tones/protective" target="_blank" style="text-decoration:none;text-align:center">\uD83D\uDCF1 INSTALL PROTECTIVE</a>
+    </div>
+    <div class="cm-dl-btns" style="margin-top:4px">
+      <button class="cm-dl-btn" onclick="downloadToneApp('healing')" style="font-size:0.6rem;padding:6px 10px;opacity:0.6">\u2B07 DOWNLOAD .HTML</button>
+      <button class="cm-dl-btn blue" onclick="downloadToneApp('protective')" style="font-size:0.6rem;padding:6px 10px;opacity:0.6">\u2B07 DOWNLOAD .HTML</button>
     </div>
     <div class="cm-dl-title" style="color:#cc88ff;margin-top:8px">\uD83D\uDD17 INSTALL ON YOUR SITE</div>
     <div class="cm-dl-info">Copy embed code to add tone tools to any website.</div>
@@ -1124,6 +1131,14 @@ app.get('/map', (req, res) => {
 
 app.get('/tools', (req, res) => {
   res.send(getShellHTML('/tools'));
+});
+
+// Tone standalone PWA pages — served outside the shell for home screen install
+app.get('/tones/healing', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'tones-healing.html'));
+});
+app.get('/tones/protective', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'tones-protective.html'));
 });
 
 // Raw content routes — serve actual pages into iframe

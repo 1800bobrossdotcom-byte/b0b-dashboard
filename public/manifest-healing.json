@@ -1,0 +1,18 @@
+{
+  "name": "b0b Healing Tones",
+  "short_name": "Healing Tones",
+  "description": "Solfeggio healing frequency generator",
+  "start_url": "/tones/healing",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-healing.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

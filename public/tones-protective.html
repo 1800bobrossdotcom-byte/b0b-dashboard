@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>b0b Protective Tones</title>
+<meta name="description" content="Binaural beats, pink/brown noise, ocean waves — standalone, zero dependencies">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Protective Tones">
+<link rel="manifest" href="/manifest-protective.json">
+<link rel="apple-touch-icon" href="/icon-protective.svg">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:env(safe-area-inset-top) 16px env(safe-area-inset-bottom);user-select:none;-webkit-user-select:none}
+.app{max-width:500px;width:100%;padding:24px;border:1px solid #333;border-radius:4px}
+.app h1{color:#00ccff;font-size:1rem;letter-spacing:2px;margin-bottom:16px;text-align:center}
+.freq-grid{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.btn{padding:10px 14px;background:transparent;border:1px solid #00ccff;color:#00ccff;font-family:inherit;font-size:0.8rem;cursor:pointer;border-radius:2px;flex:1 1 calc(50% - 6px);min-width:100px;text-align:center;transition:background 0.2s,color 0.2s}
+.btn:hover,.btn.active{background:#00ccff;color:#0a0a0a}
+.status{margin:12px 0;color:#555;font-size:0.85rem;text-align:center;min-height:1.2em}
+.toggle{display:flex;align-items:center;justify-content:center;gap:10px;margin:16px 0;cursor:pointer;font-size:0.9rem}
+.toggle input{width:22px;height:22px;accent-color:#00ccff}
+input[type=range]{width:100%;margin:12px 0;accent-color:#00ccff;height:28px}
+.info{color:#555;font-size:0.7rem;text-align:center;margin:8px 0;line-height:1.4}
+.credit{margin-top:20px;color:#333;font-size:0.6rem;text-align:center}
+.credit a{color:#555;text-decoration:none}
+.install-banner{display:none;background:#111;border:1px solid #00ccff;padding:12px;margin-bottom:16px;border-radius:4px;font-size:0.75rem;color:#aaa;text-align:center;line-height:1.5}
+.install-banner strong{color:#00ccff}
+.install-banner .dismiss{color:#555;cursor:pointer;font-size:0.65rem;margin-top:6px;display:block}
+@media(max-width:360px){.btn{flex:1 1 calc(50% - 4px);padding:8px 8px;font-size:0.7rem;min-width:80px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="install-banner" id="installBanner">
+    <strong>📱 INSTALL TO HOME SCREEN</strong><br>
+    <span id="installInstructions"></span>
+    <span class="dismiss" onclick="document.getElementById('installBanner').style.display='none'">dismiss</span>
+  </div>
+  <h1>🛡️ b0b PROTECTIVE TONES</h1>
+  <label class="toggle"><input type="checkbox" id="tog" onchange="toggle(this.checked)"><span>ACTIVATE</span></label>
+  <div class="status" id="st">INACTIVE</div>
+  <div class="freq-grid" id="grid">
+    <button class="btn active" data-f="7.83" data-n="Schumann Resonance" data-t="binaural" onclick="sel(this)">7.83 Hz</button>
+    <button class="btn" data-f="10" data-n="Alpha" data-t="binaural" onclick="sel(this)">10 Hz</button>
+    <button class="btn" data-f="14" data-n="Beta" data-t="binaural" onclick="sel(this)">14 Hz</button>
+    <button class="btn" data-f="40" data-n="Gamma" data-t="binaural" onclick="sel(this)">40 Hz</button>
+    <button class="btn" data-f="0" data-n="Pink Noise" data-t="pink" onclick="sel(this)">PINK</button>
+    <button class="btn" data-f="0" data-n="Brown Noise" data-t="brown" onclick="sel(this)">BROWN</button>
+    <button class="btn" data-f="0" data-n="Ocean Waves" data-t="ocean" onclick="sel(this)">🌊 OCEAN</button>
+  </div>
+  <input type="range" min="0" max="100" value="30" oninput="vol(this.value)" title="Volume">
+  <div class="info">🌊 7.83 Hz Schumann is Earth's electromagnetic heartbeat. Use headphones for binaural entrainment. 🐾 ANIMAL-SAFE.</div>
+  <div class="credit"><a href="https://b0b.dev">b0b.dev</a> — COUNTERMEASURES</div>
+</div>
+<script>
+var ctx,oscL,oscR,noise,lfo,gain,on=false,freq=7.83,name="Schumann Resonance",type="binaural",v=0.075;
+
+function cleanup(){
+  try{
+    if(oscL){oscL.stop();oscL.disconnect();oscL=null}
+    if(oscR){oscR.stop();oscR.disconnect();oscR=null}
+    if(noise){noise.stop();noise.disconnect();noise=null}
+    if(lfo){lfo.stop();lfo.disconnect();lfo=null}
+    if(gain){gain.disconnect();gain=null}
+  }catch(x){}
+}
+
+function toggle(e){
+  if(e){
+    if(!ctx) ctx=new(window.AudioContext||window.webkitAudioContext)();
+    if(ctx.state==="suspended") ctx.resume();
+    cleanup();
+    gain=ctx.createGain();
+    gain.gain.setValueAtTime(0,ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(v,ctx.currentTime+0.8);
+    gain.connect(ctx.destination);
+
+    if(type==="binaural"){
+      var m=ctx.createChannelMerger(2);m.connect(gain);
+      oscL=ctx.createOscillator();oscL.type="sine";oscL.frequency.value=200;
+      oscL.connect(m,0,0);
+      oscR=ctx.createOscillator();oscR.type="sine";oscR.frequency.value=200+freq;
+      oscR.connect(m,0,1);oscL.start();oscR.start();
+    } else if(type==="pink"){
+      var bs=ctx.sampleRate*2,bf=ctx.createBuffer(1,bs,ctx.sampleRate),d=bf.getChannelData(0);
+      var b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0;
+      for(var i=0;i<bs;i++){var w=Math.random()*2-1;b0=0.99886*b0+w*0.0555179;b1=0.99332*b1+w*0.0750759;b2=0.96900*b2+w*0.1538520;b3=0.86650*b3+w*0.3104856;b4=0.55000*b4+w*0.5329522;b5=-0.7616*b5-w*0.0168980;d[i]=(b0+b1+b2+b3+b4+b5+b6+w*0.5362)*0.11;b6=w*0.115926}
+      noise=ctx.createBufferSource();noise.buffer=bf;noise.loop=true;noise.connect(gain);noise.start();
+    } else if(type==="brown"){
+      var bs2=ctx.sampleRate*2,bf2=ctx.createBuffer(1,bs2,ctx.sampleRate),d2=bf2.getChannelData(0),last=0;
+      for(var j=0;j<bs2;j++){var wn=Math.random()*2-1;last=(last+(0.02*wn))/1.02;d2[j]=last*3.5}
+      noise=ctx.createBufferSource();noise.buffer=bf2;noise.loop=true;noise.connect(gain);noise.start();
+    } else if(type==="ocean"){
+      var obs=ctx.sampleRate*4,ob=ctx.createBuffer(1,obs,ctx.sampleRate),od=ob.getChannelData(0),ol=0;
+      for(var k=0;k<obs;k++){var ow=Math.random()*2-1;ol=(ol+(0.02*ow))/1.02;od[k]=ol*3.5}
+      noise=ctx.createBufferSource();noise.buffer=ob;noise.loop=true;
+      var lp=ctx.createBiquadFilter();lp.type="lowpass";lp.frequency.value=500;lp.Q.value=0.7;
+      lfo=ctx.createOscillator();lfo.type="sine";lfo.frequency.value=0.08;
+      var wd=ctx.createGain();wd.gain.value=0.4;lfo.connect(wd);wd.connect(gain.gain);lfo.start();
+      noise.connect(lp);lp.connect(gain);noise.start();
+    }
+    on=true;
+    document.getElementById("st").textContent="ACTIVE \u2014 "+name;
+    document.getElementById("st").style.color="#00ccff";
+  } else {
+    if(gain&&ctx){gain.gain.linearRampToValueAtTime(0,ctx.currentTime+0.4);setTimeout(cleanup,450)}
+    else cleanup();
+    on=false;
+    document.getElementById("st").textContent="INACTIVE";
+    document.getElementById("st").style.color="#555";
+  }
+}
+
+function sel(b){
+  document.querySelectorAll(".btn").forEach(function(x){x.classList.remove("active")});
+  b.classList.add("active");freq=parseFloat(b.dataset.f);name=b.dataset.n;type=b.dataset.t;
+  if(on){toggle(false);setTimeout(function(){document.getElementById("tog").checked=true;toggle(true)},500)}
+}
+
+function vol(val){v=(val/100)*0.25;if(on&&gain&&ctx) gain.gain.linearRampToValueAtTime(v,ctx.currentTime+0.1)}
+
+// Install prompt
+(function(){
+  var ua=navigator.userAgent||'';
+  var ios=/iPad|iPhone|iPod/.test(ua)||(/Macintosh/.test(ua)&&'ontouchend' in document);
+  var standalone=window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone;
+  if(standalone) return;
+  var banner=document.getElementById('installBanner');
+  var inst=document.getElementById('installInstructions');
+  if(ios){
+    inst.innerHTML='Tap <strong>Share ↑</strong> then <strong>"Add to Home Screen"</strong>';
+    banner.style.display='block';
+  } else if(/android/i.test(ua)){
+    inst.innerHTML='Tap <strong>⋮ Menu</strong> then <strong>"Add to Home Screen"</strong> or <strong>"Install App"</strong>';
+    banner.style.display='block';
+  }
+  var deferredPrompt=null;
+  window.addEventListener('beforeinstallprompt',function(e){
+    e.preventDefault();deferredPrompt=e;
+    inst.innerHTML='<button onclick="installPWA()" style="background:#00ccff;color:#0a0a0a;border:none;padding:8px 16px;font-family:inherit;cursor:pointer;border-radius:2px;font-size:0.8rem">⬇ INSTALL TO HOME SCREEN</button>';
+    banner.style.display='block';
+  });
+  window.installPWA=function(){
+    if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(function(){deferredPrompt=null;banner.style.display='none'})}
+  };
+})();
+</script>
+</body>
+</html>
