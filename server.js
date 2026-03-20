@@ -868,6 +868,9 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
       <a class="cm-dl-btn" href="/tones/multipack" target="_blank" style="text-decoration:none;text-align:center;background:#cc88ff;color:#0a0a0a;border-color:#cc88ff;flex:1 1 100%">🎛️ INSTALL MULTIPACK (ALL-IN-ONE)</a>
     </div>
     <div class="cm-dl-btns" style="margin-top:4px">
+      <a class="cm-dl-btn" href="/tones/instrument" target="_blank" style="text-decoration:none;text-align:center;background:#ff4444;color:#0a0a0a;border-color:#ff4444;flex:1 1 100%">🎹 INSTALL TONE LAB (INSTRUMENT)</a>
+    </div>
+    <div class="cm-dl-btns" style="margin-top:4px">
       <a class="cm-dl-btn" href="/tones/healing" target="_blank" style="text-decoration:none;text-align:center">📱 INSTALL HEALING</a>
       <a class="cm-dl-btn blue" href="/tones/protective" target="_blank" style="text-decoration:none;text-align:center">📱 INSTALL PROTECTIVE</a>
     </div>
@@ -1145,6 +1148,9 @@ app.get('/tones/protective', (req, res) => {
 });
 app.get('/tones/multipack', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'tones-multipack.html'));
+});
+app.get('/tones/instrument', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'tones-instrument.html'));
 });
 
 // Raw content routes — serve actual pages into iframe

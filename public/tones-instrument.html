@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover,maximum-scale=1">
+<title>b0b Tone Lab — Instrument</title>
+<meta name="description" content="Stackable healing tone instrument with touch pads, rhythms, harmonics, and analog feel">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="b0b Tone Lab">
+<link rel="manifest" href="/manifest-instrument.json">
+<link rel="apple-touch-icon" href="/icon-instrument.svg">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;padding:env(safe-area-inset-top) 8px env(safe-area-inset-bottom);user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:none;overflow-y:auto;overflow-x:hidden}
+.header{text-align:center;padding:12px 0 4px;width:100%;max-width:600px}
+.header h1{color:#ff4444;font-size:0.95rem;letter-spacing:2px}
+.header .sub{color:#555;font-size:0.6rem;margin-top:3px}
+
+/* ─── TOUCH PAD GRID ─── */
+.pad-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;width:100%;max-width:600px;padding:6px 0}
+.pad{position:relative;aspect-ratio:1;border-radius:6px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.08);overflow:hidden;transition:border-color 0.15s}
+.pad .glow{position:absolute;inset:0;opacity:0;transition:opacity 0.15s;border-radius:6px}
+.pad.playing .glow{opacity:1}
+.pad .freq-label{font-size:0.7rem;font-weight:bold;z-index:1;pointer-events:none}
+.pad .name-label{font-size:0.5rem;color:rgba(255,255,255,0.5);z-index:1;pointer-events:none;margin-top:2px}
+.pad .vol-bar{position:absolute;bottom:0;left:0;right:0;height:0;transition:height 0.1s;z-index:0;opacity:0.25}
+.pad.playing{border-color:rgba(255,255,255,0.3)}
+
+/* Solfeggio pads — green */
+.pad.sol .glow{background:radial-gradient(circle,rgba(0,255,65,0.25) 0%,transparent 70%)}
+.pad.sol .freq-label{color:#00ff41}
+.pad.sol .vol-bar{background:#00ff41}
+.pad.sol.playing{border-color:#00ff41}
+
+/* Binaural pads — cyan */
+.pad.bin .glow{background:radial-gradient(circle,rgba(0,204,255,0.25) 0%,transparent 70%)}
+.pad.bin .freq-label{color:#00ccff}
+.pad.bin .vol-bar{background:#00ccff}
+.pad.bin.playing{border-color:#00ccff}
+
+/* Noise pads — warm */
+.pad.noi .glow{background:radial-gradient(circle,rgba(255,170,80,0.2) 0%,transparent 70%)}
+.pad.noi .freq-label{color:#ffaa50}
+.pad.noi .vol-bar{background:#ffaa50}
+.pad.noi.playing{border-color:#ffaa50}
+
+/* Ultrasonic pad — purple */
+.pad.ult .glow{background:radial-gradient(circle,rgba(204,136,255,0.25) 0%,transparent 70%)}
+.pad.ult .freq-label{color:#cc88ff}
+.pad.ult .vol-bar{background:#cc88ff}
+.pad.ult.playing{border-color:#cc88ff}
+
+/* ─── CONTROLS ─── */
+.controls{width:100%;max-width:600px;display:flex;flex-direction:column;gap:4px;padding:4px 0}
+.ctrl-row{display:flex;align-items:center;gap:8px;padding:4px 8px;background:#111;border:1px solid #222;border-radius:4px}
+.ctrl-row label{font-size:0.65rem;color:#888;white-space:nowrap;min-width:60px}
+.ctrl-row input[type=range]{flex:1;height:22px;accent-color:#ff4444}
+.ctrl-row .val{font-size:0.6rem;color:#555;min-width:32px;text-align:right}
+.ctrl-row select{background:#0a0a0a;color:#d4d4d4;border:1px solid #333;font-family:inherit;font-size:0.65rem;padding:3px 6px;border-radius:2px}
+.ctrl-row button{background:transparent;border:1px solid #555;color:#aaa;font-family:inherit;font-size:0.6rem;padding:4px 10px;cursor:pointer;border-radius:2px;transition:all 0.15s}
+.ctrl-row button:hover{border-color:#00ff41;color:#00ff41}
+.ctrl-row button.active{background:#00ff41;color:#0a0a0a;border-color:#00ff41}
+
+/* ─── RHYTHM SEQUENCER ─── */
+.seq-section{width:100%;max-width:600px;border:1px solid #222;border-radius:4px;padding:8px;margin:4px 0;background:#0d0d0d}
+.seq-section h3{font-size:0.7rem;color:#ffaa50;letter-spacing:1px;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.seq-section h3 .dot{width:6px;height:6px;border-radius:50%;background:#333;transition:background 0.2s}
+.seq-section h3 .dot.on{background:#ffaa50;box-shadow:0 0 4px #ffaa50}
+.seq-row{display:flex;align-items:center;gap:3px;margin:3px 0}
+.seq-row .seq-label{font-size:0.5rem;color:#666;width:36px;text-align:right;flex-shrink:0}
+.seq-step{width:100%;aspect-ratio:1.5;border:1px solid #222;border-radius:2px;cursor:pointer;transition:all 0.1s;max-width:36px}
+.seq-step:hover{border-color:#555}
+.seq-step.on{border-color:#00ff41}
+.seq-step.sol.on{background:#00ff41;opacity:0.7}
+.seq-step.bin.on{background:#00ccff;opacity:0.7}
+.seq-step.noi.on{background:#ffaa50;opacity:0.7}
+.seq-step.ult.on{background:#cc88ff;opacity:0.7}
+.seq-step.current{box-shadow:0 0 4px rgba(255,255,255,0.5)}
+.seq-controls{display:flex;align-items:center;gap:8px;margin-top:6px}
+.seq-controls button{background:transparent;border:1px solid #555;color:#aaa;font-family:inherit;font-size:0.65rem;padding:4px 12px;cursor:pointer;border-radius:2px}
+.seq-controls button:hover{border-color:#ffaa50;color:#ffaa50}
+.seq-controls button.playing{background:#ffaa50;color:#0a0a0a;border-color:#ffaa50}
+
+/* ─── ACTIVE DISPLAY ─── */
+.active-display{width:100%;max-width:600px;background:#0d0d0d;border:1px solid #222;border-radius:4px;padding:6px 10px;margin:4px 0;min-height:28px;display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.active-tag{font-size:0.6rem;padding:2px 8px;border-radius:10px;border:1px solid;display:flex;align-items:center;gap:4px}
+.active-tag.sol{border-color:#00ff41;color:#00ff41}
+.active-tag.bin{border-color:#00ccff;color:#00ccff}
+.active-tag.noi{border-color:#ffaa50;color:#ffaa50}
+.active-tag.ult{border-color:#cc88ff;color:#cc88ff}
+.active-tag .x{cursor:pointer;opacity:0.5;font-size:0.7rem}
+.active-tag .x:hover{opacity:1}
+.empty-state{color:#333;font-size:0.6rem;font-style:italic}
+
+.credit{margin:8px 0;color:#333;font-size:0.6rem;text-align:center}
+.credit a{color:#555;text-decoration:none}
+.install-banner{display:none;background:#111;border:1px solid #ff4444;padding:10px;margin:6px 0;border-radius:4px;font-size:0.7rem;color:#aaa;text-align:center;line-height:1.5;max-width:600px;width:100%}
+.install-banner strong{color:#ff4444}
+.install-banner .dismiss{color:#555;cursor:pointer;font-size:0.6rem;margin-top:4px;display:block}
+@media(max-width:400px){
+  .pad-grid{grid-template-columns:repeat(4,1fr)}
+  .pad .freq-label{font-size:0.6rem}
+  .pad .name-label{font-size:0.45rem}
+}
+@media(min-width:601px){
+  .pad-grid{grid-template-columns:repeat(5,1fr)}
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>🎹 b0b TONE LAB</h1>
+  <div class="sub">TOUCH PADS TO PLAY — STACK TONES — DRAG VERTICAL FOR VOLUME — TAP TO TOGGLE</div>
+</div>
+
+<div class="install-banner" id="installBanner">
+  <strong>📱 INSTALL TO HOME SCREEN</strong><br>
+  <span id="installInstructions"></span>
+  <span class="dismiss" onclick="document.getElementById('installBanner').style.display='none'">dismiss</span>
+</div>
+
+<!-- ACTIVE TONES DISPLAY -->
+<div class="active-display" id="activeDisplay">
+  <span class="empty-state" id="emptyState">touch pads to begin...</span>
+</div>
+
+<!-- TOUCH PAD GRID -->
+<div class="pad-grid" id="padGrid"></div>
+
+<!-- CONTROLS -->
+<div class="controls">
+  <div class="ctrl-row">
+    <label>🔊 MASTER</label>
+    <input type="range" min="0" max="100" value="75" oninput="setMaster(this.value)" id="masterVol">
+    <div class="val" id="masterVal">75%</div>
+  </div>
+  <div class="ctrl-row">
+    <label>WAVEFORM</label>
+    <select id="waveform" onchange="setWaveform(this.value)">
+      <option value="sine" selected>Sine (smooth)</option>
+      <option value="triangle">Triangle (warm)</option>
+      <option value="square">Square (rich)</option>
+      <option value="sawtooth">Sawtooth (bright)</option>
+    </select>
+    <label style="min-width:auto">SUB</label>
+    <select id="subMode" onchange="setSubMode(this.value)">
+      <option value="octave" selected>Octave below</option>
+      <option value="fifth">Perfect 5th</option>
+      <option value="third">Major 3rd</option>
+      <option value="none">None</option>
+    </select>
+  </div>
+  <div class="ctrl-row">
+    <label>DETUNE</label>
+    <input type="range" min="-50" max="50" value="0" oninput="setDetune(this.value)" id="detuneRange">
+    <div class="val" id="detuneVal">0¢</div>
+    <button onclick="resetDetune()">RESET</button>
+  </div>
+  <div class="ctrl-row">
+    <label>REVERB</label>
+    <input type="range" min="0" max="100" value="20" oninput="setReverb(this.value)" id="reverbRange">
+    <div class="val" id="reverbVal">20%</div>
+    <button id="reverbBtn" onclick="toggleReverb()" class="active">ON</button>
+  </div>
+  <div class="ctrl-row">
+    <button onclick="stopAll()" style="border-color:#ff4444;color:#ff4444;flex:1">◼ STOP ALL</button>
+    <button onclick="soloMode()" id="soloBtn" style="flex:1">SOLO MODE</button>
+  </div>
+</div>
+
+<!-- RHYTHM SEQUENCER -->
+<div class="seq-section">
+  <h3><span class="dot" id="seqDot"></span>🥁 RHYTHM SEQUENCER</h3>
+  <div id="seqGrid"></div>
+  <div class="seq-controls">
+    <button id="seqPlayBtn" onclick="toggleSeq()">▶ PLAY</button>
+    <label style="font-size:0.6rem;color:#888">BPM</label>
+    <input type="range" min="40" max="200" value="90" style="width:80px;accent-color:#ffaa50" oninput="setSeqBPM(this.value)" id="seqBPM">
+    <span style="font-size:0.6rem;color:#555" id="seqBPMVal">90</span>
+    <button onclick="clearSeq()">CLEAR</button>
+    <button onclick="randomSeq()">RANDOM</button>
+  </div>
+</div>
+
+<div class="credit"><a href="https://b0b.dev">b0b.dev</a> — TONE LAB</div>
+
+<script>
+// ═══════════════════ AUDIO ENGINE ═══════════════════
+var ctx, masterGain, reverbNode, reverbDry, reverbWet, reverbEnabled = true;
+var master = 0.75, waveType = 'sine', subMode = 'octave', detuneVal = 0;
+var solo = false;
+var voices = {}; // padId -> {osc, sub, gain, subGain}
+
+// Pad definitions
+var PADS = [
+  // Solfeggio healing frequencies
+  {id:'s174',f:174,name:'Pain Relief',type:'sol'},
+  {id:'s285',f:285,name:'Tissue',type:'sol'},
+  {id:'s396',f:396,name:'Liberation',type:'sol'},
+  {id:'s417',f:417,name:'Change',type:'sol'},
+  {id:'s432',f:432,name:'Natural',type:'sol'},
+  {id:'s528',f:528,name:'Love/DNA',type:'sol'},
+  {id:'s639',f:639,name:'Connection',type:'sol'},
+  {id:'s741',f:741,name:'Intuition',type:'sol'},
+  {id:'s852',f:852,name:'Spiritual',type:'sol'},
+  {id:'s963',f:963,name:'Higher Self',type:'sol'},
+  // Binaural entrainment
+  {id:'b783',f:7.83,name:'Schumann',type:'bin'},
+  {id:'b10',f:10,name:'Alpha',type:'bin'},
+  {id:'b14',f:14,name:'Beta',type:'bin'},
+  {id:'b40',f:40,name:'Gamma',type:'bin'},
+  // Noise / Texture
+  {id:'npink',f:0,name:'Pink Noise',type:'noi',gen:'pink'},
+  {id:'nbrown',f:0,name:'Brown Noise',type:'noi',gen:'brown'},
+  {id:'nocean',f:0,name:'Ocean',type:'noi',gen:'ocean'},
+  // Ultrasonic
+  {id:'ultra',f:21000,name:'Shield',type:'ult',gen:'ultrasonic'},
+  // Drone
+  {id:'drone',f:0,name:'Drone',type:'noi',gen:'drone'},
+  // Breath
+  {id:'breath',f:0,name:'Breath',type:'noi',gen:'breath'}
+];
+
+function initAudio() {
+  if (ctx) return;
+  ctx = new (window.AudioContext || window.webkitAudioContext)();
+  // Master gain
+  masterGain = ctx.createGain();
+  masterGain.gain.value = master;
+  // Reverb chain
+  reverbDry = ctx.createGain();
+  reverbDry.gain.value = 1;
+  reverbWet = ctx.createGain();
+  reverbWet.gain.value = 0.2;
+  reverbDry.connect(masterGain);
+  reverbWet.connect(masterGain);
+  masterGain.connect(ctx.destination);
+  // Create impulse response for reverb
+  createReverb();
+}
+
+function createReverb() {
+  var len = ctx.sampleRate * 2.5;
+  var buf = ctx.createBuffer(2, len, ctx.sampleRate);
+  for (var ch = 0; ch < 2; ch++) {
+    var d = buf.getChannelData(ch);
+    for (var i = 0; i < len; i++) {
+      d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.5);
+    }
+  }
+  reverbNode = ctx.createConvolver();
+  reverbNode.buffer = buf;
+}
+
+function getOutputNode() {
+  // Return the node voices should connect to
+  return reverbDry;
+}
+
+function connectWithReverb(gainNode) {
+  gainNode.connect(reverbDry);
+  if (reverbEnabled && reverbNode) {
+    gainNode.connect(reverbNode);
+    reverbNode.connect(reverbWet);
+  }
+}
+
+// ═══════════════════ VOICE MANAGEMENT ═══════════════════
+function startVoice(pad, vol) {
+  initAudio();
+  if (ctx.state === 'suspended') ctx.resume();
+  if (voices[pad.id]) stopVoice(pad.id);
+  var v = vol || 0.15;
+  var voice = {vol: v};
+  var g = ctx.createGain();
+  g.gain.setValueAtTime(0, ctx.currentTime);
+  g.gain.linearRampToValueAtTime(v, ctx.currentTime + 0.08);
+
+  if (pad.gen === 'pink') {
+    var bs = ctx.sampleRate * 2, bf = ctx.createBuffer(1, bs, ctx.sampleRate), d = bf.getChannelData(0);
+    var b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0;
+    for(var i=0;i<bs;i++){var w=Math.random()*2-1;b0=0.99886*b0+w*0.0555179;b1=0.99332*b1+w*0.0750759;b2=0.96900*b2+w*0.1538520;b3=0.86650*b3+w*0.3104856;b4=0.55000*b4+w*0.5329522;b5=-0.7616*b5-w*0.0168980;d[i]=(b0+b1+b2+b3+b4+b5+b6+w*0.5362)*0.11;b6=w*0.115926}
+    var ns = ctx.createBufferSource(); ns.buffer = bf; ns.loop = true;
+    ns.connect(g); connectWithReverb(g); ns.start();
+    voice.noise = ns;
+  } else if (pad.gen === 'brown') {
+    var bs2 = ctx.sampleRate * 2, bf2 = ctx.createBuffer(1, bs2, ctx.sampleRate), d2 = bf2.getChannelData(0), last=0;
+    for(var j=0;j<bs2;j++){var wn=Math.random()*2-1;last=(last+(0.02*wn))/1.02;d2[j]=last*3.5}
+    var ns2 = ctx.createBufferSource(); ns2.buffer = bf2; ns2.loop = true;
+    ns2.connect(g); connectWithReverb(g); ns2.start();
+    voice.noise = ns2;
+  } else if (pad.gen === 'ocean') {
+    var obs = ctx.sampleRate * 4, ob = ctx.createBuffer(1, obs, ctx.sampleRate), od = ob.getChannelData(0), ol=0;
+    for(var k=0;k<obs;k++){var ow=Math.random()*2-1;ol=(ol+(0.02*ow))/1.02;od[k]=ol*3.5}
+    var ns3 = ctx.createBufferSource(); ns3.buffer = ob; ns3.loop = true;
+    var lp = ctx.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=500; lp.Q.value=0.7;
+    var olfo = ctx.createOscillator(); olfo.type='sine'; olfo.frequency.value=0.08;
+    var wd = ctx.createGain(); wd.gain.value=0.4; olfo.connect(wd); wd.connect(g.gain); olfo.start();
+    ns3.connect(lp); lp.connect(g); connectWithReverb(g); ns3.start();
+    voice.noise = ns3; voice.lfo = olfo;
+  } else if (pad.gen === 'drone') {
+    // Low 60Hz hum + 120Hz harmonic with slow wobble
+    var dr = ctx.createOscillator(); dr.type='sawtooth'; dr.frequency.value=60;
+    var drH = ctx.createOscillator(); drH.type='sine'; drH.frequency.value=120;
+    var drHG = ctx.createGain(); drHG.gain.value=0.3; drH.connect(drHG); drHG.connect(g);
+    var drLp = ctx.createBiquadFilter(); drLp.type='lowpass'; drLp.frequency.value=200;
+    dr.connect(drLp); drLp.connect(g);
+    var wobble = ctx.createOscillator(); wobble.type='sine'; wobble.frequency.value=0.15;
+    var wobG = ctx.createGain(); wobG.gain.value=3; wobble.connect(wobG); wobG.connect(dr.frequency);
+    connectWithReverb(g); dr.start(); drH.start(); wobble.start();
+    voice.osc = dr; voice.sub = drH; voice.lfo = wobble;
+  } else if (pad.gen === 'breath') {
+    // Filtered noise with rhythmic LFO gain modulation
+    var bbs = ctx.sampleRate * 2, bbf = ctx.createBuffer(1, bbs, ctx.sampleRate), bd = bbf.getChannelData(0);
+    for(var bi=0;bi<bbs;bi++) bd[bi]=Math.random()*2-1;
+    var bns = ctx.createBufferSource(); bns.buffer = bbf; bns.loop = true;
+    var bp = ctx.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=800; bp.Q.value=2;
+    var blfo = ctx.createOscillator(); blfo.type='sine'; blfo.frequency.value=0.2; // ~12 breaths/min
+    var blfoG = ctx.createGain(); blfoG.gain.value=0.5;
+    var breathGain = ctx.createGain(); breathGain.gain.value=0.5;
+    blfo.connect(blfoG); blfoG.connect(breathGain.gain);
+    bns.connect(bp); bp.connect(breathGain); breathGain.connect(g);
+    connectWithReverb(g); bns.start(); blfo.start();
+    voice.noise = bns; voice.lfo = blfo;
+  } else if (pad.gen === 'ultrasonic') {
+    // 20-22kHz bandpass at -60dB with sweep
+    var ubl = ctx.sampleRate * 2, ubf = ctx.createBuffer(1, ubl, ctx.sampleRate), ud = ubf.getChannelData(0);
+    for(var ui=0;ui<ubl;ui++) ud[ui]=Math.random()*2-1;
+    var uns = ctx.createBufferSource(); uns.buffer = ubf; uns.loop = true;
+    var uf = ctx.createBiquadFilter(); uf.type='bandpass'; uf.frequency.value=21000; uf.Q.value=10.5;
+    var us = ctx.createBiquadFilter(); us.type='highpass'; us.frequency.value=19500; us.Q.value=0.7;
+    var ulfo = ctx.createOscillator(); ulfo.type='triangle'; ulfo.frequency.value=0.25;
+    var ulg = ctx.createGain(); ulg.gain.value=1000; ulfo.connect(ulg); ulg.connect(uf.frequency);
+    g.gain.setValueAtTime(0,ctx.currentTime);
+    g.gain.linearRampToValueAtTime(0.001,ctx.currentTime+0.5);
+    voice.vol = 0.001;
+    uns.connect(uf); uf.connect(us); us.connect(g);
+    connectWithReverb(g); uns.start(); ulfo.start();
+    voice.noise = uns; voice.lfo = ulfo;
+  } else if (pad.type === 'bin') {
+    // Binaural: L=200Hz, R=200+freq Hz through channel merger
+    var m = ctx.createChannelMerger(2);
+    var oscL = ctx.createOscillator(); oscL.type='sine'; oscL.frequency.value=200; oscL.detune.value=detuneVal;
+    var oscR = ctx.createOscillator(); oscR.type='sine'; oscR.frequency.value=200+pad.f; oscR.detune.value=detuneVal;
+    oscL.connect(m,0,0); oscR.connect(m,0,1); m.connect(g);
+    connectWithReverb(g); oscL.start(); oscR.start();
+    voice.osc = oscL; voice.sub = oscR;
+  } else {
+    // Solfeggio tone oscillator + sub-harmonic
+    var osc = ctx.createOscillator(); osc.type = waveType; osc.frequency.value = pad.f; osc.detune.value = detuneVal;
+    osc.connect(g);
+    // Sub-harmonic
+    if (subMode !== 'none') {
+      var subF = pad.f / 2;
+      if (subMode === 'fifth') subF = pad.f * 2/3;
+      else if (subMode === 'third') subF = pad.f * 4/5;
+      var subOsc = ctx.createOscillator(); subOsc.type = 'sine'; subOsc.frequency.value = subF; subOsc.detune.value = detuneVal;
+      var subG = ctx.createGain(); subG.gain.value = 0.15;
+      subOsc.connect(subG); subG.connect(g);
+      subOsc.start();
+      voice.sub = subOsc; voice.subGain = subG;
+    }
+    connectWithReverb(g); osc.start();
+    voice.osc = osc;
+  }
+
+  voice.gain = g;
+  voices[pad.id] = voice;
+  updatePadUI(pad.id, true);
+  updateActiveDisplay();
+}
+
+function stopVoice(id) {
+  var v = voices[id];
+  if (!v) return;
+  var t = ctx ? ctx.currentTime : 0;
+  if (v.gain) {
+    v.gain.gain.linearRampToValueAtTime(0, t + 0.08);
+    setTimeout(function() {
+      try { if(v.osc){v.osc.stop();v.osc.disconnect()} } catch(x){}
+      try { if(v.sub){v.sub.stop();v.sub.disconnect()} } catch(x){}
+      try { if(v.noise){v.noise.stop();v.noise.disconnect()} } catch(x){}
+      try { if(v.lfo){v.lfo.stop();v.lfo.disconnect()} } catch(x){}
+      try { if(v.subGain){v.subGain.disconnect()} } catch(x){}
+      try { if(v.gain){v.gain.disconnect()} } catch(x){}
+    }, 100);
+  }
+  delete voices[id];
+  updatePadUI(id, false);
+  updateActiveDisplay();
+}
+
+function setVoiceVol(id, vol) {
+  var v = voices[id];
+  if (!v || !v.gain || !ctx) return;
+  v.vol = vol;
+  v.gain.gain.linearRampToValueAtTime(vol, ctx.currentTime + 0.05);
+}
+
+function stopAll() {
+  var ids = Object.keys(voices);
+  for (var i = 0; i < ids.length; i++) stopVoice(ids[i]);
+  if (seqPlaying) toggleSeq();
+}
+
+// ═══════════════════ CONTROLS ═══════════════════
+function setMaster(val) {
+  master = val / 100;
+  document.getElementById('masterVal').textContent = val + '%';
+  if (masterGain && ctx) masterGain.gain.linearRampToValueAtTime(master, ctx.currentTime + 0.05);
+}
+
+function setWaveform(type) {
+  waveType = type;
+  // Update live oscillators
+  Object.keys(voices).forEach(function(id) {
+    var pad = getPadById(id);
+    if (pad && pad.type === 'sol' && voices[id].osc) {
+      voices[id].osc.type = type;
+    }
+  });
+}
+
+function setSubMode(mode) { subMode = mode; }
+
+function setDetune(val) {
+  detuneVal = parseInt(val);
+  document.getElementById('detuneVal').textContent = val + '\u00A2';
+  Object.keys(voices).forEach(function(id) {
+    var v = voices[id];
+    if (v.osc && v.osc.detune) v.osc.detune.linearRampToValueAtTime(detuneVal, ctx.currentTime + 0.1);
+    if (v.sub && v.sub.detune) v.sub.detune.linearRampToValueAtTime(detuneVal, ctx.currentTime + 0.1);
+  });
+}
+
+function resetDetune() {
+  document.getElementById('detuneRange').value = 0;
+  setDetune(0);
+}
+
+function setReverb(val) {
+  document.getElementById('reverbVal').textContent = val + '%';
+  if (reverbWet) reverbWet.gain.value = val / 100;
+}
+
+function toggleReverb() {
+  reverbEnabled = !reverbEnabled;
+  var btn = document.getElementById('reverbBtn');
+  btn.textContent = reverbEnabled ? 'ON' : 'OFF';
+  btn.classList.toggle('active', reverbEnabled);
+  if (reverbWet) reverbWet.gain.value = reverbEnabled ? (parseInt(document.getElementById('reverbRange').value) / 100) : 0;
+}
+
+function soloMode() {
+  solo = !solo;
+  var btn = document.getElementById('soloBtn');
+  btn.classList.toggle('active', solo);
+  btn.textContent = solo ? 'SOLO: ON' : 'SOLO MODE';
+}
+
+function getPadById(id) {
+  for (var i = 0; i < PADS.length; i++) if (PADS[i].id === id) return PADS[i];
+  return null;
+}
+
+// ═══════════════════ PAD UI ═══════════════════
+function buildPads() {
+  var grid = document.getElementById('padGrid');
+  grid.innerHTML = '';
+  for (var i = 0; i < PADS.length; i++) {
+    var p = PADS[i];
+    var el = document.createElement('div');
+    el.className = 'pad ' + p.type;
+    el.id = 'pad-' + p.id;
+    el.dataset.padId = p.id;
+    el.innerHTML = '<div class="glow"></div><div class="vol-bar" id="vb-' + p.id + '"></div><div class="freq-label">' + (p.f > 0 && p.f < 1000 ? p.f + ' Hz' : (p.gen === 'ultrasonic' ? '⚡' : (p.gen === 'drone' ? '〰️' : (p.gen === 'breath' ? '🌬️' : (p.gen === 'pink' ? '〜' : (p.gen === 'brown' ? '▓' : (p.gen === 'ocean' ? '🌊' : p.f.toFixed(1)))))))) + '</div><div class="name-label">' + p.name + '</div>';
+    grid.appendChild(el);
+  }
+}
+
+function updatePadUI(id, playing) {
+  var el = document.getElementById('pad-' + id);
+  if (el) el.classList.toggle('playing', playing);
+}
+
+function updateActiveDisplay() {
+  var disp = document.getElementById('activeDisplay');
+  var ids = Object.keys(voices);
+  if (ids.length === 0) {
+    disp.innerHTML = '<span class="empty-state" id="emptyState">touch pads to begin...</span>';
+    return;
+  }
+  var html = '';
+  for (var i = 0; i < ids.length; i++) {
+    var pad = getPadById(ids[i]);
+    if (!pad) continue;
+    html += '<span class="active-tag ' + pad.type + '">' + pad.name + '<span class="x" data-id="' + pad.id + '">\u00D7</span></span>';
+  }
+  disp.innerHTML = html;
+  // Wire up close buttons
+  disp.querySelectorAll('.x').forEach(function(x) {
+    x.addEventListener('click', function(e) {
+      e.stopPropagation();
+      stopVoice(this.dataset.id);
+    });
+  });
+}
+
+// ═══════════════════ TOUCH / MOUSE HANDLING ═══════════════════
+var activeTouches = {}; // touchId -> padId
+var dragPad = null; // For mouse
+
+function handlePadStart(padId, clientY, rect) {
+  var pad = getPadById(padId);
+  if (!pad) return;
+  if (solo) {
+    // In solo mode, stop everything else first
+    var ids = Object.keys(voices);
+    for (var i = 0; i < ids.length; i++) {
+      if (ids[i] !== padId) stopVoice(ids[i]);
+    }
+  }
+  if (voices[padId]) {
+    // Already playing — toggle off
+    stopVoice(padId);
+    return;
+  }
+  // Compute volume from Y position (top = louder)
+  var vol = computeVol(clientY, rect, pad);
+  startVoice(pad, vol);
+  updateVolBar(padId, vol, pad);
+}
+
+function handlePadMove(padId, clientY, rect) {
+  if (!voices[padId]) return;
+  var pad = getPadById(padId);
+  var vol = computeVol(clientY, rect, pad);
+  setVoiceVol(padId, vol);
+  voices[padId].vol = vol;
+  updateVolBar(padId, vol, pad);
+}
+
+function computeVol(clientY, rect, pad) {
+  var ratio = 1 - Math.max(0, Math.min(1, (clientY - rect.top) / rect.height));
+  if (pad.gen === 'ultrasonic') return ratio * 0.003; // Keep ultra quiet
+  return ratio * 0.25;
+}
+
+function updateVolBar(id, vol, pad) {
+  var vb = document.getElementById('vb-' + id);
+  if (!vb) return;
+  var maxVol = pad.gen === 'ultrasonic' ? 0.003 : 0.25;
+  var pct = Math.min(100, (vol / maxVol) * 100);
+  vb.style.height = pct + '%';
+}
+
+// Touch events on the grid
+(function() {
+  var grid = document.getElementById('padGrid');
+  // Prevent scrolling on the pad grid
+  grid.addEventListener('touchstart', function(e) { e.preventDefault(); }, {passive: false});
+  grid.addEventListener('touchmove', function(e) { e.preventDefault(); }, {passive: false});
+
+  grid.addEventListener('touchstart', function(e) {
+    for (var i = 0; i < e.changedTouches.length; i++) {
+      var t = e.changedTouches[i];
+      var el = document.elementFromPoint(t.clientX, t.clientY);
+      var padEl = el ? el.closest('.pad') : null;
+      if (!padEl) continue;
+      var padId = padEl.dataset.padId;
+      activeTouches[t.identifier] = padId;
+      handlePadStart(padId, t.clientY, padEl.getBoundingClientRect());
+    }
+  });
+
+  grid.addEventListener('touchmove', function(e) {
+    for (var i = 0; i < e.changedTouches.length; i++) {
+      var t = e.changedTouches[i];
+      var padId = activeTouches[t.identifier];
+      if (!padId) continue;
+      var padEl = document.getElementById('pad-' + padId);
+      if (!padEl) continue;
+      handlePadMove(padId, t.clientY, padEl.getBoundingClientRect());
+    }
+  });
+
+  grid.addEventListener('touchend', function(e) {
+    for (var i = 0; i < e.changedTouches.length; i++) {
+      delete activeTouches[e.changedTouches[i].identifier];
+    }
+  });
+
+  // Mouse fallback
+  grid.addEventListener('mousedown', function(e) {
+    var padEl = e.target.closest('.pad');
+    if (!padEl) return;
+    var padId = padEl.dataset.padId;
+    dragPad = padId;
+    handlePadStart(padId, e.clientY, padEl.getBoundingClientRect());
+  });
+
+  document.addEventListener('mousemove', function(e) {
+    if (!dragPad) return;
+    var padEl = document.getElementById('pad-' + dragPad);
+    if (!padEl) return;
+    handlePadMove(dragPad, e.clientY, padEl.getBoundingClientRect());
+  });
+
+  document.addEventListener('mouseup', function() { dragPad = null; });
+})();
+
+// ═══════════════════ RHYTHM SEQUENCER ═══════════════════
+var SEQ_STEPS = 16;
+var SEQ_ROWS = ['s396','s528','b783','npink']; // Default sequencer rows
+var SEQ_ROW_LABELS = ['396','528','7.83','PINK'];
+var seqGrid = []; // [row][step] = true/false
+var seqPlaying = false, seqStep = 0, seqTimer = null, seqBPM = 90;
+
+function buildSeqGrid() {
+  var container = document.getElementById('seqGrid');
+  container.innerHTML = '';
+  seqGrid = [];
+  for (var r = 0; r < SEQ_ROWS.length; r++) {
+    seqGrid[r] = [];
+    var row = document.createElement('div');
+    row.className = 'seq-row';
+    var pad = getPadById(SEQ_ROWS[r]);
+    var typeClass = pad ? pad.type : 'sol';
+    row.innerHTML = '<div class="seq-label">' + SEQ_ROW_LABELS[r] + '</div>';
+    for (var s = 0; s < SEQ_STEPS; s++) {
+      seqGrid[r][s] = false;
+      var step = document.createElement('div');
+      step.className = 'seq-step ' + typeClass;
+      step.dataset.row = r;
+      step.dataset.step = s;
+      step.addEventListener('click', function() {
+        var ri = parseInt(this.dataset.row), si = parseInt(this.dataset.step);
+        seqGrid[ri][si] = !seqGrid[ri][si];
+        this.classList.toggle('on', seqGrid[ri][si]);
+      });
+      row.appendChild(step);
+    }
+    container.appendChild(row);
+  }
+}
+
+function toggleSeq() {
+  seqPlaying = !seqPlaying;
+  var btn = document.getElementById('seqPlayBtn');
+  var dot = document.getElementById('seqDot');
+  if (seqPlaying) {
+    btn.textContent = '◼ STOP';
+    btn.classList.add('playing');
+    dot.classList.add('on');
+    seqStep = 0;
+    seqTick();
+  } else {
+    btn.textContent = '▶ PLAY';
+    btn.classList.remove('playing');
+    dot.classList.remove('on');
+    clearTimeout(seqTimer);
+    // Clear step highlight
+    document.querySelectorAll('.seq-step').forEach(function(s) { s.classList.remove('current') });
+  }
+}
+
+function seqTick() {
+  if (!seqPlaying) return;
+  initAudio();
+  // Highlight current step
+  document.querySelectorAll('.seq-step').forEach(function(s) { s.classList.remove('current') });
+  document.querySelectorAll('.seq-step[data-step="' + seqStep + '"]').forEach(function(s) { s.classList.add('current') });
+
+  for (var r = 0; r < SEQ_ROWS.length; r++) {
+    var padId = SEQ_ROWS[r];
+    var pad = getPadById(padId);
+    if (seqGrid[r][seqStep]) {
+      if (!voices[padId]) startVoice(pad, 0.12);
+    } else {
+      if (voices[padId]) stopVoice(padId);
+    }
+  }
+
+  seqStep = (seqStep + 1) % SEQ_STEPS;
+  seqTimer = setTimeout(seqTick, (60 / seqBPM) * 1000 / 4); // 16th notes
+}
+
+function setSeqBPM(val) {
+  seqBPM = parseInt(val);
+  document.getElementById('seqBPMVal').textContent = val;
+}
+
+function clearSeq() {
+  for (var r = 0; r < seqGrid.length; r++)
+    for (var s = 0; s < SEQ_STEPS; s++) seqGrid[r][s] = false;
+  document.querySelectorAll('.seq-step').forEach(function(s) { s.classList.remove('on') });
+}
+
+function randomSeq() {
+  clearSeq();
+  var steps = document.querySelectorAll('.seq-step');
+  for (var r = 0; r < seqGrid.length; r++) {
+    // Random density: 20-50% active
+    var density = 0.2 + Math.random() * 0.3;
+    for (var s = 0; s < SEQ_STEPS; s++) {
+      if (Math.random() < density) {
+        seqGrid[r][s] = true;
+      }
+    }
+  }
+  steps.forEach(function(el) {
+    var ri = parseInt(el.dataset.row), si = parseInt(el.dataset.step);
+    el.classList.toggle('on', seqGrid[ri][si]);
+  });
+}
+
+// ═══════════════════ INIT ═══════════════════
+buildPads();
+buildSeqGrid();
+
+// Install prompt
+(function() {
+  var ua = navigator.userAgent || '';
+  var ios = /iPad|iPhone|iPod/.test(ua) || (/Macintosh/.test(ua) && 'ontouchend' in document);
+  var standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+  if (standalone) return;
+  var banner = document.getElementById('installBanner');
+  var inst = document.getElementById('installInstructions');
+  if (ios) {
+    inst.innerHTML = 'Tap <strong>Share \u2191</strong> then <strong>"Add to Home Screen"</strong>';
+    banner.style.display = 'block';
+  } else if (/android/i.test(ua)) {
+    inst.innerHTML = 'Tap <strong>\u22ee Menu</strong> then <strong>"Add to Home Screen"</strong> or <strong>"Install App"</strong>';
+    banner.style.display = 'block';
+  }
+  var deferredPrompt = null;
+  window.addEventListener('beforeinstallprompt', function(e) {
+    e.preventDefault(); deferredPrompt = e;
+    inst.innerHTML = '<button onclick="installPWA()" style="background:#ff4444;color:#0a0a0a;border:none;padding:8px 16px;font-family:inherit;cursor:pointer;border-radius:2px;font-size:0.8rem">\u2b07 INSTALL TO HOME SCREEN</button>';
+    banner.style.display = 'block';
+  });
+  window.installPWA = function() {
+    if (deferredPrompt) { deferredPrompt.prompt(); deferredPrompt.userChoice.then(function() { deferredPrompt = null; banner.style.display = 'none' }) }
+  };
+})();
+</script>
+</body>
+</html>
