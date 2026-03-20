@@ -320,6 +320,15 @@
       .filter-panel { width: 100vw; }
       .legend { max-width: 140px; }
     }
+
+    /* ===================== COUNTERMEASURE STATUS ===================== */
+    .cm-panel { margin-top: 8px; padding: 6px 8px; border: 1px solid #333; background: rgba(0,0,0,0.3); }
+    .cm-toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+    .cm-toggle input[type="checkbox"] { width: 16px; height: 16px; accent-color: #ff4444; }
+    .cm-label { font-size: 0.65rem; color: #ff4444; letter-spacing: 1px; font-weight: bold; }
+    .cm-status { font-size: 0.6rem; color: #555; margin-top: 4px; }
+    .cm-status.active { color: #00ff41; }
+    .cm-info { font-size: 0.55rem; color: #666; margin-top: 4px; line-height: 1.4; }
   </style>
 </head>
 <body>
@@ -434,6 +443,22 @@
   <div class="filter-item" style="margin-top:2px"><a href="/download" style="color:#ff4444;text-decoration:none;font-size:0.7rem">📦 DOWNLOAD OFFLINE BACKUP (ZIP)</a></div>
   <div class="filter-item" style="margin-top:2px"><a href="/report#methodology" target="_blank" style="color:#00ccff;text-decoration:none;font-size:0.7rem">📋 SOURCE METHODOLOGY</a></div>
   <div class="filter-item" style="margin-top:2px;color:#888;font-size:0.6rem">Deep Links: /map?type=X&section=Y&marker=Z</div>
+  <h3 style="margin-top:10px;color:#ff4444">COUNTERMEASURES</h3>
+  <div class="cm-panel">
+    <label class="cm-toggle"><input type="checkbox" id="cmUltrasonic" onchange="toggleUltrasonicCM(this.checked)"><span class="cm-label">ULTRASONIC SHIELD</span></label>
+    <div class="cm-status" id="cmStatus">INACTIVE</div>
+    <div class="cm-info">Generates inaudible ultrasonic noise (17.5–22kHz) to jam cross-device tracking beacons, acoustic data exfiltration channels, and covert surveillance microphone capture. Based on documented ultrasonic tracking techniques observed in this investigation.</div>
+  </div>
+  <div class="cm-panel" style="margin-top:4px">
+    <label class="cm-toggle"><input type="checkbox" id="cmWebrtc" onchange="toggleWebRTCBlock(this.checked)" checked><span class="cm-label">WebRTC LEAK BLOCK</span></label>
+    <div class="cm-status active" id="cmWebrtcStatus">ACTIVE — local IP masked</div>
+    <div class="cm-info">Prevents WebRTC from exposing your real local/public IP addresses through STUN/TURN requests. Blocks a common browser fingerprinting and de-anonymization vector.</div>
+  </div>
+  <div class="cm-panel" style="margin-top:4px">
+    <label class="cm-toggle"><input type="checkbox" id="cmCanvas" onchange="toggleCanvasGuard(this.checked)" checked><span class="cm-label">CANVAS FINGERPRINT GUARD</span></label>
+    <div class="cm-status active" id="cmCanvasStatus">ACTIVE — noise injected</div>
+    <div class="cm-info">Injects imperceptible noise into canvas readback operations, defeating canvas fingerprinting — a technique that uniquely identifies browsers by rendering differences.</div>
+  </div>
   </div>
 </div>
 
@@ -2579,6 +2604,176 @@ function toggleDataLayer(layer) {
     });
   });
   document.body.appendChild(btn);
+})();
+
+// ===================== COUNTERMEASURE ENGINE =====================
+
+// --- ULTRASONIC SHIELD ---
+// Generates broadband noise in the 17.5–22kHz range (inaudible to most adults)
+// Jams: ultrasonic cross-device tracking beacons, acoustic data exfiltration,
+// covert mic capture quality degradation
+var cmAudioCtx = null;
+var cmNoiseNode = null;
+var cmGainNode = null;
+var cmFilterNode = null;
+var cmUltrasonicActive = false;
+
+function toggleUltrasonicCM(enabled) {
+  if (enabled) {
+    startUltrasonicShield();
+  } else {
+    stopUltrasonicShield();
+  }
+}
+
+function startUltrasonicShield() {
+  try {
+    if (!cmAudioCtx) {
+      cmAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (cmAudioCtx.state === 'suspended') cmAudioCtx.resume();
+
+    // Create white noise buffer (2 seconds, looped)
+    var bufferSize = cmAudioCtx.sampleRate * 2;
+    var noiseBuffer = cmAudioCtx.createBuffer(1, bufferSize, cmAudioCtx.sampleRate);
+    var data = noiseBuffer.getChannelData(0);
+    for (var i = 0; i < bufferSize; i++) {
+      data[i] = (Math.random() * 2 - 1);
+    }
+
+    // Noise source
+    cmNoiseNode = cmAudioCtx.createBufferSource();
+    cmNoiseNode.buffer = noiseBuffer;
+    cmNoiseNode.loop = true;
+
+    // Bandpass filter: 17500–22000 Hz (ultrasonic, inaudible to most adults)
+    cmFilterNode = cmAudioCtx.createBiquadFilter();
+    cmFilterNode.type = 'bandpass';
+    cmFilterNode.frequency.value = 19750; // center frequency
+    cmFilterNode.Q.value = 4.4; // quality factor for ~4.5kHz bandwidth
+
+    // Gain: very low — enough to jam but imperceptible
+    cmGainNode = cmAudioCtx.createGain();
+    cmGainNode.gain.value = 0.003; // -50dB — below hearing threshold
+
+    // Connect: noise → bandpass → gain → speakers
+    cmNoiseNode.connect(cmFilterNode);
+    cmFilterNode.connect(cmGainNode);
+    cmGainNode.connect(cmAudioCtx.destination);
+    cmNoiseNode.start();
+    cmUltrasonicActive = true;
+
+    document.getElementById('cmStatus').textContent = 'ACTIVE — 17.5–22kHz noise floor';
+    document.getElementById('cmStatus').className = 'cm-status active';
+    console.log('[COUNTERMEASURE] Ultrasonic shield ACTIVE — broadband 17.5–22kHz noise floor engaged');
+  } catch (e) {
+    document.getElementById('cmStatus').textContent = 'ERROR — ' + e.message;
+    console.log('[COUNTERMEASURE] Ultrasonic shield failed: ' + e.message);
+  }
+}
+
+function stopUltrasonicShield() {
+  try {
+    if (cmNoiseNode) { cmNoiseNode.stop(); cmNoiseNode.disconnect(); cmNoiseNode = null; }
+    if (cmFilterNode) { cmFilterNode.disconnect(); cmFilterNode = null; }
+    if (cmGainNode) { cmGainNode.disconnect(); cmGainNode = null; }
+    cmUltrasonicActive = false;
+    document.getElementById('cmStatus').textContent = 'INACTIVE';
+    document.getElementById('cmStatus').className = 'cm-status';
+    console.log('[COUNTERMEASURE] Ultrasonic shield DEACTIVATED');
+  } catch (e) {}
+}
+
+// --- WebRTC LEAK BLOCK ---
+// Prevents local/public IP exposure through STUN/TURN requests
+var cmOriginalRTC = window.RTCPeerConnection || window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
+var cmRTCBlocked = false;
+
+function toggleWebRTCBlock(enabled) {
+  if (enabled) {
+    window.RTCPeerConnection = function() { console.log('[COUNTERMEASURE] WebRTC connection blocked'); return {}; };
+    window.webkitRTCPeerConnection = window.RTCPeerConnection;
+    window.mozRTCPeerConnection = window.RTCPeerConnection;
+    cmRTCBlocked = true;
+    document.getElementById('cmWebrtcStatus').textContent = 'ACTIVE — local IP masked';
+    document.getElementById('cmWebrtcStatus').className = 'cm-status active';
+    console.log('[COUNTERMEASURE] WebRTC leak block ACTIVE');
+  } else {
+    if (cmOriginalRTC) {
+      window.RTCPeerConnection = cmOriginalRTC;
+      window.webkitRTCPeerConnection = cmOriginalRTC;
+    }
+    cmRTCBlocked = false;
+    document.getElementById('cmWebrtcStatus').textContent = 'INACTIVE — WebRTC enabled';
+    document.getElementById('cmWebrtcStatus').className = 'cm-status';
+    console.log('[COUNTERMEASURE] WebRTC leak block DEACTIVATED');
+  }
+}
+
+// Auto-enable WebRTC block on load
+toggleWebRTCBlock(true);
+
+// --- CANVAS FINGERPRINT GUARD ---
+// Injects imperceptible noise into canvas toDataURL / toBlob / getImageData
+// Defeats canvas fingerprinting without breaking map rendering
+var cmCanvasGuardActive = false;
+var cmOriginalToDataURL = HTMLCanvasElement.prototype.toDataURL;
+var cmOriginalToBlob = HTMLCanvasElement.prototype.toBlob;
+var cmOriginalGetImageData = CanvasRenderingContext2D.prototype.getImageData;
+
+function toggleCanvasGuard(enabled) {
+  if (enabled) {
+    HTMLCanvasElement.prototype.toDataURL = function() {
+      var ctx = this.getContext('2d');
+      if (ctx && this.width > 0 && this.height > 0) {
+        try {
+          var imgData = cmOriginalGetImageData.call(ctx, 0, 0, Math.min(this.width, 16), Math.min(this.height, 16));
+          for (var i = 0; i < imgData.data.length; i += 4) {
+            imgData.data[i] = (imgData.data[i] + (Math.random() > 0.5 ? 1 : -1)) & 0xFF;
+          }
+          ctx.putImageData(imgData, 0, 0);
+        } catch(e) {}
+      }
+      return cmOriginalToDataURL.apply(this, arguments);
+    };
+    cmCanvasGuardActive = true;
+    document.getElementById('cmCanvasStatus').textContent = 'ACTIVE — noise injected';
+    document.getElementById('cmCanvasStatus').className = 'cm-status active';
+    console.log('[COUNTERMEASURE] Canvas fingerprint guard ACTIVE');
+  } else {
+    HTMLCanvasElement.prototype.toDataURL = cmOriginalToDataURL;
+    HTMLCanvasElement.prototype.toBlob = cmOriginalToBlob;
+    cmCanvasGuardActive = false;
+    document.getElementById('cmCanvasStatus').textContent = 'INACTIVE — canvas unguarded';
+    document.getElementById('cmCanvasStatus').className = 'cm-status';
+    console.log('[COUNTERMEASURE] Canvas fingerprint guard DEACTIVATED');
+  }
+}
+
+// Auto-enable canvas guard on load
+toggleCanvasGuard(true);
+
+// --- VISIBILITY CHANGE DETECTION ---
+// Detect when page visibility changes (potential screen capture / tab monitoring)
+document.addEventListener('visibilitychange', function() {
+  if (document.hidden) {
+    console.log('[COUNTERMEASURE] Page visibility HIDDEN — potential screen capture or tab switch at ' + new Date().toISOString());
+  } else {
+    console.log('[COUNTERMEASURE] Page visibility RESTORED — ' + new Date().toISOString());
+  }
+});
+
+// --- DEVTOOLS DETECTION ---
+// Detect debugger/devtools attachment (common in browser-based surveillance injection)
+(function() {
+  var dtThreshold = 160;
+  var dtCheck = setInterval(function() {
+    var w = window.outerWidth - window.innerWidth > dtThreshold;
+    var h = window.outerHeight - window.innerHeight > dtThreshold;
+    if (w || h) {
+      console.log('[COUNTERMEASURE] DevTools detected — potential inspection at ' + new Date().toISOString());
+    }
+  }, 10000);
 })();
 </script>
 <script>

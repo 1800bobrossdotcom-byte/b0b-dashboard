@@ -10,6 +10,72 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const AUTH_SECRET = process.env.AUTH_SECRET || crypto.randomBytes(32).toString('hex');
 
+// ===================== CONTENT INTEGRITY MONITORING =====================
+// Hash static files at startup — detect unauthorized modifications
+const fileIntegrityHashes = new Map();
+function computeFileHash(filePath) {
+  try {
+    const content = fs.readFileSync(filePath);
+    return crypto.createHash('sha256').update(content).digest('hex');
+  } catch (e) { return null; }
+}
+function initIntegrityMonitoring() {
+  const publicDir = path.join(__dirname, 'public');
+  const watchFiles = ['map.html', 'report.html', 'index.html'];
+  watchFiles.forEach(f => {
+    const fp = path.join(publicDir, f);
+    const hash = computeFileHash(fp);
+    if (hash) {
+      fileIntegrityHashes.set(f, hash);
+      console.log(`[INTEGRITY] ${f} SHA-256: ${hash.substring(0, 16)}...`);
+    }
+  });
+}
+// Periodic integrity check — every 5 minutes
+function checkFileIntegrity() {
+  const publicDir = path.join(__dirname, 'public');
+  for (const [file, expectedHash] of fileIntegrityHashes) {
+    const currentHash = computeFileHash(path.join(publicDir, file));
+    if (currentHash && currentHash !== expectedHash) {
+      console.log(`[INTEGRITY] ⚠ FILE MODIFIED: ${file} — expected ${expectedHash.substring(0, 16)}... got ${currentHash.substring(0, 16)}... — ${new Date().toISOString()}`);
+      // Update hash (file was legitimately deployed)
+      fileIntegrityHashes.set(file, currentHash);
+    }
+  }
+}
+setInterval(checkFileIntegrity, 5 * 60 * 1000);
+initIntegrityMonitoring();
+
+// ===================== SECURITY EVENT CORRELATION =====================
+// Track suspicious activity per IP — escalate on pattern detection
+const suspiciousIPs = new Map();
+const SUSPICION_WINDOW = 30 * 60 * 1000; // 30 minutes
+const SUSPICION_THRESHOLD = 5; // events before flagging
+
+function recordSuspicion(ip, reason) {
+  const now = Date.now();
+  if (!suspiciousIPs.has(ip)) {
+    suspiciousIPs.set(ip, { events: [], flagged: false });
+  }
+  const record = suspiciousIPs.get(ip);
+  record.events.push({ time: now, reason: reason });
+  // Prune old events
+  record.events = record.events.filter(e => now - e.time < SUSPICION_WINDOW);
+  if (record.events.length >= SUSPICION_THRESHOLD && !record.flagged) {
+    record.flagged = true;
+    console.log(`[SECURITY] ⚠ THREAT ESCALATION — IP: ${ip} — ${record.events.length} suspicious events in ${SUSPICION_WINDOW / 60000}min — ${record.events.map(e => e.reason).join(', ')} — ${new Date().toISOString()}`);
+  }
+}
+
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, record] of suspiciousIPs) {
+    record.events = record.events.filter(e => now - e.time < SUSPICION_WINDOW);
+    if (record.events.length === 0) suspiciousIPs.delete(ip);
+    else record.flagged = false; // reset flag after window
+  }
+}, SUSPICION_WINDOW);
+
 // ===================== BLUE TEAM — DEFENSIVE HARDENING =====================
 
 // Disable Express fingerprint (X-Powered-By header reveals stack)
@@ -361,6 +427,7 @@ app.post('/login', (req, res) => {
   // RED TEAM — Rate limiting
   if (!checkLoginRate(ip)) {
     console.log(`[AUTH] Login RATE LIMITED — IP: ${ip} — ${new Date().toISOString()}`);
+    recordSuspicion(ip, 'login-rate-limit');
     return res.status(429).send('Too many attempts. Try again in 15 minutes.');
   }
 
@@ -369,6 +436,7 @@ app.post('/login', (req, res) => {
   // Verify server-signed challenge token
   if (!verifyChallenge(challenge)) {
     console.log(`[AUTH] Login REJECTED (invalid challenge) — IP: ${ip} — ${new Date().toISOString()}`);
+    recordSuspicion(ip, 'invalid-challenge');
     return res.redirect('/login');
   }
 
@@ -416,6 +484,53 @@ app.get('/robots.txt', (req, res) => {
 // Health check — for uptime monitoring
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
+});
+
+// ===================== HONEYPOT ROUTES =====================
+// Trap common attack paths — no legitimate user would request these
+// Log detailed attacker fingerprint for threat intelligence
+const honeypotPaths = [
+  '/.env', '/wp-admin', '/wp-login.php', '/admin', '/administrator',
+  '/config.php', '/phpinfo.php', '/phpmyadmin', '/.git/config',
+  '/.aws/credentials', '/actuator', '/debug', '/console',
+  '/wp-content', '/xmlrpc.php', '/backup.sql', '/database.sql',
+  '/server-status', '/.htpasswd', '/cgi-bin'
+];
+honeypotPaths.forEach(hp => {
+  app.all(hp, (req, res) => {
+    const ip = req.ip || req.connection.remoteAddress;
+    const ua = req.headers['user-agent'] || 'no-ua';
+    const method = req.method;
+    const referer = req.headers['referer'] || 'none';
+    const accept = req.headers['accept'] || 'none';
+    console.log(`[HONEYPOT] ⚠ TRAP HIT — IP: ${ip} — Path: ${hp} — Method: ${method} — UA: ${ua.substring(0, 200)} — Referer: ${referer} — Accept: ${accept.substring(0, 100)} — ${new Date().toISOString()}`);
+    recordSuspicion(ip, 'honeypot:' + hp);
+    // Artificial delay — waste attacker's time
+    setTimeout(() => {
+      res.status(404).send('Not found');
+    }, 2000 + Math.floor(Math.random() * 3000));
+  });
+});
+
+// ===================== AUTOMATED SCANNER DETECTION =====================
+// Detect missing/anomalous headers typical of automated tools
+app.use((req, res, next) => {
+  const ip = req.ip || req.connection.remoteAddress;
+  const ua = req.headers['user-agent'] || '';
+  
+  // Flag known scanner signatures
+  const scannerPatterns = /sqlmap|nikto|nessus|nmap|masscan|dirbust|gobuster|nuclei|wfuzz|ffuf|burpsuite|zaproxy|acunetix|w3af|arachni|skipfish|whatweb|httpie\/|python-requests\/|Go-http-client|curl\/|wget\//i;
+  if (scannerPatterns.test(ua)) {
+    console.log(`[SECURITY] Scanner detected — IP: ${ip} — UA: ${ua.substring(0, 200)} — Path: ${req.path} — ${new Date().toISOString()}`);
+    recordSuspicion(ip, 'scanner-ua');
+  }
+  
+  // Flag missing Accept header (most browsers always send one)
+  if (!req.headers['accept'] && req.method === 'GET' && !req.path.startsWith('/api/') && req.path !== '/health') {
+    recordSuspicion(ip, 'missing-accept-header');
+  }
+  
+  next();
 });
 
 // ===================== PUBLIC DATA API =====================
@@ -542,6 +657,7 @@ app.use((req, res, next) => {
   record.count++;
   if (record.count > RATE_LIMIT_MAX) {
     console.log(`[SECURITY] Rate limited — IP: ${ip} — Path: ${req.path} — ${new Date().toISOString()}`);
+    recordSuspicion(ip, 'rate-limit:' + req.path.substring(0, 30));
     return res.status(429).send('Too many requests. Try again later.');
   }
   next();
@@ -567,7 +683,15 @@ app.use((req, res, next) => {
       /\/(\.|_)/.test(decodedPath) && !req.path.startsWith('/_page') && !req.path.startsWith('/.well-known')) {
     const ip = req.ip || req.connection.remoteAddress;
     console.log(`[SECURITY] Suspicious path blocked — IP: ${ip} — Path: ${req.path} — ${new Date().toISOString()}`);
+    recordSuspicion(ip, 'path-traversal:' + req.path.substring(0, 50));
     return res.status(400).send('Bad request');
+  }
+  // Block excessively long URLs (recon / fuzzing indicator)
+  if (req.originalUrl.length > 2048) {
+    const ip = req.ip || req.connection.remoteAddress;
+    console.log(`[SECURITY] Oversized URL blocked — IP: ${ip} — Length: ${req.originalUrl.length} — ${new Date().toISOString()}`);
+    recordSuspicion(ip, 'oversized-url');
+    return res.status(414).send('URI too long');
   }
   next();
 });
@@ -817,10 +941,26 @@ app.get('/_page/map', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'map.html'));
 });
 
+// ===================== RESPONSE TIMING PADDING =====================
+// Add random delay to error responses — resist timing analysis
+app.use((req, res, next) => {
+  const originalSend = res.send.bind(res);
+  res.send = function(body) {
+    if (res.statusCode >= 400 && res.statusCode < 500) {
+      // 50-200ms random padding on client error responses
+      const pad = 50 + Math.floor(Math.random() * 150);
+      return setTimeout(() => originalSend(body), pad);
+    }
+    return originalSend(body);
+  };
+  next();
+});
+
 // ===================== 404 HANDLER (RAINBOW) =====================
 app.use((req, res) => {
   const ip = req.ip || req.connection.remoteAddress;
   console.log(`[404] Not found — IP: ${ip} — Path: ${req.path} — ${new Date().toISOString()}`);
+  recordSuspicion(ip, '404:' + req.path.substring(0, 50));
   res.status(404);
   res.setHeader('Content-Type', 'text/html');
   res.send('<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>404</title><style>body{background:#0a0a0a;color:#00ff41;font-family:"Courier New",monospace;display:flex;justify-content:center;align-items:center;min-height:100vh;margin:0}div{text-align:center}h1{font-size:3rem;margin-bottom:1rem}a{color:#00ff41}</style></head><body><div><h1>404</h1><p>Not found.</p><p><a href="/">Return</a></p></div></body></html>');
@@ -836,6 +976,21 @@ app.use((err, req, res, next) => {
   }
 });
 
+// ===================== PROCESS-LEVEL HARDENING =====================
+// Catch unhandled promise rejections — prevent silent crashes
+process.on('unhandledRejection', (reason, promise) => {
+  console.error(`[SECURITY] Unhandled promise rejection: ${reason} — ${new Date().toISOString()}`);
+});
+
+// Catch uncaught exceptions — log and stay up
+process.on('uncaughtException', (err) => {
+  console.error(`[SECURITY] Uncaught exception: ${err.message} — ${new Date().toISOString()}`);
+  // Don't process.exit() — let the runtime handle restart
+});
+
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`b0b dashboard running on port ${PORT}`);
+  console.log(`[INTEGRITY] Content integrity monitoring active — ${fileIntegrityHashes.size} files tracked`);
+  console.log(`[SECURITY] Honeypot routes active — ${honeypotPaths.length} traps deployed`);
+  console.log(`[SECURITY] Security event correlation active — ${SUSPICION_THRESHOLD} events/${SUSPICION_WINDOW / 60000}min threshold`);
 });
