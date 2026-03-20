@@ -465,6 +465,10 @@ app.use((req, res, next) => {
   if (req.cookies.b0b_auth === makeAuthToken()) {
     return next();
   }
+  // BLUE TEAM — log unauthenticated access attempts to protected routes
+  const ip = req.ip || req.connection.remoteAddress;
+  const ua = req.headers['user-agent'] || 'no-ua';
+  console.log(`[AUTH] Unauthenticated access blocked — IP: ${ip} — Path: ${req.path} — UA: ${ua.substring(0, 120)} — ${new Date().toISOString()}`);
   res.redirect('/login');
 });
 
@@ -484,7 +488,9 @@ app.use((req, res, next) => {
   // Restrict referrer information
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   // Restrict browser features
-  res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=()');
+  res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=(), serial=(), hid=()');
+  // Prevent DNS prefetch data leakage — stops browser from resolving domains in page content
+  res.setHeader('X-DNS-Prefetch-Control', 'off');
   // BLUE TEAM — Cross-origin isolation headers
   // Skip COOP for /_page routes — they load inside same-origin iframes
   if (!req.path.startsWith('/_page')) {
@@ -497,13 +503,13 @@ app.use((req, res, next) => {
   var isShell = req.path === '/' || req.path === '/report' || req.path === '/map';
   if (isShell) {
     // Shell pages: need frame-src for iframe, media-src for audio player
-    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; frame-src 'self'; media-src 'self' https://*.archive.org; frame-ancestors 'self'; base-uri 'self'; form-action 'self'");
+    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; frame-src 'self'; media-src 'self' https://*.archive.org; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests");
   } else if (isMap) {
-    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; img-src 'self' https://*.basemaps.cartocdn.com https://*.tile.openstreetmap.org https://server.arcgisonline.com https://*.tile.opentopomap.org data:; font-src 'self'; connect-src 'self' https://*.basemaps.cartocdn.com https://*.tile.openstreetmap.org https://server.arcgisonline.com https://*.tile.opentopomap.org; frame-ancestors 'self'; base-uri 'self'; form-action 'self'");
+    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; img-src 'self' https://*.basemaps.cartocdn.com https://*.tile.openstreetmap.org https://server.arcgisonline.com https://*.tile.opentopomap.org data:; font-src 'self'; connect-src 'self' https://*.basemaps.cartocdn.com https://*.tile.openstreetmap.org https://server.arcgisonline.com https://*.tile.opentopomap.org; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests");
   } else if (isReport) {
-    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'");
+    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests");
   } else {
-    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; media-src 'self' https://*.archive.org; frame-ancestors 'self'; base-uri 'self'; form-action 'self'");
+    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; media-src 'self' https://*.archive.org; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests");
   }
   // Prevent caching of sensitive content
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
@@ -542,6 +548,17 @@ setInterval(() => {
     }
   }
 }, 5 * 60 * 1000);
+
+// ===================== PATH TRAVERSAL GUARD =====================
+// Block directory traversal attempts before static file serving
+app.use((req, res, next) => {
+  if (req.path.includes('..') || req.path.includes('%2e%2e') || req.path.includes('%2E%2E')) {
+    const ip = req.ip || req.connection.remoteAddress;
+    console.log(`[SECURITY] Path traversal attempt blocked — IP: ${ip} — Path: ${req.path} — ${new Date().toISOString()}`);
+    return res.status(400).send('Bad request');
+  }
+  next();
+});
 
 // ===================== STATIC FILES =====================
 app.use(express.static(path.join(__dirname, 'public')));

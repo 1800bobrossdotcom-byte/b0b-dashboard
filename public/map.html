@@ -13,7 +13,7 @@
   <meta name="twitter:title" content="">
   <meta name="twitter:description" content="">
   <title>b0b.dev — OSINT Map</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #0a0a0a; color: #d4d4d4; font-family: 'Courier New', monospace; }
@@ -469,7 +469,7 @@
   </div>
 </div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
 <script>
 // ===================== MAP INIT =====================
 // Filter panel toggle (desktop)
@@ -815,7 +815,7 @@ var locations = [
   // ===== SATELLITE GROUND STATIONS & NETWORKS =====
   {name:"Cape Canaveral / Kennedy Space Center, FL",lat:28.3922,lng:-80.6077,section:"V",type:"satellite",ctx:"Primary U.S. satellite launch facility. SpaceX (Musk) launches Starlink constellation here — 6,000+ satellites providing global internet coverage. NRO reconnaissance satellites also launch from here. The surveillance constellation and the commercial constellation share the same launchpad."},
   {name:"Vandenberg Space Force Base, CA",lat:34.7420,lng:-120.5724,section:"V",type:"satellite",ctx:"West coast satellite launch facility. NRO, Space Force, and SpaceX launches. Starlink polar orbit launches. Military and commercial satellite infrastructure co-located."},
-  {name:"Buckley Space Force Base, Aurora, CO",lat:39.7170,lng:-104.7520,section:"V",type:"satellite",ctx:"NRO satellite operations center — processes imagery from spy satellites worldwide. Space-Based Infrared System (SBIRS) missile warning. The ground station that sees everything."},
+  {name:"Buckley Space Force Base / ADF-C, Aurora, CO",lat:39.7170,lng:-104.7520,section:"V",type:"satellite",ctx:"Aerospace Data Facility-Colorado (ADF-C) — NRO's primary CONUS ground station. Home of Space Delta 20 (satellite reconnaissance operations). Processes imagery from NRO spy satellites worldwide. 'Sentient' AI system ingests ADF-C data — classified NRO program that uses AI to autonomously retask satellites at machine speed ('tipping and queueing'). NSA Colorado co-located on same installation — signals intelligence and imagery intelligence fused at same coordinates. Space-Based Infrared System (SBIRS) missile warning. The ground station that sees everything, now with an AI deciding what to look at next."},
   {name:"Schriever Space Force Base, Colorado Springs, CO",lat:38.8058,lng:-104.5286,section:"V",type:"satellite",ctx:"GPS Master Control Station — controls the entire Global Positioning System constellation (24+ satellites). AFSPC (Air Force Space Command). The facility that controls global positioning for military and civilian use."},
   {name:"Pine Gap, NT, Australia — Satellite Ground Station",lat:-23.7981,lng:133.7370,section:"V",type:"satellite",ctx:"Joint CIA/ASD satellite ground station. Processes signals from geostationary SIGINT satellites. Five Eyes southern hemisphere signals intelligence hub. Already documented as ECHELON station — dual-purpose: satellite control and signals intercept."},
   {name:"Menwith Hill, UK — Satellite Ground Station",lat:54.0016,lng:-1.6874,section:"V",type:"satellite",ctx:"NSA satellite ground station. 33 satellite tracking domes (radomes). Largest electronic monitoring station outside the U.S. Operated by Lockheed Martin. Taps both fiber cables and satellite communications."},
@@ -828,6 +828,22 @@ var locations = [
   {name:"OneWeb Ground Station, Fairbanks, AK",lat:64.8400,lng:-147.7200,section:"V",type:"satellite",ctx:"OneWeb satellite ground station. Bharti Global (India) and UK government joint venture. Competitor to Starlink with 630+ satellites. Arctic ground station for polar orbit coverage."},
   {name:"Beijing Satellite Control Center, China",lat:39.9667,lng:116.3333,section:"V",type:"satellite",ctx:"Controls China's BeiDou navigation constellation (55 satellites — alternative to GPS), Tiangong space station, Chang'e lunar missions, and military reconnaissance satellites. China's sovereign satellite control infrastructure."},
   {name:"Baikonur Cosmodrome, Kazakhstan",lat:45.9650,lng:63.3050,section:"V",type:"satellite",ctx:"Russia's primary satellite launch facility. GLONASS navigation constellation, military reconnaissance satellites, and ISS crew launches. Soviet-era facility on sovereign Kazakh soil, leased to Russia. The satellite launch site is in another country."},
+
+  // ===== NRO SENTIENT ECOSYSTEM — AI SATELLITE INTELLIGENCE =====
+  // Sentient: Classified NRO AI system. "Tipping and queueing" — autonomously retasks spy satellites
+  // at machine speed. Ingests imagery, SIGINT, financial records, weather, mobile device data,
+  // shipping, social networks, environmental sensors. The satellites are "dumb" — passive sensor
+  // platforms with software-defined payloads. Intelligence lives in the ground stations. The AI
+  // decides what to look at. The ground stations process what it sees. The commercial providers
+  // feed it everything else.
+  //
+  {name:"NRO Headquarters, Chantilly, VA",lat:38.8819,lng:-77.4508,section:"V",type:"surveillance",ctx:"National Reconnaissance Office — builds and operates U.S. spy satellites. Manages 200+ satellites (2025). Advanced Systems & Technology (AS&T) Directorate houses 'Sentient' — classified AI system that autonomously retasks satellites at machine speed. 'Tipping and queueing': Sentient detects anomaly in one data source, instantly redirects satellite constellation to investigate. Ingests EVERYTHING — imagery, SIGINT, financial records, weather, mobile device data, shipping traffic, social networks. NRO proliferated constellation: 150+ new satellites by April 2025 in addition to legacy birds. The satellites are deliberately 'dumb' — passive sensor platforms with software-defined payloads updated from ground. Intelligence lives in the ground architecture, not in orbit. The AI that watches the world."},
+  {name:"Aerospace Data Facility-East (ADF-E) / Area 58, Fort Belvoir, VA",lat:38.7361,lng:-77.1583,section:"V",type:"satellite",ctx:"ADF-E — NRO ground station code-named 'Area 58.' Manages KH-11 KENNEN electro-optical imagery satellites and Lacrosse/Onyx synthetic aperture radar satellites. NGA (National Geospatial-Intelligence Agency) co-located — imagery processing and geospatial intelligence fused at same facility. Sits on Fort Belvoir alongside ISA/Task Force Orange (documented separately). The ground station that processes what the spy satellites photograph, located 15 miles from NRO headquarters."},
+  {name:"Aerospace Data Facility-Southwest (ADF-SW), White Sands, NM",lat:32.5019,lng:-106.6108,section:"V",type:"satellite",ctx:"ADF-SW — NRO ground station at White Sands Missile Range, New Mexico. Third node of ADF ground station triad (Colorado, East, Southwest). Redundant satellite processing facility — if ADF-C or ADF-E are destroyed, ADF-SW maintains continuity. White Sands: first atomic bomb test (Trinity, 1945), first captured V-2 rocket launches, and now NRO satellite ground processing. Nuclear birth site repurposed as the backup brain for the satellite surveillance constellation."},
+  {name:"BlackSky Technology, Herndon, VA",lat:38.9556,lng:-77.4055,section:"V",type:"surveillance",ctx:"BlackSky — commercial geospatial intelligence company. Constellation of high-revisit-rate Earth observation satellites. NRO commercial imagery provider. 'Hoovering up' data from dozens of satellites, 100M+ mobile devices, ships, aircraft, social networks, and environmental sensors. Spectra AI platform fuses satellite imagery with alternative data sources for real-time global monitoring. Herndon HQ — 10 miles from NRO headquarters in Chantilly. A commercial company vacuuming up 100 million mobile device signals and selling the analysis to the spy satellite agency down the road."},
+  {name:"Maxar Technologies (Vantor), Westminster, CO",lat:39.9147,lng:-105.0275,section:"V",type:"surveillance",ctx:"Maxar Technologies — rebranded to Vantor (2025). Builds and operates WorldView satellite constellation. Provides '90% of the foundational GEOINT' to U.S. intelligence community. NRO's primary commercial imagery supplier. Builds satellite buses for NRO classified missions. Westminster CO headquarters — 30 miles from Buckley SFB/ADF-C. The company that builds the satellites, operates the commercial constellation, and provides the baseline imagery that Sentient AI processes. 90% of the pictures the intelligence community looks at come from one company."},
+  {name:"Planet Labs, San Francisco, CA",lat:37.7815,lng:-122.3963,section:"V",type:"surveillance",ctx:"Planet Labs — operates largest Earth observation constellation in history (~200 Dove satellites). Daily imaging of Earth's entire landmass. NRO commercial imagery provider. 'Daily scan' model — every point on Earth photographed every day, archived forever. Change detection at planetary scale. Unlike traditional spy satellites that photograph on command, Planet photographs everything every day whether anyone asked or not. The haystack is pre-built. Sentient just searches it."},
+  {name:"SpaceX Starshield / MILNET, Hawthorne, CA",lat:33.9207,lng:-118.3280,section:"V",type:"satellite",ctx:"SpaceX headquarters — operates MILNET/Starshield military satellite constellation. 480+ classified satellites in low Earth orbit as of June 2025. 'Hybrid mesh network' combining commercial Starlink and dedicated military payloads. Space Force Delta 8 oversees operations. The same company (SpaceX/Musk, Tier 5) that operates 6,000+ commercial Starlink satellites also operates 480+ dedicated military satellites forming a mesh network for the Pentagon. NRO reconnaissance data can route through this mesh. The commercial internet constellation and the military spy constellation share the same operator, same factories, same launch vehicles."},
 
   // ===== MINING & DRILLING OPERATIONS =====
   {name:"Kolwezi, DRC — Cobalt Mining",lat:-10.7167,lng:25.4667,section:"IX",type:"mining",ctx:"Heart of the cobalt belt. Glencore's Mutanda and Kamoto mines. 70% of global cobalt comes from DRC. Children as young as 6 in artisanal mining. Cobalt → batteries → smartphones → surveillance cameras → smart cities. The supply chain for Section V's surveillance cities starts in child labor mines."},
@@ -1931,6 +1947,26 @@ var connectionLines = [
   [[51.978,5.733],[51.989,5.815],'#ff7043','Marije (hidden, ex-PwC) → NI-academy (co-teacher with Els Martijn)'],
   [[51.978,5.733],[51.988,5.815],'#ff7043','Marije (hidden, ex-PwC) → Biomimicry Centre (co-professional, email @biomimicry-centre.com)'],
   [[51.990,5.820],[51.988,5.815],'#ff8800','404 Dead Zone → Biomimicry Centre /over-ons/ (same hidden About pattern as parent FotF)'],
+
+  // ===== NRO SENTIENT ECOSYSTEM — GROUND STATION TRIAD + COMMERCIAL FEED =====
+  // Surveillance blue (#00ccff) for NRO-to-ground-station links
+  // Corporate orange (#ff7043) for commercial provider feed lines
+  // Military red (#ff4444) for MILNET/Starshield military mesh
+  [[38.882,-77.451],[39.717,-104.752],'#00ccff','NRO HQ → ADF-C / Buckley SFB (primary ground station, Space Delta 20, Sentient ingestion)'],
+  [[38.882,-77.451],[38.736,-77.158],'#00ccff','NRO HQ → ADF-E / Area 58, Fort Belvoir (KH-11 imagery, Lacrosse radar, 15 mi)'],
+  [[38.882,-77.451],[32.502,-106.611],'#00ccff','NRO HQ → ADF-SW / White Sands (redundant ground station, continuity node)'],
+  [[39.717,-104.752],[38.736,-77.158],'#00ccff','ADF-C ↔ ADF-E (ground station triad — cross-continental redundancy)'],
+  [[39.717,-104.752],[32.502,-106.611],'#00ccff','ADF-C ↔ ADF-SW (ground station triad — Colorado to New Mexico)'],
+  [[38.736,-77.158],[32.502,-106.611],'#00ccff','ADF-E ↔ ADF-SW (ground station triad — East Coast to Southwest)'],
+  [[38.882,-77.451],[38.956,-77.406],'#ff7043','NRO HQ → BlackSky, Herndon (commercial GEOINT feed, 10 mi, 100M+ mobile devices)'],
+  [[38.882,-77.451],[39.915,-105.028],'#ff7043','NRO HQ → Maxar/Vantor, Westminster CO (90% of foundational GEOINT)'],
+  [[38.882,-77.451],[37.782,-122.396],'#ff7043','NRO HQ → Planet Labs, San Francisco (daily global scan, 200 Dove satellites)'],
+  [[38.882,-77.451],[33.921,-118.328],'#ff4444','NRO HQ → SpaceX/Starshield HQ, Hawthorne (480+ MILNET satellites, mesh network)'],
+  [[33.921,-118.328],[39.717,-104.752],'#ff4444','Starshield/MILNET → ADF-C Buckley (military mesh feeds ground station)'],
+  [[33.921,-118.328],[28.392,-80.608],'#ff4444','SpaceX Starshield HQ → Cape Canaveral (MILNET launch facility)'],
+  [[33.921,-118.328],[34.742,-120.572],'#ff4444','SpaceX Starshield HQ → Vandenberg SFB (MILNET polar orbit launches)'],
+  [[39.915,-105.028],[39.717,-104.752],'#ff7043','Maxar/Vantor → ADF-C Buckley (30 mi, same Colorado corridor — builds the satellites, processes next door)'],
+  [[38.956,-77.406],[38.736,-77.158],'#00ccff','BlackSky → ADF-E Fort Belvoir (Herndon to Belvoir, 20 mi — commercial feed to ground station)'],
 ];
 
 var lineLayer = L.layerGroup().addTo(map);
