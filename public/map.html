@@ -464,6 +464,10 @@
   <h3 style="margin-top:10px">DATA LAYERS</h3>
   <div class="filter-item"><label><input type="checkbox" checked id="toggleConnections" onchange="toggleDataLayer('connections')"> Connection Lines</label></div>
   <div class="filter-item"><label><input type="checkbox" checked id="toggleTunnels" onchange="toggleDataLayer('tunnels')"> Tunnel Paths</label></div>
+  <h3 style="margin-top:10px">LIVE FEEDS</h3>
+  <div class="filter-item"><label><input type="checkbox" id="toggleEarthquakes" onchange="toggleDataLayer('earthquakes')"> 🌍 USGS Earthquakes (24h)</label></div>
+  <div class="filter-item"><label><input type="checkbox" id="toggleEONET" onchange="toggleDataLayer('eonet')"> 🔥 NASA Active Events</label></div>
+  <div class="filter-item" id="liveFeedStatus" style="display:none;color:#888;font-size:0.6rem;padding-left:4px"></div>
   <h3 style="margin-top:10px">ANALYSIS</h3>
   <div class="filter-item"><label><input type="checkbox" id="toggleTimeline" onchange="toggleTimelinePanel()"> Correlation Timeline</label></div>
   <h3 style="margin-top:10px">PATTERN SEARCH</h3>
@@ -602,6 +606,13 @@
   <div class="legend-item"><div class="legend-dot" style="background:#00e676"></div> Crypto / Tech Park</div>
   <div class="legend-item"><div class="legend-dot" style="background:#64ffda"></div> Technology / Research</div>
   <div class="legend-item"><div style="width:24px;height:0;border-top:3px dashed #ff6600;margin-right:8px;flex-shrink:0"></div> Tunnel Path</div>
+  <h3 style="margin-top:10px;color:#ff4444;font-size:0.7rem">LIVE FEEDS</h3>
+  <div class="legend-item"><div class="legend-dot" style="background:#ff2200;border:2px solid #ff6644;width:10px;height:10px;border-radius:50%"></div> Earthquake (M5+)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ff6644;border:2px solid #ff8866;width:8px;height:8px;border-radius:50%"></div> Earthquake (M3–5)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ffaa44;width:6px;height:6px;border-radius:50%"></div> Earthquake (M&lt;3)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ff4400"></div> 🔥 Wildfire</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ff0000"></div> 🌋 Volcano</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#00ccff"></div> 🌀 Severe Storm</div>
   <h3 style="margin-top:10px;color:#00ccff;font-size:0.7rem">CONNECTION LINE COLORS</h3>
   <div class="legend-item"><div style="width:24px;height:0;border-top:2px solid #ff4444;margin-right:8px;flex-shrink:0"></div> Military / Intelligence</div>
   <div class="legend-item"><div style="width:24px;height:0;border-top:2px solid #ffcc00;margin-right:8px;flex-shrink:0"></div> Financial / Banking</div>
@@ -2527,7 +2538,132 @@ function toggleDataLayer(layer) {
   } else if (layer === 'tunnels') {
     if (map.hasLayer(tunnelLayer)) map.removeLayer(tunnelLayer);
     else map.addLayer(tunnelLayer);
+  } else if (layer === 'earthquakes') {
+    if (map.hasLayer(earthquakeLayer)) {
+      map.removeLayer(earthquakeLayer);
+      if (earthquakeRefresh) { clearInterval(earthquakeRefresh); earthquakeRefresh = null; }
+    } else {
+      map.addLayer(earthquakeLayer);
+      fetchEarthquakes();
+      earthquakeRefresh = setInterval(fetchEarthquakes, 300000);
+    }
+  } else if (layer === 'eonet') {
+    if (map.hasLayer(eonetLayer)) {
+      map.removeLayer(eonetLayer);
+      if (eonetRefresh) { clearInterval(eonetRefresh); eonetRefresh = null; }
+    } else {
+      map.addLayer(eonetLayer);
+      fetchEONET();
+      eonetRefresh = setInterval(fetchEONET, 600000);
+    }
   }
+}
+
+// ===================== LIVE DATA LAYERS =====================
+var earthquakeLayer = L.layerGroup();
+var eonetLayer = L.layerGroup();
+var earthquakeRefresh = null;
+var eonetRefresh = null;
+
+function updateLiveFeedStatus(msg) {
+  var el = document.getElementById('liveFeedStatus');
+  if (el) { el.style.display = 'block'; el.textContent = msg; }
+}
+
+function fetchEarthquakes() {
+  updateLiveFeedStatus('Fetching USGS data...');
+  fetch('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      earthquakeLayer.clearLayers();
+      var count = 0;
+      data.features.forEach(function(f) {
+        var coords = f.geometry.coordinates;
+        var mag = f.properties.mag || 0;
+        var depth = coords[2] || 0;
+        var place = f.properties.place || 'Unknown';
+        var time = new Date(f.properties.time);
+        var radius = mag < 2 ? 4 : mag < 3 ? 5 : mag < 4 ? 7 : mag < 5 ? 10 : mag < 6 ? 14 : 18;
+        var color = mag < 3 ? '#ffaa44' : mag < 5 ? '#ff6644' : '#ff2200';
+        var fillOpacity = mag < 2 ? 0.4 : mag < 4 ? 0.55 : 0.7;
+        var circle = L.circleMarker([coords[1], coords[0]], {
+          radius: radius,
+          fillColor: color,
+          color: mag >= 5 ? '#ff6644' : mag >= 3 ? '#ff8866' : color,
+          weight: mag >= 5 ? 2 : 1,
+          fillOpacity: fillOpacity,
+          opacity: 0.8
+        });
+        circle.bindPopup(
+          '<div style="font-family:Courier New,monospace;font-size:0.75rem;color:#ddd;background:#111;padding:8px;border:1px solid #333;min-width:200px">' +
+          '<div style="color:#ff4444;font-weight:bold;margin-bottom:4px">⚡ EARTHQUAKE — M' + mag.toFixed(1) + '</div>' +
+          '<div style="color:#aaa;margin-bottom:2px">📍 ' + place + '</div>' +
+          '<div style="color:#888;margin-bottom:2px">Depth: ' + depth.toFixed(1) + ' km</div>' +
+          '<div style="color:#888">🕐 ' + time.toLocaleString() + '</div>' +
+          '</div>',
+          {className: 'dark-popup'}
+        );
+        circle.addTo(earthquakeLayer);
+        count++;
+      });
+      updateLiveFeedStatus('USGS: ' + count + ' quakes (24h) — ' + new Date().toLocaleTimeString());
+    })
+    .catch(function(e) {
+      updateLiveFeedStatus('USGS fetch failed — check connection');
+    });
+}
+
+function fetchEONET() {
+  updateLiveFeedStatus('Fetching NASA EONET...');
+  fetch('https://eonet.gsfc.nasa.gov/api/v3/events?status=open&limit=200')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      eonetLayer.clearLayers();
+      var count = 0;
+      var iconMap = {
+        'wildfires': { color: '#ff4400', emoji: '🔥', label: 'WILDFIRE' },
+        'volcanoes': { color: '#ff0000', emoji: '🌋', label: 'VOLCANO' },
+        'severeStorms': { color: '#00ccff', emoji: '🌀', label: 'SEVERE STORM' },
+        'floods': { color: '#0066ff', emoji: '🌊', label: 'FLOOD' },
+        'landslides': { color: '#996633', emoji: '⛰️', label: 'LANDSLIDE' },
+        'seaLakeIce': { color: '#aaddff', emoji: '🧊', label: 'SEA/LAKE ICE' },
+        'earthquakes': { color: '#ff6644', emoji: '⚡', label: 'EARTHQUAKE' },
+        'dustHaze': { color: '#ccaa66', emoji: '💨', label: 'DUST/HAZE' },
+        'tempExtremes': { color: '#ff8800', emoji: '🌡️', label: 'TEMP EXTREME' }
+      };
+      (data.events || []).forEach(function(ev) {
+        var catId = ev.categories && ev.categories[0] ? ev.categories[0].id : 'other';
+        var info = iconMap[catId] || { color: '#cccccc', emoji: '⚠️', label: catId.toUpperCase() };
+        (ev.geometry || []).forEach(function(geo) {
+          if (geo.type === 'Point' && geo.coordinates) {
+            var marker = L.circleMarker([geo.coordinates[1], geo.coordinates[0]], {
+              radius: 8,
+              fillColor: info.color,
+              color: info.color,
+              weight: 2,
+              fillOpacity: 0.65,
+              opacity: 0.9
+            });
+            var date = geo.date ? new Date(geo.date).toLocaleDateString() : '';
+            marker.bindPopup(
+              '<div style="font-family:Courier New,monospace;font-size:0.75rem;color:#ddd;background:#111;padding:8px;border:1px solid #333;min-width:200px">' +
+              '<div style="color:' + info.color + ';font-weight:bold;margin-bottom:4px">' + info.emoji + ' ' + info.label + '</div>' +
+              '<div style="color:#ccc;margin-bottom:2px">' + (ev.title || 'Unknown') + '</div>' +
+              (date ? '<div style="color:#888">🕐 ' + date + '</div>' : '') +
+              (ev.sources && ev.sources[0] ? '<div style="margin-top:4px"><a href="' + ev.sources[0].url + '" target="_blank" rel="noopener" style="color:#00ccff;font-size:0.65rem">Source →</a></div>' : '') +
+              '</div>',
+              {className: 'dark-popup'}
+            );
+            marker.addTo(eonetLayer);
+            count++;
+          }
+        });
+      });
+      updateLiveFeedStatus('NASA: ' + count + ' active events — ' + new Date().toLocaleTimeString());
+    })
+    .catch(function(e) {
+      updateLiveFeedStatus('NASA EONET fetch failed — check connection');
+    });
 }
 
 // ===================== CORRELATION TIMELINE =====================
