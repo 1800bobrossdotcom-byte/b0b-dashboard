@@ -645,8 +645,8 @@ app.use((req, res, next) => {
     // Service worker: needs connect-src for tile domains it fetches on behalf of the map
     res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; connect-src 'self' https://*.basemaps.cartocdn.com https://*.tile.openstreetmap.org https://server.arcgisonline.com https://*.tile.opentopomap.org https://tiles.stadiamaps.com" + cspReport);
   } else if (isShell) {
-    // Shell pages: need frame-src for iframe + YouTube embed, script-src for YT IFrame API + s.ytimg.com widget loader
-    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline'; img-src 'self' https://i.ytimg.com https://*.ggpht.com; font-src 'self'; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; media-src 'self' https://*.archive.org https://*.googlevideo.com; connect-src 'self' https://*.googlevideo.com https://*.youtube.com; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests" + cspReport);
+    // Shell pages: frame-src for content iframe
+    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; frame-src 'self'; media-src 'self' https://*.archive.org; connect-src 'self'; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests" + cspReport);
   } else if (isMap) {
     res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; img-src 'self' https://*.basemaps.cartocdn.com https://*.tile.openstreetmap.org https://server.arcgisonline.com https://*.tile.opentopomap.org https://tiles.stadiamaps.com https://unpkg.com data:; font-src 'self'; connect-src 'self' https://*.basemaps.cartocdn.com https://*.tile.openstreetmap.org https://server.arcgisonline.com https://*.tile.opentopomap.org https://tiles.stadiamaps.com; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests" + cspReport);
   } else if (isReport) {
@@ -746,27 +746,10 @@ function getShellHTML(contentPath) {
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden;background:#0a0a0a}
-#frame{width:100%;border:none;height:calc(100% - 84px);display:block}
-.player-bar{position:fixed;bottom:0;left:0;right:0;height:48px;background:#0a0a0a;border-top:1px solid #222;display:flex;align-items:center;padding:0 16px;gap:10px;font-family:'Courier New',monospace;z-index:9999}
-.p-track{color:#00ff41;font-size:0.7rem;letter-spacing:1px;white-space:nowrap;flex-shrink:0}
-.p-btn{background:transparent;border:1px solid #00ff41;color:#00ff41;font-family:inherit;font-size:0.8rem;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;-webkit-tap-highlight-color:transparent}
-.p-btn:hover,.p-btn:active{background:#00ff41;color:#0a0a0a}
-.p-wrap{flex:1;height:6px;background:#222;cursor:pointer;position:relative;min-width:60px;-webkit-tap-highlight-color:transparent}
-.p-fill{height:100%;width:0%;background:#00ff41;transition:width 0.1s linear}
-.p-time{font-size:0.6rem;color:#555;flex-shrink:0;min-width:72px;text-align:right;font-family:'Courier New',monospace}
-#ytContainer{position:fixed;left:16px;bottom:56px;width:280px;height:auto;z-index:10000;border:1px solid #333;background:#000;display:none;box-shadow:0 -2px 12px rgba(0,0,0,0.7);cursor:default}
-#ytContainer.yt-show{display:block}
-#ytContainer iframe{width:100%;height:158px;display:block}
-.yt-drag{height:20px;background:#111;border-bottom:1px solid #333;cursor:grab;display:flex;align-items:center;justify-content:space-between;padding:0 8px;user-select:none}
-.yt-drag:active{cursor:grabbing}
-.yt-drag-dots{color:#555;font-size:0.55rem;letter-spacing:2px}
-.yt-close{color:#555;font-size:0.7rem;cursor:pointer;background:none;border:none;font-family:inherit;padding:0 2px}
-.yt-close:hover{color:#ff4444}
-.yt-vol-bar{height:24px;background:#111;border-top:1px solid #333;display:flex;align-items:center;gap:6px;padding:0 8px}
-.yt-vol-icon{color:#555;font-size:0.6rem;flex-shrink:0}
-.yt-vol-slider{flex:1;height:3px;accent-color:#00ff41;cursor:pointer}
+#frame{width:100%;border:none;height:100%;display:block}
+
 /* CM Drawer — persistent countermeasures above player bar */
-.cm-drawer{position:fixed;bottom:48px;left:0;right:0;z-index:9998;background:rgba(10,10,10,0.98);border-top:1px solid #333;font-family:'Courier New',monospace}
+.cm-drawer{position:fixed;bottom:0;left:0;right:0;z-index:9998;background:rgba(10,10,10,0.98);border-top:1px solid #333;font-family:'Courier New',monospace}
 .cm-drawer-bar{height:36px;display:flex;align-items:center;padding:0 16px;cursor:pointer;user-select:none;gap:12px}
 .cm-drawer-bar:hover{background:rgba(255,68,68,0.05)}
 .cm-drawer-bar h3{color:#ff4444;font-size:0.7rem;letter-spacing:2px;margin:0;white-space:nowrap}
@@ -801,7 +784,7 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
 .pt-volume{width:100%;height:4px;margin-top:6px;accent-color:#00ccff;cursor:pointer}
 .pt-now-playing{font-size:0.55rem;color:#00ccff;margin-top:4px;font-style:italic}
 .cm-dl-panel{border-color:#ff4444;margin-top:0}.cm-dl-title{font-size:0.65rem;color:#ff4444;letter-spacing:1px;font-weight:bold;margin-bottom:8px}.cm-dl-info{font-size:0.55rem;color:#666;margin-bottom:8px;line-height:1.4}.cm-dl-btns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}.cm-dl-btn{flex:1;min-width:120px;padding:8px;background:transparent;border:1px solid #00ff41;color:#00ff41;font-family:'Courier New',monospace;font-size:0.6rem;cursor:pointer;letter-spacing:1px;text-align:center}.cm-dl-btn:hover{background:#00ff41;color:#0a0a0a}.cm-dl-btn.blue{border-color:#00ccff;color:#00ccff}.cm-dl-btn.blue:hover{background:#00ccff;color:#0a0a0a}.cm-embed-label{font-size:0.55rem;color:#cc88ff;letter-spacing:1px;margin-bottom:4px}.cm-embed-wrap{position:relative;margin-bottom:8px}.cm-embed-pre{background:#111;border:1px solid #333;padding:6px;font-size:0.5rem;color:#888;overflow-x:auto;white-space:pre-wrap;word-break:break-all;margin:0;font-family:'Courier New',monospace}.cm-embed-copy{position:absolute;top:3px;right:3px;background:#0a0a0a;border:1px solid #cc88ff;color:#cc88ff;font-family:'Courier New',monospace;font-size:0.5rem;padding:2px 6px;cursor:pointer}
-@media(max-width:480px){.p-track{display:none}.player-bar{padding:0 10px;height:44px}.p-btn{width:32px;height:32px;font-size:0.7rem}.p-time{min-width:60px;font-size:0.55rem}#frame{height:calc(100% - 80px)}.cm-drawer{bottom:44px}.cm-drawer-bar{height:32px;padding:0 10px;gap:8px}.cm-drawer-bar h3{font-size:0.6rem;letter-spacing:1px}.cm-dot{width:6px;height:6px}.cm-dot-label{display:none}.cm-drawer.expanded .cm-drawer-content{grid-template-columns:1fr;max-height:60vh}.ht-freq-grid{grid-template-columns:repeat(3,1fr)}.pt-freq-grid{grid-template-columns:repeat(3,1fr)}#ytContainer{width:220px}#ytContainer iframe{height:124px}.cm-dl-btns{flex-direction:column}}
+@media(max-width:480px){#frame{height:100%}.cm-drawer{bottom:0}.cm-drawer-bar{height:32px;padding:0 10px;gap:8px}.cm-drawer-bar h3{font-size:0.6rem;letter-spacing:1px}.cm-dot{width:6px;height:6px}.cm-dot-label{display:none}.cm-drawer.expanded .cm-drawer-content{grid-template-columns:1fr;max-height:60vh}.ht-freq-grid{grid-template-columns:repeat(3,1fr)}.pt-freq-grid{grid-template-columns:repeat(3,1fr)}.cm-dl-btns{flex-direction:column}}
 </style>
 </head>
 <body>
@@ -897,42 +880,10 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
   </div>
   </div>
 </div>
-<div class="player-bar">
-  <button class="p-btn" id="pb" onclick="tp()">▶</button>
-  <div class="p-track">HIDDEN ORCHESTRA — EAST LONDON STREET <a href="https://www.tru-thoughts.co.uk" target="_blank" rel="noopener noreferrer" style="color:#ff6600;text-decoration:none;font-size:0.6rem;margin-left:6px" title="Tru Thoughts Records">TRU THOUGHTS</a></div>
-  <div class="p-wrap" id="pw"><div class="p-fill" id="pf"></div></div>
-  <div class="p-time" id="pt">0:00 / 11:13</div>
-  <div id="ytContainer"><div class="yt-drag" id="ytDrag"><span class="yt-drag-dots">≡≡≡</span><button class="yt-close" onclick="document.getElementById('ytContainer').classList.remove('yt-show')" title="Hide">✕</button></div><div id="ytPlayer"></div><div class="yt-vol-bar"><span class="yt-vol-icon">🔊</span><input type="range" class="yt-vol-slider" id="ytVol" min="0" max="100" value="100" oninput="setYtVol(this.value)" title="Volume"></div></div>
-</div>
+
 <script>
-var tag=document.createElement('script');tag.src='https://www.youtube.com/iframe_api';document.head.appendChild(tag);
-var ytP=null,ytReady=false,ytDuration=673,ytTimer=null;
-function onYouTubeIframeAPIReady(){
-  ytP=new YT.Player('ytPlayer',{height:'158',width:'280',videoId:'XGec4XPCKUQ',playerVars:{autoplay:0,controls:0,disablekb:1,fs:0,modestbranding:1,rel:0,playsinline:1},events:{onReady:function(){ytReady=true;ytDuration=ytP.getDuration()||673},onStateChange:function(e){if(e.data===YT.PlayerState.ENDED){document.getElementById('pb').textContent='▶';clearInterval(ytTimer);document.getElementById('ytContainer').classList.remove('yt-show')}}}});
-}
-function ytUpdateProgress(){
-  if(!ytP||!ytReady)return;
-  var cur=ytP.getCurrentTime()||0,dur=ytP.getDuration()||ytDuration;
-  var pf=document.getElementById('pf'),pt=document.getElementById('pt');
-  pf.style.width=(cur/dur*100)+'%';
-  function fmt(s){if(isNaN(s))return'0:00';var m=Math.floor(s/60),sec=Math.floor(s%60);return m+':'+(sec<10?'0':'')+sec}
-  pt.textContent=fmt(cur)+' / '+fmt(dur);
-}
 (function(){
-var pb=document.getElementById('pb'),pf=document.getElementById('pf'),pw=document.getElementById('pw'),pt=document.getElementById('pt'),fr=document.getElementById('frame');
-pw.addEventListener('click',function(e){if(ytP&&ytReady){var r=pw.getBoundingClientRect();var ratio=(e.clientX-r.left)/r.width;ytP.seekTo(ratio*(ytP.getDuration()||ytDuration),true)}});
-window.tp=function(){if(!ytP||!ytReady)return;var state=ytP.getPlayerState();if(state===YT.PlayerState.PLAYING){ytP.pauseVideo();pb.textContent='▶';clearInterval(ytTimer);document.getElementById('ytContainer').classList.remove('yt-show')}else{ytP.playVideo();pb.textContent='⏸';ytTimer=setInterval(ytUpdateProgress,250);document.getElementById('ytContainer').classList.add('yt-show')}};
-window.setYtVol=function(v){if(ytP&&ytReady)ytP.setVolume(parseInt(v))};
-// Draggable YT widget
-(function(){var c=document.getElementById('ytContainer'),h=document.getElementById('ytDrag'),ox=0,oy=0,sx=0,sy=0,dragging=false;
-h.addEventListener('mousedown',function(e){dragging=true;ox=e.clientX;oy=e.clientY;var r=c.getBoundingClientRect();sx=r.left;sy=r.top;e.preventDefault()});
-h.addEventListener('touchstart',function(e){var t=e.touches[0];dragging=true;ox=t.clientX;oy=t.clientY;var r=c.getBoundingClientRect();sx=r.left;sy=r.top;e.preventDefault()},{passive:false});
-function onMove(cx,cy){if(!dragging)return;var nx=sx+(cx-ox),ny=sy+(cy-oy);nx=Math.max(0,Math.min(window.innerWidth-c.offsetWidth,nx));ny=Math.max(0,Math.min(window.innerHeight-c.offsetHeight,ny));c.style.left=nx+'px';c.style.top=ny+'px';c.style.bottom='auto';c.style.right='auto'}
-document.addEventListener('mousemove',function(e){onMove(e.clientX,e.clientY)});
-document.addEventListener('touchmove',function(e){if(dragging){onMove(e.touches[0].clientX,e.touches[0].clientY);e.preventDefault()}},{passive:false});
-document.addEventListener('mouseup',function(){dragging=false});
-document.addEventListener('touchend',function(){dragging=false});
-})();
+var fr=document.getElementById('frame');
 // Copy embed code
 window.copyShellEmbed=function(id,btn){var text=document.getElementById(id).textContent;navigator.clipboard.writeText(text).then(function(){btn.textContent='\u2713 COPIED';setTimeout(function(){btn.textContent='COPY'},2000)}).catch(function(){var ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);btn.textContent='\u2713 COPIED';setTimeout(function(){btn.textContent='COPY'},2000)})};
 // Download standalone tone app
