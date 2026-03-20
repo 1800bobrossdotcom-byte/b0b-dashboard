@@ -16,31 +16,35 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; overflow: hidden; }
     body { background: #0a0a0a; color: #d4d4d4; font-family: 'Courier New', monospace; }
-    #map { width: 100%; height: calc(100vh - 60px); }
+    #map { width: 100%; height: calc(100vh - 44px); }
+    .leaflet-bottom { bottom: 36px !important; }
     .header {
       background: #0a0a0a;
       border-bottom: 1px solid #333;
-      padding: 0.5rem 1.5rem;
+      padding: 0 1rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 60px;
+      height: 44px;
+      position: relative;
+      z-index: 1003;
     }
-    .header h1 { color: #00ff41; font-size: 1.2rem; letter-spacing: 2px; }
+    .header h1 { color: #00ff41; font-size: 1.1rem; letter-spacing: 2px; white-space: nowrap; }
+    .header nav { display: flex; gap: 8px; align-items: center; }
     .header nav a {
       color: #00ccff;
       text-decoration: none;
-      margin-left: 1.5rem;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       border: 1px solid #00ccff;
-      padding: 0.3rem 0.8rem;
+      padding: 0.2rem 0.6rem;
       transition: all 0.3s;
     }
     .header nav a:hover { background: #00ccff; color: #000; }
     .legend {
       position: absolute;
-      bottom: 30px;
+      bottom: 46px;
       left: 10px;
       z-index: 1000;
       background: rgba(10,10,10,0.95);
@@ -66,26 +70,35 @@
       border: 1px solid rgba(255,255,255,0.3);
     }
     .filter-panel {
-      position: absolute;
-      top: 70px;
-      right: 10px;
-      z-index: 1000;
-      background: rgba(10,10,10,0.95);
-      border: 1px solid #333;
+      position: fixed;
+      top: 44px;
+      right: 0;
+      z-index: 1005;
+      width: 320px;
+      height: calc(100vh - 44px);
+      background: rgba(10,10,10,0.98);
+      border-left: 1px solid #333;
       font-family: 'Courier New', monospace;
       font-size: 0.75rem;
       color: #d4d4d4;
-      max-height: 85vh;
       overflow-y: auto;
-      transition: width 0.2s;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
       scrollbar-width: thin; scrollbar-color: #333 #0d0d0d;
     }
     .filter-panel::-webkit-scrollbar { width: 3px; }
     .filter-panel::-webkit-scrollbar-thumb { background: #333; }
+    .filter-panel.open { transform: translateX(0); }
+    .filter-close {
+      position: absolute; top: 10px; right: 14px;
+      color: #555; font-size: 1.2rem; cursor: pointer; z-index: 2;
+    }
+    .filter-close:hover { color: #ff4444; }
     .filter-header {
-      padding: 8px 14px; cursor: pointer; user-select: none;
+      padding: 10px 16px; cursor: pointer; user-select: none;
       display: flex; align-items: center; justify-content: space-between;
       border-bottom: 1px solid #222;
+      position: sticky; top: 0; background: rgba(10,10,10,0.98); z-index: 1;
     }
     .filter-header:hover { background: rgba(0,255,65,0.05); }
     .filter-header h3 { color: #00ff41; font-size: 0.8rem; margin: 0; }
@@ -99,7 +112,7 @@
     .filter-item input { margin-right: 6px; }
     .stats-bar {
       position: absolute;
-      top: 70px;
+      top: 54px;
       left: 10px;
       z-index: 1000;
       background: rgba(10,10,10,0.92);
@@ -145,7 +158,7 @@
     }
     .search-box {
       position: absolute;
-      top: 70px;
+      top: 54px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 1000;
@@ -163,26 +176,23 @@
     .search-box input::placeholder { color: #555; }
     .search-box input:focus { border-color: #00ff41; }
 
-    /* ===================== MOBILE TOGGLE BUTTONS ===================== */
-    .mobile-controls {
-      display: none;
+    /* ===================== FILTER TOGGLE BUTTON ===================== */
+    .filter-toggle {
       position: absolute;
-      top: 70px;
+      top: 54px;
       right: 10px;
       z-index: 1001;
-      gap: 6px;
-    }
-    .mobile-btn {
       background: rgba(10,10,10,0.95);
       border: 1px solid #333;
       color: #00ff41;
       font-family: 'Courier New', monospace;
       font-size: 0.7rem;
-      padding: 6px 10px;
+      padding: 6px 12px;
       cursor: pointer;
       letter-spacing: 1px;
+      transition: all 0.2s;
     }
-    .mobile-btn:hover, .mobile-btn.active {
+    .filter-toggle:hover, .filter-toggle.active {
       border-color: #00ff41;
       background: rgba(0,255,65,0.1);
     }
@@ -191,8 +201,8 @@
     .panel-overlay {
       display: none;
       position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.6);
-      z-index: 999;
+      background: rgba(0,0,0,0.5);
+      z-index: 1004;
     }
     .panel-overlay.visible { display: block; }
 
@@ -200,7 +210,7 @@
     .timeline-panel {
       display: none;
       position: fixed;
-      bottom: 0; left: 0; right: 0;
+      bottom: 36px; left: 0; right: 0;
       z-index: 1002;
       background: rgba(10,10,10,0.96);
       border-top: 1px solid #333;
@@ -248,54 +258,87 @@
       line-height: 1.4;
     }
 
+    /* ===================== COUNTERMEASURES DRAWER ===================== */
+    .cm-drawer {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 1003;
+      background: rgba(10,10,10,0.98);
+      border-top: 1px solid #333;
+      font-family: 'Courier New', monospace;
+    }
+    .cm-drawer-bar {
+      height: 36px;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      cursor: pointer;
+      user-select: none;
+      gap: 12px;
+    }
+    .cm-drawer-bar:hover { background: rgba(255,68,68,0.05); }
+    .cm-drawer-bar h3 {
+      color: #ff4444;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      margin: 0;
+      white-space: nowrap;
+    }
+    .cm-status-dots { display: flex; gap: 6px; align-items: center; }
+    .cm-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #333; transition: all 0.3s;
+    }
+    .cm-dot.active { background: #00ff41; box-shadow: 0 0 6px rgba(0,255,65,0.6); }
+    .cm-dot-label { font-size: 0.5rem; color: #555; letter-spacing: 0.5px; }
+    .cm-dot-label.active { color: #00ff41; }
+    .cm-drawer-chevron {
+      color: #555; font-size: 0.7rem; margin-left: auto;
+      transition: transform 0.3s;
+    }
+    .cm-drawer.expanded .cm-drawer-chevron { transform: rotate(180deg); }
+    .cm-drawer-content {
+      display: none;
+      padding: 0 16px 16px;
+      max-height: 50vh;
+      overflow-y: auto;
+      scrollbar-width: thin; scrollbar-color: #333 #0d0d0d;
+    }
+    .cm-drawer-content::-webkit-scrollbar { width: 3px; }
+    .cm-drawer-content::-webkit-scrollbar-thumb { background: #333; }
+    .cm-drawer.expanded .cm-drawer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 10px;
+    }
+
     /* ===================== MOBILE RESPONSIVE ===================== */
     @media (max-width: 768px) {
-      .header { padding: 0.4rem 0.8rem; height: 50px; }
-      .header h1 { font-size: 0.85rem; letter-spacing: 1px; }
-      .header nav a { font-size: 0.7rem; padding: 0.2rem 0.5rem; margin-left: 0.6rem; }
-      #map { height: calc(100vh - 50px); }
+      .header { height: 40px; padding: 0 0.6rem; }
+      .header h1 { font-size: 0.8rem; letter-spacing: 1px; }
+      .header nav a { font-size: 0.65rem; padding: 0.15rem 0.4rem; }
+      .header nav { gap: 4px; }
+      #map { height: calc(100vh - 40px); }
 
-      .search-box { top: 58px; }
-      .search-box input { width: calc(100vw - 100px); max-width: 280px; font-size: 16px; padding: 5px 10px; }
+      .stats-bar { top: 48px; font-size: 0.65rem; padding: 4px 8px; }
+      .search-box { top: 48px; }
+      .search-box input { width: calc(100vw - 120px); max-width: 220px; font-size: 16px; padding: 5px 10px; }
+      .filter-toggle { top: 48px; font-size: 0.6rem; padding: 4px 8px; }
 
-      .stats-bar {
-        top: auto; bottom: 8px; left: 50%;
-        transform: translateX(-50%);
-        font-size: 0.65rem; padding: 4px 10px;
-        white-space: nowrap;
-        border-radius: 2px;
-      }
+      .filter-panel { width: 85vw; max-width: 320px; top: 40px; height: calc(100vh - 40px); }
 
-      .mobile-controls { display: flex; }
+      .cm-drawer-bar { height: 32px; padding: 0 10px; gap: 8px; }
+      .cm-drawer-bar h3 { font-size: 0.6rem; letter-spacing: 1px; }
+      .cm-dot { width: 6px; height: 6px; }
+      .cm-dot-label { display: none; }
+      .cm-drawer.expanded .cm-drawer-content { grid-template-columns: 1fr; max-height: 60vh; }
 
-      .filter-panel {
-        position: fixed; top: 0; right: 0;
-        width: 280px; height: 100vh;
-        max-height: 100vh;
-        transform: translateX(100%);
-        transition: transform 0.3s ease;
-        border: none; border-left: 1px solid #333;
-        background: rgba(10,10,10,0.98);
-        -webkit-overflow-scrolling: touch;
-      }
-      .filter-panel.mobile-open {
-        transform: translateX(0);
-      }
-
-      .legend {
-        bottom: 36px; left: 8px;
-        max-width: 180px;
-        font-size: 0.65rem;
-      }
+      .legend { bottom: 40px; left: 8px; max-width: 160px; font-size: 0.65rem; }
       .legend-body { display: none; }
       .legend-header { padding: 6px 10px; }
-      .legend h3 { font-size: 0.75rem; }
-      .legend-dot { width: 10px; height: 10px; margin-right: 6px; }
 
       .leaflet-popup-content-wrapper { font-size: 0.75rem !important; max-width: 85vw !important; }
       .leaflet-popup-content { margin: 8px 10px !important; max-width: 250px; word-break: break-word; }
-      .popup-title { font-size: 0.8rem; }
-      .popup-context { font-size: 0.7rem; }
 
       .filter-item { margin: 5px 0; padding: 2px 0; }
       .filter-item label { font-size: 0.8rem; }
@@ -303,26 +346,25 @@
         width: 18px; height: 18px; margin-right: 8px; vertical-align: middle;
       }
 
-      /* Leaflet zoom controls — bottom right on mobile for thumb access */
       .leaflet-top.leaflet-left { top: auto !important; bottom: 40px !important; left: auto !important; right: 10px !important; }
       .leaflet-control-zoom a { width: 36px !important; height: 36px !important; line-height: 36px !important; font-size: 18px !important; }
 
-      /* Timeline panel mobile */
-      .timeline-panel { max-height: 50vh; }
-      #timelineCanvas { height: 160px; }
+      .timeline-panel { max-height: 45vh; bottom: 32px; }
+      #timelineCanvas { height: 150px; }
+      .leaflet-bottom { bottom: 32px !important; }
     }
 
     @media (max-width: 400px) {
-      .header h1 { font-size: 0.7rem; letter-spacing: 0.5px; }
+      .header h1 { font-size: 0.65rem; letter-spacing: 0.5px; }
       .header nav { display: flex; flex-wrap: nowrap; gap: 2px; }
-      .header nav a { font-size: 0.55rem; padding: 0.15rem 0.35rem; margin-left: 0.2rem; white-space: nowrap; }
-      .search-box input { max-width: 180px; }
-      .filter-panel { width: 100vw; }
-      .legend { max-width: 140px; }
+      .header nav a { font-size: 0.5rem; padding: 0.1rem 0.3rem; white-space: nowrap; }
+      .search-box input { max-width: 160px; }
+      .filter-panel { width: 100vw; max-width: none; }
+      .legend { max-width: 130px; }
     }
 
     /* ===================== COUNTERMEASURE STATUS ===================== */
-    .cm-panel { margin-top: 8px; padding: 6px 8px; border: 1px solid #333; background: rgba(0,0,0,0.3); }
+    .cm-panel { padding: 10px 12px; border: 1px solid #333; background: rgba(0,0,0,0.3); border-radius: 2px; }
     .cm-toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; }
     .cm-toggle input[type="checkbox"] { width: 16px; height: 16px; accent-color: #ff4444; }
     .cm-label { font-size: 0.65rem; color: #ff4444; letter-spacing: 1px; font-weight: bold; }
@@ -330,14 +372,14 @@
     .cm-status.active { color: #00ff41; }
     .cm-info { font-size: 0.55rem; color: #666; margin-top: 4px; line-height: 1.4; }
     /* ===================== HEALING TONES ===================== */
-    .ht-freq-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 6px; }
+    .ht-freq-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; margin-top: 6px; }
     .ht-freq-btn { padding: 4px 2px; font-size: 0.55rem; font-family: 'Courier New', monospace; background: rgba(0,0,0,0.4); border: 1px solid #333; color: #888; cursor: pointer; text-align: center; transition: all 0.2s; }
     .ht-freq-btn:hover { border-color: #00ff41; color: #00ff41; }
     .ht-freq-btn.active { border-color: #00ff41; color: #00ff41; background: rgba(0,255,65,0.08); box-shadow: 0 0 6px rgba(0,255,65,0.15); }
     .ht-volume { width: 100%; height: 4px; margin-top: 6px; accent-color: #00ff41; cursor: pointer; }
     .ht-now-playing { font-size: 0.55rem; color: #00ff41; margin-top: 4px; font-style: italic; }
     /* ===================== PROTECTIVE TONES ===================== */
-    .pt-freq-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 6px; }
+    .pt-freq-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; margin-top: 6px; }
     .pt-freq-btn { padding: 4px 2px; font-size: 0.55rem; font-family: 'Courier New', monospace; background: rgba(0,0,0,0.4); border: 1px solid #333; color: #888; cursor: pointer; text-align: center; transition: all 0.2s; }
     .pt-freq-btn:hover { border-color: #00ccff; color: #00ccff; }
     .pt-freq-btn.active { border-color: #00ccff; color: #00ccff; background: rgba(0,204,255,0.08); box-shadow: 0 0 6px rgba(0,204,255,0.15); }
@@ -363,16 +405,15 @@
   <button onclick="resetFilters()" style="background:#0a0a0a;color:#00ff41;border:1px solid #333;padding:4px 8px;font-family:Courier New,monospace;font-size:0.7rem;cursor:pointer;margin-left:4px" title="Reset all filters">RESET</button>
 </div>
 
-<div class="mobile-controls">
-  <button class="mobile-btn" id="mobileFilterBtn" onclick="toggleMobileFilter()">FILTERS</button>
-</div>
+<div class="filter-toggle" id="filterToggle" onclick="toggleFilterPanel()">FILTERS</div>
 
-<div class="panel-overlay" id="panelOverlay" onclick="closeMobileFilter()"></div>
+<div class="panel-overlay" id="panelOverlay" onclick="closeFilterPanel()"></div>
 
 <div class="stats-bar" id="statsBar">Loading...</div>
 
 <div class="filter-panel" id="filterPanel">
-  <div class="filter-header" onclick="toggleFilterPanel()">
+  <span class="filter-close" onclick="closeFilterPanel()">✕</span>
+  <div class="filter-header" onclick="toggleFilterBody()">
     <h3>FILTERS</h3>
     <span class="chevron" id="filterChevron">▾</span>
   </div>
@@ -457,23 +498,44 @@
   <div class="filter-item" style="margin-top:2px"><a href="/download" style="color:#ff4444;text-decoration:none;font-size:0.7rem">📦 DOWNLOAD OFFLINE BACKUP (ZIP)</a></div>
   <div class="filter-item" style="margin-top:2px"><a href="/report#methodology" target="_blank" style="color:#00ccff;text-decoration:none;font-size:0.7rem">📋 SOURCE METHODOLOGY</a></div>
   <div class="filter-item" style="margin-top:2px;color:#888;font-size:0.6rem">Deep Links: /map?type=X&section=Y&marker=Z</div>
-  <h3 style="margin-top:10px;color:#ff4444">COUNTERMEASURES</h3>
+  </div>
+</div>
+
+<!-- ===================== COUNTERMEASURES PERSISTENT DRAWER ===================== -->
+<div class="cm-drawer" id="cmDrawer">
+  <div class="cm-drawer-bar" onclick="toggleCmDrawer()">
+    <h3>🛡️ COUNTERMEASURES</h3>
+    <div class="cm-status-dots">
+      <span class="cm-dot" id="cmDotUltrasonic" title="Ultrasonic Shield"></span>
+      <span class="cm-dot-label" id="cmDotLabelUltrasonic">SHIELD</span>
+      <span class="cm-dot active" id="cmDotWebrtc" title="WebRTC Block"></span>
+      <span class="cm-dot-label active" id="cmDotLabelWebrtc">WEBRTC</span>
+      <span class="cm-dot active" id="cmDotCanvas" title="Canvas Guard"></span>
+      <span class="cm-dot-label active" id="cmDotLabelCanvas">CANVAS</span>
+      <span class="cm-dot" id="cmDotHealing" title="Healing Tones"></span>
+      <span class="cm-dot-label" id="cmDotLabelHealing">TONES</span>
+      <span class="cm-dot" id="cmDotProtective" title="Protective Tones"></span>
+      <span class="cm-dot-label active" id="cmDotLabelProtective">PROTECT</span>
+    </div>
+    <span class="cm-drawer-chevron">▲</span>
+  </div>
+  <div class="cm-drawer-content" id="cmDrawerContent">
   <div class="cm-panel">
     <label class="cm-toggle"><input type="checkbox" id="cmUltrasonic" onchange="toggleUltrasonicCM(this.checked)"><span class="cm-label">ULTRASONIC SHIELD</span></label>
     <div class="cm-status" id="cmStatus">INACTIVE</div>
     <div class="cm-info">🌊 WATER PLANET OPTIMIZED — Humidity-adaptive frequency sweep across 20–22kHz. Atmospheric water vapor attenuates ultrasound non-uniformly; our sweep ensures full-band coverage through variable moisture. Jams cross-device tracking beacons &amp; acoustic data exfiltration. 🐾 ANIMAL-SAFE: above 20kHz at -60dB, safe for all pets.</div>
   </div>
-  <div class="cm-panel" style="margin-top:4px">
+  <div class="cm-panel">
     <label class="cm-toggle"><input type="checkbox" id="cmWebrtc" onchange="toggleWebRTCBlock(this.checked)" checked><span class="cm-label">WebRTC LEAK BLOCK</span></label>
     <div class="cm-status active" id="cmWebrtcStatus">ACTIVE — local IP masked</div>
     <div class="cm-info">Prevents WebRTC from exposing your real local/public IP addresses through STUN/TURN requests. Blocks a common browser fingerprinting and de-anonymization vector.</div>
   </div>
-  <div class="cm-panel" style="margin-top:4px">
+  <div class="cm-panel">
     <label class="cm-toggle"><input type="checkbox" id="cmCanvas" onchange="toggleCanvasGuard(this.checked)" checked><span class="cm-label">CANVAS FINGERPRINT GUARD</span></label>
     <div class="cm-status active" id="cmCanvasStatus">ACTIVE — noise injected</div>
     <div class="cm-info">Injects imperceptible noise into canvas readback operations, defeating canvas fingerprinting — a technique that uniquely identifies browsers by rendering differences.</div>
   </div>
-  <div class="cm-panel" style="margin-top:4px;border-color:#00ff41">
+  <div class="cm-panel" style="border-color:#00ff41">
     <label class="cm-toggle"><input type="checkbox" id="cmHealing" onchange="toggleHealingTones(this.checked)"><span class="cm-label" style="color:#00ff41">🎵 HEALING TONES</span></label>
     <div class="cm-status" id="cmHealingStatus">INACTIVE</div>
     <div class="ht-freq-grid" id="htFreqGrid">
@@ -492,7 +554,7 @@
     <div class="ht-now-playing" id="htNowPlaying"></div>
     <div class="cm-info">🌊 WATER PLANET OPTIMIZED — Solfeggio frequencies with sub-harmonic body-water resonance. Your body is ~60% water — each tone is paired with its sub-octave to create deeper cymatics patterns that resonate with the water you carry and swim through. 🐾 ANIMAL-SAFE: 174–963 Hz at gentle volume, safe for all pets.</div>
   </div>
-  <div class="cm-panel" style="margin-top:4px;border-color:#00ccff">
+  <div class="cm-panel" style="border-color:#00ccff">
     <label class="cm-toggle"><input type="checkbox" id="cmProtective" onchange="toggleProtectiveTones(this.checked)"><span class="cm-label" style="color:#00ccff">🛡️ PROTECTIVE TONES</span></label>
     <div class="cm-status" id="cmProtectiveStatus">INACTIVE</div>
     <div class="pt-freq-grid" id="ptFreqGrid">
@@ -579,35 +641,53 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
 <script>
 // ===================== MAP INIT =====================
-// Filter panel toggle (desktop)
+// Filter panel slide-in/out
 function toggleFilterPanel() {
+  var panel = document.getElementById('filterPanel');
+  var overlay = document.getElementById('panelOverlay');
+  var btn = document.getElementById('filterToggle');
+  var isOpen = panel.classList.toggle('open');
+  overlay.classList.toggle('visible', isOpen);
+  btn.classList.toggle('active', isOpen);
+}
+function closeFilterPanel() {
+  document.getElementById('filterPanel').classList.remove('open');
+  document.getElementById('panelOverlay').classList.remove('visible');
+  document.getElementById('filterToggle').classList.remove('active');
+}
+// Filter body collapse (inside panel)
+function toggleFilterBody() {
   var body = document.getElementById('filterBody');
   var chevron = document.getElementById('filterChevron');
   body.classList.toggle('collapsed');
   chevron.classList.toggle('collapsed');
 }
-
-// Mobile filter panel
-function toggleMobileFilter() {
-  var panel = document.getElementById('filterPanel');
-  var overlay = document.getElementById('panelOverlay');
-  var btn = document.getElementById('mobileFilterBtn');
-  var isOpen = panel.classList.toggle('mobile-open');
-  overlay.classList.toggle('visible', isOpen);
-  btn.classList.toggle('active', isOpen);
-  // Ensure filter body is expanded when opening on mobile
-  if (isOpen) {
-    document.getElementById('filterBody').classList.remove('collapsed');
-    document.getElementById('filterChevron').classList.remove('collapsed');
-  }
+// Countermeasures drawer
+function toggleCmDrawer() {
+  document.getElementById('cmDrawer').classList.toggle('expanded');
 }
-function closeMobileFilter() {
-  document.getElementById('filterPanel').classList.remove('mobile-open');
-  document.getElementById('panelOverlay').classList.remove('visible');
-  document.getElementById('mobileFilterBtn').classList.remove('active');
+// Auto-update countermeasure status dots
+function updateCmDots() {
+  var pairs = [
+    ['cmUltrasonic', 'cmDotUltrasonic', 'cmDotLabelUltrasonic'],
+    ['cmWebrtc', 'cmDotWebrtc', 'cmDotLabelWebrtc'],
+    ['cmCanvas', 'cmDotCanvas', 'cmDotLabelCanvas'],
+    ['cmHealing', 'cmDotHealing', 'cmDotLabelHealing'],
+    ['cmProtective', 'cmDotProtective', 'cmDotLabelProtective']
+  ];
+  pairs.forEach(function(p) {
+    var cb = document.getElementById(p[0]);
+    var dot = document.getElementById(p[1]);
+    var label = document.getElementById(p[2]);
+    if (cb && dot) {
+      dot.classList.toggle('active', cb.checked);
+      if (label) label.classList.toggle('active', cb.checked);
+    }
+  });
 }
+setInterval(updateCmDots, 500);
 
-// Auto-collapse filter panel on mobile load
+// Auto-collapse filter body on mobile load
 if (window.innerWidth <= 768) {
   document.getElementById('filterBody').classList.add('collapsed');
   document.getElementById('filterChevron').classList.add('collapsed');
@@ -2744,7 +2824,7 @@ function toggleDataLayer(layer) {
   var btn = document.createElement('button');
   btn.id = 'shareLinkBtn';
   btn.textContent = '🔗 Share Link';
-  btn.style.cssText = 'position:fixed;bottom:12px;right:12px;z-index:1100;background:#0a0a0a;color:#00ff41;border:1px solid #00ff41;padding:6px 12px;font-family:Courier New,monospace;font-size:0.75rem;cursor:pointer;letter-spacing:1px';
+  btn.style.cssText = 'position:fixed;bottom:48px;right:12px;z-index:1100;background:#0a0a0a;color:#00ff41;border:1px solid #00ff41;padding:6px 12px;font-family:Courier New,monospace;font-size:0.75rem;cursor:pointer;letter-spacing:1px';
   btn.addEventListener('mouseenter', function() { btn.style.background = '#00ff41'; btn.style.color = '#0a0a0a'; });
   btn.addEventListener('mouseleave', function() { btn.style.background = '#0a0a0a'; btn.style.color = '#00ff41'; });
   btn.addEventListener('click', function() {
@@ -3296,7 +3376,7 @@ function setProtectiveVolume(val) {
     { sel: '.header nav', label: 'NAV LINKS' },
     { sel: '.filter-header h3', label: 'FILTER HEADING' },
     { sel: '#statsBar', label: 'STATS BAR', dynamic: true }, // updates legitimately via updateStats()
-    { sel: 'h3[style*="color:#ff4444"]', label: 'COUNTERMEASURES HEADING' }
+    { sel: '.cm-drawer-bar h3', label: 'CM DRAWER HEADING' }
   ];
 
   var snapshots = {};
@@ -3573,7 +3653,7 @@ function setProtectiveVolume(val) {
       // Show subtle indicator
       var indicator = document.createElement('div');
       indicator.id = 'canaryIndicator';
-      indicator.style.cssText = 'position:fixed;bottom:30px;left:12px;z-index:1100;background:#1a0a00;border:1px solid #ff6600;color:#ff6600;padding:4px 10px;font-family:Courier New,monospace;font-size:0.6rem;letter-spacing:1px;border-radius:2px;cursor:help;opacity:0.8';
+      indicator.style.cssText = 'position:fixed;bottom:48px;left:12px;z-index:1100;background:#1a0a00;border:1px solid #ff6600;color:#ff6600;padding:4px 10px;font-family:Courier New,monospace;font-size:0.6rem;letter-spacing:1px;border-radius:2px;cursor:help;opacity:0.8';
       indicator.textContent = '⚠ ' + blockedCount + '/' + total + ' CDN BLOCKED';
       indicator.title = 'Blocked: ' + blockedNames.join(', ') + '\nThis indicates targeted blocking, not a general outage.';
       document.body.appendChild(indicator);
