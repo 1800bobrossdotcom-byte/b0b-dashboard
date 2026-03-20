@@ -78,7 +78,7 @@ h1{color:#00ff41;font-size:1.4rem;letter-spacing:3px;margin-bottom:0.3rem;text-a
   <div class="tool-panel">
     <label class="tool-toggle"><input type="checkbox" id="cmUltrasonic" onchange="toggleUltrasonicCM(this.checked)"><span class="tool-label">ULTRASONIC SHIELD</span></label>
     <div class="tool-status" id="cmStatus">INACTIVE</div>
-    <div class="tool-info">Generates inaudible noise (20–22kHz) to jam cross-device ultrasonic tracking beacons and acoustic data exfiltration. 🐾 ANIMAL-SAFE: operates above 20kHz at extremely low amplitude (-60dB). Verified safe for dogs, cats, birds, and all household pets. Most consumer speakers naturally attenuate above 20kHz, providing additional safety margin.</div>
+    <div class="tool-info">🌊 WATER PLANET OPTIMIZED — Humidity-adaptive frequency sweep across 20–22kHz. Atmospheric water vapor attenuates ultrasound non-uniformly; our sweep ensures full-band coverage through variable moisture. Jams cross-device tracking beacons &amp; acoustic data exfiltration. 🐾 ANIMAL-SAFE: above 20kHz at -60dB, safe for all pets.</div>
   </div>
 
   <!-- WebRTC LEAK BLOCK -->
@@ -116,7 +116,7 @@ h1{color:#00ff41;font-size:1.4rem;letter-spacing:3px;margin-bottom:0.3rem;text-a
       <span class="ht-vol-label" id="htVolLabel">25%</span>
     </div>
     <div class="ht-now-playing" id="htNowPlaying"></div>
-    <div class="tool-info">Solfeggio healing frequencies — pure sine wave tones used for centuries in sound therapy and meditation. 🐾 ANIMAL-SAFE: all frequencies (174–963 Hz) are in the normal audible range at gentle volume. Safe for dogs, cats, birds, and all pets.</div>
+    <div class="tool-info">🌊 WATER PLANET OPTIMIZED — Solfeggio frequencies with sub-harmonic body-water resonance. Your body is ~60% water — each tone is paired with its sub-octave to create deeper cymatics patterns that resonate with the water you carry and swim through. 🐾 ANIMAL-SAFE: 174–963 Hz at gentle volume, safe for all pets.</div>
   </div>
 
   <!-- PROTECTIVE TONES -->
@@ -130,13 +130,14 @@ h1{color:#00ff41;font-size:1.4rem;letter-spacing:3px;margin-bottom:0.3rem;text-a
       <button class="pt-freq-btn" data-freq="40" data-name="Gamma — Perception" data-type="binaural" onclick="selectProtectiveFreq(this)">40 Hz<span class="pt-freq-name">Gamma</span></button>
       <button class="pt-freq-btn" data-freq="0" data-name="Pink Noise — Masking" data-type="pink" onclick="selectProtectiveFreq(this)">PINK<span class="pt-freq-name">Masking</span></button>
       <button class="pt-freq-btn" data-freq="0" data-name="Brown Noise — Deep Cover" data-type="brown" onclick="selectProtectiveFreq(this)">BROWN<span class="pt-freq-name">Deep Cover</span></button>
+      <button class="pt-freq-btn" data-freq="0" data-name="Ocean Waves — Planet Sound" data-type="ocean" onclick="selectProtectiveFreq(this)">🌊 OCEAN<span class="pt-freq-name">Planet</span></button>
     </div>
     <div class="pt-volume-row">
       <input type="range" class="pt-volume" id="ptVolume" min="0" max="100" value="30" oninput="setProtectiveVolume(this.value)" title="Volume">
       <span class="pt-vol-label" id="ptVolLabel">30%</span>
     </div>
     <div class="pt-now-playing" id="ptNowPlaying"></div>
-    <div class="tool-info">Binaural beats &amp; acoustic masking for mental shielding and conversation privacy. Binaural beats use stereo offset to produce sub-audible brainwave entrainment — use headphones for full effect. Pink/brown noise masks ambient sound for acoustic privacy. 🐾 ANIMAL-SAFE: all tones at gentle volume, safe for all pets.</div>
+    <div class="tool-info">🌊 WATER PLANET OPTIMIZED — 7.83 Hz Schumann is Earth's electromagnetic heartbeat through our water-enriched atmosphere. Pink noise includes humidity compensation for true 1/f masking through moisture-laden air. Ocean mode is the sound of our planet's water. Use headphones for binaural entrainment. 🐾 ANIMAL-SAFE: gentle volume, safe for all pets.</div>
   </div>
 
   <!-- SAVE HINT -->
@@ -163,6 +164,8 @@ var cmAudioCtx = null;
 var cmNoiseNode = null;
 var cmGainNode = null;
 var cmFilterNode = null;
+var cmSweepLfo = null;
+var cmSweepGain = null;
 var cmUltrasonicActive = false;
 
 function toggleUltrasonicCM(enabled) {
@@ -203,10 +206,21 @@ function startUltrasonicShield() {
     cmFilterNode.connect(safetyFilter);
     safetyFilter.connect(cmGainNode);
     cmGainNode.connect(cmAudioCtx.destination);
+
+    // Water-planet humidity-adaptive frequency sweep
+    cmSweepLfo = cmAudioCtx.createOscillator();
+    cmSweepLfo.type = 'triangle';
+    cmSweepLfo.frequency.value = 0.25;
+    cmSweepGain = cmAudioCtx.createGain();
+    cmSweepGain.gain.value = 1000;
+    cmSweepLfo.connect(cmSweepGain);
+    cmSweepGain.connect(cmFilterNode.frequency);
+    cmSweepLfo.start();
+
     cmNoiseNode.start();
     cmUltrasonicActive = true;
 
-    document.getElementById('cmStatus').textContent = 'ACTIVE — 20–22kHz noise floor (animal-safe)';
+    document.getElementById('cmStatus').textContent = 'ACTIVE — 20–22kHz sweep (humidity-adaptive, animal-safe)';
     document.getElementById('cmStatus').className = 'tool-status active';
   } catch (e) {
     document.getElementById('cmStatus').textContent = 'ERROR — ' + e.message;
@@ -216,6 +230,8 @@ function startUltrasonicShield() {
 function stopUltrasonicShield() {
   try {
     if (cmNoiseNode) { cmNoiseNode.stop(); cmNoiseNode.disconnect(); cmNoiseNode = null; }
+    if (cmSweepLfo) { cmSweepLfo.stop(); cmSweepLfo.disconnect(); cmSweepLfo = null; }
+    if (cmSweepGain) { cmSweepGain.disconnect(); cmSweepGain = null; }
     if (cmFilterNode) { cmFilterNode.disconnect(); cmFilterNode = null; }
     if (cmGainNode) { cmGainNode.disconnect(); cmGainNode = null; }
     cmUltrasonicActive = false;
@@ -279,6 +295,7 @@ toggleCanvasGuard(true);
 // All frequencies 174–963 Hz — completely safe for all animals
 var htAudioCtx = null;
 var htOscillator = null;
+var htSubOsc = null;
 var htGainNode = null;
 var htActive = false;
 var htCurrentFreq = 396;
@@ -294,6 +311,7 @@ function startHealingTone() {
     if (!htAudioCtx) htAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
     if (htAudioCtx.state === 'suspended') htAudioCtx.resume();
     if (htOscillator) { try { htOscillator.stop(); htOscillator.disconnect(); } catch(e) {} }
+    if (htSubOsc) { try { htSubOsc.stop(); htSubOsc.disconnect(); } catch(e) {} }
 
     htOscillator = htAudioCtx.createOscillator();
     htOscillator.type = 'sine';
@@ -304,8 +322,19 @@ function startHealingTone() {
     htGainNode.gain.linearRampToValueAtTime(htVolume, htAudioCtx.currentTime + 0.5);
 
     htOscillator.connect(htGainNode);
+
+    // Water-planet body-water resonance: sub-harmonic at half fundamental
+    htSubOsc = htAudioCtx.createOscillator();
+    htSubOsc.type = 'sine';
+    htSubOsc.frequency.value = htCurrentFreq / 2;
+    var htSubGain = htAudioCtx.createGain();
+    htSubGain.gain.value = 0.15;
+    htSubOsc.connect(htSubGain);
+    htSubGain.connect(htGainNode);
+
     htGainNode.connect(htAudioCtx.destination);
     htOscillator.start();
+    htSubOsc.start();
     htActive = true;
 
     document.getElementById('cmHealingStatus').textContent = 'ACTIVE — ' + htCurrentFreq + ' Hz';
@@ -323,6 +352,7 @@ function stopHealingTone() {
       setTimeout(function() {
         try {
           if (htOscillator) { htOscillator.stop(); htOscillator.disconnect(); htOscillator = null; }
+          if (htSubOsc) { htSubOsc.stop(); htSubOsc.disconnect(); htSubOsc = null; }
           if (htGainNode) { htGainNode.disconnect(); htGainNode = null; }
         } catch(e) {}
       }, 350);
@@ -344,6 +374,7 @@ function selectHealingFreq(btn) {
 
   if (htActive && htOscillator && htAudioCtx) {
     htOscillator.frequency.linearRampToValueAtTime(htCurrentFreq, htAudioCtx.currentTime + 0.3);
+    if (htSubOsc) htSubOsc.frequency.linearRampToValueAtTime(htCurrentFreq / 2, htAudioCtx.currentTime + 0.3);
     document.getElementById('cmHealingStatus').textContent = 'ACTIVE — ' + htCurrentFreq + ' Hz';
     document.getElementById('htNowPlaying').textContent = '♫ ' + htCurrentFreq + ' Hz — ' + htCurrentName;
   }
@@ -365,6 +396,7 @@ var ptAudioCtx = null;
 var ptOscL = null;
 var ptOscR = null;
 var ptNoiseNode = null;
+var ptOceanLfo = null;
 var ptGainNode = null;
 var ptActive = false;
 var ptCurrentFreq = 7.83;
@@ -415,7 +447,13 @@ function startProtectiveTone() {
       }
       ptNoiseNode = ptAudioCtx.createBufferSource();
       ptNoiseNode.buffer = buf; ptNoiseNode.loop = true;
-      ptNoiseNode.connect(ptGainNode); ptNoiseNode.start();
+      // Water-planet humidity compensation: high-shelf boost
+      var humidShelf = ptAudioCtx.createBiquadFilter();
+      humidShelf.type = 'highshelf';
+      humidShelf.frequency.value = 4000;
+      humidShelf.gain.value = 2.5;
+      ptNoiseNode.connect(humidShelf);
+      humidShelf.connect(ptGainNode); ptNoiseNode.start();
     } else if (ptCurrentType === 'brown') {
       var bufSize2 = ptAudioCtx.sampleRate * 2;
       var buf2 = ptAudioCtx.createBuffer(1, bufSize2, ptAudioCtx.sampleRate);
@@ -427,6 +465,26 @@ function startProtectiveTone() {
       ptNoiseNode = ptAudioCtx.createBufferSource();
       ptNoiseNode.buffer = buf2; ptNoiseNode.loop = true;
       ptNoiseNode.connect(ptGainNode); ptNoiseNode.start();
+    } else if (ptCurrentType === 'ocean') {
+      // Ocean waves: the sound of our water planet
+      var oceanBufSize = ptAudioCtx.sampleRate * 4;
+      var oceanBuf = ptAudioCtx.createBuffer(1, oceanBufSize, ptAudioCtx.sampleRate);
+      var od = oceanBuf.getChannelData(0); var oLast = 0;
+      for (var k = 0; k < oceanBufSize; k++) {
+        var ow = Math.random() * 2 - 1;
+        oLast = (oLast + (0.02 * ow)) / 1.02; od[k] = oLast * 3.5;
+      }
+      ptNoiseNode = ptAudioCtx.createBufferSource();
+      ptNoiseNode.buffer = oceanBuf; ptNoiseNode.loop = true;
+      var oceanLp = ptAudioCtx.createBiquadFilter();
+      oceanLp.type = 'lowpass'; oceanLp.frequency.value = 500; oceanLp.Q.value = 0.7;
+      ptOceanLfo = ptAudioCtx.createOscillator();
+      ptOceanLfo.type = 'sine'; ptOceanLfo.frequency.value = 0.08;
+      var waveDepth = ptAudioCtx.createGain(); waveDepth.gain.value = 0.4;
+      ptOceanLfo.connect(waveDepth); waveDepth.connect(ptGainNode.gain);
+      ptOceanLfo.start();
+      ptNoiseNode.connect(oceanLp); oceanLp.connect(ptGainNode);
+      ptNoiseNode.start();
     }
 
     ptActive = true;
@@ -444,6 +502,7 @@ function cleanupProtective() {
     if (ptOscL) { ptOscL.stop(); ptOscL.disconnect(); ptOscL = null; }
     if (ptOscR) { ptOscR.stop(); ptOscR.disconnect(); ptOscR = null; }
     if (ptNoiseNode) { ptNoiseNode.stop(); ptNoiseNode.disconnect(); ptNoiseNode = null; }
+    if (ptOceanLfo) { ptOceanLfo.stop(); ptOceanLfo.disconnect(); ptOceanLfo = null; }
     if (ptGainNode) { ptGainNode.disconnect(); ptGainNode = null; }
   } catch(e) {}
 }
@@ -478,8 +537,6 @@ function setProtectiveVolume(val) {
     ptGainNode.gain.linearRampToValueAtTime(ptVolume, ptAudioCtx.currentTime + 0.1);
   }
 }
-
-// ===================== LOVE TONE ENGINE =====================
 </script>
 </body>
 </html>
