@@ -1648,14 +1648,127 @@ function updateVU() {
 }
 
 /* ═══════════════════ KEYBOARD SHORTCUTS ═══════════════════ */
+var KEY_PAD_MAP = {
+  'Digit1':'s174','Digit2':'s285','Digit3':'s396','Digit4':'s417','Digit5':'s432',
+  'Digit6':'s528','Digit7':'s639','Digit8':'s741','Digit9':'s852','Digit0':'s963'
+};
+var heldKeys = {};
+
 document.addEventListener('keydown', function(e) {
-  if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') return;
+
+  /* ── Pad triggers: 1-0 = solfeggio, Q-P = chant/bin/noise row ── */
+  if (KEY_PAD_MAP[e.code] && !heldKeys[e.code]) {
+    heldKeys[e.code] = true;
+    var pad = getPadById(KEY_PAD_MAP[e.code]);
+    if (pad) { if (voices[pad.id]) stopVoice(pad.id); else startVoice(pad, 0.15); }
+    return;
+  }
+
+  /* ── Transport ── */
   if (e.code === 'Space') { e.preventDefault(); toggleSeq(); }
   if (e.code === 'Escape') stopAll();
+
+  /* ── Recording ── */
   if (e.code === 'KeyR' && !e.ctrlKey && !e.metaKey) toggleRecording();
+
+  /* ── Mic ── */
   if (e.code === 'KeyM') toggleMic();
+
+  /* ── Evolve ── */
   if (e.code === 'KeyE') toggleEvolve();
+
+  /* ── Solo ── */
+  if (e.code === 'KeyS') soloMode();
+
+  /* ── Random pattern ── */
+  if (e.code === 'KeyN') randomSeq();
+
+  /* ── Clear pattern ── */
+  if (e.code === 'KeyX') clearSeq();
+
+  /* ── Pattern slots A/B/C/D ── */
+  if (e.code === 'KeyA') loadPattern(0);
+  if (e.code === 'KeyB') loadPattern(1);
+  if (e.code === 'KeyC') loadPattern(2);
+  if (e.code === 'KeyD') loadPattern(3);
+
+  /* ── Tab switching ── */
+  if (e.code === 'F1') { e.preventDefault(); switchTab('mixer'); }
+  if (e.code === 'F2') { e.preventDefault(); switchTab('tone'); }
+  if (e.code === 'F3') { e.preventDefault(); switchTab('fx'); }
+  if (e.code === 'F4') { e.preventDefault(); switchTab('mic'); }
+
+  /* ── Master volume: +/- ── */
+  if (e.code === 'Equal' || e.code === 'NumpadAdd') {
+    var mv = Math.min(100, Math.round(master * 100) + 5);
+    document.getElementById('masterRange').value = mv; setMaster(mv);
+  }
+  if (e.code === 'Minus' || e.code === 'NumpadSubtract') {
+    var mv = Math.max(0, Math.round(master * 100) - 5);
+    document.getElementById('masterRange').value = mv; setMaster(mv);
+  }
+
+  /* ── BPM: [ / ] ── */
+  if (e.code === 'BracketLeft') {
+    seqBPM = Math.max(30, seqBPM - 5);
+    document.getElementById('seqBPM').value = seqBPM; setSeqBPM(seqBPM);
+  }
+  if (e.code === 'BracketRight') {
+    seqBPM = Math.min(240, seqBPM + 5);
+    document.getElementById('seqBPM').value = seqBPM; setSeqBPM(seqBPM);
+  }
+
+  /* ── Export shortcuts ── */
+  if (e.code === 'KeyW' && e.ctrlKey) { e.preventDefault(); exportWAV(); }
+
+  /* ── Help overlay: ? ── */
+  if (e.code === 'Slash' && e.shiftKey) toggleHelp();
 });
+
+document.addEventListener('keyup', function(e) {
+  delete heldKeys[e.code];
+});
+
+/* ── Help overlay ── */
+function toggleHelp() {
+  var el = document.getElementById('helpOverlay');
+  if (el) { el.remove(); return; }
+  var div = document.createElement('div');
+  div.id = 'helpOverlay';
+  div.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9999;display:flex;align-items:center;justify-content:center;cursor:pointer';
+  div.innerHTML = '<div style="color:#d4d4d4;font-size:0.6rem;line-height:2;max-width:480px;padding:24px;font-family:monospace" onclick="event.stopPropagation()">'
+    + '<h3 style="color:#ff4444;margin:0 0 12px;font-size:0.85rem">KEYBOARD SHORTCUTS</h3>'
+    + '<div style="columns:2;column-gap:32px">'
+    + '<b style="color:#ff6b6b">PADS</b><br>'
+    + '1-0 &nbsp;&nbsp; Solfeggio pads<br><br>'
+    + '<b style="color:#ff6b6b">TRANSPORT</b><br>'
+    + 'Space &nbsp; Play / Stop seq<br>'
+    + 'Esc &nbsp;&nbsp;&nbsp; Stop all voices<br>'
+    + 'E &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Evolve mode<br>'
+    + 'N &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Random pattern<br>'
+    + 'X &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Clear pattern<br>'
+    + 'A B C D &nbsp;Pattern slots<br>'
+    + '[ ] &nbsp;&nbsp;&nbsp; BPM -/+ 5<br><br>'
+    + '<b style="color:#ff6b6b">RECORDING</b><br>'
+    + 'R &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rec start/stop<br>'
+    + 'Ctrl+W &nbsp;Export WAV<br><br>'
+    + '<b style="color:#ff6b6b">INPUT</b><br>'
+    + 'M &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Mic toggle<br>'
+    + 'S &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Solo mode<br><br>'
+    + '<b style="color:#ff6b6b">MIXER</b><br>'
+    + '+ - &nbsp;&nbsp;&nbsp; Master vol<br><br>'
+    + '<b style="color:#ff6b6b">TABS</b><br>'
+    + 'F1 &nbsp;&nbsp;&nbsp;&nbsp; Mixer<br>'
+    + 'F2 &nbsp;&nbsp;&nbsp;&nbsp; Tone<br>'
+    + 'F3 &nbsp;&nbsp;&nbsp;&nbsp; Effects<br>'
+    + 'F4 &nbsp;&nbsp;&nbsp;&nbsp; Mic<br>'
+    + '</div>'
+    + '<div style="color:#555;margin-top:12px;font-size:0.5rem">Press ? to close</div>'
+    + '</div>';
+  div.addEventListener('click', function() { div.remove(); });
+  document.body.appendChild(div);
+}
 
 /* ═══════════════════ INIT ═══════════════════ */
 buildPads();
