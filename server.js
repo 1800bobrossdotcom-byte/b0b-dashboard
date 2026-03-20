@@ -377,7 +377,8 @@ app.post('/login', (req, res) => {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict',
-    maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    path: '/'
   });
   return res.redirect('/');
 });
@@ -405,6 +406,9 @@ app.get('/robots.txt', (req, res) => {
     'User-agent: *\n' +
     'Disallow: /report\n' +
     'Disallow: /map\n' +
+    'Disallow: /download\n' +
+    'Disallow: /api/\n' +
+    'Disallow: /_page/\n' +
     'Allow: /login\n'
   );
 });
@@ -486,12 +490,12 @@ app.use((req, res, next) => {
   res.setHeader('X-Frame-Options', 'SAMEORIGIN');
   // XSS protection (legacy browsers)
   res.setHeader('X-XSS-Protection', '1; mode=block');
-  // Enforce HTTPS (1 year, include subdomains, preload-ready)
-  res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+  // Enforce HTTPS (1 year, include subdomains, preload)
+  res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
   // Restrict referrer information
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   // Restrict browser features
-  res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=(), serial=(), hid=()');
+  res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=(), serial=(), hid=(), accelerometer=(), gyroscope=(), magnetometer=(), ambient-light-sensor=(), autoplay=(self), display-capture=(), document-domain=(), encrypted-media=(self), fullscreen=(self), interest-cohort=()');
   // Prevent DNS prefetch data leakage — stops browser from resolving domains in page content
   res.setHeader('X-DNS-Prefetch-Control', 'off');
   // BLUE TEAM — Cross-origin isolation headers
@@ -537,6 +541,7 @@ app.use((req, res, next) => {
 
   record.count++;
   if (record.count > RATE_LIMIT_MAX) {
+    console.log(`[SECURITY] Rate limited — IP: ${ip} — Path: ${req.path} — ${new Date().toISOString()}`);
     return res.status(429).send('Too many requests. Try again later.');
   }
   next();
@@ -553,11 +558,15 @@ setInterval(() => {
 }, 5 * 60 * 1000);
 
 // ===================== PATH TRAVERSAL GUARD =====================
-// Block directory traversal attempts before static file serving
+// Block directory traversal attempts and suspicious path patterns
 app.use((req, res, next) => {
-  if (req.path.includes('..') || req.path.includes('%2e%2e') || req.path.includes('%2E%2E')) {
+  const decodedPath = decodeURIComponent(req.path);
+  if (req.path.includes('..') || req.path.includes('%2e%2e') || req.path.includes('%2E%2E') ||
+      decodedPath.includes('..') || req.path.includes('\\') ||
+      /\.(env|git|htaccess|htpasswd|DS_Store|svn|hg)$/i.test(req.path) ||
+      /\/(\.|_)/.test(decodedPath) && !req.path.startsWith('/_page') && !req.path.startsWith('/.well-known')) {
     const ip = req.ip || req.connection.remoteAddress;
-    console.log(`[SECURITY] Path traversal attempt blocked — IP: ${ip} — Path: ${req.path} — ${new Date().toISOString()}`);
+    console.log(`[SECURITY] Suspicious path blocked — IP: ${ip} — Path: ${req.path} — ${new Date().toISOString()}`);
     return res.status(400).send('Bad request');
   }
   next();
@@ -589,12 +598,12 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
 #frame{width:100%;border:none;height:calc(100% - 48px);display:block}
 .player-bar{position:fixed;bottom:0;left:0;right:0;height:48px;background:#0a0a0a;border-top:1px solid #222;display:flex;align-items:center;padding:0 16px;gap:10px;font-family:'Courier New',monospace;z-index:9999}
 .p-track{color:#00ff41;font-size:0.7rem;letter-spacing:1px;white-space:nowrap;flex-shrink:0}
-.p-btn{background:transparent;border:1px solid #00ff41;color:#00ff41;font-family:inherit;font-size:0.8rem;width:32px;height:32px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.p-btn:hover{background:#00ff41;color:#0a0a0a}
-.p-wrap{flex:1;height:4px;background:#222;cursor:pointer;position:relative;min-width:60px}
+.p-btn{background:transparent;border:1px solid #00ff41;color:#00ff41;font-family:inherit;font-size:0.8rem;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;-webkit-tap-highlight-color:transparent}
+.p-btn:hover,.p-btn:active{background:#00ff41;color:#0a0a0a}
+.p-wrap{flex:1;height:6px;background:#222;cursor:pointer;position:relative;min-width:60px;-webkit-tap-highlight-color:transparent}
 .p-fill{height:100%;width:0%;background:#00ff41;transition:width 0.1s linear}
 .p-time{font-size:0.6rem;color:#555;flex-shrink:0;min-width:72px;text-align:right;font-family:'Courier New',monospace}
-@media(max-width:480px){.p-track{display:none}}
+@media(max-width:480px){.p-track{display:none}.player-bar{padding:0 10px;height:44px}.p-btn{width:32px;height:32px;font-size:0.7rem}.p-time{min-width:60px;font-size:0.55rem}#frame{height:calc(100% - 44px)}}
 </style>
 </head>
 <body>
@@ -639,6 +648,29 @@ fr.addEventListener('load',function(){
 // Inlines Leaflet CDN resources so the map works without internet (tiles still need connectivity)
 // Always reflects current state — regenerated on each download
 
+// Download rate limiter: 5 downloads per IP per hour (zip generation is expensive)
+const downloadAttempts = new Map();
+const DOWNLOAD_WINDOW = 60 * 60 * 1000; // 1 hour
+const DOWNLOAD_MAX = 5;
+
+function checkDownloadRate(ip) {
+  const now = Date.now();
+  const record = downloadAttempts.get(ip);
+  if (!record || now - record.start > DOWNLOAD_WINDOW) {
+    downloadAttempts.set(ip, { start: now, count: 1 });
+    return true;
+  }
+  record.count++;
+  return record.count <= DOWNLOAD_MAX;
+}
+
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, record] of downloadAttempts) {
+    if (now - record.start > DOWNLOAD_WINDOW) downloadAttempts.delete(ip);
+  }
+}, DOWNLOAD_WINDOW);
+
 // Cache Leaflet CDN assets in memory on first request
 let leafletJsCache = null;
 let leafletCssCache = null;
@@ -668,6 +700,13 @@ async function getLeafletAssets() {
 app.get('/download', async (req, res) => {
   try {
     const ip = req.ip || req.connection.remoteAddress;
+
+    // Rate limit downloads (zip generation is CPU-intensive)
+    if (!checkDownloadRate(ip)) {
+      console.log(`[SECURITY] Download rate limited — IP: ${ip} — ${new Date().toISOString()}`);
+      return res.status(429).send('Download limit reached. Try again later.');
+    }
+
     console.log(`[BACKUP] Offline zip downloaded — IP: ${ip} — ${new Date().toISOString()}`);
 
     const assets = await getLeafletAssets();
@@ -780,9 +819,21 @@ app.get('/_page/map', (req, res) => {
 
 // ===================== 404 HANDLER (RAINBOW) =====================
 app.use((req, res) => {
+  const ip = req.ip || req.connection.remoteAddress;
+  console.log(`[404] Not found — IP: ${ip} — Path: ${req.path} — ${new Date().toISOString()}`);
   res.status(404);
   res.setHeader('Content-Type', 'text/html');
   res.send('<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>404</title><style>body{background:#0a0a0a;color:#00ff41;font-family:"Courier New",monospace;display:flex;justify-content:center;align-items:center;min-height:100vh;margin:0}div{text-align:center}h1{font-size:3rem;margin-bottom:1rem}a{color:#00ff41}</style></head><body><div><h1>404</h1><p>Not found.</p><p><a href="/">Return</a></p></div></body></html>');
+});
+
+// ===================== GLOBAL ERROR HANDLER (BLUE TEAM) =====================
+// Catch unhandled errors — never leak stack traces to clients
+app.use((err, req, res, next) => {
+  const ip = req.ip || req.connection.remoteAddress;
+  console.error(`[ERROR] Unhandled — IP: ${ip} — Path: ${req.path} — ${err.message} — ${new Date().toISOString()}`);
+  if (!res.headersSent) {
+    res.status(500).send('Internal server error');
+  }
 });
 
 app.listen(PORT, '0.0.0.0', () => {
