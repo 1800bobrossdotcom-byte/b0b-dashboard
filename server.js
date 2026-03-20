@@ -795,7 +795,7 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
 <!-- COUNTERMEASURES PERSISTENT DRAWER -->
 <div class="cm-drawer" id="cmDrawer">
   <div class="cm-drawer-bar" onclick="toggleCmDrawer()">
-    <h3>\uD83D\uDEE1\uFE0F COUNTERMEASURES</h3>
+    <h3>🛡️ COUNTERMEASURES</h3>
     <div class="cm-status-dots">
       <span class="cm-dot" id="cmDotUltrasonic" title="Ultrasonic Shield"></span>
       <span class="cm-dot-label" id="cmDotLabelUltrasonic">SHIELD</span>
@@ -808,13 +808,13 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
       <span class="cm-dot" id="cmDotProtective" title="Protective Tones"></span>
       <span class="cm-dot-label" id="cmDotLabelProtective">PROTECT</span>
     </div>
-    <span class="cm-drawer-chevron">\u25B2</span>
+    <span class="cm-drawer-chevron">▲</span>
   </div>
   <div class="cm-drawer-content" id="cmDrawerContent">
   <div class="cm-panel">
     <label class="cm-toggle"><input type="checkbox" id="cmUltrasonic" onchange="toggleUltrasonicCM(this.checked)"><span class="cm-label">ULTRASONIC SHIELD</span></label>
     <div class="cm-status" id="cmStatus">INACTIVE</div>
-    <div class="cm-info">\uD83C\uDF0A WATER PLANET OPTIMIZED \u2014 Humidity-adaptive frequency sweep across 20\u201322kHz. Jams cross-device tracking beacons &amp; acoustic data exfiltration. \uD83D\uDC3E ANIMAL-SAFE: above 20kHz at -60dB.</div>
+    <div class="cm-info">🌊 WATER PLANET OPTIMIZED — Humidity-adaptive frequency sweep across 20–22kHz. Jams cross-device tracking beacons &amp; acoustic data exfiltration. 🐾 ANIMAL-SAFE: above 20kHz at -60dB.</div>
   </div>
   <div class="cm-panel">
     <label class="cm-toggle"><input type="checkbox" id="cmWebrtc" onchange="toggleWebRTCBlock(this.checked)" checked><span class="cm-label">WebRTC LEAK BLOCK</span></label>
@@ -827,7 +827,7 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
     <div class="cm-info">Injects imperceptible noise into canvas readback operations, defeating canvas fingerprinting.</div>
   </div>
   <div class="cm-panel" style="border-color:#00ff41">
-    <label class="cm-toggle"><input type="checkbox" id="cmHealing" onchange="toggleHealingTones(this.checked)"><span class="cm-label" style="color:#00ff41">\uD83C\uDFB5 HEALING TONES</span></label>
+    <label class="cm-toggle"><input type="checkbox" id="cmHealing" onchange="toggleHealingTones(this.checked)"><span class="cm-label" style="color:#00ff41">🎵 HEALING TONES</span></label>
     <div class="cm-status" id="cmHealingStatus">INACTIVE</div>
     <div class="ht-freq-grid" id="htFreqGrid">
       <button class="ht-freq-btn" data-freq="174" data-name="Pain Relief" onclick="selectHealingFreq(this)">174 Hz</button>
@@ -843,10 +843,10 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
     </div>
     <input type="range" class="ht-volume" id="htVolume" min="0" max="100" value="25" oninput="setHealingVolume(this.value)" title="Volume">
     <div class="ht-now-playing" id="htNowPlaying"></div>
-    <div class="cm-info">\uD83C\uDF0A Solfeggio frequencies with sub-harmonic body-water resonance. \uD83D\uDC3E ANIMAL-SAFE: 174\u2013963 Hz at gentle volume.</div>
+    <div class="cm-info">🌊 Solfeggio frequencies with sub-harmonic body-water resonance. 🐾 ANIMAL-SAFE: 174–963 Hz at gentle volume.</div>
   </div>
   <div class="cm-panel" style="border-color:#00ccff">
-    <label class="cm-toggle"><input type="checkbox" id="cmProtective" onchange="toggleProtectiveTones(this.checked)"><span class="cm-label" style="color:#00ccff">\uD83D\uDEE1\uFE0F PROTECTIVE TONES</span></label>
+    <label class="cm-toggle"><input type="checkbox" id="cmProtective" onchange="toggleProtectiveTones(this.checked)"><span class="cm-label" style="color:#00ccff">🛡️ PROTECTIVE TONES</span></label>
     <div class="cm-status" id="cmProtectiveStatus">INACTIVE</div>
     <div class="pt-freq-grid" id="ptFreqGrid">
       <button class="pt-freq-btn active" data-freq="7.83" data-name="Schumann Resonance" data-type="binaural" onclick="selectProtectiveFreq(this)">7.83 Hz</button>
@@ -855,24 +855,27 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
       <button class="pt-freq-btn" data-freq="40" data-name="Gamma \u2014 Perception" data-type="binaural" onclick="selectProtectiveFreq(this)">40 Hz</button>
       <button class="pt-freq-btn" data-freq="0" data-name="Pink Noise \u2014 Masking" data-type="pink" onclick="selectProtectiveFreq(this)">PINK</button>
       <button class="pt-freq-btn" data-freq="0" data-name="Brown Noise \u2014 Deep Cover" data-type="brown" onclick="selectProtectiveFreq(this)">BROWN</button>
-      <button class="pt-freq-btn" data-freq="0" data-name="Ocean Waves \u2014 Planet Sound" data-type="ocean" onclick="selectProtectiveFreq(this)">\uD83C\uDF0A OCEAN</button>
+      <button class="pt-freq-btn" data-freq="0" data-name="Ocean Waves — Planet Sound" data-type="ocean" onclick="selectProtectiveFreq(this)">🌊 OCEAN</button>
     </div>
     <input type="range" class="pt-volume" id="ptVolume" min="0" max="100" value="30" oninput="setProtectiveVolume(this.value)" title="Volume">
     <div class="pt-now-playing" id="ptNowPlaying"></div>
-    <div class="cm-info">\uD83C\uDF0A 7.83 Hz Schumann is Earth\u2019s electromagnetic heartbeat. Use headphones for binaural entrainment. \uD83D\uDC3E ANIMAL-SAFE.</div>
+    <div class="cm-info">🌊 7.83 Hz Schumann is Earth's electromagnetic heartbeat. Use headphones for binaural entrainment. 🐾 ANIMAL-SAFE.</div>
   </div>
   <div class="cm-panel cm-dl-panel">
-    <div class="cm-dl-title">\u2B07 DOWNLOAD / INSTALL APPS</div>
+    <div class="cm-dl-title">⬇ DOWNLOAD / INSTALL APPS</div>
     <div class="cm-dl-info">Install to home screen on mobile. Download HTML files on desktop. Zero dependencies.</div>
     <div class="cm-dl-btns">
-      <a class="cm-dl-btn" href="/tones/healing" target="_blank" style="text-decoration:none;text-align:center">\uD83D\uDCF1 INSTALL HEALING</a>
-      <a class="cm-dl-btn blue" href="/tones/protective" target="_blank" style="text-decoration:none;text-align:center">\uD83D\uDCF1 INSTALL PROTECTIVE</a>
+      <a class="cm-dl-btn" href="/tones/multipack" target="_blank" style="text-decoration:none;text-align:center;background:#cc88ff;color:#0a0a0a;border-color:#cc88ff;flex:1 1 100%">🎛️ INSTALL MULTIPACK (ALL-IN-ONE)</a>
     </div>
     <div class="cm-dl-btns" style="margin-top:4px">
-      <button class="cm-dl-btn" onclick="downloadToneApp('healing')" style="font-size:0.6rem;padding:6px 10px;opacity:0.6">\u2B07 DOWNLOAD .HTML</button>
-      <button class="cm-dl-btn blue" onclick="downloadToneApp('protective')" style="font-size:0.6rem;padding:6px 10px;opacity:0.6">\u2B07 DOWNLOAD .HTML</button>
+      <a class="cm-dl-btn" href="/tones/healing" target="_blank" style="text-decoration:none;text-align:center">📱 INSTALL HEALING</a>
+      <a class="cm-dl-btn blue" href="/tones/protective" target="_blank" style="text-decoration:none;text-align:center">📱 INSTALL PROTECTIVE</a>
     </div>
-    <div class="cm-dl-title" style="color:#cc88ff;margin-top:8px">\uD83D\uDD17 INSTALL ON YOUR SITE</div>
+    <div class="cm-dl-btns" style="margin-top:4px">
+      <button class="cm-dl-btn" onclick="downloadToneApp('healing')" style="font-size:0.6rem;padding:6px 10px;opacity:0.6">⬇ DOWNLOAD .HTML</button>
+      <button class="cm-dl-btn blue" onclick="downloadToneApp('protective')" style="font-size:0.6rem;padding:6px 10px;opacity:0.6">⬇ DOWNLOAD .HTML</button>
+    </div>
+    <div class="cm-dl-title" style="color:#cc88ff;margin-top:8px">🔗 INSTALL ON YOUR SITE</div>
     <div class="cm-dl-info">Copy embed code to add tone tools to any website.</div>
     <div class="cm-embed-label">IFRAME EMBED:</div>
     <div class="cm-embed-wrap">
@@ -904,7 +907,7 @@ html+='input[type=range]{width:100%;margin:12px 0;accent-color:#00ff41}';
 html+='.credit{margin-top:24px;color:#333;font-size:0.6rem;text-align:center}';
 html+='</style></head><body><div class="app">';
 if(type==="healing"){
-html+='<h1>\uD83C\uDFB5 b0b HEALING TONES</h1>';
+html+='<h1>🎵 b0b HEALING TONES</h1>';
 html+='<label class="toggle"><input type="checkbox" id="tog" onchange="toggle(this.checked)"><span>ACTIVATE</span></label>';
 html+='<div class="status" id="st">INACTIVE</div><div id="grid">';
 var hf=[[174,"Pain Relief"],[285,"Tissue Healing"],[396,"Liberation"],[417,"Change"],[432,"Natural Calm"],[528,"Love / DNA Repair"],[639,"Connection"],[741,"Intuition"],[852,"Spiritual"],[963,"Higher Self"]];
@@ -917,7 +920,7 @@ html+='function sel(b){document.querySelectorAll(".btn").forEach(function(x){x.c
 html+='function vol(val){v=(val/100)*0.25;if(on&&gain&&ctx)gain.gain.linearRampToValueAtTime(v,ctx.currentTime+0.1)}';
 html+='<\\/scr'+'ipt>';
 }else{
-html+='<h1>\uD83D\uDEE1\uFE0F b0b PROTECTIVE TONES</h1>';
+html+='<h1>🛡️ b0b PROTECTIVE TONES</h1>';
 html+='<label class="toggle"><input type="checkbox" id="tog" onchange="toggle(this.checked)"><span>ACTIVATE</span></label>';
 html+='<div class="status" id="st">INACTIVE</div><div id="grid">';
 html+='<button class="btn active" data-f="7.83" data-n="Schumann Resonance" data-t="binaural" onclick="sel(this)">7.83 Hz</button>';
@@ -926,7 +929,7 @@ html+='<button class="btn" data-f="14" data-n="Beta" data-t="binaural" onclick="
 html+='<button class="btn" data-f="40" data-n="Gamma" data-t="binaural" onclick="sel(this)">40 Hz</button>';
 html+='<button class="btn" data-f="0" data-n="Pink Noise" data-t="pink" onclick="sel(this)">PINK</button>';
 html+='<button class="btn" data-f="0" data-n="Brown Noise" data-t="brown" onclick="sel(this)">BROWN</button>';
-html+='<button class="btn" data-f="0" data-n="Ocean Waves" data-t="ocean" onclick="sel(this)">\uD83C\uDF0A OCEAN</button>';
+html+='<button class="btn" data-f="0" data-n="Ocean Waves" data-t="ocean" onclick="sel(this)">🌊 OCEAN</button>';
 html+='</div><input type="range" min="0" max="100" value="30" oninput="vol(this.value)">';
 html+='<scr'+'ipt>';
 html+='var ctx,oscL,oscR,noise,lfo,gain,on=false,freq=7.83,name="Schumann Resonance",type="binaural",v=0.075;';
@@ -942,7 +945,7 @@ html+='function sel(b){document.querySelectorAll(".btn").forEach(function(x){x.c
 html+='function vol(val){v=(val/100)*0.25;if(on&&gain&&ctx)gain.gain.linearRampToValueAtTime(v,ctx.currentTime+0.1)}';
 html+='<\\/scr'+'ipt>';
 }
-html+='<div class="credit">b0b.dev \u2014 COUNTERMEASURES</div></div></body></html>';
+html+='<div class="credit">b0b.dev — COUNTERMEASURES</div></div></body></html>';
 var blob=new Blob([html],{type:'text/html'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='b0b-'+type+'-tones.html';a.click();URL.revokeObjectURL(url)};
 // Listen for navigation messages from iframe content
 window.addEventListener('message',function(e){
@@ -1139,6 +1142,9 @@ app.get('/tones/healing', (req, res) => {
 });
 app.get('/tones/protective', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'tones-protective.html'));
+});
+app.get('/tones/multipack', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'tones-multipack.html'));
 });
 
 // Raw content routes — serve actual pages into iframe

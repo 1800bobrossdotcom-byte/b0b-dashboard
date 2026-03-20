@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="64" fill="#0a0a0a"/>
+  <!-- Three concentric rings in different colors for the three engines -->
+  <circle cx="256" cy="220" r="100" fill="none" stroke="#cc88ff" stroke-width="6" opacity="0.3"/>
+  <circle cx="256" cy="220" r="70" fill="none" stroke="#00ccff" stroke-width="5" opacity="0.5"/>
+  <circle cx="256" cy="220" r="40" fill="none" stroke="#00ff41" stroke-width="4" opacity="0.7"/>
+  <circle cx="256" cy="220" r="12" fill="#ff4444"/>
+  <!-- Three small dots representing the three engines -->
+  <circle cx="200" cy="320" r="6" fill="#00ff41"/>
+  <circle cx="256" cy="320" r="6" fill="#00ccff"/>
+  <circle cx="312" cy="320" r="6" fill="#cc88ff"/>
+  <text x="256" y="370" text-anchor="middle" fill="#ff4444" font-family="Courier New,monospace" font-size="48" font-weight="bold">b0b</text>
+  <text x="256" y="410" text-anchor="middle" fill="#cc88ff" font-family="Courier New,monospace" font-size="20">MULTIPACK</text>
+</svg>
