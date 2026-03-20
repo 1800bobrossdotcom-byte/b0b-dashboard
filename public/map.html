@@ -343,6 +343,12 @@
     .pt-freq-btn.active { border-color: #00ccff; color: #00ccff; background: rgba(0,204,255,0.08); box-shadow: 0 0 6px rgba(0,204,255,0.15); }
     .pt-volume { width: 100%; height: 4px; margin-top: 6px; accent-color: #00ccff; cursor: pointer; }
     .pt-now-playing { font-size: 0.55rem; color: #00ccff; margin-top: 4px; font-style: italic; }
+    /* ===================== LOVE TONE ===================== */
+    .lt-pulse { display: inline-block; width: 12px; height: 12px; margin-right: 6px; vertical-align: middle; }
+    .lt-pulse.active { animation: ltPulse 1.5s ease-in-out infinite; }
+    @keyframes ltPulse { 0%,100% { transform: scale(1); opacity: 0.7; } 50% { transform: scale(1.3); opacity: 1; } }
+    .lt-volume { width: 100%; height: 4px; margin-top: 6px; accent-color: #ff69b4; cursor: pointer; }
+    .lt-now-playing { font-size: 0.55rem; color: #ff69b4; margin-top: 4px; font-style: italic; }
   </style>
 </head>
 <body>
@@ -506,6 +512,13 @@
     <input type="range" class="pt-volume" id="ptVolume" min="0" max="100" value="30" oninput="setProtectiveVolume(this.value)" title="Volume">
     <div class="pt-now-playing" id="ptNowPlaying"></div>
     <div class="cm-info">Binaural beats &amp; acoustic masking for mental shielding and conversation privacy. Binaural beats use stereo offset to produce sub-audible brainwave entrainment (use headphones). Pink/brown noise masks ambient sound for acoustic privacy. 🐾 ANIMAL-SAFE: all tones at gentle volume, safe for all pets.</div>
+  </div>
+  <div class="cm-panel" style="margin-top:4px;border-color:#ff69b4">
+    <label class="cm-toggle"><input type="checkbox" id="cmLove" onchange="toggleLoveTone(this.checked)"><span class="cm-label" style="color:#ff69b4">❤️ LOVE TONE — 528 Hz</span></label>
+    <div class="cm-status" id="cmLoveStatus"><span class="lt-pulse" id="ltPulseIcon">❤️</span> INACTIVE</div>
+    <input type="range" class="lt-volume" id="ltVolume" min="0" max="100" value="30" oninput="setLoveVolume(this.value)" title="Volume">
+    <div class="lt-now-playing" id="ltNowPlaying"></div>
+    <div class="cm-info">The 528 Hz "Love Frequency" — layered with gentle harmonics (264 Hz sub-octave + 1056 Hz overtone) and a slow heart-coherence pulse (~0.1 Hz). Known in sound therapy as the "Miracle Tone" associated with transformation, DNA repair, and deep peace. 🐾 ANIMAL-SAFE: gentle audible tones, safe for all pets.</div>
   </div>
   </div>
 </div>
@@ -3073,6 +3086,119 @@ function setProtectiveVolume(val) {
   ptVolume = (val / 100) * 0.25;
   if (ptActive && ptGainNode && ptAudioCtx) {
     ptGainNode.gain.linearRampToValueAtTime(ptVolume, ptAudioCtx.currentTime + 0.1);
+  }
+}
+
+// --- LOVE TONE ENGINE ---
+// 528 Hz "Love Frequency" with harmonics and heart-coherence pulse
+// Layers: 528 Hz fundamental + 264 Hz sub-octave (soft) + 1056 Hz overtone (very soft)
+// Slow amplitude modulation (~0.1 Hz) mimics heart-coherence rhythm
+var ltAudioCtx = null;
+var ltOsc528 = null;
+var ltOsc264 = null;
+var ltOsc1056 = null;
+var ltGainNode = null;
+var ltLfoNode = null;
+var ltLfoGain = null;
+var ltActive = false;
+var ltVolume = 0.075;
+
+function toggleLoveTone(enabled) {
+  if (enabled) startLoveTone(); else stopLoveTone();
+}
+
+function startLoveTone() {
+  try {
+    if (!ltAudioCtx) ltAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (ltAudioCtx.state === 'suspended') ltAudioCtx.resume();
+    cleanupLove();
+
+    // Master gain with fade-in
+    ltGainNode = ltAudioCtx.createGain();
+    ltGainNode.gain.setValueAtTime(0, ltAudioCtx.currentTime);
+    ltGainNode.gain.linearRampToValueAtTime(ltVolume, ltAudioCtx.currentTime + 1.5);
+    ltGainNode.connect(ltAudioCtx.destination);
+
+    // LFO for heart-coherence pulse (~0.1 Hz gentle amplitude modulation)
+    ltLfoNode = ltAudioCtx.createOscillator();
+    ltLfoNode.type = 'sine';
+    ltLfoNode.frequency.value = 0.1; // ~6 beats per minute, heart-coherence rhythm
+    ltLfoGain = ltAudioCtx.createGain();
+    ltLfoGain.gain.value = 0.15; // subtle 15% modulation depth
+    ltLfoNode.connect(ltLfoGain);
+    ltLfoGain.connect(ltGainNode.gain);
+    ltLfoNode.start();
+
+    // 528 Hz fundamental (full volume)
+    ltOsc528 = ltAudioCtx.createOscillator();
+    ltOsc528.type = 'sine';
+    ltOsc528.frequency.value = 528;
+    var gain528 = ltAudioCtx.createGain();
+    gain528.gain.value = 1.0;
+    ltOsc528.connect(gain528);
+    gain528.connect(ltGainNode);
+    ltOsc528.start();
+
+    // 264 Hz sub-octave (30% volume — warmth)
+    ltOsc264 = ltAudioCtx.createOscillator();
+    ltOsc264.type = 'sine';
+    ltOsc264.frequency.value = 264;
+    var gain264 = ltAudioCtx.createGain();
+    gain264.gain.value = 0.3;
+    ltOsc264.connect(gain264);
+    gain264.connect(ltGainNode);
+    ltOsc264.start();
+
+    // 1056 Hz overtone (15% volume — shimmer)
+    ltOsc1056 = ltAudioCtx.createOscillator();
+    ltOsc1056.type = 'sine';
+    ltOsc1056.frequency.value = 1056;
+    var gain1056 = ltAudioCtx.createGain();
+    gain1056.gain.value = 0.15;
+    ltOsc1056.connect(gain1056);
+    gain1056.connect(ltGainNode);
+    ltOsc1056.start();
+
+    ltActive = true;
+    document.getElementById('cmLoveStatus').innerHTML = '<span class="lt-pulse active">❤️</span> ACTIVE — 528 Hz';
+    document.getElementById('cmLoveStatus').className = 'cm-status active';
+    document.getElementById('ltNowPlaying').textContent = '❤️ 528 Hz Love Frequency — with harmonics + heart pulse';
+    console.log('[LOVE TONE] 528 Hz layered tone ACTIVE');
+  } catch (e) {
+    document.getElementById('cmLoveStatus').textContent = 'ERROR — ' + e.message;
+    console.log('[LOVE TONE] Failed: ' + e.message);
+  }
+}
+
+function cleanupLove() {
+  try {
+    if (ltOsc528) { ltOsc528.stop(); ltOsc528.disconnect(); ltOsc528 = null; }
+    if (ltOsc264) { ltOsc264.stop(); ltOsc264.disconnect(); ltOsc264 = null; }
+    if (ltOsc1056) { ltOsc1056.stop(); ltOsc1056.disconnect(); ltOsc1056 = null; }
+    if (ltLfoNode) { ltLfoNode.stop(); ltLfoNode.disconnect(); ltLfoNode = null; }
+    if (ltLfoGain) { ltLfoGain.disconnect(); ltLfoGain = null; }
+    if (ltGainNode) { ltGainNode.disconnect(); ltGainNode = null; }
+  } catch(e) {}
+}
+
+function stopLoveTone() {
+  try {
+    if (ltGainNode && ltAudioCtx) {
+      ltGainNode.gain.linearRampToValueAtTime(0, ltAudioCtx.currentTime + 0.8);
+      setTimeout(function() { cleanupLove(); }, 900);
+    } else { cleanupLove(); }
+    ltActive = false;
+    document.getElementById('cmLoveStatus').innerHTML = '<span class="lt-pulse">❤️</span> INACTIVE';
+    document.getElementById('cmLoveStatus').className = 'cm-status';
+    document.getElementById('ltNowPlaying').textContent = '';
+    console.log('[LOVE TONE] DEACTIVATED');
+  } catch (e) {}
+}
+
+function setLoveVolume(val) {
+  ltVolume = (val / 100) * 0.25;
+  if (ltActive && ltGainNode && ltAudioCtx) {
+    ltGainNode.gain.linearRampToValueAtTime(ltVolume, ltAudioCtx.currentTime + 0.1);
   }
 }
 
