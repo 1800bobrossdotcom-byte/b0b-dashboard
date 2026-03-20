@@ -126,6 +126,23 @@
     .popup-context { color: #ccc; font-size: 0.75rem; line-height: 1.5; }
     .popup-link { color: #00ccff; text-decoration: none; font-size: 0.75rem; }
     .popup-link:hover { text-decoration: underline; }
+    /* ===================== CONNECTION GLOW ANIMATION ===================== */
+    @keyframes lineGlow {
+      0%, 100% { stroke-opacity: 0.9; }
+      50% { stroke-opacity: 0.4; }
+    }
+    .leaflet-overlay-pane svg path.connection-glow {
+      stroke-width: 4 !important;
+      stroke-opacity: 0.9 !important;
+      filter: drop-shadow(0 0 6px currentColor) drop-shadow(0 0 12px currentColor);
+      animation: lineGlow 1.5s ease-in-out infinite;
+    }
+    .leaflet-overlay-pane svg path.connection-glow-trail {
+      stroke-width: 8 !important;
+      stroke-opacity: 0.15 !important;
+      stroke-dasharray: none !important;
+      filter: drop-shadow(0 0 10px currentColor);
+    }
     .search-box {
       position: absolute;
       top: 70px;
@@ -399,6 +416,7 @@
   </div>
   <h3 style="margin-top:10px">RESEARCHER TOOLS</h3>
   <div class="filter-item"><a href="/api/data" target="_blank" style="color:#00ff41;text-decoration:none;font-size:0.7rem">⬇ EXPORT JSON DATA</a></div>
+  <div class="filter-item" style="margin-top:2px"><a href="/download" style="color:#ff4444;text-decoration:none;font-size:0.7rem">📦 DOWNLOAD OFFLINE BACKUP (ZIP)</a></div>
   <div class="filter-item" style="margin-top:2px"><a href="/report#methodology" target="_blank" style="color:#00ccff;text-decoration:none;font-size:0.7rem">📋 SOURCE METHODOLOGY</a></div>
   <div class="filter-item" style="margin-top:2px;color:#888;font-size:0.6rem">Deep Links: /map?type=X&section=Y&marker=Z</div>
   </div>
@@ -1970,6 +1988,8 @@ var connectionLines = [
 ];
 
 var lineLayer = L.layerGroup().addTo(map);
+var glowLayer = L.layerGroup().addTo(map);
+var allConnectionLines = [];
 connectionLines.forEach(function(conn) {
   var line = L.polyline([conn[0], conn[1]], {
     color: conn[2],
@@ -1977,8 +1997,74 @@ connectionLines.forEach(function(conn) {
     opacity: 0.35,
     dashArray: '6,4'
   });
+  line._connData = { from: conn[0], to: conn[1], color: conn[2], label: conn[3] };
   line.bindTooltip(conn[3], {sticky: true, className: 'line-tooltip'});
   line.addTo(lineLayer);
+  allConnectionLines.push(line);
+});
+
+// ===================== CONNECTION GLOW ENGINE =====================
+function clearConnectionGlow() {
+  glowLayer.clearLayers();
+  allConnectionLines.forEach(function(line) {
+    if (line._path) line._path.classList.remove('connection-glow');
+  });
+}
+
+function highlightConnections(lat, lng) {
+  clearConnectionGlow();
+  var threshold = 0.05;
+  var connectedEndpoints = [];
+  allConnectionLines.forEach(function(line) {
+    var d = line._connData;
+    var fromMatch = Math.abs(d.from[0] - lat) < threshold && Math.abs(d.from[1] - lng) < threshold;
+    var toMatch = Math.abs(d.to[0] - lat) < threshold && Math.abs(d.to[1] - lng) < threshold;
+    if (fromMatch || toMatch) {
+      // Add glow trail (wide, faint glow behind the line)
+      var trail = L.polyline([d.from, d.to], {
+        color: d.color,
+        weight: 8,
+        opacity: 0.15
+      });
+      trail.addTo(glowLayer);
+      if (trail._path) trail._path.classList.add('connection-glow-trail');
+      // Activate glow on the original line
+      if (line._path) line._path.classList.add('connection-glow');
+      // Collect the OTHER endpoint for marker pulsing
+      connectedEndpoints.push(fromMatch ? d.to : d.from);
+    }
+  });
+  // Pulse connected marker icons
+  allMarkers.forEach(function(m) {
+    var d = m._locData;
+    var isEndpoint = connectedEndpoints.some(function(c) {
+      return Math.abs(d.lat - c[0]) < threshold && Math.abs(d.lng - c[1]) < threshold;
+    });
+    if (isEndpoint && m._icon) {
+      m._icon.style.transition = 'filter 0.3s';
+      m._icon.style.filter = 'drop-shadow(0 0 6px #00ff41) drop-shadow(0 0 12px #00ff41)';
+    }
+  });
+}
+
+function clearMarkerGlow() {
+  allMarkers.forEach(function(m) {
+    if (m._icon) m._icon.style.filter = '';
+  });
+}
+
+// Activate glow on popup open
+map.on('popupopen', function(e) {
+  var marker = e.popup._source;
+  if (marker && marker._locData) {
+    highlightConnections(marker._locData.lat, marker._locData.lng);
+  }
+});
+
+// Clear glow on popup close
+map.on('popupclose', function() {
+  clearConnectionGlow();
+  clearMarkerGlow();
 });
 
 // ===================== TUNNEL PATHS =====================

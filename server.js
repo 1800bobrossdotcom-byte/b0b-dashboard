@@ -2,6 +2,9 @@ const express = require('express');
 const path = require('path');
 const crypto = require('crypto');
 const cookieParser = require('cookie-parser');
+const archiver = require('archiver');
+const fs = require('fs');
+const https = require('https');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -630,6 +633,123 @@ fr.addEventListener('load',function(){
 </body>
 </html>`;
 }
+
+// ===================== OFFLINE BACKUP ZIP =====================
+// Generates a self-contained zip of the full site for offline use
+// Inlines Leaflet CDN resources so the map works without internet (tiles still need connectivity)
+// Always reflects current state — regenerated on each download
+
+// Cache Leaflet CDN assets in memory on first request
+let leafletJsCache = null;
+let leafletCssCache = null;
+
+function fetchCDN(url) {
+  return new Promise((resolve, reject) => {
+    https.get(url, (resp) => {
+      let data = '';
+      resp.on('data', chunk => data += chunk);
+      resp.on('end', () => resolve(data));
+    }).on('error', reject);
+  });
+}
+
+async function getLeafletAssets() {
+  if (!leafletJsCache) {
+    try {
+      leafletJsCache = await fetchCDN('https://unpkg.com/leaflet@1.9.4/dist/leaflet.js');
+      leafletCssCache = await fetchCDN('https://unpkg.com/leaflet@1.9.4/dist/leaflet.css');
+    } catch (e) {
+      console.log('[BACKUP] CDN fetch failed, zip will use CDN links: ' + e.message);
+    }
+  }
+  return { js: leafletJsCache, css: leafletCssCache };
+}
+
+app.get('/download', async (req, res) => {
+  try {
+    const ip = req.ip || req.connection.remoteAddress;
+    console.log(`[BACKUP] Offline zip downloaded — IP: ${ip} — ${new Date().toISOString()}`);
+
+    const assets = await getLeafletAssets();
+    const publicDir = path.join(__dirname, 'public');
+
+    // Read map.html and inline Leaflet assets for offline use
+    let mapHtml = fs.readFileSync(path.join(publicDir, 'map.html'), 'utf8');
+    if (assets.css && assets.js) {
+      // Replace CDN CSS link with inline style
+      mapHtml = mapHtml.replace(
+        /<link rel="stylesheet" href="https:\/\/unpkg\.com\/leaflet@1\.9\.4\/dist\/leaflet\.css"[^>]*\/>/,
+        '<style>/* Leaflet 1.9.4 CSS — inlined for offline use */\n' + assets.css + '</style>'
+      );
+      // Replace CDN JS script with inline script
+      mapHtml = mapHtml.replace(
+        /<script src="https:\/\/unpkg\.com\/leaflet@1\.9\.4\/dist\/leaflet\.js"[^>]*><\/script>/,
+        '<script>/* Leaflet 1.9.4 JS — inlined for offline use */\n' + assets.js + '</script>'
+      );
+    }
+
+    // Read other files
+    const reportHtml = fs.readFileSync(path.join(publicDir, 'report.html'), 'utf8');
+    const indexHtml = fs.readFileSync(path.join(publicDir, 'index.html'), 'utf8');
+
+    // Create a launcher page
+    const launcherHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>b0b.dev — Offline Backup</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0a;color:#d4d4d4;font-family:'Courier New',monospace;display:flex;justify-content:center;align-items:center;min-height:100vh}
+.container{text-align:center;max-width:600px;padding:2rem}
+h1{color:#00ff41;font-size:2rem;margin-bottom:1rem;letter-spacing:3px}
+p{color:#888;margin-bottom:2rem;line-height:1.6}
+.links{display:flex;flex-direction:column;gap:1rem;align-items:center}
+a{color:#00ccff;text-decoration:none;border:1px solid #00ccff;padding:0.8rem 2rem;font-family:'Courier New',monospace;font-size:1rem;transition:all 0.3s;display:block;width:280px}
+a:hover{background:#00ccff;color:#000}
+.meta{color:#555;font-size:0.7rem;margin-top:2rem}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>b0b.dev</h1>
+<p>Offline backup archive. Open the files below directly in your browser.<br>
+Map tiles require internet. All data, markers, connections, and analysis are self-contained.</p>
+<div class="links">
+<a href="map.html">OSINT MAP</a>
+<a href="report.html">FULL REPORT</a>
+<a href="index.html">LANDING PAGE</a>
+</div>
+<div class="meta">Generated: ${new Date().toISOString()}<br>Source: b0b.dev</div>
+</div>
+</body>
+</html>`;
+
+    // Set response headers
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-').substring(0, 19);
+    res.setHeader('Content-Type', 'application/zip');
+    res.setHeader('Content-Disposition', 'attachment; filename="b0b-backup-' + timestamp + '.zip"');
+
+    // Create zip stream
+    const archive = archiver('zip', { zlib: { level: 9 } });
+    archive.on('error', (err) => { throw err; });
+    archive.pipe(res);
+
+    // Add files to zip
+    archive.append(launcherHtml, { name: 'b0b-backup/index.html' });
+    archive.append(mapHtml, { name: 'b0b-backup/map.html' });
+    archive.append(reportHtml, { name: 'b0b-backup/report.html' });
+    archive.append(indexHtml, { name: 'b0b-backup/landing.html' });
+
+    await archive.finalize();
+  } catch (err) {
+    console.error('[BACKUP] Zip generation failed:', err.message);
+    if (!res.headersSent) {
+      res.status(500).send('Backup generation failed');
+    }
+  }
+});
 
 // Shell routes — serve persistent player wrapper
 app.get('/', (req, res) => {
