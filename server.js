@@ -645,8 +645,8 @@ app.use((req, res, next) => {
     // Service worker: needs connect-src for tile domains it fetches on behalf of the map
     res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; connect-src 'self' https://*.basemaps.cartocdn.com https://*.tile.openstreetmap.org https://server.arcgisonline.com https://*.tile.opentopomap.org https://tiles.stadiamaps.com" + cspReport);
   } else if (isShell) {
-    // Shell pages: need frame-src for iframe, media-src for audio player
-    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; frame-src 'self'; media-src 'self' https://*.archive.org; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests" + cspReport);
+    // Shell pages: need frame-src for iframe + YouTube embed, script-src for YT IFrame API
+    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.youtube.com; style-src 'self' 'unsafe-inline'; img-src 'self' https://i.ytimg.com; font-src 'self'; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; media-src 'self' https://*.archive.org; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests" + cspReport);
   } else if (isMap) {
     res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; img-src 'self' https://*.basemaps.cartocdn.com https://*.tile.openstreetmap.org https://server.arcgisonline.com https://*.tile.opentopomap.org https://tiles.stadiamaps.com https://unpkg.com data:; font-src 'self'; connect-src 'self' https://*.basemaps.cartocdn.com https://*.tile.openstreetmap.org https://server.arcgisonline.com https://*.tile.opentopomap.org https://tiles.stadiamaps.com; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests" + cspReport);
   } else if (isReport) {
@@ -867,19 +867,29 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
 </div>
 <div class="player-bar">
   <button class="p-btn" id="pb" onclick="tp()">▶</button>
-  <div class="p-track">FAITH NO MORE — WE CARE A LOT</div>
+  <div class="p-track">HIDDEN ORCHESTRA — EAST LONDON STREET</div>
   <div class="p-wrap" id="pw"><div class="p-fill" id="pf"></div></div>
-  <div class="p-time" id="pt">0:00 / 0:00</div>
+  <div class="p-time" id="pt">0:00 / 11:13</div>
+  <div id="ytContainer" style="position:absolute;left:16px;bottom:48px;width:1px;height:1px;overflow:hidden;opacity:0.01"><div id="ytPlayer"></div></div>
 </div>
-<audio id="a" preload="metadata" src="https://dn710700.ca.archive.org/0/items/Faith_No_More_We_Care_A_Lot/Faith_No_More_We_Care_A_Lot.mp4"></audio>
 <script>
+var tag=document.createElement('script');tag.src='https://www.youtube.com/iframe_api';document.head.appendChild(tag);
+var ytP=null,ytReady=false,ytDuration=673,ytTimer=null;
+function onYouTubeIframeAPIReady(){
+  ytP=new YT.Player('ytPlayer',{height:'1',width:'1',videoId:'XGec4XPCKUQ',playerVars:{autoplay:0,controls:0,disablekb:1,fs:0,modestbranding:1,rel:0,playsinline:1},events:{onReady:function(){ytReady=true;ytDuration=ytP.getDuration()||673},onStateChange:function(e){if(e.data===YT.PlayerState.ENDED){document.getElementById('pb').textContent='▶';clearInterval(ytTimer)}}}});
+}
+function ytUpdateProgress(){
+  if(!ytP||!ytReady)return;
+  var cur=ytP.getCurrentTime()||0,dur=ytP.getDuration()||ytDuration;
+  var pf=document.getElementById('pf'),pt=document.getElementById('pt');
+  pf.style.width=(cur/dur*100)+'%';
+  function fmt(s){if(isNaN(s))return'0:00';var m=Math.floor(s/60),sec=Math.floor(s%60);return m+':'+(sec<10?'0':'')+sec}
+  pt.textContent=fmt(cur)+' / '+fmt(dur);
+}
 (function(){
-var a=document.getElementById('a'),pb=document.getElementById('pb'),pf=document.getElementById('pf'),pw=document.getElementById('pw'),pt=document.getElementById('pt'),fr=document.getElementById('frame');
-function fmt(s){if(isNaN(s))return'0:00';var m=Math.floor(s/60),sec=Math.floor(s%60);return m+':'+(sec<10?'0':'')+sec}
-a.addEventListener('timeupdate',function(){if(a.duration){pf.style.width=(a.currentTime/a.duration*100)+'%';pt.textContent=fmt(a.currentTime)+' / '+fmt(a.duration)}});
-a.addEventListener('ended',function(){pb.textContent='▶'});
-pw.addEventListener('click',function(e){if(a.duration){var r=pw.getBoundingClientRect();a.currentTime=((e.clientX-r.left)/r.width)*a.duration}});
-window.tp=function(){if(a.paused){a.play();pb.textContent='⏸'}else{a.pause();pb.textContent='▶'}};
+var pb=document.getElementById('pb'),pf=document.getElementById('pf'),pw=document.getElementById('pw'),pt=document.getElementById('pt'),fr=document.getElementById('frame');
+pw.addEventListener('click',function(e){if(ytP&&ytReady){var r=pw.getBoundingClientRect();var ratio=(e.clientX-r.left)/r.width;ytP.seekTo(ratio*(ytP.getDuration()||ytDuration),true)}});
+window.tp=function(){if(!ytP||!ytReady)return;var state=ytP.getPlayerState();if(state===YT.PlayerState.PLAYING){ytP.pauseVideo();pb.textContent='▶';clearInterval(ytTimer)}else{ytP.playVideo();pb.textContent='⏸';ytTimer=setInterval(ytUpdateProgress,250)}};
 // Listen for navigation messages from iframe content
 window.addEventListener('message',function(e){
   if(e.origin===location.origin && e.data && e.data.navigate){
