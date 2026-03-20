@@ -754,6 +754,9 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
 .p-wrap{flex:1;height:6px;background:#222;cursor:pointer;position:relative;min-width:60px;-webkit-tap-highlight-color:transparent}
 .p-fill{height:100%;width:0%;background:#00ff41;transition:width 0.1s linear}
 .p-time{font-size:0.6rem;color:#555;flex-shrink:0;min-width:72px;text-align:right;font-family:'Courier New',monospace}
+#ytContainer{position:fixed;left:16px;bottom:56px;width:280px;height:158px;z-index:10000;border:1px solid #333;background:#000;display:none;box-shadow:0 -2px 12px rgba(0,0,0,0.7)}
+#ytContainer.yt-show{display:block}
+#ytContainer iframe{width:100%;height:100%}
 /* CM Drawer — persistent countermeasures above player bar */
 .cm-drawer{position:fixed;bottom:48px;left:0;right:0;z-index:9998;background:rgba(10,10,10,0.98);border-top:1px solid #333;font-family:'Courier New',monospace}
 .cm-drawer-bar{height:36px;display:flex;align-items:center;padding:0 16px;cursor:pointer;user-select:none;gap:12px}
@@ -870,13 +873,13 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
   <div class="p-track">HIDDEN ORCHESTRA — EAST LONDON STREET <a href="https://www.tru-thoughts.co.uk" target="_blank" rel="noopener noreferrer" style="color:#ff6600;text-decoration:none;font-size:0.6rem;margin-left:6px" title="Tru Thoughts Records">TRU THOUGHTS</a></div>
   <div class="p-wrap" id="pw"><div class="p-fill" id="pf"></div></div>
   <div class="p-time" id="pt">0:00 / 11:13</div>
-  <div id="ytContainer" style="position:absolute;left:16px;bottom:48px;width:1px;height:1px;overflow:hidden;opacity:0.01"><div id="ytPlayer"></div></div>
+  <div id="ytContainer"><div id="ytPlayer"></div></div>
 </div>
 <script>
 var tag=document.createElement('script');tag.src='https://www.youtube.com/iframe_api';document.head.appendChild(tag);
 var ytP=null,ytReady=false,ytDuration=673,ytTimer=null;
 function onYouTubeIframeAPIReady(){
-  ytP=new YT.Player('ytPlayer',{height:'1',width:'1',videoId:'XGec4XPCKUQ',playerVars:{autoplay:0,controls:0,disablekb:1,fs:0,modestbranding:1,rel:0,playsinline:1},events:{onReady:function(){ytReady=true;ytDuration=ytP.getDuration()||673},onStateChange:function(e){if(e.data===YT.PlayerState.ENDED){document.getElementById('pb').textContent='▶';clearInterval(ytTimer)}}}});
+  ytP=new YT.Player('ytPlayer',{height:'158',width:'280',videoId:'XGec4XPCKUQ',playerVars:{autoplay:0,controls:0,disablekb:1,fs:0,modestbranding:1,rel:0,playsinline:1},events:{onReady:function(){ytReady=true;ytDuration=ytP.getDuration()||673},onStateChange:function(e){if(e.data===YT.PlayerState.ENDED){document.getElementById('pb').textContent='▶';clearInterval(ytTimer);document.getElementById('ytContainer').classList.remove('yt-show')}}}});
 }
 function ytUpdateProgress(){
   if(!ytP||!ytReady)return;
@@ -889,7 +892,7 @@ function ytUpdateProgress(){
 (function(){
 var pb=document.getElementById('pb'),pf=document.getElementById('pf'),pw=document.getElementById('pw'),pt=document.getElementById('pt'),fr=document.getElementById('frame');
 pw.addEventListener('click',function(e){if(ytP&&ytReady){var r=pw.getBoundingClientRect();var ratio=(e.clientX-r.left)/r.width;ytP.seekTo(ratio*(ytP.getDuration()||ytDuration),true)}});
-window.tp=function(){if(!ytP||!ytReady)return;var state=ytP.getPlayerState();if(state===YT.PlayerState.PLAYING){ytP.pauseVideo();pb.textContent='▶';clearInterval(ytTimer)}else{ytP.playVideo();pb.textContent='⏸';ytTimer=setInterval(ytUpdateProgress,250)}};
+window.tp=function(){if(!ytP||!ytReady)return;var state=ytP.getPlayerState();if(state===YT.PlayerState.PLAYING){ytP.pauseVideo();pb.textContent='▶';clearInterval(ytTimer);document.getElementById('ytContainer').classList.remove('yt-show')}else{ytP.playVideo();pb.textContent='⏸';ytTimer=setInterval(ytUpdateProgress,250);document.getElementById('ytContainer').classList.add('yt-show')}};
 // Listen for navigation messages from iframe content
 window.addEventListener('message',function(e){
   if(e.origin===location.origin && e.data && e.data.navigate){
