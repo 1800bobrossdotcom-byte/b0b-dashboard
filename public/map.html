@@ -74,7 +74,7 @@
       top: 44px;
       right: 0;
       z-index: 1005;
-      width: 320px;
+      width: 440px;
       height: calc(100vh - 44px);
       background: rgba(10,10,10,0.98);
       border-left: 1px solid #333;
@@ -106,10 +106,29 @@
     .filter-header .chevron.collapsed { transform: rotate(-90deg); }
     .filter-body { padding: 6px 14px 10px; }
     .filter-body.collapsed { display: none; }
-    .filter-panel h3 { color: #ffcc00; margin-bottom: 8px; font-size: 0.85rem; }
+    .filter-panel h3 { color: #ffcc00; margin-bottom: 6px; font-size: 0.8rem; letter-spacing: 1px; }
+    .filter-section-header { cursor: pointer; display: flex; align-items: center; justify-content: space-between; padding: 4px 0; user-select: none; }
+    .filter-section-header:hover h3 { color: #ffdd33; }
+    .filter-section-header .sec-chev { color: #555; font-size: 0.6rem; transition: transform 0.2s; }
+    .filter-section-header .sec-chev.collapsed { transform: rotate(-90deg); }
+    .filter-section-body { }
+    .filter-section-body.collapsed { display: none; }
+    .filter-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 8px; }
+    .filter-grid .filter-item { margin: 2px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .filter-grid .filter-item.full-row { grid-column: 1 / -1; }
     .filter-item { margin: 3px 0; }
-    .filter-item label { cursor: pointer; }
-    .filter-item input { margin-right: 6px; }
+    .filter-item label { cursor: pointer; display: flex; align-items: center; gap: 4px; font-size: 0.72rem; line-height: 1.2; }
+    .filter-item input { margin-right: 4px; flex-shrink: 0; }
+    .toolkit-section { margin-top: 8px; padding: 8px 10px; border: 1px solid #222; border-radius: 3px; background: rgba(0,255,65,0.02); }
+    .toolkit-link { display: flex; align-items: center; gap: 6px; padding: 5px 0; border-bottom: 1px solid #1a1a1a; text-decoration: none; color: #d4d4d4; font-size: 0.68rem; transition: color 0.15s; }
+    .toolkit-link:last-child { border-bottom: none; }
+    .toolkit-link:hover { color: #00ff41; }
+    .toolkit-link .tk-icon { font-size: 0.85rem; flex-shrink: 0; width: 20px; text-align: center; }
+    .toolkit-link .tk-label { flex: 1; }
+    .toolkit-link .tk-badge { font-size: 0.5rem; padding: 1px 5px; border-radius: 2px; border: 1px solid; letter-spacing: 0.5px; flex-shrink: 0; }
+    .tk-badge.ext { border-color: #00ccff; color: #00ccff; }
+    .tk-badge.live { border-color: #00ff41; color: #00ff41; }
+    .tk-badge.tool { border-color: #ffaa50; color: #ffaa50; }
     .stats-bar {
       position: absolute;
       top: 54px;
@@ -325,7 +344,7 @@
       .search-box input { width: calc(100vw - 120px); max-width: 220px; font-size: 16px; padding: 5px 10px; }
       .filter-toggle { top: 48px; font-size: 0.6rem; padding: 4px 8px; }
 
-      .filter-panel { width: 85vw; max-width: 320px; top: 40px; height: calc(100vh - 40px); }
+      .filter-panel { width: 92vw; max-width: 440px; top: 40px; height: calc(100vh - 40px); }
 
       .cm-drawer-bar { height: 32px; padding: 0 10px; gap: 8px; }
       .cm-drawer-bar h3 { font-size: 0.6rem; letter-spacing: 1px; }
@@ -340,11 +359,13 @@
       .leaflet-popup-content-wrapper { font-size: 0.75rem !important; max-width: 85vw !important; }
       .leaflet-popup-content { margin: 8px 10px !important; max-width: 250px; word-break: break-word; }
 
-      .filter-item { margin: 5px 0; padding: 2px 0; }
-      .filter-item label { font-size: 0.8rem; }
+      .filter-item { margin: 4px 0; padding: 3px 0; }
+      .filter-item label { font-size: 0.78rem; min-height: 32px; }
       .filter-item input[type="checkbox"], .filter-item input[type="radio"] {
-        width: 18px; height: 18px; margin-right: 8px; vertical-align: middle;
+        width: 20px; height: 20px; margin-right: 8px; vertical-align: middle; flex-shrink: 0;
       }
+      .filter-grid { grid-template-columns: 1fr 1fr; gap: 0 6px; }
+      .toolkit-link { padding: 8px 0; font-size: 0.72rem; }
 
       .leaflet-top.leaflet-left { top: auto !important; bottom: 40px !important; left: auto !important; right: 10px !important; }
       .leaflet-control-zoom a { width: 36px !important; height: 36px !important; line-height: 36px !important; font-size: 18px !important; }
@@ -360,6 +381,7 @@
       .header nav a { font-size: 0.5rem; padding: 0.1rem 0.3rem; white-space: nowrap; }
       .search-box input { max-width: 160px; }
       .filter-panel { width: 100vw; max-width: none; }
+      .filter-grid { grid-template-columns: 1fr 1fr; }
       .legend { max-width: 130px; }
     }
 
@@ -421,67 +443,102 @@
     <span class="chevron" id="filterChevron">▾</span>
   </div>
   <div class="filter-body" id="filterBody">
-  <h3 style="margin-top:4px">BY SECTION</h3>
-  <div class="filter-item"><label><input type="checkbox" checked data-section="all" onchange="toggleAll(this)"> All Sections</label></div>
-  <div class="filter-item"><label><input type="checkbox" checked data-section="II"> II — Control Architecture</label></div>
+  <!-- BY SECTION — collapsible, two-column -->
+  <div class="filter-section-header" onclick="toggleFilterSection('secBody','secChev')">
+    <h3 style="margin-top:4px">BY SECTION</h3>
+    <span class="sec-chev" id="secChev">▾</span>
+  </div>
+  <div class="filter-section-body" id="secBody">
+  <div class="filter-grid">
+  <div class="filter-item full-row"><label><input type="checkbox" checked data-section="all" onchange="toggleAll(this)"> All Sections</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-section="II"> II — Control Arch.</label></div>
   <div class="filter-item"><label><input type="checkbox" checked data-section="III"> III — 51% Threshold</label></div>
   <div class="filter-item"><label><input type="checkbox" checked data-section="IV"> IV — Underground</label></div>
-  <div class="filter-item"><label><input type="checkbox" checked data-section="V"> V — Surveillance Cities</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-section="V"> V — Surveillance</label></div>
   <div class="filter-item"><label><input type="checkbox" checked data-section="VI"> VI — "New" Pattern</label></div>
   <div class="filter-item"><label><input type="checkbox" checked data-section="VII"> VII — Enclaves</label></div>
-  <div class="filter-item"><label><input type="checkbox" checked data-section="VIII"> VIII — Cyclical Patterns</label></div>
-  <div class="filter-item"><label><input type="checkbox" checked data-section="IX"> IX — Slavery Systems</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-section="VIII"> VIII — Cyclical</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-section="IX"> IX — Slavery Sys.</label></div>
   <div class="filter-item"><label><input type="checkbox" checked data-section="X"> X — Conflicts</label></div>
   <div class="filter-item"><label><input type="checkbox" checked data-section="XI"> XI — FOIA</label></div>
   <div class="filter-item"><label><input type="checkbox" checked data-section="XII"> XII — Organized Crime</label></div>
   <div class="filter-item"><label><input type="checkbox" checked data-section="XIII"> XIII — Spiritual Exit</label></div>
-  <h3 style="margin-top:10px">BY TYPE</h3>
-  <div class="filter-item"><label><input type="checkbox" checked data-type="all-types" onchange="toggleAllTypes(this)"> All Types</label></div>
-  <div class="filter-item"><label><input type="checkbox" checked data-type="financial"> Financial / Banking</label></div>
-  <div class="filter-item"><label><input type="checkbox" checked data-type="military"> Military / Intelligence</label></div>
-  <div class="filter-item"><label><input type="checkbox" checked data-type="underground"> Underground / D.U.M.B.</label></div>
-  <div class="filter-item"><label><input type="checkbox" checked data-type="surveillance"> Surveillance / Smart Cities</label></div>
-  <div class="filter-item"><label><input type="checkbox" checked data-type="enclave"> Enclaves / Private Islands</label></div>
-  <div class="filter-item"><label><input type="checkbox" checked data-type="archaeological"> Archaeological / Ancient</label></div>
+  </div>
+  </div>
+  <!-- BY TYPE — collapsible, two-column -->
+  <div class="filter-section-header" onclick="toggleFilterSection('typeBody','typeChev')">
+    <h3 style="margin-top:6px">BY TYPE</h3>
+    <span class="sec-chev" id="typeChev">▾</span>
+  </div>
+  <div class="filter-section-body" id="typeBody">
+  <div class="filter-grid">
+  <div class="filter-item full-row"><label><input type="checkbox" checked data-type="all-types" onchange="toggleAllTypes(this)"> All Types</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="financial"> Financial</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="military"> Military / Intel</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="underground"> Underground</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="surveillance"> Surveillance</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="enclave"> Enclaves</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="archaeological"> Archaeological</label></div>
   <div class="filter-item"><label><input type="checkbox" checked data-type="conflict"> Conflict Zones</label></div>
-  <div class="filter-item"><label><input type="checkbox" checked data-type="governance"> Governance / Policy Orgs</label></div>
-  <div class="filter-item"><label><input type="checkbox" checked data-type="blacksite"> Black Sites / Rendition</label></div>
-  <div class="filter-item"><label><input type="checkbox" checked data-type="obelisk"> Obelisks / Symbols</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="governance"> Governance</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="blacksite"> Black Sites</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="obelisk"> Obelisks</label></div>
   <div class="filter-item"><label><input type="checkbox" checked data-type="organized-crime"> Organized Crime</label></div>
   <div class="filter-item"><label><input type="checkbox" checked data-type="submarine-cable"> Submarine Cables</label></div>
   <div class="filter-item"><label><input type="checkbox" checked data-type="satellite"> Satellite Networks</label></div>
   <div class="filter-item"><label><input type="checkbox" checked data-type="mining"> Mining / Drilling</label></div>
   <div class="filter-item"><label><input type="checkbox" checked data-type="airport"> Suspicious Airports</label></div>
   <div class="filter-item"><label><input type="checkbox" checked data-type="corporate"> Corporate Sites</label></div>
-  <div class="filter-item"><label><input type="checkbox" checked data-type="museum"> Museums / Institutions</label></div>
-  <div class="filter-item"><label><input type="checkbox" checked data-type="crypto-tech"> Crypto / Tech Parks</label></div>
-  <div class="filter-item"><label><input type="checkbox" checked data-type="technology"> Technology / Research</label></div>
-  <h3 style="margin-top:10px">MAP STYLE</h3>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="museum"> Museums</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="crypto-tech"> Crypto / Tech</label></div>
+  <div class="filter-item"><label><input type="checkbox" checked data-type="technology"> Technology</label></div>
+  </div>
+  </div>
+  <!-- MAP STYLE -->
+  <div class="filter-section-header" onclick="toggleFilterSection('styleBody','styleChev')">
+    <h3 style="margin-top:6px">MAP STYLE</h3>
+    <span class="sec-chev" id="styleChev">▾</span>
+  </div>
+  <div class="filter-section-body" id="styleBody">
+  <div class="filter-grid">
   <div class="filter-item"><label><input type="radio" name="mapStyle" value="dark" checked onchange="switchMapStyle(this.value)"> Dark</label></div>
   <div class="filter-item"><label><input type="radio" name="mapStyle" value="satellite" onchange="switchMapStyle(this.value)"> Satellite</label></div>
   <div class="filter-item"><label><input type="radio" name="mapStyle" value="terrain" onchange="switchMapStyle(this.value)"> Terrain</label></div>
   <div class="filter-item"><label><input type="radio" name="mapStyle" value="street" onchange="switchMapStyle(this.value)"> Street</label></div>
-  <h3 style="margin-top:10px">DATA LAYERS</h3>
+  </div>
+  </div>
+  <!-- DATA LAYERS + LIVE FEEDS -->
+  <div class="filter-section-header" onclick="toggleFilterSection('dataBody','dataChev')">
+    <h3 style="margin-top:6px">DATA LAYERS & LIVE FEEDS</h3>
+    <span class="sec-chev" id="dataChev">▾</span>
+  </div>
+  <div class="filter-section-body" id="dataBody">
+  <div class="filter-grid">
   <div class="filter-item"><label><input type="checkbox" checked id="toggleConnections" onchange="toggleDataLayer('connections')"> Connection Lines</label></div>
   <div class="filter-item"><label><input type="checkbox" checked id="toggleTunnels" onchange="toggleDataLayer('tunnels')"> Tunnel Paths</label></div>
-  <h3 style="margin-top:10px">LIVE FEEDS</h3>
-  <div class="filter-item"><label><input type="checkbox" id="toggleEarthquakes" onchange="toggleDataLayer('earthquakes')"> 🌍 USGS Earthquakes (24h)</label></div>
-  <div class="filter-item"><label><input type="checkbox" id="toggleEONET" onchange="toggleDataLayer('eonet')"> 🔥 NASA Active Events</label></div>
+  <div class="filter-item"><label><input type="checkbox" id="toggleEarthquakes" onchange="toggleDataLayer('earthquakes')"> 🌍 USGS Quakes</label></div>
+  <div class="filter-item"><label><input type="checkbox" id="toggleEONET" onchange="toggleDataLayer('eonet')"> 🔥 NASA Events</label></div>
+  </div>
   <div class="filter-item" id="liveFeedStatus" style="display:none;color:#888;font-size:0.6rem;padding-left:4px"></div>
-  <h3 style="margin-top:10px">ANALYSIS</h3>
   <div class="filter-item"><label><input type="checkbox" id="toggleTimeline" onchange="toggleTimelinePanel()"> Correlation Timeline</label></div>
-  <h3 style="margin-top:10px">PATTERN SEARCH</h3>
+  </div>
+  <!-- SEARCH -->
+  <div class="filter-section-header" onclick="toggleFilterSection('searchBody','searchChev')">
+    <h3 style="margin-top:6px">PATTERN & PROXIMITY SEARCH</h3>
+    <span class="sec-chev" id="searchChev">▾</span>
+  </div>
+  <div class="filter-section-body" id="searchBody">
   <div class="filter-item">
-    <input type="text" id="patternInput" placeholder="e.g. Palantir, CIA, obelisk..." style="background:#111;border:1px solid #333;color:#00ff41;padding:4px 8px;font-family:Courier New,monospace;font-size:0.7rem;width:100%;margin-bottom:4px" />
+    <input type="text" id="patternInput" placeholder="e.g. Palantir, CIA, obelisk..." style="background:#111;border:1px solid #333;color:#00ff41;padding:5px 8px;font-family:Courier New,monospace;font-size:0.7rem;width:100%;margin-bottom:4px" />
   </div>
   <div class="filter-item">
-    <button onclick="patternSearchKeyword()" style="background:transparent;border:1px solid #00ccff;color:#00ccff;padding:3px 8px;font-family:Courier New,monospace;font-size:0.65rem;cursor:pointer;margin-right:4px">SEARCH CONNECTIONS</button>
+    <button onclick="patternSearchKeyword()" style="background:transparent;border:1px solid #00ccff;color:#00ccff;padding:4px 10px;font-family:Courier New,monospace;font-size:0.65rem;cursor:pointer">SEARCH CONNECTIONS</button>
   </div>
-  <div class="filter-item" style="margin-top:4px">
-    <label style="color:#888;font-size:0.65rem">PROXIMITY SEARCH</label>
+  <div class="filter-item" style="margin-top:6px">
+    <label style="color:#888;font-size:0.65rem;font-weight:bold">PROXIMITY SEARCH</label>
   </div>
   <div class="filter-item">
-    <select id="proximityType" style="background:#111;border:1px solid #333;color:#00ff41;padding:3px 6px;font-family:Courier New,monospace;font-size:0.65rem;width:100%">
+    <select id="proximityType" style="background:#111;border:1px solid #333;color:#00ff41;padding:4px 6px;font-family:Courier New,monospace;font-size:0.65rem;width:100%">
       <option value="">— select type —</option>
       <option value="obelisk">Obelisks</option>
       <option value="military">Military</option>
@@ -496,15 +553,56 @@
     </select>
   </div>
   <div class="filter-item" style="display:flex;gap:4px;align-items:center;margin-top:4px">
-    <input type="number" id="proximityKm" value="50" min="1" max="500" style="background:#111;border:1px solid #333;color:#00ff41;padding:3px 6px;font-family:Courier New,monospace;font-size:0.65rem;width:60px" />
-    <span style="color:#888;font-size:0.65rem">km radius</span>
-    <button onclick="proximitySearch()" style="background:transparent;border:1px solid #00ccff;color:#00ccff;padding:3px 8px;font-family:Courier New,monospace;font-size:0.65rem;cursor:pointer">FIND</button>
+    <input type="number" id="proximityKm" value="50" min="1" max="500" style="background:#111;border:1px solid #333;color:#00ff41;padding:4px 6px;font-family:Courier New,monospace;font-size:0.65rem;width:60px" />
+    <span style="color:#888;font-size:0.65rem">km</span>
+    <button onclick="proximitySearch()" style="background:transparent;border:1px solid #00ccff;color:#00ccff;padding:4px 10px;font-family:Courier New,monospace;font-size:0.65rem;cursor:pointer">FIND</button>
   </div>
-  <h3 style="margin-top:10px">RESEARCHER TOOLS</h3>
+  </div>
+  <!-- TOOLKIT RESOURCES -->
+  <div class="filter-section-header" onclick="toggleFilterSection('toolkitBody','toolkitChev')">
+    <h3 style="margin-top:6px">🔧 TOOLKIT & RESOURCES</h3>
+    <span class="sec-chev" id="toolkitChev">▾</span>
+  </div>
+  <div class="filter-section-body" id="toolkitBody">
+  <div class="toolkit-section">
+    <a class="toolkit-link" href="https://github.com/Crosstalk-Solutions/project-nomad" target="_blank" rel="noopener noreferrer">
+      <span class="tk-icon">🖥️</span>
+      <span class="tk-label"><strong>Project N.O.M.A.D.</strong><br><span style="color:#888;font-size:0.58rem">Offline knowledge server — AI, maps, education, CyberChef</span></span>
+      <span class="tk-badge ext">EXTERNAL</span>
+    </a>
+    <a class="toolkit-link" href="https://earthquake.usgs.gov/earthquakes/map/" target="_blank" rel="noopener noreferrer">
+      <span class="tk-icon">🌍</span>
+      <span class="tk-label"><strong>USGS Earthquake Portal</strong><br><span style="color:#888;font-size:0.58rem">Real-time seismic monitoring — feeds into map live layer</span></span>
+      <span class="tk-badge live">LIVE</span>
+    </a>
+    <a class="toolkit-link" href="https://eonet.gsfc.nasa.gov/" target="_blank" rel="noopener noreferrer">
+      <span class="tk-icon">🔥</span>
+      <span class="tk-label"><strong>NASA EONET</strong><br><span style="color:#888;font-size:0.58rem">Earth Observatory Natural Event Tracker — fires, storms, volcanic</span></span>
+      <span class="tk-badge live">LIVE</span>
+    </a>
+    <a class="toolkit-link" href="/tones/instrument" target="_blank">
+      <span class="tk-icon">🎹</span>
+      <span class="tk-label"><strong>b0b Tone Lab</strong><br><span style="color:#888;font-size:0.58rem">Stackable healing frequency instrument with touch pads</span></span>
+      <span class="tk-badge tool">TOOL</span>
+    </a>
+    <a class="toolkit-link" href="/tones/multipack" target="_blank">
+      <span class="tk-icon">🎛️</span>
+      <span class="tk-label"><strong>b0b Multipack</strong><br><span style="color:#888;font-size:0.58rem">All-in-one healing, protective, ultrasonic countermeasures</span></span>
+      <span class="tk-badge tool">TOOL</span>
+    </a>
+  </div>
+  </div>
+  <!-- RESEARCHER TOOLS -->
+  <div class="filter-section-header" onclick="toggleFilterSection('researchBody','researchChev')">
+    <h3 style="margin-top:6px">📋 RESEARCHER TOOLS</h3>
+    <span class="sec-chev" id="researchChev">▾</span>
+  </div>
+  <div class="filter-section-body" id="researchBody">
   <div class="filter-item"><a href="/api/data" target="_blank" style="color:#00ff41;text-decoration:none;font-size:0.7rem">⬇ EXPORT JSON DATA</a></div>
   <div class="filter-item" style="margin-top:2px"><a href="/download" style="color:#ff4444;text-decoration:none;font-size:0.7rem">📦 DOWNLOAD OFFLINE BACKUP (ZIP)</a></div>
   <div class="filter-item" style="margin-top:2px"><a href="/report#methodology" target="_blank" style="color:#00ccff;text-decoration:none;font-size:0.7rem">📋 SOURCE METHODOLOGY</a></div>
   <div class="filter-item" style="margin-top:2px;color:#888;font-size:0.6rem">Deep Links: /map?type=X&section=Y&marker=Z</div>
+  </div>
   </div>
 </div>
 
@@ -1752,6 +1850,16 @@ function toggleAll(el) {
 function toggleAllTypes(el) {
   document.querySelectorAll('[data-type]').forEach(function(cb) { cb.checked = el.checked; });
   applyFilters();
+}
+
+// Collapsible filter sections
+function toggleFilterSection(bodyId, chevId) {
+  var body = document.getElementById(bodyId);
+  var chev = document.getElementById(chevId);
+  if (body && chev) {
+    body.classList.toggle('collapsed');
+    chev.classList.toggle('collapsed');
+  }
 }
 
 // Attach filter listeners
@@ -3739,15 +3847,16 @@ function setProtectiveVolume(val) {
     }, 30000);
   }, 3000);
 
-  // Add visual lock indicator to header
-  var header = document.querySelector('.header h1');
-  if (header) {
+  // Add visual lock indicator to header — placed OUTSIDE h1 to avoid triggering DOM watchdog
+  var header = document.querySelector('.header');
+  var h1 = document.querySelector('.header h1');
+  if (header && h1) {
     var lock = document.createElement('span');
     lock.id = 'integrityLock';
     lock.textContent = '🔒';
     lock.title = 'Content integrity OK';
-    lock.style.cssText = 'margin-left:8px;font-size:0.7rem;cursor:help;vertical-align:middle';
-    header.appendChild(lock);
+    lock.style.cssText = 'margin-left:8px;font-size:0.7rem;cursor:help;vertical-align:middle;color:#00ff41';
+    h1.after(lock);
   }
 })();
 
