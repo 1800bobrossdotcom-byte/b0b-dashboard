@@ -46,16 +46,6 @@ h1{color:#00ff41;font-size:1.4rem;letter-spacing:3px;margin-bottom:0.3rem;text-a
 .pt-volume{flex:1;height:6px;accent-color:#00ccff;cursor:pointer}
 .pt-vol-label{font-size:0.55rem;color:#555;flex-shrink:0;min-width:30px;text-align:right}
 .pt-now-playing{font-size:0.65rem;color:#00ccff;margin-top:6px;font-style:italic;min-height:1em}
-
-/* Love tone */
-.tool-panel.love{border-color:#ff69b4}
-.lt-pulse{display:inline-block;width:14px;height:14px;margin-right:6px;vertical-align:middle}
-.lt-pulse.active{animation:ltPulse 1.5s ease-in-out infinite}
-@keyframes ltPulse{0%,100%{transform:scale(1);opacity:0.7}50%{transform:scale(1.3);opacity:1}}
-.lt-volume-row{display:flex;align-items:center;gap:8px;margin-top:8px}
-.lt-volume{flex:1;height:6px;accent-color:#ff69b4;cursor:pointer}
-.lt-vol-label{font-size:0.55rem;color:#555;flex-shrink:0;min-width:30px;text-align:right}
-.lt-now-playing{font-size:0.65rem;color:#ff69b4;margin-top:6px;font-style:italic;min-height:1em}
 /* Footer */
 .footer{margin-top:1.5rem;text-align:center;padding:1rem 0}
 .footer-line{font-size:0.55rem;color:#333;line-height:1.6}
@@ -147,18 +137,6 @@ h1{color:#00ff41;font-size:1.4rem;letter-spacing:3px;margin-bottom:0.3rem;text-a
     </div>
     <div class="pt-now-playing" id="ptNowPlaying"></div>
     <div class="tool-info">Binaural beats &amp; acoustic masking for mental shielding and conversation privacy. Binaural beats use stereo offset to produce sub-audible brainwave entrainment — use headphones for full effect. Pink/brown noise masks ambient sound for acoustic privacy. 🐾 ANIMAL-SAFE: all tones at gentle volume, safe for all pets.</div>
-  </div>
-
-  <!-- LOVE TONE -->
-  <div class="tool-panel love">
-    <label class="tool-toggle"><input type="checkbox" id="cmLove" onchange="toggleLoveTone(this.checked)"><span class="tool-label" style="color:#ff69b4">❤️ LOVE TONE — 528 Hz</span></label>
-    <div class="tool-status" id="cmLoveStatus"><span class="lt-pulse" id="ltPulseIcon">❤️</span> INACTIVE</div>
-    <div class="lt-volume-row">
-      <input type="range" class="lt-volume" id="ltVolume" min="0" max="100" value="30" oninput="setLoveVolume(this.value)" title="Volume">
-      <span class="lt-vol-label" id="ltVolLabel">30%</span>
-    </div>
-    <div class="lt-now-playing" id="ltNowPlaying"></div>
-    <div class="tool-info">The 528 Hz "Love Frequency" — layered with gentle harmonics (264 Hz sub-octave + 1056 Hz overtone) and a slow heart-coherence pulse (~0.1 Hz, ~6 bpm). Known in sound therapy as the "Miracle Tone" associated with transformation, DNA repair, and deep peace. 🐾 ANIMAL-SAFE: gentle audible tones, safe for all pets.</div>
   </div>
 
   <!-- SAVE HINT -->
@@ -502,106 +480,6 @@ function setProtectiveVolume(val) {
 }
 
 // ===================== LOVE TONE ENGINE =====================
-// 528 Hz with harmonics and heart-coherence pulse
-var ltAudioCtx = null;
-var ltOsc528 = null;
-var ltOsc264 = null;
-var ltOsc1056 = null;
-var ltGainNode = null;
-var ltLfoNode = null;
-var ltLfoGain = null;
-var ltActive = false;
-var ltVolume = 0.075;
-
-function toggleLoveTone(enabled) {
-  if (enabled) startLoveTone(); else stopLoveTone();
-}
-
-function startLoveTone() {
-  try {
-    if (!ltAudioCtx) ltAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    if (ltAudioCtx.state === 'suspended') ltAudioCtx.resume();
-    cleanupLove();
-
-    ltGainNode = ltAudioCtx.createGain();
-    ltGainNode.gain.setValueAtTime(0, ltAudioCtx.currentTime);
-    ltGainNode.gain.linearRampToValueAtTime(ltVolume, ltAudioCtx.currentTime + 1.5);
-    ltGainNode.connect(ltAudioCtx.destination);
-
-    // LFO: heart-coherence pulse ~0.1 Hz (~6 bpm)
-    ltLfoNode = ltAudioCtx.createOscillator();
-    ltLfoNode.type = 'sine';
-    ltLfoNode.frequency.value = 0.1;
-    ltLfoGain = ltAudioCtx.createGain();
-    ltLfoGain.gain.value = 0.15;
-    ltLfoNode.connect(ltLfoGain);
-    ltLfoGain.connect(ltGainNode.gain);
-    ltLfoNode.start();
-
-    // 528 Hz fundamental
-    ltOsc528 = ltAudioCtx.createOscillator();
-    ltOsc528.type = 'sine';
-    ltOsc528.frequency.value = 528;
-    var g528 = ltAudioCtx.createGain(); g528.gain.value = 1.0;
-    ltOsc528.connect(g528); g528.connect(ltGainNode);
-    ltOsc528.start();
-
-    // 264 Hz sub-octave (warmth)
-    ltOsc264 = ltAudioCtx.createOscillator();
-    ltOsc264.type = 'sine';
-    ltOsc264.frequency.value = 264;
-    var g264 = ltAudioCtx.createGain(); g264.gain.value = 0.3;
-    ltOsc264.connect(g264); g264.connect(ltGainNode);
-    ltOsc264.start();
-
-    // 1056 Hz overtone (shimmer)
-    ltOsc1056 = ltAudioCtx.createOscillator();
-    ltOsc1056.type = 'sine';
-    ltOsc1056.frequency.value = 1056;
-    var g1056 = ltAudioCtx.createGain(); g1056.gain.value = 0.15;
-    ltOsc1056.connect(g1056); g1056.connect(ltGainNode);
-    ltOsc1056.start();
-
-    ltActive = true;
-    document.getElementById('cmLoveStatus').innerHTML = '<span class="lt-pulse active">❤️</span> ACTIVE — 528 Hz';
-    document.getElementById('cmLoveStatus').className = 'tool-status active';
-    document.getElementById('ltNowPlaying').textContent = '❤️ 528 Hz Love Frequency — with harmonics + heart pulse';
-  } catch (e) {
-    document.getElementById('cmLoveStatus').textContent = 'ERROR — ' + e.message;
-  }
-}
-
-function cleanupLove() {
-  try {
-    if (ltOsc528) { ltOsc528.stop(); ltOsc528.disconnect(); ltOsc528 = null; }
-    if (ltOsc264) { ltOsc264.stop(); ltOsc264.disconnect(); ltOsc264 = null; }
-    if (ltOsc1056) { ltOsc1056.stop(); ltOsc1056.disconnect(); ltOsc1056 = null; }
-    if (ltLfoNode) { ltLfoNode.stop(); ltLfoNode.disconnect(); ltLfoNode = null; }
-    if (ltLfoGain) { ltLfoGain.disconnect(); ltLfoGain = null; }
-    if (ltGainNode) { ltGainNode.disconnect(); ltGainNode = null; }
-  } catch(e) {}
-}
-
-function stopLoveTone() {
-  try {
-    if (ltGainNode && ltAudioCtx) {
-      ltGainNode.gain.linearRampToValueAtTime(0, ltAudioCtx.currentTime + 0.8);
-      setTimeout(function() { cleanupLove(); }, 900);
-    } else { cleanupLove(); }
-    ltActive = false;
-    document.getElementById('cmLoveStatus').innerHTML = '<span class="lt-pulse">❤️</span> INACTIVE';
-    document.getElementById('cmLoveStatus').className = 'tool-status';
-    document.getElementById('ltNowPlaying').textContent = '';
-  } catch (e) {}
-}
-
-function setLoveVolume(val) {
-  ltVolume = (val / 100) * 0.25;
-  document.getElementById('ltVolLabel').textContent = val + '%';
-  if (ltActive && ltGainNode && ltAudioCtx) {
-    ltGainNode.gain.linearRampToValueAtTime(ltVolume, ltAudioCtx.currentTime + 0.1);
-  }
-}
 </script>
 </body>
 </html>
