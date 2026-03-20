@@ -34,6 +34,18 @@ h1{color:#00ff41;font-size:1.4rem;letter-spacing:3px;margin-bottom:0.3rem;text-a
 .ht-vol-label{font-size:0.55rem;color:#555;flex-shrink:0;min-width:30px;text-align:right}
 .ht-now-playing{font-size:0.65rem;color:#00ff41;margin-top:6px;font-style:italic;min-height:1em}
 
+/* Protective tones */
+.tool-panel.protective{border-color:#00ccff}
+.pt-freq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:10px}
+.pt-freq-btn{padding:8px 2px;font-size:0.6rem;font-family:'Courier New',monospace;background:rgba(0,0,0,0.4);border:1px solid #333;color:#888;cursor:pointer;text-align:center;transition:all 0.2s;border-radius:1px;-webkit-tap-highlight-color:transparent}
+.pt-freq-btn:hover{border-color:#00ccff;color:#00ccff}
+.pt-freq-btn.active{border-color:#00ccff;color:#00ccff;background:rgba(0,204,255,0.08);box-shadow:0 0 6px rgba(0,204,255,0.15)}
+.pt-freq-name{display:block;font-size:0.45rem;color:#555;margin-top:2px}
+.pt-freq-btn.active .pt-freq-name{color:#00ccff}
+.pt-volume-row{display:flex;align-items:center;gap:8px;margin-top:8px}
+.pt-volume{flex:1;height:6px;accent-color:#00ccff;cursor:pointer}
+.pt-vol-label{font-size:0.55rem;color:#555;flex-shrink:0;min-width:30px;text-align:right}
+.pt-now-playing{font-size:0.65rem;color:#00ccff;margin-top:6px;font-style:italic;min-height:1em}
 /* Footer */
 .footer{margin-top:1.5rem;text-align:center;padding:1rem 0}
 .footer-line{font-size:0.55rem;color:#333;line-height:1.6}
@@ -105,6 +117,26 @@ h1{color:#00ff41;font-size:1.4rem;letter-spacing:3px;margin-bottom:0.3rem;text-a
     </div>
     <div class="ht-now-playing" id="htNowPlaying"></div>
     <div class="tool-info">Solfeggio healing frequencies — pure sine wave tones used for centuries in sound therapy and meditation. 🐾 ANIMAL-SAFE: all frequencies (174–963 Hz) are in the normal audible range at gentle volume. Safe for dogs, cats, birds, and all pets.</div>
+  </div>
+
+  <!-- PROTECTIVE TONES -->
+  <div class="tool-panel protective">
+    <label class="tool-toggle"><input type="checkbox" id="cmProtective" onchange="toggleProtectiveTones(this.checked)"><span class="tool-label" style="color:#00ccff">🛡️ PROTECTIVE TONES</span></label>
+    <div class="tool-status" id="cmProtectiveStatus">INACTIVE</div>
+    <div class="pt-freq-grid" id="ptFreqGrid">
+      <button class="pt-freq-btn active" data-freq="7.83" data-name="Schumann Resonance" data-type="binaural" onclick="selectProtectiveFreq(this)">7.83 Hz<span class="pt-freq-name">Schumann</span></button>
+      <button class="pt-freq-btn" data-freq="10" data-name="Alpha — Calm Alert" data-type="binaural" onclick="selectProtectiveFreq(this)">10 Hz<span class="pt-freq-name">Alpha</span></button>
+      <button class="pt-freq-btn" data-freq="14" data-name="Beta — Focus" data-type="binaural" onclick="selectProtectiveFreq(this)">14 Hz<span class="pt-freq-name">Beta</span></button>
+      <button class="pt-freq-btn" data-freq="40" data-name="Gamma — Perception" data-type="binaural" onclick="selectProtectiveFreq(this)">40 Hz<span class="pt-freq-name">Gamma</span></button>
+      <button class="pt-freq-btn" data-freq="0" data-name="Pink Noise — Masking" data-type="pink" onclick="selectProtectiveFreq(this)">PINK<span class="pt-freq-name">Masking</span></button>
+      <button class="pt-freq-btn" data-freq="0" data-name="Brown Noise — Deep Cover" data-type="brown" onclick="selectProtectiveFreq(this)">BROWN<span class="pt-freq-name">Deep Cover</span></button>
+    </div>
+    <div class="pt-volume-row">
+      <input type="range" class="pt-volume" id="ptVolume" min="0" max="100" value="30" oninput="setProtectiveVolume(this.value)" title="Volume">
+      <span class="pt-vol-label" id="ptVolLabel">30%</span>
+    </div>
+    <div class="pt-now-playing" id="ptNowPlaying"></div>
+    <div class="tool-info">Binaural beats &amp; acoustic masking for mental shielding and conversation privacy. Binaural beats use stereo offset to produce sub-audible brainwave entrainment — use headphones for full effect. Pink/brown noise masks ambient sound for acoustic privacy. 🐾 ANIMAL-SAFE: all tones at gentle volume, safe for all pets.</div>
   </div>
 
   <!-- SAVE HINT -->
@@ -322,6 +354,128 @@ function setHealingVolume(val) {
   document.getElementById('htVolLabel').textContent = val + '%';
   if (htActive && htGainNode && htAudioCtx) {
     htGainNode.gain.linearRampToValueAtTime(htVolume, htAudioCtx.currentTime + 0.1);
+  }
+}
+
+// ===================== PROTECTIVE TONES ENGINE =====================
+// Binaural beats + acoustic masking for mental shielding and privacy
+// Binaural: L channel = carrier freq, R channel = carrier + beat freq (use headphones)
+// Pink/Brown noise: acoustic masking for conversation privacy
+var ptAudioCtx = null;
+var ptOscL = null;
+var ptOscR = null;
+var ptNoiseNode = null;
+var ptGainNode = null;
+var ptActive = false;
+var ptCurrentFreq = 7.83;
+var ptCurrentName = 'Schumann Resonance';
+var ptCurrentType = 'binaural';
+var ptVolume = 0.075;
+var ptBaseFreq = 200;
+
+function toggleProtectiveTones(enabled) {
+  if (enabled) startProtectiveTone(); else stopProtectiveTone();
+}
+
+function startProtectiveTone() {
+  try {
+    if (!ptAudioCtx) ptAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (ptAudioCtx.state === 'suspended') ptAudioCtx.resume();
+    cleanupProtective();
+
+    ptGainNode = ptAudioCtx.createGain();
+    ptGainNode.gain.setValueAtTime(0, ptAudioCtx.currentTime);
+    ptGainNode.gain.linearRampToValueAtTime(ptVolume, ptAudioCtx.currentTime + 0.8);
+    ptGainNode.connect(ptAudioCtx.destination);
+
+    if (ptCurrentType === 'binaural') {
+      var merger = ptAudioCtx.createChannelMerger(2);
+      merger.connect(ptGainNode);
+      ptOscL = ptAudioCtx.createOscillator();
+      ptOscL.type = 'sine';
+      ptOscL.frequency.value = ptBaseFreq;
+      ptOscL.connect(merger, 0, 0);
+      ptOscR = ptAudioCtx.createOscillator();
+      ptOscR.type = 'sine';
+      ptOscR.frequency.value = ptBaseFreq + ptCurrentFreq;
+      ptOscR.connect(merger, 0, 1);
+      ptOscL.start();
+      ptOscR.start();
+    } else if (ptCurrentType === 'pink') {
+      var bufSize = ptAudioCtx.sampleRate * 2;
+      var buf = ptAudioCtx.createBuffer(1, bufSize, ptAudioCtx.sampleRate);
+      var d = buf.getChannelData(0);
+      var b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0;
+      for (var i = 0; i < bufSize; i++) {
+        var w = Math.random() * 2 - 1;
+        b0=0.99886*b0+w*0.0555179; b1=0.99332*b1+w*0.0750759;
+        b2=0.96900*b2+w*0.1538520; b3=0.86650*b3+w*0.3104856;
+        b4=0.55000*b4+w*0.5329522; b5=-0.7616*b5-w*0.0168980;
+        d[i]=(b0+b1+b2+b3+b4+b5+b6+w*0.5362)*0.11; b6=w*0.115926;
+      }
+      ptNoiseNode = ptAudioCtx.createBufferSource();
+      ptNoiseNode.buffer = buf; ptNoiseNode.loop = true;
+      ptNoiseNode.connect(ptGainNode); ptNoiseNode.start();
+    } else if (ptCurrentType === 'brown') {
+      var bufSize2 = ptAudioCtx.sampleRate * 2;
+      var buf2 = ptAudioCtx.createBuffer(1, bufSize2, ptAudioCtx.sampleRate);
+      var d2 = buf2.getChannelData(0); var last = 0;
+      for (var j = 0; j < bufSize2; j++) {
+        var wn = Math.random() * 2 - 1;
+        last = (last + (0.02 * wn)) / 1.02; d2[j] = last * 3.5;
+      }
+      ptNoiseNode = ptAudioCtx.createBufferSource();
+      ptNoiseNode.buffer = buf2; ptNoiseNode.loop = true;
+      ptNoiseNode.connect(ptGainNode); ptNoiseNode.start();
+    }
+
+    ptActive = true;
+    var label = ptCurrentType === 'binaural' ? ptCurrentFreq + ' Hz binaural' : ptCurrentName;
+    document.getElementById('cmProtectiveStatus').textContent = 'ACTIVE — ' + label;
+    document.getElementById('cmProtectiveStatus').className = 'tool-status active';
+    document.getElementById('ptNowPlaying').textContent = '◆ ' + ptCurrentName;
+  } catch (e) {
+    document.getElementById('cmProtectiveStatus').textContent = 'ERROR — ' + e.message;
+  }
+}
+
+function cleanupProtective() {
+  try {
+    if (ptOscL) { ptOscL.stop(); ptOscL.disconnect(); ptOscL = null; }
+    if (ptOscR) { ptOscR.stop(); ptOscR.disconnect(); ptOscR = null; }
+    if (ptNoiseNode) { ptNoiseNode.stop(); ptNoiseNode.disconnect(); ptNoiseNode = null; }
+    if (ptGainNode) { ptGainNode.disconnect(); ptGainNode = null; }
+  } catch(e) {}
+}
+
+function stopProtectiveTone() {
+  try {
+    if (ptGainNode && ptAudioCtx) {
+      ptGainNode.gain.linearRampToValueAtTime(0, ptAudioCtx.currentTime + 0.4);
+      setTimeout(function() { cleanupProtective(); }, 450);
+    } else { cleanupProtective(); }
+    ptActive = false;
+    document.getElementById('cmProtectiveStatus').textContent = 'INACTIVE';
+    document.getElementById('cmProtectiveStatus').className = 'tool-status';
+    document.getElementById('ptNowPlaying').textContent = '';
+  } catch (e) {}
+}
+
+function selectProtectiveFreq(btn) {
+  var allBtns = document.querySelectorAll('.pt-freq-btn');
+  for (var i = 0; i < allBtns.length; i++) allBtns[i].classList.remove('active');
+  btn.classList.add('active');
+  ptCurrentFreq = parseFloat(btn.getAttribute('data-freq'));
+  ptCurrentName = btn.getAttribute('data-name');
+  ptCurrentType = btn.getAttribute('data-type');
+  if (ptActive) startProtectiveTone();
+}
+
+function setProtectiveVolume(val) {
+  ptVolume = (val / 100) * 0.25;
+  document.getElementById('ptVolLabel').textContent = val + '%';
+  if (ptActive && ptGainNode && ptAudioCtx) {
+    ptGainNode.gain.linearRampToValueAtTime(ptVolume, ptAudioCtx.currentTime + 0.1);
   }
 }
 </script>
