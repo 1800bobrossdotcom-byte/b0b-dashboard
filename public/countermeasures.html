@@ -36,7 +36,7 @@ h1{color:#00ff41;font-size:1.4rem;letter-spacing:3px;margin-bottom:0.3rem;text-a
 
 /* Protective tones */
 .tool-panel.protective{border-color:#00ccff}
-.pt-freq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:10px}
+.pt-freq-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:10px}
 .pt-freq-btn{padding:8px 2px;font-size:0.6rem;font-family:'Courier New',monospace;background:rgba(0,0,0,0.4);border:1px solid #333;color:#888;cursor:pointer;text-align:center;transition:all 0.2s;border-radius:1px;-webkit-tap-highlight-color:transparent}
 .pt-freq-btn:hover{border-color:#00ccff;color:#00ccff}
 .pt-freq-btn.active{border-color:#00ccff;color:#00ccff;background:rgba(0,204,255,0.08);box-shadow:0 0 6px rgba(0,204,255,0.15)}
@@ -57,7 +57,8 @@ h1{color:#00ff41;font-size:1.4rem;letter-spacing:3px;margin-bottom:0.3rem;text-a
 @media(max-width:480px){
   body{padding:1rem 0.5rem}
   h1{font-size:1.1rem}
-  .ht-freq-grid{grid-template-columns:repeat(5,1fr);gap:3px}
+  .ht-freq-grid{grid-template-columns:repeat(3,1fr);gap:3px}
+  .pt-freq-grid{grid-template-columns:repeat(3,1fr);gap:3px}
   .ht-freq-btn{padding:6px 1px;font-size:0.55rem}
   .ht-freq-name{font-size:0.4rem}
   .tool-panel{padding:10px}
@@ -146,6 +147,32 @@ h1{color:#00ff41;font-size:1.4rem;letter-spacing:3px;margin-bottom:0.3rem;text-a
     Press <strong>Ctrl+S</strong> (or <strong>⌘+S</strong> on Mac) to save this page.<br>
     Open the saved HTML file anytime — no internet needed.<br>
     Works on phone, tablet, laptop, and desktop.
+  </div>
+
+  <!-- DOWNLOAD STANDALONE TOOLS -->
+  <div class="tool-panel" style="margin-top:12px;border-color:#ff4444">
+    <div style="font-size:0.75rem;color:#ff4444;letter-spacing:1px;font-weight:bold;margin-bottom:10px">⬇ DOWNLOAD STANDALONE TONE TOOLS</div>
+    <div class="tool-info" style="margin-bottom:10px">Self-contained HTML files. Zero dependencies. No server needed. Open in any browser, anywhere.</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button onclick="downloadToneApp('healing')" style="flex:1;min-width:140px;padding:10px;background:transparent;border:1px solid #00ff41;color:#00ff41;font-family:'Courier New',monospace;font-size:0.7rem;cursor:pointer;letter-spacing:1px">⬇ HEALING TONES</button>
+      <button onclick="downloadToneApp('protective')" style="flex:1;min-width:140px;padding:10px;background:transparent;border:1px solid #00ccff;color:#00ccff;font-family:'Courier New',monospace;font-size:0.7rem;cursor:pointer;letter-spacing:1px">⬇ PROTECTIVE TONES</button>
+    </div>
+  </div>
+
+  <!-- EMBED ON YOUR SITE -->
+  <div class="tool-panel" style="margin-top:12px;border-color:#cc88ff">
+    <div style="font-size:0.75rem;color:#cc88ff;letter-spacing:1px;font-weight:bold;margin-bottom:10px">🔗 INSTALL ON YOUR SITE</div>
+    <div class="tool-info" style="margin-bottom:10px">Copy one of these embed codes to add tone tools to any website. The iframe loads the full tool — no dependencies required on your end.</div>
+    <div style="margin-bottom:8px;font-size:0.6rem;color:#cc88ff;letter-spacing:1px">HEALING TONES EMBED:</div>
+    <div style="position:relative">
+      <pre id="embedHealing" style="background:#111;border:1px solid #333;padding:8px;font-size:0.55rem;color:#888;overflow-x:auto;white-space:pre-wrap;word-break:break-all;margin:0">&lt;iframe src="https://b0b.dev/tools" style="width:100%;max-width:540px;height:600px;border:1px solid #333;background:#0a0a0a" title="b0b Countermeasures &amp; Healing Tones" loading="lazy"&gt;&lt;/iframe&gt;</pre>
+      <button onclick="copyEmbed('embedHealing',this)" style="position:absolute;top:4px;right:4px;background:#0a0a0a;border:1px solid #cc88ff;color:#cc88ff;font-family:'Courier New',monospace;font-size:0.55rem;padding:3px 8px;cursor:pointer">COPY</button>
+    </div>
+    <div style="margin:12px 0 8px;font-size:0.6rem;color:#cc88ff;letter-spacing:1px">SCRIPT TAG (ADVANCED):</div>
+    <div style="position:relative">
+      <pre id="embedScript" style="background:#111;border:1px solid #333;padding:8px;font-size:0.55rem;color:#888;overflow-x:auto;white-space:pre-wrap;word-break:break-all;margin:0">&lt;script&gt;(function(){var d=document.createElement('div');d.innerHTML='&lt;iframe src="https://b0b.dev/tools" style="width:100%;max-width:540px;height:600px;border:1px solid #333;background:#0a0a0a" title="b0b Countermeasures" loading="lazy"&gt;&lt;/iframe&gt;';document.currentScript.parentNode.insertBefore(d,document.currentScript)})()&lt;/script&gt;</pre>
+      <button onclick="copyEmbed('embedScript',this)" style="position:absolute;top:4px;right:4px;background:#0a0a0a;border:1px solid #cc88ff;color:#cc88ff;font-family:'Courier New',monospace;font-size:0.55rem;padding:3px 8px;cursor:pointer">COPY</button>
+    </div>
   </div>
 
 </div>
@@ -274,6 +301,8 @@ function toggleCanvasGuard(enabled) {
           var imgData = cmOriginalGetImageData.call(ctx, 0, 0, Math.min(this.width, 16), Math.min(this.height, 16));
           for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] = (imgData.data[i] + (Math.random() > 0.5 ? 1 : -1)) & 0xFF;
+            imgData.data[i+1] = (imgData.data[i+1] + (Math.random() > 0.5 ? 1 : -1)) & 0xFF;
+            imgData.data[i+2] = (imgData.data[i+2] + (Math.random() > 0.5 ? 1 : -1)) & 0xFF;
           }
           ctx.putImageData(imgData, 0, 0);
         } catch(e) {}
@@ -536,6 +565,90 @@ function setProtectiveVolume(val) {
   if (ptActive && ptGainNode && ptAudioCtx) {
     ptGainNode.gain.linearRampToValueAtTime(ptVolume, ptAudioCtx.currentTime + 0.1);
   }
+}
+
+// ===================== COPY EMBED CODE =====================
+function copyEmbed(id, btn) {
+  var text = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = '✓ COPIED';
+    setTimeout(function() { btn.textContent = 'COPY'; }, 2000);
+  }).catch(function() {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = '✓ COPIED';
+    setTimeout(function() { btn.textContent = 'COPY'; }, 2000);
+  });
+}
+
+// ===================== DOWNLOAD STANDALONE TONE APP =====================
+function downloadToneApp(type) {
+  var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>b0b ' + type + ' Tones</title><style>';
+  html += '*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;display:flex;align-items:center;justify-content:center;min-height:100vh}';
+  html += '.app{max-width:500px;width:90%;padding:24px;border:1px solid #333}.app h1{color:#ff4444;font-size:1rem;letter-spacing:2px;margin-bottom:16px}';
+  html += '.btn{display:inline-block;padding:8px 14px;margin:4px;background:transparent;border:1px solid #00ff41;color:#00ff41;font-family:inherit;font-size:0.8rem;cursor:pointer}';
+  html += '.btn:hover,.btn.active{background:#00ff41;color:#0a0a0a}.status{margin:12px 0;color:#555;font-size:0.8rem}';
+  html += '.toggle{display:flex;align-items:center;gap:8px;margin:12px 0;cursor:pointer}.toggle input{width:18px;height:18px}';
+  html += 'input[type=range]{width:100%;margin:12px 0;accent-color:#00ff41}';
+  html += '.credit{margin-top:24px;color:#333;font-size:0.6rem;text-align:center}';
+  html += '</style></head><body><div class="app">';
+
+  if (type === 'healing') {
+    html += '<h1>\uD83C\uDFB5 b0b HEALING TONES</h1>';
+    html += '<label class="toggle"><input type="checkbox" id="tog" onchange="toggle(this.checked)"><span>ACTIVATE</span></label>';
+    html += '<div class="status" id="st">INACTIVE</div>';
+    html += '<div id="grid">';
+    var freqs = [[174,'Pain Relief'],[285,'Tissue Healing'],[396,'Liberation'],[417,'Change'],[432,'Natural Calm'],[528,'Love / DNA Repair'],[639,'Connection'],[741,'Intuition'],[852,'Spiritual'],[963,'Higher Self']];
+    for (var i = 0; i < freqs.length; i++) {
+      html += '<button class="btn' + (freqs[i][0] === 396 ? ' active' : '') + '" data-f="' + freqs[i][0] + '" data-n="' + freqs[i][1] + '" onclick="sel(this)">' + freqs[i][0] + ' Hz</button>';
+    }
+    html += '</div><input type="range" min="0" max="100" value="25" oninput="vol(this.value)">';
+    html += '<scr' + 'ipt>';
+    html += 'var ctx,osc,sub,gain,on=false,freq=396,name="Liberation",v=0.06;';
+    html += 'function toggle(e){if(e){if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();if(ctx.state==="suspended")ctx.resume();if(osc){try{osc.stop();osc.disconnect()}catch(x){}}if(sub){try{sub.stop();sub.disconnect()}catch(x){}}osc=ctx.createOscillator();osc.type="sine";osc.frequency.value=freq;gain=ctx.createGain();gain.gain.setValueAtTime(0,ctx.currentTime);gain.gain.linearRampToValueAtTime(v,ctx.currentTime+0.5);osc.connect(gain);sub=ctx.createOscillator();sub.type="sine";sub.frequency.value=freq/2;var sg=ctx.createGain();sg.gain.value=0.15;sub.connect(sg);sg.connect(gain);gain.connect(ctx.destination);osc.start();sub.start();on=true;document.getElementById("st").textContent="ACTIVE \\u2014 "+freq+" Hz";document.getElementById("st").style.color="#00ff41"}else{if(gain&&ctx){gain.gain.linearRampToValueAtTime(0,ctx.currentTime+0.3);setTimeout(function(){try{if(osc){osc.stop();osc.disconnect();osc=null}if(sub){sub.stop();sub.disconnect();sub=null}if(gain){gain.disconnect();gain=null}}catch(x){}},350)}on=false;document.getElementById("st").textContent="INACTIVE";document.getElementById("st").style.color="#555"}}';
+    html += 'function sel(b){document.querySelectorAll(".btn").forEach(function(x){x.classList.remove("active")});b.classList.add("active");freq=parseInt(b.dataset.f);name=b.dataset.n;if(on&&osc&&ctx){osc.frequency.linearRampToValueAtTime(freq,ctx.currentTime+0.3);if(sub)sub.frequency.linearRampToValueAtTime(freq/2,ctx.currentTime+0.3);document.getElementById("st").textContent="ACTIVE \\u2014 "+freq+" Hz"}}';
+    html += 'function vol(val){v=(val/100)*0.25;if(on&&gain&&ctx)gain.gain.linearRampToValueAtTime(v,ctx.currentTime+0.1)}';
+    html += '<\\/scr' + 'ipt>';
+  } else {
+    html += '<h1>\uD83D\uDEE1\uFE0F b0b PROTECTIVE TONES</h1>';
+    html += '<label class="toggle"><input type="checkbox" id="tog" onchange="toggle(this.checked)"><span>ACTIVATE</span></label>';
+    html += '<div class="status" id="st">INACTIVE</div>';
+    html += '<div id="grid">';
+    html += '<button class="btn active" data-f="7.83" data-n="Schumann Resonance" data-t="binaural" onclick="sel(this)">7.83 Hz</button>';
+    html += '<button class="btn" data-f="10" data-n="Alpha" data-t="binaural" onclick="sel(this)">10 Hz</button>';
+    html += '<button class="btn" data-f="14" data-n="Beta" data-t="binaural" onclick="sel(this)">14 Hz</button>';
+    html += '<button class="btn" data-f="40" data-n="Gamma" data-t="binaural" onclick="sel(this)">40 Hz</button>';
+    html += '<button class="btn" data-f="0" data-n="Pink Noise" data-t="pink" onclick="sel(this)">PINK</button>';
+    html += '<button class="btn" data-f="0" data-n="Brown Noise" data-t="brown" onclick="sel(this)">BROWN</button>';
+    html += '<button class="btn" data-f="0" data-n="Ocean Waves" data-t="ocean" onclick="sel(this)">\uD83C\uDF0A OCEAN</button>';
+    html += '</div><input type="range" min="0" max="100" value="30" oninput="vol(this.value)">';
+    html += '<scr' + 'ipt>';
+    html += 'var ctx,oscL,oscR,noise,lfo,gain,on=false,freq=7.83,name="Schumann Resonance",type="binaural",v=0.075;';
+    html += 'function cleanup(){try{if(oscL){oscL.stop();oscL.disconnect();oscL=null}if(oscR){oscR.stop();oscR.disconnect();oscR=null}if(noise){noise.stop();noise.disconnect();noise=null}if(lfo){lfo.stop();lfo.disconnect();lfo=null}if(gain){gain.disconnect();gain=null}}catch(x){}}';
+    html += 'function toggle(e){if(e){if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();if(ctx.state==="suspended")ctx.resume();cleanup();gain=ctx.createGain();gain.gain.setValueAtTime(0,ctx.currentTime);gain.gain.linearRampToValueAtTime(v,ctx.currentTime+0.8);gain.connect(ctx.destination);';
+    html += 'if(type==="binaural"){var m=ctx.createChannelMerger(2);m.connect(gain);oscL=ctx.createOscillator();oscL.type="sine";oscL.frequency.value=200;oscL.connect(m,0,0);oscR=ctx.createOscillator();oscR.type="sine";oscR.frequency.value=200+freq;oscR.connect(m,0,1);oscL.start();oscR.start()}';
+    html += 'else if(type==="pink"){var bs=ctx.sampleRate*2,bf=ctx.createBuffer(1,bs,ctx.sampleRate),d=bf.getChannelData(0),b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0;for(var i=0;i<bs;i++){var w=Math.random()*2-1;b0=0.99886*b0+w*0.0555179;b1=0.99332*b1+w*0.0750759;b2=0.96900*b2+w*0.1538520;b3=0.86650*b3+w*0.3104856;b4=0.55000*b4+w*0.5329522;b5=-0.7616*b5-w*0.0168980;d[i]=(b0+b1+b2+b3+b4+b5+b6+w*0.5362)*0.11;b6=w*0.115926}noise=ctx.createBufferSource();noise.buffer=bf;noise.loop=true;noise.connect(gain);noise.start()}';
+    html += 'else if(type==="brown"){var bs2=ctx.sampleRate*2,bf2=ctx.createBuffer(1,bs2,ctx.sampleRate),d2=bf2.getChannelData(0),last=0;for(var j=0;j<bs2;j++){var wn=Math.random()*2-1;last=(last+(0.02*wn))/1.02;d2[j]=last*3.5}noise=ctx.createBufferSource();noise.buffer=bf2;noise.loop=true;noise.connect(gain);noise.start()}';
+    html += 'else if(type==="ocean"){var obs=ctx.sampleRate*4,ob=ctx.createBuffer(1,obs,ctx.sampleRate),od=ob.getChannelData(0),ol=0;for(var k=0;k<obs;k++){var ow=Math.random()*2-1;ol=(ol+(0.02*ow))/1.02;od[k]=ol*3.5}noise=ctx.createBufferSource();noise.buffer=ob;noise.loop=true;var lp=ctx.createBiquadFilter();lp.type="lowpass";lp.frequency.value=500;lp.Q.value=0.7;lfo=ctx.createOscillator();lfo.type="sine";lfo.frequency.value=0.08;var wd=ctx.createGain();wd.gain.value=0.4;lfo.connect(wd);wd.connect(gain.gain);lfo.start();noise.connect(lp);lp.connect(gain);noise.start()}';
+    html += 'on=true;document.getElementById("st").textContent="ACTIVE \\u2014 "+name;document.getElementById("st").style.color="#00ccff"}';
+    html += 'else{if(gain&&ctx){gain.gain.linearRampToValueAtTime(0,ctx.currentTime+0.4);setTimeout(cleanup,450)}else cleanup();on=false;document.getElementById("st").textContent="INACTIVE";document.getElementById("st").style.color="#555"}}';
+    html += 'function sel(b){document.querySelectorAll(".btn").forEach(function(x){x.classList.remove("active")});b.classList.add("active");freq=parseFloat(b.dataset.f);name=b.dataset.n;type=b.dataset.t;if(on){toggle(false);setTimeout(function(){document.getElementById("tog").checked=true;toggle(true)},500)}}';
+    html += 'function vol(val){v=(val/100)*0.25;if(on&&gain&&ctx)gain.gain.linearRampToValueAtTime(v,ctx.currentTime+0.1)}';
+    html += '<\\/scr' + 'ipt>';
+  }
+  html += '<div class="credit">b0b.dev \u2014 COUNTERMEASURES</div></div></body></html>';
+
+  var blob = new Blob([html], { type: 'text/html' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'b0b-' + type + '-tones.html';
+  a.click();
+  URL.revokeObjectURL(url);
 }
 </script>
 </body>

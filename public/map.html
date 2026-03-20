@@ -373,6 +373,7 @@
     .cm-info { font-size: 0.55rem; color: #666; margin-top: 4px; line-height: 1.4; }
     /* ===================== HEALING TONES ===================== */
     .ht-freq-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; margin-top: 6px; }
+    @media (max-width: 400px) { .ht-freq-grid { grid-template-columns: repeat(3, 1fr); } .pt-freq-grid { grid-template-columns: repeat(3, 1fr); } }
     .ht-freq-btn { padding: 4px 2px; font-size: 0.55rem; font-family: 'Courier New', monospace; background: rgba(0,0,0,0.4); border: 1px solid #333; color: #888; cursor: pointer; text-align: center; transition: all 0.2s; }
     .ht-freq-btn:hover { border-color: #00ff41; color: #00ff41; }
     .ht-freq-btn.active { border-color: #00ff41; color: #00ff41; background: rgba(0,255,65,0.08); box-shadow: 0 0 6px rgba(0,255,65,0.15); }
@@ -1846,7 +1847,7 @@ function patternSearchKeyword() {
 function proximitySearch() {
   var targetType = document.getElementById('proximityType').value;
   if (!targetType) { alert('Select a type first'); return; }
-  var radiusKm = parseFloat(document.getElementById('proximityKm').value) || 50;
+  var radiusKm = Math.min(parseFloat(document.getElementById('proximityKm').value) || 50, 2000);
   // Haversine distance in km
   function haversine(lat1, lng1, lat2, lng2) {
     var R = 6371;
@@ -3024,6 +3025,8 @@ function toggleCanvasGuard(enabled) {
           var imgData = cmOriginalGetImageData.call(ctx, 0, 0, Math.min(this.width, 16), Math.min(this.height, 16));
           for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] = (imgData.data[i] + (Math.random() > 0.5 ? 1 : -1)) & 0xFF;
+            imgData.data[i+1] = (imgData.data[i+1] + (Math.random() > 0.5 ? 1 : -1)) & 0xFF;
+            imgData.data[i+2] = (imgData.data[i+2] + (Math.random() > 0.5 ? 1 : -1)) & 0xFF;
           }
           ctx.putImageData(imgData, 0, 0);
         } catch(e) {}
