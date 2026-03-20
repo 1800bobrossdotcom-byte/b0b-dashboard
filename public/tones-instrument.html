@@ -46,8 +46,8 @@ body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;min-he
 .empty-state{color:#333;font-size:0.55rem;font-style:italic}
 
 /* ─── PAD GRID ─── */
-.pad-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;width:100%;max-width:720px;padding:4px 0}
-.pad{position:relative;aspect-ratio:1;border-radius:5px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.06);overflow:hidden;transition:border-color 0.15s,box-shadow 0.2s}
+.pad-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;width:100%;max-width:720px;padding:4px 0;touch-action:pan-y}
+.pad{position:relative;aspect-ratio:1;border-radius:5px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.06);overflow:hidden;transition:border-color 0.15s,box-shadow 0.2s;touch-action:none}
 .pad .glow{position:absolute;inset:0;opacity:0;transition:opacity 0.15s;border-radius:5px}
 .pad.playing .glow{opacity:1}
 .pad .freq-label{font-size:0.7rem;font-weight:bold;z-index:1;pointer-events:none}
@@ -149,18 +149,44 @@ body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;min-he
 .evolve-active{background:#ff6600!important;color:#0a0a0a!important;border-color:#ff6600!important;animation:pulse-rec 1.5s ease infinite}
 .seq-transport input[type=number]{background:#0a0a0a;color:#d4d4d4;border:1px solid #333;font-family:inherit;font-size:0.55rem;padding:2px 4px;width:42px;text-align:center;border-radius:2px}
 
+/* ─── COLLAPSIBLE SECTIONS ─── */
+.section-toggle{width:100%;max-width:720px;display:flex;align-items:center;justify-content:space-between;padding:6px 8px;background:#0d0d0d;border:1px solid #1a1a1a;border-radius:3px;margin:3px 0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.section-toggle h3{font-size:0.6rem;color:#888;letter-spacing:1px;margin:0}
+.section-toggle .arrow{color:#444;font-size:0.7rem;transition:transform 0.2s}
+.section-toggle.open .arrow{transform:rotate(180deg)}
+.section-body{overflow:hidden;transition:max-height 0.3s ease,opacity 0.2s;max-height:0;opacity:0}
+.section-body.open{max-height:2000px;opacity:1}
+
+/* ─── SCROLL HINT ─── */
+.scroll-hint{display:none;text-align:center;color:#333;font-size:0.45rem;padding:2px 0;letter-spacing:1px}
+
+/* ─── STICKY TRANSPORT (mobile) ─── */
+@media(max-width:720px){
+  .seq-transport-sticky{position:sticky;bottom:0;z-index:50;background:#0a0a0a;border-top:1px solid #222;padding:6px 8px;margin:0 -8px;width:calc(100% + 16px)}
+  .scroll-hint{display:block}
+}
+
 /* ─── RESPONSIVE ─── */
 @media(max-width:520px){
   .pad-grid{grid-template-columns:repeat(5,1fr);gap:3px}
-  .pad .freq-label{font-size:0.6rem}
-  .pad .name-label{font-size:0.4rem}
+  .pad .freq-label{font-size:0.55rem}
+  .pad .name-label{font-size:0.38rem}
   .ctrl-grid{grid-template-columns:1fr}
-  .viz-bar{height:48px}
+  .viz-bar{height:42px}
   .seq-step{width:14px;height:11px}
+  .header h1{font-size:0.8rem}
+  .header .sub{font-size:0.4rem}
+  .ctrl-tab{font-size:0.5rem;padding:4px 0}
+  .ctrl-row{padding:2px 6px;gap:4px}
+  .ctrl-row label{font-size:0.5rem;min-width:42px}
+  .midi-section,.daw-info{font-size:0.45rem}
+  .seq-section{padding:4px 6px}
 }
 @media(max-width:380px){
   .pad-grid{grid-template-columns:repeat(4,1fr)}
-  .viz-bar{height:40px}
+  .pad .freq-label{font-size:0.5rem}
+  .viz-bar{height:36px}
+  .ctrl-tab{font-size:0.45rem}
 }
 @media(min-width:721px){
   .pad-grid{grid-template-columns:repeat(6,1fr)}
@@ -204,8 +230,13 @@ body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;min-he
   <span class="empty-state" id="emptyState">touch pads to begin...</span>
 </div>
 
+<!-- SCROLL HINT -->
+<div class="scroll-hint">&#8679; swipe between pads to scroll &#8681;</div>
+
 <!-- PAD GRID -->
 <div class="pad-grid" id="padGrid"></div>
+
+<div class="scroll-hint">&#8681; controls below &#8681;</div>
 
 <!-- CONTROL TABS -->
 <div class="ctrl-tabs">
@@ -355,7 +386,7 @@ body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;min-he
   <div class="seq-scroll" id="seqScroll">
     <div id="seqGrid"></div>
   </div>
-  <div class="seq-transport">
+  <div class="seq-transport seq-transport-sticky">
     <button id="seqPlayBtn" onclick="toggleSeq()">&#9654; PLAY</button>
     <label style="font-size:0.5rem;color:#555">BPM</label>
     <input type="range" min="30" max="240" value="90" style="width:70px;accent-color:#ffaa50" oninput="setSeqBPM(this.value)" id="seqBPM">
@@ -388,7 +419,12 @@ body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;min-he
   <span style="font-size:0.45rem;color:#333" id="recSize"></span>
 </div>
 
-<!-- MIDI & DAW -->
+<!-- MIDI & DAW (collapsible on mobile) -->
+<div class="section-toggle" onclick="toggleSection('midiBody',this)">
+  <h3>MIDI &amp; DAW INTEGRATION</h3>
+  <span class="arrow">&#9660;</span>
+</div>
+<div class="section-body" id="midiBody">
 <div class="midi-section">
   <h3>MIDI &amp; DAW INTEGRATION</h3>
   <div class="midi-row">
@@ -415,6 +451,8 @@ body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;min-he
     This instrument&rsquo;s AudioWorklet architecture is WAM-compatible. Wrap as a WAM plugin to load inside WAM-enabled DAWs (e.g. <em>webaudiomodules.org</em>).
   </div>
 </div>
+
+</div><!-- /section-body midiBody -->
 
 <div class="credit"><a href="https://b0b.dev">b0b.dev</a> &mdash; TONE LAB v2</div>
 
@@ -1167,27 +1205,34 @@ function updateVolBar(id, vol, pad) {
 
 (function() {
   var grid = document.getElementById('padGrid');
-  grid.addEventListener('touchstart', function(e) { e.preventDefault(); }, {passive: false});
-  grid.addEventListener('touchmove', function(e) { e.preventDefault(); }, {passive: false});
-
+  /* Touch handling: pads get touch-action:none via CSS so their
+     touches don't scroll. Grid gaps have touch-action:pan-y so
+     swiping between pads scrolls the page normally. */
   grid.addEventListener('touchstart', function(e) {
+    var hitPad = false;
     for (var i = 0; i < e.changedTouches.length; i++) {
       var t = e.changedTouches[i];
       var el = document.elementFromPoint(t.clientX, t.clientY);
       var pe = el ? el.closest('.pad') : null;
       if (!pe) continue;
+      hitPad = true;
       activeTouches[t.identifier] = pe.dataset.padId;
       handlePadStart(pe.dataset.padId, t.clientY, pe.getBoundingClientRect());
     }
-  });
+    /* Only prevent default when a pad was hit — lets scroll through gaps */
+    if (hitPad) e.preventDefault();
+  }, {passive: false});
   grid.addEventListener('touchmove', function(e) {
+    var hasPad = false;
     for (var i = 0; i < e.changedTouches.length; i++) {
       var t = e.changedTouches[i], id = activeTouches[t.identifier];
       if (!id) continue;
+      hasPad = true;
       var pe = document.getElementById('pad-' + id);
       if (pe) handlePadMove(id, t.clientY, pe.getBoundingClientRect());
     }
-  });
+    if (hasPad) e.preventDefault();
+  }, {passive: false});
   grid.addEventListener('touchend', function(e) {
     for (var i = 0; i < e.changedTouches.length; i++) delete activeTouches[e.changedTouches[i].identifier];
   });
@@ -1645,6 +1690,13 @@ function updateVU() {
 
   document.getElementById('vuL').style.height = avgL + '%';
   document.getElementById('vuR').style.height = avgR + '%';
+}
+
+/* ═══════════════════ COLLAPSIBLE SECTIONS ═══════════════════ */
+function toggleSection(id, toggle) {
+  var body = document.getElementById(id);
+  body.classList.toggle('open');
+  toggle.classList.toggle('open');
 }
 
 /* ═══════════════════ KEYBOARD SHORTCUTS ═══════════════════ */
