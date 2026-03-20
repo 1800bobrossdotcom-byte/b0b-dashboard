@@ -9,8 +9,8 @@
 // - Falls back to cache if network fails
 // - Tile requests are cached opportunistically (cache what loads, serve from cache if provider dies)
 
-var CACHE_NAME = 'b0b-shell-v1';
-var TILE_CACHE = 'b0b-tiles-v1';
+var CACHE_NAME = 'b0b-shell-v2';
+var TILE_CACHE = 'b0b-tiles-v2';
 
 // Core assets to pre-cache on install — the skeleton that must always work
 var CORE_ASSETS = [
@@ -43,7 +43,7 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('activate', function(event) {
-  console.log('[SW] Activated');
+  console.log('[SW] Activated — clearing old caches');
   // Clean old caches if version bumped
   event.waitUntil(
     caches.keys().then(function(names) {
