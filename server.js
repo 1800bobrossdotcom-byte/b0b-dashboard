@@ -638,7 +638,7 @@ app.use((req, res, next) => {
   // Content Security Policy
   var isMap = req.path === '/map' || req.path === '/_page/map';
   var isReport = req.path === '/report' || req.path === '/_page/report';
-  var isShell = req.path === '/' || req.path === '/report' || req.path === '/map';
+  var isShell = req.path === '/' || req.path === '/report' || req.path === '/map' || req.path === '/tools';
   var cspReport = "; report-uri /csp-report";
   if (isShell) {
     // Shell pages: need frame-src for iframe, media-src for audio player
@@ -742,7 +742,7 @@ function getShellHTML(contentPath) {
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden;background:#0a0a0a}
-#frame{width:100%;border:none;height:calc(100% - 48px);display:block}
+#frame{width:100%;border:none;height:calc(100% - 84px);display:block}
 .player-bar{position:fixed;bottom:0;left:0;right:0;height:48px;background:#0a0a0a;border-top:1px solid #222;display:flex;align-items:center;padding:0 16px;gap:10px;font-family:'Courier New',monospace;z-index:9999}
 .p-track{color:#00ff41;font-size:0.7rem;letter-spacing:1px;white-space:nowrap;flex-shrink:0}
 .p-btn{background:transparent;border:1px solid #00ff41;color:#00ff41;font-family:inherit;font-size:0.8rem;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;-webkit-tap-highlight-color:transparent}
@@ -750,11 +750,117 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
 .p-wrap{flex:1;height:6px;background:#222;cursor:pointer;position:relative;min-width:60px;-webkit-tap-highlight-color:transparent}
 .p-fill{height:100%;width:0%;background:#00ff41;transition:width 0.1s linear}
 .p-time{font-size:0.6rem;color:#555;flex-shrink:0;min-width:72px;text-align:right;font-family:'Courier New',monospace}
-@media(max-width:480px){.p-track{display:none}.player-bar{padding:0 10px;height:44px}.p-btn{width:32px;height:32px;font-size:0.7rem}.p-time{min-width:60px;font-size:0.55rem}#frame{height:calc(100% - 44px)}}
+/* CM Drawer — persistent countermeasures above player bar */
+.cm-drawer{position:fixed;bottom:48px;left:0;right:0;z-index:9998;background:rgba(10,10,10,0.98);border-top:1px solid #333;font-family:'Courier New',monospace}
+.cm-drawer-bar{height:36px;display:flex;align-items:center;padding:0 16px;cursor:pointer;user-select:none;gap:12px}
+.cm-drawer-bar:hover{background:rgba(255,68,68,0.05)}
+.cm-drawer-bar h3{color:#ff4444;font-size:0.7rem;letter-spacing:2px;margin:0;white-space:nowrap}
+.cm-status-dots{display:flex;gap:6px;align-items:center}
+.cm-dot{width:8px;height:8px;border-radius:50%;background:#333;transition:all 0.3s}
+.cm-dot.active{background:#00ff41;box-shadow:0 0 6px rgba(0,255,65,0.6)}
+.cm-dot-label{font-size:0.5rem;color:#555;letter-spacing:0.5px}
+.cm-dot-label.active{color:#00ff41}
+.cm-drawer-chevron{color:#555;font-size:0.7rem;margin-left:auto;transition:transform 0.3s}
+.cm-drawer.expanded .cm-drawer-chevron{transform:rotate(180deg)}
+.cm-drawer-content{display:none;padding:0 16px 16px;max-height:50vh;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#333 #0d0d0d}
+.cm-drawer-content::-webkit-scrollbar{width:3px}
+.cm-drawer-content::-webkit-scrollbar-thumb{background:#333}
+.cm-drawer.expanded .cm-drawer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.cm-panel{padding:10px 12px;border:1px solid #333;background:rgba(0,0,0,0.3);border-radius:2px}
+.cm-toggle{display:flex;align-items:center;gap:8px;cursor:pointer}
+.cm-toggle input[type="checkbox"]{width:16px;height:16px;accent-color:#ff4444}
+.cm-label{font-size:0.65rem;color:#ff4444;letter-spacing:1px;font-weight:bold}
+.cm-status{font-size:0.6rem;color:#555;margin-top:4px}
+.cm-status.active{color:#00ff41}
+.cm-info{font-size:0.55rem;color:#666;margin-top:4px;line-height:1.4}
+.ht-freq-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-top:6px}
+.ht-freq-btn{padding:4px 2px;font-size:0.55rem;font-family:'Courier New',monospace;background:rgba(0,0,0,0.4);border:1px solid #333;color:#888;cursor:pointer;text-align:center;transition:all 0.2s}
+.ht-freq-btn:hover{border-color:#00ff41;color:#00ff41}
+.ht-freq-btn.active{border-color:#00ff41;color:#00ff41;background:rgba(0,255,65,0.08);box-shadow:0 0 6px rgba(0,255,65,0.15)}
+.ht-volume{width:100%;height:4px;margin-top:6px;accent-color:#00ff41;cursor:pointer}
+.ht-now-playing{font-size:0.55rem;color:#00ff41;margin-top:4px;font-style:italic}
+.pt-freq-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin-top:6px}
+.pt-freq-btn{padding:4px 2px;font-size:0.55rem;font-family:'Courier New',monospace;background:rgba(0,0,0,0.4);border:1px solid #333;color:#888;cursor:pointer;text-align:center;transition:all 0.2s}
+.pt-freq-btn:hover{border-color:#00ccff;color:#00ccff}
+.pt-freq-btn.active{border-color:#00ccff;color:#00ccff;background:rgba(0,204,255,0.08);box-shadow:0 0 6px rgba(0,204,255,0.15)}
+.pt-volume{width:100%;height:4px;margin-top:6px;accent-color:#00ccff;cursor:pointer}
+.pt-now-playing{font-size:0.55rem;color:#00ccff;margin-top:4px;font-style:italic}
+@media(max-width:480px){.p-track{display:none}.player-bar{padding:0 10px;height:44px}.p-btn{width:32px;height:32px;font-size:0.7rem}.p-time{min-width:60px;font-size:0.55rem}#frame{height:calc(100% - 80px)}.cm-drawer{bottom:44px}.cm-drawer-bar{height:32px;padding:0 10px;gap:8px}.cm-drawer-bar h3{font-size:0.6rem;letter-spacing:1px}.cm-dot{width:6px;height:6px}.cm-dot-label{display:none}.cm-drawer.expanded .cm-drawer-content{grid-template-columns:1fr;max-height:60vh}.ht-freq-grid{grid-template-columns:repeat(3,1fr)}.pt-freq-grid{grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
 <body>
 <iframe id="frame" src="/_page${contentPath}"></iframe>
+<!-- COUNTERMEASURES PERSISTENT DRAWER -->
+<div class="cm-drawer" id="cmDrawer">
+  <div class="cm-drawer-bar" onclick="toggleCmDrawer()">
+    <h3>\uD83D\uDEE1\uFE0F COUNTERMEASURES</h3>
+    <div class="cm-status-dots">
+      <span class="cm-dot" id="cmDotUltrasonic" title="Ultrasonic Shield"></span>
+      <span class="cm-dot-label" id="cmDotLabelUltrasonic">SHIELD</span>
+      <span class="cm-dot active" id="cmDotWebrtc" title="WebRTC Block"></span>
+      <span class="cm-dot-label active" id="cmDotLabelWebrtc">WEBRTC</span>
+      <span class="cm-dot active" id="cmDotCanvas" title="Canvas Guard"></span>
+      <span class="cm-dot-label active" id="cmDotLabelCanvas">CANVAS</span>
+      <span class="cm-dot" id="cmDotHealing" title="Healing Tones"></span>
+      <span class="cm-dot-label" id="cmDotLabelHealing">TONES</span>
+      <span class="cm-dot" id="cmDotProtective" title="Protective Tones"></span>
+      <span class="cm-dot-label" id="cmDotLabelProtective">PROTECT</span>
+    </div>
+    <span class="cm-drawer-chevron">\u25B2</span>
+  </div>
+  <div class="cm-drawer-content" id="cmDrawerContent">
+  <div class="cm-panel">
+    <label class="cm-toggle"><input type="checkbox" id="cmUltrasonic" onchange="toggleUltrasonicCM(this.checked)"><span class="cm-label">ULTRASONIC SHIELD</span></label>
+    <div class="cm-status" id="cmStatus">INACTIVE</div>
+    <div class="cm-info">\uD83C\uDF0A WATER PLANET OPTIMIZED \u2014 Humidity-adaptive frequency sweep across 20\u201322kHz. Jams cross-device tracking beacons &amp; acoustic data exfiltration. \uD83D\uDC3E ANIMAL-SAFE: above 20kHz at -60dB.</div>
+  </div>
+  <div class="cm-panel">
+    <label class="cm-toggle"><input type="checkbox" id="cmWebrtc" onchange="toggleWebRTCBlock(this.checked)" checked><span class="cm-label">WebRTC LEAK BLOCK</span></label>
+    <div class="cm-status active" id="cmWebrtcStatus">ACTIVE \u2014 local IP masked</div>
+    <div class="cm-info">Prevents WebRTC from exposing your real local/public IP addresses through STUN/TURN requests.</div>
+  </div>
+  <div class="cm-panel">
+    <label class="cm-toggle"><input type="checkbox" id="cmCanvas" onchange="toggleCanvasGuard(this.checked)" checked><span class="cm-label">CANVAS FINGERPRINT GUARD</span></label>
+    <div class="cm-status active" id="cmCanvasStatus">ACTIVE \u2014 noise injected</div>
+    <div class="cm-info">Injects imperceptible noise into canvas readback operations, defeating canvas fingerprinting.</div>
+  </div>
+  <div class="cm-panel" style="border-color:#00ff41">
+    <label class="cm-toggle"><input type="checkbox" id="cmHealing" onchange="toggleHealingTones(this.checked)"><span class="cm-label" style="color:#00ff41">\uD83C\uDFB5 HEALING TONES</span></label>
+    <div class="cm-status" id="cmHealingStatus">INACTIVE</div>
+    <div class="ht-freq-grid" id="htFreqGrid">
+      <button class="ht-freq-btn" data-freq="174" data-name="Pain Relief" onclick="selectHealingFreq(this)">174 Hz</button>
+      <button class="ht-freq-btn" data-freq="285" data-name="Tissue Healing" onclick="selectHealingFreq(this)">285 Hz</button>
+      <button class="ht-freq-btn active" data-freq="396" data-name="Liberation" onclick="selectHealingFreq(this)">396 Hz</button>
+      <button class="ht-freq-btn" data-freq="417" data-name="Change" onclick="selectHealingFreq(this)">417 Hz</button>
+      <button class="ht-freq-btn" data-freq="432" data-name="Natural Calm" onclick="selectHealingFreq(this)">432 Hz</button>
+      <button class="ht-freq-btn" data-freq="528" data-name="Love / DNA Repair" onclick="selectHealingFreq(this)">528 Hz</button>
+      <button class="ht-freq-btn" data-freq="639" data-name="Connection" onclick="selectHealingFreq(this)">639 Hz</button>
+      <button class="ht-freq-btn" data-freq="741" data-name="Intuition" onclick="selectHealingFreq(this)">741 Hz</button>
+      <button class="ht-freq-btn" data-freq="852" data-name="Spiritual" onclick="selectHealingFreq(this)">852 Hz</button>
+      <button class="ht-freq-btn" data-freq="963" data-name="Higher Self" onclick="selectHealingFreq(this)">963 Hz</button>
+    </div>
+    <input type="range" class="ht-volume" id="htVolume" min="0" max="100" value="25" oninput="setHealingVolume(this.value)" title="Volume">
+    <div class="ht-now-playing" id="htNowPlaying"></div>
+    <div class="cm-info">\uD83C\uDF0A Solfeggio frequencies with sub-harmonic body-water resonance. \uD83D\uDC3E ANIMAL-SAFE: 174\u2013963 Hz at gentle volume.</div>
+  </div>
+  <div class="cm-panel" style="border-color:#00ccff">
+    <label class="cm-toggle"><input type="checkbox" id="cmProtective" onchange="toggleProtectiveTones(this.checked)"><span class="cm-label" style="color:#00ccff">\uD83D\uDEE1\uFE0F PROTECTIVE TONES</span></label>
+    <div class="cm-status" id="cmProtectiveStatus">INACTIVE</div>
+    <div class="pt-freq-grid" id="ptFreqGrid">
+      <button class="pt-freq-btn active" data-freq="7.83" data-name="Schumann Resonance" data-type="binaural" onclick="selectProtectiveFreq(this)">7.83 Hz</button>
+      <button class="pt-freq-btn" data-freq="10" data-name="Alpha \u2014 Calm Alert" data-type="binaural" onclick="selectProtectiveFreq(this)">10 Hz</button>
+      <button class="pt-freq-btn" data-freq="14" data-name="Beta \u2014 Focus" data-type="binaural" onclick="selectProtectiveFreq(this)">14 Hz</button>
+      <button class="pt-freq-btn" data-freq="40" data-name="Gamma \u2014 Perception" data-type="binaural" onclick="selectProtectiveFreq(this)">40 Hz</button>
+      <button class="pt-freq-btn" data-freq="0" data-name="Pink Noise \u2014 Masking" data-type="pink" onclick="selectProtectiveFreq(this)">PINK</button>
+      <button class="pt-freq-btn" data-freq="0" data-name="Brown Noise \u2014 Deep Cover" data-type="brown" onclick="selectProtectiveFreq(this)">BROWN</button>
+      <button class="pt-freq-btn" data-freq="0" data-name="Ocean Waves \u2014 Planet Sound" data-type="ocean" onclick="selectProtectiveFreq(this)">\uD83C\uDF0A OCEAN</button>
+    </div>
+    <input type="range" class="pt-volume" id="ptVolume" min="0" max="100" value="30" oninput="setProtectiveVolume(this.value)" title="Volume">
+    <div class="pt-now-playing" id="ptNowPlaying"></div>
+    <div class="cm-info">\uD83C\uDF0A 7.83 Hz Schumann is Earth\u2019s electromagnetic heartbeat. Use headphones for binaural entrainment. \uD83D\uDC3E ANIMAL-SAFE.</div>
+  </div>
+  </div>
+</div>
 <div class="player-bar">
   <button class="p-btn" id="pb" onclick="tp()">▶</button>
   <div class="p-track">FAITH NO MORE — WE CARE A LOT</div>
@@ -786,6 +892,7 @@ fr.addEventListener('load',function(){
 });
 })();
 </script>
+<script src="/cm-engine.js"></script>
 </body>
 </html>`;
 }
