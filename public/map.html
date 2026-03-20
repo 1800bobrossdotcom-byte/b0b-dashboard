@@ -386,6 +386,8 @@
     .pt-freq-btn.active { border-color: #00ccff; color: #00ccff; background: rgba(0,204,255,0.08); box-shadow: 0 0 6px rgba(0,204,255,0.15); }
     .pt-volume { width: 100%; height: 4px; margin-top: 6px; accent-color: #00ccff; cursor: pointer; }
     .pt-now-playing { font-size: 0.55rem; color: #00ccff; margin-top: 4px; font-style: italic; }
+    /* Dark tile fallback — invert OSM for dark mode */
+    .dark-osm-tiles { filter: invert(1) hue-rotate(180deg) brightness(0.7) contrast(1.3); }
   </style>
 </head>
 <body>
@@ -713,9 +715,9 @@ var tileProviders = {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
       subdomains: 'abcd', maxZoom: 19
     }),
-    fallback: L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://stadiamaps.com/">Stadia</a> &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>',
-      maxZoom: 20
+    fallback: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> (dark-filtered)',
+      className: 'dark-osm-tiles', maxZoom: 19
     }),
     label: 'DARK'
   },
@@ -846,6 +848,32 @@ function showTileFailoverNotice(label) {
       }
     };
     img.src = probeTargets[style];
+  });
+})();
+
+// Also probe fallback sources — if a fallback is also dead, try the next-best provider
+(function probeFallbacks() {
+  var fallbackProbes = {
+    dark: 'https://a.tile.openstreetmap.org/3/4/2.png',
+    satellite: 'https://a.tile.openstreetmap.org/3/4/2.png',
+    terrain: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/3/2/4',
+    street: 'https://a.basemaps.cartocdn.com/light_all/3/4/2.png'
+  };
+  Object.keys(fallbackProbes).forEach(function(style) {
+    var img = new Image();
+    img.onload = function() { console.log('[FALLBACK PROBE] ' + style + ' fallback OK'); };
+    img.onerror = function() {
+      console.log('[FALLBACK PROBE] ' + style + ' fallback ALSO DEAD — will use OSM street as last resort');
+      tileProviders[style].fallback = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OSM', maxZoom: 19
+      });
+      if (failedProviders[style] && currentStyle === style) {
+        map.removeLayer(currentTile);
+        currentTile = tileProviders[style].fallback;
+        currentTile.addTo(map);
+      }
+    };
+    img.src = fallbackProbes[style];
   });
 })();
 
