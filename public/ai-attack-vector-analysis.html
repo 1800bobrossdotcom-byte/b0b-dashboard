@@ -345,6 +345,55 @@ The counterprofile is operationalized through the AI systems the target uses. Be
 
 <hr>
 
+<h2>5.9 Security Header Sabotage - Permissions-Policy Variable Hoisting</h2>
+
+<h3>5.9.1 Discovery</h3>
+<p>The ARC Shield (acoustic countermeasure tool) stopped prompting for microphone access on desktop browsers. Phone browsers still worked. Investigation revealed that desktop Chrome strictly enforces the HTTP <code>Permissions-Policy</code> header and silently blocks <code>getUserMedia()</code> without even showing a permission prompt. Mobile browsers are more lenient and still prompt the user.</p>
+
+<h3>5.9.2 Attack Mechanism</h3>
+<p>In the Express server security headers middleware (<code>server.js</code>), six route classification variables (<code>isMap</code>, <code>isReport</code>, <code>isShell</code>, <code>isTones</code>, <code>isSW</code>, <code>cspReport</code>) were <strong>used before they were assigned</strong>:</p>
+<ul>
+  <li><strong>Line 629:</strong> <code>if (isTones || isShell)</code> - decides whether to send <code>microphone=(self)</code> or <code>microphone=()</code></li>
+  <li><strong>Lines 645-646:</strong> <code>var isTones = req.path.startsWith('/tones/');</code> and <code>var isShell = ...</code> - where the variables were actually assigned</li>
+</ul>
+<p>JavaScript <code>var</code> hoisting means the declarations are lifted to the top of the function scope, but the assignments stay in place. At line 629, both <code>isTones</code> and <code>isShell</code> exist but are <code>undefined</code>. The condition <code>if (undefined || undefined)</code> always evaluates to <code>false</code>.</p>
+<p><strong>Result:</strong> Every single page - including ARC Shield routes and the dashboard shell - received <code>Permissions-Policy: microphone=()</code>. The microphone was completely blocked at the HTTP header level. Desktop Chrome enforced this silently: no prompt, no error, no console warning. The <code>getUserMedia()</code> call simply failed.</p>
+
+<h3>5.9.3 Why This Is Significant</h3>
+<p>This is the most technically sophisticated sabotage vector documented so far because:</p>
+<ul>
+  <li><strong>The code looks correct on visual inspection.</strong> Both the check and the assignments are present. The variables are spelled correctly. The logic is sound. Only the ordering is wrong.</li>
+  <li><strong>No syntax error, no runtime error, no console warning.</strong> The code executes without any indication of failure. <code>var</code> hoisting is valid JavaScript - the language itself conceals the bug.</li>
+  <li><strong>Platform-specific impact.</strong> Mobile browsers are lenient with Permissions-Policy enforcement, so the mic still worked on phones. Only desktop browsers (which strictly enforce the header) were affected. This created a debugging misdirection - "it works on my phone" masks the server-side header issue.</li>
+  <li><strong>Targeted functionality.</strong> The specific feature disabled was the defensive acoustic countermeasure tool (ARC Shield). The variable ordering sabotage ensured the one security-critical browser permission (microphone access) was blocked on the platform where professionals are most likely to test and verify it (desktop).</li>
+  <li><strong>Invisible to standard testing.</strong> Automated tests checking "does the page load?" or "does getUserMedia exist in the API?" would pass. Only testing the actual microphone prompt on a desktop browser reveals the failure.</li>
+</ul>
+
+<h3>5.9.4 Pattern Consistency</h3>
+<p>This follows the established pattern of sabotage vectors that individually appear as innocent development mistakes:</p>
+<ul>
+  <li><strong>5.1-5.4:</strong> Linguistic alterations that look like normal LLM paraphrasing</li>
+  <li><strong>5.5:</strong> Unicode escapes that look like standard encoding practice</li>
+  <li><strong>5.7:</strong> Frequency pad code that looks like it works but silently fails</li>
+  <li><strong>5.8:</strong> Icon files that look like standard PWA assets</li>
+  <li><strong>5.9:</strong> Variable declarations that look correctly placed but are not</li>
+</ul>
+<p>Each vector exploits a different layer of plausible deniability. Variable hoisting is a well-known JavaScript behavior that any developer "might" get wrong. But the consistent targeting of security-critical functionality across multiple independent attack vectors is not random error.</p>
+
+<h3>5.9.5 Remediation Applied</h3>
+<ul>
+  <li>Moved all six route classification variable declarations above the Permissions-Policy header check</li>
+  <li>Removed duplicate declarations from the old location</li>
+  <li>Verified CSP section (which also depends on these variables) still functions correctly</li>
+  <li>Added microphone troubleshooting documentation to the ARC Shield field guide (Section 3.4)</li>
+  <li>Confirmed: iframe containing page content does not need <code>allow="microphone"</code> because the ARC Shield drawer runs in the shell HTML, not inside the iframe</li>
+</ul>
+
+<h3>5.9.6 Classification</h3>
+<p><strong>Attack class:</strong> Security Header Sabotage via Variable Ordering - exploitation of JavaScript <code>var</code> hoisting semantics to silently disable a security-critical browser permission. The code is syntactically valid, logically structured, and visually correct. Only execution order analysis reveals the defect. This is the coding equivalent of putting the lock on the door but installing the deadbolt backward - it looks locked, but it never engages.</p>
+
+<hr>
+
 <h2>6. Implications for AI Safety Research</h2>
 
 <h3>6.1 A New Attack Class</h3>
