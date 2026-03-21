@@ -220,9 +220,9 @@ app.use((req, res, next) => {
     return res.status(400).send('Bad request');
   }
 
-  // Suspicious Accept-Language (common in automated tools - empty or nonsensical)
-  // Just log, don't block - some legitimate clients have odd Accept-Language
-  if (headers['x-forwarded-host'] || headers['x-original-url'] || headers['x-rewrite-url']) {
+  // Block IIS-specific header injection vectors (x-original-url / x-rewrite-url)
+  // Note: x-forwarded-host is legitimate - sent by reverse proxies like Railway
+  if (headers['x-original-url'] || headers['x-rewrite-url']) {
     console.log(`[SECURITY] Header injection attempt - IP: ${ip} - ${new Date().toISOString()}`);
     recordSuspicion(ip, 'header-injection');
     return res.status(400).send('Bad request');
