@@ -92,20 +92,20 @@
     <h1>b0b</h1>
     <div class="subtitle">living document</div>
     <div class="nav-links">
-      <a href="/report">REPORT</a>
-      <a href="/map">OSINT MAP</a>
+      <a href="/report" data-i18n="nav.report">REPORT</a>
+      <a href="/map" data-i18n="nav.map">OSINT MAP</a>
     </div>
     <div class="nav-links">
-      <a href="/tones/shield" style="border-color:#ff4444;color:#ff4444">ARC SHIELD</a>
+      <a href="/tones/shield" style="border-color:#ff4444;color:#ff4444" data-i18n="nav.shield">ARC SHIELD</a>
       <a href="https://dialectforge.com" target="_blank" rel="noopener noreferrer" style="border-color:#00ff41;color:#00ff41">DIALECTFORGE</a>
     </div>
     <div class="nav-links">
       <a href="/download" style="border-color:#ff4444;color:#ff4444">BACKUP ZIP</a>
     </div>
     <div class="nav-links">
-      <a href="/logout" class="secondary">LOGOUT</a>
+      <a href="/logout" class="secondary" data-i18n="nav.logout">LOGOUT</a>
     </div>
-    <div class="status">STATUS: <span>ACTIVE</span> &nbsp;|&nbsp; LAST UPDATED: MARCH 2026</div>
+    <div class="status">STATUS: <span>ACTIVE</span></div>
     <div style="margin-top:2.5rem;padding:1.2rem 2rem;border:1px solid #333;max-width:520px;text-align:center">
       <div style="color:#888;font-size:0.7rem;letter-spacing:2px;margin-bottom:0.6rem">KEEP THIS SITE RUNNING - FOOD + SUPPLIES</div>
       <div style="color:#ffcc00;font-size:0.75rem;letter-spacing:1px;margin-bottom:0.5rem">ETH | All Layer Protocols Welcome</div>
@@ -113,6 +113,7 @@
       <div style="color:#555;font-size:0.6rem;margin-top:0.4rem">click to copy</div>
     </div>
   </div>
+<script src="/i18n.js"></script>
 <script>
 (function(){if(window.parent!==window){document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var h=a.getAttribute('href');if(!h)return;if(h==='/logout'){e.preventDefault();window.top.location.href='/logout'}else if(h==='/'||h==='/report'||h==='/map'){e.preventDefault();window.parent.postMessage({navigate:h},location.origin)}})}})();
 </script>

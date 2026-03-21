@@ -829,43 +829,43 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
 <!-- COUNTERMEASURES PERSISTENT DRAWER -->
 <div class="cm-drawer" id="cmDrawer">
   <div class="cm-drawer-bar" onclick="toggleCmDrawer()">
-    <h3>🛡️ COUNTERMEASURES</h3>
+    <h3>🛡️ <span data-i18n="drawer.title">COUNTERMEASURES</span></h3>
     <div class="cm-status-dots">
       <span class="cm-dot" id="cmDotUltrasonic" title="Ultrasonic Shield"></span>
-      <span class="cm-dot-label" id="cmDotLabelUltrasonic">SHIELD</span>
+      <span class="cm-dot-label" id="cmDotLabelUltrasonic" data-i18n="drawer.shield">SHIELD</span>
       <span class="cm-dot active" id="cmDotWebrtc" title="WebRTC Block"></span>
-      <span class="cm-dot-label active" id="cmDotLabelWebrtc">WEBRTC</span>
+      <span class="cm-dot-label active" id="cmDotLabelWebrtc" data-i18n="drawer.webrtc">WEBRTC</span>
       <span class="cm-dot active" id="cmDotCanvas" title="Canvas Guard"></span>
-      <span class="cm-dot-label active" id="cmDotLabelCanvas">CANVAS</span>
+      <span class="cm-dot-label active" id="cmDotLabelCanvas" data-i18n="drawer.canvas">CANVAS</span>
       <span class="cm-dot" id="cmDotHealing" title="Healing Tones"></span>
-      <span class="cm-dot-label" id="cmDotLabelHealing">TONES</span>
+      <span class="cm-dot-label" id="cmDotLabelHealing" data-i18n="drawer.tones">TONES</span>
       <span class="cm-dot" id="cmDotProtective" title="Protective Tones"></span>
-      <span class="cm-dot-label" id="cmDotLabelProtective">PROTECT</span>
+      <span class="cm-dot-label" id="cmDotLabelProtective" data-i18n="drawer.protect">PROTECT</span>
       <span class="cm-dot" id="cmDotArc" title="ARC Shield"></span>
-      <span class="cm-dot-label" id="cmDotLabelArc">ARC</span>
+      <span class="cm-dot-label" id="cmDotLabelArc" data-i18n="drawer.arc">ARC</span>
       <span class="cm-dot" id="cmDotToneLab" title="Tone Lab"></span>
-      <span class="cm-dot-label" id="cmDotLabelToneLab">LAB</span>
+      <span class="cm-dot-label" id="cmDotLabelToneLab" data-i18n="drawer.lab">LAB</span>
     </div>
     <span class="cm-drawer-chevron">▲</span>
   </div>
   <div class="cm-drawer-content" id="cmDrawerContent">
   <div class="cm-panel">
-    <label class="cm-toggle"><input type="checkbox" id="cmUltrasonic" onchange="toggleUltrasonicCM(this.checked)"><span class="cm-label">ULTRASONIC SHIELD</span></label>
+    <label class="cm-toggle"><input type="checkbox" id="cmUltrasonic" onchange="toggleUltrasonicCM(this.checked)"><span class="cm-label" data-i18n="panel.ultrasonic">ULTRASONIC SHIELD</span></label>
     <div class="cm-status" id="cmStatus">INACTIVE</div>
     <div class="cm-info">🌊 WATER PLANET OPTIMIZED - Humidity-adaptive frequency sweep across 20–22kHz. Jams cross-device tracking beacons &amp; acoustic data exfiltration. 🐾 ANIMAL-SAFE: above 20kHz at -60dB.</div>
   </div>
   <div class="cm-panel">
-    <label class="cm-toggle"><input type="checkbox" id="cmWebrtc" onchange="toggleWebRTCBlock(this.checked)" checked><span class="cm-label">WebRTC LEAK BLOCK</span></label>
+    <label class="cm-toggle"><input type="checkbox" id="cmWebrtc" onchange="toggleWebRTCBlock(this.checked)" checked><span class="cm-label" data-i18n="panel.webrtc">WebRTC LEAK BLOCK</span></label>
     <div class="cm-status active" id="cmWebrtcStatus">ACTIVE - local IP masked</div>
     <div class="cm-info">Prevents WebRTC from exposing your real local/public IP addresses through STUN/TURN requests.</div>
   </div>
   <div class="cm-panel">
-    <label class="cm-toggle"><input type="checkbox" id="cmCanvas" onchange="toggleCanvasGuard(this.checked)" checked><span class="cm-label">CANVAS FINGERPRINT GUARD</span></label>
+    <label class="cm-toggle"><input type="checkbox" id="cmCanvas" onchange="toggleCanvasGuard(this.checked)" checked><span class="cm-label" data-i18n="panel.canvas">CANVAS FINGERPRINT GUARD</span></label>
     <div class="cm-status active" id="cmCanvasStatus">ACTIVE - noise injected</div>
     <div class="cm-info">Injects imperceptible noise into canvas readback operations, defeating canvas fingerprinting.</div>
   </div>
   <div class="cm-panel" style="border-color:#00ff41">
-    <label class="cm-toggle"><input type="checkbox" id="cmHealing" onchange="toggleHealingTones(this.checked)"><span class="cm-label" style="color:#00ff41">🎵 HEALING TONES</span></label>
+    <label class="cm-toggle"><input type="checkbox" id="cmHealing" onchange="toggleHealingTones(this.checked)"><span class="cm-label" style="color:#00ff41">🎵 <span data-i18n="panel.healing">HEALING TONES</span></span></label>
     <div class="cm-status" id="cmHealingStatus">INACTIVE</div>
     <div class="ht-freq-grid" id="htFreqGrid">
       <button class="ht-freq-btn" data-freq="174" data-name="Pain Relief" onclick="selectHealingFreq(this)">174 Hz</button>
@@ -884,7 +884,7 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
     <div class="cm-info">🌊 Solfeggio frequencies with sub-harmonic body-water resonance. 🐾 ANIMAL-SAFE: 174–963 Hz at gentle volume.</div>
   </div>
   <div class="cm-panel" style="border-color:#00ccff">
-    <label class="cm-toggle"><input type="checkbox" id="cmProtective" onchange="toggleProtectiveTones(this.checked)"><span class="cm-label" style="color:#00ccff">🛡️ PROTECTIVE TONES</span></label>
+    <label class="cm-toggle"><input type="checkbox" id="cmProtective" onchange="toggleProtectiveTones(this.checked)"><span class="cm-label" style="color:#00ccff">🛡️ <span data-i18n="panel.protective">PROTECTIVE TONES</span></span></label>
     <div class="cm-status" id="cmProtectiveStatus">INACTIVE</div>
     <div class="pt-freq-grid" id="ptFreqGrid">
       <button class="pt-freq-btn active" data-freq="7.83" data-name="Schumann Resonance" data-type="binaural" onclick="selectProtectiveFreq(this)">7.83 Hz</button>
@@ -902,35 +902,35 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
   <!-- ARC SHIELD - QUICK ACCESS -->
   <div class="cm-panel arc-panel">
     <div style="display:flex;align-items:center;gap:8px">
-      <span class="cm-label" style="color:#ff4444">&#x1F6E1;&#xFE0F; ARC SHIELD</span>
+      <span class="cm-label" style="color:#ff4444">&#x1F6E1;&#xFE0F; <span data-i18n="panel.arc">ARC SHIELD</span></span>
     </div>
     <button class="arc-activate" id="arcActivateBtn" onclick="toggleArcShield()">&#x25B6; ACTIVATE THREAT DETECTION</button>
     <div class="cm-status" id="arcStatus">INACTIVE</div>
     <div class="arc-meter"><div class="arc-meter-fill" id="arcMeterFill"></div></div>
     <div class="cm-info" id="arcThreatInfo">LRAD detection, phase cancellation, counter-frequency. Requires microphone.</div>
     <div style="display:flex;gap:6px;margin-top:6px">
-      <a class="arc-link" href="/tones/shield" target="_blank">FULL SHIELD</a>
-      <a class="arc-link" href="/tones/shield/guide" target="_blank" style="color:#daa520;border-color:#333">FIELD GUIDE</a>
+      <a class="arc-link" href="/tones/shield" target="_blank" data-i18n="action.fullShield">FULL SHIELD</a>
+      <a class="arc-link" href="/tones/shield/guide" target="_blank" style="color:#daa520;border-color:#333" data-i18n="nav.guide">FIELD GUIDE</a>
     </div>
   </div>
   <!-- MICRO TONE LAB -->
   <div class="cm-panel mtl-panel">
     <div style="display:flex;align-items:center;gap:8px">
-      <span class="cm-label" style="color:#cc88ff">&#x1F3B9; TONE LAB</span>
+      <span class="cm-label" style="color:#cc88ff">&#x1F3B9; <span data-i18n="panel.tonelab">TONE LAB</span></span>
     </div>
     <div class="mtl-pad-grid" id="mtlPadGrid">
-      <button class="mtl-pad" data-freq="174" data-cat="sol" onclick="mtlTogglePad(this)">174<span class="mtl-name">Pain</span></button>
-      <button class="mtl-pad" data-freq="396" data-cat="sol" onclick="mtlTogglePad(this)">396<span class="mtl-name">Free</span></button>
-      <button class="mtl-pad" data-freq="432" data-cat="sol" onclick="mtlTogglePad(this)">432<span class="mtl-name">Calm</span></button>
-      <button class="mtl-pad" data-freq="528" data-cat="sol" onclick="mtlTogglePad(this)">528<span class="mtl-name">Love</span></button>
-      <button class="mtl-pad" data-freq="639" data-cat="sol" onclick="mtlTogglePad(this)">639<span class="mtl-name">Bond</span></button>
-      <button class="mtl-pad" data-freq="741" data-cat="sol" onclick="mtlTogglePad(this)">741<span class="mtl-name">Intuit</span></button>
-      <button class="mtl-pad" data-freq="852" data-cat="sol" onclick="mtlTogglePad(this)">852<span class="mtl-name">Spirit</span></button>
-      <button class="mtl-pad" data-freq="963" data-cat="sol" onclick="mtlTogglePad(this)">963<span class="mtl-name">Crown</span></button>
-      <button class="mtl-pad" data-freq="136.1" data-cat="chant" onclick="mtlTogglePad(this)" style="border-color:#555">136.1<span class="mtl-name">OM</span></button>
-      <button class="mtl-pad" data-freq="210.42" data-cat="chant" onclick="mtlTogglePad(this)" style="border-color:#555">210.4<span class="mtl-name">Hum</span></button>
-      <button class="mtl-pad" data-freq="7.83" data-cat="bin" onclick="mtlTogglePad(this)" style="border-color:#00ccff;color:#00ccff">7.83<span class="mtl-name">Earth</span></button>
-      <button class="mtl-pad" data-freq="40" data-cat="bin" onclick="mtlTogglePad(this)" style="border-color:#00ccff;color:#00ccff">40<span class="mtl-name">Gamma</span></button>
+      <button class="mtl-pad" data-freq="174" data-cat="sol" onclick="mtlTogglePad(this)">174<span class="mtl-name" data-i18n="tl.pain">Pain</span></button>
+      <button class="mtl-pad" data-freq="396" data-cat="sol" onclick="mtlTogglePad(this)">396<span class="mtl-name" data-i18n="tl.free">Free</span></button>
+      <button class="mtl-pad" data-freq="432" data-cat="sol" onclick="mtlTogglePad(this)">432<span class="mtl-name" data-i18n="tl.calm">Calm</span></button>
+      <button class="mtl-pad" data-freq="528" data-cat="sol" onclick="mtlTogglePad(this)">528<span class="mtl-name" data-i18n="tl.love">Love</span></button>
+      <button class="mtl-pad" data-freq="639" data-cat="sol" onclick="mtlTogglePad(this)">639<span class="mtl-name" data-i18n="tl.bond">Bond</span></button>
+      <button class="mtl-pad" data-freq="741" data-cat="sol" onclick="mtlTogglePad(this)">741<span class="mtl-name" data-i18n="tl.intuit">Intuit</span></button>
+      <button class="mtl-pad" data-freq="852" data-cat="sol" onclick="mtlTogglePad(this)">852<span class="mtl-name" data-i18n="tl.spirit">Spirit</span></button>
+      <button class="mtl-pad" data-freq="963" data-cat="sol" onclick="mtlTogglePad(this)">963<span class="mtl-name" data-i18n="tl.crown">Crown</span></button>
+      <button class="mtl-pad" data-freq="136.1" data-cat="chant" onclick="mtlTogglePad(this)" style="border-color:#555">136.1<span class="mtl-name" data-i18n="tl.om">OM</span></button>
+      <button class="mtl-pad" data-freq="210.42" data-cat="chant" onclick="mtlTogglePad(this)" style="border-color:#555">210.4<span class="mtl-name" data-i18n="tl.hum">Hum</span></button>
+      <button class="mtl-pad" data-freq="7.83" data-cat="bin" onclick="mtlTogglePad(this)" style="border-color:#00ccff;color:#00ccff">7.83<span class="mtl-name" data-i18n="tl.earth">Earth</span></button>
+      <button class="mtl-pad" data-freq="40" data-cat="bin" onclick="mtlTogglePad(this)" style="border-color:#00ccff;color:#00ccff">40<span class="mtl-name" data-i18n="tl.gamma">Gamma</span></button>
     </div>
     <div class="mtl-controls">
       <button class="mtl-ctrl active" data-wave="sine" onclick="mtlSetWave(this)">SIN</button>
@@ -940,34 +940,34 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
     </div>
     <input type="range" class="mtl-vol" id="mtlVolume" min="0" max="100" value="20" oninput="mtlSetVolume(this.value)" title="Volume">
     <div class="mtl-playing" id="mtlPlaying"></div>
-    <button class="mtl-stop-all" onclick="mtlStopAll()">&#x25A0; STOP ALL</button>
-    <a class="mtl-link" href="/tones/instrument" target="_blank">OPEN FULL TONE LAB &#x2192;</a>
+    <button class="mtl-stop-all" onclick="mtlStopAll()">&#x25A0; <span data-i18n="action.stopAll">STOP ALL</span></button>
+    <a class="mtl-link" href="/tones/instrument" target="_blank"><span data-i18n="action.openToneLab">OPEN FULL TONE LAB</span> &#x2192;</a>
   </div>
   <div class="cm-panel cm-dl-panel">
-    <div class="cm-dl-title">⬇ DOWNLOAD / INSTALL APPS</div>
-    <div class="cm-dl-info">Install to home screen on mobile. Download HTML files on desktop. Zero dependencies.</div>
+    <div class="cm-dl-title">⬇ <span data-i18n="dl.title">DOWNLOAD / INSTALL APPS</span></div>
+    <div class="cm-dl-info" data-i18n="dl.info">Install to home screen on mobile. Download HTML files on desktop. Zero dependencies.</div>
     <div class="cm-dl-btns">
-      <a class="cm-dl-btn" href="/tones/multipack" target="_blank" style="text-decoration:none;text-align:center;background:#cc88ff;color:#0a0a0a;border-color:#cc88ff;flex:1 1 100%">🎛️ INSTALL MULTIPACK (ALL-IN-ONE)</a>
+      <a class="cm-dl-btn" href="/tones/multipack" target="_blank" style="text-decoration:none;text-align:center;background:#cc88ff;color:#0a0a0a;border-color:#cc88ff;flex:1 1 100%">🎛️ <span data-i18n="dl.multipack">INSTALL MULTIPACK (ALL-IN-ONE)</span></a>
     </div>
     <div class="cm-dl-btns" style="margin-top:4px">
-      <a class="cm-dl-btn" href="/tones/instrument" target="_blank" style="text-decoration:none;text-align:center;background:#ff4444;color:#0a0a0a;border-color:#ff4444;flex:1 1 100%">🎹 INSTALL TONE LAB (INSTRUMENT)</a>
+      <a class="cm-dl-btn" href="/tones/instrument" target="_blank" style="text-decoration:none;text-align:center;background:#ff4444;color:#0a0a0a;border-color:#ff4444;flex:1 1 100%">🎹 <span data-i18n="dl.toneLab">INSTALL TONE LAB (INSTRUMENT)</span></a>
     </div>
     <div class="cm-dl-btns" style="margin-top:4px">
-      <a class="cm-dl-btn" href="/tones/healing" target="_blank" style="text-decoration:none;text-align:center">📱 INSTALL HEALING</a>
-      <a class="cm-dl-btn blue" href="/tones/protective" target="_blank" style="text-decoration:none;text-align:center">📱 INSTALL PROTECTIVE</a>
+      <a class="cm-dl-btn" href="/tones/healing" target="_blank" style="text-decoration:none;text-align:center">📱 <span data-i18n="dl.healing">INSTALL HEALING</span></a>
+      <a class="cm-dl-btn blue" href="/tones/protective" target="_blank" style="text-decoration:none;text-align:center">📱 <span data-i18n="dl.protective">INSTALL PROTECTIVE</span></a>
     </div>
     <div class="cm-dl-btns" style="margin-top:4px">
-      <button class="cm-dl-btn" onclick="downloadToneApp('healing')" style="font-size:0.6rem;padding:6px 10px;opacity:0.6">⬇ DOWNLOAD .HTML</button>
-      <button class="cm-dl-btn blue" onclick="downloadToneApp('protective')" style="font-size:0.6rem;padding:6px 10px;opacity:0.6">⬇ DOWNLOAD .HTML</button>
+      <button class="cm-dl-btn" onclick="downloadToneApp('healing')" style="font-size:0.6rem;padding:6px 10px;opacity:0.6">⬇ <span data-i18n="dl.download">DOWNLOAD .HTML</span></button>
+      <button class="cm-dl-btn blue" onclick="downloadToneApp('protective')" style="font-size:0.6rem;padding:6px 10px;opacity:0.6">⬇ <span data-i18n="dl.download">DOWNLOAD .HTML</span></button>
     </div>
-    <div class="cm-dl-title" style="color:#cc88ff;margin-top:8px">🔗 INSTALL ON YOUR SITE</div>
-    <div class="cm-dl-info">Copy embed code to add tone tools to any website.</div>
-    <div class="cm-embed-label">IFRAME EMBED:</div>
+    <div class="cm-dl-title" style="color:#cc88ff;margin-top:8px">🔗 <span data-i18n="dl.embedTitle">INSTALL ON YOUR SITE</span></div>
+    <div class="cm-dl-info" data-i18n="dl.embedInfo">Copy embed code to add tone tools to any website.</div>
+    <div class="cm-embed-label" data-i18n="dl.iframe">IFRAME EMBED:</div>
     <div class="cm-embed-wrap">
       <pre class="cm-embed-pre" id="shellEmbedIframe">&lt;iframe src="https://b0b.dev/tools" style="width:100%;max-width:540px;height:600px;border:1px solid #333;background:#0a0a0a" title="b0b Countermeasures &amp; Healing Tones" loading="lazy"&gt;&lt;/iframe&gt;</pre>
       <button class="cm-embed-copy" onclick="copyShellEmbed('shellEmbedIframe',this)">COPY</button>
     </div>
-    <div class="cm-embed-label">SCRIPT TAG:</div>
+    <div class="cm-embed-label" data-i18n="dl.script">SCRIPT TAG:</div>
     <div class="cm-embed-wrap">
       <pre class="cm-embed-pre" id="shellEmbedScript">&lt;script&gt;(function(){var d=document.createElement('div');d.innerHTML='&lt;iframe src="https://b0b.dev/tools" style="width:100%;max-width:540px;height:600px;border:1px solid #333;background:#0a0a0a" title="b0b Countermeasures" loading="lazy"&gt;&lt;/iframe&gt;';document.currentScript.parentNode.insertBefore(d,document.currentScript)})()&lt;/script&gt;</pre>
       <button class="cm-embed-copy" onclick="copyShellEmbed('shellEmbedScript',this)">COPY</button>
@@ -982,7 +982,7 @@ var fr=document.getElementById('frame');
 // Forward URL hash into iframe for anchor navigation (e.g. /report#V)
 if(location.hash) fr.src+=location.hash;
 // Copy embed code
-window.copyShellEmbed=function(id,btn){var text=document.getElementById(id).textContent;navigator.clipboard.writeText(text).then(function(){btn.textContent='✓ COPIED';setTimeout(function(){btn.textContent='COPY'},2000)}).catch(function(){var ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);btn.textContent='✓ COPIED';setTimeout(function(){btn.textContent='COPY'},2000)})};
+window.copyShellEmbed=function(id,btn){var text=document.getElementById(id).textContent;var cl=window.b0bI18n?window.b0bI18n.t('action.copied'):'COPIED';var co=window.b0bI18n?window.b0bI18n.t('action.copy'):'COPY';navigator.clipboard.writeText(text).then(function(){btn.textContent='✓ '+cl;setTimeout(function(){btn.textContent=co},2000)}).catch(function(){var ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);btn.textContent='✓ '+cl;setTimeout(function(){btn.textContent=co},2000)})};
 // Download standalone tone app
 window.downloadToneApp=function(type){var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>b0b '+type+' Tones</title><style>';
 html+='*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;display:flex;align-items:center;justify-content:center;min-height:100vh}';
@@ -1048,8 +1048,26 @@ fr.addEventListener('load',function(){
     if(p.indexOf('/_page')===0){var real=p.replace('/_page','');if(real==='')real='/';history.replaceState(null,'',real)}
   }catch(e){}
 });
+// Fetch and display last-updated timestamps
+fetch('/api/updated').then(function(r){return r.json()}).then(function(d){
+  window._b0bUpdated=d;
+  var el=document.createElement('div');el.className='b0b-updated';el.id='b0bUpdated';
+  var map={'/':'site','/report':'report','/map':'map','/tools':'tools'};
+  function show(){
+    var cur=location.pathname;var key=map[cur]||'site';var ts=d[key];
+    if(!ts)return el.style.display='none';
+    el.style.display='';
+    var dt=new Date(ts);var mo=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var label=window.b0bI18n?window.b0bI18n.t('nav.updated'):'UPDATED';
+    el.textContent=label+': '+mo[dt.getMonth()]+' '+dt.getDate()+', '+dt.getFullYear();
+  }
+  document.body.appendChild(el);show();
+  window.addEventListener('popstate',show);
+  var origReplace=history.replaceState;history.replaceState=function(){origReplace.apply(history,arguments);show()};
+}).catch(function(){});
 })();
 </script>
+<script src="/i18n.js"></script>
 <script src="/cm-engine.js"></script>
 </body>
 </html>`;
@@ -1241,6 +1259,25 @@ app.get('/tones/shield', (req, res) => {
 });
 app.get('/tones/shield/guide', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'tones-shield-guide.html'));
+});
+
+// Last-updated timestamps API
+app.get('/api/updated', (req, res) => {
+  const files = {
+    site: 'index.html',
+    report: 'report.html',
+    map: 'map.html',
+    tools: 'countermeasures.html',
+    shield: 'tones-shield.html'
+  };
+  const result = {};
+  for (const [key, file] of Object.entries(files)) {
+    try {
+      const stat = fs.statSync(path.join(__dirname, 'public', file));
+      result[key] = stat.mtime.toISOString();
+    } catch (e) { result[key] = null; }
+  }
+  res.json(result);
 });
 
 // Raw content routes - serve actual pages into iframe

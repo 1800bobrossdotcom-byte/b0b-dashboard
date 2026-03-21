@@ -9,12 +9,13 @@
 // - Falls back to cache if network fails
 // - Tile requests are cached opportunistically (cache what loads, serve from cache if provider dies)
 
-var CACHE_NAME = 'b0b-shell-v3';
+var CACHE_NAME = 'b0b-shell-v4';
 var TILE_CACHE = 'b0b-tiles-v3';
 
 // Core assets to pre-cache on install - the skeleton that must always work
 var CORE_ASSETS = [
   '/',
+  '/i18n.js',
   '/_page/map',
   '/_page/tools',
   '/_page/report'
