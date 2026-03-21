@@ -123,6 +123,16 @@ app.use((req, res, next) => {
   next();
 });
 
+// ===================== DOMAIN REDIRECT =====================
+// b0b.dev → 1-800-bob-ross.com (preserve path, 301 permanent)
+app.use((req, res, next) => {
+  const host = req.hostname;
+  if (host === 'b0b.dev' || host === 'www.b0b.dev') {
+    return res.redirect(301, `https://1-800-bob-ross.com${req.originalUrl}`);
+  }
+  next();
+});
+
 // ===================== HTTP METHOD RESTRICTION (RED TEAM) =====================
 // Block dangerous/unused HTTP methods - TRACE enables XST attacks, unused verbs expand attack surface
 const ALLOWED_METHODS = new Set(['GET', 'POST', 'HEAD']);
