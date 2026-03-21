@@ -1,4 +1,4 @@
-// ===================== b0b.dev SERVICE WORKER — OFFLINE SHELL =====================
+// ===================== b0b.dev SERVICE WORKER - OFFLINE SHELL =====================
 // Caches core application assets so the site remains functional even if:
 // - All CDNs are blocked/down
 // - Network is intermittent
@@ -12,7 +12,7 @@
 var CACHE_NAME = 'b0b-shell-v3';
 var TILE_CACHE = 'b0b-tiles-v3';
 
-// Core assets to pre-cache on install — the skeleton that must always work
+// Core assets to pre-cache on install - the skeleton that must always work
 var CORE_ASSETS = [
   '/',
   '/_page/map',
@@ -20,7 +20,7 @@ var CORE_ASSETS = [
   '/_page/report'
 ];
 
-// Tile CDN domains — cache tiles opportunistically
+// Tile CDN domains - cache tiles opportunistically
 var TILE_DOMAINS = [
   'basemaps.cartocdn.com',
   'tile.openstreetmap.org',
@@ -30,12 +30,12 @@ var TILE_DOMAINS = [
 ];
 
 self.addEventListener('install', function(event) {
-  console.log('[SW] Installing — pre-caching core assets');
+  console.log('[SW] Installing - pre-caching core assets');
   event.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
       return cache.addAll(CORE_ASSETS).catch(function(err) {
-        // Don't fail install if auth blocks some pages — they'll be cached on first authenticated visit
-        console.log('[SW] Some assets require auth — will cache on first visit');
+        // Don't fail install if auth blocks some pages - they'll be cached on first authenticated visit
+        console.log('[SW] Some assets require auth - will cache on first visit');
       });
     })
   );
@@ -43,7 +43,7 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('activate', function(event) {
-  console.log('[SW] Activated — clearing old caches');
+  console.log('[SW] Activated - clearing old caches');
   // Clean old caches if version bumped
   event.waitUntil(
     caches.keys().then(function(names) {
@@ -108,7 +108,7 @@ self.addEventListener('fetch', function(event) {
           if (event.request.headers.get('accept') && event.request.headers.get('accept').indexOf('text/html') !== -1) {
             return new Response(
               '<html><body style="background:#0a0a0a;color:#ff6600;font-family:Courier New,monospace;display:flex;align-items:center;justify-content:center;height:100vh;text-align:center">' +
-              '<div><h1 style="color:#00ff41">b0b.dev</h1><p>OFFLINE MODE — network unreachable</p><p style="font-size:0.7rem;color:#555">Cached content may be available. Reload when connection restores.</p></div>' +
+              '<div><h1 style="color:#00ff41">b0b.dev</h1><p>OFFLINE MODE - network unreachable</p><p style="font-size:0.7rem;color:#555">Cached content may be available. Reload when connection restores.</p></div>' +
               '</body></html>',
               { headers: { 'Content-Type': 'text/html' } }
             );

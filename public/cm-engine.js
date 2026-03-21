@@ -1,5 +1,5 @@
 // ===================== b0b COUNTERMEASURES ENGINE =====================
-// Persistent audio engine for the b0b shell — runs in parent frame
+// Persistent audio engine for the b0b shell - runs in parent frame
 // Provides: Ultrasonic Shield, WebRTC Block, Canvas Guard, Healing Tones, Protective Tones
 // Persists across page navigation (iframe navigates, tones continue)
 
@@ -80,10 +80,10 @@ function startUltrasonicShield() {
     cmSweepLfo.start();
     cmNoiseNode.start();
     cmUltrasonicActive = true;
-    document.getElementById('cmStatus').textContent = 'ACTIVE — 20\u201322kHz sweep';
+    document.getElementById('cmStatus').textContent = 'ACTIVE - 20-22kHz sweep';
     document.getElementById('cmStatus').className = 'cm-status active';
   } catch (e) {
-    document.getElementById('cmStatus').textContent = 'ERROR — ' + e.message;
+    document.getElementById('cmStatus').textContent = 'ERROR - ' + e.message;
   }
 }
 
@@ -110,7 +110,7 @@ window.toggleWebRTCBlock = function(enabled) {
     window.webkitRTCPeerConnection = window.RTCPeerConnection;
     window.mozRTCPeerConnection = window.RTCPeerConnection;
     cmRTCBlocked = true;
-    document.getElementById('cmWebrtcStatus').textContent = 'ACTIVE — local IP masked';
+    document.getElementById('cmWebrtcStatus').textContent = 'ACTIVE - local IP masked';
     document.getElementById('cmWebrtcStatus').className = 'cm-status active';
   } else {
     if (cmOriginalRTC) {
@@ -147,7 +147,7 @@ window.toggleCanvasGuard = function(enabled) {
       return cmOriginalToDataURL.apply(this, arguments);
     };
     cmCanvasGuardActive = true;
-    document.getElementById('cmCanvasStatus').textContent = 'ACTIVE — noise injected';
+    document.getElementById('cmCanvasStatus').textContent = 'ACTIVE - noise injected';
     document.getElementById('cmCanvasStatus').className = 'cm-status active';
   } else {
     HTMLCanvasElement.prototype.toDataURL = cmOriginalToDataURL;
@@ -196,11 +196,11 @@ function startHealingTone() {
     htOscillator.start();
     htSubOsc.start();
     htActive = true;
-    document.getElementById('cmHealingStatus').textContent = 'ACTIVE — ' + htCurrentFreq + ' Hz';
+    document.getElementById('cmHealingStatus').textContent = 'ACTIVE - ' + htCurrentFreq + ' Hz';
     document.getElementById('cmHealingStatus').className = 'cm-status active';
-    document.getElementById('htNowPlaying').textContent = '\u266B ' + htCurrentFreq + ' Hz — ' + htCurrentName;
+    document.getElementById('htNowPlaying').textContent = '♫ ' + htCurrentFreq + ' Hz - ' + htCurrentName;
   } catch (e) {
-    document.getElementById('cmHealingStatus').textContent = 'ERROR — ' + e.message;
+    document.getElementById('cmHealingStatus').textContent = 'ERROR - ' + e.message;
   }
 }
 
@@ -232,8 +232,8 @@ window.selectHealingFreq = function(btn) {
   if (htActive && htOscillator && htAudioCtx) {
     htOscillator.frequency.linearRampToValueAtTime(htCurrentFreq, htAudioCtx.currentTime + 0.3);
     if (htSubOsc) htSubOsc.frequency.linearRampToValueAtTime(htCurrentFreq / 2, htAudioCtx.currentTime + 0.3);
-    document.getElementById('cmHealingStatus').textContent = 'ACTIVE — ' + htCurrentFreq + ' Hz';
-    document.getElementById('htNowPlaying').textContent = '\u266B ' + htCurrentFreq + ' Hz — ' + htCurrentName;
+    document.getElementById('cmHealingStatus').textContent = 'ACTIVE - ' + htCurrentFreq + ' Hz';
+    document.getElementById('htNowPlaying').textContent = '♫ ' + htCurrentFreq + ' Hz - ' + htCurrentName;
   }
 };
 
@@ -328,11 +328,11 @@ function startProtectiveTone() {
     }
     ptActive = true;
     var label = ptCurrentType === 'binaural' ? ptCurrentFreq + ' Hz binaural' : ptCurrentName;
-    document.getElementById('cmProtectiveStatus').textContent = 'ACTIVE — ' + label;
+    document.getElementById('cmProtectiveStatus').textContent = 'ACTIVE - ' + label;
     document.getElementById('cmProtectiveStatus').className = 'cm-status active';
-    document.getElementById('ptNowPlaying').textContent = '\u25C6 ' + ptCurrentName;
+    document.getElementById('ptNowPlaying').textContent = '◆ ' + ptCurrentName;
   } catch (e) {
-    document.getElementById('cmProtectiveStatus').textContent = 'ERROR — ' + e.message;
+    document.getElementById('cmProtectiveStatus').textContent = 'ERROR - ' + e.message;
   }
 }
 
@@ -417,7 +417,7 @@ window.toggleCanvasGuard(true);
 // ===================== VISIBILITY CHANGE DETECTION =====================
 document.addEventListener('visibilitychange', function() {
   if (document.hidden) {
-    console.log('[CM] Page visibility HIDDEN — ' + new Date().toISOString());
+    console.log('[CM] Page visibility HIDDEN - ' + new Date().toISOString());
   }
 });
 
@@ -434,7 +434,7 @@ window.downloadToneApp = function(type) {
   html += '</style></head><body><div class="app">';
 
   if (type === 'healing') {
-    html += '<h1>\\uD83C\\uDFB5 b0b HEALING TONES</h1>';
+    html += '<h1>\�\� b0b HEALING TONES</h1>';
     html += '<label class="toggle"><input type="checkbox" id="tog" onchange="toggle(this.checked)"><span>ACTIVATE</span></label>';
     html += '<div class="status" id="st">INACTIVE</div>';
     html += '<div id="grid">';
@@ -445,12 +445,12 @@ window.downloadToneApp = function(type) {
     html += '</div><input type="range" min="0" max="100" value="25" oninput="vol(this.value)">';
     html += '<script>';
     html += 'var ctx,osc,sub,gain,on=false,freq=396,name="Liberation",v=0.06;';
-    html += 'function toggle(e){if(e){if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();if(ctx.state==="suspended")ctx.resume();if(osc){try{osc.stop();osc.disconnect()}catch(x){}}if(sub){try{sub.stop();sub.disconnect()}catch(x){}}osc=ctx.createOscillator();osc.type="sine";osc.frequency.value=freq;gain=ctx.createGain();gain.gain.setValueAtTime(0,ctx.currentTime);gain.gain.linearRampToValueAtTime(v,ctx.currentTime+0.5);osc.connect(gain);sub=ctx.createOscillator();sub.type="sine";sub.frequency.value=freq/2;var sg=ctx.createGain();sg.gain.value=0.15;sub.connect(sg);sg.connect(gain);gain.connect(ctx.destination);osc.start();sub.start();on=true;document.getElementById("st").textContent="ACTIVE — "+freq+" Hz";document.getElementById("st").style.color="#00ff41"}else{if(gain&&ctx){gain.gain.linearRampToValueAtTime(0,ctx.currentTime+0.3);setTimeout(function(){try{if(osc){osc.stop();osc.disconnect();osc=null}if(sub){sub.stop();sub.disconnect();sub=null}if(gain){gain.disconnect();gain=null}}catch(x){}},350)}on=false;document.getElementById("st").textContent="INACTIVE";document.getElementById("st").style.color="#555"}}';
-    html += 'function sel(b){document.querySelectorAll(".btn").forEach(function(x){x.classList.remove("active")});b.classList.add("active");freq=parseInt(b.dataset.f);name=b.dataset.n;if(on&&osc&&ctx){osc.frequency.linearRampToValueAtTime(freq,ctx.currentTime+0.3);if(sub)sub.frequency.linearRampToValueAtTime(freq/2,ctx.currentTime+0.3);document.getElementById("st").textContent="ACTIVE — "+freq+" Hz"}}';
+    html += 'function toggle(e){if(e){if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();if(ctx.state==="suspended")ctx.resume();if(osc){try{osc.stop();osc.disconnect()}catch(x){}}if(sub){try{sub.stop();sub.disconnect()}catch(x){}}osc=ctx.createOscillator();osc.type="sine";osc.frequency.value=freq;gain=ctx.createGain();gain.gain.setValueAtTime(0,ctx.currentTime);gain.gain.linearRampToValueAtTime(v,ctx.currentTime+0.5);osc.connect(gain);sub=ctx.createOscillator();sub.type="sine";sub.frequency.value=freq/2;var sg=ctx.createGain();sg.gain.value=0.15;sub.connect(sg);sg.connect(gain);gain.connect(ctx.destination);osc.start();sub.start();on=true;document.getElementById("st").textContent="ACTIVE - "+freq+" Hz";document.getElementById("st").style.color="#00ff41"}else{if(gain&&ctx){gain.gain.linearRampToValueAtTime(0,ctx.currentTime+0.3);setTimeout(function(){try{if(osc){osc.stop();osc.disconnect();osc=null}if(sub){sub.stop();sub.disconnect();sub=null}if(gain){gain.disconnect();gain=null}}catch(x){}},350)}on=false;document.getElementById("st").textContent="INACTIVE";document.getElementById("st").style.color="#555"}}';
+    html += 'function sel(b){document.querySelectorAll(".btn").forEach(function(x){x.classList.remove("active")});b.classList.add("active");freq=parseInt(b.dataset.f);name=b.dataset.n;if(on&&osc&&ctx){osc.frequency.linearRampToValueAtTime(freq,ctx.currentTime+0.3);if(sub)sub.frequency.linearRampToValueAtTime(freq/2,ctx.currentTime+0.3);document.getElementById("st").textContent="ACTIVE - "+freq+" Hz"}}';
     html += 'function vol(val){v=(val/100)*0.25;if(on&&gain&&ctx)gain.gain.linearRampToValueAtTime(v,ctx.currentTime+0.1)}';
     html += '<\/script>';
   } else {
-    html += '<h1>\\uD83D\\uDEE1\\uFE0F b0b PROTECTIVE TONES</h1>';
+    html += '<h1>\�\�\️ b0b PROTECTIVE TONES</h1>';
     html += '<label class="toggle"><input type="checkbox" id="tog" onchange="toggle(this.checked)"><span>ACTIVATE</span></label>';
     html += '<div class="status" id="st">INACTIVE</div>';
     html += '<div id="grid">';
@@ -470,13 +470,13 @@ window.downloadToneApp = function(type) {
     html += 'else if(type==="pink"){var bs=ctx.sampleRate*2,bf=ctx.createBuffer(1,bs,ctx.sampleRate),d=bf.getChannelData(0),b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0;for(var i=0;i<bs;i++){var w=Math.random()*2-1;b0=0.99886*b0+w*0.0555179;b1=0.99332*b1+w*0.0750759;b2=0.96900*b2+w*0.1538520;b3=0.86650*b3+w*0.3104856;b4=0.55000*b4+w*0.5329522;b5=-0.7616*b5-w*0.0168980;d[i]=(b0+b1+b2+b3+b4+b5+b6+w*0.5362)*0.11;b6=w*0.115926}noise=ctx.createBufferSource();noise.buffer=bf;noise.loop=true;noise.connect(gain);noise.start()}';
     html += 'else if(type==="brown"){var bs2=ctx.sampleRate*2,bf2=ctx.createBuffer(1,bs2,ctx.sampleRate),d2=bf2.getChannelData(0),last=0;for(var j=0;j<bs2;j++){var wn=Math.random()*2-1;last=(last+(0.02*wn))/1.02;d2[j]=last*3.5}noise=ctx.createBufferSource();noise.buffer=bf2;noise.loop=true;noise.connect(gain);noise.start()}';
     html += 'else if(type==="ocean"){var obs=ctx.sampleRate*4,ob=ctx.createBuffer(1,obs,ctx.sampleRate),od=ob.getChannelData(0),ol=0;for(var k=0;k<obs;k++){var ow=Math.random()*2-1;ol=(ol+(0.02*ow))/1.02;od[k]=ol*3.5}noise=ctx.createBufferSource();noise.buffer=ob;noise.loop=true;var lp=ctx.createBiquadFilter();lp.type="lowpass";lp.frequency.value=500;lp.Q.value=0.7;lfo=ctx.createOscillator();lfo.type="sine";lfo.frequency.value=0.08;var wd=ctx.createGain();wd.gain.value=0.4;lfo.connect(wd);wd.connect(gain.gain);lfo.start();noise.connect(lp);lp.connect(gain);noise.start()}';
-    html += 'on=true;document.getElementById("st").textContent="ACTIVE — "+name;document.getElementById("st").style.color="#00ccff"}';
+    html += 'on=true;document.getElementById("st").textContent="ACTIVE - "+name;document.getElementById("st").style.color="#00ccff"}';
     html += 'else{if(gain&&ctx){gain.gain.linearRampToValueAtTime(0,ctx.currentTime+0.4);setTimeout(cleanup,450)}else cleanup();on=false;document.getElementById("st").textContent="INACTIVE";document.getElementById("st").style.color="#555"}}';
     html += 'function sel(b){document.querySelectorAll(".btn").forEach(function(x){x.classList.remove("active")});b.classList.add("active");freq=parseFloat(b.dataset.f);name=b.dataset.n;type=b.dataset.t;if(on){toggle(false);setTimeout(function(){document.getElementById("tog").checked=true;toggle(true)},500)}}';
     html += 'function vol(val){v=(val/100)*0.25;if(on&&gain&&ctx)gain.gain.linearRampToValueAtTime(v,ctx.currentTime+0.1)}';
     html += '<\/script>';
   }
-  html += '<div class="credit">b0b.dev — COUNTERMEASURES</div></div></body></html>';
+  html += '<div class="credit">b0b.dev - COUNTERMEASURES</div></div></body></html>';
 
   var blob = new Blob([html], { type: 'text/html' });
   var url = URL.createObjectURL(blob);

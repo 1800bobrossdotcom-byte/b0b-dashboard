@@ -7,9 +7,9 @@
  * at runtime and pre-commit.
  * 
  * Usage:
- *   node linguistic-integrity.js generate   — Build manifest from current report.html
- *   node linguistic-integrity.js verify     — Verify report.html against manifest
- *   node linguistic-integrity.js patterns   — Scan for known injection patterns
+ *   node linguistic-integrity.js generate   - Build manifest from current report.html
+ *   node linguistic-integrity.js verify     - Verify report.html against manifest
+ *   node linguistic-integrity.js patterns   - Scan for known injection patterns
  */
 
 const fs = require('fs');
@@ -32,11 +32,11 @@ const INJECTION_PATTERNS = [
   { pattern: /\bnot a bug[.,]?\s*(?:it is|it's)\s*(?:the\s*)?(?:product|feature)\b/gi, category: 'tech-speak', severity: 'high', description: 'Silicon Valley cliché mapped onto serious analysis' },
   { pattern: /\bdead is final[.,]?\s*relocated is useful\b/gi, category: 'cynical-aphorism', severity: 'high', description: 'Dark humor aphorism trivializing intelligence operations' },
   { pattern: /\bgrowth industry\b/gi, category: 'sardonic-business', severity: 'high', description: 'Business-speak trivializing human suffering' },
-  { pattern: /\bweapons?\s*platform\b/gi, category: 'terminology-escalation', severity: 'high', description: 'Classification escalation — interceptor ≠ weapons platform' },
-  { pattern: /\borg chart\b/gi, category: 'business-speak', severity: 'medium', description: 'Corporate metaphor — review in context' },
+  { pattern: /\bweapons?\s*platform\b/gi, category: 'terminology-escalation', severity: 'high', description: 'Classification escalation - interceptor ≠ weapons platform' },
+  { pattern: /\borg chart\b/gi, category: 'business-speak', severity: 'medium', description: 'Corporate metaphor - review in context' },
   { pattern: /\btransaction cost\b/gi, category: 'financial-jargon', severity: 'medium', description: 'Financial jargon potentially trivializing criminal penalties' },
-  // Compression patterns — factual multi-sentence analysis reduced to one-liners
-  { pattern: /(?:^|\. )[A-Z][^.]{0,30}\.\s*(?=[A-Z])/gm, category: 'compression-candidate', severity: 'low', description: 'Very short sentence — may be compression of longer analysis (manual review)' },
+  // Compression patterns - factual multi-sentence analysis reduced to one-liners
+  { pattern: /(?:^|\. )[A-Z][^.]{0,30}\.\s*(?=[A-Z])/gm, category: 'compression-candidate', severity: 'low', description: 'Very short sentence - may be compression of longer analysis (manual review)' },
 ];
 
 // ===================== UTILITY FUNCTIONS =====================
@@ -151,11 +151,11 @@ function verifyIntegrity() {
   console.log('  Current hash: ', currentHash.substring(0, 16) + '...');
 
   if (currentHash === manifest.fullFileHash) {
-    console.log('\n  STATUS: PASS — File is unchanged since last manifest generation.');
+    console.log('\n  STATUS: PASS - File is unchanged since last manifest generation.');
     return;
   }
 
-  console.log('\n  STATUS: MODIFIED — File has changed since last manifest generation.');
+  console.log('\n  STATUS: MODIFIED - File has changed since last manifest generation.');
   console.log('  Running section-level diff...\n');
 
   const currentBlocks = extractContentBlocks(html);
@@ -169,18 +169,18 @@ function verifyIntegrity() {
   currentBlocks.forEach(function(block) {
     if (manifestMap[block.id]) {
       if (manifestMap[block.id].hash !== block.hash) {
-        console.log('  MODIFIED: Section "' + block.id + '" — content changed (length ' + manifestMap[block.id].length + ' → ' + block.length + ')');
+        console.log('  MODIFIED: Section "' + block.id + '" - content changed (length ' + manifestMap[block.id].length + ' → ' + block.length + ')');
         modified++;
       }
       delete manifestMap[block.id];
     } else {
-      console.log('  ADDED:    Section "' + block.id + '" — new section detected');
+      console.log('  ADDED:    Section "' + block.id + '" - new section detected');
       added++;
     }
   });
 
   Object.keys(manifestMap).forEach(function(id) {
-    console.log('  REMOVED:  Section "' + id + '" — section no longer present');
+    console.log('  REMOVED:  Section "' + id + '" - section no longer present');
     removed++;
   });
 
@@ -243,7 +243,7 @@ function scanPatterns() {
   });
 
   if (totalHits === 0) {
-    console.log('  STATUS: CLEAN — No known injection patterns detected.');
+    console.log('  STATUS: CLEAN - No known injection patterns detected.');
     return;
   }
 
@@ -251,7 +251,7 @@ function scanPatterns() {
   Object.keys(results).forEach(function(category) {
     console.log('  [' + category.toUpperCase() + ']');
     results[category].forEach(function(r) {
-      console.log('    ' + r.severity.toUpperCase() + ': "' + r.match + '" — ' + r.description);
+      console.log('    ' + r.severity.toUpperCase() + ': "' + r.match + '" - ' + r.description);
     });
     console.log('');
   });
@@ -273,8 +273,8 @@ if (command === 'generate') {
   console.log('Linguistic Integrity Verification (LIV)');
   console.log('Technical countermeasure for AI linguistic phreaking\n');
   console.log('Commands:');
-  console.log('  generate  — Build integrity manifest from current report.html');
-  console.log('  verify    — Verify report.html against stored manifest');
-  console.log('  patterns  — Scan for known AI injection patterns');
+  console.log('  generate  - Build integrity manifest from current report.html');
+  console.log('  verify    - Verify report.html against stored manifest');
+  console.log('  patterns  - Scan for known AI injection patterns');
   console.log('\nUsage: node linguistic-integrity.js <command>');
 }

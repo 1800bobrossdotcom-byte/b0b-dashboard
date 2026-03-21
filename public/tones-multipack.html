@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <title>b0b Tone Multipack</title>
-<meta name="description" content="All tone generators combined — healing, protective, ultrasonic shield. Layer them like an instrument.">
+<meta name="description" content="All tone generators combined - healing, protective, ultrasonic shield. Layer them like an instrument.">
 <meta name="theme-color" content="#0a0a0a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -55,7 +55,7 @@ input[type=range]{width:100%;margin:6px 0;height:24px}
 <body>
 <div class="header">
   <h1>🎛️ b0b TONE MULTIPACK</h1>
-  <div class="sub">LAYER TONES LIKE AN INSTRUMENT — ALL ENGINES RUN SIMULTANEOUSLY</div>
+  <div class="sub">LAYER TONES LIKE AN INSTRUMENT - ALL ENGINES RUN SIMULTANEOUSLY</div>
 </div>
 
 <div class="install-banner" id="installBanner">
@@ -116,7 +116,7 @@ input[type=range]{width:100%;margin:6px 0;height:24px}
   <div class="info">🌊 Humidity-adaptive frequency sweep across 20–22kHz. Jams cross-device tracking beacons &amp; acoustic data exfiltration. 🐾 ANIMAL-SAFE: above 20kHz at -60dB. Triangle LFO sweep at 0.25Hz adapts to ambient humidity.</div>
 </div>
 
-<div class="credit"><a href="https://b0b.dev">b0b.dev</a> — COUNTERMEASURES MULTIPACK</div>
+<div class="credit"><a href="https://b0b.dev">b0b.dev</a> - COUNTERMEASURES MULTIPACK</div>
 
 <script>
 // Master volume (0-1)
@@ -145,7 +145,7 @@ function toggleHeal(e) {
     var sg = hCtx.createGain(); sg.gain.value = 0.15; hSub.connect(sg); sg.connect(hGain);
     hGain.connect(hCtx.destination); hOsc.start(); hSub.start();
     hOn = true;
-    document.getElementById("stHeal").textContent = "ACTIVE \u2014 " + hFreq + " Hz";
+    document.getElementById("stHeal").textContent = "ACTIVE - " + hFreq + " Hz";
     document.getElementById("stHeal").style.color = "#00ff41";
     document.getElementById("dotHeal").classList.add("on");
     document.getElementById("sHeal").classList.add("active-glow");
@@ -170,7 +170,7 @@ function selHeal(b) {
   if (hOn && hOsc && hCtx) {
     hOsc.frequency.linearRampToValueAtTime(hFreq, hCtx.currentTime + 0.3);
     if (hSub) hSub.frequency.linearRampToValueAtTime(hFreq / 2, hCtx.currentTime + 0.3);
-    document.getElementById("stHeal").textContent = "ACTIVE \u2014 " + hFreq + " Hz";
+    document.getElementById("stHeal").textContent = "ACTIVE - " + hFreq + " Hz";
   }
 }
 
@@ -223,7 +223,7 @@ function toggleProt(e) {
       pNoise.connect(lp); lp.connect(pGain); pNoise.start();
     }
     pOn = true;
-    document.getElementById("stProt").textContent = "ACTIVE \u2014 " + pName;
+    document.getElementById("stProt").textContent = "ACTIVE - " + pName;
     document.getElementById("stProt").style.color = "#00ccff";
     document.getElementById("dotProt").classList.add("on");
     document.getElementById("sProt").classList.add("active-glow");
@@ -284,7 +284,7 @@ function toggleUltra(e) {
     uGain.connect(uCtx.destination);
     uNoise.start(); uSweepLfo.start();
     uOn = true;
-    document.getElementById("stUltra").textContent = "ACTIVE \u2014 20\u201322kHz sweep";
+    document.getElementById("stUltra").textContent = "ACTIVE - 20-22kHz sweep";
     document.getElementById("stUltra").style.color = "#cc88ff";
     document.getElementById("dotUltra").classList.add("on");
     document.getElementById("sUltra").classList.add("active-glow");
@@ -317,16 +317,16 @@ function toggleUltra(e) {
   var banner = document.getElementById('installBanner');
   var inst = document.getElementById('installInstructions');
   if (ios) {
-    inst.innerHTML = 'Tap <strong>Share \u2191</strong> then <strong>"Add to Home Screen"</strong>';
+    inst.innerHTML = 'Tap <strong>Share ↑</strong> then <strong>"Add to Home Screen"</strong>';
     banner.style.display = 'block';
   } else if (/android/i.test(ua)) {
-    inst.innerHTML = 'Tap <strong>\u22ee Menu</strong> then <strong>"Add to Home Screen"</strong> or <strong>"Install App"</strong>';
+    inst.innerHTML = 'Tap <strong>⋮ Menu</strong> then <strong>"Add to Home Screen"</strong> or <strong>"Install App"</strong>';
     banner.style.display = 'block';
   }
   var deferredPrompt = null;
   window.addEventListener('beforeinstallprompt', function (e) {
     e.preventDefault(); deferredPrompt = e;
-    inst.innerHTML = '<button onclick="installPWA()" style="background:#cc88ff;color:#0a0a0a;border:none;padding:8px 16px;font-family:inherit;cursor:pointer;border-radius:2px;font-size:0.8rem">\u2b07 INSTALL TO HOME SCREEN</button>';
+    inst.innerHTML = '<button onclick="installPWA()" style="background:#cc88ff;color:#0a0a0a;border:none;padding:8px 16px;font-family:inherit;cursor:pointer;border-radius:2px;font-size:0.8rem">⬇ INSTALL TO HOME SCREEN</button>';
     banner.style.display = 'block';
   });
   window.installPWA = function () {

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <title>b0b Healing Tones</title>
-<meta name="description" content="Solfeggio healing frequency generator — standalone, zero dependencies">
+<meta name="description" content="Solfeggio healing frequency generator - standalone, zero dependencies">
 <meta name="theme-color" content="#0a0a0a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -54,7 +54,7 @@ input[type=range]{width:100%;margin:12px 0;accent-color:#00ff41;height:28px}
     <button class="btn" data-f="963" data-n="Higher Self" onclick="sel(this)">963 Hz</button>
   </div>
   <input type="range" min="0" max="100" value="25" oninput="vol(this.value)" title="Volume">
-  <div class="credit"><a href="https://b0b.dev">b0b.dev</a> — COUNTERMEASURES</div>
+  <div class="credit"><a href="https://b0b.dev">b0b.dev</a> - COUNTERMEASURES</div>
 </div>
 <script>
 var ctx,osc,sub,gain,on=false,freq=396,name="Liberation",v=0.06;
@@ -73,7 +73,7 @@ function toggle(e){
     var sg=ctx.createGain();sg.gain.value=0.15;sub.connect(sg);sg.connect(gain);
     gain.connect(ctx.destination);osc.start();sub.start();
     on=true;
-    document.getElementById("st").textContent="ACTIVE \u2014 "+freq+" Hz";
+    document.getElementById("st").textContent="ACTIVE - "+freq+" Hz";
     document.getElementById("st").style.color="#00ff41";
   } else {
     if(gain&&ctx){
@@ -94,7 +94,7 @@ function sel(b){
   if(on&&osc&&ctx){
     osc.frequency.linearRampToValueAtTime(freq,ctx.currentTime+0.3);
     if(sub) sub.frequency.linearRampToValueAtTime(freq/2,ctx.currentTime+0.3);
-    document.getElementById("st").textContent="ACTIVE \u2014 "+freq+" Hz";
+    document.getElementById("st").textContent="ACTIVE - "+freq+" Hz";
   }
 }
 

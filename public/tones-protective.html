@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <title>b0b Protective Tones</title>
-<meta name="description" content="Binaural beats, pink/brown noise, ocean waves — standalone, zero dependencies">
+<meta name="description" content="Binaural beats, pink/brown noise, ocean waves - standalone, zero dependencies">
 <meta name="theme-color" content="#0a0a0a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -53,7 +53,7 @@ input[type=range]{width:100%;margin:12px 0;accent-color:#00ccff;height:28px}
   </div>
   <input type="range" min="0" max="100" value="30" oninput="vol(this.value)" title="Volume">
   <div class="info">🌊 7.83 Hz Schumann is Earth's electromagnetic heartbeat. Use headphones for binaural entrainment. 🐾 ANIMAL-SAFE.</div>
-  <div class="credit"><a href="https://b0b.dev">b0b.dev</a> — COUNTERMEASURES</div>
+  <div class="credit"><a href="https://b0b.dev">b0b.dev</a> - COUNTERMEASURES</div>
 </div>
 <script>
 var ctx,oscL,oscR,noise,lfo,gain,on=false,freq=7.83,name="Schumann Resonance",type="binaural",v=0.075;
@@ -103,7 +103,7 @@ function toggle(e){
       noise.connect(lp);lp.connect(gain);noise.start();
     }
     on=true;
-    document.getElementById("st").textContent="ACTIVE \u2014 "+name;
+    document.getElementById("st").textContent="ACTIVE - "+name;
     document.getElementById("st").style.color="#00ccff";
   } else {
     if(gain&&ctx){gain.gain.linearRampToValueAtTime(0,ctx.currentTime+0.4);setTimeout(cleanup,450)}

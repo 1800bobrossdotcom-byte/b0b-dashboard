@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 const AUTH_SECRET = process.env.AUTH_SECRET || crypto.randomBytes(32).toString('hex');
 
 // ===================== CONTENT INTEGRITY MONITORING =====================
-// Hash static files at startup — detect unauthorized modifications
+// Hash static files at startup - detect unauthorized modifications
 const fileIntegrityHashes = new Map();
 function computeFileHash(filePath) {
   try {
@@ -31,13 +31,13 @@ function initIntegrityMonitoring() {
     }
   });
 }
-// Periodic integrity check — every 5 minutes
+// Periodic integrity check - every 5 minutes
 function checkFileIntegrity() {
   const publicDir = path.join(__dirname, 'public');
   for (const [file, expectedHash] of fileIntegrityHashes) {
     const currentHash = computeFileHash(path.join(publicDir, file));
     if (currentHash && currentHash !== expectedHash) {
-      console.log(`[INTEGRITY] ⚠ FILE MODIFIED: ${file} — expected ${expectedHash.substring(0, 16)}... got ${currentHash.substring(0, 16)}... — ${new Date().toISOString()}`);
+      console.log(`[INTEGRITY] ⚠ FILE MODIFIED: ${file} - expected ${expectedHash.substring(0, 16)}... got ${currentHash.substring(0, 16)}... - ${new Date().toISOString()}`);
       // Update hash (file was legitimately deployed)
       fileIntegrityHashes.set(file, currentHash);
     }
@@ -47,7 +47,7 @@ setInterval(checkFileIntegrity, 5 * 60 * 1000);
 initIntegrityMonitoring();
 
 // ===================== SECURITY EVENT CORRELATION =====================
-// Track suspicious activity per IP — escalate on pattern detection
+// Track suspicious activity per IP - escalate on pattern detection
 const suspiciousIPs = new Map();
 const SUSPICION_WINDOW = 30 * 60 * 1000; // 30 minutes
 const SUSPICION_THRESHOLD = 5; // events before flagging
@@ -63,7 +63,7 @@ function recordSuspicion(ip, reason) {
   record.events = record.events.filter(e => now - e.time < SUSPICION_WINDOW);
   if (record.events.length >= SUSPICION_THRESHOLD && !record.flagged) {
     record.flagged = true;
-    console.log(`[SECURITY] ⚠ THREAT ESCALATION — IP: ${ip} — ${record.events.length} suspicious events in ${SUSPICION_WINDOW / 60000}min — ${record.events.map(e => e.reason).join(', ')} — ${new Date().toISOString()}`);
+    console.log(`[SECURITY] ⚠ THREAT ESCALATION - IP: ${ip} - ${record.events.length} suspicious events in ${SUSPICION_WINDOW / 60000}min - ${record.events.map(e => e.reason).join(', ')} - ${new Date().toISOString()}`);
   }
 }
 
@@ -76,7 +76,7 @@ setInterval(() => {
   }
 }, SUSPICION_WINDOW);
 
-// ===================== BLUE TEAM — DEFENSIVE HARDENING =====================
+// ===================== BLUE TEAM - DEFENSIVE HARDENING =====================
 
 // Disable Express fingerprint (X-Powered-By header reveals stack)
 app.disable('x-powered-by');
@@ -89,7 +89,7 @@ app.use(express.urlencoded({ extended: false, limit: '1kb' }));
 app.use(express.json({ limit: '10kb', type: ['application/json', 'application/csp-report'] }));
 app.use(cookieParser());
 
-// ===================== RED TEAM — RATE PROTECTION =====================
+// ===================== RED TEAM - RATE PROTECTION =====================
 
 // Login-specific rate limiter: 20 attempts per IP per 15-minute window
 const loginAttempts = new Map();
@@ -114,8 +114,8 @@ setInterval(() => {
   }
 }, LOGIN_WINDOW);
 
-// ===================== GREY TEAM — CHALLENGE-BASED AUTH =====================
-// Server-signed challenge token: HMAC(timestamp:nonce) — expires after 10 minutes
+// ===================== GREY TEAM - CHALLENGE-BASED AUTH =====================
+// Server-signed challenge token: HMAC(timestamp:nonce) - expires after 10 minutes
 function makeChallenge() {
   const ts = Date.now().toString(36);
   const nonce = crypto.randomBytes(8).toString('hex');
@@ -155,7 +155,7 @@ function getLoginHTML(challenge) {
 <meta property="og:description" content="">
 <meta property="og:type" content="website">
 <meta property="og:image" content="">
-<title>b0b.dev — Human Check</title>
+<title>b0b.dev - Human Check</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0a0a0a;color:#00ff41;font-family:'Courier New',monospace;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;overflow:hidden;position:relative;user-select:none}
@@ -192,7 +192,7 @@ canvas{width:150px;height:250px}
 <div class="float-layer" id="floatLayer"></div>
 <div class="game-wrap">
   <h1>b0b.dev</h1>
-  <div class="sub">prove you are human — or don't</div>
+  <div class="sub">prove you are human - or don't</div>
   <canvas id="game" width="120" height="200"></canvas>
   <div class="score-line" id="scoreLine">LINES: 0 / 2</div>
   <div class="info" id="info">clear 2 lines or place 10 pieces</div>
@@ -328,10 +328,10 @@ function submitForm(){document.getElementById('authForm').submit();}
 newPiece();
 requestAnimationFrame(gameLoop);
 
-// ===================== WEB AUDIO — KOROBEINIKI (TETRIS THEME) =====================
+// ===================== WEB AUDIO - KOROBEINIKI (TETRIS THEME) =====================
 var audioCtx=null,soundOn=true,musicPlaying=false;
 var MELODY=[
-  // Korobeiniki — traditional arrangement
+  // Korobeiniki - traditional arrangement
   [659,400],[494,200],[523,200],[587,400],[523,200],[494,200],
   [440,400],[440,200],[523,200],[659,400],[587,200],[523,200],
   [494,400],[494,200],[523,200],[587,400],[659,400],
@@ -425,9 +425,9 @@ app.get('/login', (req, res) => {
 app.post('/login', (req, res) => {
   const ip = req.ip || req.connection.remoteAddress;
 
-  // RED TEAM — Rate limiting
+  // RED TEAM - Rate limiting
   if (!checkLoginRate(ip)) {
-    console.log(`[AUTH] Login RATE LIMITED — IP: ${ip} — ${new Date().toISOString()}`);
+    console.log(`[AUTH] Login RATE LIMITED - IP: ${ip} - ${new Date().toISOString()}`);
     recordSuspicion(ip, 'login-rate-limit');
     return res.status(429).send('Too many attempts. Try again in 15 minutes.');
   }
@@ -436,12 +436,12 @@ app.post('/login', (req, res) => {
 
   // Verify server-signed challenge token
   if (!verifyChallenge(challenge)) {
-    console.log(`[AUTH] Login REJECTED (invalid challenge) — IP: ${ip} — ${new Date().toISOString()}`);
+    console.log(`[AUTH] Login REJECTED (invalid challenge) - IP: ${ip} - ${new Date().toISOString()}`);
     recordSuspicion(ip, 'invalid-challenge');
     return res.redirect('/login');
   }
 
-  console.log(`[AUTH] Login SUCCESS — IP: ${ip} — ${new Date().toISOString()}`);
+  console.log(`[AUTH] Login SUCCESS - IP: ${ip} - ${new Date().toISOString()}`);
   res.cookie('b0b_auth', makeAuthToken(), {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
@@ -457,8 +457,8 @@ app.get('/logout', (req, res) => {
   res.redirect('/login');
 });
 
-// ===================== RAINBOW — PUBLIC WELL-KNOWN ENDPOINTS =====================
-// These are BEFORE auth middleware — intentionally public
+// ===================== RAINBOW - PUBLIC WELL-KNOWN ENDPOINTS =====================
+// These are BEFORE auth middleware - intentionally public
 
 // RFC 9116 security.txt
 app.get('/.well-known/security.txt', (req, res) => {
@@ -469,7 +469,7 @@ app.get('/.well-known/security.txt', (req, res) => {
   );
 });
 
-// Robots.txt — block crawlers from authenticated content
+// Robots.txt - block crawlers from authenticated content
 app.get('/robots.txt', (req, res) => {
   res.type('text/plain').send(
     'User-agent: *\n' +
@@ -482,7 +482,7 @@ app.get('/robots.txt', (req, res) => {
   );
 });
 
-// Health check — for uptime monitoring
+// Health check - for uptime monitoring
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
@@ -497,13 +497,13 @@ app.post('/csp-report', (req, res) => {
   const violatedDirective = report['violated-directive'] || report.effectiveDirective || 'unknown';
   const documentUri = report['document-uri'] || report.documentURL || 'unknown';
   const sourceFile = report['source-file'] || report.sourceFile || '';
-  console.log(`[CSP VIOLATION] IP: ${ip} — Blocked: ${String(blockedUri).substring(0, 200)} — Directive: ${violatedDirective} — Page: ${String(documentUri).substring(0, 100)} — Source: ${String(sourceFile).substring(0, 100)} — ${new Date().toISOString()}`);
+  console.log(`[CSP VIOLATION] IP: ${ip} - Blocked: ${String(blockedUri).substring(0, 200)} - Directive: ${violatedDirective} - Page: ${String(documentUri).substring(0, 100)} - Source: ${String(sourceFile).substring(0, 100)} - ${new Date().toISOString()}`);
   recordSuspicion(ip, 'csp-violation:' + String(blockedUri).substring(0, 50));
   res.status(204).end();
 });
 
 // ===================== HONEYPOT ROUTES =====================
-// Trap common attack paths — no legitimate user would request these
+// Trap common attack paths - no legitimate user would request these
 // Log detailed attacker fingerprint for threat intelligence
 const honeypotPaths = [
   '/.env', '/wp-admin', '/wp-login.php', '/admin', '/administrator',
@@ -519,9 +519,9 @@ honeypotPaths.forEach(hp => {
     const method = req.method;
     const referer = req.headers['referer'] || 'none';
     const accept = req.headers['accept'] || 'none';
-    console.log(`[HONEYPOT] ⚠ TRAP HIT — IP: ${ip} — Path: ${hp} — Method: ${method} — UA: ${ua.substring(0, 200)} — Referer: ${referer} — Accept: ${accept.substring(0, 100)} — ${new Date().toISOString()}`);
+    console.log(`[HONEYPOT] ⚠ TRAP HIT - IP: ${ip} - Path: ${hp} - Method: ${method} - UA: ${ua.substring(0, 200)} - Referer: ${referer} - Accept: ${accept.substring(0, 100)} - ${new Date().toISOString()}`);
     recordSuspicion(ip, 'honeypot:' + hp);
-    // Artificial delay — waste attacker's time
+    // Artificial delay - waste attacker's time
     setTimeout(() => {
       res.status(404).send('Not found');
     }, 2000 + Math.floor(Math.random() * 3000));
@@ -537,7 +537,7 @@ app.use((req, res, next) => {
   // Flag known scanner signatures
   const scannerPatterns = /sqlmap|nikto|nessus|nmap|masscan|dirbust|gobuster|nuclei|wfuzz|ffuf|burpsuite|zaproxy|acunetix|w3af|arachni|skipfish|whatweb|httpie\/|python-requests\/|Go-http-client|curl\/|wget\//i;
   if (scannerPatterns.test(ua)) {
-    console.log(`[SECURITY] Scanner detected — IP: ${ip} — UA: ${ua.substring(0, 200)} — Path: ${req.path} — ${new Date().toISOString()}`);
+    console.log(`[SECURITY] Scanner detected - IP: ${ip} - UA: ${ua.substring(0, 200)} - Path: ${req.path} - ${new Date().toISOString()}`);
     recordSuspicion(ip, 'scanner-ua');
   }
   
@@ -550,7 +550,7 @@ app.use((req, res, next) => {
 });
 
 // ===================== PUBLIC DATA API =====================
-// Serves map data as JSON for researchers — no auth required
+// Serves map data as JSON for researchers - no auth required
 app.get('/api/data', (req, res) => {
   const fs = require('fs');
   try {
@@ -558,7 +558,7 @@ app.get('/api/data', (req, res) => {
     // Extract locations array
     const locMatch = html.match(/var locations\s*=\s*\[([\s\S]*?)\];/);
     if (!locMatch) return res.status(500).json({ error: 'Data extraction failed' });
-    // Parse entries using regex — each entry is {name:"...",lat:...,lng:...,section:"...",type:"...",ctx:"..."}
+    // Parse entries using regex - each entry is {name:"...",lat:...,lng:...,section:"...",type:"...",ctx:"..."}
     const entries = [];
     const entryRe = /\{name:"([^"]*)",lat:([-\d.]+),lng:([-\d.]+),section:"([^"]*)",type:"([^"]*)",ctx:"([^"]*)"\}/g;
     let m;
@@ -582,13 +582,13 @@ app.get('/api/data', (req, res) => {
     res.json({
       meta: {
         title: 'b0b OSINT Dataset',
-        description: 'Cross-referenced open-source intelligence — locations, types, connections, and context',
+        description: 'Cross-referenced open-source intelligence - locations, types, connections, and context',
         totalLocations: entries.length,
         totalConnections: connections,
         totalTunnelPaths: tunnels,
         types: typeCounts,
         exportDate: new Date().toISOString(),
-        license: 'Public domain — use freely, cite if possible',
+        license: 'Public domain - use freely, cite if possible',
         methodology: 'See b0b.dev/report Section XI for sourcing methodology and verification guide'
       },
       locations: entries
@@ -598,26 +598,26 @@ app.get('/api/data', (req, res) => {
   }
 });
 
-// Auth middleware — protect all routes below
+// Auth middleware - protect all routes below
 app.use((req, res, next) => {
   if (req.cookies.b0b_auth === makeAuthToken()) {
     return next();
   }
-  // BLUE TEAM — log unauthenticated access attempts to protected routes
+  // BLUE TEAM - log unauthenticated access attempts to protected routes
   const ip = req.ip || req.connection.remoteAddress;
   const ua = req.headers['user-agent'] || 'no-ua';
-  console.log(`[AUTH] Unauthenticated access blocked — IP: ${ip} — Path: ${req.path} — UA: ${ua.substring(0, 120)} — ${new Date().toISOString()}`);
+  console.log(`[AUTH] Unauthenticated access blocked - IP: ${ip} - Path: ${req.path} - UA: ${ua.substring(0, 120)} - ${new Date().toISOString()}`);
   res.redirect('/login');
 });
 
 // ===================== SECURITY HEADERS (BLUE TEAM) =====================
 app.use((req, res, next) => {
-  // RAINBOW — Request ID for incident correlation
+  // RAINBOW - Request ID for incident correlation
   const requestId = crypto.randomUUID();
   res.setHeader('X-Request-ID', requestId);
   // Prevent MIME type sniffing
   res.setHeader('X-Content-Type-Options', 'nosniff');
-  // Prevent clickjacking — only allow same-origin framing
+  // Prevent clickjacking - only allow same-origin framing
   res.setHeader('X-Frame-Options', 'SAMEORIGIN');
   // XSS protection (legacy browsers)
   res.setHeader('X-XSS-Protection', '1; mode=block');
@@ -627,10 +627,10 @@ app.use((req, res, next) => {
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   // Restrict browser features
   res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=(), serial=(), hid=(), accelerometer=(), gyroscope=(), magnetometer=(), ambient-light-sensor=(), autoplay=(self), display-capture=(), document-domain=(), encrypted-media=(self), fullscreen=(self), interest-cohort=()');
-  // Prevent DNS prefetch data leakage — stops browser from resolving domains in page content
+  // Prevent DNS prefetch data leakage - stops browser from resolving domains in page content
   res.setHeader('X-DNS-Prefetch-Control', 'off');
-  // BLUE TEAM — Cross-origin isolation headers
-  // Skip COOP for /_page routes — they load inside same-origin iframes
+  // BLUE TEAM - Cross-origin isolation headers
+  // Skip COOP for /_page routes - they load inside same-origin iframes
   if (!req.path.startsWith('/_page')) {
     res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
   }
@@ -680,7 +680,7 @@ app.use((req, res, next) => {
 
   record.count++;
   if (record.count > RATE_LIMIT_MAX) {
-    console.log(`[SECURITY] Rate limited — IP: ${ip} — Path: ${req.path} — ${new Date().toISOString()}`);
+    console.log(`[SECURITY] Rate limited - IP: ${ip} - Path: ${req.path} - ${new Date().toISOString()}`);
     recordSuspicion(ip, 'rate-limit:' + req.path.substring(0, 30));
     return res.status(429).send('Too many requests. Try again later.');
   }
@@ -706,21 +706,21 @@ app.use((req, res, next) => {
       /\.(env|git|htaccess|htpasswd|DS_Store|svn|hg)$/i.test(req.path) ||
       /\/(\.|_)/.test(decodedPath) && !req.path.startsWith('/_page') && !req.path.startsWith('/.well-known')) {
     const ip = req.ip || req.connection.remoteAddress;
-    console.log(`[SECURITY] Suspicious path blocked — IP: ${ip} — Path: ${req.path} — ${new Date().toISOString()}`);
+    console.log(`[SECURITY] Suspicious path blocked - IP: ${ip} - Path: ${req.path} - ${new Date().toISOString()}`);
     recordSuspicion(ip, 'path-traversal:' + req.path.substring(0, 50));
     return res.status(400).send('Bad request');
   }
   // Block excessively long URLs (recon / fuzzing indicator)
   if (req.originalUrl.length > 2048) {
     const ip = req.ip || req.connection.remoteAddress;
-    console.log(`[SECURITY] Oversized URL blocked — IP: ${ip} — Length: ${req.originalUrl.length} — ${new Date().toISOString()}`);
+    console.log(`[SECURITY] Oversized URL blocked - IP: ${ip} - Length: ${req.originalUrl.length} - ${new Date().toISOString()}`);
     recordSuspicion(ip, 'oversized-url');
     return res.status(414).send('URI too long');
   }
   next();
 });
 
-// ===================== SERVICE WORKER — OFFLINE SHELL =====================
+// ===================== SERVICE WORKER - OFFLINE SHELL =====================
 // Serve SW from root scope so it can cache the entire origin
 app.get('/sw.js', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'sw.js'));
@@ -751,7 +751,7 @@ function getShellHTML(contentPath) {
 html,body{height:100%;overflow:hidden;background:#0a0a0a}
 #frame{width:100%;border:none;height:100%;display:block}
 
-/* CM Drawer — persistent countermeasures above player bar */
+/* CM Drawer - persistent countermeasures above player bar */
 .cm-drawer{position:fixed;bottom:0;left:0;right:0;z-index:9998;background:rgba(10,10,10,0.98);border-top:1px solid #333;font-family:'Courier New',monospace}
 .cm-drawer-bar{height:36px;display:flex;align-items:center;padding:0 16px;cursor:pointer;user-select:none;gap:12px}
 .cm-drawer-bar:hover{background:rgba(255,68,68,0.05)}
@@ -814,16 +814,16 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
   <div class="cm-panel">
     <label class="cm-toggle"><input type="checkbox" id="cmUltrasonic" onchange="toggleUltrasonicCM(this.checked)"><span class="cm-label">ULTRASONIC SHIELD</span></label>
     <div class="cm-status" id="cmStatus">INACTIVE</div>
-    <div class="cm-info">🌊 WATER PLANET OPTIMIZED — Humidity-adaptive frequency sweep across 20–22kHz. Jams cross-device tracking beacons &amp; acoustic data exfiltration. 🐾 ANIMAL-SAFE: above 20kHz at -60dB.</div>
+    <div class="cm-info">🌊 WATER PLANET OPTIMIZED - Humidity-adaptive frequency sweep across 20–22kHz. Jams cross-device tracking beacons &amp; acoustic data exfiltration. 🐾 ANIMAL-SAFE: above 20kHz at -60dB.</div>
   </div>
   <div class="cm-panel">
     <label class="cm-toggle"><input type="checkbox" id="cmWebrtc" onchange="toggleWebRTCBlock(this.checked)" checked><span class="cm-label">WebRTC LEAK BLOCK</span></label>
-    <div class="cm-status active" id="cmWebrtcStatus">ACTIVE \u2014 local IP masked</div>
+    <div class="cm-status active" id="cmWebrtcStatus">ACTIVE - local IP masked</div>
     <div class="cm-info">Prevents WebRTC from exposing your real local/public IP addresses through STUN/TURN requests.</div>
   </div>
   <div class="cm-panel">
     <label class="cm-toggle"><input type="checkbox" id="cmCanvas" onchange="toggleCanvasGuard(this.checked)" checked><span class="cm-label">CANVAS FINGERPRINT GUARD</span></label>
-    <div class="cm-status active" id="cmCanvasStatus">ACTIVE \u2014 noise injected</div>
+    <div class="cm-status active" id="cmCanvasStatus">ACTIVE - noise injected</div>
     <div class="cm-info">Injects imperceptible noise into canvas readback operations, defeating canvas fingerprinting.</div>
   </div>
   <div class="cm-panel" style="border-color:#00ff41">
@@ -850,12 +850,12 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
     <div class="cm-status" id="cmProtectiveStatus">INACTIVE</div>
     <div class="pt-freq-grid" id="ptFreqGrid">
       <button class="pt-freq-btn active" data-freq="7.83" data-name="Schumann Resonance" data-type="binaural" onclick="selectProtectiveFreq(this)">7.83 Hz</button>
-      <button class="pt-freq-btn" data-freq="10" data-name="Alpha \u2014 Calm Alert" data-type="binaural" onclick="selectProtectiveFreq(this)">10 Hz</button>
-      <button class="pt-freq-btn" data-freq="14" data-name="Beta \u2014 Focus" data-type="binaural" onclick="selectProtectiveFreq(this)">14 Hz</button>
-      <button class="pt-freq-btn" data-freq="40" data-name="Gamma \u2014 Perception" data-type="binaural" onclick="selectProtectiveFreq(this)">40 Hz</button>
-      <button class="pt-freq-btn" data-freq="0" data-name="Pink Noise \u2014 Masking" data-type="pink" onclick="selectProtectiveFreq(this)">PINK</button>
-      <button class="pt-freq-btn" data-freq="0" data-name="Brown Noise \u2014 Deep Cover" data-type="brown" onclick="selectProtectiveFreq(this)">BROWN</button>
-      <button class="pt-freq-btn" data-freq="0" data-name="Ocean Waves — Planet Sound" data-type="ocean" onclick="selectProtectiveFreq(this)">🌊 OCEAN</button>
+      <button class="pt-freq-btn" data-freq="10" data-name="Alpha - Calm Alert" data-type="binaural" onclick="selectProtectiveFreq(this)">10 Hz</button>
+      <button class="pt-freq-btn" data-freq="14" data-name="Beta - Focus" data-type="binaural" onclick="selectProtectiveFreq(this)">14 Hz</button>
+      <button class="pt-freq-btn" data-freq="40" data-name="Gamma - Perception" data-type="binaural" onclick="selectProtectiveFreq(this)">40 Hz</button>
+      <button class="pt-freq-btn" data-freq="0" data-name="Pink Noise - Masking" data-type="pink" onclick="selectProtectiveFreq(this)">PINK</button>
+      <button class="pt-freq-btn" data-freq="0" data-name="Brown Noise - Deep Cover" data-type="brown" onclick="selectProtectiveFreq(this)">BROWN</button>
+      <button class="pt-freq-btn" data-freq="0" data-name="Ocean Waves - Planet Sound" data-type="ocean" onclick="selectProtectiveFreq(this)">🌊 OCEAN</button>
     </div>
     <input type="range" class="pt-volume" id="ptVolume" min="0" max="100" value="30" oninput="setProtectiveVolume(this.value)" title="Volume">
     <div class="pt-now-playing" id="ptNowPlaying"></div>
@@ -897,8 +897,10 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
 <script>
 (function(){
 var fr=document.getElementById('frame');
+// Forward URL hash into iframe for anchor navigation (e.g. /report#V)
+if(location.hash) fr.src+=location.hash;
 // Copy embed code
-window.copyShellEmbed=function(id,btn){var text=document.getElementById(id).textContent;navigator.clipboard.writeText(text).then(function(){btn.textContent='\u2713 COPIED';setTimeout(function(){btn.textContent='COPY'},2000)}).catch(function(){var ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);btn.textContent='\u2713 COPIED';setTimeout(function(){btn.textContent='COPY'},2000)})};
+window.copyShellEmbed=function(id,btn){var text=document.getElementById(id).textContent;navigator.clipboard.writeText(text).then(function(){btn.textContent='✓ COPIED';setTimeout(function(){btn.textContent='COPY'},2000)}).catch(function(){var ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);btn.textContent='✓ COPIED';setTimeout(function(){btn.textContent='COPY'},2000)})};
 // Download standalone tone app
 window.downloadToneApp=function(type){var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>b0b '+type+' Tones</title><style>';
 html+='*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;display:flex;align-items:center;justify-content:center;min-height:100vh}';
@@ -918,8 +920,8 @@ for(var i=0;i<hf.length;i++){html+='<button class="btn'+(hf[i][0]===396?' active
 html+='</div><input type="range" min="0" max="100" value="25" oninput="vol(this.value)">';
 html+='<scr'+'ipt>';
 html+='var ctx,osc,sub,gain,on=false,freq=396,name="Liberation",v=0.06;';
-html+='function toggle(e){if(e){if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();if(ctx.state==="suspended")ctx.resume();if(osc){try{osc.stop();osc.disconnect()}catch(x){}}if(sub){try{sub.stop();sub.disconnect()}catch(x){}}osc=ctx.createOscillator();osc.type="sine";osc.frequency.value=freq;gain=ctx.createGain();gain.gain.setValueAtTime(0,ctx.currentTime);gain.gain.linearRampToValueAtTime(v,ctx.currentTime+0.5);osc.connect(gain);sub=ctx.createOscillator();sub.type="sine";sub.frequency.value=freq/2;var sg=ctx.createGain();sg.gain.value=0.15;sub.connect(sg);sg.connect(gain);gain.connect(ctx.destination);osc.start();sub.start();on=true;document.getElementById("st").textContent="ACTIVE \\u2014 "+freq+" Hz";document.getElementById("st").style.color="#00ff41"}else{if(gain&&ctx){gain.gain.linearRampToValueAtTime(0,ctx.currentTime+0.3);setTimeout(function(){try{if(osc){osc.stop();osc.disconnect();osc=null}if(sub){sub.stop();sub.disconnect();sub=null}if(gain){gain.disconnect();gain=null}}catch(x){}},350)}on=false;document.getElementById("st").textContent="INACTIVE";document.getElementById("st").style.color="#555"}}';
-html+='function sel(b){document.querySelectorAll(".btn").forEach(function(x){x.classList.remove("active")});b.classList.add("active");freq=parseInt(b.dataset.f);name=b.dataset.n;if(on&&osc&&ctx){osc.frequency.linearRampToValueAtTime(freq,ctx.currentTime+0.3);if(sub)sub.frequency.linearRampToValueAtTime(freq/2,ctx.currentTime+0.3);document.getElementById("st").textContent="ACTIVE \\u2014 "+freq+" Hz"}}';
+html+='function toggle(e){if(e){if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();if(ctx.state==="suspended")ctx.resume();if(osc){try{osc.stop();osc.disconnect()}catch(x){}}if(sub){try{sub.stop();sub.disconnect()}catch(x){}}osc=ctx.createOscillator();osc.type="sine";osc.frequency.value=freq;gain=ctx.createGain();gain.gain.setValueAtTime(0,ctx.currentTime);gain.gain.linearRampToValueAtTime(v,ctx.currentTime+0.5);osc.connect(gain);sub=ctx.createOscillator();sub.type="sine";sub.frequency.value=freq/2;var sg=ctx.createGain();sg.gain.value=0.15;sub.connect(sg);sg.connect(gain);gain.connect(ctx.destination);osc.start();sub.start();on=true;document.getElementById("st").textContent="ACTIVE - "+freq+" Hz";document.getElementById("st").style.color="#00ff41"}else{if(gain&&ctx){gain.gain.linearRampToValueAtTime(0,ctx.currentTime+0.3);setTimeout(function(){try{if(osc){osc.stop();osc.disconnect();osc=null}if(sub){sub.stop();sub.disconnect();sub=null}if(gain){gain.disconnect();gain=null}}catch(x){}},350)}on=false;document.getElementById("st").textContent="INACTIVE";document.getElementById("st").style.color="#555"}}';
+html+='function sel(b){document.querySelectorAll(".btn").forEach(function(x){x.classList.remove("active")});b.classList.add("active");freq=parseInt(b.dataset.f);name=b.dataset.n;if(on&&osc&&ctx){osc.frequency.linearRampToValueAtTime(freq,ctx.currentTime+0.3);if(sub)sub.frequency.linearRampToValueAtTime(freq/2,ctx.currentTime+0.3);document.getElementById("st").textContent="ACTIVE - "+freq+" Hz"}}';
 html+='function vol(val){v=(val/100)*0.25;if(on&&gain&&ctx)gain.gain.linearRampToValueAtTime(v,ctx.currentTime+0.1)}';
 html+='<\\/scr'+'ipt>';
 }else{
@@ -942,13 +944,13 @@ html+='if(type==="binaural"){var m=ctx.createChannelMerger(2);m.connect(gain);os
 html+='else if(type==="pink"){var bs=ctx.sampleRate*2,bf=ctx.createBuffer(1,bs,ctx.sampleRate),d=bf.getChannelData(0),b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0;for(var i=0;i<bs;i++){var w=Math.random()*2-1;b0=0.99886*b0+w*0.0555179;b1=0.99332*b1+w*0.0750759;b2=0.96900*b2+w*0.1538520;b3=0.86650*b3+w*0.3104856;b4=0.55000*b4+w*0.5329522;b5=-0.7616*b5-w*0.0168980;d[i]=(b0+b1+b2+b3+b4+b5+b6+w*0.5362)*0.11;b6=w*0.115926}noise=ctx.createBufferSource();noise.buffer=bf;noise.loop=true;noise.connect(gain);noise.start()}';
 html+='else if(type==="brown"){var bs2=ctx.sampleRate*2,bf2=ctx.createBuffer(1,bs2,ctx.sampleRate),d2=bf2.getChannelData(0),last=0;for(var j=0;j<bs2;j++){var wn=Math.random()*2-1;last=(last+(0.02*wn))/1.02;d2[j]=last*3.5}noise=ctx.createBufferSource();noise.buffer=bf2;noise.loop=true;noise.connect(gain);noise.start()}';
 html+='else if(type==="ocean"){var obs=ctx.sampleRate*4,ob=ctx.createBuffer(1,obs,ctx.sampleRate),od=ob.getChannelData(0),ol=0;for(var k=0;k<obs;k++){var ow=Math.random()*2-1;ol=(ol+(0.02*ow))/1.02;od[k]=ol*3.5}noise=ctx.createBufferSource();noise.buffer=ob;noise.loop=true;var lp=ctx.createBiquadFilter();lp.type="lowpass";lp.frequency.value=500;lp.Q.value=0.7;lfo=ctx.createOscillator();lfo.type="sine";lfo.frequency.value=0.08;var wd=ctx.createGain();wd.gain.value=0.4;lfo.connect(wd);wd.connect(gain.gain);lfo.start();noise.connect(lp);lp.connect(gain);noise.start()}';
-html+='on=true;document.getElementById("st").textContent="ACTIVE \\u2014 "+name;document.getElementById("st").style.color="#00ccff"}';
+html+='on=true;document.getElementById("st").textContent="ACTIVE - "+name;document.getElementById("st").style.color="#00ccff"}';
 html+='else{if(gain&&ctx){gain.gain.linearRampToValueAtTime(0,ctx.currentTime+0.4);setTimeout(cleanup,450)}else cleanup();on=false;document.getElementById("st").textContent="INACTIVE";document.getElementById("st").style.color="#555"}}';
 html+='function sel(b){document.querySelectorAll(".btn").forEach(function(x){x.classList.remove("active")});b.classList.add("active");freq=parseFloat(b.dataset.f);name=b.dataset.n;type=b.dataset.t;if(on){toggle(false);setTimeout(function(){document.getElementById("tog").checked=true;toggle(true)},500)}}';
 html+='function vol(val){v=(val/100)*0.25;if(on&&gain&&ctx)gain.gain.linearRampToValueAtTime(v,ctx.currentTime+0.1)}';
 html+='<\\/scr'+'ipt>';
 }
-html+='<div class="credit">b0b.dev — COUNTERMEASURES</div></div></body></html>';
+html+='<div class="credit">b0b.dev - COUNTERMEASURES</div></div></body></html>';
 var blob=new Blob([html],{type:'text/html'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='b0b-'+type+'-tones.html';a.click();URL.revokeObjectURL(url)};
 // Listen for navigation messages from iframe content
 window.addEventListener('message',function(e){
@@ -974,7 +976,7 @@ fr.addEventListener('load',function(){
 // ===================== OFFLINE BACKUP ZIP =====================
 // Generates a self-contained zip of the full site for offline use
 // Inlines Leaflet CDN resources so the map works without internet (tiles still need connectivity)
-// Always reflects current state — regenerated on each download
+// Always reflects current state - regenerated on each download
 
 // Download rate limiter: 5 downloads per IP per hour (zip generation is expensive)
 const downloadAttempts = new Map();
@@ -1031,11 +1033,11 @@ app.get('/download', async (req, res) => {
 
     // Rate limit downloads (zip generation is CPU-intensive)
     if (!checkDownloadRate(ip)) {
-      console.log(`[SECURITY] Download rate limited — IP: ${ip} — ${new Date().toISOString()}`);
+      console.log(`[SECURITY] Download rate limited - IP: ${ip} - ${new Date().toISOString()}`);
       return res.status(429).send('Download limit reached. Try again later.');
     }
 
-    console.log(`[BACKUP] Offline zip downloaded — IP: ${ip} — ${new Date().toISOString()}`);
+    console.log(`[BACKUP] Offline zip downloaded - IP: ${ip} - ${new Date().toISOString()}`);
 
     const assets = await getLeafletAssets();
     const publicDir = path.join(__dirname, 'public');
@@ -1046,12 +1048,12 @@ app.get('/download', async (req, res) => {
       // Replace CDN CSS link with inline style
       mapHtml = mapHtml.replace(
         /<link rel="stylesheet" href="https:\/\/unpkg\.com\/leaflet@1\.9\.4\/dist\/leaflet\.css"[^>]*\/>/,
-        '<style>/* Leaflet 1.9.4 CSS — inlined for offline use */\n' + assets.css + '</style>'
+        '<style>/* Leaflet 1.9.4 CSS - inlined for offline use */\n' + assets.css + '</style>'
       );
       // Replace CDN JS script with inline script
       mapHtml = mapHtml.replace(
         /<script src="https:\/\/unpkg\.com\/leaflet@1\.9\.4\/dist\/leaflet\.js"[^>]*><\/script>/,
-        '<script>/* Leaflet 1.9.4 JS — inlined for offline use */\n' + assets.js + '</script>'
+        '<script>/* Leaflet 1.9.4 JS - inlined for offline use */\n' + assets.js + '</script>'
       );
     }
 
@@ -1066,7 +1068,7 @@ app.get('/download', async (req, res) => {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>b0b.dev — Offline Backup</title>
+<title>b0b.dev - Offline Backup</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0a0a0a;color:#d4d4d4;font-family:'Courier New',monospace;display:flex;justify-content:center;align-items:center;min-height:100vh}
@@ -1121,7 +1123,7 @@ Map tiles require internet. All data, markers, connections, and analysis are sel
   }
 });
 
-// Shell routes — serve persistent player wrapper
+// Shell routes - serve persistent player wrapper
 app.get('/', (req, res) => {
   res.send(getShellHTML('/'));
 });
@@ -1139,7 +1141,7 @@ app.get('/tools', (req, res) => {
   res.send(getShellHTML('/tools'));
 });
 
-// Tone standalone PWA pages — served outside the shell for home screen install
+// Tone standalone PWA pages - served outside the shell for home screen install
 app.get('/tones/healing', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'tones-healing.html'));
 });
@@ -1153,7 +1155,7 @@ app.get('/tones/instrument', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'tones-instrument.html'));
 });
 
-// Raw content routes — serve actual pages into iframe
+// Raw content routes - serve actual pages into iframe
 app.get('/_page/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
@@ -1171,7 +1173,7 @@ app.get('/_page/tools', (req, res) => {
 });
 
 // ===================== RESPONSE TIMING PADDING =====================
-// Add random delay to error responses — resist timing analysis
+// Add random delay to error responses - resist timing analysis
 app.use((req, res, next) => {
   const originalSend = res.send.bind(res);
   res.send = function(body) {
@@ -1188,7 +1190,7 @@ app.use((req, res, next) => {
 // ===================== 404 HANDLER (RAINBOW) =====================
 app.use((req, res) => {
   const ip = req.ip || req.connection.remoteAddress;
-  console.log(`[404] Not found — IP: ${ip} — Path: ${req.path} — ${new Date().toISOString()}`);
+  console.log(`[404] Not found - IP: ${ip} - Path: ${req.path} - ${new Date().toISOString()}`);
   recordSuspicion(ip, '404:' + req.path.substring(0, 50));
   res.status(404);
   res.setHeader('Content-Type', 'text/html');
@@ -1196,30 +1198,30 @@ app.use((req, res) => {
 });
 
 // ===================== GLOBAL ERROR HANDLER (BLUE TEAM) =====================
-// Catch unhandled errors — never leak stack traces to clients
+// Catch unhandled errors - never leak stack traces to clients
 app.use((err, req, res, next) => {
   const ip = req.ip || req.connection.remoteAddress;
-  console.error(`[ERROR] Unhandled — IP: ${ip} — Path: ${req.path} — ${err.message} — ${new Date().toISOString()}`);
+  console.error(`[ERROR] Unhandled - IP: ${ip} - Path: ${req.path} - ${err.message} - ${new Date().toISOString()}`);
   if (!res.headersSent) {
     res.status(500).send('Internal server error');
   }
 });
 
 // ===================== PROCESS-LEVEL HARDENING =====================
-// Catch unhandled promise rejections — prevent silent crashes
+// Catch unhandled promise rejections - prevent silent crashes
 process.on('unhandledRejection', (reason, promise) => {
-  console.error(`[SECURITY] Unhandled promise rejection: ${reason} — ${new Date().toISOString()}`);
+  console.error(`[SECURITY] Unhandled promise rejection: ${reason} - ${new Date().toISOString()}`);
 });
 
-// Catch uncaught exceptions — log and stay up
+// Catch uncaught exceptions - log and stay up
 process.on('uncaughtException', (err) => {
-  console.error(`[SECURITY] Uncaught exception: ${err.message} — ${new Date().toISOString()}`);
-  // Don't process.exit() — let the runtime handle restart
+  console.error(`[SECURITY] Uncaught exception: ${err.message} - ${new Date().toISOString()}`);
+  // Don't process.exit() - let the runtime handle restart
 });
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`b0b dashboard running on port ${PORT}`);
-  console.log(`[INTEGRITY] Content integrity monitoring active — ${fileIntegrityHashes.size} files tracked`);
-  console.log(`[SECURITY] Honeypot routes active — ${honeypotPaths.length} traps deployed`);
-  console.log(`[SECURITY] Security event correlation active — ${SUSPICION_THRESHOLD} events/${SUSPICION_WINDOW / 60000}min threshold`);
+  console.log(`[INTEGRITY] Content integrity monitoring active - ${fileIntegrityHashes.size} files tracked`);
+  console.log(`[SECURITY] Honeypot routes active - ${honeypotPaths.length} traps deployed`);
+  console.log(`[SECURITY] Security event correlation active - ${SUSPICION_THRESHOLD} events/${SUSPICION_WINDOW / 60000}min threshold`);
 });

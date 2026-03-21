@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover,maximum-scale=1">
-<title>b0b TONE LAB v2 — Sacred Frequency Instrument</title>
+<title>b0b TONE LAB v2 - Sacred Frequency Instrument</title>
 <meta name="description" content="Sacred frequency instrument with monk chant synthesis, MIDI control, 32-step sequencer, analog warmth engine, and WAV recording">
 <meta name="theme-color" content="#0a0a0a">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -55,19 +55,19 @@ body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;min-he
 .pad .vol-bar{position:absolute;bottom:0;left:0;right:0;height:0;transition:height 0.1s;z-index:0;opacity:0.2}
 .pad.playing{border-color:rgba(255,255,255,0.25);box-shadow:0 0 8px rgba(255,255,255,0.05)}
 
-/* Solfeggio — green */
+/* Solfeggio - green */
 .pad.sol .glow{background:radial-gradient(circle,rgba(0,255,65,0.2) 0%,transparent 70%)}
 .pad.sol .freq-label{color:#00ff41}.pad.sol .vol-bar{background:#00ff41}.pad.sol.playing{border-color:#00ff41}
-/* Sacred Chant — gold */
+/* Sacred Chant - gold */
 .pad.chant .glow{background:radial-gradient(circle,rgba(218,165,32,0.25) 0%,transparent 70%)}
 .pad.chant .freq-label{color:#daa520}.pad.chant .vol-bar{background:#daa520}.pad.chant.playing{border-color:#daa520}
-/* Binaural — cyan */
+/* Binaural - cyan */
 .pad.bin .glow{background:radial-gradient(circle,rgba(0,204,255,0.2) 0%,transparent 70%)}
 .pad.bin .freq-label{color:#00ccff}.pad.bin .vol-bar{background:#00ccff}.pad.bin.playing{border-color:#00ccff}
-/* Noise/Ambient — warm */
+/* Noise/Ambient - warm */
 .pad.noi .glow{background:radial-gradient(circle,rgba(255,170,80,0.18) 0%,transparent 70%)}
 .pad.noi .freq-label{color:#ffaa50}.pad.noi .vol-bar{background:#ffaa50}.pad.noi.playing{border-color:#ffaa50}
-/* Ultrasonic — purple */
+/* Ultrasonic - purple */
 .pad.ult .glow{background:radial-gradient(circle,rgba(204,136,255,0.2) 0%,transparent 70%)}
 .pad.ult .freq-label{color:#cc88ff}.pad.ult .vol-bar{background:#cc88ff}.pad.ult.playing{border-color:#cc88ff}
 
@@ -631,7 +631,7 @@ function startMic() {
       micActive = true;
       applyMicMode();
       startPitchDetection();
-      document.getElementById('micBtn').textContent = '\u23F9 MIC ON';
+      document.getElementById('micBtn').textContent = '⏹ MIC ON';
       document.getElementById('micBtn').style.background = '#ff6699';
       document.getElementById('micBtn').style.color = '#0a0a0a';
       document.getElementById('micPill').classList.add('mic');
@@ -652,7 +652,7 @@ function stopMic() {
   clearResonators();
   micStream = null; micSource = null; micGainNode = null; micActive = false;
   if (pitchRAF) cancelAnimationFrame(pitchRAF);
-  document.getElementById('micBtn').textContent = '\uD83C\uDFA4 ENABLE MIC';
+  document.getElementById('micBtn').textContent = '🎤 ENABLE MIC';
   document.getElementById('micBtn').style.background = '';
   document.getElementById('micBtn').style.color = '#ff6699';
   document.getElementById('micPill').classList.remove('mic');
@@ -1052,7 +1052,7 @@ function setSubMode(mode) { subMode = mode; }
 
 function setDetune(val) {
   detuneVal = parseInt(val);
-  document.getElementById('detuneVal').textContent = val + '\u00A2';
+  document.getElementById('detuneVal').textContent = val + '¢';
   Object.keys(voices).forEach(function(id) {
     var v = voices[id];
     if (v.osc) {
@@ -1089,7 +1089,7 @@ function setDelay(val) {
 function setFilter() {
   var type = document.getElementById('filterType').value;
   var freq = parseInt(document.getElementById('filterFreq').value);
-  document.getElementById('filterVal').textContent = type === 'off' ? '\u2014' : freq + 'Hz';
+  document.getElementById('filterVal').textContent = type === 'off' ? '-' : freq + 'Hz';
   if (!filterNode) return;
   if (type === 'off') { filterNode.type = 'lowpass'; filterNode.frequency.value = 18000; }
   else { filterNode.type = type; filterNode.frequency.value = freq; }
@@ -1125,13 +1125,13 @@ function buildPads() {
     el.id = 'pad-' + p.id;
     el.dataset.padId = p.id;
     var icon = '';
-    if (p.gen === 'ultrasonic') icon = '\u26A1';
-    else if (p.gen === 'sweep') icon = '\u2195';
-    else if (p.gen === 'pink') icon = '\u301C';
-    else if (p.gen === 'brown') icon = '\u2593';
-    else if (p.gen === 'ocean') icon = '\u2248';
-    else if (p.gen === 'drone') icon = '\u3030';
-    else if (p.gen === 'breath') icon = '\u2601';
+    if (p.gen === 'ultrasonic') icon = '⚡';
+    else if (p.gen === 'sweep') icon = '↕';
+    else if (p.gen === 'pink') icon = '〜';
+    else if (p.gen === 'brown') icon = '▓';
+    else if (p.gen === 'ocean') icon = '≈';
+    else if (p.gen === 'drone') icon = '〰';
+    else if (p.gen === 'breath') icon = '☁';
     else if (p.f > 0 && p.f < 1000) icon = (p.f % 1 !== 0) ? p.f.toFixed(1) : String(p.f);
     else if (p.f >= 1000) icon = (p.f / 1000).toFixed(1) + 'k';
     else icon = '?';
@@ -1161,7 +1161,7 @@ function updateActiveDisplay() {
     var pad = getPadById(ids[i]);
     if (!pad) continue;
     html += '<span class="active-tag ' + pad.type + '">' + pad.name +
-      '<span class="x" data-id="' + pad.id + '">\u00D7</span></span>';
+      '<span class="x" data-id="' + pad.id + '">×</span></span>';
   }
   disp.innerHTML = html;
   disp.querySelectorAll('.x').forEach(function(x) {
@@ -1219,7 +1219,7 @@ function updateVolBar(id, vol, pad) {
       activeTouches[t.identifier] = pe.dataset.padId;
       handlePadStart(pe.dataset.padId, t.clientY, pe.getBoundingClientRect());
     }
-    /* Only prevent default when a pad was hit — lets scroll through gaps */
+    /* Only prevent default when a pad was hit - lets scroll through gaps */
     if (hitPad) e.preventDefault();
   }, {passive: false});
   grid.addEventListener('touchmove', function(e) {
@@ -1317,11 +1317,11 @@ function toggleSeq() {
   var dot = document.getElementById('seqDot');
   if (seqPlaying) {
     initAudio();
-    btn.textContent = '\u25FC STOP'; btn.classList.add('playing'); dot.classList.add('on');
+    btn.textContent = '◼ STOP'; btn.classList.add('playing'); dot.classList.add('on');
     seqStep = 0;
     seqTick();
   } else {
-    btn.textContent = '\u25B6 PLAY'; btn.classList.remove('playing'); dot.classList.remove('on');
+    btn.textContent = '▶ PLAY'; btn.classList.remove('playing'); dot.classList.remove('on');
     clearTimeout(seqTimer);
     document.querySelectorAll('.seq-step').forEach(function(s) { s.classList.remove('current'); });
   }
@@ -1412,7 +1412,7 @@ function toggleEvolve() {
 }
 
 function evolveStep() {
-  /* mutate 1-3 random cells per tick — organic pattern drift */
+  /* mutate 1-3 random cells per tick - organic pattern drift */
   var mutations = 1 + Math.floor(Math.random() * 3);
   for (var m = 0; m < mutations; m++) {
     var r = Math.floor(Math.random() * SEQ_ROWS.length);
@@ -1470,7 +1470,7 @@ function startRecording() {
   document.getElementById('recDot').classList.add('on');
   document.getElementById('recPill').classList.add('active');
   document.getElementById('recPill').classList.add('rec');
-  document.getElementById('recBtn').textContent = '\u23F9 STOP';
+  document.getElementById('recBtn').textContent = '⏹ STOP';
   document.getElementById('recBtn').classList.add('rec-active');
   document.getElementById('expWav').style.display = 'none';
   document.getElementById('expWebM').style.display = 'none';
@@ -1496,7 +1496,7 @@ function stopRecording() {
 
   document.getElementById('recDot').classList.remove('on');
   document.getElementById('recPill').classList.remove('rec');
-  document.getElementById('recBtn').textContent = '\u23FA REC';
+  document.getElementById('recBtn').textContent = '⏺ REC';
   document.getElementById('recBtn').classList.remove('rec-active');
   document.getElementById('expWav').style.display = '';
   if (recState.mediaRec) document.getElementById('expWebM').style.display = '';
@@ -1574,7 +1574,7 @@ function initMIDI() {
 function updateMIDIDevices() {
   var sel = document.getElementById('midiDevice');
   var current = sel.value;
-  sel.innerHTML = '<option value="">\u2014 No MIDI Input \u2014</option>';
+  sel.innerHTML = '<option value="">- No MIDI Input -</option>';
   midiAccess.inputs.forEach(function(input) {
     var opt = document.createElement('option');
     opt.value = input.id; opt.textContent = input.name;
