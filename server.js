@@ -625,8 +625,8 @@ app.use((req, res, next) => {
   res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
   // Restrict referrer information
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
-  // Restrict browser features
-  if (isTones) {
+  // Restrict browser features - allow microphone for tones and shell (ARC Shield in persistent drawer)
+  if (isTones || isShell) {
     res.setHeader('Permissions-Policy', 'camera=(), microphone=(self), geolocation=(), payment=(), usb=(), bluetooth=(), serial=(), hid=(), accelerometer=(), gyroscope=(), magnetometer=(), ambient-light-sensor=(), autoplay=(self), display-capture=(), document-domain=(), encrypted-media=(self), fullscreen=(self), interest-cohort=()');
   } else {
     res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=(), serial=(), hid=(), accelerometer=(), gyroscope=(), magnetometer=(), ambient-light-sensor=(), autoplay=(self), display-capture=(), document-domain=(), encrypted-media=(self), fullscreen=(self), interest-cohort=()');
@@ -791,6 +791,33 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
 .pt-volume{width:100%;height:4px;margin-top:6px;accent-color:#00ccff;cursor:pointer}
 .pt-now-playing{font-size:0.55rem;color:#00ccff;margin-top:4px;font-style:italic}
 .cm-dl-panel{border-color:#ff4444;margin-top:0}.cm-dl-title{font-size:0.65rem;color:#ff4444;letter-spacing:1px;font-weight:bold;margin-bottom:8px}.cm-dl-info{font-size:0.55rem;color:#666;margin-bottom:8px;line-height:1.4}.cm-dl-btns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}.cm-dl-btn{flex:1;min-width:120px;padding:8px;background:transparent;border:1px solid #00ff41;color:#00ff41;font-family:'Courier New',monospace;font-size:0.6rem;cursor:pointer;letter-spacing:1px;text-align:center}.cm-dl-btn:hover{background:#00ff41;color:#0a0a0a}.cm-dl-btn.blue{border-color:#00ccff;color:#00ccff}.cm-dl-btn.blue:hover{background:#00ccff;color:#0a0a0a}.cm-embed-label{font-size:0.55rem;color:#cc88ff;letter-spacing:1px;margin-bottom:4px}.cm-embed-wrap{position:relative;margin-bottom:8px}.cm-embed-pre{background:#111;border:1px solid #333;padding:6px;font-size:0.5rem;color:#888;overflow-x:auto;white-space:pre-wrap;word-break:break-all;margin:0;font-family:'Courier New',monospace}.cm-embed-copy{position:absolute;top:3px;right:3px;background:#0a0a0a;border:1px solid #cc88ff;color:#cc88ff;font-family:'Courier New',monospace;font-size:0.5rem;padding:2px 6px;cursor:pointer}
+/* ARC Shield panel */
+.arc-panel{border-color:#ff4444}
+.arc-activate{width:100%;padding:10px;background:transparent;border:2px solid #ff4444;color:#ff4444;font-family:'Courier New',monospace;font-size:0.65rem;letter-spacing:1px;cursor:pointer;transition:all 0.3s;margin-top:6px}
+.arc-activate:hover{background:rgba(255,68,68,0.15)}
+.arc-activate.active{background:#ff4444;color:#0a0a0a;animation:arc-pulse 2s infinite}
+@keyframes arc-pulse{0%,100%{box-shadow:0 0 4px rgba(255,68,68,0.4)}50%{box-shadow:0 0 12px rgba(255,68,68,0.8)}}
+.arc-meter{height:4px;background:#111;margin-top:6px;border:1px solid #222;overflow:hidden}
+.arc-meter-fill{height:100%;width:0;background:#ff4444;transition:width 0.15s}
+.arc-link{display:inline-block;margin-top:6px;font-size:0.5rem;color:#ff4444;text-decoration:none;border:1px solid #333;padding:2px 6px}
+.arc-link:hover{border-color:#ff4444}
+/* Micro Tone Lab panel */
+.mtl-panel{border-color:#cc88ff}
+.mtl-pad-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin-top:6px}
+.mtl-pad{padding:5px 2px;font-size:0.5rem;font-family:'Courier New',monospace;background:rgba(0,0,0,0.4);border:1px solid #333;color:#888;cursor:pointer;text-align:center;transition:all 0.2s;line-height:1.2}
+.mtl-pad:hover{border-color:#cc88ff;color:#cc88ff}
+.mtl-pad.active{border-color:#cc88ff;color:#cc88ff;background:rgba(204,136,255,0.1);box-shadow:0 0 6px rgba(204,136,255,0.2)}
+.mtl-pad .mtl-name{display:block;font-size:0.4rem;color:#555;margin-top:1px}
+.mtl-pad.active .mtl-name{color:#cc88ff}
+.mtl-controls{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
+.mtl-ctrl{padding:3px 6px;font-size:0.5rem;font-family:'Courier New',monospace;background:transparent;border:1px solid #333;color:#888;cursor:pointer}
+.mtl-ctrl:hover,.mtl-ctrl.active{border-color:#cc88ff;color:#cc88ff}
+.mtl-vol{width:100%;height:4px;margin-top:4px;accent-color:#cc88ff;cursor:pointer}
+.mtl-playing{font-size:0.5rem;color:#cc88ff;margin-top:4px;font-style:italic;min-height:1em}
+.mtl-stop-all{width:100%;padding:4px;background:transparent;border:1px solid #ff4444;color:#ff4444;font-family:'Courier New',monospace;font-size:0.5rem;cursor:pointer;margin-top:4px;letter-spacing:1px}
+.mtl-stop-all:hover{background:#ff4444;color:#0a0a0a}
+.mtl-link{display:inline-block;margin-top:4px;font-size:0.5rem;color:#cc88ff;text-decoration:none;border:1px solid #333;padding:2px 6px}
+.mtl-link:hover{border-color:#cc88ff}
 @media(max-width:480px){#frame{height:100%}.cm-drawer{bottom:0}.cm-drawer-bar{height:32px;padding:0 10px;gap:8px}.cm-drawer-bar h3{font-size:0.6rem;letter-spacing:1px}.cm-dot{width:6px;height:6px}.cm-dot-label{display:none}.cm-drawer.expanded .cm-drawer-content{grid-template-columns:1fr;max-height:60vh}.ht-freq-grid{grid-template-columns:repeat(3,1fr)}.pt-freq-grid{grid-template-columns:repeat(3,1fr)}.cm-dl-btns{flex-direction:column}}
 </style>
 </head>
@@ -811,6 +838,10 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
       <span class="cm-dot-label" id="cmDotLabelHealing">TONES</span>
       <span class="cm-dot" id="cmDotProtective" title="Protective Tones"></span>
       <span class="cm-dot-label" id="cmDotLabelProtective">PROTECT</span>
+      <span class="cm-dot" id="cmDotArc" title="ARC Shield"></span>
+      <span class="cm-dot-label" id="cmDotLabelArc">ARC</span>
+      <span class="cm-dot" id="cmDotToneLab" title="Tone Lab"></span>
+      <span class="cm-dot-label" id="cmDotLabelToneLab">LAB</span>
     </div>
     <span class="cm-drawer-chevron">▲</span>
   </div>
@@ -864,6 +895,50 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
     <input type="range" class="pt-volume" id="ptVolume" min="0" max="100" value="30" oninput="setProtectiveVolume(this.value)" title="Volume">
     <div class="pt-now-playing" id="ptNowPlaying"></div>
     <div class="cm-info">🌊 7.83 Hz Schumann is Earth's electromagnetic heartbeat. Use headphones for binaural entrainment. 🐾 ANIMAL-SAFE.</div>
+  </div>
+  <!-- ARC SHIELD - QUICK ACCESS -->
+  <div class="cm-panel arc-panel">
+    <div style="display:flex;align-items:center;gap:8px">
+      <span class="cm-label" style="color:#ff4444">&#x1F6E1;&#xFE0F; ARC SHIELD</span>
+    </div>
+    <button class="arc-activate" id="arcActivateBtn" onclick="toggleArcShield()">&#x25B6; ACTIVATE THREAT DETECTION</button>
+    <div class="cm-status" id="arcStatus">INACTIVE</div>
+    <div class="arc-meter"><div class="arc-meter-fill" id="arcMeterFill"></div></div>
+    <div class="cm-info" id="arcThreatInfo">LRAD detection, phase cancellation, counter-frequency. Requires microphone.</div>
+    <div style="display:flex;gap:6px;margin-top:6px">
+      <a class="arc-link" href="/tones/shield" target="_blank">FULL SHIELD</a>
+      <a class="arc-link" href="/tones/shield/guide" target="_blank" style="color:#daa520;border-color:#333">FIELD GUIDE</a>
+    </div>
+  </div>
+  <!-- MICRO TONE LAB -->
+  <div class="cm-panel mtl-panel">
+    <div style="display:flex;align-items:center;gap:8px">
+      <span class="cm-label" style="color:#cc88ff">&#x1F3B9; TONE LAB</span>
+    </div>
+    <div class="mtl-pad-grid" id="mtlPadGrid">
+      <button class="mtl-pad" data-freq="174" data-cat="sol" onclick="mtlTogglePad(this)">174<span class="mtl-name">Pain</span></button>
+      <button class="mtl-pad" data-freq="396" data-cat="sol" onclick="mtlTogglePad(this)">396<span class="mtl-name">Free</span></button>
+      <button class="mtl-pad" data-freq="432" data-cat="sol" onclick="mtlTogglePad(this)">432<span class="mtl-name">Calm</span></button>
+      <button class="mtl-pad" data-freq="528" data-cat="sol" onclick="mtlTogglePad(this)">528<span class="mtl-name">Love</span></button>
+      <button class="mtl-pad" data-freq="639" data-cat="sol" onclick="mtlTogglePad(this)">639<span class="mtl-name">Bond</span></button>
+      <button class="mtl-pad" data-freq="741" data-cat="sol" onclick="mtlTogglePad(this)">741<span class="mtl-name">Intuit</span></button>
+      <button class="mtl-pad" data-freq="852" data-cat="sol" onclick="mtlTogglePad(this)">852<span class="mtl-name">Spirit</span></button>
+      <button class="mtl-pad" data-freq="963" data-cat="sol" onclick="mtlTogglePad(this)">963<span class="mtl-name">Crown</span></button>
+      <button class="mtl-pad" data-freq="136.1" data-cat="chant" onclick="mtlTogglePad(this)" style="border-color:#555">136.1<span class="mtl-name">OM</span></button>
+      <button class="mtl-pad" data-freq="210.42" data-cat="chant" onclick="mtlTogglePad(this)" style="border-color:#555">210.4<span class="mtl-name">Hum</span></button>
+      <button class="mtl-pad" data-freq="7.83" data-cat="bin" onclick="mtlTogglePad(this)" style="border-color:#00ccff;color:#00ccff">7.83<span class="mtl-name">Earth</span></button>
+      <button class="mtl-pad" data-freq="40" data-cat="bin" onclick="mtlTogglePad(this)" style="border-color:#00ccff;color:#00ccff">40<span class="mtl-name">Gamma</span></button>
+    </div>
+    <div class="mtl-controls">
+      <button class="mtl-ctrl active" data-wave="sine" onclick="mtlSetWave(this)">SIN</button>
+      <button class="mtl-ctrl" data-wave="triangle" onclick="mtlSetWave(this)">TRI</button>
+      <button class="mtl-ctrl" data-wave="square" onclick="mtlSetWave(this)">SQR</button>
+      <button class="mtl-ctrl" data-wave="sawtooth" onclick="mtlSetWave(this)">SAW</button>
+    </div>
+    <input type="range" class="mtl-vol" id="mtlVolume" min="0" max="100" value="20" oninput="mtlSetVolume(this.value)" title="Volume">
+    <div class="mtl-playing" id="mtlPlaying"></div>
+    <button class="mtl-stop-all" onclick="mtlStopAll()">&#x25A0; STOP ALL</button>
+    <a class="mtl-link" href="/tones/instrument" target="_blank">OPEN FULL TONE LAB &#x2192;</a>
   </div>
   <div class="cm-panel cm-dl-panel">
     <div class="cm-dl-title">⬇ DOWNLOAD / INSTALL APPS</div>

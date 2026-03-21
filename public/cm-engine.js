@@ -6,6 +6,10 @@
 (function() {
 'use strict';
 
+// Forward declarations for status dot tracking
+var arcShieldActive = false;
+var mtlVoices = {};
+
 // ===================== CM DRAWER TOGGLE =====================
 window.toggleCmDrawer = function() {
   document.getElementById('cmDrawer').classList.toggle('expanded');
@@ -29,6 +33,21 @@ function updateCmDots() {
       if (label) label.classList.toggle('active', cb.checked);
     }
   });
+  // ARC Shield dot
+  var arcDot = document.getElementById('cmDotArc');
+  var arcLabel = document.getElementById('cmDotLabelArc');
+  if (arcDot) {
+    arcDot.classList.toggle('active', arcShieldActive);
+    if (arcLabel) arcLabel.classList.toggle('active', arcShieldActive);
+  }
+  // Tone Lab dot
+  var tlDot = document.getElementById('cmDotToneLab');
+  var tlLabel = document.getElementById('cmDotLabelToneLab');
+  if (tlDot) {
+    var hasVoices = Object.keys(mtlVoices).length > 0;
+    tlDot.classList.toggle('active', hasVoices);
+    if (tlLabel) tlLabel.classList.toggle('active', hasVoices);
+  }
 }
 setInterval(updateCmDots, 500);
 
@@ -375,6 +394,273 @@ window.setProtectiveVolume = function(val) {
     ptGainNode.gain.linearRampToValueAtTime(ptVolume, ptAudioCtx.currentTime + 0.1);
   }
 };
+
+// ===================== ARC SHIELD - QUICK ACCESS =====================
+var arcMicStream = null;
+var arcAnalyser = null;
+var arcAudioCtx = null;
+var arcAnimFrame = null;
+var arcCounterOsc = null;
+var arcCounterGain = null;
+
+window.toggleArcShield = function() {
+  if (arcShieldActive) {
+    stopArcShield();
+  } else {
+    startArcShield();
+  }
+};
+
+function startArcShield() {
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    document.getElementById('arcStatus').textContent = 'ERROR - No microphone API';
+    return;
+  }
+  if (!arcAudioCtx) arcAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if (arcAudioCtx.state === 'suspended') arcAudioCtx.resume();
+  navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false } })
+    .then(function(stream) {
+      arcMicStream = stream;
+      var source = arcAudioCtx.createMediaStreamSource(stream);
+      arcAnalyser = arcAudioCtx.createAnalyser();
+      arcAnalyser.fftSize = 2048;
+      source.connect(arcAnalyser);
+      arcShieldActive = true;
+      document.getElementById('arcActivateBtn').classList.add('active');
+      document.getElementById('arcActivateBtn').textContent = '\u25A0 SHIELD ACTIVE - MONITORING';
+      document.getElementById('arcStatus').textContent = 'SCANNING...';
+      document.getElementById('arcStatus').className = 'cm-status active';
+      arcMonitorLoop();
+    })
+    .catch(function(err) {
+      document.getElementById('arcStatus').textContent = 'MIC DENIED - ' + err.message;
+      document.getElementById('arcStatus').className = 'cm-status';
+    });
+}
+
+function stopArcShield() {
+  arcShieldActive = false;
+  if (arcAnimFrame) cancelAnimationFrame(arcAnimFrame);
+  if (arcMicStream) { arcMicStream.getTracks().forEach(function(t) { t.stop(); }); arcMicStream = null; }
+  if (arcCounterOsc) { try { arcCounterOsc.stop(); arcCounterOsc.disconnect(); } catch(e) {} arcCounterOsc = null; }
+  if (arcCounterGain) { try { arcCounterGain.disconnect(); } catch(e) {} arcCounterGain = null; }
+  arcAnalyser = null;
+  document.getElementById('arcActivateBtn').classList.remove('active');
+  document.getElementById('arcActivateBtn').textContent = '\u25B6 ACTIVATE THREAT DETECTION';
+  document.getElementById('arcStatus').textContent = 'INACTIVE';
+  document.getElementById('arcStatus').className = 'cm-status';
+  document.getElementById('arcMeterFill').style.width = '0';
+  document.getElementById('arcThreatInfo').textContent = 'LRAD detection, phase cancellation, counter-frequency. Requires microphone.';
+}
+
+function arcMonitorLoop() {
+  if (!arcShieldActive || !arcAnalyser) return;
+  var bufLen = arcAnalyser.frequencyBinCount;
+  var data = new Uint8Array(bufLen);
+  arcAnalyser.getByteFrequencyData(data);
+  var sr = arcAudioCtx.sampleRate;
+  var binHz = sr / arcAnalyser.fftSize;
+  // Scan for LRAD threat frequencies (1kHz-4kHz high-energy)
+  var lradStart = Math.floor(1000 / binHz);
+  var lradEnd = Math.min(Math.ceil(4000 / binHz), bufLen);
+  var lradEnergy = 0;
+  var peakBin = lradStart;
+  var peakVal = 0;
+  for (var i = lradStart; i < lradEnd; i++) {
+    lradEnergy += data[i];
+    if (data[i] > peakVal) { peakVal = data[i]; peakBin = i; }
+  }
+  var avgLrad = lradEnergy / (lradEnd - lradStart);
+  var threat = Math.min(avgLrad / 180, 1);
+  var meterFill = document.getElementById('arcMeterFill');
+  meterFill.style.width = (threat * 100) + '%';
+  meterFill.style.background = threat > 0.6 ? '#ff4444' : threat > 0.3 ? '#ffcc00' : '#00ff41';
+  var peakFreq = Math.round(peakBin * binHz);
+  var infoEl = document.getElementById('arcThreatInfo');
+  if (threat > 0.6) {
+    document.getElementById('arcStatus').textContent = 'THREAT DETECTED - ' + peakFreq + ' Hz';
+    infoEl.textContent = 'HIGH ENERGY @ ' + peakFreq + ' Hz | Counter-frequency active';
+    infoEl.style.color = '#ff4444';
+    arcEngageCounter(peakFreq);
+  } else if (threat > 0.3) {
+    document.getElementById('arcStatus').textContent = 'ELEVATED - ' + peakFreq + ' Hz peak';
+    infoEl.textContent = 'Monitoring ' + peakFreq + ' Hz | Level: ' + Math.round(threat * 100) + '%';
+    infoEl.style.color = '#ffcc00';
+    arcDisengageCounter();
+  } else {
+    document.getElementById('arcStatus').textContent = 'SCANNING - clear';
+    infoEl.textContent = 'Environment clear | Peak: ' + peakFreq + ' Hz (' + Math.round(threat * 100) + '%)';
+    infoEl.style.color = '#666';
+    arcDisengageCounter();
+  }
+  arcAnimFrame = requestAnimationFrame(arcMonitorLoop);
+}
+
+function arcEngageCounter(freq) {
+  if (!arcAudioCtx) return;
+  if (arcCounterOsc) {
+    arcCounterOsc.frequency.linearRampToValueAtTime(freq, arcAudioCtx.currentTime + 0.05);
+    return;
+  }
+  arcCounterGain = arcAudioCtx.createGain();
+  arcCounterGain.gain.value = 0.08;
+  arcCounterGain.connect(arcAudioCtx.destination);
+  arcCounterOsc = arcAudioCtx.createOscillator();
+  arcCounterOsc.type = 'sine';
+  arcCounterOsc.frequency.value = freq;
+  arcCounterOsc.connect(arcCounterGain);
+  arcCounterOsc.start();
+}
+
+function arcDisengageCounter() {
+  if (arcCounterOsc) {
+    try { arcCounterOsc.stop(); arcCounterOsc.disconnect(); } catch(e) {}
+    arcCounterOsc = null;
+  }
+  if (arcCounterGain) {
+    try { arcCounterGain.disconnect(); } catch(e) {}
+    arcCounterGain = null;
+  }
+}
+
+// ===================== MICRO TONE LAB =====================
+var mtlAudioCtx = null;
+var mtlWaveform = 'sine';
+var mtlMasterVol = 0.05;
+
+window.mtlTogglePad = function(btn) {
+  var freq = parseFloat(btn.dataset.freq);
+  var cat = btn.dataset.cat;
+  var key = cat + '_' + freq;
+  if (mtlVoices[key]) {
+    mtlStopVoice(key);
+    btn.classList.remove('active');
+  } else {
+    mtlStartVoice(key, freq, cat);
+    btn.classList.add('active');
+  }
+  mtlUpdatePlaying();
+};
+
+window.mtlSetWave = function(btn) {
+  var btns = document.querySelectorAll('.mtl-ctrl[data-wave]');
+  btns.forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  mtlWaveform = btn.dataset.wave;
+  Object.keys(mtlVoices).forEach(function(key) {
+    var v = mtlVoices[key];
+    if (v.osc) v.osc.type = mtlWaveform;
+  });
+};
+
+window.mtlSetVolume = function(val) {
+  mtlMasterVol = (val / 100) * 0.25;
+  Object.keys(mtlVoices).forEach(function(key) {
+    var v = mtlVoices[key];
+    if (v.gain && mtlAudioCtx) v.gain.gain.linearRampToValueAtTime(mtlMasterVol, mtlAudioCtx.currentTime + 0.05);
+  });
+};
+
+window.mtlStopAll = function() {
+  Object.keys(mtlVoices).forEach(function(key) { mtlStopVoice(key); });
+  var pads = document.querySelectorAll('.mtl-pad');
+  pads.forEach(function(p) { p.classList.remove('active'); });
+  mtlUpdatePlaying();
+};
+
+function mtlStartVoice(key, freq, cat) {
+  if (!mtlAudioCtx) mtlAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if (mtlAudioCtx.state === 'suspended') mtlAudioCtx.resume();
+  var voice = {};
+  var g = mtlAudioCtx.createGain();
+  g.gain.setValueAtTime(0, mtlAudioCtx.currentTime);
+  g.gain.linearRampToValueAtTime(mtlMasterVol, mtlAudioCtx.currentTime + 0.15);
+  g.connect(mtlAudioCtx.destination);
+  voice.gain = g;
+  if (cat === 'bin') {
+    var merger = mtlAudioCtx.createChannelMerger(2);
+    merger.connect(g);
+    var oscL = mtlAudioCtx.createOscillator();
+    oscL.type = 'sine';
+    oscL.frequency.value = 200;
+    oscL.connect(merger, 0, 0);
+    var oscR = mtlAudioCtx.createOscillator();
+    oscR.type = 'sine';
+    oscR.frequency.value = 200 + freq;
+    oscR.connect(merger, 0, 1);
+    oscL.start();
+    oscR.start();
+    voice.oscL = oscL;
+    voice.oscR = oscR;
+  } else if (cat === 'chant') {
+    var osc = mtlAudioCtx.createOscillator();
+    osc.type = mtlWaveform;
+    osc.frequency.value = freq;
+    osc.connect(g);
+    osc.start();
+    voice.osc = osc;
+    // Vibrato
+    var vib = mtlAudioCtx.createOscillator();
+    vib.type = 'sine';
+    vib.frequency.value = 5.5;
+    var vibG = mtlAudioCtx.createGain();
+    vibG.gain.value = freq * 0.008;
+    vib.connect(vibG);
+    vibG.connect(osc.frequency);
+    vib.start();
+    voice.vib = vib;
+  } else {
+    var osc = mtlAudioCtx.createOscillator();
+    osc.type = mtlWaveform;
+    osc.frequency.value = freq;
+    osc.connect(g);
+    osc.start();
+    voice.osc = osc;
+    // Sub-harmonic
+    var sub = mtlAudioCtx.createOscillator();
+    sub.type = mtlWaveform;
+    sub.frequency.value = freq / 2;
+    var subG = mtlAudioCtx.createGain();
+    subG.gain.value = 0.15;
+    sub.connect(subG);
+    subG.connect(g);
+    sub.start();
+    voice.sub = sub;
+  }
+  mtlVoices[key] = voice;
+}
+
+function mtlStopVoice(key) {
+  var v = mtlVoices[key];
+  if (!v) return;
+  if (v.gain && mtlAudioCtx) {
+    v.gain.gain.linearRampToValueAtTime(0, mtlAudioCtx.currentTime + 0.1);
+    setTimeout(function() {
+      try { if (v.osc) { v.osc.stop(); v.osc.disconnect(); } } catch(e) {}
+      try { if (v.sub) { v.sub.stop(); v.sub.disconnect(); } } catch(e) {}
+      try { if (v.vib) { v.vib.stop(); v.vib.disconnect(); } } catch(e) {}
+      try { if (v.oscL) { v.oscL.stop(); v.oscL.disconnect(); } } catch(e) {}
+      try { if (v.oscR) { v.oscR.stop(); v.oscR.disconnect(); } } catch(e) {}
+      try { if (v.gain) { v.gain.disconnect(); } } catch(e) {}
+    }, 150);
+  }
+  delete mtlVoices[key];
+}
+
+function mtlUpdatePlaying() {
+  var el = document.getElementById('mtlPlaying');
+  if (!el) return;
+  var keys = Object.keys(mtlVoices);
+  if (keys.length === 0) {
+    el.textContent = '';
+  } else {
+    var names = keys.map(function(k) {
+      var parts = k.split('_');
+      return parts[1] + ' Hz';
+    });
+    el.textContent = names.join(' + ');
+  }
+}
 
 // ===================== IFRAME GUARD INJECTION =====================
 function injectGuardsIntoFrame() {
