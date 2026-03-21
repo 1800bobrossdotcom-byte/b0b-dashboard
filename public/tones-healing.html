@@ -10,8 +10,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Healing Tones">
 <link rel="manifest" href="/manifest-healing.json">
-<link rel="icon" href="/icon-transparent.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/icon-transparent.svg">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/favicon.png">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:env(safe-area-inset-top) 16px env(safe-area-inset-bottom);user-select:none;-webkit-user-select:none}
@@ -35,11 +35,11 @@ input[type=range]{width:100%;margin:12px 0;accent-color:#00ff41;height:28px}
 <body>
 <div class="app">
   <div class="install-banner" id="installBanner">
-    <strong>📱 INSTALL TO HOME SCREEN</strong><br>
+    <strong>ðŸ“± INSTALL TO HOME SCREEN</strong><br>
     <span id="installInstructions"></span>
     <span class="dismiss" onclick="document.getElementById('installBanner').style.display='none'">dismiss</span>
   </div>
-  <h1>🎵 b0b HEALING TONES</h1>
+  <h1>ðŸŽµ b0b HEALING TONES</h1>
   <label class="toggle"><input type="checkbox" id="tog" onchange="toggle(this.checked)"><span>ACTIVATE</span></label>
   <div class="status" id="st">INACTIVE</div>
   <div class="freq-grid" id="grid">
@@ -110,17 +110,17 @@ function vol(val){v=(val/100)*0.25;if(on&&gain&&ctx) gain.gain.linearRampToValue
   var banner=document.getElementById('installBanner');
   var inst=document.getElementById('installInstructions');
   if(ios){
-    inst.innerHTML='Tap <strong>Share ↑</strong> then <strong>"Add to Home Screen"</strong>';
+    inst.innerHTML='Tap <strong>Share â†‘</strong> then <strong>"Add to Home Screen"</strong>';
     banner.style.display='block';
   } else if(/android/i.test(ua)){
-    inst.innerHTML='Tap <strong>⋮ Menu</strong> then <strong>"Add to Home Screen"</strong> or <strong>"Install App"</strong>';
+    inst.innerHTML='Tap <strong>â‹® Menu</strong> then <strong>"Add to Home Screen"</strong> or <strong>"Install App"</strong>';
     banner.style.display='block';
   }
   // Chrome install prompt
   var deferredPrompt=null;
   window.addEventListener('beforeinstallprompt',function(e){
     e.preventDefault();deferredPrompt=e;
-    inst.innerHTML='<button onclick="installPWA()" style="background:#00ff41;color:#0a0a0a;border:none;padding:8px 16px;font-family:inherit;cursor:pointer;border-radius:2px;font-size:0.8rem">⬇ INSTALL TO HOME SCREEN</button>';
+    inst.innerHTML='<button onclick="installPWA()" style="background:#00ff41;color:#0a0a0a;border:none;padding:8px 16px;font-family:inherit;cursor:pointer;border-radius:2px;font-size:0.8rem">â¬‡ INSTALL TO HOME SCREEN</button>';
     banner.style.display='block';
   });
   window.installPWA=function(){

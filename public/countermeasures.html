@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link rel="icon" href="/icon-transparent.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/icon-transparent.svg">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/favicon.png">
 <meta name="robots" content="noindex, nofollow">
 <title>b0b - Privacy Countermeasures & Healing Tones</title>
 <style>
@@ -81,7 +81,7 @@ h1{color:#00ff41;font-size:1.4rem;letter-spacing:3px;margin-bottom:0.3rem;text-a
   <div class="tool-panel">
     <label class="tool-toggle"><input type="checkbox" id="cmUltrasonic" onchange="toggleUltrasonicCM(this.checked)"><span class="tool-label">ULTRASONIC SHIELD</span></label>
     <div class="tool-status" id="cmStatus">INACTIVE</div>
-    <div class="tool-info">🌊 WATER PLANET OPTIMIZED - Humidity-adaptive frequency sweep across 20–22kHz. Atmospheric water vapor attenuates ultrasound non-uniformly; our sweep ensures full-band coverage through variable moisture. Jams cross-device tracking beacons &amp; acoustic data exfiltration. 🐾 ANIMAL-SAFE: above 20kHz at -60dB, safe for all pets.</div>
+    <div class="tool-info">ðŸŒŠ WATER PLANET OPTIMIZED - Humidity-adaptive frequency sweep across 20â€“22kHz. Atmospheric water vapor attenuates ultrasound non-uniformly; our sweep ensures full-band coverage through variable moisture. Jams cross-device tracking beacons &amp; acoustic data exfiltration. ðŸ¾ ANIMAL-SAFE: above 20kHz at -60dB, safe for all pets.</div>
   </div>
 
   <!-- WebRTC LEAK BLOCK -->
@@ -100,7 +100,7 @@ h1{color:#00ff41;font-size:1.4rem;letter-spacing:3px;margin-bottom:0.3rem;text-a
 
   <!-- HEALING TONES -->
   <div class="tool-panel healing">
-    <label class="tool-toggle"><input type="checkbox" id="cmHealing" onchange="toggleHealingTones(this.checked)"><span class="tool-label" style="color:#00ff41">🎵 HEALING TONES</span></label>
+    <label class="tool-toggle"><input type="checkbox" id="cmHealing" onchange="toggleHealingTones(this.checked)"><span class="tool-label" style="color:#00ff41">ðŸŽµ HEALING TONES</span></label>
     <div class="tool-status" id="cmHealingStatus">INACTIVE</div>
     <div class="ht-freq-grid" id="htFreqGrid">
       <button class="ht-freq-btn" data-freq="174" data-name="Pain Relief" onclick="selectHealingFreq(this)">174 Hz<span class="ht-freq-name">Pain Relief</span></button>
@@ -119,12 +119,12 @@ h1{color:#00ff41;font-size:1.4rem;letter-spacing:3px;margin-bottom:0.3rem;text-a
       <span class="ht-vol-label" id="htVolLabel">25%</span>
     </div>
     <div class="ht-now-playing" id="htNowPlaying"></div>
-    <div class="tool-info">🌊 WATER PLANET OPTIMIZED - Solfeggio frequencies with sub-harmonic body-water resonance. Your body is ~60% water - each tone is paired with its sub-octave to create deeper cymatics patterns that resonate with the water you carry and swim through. 🐾 ANIMAL-SAFE: 174–963 Hz at gentle volume, safe for all pets.</div>
+    <div class="tool-info">ðŸŒŠ WATER PLANET OPTIMIZED - Solfeggio frequencies with sub-harmonic body-water resonance. Your body is ~60% water - each tone is paired with its sub-octave to create deeper cymatics patterns that resonate with the water you carry and swim through. ðŸ¾ ANIMAL-SAFE: 174â€“963 Hz at gentle volume, safe for all pets.</div>
   </div>
 
   <!-- PROTECTIVE TONES -->
   <div class="tool-panel protective">
-    <label class="tool-toggle"><input type="checkbox" id="cmProtective" onchange="toggleProtectiveTones(this.checked)"><span class="tool-label" style="color:#00ccff">🛡️ PROTECTIVE TONES</span></label>
+    <label class="tool-toggle"><input type="checkbox" id="cmProtective" onchange="toggleProtectiveTones(this.checked)"><span class="tool-label" style="color:#00ccff">ðŸ›¡ï¸ PROTECTIVE TONES</span></label>
     <div class="tool-status" id="cmProtectiveStatus">INACTIVE</div>
     <div class="pt-freq-grid" id="ptFreqGrid">
       <button class="pt-freq-btn active" data-freq="7.83" data-name="Schumann Resonance" data-type="binaural" onclick="selectProtectiveFreq(this)">7.83 Hz<span class="pt-freq-name">Schumann</span></button>
@@ -133,27 +133,27 @@ h1{color:#00ff41;font-size:1.4rem;letter-spacing:3px;margin-bottom:0.3rem;text-a
       <button class="pt-freq-btn" data-freq="40" data-name="Gamma - Perception" data-type="binaural" onclick="selectProtectiveFreq(this)">40 Hz<span class="pt-freq-name">Gamma</span></button>
       <button class="pt-freq-btn" data-freq="0" data-name="Pink Noise - Masking" data-type="pink" onclick="selectProtectiveFreq(this)">PINK<span class="pt-freq-name">Masking</span></button>
       <button class="pt-freq-btn" data-freq="0" data-name="Brown Noise - Deep Cover" data-type="brown" onclick="selectProtectiveFreq(this)">BROWN<span class="pt-freq-name">Deep Cover</span></button>
-      <button class="pt-freq-btn" data-freq="0" data-name="Ocean Waves - Planet Sound" data-type="ocean" onclick="selectProtectiveFreq(this)">🌊 OCEAN<span class="pt-freq-name">Planet</span></button>
+      <button class="pt-freq-btn" data-freq="0" data-name="Ocean Waves - Planet Sound" data-type="ocean" onclick="selectProtectiveFreq(this)">ðŸŒŠ OCEAN<span class="pt-freq-name">Planet</span></button>
     </div>
     <div class="pt-volume-row">
       <input type="range" class="pt-volume" id="ptVolume" min="0" max="100" value="30" oninput="setProtectiveVolume(this.value)" title="Volume">
       <span class="pt-vol-label" id="ptVolLabel">30%</span>
     </div>
     <div class="pt-now-playing" id="ptNowPlaying"></div>
-    <div class="tool-info">🌊 WATER PLANET OPTIMIZED - 7.83 Hz Schumann is Earth's electromagnetic heartbeat through our water-enriched atmosphere. Pink noise includes humidity compensation for true 1/f masking through moisture-laden air. Ocean mode is the sound of our planet's water. Use headphones for binaural entrainment. 🐾 ANIMAL-SAFE: gentle volume, safe for all pets.</div>
+    <div class="tool-info">ðŸŒŠ WATER PLANET OPTIMIZED - 7.83 Hz Schumann is Earth's electromagnetic heartbeat through our water-enriched atmosphere. Pink noise includes humidity compensation for true 1/f masking through moisture-laden air. Ocean mode is the sound of our planet's water. Use headphones for binaural entrainment. ðŸ¾ ANIMAL-SAFE: gentle volume, safe for all pets.</div>
   </div>
 
   <!-- SAVE HINT -->
   <div class="save-hint">
-    💾 <strong>SAVE FOR OFFLINE USE:</strong><br>
-    Press <strong>Ctrl+S</strong> (or <strong>⌘+S</strong> on Mac) to save this page.<br>
+    ðŸ’¾ <strong>SAVE FOR OFFLINE USE:</strong><br>
+    Press <strong>Ctrl+S</strong> (or <strong>âŒ˜+S</strong> on Mac) to save this page.<br>
     Open the saved HTML file anytime - no internet needed.<br>
     Works on phone, tablet, laptop, and desktop.
   </div>
 
   <!-- DOWNLOAD STANDALONE TOOLS -->
   <div class="tool-panel" style="margin-top:12px;border-color:#ff4444">
-    <div style="font-size:0.75rem;color:#ff4444;letter-spacing:1px;font-weight:bold;margin-bottom:10px">⬇ DOWNLOAD STANDALONE TONE TOOLS</div>
+    <div style="font-size:0.75rem;color:#ff4444;letter-spacing:1px;font-weight:bold;margin-bottom:10px">â¬‡ DOWNLOAD STANDALONE TONE TOOLS</div>
     <div class="tool-info" style="margin-bottom:10px">Self-contained HTML files. Zero dependencies. No server needed. Open in any browser, anywhere.</div>
     <div style="display:flex;gap:8px;flex-wrap:wrap">
       <button onclick="downloadToneApp('healing')" style="flex:1;min-width:140px;padding:10px;background:transparent;border:1px solid #00ff41;color:#00ff41;font-family:'Courier New',monospace;font-size:0.7rem;cursor:pointer;letter-spacing:1px">&#11015; HEALING TONES</button>
@@ -184,7 +184,7 @@ h1{color:#00ff41;font-size:1.4rem;letter-spacing:3px;margin-bottom:0.3rem;text-a
 
   <!-- EMBED ON YOUR SITE -->
   <div class="tool-panel" style="margin-top:12px;border-color:#cc88ff">
-    <div style="font-size:0.75rem;color:#cc88ff;letter-spacing:1px;font-weight:bold;margin-bottom:10px">🔗 INSTALL ON YOUR SITE</div>
+    <div style="font-size:0.75rem;color:#cc88ff;letter-spacing:1px;font-weight:bold;margin-bottom:10px">ðŸ”— INSTALL ON YOUR SITE</div>
     <div class="tool-info" style="margin-bottom:10px">Copy one of these embed codes to add tone tools to any website. The iframe loads the full tool - no dependencies required on your end.</div>
     <div style="margin-bottom:8px;font-size:0.6rem;color:#cc88ff;letter-spacing:1px">HEALING TONES EMBED:</div>
     <div style="position:relative">
@@ -203,12 +203,12 @@ h1{color:#00ff41;font-size:1.4rem;letter-spacing:3px;margin-bottom:0.3rem;text-a
 <div class="footer">
   <div class="footer-line">b0b.dev - Privacy Countermeasures & Healing Tones</div>
   <div class="footer-line">Zero dependencies. No tracking. No data collection.</div>
-  <div class="footer-line" style="margin-top:6px"><a href="/">← Return to b0b.dev</a></div>
+  <div class="footer-line" style="margin-top:6px"><a href="/">â† Return to b0b.dev</a></div>
 </div>
 
 <script>
 // ===================== ULTRASONIC SHIELD (ANIMAL-SAFE) =====================
-// Broadband noise 20–22kHz - jams ultrasonic tracking beacons
+// Broadband noise 20â€“22kHz - jams ultrasonic tracking beacons
 // ANIMAL SAFETY: Above 20kHz, -60dB gain, highpass safety fence at 19.5kHz
 var cmAudioCtx = null;
 var cmNoiseNode = null;
@@ -236,7 +236,7 @@ function startUltrasonicShield() {
     cmNoiseNode.buffer = noiseBuffer;
     cmNoiseNode.loop = true;
 
-    // Bandpass: 20–22kHz (animal-safe)
+    // Bandpass: 20â€“22kHz (animal-safe)
     cmFilterNode = cmAudioCtx.createBiquadFilter();
     cmFilterNode.type = 'bandpass';
     cmFilterNode.frequency.value = 21000;
@@ -270,7 +270,7 @@ function startUltrasonicShield() {
     cmNoiseNode.start();
     cmUltrasonicActive = true;
 
-    document.getElementById('cmStatus').textContent = 'ACTIVE - 20–22kHz sweep (humidity-adaptive, animal-safe)';
+    document.getElementById('cmStatus').textContent = 'ACTIVE - 20â€“22kHz sweep (humidity-adaptive, animal-safe)';
     document.getElementById('cmStatus').className = 'tool-status active';
   } catch (e) {
     document.getElementById('cmStatus').textContent = 'ERROR - ' + e.message;
@@ -344,7 +344,7 @@ toggleCanvasGuard(true);
 
 // ===================== HEALING TONES ENGINE =====================
 // Solfeggio frequencies - pure sine wave tones for sound therapy
-// All frequencies 174–963 Hz - completely safe for all animals
+// All frequencies 174â€“963 Hz - completely safe for all animals
 var htAudioCtx = null;
 var htOscillator = null;
 var htSubOsc = null;
@@ -391,7 +391,7 @@ function startHealingTone() {
 
     document.getElementById('cmHealingStatus').textContent = 'ACTIVE - ' + htCurrentFreq + ' Hz';
     document.getElementById('cmHealingStatus').className = 'tool-status active';
-    document.getElementById('htNowPlaying').textContent = '♫ ' + htCurrentFreq + ' Hz - ' + htCurrentName;
+    document.getElementById('htNowPlaying').textContent = 'â™« ' + htCurrentFreq + ' Hz - ' + htCurrentName;
   } catch (e) {
     document.getElementById('cmHealingStatus').textContent = 'ERROR - ' + e.message;
   }
@@ -428,7 +428,7 @@ function selectHealingFreq(btn) {
     htOscillator.frequency.linearRampToValueAtTime(htCurrentFreq, htAudioCtx.currentTime + 0.3);
     if (htSubOsc) htSubOsc.frequency.linearRampToValueAtTime(htCurrentFreq / 2, htAudioCtx.currentTime + 0.3);
     document.getElementById('cmHealingStatus').textContent = 'ACTIVE - ' + htCurrentFreq + ' Hz';
-    document.getElementById('htNowPlaying').textContent = '♫ ' + htCurrentFreq + ' Hz - ' + htCurrentName;
+    document.getElementById('htNowPlaying').textContent = 'â™« ' + htCurrentFreq + ' Hz - ' + htCurrentName;
   }
 }
 
@@ -543,7 +543,7 @@ function startProtectiveTone() {
     var label = ptCurrentType === 'binaural' ? ptCurrentFreq + ' Hz binaural' : ptCurrentName;
     document.getElementById('cmProtectiveStatus').textContent = 'ACTIVE - ' + label;
     document.getElementById('cmProtectiveStatus').className = 'tool-status active';
-    document.getElementById('ptNowPlaying').textContent = '◆ ' + ptCurrentName;
+    document.getElementById('ptNowPlaying').textContent = 'â—† ' + ptCurrentName;
   } catch (e) {
     document.getElementById('cmProtectiveStatus').textContent = 'ERROR - ' + e.message;
   }
@@ -594,7 +594,7 @@ function setProtectiveVolume(val) {
 function copyEmbed(id, btn) {
   var text = document.getElementById(id).textContent;
   navigator.clipboard.writeText(text).then(function() {
-    btn.textContent = '✓ COPIED';
+    btn.textContent = 'âœ“ COPIED';
     setTimeout(function() { btn.textContent = 'COPY'; }, 2000);
   }).catch(function() {
     var ta = document.createElement('textarea');
@@ -603,7 +603,7 @@ function copyEmbed(id, btn) {
     ta.select();
     document.execCommand('copy');
     document.body.removeChild(ta);
-    btn.textContent = '✓ COPIED';
+    btn.textContent = 'âœ“ COPIED';
     setTimeout(function() { btn.textContent = 'COPY'; }, 2000);
   });
 }
@@ -621,7 +621,7 @@ function downloadToneApp(type) {
   html += '</style></head><body><div class="app">';
 
   if (type === 'healing') {
-    html += '<h1>🎵 b0b HEALING TONES</h1>';
+    html += '<h1>ðŸŽµ b0b HEALING TONES</h1>';
     html += '<label class="toggle"><input type="checkbox" id="tog" onchange="toggle(this.checked)"><span>ACTIVATE</span></label>';
     html += '<div class="status" id="st">INACTIVE</div>';
     html += '<div id="grid">';
@@ -637,7 +637,7 @@ function downloadToneApp(type) {
     html += 'function vol(val){v=(val/100)*0.25;if(on&&gain&&ctx)gain.gain.linearRampToValueAtTime(v,ctx.currentTime+0.1)}';
     html += '<\\/scr' + 'ipt>';
   } else {
-    html += '<h1>🛡️ b0b PROTECTIVE TONES</h1>';
+    html += '<h1>ðŸ›¡ï¸ b0b PROTECTIVE TONES</h1>';
     html += '<label class="toggle"><input type="checkbox" id="tog" onchange="toggle(this.checked)"><span>ACTIVATE</span></label>';
     html += '<div class="status" id="st">INACTIVE</div>';
     html += '<div id="grid">';
@@ -647,7 +647,7 @@ function downloadToneApp(type) {
     html += '<button class="btn" data-f="40" data-n="Gamma" data-t="binaural" onclick="sel(this)">40 Hz</button>';
     html += '<button class="btn" data-f="0" data-n="Pink Noise" data-t="pink" onclick="sel(this)">PINK</button>';
     html += '<button class="btn" data-f="0" data-n="Brown Noise" data-t="brown" onclick="sel(this)">BROWN</button>';
-    html += '<button class="btn" data-f="0" data-n="Ocean Waves" data-t="ocean" onclick="sel(this)">🌊 OCEAN</button>';
+    html += '<button class="btn" data-f="0" data-n="Ocean Waves" data-t="ocean" onclick="sel(this)">ðŸŒŠ OCEAN</button>';
     html += '</div><input type="range" min="0" max="100" value="30" oninput="vol(this.value)">';
     html += '<scr' + 'ipt>';
     html += 'var ctx,oscL,oscR,noise,lfo,gain,on=false,freq=7.83,name="Schumann Resonance",type="binaural",v=0.075;';

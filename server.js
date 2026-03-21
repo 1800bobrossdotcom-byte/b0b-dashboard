@@ -37,7 +37,7 @@ function checkFileIntegrity() {
   for (const [file, expectedHash] of fileIntegrityHashes) {
     const currentHash = computeFileHash(path.join(publicDir, file));
     if (currentHash && currentHash !== expectedHash) {
-      console.log(`[INTEGRITY] ⚠ FILE MODIFIED: ${file} - expected ${expectedHash.substring(0, 16)}... got ${currentHash.substring(0, 16)}... - ${new Date().toISOString()}`);
+      console.log(`[INTEGRITY] âš  FILE MODIFIED: ${file} - expected ${expectedHash.substring(0, 16)}... got ${currentHash.substring(0, 16)}... - ${new Date().toISOString()}`);
       // Update hash (file was legitimately deployed)
       fileIntegrityHashes.set(file, currentHash);
     }
@@ -77,7 +77,7 @@ function recordSuspicion(ip, reason) {
     record.flagged = true;
     // Auto-blacklist for 1 hour after threat escalation
     blacklistedIPs.set(ip, now + BLACKLIST_DURATION);
-    console.log(`[SECURITY] ⚠ THREAT ESCALATION + AUTO-BLOCK - IP: ${ip} - ${record.events.length} suspicious events in ${SUSPICION_WINDOW / 60000}min - ${record.events.map(e => e.reason).join(', ')} - blocked for ${BLACKLIST_DURATION / 60000}min - ${new Date().toISOString()}`);
+    console.log(`[SECURITY] âš  THREAT ESCALATION + AUTO-BLOCK - IP: ${ip} - ${record.events.length} suspicious events in ${SUSPICION_WINDOW / 60000}min - ${record.events.map(e => e.reason).join(', ')} - blocked for ${BLACKLIST_DURATION / 60000}min - ${new Date().toISOString()}`);
   }
 }
 
@@ -124,7 +124,7 @@ app.use((req, res, next) => {
 });
 
 // ===================== DOMAIN REDIRECT =====================
-// b0b.dev → 1-800-bob-ross.com (preserve path, 301 permanent)
+// b0b.dev â†’ 1-800-bob-ross.com (preserve path, 301 permanent)
 app.use((req, res, next) => {
   const host = req.hostname;
   if (host === 'b0b.dev' || host === 'www.b0b.dev') {
@@ -349,20 +349,20 @@ canvas{width:150px;height:250px}
   <div class="score-line" id="scoreLine">LINES: 0 / 2</div>
   <div class="info" id="info">clear 2 lines or place 10 pieces</div>
   <div class="btn-row">
-    <button class="btn btn-sound" id="soundBtn" onclick="toggleSound()">♪ SOUND ON</button>
+    <button class="btn btn-sound" id="soundBtn" onclick="toggleSound()">â™ª SOUND ON</button>
   </div>
   <div class="btn-row">
     <form method="POST" action="/login" id="authForm" style="display:inline">
       <input type="hidden" name="challenge" value="${challenge}">
-      <button type="submit" class="btn btn-skip" id="skipBtn">SKIP →</button>
+      <button type="submit" class="btn btn-skip" id="skipBtn">SKIP â†’</button>
     </form>
   </div>
   <div class="touch-controls" id="touchControls">
-    <div class="touch-btn" ontouchstart="event.preventDefault();gameKey('ArrowLeft')">◀</div>
-    <div class="touch-btn" ontouchstart="event.preventDefault();gameKey('ArrowDown')">▼</div>
-    <div class="touch-btn" ontouchstart="event.preventDefault();gameKey('ArrowUp')">↻</div>
-    <div class="touch-btn" ontouchstart="event.preventDefault();gameKey('ArrowRight')">▶</div>
-    <div class="touch-btn" ontouchstart="event.preventDefault();gameKey(' ')">⤓</div>
+    <div class="touch-btn" ontouchstart="event.preventDefault();gameKey('ArrowLeft')">â—€</div>
+    <div class="touch-btn" ontouchstart="event.preventDefault();gameKey('ArrowDown')">â–¼</div>
+    <div class="touch-btn" ontouchstart="event.preventDefault();gameKey('ArrowUp')">â†»</div>
+    <div class="touch-btn" ontouchstart="event.preventDefault();gameKey('ArrowRight')">â–¶</div>
+    <div class="touch-btn" ontouchstart="event.preventDefault();gameKey(' ')">â¤“</div>
   </div>
 </div>
 
@@ -412,7 +412,7 @@ function lock(){
   if(lines>=GOAL_LINES||placed>=GOAL_PIECES){
     done=true;
     document.getElementById('info').textContent='';
-    document.getElementById('scoreLine').innerHTML='<span class="win-msg">HUMAN VERIFIED ✓</span>';
+    document.getElementById('scoreLine').innerHTML='<span class="win-msg">HUMAN VERIFIED âœ“</span>';
     setTimeout(submitForm,900);
     return;
   }
@@ -542,7 +542,7 @@ function playLineClear(){
 window.toggleSound=function(){
   initAudio();
   soundOn=!soundOn;
-  document.getElementById('soundBtn').textContent=soundOn?'♪ SOUND ON':'♪ SOUND OFF';
+  document.getElementById('soundBtn').textContent=soundOn?'â™ª SOUND ON':'â™ª SOUND OFF';
   if(soundOn&&!musicPlaying){musicPlaying=true;playMusic();}
 };
 // Auto-start music on first interaction
@@ -550,7 +550,7 @@ document.addEventListener('keydown',function starter(){initAudio();if(!musicPlay
 document.addEventListener('touchstart',function starter(){initAudio();if(!musicPlaying&&soundOn){musicPlaying=true;playMusic();}document.removeEventListener('touchstart',starter);},{once:false});
 
 // ===================== FLOATING WORDS =====================
-var phrases=['send me','envíame','envoyez-moi','schick mich','mandami','送我','送って','보내줘','пошли меня','أرسلني','skicka mig','stuur mij','wyślij mnie','pošli mě','küld el','gönder beni','送我去','שלח אותי','ส่งฉัน','gửi tôi','trimite-mă','pošlji me','kirim aku','stuur my','послати мене','envie-me','послај ме','haniraha ahy','tuma mimi','pateik mane','sūti mani','lähetä minut','send mig','στείλε με','भेजो मुझे','manda-me','invia me','cuir me','senda mig','sendi min'];
+var phrases=['send me','envÃ­ame','envoyez-moi','schick mich','mandami','é€æˆ‘','é€ã£ã¦','ë³´ë‚´ì¤˜','Ð¿Ð¾ÑˆÐ»Ð¸ Ð¼ÐµÐ½Ñ','Ø£Ø±Ø³Ù„Ù†ÙŠ','skicka mig','stuur mij','wyÅ›lij mnie','poÅ¡li mÄ›','kÃ¼ld el','gÃ¶nder beni','é€æˆ‘åŽ»','×©×œ×— ××•×ª×™','à¸ªà¹ˆà¸‡à¸‰à¸±à¸™','gá»­i tÃ´i','trimite-mÄƒ','poÅ¡lji me','kirim aku','stuur my','Ð¿Ð¾ÑÐ»Ð°Ñ‚Ð¸ Ð¼ÐµÐ½Ðµ','envie-me','Ð¿Ð¾ÑÐ»Ð°Ñ˜ Ð¼Ðµ','haniraha ahy','tuma mimi','pateik mane','sÅ«ti mani','lÃ¤hetÃ¤ minut','send mig','ÏƒÏ„ÎµÎ¯Î»Îµ Î¼Îµ','à¤­à¥‡à¤œà¥‹ à¤®à¥à¤à¥‡','manda-me','invia me','cuir me','senda mig','sendi min'];
 var colors=['#00ff41','#00cc33','#009926','#33ff66','#00ff41','#66ffaa','#00e639','#1aff5c','#00b33c','#4dff88'];
 var layer=document.getElementById('floatLayer');
 function spawn(){
@@ -692,7 +692,7 @@ honeypotPaths.forEach(hp => {
     const referer = req.headers['referer'] || 'none';
     const accept = req.headers['accept'] || 'none';
     const tlsVersion = req.socket.encrypted ? (req.socket.getProtocol ? req.socket.getProtocol() : 'tls') : 'none';
-    console.log(`[HONEYPOT] ⚠ TRAP HIT - IP: ${ip} - Path: ${hp} - Method: ${method} - UA: ${ua.substring(0, 200)} - Referer: ${referer} - Accept: ${accept.substring(0, 100)} - TLS: ${tlsVersion} - ${new Date().toISOString()}`);
+    console.log(`[HONEYPOT] âš  TRAP HIT - IP: ${ip} - Path: ${hp} - Method: ${method} - UA: ${ua.substring(0, 200)} - Referer: ${referer} - Accept: ${accept.substring(0, 100)} - TLS: ${tlsVersion} - ${new Date().toISOString()}`);
     recordSuspicion(ip, 'honeypot:' + hp);
     // Tarpit + deceptive response - waste attacker time with realistic-looking fake data
     const delay = 3000 + Math.floor(Math.random() * 5000);
@@ -1021,8 +1021,8 @@ function getShellHTML(contentPath) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="/icon-transparent.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/icon-transparent.svg">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/favicon.png">
 <meta name="robots" content="noindex, nofollow">
 <meta name="description" content="">
 <meta property="og:title" content="">
@@ -1109,7 +1109,7 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
 <!-- COUNTERMEASURES PERSISTENT DRAWER -->
 <div class="cm-drawer" id="cmDrawer">
   <div class="cm-drawer-bar" onclick="toggleCmDrawer()">
-    <h3>🛡️ <span data-i18n="drawer.title">COUNTERMEASURES</span></h3>
+    <h3>ðŸ›¡ï¸ <span data-i18n="drawer.title">COUNTERMEASURES</span></h3>
     <div class="cm-status-dots">
       <span class="cm-dot" id="cmDotUltrasonic" title="Ultrasonic Shield"></span>
       <span class="cm-dot-label" id="cmDotLabelUltrasonic" data-i18n="drawer.shield">SHIELD</span>
@@ -1126,13 +1126,13 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
       <span class="cm-dot" id="cmDotToneLab" title="Tone Lab"></span>
       <span class="cm-dot-label" id="cmDotLabelToneLab" data-i18n="drawer.lab">LAB</span>
     </div>
-    <span class="cm-drawer-chevron">▲</span>
+    <span class="cm-drawer-chevron">â–²</span>
   </div>
   <div class="cm-drawer-content" id="cmDrawerContent">
   <div class="cm-panel">
     <label class="cm-toggle"><input type="checkbox" id="cmUltrasonic" onchange="toggleUltrasonicCM(this.checked)"><span class="cm-label" data-i18n="panel.ultrasonic">ULTRASONIC SHIELD</span></label>
     <div class="cm-status" id="cmStatus">INACTIVE</div>
-    <div class="cm-info">🌊 WATER PLANET OPTIMIZED - Humidity-adaptive frequency sweep across 20–22kHz. Jams cross-device tracking beacons &amp; acoustic data exfiltration. 🐾 ANIMAL-SAFE: above 20kHz at -60dB.</div>
+    <div class="cm-info">ðŸŒŠ WATER PLANET OPTIMIZED - Humidity-adaptive frequency sweep across 20â€“22kHz. Jams cross-device tracking beacons &amp; acoustic data exfiltration. ðŸ¾ ANIMAL-SAFE: above 20kHz at -60dB.</div>
   </div>
   <div class="cm-panel">
     <label class="cm-toggle"><input type="checkbox" id="cmWebrtc" onchange="toggleWebRTCBlock(this.checked)" checked><span class="cm-label" data-i18n="panel.webrtc">WebRTC LEAK BLOCK</span></label>
@@ -1145,7 +1145,7 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
     <div class="cm-info">Injects imperceptible noise into canvas readback operations, defeating canvas fingerprinting.</div>
   </div>
   <div class="cm-panel" style="border-color:#00ff41">
-    <label class="cm-toggle"><input type="checkbox" id="cmHealing" onchange="toggleHealingTones(this.checked)"><span class="cm-label" style="color:#00ff41">🎵 <span data-i18n="panel.healing">HEALING TONES</span></span></label>
+    <label class="cm-toggle"><input type="checkbox" id="cmHealing" onchange="toggleHealingTones(this.checked)"><span class="cm-label" style="color:#00ff41">ðŸŽµ <span data-i18n="panel.healing">HEALING TONES</span></span></label>
     <div class="cm-status" id="cmHealingStatus">INACTIVE</div>
     <div class="ht-freq-grid" id="htFreqGrid">
       <button class="ht-freq-btn" data-freq="174" data-name="Pain Relief" onclick="selectHealingFreq(this)">174 Hz</button>
@@ -1161,10 +1161,10 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
     </div>
     <input type="range" class="ht-volume" id="htVolume" min="0" max="100" value="25" oninput="setHealingVolume(this.value)" title="Volume">
     <div class="ht-now-playing" id="htNowPlaying"></div>
-    <div class="cm-info">🌊 Solfeggio frequencies with sub-harmonic body-water resonance. 🐾 ANIMAL-SAFE: 174–963 Hz at gentle volume.</div>
+    <div class="cm-info">ðŸŒŠ Solfeggio frequencies with sub-harmonic body-water resonance. ðŸ¾ ANIMAL-SAFE: 174â€“963 Hz at gentle volume.</div>
   </div>
   <div class="cm-panel" style="border-color:#00ccff">
-    <label class="cm-toggle"><input type="checkbox" id="cmProtective" onchange="toggleProtectiveTones(this.checked)"><span class="cm-label" style="color:#00ccff">🛡️ <span data-i18n="panel.protective">PROTECTIVE TONES</span></span></label>
+    <label class="cm-toggle"><input type="checkbox" id="cmProtective" onchange="toggleProtectiveTones(this.checked)"><span class="cm-label" style="color:#00ccff">ðŸ›¡ï¸ <span data-i18n="panel.protective">PROTECTIVE TONES</span></span></label>
     <div class="cm-status" id="cmProtectiveStatus">INACTIVE</div>
     <div class="pt-freq-grid" id="ptFreqGrid">
       <button class="pt-freq-btn active" data-freq="7.83" data-name="Schumann Resonance" data-type="binaural" onclick="selectProtectiveFreq(this)">7.83 Hz</button>
@@ -1173,11 +1173,11 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
       <button class="pt-freq-btn" data-freq="40" data-name="Gamma - Perception" data-type="binaural" onclick="selectProtectiveFreq(this)">40 Hz</button>
       <button class="pt-freq-btn" data-freq="0" data-name="Pink Noise - Masking" data-type="pink" onclick="selectProtectiveFreq(this)">PINK</button>
       <button class="pt-freq-btn" data-freq="0" data-name="Brown Noise - Deep Cover" data-type="brown" onclick="selectProtectiveFreq(this)">BROWN</button>
-      <button class="pt-freq-btn" data-freq="0" data-name="Ocean Waves - Planet Sound" data-type="ocean" onclick="selectProtectiveFreq(this)">🌊 OCEAN</button>
+      <button class="pt-freq-btn" data-freq="0" data-name="Ocean Waves - Planet Sound" data-type="ocean" onclick="selectProtectiveFreq(this)">ðŸŒŠ OCEAN</button>
     </div>
     <input type="range" class="pt-volume" id="ptVolume" min="0" max="100" value="30" oninput="setProtectiveVolume(this.value)" title="Volume">
     <div class="pt-now-playing" id="ptNowPlaying"></div>
-    <div class="cm-info">🌊 7.83 Hz Schumann is Earth's electromagnetic heartbeat. Use headphones for binaural entrainment. 🐾 ANIMAL-SAFE.</div>
+    <div class="cm-info">ðŸŒŠ 7.83 Hz Schumann is Earth's electromagnetic heartbeat. Use headphones for binaural entrainment. ðŸ¾ ANIMAL-SAFE.</div>
   </div>
   <!-- ARC SHIELD - QUICK ACCESS -->
   <div class="cm-panel arc-panel">
@@ -1224,23 +1224,23 @@ html,body{height:100%;overflow:hidden;background:#0a0a0a}
     <a class="mtl-link" href="/tones/instrument" target="_blank"><span data-i18n="action.openToneLab">OPEN FULL TONE LAB</span> &#x2192;</a>
   </div>
   <div class="cm-panel cm-dl-panel">
-    <div class="cm-dl-title">⬇ <span data-i18n="dl.title">DOWNLOAD / INSTALL APPS</span></div>
+    <div class="cm-dl-title">â¬‡ <span data-i18n="dl.title">DOWNLOAD / INSTALL APPS</span></div>
     <div class="cm-dl-info" data-i18n="dl.info">Install to home screen on mobile. Download HTML files on desktop. Zero dependencies.</div>
     <div class="cm-dl-btns">
-      <a class="cm-dl-btn" href="/tones/multipack" target="_blank" style="text-decoration:none;text-align:center;background:#cc88ff;color:#0a0a0a;border-color:#cc88ff;flex:1 1 100%">🎛️ <span data-i18n="dl.multipack">INSTALL MULTIPACK (ALL-IN-ONE)</span></a>
+      <a class="cm-dl-btn" href="/tones/multipack" target="_blank" style="text-decoration:none;text-align:center;background:#cc88ff;color:#0a0a0a;border-color:#cc88ff;flex:1 1 100%">ðŸŽ›ï¸ <span data-i18n="dl.multipack">INSTALL MULTIPACK (ALL-IN-ONE)</span></a>
     </div>
     <div class="cm-dl-btns" style="margin-top:4px">
-      <a class="cm-dl-btn" href="/tones/instrument" target="_blank" style="text-decoration:none;text-align:center;background:#ff4444;color:#0a0a0a;border-color:#ff4444;flex:1 1 100%">🎹 <span data-i18n="dl.toneLab">INSTALL TONE LAB (INSTRUMENT)</span></a>
+      <a class="cm-dl-btn" href="/tones/instrument" target="_blank" style="text-decoration:none;text-align:center;background:#ff4444;color:#0a0a0a;border-color:#ff4444;flex:1 1 100%">ðŸŽ¹ <span data-i18n="dl.toneLab">INSTALL TONE LAB (INSTRUMENT)</span></a>
     </div>
     <div class="cm-dl-btns" style="margin-top:4px">
-      <a class="cm-dl-btn" href="/tones/healing" target="_blank" style="text-decoration:none;text-align:center">📱 <span data-i18n="dl.healing">INSTALL HEALING</span></a>
-      <a class="cm-dl-btn blue" href="/tones/protective" target="_blank" style="text-decoration:none;text-align:center">📱 <span data-i18n="dl.protective">INSTALL PROTECTIVE</span></a>
+      <a class="cm-dl-btn" href="/tones/healing" target="_blank" style="text-decoration:none;text-align:center">ðŸ“± <span data-i18n="dl.healing">INSTALL HEALING</span></a>
+      <a class="cm-dl-btn blue" href="/tones/protective" target="_blank" style="text-decoration:none;text-align:center">ðŸ“± <span data-i18n="dl.protective">INSTALL PROTECTIVE</span></a>
     </div>
     <div class="cm-dl-btns" style="margin-top:4px">
-      <button class="cm-dl-btn" onclick="downloadToneApp('healing')" style="font-size:0.6rem;padding:6px 10px;opacity:0.6">⬇ <span data-i18n="dl.download">DOWNLOAD .HTML</span></button>
-      <button class="cm-dl-btn blue" onclick="downloadToneApp('protective')" style="font-size:0.6rem;padding:6px 10px;opacity:0.6">⬇ <span data-i18n="dl.download">DOWNLOAD .HTML</span></button>
+      <button class="cm-dl-btn" onclick="downloadToneApp('healing')" style="font-size:0.6rem;padding:6px 10px;opacity:0.6">â¬‡ <span data-i18n="dl.download">DOWNLOAD .HTML</span></button>
+      <button class="cm-dl-btn blue" onclick="downloadToneApp('protective')" style="font-size:0.6rem;padding:6px 10px;opacity:0.6">â¬‡ <span data-i18n="dl.download">DOWNLOAD .HTML</span></button>
     </div>
-    <div class="cm-dl-title" style="color:#cc88ff;margin-top:8px">🔗 <span data-i18n="dl.embedTitle">INSTALL ON YOUR SITE</span></div>
+    <div class="cm-dl-title" style="color:#cc88ff;margin-top:8px">ðŸ”— <span data-i18n="dl.embedTitle">INSTALL ON YOUR SITE</span></div>
     <div class="cm-dl-info" data-i18n="dl.embedInfo">Copy embed code to add tone tools to any website.</div>
     <div class="cm-embed-label" data-i18n="dl.iframe">IFRAME EMBED:</div>
     <div class="cm-embed-wrap">
@@ -1262,7 +1262,7 @@ var fr=document.getElementById('frame');
 // Forward URL hash into iframe for anchor navigation (e.g. /report#V)
 if(location.hash) fr.src+=location.hash;
 // Copy embed code
-window.copyShellEmbed=function(id,btn){var text=document.getElementById(id).textContent;var cl=window.b0bI18n?window.b0bI18n.t('action.copied'):'COPIED';var co=window.b0bI18n?window.b0bI18n.t('action.copy'):'COPY';navigator.clipboard.writeText(text).then(function(){btn.textContent='✓ '+cl;setTimeout(function(){btn.textContent=co},2000)}).catch(function(){var ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);btn.textContent='✓ '+cl;setTimeout(function(){btn.textContent=co},2000)})};
+window.copyShellEmbed=function(id,btn){var text=document.getElementById(id).textContent;var cl=window.b0bI18n?window.b0bI18n.t('action.copied'):'COPIED';var co=window.b0bI18n?window.b0bI18n.t('action.copy'):'COPY';navigator.clipboard.writeText(text).then(function(){btn.textContent='âœ“ '+cl;setTimeout(function(){btn.textContent=co},2000)}).catch(function(){var ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);btn.textContent='âœ“ '+cl;setTimeout(function(){btn.textContent=co},2000)})};
 // Download standalone tone app
 window.downloadToneApp=function(type){var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>b0b '+type+' Tones</title><style>';
 html+='*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;display:flex;align-items:center;justify-content:center;min-height:100vh}';
@@ -1274,7 +1274,7 @@ html+='input[type=range]{width:100%;margin:12px 0;accent-color:#00ff41}';
 html+='.credit{margin-top:24px;color:#333;font-size:0.6rem;text-align:center}';
 html+='</style></head><body><div class="app">';
 if(type==="healing"){
-html+='<h1>🎵 b0b HEALING TONES</h1>';
+html+='<h1>ðŸŽµ b0b HEALING TONES</h1>';
 html+='<label class="toggle"><input type="checkbox" id="tog" onchange="toggle(this.checked)"><span>ACTIVATE</span></label>';
 html+='<div class="status" id="st">INACTIVE</div><div id="grid">';
 var hf=[[174,"Pain Relief"],[285,"Tissue Healing"],[396,"Liberation"],[417,"Change"],[432,"Natural Calm"],[528,"Love / DNA Repair"],[639,"Connection"],[741,"Intuition"],[852,"Spiritual"],[963,"Higher Self"]];
@@ -1287,7 +1287,7 @@ html+='function sel(b){document.querySelectorAll(".btn").forEach(function(x){x.c
 html+='function vol(val){v=(val/100)*0.25;if(on&&gain&&ctx)gain.gain.linearRampToValueAtTime(v,ctx.currentTime+0.1)}';
 html+='<\\/scr'+'ipt>';
 }else{
-html+='<h1>🛡️ b0b PROTECTIVE TONES</h1>';
+html+='<h1>ðŸ›¡ï¸ b0b PROTECTIVE TONES</h1>';
 html+='<label class="toggle"><input type="checkbox" id="tog" onchange="toggle(this.checked)"><span>ACTIVATE</span></label>';
 html+='<div class="status" id="st">INACTIVE</div><div id="grid">';
 html+='<button class="btn active" data-f="7.83" data-n="Schumann Resonance" data-t="binaural" onclick="sel(this)">7.83 Hz</button>';
@@ -1296,7 +1296,7 @@ html+='<button class="btn" data-f="14" data-n="Beta" data-t="binaural" onclick="
 html+='<button class="btn" data-f="40" data-n="Gamma" data-t="binaural" onclick="sel(this)">40 Hz</button>';
 html+='<button class="btn" data-f="0" data-n="Pink Noise" data-t="pink" onclick="sel(this)">PINK</button>';
 html+='<button class="btn" data-f="0" data-n="Brown Noise" data-t="brown" onclick="sel(this)">BROWN</button>';
-html+='<button class="btn" data-f="0" data-n="Ocean Waves" data-t="ocean" onclick="sel(this)">🌊 OCEAN</button>';
+html+='<button class="btn" data-f="0" data-n="Ocean Waves" data-t="ocean" onclick="sel(this)">ðŸŒŠ OCEAN</button>';
 html+='</div><input type="range" min="0" max="100" value="30" oninput="vol(this.value)">';
 html+='<scr'+'ipt>';
 html+='var ctx,oscL,oscR,noise,lfo,gain,on=false,freq=7.83,name="Schumann Resonance",type="binaural",v=0.075;';

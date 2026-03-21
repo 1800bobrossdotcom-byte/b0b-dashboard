@@ -10,8 +10,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="b0b Tones">
 <link rel="manifest" href="/manifest-multipack.json">
-<link rel="icon" href="/icon-transparent.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/icon-transparent.svg">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/favicon.png">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;padding:env(safe-area-inset-top) 12px env(safe-area-inset-bottom);user-select:none;-webkit-user-select:none;overflow-y:auto}
@@ -55,24 +55,24 @@ input[type=range]{width:100%;margin:6px 0;height:24px}
 </head>
 <body>
 <div class="header">
-  <h1>🎛️ b0b TONE MULTIPACK</h1>
+  <h1>ðŸŽ›ï¸ b0b TONE MULTIPACK</h1>
   <div class="sub">LAYER TONES LIKE AN INSTRUMENT - ALL ENGINES RUN SIMULTANEOUSLY</div>
 </div>
 
 <div class="install-banner" id="installBanner">
-  <strong>📱 INSTALL TO HOME SCREEN</strong><br>
+  <strong>ðŸ“± INSTALL TO HOME SCREEN</strong><br>
   <span id="installInstructions"></span>
   <span class="dismiss" onclick="document.getElementById('installBanner').style.display='none'">dismiss</span>
 </div>
 
 <div class="master">
-  <label>🔊 MASTER</label>
+  <label>ðŸ”Š MASTER</label>
   <input type="range" min="0" max="100" value="80" oninput="setMaster(this.value)" title="Master Volume">
 </div>
 
 <!-- HEALING TONES -->
 <div class="section s-heal" id="sHeal">
-  <h2><span class="dot" id="dotHeal"></span>🎵 HEALING TONES</h2>
+  <h2><span class="dot" id="dotHeal"></span>ðŸŽµ HEALING TONES</h2>
   <label class="toggle"><input type="checkbox" id="togHeal" onchange="toggleHeal(this.checked)"><span>ACTIVATE</span></label>
   <div class="status" id="stHeal">INACTIVE</div>
   <div class="freq-grid">
@@ -88,12 +88,12 @@ input[type=range]{width:100%;margin:6px 0;height:24px}
     <button class="btn" data-f="963" data-n="Higher Self" onclick="selHeal(this)">963 Hz</button>
   </div>
   <input type="range" min="0" max="100" value="25" oninput="volHeal(this.value)" title="Healing Volume">
-  <div class="info">🌊 Solfeggio frequencies with sub-harmonic body-water resonance. 🐾 ANIMAL-SAFE: 174–963 Hz at gentle volume.</div>
+  <div class="info">ðŸŒŠ Solfeggio frequencies with sub-harmonic body-water resonance. ðŸ¾ ANIMAL-SAFE: 174â€“963 Hz at gentle volume.</div>
 </div>
 
 <!-- PROTECTIVE TONES -->
 <div class="section s-prot" id="sProt">
-  <h2><span class="dot" id="dotProt"></span>🛡️ PROTECTIVE TONES</h2>
+  <h2><span class="dot" id="dotProt"></span>ðŸ›¡ï¸ PROTECTIVE TONES</h2>
   <label class="toggle"><input type="checkbox" id="togProt" onchange="toggleProt(this.checked)"><span>ACTIVATE</span></label>
   <div class="status" id="stProt">INACTIVE</div>
   <div class="freq-grid">
@@ -103,18 +103,18 @@ input[type=range]{width:100%;margin:6px 0;height:24px}
     <button class="btn" data-f="40" data-n="Gamma" data-t="binaural" onclick="selProt(this)">40 Hz</button>
     <button class="btn" data-f="0" data-n="Pink Noise" data-t="pink" onclick="selProt(this)">PINK</button>
     <button class="btn" data-f="0" data-n="Brown Noise" data-t="brown" onclick="selProt(this)">BROWN</button>
-    <button class="btn" data-f="0" data-n="Ocean Waves" data-t="ocean" onclick="selProt(this)">🌊 OCEAN</button>
+    <button class="btn" data-f="0" data-n="Ocean Waves" data-t="ocean" onclick="selProt(this)">ðŸŒŠ OCEAN</button>
   </div>
   <input type="range" min="0" max="100" value="30" oninput="volProt(this.value)" title="Protective Volume">
-  <div class="info">🌊 7.83 Hz Schumann is Earth's electromagnetic heartbeat. Use headphones for binaural entrainment. 🐾 ANIMAL-SAFE.</div>
+  <div class="info">ðŸŒŠ 7.83 Hz Schumann is Earth's electromagnetic heartbeat. Use headphones for binaural entrainment. ðŸ¾ ANIMAL-SAFE.</div>
 </div>
 
 <!-- ULTRASONIC SHIELD -->
 <div class="section s-ultra" id="sUltra">
-  <h2><span class="dot" id="dotUltra"></span>⚡ ULTRASONIC SHIELD</h2>
+  <h2><span class="dot" id="dotUltra"></span>âš¡ ULTRASONIC SHIELD</h2>
   <label class="toggle"><input type="checkbox" id="togUltra" onchange="toggleUltra(this.checked)"><span>ACTIVATE</span></label>
   <div class="status" id="stUltra">INACTIVE</div>
-  <div class="info">🌊 Humidity-adaptive frequency sweep across 20–22kHz. Jams cross-device tracking beacons &amp; acoustic data exfiltration. 🐾 ANIMAL-SAFE: above 20kHz at -60dB. Triangle LFO sweep at 0.25Hz adapts to ambient humidity.</div>
+  <div class="info">ðŸŒŠ Humidity-adaptive frequency sweep across 20â€“22kHz. Jams cross-device tracking beacons &amp; acoustic data exfiltration. ðŸ¾ ANIMAL-SAFE: above 20kHz at -60dB. Triangle LFO sweep at 0.25Hz adapts to ambient humidity.</div>
 </div>
 
 <div class="credit"><a href="https://b0b.dev">b0b.dev</a> - COUNTERMEASURES MULTIPACK</div>
@@ -129,7 +129,7 @@ function setMaster(val) {
   if (uGain && uCtx) uGain.gain.linearRampToValueAtTime(0.001 * master, uCtx.currentTime + 0.1);
 }
 
-// ══════════════════ HEALING ENGINE ══════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• HEALING ENGINE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 var hCtx, hOsc, hSub, hGain, hOn = false, hFreq = 396, hName = "Liberation", hVol = 0.06;
 
 function toggleHeal(e) {
@@ -177,7 +177,7 @@ function selHeal(b) {
 
 function volHeal(val) { hVol = (val / 100) * 0.25; if (hOn && hGain && hCtx) hGain.gain.linearRampToValueAtTime(hVol * master, hCtx.currentTime + 0.1) }
 
-// ══════════════════ PROTECTIVE ENGINE ══════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• PROTECTIVE ENGINE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 var pCtx, pOscL, pOscR, pNoise, pLfo, pGain, pOn = false, pFreq = 7.83, pName = "Schumann Resonance", pType = "binaural", pVol = 0.075;
 
 function pCleanup() {
@@ -247,7 +247,7 @@ function selProt(b) {
 
 function volProt(val) { pVol = (val / 100) * 0.25; if (pOn && pGain && pCtx) pGain.gain.linearRampToValueAtTime(pVol * master, pCtx.currentTime + 0.1) }
 
-// ══════════════════ ULTRASONIC SHIELD ENGINE ══════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• ULTRASONIC SHIELD ENGINE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 var uCtx, uNoise, uGain, uFilter, uSafety, uSweepLfo, uSweepGain, uOn = false;
 
 function toggleUltra(e) {
@@ -271,14 +271,14 @@ function toggleUltra(e) {
     uGain = uCtx.createGain();
     uGain.gain.setValueAtTime(0, uCtx.currentTime);
     uGain.gain.linearRampToValueAtTime(0.001 * master, uCtx.currentTime + 0.5);
-    // Humidity-adaptive sweep LFO: triangle 0.25Hz, ±1kHz
+    // Humidity-adaptive sweep LFO: triangle 0.25Hz, Â±1kHz
     uSweepLfo = uCtx.createOscillator();
     uSweepLfo.type = "triangle"; uSweepLfo.frequency.value = 0.25;
     uSweepGain = uCtx.createGain();
     uSweepGain.gain.value = 1000;
     uSweepLfo.connect(uSweepGain);
     uSweepGain.connect(uFilter.frequency);
-    // Chain: noise → bandpass → safety highpass → gain → destination
+    // Chain: noise â†’ bandpass â†’ safety highpass â†’ gain â†’ destination
     uNoise.connect(uFilter);
     uFilter.connect(uSafety);
     uSafety.connect(uGain);
@@ -318,16 +318,16 @@ function toggleUltra(e) {
   var banner = document.getElementById('installBanner');
   var inst = document.getElementById('installInstructions');
   if (ios) {
-    inst.innerHTML = 'Tap <strong>Share ↑</strong> then <strong>"Add to Home Screen"</strong>';
+    inst.innerHTML = 'Tap <strong>Share â†‘</strong> then <strong>"Add to Home Screen"</strong>';
     banner.style.display = 'block';
   } else if (/android/i.test(ua)) {
-    inst.innerHTML = 'Tap <strong>⋮ Menu</strong> then <strong>"Add to Home Screen"</strong> or <strong>"Install App"</strong>';
+    inst.innerHTML = 'Tap <strong>â‹® Menu</strong> then <strong>"Add to Home Screen"</strong> or <strong>"Install App"</strong>';
     banner.style.display = 'block';
   }
   var deferredPrompt = null;
   window.addEventListener('beforeinstallprompt', function (e) {
     e.preventDefault(); deferredPrompt = e;
-    inst.innerHTML = '<button onclick="installPWA()" style="background:#cc88ff;color:#0a0a0a;border:none;padding:8px 16px;font-family:inherit;cursor:pointer;border-radius:2px;font-size:0.8rem">⬇ INSTALL TO HOME SCREEN</button>';
+    inst.innerHTML = '<button onclick="installPWA()" style="background:#cc88ff;color:#0a0a0a;border:none;padding:8px 16px;font-family:inherit;cursor:pointer;border-radius:2px;font-size:0.8rem">â¬‡ INSTALL TO HOME SCREEN</button>';
     banner.style.display = 'block';
   });
   window.installPWA = function () {

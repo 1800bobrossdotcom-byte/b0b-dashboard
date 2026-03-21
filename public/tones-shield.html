@@ -10,8 +10,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ARC Shield">
 <link rel="manifest" href="/manifest-shield.json">
-<link rel="icon" href="/icon-transparent.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/icon-transparent.svg">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/favicon.png">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;padding:env(safe-area-inset-top) 8px env(safe-area-inset-bottom);user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;overflow-y:auto;overflow-x:hidden}
@@ -282,7 +282,7 @@ body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;min-he
 <div class="credit"><a href="https://b0b.dev">b0b.dev</a> - NO WEAPON FORMED SHALL PROSPER</div>
 
 <script>
-/* ═══════════════════ AUDIO ENGINE ═══════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• AUDIO ENGINE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 var ctx, masterGain, micStream, micSource, analyser;
 var systemActive = false;
 
@@ -321,7 +321,7 @@ var recorder = null, recordedChunks = [], recording = false;
 var eventLog = [];
 var snapshots = [];
 
-/* ═══════════════════ INIT ═══════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• INIT â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function initAudio() {
   if (ctx) return;
   ctx = new (window.AudioContext || window.webkitAudioContext)({sampleRate: 48000});
@@ -348,7 +348,7 @@ function ensureAudio() {
   return Promise.resolve();
 }
 
-/* ═══════════════════ SYSTEM TOGGLE ═══════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• SYSTEM TOGGLE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function toggleSystem() {
   if (systemActive) {
     deactivateSystem();
@@ -417,7 +417,7 @@ function deactivateSystem() {
   logEntry('info', 'System deactivated');
 }
 
-/* ═══════════════════ SCANNING & DETECTION ═══════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• SCANNING & DETECTION â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function startScanning() {
   if (!systemActive || !analyser) return;
   scan();
@@ -517,7 +517,7 @@ function updateDetectPanel() {
   }
 }
 
-/* ═══════════════════ SPECTROGRAM ═══════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• SPECTROGRAM â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 var specHistory = [];
 var SPEC_HISTORY_LEN = 200;
 
@@ -579,7 +579,7 @@ function drawSpectrogram() {
   }
 }
 
-/* ═══════════════════ ARC - ACTIVE PHASE CANCELLATION ═══════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• ARC - ACTIVE PHASE CANCELLATION â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function toggleArcAuto() {
   arcAutoActive = !arcAutoActive;
   var btn = document.getElementById('arcAutoBtn');
@@ -763,7 +763,7 @@ function updateArcPill() {
   updatePill('pillArc', any ? 'ARC ON' : 'ARC OFF', any);
 }
 
-/* ═══════════════════ PROTECTIVE FREQUENCIES ═══════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• PROTECTIVE FREQUENCIES â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function toggleProtFreq(btn) {
   var freqKey = btn.dataset.pf;
   var name = btn.dataset.pn;
@@ -868,7 +868,7 @@ function setProtVol(val) {
   document.getElementById('protVolVal').textContent = val + '%';
 }
 
-/* ═══════════════════ COUNTER-FREQUENCY ENGINE ═══════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• COUNTER-FREQUENCY ENGINE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function toggleCounterHarmonic() {
   counterHarmonicActive = !counterHarmonicActive;
   document.getElementById('counterHarmonicBtn').classList.toggle('active', counterHarmonicActive);
@@ -1018,7 +1018,7 @@ function setCounterVol(val) {
   document.getElementById('counterVolVal').textContent = val + '%';
 }
 
-/* ═══════════════════ EVIDENCE CAPTURE ═══════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• EVIDENCE CAPTURE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function toggleRecording() {
   if (recording) {
     stopRecording();
@@ -1136,7 +1136,7 @@ function exportEvidence() {
   logEntry('info', 'Evidence log exported');
 }
 
-/* ═══════════════════ UTILITIES ═══════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• UTILITIES â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function cleanNode(key, store) {
   store = store || arcNodes;
   var n = store[key];
@@ -1173,7 +1173,7 @@ function logEntry(type, msg) {
   while (panel.children.length > 200) panel.removeChild(panel.firstChild);
 }
 
-/* ═══════════════════ PWA INSTALL ═══════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• PWA INSTALL â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 var deferredPrompt = null;
 window.addEventListener('beforeinstallprompt', function(e) {
   e.preventDefault();
