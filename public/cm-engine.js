@@ -402,6 +402,7 @@ var arcAudioCtx = null;
 var arcAnimFrame = null;
 var arcCounterOsc = null;
 var arcCounterGain = null;
+var arcCounterDelay = null;
 
 window.toggleArcShield = function() {
   if (arcShieldActive) {
@@ -423,11 +424,12 @@ function startArcShield() {
       arcMicStream = stream;
       var source = arcAudioCtx.createMediaStreamSource(stream);
       arcAnalyser = arcAudioCtx.createAnalyser();
-      arcAnalyser.fftSize = 2048;
+      arcAnalyser.fftSize = 4096;
+      arcAnalyser.smoothingTimeConstant = 0.75;
       source.connect(arcAnalyser);
       arcShieldActive = true;
       document.getElementById('arcActivateBtn').classList.add('active');
-      document.getElementById('arcActivateBtn').textContent = '\u25A0 SHIELD ACTIVE - MONITORING';
+      document.getElementById('arcActivateBtn').textContent = '■ SHIELD ACTIVE - MONITORING';
       document.getElementById('arcStatus').textContent = 'SCANNING...';
       document.getElementById('arcStatus').className = 'cm-status active';
       arcMonitorLoop();
@@ -443,10 +445,11 @@ function stopArcShield() {
   if (arcAnimFrame) cancelAnimationFrame(arcAnimFrame);
   if (arcMicStream) { arcMicStream.getTracks().forEach(function(t) { t.stop(); }); arcMicStream = null; }
   if (arcCounterOsc) { try { arcCounterOsc.stop(); arcCounterOsc.disconnect(); } catch(e) {} arcCounterOsc = null; }
+  if (arcCounterDelay) { try { arcCounterDelay.disconnect(); } catch(e) {} arcCounterDelay = null; }
   if (arcCounterGain) { try { arcCounterGain.disconnect(); } catch(e) {} arcCounterGain = null; }
   arcAnalyser = null;
   document.getElementById('arcActivateBtn').classList.remove('active');
-  document.getElementById('arcActivateBtn').textContent = '\u25B6 ACTIVATE THREAT DETECTION';
+  document.getElementById('arcActivateBtn').textContent = '▶ ACTIVATE THREAT DETECTION';
   document.getElementById('arcStatus').textContent = 'INACTIVE';
   document.getElementById('arcStatus').className = 'cm-status';
   document.getElementById('arcMeterFill').style.width = '0';
@@ -460,36 +463,54 @@ function arcMonitorLoop() {
   arcAnalyser.getByteFrequencyData(data);
   var sr = arcAudioCtx.sampleRate;
   var binHz = sr / arcAnalyser.fftSize;
-  // Scan for LRAD threat frequencies (1kHz-4kHz high-energy)
-  var lradStart = Math.floor(1000 / binHz);
-  var lradEnd = Math.min(Math.ceil(4000 / binHz), bufLen);
-  var lradEnergy = 0;
-  var peakBin = lradStart;
-  var peakVal = 0;
-  for (var i = lradStart; i < lradEnd; i++) {
-    lradEnergy += data[i];
-    if (data[i] > peakVal) { peakVal = data[i]; peakBin = i; }
+
+  /* Scan all LRAD threat bands */
+  var bands = [
+    {min: 2000, max: 3500, name: 'LRAD PRIMARY', weight: 1.0},
+    {min: 1000, max: 2000, name: 'LRAD LOW-BAND', weight: 0.8},
+    {min: 3500, max: 6000, name: 'LRAD HARMONIC', weight: 0.7},
+    {min: 14000, max: 20000, name: 'ULTRASONIC', weight: 1.0},
+    {min: 100, max: 300, name: 'INFRASONIC', weight: 1.0}
+  ];
+  var maxThreat = 0;
+  var peakFreq = 0;
+  var peakBand = '';
+  for (var b = 0; b < bands.length; b++) {
+    var startBin = Math.floor(bands[b].min / binHz);
+    var endBin = Math.min(Math.ceil(bands[b].max / binHz), bufLen);
+    var energy = 0;
+    var bPeakVal = 0;
+    var bPeakBin = startBin;
+    for (var i = startBin; i < endBin; i++) {
+      energy += data[i];
+      if (data[i] > bPeakVal) { bPeakVal = data[i]; bPeakBin = i; }
+    }
+    var avg = energy / Math.max(1, endBin - startBin);
+    var threat = Math.min((avg / 180) * bands[b].weight, 1);
+    if (threat > maxThreat) {
+      maxThreat = threat;
+      peakFreq = Math.round(bPeakBin * binHz);
+      peakBand = bands[b].name;
+    }
   }
-  var avgLrad = lradEnergy / (lradEnd - lradStart);
-  var threat = Math.min(avgLrad / 180, 1);
+
   var meterFill = document.getElementById('arcMeterFill');
-  meterFill.style.width = (threat * 100) + '%';
-  meterFill.style.background = threat > 0.6 ? '#ff4444' : threat > 0.3 ? '#ffcc00' : '#00ff41';
-  var peakFreq = Math.round(peakBin * binHz);
+  meterFill.style.width = (maxThreat * 100) + '%';
+  meterFill.style.background = maxThreat > 0.6 ? '#ff4444' : maxThreat > 0.3 ? '#ffcc00' : '#00ff41';
   var infoEl = document.getElementById('arcThreatInfo');
-  if (threat > 0.6) {
-    document.getElementById('arcStatus').textContent = 'THREAT DETECTED - ' + peakFreq + ' Hz';
-    infoEl.textContent = 'HIGH ENERGY @ ' + peakFreq + ' Hz | Counter-frequency active';
+  if (maxThreat > 0.6) {
+    document.getElementById('arcStatus').textContent = 'THREAT - ' + peakBand + ' ' + peakFreq + ' Hz';
+    infoEl.textContent = peakBand + ' @ ' + peakFreq + ' Hz | Counter active';
     infoEl.style.color = '#ff4444';
     arcEngageCounter(peakFreq);
-  } else if (threat > 0.3) {
-    document.getElementById('arcStatus').textContent = 'ELEVATED - ' + peakFreq + ' Hz peak';
-    infoEl.textContent = 'Monitoring ' + peakFreq + ' Hz | Level: ' + Math.round(threat * 100) + '%';
+  } else if (maxThreat > 0.3) {
+    document.getElementById('arcStatus').textContent = 'ELEVATED - ' + peakFreq + ' Hz';
+    infoEl.textContent = peakBand + ' ' + peakFreq + ' Hz | Level: ' + Math.round(maxThreat * 100) + '%';
     infoEl.style.color = '#ffcc00';
     arcDisengageCounter();
   } else {
     document.getElementById('arcStatus').textContent = 'SCANNING - clear';
-    infoEl.textContent = 'Environment clear | Peak: ' + peakFreq + ' Hz (' + Math.round(threat * 100) + '%)';
+    infoEl.textContent = 'Clear | Peak: ' + peakFreq + ' Hz (' + Math.round(maxThreat * 100) + '%)';
     infoEl.style.color = '#666';
     arcDisengageCounter();
   }
@@ -499,27 +520,41 @@ function arcMonitorLoop() {
 function arcEngageCounter(freq) {
   if (!arcAudioCtx) return;
   if (arcCounterOsc) {
-    arcCounterOsc.frequency.linearRampToValueAtTime(freq, arcAudioCtx.currentTime + 0.05);
+    /* Track detected frequency smoothly */
+    arcCounterOsc.frequency.setTargetAtTime(freq, arcAudioCtx.currentTime, 0.02);
+    /* Update phase-inversion delay to match new frequency */
+    if (arcCounterDelay) {
+      arcCounterDelay.delayTime.setTargetAtTime(1 / (2 * freq), arcAudioCtx.currentTime, 0.01);
+    }
     return;
   }
   arcCounterGain = arcAudioCtx.createGain();
-  arcCounterGain.gain.value = 0.08;
+  arcCounterGain.gain.value = 0;
+  arcCounterGain.gain.linearRampToValueAtTime(0.12, arcAudioCtx.currentTime + 0.05);
   arcCounterGain.connect(arcAudioCtx.destination);
+
   arcCounterOsc = arcAudioCtx.createOscillator();
   arcCounterOsc.type = 'sine';
   arcCounterOsc.frequency.value = freq;
-  arcCounterOsc.connect(arcCounterGain);
+
+  /* Phase inversion: delay by half-period = 180 degrees */
+  arcCounterDelay = arcAudioCtx.createDelay(0.1);
+  arcCounterDelay.delayTime.value = 1 / (2 * freq);
+  arcCounterOsc.connect(arcCounterDelay);
+  arcCounterDelay.connect(arcCounterGain);
   arcCounterOsc.start();
 }
 
 function arcDisengageCounter() {
   if (arcCounterOsc) {
-    try { arcCounterOsc.stop(); arcCounterOsc.disconnect(); } catch(e) {}
-    arcCounterOsc = null;
-  }
-  if (arcCounterGain) {
-    try { arcCounterGain.disconnect(); } catch(e) {}
-    arcCounterGain = null;
+    if (arcCounterGain) {
+      arcCounterGain.gain.linearRampToValueAtTime(0, arcAudioCtx.currentTime + 0.05);
+    }
+    setTimeout(function() {
+      if (arcCounterOsc) { try { arcCounterOsc.stop(); arcCounterOsc.disconnect(); } catch(e) {} arcCounterOsc = null; }
+      if (arcCounterDelay) { try { arcCounterDelay.disconnect(); } catch(e) {} arcCounterDelay = null; }
+      if (arcCounterGain) { try { arcCounterGain.disconnect(); } catch(e) {} arcCounterGain = null; }
+    }, 60);
   }
 }
 

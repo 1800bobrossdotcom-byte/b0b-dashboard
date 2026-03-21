@@ -290,6 +290,7 @@ var systemActive = false;
 var fftSize = 8192;
 var freqData, timeData;
 var detectedThreats = [];
+var autoSnapshotTaken = false;
 var LRAD_SIGNATURES = [
   {min: 2000, max: 3500, name: 'LRAD PRIMARY', severity: 'HIGH'},
   {min: 1000, max: 2000, name: 'LRAD LOW-BAND', severity: 'MED'},
@@ -389,6 +390,7 @@ function activateSystem() {
 
 function deactivateSystem() {
   systemActive = false;
+  autoSnapshotTaken = false;
   if (scanRAF) cancelAnimationFrame(scanRAF);
   scanRAF = null;
 
@@ -501,11 +503,16 @@ function updateDetectPanel() {
   document.getElementById('pillShield').classList.add('alert');
   document.getElementById('pillShield').classList.remove('on');
 
-  /* Log high-severity detections */
+  /* Log high-severity detections + auto-capture evidence */
   for (var i = 0; i < detectedThreats.length; i++) {
     if (detectedThreats[i].severity === 'HIGH' && detectedThreats[i].db > -20) {
       logEntry('alert', 'HIGH THREAT: ' + detectedThreats[i].name + ' at ' +
         detectedThreats[i].freq.toFixed(0) + ' Hz (' + detectedThreats[i].db.toFixed(1) + ' dB)');
+      if (!autoSnapshotTaken) {
+        autoSnapshotTaken = true;
+        captureSnapshot();
+        logEntry('evidence', 'Auto-snapshot captured on HIGH threat');
+      }
     }
   }
 }
@@ -628,14 +635,24 @@ function toggleArcSweep() {
     var osc = ctx.createOscillator();
     osc.type = 'sawtooth';
     osc.frequency.value = 2000;
-    /* Sweep 1.5kHz - 4kHz continuously */
+    /* Sweep 1.5kHz - 4kHz continuously with auto-rescheduling */
     var now = ctx.currentTime;
-    function scheduleSweep(t) {
-      osc.frequency.setValueAtTime(1500, t);
-      osc.frequency.linearRampToValueAtTime(4000, t + 0.8);
-      osc.frequency.linearRampToValueAtTime(1500, t + 1.6);
+    var SWEEP_BATCH = 60;
+    var SWEEP_PERIOD = 1.6;
+    function scheduleSweepBatch(startTime) {
+      for (var s = 0; s < SWEEP_BATCH; s++) {
+        var t = startTime + s * SWEEP_PERIOD;
+        osc.frequency.setValueAtTime(1500, t);
+        osc.frequency.linearRampToValueAtTime(4000, t + 0.8);
+        osc.frequency.linearRampToValueAtTime(1500, t + SWEEP_PERIOD);
+      }
     }
-    for (var s = 0; s < 60; s++) scheduleSweep(now + s * 1.6); /* schedule 60 cycles */
+    scheduleSweepBatch(now);
+    /* Re-schedule before batch expires to run indefinitely */
+    arcNodes.sweepInterval = setInterval(function() {
+      if (!arcSweepActive || !ctx) return;
+      scheduleSweepBatch(ctx.currentTime);
+    }, (SWEEP_BATCH - 5) * SWEEP_PERIOD * 1000);
 
     var g = ctx.createGain();
     g.gain.value = 0.15;
@@ -646,6 +663,7 @@ function toggleArcSweep() {
     arcNodes.sweepGain = g;
     logEntry('arc', 'Sweep jam ACTIVE (1.5-4 kHz)');
   } else {
+    if (arcNodes.sweepInterval) { clearInterval(arcNodes.sweepInterval); arcNodes.sweepInterval = null; }
     cleanNode('sweepOsc');
     cleanNode('sweepGain');
     logEntry('arc', 'Sweep jam OFF');
