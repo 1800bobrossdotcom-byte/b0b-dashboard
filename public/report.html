@@ -3032,6 +3032,7 @@
     a.className = 'sidebar-link';
     a.href = '#' + h2.id;
     a.textContent = sectionTitles[h2.id] || h2.textContent;
+    a.setAttribute('data-i18n', 'report.sect.' + h2.id);
     a.dataset.sectionId = h2.id;
     a.addEventListener('click', function(e) {
       e.preventDefault();
@@ -3047,6 +3048,9 @@
     navContainer.appendChild(a);
     linkMap[h2.id] = a;
   });
+
+  // Re-apply translations after sidebar links are built
+  if(window.b0bI18n) window.b0bI18n.apply();
 
   // ===================== MAKE SECTIONS COLLAPSIBLE =====================
   sections.forEach(function(h2) {

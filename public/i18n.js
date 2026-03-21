@@ -133,6 +133,23 @@ var EN={
 'report.expandAll':'EXPAND ALL',
 'report.collapseAll':'COLLAPSE ALL',
 'report.aiVirus':'AI VIRUS REPORT',
+// --- REPORT SECTION TITLES ---
+'report.sect.I':'I. Purpose & Framework',
+'report.sect.II':'II. Control Architecture',
+'report.sect.III':'III. 51% Threshold',
+'report.sect.IV':'IV. Underground / D.U.M.B.',
+'report.sect.V':'V. Surveillance & Tech',
+'report.sect.VI':'VI. The "New" Pattern',
+'report.sect.VII':'VII. Enclaves',
+'report.sect.VIII':'VIII. Cyclical Patterns',
+'report.sect.IX':'IX. Slavery Systems',
+'report.sect.X':'X. Conflicts',
+'report.sect.XI':'XI. FOIA Patterns',
+'report.sect.XII':'XII. Organized Crime',
+'report.sect.XIII':'XIII. Cross-Reference Index',
+'report.sect.XIV':'XIV. Calibration Index',
+'report.sect.XV':'XV. Spiritual Reclamation',
+'report.sect.XVI':'XVI. The Signal',
 // --- MAP LEGEND ---
 'map.markerColors':'MARKER COLORS'
 };
@@ -188,6 +205,7 @@ es:{
 'report.expandAll':'EXPANDIR TODO',
 'report.collapseAll':'CONTRAER TODO',
 'report.aiVirus':'INFORME VIRUS IA',
+'report.sect.I':'I. Prop\u00f3sito y Marco','report.sect.II':'II. Arquitectura de Control','report.sect.III':'III. Umbral del 51%','report.sect.IV':'IV. Subterr\u00e1neo / D.U.M.B.','report.sect.V':'V. Vigilancia y Tecnolog\u00eda','report.sect.VI':'VI. El Patr\u00f3n "Nuevo"','report.sect.VII':'VII. Enclaves','report.sect.VIII':'VIII. Patrones C\u00edclicos','report.sect.IX':'IX. Sistemas de Esclavitud','report.sect.X':'X. Conflictos','report.sect.XI':'XI. Patrones FOIA','report.sect.XII':'XII. Crimen Organizado','report.sect.XIII':'XIII. \u00cdndice de Referencia Cruzada','report.sect.XIV':'XIV. \u00cdndice de Calibraci\u00f3n','report.sect.XV':'XV. Reclamaci\u00f3n Espiritual','report.sect.XVI':'XVI. La Se\u00f1al',
 'map.markerColors':'COLORES DE MARCADORES'
 },
 // --------------- FRENCH ---------------
@@ -239,6 +257,7 @@ fr:{
 'report.expandAll':'TOUT DÉVELOPPER',
 'report.collapseAll':'TOUT RÉDUIRE',
 'report.aiVirus':'RAPPORT VIRUS IA',
+'report.sect.I':'I. Objectif et Cadre','report.sect.II':'II. Architecture de Contr\u00f4le','report.sect.III':'III. Seuil de 51%','report.sect.IV':'IV. Souterrain / D.U.M.B.','report.sect.V':'V. Surveillance et Technologie','report.sect.VI':'VI. Le Mod\u00e8le "Nouveau"','report.sect.VII':'VII. Enclaves','report.sect.VIII':'VIII. Sch\u00e9mas Cycliques','report.sect.IX':'IX. Syst\u00e8mes d\'Esclavage','report.sect.X':'X. Conflits','report.sect.XI':'XI. Sch\u00e9mas FOIA','report.sect.XII':'XII. Crime Organis\u00e9','report.sect.XIII':'XIII. Index de R\u00e9f\u00e9rence Crois\u00e9e','report.sect.XIV':'XIV. Index de Calibration','report.sect.XV':'XV. R\u00e9clamation Spirituelle','report.sect.XVI':'XVI. Le Signal',
 'map.markerColors':'COULEURS DES MARQUEURS'
 },
 // --------------- ARABIC ---------------
@@ -275,7 +294,9 @@ ar:{
 'map.bySection':'\u062D\u0633\u0628 \u0627\u0644\u0642\u0633\u0645','map.byType':'\u062D\u0633\u0628 \u0627\u0644\u0646\u0648\u0639',
 'map.allSections':'\u062C\u0645\u064A\u0639 \u0627\u0644\u0623\u0642\u0633\u0627\u0645','map.allTypes':'\u062C\u0645\u064A\u0639 \u0627\u0644\u0623\u0646\u0648\u0627\u0639',
 'report.expandAll':'\u062A\u0648\u0633\u064A\u0639 \u0627\u0644\u0643\u0644','report.collapseAll':'\u0637\u064A \u0627\u0644\u0643\u0644',
-'report.aiVirus':'\u062A\u0642\u0631\u064A\u0631 \u0641\u064A\u0631\u0648\u0633 \u0627\u0644\u0630\u0643\u0627\u0621','map.markerColors':'\u0623\u0644\u0648\u0627\u0646 \u0627\u0644\u0639\u0644\u0627\u0645\u0627\u062A'
+'report.aiVirus':'\u062A\u0642\u0631\u064A\u0631 \u0641\u064A\u0631\u0648\u0633 \u0627\u0644\u0630\u0643\u0627\u0621',
+'report.sect.I':'I. \u0627\u0644\u063A\u0631\u0636 \u0648\u0627\u0644\u0625\u0637\u0627\u0631','report.sect.II':'II. \u0647\u0646\u062F\u0633\u0629 \u0627\u0644\u062A\u062D\u0643\u0645','report.sect.III':'III. \u0639\u062A\u0628\u0629 51%','report.sect.IV':'IV. \u062A\u062D\u062A \u0627\u0644\u0623\u0631\u0636 / D.U.M.B.','report.sect.V':'V. \u0627\u0644\u0645\u0631\u0627\u0642\u0628\u0629 \u0648\u0627\u0644\u062A\u0643\u0646\u0648\u0644\u0648\u062C\u064A\u0627','report.sect.VI':'VI. \u0627\u0644\u0646\u0645\u0637 \u0627\u0644\u062C\u062F\u064A\u062F','report.sect.VII':'VII. \u0627\u0644\u062C\u064A\u0648\u0628','report.sect.VIII':'VIII. \u0627\u0644\u0623\u0646\u0645\u0627\u0637 \u0627\u0644\u062F\u0648\u0631\u064A\u0629','report.sect.IX':'IX. \u0623\u0646\u0638\u0645\u0629 \u0627\u0644\u0639\u0628\u0648\u062F\u064A\u0629','report.sect.X':'X. \u0627\u0644\u0646\u0632\u0627\u0639\u0627\u062A','report.sect.XI':'XI. \u0623\u0646\u0645\u0627\u0637 FOIA','report.sect.XII':'XII. \u0627\u0644\u062C\u0631\u064A\u0645\u0629 \u0627\u0644\u0645\u0646\u0638\u0645\u0629','report.sect.XIII':'XIII. \u0641\u0647\u0631\u0633 \u0627\u0644\u0645\u0631\u0627\u062C\u0639 \u0627\u0644\u0645\u062A\u0642\u0627\u0637\u0639\u0629','report.sect.XIV':'XIV. \u0641\u0647\u0631\u0633 \u0627\u0644\u0645\u0639\u0627\u064A\u0631\u0629','report.sect.XV':'XV. \u0627\u0644\u0627\u0633\u062A\u0631\u062F\u0627\u062F \u0627\u0644\u0631\u0648\u062D\u064A','report.sect.XVI':'XVI. \u0627\u0644\u0625\u0634\u0627\u0631\u0629',
+'map.markerColors':'\u0623\u0644\u0648\u0627\u0646 \u0627\u0644\u0639\u0644\u0627\u0645\u0627\u062A'
 },
 // --------------- CHINESE SIMPLIFIED ---------------
 zh:{
@@ -311,7 +332,9 @@ zh:{
 'map.bySection':'\u6309\u7AE0\u8282','map.byType':'\u6309\u7C7B\u578B',
 'map.allSections':'\u6240\u6709\u7AE0\u8282','map.allTypes':'\u6240\u6709\u7C7B\u578B',
 'report.expandAll':'\u5C55\u5F00\u5168\u90E8','report.collapseAll':'\u6298\u53E0\u5168\u90E8',
-'report.aiVirus':'AI\u75C5\u6BD2\u62A5\u544A','map.markerColors':'\u6807\u8BB0\u989C\u8272'
+'report.aiVirus':'AI\u75C5\u6BD2\u62A5\u544A',
+'report.sect.I':'I. \u76EE\u7684\u4E0E\u6846\u67B6','report.sect.II':'II. \u63A7\u5236\u67B6\u6784','report.sect.III':'III. 51%\u95E8\u69DB','report.sect.IV':'IV. \u5730\u4E0B / D.U.M.B.','report.sect.V':'V. \u76D1\u63A7\u4E0E\u6280\u672F','report.sect.VI':'VI. \u201C\u65B0\u201D\u6A21\u5F0F','report.sect.VII':'VII. \u98DE\u5730','report.sect.VIII':'VIII. \u5468\u671F\u6A21\u5F0F','report.sect.IX':'IX. \u5974\u5F79\u5236\u5EA6','report.sect.X':'X. \u51B2\u7A81','report.sect.XI':'XI. FOIA\u6A21\u5F0F','report.sect.XII':'XII. \u6709\u7EC4\u7EC7\u72AF\u7F6A','report.sect.XIII':'XIII. \u4EA4\u53C9\u53C2\u8003\u7D22\u5F15','report.sect.XIV':'XIV. \u6821\u51C6\u7D22\u5F15','report.sect.XV':'XV. \u7075\u6027\u6536\u590D','report.sect.XVI':'XVI. \u4FE1\u53F7',
+'map.markerColors':'\u6807\u8BB0\u989C\u8272'
 },
 // --------------- PORTUGUESE ---------------
 pt:{
@@ -347,7 +370,9 @@ pt:{
 'map.bySection':'POR SE\u00c7\u00c3O','map.byType':'POR TIPO',
 'map.allSections':'Todas as Se\u00e7\u00f5es','map.allTypes':'Todos os Tipos',
 'report.expandAll':'EXPANDIR TUDO','report.collapseAll':'RECOLHER TUDO',
-'report.aiVirus':'RELAT\u00D3RIO V\u00CDRUS IA','map.markerColors':'CORES DOS MARCADORES'
+'report.aiVirus':'RELAT\u00D3RIO V\u00CDRUS IA',
+'report.sect.I':'I. Prop\u00f3sito e Estrutura','report.sect.II':'II. Arquitetura de Controle','report.sect.III':'III. Limiar de 51%','report.sect.IV':'IV. Subterr\u00e2neo / D.U.M.B.','report.sect.V':'V. Vigil\u00e2ncia e Tecnologia','report.sect.VI':'VI. O Padr\u00e3o "Novo"','report.sect.VII':'VII. Enclaves','report.sect.VIII':'VIII. Padr\u00f5es C\u00edclicos','report.sect.IX':'IX. Sistemas de Escravid\u00e3o','report.sect.X':'X. Conflitos','report.sect.XI':'XI. Padr\u00f5es FOIA','report.sect.XII':'XII. Crime Organizado','report.sect.XIII':'XIII. \u00cdndice de Refer\u00eancia Cruzada','report.sect.XIV':'XIV. \u00cdndice de Calibra\u00e7\u00e3o','report.sect.XV':'XV. Reclama\u00e7\u00e3o Espiritual','report.sect.XVI':'XVI. O Sinal',
+'map.markerColors':'CORES DOS MARCADORES'
 },
 // --------------- RUSSIAN ---------------
 ru:{
@@ -380,7 +405,9 @@ ru:{
 'content.livingDoc':'\u0436\u0438\u0432\u043E\u0439 \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442','content.theReport':'\u041E\u0422\u0427\u0401\u0422',
 'content.keepRunning':'\u041F\u041E\u0414\u0414\u0415\u0420\u0416\u0418\u0422\u0415 \u042D\u0422\u041E\u0422 \u0421\u0410\u0419\u0422 - \u0415\u0414\u0410 + \u041F\u0420\u0418\u041F\u0410\u0421\u042B',
 'report.expandAll':'\u0420\u0410\u0417\u0412\u0415\u0420\u041D\u0423\u0422\u042C \u0412\u0421\u0401','report.collapseAll':'\u0421\u0412\u0415\u0420\u041D\u0423\u0422\u042C \u0412\u0421\u0401',
-'report.aiVirus':'\u041E\u0422\u0427\u0401\u0422 \u041E \u0412\u0418\u0420\u0423\u0421\u0415 \u0418\u0418','map.markerColors':'\u0426\u0412\u0415\u0422\u0410 \u041C\u0410\u0420\u041A\u0415\u0420\u041E\u0412'
+'report.aiVirus':'\u041E\u0422\u0427\u0401\u0422 \u041E \u0412\u0418\u0420\u0423\u0421\u0415 \u0418\u0418',
+'report.sect.I':'I. \u0426\u0435\u043B\u044C \u0438 \u0421\u0442\u0440\u0443\u043A\u0442\u0443\u0440\u0430','report.sect.II':'II. \u0410\u0440\u0445\u0438\u0442\u0435\u043A\u0442\u0443\u0440\u0430 \u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F','report.sect.III':'III. \u041F\u043E\u0440\u043E\u0433 51%','report.sect.IV':'IV. \u041F\u043E\u0434\u0437\u0435\u043C\u043D\u044B\u0435 / D.U.M.B.','report.sect.V':'V. \u0421\u043B\u0435\u0436\u043A\u0430 \u0438 \u0422\u0435\u0445\u043D\u043E\u043B\u043E\u0433\u0438\u0438','report.sect.VI':'VI. \u041D\u043E\u0432\u044B\u0439 \u041F\u0430\u0442\u0442\u0435\u0440\u043D','report.sect.VII':'VII. \u0410\u043D\u043A\u043B\u0430\u0432\u044B','report.sect.VIII':'VIII. \u0426\u0438\u043A\u043B\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u041F\u0430\u0442\u0442\u0435\u0440\u043D\u044B','report.sect.IX':'IX. \u0421\u0438\u0441\u0442\u0435\u043C\u044B \u0420\u0430\u0431\u0441\u0442\u0432\u0430','report.sect.X':'X. \u041A\u043E\u043D\u0444\u043B\u0438\u043A\u0442\u044B','report.sect.XI':'XI. \u041F\u0430\u0442\u0442\u0435\u0440\u043D\u044B FOIA','report.sect.XII':'XII. \u041E\u0440\u0433\u0430\u043D\u0438\u0437\u043E\u0432\u0430\u043D\u043D\u0430\u044F \u041F\u0440\u0435\u0441\u0442\u0443\u043F\u043D\u043E\u0441\u0442\u044C','report.sect.XIII':'XIII. \u041F\u0435\u0440\u0435\u043A\u0440\u0451\u0441\u0442\u043D\u044B\u0439 \u0418\u043D\u0434\u0435\u043A\u0441','report.sect.XIV':'XIV. \u041A\u0430\u043B\u0438\u0431\u0440\u043E\u0432\u043E\u0447\u043D\u044B\u0439 \u0418\u043D\u0434\u0435\u043A\u0441','report.sect.XV':'XV. \u0414\u0443\u0445\u043E\u0432\u043D\u043E\u0435 \u0412\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0435','report.sect.XVI':'XVI. \u0421\u0438\u0433\u043D\u0430\u043B',
+'map.markerColors':'\u0426\u0412\u0415\u0422\u0410 \u041C\u0410\u0420\u041A\u0415\u0420\u041E\u0412'
 },
 // --------------- HINDI ---------------
 hi:{
@@ -400,7 +427,9 @@ hi:{
 'freq.spiritual':'\u0906\u0927\u094D\u092F\u093E\u0924\u094D\u092E\u093F\u0915','freq.higherSelf':'\u0909\u091A\u094D\u091A \u0938\u094D\u0935',
 'content.livingDoc':'\u091C\u0940\u0935\u093F\u0924 \u0926\u0938\u094D\u0924\u093E\u0935\u0947\u091C\u093C','content.theReport':'\u0930\u093F\u092A\u094B\u0930\u094D\u091F',
 'report.expandAll':'\u0938\u092D\u0940 \u0935\u093F\u0938\u094D\u0924\u093E\u0930','report.collapseAll':'\u0938\u092D\u0940 \u0938\u0902\u0915\u094D\u0937\u093F\u092A\u094D\u0924',
-'report.aiVirus':'AI \u0935\u093E\u092F\u0930\u0938 \u0930\u093F\u092A\u094B\u0930\u094D\u091F','map.markerColors':'\u092E\u093E\u0930\u094D\u0915\u0930 \u0930\u0902\u0917'
+'report.aiVirus':'AI \u0935\u093E\u092F\u0930\u0938 \u0930\u093F\u092A\u094B\u0930\u094D\u091F',
+'report.sect.I':'I. \u0909\u0926\u094D\u0926\u0947\u0936\u094D\u092F \u0914\u0930 \u0922\u093E\u0901\u091A\u093E','report.sect.II':'II. \u0928\u093F\u092F\u0902\u0924\u094D\u0930\u0923 \u0935\u093E\u0938\u094D\u0924\u0941\u0915\u0932\u093E','report.sect.III':'III. 51% \u0938\u0940\u092E\u093E','report.sect.IV':'IV. \u092D\u0942\u092E\u093F\u0917\u0924 / D.U.M.B.','report.sect.V':'V. \u0928\u093F\u0917\u0930\u093E\u0928\u0940 \u0914\u0930 \u0924\u0915\u0928\u0940\u0915','report.sect.VI':'VI. \u0928\u092F\u093E \u092A\u0948\u091F\u0930\u094D\u0928','report.sect.VII':'VII. \u090F\u0928\u094D\u0915\u094D\u0932\u0947\u0935','report.sect.VIII':'VIII. \u091A\u0915\u094D\u0930\u0940\u092F \u092A\u0948\u091F\u0930\u094D\u0928','report.sect.IX':'IX. \u0926\u093E\u0938\u0924\u093E \u092A\u094D\u0930\u0923\u093E\u0932\u0940','report.sect.X':'X. \u0938\u0902\u0918\u0930\u094D\u0937','report.sect.XI':'XI. FOIA \u092A\u0948\u091F\u0930\u094D\u0928','report.sect.XII':'XII. \u0938\u0902\u0917\u0920\u093F\u0924 \u0905\u092A\u0930\u093E\u0927','report.sect.XIII':'XIII. \u0915\u094D\u0930\u0949\u0938-\u0930\u0947\u092B\u0930\u0947\u0902\u0938 \u0938\u0942\u091A\u0940','report.sect.XIV':'XIV. \u0915\u0948\u0932\u093F\u092C\u094D\u0930\u0947\u0936\u0928 \u0938\u0942\u091A\u0940','report.sect.XV':'XV. \u0906\u0927\u094D\u092F\u093E\u0924\u094D\u092E\u093F\u0915 \u092A\u0941\u0928\u0930\u094D\u092A\u094D\u0930\u093E\u092A\u094D\u0924\u093F','report.sect.XVI':'XVI. \u0938\u0902\u0915\u0947\u0924',
+'map.markerColors':'\u092E\u093E\u0930\u094D\u0915\u0930 \u0930\u0902\u0917'
 },
 // --------------- SWAHILI ---------------
 sw:{
@@ -419,7 +448,9 @@ sw:{
 'freq.spiritual':'Kiroho','freq.higherSelf':'Nafsi ya Juu',
 'content.livingDoc':'hati hai','content.theReport':'RIPOTI',
 'report.expandAll':'PANUA YOTE','report.collapseAll':'FUNGA YOTE',
-'report.aiVirus':'RIPOTI YA VIRUSI YA AI','map.markerColors':'RANGI ZA ALAMA'
+'report.aiVirus':'RIPOTI YA VIRUSI YA AI',
+'report.sect.I':'I. Kusudi na Mfumo','report.sect.II':'II. Usanifu wa Udhibiti','report.sect.III':'III. Kizingiti cha 51%','report.sect.IV':'IV. Chini ya Ardhi / D.U.M.B.','report.sect.V':'V. Ufuatiliaji na Teknolojia','report.sect.VI':'VI. Muundo Mpya','report.sect.VII':'VII. Vijiji vya Kipekee','report.sect.VIII':'VIII. Mifumo ya Mizunguko','report.sect.IX':'IX. Mifumo ya Utumwa','report.sect.X':'X. Migogoro','report.sect.XI':'XI. Mifumo ya FOIA','report.sect.XII':'XII. Uhalifu wa Kupangwa','report.sect.XIII':'XIII. Fahirisi ya Marejeo','report.sect.XIV':'XIV. Fahirisi ya Urekebishaji','report.sect.XV':'XV. Upataji wa Kiroho','report.sect.XVI':'XVI. Ishara',
+'map.markerColors':'RANGI ZA ALAMA'
 },
 // --------------- KOREAN ---------------
 ko:{
@@ -438,7 +469,9 @@ ko:{
 'freq.spiritual':'\uC601\uC801','freq.higherSelf':'\uB192\uC740 \uC790\uC544',
 'content.livingDoc':'\uC0B4\uC544\uC788\uB294 \uBB38\uC11C','content.theReport':'\uBCF4\uACE0\uC11C',
 'report.expandAll':'\uBAA8\uB450 \uD3BC\uCE58\uAE30','report.collapseAll':'\uBAA8\uB450 \uC811\uAE30',
-'report.aiVirus':'AI \uBC14\uC774\uB7EC\uC2A4 \uBCF4\uACE0\uC11C','map.markerColors':'\uB9C8\uCEE4 \uC0C9\uC0C1'
+'report.aiVirus':'AI \uBC14\uC774\uB7EC\uC2A4 \uBCF4\uACE0\uC11C',
+'report.sect.I':'I. \uBAA9\uC801 \uBC0F \uD504\uB808\uC784\uC6CC\uD06C','report.sect.II':'II. \uD1B5\uC81C \uAD6C\uC870','report.sect.III':'III. 51% \uBB38\uD134\uAC12','report.sect.IV':'IV. \uC9C0\uD558 / D.U.M.B.','report.sect.V':'V. \uAC10\uC2DC \uBC0F \uAE30\uC220','report.sect.VI':'VI. \uC0C8\uB85C\uC6B4 \uD328\uD134','report.sect.VII':'VII. \uC5D4\uD074\uB808\uC774\uBE0C','report.sect.VIII':'VIII. \uC21C\uD658 \uD328\uD134','report.sect.IX':'IX. \uB178\uC608 \uC2DC\uC2A4\uD15C','report.sect.X':'X. \uBD84\uC7C1','report.sect.XI':'XI. FOIA \uD328\uD134','report.sect.XII':'XII. \uC870\uC9C1 \uBC94\uC8C4','report.sect.XIII':'XIII. \uAD50\uCC28 \uCC38\uC870 \uC0C9\uC778','report.sect.XIV':'XIV. \uBCF4\uC815 \uC0C9\uC778','report.sect.XV':'XV. \uC601\uC801 \uD68C\uBCF5','report.sect.XVI':'XVI. \uC2E0\uD638',
+'map.markerColors':'\uB9C8\uCEE4 \uC0C9\uC0C1'
 },
 // --------------- JAPANESE ---------------
 ja:{
@@ -458,7 +491,9 @@ ja:{
 'freq.spiritual':'\u7CBE\u795E\u7684','freq.higherSelf':'\u9AD8\u6B21\u306E\u81EA\u5DF1',
 'content.livingDoc':'\u751F\u304D\u305F\u6587\u66F8','content.theReport':'\u30EC\u30DD\u30FC\u30C8',
 'report.expandAll':'\u3059\u3079\u3066\u5C55\u958B','report.collapseAll':'\u3059\u3079\u3066\u6298\u308A\u305F\u305F\u3080',
-'report.aiVirus':'AI\u30A6\u30A4\u30EB\u30B9\u30EC\u30DD\u30FC\u30C8','map.markerColors':'\u30DE\u30FC\u30AB\u30FC\u306E\u8272'
+'report.aiVirus':'AI\u30A6\u30A4\u30EB\u30B9\u30EC\u30DD\u30FC\u30C8',
+'report.sect.I':'I. \u76EE\u7684\u3068\u67A0\u7D44\u307F','report.sect.II':'II. \u7D71\u5236\u69CB\u9020','report.sect.III':'III. 51%\u306E\u95BE\u5024','report.sect.IV':'IV. \u5730\u4E0B / D.U.M.B.','report.sect.V':'V. \u76E3\u8996\u3068\u6280\u8853','report.sect.VI':'VI. \u300C\u65B0\u300D\u30D1\u30BF\u30FC\u30F3','report.sect.VII':'VII. \u98DB\u3073\u5730','report.sect.VIII':'VIII. \u5FAA\u74B0\u30D1\u30BF\u30FC\u30F3','report.sect.IX':'IX. \u5974\u96B7\u5236\u5EA6','report.sect.X':'X. \u7D1B\u4E89','report.sect.XI':'XI. FOIA\u30D1\u30BF\u30FC\u30F3','report.sect.XII':'XII. \u7D44\u7E54\u72AF\u7F6A','report.sect.XIII':'XIII. \u76F8\u4E92\u53C2\u7167\u7D22\u5F15','report.sect.XIV':'XIV. \u6821\u6B63\u7D22\u5F15','report.sect.XV':'XV. \u970A\u7684\u56DE\u5FA9','report.sect.XVI':'XVI. \u30B7\u30B0\u30CA\u30EB',
+'map.markerColors':'\u30DE\u30FC\u30AB\u30FC\u306E\u8272'
 },
 // --------------- GERMAN ---------------
 de:{
@@ -496,7 +531,9 @@ de:{
 'map.bySection':'NACH ABSCHNITT','map.byType':'NACH TYP',
 'map.allSections':'Alle Abschnitte','map.allTypes':'Alle Typen',
 'report.expandAll':'ALLE \u00D6FFNEN','report.collapseAll':'ALLE SCHLIESSEN',
-'report.aiVirus':'KI-VIRUS BERICHT','map.markerColors':'MARKER-FARBEN'
+'report.aiVirus':'KI-VIRUS BERICHT',
+'report.sect.I':'I. Zweck und Rahmen','report.sect.II':'II. Kontrollarchitektur','report.sect.III':'III. 51%-Schwelle','report.sect.IV':'IV. Untergrund / D.U.M.B.','report.sect.V':'V. \u00dcberwachung und Technik','report.sect.VI':'VI. Das Neue Muster','report.sect.VII':'VII. Enklaven','report.sect.VIII':'VIII. Zyklische Muster','report.sect.IX':'IX. Sklavereisysteme','report.sect.X':'X. Konflikte','report.sect.XI':'XI. FOIA-Muster','report.sect.XII':'XII. Organisierte Kriminalit\u00e4t','report.sect.XIII':'XIII. Querverweisindex','report.sect.XIV':'XIV. Kalibrierungsindex','report.sect.XV':'XV. Spirituelle R\u00fcckgewinnung','report.sect.XVI':'XVI. Das Signal',
+'map.markerColors':'MARKER-FARBEN'
 }
 };
 
