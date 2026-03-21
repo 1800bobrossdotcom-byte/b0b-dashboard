@@ -1,4 +1,4 @@
-﻿// ===================== b0b.dev INTERNATIONALIZATION ENGINE =====================
+// ===================== b0b.dev INTERNATIONALIZATION ENGINE =====================
 // Client-side translation for shell, drawer, content pages
 // Supports: en, es, fr, ar, zh, pt, ru, hi, sw, ko, ja, de
 // Architecture: data-i18n attributes + postMessage sync between shell and iframe
@@ -129,9 +129,12 @@ var EN={
 'map.researcherTools':'RESEARCHER TOOLS',
 'map.exportJson':'EXPORT JSON DATA','map.downloadBackup':'DOWNLOAD OFFLINE BACKUP (ZIP)',
 'map.sourceMethods':'SOURCE METHODOLOGY',
-// --- TRANSLATE BANNER ---
-'translate.banner':'This page is in English. For full content translation:',
-'translate.link':'Translate with Google'
+// --- REPORT SIDEBAR ---
+'report.expandAll':'EXPAND ALL',
+'report.collapseAll':'COLLAPSE ALL',
+'report.aiVirus':'AI VIRUS REPORT',
+// --- MAP LEGEND ---
+'map.markerColors':'MARKER COLORS'
 };
 
 // ===================== TRANSLATIONS =====================
@@ -181,9 +184,11 @@ es:{
 'map.searchConn':'BUSCAR CONEXIONES','map.proxSearch':'B\u00daSQUEDA DE PROXIMIDAD','map.find':'BUSCAR',
 'map.researcherTools':'HERRAMIENTAS DE INVESTIGADOR',
 'map.exportJson':'EXPORTAR DATOS JSON','map.downloadBackup':'DESCARGAR COPIA OFFLINE (ZIP)',
-'map.sourceMethods':'METODOLOG\u00cdA DE FUENTES',
-'translate.banner':'Esta p\u00e1gina est\u00e1 en ingl\u00e9s. Para traducci\u00f3n completa del contenido:',
-'translate.link':'Traducir con Google'
+'map.sourceMethods':'METODOLOGÍA DE FUENTES',
+'report.expandAll':'EXPANDIR TODO',
+'report.collapseAll':'CONTRAER TODO',
+'report.aiVirus':'INFORME VIRUS IA',
+'map.markerColors':'COLORES DE MARCADORES'
 },
 // --------------- FRENCH ---------------
 fr:{
@@ -230,9 +235,11 @@ fr:{
 'map.searchConn':'RECHERCHER CONNEXIONS','map.proxSearch':'RECHERCHE DE PROXIMIT\u00c9','map.find':'TROUVER',
 'map.researcherTools':'OUTILS DE CHERCHEUR',
 'map.exportJson':'EXPORTER DONN\u00c9ES JSON','map.downloadBackup':'T\u00c9L\u00c9CHARGER SAUVEGARDE OFFLINE (ZIP)',
-'map.sourceMethods':'M\u00c9THODOLOGIE DES SOURCES',
-'translate.banner':'Cette page est en anglais. Pour la traduction compl\u00e8te du contenu:',
-'translate.link':'Traduire avec Google'
+'map.sourceMethods':'MÉTHODOLOGIE DES SOURCES',
+'report.expandAll':'TOUT DÉVELOPPER',
+'report.collapseAll':'TOUT RÉDUIRE',
+'report.aiVirus':'RAPPORT VIRUS IA',
+'map.markerColors':'COULEURS DES MARQUEURS'
 },
 // --------------- ARABIC ---------------
 ar:{
@@ -267,8 +274,8 @@ ar:{
 'content.keepRunning':'\u0623\u0628\u0642\u0650 \u0647\u0630\u0627 \u0627\u0644\u0645\u0648\u0642\u0639 \u0639\u0627\u0645\u0644\u0627\u064B - \u0637\u0639\u0627\u0645 + \u0625\u0645\u062F\u0627\u062F\u0627\u062A',
 'map.bySection':'\u062D\u0633\u0628 \u0627\u0644\u0642\u0633\u0645','map.byType':'\u062D\u0633\u0628 \u0627\u0644\u0646\u0648\u0639',
 'map.allSections':'\u062C\u0645\u064A\u0639 \u0627\u0644\u0623\u0642\u0633\u0627\u0645','map.allTypes':'\u062C\u0645\u064A\u0639 \u0627\u0644\u0623\u0646\u0648\u0627\u0639',
-'translate.banner':'\u0647\u0630\u0647 \u0627\u0644\u0635\u0641\u062D\u0629 \u0628\u0627\u0644\u0625\u0646\u062C\u0644\u064A\u0632\u064A\u0629. \u0644\u0644\u062A\u0631\u062C\u0645\u0629 \u0627\u0644\u0643\u0627\u0645\u0644\u0629 \u0644\u0644\u0645\u062D\u062A\u0648\u0649:',
-'translate.link':'\u062A\u0631\u062C\u0645 \u0639\u0628\u0631 Google'
+'report.expandAll':'\u062A\u0648\u0633\u064A\u0639 \u0627\u0644\u0643\u0644','report.collapseAll':'\u0637\u064A \u0627\u0644\u0643\u0644',
+'report.aiVirus':'\u062A\u0642\u0631\u064A\u0631 \u0641\u064A\u0631\u0648\u0633 \u0627\u0644\u0630\u0643\u0627\u0621','map.markerColors':'\u0623\u0644\u0648\u0627\u0646 \u0627\u0644\u0639\u0644\u0627\u0645\u0627\u062A'
 },
 // --------------- CHINESE SIMPLIFIED ---------------
 zh:{
@@ -303,8 +310,8 @@ zh:{
 'content.keepRunning':'\u7EF4\u6301\u8FD0\u884C - \u98DF\u7269 + \u7269\u8D44',
 'map.bySection':'\u6309\u7AE0\u8282','map.byType':'\u6309\u7C7B\u578B',
 'map.allSections':'\u6240\u6709\u7AE0\u8282','map.allTypes':'\u6240\u6709\u7C7B\u578B',
-'translate.banner':'\u6B64\u9875\u9762\u4E3A\u82F1\u6587\u3002\u5982\u9700\u5B8C\u6574\u5185\u5BB9\u7FFB\u8BD1\uFF1A',
-'translate.link':'\u7528Google\u7FFB\u8BD1'
+'report.expandAll':'\u5C55\u5F00\u5168\u90E8','report.collapseAll':'\u6298\u53E0\u5168\u90E8',
+'report.aiVirus':'AI\u75C5\u6BD2\u62A5\u544A','map.markerColors':'\u6807\u8BB0\u989C\u8272'
 },
 // --------------- PORTUGUESE ---------------
 pt:{
@@ -339,8 +346,8 @@ pt:{
 'content.keepRunning':'MANTENHA ESTE SITE - COMIDA + SUPRIMENTOS',
 'map.bySection':'POR SE\u00c7\u00c3O','map.byType':'POR TIPO',
 'map.allSections':'Todas as Se\u00e7\u00f5es','map.allTypes':'Todos os Tipos',
-'translate.banner':'Esta p\u00e1gina est\u00e1 em ingl\u00eas. Para tradu\u00e7\u00e3o completa do conte\u00fado:',
-'translate.link':'Traduzir com Google'
+'report.expandAll':'EXPANDIR TUDO','report.collapseAll':'RECOLHER TUDO',
+'report.aiVirus':'RELAT\u00D3RIO V\u00CDRUS IA','map.markerColors':'CORES DOS MARCADORES'
 },
 // --------------- RUSSIAN ---------------
 ru:{
@@ -372,8 +379,8 @@ ru:{
 'tl.bond':'\u0421\u0432\u044F\u0437\u044C','tl.intuit':'\u0418\u043D\u0442\u0443\u0438\u0446','tl.spirit':'\u0414\u0443\u0445','tl.crown':'\u041A\u043E\u0440\u043E\u043D\u0430',
 'content.livingDoc':'\u0436\u0438\u0432\u043E\u0439 \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442','content.theReport':'\u041E\u0422\u0427\u0401\u0422',
 'content.keepRunning':'\u041F\u041E\u0414\u0414\u0415\u0420\u0416\u0418\u0422\u0415 \u042D\u0422\u041E\u0422 \u0421\u0410\u0419\u0422 - \u0415\u0414\u0410 + \u041F\u0420\u0418\u041F\u0410\u0421\u042B',
-'translate.banner':'\u042D\u0442\u0430 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u043D\u0430 \u0430\u043D\u0433\u043B\u0438\u0439\u0441\u043A\u043E\u043C. \u0414\u043B\u044F \u043F\u043E\u043B\u043D\u043E\u0433\u043E \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u0430:',
-'translate.link':'\u041F\u0435\u0440\u0435\u0432\u0435\u0441\u0442\u0438 \u0447\u0435\u0440\u0435\u0437 Google'
+'report.expandAll':'\u0420\u0410\u0417\u0412\u0415\u0420\u041D\u0423\u0422\u042C \u0412\u0421\u0401','report.collapseAll':'\u0421\u0412\u0415\u0420\u041D\u0423\u0422\u042C \u0412\u0421\u0401',
+'report.aiVirus':'\u041E\u0422\u0427\u0401\u0422 \u041E \u0412\u0418\u0420\u0423\u0421\u0415 \u0418\u0418','map.markerColors':'\u0426\u0412\u0415\u0422\u0410 \u041C\u0410\u0420\u041A\u0415\u0420\u041E\u0412'
 },
 // --------------- HINDI ---------------
 hi:{
@@ -392,8 +399,8 @@ hi:{
 'freq.connection':'\u091C\u0941\u0921\u093C\u093E\u0935','freq.intuition':'\u0905\u0902\u0924\u0930\u094D\u091C\u094D\u091E\u093E\u0928',
 'freq.spiritual':'\u0906\u0927\u094D\u092F\u093E\u0924\u094D\u092E\u093F\u0915','freq.higherSelf':'\u0909\u091A\u094D\u091A \u0938\u094D\u0935',
 'content.livingDoc':'\u091C\u0940\u0935\u093F\u0924 \u0926\u0938\u094D\u0924\u093E\u0935\u0947\u091C\u093C','content.theReport':'\u0930\u093F\u092A\u094B\u0930\u094D\u091F',
-'translate.banner':'\u092F\u0939 \u092A\u0947\u091C \u0905\u0902\u0917\u094D\u0930\u0947\u091C\u0940 \u092E\u0947\u0902 \u0939\u0948\u0964 \u092A\u0942\u0930\u094D\u0923 \u0938\u093E\u092E\u0917\u094D\u0930\u0940 \u0905\u0928\u0941\u0935\u093E\u0926 \u0915\u0947 \u0932\u093F\u090F:',
-'translate.link':'Google \u0938\u0947 \u0905\u0928\u0941\u0935\u093E\u0926 \u0915\u0930\u0947\u0902'
+'report.expandAll':'\u0938\u092D\u0940 \u0935\u093F\u0938\u094D\u0924\u093E\u0930','report.collapseAll':'\u0938\u092D\u0940 \u0938\u0902\u0915\u094D\u0937\u093F\u092A\u094D\u0924',
+'report.aiVirus':'AI \u0935\u093E\u092F\u0930\u0938 \u0930\u093F\u092A\u094B\u0930\u094D\u091F','map.markerColors':'\u092E\u093E\u0930\u094D\u0915\u0930 \u0930\u0902\u0917'
 },
 // --------------- SWAHILI ---------------
 sw:{
@@ -411,8 +418,8 @@ sw:{
 'freq.connection':'Uhusiano','freq.intuition':'Angalizi ya Ndani',
 'freq.spiritual':'Kiroho','freq.higherSelf':'Nafsi ya Juu',
 'content.livingDoc':'hati hai','content.theReport':'RIPOTI',
-'translate.banner':'Ukurasa huu uko kwa Kiingereza. Kwa tafsiri kamili ya maudhui:',
-'translate.link':'Tafsiri na Google'
+'report.expandAll':'PANUA YOTE','report.collapseAll':'FUNGA YOTE',
+'report.aiVirus':'RIPOTI YA VIRUSI YA AI','map.markerColors':'RANGI ZA ALAMA'
 },
 // --------------- KOREAN ---------------
 ko:{
@@ -430,8 +437,8 @@ ko:{
 'freq.connection':'\uC5F0\uACB0','freq.intuition':'\uC9C1\uAC10',
 'freq.spiritual':'\uC601\uC801','freq.higherSelf':'\uB192\uC740 \uC790\uC544',
 'content.livingDoc':'\uC0B4\uC544\uC788\uB294 \uBB38\uC11C','content.theReport':'\uBCF4\uACE0\uC11C',
-'translate.banner':'\uC774 \uD398\uC774\uC9C0\uB294 \uC601\uC5B4\uB85C \uB418\uC5B4 \uC788\uC2B5\uB2C8\uB2E4. \uC804\uCCB4 \uCF58\uD150\uCE20 \uBC88\uC5ED:',
-'translate.link':'Google\uB85C \uBC88\uC5ED'
+'report.expandAll':'\uBAA8\uB450 \uD3BC\uCE58\uAE30','report.collapseAll':'\uBAA8\uB450 \uC811\uAE30',
+'report.aiVirus':'AI \uBC14\uC774\uB7EC\uC2A4 \uBCF4\uACE0\uC11C','map.markerColors':'\uB9C8\uCEE4 \uC0C9\uC0C1'
 },
 // --------------- JAPANESE ---------------
 ja:{
@@ -450,8 +457,8 @@ ja:{
 'freq.connection':'\u3064\u306A\u304C\u308A','freq.intuition':'\u76F4\u611F',
 'freq.spiritual':'\u7CBE\u795E\u7684','freq.higherSelf':'\u9AD8\u6B21\u306E\u81EA\u5DF1',
 'content.livingDoc':'\u751F\u304D\u305F\u6587\u66F8','content.theReport':'\u30EC\u30DD\u30FC\u30C8',
-'translate.banner':'\u3053\u306E\u30DA\u30FC\u30B8\u306F\u82F1\u8A9E\u3067\u3059\u3002\u30B3\u30F3\u30C6\u30F3\u30C4\u306E\u5B8C\u5168\u306A\u7FFB\u8A33:',
-'translate.link':'Google\u3067\u7FFB\u8A33'
+'report.expandAll':'\u3059\u3079\u3066\u5C55\u958B','report.collapseAll':'\u3059\u3079\u3066\u6298\u308A\u305F\u305F\u3080',
+'report.aiVirus':'AI\u30A6\u30A4\u30EB\u30B9\u30EC\u30DD\u30FC\u30C8','map.markerColors':'\u30DE\u30FC\u30AB\u30FC\u306E\u8272'
 },
 // --------------- GERMAN ---------------
 de:{
@@ -488,8 +495,8 @@ de:{
 'content.cmTitle':'GEGENMASSNAHMEN','content.cmSubtitle':'DATENSCHUTZ-WERKZEUGE UND HEILENDE T\u00d6NE',
 'map.bySection':'NACH ABSCHNITT','map.byType':'NACH TYP',
 'map.allSections':'Alle Abschnitte','map.allTypes':'Alle Typen',
-'translate.banner':'Diese Seite ist auf Englisch. F\u00fcr vollst\u00e4ndige Inhalts\u00fcbersetzung:',
-'translate.link':'Mit Google \u00fcbersetzen'
+'report.expandAll':'ALLE \u00D6FFNEN','report.collapseAll':'ALLE SCHLIESSEN',
+'report.aiVirus':'KI-VIRUS BERICHT','map.markerColors':'MARKER-FARBEN'
 }
 };
 
@@ -534,21 +541,7 @@ function apply(){
   document.querySelectorAll('[data-i18n-title]').forEach(function(el){
     el.title=t(el.getAttribute('data-i18n-title'));
   });
-  // Update translate banner
-  var bn=document.getElementById('b0bTrBanner');
-  if(bn){
-    if(lang==='en'){bn.style.display='none'}
-    else{
-      bn.style.display='block';
-      var pageUrl=location.href;
-      // Use canonical b0b.dev URL for translate proxy
-      if(pageUrl.indexOf('/_page')!==-1){
-        pageUrl=location.origin+pageUrl.replace('/_page','');
-      }
-      var url='https://translate.google.com/translate?sl=en&tl='+lang+'&u='+encodeURIComponent(pageUrl);
-      bn.innerHTML='<span>'+t('translate.banner')+'</span> <a href="'+url+'" target="_blank" rel="noopener" style="color:#00ff41;text-decoration:underline">'+t('translate.link')+' \u2192</a>';
-    }
-  }
+  // Update translate banner removed - native i18n only
 }
 
 // Inject styles for language selector and translate banner
@@ -563,8 +556,6 @@ function injectCSS(){
     '.b0b-lo{display:block;width:100%;padding:6px 14px;background:transparent;border:none;border-bottom:1px solid #1a1a1a;color:#888;font-size:0.7rem;text-align:left;cursor:pointer;font-family:"Courier New",monospace}'+
     '.b0b-lo:hover{background:#111;color:#00ff41}'+
     '.b0b-lo.active{color:#00ff41}'+
-    '.b0b-tr{background:rgba(10,10,10,0.95);border-bottom:1px solid #333;color:#888;font-size:0.75rem;padding:8px 16px;text-align:center;font-family:"Courier New",monospace;letter-spacing:0.5px}'+
-    '.b0b-tr a{color:#00ff41;text-decoration:underline}'+
     // Last-updated indicator
     '.b0b-updated{position:fixed;bottom:40px;left:8px;font-family:"Courier New",monospace;font-size:0.55rem;color:#333;letter-spacing:0.5px;z-index:9997}'+
     '.b0b-updated span{color:#555}';
@@ -604,19 +595,6 @@ function createSelector(){
   });
 }
 
-// Create translate banner for content pages (inside iframe only)
-function createBanner(){
-  if(window.parent===window)return;
-  var bn=document.createElement('div');
-  bn.id='b0bTrBanner';
-  bn.className='b0b-tr';
-  bn.style.display='none';
-  if(document.body.firstChild){
-    document.body.insertBefore(bn,document.body.firstChild);
-  }else{
-    document.body.appendChild(bn);
-  }
-}
 
 // Listen for language changes from parent or child iframe
 window.addEventListener('message',function(e){
@@ -642,7 +620,6 @@ window.b0bI18n={
 function init(){
   injectCSS();
   createSelector();
-  createBanner();
   if(lang!=='en'){
     document.documentElement.dir=lang==='ar'?'rtl':'ltr';
   }

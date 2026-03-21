@@ -423,22 +423,22 @@
 <div class="header">
   <h1>b0b.dev - OSINT MAP</h1>
   <nav>
-    <a href="/download" style="border-color:#ff4444;color:#ff4444" title="Download offline backup ZIP">BACKUP</a>
-    <a href="/tones/shield" style="border-color:#ff4444;color:#ff4444">ARC SHIELD</a>
+    <a href="/download" style="border-color:#ff4444;color:#ff4444" title="Download offline backup ZIP" data-i18n="nav.backup">BACKUP</a>
+    <a href="/tones/shield" style="border-color:#ff4444;color:#ff4444" data-i18n="nav.shield">ARC SHIELD</a>
     <a href="https://dialectforge.com" target="_blank" rel="noopener noreferrer" style="border-color:#00ff41;color:#00ff41">DIALECTFORGE</a>
-    <a href="/">HOME</a>
-    <a href="/report">REPORT</a>
+    <a href="/" data-i18n="nav.home">HOME</a>
+    <a href="/report" data-i18n="nav.report">REPORT</a>
   </nav>
 </div>
 
 <div id="map"></div>
 
 <div class="search-box">
-  <input type="text" id="searchInput" placeholder="Search locations..." />
-  <button onclick="resetFilters()" style="background:#0a0a0a;color:#00ff41;border:1px solid #333;padding:4px 8px;font-family:Courier New,monospace;font-size:0.7rem;cursor:pointer;margin-left:4px" title="Reset all filters">RESET</button>
+  <input type="text" id="searchInput" placeholder="Search locations..." data-i18n-ph="action.search" />
+  <button onclick="resetFilters()" style="background:#0a0a0a;color:#00ff41;border:1px solid #333;padding:4px 8px;font-family:Courier New,monospace;font-size:0.7rem;cursor:pointer;margin-left:4px" title="Reset all filters" data-i18n="action.reset">RESET</button>
 </div>
 
-<div class="filter-toggle" id="filterToggle" onclick="toggleFilterPanel()">FILTERS</div>
+<div class="filter-toggle" id="filterToggle" onclick="toggleFilterPanel()" data-i18n="action.filters">FILTERS</div>
 
 <div class="panel-overlay" id="panelOverlay" onclick="closeFilterPanel()"></div>
 
@@ -447,13 +447,13 @@
 <div class="filter-panel" id="filterPanel">
   <span class="filter-close" onclick="closeFilterPanel()">✕</span>
   <div class="filter-header" onclick="toggleFilterBody()">
-    <h3>FILTERS</h3>
+    <h3 data-i18n="action.filters">FILTERS</h3>
     <span class="chevron" id="filterChevron">▾</span>
   </div>
   <div class="filter-body" id="filterBody">
   <!-- BY SECTION - collapsible, two-column -->
   <div class="filter-section-header" onclick="toggleFilterSection('secBody','secChev')">
-    <h3 style="margin-top:4px">BY SECTION</h3>
+    <h3 style="margin-top:4px" data-i18n="map.bySection">BY SECTION</h3>
     <span class="sec-chev" id="secChev">▾</span>
   </div>
   <div class="filter-section-body" id="secBody">
@@ -475,7 +475,7 @@
   </div>
   <!-- BY TYPE - collapsible, two-column -->
   <div class="filter-section-header" onclick="toggleFilterSection('typeBody','typeChev')">
-    <h3 style="margin-top:6px">BY TYPE</h3>
+    <h3 style="margin-top:6px" data-i18n="map.byType">BY TYPE</h3>
     <span class="sec-chev" id="typeChev">▾</span>
   </div>
   <div class="filter-section-body" id="typeBody">
@@ -504,7 +504,7 @@
   </div>
   <!-- MAP STYLE -->
   <div class="filter-section-header" onclick="toggleFilterSection('styleBody','styleChev')">
-    <h3 style="margin-top:6px">MAP STYLE</h3>
+    <h3 style="margin-top:6px" data-i18n="map.mapStyle">MAP STYLE</h3>
     <span class="sec-chev" id="styleChev">▾</span>
   </div>
   <div class="filter-section-body" id="styleBody">
@@ -517,7 +517,7 @@
   </div>
   <!-- DATA LAYERS + LIVE FEEDS -->
   <div class="filter-section-header" onclick="toggleFilterSection('dataBody','dataChev')">
-    <h3 style="margin-top:6px">DATA LAYERS & LIVE FEEDS</h3>
+    <h3 style="margin-top:6px" data-i18n="map.dataLayers">DATA LAYERS & LIVE FEEDS</h3>
     <span class="sec-chev" id="dataChev">▾</span>
   </div>
   <div class="filter-section-body" id="dataBody">
@@ -572,7 +572,7 @@
   </div>
   <!-- TOOLKIT RESOURCES -->
   <div class="filter-section-header" onclick="toggleFilterSection('toolkitBody','toolkitChev')">
-    <h3 style="margin-top:6px">🔧 TOOLKIT & RESOURCES</h3>
+    <h3 style="margin-top:6px" data-i18n="map.toolkit">🔧 TOOLKIT & RESOURCES</h3>
     <span class="sec-chev" id="toolkitChev">▾</span>
   </div>
   <div class="filter-section-body" id="toolkitBody">
@@ -621,7 +621,7 @@
   </div>
   <!-- RESEARCHER TOOLS -->
   <div class="filter-section-header" onclick="toggleFilterSection('researchBody','researchChev')">
-    <h3 style="margin-top:6px">📋 RESEARCHER TOOLS</h3>
+    <h3 style="margin-top:6px" data-i18n="map.researcherTools">📋 RESEARCHER TOOLS</h3>
     <span class="sec-chev" id="researchChev">▾</span>
   </div>
   <div class="filter-section-body" id="researchBody">
@@ -707,7 +707,7 @@
 
 <div class="legend">
   <div class="legend-header" onclick="document.getElementById('legendBody').classList.toggle('collapsed'); this.querySelector('.chevron').classList.toggle('collapsed');">
-    <h3>MARKER COLORS</h3>
+    <h3 data-i18n="map.markerColors">MARKER COLORS</h3>
     <span class="chevron" style="color:#555;font-size:0.7rem;transition:transform 0.2s;">▾</span>
   </div>
   <div class="legend-body" id="legendBody">

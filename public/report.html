@@ -2992,14 +2992,14 @@
   sidebar.innerHTML =
     '<div class="sidebar-header"><a href="/">b0b.dev</a></div>' +
     '<div class="sidebar-buttons">' +
-      '<button id="expandAll">EXPAND ALL</button>' +
-      '<button id="collapseAll">COLLAPSE ALL</button>' +
-      '<a href="/map">OSINT MAP</a>' +
-      '<a href="/tones/shield" style="border-color:#ff4444;color:#ff4444">ARC SHIELD</a>' +
+      '<button id="expandAll" data-i18n="report.expandAll">EXPAND ALL</button>' +
+      '<button id="collapseAll" data-i18n="report.collapseAll">COLLAPSE ALL</button>' +
+      '<a href="/map" data-i18n="nav.map">OSINT MAP</a>' +
+      '<a href="/tones/shield" style="border-color:#ff4444;color:#ff4444" data-i18n="nav.shield">ARC SHIELD</a>' +
       '<a href="https://dialectforge.com" target="_blank" rel="noopener noreferrer" style="border-color:#00ff41;color:#00ff41">DIALECTFORGE</a>' +
-      '<button id="openAttackAnalysis" style="border-color:#ff4444;color:#ff4444">AI VIRUS REPORT</button>' +
-      '<a href="/download" style="border-color:#ff4444;color:#ff4444">BACKUP</a>' +
-      '<a href="/logout">LOGOUT</a>' +
+      '<button id="openAttackAnalysis" style="border-color:#ff4444;color:#ff4444" data-i18n="report.aiVirus">AI VIRUS REPORT</button>' +
+      '<a href="/download" style="border-color:#ff4444;color:#ff4444" data-i18n="nav.backup">BACKUP</a>' +
+      '<a href="/logout" data-i18n="nav.logout">LOGOUT</a>' +
     '</div>' +
     '<div class="sidebar-nav" id="sidebarNav"></div>';
   document.body.insertBefore(sidebar, mainDiv);
