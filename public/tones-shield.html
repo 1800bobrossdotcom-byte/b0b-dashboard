@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover,maximum-scale=1">
+<title>b0b ARC SHIELD - Acoustic Resonance Countermeasure</title>
+<meta name="description" content="LRAD detection, acoustic phase cancellation, protective frequency shield - citizen defense tool">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ARC Shield">
+<link rel="manifest" href="/manifest-shield.json">
+<link rel="apple-touch-icon" href="/icon-shield.svg">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;padding:env(safe-area-inset-top) 8px env(safe-area-inset-bottom);user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;overflow-y:auto;overflow-x:hidden}
+
+.header{text-align:center;padding:12px 0 4px;width:100%;max-width:600px}
+.header h1{color:#ff4444;font-size:1rem;letter-spacing:3px;display:flex;align-items:center;justify-content:center;gap:8px}
+.header .sub{color:#555;font-size:0.55rem;margin-top:2px;letter-spacing:0.5px}
+.scripture{color:#daa520;font-size:0.55rem;text-align:center;margin:4px 0 8px;font-style:italic;line-height:1.4;max-width:600px;padding:0 12px}
+
+/* Status bar */
+.status-bar{width:100%;max-width:600px;display:flex;gap:4px;margin-bottom:6px}
+.pill{font-size:0.5rem;padding:2px 8px;border-radius:8px;border:1px solid #333;color:#555;flex:1;text-align:center}
+.pill.on{border-color:#00ff41;color:#00ff41}
+.pill.alert{border-color:#ff4444;color:#ff4444;animation:pulse-alert 0.5s ease infinite}
+@keyframes pulse-alert{0%,100%{opacity:1}50%{opacity:0.3}}
+
+/* Spectrogram */
+.spec-wrap{width:100%;max-width:600px;margin:4px 0}
+.spec-canvas{width:100%;height:120px;background:#060606;border:1px solid #1a1a1a;border-radius:4px;display:block}
+.spec-info{display:flex;justify-content:space-between;font-size:0.5rem;color:#444;padding:2px 4px}
+
+/* Detection panel */
+.detect-panel{width:100%;max-width:600px;background:#0d0d0d;border:1px solid #1a1a1a;border-radius:4px;padding:8px 10px;margin:4px 0}
+.detect-panel h2{font-size:0.7rem;color:#ff4444;margin-bottom:6px;letter-spacing:1px}
+.detect-row{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:0.65rem}
+.detect-freq{color:#00ccff;font-family:inherit;min-width:80px}
+.detect-db{color:#ffcc00;min-width:50px}
+.detect-type{color:#ff6666;flex:1}
+.detect-empty{color:#333;font-style:italic;font-size:0.6rem}
+
+/* Control sections */
+.section{width:100%;max-width:600px;margin:4px 0}
+.section-head{background:#111;border:1px solid #222;border-radius:4px 4px 0 0;padding:8px 12px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:0.7rem;color:#d4d4d4;letter-spacing:1px}
+.section-head .arrow{color:#555;transition:transform 0.2s}
+.section-head.open .arrow{transform:rotate(90deg)}
+.section-body{background:#0d0d0d;border:1px solid #1a1a1a;border-top:none;border-radius:0 0 4px 4px;padding:10px 12px;display:none}
+.section-body.open{display:block}
+
+/* Buttons */
+.btn-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin:6px 0}
+.btn-grid.three{grid-template-columns:repeat(3,1fr)}
+.shield-btn{padding:10px 8px;background:transparent;border:1px solid;font-family:inherit;font-size:0.65rem;cursor:pointer;border-radius:3px;text-align:center;transition:all 0.15s;line-height:1.3}
+.shield-btn:active{transform:scale(0.97)}
+.shield-btn .label{display:block;font-size:0.5rem;opacity:0.5;margin-top:2px}
+
+/* ARC (red) */
+.shield-btn.arc{border-color:#ff4444;color:#ff4444}
+.shield-btn.arc.active{background:#ff4444;color:#0a0a0a}
+
+/* Protect (gold) */
+.shield-btn.protect{border-color:#daa520;color:#daa520}
+.shield-btn.protect.active{background:#daa520;color:#0a0a0a}
+
+/* Counter (cyan) */
+.shield-btn.counter{border-color:#00ccff;color:#00ccff}
+.shield-btn.counter.active{background:#00ccff;color:#0a0a0a}
+
+/* Evidence (green) */
+.shield-btn.evidence{border-color:#00ff41;color:#00ff41}
+.shield-btn.evidence.active{background:#00ff41;color:#0a0a0a}
+
+/* Master controls */
+.master-row{display:flex;align-items:center;gap:8px;margin:8px 0;font-size:0.6rem}
+.master-row label{min-width:50px;color:#888}
+.master-row input[type=range]{flex:1;accent-color:#ff4444;height:24px}
+.master-row .val{min-width:30px;text-align:right;color:#ff4444}
+
+/* Big activate button */
+.activate-wrap{width:100%;max-width:600px;margin:6px 0}
+.activate-btn{width:100%;padding:14px;background:transparent;border:2px solid #ff4444;color:#ff4444;font-family:inherit;font-size:0.9rem;font-weight:bold;letter-spacing:3px;cursor:pointer;border-radius:4px;transition:all 0.2s}
+.activate-btn:active{transform:scale(0.98)}
+.activate-btn.armed{background:#ff4444;color:#0a0a0a;animation:pulse-armed 1.5s ease infinite}
+@keyframes pulse-armed{0%,100%{box-shadow:0 0 0 0 rgba(255,68,68,0.4)}50%{box-shadow:0 0 20px 4px rgba(255,68,68,0.15)}}
+
+/* Log */
+.log-panel{width:100%;max-width:600px;background:#060606;border:1px solid #1a1a1a;border-radius:4px;padding:6px 8px;margin:4px 0;max-height:120px;overflow-y:auto;font-size:0.5rem;color:#444;line-height:1.6}
+.log-panel .alert-entry{color:#ff4444}
+.log-panel .info-entry{color:#00ff41}
+.log-panel .arc-entry{color:#00ccff}
+
+/* Footer */
+.credit{margin:12px 0;color:#333;font-size:0.5rem;text-align:center}
+.credit a{color:#555;text-decoration:none}
+
+/* PWA install */
+.install-banner{display:none;background:#111;border:1px solid #ff4444;padding:10px;margin-bottom:8px;border-radius:4px;font-size:0.65rem;color:#aaa;text-align:center;line-height:1.5;width:100%;max-width:600px}
+.install-banner strong{color:#ff4444}
+.install-banner .dismiss{color:#555;cursor:pointer;font-size:0.55rem;margin-top:4px;display:block}
+
+@media(max-width:400px){
+  .btn-grid{grid-template-columns:repeat(2,1fr)}
+  .btn-grid.three{grid-template-columns:repeat(2,1fr)}
+  .spec-canvas{height:90px}
+}
+</style>
+</head>
+<body>
+
+<div class="install-banner" id="installBanner">
+  <strong>INSTALL ARC SHIELD TO HOME SCREEN</strong><br>
+  <span id="installInstructions"></span>
+  <span class="dismiss" onclick="document.getElementById('installBanner').style.display='none'">dismiss</span>
+</div>
+
+<div class="header">
+  <h1>ARC SHIELD</h1>
+  <div class="sub">ACOUSTIC RESONANCE COUNTERMEASURE</div>
+</div>
+
+<div class="scripture">"No weapon formed against thee shall prosper" - Isaiah 54:17</div>
+
+<div class="status-bar">
+  <div class="pill" id="pillMic">MIC OFF</div>
+  <div class="pill" id="pillArc">ARC OFF</div>
+  <div class="pill" id="pillShield">SHIELD OFF</div>
+  <div class="pill" id="pillRec">REC OFF</div>
+</div>
+
+<!-- Spectrogram -->
+<div class="spec-wrap">
+  <canvas class="spec-canvas" id="specCanvas"></canvas>
+  <div class="spec-info">
+    <span>0 Hz</span>
+    <span id="dominantFreq">DOMINANT: --- Hz</span>
+    <span id="peakDb">PEAK: --- dB</span>
+    <span id="specMax">24 kHz</span>
+  </div>
+</div>
+
+<!-- Detection panel -->
+<div class="detect-panel">
+  <h2>THREAT DETECTION</h2>
+  <div id="detectList"><div class="detect-empty">Activate microphone to begin scanning...</div></div>
+</div>
+
+<!-- Master activate -->
+<div class="activate-wrap">
+  <button class="activate-btn" id="activateBtn" onclick="toggleSystem()">ACTIVATE SHIELD</button>
+</div>
+
+<!-- ARC section -->
+<div class="section">
+  <div class="section-head open" onclick="toggleSection('arcBody',this)">
+    ARC - ACTIVE PHASE CANCELLATION <span class="arrow">&#9654;</span>
+  </div>
+  <div class="section-body open" id="arcBody">
+    <div class="btn-grid">
+      <button class="shield-btn arc" id="arcAutoBtn" onclick="toggleArcAuto()">
+        AUTO-CANCEL<span class="label">match + invert detected freq</span>
+      </button>
+      <button class="shield-btn arc" id="arcSweepBtn" onclick="toggleArcSweep()">
+        SWEEP JAM<span class="label">destructive interference sweep</span>
+      </button>
+      <button class="shield-btn arc" id="arcBroadBtn" onclick="toggleArcBroad()">
+        BROADBAND<span class="label">wide-spectrum cancellation</span>
+      </button>
+      <button class="shield-btn arc" id="arcPulseBtn" onclick="toggleArcPulse()">
+        PULSE COUNTER<span class="label">anti-phase pulse bursts</span>
+      </button>
+    </div>
+    <div class="master-row">
+      <label>ARC VOL</label>
+      <input type="range" min="0" max="100" value="60" id="arcVol" oninput="setArcVol(this.value)">
+      <span class="val" id="arcVolVal">60%</span>
+    </div>
+  </div>
+</div>
+
+<!-- Protective frequencies -->
+<div class="section">
+  <div class="section-head" onclick="toggleSection('protBody',this)">
+    PROTECTIVE FREQUENCIES <span class="arrow">&#9654;</span>
+  </div>
+  <div class="section-body" id="protBody">
+    <div class="btn-grid three">
+      <button class="shield-btn protect" data-pf="7.83" data-pn="Schumann" onclick="toggleProtFreq(this)">
+        7.83 Hz<span class="label">Earth resonance</span>
+      </button>
+      <button class="shield-btn protect" data-pf="136.1" data-pn="Cosmic Om" onclick="toggleProtFreq(this)">
+        136.1 Hz<span class="label">Cosmic Om</span>
+      </button>
+      <button class="shield-btn protect" data-pf="396" data-pn="Liberation" onclick="toggleProtFreq(this)">
+        396 Hz<span class="label">Liberation</span>
+      </button>
+      <button class="shield-btn protect" data-pf="528" data-pn="Love/DNA" onclick="toggleProtFreq(this)">
+        528 Hz<span class="label">Love / DNA repair</span>
+      </button>
+      <button class="shield-btn protect" data-pf="639" data-pn="Connection" onclick="toggleProtFreq(this)">
+        639 Hz<span class="label">Connection</span>
+      </button>
+      <button class="shield-btn protect" data-pf="741" data-pn="Intuition" onclick="toggleProtFreq(this)">
+        741 Hz<span class="label">Intuition</span>
+      </button>
+    </div>
+    <div class="btn-grid">
+      <button class="shield-btn protect" data-pf="brown" data-pn="Brown Noise" onclick="toggleProtFreq(this)">
+        BROWN NOISE<span class="label">grounding mask</span>
+      </button>
+      <button class="shield-btn protect" data-pf="pink" data-pn="Pink Noise" onclick="toggleProtFreq(this)">
+        PINK NOISE<span class="label">broadband mask</span>
+      </button>
+    </div>
+    <div class="master-row">
+      <label>SHIELD</label>
+      <input type="range" min="0" max="100" value="40" id="protVol" oninput="setProtVol(this.value)">
+      <span class="val" id="protVolVal">40%</span>
+    </div>
+  </div>
+</div>
+
+<!-- Counter frequencies -->
+<div class="section">
+  <div class="section-head" onclick="toggleSection('counterBody',this)">
+    COUNTER-FREQUENCY ENGINE <span class="arrow">&#9654;</span>
+  </div>
+  <div class="section-body" id="counterBody">
+    <div class="btn-grid">
+      <button class="shield-btn counter" id="counterHarmonicBtn" onclick="toggleCounterHarmonic()">
+        HARMONIC DISRUPT<span class="label">target LRAD harmonics</span>
+      </button>
+      <button class="shield-btn counter" id="counterDetuneBtn" onclick="toggleCounterDetune()">
+        DETUNE FIELD<span class="label">micro-detuned interference</span>
+      </button>
+      <button class="shield-btn counter" id="counterBinauralBtn" onclick="toggleCounterBinaural()">
+        BINAURAL SHIELD<span class="label">alpha entrainment counter</span>
+      </button>
+      <button class="shield-btn counter" id="counterSubBtn" onclick="toggleCounterSub()">
+        SUB-HARMONIC<span class="label">low freq grounding</span>
+      </button>
+    </div>
+    <div class="master-row">
+      <label>COUNTER</label>
+      <input type="range" min="0" max="100" value="50" id="counterVol" oninput="setCounterVol(this.value)">
+      <span class="val" id="counterVolVal">50%</span>
+    </div>
+  </div>
+</div>
+
+<!-- Evidence capture -->
+<div class="section">
+  <div class="section-head" onclick="toggleSection('evidBody',this)">
+    EVIDENCE CAPTURE <span class="arrow">&#9654;</span>
+  </div>
+  <div class="section-body" id="evidBody">
+    <div class="btn-grid">
+      <button class="shield-btn evidence" id="recBtn" onclick="toggleRecording()">
+        RECORD AUDIO<span class="label">captures mic + timestamps</span>
+      </button>
+      <button class="shield-btn evidence" id="snapBtn" onclick="captureSnapshot()">
+        SNAPSHOT<span class="label">freeze current spectrum data</span>
+      </button>
+      <button class="shield-btn evidence" id="exportBtn" onclick="exportEvidence()">
+        EXPORT LOG<span class="label">download event log + data</span>
+      </button>
+      <button class="shield-btn evidence" id="gpsBtn" onclick="captureGPS()">
+        LOG GPS<span class="label">record current location</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Event log -->
+<div class="log-panel" id="logPanel">
+  <div class="info-entry">[SYSTEM] ARC Shield loaded - ready</div>
+</div>
+
+<div class="credit"><a href="https://b0b.dev">b0b.dev</a> - NO WEAPON FORMED SHALL PROSPER</div>
+
+<script>
+/* ═══════════════════ AUDIO ENGINE ═══════════════════ */
+var ctx, masterGain, micStream, micSource, analyser;
+var systemActive = false;
+
+/* Detection state */
+var fftSize = 8192;
+var freqData, timeData;
+var detectedThreats = [];
+var LRAD_SIGNATURES = [
+  {min: 2000, max: 3500, name: 'LRAD PRIMARY', severity: 'HIGH'},
+  {min: 1000, max: 2000, name: 'LRAD LOW-BAND', severity: 'MED'},
+  {min: 3500, max: 6000, name: 'LRAD HARMONIC', severity: 'MED'},
+  {min: 14000, max: 20000, name: 'ULTRASONIC', severity: 'HIGH'},
+  {min: 100, max: 300, name: 'INFRASONIC WEAPON', severity: 'HIGH'}
+];
+var THREAT_DB_THRESHOLD = -35; /* dB above noise floor to trigger detection */
+var scanRAF = null;
+
+/* ARC state */
+var arcAutoActive = false, arcSweepActive = false, arcBroadActive = false, arcPulseActive = false;
+var arcGain = null, arcVol = 0.6;
+var arcNodes = {}; /* holds active ARC oscillators/nodes */
+
+/* Protection state */
+var protGain = null, protVol = 0.4;
+var protVoices = {};
+
+/* Counter state */
+var counterGain = null, counterVol = 0.5;
+var counterNodes = {};
+var counterHarmonicActive = false, counterDetuneActive = false;
+var counterBinauralActive = false, counterSubActive = false;
+
+/* Evidence state */
+var recorder = null, recordedChunks = [], recording = false;
+var eventLog = [];
+var snapshots = [];
+
+/* ═══════════════════ INIT ═══════════════════ */
+function initAudio() {
+  if (ctx) return;
+  ctx = new (window.AudioContext || window.webkitAudioContext)({sampleRate: 48000});
+  masterGain = ctx.createGain();
+  masterGain.gain.value = 0.8;
+  masterGain.connect(ctx.destination);
+
+  arcGain = ctx.createGain();
+  arcGain.gain.value = arcVol;
+  arcGain.connect(masterGain);
+
+  protGain = ctx.createGain();
+  protGain.gain.value = protVol;
+  protGain.connect(masterGain);
+
+  counterGain = ctx.createGain();
+  counterGain.gain.value = counterVol;
+  counterGain.connect(masterGain);
+}
+
+function ensureAudio() {
+  initAudio();
+  if (ctx.state === 'suspended') return ctx.resume();
+  return Promise.resolve();
+}
+
+/* ═══════════════════ SYSTEM TOGGLE ═══════════════════ */
+function toggleSystem() {
+  if (systemActive) {
+    deactivateSystem();
+  } else {
+    activateSystem();
+  }
+}
+
+function activateSystem() {
+  ensureAudio().then(function() {
+    return navigator.mediaDevices.getUserMedia({
+      audio: {echoCancellation: false, noiseSuppression: false, autoGainControl: false}
+    });
+  }).then(function(stream) {
+    micStream = stream;
+    micSource = ctx.createMediaStreamSource(stream);
+    analyser = ctx.createAnalyser();
+    analyser.fftSize = fftSize;
+    analyser.smoothingTimeConstant = 0.75;
+    analyser.minDecibels = -100;
+    analyser.maxDecibels = -10;
+    micSource.connect(analyser);
+
+    freqData = new Uint8Array(analyser.frequencyBinCount);
+    timeData = new Float32Array(analyser.fftSize);
+
+    systemActive = true;
+    var btn = document.getElementById('activateBtn');
+    btn.textContent = 'SHIELD ACTIVE';
+    btn.classList.add('armed');
+    updatePill('pillMic', 'MIC ON', true);
+    logEntry('info', 'System activated - mic listening at ' + ctx.sampleRate + ' Hz');
+    logEntry('info', 'FFT resolution: ' + (ctx.sampleRate / fftSize).toFixed(1) + ' Hz/bin');
+    startScanning();
+  }).catch(function(err) {
+    logEntry('alert', 'Mic access denied: ' + err.message);
+  });
+}
+
+function deactivateSystem() {
+  systemActive = false;
+  if (scanRAF) cancelAnimationFrame(scanRAF);
+  scanRAF = null;
+
+  /* Stop all active nodes */
+  stopAllArc();
+  stopAllProtection();
+  stopAllCounter();
+
+  /* Release mic */
+  if (micStream) {
+    micStream.getTracks().forEach(function(t) { t.stop(); });
+    micStream = null;
+  }
+  if (micSource) { try { micSource.disconnect(); } catch(e){} micSource = null; }
+  analyser = null;
+
+  var btn = document.getElementById('activateBtn');
+  btn.textContent = 'ACTIVATE SHIELD';
+  btn.classList.remove('armed');
+  updatePill('pillMic', 'MIC OFF', false);
+  updatePill('pillArc', 'ARC OFF', false);
+  updatePill('pillShield', 'SHIELD OFF', false);
+  document.getElementById('detectList').innerHTML = '<div class="detect-empty">System deactivated</div>';
+  logEntry('info', 'System deactivated');
+}
+
+/* ═══════════════════ SCANNING & DETECTION ═══════════════════ */
+function startScanning() {
+  if (!systemActive || !analyser) return;
+  scan();
+}
+
+function scan() {
+  if (!systemActive) return;
+  analyser.getByteFrequencyData(freqData);
+  analyser.getFloatTimeDomainData(timeData);
+
+  /* Find dominant frequency and peaks */
+  var binHz = ctx.sampleRate / fftSize;
+  var maxBinVal = 0, maxBinIdx = 0;
+  var peaks = [];
+
+  for (var i = 1; i < freqData.length; i++) {
+    if (freqData[i] > maxBinVal) { maxBinVal = freqData[i]; maxBinIdx = i; }
+    /* Peak detection: local max above threshold */
+    if (freqData[i] > 40 && freqData[i] > freqData[i-1] && (i+1 >= freqData.length || freqData[i] >= freqData[i+1])) {
+      var peakFreq = i * binHz;
+      var peakDb = (freqData[i] / 255) * 90 - 100; /* approximate dB */
+      peaks.push({freq: peakFreq, db: peakDb, bin: i, val: freqData[i]});
+    }
+  }
+
+  /* Sort peaks by amplitude */
+  peaks.sort(function(a,b) { return b.val - a.val; });
+  peaks = peaks.slice(0, 10);
+
+  var domFreq = maxBinIdx * binHz;
+  var peakDb = maxBinVal > 0 ? ((maxBinVal / 255) * 90 - 100).toFixed(1) : '---';
+  document.getElementById('dominantFreq').textContent = 'DOMINANT: ' + domFreq.toFixed(0) + ' Hz';
+  document.getElementById('peakDb').textContent = 'PEAK: ' + peakDb + ' dB';
+
+  /* Threat matching */
+  detectedThreats = [];
+  for (var p = 0; p < peaks.length; p++) {
+    for (var s = 0; s < LRAD_SIGNATURES.length; s++) {
+      var sig = LRAD_SIGNATURES[s];
+      if (peaks[p].freq >= sig.min && peaks[p].freq <= sig.max && peaks[p].db > THREAT_DB_THRESHOLD) {
+        detectedThreats.push({
+          freq: peaks[p].freq,
+          db: peaks[p].db,
+          name: sig.name,
+          severity: sig.severity,
+          bin: peaks[p].bin
+        });
+        break;
+      }
+    }
+  }
+
+  updateDetectPanel();
+  drawSpectrogram();
+
+  /* Auto-cancel tracking */
+  if (arcAutoActive && detectedThreats.length > 0) {
+    updateAutoCancel(detectedThreats[0].freq);
+  }
+
+  scanRAF = requestAnimationFrame(scan);
+}
+
+function updateDetectPanel() {
+  var el = document.getElementById('detectList');
+  if (detectedThreats.length === 0) {
+    el.innerHTML = '<div class="detect-empty">No acoustic threats detected - scanning...</div>';
+    updatePill('pillShield', 'CLEAR', true);
+    return;
+  }
+
+  var html = '';
+  for (var i = 0; i < Math.min(5, detectedThreats.length); i++) {
+    var t = detectedThreats[i];
+    html += '<div class="detect-row">' +
+      '<span class="detect-freq">' + t.freq.toFixed(1) + ' Hz</span>' +
+      '<span class="detect-db">' + t.db.toFixed(1) + ' dB</span>' +
+      '<span class="detect-type">' + t.name + ' [' + t.severity + ']</span>' +
+      '</div>';
+  }
+  el.innerHTML = html;
+  updatePill('pillShield', 'THREAT', false);
+  document.getElementById('pillShield').classList.add('alert');
+  document.getElementById('pillShield').classList.remove('on');
+
+  /* Log high-severity detections */
+  for (var i = 0; i < detectedThreats.length; i++) {
+    if (detectedThreats[i].severity === 'HIGH' && detectedThreats[i].db > -20) {
+      logEntry('alert', 'HIGH THREAT: ' + detectedThreats[i].name + ' at ' +
+        detectedThreats[i].freq.toFixed(0) + ' Hz (' + detectedThreats[i].db.toFixed(1) + ' dB)');
+    }
+  }
+}
+
+/* ═══════════════════ SPECTROGRAM ═══════════════════ */
+var specHistory = [];
+var SPEC_HISTORY_LEN = 200;
+
+function drawSpectrogram() {
+  var canvas = document.getElementById('specCanvas');
+  var cw = canvas.parentElement.clientWidth;
+  if (canvas.width !== cw || canvas.height !== parseInt(getComputedStyle(canvas).height)) {
+    canvas.width = cw;
+    canvas.height = parseInt(getComputedStyle(canvas).height);
+  }
+  var w = canvas.width, h = canvas.height;
+  var c = canvas.getContext('2d');
+
+  /* Add current frame to history */
+  var col = new Uint8Array(freqData.length);
+  col.set(freqData);
+  specHistory.push(col);
+  if (specHistory.length > SPEC_HISTORY_LEN) specHistory.shift();
+
+  /* Draw waterfall */
+  c.fillStyle = '#060606';
+  c.fillRect(0, 0, w, h);
+
+  var colW = w / SPEC_HISTORY_LEN;
+  var binCount = Math.min(freqData.length, Math.floor(freqData.length * 0.5)); /* show up to Nyquist/2 for clarity */
+
+  for (var x = 0; x < specHistory.length; x++) {
+    var frame = specHistory[x];
+    for (var y = 0; y < binCount; y++) {
+      var val = frame[y];
+      if (val < 10) continue;
+      var r, g, b;
+      if (val < 80) { r = 0; g = val; b = val * 2; }
+      else if (val < 160) { r = (val - 80) * 2; g = val; b = 255 - val; }
+      else { r = 255; g = 255 - (val - 160); b = (val - 160); }
+      c.fillStyle = 'rgb(' + r + ',' + g + ',' + b + ')';
+      var py = h - (y / binCount) * h;
+      c.fillRect(x * colW, py, colW + 1, Math.max(1, h / binCount));
+    }
+  }
+
+  /* Draw threat markers */
+  var binHz = ctx.sampleRate / fftSize;
+  for (var t = 0; t < detectedThreats.length; t++) {
+    var threat = detectedThreats[t];
+    var yPos = h - (threat.bin / binCount) * h;
+    if (yPos < 0 || yPos > h) continue;
+    c.strokeStyle = '#ff4444';
+    c.lineWidth = 1;
+    c.setLineDash([3, 3]);
+    c.beginPath();
+    c.moveTo(0, yPos);
+    c.lineTo(w, yPos);
+    c.stroke();
+    c.setLineDash([]);
+    c.fillStyle = '#ff4444';
+    c.font = '9px monospace';
+    c.fillText(threat.freq.toFixed(0) + ' Hz', 4, yPos - 2);
+  }
+}
+
+/* ═══════════════════ ARC - ACTIVE PHASE CANCELLATION ═══════════════════ */
+function toggleArcAuto() {
+  arcAutoActive = !arcAutoActive;
+  var btn = document.getElementById('arcAutoBtn');
+  btn.classList.toggle('active', arcAutoActive);
+  if (!arcAutoActive && arcNodes.autoOsc) {
+    cleanNode('autoOsc');
+    cleanNode('autoGain');
+  }
+  updateArcPill();
+  logEntry('arc', 'Auto-cancel ' + (arcAutoActive ? 'ARMED' : 'OFF'));
+}
+
+function updateAutoCancel(targetFreq) {
+  if (!ctx || !arcAutoActive) return;
+  ensureAudio();
+
+  if (!arcNodes.autoOsc) {
+    var osc = ctx.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.value = targetFreq;
+    var g = ctx.createGain();
+    g.gain.value = 0;
+    g.gain.linearRampToValueAtTime(0.5, ctx.currentTime + 0.05);
+    osc.connect(g);
+    g.connect(arcGain);
+    osc.start();
+    arcNodes.autoOsc = osc;
+    arcNodes.autoGain = g;
+  } else {
+    /* Track the detected frequency with slight smoothing */
+    arcNodes.autoOsc.frequency.setTargetAtTime(targetFreq, ctx.currentTime, 0.02);
+  }
+
+  /* Phase inversion: shift by 180 degrees using delay = 1/(2*freq) */
+  if (!arcNodes.autoDelay) {
+    var delay = ctx.createDelay(0.1);
+    delay.delayTime.value = 1 / (2 * targetFreq);
+    arcNodes.autoOsc.disconnect();
+    arcNodes.autoOsc.connect(delay);
+    delay.connect(arcNodes.autoGain);
+    arcNodes.autoDelay = delay;
+  } else {
+    arcNodes.autoDelay.delayTime.setTargetAtTime(1 / (2 * targetFreq), ctx.currentTime, 0.01);
+  }
+}
+
+function toggleArcSweep() {
+  arcSweepActive = !arcSweepActive;
+  document.getElementById('arcSweepBtn').classList.toggle('active', arcSweepActive);
+  if (arcSweepActive) {
+    ensureAudio();
+    /* Create sweeping oscillator across LRAD band */
+    var osc = ctx.createOscillator();
+    osc.type = 'sawtooth';
+    osc.frequency.value = 2000;
+    /* Sweep 1.5kHz - 4kHz continuously */
+    var now = ctx.currentTime;
+    function scheduleSweep(t) {
+      osc.frequency.setValueAtTime(1500, t);
+      osc.frequency.linearRampToValueAtTime(4000, t + 0.8);
+      osc.frequency.linearRampToValueAtTime(1500, t + 1.6);
+    }
+    for (var s = 0; s < 60; s++) scheduleSweep(now + s * 1.6); /* schedule 60 cycles */
+
+    var g = ctx.createGain();
+    g.gain.value = 0.15;
+    osc.connect(g);
+    g.connect(arcGain);
+    osc.start();
+    arcNodes.sweepOsc = osc;
+    arcNodes.sweepGain = g;
+    logEntry('arc', 'Sweep jam ACTIVE (1.5-4 kHz)');
+  } else {
+    cleanNode('sweepOsc');
+    cleanNode('sweepGain');
+    logEntry('arc', 'Sweep jam OFF');
+  }
+  updateArcPill();
+}
+
+function toggleArcBroad() {
+  arcBroadActive = !arcBroadActive;
+  document.getElementById('arcBroadBtn').classList.toggle('active', arcBroadActive);
+  if (arcBroadActive) {
+    ensureAudio();
+    /* White noise through bandpass at LRAD primary range */
+    var bufSize = ctx.sampleRate * 2;
+    var buf = ctx.createBuffer(1, bufSize, ctx.sampleRate);
+    var data = buf.getChannelData(0);
+    for (var i = 0; i < bufSize; i++) data[i] = Math.random() * 2 - 1;
+    var ns = ctx.createBufferSource();
+    ns.buffer = buf;
+    ns.loop = true;
+    var bp = ctx.createBiquadFilter();
+    bp.type = 'bandpass';
+    bp.frequency.value = 2500;
+    bp.Q.value = 0.8;
+    var g = ctx.createGain();
+    g.gain.value = 0.2;
+    ns.connect(bp);
+    bp.connect(g);
+    g.connect(arcGain);
+    ns.start();
+    arcNodes.broadNoise = ns;
+    arcNodes.broadFilter = bp;
+    arcNodes.broadGain = g;
+    logEntry('arc', 'Broadband cancellation ACTIVE');
+  } else {
+    cleanNode('broadNoise');
+    cleanNode('broadFilter');
+    cleanNode('broadGain');
+    logEntry('arc', 'Broadband cancellation OFF');
+  }
+  updateArcPill();
+}
+
+function toggleArcPulse() {
+  arcPulseActive = !arcPulseActive;
+  document.getElementById('arcPulseBtn').classList.toggle('active', arcPulseActive);
+  if (arcPulseActive) {
+    ensureAudio();
+    /* Pulsed counter-tone at 2.5kHz with amplitude modulation */
+    var osc = ctx.createOscillator();
+    osc.type = 'square';
+    osc.frequency.value = 2500;
+    var ampMod = ctx.createOscillator();
+    ampMod.type = 'square';
+    ampMod.frequency.value = 8; /* 8 Hz pulse rate */
+    var modGain = ctx.createGain();
+    modGain.gain.value = 0.15;
+    var outGain = ctx.createGain();
+    outGain.gain.value = 0;
+    ampMod.connect(modGain);
+    modGain.connect(outGain.gain);
+    osc.connect(outGain);
+    outGain.connect(arcGain);
+    osc.start();
+    ampMod.start();
+    arcNodes.pulseOsc = osc;
+    arcNodes.pulseMod = ampMod;
+    arcNodes.pulseModGain = modGain;
+    arcNodes.pulseOutGain = outGain;
+    logEntry('arc', 'Pulse counter ACTIVE (2.5 kHz @ 8 Hz)');
+  } else {
+    cleanNode('pulseOsc');
+    cleanNode('pulseMod');
+    cleanNode('pulseModGain');
+    cleanNode('pulseOutGain');
+    logEntry('arc', 'Pulse counter OFF');
+  }
+  updateArcPill();
+}
+
+function stopAllArc() {
+  arcAutoActive = false; arcSweepActive = false; arcBroadActive = false; arcPulseActive = false;
+  Object.keys(arcNodes).forEach(function(k) { cleanNode(k); });
+  arcNodes = {};
+  document.querySelectorAll('.shield-btn.arc').forEach(function(b) { b.classList.remove('active'); });
+  updateArcPill();
+}
+
+function setArcVol(val) {
+  arcVol = val / 100;
+  if (arcGain) arcGain.gain.linearRampToValueAtTime(arcVol, ctx.currentTime + 0.05);
+  document.getElementById('arcVolVal').textContent = val + '%';
+}
+
+function updateArcPill() {
+  var any = arcAutoActive || arcSweepActive || arcBroadActive || arcPulseActive;
+  updatePill('pillArc', any ? 'ARC ON' : 'ARC OFF', any);
+}
+
+/* ═══════════════════ PROTECTIVE FREQUENCIES ═══════════════════ */
+function toggleProtFreq(btn) {
+  var freqKey = btn.dataset.pf;
+  var name = btn.dataset.pn;
+
+  if (protVoices[freqKey]) {
+    /* Stop this voice */
+    var v = protVoices[freqKey];
+    if (v.gain) {
+      v.gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.1);
+      setTimeout(function() {
+        if (v.nodes) v.nodes.forEach(function(n) { try { n.stop(); n.disconnect(); } catch(e){} });
+        if (v.gain) try { v.gain.disconnect(); } catch(e){}
+      }, 150);
+    }
+    delete protVoices[freqKey];
+    btn.classList.remove('active');
+    logEntry('info', name + ' OFF');
+  } else {
+    ensureAudio();
+    var g = ctx.createGain();
+    g.gain.setValueAtTime(0, ctx.currentTime);
+    g.gain.linearRampToValueAtTime(0.3, ctx.currentTime + 0.5);
+    g.connect(protGain);
+    var nodes = [];
+
+    if (freqKey === 'pink' || freqKey === 'brown') {
+      var bufSize = ctx.sampleRate * 2;
+      var buf = ctx.createBuffer(1, bufSize, ctx.sampleRate);
+      var data = buf.getChannelData(0);
+      if (freqKey === 'pink') {
+        var b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0;
+        for (var i = 0; i < bufSize; i++) {
+          var white = Math.random() * 2 - 1;
+          b0 = 0.99886*b0 + white*0.0555179;
+          b1 = 0.99332*b1 + white*0.0750759;
+          b2 = 0.96900*b2 + white*0.1538520;
+          b3 = 0.86650*b3 + white*0.3104856;
+          b4 = 0.55000*b4 + white*0.5329522;
+          b5 = -0.7616*b5 - white*0.0168980;
+          data[i] = (b0+b1+b2+b3+b4+b5+b6+white*0.5362) * 0.11;
+          b6 = white * 0.115926;
+        }
+      } else {
+        var last = 0;
+        for (var i = 0; i < bufSize; i++) {
+          var white = Math.random() * 2 - 1;
+          last = (last + (0.02 * white)) / 1.02;
+          data[i] = last * 3.5;
+        }
+      }
+      var ns = ctx.createBufferSource();
+      ns.buffer = buf;
+      ns.loop = true;
+      ns.connect(g);
+      ns.start();
+      nodes.push(ns);
+    } else {
+      var freq = parseFloat(freqKey);
+      if (freq < 20) {
+        /* Binaural for sub-20 Hz (e.g. Schumann 7.83) */
+        var baseFreq = 200;
+        var merger = ctx.createChannelMerger(2);
+        var oscL = ctx.createOscillator(); oscL.type = 'sine'; oscL.frequency.value = baseFreq;
+        var oscR = ctx.createOscillator(); oscR.type = 'sine'; oscR.frequency.value = baseFreq + freq;
+        oscL.connect(merger, 0, 0);
+        oscR.connect(merger, 0, 1);
+        merger.connect(g);
+        oscL.start(); oscR.start();
+        nodes.push(oscL, oscR);
+      } else {
+        /* Direct tone with harmonics */
+        var osc = ctx.createOscillator(); osc.type = 'sine'; osc.frequency.value = freq;
+        osc.connect(g); osc.start();
+        nodes.push(osc);
+        /* Add soft harmonic */
+        var h2 = ctx.createOscillator(); h2.type = 'sine'; h2.frequency.value = freq * 2;
+        var hg = ctx.createGain(); hg.gain.value = 0.15;
+        h2.connect(hg); hg.connect(g); h2.start();
+        nodes.push(h2);
+      }
+    }
+
+    protVoices[freqKey] = {gain: g, nodes: nodes};
+    btn.classList.add('active');
+    logEntry('info', name + ' ON (' + freqKey + (freqKey === 'pink' || freqKey === 'brown' ? '' : ' Hz') + ')');
+  }
+}
+
+function stopAllProtection() {
+  Object.keys(protVoices).forEach(function(k) {
+    var v = protVoices[k];
+    if (v.nodes) v.nodes.forEach(function(n) { try { n.stop(); n.disconnect(); } catch(e){} });
+    if (v.gain) try { v.gain.disconnect(); } catch(e){}
+  });
+  protVoices = {};
+  document.querySelectorAll('.shield-btn.protect').forEach(function(b) { b.classList.remove('active'); });
+}
+
+function setProtVol(val) {
+  protVol = val / 100;
+  if (protGain) protGain.gain.linearRampToValueAtTime(protVol, ctx.currentTime + 0.05);
+  document.getElementById('protVolVal').textContent = val + '%';
+}
+
+/* ═══════════════════ COUNTER-FREQUENCY ENGINE ═══════════════════ */
+function toggleCounterHarmonic() {
+  counterHarmonicActive = !counterHarmonicActive;
+  document.getElementById('counterHarmonicBtn').classList.toggle('active', counterHarmonicActive);
+  if (counterHarmonicActive) {
+    ensureAudio();
+    /* Generate counter-harmonics at LRAD frequency bands to create destructive patterns */
+    var freqs = [2500, 5000, 7500, 10000]; /* LRAD harmonics (fundamental + 3 harmonics) */
+    var oscs = [];
+    var g = ctx.createGain();
+    g.gain.value = 0.08;
+    g.connect(counterGain);
+    for (var i = 0; i < freqs.length; i++) {
+      var osc = ctx.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.value = freqs[i];
+      /* Slight random detune for interference pattern */
+      osc.detune.value = (Math.random() * 10 - 5);
+      osc.connect(g);
+      osc.start();
+      oscs.push(osc);
+    }
+    counterNodes.harmonicOscs = oscs;
+    counterNodes.harmonicGain = g;
+    logEntry('arc', 'Harmonic disrupt ON (2.5/5/7.5/10 kHz)');
+  } else {
+    if (counterNodes.harmonicOscs) {
+      counterNodes.harmonicOscs.forEach(function(o) { try { o.stop(); o.disconnect(); } catch(e){} });
+      delete counterNodes.harmonicOscs;
+    }
+    cleanNode('harmonicGain', counterNodes);
+    logEntry('arc', 'Harmonic disrupt OFF');
+  }
+}
+
+function toggleCounterDetune() {
+  counterDetuneActive = !counterDetuneActive;
+  document.getElementById('counterDetuneBtn').classList.toggle('active', counterDetuneActive);
+  if (counterDetuneActive) {
+    ensureAudio();
+    /* Cluster of slightly detuned tones around 2.5kHz to create beating/interference */
+    var center = 2500;
+    var spreads = [-12, -7, -3, 0, 3, 7, 12]; /* cents offset */
+    var oscs = [];
+    var g = ctx.createGain();
+    g.gain.value = 0.05;
+    g.connect(counterGain);
+    for (var i = 0; i < spreads.length; i++) {
+      var osc = ctx.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.value = center;
+      osc.detune.value = spreads[i];
+      osc.connect(g);
+      osc.start();
+      oscs.push(osc);
+    }
+    counterNodes.detuneOscs = oscs;
+    counterNodes.detuneGain = g;
+    logEntry('arc', 'Detune field ON (7-voice cluster)');
+  } else {
+    if (counterNodes.detuneOscs) {
+      counterNodes.detuneOscs.forEach(function(o) { try { o.stop(); o.disconnect(); } catch(e){} });
+      delete counterNodes.detuneOscs;
+    }
+    cleanNode('detuneGain', counterNodes);
+    logEntry('arc', 'Detune field OFF');
+  }
+}
+
+function toggleCounterBinaural() {
+  counterBinauralActive = !counterBinauralActive;
+  document.getElementById('counterBinauralBtn').classList.toggle('active', counterBinauralActive);
+  if (counterBinauralActive) {
+    ensureAudio();
+    /* Alpha entrainment (10 Hz binaural) to counter LRAD disorientation */
+    var merger = ctx.createChannelMerger(2);
+    var oscL = ctx.createOscillator(); oscL.type = 'sine'; oscL.frequency.value = 200;
+    var oscR = ctx.createOscillator(); oscR.type = 'sine'; oscR.frequency.value = 210; /* 10 Hz alpha */
+    var g = ctx.createGain(); g.gain.value = 0.12;
+    oscL.connect(merger, 0, 0);
+    oscR.connect(merger, 0, 1);
+    merger.connect(g);
+    g.connect(counterGain);
+    oscL.start(); oscR.start();
+    counterNodes.binL = oscL;
+    counterNodes.binR = oscR;
+    counterNodes.binMerger = merger;
+    counterNodes.binGain = g;
+    logEntry('arc', 'Binaural shield ON (10 Hz alpha entrainment)');
+  } else {
+    cleanNode('binL', counterNodes);
+    cleanNode('binR', counterNodes);
+    cleanNode('binMerger', counterNodes);
+    cleanNode('binGain', counterNodes);
+    logEntry('arc', 'Binaural shield OFF');
+  }
+}
+
+function toggleCounterSub() {
+  counterSubActive = !counterSubActive;
+  document.getElementById('counterSubBtn').classList.toggle('active', counterSubActive);
+  if (counterSubActive) {
+    ensureAudio();
+    /* Deep sub-harmonic grounding tone with Schumann modulation */
+    var osc = ctx.createOscillator(); osc.type = 'sine'; osc.frequency.value = 40;
+    var sub = ctx.createOscillator(); sub.type = 'sine'; sub.frequency.value = 80;
+    var lfo = ctx.createOscillator(); lfo.type = 'sine'; lfo.frequency.value = 7.83; /* Schumann */
+    var lfoG = ctx.createGain(); lfoG.gain.value = 3;
+    lfo.connect(lfoG); lfoG.connect(osc.detune); lfoG.connect(sub.detune);
+    var g = ctx.createGain(); g.gain.value = 0.15;
+    var sg = ctx.createGain(); sg.gain.value = 0.08;
+    osc.connect(g); sub.connect(sg); g.connect(counterGain); sg.connect(counterGain);
+    osc.start(); sub.start(); lfo.start();
+    counterNodes.subOsc = osc;
+    counterNodes.subSub = sub;
+    counterNodes.subLfo = lfo;
+    counterNodes.subLfoG = lfoG;
+    counterNodes.subGain = g;
+    counterNodes.subSubGain = sg;
+    logEntry('arc', 'Sub-harmonic grounding ON (40/80 Hz + Schumann)');
+  } else {
+    ['subOsc','subSub','subLfo','subLfoG','subGain','subSubGain'].forEach(function(k) {
+      cleanNode(k, counterNodes);
+    });
+    logEntry('arc', 'Sub-harmonic grounding OFF');
+  }
+}
+
+function stopAllCounter() {
+  counterHarmonicActive = false; counterDetuneActive = false;
+  counterBinauralActive = false; counterSubActive = false;
+  if (counterNodes.harmonicOscs) {
+    counterNodes.harmonicOscs.forEach(function(o) { try { o.stop(); o.disconnect(); } catch(e){} });
+  }
+  if (counterNodes.detuneOscs) {
+    counterNodes.detuneOscs.forEach(function(o) { try { o.stop(); o.disconnect(); } catch(e){} });
+  }
+  Object.keys(counterNodes).forEach(function(k) {
+    if (k !== 'harmonicOscs' && k !== 'detuneOscs') cleanNode(k, counterNodes);
+  });
+  counterNodes = {};
+  document.querySelectorAll('.shield-btn.counter').forEach(function(b) { b.classList.remove('active'); });
+}
+
+function setCounterVol(val) {
+  counterVol = val / 100;
+  if (counterGain) counterGain.gain.linearRampToValueAtTime(counterVol, ctx.currentTime + 0.05);
+  document.getElementById('counterVolVal').textContent = val + '%';
+}
+
+/* ═══════════════════ EVIDENCE CAPTURE ═══════════════════ */
+function toggleRecording() {
+  if (recording) {
+    stopRecording();
+  } else {
+    startRecording();
+  }
+}
+
+function startRecording() {
+  if (!systemActive || !micStream) {
+    logEntry('alert', 'Activate shield first to record');
+    return;
+  }
+  recordedChunks = [];
+  var options = {mimeType: 'audio/webm;codecs=opus'};
+  if (!MediaRecorder.isTypeSupported(options.mimeType)) {
+    options = {mimeType: 'audio/webm'};
+    if (!MediaRecorder.isTypeSupported(options.mimeType)) {
+      options = {};
+    }
+  }
+  recorder = new MediaRecorder(micStream, options);
+  recorder.ondataavailable = function(e) {
+    if (e.data.size > 0) recordedChunks.push(e.data);
+  };
+  recorder.onstop = function() {
+    var blob = new Blob(recordedChunks, {type: recorder.mimeType || 'audio/webm'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    var ts = new Date().toISOString().replace(/[:.]/g, '-');
+    a.href = url;
+    a.download = 'arc-evidence-' + ts + '.webm';
+    a.click();
+    URL.revokeObjectURL(url);
+    logEntry('info', 'Evidence audio saved: arc-evidence-' + ts + '.webm');
+  };
+  recorder.start(1000); /* chunk every second */
+  recording = true;
+  document.getElementById('recBtn').classList.add('active');
+  document.getElementById('recBtn').querySelector('.label').textContent = 'RECORDING...';
+  updatePill('pillRec', 'REC ON', false);
+  document.getElementById('pillRec').classList.add('alert');
+  logEntry('alert', 'RECORDING STARTED at ' + new Date().toISOString());
+}
+
+function stopRecording() {
+  if (recorder && recorder.state !== 'inactive') {
+    recorder.stop();
+  }
+  recording = false;
+  document.getElementById('recBtn').classList.remove('active');
+  document.getElementById('recBtn').querySelector('.label').textContent = 'captures mic + timestamps';
+  updatePill('pillRec', 'REC OFF', false);
+  document.getElementById('pillRec').classList.remove('alert');
+  logEntry('info', 'Recording stopped');
+}
+
+function captureSnapshot() {
+  if (!systemActive || !freqData) {
+    logEntry('alert', 'Activate shield first');
+    return;
+  }
+  var snap = {
+    timestamp: new Date().toISOString(),
+    threats: detectedThreats.slice(),
+    dominantFreq: document.getElementById('dominantFreq').textContent,
+    peakDb: document.getElementById('peakDb').textContent,
+    spectrumSample: Array.from(freqData.slice(0, 256))
+  };
+  snapshots.push(snap);
+  logEntry('info', 'Spectrum snapshot #' + snapshots.length + ' captured');
+  document.getElementById('snapBtn').classList.add('active');
+  setTimeout(function() { document.getElementById('snapBtn').classList.remove('active'); }, 300);
+}
+
+function captureGPS() {
+  if (!navigator.geolocation) {
+    logEntry('alert', 'Geolocation not available');
+    return;
+  }
+  navigator.geolocation.getCurrentPosition(function(pos) {
+    var entry = {
+      timestamp: new Date().toISOString(),
+      lat: pos.coords.latitude,
+      lon: pos.coords.longitude,
+      accuracy: pos.coords.accuracy
+    };
+    eventLog.push({type: 'gps', data: entry});
+    logEntry('info', 'GPS: ' + entry.lat.toFixed(6) + ', ' + entry.lon.toFixed(6) + ' (+-' + entry.accuracy.toFixed(0) + 'm)');
+  }, function(err) {
+    logEntry('alert', 'GPS error: ' + err.message);
+  }, {enableHighAccuracy: true});
+}
+
+function exportEvidence() {
+  var report = {
+    exported: new Date().toISOString(),
+    deviceInfo: {
+      userAgent: navigator.userAgent,
+      platform: navigator.platform,
+      sampleRate: ctx ? ctx.sampleRate : 'N/A'
+    },
+    eventLog: eventLog,
+    snapshots: snapshots,
+    textLog: document.getElementById('logPanel').innerText
+  };
+  var blob = new Blob([JSON.stringify(report, null, 2)], {type: 'application/json'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  var ts = new Date().toISOString().replace(/[:.]/g, '-');
+  a.href = url;
+  a.download = 'arc-evidence-log-' + ts + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  logEntry('info', 'Evidence log exported');
+}
+
+/* ═══════════════════ UTILITIES ═══════════════════ */
+function cleanNode(key, store) {
+  store = store || arcNodes;
+  var n = store[key];
+  if (!n) return;
+  try { if (n.stop) n.stop(); } catch(e){}
+  try { n.disconnect(); } catch(e){}
+  delete store[key];
+}
+
+function updatePill(id, text, isOn) {
+  var el = document.getElementById(id);
+  el.textContent = text;
+  el.classList.toggle('on', isOn);
+  if (!isOn) el.classList.remove('alert');
+}
+
+function toggleSection(id, toggle) {
+  var body = document.getElementById(id);
+  body.classList.toggle('open');
+  toggle.classList.toggle('open');
+}
+
+function logEntry(type, msg) {
+  var ts = new Date().toLocaleTimeString();
+  var entry = {timestamp: new Date().toISOString(), type: type, message: msg};
+  eventLog.push(entry);
+  var panel = document.getElementById('logPanel');
+  var div = document.createElement('div');
+  div.className = type + '-entry';
+  div.textContent = '[' + ts + '] ' + msg;
+  panel.appendChild(div);
+  panel.scrollTop = panel.scrollHeight;
+  /* Keep log manageable */
+  while (panel.children.length > 200) panel.removeChild(panel.firstChild);
+}
+
+/* ═══════════════════ PWA INSTALL ═══════════════════ */
+var deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', function(e) {
+  e.preventDefault();
+  deferredPrompt = e;
+  var banner = document.getElementById('installBanner');
+  banner.style.display = 'block';
+  document.getElementById('installInstructions').innerHTML =
+    '<button onclick="installPWA()" style="background:#ff4444;color:#0a0a0a;border:none;padding:6px 16px;font-family:inherit;cursor:pointer;border-radius:3px;margin-top:4px">INSTALL</button>';
+});
+
+function installPWA() {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(function() { deferredPrompt = null; });
+  document.getElementById('installBanner').style.display = 'none';
+}
+
+/* iOS install hint */
+if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.navigator.standalone) {
+  var banner = document.getElementById('installBanner');
+  banner.style.display = 'block';
+  document.getElementById('installInstructions').innerHTML = 'Tap <strong>Share</strong> then <strong>Add to Home Screen</strong>';
+}
+
+/* Register service worker */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').catch(function(){});
+}
+
+logEntry('info', 'ARC Shield v1.0 ready - activate to begin scanning');
+</script>
+</body>
+</html>

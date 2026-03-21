@@ -1,0 +1,18 @@
+{
+  "name": "b0b ARC Shield",
+  "short_name": "ARC Shield",
+  "description": "Acoustic Resonance Countermeasure - LRAD detection and defense",
+  "start_url": "/tones/shield",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-shield.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
