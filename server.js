@@ -52,6 +52,18 @@ const suspiciousIPs = new Map();
 const SUSPICION_WINDOW = 30 * 60 * 1000; // 30 minutes
 const SUSPICION_THRESHOLD = 5; // events before flagging
 
+// ===================== AUTO-BLACKLIST (RED TEAM) =====================
+// Temporarily block IPs that trigger threat escalation
+const blacklistedIPs = new Map();
+const BLACKLIST_DURATION = 60 * 60 * 1000; // 1 hour ban after escalation
+
+function isBlacklisted(ip) {
+  const until = blacklistedIPs.get(ip);
+  if (!until) return false;
+  if (Date.now() > until) { blacklistedIPs.delete(ip); return false; }
+  return true;
+}
+
 function recordSuspicion(ip, reason) {
   const now = Date.now();
   if (!suspiciousIPs.has(ip)) {
@@ -63,9 +75,19 @@ function recordSuspicion(ip, reason) {
   record.events = record.events.filter(e => now - e.time < SUSPICION_WINDOW);
   if (record.events.length >= SUSPICION_THRESHOLD && !record.flagged) {
     record.flagged = true;
-    console.log(`[SECURITY] ⚠ THREAT ESCALATION - IP: ${ip} - ${record.events.length} suspicious events in ${SUSPICION_WINDOW / 60000}min - ${record.events.map(e => e.reason).join(', ')} - ${new Date().toISOString()}`);
+    // Auto-blacklist for 1 hour after threat escalation
+    blacklistedIPs.set(ip, now + BLACKLIST_DURATION);
+    console.log(`[SECURITY] ⚠ THREAT ESCALATION + AUTO-BLOCK - IP: ${ip} - ${record.events.length} suspicious events in ${SUSPICION_WINDOW / 60000}min - ${record.events.map(e => e.reason).join(', ')} - blocked for ${BLACKLIST_DURATION / 60000}min - ${new Date().toISOString()}`);
   }
 }
+
+// Clean up expired blacklist entries
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, until] of blacklistedIPs) {
+    if (now > until) blacklistedIPs.delete(ip);
+  }
+}, 10 * 60 * 1000);
 
 setInterval(() => {
   const now = Date.now();
@@ -88,6 +110,126 @@ app.set('trust proxy', 1);
 app.use(express.urlencoded({ extended: false, limit: '1kb' }));
 app.use(express.json({ limit: '10kb', type: ['application/json', 'application/csp-report'] }));
 app.use(cookieParser());
+
+// ===================== BLACKLIST ENFORCEMENT (RED TEAM) =====================
+// Early rejection of auto-blacklisted IPs - before any route processing
+app.use((req, res, next) => {
+  const ip = req.ip || req.connection.remoteAddress;
+  if (isBlacklisted(ip)) {
+    console.log(`[SECURITY] Blacklisted IP blocked - IP: ${ip} - Path: ${req.path} - ${new Date().toISOString()}`);
+    // Tarpit: slow 403 response to waste attacker time
+    return setTimeout(() => res.status(403).send('Forbidden'), 2000 + Math.floor(Math.random() * 3000));
+  }
+  next();
+});
+
+// ===================== HTTP METHOD RESTRICTION (RED TEAM) =====================
+// Block dangerous/unused HTTP methods - TRACE enables XST attacks, unused verbs expand attack surface
+const ALLOWED_METHODS = new Set(['GET', 'POST', 'HEAD']);
+app.use((req, res, next) => {
+  if (!ALLOWED_METHODS.has(req.method)) {
+    const ip = req.ip || req.connection.remoteAddress;
+    console.log(`[SECURITY] Blocked method - IP: ${ip} - Method: ${req.method} - Path: ${req.path} - ${new Date().toISOString()}`);
+    recordSuspicion(ip, 'bad-method:' + req.method);
+    return res.status(405).send('Method not allowed');
+  }
+  next();
+});
+
+// ===================== INJECTION DETECTION (GREY TEAM) =====================
+// Scan query strings and POST body for common injection patterns
+// Inspired by ModSecurity CRS, sqlmap signatures, XSS polyglots
+const INJECTION_PATTERNS = [
+  // SQL injection - UNION, SELECT, DROP, INSERT, OR 1=1, comment injection
+  /(\b(union|select|insert|update|delete|drop|alter|create|exec|execute)\b.*\b(from|into|table|database|where))/i,
+  /(\bor\b\s+[\d'"]+=\s*[\d'"]+|'\s*(or|and)\s+')/i,
+  /(--|#|\/\*|\*\/|;--)/,
+  /(\b(waitfor|delay|benchmark|sleep|pg_sleep)\s*\()/i,
+  // XSS - script tags, event handlers, javascript: protocol
+  /(<script[\s>]|<\/script|javascript\s*:|on(error|load|click|mouseover|focus|blur|submit|change|input)\s*=)/i,
+  /(<img[^>]+onerror|<svg[^>]+onload|<body[^>]+onload|<iframe|<object|<embed|<applet)/i,
+  // Command injection - shell metacharacters, command chaining
+  /(\||;|\$\(|`|&&|\|\||>\s*\/|<\s*\/|\\x[0-9a-f]{2})/i,
+  // Path traversal in query params (supplements existing path guard)
+  /(\.\.\/|\.\.\\|%2e%2e|%252e)/i,
+  // SSTI / template injection
+  /(\{\{.*\}\}|\$\{.*\}|<%.*%>)/,
+  // LDAP injection
+  /(\([\|&!]\(|\)\(\|)/,
+  // XXE indicators in query strings
+  /(<!ENTITY|<!DOCTYPE[^>]*\[|SYSTEM\s+["'])/i,
+];
+
+app.use((req, res, next) => {
+  // Only scan public-facing query params and POST body
+  const queryStr = req.originalUrl.indexOf('?') !== -1 ? decodeURIComponent(req.originalUrl.substring(req.originalUrl.indexOf('?'))) : '';
+  const bodyStr = req.body && typeof req.body === 'object' ? JSON.stringify(req.body) : (typeof req.body === 'string' ? req.body : '');
+  const scanTarget = queryStr + ' ' + bodyStr;
+
+  if (scanTarget.length > 1) {
+    for (const pattern of INJECTION_PATTERNS) {
+      if (pattern.test(scanTarget)) {
+        const ip = req.ip || req.connection.remoteAddress;
+        console.log(`[SECURITY] Injection attempt blocked - IP: ${ip} - Pattern: ${pattern.source.substring(0, 60)} - Path: ${req.path} - ${new Date().toISOString()}`);
+        recordSuspicion(ip, 'injection:' + req.path.substring(0, 30));
+        return res.status(400).send('Bad request');
+      }
+    }
+  }
+  next();
+});
+
+// ===================== HTTP PARAMETER POLLUTION GUARD (GREY TEAM) =====================
+// Reject requests with duplicate query parameters (fuzzing / HPP indicator)
+app.use((req, res, next) => {
+  const qs = req.originalUrl.indexOf('?') !== -1 ? req.originalUrl.substring(req.originalUrl.indexOf('?') + 1) : '';
+  if (qs) {
+    const seen = new Set();
+    const pairs = qs.split('&');
+    for (const pair of pairs) {
+      const key = pair.split('=')[0];
+      if (key && seen.has(key)) {
+        const ip = req.ip || req.connection.remoteAddress;
+        console.log(`[SECURITY] HTTP Parameter Pollution - IP: ${ip} - Duplicate: ${key} - Path: ${req.path} - ${new Date().toISOString()}`);
+        recordSuspicion(ip, 'hpp:' + key);
+        return res.status(400).send('Bad request');
+      }
+      if (key) seen.add(key);
+    }
+  }
+  next();
+});
+
+// ===================== REQUEST HEADER ANOMALY DETECTION (GREY TEAM) =====================
+// Flag requests with suspicious header combinations (recon tools, custom scripts)
+app.use((req, res, next) => {
+  const ip = req.ip || req.connection.remoteAddress;
+  const headers = req.headers;
+
+  // Missing Host header (HTTP/1.1 requirement - only malformed tools do this)
+  if (!headers.host) {
+    console.log(`[SECURITY] Missing Host header - IP: ${ip} - ${new Date().toISOString()}`);
+    recordSuspicion(ip, 'no-host-header');
+    return res.status(400).send('Bad request');
+  }
+
+  // Oversized Cookie header (cookie bomb / overflow attack)
+  if (headers.cookie && headers.cookie.length > 4096) {
+    console.log(`[SECURITY] Oversized Cookie header - IP: ${ip} - Size: ${headers.cookie.length} - ${new Date().toISOString()}`);
+    recordSuspicion(ip, 'oversized-cookie');
+    return res.status(400).send('Bad request');
+  }
+
+  // Suspicious Accept-Language (common in automated tools - empty or nonsensical)
+  // Just log, don't block - some legitimate clients have odd Accept-Language
+  if (headers['x-forwarded-host'] || headers['x-original-url'] || headers['x-rewrite-url']) {
+    console.log(`[SECURITY] Header injection attempt - IP: ${ip} - ${new Date().toISOString()}`);
+    recordSuspicion(ip, 'header-injection');
+    return res.status(400).send('Bad request');
+  }
+
+  next();
+});
 
 // ===================== RED TEAM - RATE PROTECTION =====================
 
@@ -394,8 +536,8 @@ window.toggleSound=function(){
   if(soundOn&&!musicPlaying){musicPlaying=true;playMusic();}
 };
 // Auto-start music on first interaction
-document.addEventListener('keydown',function starter(){initAudio();if(!musicPlaying&&soundOn){musicPlaying=true;playMusic();}document.removeEventListener('keydown',starter);},{once:true});
-document.addEventListener('touchstart',function starter(){initAudio();if(!musicPlaying&&soundOn){musicPlaying=true;playMusic();}document.removeEventListener('touchstart',starter);},{once:true});
+document.addEventListener('keydown',function starter(){initAudio();if(!musicPlaying&&soundOn){musicPlaying=true;playMusic();}document.removeEventListener('keydown',starter);},{once:false});
+document.addEventListener('touchstart',function starter(){initAudio();if(!musicPlaying&&soundOn){musicPlaying=true;playMusic();}document.removeEventListener('touchstart',starter);},{once:false});
 
 // ===================== FLOATING WORDS =====================
 var phrases=['send me','envíame','envoyez-moi','schick mich','mandami','送我','送って','보내줘','пошли меня','أرسلني','skicka mig','stuur mij','wyślij mnie','pošli mě','küld el','gönder beni','送我去','שלח אותי','ส่งฉัน','gửi tôi','trimite-mă','pošlji me','kirim aku','stuur my','послати мене','envie-me','послај ме','haniraha ahy','tuma mimi','pateik mane','sūti mani','lähetä minut','send mig','στείλε με','भेजो मुझे','manda-me','invia me','cuir me','senda mig','sendi min'];
@@ -416,15 +558,6 @@ for(var i=0;i<35;i++)spawn();
 </body>
 </html>`;
 }
-
-// ===================== BASELINE SECURITY HEADERS (ALL ROUTES) =====================
-app.use((req, res, next) => {
-  res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
-  res.setHeader('X-Content-Type-Options', 'nosniff');
-  res.setHeader('X-XSS-Protection', '1; mode=block');
-  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
-  next();
-});
 
 app.get('/login', (req, res) => {
   res.setHeader('Content-Type', 'text/html');
@@ -511,16 +644,36 @@ app.post('/csp-report', (req, res) => {
   res.status(204).end();
 });
 
-// ===================== HONEYPOT ROUTES =====================
+// ===================== HONEYPOT ROUTES (RED TEAM) =====================
 // Trap common attack paths - no legitimate user would request these
 // Log detailed attacker fingerprint for threat intelligence
+// Enhanced with tarpitting + deceptive responses to waste attacker resources
 const honeypotPaths = [
   '/.env', '/wp-admin', '/wp-login.php', '/admin', '/administrator',
   '/config.php', '/phpinfo.php', '/phpmyadmin', '/.git/config',
   '/.aws/credentials', '/actuator', '/debug', '/console',
   '/wp-content', '/xmlrpc.php', '/backup.sql', '/database.sql',
-  '/server-status', '/.htpasswd', '/cgi-bin'
+  '/server-status', '/.htpasswd', '/cgi-bin',
+  // Extended traps - common recon, exploit, and enumeration targets
+  '/api/v1/users', '/api/v2/admin', '/graphql', '/api/swagger',
+  '/.well-known/openid-configuration', '/oauth/token',
+  '/admin/config', '/admin/login', '/manager/html',
+  '/solr/', '/jenkins', '/struts', '/webdav',
+  '/remote/login', '/Autodiscover/Autodiscover.xml',
+  '/ecp/', '/owa/', '/_wpeprivate', '/telescope',
+  '/api/.env', '/config/database.yml', '/wp-json/wp/v2/users'
 ];
+
+// Deceptive responses - make attackers chase phantom leads
+const FAKE_RESPONSES = {
+  '/.env': 'APP_KEY=base64:FAKE_KEY_DO_NOT_USE\nDB_HOST=localhost\nDB_PASSWORD=decoy_password_12345\nAWS_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE\nAWS_SECRET_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY\n',
+  '/.git/config': '[core]\n\trepositoryformatversion = 0\n\tfilemode = true\n[remote "origin"]\n\turl = https://github.com/decoy/honeypot.git\n\tfetch = +refs/heads/*:refs/remotes/origin/*\n',
+  '/.aws/credentials': '[default]\naws_access_key_id = AKIAIOSFODNN7EXAMPLE\naws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLE\nregion = us-east-1\n',
+  '/config.php': '<?php\n$db_host = "localhost";\n$db_name = "production_db";\n$db_user = "admin";\n$db_pass = "hunter2";\n?>',
+  '/api/v1/users': '{"users":[{"id":1,"username":"admin","email":"admin@example.com","role":"superadmin"},{"id":2,"username":"operator","email":"ops@example.com","role":"readonly"}]}',
+  '/backup.sql': '-- MySQL dump\nCREATE DATABASE IF NOT EXISTS decoy;\nINSERT INTO users VALUES (1, "admin", "5f4dcc3b5aa765d61d8327deb882cf99", "admin@example.com");\n',
+};
+
 honeypotPaths.forEach(hp => {
   app.all(hp, (req, res) => {
     const ip = req.ip || req.connection.remoteAddress;
@@ -528,23 +681,30 @@ honeypotPaths.forEach(hp => {
     const method = req.method;
     const referer = req.headers['referer'] || 'none';
     const accept = req.headers['accept'] || 'none';
-    console.log(`[HONEYPOT] ⚠ TRAP HIT - IP: ${ip} - Path: ${hp} - Method: ${method} - UA: ${ua.substring(0, 200)} - Referer: ${referer} - Accept: ${accept.substring(0, 100)} - ${new Date().toISOString()}`);
+    const tlsVersion = req.socket.encrypted ? (req.socket.getProtocol ? req.socket.getProtocol() : 'tls') : 'none';
+    console.log(`[HONEYPOT] ⚠ TRAP HIT - IP: ${ip} - Path: ${hp} - Method: ${method} - UA: ${ua.substring(0, 200)} - Referer: ${referer} - Accept: ${accept.substring(0, 100)} - TLS: ${tlsVersion} - ${new Date().toISOString()}`);
     recordSuspicion(ip, 'honeypot:' + hp);
-    // Artificial delay - waste attacker's time
+    // Tarpit + deceptive response - waste attacker time with realistic-looking fake data
+    const delay = 3000 + Math.floor(Math.random() * 5000);
     setTimeout(() => {
-      res.status(404).send('Not found');
-    }, 2000 + Math.floor(Math.random() * 3000));
+      if (FAKE_RESPONSES[hp]) {
+        res.status(200).type('text/plain').send(FAKE_RESPONSES[hp]);
+      } else {
+        res.status(404).send('Not found');
+      }
+    }, delay);
   });
 });
 
-// ===================== AUTOMATED SCANNER DETECTION =====================
+// ===================== AUTOMATED SCANNER DETECTION (RED TEAM) =====================
 // Detect missing/anomalous headers typical of automated tools
+// Signatures from: sqlmap, nuclei, nmap NSE, Burp Suite, OWASP ZAP, gobuster, ffuf
 app.use((req, res, next) => {
   const ip = req.ip || req.connection.remoteAddress;
   const ua = req.headers['user-agent'] || '';
   
-  // Flag known scanner signatures
-  const scannerPatterns = /sqlmap|nikto|nessus|nmap|masscan|dirbust|gobuster|nuclei|wfuzz|ffuf|burpsuite|zaproxy|acunetix|w3af|arachni|skipfish|whatweb|httpie\/|python-requests\/|Go-http-client|curl\/|wget\//i;
+  // Flag known scanner/tool signatures (expanded from ethical hacking tool repos)
+  const scannerPatterns = /sqlmap|nikto|nessus|nmap|masscan|dirbust|gobuster|nuclei|wfuzz|ffuf|burpsuite|zaproxy|acunetix|w3af|arachni|skipfish|whatweb|httpie\/|python-requests\/|Go-http-client|curl\/|wget\/|scrapy|phantomjs|headlesschrome|selenium|cypress|puppeteer|playwright|httpclient|libwww-perl|lwp-|mechanize|python-urllib|java\/|commons-httpclient|apache-httpclient|okhttp|undici|node-fetch|got\/|axios\/|superagent|httpx|feroxbuster|rustscan|amass|subfinder|httpprobe|meg\/|waybackurls|gau\/|hakrawler|katana/i;
   if (scannerPatterns.test(ua)) {
     console.log(`[SECURITY] Scanner detected - IP: ${ip} - UA: ${ua.substring(0, 200)} - Path: ${req.path} - ${new Date().toISOString()}`);
     recordSuspicion(ip, 'scanner-ua');
@@ -557,6 +717,62 @@ app.use((req, res, next) => {
   
   next();
 });
+
+// ===================== BEHAVIORAL VELOCITY DETECTION (GREY TEAM) =====================
+// Track rapid sequential requests - detect directory bruteforcing, fuzzing, crawling
+// Humans don't make 10+ requests in under 2 seconds
+const velocityTracker = new Map();
+const VELOCITY_BURST_WINDOW = 2000;   // 2 seconds
+const VELOCITY_BURST_MAX = 10;        // 10 requests in 2s = bot
+const VELOCITY_404_WINDOW = 60000;    // 1 minute
+const VELOCITY_404_MAX = 15;          // 15 404s in 1 minute = directory bruteforce
+
+app.use((req, res, next) => {
+  const ip = req.ip || req.connection.remoteAddress;
+  const now = Date.now();
+  
+  if (!velocityTracker.has(ip)) {
+    velocityTracker.set(ip, { requests: [], notFounds: [] });
+  }
+  const record = velocityTracker.get(ip);
+  
+  // Track burst velocity
+  record.requests.push(now);
+  record.requests = record.requests.filter(t => now - t < VELOCITY_BURST_WINDOW);
+  
+  if (record.requests.length > VELOCITY_BURST_MAX) {
+    console.log(`[SECURITY] Burst velocity exceeded - IP: ${ip} - ${record.requests.length} req/${VELOCITY_BURST_WINDOW}ms - Path: ${req.path} - ${new Date().toISOString()}`);
+    recordSuspicion(ip, 'burst-velocity');
+  }
+  
+  // Track 404 velocity (directory bruteforce detection)
+  const origEnd = res.end.bind(res);
+  res.end = function(...args) {
+    if (res.statusCode === 404) {
+      record.notFounds.push(now);
+      record.notFounds = record.notFounds.filter(t => now - t < VELOCITY_404_WINDOW);
+      if (record.notFounds.length > VELOCITY_404_MAX) {
+        console.log(`[SECURITY] Directory bruteforce detected - IP: ${ip} - ${record.notFounds.length} 404s/${VELOCITY_404_WINDOW / 1000}s - ${new Date().toISOString()}`);
+        recordSuspicion(ip, 'dir-bruteforce');
+      }
+    }
+    return origEnd(...args);
+  };
+  
+  next();
+});
+
+// Clean velocity tracker every 2 minutes
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, record] of velocityTracker) {
+    record.requests = record.requests.filter(t => now - t < VELOCITY_BURST_WINDOW);
+    record.notFounds = record.notFounds.filter(t => now - t < VELOCITY_404_WINDOW);
+    if (record.requests.length === 0 && record.notFounds.length === 0) {
+      velocityTracker.delete(ip);
+    }
+  }
+}, 2 * 60 * 1000);
 
 // ===================== PUBLIC DATA API =====================
 // Serves map data as JSON for researchers - no auth required
@@ -605,6 +821,51 @@ app.get('/api/data', (req, res) => {
   } catch (err) {
     res.status(500).json({ error: 'Data extraction failed' });
   }
+});
+
+// ===================== SECURITY STATUS API (BLUE TEAM) =====================
+// Live security dashboard data - shows current threat landscape
+// Protected by auth middleware below
+app.get('/api/security-status', (req, res) => {
+  if (req.cookies.b0b_auth !== makeAuthToken()) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+  const now = Date.now();
+  // Aggregate threat data
+  const activeSuspicious = [];
+  for (const [ip, record] of suspiciousIPs) {
+    const recent = record.events.filter(e => now - e.time < SUSPICION_WINDOW);
+    if (recent.length > 0) {
+      activeSuspicious.push({
+        ip: ip,
+        events: recent.length,
+        flagged: record.flagged,
+        reasons: [...new Set(recent.map(e => e.reason))],
+        lastSeen: new Date(recent[recent.length - 1].time).toISOString()
+      });
+    }
+  }
+  // Sort by event count descending
+  activeSuspicious.sort((a, b) => b.events - a.events);
+
+  const activeBlacklist = [];
+  for (const [ip, until] of blacklistedIPs) {
+    if (now < until) {
+      activeBlacklist.push({ ip: ip, expiresIn: Math.round((until - now) / 60000) + ' min' });
+    }
+  }
+
+  res.json({
+    timestamp: new Date().toISOString(),
+    uptime: Math.round(process.uptime()) + 's',
+    memory: Math.round(process.memoryUsage().rss / 1048576) + 'MB',
+    honeypots: honeypotPaths.length,
+    integrityFiles: fileIntegrityHashes.size,
+    suspiciousIPs: activeSuspicious.slice(0, 50),
+    blacklistedIPs: activeBlacklist,
+    rateLimited: requestCounts.size,
+    velocityTracked: velocityTracker.size
+  });
 });
 
 // Auth middleware - protect all routes below
