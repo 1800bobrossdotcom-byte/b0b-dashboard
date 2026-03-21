@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="64" fill="#0a0a0a"/>
-  <circle cx="256" cy="230" r="100" fill="none" stroke="#00ccff" stroke-width="6" opacity="0.3"/>
-  <circle cx="256" cy="230" r="70" fill="none" stroke="#00ccff" stroke-width="5" opacity="0.5"/>
-  <circle cx="256" cy="230" r="40" fill="none" stroke="#00ccff" stroke-width="4" opacity="0.7"/>
-  <path d="M256 190 L256 270 M226 218 L256 190 L286 218" fill="none" stroke="#00ccff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="256" y="370" text-anchor="middle" fill="#ff4444" font-family="Courier New,monospace" font-size="48" font-weight="bold">b0b</text>
-  <text x="256" y="410" text-anchor="middle" fill="#00ccff" font-family="Courier New,monospace" font-size="22">SHIELD</text>
-</svg>
