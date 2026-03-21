@@ -1157,6 +1157,9 @@ app.get('/tones/instrument', (req, res) => {
 app.get('/tones/shield', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'tones-shield.html'));
 });
+app.get('/tones/shield/guide', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'tones-shield-guide.html'));
+});
 
 // Raw content routes - serve actual pages into iframe
 app.get('/_page/', (req, res) => {
