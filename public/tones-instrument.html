@@ -774,7 +774,16 @@ function applyVocoder(freq) {
 /* ═══════════════════ VOICE MANAGEMENT ═══════════════════ */
 function startVoice(pad, vol) {
   initAudio();
-  if (ctx.state === 'suspended') ctx.resume();
+  if (ctx.state === 'suspended') {
+    ctx.resume().then(function() {
+      if (!voices[pad.id]) doStartVoice(pad, vol);
+    });
+    return;
+  }
+  doStartVoice(pad, vol);
+}
+
+function doStartVoice(pad, vol) {
   if (voices[pad.id]) stopVoice(pad.id);
   var v = vol || 0.15;
   var voice = {vol: v, padId: pad.id, baseFreq: pad.f || 0, osc: []};
@@ -1011,6 +1020,7 @@ function stopVoice(id) {
     }, (rel * 1000) + 50);
   }
   delete voices[id];
+  delete manualVoices[id];
   updatePadUI(id, false);
   updateActiveDisplay();
 }
@@ -1023,6 +1033,7 @@ function setVoiceVol(id, vol) {
 
 function stopAll() {
   Object.keys(voices).forEach(function(id) { stopVoice(id); });
+  manualVoices = {};
   if (seqPlaying) toggleSeq();
 }
 
@@ -1171,15 +1182,23 @@ function updateActiveDisplay() {
 
 /* ═══════════════════ TOUCH / MOUSE ═══════════════════ */
 var activeTouches = {}, dragPad = null;
+var touchFiredAt = 0; /* guard: block synthetic mousedown after touch */
+var manualVoices = {}; /* track manually-activated voices so sequencer won't kill them */
+var padDebounce = {}; /* prevent rapid double-trigger on same pad */
 
 function handlePadStart(padId, clientY, rect) {
   var pad = getPadById(padId); if (!pad) return;
+  /* Debounce: ignore if same pad was triggered in last 80ms */
+  var now = Date.now();
+  if (padDebounce[padId] && now - padDebounce[padId] < 80) return;
+  padDebounce[padId] = now;
   if (solo) {
     Object.keys(voices).forEach(function(id) { if (id !== padId) stopVoice(id); });
   }
-  if (voices[padId]) { stopVoice(padId); return; }
+  if (voices[padId]) { stopVoice(padId); delete manualVoices[padId]; return; }
   var vol = computeVol(clientY, rect, pad);
   startVoice(pad, vol);
+  manualVoices[padId] = true;
   updateVolBar(padId, vol, pad);
 }
 
@@ -1220,7 +1239,10 @@ function updateVolBar(id, vol, pad) {
       handlePadStart(pe.dataset.padId, t.clientY, pe.getBoundingClientRect());
     }
     /* Only prevent default when a pad was hit - lets scroll through gaps */
-    if (hitPad) e.preventDefault();
+    if (hitPad) {
+      e.preventDefault();
+      touchFiredAt = Date.now(); /* mark touch time to block synthetic mousedown */
+    }
   }, {passive: false});
   grid.addEventListener('touchmove', function(e) {
     var hasPad = false;
@@ -1237,6 +1259,8 @@ function updateVolBar(id, vol, pad) {
     for (var i = 0; i < e.changedTouches.length; i++) delete activeTouches[e.changedTouches[i].identifier];
   });
   grid.addEventListener('mousedown', function(e) {
+    /* Block synthetic mousedown fired after touchstart (mobile double-trigger) */
+    if (Date.now() - touchFiredAt < 400) return;
     var pe = e.target.closest('.pad'); if (!pe) return;
     dragPad = pe.dataset.padId;
     handlePadStart(dragPad, e.clientY, pe.getBoundingClientRect());
@@ -1336,9 +1360,10 @@ function seqTick() {
     var padId = SEQ_ROWS[r], pad = getPadById(padId);
     if (seqGrid[r][seqStep]) {
       var vol = seqGrid[r][seqStep] === 2 ? 0.2 : 0.12;
-      if (!voices[padId]) startVoice(pad, vol);
+      if (!voices[padId]) { startVoice(pad, vol); delete manualVoices[padId]; }
     } else {
-      if (voices[padId]) stopVoice(padId);
+      /* Only stop voices the sequencer started - protect manually-activated pads */
+      if (voices[padId] && !manualVoices[padId]) stopVoice(padId);
     }
   }
 
@@ -1713,7 +1738,10 @@ document.addEventListener('keydown', function(e) {
   if (KEY_PAD_MAP[e.code] && !heldKeys[e.code]) {
     heldKeys[e.code] = true;
     var pad = getPadById(KEY_PAD_MAP[e.code]);
-    if (pad) { if (voices[pad.id]) stopVoice(pad.id); else startVoice(pad, 0.15); }
+    if (pad) {
+      if (voices[pad.id]) { stopVoice(pad.id); delete manualVoices[pad.id]; }
+      else { startVoice(pad, 0.15); manualVoices[pad.id] = true; }
+    }
     return;
   }
 
