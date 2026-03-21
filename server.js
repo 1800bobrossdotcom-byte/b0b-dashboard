@@ -158,7 +158,7 @@ function getLoginHTML(challenge) {
 <title>b0b.dev - Human Check</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0a0a0a;color:#00ff41;font-family:'Courier New',monospace;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;overflow:hidden;position:relative;user-select:none}
+body{background:#0a0a0a;color:#00ff41;font-family:'Courier New',monospace;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;overflow-y:auto;overflow-x:hidden;position:relative;user-select:none}
 .float-layer{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
 .float-word{position:absolute;white-space:nowrap;font-family:'Courier New',monospace;opacity:0;animation:drift linear infinite}
 @keyframes drift{0%{transform:translateY(0) rotate(var(--rot));opacity:0}5%{opacity:var(--peak)}90%{opacity:var(--peak)}100%{transform:translateY(calc(-100vh - 60px)) rotate(var(--rot));opacity:0}}
@@ -171,7 +171,7 @@ canvas{display:block;margin:0 auto 10px;image-rendering:pixelated;border:1px sol
 .btn-row{display:flex;gap:8px;justify-content:center;margin-bottom:6px}
 .btn{padding:6px 16px;background:transparent;border:1px solid #00ff41;color:#00ff41;font-family:inherit;font-size:0.8rem;cursor:pointer;letter-spacing:1px}
 .btn:hover{background:#00ff41;color:#0a0a0a}
-.btn-skip{border-color:#555;color:#555}
+.btn-skip{border-color:#555;color:#555;min-height:44px;min-width:120px;font-size:1rem}
 .btn-skip:hover{border-color:#888;color:#888;background:transparent}
 .btn-sound{border-color:#ffcc00;color:#ffcc00;font-size:0.65rem;padding:4px 10px}
 .btn-sound:hover{background:#ffcc00;color:#0a0a0a}
@@ -394,8 +394,8 @@ window.toggleSound=function(){
   if(soundOn&&!musicPlaying){musicPlaying=true;playMusic();}
 };
 // Auto-start music on first interaction
-document.addEventListener('keydown',function starter(){initAudio();if(!musicPlaying&&soundOn){musicPlaying=true;playMusic();}document.removeEventListener('keydown',starter);},{once:false});
-document.addEventListener('touchstart',function starter(){initAudio();if(!musicPlaying&&soundOn){musicPlaying=true;playMusic();}document.removeEventListener('touchstart',starter);},{once:false});
+document.addEventListener('keydown',function starter(){initAudio();if(!musicPlaying&&soundOn){musicPlaying=true;playMusic();}document.removeEventListener('keydown',starter);},{once:true});
+document.addEventListener('touchstart',function starter(){initAudio();if(!musicPlaying&&soundOn){musicPlaying=true;playMusic();}document.removeEventListener('touchstart',starter);},{once:true});
 
 // ===================== FLOATING WORDS =====================
 var phrases=['send me','envíame','envoyez-moi','schick mich','mandami','送我','送って','보내줘','пошли меня','أرسلني','skicka mig','stuur mij','wyślij mnie','pošli mě','küld el','gönder beni','送我去','שלח אותי','ส่งฉัน','gửi tôi','trimite-mă','pošlji me','kirim aku','stuur my','послати мене','envie-me','послај ме','haniraha ahy','tuma mimi','pateik mane','sūti mani','lähetä minut','send mig','στείλε με','भेजो मुझे','manda-me','invia me','cuir me','senda mig','sendi min'];
@@ -416,6 +416,15 @@ for(var i=0;i<35;i++)spawn();
 </body>
 </html>`;
 }
+
+// ===================== BASELINE SECURITY HEADERS (ALL ROUTES) =====================
+app.use((req, res, next) => {
+  res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  next();
+});
 
 app.get('/login', (req, res) => {
   res.setHeader('Content-Type', 'text/html');
@@ -444,7 +453,7 @@ app.post('/login', (req, res) => {
   console.log(`[AUTH] Login SUCCESS - IP: ${ip} - ${new Date().toISOString()}`);
   res.cookie('b0b_auth', makeAuthToken(), {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+    secure: process.env.NODE_ENV !== 'development',
     sameSite: 'strict',
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     path: '/'
