@@ -625,6 +625,13 @@ app.use((req, res, next) => {
   res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
   // Restrict referrer information
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  // Route classification (used by Permissions-Policy + CSP below)
+  var isMap = req.path === '/map' || req.path === '/_page/map';
+  var isReport = req.path === '/report' || req.path === '/_page/report';
+  var isShell = req.path === '/' || req.path === '/report' || req.path === '/map' || req.path === '/tools';
+  var isTones = req.path.startsWith('/tones/');
+  var isSW = req.path === '/sw.js';
+  var cspReport = "; report-uri /csp-report";
   // Restrict browser features - allow microphone for tones and shell (ARC Shield in persistent drawer)
   if (isTones || isShell) {
     res.setHeader('Permissions-Policy', 'camera=(), microphone=(self), geolocation=(), payment=(), usb=(), bluetooth=(), serial=(), hid=(), accelerometer=(), gyroscope=(), magnetometer=(), ambient-light-sensor=(), autoplay=(self), display-capture=(), document-domain=(), encrypted-media=(self), fullscreen=(self), interest-cohort=()');
@@ -640,12 +647,6 @@ app.use((req, res, next) => {
   }
   res.setHeader('Cross-Origin-Resource-Policy', 'same-origin');
   // Content Security Policy
-  var isMap = req.path === '/map' || req.path === '/_page/map';
-  var isReport = req.path === '/report' || req.path === '/_page/report';
-  var isShell = req.path === '/' || req.path === '/report' || req.path === '/map' || req.path === '/tools';
-  var isTones = req.path.startsWith('/tones/');
-  var isSW = req.path === '/sw.js';
-  var cspReport = "; report-uri /csp-report";
   if (isSW) {
     // Service worker: needs connect-src for tile domains it fetches on behalf of the map
     res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; connect-src 'self' https://*.basemaps.cartocdn.com https://*.tile.openstreetmap.org https://server.arcgisonline.com https://*.tile.opentopomap.org https://tiles.stadiamaps.com https://earthquake.usgs.gov https://eonet.gsfc.nasa.gov https://firms.modaps.eosdis.nasa.gov https://opensky-network.org https://api.wheretheiss.at https://www.gdacs.org" + cspReport);

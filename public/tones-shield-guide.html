@@ -72,11 +72,13 @@ a:hover{text-decoration:underline}
   <a class="indent" href="#protective">1.3 Protective Frequencies</a>
   <a class="indent" href="#counter">1.4 Counter-Frequency Engine</a>
   <a class="indent" href="#evidence">1.5 Evidence Capture</a>
+  <a class="indent" href="#micro-arc">1.6 Micro ARC Shield (Dashboard Drawer)</a>
   <a href="#what-is-lrad">2. What Is LRAD & Acoustic Weaponry</a>
   <a href="#setup">3. Setup & Installation</a>
   <a class="indent" href="#install-pwa">3.1 Install as App (PWA)</a>
   <a class="indent" href="#old-phone">3.2 Convert Old Phone to Dedicated Shield</a>
   <a class="indent" href="#speakers">3.3 External Speaker & Amplification</a>
+  <a class="indent" href="#mic-troubleshooting">3.4 Troubleshooting: Microphone Access</a>
   <a href="#field-deploy">4. Field Deployment Configurations</a>
   <a class="indent" href="#personal">4.1 Personal Carry</a>
   <a class="indent" href="#perimeter">4.2 Perimeter Defense</a>
@@ -165,7 +167,30 @@ a:hover{text-decoration:underline}
   <li><strong>Event Log Export:</strong> Full JSON dump including device info, sample rate, all logged events, and spectral data</li>
 </ul>
 <p>This evidence is stored locally on YOUR device. Nothing is sent to any server. Export files are yours to keep, share, or submit to attorneys, journalists, or oversight bodies.</p>
+<p><strong>Auto-Snapshot:</strong> When the detection engine classifies a threat as <strong>HIGH</strong> severity for the first time in a session, the system automatically captures a spectrum snapshot. This ensures evidence is preserved even if you are disoriented or unable to manually tap the button during an active attack. The auto-snapshot fires once per activation cycle to avoid flooding storage.</p>
 </div>
+
+<h3 id="micro-arc">1.6 MICRO ARC SHIELD (DASHBOARD DRAWER)</h3>
+
+<div class="card cyan">
+<h4>Always-Available Protection From Any Page</h4>
+<p>The <strong>Micro ARC Shield</strong> is a compact version embedded in the b0b.dev dashboard drawer. It is accessible from any page on the platform - tap the ARC status dot in the persistent drawer to expand it. This means you can monitor for acoustic threats while using the map, reading the report, or working with any other tool.</p>
+</div>
+
+<p><strong>Capabilities:</strong></p>
+<ul>
+  <li><strong>5-Band Detection:</strong> Identical threat classification to the standalone - PRIMARY (1-4 kHz), LOW-BAND (200-500 Hz), HARMONIC (6-10 kHz), ULTRASONIC (10-22 kHz), and INFRASONIC (20-200 Hz)</li>
+  <li><strong>4096-bin FFT</strong> with 0.75 smoothing constant for stable, responsive spectral analysis</li>
+  <li><strong>Phase-Inversion Counter:</strong> When a threat is detected, engages a counter-tone at the detected frequency routed through a delay node at <code>1/(2 * freq)</code> seconds for true 180-degree cancellation</li>
+  <li><strong>Gain Ramping:</strong> Counter-tones fade in over 50ms on engage and fade out on disengage - prevents audible pops and clicks</li>
+  <li><strong>Threat Level Display:</strong> Real-time status (CLEAR / LOW / MEDIUM / HIGH) with detected frequency, band classification, and amplitude</li>
+</ul>
+
+<p><strong>When to use Micro vs. Standalone:</strong></p>
+<ul>
+  <li><strong>Micro ARC:</strong> Background monitoring while doing other work. Detection + basic counter. Lightweight.</li>
+  <li><strong>Standalone ARC Shield:</strong> Full deployment. Spectrogram visualization, all counter-frequency modes, sweep jam, protective frequencies, evidence capture with recording/GPS/export. Use this when you need full defensive capability.</li>
+</ul>
 
 <!-- ═══════════════════════════════════════ -->
 <h2 id="what-is-lrad">2. WHAT IS LRAD & ACOUSTIC WEAPONRY</h2>
@@ -340,6 +365,30 @@ COUNTERMEASURE CHAIN:                         |
                                               |
 EVIDENCE CHAIN:                               |
 [MediaRecorder] --&gt; [Local Storage] --&gt; [Export JSON/WebM]
+</div>
+
+<h3 id="mic-troubleshooting">3.4 TROUBLESHOOTING: MICROPHONE ACCESS</h3>
+
+<div class="card alert">
+<h4>Desktop Browsers (Chrome / Edge / Brave)</h4>
+<p>Desktop browsers enforce microphone permissions more strictly than mobile browsers. If the ARC Shield is not prompting for mic access on desktop:</p>
+<ol>
+  <li><strong>HTTPS Required:</strong> Microphone access is only available over HTTPS. Make sure you are accessing <code>b0b.dev</code>, not an insecure URL.</li>
+  <li><strong>Check Site Permissions:</strong> Click the lock/tune icon in the address bar > Site Settings > Microphone. Set to <strong>Allow</strong>.</li>
+  <li><strong>Clear Blocked State:</strong> If you previously denied mic access, the browser remembers. Go to Settings > Privacy & Security > Site Settings > Microphone. Find <code>b0b.dev</code> and remove it from the Blocked list, then reload.</li>
+  <li><strong>Browser Permissions-Policy:</strong> The server must send the correct <code>Permissions-Policy: microphone=(self)</code> header. This was fixed in the latest deployment - if you still have issues, hard-refresh with <code>Ctrl+Shift+R</code>.</li>
+  <li><strong>System Microphone:</strong> Ensure your OS allows the browser to access the microphone (Windows: Settings > Privacy > Microphone > allow desktop apps).</li>
+</ol>
+</div>
+
+<div class="card">
+<h4>Mobile Browsers</h4>
+<p>Mobile browsers (especially Chrome on Android and Safari on iOS) are generally more lenient with microphone prompting. If mic access still fails:</p>
+<ol>
+  <li><strong>iOS Safari:</strong> Go to Settings > Safari > Microphone > set to <strong>Ask</strong> or <strong>Allow</strong></li>
+  <li><strong>Android Chrome:</strong> Site Settings > Microphone > ensure b0b.dev is allowed</li>
+  <li><strong>PWA:</strong> If installed as a PWA, microphone permission is set at install time. Uninstall and reinstall if needed.</li>
+</ol>
 </div>
 
 <!-- ═══════════════════════════════════════ -->
@@ -557,6 +606,20 @@ EVIDENCE CHAIN:                               |
 </div>
 
 <h3 id="technical-improvements">6.4 TECHNICAL IMPROVEMENTS</h3>
+
+<div class="card green">
+<h4>Recently Completed</h4>
+<ul>
+  <li><strong>Continuous Sweep Jam</strong> <span class="tag green">DONE</span> - Sweep jam now reschedules indefinitely. Previously limited to 60 cycles (96 seconds) before stopping.</li>
+  <li><strong>5-Band Micro ARC Detection</strong> <span class="tag green">DONE</span> - Dashboard drawer Micro ARC now analyzes all 5 threat bands (PRIMARY, LOW-BAND, HARMONIC, ULTRASONIC, INFRASONIC) instead of only the 1-4 kHz primary range.</li>
+  <li><strong>Phase-Inversion Micro Counter</strong> <span class="tag green">DONE</span> - Micro ARC counter-tone now uses a proper delay node (<code>1/(2*freq)</code>) for true 180-degree phase cancellation instead of a bare sine tone.</li>
+  <li><strong>Gain Ramping</strong> <span class="tag green">DONE</span> - Counter-tones ramp gain 0 to 0.12 over 50ms on engage and reverse on disengage. Eliminates audible pops.</li>
+  <li><strong>Auto-Evidence Capture</strong> <span class="tag green">DONE</span> - Standalone ARC Shield auto-captures a spectrum snapshot on the first HIGH-severity detection per session.</li>
+  <li><strong>4096-bin Micro FFT</strong> <span class="tag green">DONE</span> - Micro ARC upgraded from 2048 to 4096 FFT bins with 0.75 smoothing constant for better frequency resolution.</li>
+  <li><strong>Desktop Mic Access Fix</strong> <span class="tag green">DONE</span> - Fixed server-side Permissions-Policy header that was silently blocking microphone access on desktop browsers.</li>
+  <li><strong>Integrity Diagnostics</strong> <span class="tag green">DONE</span> - Full codebase integrity scan: all 30 functions verified present, all 38 DOM IDs resolve, no eval/external scripts/iframes, phase cancellation formula confirmed correct.</li>
+</ul>
+</div>
 
 <p>Planned enhancements based on the patterns above:</p>
 
