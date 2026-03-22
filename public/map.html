@@ -282,6 +282,21 @@
       z-index: 10;
       line-height: 1.4;
     }
+    .indigenous-tooltip {
+      background: rgba(20,10,5,0.92) !important;
+      border: 1px solid rgba(255,180,60,0.7) !important;
+      color: #ffe0a0 !important;
+      font-family: serif !important;
+      font-size: 0.8rem !important;
+      letter-spacing: 0.5px;
+      padding: 4px 10px !important;
+    }
+    .terra-nullius-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 600;
+    }
 
     /* ===================== COUNTERMEASURES DRAWER ===================== */
     .cm-drawer {
@@ -511,7 +526,9 @@
   </div>
   <div class="filter-section-body" id="styleBody">
   <div class="filter-grid">
-  <div class="filter-item"><label><input type="radio" name="mapStyle" value="dark" checked onchange="switchMapStyle(this.value)"> Dark</label></div>
+  <div class="filter-item"><label><input type="radio" name="mapStyle" value="terranullius" checked onchange="switchMapStyle(this.value)"> 🌎 Terra Nullius</label></div>
+  <div class="filter-item"><label><input type="radio" name="mapStyle" value="firstpeoples" onchange="switchMapStyle(this.value)"> 🌍 First Peoples</label></div>
+  <div class="filter-item"><label><input type="radio" name="mapStyle" value="dark" onchange="switchMapStyle(this.value)"> Dark</label></div>
   <div class="filter-item"><label><input type="radio" name="mapStyle" value="satellite" onchange="switchMapStyle(this.value)"> Satellite</label></div>
   <div class="filter-item"><label><input type="radio" name="mapStyle" value="terrain" onchange="switchMapStyle(this.value)"> Terrain</label></div>
   <div class="filter-item"><label><input type="radio" name="mapStyle" value="street" onchange="switchMapStyle(this.value)"> Street</label></div>
@@ -524,8 +541,9 @@
   </div>
   <div class="filter-section-body" id="dataBody">
   <div class="filter-grid">
-  <div class="filter-item"><label><input type="checkbox" checked id="toggleConnections" onchange="toggleDataLayer('connections')"> Connection Lines</label></div>
-  <div class="filter-item"><label><input type="checkbox" checked id="toggleTunnels" onchange="toggleDataLayer('tunnels')"> Tunnel Paths</label></div>
+  <div class="filter-item"><label><input type="checkbox" id="toggleConnections" onchange="toggleDataLayer('connections')"> Connection Lines</label></div>
+  <div class="filter-item"><label><input type="checkbox" id="toggleTunnels" onchange="toggleDataLayer('tunnels')"> Tunnel Paths</label></div>
+  <div class="filter-item"><label><input type="checkbox" id="toggleIndigenous" onchange="toggleDataLayer('indigenous')"> 🏔️ Indigenous Territories</label></div>
   <div class="filter-item"><label><input type="checkbox" id="toggleEarthquakes" onchange="toggleDataLayer('earthquakes')"> 🌍 USGS Quakes</label></div>
   <div class="filter-item"><label><input type="checkbox" id="toggleEONET" onchange="toggleDataLayer('eonet')"> 🔥 NASA Events</label></div>
   <div class="filter-item"><label><input type="checkbox" id="toggleFIRMS" onchange="toggleDataLayer('firms')"> 🔥 NASA Fire Hotspots</label></div>
@@ -890,6 +908,28 @@ var tileProviders = {
       subdomains: 'abcd', maxZoom: 19
     }),
     label: 'STREET'
+  },
+  firstpeoples: {
+    primary: L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a> | Indigenous territories: <a href="https://native-land.ca/">Native Land Digital</a>',
+      subdomains: 'abcd', maxZoom: 19
+    }),
+    fallback: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      attribution: '&copy; Esri | Indigenous territories: <a href="https://native-land.ca/">Native Land Digital</a>',
+      maxZoom: 19
+    }),
+    label: 'FIRST PEOPLES'
+  },
+  terranullius: {
+    primary: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      attribution: '&copy; Esri, Maxar, Earthstar Geographics — Terra Nullius: Before naming',
+      maxZoom: 19
+    }),
+    fallback: L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://carto.com/">CARTO</a> — Terra Nullius: Before naming',
+      subdomains: 'abcd', maxZoom: 19
+    }),
+    label: 'TERRA NULLIUS'
   }
 };
 
@@ -899,8 +939,9 @@ var satelliteTile = tileProviders.satellite.primary;
 var terrainTile = tileProviders.terrain.primary;
 var streetTile = tileProviders.street.primary;
 
-var currentStyle = 'dark';
-var currentTile = darkTile;
+var currentStyle = 'terranullius';
+var terraNulliusTile = tileProviders.terranullius.primary;
+var currentTile = terraNulliusTile;
 var failedProviders = {}; // track which primaries have failed
 var failoverActive = false;
 
@@ -1017,8 +1058,8 @@ function showTileFailoverNotice(label) {
   });
 })();
 
-// Add default tile
-darkTile.addTo(map);
+// Add default tile — Terra Nullius: the world before naming
+terraNulliusTile.addTo(map);
 
 function switchMapStyle(style) {
   map.removeLayer(currentTile);
@@ -1027,6 +1068,34 @@ function switchMapStyle(style) {
   // Use fallback if primary already known-failed
   currentTile = failedProviders[currentStyle] ? provider.fallback : provider.primary;
   currentTile.addTo(map);
+
+  // Terra Nullius mode: hide all human-placed data layers (the world before naming)
+  if (style === 'terranullius') {
+    if (map.hasLayer(markerLayer)) map.removeLayer(markerLayer);
+    if (map.hasLayer(lineLayer)) map.removeLayer(lineLayer);
+    if (map.hasLayer(tunnelLayer)) map.removeLayer(tunnelLayer);
+    if (map.hasLayer(glowLayer)) map.removeLayer(glowLayer);
+    if (typeof indigenousLayer !== 'undefined' && map.hasLayer(indigenousLayer)) map.removeLayer(indigenousLayer);
+    // Show terra nullius overlay text
+    if (!window._terraNulliusOverlay) {
+      window._terraNulliusOverlay = L.DomUtil.create('div', 'terra-nullius-overlay', map.getContainer());
+      window._terraNulliusOverlay.innerHTML = '<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;z-index:600;opacity:0.15;font-size:3vw;color:#ffffff;font-family:serif;letter-spacing:0.3em;text-transform:uppercase;">Terra Nullius<br><span style="font-size:0.5em;letter-spacing:0.1em;opacity:0.7;">Before all names — the land remembers what maps forget</span><br><span style="font-size:0.35em;letter-spacing:0.05em;opacity:0.5;font-style:italic;">John 12:43</span></div>';
+    }
+    window._terraNulliusOverlay.style.display = 'block';
+  } else {
+    // Restore layers when leaving terra nullius
+    if (window._terraNulliusOverlay) window._terraNulliusOverlay.style.display = 'none';
+    if (!map.hasLayer(markerLayer)) map.addLayer(markerLayer);
+    if (document.getElementById('toggleConnections') && document.getElementById('toggleConnections').checked && !map.hasLayer(lineLayer)) map.addLayer(lineLayer);
+    if (document.getElementById('toggleTunnels') && document.getElementById('toggleTunnels').checked && !map.hasLayer(tunnelLayer)) map.addLayer(tunnelLayer);
+    if (!map.hasLayer(glowLayer)) map.addLayer(glowLayer);
+  }
+
+  // First Peoples mode: auto-enable indigenous territories overlay
+  if (style === 'firstpeoples') {
+    var cb = document.getElementById('toggleIndigenous');
+    if (cb && !cb.checked) { cb.checked = true; toggleDataLayer('indigenous'); }
+  }
 }
 
 // ===================== COLOR MAP =====================
@@ -1965,7 +2034,7 @@ var locations = [
 
 // ===================== LAYER GROUPS =====================
 var allMarkers = [];
-var markerLayer = L.layerGroup().addTo(map);
+var markerLayer = L.layerGroup(); // starts hidden in Terra Nullius mode
 
 // Create markers
 locations.forEach(function(loc) {
@@ -2715,8 +2784,8 @@ var connectionLines = [
   [[36.3824,-94.2028],[40.7614,-73.9776],'#b388ff','Crystal Bridges → MoMA (Walton-Walmart fortune → Arkansas museum vs Rockefeller-CIA → NYC museum - billionaire art institutions as cultural control, 1,300 miles apart, same function)'],
 ];
 
-var lineLayer = L.layerGroup().addTo(map);
-var glowLayer = L.layerGroup().addTo(map);
+var lineLayer = L.layerGroup(); // starts hidden in Terra Nullius mode
+var glowLayer = L.layerGroup(); // starts hidden in Terra Nullius mode
 var allConnectionLines = [];
 connectionLines.forEach(function(conn) {
   var line = L.polyline([conn[0], conn[1]], {
@@ -2899,7 +2968,7 @@ var tunnelPaths = [
   {path:[[12.0319,39.0472],[11.5469,43.1464]], color:'#cc00ff', label:'Lalibela ↔ Djibouti region - Horn of Africa underground corridor (Eastern Hemisphere map)'},
 ];
 
-var tunnelLayer = L.layerGroup().addTo(map);
+var tunnelLayer = L.layerGroup(); // starts hidden in Terra Nullius mode
 tunnelPaths.forEach(function(t) {
   var line = L.polyline(t.path, {
     color: t.color,
@@ -2972,6 +3041,13 @@ function toggleDataLayer(layer) {
       fetchGDACS();
       gdacsRefresh = setInterval(fetchGDACS, 600000);
     }
+  } else if (layer === 'indigenous') {
+    if (map.hasLayer(indigenousLayer)) {
+      map.removeLayer(indigenousLayer);
+    } else {
+      map.addLayer(indigenousLayer);
+      if (!indigenousLoaded) fetchIndigenousTerritories();
+    }
   }
 }
 
@@ -2982,6 +3058,8 @@ var firmsLayer = L.layerGroup();
 var openskyLayer = L.layerGroup();
 var issLayer = L.layerGroup();
 var gdacsLayer = L.layerGroup();
+var indigenousLayer = L.layerGroup();
+var indigenousLoaded = false;
 var earthquakeRefresh = null;
 var eonetRefresh = null;
 var firmsRefresh = null;
@@ -4479,6 +4557,14 @@ function setProtectiveVolume(val) {
 })();
 
 // ===================== SERVICE WORKER REGISTRATION =====================
+
+// Terra Nullius default: show overlay on initial load
+(function initTerraNullius() {
+  window._terraNulliusOverlay = L.DomUtil.create('div', 'terra-nullius-overlay', map.getContainer());
+  window._terraNulliusOverlay.innerHTML = '<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;z-index:600;opacity:0.15;font-size:3vw;color:#ffffff;font-family:serif;letter-spacing:0.3em;text-transform:uppercase;">Terra Nullius<br><span style="font-size:0.5em;letter-spacing:0.1em;opacity:0.7;">Before all names — the land remembers what maps forget</span><br><span style="font-size:0.35em;letter-spacing:0.05em;opacity:0.5;font-style:italic;">John 12:43</span></div>';
+  window._terraNulliusOverlay.style.display = 'block';
+})();
+
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js', { scope: '/' }).then(function(reg) {
     console.log('[SW] Registered - scope: ' + reg.scope);
@@ -4499,6 +4585,242 @@ if ('serviceWorker' in navigator) {
     }
   }, 10000);
 })();
+
+// ===================== INDIGENOUS FIRST PEOPLES TERRITORIES =====================
+// Comprehensive world coverage - every continent's ancient peoples
+// Uses Native Land Digital API where available, with embedded fallback data
+
+var indigenousTerritoryColors = [
+  'rgba(255, 107, 107, 0.3)', 'rgba(78, 205, 196, 0.3)', 'rgba(255, 195, 0, 0.3)',
+  'rgba(136, 176, 75, 0.3)', 'rgba(199, 128, 232, 0.3)', 'rgba(255, 154, 72, 0.3)',
+  'rgba(0, 206, 209, 0.3)', 'rgba(255, 99, 71, 0.3)', 'rgba(144, 238, 144, 0.3)',
+  'rgba(218, 165, 32, 0.3)', 'rgba(173, 127, 168, 0.3)', 'rgba(114, 159, 207, 0.3)',
+  'rgba(233, 185, 110, 0.3)', 'rgba(138, 226, 52, 0.3)', 'rgba(252, 175, 62, 0.3)'
+];
+
+function getIndigenousColor(index) {
+  return indigenousTerritoryColors[index % indigenousTerritoryColors.length];
+}
+
+function fetchIndigenousTerritories() {
+  updateLiveFeedStatus('Loading Indigenous territories...');
+
+  // Try Native Land Digital API first
+  fetch('https://native-land.ca/api/index.php?maps=territories')
+    .then(function(r) {
+      if (!r.ok) throw new Error('Native Land API returned ' + r.status);
+      return r.json();
+    })
+    .then(function(data) {
+      indigenousLayer.clearLayers();
+      if (data && data.length) {
+        data.forEach(function(territory, i) {
+          if (territory.geometry && territory.properties) {
+            var layer = L.geoJSON(territory, {
+              style: function() {
+                return {
+                  fillColor: getIndigenousColor(i),
+                  fillOpacity: 0.35,
+                  color: getIndigenousColor(i).replace('0.3)', '0.8)'),
+                  weight: 1.5,
+                  dashArray: '4 2'
+                };
+              },
+              onEachFeature: function(feature, lyr) {
+                var name = feature.properties.Name || feature.properties.name || feature.properties.title || 'Unknown Territory';
+                var desc = feature.properties.description || '';
+                lyr.bindPopup(
+                  '<div style="font-family:serif;max-width:280px">' +
+                  '<strong style="color:#ff9;font-size:1.1em">' + name + '</strong>' +
+                  (desc ? '<br><span style="color:#ccc;font-size:0.85em">' + desc + '</span>' : '') +
+                  '<br><span style="color:#888;font-size:0.7em;margin-top:4px;display:block">Source: Native Land Digital</span>' +
+                  '</div>'
+                );
+                lyr.bindTooltip(name, { sticky: true, className: 'indigenous-tooltip' });
+              }
+            });
+            layer.addTo(indigenousLayer);
+          }
+        });
+      }
+      indigenousLoaded = true;
+      updateLiveFeedStatus('Indigenous territories loaded: ' + data.length + ' nations');
+      console.log('[INDIGENOUS] Loaded ' + data.length + ' territories from Native Land Digital');
+    })
+    .catch(function(err) {
+      console.log('[INDIGENOUS] API unavailable (' + err.message + '), loading embedded world data');
+      loadEmbeddedIndigenousTerritories();
+    });
+}
+
+// Comprehensive embedded fallback — ancient peoples of every region of the world
+// These are approximate historical territory boundaries represented as polygon coordinates
+function loadEmbeddedIndigenousTerritories() {
+  indigenousLayer.clearLayers();
+
+  var worldTerritories = [
+    // ===== NORTH AMERICA =====
+    {name:"Nêhiyawak (Cree)",region:"North America",coords:[[55,-120],[58,-110],[60,-100],[58,-85],[55,-80],[52,-85],[50,-95],[50,-110]],desc:"One of the largest First Nations in North America. Subarctic and Plains peoples. Language family: Algonquian."},
+    {name:"Anishinaabe (Ojibwe)",region:"North America",coords:[[50,-95],[52,-88],[50,-80],[48,-78],[46,-82],[44,-86],[46,-90],[48,-93]],desc:"People of the Three Fires. Great Lakes region. Wild rice (manoomin) harvesters. Algonquian language."},
+    {name:"Haudenosaunee (Iroquois Confederacy)",region:"North America",coords:[[44,-79],[44,-74],[43,-73],[42,-74],[41,-76],[42,-78],[43,-80]],desc:"The Great Law of Peace — oldest participatory democracy. Six Nations: Mohawk, Oneida, Onondaga, Cayuga, Seneca, Tuscarora. Founded ~1142 CE."},
+    {name:"Lakota / Dakota / Nakota",region:"North America",coords:[[48,-104],[48,-98],[46,-96],[43,-97],[43,-103],[45,-106],[47,-106]],desc:"Očhéthi Šakówiŋ — Seven Council Fires. Great Plains buffalo nation. Standing Rock. Wounded Knee."},
+    {name:"Diné (Navajo)",region:"North America",coords:[[37,-111],[37,-107],[35.5,-107],[35,-109],[36,-112]],desc:"Dinétah — largest reservation in North America. Four Sacred Mountains. Long Walk of 1864. Code Talkers of WWII."},
+    {name:"Numunu (Comanche)",region:"North America",coords:[[37,-103],[36,-99],[33,-98],[32,-100],[33,-103],[35,-104]],desc:"Lords of the Southern Plains. Comanchería. Masters of horse warfare after 1680 Pueblo Revolt."},
+    {name:"Tsalagi (Cherokee)",region:"North America",coords:[[36,-85],[37,-82],[35.5,-80],[34,-82],[34,-85],[35,-86]],desc:"Sequoyah created Cherokee syllabary — one of the few times an individual invented a writing system. Trail of Tears 1838."},
+    {name:"Mvskoke (Muscogee/Creek)",region:"North America",coords:[[34,-87],[34,-84],[32,-83],[31,-85],[32,-87]],desc:"Creek Confederacy. Southeastern Ceremonial Complex. Forced removal to Indian Territory 1836."},
+    {name:"Chahta (Choctaw)",region:"North America",coords:[[34,-91],[34,-88],[32,-88],[31,-90],[32,-92]],desc:"First to walk the Trail of Tears (1831). Nanih Waiya — sacred mound of origin. Code Talkers in WWI."},
+    {name:"Niitsítapi (Blackfoot Confederacy)",region:"North America",coords:[[52,-115],[52,-109],[48,-108],[48,-113]],desc:"Siksikaitsitapi — the real people. Northern Plains. Buffalo hunters. Four nations: Siksika, Kainai, Piikani, Amskapipikani."},
+    {name:"Tlingit",region:"North America",coords:[[60,-140],[59,-134],[56,-132],[55,-135],[57,-140]],desc:"Northwest Coast. Master carvers and navigators. Clan-based society. Controlled trade routes through Southeast Alaska."},
+    {name:"Kanien'kehá:ka (Mohawk)",region:"North America",coords:[[45,-76],[45,-73],[43.5,-73],[43,-75],[44,-77]],desc:"Keepers of the Eastern Door. Haudenosaunee Confederacy. Ironworkers who built New York's skyline."},
+    {name:"Hopi",region:"North America",coords:[[36.5,-111],[36.5,-110],[35.5,-110],[35.5,-111]],desc:"Hopituh Shi-nu-mu — the peaceful people. Oldest continuously inhabited settlements in North America. Three Mesas. Kachina ceremonies."},
+    {name:"O'odham (Pima/Papago)",region:"North America",coords:[[33,-113],[33,-111],[31,-111],[31,-113]],desc:"Sonoran Desert people. Descendants of Hohokam — ancient canal builders of Arizona (1,000+ miles of canals)."},
+    {name:"Kanaka Maoli (Native Hawaiian)",region:"North America",coords:[[22,-161],[22,-154],[18,-154],[18,-161]],desc:"Polynesian navigators. Kingdom of Hawai'i overthrown 1893 by US-backed coup. 'Aina — the land that feeds."},
+    {name:"Inuit",region:"North America",coords:[[70,-170],[72,-140],[73,-100],[72,-65],[68,-60],[65,-70],[63,-95],[61,-120],[63,-140],[66,-160]],desc:"Circumpolar people across Arctic. Inuktitut language family. Survived 5,000+ years in the harshest environment on Earth."},
+    {name:"Numu / Newe (Shoshone)",region:"North America",coords:[[44,-118],[44,-111],[40,-110],[38,-114],[40,-119]],desc:"Great Basin to Northern Plains. Sacagawea's people. Western Shoshone: largest single land theft by US (Treaty of Ruby Valley 1863 — still contested)."},
+    {name:"Powhatan Confederacy",region:"North America",coords:[[39,-78],[39,-75.5],[37,-75.5],[36.5,-77],[37.5,-78]],desc:"Tsenacommacah — densely settled land. 30+ tribes under Wahunsenacawh. First contact with Jamestown 1607."},
+    {name:"Wampanoag",region:"North America",coords:[[42,-71.5],[42,-69.5],[41,-69.5],[41,-71.5]],desc:"People of the First Light. Massasoit's people. Assisted Plymouth colonists 1621. King Philip's War 1675-78 devastated the nation."},
+    {name:"Apsáalooke (Crow)",region:"North America",coords:[[47,-110],[47,-106],[44.5,-106],[45,-110]],desc:"Children of the Large-Beaked Bird. Montana/Wyoming. Master horse breeders. Allied with US Army against shared enemies."},
+
+    // ===== CENTRAL AMERICA & CARIBBEAN =====
+    {name:"Maya",region:"Central America",coords:[[21,-91],[21,-87],[18,-87],[14,-89],[14,-92],[17,-93]],desc:"3,000+ years of civilization. Invented zero. 260-day sacred calendar. Chichén Itzá, Tikal, Palenque. Writing system independently decoded. Never conquered — still here."},
+    {name:"Aztec (Mexica)",region:"Central America",coords:[[21,-100],[21,-96],[18,-96],[17,-98],[18,-101]],desc:"Tenochtitlán — island city of 200,000+ (larger than any European city in 1500). Triple Alliance. Fell to Cortés and epidemic in 1521."},
+    {name:"Taíno",region:"Caribbean",coords:[[22,-80],[22,-64],[16,-60],[16,-72],[18,-80]],desc:"First people Columbus encountered. Jamaica, Hispaniola, Puerto Rico, Cuba. Estimated 1-3 million at contact. Word origins: hurricane, canoe, barbecue, hammock, tobacco."},
+    {name:"Mixtec (Ñuu Savi)",region:"Central America",coords:[[18,-98.5],[18,-96.5],[16,-96.5],[16,-98.5]],desc:"People of the rain. Oaxaca. Master goldsmiths — finest metalwork in pre-Columbian Americas. Codex Vienna, Codex Nuttall."},
+    {name:"Zapotec (Ben'Zaa)",region:"Central America",coords:[[17.5,-97],[17.5,-95.5],[16,-95.5],[16,-97]],desc:"Cloud People. Monte Albán founded 500 BCE. One of the earliest writing systems in Mesoamerica."},
+
+    // ===== SOUTH AMERICA =====
+    {name:"Quechua (Inca)",region:"South America",coords:[[-5,-80],[-5,-69],[-12,-69],[-18,-65],[-22,-65],[-22,-70],[-18,-75],[-12,-78]],desc:"Tawantinsuyu — the four regions. Largest empire in pre-Columbian Americas. Machu Picchu. Quipu record-keeping. 25,000 miles of roads. 10 million subjects."},
+    {name:"Aymara",region:"South America",coords:[[-14,-70],[-14,-65],[-18,-65],[-18,-70]],desc:"Lake Titicaca. Pre-Inca civilization. Tiwanaku culture (600-1000 CE). Unique time concept: past is in front (seen), future is behind (unseen)."},
+    {name:"Guaraní",region:"South America",coords:[[-19,-60],[-19,-54],[-27,-54],[-27,-60]],desc:"Yvy maraẽ'ỹ — Land Without Evil. Paraguay, Brazil, Argentina, Bolivia. Language spoken by 90% of Paraguay (unique: indigenous language dominant over colonial)."},
+    {name:"Mapuche",region:"South America",coords:[[-35,-73],[-35,-70],[-42,-70],[-42,-73]],desc:"People of the Land. 'The only people in the Americas who were never conquered.' Resisted Inca, Spanish, and Chilean states. Still fighting for Wallmapu."},
+    {name:"Yanomami",region:"South America",coords:[[4,-66],[4,-62],[0,-62],[0,-66]],desc:"Amazon/Orinoco rainforest. ~35,000 people in 200-250 villages. One of the most isolated peoples until 1950s. Gold miners remain existential threat."},
+    {name:"Kayapó",region:"South America",coords:[[-5,-54],[-5,-50],[-9,-50],[-9,-54]],desc:"Mẽbêngôkre. Brazilian Amazon. 8,600+ people. Chief Raoni Metuktire — global indigenous rights icon. Demarcated territory size of Austria."},
+    {name:"Asháninka",region:"South America",coords:[[-10,-76],[-10,-73],[-13,-73],[-13,-76]],desc:"Largest indigenous group in Peruvian Amazon. 100,000+ people. Fought Shining Path guerrillas in 1980s-90s. Autonomous forest guardians."},
+    {name:"Wayuu",region:"South America",coords:[[12.5,-73],[12.5,-71],[10.5,-71],[10.5,-73]],desc:"La Guajira Peninsula. Colombia/Venezuela. 600,000+ people — one of the largest indigenous groups in South America. Matrilineal. Never fully conquered by Spain."},
+    {name:"Muisca",region:"South America",coords:[[6,-74.5],[6,-73],[4.5,-73],[4.5,-74.5]],desc:"Colombian highlands. El Dorado legend originated from Muisca gold offerings at Lake Guatavita. Zipa and Zaque: dual chieftains."},
+
+    // ===== EUROPE (PRE-ROMAN / ANCIENT) =====
+    {name:"Sámi",region:"Europe",coords:[[70,15],[70,30],[67,30],[65,25],[65,15]],desc:"Sápmi — Europe's only recognized indigenous people. Reindeer herding. Present across Norway, Sweden, Finland, Russia. 80,000+ people. Joik singing tradition."},
+    {name:"Basque (Euskaldunak)",region:"Europe",coords:[[44,-3],[44,0],[42.5,0],[42.5,-3]],desc:"Pre-Indo-European language isolate — oldest language in Europe, unrelated to any other. Pyrenees. Never fully Romanized. Whaling pioneers."},
+    {name:"Celtic Peoples",region:"Europe",coords:[[56,-10],[56,5],[48,8],[44,5],[43,-2],[46,-8],[50,-10]],desc:"Gaul, Britannia, Hibernia, Galicia, Galatia. La Tène culture. Druids. Oral tradition. Spread from Hallstatt (Austria) across Europe 800-300 BCE."},
+    {name:"Hellenic / Pre-Hellenic (Minoan-Pelasgian)",region:"Europe",coords:[[41,19],[41,29],[34,29],[34,24],[37,19]],desc:"Minoans of Crete (3000-1450 BCE) — Europe's first advanced civilization. Linear A (undeciphered). Bull-leaping. Pelasgians: the 'people who were here before.'"},
+    {name:"Etruscan (Rasenna)",region:"Europe",coords:[[44,10],[44,13],[42,13],[42,10]],desc:"Pre-Roman Italy. Language undeciphered — not Indo-European. Rome's kings were Etruscan. Engineering, metallurgy, art. Absorbed by Rome 300-100 BCE."},
+    {name:"Finno-Ugric Peoples",region:"Europe",coords:[[65,25],[65,55],[58,55],[55,40],[55,25]],desc:"Finland, Estonia, Hungary, Komi, Udmurt, Mari. Pre-Indo-European settlers of Northern Europe. Kalevala epic. Shamanic traditions."},
+    {name:"Slavic Proto-peoples",region:"Europe",coords:[[55,15],[55,35],[48,35],[45,25],[47,15]],desc:"Polabians, Sorbs, Polabian Slavs — ancient peoples of Central/Eastern Europe. Many absorbed into Germanic expansion (Drang nach Osten). Sorbian language still spoken."},
+    {name:"Iberian Pre-Celtic",region:"Europe",coords:[[43,-9],[43,-1],[37,-1],[36,-6],[38,-9]],desc:"Iberians, Celtiberians, Tartessians, Lusitanians. Pre-Roman Iberia. Tartessos: possibly ancient Tarshish. Iberian script partially deciphered."},
+    {name:"Thracians / Dacians",region:"Europe",coords:[[46,22],[46,29],[41,29],[41,22]],desc:"Balkans and Carpathians. Orpheus was Thracian. Dacians resisted Rome — Trajan's Column commemorates conquest. Getae: 'those who believe in immortality.'"},
+
+    // ===== AFRICA =====
+    {name:"San (Bushmen)",region:"Africa",coords:[[-18,18],[-18,26],[-28,26],[-28,18]],desc:"Oldest human lineage on Earth. 100,000+ years of continuous habitation in Southern Africa. Click languages. Rock art spanning 28,000 years. The first people."},
+    {name:"Khoi (Khoikhoi)",region:"Africa",coords:[[-28,16],[-28,21],[-34,21],[-34,16]],desc:"Pastoralists of the Cape. First encountered by European ships. Called 'Hottentots' (pejorative). Decimated by smallpox from Dutch colonists."},
+    {name:"Maasai",region:"Africa",coords:[[0,34],[0,38],[-5,38],[-5,34]],desc:"Nilotic pastoralists. Kenya and Tanzania. Cattle-centered culture — all cattle belong to the Maasai (given by Enkai/God). Moran warrior tradition."},
+    {name:"Yoruba",region:"Africa",coords:[[10,2],[10,5],[6,5],[6,2]],desc:"One of Africa's largest ethnic groups. Ilé-Ifẹ̀ — cradle of Yoruba civilization. Orishas — spiritual pantheon that traveled to the Americas via the slave trade (Candomblé, Santería, Vodou)."},
+    {name:"Igbo",region:"Africa",coords:[[8,6],[8,8],[5,8],[5,6]],desc:"Southeastern Nigeria. Decentralized political system — villages governed by council of elders, not kings. Nri Kingdom (900 CE). Igbo-Ukwu bronzes (9th century)."},
+    {name:"Zulu",region:"Africa",coords:[[-27,29],[-27,32],[-31,32],[-31,29]],desc:"KwaZulu. Shaka Zulu revolutionized warfare (ibutho regiment system). Defeated British at Isandlwana (1879). 12 million people."},
+    {name:"Amazigh (Berber)",region:"Africa",coords:[[36,-5],[36,10],[28,10],[28,-5]],desc:"Imazighen — Free People. Indigenous to North Africa for 10,000+ years. Tifinagh script. Survived Phoenician, Roman, Arab, French, and Spanish colonization. Still here."},
+    {name:"Tuareg (Kel Tamasheq)",region:"Africa",coords:[[25,-2],[25,12],[16,12],[16,-2]],desc:"Blue People of the Sahara. Tifinagh script. Matrilineal. Men wear veils, women do not. Trans-Saharan trade masters. Azawad independence movement."},
+    {name:"Hadza",region:"Africa",coords:[[-3,34.5],[-3,36],[-4.5,36],[-4.5,34.5]],desc:"Lake Eyasi, Tanzania. ~1,300 people. One of the last hunter-gatherer peoples. Click language (not related to Khoisan). NOT Bantu. Genetic lineage among oldest on Earth."},
+    {name:"Nuba Peoples",region:"Africa",coords:[[12,29],[12,32],[10,32],[10,29]],desc:"Nuba Mountains, Sudan. ~1 million people of 50+ distinct ethnic groups. Survived centuries of slave raids. Currently facing aerial bombardment and ethnic cleansing."},
+    {name:"Pygmy Peoples (BaAka, Mbuti, Twa, Batwa)",region:"Africa",coords:[[4,15],[4,30],[0,30],[-5,29],[-5,15]],desc:"Central African rainforest. Among the oldest inhabitants of the Congo Basin. Median height ~4'11\". Expert forest knowledge, polyphonic singing tradition."},
+    {name:"Malagasy (original Austronesian settlers)",region:"Africa",coords:[[-12,43],[-12,50],[-26,50],[-26,43]],desc:"Madagascar settled ~350 CE by Austronesian voyagers from Borneo — 5,000 miles across the Indian Ocean. Mixed with East African Bantu. Unique biodiversity."},
+    {name:"Swahili Coast Peoples",region:"Africa",coords:[[2,39],[2,41],[-12,41],[-12,39]],desc:"Swahili civilization. City-states: Kilwa, Lamu, Zanzibar, Mombasa. Bantu-Arab cultural fusion. Swahili language is Bantu with Arabic loans. Indian Ocean trade network."},
+    {name:"Wolof",region:"Africa",coords:[[16,-17],[16,-13.5],[12.5,-13.5],[12.5,-17]],desc:"Senegambia. Jolof Empire (1350-1549). Griot tradition — oral historians/musicians. Wolof language dominates Senegal regardless of ethnicity."},
+    {name:"Ashanti (Asante)",region:"Africa",coords:[[8,-3],[8,0],[6,0],[6,-3]],desc:"Golden Stool (Sika Dwa Kofi) — never sat upon, embodies the soul of the Ashanti nation. Gold Coast. Defeated British multiple times. Confederacy founded ~1670."},
+
+    // ===== MIDDLE EAST / WEST ASIA =====
+    {name:"Kurdish Peoples",region:"Middle East",coords:[[39,40],[39,46],[35,46],[35,40]],desc:"Kurdistan — 30+ million people across Turkey, Iraq, Syria, Iran. Largest stateless nation on Earth. Mountain people. Median Empire (678-549 BCE) may be ancestral."},
+    {name:"Assyrian/Syriac/Chaldean",region:"Middle East",coords:[[38,42],[38,46],[35,43],[35,42]],desc:"Indigenous to Mesopotamia. Descendants of ancient Assyrians/Babylonians. Aramaic-speaking Christians. Genocide 1914-1920 (Seyfo). Displaced from ancestral homeland."},
+    {name:"Bedouin",region:"Middle East",coords:[[32,34],[32,44],[22,44],[22,34]],desc:"Nomadic Arab peoples. Desert survival knowledge spanning millennia. Tribal confederation. Poetry, hospitality code (diyafa). Increasingly settled by nation-states."},
+    {name:"Marsh Arabs (Ma'dan)",region:"Middle East",coords:[[32,46],[32,48],[30,48],[30,46]],desc:"Southern Iraq. 5,000+ years in the Tigris-Euphrates marshlands. Reed house (mudhif) architecture. Saddam drained the marshes in 1990s (ecocide/genocide). Partially restored."},
+    {name:"Druze",region:"Middle East",coords:[[34,35],[34,37],[32,37],[32,35]],desc:"Lebanon, Syria, Israel. Esoteric monotheistic faith. Closed religion — no conversion in or out. Jethro (Nabi Shu'ayb) as central prophet. Mountain communities."},
+    {name:"Yazidi",region:"Middle East",coords:[[37,42],[37,44],[36,44],[36,42]],desc:"Sinjar Mountains. Monotheistic — Melek Taus (Peacock Angel). Survived 74 genocides (firman). ISIS genocide 2014. Oral tradition. ~1 million worldwide."},
+
+    // ===== CENTRAL ASIA =====
+    {name:"Turkic Nomadic Peoples (Kazakh, Kyrgyz, Turkmen)",region:"Central Asia",coords:[[50,50],[50,80],[38,80],[38,50]],desc:"Steppe nomads. Horse culture. Yurt dwellers. Tengriism (sky-god worship). From Göktürk Empire to Mongol confederation. Kumis (fermented mare's milk)."},
+    {name:"Pashtun",region:"Central Asia",coords:[[36,66],[36,72],[30,72],[30,66]],desc:"Pashtunwali — ancient honor code. 60+ million people. Afghanistan/Pakistan. Tribal confederation. Never fully conquered by any empire. 'Graveyard of Empires.'"},
+    {name:"Tajik / Sogdian descendants",region:"Central Asia",coords:[[40,67],[40,72],[37,72],[37,67]],desc:"Persian-speaking people of Central Asia. Sogdians were the Silk Road traders — multilingual merchants connecting China to Rome. Tajik = the settled peoples."},
+    {name:"Hazara",region:"Central Asia",coords:[[36,65],[36,68],[33,68],[33,65]],desc:"Central Afghanistan (Hazarajat). Possibly descended from Mongol garrisons. Persecuted Shia minority. Faces ongoing genocide by Taliban. Bamiyan Buddhas were in Hazara territory."},
+
+    // ===== SOUTH ASIA =====
+    {name:"Adivasi (Scheduled Tribes of India)",region:"South Asia",coords:[[24,78],[24,86],[20,86],[18,80],[20,78]],desc:"Original inhabitants of the Indian subcontinent. 104 million people (8.6% of India). 700+ distinct tribes. Forest peoples. Displaced by mining, dams, and development."},
+    {name:"Dravidian Peoples (Tamil, etc.)",region:"South Asia",coords:[[15,76],[15,80],[8,80],[8,76]],desc:"Pre-Indo-European peoples of South India and Sri Lanka. Tamil — one of the world's oldest living languages (2,000+ years of continuous literature). Indus Valley roots debated."},
+    {name:"Vedda (Sri Lanka)",region:"South Asia",coords:[[8,80],[8,82],[6.5,82],[6.5,80]],desc:"Indigenous people of Sri Lanka. Pre-Sinhalese, pre-Tamil. Hunter-gatherers. ~2,500 remaining. Among the oldest documented populations in South Asia."},
+    {name:"Naga Peoples",region:"South Asia",coords:[[27,93],[27,96],[24,96],[24,93]],desc:"Northeast India/Myanmar. 60+ tribes. Headhunting tradition (historical). Naga independence movement since 1947. Distinct from both Indian and Burmese peoples."},
+    {name:"Baloch",region:"South Asia",coords:[[30,61],[30,68],[25,68],[25,61]],desc:"Balochistan: Pakistan, Iran, Afghanistan. Nomadic/semi-nomadic. Independence movement suppressed. Strategic location on Arabian Sea. Gwadar port controversy."},
+    {name:"Sindhi",region:"South Asia",coords:[[28,67],[28,70],[24,70],[24,67]],desc:"Indus Valley. Mohenjo-daro and Harappa — 5,000-year-old planned cities with running water, sewerage. Sindhi civilization predates recorded history."},
+
+    // ===== EAST ASIA =====
+    {name:"Ainu",region:"East Asia",coords:[[46,140],[46,146],[42,146],[42,140]],desc:"Indigenous people of Hokkaido, Sakhalin, Kurils. NOT ethnically Japanese. Bear ceremony (Iyomante). Oral epic (Yukar). Colonized by Japan from 1869. ~25,000 remain."},
+    {name:"Tibetan Peoples",region:"East Asia",coords:[[35,80],[35,100],[28,100],[28,80]],desc:"Plateau of the world. Buddhist civilization. Dalai Lama lineage since 1391. Occupied by China 1950. Self-immolation protests. Unique high-altitude genetic adaptation."},
+    {name:"Uyghur",region:"East Asia",coords:[[45,75],[45,95],[37,95],[37,75]],desc:"East Turkestan (Xinjiang). Turkic Muslim people. Silk Road cities: Kashgar, Turpan, Ürümqi. Currently facing mass detention, surveillance, and cultural erasure by China."},
+    {name:"Mongol Peoples",region:"East Asia",coords:[[52,90],[52,120],[42,120],[42,90]],desc:"The Eternal Blue Sky (Tengri). Chinggis Khan united the steppe 1206. Largest contiguous empire in history. Nomadic pastoral culture. Throat singing (khoomei). Ger (yurt)."},
+    {name:"Ryukyuan (Okinawan)",region:"East Asia",coords:[[28,126],[28,130],[24,130],[24,126]],desc:"Ryukyu Kingdom (1429-1879). Distinct from Japanese. Karate originated here. Annexed by Japan. Battle of Okinawa 1945: 1/3 of civilian population killed."},
+    {name:"Hmong/Miao",region:"East Asia",coords:[[30,104],[30,110],[24,110],[24,104]],desc:"Mountain peoples of Southern China, Vietnam, Laos, Thailand. 11+ million. Story cloths (paj ntaub). Secret War in Laos — recruited by CIA, then abandoned."},
+    {name:"Yi (Nuosu)",region:"East Asia",coords:[[29,100],[29,105],[25,105],[25,100]],desc:"Southwest China. Own script (Yi syllabary). Caste system. Torch Festival. 9 million people. Yi kingdoms resisted Chinese imperial control for centuries."},
+    {name:"Korean Indigenous Shamanism (Mu)",region:"East Asia",coords:[[39,125],[39,130],[34,130],[34,125]],desc:"Mudang — Korean shamans. Pre-Buddhist, pre-Confucian spiritual tradition. Gut rituals. Persecuted under Japanese occupation and modernization. Still practiced."},
+
+    // ===== SOUTHEAST ASIA =====
+    {name:"Khmer",region:"Southeast Asia",coords:[[15,102],[15,107],[10,107],[10,102]],desc:"Angkor Wat — largest religious monument on Earth. Khmer Empire (802-1431). Hydraulic engineering. Jayavarman VII. Survived Khmer Rouge genocide."},
+    {name:"Montagnard (Degar) Peoples",region:"Southeast Asia",coords:[[15,107],[15,109],[13,109],[13,107]],desc:"Central Highlands of Vietnam. 30+ ethnic groups. Recruited by US Special Forces in Vietnam War. Persecuted by Vietnamese government. Refugees."},
+    {name:"Orang Asli",region:"Southeast Asia",coords:[[6,100],[6,103],[3,103],[3,100]],desc:"Original People of Peninsular Malaysia. 18 subgroups. Semang (Negrito), Senoi, Proto-Malay. Forest peoples losing land to palm oil plantations."},
+    {name:"Igorot (Cordillera Peoples)",region:"Southeast Asia",coords:[[18,120],[18,122],[16,122],[16,120]],desc:"Mountain peoples of northern Luzon, Philippines. Rice terraces of Banaue — 2,000 years old, carved into mountainsides. Headhunting tradition (historical)."},
+    {name:"Dayak Peoples",region:"Southeast Asia",coords:[[3,109],[3,115],[-2,115],[-2,109]],desc:"Borneo. 200+ distinct groups. Longhouse communities. Rainforest peoples. Iban, Bidayuh, Kayan, Kenyah. Under threat from logging and palm oil."},
+    {name:"Papuan Peoples",region:"Southeast Asia",coords:[[-2,137],[-2,147],[-8,147],[-8,137]],desc:"New Guinea — most linguistically diverse place on Earth. 1,000+ languages. 40,000+ years of habitation. Highland peoples contacted in 1930s. Kuk Swamp: independent invention of agriculture 10,000 years ago."},
+    {name:"Champa",region:"Southeast Asia",coords:[[16,107],[16,109.5],[12,109.5],[12,107]],desc:"Kingdom of Champa (192-1832). Hindu-Malay. Central Vietnam coast. My Son temples. Conquered and absorbed by Vietnamese (Nam tiến — Southward March)."},
+
+    // ===== OCEANIA / PACIFIC =====
+    {name:"Aboriginal Australians",region:"Oceania",coords:[[-10,115],[-10,150],[-40,150],[-40,115]],desc:"65,000+ years of continuous civilization — oldest on Earth. 500+ nations. Songlines map the continent. Dreamtime (Tjukurpa). Survived the oldest continuous genocide."},
+    {name:"Torres Strait Islanders",region:"Oceania",coords:[[-9,141],[-9,145],[-11,145],[-11,141]],desc:"Melanesian peoples of Torres Strait. Distinct from Aboriginal Australians. Maritime culture. Star navigation. Mabo v Queensland (1992) overturned terra nullius in Australian law."},
+    {name:"Māori",region:"Oceania",coords:[[-34,171],[-34,179],[-47,179],[-47,171]],desc:"Aotearoa (New Zealand). Arrived ~1280 CE by waka hourua (double-hulled canoe) from East Polynesia. Haka. Tā moko (tattoo). Treaty of Waitangi (1840). Whakapapa (genealogy)."},
+    {name:"Polynesian Navigators (Samoa, Tonga, etc.)",region:"Oceania",coords:[[-13,-176],[-13,-168],[-22,-168],[-22,-176]],desc:"3,000+ years of ocean voyaging. No compass, no GPS — star paths, wave patterns, bird flight. Populated the Pacific Triangle: Hawai'i, Rapa Nui, Aotearoa."},
+    {name:"Rapa Nui",region:"Oceania",coords:[[-27,-110],[-27,-109],[-27.5,-109],[-27.5,-110]],desc:"Easter Island. Moai — 887 monolithic statues. Rongorongo script (undeciphered — possibly independent invention of writing). Population collapsed before European contact."},
+    {name:"Fijian (iTaukei)",region:"Oceania",coords:[[-16,177],[-16,180],[-21,180],[-21,177]],desc:"3,500+ years in Fiji. Melanesian-Polynesian. Kava ceremony. Communal land ownership (83% of land). Bure (traditional house). Fire-walking tradition of Beqa."},
+    {name:"Chamorro",region:"Oceania",coords:[[14,144],[14,146],[13,146],[13,144]],desc:"Indigenous people of the Mariana Islands (Guam, Saipan). Latte stone architecture. 4,000+ years of habitation. Spanish colonization from 1668. US territory since 1898."},
+    {name:"Kanaky (Kanak)",region:"Oceania",coords:[[-20,164],[-20,167],[-23,167],[-23,164]],desc:"New Caledonia. Melanesian. Still fighting for independence from France. Three referendums (2018, 2020, 2021). Case (round hut). Customary law coexists with French law."},
+
+    // ===== NORTH ASIA / SIBERIA =====
+    {name:"Yakut (Sakha)",region:"North Asia",coords:[[68,120],[68,145],[58,145],[58,120]],desc:"Turkic people of Siberia. Coldest inhabited region on Earth (Oymyakon: -67.7°C). Horse and cattle culture adapted to permafrost. Sakha Republic."},
+    {name:"Evenki (Tungus)",region:"North Asia",coords:[[65,100],[65,135],[55,135],[55,100]],desc:"Reindeer herders across the largest territory of any indigenous Siberian people. Shamanic tradition — the word 'shaman' comes from Evenki. Trans-Baikal to Pacific."},
+    {name:"Chukchi",region:"North Asia",coords:[[70,165],[70,180],[64,180],[64,165]],desc:"Chukotka — northeastern tip of Asia. Closest indigenous people to North America. Reindeer herders and sea mammal hunters. Resisted Russian colonization for 150 years."},
+    {name:"Nenets",region:"North Asia",coords:[[72,50],[72,80],[66,80],[66,50]],desc:"Yamal Peninsula. 45,000 people. Largest reindeer herders on Earth — 300,000 head. Annual migration of 1,000+ km. Threatened by Gazprom gas extraction."},
+    {name:"Buryat",region:"North Asia",coords:[[55,105],[55,115],[50,115],[50,105]],desc:"Mongolic people of Lake Baikal region. Buddhist. Russia's largest indigenous minority. Epic of Geser. Shamanic-Buddhist syncretism."},
+    {name:"Nivkh (Gilyak)",region:"North Asia",coords:[[55,140],[55,145],[51,145],[51,140]],desc:"Sakhalin and Amur River. Language isolate — unrelated to any other. Bear festival. Fishers. ~4,000 remaining. Displaced by Russian and Japanese colonization."},
+
+    // ===== ARCTIC =====
+    {name:"Yupik",region:"Arctic",coords:[[66,-175],[66,-160],[60,-160],[60,-175]],desc:"Western Alaska and Chukotka. Sea mammal hunters. Distinct from Inuit (separate language family branch). Yup'ik dance. 34,000 people."},
+    {name:"Aleut (Unangan)",region:"Arctic",coords:[[55,-175],[55,-160],[50,-160],[50,-175]],desc:"Aleutian Islands. 10,000+ years of maritime adaptation. Russian colonization devastated population (80% loss). WWII: US forcibly relocated Aleut to internment camps."},
+    {name:"Kalaallit (Greenlandic Inuit)",region:"Arctic",coords:[[78,-60],[78,-20],[60,-20],[60,-60]],desc:"Greenland. 50,000+ people. Self-governing territory of Denmark. Thule culture ancestors. Kayak and umiak inventors. Climate change melting traditional hunting grounds."}
+  ];
+
+  worldTerritories.forEach(function(t, i) {
+    var latlngs = t.coords.map(function(c) { return [c[0], c[1]]; });
+    var fillColor = getIndigenousColor(i);
+    var borderColor = fillColor.replace('0.3)', '0.9)');
+
+    var poly = L.polygon(latlngs, {
+      fillColor: fillColor,
+      fillOpacity: 0.3,
+      color: borderColor,
+      weight: 2,
+      dashArray: '5 3'
+    });
+
+    poly.bindPopup(
+      '<div style="font-family:serif;max-width:300px">' +
+      '<strong style="color:#ff9;font-size:1.1em">' + t.name + '</strong>' +
+      '<br><span style="color:#aaa;font-size:0.75em">' + t.region + '</span>' +
+      '<br><span style="color:#ddd;font-size:0.85em;margin-top:6px;display:block">' + t.desc + '</span>' +
+      '<br><span style="color:#666;font-size:0.7em;margin-top:4px;display:block">The land had names before the colonizers arrived.</span>' +
+      '</div>'
+    );
+    poly.bindTooltip(t.name, { sticky: true, className: 'indigenous-tooltip' });
+    poly.addTo(indigenousLayer);
+  });
+
+  indigenousLoaded = true;
+  updateLiveFeedStatus('Indigenous territories loaded: ' + worldTerritories.length + ' nations (embedded data)');
+  console.log('[INDIGENOUS] Loaded ' + worldTerritories.length + ' embedded world territories');
+}
 </script>
 <script src="/i18n.js"></script>
 <script>
