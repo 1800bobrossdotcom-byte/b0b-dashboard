@@ -46,6 +46,13 @@ function checkFileIntegrity() {
 setInterval(checkFileIntegrity, 5 * 60 * 1000);
 initIntegrityMonitoring();
 
+// ===================== OWNER BYPASS =====================
+// Owner IPs are never blacklisted or flagged - set OWNER_IPS env var as comma-separated list
+const OWNER_IPS = new Set(
+  (process.env.OWNER_IPS || '74.75.249.244').split(',').map(s => s.trim()).filter(Boolean)
+);
+function isOwnerIP(ip) { return OWNER_IPS.has(ip); }
+
 // ===================== SECURITY EVENT CORRELATION =====================
 // Track suspicious activity per IP - escalate on pattern detection
 const suspiciousIPs = new Map();
@@ -58,6 +65,7 @@ const blacklistedIPs = new Map();
 const BLACKLIST_DURATION = 60 * 60 * 1000; // 1 hour ban after escalation
 
 function isBlacklisted(ip) {
+  if (isOwnerIP(ip)) return false;
   const until = blacklistedIPs.get(ip);
   if (!until) return false;
   if (Date.now() > until) { blacklistedIPs.delete(ip); return false; }
@@ -65,6 +73,7 @@ function isBlacklisted(ip) {
 }
 
 function recordSuspicion(ip, reason) {
+  if (isOwnerIP(ip)) return;
   const now = Date.now();
   if (!suspiciousIPs.has(ip)) {
     suspiciousIPs.set(ip, { events: [], flagged: false });
