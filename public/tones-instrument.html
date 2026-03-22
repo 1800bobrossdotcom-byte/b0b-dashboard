@@ -16,7 +16,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;padding:env(safe-area-inset-top) 8px env(safe-area-inset-bottom);user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;overflow-y:auto;overflow-x:hidden}
 
-/* â”€â”€â”€ HEADER â”€â”€â”€ */
+/* ─── HEADER ─── */
 .header{text-align:center;padding:10px 0 2px;width:100%;max-width:720px;position:relative}
 .header h1{color:#ff4444;font-size:0.9rem;letter-spacing:2px;display:flex;align-items:center;justify-content:center;gap:8px}
 .header .sub{color:#555;font-size:0.55rem;margin-top:2px;letter-spacing:0.5px}
@@ -26,7 +26,7 @@ body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;min-he
 .pill.rec{border-color:#ff4444;color:#ff4444;animation:pulse-rec 1s ease infinite}
 @keyframes pulse-rec{0%,100%{opacity:1}50%{opacity:0.4}}
 
-/* â”€â”€â”€ VISUALIZER â”€â”€â”€ */
+/* ─── VISUALIZER ─── */
 .viz-bar{width:100%;max-width:720px;height:64px;display:flex;gap:4px;margin:4px 0}
 .viz-canvas{flex:1;background:#0d0d0d;border:1px solid #1a1a1a;border-radius:3px}
 .vu-wrap{width:28px;display:flex;flex-direction:column;gap:2px}
@@ -34,7 +34,7 @@ body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;min-he
 .vu-fill{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,#00ff41 0%,#00ff41 60%,#ffcc00 75%,#ff4444 90%);transition:height 0.06s}
 .vu-label{font-size:0.4rem;color:#444;text-align:center}
 
-/* â”€â”€â”€ ACTIVE DISPLAY â”€â”€â”€ */
+/* ─── ACTIVE DISPLAY ─── */
 .active-display{width:100%;max-width:720px;background:#0d0d0d;border:1px solid #1a1a1a;border-radius:3px;padding:4px 8px;min-height:24px;display:flex;flex-wrap:wrap;gap:3px;align-items:center}
 .active-tag{font-size:0.55rem;padding:1px 6px;border-radius:8px;border:1px solid;display:flex;align-items:center;gap:3px}
 .active-tag.sol{border-color:#00ff41;color:#00ff41}
@@ -46,7 +46,7 @@ body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;min-he
 .active-tag .x:hover{opacity:1}
 .empty-state{color:#333;font-size:0.55rem;font-style:italic}
 
-/* â”€â”€â”€ PAD GRID â”€â”€â”€ */
+/* ─── PAD GRID ─── */
 .pad-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;width:100%;max-width:720px;padding:4px 0;touch-action:pan-y}
 .pad{position:relative;aspect-ratio:1;border-radius:5px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.06);overflow:hidden;transition:border-color 0.15s,box-shadow 0.2s;touch-action:none}
 .pad .glow{position:absolute;inset:0;opacity:0;transition:opacity 0.15s;border-radius:5px}
@@ -72,7 +72,7 @@ body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;min-he
 .pad.ult .glow{background:radial-gradient(circle,rgba(204,136,255,0.2) 0%,transparent 70%)}
 .pad.ult .freq-label{color:#cc88ff}.pad.ult .vol-bar{background:#cc88ff}.pad.ult.playing{border-color:#cc88ff}
 
-/* â”€â”€â”€ CONTROL TABS â”€â”€â”€ */
+/* ─── CONTROL TABS ─── */
 .ctrl-tabs{width:100%;max-width:720px;display:flex;border-bottom:1px solid #222;margin-top:4px}
 .ctrl-tab{flex:1;text-align:center;padding:5px 0;font-size:0.6rem;color:#555;cursor:pointer;border-bottom:2px solid transparent;letter-spacing:1px;transition:all 0.15s}
 .ctrl-tab:hover{color:#888}
@@ -91,7 +91,7 @@ body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;min-he
 .ctrl-row button.rec-active{background:#ff4444;color:#0a0a0a;border-color:#ff4444}
 .ctrl-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px}
 
-/* â”€â”€â”€ SEQUENCER â”€â”€â”€ */
+/* ─── SEQUENCER ─── */
 .seq-section{width:100%;max-width:720px;border:1px solid #1a1a1a;border-radius:3px;padding:6px 8px;margin:4px 0;background:#0d0d0d}
 .seq-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
 .seq-header h3{font-size:0.65rem;color:#ffaa50;letter-spacing:1px;display:flex;align-items:center;gap:5px}
@@ -119,7 +119,7 @@ body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;min-he
 .seq-transport button:hover{border-color:#ffaa50;color:#ffaa50}
 .seq-transport button.playing{background:#ffaa50;color:#0a0a0a;border-color:#ffaa50}
 
-/* â”€â”€â”€ RECORDING BAR â”€â”€â”€ */
+/* ─── RECORDING BAR ─── */
 .rec-bar{width:100%;max-width:720px;display:flex;align-items:center;gap:6px;padding:4px 8px;background:#0d0d0d;border:1px solid #1a1a1a;border-radius:3px;margin:3px 0}
 .rec-bar .rec-dot{width:8px;height:8px;border-radius:50%;background:#333;flex-shrink:0}
 .rec-bar .rec-dot.on{background:#ff4444;animation:pulse-rec 1s ease infinite}
@@ -127,7 +127,7 @@ body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;min-he
 .rec-bar button{background:transparent;border:1px solid #333;color:#777;font-family:inherit;font-size:0.55rem;padding:3px 8px;cursor:pointer;border-radius:2px}
 .rec-bar button:hover{border-color:#ff4444;color:#ff4444}
 
-/* â”€â”€â”€ MIDI â”€â”€â”€ */
+/* ─── MIDI ─── */
 .midi-section{width:100%;max-width:720px;border:1px solid #1a1a1a;border-radius:3px;padding:6px 8px;margin:3px 0;background:#0d0d0d}
 .midi-section h3{font-size:0.65rem;color:#00ccff;letter-spacing:1px;margin-bottom:4px}
 .midi-row{display:flex;align-items:center;gap:6px;margin:3px 0}
@@ -142,7 +142,7 @@ body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;min-he
 .install-banner strong{color:#ff4444}
 .install-banner .dismiss{color:#444;cursor:pointer;font-size:0.55rem;margin-top:3px;display:block}
 
-/* â”€â”€â”€ MICROPHONE â”€â”€â”€ */
+/* ─── MICROPHONE ─── */
 .mic-pitch{font-size:1.2rem;font-weight:bold;color:#ff6699;text-align:center;padding:4px 0;font-variant-numeric:tabular-nums;letter-spacing:1px}
 .mic-pitch small{font-size:0.5rem;color:#555;font-weight:normal;display:block}
 .mic-note{font-size:0.7rem;color:#ff6699;opacity:0.7}
@@ -150,7 +150,7 @@ body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;min-he
 .evolve-active{background:#ff6600!important;color:#0a0a0a!important;border-color:#ff6600!important;animation:pulse-rec 1.5s ease infinite}
 .seq-transport input[type=number]{background:#0a0a0a;color:#d4d4d4;border:1px solid #333;font-family:inherit;font-size:0.55rem;padding:2px 4px;width:42px;text-align:center;border-radius:2px}
 
-/* â”€â”€â”€ COLLAPSIBLE SECTIONS â”€â”€â”€ */
+/* ─── COLLAPSIBLE SECTIONS ─── */
 .section-toggle{width:100%;max-width:720px;display:flex;align-items:center;justify-content:space-between;padding:6px 8px;background:#0d0d0d;border:1px solid #1a1a1a;border-radius:3px;margin:3px 0;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .section-toggle h3{font-size:0.6rem;color:#888;letter-spacing:1px;margin:0}
 .section-toggle .arrow{color:#444;font-size:0.7rem;transition:transform 0.2s}
@@ -158,16 +158,16 @@ body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;min-he
 .section-body{overflow:hidden;transition:max-height 0.3s ease,opacity 0.2s;max-height:0;opacity:0}
 .section-body.open{max-height:2000px;opacity:1}
 
-/* â”€â”€â”€ SCROLL HINT â”€â”€â”€ */
+/* ─── SCROLL HINT ─── */
 .scroll-hint{display:none;text-align:center;color:#333;font-size:0.45rem;padding:2px 0;letter-spacing:1px}
 
-/* â”€â”€â”€ STICKY TRANSPORT (mobile) â”€â”€â”€ */
+/* ─── STICKY TRANSPORT (mobile) ─── */
 @media(max-width:720px){
   .seq-transport-sticky{position:sticky;bottom:0;z-index:50;background:#0a0a0a;border-top:1px solid #222;padding:6px 8px;margin:0 -8px;width:calc(100% + 16px)}
   .scroll-hint{display:block}
 }
 
-/* â”€â”€â”€ RESPONSIVE â”€â”€â”€ */
+/* ─── RESPONSIVE ─── */
 @media(max-width:520px){
   .pad-grid{grid-template-columns:repeat(5,1fr);gap:3px}
   .pad .freq-label{font-size:0.55rem}
@@ -458,7 +458,7 @@ body{background:#0a0a0a;color:#d4d4d4;font-family:"Courier New",monospace;min-he
 <div class="credit"><a href="https://b0b.dev">b0b.dev</a> &mdash; TONE LAB v2</div>
 
 <script>
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• AUDIO ENGINE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════ AUDIO ENGINE ═══════════════════ */
 var ctx, masterGain, warmthNode, reverbConv, reverbDry, reverbWet;
 var delayNode, delayFeedback, delayWet;
 var filterNode, analyser, analyserR, splitter;
@@ -467,12 +467,12 @@ var atkMs = 80, relMs = 150, driftAmount = 0.2;
 var solo = false, reverbAmount = 0.25;
 var voices = {};
 
-/* â”€â”€â”€ MIC ENGINE â”€â”€â”€ */
+/* ─── MIC ENGINE ─── */
 var micStream = null, micSource = null, micGainNode = null, micDryGain = null, micWetGain = null;
 var micActive = false, micMode = 'passthrough', micAnalyser = null;
 var micResonators = [], pitchRAF = null;
 
-/* â”€â”€â”€ PAD DEFINITIONS â”€â”€â”€ */
+/* ─── PAD DEFINITIONS ─── */
 var PADS = [
   /* Solfeggio healing (green) */
   {id:'s174',f:174,name:'Pain Relief',type:'sol'},
@@ -602,7 +602,7 @@ function setWarmthCurve(pct) {
   if (warmthNode) warmthNode.curve = curve;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• MICROPHONE ENGINE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════ MICROPHONE ENGINE ═══════════════════ */
 function toggleMic() {
   if (micActive) stopMic();
   else startMic();
@@ -632,7 +632,7 @@ function startMic() {
       micActive = true;
       applyMicMode();
       startPitchDetection();
-      document.getElementById('micBtn').textContent = 'â¹ MIC ON';
+      document.getElementById('micBtn').textContent = '⏹ MIC ON';
       document.getElementById('micBtn').style.background = '#ff6699';
       document.getElementById('micBtn').style.color = '#0a0a0a';
       document.getElementById('micPill').classList.add('mic');
@@ -653,7 +653,7 @@ function stopMic() {
   clearResonators();
   micStream = null; micSource = null; micGainNode = null; micActive = false;
   if (pitchRAF) cancelAnimationFrame(pitchRAF);
-  document.getElementById('micBtn').textContent = 'ðŸŽ¤ ENABLE MIC';
+  document.getElementById('micBtn').textContent = '🎤 ENABLE MIC';
   document.getElementById('micBtn').style.background = '';
   document.getElementById('micBtn').style.color = '#ff6699';
   document.getElementById('micPill').classList.remove('mic');
@@ -772,7 +772,7 @@ function applyVocoder(freq) {
   });
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• VOICE MANAGEMENT â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════ VOICE MANAGEMENT ═══════════════════ */
 function startVoice(pad, vol) {
   initAudio();
   if (ctx.state === 'suspended') {
@@ -821,7 +821,7 @@ function doStartVoice(pad, vol) {
   updateActiveDisplay();
 }
 
-/* â”€â”€â”€ SACRED CHANT VOICE (formant harmonics + vibrato + warmth) â”€â”€â”€ */
+/* ─── SACRED CHANT VOICE (formant harmonics + vibrato + warmth) ─── */
 function buildChantVoice(pad, g, voice) {
   var f = pad.f;
   var harmonics = [1, 2, 3, 4, 5, 6];
@@ -880,7 +880,7 @@ function buildChantVoice(pad, g, voice) {
   voice.extra = [breathLfo];
 }
 
-/* â”€â”€â”€ STANDARD TONE VOICE (solfeggio) â”€â”€â”€ */
+/* ─── STANDARD TONE VOICE (solfeggio) ─── */
 function buildToneVoice(pad, g, voice) {
   var osc = ctx.createOscillator();
   osc.type = waveType; osc.frequency.value = pad.f; osc.detune.value = detuneVal;
@@ -910,7 +910,7 @@ function buildToneVoice(pad, g, voice) {
   }
 }
 
-/* â”€â”€â”€ BINAURAL VOICE â”€â”€â”€ */
+/* ─── BINAURAL VOICE ─── */
 function buildBinauralVoice(pad, g, voice) {
   var m = ctx.createChannelMerger(2);
   var oscL = ctx.createOscillator(); oscL.type = 'sine';
@@ -922,7 +922,7 @@ function buildBinauralVoice(pad, g, voice) {
   voice.osc = oscL; voice.sub = oscR;
 }
 
-/* â”€â”€â”€ NOISE VOICES â”€â”€â”€ */
+/* ─── NOISE VOICES ─── */
 function buildNoiseVoice(type, g, voice) {
   var bs = ctx.sampleRate * 2, bf = ctx.createBuffer(1, bs, ctx.sampleRate);
   var d = bf.getChannelData(0);
@@ -1038,7 +1038,7 @@ function stopAll() {
   if (seqPlaying) toggleSeq();
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• CONTROLS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════ CONTROLS ═══════════════════ */
 function setMaster(val) {
   master = val / 100;
   document.getElementById('masterVal').textContent = val + '%';
@@ -1064,7 +1064,7 @@ function setSubMode(mode) { subMode = mode; }
 
 function setDetune(val) {
   detuneVal = parseInt(val);
-  document.getElementById('detuneVal').textContent = val + 'Â¢';
+  document.getElementById('detuneVal').textContent = val + '¢';
   Object.keys(voices).forEach(function(id) {
     var v = voices[id];
     if (v.osc) {
@@ -1126,7 +1126,7 @@ function switchTab(tab) {
   document.querySelectorAll('.ctrl-panel').forEach(function(p) { p.classList.toggle('active', p.id === 'tab-' + tab); });
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• PAD UI â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════ PAD UI ═══════════════════ */
 function buildPads() {
   var grid = document.getElementById('padGrid');
   grid.innerHTML = '';
@@ -1137,13 +1137,13 @@ function buildPads() {
     el.id = 'pad-' + p.id;
     el.dataset.padId = p.id;
     var icon = '';
-    if (p.gen === 'ultrasonic') icon = 'âš¡';
-    else if (p.gen === 'sweep') icon = 'â†•';
-    else if (p.gen === 'pink') icon = 'ã€œ';
-    else if (p.gen === 'brown') icon = 'â–“';
-    else if (p.gen === 'ocean') icon = 'â‰ˆ';
-    else if (p.gen === 'drone') icon = 'ã€°';
-    else if (p.gen === 'breath') icon = 'â˜';
+    if (p.gen === 'ultrasonic') icon = '⚡';
+    else if (p.gen === 'sweep') icon = '↕';
+    else if (p.gen === 'pink') icon = '〜';
+    else if (p.gen === 'brown') icon = '▓';
+    else if (p.gen === 'ocean') icon = '≈';
+    else if (p.gen === 'drone') icon = '〰';
+    else if (p.gen === 'breath') icon = '☁';
     else if (p.f > 0 && p.f < 1000) icon = (p.f % 1 !== 0) ? p.f.toFixed(1) : String(p.f);
     else if (p.f >= 1000) icon = (p.f / 1000).toFixed(1) + 'k';
     else icon = '?';
@@ -1173,7 +1173,7 @@ function updateActiveDisplay() {
     var pad = getPadById(ids[i]);
     if (!pad) continue;
     html += '<span class="active-tag ' + pad.type + '">' + pad.name +
-      '<span class="x" data-id="' + pad.id + '">Ã—</span></span>';
+      '<span class="x" data-id="' + pad.id + '">×</span></span>';
   }
   disp.innerHTML = html;
   disp.querySelectorAll('.x').forEach(function(x) {
@@ -1181,7 +1181,7 @@ function updateActiveDisplay() {
   });
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• TOUCH / MOUSE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════ TOUCH / MOUSE ═══════════════════ */
 var activeTouches = {}, dragPad = null;
 var touchFiredAt = 0; /* guard: block synthetic mousedown after touch */
 var manualVoices = {}; /* track manually-activated voices so sequencer won't kill them */
@@ -1274,7 +1274,7 @@ function updateVolBar(id, vol, pad) {
   document.addEventListener('mouseup', function() { dragPad = null; });
 })();
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• SEQUENCER â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════ SEQUENCER ═══════════════════ */
 var SEQ_STEPS = 32;
 var SEQ_ROWS = ['s396','s528','s741','c136','c73','b783','npink','drone'];
 var SEQ_ROW_LABELS = ['396','528','741','OM','GYU','SCH','PNK','DRN'];
@@ -1342,11 +1342,11 @@ function toggleSeq() {
   var dot = document.getElementById('seqDot');
   if (seqPlaying) {
     initAudio();
-    btn.textContent = 'â—¼ STOP'; btn.classList.add('playing'); dot.classList.add('on');
+    btn.textContent = '◼ STOP'; btn.classList.add('playing'); dot.classList.add('on');
     seqStep = 0;
     seqTick();
   } else {
-    btn.textContent = 'â–¶ PLAY'; btn.classList.remove('playing'); dot.classList.remove('on');
+    btn.textContent = '▶ PLAY'; btn.classList.remove('playing'); dot.classList.remove('on');
     clearTimeout(seqTimer);
     document.querySelectorAll('.seq-step').forEach(function(s) { s.classList.remove('current'); });
   }
@@ -1429,7 +1429,7 @@ function loadPattern(idx) {
   }
 }
 
-/* â”€â”€â”€ EVOLVE MODE (continuous randomization) â”€â”€â”€ */
+/* ─── EVOLVE MODE (continuous randomization) ─── */
 function toggleEvolve() {
   seqEvolving = !seqEvolving;
   var btn = document.getElementById('evolveBtn');
@@ -1456,7 +1456,7 @@ function evolveStep() {
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• RECORDING â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════ RECORDING ═══════════════════ */
 var recState = {active:false, chunks:[], buffers:[], node:null, mediaRec:null, startTime:0, timerInterval:null};
 
 function toggleRecording() {
@@ -1496,7 +1496,7 @@ function startRecording() {
   document.getElementById('recDot').classList.add('on');
   document.getElementById('recPill').classList.add('active');
   document.getElementById('recPill').classList.add('rec');
-  document.getElementById('recBtn').textContent = 'â¹ STOP';
+  document.getElementById('recBtn').textContent = '⏹ STOP';
   document.getElementById('recBtn').classList.add('rec-active');
   document.getElementById('expWav').style.display = 'none';
   document.getElementById('expWebM').style.display = 'none';
@@ -1522,7 +1522,7 @@ function stopRecording() {
 
   document.getElementById('recDot').classList.remove('on');
   document.getElementById('recPill').classList.remove('rec');
-  document.getElementById('recBtn').textContent = 'âº REC';
+  document.getElementById('recBtn').textContent = '⏺ REC';
   document.getElementById('recBtn').classList.remove('rec-active');
   document.getElementById('expWav').style.display = '';
   if (recState.mediaRec) document.getElementById('expWebM').style.display = '';
@@ -1584,7 +1584,7 @@ function timestamp() {
   return new Date().toISOString().slice(0,19).replace(/[T:-]/g, '');
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• MIDI â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════ MIDI ═══════════════════ */
 var midiAccess = null, midiInputId = null;
 
 function initMIDI() {
@@ -1647,7 +1647,7 @@ function handleMIDI(msg) {
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• VISUALIZER â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════ VISUALIZER ═══════════════════ */
 var vizRAF, vizMode = 'scope';
 
 function startVisualizer() {
@@ -1718,14 +1718,14 @@ function updateVU() {
   document.getElementById('vuR').style.height = avgR + '%';
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• COLLAPSIBLE SECTIONS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════ COLLAPSIBLE SECTIONS ═══════════════════ */
 function toggleSection(id, toggle) {
   var body = document.getElementById(id);
   body.classList.toggle('open');
   toggle.classList.toggle('open');
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• KEYBOARD SHORTCUTS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════ KEYBOARD SHORTCUTS ═══════════════════ */
 var KEY_PAD_MAP = {
   'Digit1':'s174','Digit2':'s285','Digit3':'s396','Digit4':'s417','Digit5':'s432',
   'Digit6':'s528','Digit7':'s639','Digit8':'s741','Digit9':'s852','Digit0':'s963'
@@ -1735,7 +1735,7 @@ var heldKeys = {};
 document.addEventListener('keydown', function(e) {
   if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') return;
 
-  /* â”€â”€ Pad triggers: 1-0 = solfeggio, Q-P = chant/bin/noise row â”€â”€ */
+  /* ── Pad triggers: 1-0 = solfeggio, Q-P = chant/bin/noise row ── */
   if (KEY_PAD_MAP[e.code] && !heldKeys[e.code]) {
     heldKeys[e.code] = true;
     var pad = getPadById(KEY_PAD_MAP[e.code]);
@@ -1746,41 +1746,41 @@ document.addEventListener('keydown', function(e) {
     return;
   }
 
-  /* â”€â”€ Transport â”€â”€ */
+  /* ── Transport ── */
   if (e.code === 'Space') { e.preventDefault(); toggleSeq(); }
   if (e.code === 'Escape') stopAll();
 
-  /* â”€â”€ Recording â”€â”€ */
+  /* ── Recording ── */
   if (e.code === 'KeyR' && !e.ctrlKey && !e.metaKey) toggleRecording();
 
-  /* â”€â”€ Mic â”€â”€ */
+  /* ── Mic ── */
   if (e.code === 'KeyM') toggleMic();
 
-  /* â”€â”€ Evolve â”€â”€ */
+  /* ── Evolve ── */
   if (e.code === 'KeyE') toggleEvolve();
 
-  /* â”€â”€ Solo â”€â”€ */
+  /* ── Solo ── */
   if (e.code === 'KeyS') soloMode();
 
-  /* â”€â”€ Random pattern â”€â”€ */
+  /* ── Random pattern ── */
   if (e.code === 'KeyN') randomSeq();
 
-  /* â”€â”€ Clear pattern â”€â”€ */
+  /* ── Clear pattern ── */
   if (e.code === 'KeyX') clearSeq();
 
-  /* â”€â”€ Pattern slots A/B/C/D â”€â”€ */
+  /* ── Pattern slots A/B/C/D ── */
   if (e.code === 'KeyA') loadPattern(0);
   if (e.code === 'KeyB') loadPattern(1);
   if (e.code === 'KeyC') loadPattern(2);
   if (e.code === 'KeyD') loadPattern(3);
 
-  /* â”€â”€ Tab switching â”€â”€ */
+  /* ── Tab switching ── */
   if (e.code === 'F1') { e.preventDefault(); switchTab('mixer'); }
   if (e.code === 'F2') { e.preventDefault(); switchTab('tone'); }
   if (e.code === 'F3') { e.preventDefault(); switchTab('fx'); }
   if (e.code === 'F4') { e.preventDefault(); switchTab('mic'); }
 
-  /* â”€â”€ Master volume: +/- â”€â”€ */
+  /* ── Master volume: +/- ── */
   if (e.code === 'Equal' || e.code === 'NumpadAdd') {
     var mv = Math.min(100, Math.round(master * 100) + 5);
     document.getElementById('masterRange').value = mv; setMaster(mv);
@@ -1790,7 +1790,7 @@ document.addEventListener('keydown', function(e) {
     document.getElementById('masterRange').value = mv; setMaster(mv);
   }
 
-  /* â”€â”€ BPM: [ / ] â”€â”€ */
+  /* ── BPM: [ / ] ── */
   if (e.code === 'BracketLeft') {
     seqBPM = Math.max(30, seqBPM - 5);
     document.getElementById('seqBPM').value = seqBPM; setSeqBPM(seqBPM);
@@ -1800,10 +1800,10 @@ document.addEventListener('keydown', function(e) {
     document.getElementById('seqBPM').value = seqBPM; setSeqBPM(seqBPM);
   }
 
-  /* â”€â”€ Export shortcuts â”€â”€ */
+  /* ── Export shortcuts ── */
   if (e.code === 'KeyW' && e.ctrlKey) { e.preventDefault(); exportWAV(); }
 
-  /* â”€â”€ Help overlay: ? â”€â”€ */
+  /* ── Help overlay: ? ── */
   if (e.code === 'Slash' && e.shiftKey) toggleHelp();
 });
 
@@ -1811,7 +1811,7 @@ document.addEventListener('keyup', function(e) {
   delete heldKeys[e.code];
 });
 
-/* â”€â”€ Help overlay â”€â”€ */
+/* ── Help overlay ── */
 function toggleHelp() {
   var el = document.getElementById('helpOverlay');
   if (el) { el.remove(); return; }
@@ -1851,7 +1851,7 @@ function toggleHelp() {
   document.body.appendChild(div);
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• INIT â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════ INIT ═══════════════════ */
 buildPads();
 buildSeqGrid();
 initMIDI();

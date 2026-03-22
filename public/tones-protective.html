@@ -36,11 +36,11 @@ input[type=range]{width:100%;margin:12px 0;accent-color:#00ccff;height:28px}
 <body>
 <div class="app">
   <div class="install-banner" id="installBanner">
-    <strong>ðŸ“± INSTALL TO HOME SCREEN</strong><br>
+    <strong>📱 INSTALL TO HOME SCREEN</strong><br>
     <span id="installInstructions"></span>
     <span class="dismiss" onclick="document.getElementById('installBanner').style.display='none'">dismiss</span>
   </div>
-  <h1>ðŸ›¡ï¸ b0b PROTECTIVE TONES</h1>
+  <h1>🛡️ b0b PROTECTIVE TONES</h1>
   <label class="toggle"><input type="checkbox" id="tog" onchange="toggle(this.checked)"><span>ACTIVATE</span></label>
   <div class="status" id="st">INACTIVE</div>
   <div class="freq-grid" id="grid">
@@ -50,10 +50,10 @@ input[type=range]{width:100%;margin:12px 0;accent-color:#00ccff;height:28px}
     <button class="btn" data-f="40" data-n="Gamma" data-t="binaural" onclick="sel(this)">40 Hz</button>
     <button class="btn" data-f="0" data-n="Pink Noise" data-t="pink" onclick="sel(this)">PINK</button>
     <button class="btn" data-f="0" data-n="Brown Noise" data-t="brown" onclick="sel(this)">BROWN</button>
-    <button class="btn" data-f="0" data-n="Ocean Waves" data-t="ocean" onclick="sel(this)">ðŸŒŠ OCEAN</button>
+    <button class="btn" data-f="0" data-n="Ocean Waves" data-t="ocean" onclick="sel(this)">🌊 OCEAN</button>
   </div>
   <input type="range" min="0" max="100" value="30" oninput="vol(this.value)" title="Volume">
-  <div class="info">ðŸŒŠ 7.83 Hz Schumann is Earth's electromagnetic heartbeat. Use headphones for binaural entrainment. ðŸ¾ ANIMAL-SAFE.</div>
+  <div class="info">🌊 7.83 Hz Schumann is Earth's electromagnetic heartbeat. Use headphones for binaural entrainment. 🐾 ANIMAL-SAFE.</div>
   <div class="credit"><a href="https://b0b.dev">b0b.dev</a> - COUNTERMEASURES</div>
 </div>
 <script>
@@ -132,16 +132,16 @@ function vol(val){v=(val/100)*0.25;if(on&&gain&&ctx) gain.gain.linearRampToValue
   var banner=document.getElementById('installBanner');
   var inst=document.getElementById('installInstructions');
   if(ios){
-    inst.innerHTML='Tap <strong>Share â†‘</strong> then <strong>"Add to Home Screen"</strong>';
+    inst.innerHTML='Tap <strong>Share ↑</strong> then <strong>"Add to Home Screen"</strong>';
     banner.style.display='block';
   } else if(/android/i.test(ua)){
-    inst.innerHTML='Tap <strong>â‹® Menu</strong> then <strong>"Add to Home Screen"</strong> or <strong>"Install App"</strong>';
+    inst.innerHTML='Tap <strong>⋮ Menu</strong> then <strong>"Add to Home Screen"</strong> or <strong>"Install App"</strong>';
     banner.style.display='block';
   }
   var deferredPrompt=null;
   window.addEventListener('beforeinstallprompt',function(e){
     e.preventDefault();deferredPrompt=e;
-    inst.innerHTML='<button onclick="installPWA()" style="background:#00ccff;color:#0a0a0a;border:none;padding:8px 16px;font-family:inherit;cursor:pointer;border-radius:2px;font-size:0.8rem">â¬‡ INSTALL TO HOME SCREEN</button>';
+    inst.innerHTML='<button onclick="installPWA()" style="background:#00ccff;color:#0a0a0a;border:none;padding:8px 16px;font-family:inherit;cursor:pointer;border-radius:2px;font-size:0.8rem">⬇ INSTALL TO HOME SCREEN</button>';
     banner.style.display='block';
   });
   window.installPWA=function(){
