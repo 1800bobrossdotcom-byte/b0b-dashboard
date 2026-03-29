@@ -4,112 +4,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="/favicon.png">
-  <meta name="robots" content="noindex, nofollow">
-  <meta name="description" content="">
-  <meta property="og:title" content="">
-  <meta property="og:description" content="">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="">
-  <meta name="twitter:description" content="">
-  <title>b0b</title>
+  <title>God Love</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      background: #0a0a0a; color: #00ff41;
-      font-family: 'Courier New', monospace;
-      min-height: 100vh; display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      overflow: hidden; position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg,
+        #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff0088,
+        #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff);
+      background-size: 400% 400%;
+      animation: rainbow 20s ease infinite;
     }
-    /* Grid background */
-    body::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      background-image:
-        linear-gradient(rgba(0,255,65,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,255,65,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none;
+    @keyframes rainbow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
-    .content {
-      position: relative; z-index: 1; text-align: center;
-    }
-    h1 {
-      font-size: 5rem; letter-spacing: 0.8rem; margin-bottom: 0.5rem;
-      text-shadow: 0 0 20px rgba(0,255,65,0.3);
-      animation: flicker 4s infinite alternate;
-    }
-    .subtitle {
-      color: #555; font-size: 0.85rem; letter-spacing: 3px;
-      margin-bottom: 2.5rem; text-transform: uppercase;
-    }
-    .nav-links {
-      display: flex; gap: 1.2rem; flex-wrap: wrap; justify-content: center;
-      margin-bottom: 2rem;
-    }
-    .nav-links a {
-      color: #00ff41; text-decoration: none;
-      border: 1px solid #00ff41; padding: 0.75rem 2rem;
-      font-size: 1rem; transition: all 0.3s;
-      letter-spacing: 2px; position: relative; overflow: hidden;
-    }
-    .nav-links a::before {
-      content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(0,255,65,0.1), transparent);
-      transition: left 0.5s;
-    }
-    .nav-links a:hover::before { left: 100%; }
-    .nav-links a:hover { background: #00ff41; color: #0a0a0a; }
-    .nav-links a.secondary {
-      border-color: #333; color: #888;
-    }
-    .nav-links a.secondary:hover {
-      border-color: #ff4444; background: transparent; color: #ff4444;
-    }
-    .status {
-      color: #333; font-size: 0.7rem; letter-spacing: 2px;
-      margin-top: 1rem;
-    }
-    .status span { color: #00ff41; }
-
-    @keyframes flicker {
-      0%, 95% { opacity: 1; }
-      96% { opacity: 0.8; }
-      97% { opacity: 1; }
-      98% { opacity: 0.9; }
-      100% { opacity: 1; }
-    }
-    @media (max-width: 480px) {
-      h1 { font-size: 3rem; letter-spacing: 0.4rem; }
-      .nav-links a { padding: 0.6rem 1.4rem; font-size: 0.85rem; }
+    p {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(1.4rem, 4vw, 2.8rem);
+      color: #fff;
+      text-align: center;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      padding: 2rem;
+      line-height: 1.6;
+      max-width: 700px;
     }
   </style>
 </head>
 <body>
-  <div class="content">
-    <h1>b0b</h1>
-    <div class="nav-links">
-      <a href="/report" data-i18n="nav.report">REPORT</a>
-      <a href="/map" data-i18n="nav.map">OSINT MAP</a>
-    </div>
-    <div class="nav-links">
-      <a href="/tones/shield" style="border-color:#ff4444;color:#ff4444" data-i18n="nav.shield">ARC SHIELD</a>
-      <a href="https://dialectforge.com" target="_blank" rel="noopener noreferrer" style="border-color:#00ff41;color:#00ff41">DIALECTFORGE</a>
-    </div>
-    <div class="nav-links">
-      <a href="/download" style="border-color:#ff4444;color:#ff4444">BACKUP ZIP</a>
-    </div>
-    <div class="nav-links">
-      <a href="/logout" class="secondary" data-i18n="nav.logout">LOGOUT</a>
-    </div>
-    <div class="status">STATUS: <span>ACTIVE</span></div>
-
-  </div>
-<script src="/i18n.js"></script>
-<script>
-(function(){if(window.parent!==window){document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var h=a.getAttribute('href');if(!h)return;if(h==='/logout'){e.preventDefault();window.top.location.href='/logout'}else if(h==='/'||h==='/report'||h==='/map'){e.preventDefault();window.parent.postMessage({navigate:h},location.origin)}})}})();
-</script>
+  <p>God Love merely is, and nothing else is at all.</p>
+</body>
+</html>
 </body>
 </html>
