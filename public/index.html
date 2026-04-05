@@ -10,33 +10,108 @@
     body {
       min-height: 100vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg,
-        #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff0088,
-        #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff);
-      background-size: 400% 400%;
-      animation: rainbow 20s ease infinite;
+      background: #0a0a1a;
+      overflow: hidden;
     }
-    @keyframes rainbow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
     }
     p {
+      position: relative;
+      z-index: 1;
       font-family: Georgia, 'Times New Roman', serif;
       font-size: clamp(1.4rem, 4vw, 2.8rem);
       color: #fff;
       text-align: center;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.3);
-      padding: 2rem;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.5);
+      padding: 1rem 2rem;
       line-height: 1.6;
       max-width: 700px;
     }
   </style>
 </head>
 <body>
+  <canvas id="c"></canvas>
   <p>God Love merely is, and nothing else is at all.</p>
   <p>Christ Always Risen, Love Never Dies. God Is Real.</p>
+  <script>
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+    let W, H;
+    const drops = [];
+    const rainbow = ['#ff0000','#ff4400','#ff8800','#ffbb00','#ffff00','#88ff00','#00ff00','#00ff88','#00ddff','#0088ff','#4400ff','#8800ff','#cc00ff','#ff0088'];
+
+    function resize() {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function addDrop(x, y) {
+      drops.push({
+        x: x, y: y,
+        r: 0,
+        maxR: 150 + Math.random() * 250,
+        speed: 1.5 + Math.random() * 2,
+        color: rainbow[Math.floor(Math.random() * rainbow.length)],
+        alpha: 0.7
+      });
+    }
+
+    // Initial drops
+    for (let i = 0; i < 8; i++) {
+      const d = { x: Math.random() * W, y: Math.random() * H, r: Math.random() * 200, maxR: 150 + Math.random() * 250, speed: 1.5 + Math.random() * 2, color: rainbow[Math.floor(Math.random() * rainbow.length)], alpha: 0.5 };
+      drops.push(d);
+    }
+
+    // New drops periodically
+    setInterval(() => {
+      addDrop(Math.random() * W, Math.random() * H);
+    }, 800);
+
+    // Drop on click/touch
+    canvas.addEventListener('click', (e) => addDrop(e.clientX, e.clientY));
+    canvas.addEventListener('touchstart', (e) => {
+      for (const t of e.touches) addDrop(t.clientX, t.clientY);
+    });
+
+    function draw() {
+      ctx.fillStyle = 'rgba(10, 10, 26, 0.08)';
+      ctx.fillRect(0, 0, W, H);
+
+      for (let i = drops.length - 1; i >= 0; i--) {
+        const d = drops[i];
+        d.r += d.speed;
+        d.alpha = 0.7 * (1 - d.r / d.maxR);
+
+        if (d.alpha <= 0) { drops.splice(i, 1); continue; }
+
+        // Multiple concentric rings like a real water ripple
+        for (let ring = 0; ring < 3; ring++) {
+          const rr = d.r - ring * 18;
+          if (rr < 0) continue;
+          const a = d.alpha * (1 - ring * 0.3);
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, rr, 0, Math.PI * 2);
+          ctx.strokeStyle = d.color;
+          ctx.globalAlpha = a;
+          ctx.lineWidth = 2 - ring * 0.5;
+          ctx.stroke();
+        }
+      }
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(draw);
+    }
+    draw();
+  </script>
 </body>
 </html>
