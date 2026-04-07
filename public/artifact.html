@@ -256,6 +256,26 @@
       .modes button { padding: 6px 6px; font-size: 8px; min-width: 28px; }
     }
 
+    .vhs-date {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      z-index: 4;
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: #ffaa33;
+      text-shadow: 0 0 6px rgba(255,170,51,0.4);
+      pointer-events: none;
+      display: none;
+      font-family: inherit;
+      opacity: 0.85;
+    }
+
+    .mic-active {
+      border-color: #aa8a5a !important;
+      color: #ccaa6a !important;
+    }
+
     @media (env(safe-area-inset-bottom)) {
       .bottombar { padding-bottom: calc(14px + env(safe-area-inset-bottom)); }
     }
@@ -269,6 +289,7 @@
       <div class="controls">
         <button id="formatBtn" title="cycle format" style="font-size:9px;letter-spacing:1px;width:auto;padding:0 8px;">PNG</button>
         <button id="captureBtn" title="capture">&#x2299;</button>
+        <button id="micBtn" title="microphone">&#x266A;</button>
         <button id="flipBtn" title="flip camera">&#x21CC;</button>
       </div>
     </div>
@@ -280,6 +301,7 @@
         <div class="hud-fps" id="hudFps"></div>
         <div class="hud-rec" id="hudRec" style="display:none;"></div>
       </div>
+      <div class="vhs-date" id="vhsDate"></div>
       <div class="overlay" id="overlay">
         <p id="overlayMsg">initializing artifact...</p>
       </div>
@@ -291,17 +313,12 @@
         <button data-mode="1">SORT</button>
         <button data-mode="2">VHS</button>
         <button data-mode="3">BEND</button>
-        <button data-mode="4">SCAN</button>
+        <button data-mode="4">MOD</button>
         <button data-mode="5">MELT</button>
-        <button data-mode="6">CHROM</button>
-        <button data-mode="7">GRAIN</button>
-        <button data-mode="8">DTH</button>
-        <button data-mode="9">POST</button>
-        <button data-mode="10">KAL</button>
-        <button data-mode="11">SNOW</button>
-        <button data-mode="12">BLUR</button>
-        <button data-mode="13">INV</button>
-        <button data-mode="14">HALF</button>
+        <button data-mode="6">POST</button>
+        <button data-mode="7">KAL</button>
+        <button data-mode="8">INV</button>
+        <button data-mode="9">HALF</button>
       </div>
       <div class="slider-row hidden" id="sliderRow">
         <span class="slider-label" id="sliderLabel">FX</span>
@@ -330,8 +347,8 @@
       var hudMode = document.getElementById('hudMode');
       var hudFps = document.getElementById('hudFps');
 
-      var MODE_NAMES = ['NRM', 'SORT', 'VHS', 'BEND', 'SCAN', 'MELT', 'CHROM', 'GRAIN', 'DTH', 'POST', 'KAL', 'SNOW', 'BLUR', 'INV', 'HALF'];
-      var SLIDER_LABELS = ['', 'THRESH', 'DECAY', 'CORRUPT', 'CRT', 'TRAIL', 'SPLIT', 'FILM', 'BITS', 'LEVELS', 'FOLD', 'STATIC', 'RADIUS', 'MIX', 'SCALE'];
+      var MODE_NAMES = ['NRM', 'SORT', 'VHS', 'BEND', 'MOD', 'MELT', 'POST', 'KAL', 'INV', 'HALF'];
+      var SLIDER_LABELS = ['', 'THRESH', 'DECAY', 'CORRUPT', 'FREQ', 'TRAIL', 'LEVELS', 'FOLD', 'MIX', 'SCALE'];
 
       var currentMode = 0;
       var fxAmount = 0.5;
@@ -345,6 +362,17 @@
       var frameIdx = 0;
       var running = false;
       var firstFrame = true;
+      var feedbackTex = null;
+
+      // Touch
+      var touchX = 0.5, touchY = 0.5, touchActive = false;
+
+      // Audio reactivity
+      var audioCtx = null;
+      var analyser = null;
+      var audioData = null;
+      var audioLevel = 0;
+      var audioActive = false;
 
       // FPS counter
       var fpsFrames = 0;
@@ -377,6 +405,9 @@
         'uniform vec2 uVideoSize;',
         'uniform float uFx;',
         'uniform float uMirror;',
+        'uniform vec2 uTouch;',
+        'uniform float uTouchActive;',
+        'uniform float uAudio;',
         '',
         'vec2 adjustUv(vec2 uv) {',
         '  if (uMirror > 0.5) uv.x = 1.0 - uv.x;',
@@ -416,319 +447,265 @@
         '',
         '  vec4 color = texture2D(uCamera, uv);',
         '  float fx = uFx;',
+        '  vec2 touchPt = uTouch;',
+        '  float ta = uTouchActive;',
+        '  float aa = uAudio;',
+        '  float fxA = min(fx + aa * 0.3 * fx, 1.0);',
         '',
         '  if (uMode == 0) {',
         '    // ── NORMAL ──',
         '    gl_FragColor = color;',
         '',
         '  } else if (uMode == 1) {',
-        '    // ── PIXEL SORT ──',
-        '    // Simulates pixel sorting by smearing pixels along rows',
-        '    // when luminance crosses the threshold',
-        '    float threshold = 1.0 - fx;',
+        '    // ── PIXEL SORT ── UV displacement by luminance',
+        '    float threshold = 0.85 - fxA * 0.8;',
         '    float l = lum(color.rgb);',
-        '    vec2 tx = vec2(1.0 / uVideoSize.x, 0.0);',
+        '    float pixY = 1.0 / uVideoSize.y;',
         '',
-        '    // Accumulate sorted streak',
-        '    vec3 sorted = color.rgb;',
-        '    float sortWeight = 1.0;',
-        '    int samples = 32;',
-        '',
-        '    // Scan right — drag bright pixels downward in sort',
-        '    for (int i = 1; i <= 32; i++) {',
-        '      vec2 suv = uv - tx * float(i);',
-        '      if (suv.x < 0.0) break;',
-        '      vec3 s = texture2D(uCamera, suv).rgb;',
-        '      float sl = lum(s);',
-        '      if (sl < threshold) break;',
-        '      float w = 1.0 - float(i) / 33.0;',
-        '      sorted += s * w;',
-        '      sortWeight += w;',
+        '    if (l < threshold) {',
+        '      gl_FragColor = color;',
+        '    } else {',
+        '      float strength = (l - threshold) / (1.0 - threshold);',
+        '      float maxShift = 20.0 + fxA * 44.0;',
+        '      float dirY = ta > 0.5 ? (touchPt.y - 0.5) * 2.0 : -1.0;',
+        '      float dirX = ta > 0.5 ? (touchPt.x - 0.5) * 0.3 : 0.0;',
+        '      float offset = strength * strength * maxShift;',
+        '      vec2 sortedUv = uv + vec2(dirX * offset * pixY, dirY * offset * pixY);',
+        '      sortedUv = clamp(sortedUv, vec2(0.001), vec2(0.999));',
+        '      vec3 sorted = texture2D(uCamera, sortedUv).rgb;',
+        '      float mask = smoothstep(threshold - 0.02, threshold + 0.02, l);',
+        '      gl_FragColor = vec4(mix(color.rgb, sorted, mask), 1.0);',
         '    }',
-        '',
-        '    // Scan left — pull bright pixels into streak',
-        '    for (int i = 1; i <= 32; i++) {',
-        '      vec2 suv = uv + tx * float(i);',
-        '      if (suv.x > 1.0) break;',
-        '      vec3 s = texture2D(uCamera, suv).rgb;',
-        '      float sl = lum(s);',
-        '      if (sl < threshold) break;',
-        '      float w = 1.0 - float(i) / 33.0;',
-        '      sorted += s * w;',
-        '      sortWeight += w;',
-        '    }',
-        '',
-        '    sorted /= sortWeight;',
-        '',
-        '    // Sort by luminance: brighter pixels get more streak',
-        '    float sortMix = smoothstep(threshold * 0.8, threshold * 1.2, l);',
-        '    vec3 result = mix(color.rgb, sorted, sortMix * 0.85);',
-        '',
-        '    // Slight vertical bands at sort boundaries',
-        '    float edge = abs(l - threshold);',
-        '    if (edge < 0.05) {',
-        '      result *= 0.7 + 0.3 * hash2(uv * uResolution);',
-        '    }',
-        '',
-        '    gl_FragColor = vec4(result, 1.0);',
         '',
         '  } else if (uMode == 2) {',
-        '    // ── VHS ──',
+        '    // ── VHS ── improved analog tape emulation',
         '    float t = uTime;',
-        '    float decay = fx;',
+        '    float decay = 0.3 + fxA * 0.7;',
         '',
-        '    // Tracking wobble — horizontal shift that varies by scanline',
-        '    float wobble = sin(uv.y * 80.0 + t * 3.0) * 0.002 * decay;',
-        '    wobble += noise(uv.y * 20.0 + t * 2.0) * 0.003 * decay;',
+        '    // Tracking wobble',
+        '    float wobble = sin(uv.y * 80.0 + t * 3.0) * 0.003 * decay;',
+        '    wobble += noise(uv.y * 20.0 + t * 2.0) * 0.004 * decay;',
         '',
-        '    // Tracking error — sudden horizontal jumps in bands',
-        '    float band = step(0.98, hash2(vec2(floor(uv.y * 40.0), floor(t * 4.0))));',
-        '    wobble += band * (hash(floor(t * 8.0)) - 0.5) * 0.08 * decay;',
+        '    // Touch shifts roll bar position',
+        '    float rollCenter = ta > 0.5 ? touchPt.y : fract(t * 0.15);',
         '',
-        '    // Chromatic aberration — split R/G/B channels',
-        '    float spread = 0.004 * decay;',
+        '    // Tracking error — sudden horizontal jumps',
+        '    float band = step(0.97, hash2(vec2(floor(uv.y * 40.0), floor(t * 4.0))));',
+        '    wobble += band * (hash(floor(t * 8.0)) - 0.5) * 0.1 * decay;',
+        '',
+        '    // Head switch noise at bottom',
+        '    float headSwitch = smoothstep(0.97, 1.0, uv.y);',
+        '    wobble += headSwitch * sin(uv.x * 200.0 + t * 50.0) * 0.02 * decay;',
+        '',
+        '    // Chromatic aberration',
+        '    float spread = 0.005 * decay;',
         '    float r = texture2D(uCamera, vec2(uv.x + wobble + spread, uv.y)).r;',
         '    float g = texture2D(uCamera, vec2(uv.x + wobble, uv.y)).g;',
         '    float b = texture2D(uCamera, vec2(uv.x + wobble - spread, uv.y)).b;',
         '    vec3 vhs = vec3(r, g, b);',
         '',
-        '    // Color bleed — desaturate slightly, warm shift',
+        '    // Color bleed — desaturate + warm shift',
         '    float l = lum(vhs);',
-        '    vhs = mix(vhs, vec3(l), 0.15 * decay);',
-        '    vhs *= vec3(1.05, 0.98, 0.9);',
+        '    vhs = mix(vhs, vec3(l), 0.2 * decay);',
+        '    vhs *= vec3(1.06, 0.97, 0.88);',
         '',
         '    // Scanlines',
-        '    float scanline = 0.92 + 0.08 * sin(vUv.y * uResolution.y * 1.5);',
+        '    float scanline = 0.9 + 0.1 * sin(vUv.y * uResolution.y * 1.5);',
         '    vhs *= scanline;',
         '',
         '    // Static noise',
-        '    float staticNoise = hash2(uv * uResolution + t * 100.0) * 0.06 * decay;',
+        '    float staticNoise = hash2(uv * uResolution + t * 100.0) * 0.08 * decay;',
         '    vhs += vec3(staticNoise);',
         '',
-        '    // Bottom roll bar (VHS pause artifact)',
-        '    float rollPos = fract(t * 0.15);',
-        '    float roll = smoothstep(0.0, 0.04, abs(uv.y - rollPos)) * smoothstep(0.0, 0.04, abs(uv.y - rollPos - 1.0));',
-        '    vhs *= 0.3 + 0.7 * roll;',
+        '    // Bottom roll bar',
+        '    float roll = smoothstep(0.0, 0.05, abs(uv.y - rollCenter));',
+        '    roll *= smoothstep(0.0, 0.05, abs(uv.y - rollCenter - 1.0));',
+        '    vhs *= 0.2 + 0.8 * roll;',
         '',
-        '    // Slight vignette',
-        '    float vig = 1.0 - length(vUv - 0.5) * 0.5;',
+        '    // Vignette',
+        '    float vig = 1.0 - length(vUv - 0.5) * 0.6;',
         '    vhs *= vig;',
         '',
-        '    gl_FragColor = vec4(vhs, 1.0);',
+        '    // Jitter',
+        '    vhs += (hash2(floor(vUv * uResolution * 0.5) + t * 10.0) - 0.5) * 0.02 * decay;',
+        '',
+        '    gl_FragColor = vec4(clamp(vhs, 0.0, 1.0), 1.0);',
         '',
         '  } else if (uMode == 3) {',
-        '    // ── DATABEND ──',
+        '    // ── DATABEND ── fixed sensitivity + touch center',
         '    float t = uTime;',
-        '    float corrupt = fx;',
+        '    float corrupt = 0.2 + fxA * 0.8;',
         '',
         '    vec2 buv = uv;',
         '',
-        '    // Block displacement — shift rectangular regions',
+        '    // Touch shifts corruption center',
+        '    float corruptY = ta > 0.5 ? touchPt.y : 0.5;',
+        '    float distFromTouch = abs(uv.y - corruptY);',
+        '    float touchMask = ta > 0.5 ? smoothstep(0.5, 0.0, distFromTouch) : 1.0;',
+        '',
+        '    // Block displacement',
         '    float blockY = floor(uv.y * 20.0);',
         '    float blockSeed = hash(blockY + floor(t * 2.0) * 100.0);',
-        '    if (blockSeed > 1.0 - corrupt * 0.4) {',
-        '      float shift = (hash(blockY * 7.0 + floor(t * 3.0)) - 0.5) * 0.15 * corrupt;',
+        '    if (blockSeed > 1.0 - corrupt * 0.5 * touchMask) {',
+        '      float shift = (hash(blockY * 7.0 + floor(t * 3.0)) - 0.5) * 0.2 * corrupt;',
         '      buv.x = fract(buv.x + shift);',
+        '      buv.y = clamp(buv.y + (hash(blockY * 3.0) - 0.5) * 0.03 * corrupt, 0.0, 1.0);',
         '    }',
         '',
-        '    // Fine-line glitch — thin horizontal strips shift',
+        '    // Fine-line glitch',
         '    float lineY = floor(uv.y * 200.0);',
         '    float lineSeed = hash(lineY + floor(t * 6.0) * 50.0);',
-        '    if (lineSeed > 1.0 - corrupt * 0.15) {',
-        '      buv.x = fract(buv.x + (hash(lineY * 13.0) - 0.5) * 0.06 * corrupt);',
+        '    if (lineSeed > 1.0 - corrupt * 0.2 * touchMask) {',
+        '      buv.x = fract(buv.x + (hash(lineY * 13.0) - 0.5) * 0.08 * corrupt);',
         '    }',
         '',
         '    vec4 bent = texture2D(uCamera, buv);',
         '',
-        '    // Channel separation — swap/shift individual channels in bands',
+        '    // Channel separation in bands',
         '    float bandY = floor(uv.y * 12.0);',
         '    float bandSeed = hash(bandY + floor(t) * 30.0);',
-        '    if (bandSeed > 1.0 - corrupt * 0.3) {',
-        '      float off = 0.008 * corrupt;',
+        '    if (bandSeed > 1.0 - corrupt * 0.35) {',
+        '      float off = 0.01 * corrupt;',
         '      bent.r = texture2D(uCamera, buv + vec2(off, 0.0)).r;',
         '      bent.b = texture2D(uCamera, buv - vec2(off, off * 0.5)).b;',
         '    }',
         '',
-        '    // Quantization — reduce color depth',
-        '    float quant = 32.0 - 24.0 * corrupt;',
+        '    // Quantization',
+        '    float quant = 32.0 - 28.0 * corrupt;',
         '    bent.rgb = floor(bent.rgb * quant) / quant;',
         '',
-        '    // Corruption noise bursts',
+        '    // Audio-triggered bursts',
+        '    float burstThresh = 0.08 + aa * 0.15;',
         '    float burstSeed = hash2(vec2(floor(uv.y * 60.0), floor(t * 5.0)));',
-        '    if (burstSeed > 1.0 - corrupt * 0.08) {',
+        '    if (burstSeed > 1.0 - corrupt * burstThresh) {',
         '      bent.rgb = vec3(hash2(uv * uResolution + t));',
         '    }',
         '',
-        '    // Occasional full-row color inversion',
+        '    // Row inversion',
         '    float invSeed = hash(floor(uv.y * 80.0) + floor(t * 3.0) * 200.0);',
-        '    if (invSeed > 1.0 - corrupt * 0.05) {',
+        '    if (invSeed > 1.0 - corrupt * 0.06) {',
         '      bent.rgb = 1.0 - bent.rgb;',
         '    }',
         '',
         '    gl_FragColor = bent;',
         '',
         '  } else if (uMode == 4) {',
-        '    // ── SCANLINE / CRT ──',
-        '    float crt = fx;',
+        '    // ── MOD (signal modulation) ── inspired by AEscripts Signal',
+        '    float t = uTime;',
+        '    float amt = 0.2 + fxA * 0.8;',
         '',
-        '    // Barrel distortion',
-        '    vec2 cuv = vUv * 2.0 - 1.0;',
-        '    float barrel = 0.12 * crt;',
-        '    float r2 = dot(cuv, cuv);',
-        '    cuv *= 1.0 + barrel * r2;',
-        '    vec2 suv = adjustUv(cuv * 0.5 + 0.5);',
+        '    // Touch shifts modulation frequency',
+        '    float freqMod = ta > 0.5 ? 0.5 + touchPt.x * 1.5 : 1.0;',
+        '    float freq = (10.0 + amt * 50.0) * freqMod;',
         '',
-        '    if (suv.x < 0.0 || suv.x > 1.0 || suv.y < 0.0 || suv.y > 1.0) {',
-        '      gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);',
-        '      return;',
+        '    // Per-channel phase modulation — core analog signal effect',
+        '    float phaseR = sin(uv.y * freq + t * 3.0) * amt * 0.04;',
+        '    float phaseG = sin(uv.y * freq * 1.15 + t * 2.3 + 1.0) * amt * 0.025;',
+        '    float phaseB = sin(uv.y * freq * 0.85 + t * 3.7 + 2.0) * amt * 0.05;',
+        '',
+        '    float mr = texture2D(uCamera, vec2(uv.x + phaseR, uv.y)).r;',
+        '    float mg = texture2D(uCamera, vec2(uv.x + phaseG, uv.y)).g;',
+        '    float mb = texture2D(uCamera, vec2(uv.x + phaseB, uv.y)).b;',
+        '    vec3 sig = vec3(mr, mg, mb);',
+        '',
+        '    // Amplitude modulation',
+        '    float ampMod = 0.65 + 0.35 * sin(uv.y * freq * 0.4 + t * 1.5);',
+        '    sig *= mix(1.0, ampMod, amt);',
+        '',
+        '    // Signal clipping',
+        '    sig = clamp(sig * (1.0 + amt * 0.6), 0.0, 1.0);',
+        '',
+        '    // Sync pulse errors — horizontal tears',
+        '    float syncSeed = hash(floor(uv.y * 30.0) + floor(t * 4.0) * 50.0);',
+        '    if (syncSeed > 1.0 - amt * 0.15) {',
+        '      float mshift = (hash(floor(uv.y * 30.0) * 7.0) - 0.5) * 0.12 * amt;',
+        '      sig = texture2D(uCamera, vec2(fract(uv.x + mshift), uv.y)).rgb;',
         '    }',
         '',
-        '    // RGB subpixel sampling — slight offset per channel',
-        '    float subOff = 0.001 * crt;',
-        '    float cr = texture2D(uCamera, suv + vec2(subOff, 0.0)).r;',
-        '    float cg = texture2D(uCamera, suv).g;',
-        '    float cb = texture2D(uCamera, suv - vec2(subOff, 0.0)).b;',
-        '    vec3 crtColor = vec3(cr, cg, cb);',
+        '    // Cross-channel modulation',
+        '    sig.r = mix(sig.r, sig.r * (0.8 + sig.g * 0.4), amt * 0.3);',
+        '    sig.b = mix(sig.b, sig.b * (0.8 + sig.r * 0.4), amt * 0.25);',
         '',
-        '    // Phosphor mask — RGB triads',
-        '    float px = mod(vUv.x * uResolution.x, 3.0);',
-        '    vec3 mask = vec3(0.8);',
-        '    if (px < 1.0) mask = vec3(1.0, 0.7, 0.7);',
-        '    else if (px < 2.0) mask = vec3(0.7, 1.0, 0.7);',
-        '    else mask = vec3(0.7, 0.7, 1.0);',
-        '    crtColor *= mix(vec3(1.0), mask, crt * 0.5);',
+        '    // Frequency roll-off',
+        '    float rolloff = 1.0 - abs(uv.x - 0.5) * amt * 0.4;',
+        '    sig *= rolloff;',
         '',
-        '    // Scanlines — darken every other line',
-        '    float scanY = mod(vUv.y * uResolution.y, 2.0);',
-        '    float scanDark = 1.0 - crt * 0.35 * step(1.0, scanY);',
-        '    crtColor *= scanDark;',
+        '    // Audio modulates amplitude',
+        '    sig *= 1.0 + aa * 0.4;',
+        '    sig = clamp(sig, 0.0, 1.0);',
         '',
-        '    // Slight bloom — brighten midtones',
-        '    float bl = lum(crtColor);',
-        '    crtColor += crtColor * smoothstep(0.3, 0.7, bl) * 0.15 * crt;',
-        '',
-        '    // Corner shadows (CRT falloff)',
-        '    float vign = 1.0 - r2 * 0.4 * crt;',
-        '    crtColor *= clamp(vign, 0.0, 1.0);',
-        '',
-        '    // Slight warm tint',
-        '    crtColor *= vec3(1.02, 1.0, 0.96);',
-        '',
-        '    gl_FragColor = vec4(crtColor, 1.0);',
+        '    gl_FragColor = vec4(sig, 1.0);',
         '',
         '  } else if (uMode == 5) {',
-        '    // ── MELT (ghost trails) ──',
+        '    // ── MELT (ghost trails) ── uses feedback texture',
+        '    float trail = 0.5 + fxA * 0.48;',
         '    vec4 prev = texture2D(uPrevFrame, uv);',
-        '    float trail = 0.5 + fx * 0.48;',
         '    vec3 melted = mix(color.rgb, prev.rgb, trail);',
-        '    vec2 dripUv = uv + vec2(0.0, 0.003 * fx);',
-        '    if (dripUv.y <= 1.0) {',
-        '      vec3 drip = texture2D(uPrevFrame, dripUv).rgb;',
-        '      melted = mix(melted, drip, fx * 0.4);',
-        '    }',
-        '    float flicker = 0.98 + 0.02 * hash2(vec2(uTime, 0.0));',
-        '    gl_FragColor = vec4(melted * flicker, 1.0);',
+        '',
+        '    // Drip effect',
+        '    float dripStr = fxA * 0.006;',
+        '    float dripDirY = ta > 0.5 ? (touchPt.y - 0.5) * 0.012 : dripStr;',
+        '    float dripDirX = ta > 0.5 ? (touchPt.x - 0.5) * 0.006 : 0.0;',
+        '    vec2 dripUv = uv + vec2(dripDirX, dripDirY);',
+        '    dripUv = clamp(dripUv, vec2(0.001), vec2(0.999));',
+        '    vec3 drip = texture2D(uPrevFrame, dripUv).rgb;',
+        '    melted = mix(melted, drip, fxA * 0.45);',
+        '',
+        '    // Audio turbulence',
+        '    melted += (aa * 0.1) * (hash2(uv * 100.0 + uTime) - 0.5);',
+        '',
+        '    float flicker = 0.97 + 0.03 * hash2(vec2(uTime, 0.0));',
+        '    gl_FragColor = vec4(clamp(melted * flicker, 0.0, 1.0), 1.0);',
         '',
         '  } else if (uMode == 6) {',
-        '    // ── CHROM (chromatic aberration) ──',
-        '    vec2 center = vec2(0.5);',
-        '    vec2 dir = uv - center;',
-        '    float dist = length(dir);',
-        '    float spread = fx * 0.035;',
-        '    float cr = texture2D(uCamera, uv + dir * spread).r;',
-        '    float cg = texture2D(uCamera, uv).g;',
-        '    float cb = texture2D(uCamera, uv - dir * spread).b;',
-        '    vec3 chrom = vec3(cr, cg, cb);',
-        '    chrom += dist * fx * 0.15 * vec3(0.1, -0.05, 0.15);',
-        '    float vig = 1.0 - dist * 0.4;',
-        '    gl_FragColor = vec4(chrom * vig, 1.0);',
-        '',
-        '  } else if (uMode == 7) {',
-        '    // ── GRAIN (film grain + vintage) ──',
-        '    vec3 c = color.rgb;',
-        '    float l = lum(c);',
-        '    c = mix(c, vec3(l), fx * 0.4);',
-        '    c += vec3(0.06, 0.03, -0.02) * (1.0 - l) * fx;',
-        '    c += vec3(-0.02, -0.01, 0.04) * l * fx;',
-        '    float grain = (hash2(uv * uResolution + uTime * 100.0) - 0.5) * 0.15 * fx;',
-        '    c += grain;',
-        '    c *= 1.0 - length(vUv - 0.5) * 0.8 * fx;',
-        '    c = mix(c, smoothstep(0.0, 1.0, c), fx * 0.3);',
-        '    gl_FragColor = vec4(c, 1.0);',
-        '',
-        '  } else if (uMode == 8) {',
-        '    // ── DTH (ordered dither) ──',
-        '    float levels = 2.0 + (1.0 - fx) * 14.0;',
-        '    vec2 cell = floor(mod(vUv * uResolution, 2.0));',
-        '    float bayer = (cell.x * 2.0 + cell.y * 3.0 - cell.x * cell.y * 4.0) / 4.0;',
-        '    vec3 d;',
-        '    d.r = floor(color.r * levels + bayer) / levels;',
-        '    d.g = floor(color.g * levels + bayer) / levels;',
-        '    d.b = floor(color.b * levels + bayer) / levels;',
-        '    gl_FragColor = vec4(d, 1.0);',
-        '',
-        '  } else if (uMode == 9) {',
         '    // ── POST (posterize) ──',
-        '    float levels = 2.0 + (1.0 - fx) * 22.0;',
-        '    vec3 p = floor(color.rgb * levels + 0.5) / levels;',
+        '    float levels = 2.0 + (1.0 - fxA) * 22.0;',
+        '    float touchMod = ta > 0.5 ? 1.0 + distance(uv, touchPt) * 8.0 : 0.0;',
+        '    float lv = levels + touchMod;',
+        '    vec3 p = floor(color.rgb * lv + 0.5) / lv;',
+        '    float audioLevels = max(levels - aa * 4.0, 2.0);',
+        '    p = mix(p, floor(color.rgb * audioLevels + 0.5) / audioLevels, aa * 0.5);',
         '    gl_FragColor = vec4(p, 1.0);',
         '',
-        '  } else if (uMode == 10) {',
+        '  } else if (uMode == 7) {',
         '    // ── KAL (kaleidoscope) ──',
-        '    vec2 kUv = uv - 0.5;',
+        '    vec2 center = ta > 0.5 ? touchPt : vec2(0.5);',
+        '    vec2 kUv = uv - center;',
         '    float angle = atan(kUv.y, kUv.x);',
         '    float radius = length(kUv);',
-        '    float segments = 3.0 + fx * 9.0;',
+        '    float segments = 3.0 + fxA * 9.0;',
+        '    angle += aa * 0.5;',
         '    float segAngle = 6.28318530718 / segments;',
         '    angle = mod(angle, segAngle);',
         '    if (angle > segAngle * 0.5) angle = segAngle - angle;',
-        '    vec2 kalUv = vec2(cos(angle), sin(angle)) * radius + 0.5;',
+        '    vec2 kalUv = vec2(cos(angle), sin(angle)) * radius + center;',
         '    kalUv = clamp(kalUv, 0.001, 0.999);',
         '    gl_FragColor = texture2D(uCamera, kalUv);',
         '',
-        '  } else if (uMode == 11) {',
-        '    // ── SNOW (analog static) ──',
-        '    float t = uTime;',
-        '    float amt = fx;',
-        '    float snow = hash2(uv * uResolution + t * 137.0);',
-        '    vec3 c = mix(color.rgb, vec3(snow), amt * 0.8);',
-        '    float bandSeed = hash(floor(uv.y * 60.0) + floor(t * 8.0) * 100.0);',
-        '    if (bandSeed > 1.0 - amt * 0.2) c = vec3(hash2(uv * uResolution * 3.0 + t * 200.0));',
-        '    c *= 0.9 + 0.1 * sin(vUv.y * uResolution.y * 2.0);',
-        '    gl_FragColor = vec4(c, 1.0);',
-        '',
-        '  } else if (uMode == 12) {',
-        '    // ── BLUR (radial zoom) ──',
-        '    vec2 center = vec2(0.5);',
-        '    vec2 dir = uv - center;',
-        '    float blurAmt = fx * 0.04;',
-        '    vec3 sum = vec3(0.0);',
-        '    for (int i = 0; i < 16; i++) {',
-        '      float t = float(i) / 15.0;',
-        '      sum += texture2D(uCamera, uv - dir * blurAmt * t).rgb;',
-        '    }',
-        '    gl_FragColor = vec4(sum / 16.0, 1.0);',
-        '',
-        '  } else if (uMode == 13) {',
+        '  } else if (uMode == 8) {',
         '    // ── INV (band inversion) ──',
         '    float t = uTime;',
-        '    float bandPos = sin(uv.y * 10.0 + t * 2.0) * 0.5 + 0.5;',
-        '    float inv = step(1.0 - fx, bandPos);',
+        '    float bandSpeed = 2.0 + aa * 4.0;',
+        '    float shift = ta > 0.5 ? (touchPt.y - 0.5) * 3.0 : 0.0;',
+        '    float bandPos = sin(uv.y * 10.0 + t * bandSpeed + shift) * 0.5 + 0.5;',
+        '    float inv = step(1.0 - fxA, bandPos);',
         '    vec3 c = mix(color.rgb, 1.0 - color.rgb, inv);',
         '    float swapBand = step(0.7, hash2(vec2(floor(uv.y * 30.0), floor(t * 2.0))));',
-        '    if (swapBand > 0.5 && fx > 0.3) c = c.bgr;',
+        '    if (swapBand > 0.5 && fxA > 0.3) c = c.bgr;',
         '    gl_FragColor = vec4(c, 1.0);',
         '',
-        '  } else if (uMode == 14) {',
+        '  } else if (uMode == 9) {',
         '    // ── HALF (halftone) ──',
-        '    float cellSize = 4.0 + (1.0 - fx) * 12.0;',
-        '    vec2 cellId = floor(vUv * uResolution / cellSize);',
+        '    float cellSize = 3.0 + (1.0 - fxA) * 13.0;',
+        '    cellSize += aa * 3.0;',
+        '    vec2 gridOffset = ta > 0.5 ? (touchPt - 0.5) * 20.0 : vec2(0.0);',
+        '    vec2 pixPos = vUv * uResolution + gridOffset;',
+        '    vec2 cellId = floor(pixPos / cellSize);',
         '    vec2 cellCenter = (cellId + 0.5) * cellSize / uResolution;',
         '    vec2 cellUv = adjustUv(cellCenter);',
         '    vec3 cellColor = texture2D(uCamera, clamp(cellUv, 0.001, 0.999)).rgb;',
         '    float cellLum = lum(cellColor);',
         '    float dotR = cellLum * 0.5 * cellSize;',
-        '    vec2 pixPos = vUv * uResolution;',
         '    vec2 pixInCell = mod(pixPos, cellSize) - cellSize * 0.5;',
         '    float dist = length(pixInCell);',
         '    if (dist < dotR) gl_FragColor = vec4(cellColor, 1.0);',
@@ -738,10 +715,6 @@
       ].join('\n');
 
       // ── WebGL Setup ──
-
-      var program = null;
-      var uniforms = {};
-      var cameraTextures = [];
 
       function compileShader(type, src) {
         var s = gl.createShader(type);
@@ -788,7 +761,8 @@
 
         // Cache uniform locations
         var uniNames = ['uCamera', 'uPrevFrame', 'uMode', 'uTime',
-                        'uResolution', 'uVideoSize', 'uFx', 'uMirror'];
+                        'uResolution', 'uVideoSize', 'uFx', 'uMirror',
+                        'uTouch', 'uTouchActive', 'uAudio'];
         for (var i = 0; i < uniNames.length; i++) {
           uniforms[uniNames[i]] = gl.getUniformLocation(program, uniNames[i]);
         }
@@ -813,6 +787,15 @@
           gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
           cameraTextures.push(tex);
         }
+
+        // Feedback texture for MELT mode
+        feedbackTex = gl.createTexture();
+        gl.bindTexture(gl.TEXTURE_2D, feedbackTex);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, canvas.width || 2, canvas.height || 2, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
 
         return true;
       }
@@ -899,7 +882,14 @@
         var rect = canvas.getBoundingClientRect();
         canvas.width = Math.round(rect.width * dpr);
         canvas.height = Math.round(rect.height * dpr);
-        if (gl) gl.viewport(0, 0, canvas.width, canvas.height);
+        if (gl) {
+          gl.viewport(0, 0, canvas.width, canvas.height);
+          // Re-allocate feedback texture on resize
+          if (feedbackTex) {
+            gl.bindTexture(gl.TEXTURE_2D, feedbackTex);
+            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, canvas.width, canvas.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+          }
+        }
       }
 
       // ── Render Loop ──
@@ -933,9 +923,13 @@
         gl.bindTexture(gl.TEXTURE_2D, currentTex);
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, video);
 
-        // Bind previous frame
+        // Bind previous frame — feedback for MELT, raw camera prev for others
         gl.activeTexture(gl.TEXTURE1);
-        gl.bindTexture(gl.TEXTURE_2D, prevTex);
+        if (currentMode === 5) {
+          gl.bindTexture(gl.TEXTURE_2D, feedbackTex);
+        } else {
+          gl.bindTexture(gl.TEXTURE_2D, prevTex);
+        }
 
         // Set uniforms
         gl.uniform1i(uniforms.uCamera, 0);
@@ -946,9 +940,17 @@
         gl.uniform2f(uniforms.uVideoSize, video.videoWidth, video.videoHeight);
         gl.uniform1f(uniforms.uFx, fxAmount);
         gl.uniform1f(uniforms.uMirror, useFront ? 1.0 : 0.0);
+        gl.uniform2f(uniforms.uTouch, touchX, touchY);
+        gl.uniform1f(uniforms.uTouchActive, touchActive ? 1.0 : 0.0);
+        audioLevel = getAudioLevel();
+        gl.uniform1f(uniforms.uAudio, audioLevel);
 
         // Draw
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+        // Copy rendered frame to feedback texture (for MELT persistence)
+        gl.bindTexture(gl.TEXTURE_2D, feedbackTex);
+        gl.copyTexSubImage2D(gl.TEXTURE_2D, 0, 0, 0, 0, 0, canvas.width, canvas.height);
 
         // Swap ping-pong index
         frameIdx = 1 - frameIdx;
@@ -1002,6 +1004,67 @@
         e.preventDefault();
         useFront = !useFront;
         startCamera();
+      });
+
+      // ── Touch Sensitivity ──
+
+      function updateTouch(e) {
+        var rect = canvas.getBoundingClientRect();
+        touchX = (e.clientX - rect.left) / rect.width;
+        touchY = (e.clientY - rect.top) / rect.height;
+      }
+
+      canvas.addEventListener('pointerdown', function(e) {
+        if (e.target !== canvas) return;
+        touchActive = true;
+        updateTouch(e);
+      });
+      canvas.addEventListener('pointermove', function(e) {
+        if (touchActive) updateTouch(e);
+      });
+      canvas.addEventListener('pointerup', function() { touchActive = false; });
+      canvas.addEventListener('pointercancel', function() { touchActive = false; });
+
+      // ── Audio Sensitivity ──
+
+      var micBtn = document.getElementById('micBtn');
+
+      function getAudioLevel() {
+        if (!audioActive || !analyser) return 0;
+        analyser.getByteTimeDomainData(audioData);
+        var sum = 0;
+        for (var i = 0; i < audioData.length; i++) {
+          var v = (audioData[i] - 128) / 128;
+          sum += v * v;
+        }
+        return Math.min(1, Math.sqrt(sum / audioData.length) * 4);
+      }
+
+      function initAudio() {
+        if (audioActive) {
+          // Toggle off
+          audioActive = false;
+          micBtn.classList.remove('mic-active');
+          return;
+        }
+        navigator.mediaDevices.getUserMedia({ audio: true })
+        .then(function(audioStream) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          var source = audioCtx.createMediaStreamSource(audioStream);
+          analyser = audioCtx.createAnalyser();
+          analyser.fftSize = 256;
+          source.connect(analyser);
+          audioData = new Uint8Array(analyser.frequencyBinCount);
+          audioActive = true;
+          micBtn.classList.add('mic-active');
+        }).catch(function() {
+          // Audio not available
+        });
+      }
+
+      micBtn.addEventListener('pointerdown', function(e) {
+        e.preventDefault();
+        initAudio();
       });
 
       // ── Export / GIF ──
@@ -1170,6 +1233,20 @@
       resize();
 
       if (!initGL()) return;
+
+      // VHS date overlay timer
+      var vhsDate = document.getElementById('vhsDate');
+      setInterval(function() {
+        if (currentMode !== 2) { vhsDate.style.display = 'none'; return; }
+        vhsDate.style.display = 'block';
+        var d = new Date();
+        var months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+        var h = d.getHours();
+        var ampm = h >= 12 ? 'PM' : 'AM';
+        h = h % 12; if (h === 0) h = 12;
+        var m = ('0' + d.getMinutes()).slice(-2);
+        vhsDate.textContent = months[d.getMonth()] + ' ' + ('0' + d.getDate()).slice(-2) + ' ' + d.getFullYear() + '  ' + h + ':' + m + ampm;
+      }, 1000);
 
       // Show start button for camera permission
       overlayMsg.textContent = 'analog glitch camera';
