@@ -394,54 +394,77 @@
         '  }',
         '',
         '  vec4 color = texture2D(uCamera, uv);',
-        '  float g = 0.5 + uGain * 1.5;',
+        '  float g = 0.5 + uGain * 4.5;',
         '',
         '  if (uMode == 0) {',
         '    // ── NORMAL ──',
         '    gl_FragColor = color;',
         '',
         '  } else if (uMode == 1) {',
-        '    // ── NIGHT VISION ──',
-        '    float l = lum(color.rgb);',
+        '    // ── NIGHT VISION (low-light amplified) ──',
+        '    vec2 tx = 1.0 / uVideoSize;',
+        '    // Temporal denoise: blend with previous frame',
+        '    vec3 prev = texture2D(uPrevFrame, uv).rgb;',
+        '    vec3 acc = mix(color.rgb, prev, 0.5);',
+        '    // Spatial denoise: 5-tap cross filter',
+        '    vec3 n1 = texture2D(uCamera, uv + vec2(-tx.x, 0.0)).rgb;',
+        '    vec3 n2 = texture2D(uCamera, uv + vec2( tx.x, 0.0)).rgb;',
+        '    vec3 n3 = texture2D(uCamera, uv + vec2(0.0, -tx.y)).rgb;',
+        '    vec3 n4 = texture2D(uCamera, uv + vec2(0.0,  tx.y)).rgb;',
+        '    acc = acc * 0.5 + (n1 + n2 + n3 + n4) * 0.125;',
+        '    float l = lum(acc);',
+        '    // Aggressive gamma boost',
         '    l = pow(l, 1.0 / g);',
+        '    // Contrast stretch — expand usable range',
+        '    l = smoothstep(0.015, 0.85, l);',
         '    vec3 nv = vec3(l * 0.15, l, l * 0.18);',
-        '    float noise = rand(uv * uResolution + uTime) * 0.06;',
-        '    nv += noise * vec3(0.1, 0.6, 0.1);',
+        '    // Subdued grain — less noise at high gain',
+        '    float noise = rand(uv * uResolution + uTime) * 0.025;',
+        '    nv += noise * vec3(0.08, 0.4, 0.08);',
         '    float dist = length(vUv - 0.5) * 1.5;',
         '    nv *= smoothstep(1.0, 0.3, dist);',
         '    nv *= 0.95 + 0.05 * sin(vUv.y * uResolution.y * 1.5);',
         '    gl_FragColor = vec4(nv, 1.0);',
         '',
         '  } else if (uMode == 2) {',
-        '    // ── THERMAL ──',
-        '    float l = lum(color.rgb);',
+        '    // ── THERMAL (low-light boosted) ──',
+        '    vec3 prev = texture2D(uPrevFrame, uv).rgb;',
+        '    vec3 acc = mix(color.rgb, prev, 0.4);',
+        '    float l = lum(acc);',
         '    l = pow(l, 1.0 / g);',
+        '    l = smoothstep(0.01, 0.9, l);',
         '    gl_FragColor = vec4(thermal(l), 1.0);',
         '',
         '  } else if (uMode == 3) {',
-        '    // ── EDGE DETECTION ──',
+        '    // ── EDGE DETECTION (low-light boosted) ──',
         '    vec2 tx = 1.0 / uVideoSize;',
-        '    float tl = lum(texture2D(uCamera, uv + vec2(-tx.x, tx.y)).rgb);',
-        '    float tc = lum(texture2D(uCamera, uv + vec2(0.0, tx.y)).rgb);',
-        '    float tr = lum(texture2D(uCamera, uv + vec2(tx.x, tx.y)).rgb);',
-        '    float ml = lum(texture2D(uCamera, uv + vec2(-tx.x, 0.0)).rgb);',
-        '    float mr = lum(texture2D(uCamera, uv + vec2(tx.x, 0.0)).rgb);',
-        '    float bl = lum(texture2D(uCamera, uv + vec2(-tx.x, -tx.y)).rgb);',
-        '    float bc = lum(texture2D(uCamera, uv + vec2(0.0, -tx.y)).rgb);',
-        '    float br = lum(texture2D(uCamera, uv + vec2(tx.x, -tx.y)).rgb);',
+        '    float invG = 1.0 / g;',
+        '    // Pre-boost samples with gamma before Sobel — reveals edges in darkness',
+        '    float tl = pow(lum(texture2D(uCamera, uv + vec2(-tx.x, tx.y)).rgb), invG);',
+        '    float tc = pow(lum(texture2D(uCamera, uv + vec2(0.0, tx.y)).rgb), invG);',
+        '    float tr = pow(lum(texture2D(uCamera, uv + vec2(tx.x, tx.y)).rgb), invG);',
+        '    float ml = pow(lum(texture2D(uCamera, uv + vec2(-tx.x, 0.0)).rgb), invG);',
+        '    float mr = pow(lum(texture2D(uCamera, uv + vec2(tx.x, 0.0)).rgb), invG);',
+        '    float bl = pow(lum(texture2D(uCamera, uv + vec2(-tx.x, -tx.y)).rgb), invG);',
+        '    float bc = pow(lum(texture2D(uCamera, uv + vec2(0.0, -tx.y)).rgb), invG);',
+        '    float br = pow(lum(texture2D(uCamera, uv + vec2(tx.x, -tx.y)).rgb), invG);',
         '    float gx = -tl - 2.0*ml - bl + tr + 2.0*mr + br;',
         '    float gy = -tl - 2.0*tc - tr + bl + 2.0*bc + br;',
-        '    float edge = sqrt(gx*gx + gy*gy) * g * 2.0;',
+        '    float edge = sqrt(gx*gx + gy*gy) * 2.5;',
         '    gl_FragColor = vec4(edge * 0.15, edge, edge * 0.2, 1.0);',
         '',
         '  } else if (uMode == 4) {',
-        '    // ── MOTION DETECTION ──',
+        '    // ── MOTION DETECTION (low-light boosted) ──',
         '    vec4 prev = texture2D(uPrevFrame, uv);',
-        '    vec3 diff = abs(color.rgb - prev.rgb);',
-        '    float motion = lum(diff) * g * 3.0;',
+        '    float invG = 1.0 / g;',
+        '    // Gamma-boost both frames before diff — reveals motion in darkness',
+        '    vec3 curB = pow(color.rgb, vec3(invG));',
+        '    vec3 prevB = pow(prev.rgb, vec3(invG));',
+        '    vec3 diff = abs(curB - prevB);',
+        '    float motion = lum(diff) * 3.0;',
         '    motion = smoothstep(0.02, 0.15, motion);',
         '    vec3 mc = vec3(motion, motion * 0.4, motion * 0.1);',
-        '    gl_FragColor = vec4(color.rgb * 0.15 + mc, 1.0);',
+        '    gl_FragColor = vec4(curB * 0.15 + mc, 1.0);',
         '  }',
         '}'
       ].join('\n');
@@ -543,6 +566,22 @@
           return navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 1920 }, height: { ideal: 1080 } }, audio: false });
         }).then(function(s) {
           stream = s;
+
+          // Try to boost camera exposure for low light
+          var track = stream.getVideoTracks()[0];
+          if (track && track.getCapabilities && track.applyConstraints) {
+            var caps = track.getCapabilities();
+            var adv = [];
+            if (caps.exposureCompensation) {
+              adv.push({ exposureCompensation: caps.exposureCompensation.max });
+            }
+            if (caps.exposureMode) {
+              adv.push({ exposureMode: 'continuous' });
+            }
+            if (adv.length > 0) {
+              track.applyConstraints({ advanced: adv }).catch(function() {});
+            }
+          }
 
           if (!video) {
             video = document.createElement('video');
