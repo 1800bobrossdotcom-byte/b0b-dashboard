@@ -527,13 +527,19 @@
           stream.getTracks().forEach(function(t) { t.stop(); });
         }
 
-        return navigator.mediaDevices.getUserMedia({
+        var constraints = {
           video: {
             facingMode: useFront ? 'user' : 'environment',
             width: { ideal: 1920 },
             height: { ideal: 1080 },
           },
           audio: false,
+        };
+
+        return navigator.mediaDevices.getUserMedia(constraints)
+        .catch(function() {
+          // Fallback: drop facingMode constraint (desktop may not support 'environment')
+          return navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 1920 }, height: { ideal: 1080 } }, audio: false });
         }).then(function(s) {
           stream = s;
 
@@ -722,12 +728,22 @@
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
         showError('camera api not available — use https');
       } else if (initGL()) {
-        startCamera().then(function(ok) {
-          if (ok) {
-            running = true;
-            render();
-          }
+        // Show start button — explicit user gesture required for camera
+        overlayMsg.textContent = 'SPECTRA';
+        overlayMsg.className = '';
+        var startBtn = document.createElement('button');
+        startBtn.textContent = 'enable camera';
+        startBtn.addEventListener('click', function() {
+          startBtn.remove();
+          overlayMsg.textContent = 'initializing...';
+          startCamera().then(function(ok) {
+            if (ok) {
+              running = true;
+              render();
+            }
+          });
         });
+        overlay.appendChild(startBtn);
       }
 
     })();
