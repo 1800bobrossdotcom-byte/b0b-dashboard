@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>.</title>
+<style>
+*{margin:0;padding:0}
+html,body{width:100%;height:100%;background:#000;overflow:hidden}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+var c=document.getElementById('c'),x=c.getContext('2d');
+var W,H,px,py,on=false,t=0;
+function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;}
+resize();
+window.addEventListener('resize',resize);
+function tick(){
+  x.clearRect(0,0,W,H);
+  t++;
+  if(t>Math.random()*90+20){
+    on=!on;
+    if(on){px=Math.random()*W;py=Math.random()*H;}
+    t=0;
+  }
+  if(on){
+    x.fillStyle='#fff';
+    x.fillRect(Math.floor(px),Math.floor(py),1,1);
+  }
+  requestAnimationFrame(tick);
+}
+tick();
+</script>
+</body>
+</html>
