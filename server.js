@@ -125,9 +125,11 @@ app.use((req, res, next) => {
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.setHeader('X-Frame-Options', 'DENY');
     res.setHeader('X-Permitted-Cross-Domain-Policies', 'none');
-    if (level !== 'camera') {
-      res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
-      res.setHeader('Cross-Origin-Resource-Policy', 'same-origin');
+    if (level === 'camera') {
+      // Remove COOP/CORP — they break getUserMedia permission prompts
+      res.removeHeader('Cross-Origin-Opener-Policy');
+      res.removeHeader('Cross-Origin-Resource-Policy');
+      res.removeHeader('Cross-Origin-Embedder-Policy');
     }
     res.removeHeader('X-Powered-By');
     next();
