@@ -3,186 +3,266 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <title>God Love</title>
+  <title>b0b — computational instruments</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: #05101a;
-      overflow: hidden;
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 100%; height: 100%;
+      background: #060606;
+      color: #8a8a6a;
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'JetBrains Mono', 'Courier New', monospace;
+      -webkit-font-smoothing: antialiased;
     }
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+
+    canvas#bg {
+      position: fixed; inset: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
       z-index: 0;
     }
-    p {
+
+    .page {
       position: relative;
       z-index: 1;
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: clamp(1.4rem, 4vw, 2.8rem);
-      color: rgba(255,255,255,0.92);
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 15vh 24px 10vh;
+      min-height: 100vh;
+    }
+
+    .mark {
+      font-size: 24px;
+      letter-spacing: 12px;
       text-align: center;
-      text-shadow: 0 2px 20px rgba(0,40,80,0.6), 0 0 60px rgba(80,160,220,0.15);
-      padding: 1rem 2rem;
-      line-height: 1.6;
-      max-width: 700px;
+      color: #6a8a4a;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-align: center;
+      text-transform: uppercase;
+      color: #4a4a3a;
+      margin-bottom: 48px;
+    }
+
+    .rule {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #1a1a14 20%, #1a1a14 80%, transparent);
+      margin: 0 0 40px;
+    }
+
+    .entry {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      transition: border-color 0.4s, background 0.4s;
+      padding: 24px 20px;
+      margin-bottom: 32px;
+      position: relative;
+    }
+
+    .entry:hover {
+      border-color: #1a1a14;
+      background: rgba(12, 12, 10, 0.5);
+    }
+
+    .entry-num {
+      font-size: 9px;
+      letter-spacing: 3px;
+      color: #3a3a2a;
+      margin-bottom: 10px;
+    }
+
+    .entry-name {
+      font-size: 16px;
+      letter-spacing: 6px;
+      font-weight: normal;
+      margin-bottom: 8px;
+      transition: color 0.3s, text-shadow 0.3s;
+    }
+
+    .entry-desc {
+      font-size: 11px;
+      color: #5a5a4a;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+
+    .entry-tags {
+      font-size: 10px;
+      color: #3a3a2a;
+      letter-spacing: 1px;
+    }
+
+    .entry-arrow {
+      position: absolute;
+      right: 20px;
+      bottom: 24px;
+      font-size: 11px;
+      color: #3a3a2a;
+      opacity: 0;
+      transition: opacity 0.3s, transform 0.3s;
+      transform: translateX(-4px);
+    }
+
+    .entry:hover .entry-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* SPECTRA hover — green phosphor glow */
+    .entry--spectra:hover { border-color: rgba(106, 138, 74, 0.3); }
+    .entry--spectra:hover .entry-name {
+      color: #8aaa5a;
+      text-shadow: 0 0 20px rgba(106, 138, 74, 0.2);
+    }
+
+    /* ARTIFACT hover — chromatic aberration */
+    .entry--artifact:hover { border-color: rgba(138, 74, 106, 0.3); }
+    .entry--artifact:hover .entry-name {
+      text-shadow: 2px 0 rgba(255, 0, 128, 0.15), -2px 0 rgba(0, 255, 255, 0.15);
+      color: #aa8a5a;
+    }
+
+    /* TAKE hover — warm red accent */
+    .entry--take:hover { border-color: rgba(138, 74, 74, 0.3); }
+    .entry--take:hover .entry-name { color: #aa6a5a; }
+    .entry--take .rec-dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      background: #5a2a2a;
+      border-radius: 50%;
+      margin-left: 8px;
+      vertical-align: middle;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+    .entry--take:hover .rec-dot {
+      background: #cc3333;
+      box-shadow: 0 0 8px rgba(204, 51, 51, 0.5);
+      animation: pulse 1.2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .unavailable {
+      pointer-events: none;
+    }
+    .unavailable .entry-tags::after {
+      content: ' — coming soon';
+      color: #2a2a20;
+    }
+
+    @media (max-width: 480px) {
+      .page { padding: 10vh 16px 8vh; }
+      .mark { font-size: 20px; letter-spacing: 10px; }
+      .entry-name { font-size: 14px; letter-spacing: 4px; }
     }
   </style>
 </head>
 <body>
-  <canvas id="c"></canvas>
-  <p>God Love merely is, and nothing else is at all.</p>
-  <p>Christ Always Risen, Love Never Dies. God Is Real.</p>
+  <canvas id="bg"></canvas>
+
+  <div class="page">
+    <div class="mark">b 0 b</div>
+    <div class="subtitle">computational instruments</div>
+    <div class="rule"></div>
+
+    <a href="/spectra" class="entry entry--spectra">
+      <div class="entry-num">001</div>
+      <h2 class="entry-name">SPECTRA</h2>
+      <p class="entry-desc">computational vision engine</p>
+      <p class="entry-tags">night · thermal · motion · edge</p>
+      <span class="entry-arrow">&rarr;</span>
+    </a>
+
+    <a href="/artifact" class="entry entry--artifact unavailable">
+      <div class="entry-num">002</div>
+      <h2 class="entry-name">ARTIFACT</h2>
+      <p class="entry-desc">analog glitch camera</p>
+      <p class="entry-tags">pixel sort · vhs · databend · scanline</p>
+      <span class="entry-arrow">&rarr;</span>
+    </a>
+
+    <a href="/take" class="entry entry--take unavailable">
+      <div class="entry-num">003</div>
+      <h2 class="entry-name">TAKE<span class="rec-dot"></span></h2>
+      <p class="entry-desc">short-form video tool</p>
+      <p class="entry-tags">record · effects · concatenate · export</p>
+      <span class="entry-arrow">&rarr;</span>
+    </a>
+  </div>
+
   <script>
-    const canvas = document.getElementById('c');
-    const ctx = canvas.getContext('2d');
+    const c = document.getElementById('bg');
+    const x = c.getContext('2d');
     let W, H;
-    const drops = [];
-    const hues = [0, 15, 30, 45, 60, 90, 120, 150, 180, 200, 220, 250, 270, 300, 330]; // full rainbow
+    const P = [];
+    const N = 35;
 
     function resize() {
-      W = canvas.width = window.innerWidth;
-      H = canvas.height = window.innerHeight;
-      drawBase();
+      W = c.width = window.innerWidth;
+      H = c.height = window.innerHeight;
     }
-    window.addEventListener('resize', resize);
+
     resize();
+    window.addEventListener('resize', resize);
 
-    // Deep water gradient base
-    function drawBase() {
-      const g = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, Math.max(W,H)*0.7);
-      g.addColorStop(0, '#0a2540');
-      g.addColorStop(0.5, '#071c30');
-      g.addColorStop(1, '#030e1a');
-      ctx.fillStyle = g;
-      ctx.fillRect(0, 0, W, H);
-    }
-
-    function addDrop(x, y) {
-      const hue = hues[Math.floor(Math.random() * hues.length)];
-      // Each drop creates multiple wave rings that expand at slightly different speeds
-      const numRings = 4 + Math.floor(Math.random() * 4);
-      const maxR = 120 + Math.random() * 280;
-      const baseSpeed = 0.8 + Math.random() * 1.2;
-      for (let r = 0; r < numRings; r++) {
-        drops.push({
-          x, y,
-          radius: 0,
-          delay: r * 6, // stagger rings
-          maxR: maxR,
-          speed: baseSpeed + r * 0.15,
-          hue: hue + (Math.random() - 0.5) * 20,
-          sat: 50 + Math.random() * 30,
-          light: 55 + Math.random() * 20,
-          thickness: Math.max(0.3, 2.5 - r * 0.4),
-          age: 0
-        });
-      }
-    }
-
-    // Subtle caustic light patterns on the water surface
-    const caustics = [];
-    for (let i = 0; i < 12; i++) {
-      caustics.push({
-        x: Math.random() * 2000, y: Math.random() * 2000,
-        size: 80 + Math.random() * 200,
-        phase: Math.random() * Math.PI * 2,
-        speed: 0.002 + Math.random() * 0.004,
-        drift: { x: (Math.random() - 0.5) * 0.3, y: (Math.random() - 0.5) * 0.2 }
+    for (let i = 0; i < N; i++) {
+      P.push({
+        x: Math.random() * (window.innerWidth || 1200),
+        y: Math.random() * (window.innerHeight || 800),
+        vx: (Math.random() - 0.5) * 0.15,
+        vy: (Math.random() - 0.5) * 0.15,
+        r: 0.8 + Math.random() * 1.2,
       });
     }
 
-    // Initial drops
-    for (let i = 0; i < 5; i++) {
-      addDrop(Math.random() * (window.innerWidth || 1200), Math.random() * (window.innerHeight || 800));
-    }
-
-    // New drops periodically — varied timing like real rain
-    function scheduleDrop() {
-      addDrop(Math.random() * W, Math.random() * H);
-      setTimeout(scheduleDrop, 600 + Math.random() * 2000);
-    }
-    scheduleDrop();
-
-    // Drop on click/touch
-    canvas.addEventListener('click', (e) => addDrop(e.clientX, e.clientY));
-    canvas.addEventListener('touchstart', (e) => {
-      e.preventDefault();
-      for (const t of e.touches) addDrop(t.clientX, t.clientY);
-    }, { passive: false });
-
-    let time = 0;
     function draw() {
-      time++;
+      x.clearRect(0, 0, W, H);
 
-      // Fade toward the deep water color
-      ctx.fillStyle = 'rgba(5, 16, 26, 0.06)';
-      ctx.fillRect(0, 0, W, H);
-
-      // Draw subtle caustic light patches
-      for (const c of caustics) {
-        c.x += c.drift.x;
-        c.y += c.drift.y;
-        if (c.x < -200) c.x = W + 200;
-        if (c.x > W + 200) c.x = -200;
-        if (c.y < -200) c.y = H + 200;
-        if (c.y > H + 200) c.y = -200;
-        const pulse = 0.015 + 0.01 * Math.sin(time * c.speed + c.phase);
-        const g = ctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, c.size);
-        g.addColorStop(0, `rgba(100, 180, 220, ${pulse})`);
-        g.addColorStop(1, 'rgba(100, 180, 220, 0)');
-        ctx.fillStyle = g;
-        ctx.fillRect(c.x - c.size, c.y - c.size, c.size * 2, c.size * 2);
-      }
-
-      // Draw ripples
-      for (let i = drops.length - 1; i >= 0; i--) {
-        const d = drops[i];
-        d.age++;
-
-        if (d.age < d.delay) continue;
-
-        const t = d.age - d.delay;
-        d.radius = t * d.speed;
-
-        const life = d.radius / d.maxR;
-        if (life >= 1) { drops.splice(i, 1); continue; }
-
-        // Water ripple alpha: bright at start, fades with distance
-        // Also oscillates slightly to mimic wave interference
-        const wave = Math.sin(life * Math.PI * 6) * 0.15;
-        const baseAlpha = (1 - life) * (1 - life); // quadratic fadeout
-        const alpha = Math.max(0, (baseAlpha * 0.5 + wave) * 0.8);
-
-        if (alpha <= 0.005) continue;
-
-        ctx.beginPath();
-        ctx.arc(d.x, d.y, d.radius, 0, Math.PI * 2);
-        ctx.strokeStyle = `hsla(${d.hue}, ${d.sat}%, ${d.light}%, ${alpha})`;
-        ctx.lineWidth = d.thickness * (1 - life * 0.6);
-        ctx.stroke();
-
-        // Inner highlight — simulates light refraction on the wave crest
-        if (alpha > 0.1) {
-          ctx.beginPath();
-          ctx.arc(d.x, d.y, d.radius * 0.97, 0, Math.PI * 2);
-          ctx.strokeStyle = `hsla(${d.hue + 10}, 30%, 85%, ${alpha * 0.3})`;
-          ctx.lineWidth = Math.max(0.2, d.thickness * 0.3);
-          ctx.stroke();
+      for (let i = 0; i < P.length; i++) {
+        for (let j = i + 1; j < P.length; j++) {
+          const dx = P[i].x - P[j].x;
+          const dy = P[i].y - P[j].y;
+          const d = Math.sqrt(dx * dx + dy * dy);
+          if (d < 140) {
+            x.globalAlpha = (1 - d / 140) * 0.04;
+            x.strokeStyle = '#6a8a4a';
+            x.lineWidth = 0.5;
+            x.beginPath();
+            x.moveTo(P[i].x, P[i].y);
+            x.lineTo(P[j].x, P[j].y);
+            x.stroke();
+          }
         }
       }
 
+      x.globalAlpha = 0.12;
+      x.fillStyle = '#6a8a4a';
+      for (const p of P) {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < -20) p.x = W + 20;
+        if (p.x > W + 20) p.x = -20;
+        if (p.y < -20) p.y = H + 20;
+        if (p.y > H + 20) p.y = -20;
+        x.beginPath();
+        x.arc(p.x, p.y, p.r, 0, 6.283);
+        x.fill();
+      }
+
+      x.globalAlpha = 1;
       requestAnimationFrame(draw);
     }
+
     draw();
   </script>
 </body>

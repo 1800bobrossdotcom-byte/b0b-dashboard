@@ -3,33 +3,54 @@ const path = require('path');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const crypto = require('crypto');
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // ═══════════════════════════════════════════════════════════
-// NSA STANDARD SECURITY HARDENING — RAINBOW TEAM AUDIT
+// b0b — computational instruments
+// Route-aware security hardening
 // ═══════════════════════════════════════════════════════════
 
-// ── BLUE TEAM: Strip server fingerprint ──
+const PAGES = {
+  '/':         { file: 'index.html',    security: 'strict' },
+  '/spectra':  { file: 'spectra.html',  security: 'camera' },
+  '/artifact': { file: 'artifact.html', security: 'camera' },
+  '/take':     { file: 'take.html',     security: 'camera' },
+};
+
+// Pre-load HTML templates at startup
+const TEMPLATES = {};
+for (const [route, cfg] of Object.entries(PAGES)) {
+  const fp = path.join(__dirname, 'public', cfg.file);
+  if (fs.existsSync(fp)) TEMPLATES[route] = fs.readFileSync(fp, 'utf8');
+}
+
+const STATIC_FILES = new Set(['/favicon.svg', '/favicon.png', '/icon-transparent.svg']);
+
+const ALLOWED = new Set([
+  ...Object.keys(PAGES),
+  ...STATIC_FILES,
+  '/index.html', '/spectra.html', '/artifact.html', '/take.html',
+]);
+
+// ── Fingerprint removal ──
 app.disable('x-powered-by');
 app.disable('etag');
-
-// ── BLUE TEAM: Trust Railway proxy (1 hop) ──
 app.set('trust proxy', 1);
 
-// ── RED TEAM COUNTER: Rate limiting (DDoS / brute force mitigation) ──
-const limiter = rateLimit({
-  windowMs: 60 * 1000,    // 1 minute window
-  max: 120,               // 120 requests per minute per IP
+// ── Rate limiting ──
+app.use(rateLimit({
+  windowMs: 60_000,
+  max: 120,
   standardHeaders: true,
   legacyHeaders: false,
   message: '',
   statusCode: 429,
-});
-app.use(limiter);
+}));
 
-// ── BLUE TEAM: HTTPS enforcement ──
+// ── HTTPS enforcement ──
 app.use((req, res, next) => {
   if (req.headers['x-forwarded-proto'] !== 'https' && process.env.NODE_ENV !== 'development') {
     return res.redirect(301, 'https://' + req.hostname + req.url);
@@ -37,127 +58,121 @@ app.use((req, res, next) => {
   next();
 });
 
-// ── BLUE TEAM: Generate nonce per request for inline script CSP ──
+// ── Nonce generation ──
 app.use((req, res, next) => {
-  res.locals.cspNonce = crypto.randomBytes(16).toString('base64');
+  res.locals.nonce = crypto.randomBytes(16).toString('base64');
   next();
 });
 
-// ── BLUE TEAM: Helmet security headers (NSA IA guidance compliant) ──
+// ── CSP directives by security level ──
+function csp(nonce, level) {
+  const d = {
+    defaultSrc: ["'none'"],
+    scriptSrc: [`'nonce-${nonce}'`],
+    styleSrc: ["'unsafe-inline'"],
+    imgSrc: ["'self'", 'data:'],
+    fontSrc: ["'none'"],
+    objectSrc: ["'none'"],
+    frameSrc: ["'none'"],
+    frameAncestors: ["'none'"],
+    formAction: ["'self'"],
+    baseUri: ["'self'"],
+    upgradeInsecureRequests: [],
+  };
+  if (level === 'camera') {
+    d.connectSrc = ["'self'", 'blob:'];
+    d.mediaSrc = ["'self'", 'blob:', 'mediastream:'];
+    d.workerSrc = ["'self'", 'blob:'];
+    d.childSrc = ["'self'", 'blob:'];
+    d.imgSrc.push('blob:');
+  } else {
+    d.connectSrc = ["'none'"];
+    d.mediaSrc = ["'none'"];
+    d.workerSrc = ["'none'"];
+    d.childSrc = ["'none'"];
+  }
+  return d;
+}
+
+function permissions(level) {
+  const cam = level === 'camera' ? '(self)' : '()';
+  const mic = level === 'camera' ? '(self)' : '()';
+  return [
+    `accelerometer=()`, `camera=${cam}`, `geolocation=()`,
+    `gyroscope=()`, `magnetometer=()`, `microphone=${mic}`,
+    `payment=()`, `usb=()`, `interest-cohort=()`,
+    `browsing-topics=()`, `display-capture=()`, `document-domain=()`,
+    `encrypted-media=()`, `fullscreen=(self)`, `picture-in-picture=()`
+  ].join(', ');
+}
+
+// ── Security headers (route-aware) ──
 app.use((req, res, next) => {
+  const pg = PAGES[req.path];
+  const level = pg ? pg.security : 'strict';
   helmet({
-    // Strict Content Security Policy
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'none'"],
-        scriptSrc: ["'nonce-" + res.locals.cspNonce + "'"],
-        styleSrc: ["'unsafe-inline'"],   // inline styles in single HTML page
-        imgSrc: ["'self'", 'data:'],
-        fontSrc: ["'none'"],
-        connectSrc: ["'none'"],
-        mediaSrc: ["'none'"],
-        objectSrc: ["'none'"],
-        frameSrc: ["'none'"],
-        childSrc: ["'none'"],
-        workerSrc: ["'none'"],
-        frameAncestors: ["'none'"],
-        formAction: ["'none'"],
-        baseUri: ["'self'"],
-        manifestSrc: ["'none'"],
-        upgradeInsecureRequests: [],
-        blockAllMixedContent: [],
-      },
-    },
-    // Strict Transport Security — 2 years, includeSubDomains, preload-ready
-    strictTransportSecurity: {
-      maxAge: 63072000,
-      includeSubDomains: true,
-      preload: true,
-    },
-    // Prevent clickjacking
+    contentSecurityPolicy: { directives: csp(res.locals.nonce, level) },
+    strictTransportSecurity: { maxAge: 63_072_000, includeSubDomains: true, preload: true },
     frameguard: { action: 'deny' },
-    // Prevent MIME sniffing
     noSniff: true,
-    // XSS filter
     xssFilter: true,
-    // No referrer leakage
     referrerPolicy: { policy: 'no-referrer' },
-    // Disable DNS prefetch
     dnsPrefetchControl: { allow: false },
-    // No open redirects
     ieNoOpen: true,
-    // Permissions Policy — lock down all browser APIs
     permittedCrossDomainPolicies: { permittedPolicies: 'none' },
-  })(req, res, next);
+  })(req, res, () => {
+    res.setHeader('Permissions-Policy', permissions(level));
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('X-Frame-Options', 'DENY');
+    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+    res.setHeader('Cross-Origin-Resource-Policy', 'same-origin');
+    res.setHeader('X-Permitted-Cross-Domain-Policies', 'none');
+    res.removeHeader('X-Powered-By');
+    next();
+  });
 });
 
-// ── BLUE TEAM: Additional Permissions-Policy header (feature lockdown) ──
+// ── Path allowlist ──
 app.use((req, res, next) => {
-  res.setHeader('Permissions-Policy',
-    'accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), ' +
-    'microphone=(), payment=(), usb=(), interest-cohort=(), ' +
-    'browsing-topics=(), display-capture=(), document-domain=(), ' +
-    'encrypted-media=(), fullscreen=(self), picture-in-picture=()'
-  );
-  res.setHeader('X-Content-Type-Options', 'nosniff');
-  res.setHeader('X-Frame-Options', 'DENY');
-  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
-  res.setHeader('Cross-Origin-Resource-Policy', 'same-origin');
-  res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
-  res.setHeader('X-Permitted-Cross-Domain-Policies', 'none');
-  res.removeHeader('X-Powered-By');
+  const p = req.path.split('?')[0].split('#')[0].toLowerCase();
+  if (p.includes('..') || p.includes('%2e') || p.includes('%00')) return res.status(400).end();
+  if (!ALLOWED.has(p)) return res.status(404).end();
   next();
 });
 
-// ── RED TEAM COUNTER: Block access to legacy/defunct files ──
-const ALLOWED_FILES = new Set([
-  '/', '/index.html', '/favicon.svg', '/favicon.png', '/icon-transparent.svg'
-]);
-app.use((req, res, next) => {
-  const clean = req.path.split('?')[0].split('#')[0].toLowerCase();
-  // Block path traversal attempts
-  if (clean.includes('..') || clean.includes('%2e') || clean.includes('%00')) {
-    return res.status(400).end();
-  }
-  // Only serve allowed files
-  if (!ALLOWED_FILES.has(clean)) {
-    return res.status(404).end();
-  }
-  next();
-});
+// ── Serve pages with nonce injection ──
+function serve(route) {
+  return (req, res) => {
+    const t = TEMPLATES[route];
+    if (!t) return res.status(404).end();
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.send(t.replace(/<script>/g, `<script nonce="${res.locals.nonce}">`));
+  };
+}
 
-// ── GREY TEAM: Serve index.html with CSP nonce injected ──
-const fs = require('fs');
-const INDEX_TEMPLATE = fs.readFileSync(path.join(__dirname, 'public', 'index.html'), 'utf8');
+app.get('/', serve('/'));
+app.get('/spectra', serve('/spectra'));
+app.get('/artifact', serve('/artifact'));
+app.get('/take', serve('/take'));
 
-app.get('/', (req, res) => {
-  const html = INDEX_TEMPLATE.replace('<script>', '<script nonce="' + res.locals.cspNonce + '">');
-  res.setHeader('Content-Type', 'text/html; charset=utf-8');
-  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-  res.send(html);
-});
+// ── Clean URL redirects ──
+app.get('/index.html', (_, res) => res.redirect(301, '/'));
+app.get('/spectra.html', (_, res) => res.redirect(301, '/spectra'));
+app.get('/artifact.html', (_, res) => res.redirect(301, '/artifact'));
+app.get('/take.html', (_, res) => res.redirect(301, '/take'));
 
-app.get('/index.html', (req, res) => {
-  res.redirect(301, '/');
-});
-
-// ── Static assets with strict caching ──
+// ── Static assets ──
 app.use(express.static(path.join(__dirname, 'public'), {
   maxAge: '1h',
   dotfiles: 'deny',
-  index: false,  // handled above with nonce injection
+  index: false,
 }));
 
-// ── RED TEAM COUNTER: Catch-all 404 (no information leakage) ──
-app.use((req, res) => {
-  res.status(404).end();
-});
+// ── 404 ──
+app.use((req, res) => res.status(404).end());
 
-// ── GREY TEAM: Error handler (no stack traces leaked) ──
-app.use((err, req, res, next) => {
-  res.status(500).end();
-});
+// ── Error handler ──
+app.use((err, req, res, next) => res.status(500).end());
 
-app.listen(PORT, () => {
-  console.log(`[SECURE] Server running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`[b0b] port ${PORT}`));
