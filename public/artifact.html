@@ -105,23 +105,28 @@
 
     .modes {
       display: flex;
-      gap: 6px;
-      justify-content: center;
-      margin-bottom: 8px;
+      gap: 4px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 4px;
+      margin-bottom: 6px;
+      scrollbar-width: none;
     }
+    .modes::-webkit-scrollbar { display: none; }
 
     .modes button {
       background: #0c0c0a;
       border: 1px solid #2a2a20;
       color: #5a5a4a;
-      padding: 8px 12px;
+      padding: 6px 8px;
       font-family: inherit;
-      font-size: 10px;
-      letter-spacing: 2px;
+      font-size: 9px;
+      letter-spacing: 1px;
       text-transform: uppercase;
       cursor: pointer;
       transition: all 0.2s;
-      min-width: 48px;
+      min-width: 36px;
+      flex-shrink: 0;
     }
 
     .modes button.active {
@@ -238,8 +243,17 @@
       margin-top: 4px;
     }
 
+    .hud-rec {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: #cc3333;
+      margin-top: 6px;
+      animation: blink-rec 0.8s infinite;
+    }
+    @keyframes blink-rec { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
     @media (max-width: 380px) {
-      .modes button { padding: 8px 8px; font-size: 9px; min-width: 40px; }
+      .modes button { padding: 6px 6px; font-size: 8px; min-width: 28px; }
     }
 
     @media (env(safe-area-inset-bottom)) {
@@ -253,7 +267,8 @@
       <a href="/">&larr; b0b</a>
       <span class="title">ARTIFACT</span>
       <div class="controls">
-        <button id="captureBtn" title="capture frame">&#x2299;</button>
+        <button id="formatBtn" title="cycle format" style="font-size:9px;letter-spacing:1px;width:auto;padding:0 8px;">PNG</button>
+        <button id="captureBtn" title="capture">&#x2299;</button>
         <button id="flipBtn" title="flip camera">&#x21CC;</button>
       </div>
     </div>
@@ -263,6 +278,7 @@
       <div class="hud">
         <div class="hud-mode" id="hudMode">NRM</div>
         <div class="hud-fps" id="hudFps"></div>
+        <div class="hud-rec" id="hudRec" style="display:none;"></div>
       </div>
       <div class="overlay" id="overlay">
         <p id="overlayMsg">initializing artifact...</p>
@@ -276,6 +292,16 @@
         <button data-mode="2">VHS</button>
         <button data-mode="3">BEND</button>
         <button data-mode="4">SCAN</button>
+        <button data-mode="5">MELT</button>
+        <button data-mode="6">CHROM</button>
+        <button data-mode="7">GRAIN</button>
+        <button data-mode="8">DTH</button>
+        <button data-mode="9">POST</button>
+        <button data-mode="10">KAL</button>
+        <button data-mode="11">SNOW</button>
+        <button data-mode="12">BLUR</button>
+        <button data-mode="13">INV</button>
+        <button data-mode="14">HALF</button>
       </div>
       <div class="slider-row hidden" id="sliderRow">
         <span class="slider-label" id="sliderLabel">FX</span>
@@ -304,8 +330,8 @@
       var hudMode = document.getElementById('hudMode');
       var hudFps = document.getElementById('hudFps');
 
-      var MODE_NAMES = ['NRM', 'SORT', 'VHS', 'BEND', 'SCAN'];
-      var SLIDER_LABELS = ['', 'THRESH', 'DECAY', 'CORRUPT', 'CRT'];
+      var MODE_NAMES = ['NRM', 'SORT', 'VHS', 'BEND', 'SCAN', 'MELT', 'CHROM', 'GRAIN', 'DTH', 'POST', 'KAL', 'SNOW', 'BLUR', 'INV', 'HALF'];
+      var SLIDER_LABELS = ['', 'THRESH', 'DECAY', 'CORRUPT', 'CRT', 'TRAIL', 'SPLIT', 'FILM', 'BITS', 'LEVELS', 'FOLD', 'STATIC', 'RADIUS', 'MIX', 'SCALE'];
 
       var currentMode = 0;
       var fxAmount = 0.5;
@@ -318,7 +344,6 @@
       var cameraTextures = [];
       var frameIdx = 0;
       var running = false;
-      var needCapture = false;
       var firstFrame = true;
 
       // FPS counter
@@ -590,6 +615,124 @@
         '    crtColor *= vec3(1.02, 1.0, 0.96);',
         '',
         '    gl_FragColor = vec4(crtColor, 1.0);',
+        '',
+        '  } else if (uMode == 5) {',
+        '    // ── MELT (ghost trails) ──',
+        '    vec4 prev = texture2D(uPrevFrame, uv);',
+        '    float trail = 0.5 + fx * 0.48;',
+        '    vec3 melted = mix(color.rgb, prev.rgb, trail);',
+        '    vec2 dripUv = uv + vec2(0.0, 0.003 * fx);',
+        '    if (dripUv.y <= 1.0) {',
+        '      vec3 drip = texture2D(uPrevFrame, dripUv).rgb;',
+        '      melted = mix(melted, drip, fx * 0.4);',
+        '    }',
+        '    float flicker = 0.98 + 0.02 * hash2(vec2(uTime, 0.0));',
+        '    gl_FragColor = vec4(melted * flicker, 1.0);',
+        '',
+        '  } else if (uMode == 6) {',
+        '    // ── CHROM (chromatic aberration) ──',
+        '    vec2 center = vec2(0.5);',
+        '    vec2 dir = uv - center;',
+        '    float dist = length(dir);',
+        '    float spread = fx * 0.035;',
+        '    float cr = texture2D(uCamera, uv + dir * spread).r;',
+        '    float cg = texture2D(uCamera, uv).g;',
+        '    float cb = texture2D(uCamera, uv - dir * spread).b;',
+        '    vec3 chrom = vec3(cr, cg, cb);',
+        '    chrom += dist * fx * 0.15 * vec3(0.1, -0.05, 0.15);',
+        '    float vig = 1.0 - dist * 0.4;',
+        '    gl_FragColor = vec4(chrom * vig, 1.0);',
+        '',
+        '  } else if (uMode == 7) {',
+        '    // ── GRAIN (film grain + vintage) ──',
+        '    vec3 c = color.rgb;',
+        '    float l = lum(c);',
+        '    c = mix(c, vec3(l), fx * 0.4);',
+        '    c += vec3(0.06, 0.03, -0.02) * (1.0 - l) * fx;',
+        '    c += vec3(-0.02, -0.01, 0.04) * l * fx;',
+        '    float grain = (hash2(uv * uResolution + uTime * 100.0) - 0.5) * 0.15 * fx;',
+        '    c += grain;',
+        '    c *= 1.0 - length(vUv - 0.5) * 0.8 * fx;',
+        '    c = mix(c, smoothstep(0.0, 1.0, c), fx * 0.3);',
+        '    gl_FragColor = vec4(c, 1.0);',
+        '',
+        '  } else if (uMode == 8) {',
+        '    // ── DTH (ordered dither) ──',
+        '    float levels = 2.0 + (1.0 - fx) * 14.0;',
+        '    vec2 cell = floor(mod(vUv * uResolution, 2.0));',
+        '    float bayer = (cell.x * 2.0 + cell.y * 3.0 - cell.x * cell.y * 4.0) / 4.0;',
+        '    vec3 d;',
+        '    d.r = floor(color.r * levels + bayer) / levels;',
+        '    d.g = floor(color.g * levels + bayer) / levels;',
+        '    d.b = floor(color.b * levels + bayer) / levels;',
+        '    gl_FragColor = vec4(d, 1.0);',
+        '',
+        '  } else if (uMode == 9) {',
+        '    // ── POST (posterize) ──',
+        '    float levels = 2.0 + (1.0 - fx) * 22.0;',
+        '    vec3 p = floor(color.rgb * levels + 0.5) / levels;',
+        '    gl_FragColor = vec4(p, 1.0);',
+        '',
+        '  } else if (uMode == 10) {',
+        '    // ── KAL (kaleidoscope) ──',
+        '    vec2 kUv = uv - 0.5;',
+        '    float angle = atan(kUv.y, kUv.x);',
+        '    float radius = length(kUv);',
+        '    float segments = 3.0 + fx * 9.0;',
+        '    float segAngle = 6.28318530718 / segments;',
+        '    angle = mod(angle, segAngle);',
+        '    if (angle > segAngle * 0.5) angle = segAngle - angle;',
+        '    vec2 kalUv = vec2(cos(angle), sin(angle)) * radius + 0.5;',
+        '    kalUv = clamp(kalUv, 0.001, 0.999);',
+        '    gl_FragColor = texture2D(uCamera, kalUv);',
+        '',
+        '  } else if (uMode == 11) {',
+        '    // ── SNOW (analog static) ──',
+        '    float t = uTime;',
+        '    float amt = fx;',
+        '    float snow = hash2(uv * uResolution + t * 137.0);',
+        '    vec3 c = mix(color.rgb, vec3(snow), amt * 0.8);',
+        '    float bandSeed = hash(floor(uv.y * 60.0) + floor(t * 8.0) * 100.0);',
+        '    if (bandSeed > 1.0 - amt * 0.2) c = vec3(hash2(uv * uResolution * 3.0 + t * 200.0));',
+        '    c *= 0.9 + 0.1 * sin(vUv.y * uResolution.y * 2.0);',
+        '    gl_FragColor = vec4(c, 1.0);',
+        '',
+        '  } else if (uMode == 12) {',
+        '    // ── BLUR (radial zoom) ──',
+        '    vec2 center = vec2(0.5);',
+        '    vec2 dir = uv - center;',
+        '    float blurAmt = fx * 0.04;',
+        '    vec3 sum = vec3(0.0);',
+        '    for (int i = 0; i < 16; i++) {',
+        '      float t = float(i) / 15.0;',
+        '      sum += texture2D(uCamera, uv - dir * blurAmt * t).rgb;',
+        '    }',
+        '    gl_FragColor = vec4(sum / 16.0, 1.0);',
+        '',
+        '  } else if (uMode == 13) {',
+        '    // ── INV (band inversion) ──',
+        '    float t = uTime;',
+        '    float bandPos = sin(uv.y * 10.0 + t * 2.0) * 0.5 + 0.5;',
+        '    float inv = step(1.0 - fx, bandPos);',
+        '    vec3 c = mix(color.rgb, 1.0 - color.rgb, inv);',
+        '    float swapBand = step(0.7, hash2(vec2(floor(uv.y * 30.0), floor(t * 2.0))));',
+        '    if (swapBand > 0.5 && fx > 0.3) c = c.bgr;',
+        '    gl_FragColor = vec4(c, 1.0);',
+        '',
+        '  } else if (uMode == 14) {',
+        '    // ── HALF (halftone) ──',
+        '    float cellSize = 4.0 + (1.0 - fx) * 12.0;',
+        '    vec2 cellId = floor(vUv * uResolution / cellSize);',
+        '    vec2 cellCenter = (cellId + 0.5) * cellSize / uResolution;',
+        '    vec2 cellUv = adjustUv(cellCenter);',
+        '    vec3 cellColor = texture2D(uCamera, clamp(cellUv, 0.001, 0.999)).rgb;',
+        '    float cellLum = lum(cellColor);',
+        '    float dotR = cellLum * 0.5 * cellSize;',
+        '    vec2 pixPos = vUv * uResolution;',
+        '    vec2 pixInCell = mod(pixPos, cellSize) - cellSize * 0.5;',
+        '    float dist = length(pixInCell);',
+        '    if (dist < dotR) gl_FragColor = vec4(cellColor, 1.0);',
+        '    else gl_FragColor = vec4(vec3(0.02), 1.0);',
         '  }',
         '}'
       ].join('\n');
@@ -807,20 +950,6 @@
         // Draw
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
-        // Capture if requested
-        if (needCapture) {
-          needCapture = false;
-          canvas.toBlob(function(blob) {
-            if (!blob) return;
-            var url = URL.createObjectURL(blob);
-            var a = document.createElement('a');
-            a.href = url;
-            a.download = 'artifact-' + MODE_NAMES[currentMode].toLowerCase() + '-' + Date.now() + '.png';
-            a.click();
-            setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
-          }, 'image/png');
-        }
-
         // Swap ping-pong index
         frameIdx = 1 - frameIdx;
 
@@ -875,9 +1004,163 @@
         startCamera();
       });
 
+      // ── Export / GIF ──
+
+      var exportFormat = 'png';
+      var FORMATS = ['png', 'jpg', 'gif'];
+      var gifRecording = false;
+      var gifFrames = [];
+      var gifStartTime = 0;
+      var GIF_DURATION = 3000;
+      var GIF_FPS = 10;
+      var GIF_MAX_W = 320;
+      var gifCaptureInterval = null;
+      var formatBtn = document.getElementById('formatBtn');
+      var hudRec = document.getElementById('hudRec');
+
+      // ── Inline GIF89a encoder ──
+
+      function encodeGIF(gw, gh, frames, delay) {
+        var buf = [];
+        function wb(b) { buf.push(b & 0xFF); }
+        function w16(v) { wb(v); wb(v >> 8); }
+        function ws(s) { for (var i = 0; i < s.length; i++) wb(s.charCodeAt(i)); }
+
+        // 6-6-6 color cube (216) + 40 grays = 256
+        var palette = [];
+        for (var ri = 0; ri < 6; ri++)
+          for (var gi = 0; gi < 6; gi++)
+            for (var bi = 0; bi < 6; bi++)
+              palette.push(Math.round(ri * 255 / 5), Math.round(gi * 255 / 5), Math.round(bi * 255 / 5));
+        for (var i = 0; i < 40; i++) { var v = Math.round(i * 255 / 39); palette.push(v, v, v); }
+
+        function quant(r, g, b) {
+          return Math.round(r * 5 / 255) * 36 + Math.round(g * 5 / 255) * 6 + Math.round(b * 5 / 255);
+        }
+
+        function lzwEnc(pixels) {
+          var clearCode = 256, eoiCode = 257;
+          var cs = 9, next = 258, mx = 512;
+          var dict = {}, out = [], bits = 0, bc = 0;
+          function emit(code) {
+            bits |= code << bc; bc += cs;
+            while (bc >= 8) { out.push(bits & 0xFF); bits >>= 8; bc -= 8; }
+          }
+          function reset() { dict = {}; cs = 9; next = 258; mx = 512; }
+          emit(clearCode);
+          var pre = pixels[0];
+          for (var i = 1; i < pixels.length; i++) {
+            var suf = pixels[i];
+            var key = pre + ',' + suf;
+            if (dict[key] !== undefined) { pre = dict[key]; }
+            else {
+              emit(pre);
+              if (next < 4096) { dict[key] = next++; if (next > mx && cs < 12) { cs++; mx <<= 1; } }
+              else { emit(clearCode); reset(); }
+              pre = suf;
+            }
+          }
+          emit(pre); emit(eoiCode);
+          if (bc > 0) out.push(bits & 0xFF);
+          return out;
+        }
+
+        // Header
+        ws('GIF89a');
+        w16(gw); w16(gh); wb(0xF7); wb(0); wb(0);
+        for (var i = 0; i < palette.length; i++) wb(palette[i]);
+        // NETSCAPE loop
+        wb(0x21); wb(0xFF); wb(11); ws('NETSCAPE2.0'); wb(3); wb(1); w16(0); wb(0);
+        // Frames
+        for (var f = 0; f < frames.length; f++) {
+          var px = frames[f];
+          wb(0x21); wb(0xF9); wb(4); wb(0); w16(delay); wb(0); wb(0);
+          wb(0x2C); w16(0); w16(0); w16(gw); w16(gh); wb(0);
+          var idx = new Uint8Array(gw * gh);
+          for (var p = 0; p < gw * gh; p++) idx[p] = quant(px[p * 4], px[p * 4 + 1], px[p * 4 + 2]);
+          wb(8);
+          var enc = lzwEnc(idx);
+          var off = 0;
+          while (off < enc.length) { var sz = Math.min(255, enc.length - off); wb(sz); for (var j = 0; j < sz; j++) buf.push(enc[off + j]); off += sz; }
+          wb(0);
+        }
+        wb(0x3B);
+        return new Uint8Array(buf);
+      }
+
+      function startGifRecording() {
+        gifRecording = true;
+        gifFrames = [];
+        gifStartTime = performance.now();
+        hudRec.style.display = 'block';
+        hudRec.textContent = '\u25CF REC 3s';
+        captureBtn.style.borderColor = '#cc3333';
+        captureBtn.style.color = '#cc3333';
+        gifCaptureInterval = setInterval(function() {
+          if (!gifRecording) return;
+          var scale = Math.min(1, GIF_MAX_W / canvas.width);
+          var gw = Math.round(canvas.width * scale);
+          var gh = Math.round(canvas.height * scale);
+          var tmp = document.createElement('canvas');
+          tmp.width = gw; tmp.height = gh;
+          var ctx = tmp.getContext('2d');
+          ctx.drawImage(canvas, 0, 0, gw, gh);
+          gifFrames.push(ctx.getImageData(0, 0, gw, gh).data);
+          var elapsed = performance.now() - gifStartTime;
+          var remaining = Math.ceil((GIF_DURATION - elapsed) / 1000);
+          hudRec.textContent = '\u25CF REC ' + remaining + 's';
+          if (elapsed >= GIF_DURATION) stopGifRecording();
+        }, 1000 / GIF_FPS);
+      }
+
+      function stopGifRecording() {
+        gifRecording = false;
+        clearInterval(gifCaptureInterval);
+        hudRec.textContent = 'encoding...';
+        captureBtn.style.borderColor = '';
+        captureBtn.style.color = '';
+        setTimeout(function() {
+          var scale = Math.min(1, GIF_MAX_W / canvas.width);
+          var gw = Math.round(canvas.width * scale);
+          var gh = Math.round(canvas.height * scale);
+          var data = encodeGIF(gw, gh, gifFrames, Math.round(100 / GIF_FPS));
+          var blob = new Blob([data], { type: 'image/gif' });
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url;
+          a.download = 'artifact-' + MODE_NAMES[currentMode].toLowerCase() + '-' + Date.now() + '.gif';
+          a.click();
+          setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+          gifFrames = [];
+          hudRec.style.display = 'none';
+        }, 50);
+      }
+
+      formatBtn.addEventListener('pointerdown', function(e) {
+        e.preventDefault();
+        var idx = FORMATS.indexOf(exportFormat);
+        exportFormat = FORMATS[(idx + 1) % FORMATS.length];
+        formatBtn.textContent = exportFormat.toUpperCase();
+      });
+
       captureBtn.addEventListener('pointerdown', function(e) {
         e.preventDefault();
-        needCapture = true;
+        if (exportFormat === 'gif') {
+          if (gifRecording) stopGifRecording();
+          else startGifRecording();
+        } else {
+          var mime = exportFormat === 'jpg' ? 'image/jpeg' : 'image/png';
+          var ext = exportFormat;
+          canvas.toBlob(function(blob) {
+            if (!blob) return;
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'artifact-' + MODE_NAMES[currentMode].toLowerCase() + '-' + Date.now() + '.' + ext;
+            a.click();
+            setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+          }, mime, mime === 'image/jpeg' ? 0.92 : undefined);
+        }
       });
 
       // ── Init ──
