@@ -15,6 +15,7 @@
       color: #8a8a6a;
       -webkit-user-select: none;
       user-select: none;
+      touch-action: manipulation;
     }
 
     #app {
@@ -579,8 +580,9 @@
         if (!existing) {
           var btn = document.createElement('button');
           btn.textContent = 'retry';
-          btn.addEventListener('click', function() {
-            overlayMsg.textContent = 'initializing...';
+          btn.addEventListener('pointerdown', function(e) {
+            e.preventDefault();
+            overlayMsg.textContent = 'requesting camera...';
             overlayMsg.className = '';
             btn.remove();
             startCamera().then(function(ok) {
@@ -683,43 +685,51 @@
 
       // ── Event Handlers ──
 
-      modeButtons.forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          modeButtons.forEach(function(b) { b.classList.remove('active'); });
-          btn.classList.add('active');
-          currentMode = parseInt(btn.dataset.mode, 10);
-          hudMode.textContent = MODE_NAMES[currentMode];
-
-          if (currentMode === 0) {
-            sliderRow.classList.add('hidden');
+      function setMode(mode) {
+        currentMode = mode;
+        hudMode.textContent = MODE_NAMES[mode];
+        for (var i = 0; i < modeButtons.length; i++) {
+          if (parseInt(modeButtons[i].getAttribute('data-mode'), 10) === mode) {
+            modeButtons[i].classList.add('active');
+            modeButtons[i].style.borderColor = '#6a8a4a';
           } else {
-            sliderRow.classList.remove('hidden');
-            sliderLabel.textContent = SLIDER_LABELS[currentMode];
+            modeButtons[i].classList.remove('active');
+            modeButtons[i].style.borderColor = '';
           }
-        });
-      });
+        }
+        if (mode === 0) {
+          sliderRow.classList.add('hidden');
+        } else {
+          sliderRow.classList.remove('hidden');
+          sliderLabel.textContent = SLIDER_LABELS[mode];
+        }
+      }
+
+      for (var i = 0; i < modeButtons.length; i++) {
+        (function(btn) {
+          btn.addEventListener('pointerdown', function(e) {
+            e.preventDefault();
+            setMode(parseInt(btn.getAttribute('data-mode'), 10));
+          });
+        })(modeButtons[i]);
+      }
 
       gainSlider.addEventListener('input', function() {
         gain = gainSlider.value / 100;
       });
 
-      flipBtn.addEventListener('click', function() {
+      flipBtn.addEventListener('pointerdown', function(e) {
+        e.preventDefault();
         useFront = !useFront;
         startCamera();
       });
 
-      captureBtn.addEventListener('click', function() {
+      captureBtn.addEventListener('pointerdown', function(e) {
+        e.preventDefault();
         needCapture = true;
       });
 
       window.addEventListener('resize', resize);
-
-      // Prevent zoom on double-tap (iOS)
-      document.addEventListener('touchend', function(e) {
-        if (e.target.closest('.modes') || e.target.closest('.controls')) {
-          e.preventDefault();
-        }
-      }, { passive: false });
 
       // ── Initialize ──
 
@@ -728,14 +738,14 @@
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
         showError('camera api not available — use https');
       } else if (initGL()) {
-        // Show start button — explicit user gesture required for camera
         overlayMsg.textContent = 'SPECTRA';
         overlayMsg.className = '';
         var startBtn = document.createElement('button');
         startBtn.textContent = 'enable camera';
-        startBtn.addEventListener('click', function() {
+        startBtn.addEventListener('pointerdown', function(e) {
+          e.preventDefault();
           startBtn.remove();
-          overlayMsg.textContent = 'initializing...';
+          overlayMsg.textContent = 'requesting camera...';
           startCamera().then(function(ok) {
             if (ok) {
               running = true;
@@ -744,6 +754,8 @@
           });
         });
         overlay.appendChild(startBtn);
+      } else {
+        showError('webgl init failed');
       }
 
     })();
