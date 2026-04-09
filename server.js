@@ -84,4 +84,8 @@ app.get('/', (req, res) => {
 app.use((req, res) => res.status(404).end());
 app.use((err, req, res, next) => res.status(500).end());
 
-app.listen(PORT, () => console.log(`[b0b] port ${PORT}`));
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => console.log(`[b0b] port ${PORT}`));
+}
+
+module.exports = app;
