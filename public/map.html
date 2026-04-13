@@ -292,12 +292,7 @@
       letter-spacing: 0.5px;
       padding: 4px 10px !important;
     }
-    .terra-nullius-overlay {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      pointer-events: none;
-      z-index: 600;
-    }
+
 
     /* ===================== COUNTERMEASURES DRAWER ===================== */
     .cm-drawer {
@@ -433,6 +428,51 @@
     .pt-now-playing { font-size: 0.55rem; color: #00ccff; margin-top: 4px; font-style: italic; }
     /* Dark tile fallback - invert OSM for dark mode */
     .dark-osm-tiles { filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(1.3); }
+    /* ===================== LIVE EARTH WIDGET ===================== */
+    .earth-widget {
+      position: fixed;
+      bottom: 12px;
+      right: 12px;
+      z-index: 1001;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid rgba(0,255,65,0.3);
+      box-shadow: 0 0 12px rgba(0,255,65,0.15), 0 0 24px rgba(0,0,0,0.6);
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      background: #0a0a14;
+    }
+    .earth-widget:hover {
+      transform: scale(1.15);
+      box-shadow: 0 0 18px rgba(0,255,65,0.3), 0 0 32px rgba(0,0,0,0.7);
+      border-color: rgba(0,255,65,0.6);
+    }
+    .earth-widget img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      animation: earthSpin 120s linear infinite;
+    }
+    @keyframes earthSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .earth-widget .earth-label {
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 0.4rem;
+      color: rgba(0,255,65,0.6);
+      font-family: 'Courier New', monospace;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      pointer-events: none;
+      text-shadow: 0 0 4px #000;
+    }
   </style>
 </head>
 <body>
@@ -446,6 +486,11 @@
 </div>
 
 <div id="map"></div>
+
+<div class="earth-widget" id="earthWidget" title="GOES-16 Full Disk — Live satellite view">
+  <img id="earthImg" src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/FD/GEOCOLOR/thumbnail.jpg" alt="Live Earth" crossorigin="anonymous" />
+  <div class="earth-label">GOES-16 LIVE</div>
+</div>
 
 <div class="search-box">
   <input type="text" id="searchInput" placeholder="Search locations..." data-i18n-ph="action.search" />
@@ -525,7 +570,7 @@
   </div>
   <div class="filter-section-body" id="styleBody">
   <div class="filter-grid">
-  <div class="filter-item"><label><input type="radio" name="mapStyle" value="terranullius" checked onchange="switchMapStyle(this.value)"> 🌎 Terra Nullius</label></div>
+  <div class="filter-item"><label><input type="radio" name="mapStyle" value="terranullius" checked onchange="switchMapStyle(this.value)"> 🌎 Earth</label></div>
   <div class="filter-item"><label><input type="radio" name="mapStyle" value="firstpeoples" onchange="switchMapStyle(this.value)"> 🌍 First Peoples</label></div>
   <div class="filter-item"><label><input type="radio" name="mapStyle" value="dark" onchange="switchMapStyle(this.value)"> Dark</label></div>
   <div class="filter-item"><label><input type="radio" name="mapStyle" value="satellite" onchange="switchMapStyle(this.value)"> Satellite</label></div>
@@ -921,14 +966,14 @@ var tileProviders = {
   },
   terranullius: {
     primary: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-      attribution: '&copy; Esri, Maxar, Earthstar Geographics — Terra Nullius: Before naming',
+      attribution: '&copy; Esri, Maxar, Earthstar Geographics',
       maxZoom: 19
     }),
     fallback: L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://carto.com/">CARTO</a> — Terra Nullius: Before naming',
+      attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
       subdomains: 'abcd', maxZoom: 19
     }),
-    label: 'TERRA NULLIUS'
+    label: 'EARTH'
   }
 };
 
@@ -1057,28 +1102,20 @@ function showTileFailoverNotice(label) {
   });
 })();
 
-// Add default tile — Terra Nullius: the world before naming
+// Add default tile — Earth view
 terraNulliusTile.addTo(map);
 
 function switchMapStyle(style) {
   map.removeLayer(currentTile);
   currentStyle = style || 'dark';
   var provider = tileProviders[currentStyle] || tileProviders.dark;
-  // Use fallback if primary already known-failed
   currentTile = failedProviders[currentStyle] ? provider.fallback : provider.primary;
   currentTile.addTo(map);
 
   var mapEl = document.getElementById('map');
 
-  // Terra Nullius mode: show overlay text but KEEP markers visible
-  if (style === 'terranullius') {
-    if (!window._terraNulliusOverlay) {
-      window._terraNulliusOverlay = L.DomUtil.create('div', 'terra-nullius-overlay', map.getContainer());
-      window._terraNulliusOverlay.innerHTML = '<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;z-index:600;opacity:0.15;font-size:3vw;color:#ffffff;font-family:serif;letter-spacing:0.3em;text-transform:uppercase;">Terra Nullius<br><span style="font-size:0.5em;letter-spacing:0.1em;opacity:0.7;">Before all names — the land remembers what maps forget</span><br><span style="font-size:0.35em;letter-spacing:0.05em;opacity:0.5;font-style:italic;">John 12:43</span></div>';
-    }
-    window._terraNulliusOverlay.style.display = 'block';
-  } else {
-    if (window._terraNulliusOverlay) window._terraNulliusOverlay.style.display = 'none';
+  // Restore layers for non-default modes
+  if (style !== 'terranullius') {
     if (!map.hasLayer(markerLayer)) map.addLayer(markerLayer);
     if (document.getElementById('toggleConnections') && document.getElementById('toggleConnections').checked && !map.hasLayer(lineLayer)) map.addLayer(lineLayer);
     if (document.getElementById('toggleTunnels') && document.getElementById('toggleTunnels').checked && !map.hasLayer(tunnelLayer)) map.addLayer(tunnelLayer);
@@ -1088,17 +1125,10 @@ function switchMapStyle(style) {
   // First Peoples mode: earthy tint + auto-enable indigenous territories
   if (style === 'firstpeoples') {
     mapEl.classList.add('firstpeoples-mode');
-    if (!window._firstPeoplesOverlay) {
-      window._firstPeoplesOverlay = L.DomUtil.create('div', 'firstpeoples-overlay', map.getContainer());
-      window._firstPeoplesOverlay.innerHTML = '<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;z-index:600;opacity:0.12;font-size:2.5vw;color:#ffcc66;font-family:serif;letter-spacing:0.3em;text-transform:uppercase;">First Peoples<br><span style="font-size:0.5em;letter-spacing:0.1em;opacity:0.7;">The land had names before the colonizers arrived</span></div>';
-    }
-    window._firstPeoplesOverlay.style.display = 'block';
     var cb = document.getElementById('toggleIndigenous');
     if (cb && !cb.checked) { cb.checked = true; toggleDataLayer('indigenous'); }
   } else {
     mapEl.classList.remove('firstpeoples-mode');
-    if (window._firstPeoplesOverlay) window._firstPeoplesOverlay.style.display = 'none';
-    // Auto-disable indigenous territories when leaving First Peoples
     var icb = document.getElementById('toggleIndigenous');
     if (icb && icb.checked) { icb.checked = false; toggleDataLayer('indigenous'); }
   }
@@ -1209,7 +1239,7 @@ var locations = [
   {name:"Little Saint James Island, U.S. Virgin Islands",lat:18.3000,lng:-64.8253,section:"IV",type:"enclave",ctx:"Jeffrey Epstein's island (70-78 acres). Sally port military doors. Dedicated fiber optic cable to St. Thomas. Structure containing portrait with a Pope. 18°18'N, 64°49'W."},
 
   // ===== SECTION V: Surveillance / Smart Cities =====
-  {name:"New Administrative Capital (NAC/Memphis), Egypt",lat:30.0197,lng:31.7636,section:"V",type:"surveillance",ctx:"700 km². 45 km east of Cairo. 6,000+ AI cameras. Military 51% ownership. Renamed 'Memphis' Feb 2026. Octagon (largest MoD complex in Middle East). Iconic Tower (393.8m, tallest in Africa)."},
+  {name:"The Octagon — New Administrative Capital, Egypt",lat:30.0197,lng:31.7636,section:"V",type:"surveillance",ctx:"700 km². 45 km east of Cairo. 6,000+ AI cameras. Military 51% ownership. Renamed 'Memphis' Feb 2026. The Octagon: largest Ministry of Defence complex in the Middle East. Iconic Tower (393.8m, tallest in Africa)."},
   {name:"NEOM / THE LINE, Saudi Arabia",lat:27.9500,lng:35.3000,section:"V",type:"surveillance",ctx:"170km linear city, 200m wide, 500m tall mirrored glass walls. AI-managed population. OXAGON floating industrial city. TROJENA ski resort. Huwaitat tribe killed for resisting."},
   {name:"Songdo International Business District, South Korea",lat:37.3818,lng:126.6593,section:"V",type:"surveillance",ctx:"Built on 1,500 acres reclaimed from Yellow Sea. 'Ubiquitous city' with ubiquitous sensing. Population ~180,000 (below 300,000 target)."},
   {name:"Masdar City, Abu Dhabi, UAE",lat:24.4265,lng:54.6154,section:"V",type:"surveillance",ctx:"Zero-carbon planned city by Foster + Partners. Population ~5,000 vs 50,000 target. The smart city that couldn't attract residents."},
@@ -4589,12 +4619,7 @@ function setProtectiveVolume(val) {
 
 // ===================== SERVICE WORKER REGISTRATION =====================
 
-// Terra Nullius default: show overlay on initial load
-(function initTerraNullius() {
-  window._terraNulliusOverlay = L.DomUtil.create('div', 'terra-nullius-overlay', map.getContainer());
-  window._terraNulliusOverlay.innerHTML = '<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;z-index:600;opacity:0.15;font-size:3vw;color:#ffffff;font-family:serif;letter-spacing:0.3em;text-transform:uppercase;">Terra Nullius<br><span style="font-size:0.5em;letter-spacing:0.1em;opacity:0.7;">Before all names — the land remembers what maps forget</span><br><span style="font-size:0.35em;letter-spacing:0.05em;opacity:0.5;font-style:italic;">John 12:43</span></div>';
-  window._terraNulliusOverlay.style.display = 'block';
-})();
+// Earth view default — blank satellite, no overlays
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js', { scope: '/' }).then(function(reg) {
@@ -4860,6 +4885,16 @@ function loadEmbeddedIndigenousTerritories() {
 </script>
 <script>
 (function(){if(window.parent!==window){var cm=document.getElementById('cmDrawer');if(cm)cm.style.display='none';document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var h=a.getAttribute('href');if(!h)return;if(h==='/logout'){e.preventDefault();window.top.location.href='/logout'}else if(h==='/'||h==='/report'||h==='/map'){e.preventDefault();window.parent.postMessage({navigate:h},location.origin)}})}})();
+</script>
+<script>
+// GOES-16 Earth widget — refresh every 10 minutes
+(function() {
+  var img = document.getElementById('earthImg');
+  if (!img) return;
+  setInterval(function() {
+    img.src = 'https://cdn.star.nesdis.noaa.gov/GOES16/ABI/FD/GEOCOLOR/thumbnail.jpg?t=' + Date.now();
+  }, 600000);
+})();
 </script>
 
 </body>
