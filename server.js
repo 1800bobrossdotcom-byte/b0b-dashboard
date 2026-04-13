@@ -134,6 +134,12 @@ app.use((req, res, next) => {
   next();
 });
 
+// Logout: clear cookie → back to pixel gate
+app.get('/logout', (req, res) => {
+  res.setHeader('Set-Cookie', 'b0b_access=; path=/; max-age=0; SameSite=Lax');
+  res.redirect(302, '/');
+});
+
 // Page routes
 app.get('*', (req, res) => {
   const nonce = res.locals.nonce;

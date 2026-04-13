@@ -438,9 +438,6 @@
 <div class="header">
   <h1>b0b.dev - OSINT MAP</h1>
   <nav>
-    <a href="/download" style="border-color:#ff4444;color:#ff4444" title="Download offline backup ZIP" data-i18n="nav.backup">BACKUP</a>
-    <a href="/tones/shield" style="border-color:#ff4444;color:#ff4444" data-i18n="nav.shield">ARC SHIELD</a>
-    <a href="https://dialectforge.com" target="_blank" rel="noopener noreferrer" style="border-color:#00ff41;color:#00ff41">DIALECTFORGE</a>
     <a href="/" data-i18n="nav.home">HOME</a>
     <a href="/report" data-i18n="nav.report">REPORT</a>
   </nav>
@@ -1069,14 +1066,9 @@ function switchMapStyle(style) {
   currentTile = failedProviders[currentStyle] ? provider.fallback : provider.primary;
   currentTile.addTo(map);
 
-  // Terra Nullius mode: hide all human-placed data layers (the world before naming)
+  // Terra Nullius mode: show overlay text but KEEP markers visible
   if (style === 'terranullius') {
-    if (map.hasLayer(markerLayer)) map.removeLayer(markerLayer);
-    if (map.hasLayer(lineLayer)) map.removeLayer(lineLayer);
-    if (map.hasLayer(tunnelLayer)) map.removeLayer(tunnelLayer);
-    if (map.hasLayer(glowLayer)) map.removeLayer(glowLayer);
-    if (typeof indigenousLayer !== 'undefined' && map.hasLayer(indigenousLayer)) map.removeLayer(indigenousLayer);
-    // Show terra nullius overlay text
+    // Show terra nullius overlay text (decorative only, markers stay)
     if (!window._terraNulliusOverlay) {
       window._terraNulliusOverlay = L.DomUtil.create('div', 'terra-nullius-overlay', map.getContainer());
       window._terraNulliusOverlay.innerHTML = '<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;z-index:600;opacity:0.15;font-size:3vw;color:#ffffff;font-family:serif;letter-spacing:0.3em;text-transform:uppercase;">Terra Nullius<br><span style="font-size:0.5em;letter-spacing:0.1em;opacity:0.7;">Before all names — the land remembers what maps forget</span><br><span style="font-size:0.35em;letter-spacing:0.05em;opacity:0.5;font-style:italic;">John 12:43</span></div>';
@@ -2064,6 +2056,7 @@ locations.forEach(function(loc) {
   marker.addTo(markerLayer);
 });
 
+markerLayer.addTo(map);
 updateStats();
 
 // ===================== FILTERING =====================
