@@ -35,7 +35,7 @@ document.getElementById('pw').addEventListener('keydown',function(e){
     var v=this.value;
     if(v==='never2501'){
       document.cookie='b0b_access=1;path=/;max-age=86400;SameSite=Lax';
-      window.location.reload();
+      window.location.href='/map';
     }else{
       this.value='';
       var err=document.getElementById('err');

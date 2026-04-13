@@ -71,9 +71,9 @@ function pixelCSP(nonce) {
 function siteCSP(nonce) {
   return {
     defaultSrc: ["'self'"],
-    scriptSrc: ["'self'", `'nonce-${nonce}'`, "'unsafe-inline'", 'https://unpkg.com', 'https://cdnjs.cloudflare.com'],
+    scriptSrc: ["'self'", "'unsafe-inline'", 'https://unpkg.com', 'https://cdnjs.cloudflare.com'],
     styleSrc: ["'self'", "'unsafe-inline'", 'https://unpkg.com', 'https://cdnjs.cloudflare.com'],
-    imgSrc: ["'self'", 'data:', 'blob:', 'https://*.tile.openstreetmap.org', 'https://*.basemaps.cartocdn.com', 'https://server.arcgisonline.com', 'https://*.tile.opentopomap.org', 'https://unpkg.com'],
+    imgSrc: ["'self'", 'data:', 'blob:', 'https://*.tile.openstreetmap.org', 'https://*.basemaps.cartocdn.com', 'https://server.arcgisonline.com', 'https://*.tile.opentopomap.org', 'https://unpkg.com', 'https://tiles.stadiamaps.com'],
     fontSrc: ["'self'", 'https://cdnjs.cloudflare.com'],
     objectSrc: ["'none'"],
     frameSrc: ["'self'"],
@@ -150,8 +150,7 @@ app.get('*', (req, res) => {
   if (page) {
     const file = path.join(PUB, page);
     if (fs.existsSync(file)) {
-      let html = fs.readFileSync(file, 'utf8');
-      html = html.replace(/<script>/g, `<script nonce="${nonce}">`);
+      const html = fs.readFileSync(file, 'utf8');
       res.setHeader('Content-Type', 'text/html; charset=utf-8');
       res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
       return res.send(html);
