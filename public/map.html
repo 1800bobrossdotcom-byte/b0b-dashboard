@@ -375,6 +375,7 @@
 
       .legend { bottom: 40px; left: 8px; max-width: 160px; font-size: 0.65rem; }
       .legend-body { display: none; }
+      .legend-body.expanded { display: block; }
       .legend-header { padding: 6px 10px; }
 
       .leaflet-popup-content-wrapper { font-size: 0.75rem !important; max-width: 85vw !important; }
@@ -723,7 +724,7 @@
 </div>
 
 <div class="legend">
-  <div class="legend-header" onclick="document.getElementById('legendBody').classList.toggle('collapsed'); this.querySelector('.chevron').classList.toggle('collapsed');">
+  <div class="legend-header" onclick="var lb=document.getElementById('legendBody');lb.classList.toggle('collapsed');lb.classList.toggle('expanded');this.querySelector('.chevron').classList.toggle('collapsed');">
     <h3 data-i18n="map.markerColors">MARKER COLORS</h3>
     <span class="chevron" style="color:#555;font-size:0.7rem;transition:transform 0.2s;">▾</span>
   </div>
@@ -3106,6 +3107,10 @@ function fetchEarthquakes() {
     })
     .catch(function(e) {
       updateLiveFeedStatus('USGS fetch failed - check connection');
+      var cb = document.getElementById('toggleEarthquakes');
+      if (cb) cb.checked = false;
+      if (earthquakeRefresh) { clearInterval(earthquakeRefresh); earthquakeRefresh = null; }
+      map.removeLayer(earthquakeLayer);
     });
 }
 
@@ -3159,6 +3164,10 @@ function fetchEONET() {
     })
     .catch(function(e) {
       updateLiveFeedStatus('NASA EONET fetch failed - check connection');
+      var cb = document.getElementById('toggleEONET');
+      if (cb) cb.checked = false;
+      if (eonetRefresh) { clearInterval(eonetRefresh); eonetRefresh = null; }
+      map.removeLayer(eonetLayer);
     });
 }
 
@@ -3214,6 +3223,10 @@ function fetchFIRMS() {
     })
     .catch(function(e) {
       updateLiveFeedStatus('FIRMS fetch failed - ' + e.message);
+      var cb = document.getElementById('toggleFIRMS');
+      if (cb) cb.checked = false;
+      if (firmsRefresh) { clearInterval(firmsRefresh); firmsRefresh = null; }
+      map.removeLayer(firmsLayer);
     });
 }
 
@@ -3272,6 +3285,10 @@ function fetchOpenSky() {
     })
     .catch(function(e) {
       updateLiveFeedStatus('OpenSky fetch failed - rate limit or network');
+      var cb = document.getElementById('toggleOpenSky');
+      if (cb) cb.checked = false;
+      if (openskyRefresh) { clearInterval(openskyRefresh); openskyRefresh = null; }
+      map.removeLayer(openskyLayer);
     });
 }
 
@@ -3318,6 +3335,10 @@ function fetchISS() {
     })
     .catch(function(e) {
       updateLiveFeedStatus('ISS tracker failed - ' + e.message);
+      var cb = document.getElementById('toggleISS');
+      if (cb) cb.checked = false;
+      if (issRefresh) { clearInterval(issRefresh); issRefresh = null; }
+      map.removeLayer(issLayer);
     });
 }
 
@@ -3377,6 +3398,10 @@ function fetchGDACS() {
     })
     .catch(function(e) {
       updateLiveFeedStatus('GDACS fetch failed - ' + e.message);
+      var cb = document.getElementById('toggleGDACS');
+      if (cb) cb.checked = false;
+      if (gdacsRefresh) { clearInterval(gdacsRefresh); gdacsRefresh = null; }
+      map.removeLayer(gdacsLayer);
     });
 }
 
