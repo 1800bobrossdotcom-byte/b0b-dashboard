@@ -3,191 +3,113 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/favicon.png">
   <meta name="robots" content="noindex, nofollow">
-  <title>b0b.dev</title>
+  <meta name="description" content="">
+  <meta property="og:title" content="">
+  <meta property="og:description" content="">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="">
+  <meta name="twitter:description" content="">
+  <title>b0b</title>
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html, body {
-      width: 100%; height: 100%;
-      background: #0a0a0a;
-      color: #d4d4d4;
-      font-family: 'Courier New', 'Consolas', monospace;
-      -webkit-font-smoothing: antialiased;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0a0a; color: #00ff41;
+      font-family: 'Courier New', monospace;
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      overflow: hidden; position: relative;
     }
-
-    .page {
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 12vh 24px 10vh;
-      min-height: 100vh;
+    /* Grid background */
+    body::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        linear-gradient(rgba(0,255,65,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,65,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
     }
-
-    .header {
-      text-align: center;
-      margin-bottom: 48px;
+    .content {
+      position: relative; z-index: 1; text-align: center;
     }
-
-    .mark {
-      font-size: 28px;
-      letter-spacing: 10px;
-      color: #00ff41;
-      margin-bottom: 6px;
+    h1 {
+      font-size: 5rem; letter-spacing: 0.8rem; margin-bottom: 0.5rem;
+      text-shadow: 0 0 20px rgba(0,255,65,0.3);
+      animation: flicker 4s infinite alternate;
     }
-
     .subtitle {
-      font-size: 10px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: #444;
+      color: #555; font-size: 0.85rem; letter-spacing: 3px;
+      margin-bottom: 2.5rem; text-transform: uppercase;
     }
-
-    .rule {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, #00ff41 50%, transparent);
-      opacity: 0.3;
-      margin-bottom: 40px;
+    .nav-links {
+      display: flex; gap: 1.2rem; flex-wrap: wrap; justify-content: center;
+      margin-bottom: 2rem;
     }
-
-    .section-label {
-      font-size: 9px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: #00ff41;
-      opacity: 0.5;
-      margin-bottom: 16px;
+    .nav-links a {
+      color: #00ff41; text-decoration: none;
+      border: 1px solid #00ff41; padding: 0.75rem 2rem;
+      font-size: 1rem; transition: all 0.3s;
+      letter-spacing: 2px; position: relative; overflow: hidden;
     }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 36px;
+    .nav-links a::before {
+      content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0,255,65,0.1), transparent);
+      transition: left 0.5s;
     }
-
-    .card {
-      display: block;
-      text-decoration: none;
-      color: #d4d4d4;
-      border: 1px solid #1a1a1a;
-      border-radius: 3px;
-      padding: 16px 14px;
-      transition: border-color 0.3s, background 0.3s;
+    .nav-links a:hover::before { left: 100%; }
+    .nav-links a:hover { background: #00ff41; color: #0a0a0a; }
+    .nav-links a.secondary {
+      border-color: #333; color: #888;
     }
-
-    .card:hover {
-      border-color: #00ff41;
-      background: rgba(0, 255, 65, 0.03);
+    .nav-links a.secondary:hover {
+      border-color: #ff4444; background: transparent; color: #ff4444;
     }
-
-    .card-name {
-      font-size: 13px;
-      letter-spacing: 3px;
-      font-weight: normal;
-      margin-bottom: 6px;
-      color: #00ff41;
+    .status {
+      color: #333; font-size: 0.7rem; letter-spacing: 2px;
+      margin-top: 1rem;
     }
+    .status span { color: #00ff41; }
 
-    .card-desc {
-      font-size: 10px;
-      color: #666;
-      line-height: 1.5;
+    @keyframes flicker {
+      0%, 95% { opacity: 1; }
+      96% { opacity: 0.8; }
+      97% { opacity: 1; }
+      98% { opacity: 0.9; }
+      100% { opacity: 1; }
     }
-
-    .card--wide {
-      grid-column: 1 / -1;
-    }
-
-    .logout {
-      text-align: center;
-      margin-top: 40px;
-    }
-
-    .logout a {
-      font-size: 9px;
-      letter-spacing: 2px;
-      color: #333;
-      text-decoration: none;
-      cursor: pointer;
-      transition: color 0.3s;
-    }
-
-    .logout a:hover { color: #666; }
-
     @media (max-width: 480px) {
-      .grid { grid-template-columns: 1fr; }
-      .page { padding: 8vh 16px 8vh; }
+      h1 { font-size: 3rem; letter-spacing: 0.4rem; }
+      .nav-links a { padding: 0.6rem 1.4rem; font-size: 0.85rem; }
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <div class="header">
-      <div class="mark">b 0 b</div>
-      <div class="subtitle">open source intelligence</div>
+  <div class="content">
+    <h1>b0b</h1>
+    <div class="nav-links">
+      <a href="/report" data-i18n="nav.report">REPORT</a>
+      <a href="/map" data-i18n="nav.map">OSINT MAP</a>
     </div>
-    <div class="rule"></div>
-
-    <div class="section-label">intelligence</div>
-    <div class="grid">
-      <a href="/report" class="card card--wide">
-        <h2 class="card-name">REPORT</h2>
-        <p class="card-desc">ISTAR field report — full document</p>
-      </a>
-      <a href="/map" class="card">
-        <h2 class="card-name">MAP</h2>
-        <p class="card-desc">OSINT geospatial overlay</p>
-      </a>
-      <a href="/ai-attack-vector-analysis" class="card">
-        <h2 class="card-name">AI ANALYSIS</h2>
-        <p class="card-desc">Attack vector assessment</p>
-      </a>
+    <div class="nav-links">
+      <a href="/tones/shield" style="border-color:#ff4444;color:#ff4444" data-i18n="nav.shield">ARC SHIELD</a>
+      <a href="https://dialectforge.com" target="_blank" rel="noopener noreferrer" style="border-color:#00ff41;color:#00ff41">DIALECTFORGE</a>
     </div>
-
-    <div class="section-label">countermeasures</div>
-    <div class="grid">
-      <a href="/countermeasures" class="card card--wide">
-        <h2 class="card-name">COUNTERMEASURES</h2>
-        <p class="card-desc">Ultrasonic shield · WebRTC block · canvas guard</p>
-      </a>
-      <a href="/tones-shield" class="card">
-        <h2 class="card-name">SHIELD</h2>
-        <p class="card-desc">Threat detection &amp; neutralization</p>
-      </a>
-      <a href="/tones-shield-guide" class="card">
-        <h2 class="card-name">SHIELD GUIDE</h2>
-        <p class="card-desc">Usage documentation</p>
-      </a>
+    <div class="nav-links">
+      <a href="/download" style="border-color:#ff4444;color:#ff4444">BACKUP ZIP</a>
     </div>
-
-    <div class="section-label">tones</div>
-    <div class="grid">
-      <a href="/tones-healing" class="card">
-        <h2 class="card-name">HEALING</h2>
-        <p class="card-desc">Solfeggio frequencies</p>
-      </a>
-      <a href="/tones-protective" class="card">
-        <h2 class="card-name">PROTECTIVE</h2>
-        <p class="card-desc">Ambient shielding tones</p>
-      </a>
-      <a href="/tones-instrument" class="card">
-        <h2 class="card-name">INSTRUMENT</h2>
-        <p class="card-desc">Tone synthesis lab</p>
-      </a>
-      <a href="/tones-multipack" class="card">
-        <h2 class="card-name">MULTIPACK</h2>
-        <p class="card-desc">Combined tone presets</p>
-      </a>
+    <div class="nav-links">
+      <a href="/logout" class="secondary" data-i18n="nav.logout">LOGOUT</a>
     </div>
+    <div class="status">STATUS: <span>ACTIVE</span></div>
 
-    <div class="logout"><a id="exit">[ exit ]</a></div>
   </div>
-
-  <script>
-    document.getElementById('exit').addEventListener('click', function() {
-      document.cookie = 'b0b_access=;path=/;max-age=0';
-      window.location.href = '/';
-    });
-  </script>
+<script src="/i18n.js"></script>
+<script>
+(function(){if(window.parent!==window){document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var h=a.getAttribute('href');if(!h)return;if(h==='/logout'){e.preventDefault();window.top.location.href='/logout'}else if(h==='/'||h==='/report'||h==='/map'){e.preventDefault();window.parent.postMessage({navigate:h},location.origin)}})}})();
+</script>
 </body>
 </html>
