@@ -21,6 +21,7 @@
     html, body { height: 100%; overflow: hidden; }
     body { background: #0a0a0a; color: #d4d4d4; font-family: 'Courier New', monospace; }
     #map { width: 100%; height: calc(100vh - 44px); }
+    #map.firstpeoples-mode .leaflet-tile-pane { filter: sepia(0.35) saturate(0.8) brightness(0.9); }
     .leaflet-bottom { bottom: 36px !important; }
     .header {
       background: #0a0a0a;
@@ -1067,16 +1068,16 @@ function switchMapStyle(style) {
   currentTile = failedProviders[currentStyle] ? provider.fallback : provider.primary;
   currentTile.addTo(map);
 
+  var mapEl = document.getElementById('map');
+
   // Terra Nullius mode: show overlay text but KEEP markers visible
   if (style === 'terranullius') {
-    // Show terra nullius overlay text (decorative only, markers stay)
     if (!window._terraNulliusOverlay) {
       window._terraNulliusOverlay = L.DomUtil.create('div', 'terra-nullius-overlay', map.getContainer());
       window._terraNulliusOverlay.innerHTML = '<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;z-index:600;opacity:0.15;font-size:3vw;color:#ffffff;font-family:serif;letter-spacing:0.3em;text-transform:uppercase;">Terra Nullius<br><span style="font-size:0.5em;letter-spacing:0.1em;opacity:0.7;">Before all names — the land remembers what maps forget</span><br><span style="font-size:0.35em;letter-spacing:0.05em;opacity:0.5;font-style:italic;">John 12:43</span></div>';
     }
     window._terraNulliusOverlay.style.display = 'block';
   } else {
-    // Restore layers when leaving terra nullius
     if (window._terraNulliusOverlay) window._terraNulliusOverlay.style.display = 'none';
     if (!map.hasLayer(markerLayer)) map.addLayer(markerLayer);
     if (document.getElementById('toggleConnections') && document.getElementById('toggleConnections').checked && !map.hasLayer(lineLayer)) map.addLayer(lineLayer);
@@ -1084,10 +1085,22 @@ function switchMapStyle(style) {
     if (!map.hasLayer(glowLayer)) map.addLayer(glowLayer);
   }
 
-  // First Peoples mode: auto-enable indigenous territories overlay
+  // First Peoples mode: earthy tint + auto-enable indigenous territories
   if (style === 'firstpeoples') {
+    mapEl.classList.add('firstpeoples-mode');
+    if (!window._firstPeoplesOverlay) {
+      window._firstPeoplesOverlay = L.DomUtil.create('div', 'firstpeoples-overlay', map.getContainer());
+      window._firstPeoplesOverlay.innerHTML = '<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;z-index:600;opacity:0.12;font-size:2.5vw;color:#ffcc66;font-family:serif;letter-spacing:0.3em;text-transform:uppercase;">First Peoples<br><span style="font-size:0.5em;letter-spacing:0.1em;opacity:0.7;">The land had names before the colonizers arrived</span></div>';
+    }
+    window._firstPeoplesOverlay.style.display = 'block';
     var cb = document.getElementById('toggleIndigenous');
     if (cb && !cb.checked) { cb.checked = true; toggleDataLayer('indigenous'); }
+  } else {
+    mapEl.classList.remove('firstpeoples-mode');
+    if (window._firstPeoplesOverlay) window._firstPeoplesOverlay.style.display = 'none';
+    // Auto-disable indigenous territories when leaving First Peoples
+    var icb = document.getElementById('toggleIndigenous');
+    if (icb && icb.checked) { icb.checked = false; toggleDataLayer('indigenous'); }
   }
 }
 
