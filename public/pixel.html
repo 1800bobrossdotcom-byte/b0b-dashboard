@@ -6,17 +6,46 @@
 <title>.</title>
 <style>
 *{margin:0;padding:0}
-html,body{width:100%;height:100%;background:#000;overflow:hidden}
+html,body{width:100%;height:100%;background:#000;overflow:hidden;cursor:default}
+#gate{position:fixed;bottom:12px;right:14px;z-index:2;display:flex;align-items:center;gap:6px}
+#gate input{background:transparent;border:1px solid #333;border-radius:3px;
+color:#666;font-family:monospace;font-size:10px;letter-spacing:1px;
+padding:3px 8px;width:90px;outline:none;transition:border-color 0.3s}
+#gate input:focus{border-color:#555;color:#888}
+#gate input::placeholder{color:#333}
+#gate .err{color:#400;font-size:8px;font-family:monospace;opacity:0;transition:opacity 0.3s}
 </style>
 </head>
 <body>
 <canvas id="c"></canvas>
+<div id="gate">
+  <input type="password" id="pw" placeholder="..." autocomplete="off" spellcheck="false">
+  <span class="err" id="err"></span>
+</div>
 <script>
 var c=document.getElementById('c'),x=c.getContext('2d');
 var W,H,px,py,on=false,t=0;
+
 function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;}
 resize();
 window.addEventListener('resize',resize);
+
+document.getElementById('pw').addEventListener('keydown',function(e){
+  if(e.key==='Enter'){
+    var v=this.value;
+    if(v==='never2501'){
+      document.cookie='b0b_access=1;path=/;max-age=86400;SameSite=Strict';
+      window.location.reload();
+    }else{
+      this.value='';
+      var err=document.getElementById('err');
+      err.textContent='no';
+      err.style.opacity='1';
+      setTimeout(function(){err.style.opacity='0';},1500);
+    }
+  }
+});
+
 function tick(){
   x.clearRect(0,0,W,H);
   t++;
