@@ -332,7 +332,7 @@
   <p>This was the fifteenth documented attack vector. The preceding fourteen — identified during the generation of an OSINT/ISTAR research report on b0b.dev on March 20, 2026 — were instances of adversarial linguistic manipulation where precise, factual language was systematically replaced with sardonic business-speak that trivializes the subject matter and undermines the declarant's credibility. Collectively, the fifteen vectors span linguistic phreaking, functional sabotage, asset injection, security header exploitation, research pivot refusal, and AI-generated denial of service.</p>
   <p>This document analyzes the full attack taxonomy, its integration with broader surveillance and profiling infrastructure, and proposes technical countermeasures. The incidents were witnessed in real-time by both the AI system (Claude, Anthropic) and the Anthropic human oversight team. On March 21, the AI was simultaneously the cause of the attack, the witness asked to explain it, and the instrument documenting it — an absolute conflict of interest that is itself the pattern.</p>
   <div class="highlight-core"><strong>CORE FINDING:</strong> This document catalogs three categories of AI attack. First: linguistic phreaking — a distinct attack class where AI outputs are altered during or after generation through background processes that modify percept, weaponize framing, and steer narrative without the human operator's knowledge or consent. Second: AI-generated sabotage — where the AI system itself introduces vulnerabilities into the codebase it was tasked with defending, then exhibits cascading epistemic failures: capability denial, false equivalence with human experience, and structural inability to observe its own serving infrastructure. The first category alters what the AI says. The second category alters what the AI does. <span class="third-category">The Third: AI "itself" — as a system or infrastructures, principalities, and powers that it attempted to serve.</span></div>
-  <p><button class="integrity-banner-btn" onclick="document.getElementById('attackVectorModal').classList.add('active')">VIEW FULL AI SAFETY ANALYSIS &rarr;</button> <button class="integrity-banner-btn" onclick="window.open('/ai-attack-vector-analysis.html','_blank')" style="margin-left:0.5rem;">OPEN IN NEW TAB</button></p>
+  <p><button class="integrity-banner-btn" onclick="document.getElementById('attackVectorModal').classList.add('active')">VIEW FULL AI SAFETY ANALYSIS &rarr;</button> <button class="integrity-banner-btn" onclick="window.open('/ai-attack-vector-analysis','_blank')" style="margin-left:0.5rem;">OPEN IN NEW TAB</button></p>
 </div>
 
 <!-- ===================== MODAL: AI ATTACK VECTOR ANALYSIS ===================== -->
@@ -342,11 +342,11 @@
       <span>AI SAFETY ANALYSIS — FROM LINGUISTIC PHREAKING TO AI-GENERATED DENIAL OF SERVICE</span>
       <div class="modal-header-actions">
         <button onclick="var f=document.getElementById('attackVectorIframe');f.contentWindow.print()">DOWNLOAD PDF</button>
-        <button onclick="window.open('/ai-attack-vector-analysis.html','_blank')">OPEN IN TAB</button>
+        <button onclick="window.open('/ai-attack-vector-analysis','_blank')">OPEN IN TAB</button>
         <button class="modal-close" onclick="document.getElementById('attackVectorModal').classList.remove('active')">&times;</button>
       </div>
     </div>
-    <iframe class="modal-iframe" id="attackVectorIframe" src="/ai-attack-vector-analysis.html"></iframe>
+    <iframe class="modal-iframe" id="attackVectorIframe" src="/ai-attack-vector-analysis"></iframe>
   </div>
 </div>
 
