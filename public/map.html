@@ -772,9 +772,9 @@
 <div class="legend">
   <div class="legend-header" onclick="var lb=document.getElementById('legendBody');lb.classList.toggle('collapsed');lb.classList.toggle('expanded');this.querySelector('.chevron').classList.toggle('collapsed');">
     <h3 data-i18n="map.markerColors">MARKER COLORS</h3>
-    <span class="chevron" style="color:#555;font-size:0.7rem;transition:transform 0.2s;">▾</span>
+    <span class="chevron collapsed" style="color:#555;font-size:0.7rem;transition:transform 0.2s;">▾</span>
   </div>
-  <div class="legend-body" id="legendBody">
+  <div class="legend-body collapsed" id="legendBody">
   <div class="legend-item"><div class="legend-dot" style="background:#ff4444"></div> Military / Intelligence</div>
   <div class="legend-item"><div class="legend-dot" style="background:#ffcc00"></div> Financial / Banking</div>
   <div class="legend-item"><div class="legend-dot" style="background:#ff6600"></div> Underground / D.U.M.B.</div>
@@ -2100,7 +2100,7 @@ locations.forEach(function(loc) {
   marker.addTo(markerLayer);
 });
 
-markerLayer.addTo(map);
+// Blank map on load — markers hidden until user interacts
 updateStats();
 
 // ===================== FILTERING =====================
