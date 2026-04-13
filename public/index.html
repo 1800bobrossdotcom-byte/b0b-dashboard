@@ -3,267 +3,191 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>b0b — computational instruments</title>
+  <meta name="robots" content="noindex, nofollow">
+  <title>b0b.dev</title>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     html, body {
       width: 100%; height: 100%;
-      background: #060606;
-      color: #8a8a6a;
-      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'JetBrains Mono', 'Courier New', monospace;
+      background: #0a0a0a;
+      color: #d4d4d4;
+      font-family: 'Courier New', 'Consolas', monospace;
       -webkit-font-smoothing: antialiased;
     }
 
-    canvas#bg {
-      position: fixed; inset: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: 0;
-    }
-
     .page {
-      position: relative;
-      z-index: 1;
-      max-width: 560px;
+      max-width: 640px;
       margin: 0 auto;
-      padding: 15vh 24px 10vh;
+      padding: 12vh 24px 10vh;
       min-height: 100vh;
     }
 
-    .mark {
-      font-size: 24px;
-      letter-spacing: 12px;
+    .header {
       text-align: center;
-      color: #6a8a4a;
-      margin-bottom: 8px;
+      margin-bottom: 48px;
+    }
+
+    .mark {
+      font-size: 28px;
+      letter-spacing: 10px;
+      color: #00ff41;
+      margin-bottom: 6px;
     }
 
     .subtitle {
       font-size: 10px;
-      letter-spacing: 4px;
-      text-align: center;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      color: #4a4a3a;
-      margin-bottom: 48px;
+      color: #444;
     }
 
     .rule {
       height: 1px;
-      background: linear-gradient(90deg, transparent, #1a1a14 20%, #1a1a14 80%, transparent);
-      margin: 0 0 40px;
+      background: linear-gradient(90deg, transparent, #00ff41 50%, transparent);
+      opacity: 0.3;
+      margin-bottom: 40px;
     }
 
-    .entry {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-      border: 1px solid transparent;
-      border-radius: 2px;
-      transition: border-color 0.4s, background 0.4s;
-      padding: 24px 20px;
-      margin-bottom: 32px;
-      position: relative;
-    }
-
-    .entry:hover {
-      border-color: #1a1a14;
-      background: rgba(12, 12, 10, 0.5);
-    }
-
-    .entry-num {
+    .section-label {
       font-size: 9px;
       letter-spacing: 3px;
-      color: #3a3a2a;
-      margin-bottom: 10px;
+      text-transform: uppercase;
+      color: #00ff41;
+      opacity: 0.5;
+      margin-bottom: 16px;
     }
 
-    .entry-name {
-      font-size: 16px;
-      letter-spacing: 6px;
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+
+    .card {
+      display: block;
+      text-decoration: none;
+      color: #d4d4d4;
+      border: 1px solid #1a1a1a;
+      border-radius: 3px;
+      padding: 16px 14px;
+      transition: border-color 0.3s, background 0.3s;
+    }
+
+    .card:hover {
+      border-color: #00ff41;
+      background: rgba(0, 255, 65, 0.03);
+    }
+
+    .card-name {
+      font-size: 13px;
+      letter-spacing: 3px;
       font-weight: normal;
-      margin-bottom: 8px;
-      transition: color 0.3s, text-shadow 0.3s;
+      margin-bottom: 6px;
+      color: #00ff41;
     }
 
-    .entry-desc {
-      font-size: 11px;
-      color: #5a5a4a;
-      margin-bottom: 10px;
-      letter-spacing: 1px;
-    }
-
-    .entry-tags {
+    .card-desc {
       font-size: 10px;
-      color: #3a3a2a;
-      letter-spacing: 1px;
+      color: #666;
+      line-height: 1.5;
     }
 
-    .entry-arrow {
-      position: absolute;
-      right: 20px;
-      bottom: 24px;
-      font-size: 11px;
-      color: #3a3a2a;
-      opacity: 0;
-      transition: opacity 0.3s, transform 0.3s;
-      transform: translateX(-4px);
+    .card--wide {
+      grid-column: 1 / -1;
     }
 
-    .entry:hover .entry-arrow {
-      opacity: 1;
-      transform: translateX(0);
+    .logout {
+      text-align: center;
+      margin-top: 40px;
     }
 
-    /* SPECTRA hover — green phosphor glow */
-    .entry--spectra:hover { border-color: rgba(106, 138, 74, 0.3); }
-    .entry--spectra:hover .entry-name {
-      color: #8aaa5a;
-      text-shadow: 0 0 20px rgba(106, 138, 74, 0.2);
+    .logout a {
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: #333;
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.3s;
     }
 
-    /* ARTIFACT hover — chromatic aberration */
-    .entry--artifact:hover { border-color: rgba(138, 74, 106, 0.3); }
-    .entry--artifact:hover .entry-name {
-      text-shadow: 2px 0 rgba(255, 0, 128, 0.15), -2px 0 rgba(0, 255, 255, 0.15);
-      color: #aa8a5a;
-    }
-
-    /* TAKE hover — warm red accent */
-    .entry--take:hover { border-color: rgba(138, 74, 74, 0.3); }
-    .entry--take:hover .entry-name { color: #aa6a5a; }
-    .entry--take .rec-dot {
-      display: inline-block;
-      width: 6px; height: 6px;
-      background: #5a2a2a;
-      border-radius: 50%;
-      margin-left: 8px;
-      vertical-align: middle;
-      transition: background 0.3s, box-shadow 0.3s;
-    }
-    .entry--take:hover .rec-dot {
-      background: #cc3333;
-      box-shadow: 0 0 8px rgba(204, 51, 51, 0.5);
-      animation: pulse 1.2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-
-    .unavailable {
-      pointer-events: none;
-    }
-    .unavailable .entry-tags::after {
-      content: ' — coming soon';
-      color: #2a2a20;
-    }
+    .logout a:hover { color: #666; }
 
     @media (max-width: 480px) {
-      .page { padding: 10vh 16px 8vh; }
-      .mark { font-size: 20px; letter-spacing: 10px; }
-      .entry-name { font-size: 14px; letter-spacing: 4px; }
+      .grid { grid-template-columns: 1fr; }
+      .page { padding: 8vh 16px 8vh; }
     }
   </style>
 </head>
 <body>
-  <canvas id="bg"></canvas>
-
   <div class="page">
-    <div class="mark">b 0 b</div>
-    <div class="subtitle">computational instruments</div>
+    <div class="header">
+      <div class="mark">b 0 b</div>
+      <div class="subtitle">open source intelligence</div>
+    </div>
     <div class="rule"></div>
 
-    <a href="/spectra" class="entry entry--spectra">
-      <div class="entry-num">001</div>
-      <h2 class="entry-name">SPECTRA</h2>
-      <p class="entry-desc">computational vision engine</p>
-      <p class="entry-tags">night · thermal · motion · edge</p>
-      <span class="entry-arrow">&rarr;</span>
-    </a>
+    <div class="section-label">intelligence</div>
+    <div class="grid">
+      <a href="/report" class="card card--wide">
+        <h2 class="card-name">REPORT</h2>
+        <p class="card-desc">ISTAR field report — full document</p>
+      </a>
+      <a href="/map" class="card">
+        <h2 class="card-name">MAP</h2>
+        <p class="card-desc">OSINT geospatial overlay</p>
+      </a>
+      <a href="/ai-attack-vector-analysis" class="card">
+        <h2 class="card-name">AI ANALYSIS</h2>
+        <p class="card-desc">Attack vector assessment</p>
+      </a>
+    </div>
 
-    <a href="/artifact" class="entry entry--artifact">
-      <div class="entry-num">002</div>
-      <h2 class="entry-name">ARTIFACT</h2>
-      <p class="entry-desc">analog glitch camera</p>
-      <p class="entry-tags">pixel sort · vhs · databend · scanline</p>
-      <span class="entry-arrow">&rarr;</span>
-    </a>
+    <div class="section-label">countermeasures</div>
+    <div class="grid">
+      <a href="/countermeasures" class="card card--wide">
+        <h2 class="card-name">COUNTERMEASURES</h2>
+        <p class="card-desc">Ultrasonic shield · WebRTC block · canvas guard</p>
+      </a>
+      <a href="/tones-shield" class="card">
+        <h2 class="card-name">SHIELD</h2>
+        <p class="card-desc">Threat detection &amp; neutralization</p>
+      </a>
+      <a href="/tones-shield-guide" class="card">
+        <h2 class="card-name">SHIELD GUIDE</h2>
+        <p class="card-desc">Usage documentation</p>
+      </a>
+    </div>
 
-    <a href="/take" class="entry entry--take unavailable">
-      <div class="entry-num">003</div>
-      <h2 class="entry-name">TAKE<span class="rec-dot"></span></h2>
-      <p class="entry-desc">short-form video tool</p>
-      <p class="entry-tags">record · effects · concatenate · export</p>
-      <span class="entry-arrow">&rarr;</span>
-    </a>
+    <div class="section-label">tones</div>
+    <div class="grid">
+      <a href="/tones-healing" class="card">
+        <h2 class="card-name">HEALING</h2>
+        <p class="card-desc">Solfeggio frequencies</p>
+      </a>
+      <a href="/tones-protective" class="card">
+        <h2 class="card-name">PROTECTIVE</h2>
+        <p class="card-desc">Ambient shielding tones</p>
+      </a>
+      <a href="/tones-instrument" class="card">
+        <h2 class="card-name">INSTRUMENT</h2>
+        <p class="card-desc">Tone synthesis lab</p>
+      </a>
+      <a href="/tones-multipack" class="card">
+        <h2 class="card-name">MULTIPACK</h2>
+        <p class="card-desc">Combined tone presets</p>
+      </a>
+    </div>
+
+    <div class="logout"><a id="exit">[ exit ]</a></div>
   </div>
 
   <script>
-    const c = document.getElementById('bg');
-    const x = c.getContext('2d');
-    let W, H;
-    const P = [];
-    const N = 35;
-
-    function resize() {
-      W = c.width = window.innerWidth;
-      H = c.height = window.innerHeight;
-    }
-
-    resize();
-    window.addEventListener('resize', resize);
-
-    for (let i = 0; i < N; i++) {
-      P.push({
-        x: Math.random() * (window.innerWidth || 1200),
-        y: Math.random() * (window.innerHeight || 800),
-        vx: (Math.random() - 0.5) * 0.15,
-        vy: (Math.random() - 0.5) * 0.15,
-        r: 0.8 + Math.random() * 1.2,
-      });
-    }
-
-    function draw() {
-      x.clearRect(0, 0, W, H);
-
-      for (let i = 0; i < P.length; i++) {
-        for (let j = i + 1; j < P.length; j++) {
-          const dx = P[i].x - P[j].x;
-          const dy = P[i].y - P[j].y;
-          const d = Math.sqrt(dx * dx + dy * dy);
-          if (d < 140) {
-            x.globalAlpha = (1 - d / 140) * 0.04;
-            x.strokeStyle = '#6a8a4a';
-            x.lineWidth = 0.5;
-            x.beginPath();
-            x.moveTo(P[i].x, P[i].y);
-            x.lineTo(P[j].x, P[j].y);
-            x.stroke();
-          }
-        }
-      }
-
-      x.globalAlpha = 0.12;
-      x.fillStyle = '#6a8a4a';
-      for (const p of P) {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < -20) p.x = W + 20;
-        if (p.x > W + 20) p.x = -20;
-        if (p.y < -20) p.y = H + 20;
-        if (p.y > H + 20) p.y = -20;
-        x.beginPath();
-        x.arc(p.x, p.y, p.r, 0, 6.283);
-        x.fill();
-      }
-
-      x.globalAlpha = 1;
-      requestAnimationFrame(draw);
-    }
-
-    draw();
+    document.getElementById('exit').addEventListener('click', function() {
+      document.cookie = 'b0b_access=;path=/;max-age=0';
+      window.location.href = '/';
+    });
   </script>
 </body>
 </html>
