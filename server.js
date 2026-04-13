@@ -123,6 +123,7 @@ const PAGES = {
   '/tones-multipack':'tones-multipack.html',
   '/tones-shield-guide':'tones-shield-guide.html',
   '/ai-attack-vector-analysis':  'ai-attack-vector-analysis.html',
+  '/ai-attack-vector-analysis.html':  'ai-attack-vector-analysis.html',
 };
 
 // Serve static assets (js, css, manifests, icons, i18n) for authenticated users
