@@ -55,7 +55,7 @@ function pixelCSP(nonce) {
     imgSrc: ["'none'"],
     fontSrc: ["'none'"],
     objectSrc: ["'none'"],
-    frameSrc: ["'none'"],
+    frameSrc: ["https://www.youtube.com"],
     frameAncestors: ["'none'"],
     formAction: ["'none'"],
     baseUri: ["'self'"],
