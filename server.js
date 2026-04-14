@@ -62,7 +62,7 @@ function pixelCSP(nonce) {
     connectSrc: ["'none'"],
     mediaSrc: ["'none'"],
     workerSrc: ["'none'"],
-    childSrc: ["'none'"],
+    childSrc: ["https://www.youtube.com"],
     upgradeInsecureRequests: [],
   };
 }
