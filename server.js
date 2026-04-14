@@ -55,14 +55,14 @@ function pixelCSP(nonce) {
     imgSrc: ["'none'"],
     fontSrc: ["'none'"],
     objectSrc: ["'none'"],
-    frameSrc: ["https://www.youtube.com"],
+    frameSrc: ["https://www.youtube.com", "https://www.youtube-nocookie.com"],
     frameAncestors: ["'none'"],
     formAction: ["'none'"],
     baseUri: ["'self'"],
     connectSrc: ["'none'"],
     mediaSrc: ["'none'"],
     workerSrc: ["'none'"],
-    childSrc: ["https://www.youtube.com"],
+    childSrc: ["https://www.youtube.com", "https://www.youtube-nocookie.com"],
     upgradeInsecureRequests: [],
   };
 }
@@ -92,13 +92,14 @@ function siteCSP(nonce) {
 app.use((req, res, next) => {
   const nonce = res.locals.nonce;
   const directives = hasAccess(req) ? siteCSP(nonce) : pixelCSP(nonce);
+  const rpPolicy = hasAccess(req) ? 'no-referrer' : 'strict-origin-when-cross-origin';
   helmet({
     contentSecurityPolicy: { directives },
     strictTransportSecurity: { maxAge: 63_072_000, includeSubDomains: true, preload: true },
     frameguard: { action: 'sameorigin' },
     noSniff: true,
     xssFilter: true,
-    referrerPolicy: { policy: 'no-referrer' },
+    referrerPolicy: { policy: rpPolicy },
     dnsPrefetchControl: { allow: false },
     ieNoOpen: true,
     permittedCrossDomainPolicies: { permittedPolicies: 'none' },
