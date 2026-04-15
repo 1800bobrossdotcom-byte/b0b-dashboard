@@ -892,10 +892,12 @@ function updateCmDots() {
 }
 setInterval(updateCmDots, 500);
 
-// Auto-collapse filter body on mobile load
+// On mobile, auto-collapse subsections to save space but keep filter body visible
 if (window.innerWidth <= 768) {
-  document.getElementById('filterBody').classList.add('collapsed');
-  document.getElementById('filterChevron').classList.add('collapsed');
+  document.getElementById('secBody').classList.add('collapsed');
+  document.getElementById('secChev').classList.add('collapsed');
+  document.getElementById('typeBody').classList.add('collapsed');
+  document.getElementById('typeChev').classList.add('collapsed');
 }
 
 var map = L.map('map', {
