@@ -2101,6 +2101,11 @@ locations.forEach(function(loc) {
 });
 
 markerLayer.addTo(map);
+
+// Initialize all filter checkboxes as checked
+document.querySelectorAll('[data-section]').forEach(function(cb) { cb.checked = true; });
+document.querySelectorAll('[data-type]').forEach(function(cb) { cb.checked = true; });
+
 applyFilters();
 
 // ===================== FILTERING =====================
