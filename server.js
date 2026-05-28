@@ -7,6 +7,10 @@ const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const ACCESS_COOKIE = 'b0b_access';
+const ACCESS_PASSWORD = process.env.B0B_ACCESS_PASSWORD || 'never2501';
+const ACCESS_TTL_SECONDS = 60 * 60 * 24;
+const COOKIE_SECRET = process.env.B0B_COOKIE_SECRET || crypto.randomBytes(32).toString('hex');
 
 // ═══════════════════════════════════════════════════════════
 // b0b — pixel gateway → full site
@@ -15,9 +19,14 @@ const PORT = process.env.PORT || 3000;
 const PIXEL = fs.readFileSync(path.join(__dirname, 'public', 'pixel.html'), 'utf8');
 const PUB = path.join(__dirname, 'public');
 
+if (!process.env.B0B_COOKIE_SECRET) {
+  console.warn('[b0b] B0B_COOKIE_SECRET is not set; generated ephemeral cookie secret for this process');
+}
+
 app.disable('x-powered-by');
 app.disable('etag');
 app.set('trust proxy', 1);
+app.use(express.json({ limit: '4kb' }));
 
 app.use(rateLimit({
   windowMs: 60_000,
@@ -41,9 +50,45 @@ app.use((req, res, next) => {
 });
 
 // Parse b0b_access cookie (no cookie-parser dep needed)
-function hasAccess(req) {
+function parseCookies(req) {
   const raw = req.headers.cookie || '';
-  return raw.split(';').some(c => c.trim().startsWith('b0b_access='));
+  return raw.split(';').reduce((acc, part) => {
+    const [k, ...rest] = part.trim().split('=');
+    if (!k) return acc;
+    acc[k] = rest.join('=');
+    return acc;
+  }, {});
+}
+
+function signValue(value) {
+  return crypto
+    .createHmac('sha256', COOKIE_SECRET)
+    .update(value)
+    .digest('base64url');
+}
+
+function safeEqual(a, b) {
+  const left = Buffer.from(a || '', 'utf8');
+  const right = Buffer.from(b || '', 'utf8');
+  if (left.length !== right.length) return false;
+  return crypto.timingSafeEqual(left, right);
+}
+
+function buildAccessToken() {
+  const payload = '1';
+  return `${payload}.${signValue(payload)}`;
+}
+
+function isValidAccessToken(token) {
+  if (!token || typeof token !== 'string') return false;
+  const [payload, signature] = token.split('.');
+  if (!payload || !signature) return false;
+  return safeEqual(signature, signValue(payload));
+}
+
+function hasAccess(req) {
+  const cookies = parseCookies(req);
+  return isValidAccessToken(cookies[ACCESS_COOKIE]);
 }
 
 // CSP for pixel (locked down)
@@ -139,8 +184,22 @@ app.use((req, res, next) => {
 
 // Logout: clear cookie → back to pixel gate
 app.get('/logout', (req, res) => {
-  res.setHeader('Set-Cookie', 'b0b_access=; path=/; max-age=0; SameSite=Lax');
+  const secure = process.env.NODE_ENV !== 'development' ? '; Secure' : '';
+  res.setHeader('Set-Cookie', `${ACCESS_COOKIE}=; Path=/; HttpOnly; Max-Age=0; SameSite=Lax${secure}`);
   res.redirect(302, '/');
+});
+
+app.post('/api/gate', (req, res) => {
+  // Click-to-enter: password requirement removed. Anyone POSTing /api/gate
+  // gets an access cookie. Kept the endpoint shape (POST + Set-Cookie) so
+  // existing client code and the lovebeing OSINT proxy still work.
+  const token = buildAccessToken();
+  const secure = process.env.NODE_ENV !== 'development' ? '; Secure' : '';
+  res.setHeader(
+    'Set-Cookie',
+    `${ACCESS_COOKIE}=${token}; Path=/; HttpOnly; Max-Age=${ACCESS_TTL_SECONDS}; SameSite=Lax${secure}`
+  );
+  return res.status(204).end();
 });
 
 // Page routes
