@@ -1182,6 +1182,12 @@ var locations = [
   {name:"Marshall BioResources — MBR Acres, Wyton, UK",lat:52.3618,lng:-0.1366,section:"XV",type:"animal-research",ctx:"MBR Acres, Wyton, Cambridgeshire, England. Marshall beagle-breeding facility supplying UK research labs; up to ~2,000 beagles bred per year. Long-running site of the 'Camp Beagle' protest. Part of Marshall's global network."},
   {name:"Marshall BioResources — Gannat, France",lat:46.0996,lng:3.1995,section:"XV",type:"animal-research",ctx:"Marshall BioResources facility at Gannat, Allier, France (acquired 2017). Part of Marshall's European breeding network."},
   {name:"Marshall BioResources — Mézilles, France",lat:47.7009,lng:3.1720,section:"XV",type:"animal-research",ctx:"Centre d'Élevage du Domaine des Souches, Mézilles, Yonne, France — acquired by Marshall BioResources. Breeds beagles and golden retrievers for laboratories. Part of Marshall's European breeding network."},
+  // Charles River Laboratories — global CRO and research-model breeder.
+  {name:"Charles River Laboratories — HQ, Wilmington, MA",lat:42.5955,lng:-71.1579,section:"XV",type:"animal-research",ctx:"Charles River Laboratories — 251 Ballardvale St, Wilmington, MA. Global contract research organization and breeder of research models incl. beagles. A 2014 CBS News investigation documented dog use at its Massachusetts labs. Source: Wikipedia; CBS News (2014)."},
+  {name:"Charles River — Stone Ridge, NY (breeding, approx.)",lat:41.8448,lng:-74.1544,section:"XV",type:"animal-research",ctx:"Charles River breeding facility, Stone Ridge (Town of Marbletown), Ulster County, NY (RR 209). Long-documented dog/beagle breeding site. Pin at town level — exact parcel pending. Source: SourceWatch."},
+  // Inotiv / Envigo RMS — research-model breeder; record AWA case.
+  {name:"Inotiv — HQ, West Lafayette, IN",lat:40.4588,lng:-86.9297,section:"XV",type:"animal-research",ctx:"Inotiv, Inc. (formerly BASi) — 2701 Kent Ave, West Lafayette, IN. Parent company of Envigo RMS. Source: Inotiv (Wikipedia)."},
+  {name:"Envigo / Inotiv — Cumberland, VA (approx.)",lat:37.5004,lng:-78.2469,section:"XV",type:"animal-research",ctx:"Envigo RMS beagle-breeding facility, Cumberland County, VA. ~4,000 beagles relinquished to the Humane Society (2022). Inotiv pleaded guilty to Animal Welfare Act violations and agreed to pay 35M+ — the largest AWA penalty in U.S. history (2024). Pin at county level — exact parcel pending. Sources: U.S. DOJ; CNN; NPR; AVMA (2024)."},
 
   // ===== SECTION II: Control Architecture =====
   {name:"Bank for International Settlements (BIS)",lat:47.5476,lng:7.5886,section:"II",type:"financial",ctx:"Founded May 17, 1930. 63 member central banks. Sovereign immunity on Swiss soil. Transferred 23 tons Czech gold to Nazi Germany (March 1939). Bretton Woods voted to dissolve it - it survived."},
@@ -3034,6 +3040,33 @@ tunnelPaths.forEach(function(t) {
   line.bindTooltip(t.label, {sticky: true, className: 'line-tooltip'});
   line.addTo(tunnelLayer);
 });
+
+// ===================== ANIMAL-RESEARCH NETWORK PATHS =====================
+// Corporate links (HQ -> owned/operated facilities) for the breeding networks.
+// These connect facilities that belong to the SAME company; they are not a
+// claim that the separate companies coordinate with one another.
+var animalNetPaths = [
+  // Marshall BioResources — hub: North Rose, NY
+  {path:[[43.2139,-76.9049],[52.3618,-0.1366]], label:'Marshall BioResources: North Rose, NY ↔ MBR Acres, Wyton, UK'},
+  {path:[[43.2139,-76.9049],[46.0996,3.1995]], label:'Marshall BioResources: North Rose, NY ↔ Gannat, France'},
+  {path:[[43.2139,-76.9049],[47.7009,3.1720]], label:'Marshall BioResources: North Rose, NY ↔ Mézilles, France'},
+  // Charles River Laboratories
+  {path:[[42.5955,-71.1579],[41.8448,-74.1544]], label:'Charles River: Wilmington, MA (HQ) ↔ Stone Ridge, NY (breeding)'},
+  // Inotiv / Envigo RMS
+  {path:[[40.4588,-86.9297],[37.5004,-78.2469]], label:'Inotiv: West Lafayette, IN (HQ) ↔ Envigo, Cumberland, VA'},
+];
+var animalNetLayer = L.layerGroup();
+animalNetPaths.forEach(function(t) {
+  var line = L.polyline(t.path, {
+    color: '#d500f9',
+    weight: 2,
+    opacity: 0.6,
+    dashArray: '4,6'
+  });
+  line.bindTooltip(t.label, {sticky: true, className: 'line-tooltip'});
+  line.addTo(animalNetLayer);
+});
+animalNetLayer.addTo(map); // connection paths always on
 
 function toggleDataLayer(layer) {
   if (layer === 'connections') {
