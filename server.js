@@ -16,8 +16,12 @@ const COOKIE_SECRET = process.env.B0B_COOKIE_SECRET || crypto.randomBytes(32).to
 // b0b — pixel gateway → full site
 // ═══════════════════════════════════════════════════════════
 
-const PIXEL = fs.readFileSync(path.join(__dirname, 'public', 'pixel.html'), 'utf8');
-const PUB = path.join(__dirname, 'public');
+// NOTE: this directory is intentionally NOT named "public" — Vercel auto-serves
+// a top-level public/ directory as static assets at the root, which would
+// bypass the access gate below. Routing all requests through this function is
+// what enforces the gate, so the asset dir must have a non-special name.
+const PIXEL = fs.readFileSync(path.join(__dirname, 'site', 'pixel.html'), 'utf8');
+const PUB = path.join(__dirname, 'site');
 
 if (!process.env.B0B_COOKIE_SECRET) {
   // Ephemeral fallback keeps local dev zero-config. On serverless (Vercel),
