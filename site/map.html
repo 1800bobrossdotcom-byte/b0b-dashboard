@@ -531,6 +531,7 @@
   <div class="filter-item"><label><input type="checkbox" data-section="XII"> XII - Organized Crime</label></div>
   <div class="filter-item"><label><input type="checkbox" data-section="XIII"> XIII - Spiritual Exit</label></div>
   <div class="filter-item"><label><input type="checkbox" data-section="XIV"> XIV - Sports/Gambling</label></div>
+  <div class="filter-item"><label><input type="checkbox" data-section="XV"> XV - Animal Testing</label></div>
   </div>
   </div>
   <!-- BY TYPE - collapsible, two-column -->
@@ -561,6 +562,7 @@
   <div class="filter-item"><label><input type="checkbox" data-type="crypto-tech"> Crypto / Tech</label></div>
   <div class="filter-item"><label><input type="checkbox" data-type="technology"> Technology</label></div>
   <div class="filter-item"><label><input type="checkbox" data-type="sports-gambling"> Sports / Gambling</label></div>
+  <div class="filter-item"><label><input type="checkbox" data-type="animal-research"> Animal Testing Labs</label></div>
   </div>
   </div>
   <!-- MAP STYLE -->
@@ -795,6 +797,7 @@
   <div class="legend-item"><div class="legend-dot" style="background:#00e676"></div> Crypto / Tech Park</div>
   <div class="legend-item"><div class="legend-dot" style="background:#64ffda"></div> Technology / Research</div>
   <div class="legend-item"><div class="legend-dot" style="background:#ffd740"></div> Sports / Gambling</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#d500f9"></div> Animal Testing Lab</div>
   <div class="legend-item"><div style="width:24px;height:0;border-top:3px dashed #ff6600;margin-right:8px;flex-shrink:0"></div> Tunnel Path</div>
   <div class="legend-item"><div style="width:24px;height:0;border-top:3px dashed #cc00ff;margin-right:8px;flex-shrink:0"></div> Inner-Earth / Deep Route</div>
   <h3 style="margin-top:10px;color:#ff4444;font-size:0.7rem">LIVE FEEDS</h3>
@@ -1157,7 +1160,8 @@ var colorMap = {
   'museum': '#b388ff',
   'crypto-tech': '#00e676',
   'technology': '#64ffda',
-  'sports-gambling': '#ffd740'
+  'sports-gambling': '#ffd740',
+  'animal-research': '#d500f9'
 };
 
 function makeIcon(color, size) {
@@ -1172,6 +1176,9 @@ function makeIcon(color, size) {
 
 // ===================== LOCATION DATA =====================
 var locations = [
+  // ===== SECTION XV: Animal Experimentation Networks =====
+  {name:"Animal Testing Facility — near Rochester, NY (approx.)",lat:43.05,lng:-77.45,section:"XV",type:"animal-research",ctx:"Reported beagle experimentation facility in upstate New York, outside Rochester. Documented as a hardened site: Flock ALPR cameras, guard dogs, and armed security observed on visit. APPROXIMATE LOCATION — exact coordinates pending confirmation."},
+
   // ===== SECTION II: Control Architecture =====
   {name:"Bank for International Settlements (BIS)",lat:47.5476,lng:7.5886,section:"II",type:"financial",ctx:"Founded May 17, 1930. 63 member central banks. Sovereign immunity on Swiss soil. Transferred 23 tons Czech gold to Nazi Germany (March 1939). Bretton Woods voted to dissolve it - it survived."},
   {name:"Basel, Switzerland",lat:47.5596,lng:7.5886,section:"II",type:"financial",ctx:"BIS headquarters. The central bank of central banks operates from Swiss soil with diplomatic immunity."},
