@@ -113,9 +113,11 @@ function pixelCSP(nonce) {
     objectSrc: ["'none'"],
     frameSrc: ["https://www.youtube.com", "https://www.youtube-nocookie.com"],
     frameAncestors: ["'none'"],
-    formAction: ["'none'"],
+    formAction: ["'self'"],
     baseUri: ["'self'"],
-    connectSrc: ["'none'"],
+    // The ENTER button POSTs to /api/gate via fetch(); connect-src must allow
+    // same-origin or the browser blocks the request and the gate can't be opened.
+    connectSrc: ["'self'"],
     mediaSrc: ["'none'"],
     workerSrc: ["'none'"],
     childSrc: ["https://www.youtube.com", "https://www.youtube-nocookie.com"],
