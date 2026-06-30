@@ -20,7 +20,14 @@ const PIXEL = fs.readFileSync(path.join(__dirname, 'public', 'pixel.html'), 'utf
 const PUB = path.join(__dirname, 'public');
 
 if (!process.env.B0B_COOKIE_SECRET) {
-  console.warn('[b0b] B0B_COOKIE_SECRET is not set; generated ephemeral cookie secret for this process');
+  // Ephemeral fallback keeps local dev zero-config. On serverless (Vercel),
+  // each lambda instance would generate a different secret, so an access
+  // cookie signed by one instance fails validation on another and visitors
+  // get bounced back to the pixel gate at random. B0B_COOKIE_SECRET MUST be
+  // set to a fixed value in any multi-instance / serverless deployment.
+  console.warn('[b0b] B0B_COOKIE_SECRET is not set; using an ephemeral per-process secret. ' +
+    'Set B0B_COOKIE_SECRET in the deployment environment (required on Vercel/serverless) ' +
+    'or access sessions will not persist across instances.');
 }
 
 app.disable('x-powered-by');
