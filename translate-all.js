@@ -11,7 +11,7 @@ const LANGS = ['es', 'fr', 'ar', 'zh', 'pt', 'ru', 'hi', 'sw', 'ko', 'ja', 'de']
 const force = process.argv.includes('--force');
 
 for (const lang of LANGS) {
-  const dir = path.join(__dirname, 'public', 'i18n', lang);
+  const dir = path.join(__dirname, 'site', 'i18n', lang);
   const existing = fs.existsSync(dir) ? fs.readdirSync(dir).filter(f => f.startsWith('report-') && f.endsWith('.html')).length : 0;
 
   if (existing >= 16 && !force) {
@@ -32,7 +32,7 @@ for (const lang of LANGS) {
 console.log('\n=== BATCH COMPLETE ===');
 // Final summary
 for (const lang of LANGS) {
-  const dir = path.join(__dirname, 'public', 'i18n', lang);
+  const dir = path.join(__dirname, 'site', 'i18n', lang);
   const count = fs.existsSync(dir) ? fs.readdirSync(dir).filter(f => f.startsWith('report-') && f.endsWith('.html')).length : 0;
   console.log(`  ${lang}: ${count}/16`);
 }

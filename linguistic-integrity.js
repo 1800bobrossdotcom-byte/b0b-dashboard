@@ -16,7 +16,7 @@ const fs = require('fs');
 const crypto = require('crypto');
 const path = require('path');
 
-const REPORT_PATH = path.join(__dirname, 'public', 'report.html');
+const REPORT_PATH = path.join(__dirname, 'site', 'report.html');
 const MANIFEST_PATH = path.join(__dirname, 'content-integrity-manifest.json');
 
 // ===================== KNOWN INJECTION PATTERNS =====================
@@ -115,7 +115,7 @@ function generateManifest() {
     generated: new Date().toISOString(),
     version: '1.0.0',
     tool: 'Linguistic Integrity Verification (LIV)',
-    reportFile: 'public/report.html',
+    reportFile: 'site/report.html',
     fullFileHash: fullHash,
     sectionBlocks: blocks,
     paragraphHashes: paragraphs,

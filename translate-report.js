@@ -4,7 +4,7 @@
  * Sends HTML directly — Google preserves tag structure.
  * Rotates TLDs to minimize rate-limiting.
  *
- * Output: public/i18n/{lang}/report-{sectionId}.html
+ * Output: site/i18n/{lang}/report-{sectionId}.html
  *
  * Usage: node translate-report.js [lang] [sectionId] [--force]
  */
@@ -13,8 +13,8 @@ const fs = require('fs');
 const path = require('path');
 const { translate } = require('google-translate-api-x');
 
-const REPORT = path.join(__dirname, 'public', 'report.html');
-const OUT_DIR = path.join(__dirname, 'public', 'i18n');
+const REPORT = path.join(__dirname, 'site', 'report.html');
+const OUT_DIR = path.join(__dirname, 'site', 'i18n');
 const CHUNK = 4000; // chars per block
 const DELAY = 1500; // ms between chunks
 const TLDS = ['com', 'co.uk', 'com.au', 'ca', 'co.in'];
