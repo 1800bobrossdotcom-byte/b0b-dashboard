@@ -563,6 +563,7 @@
   <div class="filter-item"><label><input type="checkbox" data-type="technology"> Technology</label></div>
   <div class="filter-item"><label><input type="checkbox" data-type="sports-gambling"> Sports / Gambling</label></div>
   <div class="filter-item"><label><input type="checkbox" data-type="animal-research"> Animal Testing Labs</label></div>
+  <div class="filter-item"><label><input type="checkbox" data-type="capital"> Capital / Finance</label></div>
   </div>
   </div>
   <!-- MAP STYLE -->
@@ -798,6 +799,7 @@
   <div class="legend-item"><div class="legend-dot" style="background:#64ffda"></div> Technology / Research</div>
   <div class="legend-item"><div class="legend-dot" style="background:#ffd740"></div> Sports / Gambling</div>
   <div class="legend-item"><div class="legend-dot" style="background:#d500f9"></div> Animal Testing Lab</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#7c4dff"></div> Capital / Financing</div>
   <div class="legend-item"><div style="width:24px;height:0;border-top:3px dashed #ff6600;margin-right:8px;flex-shrink:0"></div> Tunnel Path</div>
   <div class="legend-item"><div style="width:24px;height:0;border-top:3px dashed #cc00ff;margin-right:8px;flex-shrink:0"></div> Inner-Earth / Deep Route</div>
   <h3 style="margin-top:10px;color:#ff4444;font-size:0.7rem">LIVE FEEDS</h3>
@@ -1161,7 +1163,8 @@ var colorMap = {
   'crypto-tech': '#00e676',
   'technology': '#64ffda',
   'sports-gambling': '#ffd740',
-  'animal-research': '#d500f9'
+  'animal-research': '#d500f9',
+  'capital': '#7c4dff'
 };
 
 function makeIcon(color, size) {
@@ -1178,16 +1181,26 @@ function makeIcon(color, size) {
 var locations = [
   // ===== SECTION XV: Animal Experimentation Networks =====
   // Marshall BioResources (Marshall Farms) — global purpose-bred research-animal network.
-  {name:"Marshall BioResources — North Rose, NY (HQ)",lat:43.2139,lng:-76.9049,section:"XV",type:"animal-research",ctx:"Marshall BioResources / Marshall Farms — 5800 Lake Bluff Road, Town of Huron, Wayne County, NY. Global breeder of purpose-bred research animals: the 'Marshall Beagle' line since 1962, plus ferrets, cats and Göttingen minipigs. Reported ~66,000 animals incl. 20,000+ beagles. Advocates cite 20+ Animal Welfare Act citations over the years; 3-day protest May 2026 (Beagle Lovers & Rescuers; Against All Oddz). Company states its May 2026 unannounced USDA inspection returned no citations. Source: 13WHAM (2026)."},
+  {name:"Marshall BioResources — North Rose, NY (HQ)",lat:43.2139,lng:-76.9049,section:"XV",type:"animal-research",ctx:"Marshall BioResources / Marshall Farms — 5800 Lake Bluff Road, Town of Huron, Wayne County, NY. Global breeder of purpose-bred research animals: the 'Marshall Beagle' line since 1962, plus ferrets, cats and Göttingen minipigs. Reported ~66,000 animals incl. 20,000+ beagles. Advocates cite 20+ Animal Welfare Act citations over the years; 3-day protest May 2026 (Beagle Lovers & Rescuers; Against All Oddz). Company states its May 2026 unannounced USDA inspection returned no citations. FOLLOW THE MONEY: privately held / family-owned (Marshall Farms Group Ltd, founded 1939) — no public shareholders; revenue is customer sales (pharma/CRO) plus U.S. federal contracts (listed as a federal vendor on GovTribe). Sources: 13WHAM; Wikipedia; GovTribe (2026)."},
   {name:"Marshall BioResources — MBR Acres, Wyton, UK",lat:52.3618,lng:-0.1366,section:"XV",type:"animal-research",ctx:"MBR Acres, Wyton, Cambridgeshire, England. Marshall beagle-breeding facility supplying UK research labs; up to ~2,000 beagles bred per year. Long-running site of the 'Camp Beagle' protest. Part of Marshall's global network."},
   {name:"Marshall BioResources — Gannat, France",lat:46.0996,lng:3.1995,section:"XV",type:"animal-research",ctx:"Marshall BioResources facility at Gannat, Allier, France (acquired 2017). Part of Marshall's European breeding network."},
   {name:"Marshall BioResources — Mézilles, France",lat:47.7009,lng:3.1720,section:"XV",type:"animal-research",ctx:"Centre d'Élevage du Domaine des Souches, Mézilles, Yonne, France — acquired by Marshall BioResources. Breeds beagles and golden retrievers for laboratories. Part of Marshall's European breeding network."},
   // Charles River Laboratories — global CRO and research-model breeder.
-  {name:"Charles River Laboratories — HQ, Wilmington, MA",lat:42.5955,lng:-71.1579,section:"XV",type:"animal-research",ctx:"Charles River Laboratories — 251 Ballardvale St, Wilmington, MA. Global contract research organization and breeder of research models incl. beagles. A 2014 CBS News investigation documented dog use at its Massachusetts labs. Source: Wikipedia; CBS News (2014)."},
+  {name:"Charles River Laboratories — HQ, Wilmington, MA",lat:42.5955,lng:-71.1579,section:"XV",type:"animal-research",ctx:"Charles River Laboratories — 251 Ballardvale St, Wilmington, MA. Global contract research organization and breeder of research models incl. beagles. A 2014 CBS News investigation documented dog use at its Massachusetts labs. FOLLOW THE MONEY: publicly traded (NYSE: CRL). Disclosed largest holders are the big asset managers — Vanguard (7.38%), BlackRock, State Street, Fidelity/FMR, Wellington — much of it passive index ownership. Source: Wikipedia; CBS News (2014); SEC 13G/13F."},
   {name:"Charles River — Stone Ridge, NY (breeding, approx.)",lat:41.8448,lng:-74.1544,section:"XV",type:"animal-research",ctx:"Charles River breeding facility, Stone Ridge (Town of Marbletown), Ulster County, NY (RR 209). Long-documented dog/beagle breeding site. Pin at town level — exact parcel pending. Source: SourceWatch."},
   // Inotiv / Envigo RMS — research-model breeder; record AWA case.
   {name:"Inotiv — HQ, West Lafayette, IN",lat:40.4588,lng:-86.9297,section:"XV",type:"animal-research",ctx:"Inotiv, Inc. (formerly BASi) — 2701 Kent Ave, West Lafayette, IN. Parent company of Envigo RMS. Source: Inotiv (Wikipedia)."},
-  {name:"Envigo / Inotiv — Cumberland, VA (approx.)",lat:37.5004,lng:-78.2469,section:"XV",type:"animal-research",ctx:"Envigo RMS beagle-breeding facility, Cumberland County, VA. ~4,000 beagles relinquished to the Humane Society (2022). Inotiv pleaded guilty to Animal Welfare Act violations and agreed to pay 35M+ — the largest AWA penalty in U.S. history (2024). Pin at county level — exact parcel pending. Sources: U.S. DOJ; CNN; NPR; AVMA (2024)."},
+  {name:"Envigo / Inotiv — Cumberland, VA (approx.)",lat:37.5004,lng:-78.2469,section:"XV",type:"animal-research",ctx:"Envigo RMS beagle-breeding facility, Cumberland County, VA. ~4,000 beagles relinquished to the Humane Society (2022). Inotiv pleaded guilty to Animal Welfare Act violations and agreed to pay 35M+ — the largest AWA penalty in U.S. history (2024). FOLLOW THE MONEY: Inotiv (Nasdaq: NOTV) filed prepackaged Chapter 11 on June 3, 2026 with a 65.5M debtor-in-possession loan, cutting funded debt from ~488.7M to ~163.3M; existing shareholders wiped out and the reorganized company passes to its creditors/lenders. Pin at county level — exact parcel pending. Sources: U.S. DOJ; CNN; NPR; AVMA; SEC 8-K filings (2026)."},
+
+  // ===== CAPITAL / FINANCING — who owns & funds the breeders =====
+  // Disclosed largest shareholders of Charles River Laboratories (NYSE: CRL).
+  // NOTE: much of this is passive index-fund ownership — these managers hold
+  // CRL because they hold the whole market, not as a targeted bet on testing.
+  {name:"Vanguard Group — Malvern, PA",lat:40.0521,lng:-75.5069,section:"XV",type:"capital",ctx:"The Vanguard Group, Malvern, PA. Disclosed largest shareholder of Charles River Laboratories: 7.38% (~3.63M shares) as of 03/31/2026 (SEC Schedule 13G). Predominantly passive index funds. Source: SEC 13G; Fintel."},
+  {name:"BlackRock — 50 Hudson Yards, NYC",lat:40.7545,lng:-74.0001,section:"XV",type:"capital",ctx:"BlackRock, Inc., New York. Among the top institutional holders of Charles River Laboratories (index + active funds). World's largest asset manager. Source: SEC 13G/13F; Fintel."},
+  {name:"State Street — 1 Congress St, Boston",lat:42.3604,lng:-71.0580,section:"XV",type:"capital",ctx:"State Street Corp, Boston. Top-tier institutional holder of Charles River Laboratories (the third of the 'Big Three' index managers). Source: Fintel/13F."},
+  {name:"FMR / Fidelity — 245 Summer St, Boston",lat:42.3513,lng:-71.0537,section:"XV",type:"capital",ctx:"FMR LLC (Fidelity), Boston. Disclosed institutional holder of Charles River Laboratories. Source: Fintel/13F."},
+  {name:"Wellington Management — Boston",lat:42.3545,lng:-71.0572,section:"XV",type:"capital",ctx:"Wellington Management Group, Boston. Active institutional holder of Charles River Laboratories. Source: Fintel/13F."},
 
   // ===== SECTION II: Control Architecture =====
   {name:"Bank for International Settlements (BIS)",lat:47.5476,lng:7.5886,section:"II",type:"financial",ctx:"Founded May 17, 1930. 63 member central banks. Sovereign immunity on Swiss soil. Transferred 23 tons Czech gold to Nazi Germany (March 1939). Bretton Woods voted to dissolve it - it survived."},
@@ -3045,20 +3058,28 @@ tunnelPaths.forEach(function(t) {
 // Corporate links (HQ -> owned/operated facilities) for the breeding networks.
 // These connect facilities that belong to the SAME company; they are not a
 // claim that the separate companies coordinate with one another.
+// Magenta (#d500f9) = corporate links within the SAME company (HQ -> its sites).
+// Purple (#7c4dff) = capital links: disclosed largest shareholders -> the company.
 var animalNetPaths = [
   // Marshall BioResources — hub: North Rose, NY
-  {path:[[43.2139,-76.9049],[52.3618,-0.1366]], label:'Marshall BioResources: North Rose, NY ↔ MBR Acres, Wyton, UK'},
-  {path:[[43.2139,-76.9049],[46.0996,3.1995]], label:'Marshall BioResources: North Rose, NY ↔ Gannat, France'},
-  {path:[[43.2139,-76.9049],[47.7009,3.1720]], label:'Marshall BioResources: North Rose, NY ↔ Mézilles, France'},
+  {path:[[43.2139,-76.9049],[52.3618,-0.1366]], color:'#d500f9', label:'Marshall BioResources: North Rose, NY ↔ MBR Acres, Wyton, UK'},
+  {path:[[43.2139,-76.9049],[46.0996,3.1995]], color:'#d500f9', label:'Marshall BioResources: North Rose, NY ↔ Gannat, France'},
+  {path:[[43.2139,-76.9049],[47.7009,3.1720]], color:'#d500f9', label:'Marshall BioResources: North Rose, NY ↔ Mézilles, France'},
   // Charles River Laboratories
-  {path:[[42.5955,-71.1579],[41.8448,-74.1544]], label:'Charles River: Wilmington, MA (HQ) ↔ Stone Ridge, NY (breeding)'},
+  {path:[[42.5955,-71.1579],[41.8448,-74.1544]], color:'#d500f9', label:'Charles River: Wilmington, MA (HQ) ↔ Stone Ridge, NY (breeding)'},
   // Inotiv / Envigo RMS
-  {path:[[40.4588,-86.9297],[37.5004,-78.2469]], label:'Inotiv: West Lafayette, IN (HQ) ↔ Envigo, Cumberland, VA'},
+  {path:[[40.4588,-86.9297],[37.5004,-78.2469]], color:'#d500f9', label:'Inotiv: West Lafayette, IN (HQ) ↔ Envigo, Cumberland, VA'},
+  // Capital — disclosed largest shareholders -> Charles River (Wilmington, MA)
+  {path:[[40.0521,-75.5069],[42.5955,-71.1579]], color:'#7c4dff', label:'Vanguard (7.38%) → Charles River Laboratories'},
+  {path:[[40.7545,-74.0001],[42.5955,-71.1579]], color:'#7c4dff', label:'BlackRock → Charles River Laboratories'},
+  {path:[[42.3604,-71.0580],[42.5955,-71.1579]], color:'#7c4dff', label:'State Street → Charles River Laboratories'},
+  {path:[[42.3513,-71.0537],[42.5955,-71.1579]], color:'#7c4dff', label:'Fidelity / FMR → Charles River Laboratories'},
+  {path:[[42.3545,-71.0572],[42.5955,-71.1579]], color:'#7c4dff', label:'Wellington Management → Charles River Laboratories'},
 ];
 var animalNetLayer = L.layerGroup();
 animalNetPaths.forEach(function(t) {
   var line = L.polyline(t.path, {
-    color: '#d500f9',
+    color: t.color || '#d500f9',
     weight: 2,
     opacity: 0.6,
     dashArray: '4,6'
