@@ -9,6 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const ACCESS_COOKIE = 'b0b_access';
 const ACCESS_PASSWORD = process.env.B0B_ACCESS_PASSWORD || 'never2501';
+const ACCESS_SUBJECT = 'b0b';
 const ACCESS_TTL_SECONDS = 60 * 60 * 24;
 const COOKIE_SECRET = process.env.B0B_COOKIE_SECRET || crypto.randomBytes(32).toString('hex');
 
@@ -85,16 +86,29 @@ function safeEqual(a, b) {
   return crypto.timingSafeEqual(left, right);
 }
 
+// Access token modelled on cbuy's HMAC session scheme: the subject and an
+// absolute expiry are signed together, so the TTL is enforced cryptographically
+// server-side. A client cannot extend access by editing the cookie's Max-Age,
+// and a captured cookie stops working once the signed expiry passes.
+// Format: base64url(subject).base64url(expiryMs).base64url(HMAC-SHA256(sub.exp))
 function buildAccessToken() {
-  const payload = '1';
-  return `${payload}.${signValue(payload)}`;
+  const sub = Buffer.from(ACCESS_SUBJECT, 'utf8').toString('base64url');
+  const exp = Buffer.from(String(Date.now() + ACCESS_TTL_SECONDS * 1000), 'utf8').toString('base64url');
+  const sig = signValue(`${sub}.${exp}`);
+  return `${sub}.${exp}.${sig}`;
 }
 
 function isValidAccessToken(token) {
   if (!token || typeof token !== 'string') return false;
-  const [payload, signature] = token.split('.');
-  if (!payload || !signature) return false;
-  return safeEqual(signature, signValue(payload));
+  const parts = token.split('.');
+  if (parts.length !== 3) return false;
+  const [sub, exp, sig] = parts;
+  if (!sub || !exp || !sig) return false;
+  // Verify signature first (timing-safe), then enforce the signed expiry.
+  if (!safeEqual(sig, signValue(`${sub}.${exp}`))) return false;
+  const expiryMs = Number(Buffer.from(exp, 'base64url').toString('utf8'));
+  if (!Number.isFinite(expiryMs) || Date.now() > expiryMs) return false;
+  return true;
 }
 
 function hasAccess(req) {
