@@ -1192,6 +1192,21 @@ var locations = [
   {name:"Inotiv — HQ, West Lafayette, IN",lat:40.4588,lng:-86.9297,section:"XV",type:"animal-research",ctx:"Inotiv, Inc. (formerly BASi) — 2701 Kent Ave, West Lafayette, IN. Parent company of Envigo RMS. Source: Inotiv (Wikipedia)."},
   {name:"Envigo / Inotiv — Cumberland, VA (approx.)",lat:37.5004,lng:-78.2469,section:"XV",type:"animal-research",ctx:"Envigo RMS beagle-breeding facility, Cumberland County, VA. ~4,000 beagles relinquished to the Humane Society (2022). Inotiv pleaded guilty to Animal Welfare Act violations and agreed to pay 35M+ — the largest AWA penalty in U.S. history (2024). FOLLOW THE MONEY: Inotiv (Nasdaq: NOTV) filed prepackaged Chapter 11 on June 3, 2026 with a 65.5M debtor-in-possession loan, cutting funded debt from ~488.7M to ~163.3M; existing shareholders wiped out. WHO ENDS UP OWNING IT: under the restructuring support agreement (June 2, 2026; U.S. Bankruptcy Court, S.D. Texas), the prepetition FIRST-LIEN LENDERS take ~93% of the reorganized company's new equity; the Ad Hoc Group of Noteholders (holders of the 15% second-lien PIK notes due 2027 and 3.25% convertible notes due 2027) provide the $65.4M DIP and receive minority equity + warrants. The filings name creditor classes, not individual funds (counsel: Davis Polk; claims agent: Kroll) — the fund identities live in the RSA exhibit / court docket. Pin at county level — exact parcel pending. Sources: U.S. DOJ; SEC 8-K & RSA; Davis Polk; Kroll (2026)."},
 
+  // ===== INTERNATIONAL BREEDER NETWORK + CROSSOVER =====
+  // Rodent-model giants
+  {name:"The Jackson Laboratory (JAX) — Bar Harbor, ME",lat:44.3653,lng:-68.1963,section:"XV",type:"animal-research",ctx:"The Jackson Laboratory — 600 Main St, Bar Harbor, Maine. Nonprofit; the world's largest supplier of laboratory mice (11,000+ genetic strains, 'JAX Mice'). Additional sites: Sacramento CA, Farmington CT, and Shanghai, China. Source: JAX; MarketsandMarkets."},
+  {name:"Taconic Biosciences — Rensselaer, NY (approx.)",lat:42.6431,lng:-73.7434,section:"XV",type:"animal-research",ctx:"Taconic Biosciences HQ, Rensselaer, NY. Major rodent-model breeder: 3 service labs + 6 breeding facilities across the U.S. and Europe (incl. Germany, Denmark), Asia distribution. Pin at town level. Source: Taconic; Mordor Intelligence."},
+  {name:"Janvier Labs — Le Genest-Saint-Isle, France",lat:48.0990,lng:-0.8869,section:"XV",type:"animal-research",ctx:"Janvier Labs — Le Genest-Saint-Isle, Mayenne, France. Leading European breeder of research rodents (mice/rats). Source: industry market reports."},
+  {name:"GemPharmatech — Nanjing, China",lat:32.0438,lng:118.7789,section:"XV",type:"animal-research",ctx:"GemPharmatech — Nanjing, Jiangsu, China. Large-scale Chinese mouse-model breeder (knockout/humanized strains); expanded to San Diego, CA (2025). Source: GemPharmatech; market reports."},
+  // Charles River global subsidiaries (corporate crossover)
+  {name:"Charles River — Vital River, Beijing, China",lat:39.9057,lng:116.3913,section:"XV",type:"animal-research",ctx:"Beijing Vital River Laboratory Animal Technology — Charles River's China joint venture / rodent-breeding arm. Part of CRL's Asia-Pacific production network. Source: Charles River; market reports."},
+  {name:"Charles River — Hylasco Bio-Technology, Hyderabad, India",lat:17.3606,lng:78.4741,section:"XV",type:"animal-research",ctx:"Hylasco Bio-Technology, Hyderabad — Charles River's India rodent-breeding subsidiary. Source: Charles River."},
+  {name:"Charles River — Kuopio, Finland",lat:62.8925,lng:27.6784,section:"XV",type:"animal-research",ctx:"Charles River facility, Kuopio, Finland (imaging-equipped preclinical site, 2025). CRL European production/discovery network. Source: Charles River (2025)."},
+  // Primate (macaque) supply chain — the DOJ smuggling case
+  {name:"Vanny Bio-Research — Pursat Province, Cambodia (approx.)",lat:12.5420,lng:103.9197,section:"XV",type:"animal-research",ctx:"Vanny Bio-Research macaque farm, Pursat Province, Cambodia. Center of the U.S. DOJ/USFWS long-tailed-macaque smuggling case (2022–2023): wild-caught, internationally protected macaques laundered with false 'captive-bred' labels. Cambodian wildlife officials indicted; CITES recommended a global ban on Cambodian macaque trade. Pin at province level. Sources: U.S. DOJ; Pulitzer Center; Bloomberg (2024)."},
+  {name:"Noveprim — Mauritius (Charles River 90%)",lat:-20.4111,lng:57.7061,section:"XV",type:"animal-research",ctx:"Noveprim Ltd, Mauritius — nonhuman-primate (long-tailed macaque) supplier. Charles River acquired a 90% controlling interest (Nov 2023). Undercover footage alleged wild capture of macaques before export. Source: PETA; Species Unite; CRL filings (2023)."},
+  {name:"Bioculture — Rivière des Anguilles, Mauritius",lat:-20.4621,lng:57.5556,section:"XV",type:"animal-research",ctx:"Bioculture (Mauritius) — long-tailed macaque breeder/exporter to U.S./European research. Part of the Mauritius primate-export node in the global lab-monkey supply chain. Source: Bloomberg 'Monkey Laundering' (2024)."},
+
   // ===== CAPITAL / FINANCING — who owns & funds the breeders =====
   // Disclosed largest shareholders of Charles River Laboratories (NYSE: CRL).
   // NOTE: much of this is passive index-fund ownership — these managers hold
@@ -3019,6 +3034,15 @@ var animalNetPaths = [
   // Government funding — federal awards -> Marshall BioResources (North Rose, NY)
   {path:[[38.8676,-77.2103],[43.2139,-76.9049]], color:'#7c4dff', label:'U.S. Dept of Defense → Marshall BioResources (~$1.84M federal awards)'},
   {path:[[39.0000,-77.1040],[43.2139,-76.9049]], color:'#7c4dff', label:'NIH / HHS → Marshall BioResources (~$415K direct; primary indirect funder)'},
+  // Corporate crossover — Charles River (Wilmington, MA) owns/controls global subsidiaries (magenta)
+  {path:[[42.5955,-71.1579],[39.9057,116.3913]], color:'#d500f9', label:'Charles River → Vital River (Beijing, China JV)'},
+  {path:[[42.5955,-71.1579],[17.3606,78.4741]], color:'#d500f9', label:'Charles River → Hylasco Bio-Technology (Hyderabad, India)'},
+  {path:[[42.5955,-71.1579],[62.8925,27.6784]], color:'#d500f9', label:'Charles River → Kuopio, Finland'},
+  {path:[[42.5955,-71.1579],[-20.4111,57.7061]], color:'#d500f9', label:'Charles River → Noveprim, Mauritius (90% acquired 2023)'},
+  // Primate (macaque) supply chain into U.S. research (orange)
+  {path:[[12.5420,103.9197],[42.5955,-71.1579]], color:'#ff6d00', label:'Vanny Bio-Research (Cambodia) → Charles River — macaque supply; DOJ/USFWS smuggling case, blocked at Dulles 2023'},
+  {path:[[-20.4111,57.7061],[42.5955,-71.1579]], color:'#ff6d00', label:'Noveprim (Mauritius) → Charles River — macaque supply + 2023 acquisition'},
+  {path:[[-20.4621,57.5556],[42.5955,-71.1579]], color:'#ff6d00', label:'Bioculture (Mauritius) → U.S. research — macaque export'},
 ];
 // Draw the animal-research / capital network paths into the SAME lineLayer as
 // every other connection, so they obey the "Connection Lines" toggle instead of
