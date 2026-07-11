@@ -532,6 +532,7 @@
   <div class="filter-item"><label><input type="checkbox" data-section="XIII"> XIII - Spiritual Exit</label></div>
   <div class="filter-item"><label><input type="checkbox" data-section="XIV"> XIV - Sports/Gambling</label></div>
   <div class="filter-item"><label><input type="checkbox" data-section="XV"> XV - Animal Testing</label></div>
+  <div class="filter-item"><label><input type="checkbox" data-section="XVI"> XVI - Data Centers</label></div>
   </div>
   </div>
   <!-- BY TYPE - collapsible, two-column -->
@@ -564,6 +565,7 @@
   <div class="filter-item"><label><input type="checkbox" data-type="sports-gambling"> Sports / Gambling</label></div>
   <div class="filter-item"><label><input type="checkbox" data-type="animal-research"> Animal Testing Labs</label></div>
   <div class="filter-item"><label><input type="checkbox" data-type="capital"> Capital / Finance</label></div>
+  <div class="filter-item"><label><input type="checkbox" data-type="datacenter"> Data Centers</label></div>
   </div>
   </div>
   <!-- MAP STYLE -->
@@ -800,6 +802,7 @@
   <div class="legend-item"><div class="legend-dot" style="background:#ffd740"></div> Sports / Gambling</div>
   <div class="legend-item"><div class="legend-dot" style="background:#d500f9"></div> Animal Testing Lab</div>
   <div class="legend-item"><div class="legend-dot" style="background:#7c4dff"></div> Capital / Financing</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#2962ff"></div> Data Center (⊃ ocean-based)</div>
   <div class="legend-item"><div style="width:24px;height:0;border-top:3px dashed #ff6600;margin-right:8px;flex-shrink:0"></div> Tunnel Path</div>
   <div class="legend-item"><div style="width:24px;height:0;border-top:3px dashed #cc00ff;margin-right:8px;flex-shrink:0"></div> Inner-Earth / Deep Route</div>
   <h3 style="margin-top:10px;color:#ff4444;font-size:0.7rem">LIVE FEEDS</h3>
@@ -1164,7 +1167,8 @@ var colorMap = {
   'technology': '#64ffda',
   'sports-gambling': '#ffd740',
   'animal-research': '#d500f9',
-  'capital': '#7c4dff'
+  'capital': '#7c4dff',
+  'datacenter': '#2962ff'
 };
 
 function makeIcon(color, size) {
@@ -1206,6 +1210,26 @@ var locations = [
   {name:"Vanny Bio-Research — Pursat Province, Cambodia (approx.)",lat:12.5420,lng:103.9197,section:"XV",type:"animal-research",ctx:"Vanny Bio-Research macaque farm, Pursat Province, Cambodia. Center of the U.S. DOJ/USFWS long-tailed-macaque smuggling case (2022–2023): wild-caught, internationally protected macaques laundered with false 'captive-bred' labels. Cambodian wildlife officials indicted; CITES recommended a global ban on Cambodian macaque trade. Pin at province level. Sources: U.S. DOJ; Pulitzer Center; Bloomberg (2024)."},
   {name:"Noveprim — Mauritius (Charles River 90%)",lat:-20.4111,lng:57.7061,section:"XV",type:"animal-research",ctx:"Noveprim Ltd, Mauritius — nonhuman-primate (long-tailed macaque) supplier. Charles River acquired a 90% controlling interest (Nov 2023). Undercover footage alleged wild capture of macaques before export. Source: PETA; Species Unite; CRL filings (2023)."},
   {name:"Bioculture — Rivière des Anguilles, Mauritius",lat:-20.4621,lng:57.5556,section:"XV",type:"animal-research",ctx:"Bioculture (Mauritius) — long-tailed macaque breeder/exporter to U.S./European research. Part of the Mauritius primate-export node in the global lab-monkey supply chain. Source: Bloomberg 'Monkey Laundering' (2024)."},
+
+  // ===== SECTION XVI: DATA CENTERS (land + ocean-based platforms) =====
+  // -- Ocean-based / offshore / floating --
+  {name:"Microsoft Project Natick — off Orkney, Scotland",lat:58.9370,lng:-3.3220,section:"XVI",type:"datacenter",ctx:"Project Natick — Microsoft's underwater data center, deployed on the seabed at the European Marine Energy Centre off Orkney, Scotland (2018), retrieved 2020. First proof-of-concept subsea DC; Microsoft concluded the program in 2024. Offshore point (approx). Source: Microsoft; Data Center Frontier."},
+  {name:"Highlander Hainan Underwater Data Center, China",lat:18.3000,lng:110.0300,section:"XVI",type:"datacenter",ctx:"World's first commercially scaled subsea data center cluster, off Lingshui/Sanya, Hainan, China (Highlander, 2023). ~1,433 tons of underwater hardware; capacity ~60,000 traditional computers. Backed by four Chinese authorities. Offshore point (approx). Source: DCD; E&T; Data Center Frontier."},
+  {name:"Shanghai Offshore Underwater Data Center, China",lat:30.9000,lng:122.2000,section:"XVI",type:"datacenter",ctx:"World's first offshore wind-powered underwater data center (announced 2025), ~24 MW, off the Shanghai coast — integrates green energy with subsea compute. Offshore point (approx). Source: Data Center Frontier (2025)."},
+  {name:"Nautilus Data Technologies (floating) — Stockton, CA",lat:37.9510,lng:-121.3266,section:"XVI",type:"datacenter",ctx:"Barge-mounted floating data center at the Port of Stockton, California — river-water cooled. Investors include Keppel Data Centres (Singapore). Source: Data Center Knowledge; Nautilus."},
+  {name:"Keppel Floating Data Center Park — Singapore",lat:1.2644,lng:103.8500,section:"XVI",type:"datacenter",ctx:"Keppel's nearshore floating data center park concept, Singapore — offshore siting to bypass land/power constraints. Offshore point (approx). Source: Keppel; industry reports."},
+  // -- Land hyperscale + surveillance --
+  {name:"NSA Utah Data Center — Bluffdale, UT",lat:40.4278,lng:-111.9358,section:"XVI",type:"datacenter",ctx:"Intelligence Community Comprehensive National Cybersecurity Initiative Data Center — the NSA's mass-data storage/processing facility at Camp Williams, Bluffdale, Utah (~1M+ sq ft, online 2014). Central to the post-Snowden bulk-surveillance debate. Source: public reporting."},
+  {name:"Ashburn 'Data Center Alley' — Loudoun County, VA",lat:39.0298,lng:-77.4744,section:"XVI",type:"datacenter",ctx:"Ashburn/Loudoun County, Virginia — the world's densest data-center cluster ('Data Center Alley'); a large share of global internet traffic transits here. Northern Virginia + Greater Beijing ≈ 20% of world hyperscale capacity. Source: Synergy Research; Data Center Frontier."},
+  {name:"Switch Citadel Campus — Tahoe Reno, NV",lat:39.5560,lng:-119.4903,section:"XVI",type:"datacenter",ctx:"Switch 'Citadel' campus, Tahoe Reno Industrial Center, Storey County, NV — largest operational data center by floor area (~7.2M sq ft, 650 MW). Source: Data Center Frontier."},
+  {name:"Stargate AI Campus — Abilene, TX",lat:32.4465,lng:-99.7476,section:"XVI",type:"datacenter",ctx:"'Stargate' (OpenAI / Oracle / Microsoft-linked) AI supercomputer campus, Abilene, Texas — targeting ~1.2 GW at Phase 1, set to exceed Switch Citadel. Source: Data Center Frontier (2025)."},
+  {name:"Google Data Center — The Dalles, OR",lat:45.6015,lng:-121.1842,section:"XVI",type:"datacenter",ctx:"Google's flagship Columbia River data center, The Dalles, Oregon (since 2006) — hydro-powered. Source: Google; Synergy Research."},
+  {name:"Meta Data Center — Prineville, OR",lat:44.3035,lng:-120.8464,section:"XVI",type:"datacenter",ctx:"Meta (Facebook) Prineville, Oregon campus — one of its first owned hyperscale data centers; Apple also operates in Prineville. Source: Meta; industry reports."},
+  {name:"Google Data Center — Council Bluffs, IA",lat:41.2588,lng:-95.8519,section:"XVI",type:"datacenter",ctx:"Google Council Bluffs, Iowa — among Google's largest U.S. campuses. Iowa is a top-5 global hyperscale market. Source: Synergy Research."},
+  {name:"Meta Data Center — Luleå, Sweden",lat:65.5831,lng:22.1460,section:"XVI",type:"datacenter",ctx:"Meta's Luleå, Sweden data center near the Arctic Circle — free-air cooling, hydro power. Europe's flagship hyperscale node. Source: Meta."},
+  {name:"Google Data Center — Hamina, Finland",lat:60.5683,lng:27.1926,section:"XVI",type:"datacenter",ctx:"Google Hamina, Finland — built in a former paper mill; seawater-cooled from the Gulf of Finland. Source: Google."},
+  {name:"Ulanqab / Hohhot Hyperscale Corridor, Inner Mongolia",lat:40.9903,lng:113.1316,section:"XVI",type:"datacenter",ctx:"Ulanqab–Hohhot corridor, Inner Mongolia — the single largest concentration of hyperscale capacity on Earth (>3,000 MW: China Mobile, Alibaba, ByteDance, Baidu, Tencent, China Telecom) under Beijing's 'East Data, West Computing' plan. Source: Data Center Frontier; Synergy Research."},
+  {name:"Lefdal Mine Datacenter — Nordfjord, Norway",lat:61.7900,lng:5.7700,section:"XVI",type:"datacenter",ctx:"Data center inside the former Lefdal olivine mine, Nordfjord, Norway — fjord-water cooled, hydro-powered, deep underground. Source: Lefdal Mine; industry reports. Pin approximate."},
 
   // ===== CAPITAL / FINANCING — who owns & funds the breeders =====
   // Disclosed largest shareholders of Charles River Laboratories (NYSE: CRL).
