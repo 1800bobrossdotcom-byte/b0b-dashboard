@@ -533,6 +533,7 @@
   <div class="filter-item"><label><input type="checkbox" data-section="XIV"> XIV - Sports/Gambling</label></div>
   <div class="filter-item"><label><input type="checkbox" data-section="XV"> XV - Animal Testing</label></div>
   <div class="filter-item"><label><input type="checkbox" data-section="XVI"> XVI - Data Centers</label></div>
+  <div class="filter-item"><label><input type="checkbox" data-section="XIX"> XIX - Epstein Network</label></div>
   </div>
   </div>
   <!-- BY TYPE - collapsible, two-column -->
@@ -564,6 +565,7 @@
   <div class="filter-item"><label><input type="checkbox" data-type="technology"> Technology</label></div>
   <div class="filter-item"><label><input type="checkbox" data-type="sports-gambling"> Sports / Gambling</label></div>
   <div class="filter-item"><label><input type="checkbox" data-type="animal-research"> Animal Testing Labs</label></div>
+  <div class="filter-item"><label><input type="checkbox" data-type="epstein-network"> Epstein Network</label></div>
   <div class="filter-item"><label><input type="checkbox" data-type="capital"> Capital / Finance</label></div>
   <div class="filter-item"><label><input type="checkbox" data-type="datacenter"> Data Centers</label></div>
   </div>
@@ -1168,7 +1170,8 @@ var colorMap = {
   'sports-gambling': '#ffd740',
   'animal-research': '#d500f9',
   'capital': '#7c4dff',
-  'datacenter': '#2962ff'
+  'datacenter': '#2962ff',
+  'epstein-network': '#ff1744'
 };
 
 function makeIcon(color, size) {
@@ -1183,6 +1186,17 @@ function makeIcon(color, size) {
 
 // ===================== LOCATION DATA =====================
 var locations = [
+  // ===== SECTION XIX: Epstein-Maxwell Network (documents-grounded; intel reading = labeled hypothesis) =====
+  {name:"9 East 71st Street Townhouse, NYC",lat:40.7716,lng:-73.9663,section:"XIX",type:"epstein-network",ctx:"Former Herbert N. Straus mansion, one of the largest private residences in Manhattan. Its use passed to Epstein via Leslie Wexner / L Brands in the 1990s. Named in victim testimony; sold 2021. Appears throughout the House Oversight EFTA email release as Epstein's operational base. Sources: NYT; USVI filings; House Oversight EFTA release."},
+  {name:"Zorro Ranch, Stanley, New Mexico",lat:35.1466,lng:-105.98,section:"XIX",type:"epstein-network",ctx:"~10,000 acres held through Epstein entities (Cypress Inc. / NES LLC). Named in victim testimony and New Mexico AG inquiries. Sources: NYT; NM AG."},
+  {name:"Little St. James, USVI (LSJ)",lat:18.301,lng:-64.825,section:"XIX",type:"epstein-network",ctx:"Epstein's private island, central to the trafficking allegations. USVI v. Epstein estate settled for ~$105M (2022). Source: USVI Dept. of Justice."},
+  {name:"Great St. James, USVI",lat:18.306,lng:-64.813,section:"XIX",type:"epstein-network",ctx:"Adjacent island Epstein acquired in 2016. Source: USVI filings."},
+  {name:"358 El Brillo Way, Palm Beach",lat:26.6853,lng:-80.0388,section:"XIX",type:"epstein-network",ctx:"Site of the 2005-06 Palm Beach Police investigation whose federal handling became the 2008 non-prosecution agreement (see Acosta). Sources: Palm Beach PD; DOJ OPR report (2020)."},
+  {name:"22 Avenue Foch, Paris",lat:48.8719,lng:2.283,section:"XIX",type:"epstein-network",ctx:"Epstein's Paris apartment, referenced in the French judicial investigation connected to Jean-Luc Brunel. Source: Paris Prosecutor (OCRVP)."},
+  {name:"Carbyne (Reporty) HQ, Tel Aviv",lat:32.0743,lng:34.792,section:"XIX",type:"epstein-network",ctx:"Israeli emergency-call-routing / caller-geolocation surveillance-tech firm. Epstein was an investor; former Israeli PM Ehud Barak chaired it. A documented Epstein-Barak-surveillance-tech tie and a key node of the HYPOTHESIS layer. Sources: Bloomberg; Haaretz; MintPress."},
+  {name:"Apollo Global Management (Leon Black), 9 W 57th St",lat:40.7638,lng:-73.9772,section:"XIX",type:"epstein-network",ctx:"Apollo founder Leon Black paid Epstein ~$158M (2012-2017) for tax/estate structuring, per the independent Dechert LLP review (2021); Black later stepped down as Apollo CEO. In-corpus: Epstein family-office threads reference Apollo stock and ~$190M cash. This is established public record (a payment), not an adjudicated crime. Sources: Dechert review (2021); SEC; NYT."},
+  {name:"MIT Media Lab, Cambridge",lat:42.3608,lng:-71.0872,section:"XIX",type:"epstein-network",ctx:"Accepted Epstein-linked donations; director Joi Ito resigned in 2019 after reporting (Ronan Farrow, The New Yorker) that the Lab concealed Epstein's gifts. Source: The New Yorker; MIT / Goodwin Procter report (2020)."},
+  {name:"MC2 Model Management (Jean-Luc Brunel), Paris",lat:48.8656,lng:2.3212,section:"XIX",type:"epstein-network",ctx:"Modeling agency seeded with ~$1M from Epstein. Brunel was charged in France with rape of minors and died in La Sante prison in Feb 2022. jmail topic tag: 'Conspiring w/ Brunel'. Sources: Paris Prosecutor; AFP."},
   // ===== SECTION XV: Animal Experimentation Networks =====
   // Marshall BioResources (Marshall Farms) — global purpose-bred research-animal network.
   {name:"Marshall BioResources — North Rose, NY (HQ)",lat:43.2139,lng:-76.9049,section:"XV",type:"animal-research",ctx:"Marshall BioResources / Marshall Farms — 5800 Lake Bluff Road, Town of Huron, Wayne County, NY. Global breeder of purpose-bred research animals: the 'Marshall Beagle' line since 1962, plus ferrets, cats and Göttingen minipigs. Reported ~66,000 animals incl. 20,000+ beagles. Advocates cite 20+ Animal Welfare Act citations over the years; 3-day protest May 2026 (Beagle Lovers & Rescuers; Against All Oddz). Company states its May 2026 unannounced USDA inspection returned no citations. FOLLOW THE MONEY: privately held / family-owned (Marshall Farms Group Ltd, founded 1939) — no public shareholders; revenue is customer sales (pharma/CRO) plus U.S. federal contracts. Direct federal awards total 2.36M across 193 transactions (USAspending, all years): DoD 1.84M, HHS/NIH 415K, VA 77K, USDA 23K — the DoD military-medical share is the largest. The far bigger flow is indirect: NIH grant money funds the university/pharma research that then buys Marshall animals. Sources: 13WHAM; Wikipedia; USAspending.gov (UEI DVGAR51JKM99)."},
@@ -3115,6 +3129,20 @@ var connectionLines = [
   [[40.7481,-73.9939],[40.7068,-74.013],'#ffd740','NYPD used Clearview AI facial recognition [customer] — BuzzFeed News; NYPD disclosures'],
   // ===== CORRELATION / CONNECTIVE TISSUE =====
   [[46.2247,6.1922],[46.7978,9.827],'#00e5ff','WEF hosts its Annual Meeting at the Davos Congress Centre [operator] — World Economic Forum'],
+  // ===== EPSTEIN NETWORK EDGES (documented ties) =====
+  [[40.0812,-82.8085],[40.7716,-73.9663],'#ff1744','Wexner / L Brands to Epstein — townhouse & original fortune (documented)'],
+  [[40.7716,-73.9663],[18.301,-64.825],'#ff1744','Epstein operational network'],
+  [[40.7716,-73.9663],[26.6853,-80.0388],'#ff1744','Epstein operational network'],
+  [[40.7716,-73.9663],[35.1466,-105.98],'#ff1744','Epstein operational network'],
+  [[40.7716,-73.9663],[48.8719,2.283],'#ff1744','Epstein operational network'],
+  [[18.301,-64.825],[18.306,-64.813],'#ff1744','Adjacent island purchase (2016)'],
+  [[40.7716,-73.9663],[40.7638,-73.9772],'#ff1744','Leon Black paid Epstein ~$158M (Dechert review, 2021)'],
+  [[40.7716,-73.9663],[42.3608,-71.0872],'#ff1744','Epstein donations; MIT Media Lab director resigned 2019'],
+  [[40.7716,-73.9663],[42.377,-71.1167],'#ff1744','Epstein donations (~$9M); office at Program for Evolutionary Dynamics'],
+  [[40.7716,-73.9663],[32.0743,34.792],'#ff1744','Epstein investor; Barak chair — surveillance-tech [HYPOTHESIS layer]'],
+  [[32.0743,34.792],[48.2082,16.3738],'#ff1744','ex-Mossad private-intel nexus; Barak-Epstein \'cube\' correspondence [HYPOTHESIS]'],
+  [[40.7716,-73.9663],[40.7127,-74.0134],'#ff1744','Correspondence in the House Oversight EFTA release'],
+  [[48.8719,2.283],[48.8656,2.3212],'#ff1744','Brunel / MC2 — Epstein-funded modeling agency; \'Conspiring w/ Brunel\''],
 ];
 
 var lineLayer = L.layerGroup(); // starts hidden in Terra Nullius mode
