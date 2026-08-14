@@ -1,9 +1,9 @@
 {
-  "generated": "2026-08-14T15:36:24.697Z",
+  "generated": "2026-08-14T16:17:38.978Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "f7f019e760604d50d80e5e217bbbf9802293c25b1cbc60c2786e7bf9ac31a3bc",
+  "fullFileHash": "6506cf4ba855f8461159cf88607540be9d7ec04e1814639e1151d7239493a4e0",
   "sectionBlocks": [
     {
       "id": "_preamble",
@@ -17,18 +17,18 @@
     },
     {
       "id": "II",
-      "hash": "1e1e2fece49cdccba7874db0f2acbf6f33847e3b1ca73266bd77085d28478b97",
-      "length": 45348
+      "hash": "7117588b417c852b1f5510f9e1f7e1e93bf1f8c0ac1f6a02b6186ce2e7003a08",
+      "length": 45238
     },
     {
       "id": "III",
-      "hash": "7aca9bf28f7866aa5c12a170046254d66cc5a79859788a8d01ea26d3dd4b25e3",
-      "length": 24708
+      "hash": "33cceb02fd33ef841c88730905b9de88ec81fa94d76406c0a46b23b0a1240ec2",
+      "length": 24715
     },
     {
       "id": "IV",
-      "hash": "c33c7df359a5c3be49d94d17e41323c114aefbe1800351c4e4d17bd40ad722f3",
-      "length": 31868
+      "hash": "fb7ee953797fd6c7eaf87bb934fc3bd7a418454d8d888a98df549e923d5accf4",
+      "length": 31926
     },
     {
       "id": "V",
@@ -97,8 +97,8 @@
     },
     {
       "id": "XVIII",
-      "hash": "e2e0b94cac48702d58ecd76aabadb4f463355a3f9164313b08a06c47462e645f",
-      "length": 44600
+      "hash": "a857db3adeb0a517693f8fbcae5e7a302a9efaddf804ee459900f2d7e1b5ac55",
+      "length": 44615
     },
     {
       "id": "XIX",
@@ -219,9 +219,9 @@
     },
     {
       "index": 15,
-      "hash": "82f03e938cd0e568763565cff125c7a1d3246074975c95e0c5c976751603df9b",
+      "hash": "32146105b3b45e83d41ce56f3c53266656c64b0e259c71de37487553a5f7df1c",
       "preview": "Still silent - stated precisely. The email corpus does not contain the origin st...",
-      "length": 1699
+      "length": 1593
     },
     {
       "index": 16,
@@ -333,9 +333,9 @@
     },
     {
       "index": 34,
-      "hash": "0589576917a9f0a80cf436e3cc3ea913c966f486e57b6a628d94d4feb924ba64",
+      "hash": "935d17bd279c88d670d4a00e5bf2feac6618dd58b7b0de12cbe6a5a6b59e6532",
       "preview": "Return to the six-degrees finding (Section III) and read it through this fork. T...",
-      "length": 1189
+      "length": 1185
     },
     {
       "index": 35,
@@ -519,9 +519,9 @@
     },
     {
       "index": 65,
-      "hash": "d1bd1fb588561c435fee9230f9abe21244ee853f0331b3da2264d16543529e03",
+      "hash": "04ee3c6c30ba08157d72f94e45f2f9c3aa974e0213e851d704281654a19f728a",
       "preview": "The honest sentence, and why the node earns its place. The most the record suppo...",
-      "length": 1100
+      "length": 1103
     },
     {
       "index": 66,
