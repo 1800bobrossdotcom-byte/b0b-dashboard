@@ -1,9 +1,9 @@
 {
-  "generated": "2026-08-14T13:41:56.384Z",
+  "generated": "2026-08-14T13:52:05.230Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "beff9795a4a75fd77941181ab7cfb01421b0d6c85941eb527cd5319edbbe4acc",
+  "fullFileHash": "6b19b61188eafa53242d4a76c28b38a8dad81de0d0664032a9f1d8c77458a9ed",
   "sectionBlocks": [
     {
       "id": "_preamble",
@@ -47,8 +47,8 @@
     },
     {
       "id": "VIII",
-      "hash": "c9cced6e325f4a7f46f636cbd0ac9401af865a65fe1538e5f77abfd72aea9eeb",
-      "length": 13774
+      "hash": "11fe1e4750d1d1afa849923e3acc42cd3c282c797f9a3303da04ddfc3c36e85d",
+      "length": 15008
     },
     {
       "id": "IX",
@@ -993,9 +993,9 @@
     },
     {
       "index": 144,
-      "hash": "3271c97d44e2b3f8109685aa8ebe30a60aa37c9c57d39dd6a08dbce997cb0879",
+      "hash": "871c21ec4ed809e810d331ec54243e9ffa07cf37759bc27bafca216d9ffa8f21",
       "preview": "This section argues that control of a network runs through its governance chokep...",
-      "length": 361
+      "length": 778
     },
     {
       "index": 145,
