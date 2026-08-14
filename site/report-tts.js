@@ -104,6 +104,11 @@
     var playing = false;
     var voices = [];
     var chosenVoice = null;
+    // Generation token: speechSynthesis.cancel() fires the in-flight utterance's
+    // onend/onerror. Every speakCurrent() bumps this; a callback whose captured
+    // token is stale is ignored, so cancel-fired events can't double-advance.
+    var speakSeq = 0;
+    var keepAlive = null;  // Chromium long-read keep-alive timer
 
     var rate = parseFloat(localStorage.getItem(LS_RATE));
     if (!(rate >= 0.5 && rate <= 2)) rate = 0.92; // measured audiobook pace — less rushed reads less robotic
@@ -211,6 +216,7 @@
     // ---- core: speak the current chunk ------------------------------------
     function speakCurrent() {
       window.speechSynthesis.cancel();
+      var mySeq = ++speakSeq; // this call now owns the queue; older callbacks go stale
       if (idx >= blocks.length) { finish(); return; }
       var b = blocks[idx];
       if (chunkIdx >= b.chunks.length) { // advance to next block
@@ -229,7 +235,8 @@
       u.pitch = 1.0;   // natural pitch; a warmer, less clipped read than a lowered robot tone
       u.lang = (chosenVoice && chosenVoice.lang) || 'en-GB';
       u.onend = function () {
-        if (!playing) return;
+        // Ignore events from a cancelled/superseded utterance (see speakSeq).
+        if (mySeq !== speakSeq || !playing) return;
         chunkIdx++;
         if (chunkIdx >= blocks[idx].chunks.length) {
           clearHighlight(blocks[idx].el);
@@ -238,9 +245,11 @@
         if (idx >= blocks.length) { finish(); return; }
         speakCurrent();
       };
-      u.onerror = function () {
-        if (!playing) return;
-        // Skip a problematic chunk rather than stalling.
+      u.onerror = function (ev) {
+        if (mySeq !== speakSeq || !playing) return;
+        // "interrupted"/"canceled" are our own cancels — never treat as a fault.
+        if (ev && (ev.error === 'interrupted' || ev.error === 'canceled')) return;
+        // Skip a genuinely problematic chunk rather than stalling.
         chunkIdx++;
         if (chunkIdx >= blocks[idx].chunks.length) { idx++; chunkIdx = 0; }
         if (idx >= blocks.length) { finish(); return; }
@@ -249,16 +258,32 @@
       window.speechSynthesis.speak(u);
     }
 
+    // Chromium silently halts speechSynthesis after ~15s of continuous output,
+    // even across a queue. A periodic pause()+resume() nudge keeps it running.
+    function startKeepAlive() {
+      stopKeepAlive();
+      keepAlive = setInterval(function () {
+        if (playing && window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
+          window.speechSynthesis.pause();
+          window.speechSynthesis.resume();
+        }
+      }, 10000);
+    }
+    function stopKeepAlive() { if (keepAlive) { clearInterval(keepAlive); keepAlive = null; } }
+
     // ---- transport ---------------------------------------------------------
     function play() {
       if (idx >= blocks.length) idx = 0;
       playing = true;
       elPlay.textContent = '⏸'; // pause glyph
+      startKeepAlive();
       speakCurrent();
     }
     function pause() {
       playing = false;
       elPlay.textContent = '▶';
+      stopKeepAlive();
+      ++speakSeq;                    // invalidate the in-flight utterance's callbacks
       window.speechSynthesis.cancel();
       setStatus('Paused — ' + shortLabel());
     }
@@ -266,6 +291,8 @@
     function stop() {
       playing = false;
       elPlay.textContent = '▶';
+      stopKeepAlive();
+      ++speakSeq;
       window.speechSynthesis.cancel();
       if (blocks[idx]) clearHighlight(blocks[idx].el);
       idx = 0; chunkIdx = 0;
@@ -292,14 +319,15 @@
       reveal(blocks[idx].el);
       restartIfPlaying(true);
     }
-    function restartIfPlaying(alwaysReveal) {
-      if (blocks[idx] && (alwaysReveal || true)) reveal(blocks[idx].el);
+    function restartIfPlaying() {
+      if (blocks[idx]) reveal(blocks[idx].el);
       if (playing) speakCurrent();
       else { highlight(blocks[idx].el); scrollTo(blocks[idx].el); updateStatus(); }
     }
     function finish() {
       playing = false;
       elPlay.textContent = '▶';
+      stopKeepAlive();
       if (blocks[blocks.length - 1]) clearHighlight(blocks[blocks.length - 1].el);
       idx = 0; chunkIdx = 0;
       setStatus('Finished — end of report');
@@ -396,9 +424,11 @@
     // so we re-add via MutationObserver, exactly like the share-link buttons.
     function startAt(blockIndex) {
       showPlayer();
-      if (playing) window.speechSynthesis.cancel();
+      ++speakSeq;                    // retire any in-flight callbacks before jumping
+      window.speechSynthesis.cancel();
       if (lastHi) clearHighlight(lastHi);
       idx = blockIndex; chunkIdx = 0;
+      playing = false;               // force play() to (re)start cleanly
       play();
     }
 
@@ -468,17 +498,28 @@
   // clause boundaries so no single utterance risks the Chromium long-read cutoff.
   function chunk(text) {
     var out = [];
+    function pushWrapped(s) {
+      // Final safety net: a clause with no comma/semicolon still can't exceed the
+      // cap — hard-wrap on word boundaries so no utterance risks the ~15s cutoff.
+      while (s.length > 180) {
+        var cut = s.lastIndexOf(' ', 180);
+        if (cut < 60) cut = 180; // no space found early enough — force a break
+        out.push(s.slice(0, cut).trim());
+        s = s.slice(cut).trim();
+      }
+      if (s) out.push(s);
+    }
     var sentences = text.match(/[^.!?…]+[.!?…]+["'”’)]?|\S[^.!?…]*$/g) || [text];
     sentences.forEach(function (s) {
       s = s.trim();
       if (!s) return;
-      if (s.length <= 220) { out.push(s); return; }
+      if (s.length <= 160) { out.push(s); return; }
       var buf = '';
       s.split(/(?<=[,;:—])\s+/).forEach(function (part) {
-        if ((buf + ' ' + part).trim().length > 220 && buf) { out.push(buf.trim()); buf = part; }
+        if ((buf + ' ' + part).trim().length > 160 && buf) { pushWrapped(buf.trim()); buf = part; }
         else { buf = (buf ? buf + ' ' : '') + part; }
       });
-      if (buf.trim()) out.push(buf.trim());
+      if (buf.trim()) pushWrapped(buf.trim());
     });
     return out.length ? out : [text];
   }
