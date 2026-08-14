@@ -390,6 +390,63 @@
     // resumed tab doesn't wedge. Also stop cleanly on unload.
     window.addEventListener('beforeunload', function () { window.speechSynthesis.cancel(); });
 
+    // ---- per-section "listen from here" buttons ---------------------------
+    // Jump narration to any section heading. Self-heals: the i18n layer resets
+    // heading textContent on load / language change (which strips our button),
+    // so we re-add via MutationObserver, exactly like the share-link buttons.
+    function startAt(blockIndex) {
+      showPlayer();
+      if (playing) window.speechSynthesis.cancel();
+      if (lastHi) clearHighlight(lastHi);
+      idx = blockIndex; chunkIdx = 0;
+      play();
+    }
+
+    // Map each heading element to its position in the narration order.
+    function makeListen(h) {
+      if (!h.dataset || h.querySelector('button.tts-jump')) return;
+      var index = -1;
+      for (var i = 0; i < blocks.length; i++) { if (blocks[i].el === h) { index = i; break; } }
+      if (index < 0) return;
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'tts-jump';
+      b.title = 'Listen from this section';
+      b.setAttribute('aria-label', 'Listen from this section');
+      b.textContent = '🔊';
+      b.style.cssText = 'margin-left:8px;background:none;border:1px solid rgba(0,255,65,.4);' +
+        'color:#00ff41;border-radius:5px;cursor:pointer;font-size:.6em;padding:2px 7px;' +
+        'vertical-align:middle;opacity:.55;transition:opacity .2s;';
+      b.addEventListener('mouseenter', function () { b.style.opacity = '1'; });
+      b.addEventListener('mouseleave', function () { b.style.opacity = '.55'; });
+      b.addEventListener('click', function (e) {
+        e.preventDefault(); e.stopPropagation();
+        startAt(index);
+      });
+      h.appendChild(b);
+    }
+    function addListenButtons() {
+      for (var i = 0; i < blocks.length; i++) {
+        if (/^H2$/i.test(blocks[i].el.tagName)) makeListen(blocks[i].el);
+      }
+    }
+    addListenButtons();
+    // Re-add when i18n rewrites a heading (childList change wipes the button).
+    try {
+      var mo = new MutationObserver(function (muts) {
+        var need = false;
+        muts.forEach(function (m) {
+          if (m.type === 'childList' && m.target && m.target.matches && m.target.matches('h2[id]')) need = true;
+        });
+        if (need) setTimeout(addListenButtons, 0);
+      });
+      for (var k = 0; k < blocks.length; k++) {
+        if (/^H2$/i.test(blocks[k].el.tagName)) mo.observe(blocks[k].el, { childList: true });
+      }
+    } catch (e) { /* MutationObserver unavailable — buttons still work, just no self-heal */ }
+    window.addEventListener('message', function () { setTimeout(addListenButtons, 60); });
+    window.addEventListener('load', addListenButtons);
+
     // Reveal the FAB now that everything is wired.
     fab.classList.remove('hidden');
   }
