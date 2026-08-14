@@ -34,8 +34,8 @@
       position: relative;
       z-index: 1003;
     }
-    .header h1 { color: #00ff41; font-size: 1.1rem; letter-spacing: 2px; white-space: nowrap; }
-    .header nav { display: flex; gap: 8px; align-items: center; }
+    .header h1 { color: #00ff41; font-size: 1.1rem; letter-spacing: 2px; white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+    .header nav { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
     .header nav a {
       color: #00ccff;
       text-decoration: none;
