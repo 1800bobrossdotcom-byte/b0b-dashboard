@@ -148,13 +148,14 @@ var EN={
 'report.sect.XII':'XII. Organized Crime',
 'report.sect.XIII':'XIII. Cross-Reference Index',
 'report.sect.XIV':'XIV. Calibration Index',
-'report.sect.XV':'XV. Spiritual Reclamation',
-'report.sect.XVI':'XVI. The Signal',
-'report.sect.XVII':'XVII. Compute Substrate',
-'report.sect.XVIII':'XVIII. Connective Tissue',
-'report.sect.XIX':'XIX. Epstein Network',
-'report.sect.XX':'XX. Seam Analysis',
-'report.sect.XXI':'XXI. Blowback',
+'report.sect.XXI':'XXI. Spiritual Reclamation',
+'report.sect.XXII':'XXII. The Signal',
+'report.sect.XV':'XV. Compute Substrate',
+'report.sect.XVI':'XVI. Connective Tissue',
+'report.sect.XVII':'XVII. Epstein Network',
+'report.sect.XVIII':'XVIII. Seam Analysis',
+'report.sect.XIX':'XIX. Blowback',
+'report.sect.XX':'XX. The Maxwell Template',
 // --- REPORT FULL HEADINGS ---
 'report.h.I':'I. Purpose & Framework',
 'report.h.II':'II. The Control Architecture - Structures of Long-Lead Dominion',
@@ -170,8 +171,8 @@ var EN={
 'report.h.XII':'XII. Organized Crime as Infrastructure - The Cartel-Intelligence-Banking Nexus',
 'report.h.XIII':'XIII. Cross-Reference Index',
 'report.h.XIV':'XIV. Calibration Index - High-Connectivity Individuals',
-'report.h.XV':'XV. Spiritual Reclamation - The Counter-Architecture',
-'report.h.XVI':'XVI. Sending the Signal - Contact & Maximum Assistance',
+'report.h.XXI':'XXI. Spiritual Reclamation - The Counter-Architecture',
+'report.h.XXII':'XXII. Sending the Signal - Contact & Maximum Assistance',
 // --- MAP LEGEND ---
 'map.markerColors':'MARKER COLORS'
 };
@@ -227,7 +228,7 @@ es:{
 'report.expandAll':'EXPANDIR TODO',
 'report.collapseAll':'CONTRAER TODO',
 'report.aiVirus':'INFORME VIRUS IA',
-'report.sect.I':'I. Prop\u00f3sito y Marco','report.sect.II':'II. Arquitectura de Control','report.sect.III':'III. Umbral del 51%','report.sect.IV':'IV. Subterr\u00e1neo / D.U.M.B.','report.sect.V':'V. Vigilancia y Tecnolog\u00eda','report.sect.VI':'VI. El Patr\u00f3n "Nuevo"','report.sect.VII':'VII. Enclaves','report.sect.VIII':'VIII. Patrones C\u00edclicos','report.sect.IX':'IX. Sistemas de Esclavitud','report.sect.X':'X. Conflictos','report.sect.XI':'XI. Patrones FOIA','report.sect.XII':'XII. Crimen Organizado','report.sect.XIII':'XIII. \u00cdndice de Referencia Cruzada','report.sect.XIV':'XIV. \u00cdndice de Calibraci\u00f3n','report.sect.XV':'XV. Reclamaci\u00f3n Espiritual','report.sect.XVI':'XVI. La Se\u00f1al',
+'report.sect.I':'I. Prop\u00f3sito y Marco','report.sect.II':'II. Arquitectura de Control','report.sect.III':'III. Umbral del 51%','report.sect.IV':'IV. Subterr\u00e1neo / D.U.M.B.','report.sect.V':'V. Vigilancia y Tecnolog\u00eda','report.sect.VI':'VI. El Patr\u00f3n "Nuevo"','report.sect.VII':'VII. Enclaves','report.sect.VIII':'VIII. Patrones C\u00edclicos','report.sect.IX':'IX. Sistemas de Esclavitud','report.sect.X':'X. Conflictos','report.sect.XI':'XI. Patrones FOIA','report.sect.XII':'XII. Crimen Organizado','report.sect.XIII':'XIII. \u00cdndice de Referencia Cruzada','report.sect.XIV':'XIV. \u00cdndice de Calibraci\u00f3n','report.sect.XXI':'XXI. Reclamaci\u00f3n Espiritual','report.sect.XXII':'XXII. La Se\u00f1al',
 'report.h.I':'I. Propósito y Marco',
 'report.h.II':'II. La Arquitectura de Control – Estructuras de Dominio a Largo Plazo',
 'report.h.III':'III. El Umbral del 51% – Nash, Bitcoin y la Gobernanza como Teoría de Redes',
@@ -242,8 +243,8 @@ es:{
 'report.h.XII':'XII. Crimen Organizado como Infraestructura – El Nexo Cártel-Inteligencia-Banca',
 'report.h.XIII':'XIII. Índice de Referencia Cruzada',
 'report.h.XIV':'XIV. Índice de Calibración – Individuos de Alta Conectividad',
-'report.h.XV':'XV. Reclamación Espiritual – La Contra-Arquitectura',
-'report.h.XVI':'XVI. Enviando la Señal – Contacto y Máxima Asistencia',
+'report.h.XXI':'XXI. Reclamación Espiritual – La Contra-Arquitectura',
+'report.h.XXII':'XXII. Enviando la Señal – Contacto y Máxima Asistencia',
 'map.markerColors':'COLORES DE MARCADORES'
 },
 // --------------- FRENCH ---------------
@@ -295,7 +296,7 @@ fr:{
 'report.expandAll':'TOUT DÉVELOPPER',
 'report.collapseAll':'TOUT RÉDUIRE',
 'report.aiVirus':'RAPPORT VIRUS IA',
-'report.sect.I':'I. Objectif et Cadre','report.sect.II':'II. Architecture de Contr\u00f4le','report.sect.III':'III. Seuil de 51%','report.sect.IV':'IV. Souterrain / D.U.M.B.','report.sect.V':'V. Surveillance et Technologie','report.sect.VI':'VI. Le Mod\u00e8le "Nouveau"','report.sect.VII':'VII. Enclaves','report.sect.VIII':'VIII. Sch\u00e9mas Cycliques','report.sect.IX':'IX. Syst\u00e8mes d\'Esclavage','report.sect.X':'X. Conflits','report.sect.XI':'XI. Sch\u00e9mas FOIA','report.sect.XII':'XII. Crime Organis\u00e9','report.sect.XIII':'XIII. Index de R\u00e9f\u00e9rence Crois\u00e9e','report.sect.XIV':'XIV. Index de Calibration','report.sect.XV':'XV. R\u00e9clamation Spirituelle','report.sect.XVI':'XVI. Le Signal',
+'report.sect.I':'I. Objectif et Cadre','report.sect.II':'II. Architecture de Contr\u00f4le','report.sect.III':'III. Seuil de 51%','report.sect.IV':'IV. Souterrain / D.U.M.B.','report.sect.V':'V. Surveillance et Technologie','report.sect.VI':'VI. Le Mod\u00e8le "Nouveau"','report.sect.VII':'VII. Enclaves','report.sect.VIII':'VIII. Sch\u00e9mas Cycliques','report.sect.IX':'IX. Syst\u00e8mes d\'Esclavage','report.sect.X':'X. Conflits','report.sect.XI':'XI. Sch\u00e9mas FOIA','report.sect.XII':'XII. Crime Organis\u00e9','report.sect.XIII':'XIII. Index de R\u00e9f\u00e9rence Crois\u00e9e','report.sect.XIV':'XIV. Index de Calibration','report.sect.XXI':'XXI. R\u00e9clamation Spirituelle','report.sect.XXII':'XXII. Le Signal',
 'report.h.I':'I. Objectif et Cadre',
 'report.h.II':'II. L’Architecture de Contrôle – Structures de Domination à Long Terme',
 'report.h.III':'III. Le Seuil de 51% – Nash, Bitcoin et la Gouvernance comme Théorie des Réseaux',
@@ -310,8 +311,8 @@ fr:{
 'report.h.XII':'XII. Crime Organisé comme Infrastructure – Le Nexus Cartel-Renseignement-Banque',
 'report.h.XIII':'XIII. Index de Référence Croisée',
 'report.h.XIV':'XIV. Index de Calibration – Individus à Haute Connectivité',
-'report.h.XV':'XV. Réclamation Spirituelle – La Contre-Architecture',
-'report.h.XVI':'XVI. Envoyer le Signal – Contact et Assistance Maximale',
+'report.h.XXI':'XXI. Réclamation Spirituelle – La Contre-Architecture',
+'report.h.XXII':'XXII. Envoyer le Signal – Contact et Assistance Maximale',
 'map.markerColors':'COULEURS DES MARQUEURS'
 },
 // --------------- ARABIC ---------------
@@ -349,7 +350,7 @@ ar:{
 'map.allSections':'\u062C\u0645\u064A\u0639 \u0627\u0644\u0623\u0642\u0633\u0627\u0645','map.allTypes':'\u062C\u0645\u064A\u0639 \u0627\u0644\u0623\u0646\u0648\u0627\u0639',
 'report.expandAll':'\u062A\u0648\u0633\u064A\u0639 \u0627\u0644\u0643\u0644','report.collapseAll':'\u0637\u064A \u0627\u0644\u0643\u0644',
 'report.aiVirus':'\u062A\u0642\u0631\u064A\u0631 \u0641\u064A\u0631\u0648\u0633 \u0627\u0644\u0630\u0643\u0627\u0621',
-'report.sect.I':'I. \u0627\u0644\u063A\u0631\u0636 \u0648\u0627\u0644\u0625\u0637\u0627\u0631','report.sect.II':'II. \u0647\u0646\u062F\u0633\u0629 \u0627\u0644\u062A\u062D\u0643\u0645','report.sect.III':'III. \u0639\u062A\u0628\u0629 51%','report.sect.IV':'IV. \u062A\u062D\u062A \u0627\u0644\u0623\u0631\u0636 / D.U.M.B.','report.sect.V':'V. \u0627\u0644\u0645\u0631\u0627\u0642\u0628\u0629 \u0648\u0627\u0644\u062A\u0643\u0646\u0648\u0644\u0648\u062C\u064A\u0627','report.sect.VI':'VI. \u0627\u0644\u0646\u0645\u0637 \u0627\u0644\u062C\u062F\u064A\u062F','report.sect.VII':'VII. \u0627\u0644\u062C\u064A\u0648\u0628','report.sect.VIII':'VIII. \u0627\u0644\u0623\u0646\u0645\u0627\u0637 \u0627\u0644\u062F\u0648\u0631\u064A\u0629','report.sect.IX':'IX. \u0623\u0646\u0638\u0645\u0629 \u0627\u0644\u0639\u0628\u0648\u062F\u064A\u0629','report.sect.X':'X. \u0627\u0644\u0646\u0632\u0627\u0639\u0627\u062A','report.sect.XI':'XI. \u0623\u0646\u0645\u0627\u0637 FOIA','report.sect.XII':'XII. \u0627\u0644\u062C\u0631\u064A\u0645\u0629 \u0627\u0644\u0645\u0646\u0638\u0645\u0629','report.sect.XIII':'XIII. \u0641\u0647\u0631\u0633 \u0627\u0644\u0645\u0631\u0627\u062C\u0639 \u0627\u0644\u0645\u062A\u0642\u0627\u0637\u0639\u0629','report.sect.XIV':'XIV. \u0641\u0647\u0631\u0633 \u0627\u0644\u0645\u0639\u0627\u064A\u0631\u0629','report.sect.XV':'XV. \u0627\u0644\u0627\u0633\u062A\u0631\u062F\u0627\u062F \u0627\u0644\u0631\u0648\u062D\u064A','report.sect.XVI':'XVI. \u0627\u0644\u0625\u0634\u0627\u0631\u0629',
+'report.sect.I':'I. \u0627\u0644\u063A\u0631\u0636 \u0648\u0627\u0644\u0625\u0637\u0627\u0631','report.sect.II':'II. \u0647\u0646\u062F\u0633\u0629 \u0627\u0644\u062A\u062D\u0643\u0645','report.sect.III':'III. \u0639\u062A\u0628\u0629 51%','report.sect.IV':'IV. \u062A\u062D\u062A \u0627\u0644\u0623\u0631\u0636 / D.U.M.B.','report.sect.V':'V. \u0627\u0644\u0645\u0631\u0627\u0642\u0628\u0629 \u0648\u0627\u0644\u062A\u0643\u0646\u0648\u0644\u0648\u062C\u064A\u0627','report.sect.VI':'VI. \u0627\u0644\u0646\u0645\u0637 \u0627\u0644\u062C\u062F\u064A\u062F','report.sect.VII':'VII. \u0627\u0644\u062C\u064A\u0648\u0628','report.sect.VIII':'VIII. \u0627\u0644\u0623\u0646\u0645\u0627\u0637 \u0627\u0644\u062F\u0648\u0631\u064A\u0629','report.sect.IX':'IX. \u0623\u0646\u0638\u0645\u0629 \u0627\u0644\u0639\u0628\u0648\u062F\u064A\u0629','report.sect.X':'X. \u0627\u0644\u0646\u0632\u0627\u0639\u0627\u062A','report.sect.XI':'XI. \u0623\u0646\u0645\u0627\u0637 FOIA','report.sect.XII':'XII. \u0627\u0644\u062C\u0631\u064A\u0645\u0629 \u0627\u0644\u0645\u0646\u0638\u0645\u0629','report.sect.XIII':'XIII. \u0641\u0647\u0631\u0633 \u0627\u0644\u0645\u0631\u0627\u062C\u0639 \u0627\u0644\u0645\u062A\u0642\u0627\u0637\u0639\u0629','report.sect.XIV':'XIV. \u0641\u0647\u0631\u0633 \u0627\u0644\u0645\u0639\u0627\u064A\u0631\u0629','report.sect.XXI':'XXI. \u0627\u0644\u0627\u0633\u062A\u0631\u062F\u0627\u062F \u0627\u0644\u0631\u0648\u062D\u064A','report.sect.XXII':'XXII. \u0627\u0644\u0625\u0634\u0627\u0631\u0629',
 'report.h.I':'I. الغرض والإطار',
 'report.h.II':'II. هندسة التحكم – هياكل السيطرة طويلة الأمد',
 'report.h.III':'III. عتبة 51% – ناش، بيتكوين، والحوكمة كنظرية الشبكات',
@@ -364,8 +365,8 @@ ar:{
 'report.h.XII':'XII. الجريمة المنظمة كبنية تحتية – رابطة الكارتل-الاستخبارات-البنوك',
 'report.h.XIII':'XIII. فهرس المراجع المتقاطعة',
 'report.h.XIV':'XIV. فهرس المعايرة – أفراد ذوو اتصال عالٍ',
-'report.h.XV':'XV. الاسترداد الروحي – البنية المضادة',
-'report.h.XVI':'XVI. إرسال الإشارة – الاتصال والمساعدة القصوى',
+'report.h.XXI':'XXI. الاسترداد الروحي – البنية المضادة',
+'report.h.XXII':'XXII. إرسال الإشارة – الاتصال والمساعدة القصوى',
 'map.markerColors':'\u0623\u0644\u0648\u0627\u0646 \u0627\u0644\u0639\u0644\u0627\u0645\u0627\u062A'
 },
 // --------------- CHINESE SIMPLIFIED ---------------
@@ -403,7 +404,7 @@ zh:{
 'map.allSections':'\u6240\u6709\u7AE0\u8282','map.allTypes':'\u6240\u6709\u7C7B\u578B',
 'report.expandAll':'\u5C55\u5F00\u5168\u90E8','report.collapseAll':'\u6298\u53E0\u5168\u90E8',
 'report.aiVirus':'AI\u75C5\u6BD2\u62A5\u544A',
-'report.sect.I':'I. \u76EE\u7684\u4E0E\u6846\u67B6','report.sect.II':'II. \u63A7\u5236\u67B6\u6784','report.sect.III':'III. 51%\u95E8\u69DB','report.sect.IV':'IV. \u5730\u4E0B / D.U.M.B.','report.sect.V':'V. \u76D1\u63A7\u4E0E\u6280\u672F','report.sect.VI':'VI. \u201C\u65B0\u201D\u6A21\u5F0F','report.sect.VII':'VII. \u98DE\u5730','report.sect.VIII':'VIII. \u5468\u671F\u6A21\u5F0F','report.sect.IX':'IX. \u5974\u5F79\u5236\u5EA6','report.sect.X':'X. \u51B2\u7A81','report.sect.XI':'XI. FOIA\u6A21\u5F0F','report.sect.XII':'XII. \u6709\u7EC4\u7EC7\u72AF\u7F6A','report.sect.XIII':'XIII. \u4EA4\u53C9\u53C2\u8003\u7D22\u5F15','report.sect.XIV':'XIV. \u6821\u51C6\u7D22\u5F15','report.sect.XV':'XV. \u7075\u6027\u6536\u590D','report.sect.XVI':'XVI. \u4FE1\u53F7',
+'report.sect.I':'I. \u76EE\u7684\u4E0E\u6846\u67B6','report.sect.II':'II. \u63A7\u5236\u67B6\u6784','report.sect.III':'III. 51%\u95E8\u69DB','report.sect.IV':'IV. \u5730\u4E0B / D.U.M.B.','report.sect.V':'V. \u76D1\u63A7\u4E0E\u6280\u672F','report.sect.VI':'VI. \u201C\u65B0\u201D\u6A21\u5F0F','report.sect.VII':'VII. \u98DE\u5730','report.sect.VIII':'VIII. \u5468\u671F\u6A21\u5F0F','report.sect.IX':'IX. \u5974\u5F79\u5236\u5EA6','report.sect.X':'X. \u51B2\u7A81','report.sect.XI':'XI. FOIA\u6A21\u5F0F','report.sect.XII':'XII. \u6709\u7EC4\u7EC7\u72AF\u7F6A','report.sect.XIII':'XIII. \u4EA4\u53C9\u53C2\u8003\u7D22\u5F15','report.sect.XIV':'XIV. \u6821\u51C6\u7D22\u5F15','report.sect.XXI':'XXI. \u7075\u6027\u6536\u590D','report.sect.XXII':'XXII. \u4FE1\u53F7',
 'report.h.I':'I. 目的与框架',
 'report.h.II':'II. 控制架构 – 长期主导的结构',
 'report.h.III':'III. 51%门槛 – 纳什、比特币与网络理论治理',
@@ -418,8 +419,8 @@ zh:{
 'report.h.XII':'XII. 有组织犯罪作为基础设施 – 卡特尔-情报-银行联系',
 'report.h.XIII':'XIII. 交叉参考索引',
 'report.h.XIV':'XIV. 校准索引 – 高连接性个人',
-'report.h.XV':'XV. 灵性收复 – 反架构',
-'report.h.XVI':'XVI. 发送信号 – 联系与最大援助',
+'report.h.XXI':'XXI. 灵性收复 – 反架构',
+'report.h.XXII':'XXII. 发送信号 – 联系与最大援助',
 'map.markerColors':'\u6807\u8BB0\u989C\u8272'
 },
 // --------------- PORTUGUESE ---------------
@@ -457,7 +458,7 @@ pt:{
 'map.allSections':'Todas as Se\u00e7\u00f5es','map.allTypes':'Todos os Tipos',
 'report.expandAll':'EXPANDIR TUDO','report.collapseAll':'RECOLHER TUDO',
 'report.aiVirus':'RELAT\u00D3RIO V\u00CDRUS IA',
-'report.sect.I':'I. Prop\u00f3sito e Estrutura','report.sect.II':'II. Arquitetura de Controle','report.sect.III':'III. Limiar de 51%','report.sect.IV':'IV. Subterr\u00e2neo / D.U.M.B.','report.sect.V':'V. Vigil\u00e2ncia e Tecnologia','report.sect.VI':'VI. O Padr\u00e3o "Novo"','report.sect.VII':'VII. Enclaves','report.sect.VIII':'VIII. Padr\u00f5es C\u00edclicos','report.sect.IX':'IX. Sistemas de Escravid\u00e3o','report.sect.X':'X. Conflitos','report.sect.XI':'XI. Padr\u00f5es FOIA','report.sect.XII':'XII. Crime Organizado','report.sect.XIII':'XIII. \u00cdndice de Refer\u00eancia Cruzada','report.sect.XIV':'XIV. \u00cdndice de Calibra\u00e7\u00e3o','report.sect.XV':'XV. Reclama\u00e7\u00e3o Espiritual','report.sect.XVI':'XVI. O Sinal',
+'report.sect.I':'I. Prop\u00f3sito e Estrutura','report.sect.II':'II. Arquitetura de Controle','report.sect.III':'III. Limiar de 51%','report.sect.IV':'IV. Subterr\u00e2neo / D.U.M.B.','report.sect.V':'V. Vigil\u00e2ncia e Tecnologia','report.sect.VI':'VI. O Padr\u00e3o "Novo"','report.sect.VII':'VII. Enclaves','report.sect.VIII':'VIII. Padr\u00f5es C\u00edclicos','report.sect.IX':'IX. Sistemas de Escravid\u00e3o','report.sect.X':'X. Conflitos','report.sect.XI':'XI. Padr\u00f5es FOIA','report.sect.XII':'XII. Crime Organizado','report.sect.XIII':'XIII. \u00cdndice de Refer\u00eancia Cruzada','report.sect.XIV':'XIV. \u00cdndice de Calibra\u00e7\u00e3o','report.sect.XXI':'XXI. Reclama\u00e7\u00e3o Espiritual','report.sect.XXII':'XXII. O Sinal',
 'report.h.I':'I. Propósito e Estrutura',
 'report.h.II':'II. A Arquitetura de Controle – Estruturas de Domínio a Longo Prazo',
 'report.h.III':'III. O Limiar de 51% – Nash, Bitcoin e Governança como Teoria de Redes',
@@ -472,8 +473,8 @@ pt:{
 'report.h.XII':'XII. Crime Organizado como Infraestrutura – O Nexo Cartel-Inteligência-Banco',
 'report.h.XIII':'XIII. Índice de Referência Cruzada',
 'report.h.XIV':'XIV. Índice de Calibração – Indivíduos de Alta Conectividade',
-'report.h.XV':'XV. Reclamação Espiritual – A Contra-Arquitetura',
-'report.h.XVI':'XVI. Enviando o Sinal – Contato e Assistência Máxima',
+'report.h.XXI':'XXI. Reclamação Espiritual – A Contra-Arquitetura',
+'report.h.XXII':'XXII. Enviando o Sinal – Contato e Assistência Máxima',
 'map.markerColors':'CORES DOS MARCADORES'
 },
 // --------------- RUSSIAN ---------------
@@ -508,7 +509,7 @@ ru:{
 'content.keepRunning':'\u041F\u041E\u0414\u0414\u0415\u0420\u0416\u0418\u0422\u0415 \u042D\u0422\u041E\u0422 \u0421\u0410\u0419\u0422 - \u0415\u0414\u0410 + \u041F\u0420\u0418\u041F\u0410\u0421\u042B',
 'report.expandAll':'\u0420\u0410\u0417\u0412\u0415\u0420\u041D\u0423\u0422\u042C \u0412\u0421\u0401','report.collapseAll':'\u0421\u0412\u0415\u0420\u041D\u0423\u0422\u042C \u0412\u0421\u0401',
 'report.aiVirus':'\u041E\u0422\u0427\u0401\u0422 \u041E \u0412\u0418\u0420\u0423\u0421\u0415 \u0418\u0418',
-'report.sect.I':'I. \u0426\u0435\u043B\u044C \u0438 \u0421\u0442\u0440\u0443\u043A\u0442\u0443\u0440\u0430','report.sect.II':'II. \u0410\u0440\u0445\u0438\u0442\u0435\u043A\u0442\u0443\u0440\u0430 \u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F','report.sect.III':'III. \u041F\u043E\u0440\u043E\u0433 51%','report.sect.IV':'IV. \u041F\u043E\u0434\u0437\u0435\u043C\u043D\u044B\u0435 / D.U.M.B.','report.sect.V':'V. \u0421\u043B\u0435\u0436\u043A\u0430 \u0438 \u0422\u0435\u0445\u043D\u043E\u043B\u043E\u0433\u0438\u0438','report.sect.VI':'VI. \u041D\u043E\u0432\u044B\u0439 \u041F\u0430\u0442\u0442\u0435\u0440\u043D','report.sect.VII':'VII. \u0410\u043D\u043A\u043B\u0430\u0432\u044B','report.sect.VIII':'VIII. \u0426\u0438\u043A\u043B\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u041F\u0430\u0442\u0442\u0435\u0440\u043D\u044B','report.sect.IX':'IX. \u0421\u0438\u0441\u0442\u0435\u043C\u044B \u0420\u0430\u0431\u0441\u0442\u0432\u0430','report.sect.X':'X. \u041A\u043E\u043D\u0444\u043B\u0438\u043A\u0442\u044B','report.sect.XI':'XI. \u041F\u0430\u0442\u0442\u0435\u0440\u043D\u044B FOIA','report.sect.XII':'XII. \u041E\u0440\u0433\u0430\u043D\u0438\u0437\u043E\u0432\u0430\u043D\u043D\u0430\u044F \u041F\u0440\u0435\u0441\u0442\u0443\u043F\u043D\u043E\u0441\u0442\u044C','report.sect.XIII':'XIII. \u041F\u0435\u0440\u0435\u043A\u0440\u0451\u0441\u0442\u043D\u044B\u0439 \u0418\u043D\u0434\u0435\u043A\u0441','report.sect.XIV':'XIV. \u041A\u0430\u043B\u0438\u0431\u0440\u043E\u0432\u043E\u0447\u043D\u044B\u0439 \u0418\u043D\u0434\u0435\u043A\u0441','report.sect.XV':'XV. \u0414\u0443\u0445\u043E\u0432\u043D\u043E\u0435 \u0412\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0435','report.sect.XVI':'XVI. \u0421\u0438\u0433\u043D\u0430\u043B',
+'report.sect.I':'I. \u0426\u0435\u043B\u044C \u0438 \u0421\u0442\u0440\u0443\u043A\u0442\u0443\u0440\u0430','report.sect.II':'II. \u0410\u0440\u0445\u0438\u0442\u0435\u043A\u0442\u0443\u0440\u0430 \u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F','report.sect.III':'III. \u041F\u043E\u0440\u043E\u0433 51%','report.sect.IV':'IV. \u041F\u043E\u0434\u0437\u0435\u043C\u043D\u044B\u0435 / D.U.M.B.','report.sect.V':'V. \u0421\u043B\u0435\u0436\u043A\u0430 \u0438 \u0422\u0435\u0445\u043D\u043E\u043B\u043E\u0433\u0438\u0438','report.sect.VI':'VI. \u041D\u043E\u0432\u044B\u0439 \u041F\u0430\u0442\u0442\u0435\u0440\u043D','report.sect.VII':'VII. \u0410\u043D\u043A\u043B\u0430\u0432\u044B','report.sect.VIII':'VIII. \u0426\u0438\u043A\u043B\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u041F\u0430\u0442\u0442\u0435\u0440\u043D\u044B','report.sect.IX':'IX. \u0421\u0438\u0441\u0442\u0435\u043C\u044B \u0420\u0430\u0431\u0441\u0442\u0432\u0430','report.sect.X':'X. \u041A\u043E\u043D\u0444\u043B\u0438\u043A\u0442\u044B','report.sect.XI':'XI. \u041F\u0430\u0442\u0442\u0435\u0440\u043D\u044B FOIA','report.sect.XII':'XII. \u041E\u0440\u0433\u0430\u043D\u0438\u0437\u043E\u0432\u0430\u043D\u043D\u0430\u044F \u041F\u0440\u0435\u0441\u0442\u0443\u043F\u043D\u043E\u0441\u0442\u044C','report.sect.XIII':'XIII. \u041F\u0435\u0440\u0435\u043A\u0440\u0451\u0441\u0442\u043D\u044B\u0439 \u0418\u043D\u0434\u0435\u043A\u0441','report.sect.XIV':'XIV. \u041A\u0430\u043B\u0438\u0431\u0440\u043E\u0432\u043E\u0447\u043D\u044B\u0439 \u0418\u043D\u0434\u0435\u043A\u0441','report.sect.XXI':'XXI. \u0414\u0443\u0445\u043E\u0432\u043D\u043E\u0435 \u0412\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0435','report.sect.XXII':'XXII. \u0421\u0438\u0433\u043D\u0430\u043B',
 'report.h.I':'I. Цель и Структура',
 'report.h.II':'II. Архитектура Управления – Структуры Долгосрочного Господства',
 'report.h.III':'III. Порог 51% – Нэш, Биткоин и Управление как Теория Сетей',
@@ -523,8 +524,8 @@ ru:{
 'report.h.XII':'XII. Организованная Преступность как Инфраструктура – Связка Картель-Разведка-Банк',
 'report.h.XIII':'XIII. Перекрёстный Индекс',
 'report.h.XIV':'XIV. Калибровочный Индекс – Высокосвязанные Индивидуумы',
-'report.h.XV':'XV. Духовное Восстановление – Контр-Архитектура',
-'report.h.XVI':'XVI. Посылая Сигнал – Контакт и Максимальная Помощь',
+'report.h.XXI':'XXI. Духовное Восстановление – Контр-Архитектура',
+'report.h.XXII':'XXII. Посылая Сигнал – Контакт и Максимальная Помощь',
 'map.markerColors':'\u0426\u0412\u0415\u0422\u0410 \u041C\u0410\u0420\u041A\u0415\u0420\u041E\u0412'
 },
 // --------------- HINDI ---------------
@@ -546,7 +547,7 @@ hi:{
 'content.livingDoc':'\u091C\u0940\u0935\u093F\u0924 \u0926\u0938\u094D\u0924\u093E\u0935\u0947\u091C\u093C','content.theReport':'\u0930\u093F\u092A\u094B\u0930\u094D\u091F',
 'report.expandAll':'\u0938\u092D\u0940 \u0935\u093F\u0938\u094D\u0924\u093E\u0930','report.collapseAll':'\u0938\u092D\u0940 \u0938\u0902\u0915\u094D\u0937\u093F\u092A\u094D\u0924',
 'report.aiVirus':'AI \u0935\u093E\u092F\u0930\u0938 \u0930\u093F\u092A\u094B\u0930\u094D\u091F',
-'report.sect.I':'I. \u0909\u0926\u094D\u0926\u0947\u0936\u094D\u092F \u0914\u0930 \u0922\u093E\u0901\u091A\u093E','report.sect.II':'II. \u0928\u093F\u092F\u0902\u0924\u094D\u0930\u0923 \u0935\u093E\u0938\u094D\u0924\u0941\u0915\u0932\u093E','report.sect.III':'III. 51% \u0938\u0940\u092E\u093E','report.sect.IV':'IV. \u092D\u0942\u092E\u093F\u0917\u0924 / D.U.M.B.','report.sect.V':'V. \u0928\u093F\u0917\u0930\u093E\u0928\u0940 \u0914\u0930 \u0924\u0915\u0928\u0940\u0915','report.sect.VI':'VI. \u0928\u092F\u093E \u092A\u0948\u091F\u0930\u094D\u0928','report.sect.VII':'VII. \u090F\u0928\u094D\u0915\u094D\u0932\u0947\u0935','report.sect.VIII':'VIII. \u091A\u0915\u094D\u0930\u0940\u092F \u092A\u0948\u091F\u0930\u094D\u0928','report.sect.IX':'IX. \u0926\u093E\u0938\u0924\u093E \u092A\u094D\u0930\u0923\u093E\u0932\u0940','report.sect.X':'X. \u0938\u0902\u0918\u0930\u094D\u0937','report.sect.XI':'XI. FOIA \u092A\u0948\u091F\u0930\u094D\u0928','report.sect.XII':'XII. \u0938\u0902\u0917\u0920\u093F\u0924 \u0905\u092A\u0930\u093E\u0927','report.sect.XIII':'XIII. \u0915\u094D\u0930\u0949\u0938-\u0930\u0947\u092B\u0930\u0947\u0902\u0938 \u0938\u0942\u091A\u0940','report.sect.XIV':'XIV. \u0915\u0948\u0932\u093F\u092C\u094D\u0930\u0947\u0936\u0928 \u0938\u0942\u091A\u0940','report.sect.XV':'XV. \u0906\u0927\u094D\u092F\u093E\u0924\u094D\u092E\u093F\u0915 \u092A\u0941\u0928\u0930\u094D\u092A\u094D\u0930\u093E\u092A\u094D\u0924\u093F','report.sect.XVI':'XVI. \u0938\u0902\u0915\u0947\u0924',
+'report.sect.I':'I. \u0909\u0926\u094D\u0926\u0947\u0936\u094D\u092F \u0914\u0930 \u0922\u093E\u0901\u091A\u093E','report.sect.II':'II. \u0928\u093F\u092F\u0902\u0924\u094D\u0930\u0923 \u0935\u093E\u0938\u094D\u0924\u0941\u0915\u0932\u093E','report.sect.III':'III. 51% \u0938\u0940\u092E\u093E','report.sect.IV':'IV. \u092D\u0942\u092E\u093F\u0917\u0924 / D.U.M.B.','report.sect.V':'V. \u0928\u093F\u0917\u0930\u093E\u0928\u0940 \u0914\u0930 \u0924\u0915\u0928\u0940\u0915','report.sect.VI':'VI. \u0928\u092F\u093E \u092A\u0948\u091F\u0930\u094D\u0928','report.sect.VII':'VII. \u090F\u0928\u094D\u0915\u094D\u0932\u0947\u0935','report.sect.VIII':'VIII. \u091A\u0915\u094D\u0930\u0940\u092F \u092A\u0948\u091F\u0930\u094D\u0928','report.sect.IX':'IX. \u0926\u093E\u0938\u0924\u093E \u092A\u094D\u0930\u0923\u093E\u0932\u0940','report.sect.X':'X. \u0938\u0902\u0918\u0930\u094D\u0937','report.sect.XI':'XI. FOIA \u092A\u0948\u091F\u0930\u094D\u0928','report.sect.XII':'XII. \u0938\u0902\u0917\u0920\u093F\u0924 \u0905\u092A\u0930\u093E\u0927','report.sect.XIII':'XIII. \u0915\u094D\u0930\u0949\u0938-\u0930\u0947\u092B\u0930\u0947\u0902\u0938 \u0938\u0942\u091A\u0940','report.sect.XIV':'XIV. \u0915\u0948\u0932\u093F\u092C\u094D\u0930\u0947\u0936\u0928 \u0938\u0942\u091A\u0940','report.sect.XXI':'XXI. \u0906\u0927\u094D\u092F\u093E\u0924\u094D\u092E\u093F\u0915 \u092A\u0941\u0928\u0930\u094D\u092A\u094D\u0930\u093E\u092A\u094D\u0924\u093F','report.sect.XXII':'XXII. \u0938\u0902\u0915\u0947\u0924',
 'report.h.I':'I. उद्देश्य और ढाँचा',
 'report.h.II':'II. नियंत्रण वास्तुकला – दीर्घकालिक प्रभुत्व की संरचनाएँ',
 'report.h.III':'III. 51% सीमा – नैश, बिटकॉइन, और शासन नेटवर्क सिद्धांत के रूप में',
@@ -561,8 +562,8 @@ hi:{
 'report.h.XII':'XII. अवसंरचना के रूप में संगठित अपराध – कार्टेल-खुफिया-बैंकिंग गठजोड़',
 'report.h.XIII':'XIII. क्रॉस-रेफरेंस सूची',
 'report.h.XIV':'XIV. कैलिब्रेशन सूची – उच्च-संपर्क व्यक्ति',
-'report.h.XV':'XV. आध्यात्मिक पुनर्प्राप्ति – प्रति-वास्तुकला',
-'report.h.XVI':'XVI. संकेत भेजना – संपर्क और अधिकतम सहायता',
+'report.h.XXI':'XXI. आध्यात्मिक पुनर्प्राप्ति – प्रति-वास्तुकला',
+'report.h.XXII':'XXII. संकेत भेजना – संपर्क और अधिकतम सहायता',
 'map.markerColors':'\u092E\u093E\u0930\u094D\u0915\u0930 \u0930\u0902\u0917'
 },
 // --------------- SWAHILI ---------------
@@ -583,7 +584,7 @@ sw:{
 'content.livingDoc':'hati hai','content.theReport':'RIPOTI',
 'report.expandAll':'PANUA YOTE','report.collapseAll':'FUNGA YOTE',
 'report.aiVirus':'RIPOTI YA VIRUSI YA AI',
-'report.sect.I':'I. Kusudi na Mfumo','report.sect.II':'II. Usanifu wa Udhibiti','report.sect.III':'III. Kizingiti cha 51%','report.sect.IV':'IV. Chini ya Ardhi / D.U.M.B.','report.sect.V':'V. Ufuatiliaji na Teknolojia','report.sect.VI':'VI. Muundo Mpya','report.sect.VII':'VII. Vijiji vya Kipekee','report.sect.VIII':'VIII. Mifumo ya Mizunguko','report.sect.IX':'IX. Mifumo ya Utumwa','report.sect.X':'X. Migogoro','report.sect.XI':'XI. Mifumo ya FOIA','report.sect.XII':'XII. Uhalifu wa Kupangwa','report.sect.XIII':'XIII. Fahirisi ya Marejeo','report.sect.XIV':'XIV. Fahirisi ya Urekebishaji','report.sect.XV':'XV. Upataji wa Kiroho','report.sect.XVI':'XVI. Ishara',
+'report.sect.I':'I. Kusudi na Mfumo','report.sect.II':'II. Usanifu wa Udhibiti','report.sect.III':'III. Kizingiti cha 51%','report.sect.IV':'IV. Chini ya Ardhi / D.U.M.B.','report.sect.V':'V. Ufuatiliaji na Teknolojia','report.sect.VI':'VI. Muundo Mpya','report.sect.VII':'VII. Vijiji vya Kipekee','report.sect.VIII':'VIII. Mifumo ya Mizunguko','report.sect.IX':'IX. Mifumo ya Utumwa','report.sect.X':'X. Migogoro','report.sect.XI':'XI. Mifumo ya FOIA','report.sect.XII':'XII. Uhalifu wa Kupangwa','report.sect.XIII':'XIII. Fahirisi ya Marejeo','report.sect.XIV':'XIV. Fahirisi ya Urekebishaji','report.sect.XXI':'XXI. Upataji wa Kiroho','report.sect.XXII':'XXII. Ishara',
 'report.h.I':'I. Kusudi na Mfumo',
 'report.h.II':'II. Usanifu wa Udhibiti – Miundo ya Utawala wa Muda Mrefu',
 'report.h.III':'III. Kizingiti cha 51% – Nash, Bitcoin, na Utawala kama Nadharia ya Mtandao',
@@ -598,8 +599,8 @@ sw:{
 'report.h.XII':'XII. Uhalifu wa Kupangwa kama Miundombinu – Uhusiano wa Karteli-Ujasusi-Benki',
 'report.h.XIII':'XIII. Fahirisi ya Marejeo Mtambuka',
 'report.h.XIV':'XIV. Fahirisi ya Urekebishaji – Watu Wenye Uhusiano Mkubwa',
-'report.h.XV':'XV. Upataji wa Kiroho – Usanifu wa Kupinga',
-'report.h.XVI':'XVI. Kutuma Ishara – Mawasiliano na Msaada wa Juu',
+'report.h.XXI':'XXI. Upataji wa Kiroho – Usanifu wa Kupinga',
+'report.h.XXII':'XXII. Kutuma Ishara – Mawasiliano na Msaada wa Juu',
 'map.markerColors':'RANGI ZA ALAMA'
 },
 // --------------- KOREAN ---------------
@@ -620,7 +621,7 @@ ko:{
 'content.livingDoc':'\uC0B4\uC544\uC788\uB294 \uBB38\uC11C','content.theReport':'\uBCF4\uACE0\uC11C',
 'report.expandAll':'\uBAA8\uB450 \uD3BC\uCE58\uAE30','report.collapseAll':'\uBAA8\uB450 \uC811\uAE30',
 'report.aiVirus':'AI \uBC14\uC774\uB7EC\uC2A4 \uBCF4\uACE0\uC11C',
-'report.sect.I':'I. \uBAA9\uC801 \uBC0F \uD504\uB808\uC784\uC6CC\uD06C','report.sect.II':'II. \uD1B5\uC81C \uAD6C\uC870','report.sect.III':'III. 51% \uBB38\uD134\uAC12','report.sect.IV':'IV. \uC9C0\uD558 / D.U.M.B.','report.sect.V':'V. \uAC10\uC2DC \uBC0F \uAE30\uC220','report.sect.VI':'VI. \uC0C8\uB85C\uC6B4 \uD328\uD134','report.sect.VII':'VII. \uC5D4\uD074\uB808\uC774\uBE0C','report.sect.VIII':'VIII. \uC21C\uD658 \uD328\uD134','report.sect.IX':'IX. \uB178\uC608 \uC2DC\uC2A4\uD15C','report.sect.X':'X. \uBD84\uC7C1','report.sect.XI':'XI. FOIA \uD328\uD134','report.sect.XII':'XII. \uC870\uC9C1 \uBC94\uC8C4','report.sect.XIII':'XIII. \uAD50\uCC28 \uCC38\uC870 \uC0C9\uC778','report.sect.XIV':'XIV. \uBCF4\uC815 \uC0C9\uC778','report.sect.XV':'XV. \uC601\uC801 \uD68C\uBCF5','report.sect.XVI':'XVI. \uC2E0\uD638',
+'report.sect.I':'I. \uBAA9\uC801 \uBC0F \uD504\uB808\uC784\uC6CC\uD06C','report.sect.II':'II. \uD1B5\uC81C \uAD6C\uC870','report.sect.III':'III. 51% \uBB38\uD134\uAC12','report.sect.IV':'IV. \uC9C0\uD558 / D.U.M.B.','report.sect.V':'V. \uAC10\uC2DC \uBC0F \uAE30\uC220','report.sect.VI':'VI. \uC0C8\uB85C\uC6B4 \uD328\uD134','report.sect.VII':'VII. \uC5D4\uD074\uB808\uC774\uBE0C','report.sect.VIII':'VIII. \uC21C\uD658 \uD328\uD134','report.sect.IX':'IX. \uB178\uC608 \uC2DC\uC2A4\uD15C','report.sect.X':'X. \uBD84\uC7C1','report.sect.XI':'XI. FOIA \uD328\uD134','report.sect.XII':'XII. \uC870\uC9C1 \uBC94\uC8C4','report.sect.XIII':'XIII. \uAD50\uCC28 \uCC38\uC870 \uC0C9\uC778','report.sect.XIV':'XIV. \uBCF4\uC815 \uC0C9\uC778','report.sect.XXI':'XXI. \uC601\uC801 \uD68C\uBCF5','report.sect.XXII':'XXII. \uC2E0\uD638',
 'report.h.I':'I. 목적 및 프레임워크',
 'report.h.II':'II. 통제 구조 – 장기적 지배의 구조',
 'report.h.III':'III. 51% 문턴값 – 내쉬, 비트코인, 그리고 네트워크 이론으로서의 거버넌스',
@@ -635,8 +636,8 @@ ko:{
 'report.h.XII':'XII. 인프라로서의 조직 범죄 – 카르텔-정보기관-은행 연결고리',
 'report.h.XIII':'XIII. 교차 참조 색인',
 'report.h.XIV':'XIV. 보정 색인 – 고연결성 개인',
-'report.h.XV':'XV. 영적 회복 – 대항 구조',
-'report.h.XVI':'XVI. 신호 보내기 – 연락 및 최대 지원',
+'report.h.XXI':'XXI. 영적 회복 – 대항 구조',
+'report.h.XXII':'XXII. 신호 보내기 – 연락 및 최대 지원',
 'map.markerColors':'\uB9C8\uCEE4 \uC0C9\uC0C1'
 },
 // --------------- JAPANESE ---------------
@@ -658,7 +659,7 @@ ja:{
 'content.livingDoc':'\u751F\u304D\u305F\u6587\u66F8','content.theReport':'\u30EC\u30DD\u30FC\u30C8',
 'report.expandAll':'\u3059\u3079\u3066\u5C55\u958B','report.collapseAll':'\u3059\u3079\u3066\u6298\u308A\u305F\u305F\u3080',
 'report.aiVirus':'AI\u30A6\u30A4\u30EB\u30B9\u30EC\u30DD\u30FC\u30C8',
-'report.sect.I':'I. \u76EE\u7684\u3068\u67A0\u7D44\u307F','report.sect.II':'II. \u7D71\u5236\u69CB\u9020','report.sect.III':'III. 51%\u306E\u95BE\u5024','report.sect.IV':'IV. \u5730\u4E0B / D.U.M.B.','report.sect.V':'V. \u76E3\u8996\u3068\u6280\u8853','report.sect.VI':'VI. \u300C\u65B0\u300D\u30D1\u30BF\u30FC\u30F3','report.sect.VII':'VII. \u98DB\u3073\u5730','report.sect.VIII':'VIII. \u5FAA\u74B0\u30D1\u30BF\u30FC\u30F3','report.sect.IX':'IX. \u5974\u96B7\u5236\u5EA6','report.sect.X':'X. \u7D1B\u4E89','report.sect.XI':'XI. FOIA\u30D1\u30BF\u30FC\u30F3','report.sect.XII':'XII. \u7D44\u7E54\u72AF\u7F6A','report.sect.XIII':'XIII. \u76F8\u4E92\u53C2\u7167\u7D22\u5F15','report.sect.XIV':'XIV. \u6821\u6B63\u7D22\u5F15','report.sect.XV':'XV. \u970A\u7684\u56DE\u5FA9','report.sect.XVI':'XVI. \u30B7\u30B0\u30CA\u30EB',
+'report.sect.I':'I. \u76EE\u7684\u3068\u67A0\u7D44\u307F','report.sect.II':'II. \u7D71\u5236\u69CB\u9020','report.sect.III':'III. 51%\u306E\u95BE\u5024','report.sect.IV':'IV. \u5730\u4E0B / D.U.M.B.','report.sect.V':'V. \u76E3\u8996\u3068\u6280\u8853','report.sect.VI':'VI. \u300C\u65B0\u300D\u30D1\u30BF\u30FC\u30F3','report.sect.VII':'VII. \u98DB\u3073\u5730','report.sect.VIII':'VIII. \u5FAA\u74B0\u30D1\u30BF\u30FC\u30F3','report.sect.IX':'IX. \u5974\u96B7\u5236\u5EA6','report.sect.X':'X. \u7D1B\u4E89','report.sect.XI':'XI. FOIA\u30D1\u30BF\u30FC\u30F3','report.sect.XII':'XII. \u7D44\u7E54\u72AF\u7F6A','report.sect.XIII':'XIII. \u76F8\u4E92\u53C2\u7167\u7D22\u5F15','report.sect.XIV':'XIV. \u6821\u6B63\u7D22\u5F15','report.sect.XXI':'XXI. \u970A\u7684\u56DE\u5FA9','report.sect.XXII':'XXII. \u30B7\u30B0\u30CA\u30EB',
 'report.h.I':'I. 目的と枚組み',
 'report.h.II':'II. 統制構造 – 長期支配の構造',
 'report.h.III':'III. 51%の閾値 – ナッシュ、ビットコイン、ネットワーク理論としてのガバナンス',
@@ -673,8 +674,8 @@ ja:{
 'report.h.XII':'XII. インフラとしての組織犯罪 – カルテル-諜報-銀行ネクサス',
 'report.h.XIII':'XIII. 相互参照索引',
 'report.h.XIV':'XIV. 校正索引 – 高接続性個人',
-'report.h.XV':'XV. 霊的回復 – 対抗構造',
-'report.h.XVI':'XVI. シグナルを送る – 連絡と最大支援',
+'report.h.XXI':'XXI. 霊的回復 – 対抗構造',
+'report.h.XXII':'XXII. シグナルを送る – 連絡と最大支援',
 'map.markerColors':'\u30DE\u30FC\u30AB\u30FC\u306E\u8272'
 },
 // --------------- GERMAN ---------------
@@ -714,7 +715,7 @@ de:{
 'map.allSections':'Alle Abschnitte','map.allTypes':'Alle Typen',
 'report.expandAll':'ALLE \u00D6FFNEN','report.collapseAll':'ALLE SCHLIESSEN',
 'report.aiVirus':'KI-VIRUS BERICHT',
-'report.sect.I':'I. Zweck und Rahmen','report.sect.II':'II. Kontrollarchitektur','report.sect.III':'III. 51%-Schwelle','report.sect.IV':'IV. Untergrund / D.U.M.B.','report.sect.V':'V. \u00dcberwachung und Technik','report.sect.VI':'VI. Das Neue Muster','report.sect.VII':'VII. Enklaven','report.sect.VIII':'VIII. Zyklische Muster','report.sect.IX':'IX. Sklavereisysteme','report.sect.X':'X. Konflikte','report.sect.XI':'XI. FOIA-Muster','report.sect.XII':'XII. Organisierte Kriminalit\u00e4t','report.sect.XIII':'XIII. Querverweisindex','report.sect.XIV':'XIV. Kalibrierungsindex','report.sect.XV':'XV. Spirituelle R\u00fcckgewinnung','report.sect.XVI':'XVI. Das Signal',
+'report.sect.I':'I. Zweck und Rahmen','report.sect.II':'II. Kontrollarchitektur','report.sect.III':'III. 51%-Schwelle','report.sect.IV':'IV. Untergrund / D.U.M.B.','report.sect.V':'V. \u00dcberwachung und Technik','report.sect.VI':'VI. Das Neue Muster','report.sect.VII':'VII. Enklaven','report.sect.VIII':'VIII. Zyklische Muster','report.sect.IX':'IX. Sklavereisysteme','report.sect.X':'X. Konflikte','report.sect.XI':'XI. FOIA-Muster','report.sect.XII':'XII. Organisierte Kriminalit\u00e4t','report.sect.XIII':'XIII. Querverweisindex','report.sect.XIV':'XIV. Kalibrierungsindex','report.sect.XXI':'XXI. Spirituelle R\u00fcckgewinnung','report.sect.XXII':'XXII. Das Signal',
 'report.h.I':'I. Zweck und Rahmen',
 'report.h.II':'II. Die Kontrollarchitektur – Strukturen Langfristiger Herrschaft',
 'report.h.III':'III. Die 51%-Schwelle – Nash, Bitcoin und Governance als Netzwerktheorie',
@@ -729,8 +730,8 @@ de:{
 'report.h.XII':'XII. Organisierte Kriminalität als Infrastruktur – Das Kartell-Geheimdienst-Banken-Netzwerk',
 'report.h.XIII':'XIII. Querverweisindex',
 'report.h.XIV':'XIV. Kalibrierungsindex – Hochvernetzte Individuen',
-'report.h.XV':'XV. Spirituelle Rückgewinnung – Die Gegen-Architektur',
-'report.h.XVI':'XVI. Das Signal Senden – Kontakt und Maximale Hilfe',
+'report.h.XXI':'XXI. Spirituelle Rückgewinnung – Die Gegen-Architektur',
+'report.h.XXII':'XXII. Das Signal Senden – Kontakt und Maximale Hilfe',
 'map.markerColors':'MARKER-FARBEN'
 }
 };
