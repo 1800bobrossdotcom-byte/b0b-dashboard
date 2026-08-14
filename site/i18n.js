@@ -150,6 +150,11 @@ var EN={
 'report.sect.XIV':'XIV. Calibration Index',
 'report.sect.XV':'XV. Spiritual Reclamation',
 'report.sect.XVI':'XVI. The Signal',
+'report.sect.XVII':'XVII. Compute Substrate',
+'report.sect.XVIII':'XVIII. Connective Tissue',
+'report.sect.XIX':'XIX. Epstein Network',
+'report.sect.XX':'XX. Seam Analysis',
+'report.sect.XXI':'XXI. Blowback',
 // --- REPORT FULL HEADINGS ---
 'report.h.I':'I. Purpose & Framework',
 'report.h.II':'II. The Control Architecture - Structures of Long-Lead Dominion',
