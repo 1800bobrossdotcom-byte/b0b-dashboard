@@ -106,7 +106,7 @@
     var chosenVoice = null;
 
     var rate = parseFloat(localStorage.getItem(LS_RATE));
-    if (!(rate >= 0.5 && rate <= 2)) rate = 0.95;
+    if (!(rate >= 0.5 && rate <= 2)) rate = 0.92; // measured audiobook pace — less rushed reads less robotic
 
     // ---- build player UI ---------------------------------------------------
     var player = document.createElement('div');
@@ -187,15 +187,21 @@
 
     function score(v) {
       var s = 0, n = (v.name || '').toLowerCase(), l = (v.lang || '').toLowerCase();
-      // Prefer richer "natural/neural" voices and clear, authoritative narrators.
-      if (/natural|neural|online|premium|enhanced/.test(n)) s += 40;
-      if (/\b(guy|ryan|arthur|daniel|george|brian|matthew|davis|tony|william|christopher|eric)\b/.test(n)) s += 22;
-      if (/\b(google)\b/.test(n)) s += 18;
-      if (/\b(male)\b/.test(n)) s += 10;
-      if (l.indexOf('en-gb') === 0) s += 10;      // measured British reads "astute"
-      else if (l.indexOf('en-us') === 0) s += 6;
-      if (/\b(zira|susan|hazel|female)\b/.test(n)) s += 3; // still fine, minor
-      if (/compact|espeak|festival|robo/.test(n)) s -= 20;
+      // 1) British first — the listener asked for a British reader.
+      if (l.indexOf('en-gb') === 0) s += 60;
+      else if (l.indexOf('en-au') === 0 || l.indexOf('en-ie') === 0) s += 22; // other non-US English, warmer than US
+      else if (l.indexOf('en-us') === 0) s += 8;
+      else if (l.indexOf('en') === 0) s += 4;
+      // 2) Naturalness — network/neural voices are the non-robotic ones.
+      //    localService === false ⇒ cloud voice (Google/Microsoft natural); far smoother than on-device synths.
+      if (v.localService === false) s += 45;
+      if (/natural|neural|online|premium|enhanced|siri/.test(n)) s += 45;
+      // 3) Known-good British narrators by name.
+      if (/\b(daniel|arthur|george|ryan|thomas|oliver|libby|sonia|serena|kate|hazel|stephen|elliot)\b/.test(n)) s += 28;
+      if (/google uk english/.test(n)) s += 26;
+      if (/\b(male)\b/.test(n)) s += 6;
+      // 4) Push the robotic on-device engines to the bottom.
+      if (/compact|espeak|festival|robo|pico|flite|mbrola/.test(n)) s -= 60;
       return s;
     }
     function bestVoice(list) {
@@ -220,8 +226,8 @@
       var u = new SpeechSynthesisUtterance(b.chunks[chunkIdx]);
       if (chosenVoice) u.voice = chosenVoice;
       u.rate = rate;
-      u.pitch = 0.98;
-      u.lang = (chosenVoice && chosenVoice.lang) || 'en-US';
+      u.pitch = 1.0;   // natural pitch; a warmer, less clipped read than a lowered robot tone
+      u.lang = (chosenVoice && chosenVoice.lang) || 'en-GB';
       u.onend = function () {
         if (!playing) return;
         chunkIdx++;
