@@ -1,0 +1,22 @@
+name: Content Integrity
+
+# Tamper-evidence for published content: fails the build if report.html changed
+# without the signed manifest being regenerated. Prevents silent/unauthorized
+# (or AI-injected) edits to the report from reaching production undetected.
+on:
+  push:
+    branches: [ main ]
+    paths: [ 'site/report.html', 'content-integrity-manifest.json', 'linguistic-integrity.js' ]
+  pull_request:
+    paths: [ 'site/report.html', 'content-integrity-manifest.json', 'linguistic-integrity.js' ]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Verify report.html against signed content manifest
+        run: node linguistic-integrity.js verify

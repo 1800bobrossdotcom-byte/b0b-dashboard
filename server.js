@@ -143,9 +143,9 @@ function pixelCSP(nonce) {
 function siteCSP(nonce) {
   return {
     defaultSrc: ["'self'"],
-    scriptSrc: ["'self'", "'unsafe-inline'", 'https://unpkg.com', 'https://cdnjs.cloudflare.com'],
+    scriptSrc: ["'self'", "'unsafe-inline'"],
     scriptSrcAttr: ["'unsafe-inline'"],
-    styleSrc: ["'self'", "'unsafe-inline'", 'https://unpkg.com', 'https://cdnjs.cloudflare.com'],
+    styleSrc: ["'self'", "'unsafe-inline'"],
     imgSrc: ["'self'", 'data:', 'blob:', 'https://*.tile.openstreetmap.org', 'https://*.basemaps.cartocdn.com', 'https://server.arcgisonline.com', 'https://*.tile.opentopomap.org', 'https://unpkg.com', 'https://tiles.stadiamaps.com', 'https://cdn.star.nesdis.noaa.gov'],
     fontSrc: ["'self'", 'https://cdnjs.cloudflare.com'],
     objectSrc: ["'none'"],
@@ -177,6 +177,9 @@ app.use((req, res, next) => {
     permittedCrossDomainPolicies: { permittedPolicies: 'none' },
   })(req, res, () => {
     res.removeHeader('X-Powered-By');
+    // Restrict powerful features to nothing the site needs; delegate autoplay to the YouTube embed only.
+    res.setHeader('Permissions-Policy',
+      'camera=(), microphone=(), geolocation=(), usb=(), payment=(), magnetometer=(), gyroscope=(), accelerometer=(), interest-cohort=(), autoplay=(self "https://www.youtube.com" "https://www.youtube-nocookie.com")');
     next();
   });
 });
