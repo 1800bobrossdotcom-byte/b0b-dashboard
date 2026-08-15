@@ -16,7 +16,6 @@
     "node": ">=18.0.0"
   },
   "devDependencies": {
-    "google-translate-api-x": "^10.7.2",
-    "translatte": "^3.0.1"
+    "google-translate-api-x": "^10.7.2"
   }
 }
