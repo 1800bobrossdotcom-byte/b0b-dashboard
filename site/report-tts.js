@@ -109,6 +109,12 @@
     // token is stale is ignored, so cancel-fired events can't double-advance.
     var speakSeq = 0;
     var keepAlive = null;  // Chromium long-read keep-alive timer
+    // iOS/Safari speech is fragile: it forbids speak() right after a cancel()
+    // outside a user gesture, and the pause()/resume() keep-alive (a Chromium
+    // fix) actively silences it. Detect it and soften both.
+    var isIOS = /iP(hone|ad|od)/.test(navigator.userAgent) ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    var isSafari = /^((?!chrome|android|crios|fxios).)*safari/i.test(navigator.userAgent);
 
     var rate = parseFloat(localStorage.getItem(LS_RATE));
     if (!(rate >= 0.5 && rate <= 2)) rate = 0.92; // measured audiobook pace — less rushed reads less robotic
@@ -215,7 +221,14 @@
 
     // ---- core: speak the current chunk ------------------------------------
     function speakCurrent() {
-      window.speechSynthesis.cancel();
+      // Only cancel when something is actually in flight (an interruption:
+      // next/prev/jump/rate change). On the normal chunk→chunk advance the
+      // previous utterance has already ended, so we DON'T cancel — cancel()
+      // immediately followed by speak() outside a user gesture is what breaks
+      // iOS Safari mid-narration.
+      if (window.speechSynthesis.speaking || window.speechSynthesis.pending) {
+        window.speechSynthesis.cancel();
+      }
       var mySeq = ++speakSeq; // this call now owns the queue; older callbacks go stale
       if (idx >= blocks.length) { finish(); return; }
       var b = blocks[idx];
@@ -260,8 +273,11 @@
 
     // Chromium silently halts speechSynthesis after ~15s of continuous output,
     // even across a queue. A periodic pause()+resume() nudge keeps it running.
+    // iOS/Safari does NOT have this bug and the nudge silences it there, so the
+    // keep-alive is desktop-Chromium-only.
     function startKeepAlive() {
       stopKeepAlive();
+      if (isIOS || isSafari) return; // would break narration on Apple browsers
       keepAlive = setInterval(function () {
         if (playing && window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
           window.speechSynthesis.pause();
@@ -276,6 +292,10 @@
       if (idx >= blocks.length) idx = 0;
       playing = true;
       elPlay.textContent = '⏸'; // pause glyph
+      // iOS can leave the engine in a paused state between sessions; nudge it,
+      // and this call runs inside the button's user gesture, which unlocks
+      // speech on mobile Safari.
+      try { window.speechSynthesis.resume(); } catch (e) {}
       startKeepAlive();
       speakCurrent();
     }
