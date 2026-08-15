@@ -139,8 +139,12 @@
         '<label>Voice <select id="ttsVoice"></select></label>' +
         '<label>Speed <input type="range" id="ttsRate" min="0.6" max="1.6" step="0.05" value="' + rate + '"></label>' +
         '<span id="ttsRateVal" style="font-size:.66rem;color:#8a8a8a;">' + rate.toFixed(2) + '×</span>' +
-      '</div>';
+      '</div>' +
+      '<div class="tts-row"><span id="ttsDiag" style="font-size:.6rem;color:#6a7a6a;flex:1 1 100%;' +
+        'white-space:normal;word-break:break-word;">diag…</span></div>';
     document.body.appendChild(player);
+    var elDiag = player.querySelector('#ttsDiag');
+    function setDiag(s) { if (elDiag) elDiag.textContent = 'diag: ' + s; }
 
     var fab = document.createElement('button');
     fab.id = 'ttsFab';
@@ -203,6 +207,10 @@
         if (chosenVoice && v.name === chosenVoice.name) o.selected = true;
         elVoice.appendChild(o);
       });
+      if (typeof setDiag === 'function') {
+        setDiag('voices=' + voices.length + ' · pick=' + (chosenVoice ? chosenVoice.name + '/' + chosenVoice.lang : 'none') +
+          ' · iOS=' + isIOS + ' · api=' + ('speechSynthesis' in window));
+      }
     }
     // Speak a short sample in the current voice — immediate audible confirmation
     // that a switch took (and a diagnostic when a device ignores per-voice
@@ -215,6 +223,10 @@
       u.voice = chosenVoice;
       u.lang = chosenVoice.lang || 'en-GB';
       u.rate = rate; u.pitch = 1.0;
+      setDiag('sample → ' + chosenVoice.name + ' /' + u.lang + ' · waiting…');
+      u.onstart = function () { setDiag('SAMPLE PLAYING · ' + chosenVoice.name); };
+      u.onerror = function (ev) { setDiag('⚠ SAMPLE ERROR: ' + ((ev && ev.error) || 'unknown')); };
+      try { window.speechSynthesis.resume(); } catch (e) {}
       window.speechSynthesis.speak(u);
     }
     // Voices load asynchronously in most browsers.
@@ -272,6 +284,8 @@
       u.rate = rate;
       u.pitch = 1.0;   // natural pitch; a warmer, less clipped read than a lowered robot tone
       u.lang = (chosenVoice && chosenVoice.lang) || 'en-GB';
+      setDiag('speak → ' + (chosenVoice ? chosenVoice.name : 'default') + ' /' + u.lang + ' · waiting…');
+      u.onstart = function () { if (mySeq === speakSeq) setDiag('AUDIO PLAYING · ' + (chosenVoice ? chosenVoice.name : 'default')); };
       u.onend = function () {
         // Ignore events from a cancelled/superseded utterance (see speakSeq).
         if (mySeq !== speakSeq || !playing) return;
@@ -284,6 +298,7 @@
         speakCurrent();
       };
       u.onerror = function (ev) {
+        setDiag('⚠ ERROR: ' + ((ev && ev.error) || 'unknown') + ' · voice=' + (chosenVoice ? chosenVoice.name : 'default'));
         if (mySeq !== speakSeq || !playing) return;
         // "interrupted"/"canceled" are our own cancels — never treat as a fault.
         if (ev && (ev.error === 'interrupted' || ev.error === 'canceled')) return;

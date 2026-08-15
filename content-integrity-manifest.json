@@ -1,9 +1,9 @@
 {
-  "generated": "2026-08-15T12:52:54.912Z",
+  "generated": "2026-08-15T12:58:40.256Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "771cad55235b38ec74590b7eca7cd7f726f4e60fd5d9e0dc956be3aee966ec6b",
+  "fullFileHash": "5c008f3e4d2467749a1997ddf256bc8d74f8e73c2c65ba9bc5776bec5166f766",
   "sectionBlocks": [
     {
       "id": "_preamble",
