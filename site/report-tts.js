@@ -234,7 +234,10 @@
     window.speechSynthesis.onvoiceschanged = loadVoices;
 
     function score(v) {
-      var s = 0, n = (v.name || '').toLowerCase(), l = (v.lang || '').toLowerCase();
+      var s = 0, n = (v.name || '').toLowerCase();
+      // Android/Google TTS reports language with an underscore (en_GB); Chrome/
+      // Apple use a hyphen (en-GB). Normalize so the British match actually fires.
+      var l = (v.lang || '').toLowerCase().replace(/_/g, '-');
       // 1) British first — the listener asked for a British reader.
       if (l.indexOf('en-gb') === 0) s += 60;
       else if (l.indexOf('en-au') === 0 || l.indexOf('en-ie') === 0) s += 22; // other non-US English, warmer than US
