@@ -172,17 +172,29 @@
     }
 
     // ---- voices ------------------------------------------------------------
+    var voiceLocked = false; // true once the listener picks a voice by hand
+    var voicesSig = '';      // fingerprint of the current voice set
     function loadVoices() {
-      voices = window.speechSynthesis.getVoices().filter(function (v) {
-        return /^en(-|_|$)/i.test(v.lang);
-      });
-      if (!voices.length) voices = window.speechSynthesis.getVoices();
+      var all = window.speechSynthesis.getVoices();
+      var en = all.filter(function (v) { return /^en(-|_|$)/i.test(v.lang); });
+      voices = en.length ? en : all;
       if (!voices.length) return;
 
-      var savedName = localStorage.getItem(LS_VOICE);
-      chosenVoice = voices.filter(function (v) { return v.name === savedName; })[0] ||
-                    bestVoice(voices);
+      // Don't let a spurious voiceschanged re-run the auto-selector over a
+      // manual pick — that's how the dropdown "won't switch."
+      if (!voiceLocked) {
+        var savedName = localStorage.getItem(LS_VOICE);
+        var saved = voices.filter(function (v) { return v.name === savedName; })[0];
+        chosenVoice = saved || bestVoice(voices);
+        if (saved) voiceLocked = true; // a prior explicit choice stays put
+      }
 
+      // Rebuild the dropdown only when the voice set actually changed, and
+      // never while the user has it open (that would yank the selection).
+      var sig = voices.map(function (v) { return v.name; }).join('|');
+      if (sig === voicesSig && elVoice.options.length) return;
+      if (document.activeElement === elVoice) return;
+      voicesSig = sig;
       elVoice.innerHTML = '';
       voices.slice().sort(function (a, b) { return score(b) - score(a); }).forEach(function (v) {
         var o = document.createElement('option');
@@ -191,6 +203,19 @@
         if (chosenVoice && v.name === chosenVoice.name) o.selected = true;
         elVoice.appendChild(o);
       });
+    }
+    // Speak a short sample in the current voice — immediate audible confirmation
+    // that a switch took (and a diagnostic when a device ignores per-voice
+    // selection and only honors language).
+    function sampleVoice() {
+      if (!chosenVoice) return;
+      ++speakSeq;
+      window.speechSynthesis.cancel();
+      var u = new SpeechSynthesisUtterance('Voice set. This is how the report will sound.');
+      u.voice = chosenVoice;
+      u.lang = chosenVoice.lang || 'en-GB';
+      u.rate = rate; u.pitch = 1.0;
+      window.speechSynthesis.speak(u);
     }
     // Voices load asynchronously in most browsers.
     loadVoices();
@@ -413,9 +438,14 @@
     elClose.addEventListener('click', hidePlayer);
     fab.addEventListener('click', function () { showPlayer(); });
     elVoice.addEventListener('change', function () {
-      chosenVoice = voices.filter(function (v) { return v.name === elVoice.value; })[0] || chosenVoice;
-      if (chosenVoice) localStorage.setItem(LS_VOICE, chosenVoice.name);
-      if (playing) speakCurrent(); // re-voice mid-stream
+      var picked = voices.filter(function (v) { return v.name === elVoice.value; })[0];
+      if (picked) {
+        chosenVoice = picked;
+        voiceLocked = true; // honor the manual choice; stop the auto-selector
+        localStorage.setItem(LS_VOICE, picked.name);
+      }
+      if (playing) speakCurrent();  // continue narration in the new voice
+      else sampleVoice();           // not playing → speak a sample so it's audible
     });
     elRate.addEventListener('input', function () {
       rate = parseFloat(elRate.value) || 0.95;
