@@ -108,3 +108,24 @@ XIII Cyclical: DOCUMENTED (CIA Congress for Cultural Freedom / Encounter-Preuves
     Antarctica" / hyperstition (fiction/theory-fiction, zero evidentiary status).
 NET: report's most speculative sections now openly tier documented-vs-fringe in-text.
 NEXT: wave2 = XIV (cobalt/DRC), X (NEOM/Hikvision), VIII (Nash/Bitcoin), XX (data centers), XI, XVI.
+
+═══════════════════════════════════════════════════════════════════════
+WAVE 2 RESULTS (published tiered updates)
+═══════════════════════════════════════════════════════════════════════
+XIV Slavery: figures VERIFIED (ILO 49.6M/27.6M; $236B 2024; ACLU prison-labor $11B/13-52c).
+    No Kabwe conflation present. Only fix: abolition "paid until 2015" framing qualified
+    inline (perpetual bonds refinanced into general debt; 2015 = redemption per 2018 Treasury FOI).
+X   Surveillance: PUBLISHED audit callout. Gospel IDF-acknowledged (~100/day 2021, Kochavi);
+    Lavender/Where's-Daddy = +972-attributed, IDF-denied (contested). RETIRED the untraceable
+    "1,000+ targets/day" Maven figure -> unverified. $200M frontier-AI awards != Palantir Maven.
+VIII 51%/Nash/crypto: PUBLISHED audit callout. Nash "Ideal Money" documented; Nash=Satoshi
+    unsupported; $TRUMP/$MELANIA concentration documented (~80% held, ~$324M fees, 764-810k
+    wallets lost). DOWNGRADED "parallel deaths" -> unsupported conspiracy inference (Cotten/
+    McAfee/Mushegian each independently ruled, none linked).
+XX  Compute: PUBLISHED audit callout. Data-center infra documented (NSA Utah, Stargate, Natick,
+    Nautilus, underwater DCs); Ashburn "70%" = trade folklore. DOWNGRADED MK-Ultra->GATE
+    (debunked social-media claim), tiered Parsons (real bio, overread), labeled "secret
+    societies coordination layer"/"Epstein=intel op" as narrative framing not finding.
+NET (waves 1+2): 6 sections now carry in-text tiering audits (IX, XIII, XVII, VIII, X, XX)
+    + XIV precision fix. The report's speculative surface is now openly separated from its
+    documented backbone. NEXT: wave3 = XI, XV, XIX, VII, III, IV, XVI.
