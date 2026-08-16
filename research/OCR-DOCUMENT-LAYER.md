@@ -234,3 +234,25 @@ collective-disloyalty generalization. Same investigative standard for Wexner as 
 Trump/Andrew/Black. Keep pulling the DOCUMENTED threads (Barak/Wexner-Foundation paper;
 Maxwell→Israel substrate); treat Cohen as not-in-corpus unless an external primary
 thread is supplied.
+
+═══════════════════════════════════════════════════════════════════════
+DEEP-DIVE EXTENSION 3 — Maxwell <-> Wexner/Barak bridge (PUBLISHED, tiered)
+═══════════════════════════════════════════════════════════════════════
+QUESTION: does the Maxwell/Israel-intelligence substrate connect to the Wexner/Barak
+apparatus via a documented shared node, or only through Epstein-the-hub?
+FINDING (published as a tiered paragraph after Branch A, Section V):
+- [DOCUMENTED-corpus] No peer edge Maxwell<->Barak or Maxwell<->Wexner. Both connect to
+  Epstein, not each other. Star-graph; Epstein is the sole shared hub.
+- [NO EVIDENCE] No documented Robert Maxwell<->Wexner or Maxwell<->Barak tie in public record.
+- [DOCUMENTED, not intelligence] Strongest real cross-link = CHARLES BRONFMAN: joint 1989
+  bid w/ Robert Maxwell for the Jerusalem Post (JTA), + 1991 Mega Group co-founder with
+  Wexner (WSJ 1998). Business/philanthropy tie, NOT an intelligence conduit; Maxwell died
+  the year Mega formed, never a member. "Mega-as-CIA/Mossad-op" = Webb-tier, uncorroborated.
+- [WEAK/CIRCUMSTANTIAL] Shimon Peres: at Maxwell's 1991 funeral AND (per Barak on-record)
+  introduced Barak to Epstein ~2002. Shared elite figure, expected by default, not coordination.
+- [ALLEGED/contested, not adopted] Maxwell-Mossad (Hersh Samson Option — Maxwell sued,
+  "total invention"; Thomas "six intel chiefs"; Ben-Menashe PROMIS). No court finding.
+CONCLUSION: substrate elements are real and individually documented but do NOT form a
+documented operational network; linkage = Epstein-hub + ordinary elite overlap. This is
+Branch A restated at the bridge level (capability+money orbiting a private hub, not a
+service running a network) — the reason Branch A stays at hypothesis. Over-read refused.
