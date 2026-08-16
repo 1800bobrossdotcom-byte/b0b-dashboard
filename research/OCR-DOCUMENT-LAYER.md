@@ -199,3 +199,38 @@ DISPOSITION: Do NOT publish a "Wexner handler / sayan" passage or Yossi Cohen's 
   statement — tiered "reported, single-outlet") and the C.O.U.Q. back-flow instrument.
   The handler/sayan thesis is held here as LABELED, UNSUPPORTED — the honest finding is
   that the record shows documented philanthropy + the Barak payment, and NO handler.
+
+═══════════════════════════════════════════════════════════════════════
+CORRECTION + UPGRADE (denial epistemics; primary Barak-payment evidence)
+═══════════════════════════════════════════════════════════════════════
+DENIAL EPISTEMICS — CORRECTION. Earlier I logged the Cohen/Netanyahu/Bennett denials
+as evidence AGAINST an Epstein-Mossad link. That is wrong tradecraft: for a *deniable*
+relationship, an interested official's denial is non-probative — identical behavior
+whether true or false. STRIKE those denials as disconfirming. BUT: a worthless denial
+is not evidence FOR the claim either; it leaves the question UNFALSIFIED, not confirmed.
+The claim still stands or falls on POSITIVE documented evidence. Bar for moving it: a
+primary document placing WEXNER personally (not just his foundation, not just Barak)
+inside an intelligence tasking. Not found. Question stays open, not closed by denials.
+
+PRIMARY-SOURCE UPGRADE — Barak payment (was "reported, single-outlet"; now DOCUMENTED).
+Corpus email, 8 Dec 2005, "Re: Fwd: Question from Larry," NON-REDACTED:
+- Indyke→Epstein: "Larry Moses contacted Peg to advise her that he received the attached
+  e-mails regarding Barak's completion of summary treatments for each of his two books
+  and the request for payment pursuant to the Book Agreement with TWF [The Wexner
+  Foundation]... Moses advises that he was not involved in 'developing' the book deal
+  and asked Peg if she could find out how Moses should proceed..."
+- Epstein: "get a copy of what he sent."
+=> Documents Epstein inside the Wexner-Foundation→Barak payment machinery (routed
+Moses→Peg→Indyke→Epstein), and the Foundation's own president NOT the developer of the
+deal. This is the primary source behind the Jan-2026 DOJ "reported" claim; it cuts
+against the Foundation's 2020 High Court statement that Epstein had no role. PUBLISHED
+as the upgraded Barak line (Section III). TIER DISCIPLINE HELD: documents Epstein
+steering a large payment to a former Israeli PM through Wexner's charity; does NOT
+establish an intelligence tasking. The "why" fork (intel vs money-manager) stays open.
+
+STANDING FRAME (per user, correctly): the handler QUESTION is legitimate intelligence
+analysis, not a trope — the trope attaches only to asserting an unproven ANSWER or to
+collective-disloyalty generalization. Same investigative standard for Wexner as for
+Trump/Andrew/Black. Keep pulling the DOCUMENTED threads (Barak/Wexner-Foundation paper;
+Maxwell→Israel substrate); treat Cohen as not-in-corpus unless an external primary
+thread is supplied.

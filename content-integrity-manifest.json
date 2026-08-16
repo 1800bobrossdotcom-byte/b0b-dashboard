@@ -1,9 +1,9 @@
 {
-  "generated": "2026-08-16T01:09:57.914Z",
+  "generated": "2026-08-16T01:17:10.344Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "919034155d43f37d6b20f7a28549bbc0c47774dc0be1e15313cb3087884482f0",
+  "fullFileHash": "8fc7fda0e6433969fc44968055926bb3f907d7726647716c5237fa4390ac45da",
   "sectionBlocks": [
     {
       "id": "_preamble",
@@ -17,8 +17,8 @@
     },
     {
       "id": "II",
-      "hash": "a5863251e585bb188742dc6a8d3035ddeec664b6324bf601692d3f6a8bd9d85b",
-      "length": 54446
+      "hash": "cd7f2b976be90c6a81128affbd98039bb4289616acc4eabc54c3d60a4bf71210",
+      "length": 55414
     },
     {
       "id": "III",
@@ -231,9 +231,9 @@
     },
     {
       "index": 17,
-      "hash": "5395cab910e3f1a8a501b77681cbb3192c11edfdf94b1683669793ccba8ed9a4",
+      "hash": "394174f511b6075419daf337e3742b4aa97613a626987340303213b73dcb96d4",
       "preview": "The coherence payoff - the origin node connects to the Carbyne node. The same in...",
-      "length": 1083
+      "length": 2051
     },
     {
       "index": 18,
