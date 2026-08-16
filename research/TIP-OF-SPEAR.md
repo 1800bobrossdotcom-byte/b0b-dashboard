@@ -129,3 +129,32 @@ XX  Compute: PUBLISHED audit callout. Data-center infra documented (NSA Utah, St
 NET (waves 1+2): 6 sections now carry in-text tiering audits (IX, XIII, XVII, VIII, X, XX)
     + XIV precision fix. The report's speculative surface is now openly separated from its
     documented backbone. NEXT: wave3 = XI, XV, XIX, VII, III, IV, XVI.
+
+═══════════════════════════════════════════════════════════════════════
+WAVE 3 RESULTS (published tiered updates)
+═══════════════════════════════════════════════════════════════════════
+XIX Calibration Index: methodology sound ("nodes"=documented institutional affiliations,
+    NOT Epstein ties). Added RED GUARDRAIL disclaimer: index measures institutional
+    connectivity not proximity to Epstein; large majority have NO documented Epstein tie;
+    inclusion is not an allegation of connection or wrongdoing. (Critical guilt-by-assoc fix.)
+VII Control Architecture: institutions all documented (Trilateral "Crisis of Democracy" 1975,
+    CFR/Bilderberg/BIS, Greenspan 1996, Crown/General Dynamics, Laus Deo). Audit callout:
+    films (Being There/Prisoner/Wag the Dog) + PKD "Empire never ended" = motif not evidence;
+    "one coordinated directing body" = interpretive synthesis (overlapping membership documented,
+    unified command not).
+XV Conflicts: Nord Stream sabotage documented (gross sabotage, no charges; German case ->
+    Ukrainian cell/Andromeda, charges 2025-26). Audit callout: state authorization = charging
+    allegation not verdict; Hersh US-did-it = single anon source, Russian-media-amplified;
+    Russia-did-it contradicted by ownership. Resource-overlay = tendency not law; "globally
+    organised malicious elite" = untraceable/fringe. L3Harris/Aerojet $4.7B documented.
+XI "New" Pattern: charter cities documented WITH realistic status (NEOM stalled/paused, Prospera
+    in ICSID arbitration, California Forever ballot withdrawn, Telosa/Praxis concept-stage).
+    Pronatalism documented (Musk 14 kids/statements, Collinses, NatalCon, TESCREAL critique)
+    but "coordinated elite breeding program" DOWNGRADED to unsupported (choices+ideology != cabal).
+IV Blowback: already well-tiered this session. Fix: $10B Palantir Army deal clarified as a
+    10-yr CEILING (not guaranteed spend). Carbyne->Axon $625M, Maven $480M->$1.3B confirmed.
+NET (waves 1-3): 9 in-text tiering audits (IX,XIII,XVII,VIII,X,XX,VII,XV,XI) + XIX red guardrail
+    + XIV & IV precision fixes + VI confirmed-solid. Whole-site TOS AUDIT PASS complete:
+    every speculative section now openly separates documented backbone from labeled/fringe.
+    Remaining low-value: III (graph math), XVI (FOIA, covered by SOURCES-AND-LEADS), XII (done),
+    XVIII/XXI/XXII/XXIII/I (index/synthesis/normative).
