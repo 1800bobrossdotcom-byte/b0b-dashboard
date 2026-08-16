@@ -278,3 +278,23 @@ DEEP-DIVE EXTENSION 4 — Bronfman (PUBLISHED, tiered)
   NOT link; no edge drawn.
 [FRINGE, not adopted] "Mega-as-CIA/Mossad-op" = Whitney Webb et al., uncorroborated by
   mainstream. Flagged, excluded from evidentiary weight.
+
+═══════════════════════════════════════════════════════════════════════
+DEEP-DIVE EXTENSION 5 — Bronfman -> Trump trace (PUBLISHED as documented NEGATIVE)
+═══════════════════════════════════════════════════════════════════════
+[NO EVIDENCE-corpus] No Bronfman<->Trump edge in the Epstein archive. Roger Stone appears
+  66x but ONLY as news (his Jan 2019 Mueller indictment, Kahn forwarding CNBC) — no
+  Stone<->Epstein relationship, no Stone<->Bronfman material. No NXIVM material at all.
+[DOCUMENTED, weak/intermediary] Roger Stone was paid by Clare & Sara Bronfman for NXIVM
+  Albany lobbying ~2007 (via Joe Bruno / Steven Pigeon); by his own account quit when
+  asked to weaponize donations to get enemies indicted. Shared paid gun-for-hire, dozens
+  of clients, his Trump work separate in time+substance; connects nothing between families.
+[DOCUMENTED, disclaimed] Charles Bronfman: played golf w/ Trump once, "I really don't know
+  him... never done business with him" (Canadian Jewish News 2021); has publicly criticized
+  Trump. Sisters' political donations ran to CLINTON (2008; illegal bundling alleged at
+  NXIVM trial) — opposite direction. One minor GOP data point (NRSC), no Trump donation.
+[NO EVIDENCE] Edgar Jr (Paramount bid failed BEFORE Trump-FCC episode), Matthew, Edgar Sr:
+  no documented Trump tie.
+BOTTOM LINE (published as tight completion of the Bronfman node): no meaningful Bronfman–
+  Trump connection; strongest "link" is a shared paid intermediary (Stone), too thin to be
+  a relationship and with no Epstein nexus. Documented negative — stated, not forced.

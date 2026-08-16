@@ -1,9 +1,9 @@
 {
-  "generated": "2026-08-16T01:43:32.996Z",
+  "generated": "2026-08-16T01:53:07.353Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "7eb324587d1db1031ecc9756955933207513f56157b08f33d19d9ae502321016",
+  "fullFileHash": "f47d5a3f1b53d98d44afd6c50affc06ca854286bebc22c443448807da2ffd70c",
   "sectionBlocks": [
     {
       "id": "_preamble",
@@ -17,8 +17,8 @@
     },
     {
       "id": "II",
-      "hash": "0c3cd27ce7b6270a9ff2a6630b5416395279bb0d438615482cf2874a615fd445",
-      "length": 59877
+      "hash": "467bae1afd229ea8af5516cf4d9cb928062faa35075ac81dd234a4c8912927a2",
+      "length": 60956
     },
     {
       "id": "III",
@@ -351,9 +351,9 @@
     },
     {
       "index": 37,
-      "hash": "03ccc30462111b525df70850188e7381c47755c38c2d18020640735b05e0a391",
+      "hash": "62e8288113cbb4848f7a0d19efa18571c80867e867992e11da5aa2634f4d2656",
       "preview": "The Bronfman node, followed to its ends (tiered). Because the strongest cross-li...",
-      "length": 1903
+      "length": 2982
     },
     {
       "index": 38,
