@@ -158,3 +158,28 @@ NET (waves 1-3): 9 in-text tiering audits (IX,XIII,XVII,VIII,X,XX,VII,XV,XI) + X
     every speculative section now openly separates documented backbone from labeled/fringe.
     Remaining low-value: III (graph math), XVI (FOIA, covered by SOURCES-AND-LEADS), XII (done),
     XVIII/XXI/XXII/XXIII/I (index/synthesis/normative).
+
+═══════════════════════════════════════════════════════════════════════
+DENIABLE-ASSET SPECTRUM (published Section V) + RED-TEAM HARDENING
+═══════════════════════════════════════════════════════════════════════
+Published a 5-rung lens (unwitting contact / witting associate / facilitator-cutout /
+deniable asset [labeled] / tasked-run [service files, reached by no one]). Adversarial
+red-team salvo (2 agents) then hardened it:
+- BARAK: red-team flagged that placing a LIVING, non-indicted former head of state on any
+  numbered asset-ladder is "defamation architecture" (true facts on an axis whose endpoint
+  is espionage). FIX: ETHICAL FLOOR added — living, non-indicted individuals are NOT scored;
+  Barak MOVED OFF the ladder into plain associational terms (investor/consultant/chairman;
+  no primary source alleges an intel role). Same floor applied to Wexner, Rod-Larsen, Eddy.
+- FALSE-PRECISION critique: rungs 3-5 rest on single discredited sources (Ben-Menashe,
+  Ostrovsky). FIX: disclaimer now says rungs describe KIND not measured quantity, and names
+  Ostrovsky's + Ben-Menashe's credibility problems inline; taxonomy locates claims, never
+  launders single-source allegations into documented fact.
+- EPSTEIN phrasing: "Unit-8200 financing" -> "financed a commercial surveillance firm staffed
+  by Unit-8200 alumni" (he didn't fund the unit). Acosta line noted single-source + denied under oath.
+- GHISLAINE: posture cited explicitly (limited conduct-contingent immunity -> blanket Fifth to
+  Congress -> clemency offer). She's convicted, so not shielded by the living-uncharged floor.
+- Scout confirmed no other node clears "documented intel career + documented above-rung-1
+  function" beyond Carbyne/Barak/Black Cube; Brunel=rung-3 cut-out but for TRAFFICKING not
+  intel (kept off the intel spectrum); rung-1 contrasts (Gates, Tucker, Hawking) noted.
+NET: framework survives a hostile intelligence-professional read; living-person floor is now
+an explicit, stated principle of the whole report.
