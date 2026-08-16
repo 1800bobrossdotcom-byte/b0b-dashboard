@@ -1,9 +1,9 @@
 {
-  "generated": "2026-08-16T21:02:24.093Z",
+  "generated": "2026-08-16T21:04:30.836Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "b6152fd504b3f761ee6566c4837d3eb72ff7922b3f8649d57f1384253677f32f",
+  "fullFileHash": "25dfe3dbde17efb24aa022b309944a2306b95e22988daa3fb85ca90c81465af1",
   "sectionBlocks": [
     {
       "id": "_preamble",
@@ -32,8 +32,8 @@
     },
     {
       "id": "V",
-      "hash": "fc972b7a4ddfe441d2ec48874d9ef2476f5d9a1df15625f65c1e900ee97d2bbb",
-      "length": 24352
+      "hash": "80c8d570b2f7d118be19a6105f2941202f40935831f68fdec0e883cec8900a3c",
+      "length": 25419
     },
     {
       "id": "VI",
@@ -729,9 +729,9 @@
     },
     {
       "index": 100,
-      "hash": "36c8a6c8df71c403d37b51da5a697ca891ea97d69daee1707eb77ff2b5ff8082",
-      "preview": "The reading, held at tier. Three exposure-point exits, each unwitnessed and each...",
-      "length": 1015
+      "hash": "21b9d5b99be73c3ef1ff5e3dd05a6f85de50f818fbb3c3e194b77b6e0030e871",
+      "preview": "The reading, held at tier. (The count is kept honest: lower-tier deaths in the o...",
+      "length": 1269
     },
     {
       "index": 101,
