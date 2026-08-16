@@ -256,3 +256,25 @@ CONCLUSION: substrate elements are real and individually documented but do NOT f
 documented operational network; linkage = Epstein-hub + ordinary elite overlap. This is
 Branch A restated at the bridge level (capability+money orbiting a private hub, not a
 service running a network) — the reason Branch A stays at hypothesis. Over-read refused.
+
+═══════════════════════════════════════════════════════════════════════
+DEEP-DIVE EXTENSION 4 — Bronfman (PUBLISHED, tiered)
+═══════════════════════════════════════════════════════════════════════
+[DOCUMENTED-corpus] Matthew Bronfman (Edgar Sr.'s son) = documented Epstein contact:
+  holiday card (Dec 2009) + 2010 intro of Epstein to Ron Senator (Sphera Fund, Israeli
+  hedge fund) as "a brilliant money manager." Tier: documented contact only. (Semantic
+  "Bronfman" search was mostly NOISE — contractor Charles, auctioneer Clare Bennett,
+  Zuckerman aide Clare Probert — filtered out. Exact search found Matthew, ~real.)
+[NO EVIDENCE-corpus] Charles Bronfman NOT a direct Epstein correspondent; tie stays via
+  Mega Group + Wexner. Edgar Bronfman Jr. in Epstein's black book = contact info only.
+[DOCUMENTED-record] Charles: Mega Group co-founder w/ Wexner (1991, WSJ 1998), Birthright
+  (1999), 1989 Jerusalem Post joint bid w/ Robert Maxwell (JTA). Clare Bronfman: pleaded
+  guilty 2019 to harboring-aliens-for-gain + ID fraud (racketeering DROPPED; NOT convicted
+  of sex-trafficking), 81 months. Sara: never criminally charged. Clare+Sara financed
+  NXIVM $100M+. Raniere convicted 2019 (incl. sex trafficking), 120 yrs.
+[NO EVIDENCE] NXIVM <-> Epstein/Maxwell: no documented connection (financial/social/
+  testimonial/flight-log/black-book). Only a timing coincidence (Raniere conv. Jun 2019 /
+  Epstein arrest Jul 2019) + thematic parallel. PUBLISHED as explicit refusal: parallel,
+  NOT link; no edge drawn.
+[FRINGE, not adopted] "Mega-as-CIA/Mossad-op" = Whitney Webb et al., uncorroborated by
+  mainstream. Flagged, excluded from evidentiary weight.
