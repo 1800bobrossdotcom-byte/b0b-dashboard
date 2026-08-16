@@ -1198,9 +1198,12 @@ if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.navigator.standalone
   document.getElementById('installInstructions').innerHTML = 'Tap <strong>Share</strong> then <strong>Add to Home Screen</strong>';
 }
 
-/* Register service worker */
+/* SW decommissioned: unregister + clear caches instead of registering (prevents stale mobile). */
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js').catch(function(){});
+  navigator.serviceWorker.getRegistrations().then(function(rs){ rs.forEach(function(r){ r.unregister(); }); }).catch(function(){});
+}
+if (window.caches && caches.keys) {
+  caches.keys().then(function(ks){ ks.forEach(function(k){ caches.delete(k); }); }).catch(function(){});
 }
 
 logEntry('info', 'ARC Shield v1.0 ready - activate to begin scanning');
