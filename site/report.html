@@ -20,12 +20,18 @@
     body {
       background: #0a0a0a;
       color: #d4d4d4;
-      font-family: 'Courier New', 'Consolas', monospace;
+      font-family: ui-monospace, 'SF Mono', 'Cascadia Code', 'Roboto Mono', Menlo, Consolas, 'Courier New', monospace;
       line-height: 1.7;
       padding: 2rem;
       max-width: 960px;
       margin: 0 auto;
+      overflow-wrap: break-word;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
     }
+    /* Long emails, EFTA IDs and URLs must wrap instead of blowing out the line on phones */
+    p, li, td, th, div, span, blockquote, figcaption, h1, h2, h3, h4 { overflow-wrap: break-word; }
+    a { overflow-wrap: anywhere; }
     h1 {
       color: #00ff41;
       font-size: 2rem;
@@ -223,19 +229,26 @@
       .main-content { margin-left: 0; padding: 1rem 1.2rem; padding-top: 3.5rem; }
       .progress-bar { left: 0; }
       h2 { font-size: 1.1rem; }
+      /* wide tables scroll inside their own box instead of forcing the page sideways */
+      table { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .section-label { letter-spacing: 0.08rem; }
     }
     @media (max-width: 480px) {
-      .main-content { padding: 0.8rem; padding-top: 3.2rem; }
-      h1 { font-size: 1.4rem; }
-      h2 { font-size: 1rem; padding-left: 0.6rem; }
-      h3 { font-size: 0.95rem; }
-      body { font-size: 0.85rem; line-height: 1.6; }
+      .main-content { padding: 0.85rem; padding-top: 3.2rem; }
+      h1 { font-size: 1.45rem; }
+      h2 { font-size: 1.05rem; padding-left: 0.6rem; }
+      h3 { font-size: 1rem; }
+      /* 16px body is the mobile-legibility floor (also stops iOS from auto-zooming) */
+      body { font-size: 1rem; line-height: 1.68; }
+      p, li { font-size: 1rem; line-height: 1.68; }
+      .header-meta { font-size: 0.95rem; }
       .cross-ref, .discovery, .warning, .spiritual { padding: 1rem; margin: 1rem 0; }
-      ul, ol { margin-left: 1.2rem; }
-      .sidebar { width: 75vw; }
-      .sidebar-link { padding: 0.55rem 1rem; font-size: 0.75rem; }
-      .sidebar-buttons button, .sidebar-buttons a { padding: 0.35rem 0.6rem; font-size: 0.7rem; }
-      .back-to-top { bottom: 1rem; right: 1rem; width: 36px; height: 36px; font-size: 1rem; }
+      ul, ol { margin-left: 1.1rem; padding-left: 0.2rem; }
+      li { margin-bottom: 0.6rem; }
+      .sidebar { width: 82vw; }
+      .sidebar-link { padding: 0.7rem 1rem; font-size: 0.8rem; }
+      .sidebar-buttons button, .sidebar-buttons a { padding: 0.45rem 0.7rem; font-size: 0.72rem; }
+      .back-to-top { bottom: 1rem; right: 1rem; width: 44px; height: 44px; font-size: 1.1rem; }
     }
     .sidebar-toggle {
       display: none; position: fixed; top: 0.8rem; left: 0.8rem;
