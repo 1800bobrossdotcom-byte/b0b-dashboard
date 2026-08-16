@@ -86,3 +86,25 @@ XXII/XXIII/I  Spiritual / Signal / Purpose — normative/meta         --        
 WAVE 1 IN FLIGHT: VI + XVII (extends), IX + XIII (audits). Synthesize -> publish tiered
 updates -> then wave2. Same discipline everywhere: documented sourced; speculative
 labeled or downgraded; an edge is a fact, a chain is a claim.
+
+═══════════════════════════════════════════════════════════════════════
+WAVE 1 RESULTS (published tiered updates)
+═══════════════════════════════════════════════════════════════════════
+VI  Science Cover: section already exemplary (Edge $638K/$857K, funded-vs-present split,
+    Minsky allegation labeled, "no facility existed"). Researcher CONFIRMED; no edit needed.
+    (Net-new for future: Feb-2026 Nowak 2nd leave + Church tissue-sample story already in-section.)
+XVII Organized Crime: backbone all DOCUMENTED (HSBC $1.921B; Wachovia $378.4B/$160M; BNP
+    GUILTY PLEA $8.9B 2014; CIA-IG Hitz 1998 = no CIA-import-conspiracy finding; Kerry BCCI
+    1992). PUBLISHED audit callout: loops are documented instances, "same structure/personnel"
+    is a pattern-read not one chain; Webb "Dark Alliance" causal claim walked back (core stood).
+IX  Underground/DUMB: all 14 named sites DOCUMENTED (Cheyenne, Raven Rock, Diefenbunker,
+    REGAN Vest, Mayak, Diego Garcia, Detention Site Green, etc.). PUBLISHED audit callout
+    downgrading the fringe: "54-country coordinated network" (conspiracy synthesis), Dulce
+    Base (urban legend), Zorro Ranch "vast complex" (fake-news outlet), whistleblower-only claims.
+XIII Cyclical: DOCUMENTED (CIA Congress for Cultural Freedom / Encounter-Preuves-Der Monat;
+    Salvator Mundi $450.3M; Geneva Freeport; Senate PSI 2020; Olympics case-by-case). PUBLISHED
+    audit callout labeling as myth/fiction: "suppressed archaeology"/megaliths-predate-timeline
+    (pseudo-archaeology), flood-as-literal-global-memory, Lovecraft R'lyeh / "Emperor of
+    Antarctica" / hyperstition (fiction/theory-fiction, zero evidentiary status).
+NET: report's most speculative sections now openly tier documented-vs-fringe in-text.
+NEXT: wave2 = XIV (cobalt/DRC), X (NEOM/Hikvision), VIII (Nash/Bitcoin), XX (data centers), XI, XVI.
