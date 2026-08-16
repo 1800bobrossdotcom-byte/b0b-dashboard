@@ -54,3 +54,35 @@ RUN LOG:
   -> Larry Moses [lmoses@wexner.net, TWF president], 7 Feb 2007; Epstein forwards to Indyke
   8 Feb 2007). Originator of the 2004 deal NOT in extractable Epstein email -> reassign to
   Lead #5 (DDoSecrets Barak archive). This is why #5 carries Impact 9.
+
+═══════════════════════════════════════════════════════════════════════
+WHOLE-SITE EXPANSION (per user: run TOS DEEP on ALL 23 sections, not just Epstein)
+═══════════════════════════════════════════════════════════════════════
+Engine differs by section: Epstein sections (II-VI) = jmail corpus; the rest = web
+research + verification. For the non-Epstein material the highest-value move is often
+an AUDIT — source the soft claims or downgrade their tier — because credibility is the
+scarce resource. Score = Impact x Obtainability x Urgency.
+
+# Sec  Lead                                                          Type      Score  Status
+VI    Brockman/Edge roster + Epstein genetics/eugenics + MIT/Harvard extend    64    WAVE1 (running)
+XVII  HSBC/Wachovia/BCCI + CIA-Contra bank<->cartel<->intel nexus    verify    63    WAVE1 (running)
+IX    DUMBs: real bunkers/black-sites vs 54-country/Dulce/Zorro fringe audit    56    WAVE1 (running)
+XIII  CIA cultural cold war/art/Olympics vs pseudo-archaeology/flood audit      56    WAVE1 (running)
+XIV   Cobalt/DRC child labor + forced-labor supply chains           verify    54    wave2
+X     NEOM / Sidewalk Toronto / Hikvision smart-city surveillance    verify    48    wave2
+XVI   FOIA/MuckRock sweep (cross w/ SOURCES-AND-LEADS)               extend    42    wave2
+VIII  Nash "Ideal Money" / Bitcoin governance / network theory       verify    40    wave2
+XX    Data centers + subsea cables/platforms (cross submarine-latent) verify   40    wave2
+XI    NEOM / charter cities / Prospera replication pattern           verify    40    wave2
+IV    Carbyne->Axon close + Black Cube current ops                   extend    35    wave3
+XV    Nord Stream + "map beneath the map" conflicts                  verify    35    wave3
+XIX   Calibration-index node entries                                audit     35    wave3
+VII   Crown/General Dynamics + apex-clause specific claims          verify    36    wave3
+III   Epstein-number graph math (71% within 6 degrees)              audit     28    wave3
+XII   Enclaves — largely done this session                          --        --    done
+XVIII/XXI  Index / connective tissue — synthesis, low lead value    --        low
+XXII/XXIII/I  Spiritual / Signal / Purpose — normative/meta         --        low
+
+WAVE 1 IN FLIGHT: VI + XVII (extends), IX + XIII (audits). Synthesize -> publish tiered
+updates -> then wave2. Same discipline everywhere: documented sourced; speculative
+labeled or downgraded; an edge is a fact, a chain is a claim.
