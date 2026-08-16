@@ -131,3 +131,71 @@ family-as-victim per Les Wexner's statement) — no imputation. No motive assert
 NOT PURSUED (correctly): "Peter Thiel vet" email (Lesley Groff, 1 Jul 2016) is
 REDACTED to just that header line — insufficient to publish; over-reading it would be
 the hyperspeculation the brief forbids. Report already tiers Thiel correctly.
+
+═══════════════════════════════════════════════════════════════════════
+DEEP-DIVE EXTENSION 2 — Black/Dubin, C.O.U.Q., and the Wexner-Israel/"handler" test
+═══════════════════════════════════════════════════════════════════════
+LEON BLACK "tax" thread — NON-FINDING. The "Leon Black Tax Overhaul" item is a
+Bloomberg article ("Leon Black's Tax-Overhaul Dilemma...", 27 Dec 2017) FORWARDED to
+Epstein by GLENN DUBIN (Dubin & Company LP), not a Black-Epstein transaction. Minor:
+confirms Dubin as an active network correspondent; nothing publishable (report already
+documents Black's ~$158M well). Do not oversell a news clipping.
+
+C.O.U.Q. FOUNDATION — PUBLISHED (Section III back-flow bullet). C.O.U.Q. = Epstein's
+OWN private foundation (his Jewish-philanthropy vehicle: Ramaz $500k, YIVO, Ohio State
+$2.5M, Stanford $50k). Primary email: Indyke -> Epstein, 26 Dec 2007, "Fwd: The C.O.U.Q.
+Foundation," forwarding a Davis Polk Form 1023 for "LHW's new private foundation... the
+entity taking the grant from C.O.U.Q.," C.O.U.Q. transferring ">25% of its net assets."
+Public 990s: C.O.U.Q. -> Wexner YLK Charitable Fund = $14.2M, Jan 2008. => This is the
+documented INSTRUMENT behind the report's existing "$46M back-flow / YLK" line: money
+ran out of an Epstein foundation, through Epstein's lawyer, into a new Wexner foundation
+at the moment of the 2007 split. Clean, documented, on-thesis. PUBLISHED.
+
+───────────────────────────────────────────────────────────────────────
+THE WEXNER <-> ISRAELI-OFFICIALS / "HANDLER / SAYANIM" HYPOTHESIS — TESTED, NOT SUPPORTED
+───────────────────────────────────────────────────────────────────────
+User asked to test a "spider-sense" that Wexner had an Israeli-intelligence handler
+(possible sayan), with Yossi Cohen "of interest." Investigated both corpus and public
+record. RESULT: the record does NOT support it. Tiering:
+
+[NO EVIDENCE — CORPUS] Direct corpus search (jmail email + semantic) for Wexner x
+  Israeli officials / Mossad / Netanyahu / Yossi Cohen returned ZERO substantive hits —
+  only newsletters and unrelated litigant mail. Yossi Cohen does not appear in the
+  Epstein corpus in any documented substantive way.
+
+[NO EVIDENCE — PUBLIC RECORD] No reputable investigative outlet (NYT, Haaretz, ToI,
+  Vanity Fair) has documented that Wexner had an Israeli-intelligence handler or was
+  recruited by Mossad. No documented Yossi Cohen <-> Epstein tie and none Cohen <->
+  Wexner. Cohen publicly denied any Epstein-Mossad link (2026). Netanyahu, Bennett,
+  Cohen all denied an Epstein-Mossad relationship on record.
+
+[DOCUMENTED — but it is PHILANTHROPY, not handling] Wexner's real Israel footprint:
+  the Wexner Israel Fellowship (est. 1989, Harvard Kennedy School; ~10 mid-career
+  Israeli public-sector officials/yr; 280+ alumni incl. ministry directors-general,
+  IDF generals, PM advisers) + Wexner Senior Leaders Israel (2014); all HKS ties cut
+  Oct 2023 over Harvard's post-Oct-7 response. This is a US private philanthropy that
+  cultivates already-serving Israeli civil servants — participation != government/IDF
+  partnership, and it is emphatically NOT evidence of an intelligence role. It is,
+  however, the factual kernel that the "handler" reading over-reads.
+
+[ALLEGED — contested / low-tier, NOT corroborated] The "Wexner ran a Mossad op"
+  reading traces to independent author Whitney Webb (Mega Group = "CIA-Mossad op";
+  she does NOT claim "Epstein was Mossad" outright) and Ari Ben-Menashe (the report's
+  already-flagged contested narrator). One FBI 302 in the DOJ release records an
+  UNNAMED informant's OPINION that Epstein "was a co-opted Mossad agent" — a raw,
+  uncorroborated investigative-file source, not a finding.
+
+[GUARDRAIL] "Sayanim" (Ostrovsky, By Way of Deception, 1990) = informal unpaid Diaspora
+  helpers; the concept has a small kernel but is routinely inflated by conspiracy sites
+  into a global-Jewish-spy-network claim — a classic dual-loyalty antisemitic trope.
+  Labeling a specific named Jewish person a "sayan" without direct evidence IS that
+  pattern, not journalism. The report's existing anti-antisemitism guardrail (Branch A /
+  cabal-OS) already governs this.
+
+DISPOSITION: Do NOT publish a "Wexner handler / sayan" passage or Yossi Cohen's name in
+  the report — no documented tie exists and it is trope-adjacent. PUBLISHED instead only
+  the two DOCUMENTED items: the Barak-payment sourcing upgrade (Jan-2026 DOJ emails
+  reportedly show Epstein reviewing the payment, contradicting the 2020 High Court
+  statement — tiered "reported, single-outlet") and the C.O.U.Q. back-flow instrument.
+  The handler/sayan thesis is held here as LABELED, UNSUPPORTED — the honest finding is
+  that the record shows documented philanthropy + the Barak payment, and NO handler.
