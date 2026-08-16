@@ -96,3 +96,38 @@ DISPOSITION
   on the existing Qatar edge (Section IV) — firm name only, or firm+manager.
 - Do NOT publish the DB banker's name. Hold as research.
 - JPhotos layer: closed, off-limits, not revisited.
+
+═══════════════════════════════════════════════════════════════════════
+DEEP-DIVE EXTENSION (document/email layer) — Wexner financial-control mechanics
+═══════════════════════════════════════════════════════════════════════
+Access: POST /api/emails/search {query} returns matchedEmail.content_markdown =
+full verbatim body (non-redacted where isRedacted=false). This is the clean way to
+pull primary email text jmail exposes.
+
+PUBLISHED (Section III Wexner node, new bullet "The control, shown in primary email"):
+- Richard Kahn (rkahn@nysgmail.com, 457 Madison Ave — Epstein's office), 6 Nov 2007,
+  "re: Wexner Childrens Trust II": "...Wexner Childrens Trust II will be receiving
+  two wires tomorrow totaling 18,000,000. Citigroup (Smith Barney) does not have all
+  of Darren's FTC paperwork on file so I will be sending out both wires from FTC Bear
+  Stearns tomorrow morning." NON-REDACTED. → $18M moved for a Wexner trust by
+  Epstein's accountant, through Bear Stearns accounts, Indyke's paperwork.
+- Indyke→Epstein, 6 Jun 2006, subj "WPH": "May I give Peg your approval?" →
+  Epstein (jeeproject@yahoo.com): "yes". → Epstein's personal sign-off on a Wexner
+  account action executed by Peg Ugland (Wexner/NAProperty staff). NON-REDACTED.
+- Epstein→Abigail Wexner, 23 Nov 2007: "darren"+"gideon" opened a Citi account; the
+  trader said he "could buy no more than an additional 50-100 thousand shares without
+  moving the market." Abigail replies (24 Nov): "I spoke to Darren and told him not
+  to worry about it- in the end it is fine and not a problem." NON-REDACTED. →
+  Epstein inside Wexner-trust equity trading at market-moving size (L Brands stock).
+
+WHY IT'S ON-THESIS: upgrades the report's ">$1.3B stock oversight" from secondary
+(reporters' review) to PRIMARY corpus email showing the day-to-day mechanics of the
+1991 power of attorney being exercised. Documents control, NOT motive; framed
+consistent with both Wexner's misappropriation account and the report's open "why."
+
+DISCIPLINE: Abigail Wexner named only as documented correspondent (living, uncharged,
+family-as-victim per Les Wexner's statement) — no imputation. No motive asserted.
+
+NOT PURSUED (correctly): "Peter Thiel vet" email (Lesley Groff, 1 Jul 2016) is
+REDACTED to just that header line — insufficient to publish; over-reading it would be
+the hyperspeculation the brief forbids. Report already tiers Thiel correctly.
