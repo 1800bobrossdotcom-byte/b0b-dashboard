@@ -284,6 +284,17 @@
       .sidebar-buttons button, .sidebar-buttons a { padding: 0.45rem 0.7rem; font-size: 0.72rem; }
       .back-to-top { bottom: 1rem; right: 1rem; width: 44px; height: 44px; font-size: 1.1rem; }
     }
+    /* Touch devices get the mobile layout even when "Desktop site" mode lies
+       about the viewport width (reports ~980px, so max-width queries never fire) */
+    @media (hover: none) and (pointer: coarse) and (max-width: 1100px) {
+      .sidebar { transform: translateX(-100%); }
+      .sidebar.open { transform: translateX(0); }
+      .sidebar-toggle { display: flex !important; }
+      .main-content { margin-left: 0; padding: 1rem 1.2rem; padding-top: 3.5rem; }
+      .progress-bar { left: 0; }
+      table { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      p, li, dd, blockquote { font-size: 1.075rem; line-height: 1.75; }
+    }
     .sidebar-toggle {
       display: none; position: fixed; top: 0.8rem; left: 0.8rem;
       z-index: 200; background: #0d0d0d; border: 1px solid #00ff41;

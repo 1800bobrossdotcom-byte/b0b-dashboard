@@ -190,8 +190,36 @@
       .catch(function () { /* keep static fallback */ });
   }
 
+  /* ---------- "Desktop site" mode detector ----------
+     A phone in desktop-site mode reports a ~980px viewport, so the mobile
+     breakpoints never fire and the page renders tiny. screen.width still
+     reports the device's real size — the mismatch is the signature. */
+  function desktopModeWarn() {
+    try {
+      if (localStorage.getItem('b0b_dm_dismissed')) return;
+      var phys = Math.min(screen.width || 9999, screen.height || 9999);
+      if (phys > 500 || window.innerWidth < 900) return;
+      var w = document.createElement('div');
+      w.id = 'b0b-dm-warn';
+      w.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:2147483001;' +
+        'background:#101c10;border-bottom:1px solid #00ff41;color:#baf5cb;' +
+        "font-family:ui-monospace,Menlo,Consolas,monospace;font-size:22px;line-height:1.5;" +
+        'padding:14px 48px 14px 16px;';
+      w.innerHTML = 'Text too small? Your browser’s <b style="color:#00ff41">“Desktop site”</b> setting is ON — ' +
+        'open the browser menu (⋮) and untick <b style="color:#00ff41">Desktop site</b> to get the mobile layout.' +
+        '<button id="b0b-dm-x" style="position:absolute;top:8px;right:10px;background:none;border:1px solid #2a4;color:#00ff41;' +
+        'font-size:20px;line-height:1;padding:4px 10px;cursor:pointer;border-radius:3px">×</button>';
+      document.body.appendChild(w);
+      document.getElementById('b0b-dm-x').addEventListener('click', function () {
+        try { localStorage.setItem('b0b_dm_dismissed', '1'); } catch (e) {}
+        w.remove();
+      });
+    } catch (e) { /* never break the page over a hint */ }
+  }
+
   /* ---------- boot ---------- */
   function boot() {
+    desktopModeWarn();
     bindUI();
     loadAPI();
     loadUpdated();
