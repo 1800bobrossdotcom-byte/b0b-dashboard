@@ -1,9 +1,9 @@
 {
-  "generated": "2026-08-17T14:54:33.401Z",
+  "generated": "2026-08-17T14:57:05.684Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "927b30bf802d22a49e92cfa5e246bbb7c6af53b6879a52c7a1dd16547e4191a2",
+  "fullFileHash": "e9f9d8021ae9f0f8988e68db2041a877cc2ec8f31829395927d00a37821c6b75",
   "sectionBlocks": [
     {
       "id": "_preamble",
@@ -102,13 +102,13 @@
     },
     {
       "id": "XIX",
-      "hash": "4e10f54893aea5a0c78063f813f3367998411fc69c1964b1371d5d6ee54f285b",
-      "length": 68588
+      "hash": "08b61f9c840b6570e5f8ff0784d1254bc934b098835a14be4afefd41f91ac709",
+      "length": 69133
     },
     {
       "id": "XX",
-      "hash": "4c80233c9689af645101c694d1a9c04999557ca77190c4104b9294d1225cf32a",
-      "length": 5423
+      "hash": "0ee3742df209cb373661c583a236ecc5b9b41b6b1b6f1c02e495dc1ae5f77fe4",
+      "length": 5753
     },
     {
       "id": "XXI",
@@ -2391,9 +2391,9 @@
     },
     {
       "index": 377,
-      "hash": "8441bf051744b37a39e14d2a78bd576c80f3f309d197ebade0241cc3047ac892",
+      "hash": "72396913cc77a0063a6a18b03fe60285664519f673ba18ed3d48e7140fdfb064",
       "preview": "Federal program for identifying and \"serving\" students with exceptional cognitiv...",
-      "length": 1651
+      "length": 2101
     },
     {
       "index": 378,
@@ -2457,9 +2457,9 @@
     },
     {
       "index": 388,
-      "hash": "deb56d5a226ceb91eb49aa7febbabea27a222861a6ffb2d96841e2c968ddb0af",
+      "hash": "f6c5a76b1cf33f290a816ec52df5c046e607087bcd0672bc267ac876a73694c5",
       "preview": "Labeled / downgraded - cross-links that run past the evidence. &ldquo;MK-Ultra &...",
-      "length": 1118
+      "length": 1448
     },
     {
       "index": 389,
