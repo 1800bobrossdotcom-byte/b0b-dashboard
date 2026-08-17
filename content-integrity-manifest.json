@@ -1,9 +1,9 @@
 {
-  "generated": "2026-08-16T21:37:33.884Z",
+  "generated": "2026-08-17T11:03:51.050Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "77dc24d563e7154c594e51a319acad67adc6e11d7df388a3eafc806d3700eedc",
+  "fullFileHash": "707f244376afd7d5132c14c626a58f126cbba4f14969eb9f9f54572f064d02c3",
   "sectionBlocks": [
     {
       "id": "_preamble",
@@ -122,8 +122,8 @@
     },
     {
       "id": "XXIII",
-      "hash": "c0fee8b489c1da306162cb56b6dce4b59acdaf79dac5b443a116673081277b09",
-      "length": 8877
+      "hash": "26bec3cc3f25c8b6a5c48468ef08cfda06d24f986cd2dacbe8390dcb4c44c09d",
+      "length": 9778
     }
   ],
   "paragraphHashes": [
@@ -2487,59 +2487,65 @@
     },
     {
       "index": 393,
+      "hash": "6b3f8f61992ca539d9b1585d90b63b97971930d766d53b1ea3123deeadbf7a8c",
+      "preview": "One track is placed here deliberately, as signal rather than decoration. Richard...",
+      "length": 832
+    },
+    {
+      "index": 394,
       "hash": "9383a39e463b6cb2d8e8cfb2d6f0f8edf9e4c882ac17f80df67e574385c20ce4",
       "preview": "This report was compiled with the assistance of Claude, built by Anthropic. The ...",
       "length": 401
     },
     {
-      "index": 394,
+      "index": 395,
       "hash": "c060b9f2c7aa7c225438bd93a1da17d1228cfa82df72d2caae6cab2925ae3814",
       "preview": "The full picture requires stating what Section X documents: in March 2026, Anthr...",
       "length": 666
     },
     {
-      "index": 395,
+      "index": 396,
       "hash": "f536d61e27534e3c21a62f931d6a9fec311f154546cc6f13c997a585fe245215",
       "preview": "For that reason the author has withdrawn - canceling his use of Claude and movin...",
       "length": 478
     },
     {
-      "index": 396,
+      "index": 397,
       "hash": "4a4e7610b2c3de1fd523fef1920e4040c152e45b374f15d90f0e7962c1befbac",
       "preview": "This report is built on publicly available information - declassified documents,...",
       "length": 240
     },
     {
-      "index": 397,
+      "index": 398,
       "hash": "2c4cc3ff6965ed4a675107e57198c329a92c47c7c8a691a60d7026067fb2cc3d",
       "preview": "The patterns in this report emerge from cross-referencing, not from any single s...",
       "length": 98
     },
     {
-      "index": 398,
+      "index": 399,
       "hash": "90492cc8942cef3b3b4f9b10bbdff4169abae7e8783e152e296bc443bd5f49b7",
       "preview": "The interactive map at /map contains all geolocated data points. For researchers...",
       "length": 103
     },
     {
-      "index": 399,
+      "index": 400,
       "hash": "a7c97d1a90b658bb707610dc235705800e943fc668fca66e38ec656a2f1c2175",
       "preview": "This report distinguishes between:",
       "length": 34
     },
     {
-      "index": 400,
+      "index": 401,
       "hash": "9de53f5cdc42549c586df6043df8b96ea1d12d74fb17c03a92675ecbf3f09e79",
       "preview": "If you find an error, a mischaracterization, or a claim that cannot be verified ...",
       "length": 201
     },
     {
-      "index": 401,
+      "index": 402,
       "hash": "43fe7763e9f9b09afb7b31468abcf33db325555fe5b73eab536fc9766967e342",
       "preview": "If you are building a case, writing an article, or conducting an investigation t...",
       "length": 127
     }
   ],
   "totalSections": 24,
-  "totalParagraphs": 402
+  "totalParagraphs": 403
 }
