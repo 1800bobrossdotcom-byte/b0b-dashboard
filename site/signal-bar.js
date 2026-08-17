@@ -49,7 +49,12 @@
     '#b0b-signal-fill{position:absolute;left:0;top:0;bottom:0;width:0;background:#00ff41;border-radius:3px}',
     '#b0b-signal-time{color:#5a7a68;white-space:nowrap;font-variant-numeric:tabular-nums}',
     '#b0b-signal-upd{color:#3f5a4c;white-space:nowrap;font-size:10px;margin-left:2px}',
-    '#b0b-signal-yt{position:fixed;left:-9999px;bottom:0;width:1px;height:1px;opacity:0;pointer-events:none}',
+    // Hidden audio source: clipped to 1px IN PLACE (no off-screen offset — a
+    // large negative offset makes mobile browsers zoom out and skip the layout).
+    '#b0b-signal-yt{position:fixed;left:0;bottom:0;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;z-index:-1}',
+    // Never let a stray element widen the page past the viewport (keeps the
+    // mobile breakpoint firing so the sidebar collapses instead of shrinking text).
+    'html,body{overflow-x:hidden;max-width:100%}',
     '.back-to-top{bottom:64px !important}',
     '.leaflet-bottom{bottom:48px !important}',
     '@media(max-width:600px){#b0b-signal-title{max-width:34vw}#b0b-signal-upd{display:none}#b0b-signal-time{display:none}}',
@@ -141,6 +146,7 @@
     player = new YT.Player(mount, {
       videoId: VIDEO_ID,
       host: 'https://www.youtube-nocookie.com',
+      width: '320', height: '180',
       playerVars: { controls: 0, disablekb: 1, playsinline: 1, rel: 0, modestbranding: 1, fs: 0 },
       events: {
         onReady: function () {
