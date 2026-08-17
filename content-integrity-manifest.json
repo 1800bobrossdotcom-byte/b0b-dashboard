@@ -1,9 +1,9 @@
 {
-  "generated": "2026-08-17T14:42:58.052Z",
+  "generated": "2026-08-17T14:54:33.401Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "50b442fb9626c463f542e1dfcdd08ee0b2591b5e230c262c3e1367048de93ebc",
+  "fullFileHash": "927b30bf802d22a49e92cfa5e246bbb7c6af53b6879a52c7a1dd16547e4191a2",
   "sectionBlocks": [
     {
       "id": "_preamble",
@@ -57,8 +57,8 @@
     },
     {
       "id": "X",
-      "hash": "4dc96f7003665cfbd9d97021d1ebdae31a1775bd647156d3f6bb0654f8db4b0b",
-      "length": 39770
+      "hash": "eae914efbe5c2a4992cb441ed3c3445b21066387de10a39b24f39145c80fddd0",
+      "length": 40009
     },
     {
       "id": "XI",
@@ -122,8 +122,8 @@
     },
     {
       "id": "XXIII",
-      "hash": "d2cccc4ad3db0edc42b7d25a67bc61b1a3e9a4240822ff8992c885d44b5e077e",
-      "length": 10609
+      "hash": "697af67736e5cb2a2baa5c79e3fad8b556ace59c5a9aae43727e6b07de24288c",
+      "length": 10734
     }
   ],
   "paragraphHashes": [
@@ -1593,9 +1593,9 @@
     },
     {
       "index": 244,
-      "hash": "481fe27b81991a201fce302bba1d7451df592c3e15aa9ced0d3d4ad9fe4f5dd8",
+      "hash": "f79eaa80609c2cc9f731999c7489a7030d6d169d75101ec129b7abf59fd46265",
       "preview": "This is stated not as accusation but as structural fact. The user of this report...",
-      "length": 644
+      "length": 747
     },
     {
       "index": 245,
@@ -2571,9 +2571,9 @@
     },
     {
       "index": 407,
-      "hash": "f536d61e27534e3c21a62f931d6a9fec311f154546cc6f13c997a585fe245215",
-      "preview": "For that reason the author has withdrawn - canceling his use of Claude and movin...",
-      "length": 478
+      "hash": "858e190da7e833339a08d56751cfc9f8b549f195f6044b689a741ba4fb535ad6",
+      "preview": "For that reason the author has withdrawn: his Claude subscription is canceled, e...",
+      "length": 603
     },
     {
       "index": 408,
