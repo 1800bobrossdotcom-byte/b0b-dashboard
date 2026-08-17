@@ -350,7 +350,7 @@
 <div class="header-meta">
   ISTAR | AECA | VOVV<br>
   First published: 2026<br>
-  Last updated: August 15, 2026<br>
+  Last updated: <span id="siteUpdated">August 17, 2026</span><br>
   <br>
   <strong style="color:#ffcc00;">Intelligence standards and use.</strong> <em>This report is built to the standard of intelligence analysis, for independent review and investigative use. Every claim is tiered - <strong>documented</strong> (a fact on the record), <strong>attributed</strong> (a claim, with its claimant named), or <strong>labeled</strong> (a pattern or hypothesis, marked as such and not asserted as fact). Every edge in the network is traceable to a source document, and the method for recovering it is stated so any reviewer - journalist, investigator, or analyst - can audit each link and extend the map rather than take it on faith. It asserts no conclusion its sources do not carry, names no living person in a criminal or intelligence role as proven, and separates documented contact from operational tie throughout. The discipline is the product.</em><br>
   <br>
@@ -4274,11 +4274,30 @@
   .photo-grid img { aspect-ratio:4/3; object-fit:cover; }
   .photo-grid figure.portrait img { aspect-ratio:3/4; object-fit:cover; object-position:top; }
   .photo-credit { color:#6a6a6a; font-size:.72rem; }
-  @media (max-width:860px){ p, li { font-size:1rem; line-height:1.7; } }
+  /* --- Mobile reading optimization --- */
+  @media (max-width:860px){
+    p, li, dd, blockquote { font-size:1.075rem; line-height:1.75; -webkit-hyphens:auto; hyphens:auto; }
+    p { margin-bottom:1.25rem; }
+    li { margin-bottom:.7rem; }
+    h3, h4 { line-height:1.35; }
+    figcaption { font-size:.86rem; line-height:1.6; }
+    /* keep code/IDs/monospace from being hyphenated */
+    code, kbd, samp, .section-label, .spec-label { -webkit-hyphens:none; hyphens:none; }
+  }
+  @media (max-width:480px){
+    p, li, dd, blockquote { font-size:1.1rem; line-height:1.78; letter-spacing:.15px; }
+    p { margin-bottom:1.3rem; }
+    /* narrower side gutters = a wider, easier reading column on a phone */
+    .main-content { padding-left:.7rem; padding-right:.7rem; }
+    .cross-ref, .discovery, .warning, .spiritual, .spec-clause { padding-left:.85rem; padding-right:.85rem; }
+    /* clear the fixed signal bar at the very bottom */
+    body { padding-bottom:64px; }
+  }
 </style>
 
 <!-- Report narrator ("book on tape") — browser-native speech synthesis, no network -->
 <script src="/report-tts.js?v=6" defer></script>
 
+<script src="/signal-bar.js" defer></script>
 </body>
 </html>

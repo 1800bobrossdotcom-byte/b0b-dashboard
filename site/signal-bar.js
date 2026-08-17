@@ -1,0 +1,198 @@
+/* b0b.dev persistent signal bar — Filter, "Hey Man Nice Shot".
+   One hidden YouTube (IFrame API) player, resumed across page loads via
+   localStorage so the track feels continuous across /report and /map.
+   The site hosts no recording; YouTube's licensed player serves the audio. */
+(function () {
+  'use strict';
+  // Only render in a top-level window (avoid a double bar if a page is framed).
+  if (window.top !== window.self) return;
+  if (document.getElementById('b0b-signal-bar')) return;
+
+  var VIDEO_ID = 'qMDxrXFQwU8';        // Filter - Topic (official, licensed)
+  var LS_KEY = 'b0b_signal_v1';
+  var SAVE_MS = 1000;
+  var player = null, ready = false, dur = 0, saveTimer = null;
+
+  function loadState() {
+    try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; }
+    catch (e) { return {}; }
+  }
+  function saveState(extra) {
+    try {
+      var s = loadState();
+      if (ready && player && player.getCurrentTime) {
+        s.t = player.getCurrentTime() || s.t || 0;
+      }
+      if (extra) for (var k in extra) s[k] = extra[k];
+      localStorage.setItem(LS_KEY, JSON.stringify(s));
+    } catch (e) { /* ignore */ }
+  }
+  var st = loadState();
+
+  /* ---------- styles ---------- */
+  var css = document.createElement('style');
+  css.textContent = [
+    '#b0b-signal-bar{position:fixed;left:0;right:0;bottom:0;z-index:2147483000;',
+    'display:flex;align-items:center;gap:10px;height:46px;padding:0 12px;',
+    'padding-bottom:env(safe-area-inset-bottom,0);box-sizing:content-box;',
+    'background:#070707;border-top:1px solid #143;',
+    "font-family:ui-monospace,'SF Mono','Cascadia Code','Roboto Mono',Menlo,Consolas,monospace;",
+    'color:#8fb8a0;font-size:12px;letter-spacing:.3px;user-select:none}',
+    '#b0b-signal-bar button{background:transparent;border:1px solid #1c4;color:#00ff41;',
+    'width:30px;height:30px;min-width:30px;border-radius:3px;cursor:pointer;font-size:13px;',
+    'display:flex;align-items:center;justify-content:center;padding:0;line-height:1;',
+    'transition:background .2s,color .2s}',
+    '#b0b-signal-bar button:hover{background:#00ff41;color:#000}',
+    '#b0b-signal-title{color:#00ff41;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:0 1 auto;max-width:40vw}',
+    '#b0b-signal-title small{color:#5a7a68}',
+    '#b0b-signal-seek{flex:1 1 auto;height:6px;background:#132;border-radius:3px;cursor:pointer;position:relative;min-width:40px}',
+    '#b0b-signal-fill{position:absolute;left:0;top:0;bottom:0;width:0;background:#00ff41;border-radius:3px}',
+    '#b0b-signal-time{color:#5a7a68;white-space:nowrap;font-variant-numeric:tabular-nums}',
+    '#b0b-signal-upd{color:#3f5a4c;white-space:nowrap;font-size:10px;margin-left:2px}',
+    '#b0b-signal-yt{position:fixed;left:-9999px;bottom:0;width:1px;height:1px;opacity:0;pointer-events:none}',
+    '.back-to-top{bottom:64px !important}',
+    '@media(max-width:600px){#b0b-signal-title{max-width:34vw}#b0b-signal-upd{display:none}#b0b-signal-time{display:none}}',
+    '@media(max-width:380px){#b0b-signal-title small{display:none}}'
+  ].join('');
+  document.head.appendChild(css);
+
+  /* ---------- bar DOM ---------- */
+  var bar = document.createElement('div');
+  bar.id = 'b0b-signal-bar';
+  bar.setAttribute('role', 'region');
+  bar.setAttribute('aria-label', 'Signal track player');
+  bar.innerHTML =
+    '<button id="b0b-signal-play" aria-label="Play signal" title="Play / pause">&#9654;</button>' +
+    '<span id="b0b-signal-title">SIGNAL <small>&middot; Filter &mdash; Hey Man Nice Shot</small></span>' +
+    '<div id="b0b-signal-seek" aria-label="Seek"><div id="b0b-signal-fill"></div></div>' +
+    '<span id="b0b-signal-time">0:00</span>' +
+    '<button id="b0b-signal-mute" aria-label="Mute" title="Mute / unmute">&#128266;</button>' +
+    '<span id="b0b-signal-upd"></span>';
+  var host = document.createElement('div');
+  host.id = 'b0b-signal-yt';
+  var mount = document.createElement('div');
+  host.appendChild(mount);
+
+  function attach() {
+    document.body.appendChild(bar);
+    document.body.appendChild(host);
+    // Keep page content clear of the fixed bar.
+    var pad = 52 + 'px';
+    var prev = parseInt(getComputedStyle(document.body).paddingBottom, 10) || 0;
+    if (prev < 52) document.body.style.paddingBottom = pad;
+  }
+  if (document.body) attach();
+  else document.addEventListener('DOMContentLoaded', attach);
+
+  /* ---------- controls ---------- */
+  var playBtn, muteBtn, fill, timeEl, seekEl;
+  function els() {
+    playBtn = document.getElementById('b0b-signal-play');
+    muteBtn = document.getElementById('b0b-signal-mute');
+    fill = document.getElementById('b0b-signal-fill');
+    timeEl = document.getElementById('b0b-signal-time');
+    seekEl = document.getElementById('b0b-signal-seek');
+  }
+  function fmt(s) {
+    s = Math.max(0, Math.floor(s || 0));
+    var m = Math.floor(s / 60); var r = s % 60;
+    return m + ':' + (r < 10 ? '0' : '') + r;
+  }
+  function isPlaying() {
+    return ready && player && player.getPlayerState && player.getPlayerState() === 1;
+  }
+  function setPlayIcon() {
+    if (playBtn) playBtn.innerHTML = isPlaying() ? '&#10073;&#10073;' : '&#9654;';
+  }
+  function bindUI() {
+    els();
+    playBtn.addEventListener('click', function () {
+      if (!ready) return;
+      if (isPlaying()) { player.pauseVideo(); saveState({ playing: false }); }
+      else { player.playVideo(); saveState({ playing: true }); }
+    });
+    muteBtn.addEventListener('click', function () {
+      if (!ready) return;
+      if (player.isMuted()) { player.unMute(); muteBtn.innerHTML = '&#128266;'; saveState({ muted: false }); }
+      else { player.mute(); muteBtn.innerHTML = '&#128263;'; saveState({ muted: true }); }
+    });
+    seekEl.addEventListener('click', function (e) {
+      if (!ready || !dur) return;
+      var rect = seekEl.getBoundingClientRect();
+      var frac = Math.min(1, Math.max(0, (e.clientX - rect.left) / rect.width));
+      player.seekTo(frac * dur, true); saveState();
+    });
+  }
+
+  function tick() {
+    if (ready && player && player.getCurrentTime) {
+      var t = player.getCurrentTime() || 0;
+      dur = player.getDuration() || dur;
+      if (fill && dur) fill.style.width = (100 * t / dur) + '%';
+      if (timeEl) timeEl.textContent = fmt(t) + (dur ? ' / ' + fmt(dur) : '');
+    }
+    setPlayIcon();
+    requestAnimationFrame(tick);
+  }
+
+  /* ---------- YouTube IFrame API ---------- */
+  window.onYouTubeIframeAPIReady = function () {
+    player = new YT.Player(mount, {
+      videoId: VIDEO_ID,
+      host: 'https://www.youtube-nocookie.com',
+      playerVars: { controls: 0, disablekb: 1, playsinline: 1, rel: 0, modestbranding: 1, fs: 0 },
+      events: {
+        onReady: function () {
+          ready = true;
+          if (st.muted) { player.mute(); if (muteBtn) muteBtn.innerHTML = '&#128263;'; }
+          var start = Number(st.t) || 0;
+          if (start > 1) player.seekTo(start, true);
+          if (st.playing) { try { player.playVideo(); } catch (e) { /* autoplay may be blocked */ } }
+          setPlayIcon();
+          if (!saveTimer) saveTimer = setInterval(function () { saveState(); }, SAVE_MS);
+        },
+        onStateChange: function (e) {
+          if (e.data === 1) saveState({ playing: true });
+          else if (e.data === 2 || e.data === 0) saveState({ playing: false });
+          setPlayIcon();
+        }
+      }
+    });
+  };
+
+  function loadAPI() {
+    if (window.YT && window.YT.Player) { window.onYouTubeIframeAPIReady(); return; }
+    if (document.getElementById('b0b-yt-api')) return;
+    var s = document.createElement('script');
+    s.id = 'b0b-yt-api';
+    s.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(s);
+  }
+
+  /* ---------- last-updated label ---------- */
+  function loadUpdated() {
+    fetch('/api/updated', { credentials: 'same-origin' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d || !d.text) return;
+        var u = document.getElementById('b0b-signal-upd');
+        if (u) u.textContent = 'updated ' + d.text;
+        var stamp = document.getElementById('siteUpdated');
+        if (stamp) stamp.textContent = d.text;
+      })
+      .catch(function () { /* keep static fallback */ });
+  }
+
+  /* ---------- boot ---------- */
+  function boot() {
+    bindUI();
+    loadAPI();
+    loadUpdated();
+    requestAnimationFrame(tick);
+    ['pagehide', 'visibilitychange', 'beforeunload'].forEach(function (ev) {
+      window.addEventListener(ev, function () { saveState(); }, { passive: true });
+    });
+  }
+  if (document.getElementById('b0b-signal-play')) boot();
+  else setTimeout(function () { if (document.getElementById('b0b-signal-play')) boot(); else { attach(); boot(); } }, 0);
+})();

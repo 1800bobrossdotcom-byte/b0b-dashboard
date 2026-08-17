@@ -143,20 +143,20 @@ function pixelCSP(nonce) {
 function siteCSP(nonce) {
   return {
     defaultSrc: ["'self'"],
-    scriptSrc: ["'self'", "'unsafe-inline'"],
+    scriptSrc: ["'self'", "'unsafe-inline'", 'https://www.youtube.com', 'https://www.youtube-nocookie.com'],
     scriptSrcAttr: ["'unsafe-inline'"],
     styleSrc: ["'self'", "'unsafe-inline'"],
-    imgSrc: ["'self'", 'data:', 'blob:', 'https://*.tile.openstreetmap.org', 'https://*.basemaps.cartocdn.com', 'https://server.arcgisonline.com', 'https://*.tile.opentopomap.org', 'https://unpkg.com', 'https://tiles.stadiamaps.com', 'https://cdn.star.nesdis.noaa.gov'],
+    imgSrc: ["'self'", 'data:', 'blob:', 'https://*.tile.openstreetmap.org', 'https://*.basemaps.cartocdn.com', 'https://server.arcgisonline.com', 'https://*.tile.opentopomap.org', 'https://unpkg.com', 'https://tiles.stadiamaps.com', 'https://cdn.star.nesdis.noaa.gov', 'https://i.ytimg.com'],
     fontSrc: ["'self'", 'https://cdnjs.cloudflare.com'],
     objectSrc: ["'none'"],
-    frameSrc: ["'self'"],
+    frameSrc: ["'self'", 'https://www.youtube.com', 'https://www.youtube-nocookie.com'],
     frameAncestors: ["'self'"],
     formAction: ["'self'"],
     baseUri: ["'self'"],
     connectSrc: ["'self'", 'https://*.basemaps.cartocdn.com', 'https://server.arcgisonline.com', 'https://*.tile.openstreetmap.org', 'https://*.tile.opentopomap.org', 'https://earthquake.usgs.gov', 'https://eonet.gsfc.nasa.gov', 'https://firms.modaps.eosdis.nasa.gov', 'https://opensky-network.org', 'https://www.gdacs.org', 'https://api.wheretheiss.at', 'https://native-land.ca'],
     mediaSrc: ["'self'", 'blob:'],
     workerSrc: ["'self'", 'blob:'],
-    childSrc: ["'self'", 'blob:'],
+    childSrc: ["'self'", 'blob:', 'https://www.youtube.com', 'https://www.youtube-nocookie.com'],
     upgradeInsecureRequests: [],
   };
 }
@@ -230,6 +230,30 @@ app.post('/api/gate', (req, res) => {
     `${ACCESS_COOKIE}=${token}; Path=/; HttpOnly; Max-Age=${ACCESS_TTL_SECONDS}; SameSite=Lax${secure}`
   );
   return res.status(204).end();
+});
+
+// Last-updated stamp: newest mtime among the primary content files, so the
+// site reports when it was actually last changed on every deploy (automatic).
+function siteUpdatedString() {
+  try {
+    const files = ['report.html', 'map.html', 'index.html'].map((f) => path.join(PUB, f));
+    let latest = 0;
+    for (const f of files) {
+      try { const m = fs.statSync(f).mtimeMs; if (m > latest) latest = m; } catch (e) { /* skip */ }
+    }
+    const d = new Date(latest || Date.now());
+    const date = d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+    const time = d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'UTC' });
+    return { text: `${date}, ${time} UTC`, iso: d.toISOString() };
+  } catch (e) {
+    return { text: '', iso: '' };
+  }
+}
+
+app.get('/api/updated', (req, res) => {
+  if (!hasAccess(req)) return res.status(204).end();
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  return res.json(siteUpdatedString());
 });
 
 // Page routes
