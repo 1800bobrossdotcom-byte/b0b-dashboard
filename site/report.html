@@ -191,6 +191,23 @@
       color: #00ff41; border-left-color: #00ff41;
       background: rgba(0,255,65,0.04);
     }
+    /* Subsection dropdowns */
+    .sidebar-row { display: flex; align-items: stretch; }
+    .sidebar-row .sidebar-link { flex: 1 1 auto; }
+    .sub-toggle {
+      background: transparent; border: none; color: #3f5a4c; cursor: pointer;
+      font-size: 0.72rem; padding: 0 0.75rem; line-height: 1; font-family: inherit;
+      transition: color 0.2s;
+    }
+    .sub-toggle:hover, .sub-toggle.open { color: #00ff41; }
+    .sidebar-sub { display: none; border-left: 1px solid #16321f; margin-left: 1.05rem; padding: 0.15rem 0 0.3rem; }
+    .sidebar-sub.open { display: block; }
+    .sidebar-sublink {
+      display: block; padding: 0.3rem 0.8rem 0.3rem 0.85rem; color: #5a7a68;
+      text-decoration: none; font-size: 0.66rem; line-height: 1.35;
+      border-left: 2px solid transparent; transition: all 0.15s;
+    }
+    .sidebar-sublink:hover { color: #00ccff; background: rgba(0,204,255,0.04); }
 
     /* ===================== LAYOUT ===================== */
     body.has-sidebar { padding: 0; max-width: none; margin: 0; }
@@ -262,6 +279,8 @@
       li { margin-bottom: 0.6rem; }
       .sidebar { width: 82vw; }
       .sidebar-link { padding: 0.7rem 1rem; font-size: 0.8rem; }
+      .sidebar-sublink { padding: 0.55rem 0.8rem; font-size: 0.76rem; }
+      .sub-toggle { padding: 0 1.05rem; font-size: 0.9rem; }
       .sidebar-buttons button, .sidebar-buttons a { padding: 0.45rem 0.7rem; font-size: 0.72rem; }
       .back-to-top { bottom: 1rem; right: 1rem; width: 44px; height: 44px; font-size: 1.1rem; }
     }
@@ -4068,7 +4087,33 @@
     'XXIII': 'XXIII. The Signal'
   };
 
+  // Map each section to its h3 subsections (document order; h3s live inside
+  // the sect-body wrappers, so walk h2/h3 together and bucket by last h2 seen)
+  var subMap = {};
+  (function() {
+    var cur = null, counters = {};
+    var heads = mainDiv.querySelectorAll('h2[id], h3');
+    heads.forEach(function(h) {
+      if (h.tagName === 'H2') { cur = h.id; subMap[cur] = subMap[cur] || []; return; }
+      if (!cur) return;
+      if (h.closest('#methodology')) return; // methodology guide keeps its own flow
+      counters[cur] = (counters[cur] || 0) + 1;
+      if (!h.id) h.id = 'sub-' + cur + '-' + counters[cur];
+      subMap[cur].push(h);
+    });
+  })();
+
+  function expandSection(h2) {
+    var body = h2.nextElementSibling;
+    if (body && body.classList.contains('section-body') && body.classList.contains('collapsed')) {
+      body.classList.remove('collapsed');
+      h2.classList.remove('collapsed');
+    }
+  }
+
   sections.forEach(function(h2) {
+    var row = document.createElement('div');
+    row.className = 'sidebar-row';
     var a = document.createElement('a');
     a.className = 'sidebar-link';
     a.href = '#' + h2.id;
@@ -4077,17 +4122,51 @@
     a.dataset.sectionId = h2.id;
     a.addEventListener('click', function(e) {
       e.preventDefault();
-      // expand if collapsed
-      var body = h2.nextElementSibling;
-      if (body && body.classList.contains('section-body') && body.classList.contains('collapsed')) {
-        body.classList.remove('collapsed');
-        h2.classList.remove('collapsed');
-      }
+      expandSection(h2);
       h2.scrollIntoView({ behavior: 'smooth', block: 'start' });
       sidebar.classList.remove('open');
     });
-    navContainer.appendChild(a);
+    row.appendChild(a);
+    navContainer.appendChild(row);
     linkMap[h2.id] = a;
+
+    var subs = subMap[h2.id] || [];
+    if (!subs.length) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'sub-toggle';
+    btn.type = 'button';
+    btn.innerHTML = '&#9656;';
+    btn.setAttribute('aria-label', 'Toggle subsections of ' + h2.id);
+    btn.setAttribute('aria-expanded', 'false');
+    row.appendChild(btn);
+
+    var subDiv = document.createElement('div');
+    subDiv.className = 'sidebar-sub';
+    subs.forEach(function(h3) {
+      var s = document.createElement('a');
+      s.className = 'sidebar-sublink';
+      s.href = '#' + h3.id;
+      var t = (h3.textContent || '').trim().replace(/\s+/g, ' ');
+      s.title = t;
+      s.textContent = t.length > 52 ? t.slice(0, 50) + '…' : t;
+      s.addEventListener('click', function(e) {
+        e.preventDefault();
+        expandSection(h2);
+        h3.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        sidebar.classList.remove('open');
+      });
+      subDiv.appendChild(s);
+    });
+    navContainer.appendChild(subDiv);
+
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var open = subDiv.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.innerHTML = open ? '&#9662;' : '&#9656;';
+    });
   });
 
   // Re-apply translations after sidebar links are built
