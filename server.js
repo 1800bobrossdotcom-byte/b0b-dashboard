@@ -236,12 +236,24 @@ app.post('/api/gate', (req, res) => {
 // site reports when it was actually last changed on every deploy (automatic).
 function siteUpdatedString() {
   try {
-    const files = ['report.html', 'map.html', 'index.html'].map((f) => path.join(PUB, f));
-    let latest = 0;
-    for (const f of files) {
-      try { const m = fs.statSync(f).mtimeMs; if (m > latest) latest = m; } catch (e) { /* skip */ }
+    let d = null;
+    // Primary source: the integrity manifest's generation time. It is regenerated
+    // on every deploy (part of the publish workflow) and baked into the committed
+    // file, so it is accurate on Vercel — unlike deployed-file mtimes, which the
+    // platform normalizes to a fixed date.
+    try {
+      const mf = path.join(__dirname, 'content-integrity-manifest.json');
+      const gen = JSON.parse(fs.readFileSync(mf, 'utf8')).generated;
+      if (gen) { const t = new Date(gen); if (!isNaN(t.getTime())) d = t; }
+    } catch (e) { /* fall through to mtime */ }
+    // Fallback: newest content-file mtime.
+    if (!d) {
+      let latest = 0;
+      for (const f of ['report.html', 'map.html', 'index.html']) {
+        try { const m = fs.statSync(path.join(PUB, f)).mtimeMs; if (m > latest) latest = m; } catch (e) { /* skip */ }
+      }
+      d = new Date(latest || Date.now());
     }
-    const d = new Date(latest || Date.now());
     const date = d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
     const time = d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'UTC' });
     return { text: `${date}, ${time} UTC`, iso: d.toISOString() };
