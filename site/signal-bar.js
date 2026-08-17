@@ -51,6 +51,7 @@
     '#b0b-signal-upd{color:#3f5a4c;white-space:nowrap;font-size:10px;margin-left:2px}',
     '#b0b-signal-yt{position:fixed;left:-9999px;bottom:0;width:1px;height:1px;opacity:0;pointer-events:none}',
     '.back-to-top{bottom:64px !important}',
+    '.leaflet-bottom{bottom:48px !important}',
     '@media(max-width:600px){#b0b-signal-title{max-width:34vw}#b0b-signal-upd{display:none}#b0b-signal-time{display:none}}',
     '@media(max-width:380px){#b0b-signal-title small{display:none}}'
   ].join('');
