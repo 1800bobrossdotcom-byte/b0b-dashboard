@@ -1,9 +1,9 @@
 {
-  "generated": "2026-08-17T17:39:20.667Z",
+  "generated": "2026-08-17T17:56:55.853Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "41a205ae3a999aed546b293ad1f1b1f0f0f9b85ecb448ca9705d055bc09d395c",
+  "fullFileHash": "281e0431da2c85c9221e6783228afa4ab3da87ebd8428fdf64bb40ef085a40d5",
   "sectionBlocks": [
     {
       "id": "_preamble",
@@ -87,8 +87,8 @@
     },
     {
       "id": "XVI",
-      "hash": "610e977a755497f9a42991589de579112f9296206766c710c3aad1f6aba5dc75",
-      "length": 54020
+      "hash": "1a7fae9ca6941361747f07d206efada7fe04de02587985d1ee97d3251206c268",
+      "length": 55492
     },
     {
       "id": "XVII",
@@ -2223,9 +2223,9 @@
     },
     {
       "index": 349,
-      "hash": "5ae899bf6e56e3bb4bb6428d5ed57e4b7dfd3721d36dad8f475fe7078a7444c9",
+      "hash": "c644d2dd0662d2526f53eea0ae2f4e9b8ebb6728814bcbcec504df486dedd9ce",
       "preview": "The verdict, and the disambiguation. McKinnon is the cleanest proof of the rule ...",
-      "length": 1076
+      "length": 2548
     },
     {
       "index": 350,
