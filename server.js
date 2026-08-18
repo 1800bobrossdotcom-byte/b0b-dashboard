@@ -153,7 +153,7 @@ function siteCSP(nonce) {
     frameAncestors: ["'self'"],
     formAction: ["'self'"],
     baseUri: ["'self'"],
-    connectSrc: ["'self'", 'https://*.basemaps.cartocdn.com', 'https://server.arcgisonline.com', 'https://*.tile.openstreetmap.org', 'https://*.tile.opentopomap.org', 'https://earthquake.usgs.gov', 'https://eonet.gsfc.nasa.gov', 'https://firms.modaps.eosdis.nasa.gov', 'https://opensky-network.org', 'https://www.gdacs.org', 'https://api.wheretheiss.at', 'https://native-land.ca'],
+    connectSrc: ["'self'", 'https://*.basemaps.cartocdn.com', 'https://server.arcgisonline.com', 'https://*.tile.openstreetmap.org', 'https://*.tile.opentopomap.org', 'https://earthquake.usgs.gov', 'https://eonet.gsfc.nasa.gov', 'https://firms.modaps.eosdis.nasa.gov', 'https://opensky-network.org', 'https://www.gdacs.org', 'https://api.wheretheiss.at', 'https://native-land.ca', 'https://overpass.openstreetmap.fr'],
     mediaSrc: ["'self'", 'blob:'],
     workerSrc: ["'self'", 'blob:'],
     childSrc: ["'self'", 'blob:', 'https://www.youtube.com', 'https://www.youtube-nocookie.com'],
