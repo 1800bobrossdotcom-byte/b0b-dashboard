@@ -16,10 +16,11 @@
   // Order is deliberate: the bar opens on the lead track.
   var TRACKS = [
     { id: 'Xv8FBjo1Y8I', label: 'Tracy Chapman &mdash; Talkin&rsquo; Bout a Revolution' }, // Tracy Chapman (artist channel)
+    { id: 'uq-gYOrU8bA', label: 'Paul Simon &mdash; You Can Call Me Al' },                  // PaulSimonVEVO (official)
     { id: 'rx2_iHftARo', label: 'Talking Heads &mdash; Slippery People' },                 // Talking Heads - Topic (licensed)
     { id: 'qMDxrXFQwU8', label: 'Filter &mdash; Hey Man Nice Shot' }                       // Filter - Topic (licensed)
   ];
-  var LS_KEY = 'b0b_signal_v2';   // v2: track list reordered, old index would mis-point
+  var LS_KEY = 'b0b_signal_v3';   // bump on every reorder: a stored index points into the old list
   var SAVE_MS = 1000;
   var player = null, ready = false, dur = 0, saveTimer = null;
 
