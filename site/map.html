@@ -3711,64 +3711,120 @@ function updateLiveFeedStatus(msg) {
   if (el) { el.style.display = 'block'; el.textContent = msg; }
 }
 
-// ---------- ALPR / Flock camera layer (OpenStreetMap via Overpass; DeFlock tagging) ----------
-// Viewport-scoped by design: a whole-country Overpass query times out, a bbox query
-// returns in seconds. Data is crowdsourced and therefore INCOMPLETE - absence of a
-// marker is not evidence of absence of a camera. See report Section X.
+// ---------- ALPR / Flock camera layer ----------
+// Primary source: a baked dataset at /data/alpr-us.json, harvested from OpenStreetMap
+// (Overpass) and tagged largely through the DeFlock survey effort. Baked rather than
+// queried live because a nationwide Overpass query times out and because the layer must
+// still work when Overpass is slow, rate-limited or unreachable from the visitor.
+// Fallback: a live viewport query, used only if the dataset fails to load.
+// The data is CROWDSOURCED AND INCOMPLETE - a blank area is an unsurveyed area, not a
+// camera-free one. See report Section X.
 var ALPR_ENDPOINT = 'https://overpass.openstreetmap.fr/api/interpreter';
-var ALPR_MIN_ZOOM = 11;
+var ALPR_MIN_ZOOM = 6;
+var ALPR_RENDER_CAP = 8000;
+var alprData = null;
+var alprLoading = false;
+var alprCanvas = L.canvas({ padding: 0.5 });
 
 function alprOnMove() { if (map.hasLayer(alprLayer)) fetchALPR(); }
 
-function fetchALPR() {
+function alprVendorName(d, idx) {
+  return (d.vendors && d.vendors[idx]) ? d.vendors[idx] : 'unspecified';
+}
+
+function alprAddPoint(lat, lon, vendorName) {
+  var isFlock = /flock/i.test(vendorName);
+  var color = isFlock ? '#ff1744' : '#ff9100';
+  var m = L.circleMarker([lat, lon], {
+    renderer: alprCanvas, radius: 3.5, fillColor: color, color: color,
+    weight: 1, fillOpacity: 0.8, opacity: 0.9
+  });
+  m.bindPopup(function() {
+    return '<div style="font-family:Courier New,monospace;font-size:0.75rem;color:#ddd;background:#111;padding:8px;border:1px solid #333;min-width:220px">' +
+      '<div style="color:' + color + ';font-weight:bold;margin-bottom:4px">&#128248; ALPR CAMERA</div>' +
+      '<div style="color:#aaa;margin-bottom:2px">Vendor: ' + vendorName + '</div>' +
+      '<div style="color:#888;margin-bottom:2px">' + lat.toFixed(5) + ', ' + lon.toFixed(5) + '</div>' +
+      '<div style="color:#666;margin-top:4px;font-size:0.65rem">Reads every passing plate and writes a timestamped, geolocated record - whether or not the driver is suspected of anything.</div>' +
+      '<div style="color:#666;margin-top:4px;font-size:0.65rem">OpenStreetMap / DeFlock survey &middot; crowdsourced, incomplete</div>' +
+      '<div style="margin-top:4px"><a href="/report#X" target="_blank" style="color:#00ccff">&rarr; Section X - what this network is</a></div>' +
+      '</div>';
+  }, { className: 'dark-popup' });
+  m.addTo(alprLayer);
+  return isFlock;
+}
+
+function renderALPRFromData() {
+  var d = alprData;
+  if (!d) return;
   if (map.getZoom() < ALPR_MIN_ZOOM) {
     alprLayer.clearLayers();
-    updateLiveFeedStatus('ALPR: zoom in to level ' + ALPR_MIN_ZOOM + '+ to load cameras');
+    updateLiveFeedStatus('ALPR: ' + d.count.toLocaleString() + ' cameras loaded - zoom in to level ' + ALPR_MIN_ZOOM + '+ to plot');
+    return;
+  }
+  var b = map.getBounds();
+  var s = b.getSouth(), n = b.getNorth(), w = b.getWest(), e = b.getEast();
+  alprLayer.clearLayers();
+  var cams = d.cams, shown = 0, flock = 0, inView = 0;
+  for (var i = 0; i < cams.length; i++) {
+    var c = cams[i], lat = c[0], lon = c[1];
+    if (lat < s || lat > n || lon < w || lon > e) continue;
+    inView++;
+    if (shown >= ALPR_RENDER_CAP) continue;
+    if (alprAddPoint(lat, lon, alprVendorName(d, c[2]))) flock++;
+    shown++;
+  }
+  var msg = 'ALPR in view: ' + inView.toLocaleString() + ' (Flock ' + flock.toLocaleString() + ' of ' + shown.toLocaleString() + ' plotted)';
+  if (inView > shown) msg += ' - capped at ' + ALPR_RENDER_CAP.toLocaleString() + ', zoom in for the rest';
+  msg += ' - OSM/ODbL, ' + d.generated.slice(0, 10);
+  updateLiveFeedStatus(msg);
+}
+
+function fetchALPR() {
+  if (alprData) { renderALPRFromData(); return; }
+  if (alprLoading) return;
+  alprLoading = true;
+  updateLiveFeedStatus('ALPR: loading camera dataset...');
+  fetch('/data/alpr-us.json')
+    .then(function(r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(d) {
+      alprData = d;
+      alprLoading = false;
+      renderALPRFromData();
+    })
+    .catch(function() {
+      alprLoading = false;
+      updateLiveFeedStatus('ALPR: dataset unavailable - querying OpenStreetMap live');
+      fetchALPRLive();
+    });
+}
+
+// Fallback only: viewport query straight to Overpass.
+function fetchALPRLive() {
+  if (map.getZoom() < 11) {
+    alprLayer.clearLayers();
+    updateLiveFeedStatus('ALPR (live fallback): zoom to level 11+ to load cameras');
     return;
   }
   var b = map.getBounds();
   var bbox = b.getSouth().toFixed(3) + ',' + b.getWest().toFixed(3) + ',' + b.getNorth().toFixed(3) + ',' + b.getEast().toFixed(3);
-  if (bbox === alprLastKey || alprBusy) return;
-  alprBusy = true;
-  alprLastKey = bbox;
-  updateLiveFeedStatus('ALPR: querying OpenStreetMap...');
   var q = '[out:json][timeout:60];node["surveillance:type"="ALPR"](' + bbox + ');out tags center;';
   fetch(ALPR_ENDPOINT + '?data=' + encodeURIComponent(q))
     .then(function(r) { return r.json(); })
     .then(function(data) {
       alprLayer.clearLayers();
-      var flock = 0, other = 0;
+      var flock = 0, total = 0;
       (data.elements || []).forEach(function(el) {
         var lat = el.lat !== undefined ? el.lat : (el.center && el.center.lat);
         var lon = el.lon !== undefined ? el.lon : (el.center && el.center.lon);
         if (lat === undefined || lon === undefined) return;
         var t = el.tags || {};
-        var vendor = t.manufacturer || t.brand || t.operator || 'unspecified';
-        var isFlock = /flock/i.test(vendor);
-        if (isFlock) flock++; else other++;
-        var color = isFlock ? '#ff1744' : '#ff9100';
-        L.circleMarker([lat, lon], {
-          radius: 4, fillColor: color, color: color, weight: 1, fillOpacity: 0.75, opacity: 0.9
-        }).bindPopup(
-          '<div style="font-family:Courier New,monospace;font-size:0.75rem;color:#ddd;background:#111;padding:8px;border:1px solid #333;min-width:220px">' +
-          '<div style="color:' + color + ';font-weight:bold;margin-bottom:4px">📸 ALPR CAMERA</div>' +
-          '<div style="color:#aaa;margin-bottom:2px">Vendor: ' + vendor + '</div>' +
-          (t.operator ? '<div style="color:#888;margin-bottom:2px">Operator: ' + t.operator + '</div>' : '') +
-          (t.direction ? '<div style="color:#888;margin-bottom:2px">Facing: ' + t.direction + '&deg;</div>' : '') +
-          (t['camera:mount'] ? '<div style="color:#888;margin-bottom:2px">Mount: ' + t['camera:mount'] + '</div>' : '') +
-          '<div style="color:#666;margin-top:4px;font-size:0.65rem">OSM node ' + el.id + ' &middot; crowdsourced, incomplete</div>' +
-          '<div style="margin-top:4px"><a href="/report#X" target="_blank" style="color:#00ccff">&rarr; Section X - what this network is</a></div>' +
-          '</div>',
-          {className: 'dark-popup'}
-        ).addTo(alprLayer);
+        if (alprAddPoint(lat, lon, t.manufacturer || t.brand || t.operator || 'unspecified')) flock++;
+        total++;
       });
-      updateLiveFeedStatus('ALPR in view: ' + (flock + other) + ' (Flock ' + flock + ' / other vendors ' + other + ') - OSM/ODbL');
-      alprBusy = false;
+      updateLiveFeedStatus('ALPR (live): ' + total + ' in view, Flock ' + flock + ' - OSM/ODbL');
     })
     .catch(function(e) {
-      updateLiveFeedStatus('ALPR: Overpass unavailable (' + e.message + ')');
-      alprBusy = false;
-      alprLastKey = '';
+      updateLiveFeedStatus('ALPR: dataset and live query both unavailable (' + e.message + ')');
     });
 }
 
