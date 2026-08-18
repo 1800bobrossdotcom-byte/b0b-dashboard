@@ -13,11 +13,13 @@
   if (window.top !== window.self) return;
   if (document.getElementById('b0b-signal-bar')) return;
 
+  // Order is deliberate: the bar opens on the lead track.
   var TRACKS = [
-    { id: 'qMDxrXFQwU8', label: 'Filter &mdash; Hey Man Nice Shot' },        // Filter - Topic (licensed)
-    { id: 'rx2_iHftARo', label: 'Talking Heads &mdash; Slippery People' }     // Talking Heads - Topic (licensed)
+    { id: 'Xv8FBjo1Y8I', label: 'Tracy Chapman &mdash; Talkin&rsquo; Bout a Revolution' }, // Tracy Chapman (artist channel)
+    { id: 'rx2_iHftARo', label: 'Talking Heads &mdash; Slippery People' },                 // Talking Heads - Topic (licensed)
+    { id: 'qMDxrXFQwU8', label: 'Filter &mdash; Hey Man Nice Shot' }                       // Filter - Topic (licensed)
   ];
-  var LS_KEY = 'b0b_signal_v1';
+  var LS_KEY = 'b0b_signal_v2';   // v2: track list reordered, old index would mis-point
   var SAVE_MS = 1000;
   var player = null, ready = false, dur = 0, saveTimer = null;
 
