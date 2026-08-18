@@ -183,3 +183,29 @@ red-team salvo (2 agents) then hardened it:
   intel (kept off the intel spectrum); rung-1 contrasts (Gates, Tucker, Hawking) noted.
 NET: framework survives a hostile intelligence-professional read; living-person floor is now
 an explicit, stated principle of the whole report.
+
+═══════════════════════════════════════════════════════════════════════
+BORE PASS (this session) — Leads #2 JPMorgan + Lockheed zoom-in
+═══════════════════════════════════════════════════════════════════════
+#2 JPMORGAN (score 56) — FIRED, PUBLISHED (Section II, "The pipe"). Converted the
+   15-yr banking relationship summary->primary. Two-star overlay: RECAP litigation
+   (Doe1 1:22-cv-10019; USVI 1:22-cv-10904, Rakoff; $290M+$75M non-admission
+   settlements; Staley ~1,200 emails/Snow White; Erdoes 2006-knowledge; Dimon depo
+   denial; JPM-v-Staley clawback; Staley FCA lifetime ban) + jmail corpus (Staley
+   JPM sig block in Epstein inbox, Erdoes "call in the office" x hundreds, yacht
+   exchange). Post-death ~$1.1-1.3B retroactive SARs held at CONGRESSIONAL tier
+   (Wyden 2025-26, secondary-sourced, needs primary-exhibit pull). "Knowingly
+   facilitated" = plaintiff-alleged, both cases settled pre-trial. TODO: pull the
+   Senate memo PDF + CourtListener exhibits (docket 66683865, 280s-310s) to lift
+   the SAR/override chain to primary tier; OCC/DOJ no-penalty is unconfirmed-by-negative.
+LOCKHEED (user zoom-in) — PUBLISHED (Section VII, beside Crown/General Dynamics).
+   Corrected user's "ADP older than OSS" (Skunk Works 1943 is AFTER OSS 1942) into
+   the sharper true frame: Lockheed the company (1912/1926) predates OSS/CIA/NRO.
+   Documented: built the CIA's U-2 (AQUATONE/Bissell) + A-12 OXCART + Area 51 for it
+   + NRO Corona/Gambit/Hexagon; 1970s bribery (Bernhard/Tanaka/Leone ~$22M) -> FCPA
+   1977; #1 arms producer (SIPRI ~$64.6B 2024); F-35 >$2T (GAO-24-106703). Lockheed-
+   Palantir (Aegis/Apollo 2022) documented; Lockheed-Maven NOT drawn (Maven=Palantir).
+   NOTE: Burbank/Skunk Works is also the author's disclosed childhood geography
+   (Section XIII capstone: F-104 "Spirit of Burbank", George Izay Park, GATE).
+NEXT SPEARHEAD: #3 USVI probate ST-19-PB-80 (clock, 52.5) · #4 Barak<->Summers
+   security-confidant threads (48, jmail) · then #2 primary-exhibit lift.
