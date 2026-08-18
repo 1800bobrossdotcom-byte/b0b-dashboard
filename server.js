@@ -198,6 +198,17 @@ const PAGES = {
   '/tones-shield':  'tones-shield.html',
   '/tones-multipack':'tones-multipack.html',
   '/tones-shield-guide':'tones-shield-guide.html',
+  // Slash-form aliases. The nav in report.html / countermeasures.html and the
+  // toolkit links in map.html were written as /tones/shield, /tones/instrument
+  // etc.; without these the site's own ARC SHIELD button 404s. Both forms are
+  // kept so existing links and anything already shared keep working.
+  '/tones/shield':  'tones-shield.html',
+  '/tones/shield/guide':'tones-shield-guide.html',
+  '/tones/guide':   'tones-shield-guide.html',
+  '/tones/healing': 'tones-healing.html',
+  '/tones/protective':'tones-protective.html',
+  '/tones/instrument':'tones-instrument.html',
+  '/tones/multipack':'tones-multipack.html',
   '/ai-attack-vector-analysis':  'ai-attack-vector-analysis.html',
   '/ai-attack-vector-analysis.html':  'ai-attack-vector-analysis.html',
 };
@@ -266,6 +277,187 @@ app.get('/api/updated', (req, res) => {
   if (!hasAccess(req)) return res.status(204).end();
   res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
   return res.json(siteUpdatedString());
+});
+
+
+// ═══════════════════════════════════════════════════════════
+// Offline backup (/download) and machine-readable export (/api/data)
+// ═══════════════════════════════════════════════════════════
+// Both were advertised on the map's researcher panel and in the report's
+// methodology section while returning 404. Implemented here with no new
+// dependency: on a site about supply-chain and dependency injection, pulling
+// in an archiver package for one route is the wrong trade.
+
+const zlib = require('zlib');
+
+// CRC-32 (ZIP requires it). Table built once at boot.
+const CRC_TABLE = (() => {
+  const t = new Int32Array(256);
+  for (let n = 0; n < 256; n++) {
+    let c = n;
+    for (let k = 0; k < 8; k++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+    t[n] = c;
+  }
+  return t;
+})();
+function crc32(buf) {
+  let c = -1;
+  for (let i = 0; i < buf.length; i++) c = CRC_TABLE[(c ^ buf[i]) & 0xFF] ^ (c >>> 8);
+  return (c ^ -1) >>> 0;
+}
+
+// ZIP field writers are below, next to the streaming route that uses them.
+// Text is DEFLATEd; already-compressed media is STOREd, which is faster and
+// produces the same size.
+const STORE_EXT = /\.(png|jpe?g|gif|webp|mp3|mp4|woff2?|zip|ico)$/i;
+
+function walkSite(dir, base, out) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    const rel = base ? base + '/' + entry.name : entry.name;
+    if (entry.isDirectory()) walkSite(full, rel, out);
+    else if (entry.isFile()) out.push({ name: 'b0b.dev-backup/' + rel, data: fs.readFileSync(full) });
+  }
+  return out;
+}
+
+// Streamed, deliberately. Vercel buffers a serverless response and rejects it
+// over 4.5 MB (FUNCTION_RESPONSE_PAYLOAD_TOO_LARGE); the site archive is ~15 MB.
+// Streaming responses are exempt from that cap, so the ZIP is written out
+// entry by entry rather than assembled in memory - which also means only one
+// file is held at a time instead of the whole archive.
+function zipLocalHeader(nameBuf, store, crc, compSize, rawSize) {
+  const h = Buffer.alloc(30);
+  h.writeUInt32LE(0x04034b50, 0);
+  h.writeUInt16LE(20, 4);
+  h.writeUInt16LE(0x0800, 6);
+  h.writeUInt16LE(store ? 0 : 8, 8);
+  h.writeUInt16LE(0, 10); h.writeUInt16LE(0, 12);
+  h.writeUInt32LE(crc, 14);
+  h.writeUInt32LE(compSize, 18);
+  h.writeUInt32LE(rawSize, 22);
+  h.writeUInt16LE(nameBuf.length, 26);
+  h.writeUInt16LE(0, 28);
+  return h;
+}
+function zipCentralRecord(nameBuf, store, crc, compSize, rawSize, offset) {
+  const c = Buffer.alloc(46);
+  c.writeUInt32LE(0x02014b50, 0);
+  c.writeUInt16LE(20, 4); c.writeUInt16LE(20, 6);
+  c.writeUInt16LE(0x0800, 8);
+  c.writeUInt16LE(store ? 0 : 8, 10);
+  c.writeUInt16LE(0, 12); c.writeUInt16LE(0, 14);
+  c.writeUInt32LE(crc, 16);
+  c.writeUInt32LE(compSize, 20);
+  c.writeUInt32LE(rawSize, 24);
+  c.writeUInt16LE(nameBuf.length, 28);
+  c.writeUInt16LE(0, 30); c.writeUInt16LE(0, 32); c.writeUInt16LE(0, 34);
+  c.writeUInt16LE(0, 36); c.writeUInt32LE(0, 38);
+  c.writeUInt32LE(offset, 42);
+  return c;
+}
+
+app.get('/download', async (req, res) => {
+  if (!hasAccess(req)) return res.status(404).end();
+  const write = (buf) => new Promise((resolve, reject) => {
+    if (res.write(buf)) return resolve();
+    res.once('drain', resolve);
+    res.once('error', reject);
+  });
+  try {
+    const files = walkSite(PUB, '', []);
+    files.push({
+      name: 'b0b.dev-backup/README.txt',
+      data: Buffer.from(
+        'b0b.dev offline backup\n' +
+        '======================\n\n' +
+        'A copy of the site as served on ' + new Date().toISOString() + '.\n\n' +
+        'Open report.html or map.html directly in a browser. Both work from\n' +
+        'disk. Two things will not, because they need the live server:\n' +
+        '  - the last-updated stamp (/api/updated)\n' +
+        '  - the live map layers (USGS, NASA, OpenSky, GDACS)\n' +
+        'The ALPR camera dataset (data/alpr-us.json) is included and works\n' +
+        'offline. Map tiles are fetched from the network and will be blank\n' +
+        'without a connection; the markers themselves still plot.\n\n' +
+        'Everything here is redistributable. Map data is public domain; cite\n' +
+        'if you can. OpenStreetMap-derived data (data/alpr-us.json) is (c)\n' +
+        'OpenStreetMap contributors, ODbL.\n', 'utf8')
+    });
+
+    res.status(200);
+    res.setHeader('Content-Type', 'application/zip');
+    res.setHeader('Content-Disposition', 'attachment; filename="b0b.dev-backup.zip"');
+    res.setHeader('Cache-Control', 'no-store');
+    // No Content-Length: chunked transfer is what keeps this out of the
+    // buffered-response path.
+
+    const central = [];
+    let offset = 0;
+    for (const f of files) {
+      const nameBuf = Buffer.from(f.name, 'utf8');
+      const store = STORE_EXT.test(f.name);
+      const data = store ? f.data : zlib.deflateRawSync(f.data, { level: 6 });
+      const crc = crc32(f.data);
+      const local = zipLocalHeader(nameBuf, store, crc, data.length, f.data.length);
+      await write(local); await write(nameBuf); await write(data);
+      central.push(zipCentralRecord(nameBuf, store, crc, data.length, f.data.length, offset), nameBuf);
+      offset += local.length + nameBuf.length + data.length;
+    }
+    const centralBuf = Buffer.concat(central);
+    const end = Buffer.alloc(22);
+    end.writeUInt32LE(0x06054b50, 0);
+    end.writeUInt16LE(0, 4); end.writeUInt16LE(0, 6);
+    end.writeUInt16LE(files.length, 8); end.writeUInt16LE(files.length, 10);
+    end.writeUInt32LE(centralBuf.length, 12);
+    end.writeUInt32LE(offset, 16);
+    end.writeUInt16LE(0, 20);
+    await write(centralBuf); await write(end);
+    return res.end();
+  } catch (e) {
+    if (!res.headersSent) return res.status(500).end();
+    return res.destroy();   // truncate rather than emit a corrupt archive
+  }
+});
+
+// Machine-readable map export. Parsed out of map.html at runtime and cached,
+// so it cannot drift out of sync with what the map actually shows.
+let mapExport = null;
+function readMapArray(src, name) {
+  const start = src.indexOf('var ' + name + ' = [');
+  if (start === -1) return [];
+  const open = src.indexOf('[', start);
+  const close = src.indexOf('\n];', open);
+  if (close === -1) return [];
+  // Own source file, no request data involved.
+  return new Function('return ' + src.slice(open, close + 2))();
+}
+app.get('/api/data', (req, res) => {
+  if (!hasAccess(req)) return res.status(404).end();
+  try {
+    if (!mapExport) {
+      const src = fs.readFileSync(path.join(PUB, 'map.html'), 'utf8');
+      const locations = readMapArray(src, 'locations');
+      const lines = readMapArray(src, 'connectionLines');
+      const sections = {}, types = {};
+      locations.forEach(l => { sections[l.section] = (sections[l.section] || 0) + 1; types[l.type] = (types[l.type] || 0) + 1; });
+      mapExport = {
+        source: 'b0b.dev OSINT map',
+        licence: 'Public domain. Cite if you can. Excludes data/alpr-us.json, which is (c) OpenStreetMap contributors, ODbL.',
+        generated: new Date().toISOString(),
+        counts: { locations: locations.length, connections: lines.length, sections: Object.keys(sections).length, types: Object.keys(types).length },
+        bySection: sections,
+        byType: types,
+        locations,
+        connections: lines.map(c => ({ from: c[0], to: c[1], color: c[2], label: c[3] }))
+      };
+    }
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Cache-Control', 'public, max-age=300');
+    return res.end(JSON.stringify(mapExport));
+  } catch (e) {
+    return res.status(500).end();
+  }
 });
 
 // Page routes
