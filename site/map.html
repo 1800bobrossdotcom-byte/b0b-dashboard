@@ -600,7 +600,9 @@
   <div class="filter-item"><label><input type="checkbox" id="toggleEarthquakes" onchange="toggleDataLayer('earthquakes')"> 🌍 USGS Quakes</label></div>
   <div class="filter-item"><label><input type="checkbox" id="toggleEONET" onchange="toggleDataLayer('eonet')"> 🔥 NASA Events</label></div>
   <div class="filter-item"><label><input type="checkbox" id="toggleFIRMS" onchange="toggleDataLayer('firms')"> 🔥 NASA Fire Hotspots</label></div>
-  <div class="filter-item"><label><input type="checkbox" id="toggleOpenSky" onchange="toggleDataLayer('opensky')"> ✈️ Live Aircraft</label></div>
+  <div class="filter-item"><label><input type="checkbox" id="toggleOpenSky" onchange="toggleDataLayer('opensky')"> ✈️ Live Aircraft (ADS-B)</label></div>
+  <div class="filter-item"><label><input type="checkbox" id="toggleMilAir" onchange="toggleDataLayer('milair')"> 🛩️ Military Aircraft (global)</label></div>
+  <div class="filter-item"><label><input type="checkbox" id="toggleVessels" onchange="toggleDataLayer('vessels')"> 🚢 Live Vessels (AIS)</label></div>
   <div class="filter-item"><label><input type="checkbox" id="toggleISS" onchange="toggleDataLayer('iss')"> 🛰️ ISS Tracker</label></div>
   <div class="filter-item"><label><input type="checkbox" id="toggleGDACS" onchange="toggleDataLayer('gdacs')"> ⚠️ GDACS Disasters</label></div>
   <div class="filter-item"><label><input type="checkbox" id="toggleALPR" onchange="toggleDataLayer('alpr')"> 📸 ALPR / Flock Cameras</label></div>
@@ -821,6 +823,11 @@
   <div class="legend-item"><div class="legend-dot" style="background:#ff4400"></div> 🔥 Wildfire</div>
   <div class="legend-item"><div class="legend-dot" style="background:#ff0000"></div> 🌋 Volcano</div>
   <div class="legend-item"><div class="legend-dot" style="background:#00ccff"></div> 🌀 Severe Storm</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#44ff44"></div> ✈️ Aircraft (below 10,000 ft)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#00ccff"></div> ✈️ Aircraft (above 10,000 ft)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ff4444"></div> 🛩️ Military aircraft</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#00e5ff"></div> 🚢 Vessel under way (AIS)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#44aa88"></div> 🚢 Vessel stopped / moored</div>
   <h3 style="margin-top:10px;color:#00ccff;font-size:0.7rem">CONNECTION LINE COLORS</h3>
   <div class="legend-item"><div style="width:24px;height:0;border-top:2px solid #ff4444;margin-right:8px;flex-shrink:0"></div> Military / Intelligence</div>
   <div class="legend-item"><div style="width:24px;height:0;border-top:2px solid #ffcc00;margin-right:8px;flex-shrink:0"></div> Financial / Banking</div>
@@ -3655,6 +3662,24 @@ function toggleDataLayer(layer) {
       fetchOpenSky();
       openskyRefresh = setInterval(fetchOpenSky, 15000);
     }
+  } else if (layer === 'milair') {
+    if (map.hasLayer(milairLayer)) {
+      map.removeLayer(milairLayer);
+      if (milairRefresh) { clearInterval(milairRefresh); milairRefresh = null; }
+    } else {
+      map.addLayer(milairLayer);
+      fetchMilAir();
+      milairRefresh = setInterval(fetchMilAir, 30000);
+    }
+  } else if (layer === 'vessels') {
+    if (map.hasLayer(vesselLayer)) {
+      map.removeLayer(vesselLayer);
+      if (vesselRefresh) { clearInterval(vesselRefresh); vesselRefresh = null; }
+    } else {
+      map.addLayer(vesselLayer);
+      fetchVessels();
+      vesselRefresh = setInterval(fetchVessels, 30000);
+    }
   } else if (layer === 'iss') {
     if (map.hasLayer(issLayer)) {
       map.removeLayer(issLayer);
@@ -3697,6 +3722,10 @@ var earthquakeLayer = L.layerGroup();
 var eonetLayer = L.layerGroup();
 var firmsLayer = L.layerGroup();
 var openskyLayer = L.layerGroup();
+var milairLayer = L.layerGroup();
+var vesselLayer = L.layerGroup();
+var milairRefresh = null;
+var vesselRefresh = null;
 var issLayer = L.layerGroup();
 var gdacsLayer = L.layerGroup();
 var alprLayer = L.layerGroup();
@@ -3998,65 +4027,177 @@ function fetchFIRMS() {
 }
 
 // ===================== OPENSKY NETWORK - LIVE AIRCRAFT =====================
+// ---------- Aircraft (ADS-B) ----------
+// Primary source is adsb.lol - a keyless community ADS-B aggregator. OpenSky is
+// kept as a fallback: it still answers anonymously but throttles hard (the old
+// implementation switched its own checkbox off on the first 429, which is why
+// this layer looked permanently dead). Nothing here self-destructs on an error
+// any more; it reports and retries on the next tick.
+var ADSB_BASE = 'https://api.adsb.lol/v2';
+
+function planeIcon(color, track, size) {
+  return L.divIcon({
+    className: '',
+    html: '<div style="transform:rotate(' + (track || 0) + 'deg);color:' + color +
+          ';font-size:' + size + 'px;line-height:' + size + 'px;text-shadow:0 0 4px ' + color + '">&#10148;</div>',
+    iconSize: [size, size], iconAnchor: [size / 2, size / 2]
+  });
+}
+
+function aircraftPopup(a, color, isMil) {
+  var alt = (a.alt_baro === 'ground') ? 'ON GROUND' : (a.alt_baro != null ? a.alt_baro + ' ft' : 'unknown');
+  return '<div style="font-family:Courier New,monospace;font-size:0.75rem;color:#ddd;background:#111;padding:8px;border:1px solid #333;min-width:200px">' +
+    '<div style="color:' + color + ';font-weight:bold;margin-bottom:4px">&#9992; ' + ((a.flight || '').trim() || a.r || a.hex || 'NO CALLSIGN') + '</div>' +
+    (a.t ? '<div style="color:#aaa;margin-bottom:2px">Type: ' + a.t + '</div>' : '') +
+    (a.r ? '<div style="color:#aaa;margin-bottom:2px">Reg: ' + a.r + '</div>' : '') +
+    '<div style="color:#aaa;margin-bottom:2px">Alt: ' + alt + '</div>' +
+    (a.gs != null ? '<div style="color:#aaa;margin-bottom:2px">Speed: ' + Math.round(a.gs) + ' kts</div>' : '') +
+    (a.track != null ? '<div style="color:#888;margin-bottom:2px">Track: ' + Math.round(a.track) + '&deg;</div>' : '') +
+    (a.squawk ? '<div style="color:#888">Squawk: ' + a.squawk + (a.squawk === '7500' || a.squawk === '7600' || a.squawk === '7700' ? ' &#9888;' : '') + '</div>' : '') +
+    (isMil ? '<div style="color:#ff4444;margin-top:4px;font-weight:bold">MILITARY (source-flagged)</div>' : '') +
+    '<div style="color:#666;margin-top:4px;font-size:0.65rem">ADS-B via adsb.lol &middot; hex ' + (a.hex || '?') + '</div>' +
+    '</div>';
+}
+
+function isMilitary(a) {
+  // adsb.lol sets dbFlags bit 1 for military registrations. Callsign patterns
+  // are a weaker secondary hint and are labelled as such in the popup.
+  return !!(a.dbFlags & 1) || /^(RCH|DUKE|EVAC|NAVY|RRR|TOPG|VIPER|COBRA|SENTRY|JAKE|BART)/.test((a.flight || '').trim());
+}
+
+function drawAircraft(list, layer, dimNonMil) {
+  var mil = 0, total = 0;
+  list.forEach(function(a) {
+    if (a.lat == null || a.lon == null) return;
+    var m = isMilitary(a);
+    if (m) mil++;
+    total++;
+    var onGround = a.alt_baro === 'ground';
+    var color = m ? '#ff4444' : onGround ? '#666' : (a.alt_baro > 10000 ? '#00ccff' : '#44ff44');
+    L.marker([a.lat, a.lon], { icon: planeIcon(color, a.track, m ? 16 : 12) })
+      .bindPopup(aircraftPopup(a, color, m), { className: 'dark-popup' })
+      .addTo(layer);
+  });
+  return { total: total, mil: mil };
+}
+
+function viewportRadiusNm() {
+  var b = map.getBounds();
+  var m = map.distance(b.getCenter(), b.getNorthEast());   // metres
+  return Math.max(5, Math.min(250, Math.round(m / 1852)));  // adsb.lol caps at 250 nm
+}
+
 function fetchOpenSky() {
-  var bounds = map.getBounds();
-  var url = 'https://opensky-network.org/api/states/all?lamin=' +
-    bounds.getSouth().toFixed(2) + '&lomin=' + bounds.getWest().toFixed(2) +
-    '&lamax=' + bounds.getNorth().toFixed(2) + '&lomax=' + bounds.getEast().toFixed(2);
-  updateLiveFeedStatus('Fetching OpenSky aircraft...');
+  var c = map.getCenter();
+  var r = viewportRadiusNm();
+  updateLiveFeedStatus('Aircraft: querying ADS-B...');
+  fetch(ADSB_BASE + '/lat/' + c.lat.toFixed(3) + '/lon/' + c.lng.toFixed(3) + '/dist/' + r)
+    .then(function(res) { if (!res.ok) throw new Error(res.status); return res.json(); })
+    .then(function(d) {
+      openskyLayer.clearLayers();
+      var n = drawAircraft(d.ac || [], openskyLayer);
+      updateLiveFeedStatus('Aircraft: ' + n.total + ' within ' + r + ' nm (' + n.mil + ' military) - adsb.lol ' + new Date().toLocaleTimeString());
+    })
+    .catch(function() { fetchAircraftOpenSkyFallback(); });
+}
+
+// Fallback: OpenSky's anonymous endpoint. Lower resolution and rate-limited,
+// but it keeps the layer alive when the primary is unreachable.
+function fetchAircraftOpenSkyFallback() {
+  var b = map.getBounds();
+  var url = 'https://opensky-network.org/api/states/all?lamin=' + b.getSouth().toFixed(2) +
+    '&lomin=' + b.getWest().toFixed(2) + '&lamax=' + b.getNorth().toFixed(2) + '&lomax=' + b.getEast().toFixed(2);
   fetch(url)
-    .then(function(r) { return r.json(); })
+    .then(function(r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(function(data) {
       openskyLayer.clearLayers();
-      if (!data.states) { updateLiveFeedStatus('OpenSky: no aircraft in view'); return; }
-      var count = 0;
-      var maxShow = 500;
-      data.states.forEach(function(s, idx) {
-        if (idx >= maxShow) return;
-        var callsign = (s[1] || '').trim();
-        var country = s[2] || '';
-        var lng = s[5];
-        var lat = s[6];
-        var alt = s[7] || s[13] || 0;
-        var velocity = s[9] || 0;
-        var heading = s[10] || 0;
-        var onGround = s[8];
-        if (lat === null || lng === null) return;
-        var altFt = (alt * 3.28084).toFixed(0);
-        var speedKnots = (velocity * 1.94384).toFixed(0);
-        var isMilitary = /^RCH|^DUKE|^EVAC|^NAV|^AIR|^RFF|^TOPG|^VIPER|^COBRA/.test(callsign);
-        var color = onGround ? '#666' : isMilitary ? '#ff4444' : alt > 10000 ? '#00ccff' : '#44ff44';
-        var marker = L.circleMarker([lat, lng], {
-          radius: isMilitary ? 5 : 4,
-          fillColor: color,
-          color: color,
-          weight: isMilitary ? 2 : 1,
-          fillOpacity: 0.7,
-          opacity: 0.9
-        });
-        marker.bindPopup(
-          '<div style="font-family:Courier New,monospace;font-size:0.75rem;color:#ddd;background:#111;padding:8px;border:1px solid #333;min-width:180px">' +
-          '<div style="color:' + color + ';font-weight:bold;margin-bottom:4px">✈️ ' + (callsign || 'NO CALLSIGN') + '</div>' +
-          '<div style="color:#aaa;margin-bottom:2px">🏳️ ' + country + '</div>' +
-          '<div style="color:#aaa;margin-bottom:2px">Alt: ' + altFt + ' ft (' + alt.toFixed(0) + 'm)</div>' +
-          '<div style="color:#aaa;margin-bottom:2px">Speed: ' + speedKnots + ' kts (' + velocity.toFixed(0) + ' m/s)</div>' +
-          '<div style="color:#888">Heading: ' + heading.toFixed(0) + ' - ' + (onGround ? 'ON GROUND' : 'AIRBORNE') + '</div>' +
-          (isMilitary ? '<div style="color:#ff4444;margin-top:4px;font-weight:bold">MILITARY/GOV PATTERN</div>' : '') +
-          '</div>',
-          {className: 'dark-popup'}
-        );
-        marker.addTo(openskyLayer);
-        count++;
+      var list = (data.states || []).slice(0, 500).map(function(st) {
+        return { hex: st[0], flight: st[1], lat: st[6], lon: st[5],
+                 alt_baro: st[7] ? Math.round(st[7] * 3.28084) : (st[8] ? 'ground' : null),
+                 gs: st[9] ? st[9] * 1.94384 : null, track: st[10] };
       });
-      updateLiveFeedStatus('OpenSky: ' + count + ' aircraft in view - ' + new Date().toLocaleTimeString());
+      var n = drawAircraft(list, openskyLayer);
+      updateLiveFeedStatus('Aircraft: ' + n.total + ' in view - OpenSky fallback ' + new Date().toLocaleTimeString());
     })
-    .catch(function(e) {
-      updateLiveFeedStatus('OpenSky fetch failed - rate limit or network');
-      var cb = document.getElementById('toggleOpenSky');
-      if (cb) cb.checked = false;
-      if (openskyRefresh) { clearInterval(openskyRefresh); openskyRefresh = null; }
-      map.removeLayer(openskyLayer);
+    .catch(function() {
+      updateLiveFeedStatus('Aircraft: both ADS-B sources unavailable - will retry');
     });
+}
+
+// ---------- Military aircraft, worldwide ----------
+// Not viewport-scoped on purpose: the whole point is the global picture at once.
+function fetchMilAir() {
+  updateLiveFeedStatus('Military air: querying...');
+  fetch(ADSB_BASE + '/mil')
+    .then(function(r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(d) {
+      milairLayer.clearLayers();
+      var n = drawAircraft(d.ac || [], milairLayer);
+      updateLiveFeedStatus('Military aircraft airborne worldwide: ' + n.total + ' - adsb.lol ' + new Date().toLocaleTimeString());
+    })
+    .catch(function() { updateLiveFeedStatus('Military air feed unavailable - will retry'); });
+}
+
+// ---------- Vessels (AIS) ----------
+// Open AIS with no API key is regionally limited: the Finnish Transport
+// Infrastructure Agency publishes Gulf of Finland / Finnish waters openly,
+// while global AIS is commercially licensed. COVERAGE IS THE GULF OF FINLAND
+// AND FINNISH WATERS ONLY - an empty map elsewhere means no feed, not no ships.
+var AIS_BASE = 'https://meri.digitraffic.fi/api/ais/v1';
+var vesselNames = null;
+
+function vesselPopup(p, mmsi) {
+  var name = (p && p.name) ? p.name : ('MMSI ' + mmsi);
+  return '<div style="font-family:Courier New,monospace;font-size:0.75rem;color:#ddd;background:#111;padding:8px;border:1px solid #333;min-width:200px">' +
+    '<div style="color:#00e5ff;font-weight:bold;margin-bottom:4px">&#128674; ' + name + '</div>' +
+    '<div style="color:#aaa;margin-bottom:2px">MMSI: ' + mmsi + '</div>' +
+    (p && p.destination ? '<div style="color:#aaa;margin-bottom:2px">Destination: ' + p.destination + '</div>' : '') +
+    (p && p.sog != null ? '<div style="color:#aaa;margin-bottom:2px">Speed: ' + p.sog + ' kts</div>' : '') +
+    (p && p.heading != null && p.heading !== 511 ? '<div style="color:#888;margin-bottom:2px">Heading: ' + p.heading + '&deg;</div>' : '') +
+    (p && p.navStat != null ? '<div style="color:#888">Nav status code: ' + p.navStat + '</div>' : '') +
+    '<div style="color:#666;margin-top:4px;font-size:0.65rem">AIS via Finnish Transport Infrastructure Agency (digitraffic), CC BY 4.0. Finnish waters only.</div>' +
+    '</div>';
+}
+
+function fetchVessels() {
+  var c = map.getCenter();
+  updateLiveFeedStatus('Vessels: querying AIS (Finnish waters)...');
+  // Names come from a separate metadata endpoint; fetched once and cached.
+  var namesReady = vesselNames ? Promise.resolve(vesselNames) :
+    fetch(AIS_BASE + '/vessels').then(function(r) { return r.ok ? r.json() : []; })
+      .then(function(list) {
+        vesselNames = {};
+        (list || []).forEach(function(v) { if (v.mmsi) vesselNames[v.mmsi] = v; });
+        return vesselNames;
+      }).catch(function() { vesselNames = {}; return vesselNames; });
+
+  namesReady.then(function(names) {
+    return fetch(AIS_BASE + '/locations?radius=100&latitude=' + c.lat.toFixed(3) + '&longitude=' + c.lng.toFixed(3))
+      .then(function(r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function(d) {
+        vesselLayer.clearLayers();
+        var feats = d.features || [], n = 0;
+        feats.forEach(function(f) {
+          var co = f.geometry && f.geometry.coordinates;
+          if (!co) return;
+          var p = f.properties || {};
+          var meta = names[f.mmsi] || {};
+          var moving = p.sog != null && p.sog > 0.5;
+          L.circleMarker([co[1], co[0]], {
+            radius: 4, fillColor: moving ? '#00e5ff' : '#4a8', color: moving ? '#00e5ff' : '#4a8',
+            weight: 1, fillOpacity: 0.8, opacity: 0.9
+          }).bindPopup(vesselPopup({
+            name: meta.name, destination: meta.destination, sog: p.sog, heading: p.heading, navStat: p.navStat
+          }, f.mmsi), { className: 'dark-popup' }).addTo(vesselLayer);
+          n++;
+        });
+        if (n === 0) {
+          updateLiveFeedStatus('Vessels: 0 here - open AIS covers Finnish waters only. Pan to the Gulf of Finland (~60.1N 24.9E).');
+        } else {
+          updateLiveFeedStatus('Vessels: ' + n + ' within 100 km - digitraffic AIS ' + new Date().toLocaleTimeString());
+        }
+      });
+  }).catch(function() { updateLiveFeedStatus('Vessel AIS feed unavailable - will retry'); });
 }
 
 // ===================== ISS TRACKER =====================
