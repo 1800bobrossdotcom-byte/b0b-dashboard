@@ -1,14 +1,22 @@
-/* b0b.dev persistent signal bar — Filter, "Hey Man Nice Shot".
+/* b0b.dev persistent signal bar — the signal playlist.
    One hidden YouTube (IFrame API) player, resumed across page loads via
    localStorage so the track feels continuous across /report and /map.
-   The site hosts no recording; YouTube's licensed player serves the audio. */
+   The site hosts no recording; YouTube's licensed player serves the audio,
+   and every track is taken from the rights-holder's own channel — the
+   auto-generated "- Topic" channels the labels supply, not a re-upload.
+   Note for whoever edits this next: several high-view uploads of these songs
+   carry the word "Official" in the title while belonging to private accounts.
+   Check the channel, not the title. */
 (function () {
   'use strict';
   // Only render in a top-level window (avoid a double bar if a page is framed).
   if (window.top !== window.self) return;
   if (document.getElementById('b0b-signal-bar')) return;
 
-  var VIDEO_ID = 'qMDxrXFQwU8';        // Filter - Topic (official, licensed)
+  var TRACKS = [
+    { id: 'qMDxrXFQwU8', label: 'Filter &mdash; Hey Man Nice Shot' },        // Filter - Topic (licensed)
+    { id: 'rx2_iHftARo', label: 'Talking Heads &mdash; Slippery People' }     // Talking Heads - Topic (licensed)
+  ];
   var LS_KEY = 'b0b_signal_v1';
   var SAVE_MS = 1000;
   var player = null, ready = false, dur = 0, saveTimer = null;
@@ -28,6 +36,8 @@
     } catch (e) { /* ignore */ }
   }
   var st = loadState();
+  var idx = Number(st.i);
+  if (!(idx >= 0 && idx < TRACKS.length)) idx = 0;
 
   /* ---------- styles ---------- */
   var css = document.createElement('style');
@@ -57,8 +67,10 @@
     'html,body{overflow-x:hidden;max-width:100%}',
     '.back-to-top{bottom:64px !important}',
     '.leaflet-bottom{bottom:48px !important}',
-    '@media(max-width:600px){#b0b-signal-title{max-width:34vw}#b0b-signal-upd{display:none}#b0b-signal-time{display:none}}',
-    '@media(max-width:380px){#b0b-signal-title small{display:none}}'
+    '@media(max-width:600px){#b0b-signal-title{max-width:30vw}#b0b-signal-upd{display:none}#b0b-signal-time{display:none}',
+    '#b0b-signal-bar{gap:6px}#b0b-signal-bar button{width:27px;height:27px;min-width:27px;font-size:12px}}',
+    '@media(max-width:380px){#b0b-signal-title small{display:none}#b0b-signal-bar{gap:4px}',
+    '#b0b-signal-bar button{width:25px;height:25px;min-width:25px}}'
   ].join('');
   document.head.appendChild(css);
 
@@ -68,8 +80,10 @@
   bar.setAttribute('role', 'region');
   bar.setAttribute('aria-label', 'Signal track player');
   bar.innerHTML =
+    '<button id="b0b-signal-prev" aria-label="Previous signal" title="Previous track">&#9198;</button>' +
     '<button id="b0b-signal-play" aria-label="Play signal" title="Play / pause">&#9654;</button>' +
-    '<span id="b0b-signal-title">SIGNAL <small>&middot; Filter &mdash; Hey Man Nice Shot</small></span>' +
+    '<button id="b0b-signal-next" aria-label="Next signal" title="Next track">&#9197;</button>' +
+    '<span id="b0b-signal-title">SIGNAL <small>&middot; ' + TRACKS[idx].label + '</small></span>' +
     '<div id="b0b-signal-seek" aria-label="Seek"><div id="b0b-signal-fill"></div></div>' +
     '<span id="b0b-signal-time">0:00</span>' +
     '<button id="b0b-signal-mute" aria-label="Mute" title="Mute / unmute">&#128266;</button>' +
@@ -91,13 +105,36 @@
   else document.addEventListener('DOMContentLoaded', attach);
 
   /* ---------- controls ---------- */
-  var playBtn, muteBtn, fill, timeEl, seekEl;
+  var playBtn, muteBtn, prevBtn, nextBtn, titleEl, fill, timeEl, seekEl;
   function els() {
     playBtn = document.getElementById('b0b-signal-play');
     muteBtn = document.getElementById('b0b-signal-mute');
+    prevBtn = document.getElementById('b0b-signal-prev');
+    nextBtn = document.getElementById('b0b-signal-next');
+    titleEl = document.getElementById('b0b-signal-title');
     fill = document.getElementById('b0b-signal-fill');
     timeEl = document.getElementById('b0b-signal-time');
     seekEl = document.getElementById('b0b-signal-seek');
+  }
+
+  function paintTitle() {
+    if (titleEl) titleEl.innerHTML = 'SIGNAL <small>&middot; ' + TRACKS[idx].label + '</small>';
+  }
+
+  // Move n tracks along the list, wrapping. Time resets: a saved position
+  // belongs to the track it was saved from, not to the next one.
+  function goTrack(n) {
+    if (!TRACKS.length) return;
+    idx = ((idx + n) % TRACKS.length + TRACKS.length) % TRACKS.length;
+    dur = 0;
+    if (fill) fill.style.width = '0%';
+    paintTitle();
+    saveState({ i: idx, t: 0 });
+    if (!ready || !player) return;
+    var wasPlaying = isPlaying();
+    if (wasPlaying && player.loadVideoById) player.loadVideoById(TRACKS[idx].id);
+    else if (player.cueVideoById) player.cueVideoById(TRACKS[idx].id);
+    setPlayIcon();
   }
   function fmt(s) {
     s = Math.max(0, Math.floor(s || 0));
@@ -122,6 +159,8 @@
       if (player.isMuted()) { player.unMute(); muteBtn.innerHTML = '&#128266;'; saveState({ muted: false }); }
       else { player.mute(); muteBtn.innerHTML = '&#128263;'; saveState({ muted: true }); }
     });
+    prevBtn.addEventListener('click', function () { goTrack(-1); });
+    nextBtn.addEventListener('click', function () { goTrack(1); });
     seekEl.addEventListener('click', function (e) {
       if (!ready || !dur) return;
       var rect = seekEl.getBoundingClientRect();
@@ -144,7 +183,7 @@
   /* ---------- YouTube IFrame API ---------- */
   window.onYouTubeIframeAPIReady = function () {
     player = new YT.Player(mount, {
-      videoId: VIDEO_ID,
+      videoId: TRACKS[idx].id,
       host: 'https://www.youtube-nocookie.com',
       width: '320', height: '180',
       playerVars: { controls: 0, disablekb: 1, playsinline: 1, rel: 0, modestbranding: 1, fs: 0 },
@@ -160,7 +199,12 @@
         },
         onStateChange: function (e) {
           if (e.data === 1) saveState({ playing: true });
-          else if (e.data === 2 || e.data === 0) saveState({ playing: false });
+          else if (e.data === 2) saveState({ playing: false });
+          else if (e.data === 0) {           // ended - roll on to the next signal
+            saveState({ playing: true, t: 0 });
+            goTrack(1);
+            if (player && player.playVideo) { try { player.playVideo(); } catch (err) { /* autoplay may be blocked */ } }
+          }
           setPlayIcon();
         }
       }
@@ -221,6 +265,7 @@
   function boot() {
     desktopModeWarn();
     bindUI();
+    paintTitle();
     loadAPI();
     loadUpdated();
     requestAnimationFrame(tick);
