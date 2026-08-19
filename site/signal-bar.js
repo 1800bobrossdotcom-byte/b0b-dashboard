@@ -226,20 +226,39 @@
   }
 
   /* ---------- last-updated label ---------- */
+  // Visitor readout. Two sinks: the persistent bar, and the masthead slot on
+  // whichever page is open. Refreshed on an interval so the figure is live
+  // rather than fixed at page load.
+  var VISITOR_POLL_MS = 60000;
+  function paintVisitors(d) {
+    var bar = document.getElementById('b0b-signal-visitors');
+    var mast = document.getElementById('b0b-masthead-visitors');
+    // A per-instance memory counter is not a real total, so it is never shown
+    // as one. The endpoint reports which backend is live and the UI respects it.
+    if (!d || d.backend === 'memory') {
+      if (bar) { bar.textContent = ''; bar.title = (d && d.note) || ''; }
+      if (mast) { mast.textContent = ''; mast.title = (d && d.note) || ''; }
+      if (d && d.backend === 'memory' && window.console && console.info) {
+        console.info('[b0b] visitor counter inactive: ' + d.note);
+      }
+      return;
+    }
+    var v = Number(d.visits || 0), w = Number(d.views || 0);
+    var tip = (d.note || '') + (d.since ? ' Counting since ' + d.since.slice(0, 10) + '.' : '');
+    if (bar) {
+      bar.textContent = '\u00b7 ' + v.toLocaleString() + (v === 1 ? ' visit' : ' visits');
+      bar.title = tip;
+    }
+    if (mast) {
+      mast.textContent = 'Visitors: ' + v.toLocaleString() + ' \u00b7 ' + w.toLocaleString() + ' page views';
+      mast.title = tip;
+    }
+  }
+
   function loadVisitors() {
     fetch('/api/visitors', { credentials: 'same-origin' })
       .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (d) {
-        if (!d) return;
-        var el = document.getElementById('b0b-signal-visitors');
-        if (!el) return;
-        // A per-instance memory counter is not a real total, so it is not shown
-        // as one. The endpoint says which backend is live; the bar respects it.
-        if (d.backend === 'memory') { el.textContent = ''; el.title = d.note || ''; return; }
-        var n = Number(d.visits || 0);
-        el.textContent = '\u00b7 ' + n.toLocaleString() + (n === 1 ? ' visit' : ' visits');
-        el.title = (d.note || '') + (d.since ? ' Counting since ' + d.since.slice(0, 10) + '.' : '');
-      })
+      .then(paintVisitors)
       .catch(function () { /* a counter must never be load-bearing */ });
   }
 
@@ -291,6 +310,7 @@
     loadAPI();
     loadUpdated();
     loadVisitors();
+    setInterval(loadVisitors, VISITOR_POLL_MS);
     requestAnimationFrame(tick);
     ['pagehide', 'visibilitychange', 'beforeunload'].forEach(function (ev) {
       window.addEventListener(ev, function () { saveState(); }, { passive: true });
