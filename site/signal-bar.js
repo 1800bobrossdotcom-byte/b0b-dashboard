@@ -19,11 +19,12 @@
     { id: 'Xv8FBjo1Y8I', label: 'Tracy Chapman &mdash; Talkin&rsquo; Bout a Revolution' }, // Tracy Chapman (artist channel)
     { id: 'uq-gYOrU8bA', label: 'Paul Simon &mdash; You Can Call Me Al' },                  // PaulSimonVEVO (official)
     { id: 'rx2_iHftARo', label: 'Talking Heads &mdash; Slippery People' },                 // Talking Heads - Topic (licensed)
-    { id: 'qMDxrXFQwU8', label: 'Filter &mdash; Hey Man Nice Shot' }                       // Filter - Topic (licensed)
+    { id: 'qMDxrXFQwU8', label: 'Filter &mdash; Hey Man Nice Shot' },                      // Filter - Topic (licensed)
+    { id: '9D2R69gVyZ0', label: 'TOOL &mdash; 7empest' }                                   // TOOLVEVO (official). 15:43 - much longer than the rest.
   ];
   var LS_KEY = 'b0b_signal_v4';   // bump on every reorder: a stored index points into the old list
   var SAVE_MS = 1000;
-  var player = null, ready = false, dur = 0, saveTimer = null;
+  var player = null, ready = false, dur = 0, saveTimer = null, errCount = 0;
 
   function loadState() {
     try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; }
@@ -203,7 +204,7 @@
           if (!saveTimer) saveTimer = setInterval(function () { saveState(); }, SAVE_MS);
         },
         onStateChange: function (e) {
-          if (e.data === 1) saveState({ playing: true });
+          if (e.data === 1) { errCount = 0; saveState({ playing: true }); }
           else if (e.data === 2) saveState({ playing: false });
           else if (e.data === 0) {           // ended - roll on to the next signal
             saveState({ playing: true, t: 0 });
@@ -211,6 +212,16 @@
             if (player && player.playVideo) { try { player.playVideo(); } catch (err) { /* autoplay may be blocked */ } }
           }
           setPlayIcon();
+        },
+        onError: function () {
+          /* 2 bad id, 5 player error, 100 removed, 101/150 embedding disabled by the rights
+             holder. Without this the bar parks on a dead track forever - and because the index
+             is persisted, a listener stays parked on it across page loads. Roll on instead, and
+             stop after a full lap so an all-dead list cannot spin. */
+          errCount++;
+          if (errCount >= TRACKS.length) { saveState({ playing: false }); setPlayIcon(); return; }
+          goTrack(1);
+          if (player && player.playVideo) { try { player.playVideo(); } catch (err) { /* autoplay may be blocked */ } }
         }
       }
     });
