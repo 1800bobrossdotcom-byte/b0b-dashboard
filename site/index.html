@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="/theme.css">
+  <script>(function(){try{var t=localStorage.getItem("b0b_theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="/favicon.png">
@@ -18,7 +20,7 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      background: #0a0a0a; color: #00ff41;
+      background: var(--bg); color: var(--green);
       font-family: 'Courier New', monospace;
       min-height: 100vh; display: flex; flex-direction: column;
       align-items: center; justify-content: center;
@@ -42,7 +44,7 @@
       animation: flicker 4s infinite alternate;
     }
     .subtitle {
-      color: #555; font-size: 0.85rem; letter-spacing: 3px;
+      color: var(--muted-4); font-size: 0.85rem; letter-spacing: 3px;
       margin-bottom: 2.5rem; text-transform: uppercase;
     }
     .nav-links {
@@ -50,8 +52,8 @@
       margin-bottom: 2rem;
     }
     .nav-links a {
-      color: #00ff41; text-decoration: none;
-      border: 1px solid #00ff41; padding: 0.75rem 2rem;
+      color: var(--green); text-decoration: none;
+      border: 1px solid var(--green); padding: 0.75rem 2rem;
       font-size: 1rem; transition: all 0.3s;
       letter-spacing: 2px; position: relative; overflow: hidden;
     }
@@ -61,18 +63,18 @@
       transition: left 0.5s;
     }
     .nav-links a:hover::before { left: 100%; }
-    .nav-links a:hover { background: #00ff41; color: #0a0a0a; }
+    .nav-links a:hover { background: var(--green); color: var(--bg); }
     .nav-links a.secondary {
-      border-color: #333; color: #888;
+      border-color: var(--border); color: var(--muted);
     }
     .nav-links a.secondary:hover {
-      border-color: #ff4444; background: transparent; color: #ff4444;
+      border-color: var(--red); background: transparent; color: var(--red);
     }
     .status {
-      color: #333; font-size: 0.7rem; letter-spacing: 2px;
+      color: var(--border); font-size: 0.7rem; letter-spacing: 2px;
       margin-top: 1rem;
     }
-    .status span { color: #00ff41; }
+    .status span { color: var(--green); }
 
     @keyframes flicker {
       0%, 95% { opacity: 1; }
@@ -108,5 +110,6 @@
 (function(){if(window.parent!==window){document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var h=a.getAttribute('href');if(!h)return;if(h==='/logout'){e.preventDefault();window.top.location.href='/logout'}else if(h==='/'||h==='/report'||h==='/map'){e.preventDefault();window.parent.postMessage({navigate:h},location.origin)}})}})();
 </script>
 <script src="/signal-bar.js" defer></script>
+<script src="/theme.js" defer></script>
 </body>
 </html>
