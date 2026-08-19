@@ -71,7 +71,7 @@
     'html,body{overflow-x:hidden;max-width:100%}',
     '.back-to-top{bottom:64px !important}',
     '.leaflet-bottom{bottom:48px !important}',
-    '@media(max-width:600px){#b0b-signal-title{max-width:30vw}#b0b-signal-upd{display:none}#b0b-signal-time{display:none}',
+    '@media(max-width:600px){#b0b-signal-title{max-width:30vw}#b0b-signal-upd{display:none}#b0b-signal-visitors{display:none}#b0b-signal-time{display:none}',
     '#b0b-signal-bar{gap:6px}#b0b-signal-bar button{width:27px;height:27px;min-width:27px;font-size:12px}}',
     '@media(max-width:380px){#b0b-signal-title small{display:none}#b0b-signal-bar{gap:4px}',
     '#b0b-signal-bar button{width:25px;height:25px;min-width:25px}}'
@@ -91,7 +91,8 @@
     '<div id="b0b-signal-seek" aria-label="Seek"><div id="b0b-signal-fill"></div></div>' +
     '<span id="b0b-signal-time">0:00</span>' +
     '<button id="b0b-signal-mute" aria-label="Mute" title="Mute / unmute">&#128266;</button>' +
-    '<span id="b0b-signal-upd"></span>';
+    '<span id="b0b-signal-upd"></span>' +
+    '<span id="b0b-signal-visitors" style="color:#3f5a4c;white-space:nowrap;font-size:10px"></span>';
   var host = document.createElement('div');
   host.id = 'b0b-signal-yt';
   var mount = document.createElement('div');
@@ -225,6 +226,23 @@
   }
 
   /* ---------- last-updated label ---------- */
+  function loadVisitors() {
+    fetch('/api/visitors', { credentials: 'same-origin' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d) return;
+        var el = document.getElementById('b0b-signal-visitors');
+        if (!el) return;
+        // A per-instance memory counter is not a real total, so it is not shown
+        // as one. The endpoint says which backend is live; the bar respects it.
+        if (d.backend === 'memory') { el.textContent = ''; el.title = d.note || ''; return; }
+        var n = Number(d.visits || 0);
+        el.textContent = '\u00b7 ' + n.toLocaleString() + (n === 1 ? ' visit' : ' visits');
+        el.title = (d.note || '') + (d.since ? ' Counting since ' + d.since.slice(0, 10) + '.' : '');
+      })
+      .catch(function () { /* a counter must never be load-bearing */ });
+  }
+
   function loadUpdated() {
     fetch('/api/updated', { credentials: 'same-origin' })
       .then(function (r) { return r.ok ? r.json() : null; })
@@ -272,6 +290,7 @@
     paintTitle();
     loadAPI();
     loadUpdated();
+    loadVisitors();
     requestAnimationFrame(tick);
     ['pagehide', 'visibilitychange', 'beforeunload'].forEach(function (ev) {
       window.addEventListener(ev, function () { saveState(); }, { passive: true });

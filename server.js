@@ -240,6 +240,7 @@ app.post('/api/gate', (req, res) => {
     'Set-Cookie',
     `${ACCESS_COOKIE}=${token}; Path=/; HttpOnly; Max-Age=${ACCESS_TTL_SECONDS}; SameSite=Lax${secure}`
   );
+  bump('visits');
   return res.status(204).end();
 });
 
@@ -460,6 +461,92 @@ app.get('/api/data', (req, res) => {
   }
 });
 
+
+// ═══════════════════════════════════════════════════════════
+// Visitor counters
+// ═══════════════════════════════════════════════════════════
+// Aggregate totals only. No IP, no user agent, no per-visitor record, no
+// third-party analytics script, nothing that would let this site do to its
+// readers what the report documents being done to everyone else. Two numbers:
+// "visits" (a session entering through the gate) and "views" (a page served).
+//
+// Durability is the hard part on serverless. Each Vercel instance is ephemeral
+// and there are several of them, so an in-process number is meaningless there.
+// The store is therefore chosen at boot, in this order:
+//   1. Upstash / Vercel KV REST, if KV_REST_API_URL + KV_REST_API_TOKEN are set
+//      — atomic INCR, shared across instances, no npm dependency, plain fetch.
+//   2. A local JSON file, for a normal always-on host or local development.
+//   3. Process memory, which is honest only in dev — /api/visitors reports
+//      which backend is live so the number is never presented as more than it is.
+const KV_URL = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || '';
+const KV_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || '';
+const COUNT_FILE = path.join(__dirname, '.data', 'visitors.json');
+const memCounts = { visits: 0, views: 0 };
+let countBackend = 'memory';
+
+if (KV_URL && KV_TOKEN) {
+  countBackend = 'kv';
+} else {
+  try {
+    fs.mkdirSync(path.dirname(COUNT_FILE), { recursive: true });
+    if (!fs.existsSync(COUNT_FILE)) fs.writeFileSync(COUNT_FILE, JSON.stringify({ visits: 0, views: 0, since: new Date().toISOString() }));
+    fs.accessSync(COUNT_FILE, fs.constants.W_OK);
+    countBackend = 'file';
+  } catch (e) {
+    countBackend = 'memory';   // read-only filesystem (serverless)
+  }
+}
+
+function readFileCounts() {
+  try { return JSON.parse(fs.readFileSync(COUNT_FILE, 'utf8')); }
+  catch (e) { return { visits: 0, views: 0, since: null }; }
+}
+
+function kv(cmd) {
+  return fetch(KV_URL + '/' + cmd, { headers: { Authorization: 'Bearer ' + KV_TOKEN } })
+    .then(r => r.ok ? r.json() : null)
+    .catch(() => null);
+}
+
+// Fire-and-forget: a counter must never delay or break a page render.
+function bump(kind) {
+  try {
+    if (countBackend === 'kv') { kv('incr/b0b:' + kind); return; }
+    if (countBackend === 'file') {
+      const c = readFileCounts();
+      c[kind] = (c[kind] || 0) + 1;
+      if (!c.since) c.since = new Date().toISOString();
+      fs.writeFileSync(COUNT_FILE, JSON.stringify(c));
+      return;
+    }
+    memCounts[kind]++;
+  } catch (e) { /* never let counting break a response */ }
+}
+
+app.get('/api/visitors', (req, res) => {
+  if (!hasAccess(req)) return res.status(404).end();
+  res.setHeader('Cache-Control', 'no-store');
+  const respond = (visits, views, since) => res.json({
+    visits: visits, views: views, since: since || null, backend: countBackend,
+    // Stated in the payload so the number can never be quoted without its caveat.
+    note: countBackend === 'memory'
+      ? 'In-process counter: resets on restart and is per-instance. Not a real total. Set KV_REST_API_URL and KV_REST_API_TOKEN for a durable shared count.'
+      : (countBackend === 'file'
+          ? 'Counts persisted to disk on this host. Accurate for a single always-on server; not shared across serverless instances.'
+          : 'Durable shared counter (KV). Aggregate only - no IP, user agent or per-visitor record is stored.')
+  });
+  if (countBackend === 'kv') {
+    return Promise.all([kv('get/b0b:visits'), kv('get/b0b:views')])
+      .then(([a, b]) => respond(Number((a && a.result) || 0), Number((b && b.result) || 0), null))
+      .catch(() => respond(0, 0, null));
+  }
+  if (countBackend === 'file') {
+    const c = readFileCounts();
+    return respond(c.visits || 0, c.views || 0, c.since);
+  }
+  return respond(memCounts.visits, memCounts.views, null);
+});
+
 // Page routes
 app.get('*', (req, res) => {
   const nonce = res.locals.nonce;
@@ -477,6 +564,7 @@ app.get('*', (req, res) => {
     const file = path.join(PUB, page);
     if (fs.existsSync(file)) {
       const html = fs.readFileSync(file, 'utf8');
+      bump('views');
       res.setHeader('Content-Type', 'text/html; charset=utf-8');
       res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
       return res.send(html);
