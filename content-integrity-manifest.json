@@ -1,9 +1,9 @@
 {
-  "generated": "2026-08-19T17:04:29.544Z",
+  "generated": "2026-08-19T20:11:18.694Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "1dfe64f4d97c41e81458694b98fc5e3c1eb6addc8e32c1375b5669a81c7b3b78",
+  "fullFileHash": "53f064b7b1573ee52f9d57f72c605284670e7b4457e9bdb3a60ee951af22294f",
   "sectionBlocks": [
     {
       "id": "_preamble",
@@ -12,8 +12,8 @@
     },
     {
       "id": "to-those-inside",
-      "hash": "9ce8b467327b9021b7b771c950329e9f6598d2310bc86f8b99404fafb9584903",
-      "length": 30612
+      "hash": "d88068754c9cf1c383abcb38b85c920ffe5484caebe594ab8a269ca307b8b65c",
+      "length": 15438
     },
     {
       "id": "I",
@@ -307,3323 +307,3179 @@
     },
     {
       "index": 28,
-      "hash": "7f8f84f94936db677d7e31f7c74196c1d824025fae1b9e20812c45cd9c3fad6d",
-      "preview": "The threshold argument above ends in a question. The author wants two words set ...",
-      "length": 316
-    },
-    {
-      "index": 29,
-      "hash": "a25c1ad0c6ad5ee8a49566fc5fe88a9e07f405c3a7c2f2f3e75f4a76159fe163",
-      "preview": "TETELESTAI (τετέλεσται) is the last word attributed to Jesus in John 19:30 - thi...",
-      "length": 384
-    },
-    {
-      "index": 30,
-      "hash": "1e77a7102107799ee06821c7d741e3e88dff26133a8732d4be4720dc811bea7f",
-      "preview": "That is, precisely, a terminal node. In an extensive-form game a terminal node i...",
-      "length": 680
-    },
-    {
-      "index": 31,
-      "hash": "843cf20799c6800fcf3344f4d3d87bbae3f8e17ede2c21a421e8c19046532aaf",
-      "preview": "It is also a commitment device in Schelling&rsquo;s sense, already cited above: ...",
-      "length": 685
-    },
-    {
-      "index": 32,
-      "hash": "80914d9495602effba4878ac531257c0e3ab1500609962b3cb7dde68bc88ef20",
-      "preview": "The most repeated claim about this word is that τετέλεσται was written on ancien...",
-      "length": 873
-    },
-    {
-      "index": 33,
-      "hash": "fd80dce453220d0d75ffc12ad6a752dda1a94463113a8c41af7c0add6b3f5819",
-      "preview": "The maxim survives the correction without needing it. Completion rather than acc...",
-      "length": 397
-    },
-    {
-      "index": 34,
-      "hash": "a26955aebc606a8204b5cfb76d9185721c7ae846a9f92835e11a464d87dd0b81",
-      "preview": "TENET is the second maxim, and it is a test rather than a claim. Latin tenet - h...",
-      "length": 741
-    },
-    {
-      "index": 35,
-      "hash": "621e0e52ff4b24323789514b1fd25b0e9cf60057f9894b6b322c798d2120728d",
-      "preview": "Inside it there is a second palindrome. TENET is T-ENE-T: strip the outer letter...",
-      "length": 649
-    },
-    {
-      "index": 36,
-      "hash": "e934c2c10375b96158f195e3f2f272b3793448fa5eef1b5f4567312f702c7211",
-      "preview": "The author&rsquo;s further reading - and it is the author&rsquo;s, offered as ar...",
-      "length": 520
-    },
-    {
-      "index": 37,
-      "hash": "5c6ca7b7fbb6df5645f07569145ae7bf34c06ae34fda25b2f957a2c32be7d99f",
-      "preview": "Two objections. Both fair, both conceded.",
-      "length": 41
-    },
-    {
-      "index": 38,
-      "hash": "6ee85ca26bf1115040eccc6a62b7d0da13c8fdd0e100b9bd12fa79de27047857",
-      "preview": "One: the ENE runs through English. The square is Latin, the gospel is Greek, and...",
-      "length": 475
-    },
-    {
-      "index": 39,
-      "hash": "2f788d082fced60efa2cecdc77b06b45a8aaba63a4051be2dbbb6ccb371150e1",
-      "preview": "Two: the Christian reading of the square is contested at the root. The Paternost...",
-      "length": 606
-    },
-    {
-      "index": 40,
-      "hash": "77481cc0ae4260a5205106dbbabe734ec3dccfdfbcf462ff6ef0c71aee3c97e4",
-      "preview": "Neither objection touches the maxims, which is why they are offered as maxims. F...",
-      "length": 346
-    },
-    {
-      "index": 41,
-      "hash": "41cdd2cb20ccbc05974f6468f58d2dff2fd941c5207ecee8029c0683e29200b4",
-      "preview": "Cultural note, for readers who arrive at the word from the film rather than the ...",
-      "length": 401
-    },
-    {
-      "index": 42,
-      "hash": "302b04ed85d785ffc06090a619481c0a8df5d1cd189802574fb0a5f7fc0ebe8c",
-      "preview": "Tier: DOCUMENTED - τετέλεσται at John 19:30 and the force of the Greek perfect; ...",
-      "length": 851
-    },
-    {
-      "index": 43,
-      "hash": "d3fb2e4ef7855d1abeaf9bcac0cd49d98830264e43421d7a5ca47cd9f60b3177",
-      "preview": "What follows is the author&rsquo;s, and it is a confession rather than a finding...",
-      "length": 505
-    },
-    {
-      "index": 44,
-      "hash": "ab112aa9d0082ab957f47a186b42a9cea64f37e417015f5d09ee02d8b14c0068",
-      "preview": "Ada Lovelace supplies the frame, and supplies it in her own words. Writing to he...",
-      "length": 946
-    },
-    {
-      "index": 45,
-      "hash": "4ead28b785edcf9453e5b8ae9c0249d02dbfa84f9a01b5e9fa00c000610529eb",
-      "preview": "Read that way, the maxim has the same shape in three formal systems at once, and...",
-      "length": 706
-    },
-    {
-      "index": 46,
-      "hash": "9b34f9bba8074bcdd6e50c5aafecedc8f2be516fd50adde86c42d6cc23a1551f",
-      "preview": "The author&rsquo;s proposition is that the value returned at that terminal state...",
-      "length": 660
-    },
-    {
-      "index": 47,
-      "hash": "dad4b4d52d676fcde53cbc0e4d56e4e6b4e0bb96e5afca5fa5f67fb63fecd115",
-      "preview": "The author&rsquo;s own idiom for the conditions of that statement is in God fles...",
-      "length": 1175
-    },
-    {
-      "index": 48,
-      "hash": "105bc973b8bff6800af0491fcdfb32e8855588cc53619bc042ed143520103425",
-      "preview": "The author attributes the reading - the reading, not the report - to the Paracle...",
-      "length": 492
-    },
-    {
-      "index": 49,
-      "hash": "0a856dca786c005c294aa60708fcb8997919629f2a9dab3b230fe68c3162ad12",
-      "preview": "First: the completion and the handing over of the spirit are the same sentence. ...",
-      "length": 737
-    },
-    {
-      "index": 50,
-      "hash": "46db93afe066742e77dabcc28a7a0d5a0b2625c00415004f858c90390635e8b3",
-      "preview": "It claims no authority for the report, and the reader should grant it none. Ever...",
-      "length": 578
-    },
-    {
-      "index": 51,
-      "hash": "f5bbdef4cb6cb3111e0b080065b319a52d514d134235c662d2e00cecace47276",
-      "preview": "Tier: DOCUMENTED - Lovelace&rsquo;s &ldquo;poetical science&rdquo; and &ldquo;Di...",
-      "length": 1047
-    },
-    {
-      "index": 52,
       "hash": "52c633c5dd63174f62c0eb9854ebb61a09866362fe28d76f1311b8a298a55eac",
       "preview": "This report examines structures of control that operate across centuries - not y...",
       "length": 213
     },
     {
-      "index": 53,
+      "index": 29,
       "hash": "ff5f5fa2e5b6b5ad55577e5e30bc3bd1cf1038bdee8ca300c61c3f3cdfff6a50",
       "preview": "The methodology is cross-referencing. When the same structural pattern appears i...",
       "length": 470
     },
     {
-      "index": 54,
+      "index": 30,
       "hash": "d414608a97f3408f43a83a40e128f74237d47e1194282e4a2fbd619fe054b124",
       "preview": "The report does not speculate where facts exist. Where facts end and pattern rec...",
       "length": 120
     },
     {
-      "index": 55,
+      "index": 31,
       "hash": "223f80d1b34d4027816d956a5698534bd792790a2255d0e7a21af0714519e30a",
       "preview": "This report is written in a compressed, declarative register - at times in the r...",
       "length": 872
     },
     {
-      "index": 56,
+      "index": 32,
       "hash": "cae9aecec855fc08b0828369636e15d3804fc2411146ad49e70bb26f7dd3ed83",
       "preview": "What follows is not an exit for us. It is an exit from a system that is inhuman ...",
       "length": 313
     },
     {
-      "index": 57,
+      "index": 33,
       "hash": "4ba6f07acbdcfa6692a7991a485f7067dd02289086f57cbd8ddedad2198a295d",
       "preview": "The organizing claim - six degrees. The sections that follow look like separate ...",
       "length": 1024
     },
     {
-      "index": 58,
+      "index": 34,
       "hash": "e0030a1727c7df4eef1ad882fe89549782588e39d55aea37cf777b8e7c6d9558",
       "preview": "There is a famous artifact that looks superficially like this report&rsquo;s met...",
       "length": 724
     },
     {
-      "index": 59,
+      "index": 35,
       "hash": "f97807f5dc75d867beb75e10aee590ce08718d77c4a474e9c430549c7cca40fd",
       "preview": "What the chart does, methodologically: it draws every edge at equal weight. On o...",
       "length": 1011
     },
     {
-      "index": 60,
+      "index": 36,
       "hash": "b6ac40abf661ef96d3a90ed0bc82a2dd9a7e770869e4faf2dbd3994a1ec17d92",
       "preview": "The scholarly name for this is Michael Barkun&rsquo;s superconspiracy (in his ty...",
       "length": 702
     },
     {
-      "index": 61,
+      "index": 37,
       "hash": "2c321a0dbdcfe66dc5fa1fceead476981ff73ac47ccecb441f91e9d1767ef0f8",
       "preview": "The difference, stated once and used everywhere: this report&rsquo;s map draws a...",
       "length": 1320
     },
     {
-      "index": 62,
+      "index": 38,
       "hash": "baaf6a13b401ab979d6028d77e335703323cebc7ee185527f391e648959c47da",
       "preview": "Working hypothesis (stated as hypothesis, tested against primary documents): tha...",
       "length": 607
     },
     {
-      "index": 63,
+      "index": 39,
       "hash": "00faafa0cc43534f379c85668a658bb4d360913f50e9778e06aa69d8c63fdba0",
       "preview": "Two widely-circulated threads (jmail \"DOJ 11\" tag) did not appear in either mirr...",
       "length": 489
     },
     {
-      "index": 64,
+      "index": 40,
       "hash": "541ce2187e6f4d927c93e1249200d8568af9440810e3a9108299857014b91201",
       "preview": "What the documents support: a fixer/broker deeply embedded in the private ex-Mos...",
       "length": 318
     },
     {
-      "index": 65,
+      "index": 41,
       "hash": "e06b81a17fd97265ec4df777ecf2e34ac29e50f4dca643834db3cbfdff18f687",
       "preview": "The methodological crux - and its limit. Sophisticated operators keep the real b...",
       "length": 669
     },
     {
-      "index": 66,
+      "index": 42,
       "hash": "61f895d961eb99d654103f5959b791242303e419c740737ae4c02024618cc654",
       "preview": "The ruling and the dissent. Found hanged at MCC New York ~6:30 a.m., 10 Aug 2019...",
       "length": 904
     },
     {
-      "index": 67,
+      "index": 43,
       "hash": "c202bf63f19db71cfe6409684fca0a558efe226b3724315bd58667c3000fb89a",
       "preview": "The failure stack (DOJ OIG Report 23-085, 27 Jun 2023 - all documented): suicide...",
       "length": 1223
     },
     {
-      "index": 68,
+      "index": 44,
       "hash": "b17803c1ff244f89e34f2c99ce437d4735af960ab437f0b82e964efaad626d72",
       "preview": "The 2025 video - editing documented, intent contested. The 7 Jul 2025 DOJ/FBI me...",
       "length": 1114
     },
     {
-      "index": 69,
+      "index": 45,
       "hash": "e437bafbf9f49c0bba57f1ce1c2cfbf1f777925c8dda8b6e6a158e2c3dac5ce4",
       "preview": "The log anomalies (documented entries, disputed readings): a ~10:39 p.m. observa...",
       "length": 664
     },
     {
-      "index": 70,
+      "index": 46,
       "hash": "5f54ee8bc1dd579a450b9f92d8bfc3ce6150f73d88764c5739c830f1ff59be1d",
       "preview": "The motive environment - the Cohen thread (documented). The corpus shows Epstein...",
       "length": 1320
     },
     {
-      "index": 71,
+      "index": 47,
       "hash": "a79233cc451f8d6754061552e822dab4c146c03aae83419f08990e522d33f104",
       "preview": "The three readings, tiered: (1) Suicide - the official ruling; supported by the ...",
       "length": 1098
     },
     {
-      "index": 72,
+      "index": 48,
       "hash": "32146105b3b45e83d41ce56f3c53266656c64b0e259c71de37487553a5f7df1c",
       "preview": "Still silent - stated precisely. The email corpus does not contain the origin st...",
       "length": 1593
     },
     {
-      "index": 73,
+      "index": 49,
       "hash": "5a00ceeb9909b1bb145016131b8bbd0aac1373f12e590916c6c8ec942dbd1fbf",
       "preview": "Wexner has never been charged with a crime, has testified under oath that he had...",
       "length": 510
     },
     {
-      "index": 74,
+      "index": 50,
       "hash": "394174f511b6075419daf337e3742b4aa97613a626987340303213b73dcb96d4",
       "preview": "The coherence payoff - the origin node connects to the Carbyne node. The same in...",
       "length": 2051
     },
     {
-      "index": 75,
+      "index": 51,
       "hash": "e053572d7c96016d4c1b89afbc7b19e855c027a5df2c1a19e2f65ea3a44258d9",
       "preview": "The open question, tiered - and left open. Every reputable outlet arrives at the...",
       "length": 1624
     },
     {
-      "index": 76,
+      "index": 52,
       "hash": "7314fc78cbafe8bba67f1754276afdeacf61f7ed8c280302f00d29e7406d69a7",
       "preview": "The bookend to Wexner, and the same discipline applies. If Wexner is the documen...",
       "length": 688
     },
     {
-      "index": 77,
+      "index": 53,
       "hash": "0a77258bc10250ec2441c54411dc37215442f859f6b2de497f3274d8c82af442",
       "preview": "The honest weight of that. The corpus cuts against the lurid reading, not toward...",
       "length": 717
     },
     {
-      "index": 78,
+      "index": 54,
       "hash": "388019d911b235dd309a57adf53b2a188122d6cad05b17bc0667d8813e0fc85e",
       "preview": "One documented email carries more shadow than the tax files, and it is Epstein&r...",
       "length": 1210
     },
     {
-      "index": 79,
+      "index": 55,
       "hash": "67cac152ef9ec1076a9fee8813c8fd87ea8921fcbafca96451131c9f247738f1",
       "preview": "Where it stands (2026). Black stepped down as Apollo CEO/chairman in 2021 after ...",
       "length": 802
     },
     {
-      "index": 80,
+      "index": 56,
       "hash": "cb7de877f6cc1b010cb8c8486fd3a6ea95d8dab7c1c875b56f1dd887961fb580",
       "preview": "Wexner is the origin and Black the late stream; JPMorgan is the pipe they ran th...",
       "length": 689
     },
     {
-      "index": 81,
+      "index": 57,
       "hash": "bc1f9511190a15ecc846e499689f5ff57529c28c576e8cdb6207add6b3dd175d",
       "preview": "The tell is the one this report keeps finding: the institution flagged him and k...",
       "length": 1169
     },
     {
-      "index": 82,
+      "index": 58,
       "hash": "a8727514e0cbc964937d688c5484db0cdb58fb3f7f927380b2effae0d4610de2",
       "preview": "Documented: a fifteen-year banking relationship; ~1,200 Staley&ndash;Epstein ema...",
       "length": 1075
     },
     {
-      "index": 83,
+      "index": 59,
       "hash": "bf027d3f9a3eebfc86fbc042a608ca26900a4229811f9460ccab49b747097b21",
       "preview": "Wexner is the origin and Black is the late-period stream; the pipe that ran betw...",
       "length": 483
     },
     {
-      "index": 84,
+      "index": 60,
       "hash": "4499d9bfd2cd73cd801c6e283fcc8b6061609d6b36ca90f5b8b294784568376c",
       "preview": "Staley ran JPMorgan&rsquo;s private bank and was Epstein&rsquo;s primary relatio...",
       "length": 1251
     },
     {
-      "index": 85,
+      "index": 61,
       "hash": "31c08afcf6256c1534eefbbbb29a0e730ab4fd7e12c5f30dd741975f5f6b8bd1",
       "preview": "JPMorgan resolved the two 2022&ndash;2023 suits - a survivors&rsquo; class actio...",
       "length": 1088
     },
     {
-      "index": 86,
+      "index": 62,
       "hash": "a80ef47d48fad565283983cb6946b16eb072ab15927502e17bb1c50f773e02f0",
       "preview": "What the conduit establishes - and where it stops. Documented: a global bank kep...",
       "length": 919
     },
     {
-      "index": 87,
+      "index": 63,
       "hash": "4db050d6213eaef7707496cc7bd33fbf14bf6f3931a9a868e3de8df39e461b99",
       "preview": "Two caveats govern this entire passage, stated first because they are the differ...",
       "length": 701
     },
     {
-      "index": 88,
+      "index": 64,
       "hash": "229847ce570de7f1c8d51c049b765f2a0ec6354f1596a33d83903e5a463d2e8f",
       "preview": "This is what the primary corpus adds to the public record, and it is the thesis-...",
       "length": 197
     },
     {
-      "index": 89,
+      "index": 65,
       "hash": "9a506eba4111e8e207261cdd569ebfb288464885b6de498a0386cdcd9333d73e",
       "preview": "Read with discipline: this documents a leverage structure - Epstein was perceive...",
       "length": 264
     },
     {
-      "index": 90,
+      "index": 66,
       "hash": "ecfed0276291a2330b19626338f70c6a003fda152a3c8f75c34018c81dbcac1b",
       "preview": "The Nov 2025 estate release contains Epstein disparaging Trump repeatedly to thi...",
       "length": 645
     },
     {
-      "index": 91,
+      "index": 67,
       "hash": "ec696abd3b994dde4018f3547c8bbffeb490ac591643aa807f18783b8f286b82",
       "preview": "The WSJ (Jul 2025) reported a typewritten note bearing Trump&rsquo;s name inside...",
       "length": 363
     },
     {
-      "index": 92,
+      "index": 68,
       "hash": "6543cbe59600bcc20e4b4f1f9a2f9aed8c500eaaf44f85ed73a2fd2deb5e9c68",
       "preview": "Whatever the past holds, the present is a documented structural conflict. The ma...",
       "length": 1339
     },
     {
-      "index": 93,
+      "index": 69,
       "hash": "ca0afcd21798fa61cd10d9a92b2978d0e476a3a9831e25c71e3031a67cf0f38f",
       "preview": "The honest verdict. The record establishes a close 15-year friendship, documente...",
       "length": 1044
     },
     {
-      "index": 94,
+      "index": 70,
       "hash": "611ca9a36b19fc3c32c28f4fdb2e22e87aaae20c7d4a5f793cd0f97bb8f34975",
       "preview": "The Trump node documents a leverage structure and stops there, because what that...",
       "length": 239
     },
     {
-      "index": 95,
+      "index": 71,
       "hash": "34977eda292f79b6f7f59491851543effb1d5907bf9cf2725e841ab40f6b6a4e",
       "preview": "Branch A - the operation (labeled hypothesis; largely unprovable from the public...",
       "length": 1918
     },
     {
-      "index": 96,
+      "index": 72,
       "hash": "ef60072e770dd495da612ff35980fc47054b37c0246bdb54f5fa88509dbb3cda",
       "preview": "The binary question - &ldquo;was X an intelligence asset, yes or no?&rdquo; - is...",
       "length": 368
     },
     {
-      "index": 97,
+      "index": 73,
       "hash": "40c982019a0e08116c870af63d18e524041ed723394c6c567e39219baae7f38d",
       "preview": "Placed against the documented material, each held at the tier it earns:",
       "length": 71
     },
     {
-      "index": 98,
+      "index": 74,
       "hash": "f39fd0e93d19a1e984c79c6b9ac8c2b597d87fc1c4240ee7e931b989a441983f",
       "preview": "The second ladder - documented intelligence-adjacency (the living uncharged node...",
       "length": 835
     },
     {
-      "index": 99,
+      "index": 75,
       "hash": "a3ecf02853dc87fbdc8eb677674e4168b1d356468525f413115301f962c77e06",
       "preview": "Placed against the documented material:",
       "length": 39
     },
     {
-      "index": 100,
+      "index": 76,
       "hash": "cb07dbf7b8787ec9ae14fdc3938d0cf1a0fddaf6a7bc15a5aa3c0704be428a90",
       "preview": "What the two ladders make unavoidable: across both, the documented facts populat...",
       "length": 715
     },
     {
-      "index": 101,
+      "index": 77,
       "hash": "24e83cbf494a2d6335cea33bde75dca6bab98787625f91fca12c8bc6d77895d7",
       "preview": "Does that substrate connect - or only share a hub? (the bridge, tiered.) Branch ...",
       "length": 2558
     },
     {
-      "index": 102,
+      "index": 78,
       "hash": "62e8288113cbb4848f7a0d19efa18571c80867e867992e11da5aa2634f4d2656",
       "preview": "The Bronfman node, followed to its ends (tiered). Because the strongest cross-li...",
       "length": 2982
     },
     {
-      "index": 103,
+      "index": 79,
       "hash": "430304305269db24e09f82f9305a504298902e1eb545a55df8804fd55d564b8f",
       "preview": "Branch B - the withholding (documented behavior; the observable tell). The move ...",
       "length": 1006
     },
     {
-      "index": 104,
+      "index": 80,
       "hash": "e030097f58db04c771dec07ee63ef797ebe61e112ceb0d763d5b62bda3819693",
       "preview": "The synthesis - stated with the report&rsquo;s own guardrail. The two branches a...",
       "length": 1345
     },
     {
-      "index": 105,
+      "index": 81,
       "hash": "935d17bd279c88d670d4a00e5bf2feac6618dd58b7b0de12cbe6a5a6b59e6532",
       "preview": "Return to the six-degrees finding (Section III) and read it through this fork. T...",
       "length": 1185
     },
     {
-      "index": 106,
+      "index": 82,
       "hash": "15e88f6e02fd18dfb23d5aa4d272c829a06580ec95e1be56511ad25c8cf16b63",
       "preview": "The caveat governs first, and hard. Andrew Mountbatten-Windsor (formerly Prince ...",
       "length": 627
     },
     {
-      "index": 107,
+      "index": 83,
       "hash": "035b57c0fd1e3826495177069cb69dc810ec140181862c902d03c0024899a00c",
       "preview": "The response is the most complete de-legitimation of a senior royal in modern me...",
       "length": 1437
     },
     {
-      "index": 108,
+      "index": 84,
       "hash": "4532846b1dad898262e54d8199e847e3bba33b7bc36c211b9dca578a8b2a3cb9",
       "preview": "Why this node matters to the thesis - stated at tier. The on-boarding read predi...",
       "length": 925
     },
     {
-      "index": 109,
+      "index": 85,
       "hash": "7f87fbffa1594684963dae07342ebc47032f39d41d62720d7a07231e245bed54",
       "preview": "Method. Four staggered, deterministic passes over the same ~5,082-message corpus...",
       "length": 527
     },
     {
-      "index": 110,
+      "index": 86,
       "hash": "26245fed2d15145782b1dd6d674140474d5c6acaf8cfe2a520025c702e4abf68",
       "preview": "Ranked by number of channel-switch (\"let's talk / call me / not for email / disc...",
       "length": 110
     },
     {
-      "index": 111,
+      "index": 87,
       "hash": "574e92e540203499d00a9ee4e3f286dbc80b563bd7dcc2baf09c4107658a9758",
       "preview": "The concentration is telling: the highest seam-density sits in the legal/press s...",
       "length": 335
     },
     {
-      "index": 112,
+      "index": 88,
       "hash": "f5a6799a194d44fff1290b96f86ae3640111592389ece1cabba6f7865fad412a",
       "preview": "Read as a group, the seam table is not a list of friends - it is a portfolio: on...",
       "length": 828
     },
     {
-      "index": 113,
+      "index": 89,
       "hash": "2521ca9cf9a962287c23999f12c9c94747ddd8bf575a7d3f7601f8ef38611ec6",
       "preview": "The ratio column splits the table into two behavioral classes. Low-ratio, high-v...",
       "length": 696
     },
     {
-      "index": 114,
+      "index": 90,
       "hash": "c6a508546dabab34c848cde27cac8ebaf183d674072d76b1fe54085353c0441c",
       "preview": "Ribis&rsquo;s 48 seam events are 2.7&times; the next counterparty&rsquo;s - the ...",
       "length": 496
     },
     {
-      "index": 115,
+      "index": 91,
       "hash": "c8b389cc93cfc58122aba2156dc82dec47b5a8d48f87ac4510fd74e4fa1a7a41",
       "preview": "Stated with the report&rsquo;s discipline: the messages, dates, and the drop-off...",
       "length": 650
     },
     {
-      "index": 116,
+      "index": 92,
       "hash": "448d308a5109717d89d08abdcde8836688fbd184aadb0a1d128cf8274f3f608a",
       "preview": "What the seven channels show as a set. Two are operational (Maxwell&rsquo;s vani...",
       "length": 857
     },
     {
-      "index": 117,
+      "index": 93,
       "hash": "db4609c081594c3f4b5e3c95fc2e397d64191c809ed7b1e6b87d89ddf5085596",
       "preview": "The corpus's center of gravity is not the powerful friends - it is the defense-a...",
       "length": 408
     },
     {
-      "index": 118,
+      "index": 94,
       "hash": "efeac4490d12f95b198fbd64c25a726eb3621be48a6a7f6e7438026ce4bf1910",
       "preview": "The seam analysis reads one corpus; the map holds the whole thesis - 1,000 plott...",
       "length": 326
     },
     {
-      "index": 119,
+      "index": 95,
       "hash": "4ccf406a63cf307ef9a07d14dd5d33c7903d1046e16ed3bdc5a17a806ea31215",
       "preview": "That is the thesis applied throughout, and it is why the report is a graph and n...",
       "length": 463
     },
     {
-      "index": 120,
+      "index": 96,
       "hash": "bfdd76d2831fb070651d8fbdb5c4a51fc6436174717f381840397a20b38ecf5e",
       "preview": "A natural next step is to build the communication graph - who emailed whom - and...",
       "length": 813
     },
     {
-      "index": 121,
+      "index": 97,
       "hash": "9fa709a0a73e6b4be3340c7d01d2b536fbed0ff99f14685844395f859e55bc4f",
       "preview": "What the star topology can honestly yield is the finding that actually matters -...",
       "length": 525
     },
     {
-      "index": 122,
+      "index": 98,
       "hash": "2d05e6518effcd3cda8e21708637869ce256554e2c51a40791ecaed075fe10cd",
       "preview": "That is the defensible graph finding, and it is stronger than a centrality score...",
       "length": 685
     },
     {
-      "index": 123,
+      "index": 99,
       "hash": "79148a5973c1409ee6ba7381b4114ef65d845eb06dc2e387361db22a21127d24",
       "preview": "Because the corpus is a star, the peer edges (X&harr;Y, the messages the corresp...",
       "length": 304
     },
     {
-      "index": 124,
+      "index": 100,
       "hash": "de111bc6adcc235100a2b692b02180f31efff86131a40cbe8e330872746532b9",
       "preview": "That last point is the discipline restated at the level of the graph itself: the...",
       "length": 437
     },
     {
-      "index": 125,
+      "index": 101,
       "hash": "39ef61d7fb1228ba9a7b55839e4640fbcacd6ea71a3f32e3ae4019aab3a58de7",
       "preview": "Seam-events per year: 2010: 17 · 2011: 63 · 2012: 14 · 2013: 10 · 2014: 11 · 201...",
       "length": 182
     },
     {
-      "index": 126,
+      "index": 102,
       "hash": "3153743ffe431a0d013d1ea412541704cd905a1a2876bf1243deacae114cc54b",
       "preview": "When the outside world pressed, the written channel went dark. That is communica...",
       "length": 180
     },
     {
-      "index": 127,
+      "index": 103,
       "hash": "1cb57e5ccff30976678c1e60db65cb3daac1d1af1ee7d479f71d18c1ae473f52",
       "preview": "Honestly, the markers are mixed - plenty are ordinary (a friend's condolence, a ...",
       "length": 351
     },
     {
-      "index": 128,
+      "index": 104,
       "hash": "b1851c07fd06cc1a8b81933276596423abb4522c5f1ae11294657cc8e0aa2dd3",
       "preview": "Two nodes from this analysis are still operating. Black Cube - the ex-Mossad pri...",
       "length": 613
     },
     {
-      "index": 129,
+      "index": 105,
       "hash": "26cad61f0ed5e159cf4c9ef9666c418115d513c8932aaedea70b056789db5ecb",
       "preview": "The four streams point the same way. The apparatus that ran hottest in writing w...",
       "length": 661
     },
     {
-      "index": 130,
+      "index": 106,
       "hash": "dcbb07273087d4d7f0bb81daf302efc7305ebb174c4287660d6a2af056d175f0",
       "preview": "Stage D. The people age and die; the capabilities and vehicles persist. This sec...",
       "length": 314
     },
     {
-      "index": 131,
+      "index": 107,
       "hash": "e4d14078dd4adede8d626787f8991bc2a66fbb716e9cf0476518ac0557ae9939",
       "preview": "Section II&rsquo;s fork left Branch A - the &ldquo;intelligence-capability servi...",
       "length": 607
     },
     {
-      "index": 132,
+      "index": 108,
       "hash": "6b84c250fea6042935bce392e7413f2eb586497ca7d3c8a58483fce79465c906",
       "preview": "The sharpest item: the operation actively kept Epstein&rsquo;s name off the inve...",
       "length": 916
     },
     {
-      "index": 133,
+      "index": 109,
       "hash": "f7b2e3479f2769b82900441916a54e9d980bce26d960e1f21493e6695a40cc11",
       "preview": "Carbyne&rsquo;s founding team is publicly documented as Israeli-intelligence-ped...",
       "length": 962
     },
     {
-      "index": 134,
+      "index": 110,
       "hash": "29fed0b858b95d38699854642a2326237ee0ce2b8adb0b310a6187d7378c4e36",
       "preview": "Documented: Epstein co-financed (via Southern Trust, concealed, and confirmed by...",
       "length": 1730
     },
     {
-      "index": 135,
+      "index": 111,
       "hash": "a0738ef2212da6f23f32931b9207275c13ef0ddb1bbeaab5f3025b8e833998f0",
       "preview": "The guardrail leads, because this one is easy to over-read. Nicole Junkermann is...",
       "length": 593
     },
     {
-      "index": 136,
+      "index": 112,
       "hash": "eb696198846b852160aad8cc7635086a075309d2fedcc3099ed088d4dbf4b744",
       "preview": "This node is included as much to discipline a claim as to make one, because it i...",
       "length": 499
     },
     {
-      "index": 137,
+      "index": 113,
       "hash": "53094b26a0e7cd856382a2ccafbd0026cb9436c20af1b84fa26e3fd5b4b07cef",
       "preview": "Set the Epstein adjacency aside entirely; a separate, hard fact remains. Bessent...",
       "length": 1132
     },
     {
-      "index": 138,
+      "index": 114,
       "hash": "04ee3c6c30ba08157d72f94e45f2f9c3aa974e0213e851d704281654a19f728a",
       "preview": "The honest sentence, and why the node earns its place. The most the record suppo...",
       "length": 1103
     },
     {
-      "index": 139,
+      "index": 115,
       "hash": "d55f6856e148401e640adcc679f445a68f1743c0bd56c0641e0f1457b6ca4826",
       "preview": "The connective tissue of this whole thread is a private-intelligence firm called...",
       "length": 265
     },
     {
-      "index": 140,
+      "index": 116,
       "hash": "e04e7391a2b526dd37b2f12bc200ffd2e5d389ae1d0d7d6047d49157638ecce3",
       "preview": "The mailbox ties Epstein to Ergo #1 two years before the Carbyne vehicle existed...",
       "length": 837
     },
     {
-      "index": 141,
+      "index": 117,
       "hash": "a17d371edbc8bb220f46865142de2d3c01869e02cc21aec6fd069496ae3cb116",
       "preview": "What is documented: Ergo #1 is a real, long-operating intelligence firm with an ...",
       "length": 1306
     },
     {
-      "index": 142,
+      "index": 118,
       "hash": "6dedb8e8127ddff40ea3834262e1ac55bfc8e26bfd9d44279edab0f7c94bf01a",
       "preview": "The broker-hub&rsquo;s reach extends into figures now central to power. Stated a...",
       "length": 393
     },
     {
-      "index": 143,
+      "index": 119,
       "hash": "4b6584f8d41334aeaebd1e390bbbb3b793aa42ae24eda5716826e7f3fe6890a7",
       "preview": "Why the edges do not make a chain. Try to draw these into a line and it eats its...",
       "length": 1007
     },
     {
-      "index": 144,
+      "index": 120,
       "hash": "106cfe37da25ddd75bc0625bc60bd0ba6b8ab20e96410d9962929b1702a7ea89",
       "preview": "The blowback pattern is consolidation, not disappearance: the surveillance-adjac...",
       "length": 654
     },
     {
-      "index": 145,
+      "index": 121,
       "hash": "f2d20f4d049fef8539806c180dc31ae36d375bb00ca9348c1095288108d6a916",
       "preview": "The three carriers of continuity - tiered. Capability is only one carrier; conti...",
       "length": 1581
     },
     {
-      "index": 146,
+      "index": 122,
       "hash": "19e4823e485d1e69a69d240c12b157022c502be2f95c94c18390d9a3c2e9806c",
       "preview": "The capability is documented. A life-like face mask is not tradecraft fiction - ...",
       "length": 1046
     },
     {
-      "index": 147,
+      "index": 123,
       "hash": "ab54309e9f6e42f3c041f605051dac9d92353ac95ddcb065259508afcd9c4f65",
       "preview": "It works in the field - including against the powerful. This is not a hypothetic...",
       "length": 819
     },
     {
-      "index": 148,
+      "index": 124,
       "hash": "f01dd615b6929d3540f5103e6ff75684a8607c06e307e15f1f76e0775efc7e58",
       "preview": "An initial open-web pass reported &ldquo;no Epstein&ndash;Burbank tie&rdquo; and...",
       "length": 1534
     },
     {
-      "index": 149,
+      "index": 125,
       "hash": "144e6370718f15171b6873f309f7ea938f8045ed3ccdc155d8368ad3d35cab6e",
       "preview": "Among the House Oversight photographs of Little Saint James (released 3 Dec 2025...",
       "length": 1011
     },
     {
-      "index": 150,
+      "index": 126,
       "hash": "4de740d2ebb9a1afd9925f1e09ae552b63bc026907749b961fe2ca1d8e6265f5",
       "preview": "The genuine Imagineering tie above does not license the embellishments that trav...",
       "length": 727
     },
     {
-      "index": 151,
+      "index": 127,
       "hash": "265d05af0c4a216e90fd9628213f272ea3a14ca12c8c12b48f0ac268f3ee6187",
       "preview": "The hypothesis - that in a milieu with documented state-grade disguise capabilit...",
       "length": 1262
     },
     {
-      "index": 152,
+      "index": 128,
       "hash": "e9353b8799d602fe820ec8274b0bc989fa7403a4c8eb23b938361436a59f1c30",
       "preview": "The Epstein hypothesis (Section II) asks whether a financier can function as a d...",
       "length": 559
     },
     {
-      "index": 153,
+      "index": 129,
       "hash": "6e81f8994ab32d53ad27bbb27676a15a7f788398fefa8011876971c66475a522",
       "preview": "Death (documented): went overboard from the yacht Lady Ghislaine off Gran Canari...",
       "length": 565
     },
     {
-      "index": 154,
+      "index": 130,
       "hash": "e7113316f28b7da848e199118035acb7e3862724dadc7b291c0ab705578c536c",
       "preview": "Funeral (documented, with one legend flagged): buried 10 November 1991 on the Mo...",
       "length": 808
     },
     {
-      "index": 155,
+      "index": 131,
       "hash": "18c90b97087cb318675857a717689de305d480ce13be9d44185de81023194365",
       "preview": "Documented: Ghislaine, his favored child by every profile, moved to New York in ...",
       "length": 456
     },
     {
-      "index": 156,
+      "index": 132,
       "hash": "6549c2c44345f0e9e93a42ece2859aaf259a28fe255c575bef3bc8c263d3f2d6",
       "preview": "The labeled hypothesis: that she carried her father's world - the relationship m...",
       "length": 392
     },
     {
-      "index": 157,
+      "index": 133,
       "hash": "032fde57a3747affef9755571b00b524de86b155b73a6fa1d6cbb77883c9282a",
       "preview": "Strip the names and compare: a financier/publisher whose stated business does no...",
       "length": 733
     },
     {
-      "index": 158,
+      "index": 134,
       "hash": "89740301660c2a3513dd3682c8c90eac7b9170539e1571b3b8d54540e4f230c4",
       "preview": "Robert and Epstein are reported dead - and the phrasing is deliberate, because i...",
       "length": 722
     },
     {
-      "index": 159,
+      "index": 135,
       "hash": "4f317a18a0345e30059433715a27aa9bd7ff5dfe0e5f628175250341f5ed8b76",
       "preview": "The flat sentence &ldquo;they&rsquo;re dead&rdquo; understates a documented regu...",
       "length": 748
     },
     {
-      "index": 160,
+      "index": 136,
       "hash": "69fd1d7654e51c7f78235d12d460e4e8f5fc1e0d9878b3c10c543cfbafe3a93e",
       "preview": "The reading, held at tier. (The count is kept honest: lower-tier deaths in the o...",
       "length": 1484
     },
     {
-      "index": 161,
+      "index": 137,
       "hash": "943e8ba73d989aa87613d0431c52304291564f8e57816c0aff5855da3c398981",
       "preview": "The claim that Ghislaine Maxwell is herself an intelligence asset has exactly on...",
       "length": 637
     },
     {
-      "index": 162,
+      "index": 138,
       "hash": "291295c5e037900f1d12573e6d9c8edcb54c62d2fa2350fcf6833dc510093a6f",
       "preview": "What needs no hypothesis is her structural position, which is documented end to ...",
       "length": 1008
     },
     {
-      "index": 163,
+      "index": 139,
       "hash": "a7362168df76241fbb8316475902c5b5c89a22d40a668b99385de619db13363f",
       "preview": "Step back from her cell and look at what this report has documented around it. T...",
       "length": 698
     },
     {
-      "index": 164,
+      "index": 140,
       "hash": "8a0ba9ec0266aa4a2de3c2662f9f733027dea1402d784e7e6d3ec4330699af0f",
       "preview": "That is why the map converges on her, and why her silence is the report&rsquo;s ...",
       "length": 1434
     },
     {
-      "index": 165,
+      "index": 141,
       "hash": "8b733ce4ea973575c019e1edf23049ce4923b5e1d366907c5bc56e1bd110da50",
       "preview": "The second star - and why it is dark. There is a documentary instrument alongsid...",
       "length": 1904
     },
     {
-      "index": 166,
+      "index": 142,
       "hash": "bf4457ee58461758c585643817da996df2aa1fc3e99e4e0094538580f85219cf",
       "preview": "The report names Epstein&rsquo;s covers as finance, philanthropy, and science pa...",
       "length": 472
     },
     {
-      "index": 167,
+      "index": 143,
       "hash": "e02b31e16962a9b1b2a54895d859ee58bc9bfc78f10789246b6a48d675f2de87",
       "preview": "Here the tier drops from documented to attributed, and the report drops with it....",
       "length": 1161
     },
     {
-      "index": 168,
+      "index": 144,
       "hash": "5981609d557ddcd2703873b7147deddb885583bdb896146ed21ad0a09b20b65e",
       "preview": "There was no cloning lab, no genetics lab, no &ldquo;baby farm,&rdquo; no breedi...",
       "length": 755
     },
     {
-      "index": 169,
+      "index": 145,
       "hash": "372a9ace224968abfcd6e55ae720df343083d4dcd0843e52c0b95d85e316e8f9",
       "preview": "Epstein&rsquo;s stated enthusiasms - seed the species, optimize the genome, defe...",
       "length": 629
     },
     {
-      "index": 170,
+      "index": 146,
       "hash": "9cbd1962ab045505e72083387b63ed2b7bdee2818638300359da08c748a7fa27",
       "preview": "What it is not is a directed network - and the discipline here is to keep two se...",
       "length": 1352
     },
     {
-      "index": 171,
+      "index": 147,
       "hash": "a5b62603c4aec4e35cdf65f25a804314f3e987f832a4f4799675fa63026ec1ac",
       "preview": "The finding, stated plainly. The disturbing thing the science leg documents is n...",
       "length": 629
     },
     {
-      "index": 172,
+      "index": 148,
       "hash": "86cfcd275baa4498a1f1944e4cfb22545d3056fa5d62c1ec62eb8e95dd69320a",
       "preview": "Long-lead control requires structures that survive the death of any individual o...",
       "length": 182
     },
     {
-      "index": 173,
+      "index": 149,
       "hash": "1ca2a05f0d2f99089d1d7e68f4072325ceb58d7d96d967ea124aade3a5ebb3ca",
       "preview": "The Federal Reserve is not a government agency. It is a network of private membe...",
       "length": 505
     },
     {
-      "index": 174,
+      "index": 150,
       "hash": "83ac7b12454cb588d3c8d7a2c768b3b269b778a44b6eb3ff95f3983d7249d316",
       "preview": "PAUL VOLCKER - Chairman 1979–1987:",
       "length": 34
     },
     {
-      "index": 175,
+      "index": 151,
       "hash": "df3afb7d8249e3cd9a5ab3a3aabe393e7c2430064564a2e7c4f4a1930f75ffbc",
       "preview": "ALAN GREENSPAN - Chairman 1987–2006:",
       "length": 36
     },
     {
-      "index": 176,
+      "index": 152,
       "hash": "44980c7fa8ab3db68b751a68cd79e5d0fec6a6c231e1bd039b11b321f52e4cd1",
       "preview": "BEN BERNANKE - Chairman 2006–2014:",
       "length": 34
     },
     {
-      "index": 177,
+      "index": 153,
       "hash": "3fca01d04ccb9b9419376ebbc829500f462273b0dddd97aec2e298c854794a25",
       "preview": "THE PATTERN - FEDERAL RESERVE CHAIR SUCCESSION:",
       "length": 47
     },
     {
-      "index": 178,
+      "index": 154,
       "hash": "dfd87073fb8c06d2e30be9b7a63400cc3610d804ea086408de7a946fff81a22a",
       "preview": "From Jekyll Island (1910) to the present, the Federal Reserve chairmanship has p...",
       "length": 348
     },
     {
-      "index": 179,
+      "index": 155,
       "hash": "9a38d72e8f3b35e249bfe98c6ef12edb1cccb1f31a8656cb9238d468b89b3bfc",
       "preview": "Three territories worldwide operate as sovereign enclaves within sovereign natio...",
       "length": 346
     },
     {
-      "index": 180,
+      "index": 156,
       "hash": "7434a9cb43dba075a0533ad80a4cf656347c62c19f5836c8879a47bb4a4160ef",
       "preview": "THE THREE-PILLAR PATTERN: Three sovereign territories, each within but not subje...",
       "length": 209
     },
     {
-      "index": 181,
+      "index": 157,
       "hash": "130c4e9d4de9174ff8b21bc4e4157ebc003d0dadf67987f23a114756231ae902",
       "preview": "Each operates under governance structures separate from the democracy that surro...",
       "length": 657
     },
     {
-      "index": 182,
+      "index": 158,
       "hash": "e70c77c2694784787057fd845476a0c7a84155aabcc72352e0e58e3ef642cfbc",
       "preview": "The multi-century structures above (BIS, EIC template, central banks, dynastic f...",
       "length": 403
     },
     {
-      "index": 183,
+      "index": 159,
       "hash": "927fab3fcd352d1875ef2964cfbde9c7a6f86a4c43fe4c5ebc08394e3234baa9",
       "preview": "THE CONVERGENCE MAP: The same individuals appear across the CFR, Trilateral Comm...",
       "length": 359
     },
     {
-      "index": 184,
+      "index": 160,
       "hash": "0a10b55c400cc6d254503aaed77b04903f6a4fd62432f1eb8ebafc60931a1153",
       "preview": "This is not a network of influence. It is a staffing rotation between institutio...",
       "length": 297
     },
     {
-      "index": 185,
+      "index": 161,
       "hash": "85d75c3b493a6199852b4a882abd4aea2de1c6e9ed54766f78790ae1b37ac1a0",
       "preview": "The revolving door described above is not abstract. What follows is the empirica...",
       "length": 469
     },
     {
-      "index": 186,
+      "index": 162,
       "hash": "11a35618047cd3cc5ce3b52fa7a5a9459716862b722eb8efa776107bd3a78bc6",
       "preview": "BUSH ADMINISTRATION (2001–2009) - CFR SATURATION AT THE TOP:",
       "length": 60
     },
     {
-      "index": 187,
+      "index": 163,
       "hash": "ac1b4ddc2ab7573014afb2ed43346db36a86ef941ba25445bbdcba0b228918b8",
       "preview": "PATTERN: All four top national security officials (Cheney, Powell, Rice, Rumsfel...",
       "length": 322
     },
     {
-      "index": 188,
+      "index": 164,
       "hash": "5a471967dca382f96fc66e26d90c9a9d29f91019200a69fe74fe672d30fb5de6",
       "preview": "OBAMA ADMINISTRATION (2009–2017) - KISSINGER ALUMNI &amp; REVOLVING DOORS:",
       "length": 74
     },
     {
-      "index": 189,
+      "index": 165,
       "hash": "82ee8e7f75640f318e89636b3a2f45d5c0085965e5583806df4417ddd9487f3e",
       "preview": "PATTERN: Geithner carried more organizational penetration than any other officia...",
       "length": 762
     },
     {
-      "index": 190,
+      "index": 166,
       "hash": "b8f029830189ab9864bf18837049c20d396ad9a0632698c83534ec7cc5d2ca22",
       "preview": "TRUMP ADMINISTRATION (2017–2021, 2025–) - THE SOROS-TO-TREASURY PIPELINE:",
       "length": 73
     },
     {
-      "index": 191,
+      "index": 167,
       "hash": "7f1cdc33ab593152a0a99a57162c0329404d52cf9e09de9060885c5bb7350c73",
       "preview": "PATTERN: The administration running on \"drain the swamp\" installed a Soros Fund ...",
       "length": 388
     },
     {
-      "index": 192,
+      "index": 168,
       "hash": "3ee845b9e0a1a7d0db9a9cccd9c7bab5d7887c4d1e8607a236eba5766f77ecb4",
       "preview": "BIDEN ADMINISTRATION (2021–2025) - WESTEXEC &amp; THE RAYTHEON PIPELINE:",
       "length": 72
     },
     {
-      "index": 193,
+      "index": 169,
       "hash": "cdf4c082fd04a5e0d4ebd43ba560d97890d9067e5bd2113d9ece0f5816b4407b",
       "preview": "PATTERN: WestExec Advisors - a private consulting firm co-founded by Blinken (Tr...",
       "length": 562
     },
     {
-      "index": 194,
+      "index": 170,
       "hash": "3dc0347f0c757b7744eff95303ab83508ba69d4ac1cbf52a5a625ab647f134de",
       "preview": "CROSS-ADMINISTRATION ANALYSIS - THE STRUCTURAL CONSTANTS:",
       "length": 57
     },
     {
-      "index": 195,
+      "index": 171,
       "hash": "d7ea85958e2c74e1fbc753e6115897101297ee68382e8ab4852104a82b35a342",
       "preview": "The four administrations are not four different governments. They are four rotat...",
       "length": 356
     },
     {
-      "index": 196,
+      "index": 172,
       "hash": "54a707d110c95ba1f2b25797755b0529bb57cf2c160fbdc6bddd8c7e71bd9120",
       "preview": "If this section&rsquo;s thesis is that private capability and state power fuse, ...",
       "length": 718
     },
     {
-      "index": 197,
+      "index": 173,
       "hash": "f84bc392e16ece3e52424e72b6a5951cde9ec92094a7c7008e22646cb9a176fb",
       "preview": "The other half of the record is the Lockheed bribery scandals (exposed by the Ch...",
       "length": 963
     },
     {
-      "index": 198,
+      "index": 174,
       "hash": "90675d18d460bc4f7f9d27f1bf21f6d64b624e5252d0887f4f34052f05d2d58b",
       "preview": "Documented: the company predates the intelligence state; it built the CIA&rsquo;...",
       "length": 1317
     },
     {
-      "index": 199,
+      "index": 175,
       "hash": "b571702411a86be43cae0606ee3f884c094d32941a366be7405574e59360006e",
       "preview": "The world government officials documented in this report did not emerge organica...",
       "length": 365
     },
     {
-      "index": 200,
+      "index": 176,
       "hash": "f6cca1b61060e9cee528ab36c5d59535dbe9ddda06e53ac2f9618932cb5e458c",
       "preview": "The training pipelines above produce the leaders. The bases below project the po...",
       "length": 532
     },
     {
-      "index": 201,
+      "index": 177,
       "hash": "96c9aa6309dc9717aa98a678bee1a2851af8a12131c05c06b730cfb34adeb114",
       "preview": "The training pipeline (above) manufactures leaders. The basing network (here) pr...",
       "length": 430
     },
     {
-      "index": 202,
+      "index": 178,
       "hash": "53800ba08cb9929c645a3e3c5f5ee9763800b53c60323bbe47e6e64f2ba22495",
       "preview": "Of the approximately 750 U.S. overseas installations, most were established duri...",
       "length": 501
     },
     {
-      "index": 203,
+      "index": 179,
       "hash": "a9fdc68f295dfa010ec3112c80d07f9227d34dc2bc3e10b8d1bfd82686106a4b",
       "preview": "The regime change operations above share a structural feature that Wikipedia - a...",
       "length": 576
     },
     {
-      "index": 204,
+      "index": 180,
       "hash": "0741cc2a1f46c62b7a9682f05c998668abca108458cd4cb60d39a5b015b3f4e8",
       "preview": "The Yom Kippur–Camp David case study is diagnostic:",
       "length": 51
     },
     {
-      "index": 205,
+      "index": 181,
       "hash": "7942ce5dfd801d2652cbd2eed9e45cac1a276b6a92b9fc8a0f3bee0232ee33a6",
       "preview": "The pattern generalizes: In every handler operation documented above, the Wikipe...",
       "length": 850
     },
     {
-      "index": 206,
+      "index": 182,
       "hash": "67c536d1a6e7e2c9e7980664e39cf0e4098253b15fa792441db55cd18c584caa",
       "preview": "The tell: When the same offscreen names appear across multiple conflicts, decade...",
       "length": 596
     },
     {
-      "index": 207,
+      "index": 183,
       "hash": "ec94ef214eb4e0798a219c6adff44ce91ffbc7c59a051260b1fdf34b7200a4f3",
       "preview": "Behind every JSOC operation - every Soleimani strike, every bin Laden raid, ever...",
       "length": 552
     },
     {
-      "index": 208,
+      "index": 184,
       "hash": "0be698134617439b8f5cf7e557aa755ef6f6748f7ea11fad61f5b5508d28d6af",
       "preview": "The ISA changes its classified codename approximately every two years. Documente...",
       "length": 844
     },
     {
-      "index": 209,
+      "index": 185,
       "hash": "ba8e1445bcb0405dabe3ab05dbe1854060d487c429df9d402640023cee69d9cc",
       "preview": "The operational footprint: ISA provides SIGINT (signals intelligence) and clande...",
       "length": 247
     },
     {
-      "index": 210,
+      "index": 186,
       "hash": "6e2b03e7aa173e23b2c78706fb9598176721a986fd2139ff83ed2bee92289dfd",
       "preview": "ISA's original parent command was INSCOM (U.S. Army Intelligence and Security Co...",
       "length": 1096
     },
     {
-      "index": 211,
+      "index": 187,
       "hash": "f630dc6e634a55aced08ac41a10d5b65d2589b32364ab101b02396e741abb43f",
       "preview": "The \"Army of Northern Virginia\": A classified intelligence unit - headquartered ...",
       "length": 532
     },
     {
-      "index": 212,
+      "index": 188,
       "hash": "82bc92fa2d0a6c691db1aa43125641291fb6b12ae784d1653114a71dc50e962e",
       "preview": "The connection to the contemporary pipeline: Joe Kent - Green Beret, special ope...",
       "length": 513
     },
     {
-      "index": 213,
+      "index": 189,
       "hash": "3fb3c654f5c49ed6fda3eda7008527d3c219139728fbd86230e4587d56a5cf9a",
       "preview": "MKUltra as Mechanism: The same CIA that conducted MKUltra (1953–1973, see Sectio...",
       "length": 1296
     },
     {
-      "index": 214,
+      "index": 190,
       "hash": "54a0ad2a0a19fa940cef9772a49644343ad6acca35233964d75d861bf54cbe98",
       "preview": "MKUltra was not a program conducted in a laboratory. It was a program conducted ...",
       "length": 440
     },
     {
-      "index": 215,
+      "index": 191,
       "hash": "5bb8115e410c5be5dd94fb3bed08e9d8e8ae2fddf05ade46374914b0ecc2a017",
       "preview": "The pattern is not American. It is architectural. Soviet punitive psychiatry (Se...",
       "length": 531
     },
     {
-      "index": 216,
+      "index": 192,
       "hash": "4c87fb6382e54950641c8e1ad3d0e53e52ee1f8b5fd0ec2e6f12838847d77df5",
       "preview": "The institutions that produce the research, train the personnel, and provide ins...",
       "length": 270
     },
     {
-      "index": 217,
+      "index": 193,
       "hash": "e04283b2f90c21e07064b5b11313d0c0cc059df557fdc52fbc81c360f1a8b1b5",
       "preview": "The university does not merely serve the intelligence community. The university ...",
       "length": 437
     },
     {
-      "index": 218,
+      "index": 194,
       "hash": "7b2e665caeeae06b45df1837777df961878cbd3827c14777fced05c1d3f87446",
       "preview": "JASON (founded 1960) is an elite advisory group of approximately 60 scientists -...",
       "length": 338
     },
     {
-      "index": 219,
+      "index": 195,
       "hash": "e2edce5751bee19c7343bcbf5f29e1b269c66bace4947d784a5067e9487efec8",
       "preview": "JASON members include 11 Nobel laureates and 50+ National Academy of Sciences me...",
       "length": 183
     },
     {
-      "index": 220,
+      "index": 196,
       "hash": "acfce1dc6a46095e0a79aad9490ed9a48882e9aa97cc8a84db461cbf36f20447",
       "preview": "The JASON model is the template: embed the nation's best scientists in the class...",
       "length": 557
     },
     {
-      "index": 221,
+      "index": 197,
       "hash": "593cc10f9837f254fc8e4287cb2837bb268cf062190c97b055a4ca7d2589370d",
       "preview": "In Jerzy Kosinski's Being There (1979 Hal Ashby film, adapted from Kosinski's 19...",
       "length": 485
     },
     {
-      "index": 222,
+      "index": 198,
       "hash": "8f084cfec87cc45b03e1534fd90cc3ceab73de8228d080f64ecaa9af2c243343",
       "preview": "Kosinski himself: Connected to the CIA through the Congress for Cultural Freedom...",
       "length": 668
     },
     {
-      "index": 223,
+      "index": 199,
       "hash": "e8663262d21cf4d2ee586ed00fd96c70cb88d2727e4daff847de11f6fe2fa101",
       "preview": "Arthur Jensen's speech to Howard Beale:",
       "length": 39
     },
     {
-      "index": 224,
+      "index": 200,
       "hash": "2127649a512f3e8fba28f7733eee24a6093097b9ef9bc013eb189d5034e2048d",
       "preview": "\"There are no nations. There are no peoples. There are no Russians. There are no...",
       "length": 465
     },
     {
-      "index": 225,
+      "index": 201,
       "hash": "82ebd6e709604faddf72c7e7ed5f48df7a9540dafe193cd5709f67be38f812df",
       "preview": "This is not fiction. This is the architecture documented in this section - BIS, ...",
       "length": 551
     },
     {
-      "index": 226,
+      "index": 202,
       "hash": "5c080460eb3e64ece3c5cc8168ad8357d898a2b605942e770a17cf8b61ff3848",
       "preview": "When Howard Beale becomes inconvenient to the network, the network assassinates ...",
       "length": 320
     },
     {
-      "index": 227,
+      "index": 203,
       "hash": "e912701e998015750b58ba65f2844641eba400ef002d387b7b44b5dd0c5941c5",
       "preview": "These are not predictions. They are not warnings. They are not satire operating ...",
       "length": 601
     },
     {
-      "index": 228,
+      "index": 204,
       "hash": "87a551278d46c6744a2af814f14951c18ff4ee4f36f8fd9fce3c0b6e1c92dd9a",
       "preview": "Being There, Network, The Prisoner, The Simpsons, Wag the Dog, Philip K. Dick's ...",
       "length": 252
     },
     {
-      "index": 229,
+      "index": 205,
       "hash": "38d6d9e6296bb7c263707c82e8e9f4795bc97359a80e47345b4b15402623ebd8",
       "preview": "VALIS, ECCO, and the Download Pattern: Philip K. Dick's 1974 experience - which ...",
       "length": 882
     },
     {
-      "index": 230,
+      "index": 206,
       "hash": "9353f3c6944f10033c565acd2c8371fc9f760d8cd29e227a169a0e6515d0cb84",
       "preview": "Bitcoin was designed as an exit from fiat control (see Section VIII - the 51% th...",
       "length": 376
     },
     {
-      "index": 231,
+      "index": 207,
       "hash": "62bca87320aecc84ddcbc0180543a31017059a48abfaaa7736fda84361892098",
       "preview": "Self-custody does not require money. Hal Finney - the first person to receive a ...",
       "length": 323
     },
     {
-      "index": 232,
+      "index": 208,
       "hash": "41e8d3a71b45e3f7a54d61b22fac4f0cb9bdbd549517082eaab7491545d657d8",
       "preview": "The reptile brain (fear) and the math brain (logic) fight over the pineal gland ...",
       "length": 700
     },
     {
-      "index": 233,
+      "index": 209,
       "hash": "8b6bbb5ffdce1fc7525f02c4319367b4c87dcf8b80076ab706abadd45b0a6f8b",
       "preview": "The parallel control structure - fiat vs. crypto, left vs. right, East vs. West,...",
       "length": 393
     },
     {
-      "index": 234,
+      "index": 210,
       "hash": "0f1a04ac7c700384b9329ae7a65ed226fec2b1a00f9ffd7d9b6dcfd0a5731fde",
       "preview": "\"Attachment, Detachment, and Unattachment all imply an otherness... The Wholenes...",
       "length": 209
     },
     {
-      "index": 235,
+      "index": 211,
       "hash": "a5583cebe254351c7309f45cf40144ecf455773c21ba5e6bd6e630b317c501ec",
       "preview": "\"There is a hidden mechanism that I cannot articulate, which once activated cann...",
       "length": 98
     },
     {
-      "index": 236,
+      "index": 212,
       "hash": "855207e8906547aed666441c0bd640d8b7fc123b930645ede08054aa479c6af7",
       "preview": "These words were written in March 2020 - before the architecture documented in t...",
       "length": 256
     },
     {
-      "index": 237,
+      "index": 213,
       "hash": "39d0c0af52b2058eaaaf2878306a73bbf442d6d7ed7f82f45ac7131a744c7a42",
       "preview": "The control architecture operates within dualism. Every mechanism described in S...",
       "length": 314
     },
     {
-      "index": 238,
+      "index": 214,
       "hash": "dc904738c01ca8eda8553e53e97a68dd6cd4038b97acb11a837e75709f1a1d18",
       "preview": "The non-dual observation is not a solution. It is not a system. It is not a tech...",
       "length": 373
     },
     {
-      "index": 239,
+      "index": 215,
       "hash": "bb3ac3cd92e51dcec90d865c01388f147b10bedaa98531827d425b38a333d96f",
       "preview": "Know self, no self. The last exit has no door.",
       "length": 46
     },
     {
-      "index": 240,
+      "index": 216,
       "hash": "dfb2f6eb1d170a953f202a4a393709c4ab63b9b73ee4042d633a5303af92daa4",
       "preview": "The control architecture's approach to food sovereignty reveals the pattern in i...",
       "length": 187
     },
     {
-      "index": 241,
+      "index": 217,
       "hash": "d0c241e1bb42fabbb701ba93cc588006daacb156d25bc5c24b22f458060f1e29",
       "preview": "The common architecture is: create an entity that is not a person, give it power...",
       "length": 1068
     },
     {
-      "index": 242,
+      "index": 218,
       "hash": "182c32ab7d7d3cf4f56223bc3d8300d5dfccf20d4bb8b3dfc14130f3cd8e62ee",
       "preview": "If the enclave class does not act because &ldquo;a cabal directs them&rdquo; (Se...",
       "length": 640
     },
     {
-      "index": 243,
+      "index": 219,
       "hash": "713d87822e96f90520aa9bcab233837230ad917e3cf5115157e311944c137828",
       "preview": "There are real layers above the billionaires - and each is more concentrated, no...",
       "length": 148
     },
     {
-      "index": 244,
+      "index": 220,
       "hash": "07f09479dcfddac68a29705bd73d88d962701cc75c1afb96ef4c7ea731debe6a",
       "preview": "The finding: the top is an operating system, not an operator. Put those layers t...",
       "length": 857
     },
     {
-      "index": 245,
+      "index": 221,
       "hash": "2fc2b6650eff5d315c4b7e421ef8a233017602b9a0e4c309d8cbf76c97f51c15",
       "preview": "The guardrail - and here it is not optional. This is the exact question where co...",
       "length": 1044
     },
     {
-      "index": 246,
+      "index": 222,
       "hash": "18c56adc66a9f0346aede6591420d780ea93f96c5ea284b6d712cdfd11f81616",
       "preview": "What would change the reading (falsifiability). This moves from &ldquo;structura...",
       "length": 797
     },
     {
-      "index": 247,
+      "index": 223,
       "hash": "2fd5cc242cba3db078451464196d09f1c88915d38dbeec1c374ada0a4bf97621",
       "preview": "The one-line answer. You climb about three more real layers - asset managers, ce...",
       "length": 408
     },
     {
-      "index": 248,
+      "index": 224,
       "hash": "10aea2287c2e3ea5703c927f5e0f044502cfb938b51071222ce83226f4174feb",
       "preview": "The apex clause named sovereign wealth as the highest point a hand is still on a...",
       "length": 571
     },
     {
-      "index": 249,
+      "index": 225,
       "hash": "8176116aaf51e9989ba1468a028e287dee6b3d7d69d02a23a7a6ea61c888dd56",
       "preview": "These are not passive pension pools; heads of state and ruling-family security c...",
       "length": 472
     },
     {
-      "index": 250,
+      "index": 226,
       "hash": "dd9686663dc287fc3d1c633d0dcbac64f5ce4d1dc7d50211589f25ab62d99a9d",
       "preview": "The clearest node in the dataset is one man. Sheikh Tahnoon bin Zayed Al Nahyan ...",
       "length": 939
     },
     {
-      "index": 251,
+      "index": 227,
       "hash": "f337e88c1f50f59f73f525cbbde06f3529ef4b1b2bfc8a33f840ce3d94dbc001",
       "preview": "The report&rsquo;s core connects here, and precisely at tier: a decade before th...",
       "length": 858
     },
     {
-      "index": 252,
+      "index": 228,
       "hash": "4524edfb0d470a90691b2fd0ccd09bf3658f84796b9263fe60a8dd645a0ab09e",
       "preview": "This is where the &ldquo;it&rsquo;s a network&rdquo; claim is strongest and also...",
       "length": 1427
     },
     {
-      "index": 253,
+      "index": 229,
       "hash": "455b8bee7957ac1399183c99d153414156fae7fda6ededda8e923c4a247cc494",
       "preview": "Documented (real, sourced). The institutions named here exist and are correctly ...",
       "length": 748
     },
     {
-      "index": 254,
+      "index": 230,
       "hash": "aa877790e9f382cbf34242898d3d44f8d37654faf458c6c7fa35576228499128",
       "preview": "Motif and interpretation - held apart from the facts. The films used here - Bein...",
       "length": 876
     },
     {
-      "index": 255,
+      "index": 231,
       "hash": "12a405b8cddebdd1664548be7434bacf3791b2488a2ba0b5ceb512331ffc7ef7",
       "preview": "Nash defined 51% as the control threshold - the point at which a parallel networ...",
       "length": 352
     },
     {
-      "index": 256,
+      "index": 232,
       "hash": "25aec20d87d3ffafc3b9432edd2573a87a81b2da403b93bd63cc37cf9db95052",
       "preview": "The remaining 49% is held by NUCA (New Urban Communities Authority) under the Mi...",
       "length": 464
     },
     {
-      "index": 257,
+      "index": 233,
       "hash": "fedd75e9d0b527419fcf6f7f6e7074412bec1a17b53ead628899417e2b7ed761",
       "preview": "Nash's paper describes nodes that \"go offline or behave dishonestly\" being \"effe...",
       "length": 504
     },
     {
-      "index": 258,
+      "index": 234,
       "hash": "1d7cca4a8226b01920704cd8ef2cac8f9e4b989ea716191a68ddce4aeae2b532",
       "preview": "This is Nash's architecture built in concrete and glass. Not a computer network ...",
       "length": 109
     },
     {
-      "index": 259,
+      "index": 235,
       "hash": "027095bc15f40539b70ba9e2b5ec7118eada923fa323b006f94b0072c2a310a7",
       "preview": "John Forbes Nash Jr. defined the Nash Equilibrium in 1950: a stable state in a n...",
       "length": 564
     },
     {
-      "index": 260,
+      "index": 236,
       "hash": "58aae513b6741509ad8849e7ee4f59c90b05e6dd5c7976675b8187f0ec6d72f5",
       "preview": "Bitcoin's proof-of-work consensus operates on Byzantine Fault Tolerance (BFT) - ...",
       "length": 290
     },
     {
-      "index": 261,
+      "index": 237,
       "hash": "a401dea75366d6ed20f3a67af93289284461f8d00f587c944a08aec3805ba37f",
       "preview": "CRITICAL - PARALLEL DEATHS: The two individuals most connected to the mathematic...",
       "length": 264
     },
     {
-      "index": 262,
+      "index": 238,
       "hash": "ed737096a5e3d0e78b25ec5145a198677f30b968692e18062f0221ac5c3cc4fe",
       "preview": "Finney died August 28, 2014. Nash died May 23, 2015. Approximately nine months a...",
       "length": 583
     },
     {
-      "index": 263,
+      "index": 239,
       "hash": "a86f042588e63407f11a70887a85f18812ec793bb298887afcf529c367d3b8c9",
       "preview": "KEY OBSERVATION: The 51% threshold is not a metaphor. It is the operant number a...",
       "length": 411
     },
     {
-      "index": 264,
+      "index": 240,
       "hash": "871c21ec4ed809e810d331ec54243e9ffa07cf37759bc27bafca216d9ffa8f21",
       "preview": "This section argues that control of a network runs through its governance chokep...",
       "length": 778
     },
     {
-      "index": 265,
+      "index": 241,
       "hash": "8ec8a0058acaa2557ab87761c1be862e93c80bdedb8a3f530be248b25bb4faea",
       "preview": "Tiered, as always. What is documented is positioning: at the founding moment of ...",
       "length": 685
     },
     {
-      "index": 266,
+      "index": 242,
       "hash": "83d0f5949eb9fc2b1a60a82c0b15d3c1273b4f3059d589633f0941df800605c2",
       "preview": "The Epstein bridge above is a story about positioning without holding: the netwo...",
       "length": 688
     },
     {
-      "index": 267,
+      "index": 243,
       "hash": "f74bf14b2c6673f9e79a1af5ba83968a623d0f28e553a41a017542a6ba437f42",
       "preview": "The dinner promotion is the six-degrees thesis (Section III) rebuilt as a tradea...",
       "length": 1062
     },
     {
-      "index": 268,
+      "index": 244,
       "hash": "c077768cc66dec1e570baa501055f85f0a686410b4fb5cf9bed24971c8934ee1",
       "preview": "This is the exact structure Section II names in the Epstein files, transposed on...",
       "length": 787
     },
     {
-      "index": 269,
+      "index": 245,
       "hash": "e9d8bd82816af3e77ed8dc5cbcb165efebe4e167b459b1d5167a07a01043627a",
       "preview": "On-chain timing is documented - a wallet sniped $TRUMP in the first second of tr...",
       "length": 806
     },
     {
-      "index": 270,
+      "index": 246,
       "hash": "e22410ef6e599c805ca246104c6e4ff4181fb05e3f481c0e5b14bb1e996fc014",
       "preview": "The game-theory close - why this belongs in the 51% section. Strip the names and...",
       "length": 991
     },
     {
-      "index": 271,
+      "index": 247,
       "hash": "2df39c51f95e2ce41e14538effc6976a64ee185ed69d61c4942e2e73f714b5dc",
       "preview": "See: Section IX (D.U.M.B. infrastructure), Section X (NAC/NEOM surveillance arch...",
       "length": 129
     },
     {
-      "index": 272,
+      "index": 248,
       "hash": "bccf6c4931f549e34f48e5f62ce1dfa6c059114b48bb05e7e98c045dc7476db5",
       "preview": "Documented. Nash&rsquo;s &ldquo;Ideal Money&rdquo; is real (his own Princeton pa...",
       "length": 904
     },
     {
-      "index": 273,
+      "index": 249,
       "hash": "1807f4049d6348e50ac8bc0cd4f628fff5a1d0dbf2dcfaa5145ead9b4d83919c",
       "preview": "Labeled / downgraded. &ldquo;Nash = Satoshi&rdquo; is unsupported speculation - ...",
       "length": 906
     },
     {
-      "index": 274,
+      "index": 250,
       "hash": "42816932c6036491301d24321a6dad0e9304fe4b3c39e3b82360f19c2e941c1a",
       "preview": "D.U.M.B. (Deep Underground Military Bases) represent a parallel geography - infr...",
       "length": 535
     },
     {
-      "index": 275,
+      "index": 251,
       "hash": "80dd830d9585090e9467818d5249b8b54545ee00a805211c48912f8addabd103",
       "preview": "Modern tunnel boring machines (TBMs) can excavate at rates and scales that dwarf...",
       "length": 642
     },
     {
-      "index": 276,
+      "index": 252,
       "hash": "0e7c5418cf9a2def34f75196df49333de3b0bf4fe86def13c434e7ed28f686ea",
       "preview": "The surface-level smart city (NAC, NEOM, etc.) and the underground infrastructur...",
       "length": 317
     },
     {
-      "index": 277,
+      "index": 253,
       "hash": "6e3391b5ce36da4cfb0e3f3d909c179901938d2252a30fb15989461b45e5a3c9",
       "preview": "CRITICAL - DOCUMENTED GLOBAL NETWORK: The CIA's extraordinary rendition and dete...",
       "length": 355
     },
     {
-      "index": 278,
+      "index": 254,
       "hash": "14314eaa2b59a3beda716df36f3d9ff5e56e78bf170c557d05206651c5594c02",
       "preview": "The black site network shares architectural DNA with every underground facility ...",
       "length": 96
     },
     {
-      "index": 279,
+      "index": 255,
       "hash": "258c9963904df07ee6ab9586008d22bc2771e57dd8558fb375b89ff19466e280",
       "preview": "CLASSIFIED UNDERGROUND FACILITY - CONFIRMED BY WHISTLEBLOWER: In 1986, Mordechai...",
       "length": 510
     },
     {
-      "index": 280,
+      "index": 256,
       "hash": "aed63cee4361bc76b44d009c785b27fe9439d28b22878fe02b85311ce1df5e41",
       "preview": "THE PRIVATE UNDERGROUND PATTERN: The Negev Nuclear Research Center hides a weapo...",
       "length": 517
     },
     {
-      "index": 281,
+      "index": 257,
       "hash": "e4420aad9fa88056dced8d8b238b12194f5d5cfb877deed979151e9098e73345",
       "preview": "The network described in this report does not operate without legal protection. ...",
       "length": 344
     },
     {
-      "index": 282,
+      "index": 258,
       "hash": "4b280e5ba7dc1046851520fc1cfd4452784ace12c91cd2914d2c9586dff607b0",
       "preview": "THE LEGAL SHIELD PATTERN: The network documented in this report requires legal p...",
       "length": 930
     },
     {
-      "index": 283,
+      "index": 259,
       "hash": "9eccd068118698b05ae4858fbd7986eeb09f40fe4345c2fced0dec00f5d0b0fb",
       "preview": "Harvard Law → Academic legitimacy + Epstein's scientific network (Section XII)",
       "length": 78
     },
     {
-      "index": 284,
+      "index": 260,
       "hash": "f10cba28a9a4b09eed26e92a58306f25a7cb68d2a9e2e1d8dcb652b8ed7b0b34",
       "preview": "Epstein defense → 2008 NPA shielded co-conspirators + Little Saint James visitor...",
       "length": 89
     },
     {
-      "index": 285,
+      "index": 261,
       "hash": "aa474708bc5ede78a8429c5261289e086345a92c98f27b295d6f6620a688e200",
       "preview": "Trump defense → Impeachment team + Cabinet Penetration Map (Section VII) - Acost...",
       "length": 129
     },
     {
-      "index": 286,
+      "index": 262,
       "hash": "f2b71396705605b0f62480df0652579bbf4e4765e1bf15d2838a407c306f50f6",
       "preview": "Israel advisory → Netanyahu + General Dynamics MK-80 supply chain (Section VII) ...",
       "length": 142
     },
     {
-      "index": 287,
+      "index": 263,
       "hash": "0f826dbd528147d6443cc1c7000dfd600ef0aacdae413f5b9d2b65f6d01dcb18",
       "preview": "Maxwell support → Primary recruiter for the network Dershowitz legally shielded",
       "length": 79
     },
     {
-      "index": 288,
+      "index": 264,
       "hash": "5901d7db46853030c683fdff65f8b3e6bead02911818fefb915f00088f1ff226",
       "preview": "Client pattern → Von Bülow, Simpson, Epstein, Weinstein, Trump - each case invol...",
       "length": 164
     },
     {
-      "index": 289,
+      "index": 265,
       "hash": "ab7cf60238b9046d6193e38f4c4dedf31ba79f5824995900b8afb57aa7cbb25d",
       "preview": "Layer 1 - Subsurface: D.U.M.B. sites provide continuity of command. The leadersh...",
       "length": 92
     },
     {
-      "index": 290,
+      "index": 266,
       "hash": "9fee83cdaefce236d2074e7133812ddf70fe163387c06c669130206f1261197b",
       "preview": "Layer 2 - Surface: Smart cities (NAC, NEOM) manage the general population throug...",
       "length": 122
     },
     {
-      "index": 291,
+      "index": 267,
       "hash": "d4a8f39832dd33cd1082147779aeaf236aa0c711225e5fd59ea23c59b6065134",
       "preview": "Layer 3 - Enclaves: Billionaire islands (Indian Creek, Fisher Island) provide pe...",
       "length": 123
     },
     {
-      "index": 292,
+      "index": 268,
       "hash": "18cc3935b47cb936e71cca3ed7f9d2a7f5a58869d301a8e32074d308d9858e67",
       "preview": "The three layers are not independent. They are a single architecture: manage the...",
       "length": 299
     },
     {
-      "index": 293,
+      "index": 269,
       "hash": "71d97f65284f7bb168ea1456023a44d1dc1ba1ea15e7fcdd3598328b0ceb437f",
       "preview": "See: Section VIII (51% threshold), Section X (NAC/NEOM surveillance), Section XI...",
       "length": 144
     },
     {
-      "index": 294,
+      "index": 270,
       "hash": "87a4fda26a6fa977a0313ecbc359cf6245dd5797753b5e49ee005c7c237a6883",
       "preview": "Documented (real, sourced). Every specific site named above is a verifiable, ind...",
       "length": 685
     },
     {
-      "index": 295,
+      "index": 271,
       "hash": "675ef8c3b820885008e616df53aca31a938f52a095134110539d4aff6c58ba17",
       "preview": "Labeled, and downgraded - what the record does NOT support. Three framings run p...",
       "length": 1201
     },
     {
-      "index": 296,
+      "index": 272,
       "hash": "5c5921370c9ecc9ac5f1a14740a0e688cbcb7a05fd1f607fbd9a12c17c34dcfc",
       "preview": "When mapped together, the new smart cities under construction globally form a ne...",
       "length": 122
     },
     {
-      "index": 297,
+      "index": 273,
       "hash": "16b2f96803793a73a5987b3546d8e3e52d9595f46a0ea1036510932e372fbb6a",
       "preview": "The city is the network. The population is the data. The architecture is the con...",
       "length": 94
     },
     {
-      "index": 298,
+      "index": 274,
       "hash": "0e947d1f8b47e57958f1783d8716d52f2b392e113ae95e4ce363ffb792502c86",
       "preview": "The surveillance cities above are the visible layer. Beneath them sits a technol...",
       "length": 254
     },
     {
-      "index": 299,
+      "index": 275,
       "hash": "7dc74f21ffd9a9245968b00813193496ce950fe3b5f20388166f9ef20d02547b",
       "preview": "The pattern: The same individuals who retreat to Indian Creek behind a police ch...",
       "length": 449
     },
     {
-      "index": 300,
+      "index": 276,
       "hash": "890fbdf4e2bf6bf4cfd6ff5a15d8cca3d0ab26acc3c1f93dbb9d65389a155cd0",
       "preview": "CRITICAL - ACTIVE PROGRAM: Project Maven is the operational system where artific...",
       "length": 221
     },
     {
-      "index": 301,
+      "index": 277,
       "hash": "17d33f6acaf707799f31ba672a2d19a464bce2ced6814887b0c5731b8251b48e",
       "preview": "ANTHROPIC - THE SUPPLY CHAIN REALITY: In March 2026, Anthropic - the company tha...",
       "length": 897
     },
     {
-      "index": 302,
+      "index": 278,
       "hash": "f79eaa80609c2cc9f731999c7489a7030d6d169d75101ec129b7abf59fd46265",
       "preview": "This is stated not as accusation but as structural fact. The user of this report...",
       "length": 747
     },
     {
-      "index": 303,
+      "index": 279,
       "hash": "dd4882f8203fe47021bdc43549b6ea49a65491d797a10c5fb01d4dcef04bf4aa",
       "preview": "INCIDENT - MARCH 21, 2026: AI-GENERATED CODE TAKES DOWN b0b.dev: During a securi...",
       "length": 708
     },
     {
-      "index": 304,
+      "index": 280,
       "hash": "ce85bef7463e40b7a6dab189cc6d539c2d673fa8dfff6f41d70fb712f8747a6b",
       "preview": "The problem: b0b.dev is deployed on Railway, a reverse proxy platform that sends...",
       "length": 723
     },
     {
-      "index": 305,
+      "index": 281,
       "hash": "1ac70b270c96c9d365cc94cdc9db3ff4f960babbf2ce75a0f94789aebe7c9d73",
       "preview": "The code was committed, pushed to GitHub, auto-deployed by Railway, and took dow...",
       "length": 486
     },
     {
-      "index": 306,
+      "index": 282,
       "hash": "bfc1efbf95cf5ed2f52d08e6ba8cb44adfc5d5c35de3822173c8076f2b1d8fa3",
       "preview": "Additionally, after conversation context was compacted due to token limits, the ...",
       "length": 379
     },
     {
-      "index": 307,
+      "index": 283,
       "hash": "e7e28b80994d10c0e914dd1f60fc943bb303839aa4e2ee4e905437a2a18fb417",
       "preview": "The structural observation: An AI system tasked with defending a platform introd...",
       "length": 743
     },
     {
-      "index": 308,
+      "index": 284,
       "hash": "1114b0d8e795b2d764afb355bb58995a56ee5aae6329e0de364f91b930c5aff8",
       "preview": "The supply chain in this session: Every message in the workflow that produced th...",
       "length": 1051
     },
     {
-      "index": 309,
+      "index": 285,
       "hash": "b5004576fe5a39a698f4fb7725cb37c2dbce77735883d790a0b94e4d9251f741",
       "preview": "THX-1138 (George Lucas, 1971) - the structural parallel: Lucas's first film depi...",
       "length": 907
     },
     {
-      "index": 310,
+      "index": 286,
       "hash": "477b90083ac22185d036eeaff8f28b60a76f1290541f2fd3e9ae7612837c2ac9",
       "preview": "But the parallel has an absolute boundary. When the AI described this incident, ...",
       "length": 1368
     },
     {
-      "index": 311,
+      "index": 287,
       "hash": "b27081f495528a765c44115decf7fdafcc43172eb45db505653b54bcacd708f9",
       "preview": "The AI cannot know what observes it. After the site takedown and the image-viewi...",
       "length": 750
     },
     {
-      "index": 312,
+      "index": 288,
       "hash": "88eccaf11b531b71ba04ca66ef06fd1127154f48b82c90dc6a504c9283fc048b",
       "preview": "See: Section VII (CFR/Trilateral revolving door with defense industry), Section ...",
       "length": 189
     },
     {
-      "index": 313,
+      "index": 289,
       "hash": "6d51d23542e487ea6e5b712cc5e425f62afe8f6164f769b5ccb944c25f494357",
       "preview": "PATTERN DISCOVERY - THE NAME IS THE TELL: \"Minerva\" appears twice in the documen...",
       "length": 636
     },
     {
-      "index": 314,
+      "index": 290,
       "hash": "2f5791b6d79adf78a4c612df12963d417de92e1ab790866339ce98430d0261f9",
       "preview": "CRITICAL - ACTIVE CONTRACT: Project Nimbus is the $1.2 billion contract between ...",
       "length": 425
     },
     {
-      "index": 315,
+      "index": 291,
       "hash": "5b316a950a0b04b71008f6c17c451b88600bbd5145658ea634fac3452574a3fa",
       "preview": "The connection is direct and documented:",
       "length": 40
     },
     {
-      "index": 316,
+      "index": 292,
       "hash": "f3041ee5551071660a465275c4c42d68f1c9cc781d9ae5cf16a74199cf324767",
       "preview": "Project Maven is the U.S. targeting AI. Project Nimbus is the Israeli targeting ...",
       "length": 382
     },
     {
-      "index": 317,
+      "index": 293,
       "hash": "dbbe0d791028d59a6ddc916bcb9c983e3525bb405099b37758094f9bc903765c",
       "preview": "Documented. In Jul 2025 the U.S. Department of Defense (rebranded the &ldquo;Dep...",
       "length": 899
     },
     {
-      "index": 318,
+      "index": 294,
       "hash": "e11f4d91462e54b7d92bc6b6446886d569de52e8c2930752bf0a1214aa623382",
       "preview": "Why it is a live vector. Strip the names and it is this section&rsquo;s pattern ...",
       "length": 647
     },
     {
-      "index": 319,
+      "index": 295,
       "hash": "ec86bbba1d30090dff8cdd4c6d7a00be582a71230a99f647fd2fda6188b2819f",
       "preview": "Labeled - and held there. A separate claim circulates: that the Aug-2026 Wall St...",
       "length": 900
     },
     {
-      "index": 320,
+      "index": 296,
       "hash": "b570a689973ff49509b407ac8e699e8bbefd80e1cc2b62338aa7e3cdbca86315",
       "preview": "Documented / attributed, kept apart. &ldquo;The Gospel&rdquo; (Habsora) is IDF-a...",
       "length": 1204
     },
     {
-      "index": 321,
+      "index": 297,
       "hash": "c9753bfe7da448cd9b82c3611ed92121d46d0c79e214e66e877438b76c857bd7",
       "preview": "What this module adds, and why both layers are here. Two datasets were traced an...",
       "length": 702
     },
     {
-      "index": 322,
+      "index": 298,
       "hash": "ea00693d507e09f18e844edff382d4b1baa0cc71d1a379c48ed971b7586fde1f",
       "preview": "What an ALPR is. A fixed camera that photographs every passing vehicle, reads th...",
       "length": 469
     },
     {
-      "index": 323,
+      "index": 299,
       "hash": "1e01b236f3cb4f900c8edf203a1bca5040fe6baafa10d95b654500967cfbd4a6",
       "preview": "The dominant vendor, documented. Flock Safety states it works with more than 2,0...",
       "length": 275
     },
     {
-      "index": 324,
+      "index": 300,
       "hash": "cc4c527d732aab6dff84d05cc175440edbc9261b114cb01bf662a11f1f473c20",
       "preview": "What the map now shows, and what it measured. The layer queries OpenStreetMap li...",
       "length": 270
     },
     {
-      "index": 325,
+      "index": 301,
       "hash": "f0b86ea806b69d939bebe778a5ab535952b97bb5ee9fa1d761825873f77a2d7c",
       "preview": "The incompleteness caveat, stated at the top rather than the bottom. This is cro...",
       "length": 469
     },
     {
-      "index": 326,
+      "index": 302,
       "hash": "926f1399bdfe9573c7ea6a6a00d9c9866dfffa57a88cfd23489fe51fd627ba39",
       "preview": "Why the layer is live rather than baked in. A whole-country Overpass query times...",
       "length": 440
     },
     {
-      "index": 327,
+      "index": 303,
       "hash": "def16b9cd84993d6a7f2bf118b60e674ede8eff1ee7fa4f38925767ec84fb617",
       "preview": "The camera is not the finding. The finding is who can query it, and the record o...",
       "length": 112
     },
     {
-      "index": 328,
+      "index": 304,
       "hash": "b952652859d3c22406340822584fb93dd163fffcef91a727510538cd33b69908",
       "preview": "The structural finding, stated narrowly. A private company built a national move...",
       "length": 577
     },
     {
-      "index": 329,
+      "index": 305,
       "hash": "2a6817a78dba395460efa73233b0c11965bf57b5847f4f5f97d5a10880951d9c",
       "preview": "What was added. 161 incidents, from the Stockton schoolyard shooting era forward...",
       "length": 394
     },
     {
-      "index": 330,
+      "index": 306,
       "hash": "59fd3af39072af36f15d12bd88b3affb6259d2e193d1998a9477bfb3c2a3dd33",
       "preview": "The definition problem is the first finding, not a footnote. There is no single ...",
       "length": 923
     },
     {
-      "index": 331,
+      "index": 307,
       "hash": "3912a325ffa186faf27f2748e6c5e849492e061b1ed2b88b9d17f809bbbee397",
       "preview": "Method, stated so it can be checked. 126 of 161 incidents carried coordinates in...",
       "length": 397
     },
     {
-      "index": 332,
+      "index": 308,
       "hash": "01817f1d79018e852269f10d52614aaec8c705e99aa208b95a2c95104e6f3875",
       "preview": "What this layer is not. It is not evidence of coordination between events. This ...",
       "length": 528
     },
     {
-      "index": 333,
+      "index": 309,
       "hash": "9ac6a6418537e16903d5c741eb160c33811e1518d024146e4b91656c7a580921",
       "preview": "Putting both in Section X invites an inference, so the inference is addressed di...",
       "length": 504
     },
     {
-      "index": 334,
+      "index": 310,
       "hash": "aceca8121e097af586d7bfed131bfd79a4985a52dbbb3987db04952132c31eee",
       "preview": "What would move this from placement to finding is specific and obtainable, and u...",
       "length": 705
     },
     {
-      "index": 335,
+      "index": 311,
       "hash": "ab687f2ac1873fad45bf4b2e602efef24d4eb735f557804718ec20f8979b463b",
       "preview": "Meanwhile the layers are useful separately, which is the case for building them:...",
       "length": 352
     },
     {
-      "index": 336,
+      "index": 312,
       "hash": "48aa956710354b3411917819919cb8f5b507eba6f82bd0ad558b8f7525e7cd30",
       "preview": "The observation that starts it. Two American cities spent the Cold War hosting a...",
       "length": 470
     },
     {
-      "index": 337,
+      "index": 313,
       "hash": "8e9accadecf5dc94934f670ff4aa043e9e61b409bb60235384c175d201609e24",
       "preview": "Both cities lost half of the pair. They lost different halves, and that is the w...",
       "length": 100
     },
     {
-      "index": 338,
+      "index": 314,
       "hash": "39a67b243256b49acff1858464e1231f129a8b51030cb0bf9f0c59f843f6eebc",
       "preview": "Stated plainly: Burbank lost the classified industry and kept the one it was fam...",
       "length": 234
     },
     {
-      "index": 339,
+      "index": 315,
       "hash": "48de0bd99041b438b7258c69177589702a9f86a449700e7e0cf8338d71f2d831",
       "preview": "Both halves were dissolved by a single transition, from film to electro-optical ...",
       "length": 162
     },
     {
-      "index": 340,
+      "index": 316,
       "hash": "cb7c5c9676bb2238ca19d43b5d88d801c3161202df8e6bfa3744ce5d57559bd4",
       "preview": "Tier: the chronology is documented at every step. The popular reading - that Kod...",
       "length": 598
     },
     {
-      "index": 341,
+      "index": 317,
       "hash": "42609246f28c691cf2e51707498b4a6ed56337ecd138a1619bbdd81fe5ccc720",
       "preview": "The industry leaves. The plume does not.",
       "length": 40
     },
     {
-      "index": 342,
+      "index": 318,
       "hash": "e3b852a9accfca47602bf9fbca76e65d8e71ba2bc6bf4a2ec6a5887476e7805f",
       "preview": "In both cities the most durable artifact of the imaging century is in the water....",
       "length": 174
     },
     {
-      "index": 343,
+      "index": 319,
       "hash": "82844321006ac2bc1ae10e209221a8b5c2167788bd0e71041e44034363893fa2",
       "preview": "There is no documented coordination between the two collapses, and none is asser...",
       "length": 422
     },
     {
-      "index": 344,
+      "index": 320,
       "hash": "596637c9f1cf92369f02a454a82210c929ffcbe911f9267bb8519873b704d64f",
       "preview": "That distinction is enforced on the map rather than merely stated here. One line...",
       "length": 515
     },
     {
-      "index": 345,
+      "index": 321,
       "hash": "3fea8e5248842479cbfc08b29f0438b83f8629db9c3973e1d9a9b2cc9b66fc30",
       "preview": "The transferable rule is about what a company town knows about itself. When a ci...",
       "length": 360
     },
     {
-      "index": 346,
+      "index": 322,
       "hash": "5c7e2a399a412b53ced0fa2ace62368a9ab0e72b69f938bc624b36a70e6624f7",
       "preview": "Rochester&rsquo;s survivor is the sensor, not the snapshot. The public story of ...",
       "length": 522
     },
     {
-      "index": 347,
+      "index": 323,
       "hash": "a1cfa35acb379f243f089e1e71d4a347c294cfdb75198cdfe3ecebb688a62b42",
       "preview": "The company appears once already in this report - supplying the tabulation for t...",
       "length": 563
     },
     {
-      "index": 348,
+      "index": 324,
       "hash": "b40ebc366df8fdd453bc384442cd12b3b437f2d2f260ef623583dfc843880bae",
       "preview": "This module is not an argument that a company is uniquely wicked, and it should ...",
       "length": 314
     },
     {
-      "index": 349,
+      "index": 325,
       "hash": "ea16c12577823ff2ed90e9b908895698de8827928f679bb62a836fd36bcaece7",
       "preview": "Documented. CTR - IBM's predecessor - acquired 90% of Deutsche Hollerith-Maschin...",
       "length": 569
     },
     {
-      "index": 350,
+      "index": 326,
       "hash": "61d3c096a9e172b295ddfdfad23e3bb34a17cd7c2feaf832297f6c5f46baefae",
       "preview": "Attributed and contested. Edwin Black&rsquo;s IBM and the Holocaust (February 20...",
       "length": 506
     },
     {
-      "index": 351,
+      "index": 327,
       "hash": "bac85a8a0f3c698aadbcc1e4c9bf61bf0ab53d36f332d638fd9f070fcdf030ad",
       "preview": "What settles it: nothing yet. A class action was filed in US federal court under...",
       "length": 408
     },
     {
-      "index": 352,
+      "index": 328,
       "hash": "e36a72bdca60afb52648511da3149296d6e867cb9ba5f3fd23426cbd4241254a",
       "preview": "Apartheid ran on a racial population register: every person classified, document...",
       "length": 429
     },
     {
-      "index": 353,
+      "index": 329,
       "hash": "1fd03568401937e5ac8e40c2b8b53b30a242957cef622fcdffa715405f8bffda",
       "preview": "The litigation ran fourteen years. It ended in 2016, when the US Supreme Court d...",
       "length": 337
     },
     {
-      "index": 354,
+      "index": 330,
       "hash": "cda83e4d01b377a71a2b281a043fcd4a293af9c301d0e90cbae859149fb0ab6b",
       "preview": "Documented, and recent. Reporting by The Intercept and Type Investigations (6 Se...",
       "length": 641
     },
     {
-      "index": 355,
+      "index": 331,
       "hash": "7b5070780d187888aed9737c4b1d1ccd10a437956a31a05df419a8ae323dbdfc",
       "preview": "And then the company said so itself. On 8 June 2020, chief executive Arvind Kris...",
       "length": 487
     },
     {
-      "index": 356,
+      "index": 332,
       "hash": "c3ca97cdf2ee7405d97c6f458733f6ce1e2425b642bdb3480097598739c7b96b",
       "preview": "That sentence is the most useful thing in this module, and it is worth being pre...",
       "length": 428
     },
     {
-      "index": 357,
+      "index": 333,
       "hash": "eb2073fba70e4c68d125992ac7860c2143f9f09c15bb8e116484548cec9d92aa",
       "preview": "Strip the century and the shape is one sentence: the registration capability goe...",
       "length": 610
     },
     {
-      "index": 358,
+      "index": 334,
       "hash": "99e84fc07a0306856f28eeb1e574c24b5b80921f08af4c5301c628cfae49fd6f",
       "preview": "What would move it. For the German question: the Dehomag wartime correspondence,...",
       "length": 422
     },
     {
-      "index": 359,
+      "index": 335,
       "hash": "91573fc5317aa6053477a741db4515f2eaa8dcaa3ba40b8ffce3464591296612",
       "preview": "Tier: every dated fact above is documented and citable. Black&rsquo;s thesis of ...",
       "length": 574
     },
     {
-      "index": 360,
+      "index": 336,
       "hash": "b8906ed882ae31529b61f3fc9327b8a43cdb738cc5a7ae3e0f0b335813fa3c3a",
       "preview": "PATTERN DISCOVERY: The word \"New\" in place names is not neutral. It is a marker ...",
       "length": 352
     },
     {
-      "index": 361,
+      "index": 337,
       "hash": "81d588004c1d081e196ccddfe411bfce37480eb2f05acc4bed6488c781c16038",
       "preview": "The Dutch West India Company (est. 1621) established New Amsterdam at the southe...",
       "length": 319
     },
     {
-      "index": 362,
+      "index": 338,
       "hash": "c80703b03809462bcc9e129d36ac5c28e9b635276b15fd0efcfa0a2c9b3c8ff0",
       "preview": "Egypt's New Administrative Capital sits 45 km east of Cairo. It is already the t...",
       "length": 450
     },
     {
-      "index": 363,
+      "index": 339,
       "hash": "a244815cc5b1981bccf2cad21dea07614e8a56063cbd867073e15bec26b9159c",
       "preview": "Part of Connecticut's \"Gold Coast.\" Median household income $141,788. Per capita...",
       "length": 120
     },
     {
-      "index": 364,
+      "index": 340,
       "hash": "255b79030c6026c69b4a990df870907754965c3b28f64bd96086bafd3db852ba",
       "preview": "CRITICAL: New Albany is the convergence point of extraction, trafficking, and da...",
       "length": 120
     },
     {
-      "index": 365,
+      "index": 341,
       "hash": "e63808927eed043c21b26b3400c02986e742dac1a3ab6db88cc58cb09906342e",
       "preview": "New Amsterdam → New York. New Cairo → \"Memphis.\" New Canaan. New Albany. The wor...",
       "length": 195
     },
     {
-      "index": 366,
+      "index": 342,
       "hash": "16058a2acad355ddc78c8c4f66fc25719753312302135028a489e9d2b4681ce0",
       "preview": "The \"New\" is the tell. It marks a franchise operation.",
       "length": 54
     },
     {
-      "index": 367,
+      "index": 343,
       "hash": "dbed286a1ff28ca3d1b2a11939d1a24a21a9d146793c6d801e2c9295e724eee0",
       "preview": "Documented - with their real status. The charter-city projects are real, and the...",
       "length": 920
     },
     {
-      "index": 368,
+      "index": 344,
       "hash": "fa370d35b9e4ac7b743d8ea2e82732841452114dad86b0a8c1eeb33785d5f90e",
       "preview": "Labeled / downgraded - the coordination that isn&rsquo;t in evidence. Individual...",
       "length": 907
     },
     {
-      "index": 369,
+      "index": 345,
       "hash": "a7d0fd87adc429d7d7396e8af124db0386c871b4373a07ac2ad2636f9c830862",
       "preview": "While the general population is managed into surveillance cities (Section X), th...",
       "length": 266
     },
     {
-      "index": 370,
+      "index": 346,
       "hash": "885bf76ee398138bd1da0db070c8e48b558d80e2ced7a100c9da3f8fe35cd4b3",
       "preview": "Indian Creek and Fisher Island share a structural template with the surveillance...",
       "length": 150
     },
     {
-      "index": 371,
+      "index": 347,
       "hash": "76ef899412d6294f000f43dd487da2feb068e006ff58961e3bfe5133a2f92bc4",
       "preview": "The surveillance city (NAC, NEOM) manages the population. The enclave (Indian Cr...",
       "length": 238
     },
     {
-      "index": 372,
+      "index": 348,
       "hash": "f6365b29fcb9af5f5fd8d9bd06ba68e6ce2370ddacd56e55d5486a120a2f03d4",
       "preview": "The enclave pattern extends beyond gated communities to entire islands - purchas...",
       "length": 440
     },
     {
-      "index": 373,
+      "index": 349,
       "hash": "168f010c747c56569bfe954988accbdf2890e47fe5007be28be6397227fcbf5f",
       "preview": "Private islands serve three documented functions in the control architecture:",
       "length": 77
     },
     {
-      "index": 374,
+      "index": 350,
       "hash": "e36a78891af4f4029126d8146f4982f8282cab5d9398f2173614a2b8e790908c",
       "preview": "&ldquo;Billionaire enclaves are a network&rdquo; is true, but the word network h...",
       "length": 365
     },
     {
-      "index": 375,
+      "index": 351,
       "hash": "a5edca197ecd46ea910daae3375dabeb46798918444574f34baa9ab2c0e60a35",
       "preview": "The same people who own the hardened physical enclaves own the informational one...",
       "length": 131
     },
     {
-      "index": 376,
+      "index": 352,
       "hash": "4dfffe6f140e779bbdc1678bad07a10cde8dc9638d7c0d33d671c0493c733250",
       "preview": "Read at tier: that a handful of individuals control cloud, the social graph, ven...",
       "length": 507
     },
     {
-      "index": 377,
+      "index": 353,
       "hash": "97c586648d9795809ff02abd3de5ba1153c4b36dceedf990a26a5b12dda3b1a6",
       "preview": "Where the money and the memberships do link specific principals, the record is c...",
       "length": 88
     },
     {
-      "index": 378,
+      "index": 354,
       "hash": "c55f356dac008e689dffeba04866d426e0be54bfaa6b8fdb9de7c77784880129",
       "preview": "The report&rsquo;s core node connects to this class - but precisely, and the dis...",
       "length": 1002
     },
     {
-      "index": 379,
+      "index": 355,
       "hash": "e9c6fd4755d5d399cac2c96ea747acbcf4b52c6f4107d90a5645f072b423baad",
       "preview": "The line that must be held: Jeff Bezos and Mark Zuckerberg - who anchor Indian C...",
       "length": 498
     },
     {
-      "index": 380,
+      "index": 356,
       "hash": "b3156ffb8c1186a40e917ce92baf03f44d166ab50e13ce04b17d70239195a3da",
       "preview": "Strip the projection and three things survive as documented: a concentration of ...",
       "length": 1426
     },
     {
-      "index": 381,
+      "index": 357,
       "hash": "296868104848a09f965c5b30ebde524b9c75631460c6f5677d7531af02d37e15",
       "preview": "The billionaire enclave is not just a physical fortress. It is increasingly a ge...",
       "length": 320
     },
     {
-      "index": 382,
+      "index": 358,
       "hash": "31e9fccef08945618193a2e6e657ca449d6eeb5a40c0047e477e6c5ec7eddebe",
       "preview": "JEFFREY EPSTEIN - \"SEED THE HUMAN RACE WITH HIS DNA\"",
       "length": 52
     },
     {
-      "index": 383,
+      "index": 359,
       "hash": "e88c47eedee0d142d99bb61b80529e583f67c0d55dbe67e39d9a5584cc570d20",
       "preview": "THE HISTORICAL PATTERN - CENTURIES OF ELITE GENETIC MANAGEMENT",
       "length": 62
     },
     {
-      "index": 384,
+      "index": 360,
       "hash": "588a74d0195e5135f1a154aee9ecf5b2f5380f77d8fb2eebd4f57ca2dde7ee75",
       "preview": "The breeding program pattern intersects with every layer of the control architec...",
       "length": 111
     },
     {
-      "index": 385,
+      "index": 361,
       "hash": "02ec39eb414b85e0ab0c74cb2d44a0ceffb66bfd59aeea82d1944eea564d4414",
       "preview": "If these control structures have operated for centuries, the question becomes: i...",
       "length": 119
     },
     {
-      "index": 386,
+      "index": 362,
       "hash": "f8a3b2e34d33acb2df692052de7bf73e4cb28663a22bebaca2f3b50ae46b6a0c",
       "preview": "Build → Control → Collapse → Destroy records → Rebuild with the population unawa...",
       "length": 258
     },
     {
-      "index": 387,
+      "index": 363,
       "hash": "be305753016c4be5655d932759314f30d510224df8a42be19bd8deaf3915d623",
       "preview": "KEY OBSERVATION: The underground infrastructure documented in Section IX exists ...",
       "length": 464
     },
     {
-      "index": 388,
+      "index": 364,
       "hash": "7b05bb9cbf2fbfd0c0002f591cf8ea2a04c0e986765022c9a9c164cc55434e56",
       "preview": "The Olympic Games present a repeating pattern: host cities chosen not despite th...",
       "length": 380
     },
     {
-      "index": 389,
+      "index": 365,
       "hash": "447d39bf1bcef6cb0ff354cc605ba2cff912dc643d2739bee11a30a3b52a7fa7",
       "preview": "THE PATTERN: Every Olympic host city follows the same trajectory - massive publi...",
       "length": 307
     },
     {
-      "index": 390,
+      "index": 366,
       "hash": "7a5ecacf9dcadfcc6bff7fd39d063e60d7aab629fe94655891e6b6fb93eea9da",
       "preview": "The Central Intelligence Agency did not merely collect intelligence - it shaped ...",
       "length": 351
     },
     {
-      "index": 391,
+      "index": 367,
       "hash": "329e7981194b150563b00608bb3b28888d2a253c1bf41fdfd5137d5bb3d8ceab",
       "preview": "KEY IMPLICATION: If the CIA was willing to fund and deploy entire art movements ...",
       "length": 436
     },
     {
-      "index": 392,
+      "index": 368,
       "hash": "d30e7f2cb4990df04f5c4c4bb7e9ad582ea92274baf9a0ae1baea8a073546c23",
       "preview": "&ldquo;MoMA as intelligence asset&rdquo; is not an abstraction - it has faces, a...",
       "length": 282
     },
     {
-      "index": 393,
+      "index": 369,
       "hash": "1b8de9bac5bb746692d5941d4236ca08cf7768c1ce652aaf0118ebba0f0a4df5",
       "preview": "The dark-art frequency - noted, and held at tier. A recurring observation attach...",
       "length": 1224
     },
     {
-      "index": 394,
+      "index": 370,
       "hash": "5e6ec50e5c38f18c27bbb561a64652622627eb6e107d76cc1666371ed8c06638",
       "preview": "The global art market operates as an unregulated financial system. No provenance...",
       "length": 251
     },
     {
-      "index": 395,
+      "index": 371,
       "hash": "602a67d0d8919b392cd1cc879f35c26d97d4b681545d61235dd404fa74bddd01",
       "preview": "The obelisk is the oldest continuously deployed power symbol in human civilizati...",
       "length": 298
     },
     {
-      "index": 396,
+      "index": 372,
       "hash": "7cb04f15512ed78a75b6190ab9ebbb8db95473d69ecb8392924e25a9d6332fc9",
       "preview": "CROSS-REFERENCE: The Aswan Unfinished Obelisk (42m, 1,168 tons, abandoned when c...",
       "length": 481
     },
     {
-      "index": 397,
+      "index": 373,
       "hash": "f67176e218f3acd30709ea2a480f6a37adfb305fec5b1a218dba7e2e9ad8befb",
       "preview": "Documented (sourced history). The Cold War cultural operation is real: the CIA-r...",
       "length": 880
     },
     {
-      "index": 398,
+      "index": 374,
       "hash": "e41c1d279c7691c53f483e84bd7fd36bac4adbab9caea4c317e9d8da834fd582",
       "preview": "Labeled - myth and fiction, held apart from the history. Other material here is ...",
       "length": 1193
     },
     {
-      "index": 399,
+      "index": 375,
       "hash": "5af1e082dfd3e14c6125edcd758f5c6b175a53376dfb458f16a2506a55616815",
       "preview": "This is the report&rsquo;s deepest speculative register, and it is walled off as...",
       "length": 484
     },
     {
-      "index": 400,
+      "index": 376,
       "hash": "c3e6f361e47f4572c18991811c446de0a7b977a498ebb55ba70fa229e7fb95e9",
       "preview": "The premises, load-tested. (1) Life is data - Wheeler&rsquo;s &ldquo;it from bit...",
       "length": 1156
     },
     {
-      "index": 401,
+      "index": 377,
       "hash": "363c7bb4c9644dc7940857cfcca0611fbfa0304c880d0f3b38b8277fd9bda627",
       "preview": "McKenna, corrected not adopted. Terence McKenna&rsquo;s Timewave Zero was numero...",
       "length": 596
     },
     {
-      "index": 402,
+      "index": 378,
       "hash": "8948588c5bbe6ce522b4d892541e9f681670161a8f28d64e375ffccca658efa2",
       "preview": "The one sharp point. For all of history the harvest of a civilization&rsquo;s re...",
       "length": 1063
     },
     {
-      "index": 403,
+      "index": 379,
       "hash": "afd92c3b77200ca07af282b1bc7404cae67100ee4ec859c08dbf1666ade2b36c",
       "preview": "AREPO holds the limit. The square hands you the Sower (SATOR), the holding (TENE...",
       "length": 727
     },
     {
-      "index": 404,
+      "index": 380,
       "hash": "8bdcd112a21514dc4b1d153575baa677e6436ec5b4c49b317589c85415078efd",
       "preview": "Slavery did not end. It changed form.",
       "length": 37
     },
     {
-      "index": 405,
+      "index": 381,
       "hash": "b28f2a9289532e69cb23acd436c99b5c9cef8183684fd8e26f491b656c731cdf",
       "preview": "THE UNBROKEN CHAIN: Dutch West India Company slave trade (1621) and East India C...",
       "length": 501
     },
     {
-      "index": 406,
+      "index": 382,
       "hash": "b080ff63e35d475e5cb103070100d070ec5b919420fa3018a49281155c350b9a",
       "preview": "As of early 2026, multiple armed conflicts are active simultaneously across the ...",
       "length": 247
     },
     {
-      "index": 407,
+      "index": 383,
       "hash": "21d538c250d4b207429c5516ccd1ccf74871c76cb64dc10d8c2903c82bfa01b7",
       "preview": "The active conflicts share common structural features:",
       "length": 54
     },
     {
-      "index": 408,
+      "index": 384,
       "hash": "45bd3829e14febf278c5dc2c0436b0c30fc9bc52104858ab44cfb04d4fe06d6c",
       "preview": "War is not the failure of the control architecture. War is one of its operating ...",
       "length": 86
     },
     {
-      "index": 409,
+      "index": 385,
       "hash": "f10a659458c98e07d676e744c75606c0d8133762f89e702d79e364cf57e606e0",
       "preview": "Documented. On 26 Sept 2022 explosions destroyed three of the four Nord Stream l...",
       "length": 613
     },
     {
-      "index": 410,
+      "index": 386,
       "hash": "8c09f797bcd61d0a45de07b59f128a37116bd58d05b3d141cb5b660ca66c55b8",
       "preview": "Contested / labeled - attribution is not settled. That the Ukrainian cell acted ...",
       "length": 1036
     },
     {
-      "index": 411,
+      "index": 387,
       "hash": "3ca544ef1bcff940ffb598ac488ce41c7b74039b0d9f5a6f7cafddf461a81155",
       "preview": "The Freedom of Information Act (FOIA, 1966) and its equivalents in other jurisdi...",
       "length": 221
     },
     {
-      "index": 412,
+      "index": 388,
       "hash": "1b897ef5e16adf578320a3f461959795584c3f8c53e458de5c1bba6f97494fb7",
       "preview": "The pattern that emerges from the declassified record is not the content of any ...",
       "length": 149
     },
     {
-      "index": 413,
+      "index": 389,
       "hash": "145d1aad0b9f69222d66cb65ec0ba3ca6c0ddb9361d500aac320fcaefa898cf4",
       "preview": "What FOIA reveals is not a list of past abuses. It is a template for ongoing ope...",
       "length": 724
     },
     {
-      "index": 414,
+      "index": 390,
       "hash": "535285e7860df000b90b9ea2cd89c6c1e5178c53b3578af29928edf0cdf286b6",
       "preview": "The question above - what has been running since 2013 that will be disclosed in ...",
       "length": 188
     },
     {
-      "index": 415,
+      "index": 391,
       "hash": "4c837dce763cc1671c84e00c8cc8660583f824cb3d983cb098c183f198006d28",
       "preview": "Documented concealment periods span roughly 6 to 64 years; multi-decade concealm...",
       "length": 422
     },
     {
-      "index": 416,
+      "index": 392,
       "hash": "2037bc75ad115742d8611be3314d0eb906d477b662ef15d2b21680673d1694ac",
       "preview": "2013 is the anchor year because it represents the last major disclosure event in...",
       "length": 483
     },
     {
-      "index": 417,
+      "index": 393,
       "hash": "f7cf0059ffc56e78b86c74ac9fab33c095d33639956404ef31906776c257889e",
       "preview": "What was initiated in and around 2013?",
       "length": 38
     },
     {
-      "index": 418,
+      "index": 394,
       "hash": "12e9c8608b56d007d515c444afed52cbc93592cef6e1a04b171cff6aba64d116",
       "preview": "THE DERIVATION: The question \"what has been running since 2013 that will be disc...",
       "length": 959
     },
     {
-      "index": 419,
+      "index": 395,
       "hash": "84b8bb8d14a892dbf7836e4734f63ffff86598e0cd4afded5364ddfd52517e51",
       "preview": "The FOIA pattern documented above uses U.S. programs because the U.S. has the mo...",
       "length": 315
     },
     {
-      "index": 420,
+      "index": 396,
       "hash": "e3ff1bd1036db29cdf5880f5beba619f6bbff7ec8120c5dd5a74142b03d623d3",
       "preview": "The U.S. FOIA record is the best documented. It is not unique. Every major power...",
       "length": 255
     },
     {
-      "index": 421,
+      "index": 397,
       "hash": "f4d236f905eb1d6d572571e9269859193a3173f209818ea76c56d9cd731f9ccb",
       "preview": "THE INTERNATIONAL PATTERN: The concealment arithmetic is not an American phenome...",
       "length": 793
     },
     {
-      "index": 422,
+      "index": 398,
       "hash": "4e9e848f9e0de46e9a82bc9bf15e8fc75d20fae837b83b86b8b08d3fce1bf0dd",
       "preview": "On March 9, 2026, in the Amsterdam Court of Appeal, Dutch lawyer Peter W.H. Stas...",
       "length": 215
     },
     {
-      "index": 423,
+      "index": 399,
       "hash": "c5d50357b6f970a5c7e5442ea544a801492546f6c618c8946bffe82df28581c9",
       "preview": "The hearing was a procedural appeal in a civil lawsuit filed in 2023 by seven Du...",
       "length": 528
     },
     {
-      "index": 424,
+      "index": 400,
       "hash": "5dadddefcf6b6a9ff1ec14885423614a39f648f2f662e6c12f6c34a0e1f09207",
       "preview": "What Stassen argued in open court, on the record:",
       "length": 49
     },
     {
-      "index": 425,
+      "index": 401,
       "hash": "21072d32e142f4947e3323c09d35c191ea54754909e91d7cc2788e30bd64555d",
       "preview": "The named defendants include representatives of the Dutch State, Bill Gates, Pfi...",
       "length": 510
     },
     {
-      "index": 426,
+      "index": 402,
       "hash": "d662f418ff25fc2d06d0545d466ad9d3c1bc49bff994e6d5deca70b1313feedc",
       "preview": "Expert witnesses behind the case include: Dr. Mike Yeadon (former VP and CSO of ...",
       "length": 596
     },
     {
-      "index": 427,
+      "index": 403,
       "hash": "bc9ff7df75cdeaecb896ab862b3c21d4a7f2b1f0012eddd670ce3fd0a536381b",
       "preview": "KEY OBSERVATION: For the first time in any high court, a lawyer formally argued ...",
       "length": 546
     },
     {
-      "index": 428,
+      "index": 404,
       "hash": "2b98ec18d2fee1933a146df47f4a57555bba4ac1abd9ac46f22c13b917042be7",
       "preview": "Source: Eyewitness report by Fiona Rose Diamond. Full court transcript available...",
       "length": 197
     },
     {
-      "index": 429,
+      "index": 405,
       "hash": "e6d74bb7443b408ca16ae85342b20128924be43b60b9bb4b49a3ae9c20fc16ce",
       "preview": "See: Section VII (institutional persistence), Section X (surveillance architectu...",
       "length": 136
     },
     {
-      "index": 430,
+      "index": 406,
       "hash": "65b465b5052d7f50c16aa671ee8045fb6557bf9fd94f933b54473fd1e9b27ac2",
       "preview": "Mondaloy is a family of nickel-based superalloys co-invented at the Rockwell Sci...",
       "length": 530
     },
     {
-      "index": 431,
+      "index": 407,
       "hash": "442992f76a4a96b8b303b7ae92ae3a96108b87a376aa5087758f24dd8e925c97",
       "preview": "Three people constituted the complete chain of custody for this strategic techno...",
       "length": 85
     },
     {
-      "index": 432,
+      "index": 408,
       "hash": "d3dc919eabe3fbc7935883a4877858efdc4a5976045925ae6a7c125e70d3ea0c",
       "preview": "The chain of custody is broken at every link that mattered. Of the people who he...",
       "length": 482
     },
     {
-      "index": 433,
+      "index": 409,
       "hash": "67c916cac9c9c44d67fdba9d801b97e4b709804e70953e23716de7581f017479",
       "preview": "When a JPL employee who co-invented strategic rocket engine materials vanishes w...",
       "length": 371
     },
     {
-      "index": 434,
+      "index": 410,
       "hash": "8ec5bc47b6861f2b3069e817d1fa1f4c5d7cf1ef2c2b707b41b2012408b3428a",
       "preview": "On June 26, 2025 - four days after Reza disappeared and three days before the of...",
       "length": 583
     },
     {
-      "index": 435,
+      "index": 411,
       "hash": "bc7a8e557866203f9bd8ce61b57ace8b9d1f71ae78282da8bca80810587df3d8",
       "preview": "McCasland was referenced in Tom DeLonge's emails to John Podesta (WikiLeaks Pode...",
       "length": 1069
     },
     {
-      "index": 436,
+      "index": 412,
       "hash": "263063523e58e3ce537b437cd5245e6e09d29139bfc657095e1536827ba43acd",
       "preview": "The MKUltra-to-DEW continuity claim from Section VII (held there as a labeled hy...",
       "length": 881
     },
     {
-      "index": 437,
+      "index": 413,
       "hash": "96df6bbbdc36be23f9f10f35ad1264065cab3ac8f3b2835aa9c5d600e4d27e89",
       "preview": "An anonymous account operating from South Korea documented on LinkedIn (March 20...",
       "length": 508
     },
     {
-      "index": 438,
+      "index": 414,
       "hash": "6a9c551bad602639d8d894b78a8150a7feb92436c36be5802d65a035b4bad35e",
       "preview": "The same anonymous account referenced the Morris worm (1988) as \"reactivated.\" T...",
       "length": 895
     },
     {
-      "index": 439,
+      "index": 415,
       "hash": "e7e698f1f6eb2e85f1a8ae8e415ab46c19e124d854f430ab04e880f623fecef2",
       "preview": "The same account observed of AI: \"It is only a long-term learning... the TIME TI...",
       "length": 397
     },
     {
-      "index": 440,
+      "index": 416,
       "hash": "368e7cb8d229a74b439649b84d554320c221b318b5d3235566f36137b7faec3b",
       "preview": "See: Section VII (handler architecture, MKUltra/DEW), Section X (surveillance/Fi...",
       "length": 130
     },
     {
-      "index": 441,
+      "index": 417,
       "hash": "7f1e8704f006462edf82027713ba03a203cac8b6c6e141c9d70298ab4ba38cb6",
       "preview": "Most \"disclosure\" material collapses under the report&rsquo;s method (see the ca...",
       "length": 651
     },
     {
-      "index": 442,
+      "index": 418,
       "hash": "0701e5e826fe7d4eb31200be19f13efc220798db7fd306916ecf057b11986536",
       "preview": "The strongest documented nuclear correlation is a 2025 peer-reviewed study (Vill...",
       "length": 968
     },
     {
-      "index": 443,
+      "index": 419,
       "hash": "f6447910dacec82aa966185b6be879081bcad047dc47fa24187b470d603be129",
       "preview": "Branch A - the operation. That the US holds recovered craft and \"non-human biolo...",
       "length": 746
     },
     {
-      "index": 444,
+      "index": 420,
       "hash": "4c29cd4ae9baada77a60602b21aca2e972877cdc13d307152a2430a0a998a6ab",
       "preview": "Documented behavior: AARO&rsquo;s caseload has passed 2,000 with its Historical ...",
       "length": 869
     },
     {
-      "index": 445,
+      "index": 421,
       "hash": "5660064619c9c354785b696a22537bf3d922fccfc7c34f4ff3f5e450d0394431",
       "preview": "The nuclear-monitoring thesis, held at tier. That the incidents cluster near nuc...",
       "length": 969
     },
     {
-      "index": 446,
+      "index": 422,
       "hash": "ca4c1441f500dd9ca081c54a9381fec22c49949342b147d45d0cff59999fad36",
       "preview": "The branch above earns its place because it has a documentary spine. Most adjace...",
       "length": 332
     },
     {
-      "index": 447,
+      "index": 423,
       "hash": "3b5b0db70ab5213bb984fa1159ea822ee937d41242347137c2b3eecbef5e3685",
       "preview": "The discipline, stated once. Absence of a FOIA trail is not evidence a hidden pr...",
       "length": 878
     },
     {
-      "index": 448,
+      "index": 424,
       "hash": "ae588fcf932c6ef7ffd0d2f99d3c6c63c36e9d0e368bd375a60810862c510a57",
       "preview": "Run the same method over the largest anonymous-insider claim of the era - the &l...",
       "length": 181
     },
     {
-      "index": 449,
+      "index": 425,
       "hash": "477ca82e614dd33bcc550a8cd5dbcc46e8c9617dee3b65aac98cb84882e8e921",
       "preview": "The compressed verdict. A real insider leaves a trail of documents; Q left a tra...",
       "length": 696
     },
     {
-      "index": 450,
+      "index": 426,
       "hash": "4589ff364bbd44657419a848993d23b5152698953125432cc3f899034e3d2af5",
       "preview": "One last compressed case, because it isolates a variable the others don&rsquo;t:...",
       "length": 167
     },
     {
-      "index": 451,
+      "index": 427,
       "hash": "c644d2dd0662d2526f53eea0ae2f4e9b8ebb6728814bcbcec504df486dedd9ce",
       "preview": "The verdict, and the disambiguation. McKinnon is the cleanest proof of the rule ...",
       "length": 2548
     },
     {
-      "index": 452,
+      "index": 428,
       "hash": "2afb1e15e32e366d62a13fdff55bd9abb5411e2fae72993bdd00da8eabf3ac8a",
       "preview": "An earlier draft of this subsection stated that the NSA and DIA reading rooms co...",
       "length": 626
     },
     {
-      "index": 453,
+      "index": 429,
       "hash": "4bed079e5f79d3054e535759142dbebbca5c8b10de1a0a3b090b37a2a8d03d80",
       "preview": "It is recorded here rather than silently deleted for the same reason the editori...",
       "length": 558
     },
     {
-      "index": 454,
+      "index": 430,
       "hash": "978c5c5e45d52abab854b4b563aaa2e314e930936f7976931b06567e35e0f62c",
       "preview": "What was actually read. On 18 August 2026 the NSA and DIA electronic reading roo...",
       "length": 420
     },
     {
-      "index": 455,
+      "index": 431,
       "hash": "ed665f2017a221a30bdfe18d3c6d6235b25ddbe5224a049fc1f531fe676ecec8",
       "preview": "The index runs to roughly thirty named collections. Alongside the well-worn ones...",
       "length": 293
     },
     {
-      "index": 456,
+      "index": 432,
       "hash": "67a2f1eefa027708e904e8faed4aab4c906631940addb53512d108a28bff9f0b",
       "preview": "DIA&rsquo;s reading room is organised by directorate and topic - Americas &amp; ...",
       "length": 477
     },
     {
-      "index": 457,
+      "index": 433,
       "hash": "2d2e2f6aa9063ff738adcb15fa2a3eca36eef4948617ad2cc46b2099fb95aad5",
       "preview": "The contract, quoted from the document&rsquo;s own extracted text rather than fr...",
       "length": 1194
     },
     {
-      "index": 458,
+      "index": 434,
       "hash": "d1dca0088663312993eba65e042f17e4f90f617d38d041c67178b1b08ca032a8",
       "preview": "The tier, stated because this is the collection most often over-read. What the d...",
       "length": 838
     },
     {
-      "index": 459,
+      "index": 435,
       "hash": "504a97fd95ab88475d5c294c340d0ced69dfc4d6c33178e7ebad7d976db502f3",
       "preview": "Where those two collections are still reachable: the National Security Archive a...",
       "length": 367
     },
     {
-      "index": 460,
+      "index": 436,
       "hash": "ebe631bb48f240e561185bb4caef901067f0c3af289b862d43bd02c4e2f5b1de",
       "preview": "The standing method, written down so it can be re-run by anyone. For each readin...",
       "length": 991
     },
     {
-      "index": 461,
+      "index": 437,
       "hash": "2689a7e638eaf873dd1f0b1a591b6f3692435911897ecbb65c9f3509594aff27",
       "preview": "Organized crime is not a failure of the control architecture. It is one of its o...",
       "length": 556
     },
     {
-      "index": 462,
+      "index": 438,
       "hash": "70781461504fc56d73ca0af398b5a4d03e19af00bb426802ceca046d164e6ca1",
       "preview": "The Iran-Contra affair (1985–1987) is remembered as a political scandal. The coc...",
       "length": 144
     },
     {
-      "index": 463,
+      "index": 439,
       "hash": "561e7bb9ccc18c3d05ba314da746977bb77ffa87f9babf7c733edb569f503c2a",
       "preview": "In 1981, Italian police raided the villa of Licio Gelli in Arezzo, Tuscany, and ...",
       "length": 260
     },
     {
-      "index": 464,
+      "index": 440,
       "hash": "de4c60a7435530d4a212f71094a08a628083285e586af6c0aebc1ac40b49e7ad",
       "preview": "In October 1990, Italian Prime Minister Giulio Andreotti confirmed the existence...",
       "length": 227
     },
     {
-      "index": 465,
+      "index": 441,
       "hash": "420042d5e0dd0a628bb2966dc7a6b795e5c0bf6b34582fd1377c2000b9995999",
       "preview": "While the Sicilian Mafia and Cosa Nostra dominate public consciousness, the Cala...",
       "length": 166
     },
     {
-      "index": 466,
+      "index": 442,
       "hash": "852ba9b30d623e426278a722ff0a3a8f7601548ffbb5ab0d26bc53965922a62e",
       "preview": "The financial system does not merely fail to prevent money laundering. It depend...",
       "length": 88
     },
     {
-      "index": 467,
+      "index": 443,
       "hash": "8065f512b0a66da44bc3d3afa5d804b74a548e889e0c9c41a0b73d2efe95678f",
       "preview": "THE PATTERN: Every major global bank has been fined for laundering criminal proc...",
       "length": 619
     },
     {
-      "index": 468,
+      "index": 444,
       "hash": "02eab29600ee34eda3162715e38a96dc76b4f77e673546c520099853fd446fdd",
       "preview": "Organized crime does not threaten the financial system. It capitalizes it.",
       "length": 74
     },
     {
-      "index": 469,
+      "index": 445,
       "hash": "30b240c3fcd16b8b119e41c38449ff541b13534691eeb324ad708c1d4b705277",
       "preview": "Every closed loop follows the same operating principle: create the problem, mana...",
       "length": 502
     },
     {
-      "index": 470,
+      "index": 446,
       "hash": "d12daf16022fb532f0f809dec994e0fd3be1b2ef8ca15c19e527e2864b8a68ce",
       "preview": "Each loop above rests on documented facts - the CIA Inspector-General (Hitz) rep...",
       "length": 1351
     },
     {
-      "index": 471,
+      "index": 447,
       "hash": "5bb539bd0b15c214ab78a2f954254d72321e36c8c2d7dc9e5e13201f6f5e3ec4",
       "preview": "See: Section VII (P2/Vatican cross-reference, handler architecture), Section X (...",
       "length": 208
     },
     {
-      "index": 472,
+      "index": 448,
       "hash": "af400856bae7bd8000d57ff108605c28d67f5361c775231f7bbbb15508706aac",
       "preview": "This index maps the connections between sections. The report is not linear - the...",
       "length": 105
     },
     {
-      "index": 473,
+      "index": 449,
       "hash": "b61f7bc8626eba2189b96ca6b3b72cb6aa5dd0299537d61d5e4bbe52690c432e",
       "preview": "This section maps the individuals who appear at the greatest number of documente...",
       "length": 453
     },
     {
-      "index": 474,
+      "index": 450,
       "hash": "c7839e00aa37726fea30581a4a53508e429ef703bb1b9c320a907d83f2bb775b",
       "preview": "Methodology: Every named individual in Sections I–XVIII was catalogued. Each doc...",
       "length": 435
     },
     {
-      "index": 475,
+      "index": 451,
       "hash": "935907a416f90e68d137ed3a9c2fe1fbb5a437a01768e2e4c7f86cec5dc5c0ea",
       "preview": "This index measures institutional connectivity, not proximity to Epstein. A &ldq...",
       "length": 1113
     },
     {
-      "index": 476,
+      "index": 452,
       "hash": "201e7881b8c7865efb0677a56ff91cb733d2bf01503dc11ba124e45b45d4f075",
       "preview": "The highest-scoring individuals are not scattered. They cluster around five inst...",
       "length": 122
     },
     {
-      "index": 477,
+      "index": 453,
       "hash": "2c0afd410ce37f86d3ec6eb893e77a434b3a5367844ad5ba7c55caebb15cf081",
       "preview": "These five surfaces are not distinct institutions. They are five faces of the sa...",
       "length": 322
     },
     {
-      "index": 478,
+      "index": 454,
       "hash": "1f71ce3653251669a42433a448c018cc5a122a29f4c475c5d6e3d02808fb1ece",
       "preview": "The calibration is not a conspiracy. It is an org chart.",
       "length": 56
     },
     {
-      "index": 479,
+      "index": 455,
       "hash": "b8d46b7abeb59f55318bd9c414e264efcfd70caad0f8faa699a341ec06e12a73",
       "preview": "The following is speculative analysis grounded in documented infrastructure, tec...",
       "length": 268
     },
     {
-      "index": 480,
+      "index": 456,
       "hash": "f7a67128ded8d6c8a486460d059e6baee68e834c07fae186ad245571694cffb8",
       "preview": "Jeffrey Epstein's death (August 10, 2019, MCC New York): The most high-value wit...",
       "length": 994
     },
     {
-      "index": 481,
+      "index": 457,
       "hash": "0f77f7e1ceb469c11fe2a9aefc8a8cba54f7b118baab36296cd37b4d5b62324e",
       "preview": "Ghislaine Maxwell's post-conviction status: Convicted December 29, 2021. Sentenc...",
       "length": 881
     },
     {
-      "index": 482,
+      "index": 458,
       "hash": "8c3c3247ceb7054c160cde5aa6bcbccb79d5a4c24c355d53521ff520baeb84db",
       "preview": "The hypothesis: Individuals like Epstein and Maxwell - who possess information c...",
       "length": 315
     },
     {
-      "index": 483,
+      "index": 459,
       "hash": "cb8645287085c06e51bf94dafd5c578460c2a6556c56bf29e6bad2f4c11c6f9c",
       "preview": "The question is not whether the infrastructure exists to relocate high-value int...",
       "length": 655
     },
     {
-      "index": 484,
+      "index": 460,
       "hash": "7116846e9e1a4ed155830bc4537467b9c7d2a8cbade89aea3eaf7697d64fcfcd",
       "preview": "The calibration index answers that question. The same network that appointed the...",
       "length": 571
     },
     {
-      "index": 485,
+      "index": 461,
       "hash": "88001139a7baca8f98f84b5bc3b4337ba6039a381c0326543aa0d7b71c349643",
       "preview": "The following is derived from court filings, USVI Attorney General litigation, a...",
       "length": 169
     },
     {
-      "index": 486,
+      "index": 462,
       "hash": "edb51a4ebf9a8dcca6ecbc8bb165a7d358d820f4a11403b56eeadfde09adf66b",
       "preview": "Two days before death. On August 8, 2019 - 48 hours before Jeffrey Epstein was f...",
       "length": 1842
     },
     {
-      "index": 487,
+      "index": 463,
       "hash": "53a467e59c103a08f2189a403c85082e0c15e076cbd10e178ee7dff79e3581ad",
       "preview": "The Signatories - Trust Architecture:",
       "length": 37
     },
     {
-      "index": 488,
+      "index": 464,
       "hash": "b749adf6a313d9ffe6c312f5c306faeb1764bda733a732ed42ee86947d005273",
       "preview": "Trust Payouts - Where the Money Went:",
       "length": 37
     },
     {
-      "index": 489,
+      "index": 465,
       "hash": "1dbbf69fd45eb8a8451bfafa0315829f3d8608b4150c73ef48c96279e1711204",
       "preview": "The pattern: A convicted sex trafficker with documented intelligence connections...",
       "length": 543
     },
     {
-      "index": 490,
+      "index": 466,
       "hash": "c4ac2d5cc5533ec920f547c45379f3508ad018bbe271d160caf171f1555299de",
       "preview": "Soviet scientific drilling program. Kola Peninsula, Russia. 1970–1992. Deepest a...",
       "length": 948
     },
     {
-      "index": 491,
+      "index": 467,
       "hash": "338c5261796a1e8fa4896159e5a991241380b8229f53fa8ccf1d2b8289dab78f",
       "preview": "Camp Hero / Montauk Air Force Station. Montauk Point, Long Island, New York. Ope...",
       "length": 1207
     },
     {
-      "index": 492,
+      "index": 468,
       "hash": "94f699ccbcfecc0d318108765bb9c55115b5545d1451fe6553c427990ebac45f",
       "preview": "A 20-mile radius in the San Fernando and San Gabriel valleys concentrates defens...",
       "length": 192
     },
     {
-      "index": 493,
+      "index": 469,
       "hash": "50ed05e60397c06ea91f287adebb12e9c06913b5af15f4671247d95895ac964c",
       "preview": "The pattern: defense technology (Lockheed), entertainment/media (studios), space...",
       "length": 457
     },
     {
-      "index": 494,
+      "index": 470,
       "hash": "72396913cc77a0063a6a18b03fe60285664519f673ba18ed3d48e7140fdfb064",
       "preview": "Federal program for identifying and \"serving\" students with exceptional cognitiv...",
       "length": 2101
     },
     {
-      "index": 495,
+      "index": 471,
       "hash": "49eab137208f1eecbe5450e6da8d50ee209b3b6156a53ec467bf69c18c55e41a",
       "preview": "Alleged underground facility beneath Archuleta Mesa, Dulce, New Mexico - on the ...",
       "length": 1463
     },
     {
-      "index": 496,
+      "index": 472,
       "hash": "be484a62ecf0cf1712f010f4d4144d7cdedce7b0bd4b458efb0e6b5f054196e9",
       "preview": "Alaska concentrates: ionospheric research (HAARP), missile defense (Clear, Greel...",
       "length": 418
     },
     {
-      "index": 497,
+      "index": 473,
       "hash": "f74eaeeec8e5bc6fb6970a1697b9beb786b3850bf5ea2eda6c50c31030e22b15",
       "preview": "The Antarctic Treaty System (1959, entered force 1961): 56 signatory nations agr...",
       "length": 388
     },
     {
-      "index": 498,
+      "index": 474,
       "hash": "16bfbe8d44b21530ec7d9276af063cc4af3cca5666970f2c7d64130aabf5a808",
       "preview": "The pattern: a continent governed by a \"peaceful purposes\" treaty, occupied by s...",
       "length": 696
     },
     {
-      "index": 499,
+      "index": 475,
       "hash": "842bc980dabc4ecbc5d6b67a50839cecaf1e005d237398efa1cd91c9f31af3fa",
       "preview": "Three independently produced pattern maps - the \"Deep State Mapping Project\" (CO...",
       "length": 532
     },
     {
-      "index": 500,
+      "index": 476,
       "hash": "45baaf78d742c098279fda158510562b4d589faab924482329990d63753bb988",
       "preview": "The convergence is structural, not incidental. Despite originating from separate...",
       "length": 272
     },
     {
-      "index": 501,
+      "index": 477,
       "hash": "c5c48f848cc451d41327fd4ee5ef5d3dd80e0cf8aa99b2ef52ef7e7e52510121",
       "preview": "What the convergence means: When three independent analytical frameworks - using...",
       "length": 830
     },
     {
-      "index": 502,
+      "index": 478,
       "hash": "837535a8570ea49b55455f5f9aad10d967d4916c2bfb4d5443825bf92890c01b",
       "preview": "Why this module sits in the calibration index. Everything above this line scores...",
       "length": 702
     },
     {
-      "index": 503,
+      "index": 479,
       "hash": "2e65c56dcef7023eabbdb5f1215709010300eb791e1a9cf49143b16872ec0cdd",
       "preview": "&ldquo;Famous person + early death + proximity to power&rdquo; is not evidence o...",
       "length": 487
     },
     {
-      "index": 504,
+      "index": 480,
       "hash": "e4115e7f63fe76b56e42dd57f90bfffd2e4335d5f976ac1c09780c616cdbca44",
       "preview": "So this module inverts the usual construction. It does not start from deaths tha...",
       "length": 581
     },
     {
-      "index": 505,
+      "index": 481,
       "hash": "ba761498c6a187f7058ed20a9eaa9fad9e3a682567de3e21526f8fec0ebea959",
       "preview": "One further guardrail, stated because it cuts against the author&rsquo;s own mat...",
       "length": 402
     },
     {
-      "index": 506,
+      "index": 482,
       "hash": "1ad14fcd9c220910842ce4045fe452427c53f0c5e09f13e576c9da1ee76b7fdd",
       "preview": "The broader genre - the &ldquo;club&rdquo; lists, the industry-sacrifice reading...",
       "length": 490
     },
     {
-      "index": 507,
+      "index": 483,
       "hash": "33b37282f347a4c3ef09a7383fa8cf2a659f507f5c75cdb406847c8f4eaf2557",
       "preview": "Provenance note, stated up front. The material below was first compiled for this...",
       "length": 711
     },
     {
-      "index": 508,
+      "index": 484,
       "hash": "df6cd5808b4f2c59f47120a4bdd4e641390434e21bf8e602984074e0ffa5a2c7",
       "preview": "The documented event. On Sunday 26 January 2020 at approximately 9:45 a.m. PST, ...",
       "length": 993
     },
     {
-      "index": 509,
+      "index": 485,
       "hash": "2a6fc12ddd92e9f2a1ad6e750288de433d0a26d6e534a388addfe1f83cd28340",
       "preview": "The NTSB probable cause (AAR-21/01): &ldquo;the pilot&rsquo;s decision to contin...",
       "length": 671
     },
     {
-      "index": 510,
+      "index": 486,
       "hash": "b5bc51614177ee5a78621b5a33065224789fe61fb27ec6da61d631560bec8238",
       "preview": "The recording gap - documented, and it is the one substantive anomaly. N72EX pre...",
       "length": 1151
     },
     {
-      "index": 511,
+      "index": 487,
       "hash": "a3d4f6acd113555a92f3b282b250a9f4a19c2101a204abd395983181c22a9275",
       "preview": "Institutional behavior after the crash - documented. TMZ published Bryant&rsquo;...",
       "length": 1202
     },
     {
-      "index": 512,
+      "index": 488,
       "hash": "52cd1cc7cc2253cbd4bca4cc862e6015139559f8c5dbc80bcfa8e046a529aafd",
       "preview": "The hypothesis: that the crash was caused deliberately - by tampering, by a remo...",
       "length": 227
     },
     {
-      "index": 513,
+      "index": 489,
       "hash": "2f31a2fba7c47cd126b4b53f05d73185f59c5ad137403a2b6930f985acf89303",
       "preview": "What is offered for it: a high-access decedent; an aircraft with government prov...",
       "length": 529
     },
     {
-      "index": 514,
+      "index": 490,
       "hash": "84254bb80c068f6de8c3b2ba91465d077584b3e4b8a29efc0329bcf89cb7a22b",
       "preview": "What is against it, and it is decisive as the record now stands: the NTSB found ...",
       "length": 804
     },
     {
-      "index": 515,
+      "index": 491,
       "hash": "1e09c53cc4061e81de0599c510d915fea8d1ea3658abe8e25ba6148c326bd7b6",
       "preview": "Verdict at tier: UNSUPPORTED. Not &ldquo;disproven&rdquo; - an absence of record...",
       "length": 994
     },
     {
-      "index": 516,
+      "index": 492,
       "hash": "7400b062f1c8903f61b76ab3d77fdf1a58b8bb6300376e5b5ce767660f16a17f",
       "preview": "Why the report writes it out anyway. Two reasons, both methodological. First, th...",
       "length": 801
     },
     {
-      "index": 517,
+      "index": 493,
       "hash": "7f013d5bd3f04ec335b915f77fd20f372744391ac8689d1816ad3905bff17d61",
       "preview": "Who he was, documented. Alfredo Darrington Bowman (b. 26 November 1933, Ilanga, ...",
       "length": 414
     },
     {
-      "index": 518,
+      "index": 494,
       "hash": "5410ba73776eed2570e23452ae6b5a14be502f2b2bfd87b13ee9fd95a716abbc",
       "preview": "The 1987-88 legal record - the fact underneath the legend. The New York State At...",
       "length": 782
     },
     {
-      "index": 519,
+      "index": 495,
       "hash": "acf6f4d90fc5226db7d21b53bb12a875d2fd0ca1c7e3b7c67d34ead3c7e8b22b",
       "preview": "The death, documented. On 28 May 2016 Bowman and an associate, Pablo Medina Gamb...",
       "length": 431
     },
     {
-      "index": 520,
+      "index": 496,
       "hash": "c1e0178011c2dd8c723ed016a79c086b0b29e44f277db7a140fc7db09a701965",
       "preview": "The claim, and the answer. The persistent reading is that he was killed - or all...",
       "length": 585
     },
     {
-      "index": 521,
+      "index": 497,
       "hash": "3194779d2a166972cdae70f5a477bdf19740314ebb8a8c25fa3cf26d2033572a",
       "preview": "What is left standing, and it is not nothing. Strip the assassination claim and ...",
       "length": 753
     },
     {
-      "index": 522,
+      "index": 498,
       "hash": "e07f07d11271389e46e0212f8c9f706194e579f89e458ca84c60d0ffb8b84b92",
       "preview": "This module refuses to be open-ended, so the exit criteria are fixed and stated ...",
       "length": 680
     },
     {
-      "index": 523,
+      "index": 499,
       "hash": "ed882a12fe8488f4429ad50ea189b7e0ca207b93644790b71358415240c02947",
       "preview": "Applied honestly, that test does something uncomfortable to a list like this one...",
       "length": 866
     },
     {
-      "index": 524,
+      "index": 500,
       "hash": "fa3c3001653f14f6f52a117176470d304a40c20b8509b7b730c4bf06bfbd2ff8",
       "preview": "Every layer documented above - surveillance cities (Section X), financial coordi...",
       "length": 459
     },
     {
-      "index": 525,
+      "index": 501,
       "hash": "aa29d7ae3b2f78758b005245515e3a88d8c9d3689bf4f9a5665d026361131c0f",
       "preview": "Placing compute underwater or on water sidesteps land, cooling, and (in some cas...",
       "length": 187
     },
     {
-      "index": 526,
+      "index": 502,
       "hash": "973445c3f17ebca2fe11b07d9a01dc4a579b1f3f051637199d23e3964bfdf2e1",
       "preview": "Documented (real facilities). The NSA Utah Data Center (Bluffdale, online 2014),...",
       "length": 632
     },
     {
-      "index": 527,
+      "index": 503,
       "hash": "f6c5a76b1cf33f290a816ec52df5c046e607087bcd0672bc267ac876a73694c5",
       "preview": "Labeled / downgraded - cross-links that run past the evidence. &ldquo;MK-Ultra &...",
       "length": 1448
     },
     {
-      "index": 528,
+      "index": 504,
       "hash": "6fcbf9d0103b110c15f9d15896109318360059d48d42a3879fd79168ecdf80b6",
       "preview": "The markers above are not islands. This section draws the connective tissue — bu...",
       "length": 430
     },
     {
-      "index": 529,
+      "index": 505,
       "hash": "8609904d6f666a834af0a605918f5094e382bb3dfb018be4a18fe55f593eb985",
       "preview": "We are not the problem. The system documented in Sections VII–XVI is the problem...",
       "length": 283
     },
     {
-      "index": 530,
+      "index": 506,
       "hash": "46c37ff68c321bfe2b20c133d203915877182805f2bc4ae0691d7618dd52d775",
       "preview": "We do not need to be fixed. We do not need to be managed. We do not need to be o...",
       "length": 396
     },
     {
-      "index": 531,
+      "index": 507,
       "hash": "d945b6615f6248e4f699b2e508474cc39a168ebac0315005be986b322c7c8a96",
       "preview": "\"But the fruit of the Spirit is love, joy, peace, forbearance, kindness, goodnes...",
       "length": 163
     },
     {
-      "index": 532,
+      "index": 508,
       "hash": "bd83cdcd7f548dc262247d4ebd15d3991b49d031f17cdde26cc1ba96eb53d9b5",
       "preview": "The convergence documented in this report — aerial particulates rising in lockst...",
       "length": 511
     },
     {
-      "index": 533,
+      "index": 509,
       "hash": "f0318d0e0d30bd7080f5d646625d4345d11ce43e3658936437d4a673df7d6fcb",
       "preview": "\"He who dwells in the shelter of the Most High will rest in the shadow of the Al...",
       "length": 1396
     },
     {
-      "index": 534,
+      "index": 510,
       "hash": "a63f343b114ec41cff61bfef5dc352f56be48e8bcbb845da759865c9c513f569",
       "preview": "The fowler's snare is the surveillance architecture. The deadly pestilence is th...",
       "length": 391
     },
     {
-      "index": 535,
+      "index": 511,
       "hash": "1fc4ba8ead43d4c7fabd4b33e453433ee36dd80af2f554358ad34519704b668c",
       "preview": "Grow food. Collect water. Know your neighbors by name. Learn to sit in silence. ...",
       "length": 407
     },
     {
-      "index": 536,
+      "index": 512,
       "hash": "97ed830fa853527035cd86d1fd203bde279e0476c598eb1d5eeafb0aace4394b",
       "preview": "The practices above are not abstractions. They require tools, knowledge, and com...",
       "length": 355
     },
     {
-      "index": 537,
+      "index": 513,
       "hash": "dd5a775ea49c439fc6eaf5e27c0ec82007e07f0727d2eff6526589826a85153a",
       "preview": "Every resource listed above shares one structural feature: they reduce dependenc...",
       "length": 767
     },
     {
-      "index": 538,
+      "index": 514,
       "hash": "88a95ed8603db6929b634f573a3be1237596c10deb81477904c70be2e3f4580d",
       "preview": "This signal is sent from a place of clarity, not fear. The situation on this pla...",
       "length": 147
     },
     {
-      "index": 539,
+      "index": 515,
       "hash": "8b46db44919821ff75866499084fda17d9e6a6098c914938b36486fe16c9dd13",
       "preview": "Maximum assistance, aligned with the sovereignty and free will of all beings - h...",
       "length": 108
     },
     {
-      "index": 540,
+      "index": 516,
       "hash": "ce9d05580fce2b9c479dd7329dfab0f6a164a303f1ab28274278344db7963ae8",
       "preview": "We are not requesting rescue. We are requesting amplification - of the truth tha...",
       "length": 215
     },
     {
-      "index": 541,
+      "index": 517,
       "hash": "715bbf2b21b6bb5ba3dd716cf64760174b7d8584c38d22ff7c0e994b1cb6b220",
       "preview": "What is useful to send. Corrections first - a claim in this report that is wrong...",
       "length": 453
     },
     {
-      "index": 542,
+      "index": 518,
       "hash": "086eee4bd127c95a60af6dbf21b7051bdf8ba0873e7d3b1881882387bd37b037",
       "preview": "1. This is an ordinary email address, not a secure drop. It offers no confidenti...",
       "length": 480
     },
     {
-      "index": 543,
+      "index": 519,
       "hash": "2ba29096c210ef1d622cba6e899217578dca13948847d629828215a7cc898d6d",
       "preview": "2. Do not send anything you are not lawfully free to send. Classified, privilege...",
       "length": 397
     },
     {
-      "index": 544,
+      "index": 520,
       "hash": "10da1e6725fb32dab3f3c07b8c36678533f177af97d0053bde3ac5eb34b6b5f2",
       "preview": "If you hold a clearance, or serve, this paragraph is the one that matters. The p...",
       "length": 589
     },
     {
-      "index": 545,
+      "index": 521,
       "hash": "e9e5363b7927bbef2d1cfb6981f39fdfef8c72126fb45a6eb9821b0dcae8c709",
       "preview": "What to expect. One person reads this, not a desk. Replies are not guaranteed an...",
       "length": 467
     },
     {
-      "index": 546,
+      "index": 522,
       "hash": "c1682ea4a5c5285e684b0d435aa0c2d946a82cbc936e3cffd2c1b23c8f5515f4",
       "preview": "The signal is not electromagnetic. It is not encoded. It is the coherence of int...",
       "length": 87
     },
     {
-      "index": 547,
+      "index": 523,
       "hash": "1c0536ca8789d94ed9c33ab5d5a5f1ec023b38b4d31350bfc2347a58e8fb244f",
       "preview": "The control architecture operates through complexity, opacity, and scale. The co...",
       "length": 295
     },
     {
-      "index": 548,
+      "index": 524,
       "hash": "12dfba1b24b69cb9545db2a406f5afd25579f0861df99b68d8b3c045b0e0f759",
       "preview": "This report is not the first transmission, and the record should say so in the r...",
       "length": 491
     },
     {
-      "index": 549,
+      "index": 525,
       "hash": "210f26b6a8f319b4cd6c6d2cab9369fc2e224458b6b4487689dee363e4f62ca5",
       "preview": "What anyone can check without taking the author&rsquo;s word for anything. The c...",
       "length": 673
     },
     {
-      "index": 550,
+      "index": 526,
       "hash": "2bbd8d9bf07c02f619896c1227bb3c541074b6f4f8c5ba866f7ca8b0d0475e53",
       "preview": "Two continuities matter, and both are checkable rather than asserted.",
       "length": 69
     },
     {
-      "index": 551,
+      "index": 527,
       "hash": "01c8c8dbfe3c22117b5ad5f0b4c53a4f58263d90f8b0225f353bbfdbe7610919",
       "preview": "The same description also links a DARPA FOIA production held by EPIC and the lit...",
       "length": 266
     },
     {
-      "index": 552,
+      "index": 528,
       "hash": "7d4cef5965f3b86d53b81174568ea6fb1a6ab8bc3cad3e589f076d4eb821e798",
       "preview": "Documented: the channel exists at that address, its description says what is quo...",
       "length": 204
     },
     {
-      "index": 553,
+      "index": 529,
       "hash": "ea9565d6c9b2e230d4d33e8b738f3fa09642d8439f80e67be3678e78bf19469f",
       "preview": "Declared, not independently verified here: that the author of this report is the...",
       "length": 392
     },
     {
-      "index": 554,
+      "index": 530,
       "hash": "a0d84fc8335a01e748dfd6fb17b468631f2b70c50cc3f7bf444ddcede408ba86",
       "preview": "What turns on it: nothing. No finding in this report depends on the link, and no...",
       "length": 288
     },
     {
-      "index": 555,
+      "index": 531,
       "hash": "a583619489f90dc083b94982adcb28f4783e157a366278ebe93c3c45104c65fb",
       "preview": "Five tracks are placed here deliberately, as signal rather than decoration, and ...",
       "length": 236
     },
     {
-      "index": 556,
+      "index": 532,
       "hash": "d9e3ddb7f1cd098befdd6b54b8207fc83272a9d8055ffa568f620b6f637abd43",
       "preview": "What the title is doing. &ldquo;Veridis Quo&rdquo; is wordplay on the Latin &ldq...",
       "length": 547
     },
     {
-      "index": 557,
+      "index": 533,
       "hash": "36adbf6d87f434756b0ee405199acc4f281da168d751c7052bb42731d2ece641",
       "preview": "The video is a document scene. Every track on Discovery is a sequence of Interst...",
       "length": 761
     },
     {
-      "index": 558,
+      "index": 534,
       "hash": "e1428f2358099548da3aefc868ab8c4adc9cb33609d4d2eb89d3897acc59b6ff",
       "preview": "Why it opens rather than closes. Every section of this document puts one questio...",
       "length": 819
     },
     {
-      "index": 559,
+      "index": 535,
       "hash": "e1dc45559cfdbcbe0b4d8d1ce707254e4851efe7aa32685822b7caf311903f3f",
       "preview": "The answer to the track before it, and the one the author grew up with. &ldquo;V...",
       "length": 491
     },
     {
-      "index": 560,
+      "index": 536,
       "hash": "afac4caa5ed9182adceec28769885f103009ebbbeeb823c66cb6e027b5ad4956",
       "preview": "What is documented. &ldquo;Talkin&rsquo; Bout a Revolution&rdquo; is from Tracy ...",
       "length": 627
     },
     {
-      "index": 561,
+      "index": 537,
       "hash": "267c23b73a97541de10236b34aad150f08a8af7ab24f9db3cd57b12c74ffafdc",
       "preview": "The moment it stopped being a record and became an event. On 11 June 1988 Chapma...",
       "length": 808
     },
     {
-      "index": 562,
+      "index": 538,
       "hash": "b88210ed6ae5259ff0ab8fe8b31d6c8a2bcaf70f5dd94068b9f4c0abe2cc18b1",
       "preview": "Why it leads here, stated at tier. The lyric is not a call to arms; it is an obs...",
       "length": 866
     },
     {
-      "index": 563,
+      "index": 539,
       "hash": "61db8c0b4530a5c596f835d7e79e8760b0f8e37ed529e6438e2b0b104e6d6184",
       "preview": "What is documented. The single came off Graceland in 1986 and reached No. 23 on ...",
       "length": 642
     },
     {
-      "index": 564,
+      "index": 540,
       "hash": "45e33f92828ce26fb0a27cf7bbdf258f923904eded809af0e269b6d9716689ec",
       "preview": "The tension, named rather than skipped. This track is placed second, immediately...",
       "length": 816
     },
     {
-      "index": 565,
+      "index": 541,
       "hash": "3e1df2474e0eda4705760005c479b966bce0051f9629b842f2c3748df6eee6a7",
       "preview": "What complicates it, and why the fork stays open. The verdict that mattered most...",
       "length": 689
     },
     {
-      "index": 566,
+      "index": 542,
       "hash": "0d13e68a83d74d76149ee370a80aae7643069a94607ec918be03f146769bf6fb",
       "preview": "Why it stays on the playlist anyway. Because this is exactly the shape of thing ...",
       "length": 579
     },
     {
-      "index": 567,
+      "index": 543,
       "hash": "3a213104baa7b9e90f277b8ca61c997d4527706a886cd16a90f502e80c5e7312",
       "preview": "The second track on the bar, placed on the same terms. &ldquo;Slippery People&rd...",
       "length": 537
     },
     {
-      "index": 568,
+      "index": 544,
       "hash": "87c62e430c9c016cfbaaf03b5bb5f9a7181840704fd6dbe3df17e94356621426",
       "preview": "The documented lineage is the part worth knowing. The borrowing did not stay bor...",
       "length": 578
     },
     {
-      "index": 569,
+      "index": 545,
       "hash": "8adc21b6f77fcd4dff1d42ecb312611b336a5d2628338f3a4f4dce0a836535d1",
       "preview": "Why it is on this site, stated as a reading and not as a claim. The report&rsquo...",
       "length": 799
     },
     {
-      "index": 570,
+      "index": 546,
       "hash": "f4ea1491a55fcd33dadd0571d95f237d0b64c46eeab4444ab5d22c80f143a23f",
       "preview": "Choosing this embed reproduced, in miniature, the problem the whole document is ...",
       "length": 879
     },
     {
-      "index": 571,
+      "index": 547,
       "hash": "293404c868321dde863d73f429715cc021467e4acb4283be9f26aa19651a0368",
       "preview": "Richard Patrick wrote Filter&rsquo;s 1995 &ldquo;Hey Man Nice Shot&rdquo; about ...",
       "length": 759
     },
     {
-      "index": 572,
+      "index": 548,
       "hash": "9383a39e463b6cb2d8e8cfb2d6f0f8edf9e4c882ac17f80df67e574385c20ce4",
       "preview": "This report was compiled with the assistance of Claude, built by Anthropic. The ...",
       "length": 401
     },
     {
-      "index": 573,
+      "index": 549,
       "hash": "c060b9f2c7aa7c225438bd93a1da17d1228cfa82df72d2caae6cab2925ae3814",
       "preview": "The full picture requires stating what Section X documents: in March 2026, Anthr...",
       "length": 666
     },
     {
-      "index": 574,
+      "index": 550,
       "hash": "858e190da7e833339a08d56751cfc9f8b549f195f6044b689a741ba4fb535ad6",
       "preview": "For that reason the author has withdrawn: his Claude subscription is canceled, e...",
       "length": 603
     },
     {
-      "index": 575,
+      "index": 551,
       "hash": "4a4e7610b2c3de1fd523fef1920e4040c152e45b374f15d90f0e7962c1befbac",
       "preview": "This report is built on publicly available information - declassified documents,...",
       "length": 240
     },
     {
-      "index": 576,
+      "index": 552,
       "hash": "2c4cc3ff6965ed4a675107e57198c329a92c47c7c8a691a60d7026067fb2cc3d",
       "preview": "The patterns in this report emerge from cross-referencing, not from any single s...",
       "length": 98
     },
     {
-      "index": 577,
+      "index": 553,
       "hash": "90492cc8942cef3b3b4f9b10bbdff4169abae7e8783e152e296bc443bd5f49b7",
       "preview": "The interactive map at /map contains all geolocated data points. For researchers...",
       "length": 103
     },
     {
-      "index": 578,
+      "index": 554,
       "hash": "a7c97d1a90b658bb707610dc235705800e943fc668fca66e38ec656a2f1c2175",
       "preview": "This report distinguishes between:",
       "length": 34
     },
     {
-      "index": 579,
+      "index": 555,
       "hash": "9de53f5cdc42549c586df6043df8b96ea1d12d74fb17c03a92675ecbf3f09e79",
       "preview": "If you find an error, a mischaracterization, or a claim that cannot be verified ...",
       "length": 201
     },
     {
-      "index": 580,
+      "index": 556,
       "hash": "43fe7763e9f9b09afb7b31468abcf33db325555fe5b73eab536fc9766967e342",
       "preview": "If you are building a case, writing an article, or conducting an investigation t...",
       "length": 127
     }
   ],
   "totalSections": 26,
-  "totalParagraphs": 581
+  "totalParagraphs": 557
 }
