@@ -22,7 +22,8 @@
     { id: 'qMDxrXFQwU8', label: 'Filter &mdash; Hey Man Nice Shot' },                      // Filter - Topic (licensed)
     { id: '9D2R69gVyZ0', label: 'TOOL &mdash; 7empest' },                                   // TOOLVEVO (official). 15:43 - much longer than the rest.
     { id: 'Q3dvbM6Pias', label: 'Rage Against The Machine &mdash; Testify' },              // RATMVEVO (official)
-    { id: 'PtzhvJh9NRY', label: 'The Smiths &mdash; Bigmouth Strikes Again' }             // The Smiths (artist channel, official audio)
+    { id: 'PtzhvJh9NRY', label: 'The Smiths &mdash; Bigmouth Strikes Again' },             // The Smiths (artist channel, official audio)
+    { id: 'JKES3yfnD9U', label: 'Creedence Clearwater Revival &mdash; Have You Ever Seen the Rain' } // CCR (artist channel, official audio)
   ];
   var LS_KEY = 'b0b_signal_v4';   // bump on every reorder: a stored index points into the old list
   var SAVE_MS = 1000;
