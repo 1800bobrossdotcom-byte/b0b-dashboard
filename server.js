@@ -526,8 +526,17 @@ function bump(kind) {
 app.get('/api/visitors', (req, res) => {
   if (!hasAccess(req)) return res.status(404).end();
   res.setHeader('Cache-Control', 'no-store');
+  // Presence booleans only - never a value. Lets a misnamed or unbound env var be
+  // diagnosed from the endpoint instead of guessed at from the dashboard.
+  const envSeen = {
+    KV_REST_API_URL: !!process.env.KV_REST_API_URL,
+    KV_REST_API_TOKEN: !!process.env.KV_REST_API_TOKEN,
+    UPSTASH_REDIS_REST_URL: !!process.env.UPSTASH_REDIS_REST_URL,
+    UPSTASH_REDIS_REST_TOKEN: !!process.env.UPSTASH_REDIS_REST_TOKEN,
+    REDIS_URL: !!process.env.REDIS_URL
+  };
   const respond = (visits, views, since) => res.json({
-    visits: visits, views: views, since: since || null, backend: countBackend,
+    visits: visits, views: views, since: since || null, backend: countBackend, env: envSeen,
     // Stated in the payload so the number can never be quoted without its caveat.
     note: countBackend === 'memory'
       ? 'In-process counter: resets on restart and is per-instance. Not a real total. Set KV_REST_API_URL and KV_REST_API_TOKEN for a durable shared count.'
