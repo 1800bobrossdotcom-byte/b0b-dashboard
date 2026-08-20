@@ -20,7 +20,8 @@
     { id: 'uq-gYOrU8bA', label: 'Paul Simon &mdash; You Can Call Me Al' },                  // PaulSimonVEVO (official)
     { id: 'rx2_iHftARo', label: 'Talking Heads &mdash; Slippery People' },                 // Talking Heads - Topic (licensed)
     { id: 'qMDxrXFQwU8', label: 'Filter &mdash; Hey Man Nice Shot' },                      // Filter - Topic (licensed)
-    { id: '9D2R69gVyZ0', label: 'TOOL &mdash; 7empest' }                                   // TOOLVEVO (official). 15:43 - much longer than the rest.
+    { id: '9D2R69gVyZ0', label: 'TOOL &mdash; 7empest' },                                   // TOOLVEVO (official). 15:43 - much longer than the rest.
+    { id: 'Q3dvbM6Pias', label: 'Rage Against The Machine &mdash; Testify' }              // RATMVEVO (official)
   ];
   var LS_KEY = 'b0b_signal_v4';   // bump on every reorder: a stored index points into the old list
   var SAVE_MS = 1000;
