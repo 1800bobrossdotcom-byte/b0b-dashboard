@@ -1,9 +1,9 @@
 {
-  "generated": "2026-08-20T16:38:57.722Z",
+  "generated": "2026-08-21T12:41:39.523Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "0676361c60a11a27dfd4e130f566ba3d2b3157ea39a6ac824fb5f4f79ede4a55",
+  "fullFileHash": "bed177092c80ca51af9204133ed76a138cd76fa38aeb45225f9c3506c33d5ef8",
   "sectionBlocks": [
     {
       "id": "_preamble",
@@ -132,8 +132,8 @@
     },
     {
       "id": "contact",
-      "hash": "b300fa752559d19eb70cb830d9b6eb5f5267e9525cde65db30faeb22edc952a5",
-      "length": 27553
+      "hash": "1807d915a9d867a54cf82fd2f5e296f2c6199e7ba114e87967b3c5c1fbc20ccf",
+      "length": 30862
     }
   ],
   "paragraphHashes": [
@@ -3421,8 +3421,8 @@
     },
     {
       "index": 547,
-      "hash": "3a213104baa7b9e90f277b8ca61c997d4527706a886cd16a90f502e80c5e7312",
-      "preview": "The second track on the bar, placed on the same terms. &ldquo;Slippery People&rd...",
+      "hash": "7902e5910e3b4e958e3b735e1e95f80d7164434603cae14222b9048825a1492c",
+      "preview": "The fourth track on the bar, placed on the same terms. &ldquo;Slippery People&rd...",
       "length": 537
     },
     {
@@ -3451,59 +3451,95 @@
     },
     {
       "index": 552,
+      "hash": "802bd16d850daf774431f82bd7bb47a2d89421a6e45473114a1386f08f9eb658",
+      "preview": "What is documented. &ldquo;7empest&rdquo; closes Fear Inoculum (2019) and runs 1...",
+      "length": 351
+    },
+    {
+      "index": 553,
+      "hash": "968b43450f3b76ea8e41bd80368cc925ebd3ebd8f82a207abf0e1f2f7ee88af0",
+      "preview": "Why it is here, stated as a reading. The song&rsquo;s subject is not the storm. ...",
+      "length": 655
+    },
+    {
+      "index": 554,
+      "hash": "469f6c8cf00b87c1d8870563633ff36b74dce58da8e2f7c8fb8266dd2c26eca6",
+      "preview": "What is documented. Written by Morrissey and Marr, released as a single on 19 Ma...",
+      "length": 256
+    },
+    {
+      "index": 555,
+      "hash": "e9f969b85255d8e62f1453d3e664904aadb0c628297756076ba1172c47fff9e6",
+      "preview": "Why it is here. The address in the introduction of this report asks people insid...",
+      "length": 737
+    },
+    {
+      "index": 556,
+      "hash": "eb93b70d58a9e579622a8ed49964f03e454e30580c6a3d774811269c95f666b9",
+      "preview": "What is documented, and it is unusually clean. Written by John Fogerty, carried ...",
+      "length": 321
+    },
+    {
+      "index": 557,
+      "hash": "a55910923f235736a65214d04312e9b1d0ce8be046a82fcc408d97db4816291e",
+      "preview": "Why this one closes the set, and it is a point about method rather than music. A...",
+      "length": 786
+    },
+    {
+      "index": 558,
       "hash": "9383a39e463b6cb2d8e8cfb2d6f0f8edf9e4c882ac17f80df67e574385c20ce4",
       "preview": "This report was compiled with the assistance of Claude, built by Anthropic. The ...",
       "length": 401
     },
     {
-      "index": 553,
+      "index": 559,
       "hash": "c060b9f2c7aa7c225438bd93a1da17d1228cfa82df72d2caae6cab2925ae3814",
       "preview": "The full picture requires stating what Section X documents: in March 2026, Anthr...",
       "length": 666
     },
     {
-      "index": 554,
+      "index": 560,
       "hash": "858e190da7e833339a08d56751cfc9f8b549f195f6044b689a741ba4fb535ad6",
       "preview": "For that reason the author has withdrawn: his Claude subscription is canceled, e...",
       "length": 603
     },
     {
-      "index": 555,
+      "index": 561,
       "hash": "4a4e7610b2c3de1fd523fef1920e4040c152e45b374f15d90f0e7962c1befbac",
       "preview": "This report is built on publicly available information - declassified documents,...",
       "length": 240
     },
     {
-      "index": 556,
+      "index": 562,
       "hash": "2c4cc3ff6965ed4a675107e57198c329a92c47c7c8a691a60d7026067fb2cc3d",
       "preview": "The patterns in this report emerge from cross-referencing, not from any single s...",
       "length": 98
     },
     {
-      "index": 557,
+      "index": 563,
       "hash": "90492cc8942cef3b3b4f9b10bbdff4169abae7e8783e152e296bc443bd5f49b7",
       "preview": "The interactive map at /map contains all geolocated data points. For researchers...",
       "length": 103
     },
     {
-      "index": 558,
+      "index": 564,
       "hash": "a7c97d1a90b658bb707610dc235705800e943fc668fca66e38ec656a2f1c2175",
       "preview": "This report distinguishes between:",
       "length": 34
     },
     {
-      "index": 559,
+      "index": 565,
       "hash": "9de53f5cdc42549c586df6043df8b96ea1d12d74fb17c03a92675ecbf3f09e79",
       "preview": "If you find an error, a mischaracterization, or a claim that cannot be verified ...",
       "length": 201
     },
     {
-      "index": 560,
+      "index": 566,
       "hash": "43fe7763e9f9b09afb7b31468abcf33db325555fe5b73eab536fc9766967e342",
       "preview": "If you are building a case, writing an article, or conducting an investigation t...",
       "length": 127
     }
   ],
   "totalSections": 26,
-  "totalParagraphs": 561
+  "totalParagraphs": 567
 }
