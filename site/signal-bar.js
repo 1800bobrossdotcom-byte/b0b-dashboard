@@ -15,6 +15,7 @@
 
   // Order is deliberate: the bar opens on the lead track.
   var TRACKS = [
+    { id: 'SYaIakuWg-g', label: 'Hooverphonic &mdash; Barabas' },                          // Hooverphonic - Topic (licensed). Lead track.
     { id: 'HhZaHf8RP6g', label: 'Daft Punk &mdash; Veridis Quo' },                        // Daft Punk (artist channel)
     { id: 'Xv8FBjo1Y8I', label: 'Tracy Chapman &mdash; Talkin&rsquo; Bout a Revolution' }, // Tracy Chapman (artist channel)
     { id: 'uq-gYOrU8bA', label: 'Paul Simon &mdash; You Can Call Me Al' },                  // PaulSimonVEVO (official)
@@ -24,7 +25,7 @@
     { id: 'PtzhvJh9NRY', label: 'The Smiths &mdash; Bigmouth Strikes Again' },             // The Smiths (artist channel, official audio)
     { id: 'JKES3yfnD9U', label: 'Creedence Clearwater Revival &mdash; Have You Ever Seen the Rain' } // CCR (artist channel, official audio)
   ];
-  var LS_KEY = 'b0b_signal_v5';   // bump on every reorder: a stored index points into the old list
+  var LS_KEY = 'b0b_signal_v6';   // bump on every reorder: a stored index points into the old list
   var SAVE_MS = 1000;
   var player = null, ready = false, dur = 0, saveTimer = null, errCount = 0;
 
