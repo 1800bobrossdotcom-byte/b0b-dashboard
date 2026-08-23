@@ -1,9 +1,9 @@
 {
-  "generated": "2026-08-23T03:06:59.624Z",
+  "generated": "2026-08-23T03:30:20.299Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "960dabfa576e4817bec559f6b15575229ec050a9e528424d1e58f403321ac291",
+  "fullFileHash": "52368907f8de66bdb25fd2a502c6c66f55391b3153796230235538d049970239",
   "sectionBlocks": [
     {
       "id": "_preamble",
@@ -22,8 +22,8 @@
     },
     {
       "id": "II",
-      "hash": "baefa985f78218b7f5a2bcdc34541497c5e334765859cf2009084826afc710ff",
-      "length": 78156
+      "hash": "a2d2dce48cad08eabde887254e10271fb6abce98851861ca6d4563eba1e2d4f9",
+      "length": 79125
     },
     {
       "id": "III",
@@ -42,8 +42,8 @@
     },
     {
       "id": "VI",
-      "hash": "4e387baa7dcde0f64dd36fc689ffab23d448ca43a6d5c756ac9a07bfd05a0a7a",
-      "length": 9661
+      "hash": "504139cf773e90ddd108194cef2ebfa45266ca50b9335aef609c2e4feddee315",
+      "length": 10799
     },
     {
       "id": "VII",
@@ -445,9 +445,9 @@
     },
     {
       "index": 51,
-      "hash": "a79233cc451f8d6754061552e822dab4c146c03aae83419f08990e522d33f104",
+      "hash": "06061f86151c1657a64db8179f685c74dd01497dfec91fb1cabc77f511c936bf",
       "preview": "The three readings, tiered: (1) Suicide - the official ruling; supported by the ...",
-      "length": 1098
+      "length": 2067
     },
     {
       "index": 52,
