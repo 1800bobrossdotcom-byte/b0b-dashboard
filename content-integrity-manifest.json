@@ -1,9 +1,9 @@
 {
-  "generated": "2026-08-23T03:30:20.299Z",
+  "generated": "2026-08-23T23:15:49.967Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "52368907f8de66bdb25fd2a502c6c66f55391b3153796230235538d049970239",
+  "fullFileHash": "0804cc7ae803860a169251a9c0d63961185d98300f8d9f5486ed010a323b6395",
   "sectionBlocks": [
     {
       "id": "_preamble",
@@ -37,8 +37,8 @@
     },
     {
       "id": "V",
-      "hash": "c7e28336bf39491b3f51b62742a2ac5f296aa0893c43d8cdd24d8d8a19d928cb",
-      "length": 27011
+      "hash": "3af90b017b6c104e65d22e03fe90b99cc6d2a627ef74b071608642b01acbef0f",
+      "length": 28439
     },
     {
       "id": "VI",
@@ -102,8 +102,8 @@
     },
     {
       "id": "XVIII",
-      "hash": "bf2c58fae7428560bbcb512bffc92c9ae50c8ef72cf751569a216faca1abf49b",
-      "length": 45643
+      "hash": "a9a580e57de6e1fc48fa237372bce9d31ef98d1efa1de9c66007db86b4e527f3",
+      "length": 45788
     },
     {
       "id": "XIX",
@@ -949,15 +949,15 @@
     },
     {
       "index": 135,
-      "hash": "6e81f8994ab32d53ad27bbb27676a15a7f788398fefa8011876971c66475a522",
+      "hash": "959e713f33454d8e45f7f96230e6e8da453a0664555b3e69332acc75dcdf88d5",
       "preview": "Death (documented): went overboard from the yacht Lady Ghislaine off Gran Canari...",
-      "length": 565
+      "length": 795
     },
     {
       "index": 136,
-      "hash": "e7113316f28b7da848e199118035acb7e3862724dadc7b291c0ab705578c536c",
+      "hash": "f1a7d37382c340a73543cd28addc7f4965ade10d0e919ddc3924d07e2c541bbd",
       "preview": "Funeral (documented, with one legend flagged): buried 10 November 1991 on the Mo...",
-      "length": 808
+      "length": 1057
     },
     {
       "index": 137,
@@ -1015,9 +1015,9 @@
     },
     {
       "index": 146,
-      "hash": "943e8ba73d989aa87613d0431c52304291564f8e57816c0aff5855da3c398981",
+      "hash": "39f573a60cedb7f207d9dca5b97324a9ebf048bf021e4ac7fc95eabb3ab3116c",
       "preview": "The claim that Ghislaine Maxwell is herself an intelligence asset has exactly on...",
-      "length": 637
+      "length": 1586
     },
     {
       "index": 147,
