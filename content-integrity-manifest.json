@@ -1,9 +1,9 @@
 {
-  "generated": "2026-08-22T23:28:11.261Z",
+  "generated": "2026-08-23T03:06:59.624Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "4ed5a691a4ffbd46c490fe513e88748ea11c89ddde049fe5b44a7d95464dc633",
+  "fullFileHash": "960dabfa576e4817bec559f6b15575229ec050a9e528424d1e58f403321ac291",
   "sectionBlocks": [
     {
       "id": "_preamble",
@@ -22,8 +22,8 @@
     },
     {
       "id": "II",
-      "hash": "b91e0efe48c73691f95e2257a1e86608e827acd849858245e097fa2bf2ecaf39",
-      "length": 77099
+      "hash": "baefa985f78218b7f5a2bcdc34541497c5e334765859cf2009084826afc710ff",
+      "length": 78156
     },
     {
       "id": "III",
@@ -107,8 +107,8 @@
     },
     {
       "id": "XIX",
-      "hash": "5086fff699c58ef26ef0ca7faae16be6cfbfa970ee0feee425d1d2a5874a10e8",
-      "length": 97440
+      "hash": "2f19becd00fbaec8ec87c9299c736d94e89a5b49d0a3ee7fc775031cd6564781",
+      "length": 97482
     },
     {
       "id": "XX",
@@ -583,15 +583,15 @@
     },
     {
       "index": 74,
-      "hash": "6543cbe59600bcc20e4b4f1f9a2f9aed8c500eaaf44f85ed73a2fd2deb5e9c68",
+      "hash": "ae1c8822f763d1b1d8ce55f511e4e4ec594e869e9cc03dd9d93f709ea59e3b12",
       "preview": "Whatever the past holds, the present is a documented structural conflict. The ma...",
-      "length": 1339
+      "length": 2149
     },
     {
       "index": 75,
-      "hash": "ca0afcd21798fa61cd10d9a92b2978d0e476a3a9831e25c71e3031a67cf0f38f",
+      "hash": "fbc762414aada690709e6905c087d7e9067517fdb09225638ceb1b9370f50116",
       "preview": "The honest verdict. The record establishes a close 15-year friendship, documente...",
-      "length": 1044
+      "length": 1291
     },
     {
       "index": 76,
