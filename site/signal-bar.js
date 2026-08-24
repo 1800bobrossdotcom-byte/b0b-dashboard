@@ -1,9 +1,12 @@
 /* b0b.dev persistent signal bar — the signal playlist.
    One hidden YouTube (IFrame API) player, resumed across page loads via
    localStorage so the track feels continuous across /report and /map.
-   The site hosts no recording; YouTube's licensed player serves the audio,
-   and every track is taken from the rights-holder's own channel — the
-   auto-generated "- Topic" channels the labels supply, not a re-upload.
+   The site hosts no recording; YouTube's licensed player serves the audio.
+   Tracks are taken from the rights-holder's own channel wherever one exists —
+   the auto-generated "- Topic" channels the labels supply, not a re-upload.
+   ONE EXCEPTION, recorded here rather than left implicit: Overseer's
+   "Heligoland" has no locatable rights-holder upload, and the entry below
+   points at a private-account copy. Added deliberately, not by oversight.
    Note for whoever edits this next: several high-view uploads of these songs
    carry the word "Official" in the title while belonging to private accounts.
    Check the channel, not the title. */
@@ -16,6 +19,7 @@
   // Order is deliberate: the bar opens on the lead track.
   var TRACKS = [
     { id: 'SYaIakuWg-g', label: 'Hooverphonic &mdash; Barabas' },                          // Hooverphonic - Topic (licensed). Lead track.
+    { id: 'iU6nkE-g3BM', label: 'Overseer &mdash; Heligoland' },                           // FATLANTIC — NOT a rights-holder channel (see header). ~26min: long tail after the song.
     { id: 'sP3V7PxjdQo', label: 'Iron &amp; Wine &mdash; Evening on the Ground (Lilith&rsquo;s Song)' }, // Sub Pop (Iron & Wine's label, official)
     { id: 'HhZaHf8RP6g', label: 'Daft Punk &mdash; Veridis Quo' },                        // Daft Punk (artist channel)
     { id: 'Xv8FBjo1Y8I', label: 'Tracy Chapman &mdash; Talkin&rsquo; Bout a Revolution' }, // Tracy Chapman (artist channel)
@@ -26,7 +30,7 @@
     { id: 'PtzhvJh9NRY', label: 'The Smiths &mdash; Bigmouth Strikes Again' },             // The Smiths (artist channel, official audio)
     { id: 'JKES3yfnD9U', label: 'Creedence Clearwater Revival &mdash; Have You Ever Seen the Rain' } // CCR (artist channel, official audio)
   ];
-  var LS_KEY = 'b0b_signal_v7';   // bump on every reorder: a stored index points into the old list
+  var LS_KEY = 'b0b_signal_v8';   // bump on every reorder: a stored index points into the old list
   var SAVE_MS = 1000;
   var player = null, ready = false, dur = 0, saveTimer = null, errCount = 0;
 
