@@ -78,8 +78,15 @@
     // Never let a stray element widen the page past the viewport (keeps the
     // mobile breakpoint firing so the sidebar collapses instead of shrinking text).
     'html,body{overflow-x:hidden;max-width:100%}',
-    '.back-to-top{bottom:64px !important}',
-    '.leaflet-bottom{bottom:48px !important}',
+    // Publish our own height so pages can stack their bottom furniture on top
+    // of the bar instead of under it. Anything fixed to bottom:0 on a page that
+    // loads this file WILL be covered otherwise - that is how the /map
+    // countermeasures drawer got buried.
+    ':root{--b0b-signal-h:calc(46px + env(safe-area-inset-bottom,0px))}',
+    '.back-to-top{bottom:calc(var(--b0b-signal-h,46px) + 18px) !important}',
+    // Pages with their own bottom stack (see /map) override this with a
+    // higher-specificity rule; this is the default for pages without one.
+    '.leaflet-bottom{bottom:calc(var(--b0b-signal-h,46px) + 2px) !important}',
     '@media(max-width:600px){#b0b-signal-title{max-width:30vw}#b0b-signal-upd{display:none}#b0b-signal-visitors{display:none}#b0b-signal-time{display:none}',
     '#b0b-signal-bar{gap:6px}#b0b-signal-bar button{width:27px;height:27px;min-width:27px;font-size:12px}}',
     '@media(max-width:380px){#b0b-signal-title small{display:none}#b0b-signal-bar{gap:4px}',

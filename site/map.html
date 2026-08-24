@@ -24,7 +24,7 @@
     body { background: var(--bg); color: var(--text); font-family: 'Courier New', monospace; }
     #map { width: 100%; height: calc(100vh - 44px); }
     #map.firstpeoples-mode .leaflet-tile-pane { filter: sepia(0.35) saturate(0.8) brightness(0.9); }
-    .leaflet-bottom { bottom: 36px !important; }
+    body .leaflet-bottom { bottom: calc(var(--b0b-signal-h, 0px) + 40px) !important; }
     .header {
       background: var(--bg);
       border-bottom: 1px solid var(--border);
@@ -49,7 +49,7 @@
     .header nav a:hover { background: var(--cyan); color: var(--on-accent); }
     .legend {
       position: absolute;
-      bottom: 46px;
+      bottom: calc(var(--b0b-signal-h, 0px) + 50px);
       left: 10px;
       z-index: 1000;
       background: var(--panel-c);
@@ -299,9 +299,15 @@
 
 
     /* ===================== COUNTERMEASURES DRAWER ===================== */
-    .cm-drawer {
+    /* Bottom stack, from the floor up: signal bar (46px, injected by
+       signal-bar.js) -> countermeasures drawer (36px bar) -> leaflet
+       attribution -> legend. Offsets key off --b0b-signal-h, which the signal
+       bar publishes; the 0px fallback restores the original layout if that
+       script never loads. body- prefix beats signal-bar.js's own rules, which
+       are appended to <head> at runtime and would otherwise win the tie. */
+    body .cm-drawer {
       position: fixed;
-      bottom: 0; left: 0; right: 0;
+      bottom: var(--b0b-signal-h, 0px); left: 0; right: 0;
       z-index: 1002;
       background: var(--panel-a);
       border-top: 1px solid var(--border);
@@ -373,7 +379,7 @@
       .cm-dot-label { display: none; }
       .cm-drawer.expanded .cm-drawer-content { grid-template-columns: 1fr; max-height: 60vh; }
 
-      .legend { bottom: 40px; left: 8px; max-width: 160px; font-size: 0.65rem; }
+      .legend { bottom: calc(var(--b0b-signal-h, 0px) + 44px); left: 8px; max-width: 160px; font-size: 0.65rem; }
       .legend-body { display: none; }
       .legend-body.expanded { display: block; }
       .legend-header { padding: 6px 10px; }
@@ -394,7 +400,7 @@
 
       .timeline-panel { max-height: 45vh; bottom: 32px; }
       #timelineCanvas { height: 150px; }
-      .leaflet-bottom { bottom: 32px !important; }
+      body .leaflet-bottom { bottom: calc(var(--b0b-signal-h, 0px) + 36px) !important; }
     }
 
     @media (max-width: 400px) {
