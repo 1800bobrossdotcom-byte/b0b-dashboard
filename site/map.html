@@ -308,9 +308,9 @@
     body .cm-drawer {
       position: fixed;
       bottom: var(--b0b-signal-h, 46px); left: 0; right: 0;
-      z-index: 1002;
-      background: var(--panel-a);
-      border-top: 1px solid var(--border);
+      z-index: 2147482000;
+      background: var(--panel-a, rgba(10,10,10,0.98));
+      border-top: 1px solid var(--border, #333);
       font-family: 'Courier New', monospace;
     }
     .cm-drawer-bar {
@@ -324,7 +324,7 @@
     }
     .cm-drawer-bar:hover { background: rgba(255,68,68,0.05); }
     .cm-drawer-bar h3 {
-      color: var(--red);
+      color: var(--red, #ff4444);
       font-size: 0.7rem;
       letter-spacing: 2px;
       margin: 0;
@@ -5774,7 +5774,14 @@ function loadEmbeddedIndigenousTerritories() {
 (function(){var ls=document.querySelector('.b0b-ls');var nav=document.querySelector('.header nav');if(ls&&nav){ls.style.position='static';nav.appendChild(ls);}})();
 </script>
 <script>
-(function(){if(window.parent!==window){var cm=document.getElementById('cmDrawer');if(cm)cm.style.display='none';document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var h=a.getAttribute('href');if(!h)return;if(h==='/logout'){e.preventDefault();window.top.location.href='/logout'}else if(h==='/'||h==='/report'||h==='/map'){e.preventDefault();window.parent.postMessage({navigate:h},location.origin)}})}})();
+/* Framed-context shim. NOTE: this used to also do cm.style.display='none' on
+   #cmDrawer. That inline style beat every stylesheet rule and made the
+   countermeasures panel invisible whenever window.parent!==window - which is
+   true in embedded/in-app webviews, not just real iframes. Nothing loads /map
+   in an iframe any more, so the hide was vestigial and is removed. Do not
+   reintroduce it: an inline display:none here is undebuggable from the served
+   HTML, because curl-and-grep cannot see runtime DOM mutation. */
+(function(){if(window.parent!==window){document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var h=a.getAttribute('href');if(!h)return;if(h==='/logout'){e.preventDefault();window.top.location.href='/logout'}else if(h==='/'||h==='/report'||h==='/map'){e.preventDefault();window.parent.postMessage({navigate:h},location.origin)}})}})();
 </script>
 <script>
 // GOES-16 Earth widget — refresh every 10 minutes
