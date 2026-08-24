@@ -24,7 +24,7 @@
     body { background: var(--bg); color: var(--text); font-family: 'Courier New', monospace; }
     #map { width: 100%; height: calc(100vh - 44px); }
     #map.firstpeoples-mode .leaflet-tile-pane { filter: sepia(0.35) saturate(0.8) brightness(0.9); }
-    body .leaflet-bottom { bottom: calc(var(--b0b-signal-h, 0px) + 40px) !important; }
+    body .leaflet-bottom { bottom: calc(var(--b0b-signal-h, 46px) + 40px) !important; }
     .header {
       background: var(--bg);
       border-bottom: 1px solid var(--border);
@@ -49,7 +49,7 @@
     .header nav a:hover { background: var(--cyan); color: var(--on-accent); }
     .legend {
       position: absolute;
-      bottom: calc(var(--b0b-signal-h, 0px) + 50px);
+      bottom: calc(var(--b0b-signal-h, 46px) + 50px);
       left: 10px;
       z-index: 1000;
       background: var(--panel-c);
@@ -307,7 +307,7 @@
        are appended to <head> at runtime and would otherwise win the tie. */
     body .cm-drawer {
       position: fixed;
-      bottom: var(--b0b-signal-h, 0px); left: 0; right: 0;
+      bottom: var(--b0b-signal-h, 46px); left: 0; right: 0;
       z-index: 1002;
       background: var(--panel-a);
       border-top: 1px solid var(--border);
@@ -379,7 +379,7 @@
       .cm-dot-label { display: none; }
       .cm-drawer.expanded .cm-drawer-content { grid-template-columns: 1fr; max-height: 60vh; }
 
-      .legend { bottom: calc(var(--b0b-signal-h, 0px) + 44px); left: 8px; max-width: 160px; font-size: 0.65rem; }
+      .legend { bottom: calc(var(--b0b-signal-h, 46px) + 44px); left: 8px; max-width: 160px; font-size: 0.65rem; }
       .legend-body { display: none; }
       .legend-body.expanded { display: block; }
       .legend-header { padding: 6px 10px; }
@@ -400,7 +400,7 @@
 
       .timeline-panel { max-height: 45vh; bottom: 32px; }
       #timelineCanvas { height: 150px; }
-      body .leaflet-bottom { bottom: calc(var(--b0b-signal-h, 0px) + 36px) !important; }
+      body .leaflet-bottom { bottom: calc(var(--b0b-signal-h, 46px) + 36px) !important; }
     }
 
     @media (max-width: 400px) {
@@ -5787,7 +5787,7 @@ function loadEmbeddedIndigenousTerritories() {
 })();
 </script>
 
-<script src="/signal-bar.js" defer></script>
+<script src="/signal-bar.js?v=8" defer></script>
 <script src="/theme.js" defer></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>

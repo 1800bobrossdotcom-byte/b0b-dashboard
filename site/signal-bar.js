@@ -4,9 +4,13 @@
    The site hosts no recording; YouTube's licensed player serves the audio.
    Tracks are taken from the rights-holder's own channel wherever one exists —
    the auto-generated "- Topic" channels the labels supply, not a re-upload.
-   ONE EXCEPTION, recorded here rather than left implicit: Overseer's
-   "Heligoland" has no locatable rights-holder upload, and the entry below
-   points at a private-account copy. Added deliberately, not by oversight.
+   TWO EXCEPTIONS, recorded here rather than left implicit. Overseer's
+   "Heligoland" and billy woods' "Spider Hole" have no locatable rights-holder
+   upload (Backwoodz keeps much of its catalogue off the mainstream platforms),
+   so both entries point at private-account copies. The Spider Hole copy is
+   additionally a CENSORED edit - that is stated in its visible label, not just
+   here, because listeners should not be handed an altered cut silently. Both
+   added deliberately, not by oversight; swap the ids if better sources appear.
    Note for whoever edits this next: several high-view uploads of these songs
    carry the word "Official" in the title while belonging to private accounts.
    Check the channel, not the title. */
@@ -23,14 +27,15 @@
     { id: 'sP3V7PxjdQo', label: 'Iron &amp; Wine &mdash; Evening on the Ground (Lilith&rsquo;s Song)' }, // Sub Pop (Iron & Wine's label, official)
     { id: 'HhZaHf8RP6g', label: 'Daft Punk &mdash; Veridis Quo' },                        // Daft Punk (artist channel)
     { id: 'Xv8FBjo1Y8I', label: 'Tracy Chapman &mdash; Talkin&rsquo; Bout a Revolution' }, // Tracy Chapman (artist channel)
-    { id: 'uq-gYOrU8bA', label: 'Paul Simon &mdash; You Can Call Me Al' },                  // PaulSimonVEVO (official)
+    { id: 'GP6a-7MP91g', label: 'Paul Simon &mdash; Graceland' },                          // PaulSimonVEVO (official audio)
+    { id: '30cS-8s5wXs', label: 'billy woods &mdash; Spider Hole (clean edit)' },          // 'relly rel' — NOT rights-holder, and a censored cut (see header)
     { id: 'rx2_iHftARo', label: 'Talking Heads &mdash; Slippery People' },                 // Talking Heads - Topic (licensed)
     { id: 'qMDxrXFQwU8', label: 'Filter &mdash; Hey Man Nice Shot' },                      // Filter - Topic (licensed)
     { id: '9D2R69gVyZ0', label: 'TOOL &mdash; 7empest' },                                   // TOOLVEVO (official). 15:43 - much longer than the rest.
     { id: 'PtzhvJh9NRY', label: 'The Smiths &mdash; Bigmouth Strikes Again' },             // The Smiths (artist channel, official audio)
     { id: 'JKES3yfnD9U', label: 'Creedence Clearwater Revival &mdash; Have You Ever Seen the Rain' } // CCR (artist channel, official audio)
   ];
-  var LS_KEY = 'b0b_signal_v8';   // bump on every reorder: a stored index points into the old list
+  var LS_KEY = 'b0b_signal_v9';   // bump on every reorder: a stored index points into the old list
   var SAVE_MS = 1000;
   var player = null, ready = false, dur = 0, saveTimer = null, errCount = 0;
 

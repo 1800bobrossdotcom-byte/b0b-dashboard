@@ -1,9 +1,9 @@
 {
-  "generated": "2026-08-24T03:36:18.262Z",
+  "generated": "2026-08-24T04:27:07.930Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "7f6d9b8169e96566b2fd2cc46d97ee66d2d921a926f5ae651d46ba2b4731c22e",
+  "fullFileHash": "d6d0c0f46f57fb3da4f3f372750cf49f6a328ed569d35969ba5f3e54df17c794",
   "sectionBlocks": [
     {
       "id": "_preamble",
@@ -132,8 +132,8 @@
     },
     {
       "id": "contact",
-      "hash": "da8a66f0b02b560742785c7d5b1a97485181852551b3d2d6f2c38abdf9c47505",
-      "length": 31262
+      "hash": "baa7f95587e2fa9c1191630aeb1207dd8d7544c37e70a422c0d7ba94c1389eb8",
+      "length": 31131
     }
   ],
   "paragraphHashes": [
@@ -3439,9 +3439,9 @@
     },
     {
       "index": 550,
-      "hash": "61db8c0b4530a5c596f835d7e79e8760b0f8e37ed529e6438e2b0b104e6d6184",
-      "preview": "What is documented. The single came off Graceland in 1986 and reached No. 23 on ...",
-      "length": 642
+      "hash": "98dc592b91a5bdb9844c2b2eb49fcd2bbd0db64899c38413fd87e54cd27f60b0",
+      "preview": "What is documented. &ldquo;Graceland&rdquo; is the title track of the 1986 album...",
+      "length": 520
     },
     {
       "index": 551,
