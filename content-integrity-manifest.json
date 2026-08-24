@@ -1,9 +1,9 @@
 {
-  "generated": "2026-08-24T03:08:43.442Z",
+  "generated": "2026-08-24T03:12:31.838Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "f582c311f149583bb88970420f3726b5e3850035080d9ec277628bee9ae8942b",
+  "fullFileHash": "7f6d9b8169e96566b2fd2cc46d97ee66d2d921a926f5ae651d46ba2b4731c22e",
   "sectionBlocks": [
     {
       "id": "_preamble",
@@ -22,23 +22,23 @@
     },
     {
       "id": "II",
-      "hash": "756874a52b72d9f3793105b5e3da01be131118f65fc28358b09465ec58555056",
-      "length": 82656
+      "hash": "b001d50cc2620e84603b5ed24bc93e79091306c913e78ed67525150e2b580121",
+      "length": 83398
     },
     {
       "id": "III",
-      "hash": "8fd4525625f1e288cc6482612f421e40d323d9dda35030932d0493c9af595313",
-      "length": 27888
+      "hash": "8b44d96d60126328eb0d342f673b3dadd5cc31e0bcb0a78ef354031d91d0cae2",
+      "length": 27999
     },
     {
       "id": "IV",
-      "hash": "242a321c7b2a3639886e9ecae60122b50983c2c62b19f9dcd02eec7d34ff1375",
-      "length": 38627
+      "hash": "3f7541f54ce59da97215b55d5fe55e295dc274d5fe56817cdc555b2c208ac163",
+      "length": 38837
     },
     {
       "id": "V",
-      "hash": "3af90b017b6c104e65d22e03fe90b99cc6d2a627ef74b071608642b01acbef0f",
-      "length": 28439
+      "hash": "c784dbe2311d7f5a5a5a0be62503e86cd8999746e6c407fd3f9efd941ddd3989",
+      "length": 28826
     },
     {
       "id": "VI",
@@ -47,13 +47,13 @@
     },
     {
       "id": "VII",
-      "hash": "4d1be3480d977924d7a584092c5ad95d600996029bf40426bfc1ebdd9c8a2628",
-      "length": 136143
+      "hash": "3c7f1b3e9accaec052205a59d8ceb6dae370f5f176cc27acc87cb7eb23fc952e",
+      "length": 136491
     },
     {
       "id": "VIII",
-      "hash": "ef3f4dea0e510721f74426948b499873374b7b13d78109aae1543fb1c4fa09a3",
-      "length": 23132
+      "hash": "3241806c690a802cff54351fd49407e0e1ed5f2ee324a66a6a6dbe4f7abb0e5f",
+      "length": 23417
     },
     {
       "id": "IX",
@@ -62,18 +62,18 @@
     },
     {
       "id": "X",
-      "hash": "946dcdbb8837c094e1e6e3689851daab142a9c019862d873797b5e65535feafa",
-      "length": 63909
+      "hash": "2838283a0c5ff02ee8836e1c84b24a97ecbb58ed53070347f526ff7139b420ed",
+      "length": 64181
     },
     {
       "id": "XI",
-      "hash": "e5b23da29cee341f17efa5cba44014902c6b92662f0652317adc86136dd0d0da",
-      "length": 7198
+      "hash": "90b5378d4e0882dfb930f253a5e5b2bc29cc89b75936277fca456ff72fad1dc6",
+      "length": 7384
     },
     {
       "id": "XII",
-      "hash": "e2a1f91e59b3c42b4787f6844b055da6fe75b30c9b0a858331a25073cfec734c",
-      "length": 27215
+      "hash": "4589172599b2bbf9eaa1bed4402666cd7789be104e9ea9317eac37d096b7675c",
+      "length": 27312
     },
     {
       "id": "XIII",
@@ -92,8 +92,8 @@
     },
     {
       "id": "XVI",
-      "hash": "f42adcfeb93c481f44631a13a24de5c6f62b9d4cb1593d08254b3744e7bf6e72",
-      "length": 64919
+      "hash": "6dfe6d2ac4d48c41301ed13a6dc28e9eb131a59b30f63b55557cff784baf9d3c",
+      "length": 65173
     },
     {
       "id": "XVII",
@@ -102,8 +102,8 @@
     },
     {
       "id": "XVIII",
-      "hash": "bacaaeb5ebfe2dc1afa77d819fe67f90a92989720c7f81a8ad5ee3299b9b59a7",
-      "length": 45863
+      "hash": "34330abd36a67b2725d598512313268568d8bc2eec7d8a78ff87b8eb596c81aa",
+      "length": 45994
     },
     {
       "id": "XIX",
@@ -122,8 +122,8 @@
     },
     {
       "id": "XXII",
-      "hash": "30e4a7ecd758176142e82fbc095b30eccb2d23cc440a07a85a5c4a1905fd7452",
-      "length": 26771
+      "hash": "d4210f9ee62fadaa9e70cc0f057c147747ea99dd522daf70a2267ba7d8516aad",
+      "length": 26793
     },
     {
       "id": "XXIII",
@@ -132,8 +132,8 @@
     },
     {
       "id": "contact",
-      "hash": "1807d915a9d867a54cf82fd2f5e296f2c6199e7ba114e87967b3c5c1fbc20ccf",
-      "length": 30862
+      "hash": "da8a66f0b02b560742785c7d5b1a97485181852551b3d2d6f2c38abdf9c47505",
+      "length": 31262
     }
   ],
   "paragraphHashes": [
@@ -595,9 +595,9 @@
     },
     {
       "index": 76,
-      "hash": "ae1c8822f763d1b1d8ce55f511e4e4ec594e869e9cc03dd9d93f709ea59e3b12",
+      "hash": "a507433026c013ef9c12d79d424014e51910e9bfd220e9d5d7dcb0a96903a852",
       "preview": "Whatever the past holds, the present is a documented structural conflict. The ma...",
-      "length": 2149
+      "length": 2355
     },
     {
       "index": 77,
@@ -649,9 +649,9 @@
     },
     {
       "index": 85,
-      "hash": "24e83cbf494a2d6335cea33bde75dca6bab98787625f91fca12c8bc6d77895d7",
+      "hash": "730f8eb4c98a830edf0d22a43297d8a382190378cdcdbea5800542223f069189",
       "preview": "Does that substrate connect - or only share a hub? (the bridge, tiered.) Branch ...",
-      "length": 2558
+      "length": 2911
     },
     {
       "index": 86,
@@ -673,9 +673,9 @@
     },
     {
       "index": 89,
-      "hash": "409a166428bec8940dbf0ce1f324c023ce5dbdc1ed6ce32060ef1ff985b061af",
+      "hash": "aa9c490594a31cc2ba0e640b55af88039796a7361fe39c635865cc324719901e",
       "preview": "Return to the six-degrees finding (Section III) and read it through this fork. T...",
-      "length": 1208
+      "length": 1391
     },
     {
       "index": 90,
@@ -859,9 +859,9 @@
     },
     {
       "index": 120,
-      "hash": "eb696198846b852160aad8cc7635086a075309d2fedcc3099ed088d4dbf4b744",
+      "hash": "b71dce757859bcf3cf3a4b7a716a32aac6f1f8af2a60f96946c5864fbddd856f",
       "preview": "This node is included as much to discipline a claim as to make one, because it i...",
-      "length": 499
+      "length": 709
     },
     {
       "index": 121,
@@ -1015,15 +1015,15 @@
     },
     {
       "index": 146,
-      "hash": "4f317a18a0345e30059433715a27aa9bd7ff5dfe0e5f628175250341f5ed8b76",
+      "hash": "e728b1fa1cf451e450b0447514b10e256239bd8ea178d3b64c38ffdd58fe4be1",
       "preview": "The flat sentence &ldquo;they&rsquo;re dead&rdquo; understates a documented regu...",
-      "length": 748
+      "length": 806
     },
     {
       "index": 147,
-      "hash": "69fd1d7654e51c7f78235d12d460e4e8f5fc1e0d9878b3c10c543cfbafe3a93e",
+      "hash": "9a093bd7f8011c3cf8f9aa43e6fc3f6acfbc3ef57f3960b67861f0ddc8a1ec6d",
       "preview": "The reading, held at tier. (The count is kept honest: lower-tier deaths in the o...",
-      "length": 1484
+      "length": 1684
     },
     {
       "index": 148,
@@ -1045,9 +1045,9 @@
     },
     {
       "index": 151,
-      "hash": "8a0ba9ec0266aa4a2de3c2662f9f733027dea1402d784e7e6d3ec4330699af0f",
+      "hash": "1f6e31e3a9e12c8b580cde98041a61a6579f5096ca6830300c07b13e84d35c94",
       "preview": "That is why the map converges on her, and why her silence is the report&rsquo;s ...",
-      "length": 1434
+      "length": 1563
     },
     {
       "index": 152,
@@ -1135,9 +1135,9 @@
     },
     {
       "index": 166,
-      "hash": "9a38d72e8f3b35e249bfe98c6ef12edb1cccb1f31a8656cb9238d468b89b3bfc",
+      "hash": "c969247516fbaa444d81ea11e93ccd896ecfb8eed92f83a04dc74d3b37f1b071",
       "preview": "Three territories worldwide operate as sovereign enclaves within sovereign natio...",
-      "length": 346
+      "length": 461
     },
     {
       "index": 167,
@@ -1435,9 +1435,9 @@
     },
     {
       "index": 216,
-      "hash": "38d6d9e6296bb7c263707c82e8e9f4795bc97359a80e47345b4b15402623ebd8",
+      "hash": "eab8379cf24d8ad3936e3d7a01636dc00f055912aa6adabcf48fc1fdf6e87e98",
       "preview": "VALIS, ECCO, and the Download Pattern: Philip K. Dick's 1974 experience - which ...",
-      "length": 882
+      "length": 952
     },
     {
       "index": 217,
@@ -1645,9 +1645,9 @@
     },
     {
       "index": 251,
-      "hash": "871c21ec4ed809e810d331ec54243e9ffa07cf37759bc27bafca216d9ffa8f21",
+      "hash": "d0a088029d1788bb9e391410d37f095e40f97159f9cafffdb41340422c0e7601",
       "preview": "This section argues that control of a network runs through its governance chokep...",
-      "length": 778
+      "length": 920
     },
     {
       "index": 252,
@@ -1939,9 +1939,9 @@
     },
     {
       "index": 300,
-      "hash": "6d51d23542e487ea6e5b712cc5e425f62afe8f6164f769b5ccb944c25f494357",
+      "hash": "4b10e33be262e37c7d28bc11e2a926b37f4ab0ac5cb42e85f7d30e10707748f0",
       "preview": "PATTERN DISCOVERY - THE NAME IS THE TELL: \"Minerva\" appears twice in the documen...",
-      "length": 636
+      "length": 736
     },
     {
       "index": 301,
@@ -2257,9 +2257,9 @@
     },
     {
       "index": 353,
-      "hash": "16058a2acad355ddc78c8c4f66fc25719753312302135028a489e9d2b4681ce0",
-      "preview": "The \"New\" is the tell. It marks a franchise operation.",
-      "length": 54
+      "hash": "dc3d9be08e35b81ad22edc215925834c64ed63560c735d0c6c3ae36aa09c93cb",
+      "preview": "The \"New\" marks the naming convention, not the operation - and by the template a...",
+      "length": 240
     },
     {
       "index": 354,
@@ -2659,9 +2659,9 @@
     },
     {
       "index": 420,
-      "hash": "67c916cac9c9c44d67fdba9d801b97e4b709804e70953e23716de7581f017479",
+      "hash": "9633dbb4a6bef2775aee215018fb67002984e281208022ffab857184a264f07a",
       "preview": "When a JPL employee who co-invented strategic rocket engine materials vanishes w...",
-      "length": 371
+      "length": 625
     },
     {
       "index": 421,
