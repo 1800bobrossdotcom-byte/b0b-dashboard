@@ -1,0 +1,22 @@
+name: Live Check
+
+# Catches silent deploy failures: a push can land on main while the Vercel
+# webhook never fires, leaving production serving stale content with no signal.
+# Compares the live build's content-manifest timestamp against this repo.
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: '0 */6 * * *'   # drift catcher between pushes
+  workflow_dispatch:
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Verify production matches this commit
+        run: node scripts/check-live.js --wait
