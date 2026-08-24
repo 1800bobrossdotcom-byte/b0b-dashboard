@@ -1,9 +1,9 @@
 {
-  "generated": "2026-08-24T02:36:17.949Z",
+  "generated": "2026-08-24T03:00:57.497Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "035aa401e662c50e436d9b58b96fdab3af608ca4f59dea581f08fd08a74fc743",
+  "fullFileHash": "3f097afd9bc66bd87cadd97156b6bcfdb7435c3cd91027cd4e579532bdee4c02",
   "sectionBlocks": [
     {
       "id": "_preamble",
@@ -22,8 +22,8 @@
     },
     {
       "id": "II",
-      "hash": "572284c62f4ffce95534f0974e354bbf236c689209029574b9a168c8527f3338",
-      "length": 81804
+      "hash": "25fc302f986b2b3bbd81824dd0070ffe3b7ece18fb26517520c267c57e04e6f6",
+      "length": 82633
     },
     {
       "id": "III",
@@ -613,9 +613,9 @@
     },
     {
       "index": 79,
-      "hash": "34977eda292f79b6f7f59491851543effb1d5907bf9cf2725e841ab40f6b6a4e",
+      "hash": "b58bc1ecc3acbc6508046b8b3434ef256703f58e0da7530b51501c3acd82a35d",
       "preview": "Branch A - the operation (labeled hypothesis; largely unprovable from the public...",
-      "length": 1918
+      "length": 2747
     },
     {
       "index": 80,
