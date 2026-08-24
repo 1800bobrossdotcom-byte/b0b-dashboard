@@ -1,14 +1,14 @@
 {
-  "generated": "2026-08-24T02:07:52.729Z",
+  "generated": "2026-08-24T02:12:55.301Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "416059b198ac037feb782731e1a9ddebb28f47f64924ff3ca474744ff2a2a0ea",
+  "fullFileHash": "ba62ef1d3122c9cc8639cc27adc592a134c22105e57dfbc70092334b67afa065",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "b8675c64dd294803c19ef4cbcccdfc509a0a0c73b053b30bc4b76b5ed2212710",
-      "length": 26715
+      "hash": "2a4ae23418745bf07f34d5c10d74ace63d6dbee358424ca94c51b697ce90f349",
+      "length": 27279
     },
     {
       "id": "to-those-inside",
@@ -163,9 +163,9 @@
     },
     {
       "index": 4,
-      "hash": "2fd7eb14dc2a9955f4e61826fa9e02913ae6d6f0462fa4206356368b1354c623",
+      "hash": "1b7a32b90d6b170d259d027df74d918c3e35201e3a0b0e93d4ffb0f5e2926d4d",
       "preview": "Ars est celare artem. &ldquo;It is art to conceal art&rdquo; - the second initia...",
-      "length": 1586
+      "length": 1897
     },
     {
       "index": 5,
