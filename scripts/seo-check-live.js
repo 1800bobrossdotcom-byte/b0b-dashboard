@@ -39,6 +39,15 @@ function check(name, ok, detail) {
     page.status === 200 && html.includes('rel="canonical"') && !html.includes('id="gate"'), `HTTP ${page.status}`);
   check('served page carries no noindex', !/name="robots"[^>]*noindex/.test(html));
 
+  // Ownership: the meta tag is the method that survives this platform - Vercel
+  // intercepts .html paths before the function runs, so the file method does
+  // not work here. Checked on the gate page, which is what Google's verifier
+  // (a "Google-Site-Verification" UA, not Googlebot) actually receives.
+  const gate = await fetch(`${BASE}/`);
+  const gateHtml = await gate.text();
+  check('Search Console meta tag live on the gate page',
+    gateHtml.includes('content="TsPEDsaL88qvOxa0dWejCZFKVU37Y7Vk5v5HKcp5kL0"'), `HTTP ${gate.status}`);
+
   const alias = await fetch(`${BASE}/tones-shield`, { redirect: 'manual' });
   check('alias 301 live', alias.status === 301 || alias.status === 308,
     `HTTP ${alias.status} -> ${alias.headers.get('location')}`);

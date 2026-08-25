@@ -85,6 +85,24 @@ async function main() {
       `HTTP ${r.status}: ${JSON.stringify(r.body.slice(0, 60))}`);
   }
 
+  {
+    // Ownership is proven by the meta tag, not the file: Vercel handles .html
+    // paths before the function sees them, so the /google<token>.html route
+    // never runs in production even though it works locally. The tag must be
+    // on the gate page - Google's verifier sends a "Google-Site-Verification"
+    // user-agent, which is deliberately not on the crawler allowlist.
+    const TAG = 'content="TsPEDsaL88qvOxa0dWejCZFKVU37Y7Vk5v5HKcp5kL0"';
+    const gate = await request(server, { path: '/', headers: HTTPS });
+    check('Search Console meta tag is on the gate page (what the verifier sees)',
+      gate.body.includes('google-site-verification') && gate.body.includes(TAG));
+    const bot = await request(server, { path: '/', headers: asBot() });
+    check('Search Console meta tag is also on the crawler-served homepage',
+      bot.body.includes('google-site-verification') && bot.body.includes(TAG));
+    const verifierUA = await request(server, { path: '/', headers: { ...HTTPS, 'user-agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)' } });
+    check("Google's verification fetcher receives a page carrying the tag",
+      verifierUA.status === 200 && verifierUA.body.includes(TAG), `HTTP ${verifierUA.status}`);
+  }
+
   console.log('\nCrawler access and its limits');
   {
     const r = await request(server, { path: '/report', headers: asBot() });
