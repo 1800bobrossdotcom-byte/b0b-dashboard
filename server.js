@@ -8,10 +8,30 @@ const fs = require('fs');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const ACCESS_COOKIE = 'b0b_access';
-const ACCESS_PASSWORD = process.env.B0B_ACCESS_PASSWORD || 'never2501';
 const ACCESS_SUBJECT = 'b0b';
 const ACCESS_TTL_SECONDS = 60 * 60 * 24;
 const COOKIE_SECRET = process.env.B0B_COOKIE_SECRET || crypto.randomBytes(32).toString('hex');
+
+// Hosts this site will redirect to. The HTTP->HTTPS redirect below built its
+// Location from req.hostname, which with 'trust proxy' resolves from the
+// client-supplied X-Forwarded-Host / Host header. That let anyone turn
+// b0b.dev into an open redirect - GET / with "Host: evil.example" answered
+// "301 -> https://evil.example/" - which is exactly the link-laundering
+// primitive a phishing campaign wants to borrow from a trusted domain.
+// Unrecognised hosts are now sent to the canonical host instead of echoed.
+const CANONICAL_HOST = (process.env.B0B_CANONICAL_HOST || 'www.b0b.dev').toLowerCase();
+const ALLOWED_HOSTS = new Set(
+  (process.env.B0B_ALLOWED_HOSTS || 'www.b0b.dev,b0b.dev,localhost,127.0.0.1')
+    .split(',').map(h => h.trim().toLowerCase()).filter(Boolean)
+);
+function safeRedirectHost(req) {
+  const host = String(req.hostname || '').toLowerCase();
+  if (ALLOWED_HOSTS.has(host)) return host;
+  // Vercel preview deployments get a generated *.vercel.app hostname that
+  // cannot be enumerated ahead of time; the suffix is the check.
+  if (/^[a-z0-9-]+(\.[a-z0-9-]+)*\.vercel\.app$/.test(host)) return host;
+  return CANONICAL_HOST;
+}
 
 // ═══════════════════════════════════════════════════════════
 // b0b — pixel gateway → full site
@@ -38,7 +58,9 @@ if (!process.env.B0B_COOKIE_SECRET) {
 app.disable('x-powered-by');
 app.disable('etag');
 app.set('trust proxy', 1);
-app.use(express.json({ limit: '4kb' }));
+// Scoped to /api/gate: it is the only route with a request body, and a parser
+// mounted app-wide is reachable surface on every other route for no benefit.
+app.use('/api/gate', express.json({ limit: '4kb' }));
 
 app.use(rateLimit({
   windowMs: 60_000,
@@ -51,7 +73,7 @@ app.use(rateLimit({
 
 app.use((req, res, next) => {
   if (req.headers['x-forwarded-proto'] !== 'https' && process.env.NODE_ENV !== 'development') {
-    return res.redirect(301, 'https://' + req.hostname + req.url);
+    return res.redirect(301, 'https://' + safeRedirectHost(req) + req.url);
   }
   next();
 });
@@ -106,6 +128,7 @@ function isValidAccessToken(token) {
   if (!sub || !exp || !sig) return false;
   // Verify signature first (timing-safe), then enforce the signed expiry.
   if (!safeEqual(sig, signValue(`${sub}.${exp}`))) return false;
+  if (Buffer.from(sub, 'base64url').toString('utf8') !== ACCESS_SUBJECT) return false;
   const expiryMs = Number(Buffer.from(exp, 'base64url').toString('utf8'));
   if (!Number.isFinite(expiryMs) || Date.now() > expiryMs) return false;
   return true;
@@ -143,7 +166,18 @@ function pixelCSP(nonce) {
 function siteCSP(nonce) {
   return {
     defaultSrc: ["'self'"],
-    scriptSrc: ["'self'", "'unsafe-inline'", 'https://www.youtube.com', 'https://www.youtube-nocookie.com'],
+    // Nonce, not 'unsafe-inline'. With 'unsafe-inline' in script-src, any
+    // injected <script> executes and the CSP contributes nothing against XSS -
+    // the header was there but the protection was not. Every inline block in
+    // site/*.html is the bare <script> form and gets stamped with this nonce at
+    // serve time (see the page route); external files stay covered by 'self'.
+    // A browser that understands nonces ignores 'unsafe-inline' anyway, so
+    // nothing is lost by removing it, and injected markup no longer runs.
+    scriptSrc: ["'self'", `'nonce-${nonce}'`, 'https://www.youtube.com', 'https://www.youtube-nocookie.com'],
+    // Inline handlers (onclick= and friends) are governed by this separate
+    // directive and are not covered by the nonce. ~250 of them are spread
+    // across the pages, so removing this is its own piece of work; script-src
+    // is the one that stops injected <script> blocks.
     scriptSrcAttr: ["'unsafe-inline'"],
     styleSrc: ["'self'", "'unsafe-inline'"],
     imgSrc: ["'self'", 'data:', 'blob:', 'https://*.tile.openstreetmap.org', 'https://*.basemaps.cartocdn.com', 'https://server.arcgisonline.com', 'https://*.tile.opentopomap.org', 'https://unpkg.com', 'https://tiles.stadiamaps.com', 'https://cdn.star.nesdis.noaa.gov', 'https://i.ytimg.com'],
@@ -182,6 +216,32 @@ app.use((req, res, next) => {
       'camera=(), microphone=(), geolocation=(), usb=(), payment=(), magnetometer=(), gyroscope=(), accelerometer=(), interest-cohort=(), autoplay=(self "https://www.youtube.com" "https://www.youtube-nocookie.com")');
     next();
   });
+});
+
+// ── Vulnerability disclosure (RFC 9116) ──
+// Deliberately ahead of the access gate: a researcher with a finding must be
+// able to reach the contact address without first being let through the pixel.
+const SECURITY_CONTACT = process.env.B0B_SECURITY_CONTACT || 'mailto:security@b0b.dev';
+app.get(['/.well-known/security.txt', '/security.txt'], (req, res) => {
+  // Regenerated per request so the required Expires field cannot go stale and
+  // silently invalidate the file.
+  const expires = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().replace(/\.\d{3}Z$/, 'Z');
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+  res.setHeader('Cache-Control', 'public, max-age=86400');
+  res.send(
+    'Contact: ' + SECURITY_CONTACT + '\n' +
+    'Expires: ' + expires + '\n' +
+    'Preferred-Languages: en\n' +
+    'Canonical: https://' + CANONICAL_HOST + '/.well-known/security.txt\n' +
+    '\n' +
+    '# Reports are welcome. Please include steps to reproduce and give us a\n' +
+    '# reasonable window to fix before publishing. No bounty is offered and\n' +
+    '# none is implied; credit is, if you want it.\n' +
+    '#\n' +
+    '# Out of scope: findings from automated scanners with no demonstrated\n' +
+    '# impact, and the access gate itself - it is a threshold, not a\n' +
+    '# credential, and it is meant to be openable by anyone who clicks.\n'
+  );
 });
 
 // ── Static routes (only for authenticated visitors) ──
@@ -230,7 +290,16 @@ app.get('/logout', (req, res) => {
   res.redirect(302, '/');
 });
 
-app.post('/api/gate', (req, res) => {
+const gateLimiter = rateLimit({
+  windowMs: 60_000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: '',
+  statusCode: 429,
+});
+
+app.post('/api/gate', gateLimiter, (req, res) => {
   // Click-to-enter: password requirement removed. Anyone POSTing /api/gate
   // gets an access cookie. Kept the endpoint shape (POST + Set-Cookie) so
   // existing client code and the lovebeing OSINT proxy still work.
@@ -572,7 +641,11 @@ app.get('*', (req, res) => {
   if (page) {
     const file = path.join(PUB, page);
     if (fs.existsSync(file)) {
-      const html = fs.readFileSync(file, 'utf8');
+      // Stamp the per-response nonce onto every inline block, matching the
+      // 'nonce-...' source in siteCSP. Only the bare <script> form is inline in
+      // these pages; anything with a src= is external and covered by 'self'.
+      // Pages are served no-store, so a nonce is never replayed from a cache.
+      const html = fs.readFileSync(file, 'utf8').replace(/<script>/g, `<script nonce="${nonce}">`);
       bump('views');
       res.setHeader('Content-Type', 'text/html; charset=utf-8');
       res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');

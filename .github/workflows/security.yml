@@ -1,0 +1,68 @@
+name: Security
+
+# Two things this catches that nothing else in CI does:
+#   1. A dependency advisory landing in a package we already ship.
+#   2. A change to server.js that quietly reopens the access gate, the CSP, or
+#      the redirect - the self-test asserts the behaviour, not the source.
+# The schedule matters as much as the push trigger: an advisory can be
+# published against a dependency we have not touched in months, and only a
+# recurring run will notice.
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  schedule:
+    - cron: '17 6 * * 1'   # weekly, off the hour to avoid the scheduling stampede
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    name: Dependency audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      # Fails the build on high/critical only. Moderate and low are reported
+      # but do not block: a gate that cries wolf gets switched off.
+      - name: npm audit (high and critical block)
+        run: npm audit --audit-level=high
+      - name: npm audit (full report, informational)
+        if: always()
+        run: npm audit || true
+
+  selftest:
+    name: Server security self-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      - name: Access gate, token, headers, redirect
+        run: npm run security-test
+
+  csp:
+    name: CSP browser check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      - name: Install Chromium
+        run: npm i --no-save playwright && npx playwright install --with-deps chromium
+      # Proves the pages still run under the nonce policy, and that an injected
+      # nonce-less <script> does not.
+      - name: Every page renders under the CSP, injected scripts do not
+        run: npm run csp-browser-check

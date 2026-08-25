@@ -6,7 +6,11 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "check-live": "node scripts/check-live.js"
+    "check-live": "node scripts/check-live.js",
+    "security-test": "node scripts/security-selftest.js",
+    "security-check": "node scripts/security-check.js",
+    "csp-browser-check": "node scripts/csp-browser-check.js",
+    "test": "node scripts/security-selftest.js"
   },
   "dependencies": {
     "express": "^4.21.0",
