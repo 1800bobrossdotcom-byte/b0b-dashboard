@@ -78,6 +78,13 @@ async function main() {
     }
   }
 
+  {
+    const r = await request(server, { path: '/googlec8931dc626c500a1.html', headers: HTTPS });
+    check('Google Search Console verification file is served ungated',
+      r.status === 200 && r.body.trim() === 'google-site-verification: googlec8931dc626c500a1.html',
+      `HTTP ${r.status}: ${JSON.stringify(r.body.slice(0, 60))}`);
+  }
+
   console.log('\nCrawler access and its limits');
   {
     const r = await request(server, { path: '/report', headers: asBot() });

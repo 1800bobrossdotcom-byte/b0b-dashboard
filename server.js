@@ -305,7 +305,10 @@ app.use((req, res, next) => {
 //   B0B_INDEXNOW_KEY   <key>.txt           -> IndexNow key file (Bing/Yandex
 //                       fetch it to verify pings sent by scripts/indexnow-ping.js)
 app.get(/^\/google([a-f0-9]+)\.html$/, (req, res, next) => {
-  const token = process.env.B0B_GSC_TOKEN || '';
+  // Default is the site's real Search Console token. Not a secret: the file's
+  // entire purpose is to be served publicly at this URL - ownership comes from
+  // Google having issued the token to the account, not from hiding it.
+  const token = process.env.B0B_GSC_TOKEN || 'c8931dc626c500a1';
   if (!token || req.path !== `/google${token}.html`) return next();
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.send(`google-site-verification: google${token}.html`);
