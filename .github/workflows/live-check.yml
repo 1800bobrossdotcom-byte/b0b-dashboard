@@ -20,3 +20,12 @@ jobs:
           node-version: '20'
       - name: Verify production matches this commit
         run: node scripts/check-live.js --wait
+      # Once the deploy is confirmed live, tell IndexNow-capable engines
+      # (Bing, Yandex) to re-crawl. No-ops until the secret is configured.
+      - name: Live SEO surface
+        run: node scripts/seo-check-live.js
+      - name: IndexNow ping
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        env:
+          B0B_INDEXNOW_KEY: ${{ secrets.B0B_INDEXNOW_KEY }}
+        run: node scripts/indexnow-ping.js

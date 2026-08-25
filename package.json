@@ -10,7 +10,11 @@
     "security-test": "node scripts/security-selftest.js",
     "security-check": "node scripts/security-check.js",
     "csp-browser-check": "node scripts/csp-browser-check.js",
-    "test": "node scripts/security-selftest.js"
+    "test": "node scripts/security-selftest.js && node scripts/seo-selftest.js",
+    "seo-test": "node scripts/seo-selftest.js",
+    "seo-apply": "node scripts/apply-seo-meta.js",
+    "og-card": "node scripts/make-og-card.js",
+    "seo-check-live": "node scripts/seo-check-live.js"
   },
   "dependencies": {
     "express": "^4.21.0",

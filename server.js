@@ -78,6 +78,19 @@ app.use((req, res, next) => {
   next();
 });
 
+// Host canonicalization: apex -> www. Serving identical content on b0b.dev
+// and www.b0b.dev splits every ranking signal across two hosts; a 301
+// consolidates them onto one. Only known aliases are redirected - previews
+// (*.vercel.app) and local dev hosts are left alone.
+app.use((req, res, next) => {
+  const host = String(req.hostname || '').toLowerCase();
+  if (host !== CANONICAL_HOST && ALLOWED_HOSTS.has(host) &&
+      host !== 'localhost' && host !== '127.0.0.1') {
+    return res.redirect(301, 'https://' + CANONICAL_HOST + req.url);
+  }
+  next();
+});
+
 app.use((req, res, next) => {
   res.locals.nonce = crypto.randomBytes(16).toString('base64');
   next();
@@ -139,6 +152,37 @@ function hasAccess(req) {
   return isValidAccessToken(cookies[ACCESS_COOKIE]);
 }
 
+// ── Crawler access ──
+// The pixel gate is a threshold, not a credential: anyone who clicks ENTER is
+// let in, no password, no account. Search and link-preview crawlers cannot
+// click, so without this they see the gate HTML on every URL - to Google the
+// whole site is one thin duplicate page, and nothing here can rank or unfurl.
+// Verified-by-UA is enough precisely because the gate is not security: an
+// attacker who spoofs Googlebot gains exactly what any human gets by clicking.
+// The bypass covers pages and the assets needed to render them, and nothing
+// else - /download, /api/data and /api/visitors stay cookie-only.
+// Search engines, link-preview unfurlers, and search-mode AI crawlers are
+// listed; training-only scrapers (GPTBot, CCBot) are deliberately absent.
+const CRAWLER_RE = new RegExp(
+  process.env.B0B_CRAWLER_RE ||
+  [
+    'Googlebot', 'Google-InspectionTool', 'GoogleOther', 'Storebot-Google',
+    'bingbot', 'DuckDuckBot', 'Slurp', 'YandexBot', 'Baiduspider', 'Applebot',
+    'PetalBot', 'SeznamBot', 'Qwantbot',
+    'facebookexternalhit', 'Twitterbot', 'LinkedInBot', 'Slackbot',
+    'Discordbot', 'TelegramBot', 'WhatsApp', 'Pinterestbot', 'redditbot',
+    'OAI-SearchBot', 'PerplexityBot', 'YouBot',
+  ].join('|'), 'i');
+
+function isCrawler(req) {
+  return CRAWLER_RE.test(req.headers['user-agent'] || '');
+}
+
+// "May this request see site content?" - a person who entered, or a crawler.
+function canView(req) {
+  return hasAccess(req) || isCrawler(req);
+}
+
 // CSP for pixel (locked down)
 function pixelCSP(nonce) {
   return {
@@ -197,7 +241,7 @@ function siteCSP(nonce) {
 
 app.use((req, res, next) => {
   const nonce = res.locals.nonce;
-  const directives = hasAccess(req) ? siteCSP(nonce) : pixelCSP(nonce);
+  const directives = canView(req) ? siteCSP(nonce) : pixelCSP(nonce);
   const rpPolicy = hasAccess(req) ? 'no-referrer' : 'strict-origin-when-cross-origin';
   helmet({
     contentSecurityPolicy: { directives },
@@ -244,6 +288,85 @@ app.get(['/.well-known/security.txt', '/security.txt'], (req, res) => {
   );
 });
 
+// Brand assets, ungated: the link-preview card and favicons must be
+// fetchable by any unfurler or validator, allowlisted or not - a share card
+// that only some services can load is a share card that randomly breaks.
+const PUBLIC_ASSETS = new Set(['/img/og-card.png', '/favicon.png', '/favicon.svg', '/icon-transparent.svg']);
+app.use((req, res, next) => {
+  if (!PUBLIC_ASSETS.has(req.path)) return next();
+  return express.static(PUB, { maxAge: '1d' })(req, res, next);
+});
+
+// ── Search engine plumbing (ungated, env-driven) ──
+// Site verification and IndexNow, switched on by env vars so enabling them is
+// a Vercel setting, not a commit. All three no-op harmlessly when unset.
+//   B0B_GSC_TOKEN      google<token>.html  -> Google Search Console ownership
+//   B0B_BING_AUTH      BingSiteAuth.xml    -> Bing Webmaster Tools ownership
+//   B0B_INDEXNOW_KEY   <key>.txt           -> IndexNow key file (Bing/Yandex
+//                       fetch it to verify pings sent by scripts/indexnow-ping.js)
+app.get(/^\/google([a-f0-9]+)\.html$/, (req, res, next) => {
+  const token = process.env.B0B_GSC_TOKEN || '';
+  if (!token || req.path !== `/google${token}.html`) return next();
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.send(`google-site-verification: google${token}.html`);
+});
+app.get('/BingSiteAuth.xml', (req, res, next) => {
+  const auth = process.env.B0B_BING_AUTH || '';
+  if (!auth) return next();
+  res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+  res.send(`<?xml version="1.0"?>\n<users><user>${auth}</user></users>\n`);
+});
+app.get(/^\/([a-f0-9]{16,64})\.txt$/, (req, res, next) => {
+  const key = process.env.B0B_INDEXNOW_KEY || '';
+  if (!key || req.path !== `/${key}.txt`) return next();
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+  res.send(key);
+});
+
+// ── robots.txt + sitemap.xml (ungated) ──
+// Both must be reachable without a cookie or crawlers never find anything.
+app.get('/robots.txt', (req, res) => {
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+  res.setHeader('Cache-Control', 'public, max-age=3600');
+  res.send(
+    'User-agent: *\n' +
+    'Allow: /\n' +
+    'Disallow: /api/\n' +
+    'Disallow: /download\n' +
+    'Disallow: /logout\n' +
+    '\n' +
+    'Sitemap: https://' + CANONICAL_HOST + '/sitemap.xml\n'
+  );
+});
+
+// One entry per canonical URL - alias forms 301 to these and never appear
+// here, so the sitemap and the redirects can't disagree about what is
+// canonical. lastmod comes from the integrity manifest, the one timestamp
+// that is real on Vercel (file mtimes are normalized at deploy).
+const CANONICAL_PATHS = [
+  '/', '/report', '/map', '/countermeasures', '/artifact', '/spectra',
+  '/tones/healing', '/tones/protective', '/tones/instrument', '/tones/shield',
+  '/tones/multipack', '/tones/shield/guide', '/ai-attack-vector-analysis',
+];
+
+app.get('/sitemap.xml', (req, res) => {
+  let lastmod = '';
+  try {
+    const gen = JSON.parse(fs.readFileSync(path.join(__dirname, 'content-integrity-manifest.json'), 'utf8')).generated;
+    if (gen && !isNaN(new Date(gen).getTime())) lastmod = new Date(gen).toISOString().slice(0, 10);
+  } catch (e) { /* omit lastmod rather than invent one */ }
+  const urls = CANONICAL_PATHS.map((p) =>
+    '  <url>\n' +
+    '    <loc>https://' + CANONICAL_HOST + p + '</loc>\n' +
+    (lastmod ? '    <lastmod>' + lastmod + '</lastmod>\n' : '') +
+    '  </url>'
+  ).join('\n');
+  res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+  res.setHeader('Cache-Control', 'public, max-age=3600');
+  res.send('<?xml version="1.0" encoding="UTF-8"?>\n' +
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + '\n</urlset>\n');
+});
+
 // ── Static routes (only for authenticated visitors) ──
 const PAGES = {
   '/':              'index.html',
@@ -258,24 +381,35 @@ const PAGES = {
   '/tones-shield':  'tones-shield.html',
   '/tones-multipack':'tones-multipack.html',
   '/tones-shield-guide':'tones-shield-guide.html',
-  // Slash-form aliases. The nav in report.html / countermeasures.html and the
-  // toolkit links in map.html were written as /tones/shield, /tones/instrument
-  // etc.; without these the site's own ARC SHIELD button 404s. Both forms are
-  // kept so existing links and anything already shared keep working.
   '/tones/shield':  'tones-shield.html',
   '/tones/shield/guide':'tones-shield-guide.html',
-  '/tones/guide':   'tones-shield-guide.html',
   '/tones/healing': 'tones-healing.html',
   '/tones/protective':'tones-protective.html',
   '/tones/instrument':'tones-instrument.html',
   '/tones/multipack':'tones-multipack.html',
   '/ai-attack-vector-analysis':  'ai-attack-vector-analysis.html',
-  '/ai-attack-vector-analysis.html':  'ai-attack-vector-analysis.html',
+};
+
+// Alias -> canonical, as 301s. These used to be duplicate 200s (both forms in
+// PAGES serving the same file), which splits ranking signals across two URLs
+// per page and leaves search engines to guess which one is real. The slash
+// forms are canonical because the site's own nav links use them; the hyphen
+// forms and the stray .html form redirect. Anything already shared keeps
+// working - it just lands on the canonical URL now.
+const REDIRECTS = {
+  '/tones-healing':      '/tones/healing',
+  '/tones-protective':   '/tones/protective',
+  '/tones-instrument':   '/tones/instrument',
+  '/tones-shield':       '/tones/shield',
+  '/tones-multipack':    '/tones/multipack',
+  '/tones-shield-guide': '/tones/shield/guide',
+  '/tones/guide':        '/tones/shield/guide',
+  '/ai-attack-vector-analysis.html': '/ai-attack-vector-analysis',
 };
 
 // Serve static assets (js, css, manifests, icons, i18n) for authenticated users
 app.use((req, res, next) => {
-  if (!hasAccess(req)) return next();
+  if (!canView(req)) return next();
   // only serve known static extensions
   if (/\.(js|css|json|png|svg|ico|jpg|jpeg|webp|mp3|mp4|woff2?)$/i.test(req.path)) {
     return express.static(PUB, { maxAge: '1h' })(req, res, next);
@@ -628,6 +762,25 @@ app.get('/api/visitors', (req, res) => {
 // Page routes
 app.get('*', (req, res) => {
   const nonce = res.locals.nonce;
+
+  // Alias -> canonical redirect, for everyone: crawlers consolidate signals,
+  // humans land on the canonical URL before they ever see the gate.
+  const target = REDIRECTS[req.path];
+  if (target) return res.redirect(301, target);
+
+  // A crawler gets the real page - see the crawler-access note above. Unknown
+  // paths get a genuine 404 rather than the pixel page: a catch-all 200 turns
+  // every mistyped URL into a soft-404 duplicate of the gate in the index.
+  if (!hasAccess(req) && isCrawler(req)) {
+    const page = PAGES[req.path];
+    if (!page) return res.status(404).end();
+    const file = path.join(PUB, page);
+    if (!fs.existsSync(file)) return res.status(404).end();
+    const html = fs.readFileSync(file, 'utf8').replace(/<script>/g, `<script nonce="${nonce}">`);
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    return res.send(html);
+  }
 
   // No access cookie → pixel gate
   if (!hasAccess(req)) {

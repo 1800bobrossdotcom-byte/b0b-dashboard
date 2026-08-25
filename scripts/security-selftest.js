@@ -79,8 +79,10 @@ async function main() {
   console.log('\nAccess gate');
   {
     const r = await request(server, { path: '/report', headers: HTTPS });
+    // Identify the gate positively by its ENTER control - matching on the
+    // title was fragile once the gate page grew a real one.
     check('/report without a cookie serves the pixel gate, not the report',
-      r.status === 200 && !r.body.includes('<title>b0b'), `status ${r.status}, ${r.body.length} bytes`);
+      r.status === 200 && r.body.includes('id="gate"') && !r.body.includes('sect-body'), `status ${r.status}, ${r.body.length} bytes`);
   }
   for (const path of ['/api/data', '/api/visitors', '/download']) {
     const r = await request(server, { path, headers: HTTPS });
@@ -89,6 +91,21 @@ async function main() {
   {
     const r = await request(server, { path: '/api/data', headers: authed() });
     check('/api/data with a valid cookie is 200', r.status === 200, `status ${r.status}`);
+  }
+
+  console.log('\nCrawler bypass scope');
+  {
+    // Search crawlers are allowed through the gate by user-agent (the gate is
+    // click-to-enter, so the bypass grants nothing a click would not). What
+    // must hold is the boundary: pages yes, the gated API surface no.
+    const bot = { ...HTTPS, 'user-agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)' };
+    const page = await request(server, { path: '/report', headers: bot });
+    check('a Googlebot UA is served the report without a cookie',
+      page.status === 200 && !page.body.includes('id="gate"'), `status ${page.status}`);
+    for (const p of ['/download', '/api/data', '/api/visitors']) {
+      const r = await request(server, { path: p, headers: bot });
+      check(`crawler UA still cannot reach ${p}`, r.status === 404, `status ${r.status}`);
+    }
   }
 
   console.log('\nAccess token forgery');
@@ -149,7 +166,10 @@ async function main() {
   console.log('\nInline script nonces');
   {
     const r = await request(server, { path: '/report', headers: authed() });
-    const inline = r.body.match(/<script(?![^>]*\ssrc=)[^>]*>/g) || [];
+    // Executable inline scripts only - JSON-LD data blocks are inert by
+    // spec, exempt from CSP, and deliberately unnonced.
+    const inline = (r.body.match(/<script(?![^>]*\ssrc=)[^>]*>/g) || [])
+      .filter((t) => !/type="application\/ld\+json"/.test(t));
     const nonced = inline.filter((t) => /nonce="[A-Za-z0-9+/=]+"/.test(t));
     check('every inline <script> in the served HTML carries a nonce',
       inline.length > 0 && nonced.length === inline.length,

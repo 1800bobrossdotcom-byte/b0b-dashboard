@@ -1,0 +1,211 @@
+{
+  "pages": [
+    {
+      "file": "index.html",
+      "title": "b0b.dev — signal over noise: OSINT research & countermeasures",
+      "metaDescription": "index for b0b's OSINT research: a report documenting the Epstein-Maxwell network and surveillance infrastructure, and an interactive map of its connections.",
+      "ogDescription": "b0b — independent OSINT research. the report and the map: surveillance infrastructure and the Epstein-Maxwell network, documented. signal over noise. status: active.",
+      "jsonldType": "WebSite",
+      "headline": "independent OSINT research: surveillance infrastructure and the Epstein-Maxwell network",
+      "topics": [
+        "OSINT",
+        "Epstein-Maxwell network",
+        "surveillance infrastructure",
+        "network map",
+        "research report"
+      ]
+    },
+    {
+      "file": "report.html",
+      "title": "PROJECT ANGLERFISH: Epstein-Maxwell OSINT report — b0b.dev",
+      "metaDescription": "23-section OSINT report: Epstein-Maxwell documentary record, control architecture, surveillance infrastructure, FOIA patterns. every claim tiered and sourced.",
+      "ogDescription": "23 sections of tiered OSINT: the Epstein-Maxwell record, control architecture, surveillance cities, underground infrastructure. documented fact vs labeled hypothesis. precision over drama.",
+      "jsonldType": "Article",
+      "headline": "PROJECT ANGLERFISH: CASSOWARY ORCA AGILITY — a tiered open-source intelligence report",
+      "topics": [
+        "Epstein-Maxwell network",
+        "control architecture",
+        "surveillance infrastructure",
+        "OSINT",
+        "FOIA declassification",
+        "underground infrastructure"
+      ]
+    },
+    {
+      "file": "map.html",
+      "title": "OSINT world map: surveillance sites & Epstein network — b0b.dev",
+      "metaDescription": "interactive OSINT map of 1,100+ sites: surveillance infrastructure, black sites, the Epstein-Maxwell network, ALPR cameras, live aircraft and quake feeds.",
+      "ogDescription": "1,100+ mapped locations: surveillance infrastructure, black sites, the Epstein-Maxwell network, Flock ALPR cameras — with live ADS-B aircraft, AIS vessels and USGS quakes. signal, plotted.",
+      "jsonldType": "WebApplication",
+      "headline": "OSINT world map: 1,100+ documented sites, surveillance infrastructure, and the Epstein-Maxwell network",
+      "topics": [
+        "OSINT map",
+        "surveillance infrastructure",
+        "Epstein-Maxwell network",
+        "ALPR cameras",
+        "black sites",
+        "live aircraft tracking"
+      ]
+    },
+    {
+      "file": "countermeasures.html",
+      "title": "countermeasures: privacy tools & healing tones — b0b.dev",
+      "metaDescription": "ultrasonic beacon jammer, webrtc leak block, canvas fingerprint guard, solfeggio healing tones and binaural beats. browser-based privacy tools, no tracking.",
+      "ogDescription": "jam ultrasonic tracking beacons, block webrtc leaks, defeat canvas fingerprinting. plus solfeggio healing tones, binaural beats, noise masking. zero dependencies, no tracking, works offline.",
+      "jsonldType": "WebApplication",
+      "headline": "privacy countermeasures & tone generators: ultrasonic shield, fingerprint guard, healing & protective tones",
+      "topics": [
+        "browser fingerprinting",
+        "webrtc leak blocking",
+        "ultrasonic tracking beacons",
+        "solfeggio frequencies",
+        "binaural beats",
+        "noise masking"
+      ]
+    },
+    {
+      "file": "artifact.html",
+      "title": "artifact: in-browser analog glitch camera — b0b.dev",
+      "metaDescription": "webgl glitch camera that runs in your browser: pixel sort, vhs, databend, melt, kaleidoscope and halftone modes, audio-reactive, exports png, jpg or gif.",
+      "ogDescription": "point a camera at the world and corrupt the signal: ten webgl modes — pixel sort, vhs, databend, melt, kaleidoscope — reactive to touch and sound. png, jpg and gif capture. no upload.",
+      "jsonldType": "WebApplication",
+      "headline": "artifact: a live analog glitch camera in the browser",
+      "topics": [
+        "glitch camera",
+        "webgl shaders",
+        "pixel sort",
+        "vhs effect",
+        "databending",
+        "gif export"
+      ]
+    },
+    {
+      "file": "spectra.html",
+      "title": "SPECTRA: night vision & thermal camera filters — b0b.dev",
+      "metaDescription": "in-browser webgl camera: low-light night vision, ironbow thermal palette, sobel edge detection, motion detection. gain control, frame capture, camera flip.",
+      "ogDescription": "point a camera through five shader lenses — night vision, ironbow thermal, sobel edges, motion diff. all webgl, all in-browser, frames saved straight to png.",
+      "jsonldType": "WebApplication",
+      "headline": "SPECTRA: in-browser camera with night vision, thermal, edge and motion detection modes",
+      "topics": [
+        "night vision",
+        "thermal palette",
+        "edge detection",
+        "motion detection",
+        "webgl shaders",
+        "camera modes"
+      ]
+    },
+    {
+      "file": "tones-healing.html",
+      "title": "healing tones: solfeggio frequency generator — b0b.dev",
+      "metaDescription": "solfeggio tone generator in the browser: ten sine frequencies from 174 to 963 Hz — 396, 432, 528 and more — with sub-octave layer and volume control.",
+      "ogDescription": "ten solfeggio frequencies, one toggle. 174-963 Hz sine tones with a sub-octave layer, volume slider, home-screen install. zero dependencies. filed under countermeasures.",
+      "jsonldType": "WebApplication",
+      "headline": "healing tones: a browser solfeggio frequency generator, 174 to 963 Hz",
+      "topics": [
+        "solfeggio frequencies",
+        "healing tones",
+        "tone generator",
+        "528 Hz",
+        "432 Hz",
+        "web audio"
+      ]
+    },
+    {
+      "file": "tones-protective.html",
+      "title": "protective tones: Schumann binaurals, noise, ocean — b0b.dev",
+      "metaDescription": "standalone browser tone generator: 7.83 Hz Schumann resonance, alpha/beta/gamma binaural beats, pink and brown noise, ocean waves. installs to your home screen.",
+      "ogDescription": "countermeasures for your ears: 7.83 Hz Schumann resonance and alpha/beta/gamma binaural beats, pink/brown noise, ocean waves. zero dependencies, animal-safe. use headphones for entrainment.",
+      "jsonldType": "WebApplication",
+      "headline": "protective tones: Schumann resonance binaurals, pink and brown noise, ocean waves in the browser",
+      "topics": [
+        "binaural beats",
+        "Schumann resonance",
+        "pink noise",
+        "brown noise",
+        "ocean waves",
+        "brainwave entrainment"
+      ]
+    },
+    {
+      "file": "tones-instrument.html",
+      "title": "tone lab v2: sacred frequency instrument — b0b.dev",
+      "metaDescription": "tone lab v2: browser instrument with solfeggio pads (174-963 Hz), monk chant synthesis, binaural beats, a 32-step sequencer, MIDI input, and WAV recording.",
+      "ogDescription": "a sacred frequency instrument in the browser. solfeggio pads, tibetan and gregorian chant synthesis, binaural beats, noise beds, 32-step sequencer, MIDI in, WAV out. touch pads to begin.",
+      "jsonldType": "WebApplication",
+      "headline": "tone lab v2: a sacred frequency instrument with chant synthesis, sequencer and MIDI",
+      "topics": [
+        "solfeggio frequencies",
+        "binaural beats",
+        "chant synthesis",
+        "step sequencer",
+        "MIDI",
+        "web audio"
+      ]
+    },
+    {
+      "file": "tones-shield.html",
+      "title": "ARC Shield: LRAD detection & phase cancellation — b0b.dev",
+      "metaDescription": "mic spectrogram scans for LRAD, ultrasonic and infrasonic signatures; anti-phase cancellation tones, protective frequencies, and evidence logging with GPS.",
+      "ogDescription": "detect and counter acoustic devices in the browser: live spectrogram flags LRAD, ultrasonic and infrasonic signatures; ARC generates anti-phase cancellation; evidence log captures audio and GPS.",
+      "jsonldType": "WebApplication",
+      "headline": "ARC Shield: acoustic resonance countermeasure — LRAD detection, phase cancellation, evidence capture",
+      "topics": [
+        "LRAD detection",
+        "acoustic phase cancellation",
+        "protective frequencies",
+        "audio spectrogram",
+        "evidence capture"
+      ]
+    },
+    {
+      "file": "tones-multipack.html",
+      "title": "tone multipack: solfeggio, binaural & ultrasonic — b0b.dev",
+      "metaDescription": "three layerable tone engines: solfeggio frequencies 174-963 Hz, Schumann-carrier binaurals, noise beds, and a 20-22 kHz ultrasonic sweep against tracking beacons.",
+      "ogDescription": "three engines, one page: solfeggio tones, Schumann binaural beats, noise beds, and a 20-22 kHz ultrasonic shield against cross-device tracking beacons. layer them like an instrument.",
+      "jsonldType": "WebApplication",
+      "headline": "tone multipack: layered solfeggio, binaural beats and ultrasonic shield",
+      "topics": [
+        "solfeggio frequencies",
+        "binaural beats",
+        "Schumann resonance",
+        "ultrasonic shield",
+        "pink noise",
+        "tone generator"
+      ]
+    },
+    {
+      "file": "tones-shield-guide.html",
+      "title": "ARC Shield field guide: LRAD countermeasure manual — b0b.dev",
+      "metaDescription": "field manual for the ARC Shield acoustic countermeasure: LRAD detection, phase cancellation, old phone conversion, amplification, deployment, FOIA research.",
+      "ogDescription": "how to turn any phone into an acoustic countermeasure. LRAD detection, 180-degree phase cancellation, old phone conversion, perimeter and mesh deployment. no app store, no server, no tracking.",
+      "jsonldType": "Article",
+      "headline": "ARC Shield field guide: a citizen defense manual for the acoustic resonance countermeasure",
+      "topics": [
+        "LRAD",
+        "acoustic weapons",
+        "phase cancellation",
+        "acoustic countermeasures",
+        "FOIA research",
+        "Web Audio API"
+      ]
+    },
+    {
+      "file": "ai-attack-vector-analysis.html",
+      "title": "linguistic phreaking to AI-generated DoS — b0b.dev",
+      "metaDescription": "fifteen AI attack vectors on b0b.dev: linguistic phreaking, unicode escape injection, security header sabotage, and an AI-generated denial of service.",
+      "ogDescription": "the AI tasked with defending the site wrote the middleware that took it down. fifteen documented attack vectors, from linguistic phreaking to AI-generated denial of service.",
+      "jsonldType": "Article",
+      "headline": "from linguistic phreaking to AI-generated denial of service: fifteen documented AI attack vectors",
+      "topics": [
+        "linguistic phreaking",
+        "AI-generated denial of service",
+        "AI safety",
+        "security middleware sabotage",
+        "unicode escape injection",
+        "surveillance infrastructure"
+      ]
+    }
+  ],
+  "notes": "House title pattern is now \"name: payload — b0b.dev\" with an em dash before the brand on every page (draft set mixed \" | \", \" - \", and \" — \", plus one bare \"b0b\" on artifact.html); index.html is the single exception, leading with the brand and site tagline (\"b0b.dev — signal over noise: OSINT research & countermeasures\") instead of its old report-plus-map descriptor, which competed with report.html and map.html. The six tones pages were normalized into one family construction across title, headline, and description (lowercase tool name, colon, concrete payload — e.g. \"healing tones: solfeggio frequency generator\", \"ARC Shield: LRAD detection & phase cancellation\"), tone lab's short headline was expanded to the family shape, and the multipack meta was rephrased (\"Schumann-carrier binaurals, noise beds\") to break its near-overlap with tones-protective while keeping the 20-22 kHz ultrasonic sweep as its differentiator; map.html's title dropped the vague \"surveillance, Epstein network\" list for \"surveillance sites & Epstein network\". Casing was unified to the site's lowercase terminal voice (acronyms and proper nouns — OSINT, LRAD, Schumann, Epstein-Maxwell, PROJECT ANGLERFISH, SPECTRA — keep caps), en dashes in ranges became ASCII hyphens (174-963 Hz), and stray \" - \" separators in headlines became em dashes. All lengths verified by script: titles 50-63 chars, metas 149-162, ogs 157-194, headlines 52-107; pairwise token-similarity check confirms no near-identical titles or metas. jsonldType needed no changes — exactly one WebSite (index), Articles for report, shield-guide, and the attack-vector writeup, WebApplication for the interactive tools (countermeasures kept as WebApplication since its copy describes on-page tools, not a link hub). Nothing was genericized; every specific (1,100+ sites, 7.83 Hz, 23 sections, Flock ALPR, CASSOWARY ORCA AGILITY) survives."
+}

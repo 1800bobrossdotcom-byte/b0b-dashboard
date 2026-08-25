@@ -49,6 +49,8 @@ jobs:
       - run: npm ci
       - name: Access gate, token, headers, redirect
         run: npm run security-test
+      - name: Crawl surface, redirects, page metadata
+        run: npm run seo-test
 
   csp:
     name: CSP browser check

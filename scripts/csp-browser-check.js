@@ -84,7 +84,10 @@ function accessCookie() {
     } catch (e) { errs.push('NAV: ' + e.message); }
 
     const inline = await page.evaluate(() => {
-      const s = [...document.querySelectorAll('script:not([src])')];
+      // Data blocks (type="application/ld+json" etc.) never execute and are
+      // exempt from CSP by spec - only executable inline scripts need nonces.
+      const s = [...document.querySelectorAll('script:not([src])')]
+        .filter((x) => { const t = (x.getAttribute('type') || '').toLowerCase(); return !t || t === 'module' || /javascript/.test(t); });
       return { count: s.length, allNonced: s.every((x) => !!(x.nonce || x.getAttribute('nonce'))) };
     }).catch(() => ({ count: -1, allNonced: false }));
 
