@@ -172,6 +172,34 @@ async function main() {
   }
   check('all sitemap pages were checked', pagesChecked === sitemapPaths.length && pagesChecked > 0);
 
+  console.log('\nManaged metadata block');
+  {
+    // Each page must carry exactly one seo:begin/seo:end block. An earlier
+    // strip regex anchored on a marker the script never emits, so re-running
+    // apply-seo-meta.js appended a second block instead of replacing the
+    // first - duplicate canonical, og and JSON-LD tags shipped on all 13
+    // pages before this check existed.
+    const fsMod = require('fs');
+    const pathMod = require('path');
+    const dir = pathMod.join(__dirname, '..', 'site');
+    const offenders = fsMod.readdirSync(dir).filter((f) => f.endsWith('.html')).map((f) => {
+      const body = fsMod.readFileSync(pathMod.join(dir, f), 'utf8');
+      return { f, n: (body.match(/<!-- seo:begin/g) || []).length };
+    }).filter((x) => x.n > 1);
+    check('no page has a duplicated managed metadata block',
+      offenders.length === 0, offenders.map((o) => `${o.f} x${o.n}`).join(', '));
+
+    const r = await request(server, { path: '/map', headers: asBot() });
+    for (const [label, re] of [
+      ['canonical', /<link rel="canonical"/g],
+      ['og:title', /<meta property="og:title"/g],
+      ['JSON-LD', /<script type="application\/ld\+json">/g],
+    ]) {
+      check(`served page has exactly one ${label} tag`, (r.body.match(re) || []).length === 1,
+        `${(r.body.match(re) || []).length} found`);
+    }
+  }
+
   console.log('\nGate page (what an unrecognized visitor sees)');
   {
     const r = await request(server, { path: '/', headers: HTTPS });
