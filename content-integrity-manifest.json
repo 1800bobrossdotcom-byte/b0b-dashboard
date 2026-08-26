@@ -1,9 +1,9 @@
 {
-  "generated": "2026-08-26T06:20:47.121Z",
+  "generated": "2026-08-26T12:04:21.698Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "75796e918d1b3f0d7ab3a71c08becd6541caeef9170f908f557293b49e42e411",
+  "fullFileHash": "02eb23c1f4b02e0231efdcb25c8620dbc02d637be084e68a113a6c5b6acc6d98",
   "sectionBlocks": [
     {
       "id": "_preamble",
@@ -22,8 +22,8 @@
     },
     {
       "id": "II",
-      "hash": "8dfcac9715d5cd37e502fdef595626725d145c9a922b1668801722a1795dad32",
-      "length": 103377
+      "hash": "1ed01276aa7cb90cd0fe4a617a634ed3b67dc7c6064fc48c74c2d4c7b38f9c08",
+      "length": 103676
     },
     {
       "id": "III",
