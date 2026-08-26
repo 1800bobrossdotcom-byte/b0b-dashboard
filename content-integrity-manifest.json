@@ -1,9 +1,9 @@
 {
-  "generated": "2026-08-26T04:53:09.115Z",
+  "generated": "2026-08-26T06:07:15.180Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "87888b69bd5427831aa2e2a37ed75293d9a1189876e249fa31cb2593d4ea550d",
+  "fullFileHash": "28ef5ce40186916db6461cab00bf4b82aca834b8b01aaec83c2995d3cf113d5b",
   "sectionBlocks": [
     {
       "id": "_preamble",
@@ -137,8 +137,8 @@
     },
     {
       "id": "contact",
-      "hash": "d26cb64e446800d55b4f7a296543ce3e2885d7f83ca1790ef8da3f63780624c5",
-      "length": 32654
+      "hash": "5e1df6bdb8364d4a351b7b6865c442e9a36a42e4fce38d04754ded5e80b44bad",
+      "length": 33549
     }
   ],
   "paragraphHashes": [
@@ -3843,8 +3843,38 @@
       "hash": "43fe7763e9f9b09afb7b31468abcf33db325555fe5b73eab536fc9766967e342",
       "preview": "If you are building a case, writing an article, or conducting an investigation t...",
       "length": 127
+    },
+    {
+      "index": 617,
+      "hash": "57fdcf9a2e3dc280faaab9d07439b678b8cd4caae8c23024a83ef171bf87eca2",
+      "preview": "God, Jesus Christ, Yeshua HaMashiach says &ldquo;It is finished&rdquo; - &ldquo;...",
+      "length": 102
+    },
+    {
+      "index": 618,
+      "hash": "e1740e41aa59e5ff2b4a487354285517b8128eacee0757f6d91555af5f160147",
+      "preview": "This is timetravel in a borrowed moment of God Time.",
+      "length": 52
+    },
+    {
+      "index": 619,
+      "hash": "35b1e4dee70349af09159d79d66cfb368c546b2816a2e60c0b6fceac8a5e6d33",
+      "preview": "The adversary has no move, and is non-existent as adversary. It attempts power -...",
+      "length": 112
+    },
+    {
+      "index": 620,
+      "hash": "e4c210340209ecfb6839750a6ca15f0f0a8f5053eec293b887061decdec0aec7",
+      "preview": "God is All Powerful, and the Only Source of Power - Spiritual and Scientific.",
+      "length": 77
+    },
+    {
+      "index": 621,
+      "hash": "d5ec23de890ff522e1dba206776afb40bf6e92527a136e06807cc0eb2985b06e",
+      "preview": "Each Christ paradox and each parable is math.",
+      "length": 45
     }
   ],
   "totalSections": 27,
-  "totalParagraphs": 617
+  "totalParagraphs": 622
 }
