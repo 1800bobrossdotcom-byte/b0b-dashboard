@@ -409,7 +409,7 @@
 </head>
 <body>
 
-<div class="nav"><a href="/">&larr; b0b.dev</a> &nbsp;|&nbsp; <a href="/map">OSINT MAP &rarr;</a> &nbsp;|&nbsp; <a href="/tones/shield" style="color:#ff4444">ARC SHIELD</a> &nbsp;|&nbsp; <a href="https://dialectforge.com" target="_blank" rel="noopener noreferrer" style="color:#00ff41">DIALECTFORGE</a> &nbsp;|&nbsp; <a href="https://www.youtube.com/@ERC-1155" target="_blank" rel="noopener noreferrer" style="color:#e6c200">ERC-1155</a> &nbsp;|&nbsp; <a href="https://x.com/_lovebeing_" target="_blank" rel="noopener noreferrer" style="color:#ffffff">&#120143; @_lovebeing_</a></div>
+<div class="nav"><a href="/">&larr; b0b.dev</a> &nbsp;|&nbsp; <a href="/map">OSINT MAP &rarr;</a> &nbsp;|&nbsp; <a href="/tones/shield" style="color:#ff4444">ARC SHIELD</a> &nbsp;|&nbsp; <a href="https://dialectforge.com" target="_blank" rel="noopener noreferrer" style="color:#00ff41">DIALECTFORGE</a> &nbsp;|&nbsp; <a href="https://www.youtube.com/@ERC-1155" target="_blank" rel="noopener noreferrer" style="color:#e6c200">ERC-1155</a> &nbsp;|&nbsp; <a href="https://x.com/_lovebeing_" target="_blank" rel="noopener noreferrer" style="color:#ffffff">&#120143; @_lovebeing_</a> &nbsp;|&nbsp; <a href="#donate" style="color:#00ff41">DONATE ETH</a></div>
 
 <h1>PROJECT ANGLERFISH<span class="h1-codewords">: CASSOWARY ORCA AGILITY</span></h1>
 <div class="header-meta">
@@ -4473,6 +4473,81 @@ R O T A S</pre>
   </script>
   <p><strong>What is useful to send.</strong> Corrections first - a claim in this report that is wrong, over-stated, or tiered too high is the most valuable thing anyone can put in this inbox, and it is more welcome than a citation that agrees. After that: public record. FOIA releases, court filings, corporate and land registrations, archival material, published reporting, procurement documents, anything with a document number on it that a stranger could pull themselves.</p>
 </div>
+
+<div class="discovery" id="donate">
+  <div class="discovery-title">DONATE &mdash; ETHEREUM</div>
+  <p style="margin-bottom:.7rem">If this work is worth something to you, it takes donations in <strong>ETH</strong>. There is no obligation and nothing behind a paywall - the report, the map and the toolkit stay open regardless.</p>
+  <p id="b0b-eth-wrap" style="margin:0 0 .5rem">
+    <code id="b0b-eth-addr" style="display:block;font-family:'Courier New',monospace;font-size:1.02rem;line-height:1.6;letter-spacing:1.2px;word-break:break-all;color:var(--green,#00ff41);background:var(--fill-lo,rgba(0,0,0,0.35));border:1px solid var(--border,#333);padding:10px 12px;border-radius:2px">0x8455cF296e1265b494605207e97884813De21950</code>
+  </p>
+  <p style="margin:0 0 .9rem"><button type="button" id="b0b-eth-copy" style="font-family:'Courier New',monospace;font-size:0.72rem;letter-spacing:1px;background:transparent;border:1px solid var(--green,#00ff41);color:var(--green,#00ff41);padding:6px 14px;cursor:pointer;border-radius:2px">COPY ADDRESS</button> <span id="b0b-eth-copied" style="font-size:0.7rem;color:var(--muted,#888);margin-left:8px"></span></p>
+  <p style="font-size:0.9rem;color:var(--muted-2,#9aa0a6);margin-bottom:.6rem"><strong>Read the whole string before you send anything.</strong> It is shown in full and never abbreviated, on purpose: the common theft against a published address is a <em>lookalike</em> ground to match the first and last few characters, which defeats anyone checking a truncated <em>0x8455&hellip;1950</em> and nothing else. This address is <strong>EIP-55 checksummed</strong> - the mixed upper/lower case is the checksum, not decoration - so a wallet will reject a version with any character mistyped. That check is yours to make, and it is worth making.</p>
+  <p style="font-size:0.9rem;color:var(--muted-2,#9aa0a6);margin:0"><strong>Network:</strong> Ethereum mainnet only - ETH or ERC-20 tokens. Do not send assets from another chain to this address; there is no recovery.</p>
+</div>
+<script>
+(function () {
+  // The address is held here as a constant and the rendered node is checked against it.
+  // A published donation address is the highest-value substitution target on this site:
+  // swap the text and funds silently reroute while the page still looks correct. This is
+  // the same posture as the DOM watchdog on /map, narrowed to the one element that moves
+  // money. It defends against DOM-level tampering - a malicious extension, an injected
+  // script, a rewriting proxy. It cannot defend against an attacker who can edit this
+  // file, but at that point the site is lost anyway.
+  var ADDR = '0x8455cF296e1265b494605207e97884813De21950';
+  var el = document.getElementById('b0b-eth-addr');
+  var btn = document.getElementById('b0b-eth-copy');
+  var note = document.getElementById('b0b-eth-copied');
+  if (!el) return;
+  var tripped = false;
+
+  function fail() {
+    if (tripped) return;
+    tripped = true;
+    // Fail loud and show nothing rather than risk showing someone else's address.
+    el.textContent = 'ADDRESS TAMPERING DETECTED - DO NOT SEND';
+    el.style.color = '#ff1744';
+    el.style.borderColor = '#ff1744';
+    if (btn) { btn.disabled = true; btn.style.opacity = '0.4'; btn.style.cursor = 'not-allowed'; }
+    if (note) { note.textContent = 'verify the address from another source before sending'; note.style.color = '#ff1744'; }
+    try { console.error('[b0b] donation address failed integrity check'); } catch (e) {}
+  }
+
+  function verify() { if (!tripped && el.textContent.trim() !== ADDR) fail(); }
+  verify();
+
+  if (window.MutationObserver) {
+    new MutationObserver(verify).observe(el, {
+      childList: true, characterData: true, subtree: true, attributes: true
+    });
+  }
+
+  if (btn) {
+    btn.addEventListener('click', function () {
+      if (tripped) return;
+      // Copy from the constant, never from the DOM - if the node were swapped, copying
+      // what is displayed would hand the attacker's address straight to the clipboard.
+      var done = function () {
+        if (note) { note.textContent = 'copied - check it against what your wallet shows'; note.style.color = 'var(--green,#00ff41)'; }
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(ADDR).then(done, function () {
+          if (note) { note.textContent = 'copy blocked - select the address manually'; note.style.color = 'var(--muted,#888)'; }
+        });
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = ADDR; ta.setAttribute('readonly', '');
+        ta.style.position = 'absolute'; ta.style.left = '-9999px';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch (e) {
+          if (note) { note.textContent = 'copy blocked - select the address manually'; note.style.color = 'var(--muted,#888)'; }
+        }
+        document.body.removeChild(ta);
+      }
+    });
+  }
+})();
+</script>
+
 
 <div class="warning">
 <div class="warning-title">READ THIS BEFORE YOU WRITE - TWO LIMITS, BOTH FOR YOUR PROTECTION</div>
