@@ -1,9 +1,9 @@
 {
-  "generated": "2026-08-26T02:19:22.765Z",
+  "generated": "2026-08-26T02:36:21.652Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "96d2c7b27b1aa7725fc54a6214e7ef35a7a5f40c0411647900b9b8706c778e68",
+  "fullFileHash": "eadd0f6f66d93ce6b3992a636e938d26fd21816c20f773dc8b390382aeb999cd",
   "sectionBlocks": [
     {
       "id": "_preamble",
@@ -22,8 +22,8 @@
     },
     {
       "id": "II",
-      "hash": "714291a4a84ebe5371c6617500e37146c35c7fb5e67d4cc46c15fd1d68d2c356",
-      "length": 101028
+      "hash": "b6220137f2c4711b6271d07258bad2e8f589a76e3cc493c00b39d020c017bc1b",
+      "length": 101130
     },
     {
       "id": "III",
@@ -42,8 +42,8 @@
     },
     {
       "id": "VI",
-      "hash": "504139cf773e90ddd108194cef2ebfa45266ca50b9335aef609c2e4feddee315",
-      "length": 10799
+      "hash": "f3ad3695d988c6545c37e8852eeca6a5a83fcf0932f604fabc2b8600fa50469e",
+      "length": 10801
     },
     {
       "id": "VII",
@@ -57,8 +57,8 @@
     },
     {
       "id": "IX",
-      "hash": "1e705e1d2064b1edd9fc2bba788112a6d18df9915a5a4f8a1f86793eb3e6581e",
-      "length": 42027
+      "hash": "21fd96c121595713b49cfbee114218d257c1e3a89ab48c0daa5f0f4c915450aa",
+      "length": 42022
     },
     {
       "id": "X",
@@ -499,9 +499,9 @@
     },
     {
       "index": 60,
-      "hash": "e053572d7c96016d4c1b89afbc7b19e855c027a5df2c1a19e2f65ea3a44258d9",
+      "hash": "bbacc11ba83741ad3a32a52c491589bcd2d3116f03deb8767493c4a9ff868e98",
       "preview": "The open question, tiered - and left open. Every reputable outlet arrives at the...",
-      "length": 1624
+      "length": 1628
     },
     {
       "index": 61,
@@ -517,9 +517,9 @@
     },
     {
       "index": 63,
-      "hash": "388019d911b235dd309a57adf53b2a188122d6cad05b17bc0667d8813e0fc85e",
+      "hash": "8aa2358a70aa6fdf2768270cfec5e9c9e3507e0608cc3374e0ae7e3dc0c57a4c",
       "preview": "One documented email carries more shadow than the tax files, and it is Epstein&r...",
-      "length": 1210
+      "length": 1214
     },
     {
       "index": 64,
@@ -781,9 +781,9 @@
     },
     {
       "index": 107,
-      "hash": "c7e6b93b56ed98a79b1d74ca5733bd7b0b1e5d7e756d57bf88ef852c1f6dede1",
+      "hash": "edf105226d9a7b8b59f8a6911ec192ac432592bde795bedc7c58394838e8a345",
       "preview": "The floor first, and it holds throughout. Andrew Mountbatten-Windsor (formerly P...",
-      "length": 418
+      "length": 510
     },
     {
       "index": 108,
