@@ -45,17 +45,20 @@ gap:18px;height:100vh;height:100dvh;padding:14px}
 /* Two transmissions side by side. Each is capped by width AND by available
    height so the ENTER button below can never be pushed off screen - the same
    constraint that fixed the landscape bug, now sized for a pair. */
-#vids{position:relative;z-index:1;flex:0 1 auto;display:flex;gap:14px;
-justify-content:center;align-items:center;max-width:100%}
-#vids .vid{aspect-ratio:16/9;flex:0 1 auto;
-width:min(45vw, 520px, calc((100dvh - 116px) * 16 / 9))}
+/* Four transmissions in a 2x2 grid. Each cell is capped three ways - by half
+   the viewport width, by an absolute max, and by HALF the remaining vertical
+   space (two rows now, not one). That third cap is what keeps the ENTER button
+   below from being pushed off screen, which is how the landscape bug happened
+   the first time. The grid stays 2x2 at every size rather than collapsing to a
+   column: four stacked 16:9 frames cannot fit above a button on a phone, and
+   body carries overflow:hidden so there would be no way to scroll to it. */
+#vids{position:relative;z-index:1;flex:0 1 auto;display:grid;
+grid-template-columns:repeat(2, auto);gap:12px;
+justify-content:center;align-content:center;max-width:100%}
+#vids .vid{aspect-ratio:16/9;
+width:min(45vw, 460px, calc(((100dvh - 128px) / 2) * 16 / 9))}
 #vids iframe{width:100%;height:100%;border:none;display:block}
-/* Under ~760px two 16:9 frames side by side are unusably small, so stack them -
-   and halve the height budget, since there are now two of them plus a gap. */
-@media (max-width:760px){
-  #vids{flex-direction:column;gap:12px}
-  #vids .vid{width:min(92vw, 620px, calc(((100dvh - 130px) / 2) * 16 / 9))}
-}
+@media (max-width:520px){ #vids{gap:8px} }
 #gate{position:relative;z-index:2;flex:0 0 auto;
 display:flex;align-items:center;gap:10px}
 #gate button{background:transparent;border:1px solid #333;border-radius:3px;
@@ -77,6 +80,16 @@ transition:border-color 0.3s,color 0.3s}
   <div class="vid">
     <iframe src="https://www.youtube-nocookie.com/embed/hnTSb2mZGKw?autoplay=1&mute=1&loop=1&playlist=hnTSb2mZGKw&controls=1&rel=0&playsinline=1"
       title="TRANSMISSION - DREAM COLONY (ERC-1155)"
+      allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </div>
+  <div class="vid">
+    <iframe src="https://www.youtube-nocookie.com/embed/zKcULCXz-cA?autoplay=1&mute=1&loop=1&playlist=zKcULCXz-cA&controls=1&rel=0&playsinline=1"
+      title="TRANSMISSION - MURAKAMI (ERC-1155)"
+      allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </div>
+  <div class="vid">
+    <iframe src="https://www.youtube-nocookie.com/embed/vCeDEZtRY9s?autoplay=1&mute=1&loop=1&playlist=vCeDEZtRY9s&controls=1&rel=0&playsinline=1&start=7"
+      title="TRANSMISSION - TARLAN (ERC-1155)"
       allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
   </div>
 </div>
