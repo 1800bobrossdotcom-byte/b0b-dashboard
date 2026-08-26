@@ -1,9 +1,9 @@
 {
-  "generated": "2026-08-26T01:06:20.276Z",
+  "generated": "2026-08-26T01:12:10.581Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "f41bcef6f673b91e37b14d24b76c51210e047b50c2d309c7a13888f114610f67",
+  "fullFileHash": "59263dbc63bacbb097a872ef83de11ae42f01f0f47a97a82d056a5b8f57e55db",
   "sectionBlocks": [
     {
       "id": "_preamble",
@@ -72,8 +72,8 @@
     },
     {
       "id": "XII",
-      "hash": "4589172599b2bbf9eaa1bed4402666cd7789be104e9ea9317eac37d096b7675c",
-      "length": 27312
+      "hash": "afa658296cfd89ab5f909df4af4bc3b76d45e27e895c309b4f75dab9ceebb21b",
+      "length": 27318
     },
     {
       "id": "XIII",
@@ -132,8 +132,8 @@
     },
     {
       "id": "contact",
-      "hash": "baa7f95587e2fa9c1191630aeb1207dd8d7544c37e70a422c0d7ba94c1389eb8",
-      "length": 31131
+      "hash": "3c2801600172e75f431f8c766d2f43ea2e17ae54a2ca41712b6ab948fb35031c",
+      "length": 31756
     }
   ],
   "paragraphHashes": [
@@ -3481,9 +3481,9 @@
     },
     {
       "index": 557,
-      "hash": "a583619489f90dc083b94982adcb28f4783e157a366278ebe93c3c45104c65fb",
-      "preview": "Five tracks are placed here deliberately, as signal rather than decoration, and ...",
-      "length": 236
+      "hash": "c7d86bc01ab887a889edada797cbaef8889fed6e047634d0c227d480280d18b5",
+      "preview": "Eight tracks are written up here deliberately, as signal rather than decoration,...",
+      "length": 861
     },
     {
       "index": 558,
