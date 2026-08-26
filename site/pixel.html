@@ -34,34 +34,36 @@
 </script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{width:100%;height:100%;background:#000;overflow:hidden;cursor:default}
+html{width:100%;background:#000;cursor:default}
+/* Scrolling is now required, not optional: four stacked 16:9 frames at full
+   size are taller than any viewport. The old overflow:hidden is what made the
+   landscape bug unrecoverable - content below the fold with no way to reach it.
+   With the page scrollable and ENTER sticky, neither can happen again. */
+body{width:100%;min-height:100%;background:#000;overflow-x:hidden;overflow-y:auto}
 /* Flex column instead of a computed top offset. The old rule positioned ENTER at
    50% + half the video height + 18px, which on a phone in landscape put the button
    below the fold - and with overflow:hidden there was no way to scroll to it, so the
    site could not be entered at all. Here the video is capped by BOTH width and
    available height, so the button is always on screen at any aspect ratio. */
-body{display:flex;flex-direction:column;align-items:center;justify-content:center;
-gap:18px;height:100vh;height:100dvh;padding:14px}
+body{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+gap:18px;min-height:100vh;min-height:100dvh;padding:14px 14px 0}
 /* Two transmissions side by side. Each is capped by width AND by available
    height so the ENTER button below can never be pushed off screen - the same
    constraint that fixed the landscape bug, now sized for a pair. */
-/* Four transmissions in a 2x2 grid. Each cell is capped three ways - by half
-   the viewport width, by an absolute max, and by HALF the remaining vertical
-   space (two rows now, not one). That third cap is what keeps the ENTER button
-   below from being pushed off screen, which is how the landscape bug happened
-   the first time. The grid stays 2x2 at every size rather than collapsing to a
-   column: four stacked 16:9 frames cannot fit above a button on a phone, and
-   body carries overflow:hidden so there would be no way to scroll to it. */
-#vids{position:relative;z-index:1;flex:0 1 auto;display:grid;
-grid-template-columns:repeat(2, auto);gap:12px;
-justify-content:center;align-content:center;max-width:100%}
-#vids .vid{aspect-ratio:16/9;
-width:min(45vw, 460px, calc(((100dvh - 128px) / 2) * 16 / 9))}
+/* Stacked vertically so each transmission is as large as the column allows.
+   Capped at 92vw and 900px; no height cap, because the page scrolls now. */
+#vids{position:relative;z-index:1;display:flex;flex-direction:column;
+gap:16px;align-items:center;width:100%}
+#vids .vid{aspect-ratio:16/9;width:min(92vw, 900px)}
 #vids iframe{width:100%;height:100%;border:none;display:block}
-@media (max-width:520px){ #vids{gap:8px} }
-#gate{position:relative;z-index:2;flex:0 0 auto;
-display:flex;align-items:center;gap:10px}
-#gate button{background:transparent;border:1px solid #333;border-radius:3px;
+/* Sticky, not static: with a scrolling page the button would otherwise sit
+   below four videos and have to be hunted for. This keeps it on screen at
+   every scroll position while staying in normal flow. */
+#gate{position:sticky;bottom:16px;z-index:2;flex:0 0 auto;
+display:flex;align-items:center;justify-content:center;gap:10px;
+padding:0;margin:2px 0 16px;width:100%;pointer-events:none}
+#gate>*{pointer-events:auto}
+#gate button{background:rgba(0,0,0,0.88);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);border:1px solid #333;border-radius:3px;
 color:#666;font-family:monospace;font-size:11px;letter-spacing:2px;
 padding:12px 26px;min-height:44px;cursor:pointer;outline:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation;
 transition:border-color 0.3s,color 0.3s}
