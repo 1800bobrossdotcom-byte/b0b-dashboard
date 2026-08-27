@@ -91,6 +91,30 @@ Every fact that reaches the report is re-derived from the DOJ file.
 
 ---
 
+## Passages used in the report, with their timecodes
+
+Both sit in the last four minutes of the released session, back to back.
+
+| Timecode | What it is |
+|---|---|
+| **1:56:03–1:56:30** | The tier-one exchange — *"what are you, class three sexual predator?" / "Tier one." / "No, I'm the lowest… but a criminal."* |
+| **1:56:42–1:57:36** | The devil exchange — *"Do you think you're the devil himself?" / "No, but I do have a good mirror." … "No, the devil scares me."* |
+
+**Speaker attribution for both comes from contemporaneous reporting** (France 24,
+The Independent, Premier Christian News and others, Feb 2026), **never from the
+machine diarization**, which tags both sides of both exchanges to one label.
+
+**One detail in the devil exchange is the report's own and is worth flagging.**
+Epstein answers the Milton quotation with *"I saw that in a movie once called
+American Dharma. I don't remember who said it."* American Dharma is Errol
+Morris's 2018 documentary **about Bannon**, in which Morris offers that line and
+Bannon completes it himself — *"Better to reign in hell than serve in heaven"* —
+adding *"I love that line."* The session was recorded 30 April 2019, before the
+film's US theatrical release. The report states the structure and explicitly
+does not assert whether Epstein's answer was a lapse or a needle.
+
+---
+
 ## Identification: how each recording's participants were established
 
 **EFTA01600824 (Bannon).** DOJ's own embedded title `je_1st_session` plus
