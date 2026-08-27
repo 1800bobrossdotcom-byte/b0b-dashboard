@@ -1,9 +1,9 @@
 {
-  "generated": "2026-08-27T02:41:24.864Z",
+  "generated": "2026-08-27T04:29:12.748Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "5e56ac69e7e90a24fb101b0105584b5402b421a550ef9ca46e43658fac616b59",
+  "fullFileHash": "1c83c1212878a66da61ebbbd9a7025a078221a58625cc77e9cccce002a52c516",
   "sectionBlocks": [
     {
       "id": "_preamble",
@@ -22,8 +22,8 @@
     },
     {
       "id": "II",
-      "hash": "fab0274ddeb8a2f3e1e578e0eada94e4adc409e2764dfafb18066ddd42cce3dc",
-      "length": 104054
+      "hash": "1c671f513955fb17a1ee202ac11310ea90adbd8142bfc4edca0241ce92b8b472",
+      "length": 105569
     },
     {
       "id": "III",
@@ -630,9 +630,9 @@
     },
     {
       "index": 81,
-      "hash": "ecfed0276291a2330b19626338f70c6a003fda152a3c8f75c34018c81dbcac1b",
-      "preview": "The Nov 2025 estate release contains Epstein disparaging Trump repeatedly to thi...",
-      "length": 645
+      "hash": "9564155bffa7377c7c0834a1ad471f86ff357fc76cc977f80c68a181f0f481db",
+      "preview": "The Nov 2025 estate release contains Epstein disparaging Trump repeatedly - his ...",
+      "length": 1108
     },
     {
       "index": 82,
@@ -654,9 +654,9 @@
     },
     {
       "index": 85,
-      "hash": "60483300ed9de67b744e1f63602587adcb09e17a410973b330a57c0f5d876783",
+      "hash": "0f6413050aff841b0d65a6d3b891e0b386d3590c81a3e43a88626090948232ad",
       "preview": "What the record contains, in the principal&rsquo;s own hand. The correspondence ...",
-      "length": 939
+      "length": 1991
     },
     {
       "index": 86,
