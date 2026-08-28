@@ -1,13 +1,13 @@
 {
-  "generated": "2026-08-28T20:30:09.610Z",
+  "generated": "2026-08-28T22:08:18.860Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "832985917e9d0520f0286a68b4d2f078f168ac68c2e480269f3357f07d91b35d",
+  "fullFileHash": "20ac61be50a428039714a9e6ee6a7b4e7204605018a596475109727a5636c60f",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "7527b62584b78cf153712ca809406095ecb4c45591b5971d8cea57ca902487b6",
+      "hash": "ff440bd00e995bad584633c4097c52e479c0dcf2c14e9318702524f12d604318",
       "length": 32137
     },
     {
@@ -32,8 +32,8 @@
     },
     {
       "id": "II",
-      "hash": "b56fd047828a1d267acbf56afbbd7648fe7c20f0121c258e71d97664d48587cf",
-      "length": 11568
+      "hash": "9f2a29cc6a6444b1c83128b8f8c89ab659f96a3af81623969f5a812c9f90e921",
+      "length": 11572
     },
     {
       "id": "ii-tier-1-documented-directly-in-the-corpus",
@@ -76,9 +76,9 @@
       "length": 17736
     },
     {
-      "id": "ii-the-joint-service-extension-cia-mossad-and-british-acknowledgment",
-      "hash": "1c7806266c39a89a8c2b16d2b73b28693bd1754e0d12dadb1b9974c74b869a8b",
-      "length": 6732
+      "id": "ii-primary-and-liaison-mossad-directing-with-cia-and-british-services-witting",
+      "hash": "469fd116623c0288ade9ae7bd0758c99dbc88e923f6b94a8cef6ae15170b2f68",
+      "length": 7705
     },
     {
       "id": "ii-were-the-covers-the-operation",
@@ -132,8 +132,8 @@
     },
     {
       "id": "ii-the-fork-the-operation-or-the-withholding-and",
-      "hash": "a1eb579edecc2f120d3237fdda47e7c6d39f4cca0b5c9893fd76c0656cd3da89",
-      "length": 40345
+      "hash": "a4bb2215b58c38fa2ecc87d454250a5951b07ebab0adf5f740cc0136e95db746",
+      "length": 40034
     },
     {
       "id": "ii-the-on-boarding-read-what-the-hub-metric-is",
@@ -2075,51 +2075,51 @@
     },
     {
       "index": 121,
-      "hash": "0be954c1833f42627f549cb7e34e043fcb99a2e2c9b2506fcd10d89067db8953",
-      "preview": "The author&rsquo;s hypothesis has a second form, and it is a different claim rat...",
-      "length": 567
+      "hash": "028d2ae0c9d63d75f2b9495a03290fed6f386e88c6105f8bc0fb76fea6f5ac55",
+      "preview": "The author&rsquo;s hypothesis has a second form, and an earlier version of this ...",
+      "length": 794
     },
     {
       "index": 122,
-      "hash": "5a057c283dea9dff8b7aa03a0414bb660c69f60d87fcaa7fec1f4009c59a1720",
-      "preview": "The substrate is documented history, not lore, and this is the strongest part of...",
-      "length": 776
+      "hash": "4193174c63639cb4fbabd224e47939a0d670b591d70a81308c91e13d646f2463",
+      "preview": "The substrate is documented history rather than lore. These services are institu...",
+      "length": 750
     },
     {
       "index": 123,
-      "hash": "4d9f071ba6c355de26e3ffc1ff1eb6c9e0e25c926b58462c1fd2ea3c91915bcc",
-      "preview": "And the word &ldquo;acknowledgment&rdquo; is doing precise work, which the repor...",
-      "length": 939
+      "hash": "30b4a0042d81cc71659682bcdef591aa395eea8881b66ca3a07899a633d40f8e",
+      "preview": "And the vocabulary already exists, exactly, which is why the author&rsquo;s form...",
+      "length": 1047
     },
     {
       "index": 124,
-      "hash": "7051a9763ac262648e476297a524086dd33e4bc441bfbd51b49a303c4000e448",
-      "preview": "Two things the joint reading explains better than the single-sponsor reading, an...",
-      "length": 856
+      "hash": "745652821d0723b56af372b9e7fb2d535fb2ef09798a2a9c3a9ba71f2a4d70ef",
+      "preview": "Two things this reading explains better than a single unwitting sponsor, and the...",
+      "length": 789
     },
     {
       "index": 125,
-      "hash": "c6d67ee1c370f450e264ea9b4f33f77f9aa1b4de53c8f7006c7559c3467a6e9d",
-      "preview": "The cost, and it is structural rather than a matter of taste. A joint operation ...",
-      "length": 622
+      "hash": "fc447acb6f46dd9a6b4f0bc8d64c6f1dfb764c8cf52cce6613ebe3c8d61c345f",
+      "preview": "The objection this report raised last time does not survive the correction, and ...",
+      "length": 851
     },
     {
       "index": 126,
-      "hash": "a3fc082f07cc663748be3c6313b1e1083fcab92cba2517a7c1d9249f295a04f2",
-      "preview": "And the fair answer to that objection is the author&rsquo;s own architecture, so...",
-      "length": 672
+      "hash": "b3455643713e529b4d944eeacdfbb891484ebfa858aef66e2683055ffeaa12d1",
+      "preview": "And the Pollard case has to be re-graded for the same reason, in his favour. The...",
+      "length": 1310
     },
     {
       "index": 127,
-      "hash": "fe76897dd7bb94b52cb7fa603ee44b2f1efde00f82bcbdd16e4d4e0ee79e582f",
-      "preview": "The hardest fact cuts the other way, and it arrives from inside the author&rsquo...",
-      "length": 1037
+      "hash": "0651e23a10ee5122d88b944b6111b5fc6862ca344f95210e67a1925ab1a8c6f2",
+      "preview": "What survives as the objection, and it is narrower and harder than the one it re...",
+      "length": 827
     },
     {
       "index": 128,
-      "hash": "b794e9f5701f0c77c25c8758f0befc7d5fd105d8d4708d76391f11551dff3887",
-      "preview": "Tier - and note which direction this moves the bar. Author&rsquo;s hypothesis, u...",
-      "length": 1256
+      "hash": "38f07ec822dbab4388f91df44e7608a90bdcec7f56b43d13f99bb712389ff91b",
+      "preview": "Tier, stated exactly. Author&rsquo;s hypothesis - unproven, and adopted by this ...",
+      "length": 1330
     },
     {
       "index": 129,
@@ -2597,21 +2597,21 @@
     },
     {
       "index": 208,
-      "hash": "64f1b4aa281048b653fd0cf590185879732d3ac414a77634ca5f62206b73d025",
+      "hash": "b8c3241baebe0583c382253adaf4807dcf6b4e00d423247268ead74051c75ea5",
       "preview": "Against it, finding four - and this one is the assumption underneath the other t...",
-      "length": 866
+      "length": 870
     },
     {
       "index": 209,
-      "hash": "ec3dc8e4aca33cabaf7c66b505b4d6597f7d05e30ccb0c4b467fc0a958f6fc38",
-      "preview": "And partition cuts in both directions, which is the honest way to leave it. Addi...",
-      "length": 908
+      "hash": "53d8698b3dd649ecbd2ca6ae073bdaeb5fa7a6df6cbbec4999599946038a3f7b",
+      "preview": "And the shape of the alternative matters, because two different things get calle...",
+      "length": 950
     },
     {
       "index": 210,
-      "hash": "b134d09b1cdf8f4a292bbb66357c3102d637e1695a9cc1b4e7caf0e5a52704be",
-      "preview": "The strongest form of the reply is worth stating, because it is available and it...",
-      "length": 1323
+      "hash": "74a6985b0bd895bf6e6f1ae0ed2ee226012472c49fb870a1bbc083d01004481f",
+      "preview": "What the multi-party shape does explain, on either version, is the character of ...",
+      "length": 974
     },
     {
       "index": 211,
