@@ -40,7 +40,7 @@ FRONT = 'FRONT'
 # anything. Order here is the order on the page: ascending count, which is also
 # ascending diffuseness.
 TERMS = [
-    ('DARPA', 'darpa', 'The forward edge'),
+    ('DARPA', 'darpa', 'A clock, and one named target'),
     ('Lockheed', 'lockheed', 'The case study'),
     ('CIA', 'cia', 'The connective institution'),
 ]
@@ -145,11 +145,11 @@ def ledger(term, data):
 # Prose is authored, not generated — the counts inside it are substituted from
 # the live figures so a stale sentence is impossible.
 COPY = {
-    'DARPA': """<p>DARPA is the rarest of the three and the most lopsided in <em>where</em> it falls. {Xvi_w} of its {total} mentions sit in <strong>Section XVI</strong>, and four of those are inside one subsection: the derivation that asks what is running now and will be disclosed in 2040. The report reaches for DARPA almost exclusively when it is pointing at the part of the record that does not exist yet.</p>
-    <p>The programmes it names in that window are dated rather than speculative: <strong>Big Mechanism</strong> (2012, machine reading of the scientific literature), the <strong>Biological Technologies Office</strong> (established 2014, as CRISPR entered wide laboratory use), and the <strong>N3</strong> brain-computer interface line (2017&ndash;), which the report calls the successor to MKUltra&rsquo;s failed attempts &mdash; <q>not through drugs and torture, but through engineering.</q> The argument is a clock rather than a claim: every declassified programme in the report&rsquo;s own table stayed dark for two to three decades, so a 2013 cohort lands in 2033&ndash;2040.</p>
-    <p>The remaining mentions do different work. In <strong>Section XVI</strong> DARPA appears as a <em>credential that does not transfer</em>: Lt. Col. John G. Blitch is genuinely documented &mdash; DARPA robotics, founder of CRASAR, ran the search-and-rescue robots at the WTC &mdash; and in 2025 UAP media he is the vetter, not the claimant. A credentialed person vouching does not convert testimony into documentation. In <strong>Section XX</strong> it carries the ALIAS autonomy programme into the Calabasas crash entry, where the report states the capability and then states the counter-evidence that defeats it. And in <strong>XXIV</strong> it is the author disclosing the lens: Burbank, the GATE programme, and a DARPA mark on his own arm.</p>""",
+    'DARPA': """<p>DARPA is the rarest of the three and the only one that does two unrelated jobs in this report. The larger share &mdash; {ii} of {total} &mdash; is <em>documentary</em>, and it is recent. <strong>Section II</strong> carries an approach out of the DOJ production itself: across 2010&ndash;2013 Epstein pursued an introduction to <strong>Regina Dugan, Director of DARPA from July 2009 to March 2012</strong>, brokered by Bill Gates&rsquo;s science adviser Boris Nikolic (<q>You would like her a lot! We need to schedule a trip to DC sometime soon</q>), kept alive by standing calendar alarms reading <q>remind JE Regina, darpa</q>, and planned to close at TED2012. The report states the strategic reading of that at hypothesis tier and publishes the finding that cuts against it &mdash; the interest continued after she left the agency. <strong>Nothing shows she met him or knew of the interest, and the report asserts nothing about her.</strong></p>
+    <p><strong>The other job is a clock, and it points the opposite way in time.</strong> {Xvi_w} mentions sit in <strong>Section XVI</strong>, four inside one subsection: the derivation asking what is running now and will be disclosed in 2040. The programmes it names there are dated rather than speculative &mdash; <strong>Big Mechanism</strong> (2012, machine reading of the scientific literature), the <strong>Biological Technologies Office</strong> (established 2014, as CRISPR entered wide laboratory use), and the <strong>N3</strong> brain-computer interface line (2017&ndash;), which the report calls the successor to MKUltra&rsquo;s failed attempts <q>not through drugs and torture, but through engineering.</q> The argument there is a clock rather than a claim: every declassified programme in the report&rsquo;s own table stayed dark for two to three decades, so a 2013 cohort lands in 2033&ndash;2040.</p>
+    <p>The remaining mentions do other work again. DARPA appears in <strong>Section XVI</strong> as a <em>credential that does not transfer</em>: Lt. Col. John G. Blitch is genuinely documented &mdash; DARPA robotics, founder of CRASAR, ran the search-and-rescue robots at the WTC &mdash; and in 2025 UAP media he is the vetter, not the claimant. A credentialed person vouching does not convert testimony into documentation. In <strong>Section XX</strong> it carries the ALIAS autonomy programme into the Calabasas crash entry, where the report states the capability and then states the counter-evidence that defeats it. And in <strong>XXIV</strong> it is the author disclosing the lens: Burbank, the GATE programme, and a DARPA mark on his own arm.</p>""",
 
-    'Lockheed': """<p>Lockheed is the opposite shape. {Vii_w} of its {total} mentions are in <strong>Section VII</strong>, and thirteen of those are in a single subsection written for it. Where DARPA is a pointer, Lockheed is an argument the report works out in one place.</p>
+    'Lockheed': """<p>Lockheed is the opposite shape. {Vii_w} of its {total} mentions are in <strong>Section VII</strong>, and thirteen of those are in a single subsection written for it. Where DARPA is split between a clock and a single named target, Lockheed is one argument the report works out in one place.</p>
     <p>The claim is chronological, and the report corrects its own looser version of it first: the Skunk Works (1943) is <em>not</em> older than the OSS (1942). Lockheed the company is &mdash; Loughead Aircraft (1912) &rarr; Lockheed Aircraft Co. (1926) &rarr; the Gross reorganisation (1932), all predating the OSS (1942), the CIA (1947) and the NRO (1961). <q>The private aerospace firm is older than the entire modern US intelligence apparatus &mdash; which was then built, in part, around capabilities the firm already had.</q></p>
     <p>Then the documented instruments. The <strong>U-2 was a CIA programme, not the Air Force&rsquo;s</strong>: Project AQUATONE, Eisenhower-approved November 1954, run by Richard Bissell, contracted directly to Kelly Johnson; Area 51 established April&ndash;July 1955 to flight-test it, and acknowledged by the Agency only in 2013. The <strong>A-12 OXCART</strong> was CIA-owned outright &mdash; twelve aircraft, operational 1965, declassified 2007. And Lockheed was system integrator on <strong>Corona, Gambit and Hexagon</strong>, the first spy satellites of an agency whose existence stayed classified until 1992.</p>
     <p>The other half is the <strong>bribery record</strong>: ~$22M across six countries, exposed by the Church Subcommittee in 1975&ndash;76, taking down Prince Bernhard of the Netherlands, Japanese PM Kakuei Tanaka and Italian President Giovanni Leone &mdash; and producing the <strong>Foreign Corrupt Practices Act</strong> (December 1977). Today Lockheed Martin is the world&rsquo;s largest arms producer for a fifteenth consecutive year (~$64.6B, SIPRI 2024), with an F-35 lifetime cost the GAO revised past <strong>$2 trillion</strong>.</p>
@@ -169,7 +169,7 @@ def prose(term, data):
         total=v['total'],
         sections=v['nsec'], sections_w=words(v['nsec']),
         subs=len(v['subs']),
-        vii=s.get('VII', 0), xvi=s.get('XVI', 0),
+        vii=s.get('VII', 0), xvi=s.get('XVI', 0), ii=s.get('II', 0),
         vii_w=words(s.get('VII', 0)), xvi_w=words(s.get('XVI', 0)),
         Vii_w=words(s.get('VII', 0)).capitalize(),
         Xvi_w=words(s.get('XVI', 0)).capitalize(),
@@ -375,8 +375,8 @@ h1 .sep{{color:var(--rule-hi);font-weight:400}}
   <p class="lede">The three names are not three versions of the same thing. Counted and plotted, each falls into a different pattern, and the pattern is the first finding.</p>
   <p><strong>CIA is diffuse</strong> &mdash; {cia_total} occurrences spread across {cia_sec_w} of the {nsec_w} numbered sections and {cia_subs} separate subsections. It has no chapter because it is connective tissue; a high count here describes the report&rsquo;s architecture rather than proving anything about the Agency.</p>
   <p><strong>Lockheed is concentrated</strong> &mdash; {lock_total} occurrences, {lock_vii_w} of them in Section VII and thirteen in a single subsection written for it. It is a worked case, argued once and in one place.</p>
-  <p><strong>DARPA is sparse and late</strong> &mdash; {darpa_total} occurrences, half of them in the derivation that asks what is running now and gets disclosed in 2040. The report reaches for DARPA almost exclusively when pointing at a record that does not exist yet, which is the honest limit of what a citation can do there.</p>
-  <p>The three are ordered below by count, smallest first, because that is also the order of increasing diffuseness &mdash; from a pointer, to a case, to a solvent.</p>
+  <p><strong>DARPA is sparse and split</strong> &mdash; {darpa_total} occurrences doing two unrelated jobs. {darpa_ii} of them sit in <strong>Section II</strong> and are documentary: a pursued approach to the agency&rsquo;s sitting director, out of the DOJ production itself. {darpa_xvi} are a clock &mdash; the derivation asking what is running now and gets disclosed in 2040, where a citation can only point at a record that does not exist yet. The larger half is now the one made of paper.</p>
+  <p>The three are ordered below by count, smallest first, because that is also the order of increasing diffuseness &mdash; from a named target, to a worked case, to a solvent.</p>
 </section>
 {blocks}
 <footer class="foot">
@@ -443,6 +443,8 @@ def main():
         lock_vii=data['terms']['Lockheed']['by_section'].get('VII', 0),
         lock_vii_w=words(data['terms']['Lockheed']['by_section'].get('VII', 0)),
         darpa_total=data['terms']['DARPA']['total'],
+        darpa_ii=data['terms']['DARPA']['by_section'].get('II', 0),
+        darpa_xvi=data['terms']['DARPA']['by_section'].get('XVI', 0),
     )
 
     with open(OUT, 'w', encoding='utf-8') as fh:
