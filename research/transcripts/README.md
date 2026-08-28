@@ -161,3 +161,102 @@ out of an Epstein recording where it means something else is precisely the false
 weld the report's anti-map guardrail exists to refuse, and doing it to our own
 material would be worse than doing it to someone else's. Recorded here so the
 exclusion is a decision on the record rather than a silent omission.
+
+---
+
+# DOJ EFTA device extraction — Epstein iMessages, 20 December 2018
+
+Added 28 August 2026. This is **not** a recording and **not** the email corpus. It is a
+forensic extraction report from Epstein's own device, released as a PDF.
+
+| Bates range | Pages | DOJ dataset | DOJ `content-length` | DOJ `last-modified` |
+|---|---|---|---|---|
+| `EFTA01211330`–`EFTA01211347` | 18 | DataSet 9 | 1,038,108 | Fri, 30 Jan 2026 06:17:15 GMT |
+
+URL:
+
+```
+https://www.justice.gov/epstein/files/DataSet%209/EFTA01211330.pdf
+```
+
+```
+sha256  da5311e1c63f866ebbb42bf76726c5828cd8ccceaad1892b0e011fe9efe8c98b  EFTA01211330.pdf  (1,038,108 bytes)
+```
+
+Retrieved with the same `justiceGovAgeVerified=true` interstitial cookie as the media
+files. The PDF itself is **not committed** — only the hash and the extracted text
+(`EFTA01211330.raw.txt`, produced with `pypdf`).
+
+### What the document is, in its own words
+
+- Evidence item: **`NYC024365.aff4`** (Device Details → `NYC024365.aff4 - 001`).
+- Section header: **`Case Data: Messages (39001-39100 of 54988)`**.
+- The account rendered as `Self` on every outbound message: **`jeeitunes@gmail.com`**.
+- One Bates number per page; page 1 = `EFTA01211330`, page 18 = `EFTA01211347`.
+
+**The denominator is the load-bearing fact.** The device held **54,988** messages and
+DOJ published a window of **one hundred**. That is stated by the extraction tool, not
+inferred, and it is the same shape as the `je_1st_session` title on the Bannon video:
+the release documents its own incompleteness.
+
+### Known defects — read before quoting
+
+1. **The scan is poor and the text layer is imperfect.** Confirmed OCR corruptions
+   include `grnail.com` for `gmail.com`, `eeitune ail.com` / `jeeitunes®gmail.com` for
+   the address, `bums down his house` for *burns*, `hups://` for `https://`, and garbled
+   timestamps (`I I:IR:42`). Every quotation used in the report was read against the
+   surrounding lines; none is repaired silently.
+2. **Every message is rendered two or three times.** Each appears once with a bracketed
+   index (`[2]`, `[3]`, `[4]`, `[5]`) and again as `[1]`. The `[1]` copies are duplicates.
+3. **The bracketed index is NOT relied on.** Within the single Syria/Iran exchange the
+   leading index alternates between `[3]` and `[4]`, which would mean Epstein pushed the
+   same analysis to two correspondents in parallel. That is a real possibility and it is
+   **deliberately not published**, because at this scan quality a `3`/`4` misread is at
+   least as likely as a second thread. Recorded here as unresolved.
+4. **At least three distinct correspondents are interleaved** in the hundred-message
+   window: the Syria/geopolitics thread, a philosophy-of-consciousness thread (Tagore,
+   Rumi, *"Running to yoga class"*), and a third that closes with *"I'm grateful for your
+   help with my business."* The export is a slice of the Messages table by row number,
+   not a conversation.
+
+### Identification: deliberately not attempted
+
+**DOJ redacted every participant except Epstein.** The Syria correspondent's own messages
+nonetheless contain a good deal of self-identifying material — travel, a named UN
+official described as a former subordinate, and a reference to a White House briefing.
+
+**That material is not reproduced in the report and no identification is offered.**
+De-anonymising a government redaction on a living, uncharged person by inference is the
+naming error the report exists to refuse, performed on our own material, and being
+someone Epstein texted is not an offence. The analytic consequence is stated in the
+report instead: the recipient-incentive analysis run on the Wolff and Maxwell letters
+**cannot be run here**, so these messages are held *lower*, not higher.
+
+### Passages used in the report
+
+All are Epstein (`Sender: Self`), 20 December 2018, times UTC — the morning after the
+19 December announcement of the US withdrawal from Syria.
+
+| Time | Text |
+|---|---|
+| 11:45:27 | *"Trump pulling troops out of syria , is a bad sign. He is up to something . And its not good"* |
+| 11:46:23 | *"btw. I believe that his pulling troops out of syria is step one"* |
+| 11:46:56 | *"He needs a large diversion"* |
+| 11:53:46 | *"You guys need to understand that he is psychotic. And would not blink twice at encouraging an attack on us . So he can leap to the country.s defense. . mindset. If I go down I m taking everyone with"* |
+| 11:54:12 | *"Cornering a rat, never a good idea"* |
+| 11:56:46 | *"Could be he doesn't want them there if a much bigger operation might put them in jeopardy . Reminder , he will take everyone down with him, if he feels the end is near. I always urge people not to corner a rat.. they become extremely dangerous and unpredictable"* |
+| 12:14:13 | *"They are going drip by drip. But rats go crazy BEFORE the cage closes. Too much time . The republicans are beginning to understand .. I would nt be surprised to see him do things that might encourage a real problem"* |
+| 12:21:49 | *"We only had 2k troops there , if he were to bomb Iran , they would be slaughtered"* |
+
+**One correction the primary document forced on our own draft, recorded because it
+matters.** Before this PDF was read, the working note held that the viral quote card —
+*"If Trump feels cornered like a rat, he will bomb Iran just to create a diversion"* —
+had invented the diversion motive outright. It had not. **"He needs a large diversion" is
+Epstein's own sentence**, sent at 11:46:56, thirty-five minutes before the Iran line. The
+card is a **weld of three real messages into one sentence he never wrote**, not an
+invention — a materially different and more interesting object, and the finding published
+in Section XIII says so.
+
+**Also settled by the document:** *"If I go down I m taking everyone with"* is not
+Epstein speaking about himself. It is the tail of a sentence about Trump, and the word
+immediately preceding it is *mindset*.
