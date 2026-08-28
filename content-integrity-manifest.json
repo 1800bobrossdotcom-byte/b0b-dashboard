@@ -1,13 +1,13 @@
 {
-  "generated": "2026-08-28T00:21:04.054Z",
+  "generated": "2026-08-28T01:23:55.803Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "23ccdaddb21797f6e2e093b29d12227c9500bad67e2b19bf0d11803826b34326",
+  "fullFileHash": "a6a2f07ca2d7039564a53c89854bd8358ae9386f55d8fbc15ac311762e0a769e",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "60a348647154e40f7455aa856af0e6569615166b4a7484ffd9f49c2fa4befbe8",
+      "hash": "c4b4e79f0587e84c9d701065d1b1a17361d7bc2f801f9f89877d7bc9e8f89427",
       "length": 31147
     },
     {
@@ -1037,8 +1037,8 @@
     },
     {
       "id": "XIX",
-      "hash": "2404af4b5bf264648c8b09d2495dda212da215c49f32c306842ad748404a4fd3",
-      "length": 454
+      "hash": "b8f9e9d92b8e349a563d3e321125a4dac0dcd9dd947e0ffceed2b65bd73e09ba",
+      "length": 1133
     },
     {
       "id": "xref-governance",

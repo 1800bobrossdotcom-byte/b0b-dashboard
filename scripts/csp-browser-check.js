@@ -47,6 +47,7 @@ const PAGES = [
   '/', '/report', '/map', '/countermeasures', '/artifact', '/spectra',
   '/tones-shield', '/tones-healing', '/tones-instrument', '/tones-multipack',
   '/tones-protective', '/tones-shield-guide', '/ai-attack-vector-analysis',
+  '/darpa-cia-lockheed',
 ];
 
 function accessCookie() {

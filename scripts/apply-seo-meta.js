@@ -38,6 +38,7 @@ const URLS = {
   'tones-multipack.html': '/tones/multipack',
   'tones-shield-guide.html': '/tones/shield/guide',
   'ai-attack-vector-analysis.html': '/ai-attack-vector-analysis',
+  'darpa-cia-lockheed.html': '/darpa-cia-lockheed',
 };
 
 // The one honest timestamp on Vercel (see server.js siteUpdatedString).

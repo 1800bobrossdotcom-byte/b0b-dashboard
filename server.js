@@ -350,6 +350,7 @@ const CANONICAL_PATHS = [
   '/', '/report', '/map', '/countermeasures', '/artifact', '/spectra',
   '/tones/healing', '/tones/protective', '/tones/instrument', '/tones/shield',
   '/tones/multipack', '/tones/shield/guide', '/ai-attack-vector-analysis',
+  '/darpa-cia-lockheed',
 ];
 
 app.get('/sitemap.xml', (req, res) => {
@@ -391,6 +392,7 @@ const PAGES = {
   '/tones/instrument':'tones-instrument.html',
   '/tones/multipack':'tones-multipack.html',
   '/ai-attack-vector-analysis':  'ai-attack-vector-analysis.html',
+  '/darpa-cia-lockheed': 'darpa-cia-lockheed.html',
 };
 
 // Alias -> canonical, as 301s. These used to be duplicate 200s (both forms in
@@ -408,6 +410,7 @@ const REDIRECTS = {
   '/tones-shield-guide': '/tones/shield/guide',
   '/tones/guide':        '/tones/shield/guide',
   '/ai-attack-vector-analysis.html': '/ai-attack-vector-analysis',
+  '/darpa-cia-lockheed.html': '/darpa-cia-lockheed',
 };
 
 // Serve static assets (js, css, manifests, icons, i18n) for authenticated users
