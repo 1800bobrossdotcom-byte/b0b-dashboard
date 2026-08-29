@@ -98,3 +98,56 @@ they get their caveat.
 
 Any quote taken from the jmail email layer must record its **doc_id namespace** at
 capture time. A hex32 id is a research lead, never a citation.
+
+---
+
+# ADDENDUM — a clean counter-example, verified the right way (29 Aug 2026)
+
+The author supplied a primary URL for a designer-baby funding solicitation. It is
+the **opposite** of the problem above, and it demonstrates the method that closes it.
+
+- **EFTA01003966** — `justice.gov/epstein/files/DataSet 9/EFTA01003966.pdf`
+  - fetched with `justiceGovAgeVerified=true` + browser UA → HTTP 200, 64,513 bytes
+  - SHA-256 `ce7a9f3f6ede9c0b5a8cbb42ba7724ac691354d4c64034e1c581f9210e012a49`
+  - `pypdf` extract carries the Bates stamp `EFTA01003966` at the foot
+  - text matches the author's screenshot exactly; OCR renders `gmail`→`grnail`,
+    `$1.7m`→`$1.7rn`, `~`→`—`/`--`. Extraction artifacts, not variants.
+- Thread continues, same method, DataSet 11:
+  - **EFTA02604748** (16 Aug 2018) SHA-256 `0b42c9ef13edcba1cba313f5efb426afc9e722ddb6f2a0947cf30e2bdb3201e1`
+  - **EFTA02625950** (30 Aug 2018) SHA-256 `bb8c84bce65013d59de4507b7a274be5eea47e1497eefb3b0573e7088aa77bb6`
+  - **EFTA02603821** (13 Aug 2018), **EFTA02625511** (30 Aug 2018) — resolved, not hashed.
+
+Published in Section VI as "The costed proposal". The contrast is the point: this
+quote is citable because a Bates number resolved to a government PDF whose bytes
+were pulled and hashed. The five items flagged above still have no such anchor.
+
+---
+
+# ADDENDUM 2 — two corpus-reading specimens (29 Aug 2026), both author-supplied
+
+- **EFTA00165018–EFTA00165024** (DataSet 9, 7pp, 29 Dec 2020) — SHA-256
+  `766f3df3bfae2a33707553ea884af92cd19c5945b53f7d3096903c18ea6598d5`.
+  Unsolicited public tip to the FBI ("[EXTERNAL EMAIL] - Hello again") forwarding
+  phone screenshots: adrenochrome/organ harvesting, an "underground temple" sealed
+  behind a painted fake door, blood in black buckets, children killed for mind
+  control. Third-hand, ultimate source recounting age-four memories. **Names a
+  living, uncharged scientist at a major university.** NAME AND ALLEGATION NOT
+  PUBLISHED AND NOT TO BE — anonymous, uncorroborated, defamatory.
+  → Published as the Section I guardrail, described structurally only.
+
+- **EFTA01850400–EFTA01850401** (DataSet 10, 11 Nov 2011) — SHA-256
+  `daa41913f5210ff476b083eb4e15243a29f4f571050c616dc51cf10a35fa9cec`.
+  Genuine Epstein email; a correspondent sends a Christie's lot photo: Sex Pistols
+  banned promo poster *Young Flesh Required*, Great Rock 'N' Roll Swindle, Virgin
+  1979, GBP 1000–1200. **Checked: it is a Jamie Reid 1979 American-Express-card
+  parody attacking record-label exploitation — "The Artist (The Prostitute) … the
+  Record Company (The Pimp)" — held by MoMA, banned because Amex sued Virgin over
+  the trademark.** The title means the reverse of what the inbox implies.
+  Correspondent referred to as "a correspondent"; not identified, as the name is
+  ambiguous and identification would be speculation.
+  → Published as the guardrail's second specimen.
+
+The pair is the point: specimen one is material that was never evidence; specimen
+two is a genuine Epstein document whose contents mean something other than the
+context suggests. Neither error is caught by verifying the document — only by
+identifying what it is about.
