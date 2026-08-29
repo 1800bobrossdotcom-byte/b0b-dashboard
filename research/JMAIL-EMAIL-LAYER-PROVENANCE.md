@@ -306,3 +306,43 @@ case of the Section I guardrail.
 **NOT PUBLISHED:** a gratuitous remark about a named living woman's appearance —
 cruel, private, zero analytical value; and her name, which would attach her to
 Epstein for no gain. Excluded entirely.
+
+---
+
+# ADDENDUM 7 — Fenwick: the money moved, and Goldsmiths refused it
+
+Correction to Addendum 6's framing. Published first as a solicitation; it was a
+funded project, and an institution declined the larger gift.
+
+**DOCUMENTED (verified here, hashed):**
+- EFTA01059474 (DataSet 9, 10 Dec 2016) `fd655b193e456f07d5a8389a1cede794e860d53a4aa9cb62cd9d3f1623da8e40`
+  — Fenwick → Epstein, "Hyperscanning Grant", the 2-page proposal.
+- EFTA00504063 (DataSet 9) `94f9a198de38970afac9315ceaeb02b9841d0df3ba1730e59ffaf5de4bf728cc`
+  — Lesley Groff (NPA-immunised assistant) forwarding the Fenwick thread. Shows the
+  channel was administered from Epstein's office.
+
+**REPORTED (CIReN / Sigmalive Cyprus; UK press) — NOT re-derived from DOJ PDFs:**
+- Sept 2016: introduction made by an academic at a Hong Kong university.
+- £85,000 draft proposal to **Goldsmiths, University of London**, from Epstein's
+  **"Enhanced Education"** vehicle.
+- £20,000 to a Cypriot co-investigator; £6,500 invoiced Mar 2017 for EEG analysis.
+- **22 Feb 2017: £15,000 transferred to Fenwick as a "starter grant."**
+- **Late Mar 2017: Goldsmiths' Ethical Committee for Acceptance of Gifts REFUSED
+  the donation.**
+- Study subjects were to be a French spiritual teacher and his students — which is
+  what the "Alain" first-name reference in the 10 Dec email points to.
+
+**WHY IT MATTERS — the institutional tally is now the finding.** Four bodies ran a
+check on Epstein and got a clear answer: Fidelifacts 1976 (fabrication documented,
+brokerage promoted him anyway); the banks across ~15 years (late, thin, or no
+SARs); 23andMe 2017 (queried a bulk order, disbelieved the answer, killed it);
+Goldsmiths 2017 (refused the gift). **The two that acted were a consumer genomics
+company and a university ethics committee. The two that did not were a Wall Street
+brokerage and several of the largest banks on earth.**
+
+**FLOORS:** the Hong Kong academic, the Cypriot co-investigator and the French
+teacher are living, uncharged, and are NOT named in the published text — seeking
+or receiving a research grant is not misconduct.
+
+**Not chased:** a UK press story about a Highlands property used to tempt Epstein
+to a Scottish retreat. Open lead.
