@@ -770,3 +770,174 @@ it unexamined would have been the asymmetry this report spent the day correcting
 produced a *more* lurid report, not a duller one.
 
 Published into the Section XIII naming-error module as four fresh specimens.
+
+---
+
+# ADDENDUM 19 — the objection scan: six phrasings, one hit, and the hit is the prosecutor's
+
+**Question asked:** does anyone in the correspondence ever object? Not "is there
+evidence of crime" — a moral-scale question about the mail itself.
+
+**Method:** literal phrase queries against the email layer, six objection phrasings.
+
+| phrase | hits |
+|---|---|
+| `"you need to stop"` | 0 |
+| `"I can't be part of"` | 0 |
+| `"i object"` | 0 |
+| `"this is not right"` | 0 |
+| plain refusal forms around the above | 0 |
+| `"this has to stop"` | **1** |
+
+**The single hit: EFTA00189167.** DataSet 9, 24 pages.
+SHA-256 `a51660c44dc87cdea685a28461116d6903aedf567e016286c77e90a95cef5020`.
+Retrieved from justice.gov with the age-verification cookie and hashed.
+
+It is not Epstein's mail. It is the 2007 NPA negotiation traffic — AUSA Ann Marie
+Villafaña, First Assistant Jeff Sloman, US Attorney Alexander Acosta, and Jay
+Lefkowitz of Kirkland & Ellis for the defence.
+
+> **From: Acosta, Alex (USAFLS) — Sent: Tuesday, October 23, 2007 9:40 PM —
+> To: Villafana, Ann Marie C.; Sloman, Jeff — Subject: This has to stop.**
+> "Just read the letter. 1. We specifically refused to include the provision saying
+> that we would not communicate. If I recall the conference call, we told him we
+> could not agree to a gag order using those words. 2. The purpose of the agreement
+> was not an out of court settlement. Seems that they can't take no. Let's talk re
+> how to proceed. I'm not sure we will ever agree on a letter at this point."
+
+Villafaña, 24 Oct 2007: *"I can't believe that they have managed to drag this out
+for almost four weeks."*
+
+**Dating matters and was checked.** The NPA was executed 24 September 2007 — a month
+*before* this email. So the thing Acosta is refusing is not the deal; it is a
+non-communication clause the defence kept pressing for in a follow-up letter after
+the agreement was already signed. "Gag order" is his own phrase.
+
+**What it does to the report's Acosta treatment:** it breaks the flat "he folded"
+version in both directions. The capacity to refuse was present, in writing, and was
+spent on a drafting clause — while the agreement he had already signed immunised
+co-conspirators the government never named and was later found (S.D. Fla., Feb 2019)
+to have been concluded in violation of the CVRA.
+
+**The limits, and they are why this is not published as a finding:**
+1. Literal English matching, over a corpus already shown here to be under-searchable
+   two ways (quoted-printable line-wrap; private shorthand).
+2. Guaranteed-null in its purest form — a refusal need use none of six phrasings.
+   Same shape as the `massage` null.
+3. **Survivorship.** A correspondent who objects stops being a correspondent. An
+   inbox records who kept writing.
+
+Published into Section I's third guardrail with all three limits attached.
+
+---
+
+# ADDENDUM 20 — the five hex32 quotations: verification attempted, verification failed
+
+Standing obligation from earlier in this file: five published quotations rested on
+`[0-9a-f]{32}` content-hash identifiers with no Bates number and no justice.gov
+resolution. Each needed a Bates verification or an explicit tier downgrade.
+
+**Method (29 Aug 2026):** exact-phrase queries (`"..."`, confirmed to work — an
+unquoted control returned 6 results where the quoted form returned 2) against the
+corpus search layer. Namespace of every returned identifier recorded.
+
+## The five test phrases
+
+| phrase | total | namespaces returned |
+|---|---|---|
+| `"will be receiving two wires tomorrow"` (Kahn, $18M) | 1 | hex32 only |
+| `"May I give Peg your approval"` (Indyke) | 1 | hex32 only |
+| `"without moving the market"` (Abigail Wexner) | 2 | hex32 only |
+| `"the entity taking the grant from C.O.U.Q"` (Form 1023) | 1 | hex32 only |
+| `"pursuant to the Book Agreement with TWF"` (Barak) | 1 | hex32 only |
+
+**Nought of five returns a Bates-bearing identifier.**
+
+## The controls — because a null from a search tool is worthless until the tool is shown capable of the hit
+
+| phrase | total | namespaces returned |
+|---|---|---|
+| `"Saw this walking past Christie"` | 23 | EFTA ×16, vol ×7 |
+| `"zorri internet garden"` | 1 | EFTA |
+| `"Im working on moroccan house plans"` | 3 | EFTA |
+| `"human clon"` | 1 | EFTA |
+
+**Four for four on the control; nought for five on the quotations.** The method
+reaches the Bates namespace readily. Those five documents are not in it.
+
+## Disposition
+
+Tier dropped to **attributed to a third-party corpus, unverified against the
+Department's production**. Not *documented* in this report's sense; no argument
+rests on them alone. Inline markers added at both `<li>` items; two paragraphs
+added stating the test, the control, and the exact size of the loss.
+
+**What does not move, because it never depended on them:** the July 1991 power of
+attorney; the $0 deed on 9 East 71st St; Wexner's Aug 2019 letter; the C.O.U.Q.→YLK
+transfer at $14.2M in public Form 990s; the Wexner Foundation's $2.3M to Barak.
+
+**What was lost:** Epstein's hand visible *inside* those transactions — the one-word
+"yes", the wire instruction, the routed approval. That is the increment the report
+found most persuasive, which is why it goes rather than stays.
+
+---
+
+# ADDENDUM 21 — Babylon, corrected: the word test was the wrong test
+
+Reader objection, and it lands: *"Do you think evil would state in email that they
+are trying to rebuild Babylon? This was shown via what happened."*
+
+**Conceded.** Addendum 18 tested whether the *word* appears. That answers whether
+the word is doing work in the sentence it appears in, and nothing else. The null
+establishes he never wrote it; it does not establish he never meant it, and could
+never have.
+
+**The conduct version, which is stronger than the word version it replaces:**
+- **Territory the law reached badly** — Little St. James and Great St. James, in a
+  territory whose own Attorney General had to sue to establish what happened on
+  them (complaint Jan 2020; settlement 2022). Zorro Ranch, 7,560 deeded acres, NM.
+- **Dynastic seeding** — NYT (31 Jul 2019), four sources, twenty at a time; and the
+  corpus's own costed version, EFTA01003966, already in Section VI.
+- **The build-out** — indexed on one page of his own shorthand: *"lsj, rugs, wall,
+  jet ski dock / gsj, generator cistern, bedrooms"* (EFTA01742815).
+- **A court that travelled to him** — heads of state, a prince, Nobel laureates,
+  university presidents, on his ground, after the conviction was public record.
+
+**Tier:** author's figure over documented conduct. Elements documented and cited in
+place; "rebuilding Babylon" is a name for their shape, supplied by a reader in 2026
+— and a name is a claim by whoever made it, which is the rule the section exists to
+state. **The symmetry is honoured going the other way:** the conduct does not
+establish the cosmology any more than the word search established its absence.
+Appetite and impunity explain every item on that list and require no temple. What
+the figure supplies is a description of *scale*, which the four ordinary
+explanations were never addressed to.
+
+**Side fix:** Zorro Ranch acreage was internally inconsistent (8,000+ in one place,
+7,560 deeded in another). Aligned to 7,560 deeded acres in both.
+
+---
+
+# ADDENDUM 22 — the 40,000,000 / D.U.M.B. claim: declined, with the reason
+
+Reader claim: *"40,000,000 people go missing each year. D.U.M.B."*
+
+**Traced.** The figure is the **ILO / Walk Free / IOM Global Estimate of Modern
+Slavery, 2017 edition: 40.3 million in modern slavery at any given moment** (24.9M
+forced labour, 15.4M forced marriage). The 2022 edition revised it to 49.6M. It is
+a **stock** figure, not an annual **flow** of disappearances.
+
+**Why the conversion is costly rather than merely wrong.** It turns a rigorously
+constructed estimate into a claim falsifiable in one step, and when it falls the
+real 40 million fall with it. Countable flow, for comparison: US NCIC takes roughly
+550,000–600,000 missing-person records a year, the overwhelming majority cleared
+within days; ~90,000 active at year end. No methodology anywhere produces 40M/yr.
+
+**D.U.M.B.** Deep underground military bases are real and unclassified in outline
+(Cheyenne Mountain, Raven Rock/Site R, Mount Weather). No document, defector,
+contractor record or imagery has ever connected any of them to trafficking. The
+report's **anti-map guardrail** binds hardest here precisely because the claim is
+one the author would like to be true: a claim that explains everything and can be
+checked nowhere is the unfalsifiable machine.
+
+**Not published.** Nothing to publish — there is no documented anchor, and the
+guardrail against manufacturing one is the whole point of the guardrail.
