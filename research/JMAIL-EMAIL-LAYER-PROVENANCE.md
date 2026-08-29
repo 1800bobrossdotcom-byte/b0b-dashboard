@@ -698,3 +698,42 @@ existed, no scan would have flagged it.** The known-positive case yields the sam
 empty result as this sweep. So absence of detected code words is not absence of
 code words; it is absence of a key. Published with that limit attached, into the
 Section I guardrail.
+
+---
+
+# ADDENDUM 17 — the Juval Aviv assassination claim: a live test of the symmetry rule
+
+Author supplied a circulating social post (Aug 2026) carrying a podcast claim
+attributed to **Juval Aviv**: Epstein did not hang himself; a trained assassin was
+brought in from outside the country and left; Epstein set no real dead-man switch
+because he trusted a promised pardon.
+
+**Why it does not move the attribution question** — and the reason is structural,
+not about him. The report's refusal was never "nobody has claimed it." It was that
+motive is shared by dozens, so naming one actor needs evidence that *discriminates*.
+**An assertion does not discriminate; it selects.**
+
+**The narrator, verified both ways before writing.**
+- FOR: real figure; founder of Interfor; acknowledged basis for the protagonist of
+  Jonas's *Vengeance* → Spielberg's *Munich*. **Indicted federally on mail/wire
+  fraud 1995 over an investigative report; ACQUITTED 1996.**
+- AGAINST: Israel denies the service — **Yigal Carmon**, then counter-terrorism
+  adviser to the PM, denied it in writing in **1990**. *Haaretz* intelligence
+  correspondent **Yossi Melman** describes him as a former El Al security guard.
+  His Interfor report attributing Pan Am 103 to a CIA-linked operation was not
+  accepted.
+
+**THE TEST.** Aviv's answer to the denials is that *the discrediting was itself a
+joint CIA–Mossad operation* — **precisely the argument this report was pressed to
+accept about Ben-Menashe.** Under the symmetry rule it cannot be accepted for one
+narrator and refused for another. Verdict is therefore the one Section V reached:
+**untestable**, and untestable forbids building on him rather than licensing him.
+
+**Technique worth naming:** the dead-man-switch element asserts a negative about a
+dead man's state of mind, and thereby *explains away the absence of the
+corroboration the claim would otherwise need* — the unfalsifiable machine, inside a
+claim one might like to be true.
+
+**Concession published:** on *manner* the claim is not extraordinary and the report
+is already near it. What it adds is attribution, and that is the part that fails.
+Tier: labeled claim, single-source, untestable narrator, adopted nowhere.
