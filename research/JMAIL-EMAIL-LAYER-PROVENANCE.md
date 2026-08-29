@@ -196,3 +196,40 @@ Published into the Section I guardrail.
   — substantively: a theological/First-Amendment exchange on Masterpiece Cakeshop
   and compelled speech; documents the Starr relationship persisting to Nov 2018,
   eleven years after the 2007 NPA. Starr d. 2022. Not yet published.
+
+---
+
+# ADDENDUM 4 — EFTA02486591: a primary anchor for Epstein in London, 1985
+
+`justice.gov/epstein/files/DataSet 11/EFTA02486591.pdf`
+SHA-256 `d1668bc3ef1967579509d0be275209a49ab7294012bf73df42aa08e2eb53f58e`
+
+23 Sep 2015, Mark L. Epstein (izmo@mindspring.com) → Jeffrey Epstein
+(jeevacation@gmail.com), subject "Re: pope". Private family email about Pope
+Francis's NYC visit and Mark's upcoming travel.
+
+**THE FINDING.** Mark writes: *"I haven't been in London since I visited you there,
+with Paula and Seymour, in 1985."* Paula (1918–2004) and Seymour (1916–1991)
+Epstein were their parents. **This places Jeffrey Epstein in London in 1985**, with
+his brother and both parents visiting him there.
+
+Why it matters: Section II's recruitment-window subsection rested the London limb
+entirely on *Epstein's Shadow* (2021) — attributed tier, unnamed sources, a
+production team's conclusion, contested by Ghislaine Maxwell's 2016 deposition.
+This is a better class of evidence: a private family email inside the government's
+own production, written by someone not testifying, not interviewed, with no motive
+to place his brother anywhere — he is reminiscing and complaining about London.
+
+**Bounds held in the published text:** establishes presence in 1985 and nothing
+else. No Robert Maxwell, no Ghislaine, no business, no intelligence. On
+Ben-Menashe it corroborates nothing — it removes one specific objection (that
+Epstein had no business being in London that decade). An objection removed is not
+a claim established.
+
+**NOT PUBLISHED from this document:** a crude private remark about a named living
+woman ("Aldine") — private, living, zero analytical value. Excluded entirely.
+
+Also present and not used: Epstein replying that he would invite the Pope "for a
+massage" — "massage" being the operative euphemism across the whole Palm Beach
+record. Held; it characterises rather than documents, and the report has the
+Bannon "tier one" exchange already doing that work.
