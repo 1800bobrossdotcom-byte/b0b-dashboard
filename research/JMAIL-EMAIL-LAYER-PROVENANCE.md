@@ -151,3 +151,48 @@ The pair is the point: specimen one is material that was never evidence; specime
 two is a genuine Epstein document whose contents mean something other than the
 context suggests. Neither error is caught by verifying the document — only by
 identifying what it is about.
+
+---
+
+# ADDENDUM 3 — the "=" in the emails is quoted-printable, and it breaks search (29 Aug 2026)
+
+Author question: many emails show `=` replacing a letter mid-word — is it a cipher?
+**No.** It is MIME **quoted-printable** (RFC 2045) soft line breaks, surviving the
+print-to-PDF pipeline undecoded, with the adjacent character lost.
+
+## Three measurements
+
+1. **Spacing.** In EFTA02597523 the `=` marks fall at mean **72.0** chars
+   (median 72, σ 7.6, n=18). Quoted-printable wraps encoded lines at **76** and
+   marks each wrap with a trailing `=` the decoder should delete with the newline.
+   A margin, not a message.
+2. **Mapping.** In that one email `=` stands for **13 distinct characters**
+   (a×4, t×3, l×2, f×2, S, A, W, c, i, o, e, d, h) — roughly English letter
+   frequency. A substitution cipher is one-to-one; this is one-to-whatever.
+3. **The clincher.** EFTA02613636 carries the same address twice in one line:
+   display text `j=evacation@gmail.com`, adjacent `mailto:` href
+   `jeevacation@gmail.com` intact. Flowed text wrapped; URL attribute did not.
+   A cipher encodes both.
+   Direct signature also present: `=C2=A0` (UTF-8 nbsp) undecoded.
+
+## The consequence — this is the publishable part
+
+**The encoding breaks keyword search.** Tested:
+- `cloning` → does NOT return EFTA02603821 ("human clon=ng company")
+- `laboratory` → does NOT return EFTA02597523 ("a research =aboratory")
+- `architecture` → does NOT return EFTA02597523 ("school of =rchitecture")
+
+Three for three. So corpus mention-counts are wrong **in both directions**:
+inflated by inbound public tips that were never evidence (Addendum 2), deflated by
+encoding damage that hides real hits. **Any null this report states — "X does not
+appear in the corpus" — is the limit of a search, not the contents of an archive.**
+Published into the Section I guardrail.
+
+## Documents hashed this pass
+- EFTA02597523 (DataSet 11, Joi Ito→Epstein 5 Aug 2018)
+  `57c91529727ecf4eb82c2fc78ccd6b15ac4a2980733f38b112e706d55d36d95b`
+- EFTA02613636 (DataSet 11, Epstein↔Ken Starr 23 Nov 2018)
+  `82086ed29a2a59c63e2623a8b645e4f3c543be1965e31667ccdb1b14bdbad608`
+  — substantively: a theological/First-Amendment exchange on Masterpiece Cakeshop
+  and compelled speech; documents the Starr relationship persisting to Nov 2018,
+  eleven years after the 2007 NPA. Starr d. 2022. Not yet published.
