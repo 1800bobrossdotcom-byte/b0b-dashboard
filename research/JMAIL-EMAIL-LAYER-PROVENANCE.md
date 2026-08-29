@@ -652,3 +652,49 @@ beside the citations.
 
 **Publicists NOT named** — suggestions in someone else's email, no evidence any was
 approached, hired, or knew of the enquiry. Same rule as Dugan and Lee.
+
+---
+
+# ADDENDUM 16 — occlusion and cipher sweep: a null, and why the null is weak
+
+Author's brief: scour the corpus for occlusion methodology and basic cipher
+patterns, on the premise that Epstein knew email could be read.
+
+**PREMISE TESTED, NOT ASSUMED.** The two artefacts found earlier today are *not*
+occlusion: quoted-printable `=` is mechanical MIME transport encoding, and the
+shorthand in EFTA01742815 is a man writing notes to himself. Neither implies intent.
+
+## Occlusion markers — ~900 bodies, literal-confirmed hits only
+| class | docs | what they actually are |
+|---|---|---|
+| channel-switch | 23 | "call me". Ordinary. |
+| deletion | 55 | **virus / account-compromise warnings** ("delete the email as he has been hacked"). IT hygiene. |
+| surveillance-aware | 49 | mostly **law enforcement preparing its own subpoenas (2019)** — investigators' documents in the production |
+| secure-channel | 81 | contact-block WhatsApp/Telegram lines; one "telegram is better than email" convenience note |
+
+## Cipher signatures — none
+| test | hits | reality |
+|---|---|---|
+| base64 ≥40 chars | 7 | web tokens; one decodes to a **Pinterest email-verification link** |
+| hex ≥32 chars | 2 | message identifiers |
+| numeric group codes | 138 | Manhattan postcodes (10019, 10022), phone numbers |
+| letter/number substitution | 188 | *1st*, *3rd*, *71st* |
+| spaced-out lettering | 0 | — |
+| PGP / encrypted content | 0 | — |
+
+## The finding, in two halves
+
+**Occlusion exists and is narrow.** Two instances, both already in the report: the
+**euphemism** ("massage") and **concealed beneficial ownership** (Southern Trust
+behind Carbyne — "I thought we did not want your name associated with this
+Investment?"). It operates in what words mean and in who owns what — **not in the
+transport**. There is no cipher because none was needed.
+
+**And the null is weak, which is the part that matters.** A successful code word is
+invisible to a search for the thing it conceals. "Massage" is known to be one from
+testimony, investigation and a conviction — not from anything detectable in the
+text, where it looks like an ordinary word because it is one. **Had that history not
+existed, no scan would have flagged it.** The known-positive case yields the same
+empty result as this sweep. So absence of detected code words is not absence of
+code words; it is absence of a key. Published with that limit attached, into the
+Section I guardrail.
