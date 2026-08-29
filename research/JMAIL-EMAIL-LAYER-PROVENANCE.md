@@ -492,3 +492,52 @@ does not carry the smear. Giuffre d. Apr 2025; Maxwell convicted Dec 2021.
 **"Barden" NOT identified.** Quoted as Maxwell wrote it. A UK solicitor of that
 surname acted for her publicly, but the identification is not verified here and
 naming a lawyer for doing his job adds nothing.
+
+---
+
+# ADDENDUM 12 — EFTA02727130: stopped on CBP traveler manifests. Two wrong reads on the way, both recorded.
+
+`DataSet 11/EFTA02727130.pdf` — **136 MB, 367 pages**, Bates from EFTA02727130.
+SHA-256 `80eaa9c577f120929c030ea5131938ac2a8e06abbc02a50574e13cda045a38b2`
+Fetched, characterised in three passes, **deleted without being mined**.
+
+**My first read was wrong.** The opening pages are product labels and handwriting,
+and the first typed page I hit was an FBI Sentinel serial about methamphetamine
+dealers in Ballston Spa NY using Zoom — so I took it for wholly unrelated material.
+A keyword scan across all 367 pages killed that: Maxwell 292, Ghislaine 253,
+Epstein 177.
+
+**My second read was also wrong.** I then took it for an FBI investigative case
+file on the Maxwell prosecution. The sensitive-class scan does not support that
+either: **zero** FD-302, proffer, grand jury, Jane Doe, 3500, Giglio or Jencks
+markers.
+
+**What it actually is, settled by sampling typed pages:** a mixed bundle —
+- ~**268 typed pages, the bulk being U.S. Customs and Border Protection *TECS
+  Advance Traveler Information — List of Travelers* manifests for private aircraft
+  **N120JE**, generated 23 April 2019, with columns for Traveler's Name (L,F,M),
+  **DOB**, Hit, Doc Type;
+- ~**87 pages** of handwritten investigator notes (OCR largely illegible);
+- ~**53** press clippings / web captures (incl. Nov 2019 Peter Nygard coverage);
+- 3 FBI Sentinel serials, UNCLASSIFIED//FOUO, one of them the Albany
+  methamphetamine intel product that has nothing to do with this subject.
+
+**WHY IT STOPPED THERE.** Passenger manifests for Epstein's aircraft, carrying a
+**date-of-birth column**, are victim-adjacent by construction — these are the
+flights. Mining 268 pages of traveler records against the report's floor (never
+identify a victim) is not a close call, and 87 pages of handwriting cannot be
+triaged reliably at all.
+
+**What is safely sayable and is genuinely the strongest version of the Section I
+guardrail yet:** one Bates number, four unrelated document classes — CBP border
+records, handwritten agent notes, press clippings, and an FBI intelligence product
+about drug dealers in upstate New York. **A Bates number certifies custody. It does
+not certify subject matter, let alone relevance.**
+
+Minor, non-victim, and not published: the CBP data was generated 23 Apr 2019,
+roughly ten weeks before the arrest — a dated investigative-step marker only.
+
+**Process note worth keeping:** the two wrong characterisations were caught by
+scanning rather than by reading further, and neither reached the report. Triage
+that identifies a document class before extracting content is what made the error
+cheap.
