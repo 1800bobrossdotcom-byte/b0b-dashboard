@@ -1077,3 +1077,103 @@ the printed email page**, 16KB — the scan of the page, not the photograph. **T
 attachment is not in the production.** Sender is a private individual; name not
 published, since he appears only as the sender of an email whose content cannot be
 assessed.
+
+---
+
+# ADDENDUM 24 — the Bannon tape parsed whole; Memphis run down; and no independent reviews exist
+
+## 1. Full parse of EFTA01600824
+
+Diarized transcript: **1,753 segments, 352 merged speaker turns, 18,365 words, 1:57:46.**
+SPEAKER_01 = Epstein (64.4% of words); SPEAKER_03 = Bannon (35.3%); three crew voices.
+
+**The report's own absence claims re-checked against the complete text — all hold:**
+`girls` 0 · `girl` 0 · `Trump` 0 · `Maxwell` 0 · `Ghislaine` 0 · `Wexner` 0 · `Barak` 0.
+Present: `Clinton` 8 (blamed for the 2008 crash), `soul` 15, `devil` 7, `God` 5,
+`miracle` 4, `Satan` 1. `Babylon` 0, `Memphis` 0, `Israel` 0, `Mossad` 0.
+
+**A word-search miss caught on our own tooling.** Whole-word `\boccult\b` → **0 hits**.
+The word is present once, as **"occults"** (plural). Third instance today of the
+Section XIII failure mode, this time on the exact question a reader asked us to test.
+
+### New material published (Section IV, new subsection)
+
+- **The occult, unprompted, at 1:14:51** — "300 years ago, they said that unexplainable
+  realm was God. And people who attempted... to explain the unexplainable, who said,
+  yes, I understand the unexplainable, were charlatans. **They were the occults. They
+  were the astrologers. They were the conmen.**" He files the occult with fraud.
+- **The soul, affirmed twice** — "Their soul leaves. **No question.**" / "I refer to the
+  soul" / "the dark matter of the brain" / human life: "**It's a miracle. It's a
+  miracle.**" / Newton: "the limits were God. You got close to God, but you can never
+  be God." Bannon's own reaction: "pretty shocking in its own right."
+- **The measurement fight at 1:47:51** — Bannon: "**You weigh and measure every day.
+  You weigh and measure people. You weigh and measure leaders. You weigh and measure
+  economies... Your whole life, in fact, is measuring.**" Epstein: "I don't even know
+  what it means to measure you." And of Santa Fe Institute's 15-year effort: "**Total
+  failure.**"
+- **Daniel 5:27 / TEKEL** — published as an **author's figure**, same tier as the
+  Babylon-as-conduct reading. Nobody in the room said Daniel. Stated as a description
+  of shape, not a discovery of meaning.
+- **The Trilateral passage** — Epstein volunteers the frame: "The Trilateral Commission
+  is some spooky stuff. People said it was... the Illuminati... people that ran the
+  world." Then Rockefeller's rationale as he reports it: politicians last four or eight
+  years, "**the most important people to have stability and consistency would be
+  businessmen.**" Tier: Epstein's account of a dead man's words, uncorroborated as to
+  Rockefeller; documented only as what Epstein said in April 2019.
+- **"Is your money dirty money?"** — "No... Because I earned it. I earned it legally,"
+  then a pivot to polio vaccines: "ask their mothers." Question was about the source;
+  answer was about the recipients.
+- **The two endings** — the tape ends on Milton's *non serviam*, supplied by the
+  interviewer and handed back. This report ends on *tetelestai*. **Symmetry recorded,
+  nothing claimed from it** — a symmetry between two endings is a fact about two
+  documents, not about the world.
+
+**Not published:** the videographer credited in the file's metadata. Standing refusal.
+
+## 2. Memphis — run down, and there is nothing there
+
+168 corpus hits for `Memphis`. Every one resolves ordinary:
+
+- **FedEx.** Memphis is FedEx's global superhub — EFTA02593286: "he has commitment on
+  Thursday to fly a FEDEX Boeing in Memphis."
+- **Customs routing.** EFTA01900343: "Customs in St Thomas requested that I obtain
+  permission from **Memphis which is a Service Airport of arrival**, and Nashville is
+  not." Operationally interesting (it is a USVI flight-clearance detail) but it is
+  a CBP port-of-entry fact, not a funding fact.
+- **Travel shorthand.** EFTA02423529: "Memphis monday/tuesday, nyc tues/weds."
+- **A Broadway marketing blast.** vol00009-efta00420367 — a promotional newsletter
+  carrying "Mamma Mia! Celebrates 10 Years" and "**Memphis: The Little Show That
+  Could**". This is an advertisement received, not an investment made.
+- **A birthday party.** EFTA02451464: "K&C'S DOUBLE TROUBLE BIRTHDAY IN MEMPHIS."
+
+**No funding of anything in Memphis appears in the corpus.** `"Memphis Egypt"` → 0.
+`"St. Jude"` → 6, all newsletters. **Nothing published.** Recorded here so the null is
+on the record rather than left as an open thread.
+
+*(The biblical frame is real and is the reader's to make: Memphis/Noph is judged with
+Egypt at Isa 19:13, Jer 2:16, 46:14–19, Ezek 30:13–16, and Hos 9:6 — "Memphis shall
+bury them." That is a fact about the prophets. It is not a fact about this corpus, and
+the two must not be welded.)*
+
+## 3. Independent reviews of this report — there are none
+
+Four searches (29 Aug 2026): `"b0b.dev" report Epstein OSINT review`; `b0b.dev Epstein
+report critique fact-check independent analysis 2026`; `"b0b.dev"`; and a search on the
+report's own coinages (`"anti-map"`, `"guaranteed-null"`, `"deniable asset"` ladder).
+
+**Result: zero reviews, and the domain does not index under its own name** — a bare
+`"b0b.dev"` query returns b0.dev (browser automation), boot.dev, and a GitHub project
+called b0. Nobody has reviewed this report, and search does not know it exists.
+
+**Independent comparanda that do exist** — other people reaching adjacent conclusions by
+different routes, which is what an honest "independent check" can mean here:
+- epstein-data.com — "MASTER FORENSIC REPORT: DOJ EPSTEIN FILES"
+- Section 14 (Substack) — "Jeffrey Epstein was an intelligence asset", which independently
+  reaches *non-official, plausibly deniable asset* — this report's rung 4
+- ResearchGate — "Epstein Assessment: Master Compendium"
+- The Conversation — "A whiff of espionage around the Epstein files"
+
+**Not yet published.** A self-audit of the report's own search visibility belongs in the
+report — and it bears directly on the eJewishPhilanthropy finding published today, in
+which search visibility is shown being manufactured directory by directory. Offered to
+the author rather than inserted.
