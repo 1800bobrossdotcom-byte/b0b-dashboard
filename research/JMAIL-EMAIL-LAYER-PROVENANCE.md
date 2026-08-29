@@ -541,3 +541,41 @@ roughly ten weeks before the arrest — a dated investigative-step marker only.
 scanning rather than by reading further, and neither reached the report. Triage
 that identifies a document class before extracting content is what made the error
 cheap.
+
+---
+
+# ADDENDUM 13 — EFTA01742815: shorthand is a third search-breaking mechanism
+
+`DataSet 10/EFTA01742815.pdf`, 1 page, 8 May 2018.
+SHA-256 `52140388c909026a5de3dcaa43ef2517ba2d100e241b9b85fa54c1f675aa522c`
+
+Author's prompt: *look for "ghis" and these short hand*. He was right, and it is
+measurable.
+
+**THE DOCUMENT.** A private to-do list from Epstein's own account, subject line =
+first row. People, four properties, litigation, staff, travel, money, PR — his own
+one-page index of the operation, fourteen months before arrest.
+
+**THE TEST — six full-name searches, six misses.** The document is NOT returned by
+`Ghislaine`, `Ghislaine Maxwell`, `Dershowitz`, `Jes Staley`, `Zorro Ranch`, or
+`Little St James`. Searching the shorthand returns it instantly. The page says
+*ghis*, *ghislanc*, *dersh*, *jes*, *zorri*, *lsj*, *gsj*.
+
+**So three mechanisms now, two of them deflationary:**
+1. quoted-printable breaking words mid-token (Addendum 3);
+2. **private shorthand and misspelling — the word was never written** (this);
+3. inflation from inbound material that was never evidence (Addendum 2).
+
+**DISCIPLINE PUBLISHED WITH IT.** Expanding shorthand is itself inference. Safe and
+already independently documented: dersh, jes, ghis/ghislanc, cvra (Crime Victims'
+Rights Act litigation over the 2007 agreement, live in 2018), pb, zorri, lsj, gsj,
+plus first names the corpus establishes elsewhere. **Refused by name in the
+published text**: *ian*, *forrrester cayne*, *shaher*, *barnaby*, *novak*, *edo*.
+Expanding four letters into a living person's name would be the Section XIII naming
+error in its purest form, and the temptation is strongest exactly where the list is
+most interesting.
+
+**Not published:** the full expansion of the science/finance run on the list. Most
+are already report nodes, but a list of surnames in a dead man's notes adds nothing
+the report does not already source properly, and reproducing it wholesale would be
+a proximity smear by another route.
