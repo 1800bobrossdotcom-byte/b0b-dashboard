@@ -378,3 +378,49 @@ about authorship and nothing about relevance.
 **Standing rule, restated:** if extraction shows a document is substantially
 imagery rather than text, stop, delete, record. Do not render, do not view, do not
 describe beyond what incidental OCR already surfaced.
+
+---
+
+# ADDENDUM 9 — EFTA01249940: FBI 302, victim interview. Stopped, deleted, nothing retained (29 Aug 2026)
+
+`DataSet 9/EFTA01249940.pdf` — 7 pages, Bates EFTA01249940–EFTA01249946.
+Fetched (after an Akamai 401 and a backed-off retry), identified, **deleted**.
+**Nothing from it is quoted, summarised, or carried anywhere.**
+
+**What it is, at the only level of detail that is safe to record:** an **FBI FD-302**
+— an interview report — of a survivor, conducted **19 August 2021** at SDNY under a
+**proffer agreement**, with Assistant US Attorneys present, and stamped
+**"SUBJECT TO PROTECTIVE ORDER PARAGRAPHS 7, 8, 9, 10, 15, and 17."** The
+interviewee's name is redacted. The narrative is not, and it is richly
+identifying.
+
+**Why it stopped there.** The report's core discipline: never publish victim
+material, never de-anonymise a victim, never identify one. Redaction of a name does
+not anonymise an account this specific — the surrounding detail would identify her
+to anyone who knew her, which is precisely why the protective order exists. This is
+not a close call and it is not squeamishness.
+
+**Also cleared in the same pass:** the scratch harvest of hex32 email bodies
+(`/tmp/yh/`), which contained private correspondence with named private individuals
+gathered while testing provenance. It had served its purpose; keeping it had no
+justification.
+
+**What can be said without touching her, and it is genuinely useful.** The
+production contains FBI 302s of victim interviews under protective order. Three
+consequences follow:
+1. It is a further corpus-composition datapoint for the Section I guardrail — the
+   release is a case file, and case files contain sealed-adjacent victim testimony
+   alongside correspondence and device forensics.
+2. **No keyword sweep of this corpus may be run unfiltered.** A search that returns
+   302s is returning victim testimony, and the report's own searching must assume
+   that.
+3. It bears on Branch B and cuts *for* the Department on one narrow point that
+   fairness requires stating: material of this exact class is what legitimate
+   redaction is for. Raskin's finding was of **both** unnecessary over-redaction of
+   innocuous material **and** failure to redact victims' names. This document is the
+   category that genuinely needs the protection, and saying so costs the withholding
+   argument nothing it is entitled to keep.
+
+**Standing rule, extended:** if a document is an FD-302, a victim interview, or
+carries a protective-order stamp, stop at identification. Do not read on, do not
+extract, do not retain.
