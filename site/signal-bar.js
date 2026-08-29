@@ -4,13 +4,23 @@
    The site hosts no recording; YouTube's licensed player serves the audio.
    Tracks are taken from the rights-holder's own channel wherever one exists —
    the auto-generated "- Topic" channels the labels supply, not a re-upload.
-   TWO EXCEPTIONS, recorded here rather than left implicit. Overseer's
+   THREE EXCEPTIONS, recorded here rather than left implicit. Overseer's
    "Heligoland" and billy woods' "Spider Hole" have no locatable rights-holder
    upload (Backwoodz keeps much of its catalogue off the mainstream platforms),
    so both entries point at private-account copies. The Spider Hole copy is
    additionally a CENSORED edit - that is stated in its visible label, not just
    here, because listeners should not be handed an altered cut silently. Both
    added deliberately, not by oversight; swap the ids if better sources appear.
+   The third is Blackalicious' "Ego Sonic War Drums". Here a rights-holder copy
+   DOES exist - V6Ds1JbKfj8, on the label-supplied "Blackalicious - Topic"
+   channel, provided to YouTube by Epitaph for ANTI- - and it was used first and
+   would not play: the IFrame player rejected it as not embeddable. There is no
+   ANTI-, Epitaph or artist-channel upload to fall back to, so this entry points
+   at a private-account copy instead, chosen with that trade-off understood. Its
+   cut could NOT be verified against the 3:46 album version - no duration is
+   exposed by any endpoint reachable from here - so the visible label says only
+   "unofficial upload" and claims nothing about whether the audio is complete.
+   If it turns out to be edited, say so in the label the way Spider Hole does.
    Note for whoever edits this next: several high-view uploads of these songs
    carry the word "Official" in the title while belonging to private accounts.
    Check the channel, not the title. */
@@ -23,7 +33,7 @@
   // Order is deliberate: the bar opens on the lead track.
   var TRACKS = [
     { id: 'SYaIakuWg-g', label: 'Hooverphonic &mdash; Barabas' },                          // Hooverphonic - Topic (licensed). Lead track.
-    { id: 'V6Ds1JbKfj8', label: 'Blackalicious &mdash; Ego Sonic War Drums' },             // Blackalicious - Topic (licensed; provided to YouTube by Epitaph for ANTI-)
+    { id: 'hFUEGRwhYcU', label: 'Blackalicious &mdash; Ego Sonic War Drums (unofficial upload)' }, // 'Hi-Def' — NOT a rights-holder channel (see header). Licensed copy V6Ds1JbKfj8 exists but is not embeddable.
     { id: 'iU6nkE-g3BM', label: 'Overseer &mdash; Heligoland' },                           // FATLANTIC — NOT a rights-holder channel (see header). ~26min: long tail after the song.
     { id: 'sP3V7PxjdQo', label: 'Iron &amp; Wine &mdash; Evening on the Ground (Lilith&rsquo;s Song)' }, // Sub Pop (Iron & Wine's label, official)
     { id: 'HhZaHf8RP6g', label: 'Daft Punk &mdash; Veridis Quo' },                        // Daft Punk (artist channel)
