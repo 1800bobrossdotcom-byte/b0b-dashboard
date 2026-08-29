@@ -270,3 +270,39 @@ uncharged; a dead man's complaint about their pace is not a finding about them.
 **Markup note:** first attempt inserted `</p><p>` inside an `<li>` and left a
 `<span>` unclosed (tag-balance check caught it, 495/494). Reverted and redone as
 sibling `<li>` items. The balance check is why it never shipped.
+
+---
+
+# ADDENDUM 6 — EFTA00747383: a second sitting DARPA official in the corpus
+
+`justice.gov/epstein/files/DataSet 9/EFTA00747383.pdf`
+SHA-256 `8b3f1bcee716f651cbfc4c9cf336396009a24d8b81df650169e2b3b2c25baaaf`
+
+27 Mar 2010, Dan Dubno (technologist, ex-CBS News) ↔ Epstein. Dubno proposes a
+crypto workshop — anti-censorship tooling for scientists and human-rights workers
+under authoritarian regimes — and lists participants: *"A bunch of Israeli hackers
+are in this with me as well as the chief disruption officer at Darpa, Dr. Peter
+Lee."* Plus the quid pro quo: *"I'd design this so you'd get your questions
+answered if you'd help me get mine."*
+
+**VERIFIED:** Peter Lee directed DARPA's Transformational Convergence Technology
+Office **Aug 2009 – Sep 2010** (on leave from CMU; TCTO remit: social media,
+synthetic biology, machine learning, computational social science). He was in post
+on 27 Mar 2010. "Chief disruption officer" is Dubno's phrasing, not a title.
+
+So the corpus carries **two DARPA officials named while serving** — Dugan
+(2011–12, via Nikolic) and Lee (Mar 2010, via Dubno) — through unrelated channels.
+
+**FLOOR:** Lee is living, uncharged, named by a third party as an expected
+participant in someone else's proposed workshop. Nothing shows he met Epstein,
+knew of him, or that the workshop happened. Dubno living, uncharged. "Israeli
+hackers" unnamed, Dubno's own collaborators, nothing built on them.
+
+**GUARDRAIL APPLIED IN PUBLIC:** the line *"ramp em out to make discovery more
+difficult"* reads as legal discovery in this inbox and plainly means **detection**
+in its own paragraph. Published with the correction attached, as a live worked
+case of the Section I guardrail.
+
+**NOT PUBLISHED:** a gratuitous remark about a named living woman's appearance —
+cruel, private, zero analytical value; and her name, which would attach her to
+Epstein for no gain. Excluded entirely.
