@@ -424,3 +424,32 @@ consequences follow:
 **Standing rule, extended:** if a document is an FD-302, a victim interview, or
 carries a protective-order stamp, stop at identification. Do not read on, do not
 extract, do not retain.
+
+---
+
+# ADDENDUM 10 — EFTA01771469: no analytical value, deleted (29 Aug 2026)
+
+`DataSet 10/EFTA01771469.pdf`, 1 page, 22 Dec 2011. Private sexual correspondence
+between Epstein and an adult woman whose name the Department has redacted; her
+mail client is German-language. Explicit, consensual as described, no indication of
+a minor.
+
+**Disposition: not used, deleted, not quoted.** Not because it is explicit — because
+it is *private correspondence with an unnamed private individual that bears on
+nothing this report examines*. It does not touch trafficking, the money, the
+sponsor question or the withholding. The only thesis it could be pressed into
+serving is a general one about Epstein's private life, and pressing it there would
+be the over-reading the report exists to refuse.
+
+A redacted name is not anonymity when the surrounding detail is this specific — the
+same reasoning as Addendum 9.
+
+Incidental: the quoted-printable artefacts are plainly visible again
+("faith=ul", "=onight", "=tarted"), consistent with Addendum 3. Noted, not needed.
+
+**Running disposition tally for author-supplied documents (29 Aug):** four
+published and hashed (EFTA01003966, EFTA02486591, EFTA02446088, EFTA00747383,
+EFTA01059474 + EFTA00504063); two published as guardrail specimens (EFTA00165018,
+EFTA01850400); two used for the encoding proof (EFTA02597523, EFTA02613636); three
+stopped and deleted (EFTA01632670 image layer, EFTA01249940 victim 302,
+EFTA01771469 private/no value).
