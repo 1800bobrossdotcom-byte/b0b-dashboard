@@ -941,3 +941,139 @@ checked nowhere is the unfalsifiable machine.
 
 **Not published.** Nothing to publish — there is no documented anchor, and the
 guardrail against manufacturing one is the whole point of the guardrail.
+
+---
+
+# ADDENDUM 23 — six documents fetched on request; one of them falsified Addendum 21 within hours
+
+All fetched from justice.gov with the age-verification cookie and hashed.
+Akamai note: rate-limiting returns **HTTP 401**, not 429 — curl needs `--fail`
+or `--retry-all-errors` never fires. Backoff ladder 8/20/40/70/110s cleared it.
+
+| Bates | DataSet | pp | SHA-256 (head) | what it is |
+|---|---|---|---|---|
+| EFTA02011205 | 10 | 1 | 052b161e | unrelated one-liner (Kosslyn, 2013) |
+| EFTA02011206 | 10 | 1 | ec42084d | **transmittal: Pritzker, Tom → Epstein, 9 Jun 2011** |
+| EFTA02011207–214 | 10 | 8 | 5a2e2174 | **attachment: Tom Pritzker's July 2008 Iraq letter** |
+| EFTA00711844–45 | 9 | 2 | 9753fbdf | **2013 SEO/reputation campaign + eJewishPhilanthropy pitch** |
+| EFTA01899786 | 10 | 1 | 200a4396 | photo-attachment email; **photo not in production** |
+| EFTA00579623–24 | 9 | 2 | d368e531 | God-vs-Satan diet chain-letter joke, Feb 2002 |
+| EFTA02333752 | 11 | 1 | 9dcdb74d | G. Max 13 Apr 2003 exchange + "Fwd: Fw: Satan" footer |
+| EFTA02810791–92 | Court Records | 24 | e1f901dc | **USVI v. JPMorgan Exhibit 49 — the 2003 DDR** |
+
+## 1. The Pritzker letter — authorship documented, not inferred
+
+EFTA02011206, To: jeevacation@gmail.com, **From: Pritzker, Tom**, Thu 6/9/2011
+7:25:30 AM, "Iraq mom's letter doc":
+
+> "Here is the first installment. Note the date. I am working on the letter from
+> this trip which will analyze **the white space in our tools for conducting
+> foreign policy**. Great to see you. It's always too much fun. Could do this for
+> hours with you. Best, Tom"
+
+Attachment: 8pp, July 2008, "Dear Mom and Margot… Love, Tom." Five days across
+Iraq; two hours with Petraeus; a briefing he calls "a dry run" for Obama's visit
+the following week; Basra, Babylon, the Palestine hotel; MRAPs, Blackhawks,
+15–20 shooters; dinner at an opposition MP's with former PM Allawi.
+
+Corpus corroboration: `vol00009-efta00994667-pdf` — "On Wed, Aug 6, 2014 …
+**Pritzker, Tom** <> wrote: Have been having some fun with Iraq"; `EFTA02490215-2`
+— "tom pritzker was here, he has a port/logistics in Iraq"; and a long run of
+"Please call Tom Pritzker" messages in Epstein's mailbox.
+
+**Living-person floor.** Pritzker is living and uncharged. Nothing here alleges an
+offence. What is documented is a transmittal, an attachment, and a sentence about
+"white space in our tools for conducting foreign policy." **Held for the author's
+direction before publication** — it introduces a new living person to the report.
+
+## 2. The correction it forced — Addendum 21 / Section XIII
+
+Page 5 of the letter: **"We went to Babylon… We visited the ruins of Babylon."**
+
+The published specimen said *every* literal Babylon occurrence resolves to West
+Babylon NY or the namesake neurosurgeon. **False.** The scan ran against the
+**email layer**; this is an **attachment in the PDF production**. Tested: four
+exact phrases from the letter, queried against the email layer, **0 hits each.**
+
+That is a **third under-searchability defect** on top of quoted-printable and the
+private shorthand — and this one the report walked into itself. Correction
+published in place, with the quantifier named as the part that broke.
+
+Note the counter-example cuts *against* the thematic reading: it is a guarded
+tourist visit to the archaeological site at Hillah, and the writer's point is that
+Saddam "virtually paved over the ruins."
+
+## 3. EFTA00711844 — the fabrication still running in 2013
+
+1 Apr 2013 status report to Epstein from a search-visibility contractor:
+"15 of the 43 business directories are live… waiting for the new Wikipeida article
+… premium Yellow Pages site (which gives a guarantee of a 1st page listing)."
+
+Benchmarked explicitly against Wexner: *"I reviewed how the Wexner Foundation
+performs in google local results and am adding your foundation to all the websites
+that come up on their 1st page."*
+
+Attached pitch letter to eJewishPhilanthropy, in Epstein's voice, uses Wexner as
+the credential — *"a long partneship with Leslie Wexner and the Wexner Foundation,
+which is listed on your site"* — **six years after the split**. And repeats the
+1976 lie: *"Mr. Epstein started his career at Bear Steams with an educational
+background in physics and mathematics."*
+
+**Symmetry note, published.** The same letter lists Jewish and Israeli charitable
+causes, and a reader hunting an intelligence perimeter finds that list before
+finding the lie four paragraphs below. It is a self-authored publicity document
+containing a demonstrable falsehood about its own subject: excellent evidence of
+projection, none at all of substance.
+
+## 4. EFTA02810791 — USVI v. JPMorgan, Exhibit 49
+
+Internal JPMorgan email, **21 May 2003**: a Due Diligence Report on **Financial
+Trust Company** signed off by **Security Services**, awaiting client-manager
+approval — *"I was waiting to pull everything together before sending down Vanity
+Fair article, so you'll get everything at once."* The attachment is **Vicky Ward,
+"The Talented Mr. Epstein," Vanity Fair, March 2003**, reproduced across pp. 3–21.
+
+**The exposé was inside the bank's due-diligence file, attached to the approval, in
+2003.** The relationship ran roughly another decade. Same shape as Fidelifacts 1976:
+commissioned, written down, filed, decision unchanged. Published into Section II.
+
+*Minor:* pp. 22–24 of the exhibit are the Vanity Fair site's related-articles rail,
+captured when the page was printed to PDF on 31 Mar 2023 — three pages of Bess
+Levin Trump headlines that are not evidence of anything. Another "in the files"
+specimen; not published.
+
+## 5. The two Satan documents — and a name not published
+
+- **EFTA00579623** (17 Feb 2002): a forwarded chain-letter joke, "And God populated
+  the earth with broccoli… And Satan created McDonald's." Sender is a Manhattan
+  nightclub proprietor. **This is what "Satan" in the corpus is.**
+- **EFTA02333752** footer (13 Apr 2003): **"G. Max" → "Mum", Subject: "Fwd: Fw:
+  Satan"**, Eudora via mail.mindspring.com. Corroborated — 5 documents carry
+  "Fw: Satan" in the subject field, sender G. Max. **The same joke, two mailboxes,
+  14 months apart.** A second clean specimen for the Section XIII occult test.
+
+**The unresolved part, and it stays unresolved.** The body of EFTA02333752 quotes an
+inbound message of 13 Apr 2003 1:31 PM whose sender the search index renders as
+`WJC <wjc>` — "Just spoke to our favorite person, mr levine… I told him I was
+working on brenda… he is bringing the brit to je's… maybe a late night burgerfest
+again", with G. Max replying "I think the 3 of us make a good team… my 2 favorite
+men! Gx".
+
+The string is **real and corroborated across six Bates-bearing documents**
+(EFTA02332574, EFTA02333820, EFTA02335262, EFTA02335790, vol00009-efta00578889,
+vol00009-efta00580019). **The address behind it is redacted in every instance, and
+nothing in any of them expands the initialism.**
+
+**Not published, and not expanded.** Naming a living person from a three-letter
+display name is exactly the resolution failure Section XIII exists to warn about —
+"a mark read at too low a resolution and named confidently." What would settle it
+is an unredacted header. We do not have one.
+
+## 6. EFTA01899786 — checked, and there was nothing to see
+
+"Fast boy and slow boy", 13 Apr 2013, with a camera filename (DSC 1198) in the
+body. Image census: the single embedded object is an **816×1073 greyscale raster of
+the printed email page**, 16KB — the scan of the page, not the photograph. **The
+attachment is not in the production.** Sender is a private individual; name not
+published, since he appears only as the sender of an email whose content cannot be
+assessed.
