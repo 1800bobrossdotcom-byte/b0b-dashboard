@@ -346,3 +346,35 @@ or receiving a research grant is not misconduct.
 
 **Not chased:** a UK press story about a Highlands property used to tempt Epstein
 to a Scottish retreat. Open lead.
+
+---
+
+# ADDENDUM 8 — EFTA01632670: stopped, deleted, not examined (29 Aug 2026)
+
+`DataSet 10/EFTA01632670.pdf` — 17 MB, **100 pages**, Bates range
+EFTA01632670–EFTA01632769. Fetched, then **deleted without the images being
+viewed**.
+
+**Why.** Text extraction returned almost no prose — the document is essentially
+page images. What little OCR surfaced is the furniture of pornographic websites
+("Live Sex Cams", "Popular Categories", channel names, Viagra ad copy), i.e. a
+capture of web browsing, probably forensic, from a seized device.
+
+**The standing rule applies and is not negotiable.** `research/OCR-DOCUMENT-LAYER.md`
+records that the image layer of this corpus was deliberately NOT mined: it is a
+redaction-heavy archive in which a large share of the imagery is victim-related and
+explicit, and the report's core discipline is never to touch victim imagery or
+identify victims. A 100-page image document from this production, whose incidental
+OCR is adult-site chrome, is exactly the class that rule exists for. **Verifying
+everything yields here; this is the one place it must.**
+
+**What can honestly be said without looking, and it is not nothing.** The presence
+of a hundred-page browsing capture in the production is another corpus-composition
+datapoint of the kind the Section I guardrail now covers: the DOJ release is a case
+file, and case files contain device forensics, not just correspondence. A Bates
+number in this range certifies that the government holds a page. It says nothing
+about authorship and nothing about relevance.
+
+**Standing rule, restated:** if extraction shows a document is substantially
+imagery rather than text, stop, delete, record. Do not render, do not view, do not
+describe beyond what incidental OCR already surfaced.
