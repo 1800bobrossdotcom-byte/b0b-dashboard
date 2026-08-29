@@ -737,3 +737,36 @@ claim one might like to be true.
 **Concession published:** on *manner* the claim is not extraordinary and the report
 is already near it. What it adds is attribution, and that is the part that fails.
 Tier: labeled claim, single-source, untestable narrator, adopted nowhere.
+
+---
+
+# ADDENDUM 18 — polygamy / Babylon / "Sultan" / satanic: four claims tested against the corpus
+
+Author's brief, plus a re-sent link to **EFTA01249940** — the FD-302 victim
+interview already stopped on and deleted in Addendum 9. **Not re-opened.** Same
+Bates number; standing rule applies. The substantive question was answered from
+other sources instead.
+
+| claim | verdict | what the corpus actually shows |
+|---|---|---|
+| Epstein called himself **"Sultan"** | **REFUTED** | A guest's first name. *"Sultan WILL bring his wife… breakfast for Sultan and Jeffrey"* — two people, one sentence. It is Sultan Ahmed bin Sulayem (DP World), already a report node via the DNA kits. Self-reference searches ("I am the sultan", "call me sultan", "your sultan", "the sultan of") return **zero**. A 2011 email is addressed to *"Jeffrey Epstain - Friend of Sultan"* — independent confirmation from a second direction. |
+| **recreating Babylon** | **REFUTED** | "recreate Babylon" = **0 hits**. Every literal *Babylon* is **West Babylon, NY** (an office-equipment supplier on Sunrise Highway) or a search page listing **a different Jeffrey Epstein, a neurosurgeon in Babylon NY**. *Babylonian* = a Science trigonometry-tablet item and a puzzle-collection blurb. |
+| **temple** (occult reading) | **REFUTED** | A Thai Buddhist meditation temple website; **Daniel C. Temple**, VP at J.P. Morgan Private Banking, signing his own mail; the **Shirley Temple Blue Diamond**. |
+| **harem** | **REFUTED — architecture** | *"Do not forget in the house the harem part. Happy to manage it…"* — the worst-reading sentence in the corpus, and the previous evening Epstein wrote *"Im working on moroccan house plans"*. In Moroccan/Islamic domestic architecture the *harem* is the private family quarters. A note about a floor plan. **EFTA02546658** (DataSet 11), SHA-256 `e509845f0706e260289f9001880a904ecb59098d3f1f44baf9a8b8e7e230e4ce`. |
+| **polygamy** | not supported as a theme | 3 literal hits: a stray fragment, a ScienceDaily link on polygamy/monogamy, an FT piece on the Emir of Kano. |
+| **satanic / occult** | no evidence | Already covered: the Spirit Cooking debunk (Section XVIII) and the adrenochrome tip published today as a Section I guardrail specimen. |
+
+**WHAT SURVIVES, and it was never a keyword question:** the NYT (31 Jul 2019,
+Stewart/Goldstein/Silver-Greenberg) reported on four sources that Epstein wanted to
+seed the human race with his DNA by impregnating women at the New Mexico ranch, one
+account putting it at twenty at a time. Documented, in Section VI, never carried
+out. **It is eugenics, not polygamy, Babylon or the occult.**
+
+**Method note worth keeping:** the harem hit was chased *because* it was the one
+that might have gone the other way. Publishing the three refutations while leaving
+it unexamined would have been the asymmetry this report spent the day correcting.
+
+**And the direction of the errors is the finding:** all four misreadings would have
+produced a *more* lurid report, not a duller one.
+
+Published into the Section XIII naming-error module as four fresh specimens.
