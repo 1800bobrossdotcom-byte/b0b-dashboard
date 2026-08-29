@@ -614,3 +614,41 @@ is evidence that he wrote a story treatment.
 **Disposition: not used, deleted, nothing carried.** Recorded because the trail of
 refusals is worth as much as the trail of finds — this is the third document today
 whose apparent significance did not survive asking what class of thing it is.
+
+---
+
+# ADDENDUM 15 — EFTA02652408: Epstein running the media operation for Maxwell's civil trial
+
+`DataSet 11/EFTA02652408.pdf`, 2pp, Bates EFTA02652408–409, 23 Apr 2017.
+SHA-256 `70a1fe8ab8eb9487a6d9d1435fa27fe8264d607ed0805c19b88b81d3615d9cff`
+(Note: needed `curl --fail` for the retry to engage — Akamai returns 401 on
+rate-limit, which curl otherwise counts as a completed transfer.)
+
+Epstein → **Michael Wolff**, 09:09: *"I want to hire a pr person to cover the
+ghislaine trial in new york may 15 for 5 weeks. suggestions … they can shape the
+story."* Wolff, 09:41: two publicist names, *"If I can help with inquiries, let me
+know"*, and a suggestion to hire in London *"where a lot of the coverage is going
+to come from."* Epstein, 13:46: *"i want a person to sit in the courtroom."*
+
+**The trial** is *Giuffre v. Maxwell* (S.D.N.Y. 1:15-cv-07433), the civil
+defamation case listed for May 2017; it settled on the eve of trial. **Epstein was
+not a party.** He was arranging paid press management and a courtroom observer for
+a case brought against his co-principal by a woman he trafficked.
+
+**Second instance of the joint-unit pattern**, with EFTA00642874 (Apr 2015, Maxwell
+drafting the rebuttal). Two years apart, both showing the two operating as one
+unit on her legal exposure — the co-principalship residue the report had said it
+lacked.
+
+**AND IT TURNS BACK ON THE REPORT.** Section II weighs Epstein's 2019 statements to
+Wolff at attributed tier, cautioning they were made to *a journalist writing a
+book* with narrative incentive. That caution now carries a second half: two years
+earlier the same journalist supplied crisis-PR referrals for the co-principal's
+trial and offered to help with enquiries. **Recommending publicists is not
+misconduct; Wolff is living and uncharged; nothing is alleged against him.** But a
+source who has previously advised the subject is differently placed from one who
+only interviewed him, and the report cites him often enough that this belongs
+beside the citations.
+
+**Publicists NOT named** — suggestions in someone else's email, no evidence any was
+approached, hired, or knew of the enquiry. Same rule as Dugan and Lee.
