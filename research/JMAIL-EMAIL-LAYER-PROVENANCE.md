@@ -453,3 +453,42 @@ EFTA01059474 + EFTA00504063); two published as guardrail specimens (EFTA00165018
 EFTA01850400); two used for the encoding proof (EFTA02597523, EFTA02613636); three
 stopped and deleted (EFTA01632670 image layer, EFTA01249940 victim 302,
 EFTA01771469 private/no value).
+
+---
+
+# ADDENDUM 11 — EFTA00642874: the Maxwell co-principalship residue the report said it lacked
+
+`DataSet 9/EFTA00642874.pdf`, 2pp, Bates EFTA00642874–875.
+SHA-256 `9109a9c8402c63b9ec207b90af0d78ec6d4bf5a772369002b604ac93030ebaf1`
+
+22 Apr 2015, subject "ATTORNEY-CLIENT PRIVILEGE". Epstein (jeevacation@gmail.com)
+forwards Ghislaine Maxwell a passage from Virginia Giuffre's account — the
+allegation that Epstein and Maxwell asked Giuffre to bear a child for them and
+sign away parental rights, which Giuffre said she refused. Maxwell replies the
+same evening **from Ghislaine@theterramarproject.org**, calls it "this bullshit",
+asks that "Barden" reply, and supplies finished third-person copy for counsel to
+issue.
+
+**WHY IT MATTERS.** Section II's grading passage said flatly: *"There is no Maxwell
+equivalent of the documentary entries… her placement is carried substantially by
+what she was part of."* That was written before this. It is now qualified: this is
+**independent documentary residue of co-principalship**. She reviews, selects the
+allegation to answer, drafts the reply, and directs counsel. **A principal's
+posture, not an employee's** — which is the proposition the rest of her placement
+had been reaching by inference.
+
+Secondary: the TerraMar domain carries the principals' joint legal defence, which
+makes "a documented cover" concrete rather than descriptive.
+
+**BOUNDS PUBLISHED WITH IT.** Coordinating a legal/press defence with a
+co-defendant is lawful and ordinary; nothing is offered as misconduct, and the
+denial is hers to make. The evidentiary value is *structural only*.
+
+**HANDLING.** The Giuffre allegation is recorded as hers — denied, never
+adjudicated, neither adopted nor discounted. The drafted attack on her credibility
+is noted once and not repeated: the report records that the smear was drafted, and
+does not carry the smear. Giuffre d. Apr 2025; Maxwell convicted Dec 2021.
+
+**"Barden" NOT identified.** Quoted as Maxwell wrote it. A UK solicitor of that
+surname acted for her publicly, but the identification is not verified here and
+naming a lawyer for doing his job adds nothing.
