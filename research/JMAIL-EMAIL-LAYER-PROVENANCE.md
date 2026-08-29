@@ -233,3 +233,40 @@ Also present and not used: Epstein replying that he would invite the Pope "for a
 massage" — "massage" being the operative euphemism across the whole Palm Beach
 record. Held; it characterises rather than documents, and the report has the
 Bannon "tier one" exchange already doing that work.
+
+---
+
+# ADDENDUM 5 — EFTA02446088: the scope of the Black engagement
+
+`justice.gov/epstein/files/DataSet 11/EFTA02446088.pdf`
+SHA-256 `35d84546727c160698fd2fd5b755f164107d18074f490fd66f38fb5c9dee8686`
+
+24 Oct 2016, Epstein → **Melanie Spinella**, Leon Black's executive assistant
+(confirmed: assistant to Black; Epstein's team later named her co-trustee of a
+Black trust; named in a 2025 Senate Finance records request; uncharged).
+
+Content: agreement with "brad" (Brad Wechsler, already in the report) that
+decisions "need to be made"; "1031 asap"; an E&Y retirement making it "more
+important for [X] to come on board"; a work programme — "gift tax, brh, tra,
+shareholders agreements 8865, rega, phaidon, art sales, art partnership, trust
+distributions, family meeting"; and the verdict: *"very few things on the two
+years old list actually got done. your 5 billion dollar operation is in the hands
+of"* three named advisers.
+
+**Why it is additive:** the report already documents Epstein *in the decision loop*
+(the APO1 GRATs, "Leon did not want to sign anything until he spoke with"
+Epstein). This documents him *auditing the family office and its staffing* — a
+broader role than advisory. Phaidon is Black's (acquired 2012), which corroborates
+the recipient identification independently.
+
+**Cuts both ways and is published that way:** corroborates Dechert/Black that the
+engagement was real and substantive; and names, in Epstein's own hand, the
+structuring Senate Finance has been sizing (Form 8865 = foreign partnerships,
+beside 1031, gift tax, trusts).
+
+**NOT published:** the three advisers Epstein disparaged — private, living,
+uncharged; a dead man's complaint about their pace is not a finding about them.
+
+**Markup note:** first attempt inserted `</p><p>` inside an `<li>` and left a
+`<span>` unclosed (tag-balance check caught it, 495/494). Reverted and redone as
+sibling `<li>` items. The balance check is why it never shipped.

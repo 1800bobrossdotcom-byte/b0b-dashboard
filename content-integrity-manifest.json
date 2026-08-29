@@ -1,14 +1,14 @@
 {
-  "generated": "2026-08-29T07:48:12.156Z",
+  "generated": "2026-08-29T07:51:40.753Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "0af62b67a0e18e84ad227fdda60df7b1b1dc00d1080c9cb578a85a647d7499ec",
+  "fullFileHash": "66dd74fce6409d55c6959426beb4a12c81bcdd309fd0b3b6adfa0d1a869a0fbc",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "2eae9479392e6e3d23d8bc01a55d4d57a37d2c54ff82d8f60fb17da3b00658a3",
-      "length": 32137
+      "hash": "84677d3fdf0da2b6b0d92ae4393fcf71072e6b5a49fd80973f29e692584773f8",
+      "length": 32138
     },
     {
       "id": "to-those-inside",
@@ -107,8 +107,8 @@
     },
     {
       "id": "ii-the-late-period-stream-in-full-leon-black-and",
-      "hash": "c4761ed5d69bd694f67ca0efe00e3dc7488334ccbd006ae90da214992443a186",
-      "length": 5969
+      "hash": "f1c11b70ac524266674f8cf5080f6d3f1b5ea46a91ee04acc19ccb0efc81f378",
+      "length": 8223
     },
     {
       "id": "ii-the-pipe-jpmorgan-and-the-fifteen-year-banking",
