@@ -579,3 +579,38 @@ most interesting.
 are already report nodes, but a list of surnames in a dead man's notes adds nothing
 the report does not already source properly, and reproducing it wholesale would be
 a proximity smear by another route.
+
+---
+
+# ADDENDUM 14 — EFTA00684820: a story treatment, not evidence. Not published.
+
+`DataSet 9/EFTA00684820.pdf`, 1 page, 3 Jul 2013, from jeevacation@gmail.com.
+SHA-256 `4d8477f067e548c6d53ffc8db1234c66f6970470953a1428f3b05a6c37403065`
+
+**What it is: a film/TV story outline Epstein wrote to himself.** A street-gang kid
+makes good working for a Wall Street tycoon, denies his old friends, gets rich, and
+is then forced back to old-neighbourhood methods; the rich are shallow and
+disloyal; "the street outsmarts the wall street." Named characters (Vinny, Crazy
+Kathy, Sam Wall, Johnny Boy, Suz, Walter, Anastasia, Ginny).
+
+**What settles that it is fiction, and it is not a judgement call.** The page is
+written in the vocabulary of construction, not description: *"contrast with…"*,
+*"sees himself as a ladies man"*, *"uses the word…"* (a note on dialogue register),
+*"walters wife anastasia, russian, knows he cheats"*. Those are an author blocking
+out characters. Nobody describes events that way.
+
+**Why it is not published, stated plainly rather than dodged.** The outline
+contains imagery that reads very darkly in this particular inbox — a woman used to
+distract a man sexually, a threat delivered "standing outside the private school",
+"girls" in a list of a rich man's possessions. **That is exactly what makes it
+unusable.** Reading an author's fiction as autobiography is a standard interpretive
+error, and here it is the Section I error in its most tempting form: a genuine
+Epstein document, a real justice.gov URL, a real Bates number, and content whose
+resonance comes entirely from the reader's knowledge of what he actually did.
+
+The report documents his conduct from evidence of his conduct. A story treatment
+is evidence that he wrote a story treatment.
+
+**Disposition: not used, deleted, nothing carried.** Recorded because the trail of
+refusals is worth as much as the trail of finds — this is the third document today
+whose apparent significance did not survive asking what class of thing it is.
