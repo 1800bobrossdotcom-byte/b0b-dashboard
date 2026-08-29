@@ -234,11 +234,25 @@
           }
           setPlayIcon();
         },
-        onError: function () {
+        onError: function (e) {
           /* 2 bad id, 5 player error, 100 removed, 101/150 embedding disabled by the rights
-             holder. Without this the bar parks on a dead track forever - and because the index
+             holder (150 also covers age-restricted, which can never play in an embed).
+             Without this the bar parks on a dead track forever - and because the index
              is persisted, a listener stays parked on it across page loads. Roll on instead, and
-             stop after a full lap so an all-dead list cannot spin. */
+             stop after a full lap so an all-dead list cannot spin.
+             The code is logged rather than swallowed: an earlier version took no argument at
+             all, so a dead track was indistinguishable from a track that had simply been
+             skipped, and diagnosing one cost a round trip to whoever noticed. */
+          try {
+            var code = e && e.data;
+            var why = { 2: 'invalid video id', 5: 'HTML5 player error',
+                        100: 'video removed or private',
+                        101: 'embedding disabled by rights holder',
+                        150: 'embedding disabled or age-restricted' }[code] || 'unknown';
+            console.warn('[b0b-signal] track ' + (idx + 1) + '/' + TRACKS.length + ' failed: ' +
+                         TRACKS[idx].label.replace(/&mdash;/g, '-').replace(/&[a-z]+;/g, '') +
+                         ' (id ' + TRACKS[idx].id + ') - YouTube error ' + code + ': ' + why);
+          } catch (err) { /* logging must never break playback */ }
           errCount++;
           if (errCount >= TRACKS.length) { saveState({ playing: false }); setPlayIcon(); return; }
           goTrack(1);
