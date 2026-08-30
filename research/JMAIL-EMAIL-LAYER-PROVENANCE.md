@@ -1177,3 +1177,71 @@ different routes, which is what an honest "independent check" can mean here:
 report — and it bears directly on the eJewishPhilanthropy finding published today, in
 which search visibility is shown being manufactured directory by directory. Offered to
 the author rather than inserted.
+
+---
+
+# ADDENDUM 25 — the cloning thread: three more documents, and the capability answer
+
+Fetched from justice.gov, hashed:
+
+| Bates | DS | date | SHA-256 (head) | content |
+|---|---|---|---|---|
+| EFTA01850736 | 10 | 18 Nov 2011 | 92c171b14d3e | Epstein → redacted: "did the cloning isssue , give you pause?" |
+| EFTA01925437 | 10 | 19 Apr 2014 | 090316c3c983 | Richard Merkin → Epstein: "Any cloning updates?" |
+| EFTA02625025 | 11 | 4 Sep 2018 | 90088f33044c | Bryan Bishop → "J": embryo-editing diligence, "our concept" |
+
+Plus EFTA02603821 (already held): "the 'use of funds' spreadsheet for the designer
+baby and human clon=ng company."
+
+## The one that carries weight
+
+EFTA02625025 — subject *References for embryo editing*. Two words do the work:
+**"diligence"** (investment vocabulary, not curiosity) and **"our concept"** (not a
+cold pitch). Links a key-references PDF on human germline modification and an
+outline of the concept itself.
+
+## The one that must not be over-read, and is flagged as such in the published text
+
+EFTA01925437. In biotech "cloning" overwhelmingly means **molecular** cloning —
+routine vector work. Merkin is a healthcare executive writing about the Milken
+conference, the ACA and a CMS demonstration project. **The deflationary reading is
+the likelier one and it leads the published paragraph.** Recorded only because the
+word recurs across a decade. Nothing alleges wrongdoing by him. Both Merkin and
+Bishop are living and uncharged.
+
+## Capability — settled in public, not redacted
+
+- **May 2013** — Tachibana *et al.*, *Cell*: human ESCs by SCNT (Mitalipov, OHSU).
+  Blastocyst stage, for cells, not birth.
+- **24 Jan 2018** — Zhong Zhong and Hua Hua, *Cell*, CAS Institute of Neuroscience:
+  **first primates cloned by the Dolly method.** Coverage said the human barrier
+  had fallen.
+- **Reproductive human cloning: never demonstrated. No verified human clone.**
+  What separates a cloned macaque from a cloned human is now law and ethics far
+  more than technique.
+
+## The load-bearing juxtaposition
+
+- Jan 2018 — primates cloned, publicly.
+- Sep 2018 — the germline concept circulating in this mailbox.
+- **Nov 2018 — the world learns heritable human genome editing had ALREADY been
+  performed in secret on two living children (He Jiankui; sentenced Dec 2019,
+  three years, illegal medical practice).**
+
+**The capability question was answered in public that year and not by anything
+redacted.** He Jiankui proves the forbidden thing needs no hidden facility, state
+programme or compartment — one scientist, a clinic, willing parents. A
+*decentralised* horror, not a concealed one, and worse for it: nothing central to
+raid, defund or expose.
+
+## Guaranteed null, stated
+
+Whether any of the ~200,000 withheld/redacted pages touches this reads identically
+whether the answer is nothing or everything. Not scored in either direction.
+
+## The limit, preserved
+
+"The honest limit — what did NOT exist" still stands immediately below the new
+subsection, unchanged: no cloning lab, no genetics lab, no facility. The new
+material documents proximity and appetite to the frontier; it does not move the
+report one inch toward a facility that the record does not carry.
