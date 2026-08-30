@@ -1245,3 +1245,76 @@ whether the answer is nothing or everything. Not scored in either direction.
 subsection, unchanged: no cloning lab, no genetics lab, no facility. The new
 material documents proximity and appetite to the frontier; it does not move the
 report one inch toward a facility that the record does not carry.
+
+---
+
+# ADDENDUM 26 — Epstein filed a FOIA request with the CIA (Jul 2011). Reader hypothesis, tested, confirmed.
+
+**Origin.** The report carried the Aviv claim that Epstein "had never set a real
+dead-man switch because he was confident of a presidential pardon." A reader put
+the counter-hypothesis: he did, and it was a request to CIA. Tested. The
+documents exist.
+
+**Two documents, DataSet 9, retrieved from justice.gov and hashed:**
+- `EFTA00687827` — 3pp — SHA-256 `18462e4dcbe49b03e621c77372c412fe6b27ca66b7648f901226ba5a22a0178d`
+- `EFTA00915248` — 2pp — SHA-256 `b3f36f611661379af66bb3ccc0dd95c6b3bd36784e6260ba6a3f2d4014c03ee6`
+
+**Subject line: "CIA FOIA Request."** Chain of 18 July 2011:
+
+- **10:21** — Evan Capps, legal assistant to Martin G. Weinberg: *"I spoke with a
+  woman at the CIA's FOIA office, she said that they do not have a standard
+  privacy waiver and identity cert. form. She did say that the DOJ's form is
+  sufficient for this request."*
+- **10:56** — Weinberg → Epstein: *"Please execute and return so I can finalize
+  filing of CIA FOIA - they have demanded a privacy waiver but have no specific
+  CIA form so they OKd using the FBI/DOJ form as attached."*
+- **11:01** — Epstein: *"did we fill out one for the fbi foia? did we not send
+  anything yet to cia?"*
+- **11:06** — Weinberg: *"yes, we filled out fbi privacy waiver with VI address
+  last year. **we filed CIA FOIA - they have it** - we need a separate privacy
+  waiver signed in 2011 for them to fully process."*
+
+## Established
+Epstein sought his own CIA file through criminal counsel; the request was with
+the Agency by July 2011; a parallel FBI privacy waiver was filed in 2010 using
+the **US Virgin Islands** address; CIA had no standing identity-certification
+form and accepted DOJ's.
+
+## Not established
+**The outcome.** No response, release, denial or Glomar appears anywhere in the
+corpus — searched. Whether CIA held records, and what it said, is unknown.
+Epstein's purpose is nowhere stated.
+
+## Analysis as published
+
+**Ordinary reading leads and is strong:** defence counsel FOIA agencies for a
+client under continuing exposure. Routine.
+
+**Where it stops covering:** the FBI request is fully explained — they
+investigated him. The CIA request is not. *A person files a Privacy Act request
+for their own CIA records when they think there may be some.* Not proof —
+grandiosity and a thorough lawyer both explain it — but it is a documented act of
+seeking his own CIA file, which this report had never had.
+
+**Is it a dead-man switch? No.** A switch is *conditional*; its leverage lives
+entirely in what has not yet happened. A filing has already fired and is spent in
+the sending. It deterred nobody; no adversary watches CIA's records queue.
+
+**But the reader's point survives in better form.** A filing creates a permanent,
+dated record that the person asked, and that record outlives him. It releases
+nothing and deters nothing — it *marks a spot and persists*. Which is exactly
+what occurred, by a route nobody in the 2011 thread could have anticipated: the
+request surfaced not through CIA but because DOJ published Epstein's mailbox
+after he died. **The document became evidence of itself** — not by disclosing a
+file, but by existing inside a production that only happened because its author
+was dead. *Not a dead man's switch; a dead man's marker.* A marker needs no
+trigger, only an eventual reader.
+
+## What changes in the report
+Narrow and real: the death record can no longer say the record shows no step
+toward memorialising a CIA connection. It shows exactly one, in counsel's own
+words, eight years before he died. The leverage/hedge interpretation is published
+as the **reader's labeled hypothesis**, not as this report's finding.
+
+Weinberg is named as author of his own correspondence. Nothing alleges anything
+against him or his firm.
