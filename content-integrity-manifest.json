@@ -1,13 +1,13 @@
 {
-  "generated": "2026-08-31T17:17:30.320Z",
+  "generated": "2026-08-31T17:24:25.455Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "7035a691fb9db10f4ef527189a83f1fd003111994c716b70f522373702d59749",
+  "fullFileHash": "bed235cbe24e968a90a115eae6c1d10995662507778f0f6a8c72dff6f73796ac",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "7c28e1877eaf41d51d6309e6d62f4d577919d6d9f435eded90db0545da8b3720",
+      "hash": "7da90b371bff17a8b705ba1e0f902cf416af9e0058821dbe1c7cc8debc9570ed",
       "length": 35218
     },
     {
@@ -892,8 +892,8 @@
     },
     {
       "id": "xiii-speculative-floor-the-cyclical-data",
-      "hash": "d05a39a60384fc11e5eceae1f1e6584536ec6d751f0481744d966ba8481a8150",
-      "length": 10188
+      "hash": "6d30e7b9a69a4cf88d54b3135660acb72e43f1b70781d4a3b61813c01e676d77",
+      "length": 11534
     },
     {
       "id": "XIV",
