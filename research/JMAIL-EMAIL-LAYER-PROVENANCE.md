@@ -1375,3 +1375,41 @@ counsel**, eight years before he died. The report's existing note that this limb
 an unfalsifiable-machine move (a claim about a dead man's state of mind that
 explains away its own missing corroboration) stands, and now has a documented
 counter-example rather than only a structural objection.
+
+---
+
+# ADDENDUM 28 — EFTA01249207: STOPPED AT IDENTIFICATION. Not read, not retained.
+
+**Requested by the author, 31 Aug 2026.** Fetched from justice.gov, DataSet 9,
+3pp, SHA-256 `02508baebfa2043f7c48a1b252482f8d9bf7d8be6f9d45ff364084090beb8aa2`.
+
+**Both standing stop-rules fired simultaneously:**
+
+1. **It is an FD-302** — the FBI's witness-interview form. Header: `FD-302 (Rev.
+   5.4.10)`, case `50D-NY-3027571`, `Serial 593`, and the interview preamble
+   *"date of birth ___ Home telephone number ___, was interviewed telephonically
+   by FBI Special Agents…"*
+2. **It carries a live protective-order stamp on every page** — `SUBJECT TO
+   PROTECTIVE ORDER PARAGRAPHS 7, 8, 9, 10, 15, and 17` — together with the
+   Bureau's own distribution restriction, that the document and its contents are
+   not to be distributed outside the receiving agency.
+
+**Action taken:** identification only. The document was not read through. Both
+the PDF and the extracted text were **deleted immediately** on identification.
+Nothing from it is quoted, summarised, tiered or published.
+
+**Disclosed for completeness, because the report's rules bind the report:** while
+pulling the minimum context needed to classify the document, a fragment of
+substantive content passed through the identification window incidentally. **It
+is not used, not recorded here, and not carried into any section.** Recording
+that it happened is the honest form; repeating it would defeat the rule.
+
+**The URL is public.** This is not a claim that the document is secret or that the
+author may not read it — it is on justice.gov and anyone can open it. It is a
+statement about what *this* report will process: a witness interview under an
+active protective order is not material this document builds on, regardless of
+where it is hosted.
+
+**Standing rule reaffirmed:** FD-302 / victim or witness interview / protective-
+order stamp → stop at identification, do not read on, do not retain, log the
+refusal.
