@@ -1,13 +1,13 @@
 {
-  "generated": "2026-08-31T04:16:02.015Z",
+  "generated": "2026-08-31T05:13:15.735Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "325d3bbf7d48f07ef59c0eba9a8e955a20c2461a737550491d9bf94beaea8eb8",
+  "fullFileHash": "670b8d90f0b7805be2c7c71e5941518c95c508980f8196623749e7a0a96d1676",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "76a2b33b7c7ba190e8cd2d61e085912f7290b4a632d5ccdb92894a211858d39b",
+      "hash": "e81ef74ec08b7e1e5c9fbbfd804d3ad7b1c1bd093d7448907046924ce2673a3b",
       "length": 35216
     },
     {
@@ -1377,8 +1377,8 @@
     },
     {
       "id": "xxiv-endgame",
-      "hash": "b39ac016065ef3290cb3217ff21f94628619dd889e04402eb4eeb2880a573826",
-      "length": 10772
+      "hash": "a77a1e22ee96ae8795edf64794041be2ac67b2b4305a07f1d19e58e7f513ac37",
+      "length": 13383
     }
   ],
   "paragraphHashes": [
@@ -7063,8 +7063,26 @@
       "hash": "3e6f195d50cba12f83ce5576caf442b9f4bb122dfd0c7955509adbacd04909ea",
       "preview": "Which is finally why this document publishes its own corrections, and it is wort...",
       "length": 1174
+    },
+    {
+      "index": 947,
+      "hash": "ebb673b48b4ab38077bbe501f4230a5f51a9787d98585dcea98b8080a59f2dc8",
+      "preview": "And the tenet the author asks this report to close on is Isaiah 54:17, which is ...",
+      "length": 856
+    },
+    {
+      "index": 948,
+      "hash": "e320da3c22b700c071d981616734d4c6236a4c8f2231b30ae90926ab34983325",
+      "preview": "Which makes it the exact complement of the &ldquo;fear not&rdquo; above, and not...",
+      "length": 814
+    },
+    {
+      "index": 949,
+      "hash": "00c198ecf6e98e4dbf389c2e8ca8af275349c01830bc28c92796502904d366e2",
+      "preview": "So the close is three completed things, and the report claims none of them as it...",
+      "length": 938
     }
   ],
   "totalSections": 275,
-  "totalParagraphs": 947
+  "totalParagraphs": 950
 }
