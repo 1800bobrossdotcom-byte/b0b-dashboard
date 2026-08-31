@@ -1413,3 +1413,79 @@ where it is hosted.
 **Standing rule reaffirmed:** FD-302 / victim or witness interview / protective-
 order stamp → stop at identification, do not read on, do not retain, log the
 refusal.
+
+---
+
+# ADDENDUM 29 — the "torture" sweep: 317 hits, and the word does no work
+
+Requested by the author, 31 Aug 2026. Searched the email layer for `torture`,
+`tortured`, `torturing`, `"enhanced interrogation"`, `waterboard`.
+
+**Totals:** torture 317 · tortured 146 · torturing 90 · enhanced interrogation 10
+· waterboard 5.
+
+## Every resolvable hit is figurative, medical, journalistic or spam
+
+- *"Sorry to torture you on this."* · *"Day of torture and stress? No way!"* ·
+  *"And BY THE WAY I don't like to be tortured!!!!"* — ordinary idiom.
+- *"Supposed to get tortured again by uberjew endodontist @ 5pm Thursday"* — a
+  dentist. (The slur in that line is the author's correspondent's and is noted,
+  not published.)
+- *"vanity fair and the ny post are torturing WA"* — press coverage.
+- *"is Mr. Evil torturing you? :)"* — with a smiley.
+- *"I will be tortured, sent to Siberia and executed"* — hyperbole in a
+  scheduling email.
+- **EFTA02716754** — a forwarded news blast on the **Senate (SSCI) torture
+  report**, Dec 2014: waterboarding, rectal feeding, stress positions, Obama's
+  "inconsistent with our values", CIA pushback. **Inbound news, not conduct.**
+- **EFTA02317998** — *"Pornstar janay torturing bondaged slave"* + a link to a
+  `.ru` MODX assets path. **Spam/malware lure.**
+
+## Two that resolved on inspection
+
+- **"Im torturing them"** (`vol00009-efta00707422`) sits directly above a
+  forwarded **Douglas Elliman insurance-claims** email. Adjusters.
+- **"priority is finding the 20m with joslin . first step to torture"**
+  (`EFTA02481722`) — money recovery; "torture" = pressure a counterparty. Carries
+  the JEE confidentiality footer.
+
+## One that resolved, and is ugly without being torture
+
+**EFTA01774891 / EFTA01775045** (DataSet 10), thread 8–11 Sept 2011 between
+Epstein and correspondent **Tancredi Marchiolo**. Sequence: Epstein, *"what would
+you like me to do with your friend?"* → Marchiolo, *"Hit on her!"* → Epstein,
+*"do you want me to try to do her.. or just torture her"* → Marchiolo's reply.
+
+**"Torture" here means tease.** It is sexual banter between two men about an adult
+woman who is not named in the document and is not named here. Degrading, not
+violent. **Working copy deleted after classification**; the woman's description is
+not reproduced.
+
+## One that does NOT resolve, and that is the honest result
+
+**EFTA01827430** (DataSet 10, 24 Apr 2009) is a **single line** from Epstein to a
+redacted recipient: *"where are you? are you ok , I loved the torture video"*.
+**133 characters, one page, no subject, no thread, no attachment reference, no
+preceding or following message.** It recurs as duplicates across at least five
+Bates numbers.
+
+**It cannot be classified in either direction and this file does not classify it.**
+There is no context to read it with — it could be a film, a workout clip, a news
+segment, or something else entirely. **It is the most alarming-sounding string in
+the entire torture set and it is the one with the least evidence attached**, which
+is exactly the configuration Section XIII exists to warn about. Recorded as
+**unresolved**, and not published as a finding.
+
+## One left alone
+
+**EFTA02621657** — *"██ should not be tortured"* — carries a **DOJ redaction block**
+over the name. Not pursued; the report does not de-anonymise redactions.
+
+## Verdict
+
+**The word carries no load in this corpus.** 317 instances and not one of them,
+where context exists, describes torture of a person. The set is idiom, dentistry,
+press complaints, a Senate report arriving as news, and spam — plus one crude
+flirtation thread and one irreducible one-liner. **A search for an atrocity word
+returned an atrocity of nothing**, and the null is recorded with the single
+unresolved item named rather than buried.
