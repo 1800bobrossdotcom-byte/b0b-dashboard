@@ -1,13 +1,13 @@
 {
-  "generated": "2026-08-31T03:11:04.225Z",
+  "generated": "2026-08-31T03:27:42.347Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "5947ff0a0b6936a48f39edc45c53f2ab392514457b82eb986fba4ab6979da14d",
+  "fullFileHash": "4163b9309d263072a30f2c24e41786eb81052fd5c5708c3161609b0eca7dd3db",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "6a8ea9900440f1284b354c4253b0a0009a1a64fb3af9b1a27f687ed304c52c13",
+      "hash": "14a77d281a26736cefbbf5a68b0f73c89454a416cb4f459828c5bdb0170d02e7",
       "length": 35196
     },
     {
@@ -1372,8 +1372,8 @@
     },
     {
       "id": "xxiv-endgame",
-      "hash": "3774086547421e39c7034ea185566a7a85ca9fcc3979a9153921601dde0e0aaf",
-      "length": 8237
+      "hash": "b39ac016065ef3290cb3217ff21f94628619dd889e04402eb4eeb2880a573826",
+      "length": 10772
     }
   ],
   "paragraphHashes": [
@@ -6956,8 +6956,26 @@
       "hash": "7ac5b6439f23a3936abc5b65e39d8515c51108b29b7a9f18c54377388b787256",
       "preview": "So the popular reading is a misread abbreviation, canonised in a lexicon, correc...",
       "length": 1037
+    },
+    {
+      "index": 930,
+      "hash": "93e40423a9e545a3a19ffd28901fde2d420b48bf63a2e2e1f9733c87f620d250",
+      "preview": "And there is a second perfect passive, which the author puts beside the first, a...",
+      "length": 801
+    },
+    {
+      "index": 931,
+      "hash": "b943d9fc2654938dd07d12fc494fdecdabcb3de44992b2672084c3ed3a20d860",
+      "preview": "What almost every citation of that verse drops is the sentence it is inside, and...",
+      "length": 557
+    },
+    {
+      "index": 932,
+      "hash": "3e6f195d50cba12f83ce5576caf442b9f4bb122dfd0c7955509adbacd04909ea",
+      "preview": "Which is finally why this document publishes its own corrections, and it is wort...",
+      "length": 1174
     }
   ],
   "totalSections": 274,
-  "totalParagraphs": 930
+  "totalParagraphs": 933
 }
