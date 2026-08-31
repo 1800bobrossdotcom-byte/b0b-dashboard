@@ -1,13 +1,13 @@
 {
-  "generated": "2026-08-31T05:13:15.735Z",
+  "generated": "2026-08-31T16:16:35.879Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "670b8d90f0b7805be2c7c71e5941518c95c508980f8196623749e7a0a96d1676",
+  "fullFileHash": "cf599ac5ce918a7e7b96c6d2290243f6e3c81edcec6f6a5631427e2685f9b8ca",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "e81ef74ec08b7e1e5c9fbbfd804d3ad7b1c1bd093d7448907046924ce2673a3b",
+      "hash": "94dbcf1d75ce73e0592e4193e9666db82acc0ee6a7af1a457fdbf4345d732522",
       "length": 35216
     },
     {
@@ -337,8 +337,8 @@
     },
     {
       "id": "v-the-ancillary-module-the-exit-pattern-and-why",
-      "hash": "f45ee02ec2e90c7a9cd0e18af2607ab14dffd38ba22fe5846070fc6dca69ff5a",
-      "length": 5848
+      "hash": "48b22027e37a2de7501e6009bf20d47bb2f91efbce9cfcdd172f08c7b515a628",
+      "length": 9454
     },
     {
       "id": "v-the-documented-record",
