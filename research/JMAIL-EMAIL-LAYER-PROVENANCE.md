@@ -1318,3 +1318,60 @@ as the **reader's labeled hypothesis**, not as this report's finding.
 
 Weinberg is named as author of his own correspondence. Nothing alleges anything
 against him or his firm.
+
+---
+
+# ADDENDUM 27 — correction: the CIA filing IS death-activated. The first analysis was wrong on the law.
+
+**What Addendum 26 and the published subsection originally said:** "Not a dead man's
+switch. A dead man's marker." Reasoning: a switch is conditional; a filing has
+already fired and is spent in the sending.
+
+**The author rejected it. He was right, and the statute is why.**
+
+## The law
+
+- **Privacy Act (5 U.S.C. 552a)** — rights are personal to **living** individuals.
+  They do not survive death and are not inheritable.
+- **FOIA Exemptions 6 and 7(C)** — turn on a personal privacy interest, and the
+  settled rule is that **death substantially extinguishes it**. NARA's own FOIA
+  office titles the point *"Death breathes new life into some records."*
+
+**Therefore:** the disclosability of any CIA file on Epstein was, *by operation of
+law*, contingent on Epstein being alive. Closed to everyone but him while he
+lived; substantially releasable to anyone the moment he died.
+
+## Which makes the structure conditional after all
+
+- **Set in life** — the 2011 filing, dated, counsel-confirmed, on the federal record.
+- **Operative on death** — the privacy shield drops; the file becomes askable-for.
+- **Required check-in while alive** — the request was *pending* and the Agency had
+  demanded a fresh 2011 waiver "to fully process" it. He had to keep feeding it.
+
+That is the ordinary-language core of a dead man's switch. The earlier analysis
+reached the opposite conclusion **only by insisting on the narrowest definition
+(escrow + automatic publication) and then treating a definitional preference as a
+finding.** That is a real methodological failure and it is recorded as one.
+
+## What survives of the distinction
+
+Nothing publishes itself. The unlocking makes material **askable for** rather than
+**released**, so it deterred nobody in life — deterrence needs an adversary who
+knows. **A switch that arms a door, not one that fires a charge.** And it worked:
+the request surfaced not through CIA but because DOJ published the mailbox after
+he died.
+
+## Intent, unchanged
+
+The death-activation is a property of the statute, **not of his intent** — it would
+have operated identically had he filed out of curiosity. Purpose stays where the
+documents leave it: unstated, and not asserted.
+
+## Consequence for the Aviv treatment
+
+Aviv asserts the flat negative — that Epstein "had never set a real dead-man
+switch." **That limb is now contradicted by a primary document from Epstein's own
+counsel**, eight years before he died. The report's existing note that this limb is
+an unfalsifiable-machine move (a claim about a dead man's state of mind that
+explains away its own missing corroboration) stands, and now has a documented
+counter-example rather than only a structural objection.
