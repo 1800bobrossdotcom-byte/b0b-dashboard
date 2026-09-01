@@ -1,13 +1,13 @@
 {
-  "generated": "2026-09-01T01:14:32.898Z",
+  "generated": "2026-09-01T01:16:23.335Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "4439df62212b03f76a0a23efc4b5c44442c37c76d75ca2084e4c229de9b6aa93",
+  "fullFileHash": "46234694e4b33a152798f5e142d99df501706ed12b2cb4a0c99d5648858c37c5",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "e9d05eabb8b572b4005519131227f641ed1712bff722b84b3b70e90c5275185d",
+      "hash": "9432326eaf683809755a13c42fde9d223ebc5acb3b39f87066df664ec02638e3",
       "length": 35251
     },
     {
@@ -37,8 +37,8 @@
     },
     {
       "id": "i-the-authors-testimony-the-work-is-the-method",
-      "hash": "4c256c43325c6168f7577435ef728408a3931b4b26b71f19e7a1083232bc8c8e",
-      "length": 16582
+      "hash": "939b1dffbb92c0b3f72cf86f01d710235b5b4ef5ed6528a83ce0a7f083578ea5",
+      "length": 17967
     },
     {
       "id": "II",
@@ -1955,9 +1955,9 @@
     },
     {
       "index": 91,
-      "hash": "f85182c6be5ee0571ef6d50758cbbf792e30c54f2ee7cdccc01dfff5dbc73202",
+      "hash": "bdd995bfd57467cfd19345f0fe4c21a545a1e3112dd712554c4c0f541437caac",
       "preview": "Third, and recorded because he raised it and because it is on the same signed fe...",
-      "length": 1142
+      "length": 2527
     },
     {
       "index": 92,
