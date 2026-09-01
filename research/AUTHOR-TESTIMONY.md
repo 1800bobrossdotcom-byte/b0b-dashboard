@@ -23,7 +23,7 @@ separate decision, and nothing in it is tiered above *testimony*.
 ### The testimony
 
 On his now-defunct **@_gyra_** account, the author encountered a post by a member
-of the **Milady / Remilia World Order** online subculture disparaging **Aaron
+of the **Milady / Remilia World Order** online subculture disparaging **Sir Aaron
 Bushnell** — in his words, demeaning and dishonouring him "in a disgusting way."
 
 He was enraged. In response he **composed a handmade cipher** and addressed it to
@@ -32,15 +32,15 @@ a Fort Meade / national-security account, which he reports has since disappeared
 Subsequently: **the Milady RWO account that had disparaged Bushnell was removed.**
 His own account was **unbothered**.
 
-He refers to Bushnell throughout as **"Sir Aaron Bushnell."** The honorific is his
-and is recorded as his.
+He is **Sir Aaron Bushnell** throughout. The honorific is the author's, and this
+file uses it.
 
-### What is documented about Aaron Bushnell
+### What is documented about Sir Aaron Bushnell
 
 Recorded carefully, because he was a real person who died recently and his family
 is living.
 
-- **Aaron Bushnell**, 25, active-duty **United States Air Force** since May 2020.
+- **Sir Aaron Bushnell**, 25, active-duty **United States Air Force** since May 2020.
 - **Cyber defense operations specialist**, **531st Intelligence Support Squadron**,
   Joint Base San Antonio–Lackland, Texas.
 - **Assigned to the 70th Intelligence, Surveillance and Reconnaissance Wing**,
@@ -52,10 +52,6 @@ is living.
 earlier draft of this note doubted it wrongly. Bushnell was physically posted in
 Texas; his parent wing sits at Fort Meade. Both are true and the second is the one
 he meant.
-
-*No position is taken here on the act itself, and nothing in this file presents it
-as a model. The author's account concerns how the dead man was spoken about
-afterward, which is a separate question from how he died.*
 
 ### Tiering — stated plainly
 

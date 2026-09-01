@@ -1,13 +1,13 @@
 {
-  "generated": "2026-09-01T01:13:29.316Z",
+  "generated": "2026-09-01T01:14:32.898Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "6a2f23ad852d667195243a0b62269785d449fa670860fcd83a7d9453896c5ea8",
+  "fullFileHash": "4439df62212b03f76a0a23efc4b5c44442c37c76d75ca2084e4c229de9b6aa93",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "dba73a3e2daf1bf97b3cbc9db88870aa1bf0752fefc69025f851d486b93e9c66",
+      "hash": "e9d05eabb8b572b4005519131227f641ed1712bff722b84b3b70e90c5275185d",
       "length": 35251
     },
     {
@@ -37,8 +37,8 @@
     },
     {
       "id": "i-the-authors-testimony-the-work-is-the-method",
-      "hash": "d25e6a56ed5601d46427838b94e033948dcf6578df9b98af358650895581f0a5",
-      "length": 16738
+      "hash": "4c256c43325c6168f7577435ef728408a3931b4b26b71f19e7a1083232bc8c8e",
+      "length": 16582
     },
     {
       "id": "II",
@@ -1949,9 +1949,9 @@
     },
     {
       "index": 90,
-      "hash": "ca1b7df51ac79717576c83db002e15b999fb8c4882d7512af3ecc9ea70742121",
+      "hash": "c34951ca1a42310fcffd754308cf7935ab227d05bf4248b328b641fd2705ec07",
       "preview": "Second, the cipher. On his now-defunct @_gyra_ account he encountered a post fro...",
-      "length": 1251
+      "length": 1095
     },
     {
       "index": 91,
