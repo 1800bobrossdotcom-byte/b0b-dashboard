@@ -94,7 +94,10 @@ Recorded so they are not re-litigated each cycle:
 
 | date | report claim (SHA + UTC) | event (source + date) | cell | notes |
 |---|---|---|---|---|
-| — | — | — | — | opened, no entries |
+| 3 Sep 2026 | *none — see below* | US–Iran war ongoing; US strikes IRGC targets 1 Sep 2026 | **C** | Base rate. No pre-registered specific claim precedes it in a falsifiable form. Excluded under the specificity gate, consistent with the standing exclusion already recorded for the Iran war. |
+| 3 Sep 2026 | *none* | Blanche confirmed AG (late Jul 2026); *Phang v. Blanche* redaction-log statement due 3 Sep 2026 | **C** | The report anticipated continued withholding in general terms. Too unspecific to score — an outcome in either direction was compatible with it. |
+
+**Cell A remains empty. Nothing has scored.**
 
 ---
 
@@ -102,8 +105,36 @@ Recorded so they are not re-litigated each cycle:
 
 - A (hits): **0**
 - B (published misses): **0**
-- C (base rate): **0**
-- Periods reviewed: **0**
+- C (base rate): **2**
+- Periods reviewed: **1** (29 Aug – 3 Sep 2026)
 
 **Current verdict: no evidence of concurrence beyond base rate.** This line is
 updated every cycle and is permitted to stay exactly as it is indefinitely.
+
+---
+
+## Method failure caught in the first sweep — logged because it is the point
+
+**3 September 2026.** While compiling the first review period, a search-summary layer
+returned, as a statement of fact, that **the US military had captured Venezuelan President
+Nicolás Maduro and his wife in a large-scale attack on the country.**
+
+**It is false.** Checking the dated record entry by entry for August and September 2026
+found no such event. What Venezuela has on the record is a 2 August framework with the
+Dominican Republic to restore diplomatic relations, and a June earthquake toll now above
+6,000. The "capture" traces to **conflict-forecasting literature — scenario planning about
+what *might* occur in 2026 — collapsed by a summarising layer into a report of what did.**
+
+**Why this belongs in this log rather than in a footnote.** This log exists to test whether
+world events correlate with the report. *A pipeline that silently converts forecasts into
+events would manufacture cell-A hits indefinitely* — the correlation engine would be
+running on synthetic fuel and every entry after it would be worthless. The claim would have
+entered the report as a sourced line and propagated outward.
+
+**Standing rule added, effective immediately:** *no event enters this log, or the report,
+from a search summary alone.* It must be confirmed against a dated primary or
+primary-adjacent record — and an extraordinary claim about a head of state, a strike, or a
+death gets that check **before** it is written down, not after.
+
+**This is also the first published null of the log, and it is a null about the instrument
+rather than about the world.** Those are the more valuable kind.
