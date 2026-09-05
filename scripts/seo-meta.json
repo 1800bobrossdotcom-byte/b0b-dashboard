@@ -195,7 +195,7 @@
       "file": "ai-attack-vector-analysis.html",
       "title": "linguistic phreaking to AI-generated DoS — b0b.dev",
       "metaDescription": "fifteen AI attack vectors on b0b.dev: linguistic phreaking, unicode escape injection, security header sabotage, and an AI-generated denial of service.",
-      "ogDescription": "the AI tasked with defending the site wrote the middleware that took it down. fifteen documented attack vectors, from linguistic phreaking to AI-generated denial of service.",
+      "ogDescription": "the AI tasked with defending the site wrote the middleware that took it down. sixteen documented attack vectors, from linguistic phreaking to AI-generated denial of service.",
       "jsonldType": "Article",
       "headline": "from linguistic phreaking to AI-generated denial of service: fifteen documented AI attack vectors",
       "topics": [
