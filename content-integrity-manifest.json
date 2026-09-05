@@ -1,19 +1,19 @@
 {
-  "generated": "2026-09-05T07:22:51.882Z",
+  "generated": "2026-09-05T07:33:31.703Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "7e3d02f6d01370352596724f8f4d54e06b03af8f446c9182a891abe9dcc969e6",
+  "fullFileHash": "480a1df217955c35cd1a0274176c144d08d91be469621a7ab4bce52b2dcc5079",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "6ce0f889cabb6907810fa8e43668d3b26a773399db05476267fc2272b880c641",
+      "hash": "491eedd7527d280ced8c69470acc9f21949db8e37a6a71e9c787c4515fd0d085",
       "length": 35251
     },
     {
       "id": "to-those-inside",
-      "hash": "666842bad2be0843f4547f66350698eabf8a515dabf0c341afca96592c68e033",
-      "length": 16973
+      "hash": "bdc8b4b15afc5d4244e9140bf74938b2c6034dabdbc8290855753043dce03f7e",
+      "length": 16862
     },
     {
       "id": "I",
@@ -32,18 +32,18 @@
     },
     {
       "id": "i-what-in-the-files-actually-means-the-corpus-contains-the-publics-tips",
-      "hash": "5968227f2ad442e4a6bb164ce994b12d9d81dcab7812deba49f3285572ef9ba1",
-      "length": 19526
+      "hash": "777d9c6d6ee2dcacc87f61b89c331d1948f49bb86284f3046de0d4b953aaa9c5",
+      "length": 19449
     },
     {
       "id": "i-the-authors-testimony-the-work-is-the-method",
-      "hash": "e82fc7068d06d042497ea545df37381412ddf8e5e51018fe72e0ad99ad1880e7",
-      "length": 20203
+      "hash": "340cafeb545019dfdae6844c43d63645e16c39eb8adcb8c76e9176d2ca92e61c",
+      "length": 20129
     },
     {
       "id": "II",
-      "hash": "b474206bfa589790bc6d456dfb054a719a8416754192622556439545f0e666e5",
-      "length": 12562
+      "hash": "f9eea987bbe9fec7b4b138feedd2ddc57f830d94104adf1034c30a7962aa953a",
+      "length": 12483
     },
     {
       "id": "ii-tier-1-documented-directly-in-the-corpus",
@@ -72,18 +72,18 @@
     },
     {
       "id": "ii-the-authors-hypothesis-third-form-lineage-onboarding-and-why-there-is-no-file",
-      "hash": "12cc5240323d1af9708fad0c028f3ab307f50310fc1b28265443d03f98edc5a5",
-      "length": 7268
+      "hash": "6c538792d85dc6015e1a13081e06934deb6a3e8212af27dd10adc9041e909e8f",
+      "length": 7191
     },
     {
       "id": "ii-he-filed-a-foia-request-with-the-cia",
-      "hash": "c80e170e00e56171fa619468263aaf7882007c4f1e51048c159c9904b5bbf4a2",
-      "length": 7678
+      "hash": "1384061933b3180fb6fb2367adf17dec6e0eb30f557b9e550f52a40101e3d09f",
+      "length": 7601
     },
     {
       "id": "ii-the-conclusion-in-one-place-two-principals-a-sponsor-question-and-a-price",
-      "hash": "f42dffa6b04de2f4582871843b2bdfb1e12b7fbee4bfab69d189a623355204a5",
-      "length": 14737
+      "hash": "8d2572030c472a7f45aa62d167393720a09e46ff9a874c15fc34c37d37f180dc",
+      "length": 14479
     },
     {
       "id": "ii-when-could-it-have-happened-the-window-the-documents-actually-allow",
@@ -92,8 +92,8 @@
     },
     {
       "id": "ii-the-authors-hypothesis-long-lead-development-and-the-1991-closure",
-      "hash": "b7b63ae019a1c0c94e73c0881a1c63867aafd41c4dd0cf7cc0d90dc7adfc4cf0",
-      "length": 17736
+      "hash": "9c01d88706f21b70bf6a3f7f833f16bea9379c6ead3ffa144ece37cbfd161ce0",
+      "length": 17550
     },
     {
       "id": "ii-primary-and-liaison-mossad-directing-with-cia-and-british-services-witting",
@@ -102,8 +102,8 @@
     },
     {
       "id": "ii-testing-ordinary-rather-than-exotic-the-nypd-runs-its-own-foreign-liaison-service",
-      "hash": "55ad7720fa9156dc66b0b2b72335bde2e7c3420538eee164e122068c8ffa0463",
-      "length": 7248
+      "hash": "b373c80db7ba4ca37b9a23947e0bbc6a3fe8a2d2589237d3d1ea75dcef878e1d",
+      "length": 7011
     },
     {
       "id": "ii-were-the-covers-the-operation",
@@ -112,8 +112,8 @@
     },
     {
       "id": "ii-test-one-worked-the-sitting-director-of-darpa",
-      "hash": "46d03498593edab5bfe2e880c9866dc4ced2724bbe175df1f0dc33398ac67137",
-      "length": 8913
+      "hash": "33a82909ec9024a895ebd7b6a273a01e49e3b003e47e81818a53e418e187d35e",
+      "length": 8701
     },
     {
       "id": "ii-the-credentials-fabricated-and-checked-and-kept",
@@ -122,23 +122,23 @@
     },
     {
       "id": "ii-the-origin-node-in-full-the-power-of-attorney",
-      "hash": "dce935e1bab66856f9c21a81ed33f4f2cd2804cc87704406870b01379ee5d17c",
-      "length": 13070
+      "hash": "d16ed3658e98d16747fa45fb6b8d218dd165a84ec2d11cc2414e85859f86b9b1",
+      "length": 13028
     },
     {
       "id": "ii-the-house-next-door-the-nominal-conveyance-and-the-numerology-that-is-not-a-finding",
-      "hash": "985878bcb5dd4e5307ce6fd6b01d36b30fc4eeebf8750e317178b0222440a135",
-      "length": 5222
+      "hash": "2ca25d26a946b5c7d66462e44744fc7d725413de247e0639a5a40d4338e70be7",
+      "length": 5084
     },
     {
       "id": "ii-the-late-period-stream-in-full-leon-black-and",
-      "hash": "f1c11b70ac524266674f8cf5080f6d3f1b5ea46a91ee04acc19ccb0efc81f378",
-      "length": 8223
+      "hash": "aa80bac06e6ded49122e729b26fe696addbc976e91a032ea6d9ee8656ad10c2f",
+      "length": 8045
     },
     {
       "id": "ii-the-compellability-fight-status-5-september-2026",
-      "hash": "77e2840c651250cb9495417ee0dedb21eeca178ac94d93df4061137ece98ae9a",
-      "length": 9683
+      "hash": "ec1e889dac087ff23fbfa7035d836367d8880133cc3ec21d1d9b98adf02a22de",
+      "length": 9576
     },
     {
       "id": "ii-the-pipe-jpmorgan-and-the-fifteen-year-banking",
@@ -147,8 +147,8 @@
     },
     {
       "id": "ii-the-conduit-jpmorgan-and-the-banker-with-the",
-      "hash": "691b9ae7f39d174cb7d81eb2c5c8cb4f6aa0f04051bf7444929f6c30e1cf8b4f",
-      "length": 5395
+      "hash": "2d55b638a62b10905f1db26f877b84c654bdf2cd13d9e8b7b5d87b9a96a83545",
+      "length": 5372
     },
     {
       "id": "ii-the-third-bank-and-the-senates-august-2026",
@@ -162,13 +162,13 @@
     },
     {
       "id": "ii-the-trump-node-documented-proximity-labeled",
-      "hash": "29d534bb763285710638f2f206ce9864105e214115ad4be1c282854a690b9b34",
-      "length": 22196
+      "hash": "4834d48a1f49016797cc461673cf1a4c73045f14268b3696d4b9ab96ff533c0d",
+      "length": 21982
     },
     {
       "id": "ii-the-fork-the-operation-or-the-withholding-and",
-      "hash": "a4bb2215b58c38fa2ecc87d454250a5951b07ebab0adf5f740cc0136e95db746",
-      "length": 40034
+      "hash": "7021a3c489abd969c45482c22d06e11c2bff0f89ea19baf9ddb66427b61caa63",
+      "length": 39902
     },
     {
       "id": "ii-the-on-boarding-read-what-the-hub-metric-is",
@@ -237,8 +237,8 @@
     },
     {
       "id": "iii-the-black-book-as-a-machine-readable-claim-the-naming-error-at-database-scale",
-      "hash": "137c71ec9a70a488a48057a46935c8ac5e47059adc6b3c377b3085d65e3559ea",
-      "length": 4743
+      "hash": "d79b0fde6f6dc277f152b1b2d19a0e275438fa57989c146decd647001d27f6f6",
+      "length": 4561
     },
     {
       "id": "iii-stage-d-blowback-the-surviving-networks",
@@ -267,8 +267,8 @@
     },
     {
       "id": "iv-the-co-investor-node-nicole-junkermann",
-      "hash": "d984d9ef9e10b6faca9df6674907ebc03656da5ef8d9b97cbdae096e8fb131ce",
-      "length": 2811
+      "hash": "dfe4b3807004efbd010fc4a61cb220e2dd512bfaa2e1d372ac5a0588e5c99ad1",
+      "length": 2623
     },
     {
       "id": "iv-the-bessent-adjacency-what-tiering-does-to-a",
@@ -287,8 +287,8 @@
     },
     {
       "id": "iv-the-recordings-epstein-on-tape-and-the-file",
-      "hash": "e5afe3a975ddc938b314c3a2ecdaf60bdc4d3087055b06094a14875a670edd5c",
-      "length": 12243
+      "hash": "51d59a22968cb1202bb8a9b15d3dcae63ab653dbe003732655812ffb83634a54",
+      "length": 12103
     },
     {
       "id": "iv-what-he-said-about-god-the-soul-and-being-measured",
@@ -387,8 +387,8 @@
     },
     {
       "id": "vi-the-scientists-documented-ties-stated",
-      "hash": "789f7212d04bd7156795625bfad7478b5e0cec5974a01b0d4052e56893be84d0",
-      "length": 2489
+      "hash": "4f68babd0247001d734fc55f62fbfeff237eb9acfaf70f501b075352642a60ae",
+      "length": 2404
     },
     {
       "id": "vi-the-ideology-on-the-record-but-only-as-talk",
@@ -397,18 +397,18 @@
     },
     {
       "id": "vi-the-dna-kits-bought-in-bulk-under-an-alias",
-      "hash": "9cb7028c1be11be57377b0be669b010f7cf0804c4f676fa5bc93cab7fc93c760",
-      "length": 6067
+      "hash": "a5deeb928ff998d8723294ef1a0b17e5cabcd2820b7b50b491fd0a57e7cbb5ef",
+      "length": 5998
     },
     {
       "id": "vi-the-costed-proposal-a-designer-baby-company-pitched-to-him-with-a-budget",
-      "hash": "d7467e1aec445263a6e16b7d0324c3e517ee7d07701cc992e5a2631474019adf",
-      "length": 11036
+      "hash": "b4476b15e108796db6502c2c9e8eb5cde71061d93182926feb8552832b5eb146",
+      "length": 10870
     },
     {
       "id": "vi-the-cloning-thread-proposed-possible-and-the-distance",
-      "hash": "7e9a2106b34c1f5f62d95833208475001b6c711696a1db0cc85821aad4311499",
-      "length": 6415
+      "hash": "065d9cda107e89eccdb0b3925fe3b5e353be15433e48222676c5cf267ea34b3c",
+      "length": 6294
     },
     {
       "id": "vi-the-honest-limit-what-did-not-exist",
@@ -907,8 +907,8 @@
     },
     {
       "id": "xiii-the-naming-error-when-a-label-becomes-the",
-      "hash": "c8ec780b0ea91fa6432af9e597604dc87a0da9a756c69633fafbe12cdb9ee9cd",
-      "length": 26153
+      "hash": "82795f54769fb28a6ee9699e30e0ef95695593aa762b3bdda5c5aba4e237c344",
+      "length": 26075
     },
     {
       "id": "xiii-speculative-floor-the-cyclical-data",
@@ -1122,8 +1122,8 @@
     },
     {
       "id": "xviii-power-what-a-board-seat-actually-purchases",
-      "hash": "ad141bce7cba575afd3dcd67eb7056453b11df4f972472bd6bc43783916b33c7",
-      "length": 718
+      "hash": "d0564e017981de634cbb30c51f3453799c2bc0bca96abe7627f3a509759548e1",
+      "length": 629
     },
     {
       "id": "xviii-art-as-intelligence-infrastructure-the-cia-s",
@@ -1212,8 +1212,8 @@
     },
     {
       "id": "XX",
-      "hash": "be5c204e656d54cdb265a12c60020119aca0e56987803a26a79fbfaea717a22e",
-      "length": 36535
+      "hash": "6bd5b5bef15be0b1f21f80586863e20322198710841cce32fa932079946fb689",
+      "length": 36399
     },
     {
       "id": "xx-pattern-analysis-what-the-calibration-reveals",
@@ -1422,8 +1422,8 @@
     },
     {
       "id": "xxiv-endgame",
-      "hash": "4ee1af67ec2494d3ddac5c5965c5bfe6fc4fd5f6f0b1e1229dd065d429e0148d",
-      "length": 18211
+      "hash": "3e59182e30491429c61b24e25278c7284f3b27c1905d68ae67b1ad0fe37c0b73",
+      "length": 18137
     }
   ],
   "paragraphHashes": [
@@ -1579,9 +1579,9 @@
     },
     {
       "index": 25,
-      "hash": "d4b2b3bc5396e0410f2b0a523cf3c9bd27398ead6bdd7fbe071cf127594fbe8e",
+      "hash": "339d12c99b28b421d2d77a238d9094ee0bbf0840db6aaec932874c5d30d777d1",
       "preview": "Tier and fairness. Nothing here is adjudicated. Charges have now been preferred ...",
-      "length": 1378
+      "length": 1267
     },
     {
       "index": 26,
@@ -1873,9 +1873,9 @@
     },
     {
       "index": 74,
-      "hash": "597adbfba392b0b41ae1534dde1f086bbada58fba480c22798043243e30693a4",
+      "hash": "89ef7769acffd81dfcf4a239a9d7eeb60b05e3d67a4b8cd741088417c7f2eb15",
       "preview": "Read for what it is, the document cuts two ways at once, and both have to be sta...",
-      "length": 1103
+      "length": 1026
     },
     {
       "index": 75,
@@ -1987,9 +1987,9 @@
     },
     {
       "index": 93,
-      "hash": "f7d13b8ed0ea39513c63feac2daa2acff22521aa9de44762196550092ca71945",
+      "hash": "646371402d9df5bad56c0cd00642253f2cac84af46a7f4a0cb07a950062433e6",
       "preview": "And this is where the guardrails in this section stop reading as constraints imp...",
-      "length": 956
+      "length": 882
     },
     {
       "index": 94,
@@ -2017,9 +2017,9 @@
     },
     {
       "index": 98,
-      "hash": "ba119878da3539e627cea9f7d3d2bf60e7ef1f8df9991f56905a41be4b33c720",
+      "hash": "06a3956414f4d9728a62a8662189d48ea778a71580b121c6cee460058bef9c63",
       "preview": "Why it leads. Everything else in the withholding record is the government declin...",
-      "length": 838
+      "length": 759
     },
     {
       "index": 99,
@@ -2263,9 +2263,9 @@
     },
     {
       "index": 139,
-      "hash": "924946dd85dec5743baf4e9ef4bf6a7cc14b596e2cbffe86908962e60114af8f",
+      "hash": "b3572fea6b77f573c5ff6c64f81f742a0935d38efaf5758e0e23b3d4a85e8b46",
       "preview": "Tier, stated once, in full, and at the foot. Author&rsquo;s hypothesis - unprove...",
-      "length": 1316
+      "length": 1239
     },
     {
       "index": 140,
@@ -2323,9 +2323,9 @@
     },
     {
       "index": 149,
-      "hash": "d5e1323a745d8d1fbe00e8697573c2bcf577c168d9be06a117b1120949b54687",
+      "hash": "c7a33d850f793d307de244bdb0eb9601b744c68a2d19c1c0ebb98325c59c08f7",
       "preview": "Tier, exactly. Documented: the filing, its date, its subject line, counsel&rsquo...",
-      "length": 1820
+      "length": 1743
     },
     {
       "index": 150,
@@ -2353,9 +2353,9 @@
     },
     {
       "index": 154,
-      "hash": "8f1b3cc4a9970f70b57d33bd77361af9900ae11d964ad0cbcd4ed6962801bf95",
+      "hash": "d5906e52242e80c4754cadb3d84e12fb9870c305115b96741416a9f7d70f99e1",
       "preview": "What that document is evidence of, stated narrowly, because the obvious over-rea...",
-      "length": 907
+      "length": 856
     },
     {
       "index": 155,
@@ -2377,9 +2377,9 @@
     },
     {
       "index": 158,
-      "hash": "56689f34dd6b714fd7a14c48ea231df09c56ee8726e69dd8ca44df6e8238a0e1",
+      "hash": "7f794f2da4b33404c5e2117b681b9808183667111b27875ce991fe1eb5594242",
       "preview": "But one thing in it does have to be turned back on this report, because the repo...",
-      "length": 1072
+      "length": 944
     },
     {
       "index": 159,
@@ -2425,9 +2425,9 @@
     },
     {
       "index": 166,
-      "hash": "994f3fa6b438ed4e8002d7a41949c85edb5ce6ef54d872d89d958ce17a26b18e",
+      "hash": "ba93bd24242b2c9b3c097d186b9bb23b851614ea55667a375fba11c8f2b5f515",
       "preview": "Tier, held firmly in both directions. Counsel&rsquo;s assertion that Trump and C...",
-      "length": 1405
+      "length": 1326
     },
     {
       "index": 167,
@@ -2521,9 +2521,9 @@
     },
     {
       "index": 182,
-      "hash": "72e71a2006a75d0a36140cd891ddb22ba0f9cf62926fe51616b3821a4bde01be",
+      "hash": "94695a597c6d6d6ac1a91bcce9c6677b267231e4bd4ce68854d692e7fac97f03",
       "preview": "Pattern three - a cover that pays for itself, and this is the item that most fav...",
-      "length": 783
+      "length": 675
     },
     {
       "index": 183,
@@ -2629,9 +2629,9 @@
     },
     {
       "index": 200,
-      "hash": "f743ddf5ed25ffb29a26361a4b5822b481839c68038f08ba0a55b61482408b4d",
+      "hash": "132644734e35f99e52c4791d2b3a5245fc22aa614736d1486843f05e5eed288c",
       "preview": "Tier, stated exactly. Author&rsquo;s hypothesis - unproven, and adopted by this ...",
-      "length": 1412
+      "length": 1334
     },
     {
       "index": 201,
@@ -2719,9 +2719,9 @@
     },
     {
       "index": 215,
-      "hash": "f2c99e9fd549b149e1f5a6333091bb89b79f0655accc89ec3b7ed81c618b93ef",
+      "hash": "348b43e48f4656ef5b343b0fc1ce7e4bde3de02c10f524b89c033b69fbae1fe5",
       "preview": "What the structure actually rests on, and the natural experiment that proved it....",
-      "length": 2236
+      "length": 1999
     },
     {
       "index": 216,
@@ -2797,9 +2797,9 @@
     },
     {
       "index": 228,
-      "hash": "2277c0402ea807abf026ee8dddd80396ea131deb29db2fd414f4bc98c3f1ef1b",
-      "preview": "The floor, and it is not a formality here. Regina Dugan is living, uncharged, an...",
-      "length": 763
+      "hash": "ff8fd31234b92ad233434fd2b22d0ee3b4d1f1c5bc8317cb12f521bc724e7ab1",
+      "preview": "The floor, and it is not a formality here. What the record documents is Epstein&...",
+      "length": 664
     },
     {
       "index": 229,
@@ -2815,9 +2815,9 @@
     },
     {
       "index": 231,
-      "hash": "9143d3cecb624089176206f4285859955ccbfdb3376ef2fedbceb8a8f83c3a2a",
+      "hash": "8a1538ff64b74a656642e7579ab8a9234c81519e73054c96b484ce69dbf335c0",
       "preview": "The floor, and it is the same floor. Peter Lee is living, uncharged, and is name...",
-      "length": 556
+      "length": 443
     },
     {
       "index": 232,
@@ -2887,9 +2887,9 @@
     },
     {
       "index": 243,
-      "hash": "3376b6e3b600ab7ea53adf98145b1b12f824c24515f5dae5ef87f696eec14bf4",
+      "hash": "fb4572160e38040618ed3efc7094465bbce0960fded409bc5e7c1def1aec152e",
       "preview": "The floor, stated as a floor rather than as a frame. Leslie Wexner has never bee...",
-      "length": 654
+      "length": 612
     },
     {
       "index": 244,
@@ -2935,9 +2935,9 @@
     },
     {
       "index": 251,
-      "hash": "486829119542e7f210341da00cdca45fd21126c07c43060dc59ccc97d15123fa",
+      "hash": "e0de661fc245911a467035063ed3b9b0d25c2787a087b993a9958aff8e42a79b",
       "preview": "What the documents show against what he says, stated as the conflict it is. Lutn...",
-      "length": 1336
+      "length": 1198
     },
     {
       "index": 252,
@@ -2965,9 +2965,9 @@
     },
     {
       "index": 256,
-      "hash": "7314fc78cbafe8bba67f1754276afdeacf61f7ed8c280302f00d29e7406d69a7",
+      "hash": "5cc60cf9b75f9f32cbcb854cd8b09244c9980f718c9c386abf7b73befe0dcb5e",
       "preview": "The bookend to Wexner, and the same discipline applies. If Wexner is the documen...",
-      "length": 688
+      "length": 657
     },
     {
       "index": 257,
@@ -2989,9 +2989,9 @@
     },
     {
       "index": 260,
-      "hash": "eeb9c6e0eec9f478efb9b5f333908394eedca59ad6852958e7a7ac1484307252",
+      "hash": "469ce2034afb3d563daa6b6931246418b7af6f171a1f12588ead5319c2a7704b",
       "preview": "Two of the men in this section have moved, in the same direction, and the thing ...",
-      "length": 315
+      "length": 243
     },
     {
       "index": 261,
@@ -3007,9 +3007,9 @@
     },
     {
       "index": 263,
-      "hash": "90e483311c9cbbc5d7ce452181ec5b40c9c46c86d88d841438241456459e53d3",
+      "hash": "b58cf250ae9cf1a447df553c6b2092e95c42d7acbc2e7922b9eb04477e5ec753",
       "preview": "Who is making the privacy argument, and what it sits on top of. The privacy of t...",
-      "length": 1230
+      "length": 1195
     },
     {
       "index": 264,
@@ -3049,9 +3049,9 @@
     },
     {
       "index": 270,
-      "hash": "4499d9bfd2cd73cd801c6e283fcc8b6061609d6b36ca90f5b8b294784568376c",
+      "hash": "1b208d3b494d02bff7025c45b289f79c922b33522c6ea2b862ced84a59538b86",
       "preview": "Staley ran JPMorgan&rsquo;s private bank and was Epstein&rsquo;s primary relatio...",
-      "length": 1251
+      "length": 1228
     },
     {
       "index": 271,
@@ -3127,9 +3127,9 @@
     },
     {
       "index": 283,
-      "hash": "4db050d6213eaef7707496cc7bd33fbf14bf6f3931a9a868e3de8df39e461b99",
+      "hash": "1c33732bf110614df35680d1e1b93272408fb049d48939ea398c56196eab9bda",
       "preview": "Two caveats govern this entire passage, stated first because they are the differ...",
-      "length": 701
+      "length": 591
     },
     {
       "index": 284,
@@ -3175,9 +3175,9 @@
     },
     {
       "index": 291,
-      "hash": "33f492c79b4681ea4c85cc7f6a9340377c22c67f30c30d9e81d392658117c9bf",
+      "hash": "c660b261394529bbf3586cc0e75380edaffc30ba12247180e3462ec99cf4683c",
       "preview": "Bondi has since been removed as Attorney General amid the files fight, with Todd...",
-      "length": 1409
+      "length": 1305
     },
     {
       "index": 292,
@@ -3457,9 +3457,9 @@
     },
     {
       "index": 338,
-      "hash": "95c09cd89f3342f5fb9e9dbba3a2bb055db1a683b501bf61a690860d6a3705a1",
+      "hash": "a7e1100123cbf75d2d30b97cb9f788caead8bf6716ceddb5caeae77fbfbf865e",
       "preview": "The sequence needs no hypothesis about content: stand down, hand over, no return...",
-      "length": 888
+      "length": 756
     },
     {
       "index": 339,
@@ -3679,9 +3679,9 @@
     },
     {
       "index": 375,
-      "hash": "cc53bdd86e1c0462e3310d6ca2c45d529cadd013853881da7ac173d527667a5c",
+      "hash": "d9f90b9e25fd77330cf20101d4ce090c06e46a0188d8db9e0618ef27828bd98d",
       "preview": "One thing noted and deliberately not used. The record also links a file describe...",
-      "length": 1241
+      "length": 1059
     },
     {
       "index": 376,
@@ -3733,9 +3733,9 @@
     },
     {
       "index": 384,
-      "hash": "a0738ef2212da6f23f32931b9207275c13ef0ddb1bbeaab5f3025b8e833998f0",
+      "hash": "97b8f03b94ea07e2e231179abc0e89282c205460ac4b5226a4b0035bad53bffd",
       "preview": "The guardrail leads, because this one is easy to over-read. Nicole Junkermann is...",
-      "length": 593
+      "length": 405
     },
     {
       "index": 385,
@@ -3829,9 +3829,9 @@
     },
     {
       "index": 400,
-      "hash": "439567eb6bc5cbb4f7b30be4713b34854bc113152e3e399a32d3abcaea0715a7",
+      "hash": "840454b5ca9d35e73147f8b5562e5d4dfae99280aa1326858fffcaccd0f037db",
       "preview": "The three-and-a-half-hour recording is the bigger document, and it lands on a pa...",
-      "length": 1777
+      "length": 1732
     },
     {
       "index": 401,
@@ -3841,9 +3841,9 @@
     },
     {
       "index": 402,
-      "hash": "8ca17253562ea2eaac49260c73712a921662b50000008687fe68df3ff90bd238",
+      "hash": "7a72d52071ea97cb19050ff9e170b923ecfade9da40a4c90f6e6959ca1254645",
       "preview": "Barak has answered, and his answer travels with the quote. In an N12 interview r...",
-      "length": 835
+      "length": 740
     },
     {
       "index": 403,
@@ -4351,9 +4351,9 @@
     },
     {
       "index": 487,
-      "hash": "cada0a30152600713cdb7ddeba833fedeb29f2c10fc8c454ef8d57db2ff1a1a3",
+      "hash": "8d833ac79a133aa73314ed0c307b28303798eff75994bb8976d5d24c65ea89df",
       "preview": "The section above holds the eugenic material as talk. This is the place where it...",
-      "length": 947
+      "length": 878
     },
     {
       "index": 488,
@@ -4471,9 +4471,9 @@
     },
     {
       "index": 507,
-      "hash": "00fa820b34a73cf98227e1e11687f0a20a831b03c2749877a9e62bec26a94be6",
+      "hash": "f3596cd8915208943e6802f6b692618ab756e22d467de77736788106652e4ebb",
       "preview": "So the series stands, and it is sharper for the correction rather than softer. A...",
-      "length": 1485
+      "length": 1319
     },
     {
       "index": 508,
@@ -4495,15 +4495,15 @@
     },
     {
       "index": 511,
-      "hash": "8d049f86be47c9376b50d64fd86f83fd4f968b1004dcf9d37b058e24609c458a",
+      "hash": "1516d3860dc2f8ea15051a5b3f2c44e07def1c4e9a71729a9492df0d62e0763b",
       "preview": "April 2014 - and this one is genuinely ambiguous, which is why the deflationary ...",
-      "length": 1127
+      "length": 1038
     },
     {
       "index": 512,
-      "hash": "4d48fe894a321adc78bd1f623a10a1adb2d7d36bec97b8bba566615a2a283130",
+      "hash": "7321313f32ded43b6daf4c51cfce1f9f872f2a412a17b380b576caa51878c005",
       "preview": "September 2018 - and this is the document that carries weight. EFTA02625025 (Dat...",
-      "length": 897
+      "length": 865
     },
     {
       "index": 513,
@@ -5971,9 +5971,9 @@
     },
     {
       "index": 757,
-      "hash": "5ebf4fce8bea12ba3a6061e874b2ba3f8a9bc79392ab7db9d24d687abc9a1c46",
+      "hash": "2d357a8c9dc8a0305a22487915eda87db07d195e031857308e522a5c7e7d9d59",
       "preview": "Here is the precision that matters, and almost every retelling loses it: the sec...",
-      "length": 988
+      "length": 910
     },
     {
       "index": 758,
@@ -6655,9 +6655,9 @@
     },
     {
       "index": 871,
-      "hash": "ad141bce7cba575afd3dcd67eb7056453b11df4f972472bd6bc43783916b33c7",
+      "hash": "d0564e017981de634cbb30c51f3453799c2bc0bca96abe7627f3a509759548e1",
       "preview": "The patronage finding of Section II applies here with no adjustment. A museum tr...",
-      "length": 718
+      "length": 629
     },
     {
       "index": 872,
@@ -6781,9 +6781,9 @@
     },
     {
       "index": 892,
-      "hash": "935907a416f90e68d137ed3a9c2fe1fbb5a437a01768e2e4c7f86cec5dc5c0ea",
+      "hash": "a8e140c27f02d7a65bd203fd8727557eadc0851af3bd467b80133e2d3fb437b6",
       "preview": "This index measures institutional connectivity, not proximity to Epstein. A &ldq...",
-      "length": 1113
+      "length": 977
     },
     {
       "index": 893,
@@ -7567,9 +7567,9 @@
     },
     {
       "index": 1023,
-      "hash": "00c198ecf6e98e4dbf389c2e8ca8af275349c01830bc28c92796502904d366e2",
+      "hash": "05418fc0198fc706a37fc76db7510297acd0df94ac46a1c972cfd1f9ee1dcd16",
       "preview": "So the close is three completed things, and the report claims none of them as it...",
-      "length": 938
+      "length": 864
     },
     {
       "index": 1024,

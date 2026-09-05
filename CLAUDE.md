@@ -52,6 +52,14 @@ what is a crime regardless of motive.
   view; (b) FD-302 / victim interview / protective-order stamp → stop at identification, do
   not read on, do not retain; (c) a hex32 id is a research lead, never a citation.
 - Documented-only autonomous deploys. Hold anything defamation-adjacent or contested.
+- **No subject-shielding disclaimers.** Author's instruction, 5 Sept 2026: sentences whose
+  function is to reassure the reader on a subject's behalf - "no crime is alleged against
+  him", "X is living and uncharged", "nothing here alleges anything against him", "not an
+  allegation of wrongdoing", "he has not been charged" - are removed report-wide and are
+  not to be re-added. They read as defending the people the report documents. The
+  living-person floor is about what the report *asserts*; it does not require reassurance
+  boilerplate. State what the record shows, state the tier, stop. Tier statements about
+  the *evidence* ("not established", "attributed", "documented") stay.
 
 ---
 
