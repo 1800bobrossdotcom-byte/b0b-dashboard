@@ -1,13 +1,13 @@
 {
-  "generated": "2026-09-05T07:33:31.703Z",
+  "generated": "2026-09-05T07:34:46.283Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "480a1df217955c35cd1a0274176c144d08d91be469621a7ab4bce52b2dcc5079",
+  "fullFileHash": "a7bc927c747c42ec33caff734004a0b3c5aee3f36eeded76c39977b347f736f2",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "491eedd7527d280ced8c69470acc9f21949db8e37a6a71e9c787c4515fd0d085",
+      "hash": "3a1b3939e5bbed58150e52b96cf2ac5d854849d266e835881f396b3dc6a0f592",
       "length": 35251
     },
     {
@@ -112,8 +112,8 @@
     },
     {
       "id": "ii-test-one-worked-the-sitting-director-of-darpa",
-      "hash": "33a82909ec9024a895ebd7b6a273a01e49e3b003e47e81818a53e418e187d35e",
-      "length": 8701
+      "hash": "2f9918dfe7d2ec8e1947dc0ab2268cb8aafc5e45bc290b2025d37eb4fd400d34",
+      "length": 8675
     },
     {
       "id": "ii-the-credentials-fabricated-and-checked-and-kept",
@@ -162,8 +162,8 @@
     },
     {
       "id": "ii-the-trump-node-documented-proximity-labeled",
-      "hash": "4834d48a1f49016797cc461673cf1a4c73045f14268b3696d4b9ab96ff533c0d",
-      "length": 21982
+      "hash": "768273de402cbf0bb13a29d06ed5503f07205b0c5a4e73266eb10c0f60518577",
+      "length": 21952
     },
     {
       "id": "ii-the-fork-the-operation-or-the-withholding-and",
@@ -237,8 +237,8 @@
     },
     {
       "id": "iii-the-black-book-as-a-machine-readable-claim-the-naming-error-at-database-scale",
-      "hash": "d79b0fde6f6dc277f152b1b2d19a0e275438fa57989c146decd647001d27f6f6",
-      "length": 4561
+      "hash": "3d02cd3aab8693df37109391bcf39d2d2f4f0f8c72e255b92a8c1eccbac44b4c",
+      "length": 4543
     },
     {
       "id": "iii-stage-d-blowback-the-surviving-networks",
@@ -287,8 +287,8 @@
     },
     {
       "id": "iv-the-recordings-epstein-on-tape-and-the-file",
-      "hash": "51d59a22968cb1202bb8a9b15d3dcae63ab653dbe003732655812ffb83634a54",
-      "length": 12103
+      "hash": "5af775cac85af932ea714d0ab6247fce2b285ff40e0c4960c434a25c92772127",
+      "length": 12061
     },
     {
       "id": "iv-what-he-said-about-god-the-soul-and-being-measured",
@@ -397,13 +397,13 @@
     },
     {
       "id": "vi-the-dna-kits-bought-in-bulk-under-an-alias",
-      "hash": "a5deeb928ff998d8723294ef1a0b17e5cabcd2820b7b50b491fd0a57e7cbb5ef",
-      "length": 5998
+      "hash": "9ce0a57b2404f1d3fdd4ed61fe97ee17b91f97914c3ec30c152de053a54d0b8a",
+      "length": 5923
     },
     {
       "id": "vi-the-costed-proposal-a-designer-baby-company-pitched-to-him-with-a-budget",
-      "hash": "b4476b15e108796db6502c2c9e8eb5cde71061d93182926feb8552832b5eb146",
-      "length": 10870
+      "hash": "237b87128a7bd31c7471c5a3900776d9fcae7c019627ef47d268a890613ae77d",
+      "length": 10781
     },
     {
       "id": "vi-the-cloning-thread-proposed-possible-and-the-distance",
@@ -2815,9 +2815,9 @@
     },
     {
       "index": 231,
-      "hash": "8a1538ff64b74a656642e7579ab8a9234c81519e73054c96b484ce69dbf335c0",
-      "preview": "The floor, and it is the same floor. Peter Lee is living, uncharged, and is name...",
-      "length": 443
+      "hash": "695570992e75402da890eca223fa18d86b6bfd1d56160091898ebc71a6ac6255",
+      "preview": "The floor, and it is the same floor. Peter Lee is named by a third party as an e...",
+      "length": 417
     },
     {
       "index": 232,
@@ -3169,9 +3169,9 @@
     },
     {
       "index": 290,
-      "hash": "0db22aad0e27ae96010bd564cc77c5b4adfd8d16d63268eea166657c312e223b",
+      "hash": "7243341416c3f18c0a11b480702fbf4fbf5239e96918b4a8c1680725b5aeb1b3",
       "preview": "And the position hardened rather than resolved, which is the part that matters h...",
-      "length": 1237
+      "length": 1207
     },
     {
       "index": 291,
@@ -3667,9 +3667,9 @@
     },
     {
       "index": 373,
-      "hash": "03eddd05a24653483537930e3f873104fef4787a6984456d7f63f8d2773e18c9",
+      "hash": "906e78107d91b14a6d220801541078128555ed78723ee2a655638e0877eb65ef",
       "preview": "This report does not reproduce the twenty-two names, and the refusal is the same...",
-      "length": 710
+      "length": 692
     },
     {
       "index": 374,
@@ -3841,9 +3841,9 @@
     },
     {
       "index": 402,
-      "hash": "7a72d52071ea97cb19050ff9e170b923ecfade9da40a4c90f6e6959ca1254645",
+      "hash": "3629ea52314c20d86835e640e28fc797b8947a44a8d9556e435b1252c76bd26b",
       "preview": "Barak has answered, and his answer travels with the quote. In an N12 interview r...",
-      "length": 740
+      "length": 698
     },
     {
       "index": 403,
@@ -4351,9 +4351,9 @@
     },
     {
       "index": 487,
-      "hash": "8d833ac79a133aa73314ed0c307b28303798eff75994bb8976d5d24c65ea89df",
+      "hash": "b35eb5b9eef7a8c8f3169fb456bbdfbcd9d630e80803d98fda4cd6e5980cd6c1",
       "preview": "The section above holds the eugenic material as talk. This is the place where it...",
-      "length": 878
+      "length": 832
     },
     {
       "index": 488,
@@ -4387,9 +4387,9 @@
     },
     {
       "index": 493,
-      "hash": "5a971bc89b753c8b1033d94c055c97c1556b435457ac3a229f55fc15b8330803",
+      "hash": "2496f2f9a76d3412b6fbbb158eb65964fc1b9483c0b566bd232273e4feec2ae4",
       "preview": "One adjacency, stated as a juxtaposition and nothing more. This report elsewhere...",
-      "length": 905
+      "length": 876
     },
     {
       "index": 494,
@@ -4423,9 +4423,9 @@
     },
     {
       "index": 499,
-      "hash": "7bccf3c04b705ca4151f959b033d426199033b5e95d722fb383f606f3a5a8337",
-      "preview": "The floor, and it is not decoration. The sender, Bryan Bishop, is living and unc...",
-      "length": 488
+      "hash": "1f9bfb3e5662f39a445f1815010063a86dea961282c57dc827388b5e32805d4b",
+      "preview": "The floor. The sender is Bryan Bishop. There is no evidence Epstein funded him, ...",
+      "length": 399
     },
     {
       "index": 500,
