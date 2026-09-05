@@ -1,13 +1,13 @@
 {
-  "generated": "2026-09-05T07:14:33.743Z",
+  "generated": "2026-09-05T07:22:51.882Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "1d14af7d8c64511a07f4b7b08a682bef59a09edb59b4543b5f3b66805e6af3f3",
+  "fullFileHash": "7e3d02f6d01370352596724f8f4d54e06b03af8f446c9182a891abe9dcc969e6",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "58827f3a0aeebfe46a9057b80f96a3e892086d28ed79dc386398ccfdb4c422a6",
+      "hash": "6ce0f889cabb6907810fa8e43668d3b26a773399db05476267fc2272b880c641",
       "length": 35251
     },
     {
@@ -137,8 +137,8 @@
     },
     {
       "id": "ii-the-compellability-fight-status-5-september-2026",
-      "hash": "1d3ed90de21f1811e76c5caf0c22f4e3ae7cbc9cb89eb12b0f5af9febc5ed6f3",
-      "length": 8847
+      "hash": "77e2840c651250cb9495417ee0dedb21eeca178ac94d93df4061137ece98ae9a",
+      "length": 9683
     },
     {
       "id": "ii-the-pipe-jpmorgan-and-the-fifteen-year-banking",
@@ -3007,15 +3007,15 @@
     },
     {
       "index": 263,
-      "hash": "260187593daa90e6447256aada21e9cae4314d7d06c7ea6548452dba11e06dd9",
-      "preview": "The honest difficulty, which this report will not resolve because it is not reso...",
-      "length": 734
+      "hash": "90e483311c9cbbc5d7ce452181ec5b40c9c46c86d88d841438241456459e53d3",
+      "preview": "Who is making the privacy argument, and what it sits on top of. The privacy of t...",
+      "length": 1230
     },
     {
       "index": 264,
-      "hash": "d942bc43fc557753d904a58870fb698f45a7a10bc19608a1da00f152ecffd996",
+      "hash": "83e5cb3d00d9b0ad438384a9f146d3bfde7e2098b67b0d8a0d819ff3cdf9706f",
       "preview": "Howard Lutnick&rsquo;s account has changed on the record, and the change is the ...",
-      "length": 1328
+      "length": 1668
     },
     {
       "index": 265,
