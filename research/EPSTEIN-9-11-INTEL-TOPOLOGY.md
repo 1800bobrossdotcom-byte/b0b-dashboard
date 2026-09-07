@@ -409,3 +409,122 @@ bears on whether any person was warned. The page's treatment stands.
   non-diagnostic about the underlying record. **That half remains open.**
 - **Not opened:** no FD-302, no victim interview, no protective-order material. No imagery. No
   DOJ redaction de-anonymised. No Deutsche Bank name appears anywhere in this file.
+
+---
+
+## 10. THE OPEN-RECORD HALF - run 7 September 2026, and it found errors on our own page
+
+The three open-record lines were re-dispatched after the rate limit cleared. **Zero bridge
+claims survived, in any line.** No document links Epstein to the CIA; no document links him or
+his circle to 9/11; the Israel-side 9/11 material remains what the page already says it is.
+
+**But the sweep found four claims already published on the page that the record does not
+support as written. All four cut against this report's own thesis, which is why they are listed
+first and why they are not being quietly fixed.** Nothing has been changed on the page: the
+author scoped this session to research. These are held for his decision.
+
+### 10.1 The Mirror Group apology is being read as a concession, and it is not one
+**Verified independently.**
+
+**On the page now:** *"the Mirror Group apologised 'unreservedly' to Hersh and paid him damages
+in 1994. The allegation was never refuted. Maxwell's own company conceded it after he was gone."*
+
+**What the record shows.** In August 1994 Mirror Group settled the libel action Robert Maxwell
+had filed in October 1991 against Seymour Hersh and Faber and Faber over *The Samson Option*,
+paying both damages and costs. It separately apologised "unreservedly" for its own October 1991
+articles **attacking Hersh and Faber**, which it accepted had been "entirely improper."
+
+**Why the page is wrong.** Two different things are being fused. The apology was for the attacks
+on the author and his publisher, not for the underlying allegation. And abandoning a libel claim
+and paying the defendant is **not** an admission that the defendant's allegation was true; under
+the English law of the day truth was a defence the defendant would have had to prove, and it
+never was. **"Conceded it" is the symmetry rule failing in the direction this report prefers.**
+What survives, and it is still worth printing: *the plaintiff's side dropped the action and paid
+the defendant.* That is a real fact and a smaller one.
+Sources: Washington Post, 19 August 1994; Deseret News, 20 August 1994.
+
+### 10.2 "The CIA Director who met with Epstein in 2014" is a naming error
+**Verified independently.**
+
+**On the page now, in three places:** *"Burns (CIA Director)"*, *"The CIA Director who met with
+Epstein in 2014"*, *"Burns (Biden CIA, three Epstein meetings 2014)."*
+
+**What the record shows.** William J. Burns was **Deputy Secretary of State** until 4 November
+2014 and then president of the Carnegie Endowment. He became Director of the CIA in March 2021,
+**seven years after the meetings**. The page elsewhere states the Carnegie fact correctly, which
+makes the framing an inconsistency as well as an error.
+
+**Why it matters.** This is the report's own **naming error** - mistaking the sign for the thing
+named - and it is borrowing the weight of a later office to colour an earlier meeting. The
+documented claim is: *the man who would later run the CIA met Epstein three times in 2014, while
+he was the second-ranking official at the State Department.* That is still notable. It is not a
+CIA meeting and the page should not call it one.
+
+### 10.3 The FBI file does not end where the page says it ends - and the full file is better for us
+**Verified independently, verbatim, in FBI file 303A-NK-105536.**
+
+**On the page now:** the FBI serial of 24 September 2001 is cited as the Bureau's finding that
+"none of the Israelis were acting on behalf of a foreign government."
+
+**What the record shows.** That serial is real, but it is marked **(Pending)** and dated eleven
+days into the case. A foreign-counterintelligence investigation followed. Its **Closing
+Investigative Memorandum records: "On 07/10/2003 Newark investigation was completed and
+closed."** The same memorandum says two things, and the report should print both:
+
+- *Against the null:* the CI case was opened because the criminal case *"indicated a
+  possible/undefined intelligence affiliation with an Israeli Intelligence Service"*, and it
+  records Newark's belief that one individual *"was working for the Israeli Government through
+  his employment at the [redacted]."*
+- *Against the foreknowledge reading, and decisively:* *"None of the pictures developed from the
+  film found inside the 35 mm camera depicted the twin towers prior to the attack"*, and
+  *"Numerous circumstantial facts strongly support the five (5) individuals statements they
+  traveled to the roof of the parking garage after learning of the attacks from radio broadcasts
+  and Internet news sites."*
+
+**This is the best single upgrade available to Section XVI.** The current text uses a provisional
+eleven-day-old serial where a closing memorandum exists, and the closing memorandum is *more*
+useful precisely because it refuses to resolve cleanly in either direction. It kills the
+foreknowledge specimen on physical evidence while leaving a documented counterintelligence
+concern standing.
+
+### 10.4 The DEA art-students memorandum date is stated as fact and may not be one
+**Not independently verified - flagged, not adopted.** The page dates it *"June 2001."* The
+report line is that the leaked copy carries no date and that June 2001 is a secondary
+attribution. **Check the leaked copy before touching the page.** Also noted: the document's own
+comparator is Israeli organised crime rather than a service, which the page does not say.
+
+### 10.5 New at documented tier, not yet on the page
+
+- **6 December 2018** (`vol00009-efta01014138`) - Steve Bannon forwards Epstein a post about
+  Acosta. Epstein replies: **"do you know bill barr. CIA ."** Barr's nomination was announced the
+  next day, 7 December 2018. Barr's CIA service from 1973 to 1977 is public record, so Epstein's
+  observation is accurate rather than a claim. **What it establishes:** what Epstein was tracking,
+  and when. **What it does not establish:** anything about Barr.
+- **The Burns contact is correspondence, not just a calendar entry** (`EFTA01800671`;
+  `vol00009-efta00629334`) - Burns arranging a meeting from his own address, and thanking Epstein
+  in writing for an introduction to Peter Thiel. This strengthens a claim the page already makes,
+  while 10.2 corrects how it is framed.
+- **Brennan is a proposal, not a meeting** (`EFTA02643671`, Kathy Ruemmler, July 2017;
+  `EFTA02639189`). **Publish as a null**, at the same prominence as the Burns material.
+- **Huntleigh USA**, a subsidiary of ICTS International since 1998, is named in the 9/11
+  Commission Report's own first chapter as United's screening contractor for United 175, beside
+  Globe Security for American 11. **The split is the finding**: two different contractors, so the
+  screening arrangement discriminates nothing. Print it with the comment that it proves nothing,
+  or not at all.
+- **The agency mismatch in the whole public argument.** Ben-Menashe's claim, on tape, is Israeli
+  **military** intelligence. Every official denial answers **Mossad**. Claim and denial have been
+  passing each other, and both remain non-diagnostic.
+- **Epstein forwarded the Gordon Thomas Maxwell-extortion narrative on 15 March 2018**
+  (`EFTA02507843`) - so where he got the story is now documented, and Section II can say so while
+  continuing to decline to use it.
+- **The Acosta contradiction is two-sided and documented**: Vicky Ward's anonymous source against
+  Acosta's own "the answer is no" to the Office of Professional Responsibility. Only 13 pages of
+  the 348-page OPR report are public and the word "intelligence" appears nowhere in them.
+
+### 10.6 Held, not adopted
+
+The February 2026 "financial bounty hunter" memorandum - the primary was not obtained and it
+touches six living people. The 8 January 2015 "CIA Agency Medal" email has a redacted sender and
+**was not de-anonymised.** NYT, Telegraph, Forward, Washington Post and archive.org were blocked
+or partly blocked from this environment, so several items in the Israel-side 9/11 line rest on
+secondary retrieval and are flagged in place.
