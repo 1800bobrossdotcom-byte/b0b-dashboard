@@ -155,7 +155,34 @@ than once.
 
 ---
 
-## 7. OPEN AT LAST WRITE — 1 September 2026
+## 7. OPEN AT LAST WRITE — 7 September 2026
+
+**FOUR ERRORS FOUND ON THE LIVE PAGE, 7 Sept 2026. Verified, held for the author, not fixed —
+he scoped that session to research. Full detail in `research/EPSTEIN-9-11-INTEL-TOPOLOGY.md` §10.**
+
+1. **The 1994 Mirror Group settlement is not a concession.** The apology was for the Oct 1991
+   articles attacking Hersh and Faber ("entirely improper"), not for the allegation. Dropping a
+   libel action and paying the defendant is not an admission it was true. "Maxwell's own company
+   conceded it after he was gone" is the symmetry rule failing our way.
+2. **"The CIA Director who met with Epstein in 2014" is our own naming error**, in three places.
+   Burns was Deputy Secretary of State until 4 Nov 2014; CIA from 2021.
+3. **The FBI Urban Moving serial we cite (24 Sept 2001) is marked (Pending)**, eleven days in.
+   The case closed 10 July 2003. The closing memorandum is *better for us*: it records a
+   documented CI concern and kills the foreknowledge specimen on physical evidence.
+4. **The DEA art-students memo is dated "June 2001" on the page**; the leaked copy may be
+   undated. Not verified either way. Get the copy first.
+
+**Also researched, unpublished (same file):** the Nov 2016 Riyadh trip named in the pilot's own
+traffic; the Nov 2017 Boies exchange and Barak's "Call me. in Paris."; the Carbyne/Trae Stephens
+introduction; the Lutnick contact record including his written acceptance of a Little St. James
+lunch for 23 Dec 2012; Epstein to Bannon 6 Dec 2018, "do you know bill barr. CIA ."
+
+**The Epstein↔9/11 question itself: three tests, all NOT REACHED.** The corpus 9/11 null is
+clean and is the publishable finding.
+
+---
+
+### Carried from 1 September 2026
 
 - **Which Daniel** — the corpus holds both **Daniel Siad** (13 two-way messages, asked to
   "help facilitate" contact) and **Daniel Sabba** (`@db.com`). Author to disambiguate.
