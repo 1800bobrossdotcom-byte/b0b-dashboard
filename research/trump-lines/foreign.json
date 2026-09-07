@@ -1,0 +1,417 @@
+{
+  "line": "foreign",
+  "findings": [
+    {
+      "id": "FOR-01",
+      "claim": "Three federal suits alleged that Trump's retention of business interests violated the Foreign and/or Domestic Emoluments Clauses during his first term: CREW v. Trump (S.D.N.Y. / 2d Cir.), District of Columbia and Maryland v. Trump (D. Md. / 4th Cir.), and Blumenthal v. Trump (D.D.C. / D.C. Cir.). None produced a merits ruling. On 25 January 2021 the Supreme Court granted certiorari in Trump v. CREW (No. 20-330) and Trump v. District of Columbia (No. 20-331), vacated the Second and Fourth Circuit judgments, and remanded with instructions to dismiss as moot because Trump had left office - a Munsingwear vacatur (United States v. Munsingwear, Inc., 340 U.S. 36 (1950)), which strips the vacated opinions of precedential force. Blumenthal had already been dismissed on 7 February 2020 when a unanimous D.C. Circuit panel (Henderson, Tatel, Griffith) held that individual Members of Congress lack standing to assert the institution's interests; certiorari denied 13 October 2020.",
+      "tier": "documented",
+      "legal_frame": "U.S. Const. Art. I sec. 9 cl. 8 (Foreign Emoluments Clause); Art. II sec. 1 cl. 7 (Domestic Emoluments Clause); Art. III standing; mootness / Munsingwear vacatur",
+      "sources": [
+        "https://www.scotusblog.com/case-files/cases/trump-v-citizens-for-responsibility-and-ethics-in-washington",
+        "https://www.scotusblog.com/2021/01/justices-vacate-rulings-on-trump-and-emoluments/",
+        "https://law.justia.com/cases/federal/appellate-courts/cadc/19-5237/19-5237-2020-02-07.html",
+        "https://www.theusconstitution.org/litigation/trump-and-foreign-emoluments-clause/",
+        "https://levin-center.org/members-of-congress-emoluments-case/"
+      ],
+      "establishes": "That the constitutional question was litigated to the Supreme Court and was never answered. Two circuit judgments favourable to plaintiffs were erased without review of their reasoning. One case ended on standing.",
+      "does_not": "Establish that the conduct violated either clause, or that it did not. A dismissal for mootness or lack of standing is a ruling about the court's power, not about the President's conduct. Guaranteed-null rule applies in full: both sides have claimed vindication from a disposition that decided nothing.",
+      "counter_record": "The vacatur was requested by the Acting Solicitor General and is the ordinary disposition for a civil case mooted by circumstance, not a favour. Independently, the District Court in D.C. and Maryland v. Trump and the D.C. district court in Blumenthal had each read 'emolument' broadly to reach commercial proceeds - so had the litigation continued, the plaintiffs would still have had to survive appellate review of a contested definitional question on which no appellate court ever ruled.",
+      "date_span": "2017-06 to 2021-01-25",
+      "status": "dismissed on mootness (CREW; D.C./Maryland) and on standing (Blumenthal); no merits ruling; lower opinions vacated",
+      "notes": "The lead's frame should note: 'no court has ever ruled on whether the conduct violated the Emoluments Clauses' is precisely correct and is the only defensible formulation."
+    },
+    {
+      "id": "FOR-02",
+      "claim": "House Oversight Committee minority (Democratic) staff released a 156-page report, 'White House for Sale: How Princes, Prime Ministers, and Premiers Paid Off President Trump,' on 4 January 2024, finding at least $7.8 million in payments from at least 20 foreign governments to four Trump-owned entities (Trump International Hotel Washington D.C., Trump International Hotel Las Vegas, Trump Tower 5th Ave, Trump World Tower 845 UN Plaza) during 2017-2020. China accounted for over $5 million. The source records were documents subpoenaed from Trump's accounting firm Mazars USA and obtained after litigation.",
+      "tier": "documented",
+      "legal_frame": "U.S. Const. Art. I sec. 9 cl. 8 (Foreign Emoluments Clause) - asserted by the report's authors; no adjudication",
+      "sources": [
+        "https://oversightdemocrats.house.gov/news/press-releases/oversight-democrats-release-report-proving-trump-pocketed-millions-from-at-least",
+        "https://www.lawfaremedia.org/article/report-finds-trump-businesses-received-7.8-million-from-foreign-governments-during-trump-presidency",
+        "https://www.axios.com/2024/01/04/report-trump-received-at-least-78m-in-foreign-payments-during-presidency"
+      ],
+      "establishes": "That specific, dated payments from identified foreign governments to Trump-owned entities are recorded in his own accountants' ledgers, in an amount of at least $7.8 million over the period the ledgers cover.",
+      "does_not": "Establish that any payment was an 'emolument' within the constitutional meaning, that any was made to influence an official act, or that any official act followed. The report is a minority-staff document, not a committee finding, not a court judgment, and not an executive-branch determination. Its own $7.8m figure is a floor derived from incomplete ledgers covering roughly two years and four of more than 500 entities - which is a limitation on the number in both directions: it is not a total, and it is also not a verified accounting.",
+      "counter_record": "Three arguments run against treating these as constitutional emoluments: (a) a market-rate payment to a business the officeholder owns is a commercial transaction, not a 'present, Emolument, Office, or Title' to the officeholder - the definitional question the courts never reached; (b) the Trump Organization voluntarily remitted its estimated profit on identified foreign-government business to the U.S. Treasury each year - reported figures of $151,470 (2017), c. $191,000 (2018), $191,538 (2019), $105,465 (2020); (c) the report is a partisan minority product issued in an election year. Against (b): those remittances are estimated profit, not revenue, computed by the payee on its own methodology and never independently audited, so they are not a reconciliation of the $7.8m.",
+      "date_span": "2017 to 2020; report 2024-01-04",
+      "status": "never charged; no adjudication; congressional minority-staff report only",
+      "notes": "CREW separately put the likely figure at $13.6 million using a different method. I did not verify CREW's methodology and do not rely on its number."
+    },
+    {
+      "id": "FOR-03",
+      "claim": "Qatar's government transferred a Boeing 747-8 valued at c. $400 million. The Department of Defense formally accepted the aircraft in May 2025; it was retrofitted and flew as Air Force One from Joint Base Andrews on 1 July 2026. The stated plan is transfer of the aircraft to the Donald J. Trump Presidential Library Foundation no later than 1 January 2029. Senate Resolution 244 (119th Cong., introduced by Sen. Blumenthal, 21 May 2025) declared the acceptance 'an illegal emolument, regardless of the legal technicalities of ownership' and expressly 'withholds the consent of the Senate.' It was referred to Homeland Security and Governmental Affairs and never adopted; a unanimous-consent attempt was blocked.",
+      "tier": "documented",
+      "legal_frame": "U.S. Const. Art. I sec. 9 cl. 8 (Foreign Emoluments Clause: 'without the Consent of the Congress'); Foreign Gifts and Decorations Act, 5 U.S.C. sec. 7342; 18 U.S.C. sec. 201 (bribery/illegal gratuity) raised by critics",
+      "sources": [
+        "https://www.congress.gov/119/bills/sres244/BILLS-119sres244is.htm",
+        "https://www.cnbc.com/2026/07/01/retrofitted-qatari-jet-flight-air-force-one-trump.html",
+        "https://www.bloomberg.com/news/articles/2026-05-13/air-force-affirms-400-million-cost-estimate-for-jet-from-qatar",
+        "https://abcnews.com/US/final-decision-future-qatar-donated-air-force-after/story?id=135413499",
+        "https://www.commondreams.org/news/trump-qatar"
+      ],
+      "establishes": "That a foreign state conveyed an asset of very large value into U.S. government hands with a stated downstream destination of a foundation bearing the President's name, and that Congress has not consented. The clause's text conditions acceptance on congressional consent; no consent exists.",
+      "does_not": "Establish a violation. The clause's application turns on whether the recipient is the officeholder or the United States, and no court has ruled. It does not establish any quid pro quo with Qatar, and no such document was found. It does not establish the eventual disposition of the aircraft: as of the ABC News reporting there was 'no final decision' on its post-term future.",
+      "counter_record": "The Department of Justice's position, in a memorandum signed by Attorney General Pam Bondi in May 2025 and reportedly cleared by the Office of Legal Counsel, is that the arrangement is lawful because the gift runs to the Department of Defense rather than to the President personally and is not tied to a specific official act. That memorandum has not been released; DOJ told a FOIA requester that processing would take over 600 days, and Freedom of the Press Foundation, represented by American Oversight, sued in the District of Columbia in July 2025. As of this search no ruling ordering release was found. So the government's own legal reasoning is unexamined in public - which cuts against certainty in both directions.",
+      "date_span": "2025-05 to 2026-07",
+      "status": "accepted by DoD; in service; never charged; no litigation on the merits; DOJ memo withheld, FOIA suit pending",
+      "notes": "Retrofit cost is contested: the Air Force affirms an estimate under $400 million; NBC and outside engineers put it above $1 billion; a reported $934 million transfer from the Sentinel missile program was covered by NYT in July 2025. I did not obtain the underlying reprogramming document and tier the $934m figure no higher than labeled."
+    },
+    {
+      "id": "FOR-04",
+      "claim": "The Trump Organization's second-term ethics plan, issued 10 January 2025, is materially weaker than the 2017 version: it bars new deals with foreign governments but, unlike the first-term pact, does not bar new deals with private foreign companies. It retains a pledge to remit to the Treasury identifiable profits from foreign governments, and installs outside counsel (William A. Burck) to review transactions.",
+      "tier": "documented",
+      "legal_frame": "none - voluntary private ethics undertaking; not law and not enforceable by any authority",
+      "sources": [
+        "https://www.washingtonpost.com/politics/2025/01/10/trump-org-issues-ethics-plan-second-term-critics-say-its-not-enough/",
+        "https://www.usnews.com/news/us/articles/2025-01-10/the-trump-company-is-not-banning-private-foreign-deals-a-break-with-its-first-term-policy",
+        "https://www.nbcnews.com/politics/donald-trump/trump-organization-ethics-plan-president-white-house-rcna187214"
+      ],
+      "establishes": "The structural fact that makes the 2025-26 record different in kind from 2017-20: the private-foreign-company channel is open by design, and the state's interest can travel through a private counterparty.",
+      "does_not": "Establish wrongdoing. A voluntary ethics plan is not a legal standard, and loosening one is not a violation of anything.",
+      "counter_record": "Eric Trump's stated position is that the company is 'dedicated to not just meeting but vastly exceeding its legal and ethical obligations,' and that first-term voluntary restraints drew criticism regardless of compliance. Nothing in law required either plan; a company owned by a president's family has no statutory obligation to restrict its counterparties at all.",
+      "date_span": "2025-01-10",
+      "status": "voluntary undertaking; no enforcement mechanism",
+      "notes": "This is the hinge for FOR-05: 'no deals with foreign governments' and 'deals with developers majority-owned or joint-ventured with sovereign entities' are not the same statement."
+    },
+    {
+      "id": "FOR-05",
+      "claim": "Trump's own public financial disclosure (OGE Form 278e, Annual, calendar year 2025, received by OGE 29 June 2026, filed under a 45-day extension) reports licensing and management income from Gulf projects whose licensees are Dar Global / Dar Al Arkan entities: DT Marks Dubai DG LLC, licensee Dar Al Arkan Properties LLC - license fee $10,361,458.68; DT Marks KSA LLC (Saudi Arabia), licensee Dar Al Arkan Properties LLC - license fee $9,243,574.15; DT Marks Doha LLC (Doha, Qatar), licensee Dar Global Holdings for Real Estate LLC - license fee $5,250,000.00; DT Marks Oman LLC, licensee Dar Al Arkan Property Development SPC - license fee $949,642; DT Marks Dubai LLC and DT Dubai Golf Manager LLC, licensee/counterparty Damac Crescent Properties LLC - $1,335,140 and $1,254,744; DT Diriyah Hotel Manager LLC (Diriyah, Saudi Arabia), licensee Dar Global Real Estate Development LLC - no income reported for the period. Reporting establishes that the Qatar project counterparty structure involves Qatari Diar, a Qatari sovereign-wealth vehicle, and the Oman project involves Omran, an Omani state tourism-development company.",
+      "tier": "documented",
+      "legal_frame": "Ethics in Government Act, 5 U.S.C. app. sec. 101 et seq. / 5 C.F.R. part 2634 (disclosure); Art. I sec. 9 cl. 8 asserted by critics, unadjudicated",
+      "sources": [
+        "https://www.citizensforethics.org/wp-content/uploads/2026/06/Donald-J-Trump-2026-278ANNUAL.pdf",
+        "https://www.pbs.org/newshour/politics/in-a-deal-with-trump-organization-dar-global-will-launch-a-1-billion-project-in-saudi-arabia",
+        "https://www.ms.now/news/trump-organization-foreign-deals-dubai-saudi-arabia",
+        "https://www.forbes.com/sites/danalexander/2025/11/14/how-trumps-finances-got-tangled-up-with-saudi-arabia/"
+      ],
+      "establishes": "Sitting-president income, in eight figures for a single year, from licence agreements with Gulf developers, at least two of whose projects are joint ventures with state-owned entities (Qatari Diar; Omran). The amounts are from the President's own signed disclosure, not from an adversary's estimate.",
+      "does_not": "Establish that any payer is a foreign state. Dar Global plc is a publicly listed subsidiary of Dar Al Arkan, a private Saudi developer; Damac is privately held. A licence fee from a private company is not, on the face of the record, a payment from a 'King, Prince, or foreign State.' It does not establish that any US policy decision was affected. Anti-map guardrail: a Gulf counterparty and a Gulf foreign-policy decision in the same year are not a chain.",
+      "counter_record": "Three counters, all real: (a) the payments run to private companies, and the emoluments clause on its face reaches foreign states, so the state-linkage argument requires piercing a corporate structure no court has been asked to pierce; (b) the Trump Organization says it does not do new deals with foreign governments, and no document surfaced showing a direct government counterparty on these six lines; (c) licence fees on branded real estate are an ordinary commercial product the company sold for two decades before 2015, so the existence of the income is not itself anomalous. Against (c): the scale and the concentration in the Gulf during a presidency are the anomaly, not the product.",
+      "date_span": "calendar year 2025; disclosure filed 2026-06-29",
+      "status": "never charged; no investigation known to be open; disclosed and accepted by OGE reviewing official",
+      "notes": "CNBC reported on 10 August 2026 an aggregate foreign licensing figure of $59.5 million; I could not fetch that article (HTTP 403) and do not adopt the aggregate. The individual line items above are read directly from the filed 278e. I did not attempt to total them, because the form mixes license fees, management fees and intercompany receivables and a naive sum would double-count."
+    },
+    {
+      "id": "FOR-06",
+      "claim": "The same 2025 disclosure reports very large crypto proceeds routed through DT Marks Defi LLC, which holds a 38.25% interest in WLF Holdco LLC, the sole member of World Liberty Financial, Inc.: 'Net proceeds from Equity Sale in WLF Holdco LLC' $65,625,000; 'Net proceeds from Token sales distributed by World Liberty Financial LLC' $236,250,000; and further wallet-level entries of $42,250,000, $56,036,445 and $150,606,931 described as proceeds from token sales distributed by World Liberty Financial LLC. CIC Digital LLC is separately disclosed as holding 'License fees for NFT's and meme coins.'",
+      "tier": "documented",
+      "legal_frame": "5 C.F.R. part 2634 (disclosure); no charge; emoluments and 18 U.S.C. sec. 201 raised by members of Congress, unadjudicated",
+      "sources": [
+        "https://www.citizensforethics.org/wp-content/uploads/2026/06/Donald-J-Trump-2026-278ANNUAL.pdf"
+      ],
+      "establishes": "That a sitting president disclosed nine-figure personal proceeds from a crypto venture during his term, and the corporate chain by which those proceeds reached him.",
+      "does_not": "Identify a single purchaser. The disclosure names no buyer of any token and no foreign state. It is therefore evidence of magnitude and structure, and of nothing about who paid. It also does not establish a clean total: the wallet-level lines appear to overlap with the $236,250,000 aggregate line, and I did not resolve the overlap.",
+      "counter_record": "World Liberty Financial's stated position is that USD1's growth reflects market demand rather than political ties. Token purchases on a public blockchain are open to anyone; a president cannot decline them and the venture cannot in general identify buyers. That is a genuine defence and it also cuts the other way, because it means the identity of the payers is structurally unknowable from the disclosure alone.",
+      "date_span": "calendar year 2025",
+      "status": "disclosed; never charged; congressional inquiries open",
+      "notes": "Read directly from the filed form. Do not publish a single 'Trump made $X from crypto' figure off these lines without resolving the double-count."
+    },
+    {
+      "id": "FOR-07",
+      "claim": "Congressional investigators opened inquiries in 2026 into World Liberty Financial's foreign backing. On 4 February 2026 the House Select Committee on the CCP minority wrote to WLF; House investigators, led by Rep. Ro Khanna, sought ownership, payment and governance records over a reported $500 million deal giving an Abu Dhabi-connected vehicle (reported as Aryam Investment 1) a 49% stake shortly before the January 2025 inauguration, and asked whether $187 million reached Trump family entities. Senators Warren and Merkley separately sought records on the use of WLF's USD1 stablecoin to settle MGX's $2 billion investment in Binance. A production deadline of 1 March 2026 was set.",
+      "tier": "documented",
+      "legal_frame": "Congressional oversight; questions raised under Art. I sec. 9 cl. 8 and 18 U.S.C. sec. 201; no statute charged",
+      "sources": [
+        "https://democrats-selectcommitteeontheccp.house.gov/sites/evo-subsites/democrats-selectcommitteeontheccp.house.gov/files/evo-media-document/2-4-26-scc-letter-to-wlf.pdf",
+        "https://www.coindesk.com/policy/2026/02/05/house-probe-targets-wlfi-after-report-of-usd500-million-uae-stake",
+        "https://www.banking.senate.gov/newsroom/minority/warren-merkley-seek-world-liberty-financial-records-on-2-billion-trump-stablecoin-deal-involving-uae-firm-and-binance"
+      ],
+      "establishes": "That the inquiries exist, who sent them, what they ask for, and the dates.",
+      "does_not": "Establish any of the underlying allegations. A congressional letter is a request, not a finding, and these are minority-staff letters without subpoena power behind them. The $500 million stake, the 49% figure, the Aryam vehicle and the $187 million to family entities are all allegations recited in letters and press reporting; I found no primary document establishing any of them.",
+      "counter_record": "Binance CEO Richard Teng publicly denied (CNBC, 4 November 2025) that the firm boosted a Trump crypto venture ahead of the Zhao pardon. World Liberty Financial attributes USD1's growth to demand. No committee with subpoena authority has adopted any finding; no agency has opened a public investigation.",
+      "date_span": "2026-02-04 to 2026-03-01",
+      "status": "under congressional inquiry (minority); never charged; no agency investigation known",
+      "notes": "Tier the underlying facts no higher than labeled until a primary document appears. The letters themselves are documented."
+    },
+    {
+      "id": "FOR-08",
+      "claim": "The $TRUMP memecoin promoted a private dinner and VIP reception for its top holders, held 22 May 2025 at Trump National Golf Club near Washington. An account identified as belonging to Justin Sun held the top position with over $18 million of the token as of 12 May 2025. A Bloomberg analysis found 19 of the top 25 holders were likely foreign nationals. On that basis 35 House Democrats, led by Reps. Adam Smith and Sean Casten, wrote to the Department of Justice demanding an investigation into whether the arrangement violated federal bribery law or the Foreign Emoluments Clause.",
+      "tier": "documented",
+      "legal_frame": "18 U.S.C. sec. 201 (bribery / illegal gratuity); U.S. Const. Art. I sec. 9 cl. 8 - both asserted in a congressional letter, neither charged",
+      "sources": [
+        "https://casten.house.gov/imo/media/doc/trump_memecoin_dinner_letter_final.pdf",
+        "https://adamsmith.house.gov/news/press-releases/smith-casten-demand-doj-investigation-trump-crypto-dinner",
+        "https://www.pbs.org/newshour/show/private-event-with-crypto-customers-fuels-accusations-of-trump-profiting-off-presidency"
+      ],
+      "establishes": "That access to the President was allocated by holdings in a token from which his entities earned fees, and that the largest holders were predominantly foreign nationals.",
+      "does_not": "Establish that any purchaser was a foreign government or acting for one. 'Foreign national' is not 'foreign State' - the clause reaches states. It does not establish any official act sought or delivered. Justin Sun is a living private individual: the record shows he held the top position and attended; nothing more is asserted here.",
+      "counter_record": "Sen. Cynthia Lummis (R-Wyo.), a supporter of the President, said publicly the dinner 'gives me pause' - so criticism was not purely partisan. On the other side, the strongest defence is legal: a public-market purchase with no communicated exchange fails the 'official act' element of section 201 under McDonnell v. United States, 579 U.S. 550 (2016), and a private-national purchaser is outside the Foreign Emoluments Clause's text. DOJ took no public action on the letter.",
+      "date_span": "2025-05-12 to 2025-05-23",
+      "status": "never charged; no DOJ action publicly announced; investigation not known to exist",
+      "notes": "The Bloomberg nationality analysis is an inference from wallet behaviour, not an identification. Tier it labeled."
+    },
+    {
+      "id": "FOR-09",
+      "claim": "On 21 October 2025 the President granted a full and unconditional pardon to Changpeng Zhao in United States v. Zhao, No. 23-CR-00179-RAJ-001 (W.D. Wash.), where Zhao had pleaded guilty to failing to maintain an effective anti-money-laundering programme at Binance and served four months in 2024. The pardon warrant is a primary document bearing the DOJ seal. In the same period, MGX - an Abu Dhabi state-linked investment firm - used World Liberty Financial's USD1 stablecoin to settle a $2 billion investment in Binance, an arrangement that materially benefited the Trump-family venture.",
+      "tier": "documented",
+      "legal_frame": "U.S. Const. Art. II sec. 2 cl. 1 (pardon power); 18 U.S.C. sec. 201 raised by critics; 31 U.S.C. sec. 5318(h) was the underlying offence",
+      "sources": [
+        "https://www.justice.gov/pardon/media/1416576/dl?inline=",
+        "https://www.cnbc.com/2025/10/23/trump-pardons-binance-founder-cz-zhao.html",
+        "https://www.banking.senate.gov/imo/media/doc/changpeng_zhao_pardon_resolution.pdf",
+        "https://democrats-judiciary.house.gov/sites/evo-subsites/democrats-judiciary.house.gov/files/evo-media-document/2026-08-hjc-dems-staff-report-pardons-inc.pdf"
+      ],
+      "establishes": "The pardon, its date, its scope, and the fact that a foreign state-linked fund's $2 billion transaction ran through a stablecoin issued by a venture in which the President's family holds a large economic interest, in the same window.",
+      "does_not": "Establish a quid pro quo. No document was found recording an exchange. Anti-map guardrail applies with force here: a benefit and a pardon in the same period is a timeline, not a chain, and the House Judiciary minority staff report ('Pardons, Inc.', August 2026) itself recites sequence and lobbying spend rather than any agreement. Zhao's conviction was for an AML programme failure, not for defrauding victims, and he had already completed his sentence - so the pardon's practical effect was restoration of status, not release.",
+      "counter_record": "Zhao told CNBC on 23 January 2026 that his business relationship with the Trumps had been 'misconstrued.' Binance CEO Richard Teng denied the firm boosted the Trump venture ahead of the pardon. Trump said publicly he had 'no idea' who Zhao is. Guaranteed-null rule: a pardon is an unreviewable Article II act, so its issuance is consistent with both a corrupt motive and a policy view that the prosecution was overreach - the act itself discriminates between them not at all.",
+      "date_span": "2025-10-21 to 2026-08",
+      "status": "pardoned; no charge against any person arising from the pardon; congressional minority-staff report only",
+      "notes": "Zhao is a convicted and pardoned person, so stating the conviction is not a living-person-floor problem. The pardon warrant text was read directly."
+    },
+    {
+      "id": "FOR-10",
+      "claim": "Affinity Partners, the private investment firm founded by Jared Kushner after leaving government in January 2021, received approximately $2 billion from Saudi Arabia's Public Investment Fund - a commitment approved over the objections of PIF's own screening panel - and further capital from Qatari and Emirati sovereign funds. Senate Finance Committee investigation records state the firm collected roughly $157 million in fees from foreign investors over three years, including about $87 million directly from the Saudi government, while returning nothing to investors. On 24 October 2024 Sen. Wyden and Rep. Raskin asked the Attorney General to appoint a special counsel to investigate possible Foreign Agents Registration Act violations. In 2026, with Kushner serving as 'Special Envoy for Peace,' Wyden and Rep. Garcia (19 March 2026) and Raskin (April and 24 August 2026) opened further inquiries into his simultaneous fundraising from Middle Eastern governments and negotiation of U.S. foreign policy.",
+      "tier": "documented",
+      "legal_frame": "22 U.S.C. sec. 611 et seq. (Foreign Agents Registration Act); 18 U.S.C. sec. 208 (criminal conflict of interest, applicability to special government employees contested); U.S. Const. Art. I sec. 9 cl. 8 as to any officeholder",
+      "sources": [
+        "https://www.finance.senate.gov/chairmans-news/wyden-investigation-of-kushner-firm-continues-new-letter-outlines-affinity-partners-fee-structure-lack-of-return-to-investors-questionable-deals-with-foreign-governments",
+        "https://www.finance.senate.gov/imo/media/doc/wyden_raskin_kushner_fara.pdf",
+        "https://www.finance.senate.gov/ranking-members-news/wyden-garcia-investigate-kushner-raising-billions-from-middle-east-governments-while-negotiating-us-foreign-policy",
+        "https://democrats-judiciary.house.gov/sites/evo-subsites/democrats-judiciary.house.gov/files/evo-media-document/2026-08-24-raskin-to-kushner-affinity-re-albania-and-compliance.pdf",
+        "https://democrats-judiciary.house.gov/media-center/press-releases/ranking-member-raskin-opens-sweeping-investigation-into-us-special-envoy-for-peace-jared-kushner-s-foreign-entanglements-and-staggering-conflicts-of-interest"
+      ],
+      "establishes": "The capital flows, the fee figures as stated in Senate investigation letters, the PIF panel override, and the fact and dates of the referrals and inquiries.",
+      "does_not": "Establish that Kushner acted as an agent of a foreign principal within FARA's meaning, or that he took any official act for a foreign payer. He is a living person against whom no charge has been brought and none is implied here. The fee and return figures come from congressional letters, not from audited filings I have seen.",
+      "counter_record": "Sovereign wealth funds routinely place capital with U.S. private-equity firms; PIF has done so with many managers. FARA's commercial and legal exemptions are broad, and the statute has historically been enforced only rarely. Most importantly for symmetry: the Department of Justice acknowledged the 2024 referral and took no action, and no special counsel was appointed. That declination is not evidence that the conduct was lawful, but neither is the referral evidence that it was not - and the declination sits inside a policy change (see FOR-11) that makes it weak evidence of anything.",
+      "date_span": "2021 to 2026-08-24",
+      "status": "never charged; special-counsel referral declined / no appointment; congressional inquiries open",
+      "notes": "Kushner is uncharged. State the record and stop."
+    },
+    {
+      "id": "FOR-11",
+      "claim": "On 5 February 2025, her first day in office, Attorney General Pam Bondi issued a memorandum limiting criminal FARA enforcement to 'conduct similar to more traditional espionage by foreign government actors,' directing the Department toward civil enforcement and public guidance instead, and disbanding the FBI's Foreign Influence Task Force.",
+      "tier": "documented",
+      "legal_frame": "22 U.S.C. sec. 611 et seq. (FARA); internal DOJ charging policy",
+      "sources": [
+        "https://www.lawfaremedia.org/article/justice-dept.-releases-slate-of-memos-from-attorney-general-bondi",
+        "https://www.skadden.com/insights/publications/2025/02/attorney-general-announces-shift-in-foreign-agents",
+        "https://cyberscoop.com/doj-disbands-foreign-influence-task-force/",
+        "https://www.insidepoliticallaw.com/2025/02/07/attorney-general-issues-memorandum-regarding-fara-criminal-enforcement/"
+      ],
+      "establishes": "A documented, dated change in the executive branch's own enforcement posture on the single statute most often invoked against undisclosed foreign-principal work.",
+      "does_not": "Establish that the change was made to protect anyone. Charging policy is squarely within prosecutorial discretion and administrations reset it routinely.",
+      "counter_record": "The stated rationale - that FARA had been used expansively and that resources were better spent elsewhere - has support across the bar: FARA's breadth and vagueness have drawn sustained criticism from defence practitioners and from the DOJ Inspector General (2016) long before 2025. Sen. Grassley (R-Iowa) has separately pressed DOJ on FARA data, so oversight interest is not one-sided.",
+      "date_span": "2025-02-05",
+      "status": "in force as DOJ policy",
+      "notes": "This is the structural reason a FARA null in 2025-26 carries almost no information. Guaranteed-null rule: an absence of FARA charges under a policy that all but forecloses FARA charges is evidence of nothing about the underlying conduct."
+    },
+    {
+      "id": "FOR-12",
+      "claim": "The White House-released Memorandum of Telephone Conversation for the 25 July 2019 call between President Trump and President Zelenskyy (declassified 24 September 2019) records Trump saying: 'I would like you to do us a favor though because our country has been through a lot and Ukraine knows a lot about it,' asking Zelenskyy to look into CrowdStrike and 'the server'; and later: 'There's a lot of talk about Biden's son, that Biden stopped the prosecution and a lot of people want to find out about that so whatever you can do with the Attorney General would be great... It sounds horrible to me.' Trump also said 'I will have Mr. Giuliani give you a call and I am also going to have Attorney General Barr call.' The document itself carries a caution that a TELCON 'is not a verbatim transcript' but 'records the notes and recollections of Situation Room Duty Officers and NSC policy staff.'",
+      "tier": "documented",
+      "legal_frame": "U.S. Const. Art. II sec. 4 (impeachment: 'Treason, Bribery, or other high Crimes and Misdemeanors'); 52 U.S.C. sec. 30121 (solicitation of a thing of value from a foreign national - considered and not charged); 18 U.S.C. sec. 201 (bribery - not charged)",
+      "sources": [
+        "https://trumpwhitehouse.archives.gov/wp-content/uploads/2019/09/Unclassified09.2019.pdf"
+      ],
+      "establishes": "The words on the record, from the government's own released document, read directly.",
+      "does_not": "Establish a crime. No charge was ever brought arising from the call. It also does not establish a verbatim record: the document's own caution paragraph says so, and any quotation should carry that caveat.",
+      "counter_record": "The President's stated defence was that the call was 'perfect,' that no aid was conditioned in the conversation itself (the memorandum contains no explicit condition), that the aid was released on 11 September 2019, and that Zelenskyy said publicly he felt no pressure. The Ukrainian investigations were never announced. Against that: the article of impeachment alleged a scheme extending beyond the call.",
+      "date_span": "2019-07-25; released 2019-09-24",
+      "status": "never charged; formed the factual basis of Article I of the first impeachment",
+      "notes": "Read from the primary PDF via pypdf; OCR artefacts present but the quoted passages are legible and unambiguous."
+    },
+    {
+      "id": "FOR-13",
+      "claim": "GAO Decision B-331564, 'Office of Management and Budget - Withholding of Ukraine Security Assistance,' 16 January 2020, held: 'OMB violated the ICA when it withheld DOD's USAI funds from obligation for policy reasons. This impoundment of budget authority was not a programmatic delay.' The digest states: 'Faithful execution of the law does not permit the President to substitute his own policy priorities for those that Congress has enacted into law.' The amount was approximately $214 million of Ukraine Security Assistance Initiative funds, withheld through nine apportionment schedules with footnotes making unobligated balances unavailable.",
+      "tier": "documented",
+      "legal_frame": "Impoundment Control Act of 1974, 2 U.S.C. sec. 681 et seq.; Department of Defense Appropriations Act, 2019, Pub. L. No. 115-245, div. A, tit. IX, sec. 9013",
+      "sources": [
+        "https://www.gao.gov/products/b-331564",
+        "https://www.gao.gov/assets/b-331564.pdf"
+      ],
+      "establishes": "A formal legal conclusion by Congress's own auditor that a statute was violated, with the statutory reasoning stated.",
+      "does_not": "Establish a crime, a judicial holding, or personal liability. GAO decisions are nonbinding on courts. No enforcement suit was brought under the ICA's Comptroller General provision, and no court has adopted this conclusion.",
+      "counter_record": "OMB's position, quoted in the decision, was that the withholding was a 'programmatic delay' outside the ICA because a 'policy development process is a fundamental part of program implementation,' and that reviews for compliance with presidential policy prerogatives are as programmatic as reviews for statutory compliance. GAO called those assertions groundless in law, but they were never tested in court. Separately and importantly for symmetry: in a 6-3 shadow-docket order in 2025 the Supreme Court allowed the administration to proceed with a 'pocket rescission' of roughly $4 billion that GAO had likewise called unlawful - so the judiciary has, at least preliminarily, declined to treat GAO's ICA reading as controlling.",
+      "date_span": "2019 summer; decision 2020-01-16; SCOTUS pocket-rescission order 2025",
+      "status": "GAO legal decision; nonbinding; never enforced in court; no charge",
+      "notes": "Note the arithmetic mismatch worth preserving: GAO addresses $214m of USAI; Article I of the impeachment alleges $391m, which includes Foreign Military Financing funds GAO said it could not yet rule on because State and OMB withheld information."
+    },
+    {
+      "id": "FOR-14",
+      "claim": "The House adopted H.Res.755 on 18 December 2019, impeaching the President on two articles: Article I, 'Abuse of Power,' alleging he 'solicited the interference of a foreign government, Ukraine, in the 2020 United States Presidential election' and 'conditioned two official acts' - release of $391 million in appropriated security assistance and a White House meeting - on public announcement of investigations into former Vice President Biden and into a theory that Ukraine rather than Russia interfered in 2016; and Article II, 'Obstruction of Congress.' On 5 February 2020 the Senate voted to acquit: 48-52 on Article I and 47-53 on Article II (Senate Roll Call Votes 33 and 34, 116th Congress, 2d Session). Sen. Romney was the only member to cross party lines, voting guilty on Article I.",
+      "tier": "documented",
+      "legal_frame": "U.S. Const. Art. I sec. 2 cl. 5, Art. I sec. 3 cl. 6, Art. II sec. 4",
+      "sources": [
+        "https://www.congress.gov/116/bills/hres755/BILLS-116hres755eh.htm",
+        "https://www.senate.gov/legislative/LIS/roll_call_votes/vote1162/vote_116_2_00034.htm",
+        "https://rollcall.com/2020/02/05/senate-votes-to-acquit-trump-on-both-impeachment-charges/"
+      ],
+      "establishes": "The charges as the House framed them, verbatim, and the Senate's disposition with exact tallies.",
+      "does_not": "Establish that the conduct occurred or did not. Impeachment is a political process; acquittal is not a factual finding and conviction would not have been one either. Neither article charged treason - the House used the 'other high Crimes and Misdemeanors' branch of Art. II sec. 4, and named no criminal statute.",
+      "counter_record": "The acquittal is the counter-record and it is a real one: a majority of the Senate voted not guilty on both articles, and several senators who voted to acquit stated they found the conduct inappropriate but not removable - a position that is neither exoneration nor condemnation. Guaranteed-null rule: with a two-thirds threshold and party alignment as it stood, acquittal was the near-certain outcome regardless of the evidence, so it carries little information about the conduct.",
+      "date_span": "2019-12-18 to 2020-02-05",
+      "status": "impeached by the House; acquitted by the Senate on both articles",
+      "notes": "Article I text read directly from the engrossed resolution. Note that the articles expressly recite the constitutional phrase 'Treason, Bribery, or other high Crimes and Misdemeanors' but charge neither treason nor bribery."
+    },
+    {
+      "id": "FOR-15",
+      "claim": "The Report on the Investigation into Russian Interference in the 2016 Presidential Election (Special Counsel Robert S. Mueller III, March 2019), Volume I, states: 'Although the investigation established that the Russian government perceived it would benefit from a Trump presidency and worked to secure that outcome, and that the Campaign expected it would benefit electorally from information stolen and released through Russian efforts, the investigation did not establish that members of the Trump Campaign conspired or coordinated with the Russian government in its election interference activities.' The same volume defines its own term: 'A statement that the investigation did not establish particular facts does not mean there was no evidence of those facts.' It also states that the Office 'applied the framework of conspiracy law, not the concept of \"collusion,\"' because 'collusion is not a specific offense or theory of liability found in the United States Code.'",
+      "tier": "documented",
+      "legal_frame": "18 U.S.C. sec. 371 (conspiracy to defraud the United States); 52 U.S.C. sec. 30121 (foreign national contributions) - the frameworks the Special Counsel applied",
+      "sources": [
+        "https://www.justice.gov/archives/sco/file/1373816/dl"
+      ],
+      "establishes": "The finding, in the Special Counsel's own words, together with his own gloss on what 'did not establish' means and his express rejection of 'collusion' as a legal category.",
+      "does_not": "Establish that no coordination occurred. The report says so itself. Equally, it does not establish that any did. Both halves must travel together or the symmetry rule is broken.",
+      "counter_record": "This finding is itself the counter-record to the coordination hypothesis, and it is the strongest one. Against it: the report's own caveat sentence, and its catalogue of contacts (Trump Tower Moscow letter of intent signed November 2015; the June 2016 Trump Tower meeting; the Manafort-Kilimnik channel) which it describes without concluding they amounted to a chargeable conspiracy.",
+      "date_span": "2019-03; released 2019-04-18",
+      "status": "investigation closed; no charge against the President arising from Volume I",
+      "notes": "Read directly from the DOJ-hosted PDF (page 10 of the PDF = Volume I introduction). DOJ requires Cookie: justiceGovAgeVerified=true; without it the fetch returns HTTP 401 via Akamai."
+    },
+    {
+      "id": "FOR-16",
+      "claim": "Volume II of the same report concludes (at page 182): 'Because we determined not to make a traditional prosecutorial judgment, we did not draw ultimate conclusions about the President's conduct... At the same time, if we had confidence after a thorough investigation of the facts that the President clearly did not commit obstruction of justice, we would so state. Based on the facts and the applicable legal standards, we are unable to reach that judgment. Accordingly, while this report does not conclude that the President committed a crime, it also does not exonerate him.'",
+      "tier": "documented",
+      "legal_frame": "18 U.S.C. sec. 1512(c)(2) and related obstruction statutes; OLC opinion barring indictment of a sitting president",
+      "sources": [
+        "https://www.justice.gov/archives/sco/file/1373816/dl"
+      ],
+      "establishes": "That the Special Counsel expressly declined to exonerate, and expressly declined to accuse, and stated the reason for both.",
+      "does_not": "Establish obstruction. The non-exoneration sentence is a statement about the limits of the Office's own judgment, not a finding of guilt.",
+      "counter_record": "Attorney General Barr and Deputy Attorney General Rosenstein concluded the evidence was insufficient to establish an obstruction offence, and no charge followed. The Office's decision not to reach a judgment rested substantially on the OLC position that a sitting president cannot be indicted - a constraint, not a finding. Guaranteed-null rule applies to the non-exoneration language: a prosecutor who has decided in advance not to make a charging decision will decline to exonerate in every case, so the sentence carries less information than it is usually made to carry.",
+      "date_span": "2019-03",
+      "status": "never charged; investigation closed",
+      "notes": "FOR-15 and FOR-16 must be published together. Either one alone is the symmetry rule failing."
+    },
+    {
+      "id": "FOR-17",
+      "claim": "The Senate Select Committee on Intelligence, Report on Russian Active Measures Campaigns and Interference in the 2016 U.S. Election, Volume 5: Counterintelligence Threats and Vulnerabilities (August 2020, 116th Congress, bipartisan) found: 'Manafort hired and worked increasingly closely with a Russian national, Konstantin Kilimnik. Kilimnik is a Russian intelligence officer.' It found that 'On numerous occasions, Manafort sought to secretly share internal Campaign information with Kilimnik' but that 'The Committee was unable to reliably determine why Manafort shared sensitive internal polling data or Campaign strategy with Kilimnik or with whom Kilimnik further shared that information.' It stated: 'The Committee obtained some information suggesting Kilimnik may have been connected to the GRU's hack and leak operation targeting the 2016 U.S. election.' Its summary judgment: 'Taken as a whole, Manafort's high-level access and willingness to share information with individuals closely affiliated with the Russian intelligence services, particularly Kilimnik and associates of Oleg Deripaska, represented a grave counterintelligence threat.'",
+      "tier": "documented",
+      "legal_frame": "none as to the President - counterintelligence findings, not charges. Manafort's own convictions were for tax and bank fraud and FARA-related conspiracy, unrelated to these findings.",
+      "sources": [
+        "https://www.intelligence.senate.gov/sites/default/files/documents/report_volume5.pdf"
+      ],
+      "establishes": "A bipartisan Senate finding that the chairman of a presidential campaign was in a covert information-sharing relationship with an identified Russian intelligence officer, and that the Committee could not determine the purpose or destination of what was shared.",
+      "does_not": "Establish anything about the President personally. The Committee expressly could not determine why the data was shared or with whom Kilimnik shared it - the finding stops at the counterintelligence threat and goes no further. Rung 5 - tasked and run - is claimed for no one here, and the Committee did not claim it.",
+      "counter_record": "Read directly from the report at pages 941-942: the Additional Views of Senators Risch, Rubio, Blunt, Cotton, Cornyn and Sasse state that Volume 5 'never explicitly states the critical fact: the Committee found no evidence that then-candidate Donald Trump or his campaign colluded with the Russian government,' and conclude 'we can now say with no doubt, there was no collusion.' They also fault the FBI's handling of the Steele material. At pages 943-944 the Additional Views of Senators Heinrich, Feinstein, Wyden, Harris and Bennet reach the opposite reading of the same record: 'This is what collusion looks like.' Six members of the same committee read the same findings in flatly opposite directions, in the same volume. That disagreement is itself part of the record and should be published with the finding.",
+      "date_span": "2016; report published 2020-08-18",
+      "status": "congressional finding; no charge against the President; no charge arising from the Kilimnik channel",
+      "notes": "All quotations read directly from the report PDF via pypdf. The public version is redacted in places; the passages quoted are unredacted."
+    },
+    {
+      "id": "FOR-18",
+      "claim": "The Logan Act, 18 U.S.C. sec. 953, criminalises unauthorised correspondence with a foreign government intended to influence its conduct in a dispute with the United States. Enacted 1799. It has produced one indictment, in 1803, of a Kentucky newspaper writer, which was never prosecuted, and no indictment has been sought since 1852. There has never been a conviction. The Office of Legal Counsel's published treatment concludes the statute, properly construed, is constitutional, while noting serious First Amendment questions and the difficulty of proving intent and lack of authority.",
+      "tier": "documented",
+      "legal_frame": "18 U.S.C. sec. 953 (Logan Act); First Amendment overbreadth and vagueness",
+      "sources": [
+        "https://www.justice.gov/olc/media/1385381/dl?inline=",
+        "https://www.everycrsreport.com/reports/RL33265.html",
+        "https://fedsoc.org/commentary/fedsoc-blog/the-logan-act-an-introduction"
+      ],
+      "establishes": "That the statute is effectively dead letter: 227 years, one abandoned indictment, zero convictions.",
+      "does_not": "Establish that the statute is invalid - it has never been struck down, and, as OLC notes, executive non-enforcement neither modifies nor repeals a law.",
+      "counter_record": "The strongest argument for the Logan Act's usability is exactly OLC's: it remains on the books and DOJ believes it constitutional as properly construed. But no prosecutor has acted on that belief in over 170 years, and the vagueness of 'without authority of the United States' as applied to a President-elect or a President - who plainly has authority - makes it unusable against this subject in particular.",
+      "date_span": "1799 to present",
+      "status": "never used against this subject; no charge; no conviction under the statute in its history",
+      "notes": "Recommendation to the lead: the Logan Act is not a usable frame here and invoking it would be the recorded failure mode - getting the law wrong while sounding certain. A President cannot lack 'authority of the United States' in foreign affairs; the statute's only plausible target in this orbit would be a private citizen or a transition figure, and even there it has never once produced a conviction."
+    },
+    {
+      "id": "FOR-19",
+      "claim": "Saudi Arabia's Public Investment Fund funded LIV Golf, which has repeatedly staged events at Trump-owned courses including the season-ending team championship at Trump National Doral in Miami. PIF's cumulative investment in LIV was reported to approach $6 billion by end-2026, and in May 2026 Bloomberg reported PIF would fund LIV only through the remainder of the 2026 season.",
+      "tier": "labeled",
+      "legal_frame": "U.S. Const. Art. I sec. 9 cl. 8 asserted by critics; no adjudication, no charge",
+      "sources": [
+        "https://www.bloomberg.com/news/articles/2026-05-20/liv-golf-saudi-bridge-to-trump-falls-victim-to-spending-shift",
+        "https://www.cbsnews.com/amp/miami/news/controversial-liv-golf-brings-team-championship-tournament-to-trump-national-doral/",
+        "https://www.sportspro.com/analysis/decision-makers/politics-and-governance/liv-golf-pif-bryson-dechambeau-bc-capital/"
+      ],
+      "establishes": "That a sovereign wealth fund's sports vehicle has been a recurring paying tenant at properties the President owns.",
+      "does_not": "Establish the amounts paid to Trump entities. I found no primary document - no contract, no disclosure line - stating what LIV paid for any Trump venue. The aggregate PIF-into-LIV figures say nothing about what reached Trump. Tier this labeled and do not attach a dollar figure to the Trump side without a document.",
+      "counter_record": "Venue-hire is an arm's-length commercial transaction at market rates, and Trump courses hosted championship golf long before 2015. LIV's relationship with PIF is now contracting, not expanding.",
+      "date_span": "2022 to 2026",
+      "status": "never charged; no investigation; no adjudication",
+      "notes": "Weakest item in this set on documentation. Included because the brief asked for it; flagged as insufficiently sourced for publication as a dollar claim."
+    },
+    {
+      "id": "FOR-20",
+      "claim": "The first litigation squarely raising the Domestic Emoluments Clause against the sitting President in his second term is Sistrunk Seeds v. Trump, filed 13 May 2026 in the U.S. District Court for the Southern District of Florida by a Miami nonprofit, Miami residents and a Miami Dade College student, represented by the Constitutional Accountability Center and Gelber Schachter & Greenberg. It alleges that Florida officials conveyed state-owned property worth hundreds of millions of dollars nominally for a presidential library in a transaction the complaint contends facilitates personal commercial gain.",
+      "tier": "documented",
+      "legal_frame": "U.S. Const. Art. II sec. 1 cl. 7 (Domestic Emoluments Clause)",
+      "sources": [
+        "https://www.theusconstitution.org/litigation/sistrunk-seeds-v-trump/"
+      ],
+      "establishes": "That a live case exists and what it alleges.",
+      "does_not": "Establish anything about the underlying transaction. A complaint is an allegation. No merits ruling has issued; the docket shows the case awaiting filings, and standing - which killed Blumenthal - is the obvious first obstacle.",
+      "counter_record": "Searched; no responsive pleading or defence has been reported. The strongest structural counter is precedential: every prior emoluments suit against this defendant failed on justiciability rather than on the merits, and nothing in the 2021 vacatur made standing easier.",
+      "date_span": "2026-05-13 to present",
+      "status": "filed; pending; no merits ruling",
+      "notes": "I did not obtain the complaint itself or a docket number. Verify on CourtListener before any publication."
+    }
+  ],
+  "nulls": [
+    {
+      "searched": "Any court ruling, at any level, at any time, on the merits of whether Trump's conduct violated the Foreign or Domestic Emoluments Clause",
+      "result": "None exists. Two district courts read 'emolument' broadly at the pleading stage; both judgments were vacated or mooted before appellate merits review. Every case ended on mootness or standing. This is the single most important null in the line and the report should lead the emoluments section with it."
+    },
+    {
+      "searched": "Any criminal charge, ever, against Donald Trump under 18 U.S.C. sec. 953 (Logan Act), 18 U.S.C. sec. 201 (bribery), or 22 U.S.C. sec. 611 et seq. (FARA)",
+      "result": "None found. No indictment, no information, no declination memorandum published. The FARA null is a guaranteed null after February 2025 (see FOR-11) and carries almost no information."
+    },
+    {
+      "searched": "Any treason charge, Article III sec. 3 proceeding, or 18 U.S.C. sec. 2381 charge against Trump or any person in his orbit arising from foreign dealings",
+      "result": "None. No such charge has ever been brought. The constitutional definition requires levying war against the United States or adhering to their enemies giving aid and comfort, with two witnesses to the same overt act or confession in open court, and 'enemies' in the clause has been read to require a state of declared or open war. None of the conduct in this line comes near that frame."
+    },
+    {
+      "searched": "A documented quid pro quo linking the Qatari aircraft, the MGX/Binance USD1 settlement, the Zhao pardon, the $TRUMP dinner, or Gulf licensing income to any specific official act",
+      "result": "None found in any primary document. In every instance the record supports sequence and benefit, not agreement. Anti-map guardrail: these are simultaneous facts, not a chain, and the report should say so explicitly at each one."
+    },
+    {
+      "searched": "The Bondi/OLC memorandum concluding the Qatari aircraft transfer is lawful",
+      "result": "Not public. DOJ estimated over 600 days to process a FOIA request; Freedom of the Press Foundation, represented by American Oversight, sued in D.D.C. in July 2025; no release or merits ruling found as of this search. The government's own legal reasoning on the central 2025-26 emoluments question is therefore unexamined."
+    },
+    {
+      "searched": "Identification of any foreign government as a purchaser of $TRUMP tokens or World Liberty Financial tokens",
+      "result": "None found. The Bloomberg analysis identifies likely foreign nationals among top holders, which is not the same category as a foreign state, and the Foreign Emoluments Clause reaches states. Do not elide the two."
+    },
+    {
+      "searched": "Any DOJ, OGE, Office of Special Counsel, or inspector-general investigation opened into the President regarding foreign payments in 2025-2026",
+      "result": "None found. All 2025-26 activity located is congressional-minority letters and private FOIA litigation. Guaranteed-null rule: the executive branch investigating itself under an Attorney General appointed by the subject is a test that cannot come out against the tester, so the absence of an investigation is evidence of nothing."
+    },
+    {
+      "searched": "Judicial adoption of GAO's B-331564 Impoundment Control Act holding",
+      "result": "None. GAO decisions are nonbinding; no ICA enforcement suit followed the Ukraine withholding. In 2025 the Supreme Court, on the emergency docket and 6-3, permitted a 'pocket rescission' of roughly $4 billion that GAO had also called unlawful - so the only judicial signal available runs against GAO's reading, and it is preliminary."
+    },
+    {
+      "searched": "A verified aggregate figure for Trump's 2025 foreign licensing income",
+      "result": "Not obtained. CNBC reported $59.5 million on 10 August 2026 but the article returned HTTP 403 and could not be fetched. The individual disclosure lines in FOR-05 are read from the filed form; they should not be summed naively because the form mixes fee types with intercompany receivables."
+    },
+    {
+      "searched": "Any payment from LIV Golf or PIF to a Trump entity, by amount and date",
+      "result": "No primary document found. The relationship is well established; the money to Trump is not, in any source I could reach."
+    },
+    {
+      "searched": "SSCI Volume 5 finding that Trump personally coordinated with Russian intelligence",
+      "result": "No such finding exists. The Committee's Manafort findings stop at 'grave counterintelligence threat' and it expressly could not determine why the polling data was shared or where it went. Six of its own members published Additional Views saying it found no collusion; five published Additional Views saying it found exactly that. Publish the finding and both sets of Additional Views together or not at all."
+    }
+  ],
+  "searched": [
+    "Trump v. CREW / Trump v. District of Columbia, Supreme Court disposition 25 January 2021; Munsingwear vacatur",
+    "Blumenthal v. Trump, D.C. Cir. No. 19-5237, 7 February 2020; cert. denied 13 October 2020",
+    "House Oversight minority staff report 'White House for Sale', 4 January 2024; Mazars records",
+    "Trump Organization voluntary Treasury remittances of foreign-government profits, 2017-2020",
+    "Trump Organization second-term ethics plan, 10 January 2025",
+    "Qatari Boeing 747-8: DoD acceptance, retrofit cost, first flight 1 July 2026, library transfer plan",
+    "S.Res.244, 119th Congress, introduced 21 May 2025 (full text retrieved from congress.gov)",
+    "Bondi/OLC memorandum on the Qatari aircraft; FPF v. DOJ FOIA litigation",
+    "Trump OGE Form 278e Annual for CY2025, received 29 June 2026 (full 927-page filing retrieved and parsed)",
+    "Dar Global / Dar Al Arkan / Damac / Qatari Diar / Omran project structures",
+    "World Liberty Financial, USD1, MGX $2 billion Binance settlement; House Select Committee on the CCP letter 4 February 2026; Warren/Merkley banking letters",
+    "$TRUMP memecoin dinner 22 May 2025; Smith/Casten DOJ letter; Bloomberg top-holder nationality analysis",
+    "Changpeng Zhao pardon warrant, 21 October 2025 (primary document retrieved and read)",
+    "House Judiciary minority staff report 'Pardons, Inc.', August 2026 (retrieved and parsed)",
+    "Affinity Partners / Saudi PIF $2bn; Wyden Senate Finance letters 2024; Wyden-Garcia 19 March 2026; Raskin April and 24 August 2026",
+    "Bondi FARA charging memorandum, 5 February 2025; disbanding of the FBI Foreign Influence Task Force",
+    "25 July 2019 Zelenskyy call memorandum (primary PDF retrieved from trumpwhitehouse.archives.gov and read)",
+    "GAO Decision B-331564, 16 January 2020 (decision PDF retrieved and read)",
+    "H.Res.755 engrossed text, 18 December 2019 (retrieved from congress.gov)",
+    "Senate Roll Call Votes 33 and 34, 116th Cong. 2d Sess., 5 February 2020",
+    "Mueller Report Volumes I and II (DOJ PDF retrieved with justiceGovAgeVerified cookie; quotations read directly at PDF pp. 10, 13, 214, 220, 394)",
+    "SSCI Volume 5 (52 MB PDF retrieved from intelligence.senate.gov; Findings and both sets of Additional Views read directly)",
+    "Logan Act 18 U.S.C. sec. 953: OLC treatment, CRS report RL33265, prosecution history",
+    "LIV Golf / PIF funding and Trump National Doral events, 2022-2026",
+    "Sistrunk Seeds v. Trump, S.D. Fla., filed 13 May 2026",
+    "Impoundment Control Act litigation and the 2025 Supreme Court pocket-rescission order",
+    "Second-term emoluments litigation generally: searched for any merits ruling 2025-2026"
+  ],
+  "notes": "METHOD. Primary documents were retrieved and read directly, not summarised from reporting, for: the Zelenskyy call memorandum, GAO B-331564, H.Res.755, the Senate acquittal roll call, the Mueller Report (both volumes), SSCI Volume 5 including both sets of Additional Views, S.Res.244, the Zhao pardon warrant, the House Judiciary 'Pardons, Inc.' staff report, and Trump's CY2025 OGE Form 278e. Quotations from those are verbatim from the retrieved files. Everything else is tiered at or below what its source supports.\n\nTWO THINGS THE LEAD SHOULD NOT LET THROUGH. First, the emoluments material is strong on documented payment and weak on documented violation, and the gap between those is the whole legal question. The correct sentence is: no court has ever ruled on whether this conduct violates either clause, and both a broad and a narrow reading of 'emolument' remain open. Any sentence stronger than that is unsupported. Second, the 2025-26 Gulf income runs to private companies, several of which are joint-ventured with sovereign entities. 'Payment from a state-linked developer' and 'payment from a foreign State' are different claims and the clause names the second. Collapsing them would be the naming error.\n\nTHE LOGAN ACT SHOULD NOT APPEAR AS A FRAME. It is dead letter - one abandoned 1803 indictment, nothing sought since 1852, no conviction ever - and it cannot in any event reach a President, who does not lack 'authority of the United States' in foreign affairs. Invoking it would be exactly the recorded failure mode.\n\nSYMMETRY. Three items in this set cut against the accumulating case and are recorded at equal weight: Mueller Volume I's conspiracy finding (FOR-15), the six-senator Republican Additional Views to SSCI Volume 5 (inside FOR-17), and the Senate acquittal (FOR-14). Two guaranteed nulls are recorded as such: the absence of DOJ action in 2025-26 under an Attorney General appointed by the subject, and the absence of FARA charges under a February 2025 policy that all but forecloses them. Neither absence is evidence about the conduct.\n\nWHAT I COULD NOT SOURCE AND THEREFORE HELD. The dollar value of any LIV Golf or PIF payment to a Trump entity. Any aggregate 2025 foreign-licensing figure (CNBC 403'd). The Sistrunk Seeds complaint and docket number. The $934 million Sentinel-to-jet reprogramming document. The reported $500 million UAE stake and $187 million to Trump family entities in the World Liberty structure - these exist only as allegations recited in congressional letters and press reporting and are tiered labeled, not documented."
+}

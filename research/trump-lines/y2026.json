@@ -1,0 +1,778 @@
+{
+  "line": "LINE-2026: the January 2025 - September 2026 record. Seven assigned areas: (1) domestic deployment of the armed forces and its litigation; (2) compliance with court orders; (3) federal law-enforcement and prosecutorial power directed at named political opponents; (4) the Epstein files; (5) pardons and commutations; (6) emergency powers; (7) foreign policy conducted through private or family business channels. All items searched, not recalled; assistant knowledge cutoff precedes most of this period.",
+  "findings": [
+    {
+      "id": "D1-01",
+      "claim": "The Insurrection Act (10 U.S.C. §§251-255) was NOT invoked at any point between January 2025 and September 2026. Every domestic deployment of the National Guard in this period rested instead on 10 U.S.C. §12406 (federalisation), on Title 32 with the consent of a governor, or on the President's asserted Art. II authority over the D.C. Guard. Invocation was repeatedly threatened in public - most explicitly in early October 2025 during the Chicago and Portland disputes - and not carried out.",
+      "tier": "documented",
+      "legal_frame": "10 U.S.C. §§251-255 (Insurrection Act) - not invoked; 10 U.S.C. §12406 used instead",
+      "sources": [
+        "CBS Chicago, 'President Trump threatened to use the Insurrection Act in Chicago and Illinois, but never did', https://www.cbsnews.com/chicago/news/trump-insurrection-act-chicago-illinois/",
+        "Brennan Center, 'Unpacking Trump's Order Authorizing Domestic Deployment of the Military', https://www.brennancenter.org/our-work/analysis-opinion/unpacking-trumps-order-authorizing-domestic-deployment-military",
+        "CNN, 24 Dec 2025, https://www.cnn.com/2025/12/24/politics/national-guard-trump-insurrection-act-supreme-court",
+        "Newsonair/AP wire, 7 Oct 2025, https://www.newsonair.gov.in/us-president-trump-threatens-to-invoke-insurrection-act-amid-clashes-in-chicago-and-portland"
+      ],
+      "establishes": "That the statutory frame actually used was §12406, not the Insurrection Act. This matters because §12406 is judicially reviewable on its statutory preconditions, which is why the deployments lost in court; the Insurrection Act's standard of review is unsettled and was never tested.",
+      "does_not": "Does not establish that invocation is foreclosed. The Supreme Court in Trump v. Illinois expressly left open both the Insurrection Act route and a claim of inherent Art. II authority to deploy active-duty forces. A threat is not an act.",
+      "counter_record": "Threatening a lawful statutory power one does not use is not itself unlawful, and the restraint cuts the other way: the administration chose the narrower authority and then complied with adverse rulings by withdrawing rather than escalating.",
+      "date_span": "2025-01-20 to 2026-09-07",
+      "status": "never invoked",
+      "notes": "This is the single most important null in area (1) and it runs against the strongest version of the accusation."
+    },
+    {
+      "id": "D1-02",
+      "claim": "June 2025 Los Angeles: the President federalised approximately 4,000 California National Guard members and deployed roughly 700 Marines under 10 U.S.C. §12406(3). Judge Charles Breyer (N.D. Cal., Newsom v. Trump, 3:25-cv-04870) issued a TRO on 12 June 2025 ordering return of control to the State, finding no rebellion and that the President was not 'unable' to execute the laws. The Ninth Circuit stayed that order on 19 June 2025 (No. 25-3727), holding review under §12406 is 'highly deferential' and that the President likely had a colorable, good-faith basis.",
+      "tier": "documented",
+      "legal_frame": "10 U.S.C. §12406(3)",
+      "sources": [
+        "Newsom v. Trump, 3:25-cv-04870 (N.D. Cal.), Civil Rights Litigation Clearinghouse, https://clearinghouse.net/case/46678/",
+        "Ninth Circuit opinion 19 June 2025, https://cdn.ca9.uscourts.gov/datastore/opinions/2025/06/19/25-3727.pdf",
+        "TIME, 'What the Appeals Court Said About Trump's National Guard', https://time.com/7296221/trump-national-guard-la-protests-appeals-court-authority/"
+      ],
+      "establishes": "That a federal district court found the statutory preconditions unmet, and that the Ninth Circuit disagreed at the stay stage under a deferential standard.",
+      "does_not": "Does not establish a final merits ruling in either direction. A stay pending appeal is a likelihood-of-success prediction, not a judgment.",
+      "counter_record": "The Ninth Circuit ruled FOR the administration on this question and its reasoning is not marginal: §12406 commits substantial discretion to the President, federal officers had faced violence local police did not promptly contain, and the panel held the President likely acted lawfully. That panel also rejected the administration's broader position that the decision is wholly unreviewable - a loss for the government embedded in a win.",
+      "date_span": "2025-06-07 to 2025-06-19",
+      "status": "superseded by later orders in the same case",
+      "notes": "The report's symmetry rule applies here directly: the same litigation produced rulings both ways and both must be carried."
+    },
+    {
+      "id": "D1-03",
+      "claim": "On 2 September 2025 Judge Breyer held that the defendants violated the Posse Comitatus Act (18 U.S.C. §1385) in Los Angeles, finding that federalised Guard units engaged in prohibited civilian law-enforcement activity - arrests, apprehensions, searches, seizures, traffic and crowd control - pursuant to a top-down directive. He entered injunctive relief limited to California and stayed it until noon 12 September 2025.",
+      "tier": "documented",
+      "legal_frame": "18 U.S.C. §1385 (Posse Comitatus Act)",
+      "sources": [
+        "Clearinghouse case record, https://clearinghouse.net/case/46678/",
+        "NPR, 2 Sept 2025, https://www.npr.org/2025/09/02/nx-s1-5525647/a-california-judge-rules-that-trumps-deployment-of-the-guard-to-la-was-illegal",
+        "CNN, 2 Sept 2025, https://www.cnn.com/2025/09/02/politics/national-guard-california-trump-posse-comitatus-act-breyer",
+        "Lawfare, 'The Lingering Uncertainty in Judge Breyer's Newsom v. Trump Ruling', https://www.lawfaremedia.org/article/the-lingering-uncertainty-in-judge-breyer-s-newsom-v.-trump-ruling"
+      ],
+      "establishes": "A federal court finding that a federal criminal statute governing the use of the military in civilian law enforcement was violated as a matter of civil adjudication.",
+      "does_not": "Does NOT establish a criminal violation of §1385. No one was charged. A district court's civil finding that conduct violated a statute is not a criminal conviction and carries no criminal consequence. The ruling was also stayed by the Ninth Circuit on 4 September 2025 and its final appellate fate was not resolved on the merits.",
+      "counter_record": "The Ninth Circuit administratively stayed the injunction two days later; the government's position was that the Guard performed protective functions around federal personnel and property, which is an established exception to the PCA. The June 2025 Ninth Circuit panel had expressly declined to reach the PCA question, so no appellate court endorsed Breyer's PCA holding.",
+      "date_span": "2025-09-02 to 2025-09-12",
+      "status": "injunction entered, stayed on appeal, no criminal charge",
+      "notes": "Legal precision matters here: 'violated the Posse Comitatus Act' in a civil injunction is not the same sentence as 'committed a crime'."
+    },
+    {
+      "id": "D1-04",
+      "claim": "Portland: on 7 November 2025 Judge Karin Immergut (D. Or., State of Oregon v. Trump, 3:25-cv-01756) issued a 106-page permanent injunction and declaratory judgment barring deployment of National Guard troops from any state to Portland, holding the President and the Departments of Defense and Homeland Security exceeded their statutory and constitutional authority. She found no rebellion, that the protests cited were small, and that federal law enforcement already had adequate resources - i.e. the §12406 preconditions were not met.",
+      "tier": "documented",
+      "legal_frame": "10 U.S.C. §12406; ultra vires; Tenth Amendment / separation of powers",
+      "sources": [
+        "State of Oregon v. Trump, 3:25-cv-01756 (D. Or.), Clearinghouse, https://clearinghouse.net/case/47011/",
+        "Justia docket document 134, https://law.justia.com/cases/federal/district-courts/oregon/ordce/3:2025cv01756/189270/134/",
+        "OPB, 7 Nov 2025, https://www.opb.org/article/2025/11/07/portland-oregon-national-guard-trump-politics-karin-immergut/"
+      ],
+      "establishes": "A final (not interim) merits ruling that the deployment order was unlawful, from a judge appointed by Trump in his first term.",
+      "does_not": "Does not resolve the Insurrection Act question, which was not before the court, and does not decide inherent Art. II authority.",
+      "counter_record": "The administration filed an emergency appeal on or about 16 November 2025 seeking to retain control of Oregon Guard troops; the injunction's factual premises (size and character of the protests) were contested by the government at trial. Searched for an appellate reversal of Immergut through September 2026 and found none reported.",
+      "date_span": "2025-09-28 to 2025-11-07",
+      "status": "permanent injunction entered; appealed",
+      "notes": "Immergut is a Trump appointee. That is a fact about the record, not an argument."
+    },
+    {
+      "id": "D1-05",
+      "claim": "Washington DC: on 20 November 2025 Judge Jia Cobb (D.D.C., District of Columbia v. Trump) issued a preliminary injunction holding the deployment of the D.C. National Guard unlawful, finding the President lacked power to deploy the D.C. Guard for 'non-military, crime-deterrence missions in the absence of a request from the city's civil authorities', and stayed her order 21 days. On 5 December 2025 a unanimous D.C. Circuit panel (Millett, Rao, Katsas) stayed that injunction, holding the administration was likely to succeed in defending the 11 August 2025 deployment as within the President's authority and as authorised by D.C. law. Roughly 2,000 Guard members remained in place.",
+      "tier": "documented",
+      "legal_frame": "D.C. Code Guard provisions; Art. I §8 cl. 17 (federal district); Home Rule Act",
+      "sources": [
+        "District of Columbia v. Trump, PI Order, D.C. OAG, https://oag.dc.gov/sites/default/files/2025-11/District%20of%20Columbia%20v.%20Trump%20--%20PI%20Order.pdf",
+        "CBS News, https://www.cbsnews.com/news/judge-rules-trump-national-guard-dc-deployment-illegal/",
+        "Courthouse News, 'DC Circuit rules Trump's National Guard deployment can continue for now', https://www.courthousenews.com/dc-circuit-rules-trumps-national-guard-deployment-can-continue-for-now/",
+        "Al Jazeera, 5 Dec 2025, https://www.aljazeera.com/news/2025/12/5/trump-can-keep-national-guard-in-washington-dc-for-now-appeals-court"
+      ],
+      "establishes": "That the D.C. deployment is legally distinguishable from the state cases - the D.C. Guard has always been under presidential rather than gubernatorial command - and that on that distinction the administration WON at the circuit level, unanimously, including an Obama appointee.",
+      "does_not": "Does not establish the D.C. deployment was lawful on the merits; a stay is not a judgment. Arguments were not scheduled before 12 February 2026.",
+      "counter_record": "This is the counter-record for area (1) as a whole: on the one deployment where the legal footing was strongest, three judges across two appointing presidents agreed the government would likely win. Any account that presents the deployments as uniformly judicially condemned is inaccurate.",
+      "date_span": "2025-08-11 to 2026-02",
+      "status": "PI stayed pending appeal; administration prevailing at this stage"
+    },
+    {
+      "id": "D1-06",
+      "claim": "Trump v. Illinois, decided 23 December 2025: the Supreme Court, 6-3, declined to stay the injunction barring the Chicago Guard deployment, holding that 'regular forces' in 10 U.S.C. §12406(3) means active-duty armed forces rather than civilian law enforcement, and that the President had not shown he was 'unable' to execute federal law with those forces.",
+      "tier": "documented",
+      "legal_frame": "10 U.S.C. §12406(3)",
+      "sources": [
+        "Just Security, 'Trump v. Illinois: A Narrow Supreme Court Decision with Broad Implications', https://www.justsecurity.org/128371/trump-v-illinois-supreme-court/",
+        "Brennan Center analysis, https://www.brennancenter.org/our-work/analysis-opinion/trump-v-illinois-narrow-supreme-court-decision-broad-implications-0",
+        "CNN, 24 Dec 2025, https://www.cnn.com/2025/12/24/politics/national-guard-trump-insurrection-act-supreme-court"
+      ],
+      "establishes": "The narrowest available statutory reading of the federalisation power, from the Supreme Court, in a posture the administration chose.",
+      "does_not": "Expressly does NOT decide: whether the President has inherent constitutional authority to deploy active-duty troops domestically; whether the Insurrection Act permits deployment for protective functions; the standard of review for an Insurrection Act invocation; or whether such an invocation is reviewable at all. It is an emergency-docket stay denial, not a full merits opinion.",
+      "counter_record": "Three Justices would have granted the stay. And the decision is, on its own terms, a statutory holding that leaves two larger doors open - which is why treating it as a judicial repudiation of domestic deployment overstates it.",
+      "date_span": "2025-12-23",
+      "status": "stay denied; underlying injunction left in force"
+    },
+    {
+      "id": "D1-07",
+      "claim": "Withdrawal: after the 10 December 2025 preliminary injunction in Newsom v. Trump (Breyer, finding the 5 August and 16 October 2025 federalisation orders likely violated §12406 because the original exigency had dissipated) and the Ninth Circuit's 31 December 2025 vacatur of its administrative stay, the President announced on 31 December 2025 that Guard troops would leave Chicago, Los Angeles and Portland. The push was dropped in early January 2026.",
+      "tier": "documented",
+      "legal_frame": "10 U.S.C. §12406",
+      "sources": [
+        "Clearinghouse chronology, https://clearinghouse.net/case/46678/",
+        "JURIST, Jan 2026, https://www.jurist.org/news/2026/01/trump-pulls-national-guard-out-of-chicago-los-angeles-and-portland-after-court-ruling/",
+        "Smart Cities Dive, https://www.smartcitiesdive.com/news/trump-national-guard-withdrawal-cities-supreme-court-insurrection-act/808717/"
+      ],
+      "establishes": "Compliance. The administration withdrew forces following adverse rulings rather than defying them.",
+      "does_not": "Does not establish that the deployments were abandoned as unlawful; the announcement framed it as 'for now'.",
+      "counter_record": "This is itself the counter-record to the strongest form of the area-(1) accusation. Whatever the legality of the deployments, the terminal event was compliance with court orders, not defiance of them.",
+      "date_span": "2025-12-10 to 2026-01",
+      "status": "complied; deployments ended in those three cities"
+    },
+    {
+      "id": "D1-08",
+      "claim": "New Orleans, December 2025 onward: up to 350 Louisiana National Guard members were activated on Title 32 status at the formal request of Governor Jeff Landry (who requested up to 1,000), under the Governor's command and control, supporting federal law enforcement; extended for six months in March 2026. Federal troops remained there as of April 2026 after being pulled from other cities.",
+      "tier": "documented",
+      "legal_frame": "32 U.S.C. §502(f) (Title 32 duty, state command, governor's consent) - distinct from 10 U.S.C. §12406 federalisation",
+      "sources": [
+        "Louisiana National Guard, 23 Dec 2025, https://geauxguard.la.gov/2025/12/23/la-national-guard-mobilizes-to-support-law-enforcement-efforts-in-new-orleans/",
+        "DoD spokesman statement, 23 Dec 2025, https://www.globalsecurity.org/security/library/news/2025/12/sec-251223-dod01.htm",
+        "Office of Governor Jeff Landry, https://gov.louisiana.gov/news/5069",
+        "Military.com, 3 March 2026, https://www.military.com/daily-news/investigations-and-features/2026/03/03/pentagon-authorizes-six-month-extension-louisiana-national-guard-new-orleans"
+      ],
+      "establishes": "That a consented, state-commanded Title 32 deployment is a legally distinct and unchallenged path, and that the administration used it where a governor cooperated.",
+      "does_not": "Does not speak to the lawfulness of the contested federalisations. Also does not establish anything about conduct on the ground; civil-liberties objections were raised locally but no adverse court ruling was found.",
+      "counter_record": "The whole of the litigated objection in Los Angeles, Portland and Chicago was the absence of state consent. Where consent existed, no court found a violation and none was sought. This is the control case, and it substantially narrows what the litigation actually decided.",
+      "date_span": "2025-12-03 to 2026-04+",
+      "status": "lawful under Title 32; unchallenged"
+    },
+    {
+      "id": "D2-01",
+      "claim": "Alien Enemies Act removals to CECOT: Chief Judge James Boasberg (D.D.C., J.G.G. v. Trump) ordered on 15 March 2025 that removal flights be turned around; they were not. On 16 April 2025 he issued an opinion finding probable cause to believe defendants committed criminal contempt, describing 'willful disregard' of his order. In August 2025 a divided D.C. Circuit panel (2-1, both Trump appointees in the majority) set aside that probable-cause order as exceeding his authority. The full D.C. Circuit subsequently permitted the inquiry to continue and Boasberg resumed it in November 2025.",
+      "tier": "documented",
+      "legal_frame": "18 U.S.C. §401 (contempt of court); Fed. R. Crim. P. 42; Alien Enemies Act, 50 U.S.C. §21",
+      "sources": [
+        "NPR, 16 Apr 2025, https://www.npr.org/2025/04/16/g-s1-60696/judge-contempt-alien-enemies-act",
+        "TPM, https://talkingpointsmemo.com/news/boasberg-issues-criminal-contempt-finding-in-alien-enemies-act-case",
+        "CBS News, 'Appeals court shuts down criminal contempt probe', https://www.cbsnews.com/news/alien-enemies-act-deportations-criminal-contempt-appeals-court/",
+        "CBS News, 'Federal judge to resume contempt inquiry', https://www.cbsnews.com/news/federal-judge-to-resume-contempt-inquiry-into-trump-officials-for-deportations-to-el-salvador/",
+        "ABC News, en banc argument, https://abcnews.com/US/full-appeals-court-hear-arguments-contempt-inquiry-cecot/story?id=134112094",
+        "ACLU of DC case page, https://www.acludc.org/cases/jgg-v-trump-challenging-unlawful-use-alien-enemies-act-1789-deport-immigrants-without-due/"
+      ],
+      "establishes": "A judicial finding of probable cause - the same standard as an arrest warrant - that federal officials criminally disobeyed a court order, and the quoted characterisation 'willful disregard'.",
+      "does_not": "Establishes NO criminal liability. Probable cause is not guilt, not an indictment, and not a conviction. No official was charged. No special prosecutor was appointed. No one has been adjudicated in contempt.",
+      "counter_record": "The government's position was that the flights were outside U.S. airspace when the written order issued and that the oral directive was not enforceable; a D.C. Circuit panel agreed the district court exceeded its authority. The proceeding has never produced a finding beyond probable cause after eighteen months.",
+      "date_span": "2025-03-15 to 2026",
+      "status": "inquiry revived; no charge, no contempt adjudication",
+      "notes": "The guaranteed-null rule applies to the DOJ's non-prosecution: an executive branch declining to prosecute itself is evidence of nothing about the underlying conduct."
+    },
+    {
+      "id": "D2-02",
+      "claim": "On 22 December 2025 Judge Boasberg ruled that the March 2025 removal of 137 Venezuelan men to CECOT under the Alien Enemies Act was unlawful for want of due process, and ordered the government to provide them an opportunity to challenge their designations; he separately ordered the return of Venezuelan deportees challenging their removal.",
+      "tier": "documented",
+      "legal_frame": "Fifth Amendment due process; Alien Enemies Act, 50 U.S.C. §21; APA",
+      "sources": [
+        "NPR, 22 Dec 2025, https://www.npr.org/2025/12/22/nx-s1-5652187/alien-enemies-act-deportations-case",
+        "The Hill, https://thehill.com/regulation/court-battles/5660475-trump-administration-venezuelan-deportees-return-ruling/"
+      ],
+      "establishes": "A merits ruling that the removals violated due process.",
+      "does_not": "Does not establish that the AEA can never be invoked, nor that any individual was innocent of gang affiliation - the holding is about process, not about the men.",
+      "counter_record": "The government maintained the AEA designation was a foreign-affairs judgment owed deference and that the men were Tren de Aragua members. Appellate review of the December 2025 ruling was not resolved in the sources found.",
+      "date_span": "2025-03 to 2025-12-22",
+      "status": "ruled unlawful at district level"
+    },
+    {
+      "id": "D2-03",
+      "claim": "Third-country removals: Judge Brian Murphy (D. Mass., D.V.D. v. DHS) found in 2025 that the administration violated his order barring removals to third countries without notice and an opportunity to object, stating: 'The department's actions in this case are unquestionably violative of this court's order.'",
+      "tier": "documented",
+      "legal_frame": "Fed. R. Civ. P. 65; Fifth Amendment due process; Convention Against Torture implementing regulations",
+      "sources": [
+        "Democracy Docket, https://www.democracydocket.com/news-alerts/trump-violated-judge-court-deportation-order/",
+        "Law & Crime, https://lawandcrime.com/high-profile/this-ruling-is-deranged-trump-admin-escalates-war-on-judiciary-after-federal-judge-says-dhs-unquestionably-violated-court-order/"
+      ],
+      "establishes": "A second, independent judicial finding that an injunction was violated - the quoted language is the court's own.",
+      "does_not": "Does not establish a contempt adjudication or sanction from this finding.",
+      "counter_record": "The administration disputed the finding publicly and on appeal; the Supreme Court subsequently permitted third-country removals to proceed in a related posture. Searched for a sanction arising from this specific finding and found none.",
+      "date_span": "2025-05",
+      "status": "violation found; no sanction located"
+    },
+    {
+      "id": "D2-04",
+      "claim": "Two civil contempt findings against the executive were entered in early 2026 in the District of Minnesota. A Trump-appointed judge held DHS in civil contempt for transporting a detainee to a Texas facility in violation of a court order and required the government to pay for his return flight; and on or about 19 February 2026 a federal government attorney was held in civil contempt for 'flagrant disobedience of court orders' - reported as the first court-ordered sanction against a federal attorney in the second term.",
+      "tier": "documented",
+      "legal_frame": "18 U.S.C. §401(3) / inherent civil contempt power",
+      "sources": [
+        "The Hill, 'Trump-appointed judge finds DHS in contempt over detainee transfer', https://thehill.com/regulation/court-battles/5753665-judge-holds-dhs-contempt/",
+        "CNN, 19 Feb 2026, https://www.cnn.com/2026/02/19/politics/trump-attorney-contempt-minnesota-immigration"
+      ],
+      "establishes": "That contempt was actually entered - not merely found probable - against the executive in this period, twice, in one district, one of them by a judge the President appointed.",
+      "does_not": "Civil contempt is coercive and compensatory, not punitive. Neither finding is a criminal conviction, and the sanctions were narrow (a flight cost; attorney sanctions).",
+      "counter_record": "Both are small-bore, single-detainee matters, and one was cured by compensation. Against roughly two years and hundreds of injunctions, two entered contempt findings is a low rate; the far more common pattern in the record is adverse ruling followed by appeal, not defiance. The CNN report could not be fetched directly (HTTP 451); details here rest on the search-result summary and the parallel Hill report.",
+      "date_span": "2026-01 to 2026-02-19",
+      "status": "civil contempt entered",
+      "notes": "Flagged: the primary CNN page was unreachable from this environment. Treat the attorney-contempt specifics as labeled rather than documented until the order itself is read."
+    },
+    {
+      "id": "D2-05",
+      "claim": "Kilmar Abrego Garcia: after his removal to El Salvador in error and court-ordered return, the government charged him with human smuggling in Tennessee. On 22 May 2026 Judge Waverly Crenshaw (M.D. Tenn.) dismissed the indictment, holding the government failed to rebut a presumption of vindictiveness - finding that a DHS agent reopened a closed investigation of a November 2022 traffic stop only after Abrego Garcia's successful lawsuit, and that 'now unrebutted public statements tying the reopened investigation to Abrego's successful lawsuit taint the investigation with a vindictive motive', adding that 'the prosecutor's subjective good faith does not cure the retaliatory taint.' Judge Paula Xinis (D. Md.) ordered his release from ICE detention and blocked re-detention.",
+      "tier": "documented",
+      "legal_frame": "Fifth Amendment due process - vindictive prosecution (United States v. Goodwin); 8 U.S.C. §1324",
+      "sources": [
+        "NPR, 23 May 2026, https://www.npr.org/2026/05/23/nx-s1-5831979/tennessee-judge-dismisses-federal-human-smuggling-charges-against-kilmar-abrego-garcia",
+        "ABC News, https://abcnews.com/US/federal-judge-dismisses-tennessee-criminal-case-kilmar-abrego/story?id=133232491",
+        "Forbes, 22 May 2026, https://www.forbes.com/sites/antoniopequenoiv/2026/05/22/judge-drops-indictment-against-mistakenly-deported-man-kilmar-abrego-garcia/",
+        "ABC News, DOJ appeal, https://abcnews.com/US/doj-appeal-judges-order-dismissing-kilmar-abrego-garcias/story?id=134110051"
+      ],
+      "establishes": "A federal court finding of retaliatory motive in a federal prosecution - a judicial determination, not an advocacy claim.",
+      "does_not": "Does not establish that Abrego Garcia did or did not commit the underlying conduct; the dismissal is on prosecutorial motive, not on the facts of the traffic stop. Does not attribute the motive to the President personally - the finding concerns DHS and the prosecution.",
+      "counter_record": "DOJ appealed the dismissal. The government's position is that the evidence from the 2022 stop was independently sufficient and that the charging decision followed ordinary review; the court itself accepted that the line prosecutor acted in subjective good faith.",
+      "date_span": "2025-03 to 2026-05-22",
+      "status": "dismissed; on appeal"
+    },
+    {
+      "id": "D3-01",
+      "claim": "James Comey was indicted 25 September 2025 in E.D. Va. on false-statement and obstruction counts arising from 2020 Senate testimony, five days before the five-year limitations period expired on 30 September 2025. On 24 November 2025 Judge Cameron Currie dismissed the indictment because the prosecutor who obtained it, Lindsey Halligan, was unlawfully appointed - the 120-day interim-US-Attorney clock under 28 U.S.C. §546 had run during her predecessor's tenure, so the appointment power had passed to the district's judges, not the Attorney General: 'Because Ms. Halligan had no lawful authority to present the indictment, I will grant Mr. Comey's motion and dismiss the indictment.' Letitia James's indictment was dismissed the same day on the same ground.",
+      "tier": "documented",
+      "legal_frame": "28 U.S.C. §546 (interim U.S. Attorney appointment); Appointments Clause, Art. II §2 cl. 2; 18 U.S.C. §1001, §1505; 18 U.S.C. §3282 (limitations)",
+      "sources": [
+        "NBC News, 24 Nov 2025, https://www.nbcnews.com/politics/justice-department/judge-dismisses-cases-james-comey-letitia-james-finding-prosecutor-was-rcna244775",
+        "CRS Legal Sidebar LSB11380, 'Court Says Interim U.S. Attorney was Unlawfully Appointed', https://www.congress.gov/crs-product/LSB11380",
+        "United States v. Comey (E.D. Va. 2025), FindLaw, https://caselaw.findlaw.com/court/us-dis-crt-e-d-vir-ale-div/117972189.html",
+        "Levin Center docket materials, 4th Cir. No. 25-4674, https://levin-center.org/congressional-lawmakers/congressional-oversight-resources/oversight-case-law/case-list/us-v-comey/",
+        "CourtListener docket, https://www.courtlistener.com/docket/72065969/united-states-v-james-comey-jr/",
+        "Law360, oral argument scheduling, https://www.law360.com/whitecollar/articles/2490227"
+      ],
+      "establishes": "That two prosecutions of the President's named political adversaries were brought by a prosecutor a federal court held had no lawful authority to bring them, and were dismissed on that ground. Also establishes the timing: the indictment was sought on the appointee's fourth day in office, days before limitations ran.",
+      "does_not": "The dismissal was NOT on the merits. It establishes nothing about whether Comey or James made false statements. It is also not a judicial finding of vindictive prosecution - Comey's separate selective/vindictive-prosecution motion is not what carried the day.",
+      "counter_record": "DOJ appealed on 12 December 2025 (4th Cir. No. 25-4674); the appeals were consolidated on the single question of Halligan's authority, with in-person argument set for 15-18 September 2026. If the government prevails the indictments could be reinstated. The administration's position is that the AG retained appointment authority. Separately, the Bolton case shows the department did bring at least one case against a critic that survived to a guilty plea, which cuts against a claim that every such prosecution was baseless.",
+      "date_span": "2025-09-25 to 2026-09-15",
+      "status": "dismissed; on appeal, argument imminent as of this writing",
+      "notes": "As of 7 September 2026 the Fourth Circuit has not ruled. Any statement about the final outcome is premature."
+    },
+    {
+      "id": "D3-02",
+      "claim": "John Bolton was indicted in October 2025 on 18 counts concerning classified information. On 26 June 2026 he pleaded guilty to one count of illegal retention of national defense information; the plea agreement caps the government's recommendation at 60 months and includes forfeiture of approximately $2.2 million. Sentencing before Judge Chuang was set for 28 October 2026.",
+      "tier": "documented",
+      "legal_frame": "18 U.S.C. §793(e) (retention of national defense information)",
+      "sources": [
+        "NPR, 26 June 2026, https://www.npr.org/2026/06/26/nx-s1-5871292/john-bolton-national-security-classified-documents",
+        "ABC News, https://abcnews.com/US/john-bolton-expected-plead-guilty-mishandling-classified-information/story?id=134224305",
+        "The Hill, https://thehill.com/regulation/court-battles/5942397-john-bolton-guilty-plea-classified-documents-case/"
+      ],
+      "establishes": "A conviction by guilty plea of a prominent critic of the President - and, crucially, that this one was not baseless.",
+      "does_not": "A plea to 1 of 18 counts is not vindication of the indictment as charged. It also does not establish that the decision to charge was free of political motive.",
+      "counter_record": "This is the strongest counter-record in area (3): the Bolton investigation began during the first Trump administration and continued through the Biden administration before charges were brought, so it is not a case manufactured in 2025; and it ended in a conviction, not a dismissal. Any account of prosecutorial retaliation must carry this case.",
+      "date_span": "2025-10 to 2026-10-28",
+      "status": "convicted by plea; awaiting sentencing"
+    },
+    {
+      "id": "D3-03",
+      "claim": "Executive orders targeting law firms - Perkins Coie, Jenner & Block, WilmerHale and Susman Godfrey - were held unconstitutional in full by the U.S. District Court for the District of Columbia, which granted summary judgment for the firms and enjoined agencies from implementing them. The firms were targeted for representing Hillary Clinton's 2016 campaign or for having employed lawyers who worked on the Mueller investigation. The government appealed; briefs were filed 6 and 27 March 2026 with argument set for 14 May 2026. In early March 2026 DOJ moved to voluntarily dismiss the appeals and then, within hours, reversed and moved to continue defending the orders.",
+      "tier": "documented",
+      "legal_frame": "First Amendment (retaliation, compelled association); Fifth Amendment due process; Sixth Amendment right to counsel; Bill of Attainder Clause, Art. I §9 cl. 3",
+      "sources": [
+        "ACLU of DC consolidated case page, https://www.acludc.org/cases/perkins-coie-llp-v-us-department-justice-jenner-block-llp-v-us-dept-justice-wilmerhale-v/",
+        "States United Democracy Center, https://statesunited.org/resources/perkins-coie-v-doj/",
+        "Axios, 3 March 2026, https://www.axios.com/2026/03/03/trump-law-firms-justice-department-executive-orders",
+        "CBS News, https://www.cbsnews.com/news/justice-department-drop-defense-trumps-executive-orders-targeting-law-firms/"
+      ],
+      "establishes": "Four separate final merits rulings that executive orders directed at named private entities for their legal representation were unconstitutional. These are among the cleanest adverse merits judgments in the whole 2025-2026 record - not stays, not dismissals on technicalities.",
+      "does_not": "Does not establish personal liability for anyone, and the orders were enjoined before most of their sanctions took effect.",
+      "counter_record": "Searched for any appellate reversal or any court upholding these orders through September 2026 and found none. The government's stated defence was that security-clearance and contracting decisions are committed to executive discretion. Several other firms settled with the White House rather than sue, which the administration cites as evidence the orders were negotiable rather than punitive; that is an argument, not a holding.",
+      "date_span": "2025-02 to 2026-05",
+      "status": "unconstitutional; enjoined; appeal pending"
+    },
+    {
+      "id": "D3-04",
+      "claim": "On 9 April 2025 the President signed executive orders revoking the security clearances of Christopher Krebs and Miles Taylor - and, for Krebs, temporarily revoking clearances of associates including staff at his employer SentinelOne - and directing the Department of Justice to investigate both men's conduct as government employees. Krebs had publicly stated the 2020 election was not stolen; Taylor wrote an anonymous book critical of Trump.",
+      "tier": "documented",
+      "legal_frame": "First Amendment retaliation; Art. II clearance authority (Department of the Navy v. Egan)",
+      "sources": [
+        "NBC News, https://www.nbcnews.com/politics/national-security/trump-orders-probes-two-former-officials-defied-rcna200523",
+        "Axios, 9 Apr 2025, https://www.axios.com/2025/04/09/chris-krebs-miles-taylor-doj-investigation-trump",
+        "C-SPAN clip of the signing, https://www.c-span.org/clip/white-house-event/president-trump-signs-eos-directing-doj-to-investigate-miles-taylor-and-chris-krebs/5160077"
+      ],
+      "establishes": "That the President by name directed federal investigative attention at two named private citizens for speech, on the face of published executive orders.",
+      "does_not": "Does not establish that either was charged - neither was, on the record found. Does not establish an unlawful act: clearance revocation is close to unreviewable under Egan, and directing DOJ to investigate is within Art. II.",
+      "counter_record": "Searched for a court ruling on a challenge by Krebs or Taylor through September 2026 and found none reported. The clearance-revocation power is one of the least justiciable in American law, so the absence of a ruling is not evidence of lawfulness - the guaranteed-null rule applies.",
+      "date_span": "2025-04-09",
+      "status": "no charges; no litigation outcome found"
+    },
+    {
+      "id": "D3-05",
+      "claim": "The Justice Department's 'Weaponization Working Group' was headed by Ed Martin. A Justice Department internal review found that Martin improperly handled and leaked grand jury material in an investigation of the President's political opponents. Martin was removed as head of the group on the first day of 2026 and relocated out of department headquarters. As of April 2026 the group had produced one report.",
+      "tier": "documented",
+      "legal_frame": "Fed. R. Crim. P. 6(e) (grand jury secrecy)",
+      "sources": [
+        "CNN, 4 Feb 2026, https://www.cnn.com/2026/02/04/politics/ed-martin-review-improperly-handled-grand-jury",
+        "CNN, 2 Feb 2026, https://www.cnn.com/2026/02/02/politics/justice-department-trump-weaponization-priority",
+        "American Oversight, 'Criminal Investigations into Trump's Perceived Enemies', https://americanoversight.org/investigation/trumps-retaliation-against-his-opponents/"
+      ],
+      "establishes": "An internal DOJ finding of Rule 6(e) misconduct by the official leading the retaliation portfolio, and his removal from that role.",
+      "does_not": "No prosecution of Martin. An internal review finding is not an adjudication. Does not establish that the President directed the leak.",
+      "counter_record": "The removal is itself evidence of internal correction rather than sanction of the conduct. Martin has publicly accused the D.C. disciplinary counsel investigating him of weaponization in turn - his defence is on the record.",
+      "date_span": "2026-01-01 to 2026-04",
+      "status": "removed from role; no charge"
+    },
+    {
+      "id": "D3-06",
+      "claim": "FHFA Director Bill Pulte referred Federal Reserve Governor Lisa Cook, Senator Adam Schiff and NY Attorney General Letitia James to DOJ over mortgage documents. Cook and Schiff denied wrongdoing; Schiff had not been indicted as of July 2026 and Cook faced no charges. DOJ subsequently opened an investigation into whether people impersonated federal agents during the mortgage-fraud probes of prominent Democrats.",
+      "tier": "documented",
+      "legal_frame": "18 U.S.C. §1014 (false statement on loan application) alleged in referrals; 18 U.S.C. §912 (impersonating a federal officer) in the counter-investigation",
+      "sources": [
+        "The Hill, https://thehill.com/regulation/court-battles/5610395-lisa-cook-letitia-james-mortgage-fraud-allegations/",
+        "CNN, 20 Nov 2025, https://www.cnn.com/2025/11/20/politics/justice-department-adam-schiff-ed-martin-bill-pulte-christine-bish",
+        "CBS News, https://www.cbsnews.com/news/justice-dept-adam-schiff-investigation",
+        "Democracy Forward, 'Weaponization of Federal Housing Finance Agency Investigations', https://democracyforward.org/work/investigations/weaponization-of-federal-housing-finance-agency-investigations/",
+        "Al Jazeera, 17 Nov 2025, https://www.aljazeera.com/economy/2025/11/17/us-fed-governor-cook-offers-detailed-defence-in-mortgage-fraud-case"
+      ],
+      "establishes": "That a housing-finance regulator generated criminal referrals against three named political opponents of the President, and that the investigative conduct itself became the subject of a DOJ inquiry.",
+      "does_not": "Establishes no wrongdoing by Cook, Schiff or James - none was charged on these referrals as of the record found - and equally establishes no crime by Pulte or Martin. Referrals are not charges.",
+      "counter_record": "Pulte renewed the Cook allegations after the Supreme Court ruling; the underlying mortgage documents are real documents and the allegations have not been adjudicated false. Cook offered a detailed documentary defence in November 2025. Both sides here remain unadjudicated.",
+      "date_span": "2025-05 to 2026-07",
+      "status": "no charges filed; counter-investigation open"
+    },
+    {
+      "id": "D3-07",
+      "claim": "The President purported to remove Federal Reserve Governor Lisa Cook 'for cause' based on pre-office mortgage-fraud allegations - the first attempted removal of a Fed governor in the institution's 111-year history. In Trump v. Cook, decided 29 June 2026, the Supreme Court held 5-4 (Roberts, joined by Sotomayor, Kagan, Kavanaugh and Jackson) that the for-cause removal protection for Fed governors is constitutional and requires notice and a hearing before removal is effective; whether cause exists depends on the seriousness of the alleged misconduct and its nexus to the governor's duties. The Court declined to stay the injunction and Cook remained in office.",
+      "tier": "documented",
+      "legal_frame": "12 U.S.C. §242 (for-cause removal); Art. II removal power; Humphrey's Executor line",
+      "sources": [
+        "CRS Legal Sidebar LSB11449, https://www.congress.gov/crs-product/LSB11449",
+        "Supreme Court opinion, No. 25A312, 29 June 2026, https://www.supremecourt.gov/opinions/25pdf/25a312_5468.pdf",
+        "CNBC, 29 June 2026, https://www.cnbc.com/2026/06/29/supreme-court-lisa-cook-trump-federal-reserve.html",
+        "Faegre Drinker, 'Supreme Court Decides Trump v. Cook', https://www.faegredrinker.com/en/insights/publications/2026/6/supreme-court-decides-trump-v-cook"
+      ],
+      "establishes": "A Supreme Court holding constraining removal of a named official the President sought to fire, on procedural due-process-like grounds.",
+      "does_not": "Does not hold the removal attempt unlawful in substance - the Court said the cause determination is the President's alone to make. Does not resolve the underlying mortgage allegations.",
+      "counter_record": "Four Justices dissented. The Court expressly preserved the President's exclusive authority to decide whether cause exists, and framed its holding as procedural. The administration complied with the ruling.",
+      "date_span": "2025-08 to 2026-06-29",
+      "status": "removal blocked; Cook in office"
+    },
+    {
+      "id": "D4-01",
+      "claim": "On or about 7 July 2025 the Department of Justice and FBI issued a two-page memorandum stating that an exhaustive systematic review of the Epstein files 'revealed no incriminating client list', that no credible evidence was found that Epstein blackmailed prominent individuals, that no evidence warranted investigation of uncharged third parties, and that Epstein died by suicide in August 2019.",
+      "tier": "documented",
+      "legal_frame": "none - executive investigative determination",
+      "sources": [
+        "Washington Post, 7 July 2025, https://www.washingtonpost.com/national-security/2025/07/07/justice-pam-bondi-epstein-no-client-list/",
+        "OPB/NPR, 7 July 2025, https://www.opb.org/article/2025/07/07/doj-releases-memo-on-sex-offender-jeffrey-epstein-files/",
+        "Senate Judiciary Committee, Durbin letters to AG Bondi and Director Patel, 18 July 2025, https://www.judiciary.senate.gov/imo/media/doc/2025-07-18%20RJD%20Letter%20to%20AG%20Bondi%20re%20Epstein.pdf"
+      ],
+      "establishes": "The department's official position as of July 2025, and the fact that it contradicted the Attorney General's earlier public statements that a client list was under review.",
+      "does_not": "Establishes nothing about what the files contain. A two-page conclusory memorandum is a claim by an interested party, not a document release. Under the guaranteed-null rule it is also not evidence that a list does not exist - a review that finds nothing is compatible with there being nothing and with there being something not found or not disclosed.",
+      "counter_record": "The subsequent statutory release of ~3.5 million pages, and Congress's near-unanimous vote to compel it, are the strongest evidence that the July memo was not treated as adequate by anyone including the President's own party. Conversely, no released document has yet been shown to falsify the memo's core assertion that no formal 'client list' document exists.",
+      "date_span": "2025-07-07",
+      "status": "superseded by statute"
+    },
+    {
+      "id": "D4-02",
+      "claim": "The Epstein Files Transparency Act was passed by the House 427-1 on 18 November 2025, by the Senate by unanimous consent, and signed by the President on 19 November 2025 as Public Law 119-38. It obligated DOJ to make publicly available all unclassified records, documents, communications and investigative materials relating to Epstein within 30 days, permitting redaction only to protect victim identities, comply with grand jury secrecy, and avoid releasing illegal imagery.",
+      "tier": "documented",
+      "legal_frame": "Pub. L. 119-38 (Epstein Files Transparency Act); H.R. 4405, 119th Cong.",
+      "sources": [
+        "PUBLIC LAW 119-38, 19 Nov 2025, https://www.congress.gov/119/plaws/publ38/PLAW-119publ38.pdf",
+        "H.R.4405 legislative history, https://www.congress.gov/bill/119th-congress/house-bill/4405",
+        "DOJ Epstein disclosures portal, https://www.justice.gov/epstein/doj-disclosures"
+      ],
+      "establishes": "A binding statutory disclosure mandate with a narrow, enumerated redaction regime - which is what makes subsequent withholding legally actionable rather than merely criticisable.",
+      "does_not": "Does not itself establish that anything was improperly withheld.",
+      "counter_record": "The President signed it. A 427-1 House vote and Senate unanimous consent left no realistic veto path, but signature rather than veto is on the record and belongs in it.",
+      "date_span": "2025-11-18 to 2025-11-19",
+      "status": "enacted"
+    },
+    {
+      "id": "D4-03",
+      "claim": "DOJ began releasing files on 19 December 2025, the statutory deadline, and by a press release dated 30 January 2026 stated it had published nearly 3.5 million pages. It withheld or redacted material as duplicative between SDNY and SDFL investigations, as covered by deliberative-process and attorney-client privilege, as depictions of violence, or as unrelated to the Epstein and Maxwell cases; it stated redactions were 'limited to the protection of victims and their families' and that 'notable individuals and politicians were not redacted.' Days after the initial release DOJ disclosed it had uncovered over a million further potentially responsive documents. Senators and House members stated the department had withheld files, re-released already-public documents, and redacted beyond the Act's limited exceptions.",
+      "tier": "documented",
+      "legal_frame": "Pub. L. 119-38 §§ disclosure and redaction provisions",
+      "sources": [
+        "DOJ Office of Public Affairs, 30 Jan 2026, https://www.justice.gov/opa/pr/department-justice-publishes-35-million-responsive-pages-compliance-epstein-files",
+        "CNBC, 19 Dec 2025, https://www.cnbc.com/2025/12/19/jeffrey-epstein-files-doj-release-order-maxwell.html",
+        "CNBC, 24 Dec 2025, https://www.cnbc.com/2025/12/24/epstein-files-senators-call-for-audit-into-dojs-release.html",
+        "ABC News, https://abcnews.go.com/Politics/justice-department-million-documents-potentially-related-epstein/story?id=128683817",
+        "House Oversight Democrats, 8 Jan 2026, https://oversightdemocrats.house.gov/news/press-releases/ranking-member-robert-garcia-all-oversight-democrats-demand-pam-bondi-testify-to-oversight-committee-as-doj-violates-epstein-files-transparency-act-and-oversight-committee-subpoena"
+      ],
+      "establishes": "The scale of release, the asserted grounds for withholding, and a contemporaneous bipartisan record of dissatisfaction with compliance.",
+      "does_not": "Does not establish that any specific withheld document concerns the President or any other named person. Deliberative-process and attorney-client privilege are not among the Act's enumerated exceptions on the face of the statute, which is the legal core of the dispute - but that is a contested reading, not a settled one.",
+      "counter_record": "DOJ's own account is that it 'erred on the side of over-collecting', that a court order required certification that no victim-identifying information be produced unredacted, and that notable individuals were not redacted. 3.5 million pages is not a token release. The million further documents were disclosed by the department itself rather than discovered by others.",
+      "date_span": "2025-12-19 to 2026-01-30",
+      "status": "partially complied; contested"
+    },
+    {
+      "id": "D4-04",
+      "claim": "Phang v. Blanche, No. 1:26-cv-01417 (D.D.C.), filed 27 April 2026 by journalist and lawyer Katie Phang against the Acting Attorney General, alleges failure to comply with the Epstein Files Transparency Act - missed deadlines, improper and unexplained redactions, and withholding. Judge Emmet Sullivan granted a preliminary injunction on 25 June 2026, finding plaintiff likely to succeed on her APA claims and ordering DOJ to produce specified records with redactions removed, to begin review of hundreds of thousands of foreign-language documents, and to publish redaction logs, or to justify non-compliance in writing. He issued a show-cause order 6 July 2026, ordered in camera review 25 July 2026, and at a subsequent hearing warned the government against forcing him to open contempt proceedings, noting he had held lawyers in contempt before. DOJ appealed the injunction to the D.C. Circuit on 24 August 2026 (No. 26-5299). The case was pending as of early September 2026.",
+      "tier": "documented",
+      "legal_frame": "5 U.S.C. §706 (APA); Declaratory Judgment Act, 28 U.S.C. §2201; ultra vires; Pub. L. 119-38",
+      "sources": [
+        "Clearinghouse case record, Phang v. Blanche 1:26-cv-01417, https://clearinghouse.net/case/48180/",
+        "NBC News, https://www.nbcnews.com/politics/justice-department/judge-shows-signs-frustration-doj-attorneys-handling-epstein-files-rcna592418",
+        "Courthouse News, https://www.courthousenews.com/feds-struggle-to-explain-redactions-in-epstein-files-compliance-case/",
+        "Ms. Magazine, 29 July 2026, https://msmagazine.com/2026/07/29/todd-blanche-epstein-files-katie-phang-lawsuit-court-judge/"
+      ],
+      "establishes": "A federal court has found a plaintiff likely to succeed on the claim that DOJ unlawfully withheld and over-redacted Epstein records, and has ordered production.",
+      "does_not": "A preliminary injunction is a likelihood finding, not a merits judgment. No contempt has been entered. The case does not establish what the withheld material contains.",
+      "counter_record": "DOJ's response of 2 July 2026 defended the redactions as protecting victims and personal information and argued the underlying materials were duplicative; it filed a notice of compliance with in camera review on 30 July 2026 and has appealed. A victim intervened as 'Jane Doe' seeking to PRESERVE redactions - the privacy interest cutting against disclosure is real and is represented in the case.",
+      "date_span": "2026-04-27 to 2026-09",
+      "status": "preliminary injunction granted; on appeal; pending"
+    },
+    {
+      "id": "D4-05",
+      "claim": "On 12-13 November 2025 the House Oversight Committee released documents obtained from the Epstein estate, including more than 20,000 pages from the Republican majority. Among them: a 2011 email from Epstein to Ghislaine Maxwell stating that Donald Trump 'spent hours at my house' with a woman who was a victim of trafficking; and a 2019 email from Epstein to author Michael Wolff stating that Trump 'knew about the girls as he asked ghislaine to stop.'",
+      "tier": "documented as to the existence and contents of the documents; attributed as to the truth of Epstein's assertions",
+      "legal_frame": "none - no charge, no cause of action; congressional oversight release",
+      "sources": [
+        "NPR, 12 Nov 2025, https://www.npr.org/2025/11/12/nx-s1-5605582/epstein-files-release-trump-email-grijalva-massie",
+        "PBS NewsHour, text of the emails, https://www.pbs.org/newshour/politics/read-jeffrey-epsteins-newly-released-emails-about-trump",
+        "NPR, 13 Nov 2025, https://www.npr.org/2025/11/13/nx-s1-5607057/house-committee-releases-over-20-000-documents-from-epstein-estate",
+        "House Oversight Republican staff memorandum, 16 Nov 2025, https://oversight.house.gov/wp-content/uploads/2025/11/111625_OGR-Republican-Staff-Memorandum-Democrats-Pursue-Anti-Trump-Hoax-in-Epstein-Investigation.pdf",
+        "House Oversight Democrats, 12 Nov 2025, https://oversightdemocrats.house.gov/news/press-releases/house-oversight-committee-releases-jeffrey-epstein-email-correspondence-raising"
+      ],
+      "establishes": "That these documents exist, were produced by the estate to a congressional committee, and say what they say. That is all it establishes.",
+      "does_not": "Does NOT establish the truth of any statement in them. Epstein is dead and cannot be examined; the statements are out-of-court assertions by a convicted sex offender with a documented interest in implying leverage over powerful people, made in one instance to a journalist writing about him. The report's testimony tier applies with full force: these are evidence that Epstein wrote something, never evidence of the underlying fact. No charge, no investigation of the President arose from them. Under the living-person floor nothing here asserts or implies criminal conduct by any living person.",
+      "counter_record": "The Republican staff released a far larger tranche in which Epstein repeatedly expressed hostility to Trump and his presidency, and issued a memorandum on 16 November 2025 characterising the Democratic selection as an anti-Trump hoax. The 2015 Wolff correspondence shows Epstein and Wolff discussing how to 'craft an answer' for a Trump interview and Wolff characterising Epstein's leverage - i.e. the documents themselves show the two men constructing a narrative, which cuts directly against reading Epstein's assertions as reportage. DOJ's July 2025 review found no basis to investigate uncharged third parties.",
+      "date_span": "2025-11-12 to 2025-11-16",
+      "status": "never charged; no investigation opened; documents public",
+      "notes": "Handled under the report's testimony-tier and living-person rules. Selection effects run in both directions here and both selections are named."
+    },
+    {
+      "id": "D4-06",
+      "claim": "Attorney General Pam Bondi was removed by the President on 2 April 2026 amid criticism of the department's handling of the Epstein files; Deputy Attorney General Todd Blanche - formerly the President's personal criminal defence lawyer - served as Acting Attorney General and was confirmed as Attorney General on 8 August 2026 by a 50-49 Senate vote, with Republicans Collins and Murkowski joining all Democrats in opposition.",
+      "tier": "documented",
+      "legal_frame": "Art. II §2 cl. 2 (appointment and removal); 28 U.S.C. §508 (succession)",
+      "sources": [
+        "NPR, 2-3 Apr 2026, https://www.npr.org/2026/04/02/g-s1-115077/trump-bondi-attorney-general-departure",
+        "CNN, 2 Apr 2026, https://www.cnn.com/2026/04/02/politics/pam-bondi-role-trump",
+        "Washington Post, 8 Aug 2026, https://www.washingtonpost.com/national-security/2026/08/08/senate-narrowly-approves-todd-blanche-ag-capping-tough-confirmation-fight/",
+        "NPR, 8 Aug 2026, https://www.npr.org/2026/08/08/g-s1-137631/senate-confirms-todd-blanche-attorney-general"
+      ],
+      "establishes": "That the President's former personal defence counsel now heads the department litigating the Epstein disclosure case in which he is the named defendant, and that the confirmation drew bipartisan opposition on independence grounds.",
+      "does_not": "Establishes no unlawful act. Appointing one's former lawyer as Attorney General is lawful, was disclosed, and was confirmed by the Senate. It is a structural conflict, not a crime.",
+      "counter_record": "The Senate confirmed him, which is the constitutionally prescribed check operating as designed. Bondi's removal is at least as consistent with accountability for the Epstein handling as with anything else.",
+      "date_span": "2026-04-02 to 2026-08-08",
+      "status": "confirmed"
+    },
+    {
+      "id": "D4-07",
+      "claim": "Ghislaine Maxwell has not been pardoned or had her sentence commuted as of 7 September 2026. The Supreme Court declined her certiorari petition in October 2025. She was moved to FPC Bryan, a minimum-security camp in Texas, with a release date of 17 July 2037. Judge Paul Engelmayer (S.D.N.Y.) denied her pro se habeas petition in August 2026. At a closed-door House Oversight deposition on 9 February 2026 her attorney stated she was 'prepared to speak fully and honestly if granted clemency by President Trump.' Ranking Member Raskin filed a resolution opposing any pardon or commutation.",
+      "tier": "documented",
+      "legal_frame": "Art. II §2 cl. 1 (pardon power); 28 U.S.C. §2255",
+      "sources": [
+        "House Judiciary Democrats, Raskin resolution, https://democrats-judiciary.house.gov/media-center/press-releases/ranking-member-raskin-files-resolution-opposing-pardon-or-commutation-for-epstein-accomplice-and-convicted-child-sex-trafficker-ghislaine-maxwell",
+        "House Judiciary Democrats, whistleblower/commutation application release, https://democrats-judiciary.house.gov/media-center/press-releases/whistleblower-shares-evidence-that-federal-prison-camp-warden-is-pampering-ghislaine-maxwell-maxwell-also-filing-a-commutation-application-with-trump-administration",
+        "MS NOW, habeas denial, https://www.ms.now/news/judge-denies-ghislaine-maxwell-petition-for-release-from-prison",
+        "Newsweek, https://www.newsweek.com/ghislaine-maxwell-habeas-denied-by-obama-appointed-judge-12364467"
+      ],
+      "establishes": "A negative that matters: the most-predicted act of clemency in this area did not happen in twenty months, and an offer of testimony conditioned on clemency was made publicly and not taken up.",
+      "does_not": "Does not establish that clemency will not be granted, nor that the transfer to a minimum-security camp was or was not improper favour. The 'pampering' allegation is a whistleblower claim released by minority committee staff - attributed, not documented.",
+      "counter_record": "The transfer to FPC Bryan and the whistleblower allegations are the contrary indication and are on the record; so is the fact that a clemency application is pending. Nothing here is settled.",
+      "date_span": "2025-08 to 2026-09-07",
+      "status": "no clemency granted; conviction and sentence stand"
+    },
+    {
+      "id": "D5-01",
+      "claim": "Proclamation 10887, signed 20 January 2025, granted clemency to January 6 defendants. Approximately 1,586 people were pardoned and 14 had sentences commuted; pending cases were directed to be dismissed. About 1,270 of those pardoned (roughly 81%) had already pleaded guilty or been convicted - 1,009 guilty pleas (327 felony, 682 misdemeanour) and 261 convicted at trial or on agreed facts. Roughly 608 had been charged with assaulting or obstructing law enforcement and 174 with using deadly or dangerous weapons or causing serious bodily injury; 172 had pleaded guilty to assaulting law enforcement and 69 to doing so with a dangerous or deadly weapon. Ten of the 14 commuted had been convicted of seditious conspiracy - six Oath Keepers and four Proud Boys, including Stewart Rhodes and Enrique Tarrio.",
+      "tier": "documented",
+      "legal_frame": "Art. II §2 cl. 1 (pardon power); 18 U.S.C. §2384 (seditious conspiracy); 18 U.S.C. §111 (assaulting federal officers)",
+      "sources": [
+        "Just Security, 'Trump's January 6 Pardons and Assaults on Law Enforcement Officers By The Numbers', https://www.justsecurity.org/106689/january-6-pardons-statistics/",
+        "Lawfare, 'Evenhanded Injustice: Jan. 6 Pardons, Commutations & Dismissals', https://www.lawfaremedia.org/article/evenhanded-injustice--jan.-6-pardons--commutations---dismissals",
+        "CNN, 20 Jan 2025, https://www.cnn.com/2025/01/20/politics/january-6-2021-capitol-riot-pardons-trump/index.html",
+        "NPR, 20 Jan 2025, https://www.npr.org/2025/01/20/g-s1-36809/trump-pardons-january-6-riot"
+      ],
+      "establishes": "The scale and composition of the clemency, including that it reached hundreds of people convicted of violence against police and ten convicted of seditious conspiracy.",
+      "does_not": "Establishes no illegality whatever. The federal pardon power for offences against the United States is, on the text of Art. II §2 cl. 1, unreviewable and unlimited except for impeachment. There is no legal frame under which these pardons are challengeable. Note also: the seditious-conspiracy leaders received commutations, not pardons - their convictions stand.",
+      "counter_record": "The pardon power is plenary; every president has used it in ways his opponents called abusive; and the distinction the proclamation drew - pardons for most, commutations only for the seditious-conspiracy leaders - is a deliberate line that left those convictions in place. The strongest criticism here is political and institutional, not legal.",
+      "date_span": "2025-01-20",
+      "status": "executed; unreviewable"
+    },
+    {
+      "id": "D5-02",
+      "claim": "A series of 2025-2026 clemency grants went to people with documented financial or political ties to the President or his circle: Trevor Milton (March 2025), whose associates donated nearly $2 million to pro-Trump committees in 2024; Paul Walczak (April 2025), whose mother donated $1 million to a Trump super PAC weeks before; Changpeng Zhao of Binance (23 October 2025), pardoned after a guilty plea to enabling money laundering, where Binance had dealings connected to the Trump family's crypto venture and a close friend of Donald Trump Jr. pressed the case in an Oval Office meeting; George Santos, commuted (October 2025); Timothy Leiweke (December 2025), whose company gave $250,000 to the inaugural committee; Rep. Henry Cuellar (December 2025); Tina Peters (December 2025); Julio Herrera Velutini (January 2026), whose daughter gave $3.5 million to a Trump super PAC; Wanda Vazquez (January 2026); and Joseph Schwartz (November 2025), who paid $1.1 million to lobbying firms for pardon advocacy.",
+      "tier": "documented as to the grants, dates and donations; contested as to any exchange",
+      "legal_frame": "Art. II §2 cl. 1 (pardon power); 18 U.S.C. §201 (bribery) would be the only conceivable frame and no such charge exists",
+      "sources": [
+        "Campaign Legal Center, 'Inside the Pardon Playbook: An Analysis of President Trump's Clemency Abuses', https://campaignlegal.org/update/inside-pardon-playbook-analysis-president-trumps-clemency-abuses",
+        "CNBC, 23 Oct 2025, https://www.cnbc.com/2025/10/23/trump-pardons-binance-founder-cz-zhao.html",
+        "CNBC, 23 Jan 2026, https://www.cnbc.com/2026/01/23/pardon-binance-founder-cz-trump.html",
+        "Forbes, 7 May 2026, https://www.forbes.com/sites/alisondurkee/2026/05/07/democrats-investigate-whether-trumps-pardons-were-pay-to-play-here-are-the-big-time-donors-and-business-allies-hes-sprung-free/",
+        "NBC News, 'Trump's pardons forgive financial crimes that came with hundreds of millions in punishments', https://www.nbcnews.com/politics/trump-administration/trumps-pardons-forgive-financial-crimes-came-hundreds-millions-punishm-rcna248277",
+        "Fox News, https://www.foxnews.com/politics/deal-making-clemency-inside-trumps-most-disputed-pardons-2025"
+      ],
+      "establishes": "Temporal correlation between large contributions or business relationships and grants of clemency, with named amounts and dates.",
+      "does_not": "Establishes no quid pro quo. The Campaign Legal Center - the most adverse serious source - says so itself: it cannot legally prove an exchange in most cases, frames these as abuses of discretion rather than prosecutable conspiracies, and asks the FEC to investigate whether Herrera Velutini was the true source of his daughter's contribution because CLC cannot independently verify a straw-donor theory. The anti-map guardrail applies: a shared timeline between a donation and a pardon is not a chain.",
+      "counter_record": "Zhao's lawyer stated he was 'pardoned for justice' and Zhao publicly said in January 2026 that his business relationship with the Trumps had been 'misconstrued'; the President said he acted at the request of others and publicly distanced himself. Cuellar is a Democrat, which cuts against a purely partisan-loyalty reading. The White House tightened its clemency process during this period. And again: the power is unreviewable, so no court will ever adjudicate this either way.",
+      "date_span": "2025-03 to 2026-01",
+      "status": "granted; under congressional investigation; no charge",
+      "notes": "The House Judiciary Committee Democrats issued an August 2026 staff report on this subject ('Pardons, Inc.'). I could not extract its text - the PDF at democrats-judiciary.house.gov returned image-encoded content and no pdftotext binary is available in this environment. Its contents are therefore NOT relied on here."
+    },
+    {
+      "id": "D5-03",
+      "claim": "The President issued a pardon dated 5 December 2025 to Tina Peters, granting 'a full and unconditional pardon' for 'those offenses she has or may have committed or taken part in related to election integrity and security during the period January 1, 2020 through December 31, 2021.' Peters was convicted in Colorado STATE court and was serving a nine-year state sentence. Colorado Attorney General Phil Weiser stated: 'The idea that a president could pardon someone tried and convicted in state court has no precedent in American law.' Peters asked the Colorado Court of Appeals to recognise the pardon and release her, her counsel invoking Washington's 1795 Whiskey Rebellion pardons.",
+      "tier": "documented",
+      "legal_frame": "Art. II §2 cl. 1 - power extends only to 'Offences against the United States'; federalism / state sovereignty",
+      "sources": [
+        "CBS News, https://www.cbsnews.com/news/trump-pardons-tina-peters-but-charged-in-state-court/",
+        "Colorado Politics, 12 Dec 2025, https://www.coloradopolitics.com/2025/12/12/trump-pardons-tina-peters-but-colorado-officials-say-he-cant-reverse-state-convictions-trail-mix/",
+        "Colorado Newsline, https://coloradonewsline.com/2025/12/12/trump-tina-peters-pardon/",
+        "Colorado Sun, 25 Dec 2025, https://coloradosun.com/2025/12/25/tina-peters-colorado-court-of-appeals-request/"
+      ],
+      "establishes": "That a formal pardon instrument was issued purporting to reach a state conviction, which on the settled reading of Art. II §2 cl. 1 it cannot.",
+      "does_not": "Does not establish that Peters has been or will be released; as of the record found, Colorado did not recognise it. Issuing a legally ineffective pardon is not itself a crime or a justiciable wrong.",
+      "counter_record": "Peters's counsel has a non-frivolous historical argument (the Whiskey Rebellion pardons) and is litigating it; the question has never been squarely decided by the Supreme Court. The proposition that the pardon is void is overwhelmingly the majority view, including the ABA's, but it is a legal position, not yet a holding in this case.",
+      "date_span": "2025-12-05 to 2025-12-25",
+      "status": "pardon issued; effect contested in Colorado courts"
+    },
+    {
+      "id": "D5-04",
+      "claim": "The President pardoned former Honduran President Juan Orlando Hernandez, who had been convicted in U.S. federal court on drug-trafficking and firearms charges and sentenced to 45 years for assisting cocaine traffickers moving hundreds of tons of narcotics into the United States. Honduras responded by issuing a warrant for his arrest.",
+      "tier": "documented",
+      "legal_frame": "Art. II §2 cl. 1; 21 U.S.C. §§959, 963 (drug trafficking); 18 U.S.C. §924(c)",
+      "sources": [
+        "Fox News, https://www.foxnews.com/politics/deal-making-clemency-inside-trumps-most-disputed-pardons-2025",
+        "NBC News, https://www.nbcnews.com/world/latin-america/trump-says-plans-pardon-former-honduran-president-hernandez-2024-drug-rcna246397",
+        "CBS News, https://www.cbsnews.com/news/trump-says-he-will-pardon-former-honduran-president-juan-orlando-hernandez"
+      ],
+      "establishes": "That the pardon power was used to release a foreign head of state convicted of trafficking into the United States, and that the announcement preceded the grant.",
+      "does_not": "Establishes no illegality; foreign-policy and clemency judgments are both committed to the President. No exchange has been documented.",
+      "counter_record": "The President stated publicly he believed the prosecution was politically motivated. Searched for any documented payment, business tie or foreign inducement connected to this pardon and found none.",
+      "date_span": "2025-11 to 2025-12",
+      "status": "granted; unreviewable"
+    },
+    {
+      "id": "D6-01",
+      "claim": "Learning Resources, Inc. v. Trump, No. 24-1287, argued 5 November 2025 and decided 20 February 2026: the Supreme Court held 6-3, in an opinion by Chief Justice Roberts, that the International Emergency Economic Powers Act does not authorise the President to impose tariffs. The Court reasoned that the power to 'regulate ... importation' in 50 U.S.C. §1702(a)(1)(B) does not encompass the power to tax, and that Congress omitted any mention of tariffs or duties from IEEPA in contrast to statutes that grant tariff authority expressly; the majority rested principally on the major questions doctrine. Justices Thomas, Alito and Kavanaugh dissented. Justices Kagan, Sotomayor and Jackson agreed with the outcome but would have decided it on ordinary statutory grounds. The tariffs at issue included the 2 April 2025 global 10% baseline and 'reciprocal' rates up to 50%, and the drug-trafficking-emergency tariffs on Canada, Mexico and China.",
+      "tier": "documented",
+      "legal_frame": "50 U.S.C. §1701 et seq. (IEEPA); Art. I §8 cl. 1 (taxing and tariff power); major questions doctrine",
+      "sources": [
+        "Supreme Court opinion PDF, 24-1287, 20 Feb 2026, https://www.supremecourt.gov/opinions/25pdf/24-1287_4gcj.pdf",
+        "WilmerHale client alert, 20 Feb 2026, https://www.wilmerhale.com/en/insights/client-alerts/20260220-supreme-court-strikes-down-ieepa-tariffs-what-now",
+        "SCOTUSblog case file, https://www.scotusblog.com/cases/case-files/learning-resources-inc-v-trump/",
+        "Cornell LII, https://www.law.cornell.edu/wex/Learning_Resources_v_Trump_2026",
+        "Tax Foundation analysis, https://taxfoundation.org/blog/supreme-court-trump-tariffs-ruling/"
+      ],
+      "establishes": "The most significant judicial limit on executive emergency power in this period: a merits holding, from the Supreme Court, that a claimed emergency authority did not exist.",
+      "does_not": "Does not hold that the emergency declarations themselves were invalid, does not address other tariff statutes (Sections 232, 301, 122), and expressly did not resolve refunds - the Court affirmed the Court of International Trade's exclusive jurisdiction and left remedy to resumed CIT litigation. Industry estimates of potential refunds run as high as $175 billion; none is ordered by this opinion.",
+      "counter_record": "Three Justices would have upheld the tariffs, and the administration's reading of 'regulate ... importation' was not frivolous - it had prevailed in part below and drew a dissent from three Justices. The administration complied immediately, revoking the IEEPA tariffs by executive order the same day.",
+      "date_span": "2025-04-02 to 2026-02-20",
+      "status": "held unlawful; complied with; refunds unresolved"
+    },
+    {
+      "id": "D6-02",
+      "claim": "Within hours of the 20 February 2026 ruling the administration reimposed tariffs under Section 122 of the Trade Act of 1974 (19 U.S.C. §2132) as a 10% temporary import surcharge, raised to 15% - the statutory maximum - on 21 February 2026, with the statutory 150-day life expiring 24 July 2026. On 7 May 2026 the Court of International Trade, in Oregon v. United States and Burlap and Barrel, Inc. v. United States, invalidated the Section 122 surcharge by a 2-1 majority, holding that the statute requires balance-of-payments deficits measured by specific 1970s-era metrics (liquidity, official settlements, basic balance) whereas the proclamation cited trade and current-account deficits, which the majority found legally distinct; the court granted only a party-specific remedy limited to three named plaintiffs. The government appealed to the Federal Circuit on 8 May 2026 and obtained a temporary stay on 12 May 2026. The surcharge expired by operation of law on 24 July 2026 and was replaced within the hour by a two-tier Section 301 regime (10% and 12.5%) covering roughly 60 countries, premised on USTR findings about forced-labour enforcement - a regime with no statutory expiration.",
+      "tier": "documented",
+      "legal_frame": "19 U.S.C. §2132 (Trade Act §122); 19 U.S.C. §2411 (Trade Act §301); 19 U.S.C. §1862 (Trade Expansion Act §232)",
+      "sources": [
+        "Skadden, 'US Trade Court Strikes Down Section 122 Tariffs', May 2026, https://www.skadden.com/insights/publications/2026/05/us-trade-court-strikes-down-section-122-tariffs",
+        "Global Trade Alert, 'From IEEPA to Section 122: What Changed on 20 February 2026', https://globaltradealert.org/blog/from-ieepa-to-section-122",
+        "Nakachi Eckhardt & Jacobson, 4 July 2026, https://www.tradelawcounsel.com/insights-news/2026/7/4/section-122-surcharge-sunsets-july-24-what-importers-should-do-beforeand-afterthe-150-day-clock-runs-out",
+        "BDO, https://www.bdo.global/en-gb/insights/tax/indirect-tax/united-states-supreme-court-reins-in-ieepa-tariff-authority-what-happens-now"
+      ],
+      "establishes": "A documented pattern of statutory substitution: when one authority is struck down, the tariff policy is re-founded on the next statute, and the substitution moved from a 150-day capped authority to an uncapped one.",
+      "does_not": "Establishes no unlawful act in the substitution itself. Using a different statute after losing under one is ordinary lawyering, not defiance; Sections 232 and 301 confer real delegated authority and the Supreme Court's opinion said nothing against them. The CIT ruling is a divided panel decision, stayed, and party-specific.",
+      "counter_record": "Section 122 is on its face a tariff statute - unlike IEEPA - and its use was a direct response to the Court's reasoning that Congress must speak clearly about tariffs. The Federal Circuit stayed the CIT ruling, so no operative judgment against Section 122 stands. The Section 301 regime rests on USTR findings, the statutorily prescribed process.",
+      "date_span": "2026-02-20 to 2026-07-24",
+      "status": "IEEPA tariffs revoked; §122 expired; §301 regime in force; §122 appeal pending"
+    },
+    {
+      "id": "D6-03",
+      "claim": "The Government Accountability Office issued a series of legal determinations in 2025-2026 that the administration violated the Impoundment Control Act by withholding appropriated funds - identified programmes include the Department of Transportation's National Electric Vehicle Infrastructure programme, three FEMA grant programmes (Emergency Food and Shelter, Shelter and Services, Next Generation Warning System), Head Start, the Department of Energy's Renew America's Schools programme, and NIH grant reviews and funds.",
+      "tier": "documented",
+      "legal_frame": "Impoundment Control Act of 1974, 2 U.S.C. §§681-688",
+      "sources": [
+        "Senate Appropriations Committee minority, https://www.appropriations.senate.gov/news/minority/government-watchdog-concludes-trump-is-illegally-impounding-fundingsenator-murray-responds",
+        "Senate Budget Committee ranking member, https://www.budget.senate.gov/ranking-member/newsroom/press/trump-administration-violated-the-impoundment-control-act-by-withholding-funding-gao-reports",
+        "House Budget Committee Democrats, https://democrats-budget.house.gov/news/press-releases/boyle-statement-gao-legal-opinion-finding-trump-administration-violated",
+        "The Hill, FEMA determination, https://thehill.com/policy/energy-environment/5527698-trump-fema-grants-violation/",
+        "Axios Pro, NIH determination, https://www.axios.com/pro/health-care-policy/2025/08/07/gao-trump-admin-improperly-withheld-nih-funds"
+      ],
+      "establishes": "Repeated formal legal determinations by Congress's own nonpartisan audit agency that a specific statute was violated, across multiple agencies.",
+      "does_not": "A GAO legal opinion is not a court judgment and carries no penalty. GAO may sue to compel release under 2 U.S.C. §687 but the record found does not show it doing so. These are determinations about agency conduct, not findings about the President personally.",
+      "counter_record": "The administration's position across these disputes is that the pauses were programmatic delays for review rather than impoundments, which is a recognised distinction under the Act. Most of the sources located are minority-party press releases characterising GAO decisions rather than the decisions themselves; I did not fetch the underlying GAO opinion documents, so the individual determinations should be verified against gao.gov B-numbers before publication.",
+      "date_span": "2025-05 to 2026",
+      "status": "GAO determinations issued; no litigation outcome located",
+      "notes": "Flagged for verification: cite the GAO decision B-numbers, not the press releases."
+    },
+    {
+      "id": "D6-04",
+      "claim": "The President declared roughly nine new national emergencies in the first year of the second term; as of 2 September 2026 approximately 52 declared national emergencies were in effect government-wide. For comparison the Brennan Center's tracking records 13 declarations in the first Trump term, 11 under Biden, 12 under Obama and 14 under George W. Bush.",
+      "tier": "labeled",
+      "legal_frame": "National Emergencies Act, 50 U.S.C. §§1601-1651",
+      "sources": [
+        "Brennan Center, 'Declared National Emergencies Under the National Emergencies Act', https://www.brennancenter.org/our-work/research-reports/declared-national-emergencies-under-national-emergencies-act",
+        "NPR, 9 June 2025, https://www.npr.org/2025/06/09/nx-s1-5424666/trump-national-emergencies-democracy-supreme-court-constitution",
+        "Axios, 18 Apr 2025, https://www.axios.com/2025/04/18/trump-national-emergency-declarations"
+      ],
+      "establishes": "That emergency declaration was a routine rather than exceptional instrument in this period.",
+      "does_not": "The count is not authoritative here - I did not reconcile it against the Federal Register or the Brennan Center table directly, and the figures in the search summaries were internally inconsistent (eight, then nine). The NEA imposes essentially no substantive limit on what may be declared an emergency, so a high count establishes no illegality.",
+      "counter_record": "The per-year rate is not obviously out of line with predecessors once the first-term and Biden numbers are set beside it. Congress's termination mechanism under 50 U.S.C. §1622 exists and was not successfully used, which is a fact about Congress as much as about the President.",
+      "date_span": "2025-01-20 to 2026-09-02",
+      "status": "in effect",
+      "notes": "Numbers require verification against the Brennan Center table before any use."
+    },
+    {
+      "id": "D7-01",
+      "claim": "Jared Kushner served as a presidential envoy conducting negotiations on Gaza, the Russia-Ukraine war and Iran while his private equity firm Affinity Partners held capital raised overwhelmingly from foreign sources - reported at more than $6 billion since 2021, roughly 99% from foreign nationals including the sovereign wealth funds of Saudi Arabia, the UAE and Qatar. House Oversight and Senate Finance Democrats wrote to the White House Chief of Staff and to Affinity Partners on 19 March 2026, and House Judiciary ranking member Raskin wrote to Kushner on 16 April 2026, seeking information on conflicts of interest. Rep. Stanton questioned Secretary Rubio on the Kushner and Witkoff conflicts in June 2026.",
+      "tier": "documented as to the role, the fund's foreign sovereign capital and the congressional inquiries; unsupported as to any exchange",
+      "legal_frame": "Art. I §9 cl. 8 (Foreign Emoluments Clause) - contested application to family members and to a non-officeholder envoy; 18 U.S.C. §208 (criminal conflict of interest) - which by its terms does not reach the President and whose application to a special government employee depends on his appointment status",
+      "sources": [
+        "House Oversight Democrats / Sen. Wyden letter to White House, 19 March 2026, https://oversightdemocrats.house.gov/imo/media/doc/2026-03-19garciawydenlettertowhrekushnerfundraisingfinal.pdf",
+        "Letter to Affinity Partners, 19 March 2026, https://oversightdemocrats.house.gov/imo/media/doc/2026-03-19garciawydenlettertoaffinitypartnersrekushnerfundraisingfinal.pdf",
+        "House Judiciary Democrats, Raskin to Kushner, 16 April 2026, https://democrats-judiciary.house.gov/sites/evo-subsites/democrats-judiciary.house.gov/files/evo-media-document/2026-04-16-raskin-to-kushner-affinity-re-conflict-of-interest.pdf",
+        "Rep. Greg Stanton newsroom, June 2026, https://stanton.house.gov/2026/6/stanton-confronts-secretary-rubio-over-foreign-conflicts-of-interest-involving-trump-envoys-witkoff-and-kushner",
+        "The Hill, https://thehill.com/homenews/administration/5792597-kushner-business-middle-east-democrats/"
+      ],
+      "establishes": "A structural conflict on the face of the public record: the same individual negotiating with Gulf states on behalf of the United States while being paid by them privately. The congressional letters are primary documents and are dated.",
+      "does_not": "Establishes NO exchange, no bribe, no unlawful act, and no policy outcome traceable to the payments. The anti-map guardrail applies with full force: the fund, the envoy role and the Gaza agreement share a timeline; that is not a chain. The Foreign Emoluments Clause reaches persons holding office of profit or trust under the United States - whether an unpaid family envoy is such a person, and whether fund management fees are 'emoluments', are unsettled and have never been adjudicated.",
+      "counter_record": "Affinity's capital was raised beginning in 2021, before this term, and the fund's investor base was public. No court, inspector general or ethics office has found a violation. Congressional letters are requests, not findings; the recipients' responses were not located. The Gaza agreement's terms are not shown to have favoured any Affinity investor.",
+      "date_span": "2025-01 to 2026-06",
+      "status": "under congressional inquiry; no finding, no charge"
+    },
+    {
+      "id": "D7-02",
+      "claim": "World Liberty Financial, the crypto venture co-owned by the Trump family and co-founded by Zach Witkoff - son of Middle East special envoy Steve Witkoff - was granted a conditional de novo national bank charter by the Office of the Comptroller of the Currency in August 2026, reported as unprecedented for a venture owned by a sitting president. Members of Congress have alleged that a UAE royal and national security adviser purchased a large stake in the venture and that funds flowed to the Witkoff family, while Steve Witkoff participated in discussions on exporting advanced AI chips to the UAE.",
+      "tier": "documented as to the OCC charter and the family ownership; attributed as to the stake purchase, the sums, and the chip-negotiation overlap",
+      "legal_frame": "12 U.S.C. §27 (national bank charters); Art. I §9 cl. 8 (Foreign Emoluments Clause) - contested; no charge under any statute",
+      "sources": [
+        "ABC News, 'Trump-linked crypto venture World Liberty Trust granted bank status', https://abcnews.com/Business/trump-linked-crypto-venture-world-liberty-trust-granted/story?id=135668756",
+        "Daily Caller, 14 Aug 2026, https://dailycaller.com/2026/08/14/cryptocurrency-occ-de-novo-banking-charter-witkoff-world-liberty-financial-treasury-donald-trump-silicon-valley-bank/",
+        "CNBC, 25 Aug 2026, https://www.cnbc.com/2026/08/25/world-liberty-financial-says-stablecoin-success-refutes-trump-cronyism-charge.html",
+        "Rep. Greg Stanton newsroom, June 2026, https://stanton.house.gov/2026/6/stanton-confronts-secretary-rubio-over-foreign-conflicts-of-interest-involving-trump-envoys-witkoff-and-kushner"
+      ],
+      "establishes": "That a federal banking regulator granted a charter to a venture in which the President's family holds an ownership interest.",
+      "does_not": "The specific figures circulating - a 49% stake for $500 million, $31 million to the Witkoff family - come from a member of Congress's press release, not from a filing, an SEC document or a court record. I did not locate a primary source for them and they should not be published as documented. Nothing here establishes that any regulatory decision was traded for anything.",
+      "counter_record": "World Liberty Financial's chief executive stated in August 2026 that the stablecoin's commercial success answers the cronyism charge. An OCC charter is granted through a defined application process with conditions; no finding of irregularity in that process was located. Searched for an IG or GAO review of the charter decision and found none.",
+      "date_span": "2025 to 2026-08",
+      "status": "charter granted; no investigation outcome located",
+      "notes": "The congressional figures are the weakest-sourced material in this report line. Held at attributed. Do not publish the dollar amounts without a primary source."
+    },
+    {
+      "id": "D7-03",
+      "claim": "The President reported $59.5 million in foreign real-estate licensing income for 2025, up 71% from 2024 and nearly tenfold from 2023. UAE-linked projects generated roughly $22 million, Saudi Arabia roughly $9 million and Qatar roughly $5 million, much of it through the Gulf developers Dar Al Arkan (Saudi-linked) and Damac (UAE). CREW counts twenty-three Trump-branded foreign real-estate projects to be developed during the presidency. In April 2025 the Trump Organization announced a Qatari golf resort to be developed by Qatari Diar, which is owned by the Qatari state - the first foreign deal of the second term, and one that appears inconsistent with the organisation's own second-term ethics pledge to avoid deals with foreign governments.",
+      "tier": "documented",
+      "legal_frame": "Art. I §9 cl. 8 (Foreign Emoluments Clause) - never adjudicated on the merits; no statute prohibits the conduct",
+      "sources": [
+        "CNBC, 10 Aug 2026, https://www.cnbc.com/2026/08/10/trump-foreign-real-estate-licensing-income-gulf-deals.html",
+        "CREW foreign development tracker, https://www.citizensforethics.org/reports-investigations/crew-reports/trump-foreign-development-tracker/",
+        "MS NOW, https://www.ms.now/news/trump-organization-foreign-deals-dubai-saudi-arabia",
+        "MarketBeat/AP, 30 Apr 2025, https://www.marketbeat.com/articles/trump-company-strikes-qatari-golf-resort-deal-in-a-sign-its-not-holding-back-from-foreign-business-2025-04-30",
+        "Center for American Progress, https://www.americanprogress.org/article/trumps-gulf-interests-conflict-with-the-interests-of-the-american-people/"
+      ],
+      "establishes": "Documented income from foreign sources during the term, in figures drawn from the President's own financial disclosure, including revenue from a project with a state-owned developer.",
+      "does_not": "Establishes no violation. Whether licensing revenue from a state-owned company is an 'emolument' is precisely the question that has never been decided - the first-term emoluments cases (CREW v. Trump; Blumenthal v. Trump; District of Columbia and Maryland v. Trump) were dismissed or vacated as moot when he left office in 2021, none on the merits. The guaranteed-null rule applies: their disposition tells us nothing about the underlying legal question.",
+      "counter_record": "The income is disclosed - it is known because he reported it. The second-term ethics pledge was publicly weaker than the first-term one and was announced as such, so there is no concealment. Congress has legislated no prohibition despite two terms of controversy, and Art. I §9 cl. 8 permits foreign emoluments with the consent of Congress, which has never been asked and never refused.",
+      "date_span": "2025-04 to 2026-08",
+      "status": "ongoing; no litigation, no charge"
+    },
+    {
+      "id": "D7-04",
+      "claim": "In May 2025 the administration accepted a Boeing 747-8 from the government of Qatar, valued at roughly $400 million, to serve as a presidential aircraft and later to be transferred to the presidential library. On 13 May 2025 Senators Schatz and Coons led 27 senators in a resolution condemning the acceptance. By mid-2026 the aircraft had been converted by L3Harris and was preparing for its first presidential flight.",
+      "tier": "documented as to the transfer and the congressional response; contested as to legality",
+      "legal_frame": "Art. I §9 cl. 8 (Foreign Emoluments Clause); 5 U.S.C. §7342 (Foreign Gifts and Decorations Act)",
+      "sources": [
+        "NPR, 12 May 2025, https://www.npr.org/2025/05/12/nx-s1-5395696/qatar-trump-plane-gift-ethics",
+        "Sen. Cantwell press release, https://www.cantwell.senate.gov/news/press-releases/cantwell-colleagues-condemn-trumps-willingness-to-accept-lavish-400m-jet-from-qatar",
+        "Poynter fact-check, https://www.poynter.org/fact-checking/2025/qatar-boeing-7478-gift-donald-trump-legal-not/",
+        "The Hill, https://thehill.com/homenews/administration/5297095-norman-eisen-donald-trump-qatari-jet/"
+      ],
+      "establishes": "That a foreign state transferred an asset of that value and that it was accepted, and that Congress objected without prohibiting it.",
+      "does_not": "Establishes no adjudicated violation. The administration's position is that the aircraft was transferred to the Department of Defense and then to a presidential library foundation, not to the President personally - which, if accurate, is the whole legal question. No court has ruled. Serious constitutional scholars disagree in print about whether the clause is triggered.",
+      "counter_record": "No lawsuit was filed. Standing is the reason: after the first-term emoluments litigation collapsed on justiciability and mootness, no plaintiff has been identified who can get into court. Congress could have consented or prohibited under Art. I §9 cl. 8 and did neither. The 27-senator resolution is a statement, not law.",
+      "date_span": "2025-05 to 2026",
+      "status": "accepted; no litigation; no ruling"
+    },
+    {
+      "id": "D0-01",
+      "claim": "Impeachment: multiple resolutions were introduced in the 119th Congress, including H.Res. 353 (seven articles: obstruction of justice, violation of due process, usurpation of the appropriations power, abuse of trade powers and international aggression, violation of First Amendment rights, creation of an unlawful office, bribery and corruption, and tyranny), H.Res. 537 and H.Res. 939. The House voted to table on 24 June 2025 by 344-79 and again on 11 December 2025 by 237-140 with 47 voting present. No article was ever adopted or transmitted to the Senate.",
+      "tier": "documented",
+      "legal_frame": "Art. II §4; Art. I §2 cl. 5 and §3 cl. 6",
+      "sources": [
+        "H.Res.353, 119th Cong., https://www.congress.gov/bill/119th-congress/house-resolution/353",
+        "H.Res.537 text, https://www.congress.gov/bill/119th-congress/house-resolution/537/text",
+        "H.Res.939 text, https://www.congress.gov/bill/119th-congress/house-resolution/939/text",
+        "Free Speech For People, https://freespeechforpeople.org/140-members-of-congress-vote-to-advance-articles-of-impeachment-against-trump/"
+      ],
+      "establishes": "That the constitutional remedy for the conduct catalogued above was formally proposed, in specified articles, and rejected by the House twice.",
+      "does_not": "Establishes nothing about the underlying conduct in either direction. A tabling vote is a political decision by a chamber the President's party controls; it is not an adjudication and not an exoneration. The guaranteed-null rule applies squarely.",
+      "counter_record": "The 79 and 140 vote counts include members who stated they were voting on procedure rather than merits, and both resolutions were introduced by individual members without committee action or leadership support. Notably, no article of impeachment alleged treason.",
+      "date_span": "2025-06-24 to 2025-12-11",
+      "status": "tabled; never adopted"
+    }
+  ],
+  "nulls": [
+    {
+      "searched": "Any charge, indictment, grand jury referral, congressional article of impeachment, or executive-branch allegation of TREASON under Art. III §3 or 18 U.S.C. §2381 against the President, 2025-2026.",
+      "result": "None found. No such charge exists, none was sought, and none of the impeachment articles introduced (H.Res. 353, 537, 939) alleged treason. Art. III §3 requires levying war against the United States or adhering to their enemies giving aid and comfort, with two witnesses to the same overt act or confession in open court; 'enemies' has been read to require a state of declared or open war. Nothing in the 2025-2026 record engages that clause. The lead's determination that treason is the wrong legal frame is confirmed by the record, not merely by doctrine."
+    },
+    {
+      "searched": "Any invocation of the Insurrection Act, 10 U.S.C. §§251-255, 2025-2026.",
+      "result": "None. Threatened repeatedly, never invoked. All deployments proceeded under 10 U.S.C. §12406, Title 32 with gubernatorial consent, or asserted Art. II authority over the D.C. Guard."
+    },
+    {
+      "searched": "Any criminal charge, indictment or contempt conviction of any executive official for defying a court order, 2025-2026.",
+      "result": "None. Judge Boasberg's April 2025 probable-cause finding never produced a prosecution; the D.C. Circuit vacated it, the en banc court permitted the inquiry to resume, and no charge followed. Two civil contempt findings were entered (D. Minn., early 2026). Under the guaranteed-null rule, DOJ's non-prosecution of DOJ is evidence of nothing."
+    },
+    {
+      "searched": "Any live Foreign or Domestic Emoluments Clause litigation against the President, 2025-2026.",
+      "result": "None found. No suit over the Qatari aircraft, the Gulf licensing income, the Qatari Diar resort, or World Liberty Financial. The first-term cases (CREW v. Trump; Blumenthal v. Trump; District of Columbia and Maryland v. Trump) all ended without merits rulings - dismissed or vacated as moot in 2021 - which left no standing doctrine any plaintiff could use. This is the largest structural gap in the accountability record: the most-cited constitutional provision in this area has never once been construed by a court against a sitting president."
+    },
+    {
+      "searched": "Any inspector general or GAO report specifically examining the Kushner/Affinity or Witkoff/World Liberty Financial conflicts, or the OCC charter decision.",
+      "result": "None found. The entire documentary record in area (7) consists of congressional minority-party letters, press reporting, and the President's own financial disclosures. No investigative body with subpoena-backed findings has reported. Absence of a report is not absence of a problem, and equally not evidence of one."
+    },
+    {
+      "searched": "Any court ruling on challenges by Christopher Krebs or Miles Taylor to the 9 April 2025 executive orders.",
+      "result": "None found through September 2026. Security-clearance revocation is close to unreviewable under Department of the Navy v. Egan, which is a likely explanation, but I could not confirm whether suits were filed and lost, filed and pending, or never filed."
+    },
+    {
+      "searched": "Any documented quid pro quo - an actual exchange, not a temporal correlation - underlying any pardon or commutation.",
+      "result": "None found, including by the most adverse serious source. The Campaign Legal Center states directly that it cannot establish exchange and asks the FEC to investigate one straw-donor question it cannot resolve. No 18 U.S.C. §201 charge, no grand jury, no court finding."
+    },
+    {
+      "searched": "Any Federal Circuit merits ruling on the Section 122 tariffs, and any order resolving the estimated $175 billion in IEEPA tariff refunds.",
+      "result": "None found as of 7 September 2026. The Federal Circuit granted a temporary stay on 12 May 2026; refund questions were remitted to the Court of International Trade and were unresolved."
+    },
+    {
+      "searched": "Any Fourth Circuit ruling in the consolidated Comey and Letitia James appeals.",
+      "result": "None. Oral argument was scheduled for 15-18 September 2026 - after this research was completed. Any statement about the outcome would be speculation."
+    },
+    {
+      "searched": "Text of the House Judiciary Committee Democrats' August 2026 staff report on pardons ('Pardons, Inc.').",
+      "result": "Could not be extracted. The PDF at democrats-judiciary.house.gov returned image-encoded content and no PDF text extraction tool is available in this environment. Its findings are not relied on anywhere in this file."
+    }
+  ],
+  "searched": [
+    "Newsom v. Trump 3:25-cv-04870 (N.D. Cal.) - full docket chronology via Civil Rights Litigation Clearinghouse",
+    "State of Oregon v. Trump 3:25-cv-01756 (D. Or.) - Immergut permanent injunction",
+    "District of Columbia v. Trump (D.D.C.) - Cobb preliminary injunction order PDF via D.C. OAG; D.C. Circuit stay",
+    "Trump v. Illinois (S. Ct., 23 Dec 2025) - Just Security and Brennan Center analyses",
+    "Ninth Circuit No. 25-3727 opinion (19 June 2025)",
+    "Insurrection Act 10 U.S.C. §§251-255 - invocation searches across 2025 and 2026",
+    "Louisiana National Guard / Governor Landry Title 32 request, Dec 2025 - Mar 2026",
+    "J.G.G. v. Trump / Boasberg contempt proceedings, D.C. Circuit panel and en banc",
+    "D.V.D. v. DHS (Judge Murphy, D. Mass.)",
+    "D. Minn. civil contempt findings, Jan-Feb 2026",
+    "United States v. Abrego Garcia (M.D. Tenn., Crenshaw, 22 May 2026); Xinis orders (D. Md.)",
+    "United States v. Comey (E.D. Va.) and 4th Cir. No. 25-4674; CRS Legal Sidebar LSB11380",
+    "Prosecution of John Bolton (D. Md.) - indictment through 26 June 2026 plea",
+    "Perkins Coie / Jenner & Block / WilmerHale / Susman Godfrey v. DOJ and EOP",
+    "Executive orders of 9 April 2025 re Krebs and Taylor",
+    "DOJ Weaponization Working Group; Ed Martin grand jury review",
+    "FHFA referrals re Cook, Schiff, James; DOJ impersonation investigation",
+    "Trump v. Cook, No. 25A312 (S. Ct., 29 June 2026); CRS LSB11449",
+    "DOJ/FBI Epstein memorandum, 7 July 2025; Senate Judiciary Durbin letters 18 July 2025",
+    "Epstein Files Transparency Act, Pub. L. 119-38; H.R. 4405 legislative history",
+    "DOJ Office of Public Affairs release, 30 Jan 2026; DOJ Epstein disclosures portal",
+    "Phang v. Blanche, 1:26-cv-01417 (D.D.C.) - Clearinghouse chronology; D.C. Cir. No. 26-5299",
+    "House Oversight Epstein estate document releases, 12-16 Nov 2025, both majority and minority",
+    "Bondi removal 2 April 2026; Blanche confirmation 8 August 2026",
+    "Ghislaine Maxwell - cert denial, habeas denial, clemency application, Raskin resolution",
+    "Proclamation 10887 and January 6 clemency statistics (Just Security, Lawfare)",
+    "Campaign Legal Center pardon analysis; Forbes and NBC pardon reporting",
+    "Tina Peters pardon instrument and Colorado response",
+    "Juan Orlando Hernandez pardon",
+    "Learning Resources, Inc. v. Trump, No. 24-1287 (S. Ct., 20 Feb 2026)",
+    "Section 122 proclamation; Oregon v. United States and Burlap and Barrel v. United States (CIT, 7 May 2026); Section 301 successor regime",
+    "GAO Impoundment Control Act determinations 2025-2026",
+    "Brennan Center national emergencies tracking",
+    "Kushner / Affinity Partners congressional letters (19 Mar and 16 Apr 2026)",
+    "Witkoff / World Liberty Financial; OCC conditional charter Aug 2026",
+    "Trump Organization foreign licensing income 2025; CREW foreign development tracker; Qatari Diar resort",
+    "Qatari Boeing 747-8 transfer and Senate response",
+    "Impeachment resolutions H.Res. 353, 537, 939 and the tabling votes",
+    "Treason - Art. III §3 and 18 U.S.C. §2381 - charge searches (null)",
+    "Emoluments litigation 2025-2026 (null)"
+  ],
+  "notes": "SOURCING LIMITS. Several primary PDFs could not be read from this environment: the Supreme Court's Learning Resources slip opinion and the House Judiciary staff report both returned image-encoded content and no PDF text extractor is installed; cnn.com returned HTTP 451, thehill.com, forbes.com, courthousenews.com and justia returned HTTP 403. Where a primary document could not be read, I relied on named secondary sources and have said so in the relevant finding. The Learning Resources holding, vote and dissent lineup rest on the WilmerHale client alert of 20 February 2026 rather than on the slip opinion itself; the citation to supremecourt.gov/opinions/25pdf/24-1287_4gcj.pdf is a real URL that was fetched, not a constructed one, but its text was not machine-readable here.\n\nTHREE STRUCTURAL OBSERVATIONS, offered as method rather than conclusion.\n\nFirst, the shape of area (1) is the opposite of the popular account. The administration lost the §12406 cases and won the D.C. case; it never invoked the Insurrection Act; and when it lost at the Supreme Court it withdrew. The most damaging findings in that area - Breyer's Posse Comitatus ruling and Immergut's permanent injunction - sit beside a unanimous D.C. Circuit stay in the government's favour and a lawful, consented Title 32 deployment in New Orleans. Any account that reports only one side of that is not describing the record.\n\nSecond, the strongest documented material in the whole line is not about any single dramatic act. It is the pattern in areas (2) and (3): a prosecutor a court held had no authority to indict, indicting two named adversaries days before limitations ran; a vindictive-prosecution dismissal; four executive orders against named law firms struck down in full; an internal DOJ finding of grand jury misconduct by the official running the retaliation portfolio. Every one of those is a judicial or internal-executive finding, not an advocacy claim. And every one of them is procedurally incomplete - dismissals without merits rulings, appeals pending, no charge against anyone.\n\nThird, the single largest gap is that the Foreign Emoluments Clause has never been construed. Everything in area (7) - $59.5 million in foreign licensing income, a $400 million aircraft from a foreign state, a family crypto venture with a national bank charter, an envoy paid by the governments he negotiates with - sits in a space where no court has jurisdiction, no statute prohibits, no inspector general has reported, and Congress has neither consented nor forbidden. That is a finding about the architecture, and it is the one that would survive if every disputed factual claim in this file were discarded.\n\nFOURTH AND LAST, on the report's own rules: I have applied the guaranteed-null rule to the impeachment tablings, to the DOJ's non-prosecution of itself, to the collapse of the first-term emoluments cases, and to the absence of any Krebs/Taylor ruling. None of those outcomes is evidence about the underlying conduct in either direction, and a document that treats them as vindication - in either direction - is running the unfalsifiable machine."
+}
