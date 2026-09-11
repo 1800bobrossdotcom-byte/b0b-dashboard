@@ -181,3 +181,145 @@ is the claim the author's question points at.
 *Section 4, the open-record half - Chiliad's actual customers, any In-Q-Tel relationship, Isabel's
 Israeli technology roles, and the PROMIS lineage claim tested against the Inslaw official record -
 is being researched separately and will be appended.*
+
+---
+
+# 4. THE OPEN RECORD - and the lineage claim fails at its FIRST link, not its last
+
+## 4.1 The claim being tested
+
+The popular synthesis - Whitney Webb, *Unlimited Hangout*, "Isabel Maxwell: Israel's 'Back Door'
+Into Silicon Valley" (July 2020), and before her Gordon Thomas and Martin Dillon - runs: Robert
+Maxwell distributed bugged PROMIS software for Israeli intelligence, therefore his daughters'
+later search and data-mining companies are the same operation continued. **The report should
+neither adopt this nor wave it away. It should test the first link, because if the first link is
+not documented the rest cannot be.**
+
+## 4.2 The first link is not in the official record. I verified this myself.
+
+- **H.R. Rep. 102-857, "The INSLAW Affair," House Judiciary Committee, 10 September 1992** - the
+  most substantial congressional investigation of PROMIS ever conducted. **The name Robert Maxwell
+  appears zero times.**
+- **The Report of Special Counsel Nicholas J. Bua, March 1993** - **zero occurrences.**
+- **The only official document that examines him at all is the Department of Justice's review of
+  September 1994**, which I downloaded (466 pages, governmentattic.org) and read directly. All
+  twenty "Maxwell" hits in the combined release fall inside that 1994 review. Its section E.3 is
+  titled *"The Alleged Involvement of Robert Maxwell in the International Distribution of PROMIS"*
+  and it concludes, verbatim:
+
+> *"There is simply no evidence -- again, other than the statements by Mr. Ben-Menashe -- of any
+> involvement of Mr. Maxwell in the sale or distribution of PROMIS."*
+
+> *"In short, there is nothing of which we are aware that links Mr. Maxwell to PROMIS."*
+
+**The sole affirmative source is Ari Ben-Menashe** - the same narrator the report already treats
+as discredited. The October Surprise Task Force found his account *"demonstrably false from
+beginning to end."* He told the DOJ reviewers he had never affirmatively said INSLAW's PROMIS; he
+*"simply let the Hamiltons and others assume"* that is what he meant.
+
+## 4.3 The inference chain, laid bare in the primary document
+
+The 1994 review reproduces INSLAW's own reasoning, and it is worth printing because it is a
+textbook specimen. On 10 January 1994 the FBI released twenty pages responsive to INSLAW's FOIA
+request about *"the involvement of the late Robert Maxwell in the dissemination, marketing or sale
+of computer software systems"* between 1983 and 1992. From redaction codes on those pages INSLAW
+inferred that the Albuquerque field office had run a foreign counterintelligence investigation of
+Maxwell and Pergamon International, and from that inferred PROMIS had been sold as *"an electronic
+Trojan horse."* DOJ's answer: *"We disagree that such an inference is reasonable... none of the
+documents in question even mentioned INSLAW or PROMIS. The FBI made unredacted versions of the
+documents available to us for our review. None of the documents referred to INSLAW or PROMIS."*
+
+**Read the denial narrowly, which is the honest reading.** DOJ is saying the FBI's Maxwell
+documents do not concern PROMIS. **It is not saying the FBI held no Maxwell documents** - it
+confirms twenty pages exist and that reviewers saw them unredacted. That is a smaller denial than
+it first appears, and the report should state it at its true width rather than either width that
+suits a conclusion.
+
+## 4.4 The symmetry caution, which must travel with the kill
+
+**The 1994 review is the accused agency reviewing itself.** The same House Judiciary Committee
+that never named Maxwell also found the Department incapable of investigating its own conduct
+honestly. **So the defensible verb is "never corroborated," not "disproved."** The report kills
+the specimen on the basis that no independent record ever supported it, not on the basis that DOJ
+said so.
+
+**And two things in the official record do survive and should not be swept up in the kill:** Judge
+Bason's bankruptcy-court findings that the Department took INSLAW's Enhanced PROMIS through
+"trickery, fraud and deceit" were real findings about DOJ conduct, undone on jurisdictional
+grounds rather than on the merits. And departmental memoranda of 22 April and 12 May 1983 record
+a genuine PROMIS transfer to Israel - **of the public-domain LEAA version, not Enhanced PROMIS.**
+
+## 4.5 The author's instinct has a documented core, and it is not PROMIS
+
+**Chiliad Publishing Incorporated held real US federal contracts**, including with the FBI:
+approximately fifty award records totalling roughly **$20.1 million** in USAspending data from
+2006 onward, with FBI awards including **DJFA8N0825200** ($1.9M, 2008), **DJFA9N0906000** ($1.7M,
+2009) and **DJFA1N0906002** ($1.44M, 2011), plus Air Force Research Laboratory and Navy work.
+
+**Two limits, and the second is disqualifying until resolved.**
+1. **A shared customer thirty years apart is not a transfer.** PROMIS was 1970s and 1980s COBOL
+   case-tracking for prosecutors' offices. Chiliad's product was 2000s natural-language search
+   across unstructured data. Both sold to the Department of Justice. So did hundreds of vendors.
+   **That is the anti-map guardrail exactly.**
+2. **The identity of "Chiliad Publishing Incorporated" in federal award data with Christine
+   Maxwell's Chiliad is not yet confirmed by document.** Until a filing ties them, this cannot go
+   on the page at all.
+
+## 4.6 Isabel's Israel layer - documented, and larger than usually stated
+
+- **The McKinley Group Inc.** - co-founder, Senior Vice President for international business
+  development, corporate affairs and investor relations, March 1993 to August 1996.
+- **Commtouch Software Inc.**, the US subsidiary of the Israeli company Commtouch Software Ltd. -
+  **President, February 1997 to March 2001** (SEC Form 424B4, 13 July 1999).
+- **BackWeb Technologies Ltd.** (NASDAQ: BWEB, Israeli) - **Outside Director from February 2002**,
+  elected under the Israeli Companies Law (DEF 14A, 2003).
+
+**And the null that matters: the filings name no government, military or intelligence customer of
+any country.** Nothing in this layer touches PROMIS. It is a documented career in Israeli
+technology, which is what it looks like.
+
+## 4.7 Specimens killed in this line
+
+1. **"Bill Gates and Paul Allen each personally invested $20 million in Commtouch."** False in the
+   primary record. The prospectus shows **$20,000,000 combined** to Go2Net *and* Vulcan Ventures
+   at $14.88 per share; separately **Microsoft Corporation** exercised a warrant on 29 December
+   1999 for about $20.0 million. **Corporate, disclosed, and not personal.** The fact that
+   survives: Allen's vehicle did put $20 million into an Israeli email company run by Robert
+   Maxwell's daughter.
+2. **Isabel Maxwell at "Information on Demand"** - a claim in the lineage literature. **No record
+   found placing her there.** Unsupported.
+3. **The Peres Center for Peace governorship.** The Center's current International Board of
+   Governors page, fetched 11 September 2026, **does not list her.** The claim traces to her own
+   statements. **Attributed, not documented.** (The archived board pages could not be retrieved -
+   web.archive.org is blocked from this environment - so this is not a final answer.)
+4. **The Maxwell-PROMIS link itself**, per §4.2 to §4.4: **never corroborated by any independent
+   record, and resting on one discredited narrator.**
+
+## 4.8 Kevin and Ian Maxwell
+
+Tried at the Old Bailey on Serious Fraud Office charges arising from the diversion of Maxwell
+pension assets, and **acquitted by a jury on 19 January 1996** after an eight-month trial. **The
+acquittal is load-bearing and must be stated wherever the pension scandal appears.** The fact it
+does not touch: pensioners lost money that was demonstrably moved out of the funds.
+
+---
+
+# 5. THE ANSWER TO THE AUTHOR'S QUESTION
+
+**Christine Maxwell is missing from the report, and she should not be - but not for the reason the
+question implies.** What justifies her presence is **documented and in the corpus**: she and her
+sister transacted with Epstein directly from 2003 to 2012, in equity, investment solicitation,
+trust paperwork and introductions, and the report's Maxwell section currently pretends the other
+children do not exist.
+
+**What does not justify her presence is the intelligence lineage**, because the first link in it
+was never corroborated by any independent record and rests on the one narrator this report already
+calls discredited. **Chiliad's FBI contracts are real and are a different claim entirely** - a
+company selling search software to a federal customer - and even those cannot be published until
+the corporate identity is tied down by a filing.
+
+**Recommended, if the author directs it:** a Section V subsection on the other Maxwell children,
+built on the corpus documents in §2, carrying the FBI-contract fact only once the entity is
+confirmed, and **carrying the PROMIS kill at equal prominence** - because a section that adds the
+sisters while quietly dropping the reason they are interesting to the lineage writers would be the
+document accumulating rather than testing.
