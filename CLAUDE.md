@@ -184,6 +184,33 @@ finding and tier note. Scale line now 269 / 1,053 / 121.
 section's `sect-body` wrapper, which opened *outside* the deleted range. Tag-balance caught it.
 **Always diff div balance against a pre-edit backup, not just the absolute count.**
 
+**THE OTHER MAXWELL CHILDREN — researched 11 Sept 2026, unpublished.**
+`research/MAXWELL-SIBLINGS.md`. The page carries Christine 0, Isabel 0, Kevin 0, Magellan 0,
+Chiliad 0 against PROMIS 39 — in a Section V titled *"Father, Daughter, and the Surviving Node."*
+**The reason they belong is the corpus, not the intelligence lineage:** Christine and Isabel
+transacted with Epstein directly 2003–2012 (Chiliad equity, a Salty Dog Ventures round pitched to
+him, Eli's Trust papers sent to his attention, introductions). Documented and EFTA-cited.
+
+**The PROMIS lineage claim is dead and must not be revived without new documents.** H.R. Rep.
+102-857 (1992) and the Bua Report (1993) name Robert Maxwell **zero times** — verified with
+control terms, which is what makes a zero meaningful. The only official treatment is DOJ's Sept
+1994 review: *"there is nothing of which we are aware that links Mr. Maxwell to PROMIS"*, resting
+on Ben-Menashe alone, who admitted he *"simply let the Hamiltons and others assume"* he meant
+INSLAW's PROMIS. **Symmetry caution that travels with it:** that review is the accused agency
+reviewing itself, so the verb is **never corroborated**, not *disproved*. **And read the denial
+narrowly:** DOJ says the FBI's 20 Maxwell pages do not concern PROMIS, not that no FBI Maxwell
+file exists. **Chiliad's engine has a documented different parent** — UMass Amherst CIIR's INQUERY
+via Sovereign Hill Software, April 1996.
+
+**Killed, do not re-publish:** Christine founding *Information on Demand* (Sue Rugge, Berkeley,
+1979); *"a sitting CIA CIO co-founded Chiliad"* (Alan Wade was CIA CIO 2001–05; role contested,
+needs a primary); *"bugged software to Fortune 500"* (no source, any tier); Gates and Allen each
+putting $20M into Commtouch (it was combined and corporate); the $18M Excite figure (that is the
+June announcement, not the August close of 850,000 shares).
+**Blocked on:** an EFTA copy of the May–June 2008 Chiliad share thread (hex32-only, so a lead);
+reconciling two USAspending totals (~$20.1M/50 vs ~$33.1M/60 awards); tying "Chiliad Publishing
+Incorporated" to Christine by filing. **web.archive.org is unreachable from this environment.**
+
 ---
 
 ### Still open from 7 September 2026
