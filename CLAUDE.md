@@ -155,7 +155,38 @@ than once.
 
 ---
 
-## 7. OPEN AT LAST WRITE — 7 September 2026
+## 7. OPEN AT LAST WRITE — 11 September 2026
+
+**THE SPONSOR QUESTION IS SETTLED ON THE PAGE. DO NOT RE-HEDGE IT.** 11 Sept 2026: the author
+found that Section II's conclusion paragraph said the report *"does not name a sponsoring
+service"* while Section II also carries **"Primary and liaison — Mossad directing, with CIA and
+British services witting."** Both were written 28 Aug 2026 and never reconciled. Mossad was never
+scrubbed — 54 instances, its own subsection — but a reader stopping at the conclusion was told the
+opposite. **The conclusion now names it: Mossad primary, CIA and British services witting by
+liaison, at the author's hypothesis tier.** Three things travel with it and must not be dropped:
+it is argued from documented liaison structure and the Maxwell lineage, **not** from the corpus;
+the corpus limit is stated in the same breath (the word appears there only in Epstein's joking
+denial to Barak and in a question he asked Barak); and **rung 5 is still refused for everyone.**
+*Do not "restore balance" by re-inserting a no-service-named hedge. That is the error that was
+just fixed.*
+
+**Also done 11 Sept 2026, at his direction:** Section I cut from four subsections to two — the
+symmetry-rule and "what in the files means" subsections removed as excessive, with a compact
+definition of both folded into the Section I intro because **the symmetry rule is still invoked
+eight times downstream.** The address to service members cut 2,526 → 1,190 words. **Every
+safety-critical passage was kept verbatim** and must stay: not a call to disobey lawful orders;
+the lawful channels (10 U.S.C. §1034, PPD-19, ICD-120); do not send classified material; and the
+**Article 94 mutiny warning** closing the door on coordinated refusal. What went was apparatus —
+the Byzantine Generals detour, Schelling/Aumann, and the Watson case study compressed to its
+finding and tier note. Scale line now 269 / 1,053 / 121.
+
+**Pipeline trap learned:** deleting a subsection block can carry away a `</div>` that closes the
+section's `sect-body` wrapper, which opened *outside* the deleted range. Tag-balance caught it.
+**Always diff div balance against a pre-edit backup, not just the absolute count.**
+
+---
+
+### Still open from 7 September 2026
 
 **FOUR ERRORS FOUND ON THE LIVE PAGE, 7 Sept 2026. Verified, held for the author, not fixed —
 he scoped that session to research. Full detail in `research/EPSTEIN-9-11-INTEL-TOPOLOGY.md` §10.**
