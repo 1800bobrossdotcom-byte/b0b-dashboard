@@ -1,0 +1,470 @@
+{
+  "line": "Christine Maxwell - the documented career, end to end",
+  "findings": [
+    {
+      "id": "CM-01-identity",
+      "claim": "Christine Yvonne Malina-Maxwell, born August 1950, British, twin of Isabel Maxwell, daughter of Robert and Elisabeth Maxwell, sister of Ghislaine Maxwell. She uses the filed name 'Christine Malina Maxwell' / 'Christine Yvonne MALINA-MAXWELL'.",
+      "tier": "documented",
+      "sources": [
+        "UK Companies House officer record, Christine Yvonne MALINA-MAXWELL, DOB August 1950, nationality British, place of residence United States - https://find-and-update.company-information.service.gov.uk/officers/bFPV7btkrtskWvqK91eu7WY8eGE/appointments",
+        "United States v. Ghislaine Maxwell, S.D.N.Y. 1:20-cr-00330-AJN, ECF No. 663 (filed 15 June 2022), Exhibit C, letter of Christine Malina Maxwell dated 2 May 2022: 'My name is Christine Malina Maxwell. I am one of Ghislaine's sisters.' and 'I will be 72 years old before the end of this year.' - PDF copy: https://www.courthousenews.com/wp-content/uploads/2022/06/maxwell-sentencing-memo.pdf",
+        "Birth date 16 August 1950, Maisons-Laffitte, France: Wikipedia citing The Telegraph (16 Aug 2019) - index only, day/place not independently fetched"
+      ],
+      "establishes": "Identity, birth year, family position, and the name form she files under. The birth year is fixed independently by two records (Companies House DOB month/year; her own dated court letter).",
+      "does_not": "The exact day and place of birth rest on a newspaper citation I did not retrieve. Nothing here bears on any operational question.",
+      "counter_record": "None. No record contradicts the birth year or the family relationship.",
+      "date_span": "1950 - 2026",
+      "persons": ["Christine Yvonne Malina-Maxwell", "Isabel Maxwell", "Robert Maxwell", "Elisabeth Maxwell", "Ghislaine Maxwell"],
+      "chain_to_promis": false,
+      "notes": "Living person. Uncharged. Nothing in this record is an allegation."
+    },
+    {
+      "id": "CM-02-education",
+      "claim": "PhD in Humanities from the University of Texas at Dallas, in Holocaust studies; also an MA in Interdisciplinary Studies from UT Dallas. Undergraduate: BA, Pitzer College (1972); PGCE, Lady Spencer Churchill College / Oxford Brookes (1974).",
+      "tier": "documented",
+      "sources": [
+        "US v. Maxwell, 1:20-cr-00330-AJN, ECF 663 Ex. C, letter dated 2 May 2022, her own words: 'Following in my mother's footsteps, I have a Humanities PhD in the arena of Holocaust Studies from the University of Texas at Dallas.'",
+        "UT Dallas institutional repository item: MAXWELL-DISSERTATION-2021.pdf, handle 10735.1/9300 - https://utd-ir.tdl.org/bitstream/handle/10735.1/9300/MAXWELL-DISSERTATION-2021.pdf (URL resolves; the PDF itself 301-redirected to the UTD library discovery page and could not be opened in this session)",
+        "UT Dallas Comet Calendar, 'Graduate Student Speaker Series: Christine Malina-Maxwell, PhD student in Humanities' - https://calendar.utdallas.edu/event/graduate_student_speaker_series_christine_malina-maxwell_phd_student_in_humanities"
+      ],
+      "establishes": "The doctorate is documented from her own signed court filing and from a UT Dallas repository deposit under her surname dated 2021.",
+      "does_not": "Pitzer 1972 and Oxford Brookes 1974 are from an uncited Wikipedia passage - labeled, not documented. The dissertation title and year below are a separate finding.",
+      "counter_record": "None found. No record disputes the degree.",
+      "date_span": "1972 - 2021",
+      "persons": ["Christine Yvonne Malina-Maxwell"],
+      "chain_to_promis": false,
+      "notes": "Her mother Elisabeth Maxwell held a doctorate and published on Holocaust studies; 'following in my mother's footsteps' is her own framing."
+    },
+    {
+      "id": "CM-03-dissertation",
+      "claim": "Dissertation: 'The Book as Provocative Artifact: A New Relevancy for Holocaust Literature in the 21st Century,' UT Dallas, 2021, supervised by Dr Nils Roemer, committee including Dr Ozsvath, Dr Patterson and Dr Balsamo.",
+      "tier": "labeled",
+      "sources": [
+        "UT Dallas repository file path and search index: https://utd-ir.tdl.org/bitstream/handle/10735.1/9300/MAXWELL-DISSERTATION-2021.pdf",
+        "Search-engine index of the same PDF's abstract and committee page (the PDF and the handle at https://hdl.handle.net/10735.1/9300 both failed to fetch: 301 to the library discovery page, and HTTP 500, respectively)"
+      ],
+      "establishes": "That a dissertation of this title, deposited under her name, exists in the UT Dallas repository with a 2021 filename stamp.",
+      "does_not": "I did not open the document. The title, year, supervisor and committee are read off an index, not off the title page. Tiered labeled for that reason.",
+      "counter_record": "One search summary gave the year as 2019; the repository filename says 2021. The filename is the better record but neither was opened.",
+      "date_span": "2021",
+      "persons": ["Christine Yvonne Malina-Maxwell", "Nils Roemer"],
+      "chain_to_promis": false,
+      "notes": "Relevant to the line brief because the subject is Holocaust literature and book-as-object, not search, data or intelligence. It is not a technical doctorate."
+    },
+    {
+      "id": "CM-04-books",
+      "claim": "Author of The Pergamon Dictionary of Perfect Spelling (Pergamon Press, 1977), published by her father's company; reissued as Dictionary of Perfect Spelling (Barrington Stoke, 2005), Spell it Right (Berlitz, 2007) and School Spelling Dictionary (Barrington Stoke, 2012). Creator/co-author of New Riders' Official Internet Yellow Pages (New Riders/Macmillan, 1994) with Czeslaw Jan Grycz, and The McKinley Internet Yellow Pages (1995).",
+      "tier": "documented",
+      "sources": [
+        "ISBN records 0080214252 / 0080219020 / 0080228631 / 0080228666 (Pergamon Press editions)",
+        "Internet Archive scan: https://archive.org/details/dictionaryofperf0000maxw",
+        "Internet Archive scan: https://archive.org/details/newridersofficia00chri",
+        "ISBN 156205306X / 1562054082 (New Riders' Official Internet Yellow Pages, 1994 and 1995 editions)"
+      ],
+      "establishes": "A documented publishing career beginning inside her father's Pergamon Press in 1977 and continuing into internet reference guides in the mid-1990s.",
+      "does_not": "Publication by Pergamon establishes a family commercial relationship, nothing more. It is not evidence about any other Pergamon activity.",
+      "counter_record": "The 1977 dictionary is a children's/dyslexia spelling aid with a long independent commercial life at two later publishers unconnected to the Maxwell family - the simplest reading is that it sold.",
+      "date_span": "1977 - 2012",
+      "persons": ["Christine Yvonne Malina-Maxwell", "Czeslaw Jan Grycz"],
+      "chain_to_promis": false,
+      "notes": "Also reported (labeled) as a school editor at A. Wheaton & Company, Exeter, in the late 1970s - a Pergamon-group imprint."
+    },
+    {
+      "id": "CM-05-information-on-demand",
+      "claim": "She headed Information on Demand (IoD), a Berkeley information-broker firm, from about 1985 until her father's death in November 1991; the company was later renamed Research on Demand. Robert Maxwell acquired IoD; the acquisition is dated 1982 in one account and 'the mid-1980s' in another.",
+      "tier": "contested",
+      "sources": [
+        "US v. Maxwell, ECF 663 Ex. C (2 May 2022), her own description: 'served as President & CEO of an information broker company and two online search engine companies'",
+        "Association of Independent Information Professionals, Sue Rugge biography/memorial - https://aiip.org/Sue-Rugge and https://www.aiip.org/about/awards/sue-rugge-memorial-award",
+        "Sue Rugge obituary, San Francisco Chronicle - https://www.sfgate.com/news/article/Sue-Rugge-2924904.php",
+        "Wikipedia (index only) citing Tatler, April 2000, for the 1982 acquisition date"
+      ],
+      "establishes": "That she ran an information-broker company owned by her father's group in the second half of the 1980s. She states the President & CEO role herself in a filed court document.",
+      "does_not": "It does not establish when she started, when the company was bought, or what it sold to whom. No contract, filing or customer list was found.",
+      "counter_record": "THE STRONGEST COUNTER-RECORD IN THIS LINE. The widely repeated claim that 'Christine and Isabel Maxwell founded Information on Demand in 1971' is contradicted by the information-industry record: Sue Rugge co-founded Information Unlimited in Berkeley in 1971 and founded Information on Demand in 1979; Robert Maxwell acquired Rugge's company in the mid-1980s. Christine Maxwell did not found IoD. She ran a company her father bought.",
+      "date_span": "1979 - 1991",
+      "persons": ["Christine Yvonne Malina-Maxwell", "Sue Rugge", "Robert Maxwell"],
+      "chain_to_promis": false,
+      "notes": "IoD is the hinge of the popular lineage argument. See CM-14 and CM-15: the IoD-to-PROMIS link is Ben-Menashe's, not a document's."
+    },
+    {
+      "id": "CM-06-mckinley-founding",
+      "claim": "The McKinley Group, Inc., Sausalito, California. Inception date 7 December 1993, stated in Excite, Inc.'s audited SEC filing. Founded by Christine and Isabel Maxwell. Launched the Magellan online guide - a human-reviewed, star-rated web directory - in 1995.",
+      "tier": "documented",
+      "sources": [
+        "Excite, Inc. Form 10-K for FY1997, SEC accession 0000891618-98-001484, CIK 0001007297: 'The inception date is June 9, 1994 for Excite and December 7, 1993 for McKinley.' - https://www.sec.gov/Archives/edgar/data/1007297/0000891618-98-001484.txt",
+        "Associated Press, 29 June 1996, carried in The Virginian-Pilot: 'McKinley was started by Christine and Isabel Maxwell, daughters of the late British publisher Robert Maxwell.' - https://scholar.lib.vt.edu/VA-news/VA-Pilot/issues/1996/vp960629/06290210.htm"
+      ],
+      "establishes": "A hard inception date from an audited filing, and contemporaneous wire attribution of the founding to the two sisters.",
+      "does_not": "It does not establish the funding source, the shareholder register, or any third founder. No Companies House or California filing for McKinley was retrieved.",
+      "counter_record": "Secondary accounts add Kevin Maxwell as a co-founder and a 1992 or 1993 founding year. The SEC inception date of 7 December 1993 is the better record. I found NO record naming Bruce Heflinger as a co-founder - see nulls.",
+      "date_span": "1993-12-07 - 1996-08-30",
+      "persons": ["Christine Yvonne Malina-Maxwell", "Isabel Maxwell"],
+      "chain_to_promis": false,
+      "notes": "Magellan was a reviewed directory - editorial staff rating websites - not a crawler and not a data-mining product. The brief asked what Magellan actually was; that is what it was."
+    },
+    {
+      "id": "CM-07-excite-sale",
+      "claim": "Excite, Inc. acquired The McKinley Group on 30 August 1996 by issuing 850,000 shares of Excite common stock, accounted for as a pooling of interests. Excite recorded roughly $2.3 million in 1996 merger-related charges for McKinley.",
+      "tier": "documented",
+      "sources": [
+        "Excite, Inc. Form 10-K FY1997, SEC accession 0000891618-98-001484: 'On August 30, 1996, the Company acquired The McKinley Group, Inc. (\"McKinley\"), the creator of the Magellan On-Line Guide. The transaction was effected through the issuance of 850,000 shares of the Company's Common Stock and was accounted for as a pooling of interests.'",
+        "Associated Press, 29 June 1996 (announcement): 'Excite Inc. will buy McKinley Group Inc. for $18 million' by 'issuing 1.2 million shares of stock.'"
+      ],
+      "establishes": "The closing date, the closing consideration in shares, and the accounting treatment, from an audited filing.",
+      "does_not": "It does not establish a dollar value at closing, nor what any individual shareholder received. Pooling of interests means no purchase price was recorded.",
+      "counter_record": "The $18 million figure is the JUNE ANNOUNCEMENT, at 1.2 million shares. The deal CLOSED in August at 850,000 shares - about 29 percent fewer. Anyone citing '$18 million' is citing the press release, not the filing. The report should use the filing.",
+      "date_span": "1996-06-28 - 1996-08-30",
+      "persons": ["Christine Yvonne Malina-Maxwell", "Isabel Maxwell"],
+      "chain_to_promis": false,
+      "notes": "Excite also licensed the McKinley database and drew royalties from the McKinley Internet Yellow Pages - named in the same 10-K as pre-1996 revenue lines."
+    },
+    {
+      "id": "CM-08-chiliad-corporate",
+      "claim": "Chiliad Publishing, Inc. (dba Chiliad), a Delaware corporation. Federal entity establishment date 30 September 1996; first federal registration 17 December 2001. Offices: West Street, Amherst, Massachusetts, then Dulles Corner Boulevard, Herndon, Virginia. UEI JDHJFZUTMLD4, CAGE 1WKE5, NAICS 541511. SEC CIK 0001093334, with two Regulation D paper notices (REGDEX 15 Feb 2007; REGDEX/A 11 Apr 2007; file no. 021-100336). Now defunct.",
+      "tier": "documented",
+      "sources": [
+        "SEC EDGAR company record, CHILIAD PUBLISHING INC, CIK 0001093334, business address 433 West St Suite 10, Amherst MA 01002 - https://data.sec.gov/submissions/CIK0001093334.json",
+        "SEC EDGAR filing index: REGDEX accession 9999999997-07-007539 (2007-02-15) and REGDEX/A 9999999997-07-019182 (2007-04-11), file 021-100336",
+        "HigherGov awardee record derived from SAM.gov entity registration: Delaware incorporation, established 30 Sept 1996, federally registered 17 Dec 2001, Herndon VA - https://www.highergov.com/awardee/chiliad-publishing-incorporated-13261233/",
+        "SBIR.gov firm portfolio 125293 (address 44 Belchertown Road, Amherst MA; 17 employees) - https://www.sbir.gov/portfolio/125293",
+        "inKnowVation company profile (Herndon VA; profile marked inactive) - https://www.inknowvation.com/sbir/companies/chiliad-publishing-inc"
+      ],
+      "establishes": "Legal form, state of incorporation, addresses, federal identifiers, and the fact of a private Reg D raise in early 2007.",
+      "does_not": "The REGDEX filings are paper notices - EDGAR holds only a one-kilobyte index, not the Form D contents. No investor names, amounts or share classes are available from SEC. I did not obtain a Delaware or Massachusetts charter document.",
+      "counter_record": "The founding year is genuinely contested across sources: 1996 (SAM entity establishment), 1997 (Wikipedia and most commentary), 1998 (inKnowVation), 1999 (Stephen E. Arnold). The only date backed by a government registry is 30 September 1996, and an entity-establishment date in SAM is not the same as a charter date.",
+      "date_span": "1996-09-30 - c.2017",
+      "persons": ["Christine Yvonne Malina-Maxwell"],
+      "chain_to_promis": false,
+      "notes": "'Chiliad Publishing Incorporated' is the legal name on every federal record; 'Chiliad, Inc.' is the trade name. Any search that misses the 'Publishing' variant will miss all the contract data."
+    },
+    {
+      "id": "CM-09-chiliad-technology-lineage",
+      "claim": "Chiliad's natural-language search technology descends from the University of Massachusetts Amherst Center for Intelligent Information Retrieval and its INQUERY probabilistic-inference search engine - not from PROMIS. Co-founder Paul McOwen came out of UMass Amherst's CIIR and had earlier founded Sovereign Hill Software, which in April 1996 took exclusive commercial rights to INQUERY from UMass via ACSIOM. Howard Turtle, who co-created INQUERY's inference-network model with W. Bruce Croft, is named as the third founder by one trade account.",
+      "tier": "labeled",
+      "sources": [
+        "UMass Amherst Computer Science department newsletter SIGBITS, Spring 1997, 'Department transfers InQuery technology to Sovereign Hill' - https://web.cs.umass.edu/csinfo/newsletter/images/sigbits_spring97.pdf",
+        "UMass CIIR timeline entry, 'Sovereign Hill Software established' (April 1996, exclusive commercial rights to INQUERY via ACSIOM) - https://ciir.cs.umass.edu/node/403",
+        "Stephen E. Arnold, Beyond Search, 14 Feb 2012: 'Christine Maxwell, who created the \"Magellan\" search engine, Paul McOwen, co-founder of the National Center for Intelligent Information Retrieval for the National Science Foundation, and Howard Turtle, former chief scientist at West Publishing, formed Chiliad' in 1999, originally to build 'a business-to-consumer shopping site with a natural language search engine', pivoting to the intelligence community after 11 September 2001 - http://www.arnoldit.com/wordpress/2012/02/14/chiliad-virtual-information-sharing/",
+        "Daily Research News Online no. 15626, 19 June 2012, 'Chiliad Names NLP Expert Turtle as Chief Scientist' - http://www.mrweb.com/drno/news15626.htm"
+      ],
+      "establishes": "THIS IS THE ANSWER TO THE LINEAGE QUESTION. Chiliad's search technology has a traceable academic genealogy - UMass Amherst CIIR, INQUERY, Croft and Turtle, commercialised through Sovereign Hill Software - that is documented, public, peer-reviewed, and has nothing to do with PROMIS or Inslaw. The INQUERY transfer to Sovereign Hill is documented in a university department newsletter. PROMIS was a 1970s COBOL case-tracking system for prosecutors' offices; INQUERY is a 1990s probabilistic inference-network retrieval engine. They are not the same kind of thing and there is no transmission path between them.",
+      "does_not": "The founder trio and the 1999 date come from a trade analyst's blog, not a filing - hence labeled. The INQUERY-to-Sovereign-Hill transfer is documented; the Sovereign-Hill-to-Chiliad step rests on McOwen's biography rather than on an assignment record I retrieved.",
+      "counter_record": "Against Turtle as a 1999 founder: the trade press reports Chiliad APPOINTING Turtle as Chief Scientist in June 2012, which is odd for a founder. One of the two accounts is wrong. Also, no patent assignment or technology-licence document connecting Sovereign Hill to Chiliad was located, so the technical inheritance is inferred from personnel, which is exactly the kind of inference the anti-map guardrail warns about - applied here in our own favour, so flag it.",
+      "date_span": "1996-04 - 2012-06",
+      "persons": ["Paul McOwen", "Howard Turtle", "W. Bruce Croft", "Christine Yvonne Malina-Maxwell"],
+      "chain_to_promis": false,
+      "notes": "SYMMETRY NOTE: the same discount that kills the PROMIS-to-Chiliad chain also limits how hard we can push the INQUERY-to-Chiliad chain. Both are lineage-by-personnel. The difference is that the INQUERY side has a documented technology transfer and a matching technical description, and the PROMIS side has neither."
+    },
+    {
+      "id": "CM-10-chiliad-federal-contracts",
+      "claim": "Chiliad Publishing Incorporated holds 60 prime federal contract award records in USAspending totalling approximately $33.11 million, spanning starts from 2005 to 2014. Customers: FBI (Department of Justice), US Air Force, US Navy, US Army, and DoD components administered through DCMA.",
+      "tier": "documented",
+      "sources": [
+        "USAspending.gov API, spending_by_award, recipient_search_text 'chiliad', award types A/B/C/D, FY2008-present window (60 records, $33,110,937.37). Selected FBI awards: DJFA8N0825200 'FEDERATED QUERY SERVICES', $1,909,600, start 26 Sept 2008; DJFA9N0906000 '0200-CHILIAD ELA', $1,702,348, start 24 Aug 2009; DJFA0N0906001 '0200-CHILIAD MAINTENANCE', $823,800, start 22 Feb 2010; DJFA1N0906002 'SW MAINT', $1,442,000, start 24 Feb 2011; DJFA8N805552 'CHILIAD MAINTENANCE', $211,538, start 29 Sept 2008; DJFA9N0905400, $49,950, start 15 Mar 2009; DJFA3N0906004, $48,900, start 17 Jan 2013; DJF141200E0004806, $96,100, 2014; DJF141200E0002963, $48,900, 2014.",
+        "Same source, DoD: FA875005C0091, $2,398,840, start 25 Aug 2005; FA875006C0039, $3,162,255, start 24 Apr 2006; IDV FA875008D0225 task order 0002 'INFORMATION SHARING ENVIRONMENT (ISE) KNOWLEDGE MANAGEMENT', $4,435,557, start 3 June 2009; task order 0003 'CBP ENHANCEMENTS & INTEGRATION', $6,306,000, start 30 Sept 2010; FA860410C7007 'DATA EXFILTRATION CAPABILITY', $334,000, start 30 June 2010; Navy IDV N6523605D6225 task orders 0002-0037 (largely 'SENIOR SOFTWARE ENGINEER' labour); Army W81XWH07P0718 'SOFTWARE MAINTENANCE', $13,458, 2007; DCMA task order 0004 'ONESEARCH/FEDERATED QUERY PILOT MAINTENANCE', $259,718, start 28 Sept 2012.",
+        "Raw pull retained at /tmp/claude-0/-home-user/9915310d-9125-5a6d-9896-9cfd05323aa5/scratchpad/cmax/usaspend.json"
+      ],
+      "establishes": "TOTAL FBI PRIME OBLIGATIONS OF ROUGHLY $6.33 MILLION ACROSS NINE AWARDS, 2008-2014, all of them software licence, federated-query or maintenance line items. Government customership is fully documented and does not need any inference. The largest single award in the set is an Air Force task order for Customs and Border Protection enhancements at $6.31 million.",
+      "does_not": "IT DOES NOT ESTABLISH AN INTELLIGENCE AFFILIATION. Selling federated search software to the FBI on a competitively administered contract is a commercial relationship. There is no CIA, NSA, DIA or ODNI prime award in the data. The 'ISE Knowledge Management' award refers to the statutory Information Sharing Environment created by the Intelligence Reform and Terrorism Prevention Act of 2004 - a governance programme, not an agency. USAspending prime-award coverage is reliable only from FY2008; the 2005-2007 records are present but partial, and subcontract flows through SAIC, Booz Allen, General Dynamics and others are not captured here at all.",
+      "counter_record": "The single largest customer by dollars is the Air Force, not the FBI, and the largest task order is for Customs and Border Protection. The Navy line - by far the most numerous - is body-shop labour billed as 'SENIOR SOFTWARE ENGINEER', which is staffing, not product. A company whose profile is 'FBI counterterrorism' looks different once the whole award table is read.",
+      "date_span": "2005-08-25 - 2017-02-06",
+      "persons": [],
+      "chain_to_promis": false,
+      "notes": "The line brief asked for every documented government customer. This is it. Nothing was found for DHS, Treasury or any IC element as a prime."
+    },
+    {
+      "id": "CM-11-chiliad-sbir",
+      "claim": "Five US Air Force SBIR awards to Chiliad Publishing Inc, 2004-2006, totalling $5,860,174: Metadata Generation (Phase I 2004, $99,456; Phase II 2005, $2,398,840; topic AF04-097), Predictive Analysis Tools for PBA/IPB (Phase I 2005, $99,988; topic AF05-095), Automated Assistance with Metadata Generation (A2MG) Tools for PBA/IPB (Phase I 2005, $99,630; Phase II 2006, $3,162,260; topic AF05-098).",
+      "tier": "documented",
+      "sources": [
+        "SBIR.gov firm portfolio 125293 - https://www.sbir.gov/portfolio/125293",
+        "inKnowVation company profile - https://www.inknowvation.com/sbir/companies/chiliad-publishing-inc",
+        "Cross-checked against USAspending contract numbers FA875005C0091 and FA875006C0039, whose amounts match the two Phase II awards"
+      ],
+      "establishes": "A documented Air Force research relationship from 2004, i.e. before the FBI prime contracts, and the subject matter: automated metadata generation for predictive battlespace awareness / intelligence preparation of the battlespace.",
+      "does_not": "SBIR is an open, competed, published small-business research programme. Winning SBIR topics is not an intelligence relationship and the awards are public by statute.",
+      "counter_record": "The SBIR awards are the earliest federal money in the record, and they are Air Force research, not post-9/11 counterterrorism procurement. That cuts against the tidy 'pivoted to the IC after 9/11 and went straight to the FBI' story: the first money was a competed research topic in 2004.",
+      "date_span": "2004 - 2006",
+      "persons": [],
+      "chain_to_promis": false,
+      "notes": "inKnowVation lists Christine Maxwell on this profile as Co-Founder, Vice Chairman and Interim CEO, and Robert Cook as CTO, with Dan Ferranti hired as CEO in March 2008."
+    },
+    {
+      "id": "CM-12-idw",
+      "claim": "Chiliad is named as one of the contractors on the FBI's Investigative Data Warehouse, alongside SAIC and Convera.",
+      "tier": "labeled",
+      "sources": [
+        "Electronic Frontier Foundation, Report on the Investigative Data Warehouse, April 2009: 'The FBI worked with Science Applications International Corporation (SAIC), Convera and Chiliad to develop the project, among other contractors.' - https://www.eff.org/issues/foia/investigative-data-warehouse-report",
+        "eWeek, 29 April 2009, on Chiliad technology used by the FBI and moving to enterprise markets - https://www.eweek.com/database/data-search-technology-used-by-fbi-makes-its-way-to-enterprises/"
+      ],
+      "establishes": "That the FBI's own search layer over IDW is publicly associated with Chiliad, consistent with the 'FEDERATED QUERY SERVICES' and 'CHILIAD ELA' contract line items.",
+      "does_not": "EFF attaches no specific FOIA document to the Chiliad sentence; it is the report's narrative, not a released record. Tiered labeled for that reason. It establishes nothing about what the software did to the data or who could see it.",
+      "counter_record": "IDW was a very large multi-vendor programme; Chiliad is one name in a list that includes SAIC, whose role dwarfs it. The contract dollars bear that out - under $6.4 million of FBI prime money over six years is a component purchase, not a system.",
+      "date_span": "2004 - 2014",
+      "persons": [],
+      "chain_to_promis": false,
+      "notes": "The FBI IDW is a documented programme. The report can cite it without any of the surrounding synthesis."
+    },
+    {
+      "id": "CM-13-chiliad-roles-and-wade",
+      "claim": "Christine Maxwell was a Chiliad co-founder, Vice Chairman of its board, a board director as of 2019, and served a period as interim CEO (reported 2013). Alan C. Wade, who was CIA Chief Information Officer from 2001 and retired from the Agency in 2005 after a 35-year career, later served as Chiliad's board chairman.",
+      "tier": "labeled",
+      "sources": [
+        "inKnowVation company profile listing her as Co-Founder, Vice Chairman and Interim CEO - https://www.inknowvation.com/sbir/companies/chiliad-publishing-inc",
+        "Bloomberg company/person profiles: Chiliad Inc (0817391D:US) and Alan C Wade (person 15334046)",
+        "Aerospace Corporation trustee biography for Alan C. Wade (CIA CIO from 2001, retired 2005), https://aerospace.org/sites/default/files/2018-07/Wade0618.pdf - cited from search summary; the PDF returned HTTP 403 in this session",
+        "Trade coverage of a July 2013 Chiliad announcement naming her interim CEO"
+      ],
+      "establishes": "That a former CIA CIO chaired the board of a company co-founded by Christine Maxwell, after his retirement from government.",
+      "does_not": "IT DOES NOT ESTABLISH THAT CHILIAD WAS FOUNDED WITH OR BY A SERVING INTELLIGENCE OFFICER.",
+      "counter_record": "DECISIVE, AND IT KILLS A WIDELY REPEATED CLAIM. The synthesis says Chiliad was 'co-founded in 1997 with then-Chief Information Officer at the CIA, Alan C. Wade.' Wade did not become CIA CIO until 2001 and did not leave the Agency until 2005. He cannot have been 'then-CIA CIO' at a 1996, 1997, 1998 or 1999 founding, and a serving CIA officer co-founding a private vendor is not what the record shows. Bloomberg's 'Chairman/Founder' label is a database field, not a filing. The defensible statement is narrower and duller: a retired CIA CIO joined the board of a government-facing search vendor after retirement, which is the ordinary career path of almost every senior federal IT official.",
+      "date_span": "2001 - 2019",
+      "persons": ["Christine Yvonne Malina-Maxwell", "Alan C. Wade", "Paul McOwen", "Robert Cook", "Dan Ferranti", "Craig Norris"],
+      "chain_to_promis": false,
+      "notes": "Wade is living and uncharged. Post-government board service is documented affiliation and nothing more."
+    },
+    {
+      "id": "CM-14-inslaw-report-null",
+      "claim": "The congressional investigative record of the Inslaw affair does not mention Robert Maxwell, Pergamon, Degem, or Information on Demand at all.",
+      "tier": "documented",
+      "sources": [
+        "H.R. Rep. No. 102-857, The INSLAW Affair: Investigative Report by the Committee on the Judiciary together with Dissenting and Separate Dissenting Views, 10 September 1992, Union Calendar No. 491. Full OCR text: https://archive.org/download/InslawAffairInvestigativeReport/TheInslawAffair_djvu.txt",
+        "Word counts run over that full text: 'Maxwell' 0, 'Pergamon' 0, 'Degem' 0, 'Information on Demand' 0. Control terms in the same text: 'Israel' 16, 'Israeli' 7, and the report names Ari Ben-Menashe and Michael Riconosciuto as INSLAW's informants and records the May 1983 delivery of an LEAA version of PROMIS to 'Dr. Ben Orr, a representative of the Government of Israel.'"
+      ],
+      "establishes": "PUBLISHED NULL AT FULL WEIGHT. The 1992 House Judiciary report - the most thorough official investigation of PROMIS ever conducted, and the one that found the Department of Justice 'took, converted and stole' Inslaw's software - never names Robert Maxwell or any Maxwell entity. The OCR is sound: control terms return hits in the same pass.",
+      "does_not": "Absence from the House report does not prove Robert Maxwell had no role. The committee was investigating DOJ conduct and was hampered by non-cooperation. This is a null about the record, not about the world.",
+      "counter_record": "Against the null: the report DOES document an Israeli-government recipient of PROMIS in May 1983 and DOES record Ben-Menashe as an informant to the committee. So the Israel thread is in the official record; the Maxwell thread is not.",
+      "date_span": "1992-09-10",
+      "persons": ["Robert Maxwell", "Ari Ben-Menashe", "Michael Riconosciuto"],
+      "chain_to_promis": false,
+      "notes": "This is the single most useful finding for the report's purposes: it tiers the Maxwell/PROMIS foundation correctly at attributed, sourced to Ben-Menashe's 1992 book Profits of War and downstream reporting, not to the congressional record."
+    },
+    {
+      "id": "CM-15-chain-test",
+      "claim": "No document connects Christine Maxwell, the McKinley Group, Magellan, or Chiliad to PROMIS, to Inslaw, or to any intelligence service.",
+      "tier": "unsupported",
+      "sources": [
+        "Negative result across: H.R. Rep. 102-857 full text (CM-14); SEC EDGAR (Excite 10-K, Chiliad CIK 1093334); USAspending 60-award table; SBIR.gov; USPTO trademark and patent indexes; In-Q-Tel published portfolio; UK Companies House"
+      ],
+      "establishes": "The lineage argument - Robert Maxwell distributed bugged PROMIS, therefore his daughters' search companies continue it - is lineage by resemblance. What actually connects PROMIS to Chiliad is: a surname, and the fact that both are software that searches records. That is the anti-map guardrail exactly. A shared family and a shared subject matter are not a chain.",
+      "does_not": "This is not a finding that nothing happened. It is a finding that no document was produced. Secrecy about customers would be a guaranteed null and is not treated as evidence in either direction.",
+      "counter_record": "The strongest fact the other way, stated plainly: Christine Maxwell ran a company her father owned in the 1980s, and later co-founded a company that sold federated search software to the FBI. Those two facts are both true, both documented, and adjacent in subject matter. What is missing between them is any transmission - no shared code, no shared personnel, no assignment, no contract, no named intermediary, no document. The adjacency is real; the chain is not.",
+      "date_span": "1982 - 2017",
+      "persons": ["Christine Yvonne Malina-Maxwell", "Robert Maxwell"],
+      "chain_to_promis": false,
+      "notes": "Rung 4 (deniable asset) requires a document and there is none. Rung 5 is claimed for no one."
+    },
+    {
+      "id": "CM-16-patents-null",
+      "claim": "No United States patent naming Christine Maxwell as an inventor was found, and no patent assigned to Chiliad was located.",
+      "tier": "unsupported",
+      "sources": [
+        "FreePatentsOnline inventor-field search IN/\"Maxwell, Christine\" across US patents and applications: 'Your search returned no results.'",
+        "FreePatentsOnline specification-text search for 'chiliad': six results, all unrelated (dental abutments, semiconductor emitters, an air-conditioning apparatus, and a Thomson Reuters range-index application).",
+        "USPTO trademark record: CHILIAD DISCOVERY/ALERT, serial 77768156, owner Chiliad Publishing Incorporated"
+      ],
+      "establishes": "Chiliad's marketing described its software as 'patent-pending'. No granted patent under the company name surfaced, and she is not on the face of one.",
+      "does_not": "This null carries a tooling caveat that must travel with it: PatentsView (search.patentsview.org) and Google Patents were both blocked from this environment, Justia returned 403, and USPTO's TSDR and Patent Public Search APIs now require keys. The search rests on one index. Treat as not established rather than established-absent.",
+      "counter_record": "A search snippet attributed US 9,483,472 to Chiliad with Howard Turtle among the inventors. I fetched the patent: it is assigned to Thomson Reuters, priority 1998, and Turtle is on it in his Thomson/West capacity, not a Chiliad one. A near-miss that would have become a false citation if not checked.",
+      "date_span": "1999 - 2016",
+      "persons": ["Christine Yvonne Malina-Maxwell", "Howard Turtle"],
+      "chain_to_promis": false,
+      "notes": "The line brief asked for patent numbers. Do not publish any: none were verified. The US 9,483,472 near-miss is exactly the failure mode to avoid."
+    },
+    {
+      "id": "CM-17-inqtel-null",
+      "claim": "Chiliad does not appear in In-Q-Tel's published portfolio, and no In-Q-Tel investment announcement naming Chiliad was found.",
+      "tier": "unsupported",
+      "sources": [
+        "In-Q-Tel published portfolio - https://www.iqt.org/portfolio (no Chiliad; page paginates to 32 screens and I read the first)",
+        "Targeted searches for In-Q-Tel plus Chiliad across news and VC databases returned nothing"
+      ],
+      "establishes": "The line brief asked for this explicitly, and it is worth stating: In-Q-Tel publishes its portfolio, and Chiliad is not on it. The reported early-2007 raise is associated in aggregator data with Hewlett-Packard, Charlot Capital and Allied Commercial Exporters - not with In-Q-Tel.",
+      "does_not": "I did not paginate the entire portfolio list, and In-Q-Tel's public list is a snapshot that may not carry every historical exit. The aggregator investor names are labeled tier - the corresponding SEC Form D is a 2007 paper filing with no retrievable contents.",
+      "counter_record": "Chiliad did receive government development money - the Arnold account describes '$1.6 million in funding from a joint development project with various intelligence and military agencies' in 2007, and the SBIR Phase II awards are far larger. Government funding of the technology is real; In-Q-Tel equity is not in evidence.",
+      "date_span": "1999 - 2014",
+      "persons": [],
+      "chain_to_promis": false,
+      "notes": "Guaranteed-null rule applies to any argument from In-Q-Tel's silence. The publishable statement is the narrow one: absent from the published portfolio."
+    },
+    {
+      "id": "CM-18-utdallas",
+      "claim": "She has worked at the University of Texas at Dallas as Program Manager of Learning Technologies in the Office of Information Technology, handling special projects in information resources, while also a graduate student and then PhD in the School of Arts and Humanities.",
+      "tier": "labeled",
+      "sources": [
+        "ResearchGate institutional profile: 'The University of Texas at Dallas ... Office of Information Technology: Program Manager' - https://www.researchgate.net/profile/Christine-Malina-Maxwell-2",
+        "UT Dallas academia.edu profile - https://utdallas.academia.edu/christineMalinaMaxwell",
+        "UT Dallas Comet Calendar event listing (PhD student in Humanities)"
+      ],
+      "establishes": "An ongoing university affiliation in an IT programme-management role.",
+      "does_not": "NO DATES ESTABLISHED. No UT Dallas staff directory page was retrieved. Start and end dates are unknown and must not be invented.",
+      "counter_record": "Her May 2022 court letter describes her current work as 'my Internet knowledge discovery company', not a university post - so the two roles overlapped, or the university role had ended or changed by 2022. Unresolved.",
+      "date_span": "unknown",
+      "persons": ["Christine Yvonne Malina-Maxwell"],
+      "chain_to_promis": false,
+      "notes": "Her husband is described in the same court letter as 'an endowed professor of Physics and Art & Technology' - consistent with UT Dallas, and reported elsewhere as Roger Malina. Not pursued; he is a living private individual with no bearing on the line."
+    },
+    {
+      "id": "CM-19-internet-society",
+      "claim": "Internet Society: appointed chair of the Internet Societal Task Force and its steering group by board resolution of 9 December 2000, for an initial one-year term renewable to three; served on the Nominations Committee in 2001-2002; stood for ISOC board chair and lost 13 votes to 3 to Fred Baker; described as a former ISOC Trustee.",
+      "tier": "documented",
+      "sources": [
+        "Internet Society published Board of Trustees resolutions and minutes - https://www.internetsociety.org/board-of-trustees/resolutions/25/ , /minutes/22/ , /minutes/25/ , /minutes/28/ , /board-of-trustees/2001-2002/",
+        "Internet Society 2002 Board of Trustees election results (cited on her Wikipedia entry as reference 15)"
+      ],
+      "establishes": "A documented governance role in internet civil-society institutions in 2000-2002, recorded in the organisation's own published minutes.",
+      "does_not": "ISOC is an open membership body; trusteeship there is an elected volunteer position and carries no access of any kind.",
+      "counter_record": "She lost the chair election 13-3. That is the opposite of an ascent.",
+      "date_span": "2000-12-09 - 2002",
+      "persons": ["Christine Yvonne Malina-Maxwell", "Fred Baker"],
+      "chain_to_promis": false,
+      "notes": "A 1998 Internet Society profile of her (isoc.org/oti/articles/0998/stokes.html) survives only in the Wayback Machine, which was unreachable from this environment."
+    },
+    {
+      "id": "CM-20-ghislaine-sentencing-letter",
+      "claim": "Christine Malina Maxwell submitted a two-page letter dated 2 May 2022 to Judge Alison J. Nathan in support of Ghislaine Maxwell at sentencing, filed as Exhibit C to the defence sentencing submission.",
+      "tier": "documented",
+      "sources": [
+        "United States v. Ghislaine Maxwell, S.D.N.Y. No. 1:20-cr-00330-AJN, ECF No. 663 (filed 15 June 2022), Exhibit C at pages 47-48 of 77. Copy: https://www.courthousenews.com/wp-content/uploads/2022/06/maxwell-sentencing-memo.pdf",
+        "Same filing, Exhibit D: letter of Isabel Maxwell dated 18 May 2022"
+      ],
+      "establishes": "Verbatim, in her own filed words: 'I am fully aware of the charges to which Ghislaine has been found guilty. Despite this fact, I continue to hold my sister in the highest regard.' Her self-description of her career: 'I have taught grade school, worked as an editor and marketing director for an international scientific and educational publishing company, and served as President & CEO of an information broker company and two online search engine companies. Today, my Internet knowledge discovery company strives to help people find actionable insights to foster a better, safer, smarter world.' She describes advising Ghislaine on the TerraMar Project: 'During its development, Ghislaine reached out to me for educational and publishing advice.' She writes that Ghislaine 'found her passion in life at aged 50' with TerraMar and cites National Geographic and Oxford University collaborations.",
+      "does_not": "A character letter is advocacy by a family member at sentencing. It establishes what she said and when, not whether any of it is accurate. The TerraMar advisory role she describes is educational and publishing advice, on her own account.",
+      "counter_record": "The same submission's family narrative is contested by the government's sentencing memorandum in the same docket, and the court imposed 240 months notwithstanding. Her sentence 'As you have stated on three occasions, Ghislaine is not a threat to the public' is her characterisation of the court's bail rulings, not a quotation the court adopted at sentencing.",
+      "date_span": "2022-05-02 - 2022-06-28",
+      "persons": ["Christine Yvonne Malina-Maxwell", "Isabel Maxwell", "Ghislaine Maxwell", "Alison J. Nathan"],
+      "chain_to_promis": false,
+      "notes": "Her filed correspondence address is a mailbox suite on Santa Monica Boulevard, Los Angeles, shared with Isabel Maxwell's letter. Street only; no number recorded, per standing rule. This is the clean, citable primary document for her public position on Ghislaine."
+    },
+    {
+      "id": "CM-21-family-statement",
+      "claim": "After the 29 December 2021 conviction the Maxwell siblings issued a joint statement asserting belief in Ghislaine's innocence and announcing an appeal, and a family member was present in court throughout the trial.",
+      "tier": "labeled",
+      "sources": [
+        "Associated Press coverage as carried by FOX 5 DC, 'Ghislaine Maxwell's family voices faith in her innocence after conviction' - https://www.fox5dc.com/news/ghislaine-maxwells-family-voices-faith-in-her-innocence-after-conviction",
+        "Wire photo captions placing Christine Maxwell leaving the federal courthouse"
+      ],
+      "establishes": "A public family position. The quoted statement: 'We believe firmly in our sister's innocence. We are very disappointed with the verdict. We have already started the appeal tonight, and we believe that she will ultimately be vindicated.'",
+      "does_not": "The statement is attributed to the siblings collectively; I found no version signed by Christine Maxwell individually. Her individual, signed position is the May 2022 letter at CM-20 - use that instead.",
+      "counter_record": "Most of the family's public advocacy in this period was carried by Ian Maxwell, who gave repeated interviews. Christine's public footprint on the trial is thin by comparison.",
+      "date_span": "2021-11 - 2022-06",
+      "persons": ["Christine Yvonne Malina-Maxwell", "Ian Maxwell", "Ghislaine Maxwell"],
+      "chain_to_promis": false,
+      "notes": "The family's UN Working Group on Arbitrary Detention complaint was also reported in this period; I did not retrieve the complaint itself."
+    },
+    {
+      "id": "CM-22-uk-directorship",
+      "claim": "Sole UK directorship on record: The Environment4Change Foundation, company number 11664276, a private company limited by guarantee, incorporated 7 November 2018, SIC 74901 environmental consulting, registered office on Charlbury Grove, Ealing, London. Christine Yvonne Malina-Maxwell was a director from 27 June 2019 to 2 December 2025.",
+      "tier": "documented",
+      "sources": [
+        "UK Companies House company record 11664276 - https://find-and-update.company-information.service.gov.uk/company/11664276",
+        "UK Companies House officers list for 11664276 - https://find-and-update.company-information.service.gov.uk/company/11664276/officers",
+        "UK Companies House officer appointments, Christine Yvonne MALINA-MAXWELL - https://find-and-update.company-information.service.gov.uk/officers/bFPV7btkrtskWvqK91eu7WY8eGE/appointments"
+      ],
+      "establishes": "Her only UK corporate appointment in the register, with exact dates. Fellow directors on the register are two named British directors appointed at incorporation and a third appointed in August 2019.",
+      "does_not": "No connection to Ghislaine Maxwell's TerraMar Project appears in the officer register or the company record. The shared subject matter - environment, oceans - is a shared subject matter and nothing more. Anti-map guardrail.",
+      "counter_record": "The company is a small guarantee company with an environmental-consulting SIC code and no share capital, registered at a residential-scale address; nothing about the filing suggests scale or an intelligence-adjacent purpose.",
+      "date_span": "2018-11-07 - 2025-12-02",
+      "persons": ["Christine Yvonne Malina-Maxwell"],
+      "chain_to_promis": false,
+      "notes": "No house number recorded, per standing rule. Her resignation on 2 December 2025 coincided with a second director's resignation the same day."
+    },
+    {
+      "id": "CM-23-bugged-software-claim",
+      "claim": "The claim that, while heading Information on Demand, 'she helped sell bugged software to several Fortune 500 companies'.",
+      "tier": "unsupported",
+      "sources": [
+        "Claim circulates via Grokipedia and Substack aggregations; no primary source is offered by any of them",
+        "Searched against: H.R. Rep. 102-857 full text (no Maxwell, no Information on Demand); SEC EDGAR; US court dockets via CourtListener"
+      ],
+      "establishes": "Nothing. There is no document, no named buyer, no named product, no case, no regulator action and no contemporaneous report behind it.",
+      "does_not": "It does not even reach attributed tier, because no named person is on record making it as a first-person claim - it is a paraphrase circulating between aggregators.",
+      "counter_record": "An information-broker firm in the 1980s sold literature searches and document delivery against commercial databases - that is what IoD's documented client work was, for customers like IBM research, Bell Labs, Xerox and NASA Ames under its founder. There is no software product in that business model to bug.",
+      "date_span": "1985 - 1991",
+      "persons": ["Christine Yvonne Malina-Maxwell"],
+      "chain_to_promis": false,
+      "notes": "DO NOT PUBLISH THIS CLAIM IN ANY FORM. It asserts criminal conduct by a living, uncharged person on no record at all. It is the exact thing the living-person floor exists to stop."
+    }
+  ],
+  "nulls": [
+    {
+      "searched": "'Maxwell', 'Pergamon', 'Degem', 'Information on Demand' in the full OCR text of H.R. Rep. 102-857, The INSLAW Affair (10 Sept 1992)",
+      "result": "Zero occurrences of each. Control terms in the same pass: 'Israel' 16, 'Israeli' 7, 'Ben Orr' 2. The congressional record of the Inslaw affair does not name Robert Maxwell or any Maxwell entity."
+    },
+    {
+      "searched": "Any document connecting Christine Maxwell, McKinley/Magellan or Chiliad to PROMIS, Inslaw, or an intelligence service",
+      "result": "None found across SEC EDGAR, USAspending, SBIR.gov, USPTO, Companies House, CourtListener and the congressional record. chain_to_promis is false for every finding in this line."
+    },
+    {
+      "searched": "In-Q-Tel published portfolio and investment announcements for Chiliad",
+      "result": "Absent. No IQT announcement, no portfolio entry. Caveat: I read the first of 32 portfolio pages and searched announcements separately. Guaranteed-null rule applies to any inference from IQT silence."
+    },
+    {
+      "searched": "USPTO patents naming Christine Maxwell as inventor (FreePatentsOnline inventor field)",
+      "result": "Zero results. No Chiliad-assigned patent located either. Tooling caveat: PatentsView and Google Patents were blocked from this environment, Justia returned 403, USPTO TSDR and Patent Public Search now require API keys. One index only."
+    },
+    {
+      "searched": "'Bruce Heflinger' as a McKinley Group co-founder",
+      "result": "No record found in any source. The name does not appear in the AP account, the Excite SEC filing, or any retrievable contemporaneous reporting. Do not publish it."
+    },
+    {
+      "searched": "Kevin Maxwell as a McKinley Group co-founder",
+      "result": "Asserted by secondary aggregators; not corroborated. The 29 June 1996 AP account names only Christine and Isabel. Unsupported."
+    },
+    {
+      "searched": "Contents of Chiliad's 2007 Regulation D offering (investors, amount, share class)",
+      "result": "Not obtainable. SEC accession 9999999997-07-007539 and its amendment are REGDEX paper filings; EDGAR holds a one-kilobyte index with no document. Aggregator reports of a ~$4m round on 27 Feb 2007 involving Hewlett-Packard, Charlot Capital and Allied Commercial Exporters are labeled tier only."
+    },
+    {
+      "searched": "Any Israeli government, Mossad or Israeli-company customer, investor or shareholder of Chiliad",
+      "result": "None found. No contract, filing, registry entry or contemporaneous report. The claim circulates only on video and Substack aggregation with no primary source."
+    },
+    {
+      "searched": "CIA, NSA, ODNI, DIA or DHS as a prime contracting customer of Chiliad in USAspending",
+      "result": "None. The prime customers on record are DOJ/FBI, Air Force, Navy, Army and DCMA-administered DoD work. The 'ISE Knowledge Management' award refers to the statutory Information Sharing Environment, not to an intelligence agency."
+    },
+    {
+      "searched": "Christine Maxwell as a party, witness or declarant in US v. Ghislaine Maxwell, Giuffre v. Maxwell, or any Epstein-related docket (CourtListener RECAP)",
+      "result": "None. Her only appearance in the litigation record located is as the author of a character letter filed as a defence sentencing exhibit (CM-20). She was not a witness."
+    },
+    {
+      "searched": "Any documented role for Christine Maxwell in the administration of Robert Maxwell's estate, the Maxwell pension-fund litigation, or the Maxwell Communication Corporation insolvency",
+      "result": "None found. The record of the post-1991 Maxwell business litigation names Ian and Kevin Maxwell, who were tried and acquitted. No Christine Maxwell role surfaced."
+    },
+    {
+      "searched": "Archived chiliad.com management, board and customer pages via the Wayback Machine",
+      "result": "NOT SEARCHED - TOOLING FAILURE, NOT A NULL. web.archive.org was unreachable from this environment throughout the session (tunnel closed mid-exchange on every attempt, CDX API included). The 1998 Internet Society profile of her and all archived Chiliad company pages remain unread. This is the largest open gap in the line."
+    },
+    {
+      "searched": "Delaware or Massachusetts charter documents for Chiliad Publishing Inc",
+      "result": "Not obtained. The Massachusetts corporate search requires an ASP.NET postback and OpenCorporates requires an API token. Delaware incorporation rests on the SAM-derived HigherGov record."
+    },
+    {
+      "searched": "UT Dallas staff directory entry with employment dates for Christine Maxwell",
+      "result": "Not found. Role is labeled from ResearchGate and academia.edu profiles; no dates established."
+    }
+  ],
+  "searched": [
+    "USAspending.gov API - recipient autocomplete and spending_by_award for 'chiliad' (60 prime awards, $33.1m, saved to scratchpad)",
+    "SBIR.gov firm portfolio 125293 and inKnowVation company profile",
+    "SEC EDGAR - company search 'chiliad' and 'excite'; data.sec.gov submissions for CIK 0001093334; full-text search (efts) for 'Chiliad' and 'McKinley Group'; Excite Inc FY1997 Form 10-K accession 0000891618-98-001484 (downloaded and grepped)",
+    "H.R. Rep. 102-857, The INSLAW Affair, full OCR text from archive.org (downloaded, flattened and grepped with control terms)",
+    "UK Companies House - officer search 'Malina-Maxwell', officer appointments, company 11664276 record and officers list",
+    "CourtListener RECAP API - 'Christine Maxwell' alone and with Ghislaine/Epstein",
+    "US v. Ghislaine Maxwell, 1:20-cr-00330-AJN, ECF 663 defence sentencing submission (77pp PDF downloaded, text-extracted, searched for siblings)",
+    "FreePatentsOnline - inventor-field, assignee-field and specification-text searches; Google Patents US9483472B2 (fetched and disproved as a Chiliad patent)",
+    "In-Q-Tel published portfolio at iqt.org/portfolio, plus announcement searches",
+    "EFF Report on the Investigative Data Warehouse (April 2009)",
+    "UMass Amherst CS department SIGBITS newsletter Spring 1997 and CIIR timeline (INQUERY to Sovereign Hill Software, April 1996)",
+    "Stephen E. Arnold / Beyond Search, 14 Feb 2012 Chiliad profile; MrWeb Daily Research News no. 15626, 19 June 2012",
+    "Associated Press via Virginian-Pilot, 29 June 1996 (Excite/McKinley announcement)",
+    "Internet Society published board minutes and resolutions 22, 25, 28 and 2001-2002 nominations",
+    "UT Dallas institutional repository handle 10735.1/9300; Comet Calendar; ResearchGate and academia.edu profiles",
+    "AIIP and SFGate records for Sue Rugge and the founding of Information on Demand",
+    "USPTO trademark serial 77768156 (CHILIAD DISCOVERY/ALERT) via index; TSDR API (now key-gated)",
+    "HigherGov awardee record for Chiliad Publishing Incorporated (SAM-derived)",
+    "Wikipedia entries for Christine Maxwell, Isabel Maxwell, Kevin Maxwell, Robert Maxwell, Investigative Data Warehouse - used as an index to primary sources only, never cited"
+  ],
+  "notes": "BOTTOM LINE FOR THE AUTHOR. Christine Maxwell's career is unusually well documented and the documents are duller than the synthesis. The hard core: McKinley Group inception 7 Dec 1993 and its sale to Excite on 30 Aug 1996 for 850,000 shares, both from an audited SEC filing; roughly $33.1m of federal prime contracts to Chiliad Publishing Inc across 60 awards, of which about $6.33m is FBI across nine awards 2008-2014; $5.86m of competed Air Force SBIR awards 2004-2006; a 2 May 2022 signed letter to Judge Nathan in the Ghislaine Maxwell sentencing record; one UK directorship with exact dates; a 2021 UT Dallas humanities doctorate on Holocaust literature. All of that is publishable as-is with the tier stated.\n\nTHE LINEAGE ARGUMENT DOES NOT SURVIVE THE TEST. Three separate failures. (1) The 1992 House Judiciary Inslaw report - the official investigation - never names Robert Maxwell, Pergamon, Degem or Information on Demand, while naming Ben-Menashe as an informant. So the Maxwell/PROMIS foundation is attributed to Ben-Menashe's book, not documented. (2) Christine Maxwell did not found Information on Demand; Sue Rugge did, in Berkeley in 1979, and Robert Maxwell bought it. The widely repeated '1971, founded by the twins' is simply wrong. (3) Chiliad's technology has a documented academic genealogy running to UMass Amherst's CIIR and the INQUERY inference-network retrieval engine via Paul McOwen and Sovereign Hill Software - a different technical tradition from a 1970s COBOL prosecutor case-tracking system, with no transmission path between them. What connects PROMIS to Chiliad is a surname and a subject matter. Anti-map guardrail, cleanly.\n\nTWO NAMING ERRORS TO CORRECT IF THE REPORT EVER CARRIES THIS. First: Alan C. Wade was NOT 'then-CIA CIO' at Chiliad's founding - he became CIA CIO in 2001 and retired in 2005, and chaired the board afterwards. The claim as circulated is chronologically impossible. Second: '$18 million' for the Excite deal is the June announcement at 1.2m shares; the deal closed in August at 850,000 shares as a pooling of interests with no recorded purchase price.\n\nSYMMETRY CHECK ON MYSELF. The INQUERY finding is also lineage-by-personnel, and I have flagged it as such inside CM-09. It is better evidenced than the PROMIS claim - there is a documented university technology transfer and the technical descriptions match - but it is the same species of argument and should not be published harder than the evidence carries.\n\nUNRESOLVED. The Wayback Machine was unreachable for the whole session, so archived chiliad.com board, management and customer pages and the 1998 Internet Society profile are unread; patent coverage rests on a single index; the 2007 Reg D contents are paper-only at SEC; and no UT Dallas employment dates were established."
+}

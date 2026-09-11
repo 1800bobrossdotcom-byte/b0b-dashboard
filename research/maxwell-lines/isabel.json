@@ -1,0 +1,258 @@
+{
+  "line": "Isabel Maxwell, the Israel technology layer, and the PROMIS lineage claim - tested",
+  "findings": [
+    {
+      "id": "IM-01",
+      "claim": "Isabel Maxwell was a co-founder of The McKinley Group Inc. and served as its Senior Vice President (International Business Development / Corporate Affairs / Investor Relations) from March 1993 to August 1996; McKinley's Magellan directory/search service was sold to Excite, Inc. in June 1996 for about $18 million in stock (1.2 million shares), and she was an Executive Vice President of Excite from August 1996 to October 1996.",
+      "tier": "documented",
+      "sources": [
+        "Commtouch Software Ltd., Prospectus, Form 424B4, filed 13 July 1999, SEC accession 0000891618-99-003102, 'Management' section: https://www.sec.gov/Archives/edgar/data/1084577/0000891618-99-003102.txt",
+        "BackWeb Technologies Ltd., DEF 14A, filed 3 July 2003, SEC accession 0000891618-03-003407, director biography: https://www.sec.gov/Archives/edgar/data/1082064/000089161803003407/f91017dedef14a.htm",
+        "'Internet search engine Excite buys competitor', Virginian-Pilot, 29 June 1996: https://scholar.lib.vt.edu/VA-news/VA-Pilot/issues/1996/vp960629/06290210.htm"
+      ],
+      "establishes": "The dates, titles and corporate shape of Isabel Maxwell's search-engine career, from two SEC-filed documents four years apart that agree with each other and with contemporaneous reporting. Magellan was a curated web directory with site reviews and ratings, sold into a consolidating consumer search market.",
+      "does_not": "Establish anything about the origin of Magellan's technology, any government or intelligence customer, or any connection to PROMIS. The 424B4 and the 2003 proxy carry no employer for her before March 1993 at all, so her pre-1993 working life is simply not in the corporate record.",
+      "counter_record": "The 1999 prospectus gives her McKinley title as 'International Business Development, Corporate Affairs and Investor Relations'; the 2003 proxy gives 'Corporate Affairs and International Relations'. Neither is a technical role, which cuts against reading her as the carrier of any software lineage - and equally, a non-technical title does not prove she was uninvolved with the product.",
+      "date_span": "1993-03 to 1996-10",
+      "persons": ["Isabel Maxwell", "Christine Maxwell"],
+      "chain_to_promis": false,
+      "notes": "The Excite purchase price of $18m in stock is from contemporaneous newspaper reporting, not from an Excite filing I retrieved."
+    },
+    {
+      "id": "IM-02",
+      "claim": "Isabel Maxwell served as President of Commtouch Software Inc. (the US subsidiary of the Israeli company Commtouch Software Ltd.) from February 1997 to March 2001. Commtouch Software Ltd. is incorporated under the laws of the State of Israel, with principal executive offices at 10 Technology Avenue, Ein Vered, Israel and 3945 Freedom Circle, Santa Clara, California; it IPO'd on NASDAQ in July 1999. She held 204,040 ordinary shares (2.1% pre-offering, 1.3% post-offering) acquired by exercising options on 17 March 1999 funded by a promissory note from the company.",
+      "tier": "documented",
+      "sources": [
+        "Commtouch Software Ltd., Form 424B4, 13 July 1999, SEC accession 0000891618-99-003102 - 'Management', 'Certain Transactions', 'Principal Shareholders', 'Office Location', 'Risks Relating to Operations in Israel': https://www.sec.gov/Archives/edgar/data/1084577/0000891618-99-003102.txt",
+        "BackWeb Technologies Ltd., DEF 14A, 3 July 2003, accession 0000891618-03-003407 (gives the Feb 1997 - Mar 2001 span): https://www.sec.gov/Archives/edgar/data/1082064/000089161803003407/f91017dedef14a.htm",
+        "Commtouch Software Ltd., Form 20-F for FY1999, filed 23 June 2000, accession 0000950005-00-000766 (still names her as President of the US subsidiary): https://www.sec.gov/Archives/edgar/data/1084577/0000950005-00-000766.txt",
+        "Commtouch Software Ltd., Form 20-F for FY2000, filed 16 May 2001, accession 0000950005-01-500158 (no longer names her)"
+      ],
+      "establishes": "That the presidency, its dates, and the company's Israeli base are primary-document facts, not inference. What Commtouch did is also documented: outsourced/private-label web email and messaging services, supplied in 14 languages to business partners' websites.",
+      "does_not": "Establish that Commtouch had any government, military or intelligence customer. The prospectus's Israel-risk section is boilerplate about macroeconomic and security conditions plus reserve-duty exposure of Israeli employees; the only Israeli-state touchpoint in the filing is an Office of Chief Scientist grant programme, which is an ordinary R&D subsidy taken by most Israeli technology companies.",
+      "counter_record": "The strongest fact the other way inside the same document: Commtouch is an Israeli-incorporated company whose R&D sat in Israel, its CTO and CEO were Israeli, and it took Israeli government R&D money. That is a real Israeli institutional footprint. It is also the footprint of every Israeli software company of that era, which is exactly why it cannot carry an intelligence inference on its own.",
+      "date_span": "1997-02 to 2001-03",
+      "persons": ["Isabel Maxwell", "Gideon Mantel", "Amir Lev"],
+      "chain_to_promis": false,
+      "notes": "Her SEC-filed title is President of the US subsidiary, not of the Israeli parent. Later bios describing her as 'President of Commtouch' compress that."
+    },
+    {
+      "id": "IM-03",
+      "claim": "The widely repeated claim that Bill Gates and Paul Allen each personally invested $20 million in Commtouch is contradicted by the company's own filings. Two separate $20m events occurred and neither was a personal investment by either man: (1) a concurrent private placement of 1,344,086 ordinary shares at $14.88 to Go2Net, Inc. and Vulcan Ventures Incorporated for $20,000,000 combined, closing with the July 1999 IPO; (2) Microsoft Corporation received a warrant under an email-services agreement and exercised it on 29 December 1999 for 707,965 ordinary shares at $28.25, an aggregate exercise price of approximately $20.0 million.",
+      "tier": "documented",
+      "sources": [
+        "Commtouch Software Ltd., Form 424B4, 13 July 1999, accession 0000891618-99-003102 - dilution table ('Go2Net and Vulcan ... 1,344,086 ... $20,000,000 ... $14.88') and risk factor on concentration of ownership",
+        "Commtouch Software Ltd., Form F-1, 6 March 2000, accession 0000950005-00-000420 - Microsoft email services agreement and warrant exercise: https://www.sec.gov/Archives/edgar/data/1084577/0000950005-00-000420.txt"
+      ],
+      "establishes": "A specimen kill on a load-bearing detail of the popular synthesis. Vulcan Ventures was Paul Allen's corporate investment vehicle and was a shareholder in Go2Net, a separately listed company; the $20m was theirs jointly, not Allen's personally. The Microsoft money came from the corporation under a commercial services agreement, not from Gates. The F-1 adds, in the company's own words, that 'we may not realize any revenues or any other business benefits from this transaction because Microsoft is not obligated to use our services with respect to any website'.",
+      "does_not": "Show that the underlying investments were unremarkable. Go2Net/Vulcan took roughly 16.8% of the company and the prospectus says Go2Net 'will be able to significantly influence and possibly exercise control over most matters requiring approval by our shareholders'. That is a large, real position.",
+      "counter_record": "Paul Allen's vehicle really did put $20m into an Israeli email company run by Robert Maxwell's daughter, and Microsoft really did take a ~$20m equity position months later. Killing the 'personally, each' framing does not make the capital flows small or ordinary; it makes them corporate and disclosed.",
+      "date_span": "1999-07 to 1999-12",
+      "persons": ["Isabel Maxwell", "Paul Allen", "Bill Gates"],
+      "chain_to_promis": false,
+      "notes": "Trace this one to its source before repeating it anywhere: the 'each personally $20m' version is what search engines return, and it is wrong in the primary record."
+    },
+    {
+      "id": "IM-04",
+      "claim": "Isabel Maxwell was a director of BackWeb Technologies Ltd. (NASDAQ: BWEB, an Israeli company) from February 2002, elected by shareholders as an Outside Director under the Israeli Companies Law for a three-year term commencing 28 February 2002; she filed SEC Forms 4 as an insider in 2003 and 2004. Gil Shwed, co-founder of Check Point Software, served on the same board from March 1999. From March 2001 she was a consultant to the private equity firm Apax Partners.",
+      "tier": "documented",
+      "sources": [
+        "BackWeb Technologies Ltd., DEF 14A, 3 July 2003, accession 0000891618-03-003407: https://www.sec.gov/Archives/edgar/data/1082064/000089161803003407/f91017dedef14a.htm",
+        "SEC Form 4, MAXWELL ISABEL (CIK 0001259519) / BACKWEB TECHNOLOGIES LTD (CIK 0001082064), filed 13 Aug 2003, accession 0001209191-03-016896; and 12 Aug 2004, accession 0001209191-04-040596",
+        "SEC EDGAR full-text search for \"Isabel Maxwell\": 24 filings, all BackWeb Technologies Ltd."
+      ],
+      "establishes": "Her second documented Israeli-company role, in a formal statutory capacity created by Israeli corporate law. It also fixes the limit of her SEC footprint: EDGAR full-text search (which covers 2001 onward) returns her name in BackWeb filings and nowhere else.",
+      "does_not": "Establish any intelligence relationship. Gil Shwed's service in Unit 8200 before founding Check Point is widely reported but is not in the BackWeb proxy, and sitting on a board with someone is not a chain in either direction. An 'Outside Director' under Israeli law is by definition an independent, non-affiliated appointee - the opposite of an insider placement.",
+      "counter_record": "The strongest fact the other way is structural: Israeli technology boards of that period routinely included 8200 alumni because 8200 alumni founded much of the industry. That makes proximity to former signals-intelligence personnel near-certain for anyone on an Israeli tech board, and therefore near-worthless as evidence about any particular director.",
+      "date_span": "2002-02 to 2006",
+      "persons": ["Isabel Maxwell", "Gil Shwed", "Eli Barkat"],
+      "chain_to_promis": false,
+      "notes": "Her Apax Partners consultancy from March 2001 is stated in the BackWeb proxy; I did not find a separate Apax record confirming it."
+    },
+    {
+      "id": "IM-05",
+      "claim": "Isabel Maxwell described her Israel-facing work in her own words to Israeli media: she has functioned as a liaison between early-stage Israeli companies and US angel investors and has helped US companies open Israeli development centres; she told Haaretz she took the Commtouch presidency 'from the heart', as a chance to continue her father's involvement in Israel. By 2006 she held herself out as honorary/emeritus president of Commtouch, chairperson of the Israel Venture Network Social Entrepreneur Fellowship Program, a member of the Peres Center for Peace international board, and CEO of the Israeli content-filtering company iCognito Technologies (PureSight).",
+      "tier": "attributed",
+      "sources": [
+        "Ronit Adler, 'Isabel Maxwell: I think my father's death was an accident, my sister thinks it was murder', Globes, 9 February 2006: https://en.globes.co.il/en/article-1000059949",
+        "Haaretz interview (2002), quoted secondarily; not retrieved in original"
+      ],
+      "establishes": "That she publicly and repeatedly framed her career around Israel and around continuity with her father's Israeli connections. That framing is hers, on the record, and is the reason the lineage narrative has purchase.",
+      "does_not": "Establish any of the roles as a fact independent of her own account. This is a named person's claim about herself carried by an interviewer - the definition of the attributed tier. It says nothing about intelligence: 'continuing my father's involvement in Israel' is a statement about philanthropy, business and identity unless a document makes it more.",
+      "counter_record": "The Peres Center's own current International Board of Governors page (fetched 11 September 2026) does not list Isabel Maxwell. Her 'Governor since 1999' line traces to her own conference and WEF bios, not to a Peres Center record I could retrieve. The claim may be true and simply stale on their site, but as of today it is uncorroborated by the institution named.",
+      "date_span": "1997 to 2010",
+      "persons": ["Isabel Maxwell"],
+      "chain_to_promis": false,
+      "notes": "The Globes piece is contemporaneous reporting, but what it reports is her self-description; tiering it documented would launder a bio into a record."
+    },
+    {
+      "id": "PR-01",
+      "claim": "No official finding in the Inslaw/PROMIS record ever named Robert Maxwell as a distributor of PROMIS. The House Judiciary Committee's investigative report 'The INSLAW Affair' (H.R. Rep. 102-857, 10 September 1992) does not contain the name Maxwell at all. The Report of Special Counsel Nicholas J. Bua (March 1993) does not contain it either. The name appears only in the later Report of the United States Department of Justice On the Review of Special Counsel Nicholas J. Bua's Report on the Allegations of INSLAW, Inc. (27 September 1994), in a section created to address an allegation INSLAW first raised in a February 1994 addendum - and that section rejects it.",
+      "tier": "documented",
+      "sources": [
+        "House Committee on the Judiciary, 'The INSLAW Affair: Investigative Report', H.R. Rep. 102-857, 10 Sept 1992, full text: https://archive.org/stream/InslawAffairInvestigativeReport/TheInslawAffair_djvu.txt (term frequency for 'Maxwell': 0)",
+        "'Report of Special Counsel Nicholas J. Bua to the Attorney General of the United States Regarding the Allegations of INSLAW, Inc., March 1993' and 'Report of the United States Department of Justice On the Review of Special Counsel Nicholas J. Bua's Report on the Allegations of INSLAW, Inc., September 27, 1994', released together by DOJ OIP under FOIA AG/13-00675, 30 Sept 2013: https://www.governmentattic.org/9docs/DOJ-OIP-INSLAW_1993.pdf (all 20 'Maxwell' hits fall inside the 1994 report, which begins at PDF p. 276)"
+      ],
+      "establishes": "The crux, from the official record itself. The 1994 DOJ report, section III.E.3 'The Alleged Involvement of Robert Maxwell in the International Distribution of PROMIS' (report pp. 84-85), states: 'There is simply no evidence -- again, other than the statements by Mr. Ben-Menashe -- of any involvement of Mr. Maxwell in the sale or distribution of PROMIS.' On INSLAW's inference from FBI FOIA release codes that Albuquerque had run a foreign counterintelligence investigation of Maxwell and Pergamon over PROMIS sales to New Mexico defence installations, it states: 'We disagree that such an inference is reasonable. There is no evidence supporting this flight of fancy by INSLAW ... none of the documents in question even mentioned INSLAW or PROMIS. The FBI made unredacted versions of the documents available to us for our review. None of the documents referred to INSLAW or PROMIS or to any other subject even remotely related to INSLAW's allegations. In short, there is nothing of which we are aware that links Mr. Maxwell to PROMIS.'",
+      "does_not": "Establish that Robert Maxwell had no intelligence relationship with anyone, or that the DOJ review was disinterested. It establishes only that the Maxwell-PROMIS link was examined by the government and rejected, and that its sole affirmative source in the official record was Ben-Menashe.",
+      "counter_record": "The 1994 report is the accused party reviewing itself. The House Judiciary Committee's 1992 report is a sustained finding that the Department was institutionally incapable of investigating INSLAW honestly - its section VI is headed 'The Department has proven to be incapable of a forthright investigation of the INSLAW matter'. Under the symmetry rule the same discount must run both ways: a DOJ self-exoneration is weak evidence, and it is the only official document that ever looked at Maxwell. The honest statement is that the claim was never corroborated, not that it was authoritatively disproved. The FBI documents themselves were seen only by the reviewers, not published.",
+      "date_span": "1992-09 to 1994-09",
+      "persons": ["Robert Maxwell", "Ari Ben-Menashe", "William Hamilton", "Nancy Hamilton", "Nicholas J. Bua"],
+      "chain_to_promis": false,
+      "notes": "Guaranteed-null discipline applies to the FBI redactions: INSLAW read meaning into unredacted routing codes on a 20-page January 1994 FOIA release. Codes are not content."
+    },
+    {
+      "id": "PR-02",
+      "claim": "The bankruptcy court's findings against DOJ were real and were about DOJ conduct only, and they were undone on jurisdictional grounds. Judge George Bason found the Department took INSLAW's Enhanced PROMIS through 'trickery, fraud and deceit'; District Judge William Bryant affirmed, finding the Department 'acted willfully and fraudulently' and 'took, converted and stole' the software. On 7 May 1991 the D.C. Circuit reversed - the House Judiciary Committee's own section heading is 'Appeals Court Reverses INSLAW's Victory on Primarily Jurisdictional Grounds' - and the bankruptcy proceeding was, in the 1994 DOJ report's words, 'eventually dismissed for lack of jurisdiction'.",
+      "tier": "documented",
+      "sources": [
+        "H.R. Rep. 102-857, 10 Sept 1992, sections on Judge Bason's findings, Judge Bryant's decision, and section III.G: https://archive.org/stream/InslawAffairInvestigativeReport/TheInslawAffair_djvu.txt",
+        "United States v. Inslaw, Inc., 932 F.2d 1467 (D.C. Cir. 1991), argued 17 Jan 1991, decided 7 May 1991",
+        "DOJ Report on the Review of Special Counsel Bua's Report, 27 Sept 1994, in https://www.governmentattic.org/9docs/DOJ-OIP-INSLAW_1993.pdf"
+      ],
+      "establishes": "That the strong, quotable language about theft is judicial and belongs to the contract dispute between INSLAW and the Department of Justice. It is the part of the story that is real.",
+      "does_not": "Reach Israel, Mossad, Robert Maxwell, or any foreign distribution. The words 'Maxwell', and any finding of foreign sale, appear nowhere in those judgments. The House Committee itself placed foreign distribution under a heading beginning 'Significant questions remain unanswered' and under subheads worded as questions ('Does the Government of Canada have the PROMIS software?', 'Did the CIA assist in the sale of PROMIS?'), not as findings.",
+      "counter_record": "The committee maintained after the reversal that 'the recent ruling by the D.C. Circuit Court of Appeals does nothing to vitiate those conclusions, the product of an extensive record compiled under oath by two Federal jurists.' The vacatur was jurisdictional; it did not adjudicate that the conduct findings were wrong.",
+      "date_span": "1988-02 to 1991-05",
+      "persons": ["George Bason", "William Bryant", "William Hamilton"],
+      "chain_to_promis": true,
+      "notes": "chain_to_promis is true here only in the literal sense that these documents ARE the PROMIS record. They contain no Maxwell link."
+    },
+    {
+      "id": "PR-03",
+      "claim": "The one documented PROMIS-to-Israel transfer in the official record is a transfer of the public-domain LEAA version, not Enhanced PROMIS. Department memoranda by Jack S. Rugh dated 22 April 1983 and 12 May 1983 record that DOJ produced 'the LEAA DEC PDP 11/70 version of PROMIS on magnetic tape along with the printed specifications for that tape, as well as two printed volumes of PROMIS documentation for the LEAA version of the system' for 'Dr. Ben Orr of the Government of Israel' before he left the United States on 16 May 1983.",
+      "tier": "documented",
+      "sources": [
+        "H.R. Rep. 102-857, 10 Sept 1992, quoting Rugh memoranda of 22 April 1983 and 12 May 1983: https://archive.org/stream/InslawAffairInvestigativeReport/TheInslawAffair_djvu.txt"
+      ],
+      "establishes": "That a real, dated, documented PROMIS transfer to the Government of Israel happened - and that its object was the LEAA public-domain version, which INSLAW never claimed as proprietary. The committee also recorded its own unease: 'Given the international dimensions to the decisions, it is difficult to accept the notion that a group of low-level Department personnel decided independently to get in touch with the Government of Israel to arrange for transfer of the PROMIS software.'",
+      "does_not": "Establish that Enhanced PROMIS reached Israel. The committee's own language is that the thin documentation 'only creates new questions'. Questions are not findings. And nothing in this transaction involves Robert Maxwell, Pergamon, or any Maxwell company.",
+      "counter_record": "Against the reading that this is innocuous: the committee thought the transfer was handled at a level and with a documentation trail that did not fit a routine public-domain software hand-off, and said so in print. Against the reading that it is the smoking gun: the version transferred is the one that was free to transfer.",
+      "date_span": "1983-04 to 1983-05",
+      "persons": ["Jack S. Rugh", "Ben Orr"],
+      "chain_to_promis": true,
+      "notes": "This is the factual seed the whole Israel strand grows from, and it is smaller than the strand."
+    },
+    {
+      "id": "PR-04",
+      "claim": "The sole affirmative source for Robert Maxwell's alleged role in PROMIS distribution is Ari Ben-Menashe, whose credibility was destroyed in the official record, and who told the DOJ reviewers that he had never affirmatively said the software he was describing was INSLAW's PROMIS.",
+      "tier": "documented",
+      "sources": [
+        "Report of Special Counsel Nicholas J. Bua, March 1993, p. 77 (PDF p. 84) and p. 81, in https://www.governmentattic.org/9docs/DOJ-OIP-INSLAW_1993.pdf",
+        "DOJ Report on the Review of Bua's Report, 27 Sept 1994, pp. 35, 84-85, same PDF",
+        "Joint Report of the October Surprise Task Force (House, 102d Cong.), quoted therein at pp. 97 and 110"
+      ],
+      "establishes": "Two things, both from primary text. First, the Task Force finding quoted by DOJ: 'Aside from early biographical details, virtually everything Ben-Menashe told the Task Force has been found to be false' (p. 97), and 'According to numerous pieces of documentary evidence, Ben-Menashe's account is demonstrably false from beginning to end' (p. 110). Second, and more damaging to the lineage claim than any credibility attack: the Bua report records that Ben-Menashe told investigators 'he did not believe that DOJ had distributed Inslaw's software to any other person or entity', and that 'he simply let the Hamiltons and others \"assume\" that he was referring to Inslaw's PROMIS when he discussed the PROMIS program that he says Earl Brian distributed, even though in his mind he was referring to the different software program developed by NSA.' Bua concluded his 'testimony offers no support for the allegation'.",
+      "does_not": "Prove that nothing happened. A discredited witness is not a negative finding, and the guaranteed-null rule cuts both ways: his unreliability is evidence about him, not about the world.",
+      "counter_record": "The strongest fact the other way is procedural and is in the same footnote: DOJ conceded 'we do not have a copy of the testimony Ben-Menashe gave to the House Committee, [so] we cannot know whether he is now misstating what he told them, or whether the investigators misinterpreted what he said.' The House report, by contrast, recorded him as referring to INSLAW's PROMIS. So the recharacterisation is itself contested - which is worse for the claim than if it were clean, because the source is then inconsistent under oath in both directions.",
+      "date_span": "1991 to 1994",
+      "persons": ["Ari Ben-Menashe", "Earl Brian", "Michael Riconosciuto"],
+      "chain_to_promis": true,
+      "notes": "Portions of both reports are redacted under Fed. R. Crim. P. 6(e) (grand jury). Those redactions are a guaranteed null and are not read for meaning here."
+    },
+    {
+      "id": "LN-01",
+      "claim": "The Maxwell-PROMIS-to-Maxwell-daughters lineage argument, as made by Whitney Webb (Unlimited Hangout, 'Isabel Maxwell: Israel's \"Back Door\" Into Silicon Valley', July 2020) and before her by Gordon Thomas and Martin Dillon ('Robert Maxwell, Israel's Superspy', 2002), rests at every link on attributed sources, not documents.",
+      "tier": "attributed",
+      "sources": [
+        "Whitney Webb, Unlimited Hangout, July 2020: https://unlimitedhangout.com/2020/07/investigative-reports/isabel-maxwell-israels-back-door-into-silicon-valley/",
+        "Gordon Thomas and Martin Dillon, 'Robert Maxwell, Israel's Superspy: The Life and Murder of a Media Mogul' (2002) - publisher and review descriptions of its sourcing"
+      ],
+      "establishes": "The shape of the citation chain, which is the thing worth recording. Webb's PROMIS premise is carried over from an earlier instalment of her own series and from Thomas and Dillon. Thomas and Dillon rest on unnamed 'well-placed sources', on interviews (Victor Ostrovsky; an unnamed 'Efraim'; unnamed former officials), and on the Ben-Menashe strand. The terminal citation for 'Robert Maxwell distributed PROMIS for Mossad' is Ben-Menashe. No document is produced at any link.",
+      "does_not": "Establish that the authors are wrong about Robert Maxwell, who is dead and outside the living-person floor. It establishes that the claim has never been documented, and that its repetition across outlets is recirculation of one uncorroborated source, not accumulation of evidence.",
+      "counter_record": "The strongest point for the lineage writers: the government documents that reject the Maxwell link are DOJ documents about DOJ's own conduct, and the House Judiciary Committee found DOJ incapable of honest self-investigation. The rejection therefore comes from an interested party. The lineage writers are entitled to that objection - and it still leaves them with no affirmative document.",
+      "date_span": "2002 to 2020",
+      "persons": ["Whitney Webb", "Gordon Thomas", "Martin Dillon", "Ari Ben-Menashe"],
+      "chain_to_promis": false,
+      "notes": "One detail in Webb's piece I could not corroborate at all: that Isabel Maxwell worked at 'Information on Demand', characterised there as an Israeli intelligence front used by her father to sell bugged PROMIS. Neither of her two SEC-filed biographies lists any pre-1993 employer, and I found no record placing her at that company. Recorded as unsupported."
+    },
+    {
+      "id": "LN-02",
+      "claim": "Chiliad Publishing Incorporated held documented US federal contracts, including with the FBI and the Department of Defense - at least 50 award records totalling roughly $20.1 million in the USAspending data from 2006 onward, including FBI awards DJFA8N0825200 ($1,909,600, 26 Sept 2008), DJFA9N0906000 ($1,702,348, 24 Aug 2009) and DJFA1N0906002 ($1,442,000, 24 Feb 2011), and Air Force awards FA8750-05-C-0091 ($2,398,840) and FA8750-06-C-0039 ($3,162,255).",
+      "tier": "documented",
+      "sources": [
+        "USAspending.gov API, spending_by_award, recipient 'Chiliad Publishing Incorporated', queried 11 September 2026: https://api.usaspending.gov/api/v2/search/spending_by_award/"
+      ],
+      "establishes": "That a company bearing the Chiliad name really did sell data-search software to the FBI and to DoD, at scale, for the better part of a decade. This is the single strongest fact the lineage narrative has, and it should be stated at full strength rather than discounted: the surface rhyme with PROMIS - Maxwell-linked company, case-and-document search software, FBI customer - is not imaginary.",
+      "does_not": "Connect any of it to PROMIS, to Inslaw, to Robert Maxwell, or to any intelligence service. A competitively awarded software contract is a commercial relationship. I also did not independently verify that 'Chiliad Publishing Incorporated' in the federal recipient data is the entity founded by Christine Maxwell; the name and period fit, but the identity match is not confirmed by a document I hold.",
+      "counter_record": "The rhyme cuts the other way once stated plainly. PROMIS was 1970s-80s COBOL case-tracking for prosecutors' offices; Chiliad's product was 2000s unstructured-text search over large document stores. They share a customer and a verb. Descent requires a transfer, and there is no document of one. This is the anti-map guardrail in its clearest form: same agency, same problem domain, thirty years apart, no chain.",
+      "date_span": "2005-08 to 2014-01",
+      "persons": ["Christine Maxwell"],
+      "chain_to_promis": false,
+      "notes": "Chiliad belongs to the Christine line; recorded here only because the lineage test required it. USAspending contract-level search is limited to 2007-10-01 onward by default; earlier awards surfaced via the recipient query and should be re-pulled from FPDS if cited."
+    },
+    {
+      "id": "KM-01",
+      "claim": "Kevin Maxwell and Ian Maxwell were tried at the Central Criminal Court (Old Bailey) on charges brought by the Serious Fraud Office arising from the diversion of Maxwell pension fund assets, and on 19 January 1996, after a trial of roughly eight months, the jury acquitted both. Kevin Maxwell had earlier, in 1992, been declared bankrupt with debts of about £406.5 million, then the largest personal bankruptcy in UK history. In 2011 he was disqualified from acting as a company director for eight years in connection with his conduct at a construction company.",
+      "tier": "documented",
+      "sources": [
+        "'UK fraud trial clears Maxwell brothers', UPI, 19 January 1996: https://www.upi.com/Archives/1996/01/19/UK-fraud-trial-clears-Maxwell-brothers/5765822027600/",
+        "'Media Magnate Maxwell's Sons Acquitted Of Charges They Raided Pension Fund', Washington Post, 20 January 1996: https://www.washingtonpost.com/archive/politics/1996/01/20/media-magnate-maxwells-sons-acquitted-of-charges-they-raided-pension-fund/1841c6cf-8340-4e9e-876c-9f862b4685b5/",
+        "'Maxwell Brothers Acquitted In Pension-Fund Fraud Case', Seattle Times, 19 January 1996: https://archive.seattletimes.com/archive/?date=19960119&slug=2309646",
+        "'Britain: Maxwell brothers escape disqualification proceedings', WSWS, 4 April 2002: https://www.wsws.org/en/articles/2002/04/maxw-a04.html"
+      ],
+      "establishes": "The acquittal, which is load-bearing and must be stated wherever the pension scandal is mentioned. A jury heard the Serious Fraud Office's case in full and returned not guilty on every count against both brothers.",
+      "does_not": "Establish that the pension money was not taken. The assets were diverted; that is not in dispute and was the subject of separate civil and regulatory processes. An acquittal is a finding that the Crown did not prove criminal dishonesty beyond reasonable doubt against these two defendants, nothing more and nothing less.",
+      "counter_record": "The strongest fact the other way is the one the acquittal does not touch: pensioners lost money that was demonstrably moved out of the funds, and Kevin Maxwell's 1992 bankruptcy and his 2011 eight-year director disqualification are both real adverse records. Neither is a criminal conviction and neither concerns PROMIS or intelligence.",
+      "date_span": "1992 to 2011",
+      "persons": ["Kevin Maxwell", "Ian Maxwell"],
+      "chain_to_promis": false,
+      "notes": "The 2011 disqualification and the 1992 bankruptcy figure come from secondary reporting; if cited, pull the Insolvency Service / Companies House disqualification register entry first. Both brothers are living and were acquitted."
+    }
+  ],
+  "nulls": [
+    {
+      "searched": "The full text of the House Judiciary Committee's 'The INSLAW Affair' (H.R. Rep. 102-857, 10 Sept 1992) for 'Maxwell'.",
+      "result": "Zero occurrences. The name of Robert Maxwell does not appear anywhere in the 1992 congressional investigative report on PROMIS. This is the report most often invoked as establishing the PROMIS conspiracy."
+    },
+    {
+      "searched": "The Report of Special Counsel Nicholas J. Bua (March 1993) for 'Maxwell'.",
+      "result": "Zero occurrences in the Bua report proper. All twenty 'Maxwell' hits in the combined DOJ FOIA release fall inside the separate September 1994 DOJ review, which addresses the claim only because INSLAW raised it in a February 1994 addendum."
+    },
+    {
+      "searched": "Both official Inslaw records (1992 House report; 1993 Bua + 1994 DOJ reports) for 'Magellan', 'McKinley', 'Chiliad', 'Commtouch', 'Isabel', 'Christine'.",
+      "result": "Zero occurrences of every term in both documents. Stated with its limit: this null is partly chronological - Magellan launched 1995, the Commtouch presidency began 1997, Chiliad later still, so no 1992-94 investigator could have named them. The non-trivial half of the null is that the one Maxwell venture those investigators COULD have named, Pergamon, was examined and produced nothing."
+    },
+    {
+      "searched": "Any document connecting Magellan/McKinley Group, Commtouch Software, or Chiliad to PROMIS, to Inslaw, or to an intelligence service - via SEC filings (424B4, 20-F, F-1, DEF 14A, Forms 4), SEC EDGAR full-text search, USAspending federal award data, and the official Inslaw record.",
+      "result": "Null. No such document found. The Commtouch prospectus and 20-Fs name no government, military or intelligence customer of any country. EDGAR full-text search for 'Isabel Maxwell' returns 24 filings, all of them BackWeb Technologies. Resemblance between software that searched data in 1982 and software that searched data in 2001 is not evidence of descent, and no transfer document exists linking them."
+    },
+    {
+      "searched": "Whitney Webb's claim that Isabel Maxwell worked at 'Information on Demand', described as an Israeli intelligence front used by Robert Maxwell to sell bugged PROMIS.",
+      "result": "Unsupported. No record placing Isabel Maxwell at that company was found. Her two SEC-filed biographies (1999 Commtouch prospectus, 2003 BackWeb proxy) list no employer before The McKinley Group in March 1993."
+    },
+    {
+      "searched": "Corroboration from the Peres Center for Peace that Isabel Maxwell is or was a Governor of its international board since 1999.",
+      "result": "Not corroborated. The Peres Center's current International Board of Governors page, fetched 11 September 2026, does not list her. The claim traces to her own WEF and conference biographies and to the 2006 Globes interview. Attributed, not documented."
+    },
+    {
+      "searched": "Wayback Machine CDX index and archived Peres Center board pages for a historical listing.",
+      "result": "Not retrievable from this environment - web.archive.org CDX queries were reset by the outbound proxy and WebFetch is blocked for that host. The archived check remains open."
+    },
+    {
+      "searched": "Any charge, indictment, regulatory action or adverse court finding against Isabel Maxwell in connection with PROMIS, Inslaw, or any intelligence matter.",
+      "result": "Null. None found in any record consulted."
+    }
+  ],
+  "searched": [
+    "SEC EDGAR company search and submissions API for Commtouch Software Ltd. / CYREN Ltd. (CIK 0001084577) - full pre-2002 filing index",
+    "Commtouch Form 424B4 (13 July 1999, accession 0000891618-99-003102) - full text",
+    "Commtouch Form F-1 (6 March 2000, accession 0000950005-00-000420) - full text",
+    "Commtouch Form 20-F FY1999 (23 June 2000) and FY2000 (16 May 2001)",
+    "Commtouch Forms 6-K, Aug-Dec 1999 (Microsoft agreement; Go2Net/Vulcan placement)",
+    "SEC EDGAR full-text search: \"Isabel Maxwell\" (24 hits), \"Christine Maxwell\" (7 hits), \"Chiliad\" (30 hits)",
+    "BackWeb Technologies Ltd. DEF 14A 3 July 2003; Forms 4 filed 2003 and 2004 by MAXWELL ISABEL (CIK 0001259519)",
+    "House Judiciary Committee, H.R. Rep. 102-857, 'The INSLAW Affair' (10 Sept 1992) - full text, term-frequency analysis",
+    "DOJ OIP FOIA release AG/13-00675: Bua Report (March 1993) + DOJ Review Report (27 Sept 1994), 466pp - full text extraction and page-level term location",
+    "United States v. Inslaw, Inc., 932 F.2d 1467 (D.C. Cir. 1991) - citation and holding via secondary sources (Justia and OpenJurist both returned 403 to this environment)",
+    "CourtListener opinion index for Inslaw (263 results; opinion bodies require API authentication)",
+    "USAspending.gov API - federal award search for 'Chiliad' and 'Commtouch'",
+    "Companies House (UK) officer appointments for Isabel Sylvia Maxwell",
+    "Globes (Israel), 9 Feb 2006 interview by Ronit Adler",
+    "Virginian-Pilot, 29 June 1996, Excite/McKinley acquisition",
+    "Peres Center for Peace & Innovation, current International Board of Governors page",
+    "Unlimited Hangout, Whitney Webb, July 2020 - citation-chain analysis",
+    "Contemporaneous wire and newspaper reporting of the 19 Jan 1996 Maxwell brothers acquittal (UPI, Washington Post, Seattle Times)"
+  ],
+  "notes": "Bottom line on the line I was given. Isabel Maxwell's Israeli technology career is documented in primary SEC filings and is larger and better evidenced than most treatments make it: President of Commtouch's US subsidiary Feb 1997 - Mar 2001, statutory Outside Director of BackWeb from Feb 2002, and a self-described liaison between Israeli startups and US capital. None of it touches PROMIS. The lineage claim fails at its first link, not its last: Robert Maxwell's alleged role in PROMIS distribution was never the finding of any official body. The 1992 House report does not contain his name; neither does the 1993 Bua report; the only official document that examines him at all is the DOJ's September 1994 review, which concluded 'there is nothing of which we are aware that links Mr. Maxwell to PROMIS' - and the sole affirmative source it could identify was Ari Ben-Menashe, whom the October Surprise Task Force found 'demonstrably false from beginning to end' and who told investigators he had let the Hamiltons assume he meant INSLAW's PROMIS when he did not. Two symmetry-rule cautions against over-claiming this kill. First, the 1994 rejection comes from the accused agency, and the same House committee found that agency incapable of investigating itself; the defensible statement is 'never corroborated', not 'disproved'. Second, the strongest fact for the other side is real and should be printed at full strength: a Maxwell-founded company, Chiliad, sold document-search software to the FBI under at least six contracts across 2008-2014. That is a documented commercial relationship and nothing more - the anti-map guardrail holds, since a shared customer thirty years apart is not a transfer. Living-person floor observed throughout: Isabel, Christine, Kevin and Ian Maxwell are living and uncharged in all of this, and Kevin and Ian were acquitted by a jury on 19 January 1996. Rung 4 is not claimed for anyone here; rung 5 is not claimed for anyone anywhere. Open items for the author: the archived Peres Center board listing could not be pulled (proxy blocks web.archive.org), and the identity of 'Chiliad Publishing Incorporated' in federal award data with Christine Maxwell's Chiliad is unconfirmed by document."
+}

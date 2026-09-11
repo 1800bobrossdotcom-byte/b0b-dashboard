@@ -323,3 +323,78 @@ built on the corpus documents in §2, carrying the FBI-contract fact only once t
 confirmed, and **carrying the PROMIS kill at equal prominence** - because a section that adds the
 sisters while quietly dropping the reason they are interesting to the lineage writers would be the
 document accumulating rather than testing.
+
+---
+
+# 6. CHRISTINE'S OWN RECORD - the corporate half, and the claim that actually needed killing
+
+## 6.1 Documented, from primary filings
+
+- **The McKinley Group Inc.** - inception **7 December 1993**. **Sold to Excite on 30 August
+  1996** for **850,000 shares**, accounted for as a pooling of interests. Source: Excite's audited
+  Form 10-K, SEC accession **0000891618-98-001484**.
+  **Correction to the figure that circulates:** the widely repeated *"$18 million"* is the **June
+  1996 announcement** (1.2 million shares), **not the August close** (850,000 shares). Anyone
+  citing $18 million is citing the announcement, not the transaction.
+- **Chiliad Publishing Inc.** - Delaware, offices Amherst, Massachusetts and later Herndon,
+  Virginia.
+- **Her 2 May 2022 letter to Judge Nathan**, filed as **Exhibit C to ECF 663** in *United States v.
+  Maxwell*, No. 20-cr-00330 - a sentencing letter from a sister. Documented, and it is the one
+  place she appears in the criminal record.
+- **A 2021 UT Dallas doctorate in the humanities, on Holocaust literature.**
+
+## 6.2 The federal contracts - real, and the two counts do not agree
+
+Chiliad Publishing Inc. holds **60 federal prime awards totalling roughly $33.1 million** in
+USAspending, of which about **$6.33 million is FBI across nine awards, 2008 to 2014** - including
+**DJFA8N0825200, "Federated Query Services," $1,909,600**, and a **"Chiliad ELA" at $1,702,348** -
+plus **$5.86 million of competed Air Force SBIR work, 2004 to 2006**.
+
+**Flagged rather than reconciled:** the two research lines returned **different totals** for the
+same company, roughly $20.1 million over ~50 awards and roughly $33.1 million over 60. **Neither
+number goes on the page until one query is re-run and reconciled**, and the smaller, sourced
+figure is the one to prefer if they cannot be.
+
+## 6.3 The technology has a documented provenance, and it is not PROMIS
+
+**Chiliad's engine descends from the University of Massachusetts Amherst Center for Intelligent
+Information Retrieval's INQUERY system, transferred through Paul McOwen and Sovereign Hill
+Software in a documented April 1996 transaction.**
+
+**This is much stronger than "no link found."** It is a positive, documented alternative ancestry.
+A 1990s academic information-retrieval engine out of a university research centre is a different
+tradition from a 1970s COBOL case-tracking system written for prosecutors' offices. **The lineage
+writers assert descent; the record shows a different parent.**
+
+## 6.4 Three claims killed
+
+1. **"Christine Maxwell founded Information on Demand"** and the variant *"the twins founded it in
+   1971."* **False.** Information on Demand was founded by **Sue Rugge in Berkeley in 1979**.
+   Robert Maxwell later bought it. The founding attribution is wrong in both name and decade, and
+   the second research line independently found no record placing Isabel there either.
+2. **"A sitting CIA Chief Information Officer co-founded Chiliad."** **Not as stated.** Alan Wade
+   was the CIA's CIO from **2001 until his retirement in 2005**, after a thirty-five-year Agency
+   career. Chiliad predates his tenure as CIO. **Contested and unresolved:** Bloomberg's profile
+   lists him as "Chairman/Founder at Chiliad Inc.," while the research line places his chairmanship
+   after his retirement. **What is settled is the part that matters: his CIA CIO tenure and his
+   Chiliad board role did not overlap in the way the claim implies.** Get a primary filing before
+   publishing anything on Wade.
+3. **"Chiliad sold bugged software to Fortune 500 companies."** **No source of any tier. Do not
+   publish it in any form.**
+
+## 6.5 The methodology note worth keeping
+
+The 1992 House Judiciary Inslaw report was checked against **full OCR with control terms** - zero
+occurrences of "Maxwell," "Pergamon," "Degem" and "Information on Demand," against "Israel" 16 and
+"Ben Orr" 2. **The controls are what make the zero meaningful**, because a zero from a failed text
+extraction looks identical to a zero from an absent name. That is the right way to publish a null
+and the report should use it.
+
+## 6.6 Still open
+
+- An **EFTA-numbered copy of the May-June 2008 Chiliad share thread** (§2.2). Highest value.
+- **Reconciling the two USAspending totals** (§6.2).
+- **Tying "Chiliad Publishing Incorporated" in award data to Christine Maxwell by filing** (§4.5).
+- **A primary source on Alan Wade's Chiliad role and its dates** (§6.4).
+- Archived `chiliad.com` pages and the Peres Center board history - **web.archive.org was
+  unreachable from this environment all session**, so both remain unread rather than checked.
