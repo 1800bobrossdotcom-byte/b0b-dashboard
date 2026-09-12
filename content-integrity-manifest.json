@@ -1,13 +1,13 @@
 {
-  "generated": "2026-09-12T03:41:22.064Z",
+  "generated": "2026-09-12T03:59:00.854Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "f712df8586cfe24717de520fd28225ed275035f14f56ad2c101162a1ddcf1cfd",
+  "fullFileHash": "e65fd138a4a9020d726d8a2aae811041f874e39ee6592bd0de6a1b0fa696f7e7",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "35adac531ef6366ccdb682d98abaa505639ac5277047b2150dfc8956e871d4f8",
+      "hash": "95a0b450bbede4337ccb892c0e9fee3544cd5b6833d6aa1a09a35af5242fb604",
       "length": 34924
     },
     {
@@ -82,8 +82,8 @@
     },
     {
       "id": "ii-the-authors-hypothesis-long-lead-development-and-the-1991-closure",
-      "hash": "dd1c2427a8108a9a46d337291198645fa8b35cd4e58e65ec84d0f8a5a7469845",
-      "length": 17042
+      "hash": "82e4b83ebfb3ab8e9f979b567434eba20760559ef371c7b5620a9c2290348bc3",
+      "length": 17450
     },
     {
       "id": "ii-primary-and-liaison-mossad-directing-with-cia-and-british-services-witting",
@@ -487,8 +487,8 @@
     },
     {
       "id": "vii-cabinet-penetration-map-four-administrations",
-      "hash": "9f36aa07b6b55772ceab5497eb7edc284b41e17c274a735281d9d8d2a6be464e",
-      "length": 18763
+      "hash": "6d08e11b964aefaffd193fa6d099c22b3c8ece162663c8f236ad874c0a48f346",
+      "length": 19078
     },
     {
       "id": "vii-jonathan-greenblatt-the-crown-connection",
@@ -1087,8 +1087,8 @@
     },
     {
       "id": "xvi-9-11-vector-8-the-israel-liaison-question-what-the-files-say",
-      "hash": "b251c940e4a05f1af7e0d630e739edad5bfff3a1865aae15789e187fbc51ce8f",
-      "length": 1987
+      "hash": "94441ffb3d6c4a8f3f211b121d03b578cd7f5fd2815318149c7d96c1d4777ead",
+      "length": 3235
     },
     {
       "id": "xvi-9-11-vector-9-the-next-war-pnac-and-the-anthrax-naming-error",
@@ -1262,13 +1262,13 @@
     },
     {
       "id": "XX",
-      "hash": "c44cd41704ae395a6209b2bb29a0af2f47e1a2430c5fbe5237f1f95318924441",
-      "length": 36114
+      "hash": "38a2c2f85edb763503c1481fe02b7a535efba371024b788791598c35fb4a3b61",
+      "length": 36089
     },
     {
       "id": "xx-pattern-analysis-what-the-calibration-reveals",
-      "hash": "8c681e1e0384506675c1a533846a268c4a0062f8d403e413bd0791873377ddd7",
-      "length": 3176
+      "hash": "2c884b067b613c4737cdcd153a55e039a4f70fa0c37558ae26ec00ec5c877838",
+      "length": 3205
     },
     {
       "id": "xx-the-connectivity-map-who-touches-whom",
@@ -2391,9 +2391,9 @@
     },
     {
       "index": 152,
-      "hash": "e35d0d38363a7ebefe83ec1292996a42175368e9378af2901ac8908943d6ccb8",
+      "hash": "c07cd1439b5daab9d300c7a18bcb74615abe5d5f7101774c89329d843078eb10",
       "preview": "One - he sued, and the suing is the danger. Hersh put the Mossad relationship in...",
-      "length": 874
+      "length": 1282
     },
     {
       "index": 153,
@@ -4503,9 +4503,9 @@
     },
     {
       "index": 504,
-      "hash": "cdf4c082fd04a5e0d4ebd43ba560d97890d9067e5bd2113d9ece0f5816b4407b",
+      "hash": "25e2e9ec71edbf73c7174c14c255e48935b33acf94079c6c9951971f6944586f",
       "preview": "PATTERN: WestExec Advisors - a private consulting firm co-founded by Blinken (Tr...",
-      "length": 562
+      "length": 594
     },
     {
       "index": 505,
@@ -6417,9 +6417,9 @@
     },
     {
       "index": 823,
-      "hash": "2bcaf4e5fb9a74e8021bc5c7418c8038942220c268ff42ebcec0d7f10bc652c1",
+      "hash": "6583339a50d1c4755e9ef224ccb585e1e970b66d3c285e9bd56b02687fb8d2a0",
       "preview": "This report holds a liaison hypothesis in Section II and it is obliged to run th...",
-      "length": 1276
+      "length": 2524
     },
     {
       "index": 824,
