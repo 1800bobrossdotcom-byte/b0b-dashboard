@@ -1,13 +1,13 @@
 {
-  "generated": "2026-09-12T03:59:00.854Z",
+  "generated": "2026-09-12T04:04:09.430Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "e65fd138a4a9020d726d8a2aae811041f874e39ee6592bd0de6a1b0fa696f7e7",
+  "fullFileHash": "491600d7c99918a59901d4720baa716edc942e32534688f896303771590b1fb5",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "95a0b450bbede4337ccb892c0e9fee3544cd5b6833d6aa1a09a35af5242fb604",
+      "hash": "062c86d15b717d9fc0f73ea9b0f81b9c9b6f351840fe524e0b3900a860375e0b",
       "length": 34924
     },
     {
@@ -412,8 +412,8 @@
     },
     {
       "id": "vi-elite-breeding-programs-pronatalism-eugenics",
-      "hash": "e001d5ec62d5f26cf7be9b384e35ae17b6b24db26808f557e7e959a049b55d85",
-      "length": 6989
+      "hash": "160b4afc3254cfcf35ca1451eb5e136a10e59dc325b6a71baa89aa0009da5493",
+      "length": 7399
     },
     {
       "id": "VII",
@@ -452,8 +452,8 @@
     },
     {
       "id": "vii-three-fed-chairs-the-revolving-door-in",
-      "hash": "7adfb3680746ba02fec73955b5dc82e6ec00c452793698266dc0bc4da0183c6f",
-      "length": 6886
+      "hash": "d4fd89b44651f43736e25ee9b909c4fcee8c310254e908de7af9d4a2ced84aae",
+      "length": 7506
     },
     {
       "id": "vii-the-three-city-states-sovereign-territories",
@@ -1262,8 +1262,8 @@
     },
     {
       "id": "XX",
-      "hash": "38a2c2f85edb763503c1481fe02b7a535efba371024b788791598c35fb4a3b61",
-      "length": 36089
+      "hash": "5c11576c0130d248c9299b6c8868cc23ccc118a333ceeb59975f8a8892b64c28",
+      "length": 36241
     },
     {
       "id": "xx-pattern-analysis-what-the-calibration-reveals",
@@ -4413,9 +4413,9 @@
     },
     {
       "index": 489,
-      "hash": "dfd87073fb8c06d2e30be9b7a63400cc3610d804ea086408de7a946fff81a22a",
-      "preview": "From Jekyll Island (1910) to the present, the Federal Reserve chairmanship has p...",
-      "length": 348
+      "hash": "9767b638aac231b826b218e5abf9ce8addd434953993548aa6e925e230937599",
+      "preview": "What the chairs above document is an institutional revolving door, and that is t...",
+      "length": 968
     },
     {
       "index": 490,
