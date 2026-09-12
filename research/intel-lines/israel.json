@@ -1,0 +1,421 @@
+{
+  "line": "The Israeli intelligence-to-industry pipeline, tested at the document layer: SEC filings, the Israeli Registrar of Companies, 15 CFR 744 Supplement No. 4, and USAspending/FPDS. The state link that survives documentation is the export licence, not the cap table and not the founder's unit.",
+  "findings": [
+    {
+      "id": "ISR-01",
+      "claim": "A single SEC filing in the entire 2001-2026 EDGAR full-text corpus states a named executive's Unit 8200 command for a major Israeli cyber company: Check Point's Form 20-F says of CEO Nadav Zafrir, 'Prior to founding Team8, Nadav spent 20 years in the Israel Defense Forces. He served as Commander of Unit 8200, Israel's elite military technology unit, where he established the Israel Defense Forces Cyber Command.' The same filing states he co-founded Team8 Labs Ltd. in 2014 and became Check Point CEO in December 2024.",
+      "tier": "documented",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/1015922/000117891326001932/zk2634942.htm (Check Point Software Technologies Ltd., Form 20-F for FY2025, filed 31 Mar 2026, Item 6)",
+        "https://www.sec.gov/Archives/edgar/data/1015922/000117891326003557/zk2635717.htm (Check Point Form 6-K, 22 Jul 2026, proxy statement, same language)",
+        "https://efts.sec.gov/LATEST/search-index?q=%22Unit%208200%22 (EDGAR full-text search, phrase 'Unit 8200', 195 hits, entity breakdown)"
+      ],
+      "establishes": "That the 8200-to-industry path is stated by the companies themselves in filings signed under SEC liability, at the very top of the industry. It is disclosed, not concealed.",
+      "does_not": "Establish any operational relationship between Check Point, Team8 and Unit 8200. A commander's post-service career is a career, not a placement. Nothing in the filing says the IDF directs, funds or holds anything in either company.",
+      "counter_record": "The same 195-hit corpus shows the pattern is thin in filings generally: of the top entities by hit count, most are unrelated (Landa App LLC, Sumitomo Mitsui, iShares). Check Point accounts for 6 hits, all Zafrir.",
+      "date_span": "2014-2026",
+      "persons": ["Nadav Zafrir"],
+      "doc_type": "filing",
+      "notes": "Zafrir is living and uncharged. Rung 4 is not claimed for him; documented affiliation only."
+    },
+    {
+      "id": "ISR-02",
+      "claim": "The filing layer does NOT carry Unit 8200 service for the canonical founder names the trope rests on. Check Point's own 20-F bio of founder Gil Shwed names no military unit at all. 'Unit 8200' and '8200' appear zero times in Palo Alto Networks' FY2025 DEF 14A (7 Nov 2025) and its FY2026 Form 10-K (10 Sep 2026) - including in the passages on founder Nir Zuk's retirement - and zero times in Cellebrite DI Ltd.'s FY2025 Form 20-F.",
+      "tier": "documented",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/1015922/000117891326001932/zk2634942.htm (Check Point 20-F FY2025, Shwed bio, Item 6)",
+        "https://www.sec.gov/Archives/edgar/data/1327567/000130817925000624/panw-20251107.htm (Palo Alto Networks DEF 14A, filed 7 Nov 2025; '8200' count = 0)",
+        "https://www.sec.gov/Archives/edgar/data/1327567/000132756726000023/panw-20260731.htm (Palo Alto Networks Form 10-K FY2026, filed 10 Sep 2026; '8200' count = 0)",
+        "https://www.sec.gov/Archives/edgar/data/1854587/000162828026013790/cele-20251231.htm (Cellebrite DI Ltd. Form 20-F FY2025, filed 3 Mar 2026; '8200' count = 0)"
+      ],
+      "establishes": "That 'Shwed/Zuk were 8200' is a reporting-layer claim, not a filing-layer one. Where the report's own tiering is applied strictly, most of the standard founder table drops from documented to labeled.",
+      "does_not": "Establish the claims are false. Companies are not required to publish an officer's conscript unit, and Israeli military censorship constrains what can be published about some units. Absence here is absence of a filing, not absence of service.",
+      "counter_record": "Shwed's 8200 service is widely reported and has been stated by him in interviews; the null is about the document class, not about the fact. This is the guaranteed-null rule running the other way: an omission compelled by no rule is weak evidence either way.",
+      "date_span": "2001-2026",
+      "persons": ["Gil Shwed", "Nir Zuk"],
+      "doc_type": "filing",
+      "notes": "NULLS ARE FINDINGS. This is the anti-map guardrail applied to the strongest-looking pattern in the line."
+    },
+    {
+      "id": "ISR-03",
+      "claim": "Scale honesty: Israel has near-universal conscription and Unit 8200 is a very large technical formation, so an 8200 alumnus founding a company is the modal outcome of a national talent pipeline. Unit 81 - the technology unit of the Military Intelligence Directorate (AMAN), distinct from 8200, staffed substantially by Talpiot graduates - was reported by Calcalist in 2021 to have produced roughly 100 veterans who founded about 50 companies in a decade, raising ~$4bn at combined valuations over $10bn.",
+      "tier": "labeled",
+      "sources": [
+        "https://www.calcalistech.com/ctech/articles/0,7340,L-3886512,00.html (Calcalist/CTech, 'Unit 81: The elite military unit that caused a big bang in the Israeli tech scene', 2021)",
+        "https://www.algemeiner.com/2021/01/08/unit-81-the-elite-military-unit-that-caused-a-big-bang-in-the-israeli-tech-scene/ (8 Jan 2021 reprint)"
+      ],
+      "establishes": "A base rate. With thousands of alumni per cohort, 'founder X served in 8200' carries almost no discriminating information about any particular company.",
+      "does_not": "Establish anything about any named company. The figures are an outlet's count, not a registry count, and I did not reproduce them.",
+      "counter_record": "EDGAR full-text search for 'Unit 81' returns 448 hits, none of which on inspection are unit-service disclosures - they are page and paragraph numbering in unrelated filings (Sumitomo Mitsui, iShares, Innoviz). No SEC filing states a named executive's Unit 81 service.",
+      "date_span": "2011-2021",
+      "persons": [],
+      "doc_type": "reporting",
+      "notes": "This finding exists to discount ISR-01 and ISR-04, not to support them."
+    },
+    {
+      "id": "ISR-04",
+      "claim": "The venture layer: Team8 was founded in 2014 by Nadav Zafrir (Unit 8200 commander - documented in ISR-01) with Israel Grimberg, reported as former head of the cyber division of Unit 8200, and Liran Grinberg. Team8's own site states $1.8bn AUM and 64+ portfolio companies; its 2024-25 fund of $365m was reported to be backed by Walmart, Cisco, Moody's, AT&T, SoftBank and Temasek.",
+      "tier": "contested",
+      "sources": [
+        "https://team8.vc/about/ (Team8 own site: co-founders Liran Grinberg and Israel Grimberg, Managing Partners; AUM $1.8bn; 64+ companies; investor logos shown without names)",
+        "https://www.sec.gov/Archives/edgar/data/1015922/000117891326001932/zk2634942.htm (Check Point 20-F: Zafrir co-founded Team8 Labs Ltd.)",
+        "https://www.timesofisrael.com/backed-by-walmart-and-cisco-israels-team8-raises-365m-to-help-build-ai-startups/ (Times of Israel, $365m fund and LP list)"
+      ],
+      "establishes": "Documented: Zafrir's 8200 command and his Team8 co-founding, from an SEC filing. The founder-to-fund-to-listed-CEO path is real and disclosed.",
+      "does_not": "Establish that Team8 is a service vehicle, that Israeli intelligence holds any interest in it, or that its LPs are conduits. Temasek appearing as an LP is a sovereign fund allocating to a venture fund - the ordinary business of a sovereign fund.",
+      "counter_record": "Team8's own About page does not mention Unit 8200 or any Israeli military service for any of its partners, and lists its investors only as unlabelled logos. The 8200 attribution for Grimberg rests on outlet reporting, not on Team8's own disclosure - hence 'contested' rather than 'documented'.",
+      "date_span": "2014-2026",
+      "persons": ["Nadav Zafrir", "Israel Grimberg", "Liran Grinberg"],
+      "doc_type": "reporting",
+      "notes": "LP list is labeled tier. Do not upgrade it without the fund's own release or a Form D/ADV."
+    },
+    {
+      "id": "ISR-05",
+      "claim": "Cyberstarts, founded 2018 by Gili Raanan, led Wiz's 2020 seed round. Alphabet completed the Wiz acquisition on 11 March 2026 for $29.5bn ($29,467m total purchase price: $8.3bn intangibles, $22,705m goodwill, less $1,538m net liabilities assumed, including $660m acquired cash).",
+      "tier": "documented",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000071/goog-20260630.htm (Alphabet Inc. Form 10-Q for Q2 2026, filed 23 Jul 2026, Note 8 'Acquisitions and Divestitures - Wiz Acquisition')",
+        "https://www.calcalistech.com/ctechnews/article/rkgihcpd11g (CTech, Raanan on the Wiz sale)",
+        "https://www.cyberstarts.com/team/gili-raanan (Cyberstarts own site)"
+      ],
+      "establishes": "The exit price from the acquirer's own filing. It also corrects the number in near-universal circulation: the announced headline was $32bn; Alphabet's filing records $29.5bn after purchase-price adjustments.",
+      "does_not": "Establish any intelligence-service role in Wiz, Cyberstarts or the transaction. Nothing in Alphabet's filing references any Israeli government party.",
+      "counter_record": "No filing states Gili Raanan's or any Wiz founder's military service; the 8200 attribution for the Wiz founding team is reporting-layer only. Wiz's own about-us page was not retrievable (HTTP 404) to check the company's own statement.",
+      "date_span": "2018-2026",
+      "persons": ["Gili Raanan"],
+      "doc_type": "filing",
+      "notes": "The $32bn/$29.5bn gap is the kind of primary-vs-headline discrepancy worth printing."
+    },
+    {
+      "id": "ISR-06",
+      "claim": "The 2026 capital direction, from three acquirers' own filings, is Israeli cyber equity flowing INTO US-listed balance sheets, not the reverse. In one quarter: Palo Alto Networks completed its acquisition of CyberArk Software Ltd. on 11 February 2026 for total purchase consideration of $21.1bn; Alphabet completed Wiz on 11 March 2026 for $29.5bn; Axon Enterprise acquired Carbyne Ltd. in February 2026 for a base purchase price of $625.0m, having already held approximately 11%.",
+      "tier": "documented",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/1327567/000132756726000023/panw-20260731.htm (Palo Alto Networks Form 10-K FY2026, filed 10 Sep 2026: 'on February 11, 2026, the Company completed the acquisition of CyberArk for total purchase consideration of $21.1 billion')",
+        "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000071/goog-20260630.htm (Alphabet Form 10-Q Q2 2026, Note 8)",
+        "https://www.sec.gov/Archives/edgar/data/1069183/000162828026011360/axon-20251231.htm (Axon Enterprise Form 10-K FY2025, filed 25 Feb 2026, Note 20 'Subsequent Events - Carbyne')"
+      ],
+      "establishes": "A measurable, dated, three-filing capital layer - the layer the report currently carries at zero - and the ownership end-state: these assets are now inside US-listed issuers subject to US securities and antitrust supervision.",
+      "does_not": "Establish influence running in either direction. Ownership of a security company is not control of its customers, and none of the three filings references any government party.",
+      "counter_record": "This is the symmetry test on the 'Israeli control of US infrastructure' reading, and it comes out against it: after these closings the controlling shareholders are Alphabet, Palo Alto Networks and Axon - all US-domiciled, all SEC registrants.",
+      "date_span": "2026-02-11 to 2026-03-11",
+      "persons": [],
+      "doc_type": "filing",
+      "notes": "Axon's disclosure also gives the pre-close stake (~11%), which is why the reported cash figure for the remaining 89.3% (~$549.7m) is lower than the $625.0m base price."
+    },
+    {
+      "id": "ISR-07",
+      "claim": "Export control is the documented state link, and Cellebrite's 20-F sets out the whole framework: exports are administered by the Israeli Defense Export Controls Agency (DECA) within the Ministry of Defense; Cellebrite operates under a licence issued under the Israeli encryption control regime; Israel is not a party to the Wassenaar Arrangement but has adopted its List of Dual Use Goods and Technologies; products fall primarily under the Defense Export Control Law, 5767-2007 (DECA) and secondarily under the Import and Export Order (Export Control over Dual Use Goods, Services and Technology), 5766-2006 (Ministry of the Economy); and an Israeli company 'may not conduct defense marketing activity without a defense marketing license from the Israeli Ministry of Defense.'",
+      "tier": "documented",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/1854587/000162828026013790/cele-20251231.htm (Cellebrite DI Ltd. Form 20-F FY2025, filed 3 Mar 2026, 'Export Controls' and Risk Factors)"
+      ],
+      "establishes": "That the Israeli state holds a live, per-transaction veto over who these companies may market to and sell to - an instrument of control far stronger than a founder's alumni status and one that is admitted in a filing.",
+      "does_not": "Establish that the state directs product design, targeting or customer selection beyond grant or refusal of a licence, nor that any particular sale was state-initiated.",
+      "counter_record": "The same instrument constrains as well as enables: Cellebrite states its existing DECA licences 'prohibit us from exporting some of our products to customers in certain countries' and require DECA consent for others. An export-licence regime is what most arms-exporting states run, including the US ITAR.",
+      "date_span": "2006-2026",
+      "persons": [],
+      "doc_type": "filing",
+      "notes": "This is the finding that should carry the line. It replaces the founder table as the actual state link."
+    },
+    {
+      "id": "ISR-08",
+      "claim": "New and after the assistant's cutoff: on 18 November 2025 the Israeli Minister of Defense signed an order repealing the existing encryption control regime and adopting a new one, effective 18 March 2026. Cellebrite states its belief that its current licence remains valid until September 2027 for existing products, and that under the new regime some of its products will be controlled primarily under the Defense Export Control Law, 5767-2007, imposing new obligations including defense marketing licensing.",
+      "tier": "documented",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/1854587/000162828026013790/cele-20251231.htm (Cellebrite Form 20-F FY2025, 'Export Controls')"
+      ],
+      "establishes": "A dated regulatory change moving digital-forensics and cyber products from an encryption regime toward the defence regime - i.e. tightening, and toward the Ministry of Defense.",
+      "does_not": "Establish the order's contents. I have the filing's characterisation of the order, not the order itself; I did not obtain the Hebrew text or its official publication reference.",
+      "counter_record": "A registrant's description of a regulation it is subject to is interested testimony about scope, though a materially false description would carry securities liability. Treat the direction of travel as documented and the detail as the company's account.",
+      "date_span": "2025-11-18 to 2027-09",
+      "persons": [],
+      "doc_type": "filing",
+      "notes": "Worth chasing to the Israeli official gazette (Reshumot) before publishing the detail."
+    },
+    {
+      "id": "ISR-09",
+      "claim": "NSO Group and Candiru were added to the Commerce Department Entity List on 4 November 2021 (86 FR 60759-60761; the individual entries cite 86 FR 60760), under 15 CFR 744.11(b), and both remain listed in the eCFR current through 1 September 2026, under ISRAEL, for 'All items subject to the EAR', licence review policy 'Presumption of denial'. Candiru is listed with seven aliases including Saito Tech Ltd., at 21 Haarbaa, Tel Aviv-Yafo 6473921; NSO Group at 22 Galgalei Haplada, Herzliya.",
+      "tier": "documented",
+      "sources": [
+        "https://www.ecfr.gov/api/versioner/v1/full/2026-09-01/title-15.xml?part=744 (15 CFR Part 744, Supplement No. 4 - Entity List, ISRAEL block, retrieved 12 Sep 2026)",
+        "https://www.federalregister.gov/documents/2021/11/04/2021-24123/addition-of-certain-entities-to-the-entity-list (BIS final rule, 'Addition of Certain Entities to the Entity List', 4 Nov 2021)",
+        "https://www.bis.gov/press-release/commerce-adds-nso-group-other-foreign-companies-entity-list-malicious-cyber-activities (BIS press release)"
+      ],
+      "establishes": "That the US designation is live today, survived a change in US administration and survived NSO's reported change of ownership. It is the hardest adverse document in this line.",
+      "does_not": "Establish criminal conduct. An Entity List designation is an export-licensing determination under 744.11(b) - 'reasonable cause to believe, based on specific and articulated facts' - not a finding of guilt, and no charge is attached to it.",
+      "counter_record": "Scale check, against the trope: the entire ISRAEL block of the Entity List holds 11 entries. Two are the 2021 spyware designations. Eight are a single aviation-parts diversion cluster designated in 2016 (81 FR 40178: A. Leib Ltd., AVS, Eliyahu Cohen, M&P Trading, P.AD Ltd., QPS Ltd., RSP Ltd., Wheels Incorporated - mostly one Binyamina/Caesarea address group). The remainder are Toga Networks (85 FR 51603, 2020, a Huawei-related listing) and the Nuclear Research Center at Negev Dimona (62 FR 35334, 1997, case-by-case). There is no Entity List designation of an Israeli cyber industry - there is a designation of two companies.",
+      "date_span": "1997-2026",
+      "persons": [],
+      "doc_type": "licence",
+      "notes": "federalregister.gov was unreachable from this environment (302 to unblock.federalregister.gov); the page range 60759-60761 comes from the docket index and the entries' own '86 FR 60760' citation in the eCFR. Addresses reproduced as published in the CFR - corporate registered offices, not residences."
+    },
+    {
+      "id": "ISR-10",
+      "claim": "Registry finding, original: the Israeli Registrar of Companies shows TWO active companies at the exact address the Entity List gives for Candiru. SAITO TECH LTD - the alias the Entity List names - company number 515126605, incorporated 7 September 2014, status active, Haarbaa 21, Tel Aviv-Yafo 6473921. INTEGRITY LABS LTD, company number 517081089, incorporated 18 December 2024 (i.e. after the designation), status active, Israeli private company, Haarbaa 21, Tel Aviv-Yafo 6473921, last annual return filed 2026.",
+      "tier": "documented",
+      "sources": [
+        "https://data.gov.il/api/3/action/datastore_search?resource_id=f004176c-b85f-4542-8901-7b3176f9a054&q=517081089 (Israeli Registrar of Companies open dataset, Ministry of Justice, retrieved 12 Sep 2026)",
+        "https://data.gov.il/api/3/action/datastore_search?resource_id=f004176c-b85f-4542-8901-7b3176f9a054&q=SAITO%20TECH (same dataset)",
+        "https://www.ecfr.gov/api/versioner/v1/full/2026-09-01/title-15.xml?part=744 (Entity List address for Candiru/Saito Tech: 21 Haarbaa, Tel Aviv-Yafo, Israel 6473921)"
+      ],
+      "establishes": "Two live Israeli registrations at the designated entity's listed address, one incorporated 37 months after the designation. It also corrects reporting that Candiru's assets simply moved to a new entity: the designated registration is still active, not struck off.",
+      "does_not": "Establish that Integrity Labs is Candiru, that any asset moved, that any person is common to both, or that the designation is being evaded. A shared registered office in a Tel Aviv commercial block is an address, not a corporate identity - reading it as one is the naming error at address scale. The Entity List does not name Integrity Labs.",
+      "counter_record": "The reported link (Recorded Future's Insikt Group, via a $30m April 2025 acquisition by Integrity Partners) is outlet reporting; I did not obtain the shareholder or director filings that would tie the two registrations together, and the dataset does not carry officers.",
+      "date_span": "2014-09-07 to 2026",
+      "persons": [],
+      "doc_type": "registry",
+      "notes": "To promote the connection above 'address coincidence', pull both companies' shareholder/officer extracts (Rasham HaChavarot paid extract). Do not publish an identity claim on the address alone."
+    },
+    {
+      "id": "ISR-11",
+      "claim": "NSO's 2025-26 ownership change, and the limit of what it changed. NSO confirmed in October 2025 that an American investment group had 'invested tens of millions of dollars in the company and has acquired controlling ownership'; the group was reported to be led by Robert Simonds. NSO's spokesman stated in the same breath: 'This investment does not mean that the company is moving out of Israeli regulatory or operational control.' Completion was reported to require DECA approval at the Israeli Ministry of Defense, because Israeli authorities classify the product as a controlled national-security cyber tool.",
+      "tier": "labeled",
+      "sources": [
+        "https://techcrunch.com/2025/10/10/spyware-maker-nso-group-confirms-acquisition-by-us-investors/ (NSO spokesman Oded Hershowitz, on the record)",
+        "https://www.calcalistech.com/ctechnews/article/s1jgvmitgx (Calcalist/CTech, first report; DECA approval requirement)",
+        "https://www.ecfr.gov/api/versioner/v1/full/2026-09-01/title-15.xml?part=744 (NSO still Entity Listed as of 1 Sep 2026)"
+      ],
+      "establishes": "The sharpest framing available for this whole line: US equity ownership did not detach NSO from the Israeli state, because the binding instrument was never the cap table - it was the export licence, which stays with DECA. And the US designation survived the sale.",
+      "does_not": "Establish the buyer group's members, the price, or that the transaction closed on the reported terms. NSO is private; there is no filing.",
+      "counter_record": "Two things do not reconcile. 'Tens of millions of dollars' for controlling ownership is an order of magnitude below the ~$1bn-plus valuations reported for NSO in 2019, and NSO declined to name the investors or the amount. And the Washington Post reported in May 2025 that the administration would not seek NSO's removal from the Entity List - consistent with what the eCFR shows today.",
+      "date_span": "2025-10 to 2026-09",
+      "persons": ["Robert Simonds"],
+      "doc_type": "reporting",
+      "notes": "Simonds is living and uncharged; acquiring a designated company is lawful and is not an operational tie. No rung is claimed."
+    },
+    {
+      "id": "ISR-12",
+      "claim": "US federal procurement, from FPDS via USAspending: CELLEBRITE INC holds 705 prime contract awards totalling approximately $158.3m from FY2008 to FY2026, the largest being DHS awards of $11,112,194 (70CMSD25P00000141, FY2025), $9,598,699 (70CMSD24FR0000139, FY2024) and $6,171,600 (70CMSD23FR0000076, FY2023). NSO Group holds ZERO US federal prime awards. Carbyne holds ZERO.",
+      "tier": "documented",
+      "sources": [
+        "https://api.usaspending.gov/api/v2/search/spending_by_award/ (keyword queries 'CELLEBRITE', 'NSO GROUP', 'CARBYNE', award types A/B/C/D, FY2008-2026, retrieved 12 Sep 2026)"
+      ],
+      "establishes": "The contract layer for one Israeli forensics vendor, quantified, with named DHS award IDs - and the size of it: $158m over eighteen years is a mid-sized federal vendor, not a pillar of the security state.",
+      "does_not": "Capture subcontracts, resold licences (several of the largest 'Cellebrite' keyword hits are resellers - REDHAWK IT SOLUTIONS, BLUE TECH, FCN, LEIDOS - whose awards are not counted here), classified procurement, or anything bought outside FPDS reporting thresholds.",
+      "counter_record": "The NSO zero is a real null but a partial one: the FBI's reported 2019 Phantom purchase and the DEA's reported use of NSO's Landmark through a cut-out would not appear under NSO's name. I checked the reported cut-out - RIVA NETWORKS INC shows ten awards totalling $2.4m, of which the DEA entries are 2008 Treo handset and covert-phone-licence buys, unrelated. Absence of an NSO prime award is not absence of NSO product in US hands.",
+      "date_span": "2007-10-01 to 2026-09-12",
+      "persons": [],
+      "doc_type": "contract award",
+      "notes": "This is the layer the report currently carries at zero for Cellebrite."
+    },
+    {
+      "id": "ISR-13",
+      "claim": "A documented US federal contract with an Israeli-founded spyware vendor's US arm: PARAGON SOLUTIONS (US) INC, Department of Homeland Security / U.S. Immigration and Customs Enforcement, award 70CTD024P00000012, obligated $2,000,000, period 30 September 2024 to 29 September 2025, description 'THIS AWARD IS FOR A FULLY CONFIGURED PROPRIETARY SOLUTION INCLUDING LICENSE, HARDWARE, WARRANTY, MAINTENANCE AND TRAINING.' Total outlays recorded: $2,008,740.07.",
+      "tier": "documented",
+      "sources": [
+        "https://api.usaspending.gov/api/v2/search/spending_by_award/ (recipient PARAGON SOLUTIONS (US) INC, award 70CTD024P00000012, retrieved 12 Sep 2026)",
+        "https://www.usaspending.gov/award/CONT_AWD_70CTD024P00000012_7012_-NONE-_-NONE-"
+      ],
+      "establishes": "That the contract was not merely signed but paid out in full - outlays slightly exceed the obligated amount - and ran to its stated end date. That is a documented fact about money, on a matter where the public record has been mostly assertion.",
+      "does_not": "Establish what the 'proprietary solution' is. The contract description names no product; it does not say Graphite, spyware, or interception. It does not establish that anything was deployed against any person.",
+      "counter_record": "Reporting that a White House hold or stop-work order was placed on this contract in early 2025 and later lifted is not contradicted by the outlay figure alone - outlays are cumulative and undated in this view. Do not read 'paid in full' as 'never paused'.",
+      "date_span": "2024-09-30 to 2025-09-29",
+      "persons": [],
+      "doc_type": "contract award",
+      "notes": "The obvious next primary is the FOIA'd contract file or the FPDS modification history, which would date the stop-work."
+    },
+    {
+      "id": "ISR-14",
+      "claim": "Paragon Solutions was founded in 2019 by Ehud Schneorson, a former commander of Unit 8200, with reported backing from former Israeli prime minister Ehud Barak; the founding team is reported as CEO Idan Nurick, CTO Igor Bogudlov and Chief Research Officer Liad Abraham. The company was reported sold at the end of 2024 to US private equity firm AE Industrial Partners, via its portfolio company RedLattice, for a figure reported above $500m.",
+      "tier": "labeled",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Paragon_Solutions (index to primaries only, not a citation)",
+        "https://citizenlab.ca/research/a-first-look-at-paragons-proliferating-spyware-operations/ (Citizen Lab, 'Virtue or Vice? A First Look at Paragon's Proliferating Spyware Operations')",
+        "https://www.timesofisrael.com/trump-administration-reinstates-contract-with-israeli-founded-spyware-maker-paragon/ (Times of Israel, contract reinstatement)",
+        "https://www.turkiyetoday.com/business/paragon-israels-top-cybersecurity-firm-sold-to-us-investor-for-over-500m-93586 (sale price, single-outlet)"
+      ],
+      "establishes": "A second 8200 commander at the head of a spyware firm, and a second case of a US private-equity buyer taking an Israeli offensive-cyber asset.",
+      "does_not": "Establish any service role for Paragon, any tasking, or Barak's current interest. Schneorson and Barak are living and uncharged; a former commander founding a company in his field is a career move.",
+      "counter_record": "No filing anywhere confirms the founders, the ownership or the price - Paragon is private, AE Industrial is private, and I found no SEC Form D or registry entry. The Israeli Registrar open dataset returns no company matching 'Paragon Solutions' by English name. The >$500m figure rests on a single outlet. Everything here is reporting; it must not be tiered up.",
+      "date_span": "2019-2026",
+      "persons": ["Ehud Schneorson", "Ehud Barak", "Idan Nurick", "Igor Bogudlov", "Liad Abraham"],
+      "doc_type": "reporting",
+      "notes": "Contrast ISR-13, which is documented, with this, which is not. The contract is a document; the founder story is not."
+    },
+    {
+      "id": "ISR-15",
+      "claim": "Cellebrite is not Israeli-state-controlled on its cap table: SUNCORPORATION, a Japanese company, beneficially owns 106,065,324 ordinary shares - 42.52% - as of 23 February 2026, and True Wind Capital Management 13,861,007 shares, 5.56%, of 249,439,817 shares outstanding. No Israeli government entity appears among 5% holders.",
+      "tier": "documented",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/1854587/000162828026013790/cele-20251231.htm (Cellebrite Form 20-F FY2025, Item 7.A Major Shareholders)"
+      ],
+      "establishes": "That the state link for Cellebrite runs through the DECA licence (ISR-07), not through ownership - and that the largest single owner is Japanese, not Israeli.",
+      "does_not": "Establish the absence of state influence by other means. A licence veto is influence; a cap table is not the only instrument.",
+      "counter_record": "This is the trope's specific factual claim tested and returned against it, and it belongs at equal prominence: where the surname-and-ownership reading predicts state or family equity, the filing shows a Japanese listed company with 42.52%.",
+      "date_span": "2021-2026",
+      "persons": [],
+      "doc_type": "filing",
+      "notes": "Published at equal prominence per COMMON.md: a trope tested and killed is a finding."
+    },
+    {
+      "id": "ISR-16",
+      "claim": "Carbyne, which the report already carries: acquired by Axon Enterprise, Inc. in February 2026 for a base purchase price of $625.0m subject to adjustments, funded from cash on hand; Axon held approximately 11% before closing, making it a step acquisition under GAAP. Ehud Barak, chairman from 2015, stepped down from the board effective 1 May 2020. Carbyne raised $100m in July 2025 from investors including AT&T Ventures, Axon, Cox Enterprises, Global Medical Response, Hanaco, Hercules Capital, Rokos Capital Management's RCM Private Markets Fund and SVB.",
+      "tier": "documented",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/1069183/000162828026011360/axon-20251231.htm (Axon Enterprise Form 10-K FY2025, filed 25 Feb 2026, Note 20 and Liquidity)",
+        "https://www.prnewswire.com/news-releases/carbyne-raises-100-million-in-funding-to-accelerate-ai-powered-emergency-response-and-intelligence-302518401.html (Carbyne release, 31 Jul 2025, investor list)",
+        "https://www.businesswire.com/news/home/20200430005516/en/Carbyne-Announces-Board-Changes (Carbyne release, 30 Apr 2020, Barak departure)"
+      ],
+      "establishes": "Current ownership and status in 2026: Carbyne is now a wholly owned subsidiary of a US-listed issuer, and it sits inside the core NG911 call-handling layer alongside Axon's Prepared and Fusus acquisitions.",
+      "does_not": "Establish any government customer relationship beyond Axon's own description of the NG911 market, or anything about Epstein-era investors. Barak's chairmanship ended six years before the sale.",
+      "counter_record": "The report's existing Carbyne material rests on the 2015-2019 Barak period. The 2026 record is a different company with different owners; carrying the old framing forward without the acquisition would be the ratchet running toward the preferred conclusion.",
+      "date_span": "2015-2026",
+      "persons": ["Ehud Barak"],
+      "doc_type": "filing",
+      "notes": "Brief asked only for what is new. This is what is new."
+    },
+    {
+      "id": "ISR-17",
+      "claim": "Item (5), the equity question, answered against the hypothesis: the one Israeli intelligence service that runs an investment arm publishes terms that take no equity. Mossad established Libertad, its technology innovation fund, in June 2017 (libertad.gov.il). Its published model is grants of up to NIS 2m per company with no equity stake, no dilution, no IP restriction and no royalty repayment; in return Mossad receives a non-commercial, non-exclusive licence to use the developed IP. Reported budget ~NIS 10m/year, roughly five companies a year, 30-plus deals since 2017.",
+      "tier": "labeled",
+      "sources": [
+        "https://libertad.gov.il/ (official Israeli government domain; returned HTTP 503 on retrieval 12 Sep 2026 - existence and domain confirmed, contents not fetched)",
+        "https://www.timesofisrael.com/in-bid-for-cutting-edge-spy-tech-mossad-expands-scope-of-investment-arm/ (Times of Israel)",
+        "https://www.calcalistech.com/ctech/articles/0,7340,L-3733822,00.html (Calcalist/CTech, portfolio selection)",
+        "https://www.israeldefense.co.il/en/node/30169 (Israel Defense, launch)"
+      ],
+      "establishes": "That the service-equity question has a specific, checkable answer rather than a rumour: the vehicle exists, it is official, and it is equity-free by design.",
+      "does_not": "Establish that no Israeli service has ever held equity by another route, nor identify Libertad's portfolio - the fund does not publish it, and the recipients are reported to be unnamed.",
+      "counter_record": "The equity-free structure is itself a finding, and it cuts against the cap-table hypothesis from the direction that matters: if a service wanted concealed equity, this is where it would sit, and the published terms refuse it. Caution: the terms are as reported and as the fund describes itself; I could not load the official page (503) to quote it directly, so this is labeled, not documented.",
+      "date_span": "2017-2026",
+      "persons": [],
+      "doc_type": "reporting",
+      "notes": "Retry libertad.gov.il before publishing; an official-page quotation would move this to documented."
+    },
+    {
+      "id": "ISR-18",
+      "claim": "The single most-cited spyware company is the weakest case for the 8200-founder pattern. Accounts of NSO Group's founders conflict: some describe Shalev Hulio, Omri Lavie and Niv Carmi as 8200 alumni; better-sourced accounts describe Hulio as having served as a major in an army search-and-rescue unit and Carmi as having served in military intelligence and in Mossad.",
+      "tier": "contested",
+      "sources": [
+        "https://forbiddenstories.org/the-rise-and-fall-of-nso-group/ (Forbidden Stories, Hulio's search-and-rescue service)",
+        "https://en.wikipedia.org/wiki/NSO_Group (index to primaries only, not a citation; carries the conflicting 8200 attribution)"
+      ],
+      "establishes": "Nothing affirmative. It establishes that the founder-unit layer is not reliable enough to carry weight, on the exact company where the pattern is most often asserted.",
+      "does_not": "Establish that none of the three served in 8200. Both readings remain in circulation and I resolved neither to a primary.",
+      "counter_record": "Both directions are given above; that is the point of the tier. Carmi's reported Mossad service, if true, is the closest thing in this line to a service-to-company link on a person - and it is reporting, not a document, and he left NSO at the outset.",
+      "date_span": "2010-2026",
+      "persons": ["Shalev Hulio", "Omri Lavie", "Niv Carmi"],
+      "doc_type": "none",
+      "notes": "All three are living and uncharged. Rung 4 is not claimed. This finding exists to kill a specimen, not to build one."
+    },
+    {
+      "id": "ISR-19",
+      "claim": "Litigation outcomes, as reported and not verified against the docket: WhatsApp v NSO Group (N.D. Cal.) - a jury awarded roughly $444,000 compensatory and about $167m punitive damages in May 2025; in October 2025 the court reduced punitive damages to $4m and entered a permanent injunction barring NSO from targeting WhatsApp users; NSO appealed in November 2025 (Ninth Circuit, No. 25-7380), with amici filing in May 2026; the appeal was pending as of mid-2026, and WhatsApp has since said it detected activity it regards as violating the injunction. Apple v NSO Group and Q Cyber Technologies - Apple moved to voluntarily dismiss its own 2021 suit in September 2024, citing risk of exposing threat-intelligence information, a diversified spyware market, and discovery obstacles; dismissal was sought without prejudice.",
+      "tier": "labeled",
+      "sources": [
+        "https://www.securityweek.com/nso-ordered-to-stop-hacking-whatsapp-but-damages-cut-to-4-million/ (SecurityWeek)",
+        "https://cdt.org/wp-content/uploads/2026/05/WhatsApp-v.-NSO-Brief-of-Amici-Curiae-Access-Now-et-al.pdf (amicus brief, Ninth Circuit No. 25-7380, May 2026)",
+        "https://knightcolumbia.org/cases/whatsapp-v-nso-group (Knight First Amendment Institute case page)",
+        "https://therecord.media/apple-seeks-dismissal-of-nso-lawsuit-pegasus-spyware (The Record, Apple dismissal motion)"
+      ],
+      "establishes": "That the strongest US legal check on this industry to date is civil, brought by platform companies, and that one of the two platforms withdrew rather than litigate through discovery.",
+      "does_not": "Establish the exact figures, the docket numbers, or the current posture of the appeal. I did not pull PACER/CourtListener; every number here is an outlet's.",
+      "counter_record": "Apple's withdrawal cuts against reading the litigation as a clean win: Apple's own stated reason was that continuing risked exposing its threat intelligence, and it asked for dismissal without prejudice. And a punitive award cut from $167m to $4m is a 97.6% reduction by the trial judge - report the reduction, not just the verdict.",
+      "date_span": "2019-2026",
+      "persons": [],
+      "doc_type": "reporting",
+      "notes": "Do not publish the dollar figures at documented tier without the docket. CourtListener has the opinion: https://www.courtlistener.com/opinion/10379462/whatsapp-inc-v-nso-group-technologies-limited/"
+    },
+    {
+      "id": "ISR-20",
+      "claim": "Q CYBER TECHNOLOGIES LTD - NSO's parent and Apple's co-defendant - is an active Israeli private company, registration number 514971522, incorporated 2 December 2013, registered in Ramat HaSharon.",
+      "tier": "documented",
+      "sources": [
+        "https://data.gov.il/api/3/action/datastore_search?resource_id=f004176c-b85f-4542-8901-7b3176f9a054&q=Q%20CYBER (Israeli Registrar of Companies open dataset, retrieved 12 Sep 2026)"
+      ],
+      "establishes": "That the holding structure named in the US litigation is a live Israeli registration, independently confirmable, with a date of incorporation three years before NSO's better-known expansion.",
+      "does_not": "Establish ownership, officers or the current group structure - the open dataset carries no shareholder or director fields.",
+      "counter_record": "No entry for 'NSO Group' or 'NSO Group Technologies' surfaced in the same dataset by English name. That is a tooling limit - the dataset's English-name field is frequently blank - not a finding that no such registration exists. Do not report it as a null about NSO.",
+      "date_span": "2013-2026",
+      "persons": [],
+      "doc_type": "registry",
+      "notes": "Street named without house number per the report's address rule; the CFR-published corporate addresses in ISR-09 are reproduced as the regulation prints them."
+    },
+    {
+      "id": "ISR-21",
+      "claim": "Cybereason was founded in 2012 by Lior Div, Yonatan Striem-Amit and Yossi Naar, reported as former members of Unit 8200, and was acquired by LevelBlue (the AT&T cybersecurity spin-out) in a transaction announced October 2025 and reported completed November 2025. Earlier, in March 2025, Cybereason took a $120m investment from SoftBank Corp., SoftBank Vision Fund 2 and Liberty Strategic Capital.",
+      "tier": "labeled",
+      "sources": [
+        "https://www.builtinboston.com/articles/cybereason-founding-story (Built In Boston, founding story)",
+        "https://thecyberwire.com/newsletters/business-briefing/7/41 (CyberWire business briefing, LevelBlue/Cybereason)",
+        "https://research.contrary.com/company/cybereason (Contrary Research company profile)"
+      ],
+      "establishes": "A further instance of the pattern's end-state: an Israeli-founded security company ending up inside a US owner.",
+      "does_not": "Establish the founders' unit service from any filing or company document. Cybereason is private; there is no 20-F or 10-K to check, which is precisely why this sits at labeled while ISR-01 sits at documented.",
+      "counter_record": "Liberty Strategic Capital is the fund of a former US Treasury Secretary; the investor set here is American, not Israeli-state. Nothing in the record ties any service to the company.",
+      "date_span": "2012-2025",
+      "persons": ["Lior Div", "Yonatan Striem-Amit", "Yossi Naar"],
+      "doc_type": "reporting",
+      "notes": "All living and uncharged. Included for completeness of the founder table with its tier stated honestly."
+    }
+  ],
+  "nulls": [
+    {
+      "searched": "'Unit 8200' across the entire SEC EDGAR full-text corpus (2001-2026), filtered to Palo Alto Networks",
+      "result": "Zero. '8200' appears 0 times in PANW's DEF 14A of 7 Nov 2025 and 0 times in its Form 10-K for FY2026 filed 10 Sep 2026, including the passages announcing founder Nir Zuk's retirement. The Nir Zuk / 8200 attribution has no filing behind it."
+    },
+    {
+      "searched": "'Unit 8200' or '8200' in Cellebrite DI Ltd.'s Form 20-F for FY2025",
+      "result": "Zero. Cellebrite - the Israeli forensics company with the largest documented US federal contract footprint in this line - does not state any founder's or officer's unit service in its annual report."
+    },
+    {
+      "searched": "Any Check Point SEC filing 2001-2026 attaching Unit 8200 to founder Gil Shwed",
+      "result": "Zero. All six Check Point hits for 'Unit 8200' concern Nadav Zafrir. Check Point's own 20-F bio of Shwed names no military service at all."
+    },
+    {
+      "searched": "USAspending / FPDS prime contract awards to NSO Group, any agency, FY2008-FY2026",
+      "result": "Zero. The only 'NSO' keyword match is NSOD JOINT VENTURE, a US Army levee contractor - unrelated. Reported US-government use of NSO product, if it occurred, did not occur under NSO's name in FPDS."
+    },
+    {
+      "searched": "USAspending / FPDS prime contract awards to Carbyne, any agency",
+      "result": "Zero. Carbyne's public-safety deployments are sold to state, county and municipal PSAPs, which do not appear in federal procurement data."
+    },
+    {
+      "searched": "RIVA NETWORKS INC awards, as the reported FBI/DEA cut-out for NSO's Landmark product",
+      "result": "Ten awards totalling ~$2.4m, 2007-2024. The DEA entries are 2008 purchases of Treo 650 handsets and covert-phone licences; the largest is a 2017 Army cross-domain training environment. Nothing resembling a spyware or geolocation licence appears. The reported cut-out arrangement is not visible in FPDS."
+    },
+    {
+      "searched": "In-Q-Tel's own published portfolio (iqt.org/portfolio) for Israeli or Israel-founded companies",
+      "result": "None identified on the pages retrievable. IQT states 800+ total investments across 32 paginated pages; the page reachable here listed no Israeli company. IQT's Israeli investments could not be confirmed from IQT's own publication, and no primary was found for the commonly repeated IQT-Cybereason / IQT-Claroty claims. Report as unconfirmed, not as absent."
+    },
+    {
+      "searched": "Paladin Capital Group investments into Israeli companies with government customers",
+      "result": "None documented. Paladin's founding by former heads of NSA, CIA and DARPA in 2001 is itself only labeled - it appears in the firm's own marketing and in trade press, and I found no primary. No Paladin-to-Israeli-company investment was confirmed from any primary source."
+    },
+    {
+      "searched": "Any documented instance of an Israeli intelligence or military service holding equity in a private company",
+      "result": "None found. The one official service investment vehicle - Mossad's Libertad - publishes an explicitly equity-free model: grants, no shares, no dilution, no royalties, in exchange for a non-commercial non-exclusive IP licence. This is the answer to the brief's item (5), and it is a null in the direction that disfavours the hypothesis."
+    },
+    {
+      "searched": "Removal or modification of the NSO Group or Candiru Entity List designations, 2021-2026",
+      "result": "None. Both remain in 15 CFR Part 744 Supplement No. 4 in the eCFR current through 1 September 2026, unchanged from the original 86 FR 60760 / 4 Nov 2021 citation, at 'All items subject to the EAR' with a presumption-of-denial review policy - notwithstanding NSO's reported acquisition by US investors in late 2025 and its reported lobbying for delisting."
+    },
+    {
+      "searched": "Full ISRAEL block of the Entity List, 15 CFR 744 Supp. No. 4, current through 1 Sep 2026",
+      "result": "Eleven entries total. Two are the 2021 spyware designations (NSO, Candiru). Eight are a single 2016 aviation-parts diversion cluster at a small number of Binyamina and Caesarea addresses (81 FR 40178). The remaining two are Toga Networks (2020) and the Nuclear Research Center at Negev Dimona (1997). There is no designation of an Israeli cyber sector."
+    },
+    {
+      "searched": "Israeli Registrar of Companies open dataset for 'NSO Group', 'NSO Group Technologies', 'Paragon Solutions', 'Carbyne', 'Reporty'",
+      "result": "No matches by English name. The dataset's English-name field is frequently blank, so this is a tooling limit and must not be reported as a finding about those companies' registration status. Q Cyber Technologies Ltd, Saito Tech Ltd and Integrity Labs Ltd did resolve."
+    },
+    {
+      "searched": "federalregister.gov for the 4 Nov 2021 Entity List rule",
+      "result": "Unreachable from this environment - HTTP 302 to unblock.federalregister.gov. The citation was established instead from the eCFR entries' own '86 FR 60760, 11/4/21' reference and the BIS press release; the docket index gives the rule at 86 FR 60759-60761. web.archive.org remains unreachable."
+    }
+  ],
+  "searched": [
+    "EDGAR full-text search API (efts.sec.gov): 'Unit 8200' (195 hits), 'Unit 81' (448, all noise), 'Talpiot' (155), 'Defense Export Control' (506), 'Israeli Ministry of Defense export license' (0), 'Carbyne Ltd' in 10-Ks, 'Wiz, Inc.'",
+    "Check Point Software Technologies Ltd. Form 20-F FY2025 (filed 31 Mar 2026) and Form 6-K of 22 Jul 2026",
+    "Cellebrite DI Ltd. Form 20-F FY2025 (filed 3 Mar 2026) - export controls, regulations, major shareholders",
+    "Axon Enterprise Form 10-K FY2025 (filed 25 Feb 2026) - Note 20 Subsequent Events, Carbyne",
+    "Alphabet Inc. Form 10-Q Q2 2026 (filed 23 Jul 2026) - Note 8, Wiz purchase price allocation",
+    "Palo Alto Networks DEF 14A (7 Nov 2025) and Form 10-K FY2026 (10 Sep 2026) - CyberArk close, Zuk retirement, 8200 count",
+    "eCFR API, 15 CFR Part 744 full text current through 2026-09-01 - Entity List Supplement No. 4, ISRAEL block",
+    "USAspending API v2 spending_by_award - keywords CELLEBRITE, NSO GROUP, CARBYNE, RIVA NETWORKS, PARAGON SOLUTIONS, award types A/B/C/D, FY2008-FY2026",
+    "data.gov.il Israeli Registrar of Companies dataset f004176c-b85f-4542-8901-7b3176f9a054 - Saito Tech, Integrity Labs, Q Cyber, NSO, Paragon, Carbyne, Reporty",
+    "iqt.org/portfolio; team8.vc/about; cyberstarts.com; wiz.io/about-us (404); libertad.gov.il (503)",
+    "Web: NSO 2025-26 ownership and DECA approval; Entity List delisting; WhatsApp v NSO damages and Ninth Circuit appeal No. 25-7380; Apple v NSO voluntary dismissal; Candiru/Saito Tech/Integrity Labs 2025-26; Paragon founders, AE Industrial/RedLattice, ICE contract reinstatement; Cyberstarts/Wiz; Paladin Capital; Cybereason/LevelBlue; Unit 81 scale"
+  ],
+  "notes": "THE TRAP, HANDLED. Nothing in this file rests on a surname, a family, a school or a shared conference. Every adverse finding rests on a filing, a regulation, a registry record or a contract award, and each carries the counter-record that limits it. Where the trope makes a testable claim, the test was run and printed either way: Cellebrite's largest owner is a Japanese listed company at 42.52%, not any Israeli state or family interest (ISR-15); Mossad's own investment arm is equity-free by published design (ISR-17); the Entity List names two Israeli companies, not a sector (ISR-09); and the single most-cited spyware firm's founders are the weakest case in the whole founder table (ISR-18).\n\nTHE SHAPE OF THE ANSWER. The 8200 founder pipeline is real, openly stated, and nearly worthless as evidence - the base rate swamps it, and in the filing layer it barely exists at all (ISR-02). The thing that actually binds these companies to the Israeli state is the export licence: DECA within the Ministry of Defense, under the Defense Export Control Law 5767-2007, with a per-country, per-customer veto that Cellebrite describes in its own 20-F (ISR-07), that was tightened by ministerial order on 18 November 2025 effective 18 March 2026 (ISR-08), and that NSO's reported US acquirers could not buy their way out of - NSO's own spokesman said the company 'is not moving out of Israeli regulatory or operational control', and the sale required DECA approval (ISR-11). That is the finding. It should displace the founder table, not sit beside it.\n\nBEST NEW MATERIAL for the report's thin capital/contract layer: ISR-06 (three 2026 closings from three acquirers' filings: CyberArk $21.1bn, Wiz $29.5bn, Carbyne $625.0m); ISR-12 and ISR-13 (Cellebrite $158.3m across 705 awards; the ICE-Paragon award 70CTD024P00000012 paid out at $2,008,740.07); ISR-10 (registry: Saito Tech Ltd and Integrity Labs Ltd both active at the Entity List's own address for Candiru, the latter incorporated after designation).\n\nTHREE THINGS I WOULD NOT PUBLISH YET. (a) The Candiru-Integrity Labs identity - I have an address match and a date, not a shareholder filing; publishing it as continuity would be the naming error at address scale. (b) The WhatsApp v NSO dollar figures at anything above labeled, until the docket is pulled. (c) The Libertad terms at documented tier, until libertad.gov.il can be loaded and quoted directly.\n\nLIVING-PERSON FLOOR observed throughout: Zafrir, Shwed, Zuk, Raanan, Schneorson, Barak, Simonds, Hulio, Lavie, Carmi, Div, Striem-Amit and Naar are named only for documented affiliations and business facts. No rung 4 and no rung 5 is claimed for anyone. No reassurance boilerplate was written."
+}

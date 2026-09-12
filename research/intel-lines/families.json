@@ -1,0 +1,303 @@
+{
+  "line": "families",
+  "findings": [
+    {
+      "id": "FAM-01",
+      "claim": "Rothschild & Co SCA, the largest firm carrying the name, was taken private in 2023 by Concordia, a French SAS whose shareholders are all members of the Rothschild family. The AMF-published result of Concordia's simplified tender offer (settlement 18 September 2023) left the concert holding 68,571,259 shares = 88.74% of capital and 91.25% of voting rights; including assimilated shares under put/call and transfer undertakings, 73,909,273 shares = 95.65% of capital and 95.79% of votes, above the squeeze-out threshold. Mandatory delisting was implemented at 38.60 euros per share. Concordia is registered at the Paris trade and companies registry under number 499 208 932, registered office 23 bis avenue de Messine, 75008 Paris.",
+      "tier": "documented",
+      "sources": [
+        "Rothschild & Co / Concordia press release, Paris, 12 September 2023, 'Result of the simplified tender offer for Rothschild & Co's shares' — https://www.rothschildandco.com/siteassets/publications/concordia/2023/en_pr_result_of_the_simplified_tender_offer_for_randcos_shares.pdf (full text extracted locally)",
+        "AMF result notice referenced therein — https://www.amf-france.org/"
+      ],
+      "establishes": "The listed Rothschild vehicle no longer exists; family control of Rothschild & Co is real, documented, and exercised through a named holding company with a registry number, not through an unwritten network.",
+      "does_not": "Establish anything about the family's influence outside this one corporate group; a squeeze-out of minority shareholders in a mid-sized advisory bank is an ordinary European take-private, not evidence of external control.",
+      "counter_record": "The same document shows the control being purchased at a published price from public minority holders under regulator supervision — i.e. the opposite of concealed ownership. Nothing in the offer documents supports any claim about the family beyond this issuer.",
+      "date_span": "2023-06-08 to 2023-10-11",
+      "persons": [],
+      "doc_type": "filing",
+      "notes": "The sub-model's first pass on this PDF hallucinated '22.00 euros' and 'January 2020'. Figures above are from raw text extracted from the PDF locally, not from a model summary."
+    },
+    {
+      "id": "FAM-02",
+      "claim": "Rothschild & Co's actual size, from its own audited consolidated accounts for the twelve months to 31 December 2025: net banking income 2,986.4m euros (2024: 2,908.75m); profit before tax 714.4m; consolidated net income 573.9m, of which group share 412.8m; TOTAL ASSETS 19,989,242 thousand euros = 19.99bn euros (2024: 19.53bn). Headcount 4,787 full-time equivalents at period end across France 1,399 / UK 1,586 / other Europe 524 / North America 421 / Switzerland 401 / Luxembourg 51 / Asia-Pacific and Latin America 219 / Channel Islands 50 / other 136. Company material states c.4,600 specialists in over 40 countries and Wealth & Asset Management assets of approximately 124bn euros.",
+      "tier": "documented",
+      "sources": [
+        "Rothschild & Co, Consolidated accounts December 2025 — https://www.rothschildandco.com/siteassets/publications/rothschild_and_co/2025/full_year_results/en_consolidated_accounts_december_2025.pdf (income statement, balance sheet, and the Art. L.511-45 Code monétaire et financier country-by-country table)",
+        "Rothschild & Co press release, November 2025, 'About Rothschild & Co' boilerplate — https://www.rothschildandco.com/en/newsroom/press-releases/2025/11/randco-sets-the-course-for-the-continued-development-of-its-wealth-management-business-in-germany/"
+      ],
+      "establishes": "Against the top of global banking, the comparison is not close. ICBC held about 7.646 trillion US dollars of assets at end-2025 and JPMorgan Chase about 4.4 trillion. Rothschild & Co's balance sheet of 19.99bn euros is roughly 0.26% of ICBC's and about 0.45% of JPMorgan's. JPMorgan reported about 57bn dollars of 2025 profit; Rothschild & Co reported 573.9m euros. The firm is an advisory and wealth house, not a balance-sheet bank.",
+      "does_not": "Measure family wealth, which is held outside the operating company and is not disclosed in these accounts; nor measure advisory influence, where Rothschild & Co is a genuine top-tier M&A adviser by deal count. Small balance sheet is not the same as small mandate.",
+      "counter_record": "The advisory franchise is the counter-record to a pure size argument: the firm ranks near the top of global M&A adviser league tables by number of deals despite the small balance sheet. Anyone arguing 'they are tiny therefore irrelevant' has run the symmetry rule in the other direction and should stop at the number.",
+      "date_span": "2025-01-01 to 2025-12-31",
+      "persons": [],
+      "doc_type": "filing",
+      "notes": "Group AUM is not stated in the consolidated accounts; the 124bn euro figure is company boilerplate, tier labeled at best. S&P Global Market Intelligence's 2026 largest-banks ranking page returned HTTP 403 to direct fetch; the ICBC and JPMorgan figures are from the ICBC 2025 results reporting and JPMorgan's FY2025 10-K as surfaced in search, not fetched to the primary in this pass."
+    },
+    {
+      "id": "FAM-03",
+      "claim": "Edmond de Rothschild Group is a separate Swiss institution, not part of Rothschild & Co. Its bearer shares were delisted from SIX on 27 August 2019 following a SIX Exchange Regulation decision of 16 August 2019, after Edmond de Rothschild Holding reached 98.82% of the share capital of Edmond de Rothschild (Suisse) S.A. and began a squeeze-out. At 31 December 2025 the group reported assets under management of over CHF 198bn, a record, up 8.0% on the year, with a solvency ratio of 19.1% and CHF 10bn of net inflows. Ariane de Rothschild has been CEO since March 2023.",
+      "tier": "documented",
+      "sources": [
+        "SIX Exchange Regulation delisting notice, 27 August 2019 — https://www.ser-ag.com/dam/downloads/publication/delisting-notices/2019/edmond-de-rothschild-27-08-2019.pdf",
+        "Edmond de Rothschild Group, 2025 annual results, 'Strong momentum with CHF 10 billion net inflows in 2025 taking assets under management to a record high close to CHF 200 billion' — https://www.edmond-de-rothschild.com/en/news/show/1565-16673-strong-momentum-with-chf-10-billion-net-inflows-in-2025-taking-assets-under-management-to-a-record-high-close-to-chf-200-billion"
+      ],
+      "establishes": "There are at least two large, separately owned, separately managed Rothschild financial groups. Any claim that treats 'Rothschild' as one entity has already failed on the registry.",
+      "does_not": "Establish any relationship, coordination or common control between Rothschild & Co and Edmond de Rothschild. No document was found asserting one.",
+      "counter_record": "The two groups have competed in wealth management in the same markets and have litigated over use of the Rothschild name in branding — the record shows rivalry, not a single house. Not fetched to a primary in this pass; tier that sentence labeled.",
+      "date_span": "2019-08-16 to 2025-12-31",
+      "persons": ["Ariane de Rothschild"],
+      "doc_type": "registry",
+      "notes": "Ariane de Rothschild is living and appears here only as the named CEO of a company, from the company's own governance page."
+    },
+    {
+      "id": "FAM-04",
+      "claim": "RIT Capital Partners plc is an LSE-listed, publicly traded closed-ended investment trust regulated as a UK investment company, not a bank and not a private family vehicle. Final results for the year ended 31 December 2025: net assets 4,040.1m pounds; NAV per share 2,921p diluted, 2,932p basic; share price 2,270p; 147.2m shares in issue. It is managed by its wholly owned subsidiary J. Rothschild Capital Management Limited, whose CEO is Maggie Fanari.",
+      "tier": "documented",
+      "sources": [
+        "RIT Capital Partners plc, Final Results for the year ended 31 December 2025, RNS via Investegate — https://www.investegate.co.uk/announcement/rns/rit-capital-partners--rcp/final-results/9454688",
+        "RIT Capital Partners — https://www.ritcap.com/news/final-results-for-the-year-ended-31-december-2025/"
+      ],
+      "establishes": "Anyone can buy RIT on the open market. Its holdings, NAV and discount are published monthly. Whatever this vehicle is, it is not secret.",
+      "does_not": "Establish the size of the Rothschild family's stake. The final-results announcement discloses no family shareholding percentage. See nulls.",
+      "counter_record": "Jacob Rothschild, who founded the vehicle and chaired it until 2019, died in February 2024; the company is now run by external management. The 'family investment trust' framing describes its origin, not its current governance.",
+      "date_span": "2025-01-01 to 2025-12-31",
+      "persons": [],
+      "doc_type": "filing",
+      "notes": "Net assets 4,040.1m pounds is from the RNS; a separate secondary reported 3,855.0m for a different measure or date. Prefer the RNS figure; flag the discrepancy rather than picking silently."
+    },
+    {
+      "id": "FAM-05",
+      "claim": "The 19th-century structure was real and is documented: five houses run jointly by Mayer Amschel Rothschild's sons in Frankfurt, London, Paris, Vienna and Naples, acting together on large transactions, pooling profits and sharing costs. Three of the five are gone. Naples (C M de Rothschild & Figli) closed in 1863 after Italian unification removed the reason for its existence. Frankfurt (M A Rothschild & Söhne) closed in 1901 on the death of Wilhelm Carl, its last partner, with no family member willing to relocate there. Vienna (S M von Rothschild) was ended by force: the 13 March 1938 Anschluss, followed in 1939 by placement under the control of Merck, Finck & Co and sale to them, with Bankhaus E. v. Nicolai taking over in 1940.",
+      "tier": "documented",
+      "sources": [
+        "The Rothschild Archive, 'The Business' house pages: Naples — https://www.rothschildarchive.org/business/c_m_de_rothschild_and_figli_naples/ ; Frankfurt — https://www.rothschildarchive.org/business/m_a_rothschild_sohne_frankfurt/ ; Vienna — https://www.rothschildarchive.org/business/s_m_von_rothschild_vienna/",
+        "Guide to the Archive, 'S M von Rothschild in the twentieth century' — https://guide-to-the-archive.rothschildarchive.org/the-vienna-banking-house/depts/the-vienna-house-history/s-m-von-rothschild-in-the-twentieth-century"
+      ],
+      "establishes": "The five-capitals structure is history, not a present arrangement, and the Vienna house did not merely close — it was expropriated under Nazi rule. The literature that invokes 'five capitals' as a live control diagram is describing an arrangement that stopped existing between 1863 and 1938.",
+      "does_not": "Diminish the 19th-century scale, which was genuinely first-rank: the houses were among the largest private financial institutions in Europe and financed sovereign borrowing across it. Both halves belong on the page.",
+      "counter_record": "The Vienna record cuts directly against the trope it is usually deployed to support: a family alleged to control states was dispossessed by one.",
+      "date_span": "1810s to 1940",
+      "persons": [],
+      "doc_type": "reporting",
+      "notes": "rothschildarchive.org returned HTTP 503 to direct fetch on two attempts; the above is from the Archive's own pages as surfaced and quoted in search results, not from a completed fetch. Re-fetch before publication and tier documented only once fetched."
+    },
+    {
+      "id": "FAM-06",
+      "claim": "'Warburg' denotes at least three unrelated-in-control institutions, and telling them apart requires only their founding documents. (a) M.M.Warburg & CO (AG & Co.) KGaA, Hamburg, HRB 84168 — the family private bank, still family-owned. (b) Warburg Pincus LLC, New York — private equity; E.M. Warburg & Co. was founded in New York by Eric Warburg in 1939 and was ACQUIRED by Lionel I. Pincus & Co. in 1966; the firm describes itself as 'a private partnership since 1966' with more than 105bn dollars under management. (c) S.G. Warburg & Co., London — founded 1946 by Siegmund Warburg, Erich Körner and Henry Grunfeld; acquired by Swiss Bank Corporation in 1995 under EC merger Case No IV/M.597; SBC merged with Union Bank of Switzerland to form UBS in 1998. The name survives inside UBS; the firm does not.",
+      "tier": "documented",
+      "sources": [
+        "Warburg Pincus, 'Firm History: Milestones of Growth' — https://warburgpincus.com/firm/firm-history/",
+        "European Commission, Case No IV/M.597 Swiss Bank Corporation / SG Warburg — https://ec.europa.eu/competition/mergers/cases/decisions/m597_en.pdf",
+        "Federal Reserve Board order on the SBC/UBS merger, 8 June 1998 — https://www.federalreserve.gov/boarddocs/press/bhc/1998/19980608/19980608.pdf",
+        "Northdata registry entry, M.M.Warburg & Co. (AG & Co.) KGaA, Hamburg HRB 84168 — https://www.northdata.com/M%C2%B7M%C2%B7Warburg%20&%20Co%C2%B7%20(AG%20&%20Co%C2%B7)%20KGaA,%20Hamburg/HRB%2084168"
+      ],
+      "establishes": "The test that separates them is a single line in each firm's own history: Warburg Pincus was sold to Lionel Pincus in 1966 and has been partner-owned since; S.G. Warburg was sold to SBC in 1995 and absorbed into UBS in 1998; only M.M.Warburg remains family-held. A surname shared across three firms with three different owners is the naming error in its purest form.",
+      "does_not": "Establish that the names are coincidental. Eric M. Warburg was a member of the Hamburg Warburg family, so Warburg Pincus's name has a genuine family origin. Origin is not control, and 1966 is where the control ends.",
+      "counter_record": "Against any claim that the firms are 'really' unconnected: they were connected, by family, in the mid-20th century, and Siegmund Warburg in London and Eric Warburg in New York were cousins who quarrelled over exactly this sale. The honest statement is that the connection is historical and terminated, not that it never existed.",
+      "date_span": "1939 to 1998",
+      "persons": [],
+      "doc_type": "filing",
+      "notes": "Eric M. Warburg's descent from Max Warburg (Paul Warburg's brother) was NOT fetched to a primary in this pass — tier that specific link labeled until a genealogical or archival primary is pulled. Warburg Pincus's own page does not state it."
+    },
+    {
+      "id": "FAM-07",
+      "claim": "The cum-ex court record against the Hamburg house is documented and adverse. Landgericht Bonn, judgment of 18 March 2020, 62 KLs - 213 Js 41/19 - 1/19, convicted two British former traders and ordered forfeiture (Einziehung) against M.M.Warburg of 176,574,602.00 euros, of which 166,574,603.00 euros as joint liability, for proprietary cum-ex trading in 2007-2011. The Bundesgerichtshof upheld the convictions and the treatment of cum-ex as criminal tax evasion on 28 July 2021, 1 StR 519/20. M.M.Warburg's constitutional complaint against the forfeiture (2 BvR 2194/21) was unsuccessful. The separate criminal proceeding against Christian Olearius, former head of the bank, was TERMINATED by Landgericht Bonn on 24 June 2024, 63 KLs 1/22, on grounds of permanent unfitness to stand trial; the BGH held the termination legally sound but remitted the question of forfeiture of his proceeds to Bonn for fresh hearing, the Cologne prosecutor seeking about 40m euros.",
+      "tier": "documented",
+      "sources": [
+        "LG Bonn, 18.03.2020, 62 KLs - 213 Js 41/19 - 1/19, full text — https://nrwe.justiz.nrw.de/pdfdownload/downloadEntscheidung.php?entscheidung=/nrwe/lgs/bonn/lg_bonn/j2020/62_KLs_213_Js_41_19_1_19_Urteil_20200318.html ; dejure index — https://dejure.org/dienste/vernetzung/rechtsprechung?Gericht=LG+Bonn&Datum=18.03.2020&Aktenzeichen=62+KLs+1%2F19",
+        "BGH, 28.07.2021, 1 StR 519/20, as reported — https://www.handelsblatt.com/finanzen/banken-versicherungen/cum-ex/cum-ex-skandal-bundesgerichtshof-bestaetigt-urteil-gegen-zwei-warburg-banker/100147177.html",
+        "BVerfG 2 BvR 2194/21, reported — https://www.lto.de/recht/kanzleien-unternehmen/k/cum-ex-verfassungsbeschwerde-m-m-warburg-einziehung-tatertraege-erfolglos-2bvr219421",
+        "LG Bonn termination, 24.06.2024, 63 KLs 1/22, reported — https://www.lto.de/recht/nachrichten/n/cum-ex-lg-bonn-olearius-verfahrenseinstellung-verhandlungsunfhigkeit-63-KLs-122",
+        "BGH remittal on Einziehung, 1 StR 97/25, reported — https://www.lto.de/recht/kanzleien-unternehmen/k/cum-ex-geschaefte-warburg-bank-christian-olearius-bgh-einziehung-tatlohn-1-str-97-25"
+      ],
+      "establishes": "Where a family bank has done something criminal, it is in a docket with a case number, and the state pursued it to the constitutional court. That is what the document layer looks like when the answer is adverse.",
+      "does_not": "Establish a criminal finding against Christian Olearius. He is living, the proceeding against him ended without verdict on health grounds, and a termination for unfitness to stand trial is neither a conviction nor an acquittal. It also does not establish anything about any other bank bearing the Warburg name.",
+      "counter_record": "Cum-ex was an industry-wide scheme involving dozens of banks across Germany, including state-owned Landesbanken and large international institutions. Presenting the Warburg case as a family-specific phenomenon inverts the record: the family bank is one defendant among many, and not the largest.",
+      "date_span": "2007 to 2026",
+      "persons": ["Christian Olearius"],
+      "doc_type": "court record",
+      "notes": "The NRWE full-text judgment URL is the primary and should be pulled before publication; the BGH and BVerfG case numbers above come from legal-press reporting, not from the decisions themselves. Living-person floor applies to Olearius throughout: state the procedural posture, stop."
+    },
+    {
+      "id": "FAM-08",
+      "claim": "M.M.Warburg's present condition is the trope's strongest counter-example. The bank reported a net profit of about 1m euros for financial year 2024, down from about 10m in 2023, on net interest income of about 67m and net commission income of just under 67m, against personnel expenses of about 71m and other administrative expenses of about 84m — a cost-income ratio of 112.4%. Shareholders Christian Olearius and Max Warburg each hold 40% of the group. They borrowed to repay cum-ex tax debts of almost 280m euros including interest for 2007-2011; supervisors required a 60m euro loan from the bank to its parent to be repaid by end-March 2025. A structured sale process running since 2024, mandated to Perella Weinberg and Latham & Watkins, had produced no buyer as of end-March 2025; part of the loan was repaid and part extended.",
+      "tier": "documented",
+      "sources": [
+        "M.M.Warburg & CO press release, 'M.M.Warburg & CO closes financial year 2024 on a modestly positive note' — https://www.mmwarburg.de/en/publications/press/M.M.Warburg-CO-closes-financial-year-2024-on-a-modestly-positive-note/",
+        "Börsen-Zeitung, 'No new investor found for Warburg Bank' — https://www.boersen-zeitung.de/english/no-investor-warburg-bank",
+        "M.M.Warburg Gruppe, 'Generational Shift at Warburg Bank' — https://mmwarburggruppe.com/en/press/press/Generational-Shift-at-Warburg-Bank"
+      ],
+      "establishes": "A cost-income ratio above 100 means the bank spends more running itself than it earns. The named banking dynasty most often invoked alongside the Federal Reserve's founding runs an institution that made one million euros in a year, could not find a buyer, and needed a regulator-supervised repayment schedule. Publish this at the same prominence as anything adverse.",
+      "does_not": "Establish that the family is poor, or that the owners lack assets outside the bank. Nothing here measures private wealth.",
+      "counter_record": "The bank's own framing is that it strengthened reserves and capital structure from its own resources and invested a double-digit million sum in IT — i.e. the thin profit is partly a deliberate reinvestment year, not purely distress. Both readings are on the record; the failed sale process is the harder fact.",
+      "date_span": "2024-01-01 to 2025-04-30",
+      "persons": ["Christian Olearius", "Max Warburg"],
+      "doc_type": "reporting",
+      "notes": "Balance-sheet total, AUM and headcount are NOT established — the 2024 press release does not disclose them and the Geschäftsbericht was not retrieved. See nulls. Both named shareholders are living; they appear here as the registered owners of a company, which is a filing fact."
+    },
+    {
+      "id": "FAM-09",
+      "claim": "Investor AB is the best-documented case of concentrated family control of listed industry in a democracy, and every element of it is in the annual report. At 31 December 2025 Investor had about 693,000 shareholders. The single holder above one tenth of votes is the Knut and Alice Wallenberg Foundation with 20.1% of capital and 43.0% of the votes. The Wallenberg Foundations collectively controlled 50.2% of votes, per the Nomination Committee table. The mechanism is stated plainly in the governance report: A-shares carry one vote, B-shares carry 1/10 vote. Adjusted net asset value was SEK 1,087bn against a market capitalisation of SEK 1,010bn; portfolio companies employ more than 500,000 people; SEK 3.7bn of the SEK 15.9bn dividend paid went to the Wallenberg Foundations, which have granted some SEK 50bn to research and education to date and have been Investor's largest shareholder since 1917.",
+      "tier": "documented",
+      "sources": [
+        "Investor AB, Annual Report 2025, Corporate governance report and 'This is Investor' — https://www.investorab.com/media/vnwfudoo/eng-annual-report-2025-print.pdf (text extracted locally)",
+        "Investor AB ownership structure page — https://www.investorab.com/investors-media/the-investor-share/ownership-structure"
+      ],
+      "establishes": "Family control of a trillion-krona industrial portfolio, exercised over a century, requiring no secrecy at all — it is a dual-class share structure disclosed in a printed annual report, and the cash flows to named foundations that publish their grants. This is the correct answer to 'can a family control industry?': yes, by a legal instrument, in public, with the percentages printed.",
+      "does_not": "Establish any coordination with any other family, any intelligence relationship, or any control outside the companies in the portfolio. The 20.1%/43.0% asymmetry is the whole mechanism and it is bounded by Swedish company law.",
+      "counter_record": "The same structure is the counter to the covert-control thesis generally: where family control of listed industry actually exists at scale, it leaves a paper trail this thick. The absence of a comparable trail for the families the literature prefers is itself evidence.",
+      "date_span": "1917 to 2025-12-31",
+      "persons": [],
+      "doc_type": "filing",
+      "notes": "The report's single Wallenberg mention (Section XX) attaches 'Investor AB board (Wallenberg dynasty - Sweden's most powerful financial family, 100+ years of banking and industrial control)' to Mark Malloch-Brown. The board membership itself was not verified against Investor AB's board list in this pass — check it before it stays on the page."
+    },
+    {
+      "id": "FAM-10",
+      "claim": "The Federal Reserve ownership claim, tested against statute. Member commercial banks subscribe stock in their district Reserve Bank; 12 U.S.C. 287 fixes shares at 100 dollars each and provides that 'Shares of the capital stock of Federal reserve banks owned by member banks shall not be transferred or hypothecated.' 12 U.S.C. 289 sets the dividend: for stockholders with more than 10,000,000,000 dollars in total consolidated assets, the smaller of the high yield of the 10-year Treasury note at the last auction and 6 percent; for those at or below that threshold, 6 percent. The aggregate surplus fund of the Reserve Banks 'may not exceed 6,825,000,000 dollars' and earnings above dividends and that cap go to the Treasury's general fund. The Federal Reserve's own answer is 'The Federal Reserve System is not owned by anyone' and that Reserve Banks 'are required by law to transfer net earnings to the U.S. Treasury.'",
+      "tier": "documented",
+      "sources": [
+        "12 U.S.C. 287 — https://www.law.cornell.edu/uscode/text/12/287",
+        "12 U.S.C. 289 — https://www.law.cornell.edu/uscode/text/12/289",
+        "Federal Reserve FAQ, 'Who owns the Federal Reserve?' — https://www.federalreserve.gov/faqs/about_14986.htm",
+        "12 CFR Part 209 (Regulation I), Federal Reserve Bank Capital Stock — https://www.ecfr.gov/current/title-12/chapter-II/subchapter-A/part-209",
+        "Federal Register, 'Federal Reserve Bank Capital Stock', 20 November 2025 — https://www.federalregister.gov/documents/2025/11/20/2025-20472/federal-reserve-bank-capital-stock",
+        "GAO-17-243, Federal Reserve System: Potential Implications of Modifying the Capital Surplus Account and Stock Ownership Requirement — https://www.gao.gov/assets/gao-17-243.pdf"
+      ],
+      "establishes": "The 'privately owned Fed' claim is dead on the transfer clause alone. Reserve Bank stock cannot be bought, sold, traded, pledged or inherited; it is a non-transferable membership obligation held only by US-chartered member banks, paying a statutorily capped dividend, with residual earnings going to Treasury by law. No family, foreign entity or private investor can hold it, because the statute forbids the transfer that would be required.",
+      "does_not": "Establish that member banks have no influence. They elect six of the nine directors of each Reserve Bank, and the New York Fed's counterparty and primary-dealer arrangements are a real channel of private-sector proximity. The correct objection to the Fed's governance is about director election and regulatory capture, and it is available without the ownership claim.",
+      "counter_record": "The genuinely adverse fact runs the other way from 'the Fed prints money for its owners': the System has remitted nothing to Treasury since September 2022 and carried a consolidated deferred asset of about 243bn dollars as at 3 December 2025 — accumulated losses, not extracted profits. Against that: cumulative remittances in the preceding decade ran to hundreds of billions, so the deferred asset is a phase of the balance sheet, not its character.",
+      "date_span": "1913 to 2025-12-03",
+      "persons": [],
+      "doc_type": "filing",
+      "notes": "eCFR 12 CFR 209 redirected to an unblock interstitial and was not fetched; cited as a pointer, not as a quoted source. Deferred-asset figure from Federal Reserve balance-sheet developments releases as surfaced in search; pull the H.4.1 for the exact line before publication."
+    },
+    {
+      "id": "FAM-11",
+      "claim": "The legal citation the ownership claim rests on is systematically misread. Lewis v. United States, 680 F.2d 1239 (9th Cir. 1982), arose from a traffic injury on 27 July 1979 caused by a vehicle of the Los Angeles branch of the Federal Reserve Bank of San Francisco. The Ninth Circuit held that Reserve Banks are not federal agencies FOR PURPOSES OF THE FEDERAL TORT CLAIMS ACT, 28 U.S.C. 1346(b), and that the court therefore lacked subject-matter jurisdiction. The same opinion records that Reserve Banks 'have properly been held to be federal instrumentalities for some purposes', including a Reserve Bank employee being a public official under the federal bribery statute.",
+      "tier": "documented",
+      "sources": [
+        "Lewis v. United States, 680 F.2d 1239 (9th Cir. 1982), full text — https://law.justia.com/cases/federal/appellate-courts/F2/680/1239/200393/ and https://law.resource.org/pub/us/case/reporter/F2/680/680.F2d.1239.80-5905.html"
+      ],
+      "establishes": "A tort-liability holding about who pays for a car accident is quoted as a holding about ownership of the monetary system. This is the naming error applied to a case caption: the sign ('not a federal agency') read as the thing named ('privately owned'). The opinion's own text defeats the use it is put to.",
+      "does_not": "Establish that the Reserve Banks are ordinary government departments. They are hybrid by design and the opinion says so; that hybridity is the real, citable structural point.",
+      "counter_record": "Lewis is genuinely a case in which a federal court declined to treat a Reserve Bank as the federal government. Anyone dismissing the citation entirely is running the ratchet in the other direction. The accurate statement is that the holding is jurisdictional and issue-specific, and the same court said the opposite for other purposes in the same paragraph.",
+      "date_span": "1979-07-27 to 1982-04-19",
+      "persons": [],
+      "doc_type": "court record",
+      "notes": "This is the single highest-value kill in the line: it is checkable in one click and the counter-text is inside the cited document."
+    },
+    {
+      "id": "FAM-12",
+      "claim": "The family-wealth figures fail on arithmetic. UBS's Global Wealth Report 2025 covers 471 trillion US dollars of global wealth, stated to be more than 92% of the world's wealth; the 2026 edition reports global wealth rose over 10% in 2025. The recurring '500 trillion dollar Rothschild fortune' claim therefore asserts a single family holds an amount equal to or greater than all household wealth on Earth. No filing, registry, tax record, probate record or court document supporting any figure of this order was located. The disclosed vehicles bearing the name total roughly: Rothschild & Co, 19.99bn euros of assets and about 124bn euros of client AUM; Edmond de Rothschild, CHF 198bn of client AUM; RIT Capital Partners, 4.04bn pounds of net assets. Client AUM is other people's money and is not family wealth.",
+      "tier": "documented",
+      "sources": [
+        "UBS Global Wealth Report 2025 — https://www.ubs.com/global/en/media/display-page-ndp/en-20250618-gwr-2025.html",
+        "UBS Global Wealth Report 2026 — https://www.ubs.com/global/en/media/display-page-ndp/en-20260630-gwr-2026.html",
+        "Sources at FAM-02, FAM-03, FAM-04 for the vehicle figures"
+      ],
+      "establishes": "The claim is not merely unsupported, it is arithmetically impossible against a published global aggregate. It can be killed without any inquiry into the family at all, which is the correct way to kill it.",
+      "does_not": "Establish what the family is actually worth. No one outside it knows, no filing requires disclosure, and the honest tier for any specific figure is unsupported. Absence of a number is not evidence of a large one — that is the guaranteed-null rule.",
+      "counter_record": "Against a simple 'they are just an advisory firm' reading: the family's control of Concordia (FAM-01) is real, undisclosed in quantum, and a genuine concentration of ownership. The unknown is unknown in both directions.",
+      "date_span": "2024 to 2026",
+      "persons": [],
+      "doc_type": "reporting",
+      "notes": "Whatever the 2026 global total turns out to be (roughly 520 trillion if the stated 10%-plus growth holds), a 500 trillion single-family claim stays at 96% or more of all wealth on Earth. The kill does not depend on the year."
+    },
+    {
+      "id": "FAM-13",
+      "claim": "The 'owns most of the world's central banks' claim, tested at the only institution where central-bank shareholding is a real legal category. Sixty-three central banks and monetary authorities are members of the Bank for International Settlements with rights of voting and representation at General Meetings. Private shareholding in the BIS was abolished: an Extraordinary General Meeting on 8 January 2001 restricted the right to hold BIS shares exclusively to central banks and approved the mandatory repurchase of all 72,648 shares then held by private shareholders at CHF 16,000 per share. Three former private shareholders challenged the withdrawal before the Hague Arbitral Tribunal, which issued its final decision on 19 September 2003.",
+      "tier": "documented",
+      "sources": [
+        "BIS, 'The BIS announces the withdrawal of all shares held by its private shareholders against payment of CHF 16,000 per share', 8 January 2001 — https://www.bis.org/press/p010108.htm",
+        "BIS, 'Note to private shareholders: Decisions by the Extraordinary General Meeting held on 8 January 2001' — https://www.bis.org/about/swd010110.htm",
+        "BIS, 'Withdrawal of privately held shares of the BIS: Final decision of the Hague Arbitral Tribunal', 22 September 2003 — https://www.bis.org/press/p030922.htm",
+        "BIS member central banks — https://www.bis.org/about/organisation/members"
+      ],
+      "establishes": "The one institution where a private party could once hold a stake in the central-banking system published the date it ended that, the number of shares, the price, and the arbitration that followed. Private shareholding in the BIS ended on 8 January 2001. Member central banks are statutory public institutions of their states.",
+      "does_not": "Establish that BIS governance is democratic or transparent in substance. Its immunities, its Basel committees' rule-setting without direct legislative mandate, and the closed Global Economy Meetings are real and criticisable — and the report already treats the BIS. The ownership claim is the weakest available objection to it.",
+      "counter_record": "The withdrawal itself is a documented act of concentration: the BIS compulsorily bought out private holders to consolidate itself among central banks. Read either way, the record is published on the BIS's own site with case documents attached.",
+      "date_span": "2001-01-08 to 2003-09-19",
+      "persons": [],
+      "doc_type": "filing",
+      "notes": "The 63-member figure is from the BIS's own members page as surfaced; confirm against the current page before publication."
+    },
+    {
+      "id": "FAM-14",
+      "claim": "Three specific passages in the live report fail the tests above and should be held for the author. (a) Section VII states: 'The same banking dynasties that created the institution in secret still operate it 113 years later. The chair rotates. The families do not.' The succession the report itself prints — Warburg, Strong, Burns, Volcker, Greenspan, Bernanke, Yellen, Powell — contains exactly one member of a banking family, Paul Warburg, who died in 1932. The sentence is the banking-families trope stated in the report's own voice and it is unsupported. (b) Section XX states, of Geithner, 'the private equity layer (Warburg Pincus - note the Warburg name from the Federal Reserve's founding dynasty, Section VII).' Warburg Pincus was acquired by Lionel I. Pincus & Co. in 1966 and has been a private partnership since; the name is a residue of a firm sold sixty years ago. An instruction to the reader to 'note the name' is exactly the naming error, and the report's own term for it is linguistic phreaking. (c) Section VI states 'The same Rothschild banking network documented in Section VII'. Section VII contains one Rothschild sentence, about an 1825 gold loan. No Rothschild banking network is documented there. Rothschild appears six times in the whole report, five of them in Section VI.",
+      "tier": "documented",
+      "sources": [
+        "/home/user/b0b-dashboard/site/report.html — verified by regex over the file on 12 September 2026; Rothschild at six offsets, five under h2 id=\"VI\", one under h2 id=\"VII\"; Wallenberg at one offset under h2 id=\"XX\"; Warburg at 32 offsets",
+        "Warburg Pincus firm history — https://warburgpincus.com/firm/firm-history/"
+      ],
+      "establishes": "The weakness the common brief predicted is present and is in the report's own voice, not in its sources. All three passages rest on a surname rather than a filing.",
+      "does_not": "Establish that the Federal Reserve section is wrong on its documented material. Paul Warburg's role at Jekyll Island, his Kuhn Loeb partnership, his Fed Board service 1914-1918 and his CFR founding directorship are historical record and survive intact. What fails is the present-tense continuity claim built on top of them.",
+      "counter_record": "Against cutting the Warburg material entirely: the 1910-1913 record is genuinely documented and the report is right to carry it. The fix is to end the passage where the documents end — 1932 — rather than to carry the sentence forward 113 years.",
+      "date_span": "2026-09-12",
+      "persons": [],
+      "doc_type": "none",
+      "notes": "RESEARCH ONLY. Nothing edited under site/. Held for the author's decision, per the standing rule on contested and defamation-adjacent material."
+    }
+  ],
+  "nulls": [
+    {
+      "searched": "Rothschild family shareholding percentage in RIT Capital Partners plc — final results RNS for FY2025 and the company's own results page",
+      "result": "NOT DISCLOSED. The final-results announcement states no family shareholding figure. Widely repeated secondary percentages exist; none traced to a filing in this pass. Tier any figure unsupported until the annual report's substantial-shareholdings table or an RNS holding notification is pulled."
+    },
+    {
+      "searched": "Any Rothschild, Warburg, or other family entity holding Federal Reserve Bank capital stock",
+      "result": "STRUCTURALLY IMPOSSIBLE, not merely unfound. 12 U.S.C. 287 bars transfer or hypothecation of the stock, and only member banks may hold it. No search of member-bank registers is needed to kill the claim; the statute does it."
+    },
+    {
+      "searched": "Group assets under management for Rothschild & Co in the audited consolidated accounts for 2025",
+      "result": "NOT STATED in the accounts. AUM appears only as a goodwill-impairment input (closing AUM at September 2025, EV/AUM peer multiples). The ~124bn euro figure is company boilerplate from a press release. Tier labeled."
+    },
+    {
+      "searched": "M.M.Warburg balance-sheet total, assets under management, and headcount — 2024 Geschäftsbericht and group press releases",
+      "result": "NOT ESTABLISHED. The 2024 results press release discloses income-statement lines and the 112.4% cost-income ratio but no balance-sheet total, AUM or headcount. The Geschäftsbericht 2024 was not retrieved. Northdata carries the HRB numbers and filed accounts and is the next place to look."
+    },
+    {
+      "searched": "Any document showing Warburg family ownership, board representation or control of Warburg Pincus after 1966",
+      "result": "NONE FOUND. The firm's own history records acquisition by Lionel I. Pincus & Co. in 1966 and describes itself as a private partnership since. A null here is the finding: the name is all that remains."
+    },
+    {
+      "searched": "Any coordination, common ownership or cross-shareholding between Rothschild & Co and Edmond de Rothschild Group",
+      "result": "NONE FOUND in either group's published material. Two separately controlled financial groups sharing a surname."
+    },
+    {
+      "searched": "Mark Malloch-Brown's membership of the Investor AB board, as asserted in report Section XX",
+      "result": "NOT VERIFIED in this pass against Investor AB's own board list or annual report governance section. Flagged, not assumed."
+    },
+    {
+      "searched": "web.archive.org, for historical Rothschild & Co and M.M.Warburg disclosures",
+      "result": "UNREACHABLE from this environment, as recorded in the operating memory. No archived snapshots were consulted."
+    },
+    {
+      "searched": "S&P Global Market Intelligence 'The world's largest banks by assets, 2026'",
+      "result": "HTTP 403 on direct fetch. Top-ten asset figures used above come from search-surfaced reporting of ICBC's 2025 results and JPMorgan's FY2025 10-K, not from a fetched ranking table. Pull the primaries before publication."
+    },
+    {
+      "searched": "eCFR 12 CFR Part 209 (Regulation I) full text",
+      "result": "Redirected to an unblock interstitial; not fetched. The statutory provisions at 12 U.S.C. 287 and 289 were fetched instead and carry the load."
+    }
+  ],
+  "searched": [
+    "Rothschild & Co / Concordia 2023 simplified tender offer, offer document, result release, mandatory delisting release",
+    "Rothschild & Co consolidated accounts December 2025 (income statement, balance sheet, country-by-country headcount table) — PDF text extracted locally",
+    "Rothschild & Co 2025 press releases for the 'About Rothschild & Co' boilerplate (AUM, headcount, countries)",
+    "Edmond de Rothschild Group 2025 annual results; SIX Exchange Regulation delisting notice 27 August 2019",
+    "RIT Capital Partners final results for the year ended 31 December 2025 (Investegate RNS)",
+    "The Rothschild Archive business pages for the Naples, Frankfurt and Vienna houses (503 on direct fetch; search-surfaced text only)",
+    "LG Bonn 62 KLs 1/19 (18.03.2020) cum-ex judgment and NRWE full text; BGH 1 StR 519/20; BVerfG 2 BvR 2194/21; LG Bonn 63 KLs 1/22 termination; BGH 1 StR 97/25 remittal",
+    "M.M.Warburg 2024 results press release; Börsen-Zeitung on the failed Perella Weinberg sale process; group ownership (Olearius / Max Warburg 40% each); Hamburg HRB 84168 and HRB 142024",
+    "Warburg Pincus firm history page; Lionel I. Pincus & Co. 1966 acquisition; current AUM",
+    "EC merger Case No IV/M.597 Swiss Bank Corporation / SG Warburg; Federal Reserve Board order on SBC/UBS, 8 June 1998",
+    "Investor AB Annual Report 2025 — PDF text extracted locally (corporate governance report, Nomination Committee vote table, 'This is Investor'); Investor AB ownership structure page",
+    "12 U.S.C. 287 and 289 (Cornell LII); Federal Reserve FAQ 'Who owns the Federal Reserve?'; Federal Register 20 Nov 2025 Reserve Bank capital stock; GAO-17-243; Fed balance-sheet developments releases for the deferred asset",
+    "Lewis v. United States, 680 F.2d 1239 (9th Cir. 1982) — Justia and public.resource.org",
+    "UBS Global Wealth Report 2025 and 2026 global wealth totals",
+    "BIS press releases of 8 January 2001 and 22 September 2003 on the withdrawal of privately held shares; BIS member central banks page",
+    "ICBC FY2025 results (assets above CNY 53tn); JPMorgan Chase FY2025 10-K and 4Q25 release; S&P Global largest-banks 2026 (403)",
+    "/home/user/b0b-dashboard/site/report.html — regex census of Rothschild (6), Warburg (32) and Wallenberg (1) with section attribution"
+  ],
+  "notes": "Method note that matters for the pipeline: WebFetch's summarising model produced confidently wrong numbers on two Rothschild PDFs (it returned '22.00 euros per share' and a January 2020 delisting for a September 2023 release at 38.60 euros). Every figure in this file that came from a PDF was re-extracted from the raw file with a local zlib/BT-ET text extractor at scratchpad/intel/pdftxt.py and read directly. Do not let a model summary of a filing reach the page. Trap discipline: the line was run the way the brief demands — every claim pushed down to a filing, a docket, a statute or a registry number, and killed where it rests on a surname. The strongest results are nulls and reversals: the '500 trillion' figure exceeds all household wealth on Earth; Lewis v. United States says the opposite of what it is quoted for inside the same paragraph; Reserve Bank stock is legally untransferable so no family can hold it; private shareholding in the BIS ended on a dated, priced, arbitrated transaction in 2001; Warburg Pincus was sold to Lionel Pincus in 1966; S.G. Warburg was sold to SBC in 1995; three of the five Rothschild houses closed between 1863 and 1938 and the Vienna one was expropriated by the Nazi state. Against those, the one family-control structure that IS documented at scale — Wallenberg at Investor AB, 20.1% of capital carrying 43.0% of votes, foundations at 50.2% of votes, SEK 1,087bn of net assets — is entirely public and requires no secrecy. That contrast is the finding of this line: where the control exists it is printed in an annual report, and where the trope points there is a surname on a firm somebody else bought. FAM-14 records three passages already live on the page that fail these tests, including one — 'the chair rotates, the families do not' — that states the trope in the report's own voice. Held for the author; nothing edited under site/."
+}

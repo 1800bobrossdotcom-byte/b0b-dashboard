@@ -1,0 +1,399 @@
+{
+  "line": "sovereign and royal capital - the documented version",
+  "findings": [
+    {
+      "id": "SOV-01-PIF-AUM",
+      "claim": "Saudi Arabia's Public Investment Fund reported assets under management of approximately SAR 3.4 trillion (about USD 906bn) at 31 December 2025 in its 2025 annual report, a fall of SAR 38bn on 2024 - its first annual decline this decade.",
+      "tier": "documented",
+      "sources": [
+        "PIF Annual Report 2025, https://www.pif.gov.sa/en/annual-report-2025/ (PDF at https://www.pif.gov.sa/-/media/project/pif-corporate/pif-corporate-site/annual-reports/reports/pif-annual-report-2025-english-hyperlinked.pdf - pif.gov.sa returns HTTP 403 to this environment; figures taken from dated reporting quoting the report)",
+        "Asia Asset Management, 20 Aug 2026, https://www.asiaasset.com/sovereign-wealth-funds/saudi-arabias-pif-assets-under-management-fell-38-billion-riyals-in-2025/",
+        "Saudi Gazette, https://saudigazette.com.sa/article/663849"
+      ],
+      "establishes": "A dated, self-published AUM figure for PIF and its direction of travel.",
+      "does_not": "Does not establish portfolio composition beyond the three published buckets (domestic 76%, international 20%, treasury 4%), and does not itself name any holding.",
+      "counter_record": "Secondary coverage of the same report ran in both directions - some outlets headlined 'assets surpass $900bn / assets up' against Asia Asset's 'fell 38 billion riyals'. Both can be true (level up on 2021-24 baseline, down year-on-year); the PDF itself could not be retrieved from this environment, so the -38bn figure is single-sourced reporting, not a read of the primary.",
+      "date_span": "2025 financial year; report published 2026",
+      "persons": [],
+      "doc_type": "filing (annual report), read via contemporaneous reporting",
+      "notes": "pif.gov.sa blocks both WebFetch and curl from this environment (403 on HTML and PDF paths; one earlier attempt returned a TLS-level connection reset). Re-fetch the PDF from an unblocked host before publishing the exact riyal figure."
+    },
+    {
+      "id": "SOV-02-PIF-CHAIR",
+      "claim": "PIF's Board of Directors is chaired by Prince Mohammed bin Salman bin Abdulaziz Al Saud in his capacity as Crown Prince and Prime Minister of Saudi Arabia; PIF reports to the Council of Economic and Development Affairs, which the same person chairs. Yasir Al-Rumayyan is Governor.",
+      "tier": "documented",
+      "sources": [
+        "PIF press release, 'Chaired by HRH Crown Prince, PIF Board of Directors approves PIF 2026-2030 strategy', https://www.pif.gov.sa/en/news-and-insights/press-releases/2026/chaired-by-hrh-crown-prince-pif-board-of-directors-approves-pif-2026-2030-strategy/ (403 to this environment; title and content indexed in search)",
+        "PIF Law documents (Arabic/English), https://www.pif.gov.sa/-/media/project/pif-corporate/pif-corporate-site/our-investments/governance-and-investments/pdf/pif-law-documents-en11.pdf",
+        "PIF, 'Our Governance and Investment Decisions', https://www.pif.gov.sa/en/our-investments/governance-and-investment-decisions/"
+      ],
+      "establishes": "The head of government chairs the fund and chairs the body the fund reports to. On the line brief's own test, the fund is the state in the Saudi case - not by inference but by published governance document.",
+      "does_not": "Does not establish that any particular PIF investment was directed by the Saudi state for a state purpose, and does not establish anything about any portfolio company's conduct.",
+      "counter_record": "PIF publishes an annual report, a Santiago Principles self-assessment and an audited account, and its Governor - not its Chairman - signs investment decisions below board thresholds; chairmanship is not the same as deal-level direction.",
+      "date_span": "PIF Law as amended; board composition current to 2026",
+      "persons": ["Mohammed bin Salman Al Saud", "Yasir Al-Rumayyan"],
+      "doc_type": "registry / statute + issuer press release",
+      "notes": "The statutory reporting line ('The Fund shall report to the Council of Economic and Development Affairs') is quoted in PIF's own governance material; I could not open the PIF Law PDF directly (403) and have not read the article number. Do not cite an article number without reading it."
+    },
+    {
+      "id": "SOV-03-PIF-13F",
+      "claim": "PIF files Form 13F-HR with the SEC (CIK 0001767640). Its 13F for the quarter ended 30 June 2026, filed 14 August 2026, reports exactly five US-listed positions: Space Exploration Technologies Corp 154,146,835 shares / $26,337,528,228; Electronic Arts 24,807,932 shares / $5,086,618,377; Uber Technologies 72,840,541 shares / $5,256,173,439; Lucid Group 177,088,867 shares / $1,184,724,520; Claritev Corporation 1,281,250 shares / $43,703,438.",
+      "tier": "documented",
+      "sources": [
+        "SEC EDGAR, Public Investment Fund, CIK 0001767640, 13F-HR accession 0001011438-26-000537, period 2026-06-30, filed 2026-08-14",
+        "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001767640&type=13F"
+      ],
+      "establishes": "The exact, dated, sworn US-listed equity book PIF reports in its own name - including a $26.3bn position in SpaceX, a National Security Space Launch and National Reconnaissance Office contractor.",
+      "does_not": "Does not capture PIF's non-US holdings, its unlisted holdings, positions held through external managers who file in their own name, or the Saudi domestic book that is 76% of its AUM. A 13F is a snapshot of one asset class in one jurisdiction.",
+      "counter_record": "SpaceX's Class A outstanding was 7,696,293,669 as of 28 July 2026 (SpaceX Form 10-Q, filed 4 Aug 2026), so PIF's stake is 2.00% of Class A. Elon Musk's Schedule 13G filed 13 Aug 2026 reports 6,418,547,515 shares, 48.4% beneficial ownership. PIF is a minority financial holder in a founder-controlled company.",
+      "date_span": "position date 30 June 2026",
+      "persons": [],
+      "doc_type": "filing (SEC Form 13F-HR)",
+      "notes": "13F value fields here are in whole dollars, not thousands (cross-checked: Palantir implied $116.67/share appears identically in the Norges and Mubadala filings)."
+    },
+    {
+      "id": "SOV-04-SPACEX-PUBLIC",
+      "claim": "Space Exploration Technologies Corp is a public registrant (CIK 0001181412, Nasdaq: SPCX) following an S-1 filed 20 May 2026 and a 424(b)(4) prospectus dated 12 June 2026. Its prospectus states that the US government may require it to hold facility security clearances under the NISPOM Rule, 'as a result of which we are required to maintain with the Department of War mitigation measures with respect to foreign ownership, control and influence', and that transactions may fall under CFIUS jurisdiction.",
+      "tier": "documented",
+      "sources": [
+        "SpaceX Form 424(b)(4), 12 June 2026, https://www.sec.gov/Archives/edgar/data/1181412/000162828026042639/spaceexplorationtechnologi.htm",
+        "SpaceX Form 10-Q for the quarter ended 30 June 2026, filed 4 Aug 2026",
+        "Elon Musk Schedule 13G on SPCX, filed 13 Aug 2026, accession 0001104659-26-095936"
+      ],
+      "establishes": "A named, published instrument - FOCI mitigation with the Department of War, plus CFIUS jurisdiction - that governs what foreign shareholders of a US national-security contractor can and cannot reach. This is exactly the class of document the anti-map test asks for, and here it exists and runs against control, not for it.",
+      "does_not": "Does not disclose the terms of any specific FOCI agreement, does not name PIF, and does not establish that PIF's holding triggered any mitigation measure.",
+      "counter_record": "The prospectus does not name any sovereign shareholder; the >5% beneficial-ownership table would not reach a 2.00% holder. No 13D was filed by PIF, i.e. no control intent was declared.",
+      "date_span": "S-1 20 May 2026; prospectus 12 June 2026; 10-Q 4 Aug 2026",
+      "persons": ["Elon Musk"],
+      "doc_type": "filing (S-1 / 424B4 / 10-Q / Schedule 13G)",
+      "notes": "The prospectus text says 'Department of War', reflecting the 2025 renaming. Starshield is defined in the prospectus as 'a secure satellite network designed specifically for government customers and national security applications'; customers named include NASA and the NRO."
+    },
+    {
+      "id": "SOV-05-MUBADALA-GOV",
+      "claim": "Mubadala Investment Company PJSC is wholly owned by the Government of Abu Dhabi. Its Board of Directors was reconstituted by resolution of the Abu Dhabi Supreme Council for Financial and Economic Affairs on 9 March 2023 and is chaired by Sheikh Mansour bin Zayed Al Nahyan, described on Mubadala's own board page as 'UAE Vice President, Deputy Prime Minister, Chairman of the Presidential Court'. Board members include Sheikh Theyab bin Mohamed bin Zayed Al Nahyan, Suhail Mohamed Al Mazrouei, Dr Sultan Ahmed Al Jaber, Abdulhamid Saeed, Saif Saeed Ghobash, and Khaldoon Khalifa Al Mubarak as Managing Director and Group CEO. AUM AED 1.4 trillion (USD 385bn) at end-2025, up 17%.",
+      "tier": "documented",
+      "sources": [
+        "Mubadala, Board of Directors, https://www.mubadala.com/en/who-we-are/board-of-directors",
+        "Abu Dhabi Media Office, 'Supreme Council for Financial and Economic Affairs issues resolution to reconstitute Board of Directors of Mubadala Investment Company', 9 March 2023, https://www.mediaoffice.abudhabi/en/government-affairs/supreme-council-for-financial-and-economic-affairs-issues-resolution-to-restructure-board-of-directors-of-mubadala-investment-company/",
+        "Mubadala, 'Strong performance by UAE Portfolio Drives Mubadala's Growth in 2025', https://www.mubadala.com/en/news/strong-performance-by-uae-portfolio-drives-mubadalas-growth-in-2025",
+        "Mubadala 2025 Annual Review, https://annual2025.mubadala.com/en"
+      ],
+      "establishes": "The fund's board is appointed by a state council and chaired by the UAE Vice President and Deputy Prime Minister; four of the seven directors hold federal or emirate office. The board is an organ of the state by its own published appointment instrument.",
+      "does_not": "Does not establish that any Mubadala portfolio decision was taken for a state security purpose, and does not make any Mubadala portfolio company an instrument of the UAE.",
+      "counter_record": "Mubadala publishes audited group accounts, issues rated public debt, and its investment committees sit below the board; the appointment instrument governs who sits, not what is bought.",
+      "date_span": "resolution 9 March 2023; AUM at 31 December 2025",
+      "persons": ["Mansour bin Zayed Al Nahyan", "Theyab bin Mohamed bin Zayed Al Nahyan", "Khaldoon Khalifa Al Mubarak", "Sultan Ahmed Al Jaber", "Suhail Mohamed Al Mazrouei", "Abdulhamid Saeed", "Saif Saeed Ghobash"]
+      ,
+      "doc_type": "registry / state resolution + issuer disclosure"
+    },
+    {
+      "id": "SOV-06-MUBADALA-13F-GF",
+      "claim": "Mubadala Investment Co PJSC files Form 13F-HR (CIK 0001704268). Its 13F for 30 June 2026 (filed 14 Aug 2026) reports 72 US-listed positions including GLOBALFOUNDRIES INC, 399,573,756 ordinary shares valued at $32,928,873,232, and PALANTIR TECHNOLOGIES INC Class A, 95,656 shares / $11,160,186.",
+      "tier": "documented",
+      "sources": [
+        "SEC EDGAR, Mubadala Investment Co PJSC, CIK 0001704268, 13F-HR accession 0001140361-26-032980, period 2026-06-30, filed 2026-08-14"
+      ],
+      "establishes": "A dated, sworn statement of the position size in a US-listed foundry with US defence-adjacent output, and a de minimis Palantir position.",
+      "does_not": "The Palantir position (95,656 shares) is a rounding error in a $385bn fund and establishes nothing about intent.",
+      "counter_record": "See SOV-07: GlobalFoundries' own 20-F is the better document and gives 81% beneficial ownership across Mubadala entities, i.e. the 13F captures only part of the holding.",
+      "date_span": "30 June 2026",
+      "persons": [],
+      "doc_type": "filing (SEC Form 13F-HR)"
+    },
+    {
+      "id": "SOV-07-GF-CONTROL",
+      "claim": "GlobalFoundries Inc.'s Form 20-F for FY2025 (filed 27 Feb 2026) states that Mubadala 'beneficially owns, in the aggregate, approximately 81% of our outstanding ordinary shares', that GF 'entered into a shareholder's agreement with Mubadala, which entitles Mubadala ... to certain consent rights and director nomination rights', that MTIC is entitled to nominate 'a number of designees ... representing a majority of our directors' (named as Marc Antaki, Martin L. Edelman, Samer Halawa, Camilla Languille and Carlos Obeid), and that a Mubadala Designee 'may only be removed with or without cause by MTIC'. GF is a Nasdaq 'controlled company'.",
+      "tier": "documented",
+      "sources": [
+        "GlobalFoundries Inc. Form 20-F for the year ended 31 December 2025, filed 27 Feb 2026, https://www.sec.gov/Archives/edgar/data/1709048/000170904826000022/gfs-20251231.htm"
+      ],
+      "establishes": "This is the case the anti-map test asks for and it comes out positive: a sovereign fund whose board is appointed by a state council holds 81% of a company, holds a shareholder's agreement with consent rights, appoints a majority of the board, and alone can remove its own appointees. Direction of the corporate entity is documented, not inferred.",
+      "does_not": "Does not establish that Abu Dhabi directs GF's US operations, and expressly does not reach GF's classified work - see the counter-record. Does not establish that any UAE state body has received GF data or technology.",
+      "counter_record": "The same 20-F records the countervailing instrument: GF holds 'Foreign Ownership, Control or Influence agreements' with the US government tied to its facility security clearance, and states that 'Failure to comply with our Foreign Ownership, Control or Influence agreements could lead to a loss of our security clearance and, therefore, certain government business.' GF also entered a Direct Funding Agreement with the US Department of Commerce in November 2024 for up to $1.5bn under the CHIPS and Science Act (plus $75m added January 2025). So the ownership control is documented AND a US instrument documented in the same filing carves out what it can reach.",
+      "date_span": "shareholder's agreement from 2021 IPO; 20-F covers FY2025",
+      "persons": ["Marc Antaki", "Martin L. Edelman", "Samer Halawa", "Camilla Languille", "Carlos Obeid"],
+      "doc_type": "filing (SEC Form 20-F)",
+      "notes": "MTIC / MTIIIC are the Mubadala Technology Investment entities defined in the filing. The 81% figure is GF's own aggregate; the 13F number (399.6m shares) is the sub-set reported under 13F."
+    },
+    {
+      "id": "SOV-08-LUCID-CONTROL",
+      "claim": "Lucid Group's DEF 14A filed 23 April 2026 states that Ayar Third Investment Company - PIF's vehicle - 'controls more than 50% of our combined voting power', making Lucid a Nasdaq 'controlled company', and that under an Investor Rights Agreement dated 22 February 2021 'Ayar has the right to nominate five directors to our Board of Directors' of nine. Lucid's Chairman since April 2023 is Turqi Alnowaiser, who is Deputy Governor and Head of the International Investments Division at PIF; the same filing records him as a director of Uber Technologies.",
+      "tier": "documented",
+      "sources": [
+        "Lucid Group, Inc. DEF 14A filed 23 April 2026, https://www.sec.gov/Archives/edgar/data/1811210/000162828026026842/lcid-20260423.htm"
+      ],
+      "establishes": "A named, dated shareholder agreement by which a sovereign fund nominates a board majority, and a serving fund executive chairing the board. Where this pattern exists, it is visible in an ordinary proxy statement - which is the point: control leaves documents.",
+      "does_not": "Lucid is an automaker, not a defence or surveillance company. This establishes the mechanism and nothing about national-security direction. A PIF officer sitting on Uber's board is a disclosed directorship, not an intelligence placement.",
+      "counter_record": "Ayar's nomination rights step down with beneficial ownership by the terms of the Investor Rights Agreement itself; Lucid states it does not currently use any controlled-company governance exemption.",
+      "date_span": "Investor Rights Agreement 22 Feb 2021; proxy 23 April 2026",
+      "persons": ["Turqi Alnowaiser"],
+      "doc_type": "filing (SEC DEF 14A)"
+    },
+    {
+      "id": "SOV-09-ADIA-GOV",
+      "claim": "The Abu Dhabi Investment Authority's published Board of Directors page states the Board 'comprises a Chairman, Managing Director and Board Members who are appointed by a resolution issued by the Abu Dhabi Supreme Council for Financial and Economic Affairs.' The Chairman is Sheikh Tahnoun bin Zayed Al Nahyan; the Managing Director is Sheikh Hamed bin Zayed Al Nahyan; members include Sheikh Khaled bin Mohamed bin Zayed Al Nahyan, Sheikh Mansour bin Zayed Al Nahyan, Khalil Mohammed Sharif Foulathi, Jassem Mohamed Bu Ataba Al Zaabi, Hamad Mohammed Al Hurr Al Suwaidi and Dr Ahmed Mubarak Al Mazrouei (appointment effective 1 January 2025). ADIA's 20-year annualised rate of return was 6.6% to 31 December 2025.",
+      "tier": "documented",
+      "sources": [
+        "ADIA 2024 Review, Board of Directors page, https://www.adia.ae/en/pr/2024/pdf/adia-annual-review-2024-board-of-directors.pdf",
+        "ADIA, Board of Directors, https://www.adia.ae/en/investments/governance/board-of-directors",
+        "ADIA 2025 Review (20-year return), reported https://economymiddleeast.com/news/adias-20-year-annualized-return-rises-to-6-6-percent-as-private-equity-allocation-expands-and-ai-private-market-focus-sharpens/"
+      ],
+      "establishes": "ADIA is chaired by the man who is, per the Abu Dhabi Government Media Office, 'Deputy Ruler of Abu Dhabi and National Security Adviser' of the UAE. The state's national-security principal chairs its largest fund - stated in the fund's own annual review.",
+      "does_not": "Does not establish that ADIA's portfolio is selected or used for intelligence purposes. ADIA's published governance separates the Board (strategy and risk-return parameters) from the Managing Director (investment and operational activities), and the Board is described as not taking individual investment decisions.",
+      "counter_record": "ADIA's own review states the Board sets 'strategy and risk-return parameters' and that the Managing Director 'has responsibility for implementing ADIA's strategy and its investment and operational activities' - i.e. ADIA's published structure places investment decisions below the chairman.",
+      "date_span": "board as at 2024 review with one appointment effective 1 Jan 2025; return to 31 Dec 2025",
+      "persons": ["Tahnoun bin Zayed Al Nahyan", "Hamed bin Zayed Al Nahyan", "Khaled bin Mohamed bin Zayed Al Nahyan", "Mansour bin Zayed Al Nahyan"],
+      "doc_type": "filing (annual review) / registry",
+      "notes": "Text extracted from the ADIA PDF content stream; spelling of names as printed by ADIA."
+    },
+    {
+      "id": "SOV-10-TAHNOUN-OFFICES",
+      "claim": "Sheikh Tahnoun bin Zayed Al Nahyan simultaneously holds the UAE state office of National Security Adviser and Deputy Ruler of Abu Dhabi, and chairs ADIA, G42 and MGX. MGX was established in March 2024 as a joint venture of Mubadala Investment Company and G42 and closed its first fund at $49bn against a $45bn target; it is an equity partner in the Stargate US AI infrastructure programme announced January 2025 and in Stargate UAE announced May 2025.",
+      "tier": "documented",
+      "sources": [
+        "Abu Dhabi Government Media Office, 'Tahnoon bin Zayed concludes official visit to Washington', https://www.mediaoffice.abudhabi/en/government-affairs/tahnoon-bin-zayed-concludes-official-visit-to-washington/ (state offices)",
+        "Mubadala, 'Abu Dhabi Launches Comprehensive Global Investment Strategy on Artificial Intelligence', https://www.mubadala.com/en/news/abu-dhabi-launches-comprehensive-global-investment-strategy-on-artificial-intelligence (MGX formation)",
+        "MGX leadership page, https://www.mgx.ae/en/leadership",
+        "'Global Tech Alliance Launches Stargate UAE', PR Newswire, https://www.prnewswire.com/ae/news-releases/global-tech-alliance-launches-stargate-uae-302463328.html"
+      ],
+      "establishes": "The clearest documented instance on this line of the intelligence-to-capital adjacency: one person holding a national-security state office and chairing the state's largest fund, its AI national champion, and its AI investment vehicle. The offices are the finding.",
+      "does_not": "Does not establish that MGX, G42 or ADIA investments are tasked by the UAE security apparatus, that any portfolio company passes data to a UAE service, or that any of the co-investors are witting of anything. Holding a security office and a chairmanship concurrently is a documented fact about offices; it is not an operational tie and rung 5 is claimed for no one.",
+      "counter_record": "MGX's chairmanship sits above a conventional fund structure with institutional co-investors and named executives; G42 has a separate Group CEO (Peng Xiao); ADIA's own governance document places investment decisions with the Managing Director. None of the co-investment announcements disclose any UAE-government direction right. The MGX fund-size figures ($49bn close) come from trade reporting, not an MGX filing - tier those separately as labeled.",
+      "date_span": "MGX founded March 2024; Stargate Jan 2025; Stargate UAE May 2025; Washington visit 2025",
+      "persons": ["Tahnoun bin Zayed Al Nahyan", "Peng Xiao"],
+      "doc_type": "reporting + issuer/state press releases",
+      "notes": "The mgx.ae leadership page exceeded the fetch size limit and was not read directly; MGX's chairmanship is taken from Mubadala's and the Abu Dhabi Media Office's material plus reporting. Read mgx.ae/en/leadership before publishing MGX board detail. The Washington visit release also records meetings with the US Secretary of Commerce, Treasury Secretary, National Security Advisor and CIA Director - that is a disclosed state visit and establishes nothing beyond itself."
+    },
+    {
+      "id": "SOV-11-G42-IGAA",
+      "claim": "The April 2024 Microsoft-G42 transaction ($1.5bn Microsoft investment) was accompanied by a first-of-its-kind Intergovernmental Assurance Agreement developed with the US and UAE governments, setting binding standards on cybersecurity, export controls and responsible AI. G42 announced on 20 November 2025 that advanced AI chip exports to it were approved, and that deployment 'will be governed by the Regulated Technology Environment (RTE), a world-class technology and compliance framework pioneered by G42 and approved under U.S. Department of Commerce and Bureau of Industry and Security (BIS) guidelines.'",
+      "tier": "documented",
+      "sources": [
+        "Microsoft, 'Microsoft and G42 partner to accelerate AI innovation in UAE and beyond', 15 April 2024, https://blogs.microsoft.com/blog/2024/04/15/microsoft-and-g42-partner-to-accelerate-ai-innovation-in-uae-and-beyond/",
+        "Microsoft Source, 16 April 2024, https://news.microsoft.com/source/2024/04/16/microsoft-invests-1-5-billion-in-abu-dhabis-g42-to-accelerate-ai-development-and-global-expansion/",
+        "G42, 'G42 Receives U.S. Approval for Advanced AI Chip Exports', 20 November 2025, https://www.g42.ai/resources/news/g42-receives-us-approval-advanced-ai-chip-exports-enabling-full-scale-deployment-trusted-ai-infrastructure"
+      ],
+      "establishes": "An export-licence-condition instrument of exactly the kind the anti-map test names, and it is public: US export control authority, not shareholding, is what constrains a state-chaired AI company's access to controlled technology.",
+      "does_not": "The text of the IGAA is not public; neither company publishes the conditions. It does not establish what China-related concern prompted it, and the House Select Committee correspondence that preceded it is a congressional request, not a finding.",
+      "counter_record": "The same sequence cuts against a control reading: the US government imposed conditions on G42 precisely because ownership by an Abu Dhabi state-linked chairman does not by itself confer or deny access - the licence does. Chip access was subsequently granted, i.e. the conditions were treated as satisfied.",
+      "date_span": "April 2024 - November 2025",
+      "persons": [],
+      "doc_type": "licence / corporate announcement",
+      "notes": "Chip-volume figures ('equivalent to 35,000 GB300 processors') come from trade reporting, not from BIS or G42; do not publish that number at documented tier."
+    },
+    {
+      "id": "SOV-12-QIA-GOV",
+      "claim": "Qatar Investment Authority's board is reconstituted by Amiri Decision. Amiri Decision No. 14 of 2026, issued 25 March 2026 by Amir Sheikh Tamim bin Hamad Al-Thani, restructured the QIA board with Sheikh Bandar bin Mohammed bin Saud Al-Thani as Chairman and Sheikh Mohammed bin Hamad bin Khalifa Al-Thani as Vice Chairman; members named include Ali bin Ahmed Al Kuwari, Saad bin Sherida Al Kaabi, Sheikh Faisal bin Thani bin Faisal Al-Thani, Nasser bin Ghanim Al Khelaifi and Hassan bin Abdullah Al Thawadi. The Chairman is concurrently Governor of the Qatar Central Bank.",
+      "tier": "documented",
+      "sources": [
+        "Amiri Diwan, 'HH The Amir Issues Amiri Decision Restructuring Board of Directors of Qatar Investment Authority', 25 March 2026, https://www.diwan.gov.qa/ar-QA/Briefing-Room/News/General/LG/2026/March/25/LG01?sc_lang=en",
+        "The Peninsula, 25 March 2026, https://thepeninsulaqatar.com/article/25/03/2026/amir-reconstitutes-board-of-directors-of-qatar-investment-authority",
+        "Qatar Central Bank, Governor page, https://www.qcb.gov.qa/en/pages/governor.aspx",
+        "Qatar Financial Centre Regulatory Authority, chairman profile, https://www.qfcra.com/staff-members/chairman/"
+      ],
+      "establishes": "QIA's board exists at the pleasure of the head of state by decree, and its chairman is the central bank governor. Board members include the Minister of Finance and the Minister of State for Energy Affairs. The fund is a state organ by instrument.",
+      "does_not": "Does not establish QIA's holdings, its size, or any direction of a portfolio company.",
+      "counter_record": "Between March 2023 and 2026 the chairmanship moved off the Prime Minister (Sheikh Mohammed bin Abdulrahman Al Thani, who chaired QIA before becoming PM) and onto the central bank governor - the trend in Qatar is away from, not toward, head-of-government chairmanship. Do not generalise 'the head of state chairs the fund' across the Gulf; in Qatar it is now false.",
+      "date_span": "Amiri Decision No. 14 of 2026, 25 March 2026",
+      "persons": ["Tamim bin Hamad Al-Thani", "Bandar bin Mohammed bin Saud Al-Thani", "Mohammed bin Hamad bin Khalifa Al-Thani", "Ali bin Ahmed Al Kuwari", "Saad bin Sherida Al Kaabi", "Nasser bin Ghanim Al Khelaifi", "Hassan bin Abdullah Al Thawadi", "Sheikh Faisal bin Thani bin Faisal Al-Thani"],
+      "doc_type": "registry / state decree",
+      "notes": "I read the Peninsula report of the decision, not the Arabic gazette text. Verify the decision number against diwan.gov.qa before publishing it."
+    },
+    {
+      "id": "SOV-13-KIA-STATUTE",
+      "claim": "The Kuwait Investment Authority is constituted by Law No. 47 of 1982 as 'an independent public authority ... attached to the Minister of Finance'. Its Board is chaired ex officio by the State Minister for Economic Affairs and Investment (currently H.E. Abdulaziz AlMarzooq) and comprises the Minister of Oil, the Governor of the Central Bank, the Undersecretary of the Ministry of Finance and five Kuwaiti members appointed by Amiri Decree for four-year terms, at least three of whom must not hold public office. Clause 8 of the same law prohibits public disclosure of KIA's work information, and Clause 9 sets penalties for unauthorised disclosure. KIA states its investments are 'completely transparent to the State of Kuwait, as presented in a detailed annual report to the Council of Ministers'.",
+      "tier": "documented",
+      "sources": [
+        "Kuwait Investment Authority, About KIA, https://www.kia.gov.kw/about-kia/",
+        "IFSWF Santiago Principles self-assessment, KIA, https://www.ifswf.org/assessment/kuwait-investment-authority",
+        "UNCTAD Investment Policy Hub, Kuwait investment law, https://investmentpolicy.unctad.org/investment-laws/laws/104/kuwait-investment-law"
+      ],
+      "establishes": "A statutory non-disclosure regime, quoted by the fund itself. KIA's silence about its size and holdings is a legal obligation with a named clause and a penalty, not a choice or a concealment inference.",
+      "does_not": "Does not establish anything about what KIA holds. It specifically does not license the inference that a fund forbidden by statute to disclose is hiding something particular - that is the guaranteed-null rule.",
+      "counter_record": "KIA reports in detail to the Council of Ministers and the National Assembly; the opacity is external, not internal, and Kuwait's parliament has repeatedly debated KIA holdings in session.",
+      "date_span": "Law No. 47 of 1982; board current 2026",
+      "persons": ["Abdulaziz AlMarzooq"],
+      "doc_type": "statute / registry",
+      "notes": "I did not read the Arabic text of Law 47/1982; clause numbering is as KIA's own site presents it."
+    },
+    {
+      "id": "SOV-14-NBIM",
+      "claim": "Norway's Government Pension Fund Global had a market value of NOK 22,683bn at 30 June 2026 (return 9.4% in H1 2026; equities 72.1%, fixed income 25.8%, unlisted real estate 1.6%, unlisted renewable infrastructure 0.5%). The fund is owned by the Norwegian people; the Storting sets the framework in the Government Pension Fund Act, the Ministry of Finance has overall responsibility and issues the management mandate, and Norges Bank manages it through NBIM. The Ministry's investment mandate provides that 'The equity portfolio may not be invested in more than 10 per cent of the voting shares in an individual company.'",
+      "tier": "documented",
+      "sources": [
+        "NBIM Half-year report 2026, https://www.nbim.no/en/news-and-insights/reports/2026/half-year-report-2026/",
+        "NBIM, About the fund, https://www.nbim.no/en/the-fund/about-the-fund/",
+        "Investment mandate, Government Pension Fund Global, Ministry of Finance, https://www.norges-bank.no/contentassets/799da96fc12b47c682d46f8281657529/investment_mandate_gpfg.pdf (restriction 10 under 3.2 'Management restrictions set by the Ministry of Finance')",
+        "NBIM submission, 'The ownership limit for the Government Pension Fund - Global', https://www.nbim.no/en/news-and-insights/submissions-to-ministry/2008/the-ownership-limit-for-the-government-pension-fund--global/"
+      ],
+      "establishes": "The counter-example, and it is the most useful finding on the line: the largest sovereign fund in the world is barred by its own state's mandate from taking a controlling position in anything. The stated purpose of the cap, in Norges Bank's own submission, is that the Bank 'is to remain a financial investor rather than a strategic investor'.",
+      "does_not": "Does not mean the fund has no influence - it votes its shares and publishes voting guidelines. It does mean a Norwegian holding in any company cannot, by construction, be a control position.",
+      "counter_record": "A 10% cap still leaves the fund among the largest shareholders in thousands of companies (NBIM states an average 1.5% stake across roughly 7,100 companies), and it does exercise ownership rights through voting and exclusions - so 'financial not strategic' is a legal characterisation, not an absence of leverage.",
+      "date_span": "market value at 30 June 2026; mandate as amended",
+      "persons": [],
+      "doc_type": "filing (half-year report) + statutory mandate",
+      "notes": "Mandate text extracted from the PDF content stream; confirm the numbering ('restriction 10') against a clean copy before citing a section number."
+    },
+    {
+      "id": "SOV-15-NBIM-13F",
+      "claim": "Norges Bank files Form 13F-HR (CIK 0001374170). Its 13F for 30 June 2026 (filed 12 Aug 2026) reports 1,617 US-listed positions, including: Palantir Technologies Cl A, 31,076,211 shares / $3,625,661,537; RTX Corporation, 19,952,281 / $3,785,546,274; Palo Alto Networks, 9,750,674 / $3,325,174,847; CrowdStrike Cl A, 3,669,761 / $2,800,541,410; Motorola Solutions, 2,354,901 / $977,966,836; Rocket Lab, 5,437,031 / $552,674,201; Teledyne, 826,081 / $550,913,419; Axon Enterprise, 931,827 / $522,391,534; Leidos, 1,708,078 / $175,880,792; Check Point Software, 1,325,557 / $174,217,957; Planet Labs Cl A, 3,706,569 / $122,798,631; Booz Allen Hamilton Cl A, 1,980,931 / $120,183,084; Kratos, 1,889,341 / $94,202,542; CACI International, 187,660 / $86,935,372; AeroVironment, 473,141 / $78,101,385; SentinelOne, 4,223,887 / $71,679,362; GlobalFoundries, 732,804 / $60,390,378; Zscaler, 411,216 / $58,043,138; Leonardo DRS, 992,317 / $42,342,166; SAIC, 356,104 / $39,317,443; Karman Holdings, 612,905 / $30,596,218; Parsons, 193,309 / $10,127,459; V2X, 109,000 / $8,127,040; NICE Ltd ADR, 23,828 / $2,164,774. Temasek Holdings (Private) Ltd (CIK 0001021944) reports 196 positions at the same date including BlackSky Technology Cl A, 288,649 / $8,059,080 and Palo Alto Networks, 297,538 / $101,466,409.",
+      "tier": "documented",
+      "sources": [
+        "SEC EDGAR, Norges Bank, CIK 0001374170, 13F-HR accession 0001374170-26-000069, period 2026-06-30, filed 2026-08-12",
+        "SEC EDGAR, Temasek Holdings (Private) Ltd, CIK 0001021944, 13F-HR accession 0001021944-26-000013, period 2026-06-30, filed 2026-08-07"
+      ],
+      "establishes": "A state fund's exact, dated positions in the surveillance, cyber and defence contractors the report tracks - the document layer the report was missing. Booz Allen, Palantir, CACI, Leidos, SAIC, Check Point and Planet Labs are all held, and the size of each is on the record.",
+      "does_not": "These are index-weight-scale holdings in a fund that owns roughly 1.5% of every listed company on earth. They establish exposure, not selection, not intent, and - because of the 10% mandate cap (SOV-14) - not control. Publishing them as a network would be exactly the anti-map error.",
+      "counter_record": "Norges' index-tracking construction means the presence of any given US-listed defence contractor is close to automatic; absence is the informative signal. No Cellebrite, Elbit Systems, Cognyte, Verint, CyberArk or Radware position appeared in the Norges, PIF, Mubadala or Temasek filings at this date.",
+      "date_span": "30 June 2026",
+      "persons": [],
+      "doc_type": "filing (SEC Form 13F-HR)"
+    },
+    {
+      "id": "SOV-16-NBIM-EXCLUSIONS",
+      "claim": "Norges Bank's Executive Board decided on 8 August 2025 to exclude six companies - First International Bank of Israel Ltd, FIBI Holdings Ltd, Bank Leumi Le-Israel BM, Mizrahi Tefahot Bank Ltd, Bank Hapoalim BM and Caterpillar Inc - on recommendations from the Council on Ethics dated 25 June and 2 July 2025. In August 2025 NBIM divested holdings in 11 Israeli companies including Bet Shemesh Engines Holdings, and by 14 August 2025 held NOK 19bn in 38 Israel-listed companies, down NOK 4bn and 23 companies from 30 June 2025.",
+      "tier": "documented",
+      "sources": [
+        "NBIM, 'Decisions on exclusion', 2025, https://www.nbim.no/en/news-and-insights/the-press/press-releases/2025/decisions-on-exclusion/",
+        "Norges Bank / NBIM submission to the Ministry of Finance, 18 Aug 2025, https://www.nbim.no/en/news-and-insights/submissions-to-ministry/2025/government-pension-fund-global--renewed-review-of-responsible-investment-work-and-investments-in-israeli-companies/",
+        "European Pensions, 'NBIM divests from 11 Israeli companies; Tangen concedes mistake over Bet Shemesh Engines', https://www.europeanpensions.net/ep/NBIM-divests-from-11-Israeli-companies.php"
+      ],
+      "establishes": "A sovereign fund publishing, by name and date, the companies it refuses to own and the ethical-guideline basis for each - and publishing its own misjudgement (Bet Shemesh Engines had been assessed medium risk in a May 2025 review and would, on the later information, have been assessed high risk). The exclusion list is the counter-record that makes the holdings list readable.",
+      "does_not": "Does not establish any finding about the excluded companies' conduct beyond the Council on Ethics' own published recommendations, which are assessments against Norway's ethical guidelines, not adjudications.",
+      "counter_record": "Norway's parliament subsequently voted to suspend aspects of the GPFG ethical guidelines, and the ADL published a report arguing the Israel-related decisions applied a double standard - the exclusions are contested as a policy matter and should be presented as decisions taken, not as findings proved.",
+      "date_span": "June - August 2025",
+      "persons": [],
+      "doc_type": "filing / issuer press release",
+      "notes": "The nbim.no exclusion landing page URL I tried (/en/investments/responsible-investment/exclusion-of-companies/) 404s; use the press-release URL above."
+    },
+    {
+      "id": "SOV-17-TEMASEK-GIC",
+      "claim": "Temasek reported net portfolio value of S$518bn on a mark-to-market basis as at 31 March 2026 (up S$49bn; 20-year TSR 6.8%, 10-year 7.1%), announced 8 July 2026; Teo Chee Hean, a former Deputy Prime Minister of Singapore, is Chairman. GIC's own board page lists Chairman Lee Hsien Loong ('Senior Minister'), Deputy Chairman Lawrence Wong ('Prime Minister and Minister for Finance'), and director Gan Kim Yong ('Deputy Prime Minister and Minister for Trade and Industry'), alongside Heng Swee Keat and Lim Hng Kiang.",
+      "tier": "documented",
+      "sources": [
+        "Temasek, 'Temasek's Net Portfolio Value Grows to S$518 billion', 8 July 2026, https://www.temasek.com.sg/en/news-and-resources/news-room/news/2026/temasek-net-portfolio-value-grows-to-518b-up-49b-from-last-year",
+        "Temasek Review 2026, https://www.temasekreview.com.sg/",
+        "GIC, Board of Directors, https://www.gic.com.sg/who-we-are/board-of-directors/",
+        "Asia Asset Management, 'Singapore's Temasek names Teo Chee Hean ... as next chairman', https://www.asiaasset.com/sovereign-wealth-funds/singapores-temasek-names-teo-chee-hean-an-ex-deputy-prime-minister-as-next-chairman/"
+      ],
+      "establishes": "GIC is the cleanest published instance of the line brief's load-bearing fact: the sitting Prime Minister and Finance Minister is Deputy Chairman of the fund, the immediately preceding Prime Minister is its Chairman, and the Deputy Prime Minister sits on the board - all stated by the fund itself. Singapore does not conceal this; it publishes it.",
+      "does_not": "Does not establish direction of any investee. Singapore's constitutional design cuts the other way: the Fifth Schedule custodial-powers regime treats the President, not the Cabinet, as the check on drawing down past reserves - the ministers on the board are constrained by an office outside the board.",
+      "counter_record": "Temasek's chairmanship moved from Lim Boon Heng to Teo Chee Hean, a former DPM rather than a sitting minister, and Temasek's published position is that it operates commercially with the Government neither directing nor being involved in its investment decisions. Both funds' boards also carry a majority of private-sector directors.",
+      "date_span": "Temasek NPV at 31 March 2026; GIC board current 2026",
+      "persons": ["Teo Chee Hean", "Lim Boon Heng", "Lee Hsien Loong", "Lawrence Wong", "Gan Kim Yong", "Heng Swee Keat", "Lim Hng Kiang", "Lim Chow Kiat"],
+      "doc_type": "filing (annual review) / issuer disclosure",
+      "notes": "The Fifth Schedule point is from constitutional structure, not from a document I fetched this session; verify before publishing it as a quotation."
+    },
+    {
+      "id": "SOV-18-CROWN-ESTATE",
+      "claim": "The Crown Estate is a statutory corporation created by the Crown Estate Act 1961, amended by the Crown Estate Act 2025. Its own material states: 'The Crown Estate is not the private property of the King. Our assets are hereditary possessions of the Sovereign held in right of the Crown'; 'The UK government does not own The Crown Estate either'; and 'we continue to give all of our net profit to HM Treasury for the benefit of the nation's finances.' Net revenue profit for 2025/26 was £0.5bn; £5bn has been returned to the Treasury over ten years. The Sovereign Grant is separately benchmarked at a percentage of Crown Estate net revenue profit (12%, applied two years in arrears and periodically reviewed) and is paid by the Treasury - the monarch does not receive Crown Estate revenue.",
+      "tier": "documented",
+      "sources": [
+        "The Crown Estate, FAQs, https://www.thecrownestate.co.uk/about-us/faqs",
+        "The Crown Estate Annual Report and Accounts 2025/26, https://www.thecrownestate.co.uk/about-us/annual-report and https://assets.publishing.service.gov.uk/media/6a3d467433bc5beefd3c4b2b/The_Crown_Estate_Integrated_Annual_Report_and_Accounts_2025_to_2026.pdf",
+        "Crown Estate Act 1961, https://www.legislation.gov.uk/ukpga/Eliz2/9-10/55"
+      ],
+      "establishes": "The correct description, from the primary: neither royal private wealth nor a government department, but a corporation sole's public estate managed by statutory Commissioners, with 100% of net profit to the Treasury and the monarch's funding set by a separate statutory formula.",
+      "does_not": "Does not make the Sovereign Grant unrelated to Crown Estate performance - the benchmark is explicitly a percentage of Crown Estate net revenue profit, so profits do determine the size of the grant even though the money does not flow to the monarch.",
+      "counter_record": "The common claim that 'the King owns the Crown Estate and hands the profits to the Treasury in exchange for the Sovereign Grant' misstates the mechanism in both directions: the Sovereign cannot sell the assets and does not receive the revenue, and the grant is voted from the Consolidated Fund, not paid out of Crown Estate income. The Crown Estate Act 2025 further amended the 1961 framework (borrowing and investment powers).",
+      "date_span": "1961 Act; 2025 Act; accounts to 31 March 2026",
+      "persons": [],
+      "doc_type": "statute + filing (annual report laid before Parliament)",
+      "notes": "I read the FAQs and annual-report landing page, not the 2025/26 PDF. Portfolio/total asset value was not captured - take it from the PDF before publishing."
+    },
+    {
+      "id": "SOV-19-DUCHIES",
+      "claim": "The Duchy of Lancaster describes itself as 'a private estate held in trust for the Sovereign and their successors'; its Annual Report and Accounts for the year ended 31 March 2026, published 29 June 2026, reports an adjusted net surplus of £25.2m (2025: £24.4m) and net asset value of £687.3m (2025: £678.7m); the surplus provides revenue for the Privy Purse. The accounts are audited, laid before both Houses of Parliament and prepared under HM Treasury directions. The Duchy of Cornwall, founded by the Great Charter of 1337 and governed by its charters and the Duchies Management Acts, reported a revenue account surplus of £21.6m in its 2026 Integrated Impact Report; the Duke does not have access to the Duchy's capital value, HM Treasury approves substantial property transactions, and the accounts are laid before both Houses.",
+      "tier": "documented",
+      "sources": [
+        "Duchy of Lancaster, 'Annual Report and Accounts Year Ended 31st March 2026', https://www.duchyoflancaster.co.uk/news-updates/duchy-of-lancaster-annual-report-and-accounts-year-ended-31st-march-2026/",
+        "Duchy of Lancaster, Governance, https://www.duchyoflancaster.co.uk/about-the-duchy-of-lancaster/governance/",
+        "Duchy of Cornwall Integrated Impact Report 2026, https://duchyofcornwall.org/assets/media/uploads/content/report/duchy-of-cornwall-integrated-impact-report-2026-523371.pdf",
+        "Duchy of Cornwall, About the Duchy, https://duchyofcornwall.org/page/about-us/"
+      ],
+      "establishes": "Two published, parliament-laid sets of accounts for royal commercial vehicles, with the constitutional distinction intact: income to the office-holder, capital inalienable, Treasury oversight of disposals.",
+      "does_not": "Neither Duchy is a sovereign wealth fund and neither holds the kind of technology or defence position this line is about. Their scale (£687m NAV; £21-25m annual surpluses) is two to three orders of magnitude below the Gulf and Asian funds. Do not put them on the same axis.",
+      "counter_record": "The Chancellor of the Duchy of Lancaster is a UK Cabinet minister whose modern portfolio is Cabinet Office business, with Duchy administration a nominal residue of the office - a reader who reads the title as the state running a royal estate, or the estate running a state office, has made the naming error. The Duchy's own governance page describes the Chancellor as responsible to the Sovereign for administering the Duchy and does not present the role as ministerial.",
+      "date_span": "years ended 31 March 2025 and 31 March 2026",
+      "persons": ["Charles III", "William, Prince of Wales"],
+      "doc_type": "filing (accounts laid before Parliament)",
+      "notes": "Duchy figures taken from the funds' own published summaries via search; I could not open duchyoflancaster.co.uk/about/ (404) or extract figures from the Cornwall PDF directly. Re-read both PDFs before publishing the numbers."
+    },
+    {
+      "id": "SOV-20-ANTIMAP",
+      "claim": "Applying the anti-map guardrail to this line: of the sovereign positions documented here, exactly two carry an instrument that establishes direction of the company, and both are disclosed in ordinary securities filings - Mubadala/GlobalFoundries (81% beneficial ownership plus a shareholder's agreement conferring consent rights and a board majority) and PIF-Ayar/Lucid (>50% voting power plus an Investor Rights Agreement conferring five of nine board nominations). Every other sovereign position found - PIF in SpaceX (2.00% of Class A), PIF in Uber and EA, Norges' entire defence and cyber book, Temasek's book - is a minority financial holding with no golden share, no shareholder agreement, no board control and no export-licence condition attached to the shareholding. Where an instrument of state direction does appear on the other side, it is a US instrument constraining foreign holders: SpaceX's FOCI mitigation with the Department of War, GlobalFoundries' FOCI agreements tied to its security clearance, and the BIS-approved Regulated Technology Environment governing G42's chip access.",
+      "tier": "documented",
+      "sources": [
+        "GlobalFoundries 20-F FY2025 (SOV-07)",
+        "Lucid Group DEF 14A 23 April 2026 (SOV-08)",
+        "SpaceX 424(b)(4) 12 June 2026 and Musk Schedule 13G 13 Aug 2026 (SOV-04)",
+        "GPFG investment mandate, 10% voting-share cap (SOV-14)",
+        "G42 announcement, 20 Nov 2025 (SOV-11)"
+      ],
+      "establishes": "The test and its result. What would be required to establish state direction of a company through a fund: board control, a golden share, a shareholder agreement, or a licence condition. Two of those documents exist in the cases found, and both are corporate-control documents about commercial governance, not security tasking. No golden share was found in any case on this line.",
+      "does_not": "Does not establish that no such direction exists - absence of a filed instrument is absence of evidence, and unlisted holdings, side letters and domestic holdings are outside the disclosure perimeter entirely. It does establish that the claim cannot be made from the filings that exist.",
+      "counter_record": "The symmetry check runs the other way too: the same reasoning that refuses to read Norges' Palantir stake as Norwegian direction must refuse to read Mubadala's 81% of GlobalFoundries as proof of Emirati security direction - what that 81% documents is control of a corporation, and GF's FOCI agreements document a US limit on what that control reaches.",
+      "date_span": "2021-2026",
+      "persons": [],
+      "doc_type": "filing (synthesis of the above)"
+    }
+  ],
+  "nulls": [
+    {
+      "searched": "SEC EDGAR company search, form types 13F and 13F-HR, for 'abu dhabi investment authority', 'qatar investment authority', 'kuwait investment', 'GIC private', 'government of singapore'",
+      "result": "No 13F filer found under any of those names. ADIA, QIA, KIA and GIC do not appear to report US-listed holdings in their own names. PIF (CIK 1767640), Mubadala (1704268), Norges Bank (1374170) and Temasek Holdings (1021944) do. Temasek's subsidiary entities (Temasek Capital (Private) Ltd, Temasek Capital (Americas), Temasek Life Sciences, Temasek Healthcare) file 13F-NT notices, i.e. holdings reported by an affiliate. Limitation: these funds may hold through external managers who file in their own names, and 13F covers only Section 13(f) securities."
+    },
+    {
+      "searched": "Published assets under management for ADIA, QIA, KIA and GIC from the funds' own material",
+      "result": "None of the four publishes an AUM figure. ADIA publishes only annualised 20- and 30-year rates of return (6.6% over 20 years to 31 Dec 2025). KIA is barred from public disclosure by Clause 8 of Law No. 47 of 1982. Every circulating figure for these four ($1.07tn KIA, $936bn GIC, ~$870bn ADIA, ~$450-500bn QIA) is a third-party estimate from Global SWF or SWFI, not a filing. Do not cite any of them at documented tier, and do not read the silence as concealment of anything in particular - that is the guaranteed-null rule."
+    },
+    {
+      "searched": "Any golden share, state veto, or security-related shareholder agreement held by a sovereign fund over a technology or defence company, across the GlobalFoundries 20-F, Lucid DEF 14A, SpaceX prospectus, and the funds' own governance publications",
+      "result": "No golden share found in any case. The only shareholder agreements found (Mubadala/GF, Ayar/Lucid) are ordinary commercial control agreements with no state-security clause disclosed. No sovereign fund was found to hold a special share, a state veto, or a security-conditioned stake in any company on this line."
+    },
+    {
+      "searched": "Sovereign fund positions in Cellebrite, NSO Group, Elbit Systems, Cognyte, Verint, CyberArk, Radware, Team8, Cyberstarts, Paladin Capital Group, across the 30 June 2026 13F filings of PIF, Mubadala, Norges Bank and Temasek",
+      "result": "None found. Norges holds Check Point Software (1,325,557 shares / $174.2m) and NICE Ltd ADR (23,828 shares / $2.2m) and nothing else from that list. NSO Group, Team8, Cyberstarts and Paladin are private and outside 13F entirely, so this is a null about the disclosure perimeter, not about the world."
+    },
+    {
+      "searched": "Any claim that a Gulf ruling family or sovereign fund directs a surveillance or intelligence company",
+      "result": "Nothing sourced to a filing. The strongest documented adjacency is that one person - Sheikh Tahnoun bin Zayed Al Nahyan - holds the UAE state office of National Security Adviser and chairs ADIA, G42 and MGX. That is a fact about offices held, published by the Abu Dhabi Government Media Office and the companies themselves. It is not a document showing tasking, and no such document was found. Rung 5 is claimed for no one."
+    },
+    {
+      "searched": "The common claim that the Crown Estate is the monarch's private wealth, or that the monarch surrenders it to the Treasury in exchange for the Sovereign Grant",
+      "result": "Killed by the primary. The Crown Estate's own FAQ states it is 'not the private property of the King' and that 'The UK government does not own The Crown Estate either'; all net profit goes to HM Treasury; the Sovereign Grant is a separate statutory payment benchmarked at a percentage of Crown Estate net revenue profit and paid by the Treasury. The exchange framing is wrong in both directions."
+    },
+    {
+      "searched": "Whether the head of state or head of government chairs each of the eight funds (the line's load-bearing test)",
+      "result": "True for two of eight and half-true for a third, so the generalisation fails. PIF: chaired by the Crown Prince and Prime Minister - true. GIC: chaired by the Senior Minister and former Prime Minister, with the sitting Prime Minister as Deputy Chairman - effectively true. Mubadala: chaired by the UAE Vice President and Deputy Prime Minister - a head of government's deputy, not the head. ADIA: chaired by the National Security Adviser and Deputy Ruler of Abu Dhabi - a security office, not a head-of-government office. QIA: chaired by the Central Bank Governor since 2023, having moved off the future Prime Minister - false and moving away. KIA: chaired ex officio by the State Minister for Economic Affairs and Investment - a minister, not the head. Temasek: chaired by a former Deputy Prime Minister - false. NBIM: no chairman in this sense at all; managed by the central bank under a Ministry of Finance mandate."
+    },
+    {
+      "searched": "PIF Annual Report 2025 PDF, PIF Law PDF, PIF governance and press-release pages on pif.gov.sa",
+      "result": "Unreachable from this environment. All pif.gov.sa URLs return HTTP 403 to WebFetch and to curl with browser user-agents; one attempt returned a TLS-level connection reset through the agent proxy. Every PIF figure in this file is therefore from dated secondary reporting quoting the primary, not from the primary. web.archive.org also remains unreachable, so no cached copy could be obtained."
+    },
+    {
+      "searched": "mgx.ae leadership page for MGX's board and chairman",
+      "result": "Fetch failed - page exceeded the 10MB content limit. MGX's chairmanship by Sheikh Tahnoun is taken from Mubadala's own announcement and from reporting, not from MGX's own leadership page. The $49bn Fund I close and the Anthropic/OpenAI/xAI portfolio claims are trade reporting only and are tiered labeled, not documented."
+    }
+  ],
+  "searched": [
+    "SEC EDGAR company search (13F, 13F-HR, 13F-NT) for PIF, Mubadala, Norges Bank, Temasek, GIC, KIA, ADIA, QIA",
+    "SEC EDGAR submissions JSON and 13F information tables for CIKs 1767640, 1704268, 1374170, 1021944 (period 2026-06-30)",
+    "SpaceX (CIK 1181412) S-1, 424(b)(4), 10-Q, and all Schedule 13G filings",
+    "GlobalFoundries Inc. (CIK 1709048) Form 20-F FY2025",
+    "Lucid Group (CIK 1811210) DEF 14A 23 April 2026",
+    "pif.gov.sa governance, annual report and press-release pages (403 - blocked)",
+    "mubadala.com board of directors and news; annual2025.mubadala.com",
+    "mediaoffice.abudhabi resolutions on Mubadala and ADIA boards; Tahnoun bin Zayed state offices",
+    "adia.ae board of directors (2024 Review PDF, content-stream extraction)",
+    "qia.qa leadership; diwan.gov.qa Amiri Decision 25 March 2026; thepeninsulaqatar.com; qcb.gov.qa governor",
+    "kia.gov.kw About KIA; IFSWF Santiago Principles assessment; UNCTAD investment-law text of Law 47/1982",
+    "nbim.no about-the-fund, half-year report 2026, exclusion press releases, submissions to the Ministry of Finance",
+    "norges-bank.no GPFG investment mandate PDF (content-stream extraction for the 10% voting-share cap)",
+    "temasek.com.sg news room and Temasek Review 2026; gic.com.sg board of directors",
+    "thecrownestate.co.uk FAQs and Annual Report 2025/26; legislation.gov.uk Crown Estate Act 1961",
+    "duchyoflancaster.co.uk annual report and governance; duchyofcornwall.org about and 2026 Integrated Impact Report",
+    "Microsoft blog/newsroom on the G42 investment and Intergovernmental Assurance Agreement; g42.ai chip-export approval announcement"
+  ],
+  "notes": "Method note for the report: the strongest material on this line is not that sovereign funds hold surveillance companies - they hold everything - but that where state direction of a company genuinely exists it leaves an ordinary, boring, public document: a shareholder's agreement, a proxy disclosure, a controlled-company statement, a FOCI agreement, a BIS licence condition. Two such documents were found (Mubadala/GlobalFoundries, PIF-Ayar/Lucid) and both are commercial-control instruments. No golden share was found anywhere on this line. The instruments that do address national security all run the other way - US instruments constraining what foreign owners can reach. Three specific cautions for anyone drafting from this file: (1) every PIF figure is secondary, because pif.gov.sa blocks this environment; (2) all AUM figures circulating for ADIA, KIA, QIA and GIC are third-party estimates and none of the four publishes one, and KIA's silence is a statutory duty under Law 47/1982 with a named penalty clause, not a concealment signal; (3) the 'head of state chairs the fund' generalisation holds for PIF and GIC, fails for QIA, Temasek, KIA and NBIM, and is a different office entirely at ADIA - publishing it as a pattern would be the symmetry-rule ratchet. The 13F value fields in all four filings are in whole dollars (cross-checked against a common security), not thousands."
+}

@@ -162,6 +162,67 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**THREE TROPE PASSAGES KILLED, IN OUR OWN VOICE. This was the worst error class on the page.**
+Found by the banking-families research line, each verified against the page before editing:
+(a) Section VII closed the Fed material with *"The same banking dynasties that created the
+institution in secret still operate it 113 years later. The chair rotates. The families do not."*
+**It fails against the report's own list** — the succession printed directly above it contains no
+banking dynasty. Paul Warburg sat on the original Board as vice-governor 1916-1918, **was never
+chairman**, died 1932. The documented institutional revolving door stays; the hereditary
+conversion is gone. (b) Section XX told the reader to *"note the Warburg name"* — Warburg Pincus
+has been a private partnership since Lionel I. Pincus & Co. acquired E.M. Warburg & Co. in **1966**.
+(c) Section VI cross-referenced *"the Rothschild banking network documented in Section VII"*;
+Section VII carries **one** Rothschild sentence, about an 1825 gold loan. Replaced with the real
+five-house record including **Vienna seized after the March 1938 Anschluss**, which cuts against
+the use the material is usually put to. **Do not re-add any of the three.**
+
+**The four held errors are fixed** (Mirror Group 1994, Burns, FBI Urban Moving). **Burns was wrong
+in six places and three ways**: Deputy Secretary of State 2011-2014, Carnegie 2015-2021, CIA
+2021-**2025**. The 2014 Epstein meetings fall in his State tenure, and he no longer holds office,
+so listing him under "active desks" was stale. **The DEA art-students item was NOT an error** —
+the memo is a 60-page June 2001 document of the DEA's Office of Security Programs and its own
+speculation is *"organized intelligence gathering activity"*, stronger than what we printed.
+Holding it pending verification was right.
+
+**Gate/crawler fix, `server.js`.** The allowlist admitted search indexers (OAI-SearchBot,
+PerplexityBot) but gave the 8,607-byte pixel gate to **user-directed fetchers** — ChatGPT-User,
+Claude-User, Perplexity-User — i.e. the indexer that helps someone find the report was in, the
+fetcher that lets them read it was out. Added those three plus Claude-SearchBot. **GPTBot, CCBot
+and ClaudeBot stay out** (training). Verified live across ten user agents; `/download`,
+`/api/data`, `/api/visitors` still cookie-only. `B0B_CRAWLER_RE` overrides without a deploy.
+*Caution recorded: I first attributed an outside model's failure to read the report to this gate.
+It had no URL-fetch tool at all. The fix was right; the attribution was not. Confirm the
+mechanism before blaming it.* **Site SEO is clean** — `node scripts/seo-check-live.js` passes all
+seven checks, /report is in the sitemap, canonical and description are correct.
+
+**RESEARCH LANDED, UNPUBLISHED — `research/` files pending, four lines on the intelligence-to-capital
+pipeline.** The framing finding: **the report carries the club layer heavily and the money layer
+barely** — CFR 130, Trilateral 65, Bilderberg 44 against In-Q-Tel 2, Booz Allen 3, Check Point 1,
+and zero for Cellebrite, Team8, Cyberstarts, Paladin, Temasek. **That is backwards.** A shared club
+is the weakest evidence; a cap table, a contract award and an export licence are documents.
+- **Israel line:** the 8200 founder pipeline is **real, self-published and nearly worthless as
+  evidence** — EDGAR full-text 2001-2026 yields **one** major Israeli cyber firm stating an
+  executive's 8200 command (Check Point 20-F, Nadav Zafrir). **Zero** in Palo Alto's FY2025 proxy
+  and FY2026 10-K, zero in Cellebrite's 20-F, zero for Gil Shwed. **What actually binds these firms
+  to the state is the export licence** — DECA, Defense Export Control Law 5767-2007 (the page has
+  **zero** mentions of it; this is the real gap). NSO's US sale still required DECA approval.
+  New capital layer: CyberArk→Palo Alto $21.1bn (11 Feb 2026), Wiz→Alphabet **$29.5bn** filing
+  figure (11 Mar 2026), Carbyne→Axon $625m — **the page already carries Carbyne→Axon.**
+  Killed: Cellebrite's largest owner is SUNCORPORATION (Japan) 42.52%, no Israeli state equity.
+- **Families line killed:** "$500 trillion" (exceeds all household wealth on Earth); "privately
+  owned Fed" (12 U.S.C. §287 bars transfer of Reserve Bank stock); *Lewis v. United States* (an
+  FTCA car-accident holding); "owns most central banks" (BIS private shareholding abolished
+  8 Jan 2001, 72,648 shares at CHF 16,000). **Survived:** Wallenberg/Investor AB (KAW 20.1% of
+  capital, 43.0% of votes; foundations 50.2%) — the best-documented family control of listed
+  industry anywhere, and entirely public.
+- **PIPELINE WARNING, important:** WebFetch's summarising model **returned confidently fabricated
+  figures from two Rothschild PDFs**. Never let a model summary of a filing reach the page —
+  extract the PDF text locally and read the number yourself.
+
+---
+
+### Still open from 11 September 2026
+
 **EDIT NOTES ARE GONE FROM THE PAGE. DO NOT RE-ADD THEM.** 12 Sept 2026, author's instruction:
 the revision-history narration was "lengthy and distracting and confusing." **33 edit notes plus
 the Section XVI `EDITORIAL CORRECTION` box were removed.** The rule now: **when a claim is wrong,
