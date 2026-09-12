@@ -162,6 +162,38 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**MAP: DATES, A PERIOD SCRUBBER, AND A KML EXPORT — 12 Sept 2026.** `site/map.html` markers now
+carry `date` (ISO, as precise as the source allows) and `dprec` (`day`/`month`/`year`), parsed from
+each marker's own `ctx` text: **819 of 1,181 dated — 63 day, 47 month, 709 year — and 362 undated.**
+Range 1545–2026. A `.time-scrub` control filters on it; **undated markers are included by default
+and the hidden count is printed in the stats bar**, so narrowing a period never silently drops a
+third of the corpus.
+
+*Two extraction traps, both hit:* sorting candidate tuples lets a bare year `(y,1,1,'year')` beat a
+specific date in the same year — find the earliest **year** first, then take the most precise
+candidate inside it. And "Vision 2030" parses as a date — guard with a lookbehind for
+`(vision|agenda|horizon|goal|target|plan)\s*$` and cap at 2026.
+
+*Pipeline trap, new and generic:* **`var` hoisting made the first `applyFilters()` read
+`tsFrom`/`tsTo` as `undefined`, and every marker failed the range test — 0 of 1,181 shown.** The
+page looked built and was empty. Time-range state is now declared **above** marker creation. The
+lesson is the diagnostic, not the fix: a headless `--dump-dom` run with a `<pre>` that JSON-dumps
+live state (`allMarkers.length`, per-predicate match counts, `markerLayer.getLayers().length`)
+found it in one pass where a screenshot only showed the symptom.
+
+**Google Earth: the answer is KML, not the Maps API.** `scripts/build-kml.py` generates
+`site/map.kml` from the `locations` array — 1,181 placemarks, 16 folders, per-type styles, and
+`TimeSpan`/`TimeStamp` on the 819 dated ones **so Earth's own time slider runs off the same dates
+as the site scrubber**. Linked from the scrub panel. **Photorealistic 3D Maps / Map3DElement was
+rejected**: it needs a billing account and a referrer-restricted key exposed client-side on a public
+page with unbounded session billing, and it would mean rewriting the ten live Leaflet feeds. *Parser
+note: the `locations` literal is not JSON — it has `//` comments containing apostrophes (which open
+a phantom string and truncate a naive bracket-matcher), bare keys, and `\'` inside double-quoted
+strings (legal JS, illegal JSON). `build-kml.py` walks it character by character; do not regex it.*
+
+**MapLibre GL 5.6.0 was vendored and then removed unused.** A renderer swap is a separate decision,
+not part of the in-place upgrade.
+
 **THREE TROPE PASSAGES KILLED, IN OUR OWN VOICE. This was the worst error class on the page.**
 Found by the banking-families research line, each verified against the page before editing:
 (a) Section VII closed the Fed material with *"The same banking dynasties that created the
