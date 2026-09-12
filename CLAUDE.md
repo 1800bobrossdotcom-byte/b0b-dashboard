@@ -111,6 +111,15 @@ Learn these; they are invoked by name on the page.
 - **The gate intercepts static assets too.** Un-cookied fetches of `/signal-bar.js` return
   the 8,607-byte pixel gate as `text/html`. Gate cookie:
   `POST /api/gate -d '{"answer":"7"}'` with a jar.
+- **Static assets are only gated while cold.** `express.static` sends
+  `Cache-Control: public, max-age=3600` with no `Vary` on the access cookie, so the first
+  cookied fetch of an asset populates the edge cache and un-cookied clients get the real
+  file on that URL for the next hour. Verified on `/signal-bar.js` and `/map.kml`.
+  **When verifying that something is gated, always add a cache-buster query string** — a
+  warm URL will lie to you. Not treated as a defect: `security.txt` already says the gate
+  is a threshold, not a credential. Flagged for the author, unchanged.
+- **The static route serves a fixed extension allowlist** in `server.js`. A new asset type
+  404s live while looking perfectly fine in the repo — `.kml` did exactly that.
 - **Section I has no static sect-toc** (JS-generated). Sections II, IX, XIII and others do.
 - **DOJ fetch:** `Cookie: justiceGovAgeVerified=true` + browser UA. Akamai rate-limits with
   **HTTP 401, not 429** — use `--fail`, back off 5/15/35/60/90s.
