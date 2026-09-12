@@ -20,9 +20,14 @@ It is **two things at once and both are load-bearing:**
 1. **A documented record** of institutional failure around the Epstein–Maxwell network and
    the wider control architecture — sourced, tiered, and checkable.
 2. **A work of art.** A decades-spanning installation in which **the method is the
-   content**: the tiering, the published nulls, the corrections printed on the page rather
-   than made silently. The second is what makes the first credible. A document that kills
-   its own specimens can be trusted about the ones that survive.
+   content**: the tiering, the published nulls, the specimens killed on the page. The second
+   is what makes the first credible. A document that kills its own specimens can be trusted
+   about the ones that survive.
+
+*Amended 12 Sept 2026: this used to read "corrections printed on the page rather than made
+silently." The author had the revision-history notes stripped — see §7. **Corrections are still
+made and material ones are still disclosed; what is gone is the narration about the report's own
+drafts.** Do not re-add "an earlier version of this passage said X" prose.*
 
 **Real operators read this. Some may act on it.** That is the reason for the discipline,
 not a reason to soften it. Accuracy is the safety mechanism. Anything that would get a
@@ -155,7 +160,36 @@ than once.
 
 ---
 
-## 7. OPEN AT LAST WRITE — 11 September 2026
+## 7. OPEN AT LAST WRITE — 12 September 2026
+
+**EDIT NOTES ARE GONE FROM THE PAGE. DO NOT RE-ADD THEM.** 12 Sept 2026, author's instruction:
+the revision-history narration was "lengthy and distracting and confusing." **33 edit notes plus
+the Section XVI `EDITORIAL CORRECTION` box were removed.** The rule now: **when a claim is wrong,
+fix the claim. Do not write a paragraph about having fixed it.** Every corrected fact was kept —
+the Park Report chronology, the Ben-Menashe sourcing, the 2003 documented-contact floor, the
+Zorro acreage, the DUMB over-claim — each now simply states itself. Banned phrasings: "an earlier
+version of this passage/entry/box", "an earlier draft", "this report first/previously said",
+"corrected here", "recorded rather than made silently". **Kept deliberately: the two Anthropic
+supply-chain disclosures**, which are provenance about who helped draft the report, not
+corrections. *This supersedes the old §1 line about corrections printed on the page.*
+
+**Redundancy pass, same day.** Paragraph-level dedup was already clean — one near-duplicate pair
+in 2,267 blocks, and it is a prose entry against an index entry, which is correct. Four set-piece
+restatements were cut: the Carbyne concealment argument (made twice in Section II with the same
+lawyer quote; the first now points to test two), the "Wexner, Barak and Acosta appear above as
+documented participants" tier boilerplate (verbatim in two closing paragraphs), the "what has
+been running since 2013 that will be disclosed in 2040?" question (posed three times inside one
+Section XIII subsection), and the masthead's what-to-send list (duplicated Section XXIV's).
+**Scale line now 269 / 1,051 / 121.**
+
+**Useful redundancy tooling, worth reusing:** normalise every `<p>`/`<li>` to text, build 5-word
+shingle sets, flag pairs with Jaccard ≥0.30; separately, count repeated 12-to-14-word spans over
+tag-stripped prose with `<script>`/`<style>` removed first. The n-gram counter double-counts
+across inline markup, so **confirm every hit with `re.finditer` on the raw HTML before cutting.**
+
+---
+
+### Still open from 11 September 2026
 
 **THE SPONSOR QUESTION IS SETTLED ON THE PAGE. DO NOT RE-HEDGE IT.** 11 Sept 2026: the author
 found that Section II's conclusion paragraph said the report *"does not name a sponsoring
