@@ -162,7 +162,16 @@ function hasAccess(req) {
 // The bypass covers pages and the assets needed to render them, and nothing
 // else - /download, /api/data and /api/visitors stay cookie-only.
 // Search engines, link-preview unfurlers, and search-mode AI crawlers are
-// listed; training-only scrapers (GPTBot, CCBot) are deliberately absent.
+// listed; training-only scrapers (GPTBot, CCBot, ClaudeBot) are deliberately
+// absent.
+// Third category, added 12 Sep 2026: USER-DIRECTED AI fetchers. ChatGPT-User,
+// Claude-User and Perplexity-User fire when a person asks an assistant to read
+// this specific URL. That is a reader using a tool, not a harvester - and
+// excluding them while admitting OAI-SearchBot was incoherent: the indexer
+// that helps someone find the report was allowed in, the fetcher that lets
+// them actually read it was handed the pixel gate. Observed in the wild:
+// a reader pointed an assistant at /report and it reported the page could not
+// be retrieved. Training crawlers stay out.
 const CRAWLER_RE = new RegExp(
   process.env.B0B_CRAWLER_RE ||
   [
@@ -171,7 +180,8 @@ const CRAWLER_RE = new RegExp(
     'PetalBot', 'SeznamBot', 'Qwantbot',
     'facebookexternalhit', 'Twitterbot', 'LinkedInBot', 'Slackbot',
     'Discordbot', 'TelegramBot', 'WhatsApp', 'Pinterestbot', 'redditbot',
-    'OAI-SearchBot', 'PerplexityBot', 'YouBot',
+    'OAI-SearchBot', 'PerplexityBot', 'YouBot', 'Claude-SearchBot',
+    'ChatGPT-User', 'Claude-User', 'Perplexity-User',
   ].join('|'), 'i');
 
 function isCrawler(req) {
