@@ -1,13 +1,13 @@
 {
-  "generated": "2026-09-12T04:04:09.430Z",
+  "generated": "2026-09-12T04:10:22.462Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "491600d7c99918a59901d4720baa716edc942e32534688f896303771590b1fb5",
+  "fullFileHash": "ac79fe1bb0249cc6fa5c164de3378ddd68df815e0f32ff6010ea6291a4298230",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "062c86d15b717d9fc0f73ea9b0f81b9c9b6f351840fe524e0b3900a860375e0b",
+      "hash": "2169207dac18aecbe469018e00351d158f7825410e1c265dca9356f3a1f8f72d",
       "length": 34924
     },
     {
@@ -727,8 +727,8 @@
     },
     {
       "id": "x-project-maven-ai-military-convergence",
-      "hash": "49369ce3bbf943cbfe371629aff4532bed19e44ba67b4ee31456fc9edf4a04b1",
-      "length": 12456
+      "hash": "003927af9228a711066b8ed010d6122c773190a3f703adb4255b62b6bebf641d",
+      "length": 12952
     },
     {
       "id": "x-merlin-and-nspm-7-a-claim-checked-in-both-directions",
@@ -1262,8 +1262,8 @@
     },
     {
       "id": "XX",
-      "hash": "5c11576c0130d248c9299b6c8868cc23ccc118a333ceeb59975f8a8892b64c28",
-      "length": 36241
+      "hash": "35c447878937921fa31f2795017db1306f3d63f765914327e32569ce4495ca7b",
+      "length": 36325
     },
     {
       "id": "xx-pattern-analysis-what-the-calibration-reveals",
