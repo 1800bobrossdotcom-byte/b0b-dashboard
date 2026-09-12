@@ -427,8 +427,17 @@ const REDIRECTS = {
 app.use((req, res, next) => {
   if (!canView(req)) return next();
   // only serve known static extensions
-  if (/\.(js|css|json|png|svg|ico|jpg|jpeg|webp|mp3|mp4|woff2?)$/i.test(req.path)) {
-    return express.static(PUB, { maxAge: '1h' })(req, res, next);
+  if (/\.(js|css|json|png|svg|ico|jpg|jpeg|webp|mp3|mp4|woff2?|kml)$/i.test(req.path)) {
+    // KML is set explicitly rather than left to the mime table, so the Google
+    // Earth export downloads as Earth data instead of as a generic XML blob.
+    return express.static(PUB, {
+      maxAge: '1h',
+      setHeaders: (res, filePath) => {
+        if (filePath.endsWith('.kml')) {
+          res.setHeader('Content-Type', 'application/vnd.google-earth.kml+xml');
+        }
+      },
+    })(req, res, next);
   }
   next();
 });
