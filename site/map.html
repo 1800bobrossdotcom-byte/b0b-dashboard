@@ -213,6 +213,20 @@
     }
     .search-box input::placeholder { color: var(--muted-4); }
     .search-box input:focus { border-color: var(--green); }
+    /* Syntax hint. Mostly punctuation, so it reads the same in every locale. */
+    .search-hint {
+      margin-top: 3px;
+      text-align: center;
+      font-family: 'Courier New', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.04em;
+      color: var(--muted-4);
+      opacity: 0;
+      transition: opacity .15s;
+      pointer-events: none;
+    }
+    .search-box:hover .search-hint,
+    .search-box:focus-within .search-hint { opacity: .85; }
 
     /* ===================== FILTER TOGGLE BUTTON ===================== */
     .filter-toggle {
@@ -450,8 +464,9 @@
 }
 </style>
 <div class="search-box">
-  <input type="text" id="searchInput" placeholder="Search locations..." data-i18n-ph="action.search" />
+  <input type="text" id="searchInput" placeholder="Search locations..." data-i18n-ph="action.search" title="Multiple words: every one must match. &quot;quoted phrase&quot; matches as one string. -word excludes. Matches name, context, section, type and date." />
   <button onclick="resetFilters()" style="background:#0a0a0a;color:#00ff41;border:1px solid #333;padding:4px 8px;font-family:Courier New,monospace;font-size:0.7rem;cursor:pointer;margin-left:4px" title="Reset all filters" data-i18n="action.reset">RESET</button>
+  <div class="search-hint">word word = AND &middot; "phrase" &middot; -exclude</div>
 </div>
 
 <div class="time-scrub" id="timeScrub">
@@ -590,7 +605,7 @@
   </div>
   <div class="filter-section-body" id="searchBody">
   <div class="filter-item">
-    <input type="text" id="patternInput" placeholder="e.g. Palantir, CIA, obelisk..." style="background:#111;border:1px solid #333;color:#00ff41;padding:5px 8px;font-family:Courier New,monospace;font-size:0.7rem;width:100%;margin-bottom:4px" />
+    <input type="text" id="patternInput" placeholder='e.g. epstein island &nbsp;"black site" &nbsp;palantir -uk' title="Multiple words: every one must match. &quot;quoted phrase&quot; matches as one string. -word excludes." style="background:#111;border:1px solid #333;color:#00ff41;padding:5px 8px;font-family:Courier New,monospace;font-size:0.7rem;width:100%;margin-bottom:4px" />
   </div>
   <div class="filter-item">
     <button onclick="patternSearchKeyword()" style="background:transparent;border:1px solid #00ccff;color:#00ccff;padding:4px 10px;font-family:Courier New,monospace;font-size:0.65rem;cursor:pointer">SEARCH CONNECTIONS</button>
@@ -2549,16 +2564,76 @@ function resetTimeRange() {
   tsSync();
 }
 
+// ===================== QUERY PARSING =====================
+// Search takes more than one word. Every term must match (AND), because a
+// query that widens as you add words is a query that cannot narrow anything.
+//   epstein island      both words, anywhere in the entry
+//   "little st james"   quoted, matched as one string
+//   maxwell -ghislaine  leading minus excludes
+// Terms match against the marker's name, context, section, type and date, so
+// `obelisk paris` and `II 2003` both work without touching the checkboxes.
+function parseQuery(raw) {
+  var s = (raw || '').toLowerCase();
+  var terms = [];
+  var i = 0;
+  while (i < s.length) {
+    while (i < s.length && /\s/.test(s.charAt(i))) i++;
+    if (i >= s.length) break;
+    var neg = false;
+    if (s.charAt(i) === '-' && i + 1 < s.length && !/\s/.test(s.charAt(i + 1))) {
+      neg = true;
+      i++;
+    }
+    var text;
+    if (s.charAt(i) === '"') {
+      var end = s.indexOf('"', i + 1);
+      // An unclosed quote takes the rest of the line rather than matching
+      // nothing, so the query still works while it is being typed.
+      if (end === -1) { text = s.slice(i + 1); i = s.length; }
+      else { text = s.slice(i + 1, end); i = end + 1; }
+    } else {
+      var j = i;
+      while (j < s.length && !/\s/.test(s.charAt(j))) j++;
+      // List separators are dropped so "palantir, cia" behaves the way anyone
+      // typing it expects. Everything else is kept: 9/11 and u.s. must survive.
+      text = s.slice(i, j).replace(/^[,;]+|[,;]+$/g, '');
+      i = j;
+    }
+    text = text.trim();
+    if (text) terms.push({ text: text, neg: neg });
+  }
+  return terms;
+}
+
+// Built once per marker and cached: applyFilters runs on every keystroke.
+function searchHaystack(d) {
+  if (d._hay === undefined) {
+    d._hay = (d.name + ' ' + d.ctx + ' ' + d.section + ' ' + d.type + ' ' +
+              (d.date || '')).toLowerCase();
+  }
+  return d._hay;
+}
+
+function queryMatch(terms, d) {
+  if (!terms.length) return true;
+  var h = searchHaystack(d);
+  for (var i = 0; i < terms.length; i++) {
+    var hit = h.indexOf(terms[i].text) !== -1;
+    if (terms[i].neg ? hit : !hit) return false;
+  }
+  return true;
+}
+
 function applyFilters() {
   var f = getActiveFilters();
-  var search = document.getElementById('searchInput').value.toLowerCase();
+  var terms = parseQuery(document.getElementById('searchInput').value);
   markerLayer.clearLayers();
   var shown = 0, hiddenUndated = 0;
   allMarkers.forEach(function(m) {
     var d = m._locData;
     var sectionMatch = f.sections.indexOf(d.section) !== -1;
     var typeMatch = f.types.indexOf(d.type) !== -1;
-    var searchMatch = !search || d.name.toLowerCase().indexOf(search) !== -1 || d.ctx.toLowerCase().indexOf(search) !== -1;
+    var searchMatch = queryMatch(terms, d);
     if (sectionMatch && typeMatch && searchMatch) {
       if (tsMatch(d)) { m.addTo(markerLayer); shown++; }
       else if (tsYear(d) === null) { hiddenUndated++; }
@@ -2673,14 +2748,15 @@ function showConnected(lat, lng) {
 // Keyword connection search - finds all markers where ctx or name mentions the keyword,
 // PLUS all markers connected to those markers via connection lines
 function patternSearchKeyword() {
-  var query = (document.getElementById('patternInput').value || '').toLowerCase().trim();
-  if (!query) return;
-  // Step 1: Find all markers matching the keyword
+  var terms = parseQuery(document.getElementById('patternInput').value);
+  if (!terms.length) return;
+  // Step 1: Find all markers matching the query (same multi-term rules as the
+  // location search: every term must match, "phrases" are one string, -excludes)
   var matchedCoords = [];
   var matchedIndices = new Set();
   allMarkers.forEach(function(m, idx) {
     var d = m._locData;
-    if (d.name.toLowerCase().indexOf(query) !== -1 || d.ctx.toLowerCase().indexOf(query) !== -1) {
+    if (queryMatch(terms, d)) {
       matchedCoords.push([d.lat, d.lng]);
       matchedIndices.add(idx);
     }
@@ -2719,7 +2795,9 @@ function patternSearchKeyword() {
     markerLayer.eachLayer(function(l) { bounds.push(l.getLatLng()); });
     map.fitBounds(L.latLngBounds(bounds), { padding: [50, 50] });
   } else if (shown === 0) {
-    alert('No results for "' + query + '"');
+    alert('No results for "' +
+          document.getElementById('patternInput').value.trim() +
+          '"\n\nEvery term has to match. Drop a word, or quote a phrase.');
   }
 }
 
