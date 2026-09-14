@@ -39,6 +39,10 @@
     'font-size:0.7rem;line-height:1;padding:0.3rem 0.4rem;cursor:pointer;border-radius:2px}',
     '#b0b-search button:hover{border-color:var(--green);color:var(--green)}',
     '#b0b-search-count{color:var(--muted-3);font-size:0.62rem;margin-top:0.35rem;min-height:0.8rem;letter-spacing:0.3px}',
+    /* syntax hint: almost all punctuation, so it reads the same in every locale */
+    '#b0b-search-hint{display:none;color:var(--muted-3);font-size:0.58rem;letter-spacing:0.3px;',
+    'line-height:1.5;opacity:0.8}',
+    '#b0b-search:focus-within #b0b-search-hint{display:block}',
     '#b0b-search-results{display:none;padding:0.2rem 0 calc(3rem + env(safe-area-inset-bottom, 0px))}',
     '#b0b-search-results.active{display:block}',
     '.b0b-hit{display:block;padding:0.5rem 1.2rem;border-bottom:1px solid var(--surface-3);cursor:pointer;',
@@ -56,6 +60,53 @@
     '.b0b-search-flash.fade{outline-color:transparent}'
   ].join('');
   document.head.appendChild(css);
+
+  /* ---------- query ----------
+     More than one word. Every term has to match the same block (AND), because a
+     query that widens as you add words cannot narrow anything in a document this
+     long. Quoted phrases match as one string; a leading minus excludes the block.
+       epstein island        both words, same paragraph
+       "little st. james"    one string
+       maxwell -ghislaine    excludes
+     Positive terms shorter than MIN_CHARS are ignored rather than matching
+     everything, so `epstein i` behaves as `epstein` until the second word lands. */
+  function parseQuery(raw) {
+    var s = (raw || '').toLowerCase();
+    var terms = [];
+    var i = 0;
+    while (i < s.length) {
+      while (i < s.length && /\s/.test(s.charAt(i))) i++;
+      if (i >= s.length) break;
+      var neg = false;
+      if (s.charAt(i) === '-' && i + 1 < s.length && !/\s/.test(s.charAt(i + 1))) { neg = true; i++; }
+      var text;
+      if (s.charAt(i) === '"') {
+        var end = s.indexOf('"', i + 1);
+        // an unclosed quote takes the rest of the line, so the query keeps
+        // working while it is still being typed
+        if (end === -1) { text = s.slice(i + 1); i = s.length; }
+        else { text = s.slice(i + 1, end); i = end + 1; }
+      } else {
+        var j = i;
+        while (j < s.length && !/\s/.test(s.charAt(j))) j++;
+        // list separators are dropped; 9/11 and u.s. are not
+        text = s.slice(i, j).replace(/^[,;]+|[,;]+$/g, '');
+        i = j;
+      }
+      text = text.trim();
+      if (text) terms.push({ text: text, neg: neg });
+    }
+    return terms;
+  }
+
+  function splitTerms(raw) {
+    var pos = [], neg = [];
+    parseQuery(raw).forEach(function (t) {
+      if (t.text.length < MIN_CHARS) return;
+      (t.neg ? neg : pos).push(t.text);
+    });
+    return { pos: pos, neg: neg };
+  }
 
   /* ---------- index ---------- */
   function sectionOf(el) {
@@ -189,7 +240,10 @@
     results.innerHTML = '';
     clearMark();
 
-    if (q.length < MIN_CHARS) {
+    var t = splitTerms(q);
+    // A query of nothing but exclusions would select almost the whole report,
+    // which is not a search. Wait for something to look for.
+    if (!t.pos.length) {
       results.classList.remove('active');
       if (sidebarNav) sidebarNav.style.display = '';
       count.textContent = '';
@@ -197,12 +251,27 @@
     }
     if (!index) index = build();
 
-    var lower = q.toLowerCase();
     for (var i = 0; i < index.length; i++) {
-      var it = index[i], from = 0, at;
-      while ((at = it.lower.indexOf(lower, from)) !== -1) {
-        matches.push({ el: it.el, h2: it.h2, sect: it.sect, text: it.text, start: at, len: q.length });
-        from = at + lower.length;
+      var it = index[i], k, ok = true;
+      for (k = 0; k < t.pos.length && ok; k++) if (it.lower.indexOf(t.pos[k]) === -1) ok = false;
+      for (k = 0; k < t.neg.length && ok; k++) if (it.lower.indexOf(t.neg[k]) !== -1) ok = false;
+      if (!ok) continue;
+      // Every occurrence of every term, in reading order, so the ▲▼ buttons
+      // still step hit by hit through a block that satisfied the whole query.
+      var hits = [];
+      for (k = 0; k < t.pos.length; k++) {
+        var term = t.pos[k], from = 0, at;
+        while ((at = it.lower.indexOf(term, from)) !== -1) {
+          hits.push({ start: at, len: term.length });
+          from = at + term.length;
+        }
+      }
+      hits.sort(function (a, b) { return a.start - b.start || b.len - a.len; });
+      for (k = 0; k < hits.length; k++) {
+        // overlapping terms can land on the same run; report it once
+        if (k && hits[k].start === hits[k - 1].start && hits[k].len === hits[k - 1].len) continue;
+        matches.push({ el: it.el, h2: it.h2, sect: it.sect, text: it.text,
+                       start: hits[k].start, len: hits[k].len });
       }
     }
 
@@ -212,7 +281,9 @@
     if (!matches.length) {
       var none = document.createElement('div');
       none.className = 'b0b-search-none';
-      none.textContent = 'No match for “' + q + '”';
+      none.textContent = t.pos.length > 1
+        ? 'No block contains all of: ' + t.pos.join(', ')
+        : 'No match for “' + q + '”';
       results.appendChild(none);
       count.textContent = '';
       return;
@@ -236,7 +307,7 @@
     var q = input.value.trim();
     if (q === lastQuery) return;
     // rebuild between searches so a language switch cannot leave a stale index behind
-    if (lastQuery.length < MIN_CHARS && q.length >= MIN_CHARS) index = null;
+    if (!splitTerms(lastQuery).pos.length && splitTerms(q).pos.length) index = null;
     lastQuery = q;
     clearTimeout(timer);
     timer = setTimeout(function () { run(q); }, DEBOUNCE_MS);
@@ -254,10 +325,13 @@
     wrap.innerHTML =
       '<div id="b0b-search-row">' +
         '<input id="b0b-search-input" type="search" autocomplete="off" spellcheck="false" ' +
-               'placeholder="Search the report  /" aria-label="Search the report">' +
+               'placeholder="Search the report  /" aria-label="Search the report" ' +
+               'title="Multiple words: every one must appear in the same paragraph. ' +
+               '&quot;quoted phrase&quot; matches as one string. -word excludes.">' +
         '<button id="b0b-search-prev" title="Previous match" aria-label="Previous match">&#9650;</button>' +
         '<button id="b0b-search-next" title="Next match" aria-label="Next match">&#9660;</button>' +
-      '</div><div id="b0b-search-count" aria-live="polite"></div>';
+      '</div><div id="b0b-search-count" aria-live="polite"></div>' +
+      '<div id="b0b-search-hint">all words must match<br>"phrase" · -exclude</div>';
 
     if (buttons && buttons.parentNode) buttons.parentNode.insertBefore(wrap, buttons.nextSibling);
     else sidebar.insertBefore(wrap, sidebar.firstChild);

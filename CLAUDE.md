@@ -179,8 +179,21 @@ dropped (`palantir, cia`) while `9/11` and `u.s.` survive intact. Terms match na
 section, type **and date**, so `obelisk paris` and `II 2003` work without touching a checkbox. The
 haystack is cached per marker — the filter runs on every keystroke. Verified across fifteen
 queries. *The placeholder was `e.g. Palantir, CIA, obelisk...`, which advertised an OR the code
-never had; it now shows the real syntax.* **`report.html` has no search box at all** — if one is
-ever wanted, reuse this parser.
+never had; it now shows the real syntax.*
+
+**THE REPORT SEARCH TAKES MULTIPLE WORDS TOO — 14 Sept 2026, same defect, same fix.**
+**The report's search is not in `report.html` at all — it is `site/report-search.js`, injected into
+the sidebar at runtime.** Grepping `report.html` for `searchInput` or `placeholder=` finds nothing
+and I wrongly told the author the report had no search. **Look in `site/*.js` before concluding a
+UI does not exist.** Same parser as the map, with one difference that matters: **the AND is scoped
+to a block** (`p, li, h3…`), so `epstein mossad` means both words in the same paragraph, not
+merely both somewhere in a 1.4 MB document. Inside a qualifying block **every occurrence of every
+term is a steppable match in reading order**, so the ▲▼ buttons and the `1 of N` counter keep
+working. Positive terms under `MIN_CHARS` are ignored rather than matching everything, so
+`epstein e` behaves as `epstein` while the second word is being typed; a query of nothing but
+exclusions renders nothing, because it would select almost the whole report. Live numbers:
+**epstein 786, mossad 53, `epstein mossad` 57 in 6 sections, `mossad -epstein` 31,
+`carbyne, axon` 8, `"guaranteed-null"` 3.**
 
 **MAP: DATES, A PERIOD SCRUBBER, AND A KML EXPORT — 12 Sept 2026.** `site/map.html` markers now
 carry `date` (ISO, as precise as the source allows) and `dprec` (`day`/`month`/`year`), parsed from
