@@ -171,6 +171,17 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**MAP SEARCH TAKES MULTIPLE WORDS — 14 Sept 2026.** Both boxes matched the entire input as one
+substring, so **`epstein island` returned nothing while `epstein` returned 28 and `island` 97.**
+The location search and the pattern-connection search now share one parser: **every term must
+match (AND)**, `"quoted phrases"` match as one string, a leading `-` excludes, and list commas are
+dropped (`palantir, cia`) while `9/11` and `u.s.` survive intact. Terms match name, context,
+section, type **and date**, so `obelisk paris` and `II 2003` work without touching a checkbox. The
+haystack is cached per marker — the filter runs on every keystroke. Verified across fifteen
+queries. *The placeholder was `e.g. Palantir, CIA, obelisk...`, which advertised an OR the code
+never had; it now shows the real syntax.* **`report.html` has no search box at all** — if one is
+ever wanted, reuse this parser.
+
 **MAP: DATES, A PERIOD SCRUBBER, AND A KML EXPORT — 12 Sept 2026.** `site/map.html` markers now
 carry `date` (ISO, as precise as the source allows) and `dprec` (`day`/`month`/`year`), parsed from
 each marker's own `ctx` text: **819 of 1,181 dated — 63 day, 47 month, 709 year — and 362 undated.**
