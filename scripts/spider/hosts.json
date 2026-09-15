@@ -1,0 +1,46 @@
+{
+  "_comment": [
+    "Per-host access requirements. Every entry is a documented thing the site asks of",
+    "ordinary visitors - an age gate, a consent cookie, a slower pace - never a disguise.",
+    "The user agent is not settable here and spider.py exits if an entry tries.",
+    "If a host refuses the identified crawler, that refusal is recorded as a null.",
+    "It is not worked around from this file."
+  ],
+  "justice.gov": {
+    "why": "The site sets an age-verification cookie on its own interstitial before serving documents. This is the same cookie a browser would carry after clicking through.",
+    "cookies": {
+      "justiceGovAgeVerified": "true"
+    },
+    "delay": 6.0
+  },
+  "efts.sec.gov": {
+    "why": "EDGAR full-text search asks automated clients to identify themselves and to stay under 10 requests a second. The identification is the standing user agent; the pace is set here well below the limit.",
+    "delay": 1.0
+  },
+  "www.sec.gov": {
+    "why": "Same EDGAR fair-access policy as efts.sec.gov.",
+    "delay": 1.0
+  },
+  "jmail.world": {
+    "why": "The www host 307-redirects to the apex. Redirects are followed, which is all this needs; recorded here so the behaviour is not mistaken for a fault.",
+    "delay": 1.5
+  },
+  "irp.fas.org": {
+    "why": "A small volunteer-run archive holding primary government documents. The delay is deliberately generous - it costs us nothing and the mirror is load-bearing for this project.",
+    "delay": 5.0
+  },
+  "www.cia.gov": {
+    "why": "The reading room is a JavaScript application: node/ and print/ document ids return the homepage to any plain HTTP client, ours included. That is a rendering limit, not a block, and no amount of header work changes it. Documents from here are attributed, not primary, until pulled from a mirror that serves HTML. Registered as a decoy title so those 200s are demoted to nulls instead of entering the ledger as sources.",
+    "delay": 8.0,
+    "decoy_titles": [
+      "Freedom of Information Act Electronic Reading Room"
+    ]
+  },
+  "www.b0b.dev": {
+    "why": "Our own access gate answers every path with an 8,607-byte pixel page at HTTP 200, static assets included. Registered so a self-check cannot mistake the gate for the content.",
+    "decoy_bytes": [
+      8607
+    ],
+    "delay": 1.0
+  }
+}
