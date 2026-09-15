@@ -171,6 +171,33 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**THE SOUTHERN AIR TRANSPORT CLAIM — tested 15 Sept 2026, unpublished.**
+`research/EPSTEIN-SOUTHERN-AIR-TRANSPORT.md`. The claim: Epstein negotiated the contract to move
+*"the CIA's proprietary airliner"* to Rickenbacker and was *"the authorized signatory."*
+**The adjacency is documented; the claim as stated is not.** (a) **The CIA sold SAT at the end of
+1973** — in 1994 it was James Bastian's private company, so the claim's own rhetorical question
+("how would you convince the CIA to move its proprietary?") describes an act with no counterparty;
+the documented mechanism is Ohio outbidding Miami with a $6m loan, a grant and a fifteen-year tax
+exemption. **The article the claim derives from states the 1973 sale in its own third sentence.**
+(b) **"Signatory" has no document** — the chain ends at a journalist's recollection of what two
+former Ohio officials said verbally, and the word "signator" appears **zero** times in that
+reporting. What is documented is the *capability*: Wexner's **July 1991 durable power of attorney**,
+filed in Franklin County. (c) The Khashoggi bridge is a single **1987** boast about *finding* money,
+dated after the arms purchases it is invoked to explain.
+**Corpus null, clean:** Southern Air Transport **0**, Air America **0**, Hasenfus **0**,
+Iran-Contra **0**; "Contra" 39, every one "contract" or "contra offer"; **"Rickenbacker" exactly one
+— the _Causeway_ in Miami, in an email about the Seaquarium dolphin programme**, which is a keepable
+naming-error specimen; "Adnan Khashoggi" exactly one, and it runs against the thesis.
+**Primary read directly:** CIA IG, *Allegations of Connections Between CIA and the Contras in
+Cocaine Trafficking*, **Vol II, 8 Oct 1998** — SAT sits under *"Other Companies Associated With the
+Contras"*, not proprietaries, and carries exactly two allegation records (Gates memo 21 Jan 1987;
+DEA cable 23 Feb 1991, "of record" Jan 1985–Sept 1990). **Symmetry: that DEA window is real and
+adverse — do not discount it because the Epstein claim is overstated.**
+**New environment limit: `cia.gov/readingroom` returns its homepage for every `node/` and `print/`
+document id from here**, exactly like web.archive.org. Anything sourced to it is attributed, not
+primary, until pulled elsewhere. **Naming error now circulating: SAT was *not* "formerly Air
+America"** — separate companies under the same Pacific Corporation holding.
+
 **MAP SEARCH TAKES MULTIPLE WORDS — 14 Sept 2026.** Both boxes matched the entire input as one
 substring, so **`epstein island` returned nothing while `epstein` returned 28 and `island` 97.**
 The location search and the pattern-connection search now share one parser: **every term must
