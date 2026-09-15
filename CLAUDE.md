@@ -171,6 +171,31 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**SOURCE SPIDER — `scripts/spider/spider.py`, built 15 Sept 2026. Use it instead of ad-hoc curl
+for anything that will be cited.** `fetch` / `crawl` / `verify` / `ledger` / `text`. Every fetch
+appends one row to `research/sources/ledger.jsonl` (committed) with URL, final URL, timestamp,
+status, content type, length, **sha256** and cache path; bodies go to `research/sources/cache/`
+(gitignored, keyed by hash). **`verify` re-fetches and reports unchanged / changed / gone /
+refused** against the recorded hash — run it before publishing anything that cites a live page.
+
+*It was asked for as "spider bots that occlude themselves." That half was declined and the reason
+is recorded in the code:* **one identity always, robots.txt obeyed, no UA or address rotation, no
+proxy pools, no challenge solving, no retrying a refusal under a second name.** This site runs its
+own gate and crawler allowlist, so disguising ours to beat someone else's is the rule that only
+bites strangers (§2). The practical case is stronger: **a document obtained by defeating an access
+control has contaminated provenance, and provenance is the whole asset.** Therefore **a refusal is
+a finding** — 403, 401 and robots-disallow are written as nulls exactly as successes are, and
+`ledger --nulls` groups them by host, which is the input to a records request.
+
+**THE DECOY RULE — the most useful thing in it.** *A 200 that is really a refusal is the most
+dangerous outcome available, because nothing downstream questions it.* Two live cases, both
+`200 text/html`: `cia.gov/readingroom` returns its homepage for every document id, and **our own
+gate returns the 8,607-byte pixel page on every path**. `hosts.json` registers decoys by title,
+byte length or sha256 and demotes the match to `decoy_200, ok:false`. Both are verified in the
+seeded ledger. **`hosts.json` carries documented access requirements only** — age-gate cookie,
+slower pace, known redirect — each with a `why`, and **the loader exits if an entry tries to
+override the user agent.**
+
 **THE SOUTHERN AIR TRANSPORT CLAIM — tested 15 Sept 2026, unpublished.**
 `research/EPSTEIN-SOUTHERN-AIR-TRANSPORT.md`. The claim: Epstein negotiated the contract to move
 *"the CIA's proprietary airliner"* to Rickenbacker and was *"the authorized signatory."*
