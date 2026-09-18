@@ -171,6 +171,33 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**THE NEW CAPITAL'S CAMERAS ARE HONEYWELL'S, NOT HUAWEI'S — 18 Sept 2026, published, and it
+corrected an error of our own.** The author asserted *"China ZTE Huawei funded the cameras."* The
+page itself carried *"Hikvision cameras in NAC"* in the Section X network-map bullet — **unsourced,
+and wrong for the NAC.** The record: **Honeywell (US) signed with ACUD on 25 Feb 2019**, in the
+presence of the US Chief of Mission, to integrate **6,000+ IP cameras into one Integrated Command
+and Control Centre** with partner MTI; **e& Egypt** (Emirati state carrier, ex-Etisalat Misr) worked
+with Honeywell on the City Operations Center; **Orange** runs the NAC data centre. **The primary on
+exactly this question — Wakabi & Roberts (eds), IDS, *Smart City Surveillance in Africa: Mapping
+Chinese AI Surveillance Across 11 Countries*, 12 March 2026, DOI 10.19088/IDS.2025.068 — says it
+in one sentence (p.27): *"In the case of Egypt, the US company Honeywell takes the place of
+Huawei."*** Same report: the Chinese package (Eximbank ~US$250m soft loan tied to Hikvision cameras
++ Huawei/ZTE control centre, p.12) is the **continental norm and Egypt is the named exception**;
+Hikvision/Dahua are deployed by Egyptian authorities **nationally** (Masaar 2023, p.79), not in the
+NAC grid; Huawei in Egypt is documented for **5G with Telecom Egypt** (p.79). **ZTE: zero, any
+tier.** Live and worth watching, not asserting: **Aug 2026 Huawei bid** on a government tender —
+~2,000 Ascend chips for AI clouds with military/security/surveillance end users, alongside iFlytek
+(US Entity List 2019), individuals-and-vehicles-against-national-databases; State reported to have
+approached Nvidia/AMD/Microsoft for a rival consortium (Bloomberg via EnterpriseAM, 26 Aug 2026).
+*Network-map bullet rewritten; a fourth paragraph added to the Octagon subsection; NAC bullet now
+attributes the cameras. Scale 271 / 1,060 / 124.* **Tooling:** the IDS PDF came via the Figshare
+public API (`api.figshare.com/v2/articles/31646347` → `ndownloader.figshare.com/files/62639779`)
+because the OpenDocs landing page answers plain clients with an empty 202; the ledger row's sha256
+matches the bytes read locally. **The container's `cryptography` package panics on import
+(`_cffi_backend`), which breaks pypdf *and* pdfminer; `scratchpad/pdftext.py` stubs the module
+before import — fine for unencrypted PDFs.** Zawya (400) and Arab Weekly (403) refused the
+identified crawler and are recorded as nulls; the page cites only hosts the ledger holds.
+
 **THE OCTAGON AND TURA-MASARA ARE NOW PUBLISHED — 18 Sept 2026. Section X, two new subsections,
 toc 21 → 23 parts. Scale line 271 / 1,059 / 123.** The author asked why this "keeps getting
 excluded." **It was not excluded — the Octagon was already on the page twice** (the New Capital
