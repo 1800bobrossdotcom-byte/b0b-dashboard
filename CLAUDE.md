@@ -171,6 +171,42 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**THE OCTAGON AND TURA-MASARA ARE NOW PUBLISHED — 18 Sept 2026. Section X, two new subsections,
+toc 21 → 23 parts. Scale line 271 / 1,059 / 123.** The author asked why this "keeps getting
+excluded." **It was not excluded — the Octagon was already on the page twice** (the New Capital
+entry in X, and the replicated-names entry in XI) **and on the map.** What was genuinely missing
+was **Tura**, which existed only as a bare cross-reference label, *"Tura Quarries → NAC Geological
+Continuity"*, with nothing behind it. **Check the page before accepting that something is absent
+from it.**
+
+**The funding triad he asked for — US, Israel, China — was published as a three-way test, because
+it fails three different ways:**
+- **US: documented aid, mechanism forecloses the claim.** $1.3bn/yr FMF since 1987, but under the
+  **Arms Export Control Act** it sits in an interest-bearing account at the **Federal Reserve Bank
+  of New York**, never transfers to Egypt, and is paid to **US contractors** for US-origin articles.
+  **The dollars cannot buy Egyptian concrete.** Fungibility is arguable and is printed as inference.
+- **China: documented for the CBD, absent for the Octagon.** Sept 2015 CSCEC memorandum, Iconic
+  Tower — already on the page. Chinese analysts *write about* the Octagon; that is not financing.
+- **Israel: nothing at any tier, and this is the instructive null.** The Israeli material in the
+  record is the *Jerusalem Post* asking whether Israel should fear it, *The Media Line* asking
+  whether Israel should be concerned, and *Times of Israel* reporting the ribbon. **Israel is the
+  worried audience, not the funder** — a naming error whose search results look exactly like
+  corroboration at a glance, which is why the null is printed rather than dropped.
+
+**Octagon particulars, documented:** official name **State Strategic Command Center**, inaugurated
+**July 2026**, **22,000 acres / 89 km²**, 13 zones, ~1,160 acres floor area, eight buildings; the
+Pentagon is one building of ~29 acres. **Map coordinates were ~13 km off** (30.0197,31.7636 →
+**29.937917,31.653917**) and typed `surveillance` rather than `military`. *Earlier in that check I
+said the marker was duplicated; it was not — the regex matched "Octagon" twice inside one entry.*
+
+**Tura-Masara, documented and strong:** ~6 km of **underground galleries** (tunnelled, with
+limestone pillars left to carry the roofs) on the Nile's east bank, ~12 km south of Cairo and
+**west of the Octagon**; source of Khufu's casing stone, ~**67,390 m³** for that monument alone;
+**mapped for the British military in WWII as bomb-proof storage**; now the **Tura cement works
+under Heidelberg Materials**. The entry states plainly that **continuity of use is not continuity
+of purpose** and applies the anti-map guardrail to our own material. **Map now 1,182 markers, 820
+dated** — and the `1,181` counts lived in **`scripts/seo-meta.json`** (4 of them), not the HTML.
+
 **SOURCE SPIDER — `scripts/spider/spider.py`, built 15 Sept 2026. Use it instead of ad-hoc curl
 for anything that will be cited.** `fetch` / `crawl` / `verify` / `ledger` / `text`. Every fetch
 appends one row to `research/sources/ledger.jsonl` (committed) with URL, final URL, timestamp,
