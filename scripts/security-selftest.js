@@ -22,6 +22,7 @@ const crypto = require('crypto');
 process.env.NODE_ENV = 'test';                 // not 'development' -> redirect middleware is live
 process.env.B0B_COOKIE_SECRET = crypto.randomBytes(32).toString('hex');
 process.env.VERCEL = '1';                      // stop server.js self-listening; we drive the port
+process.env.B0B_GATE = 'on';                   // the gate is off in production since 19 Sept 2026; test the mechanism as a feature
 
 const app = require('../server.js');
 

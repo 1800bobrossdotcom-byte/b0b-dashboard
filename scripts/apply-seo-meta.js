@@ -25,7 +25,7 @@ const COPY = JSON.parse(fs.readFileSync(process.argv[2] || path.join(__dirname, 
 
 // Canonical URL per file - single source of truth kept in sync with server.js
 const URLS = {
-  'index.html': '/',
+  'index.html': '/home',   // '/' has redirected to /report since 19 Sept 2026
   'report.html': '/report',
   'map.html': '/map',
   'countermeasures.html': '/countermeasures',

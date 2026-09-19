@@ -147,7 +147,18 @@ function isValidAccessToken(token) {
   return true;
 }
 
+// 19 Sept 2026, author's instruction: the site starts on the home page. The
+// click-gate - the pixel page with its four autoplaying videos - is OFF by
+// default; B0B_GATE=on restores it. With the gate off every visitor is treated
+// as having clicked through, which changes nothing about what they could
+// reach: the gate was a threshold, not a credential (security.txt), and the
+// cookie-only routes (/download, /api/*) stay disallowed to crawlers by
+// robots.txt. /api/gate and /logout keep working so nothing that calls them
+// breaks. The self-tests run with B0B_GATE=on so the mechanism stays tested.
+const GATE_ON = process.env.B0B_GATE === 'on';
+
 function hasAccess(req) {
+  if (!GATE_ON) return true;
   const cookies = parseCookies(req);
   return isValidAccessToken(cookies[ACCESS_COOKIE]);
 }
@@ -359,7 +370,7 @@ app.get('/robots.txt', (req, res) => {
 // canonical. lastmod comes from the integrity manifest, the one timestamp
 // that is real on Vercel (file mtimes are normalized at deploy).
 const CANONICAL_PATHS = [
-  '/', '/report', '/map', '/countermeasures', '/artifact', '/spectra',
+  '/home', '/report', '/map', '/countermeasures', '/artifact', '/spectra',
   '/tones/healing', '/tones/protective', '/tones/instrument', '/tones/shield',
   '/tones/multipack', '/tones/shield/guide', '/ai-attack-vector-analysis',
   '/darpa-cia-lockheed',
@@ -385,7 +396,11 @@ app.get('/sitemap.xml', (req, res) => {
 
 // ── Static routes (only for authenticated visitors) ──
 const PAGES = {
-  '/':              'index.html',
+  // 19 Sept 2026, author's instruction: the site opens on the report, served
+  // at '/' directly (its canonical stays /report, so search sees one page).
+  // The landing page with the film reel moved to /home.
+  '/':              'report.html',
+  '/home':          'index.html',
   '/report':        'report.html',
   '/map':           'map.html',
   '/countermeasures':'countermeasures.html',

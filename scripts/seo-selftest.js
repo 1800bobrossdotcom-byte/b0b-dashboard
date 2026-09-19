@@ -21,6 +21,7 @@ const crypto = require('crypto');
 process.env.NODE_ENV = 'test';
 process.env.B0B_COOKIE_SECRET = crypto.randomBytes(32).toString('hex');
 process.env.VERCEL = '1';
+process.env.B0B_GATE = 'on';  // the gate is off in production since 19 Sept 2026; these checks describe it as a feature
 
 const app = require('../server.js');
 

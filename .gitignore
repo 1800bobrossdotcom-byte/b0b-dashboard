@@ -13,3 +13,4 @@ Thumbs.db
 # Spider body cache: bytes as fetched, keyed by sha256. The ledger is committed,
 # the bodies are not - they are reproducible from it and some are large.
 research/sources/cache/
+__pycache__/
