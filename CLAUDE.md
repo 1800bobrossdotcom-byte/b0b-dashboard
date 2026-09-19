@@ -181,6 +181,46 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**THE SITE OPENS ON THE REPORT; THE GATE IS OFF; THE PERIOD BAR IS GONE — 19 Sept 2026, three
+author instructions in one hour, all live.** (1) *"site should start here, no longer do the 4
+videos"* — `pixel.html` (the click-gate, with four autoplaying YouTube embeds) is **off by default;
+`B0B_GATE=on` restores it.** `hasAccess()` returns true for everyone when off; robots.txt still
+keeps crawlers off `/download` and `/api/`. **`security-selftest.js` and `seo-selftest.js` set
+`B0B_GATE=on` themselves** so the mechanism stays tested — do not read a passing run as proof of
+what production serves; verify production with a cookie-less, cache-busted curl. (2) *"have it
+actually land directly on the report as the opening page"* — **`/` serves `report.html`** (its
+canonical stays `/report`, so search sees one page; the Search Console tag is now on the report
+too). **The film-reel landing page moved to `/home`** (`PAGES`, `CANONICAL_PATHS`, and the
+`index.html → /home` entry in `scripts/apply-seo-meta.js`), reachable from a **FILMS** button in
+the report sidebar. LOGOUT removed from home and sidebar; `/logout` still works. *A 302 was tried
+first and rejected: with the gate on it broke the "crawler-served homepage carries the
+verification tag" check, and a served page beats a redirect for the verifier anyway.* (3) *"take
+off that large time period bar on the map"* — the `.time-scrub` control **and its filter
+machinery** are gone; `date`/`dprec` stay because they drive the KML time slider; the KML link sits
+beside RESET. **The machinery had to go, not just the control: `TS_MIN=1545` was silently hiding
+Museo del Prado (1520) — 1181/1182 shown.**
+
+**MAP LABELING AUDIT — first pass, 19 Sept 2026. Dates were the worst class, and they were mine.**
+The 12 Sept extractor took the *earliest* year on the line. **All 161 mass-shooting markers were
+dated 1982 — the start of the Mother Jones coverage span "(1982-2026)", not the shooting.** Tehran
+1953 was dated 1979; the Ukraine war 1945 ("since 1945"). **`scripts/date-markers.py`** now derives
+every date with rules that survived review (dry-run, then `--write`, idempotent): full dates win;
+the year in the *name* beats the paragraph; retrieval/edit stamps (`accessed`, `as of`, `ADDED /
+CORRECTED / QUALIFIED 31 Aug 2026`) are stripped first; a span ending at the present keeps only
+its start; `since/until/as early as` years are demoted, **but `founded/opened/built` years are
+first-class** (CCF Paris is 1950, not its 1967 exposure). **273 changed; 820 dated, 362 undated,
+unchanged totals.** *Rewrite trap: names hold `\'` in source — match `(?:\\)?'` — and the head
+pattern must refuse to run past an existing `,date:` or the old field is kept and a second
+appended.* **Other findings, held for the author (not errors on their face):** 18 markers typed
+`capital` sit in section ANIMAL — they are the disclosed institutional holders of Charles River /
+Marshall BioResources, deliberate; **30 co-located pairs**, most legitimately two sections for one
+site (Vatican square/archive, Harvard Law/University), but six are the *same event twice* across
+VII and XV (Tehran 1953, Guatemala 1954, Santiago 1973, Menwith Hill, Pine Gap, Svalbard) — merge
+or keep is editorial; a **reverse-geocode pass (Nominatim, 1 req/1.2 s, identified UA, cached in
+`scratchpad/revgeo.json`)** was running to test name↔coordinate agreement and had not finished.
+*Shell trap: `pkill -f "http.server 8815"` matches the shell running the command and kills it
+(exit 144) — start a fresh port instead.*
+
 **HOME PAGE REBUILT AROUND A FILM REEL; REPORT SET IN PLEX SERIF — 19 Sept 2026, live.** Author's
 ask: *"put the videos on the home page in a carousel and redesign the report and website for
 readability."* **There were no videos on the site at all** — "the videos" are the **ERC-1155
