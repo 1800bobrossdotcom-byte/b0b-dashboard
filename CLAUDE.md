@@ -107,7 +107,11 @@ Learn these; they are invoked by name on the page.
    **Order matters:** the concordance re-stamps `dateModified`, so the manifest is
    regenerated *after* the concordance build.
 8. Push branch **and** `HEAD:main`.
-9. `node scripts/check-live.js --wait`
+9. `node scripts/check-live.js --wait` — **it compares only the manifest's `generated` stamp,
+   which moves only when `report.html` changes.** A deploy touching just `index.html`,
+   `server.js`, `theme.css` or the map passes it immediately while the *previous* build is
+   still being served (seen 19 Sept 2026: four "clean" reads of the old home page). For those,
+   poll the changed page for a string that exists only in the new markup before step 10.
 10. Gated curl on actual content — **four consecutive clean reads**.
 
 **Traps that have bitten:**
