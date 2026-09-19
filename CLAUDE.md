@@ -171,6 +171,30 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**HOME PAGE REBUILT AROUND A FILM REEL; REPORT SET IN PLEX SERIF — 19 Sept 2026, live.** Author's
+ask: *"put the videos on the home page in a carousel and redesign the report and website for
+readability."* **There were no videos on the site at all** — "the videos" are the **ERC-1155
+YouTube channel** (15 films, read from its public RSS feed `youtube.com/feeds/videos.xml?channel_id=
+UCFDLK0U42dTD1n6MBhWM6qA` — the channel id is `"externalId"` in the handle page, not `channelId`) plus
+**one Vimeo music video, 1228401790, "nearest neighbor | visitor"**, uploaded the same day. Home page
+(`site/index.html`, fully regenerated) now: top bar + nav, serif lede, side index, **TRANSMISSIONS
+reel of 16 cards, newest first** — each card is a plain link until clicked, then swaps in the
+player (`youtube-nocookie` / `player.vimeo.com?dnt=1`), one at a time; scroll-snap, arrow buttons,
+keyboard, live counter, `prefers-reduced-motion` honoured. **CSP now admits `player.vimeo.com`
+(frame/child) and `i.vimeocdn.com` (img)** — a new embed host is always a CSP edit in `server.js`.
+**Fonts:** IBM Plex Mono + Serif were already self-hosted in `site/fonts/` (OFL) but declared only in
+the concordance page; **now declared once in `theme.css` with `--mono` / `--serif` tokens.** The
+report got a **readability layer appended after its original stylesheet** (serif 17px/1.68, ~72ch
+measure, mono for headings/labels/sidebar/controls, callouts as left-rule panels; palette and
+markup untouched). *Verification traps:* **headless Chromium clamps the window to 500px wide and
+crops the image to the requested 420** — the "text cut off on mobile" was that, not the site;
+**Vimeo's oEmbed and player URLs 403 this egress IP (`MW-BL`), the old `vimeo.com/api/v2/video/ID.json`
+endpoint works** for title/thumbnail; **`theme.js` mounts the light/dark toggle by selector list
+(`TARGETS`)** — new page markup needs its nav added there or the toggle silently disappears; and
+`node_modules` is not installed in a fresh clone — `npm install` first, then `security-selftest.js`
+(33/33) and `seo-selftest.js` (47/48; the failure is the pre-existing 84-char concordance title)
+run in-process with no network.
+
 **THE NEW CAPITAL'S CAMERAS ARE HONEYWELL'S, NOT HUAWEI'S — 18 Sept 2026, published, and it
 corrected an error of our own.** The author asserted *"China ZTE Huawei funded the cameras."* The
 page itself carried *"Hikvision cameras in NAC"* in the Section X network-map bullet — **unsourced,
