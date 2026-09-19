@@ -1,0 +1,171 @@
+{
+ "_comment": "Feeds for the home-page TRANSMISSIONS reel. YouTube is pulled whole (feed = 15 most recent). Vimeo is curated by id on purpose - the account also carries client and spec work that is not this site's subject. `entries` is written by scripts/build-transmissions.py and is the reproducible source for --offline builds.",
+ "youtube_channel_id": "UCFDLK0U42dTD1n6MBhWM6qA",
+ "youtube_channel_url": "https://www.youtube.com/@ERC-1155",
+ "vimeo_ids": [
+  "1228401790"
+ ],
+ "entries": [
+  {
+   "kind": "vimeo",
+   "id": "1228401790",
+   "title": "nearest neighbor | visitor | music video",
+   "sub": "original music, vocals, images by me !",
+   "date": "2026-09-19",
+   "thumb": "https://i.vimeocdn.com/video/2202837595-ebd1c28805a57fcb502d379ad54d6dfec3ea5d952cff2a27912f65c40327bfa2-d_640?region=us",
+   "href": "https://vimeo.com/1228401790",
+   "dur": 141
+  },
+  {
+   "kind": "youtube",
+   "id": "UMWfXy2Nwlc",
+   "title": "CHAPTER 20",
+   "sub": "",
+   "date": "2024-02-16",
+   "thumb": "https://i.ytimg.com/vi/UMWfXy2Nwlc/hqdefault.jpg",
+   "href": "https://www.youtube.com/watch?v=UMWfXy2Nwlc",
+   "dur": null
+  },
+  {
+   "kind": "youtube",
+   "id": "vIHLA9IYh2E",
+   "title": "TRANSMISSION:  S T A R S H I P  W R E CK",
+   "sub": "",
+   "date": "2024-02-09",
+   "thumb": "https://i.ytimg.com/vi/vIHLA9IYh2E/hqdefault.jpg",
+   "href": "https://www.youtube.com/watch?v=vIHLA9IYh2E",
+   "dur": null
+  },
+  {
+   "kind": "youtube",
+   "id": "pRbjJa8PZKQ",
+   "title": "TRANSMISSION - T E A R D R O P   B L U E S",
+   "sub": "",
+   "date": "2024-02-09",
+   "thumb": "https://i.ytimg.com/vi/pRbjJa8PZKQ/hqdefault.jpg",
+   "href": "https://www.youtube.com/watch?v=pRbjJa8PZKQ",
+   "dur": null
+  },
+  {
+   "kind": "youtube",
+   "id": "AmTnNRJtrqE",
+   "title": "TRANSMISSION - T H E   S Q U I D",
+   "sub": "",
+   "date": "2024-02-04",
+   "thumb": "https://i.ytimg.com/vi/AmTnNRJtrqE/hqdefault.jpg",
+   "href": "https://www.youtube.com/watch?v=AmTnNRJtrqE",
+   "dur": null
+  },
+  {
+   "kind": "youtube",
+   "id": "YlMeyAAWhwE",
+   "title": "TRANSMISSION - T E N S O R",
+   "sub": "",
+   "date": "2024-01-30",
+   "thumb": "https://i.ytimg.com/vi/YlMeyAAWhwE/hqdefault.jpg",
+   "href": "https://www.youtube.com/watch?v=YlMeyAAWhwE",
+   "dur": null
+  },
+  {
+   "kind": "youtube",
+   "id": "OiYL9z3bXEI",
+   "title": "TRANSMISSION - WATER BUFFALO",
+   "sub": "",
+   "date": "2023-11-17",
+   "thumb": "https://i.ytimg.com/vi/OiYL9z3bXEI/hqdefault.jpg",
+   "href": "https://www.youtube.com/watch?v=OiYL9z3bXEI",
+   "dur": null
+  },
+  {
+   "kind": "youtube",
+   "id": "RjRJCg6NMB4",
+   "title": "CHAPTER 19 - KAZUKO",
+   "sub": "",
+   "date": "2023-10-20",
+   "thumb": "https://i.ytimg.com/vi/RjRJCg6NMB4/hqdefault.jpg",
+   "href": "https://www.youtube.com/watch?v=RjRJCg6NMB4",
+   "dur": null
+  },
+  {
+   "kind": "youtube",
+   "id": "8VbssmVYakg",
+   "title": "TRANSMISSION - S T R E A M",
+   "sub": "",
+   "date": "2023-08-30",
+   "thumb": "https://i.ytimg.com/vi/8VbssmVYakg/hqdefault.jpg",
+   "href": "https://www.youtube.com/watch?v=8VbssmVYakg",
+   "dur": null
+  },
+  {
+   "kind": "youtube",
+   "id": "VP2iLdUcI1c",
+   "title": "CHAPTER 18 - SILENT TALK",
+   "sub": "",
+   "date": "2023-08-14",
+   "thumb": "https://i.ytimg.com/vi/VP2iLdUcI1c/hqdefault.jpg",
+   "href": "https://www.youtube.com/watch?v=VP2iLdUcI1c",
+   "dur": null
+  },
+  {
+   "kind": "youtube",
+   "id": "fs_0-rRKsy4",
+   "title": "TRANSMISSION - M A P",
+   "sub": "",
+   "date": "2023-07-31",
+   "thumb": "https://i.ytimg.com/vi/fs_0-rRKsy4/hqdefault.jpg",
+   "href": "https://www.youtube.com/watch?v=fs_0-rRKsy4",
+   "dur": null
+  },
+  {
+   "kind": "youtube",
+   "id": "vCeDEZtRY9s",
+   "title": "TRANSMISSION - T A R L AN",
+   "sub": "",
+   "date": "2023-07-23",
+   "thumb": "https://i.ytimg.com/vi/vCeDEZtRY9s/hqdefault.jpg",
+   "href": "https://www.youtube.com/watch?v=vCeDEZtRY9s",
+   "dur": null
+  },
+  {
+   "kind": "youtube",
+   "id": "zKcULCXz-cA",
+   "title": "TRANSMISSION - M U R A K A M I",
+   "sub": "",
+   "date": "2023-07-10",
+   "thumb": "https://i.ytimg.com/vi/zKcULCXz-cA/hqdefault.jpg",
+   "href": "https://www.youtube.com/watch?v=zKcULCXz-cA",
+   "dur": null
+  },
+  {
+   "kind": "youtube",
+   "id": "hnTSb2mZGKw",
+   "title": "TRANSMISSION - D R E A M C O L O N Y",
+   "sub": "",
+   "date": "2023-06-30",
+   "thumb": "https://i.ytimg.com/vi/hnTSb2mZGKw/hqdefault.jpg",
+   "href": "https://www.youtube.com/watch?v=hnTSb2mZGKw",
+   "dur": null
+  },
+  {
+   "kind": "youtube",
+   "id": "E9IuNSX3FAE",
+   "title": "TRANSMISSION - F R O G W I Z A R D",
+   "sub": "",
+   "date": "2023-05-30",
+   "thumb": "https://i.ytimg.com/vi/E9IuNSX3FAE/hqdefault.jpg",
+   "href": "https://www.youtube.com/watch?v=E9IuNSX3FAE",
+   "dur": null
+  },
+  {
+   "kind": "youtube",
+   "id": "hwUv6CX1cFQ",
+   "title": "TRANSMISSION - O L D S T O R E",
+   "sub": "",
+   "date": "2023-05-23",
+   "thumb": "https://i.ytimg.com/vi/hwUv6CX1cFQ/hqdefault.jpg",
+   "href": "https://www.youtube.com/watch?v=hwUv6CX1cFQ",
+   "dur": null
+  }
+ ],
+ "fetched_at": "2026-09-19T23:17:58+00:00"
+}

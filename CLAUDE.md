@@ -97,6 +97,12 @@ Learn these; they are invoked by name on the page.
 5. Update the scale line. Subsections = `<h3 id=`; paragraphs = `<p[\s>]`; sourcing =
    `<span[^>]*>Sources:` **+5 offset**.
 6. `python3 scripts/build-concordance.py`
+6b. `python3 scripts/build-transmissions.py` — refreshes the home-page film reel from the
+   ERC-1155 YouTube feed (15 most recent, the feed's ceiling) and the curated `vimeo_ids` in
+   `scripts/transmissions.json`. **Vimeo is by id on purpose**: the same account carries client
+   and spec work that is not this site's subject. On any fetch failure it leaves the reel
+   untouched and exits non-zero; `--offline` rebuilds from the cached `entries`. Owns only what
+   sits between `<!-- transmissions:begin/end -->` in `site/index.html`.
 7. `node linguistic-integrity.js generate && verify` → must print **STATUS: PASS**.
    **Order matters:** the concordance re-stamps `dateModified`, so the manifest is
    regenerated *after* the concordance build.

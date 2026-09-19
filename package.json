@@ -14,7 +14,8 @@
     "seo-test": "node scripts/seo-selftest.js",
     "seo-apply": "node scripts/apply-seo-meta.js",
     "og-card": "node scripts/make-og-card.js",
-    "seo-check-live": "node scripts/seo-check-live.js"
+    "seo-check-live": "node scripts/seo-check-live.js",
+    "transmissions": "python3 scripts/build-transmissions.py"
   },
   "dependencies": {
     "express": "^4.21.0",
