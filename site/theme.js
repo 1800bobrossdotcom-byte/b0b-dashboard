@@ -47,7 +47,8 @@
   var TARGETS = [
     '.sidebar-buttons',   // report - sidebar
     '.header nav',        // map - header bar
-    '.nav-links',         // index - landing
+    '.top .nav',          // index - landing (19 Sept 2026 layout)
+    '.nav-links',         // index - previous landing markup, kept for any page still using it
     '.main-content .nav'  // report - static top nav
   ];
 

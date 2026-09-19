@@ -30,100 +30,493 @@
        apply-seo-meta.js regeneration never strips it. -->
   <meta name="google-site-verification" content="TsPEDsaL88qvOxa0dWejCZFKVU37Y7Vk5v5HKcp5kL0">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *,*::before,*::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
     body {
-      background: var(--bg); color: var(--green);
-      font-family: 'Courier New', monospace;
-      min-height: 100vh; display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      overflow: hidden; position: relative;
+      margin: 0; min-height: 100vh; min-height: 100dvh;
+      background: var(--bg); color: var(--text);
+      font-family: var(--mono); font-size: 0.95rem; line-height: 1.55;
+      position: relative;
+      padding-bottom: calc(var(--b0b-signal-h, 46px) + 2rem);
     }
-    /* Grid background */
+    /* the grid stays, quieter, and does not paint over the reel */
     body::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
       background-image:
-        linear-gradient(rgba(0,255,65,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,255,65,0.03) 1px, transparent 1px);
+        linear-gradient(rgba(0,255,65,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,65,0.025) 1px, transparent 1px);
       background-size: 40px 40px;
-      pointer-events: none;
     }
-    .content {
-      position: relative; z-index: 1; text-align: center;
-    }
-    h1 {
-      font-size: 5rem; letter-spacing: 0.8rem; margin-bottom: 0.5rem;
-      text-shadow: 0 0 20px rgba(0,255,65,0.3);
-      animation: flicker 4s infinite alternate;
-    }
-    .subtitle {
-      color: var(--muted-4); font-size: 0.85rem; letter-spacing: 3px;
-      margin-bottom: 2.5rem; text-transform: uppercase;
-    }
-    .nav-links {
-      display: flex; gap: 1.2rem; flex-wrap: wrap; justify-content: center;
-      margin-bottom: 2rem;
-    }
-    .nav-links a {
-      color: var(--green); text-decoration: none;
-      border: 1px solid var(--green); padding: 0.75rem 2rem;
-      font-size: 1rem; transition: all 0.3s;
-      letter-spacing: 2px; position: relative; overflow: hidden;
-    }
-    .nav-links a::before {
-      content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(0,255,65,0.1), transparent);
-      transition: left 0.5s;
-    }
-    .nav-links a:hover::before { left: 100%; }
-    .nav-links a:hover { background: var(--green); color: var(--bg); }
-    .nav-links a.secondary {
-      border-color: var(--border); color: var(--muted);
-    }
-    .nav-links a.secondary:hover {
-      border-color: var(--red); background: transparent; color: var(--red);
-    }
-    .status {
-      color: var(--border); font-size: 0.7rem; letter-spacing: 2px;
-      margin-top: 1rem;
-    }
-    .status span { color: var(--green); }
+    [data-theme="light"] body::before { background-image:
+        linear-gradient(rgba(5,99,31,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(5,99,31,0.06) 1px, transparent 1px); }
+    a { color: var(--cyan); }
+    .wrap { position: relative; z-index: 1; max-width: 1120px; margin: 0 auto; padding: 1.25rem 1.5rem 0; }
 
-    @keyframes flicker {
-      0%, 95% { opacity: 1; }
-      96% { opacity: 0.8; }
-      97% { opacity: 1; }
-      98% { opacity: 0.9; }
-      100% { opacity: 1; }
+    /* ---- top bar ---- */
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 1rem 2rem; flex-wrap: wrap;
+            padding: 0.5rem 0 1.25rem; border-bottom: 1px solid var(--surface-3); }
+    .brand { display: flex; align-items: baseline; gap: 0.9rem; text-decoration: none; }
+    .brand .mark { color: var(--green); font-weight: 600; font-size: 1.6rem; letter-spacing: 0.22em; }
+    .brand .tag { color: var(--muted); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; }
+    .nav { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .nav a { color: var(--green); text-decoration: none; border: 1px solid var(--green); padding: 0.45rem 0.95rem;
+             font-size: 0.74rem; letter-spacing: 0.14em; transition: background .2s, color .2s; white-space: nowrap; }
+    .nav a:hover, .nav a:focus-visible { background: var(--green); color: var(--on-accent); outline: none; }
+    .nav a.alt { color: var(--amber); border-color: var(--amber); }
+    .nav a.alt:hover { background: var(--amber); color: var(--on-accent); }
+    .nav a.quiet { color: var(--muted); border-color: var(--border); }
+    .nav a.quiet:hover { background: transparent; color: var(--red); border-color: var(--red); }
+
+    /* ---- hero ---- */
+    .hero { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 2.5rem 4rem; align-items: end;
+             padding: 3.5rem 0 3rem; }
+    .hero h1 { margin: 0 0 1rem; color: var(--green); font-weight: 600; font-size: clamp(2.6rem, 7vw, 5.2rem);
+                letter-spacing: 0.2em; line-height: 1; }
+    .hero .lede { font-family: var(--serif); font-size: 1.22rem; line-height: 1.6; color: var(--text); margin: 0 0 1.4rem; max-width: 34em; }
+    .hero .lede strong { color: var(--text-hi); font-weight: 600; }
+    .hero .fine { font-size: 0.8rem; line-height: 1.6; color: var(--muted); margin: 0; }
+    .cta { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .cta a { text-decoration: none; padding: 0.8rem 1.4rem; font-size: 0.82rem; letter-spacing: 0.14em; border: 1px solid var(--green);
+             color: var(--on-accent); background: var(--green); transition: filter .2s; }
+    .cta a:hover { filter: brightness(1.12); }
+    .cta a.ghost { background: transparent; color: var(--green); }
+    .cta a.ghost:hover { background: rgba(0,255,65,0.08); filter: none; }
+    .hero .side { border-left: 1px solid var(--surface-3); padding-left: 2rem; }
+    .hero .side dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 0.45rem 1rem; font-size: 0.8rem; }
+    .hero .side dt { color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.68rem; padding-top: 0.15rem; }
+    .hero .side dd { margin: 0; color: var(--text); }
+    .hero .side dd a { color: var(--cyan); text-decoration: none; }
+    .hero .side dd a:hover { text-decoration: underline; }
+
+    /* ---- transmissions reel ---- */
+    .tx { padding: 2rem 0 1rem; border-top: 1px solid var(--surface-3); }
+    .tx-head { display: flex; align-items: end; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
+    .tx-head h2 { margin: 0; color: var(--amber); font-size: 0.86rem; letter-spacing: 0.24em; font-weight: 600; }
+    .tx-head p { margin: 0.35rem 0 0; color: var(--muted); font-size: 0.78rem; }
+    .tx-head p a { color: var(--muted); }
+    .tx-ctl { display: flex; align-items: center; gap: 0.5rem; }
+    .tx-ctl .count { color: var(--muted); font-size: 0.74rem; letter-spacing: 0.1em; min-width: 4.5em; text-align: right; }
+    .tx-ctl button { background: transparent; border: 1px solid var(--border); color: var(--green); font-family: inherit;
+                      width: 2.4rem; height: 2.4rem; cursor: pointer; font-size: 1rem; line-height: 1; transition: border-color .2s, color .2s; }
+    .tx-ctl button:hover, .tx-ctl button:focus-visible { border-color: var(--green); outline: none; }
+    .tx-ctl button:disabled { color: var(--muted-4); border-color: var(--surface-3); cursor: default; }
+    .reel { list-style: none; margin: 0 -1.5rem; padding: 0 1.5rem 1rem; display: flex; gap: 1rem;
+             overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 1.5rem; -webkit-overflow-scrolling: touch;
+             scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+    .reel::-webkit-scrollbar { height: 6px; }
+    .reel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    .card { flex: 0 0 clamp(260px, 30vw, 380px); scroll-snap-align: start; background: var(--surface); border: 1px solid var(--surface-3);
+             transition: border-color .2s; }
+    .card:hover, .card:focus-within { border-color: var(--green-mid); }
+    .card.playing { flex-basis: clamp(300px, 60vw, 720px); border-color: var(--green); }
+    .card-link { display: block; color: inherit; text-decoration: none; height: 100%; }
+    .card-frame { position: relative; display: block; aspect-ratio: 16 / 9; background: #000; overflow: hidden; }
+    .card-img { display: block; width: 100%; height: 100%; object-fit: cover; opacity: 0.88; transition: opacity .2s, transform .3s; }
+    .card-link:hover .card-img { opacity: 1; transform: scale(1.02); }
+    .card-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+                  width: 3.2rem; height: 3.2rem; display: grid; place-items: center; padding-left: 0.2rem;
+                  border: 1px solid var(--green); color: var(--green); background: rgba(10,10,10,0.72); border-radius: 50%; font-size: 1.05rem; }
+    .card-dur { position: absolute; right: 0.5rem; bottom: 0.5rem; font-size: 0.68rem; letter-spacing: 0.08em;
+                 background: rgba(10,10,10,0.82); color: var(--text); padding: 0.15rem 0.4rem; }
+    .card-meta { display: flex; flex-direction: column; gap: 0.3rem; padding: 0.8rem 0.9rem 0.9rem; }
+    .card-title { color: var(--text-hi); font-weight: 500; font-size: 0.8rem; line-height: 1.4; letter-spacing: 0.02em; overflow-wrap: anywhere; }
+    .card-sub { font-family: var(--serif); font-style: italic; color: var(--text-dim); font-size: 0.86rem; }
+    .card-line { display: flex; justify-content: space-between; gap: 1rem; font-size: 0.66rem; letter-spacing: 0.12em; color: var(--muted); }
+    .card-kind { color: var(--green-dim); }
+    .card-player { display: block; aspect-ratio: 16 / 9; width: 100%; border: 0; background: #000; }
+    .card.playing .card-meta { padding-top: 0.7rem; }
+
+    /* ---- footer ---- */
+    .foot { display: flex; align-items: center; justify-content: space-between; gap: 1rem 2rem; flex-wrap: wrap;
+             padding: 1.5rem 0 1rem; border-top: 1px solid var(--surface-3); font-size: 0.74rem; color: var(--muted); letter-spacing: 0.08em; }
+    .foot .links { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+    .foot a { color: var(--muted); text-decoration: none; }
+    .foot a:hover { color: var(--green); }
+    .foot .status span { color: var(--green); }
+
+    @media (max-width: 760px) {
+      .wrap { padding: 1rem 1rem 0; }
+      .hero { grid-template-columns: 1fr; gap: 1.75rem; padding: 2.25rem 0 2rem; }
+      .hero .side { border-left: 0; padding-left: 0; border-top: 1px solid var(--surface-3); padding-top: 1.25rem; }
+      .hero .lede { font-size: 1.08rem; }
+      .reel { margin: 0 -1rem; padding: 0 1rem 1rem; scroll-padding: 0 1rem; }
+      .card { flex-basis: 78vw; }
+      .card.playing { flex-basis: 92vw; }
+      .nav a { padding: 0.45rem 0.7rem; font-size: 0.7rem; }
     }
-    @media (max-width: 480px) {
-      h1 { font-size: 3rem; letter-spacing: 0.4rem; }
-      .nav-links a { padding: 0.6rem 1.4rem; font-size: 0.85rem; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+      .reel { scroll-behavior: auto !important; }
     }
   </style>
 </head>
 <body>
-  <div class="content">
-    <h1>b0b</h1>
-    <div class="nav-links">
+<div class="wrap">
+
+  <header class="top">
+    <a class="brand" href="/"><span class="mark">b0b</span><span class="tag">signal over noise</span></a>
+    <nav class="nav" aria-label="Primary">
       <a href="/report" data-i18n="nav.report">REPORT</a>
       <a href="/map" data-i18n="nav.map">OSINT MAP</a>
       <a href="/darpa-cia-lockheed">CONCORDANCE</a>
-      <a href="https://www.youtube.com/@ERC-1155" target="_blank" rel="noopener noreferrer" style="color:#e6c200;border-color:#e6c200">ERC-1155</a>
-    <a href="https://x.com/_lovebeing_" target="_blank" rel="noopener noreferrer" style="color:#ffffff;border-color:#ffffff">&#120143; @_lovebeing_</a>
-    </div>
+      <a href="/tones/shield" class="alt" data-i18n="nav.shield">ARC SHIELD</a>
+      <a href="/logout" class="quiet" data-i18n="nav.logout">LOGOUT</a>
+    </nav>
+  </header>
 
-    <div class="nav-links">
-      <a href="/logout" class="secondary" data-i18n="nav.logout">LOGOUT</a>
+  <section class="hero">
+    <div>
+      <h1>b0b</h1>
+      <p class="lede">Independent open-source intelligence. <strong>The report</strong> documents surveillance infrastructure and the Epstein&ndash;Maxwell network, every claim tiered &mdash; documented, attributed, or labeled &mdash; with the nulls published at the same prominence as the hits. <strong>The map</strong> plots the sites the report names, with live feeds beside them.</p>
+      <div class="cta">
+        <a href="/report">READ THE REPORT</a>
+        <a href="/map" class="ghost">OPEN THE MAP</a>
+      </div>
+    </div>
+    <aside class="side" aria-label="Elsewhere">
+      <dl>
+        <dt>Films</dt><dd><a href="https://www.youtube.com/@ERC-1155" target="_blank" rel="noopener noreferrer">ERC-1155 on YouTube</a> &middot; <a href="https://vimeo.com/uaawtf" target="_blank" rel="noopener noreferrer">Vimeo</a></dd>
+        <dt>Signal</dt><dd><a href="https://x.com/_lovebeing_" target="_blank" rel="noopener noreferrer">&#120143; @_lovebeing_</a></dd>
+        <dt>Index</dt><dd><a href="/darpa-cia-lockheed">DARPA &middot; CIA &middot; Lockheed concordance</a></dd>
+        <dt>Shield</dt><dd><a href="/tones/shield">ARC shield</a> &middot; <a href="/tones/shield/guide">field guide</a></dd>
+        <dt>Status</dt><dd><span style="color:var(--green)">ACTIVE</span></dd>
+      </dl>
+    </aside>
+  </section>
+
+  <section class="tx" aria-labelledby="tx-title">
+    <div class="tx-head">
+      <div>
+        <h2 id="tx-title">TRANSMISSIONS</h2>
+        <p>16 films &mdash; music, images and chapters by the author. Newest first. Plays here; <a href="https://www.youtube.com/@ERC-1155" target="_blank" rel="noopener noreferrer">the channel</a> has the rest.</p>
+      </div>
+      <div class="tx-ctl">
+        <span class="count" id="tx-count" aria-live="polite">1 / 16</span>
+        <button type="button" id="tx-prev" aria-label="Previous films">&#8592;</button>
+        <button type="button" id="tx-next" aria-label="Next films">&#8594;</button>
+      </div>
+    </div>
+    <ul class="reel" id="reel" tabindex="0" aria-label="Films">
+      <li class="card" data-kind="vimeo" data-id="1228401790">
+        <a class="card-link" href="https://vimeo.com/1228401790" target="_blank" rel="noopener noreferrer" aria-label="Play: nearest neighbor | visitor | music video">
+          <span class="card-frame">
+            <img class="card-img" src="https://i.vimeocdn.com/video/2202837595-ebd1c28805a57fcb502d379ad54d6dfec3ea5d952cff2a27912f65c40327bfa2-d_640?region=us" alt="" loading="eager" decoding="async" width="640" height="360">
+            <span class="card-play" aria-hidden="true">&#9654;</span>
+            <span class="card-dur">2:21</span>
+          </span>
+          <span class="card-meta">
+            <span class="card-title">nearest neighbor | visitor | music video</span>
+            <span class="card-sub">original music, vocals, images by me !</span>
+            <span class="card-line"><span class="card-kind">VIMEO</span><span class="card-date">SEP 2026</span></span>
+          </span>
+        </a>
+      </li>
+      <li class="card" data-kind="youtube" data-id="UMWfXy2Nwlc">
+        <a class="card-link" href="https://www.youtube.com/watch?v=UMWfXy2Nwlc" target="_blank" rel="noopener noreferrer" aria-label="Play: CHAPTER 20">
+          <span class="card-frame">
+            <img class="card-img" src="https://i.ytimg.com/vi/UMWfXy2Nwlc/hqdefault.jpg" alt="" loading="eager" decoding="async" width="640" height="360">
+            <span class="card-play" aria-hidden="true">&#9654;</span>
+            
+          </span>
+          <span class="card-meta">
+            <span class="card-title">CHAPTER 20</span>
+            
+            <span class="card-line"><span class="card-kind">YOUTUBE</span><span class="card-date">FEB 2024</span></span>
+          </span>
+        </a>
+      </li>
+      <li class="card" data-kind="youtube" data-id="vIHLA9IYh2E">
+        <a class="card-link" href="https://www.youtube.com/watch?v=vIHLA9IYh2E" target="_blank" rel="noopener noreferrer" aria-label="Play: TRANSMISSION:  S T A R S H I P  W R E CK">
+          <span class="card-frame">
+            <img class="card-img" src="https://i.ytimg.com/vi/vIHLA9IYh2E/hqdefault.jpg" alt="" loading="eager" decoding="async" width="640" height="360">
+            <span class="card-play" aria-hidden="true">&#9654;</span>
+            
+          </span>
+          <span class="card-meta">
+            <span class="card-title">TRANSMISSION:  S T A R S H I P  W R E CK</span>
+            
+            <span class="card-line"><span class="card-kind">YOUTUBE</span><span class="card-date">FEB 2024</span></span>
+          </span>
+        </a>
+      </li>
+      <li class="card" data-kind="youtube" data-id="pRbjJa8PZKQ">
+        <a class="card-link" href="https://www.youtube.com/watch?v=pRbjJa8PZKQ" target="_blank" rel="noopener noreferrer" aria-label="Play: TRANSMISSION - T E A R D R O P   B L U E S">
+          <span class="card-frame">
+            <img class="card-img" src="https://i.ytimg.com/vi/pRbjJa8PZKQ/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="640" height="360">
+            <span class="card-play" aria-hidden="true">&#9654;</span>
+            
+          </span>
+          <span class="card-meta">
+            <span class="card-title">TRANSMISSION - T E A R D R O P   B L U E S</span>
+            
+            <span class="card-line"><span class="card-kind">YOUTUBE</span><span class="card-date">FEB 2024</span></span>
+          </span>
+        </a>
+      </li>
+      <li class="card" data-kind="youtube" data-id="AmTnNRJtrqE">
+        <a class="card-link" href="https://www.youtube.com/watch?v=AmTnNRJtrqE" target="_blank" rel="noopener noreferrer" aria-label="Play: TRANSMISSION - T H E   S Q U I D">
+          <span class="card-frame">
+            <img class="card-img" src="https://i.ytimg.com/vi/AmTnNRJtrqE/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="640" height="360">
+            <span class="card-play" aria-hidden="true">&#9654;</span>
+            
+          </span>
+          <span class="card-meta">
+            <span class="card-title">TRANSMISSION - T H E   S Q U I D</span>
+            
+            <span class="card-line"><span class="card-kind">YOUTUBE</span><span class="card-date">FEB 2024</span></span>
+          </span>
+        </a>
+      </li>
+      <li class="card" data-kind="youtube" data-id="YlMeyAAWhwE">
+        <a class="card-link" href="https://www.youtube.com/watch?v=YlMeyAAWhwE" target="_blank" rel="noopener noreferrer" aria-label="Play: TRANSMISSION - T E N S O R">
+          <span class="card-frame">
+            <img class="card-img" src="https://i.ytimg.com/vi/YlMeyAAWhwE/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="640" height="360">
+            <span class="card-play" aria-hidden="true">&#9654;</span>
+            
+          </span>
+          <span class="card-meta">
+            <span class="card-title">TRANSMISSION - T E N S O R</span>
+            
+            <span class="card-line"><span class="card-kind">YOUTUBE</span><span class="card-date">JAN 2024</span></span>
+          </span>
+        </a>
+      </li>
+      <li class="card" data-kind="youtube" data-id="OiYL9z3bXEI">
+        <a class="card-link" href="https://www.youtube.com/watch?v=OiYL9z3bXEI" target="_blank" rel="noopener noreferrer" aria-label="Play: TRANSMISSION - WATER BUFFALO">
+          <span class="card-frame">
+            <img class="card-img" src="https://i.ytimg.com/vi/OiYL9z3bXEI/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="640" height="360">
+            <span class="card-play" aria-hidden="true">&#9654;</span>
+            
+          </span>
+          <span class="card-meta">
+            <span class="card-title">TRANSMISSION - WATER BUFFALO</span>
+            
+            <span class="card-line"><span class="card-kind">YOUTUBE</span><span class="card-date">NOV 2023</span></span>
+          </span>
+        </a>
+      </li>
+      <li class="card" data-kind="youtube" data-id="RjRJCg6NMB4">
+        <a class="card-link" href="https://www.youtube.com/watch?v=RjRJCg6NMB4" target="_blank" rel="noopener noreferrer" aria-label="Play: CHAPTER 19 - KAZUKO">
+          <span class="card-frame">
+            <img class="card-img" src="https://i.ytimg.com/vi/RjRJCg6NMB4/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="640" height="360">
+            <span class="card-play" aria-hidden="true">&#9654;</span>
+            
+          </span>
+          <span class="card-meta">
+            <span class="card-title">CHAPTER 19 - KAZUKO</span>
+            
+            <span class="card-line"><span class="card-kind">YOUTUBE</span><span class="card-date">OCT 2023</span></span>
+          </span>
+        </a>
+      </li>
+      <li class="card" data-kind="youtube" data-id="8VbssmVYakg">
+        <a class="card-link" href="https://www.youtube.com/watch?v=8VbssmVYakg" target="_blank" rel="noopener noreferrer" aria-label="Play: TRANSMISSION - S T R E A M">
+          <span class="card-frame">
+            <img class="card-img" src="https://i.ytimg.com/vi/8VbssmVYakg/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="640" height="360">
+            <span class="card-play" aria-hidden="true">&#9654;</span>
+            
+          </span>
+          <span class="card-meta">
+            <span class="card-title">TRANSMISSION - S T R E A M</span>
+            
+            <span class="card-line"><span class="card-kind">YOUTUBE</span><span class="card-date">AUG 2023</span></span>
+          </span>
+        </a>
+      </li>
+      <li class="card" data-kind="youtube" data-id="VP2iLdUcI1c">
+        <a class="card-link" href="https://www.youtube.com/watch?v=VP2iLdUcI1c" target="_blank" rel="noopener noreferrer" aria-label="Play: CHAPTER 18 - SILENT TALK">
+          <span class="card-frame">
+            <img class="card-img" src="https://i.ytimg.com/vi/VP2iLdUcI1c/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="640" height="360">
+            <span class="card-play" aria-hidden="true">&#9654;</span>
+            
+          </span>
+          <span class="card-meta">
+            <span class="card-title">CHAPTER 18 - SILENT TALK</span>
+            
+            <span class="card-line"><span class="card-kind">YOUTUBE</span><span class="card-date">AUG 2023</span></span>
+          </span>
+        </a>
+      </li>
+      <li class="card" data-kind="youtube" data-id="fs_0-rRKsy4">
+        <a class="card-link" href="https://www.youtube.com/watch?v=fs_0-rRKsy4" target="_blank" rel="noopener noreferrer" aria-label="Play: TRANSMISSION - M A P">
+          <span class="card-frame">
+            <img class="card-img" src="https://i.ytimg.com/vi/fs_0-rRKsy4/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="640" height="360">
+            <span class="card-play" aria-hidden="true">&#9654;</span>
+            
+          </span>
+          <span class="card-meta">
+            <span class="card-title">TRANSMISSION - M A P</span>
+            
+            <span class="card-line"><span class="card-kind">YOUTUBE</span><span class="card-date">JUL 2023</span></span>
+          </span>
+        </a>
+      </li>
+      <li class="card" data-kind="youtube" data-id="vCeDEZtRY9s">
+        <a class="card-link" href="https://www.youtube.com/watch?v=vCeDEZtRY9s" target="_blank" rel="noopener noreferrer" aria-label="Play: TRANSMISSION - T A R L AN">
+          <span class="card-frame">
+            <img class="card-img" src="https://i.ytimg.com/vi/vCeDEZtRY9s/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="640" height="360">
+            <span class="card-play" aria-hidden="true">&#9654;</span>
+            
+          </span>
+          <span class="card-meta">
+            <span class="card-title">TRANSMISSION - T A R L AN</span>
+            
+            <span class="card-line"><span class="card-kind">YOUTUBE</span><span class="card-date">JUL 2023</span></span>
+          </span>
+        </a>
+      </li>
+      <li class="card" data-kind="youtube" data-id="zKcULCXz-cA">
+        <a class="card-link" href="https://www.youtube.com/watch?v=zKcULCXz-cA" target="_blank" rel="noopener noreferrer" aria-label="Play: TRANSMISSION - M U R A K A M I">
+          <span class="card-frame">
+            <img class="card-img" src="https://i.ytimg.com/vi/zKcULCXz-cA/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="640" height="360">
+            <span class="card-play" aria-hidden="true">&#9654;</span>
+            
+          </span>
+          <span class="card-meta">
+            <span class="card-title">TRANSMISSION - M U R A K A M I</span>
+            
+            <span class="card-line"><span class="card-kind">YOUTUBE</span><span class="card-date">JUL 2023</span></span>
+          </span>
+        </a>
+      </li>
+      <li class="card" data-kind="youtube" data-id="hnTSb2mZGKw">
+        <a class="card-link" href="https://www.youtube.com/watch?v=hnTSb2mZGKw" target="_blank" rel="noopener noreferrer" aria-label="Play: TRANSMISSION - D R E A M C O L O N Y">
+          <span class="card-frame">
+            <img class="card-img" src="https://i.ytimg.com/vi/hnTSb2mZGKw/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="640" height="360">
+            <span class="card-play" aria-hidden="true">&#9654;</span>
+            
+          </span>
+          <span class="card-meta">
+            <span class="card-title">TRANSMISSION - D R E A M C O L O N Y</span>
+            
+            <span class="card-line"><span class="card-kind">YOUTUBE</span><span class="card-date">JUN 2023</span></span>
+          </span>
+        </a>
+      </li>
+      <li class="card" data-kind="youtube" data-id="E9IuNSX3FAE">
+        <a class="card-link" href="https://www.youtube.com/watch?v=E9IuNSX3FAE" target="_blank" rel="noopener noreferrer" aria-label="Play: TRANSMISSION - F R O G W I Z A R D">
+          <span class="card-frame">
+            <img class="card-img" src="https://i.ytimg.com/vi/E9IuNSX3FAE/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="640" height="360">
+            <span class="card-play" aria-hidden="true">&#9654;</span>
+            
+          </span>
+          <span class="card-meta">
+            <span class="card-title">TRANSMISSION - F R O G W I Z A R D</span>
+            
+            <span class="card-line"><span class="card-kind">YOUTUBE</span><span class="card-date">MAY 2023</span></span>
+          </span>
+        </a>
+      </li>
+      <li class="card" data-kind="youtube" data-id="hwUv6CX1cFQ">
+        <a class="card-link" href="https://www.youtube.com/watch?v=hwUv6CX1cFQ" target="_blank" rel="noopener noreferrer" aria-label="Play: TRANSMISSION - O L D S T O R E">
+          <span class="card-frame">
+            <img class="card-img" src="https://i.ytimg.com/vi/hwUv6CX1cFQ/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="640" height="360">
+            <span class="card-play" aria-hidden="true">&#9654;</span>
+            
+          </span>
+          <span class="card-meta">
+            <span class="card-title">TRANSMISSION - O L D S T O R E</span>
+            
+            <span class="card-line"><span class="card-kind">YOUTUBE</span><span class="card-date">MAY 2023</span></span>
+          </span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <footer class="foot">
+    <div class="links">
+      <a href="/report">REPORT</a>
+      <a href="/map">MAP</a>
+      <a href="https://www.youtube.com/@ERC-1155" target="_blank" rel="noopener noreferrer">YOUTUBE</a>
+      <a href="https://vimeo.com/uaawtf" target="_blank" rel="noopener noreferrer">VIMEO</a>
+      <a href="https://x.com/_lovebeing_" target="_blank" rel="noopener noreferrer">X</a>
+      <a href="/.well-known/security.txt">SECURITY.TXT</a>
     </div>
     <div class="status">STATUS: <span>ACTIVE</span></div>
+  </footer>
 
-  </div>
+</div>
+
 <script src="/i18n.js"></script>
+<script>
+(function () {
+  'use strict';
+  var reel = document.getElementById('reel');
+  if (!reel) return;
+  var cards = Array.prototype.slice.call(reel.querySelectorAll('.card'));
+  var prev = document.getElementById('tx-prev'), next = document.getElementById('tx-next'), count = document.getElementById('tx-count');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var playing = null;
+
+  // Players load only on click. Until then a card is a plain link to the
+  // video page, so the reel works with scripting off and nothing third-party
+  // is fetched beyond the poster frame.
+  function embedFor(card) {
+    var id = card.getAttribute('data-id');
+    if (card.getAttribute('data-kind') === 'vimeo') {
+      return 'https://player.vimeo.com/video/' + encodeURIComponent(id) + '?autoplay=1&dnt=1&title=0&byline=0&portrait=0';
+    }
+    return 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1&rel=0&modestbranding=1';
+  }
+  function stop(card) {
+    if (!card) return;
+    var f = card.querySelector('.card-player');
+    if (f) { f.parentNode.replaceChild(card._frame, f); }
+    card.classList.remove('playing');
+  }
+  function play(card) {
+    if (playing === card) return;
+    stop(playing);
+    var link = card.querySelector('.card-link'), frame = card.querySelector('.card-frame');
+    card._frame = frame;
+    var iframe = document.createElement('iframe');
+    iframe.className = 'card-player';
+    iframe.src = embedFor(card);
+    iframe.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media';
+    iframe.setAttribute('allowfullscreen', '');
+    iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+    iframe.title = card.querySelector('.card-title').textContent;
+    frame.parentNode.replaceChild(iframe, frame);
+    card.classList.add('playing');
+    playing = card;
+    card.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'nearest', inline: 'start' });
+  }
+  cards.forEach(function (card) {
+    card.querySelector('.card-link').addEventListener('click', function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; // let "open in new tab" through
+      e.preventDefault();
+      play(card);
+    });
+  });
+
+  function step() { var c = cards[0]; return c ? c.getBoundingClientRect().width + 16 : 300; }
+  function go(dir) { reel.scrollBy({ left: dir * step() * 2, behavior: reduce ? 'auto' : 'smooth' }); }
+  prev.addEventListener('click', function () { go(-1); });
+  next.addEventListener('click', function () { go(1); });
+  reel.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+  });
+  function paint() {
+    var max = reel.scrollWidth - reel.clientWidth;
+    prev.disabled = reel.scrollLeft <= 2;
+    next.disabled = reel.scrollLeft >= max - 2;
+    var idx = Math.min(cards.length, Math.round(reel.scrollLeft / step()) + 1);
+    count.textContent = idx + ' / ' + cards.length;
+  }
+  var t;
+  reel.addEventListener('scroll', function () { clearTimeout(t); t = setTimeout(paint, 60); }, { passive: true });
+  window.addEventListener('resize', paint);
+  paint();
+})();
+</script>
 <script>
 (function(){if(window.parent!==window){document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var h=a.getAttribute('href');if(!h)return;if(h==='/logout'){e.preventDefault();window.top.location.href='/logout'}else if(h==='/'||h==='/report'||h==='/map'){e.preventDefault();window.parent.postMessage({navigate:h},location.origin)}})}})();
 </script>
 <script src="/signal-bar.js?v=10" defer></script>
-<script src="/theme.js" defer></script>
+<script src="/theme.js?v=2" defer></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

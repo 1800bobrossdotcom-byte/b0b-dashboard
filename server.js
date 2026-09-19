@@ -234,17 +234,19 @@ function siteCSP(nonce) {
     // is the one that stops injected <script> blocks.
     scriptSrcAttr: ["'unsafe-inline'"],
     styleSrc: ["'self'", "'unsafe-inline'"],
-    imgSrc: ["'self'", 'data:', 'blob:', 'https://*.tile.openstreetmap.org', 'https://*.basemaps.cartocdn.com', 'https://server.arcgisonline.com', 'https://*.tile.opentopomap.org', 'https://unpkg.com', 'https://tiles.stadiamaps.com', 'https://cdn.star.nesdis.noaa.gov', 'https://i.ytimg.com'],
+    // i.ytimg.com and i.vimeocdn.com: poster frames for the home-page transmissions
+    // carousel. The players themselves are frame-src below and load only on click.
+    imgSrc: ["'self'", 'data:', 'blob:', 'https://*.tile.openstreetmap.org', 'https://*.basemaps.cartocdn.com', 'https://server.arcgisonline.com', 'https://*.tile.opentopomap.org', 'https://unpkg.com', 'https://tiles.stadiamaps.com', 'https://cdn.star.nesdis.noaa.gov', 'https://i.ytimg.com', 'https://i.vimeocdn.com'],
     fontSrc: ["'self'", 'https://cdnjs.cloudflare.com'],
     objectSrc: ["'none'"],
-    frameSrc: ["'self'", 'https://www.youtube.com', 'https://www.youtube-nocookie.com'],
+    frameSrc: ["'self'", 'https://www.youtube.com', 'https://www.youtube-nocookie.com', 'https://player.vimeo.com'],
     frameAncestors: ["'self'"],
     formAction: ["'self'"],
     baseUri: ["'self'"],
     connectSrc: ["'self'", 'https://*.basemaps.cartocdn.com', 'https://server.arcgisonline.com', 'https://*.tile.openstreetmap.org', 'https://*.tile.opentopomap.org', 'https://earthquake.usgs.gov', 'https://eonet.gsfc.nasa.gov', 'https://firms.modaps.eosdis.nasa.gov', 'https://opensky-network.org', 'https://www.gdacs.org', 'https://api.wheretheiss.at', 'https://native-land.ca', 'https://overpass.openstreetmap.fr', 'https://api.adsb.lol', 'https://meri.digitraffic.fi'],
     mediaSrc: ["'self'", 'blob:'],
     workerSrc: ["'self'", 'blob:'],
-    childSrc: ["'self'", 'blob:', 'https://www.youtube.com', 'https://www.youtube-nocookie.com'],
+    childSrc: ["'self'", 'blob:', 'https://www.youtube.com', 'https://www.youtube-nocookie.com', 'https://player.vimeo.com'],
     upgradeInsecureRequests: [],
   };
 }

@@ -1,3 +1,19 @@
+/* Type. IBM Plex, self-hosted under the OFL (site/fonts/LICENSE-OFL.txt); the CSP
+   allows fonts from 'self' only, so nothing here reaches a third party. Serif is
+   the reading face for prose; mono is the instrument face for labels, chrome,
+   headings and anything that is a control rather than a sentence. */
+@font-face{font-family:"IBM Plex Mono";src:url("/fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("/fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("/fonts/ibm-plex-mono-latin-600-normal.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Serif";src:url("/fonts/ibm-plex-serif-latin-400-normal.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Serif";src:url("/fonts/ibm-plex-serif-latin-600-normal.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Serif";src:url("/fonts/ibm-plex-serif-latin-400-italic.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap}
+:root{
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,"Courier New",monospace;
+  --serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+  --b0b-signal-h:46px;
+}
+
 /* b0b.dev theme tokens. Dark is the default and reproduces the original palette
    exactly, so a visitor who never touches the toggle sees no change. */
 :root{
