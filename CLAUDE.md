@@ -181,7 +181,10 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
-**"DARPA SOLVED RSI OVER A DECADE AGO" — tested 20 Sept 2026, unpublished.** `research/DARPA-RSI-CODEX.md`.
+**"DARPA SOLVED RSI OVER A DECADE AGO" — tested 20 Sept 2026; the take is PUBLISHED.** `research/DARPA-RSI-CODEX.md`.
+*"Note that take"* (author) → **Section X gained `x-the-soldier-s-servant-pal-calo-siri-and-the-neuromorphic-line`**
+(toc 23 → 24 parts): the PAL→CALO→Siri chain and the SyNAPSE figures at documented tier, Avatar attributed, the
+DeepMind tie a null, the RSI claim unsupported. **Scale line 273 / 1,069 / 127.**
 A thread reply's claim plus its word list (spiking neural net, Synapse, Avatar, STDP, CALO, PAL, Siri, "even
 deepmind"). **"Solved recursive self-improvement": unsupported at any tier** — no program on the list claims
 it; the documented outputs are a scheduling assistant and a 100 mW pattern-recognition chip. **The list is a
