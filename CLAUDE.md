@@ -181,7 +181,15 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
-**THE REPORT AGAINST THE KJV AND GAME THEORY — 20 Sept 2026, researched, unpublished.**
+**THE REPORT AGAINST THE KJV AND GAME THEORY — 20 Sept 2026, researched; the reframe is PUBLISHED.**
+*"Update report where applicable"* (author, same day) put two things on the page: **Section XIII gained
+`xiii-the-oldest-outlines-correlation-without-mechanism`** (toc 6 → 7 parts) — the seven dated outlines
+against the record, each with its no-foreknowledge reading, tier *correlation documented / mechanism not
+reached*, the Deut 18:22 forward test the report cannot sit, and the two refused verses (Amos 3:3, Rev
+13:16–17); and **the Section XXIV close gained one paragraph** after "three completed things" — Zermelo
+1913 determinacy as the shape of the perfect passive, Lovelace's retrospective/prospective signification,
+Note G as the limit on the engine that helped draft the page. **Scale line 272 / 1,065 / 126.** Nothing
+from §3 of the research file went on the page except as a refusal.
 `research/KJV-AND-GAME-THEORY.md`. Author's ask: *"how the report parallels prophecy … or at least
 sits, contextually within biblical framework … and game theory … tetelestai, ha!"* **Finding: the
 report parallels prophecy as indictment, not as prediction, and the KJV's own rules are why** —
