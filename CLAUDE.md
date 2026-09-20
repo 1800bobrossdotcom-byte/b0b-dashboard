@@ -181,6 +181,32 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**THE REPORT AGAINST THE KJV AND GAME THEORY — 20 Sept 2026, researched, unpublished.**
+`research/KJV-AND-GAME-THEORY.md`. Author's ask: *"how the report parallels prophecy … or at least
+sits, contextually within biblical framework … and game theory … tetelestai, ha!"* **Finding: the
+report parallels prophecy as indictment, not as prediction, and the KJV's own rules are why** —
+Deut 18:22 is an outcome test the report cannot sit because it predicts nothing; Jer 23:16 names
+the fabricator class; the prophetic books are mostly indictment of captured institutions with a
+two-witness floor (Deut 19:15, Num 35:30, Matt 18:16, 2 Cor 13:1 = the testimony tier). **The page
+already carries nine passages** (Matt 4:19 masthead; John 19:30 ×4; Luke 12:6–7 ×5; Isa 54:17 ×4;
+Dan 5:27 ×2; Ps 139; Rev 21:6; Gal 5:22–23; Ps 91) and reads three at the level of the grammar —
+that is the documented tier; every other fit is labeled mine. **Refused by the report's own rules:**
+Rev 13:16–17 against Section X (guaranteed-null + the "predictive programming" refusal already on
+the page applies to scripture identically), Amos 3:3 (the anti-map's target verse), Psalm 2, Dan
+12:4 as internet prophecy, any numerology. **Game theory, six rules mapped and no further:**
+guaranteed-null = pooling equilibrium; symmetry = likelihood consistency; published nulls = costly
+signalling (Spence) and §8 of this file is its exact statement, with Matt 5:37 as the cheap-talk
+ban; standing constraints = Schelling commitment devices, and Section XXIII's Article 94 warning is
+a *refused* coordination game with the lawful channel as the no-coordination focal point; Matt
+7:16 = revealed preference (the money-layer finding); tetelestai = certain audit removes the payoff
+to bury a retraction — the page's own closing argument ("written as though the ledger were already
+kept"), with Eccl 8:11 as the delayed-audit case. The bridge is the author's line on the page,
+*"each Christ paradox and each parable is math"*, recorded as his. **Tooling trap:** the Gutenberg
+KJV (#10, in the ledger) repeats every book title in a table of contents, and two testament
+headers sit inside it; a title-split lands in the TOC and returned Amos for Daniel 5:27, 1 Timothy
+for 1 Thess 5:21. Split on each title's *body* occurrence, and split verses on `N:N` anywhere in
+the line — Gutenberg runs several verses per paragraph. `scripts/kjv-verse.py` does both (needs the cached body: `spider.py fetch https://www.gutenberg.org/cache/epub/10/pg10.txt` if the cache is cold).
+
 **THE SITE OPENS ON THE REPORT; THE GATE IS OFF; THE PERIOD BAR IS GONE — 19 Sept 2026, three
 author instructions in one hour, all live.** (1) *"site should start here, no longer do the 4
 videos"* — `pixel.html` (the click-gate, with four autoplaying YouTube embeds) is **off by default;
