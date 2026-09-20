@@ -181,6 +181,21 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**"DARPA SOLVED RSI OVER A DECADE AGO" — tested 20 Sept 2026, unpublished.** `research/DARPA-RSI-CODEX.md`.
+A thread reply's claim plus its word list (spiking neural net, Synapse, Avatar, STDP, CALO, PAL, Siri, "even
+deepmind"). **"Solved recursive self-improvement": unsupported at any tier** — no program on the list claims
+it; the documented outputs are a scheduling assistant and a 100 mW pattern-recognition chip. **The list is a
+real DARPA lineage, and that is the keepable finding:** PAL (2003) → CALO at SRI (May 2003–2008, "soldier's
+servant") → Siri Inc. (Dec 2007) → Apple (2010) → iPhone 4S (Oct 2011) — a contract, a spin-out and an
+acquisition, i.e. the money layer; SyNAPSE (Nov 2008, IBM + HRL in named tranches) → the 7 Aug 2014 chip
+(1M neurons, 256M synapses, <100 mW, DARPA's own release); STDP is the neuroscience learning rule (Markram
+1997, Bi & Poo 1998), a weight-update, not a rewrite. **Avatar** is a 2012 telepresence-robot line item, on
+the list by name only — every source refused from here (six nulls ledgered), so attributed. **DeepMind: DARPA
+0, any tier**; Founders Fund/Thiel is the only edge and it is a club edge. "Noone cared" fails on Science's
+Aug 2014 cover and every iPhone since 2011. L2M (2017) is the closest DARPA language and its own premise is
+that the problem is unsolved. **The report carries none of the lineage** (SyNAPSE/CALO/PAL/TrueNorth 0);
+a PAL→Siri entry belongs in Section X at documented tier — author's call.
+
 **THE REPORT AGAINST THE KJV AND GAME THEORY — 20 Sept 2026, researched; the reframe is PUBLISHED.**
 *"Update report where applicable"* (author, same day) put two things on the page: **Section XIII gained
 `xiii-the-oldest-outlines-correlation-without-mechanism`** (toc 6 → 7 parts) — the seven dated outlines
