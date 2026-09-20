@@ -181,6 +181,22 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**MAP LABELING COHERENCE CHECK — second pass, 20 Sept 2026, all 1,182 markers. `research/MAP-LABEL-AUDIT.md`.**
+Name vs type, section, context, coordinates, and marker vs marker. **Coordinates are clean:** the Nominatim
+reverse-geocode pass finished (1,152 unique keys, cache `scratchpad/revgeo.json`, method in
+`scratchpad/geocheck.py` — gazetteer built from the geocoder's own answers, flag when a place named in the
+marker appears nowhere in its own geocode) — **1,004 testable, 10 flagged, all benign** (the Strip is Clark
+County; the Cowboys and the Pentagon are both in an Arlington). **One class fixed and live:** six orbital
+launch sites in IX typed `airport`/`technology` → `satellite` (Esrange, Cayenne/Kourou, Wenchang, Jiuquan,
+Sriharikota, Sohae) — the same class was already `satellite` in X and two of the sites carried two types at
+once. KML regenerated. **Held for the author:** five same-section duplicates (Menwith Hill ×2 and Pine Gap ×2
+in X, Culiacán ×2 in XVII, Allegiant ×2 in SPORTS, GCHQ Bude cable/satellite); **the Olympic set is on the map
+twice** — XIII's fourteen hosts and SPORTS's eight overlap on six, IOC HQ ×2 — and XIII types each host by
+what the contest was (conflict/financial/surveillance/governance; Berlin 1936 as `archaeological` is the odd
+one); same-event-twice now eight pairs (add Medellín CENTRA SPIKE VII/XVII and Củ Chi IX/XV to the six);
+mixed dash styles in names (348 ` - ` vs 233 ` — `). *Method note: a name-token-absent-from-context test
+flags 155 and means nothing — context describes, it does not restate. Do not re-run it as a signal.*
+
 **"DARPA SOLVED RSI OVER A DECADE AGO" — tested 20 Sept 2026; the take is PUBLISHED.** `research/DARPA-RSI-CODEX.md`.
 *"Note that take"* (author) → **Section X gained `x-the-soldier-s-servant-pal-calo-siri-and-the-neuromorphic-line`**
 (toc 23 → 24 parts): the PAL→CALO→Siri chain and the SyNAPSE figures at documented tier, Avatar attributed, the
