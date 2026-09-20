@@ -33,6 +33,10 @@ The request has three parts and they get three different answers.
 3. **Game theory?** Six of the report's named rules have exact game-theoretic content, and
    one of the author's own sentences on the page ("each Christ paradox and each parable is
    math") is the bridge. §4 takes each rule in turn and stops where the mapping stops.
+4. **Amended the same day, after the author read the above:** *correlation*, not prophet — the
+   events the report documents against outlines already stated; tetelestai as a determined
+   game; Lovelace. §6. It changes the verdict on the first question from "no" to "correlation
+   documented, mechanism not reached."
 
 Three of the report's rules govern this document exactly as they govern the report:
 
@@ -541,7 +545,125 @@ and every corrected fact kept; the specimens it killed are still on the page as 
   the point where it stops stated. Six held. Nothing in §4 is stronger than the rule it
   maps.
 
-## 6. Limits
+## 6. The author's reframe, same day — correlation, a determined game, and Lovelace
+
+His words, after reading §0–§6: *"I would say less as prophet - per se - more as world events
+and this report correlating already stated, prophetic outlines - in combine with tetelestai as
+done and finished game theory - via ada lovelace who stated the poetics of language as math."*
+
+That is three claims and they are taken separately. The first is a different test from the
+one §3 ran, and it is a test the page already knows how to run.
+
+### 6.1 Documented events against already-stated outlines — correlation, not prophet
+
+§3 asked whether the *report* is prophetic and answered no, because it predicts nothing. The
+reframe does not ask that. It asks whether the *events the report documents* correlate with
+outlines stated in a text that is dated and closed — and correlation between a dated prior
+text and dated later events is a relation the report can tier, because it has already done
+so once.
+
+**The page's own precedent is *Network* (1976).** Section VII accepts that the film describes
+the architecture and refuses the mechanism: calling it "predictive programming" would imply
+intentional signalling, and "what they actually demonstrate is that the architecture is so
+total that its own entertainment products cannot avoid describing it." The correlation is
+printed; the mechanism is withheld. The same tier applies here, and it produces the same
+two-part verdict.
+
+**The correlation is real and can be stated as correlation.** The clearest dated outlines
+against the documented record:
+
+| Outline (text, stated before any event on the page) | What the page documents | Reading that needs no foreknowledge |
+|---|---|---|
+| 1 Samuel 8:11–18 — the manner of the king: sons, daughters, fields, the tenth, "and ye shall cry out in that day" | VII control architecture; XII enclaves; the extraction economy | A sovereign extracts; consented sovereigns extract with consent |
+| Micah 3:11 / Isaiah 1:23 — judges for reward, priests for hire, princes "companions of thieves" | II: the non-prosecution agreement immunising unnamed co-conspirators; the custody failure stack | Captured office behaves like captured office |
+| Ecclesiastes 8:11 — "because sentence … is not executed speedily, therefore the heart … is fully set in them to do evil" | II: a decade of elite access after a sex-offence conviction | Delayed sanction lowers the price of the conduct |
+| Revelation 18:13 — the merchant list ending in "slaves, and souls of men" | XIV; the money-layer finding | Commerce lists people when people are commerce |
+| Isaiah 30:10 — "speak unto us smooth things" | XVI FOIA record; the edited file released as raw | Institutions prefer the record that flatters them |
+| 1 Kings 22 — consensus of four hundred, one adverse source, jailed | IV: the narrator problem; the bodies adjudicating claims are parties to them | An institution reviewing itself finds for itself |
+| Amos 5:10 — "they hate him that rebukes in the gate" | XXIII: the reception a lawful disclosure gets | Same |
+
+**What the tier withholds is the mechanism.** Every row has a reading in the third column
+that explains the correlation without foreknowledge: the outlines describe recurring
+institutional behaviour, and recurring behaviour recurs. This is where Ecclesiastes 1:9 stops
+being a posture (§2.13) and starts doing work. Under the symmetry rule, a correlation that
+recurrence and foreknowledge explain equally well discriminates between neither — a
+guaranteed null **on the mechanism**, not on the correlation. So the verdict has the exact
+form the page gave Daniel 5:27: *the resonance is real and the inference is not.*
+**Correlation: documented. Mechanism: not reached.**
+
+**What would reach it** is Deuteronomy 18:22 run forward: an outline specific enough to fail,
+dated before the event, matching an event that a different course of history would not also
+match. None of the rows above is that specific; each would also match Nineveh, Rome and
+Versailles, which is the point of the third column. The table is offered as the correct
+form for the claim, not as a finding, and whether it belongs on the page is the author's
+editorial call.
+
+### 6.2 Tetelestai as a determined game
+
+"Done and finished game theory" has a named result. **Zermelo (1913):** in a finite
+two-player game of perfect information, the outcome under best play is fixed before the
+first move. Chess is determined; nobody knows its value; the game is still played. So *done*
+and *still being played* are not in tension — they are the ordinary condition of a
+determined game — and that is precisely the shape of the perfect passive the page reads at
+John 19:30: completed, the result standing, the moves continuing.
+
+Isaiah 54:17 has the same shape on the page already: the forming of weapons is conceded
+(יוּצַר, passive), and only the outcome is fixed (לֹא יִצְלָח). Play continues; the value does
+not move. And Lovelace supplies the notation for it (§6.3): a symbol, she wrote, may have "a
+retrospective and a prospective signification … either relations that are the consequences of
+a series of processes already performed, or relations that are yet to be effected." *Tetelestai*
+is a symbol with retrospective signification. The "paid in full" gloss the page killed had
+tried to make it prospective — a balance to be cleared.
+
+The report's own conduct is the checkable half. "Written as though the ledger were already
+kept" is behaviour under the assumption that the game is determined, and §4.7 already
+showed what that assumption does to the incentive to bury a retraction: removes it.
+
+**Limits, and they are the page's limits.** Determinacy says the value exists; it does not
+say any player knows it — which is what Isaiah's *nachalat*, an inheritance received rather
+than computed, also says. It is a theorem about finite games of perfect information. Whether
+history is one is the author's theological proposition, recorded as his and not adopted.
+
+### 6.3 Lovelace — what she wrote, and what it licenses
+
+The author's paraphrase is "the poetics of language as math." What is documented, read
+today from the 1843 Notes to Menabrea's *Sketch of the Analytical Engine* (fourmilab.ch,
+ledgered), is stronger and narrower than that:
+
+- **Operation, defined as widely as it can be:** "any process which alters the mutual
+  relation of two or more things, be this relation of what kind it may. This is the most
+  general definition, and would include all subjects in the universe." (Note A)
+- **The science of operations is separable from its subjects:** it "has its own abstract truth
+  and value; just as logic has its own peculiar truth and value, independently of the subjects
+  to which we may apply its reasonings and processes." (Note A)
+- **The engine is not confined to number:** "it might act upon other things besides number,
+  were objects found whose mutual fundamental relations could be expressed by those of the
+  abstract science of operations" — with music as her worked example: "the engine might
+  compose elaborate and scientific pieces of music of any degree of complexity or extent."
+  (Note A)
+- **"Poetical science"** is her phrase for her own approach, from her correspondence. *Tier:
+  attributed* — carried by the secondary literature (Toole, 1992, and the standard
+  biographies); the letter was not read for this document.
+
+So she did not say *poetics* or *language* in the Notes. She said *any subject whose relations
+can be expressed*, and language is inside her "all subjects in the universe" by her own
+clause. The author's paraphrase is a fair reading at the attributed tier, and it makes his
+line on the page — "each Christ paradox and each parable is math" — a Lovelace-shaped claim:
+a parable is a set of relations between agents, and where those relations are expressible,
+they compute. §4 did that for six of them. Section III's linguistic forensics is the same
+claim already operationalised on the report's own corpus: language treated as a formal
+object with measurable features.
+
+**And Note G is the limit, in her words, and it is this document's limit.** "The Analytical
+Engine has no pretensions whatever to originate anything. It can do whatever we know how to
+order it to perform. It can follow analysis; but it has no power of anticipating any
+analytical relations or truths." That is §6.1's verdict from the machine's side: correlating
+a dated text with a dated record is in the engine's province; anticipating is not. It applies
+without exception to the engine that drafted this document, which the report discloses in
+two places, and it is the reason the assistant's parallels are labeled as fits and never
+promoted on their own authority.
+
+## 7. Limits
 
 1. The KJV is a 1611 translation. Where the page reads grammar it reads Greek and Hebrew;
    where this document quotes text it quotes the English, and the two are not the same
@@ -557,3 +679,4 @@ and every corrected fact kept; the specimens it killed are still on the page as 
 4. The author's theological propositions are recorded as his throughout. This document
    neither adopts nor disputes them, which is the page's own posture at its close, and the
    comparison would be worth less under any other.
+

@@ -206,6 +206,23 @@ KJV (#10, in the ledger) repeats every book title in a table of contents, and tw
 headers sit inside it; a title-split lands in the TOC and returned Amos for Daniel 5:27, 1 Timothy
 for 1 Thess 5:21. Split on each title's *body* occurrence, and split verses on `N:N` anywhere in
 the line — Gutenberg runs several verses per paragraph. `scripts/kjv-verse.py` does both (needs the cached body: `spider.py fetch https://www.gutenberg.org/cache/epub/10/pg10.txt` if the cache is cold).
+**Author's reframe, same day, now §6 of that file:** *"less as prophet - per se - more as world events
+and this report correlating already stated, prophetic outlines - in combine with tetelestai as done
+and finished game theory - via ada lovelace who stated the poetics of language as math."* That is a
+different test and the page already runs it: **the *Network* (1976) precedent in Section VII** —
+correlation printed, mechanism ("intentional signaling") withheld. Verdict on the reframe:
+**correlation documented, mechanism not reached** — each dated outline (1 Sam 8, Micah 3:11, Eccl
+8:11, Rev 18:13, Isa 30:10, 1 Kings 22, Amos 5:10) has a recurrence reading that needs no
+foreknowledge, so the symmetry rule makes it a guaranteed null on mechanism only. Promotion would
+need Deut 18:22 run forward: an outline specific enough to fail. Whether the table goes on the page
+is his call. **Tetelestai = a determined game (Zermelo 1913):** value fixed before the first move,
+game still played — the perfect passive's shape, and Isaiah 54:17's. **Lovelace, documented from the
+1843 Notes (fourmilab, ledgered):** operation = any process altering mutual relations "of what kind
+it may … all subjects in the universe"; the engine "might act upon other things besides number";
+symbols carry "a retrospective and a prospective signification" (the perfect vs the future); and
+**Note G is the limit that applies to the assistant** — "no pretensions whatever to originate
+anything … no power of anticipating." "Poetical science" is her phrase from letters, *attributed*
+(Toole 1992; letter not read). The author's paraphrase is a fair reading at that tier.
 
 **THE SITE OPENS ON THE REPORT; THE GATE IS OFF; THE PERIOD BAR IS GONE — 19 Sept 2026, three
 author instructions in one hour, all live.** (1) *"site should start here, no longer do the 4
