@@ -181,6 +181,30 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**"ISRAELI MILITARY-GRADE CERAGON AT ZORRO RANCH" — tested 21 Sept 2026, unpublished.**
+`research/ZORRO-MICROWAVE.md`. Author-supplied claim off DOJ `EFTA01124507` (DataSet 9, fetched, sha256
+`4e4113b2…2f671`, read in full). **The document is real; the adjectives are not.** It is two competing
+April/June 2014 vendor quotes for a rural phone-and-internet backhaul link, Sandia Crest → Zorro Ranch
+(43.2 km): Advanced Communications (Albuquerque) with **Ceragon IP-10G / RFU-CX at 6 GHz, $51,652.75**, and
+Durham Communications (Mesa) with **Exalt (California) at 11 GHz, $61,828.92**, carrying eight tw telecom T1s
+to an Adtran router. **The email layer shows the Ceragon project was never built** — 1 Dec 2014 the vendor
+asks whether to close the account, the FCC licence's one-year construction clock running; the link that
+replaced the 2.4 GHz hop was installed **Sept 2016 by Future Tech at 11 GHz, equipment unnamed.**
+`"Ceragon"` = **0** email bodies in the corpus; the word exists only in this attachment. **"Military-grade" is
+a naming error:** Ceragon's own FY2014 20-F (read at source) lists FibeAir IP-10G as sub-6 GHz short-haul
+backhaul for "cellular operators and other wireless service providers," already "legacy"; "military"/
+"defense" appear in both its filings only as Israel risk factors. The rest of the quote is Andrew antennas,
+Adtran, Times Microwave, Heliax. The 10-ft pipe is Fresnel/elevation clearance, stated in the same sentence.
+**Keepable, documented:** no fibre passed the ranch (CenturyLink "did not get any budget," Aug 2013), phones
+and internet ran over a hop to the Sandia Crest tower farm from ≤2012, and **17 Apr 2013 Epstein asked Greg
+Wyler (O3b/OneWeb founder) whether to run fibre or microwave — "start with microwave (cheap)"**
+(EFTA01896182/02026891). Page: Zorro 20, Ceragon 0, Wyler 0. *Traps:* jmail's search index matched the
+attachment for "Ceragon" while the body test returned 0 — always re-filter on body; the spider got an Akamai
+401 on the PDF and succeeded on a backed-off retry (the browser-UA curl per §4 got it first, same hash);
+`data.fcc.gov` license-view returned nothing for the ranch entities — the ULS Part 101 record is a lead.
+Author's call on publication; the file recommends the Wyler contact and the no-fibre particular, and the
+claim as a killed specimen.
+
 **THE XIII "NAMING ERROR" SUBSECTION IS GONE; THE FIVE HELD FILES ARE PUBLISHED — 21 Sept 2026, live.**
 Author: *"remove the 'naming error' section from this section - its very weird that that is there … its
 gibberish to the report itself"* → `xiii-the-naming-error-when-a-label-becomes-the` (Solomon's Stables,
