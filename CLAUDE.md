@@ -181,7 +181,27 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
-**AARON SWARTZ — researched 21 Sept 2026, unpublished. `research/SWARTZ.md`.** Author's correction on
+**THE XIII "NAMING ERROR" SUBSECTION IS GONE; THE FIVE HELD FILES ARE PUBLISHED — 21 Sept 2026, live.**
+Author: *"remove the 'naming error' section from this section - its very weird that that is there … its
+gibberish to the report itself"* → `xiii-the-naming-error-when-a-label-becomes-the` (Solomon's Stables,
+the Templars, the Jerusalem cross, the octagram, the author's own marks, tetelestai, the Parodyjeff card,
+the Sultan/Babylon/Temple/Harem word tests) removed whole, toc 7 → 6. **Do not re-add it.** The *rule*
+survives where it is defined (Section I, "a second guardrail") and where it is invoked by name (III black
+book, XVI anthrax); the Section XXIV tetelestai close still stands on its own. Then *"AND ADD THOSE 5"* →
+**XV gained two subsections** (`xv-who-arms-sudan-…`, `xv-whose-weapons-are-in-these-wars-…`; XV has no
+static toc), **XVI gained two** (`xvi-the-intelligence-funding-documents-…`, `xvi-united-states-v-swartz-…`;
+toc 27 → 29), and **the map audit's plain duplicates were merged** — Menwith Hill, Pine Gap, Culiacán,
+Allegiant (context folded into the kept marker; GCHQ Bude kept as two because cable tap and satellite
+intercept are two documented functions), **232 names normalised from ` — ` to ` - `**, **1,182 → 1,178
+markers, 819 dated**, KML rebuilt, counts changed in `scripts/seo-meta.json` (3) and the map's KML link
+line. Cross-section pairs and the Olympic overlap left as they were. **Scale line 276 / 1,067 / 125.**
+*Trap:* the XIII sect-body `</div>` sits *before* the last two XIII subsections (the speculative floor is
+literally outside the evidentiary wrapper) — the removal had to keep that closer; div balance diffed
+against a backup, 327/327. `build-transmissions.py` got a 404 from the feed this run and left the reel
+untouched, as designed.
+
+**AARON SWARTZ — researched 21 Sept 2026; PUBLISHED the same day as Section XVI
+`xvi-united-states-v-swartz-the-ruling-recorded-the-prosecution-documented`. `research/SWARTZ.md`.** Author's correction on
 posture, verbatim: *"Epstein 'died by suicide' too... and that isn't our finding."* The medical examiner's
 ruling is recorded at tier (a spokesperson's report, attributed), not adopted — the same rule the page
 runs for Epstein. **But the parallel is of posture, not fact pattern, and the page must not imply the
@@ -210,9 +230,11 @@ against Epstein in 2007 brought thirteen felonies for downloading journal articl
 instrument, documented both ways.** Page carries Swartz 0 / CFAA 0. *Trap, new decoy shape:*
 `justice.gov/usao-ma/pr/…` serves a 2,545-byte Akamai `bm-verify` interstitial with HTTP 200 (the
 archive path `justice.gov/archive/usao/ma/news/…` still serves real pages). Candidate for `hosts.json`.
-Author's call on publication.
+On the page the living prosecutors are not named — "the lead prosecutor", "the US Attorney's release".
 
-**US AND ISRAELI WEAPONS VIA THE UAE; THE INTELLIGENCE FUNDING DOCS — 21 Sept 2026, unpublished.**
+**US AND ISRAELI WEAPONS VIA THE UAE; THE INTELLIGENCE FUNDING DOCS — 21 Sept 2026; PUBLISHED the same
+day as XV `xv-whose-weapons-are-in-these-wars-the-us-and-israeli-lines-through-the-uae` and XVI
+`xvi-the-intelligence-funding-documents-the-certificate-is-the-voucher`.**
 `research/US-ARMS-UAE-SUDAN.md`, `research/INTEL-FUNDING-DOCS.md`. Three author questions. (1) *Does the US arm
 Sudan via arming the UAE?* **The law would bite** — 22 U.S.C. §2753(a)(2) requires presidential consent for any
 retransfer and (c) cuts off deliveries for substantial violation — **but no US-origin weapon has been found in Sudan
@@ -240,9 +262,10 @@ certificate shall be deemed a sufficient voucher"** — the founding instrument;
 (FY2025 $73.3bn NIP + $27.8bn MIP; FY2026 request $81.9bn + $33.6bn; first-ever disclosures $26.6bn FY1997/$26.7bn
 FY1998 via FOIA litigation); the FY2013 CBJB $52.6bn (Snowden/WaPo, robots-disallowed) is the only line-item document
 and is already on the page; *U.S. v. Richardson* (1974) declined the Statement-and-Account question on standing. Page
-has zero for NIP/MIP/CIA Act/unvouchered. All three files: author's call on publication.
+had zero for NIP/MIP/CIA Act/unvouchered until the XVI subsection.
 
-**WHO ARMS SUDAN — researched 21 Sept 2026, unpublished.** `research/SUDAN-ARMS.md`. **Documented (primaries
+**WHO ARMS SUDAN — researched 21 Sept 2026; PUBLISHED the same day as XV
+`xv-who-arms-sudan-the-documented-layer-the-attributed-layer-and-the-gold`.** `research/SUDAN-ARMS.md`. **Documented (primaries
 read in full):** OFAC 7 Jan 2025 — Hemedti designated with a **UAE-based** procurement/gold network (Capital Tap
 Holding "provided the RSF with money and military equipment"; AZ Gold moves Sudanese gold to Dubai; Algoney,
 the RSF procurement director, designated 8 Oct 2024); State's genocide determination same day is a
@@ -255,7 +278,7 @@ mid-2024, Port Sudan base talks), Egypt (jets, then drone strikes), Eritrea, Pak
 SAF; China and Serbia by manufacture to both. **Symmetry:** UAE's 30 Apr 2025 claim of intercepting SAF-bound
 ammunition. **Treasury names companies, not the Emirati state — the sovereign step is the attributed layer's.**
 *Trap:* `docs.un.org` serves a 4 KB viewer shell with 200 for `S/2024/65` — decoy; the Panel PDF is unread. Amnesty
-and HRW refuse the crawler. **Page carries the war in one Section XV entry and nothing on arms; author's call.**
+and HRW refuse the crawler. The Panel finding stays attributed on the page until the PDF is read.
 
 **MAP LABELING COHERENCE CHECK — second pass, 20 Sept 2026, all 1,182 markers. `research/MAP-LABEL-AUDIT.md`.**
 Name vs type, section, context, coordinates, and marker vs marker. **Coordinates are clean:** the Nominatim
@@ -265,12 +288,12 @@ marker appears nowhere in its own geocode) — **1,004 testable, 10 flagged, all
 County; the Cowboys and the Pentagon are both in an Arlington). **One class fixed and live:** six orbital
 launch sites in IX typed `airport`/`technology` → `satellite` (Esrange, Cayenne/Kourou, Wenchang, Jiuquan,
 Sriharikota, Sohae) — the same class was already `satellite` in X and two of the sites carried two types at
-once. KML regenerated. **Held for the author:** five same-section duplicates (Menwith Hill ×2 and Pine Gap ×2
-in X, Culiacán ×2 in XVII, Allegiant ×2 in SPORTS, GCHQ Bude cable/satellite); **the Olympic set is on the map
-twice** — XIII's fourteen hosts and SPORTS's eight overlap on six, IOC HQ ×2 — and XIII types each host by
+once. KML regenerated. **Resolved 21 Sept (see the entry above):** four same-section duplicates merged
+(Menwith Hill, Pine Gap, Culiacán, Allegiant), GCHQ Bude kept as two, dash styles normalised. **Still
+held:** **the Olympic set is on the map twice** — XIII's fourteen hosts and SPORTS's eight overlap on six, IOC HQ ×2 — and XIII types each host by
 what the contest was (conflict/financial/surveillance/governance; Berlin 1936 as `archaeological` is the odd
-one); same-event-twice now eight pairs (add Medellín CENTRA SPIKE VII/XVII and Củ Chi IX/XV to the six);
-mixed dash styles in names (348 ` - ` vs 233 ` — `). *Method note: a name-token-absent-from-context test
+one); same-event-twice now eight pairs (add Medellín CENTRA SPIKE VII/XVII and Củ Chi IX/XV to the six).
+*Method note: a name-token-absent-from-context test
 flags 155 and means nothing — context describes, it does not restate. Do not re-run it as a signal.*
 
 **"DARPA SOLVED RSI OVER A DECADE AGO" — tested 20 Sept 2026; the take is PUBLISHED.** `research/DARPA-RSI-CODEX.md`.
