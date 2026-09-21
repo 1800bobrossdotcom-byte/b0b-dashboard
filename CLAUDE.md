@@ -181,6 +181,37 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**AARON SWARTZ — researched 21 Sept 2026, unpublished. `research/SWARTZ.md`.** Author's correction on
+posture, verbatim: *"Epstein 'died by suicide' too... and that isn't our finding."* The medical examiner's
+ruling is recorded at tier (a spokesperson's report, attributed), not adopted — the same rule the page
+runs for Epstein. **But the parallel is of posture, not fact pattern, and the page must not imply the
+second by printing the first:** Swartz was on pre-trial release, not in custody — no camera, no cellmate,
+no contested autopsy, no retained pathologist. On *manner* the record is empty in both directions; that
+null is printed. **The documented tier is the twenty-four months before** (MIT Review Panel, 30 July 2013,
+read in full): USAO investigation opened **5 Jan 2011, the day before anyone was identified**; the Secret
+Service in the arrest party via its own Electronic Crimes Task Force on a call that in none of MIT
+Police's usual six-a-year computer calls had drawn a federal agent; **network logs and an 87 GB packet
+capture handed to the Secret Service without subpoena (drive 25 Jan; first subpoena 27 Jan)** and MIT's
+counsel later telling the defence the opposite — Panel: *"In fact, this was not true"*; the state case
+**dismissed 8 Mar 2012 because the USAO and Secret Service refused discovery to the DA**; four counts
+unbundled into **thirteen** (12 Sept 2012); the prosecutor telling MIT's counsel "general deterrence of
+others" was a consideration; **both nominal victims on record as not wanting the prosecution** (JSTOR:
+"It was the government's decision whether to prosecute, not JSTOR's"; MIT "never requested" one); the
+2008 manifesto used as intent though the Panel records **Swartz was not its sole author and the quoted
+sentences are of unknown hand** — the naming error, documented by the institution not on his side;
+motive "remaining open." Oversight: Issa–Cummings and Cornyn letters, Reich briefing (manifesto "played a
+role"), estate misconduct complaint → **no public finding located**; unsealing 13 May 2013 with names
+redacted; Secret Service FOIA files refused from here (wired 404, muckrock 403, vault.fbi.gov 403).
+Aaron's Law (H.R. 2454 / S. 1196, 20 June 2013, texts read) never enacted; **Van Buren (3 June 2021)
+narrowed "exceeds authorized access" and footnote 8 expressly left open the code-based-vs-contract
+question Aaron's Law would have answered.** PACER 2008: FBI, no charges; FOIA-retaliation link is
+Cornyn's question, not established. **Keepable finding: the same DOJ that declined federal charges
+against Epstein in 2007 brought thirteen felonies for downloading journal articles — discretion as the
+instrument, documented both ways.** Page carries Swartz 0 / CFAA 0. *Trap, new decoy shape:*
+`justice.gov/usao-ma/pr/…` serves a 2,545-byte Akamai `bm-verify` interstitial with HTTP 200 (the
+archive path `justice.gov/archive/usao/ma/news/…` still serves real pages). Candidate for `hosts.json`.
+Author's call on publication.
+
 **US AND ISRAELI WEAPONS VIA THE UAE; THE INTELLIGENCE FUNDING DOCS — 21 Sept 2026, unpublished.**
 `research/US-ARMS-UAE-SUDAN.md`, `research/INTEL-FUNDING-DOCS.md`. Three author questions. (1) *Does the US arm
 Sudan via arming the UAE?* **The law would bite** — 22 U.S.C. §2753(a)(2) requires presidential consent for any
