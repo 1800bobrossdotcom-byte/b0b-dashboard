@@ -181,6 +181,21 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**WHO ARMS SUDAN — researched 21 Sept 2026, unpublished.** `research/SUDAN-ARMS.md`. **Documented (primaries
+read in full):** OFAC 7 Jan 2025 — Hemedti designated with a **UAE-based** procurement/gold network (Capital Tap
+Holding "provided the RSF with money and military equipment"; AZ Gold moves Sudanese gold to Dubai; Algoney,
+the RSF procurement director, designated 8 Oct 2024); State's genocide determination same day is a
+determination, not a court finding. OFAC 16 Jan 2025 — Burhan designated; the SAF chain is **Iranian UAVs via an
+Azerbaijani company and a Hong Kong shell (Portex)** brokered by a Sudanese-Ukrainian DIS official. **ICJ Sudan v.
+UAE, 5 May 2025: removed from the List for manifest lack of jurisdiction — not a merits ruling either way.**
+**Attributed:** UAE flights via Amdjarass (NYT/WSJ/Guardian/BBC; UN Panel Jan 2024 "credible"); Bosaso/Puntland hub
+and Colombian contractors (to Apr 2026); Wagner SAMs via Haftar (CNN 2023); Iran, Turkey (Baykar), Russia (SAF from
+mid-2024, Port Sudan base talks), Egypt (jets, then drone strikes), Eritrea, Pakistan (Mohafiz-V Aug 2026) to the
+SAF; China and Serbia by manufacture to both. **Symmetry:** UAE's 30 Apr 2025 claim of intercepting SAF-bound
+ammunition. **Treasury names companies, not the Emirati state — the sovereign step is the attributed layer's.**
+*Trap:* `docs.un.org` serves a 4 KB viewer shell with 200 for `S/2024/65` — decoy; the Panel PDF is unread. Amnesty
+and HRW refuse the crawler. **Page carries the war in one Section XV entry and nothing on arms; author's call.**
+
 **MAP LABELING COHERENCE CHECK — second pass, 20 Sept 2026, all 1,182 markers. `research/MAP-LABEL-AUDIT.md`.**
 Name vs type, section, context, coordinates, and marker vs marker. **Coordinates are clean:** the Nominatim
 reverse-geocode pass finished (1,152 unique keys, cache `scratchpad/revgeo.json`, method in
