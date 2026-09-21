@@ -106,9 +106,30 @@ conflict of interest, not the contents* — the US is a party with an interest i
   guidance." State filed one 2018 certification and "did not submit two subsequent, required
   certifications."
 
-So in Yemen the UAE retransferred US-origin armoured vehicles to militias without consent, the
-Pentagon confirmed no consent was given, and the executive branch's own auditor found nobody
-investigated. **That is the documented precedent for the question the author is asking about
+- **Direct use, not retransfer — the second branch, supplied by the author (Columbia Magazine,
+  Fall 2022, read at source, ledgered).** A joint investigation by the **Security Force Monitor**
+  (Columbia Law School Human Rights Institute) and the **Washington Post**, published 4 June 2022
+  with a companion essay in *Just Security* by Tony Wilson and Priyanka Motaparthy, "concluded
+  that a 'substantial portion' of airstrikes that have killed civilians in Yemen have been carried
+  out by jets developed, sold, and maintained by US companies and flown by US-trained pilots."
+  Method: thousands of public news items, photographs and videos matched against US military
+  contracts to show that particular **Saudi, Emirati, Kuwaiti and Bahraini fighter squadrons**
+  flying over Yemen "are heavily reliant on US equipment and training." The authors' own line:
+  "It is high time for the United States to finally spend the time and resources to review
+  whether coalition squadrons that benefitted from U.S. military contracts conducted attacks in
+  Yemen that may constitute war crimes — and to disclose their findings to Congress and the
+  public." Against the government position the article quotes — that "there is no reason to
+  believe that American-made arms are commonly used in such strikes" — and against GAO's finding
+  the same month that nobody had investigated. **Tier: the investigation's existence, authorship,
+  date and headline finding are documented from the Columbia page; the squadron-level data are
+  attributed** — the *Just Security* URL answered the crawler with a redirect to the article's
+  header image (HTTP 200, `image/jpeg`; a new decoy shape, recorded), the Monitor's own post is
+  404, and the Post is robots-disallowed.
+
+So in Yemen the record has two branches. The UAE retransferred US-origin armoured vehicles to
+militias without consent, the Pentagon confirmed no consent was given, and the executive
+branch's own auditor found nobody investigated. And the coalition's own airstrikes on civilians
+were flown, in substantial part, in US-built and US-maintained jets by US-trained crews. **That is the documented precedent for the question the author is asking about
 Sudan: the mechanism exists, has been used, and was not policed.**
 
 **Libya — attributed, one strong specimen.** In June 2019 the Tripoli government found a cache

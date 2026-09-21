@@ -191,8 +191,12 @@ the UAE. Meanwhile GAO-22-105988: $54.6bn of US military support to Saudi/UAE FY
 and State could not provide evidence that it investigated any incidents of potential unauthorized use." Biden made the
 UAE a "major defense partner" 23 Sept 2024; Meeks hold Mar 2025; $1.32bn Chinooks approved May 2025; Senate JRDs June
 2025 (outcome unverified); Rubio Nov 2025 "knows which countries" supply the RSF. (2) *Are our weapons in those wars?*
-**Yemen: documented** — Amnesty (6 Feb 2019) and CNN (Feb 2019) traced US M-ATV/Caiman/MaxxPro/Oshkosh vehicles and TOWs
-to UAE-backed militias; Pentagon on record that no retransfer was authorised. **Libya: attributed** — US Javelins sold
+**Yemen: documented, two branches** — retransfer: Amnesty (6 Feb 2019) and CNN (Feb 2019) traced US M-ATV/Caiman/
+MaxxPro/Oshkosh vehicles and TOWs to UAE-backed militias, Pentagon on record that no retransfer was authorised; direct
+use (author-supplied, Columbia Magazine Fall 2022, ledgered): the Security Force Monitor + Washington Post investigation of
+4 June 2022 found a "substantial portion" of civilian-killing airstrikes were flown in US-developed, -sold and -maintained
+jets by US-trained Saudi/Emirati/Kuwaiti/Bahraini squadrons. *Trap:* justsecurity.org answered the crawler with a 200
+redirect to the article's header JPEG — a decoy shape not in `hosts.json` yet. **Libya: attributed** — US Javelins sold
 to the UAE in 2008 found at a Haftar base June 2019. **Sudan: null.** (3) *Israeli systems the same way?* Sudan:
 LAR-160 mounts and Galil ACE carbines with the RSF (Aug/Oct 2023, "likely a third party," attributed); **Predator
 spyware (Cytrox/Intellexa, Israeli subsidiaries) flown Cyprus→Athens→Khartoum 2022, Greek licence admitted 2023,
