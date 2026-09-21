@@ -181,6 +181,32 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**US AND ISRAELI WEAPONS VIA THE UAE; THE INTELLIGENCE FUNDING DOCS — 21 Sept 2026, unpublished.**
+`research/US-ARMS-UAE-SUDAN.md`, `research/INTEL-FUNDING-DOCS.md`. Three author questions. (1) *Does the US arm
+Sudan via arming the UAE?* **The law would bite** — 22 U.S.C. §2753(a)(2) requires presidential consent for any
+retransfer and (c) cuts off deliveries for substantial violation — **but no US-origin weapon has been found in Sudan
+by anyone tracing** (Amnesty, UN Panel, Bellingcat, Sudan's own Oct 2025 UNSC filing): the third-party list is
+Canada (Streit), UK (Militec, Cummins-engined Nimr APCs), Israel, Greece; Chinese Norinco kit is what moves through
+the UAE. Meanwhile GAO-22-105988: $54.6bn of US military support to Saudi/UAE FY2015–21, and "DOD has not reported
+and State could not provide evidence that it investigated any incidents of potential unauthorized use." Biden made the
+UAE a "major defense partner" 23 Sept 2024; Meeks hold Mar 2025; $1.32bn Chinooks approved May 2025; Senate JRDs June
+2025 (outcome unverified); Rubio Nov 2025 "knows which countries" supply the RSF. (2) *Are our weapons in those wars?*
+**Yemen: documented** — Amnesty (6 Feb 2019) and CNN (Feb 2019) traced US M-ATV/Caiman/MaxxPro/Oshkosh vehicles and TOWs
+to UAE-backed militias; Pentagon on record that no retransfer was authorised. **Libya: attributed** — US Javelins sold
+to the UAE in 2008 found at a Haftar base June 2019. **Sudan: null.** (3) *Israeli systems the same way?* Sudan:
+LAR-160 mounts and Galil ACE carbines with the RSF (Aug/Oct 2023, "likely a third party," attributed); **Predator
+spyware (Cytrox/Intellexa, Israeli subsidiaries) flown Cyprus→Athens→Khartoum 2022, Greek licence admitted 2023,
+Intellexa OFAC-designated Mar 2024** — the one near-documented chain; Israel announced Mossad/MFA contact with *both*
+Burhan and Hemedti on 16 Apr 2023. Libya: an Israeli air-defence system bought by the UAE and deployed via Haftar,
+Apr 2020 (attributed) — the cleanest Emirati-mediated Israeli specimen. **DECA is the Israeli AECA and the page has
+zero mentions of it; no Israeli equivalent of the GAO end-use audit exists in the public record found.** (Funding
+docs) **50 U.S.C. §3510(b): CIA money "accounted for solely on the certificate of the Director and every such
+certificate shall be deemed a sufficient voucher"** — the founding instrument; §3306 requires only the aggregate NIP
+(FY2025 $73.3bn NIP + $27.8bn MIP; FY2026 request $81.9bn + $33.6bn; first-ever disclosures $26.6bn FY1997/$26.7bn
+FY1998 via FOIA litigation); the FY2013 CBJB $52.6bn (Snowden/WaPo, robots-disallowed) is the only line-item document
+and is already on the page; *U.S. v. Richardson* (1974) declined the Statement-and-Account question on standing. Page
+has zero for NIP/MIP/CIA Act/unvouchered. All three files: author's call on publication.
+
 **WHO ARMS SUDAN — researched 21 Sept 2026, unpublished.** `research/SUDAN-ARMS.md`. **Documented (primaries
 read in full):** OFAC 7 Jan 2025 — Hemedti designated with a **UAE-based** procurement/gold network (Capital Tap
 Holding "provided the RSF with money and military equipment"; AZ Gold moves Sudanese gold to Dubai; Algoney,
