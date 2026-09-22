@@ -181,6 +181,56 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**CURRENT NEWS / EVENTS SCAN — 22 Sept 2026, PUBLISHED, live.** Author: *"update the report with a
+current news / events scan / social media and web."* The page's newest current-events entry was the XV
+status update of **3 Sept**, a nineteen-day gap. **Method that worked and should be re-used:** Wikipedia
+`Portal:Current_events/2026_September_NN` **day pages**, not the monthly page (the monthly page truncates
+at ~4 Sept in a WebFetch and the model will tell you the rest "does not exist"); then **every item that
+went on the page was re-verified against named outlets with dates.** Search results for 2026 queries
+routinely returned 2025 items — date-check everything. **Three new subsections + four appends:**
+- **XV `xv-status-update-22-september-2026`** — the **UN Independent International Fact-Finding Mission on
+  Iran, 17 Sept**, reasonable grounds that the US committed *the war crime of launching indiscriminate
+  attacks* on **28 Feb 2026** (the war's opening day): Minab elementary school ≥157 dead incl. 120
+  children, Lamerd sports hall 20 dead. **US rejected it ("unserious nonsense"), denies any Lamerd
+  strike — printed with the finding.** Hormuz tanker strikes vs CENTCOM's "six-month high" shipping
+  (symmetry pair); Iran GDP −10.1%; sanctions extended to 2031 (signed 18 Sept); Yemen escalation
+  (Mokha 10 Sept, Hanish Islands 14 Sept, 100k displaced); **the Afghanistan–Pakistan war the section
+  lacked** (Kohat bombing 18 Sept, 31 dead) — also added to the conflict-zones list; Ukraine (1,600+
+  drones on Moscow Oblast 20 Sept); **Greenland: US–Denmark–Greenland agreement 18 Sept**, permanent
+  basing, no sovereignty transfer, updates the 1951 pact.
+- **X `x-two-acknowledgments-in-one-month-…`** (toc 24 → 25) — **14 Sept: the Air Force Secretary
+  acknowledged on-orbit space-control weapons, the first US public confirmation of weapons in orbit**, no
+  type/number/orbit named; and the **Serbian spyware wave** (Citizen Lab + SHARE Foundation, 2–3 Sept):
+  ≥14 targets, Pegasus by **zero-click iMessage**, two **NoviSpy** infections, **one after police
+  confiscated the device during questioning** — the physical-custody vector. Both carried with the
+  constraint: *an acknowledged capability is not a use, a confirmed infection is not a confirmed
+  operator*; **no marker retyped and no operator named.**
+- **XVI `xvi-the-ground-zero-air-quality-records-…`** (toc 29 → 30) — **8 Sept: NYC released 170,000+
+  pages** of post-9/11 air-quality records, 68 boxes, many found only last year, settling survivor
+  litigation. Framed as the interval between knowing and publishing (25 years) and the point that
+  **nothing in it was classified**. *Limit printed: the report has not read the pages.*
+- **Appends:** XV Sudan — the **Al-Zar'a mine collapse, West Kordofan (RSF-held), 16 Sept**, toll printed
+  as a genuine range (67 Sudan Tribune / "at least 70" Al Jazeera / 82 others) **and the aggregator's
+  "explosion" corrected to "collapse"**; plus **Kenya (15 Sept), Ghana (1 Sept) and Zimbabwe forcing
+  domestic gold refining** — a direct move on the Dubai chokepoint; Eritrea sanctions lifted and the
+  Algeria–UAE break carried *with no mechanism attached* (anti-map). XV weapons — **UK RAF air-to-air
+  refuelling of Saudi aircraft, 21 Sept**, i.e. direct participation, the same support the US/coalition
+  arrangement ended in **Nov 2018** over civilian casualties; **Serbia's Yugoimport SDPR + Elbit drone
+  plant, 17 Sept** — and Yugoimport is the same producer the Sudan entry names supplying both sides;
+  *Nicaragua v. Germany* at the ICJ on arms exports. XVI UAP — the **sixth release, 18 Sept**, whose
+  centrepiece is 1952 Tremonton footage that **Blue Book (Dec 1952) called pillow balloons and the Naval
+  Photographic Interpretation Center (1954) called not consistent with natural phenomena**: a
+  declassification that publishes a disagreement instead of resolving it. II compellability — **Oversight
+  41–0 on 15 Sept and the House holding Leon Black in contempt by unanimous consent on 16 Sept**, over the
+  **subpoenaed NDAs**, referred to the DOJ; and **9 Sept: Norway, Poland, Latvia and the UK say their
+  mutual legal assistance requests are unfulfilled**, with DOJ's denial quoted and the symmetry note that
+  *delay is not refusal* — the page had **MLAT 0** before this. Heading/TOC text moved 5 Sept → 16 Sept;
+  **the id was left unchanged so anchors keep working.**
+**Scale line 279 / 1,086 / 132.** *Traps:* an idempotency key must be unique to its own block — "air-to-air
+refuelling of Saudi aircraft" appeared in both the status update and the weapons append and the guard
+fired correctly; `build-transmissions.py` has now failed **twice running** (404 on 21 Sept, 500 on 22 Sept)
+and left the reel untouched as designed — **if it fails a third time treat the feed as broken, not flaky.**
+
 **"ISRAELI MILITARY-GRADE CERAGON AT ZORRO RANCH" — tested 21 Sept 2026, unpublished.**
 `research/ZORRO-MICROWAVE.md`. Author-supplied claim off DOJ `EFTA01124507` (DataSet 9, fetched, sha256
 `4e4113b2…2f671`, read in full). **The document is real; the adjectives are not.** It is two competing
