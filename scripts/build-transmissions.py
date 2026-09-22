@@ -11,6 +11,13 @@ Sources, both public and unauthenticated:
     scripts/transmissions.json. Vimeo is curated by id on purpose: the same
     account also carries client and spec work that is not this site's subject.
     Add an id to `vimeo_ids` to include a piece; nothing is pulled implicitly.
+  - YouTube videos that are NOT on the channel, listed in `youtube_ids` as
+    objects: {"id", "date", "sub", optionally "title"}. Title and thumbnail
+    come from YouTube's public oEmbed endpoint when online. `date` and `sub`
+    are curated because oEmbed carries neither, and the watch page itself
+    refuses this crawler (402-byte stub), so an upload date cannot be read
+    from here - state in the entry what the date actually refers to rather
+    than implying it is the upload date.
 
 The fetched entries are written to scripts/transmissions.json under `entries`
 so the reel is reproducible without the network and the diff of any rebuild is
@@ -27,6 +34,7 @@ import json
 import os
 import re
 import sys
+import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 
@@ -77,6 +85,30 @@ def vimeo(video_id):
     }
 
 
+def youtube_one(spec):
+    """A single YouTube video that is not on the channel feed. Curated."""
+    vid = spec['id'] if isinstance(spec, dict) else str(spec)
+    meta = spec if isinstance(spec, dict) else {}
+    title = meta.get('title')
+    thumb = 'https://i.ytimg.com/vi/%s/hqdefault.jpg' % vid
+    if not title:
+        o = json.loads(get('https://www.youtube.com/oembed?url=%s&format=json'
+                           % urllib.parse.quote('https://www.youtube.com/watch?v=' + vid, safe='')))
+        title = o.get('title') or ''
+        thumb = o.get('thumbnail_url') or thumb
+    if not title:
+        raise RuntimeError('no title for curated YouTube id ' + vid)
+    return {
+        'kind': 'youtube', 'id': vid,
+        'title': title,
+        'sub': meta.get('sub', ''),
+        'date': meta.get('date') or datetime.date.today().isoformat(),
+        'thumb': thumb,
+        'href': 'https://www.youtube.com/watch?v=' + vid,
+        'dur': meta.get('dur'),
+    }
+
+
 def nice(d):
     return datetime.date.fromisoformat(d).strftime('%b %Y').upper()
 
@@ -104,14 +136,30 @@ def main():
     offline = '--offline' in sys.argv
     cfg = json.load(open(CFG, encoding='utf-8'))
     if offline:
-        entries = cfg.get('entries') or []
+        entries = list(cfg.get('entries') or [])
         if not entries:
             sys.exit('build-transmissions: no cached entries to build from')
+        # A curated id added since the last successful fetch still belongs in the
+        # reel. It can be built here without the network only if it carries its
+        # own title; otherwise say so rather than dropping it silently.
+        have = {(v['kind'], v['id']) for v in entries}
+        for spec in cfg.get('youtube_ids', []):
+            vid = spec['id'] if isinstance(spec, dict) else str(spec)
+            if ('youtube', vid) in have:
+                continue
+            if isinstance(spec, dict) and spec.get('title'):
+                entries.append(youtube_one(spec))
+            else:
+                print('build-transmissions: curated id %s has no cached entry and no title; '
+                      'skipped in offline mode' % vid, file=sys.stderr)
+        entries.sort(key=lambda v: v['date'], reverse=True)
     else:
         try:
             entries = youtube(cfg['youtube_channel_id'])
             for vid in cfg.get('vimeo_ids', []):
                 entries.append(vimeo(vid))
+            for spec in cfg.get('youtube_ids', []):
+                entries.append(youtube_one(spec))
         except Exception as e:
             sys.exit('build-transmissions: fetch failed, reel left untouched: %s' % e)
         entries.sort(key=lambda v: v['date'], reverse=True)

@@ -1,9 +1,18 @@
 {
- "_comment": "Feeds for the home-page TRANSMISSIONS reel. YouTube is pulled whole (feed = 15 most recent). Vimeo is curated by id on purpose - the account also carries client and spec work that is not this site's subject. `entries` is written by scripts/build-transmissions.py and is the reproducible source for --offline builds.",
+ "_comment": "Feeds for the home-page TRANSMISSIONS reel. YouTube is pulled whole (feed = 15 most recent). Vimeo is curated by id on purpose - the account also carries client and spec work that is not this site's subject. `entries` is written by scripts/build-transmissions.py and is the reproducible source for --offline builds. YouTube videos that are not on the channel go in youtube_ids, curated by id with their own date and note.",
  "youtube_channel_id": "UCFDLK0U42dTD1n6MBhWM6qA",
  "youtube_channel_url": "https://www.youtube.com/@ERC-1155",
  "vimeo_ids": [
   "1228401790"
+ ],
+ "youtube_ids": [
+  {
+   "id": "7eNqNfURcxw",
+   "title": "Restless Leg Syndrome - Represent the fucking planet",
+   "sub": "site soundtrack — from Totem (2021); uploaded by the label, Duzz Down San",
+   "date": "2021-08-06",
+   "date_note": "track release date; the YouTube upload date could not be read - the watch page refuses this crawler"
+  }
  ],
  "entries": [
   {
@@ -165,7 +174,17 @@
    "thumb": "https://i.ytimg.com/vi/hwUv6CX1cFQ/hqdefault.jpg",
    "href": "https://www.youtube.com/watch?v=hwUv6CX1cFQ",
    "dur": null
+  },
+  {
+   "kind": "youtube",
+   "id": "7eNqNfURcxw",
+   "title": "Restless Leg Syndrome - Represent the fucking planet",
+   "sub": "site soundtrack — from Totem (2021); uploaded by the label, Duzz Down San",
+   "date": "2021-08-06",
+   "thumb": "https://i.ytimg.com/vi/7eNqNfURcxw/hqdefault.jpg",
+   "href": "https://www.youtube.com/watch?v=7eNqNfURcxw",
+   "dur": null
   }
  ],
- "fetched_at": "2026-09-20T19:28:13+00:00"
+ "fetched_at": "2026-09-22T18:51:58+00:00"
 }

@@ -181,6 +181,54 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**THE SITE HAS A SOUNDTRACK, AND THE WANTED-LIST QUESTION IS PUBLISHED — 22 Sept 2026, live.**
+Author: *"why is david myatt not on interpol or fbi most wanted lists"*, then *"add and the autoplay audio -
+Represent The Fucking Planet - by Restless Leg Syndrome"*, then *"add this to the playlist tho"*.
+- **XVI gained `xvi-why-a-name-is-not-on-a-wanted-list-the-instrument-measures-warrants-not-danger`**
+  (toc 30 → 31). **The finding is the mechanism, not the man:** a Red Notice needs an arrest warrant or
+  court order already issued by a member state's judicial authorities via its NCB (INTERPOL never
+  initiates); the FBI Most Wanted Terrorists list (created 10 Oct 2001) needs a **federal grand jury
+  indictment** plus a publicity test. **No warrant, no listing.** Myatt: two custodial terms in the early
+  1970s for political violence, and a **Feb 1998** Scotland Yard investigation for incitement to murder /
+  racial hatred over *A Practical Guide to Aryan Revolution* **dropped after three years** for want of
+  evidence from Canadian authorities. Lives openly in England under his own name. **INTERPOL Article 3**
+  ("strictly forbidden … political, military, religious or racial character", predominance test) is a
+  second independent bar. **Authorship of the O9A corpus as "Anton Long" is ATTRIBUTED — scholarly
+  consensus plus the group's own 2016 acknowledgment, never a court finding — and must not be promoted.**
+  The asymmetry is the keepable part: **NZ designated the O9A a terrorist entity 7 Dec 2025** (s29B
+  Terrorism Suppression Act 2002; Canada designated two cells the same day; NZ's statements of case call
+  it a network practising **stochastic terrorism** and do not claim NZ activity), **the UK has not
+  proscribed it**, and a **March 2023 US federal case sentenced a soldier to 45 years** over an ambush plot
+  with no charge reaching the alleged author. **Symmetry printed hard: absence from a list is evidence
+  about the instrument, not the man — exoneration and "he's protected" are the same error** (guaranteed
+  null). Page had Myatt 0 / O9A 0 before this.
+- **SOUNDTRACK — `site/soundtrack.js`, loaded by `report.html` only** (the report is `/`, the landing
+  page). Restless Leg Syndrome, *Represent The Fucking Planet* (from *Totem*, 2021), played from the
+  **label's** YouTube upload (Duzz Down San, id `7eNqNfURcxw`) through youtube-nocookie — **nothing is
+  rehosted, so there is no licensing exposure.** **No CSP or server.js change was needed and none was
+  made:** `frameSrc`/`scriptSrc` already admit youtube.com + youtube-nocookie.com and the
+  **Permissions-Policy header already delegates `autoplay` to those origins**. **AUTOPLAY IS ATTEMPTED,
+  NOT PROMISED** — Permissions-Policy governs whether the feature is *allowed*; Chrome's media-engagement
+  heuristic still decides whether *unmuted* audio may start without a gesture, and usually refuses on a
+  first visit. So state comes from the **IFrame API's `onStateChange`**, never from our intent: the button
+  cannot claim to be playing when it is not. It **ducks for the narrator** (polls
+  `speechSynthesis.speaking`, so `report-tts.js` needed no edit), **remembers a stop** in localStorage
+  (every access try/caught), removes itself if the API fails to load, and sits **bottom-left** — the only
+  free corner, since signal-bar owns the full-width bottom strip and report-tts owns bottom-centre and
+  bottom-right (it uses `--b0b-signal-h` to clear them).
+- **PLAYLIST — `scripts/build-transmissions.py` gained a `youtube_ids` curated list**, parallel to
+  `vimeo_ids`, for YouTube videos **not on the ERC-1155 channel** (the Atom feed only covers the channel).
+  Title/thumb come from YouTube's public **oEmbed** endpoint; `date` and `sub` are curated because oEmbed
+  carries neither. **Offline mode now merges curated ids that post-date the last fetch**, provided the
+  entry carries its own `title` — so the reel stays reproducible without network. **Reel is 17 cards.**
+  *Trap:* the **watch page refuses this crawler (402-byte stub)**, so no upload date is obtainable here —
+  the entry carries the **track release date** (2021-08-06) with a `date_note` saying exactly that. Do not
+  present it as an upload date. **`build-transmissions.py` succeeded live this time** after the 404/21 Sept
+  and 500/22 Sept failures, so the feed is flaky rather than broken — the third-failure rule is not tripped.
+**Scale line 280 / 1,094 / 133.** security-selftest 33/33; seo-selftest 47/48 (the pre-existing 84-char
+concordance title). **`index.html` changed, so check-live.js alone is not proof** — the reel was verified
+by polling `/home` for the new card id (§4 step 9).
+
 **CURRENT NEWS / EVENTS SCAN — 22 Sept 2026, PUBLISHED, live.** Author: *"update the report with a
 current news / events scan / social media and web."* The page's newest current-events entry was the XV
 status update of **3 Sept**, a nineteen-day gap. **Method that worked and should be re-used:** Wikipedia
