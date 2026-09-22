@@ -181,6 +181,33 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**SHINYHUNTERS v THE FBI — author dropped the 404 Media link 22 Sept 2026; PUBLISHED same day as XVI
+`xvi-a-claim-against-the-bureau-and-a-ransom-demanded-in-retractions` (toc 31 → 32).** **The keepable
+finding is the demand, not the breach: the ransom is a retraction.** The group gave the Bureau **seven
+days** to correct or remove its **PSA of 15 May 2026** — addressed to the FBI Director and the Cyber
+Division assistant director — and says the operation is *"NOT financially motivated."* That PSA had
+warned the group pressures victims by threatening victims' **family members** and, in some cases,
+**swatting**. *Every other extortion on the page targets money or silence about a fact; this one targets
+the text of a government document.* **And it is self-refuting:** the same PSA warns that such attackers
+**exaggerate their claimed access** — so the leverage is a claim of exactly the kind the document being
+attacked says is inflated. A retraction under that pressure would prove the warning right, not wrong.
+**Tiering, which is the whole job here:** *documented* — the claim, date, deadline, addressees, the PSA's
+contents, and that the capability class is real (**CVE-2026-35273**, unauthenticated RCE in PeopleSoft
+Enterprise PeopleTools, **CVSS 9.8**, exploited as a true zero-day before Oracle's **10 June 2026**
+advisory; Mandiant dated activity **27 May–9 June**, 100+ orgs notified, ~⅔ higher education).
+*Attributed* — a ~**5,000**-record sample whose phone numbers an outlet matched to like-named people.
+**Not established at any tier** — the breach itself, the 2–3 TB figure, the word "all", and the *new*
+second zero-day claimed; **FBI, Oracle and AWS have confirmed nothing.** *Symmetry from the group's own
+history, not from sympathy for the Bureau:* **NAIC, a named prior victim of the same flaw, said publicly
+that what was actually taken was public data, stale logs and config files** — so scope is the part to
+hold loosest. **Guaranteed-null stated explicitly about FBI silence:** deny = cover-up, confirm =
+vindication, say nothing = confirmation; a test scoring every outcome for the claim is not a test.
+**HARD RULE WRITTEN INTO THE ENTRY — no portion of the data is reproduced, summarised, characterised or
+pointed to, and no individual in it will ever appear on the page**, because the FBI's own PSA documents
+that this group swats people; helping resolve a name would be participating in that. **Live and
+unresolved — record the outcome either way, including if the claim collapses.** **Scale line
+281 / 1,101 / 134.**
+
 **THE SITE HAS A SOUNDTRACK, AND THE WANTED-LIST QUESTION IS PUBLISHED — 22 Sept 2026, live.**
 Author: *"why is david myatt not on interpol or fbi most wanted lists"*, then *"add and the autoplay audio -
 Represent The Fucking Planet - by Restless Leg Syndrome"*, then *"add this to the playlist tho"*.
