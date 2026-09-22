@@ -446,9 +446,11 @@
     videoMode = !!video;
     clearTimeout(gateT);
     gated = videoMode;
-    // If the film has not started within 6 s the narration goes ahead anyway;
+    // If the film has not started within 15 s the narration goes ahead anyway;
     // the hold at every part boundary pulls picture and voice back together.
-    if (gated) gateT = setTimeout(function () { gated = false; }, 6000);
+    // 6 s was too short: through a slow link the live film took 8.5 s to start
+    // and she began ahead of it. The shimmer on the bar makes the wait honest.
+    if (gated) gateT = setTimeout(function () { gated = false; }, 15000);
     if (video) {
       video.loop = false;
       try { video.pause(); video.currentTime = 0; } catch (e) {}

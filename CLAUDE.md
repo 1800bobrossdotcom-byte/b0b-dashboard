@@ -220,7 +220,8 @@ finishes**; newsreel audio ducks to 0.1 under her. A probe drops to captions-onl
 started within 3 s. iOS Safari needs a silent utterance queued *inside* the click — done.
 **SYNC DEFECT FOUND ONLY ON PRODUCTION, FIXED:** locally the video starts instantly, so the first test showed
 perfect sync; **on the live site the 8 MB file took ~4 s to start and she was four seconds ahead of the
-picture.** The narration is now **gated on the video's `playing` event** (6 s fallback; the part-boundary
+picture.** The narration is now **gated on the video's `playing` event** (15 s fallback — 6 s was too short: through a slow link the live film
+took 8.5 s to start and she began 2.4 s ahead; the part-boundary
 hold resyncs after any stall), with a cyan loading shimmer on the progress bar meanwhile. Proven by holding
 the video response 3.5 s: PLAY 3.87 s → picture 7.49 s → first word 7.50 s. **Lesson: test media sync over
 a real network, not localhost.** *Cascade trap caught before shipping:* `transform:none!important` on the
