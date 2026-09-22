@@ -222,6 +222,7 @@
   var muted = false, narrate = true, speechOk = true;
   var spoken = {}, narrToken = 0, keep = [];
   var seeking = false, lastFocus = null;
+  var gated = false, gateT = 0;   // true until the picture is actually moving
 
   function setState(s) {
     state = s;
@@ -330,6 +331,11 @@
 
   // ---- the loop ---------------------------------------------------------------
   function paint(t) {
+    // Over a real network the first seconds of an 8 MB file can take a while
+    // to arrive. Nothing is spoken until the picture is actually moving - on
+    // production the first test had her four seconds ahead of the footage.
+    el.classList.toggle('bi-loading', gated);
+    if (gated) { setSub(''); return; }
     var i = chapterAt(t);
     if (i !== chIdx) enterPart(i);
     if (t < REEL_DUR && REEL.length) {
@@ -438,6 +444,11 @@
     setState('film');
     size();
     videoMode = !!video;
+    clearTimeout(gateT);
+    gated = videoMode;
+    // If the film has not started within 6 s the narration goes ahead anyway;
+    // the hold at every part boundary pulls picture and voice back together.
+    if (gated) gateT = setTimeout(function () { gated = false; }, 6000);
     if (video) {
       video.loop = false;
       try { video.pause(); video.currentTime = 0; } catch (e) {}
@@ -458,11 +469,13 @@
     raf = requestAnimationFrame(frame);
   }
   function noVideo() {
+    gated = false; clearTimeout(gateT);
     videoMode = false;
     el.classList.add('bi-reel-off');
   }
   if (video) {
     video.addEventListener('ended', function () { if (state === 'film') goMap(); });
+    video.addEventListener('playing', function () { if (state === 'film' && gated) { gated = false; clearTimeout(gateT); } });
     video.addEventListener('error', function () { if (state === 'film') noVideo(); }, true);
   }
 
@@ -481,6 +494,7 @@
     if (video) { try { video.pause(); } catch (e) {} }
     setState('idle');
     setSub('');
+    el.classList.remove('bi-loading');
     el.classList.add('bi-out');
     setTimeout(function () {
       if (state !== 'idle') return;         // reopened during the fade
@@ -543,7 +557,7 @@
   // shows its first frame and nothing else. These render one exact moment, or
   // one card, with the live loop stopped. Nothing on the site calls them.
   window.__b0bIntroSeek = function (ms) {
-    seeking = true;
+    seeking = true; gated = false;
     cancelAnimationFrame(raf); clearCountdown(); stopSpeech();
     startCard.hidden = true; endCard.hidden = true;
     el.hidden = false;
