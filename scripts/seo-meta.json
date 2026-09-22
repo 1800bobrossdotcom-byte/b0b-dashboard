@@ -33,6 +33,23 @@
       ]
     },
     {
+      "file": "intro.html",
+      "title": "b0b.dev - the intro film",
+      "metaDescription": "A three-minute film in eight parts from public-domain archive footage - Nuremberg, HUAC, Ivy Mike, Explorer 1, Cuba, 1967, Iran-Contra - with every shot's source on screen.",
+      "ogDescription": "Nuremberg to Iran-Contra in three minutes, cut from public-domain newsreel and government film and narrated. Every shot's source is printed on screen while it plays.",
+      "jsonldType": "VideoObject",
+      "headline": "b0b.dev - the intro film: the record, the instrument, the capability, the overhead, the annotation, the public, the inquiry, the ledger",
+      "ogImage": "/img/intro-card.jpg",
+      "contentPath": "/intro-reel.mp4",
+      "duration": "PT3M20S",
+      "topics": [
+        "archive film",
+        "public domain newsreel",
+        "OSINT method",
+        "provenance"
+      ]
+    },
+    {
       "file": "map.html",
       "title": "OSINT world map: surveillance sites & Epstein network — b0b.dev",
       "metaDescription": "interactive OSINT map of 1,178 sites: surveillance infrastructure, black sites, the Epstein-Maxwell network, ALPR cameras, live aircraft and quake feeds.",

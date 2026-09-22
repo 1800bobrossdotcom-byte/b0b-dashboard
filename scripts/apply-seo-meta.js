@@ -27,6 +27,7 @@ const COPY = JSON.parse(fs.readFileSync(process.argv[2] || path.join(__dirname, 
 const URLS = {
   'index.html': '/home',   // '/' has redirected to /report since 19 Sept 2026
   'report.html': '/report',
+  'intro.html': '/intro',
   'map.html': '/map',
   'countermeasures.html': '/countermeasures',
   'artifact.html': '/artifact',
@@ -52,6 +53,10 @@ function esc(t) {
   return String(t).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
+// A page may carry its own share image (the intro film does); otherwise the
+// site card is used.
+function ogImage(p) { return p.ogImage ? HOST + p.ogImage : OG_IMAGE; }
+
 function jsonld(p, url) {
   const base = {
     '@context': 'https://schema.org',
@@ -59,7 +64,7 @@ function jsonld(p, url) {
     name: p.headline,
     url,
     description: p.metaDescription,
-    image: OG_IMAGE,
+    image: ogImage(p),
   };
   if (p.jsonldType === 'WebSite') {
     return [base];
@@ -72,7 +77,13 @@ function jsonld(p, url) {
     base.mainEntityOfPage = url;
     if (modified) base.dateModified = modified;
   }
-  if (p.jsonldType === 'WebApplication') {
+  if (p.jsonldType === 'VideoObject') {
+    base.thumbnailUrl = ogImage(p);
+    if (p.contentPath) base.contentUrl = HOST + p.contentPath;
+    if (p.duration) base.duration = p.duration;
+    if (modified) base.uploadDate = modified;
+  }
+    if (p.jsonldType === 'WebApplication') {
     base.applicationCategory = 'UtilityApplication';
     base.operatingSystem = 'Web';
     base.offers = { '@type': 'Offer', price: '0', priceCurrency: 'USD' };
@@ -131,13 +142,13 @@ for (const p of COPY.pages) {
   <meta property="og:description" content="${esc(p.ogDescription)}">
   <meta property="og:type" content="${ogType}">
   <meta property="og:url" content="${url}">
-  <meta property="og:image" content="${OG_IMAGE}">
+  <meta property="og:image" content="${ogImage(p)}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${esc(p.title)}">
   <meta name="twitter:description" content="${esc(p.ogDescription)}">
-  <meta name="twitter:image" content="${OG_IMAGE}">
+  <meta name="twitter:image" content="${ogImage(p)}">
 ${ld}
   <!-- seo:end -->`;
   s = s.replace(/<\/title>\n?/, `</title>\n${block}\n`);

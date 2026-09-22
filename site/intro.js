@@ -1,301 +1,573 @@
-/* intro.js — the ten-second loading intro for b0b.dev.
+/* intro.js — the b0b.dev intro film.
  *
- * WHAT IT PLAYS, AND WHY IT CAN PLAY IT.
- * Five shots of real events: the prosecution's structure chart standing in the
- * Nuremberg courtroom (1945), the Ivy Mike fireball (1952), Explorer 1 leaving
- * the pad (1958), the peace march filling the park (1967), and the Iran-Contra
- * committee in session (1987). Every one is public domain or CC0, pulled from
- * a named archive item, cut by scripts/build-intro-reel.py, and CITED ON THE
- * SCREEN WHILE IT PLAYS. That caption is not decoration - it is the same rule
- * the rest of the site runs on. Footage nobody can trace is worth exactly as
- * much as a claim nobody can check.
+ * WHAT IT IS. A three-minute film in eight parts, cut from public-domain and
+ * CC0 newsreel and government film (scripts/intro-reel.json names every item),
+ * narrated live in a British voice, with the source of each shot printed on
+ * screen while it plays. It opens on a start card over a muted loop of the
+ * footage; the reader chooses to watch it or to go straight to the report.
  *
- * The picture is cut and scaled and nothing else: no grade, no retime, no crop
- * for drama. The grain, the scanlines and the vignette live in the overlay,
- * over the footage rather than inside it, so the record and the styling can
- * never be confused for one another.
+ * WHY THE NARRATION IS SPOKEN BY THE BROWSER, NOT BAKED INTO THE FILE.
+ * The site already reads the report aloud through the reader's own speech
+ * engine (report-tts.js), preferring British voices. The film uses the same
+ * layer and asks it for a British WOMAN's voice by name - Sonia, Libby, Serena,
+ * Kate, Hazel, Martha, "Google UK English Female" - falling back to the best
+ * British voice there is. Every word is also on screen, so the film is
+ * complete with the sound off, with speech blocked, or with no engine at all.
  *
- * The last beat is the site's own map - 1,178 documented markers assembling
- * under the wordmark. It is the one piece of "world footage" this site does
- * own, and putting it last says what the five archive shots are doing here:
- * the same job, a century apart.
+ * WHY IT STARTS ON A CARD. Browsers will not start unmuted audio, and will not
+ * speak, without a gesture from the reader. A film whose argument is in its
+ * narration therefore has to ask first; pretending otherwise produces a silent
+ * film that looks broken. The card is that question, asked once.
  *
- * IT IS A LOADER, NOT A GATE. The click-gate was removed on 19 Sept 2026 at
- * the author's instruction - the site lands on the report. So this overlay:
- *   - shows at most ONCE PER SESSION (sessionStorage),
- *   - is skippable by click, any key, Escape, or the SKIP button,
- *   - dismisses itself at 10s no matter what,
- *   - is created by JS only, so crawlers and no-JS readers never see it,
- *   - and FAILS OPEN: report.html's inline bootstrap removes the overlay on a
- *     timer even if this file never loads. A document must never be held
- *     hostage by its own decoration.
+ * IT IS STILL A LOADER, NOT A GATE. The click-gate was removed on 19 Sept 2026
+ * at the author's instruction and must not come back through the side door:
+ *   - the card shows at most once per session and never on a deep link
+ *     (report.html's bootstrap decides that before this file loads),
+ *   - left untouched, it dissolves into the report on its own after 14 s,
+ *     with a visible countdown,
+ *   - ENTER, Escape and SKIP always go straight to the report,
+ *   - and report.html's bootstrap removes the overlay on a timer if this file
+ *     never loads. A document must never be held hostage by its decoration.
+ * On /intro (data-mode="page") the film is the page, so none of that applies.
  *
- * IT ALSO FAILS SOFT. If the video will not play - blocked, still buffering,
- * codec refused - the map runs for the full ten seconds instead and the intro
- * is exactly what it was before the footage existed. Nothing waits on bytes.
+ * THE PICTURE IS THE RECORD; THE STYLING IS NOT. Footage is cut and scaled and
+ * nothing else. Grain, scanlines and vignette are drawn over it here, where
+ * they cannot be mistaken for the film.
  *
- * prefers-reduced-motion: no video and no animation. Text at rest, short hold.
- *
- * It also solves the soundtrack's autoplay problem: dismissing the intro is a
- * user gesture, and a gesture is what the browser's media-engagement policy
- * wants before it will allow unmuted audio. If the reader has not previously
- * silenced the soundtrack, that gesture starts it.
+ * SYNC. The video is the spine. Each part's narration starts as the part
+ * begins; if she is still speaking when the part's last shot ends, the picture
+ * holds on its final frame until she finishes. The newsreels' own sound ducks
+ * under her voice and comes back up between parts.
  */
 (function () {
   'use strict';
   var el = document.getElementById('b0b-intro');
-  if (!el || el.dataset.done === '1') return;
+  if (!el || el.dataset.claimed === '1') return;
+  el.dataset.claimed = '1';
 
-  var DURATION = 10000, FADE = 700;
-  // The sweep has to FINISH with time to spare. At 1500 it completed 250ms
-  // before the fade began and the resolve never landed - the whole point of
-  // the last beat is the assembled map, not the assembling.
-  var MAP_HOLD = 1100;          // how long the map beat runs before the fade
+  var MODE = el.dataset.mode === 'page' ? 'page' : 'overlay';
+  var SHARE_URL = 'https://www.b0b.dev/intro';
+  var SHARE_TEXT = 'b0b.dev — a three-minute film cut from public-domain footage. Every shot cited.';
+  var AUTO_ENTER = 14000;     // an untouched start card dissolves into the report
+  var MAP_SWEEP = 2600;       // the closing map assembles in this long
+  var MAP_TEXT = 24;          // seconds the closing part runs when nothing is speaking
+  var FADE = 600;
+  var VOL_UP = 0.55, VOL_DUCK = 0.1;
 
-  var video = el.querySelector('video');
-  var canvas = el.querySelector('canvas');
-  var capEl = el.querySelector('.b0b-intro-cap');
-  var lineWrap = el.querySelector('.b0b-intro-lines');
-  var plate = el.querySelector('.b0b-intro-plate');
-  var skipBtn = el.querySelector('.b0b-intro-skip');
+  var REEL = window.B0B_INTRO_REEL || [];
+  var CH = window.B0B_INTRO_CHAPTERS || [];
+  var REEL_DUR = window.B0B_INTRO_REEL_DUR || 0;
+  var pts = window.B0B_INTRO_POINTS || [];
+  var TOTAL = window.B0B_INTRO_TOTAL || 0;
 
   var reduced = false;
-  try {
-    reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  } catch (e) {}
+  try { reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+  var synth = ('speechSynthesis' in window) ? window.speechSynthesis : null;
 
-  var total = window.B0B_INTRO_TOTAL || 0;
-  var pts = window.B0B_INTRO_POINTS || [];
-  var REEL = window.B0B_INTRO_REEL || [];
-  var REEL_MS = (window.B0B_INTRO_REEL_DUR || 0) * 1000;
+  // ---- markup: one source of truth for report.html and intro.html ----------
+  el.innerHTML =
+    '<div class="bi-stage">' +
+      '<div class="bi-plate">' +
+        '<video playsinline muted preload="metadata" poster="/intro-poster.jpg?v=2" aria-hidden="true">' +
+          '<source src="/intro-reel.webm?v=2" type="video/webm">' +
+          '<source src="/intro-reel.mp4?v=2" type="video/mp4">' +
+        '</video>' +
+        '<canvas aria-hidden="true"></canvas>' +
+        '<div class="bi-scan" aria-hidden="true"></div>' +
+        '<div class="bi-grain" aria-hidden="true"></div>' +
+        '<div class="bi-chapter" aria-hidden="true"><b></b><span></span></div>' +
+        '<div class="bi-src" aria-hidden="true"></div>' +
+        '<div class="bi-sub" aria-live="polite"><span></span></div>' +
+      '</div>' +
+      '<div class="bi-bar" aria-hidden="true"><i></i></div>' +
+    '</div>' +
+    '<div class="bi-card bi-start">' +
+      '<div class="bi-mark">b0b.dev</div>' +
+      '<div class="bi-kicker">a short film in eight parts &middot; 3 min<br>public-domain footage &middot; every shot cited</div>' +
+      '<div class="bi-actions">' +
+        '<button type="button" class="bi-btn bi-play">&#9654;&nbsp; WATCH THE FILM</button>' +
+        '<button type="button" class="bi-btn bi-ghost bi-enter">ENTER THE REPORT &rarr;</button>' +
+      '</div>' +
+      '<div class="bi-note">narrated &middot; sound on</div>' +
+      '<div class="bi-count" aria-hidden="true"><i></i></div>' +
+    '</div>' +
+    '<div class="bi-card bi-end" hidden>' +
+      '<div class="bi-mark">b0b.dev</div>' +
+      '<div class="bi-greek" lang="grc">&tau;&epsilon;&tau;&#941;&lambda;&epsilon;&sigma;&tau;&alpha;&iota;</div>' +
+      '<div class="bi-actions">' +
+        '<button type="button" class="bi-btn bi-ghost bi-replay">&#8635;&nbsp; WATCH AGAIN</button>' +
+        '<button type="button" class="bi-btn bi-enter">ENTER THE REPORT &rarr;</button>' +
+      '</div>' +
+      '<div class="bi-share" role="group" aria-label="Share the film">' +
+        '<span class="bi-share-l">share the film</span>' +
+        '<a data-net="x" target="_blank" rel="noopener noreferrer">X</a>' +
+        '<a data-net="bsky" target="_blank" rel="noopener noreferrer">Bluesky</a>' +
+        '<a data-net="fb" target="_blank" rel="noopener noreferrer">Facebook</a>' +
+        '<a data-net="li" target="_blank" rel="noopener noreferrer">LinkedIn</a>' +
+        '<a data-net="rd" target="_blank" rel="noopener noreferrer">Reddit</a>' +
+        '<a data-net="mail">Email</a>' +
+        '<button type="button" data-net="copy">Copy link</button>' +
+        '<button type="button" data-net="native" hidden>Share&hellip;</button>' +
+      '</div>' +
+      '<div class="bi-credit">Footage: Universal Newsreel via NARA (public domain); US DOE film 0800012 and NARA ARC 11161 (CC0). Sources listed in the page’s shot list.</div>' +
+    '</div>' +
+    '<div class="bi-ctl">' +
+      '<button type="button" class="bi-mute" aria-pressed="false">SOUND ON</button>' +
+      '<button type="button" class="bi-skip">SKIP &rsaquo;</button>' +
+    '</div>';
 
-  // Where the footage ends and the map begins. If the video never starts this
-  // is rewritten to 0 and the map simply takes the whole ten seconds.
-  var mapAt = REEL_MS ? REEL_MS : 0;
+  var $ = function (s) { return el.querySelector(s); };
+  var video = $('video'), canvas = $('canvas'), plate = $('.bi-plate');
+  var chNum = $('.bi-chapter b'), chTitle = $('.bi-chapter span');
+  var srcEl = $('.bi-src'), subEl = $('.bi-sub span');
+  var startCard = $('.bi-start'), endCard = $('.bi-end');
+  var barEl = $('.bi-bar i'), countEl = $('.bi-count i');
+  var muteBtn = $('.bi-mute'), skipBtn = $('.bi-skip');
 
-  var LINES = [
-    { at: 1200, text: total ? (total.toLocaleString() + ' documented sites · 24 sections') : '24 sections' },
-    { at: 4200, text: 'documented · attributed · labeled · contested' },
-    { at: 7900, text: 'b0b.dev', wordmark: true }
-  ];
-
-  var raf = 0, start = 0, done = false, seeking = false, typed = [];
-  var videoOk = false, capShown = -1;
-
-  function cleanup() {
-    if (done) return;
-    done = true;
-    el.dataset.done = '1';
-    if (raf) cancelAnimationFrame(raf);
-    document.removeEventListener('keydown', onKey, true);
-    el.removeEventListener('click', onClick);
-    window.removeEventListener('resize', size);
-    if (video) { try { video.pause(); video.removeAttribute('src'); video.load(); } catch (e) {} }
-    el.classList.add('b0b-intro-out');
-    setTimeout(function () {
-      if (el.parentNode) el.parentNode.removeChild(el);
-      try { document.documentElement.classList.remove('b0b-intro-lock'); } catch (e) {}
-    }, FADE);
-  }
-
-  // Dismissed by a real gesture: hand the soundtrack its permission slip.
-  function dismiss(byGesture) {
-    if (byGesture) {
+  // ---- share links --------------------------------------------------------
+  (function () {
+    var u = encodeURIComponent(SHARE_URL), t = encodeURIComponent(SHARE_TEXT);
+    var hrefs = {
+      x: 'https://x.com/intent/post?text=' + t + '&url=' + u,
+      bsky: 'https://bsky.app/intent/compose?text=' + encodeURIComponent(SHARE_TEXT + ' ' + SHARE_URL),
+      fb: 'https://www.facebook.com/sharer/sharer.php?u=' + u,
+      li: 'https://www.linkedin.com/sharing/share-offsite/?url=' + u,
+      rd: 'https://www.reddit.com/submit?url=' + u + '&title=' + t,
+      mail: 'mailto:?subject=' + encodeURIComponent('b0b.dev — the intro film') +
+            '&body=' + encodeURIComponent(SHARE_TEXT + '\n\n' + SHARE_URL)
+    };
+    Array.prototype.forEach.call(el.querySelectorAll('.bi-share a[data-net]'), function (a) {
+      a.href = hrefs[a.getAttribute('data-net')] || SHARE_URL;
+    });
+    var copy = el.querySelector('[data-net="copy"]');
+    copy.addEventListener('click', function () {
+      var done = function () { copy.textContent = 'Copied'; setTimeout(function () { copy.textContent = 'Copy link'; }, 1800); };
       try {
-        var t = window.__b0bSoundtrackStart;
-        if (typeof t === 'function') t();
-      } catch (e) {}
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(SHARE_URL).then(done, function () { prompt('Copy this link:', SHARE_URL); });
+        else prompt('Copy this link:', SHARE_URL);
+      } catch (e) { prompt('Copy this link:', SHARE_URL); }
+    });
+    var nat = el.querySelector('[data-net="native"]');
+    if (navigator.share) {
+      nat.hidden = false;
+      nat.addEventListener('click', function () {
+        try { navigator.share({ title: 'b0b.dev — the intro film', text: SHARE_TEXT, url: SHARE_URL }).catch(function () {}); } catch (e) {}
+      });
     }
-    cleanup();
+  })();
+
+  // ---- voice ----------------------------------------------------------------
+  // A British woman's voice, by name where the platform exposes one. The male
+  // names are pushed down explicitly because "Google UK English Male" and the
+  // like otherwise score as high as their female counterparts.
+  var FEMALE = /\b(sonia|libby|maisie|abbi|bella|hollie|olivia|serena|kate|hazel|martha|stephanie|susan|fiona|amy|emma|female)\b/i;
+  var MALE = /\b(ryan|thomas|elliot|oliver|daniel|arthur|george|alfie|ethan|noah|harry|jamie|male)\b/i;
+  var voice = null;
+  function scoreVoice(v) {
+    var n = v.name || '', l = (v.lang || '').toLowerCase().replace(/_/g, '-'), s = 0;
+    if (l.indexOf('en-gb') === 0) s += 100;
+    else if (/^en-(ie|au|nz|za)/.test(l)) s += 35;
+    else if (l.indexOf('en') === 0) s += 10;
+    else return -1e9;
+    if (FEMALE.test(n)) s += 70;
+    if (MALE.test(n) && !/female/i.test(n)) s -= 80;
+    if (v.localService === false) s += 20;
+    if (/natural|neural|online|premium|enhanced/i.test(n)) s += 30;
+    if (/compact|espeak|pico|flite|festival/i.test(n)) s -= 40;
+    return s;
+  }
+  function pickVoice() {
+    if (!synth) return null;
+    var all = [];
+    try { all = synth.getVoices() || []; } catch (e) {}
+    var best = null, bs = -1e9;
+    for (var i = 0; i < all.length; i++) { var s = scoreVoice(all[i]); if (s > bs) { bs = s; best = all[i]; } }
+    return bs > -1e9 ? best : null;
+  }
+  if (synth) {
+    voice = pickVoice();
+    try { synth.addEventListener('voiceschanged', function () { voice = pickVoice(); }); } catch (e) {}
   }
 
-  function onKey(e) {
-    if (done) return;
-    if (e.key === 'Tab') return;      // leave focus navigation alone
-    e.preventDefault();
-    dismiss(true);
+  // ---- helpers ----------------------------------------------------------------
+  function fill(t) {
+    var n = TOTAL ? TOTAL.toLocaleString('en-GB') : 'Over a thousand';
+    return String(t).replace('{TOTAL}', n).replace('{TOTALWORDS}', n);
   }
-  function onClick() { dismiss(true); }
+  function words(L) { return String(L.say || L.text).split(/\s+/).length; }
+  function chapterAt(t) { for (var i = CH.length - 1; i >= 0; i--) if (t >= CH[i].at) return i; return 0; }
+  function shotAt(t) { for (var i = REEL.length - 1; i >= 0; i--) if (t >= REEL[i].at) return i; return 0; }
+  function chEnd(i) { return CH[i].end != null ? CH[i].end : CH[i].at + MAP_TEXT; }
+  function totalLen() { return REEL_DUR + MAP_TEXT; }
+  // Which line of part i is on screen at time t when nothing is speaking:
+  // lines are laid across the part in proportion to their length.
+  function lineAt(i, t) {
+    var c = CH[i], lead = 0.6, span = Math.max(1, chEnd(i) - c.at - lead - 0.4);
+    var ws = c.lines.map(words), tot = ws.reduce(function (a, b) { return a + b; }, 0);
+    var x = (t - c.at - lead) / span * tot;
+    if (x < 0) return -1;
+    var acc = 0;
+    for (var k = 0; k < ws.length; k++) { acc += ws[k]; if (x < acc) return k; }
+    return ws.length - 1;
+  }
+  function setSub(text) { if (subEl.textContent !== text) subEl.textContent = text; el.classList.toggle('bi-has-sub', !!text); }
+  function soundtrack(fn, arg) { try { var f = window[fn]; if (typeof f === 'function') f(arg); } catch (e) {} }
 
-  // ---- the map beat ---------------------------------------------------------
-  var ctx = null, W = 0, H = 0, dpr = 1;
+  // ---- state ------------------------------------------------------------------
+  var state = 'idle';            // idle | start | film | map | end
+  var raf = 0, countT = 0, chT = 0, endT = 0;
+  var chIdx = -1, shotIdx = -1;
+  var vt = 0, lastNow = 0, mapStart = 0;
+  var videoMode = true, holding = false, speaking = false;
+  var muted = false, narrate = true, speechOk = true;
+  var spoken = {}, narrToken = 0, keep = [];
+  var seeking = false, lastFocus = null;
+
+  function setState(s) {
+    state = s;
+    el.classList.remove('bi-s-idle', 'bi-s-start', 'bi-s-film', 'bi-s-map', 'bi-s-end');
+    el.classList.add('bi-s-' + s);
+  }
+  function speechActive() { return !!(synth && narrate && speechOk && !muted); }
+  function duck() { if (video) { try { video.volume = speaking ? VOL_DUCK : VOL_UP; } catch (e) {} } }
+
+  // ---- the closing map ------------------------------------------------------
+  var ctx = canvas && canvas.getContext ? canvas.getContext('2d') : null, W = 0, H = 0;
   function size() {
     if (!canvas || !plate) return;
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
     W = plate.clientWidth; H = plate.clientHeight;
     canvas.width = Math.max(1, Math.round(W * dpr));
     canvas.height = Math.max(1, Math.round(H * dpr));
-    canvas.style.width = W + 'px';
-    canvas.style.height = H + 'px';
     if (ctx) ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
-
-  // Equirectangular fit inside the plate, aspect preserved.
-  function project() {
-    var scale = Math.min((W * 0.94) / 1024, (H * 0.94) / 512);
-    return { ox: (W - 1024 * scale) / 2, oy: (H - 512 * scale) / 2, s: scale };
-  }
-
-  function drawMap(t) {
-    if (!ctx) return;
+  function drawMap(ms) {
+    if (!ctx || !pts.length) return;
     ctx.clearRect(0, 0, W, H);
-    var p = project();
-    // West-to-east sweep: points are pre-sorted by longitude, so a prefix of
-    // the array is a wipe across the map.
-    var span = Math.max(600, MAP_HOLD - 200);
-    var prog = Math.min(1, t / span);
-    var eased = 1 - Math.pow(1 - prog, 2);
-    var upto = Math.floor(eased * pts.length);
-    // The flare marks the moving edge. It is keyed to index, so once the sweep
-    // finishes it has to be faded by time or the last points stay lit white.
-    var settle = prog < 1 ? 1 : Math.max(0, 1 - (t - span) / 500);
+    var s = Math.min((W * 0.92) / 1024, (H * 0.92) / 512);
+    var ox = (W - 1024 * s) / 2, oy = (H - 512 * s) / 2;
+    var prog = reduced ? 1 : Math.min(1, ms / MAP_SWEEP);
+    var upto = Math.floor((1 - Math.pow(1 - prog, 2)) * pts.length);
+    var settle = prog < 1 ? 1 : Math.max(0, 1 - (ms - MAP_SWEEP) / 600);
     for (var i = 0; i < upto; i++) {
-      var x = p.ox + pts[i][0] * p.s, y = p.oy + pts[i][1] * p.s;
       var age = (upto - i) / Math.max(1, pts.length * 0.06);
-      var flare = (age < 1 ? (1 - age) : 0) * settle;
+      var flare = (age < 1 ? 1 - age : 0) * settle;
       ctx.globalAlpha = 0.62 + flare * 0.38;
       ctx.fillStyle = flare > 0.25 ? '#fff6d5' : '#ffcc00';
       ctx.beginPath();
-      ctx.arc(x, y, 1.6 + flare * 2.4, 0, 6.2832);
+      ctx.arc(ox + pts[i][0] * s, oy + pts[i][1] * s, 1.7 + flare * 2.6, 0, 6.2832);
       ctx.fill();
     }
-    // Leading edge: a one-pixel line with a short, nearly transparent trail.
-    // The first draft filled a 66px column and read as a solid teal block.
     if (prog < 1 && upto > 0) {
-      var lead = p.ox + pts[Math.min(upto, pts.length - 1)][0] * p.s;
-      var top = p.oy, hgt = 512 * p.s;
-      var g = ctx.createLinearGradient(lead - 34, 0, lead, 0);
-      g.addColorStop(0, 'rgba(0,204,255,0)');
-      g.addColorStop(1, 'rgba(0,204,255,0.10)');
+      var lead = ox + pts[Math.min(upto, pts.length - 1)][0] * s;
       ctx.globalAlpha = 1;
-      ctx.fillStyle = g;
-      ctx.fillRect(lead - 34, top, 34, hgt);
       ctx.fillStyle = 'rgba(0,204,255,0.55)';
-      ctx.fillRect(lead, top, 1, hgt);
+      ctx.fillRect(lead, oy, 1, 512 * s);
     }
     ctx.globalAlpha = 1;
   }
 
-  // ---- the source line ------------------------------------------------------
-  // Which archive item is on screen right now. This is the whole point of the
-  // sequence: footage that names its own source while it plays.
-  function caption(elapsed) {
-    if (!capEl) return;
-    if (elapsed >= mapAt) {
-      if (capShown !== -2) {
-        capShown = -2;
-        capEl.textContent = total
-          ? (total.toLocaleString() + ' markers · the shape of what has been documented')
-          : 'the shape of what has been documented';
-        capEl.classList.add('b0b-intro-cap-own');
+  // ---- narration ----------------------------------------------------------
+  function speakPart(i) {
+    var c = CH[i], k = 0, token = ++narrToken, first = true;
+    speaking = true; duck();
+    function next() {
+      if (token !== narrToken) return;
+      if (k >= c.lines.length) {
+        speaking = false; spoken[i] = true; duck();
+        setTimeout(function () { if (narrToken === token && !speaking) setSub(''); }, 1400);
+        if (holding) release();
+        if (c.map) finishSoon();
+        return;
       }
-      return;
+      var L = c.lines[k++];
+      var u;
+      try { u = new SpeechSynthesisUtterance(fill(L.say || L.text)); } catch (e) { speechOk = false; speaking = false; release(); return; }
+      if (voice) u.voice = voice;
+      u.lang = (voice && voice.lang) || 'en-GB';
+      u.rate = 0.96; u.pitch = 1;
+      var fin = false, started = false;
+      // Engines drop onend often enough that the film would stall on it; a
+      // generous guard keeps things moving without cutting a line short.
+      var guard = setTimeout(end, words(L) * 560 + 2400);
+      var probe = first ? setTimeout(function () {
+        // Nothing started within 3 s of the first line: this engine will not
+        // speak (no voices, blocked, or a platform that refuses). Carry on
+        // with the captions alone rather than hold the picture for silence.
+        if (!started && token === narrToken) { speechOk = false; try { synth.cancel(); } catch (e) {} speaking = false; duck(); release(); }
+      }, 3000) : 0;
+      first = false;
+      function end() { if (fin) return; fin = true; clearTimeout(guard); clearTimeout(probe); setTimeout(next, 240); }
+      u.onstart = function () { started = true; setSub(fill(L.text)); };
+      u.onend = end; u.onerror = end;
+      keep.push(u); if (keep.length > 10) keep.shift();   // GC would otherwise eat the callbacks
+      setSub(fill(L.text));
+      try { synth.speak(u); } catch (e) { end(); }
     }
-    var idx = -1;
-    for (var i = 0; i < REEL.length; i++) {
-      if (elapsed >= REEL[i].at * 1000) idx = i;
-    }
-    if (idx !== capShown) {
-      capShown = idx;
-      capEl.classList.remove('b0b-intro-cap-own');
-      capEl.textContent = idx >= 0 ? REEL[idx].cap : '';
-    }
+    next();
+  }
+  function stopSpeech() {
+    narrToken++; speaking = false;
+    if (synth) { try { synth.cancel(); } catch (e) {} }
+    duck();
+  }
+  function release() {
+    if (!holding) return;
+    holding = false;
+    if (state === 'film' && videoMode && video) { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
   }
 
-  function typeLines(elapsed) {
-    for (var i = 0; i < LINES.length; i++) {
-      var L = LINES[i];
-      if (elapsed < L.at) break;
-      if (!typed[i]) {
-        var d = document.createElement('div');
-        d.className = 'b0b-intro-line' + (L.wordmark ? ' b0b-intro-mark' : '');
-        lineWrap.appendChild(d);
-        typed[i] = { node: d, n: 0 };
-      }
-      var st = typed[i];
-      var want = Math.min(L.text.length, Math.floor((elapsed - L.at) / 26));
-      if (want !== st.n) {
-        st.n = want;
-        st.node.textContent = L.text.slice(0, want);
-      }
+  function enterPart(i) {
+    chIdx = i;
+    var c = CH[i];
+    chNum.textContent = c.id;
+    chTitle.textContent = c.title.toUpperCase() + ' · ' + c.year;
+    el.classList.add('bi-chshow');
+    clearTimeout(chT);
+    if (!seeking) chT = setTimeout(function () { el.classList.remove('bi-chshow'); }, 3800);
+    if (!seeking && speechActive() && !spoken[i]) speakPart(i);
+  }
+
+  // ---- the loop ---------------------------------------------------------------
+  function paint(t) {
+    var i = chapterAt(t);
+    if (i !== chIdx) enterPart(i);
+    if (t < REEL_DUR && REEL.length) {
+      var s = shotAt(t);
+      if (s !== shotIdx) { shotIdx = s; srcEl.textContent = REEL[s].cap; }
+    } else if (shotIdx !== -2) {
+      shotIdx = -2;
+      srcEl.textContent = (TOTAL ? TOTAL.toLocaleString('en-GB') + ' markers' : 'the map') + ' · b0b.dev/map';
     }
+    // With a voice, the words on screen are the words being spoken and nothing
+    // else. Without one, lines are laid across each part by length.
+    if (seeking || !speechActive()) { var k = lineAt(i, t); setSub(k >= 0 ? fill(CH[i].lines[k].text) : ''); }
+    barEl.style.transform = 'scaleX(' + Math.max(0, Math.min(1, t / totalLen())).toFixed(4) + ')';
+    if (state === 'map' || !videoMode) drawMap(state === 'map' ? performance.now() - mapStart : t * 1000);
   }
 
-  function render(elapsed) {
-    var inMap = elapsed >= mapAt;
-    el.classList.toggle('b0b-intro-mapping', inMap);
-    if (inMap) drawMap(elapsed - mapAt);
-    caption(elapsed);
-    typeLines(elapsed);
-  }
-
-  function frame(ts) {
-    if (done || seeking) return;
-    if (!start) start = ts;
-    var elapsed = ts - start;
-    render(elapsed);
-    if (elapsed >= DURATION - FADE) { cleanup(); return; }
+  function frame(now) {
+    if (seeking || (state !== 'film' && state !== 'map')) return;
+    var dt = Math.min(0.25, (now - (lastNow || now)) / 1000);
+    lastNow = now;
+    if (state === 'film' && videoMode && video) {
+      vt = video.currentTime || 0;
+      // Hold the last frame of a part while she is still speaking.
+      var c = CH[chIdx];
+      if (speaking && !holding && c && c.end != null && vt >= c.end - 0.12) {
+        holding = true; try { video.pause(); } catch (e) {}
+      }
+    } else if (!holding) {
+      vt += dt;
+    }
+    if (state === 'film' && !videoMode && vt >= REEL_DUR) goMap();
+    if (state === 'map' && !speechActive() && vt >= totalLen()) { showEnd(); return; }
+    paint(vt);
     raf = requestAnimationFrame(frame);
   }
 
-  // ---- go --------------------------------------------------------------
-  document.addEventListener('keydown', onKey, true);
-  el.addEventListener('click', onClick);
-  if (skipBtn) {
-    skipBtn.addEventListener('click', function (e) { e.stopPropagation(); dismiss(true); });
+  function goMap() {
+    if (state === 'map') return;
+    setState('map');
+    el.classList.add('bi-mapping');
+    mapStart = performance.now();
+    vt = Math.max(vt, REEL_DUR);
+  }
+  function finishSoon() {
+    clearTimeout(endT);
+    endT = setTimeout(function () { if (state === 'map') showEnd(); }, 1800);
   }
 
-  if (reduced || !canvas || !canvas.getContext) {
-    // No animation: the composed frame at rest, held briefly, then gone.
-    for (var i = 0; i < LINES.length; i++) {
-      var d = document.createElement('div');
-      d.className = 'b0b-intro-line' + (LINES[i].wordmark ? ' b0b-intro-mark' : '');
-      d.textContent = LINES[i].text;
-      lineWrap.appendChild(d);
+  // ---- cards --------------------------------------------------------------------
+  function clearCountdown() {
+    clearTimeout(countT); countT = 0;
+    if (countEl) { countEl.style.transition = 'none'; countEl.style.transform = 'scaleX(1)'; }
+  }
+  function showStart() {
+    setState('start');
+    startCard.hidden = false; endCard.hidden = true;
+    el.classList.remove('bi-mapping', 'bi-chshow', 'bi-ended');
+    setSub('');
+    if (video && !reduced) {
+      video.muted = true; video.loop = true;
+      try { video.currentTime = 0; } catch (e) {}
+      var p = video.play(); if (p && p.catch) p.catch(function () {});
     }
-    if (capEl && REEL.length) capEl.textContent = REEL[0].cap;
-    if (video) { try { video.removeAttribute('autoplay'); video.pause(); } catch (e) {} }
-    setTimeout(function () { dismiss(false); }, reduced ? 1800 : 900);
-    return;
+    if (MODE === 'overlay') {
+      clearCountdown();
+      if (countEl && !reduced) {
+        void countEl.offsetWidth;
+        countEl.style.transition = 'transform ' + AUTO_ENTER + 'ms linear';
+        countEl.style.transform = 'scaleX(0)';
+      }
+      countT = setTimeout(function () { if (state === 'start') enter(false); }, AUTO_ENTER);
+    }
+    focusSoon('.bi-play');
+  }
+  function showEnd() {
+    cancelAnimationFrame(raf);
+    stopSpeech(); holding = false;
+    if (video) { try { video.pause(); } catch (e) {} }
+    setState('end');
+    el.classList.add('bi-mapping', 'bi-ended');
+    el.classList.remove('bi-chshow');
+    drawMap(MAP_SWEEP + 2000);
+    barEl.style.transform = 'scaleX(1)';
+    setSub('');
+    startCard.hidden = true; endCard.hidden = false;
+    focusSoon('.bi-end .bi-enter');
+  }
+  function focusSoon(sel) { setTimeout(function () { var b = el.querySelector(sel); if (b && !el.hidden) { try { b.focus({ preventScroll: true }); } catch (e) { b.focus(); } } }, 60); }
+
+  // ---- play -----------------------------------------------------------------------
+  function playFilm() {
+    clearCountdown(); clearTimeout(endT);
+    stopSpeech();
+    startCard.hidden = true; endCard.hidden = true;
+    el.classList.remove('bi-mapping', 'bi-ended', 'bi-reel-off');
+    spoken = {}; chIdx = -1; shotIdx = -1; holding = false;
+    vt = 0; lastNow = 0;
+    speechOk = true;
+    if (synth) {
+      voice = pickVoice() || voice;
+      // iOS Safari only lets a page speak if the first utterance is queued
+      // inside the gesture itself; the real lines start a frame later.
+      try { var w = new SpeechSynthesisUtterance(' '); w.volume = 0; synth.speak(w); } catch (e) {}
+    }
+    soundtrack('__b0bSoundtrackHold', true);
+    setState('film');
+    size();
+    videoMode = !!video;
+    if (video) {
+      video.loop = false;
+      try { video.pause(); video.currentTime = 0; } catch (e) {}
+      video.muted = muted;
+      duck();
+      var p = video.play();
+      if (p && p.catch) p.catch(function () {
+        // A refusal of sound: try again silent, and if even that fails, the
+        // film runs on the map and the words alone.
+        video.muted = true;
+        var q = video.play();
+        if (q && q.catch) q.catch(noVideo);
+      });
+    } else {
+      noVideo();
+    }
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(frame);
+  }
+  function noVideo() {
+    videoMode = false;
+    el.classList.add('bi-reel-off');
+  }
+  if (video) {
+    video.addEventListener('ended', function () { if (state === 'film') goMap(); });
+    video.addEventListener('error', function () { if (state === 'film') noVideo(); }, true);
   }
 
-  ctx = canvas.getContext('2d');
-  window.addEventListener('resize', size);
-  size();
-
-  // The footage is an enhancement, never a dependency. If it is playing by the
-  // time the first shot should be over, keep it; otherwise hand the whole ten
-  // seconds to the map and carry on as though the video had never existed.
-  if (video && REEL.length) {
-    video.muted = true;                 // the property, not just the attribute:
-    video.defaultMuted = true;          // an unmuted autoplay is refused outright
-    var p;
-    try { p = video.play(); } catch (e) {}
-    if (p && p.catch) p.catch(function () {});
-    video.addEventListener('playing', function () {
-      videoOk = true;
-      el.classList.add('b0b-intro-reel-on');
-    });
+  // ---- open / close ----------------------------------------------------------------
+  function open(opts) {
+    el.hidden = false;
+    el.classList.remove('bi-out');
+    if (MODE === 'overlay') document.documentElement.classList.add('b0b-intro-lock');
+    size();
+    if (opts && opts.play) playFilm(); else showStart();
+  }
+  function close() {
+    cancelAnimationFrame(raf);
+    clearCountdown(); clearTimeout(endT); clearTimeout(chT);
+    stopSpeech(); holding = false;
+    if (video) { try { video.pause(); } catch (e) {} }
+    setState('idle');
+    setSub('');
+    el.classList.add('bi-out');
     setTimeout(function () {
-      if (!videoOk) { mapAt = 0; el.classList.add('b0b-intro-reel-off'); }
-    }, 900);
-  } else {
-    mapAt = 0;
-    el.classList.add('b0b-intro-reel-off');
+      if (state !== 'idle') return;         // reopened during the fade
+      el.hidden = true;
+      el.classList.remove('bi-out', 'bi-mapping', 'bi-ended', 'bi-chshow', 'bi-reel-off');
+      try { document.documentElement.classList.remove('b0b-intro-lock'); } catch (e) {}
+      if (lastFocus) { try { lastFocus.focus(); } catch (e) {} lastFocus = null; }
+    }, FADE);
+    soundtrack('__b0bSoundtrackHold', false);
+  }
+  // Leaving by a real gesture hands the site soundtrack its permission to start,
+  // which is the one thing browsers want before they allow audio.
+  function enter(byGesture) {
+    if (MODE === 'page') { window.location.href = '/'; return; }
+    close();
+    if (byGesture) soundtrack('__b0bSoundtrackStart');
   }
 
-  // Render an arbitrary moment of the timeline. Exists because headless
-  // Chromium fires requestAnimationFrame only a couple of times under
-  // --virtual-time-budget, so a screenshot of the real loop shows the first
-  // 50ms and tells you nothing. Harmless in production; nothing calls it.
+  // ---- controls ----------------------------------------------------------------------
+  el.querySelector('.bi-play').addEventListener('click', function () { playFilm(); });
+  el.querySelector('.bi-replay').addEventListener('click', function () { playFilm(); });
+  Array.prototype.forEach.call(el.querySelectorAll('.bi-enter'), function (b) {
+    b.addEventListener('click', function () { enter(true); });
+  });
+  skipBtn.addEventListener('click', function () {
+    if (MODE === 'page') showEnd(); else enter(true);
+  });
+  muteBtn.addEventListener('click', function () {
+    muted = !muted;
+    muteBtn.textContent = muted ? 'SOUND OFF' : 'SOUND ON';
+    muteBtn.setAttribute('aria-pressed', muted ? 'true' : 'false');
+    if (video) video.muted = muted;
+    if (muted) { if (chIdx >= 0) spoken[chIdx] = true; stopSpeech(); release(); }
+    else if (state === 'film' || state === 'map') { if (chIdx >= 0) spoken[chIdx] = true; }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (el.hidden || state === 'idle') return;
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      if (MODE === 'page') { if (state === 'film' || state === 'map') showEnd(); }
+      else enter(true);
+    }
+  }, true);
+  // The replay control lives in the report sidebar (#playIntroFilm) and in any
+  // other page that wants one ([data-b0b-intro]). Clicking it is a gesture, so
+  // the film can start with sound straight away.
+  document.addEventListener('click', function (e) {
+    var t = e.target && e.target.closest ? e.target.closest('#playIntroFilm,[data-b0b-intro]') : null;
+    if (!t) return;
+    e.preventDefault();
+    lastFocus = t;
+    open({ play: true });
+  });
+  window.addEventListener('resize', function () { if (!el.hidden) { size(); if (state === 'map' || state === 'end' || !videoMode) drawMap(state === 'end' ? MAP_SWEEP + 2000 : performance.now() - mapStart); } });
+
+  window.__b0bIntroOpen = function () { open({ play: true }); };
+
+  // Verification hooks. Headless Chromium fires requestAnimationFrame only a
+  // couple of times and has no speech voices, so a screenshot of the live film
+  // shows its first frame and nothing else. These render one exact moment, or
+  // one card, with the live loop stopped. Nothing on the site calls them.
   window.__b0bIntroSeek = function (ms) {
-    // Stop the live loop first, or its next frame clears the canvas and
-    // repaints the opening 50ms over the frame being inspected.
     seeking = true;
-    if (raf) { cancelAnimationFrame(raf); raf = 0; }
-    if (video && ms < mapAt) { try { video.currentTime = ms / 1000; } catch (e) {} }
-    render(ms);
+    cancelAnimationFrame(raf); clearCountdown(); stopSpeech();
+    startCard.hidden = true; endCard.hidden = true;
+    el.hidden = false;
+    size();
+    var t = ms / 1000;
+    chIdx = -1; shotIdx = -1;
+    if (t < REEL_DUR) {
+      setState('film'); el.classList.remove('bi-mapping');
+      if (video) { try { video.pause(); video.currentTime = t; } catch (e) {} }
+    } else {
+      setState('map'); el.classList.add('bi-mapping');
+      mapStart = performance.now() - (t - REEL_DUR) * 1000;
+    }
+    vt = t;
+    paint(t);
+    el.classList.add('bi-chshow');
+  };
+  window.__b0bIntroCard = function (which) {
+    seeking = true; cancelAnimationFrame(raf); stopSpeech();
+    el.hidden = false; size();
+    if (which === 'end') showEnd(); else { showStart(); clearCountdown(); }
   };
 
-  raf = requestAnimationFrame(frame);
+  // ---- go ------------------------------------------------------------------------------
+  size();
+  if (!el.hidden) open();
 })();

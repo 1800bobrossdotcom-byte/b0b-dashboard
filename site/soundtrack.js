@@ -172,8 +172,19 @@
   // will allow unmuted audio - so the loader doubles as the permission slip.
   // It respects a previous stop: a reader who silenced this stays silenced.
   window.__b0bSoundtrackStart = function () {
-    if (offByChoice() || playing) return;
+    if (held || offByChoice() || playing) return;
     play(true);
+  };
+
+  // Handed to intro.js as well. While the intro film has the floor - its own
+  // newsreel sound and a narrator - the soundtrack stops and stays stopped:
+  // without this the narrator-ducking below would restart the music in every
+  // pause between her sentences. Releasing the hold does not restart anything
+  // by itself; the film calls __b0bSoundtrackStart when the reader leaves it.
+  var held = false;
+  window.__b0bSoundtrackHold = function (on) {
+    held = !!on;
+    if (held) { duckedByNarrator = false; if (playing) stop(); }
   };
 
   toggle.addEventListener('click', function () {
@@ -189,7 +200,7 @@
   // drives window.speechSynthesis, so polling `speaking` needs no edit there.
   setInterval(function () {
     var sp = window.speechSynthesis;
-    if (!sp) return;
+    if (!sp || held) return;
     if (sp.speaking && playing) { duckedByNarrator = true; stop(); }
     else if (duckedByNarrator && !sp.speaking && !offByChoice()) { duckedByNarrator = false; play(true); }
   }, 700);

@@ -181,88 +181,78 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
-**THE INTRO NOW PLAYS ACTUAL FOOTAGE OF ACTUAL EVENTS, AND EVERY SHOT CITES ITSELF ON SCREEN — 22 Sept
-2026, live.** Author, on the point-cloud version shipped hours earlier: *"that intro is whack - use actual
-footage of the world events"*, then *"I know you can do better."* **He was right and the fix was available:
-public-domain film.** Five shots, chronological, 1.55 s each: the prosecution's chart of the Nazi state
-structure standing in the Nuremberg courtroom (**Universal Newsreel, 6 Dec 1945, NARA**); the **Ivy Mike**
-fireball rising over the atoll (**US DOE film 0800012, 1952, CC0**); **Explorer 1** leaving the pad at night
-(**Universal Newsreel, 3 Feb 1958**); the **peace march** filling the park to the skyline (**Universal
-Newsreel, 18 Apr 1967**); and a wide of the **Iran-Contra** committee in session (**NARA ARC 11161, 8 Jul
-1987, CC0**). **Nothing is rehosted from anyone who did not release it** — every item is public domain or
-CC0 by its own archive metadata, and **the caption under the plate names the item while that shot is
-playing.** That is the whole argument for using footage at all: *footage nobody can trace is worth exactly
-what a claim nobody can check is worth.* **The picture is cut and scaled and NOTHING else** — no grade, no
-retime, no crop for drama; the grain, scanlines and vignette are drawn **over** it in the overlay, where they
-cannot be mistaken for the record. **`scripts/build-intro-reel.py` + `scripts/intro-reel.json`** rebuild it
-frame for frame from the archive ids, and the JSON now carries the **sha256 of each master actually cut**;
-`site/intro-reel.js` (captions) is generated from the same spec so picture and provenance cannot drift.
-Masters are ~600 MB and live outside the repo; the script re-fetches them.
-**LIVING-PERSON FLOOR APPLIED TO A SHOT CHOICE, DELIBERATELY:** the Iran-Contra tape is 64 minutes of
-close-ups of a living, uncharged-today witness. **The wide of the room was chosen instead** — the subject is
-the instrument, not the man, and a face held in a montage implies something the report does not assert.
-**The map is now the last beat, not the whole thing**: 780 points assemble under the wordmark in the same
-plate, which says what the five archive shots are doing there — the same job, a century apart.
-**FAILS SOFT AS WELL AS OPEN:** if the video will not play, `mapAt` is rewritten to 0 and the map takes the
-full ten seconds, i.e. the intro degrades to exactly what it was before the footage existed. The 11.5 s
-fail-open bootstrap in `report.html` is untouched.
-***THREE VERIFICATION TRAPS, ALL NEW, ALL COST REAL TIME:*** **(1) Playwright's Chromium has no H.264** —
-`canPlayType('video/mp4; codecs="avc1.640028"')` returns `''`, so an MP4-only reel is invisible to the only
-browser available here. A **VP9/WebM twin now ships** and is listed first: it covers that build, covers
-Firefox on Linux without system decoders, and is the only reason the reel could be inspected at all.
-**`.webm` was NOT in `server.js`'s static extension allowlist — the `.kml` trap exactly, caught before
-deploy, allowlist extended.** **(2) `python3 -m http.server` serves no Range requests**, so
-`video.seekable` is `[0,0]`, **every `currentTime` assignment silently no-ops**, and every seek-based
-screenshot shows frame 0 — three "stuck video" screenshots that were nothing of the kind. **A screenshot
-that looks frozen is not evidence: read `currentTime`, `seekable` and `buffered` first.** A 25-line
-Range-capable node server fixed it. **(3) the pip `imageio-ffmpeg` binary has no `drawtext` (no freetype)
-and segfaults on an `https://` input** — fetch with curl, process locally. *archive.org notes: `/download/`
-302s so `curl -L` is required, Range works (206), ~11 MB/s, and every item's `licenseurl` is in
-`https://archive.org/metadata/<id>`.*
-**Four defects found by looking at rendered frames, all fixed:** the plate **jumped** every time a text line
-typed in (the flex column re-centred; the text block's height is now reserved up front); the map dots
-**smeared over the last shot** (the footage now clears to black *before* the map fades in); the sweep
-**finished 250 ms before the fade began** so the resolve never landed (MAP_HOLD 1500 → 1100); and the dots
-were too dim inside the smaller plate. **Counts unchanged — 282 / 1,104 / 134** (the overlay is div/canvas/
-video/button, no `<p>` or `<h3>`). security 33/33, seo 47/48. Reel 433 KB MP4 + 396 KB WebM + 14 KB poster.
-**`build-transmissions.py` succeeded again** (17 cards) — the 21/22 Sept failures were flakiness, not a
-broken feed.
-
-**TEN-SECOND LOADING INTRO — 22 Sept 2026, live on `report.html`.** Author: *"animate a text based intro
-with video clips from the world - and do 10 second intro for b0b.dev for loading."*
-**There is no stock footage and none was bought or rehosted.** The world is drawn from **the report's own
-markers**: `scripts/build-intro-points.py` reuses `build-kml.py`'s character-walker on the map's
-`locations` literal, projects equirectangular, quantises to a 1024×512 grid and de-dupes co-located pins
-→ **780 distinct points, 7.9 KB** in `site/intro-points.js`. The continents that assemble are not a
-picture of the world, they are **the shape of what has been documented** — which is the only clip from
-the world this site can honestly claim to own. Sweep runs **west→east** (points pre-sorted by longitude),
-four lines type in, closing on the **b0b.dev** wordmark; the third line is the **tier ladder**
-(*documented · attributed · labeled · contested*), i.e. the method as the content.
-**IT IS A LOADER, NOT A GATE — this matters, because the click-gate was removed on 19 Sept at the
-author's own instruction.** So: **once per session** (`sessionStorage`), **skipped by click / any key /
-Esc / SKIP**, **self-dismissing at 10 s**, **suppressed entirely when `location.hash` is set** (a deep
-link means someone is going to a citation — do not stand in the way), **JS-only so crawlers and no-JS
-readers never see it**, and **FAILS OPEN**: the overlay is `hidden` in the markup and an inline
-nonce-stamped bootstrap in `report.html` both reveals it *and* sets an 11.5 s timer that rips it out even
-if `intro.js` never loads. *A document must never be held hostage by its own decoration.*
-`prefers-reduced-motion` → no animation, text at rest, short hold. **It also fixes the soundtrack's
-autoplay problem:** dismissing the intro is a user gesture, so `intro.js` calls
-`window.__b0bSoundtrackStart()` (new export in `soundtrack.js`, which respects a previous stop).
-**Four defects found by actually looking at rendered frames, all fixed:** the scan line filled a 66 px
-column at half opacity and read as a **solid teal block** (now a 1 px edge with a faint 34 px trail);
-**text overlapped the map** at 1200×800 (the map is now capped at 50% height and `size()` positions the
-text from the map's computed bottom); dots were too small; and the **flare keyed to index, so the
-easternmost points stayed lit white forever** (now time-faded over 600 ms once the sweep completes).
-**Counts unchanged — 282 / 1,104 / 134** (the overlay uses div/canvas/button, no `<p>` or `<h3>`, so the
-scale line does not move). security 33/33, seo 47/48.
-***VERIFICATION TRAP, THE BIG ONE, AND THE FIX IS REUSABLE:*** headless Chromium fires
-`requestAnimationFrame` only **once or twice** under `--virtual-time-budget`, so a screenshot of any
-rAF animation shows **the first ~50 ms** and looks broken when it is fine. `intro.js` therefore exports
-**`window.__b0bIntroSeek(ms)`**, which **cancels the live loop** (the first attempt did not, and the next
-frame cleared the canvas and repainted the opening over the frame being inspected — the canvas showed
-50 ms while the DOM text showed 9 s) and renders one exact moment. **Screenshot through a seek harness,
-never the live loop.** Also re-confirmed: the **500 px width clamp** makes any sub-500 screenshot a crop,
-not a layout — verify narrow at **≥560 px**.
+**THE INTRO IS A THREE-MINUTE NARRATED FILM, SHAREABLE AT `/intro` — 22 Sept 2026, live. Supersedes the
+ten-second loader and the five-shot reel written earlier the same day.** Author, in sequence: *"that intro is
+whack - use actual footage of the world events"*, *"I know you can do better"*, *"make the intro larger and
+longer with audio"*, then *"edit a mini film intro - you can do minutes here / with voice over in one of our
+british ladies voices / and then allow the watch intro again button or in site / share buttons for social"*,
+then *"tetelestai"* (I read it as *stop* and reverted the tree; he said *"please continue"* — it was the
+closing word, and the film now ends on it).
+**The film.** Eight parts, 33 shots, 2:59 of footage + a ~20 s closing map, all from **archive.org items that
+are public domain or CC0 by their own metadata** (`scripts/intro-reel.json` names each item, its licence URL,
+the exact in-point, and the sha256 of the master cut): I *The record* — Nuremberg (Universal Newsreel, 6 Dec
+1945); II *The instrument* — HUAC's Hollywood hearings, the bank of newsreel cameras (20 Oct 1947); III *The
+capability* — Ivy Mike (US DOE film 0800012); IV *The overhead* — Explorer 1 (3 Feb 1958); V *The annotation* —
+the labelled U-2 photographs (25 Oct 1962); VI *The public* — the 1967 peace march **and its
+counter-demonstrators**, which the reel filmed too; VII *The inquiry* — Iran-Contra (NARA ARC 11161); VIII *The
+ledger* — the site's own 1,178 markers, closing on **τετέλεσται — "it has been completed, and remains so"**, the
+report's own XXIV reading (perfect passive), not "it is finished" and not "paid in full". **The source of every
+shot is on screen while it plays.** Picture cut and scaled only; the newsreels' **own sound** runs under the
+narration, level-matched (loudnorm) with 90 ms splice fades — correction, not scoring; nothing was laid under
+it. `scripts/build-intro-reel.py` rebuilds it all (~3 min; masters ~700 MB outside the repo, re-fetched on
+demand) and emits `site/intro-reel.js` — shot captions, part timings and **the narration script** from the one
+spec, so picture, source line and voice cannot drift. 8.3 MB MP4 + 8.7 MB WebM.
+**The narration was checked line by line and three lines were narrowed before they went in:** Explorer 1
+carried a **cosmic-ray counter, not a camera** — the watching came two years later under the cover name
+*Discoverer* (CORONA, first recovery Aug 1960, declassified Feb 1995: "stayed classified for thirty-five");
+the peace-march crowd is **quoted by the reel's own title ("Thousands")**, not by an estimate; and the
+counter-demonstrators are placed **"in the same reel"**, which is what the film shows, not "across the
+street". The script is the report's method, not new claims — the named rules, the tier ladder, §8's last
+line. **Living-person floor applied to shot choice:** the Iran-Contra tape is mostly close-ups of a living
+witness; only the wide of the room and the (deceased) committee chairman are used.
+**The voice.** Spoken live by the reader's own browser, asking for a **British woman by name** — Sonia, Libby,
+Serena, Kate, Hazel, Martha, "Google UK English Female" — with British male names pushed *down* (Google UK
+English Male otherwise scores equal), falling back to the best en-GB voice. Same layer as `report-tts.js`.
+**Every line is also on screen** (serif subtitles; below the picture on portrait phones), so the film is whole
+muted, blocked, or with no engine. **Sync:** the video is the spine; a part's narration starts with the part;
+**if she is still speaking when the part's last shot ends, the picture holds on its final frame until she
+finishes**; newsreel audio ducks to 0.1 under her. A probe drops to captions-only if the first line has not
+started within 3 s. iOS Safari needs a silent utterance queued *inside* the click — done.
+**Why it opens on a card, and why that is not the gate coming back.** No browser lets a page speak or play
+unmuted without a gesture, so a narrated film must ask. The card (**WATCH THE FILM / ENTER THE REPORT**, muted
+footage looping behind) shows **once per session, never on a deep link, dissolves into the report after 14 s
+with a visible countdown**, and ENTER / Esc / SKIP always go straight to the report. The bootstrap in
+`report.html` no longer *removes* the overlay when already seen (the replay button needs it); its fail-open
+timer is 8 s and **fires only if `intro.js` never claimed the overlay** (`data-claimed`), so it can never cut a
+film that is playing. **Replay:** a cyan **▶ INTRO FILM** button in the report sidebar (next to FILMS; any
+`[data-b0b-intro]` element works) opens straight into the film with sound. **Share:** `/intro` is its own page
+(`PAGES`, `CANONICAL_PATHS`, sitemap, `apply-seo-meta.js` URL map) whose end card carries X, Bluesky,
+Facebook, LinkedIn, Reddit, Email, Copy link and native Share — plain links, no third-party script, no CSP
+change. **`apply-seo-meta.js` now takes a per-page `ogImage` and emits `VideoObject` JSON-LD**; the card is
+`site/img/intro-card.jpg` (1200×630, three real frames, rendered in headless Chromium). `/home` links it in
+nav and hero. `soundtrack.js` gained **`__b0bSoundtrackHold`** — without it the narrator-ducking restarted the
+music in every pause between her sentences. Markup lives **only** in `intro.js` (report.html and intro.html
+carry an empty shell); styles in `site/intro.css`.
+**Verified, not assumed** (local Express on a fresh port, Playwright, mocked speech engine listing the male
+voice first): Sonia picked; subtitles track the spoken line; ducking at 0.1; **Part I held at 23.89 s for six
+seconds while the last line finished, and Part II began as she stopped**; arrival → ENTER → sidebar replay →
+Esc → same-session reload all behave; zero CSP violations; `/intro` in the sitemap; Range 206 on both files.
+Every one of the 33 shots was checked by a mid-frame contact sheet — **one miss found and fixed** (the Ivy
+"atoll map" in-point was a dissolve; the map is at 1,400 s, not 1,380) and two shot *labels* corrected. Counts
+unchanged **282 / 1,104 / 134**; security 33/33; seo 48/49 (new `/intro` check passes; the fail is the
+pre-existing 84-char concordance title).
+***TRAPS, ALL STILL LIVE:*** **(1) Playwright's Chromium has no H.264** (`canPlayType` → `''`) — the WebM twin
+ships first in source order and is the only reason the film can be inspected here; **`.webm` had to be added to
+`server.js`'s static allowlist** (the `.kml` trap). **(2) `python3 -m http.server` serves no Range**, so
+`video.seekable` is `[0,0]` and every seek silently no-ops — test against the real Express server, which does.
+**(3) the pip `imageio-ffmpeg` binary has no `drawtext` and segfaults on `https://` input** — fetch with curl,
+cut locally. **(4) headless rAF:** screenshot through `window.__b0bIntroSeek(ms)` / `__b0bIntroCard('end')`,
+never the live loop. **(5) Playwright *does* run report.html's deferred scripts** — the "never executes
+deferred scripts" limit below is specific to `--dump-dom`; use Playwright for report JS. **(6) re-serialising
+a JSON config** with the wrong indent turned a 17-line change into a 483-line diff — match the file's own
+format (seo-meta.json is indent 2, `ensure_ascii=False`). *archive.org:* `/download/` 302s (curl `-L`), Range
+206, ~11 MB/s, `licenseurl` in `/metadata/<id>`; `gov.archives.arc.12110` is **mislabelled** — catalogued as
+the FBI crime lab, it is defensive-tactics training.
 
 **SOUNDTRACK REWRITTEN AFTER "not up", AND THE TRACK IS NOW THE NINTH SIGNAL — 22 Sept 2026.**
 Author: *"Restless leg syndrome not up."* **Two separate mistakes, both mine.**

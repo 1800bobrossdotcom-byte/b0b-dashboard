@@ -1,0 +1,129 @@
+/* intro.css — the b0b.dev intro film (site/intro.js).
+ * Shared by the report's opening overlay and the /intro page. The terminal
+ * palette of the rest of the site: near-black ground, amber for action and
+ * the map, cyan for provenance. Everything decorative sits OVER the footage,
+ * never inside it - the picture is the record.
+ */
+html.b0b-intro-lock{overflow:hidden}
+#b0b-intro[hidden]{display:none!important}
+#b0b-intro{position:fixed;inset:0;z-index:2147483600;background:#050505;color:#e8e4d8;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono,'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace);
+  opacity:1;transition:opacity .6s ease;-webkit-font-smoothing:antialiased}
+#b0b-intro.bi-out{opacity:0;pointer-events:none}
+#b0b-intro .bi-boot{font-size:clamp(26px,5vw,48px);letter-spacing:.14em;color:#fff;opacity:.85}
+
+/* ---- the plate: as large as the screen allows, 4:3 like the film ---- */
+#b0b-intro .bi-stage{display:flex;flex-direction:column;align-items:center;gap:10px;
+  width:min(96vw,calc((100vh - 56px) * 4 / 3))}
+@supports (height:100dvh){#b0b-intro .bi-stage{width:min(96vw,calc((100dvh - 56px) * 4 / 3))}}
+#b0b-intro .bi-plate{position:relative;width:100%;aspect-ratio:4/3;background:#000;overflow:hidden;
+  border:1px solid #1f1f1f;box-shadow:0 24px 80px rgba(0,0,0,.9)}
+#b0b-intro .bi-plate video,#b0b-intro .bi-plate canvas{position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;transition:opacity .5s ease}
+#b0b-intro .bi-plate canvas{opacity:0}
+#b0b-intro.bi-mapping .bi-plate video{opacity:0;transition:opacity .3s ease}
+#b0b-intro.bi-mapping .bi-plate canvas{opacity:1;transition:opacity .6s ease .25s}
+#b0b-intro.bi-reel-off .bi-plate video{display:none}
+#b0b-intro.bi-reel-off .bi-plate canvas{opacity:1}
+#b0b-intro .bi-grain{position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:repeating-linear-gradient(to bottom,rgba(0,0,0,.24) 0 1px,rgba(0,0,0,0) 1px 3px),
+    radial-gradient(125% 105% at 50% 50%,rgba(0,0,0,0) 46%,rgba(0,0,0,.62) 100%)}
+#b0b-intro .bi-scan{position:absolute;left:0;right:0;top:0;height:24%;pointer-events:none;z-index:3;
+  background:linear-gradient(to bottom,rgba(0,204,255,0),rgba(0,204,255,.05) 55%,rgba(0,204,255,0));
+  animation:biScan 4.2s linear infinite}
+@keyframes biScan{from{transform:translateY(-40%)}to{transform:translateY(420%)}}
+#b0b-intro .bi-plate::before,#b0b-intro .bi-plate::after{content:'';position:absolute;width:16px;height:16px;
+  border:1px solid rgba(255,204,0,.5);pointer-events:none;z-index:4}
+#b0b-intro .bi-plate::before{top:9px;left:9px;border-right:0;border-bottom:0}
+#b0b-intro .bi-plate::after{bottom:9px;right:9px;border-left:0;border-top:0}
+
+/* ---- the part card, top left ---- */
+#b0b-intro .bi-chapter{position:absolute;top:clamp(12px,3%,26px);left:clamp(14px,3.2%,30px);z-index:4;
+  background:rgba(5,5,5,.5);padding:.45em .7em .5em;
+  display:flex;flex-direction:column;gap:2px;opacity:0;transform:translateY(-4px);
+  transition:opacity .7s ease,transform .7s ease;text-shadow:0 0 14px #000,0 0 4px #000}
+#b0b-intro .bi-chapter b{font-weight:500;font-size:clamp(20px,3.4vw,36px);color:#ffcc00;letter-spacing:.06em;line-height:1}
+#b0b-intro .bi-chapter span{font-size:clamp(10px,1.35vw,15px);letter-spacing:.18em;color:#fff}
+#b0b-intro.bi-chshow .bi-chapter{opacity:1;transform:none}
+
+/* ---- the source line, top right: provenance while it plays ---- */
+#b0b-intro .bi-src{position:absolute;top:clamp(12px,3%,26px);right:clamp(14px,3.2%,30px);z-index:4;
+  max-width:52%;text-align:right;font-size:clamp(9px,1.05vw,12px);letter-spacing:.1em;line-height:1.5;
+  text-transform:uppercase;color:#cfe3e8;background:rgba(5,5,5,.62);padding:.25em .55em;border-radius:1px}
+/* Legible on any frame, including the Ivy fireball, which is almost all orange. */
+#b0b-intro .bi-src::before{content:'\25CF\00a0';color:#00ccff;font-size:.8em;vertical-align:.1em}
+
+/* ---- the narration, bottom centre ---- */
+#b0b-intro .bi-sub{position:absolute;left:7%;right:7%;bottom:clamp(14px,6%,44px);z-index:4;text-align:center;
+  font-family:var(--serif,'IBM Plex Serif',Georgia,'Times New Roman',serif);
+  font-size:clamp(14px,2.1vw,23px);line-height:1.5;color:#f4f0e6}
+#b0b-intro .bi-sub span{background:rgba(5,5,5,.62);padding:.14em .5em;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone}
+#b0b-intro .bi-sub span:empty{display:none}
+
+/* ---- progress ---- */
+#b0b-intro .bi-bar{width:100%;height:2px;background:#161616}
+#b0b-intro .bi-bar i{display:block;height:100%;background:#ffcc00;transform-origin:0 50%;transform:scaleX(0)}
+
+/* ---- controls, top right of the screen, only while the film runs ---- */
+#b0b-intro .bi-ctl{position:absolute;z-index:6;top:calc(env(safe-area-inset-top,0px) + 12px);right:12px;
+  display:none;gap:8px}
+#b0b-intro.bi-s-film .bi-ctl,#b0b-intro.bi-s-map .bi-ctl{display:flex}
+#b0b-intro .bi-ctl button{font:inherit;font-size:11px;letter-spacing:.14em;color:#9a9a9a;background:rgba(5,5,5,.6);
+  border:1px solid #333;border-radius:3px;padding:6px 10px;cursor:pointer}
+#b0b-intro .bi-ctl button:hover{color:#ffcc00;border-color:#ffcc00}
+
+/* During the cards, the film's overlays stand down. */
+#b0b-intro.bi-s-start .bi-chapter,#b0b-intro.bi-s-start .bi-src,#b0b-intro.bi-s-start .bi-sub,
+#b0b-intro.bi-s-end .bi-chapter,#b0b-intro.bi-s-end .bi-src,#b0b-intro.bi-s-end .bi-sub{display:none}
+
+/* ---- cards ---- */
+#b0b-intro .bi-card{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:clamp(12px,2.4vh,22px);padding:24px 16px;text-align:center;
+  background:radial-gradient(ellipse at center,rgba(5,5,5,.5) 0%,rgba(5,5,5,.9) 70%)}
+#b0b-intro .bi-card[hidden]{display:none}
+#b0b-intro .bi-mark{font-size:clamp(34px,7vw,76px);letter-spacing:.14em;color:#fff;line-height:1;
+  text-shadow:0 0 30px rgba(0,0,0,.9)}
+#b0b-intro .bi-kicker{font-size:clamp(10px,1.3vw,13px);letter-spacing:.16em;line-height:1.9;color:#a9b4b6;
+  text-transform:uppercase}
+#b0b-intro .bi-greek{font-family:var(--serif,'IBM Plex Serif',Georgia,serif);font-style:italic;
+  font-size:clamp(20px,3vw,30px);color:#e8e4d8;letter-spacing:.04em;margin-top:-4px}
+#b0b-intro .bi-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+#b0b-intro .bi-btn{font:inherit;font-size:clamp(12px,1.3vw,14px);letter-spacing:.14em;padding:13px 20px;
+  border:1px solid #ffcc00;background:#ffcc00;color:#050505;border-radius:2px;cursor:pointer;
+  transition:background .2s,color .2s,border-color .2s}
+#b0b-intro .bi-btn:hover{background:#fff;border-color:#fff}
+#b0b-intro .bi-btn.bi-ghost{background:transparent;color:#ffcc00}
+#b0b-intro .bi-btn.bi-ghost:hover{color:#050505;background:#ffcc00}
+#b0b-intro button:focus-visible,#b0b-intro a:focus-visible{outline:2px solid #00ccff;outline-offset:3px}
+#b0b-intro .bi-note{font-size:11px;letter-spacing:.2em;color:#6f7a7c;text-transform:uppercase}
+#b0b-intro .bi-count{position:absolute;left:0;right:0;bottom:0;height:2px;background:rgba(255,255,255,.06)}
+#b0b-intro .bi-count i{display:block;height:100%;background:#00ccff;opacity:.7;transform-origin:0 50%;transform:scaleX(1)}
+#b0b-intro[data-mode="page"] .bi-count{display:none}
+
+/* ---- share ---- */
+#b0b-intro .bi-share{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 10px;
+  max-width:640px;margin-top:4px}
+#b0b-intro .bi-share-l{width:100%;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#6f7a7c}
+#b0b-intro .bi-share a,#b0b-intro .bi-share button{font:inherit;font-size:12px;letter-spacing:.06em;color:#cfe7ee;
+  background:transparent;border:1px solid #2c3a3e;border-radius:2px;padding:7px 11px;text-decoration:none;cursor:pointer}
+#b0b-intro .bi-share a:hover,#b0b-intro .bi-share button:hover{border-color:#00ccff;color:#00ccff}
+#b0b-intro .bi-credit{max-width:560px;font-size:10px;line-height:1.7;letter-spacing:.04em;color:#5f6a6c}
+
+/* Portrait phones: the plate is short and the screen below it is empty, so
+   the words move out from over the footage into that space. */
+@media (max-aspect-ratio:4/5){
+  #b0b-intro .bi-plate{overflow:visible}
+  #b0b-intro .bi-sub{top:calc(100% + 22px);bottom:auto;left:0;right:0;font-size:clamp(16px,4.4vw,20px)}
+  #b0b-intro .bi-sub span{background:none;padding:0}
+}
+@media (max-width:560px){
+  #b0b-intro .bi-src{max-width:62%}
+  #b0b-intro .bi-btn{width:100%;max-width:320px}
+}
+@media (prefers-reduced-motion: reduce){
+  #b0b-intro,#b0b-intro .bi-chapter,#b0b-intro .bi-plate video,#b0b-intro .bi-plate canvas{transition:none}
+  #b0b-intro .bi-scan{animation:none;opacity:0}
+}
+@media print{#b0b-intro{display:none!important}}
