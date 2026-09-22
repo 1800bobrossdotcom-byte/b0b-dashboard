@@ -181,6 +181,24 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**XIII's LAST TWO SUBSECTIONS ARE GONE — 22 Sept 2026, live. DO NOT RE-ADD EITHER.** Author, with a screenshot of
+the XIII sidebar: *"remove the last two sections here they have nothing to do with cyclical patterns."*
+Removed whole: **`xiii-the-oldest-outlines-correlation-without-mechanism`** (the KJV outlines table added 20 Sept)
+and **`xiii-speculative-floor-the-cyclical-data`** (the data-extraction hypothesis *and its `spec-clause`*, which
+carried the author's provenance note about his personal record). XIII is now four parts — Indicators, Point
+Nemo, the Cycle Template, the Olympic Pattern — and **ends on the Olympic Pattern, then its own `sect-body`
+closer.** The trap recorded on 21 Sept held exactly: that closer sits *before* the two removed subsections, so
+the cut ran from the first `<h3>` to the `spec-clause` `</div>` and left the closer alone; div 331 → 330,
+balanced, diffed against a backup. **One prose dependency amended rather than left false:** the XXIV close
+said *"…anticipating is not - which is why Section XIII prints the oldest outlines as correlation and stops"*;
+it now ends at *"anticipating is not."* The concordance page linked the speculative floor and is regenerated.
+**Scale line 280 / 1,090 / 132.** *Verification trap found in my own tooling:* the TOCs are **`<nav class="sect-toc">`,
+not `<div>`** — an audit regex written for `<div class="sect-toc"` matches nothing and prints PASS having checked
+nothing (it did, on every deploy earlier on 22 Sept). Re-run correctly: 0 mismatches report-wide. **A check
+that finds zero items is not a pass until it has been shown to find one.** Then *"look for removal of sections like this that go off track"* — the
+off-track audit (every subsection title read against its section's title, every candidate's opening read)
+was put to the author as a choice, not executed: removal is editorial.
+
 **THE INTRO IS A THREE-MINUTE NARRATED FILM, SHAREABLE AT `/intro` — 22 Sept 2026, live. Supersedes the
 ten-second loader and the five-shot reel written earlier the same day.** Author, in sequence: *"that intro is
 whack - use actual footage of the world events"*, *"I know you can do better"*, *"make the intro larger and
@@ -585,7 +603,7 @@ a PAL→Siri entry belongs in Section X at documented tier — author's call.
 
 **THE REPORT AGAINST THE KJV AND GAME THEORY — 20 Sept 2026, researched; the reframe is PUBLISHED.**
 *"Update report where applicable"* (author, same day) put two things on the page: **Section XIII gained
-`xiii-the-oldest-outlines-correlation-without-mechanism`** (toc 6 → 7 parts) — the seven dated outlines
+`xiii-the-oldest-outlines-correlation-without-mechanism`** (toc 6 → 7 parts) **[REMOVED 22 Sept 2026 at the author's instruction — see the entry at the top of §7; do not re-add]** — the seven dated outlines
 against the record, each with its no-foreknowledge reading, tier *correlation documented / mechanism not
 reached*, the Deut 18:22 forward test the report cannot sit, and the two refused verses (Amos 3:3, Rev
 13:16–17); and **the Section XXIV close gained one paragraph** after "three completed things" — Zermelo
