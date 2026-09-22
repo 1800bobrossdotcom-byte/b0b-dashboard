@@ -181,6 +181,53 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**THE INTRO NOW PLAYS ACTUAL FOOTAGE OF ACTUAL EVENTS, AND EVERY SHOT CITES ITSELF ON SCREEN — 22 Sept
+2026, live.** Author, on the point-cloud version shipped hours earlier: *"that intro is whack - use actual
+footage of the world events"*, then *"I know you can do better."* **He was right and the fix was available:
+public-domain film.** Five shots, chronological, 1.55 s each: the prosecution's chart of the Nazi state
+structure standing in the Nuremberg courtroom (**Universal Newsreel, 6 Dec 1945, NARA**); the **Ivy Mike**
+fireball rising over the atoll (**US DOE film 0800012, 1952, CC0**); **Explorer 1** leaving the pad at night
+(**Universal Newsreel, 3 Feb 1958**); the **peace march** filling the park to the skyline (**Universal
+Newsreel, 18 Apr 1967**); and a wide of the **Iran-Contra** committee in session (**NARA ARC 11161, 8 Jul
+1987, CC0**). **Nothing is rehosted from anyone who did not release it** — every item is public domain or
+CC0 by its own archive metadata, and **the caption under the plate names the item while that shot is
+playing.** That is the whole argument for using footage at all: *footage nobody can trace is worth exactly
+what a claim nobody can check is worth.* **The picture is cut and scaled and NOTHING else** — no grade, no
+retime, no crop for drama; the grain, scanlines and vignette are drawn **over** it in the overlay, where they
+cannot be mistaken for the record. **`scripts/build-intro-reel.py` + `scripts/intro-reel.json`** rebuild it
+frame for frame from the archive ids, and the JSON now carries the **sha256 of each master actually cut**;
+`site/intro-reel.js` (captions) is generated from the same spec so picture and provenance cannot drift.
+Masters are ~600 MB and live outside the repo; the script re-fetches them.
+**LIVING-PERSON FLOOR APPLIED TO A SHOT CHOICE, DELIBERATELY:** the Iran-Contra tape is 64 minutes of
+close-ups of a living, uncharged-today witness. **The wide of the room was chosen instead** — the subject is
+the instrument, not the man, and a face held in a montage implies something the report does not assert.
+**The map is now the last beat, not the whole thing**: 780 points assemble under the wordmark in the same
+plate, which says what the five archive shots are doing there — the same job, a century apart.
+**FAILS SOFT AS WELL AS OPEN:** if the video will not play, `mapAt` is rewritten to 0 and the map takes the
+full ten seconds, i.e. the intro degrades to exactly what it was before the footage existed. The 11.5 s
+fail-open bootstrap in `report.html` is untouched.
+***THREE VERIFICATION TRAPS, ALL NEW, ALL COST REAL TIME:*** **(1) Playwright's Chromium has no H.264** —
+`canPlayType('video/mp4; codecs="avc1.640028"')` returns `''`, so an MP4-only reel is invisible to the only
+browser available here. A **VP9/WebM twin now ships** and is listed first: it covers that build, covers
+Firefox on Linux without system decoders, and is the only reason the reel could be inspected at all.
+**`.webm` was NOT in `server.js`'s static extension allowlist — the `.kml` trap exactly, caught before
+deploy, allowlist extended.** **(2) `python3 -m http.server` serves no Range requests**, so
+`video.seekable` is `[0,0]`, **every `currentTime` assignment silently no-ops**, and every seek-based
+screenshot shows frame 0 — three "stuck video" screenshots that were nothing of the kind. **A screenshot
+that looks frozen is not evidence: read `currentTime`, `seekable` and `buffered` first.** A 25-line
+Range-capable node server fixed it. **(3) the pip `imageio-ffmpeg` binary has no `drawtext` (no freetype)
+and segfaults on an `https://` input** — fetch with curl, process locally. *archive.org notes: `/download/`
+302s so `curl -L` is required, Range works (206), ~11 MB/s, and every item's `licenseurl` is in
+`https://archive.org/metadata/<id>`.*
+**Four defects found by looking at rendered frames, all fixed:** the plate **jumped** every time a text line
+typed in (the flex column re-centred; the text block's height is now reserved up front); the map dots
+**smeared over the last shot** (the footage now clears to black *before* the map fades in); the sweep
+**finished 250 ms before the fade began** so the resolve never landed (MAP_HOLD 1500 → 1100); and the dots
+were too dim inside the smaller plate. **Counts unchanged — 282 / 1,104 / 134** (the overlay is div/canvas/
+video/button, no `<p>` or `<h3>`). security 33/33, seo 47/48. Reel 433 KB MP4 + 396 KB WebM + 14 KB poster.
+**`build-transmissions.py` succeeded again** (17 cards) — the 21/22 Sept failures were flakiness, not a
+broken feed.
+
 **TEN-SECOND LOADING INTRO — 22 Sept 2026, live on `report.html`.** Author: *"animate a text based intro
 with video clips from the world - and do 10 second intro for b0b.dev for loading."*
 **There is no stock footage and none was bought or rehosted.** The world is drawn from **the report's own

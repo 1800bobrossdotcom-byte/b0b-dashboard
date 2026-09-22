@@ -444,7 +444,7 @@ const REDIRECTS = {
 app.use((req, res, next) => {
   if (!canView(req)) return next();
   // only serve known static extensions
-  if (/\.(js|css|json|png|svg|ico|jpg|jpeg|webp|mp3|mp4|woff2?|kml)$/i.test(req.path)) {
+  if (/\.(js|css|json|png|svg|ico|jpg|jpeg|webp|mp3|mp4|webm|woff2?|kml)$/i.test(req.path)) {
     // KML is set explicitly rather than left to the mime table, so the Google
     // Earth export downloads as Earth data instead of as a generic XML blob.
     return express.static(PUB, {

@@ -1,13 +1,24 @@
 /* intro.js — the ten-second loading intro for b0b.dev.
  *
- * WHAT IT DRAWS, AND WHY IT IS NOT STOCK FOOTAGE.
- * The author asked for "video clips from the world". This site does not own
- * any, and rehosting someone else's is the exact thing the report refuses to
- * do elsewhere. So the world is drawn from the only footage this site can
- * honestly claim: its own evidence. Every dot is a marker on the OSINT map,
- * projected equirectangular and quantised by scripts/build-intro-points.py.
- * The continents that appear are not a picture of the world; they are the
- * shape of what has been documented, which is a truer thing to open with.
+ * WHAT IT PLAYS, AND WHY IT CAN PLAY IT.
+ * Five shots of real events: the prosecution's structure chart standing in the
+ * Nuremberg courtroom (1945), the Ivy Mike fireball (1952), Explorer 1 leaving
+ * the pad (1958), the peace march filling the park (1967), and the Iran-Contra
+ * committee in session (1987). Every one is public domain or CC0, pulled from
+ * a named archive item, cut by scripts/build-intro-reel.py, and CITED ON THE
+ * SCREEN WHILE IT PLAYS. That caption is not decoration - it is the same rule
+ * the rest of the site runs on. Footage nobody can trace is worth exactly as
+ * much as a claim nobody can check.
+ *
+ * The picture is cut and scaled and nothing else: no grade, no retime, no crop
+ * for drama. The grain, the scanlines and the vignette live in the overlay,
+ * over the footage rather than inside it, so the record and the styling can
+ * never be confused for one another.
+ *
+ * The last beat is the site's own map - 1,178 documented markers assembling
+ * under the wordmark. It is the one piece of "world footage" this site does
+ * own, and putting it last says what the five archive shots are doing here:
+ * the same job, a century apart.
  *
  * IT IS A LOADER, NOT A GATE. The click-gate was removed on 19 Sept 2026 at
  * the author's instruction - the site lands on the report. So this overlay:
@@ -19,8 +30,11 @@
  *     timer even if this file never loads. A document must never be held
  *     hostage by its own decoration.
  *
- * prefers-reduced-motion: no animation at all. The composed frame is held
- * briefly and dismissed.
+ * IT ALSO FAILS SOFT. If the video will not play - blocked, still buffering,
+ * codec refused - the map runs for the full ten seconds instead and the intro
+ * is exactly what it was before the footage existed. Nothing waits on bytes.
+ *
+ * prefers-reduced-motion: no video and no animation. Text at rest, short hold.
  *
  * It also solves the soundtrack's autoplay problem: dismissing the intro is a
  * user gesture, and a gesture is what the browser's media-engagement policy
@@ -33,9 +47,18 @@
   if (!el || el.dataset.done === '1') return;
 
   var DURATION = 10000, FADE = 700;
+  // The sweep has to FINISH with time to spare. At 1500 it completed 250ms
+  // before the fade began and the resolve never landed - the whole point of
+  // the last beat is the assembled map, not the assembling.
+  var MAP_HOLD = 1100;          // how long the map beat runs before the fade
+
+  var video = el.querySelector('video');
   var canvas = el.querySelector('canvas');
+  var capEl = el.querySelector('.b0b-intro-cap');
   var lineWrap = el.querySelector('.b0b-intro-lines');
+  var plate = el.querySelector('.b0b-intro-plate');
   var skipBtn = el.querySelector('.b0b-intro-skip');
+
   var reduced = false;
   try {
     reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -43,15 +66,21 @@
 
   var total = window.B0B_INTRO_TOTAL || 0;
   var pts = window.B0B_INTRO_POINTS || [];
+  var REEL = window.B0B_INTRO_REEL || [];
+  var REEL_MS = (window.B0B_INTRO_REEL_DUR || 0) * 1000;
+
+  // Where the footage ends and the map begins. If the video never starts this
+  // is rewritten to 0 and the map simply takes the whole ten seconds.
+  var mapAt = REEL_MS ? REEL_MS : 0;
 
   var LINES = [
-    { at: 900,  text: total ? (total.toLocaleString() + ' documented sites') : 'documented sites' },
-    { at: 2700, text: '24 sections · every source named' },
-    { at: 4500, text: 'documented · attributed · labeled · contested' },
-    { at: 6400, text: 'b0b.dev', wordmark: true }
+    { at: 1200, text: total ? (total.toLocaleString() + ' documented sites · 24 sections') : '24 sections' },
+    { at: 4200, text: 'documented · attributed · labeled · contested' },
+    { at: 7900, text: 'b0b.dev', wordmark: true }
   ];
 
   var raf = 0, start = 0, done = false, seeking = false, typed = [];
+  var videoOk = false, capShown = -1;
 
   function cleanup() {
     if (done) return;
@@ -61,6 +90,7 @@
     document.removeEventListener('keydown', onKey, true);
     el.removeEventListener('click', onClick);
     window.removeEventListener('resize', size);
+    if (video) { try { video.pause(); video.removeAttribute('src'); video.load(); } catch (e) {} }
     el.classList.add('b0b-intro-out');
     setTimeout(function () {
       if (el.parentNode) el.parentNode.removeChild(el);
@@ -87,62 +117,51 @@
   }
   function onClick() { dismiss(true); }
 
+  // ---- the map beat ---------------------------------------------------------
   var ctx = null, W = 0, H = 0, dpr = 1;
   function size() {
-    if (!canvas) return;
+    if (!canvas || !plate) return;
     dpr = Math.min(window.devicePixelRatio || 1, 2);
-    W = el.clientWidth; H = el.clientHeight;
+    W = plate.clientWidth; H = plate.clientHeight;
     canvas.width = Math.max(1, Math.round(W * dpr));
     canvas.height = Math.max(1, Math.round(H * dpr));
     canvas.style.width = W + 'px';
     canvas.style.height = H + 'px';
     if (ctx) ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    if (lineWrap) {
-      var p = project();
-      lineWrap.style.marginTop = Math.round(p.oy + 512 * p.s + Math.max(26, H * 0.05)) + 'px';
-    }
   }
 
-  // Equirectangular fit, aspect preserved. The map is held in the upper half
-  // and the text is placed under it by size(), so the two can never collide
-  // at any viewport ratio - the first draft let them overlap at 1200x800.
+  // Equirectangular fit inside the plate, aspect preserved.
   function project() {
-    var margin = Math.min(W, H) * 0.08;
-    var availW = W - margin * 2, availH = H * 0.50;
-    var scale = Math.min(availW / 1024, availH / 512);
-    var w = 1024 * scale;
-    return { ox: (W - w) / 2, oy: H * 0.09, s: scale };
+    var scale = Math.min((W * 0.94) / 1024, (H * 0.94) / 512);
+    return { ox: (W - 1024 * scale) / 2, oy: (H - 512 * scale) / 2, s: scale };
   }
 
-  function draw(elapsed) {
+  function drawMap(t) {
     if (!ctx) return;
     ctx.clearRect(0, 0, W, H);
     var p = project();
-    // West-to-east sweep: points are pre-sorted by longitude, so a simple
-    // prefix of the array is a wipe across the map.
-    var prog = Math.min(1, elapsed / 6000);
+    // West-to-east sweep: points are pre-sorted by longitude, so a prefix of
+    // the array is a wipe across the map.
+    var span = Math.max(600, MAP_HOLD - 200);
+    var prog = Math.min(1, t / span);
     var eased = 1 - Math.pow(1 - prog, 2);
     var upto = Math.floor(eased * pts.length);
-    // The flare marks the moving edge of the sweep. It is keyed to index, so
-    // once the sweep finishes it has to be faded out by time or the last
-    // points stay lit white for the rest of the intro.
-    var settle = prog < 1 ? 1 : Math.max(0, 1 - (elapsed - 6000) / 600);
+    // The flare marks the moving edge. It is keyed to index, so once the sweep
+    // finishes it has to be faded by time or the last points stay lit white.
+    var settle = prog < 1 ? 1 : Math.max(0, 1 - (t - span) / 500);
     for (var i = 0; i < upto; i++) {
       var x = p.ox + pts[i][0] * p.s, y = p.oy + pts[i][1] * p.s;
-      // Each dot flares as it lands, then settles to a steady amber.
       var age = (upto - i) / Math.max(1, pts.length * 0.06);
       var flare = (age < 1 ? (1 - age) : 0) * settle;
-      var r = 1.35 + flare * 2.4;
-      ctx.globalAlpha = 0.5 + flare * 0.5;
+      ctx.globalAlpha = 0.62 + flare * 0.38;
       ctx.fillStyle = flare > 0.25 ? '#fff6d5' : '#ffcc00';
       ctx.beginPath();
-      ctx.arc(x, y, r, 0, 6.2832);
+      ctx.arc(x, y, 1.6 + flare * 2.4, 0, 6.2832);
       ctx.fill();
     }
-    // The leading edge of the sweep. The first draft filled a 66px column at
-    // half opacity and read as a solid teal block over the map; it is now a
-    // one-pixel edge with a short, nearly transparent trail.
-    if (prog < 1 && upto > 0 && upto <= pts.length) {
+    // Leading edge: a one-pixel line with a short, nearly transparent trail.
+    // The first draft filled a 66px column and read as a solid teal block.
+    if (prog < 1 && upto > 0) {
       var lead = p.ox + pts[Math.min(upto, pts.length - 1)][0] * p.s;
       var top = p.oy, hgt = 512 * p.s;
       var g = ctx.createLinearGradient(lead - 34, 0, lead, 0);
@@ -155,6 +174,32 @@
       ctx.fillRect(lead, top, 1, hgt);
     }
     ctx.globalAlpha = 1;
+  }
+
+  // ---- the source line ------------------------------------------------------
+  // Which archive item is on screen right now. This is the whole point of the
+  // sequence: footage that names its own source while it plays.
+  function caption(elapsed) {
+    if (!capEl) return;
+    if (elapsed >= mapAt) {
+      if (capShown !== -2) {
+        capShown = -2;
+        capEl.textContent = total
+          ? (total.toLocaleString() + ' markers · the shape of what has been documented')
+          : 'the shape of what has been documented';
+        capEl.classList.add('b0b-intro-cap-own');
+      }
+      return;
+    }
+    var idx = -1;
+    for (var i = 0; i < REEL.length; i++) {
+      if (elapsed >= REEL[i].at * 1000) idx = i;
+    }
+    if (idx !== capShown) {
+      capShown = idx;
+      capEl.classList.remove('b0b-intro-cap-own');
+      capEl.textContent = idx >= 0 ? REEL[idx].cap : '';
+    }
   }
 
   function typeLines(elapsed) {
@@ -176,12 +221,19 @@
     }
   }
 
+  function render(elapsed) {
+    var inMap = elapsed >= mapAt;
+    el.classList.toggle('b0b-intro-mapping', inMap);
+    if (inMap) drawMap(elapsed - mapAt);
+    caption(elapsed);
+    typeLines(elapsed);
+  }
+
   function frame(ts) {
     if (done || seeking) return;
     if (!start) start = ts;
     var elapsed = ts - start;
-    draw(elapsed);
-    typeLines(elapsed);
+    render(elapsed);
     if (elapsed >= DURATION - FADE) { cleanup(); return; }
     raf = requestAnimationFrame(frame);
   }
@@ -193,21 +245,44 @@
     skipBtn.addEventListener('click', function (e) { e.stopPropagation(); dismiss(true); });
   }
 
-  if (reduced || !canvas || !canvas.getContext || !pts.length) {
-    // No animation: show the text at rest, hold briefly, leave.
+  if (reduced || !canvas || !canvas.getContext) {
+    // No animation: the composed frame at rest, held briefly, then gone.
     for (var i = 0; i < LINES.length; i++) {
       var d = document.createElement('div');
       d.className = 'b0b-intro-line' + (LINES[i].wordmark ? ' b0b-intro-mark' : '');
       d.textContent = LINES[i].text;
       lineWrap.appendChild(d);
     }
-    setTimeout(function () { dismiss(false); }, reduced ? 1600 : 900);
+    if (capEl && REEL.length) capEl.textContent = REEL[0].cap;
+    if (video) { try { video.removeAttribute('autoplay'); video.pause(); } catch (e) {} }
+    setTimeout(function () { dismiss(false); }, reduced ? 1800 : 900);
     return;
   }
 
   ctx = canvas.getContext('2d');
   window.addEventListener('resize', size);
   size();
+
+  // The footage is an enhancement, never a dependency. If it is playing by the
+  // time the first shot should be over, keep it; otherwise hand the whole ten
+  // seconds to the map and carry on as though the video had never existed.
+  if (video && REEL.length) {
+    video.muted = true;                 // the property, not just the attribute:
+    video.defaultMuted = true;          // an unmuted autoplay is refused outright
+    var p;
+    try { p = video.play(); } catch (e) {}
+    if (p && p.catch) p.catch(function () {});
+    video.addEventListener('playing', function () {
+      videoOk = true;
+      el.classList.add('b0b-intro-reel-on');
+    });
+    setTimeout(function () {
+      if (!videoOk) { mapAt = 0; el.classList.add('b0b-intro-reel-off'); }
+    }, 900);
+  } else {
+    mapAt = 0;
+    el.classList.add('b0b-intro-reel-off');
+  }
 
   // Render an arbitrary moment of the timeline. Exists because headless
   // Chromium fires requestAnimationFrame only a couple of times under
@@ -218,8 +293,8 @@
     // repaints the opening 50ms over the frame being inspected.
     seeking = true;
     if (raf) { cancelAnimationFrame(raf); raf = 0; }
-    draw(ms);
-    typeLines(ms);
+    if (video && ms < mapAt) { try { video.currentTime = ms / 1000; } catch (e) {} }
+    render(ms);
   };
 
   raf = requestAnimationFrame(frame);

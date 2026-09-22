@@ -37,7 +37,7 @@
   <meta name="twitter:title" content="PROJECT ANGLERFISH: the architecture of control — b0b.dev">
   <meta name="twitter:description" content="24 sections of tiered OSINT on structures of control: institutional capture, surveillance cities, underground infrastructure, the Epstein-Maxwell record. documented fact vs labeled hypothesis.">
   <meta name="twitter:image" content="https://www.b0b.dev/img/og-card.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"PROJECT ANGLERFISH: CASSOWARY ORCA AGILITY — the architecture of control, tiered and sourced","url":"https://www.b0b.dev/report","description":"24-section OSINT report on the architecture of control: power transfer, surveillance systems, underground construction, the Epstein-Maxwell record. all tiered.","image":"https://www.b0b.dev/img/og-card.png","isPartOf":{"@type":"WebSite","name":"b0b.dev","url":"https://www.b0b.dev/"},"headline":"PROJECT ANGLERFISH: CASSOWARY ORCA AGILITY — the architecture of control, tiered and sourced","author":{"@type":"Person","name":"b0b"},"publisher":{"@type":"Organization","name":"b0b.dev","url":"https://www.b0b.dev/"},"mainEntityOfPage":"https://www.b0b.dev/report","dateModified":"2026-09-22T21:13:07.338Z"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"PROJECT ANGLERFISH: CASSOWARY ORCA AGILITY — the architecture of control, tiered and sourced","url":"https://www.b0b.dev/report","description":"24-section OSINT report on the architecture of control: power transfer, surveillance systems, underground construction, the Epstein-Maxwell record. all tiered.","image":"https://www.b0b.dev/img/og-card.png","isPartOf":{"@type":"WebSite","name":"b0b.dev","url":"https://www.b0b.dev/"},"headline":"PROJECT ANGLERFISH: CASSOWARY ORCA AGILITY — the architecture of control, tiered and sourced","author":{"@type":"Person","name":"b0b"},"publisher":{"@type":"Organization","name":"b0b.dev","url":"https://www.b0b.dev/"},"mainEntityOfPage":"https://www.b0b.dev/report","dateModified":"2026-09-22T21:41:11.394Z"}</script>
   <!-- seo:end -->
   <!-- Search Console ownership. The site opens on this page since 19 Sept 2026
        (/ redirects here), so the verifier's fetch of the homepage ends up on
@@ -476,36 +476,74 @@
 /* ---- ten-second loading intro (site/intro.js). Kept in the head so the
    overlay paints before the 1.4 MB document does. It is a loader, not a gate:
    once per session, skippable, self-dismissing, and removed on a timer even
-   if the script never loads. Crawlers and no-JS readers never see it. ---- */
+   if the script never loads. Crawlers and no-JS readers never see it.
+
+   The plate holds five public-domain archive shots, each captioned with the
+   item it came from while it is on screen. The grain, scanlines and vignette
+   are drawn OVER the footage, never baked into it, so the styling can never
+   be mistaken for the record. ---- */
 html.b0b-intro-lock{overflow:hidden}
 #b0b-intro[hidden]{display:none}
 #b0b-intro{position:fixed;inset:0;z-index:2147483600;background:#050505;
-  display:flex;align-items:flex-start;justify-content:center;cursor:pointer;
-  opacity:1;transition:opacity .7s ease}
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  opacity:1;transition:opacity .7s ease;
+  font-family:var(--mono,ui-monospace,SFMono-Regular,Menlo,monospace)}
 #b0b-intro.b0b-intro-out{opacity:0;pointer-events:none}
-#b0b-intro canvas{position:absolute;inset:0;width:100%;height:100%}
-#b0b-intro .b0b-intro-lines{position:relative;z-index:1;width:min(760px,88vw);
-  margin-top:min(62vh,540px);
-  font-family:var(--mono,ui-monospace,SFMono-Regular,Menlo,monospace);
-  color:#ffcc00;font-size:clamp(12px,2vw,18px);line-height:1.95;
-  letter-spacing:.05em;text-align:center;
-  text-shadow:0 0 20px #050505,0 0 8px #050505}
-#b0b-intro .b0b-intro-line{min-height:1.95em;overflow-wrap:break-word}
-@media (max-width:560px){
-  #b0b-intro .b0b-intro-lines{font-size:11px;letter-spacing:.02em;line-height:1.85;
-    width:92vw}
-  #b0b-intro .b0b-intro-mark{font-size:30px;letter-spacing:.1em}
-}
-#b0b-intro .b0b-intro-mark{color:#fff;font-size:clamp(24px,5.4vw,46px);
-  letter-spacing:.14em;margin-top:.45em;line-height:1.3}
-#b0b-intro .b0b-intro-skip{position:absolute;z-index:2;
+#b0b-intro .b0b-intro-stack{display:flex;flex-direction:column;align-items:center;
+  gap:clamp(10px,1.8vh,20px);width:min(86vw,760px,calc(54vh * 4 / 3))}
+#b0b-intro .b0b-intro-plate{position:relative;width:100%;aspect-ratio:4/3;
+  background:#000;border:1px solid #232323;overflow:hidden;
+  box-shadow:0 20px 70px rgba(0,0,0,.85)}
+#b0b-intro .b0b-intro-plate video,#b0b-intro .b0b-intro-plate canvas{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transition:opacity .5s ease}
+#b0b-intro.b0b-intro-reel-on .b0b-intro-plate video{opacity:1}
+#b0b-intro.b0b-intro-reel-off .b0b-intro-plate video{display:none}
+/* The footage clears to black BEFORE the map arrives. Overlapping the two
+   reads as a smear over the last shot rather than a change of subject. */
+#b0b-intro.b0b-intro-mapping .b0b-intro-plate video{opacity:0;transition:opacity .26s ease}
+#b0b-intro.b0b-intro-mapping .b0b-intro-plate canvas{opacity:1;transition:opacity .5s ease .2s}
+/* Scanlines and a vignette, over the picture. */
+#b0b-intro .b0b-intro-grain{position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:repeating-linear-gradient(to bottom,rgba(0,0,0,.26) 0 1px,rgba(0,0,0,0) 1px 3px),
+    radial-gradient(120% 100% at 50% 50%,rgba(0,0,0,0) 44%,rgba(0,0,0,.6) 100%)}
+#b0b-intro .b0b-intro-scan{position:absolute;left:0;right:0;top:0;height:26%;
+  pointer-events:none;z-index:3;
+  background:linear-gradient(to bottom,rgba(0,204,255,0) 0%,rgba(0,204,255,.07) 55%,rgba(0,204,255,0) 100%);
+  animation:b0bIntroScan 3.6s linear infinite}
+@keyframes b0bIntroScan{from{transform:translateY(-40%)}to{transform:translateY(400%)}}
+#b0b-intro .b0b-intro-plate::before,#b0b-intro .b0b-intro-plate::after{content:'';
+  position:absolute;width:14px;height:14px;border:1px solid rgba(255,204,0,.5);
+  pointer-events:none;z-index:4}
+#b0b-intro .b0b-intro-plate::before{top:8px;left:8px;border-right:0;border-bottom:0}
+#b0b-intro .b0b-intro-plate::after{bottom:8px;right:8px;border-left:0;border-top:0}
+/* The source line. Every shot names where it came from while it plays. */
+#b0b-intro .b0b-intro-cap{max-width:100%;min-height:1.5em;text-align:center;
+  font-size:clamp(9px,1.05vw,11px);letter-spacing:.12em;color:#7d8b91;
+  text-transform:uppercase;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#b0b-intro .b0b-intro-cap::before{content:'▌\00a0';color:#00ccff}
+#b0b-intro .b0b-intro-cap-own{color:#9c8f68}
+#b0b-intro .b0b-intro-cap-own::before{color:#ffcc00}
+/* Height is reserved for every line up front. Without this the flex
+   column re-centres as each line types in and the plate visibly jumps. */
+#b0b-intro .b0b-intro-lines{width:100%;text-align:center;color:#ffcc00;
+  min-height:clamp(96px,15vh,126px);
+  font-size:clamp(11px,1.5vw,15px);line-height:1.85;letter-spacing:.05em}
+#b0b-intro .b0b-intro-line{min-height:1.85em}
+#b0b-intro .b0b-intro-mark{color:#fff;font-size:clamp(22px,4.6vw,40px);
+  letter-spacing:.14em;margin-top:.25em;line-height:1.25}
+#b0b-intro .b0b-intro-skip{position:absolute;z-index:5;
   top:calc(env(safe-area-inset-top,0px) + 14px);right:14px;
-  font:inherit;font-family:var(--mono,ui-monospace,SFMono-Regular,Menlo,monospace);
-  font-size:11px;letter-spacing:.14em;color:#888;background:transparent;
-  border:1px solid #333;border-radius:3px;padding:5px 10px;cursor:pointer}
+  font:inherit;font-size:11px;letter-spacing:.14em;color:#888;
+  background:transparent;border:1px solid #333;border-radius:3px;
+  padding:5px 10px;cursor:pointer}
 #b0b-intro .b0b-intro-skip:hover{color:#ffcc00;border-color:#ffcc00}
 #b0b-intro .b0b-intro-skip:focus-visible{outline:2px solid #ffcc00;outline-offset:2px}
-@media (prefers-reduced-motion: reduce){#b0b-intro{transition:none}}
+@media (prefers-reduced-motion: reduce){
+  #b0b-intro{transition:none}
+  #b0b-intro .b0b-intro-scan{animation:none;opacity:0}
+  #b0b-intro .b0b-intro-plate video,#b0b-intro .b0b-intro-plate canvas{transition:none}
+}
 @media print{#b0b-intro{display:none!important}}
 </style>
 </head>
@@ -515,8 +553,19 @@ html.b0b-intro-lock{overflow:hidden}
      turns it on, and it also removes the overlay on a timer so a decoration
      can never hold the document hostage. -->
 <div id="b0b-intro" hidden role="status" aria-live="polite" aria-label="b0b.dev intro">
-  <canvas aria-hidden="true"></canvas>
-  <div class="b0b-intro-lines"></div>
+  <div class="b0b-intro-stack">
+    <div class="b0b-intro-plate">
+      <video playsinline muted preload="auto" poster="/intro-poster.jpg?v=1" aria-hidden="true">
+        <source src="/intro-reel.webm?v=1" type="video/webm">
+        <source src="/intro-reel.mp4?v=1" type="video/mp4">
+      </video>
+      <canvas aria-hidden="true"></canvas>
+      <div class="b0b-intro-scan" aria-hidden="true"></div>
+      <div class="b0b-intro-grain" aria-hidden="true"></div>
+    </div>
+    <div class="b0b-intro-cap"></div>
+    <div class="b0b-intro-lines"></div>
+  </div>
   <button type="button" class="b0b-intro-skip" aria-label="Skip intro">SKIP</button>
 </div>
 <script>
@@ -6631,7 +6680,8 @@ R O T A S</pre>
 <script src="/countermeasures.js?v=1" defer></script>
 <script src="/theme.js" defer></script>
 <script src="/intro-points.js?v=1" defer></script>
-<script src="/intro.js?v=1" defer></script>
+<script src="/intro-reel.js?v=1" defer></script>
+<script src="/intro.js?v=2" defer></script>
 <!-- Site soundtrack: Restless Leg Syndrome, "Represent The Fucking Planet" (Totem, 2021),
      played from the label's YouTube upload through youtube-nocookie; nothing is rehosted.
      The control mounts unconditionally and plays through a plain iframe, so it still works
