@@ -181,6 +181,42 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**TEN-SECOND LOADING INTRO — 22 Sept 2026, live on `report.html`.** Author: *"animate a text based intro
+with video clips from the world - and do 10 second intro for b0b.dev for loading."*
+**There is no stock footage and none was bought or rehosted.** The world is drawn from **the report's own
+markers**: `scripts/build-intro-points.py` reuses `build-kml.py`'s character-walker on the map's
+`locations` literal, projects equirectangular, quantises to a 1024×512 grid and de-dupes co-located pins
+→ **780 distinct points, 7.9 KB** in `site/intro-points.js`. The continents that assemble are not a
+picture of the world, they are **the shape of what has been documented** — which is the only clip from
+the world this site can honestly claim to own. Sweep runs **west→east** (points pre-sorted by longitude),
+four lines type in, closing on the **b0b.dev** wordmark; the third line is the **tier ladder**
+(*documented · attributed · labeled · contested*), i.e. the method as the content.
+**IT IS A LOADER, NOT A GATE — this matters, because the click-gate was removed on 19 Sept at the
+author's own instruction.** So: **once per session** (`sessionStorage`), **skipped by click / any key /
+Esc / SKIP**, **self-dismissing at 10 s**, **suppressed entirely when `location.hash` is set** (a deep
+link means someone is going to a citation — do not stand in the way), **JS-only so crawlers and no-JS
+readers never see it**, and **FAILS OPEN**: the overlay is `hidden` in the markup and an inline
+nonce-stamped bootstrap in `report.html` both reveals it *and* sets an 11.5 s timer that rips it out even
+if `intro.js` never loads. *A document must never be held hostage by its own decoration.*
+`prefers-reduced-motion` → no animation, text at rest, short hold. **It also fixes the soundtrack's
+autoplay problem:** dismissing the intro is a user gesture, so `intro.js` calls
+`window.__b0bSoundtrackStart()` (new export in `soundtrack.js`, which respects a previous stop).
+**Four defects found by actually looking at rendered frames, all fixed:** the scan line filled a 66 px
+column at half opacity and read as a **solid teal block** (now a 1 px edge with a faint 34 px trail);
+**text overlapped the map** at 1200×800 (the map is now capped at 50% height and `size()` positions the
+text from the map's computed bottom); dots were too small; and the **flare keyed to index, so the
+easternmost points stayed lit white forever** (now time-faded over 600 ms once the sweep completes).
+**Counts unchanged — 282 / 1,104 / 134** (the overlay uses div/canvas/button, no `<p>` or `<h3>`, so the
+scale line does not move). security 33/33, seo 47/48.
+***VERIFICATION TRAP, THE BIG ONE, AND THE FIX IS REUSABLE:*** headless Chromium fires
+`requestAnimationFrame` only **once or twice** under `--virtual-time-budget`, so a screenshot of any
+rAF animation shows **the first ~50 ms** and looks broken when it is fine. `intro.js` therefore exports
+**`window.__b0bIntroSeek(ms)`**, which **cancels the live loop** (the first attempt did not, and the next
+frame cleared the canvas and repainted the opening over the frame being inspected — the canvas showed
+50 ms while the DOM text showed 9 s) and renders one exact moment. **Screenshot through a seek harness,
+never the live loop.** Also re-confirmed: the **500 px width clamp** makes any sub-500 screenshot a crop,
+not a layout — verify narrow at **≥560 px**.
+
 **SOUNDTRACK REWRITTEN AFTER "not up", AND THE TRACK IS NOW THE NINTH SIGNAL — 22 Sept 2026.**
 Author: *"Restless leg syndrome not up."* **Two separate mistakes, both mine.**
 - **(1) The control was built inside the YouTube IFrame API's ready callback**, so if that API did

@@ -167,6 +167,15 @@
     setLabel();
   }
 
+  // Handed to intro.js. Dismissing the intro is a real user gesture, and a
+  // gesture is exactly what the browser's autoplay policy wants before it
+  // will allow unmuted audio - so the loader doubles as the permission slip.
+  // It respects a previous stop: a reader who silenced this stays silenced.
+  window.__b0bSoundtrackStart = function () {
+    if (offByChoice() || playing) return;
+    play(true);
+  };
+
   toggle.addEventListener('click', function () {
     if (playing) { stop(); remember(true); }
     else { remember(false); play(true); }
