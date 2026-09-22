@@ -181,6 +181,41 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**SOUNDTRACK REWRITTEN AFTER "not up", AND THE TRACK IS NOW THE NINTH SIGNAL — 22 Sept 2026.**
+Author: *"Restless leg syndrome not up."* **Two separate mistakes, both mine.**
+- **(1) The control was built inside the YouTube IFrame API's ready callback**, so if that API did
+  not load — blocker, privacy extension, filtered network, slow — **nothing appeared at all, not even
+  a play button.** `site/soundtrack.js` is rewritten: **the bar mounts unconditionally**, playback runs
+  through a **plain `<iframe>` driver that needs no external script**, and the **API is adopted only if
+  it loads**, purely to report true state. Two further defects fixed: a cross-origin iframe **needs
+  `allow="autoplay"` on the element** to receive the autoplay permission the Permissions-Policy header
+  delegates (header delegation alone is not enough — this alone would have blocked autoplay), and the
+  player had **1×1 dimensions**, which invites the embed to treat itself as hidden; it is now 320×180
+  off-viewport. Tag bumped to **`?v=2`**. *Note `signal-bar.js` already injects the YouTube API as
+  `b0b-yt-api` and sets `onYouTubeIframeAPIReady`; soundtrack.js chains rather than overwrites it.*
+- **(2) "add this to the playlist tho" almost certainly meant SECTION XXIV, not the film reel.**
+  **XXIV carries "the bar" — a curated song playlist, eight numbered "signals"** (Daft Punk, Tracy
+  Chapman, Paul Simon, Talking Heads, Filter, TOOL, The Smiths, CCR), each an essay plus a
+  youtube-nocookie embed, with its own provenance note. **I had not read XXIV and put the track in the
+  home-page transmissions reel (films).** It is now **also `xxiv-ninth-signal-restless-leg-syndrome-…`**
+  (toc 18 → 19). *The Creedence entry claimed to be "the last thing on the bar"; that sentence was
+  amended rather than left false.* Entry facts: Vienna trio **d.b.h / Chrisfader / Testa**, track 6 on
+  **Totem, 6 Aug 2021, Duzz Down San** (2LP), 7-inch on Little Beat More Dec 2022. The rationale is
+  the honest one — **a turntablist record is assembled from other people's records exactly as this
+  report is assembled from other people's documents, and both only survive if every splice is marked**
+  — and the title reading is **labeled as the site's own, not as the artists' stated meaning** (no
+  interview found; they have not been asked to lend the document anything).
+**Scale line 282 / 1,104 / 134.** **VERIFICATION LIMIT, IMPORTANT AND NOT A DEFECT:** headless Chromium
+here **never executes deferred scripts on `report.html`** — `b0b-signal-bar`, `ttsFab` and `b0b-snd` are
+all absent from a `--dump-dom` even at a 90 s virtual-time budget, including the two that certainly work
+in production. **So "the control is missing from the DOM dump" proves nothing about the live site.** What
+*is* provable here: the script mounts correctly on an isolated local page (control, iframe with the allow
+attribute, honest PLAY label). **To test report JS, use an isolated page, not a dump of the report.**
+*Shell trap repeated and confirmed: `pkill -f "node server.js"` kills the shell running it (exit 144) —
+never pkill, always a fresh port. The local server also 301s to HTTPS unless `NODE_ENV=development`.*
+*And the dev server rate-limits at 60/min — a curl that returns empty mid-diagnosis is probably throttled,
+not evidence.*
+
 **SHINYHUNTERS v THE FBI — author dropped the 404 Media link 22 Sept 2026; PUBLISHED same day as XVI
 `xvi-a-claim-against-the-bureau-and-a-ransom-demanded-in-retractions` (toc 31 → 32).** **The keepable
 finding is the demand, not the breach: the ransom is a retraction.** The group gave the Bureau **seven

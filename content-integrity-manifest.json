@@ -1,13 +1,13 @@
 {
-  "generated": "2026-09-22T20:16:35.100Z",
+  "generated": "2026-09-22T21:13:07.338Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "25ed2c3a6c9a01bf4ed4309b62bd0fbd531b0a65e7e8acc222a771d79915c502",
+  "fullFileHash": "5a08932084326b4c94491eb9cde3ffaabf79c87513f901eb344bf862cf6b6c0b",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "d4b79ebbc2c82044a6ead78cfdb3ecd39e86d95fc6eb69e57d142f47c3d0ce93",
+      "hash": "2c5b952374edbdff027e7e1b99eb7fbe46c4524f48a474e1215d7e5dec2cc326",
       "length": 38839
     },
     {
@@ -1442,8 +1442,8 @@
     },
     {
       "id": "XXIV",
-      "hash": "f48a447b9df5b894f6a256fccf1a313fc51164866e51db07f4365cf4d0b87074",
-      "length": 1273
+      "hash": "ef23960252da58031b90168eeec066cc7db34b6e57bd84d64a0cf639fafccd33",
+      "length": 1354
     },
     {
       "id": "contact",
@@ -1497,8 +1497,13 @@
     },
     {
       "id": "xxiv-eighth-signal-creedence-clearwater-revival",
-      "hash": "388d0f95f8d37e2362957c2d5ff7a6a1b80e55182439334b0717ac64070a029a",
-      "length": 1108
+      "hash": "d465e47b51f8978c7452181fb0aa9392df4347d3ab9e35252a67577f250ce70c",
+      "length": 1099
+    },
+    {
+      "id": "xxiv-ninth-signal-restless-leg-syndrome-represent-the-fucking-planet",
+      "hash": "5b3ba6fd24d18e4f5d09eaf6e1611c0974186ebc6893d03c24a8368422a07637",
+      "length": 2388
     },
     {
       "id": "xxiv-trust",
@@ -7695,191 +7700,209 @@
     },
     {
       "index": 1026,
-      "hash": "a55910923f235736a65214d04312e9b1d0ce8be046a82fcc408d97db4816291e",
+      "hash": "68792bd2410a20400b712624e93aae7225ce275365fb9881988845665520b700",
       "preview": "Why this one closes the set, and it is a point about method rather than music. A...",
-      "length": 786
+      "length": 777
     },
     {
       "index": 1027,
+      "hash": "46ed0fe92d6ca8289dd915eb061edfd6e559e8cf65f06dd295fa5b07d4b95153",
+      "preview": "What is documented. Restless Leg Syndrome are a Vienna group - the producer d.b....",
+      "length": 492
+    },
+    {
+      "index": 1028,
+      "hash": "f6bc1bed3d70217ab32671d188967ccc4fce291747551bc41e8aabeea2764e8d",
+      "preview": "Why it is on the bar, and the first half is method rather than mood. A turntabli...",
+      "length": 878
+    },
+    {
+      "index": 1029,
+      "hash": "bd47c18fad027d66133c352e57418b9c5fc4266bb2a01e5fb4eb22f9df014328",
+      "preview": "The title, taken as a reading and labeled as one. Almost every faction this repo...",
+      "length": 1016
+    },
+    {
+      "index": 1030,
       "hash": "9383a39e463b6cb2d8e8cfb2d6f0f8edf9e4c882ac17f80df67e574385c20ce4",
       "preview": "This report was compiled with the assistance of Claude, built by Anthropic. The ...",
       "length": 401
     },
     {
-      "index": 1028,
+      "index": 1031,
       "hash": "c060b9f2c7aa7c225438bd93a1da17d1228cfa82df72d2caae6cab2925ae3814",
       "preview": "The full picture requires stating what Section X documents: in March 2026, Anthr...",
       "length": 666
     },
     {
-      "index": 1029,
+      "index": 1032,
       "hash": "b85c240bb9759990855dc6d0a19e17dbb1332f764f0e1d4af18dcabc9c9a1147",
       "preview": "For that reason the author has withdrawn: his Claude subscription is canceled, e...",
       "length": 547
     },
     {
-      "index": 1030,
+      "index": 1033,
       "hash": "4a4e7610b2c3de1fd523fef1920e4040c152e45b374f15d90f0e7962c1befbac",
       "preview": "This report is built on publicly available information - declassified documents,...",
       "length": 240
     },
     {
-      "index": 1031,
+      "index": 1034,
       "hash": "2c4cc3ff6965ed4a675107e57198c329a92c47c7c8a691a60d7026067fb2cc3d",
       "preview": "The patterns in this report emerge from cross-referencing, not from any single s...",
       "length": 98
     },
     {
-      "index": 1032,
+      "index": 1035,
       "hash": "90492cc8942cef3b3b4f9b10bbdff4169abae7e8783e152e296bc443bd5f49b7",
       "preview": "The interactive map at /map contains all geolocated data points. For researchers...",
       "length": 103
     },
     {
-      "index": 1033,
+      "index": 1036,
       "hash": "a7c97d1a90b658bb707610dc235705800e943fc668fca66e38ec656a2f1c2175",
       "preview": "This report distinguishes between:",
       "length": 34
     },
     {
-      "index": 1034,
+      "index": 1037,
       "hash": "9de53f5cdc42549c586df6043df8b96ea1d12d74fb17c03a92675ecbf3f09e79",
       "preview": "If you find an error, a mischaracterization, or a claim that cannot be verified ...",
       "length": 201
     },
     {
-      "index": 1035,
+      "index": 1038,
       "hash": "43fe7763e9f9b09afb7b31468abcf33db325555fe5b73eab536fc9766967e342",
       "preview": "If you are building a case, writing an article, or conducting an investigation t...",
       "length": 127
     },
     {
-      "index": 1036,
+      "index": 1039,
       "hash": "57fdcf9a2e3dc280faaab9d07439b678b8cd4caae8c23024a83ef171bf87eca2",
       "preview": "God, Jesus Christ, Yeshua HaMashiach says &ldquo;It is finished&rdquo; - &ldquo;...",
       "length": 102
     },
     {
-      "index": 1037,
+      "index": 1040,
       "hash": "e1740e41aa59e5ff2b4a487354285517b8128eacee0757f6d91555af5f160147",
       "preview": "This is timetravel in a borrowed moment of God Time.",
       "length": 52
     },
     {
-      "index": 1038,
+      "index": 1041,
       "hash": "35b1e4dee70349af09159d79d66cfb368c546b2816a2e60c0b6fceac8a5e6d33",
       "preview": "The adversary has no move, and is non-existent as adversary. It attempts power -...",
       "length": 112
     },
     {
-      "index": 1039,
+      "index": 1042,
       "hash": "e4c210340209ecfb6839750a6ca15f0f0a8f5053eec293b887061decdec0aec7",
       "preview": "God is All Powerful, and the Only Source of Power - Spiritual and Scientific.",
       "length": 77
     },
     {
-      "index": 1040,
+      "index": 1043,
       "hash": "d5ec23de890ff522e1dba206776afb40bf6e92527a136e06807cc0eb2985b06e",
       "preview": "Each Christ paradox and each parable is math.",
       "length": 45
     },
     {
-      "index": 1041,
+      "index": 1044,
       "hash": "02589526694c6169242d52af45cdf6469ddb0242a28daae5d2136573eefd533e",
       "preview": "God grips me and holds me. Not a tattoo. Not a city-state, or the law of men, or...",
       "length": 106
     },
     {
-      "index": 1042,
+      "index": 1045,
       "hash": "37a4459dbef875543b4fc7f362710232843cfdd0f6d74f80c9eefed26e27f3a2",
       "preview": "Commentary - the report&rsquo;s voice, on the verse above, and it runs in the au...",
       "length": 503
     },
     {
-      "index": 1043,
+      "index": 1046,
       "hash": "b0268648d5dfe2bd47c08a8bf4f36b8d694182f04233cd528b568d6316133e34",
       "preview": "What the scholarship does not support is the gloss most people have heard, and i...",
       "length": 923
     },
     {
-      "index": 1044,
+      "index": 1047,
       "hash": "7ac5b6439f23a3936abc5b65e39d8515c51108b29b7a9f18c54377388b787256",
       "preview": "So the popular reading is a misread abbreviation, canonised in a lexicon, correc...",
       "length": 1037
     },
     {
-      "index": 1045,
+      "index": 1048,
       "hash": "93e40423a9e545a3a19ffd28901fde2d420b48bf63a2e2e1f9733c87f620d250",
       "preview": "And there is a second perfect passive, which the author puts beside the first, a...",
       "length": 801
     },
     {
-      "index": 1046,
+      "index": 1049,
       "hash": "b943d9fc2654938dd07d12fc494fdecdabcb3de44992b2672084c3ed3a20d860",
       "preview": "What almost every citation of that verse drops is the sentence it is inside, and...",
       "length": 557
     },
     {
-      "index": 1047,
+      "index": 1050,
       "hash": "3e6f195d50cba12f83ce5576caf442b9f4bb122dfd0c7955509adbacd04909ea",
       "preview": "Which is finally why this document publishes its own corrections, and it is wort...",
       "length": 1174
     },
     {
-      "index": 1048,
+      "index": 1051,
       "hash": "ebb673b48b4ab38077bbe501f4230a5f51a9787d98585dcea98b8080a59f2dc8",
       "preview": "And the tenet the author asks this report to close on is Isaiah 54:17, which is ...",
       "length": 856
     },
     {
-      "index": 1049,
+      "index": 1052,
       "hash": "e320da3c22b700c071d981616734d4c6236a4c8f2231b30ae90926ab34983325",
       "preview": "Which makes it the exact complement of the &ldquo;fear not&rdquo; above, and not...",
       "length": 814
     },
     {
-      "index": 1050,
+      "index": 1053,
       "hash": "05418fc0198fc706a37fc76db7510297acd0df94ac46a1c972cfd1f9ee1dcd16",
       "preview": "So the close is three completed things, and the report claims none of them as it...",
       "length": 864
     },
     {
-      "index": 1051,
+      "index": 1054,
       "hash": "7994fef1334097a73543147655e308775892cfb8188b20b05d378e1a81026b13",
       "preview": "And the finished thing has a shape in mathematics, which the author&rsquo;s own ...",
       "length": 2083
     },
     {
-      "index": 1052,
+      "index": 1055,
       "hash": "8295fc70301f2e5b6d613f6c405b1ed8a3d4999ee9d958f2768535866a651c5e",
       "preview": "And there is a fourth thing, added last, which is the only line in this document...",
       "length": 732
     },
     {
-      "index": 1053,
+      "index": 1056,
       "hash": "ec835702f3be228050840033b79c92ab86b13b81598e83643a6f827c3b4a3a89",
       "preview": "What he is naming are claimants. The report catalogues bodies that assert sovere...",
       "length": 781
     },
     {
-      "index": 1054,
+      "index": 1057,
       "hash": "c6b35dc69e851a4761932ea156912d8cfbbe0c05e21ce14f5473661dc25a300e",
       "preview": "The finding, stated as a negative and sourced entirely to work already in this d...",
       "length": 1130
     },
     {
-      "index": 1055,
+      "index": 1058,
       "hash": "4ab0b456b1525b40d5ef3a69f415c43faff10d3630819f976f8ebdbda57ddff9",
       "preview": "The most striking version of it is the continuity apparatus conceding the point ...",
       "length": 669
     },
     {
-      "index": 1056,
+      "index": 1059,
       "hash": "bbf33e7107dbdbf82d92b8a1442342ac84914a38a98f09c22ab572873e0f97ba",
       "preview": "And he took his own mark off the list first, which is the part that costs him so...",
       "length": 1383
     }
   ],
-  "totalSections": 306,
-  "totalParagraphs": 1057
+  "totalSections": 307,
+  "totalParagraphs": 1060
 }
