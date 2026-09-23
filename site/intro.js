@@ -47,7 +47,7 @@
 
   var MODE = el.dataset.mode === 'page' ? 'page' : 'overlay';
   var SHARE_URL = 'https://www.b0b.dev/intro';
-  var SHARE_TEXT = 'b0b.dev — a three-minute film cut from public-domain footage. Every shot cited.';
+  var SHARE_TEXT = 'b0b.dev — a short film cut from archive and contemporary footage, then and now. Every shot cited.';
   var AUTO_ENTER = 14000;     // an untouched start card dissolves into the report
   var MAP_SWEEP = 2600;       // the closing map assembles in this long
   var MAP_TEXT = 24;          // seconds the closing part runs when nothing is speaking
@@ -68,9 +68,9 @@
   el.innerHTML =
     '<div class="bi-stage">' +
       '<div class="bi-plate">' +
-        '<video playsinline muted preload="metadata" poster="/intro-poster.jpg?v=2" aria-hidden="true">' +
-          '<source src="/intro-reel.webm?v=2" type="video/webm">' +
-          '<source src="/intro-reel.mp4?v=2" type="video/mp4">' +
+        '<video playsinline muted preload="metadata" poster="/intro-poster.jpg?v=3" aria-hidden="true">' +
+          '<source src="/intro-reel.webm?v=3" type="video/webm">' +
+          '<source src="/intro-reel.mp4?v=3" type="video/mp4">' +
         '</video>' +
         '<canvas aria-hidden="true"></canvas>' +
         '<div class="bi-scan" aria-hidden="true"></div>' +
@@ -83,7 +83,7 @@
     '</div>' +
     '<div class="bi-card bi-start">' +
       '<div class="bi-mark">b0b.dev</div>' +
-      '<div class="bi-kicker">a short film in eight parts &middot; 3 min<br>public-domain footage &middot; every shot cited</div>' +
+      '<div class="bi-kicker">a short film in eight parts &middot; then and now<br>archive and contemporary footage &middot; every shot cited</div>' +
       '<div class="bi-actions">' +
         '<button type="button" class="bi-btn bi-play">&#9654;&nbsp; WATCH THE FILM</button>' +
         '<button type="button" class="bi-btn bi-ghost bi-enter">ENTER THE REPORT &rarr;</button>' +
@@ -116,6 +116,7 @@
       '<button type="button" class="bi-skip">SKIP &rsaquo;</button>' +
     '</div>';
 
+  if (window.B0B_INTRO_STYLE === 'collage') el.classList.add('bi-collage');
   var $ = function (s) { return el.querySelector(s); };
   var video = $('video'), canvas = $('canvas'), plate = $('.bi-plate');
   var chNum = $('.bi-chapter b'), chTitle = $('.bi-chapter span');

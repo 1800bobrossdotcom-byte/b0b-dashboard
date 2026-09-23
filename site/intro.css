@@ -13,11 +13,11 @@ html.b0b-intro-lock{overflow:hidden}
 #b0b-intro.bi-out{opacity:0;pointer-events:none}
 #b0b-intro .bi-boot{font-size:clamp(26px,5vw,48px);letter-spacing:.14em;color:#fff;opacity:.85}
 
-/* ---- the plate: as large as the screen allows, 4:3 like the film ---- */
+/* ---- the plate: as large as the screen allows, 16:9 like the film ---- */
 #b0b-intro .bi-stage{display:flex;flex-direction:column;align-items:center;gap:10px;
-  width:min(96vw,calc((100vh - 56px) * 4 / 3))}
-@supports (height:100dvh){#b0b-intro .bi-stage{width:min(96vw,calc((100dvh - 56px) * 4 / 3))}}
-#b0b-intro .bi-plate{position:relative;width:100%;aspect-ratio:4/3;background:#000;overflow:hidden;
+  width:min(96vw,calc((100vh - 56px) * 16 / 9))}
+@supports (height:100dvh){#b0b-intro .bi-stage{width:min(96vw,calc((100dvh - 56px) * 16 / 9))}}
+#b0b-intro .bi-plate{position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden;
   border:1px solid #1f1f1f;box-shadow:0 24px 80px rgba(0,0,0,.9)}
 #b0b-intro .bi-plate video,#b0b-intro .bi-plate canvas{position:absolute;inset:0;width:100%;height:100%;
   object-fit:cover;transition:opacity .5s ease}
@@ -80,6 +80,11 @@ html.b0b-intro-lock{overflow:hidden}
   border:1px solid #333;border-radius:3px;padding:6px 10px;cursor:pointer}
 #b0b-intro .bi-ctl button:hover{color:#ffcc00;border-color:#ffcc00}
 
+/* The collage cut burns its part cards and source tags into the picture, where
+   they cannot drift from the frame they describe; the HTML versions stand down
+   while it plays and come back for the closing map. */
+#b0b-intro.bi-collage.bi-s-film .bi-chapter,#b0b-intro.bi-collage.bi-s-film .bi-src{display:none}
+
 /* During the cards, the film's overlays stand down. */
 #b0b-intro.bi-s-start .bi-chapter,#b0b-intro.bi-s-start .bi-src,#b0b-intro.bi-s-start .bi-sub,
 #b0b-intro.bi-s-end .bi-chapter,#b0b-intro.bi-s-end .bi-src,#b0b-intro.bi-s-end .bi-sub{display:none}
@@ -119,7 +124,7 @@ html.b0b-intro-lock{overflow:hidden}
 
 /* Portrait phones: the plate is short and the screen below it is empty, so
    the words move out from over the footage into that space. */
-@media (max-aspect-ratio:4/5){
+@media (max-aspect-ratio:1/1){
   #b0b-intro .bi-plate{overflow:visible}
   #b0b-intro .bi-sub{top:calc(100% + 22px);bottom:auto;left:0;right:0;font-size:clamp(16px,4.4vw,20px)}
   #b0b-intro .bi-sub span{background:none;padding:0}
