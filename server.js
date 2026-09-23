@@ -370,7 +370,7 @@ app.get('/robots.txt', (req, res) => {
 // canonical. lastmod comes from the integrity manifest, the one timestamp
 // that is real on Vercel (file mtimes are normalized at deploy).
 const CANONICAL_PATHS = [
-  '/home', '/report', '/intro', '/map', '/countermeasures', '/artifact', '/spectra',
+  '/home', '/report', '/intro', '/continuity', '/map', '/countermeasures', '/artifact', '/spectra',
   '/tones/healing', '/tones/protective', '/tones/instrument', '/tones/shield',
   '/tones/multipack', '/tones/shield/guide', '/ai-attack-vector-analysis',
   '/darpa-cia-lockheed',
@@ -403,6 +403,7 @@ const PAGES = {
   '/home':          'index.html',
   '/report':        'report.html',
   '/intro':         'intro.html',     // the intro film, shareable on its own
+  '/continuity':    'continuity.html', // the second film, on the same player
   '/map':           'map.html',
   '/countermeasures':'countermeasures.html',
   '/artifact':      'artifact.html',

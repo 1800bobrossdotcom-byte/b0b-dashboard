@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Build the b0b.dev intro film, collage cut (v3), from scripts/intro-collage.json.
+"""Build a b0b.dev film, collage cut, from a spec (default scripts/intro-collage.json).
+
+Two films share this engine: the intro (scripts/intro-collage.json) and
+"Continuity" (scripts/film-continuity.json, --spec). Each spec names its own
+outputs, so building one never touches the other's files.
 
 The narration is baked in (Piper, en_GB cori, public-domain training data) and a
 second, subtitled master is written in the same pass for the downloadable file.
@@ -19,6 +23,7 @@ source of truth.
     python3 scripts/build-intro-collage.py            # full build
     python3 scripts/build-intro-collage.py --js-only  # timings/script only
     python3 scripts/build-intro-collage.py --still 12.5 --out /tmp/f.png
+    python3 scripts/build-intro-collage.py --spec scripts/film-continuity.json
 
 Media live outside the repo (MEDIA_DIR); each entry in the spec carries its
 source page, licence and sha256 so a missing file can be re-fetched and checked.
@@ -309,11 +314,16 @@ def layout(spec, media_dir):
     parts = [dict(p, shots=[dict(s) for s in p['shots']]) for p in spec['parts']]
     fin = spec['finale']
     parts.append({'id': fin['id'], 'title': fin['title'], 'years': fin.get('years', ['1945', fin['year']]),
-                  'lines': fin['lines'], 'card': 1.4, 'finale': True,
+                  'lines': fin['lines'], 'card': fin.get('card', 1.4), 'finale': True,
                   'shots': [{'type': 'finale', 'dur': 1.0, 'sound': False}]})
     for p in parts:
         p['_audio'] = []
         for L in p['lines']:
+            if L.get('archive'):
+                # the archive film speaks for itself here: silence in the voice track,
+                # the film's own sound brought up (see Film.audio)
+                p['_audio'].append(np.zeros(int(L['archive']['dur'] * SR), dtype=np.float32))
+                continue
             say = L.get('say') or L['text']
             say = [fill(x, total) for x in say] if isinstance(say, list) else fill(say, total)
             p['_audio'].append(nar.line(say))
@@ -321,16 +331,29 @@ def layout(spec, media_dir):
         read = sum(durs) + GAP * (len(durs) - 1)
         card = p.get('card', 1.4)
         if p.get('finale'):
-            p['shots'][0]['dur'] = round(0.5 + read + 3.2, 3)
+            p['_lead'] = card + fin.get('lead', 0.5)
+            p['shots'][0]['dur'] = round(fin.get('lead', 0.5) + read + fin.get('hold', 3.2), 3)
             continue
-        need = LEAD + read + TAIL
+        lead = LEAD
+        first = p['lines'][0] if p['lines'] else {}
+        if first.get('archive'):
+            # an archive line is pinned to the start of the part's first shot
+            a = first['archive']
+            sh0 = p['shots'][0]
+            if sh0['dur'] < a.get('from', 0) + a['dur']:
+                sys.exit('part %s: archive line runs past its shot' % p['id'])
+            sh0['fixed'] = True
+            lead = card + a.get('from', 0)
+        p['_lead'] = lead
+        need = lead + read + TAIL
         pic = card + sum(s['dur'] for s in p['shots'])
         if need > pic:
-            flashes = sum(s['dur'] for s in p['shots'] if s['type'] == 'flash')
-            body = sum(s['dur'] for s in p['shots'] if s['type'] != 'flash')
+            still = lambda s: s['type'] == 'flash' or s.get('fixed')
+            flashes = sum(s['dur'] for s in p['shots'] if still(s))
+            body = sum(s['dur'] for s in p['shots'] if not still(s))
             k = (need - card - flashes) / body
             for s in p['shots']:
-                if s['type'] != 'flash':
+                if not still(s):
                     s['dur'] = round(s['dur'] * k, 3)
     out = dict(spec, parts=parts)
     out['_total'] = total
@@ -347,6 +370,7 @@ class Film:
         self.rng = random.Random(1945)
         self._strips = {}
         self.narr = []
+        self.archive = []     # spans where an archive film is heard instead of the voice
         # flatten parts into a timeline
         self.timeline = []
         t = 0.0
@@ -361,12 +385,15 @@ class Film:
                 self.timeline.append(sh)
                 t += sh['dur']
             # narration: absolute time of every line
-            lt = start + (part.get('card', 1.4) + 0.5 if part.get('finale') else LEAD)
+            lt = start + part.get('_lead', LEAD)
             lines = []
             for L, a in zip(part['lines'], part.get('_audio', [])):
                 d = len(a) / SR
                 lines.append(dict(L, at=round(lt, 3), end=round(lt + d, 3)))
-                self.narr.append((lt, a))
+                if L.get('archive'):
+                    self.archive.append((lt, lt + d))
+                else:
+                    self.narr.append((lt, a))
                 lt += d + GAP
             self.parts.append({'id': part['id'], 'title': part['title'], 'years': part['years'],
                                'at': round(start, 3), 'end': round(t, 3), 'lines': lines or part['lines'],
@@ -374,9 +401,20 @@ class Film:
         self.dur = t
         self.subs = [(L['at'], L['end'], L['text']) for p in self.parts for L in p['lines'] if 'at' in L]
         self.total = spec.get('_total', 0)
-        self.pts = read_points()
+        self.fin = spec['finale']
+        self.style = self.fin.get('style', 'ledger')
+        self.pts = read_points() if self.style == 'ledger' else []
         fin = [p for p in self.parts if p.get('finale')]
-        self.greek_at = fin[0]['lines'][-1]['at'] if fin and 'at' in fin[0]['lines'][-1] else None
+        last = fin[0]['lines'][-1] if fin and fin[0]['lines'] else {}
+        self.greek_at = last.get('at')
+        # the closing card: the intro's arrives with its last word; a card that
+        # prints a sentence arrives after she has said it
+        if self.greek_at is None:
+            self.close_from = None
+        elif self.fin.get('close', {}).get('after_line'):
+            self.close_from = last['end'] + 0.25
+        else:
+            self.close_from = self.greek_at - 0.4
 
     # --- per-shot frame source, cached across the frames of one shot
     def prepare(self, sh):
@@ -426,7 +464,11 @@ class Film:
             img = self.card(sh['part'], p, sh['dur'])
             return np.asarray(img)
         if ty == 'finale':
+            if self.style == 'timeline':
+                return np.asarray(self.finale_timeline(sh, fi))
             return np.asarray(self.finale(sh, fi))
+        if ty == 'doc':
+            return self.post(sh, fi, np.asarray(self.doc(sh, p, fi)))
         if ty in ('full', 'flash'):
             canvas[:] = self.panel(sh, 0, p, fi)
             tags.append((16, H - 16, self.media[sh['media'][0]].tag, 'ls'))
@@ -482,12 +524,14 @@ class Film:
             self.P.tag(img, x, y, t, a)
         for (txt, pos) in self.years(sh, p):
             self.P.year(img, pos[0], pos[1], txt, anchor=pos[2])
-        arr = np.asarray(img)
+        return self.post(sh, fi, np.asarray(img))
+
+    def post(self, sh, fi, arr):
         # cut glitch: first frames of shots marked glitch, and every flash
         g = 0.0
         if sh.get('glitch') and fi < 3:
             g = (3 - fi) / 3
-        if ty == 'flash':
+        if sh['type'] == 'flash':
             g = max(g, 0.55)
         if g:
             arr = glitch(arr, g, self.rng)
@@ -524,8 +568,8 @@ class Film:
             d.text((34, 40 + int(H * 0.06)), 'TWENTY-FIVE SECTIONS', font=P.f_small, fill=tuple(int(c * k) for c in (150, 160, 162)), anchor='lt')
         P.tag(img, 16, H - 16, 'B0B.DEV/MAP · THE SITE’S OWN {:,} MARKERS'.format(self.total), 'ls')
         # the closing word, cross-faded in as she says it
-        if self.greek_at is not None and ta >= self.greek_at - 0.4:
-            k = min(1.0, (ta - (self.greek_at - 0.4)) / 0.6)
+        if self.close_from is not None and ta >= self.close_from:
+            k = min(1.0, (ta - self.close_from) / 0.6)
             card = Image.new('RGB', (W, H), INK)
             c = ImageDraw.Draw(card)
             gf = ImageFont.truetype(GREEK_FONT, int(H / 6.5))
@@ -535,10 +579,205 @@ class Film:
             img = Image.blend(img, card, k)
         return img
 
+    def wrap(self, d, text, f, width):
+        out, cur = [], ''
+        for w in text.split():
+            trial = (cur + ' ' + w).strip()
+            if d.textlength(trial, font=f) > width and cur:
+                out.append(cur); cur = w
+            else:
+                cur = trial
+        if cur:
+            out.append(cur)
+        return out
+
+    def doc(self, sh, p, fi):
+        """A document typed onto the screen: a verbatim quotation (style 'quote')
+        or a dated ledger of instruments (style 'ledger'). The words are the
+        record's own; the citation is burned in beneath them."""
+        W, H, P = self.W, self.H, self.P
+        if sh.get('media'):
+            bg = self.panel(sh, 0, p, fi).astype(np.float32) * 0.2
+            img = Image.fromarray(bg.astype(np.uint8))
+        else:
+            img = Image.new('RGB', (W, H), (9, 10, 11))
+            g = ImageDraw.Draw(img)
+            for x in range(0, W, 40):
+                g.line((x, 0, x, H), fill=(15, 17, 18))
+            for y in range(0, H, 40):
+                g.line((0, y, W, y), fill=(15, 17, 18))
+        d = ImageDraw.Draw(img)
+        x0, y0 = int(W * 0.085), int(H * 0.15)
+        head = sh.get('head', '').upper()
+        hk = ease(min(1, p * 6))
+        d.text((x0, y0), head, font=P.f_tag, fill=tuple(int(c * hk) for c in AMBER), anchor='ls')
+        rule_x = int(W * 0.06)
+        style = sh.get('style', 'quote')
+        blink = (fi // 6) % 2 == 0
+        if style == 'quote':
+            f = font('ibm-plex-serif-latin-400-normal.woff2', int(H / sh.get('scale', 17)))
+            text = '“' + sh['text'] + '”'
+            lines = self.wrap(d, text, f, W * 0.8)
+            lh = int(f.size * 1.42)
+            n = int(len(text) * ease(min(1, max(0, p - 0.04) / sh.get('type_by', 0.55))))
+            y = y0 + int(H * 0.09)
+            shown = 0
+            cur = None
+            for ln in lines:
+                take = max(0, min(len(ln), n - shown))
+                if take:
+                    d.text((x0, y), ln[:take], font=f, fill=(238, 234, 222), anchor='ls')
+                    cur = (x0 + d.textlength(ln[:take], font=f) + 6, y)
+                shown += len(ln) + 1
+                y += lh
+            if cur and (n < len(text) or blink):
+                d.rectangle((cur[0], cur[1] - f.size * 0.8, cur[0] + f.size * 0.45, cur[1] + 4), fill=AMBER)
+            d.rectangle((rule_x, y0 - int(H * 0.02), rule_x + 2, y - lh + 12), fill=AMBER)
+        else:
+            rows = sh['rows']
+            cols = sh.get('cols', 1)
+            f = font('ibm-plex-mono-latin-500-normal.woff2', int(H / sh.get('scale', 27)))
+            per = (len(rows) + cols - 1) // cols
+            lh = int(f.size * 1.55)
+            cw = (W * 0.84) / cols
+            span = sh.get('type_by', 0.7)
+            for i, row in enumerate(rows):
+                appear = 0.05 + span * i / max(1, len(rows))
+                if p < appear:
+                    continue
+                c, r = divmod(i, per)
+                x = x0 + int(c * cw)
+                y = y0 + int(H * 0.08) + r * lh
+                fresh = p - appear < 0.03
+                left, right = (row + [''])[:2] if isinstance(row, list) else (row, '')
+                col_l = CYAN if fresh else AMBER
+                d.text((x, y), left, font=f, fill=col_l, anchor='ls')
+                if right:
+                    dim = right.startswith('[')
+                    d.text((x + int(sh.get('gutter', 0.2) * W), y), right, font=f,
+                           fill=(150, 160, 162) if dim else (232, 228, 216), anchor='ls')
+            ylast = y0 + int(H * 0.08) + (min(per, len(rows)) - 1) * lh
+            d.rectangle((rule_x, y0 - int(H * 0.02), rule_x + 2, ylast + 10), fill=AMBER)
+        if sh.get('tag'):
+            P.tag(img, 16, H - 16, sh['tag'], 'ls')
+        return img
+
+    def tl_x(self, year):
+        ax = self.fin['axis']
+        W = self.W
+        for (y0, f0), (y1, f1) in zip(ax, ax[1:]):
+            if year <= y1:
+                f = f0 + (f1 - f0) * (year - y0) / (y1 - y0)
+                break
+        else:
+            f = ax[-1][1]
+        return W * 0.07 + f * W * 0.86
+
+    def finale_timeline(self, sh, fi):
+        """The pattern points: every dated instrument in the film on one axis.
+        Dashed arcs join them while she says they correlate, and dissolve as
+        she says a shared timeline is not a chain."""
+        W, H, P, fin = self.W, self.H, self.P, self.fin
+        tl = fi / self.fps
+        ta = sh['at'] + tl
+        img = Image.new('RGB', (W, H), INK)
+        d = ImageDraw.Draw(img)
+        ay = int(H * 0.56)
+        grow = ease(min(1, tl / 0.8))
+        d.line((W * 0.07, ay, W * 0.07 + W * 0.86 * grow, ay), fill=(70, 76, 78), width=2)
+        for yr in fin.get('ticks', []):
+            x = self.tl_x(yr)
+            if x > W * 0.07 + W * 0.86 * grow:
+                continue
+            d.line((x, ay - 5, x, ay + 5), fill=(70, 76, 78), width=1)
+            d.text((x, ay + 22), str(yr), font=P.f_tag, fill=(90, 96, 98), anchor='mt')
+        for brk in fin.get('breaks', []):
+            x = self.tl_x(brk)
+            d.line((x - 6, ay + 8, x + 2, ay - 8), fill=(120, 126, 128), width=2)
+            d.line((x + 2, ay + 8, x + 10, ay - 8), fill=(120, 126, 128), width=2)
+        pts = fin['points']
+        sweep = fin.get('sweep', 2.8)
+        lines = [p for p in self.parts if p.get('finale')][0]['lines']
+        arc_line = lines[fin.get('arc_line', 0)]
+        cut_line = lines[fin.get('cut_line', -1)]
+        shown = []
+        f_lab = P.f_tag
+        f_yr = font('ibm-plex-mono-latin-600-normal.woff2', max(12, H // 40))
+        for i, pt in enumerate(pts):
+            t_on = 0.6 + sweep * i / max(1, len(pts))
+            if tl < t_on:
+                continue
+            k = ease(min(1, (tl - t_on) / 0.35))
+            x = self.tl_x(pt['year'])
+            up = pt.get('side', 'up' if i % 2 == 0 else 'down') == 'up'
+            stem = int(H * (0.1 + 0.075 * (pt.get('tier', i % 3))))
+            yb = ay - stem * k if up else ay + stem * k
+            d.line((x, ay, x, yb), fill=(120, 100, 20), width=1)
+            r = 5 + (1 - k) * 6
+            d.ellipse((x - r, ay - r, x + r, ay + r), fill=AMBER if k >= 1 else (255, 246, 213))
+            if k > 0.6:
+                al = ease((k - 0.6) / 0.4)
+                ylab = yb - 8 if up else yb + 8
+                anc_y, anc_l = ('ls', 'ls') if up else ('lt', 'lt')
+                lab = pt['label'].upper()
+                lw = max(d.textlength(lab, font=f_lab), d.textlength(pt.get('show', str(pt['year'])), font=f_yr))
+                lx = min(max(x - 4, 12), W - lw - 12)
+                if up:
+                    d.text((lx, ylab - int(H * 0.028)), pt.get('show', str(pt['year'])), font=f_yr, fill=tuple(int(c * al) for c in CYAN), anchor='ls')
+                    d.text((lx, ylab), lab, font=f_lab, fill=tuple(int(c * al) for c in (225, 221, 210)), anchor='ls')
+                else:
+                    d.text((lx, ylab), pt.get('show', str(pt['year'])), font=f_yr, fill=tuple(int(c * al) for c in CYAN), anchor='lt')
+                    d.text((lx, ylab + int(H * 0.03)), lab, font=f_lab, fill=tuple(int(c * al) for c in (225, 221, 210)), anchor='lt')
+            shown.append(self.tl_x(pt['year']))
+        # the arcs: drawn in over the arc line, dissolved over the cut line
+        a0 = arc_line.get('at')
+        if a0 is not None and ta >= a0 + 0.3 and len(shown) > 1:
+            draw = ease(min(1, (ta - a0 - 0.3) / 1.4))
+            c0 = cut_line.get('at', a0 + 3)
+            fade = 1 - ease(min(1, max(0, ta - c0 - 0.6) / 1.2))
+            if fade > 0:
+                ov = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+                od = ImageDraw.Draw(ov)
+                xs = sorted(shown)
+                segs = list(zip(xs, xs[1:]))
+                upto = draw * len(segs)
+                for j, (xa, xb) in enumerate(segs):
+                    if j >= upto:
+                        break
+                    part = min(1, upto - j)
+                    h = min(H * 0.22, 30 + (xb - xa) * 0.35)
+                    pts_arc = []
+                    n = 40
+                    for q in range(int(n * part) + 1):
+                        u = q / n
+                        pts_arc.append((xa + (xb - xa) * u, ay - 4 * h * u * (1 - u) - 6))
+                    for q in range(0, len(pts_arc) - 1, 2):
+                        od.line((pts_arc[q], pts_arc[q + 1]), fill=CYAN + (int(200 * fade),), width=2)
+                img = Image.alpha_composite(img.convert('RGBA'), ov).convert('RGB')
+        img2 = img
+        P.tag(img2, 16, H - 16, fin.get('tag', 'EVERY DATE ON THIS LINE IS IN THE FILM ABOVE, AND IN THE REPORT'), 'ls')
+        cl = fin.get('close', {})
+        if self.close_from is not None and ta >= self.close_from:
+            k = min(1.0, (ta - self.close_from) / 0.7)
+            card = Image.new('RGB', (W, H), INK)
+            c = ImageDraw.Draw(card)
+            fb = font('ibm-plex-serif-latin-600-normal.woff2', int(H / cl.get('scale', 11)))
+            rows = self.wrap(c, cl['big'], fb, W * 0.8)
+            lh = int(fb.size * 1.2)
+            y = int(H * 0.46) - (len(rows) - 1) * lh // 2
+            for r_ in rows:
+                c.text((W // 2, y), r_, font=fb, fill=(244, 240, 230), anchor='mm')
+                y += lh
+            if cl.get('sub'):
+                c.text((W // 2, y + int(H * 0.03)), cl['sub'].upper(), font=P.f_small, fill=AMBER, anchor='mm')
+            c.text((W // 2, H - 40), 'b0b.dev', font=P.f_title, fill=(255, 255, 255), anchor='ms')
+            img2 = Image.blend(img2, card, k)
+        return img2
+
     def subtitle(self, arr, t):
         """Burn the line being spoken into a copy of the frame (download edition)."""
         txt = None
-        if self.greek_at is not None and t >= self.greek_at - 0.4:
+        if self.close_from is not None and t >= self.close_from:
             return arr   # the closing card carries its own words
         for a, b, x in self.subs:
             if a - 0.05 <= t < b + 0.35:
@@ -674,6 +913,7 @@ class Film:
     def audio(self):
         n = int(math.ceil(self.dur * SR)) + SR
         mix = np.zeros(n, dtype=np.float32)
+        arc = np.zeros(n, dtype=np.float32)
         t = np.arange(n) / SR
         # drone: A1 and E2, a slow swell, a little filtered noise - the room tone
         lfo = 0.55 + 0.45 * np.sin(2 * np.pi * t / 11.0)
@@ -709,13 +949,19 @@ class Film:
                     if not len(a):
                         continue
                     rms = float(np.sqrt(np.mean(a ** 2))) or 1.0
-                    a = a / rms * 0.09
+                    a = a / rms * 0.09 * sh.get('sound_gain', 1.0)
                     f = min(len(a), int(0.03 * SR))
                     if f:
                         a[:f] *= np.linspace(0, 1, f); a[-f:] *= np.linspace(1, 0, f)
-                    mix[i0:i0 + len(a)] += a[: n - i0]
+                    arc[i0:i0 + len(a)] += a[: n - i0]
                     break
-        bed = np.tanh(mix * 1.1) * 0.8
+        # where an archive film speaks for itself, the synthesised bed steps back
+        apres = np.zeros(n, dtype=np.float32)
+        for a0, a1 in self.archive:
+            apres[int(a0 * SR):int(a1 * SR)] = 1
+        k = int(0.3 * SR)
+        apres = np.convolve(apres, np.ones(k) / k, mode='same')
+        bed = np.tanh((mix * (1 - 0.75 * apres) + arc) * 1.1) * 0.8
         # the voice on top; everything else steps back while she speaks
         voice = np.zeros(n, dtype=np.float32)
         pres = np.zeros(n, dtype=np.float32)
@@ -742,7 +988,10 @@ def write_js(film, spec, path):
         if sh['type'] == 'card':
             cap = '%s. %s' % (sh['part']['id'], sh['part']['title'])
         elif sh['type'] == 'finale':
-            cap = '{:,} markers \u00b7 b0b.dev/map'.format(film.total)
+            cap = ('{:,} markers \u00b7 b0b.dev/map'.format(film.total) if film.style == 'ledger'
+                   else spec['finale'].get('tag', 'the pattern points'))
+        elif sh['type'] == 'doc':
+            cap = sh.get('tag', '')
         else:
             cap = ' | '.join(film.media[k].tag for k in sh.get('media', []))
         reel.append({'at': round(sh['at'], 3), 'dur': round(sh['dur'], 3), 'cap': cap})
@@ -751,13 +1000,17 @@ def write_js(film, spec, path):
         lines = [{k: v for k, v in L.items() if k in ('text', 'at', 'end')} for L in p['lines']]
         chapters.append({'id': p['id'], 'title': p['title'], 'year': p['years'][1], 'at': p['at'],
                          'end': p['end'], 'map': False, 'lines': lines})
-    js = ('/* generated by scripts/build-intro-collage.py from scripts/intro-collage.json - edit there */\n'
+    js = ('/* generated by scripts/build-intro-collage.py from %s - edit there */\n'
           'window.B0B_INTRO_STYLE="collage";\n'
           'window.B0B_INTRO_BAKED=true;\n'
           'window.B0B_INTRO_REEL=%s;\n'
           'window.B0B_INTRO_CHAPTERS=%s;\n'
           'window.B0B_INTRO_REEL_DUR=%s;\n'
-          % (json.dumps(reel, ensure_ascii=False), json.dumps(chapters, ensure_ascii=False), round(film.dur, 3)))
+          % (spec.get('_spec', 'scripts/intro-collage.json'), json.dumps(reel, ensure_ascii=False),
+             json.dumps(chapters, ensure_ascii=False), round(film.dur, 3)))
+    if spec.get('film'):
+        # page-level settings for site/intro.js (sources, download, share) - the intro has none
+        js += 'window.B0B_FILM=%s;\n' % json.dumps(spec['film'], ensure_ascii=False)
     open(path, 'w', encoding='utf-8').write(js)
     print('wrote %s (%d shots, %.1f s of film)' % (path, len(reel), film.dur))
 
@@ -769,8 +1022,10 @@ def main():
     ap.add_argument('--sheet', action='store_true', help='contact sheet: one frame per shot')
     ap.add_argument('--out')
     ap.add_argument('--download-only', action='store_true', help='rebuild only the subtitled download file')
+    ap.add_argument('--spec', default=SPEC)
     args = ap.parse_args()
-    spec = json.load(open(SPEC, encoding='utf-8'))
+    spec = json.load(open(args.spec, encoding='utf-8'))
+    spec['_spec'] = os.path.relpath(os.path.abspath(args.spec), ROOT)
     media_dir = os.path.expanduser(os.environ.get('B0B_MEDIA_DIR', spec['media_dir']))
     spec = layout(spec, media_dir)
     film = Film(spec, media_dir)
@@ -808,7 +1063,7 @@ def main():
     W, H, fps = film.W, film.H, film.fps
     out_mp4 = os.path.join(ROOT, spec['output'])
     out_webm = out_mp4[:-4] + '.webm'
-    tmp = os.path.join(media_dir, '_build')
+    tmp = os.path.join(media_dir, '_build', spec.get('build_name', '')).rstrip('/')
     os.makedirs(tmp, exist_ok=True)
     wav = os.path.join(tmp, 'mix.wav')
     write_wav(wav, film.audio())
@@ -855,7 +1110,8 @@ def main():
                     '-c:v', 'libx264', '-preset', 'slow', '-crf', str(spec.get('crf_download', 26)), '-pix_fmt', 'yuv420p',
                     '-profile:v', 'high', '-movflags', '+faststart',
                     '-af', 'loudnorm=' + a['loudnorm'], '-c:a', 'aac', '-b:a', '96k', '-ac', '1',
-                    '-metadata', 'title=b0b.dev - the intro film', '-metadata', 'comment=Every panel cites its source. Full list: https://www.b0b.dev/intro',
+                    '-metadata', 'title=' + spec.get('meta_title', 'b0b.dev - the intro film'),
+                    '-metadata', 'comment=Every panel cites its source. Full list: ' + spec.get('meta_url', 'https://www.b0b.dev/intro'),
                     '-shortest', out_dl], check=True)
     if args.download_only:
         print('  %-40s %8.1f KB' % (os.path.relpath(out_dl, ROOT), os.path.getsize(out_dl) / 1024))

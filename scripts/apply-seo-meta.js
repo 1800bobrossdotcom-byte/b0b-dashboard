@@ -28,6 +28,7 @@ const URLS = {
   'index.html': '/home',   // '/' has redirected to /report since 19 Sept 2026
   'report.html': '/report',
   'intro.html': '/intro',
+  'continuity.html': '/continuity',
   'map.html': '/map',
   'countermeasures.html': '/countermeasures',
   'artifact.html': '/artifact',

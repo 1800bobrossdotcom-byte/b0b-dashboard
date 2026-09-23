@@ -46,8 +46,13 @@
   el.dataset.claimed = '1';
 
   var MODE = el.dataset.mode === 'page' ? 'page' : 'overlay';
-  var SHARE_URL = 'https://www.b0b.dev/intro';
-  var SHARE_TEXT = 'b0b.dev — a short film cut from archive and contemporary footage, then and now. Every shot cited.';
+  // A second film (/continuity) runs on this same player. Its generated reel
+  // file sets B0B_FILM; the intro sets nothing and keeps every default below.
+  var F = window.B0B_FILM || {};
+  function esc(x) { return String(x).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  var SHARE_URL = F.share || 'https://www.b0b.dev/intro';
+  var SHARE_TEXT = F.shareText || 'b0b.dev — a short film cut from archive and contemporary footage, then and now. Every shot cited.';
+  var TITLE = F.title || 'b0b.dev — the intro film';
   var AUTO_ENTER = 14000;     // an untouched start card dissolves into the report
   var MAP_SWEEP = 2600;       // the closing map assembles in this long
   var MAP_TEXT = 24;          // seconds the closing part runs when nothing is speaking
@@ -67,15 +72,16 @@
   // no longer speaks, so every viewer hears the same voice and the film downloads whole.
   var BAKED = !!window.B0B_INTRO_BAKED;
   var synth = (!BAKED && 'speechSynthesis' in window) ? window.speechSynthesis : null;
-  var DOWNLOAD = '/b0b-intro-film.mp4?v=1';
+  var DOWNLOAD = F.download || '/b0b-intro-film.mp4?v=1';
+  var DL_NAME = esc(F.downloadName || 'b0b-dev-intro-film.mp4');
 
   // ---- markup: one source of truth for report.html and intro.html ----------
   el.innerHTML =
     '<div class="bi-stage">' +
       '<div class="bi-plate">' +
-        '<video playsinline muted preload="metadata" poster="/intro-poster.jpg?v=4" aria-hidden="true">' +
-          '<source src="/intro-reel.webm?v=4" type="video/webm">' +
-          '<source src="/intro-reel.mp4?v=4" type="video/mp4">' +
+        '<video playsinline muted preload="metadata" poster="' + esc(F.poster || '/intro-poster.jpg?v=4') + '" aria-hidden="true">' +
+          '<source src="' + esc(F.webm || '/intro-reel.webm?v=4') + '" type="video/webm">' +
+          '<source src="' + esc(F.mp4 || '/intro-reel.mp4?v=4') + '" type="video/mp4">' +
         '</video>' +
         '<canvas aria-hidden="true"></canvas>' +
         '<div class="bi-scan" aria-hidden="true"></div>' +
@@ -88,22 +94,23 @@
     '</div>' +
     '<div class="bi-card bi-start">' +
       '<div class="bi-mark">b0b.dev</div>' +
-      '<div class="bi-kicker">a short film in eight parts &middot; then and now<br>archive and contemporary footage &middot; every shot cited</div>' +
+      '<div class="bi-kicker">' + (F.kicker ? esc(F.kicker[0]) + '<br>' + esc(F.kicker[1]) : 'a short film in eight parts &middot; then and now<br>archive and contemporary footage &middot; every shot cited') + '</div>' +
       '<div class="bi-actions">' +
         '<button type="button" class="bi-btn bi-play">&#9654;&nbsp; WATCH THE FILM</button>' +
         '<button type="button" class="bi-btn bi-ghost bi-enter">ENTER THE REPORT &rarr;</button>' +
       '</div>' +
-      '<div class="bi-note">narrated &middot; sound on &middot; <a class="bi-dl-link" href="' + DOWNLOAD + '" download="b0b-dev-intro-film.mp4">download the film</a></div>' +
+      '<div class="bi-note">narrated &middot; sound on &middot; <a class="bi-dl-link" href="' + esc(DOWNLOAD) + '" download="' + DL_NAME + '">download the film</a></div>' +
       '<div class="bi-count" aria-hidden="true"><i></i></div>' +
     '</div>' +
     '<div class="bi-card bi-end" hidden>' +
       '<div class="bi-mark">b0b.dev</div>' +
-      '<div class="bi-greek" lang="grc">&tau;&epsilon;&tau;&#941;&lambda;&epsilon;&sigma;&tau;&alpha;&iota;</div>' +
+      (F.endLine ? '<div class="bi-greek bi-endline">' + esc(F.endLine) + '</div>'
+                 : '<div class="bi-greek" lang="grc">&tau;&epsilon;&tau;&#941;&lambda;&epsilon;&sigma;&tau;&alpha;&iota;</div>') +
       '<div class="bi-actions">' +
         '<button type="button" class="bi-btn bi-ghost bi-replay">&#8635;&nbsp; WATCH AGAIN</button>' +
         '<button type="button" class="bi-btn bi-enter">ENTER THE REPORT &rarr;</button>' +
       '</div>' +
-      '<a class="bi-btn bi-ghost bi-dl" href="' + DOWNLOAD + '" download="b0b-dev-intro-film.mp4">&#8595;&nbsp; DOWNLOAD THE FILM &middot; MP4</a>' +
+      '<a class="bi-btn bi-ghost bi-dl" href="' + esc(DOWNLOAD) + '" download="' + DL_NAME + '">&#8595;&nbsp; DOWNLOAD THE FILM &middot; MP4</a>' +
       '<div class="bi-share" role="group" aria-label="Share the film">' +
         '<span class="bi-share-l">share the film</span>' +
         '<a data-net="x" target="_blank" rel="noopener noreferrer">X</a>' +
@@ -115,7 +122,8 @@
         '<button type="button" data-net="copy">Copy link</button>' +
         '<button type="button" data-net="native" hidden>Share&hellip;</button>' +
       '</div>' +
-      '<div class="bi-credit">Archive footage: Universal Newsreel, NARA, US DOE, CIA/NRO via NARA (public domain, CC0). Contemporary: NASA, US Government, Wikimedia Commons contributors (public domain, CC0, CC BY - credited on screen). ERC-1155 frames: the author&rsquo;s own films. Narration: Piper &ldquo;cori&rdquo; voice, trained on public-domain LibriVox recordings. Full list at <a href="/intro">b0b.dev/intro</a>.</div>' +
+      '<div class="bi-credit">' + (F.credit ? esc(F.credit) + ' Full list at <a href="' + esc(F.page || '/intro') + '">b0b.dev' + esc(F.page || '/intro') + '</a>.' :
+        'Archive footage: Universal Newsreel, NARA, US DOE, CIA/NRO via NARA (public domain, CC0). Contemporary: NASA, US Government, Wikimedia Commons contributors (public domain, CC0, CC BY - credited on screen). ERC-1155 frames: the author&rsquo;s own films. Narration: Piper &ldquo;cori&rdquo; voice, trained on public-domain LibriVox recordings. Full list at <a href="/intro">b0b.dev/intro</a>.') + '</div>' +
     '</div>' +
     '<div class="bi-ctl">' +
       '<button type="button" class="bi-mute" aria-pressed="false">SOUND ON</button>' +
@@ -140,7 +148,7 @@
       fb: 'https://www.facebook.com/sharer/sharer.php?u=' + u,
       li: 'https://www.linkedin.com/sharing/share-offsite/?url=' + u,
       rd: 'https://www.reddit.com/submit?url=' + u + '&title=' + t,
-      mail: 'mailto:?subject=' + encodeURIComponent('b0b.dev — the intro film') +
+      mail: 'mailto:?subject=' + encodeURIComponent(TITLE) +
             '&body=' + encodeURIComponent(SHARE_TEXT + '\n\n' + SHARE_URL)
     };
     Array.prototype.forEach.call(el.querySelectorAll('.bi-share a[data-net]'), function (a) {
@@ -158,7 +166,7 @@
     if (navigator.share) {
       nat.hidden = false;
       nat.addEventListener('click', function () {
-        try { navigator.share({ title: 'b0b.dev — the intro film', text: SHARE_TEXT, url: SHARE_URL }).catch(function () {}); } catch (e) {}
+        try { navigator.share({ title: TITLE, text: SHARE_TEXT, url: SHARE_URL }).catch(function () {}); } catch (e) {}
       });
     }
   })();
@@ -214,7 +222,7 @@
       var ls = CH[i].lines;
       for (var j = 0; j < ls.length; j++) if (ls[j].at != null && t >= ls[j].at - 0.05 && t < ls[j].end + 0.35) {
         // the closing card prints its own words; a caption over it would collide with the wordmark
-        if (i === CH.length - 1 && j === ls.length - 1) return -1;
+        if (i === CH.length - 1 && j === ls.length - 1 && F.lastLineOnCard !== false) return -1;
         return j;
       }
       return -1;
