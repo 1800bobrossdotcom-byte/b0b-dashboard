@@ -585,8 +585,8 @@
       "map": true,
       "lines": [
         {
-          "text": "{TOTAL} documented sites. Twenty-four sections.",
-          "say": "{TOTALWORDS} documented sites. Twenty-four sections."
+          "text": "{TOTAL} documented sites. Twenty-five sections.",
+          "say": "{TOTALWORDS} documented sites. Twenty-five sections."
         },
         {
           "text": "Every source named. Every tier stated."

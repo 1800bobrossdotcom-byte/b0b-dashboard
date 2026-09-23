@@ -12,8 +12,8 @@ enough that its disagreement is not authority — see §5.
 
 ## 1. WHAT THIS IS
 
-`site/report.html` — a ~1.4 MB OSINT report at https://www.b0b.dev/report. 24 numbered
-sections plus a researcher's guide.
+`site/report.html` — a ~1.5 MB OSINT report at https://www.b0b.dev/report. 25 numbered
+sections plus a researcher's guide (24 until 23 Sept 2026 — see §7).
 
 It is **two things at once and both are load-bearing:**
 
@@ -180,6 +180,41 @@ than once.
 ---
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
+
+**THE OFF-TRACK RESTRUCTURE — 23 Sept 2026, live. NEW SECTION XXIV "TEST CASES"; THE SIGNAL IS NOW XXV.**
+Author: *"look for removal of sections like this that go off track"* → every candidate read in full, then *"find
+out where these DO go if at all"*, *"keep asset relocation as that is a real thing"*, and the choices **"New XXIV,
+Signal → XXV"** and **"Test Cases"**. **XXIV. Test Cases - Live Claims Graded Against the Record** (22 parts, in
+order): Swartz; the wanted-list question; ShinyHunters; the twelve-part 9/11 topology; the access-and-exit
+module from XX (intro, ladder, Calabasas, Dr. Sebi, standing test); the Severed Chain; the Institutional
+Silence. **Moved:** Gulag geography IX → XIV (state forced labour); the seed-vault piece XIV → VII, **rewritten,
+because it was wrong** — Norway's own site: *"The Government of Norway established and fully funded"* the
+vault; Norway owns it, NordGen runs it, the Crop Trust part-funds operations; black-box deposits, *"only that
+gene bank can request return"*; ICARDA's 2015-19 withdrawal. "Funded by Monsanto/Syngenta/DuPont … confiscation"
+is killed as a naming error (vault + Crop Trust donors + patent-holders merged); what survives is the patent
+(*J.E.M. v. Pioneer* 2001, *Bowman v. Monsanto* 2013). The Gates "one owner, three control surfaces" bullets and
+"primary funder of the vault" (X, XX, IX) went with it. **Removed whole, do not re-add:** Point Nemo (XIII — anti-map
+coincidence chain: R'lyeh, Nash's "Emperor of Antarctica"), the Netherlands courtroom (XVI — it called "families
+who own the central banks" *"what this report documents"*, i.e. the killed §7 trope), the DEW/FLIR claim and the
+Morris Worm lineage (XVI — both on one anonymous LinkedIn account). **Kept at the author's instruction:** Asset
+Relocation (XX). The Yamantau duplicate in IX's military-science belt is cut (IX has its own Yamantau entry).
+**Ids never renamed** — the moved h3s keep `xvi-`/`xx-`/`xiv-`/`ix-` prefixes and the Signal keeps `xxiv-*`, so
+every old deep link still lands. `#XXIV` now means Test Cases; all old `#XXIV` links and "Section XXIV" prose were
+moved to XXV first. **Pre-existing breakage found and fixed on the way:** ~14 pointers still sent readers to
+"Section XIII" for the naming error, the Babylon reading, the Geneva Freeport figure, "obelisks and cubes" and the
+Spirit of Burbank — all removed from XIII on 21-22 Sept. They now point to Section I (where the naming error is
+defined), XVIII or XX, or were reworded; the Freeport 1.2 million is marked a press estimate. **Traps:** the
+`<!-- SECTION XXIV (THE SIGNAL) -->` comment sat *above* XXIII's servicemember subsection, so inserting before
+the comment swallowed that subsection into XXIV; the TOC audit caught it (23 h3 vs 22 li) and the marker is now
+directly above its h2. There is a **second static contents list** near the top of the report (`<a href="#XXIV"
+data-i18n=…>`) besides the JS sidebar. "twenty-four sections" appeared **11** times, not the 5 a line grep found.
+**Map 1,178 → 1,174:** Point Nemo, the Amsterdam court, Edwards AFB (existed only for the DEW claim) and the
+duplicate "Svalbard Seed Vault (Gates/Rockefeller)" gone; the surviving vault marker corrected and moved to VII;
+Mondaloy markers → XXIV; Magadan/Vorkuta/Perm-36 → XIV; the Nestlé→vault line (no documented edge) and the
+Edwards→Reza line removed; SvalSat↔vault relabelled (2.4 km apart, not "same coordinates"). i18n carries XXIV and
+XXV in all 12 languages; KML, concordance (plate now 25 cells) and the film's "Twenty-five sections" updated.
+**Scale line 276 / 1,079 / 133; 111 cross-references.** The scale line had not been updated at the 22 Sept XIII cut
+(still said 282) — now recomputed.
 
 **XIII's LAST TWO SUBSECTIONS ARE GONE — 22 Sept 2026, live. DO NOT RE-ADD EITHER.** Author, with a screenshot of
 the XIII sidebar: *"remove the last two sections here they have nothing to do with cyclical patterns."*

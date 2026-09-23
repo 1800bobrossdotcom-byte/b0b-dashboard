@@ -2,7 +2,7 @@
 """Build site/darpa-cia-lockheed.html — a term concordance over the OSINT report.
 
 The report's Cross-Reference Index (Section XIX) joins *topics*. This is a
-different instrument: it counts a name, plots which of the 24 sections it fires
+different instrument: it counts a name, plots which of the 25 sections it fires
 in, and links every passage that carries it.
 
 Every number on the page is derived from site/report.html at build time. Nothing
@@ -32,7 +32,7 @@ REPORT_URL = 'https://www.b0b.dev/report'
 BASE = REPORT_URL + '#'
 
 # Label for text before the first <h2>. It is real report prose and is counted,
-# but it is not one of the 24 numbered sections and must not be tallied as one.
+# but it is not one of the 25 numbered sections and must not be tallied as one.
 FRONT = 'FRONT'
 
 # Whole-word, case-sensitive. "CIA" unbounded matches inside "special",
@@ -112,7 +112,7 @@ def build(src):
 
 
 def plate(term, data):
-    """24 cells, one per section, shaded by density."""
+    """25 cells, one per section, shaded by density."""
     v = data['terms'][term]
     top = max(v['by_section'].values())
     cells = []
@@ -147,7 +147,7 @@ def ledger(term, data):
 COPY = {
     'DARPA': """<p>DARPA is the rarest of the three and the only one that does two unrelated jobs in this report. The larger share &mdash; {ii} of {total} &mdash; is <em>documentary</em>, and it is recent. <strong>Section II</strong> carries an approach out of the DOJ production itself: across 2010&ndash;2013 Epstein pursued an introduction to <strong>Regina Dugan, Director of DARPA from July 2009 to March 2012</strong>, brokered by Bill Gates&rsquo;s science adviser Boris Nikolic (<q>You would like her a lot! We need to schedule a trip to DC sometime soon</q>), kept alive by standing calendar alarms reading <q>remind JE Regina, darpa</q>, and planned to close at TED2012. The report states the strategic reading of that at hypothesis tier and publishes the finding that cuts against it &mdash; the interest continued after she left the agency. <strong>Nothing shows she met him or knew of the interest, and the report asserts nothing about her.</strong></p>
     <p><strong>The other job is a clock, and it points the opposite way in time.</strong> {Xvi_w} mentions sit in <strong>Section XVI</strong>, four inside one subsection: the derivation asking what is running now and will be disclosed in 2040. The programmes it names there are dated rather than speculative &mdash; <strong>Big Mechanism</strong> (2012, machine reading of the scientific literature), the <strong>Biological Technologies Office</strong> (established 2014, as CRISPR entered wide laboratory use), and the <strong>N3</strong> brain-computer interface line (2017&ndash;), which the report calls the successor to MKUltra&rsquo;s failed attempts <q>not through drugs and torture, but through engineering.</q> The argument there is a clock rather than a claim: every declassified programme in the report&rsquo;s own table stayed dark for two to three decades, so a 2013 cohort lands in 2033&ndash;2040.</p>
-    <p>The remaining mentions do other work again. DARPA appears in <strong>Section XVI</strong> as a <em>credential that does not transfer</em>: Lt. Col. John G. Blitch is genuinely documented &mdash; DARPA robotics, founder of CRASAR, ran the search-and-rescue robots at the WTC &mdash; and in 2025 UAP media he is the vetter, not the claimant. A credentialed person vouching does not convert testimony into documentation. In <strong>Section XX</strong> it carries the ALIAS autonomy programme into the Calabasas crash entry, where the report states the capability and then states the counter-evidence that defeats it. And in <strong>XXIV</strong> it is the author disclosing the lens: Burbank, the GATE programme, and a DARPA mark on his own arm.</p>""",
+    <p>The remaining mentions do other work again. DARPA appears in <strong>Section XVI</strong> as a <em>credential that does not transfer</em>: Lt. Col. John G. Blitch is genuinely documented &mdash; DARPA robotics, founder of CRASAR, ran the search-and-rescue robots at the WTC &mdash; and in 2025 UAP media he is the vetter, not the claimant. A credentialed person vouching does not convert testimony into documentation. In <strong>Section XXIV</strong> it carries the ALIAS autonomy programme into the Calabasas crash entry, where the report states the capability and then states the counter-evidence that defeats it. And in <strong>XXV</strong> it is the author disclosing the lens: Burbank, the GATE programme, and a DARPA mark on his own arm.</p>""",
 
     'Lockheed': """<p>Lockheed is the opposite shape. {Vii_w} of its {total} mentions are in <strong>Section VII</strong>, and thirteen of those are in a single subsection written for it. Where DARPA is split between a clock and a single named target, Lockheed is one argument the report works out in one place.</p>
     <p>The claim is chronological, and the report corrects its own looser version of it first: the Skunk Works (1943) is <em>not</em> older than the OSS (1942). Lockheed the company is &mdash; Loughead Aircraft (1912) &rarr; Lockheed Aircraft Co. (1926) &rarr; the Gross reorganisation (1932), all predating the OSS (1942), the CIA (1947) and the NRO (1961). <q>The private aerospace firm is older than the entire modern US intelligence apparatus &mdash; which was then built, in part, around capabilities the firm already had.</q></p>
@@ -155,7 +155,7 @@ COPY = {
     <p>The other half is the <strong>bribery record</strong>: ~$22M across six countries, exposed by the Church Subcommittee in 1975&ndash;76, taking down Prince Bernhard of the Netherlands, Japanese PM Kakuei Tanaka and Italian President Giovanni Leone &mdash; and producing the <strong>Foreign Corrupt Practices Act</strong> (December 1977). Today Lockheed Martin is the world&rsquo;s largest arms producer for a fifteenth consecutive year (~$64.6B, SIPRI 2024), with an F-35 lifetime cost the GAO revised past <strong>$2 trillion</strong>.</p>
     <p><strong>Note the edge the report refuses to draw.</strong> A Lockheed&harr;Palantir collaboration is documented (2022). No Lockheed&ndash;Project Maven tie was found, Maven&rsquo;s industry partner is Palantir directly, and the report says so rather than letting the adjacency stand in for a link.</p>""",
 
-    'CIA': """<p>CIA is less a subject in this report than a solvent. It appears in {sections_w} of the twenty-four numbered sections, once more in the front matter, and in {subs} separate subsections, which means it is doing structural work rather than occupying a chapter &mdash; and a high count here is a fact about the report&rsquo;s architecture, not evidence of anything.</p>
+    'CIA': """<p>CIA is less a subject in this report than a solvent. It appears in {sections_w} of the twenty-five numbered sections, once more in the front matter, and in {subs} separate subsections, which means it is doing structural work rather than occupying a chapter &mdash; and a high count here is a fact about the report&rsquo;s architecture, not evidence of anything.</p>
     <p>The densest clusters are four. <strong>Section VII</strong> ({vii}) holds the institutional machinery: the Cabinet Penetration Map across four administrations, the Task Force Orange / ISA entry on the unit that changes its classified codename roughly every two years, and Manufactured Leaders on the training pipelines. <strong>Section XVI</strong> ({xvi}) holds the declassified record itself &mdash; MKUltra, which survived only because 20,000+ documents were misfiled into financial records and escaped the 1973 destruction order &mdash; and the black-site network: 54 countries, 1,245 European Parliament-documented flights 2001&ndash;05, named sites confirmed by the European Court of Human Rights.</p>
     <p><strong>Section XX</strong> ({xx}) is the Calibration Index, where the count is a scoring artefact rather than prose. <strong>Section XVIII</strong> ({xviii}) is the culture programme: the Congress for Cultural Freedom across 35 countries, Abstract Expressionism funded onto tour through MoMA&rsquo;s International Council, Tom Braden&rsquo;s 1967 <cite>I&rsquo;m Glad the CIA Is &lsquo;Immoral&rsquo;</cite>, and the Agency&rsquo;s own 100-work collection at Langley.</p>
     <p>Two entries are worth reading for method rather than content. The <strong>two-ended camera</strong> in Section X pairs Burbank and Rochester &mdash; Lockheed built the U-2, Kodak&rsquo;s Hawkeye Works made and processed the film it carried &mdash; and then refuses to draw the second line: the two industries&rsquo; collapses share no documented actor, so the report calls it a structural homology and says a homology is not a network edge. And in <strong>Section XVI</strong> the FOIA harvest logs the report&rsquo;s own error at full resolution: it had claimed the NSA and DIA reading rooms were unreachable, which turned out to be a broken tool rather than a blocked agency. <q>&lsquo;The agency blocked us&rsquo; is a far more attractive sentence than &lsquo;we used the wrong tool.&rsquo;</q></p>""",
@@ -292,7 +292,7 @@ h1 .sep{{color:var(--rule-hi);font-weight:400}}
 #lockheed{{--accent:var(--lockheed)}}
 #cia{{--accent:var(--cia)}}
 
-.plate{{margin:22px 0 0;display:grid;grid-template-columns:repeat(24,1fr);gap:3px;overflow-x:auto}}
+.plate{{margin:22px 0 0;display:grid;grid-template-columns:repeat(25,1fr);gap:3px;overflow-x:auto}}
 .cell{{aspect-ratio:1/1.5;min-width:0;background:var(--plate-0);display:flex;align-items:flex-end;justify-content:center;padding-bottom:3px}}
 .cell span{{font-family:var(--mono);font-size:8px;color:var(--dim);writing-mode:vertical-rl;transform:rotate(180deg);padding-bottom:2px;pointer-events:none}}
 .cell.l0 span{{opacity:.42}}
@@ -399,8 +399,8 @@ BLOCK = """
     <div><h2>{name}</h2><p class="kick">{kicker}</p></div>
     <p class="meta">{total} occurrences &middot; {nsec} sections &middot; {nsub} subsections</p>
   </header>
-  <div class="plate" role="img" aria-label="Occurrences of {name} across the report's 24 sections">{plate}</div>
-  <p class="platekey">One cell per section, I&ndash;XXIV &middot; shade = density of {name} mentions</p>
+  <div class="plate" role="img" aria-label="Occurrences of {name} across the report's 25 sections">{plate}</div>
+  <p class="platekey">One cell per section, I&ndash;XXV &middot; shade = density of {name} mentions</p>
   <div class="prose">{prose}</div>
   <h3 class="lh">Every passage, by weight</h3>
   <ol class="ledger">

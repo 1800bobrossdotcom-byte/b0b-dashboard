@@ -18,8 +18,8 @@
     {
       "file": "report.html",
       "title": "PROJECT ANGLERFISH: the architecture of control — b0b.dev",
-      "metaDescription": "24-section OSINT report on the architecture of control: power transfer, surveillance systems, underground construction, the Epstein-Maxwell record. all tiered.",
-      "ogDescription": "24 sections of tiered OSINT on structures of control: institutional capture, surveillance cities, underground infrastructure, the Epstein-Maxwell record. documented fact vs labeled hypothesis.",
+      "metaDescription": "25-section OSINT report on the architecture of control: power transfer, surveillance systems, underground construction, the Epstein-Maxwell record. all tiered.",
+      "ogDescription": "25 sections of tiered OSINT on structures of control: institutional capture, surveillance cities, underground infrastructure, the Epstein-Maxwell record. documented fact vs labeled hypothesis.",
       "jsonldType": "Article",
       "headline": "PROJECT ANGLERFISH: CASSOWARY ORCA AGILITY — the architecture of control, tiered and sourced",
       "topics": [
@@ -52,10 +52,10 @@
     {
       "file": "map.html",
       "title": "OSINT world map: surveillance sites & Epstein network — b0b.dev",
-      "metaDescription": "interactive OSINT map of 1,178 sites: surveillance infrastructure, black sites, the Epstein-Maxwell network, ALPR cameras, live aircraft and quake feeds.",
-      "ogDescription": "1,178 mapped locations: surveillance infrastructure, black sites, the Epstein-Maxwell network, Flock ALPR cameras — with live ADS-B aircraft, AIS vessels and USGS quakes. signal, plotted.",
+      "metaDescription": "interactive OSINT map of 1,174 sites: surveillance infrastructure, black sites, the Epstein-Maxwell network, ALPR cameras, live aircraft and quake feeds.",
+      "ogDescription": "1,174 mapped locations: surveillance infrastructure, black sites, the Epstein-Maxwell network, Flock ALPR cameras — with live ADS-B aircraft, AIS vessels and USGS quakes. signal, plotted.",
       "jsonldType": "WebApplication",
-      "headline": "OSINT world map: 1,178 documented sites, surveillance infrastructure, and the Epstein-Maxwell network",
+      "headline": "OSINT world map: 1,174 documented sites, surveillance infrastructure, and the Epstein-Maxwell network",
       "topics": [
         "OSINT map",
         "surveillance infrastructure",
@@ -227,7 +227,7 @@
     {
       "file": "darpa-cia-lockheed.html",
       "title": "Burbank, Langley, Arlington: DARPA, CIA & Lockheed in the OSINT report — b0b.dev",
-      "metaDescription": "A term concordance over the 24-section OSINT report: every DARPA, CIA and Lockheed passage counted, plotted by section, and deep-linked. 238 occurrences across 15 sections.",
+      "metaDescription": "A term concordance over the 25-section OSINT report: every DARPA, CIA and Lockheed passage counted, plotted by section, and deep-linked. 238 occurrences across 15 sections.",
       "ogDescription": "CIA is diffuse (194 across 15 sections). Lockheed is concentrated (34, most in one subsection). DARPA is sparse and points at a record that does not exist yet. Counts derived from the report itself.",
       "jsonldType": "Article",
       "headline": "Burbank, Langley, Arlington — a DARPA / CIA / Lockheed concordance over the OSINT report",

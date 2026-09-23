@@ -165,7 +165,7 @@ def main():
     def sort_key(sec):
         romans = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X',
                   'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII',
-                  'XIX', 'XX', 'XXI', 'XXII', 'XXIII', 'XXIV']
+                  'XIX', 'XX', 'XXI', 'XXII', 'XXIII', 'XXIV', 'XXV']
         return (romans.index(sec), sec) if sec in romans else (99, sec)
 
     body = []
