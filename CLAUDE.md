@@ -181,6 +181,27 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**GAZA ENTERS XV ON THE COURT RECORD; ARCHIVEGENOCIDE.COM CITED AS A METHOD SPECIMEN — 23 Sept 2026, live.**
+Author dropped `https://archivegenocide.com/nodes/`, then chose **"xv"** of three placements. New subsection
+**`xv-gaza-what-the-courts-have-said-and-an-archive-that-grades-its-own-footage`** (before XV's structural close;
+XV has no static toc). Page had Gaza 8 / ICJ-Gaza 0 / ICC 1 before this. **Documented:** ICJ *South Africa v.
+Israel* (case 192) from the Court's own **HTML docket** — instituted 29 Dec 2023; provisional-measures orders
+26 Jan, 28 Mar, 24 May 2024; Counter-Memorial extensions 14 Apr and 20 Oct 2025; **21 May 2026 order fixing a Reply
+and Rejoinder**; 2026 interventions by Paraguay, Netherlands, Iceland, Namibia, **the United States**, Hungary, Fiji;
+**Colombia withdrew 22 Sept 2026**. ICC PTC I, 21 Nov 2024, read in full via the UN UNISPAL mirror: warrants for
+Netanyahu and Gallant (starvation; murder, persecution, other inhumane acts; civilian-superior liability, two
+incidents) **and the symmetry line in the Chamber's own words — it "could not determine that all elements of the
+crime against humanity of extermination were met."** Threshold stated (art. 58 "reasonable grounds", below
+confirmation and conviction). **Nulls, ledgered:** every ICJ PDF, icc-cpi.int, OHCHR and Times of Israel refused
+the crawler — so the post-2024 ICC appeal history is **attributed**, and no state's intervention is characterised.
+**The archive:** anonymous, advocacy-framed ("genocide" carried as its word), self-reported ICC/Hind Rajab/ICJ
+submission unverified; counts attributed (87,503 events / 131,620 clips, a declared beta). **Why it is on the page:
+its method is the report's** — deterministic merges only, dashed "possible" links ("a lead … never a finding"), A–E
+corroboration, and **a published list of the casualty figures it rejected**. **Hard rules written into the entry:**
+no individual from its named-"perpetrators" class appears at any tier; the method pages are linked, **the footage
+and torrents are not**, and **no footage was opened** (stop rule a). Research note `research/ARCHIVE-GENOCIDE.md`.
+**Scale line 277 / 1,083 / 134.**
+
 **THE NARRATION IS BAKED INTO THE FILM, AND THE FILM DOWNLOADS — 23 Sept 2026, live.** Author: *"can we make the
 video downloadable"*, then *"can you bake in narration"*. The first alone would have shipped a file with no voice,
 no words and no ending — the narration was the browser's, the subtitles were page overlays, the map finale was a

@@ -1,5 +1,9 @@
 # archivegenocide.com — the Gaza Node Map (read 23 Sept 2026)
 
+**PUBLISHED 23 Sept 2026 in Section XV** (`xv-gaza-what-the-courts-have-said-and-an-archive-that-grades-its-own-footage`),
+the author's choice. The ICJ merits status was checked against the Court's docket before publication: written phase,
+Reply and Rejoinder time-limits fixed 21 May 2026; no merits judgment.
+
 Author dropped the link with no instruction: <https://archivegenocide.com/nodes/>.
 Read through `scripts/spider/spider.py` (robots.txt: `Allow: /`); pages ledgered:
 `/nodes/`, `/about.html`, `/sources.html`, `/verify.html`, `/download.html`, `/sitemap.xml`.
