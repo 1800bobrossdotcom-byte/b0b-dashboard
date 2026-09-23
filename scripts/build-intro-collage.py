@@ -313,7 +313,7 @@ def layout(spec, media_dir):
     nar = Narrator(spec, media_dir)
     parts = [dict(p, shots=[dict(s) for s in p['shots']]) for p in spec['parts']]
     fin = spec['finale']
-    parts.append({'id': fin['id'], 'title': fin['title'], 'years': fin.get('years', ['1945', fin['year']]),
+    parts.append({'id': fin['id'], 'title': fin['title'], 'years': fin['years'] if 'years' in fin else ['1945', fin['year']],
                   'lines': fin['lines'], 'card': fin.get('card', 1.4), 'finale': True,
                   'shots': [{'type': 'finale', 'dur': 1.0, 'sound': False}]})
     for p in parts:
@@ -597,7 +597,7 @@ class Film:
         record's own; the citation is burned in beneath them."""
         W, H, P = self.W, self.H, self.P
         if sh.get('media'):
-            bg = self.panel(sh, 0, p, fi).astype(np.float32) * 0.2
+            bg = self.panel(sh, 0, p, fi).astype(np.float32) * sh.get('dim', 0.1)
             img = Image.fromarray(bg.astype(np.uint8))
         else:
             img = Image.new('RGB', (W, H), (9, 10, 11))

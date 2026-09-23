@@ -42,5 +42,17 @@
       8607
     ],
     "delay": 1.0
+  },
+  "www.federalregister.gov": {
+    "why": "HTML and plain-text document pages redirect plain clients to unblock.federalregister.gov, a 10,596-byte 'Request Access' page, with HTTP 200. The JSON API (/api/v1/documents/) and the govinfo PDF serve the same documents; use those. Registered as a decoy so the 200 is a null, not a source (seen 23 Sept 2026).",
+    "decoy_titles": [
+      "Federal Register :: Request Access"
+    ]
+  },
+  "www.govinfo.gov": {
+    "why": "Some Weekly Compilation URLs redirect to /error and return a 'Page Not Found | GovInfo' page with HTTP 200 (seen 23 Sept 2026). The package PDFs are reliable.",
+    "decoy_titles": [
+      "Page Not Found | GovInfo"
+    ]
   }
 }

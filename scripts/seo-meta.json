@@ -51,6 +51,24 @@
       ]
     },
     {
+      "file": "continuity.html",
+      "title": "b0b.dev - Continuity",
+      "metaDescription": "A short film in nine parts on power that outlives the people who hold it: a charter, a bank, a bunker, an emergency, a door. Every panel's source on screen.",
+      "ogDescription": "Charters, banks, bunkers and emergencies that outlive the people who sign them - narrated, every panel cited, and ending on the report's own rule: a shared timeline is not a chain.",
+      "jsonldType": "VideoObject",
+      "headline": "Continuity - a b0b.dev film: the charter, the bank, the relocation plan, the emergency, the door, the contractor, the clock, the empty seat, the pattern points",
+      "ogImage": "/img/continuity-card.jpg",
+      "contentPath": "/b0b-continuity-film.mp4",
+      "duration": "PT3M30S",
+      "topics": [
+        "continuity of government",
+        "revolving door",
+        "Bank for International Settlements",
+        "declassification",
+        "OSINT method"
+      ]
+    },
+    {
       "file": "map.html",
       "title": "OSINT world map: surveillance sites & Epstein network — b0b.dev",
       "metaDescription": "interactive OSINT map of 1,174 sites: surveillance infrastructure, black sites, the Epstein-Maxwell network, ALPR cameras, live aircraft and quake feeds.",

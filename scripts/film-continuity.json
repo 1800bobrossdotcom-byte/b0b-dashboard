@@ -1,0 +1,2085 @@
+{
+ "_comment": [
+  "CONTINUITY - the second b0b.dev film, built by scripts/build-intro-collage.py --spec scripts/film-continuity.json.",
+  "",
+  "Its argument is the report's own (Section VII's apex clause, IX's continuity of government, XVI's clocks):",
+  "power that lasts is written into instruments that outlive the people who sign them. The refrain",
+  "(\"the X ended; the Y did not\") makes the pattern audible; the finale plots every dated point and then",
+  "refuses to join them - the anti-map guardrail, a shared timeline is not a chain. The killed trope passages",
+  "(dynasties, \"families who own the central banks\") are not re-added in any form; the bloodline answer is",
+  "named and refused in part VIII, as Section VII does.",
+  "",
+  "EVERY PANEL CARRIES ITS SOURCE. Licences read from each source's own metadata: PD, CC0, CC BY (credited on",
+  "screen), and Library of Congress 'no known restrictions' for three U.S. News & World Report photographs.",
+  "Typed document cards quote the record verbatim and cite it on screen.",
+  "",
+  "LIVING-PERSON FLOOR APPLIED TO PICTURES: faces are of the dead (Elizabeth I, Clive, George V, Eisenhower,",
+  "Volcker, Kelly Johnson, Khrushchev) or rooms, buildings, documents and aircraft. REFUSED: two Prince Bernhard",
+  "portraits (photographer living; the museum's CC0 not explained), a Kissinger portrait (gift terms unread),",
+  "a Rockefeller/Burns still (partial third face), an Israeli/US F-35 formation (reads as a statement), the",
+  "Nuremberg dock still and pleas film (the Funk line was cut: his BIS board seat is attributed only).",
+  "NOT USED: the only farewell-address film found is a community upload of unknown provenance, so the",
+  "narrator quotes Eisenhower over the public-domain reading copy instead.",
+  "",
+  "Lines fact-checked 23 Sept 2026 (session scratchpad film2-facts.md): EIC war/coin powers came under Charles",
+  "II, hence 'in time'; Resolution V 'put aside' by 1948; PPD-40 text not released; Proclamation 7463 continued",
+  "8 Sept 2026 (91 FR 57773); Iraq AUMFs repealed in the FY2026 NDAA, 18 Dec 2025; Vanguard quoted verbatim;",
+  "Lockheed SIPRI #1, $64.7bn, 2024 data."
+ ],
+ "media_dir": "/home/user/.b0b-intro-sources",
+ "build_name": "continuity",
+ "output": "site/continuity-reel.mp4",
+ "poster": "site/continuity-poster.jpg",
+ "poster_at": 3.0,
+ "js": "site/continuity-reel.js",
+ "download": "site/b0b-continuity-film.mp4",
+ "meta_title": "b0b.dev - Continuity",
+ "meta_url": "https://www.b0b.dev/continuity",
+ "width": 1280,
+ "height": 720,
+ "fps": 24,
+ "crf_mp4": 30,
+ "crf_webm": 40,
+ "crf_download": 26,
+ "audio": {
+  "bitrate_mp4": "64k",
+  "bitrate_webm": "48k",
+  "loudnorm": "I=-16:TP=-1.5:LRA=11"
+ },
+ "voice": {
+  "model": "voice/en_GB-cori-high.onnx",
+  "config": "voice/en_GB-cori-high.onnx.json",
+  "sha256": "470b4dd634c98f8a4850d7626ffc3dfc90774628eeef6605a6dd8f88f30a5903",
+  "length_scale": 0.97,
+  "source": "https://huggingface.co/rhasspy/piper-voices/tree/main/en/en_GB/cori/high",
+  "licence": "Piper voice en_GB cori (high); training data LibriVox, public domain per the model card"
+ },
+ "film": {
+  "title": "b0b.dev — Continuity",
+  "page": "/continuity",
+  "share": "https://www.b0b.dev/continuity",
+  "shareText": "Continuity — a short film on power that outlives the people who hold it. Every shot cited; every date checked.",
+  "webm": "/continuity-reel.webm?v=1",
+  "mp4": "/continuity-reel.mp4?v=1",
+  "poster": "/continuity-poster.jpg?v=1",
+  "download": "/b0b-continuity-film.mp4?v=1",
+  "downloadName": "b0b-dev-continuity.mp4",
+  "kicker": [
+   "continuity · a short film in nine parts",
+   "charters, banks, bunkers, emergencies · every shot cited"
+  ],
+  "endLine": "A shared timeline is not a chain.",
+  "lastLineOnCard": false,
+  "credit": "Archive film: United News, Universal Newsreel, Lockheed (Prelinger), NARA (public domain, CC0). Stills: Library of Congress, Rijksmuseum, The Met, Smithsonian, NASA, US Government, Wikimedia Commons contributors (public domain, CC0, CC BY - credited on screen). ERC-1155 frames: the author’s own films. Narration: Piper “cori” voice, trained on public-domain LibriVox recordings."
+ },
+ "parts": [
+  {
+   "id": "I",
+   "title": "The charter",
+   "years": [
+    "1600",
+    "1874"
+   ],
+   "card": 1.4,
+   "lines": [
+    {
+     "text": "London, the last day of 1600. A queen signs a charter, and a company is born that will outlive her by two hundred and seventy years.",
+     "say": "London, the last day of sixteen hundred. A queen signs a charter, and a company is born that will outlive her by two hundred and seventy years."
+    },
+    {
+     "text": "In time it won the right to make war, coin money and hold courts. When the Crown took it over in 1858, its armies became the Queen's, and its offices carried on as the Raj.",
+     "say": "In time it won the right to make war, coin money and hold courts. When the Crown took it over in eighteen fifty-eight, its armies became the Queen's, and its offices carried on as the Raj."
+    },
+    {
+     "text": "Build something that is not a person, and it does not have to die."
+    }
+   ],
+   "shots": [
+    {
+     "type": "full",
+     "dur": 2.0,
+     "media": [
+      "I_elizabeth_i_de_passe_1592"
+     ],
+     "motion": "push",
+     "years": [
+      "1600"
+     ],
+     "glitch": true
+    },
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "I_east_india_house_leadenhall_1800_rijks"
+     ],
+     "motion": "pan-r"
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "I_east_indiaman_warley_salmon_1804"
+     ],
+     "motion": "pan-l",
+     "years": [
+      "1804"
+     ]
+    },
+    {
+     "type": "split",
+     "dur": 2.6,
+     "media": [
+      "I_shah_alam_diwani_clive_west_1818",
+      "I_delhi_durbar_1877_imperial_assemblage"
+     ],
+     "motion": "push",
+     "glitch": true,
+     "years": [
+      "1765",
+      "1877"
+     ]
+    },
+    {
+     "type": "flash",
+     "dur": 0.33,
+     "media": [
+      "erc_YlMeyAAWhwE"
+     ],
+     "motion": "slam",
+     "sound": false
+    },
+    {
+     "type": "full",
+     "dur": 1.4,
+     "media": [
+      "I_elizabeth_in_parliament_1682"
+     ],
+     "motion": "slam"
+    },
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "I_delhi_durbar_1911_jharokha"
+     ],
+     "motion": "push",
+     "years": [
+      "1911"
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "I_east_indiaman_atlas_huggins_1822"
+     ],
+     "motion": "pan-r"
+    }
+   ]
+  },
+  {
+   "id": "II",
+   "title": "The bank",
+   "years": [
+    "1930",
+    "2026"
+   ],
+   "card": 1.4,
+   "lines": [
+    {
+     "text": "Basel, 1930. A bank for central banks opens to settle German reparations. The reparations ended in 1932. The bank did not.",
+     "say": "Basel, nineteen thirty. A bank for central banks opens to settle German reparations. The reparations ended in nineteen thirty-two. The bank did not."
+    },
+    {
+     "text": "At Bretton Woods in 1944 the Allies recommended its liquidation at the earliest possible moment. By 1948 the recommendation had been put aside.",
+     "say": "At Bretton Woods in nineteen forty-four, the Allies recommended its liquidation at the earliest possible moment. By nineteen forty-eight, the recommendation had been put aside."
+    },
+    {
+     "text": "Today sixty-three central banks are members."
+    }
+   ],
+   "shots": [
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "II_bis_tower_basel_2015_romero"
+     ],
+     "motion": "pan-l",
+     "years": [
+      "2015"
+     ],
+     "glitch": true
+    },
+    {
+     "type": "full",
+     "dur": 2.2,
+     "media": [
+      "II_bretton_woods_united_news_1944_x171-241"
+     ],
+     "motion": "push",
+     "years": [
+      "1944"
+     ],
+     "t": [
+      2.0
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "II_bretton_woods_united_news_1944_x171-241"
+     ],
+     "motion": "push",
+     "t": [
+      20.0
+     ]
+    },
+    {
+     "type": "doc",
+     "dur": 3.4,
+     "head": "Bretton Woods · Final Act · Resolution V · 22 July 1944",
+     "tag": "UN MONETARY AND FINANCIAL CONFERENCE · FINAL ACT, RESOLUTION V · 22 JULY 1944 · PD",
+     "sound": false,
+     "style": "quote",
+     "text": "RECOMMENDS: The liquidation of the Bank for International Settlements at the earliest possible moment."
+    },
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "II_bretton_woods_united_news_1944_x171-241"
+     ],
+     "motion": "push",
+     "t": [
+      56.0
+     ]
+    },
+    {
+     "type": "split",
+     "dur": 2.4,
+     "media": [
+      "II_bretton_woods_meeting_room_highsmith",
+      "II_bis_tower_basel_2015_romero"
+     ],
+     "motion": "push",
+     "glitch": true,
+     "years": [
+      "1944",
+      "2015"
+     ]
+    },
+    {
+     "type": "flash",
+     "dur": 0.33,
+     "media": [
+      "erc_vCeDEZtRY9s"
+     ],
+     "motion": "slam",
+     "sound": false
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "II_bis_tower_basel_2015_romero"
+     ],
+     "motion": "slam"
+    }
+   ]
+  },
+  {
+   "id": "III",
+   "title": "The relocation plan",
+   "years": [
+    "1955",
+    "2016"
+   ],
+   "card": 1.4,
+   "lines": [
+    {
+     "text": "Continuity of government is not a rumour. It is a line of directives, each signed to replace the last, from Eisenhower to now, under both parties."
+    },
+    {
+     "text": "Mountains were hollowed out for it. A bunker for the whole of Congress sat under a resort hotel for three decades, until a newspaper found it."
+    },
+    {
+     "text": "It was switched on once: the eleventh of September, 2001. The text of the directive in force today has not been released.",
+     "say": "It was switched on once: the eleventh of September, two thousand and one. The text of the directive in force today has not been released."
+    }
+   ],
+   "shots": [
+    {
+     "type": "full",
+     "dur": 2.2,
+     "media": [
+      "III_operation_alert_1956_x96-166"
+     ],
+     "motion": "push",
+     "years": [
+      "1956"
+     ],
+     "t": [
+      2.0
+     ],
+     "glitch": true
+    },
+    {
+     "type": "full",
+     "dur": 1.4,
+     "media": [
+      "III_eisenhower_official_1959"
+     ],
+     "motion": "push"
+    },
+    {
+     "type": "doc",
+     "dur": 3.6,
+     "head": "Continuity of government · each directive replaces the last",
+     "tag": "CRS RS22674 · FEMA FCD 1 · SECTION IX OF THE REPORT",
+     "sound": false,
+     "style": "ledger",
+     "gutter": 0.2,
+     "rows": [
+      [
+       "NSC 5521",
+       "1955"
+      ],
+      [
+       "NSAM 127",
+       "1962"
+      ],
+      [
+       "NSDM 8",
+       "1969"
+      ],
+      [
+       "PD 58",
+       "1980"
+      ],
+      [
+       "NSDD 55",
+       "1982"
+      ],
+      [
+       "NSD 69",
+       "1992"
+      ],
+      [
+       "PDD 67",
+       "1998"
+      ],
+      [
+       "NSPD-51",
+       "2007"
+      ],
+      [
+       "PPD-40",
+       "2016  [TEXT NOT RELEASED]"
+      ]
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "III_cheyenne_mountain_construction_tunnel"
+     ],
+     "motion": "push",
+     "years": [
+      "1960s"
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 1.4,
+     "media": [
+      "III_cheyenne_mountain_norad_entrance_1968"
+     ],
+     "motion": "pull",
+     "years": [
+      "1968"
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "III_operation_alert_1956_x96-166"
+     ],
+     "motion": "push",
+     "t": [
+      30.0
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "III_greenbrier_highsmith_2015"
+     ],
+     "motion": "pan-r",
+     "years": [
+      "2015"
+     ]
+    },
+    {
+     "type": "flash",
+     "dur": 0.33,
+     "media": [
+      "erc_OiYL9z3bXEI"
+     ],
+     "motion": "slam",
+     "sound": false
+    },
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "III_mount_weather_fema_2007"
+     ],
+     "motion": "pan-l",
+     "years": [
+      "2007"
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "III_operation_alert_1956_x96-166"
+     ],
+     "motion": "push",
+     "t": [
+      50.0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "IV",
+   "title": "The emergency",
+   "years": [
+    "2001",
+    "2026"
+   ],
+   "card": 1.4,
+   "lines": [
+    {
+     "text": "Three days later a national emergency was declared. Every president since has renewed it."
+    },
+    {
+     "text": "Congress authorised force in a single sentence, naming no country and setting no end date. The two Iraq authorisations were repealed in December 2025. That one was not.",
+     "say": "Congress authorised force in a single sentence, naming no country and setting no end date. The two Iraq authorisations were repealed in December twenty twenty-five. That one was not."
+    },
+    {
+     "text": "The attack ended. The instruments did not."
+    }
+   ],
+   "shots": [
+    {
+     "type": "full",
+     "dur": 2.0,
+     "media": [
+      "IV_proclamation_7463_federal_register_20010918"
+     ],
+     "motion": "push",
+     "years": [
+      "2001"
+     ],
+     "glitch": true
+    },
+    {
+     "type": "doc",
+     "dur": 3.6,
+     "head": "Proclamation 7463 · notices of continuation",
+     "tag": "FEDERAL REGISTER · LATEST NOTICE 8 SEPT 2026, 91 FR 57773 · PD",
+     "sound": false,
+     "style": "ledger",
+     "cols": 5,
+     "gutter": 0.075,
+     "scale": 30,
+     "rows": [
+      [
+       "2002",
+       "RENEWED"
+      ],
+      [
+       "2003",
+       "RENEWED"
+      ],
+      [
+       "2004",
+       "RENEWED"
+      ],
+      [
+       "2005",
+       "RENEWED"
+      ],
+      [
+       "2006",
+       "RENEWED"
+      ],
+      [
+       "2007",
+       "RENEWED"
+      ],
+      [
+       "2008",
+       "RENEWED"
+      ],
+      [
+       "2009",
+       "RENEWED"
+      ],
+      [
+       "2010",
+       "RENEWED"
+      ],
+      [
+       "2011",
+       "RENEWED"
+      ],
+      [
+       "2012",
+       "RENEWED"
+      ],
+      [
+       "2013",
+       "RENEWED"
+      ],
+      [
+       "2014",
+       "RENEWED"
+      ],
+      [
+       "2015",
+       "RENEWED"
+      ],
+      [
+       "2016",
+       "RENEWED"
+      ],
+      [
+       "2017",
+       "RENEWED"
+      ],
+      [
+       "2018",
+       "RENEWED"
+      ],
+      [
+       "2019",
+       "RENEWED"
+      ],
+      [
+       "2020",
+       "RENEWED"
+      ],
+      [
+       "2021",
+       "RENEWED"
+      ],
+      [
+       "2022",
+       "RENEWED"
+      ],
+      [
+       "2023",
+       "RENEWED"
+      ],
+      [
+       "2024",
+       "RENEWED"
+      ],
+      [
+       "2025",
+       "RENEWED"
+      ],
+      [
+       "2026",
+       "RENEWED"
+      ]
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 2.0,
+     "media": [
+      "IV_aumf_public_law_107-40_p1"
+     ],
+     "motion": "push",
+     "years": [
+      "2001"
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "IV_capitol_dome_highsmith"
+     ],
+     "motion": "pan-r"
+    },
+    {
+     "type": "flash",
+     "dur": 0.33,
+     "media": [
+      "erc_fs_0-rRKsy4"
+     ],
+     "motion": "slam",
+     "sound": false
+    },
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "V_pentagon_aerial_highsmith"
+     ],
+     "motion": "pan-l"
+    }
+   ]
+  },
+  {
+   "id": "V",
+   "title": "The door",
+   "years": [
+    "1961",
+    "2025"
+   ],
+   "card": 1.4,
+   "lines": [
+    {
+     "text": "Eisenhower, leaving office in 1961: in the councils of government, we must guard against the acquisition of unwarranted influence, whether sought or unsought, by the military-industrial complex.",
+     "say": "Eisenhower, leaving office in nineteen sixty-one. In the councils of government, we must guard against the acquisition of unwarranted influence, whether sought or unsought, by the military-industrial complex."
+    },
+    {
+     "text": "Paul Volcker went from Chase Manhattan to the Treasury, back to Chase, back to the Treasury, and then to the chair of the Federal Reserve."
+    },
+    {
+     "text": "The people rotate. The desks do not. It is less a revolving door than one room with many desks."
+    }
+   ],
+   "shots": [
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "V_eisenhower_farewell_reading_copy_p15"
+     ],
+     "motion": "push",
+     "years": [
+      "1961"
+     ],
+     "glitch": true
+    },
+    {
+     "type": "doc",
+     "dur": 5.0,
+     "head": "Eisenhower · farewell address · 17 January 1961",
+     "tag": "FAREWELL ADDRESS, READING COPY, P.15 · EISENHOWER LIBRARY · PD",
+     "sound": false,
+     "style": "quote",
+     "media": [
+      "V_eisenhower_farewell_reading_copy_p15"
+     ],
+     "motion": "hold",
+     "type_by": 0.75,
+     "text": "In the councils of government, we must guard against the acquisition of unwarranted influence, whether sought or unsought, by the military-industrial complex."
+    },
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "V_volcker_senate_banking_1983"
+     ],
+     "motion": "push",
+     "years": [
+      "1983"
+     ]
+    },
+    {
+     "type": "doc",
+     "dur": 3.4,
+     "head": "Paul Volcker, 1927-2019 · the route",
+     "tag": "FEDERAL RESERVE HISTORY · FEDERALRESERVEHISTORY.ORG",
+     "sound": false,
+     "style": "ledger",
+     "gutter": 0.12,
+     "rows": [
+      [
+       "1957",
+       "CHASE MANHATTAN"
+      ],
+      [
+       "1962",
+       "TREASURY"
+      ],
+      [
+       "1965",
+       "CHASE MANHATTAN"
+      ],
+      [
+       "1969",
+       "TREASURY · UNDER SECRETARY"
+      ],
+      [
+       "1975",
+       "FEDERAL RESERVE BANK OF NEW YORK"
+      ],
+      [
+       "1979",
+       "FEDERAL RESERVE · CHAIR"
+      ]
+     ]
+    },
+    {
+     "type": "split",
+     "dur": 2.4,
+     "media": [
+      "V_eccles_building_1937",
+      "V_treasury_building_highsmith"
+     ],
+     "motion": "push",
+     "glitch": true,
+     "years": [
+      "1937",
+      "NOW"
+     ]
+    },
+    {
+     "type": "flash",
+     "dur": 0.33,
+     "media": [
+      "erc_8VbssmVYakg"
+     ],
+     "motion": "slam",
+     "sound": false
+    },
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "V_eccles_building_fed_2011"
+     ],
+     "motion": "pan-r",
+     "years": [
+      "2011"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "VI",
+   "title": "The contractor",
+   "years": [
+    "1912",
+    "2024"
+   ],
+   "card": 1.4,
+   "lines": [
+    {
+     "text": "Lockheed is older than the CIA. It built the Agency's U-2 in 1955, and the A-12 after it.",
+     "say": "Lockheed is older than the C I A. It built the Agency's U two in nineteen fifty-five, and the A twelve after it."
+    },
+    {
+     "text": "In 1976 its foreign payments reached a prince. Bernhard of the Netherlands, who had chaired the Bilderberg meetings since 1954, gave up his military posts and the chair. The next year, bribing foreign officials became a federal crime.",
+     "say": "In nineteen seventy-six its foreign payments reached a prince. Bernhard of the Netherlands, who had chaired the Bilderberg meetings since nineteen fifty-four, gave up his military posts and the chair. The next year, bribing foreign officials became a federal crime."
+    },
+    {
+     "text": "Today it is the world's largest arms producer. The scandal ended. The contracts did not."
+    }
+   ],
+   "shots": [
+    {
+     "type": "full",
+     "dur": 2.0,
+     "media": [
+      "VI_look_to_lockheed_plant_1940_x500-560"
+     ],
+     "motion": "push",
+     "years": [
+      "1940"
+     ],
+     "t": [
+      12.0
+     ],
+     "glitch": true
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "VI_lockheed_p38_assembly_line_1942"
+     ],
+     "motion": "pan-r",
+     "years": [
+      "1942"
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "VI_kelly_johnson_skunk_works_1950s"
+     ],
+     "motion": "push"
+    },
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "VI_u2_spy_story_1960_x0-58"
+     ],
+     "motion": "push",
+     "years": [
+      "1960"
+     ],
+     "t": [
+      6.0
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 1.2,
+     "media": [
+      "VI_u2_article347_camera_ports_nasm"
+     ],
+     "motion": "slam"
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "VI_a12_oxcart_in_flight_1960s"
+     ],
+     "motion": "pan-l"
+    },
+    {
+     "type": "doc",
+     "dur": 4.2,
+     "head": "Lockheed · the firm and the state it equips",
+     "tag": "LOCKHEED MARTIN HISTORY · CIA · DONNER COMMITTEE · SIPRI TOP 100 (DEC 2025) · SECTION VII",
+     "sound": false,
+     "style": "ledger",
+     "gutter": 0.1,
+     "rows": [
+      [
+       "1912",
+       "ALCO-HYDRO AEROPLANE CO. · THE LOUGHEAD BROTHERS"
+      ],
+      [
+       "1947",
+       "THE CIA IS CREATED"
+      ],
+      [
+       "1955",
+       "U-2 FLIES · CIA PROJECT AQUATONE"
+      ],
+      [
+       "1976",
+       "DONNER REPORT · PRINCE BERNHARD STEPS DOWN"
+      ],
+      [
+       "1977",
+       "FOREIGN CORRUPT PRACTICES ACT"
+      ],
+      [
+       "2024",
+       "SIPRI #1 · $64.7BN ARMS REVENUE"
+      ]
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "VI_look_to_lockheed_hudsons_1940_x696-756"
+     ],
+     "motion": "push",
+     "t": [
+      36.0
+     ]
+    },
+    {
+     "type": "flash",
+     "dur": 0.33,
+     "media": [
+      "erc_AmTnNRJtrqE"
+     ],
+     "motion": "slam",
+     "sound": false
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "VI_f35_heritage_flight_2018"
+     ],
+     "motion": "slam",
+     "years": [
+      "2018"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "VII",
+   "title": "The clock",
+   "years": [
+    "1946",
+    "2026"
+   ],
+   "card": 1.4,
+   "lines": [
+    {
+     "text": "MKUltra: authorised 1953, exposed in the seventies. Northwoods: written 1962, released 1997. The UKUSA agreement: signed 1946, released 2010.",
+     "say": [
+      "M K Ultra: authorised nineteen fifty-three, exposed in the seventies.",
+      "Northwoods: written nineteen sixty-two, released nineteen ninety-seven.",
+      "The U K U S A agreement: signed nineteen forty-six, released twenty ten."
+     ]
+    },
+    {
+     "text": "The money moves on less paper still. Since 1949, the Director's certificate has been the voucher.",
+     "say": "The money moves on less paper still. Since nineteen forty-nine, the Director's certificate has been the voucher."
+    },
+    {
+     "text": "The clock says when a record surfaces. It does not say what the record will say."
+    }
+   ],
+   "shots": [
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "VII_mkultra_subproject8_19530609"
+     ],
+     "motion": "push",
+     "years": [
+      "1953"
+     ],
+     "glitch": true
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "VII_northwoods_memo_lemnitzer_19620313_p1"
+     ],
+     "motion": "pan-r",
+     "years": [
+      "1962"
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "VII_ukusa_revision_uscib_19541206_p1"
+     ],
+     "motion": "push",
+     "years": [
+      "1954"
+     ]
+    },
+    {
+     "type": "doc",
+     "dur": 2.8,
+     "head": "Hidden, then released",
+     "tag": "CIA · JCS/ARRB · NSA-GCHQ RELEASES · SECTION XVI",
+     "sound": false,
+     "style": "ledger",
+     "gutter": 0.2,
+     "rows": [
+      [
+       "MKULTRA",
+       "AUTHORISED 1953 · EXPOSED 1975"
+      ],
+      [
+       "NORTHWOODS",
+       "WRITTEN 1962 · RELEASED 1997"
+      ],
+      [
+       "UKUSA",
+       "SIGNED 1946 · RELEASED 2010"
+      ]
+     ]
+    },
+    {
+     "type": "doc",
+     "dur": 4.0,
+     "head": "50 U.S.C. §3510(b) · Central Intelligence Agency Act of 1949, §8",
+     "tag": "50 U.S.C. §3510 · CORNELL LII · SECTION XVI OF THE REPORT",
+     "sound": false,
+     "style": "quote",
+     "scale": 19,
+     "text": "...such expenditures to be accounted for solely on the certificate of the Director and every such certificate shall be deemed a sufficient voucher for the amount therein certified."
+    },
+    {
+     "type": "full",
+     "dur": 1.4,
+     "media": [
+      "VII_church_committee_book2_title_1976"
+     ],
+     "motion": "push",
+     "years": [
+      "1976"
+     ]
+    },
+    {
+     "type": "flash",
+     "dur": 0.33,
+     "media": [
+      "erc_VP2iLdUcI1c"
+     ],
+     "motion": "slam",
+     "sound": false
+    },
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "I_nara_wnrc_stacks"
+     ],
+     "motion": "pan-l"
+    }
+   ]
+  },
+  {
+   "id": "VIII",
+   "title": "The empty seat",
+   "years": [
+    "1940",
+    "2026"
+   ],
+   "card": 1.4,
+   "lines": [
+    {
+     "text": "Climb the pyramid and the names thin out into rules: asset managers, central banks, sovereign funds. Vanguard is owned by its own funds."
+    },
+    {
+     "text": "The seat at the top is real, load-bearing and empty. Hand it a family or a bloodline and the analysis is over. That is the oldest way this research goes bad."
+    }
+   ],
+   "shots": [
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "VIII_fed_board_room_1940"
+     ],
+     "motion": "push",
+     "years": [
+      "1940"
+     ],
+     "glitch": true
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "VIII_oval_office_desk_empty_1964"
+     ],
+     "motion": "pan-r",
+     "years": [
+      "1964"
+     ]
+    },
+    {
+     "type": "doc",
+     "dur": 3.2,
+     "head": "Vanguard · who owns it",
+     "tag": "CORPORATE.VANGUARD.COM · OWNERSHIP",
+     "sound": false,
+     "style": "quote",
+     "text": "Vanguard is owned by its member funds, which in turn are owned by fund shareholders."
+    },
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "VIII_unsc_chamber_empty_2024_forrester"
+     ],
+     "motion": "pan-l",
+     "years": [
+      "2024"
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "VIII_fomc_board_room_entrance_2007"
+     ],
+     "motion": "push"
+    },
+    {
+     "type": "flash",
+     "dur": 0.33,
+     "media": [
+      "erc_E9IuNSX3FAE"
+     ],
+     "motion": "slam",
+     "sound": false
+    },
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "VIII_oval_office_empty_19810422"
+     ],
+     "motion": "pull",
+     "years": [
+      "1981"
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "VIII_fed_board_room_coat_of_arms_2014"
+     ],
+     "motion": "slam"
+    }
+   ]
+  }
+ ],
+ "finale": {
+  "id": "IX",
+  "title": "The pattern points",
+  "years": [
+   "1600",
+   "2026"
+  ],
+  "style": "timeline",
+  "card": 1.4,
+  "lead": 3.4,
+  "hold": 3.6,
+  "sweep": 3.0,
+  "arc_line": 0,
+  "cut_line": 1,
+  "axis": [
+   [
+    1600,
+    0.0
+   ],
+   [
+    1900,
+    0.13
+   ],
+   [
+    1940,
+    0.26
+   ],
+   [
+    1965,
+    0.6
+   ],
+   [
+    2030,
+    1.0
+   ]
+  ],
+  "ticks": [
+   1600,
+   1700,
+   1800,
+   1900,
+   1940,
+   1950,
+   1960,
+   1980,
+   2000,
+   2020
+  ],
+  "breaks": [],
+  "tag": "EVERY DATE ON THIS LINE IS IN THE FILM ABOVE, AND IN THE REPORT",
+  "points": [
+   {
+    "year": 1600,
+    "label": "EIC charter",
+    "tier": 1
+   },
+   {
+    "year": 1858,
+    "label": "Crown takes the EIC",
+    "tier": 0,
+    "side": "down"
+   },
+   {
+    "year": 1912,
+    "label": "Lockheed founded",
+    "tier": 0
+   },
+   {
+    "year": 1930,
+    "label": "BIS opens",
+    "tier": 2,
+    "side": "down"
+   },
+   {
+    "year": 1944,
+    "label": "Bretton Woods",
+    "tier": 2
+   },
+   {
+    "year": 1949,
+    "label": "CIA Act s.8",
+    "tier": 0,
+    "side": "down"
+   },
+   {
+    "year": 1953,
+    "label": "MKUltra",
+    "tier": 0
+   },
+   {
+    "year": 1955,
+    "label": "NSC 5521",
+    "tier": 1,
+    "side": "down"
+   },
+   {
+    "year": 1961,
+    "label": "Farewell address",
+    "tier": 1
+   },
+   {
+    "year": 1976,
+    "label": "Bernhard steps down",
+    "tier": 2,
+    "side": "down"
+   },
+   {
+    "year": 1992,
+    "label": "Greenbrier found",
+    "tier": 0
+   },
+   {
+    "year": 2001,
+    "label": "COG switched on",
+    "tier": 0,
+    "side": "down"
+   },
+   {
+    "year": 2016,
+    "label": "PPD-40",
+    "tier": 2
+   },
+   {
+    "year": 2026,
+    "label": "Emergency renewed",
+    "tier": 2,
+    "side": "down"
+   }
+  ],
+  "lines": [
+   {
+    "text": "These are the pattern points, and they correlate."
+   },
+   {
+    "text": "A shared timeline is not a chain."
+   }
+  ],
+  "close": {
+   "after_line": true,
+   "big": "A shared timeline is not a chain.",
+   "sub": "correlation documented · mechanism not reached",
+   "scale": 12
+  }
+ },
+ "media": {
+  "I_elizabeth_i_de_passe_1592": {
+   "file": "v3/I_elizabeth_i_de_passe_1592.jpg",
+   "kind": "still",
+   "tag": "QUEEN ELIZABETH I · ENGRAVING BY CRISPIJN DE PASSE THE ELDER · 1592 · THE MET · CC0",
+   "source_page": "https://www.metmuseum.org/art/collection/search/364401",
+   "licence": "Public domain (Met Open Access, isPublicDomain: true; CC0)",
+   "sha256": "beede20df7191a468767ef074543c3d7a76831f716f46037fde74ea98be7e286",
+   "focus": [
+    0.42,
+    0.35
+   ]
+  },
+  "I_elizabeth_in_parliament_1682": {
+   "file": "v3/I_elizabeth_in_parliament_1682.jpg",
+   "kind": "still",
+   "tag": "QUEEN ELIZABETH IN PARLIAMENT · ANONYMOUS ENGRAVING · 1682 · THE MET · CC0",
+   "source_page": "https://www.metmuseum.org/art/collection/search/683019",
+   "licence": "Public domain (Met Open Access, isPublicDomain: true; CC0)",
+   "sha256": "a568883070e1b5c26e28c16b89a8c82cc40d0e8e17c0f5e4308b0e857bd90d12",
+   "focus": [
+    0.5,
+    0.3
+   ]
+  },
+  "I_shah_alam_diwani_clive_west_1818": {
+   "file": "v3/I_shah_alam_diwani_clive_west_1818.jpg",
+   "kind": "still",
+   "tag": "SHAH ALAM CONVEYING THE GRANT OF THE DIWANI TO LORD CLIVE · BENJAMIN WEST · 1818 · BRITISH LIBRARY · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Shah_%27Alam_conveying_the_grant_of_the_Diwani_to_Lord_Clive.jpg",
+   "licence": "Public domain (Commons LicenseShortName)",
+   "sha256": "4152c5f50b951aa36249afc8c7db11c983288d9cd383c8ff15844c8805332224",
+   "focus": [
+    0.44,
+    0.45
+   ]
+  },
+  "I_east_india_house_leadenhall_1800_rijks": {
+   "file": "v3/I_east_india_house_leadenhall_1800_rijks.jpg",
+   "kind": "still",
+   "tag": "FRONT OF THE EAST INDIA HOUSE, LEADENHALL STREET, AS REBUILT IN 1796 · PRINT AFTER T. MALTON · C. 1800 · RIJKSMUSEUM · CC0",
+   "source_page": "https://www.rijksmuseum.nl/en/collection/RP-P-2018-2132",
+   "licence": "CC0 1.0 (Rijksmuseum object metadata, id.rijksmuseum.nl/200731930)",
+   "sha256": "1ea84c85dd4074ee273215ba820a70746cc2c3334b40c3a24e42fb70b3e417ee",
+   "focus": [
+    0.45,
+    0.45
+   ]
+  },
+  "I_east_indiaman_atlas_huggins_1822": {
+   "file": "v3/I_east_indiaman_atlas_huggins_1822.jpg",
+   "kind": "still",
+   "tag": "THE EAST INDIAMAN 'ATLAS' OFF THE SOUTH FORELAND · WILLIAM JOHN HUGGINS · 1820S · NATIONAL MARITIME MUSEUM · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:The_East_Indiaman_%27Atlas%27_RMG_BHC3213.tiff",
+   "licence": "Public domain (Commons LicenseShortName)",
+   "sha256": "ba33d60637345eeff3206a40631c94708c70b611e830d4cde640b3d72ba0f300",
+   "focus": [
+    0.5,
+    0.5
+   ]
+  },
+  "I_east_indiaman_warley_salmon_1804": {
+   "file": "v3/I_east_indiaman_warley_salmon_1804.jpg",
+   "kind": "still",
+   "tag": "THE EAST INDIAMAN 'WARLEY' · ROBERT SALMON · 1804 · NATIONAL MARITIME MUSEUM · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:East_Indiaman_Warley.jpg",
+   "licence": "Public domain (Commons LicenseShortName)",
+   "sha256": "f2efeff15f9028951d3126bc24ffde3032a27d02ffad172f17090b5b7ddca52a",
+   "focus": [
+    0.55,
+    0.55
+   ]
+  },
+  "I_delhi_durbar_1877_imperial_assemblage": {
+   "file": "v3/I_delhi_durbar_1877_imperial_assemblage.jpg",
+   "kind": "still",
+   "tag": "THE IMPERIAL ASSEMBLAGE, DELHI · PHOTOGRAPH · 1877 · RIJKSMUSEUM · CC0",
+   "source_page": "https://www.rijksmuseum.nl/en/collection/RP-F-2001-7-1124-27",
+   "licence": "CC0 1.0 (Rijksmuseum object metadata, id.rijksmuseum.nl/200656043)",
+   "sha256": "37920152991b48bb8e7319d47fec7c1b631fe5bc889dfa83c14fd8696b3487f0",
+   "focus": [
+    0.5,
+    0.7
+   ]
+  },
+  "II_bretton_woods_united_news_1944_x171-241": {
+   "file": "v3/II_bretton_woods_united_news_1944_x171-241.mp4",
+   "kind": "video",
+   "tag": "UNITED NATIONS MONETARY CONFERENCE, BRETTON WOODS · UNITED NEWS NEWSREEL · JULY 1944 · NARA · CC0",
+   "source_page": "https://archive.org/details/gov.archives.arc.39018",
+   "licence": "CC0 1.0 (archive.org licenseurl); NARA ARC 39018, LI 208-UN-111, United News newsreel (US Office of War Information)",
+   "sha256": "537bc9b45c4c8eda76925bf91ae8ff6f39e03c214d3f2aeb8048a4ed2f318198",
+   "in": 0
+  },
+  "II_bretton_woods_meeting_room_highsmith": {
+   "file": "v3/II_bretton_woods_meeting_room_highsmith.jpg",
+   "kind": "still",
+   "tag": "MEETING ROOM, MOUNT WASHINGTON HOTEL, BRETTON WOODS · CAROL M. HIGHSMITH · LIBRARY OF CONGRESS · PD",
+   "source_page": "https://www.loc.gov/item/2011631558/",
+   "licence": "Public domain (Carol M. Highsmith Archive; LoC: 'No known restrictions on publication.')",
+   "sha256": "e5147fd8a8bc23b9d343d830ddd2a3aa76bcd8f2a8d14abbe142e892090f53b5",
+   "focus": [
+    0.45,
+    0.55
+   ]
+  },
+  "II_bis_tower_basel_2015_romero": {
+   "file": "v3/II_bis_tower_basel_2015_romero.jpg",
+   "kind": "still",
+   "tag": "BANK FOR INTERNATIONAL SETTLEMENTS TOWER, BASEL · FRED ROMERO · 2015 · CC BY 2.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Basel_-_Bank_f%C3%BCr_Internationalen_Zahlungsausgleich-Tower_Building_(27626681225).jpg",
+   "licence": "CC BY 2.0",
+   "sha256": "d108c9642107c41ab33da9735455d0c3daaf7372629326afb825bd2830d58722",
+   "focus": [
+    0.55,
+    0.45
+   ]
+  },
+  "III_operation_alert_1956_x96-166": {
+   "file": "v3/III_operation_alert_1956_x96-166.mp4",
+   "kind": "video",
+   "tag": "OPERATION ALERT: MOCK H-BOMB ATTACK TESTS CIVIL DEFENSE · UNIVERSAL NEWSREEL · JULY 1956 · PD",
+   "source_page": "https://archive.org/details/1956-07-23_Ike_In_Panama",
+   "licence": "Public Domain (archive.org licenseurl creativecommons.org/licenses/publicdomain; Universal Newsreel, released to the public domain via NARA)",
+   "sha256": "a203fb3f521b4434810e715581e8ec4e60d92e57db1160ceefb68a185b1e442b",
+   "in": 0
+  },
+  "IV_capitol_dome_highsmith": {
+   "file": "v3/IV_capitol_dome_highsmith.jpg",
+   "kind": "still",
+   "tag": "U.S. CAPITOL DOME · CAROL M. HIGHSMITH · LIBRARY OF CONGRESS · PD",
+   "source_page": "https://www.loc.gov/item/2011630697/",
+   "licence": "Public domain (Carol M. Highsmith Archive; LoC: 'No known restrictions on publication.')",
+   "sha256": "92cde19df68afb3d87d0b5e91f5f75cb526f3c6066705af7e6fcc1d36299b737",
+   "focus": [
+    0.38,
+    0.4
+   ]
+  },
+  "IV_pentagon_aerial_1947": {
+   "file": "v3/IV_pentagon_aerial_1947.jpg",
+   "kind": "still",
+   "tag": "THE PENTAGON FROM THE AIR · C. 1947 · LIBRARY OF CONGRESS · LOC · NO KNOWN RESTRICTIONS",
+   "source_page": "https://www.loc.gov/item/2006682713/",
+   "licence": "No known restrictions on publication (LoC item rights statement)",
+   "sha256": "ad8cf69d1901bfa5167e3339cb69f46c3c8ee63ff7b0c65f798b95b8ceadc4c0",
+   "focus": [
+    0.52,
+    0.5
+   ]
+  },
+  "V_volcker_senate_banking_1983": {
+   "file": "v3/V_volcker_senate_banking_1983.jpg",
+   "kind": "still",
+   "tag": "PAUL VOLCKER TESTIFIES TO THE SENATE BANKING COMMITTEE · CHICK HARRITY · 16 FEB 1983 · LIBRARY OF CONGRESS · LOC · NO KNOWN RESTRICTIONS",
+   "source_page": "https://www.loc.gov/item/2024630612/",
+   "licence": "No known restrictions on publication (LoC; U.S. News & World Report collection)",
+   "sha256": "8a5dea8832bad0876b102a0343d390eacad3243ea7a53cc23fed0d162fd3b791",
+   "focus": [
+    0.55,
+    0.3
+   ]
+  },
+  "V_treasury_building_highsmith": {
+   "file": "v3/V_treasury_building_highsmith.jpg",
+   "kind": "still",
+   "tag": "U.S. TREASURY BUILDING, WASHINGTON · CAROL M. HIGHSMITH · LIBRARY OF CONGRESS · PD",
+   "source_page": "https://www.loc.gov/item/2011631001/",
+   "licence": "Public domain (Carol M. Highsmith Archive; LoC: 'No known restrictions on publication.')",
+   "sha256": "d6993cc2b8bded41241a15e24622241dc371ce5604d7a90110b96a370acb14bd",
+   "focus": [
+    0.5,
+    0.5
+   ]
+  },
+  "V_pentagon_aerial_highsmith": {
+   "file": "v3/V_pentagon_aerial_highsmith.jpg",
+   "kind": "still",
+   "tag": "THE PENTAGON, ARLINGTON, VIRGINIA · CAROL M. HIGHSMITH · LIBRARY OF CONGRESS · PD",
+   "source_page": "https://www.loc.gov/item/2011632609/",
+   "licence": "Public domain (Carol M. Highsmith Archive; LoC: 'No known restrictions on publication.')",
+   "sha256": "4b5c4a0a02553f69394fefccb3f41187a43dfb35d6682331b37a60f60d46d084",
+   "focus": [
+    0.5,
+    0.6
+   ]
+  },
+  "VI_lockheed_p38_assembly_line_1942": {
+   "file": "v3/VI_lockheed_p38_assembly_line_1942.jpg",
+   "kind": "still",
+   "tag": "LOCKHEED P-38 ASSEMBLY LINE, BURBANK · DAVID BRANSBY, OWI · 1942 · LIBRARY OF CONGRESS · PD",
+   "source_page": "https://www.loc.gov/item/2017694516/",
+   "licence": "Public domain (LoC: 'The contents of the Library of Congress Farm Security Administration/Office of War Information Black-and-White Negatives are in the public domain and are free to use and reuse.')",
+   "sha256": "22b797aacb5d4b27f0fced9cb24fca30af3f4cb3800ff3c29de6006554950c5f",
+   "focus": [
+    0.5,
+    0.55
+   ]
+  },
+  "VI_nasa_u2_sensor_payloads_ames_1977": {
+   "file": "v3/VI_nasa_u2_sensor_payloads_ames_1977.jpg",
+   "kind": "still",
+   "tag": "U-2 WITH ITS SENSOR AND CAMERA PAYLOADS LAID OUT, NASA AMES · ROGER BRIMMER · 1977 · NASA · PD",
+   "source_page": "https://images.nasa.gov/details/ARC-1977-AC77-0068-27",
+   "licence": "Public domain (NASA media; not copyrighted, per NASA media usage guidelines)",
+   "sha256": "69a1147195cea665ce580459ba7a3353e1e9b81d5b47b3cfb19c3aa1e7ba675e",
+   "focus": [
+    0.4,
+    0.45
+   ]
+  },
+  "VI_u2_spy_story_1960_x0-58": {
+   "file": "v3/VI_u2_spy_story_1960_x0-58.mp4",
+   "kind": "video",
+   "tag": "SPY STORY OF THE YEAR: KHRUSHCHEV ANNOUNCES THE U-2 PILOT IS ALIVE · UNIVERSAL NEWSREEL · 9 MAY 1960 · PD",
+   "source_page": "https://archive.org/details/1960-05-09_spy_story_of_the_year",
+   "licence": "Public Domain (archive.org licenseurl creativecommons.org/licenses/publicdomain; Universal Newsreel)",
+   "sha256": "629c885ac911cc94460c6bade58552cd300c20eb361a3d2fcf975942841551ad",
+   "in": 0
+  },
+  "VI_look_to_lockheed_plant_1940_x500-560": {
+   "file": "v3/VI_look_to_lockheed_plant_1940_x500-560.mp4",
+   "kind": "video",
+   "tag": "LOOK TO LOCKHEED FOR LEADERSHIP · LOCKHEED'S OWN FILM · C. 1940 · PRELINGER ARCHIVES · PD",
+   "source_page": "https://archive.org/details/LooktoLo1940",
+   "licence": "Public Domain (archive.org licenseurl creativecommons.org/licenses/publicdomain; Prelinger Archives)",
+   "sha256": "5115b0edc92a73bdf20c90968ab4fb6323165046630e3db3b22df27f4d2d5dac",
+   "in": 0
+  },
+  "VI_look_to_lockheed_hudsons_1940_x696-756": {
+   "file": "v3/VI_look_to_lockheed_hudsons_1940_x696-756.mp4",
+   "kind": "video",
+   "tag": "HUDSON BOMBERS FOR THE RAF LEAVE BURBANK · LOOK TO LOCKHEED FOR LEADERSHIP, PART II · C. 1940 · PD",
+   "source_page": "https://archive.org/details/LooktoLo1940_2",
+   "licence": "Public Domain (archive.org licenseurl creativecommons.org/licenses/publicdomain; Prelinger Archives)",
+   "sha256": "34d967bd82510b019b0221e40c8edc696a5de03bcf30b23c574e0aae37464c74",
+   "in": 0
+  },
+  "VII_mkultra_subproject8_19530609": {
+   "file": "v3/VII_mkultra_subproject8_19530609.jpg",
+   "kind": "still",
+   "tag": "PROJECT MKULTRA, SUBPROJECT 8 · CIA MEMORANDUM · 9 JUNE 1953 · RELEASED 2002 · PD",
+   "source_page": "https://archive.org/details/cia-readingroom-document-cia-rdp78-04913a000100030113-7",
+   "licence": "Public domain (US federal government work, CIA; archive.org mirror of the CIA Reading Room, collection 'usgovernmentmirrors' — item carries no licenseurl)",
+   "sha256": "aff35ebfeb41ed91543d30c10dbc0295e2f2de3bf7fa95f046db1246d5e887a8",
+   "focus": [
+    0.45,
+    0.35
+   ]
+  },
+  "VII_northwoods_memo_lemnitzer_19620313_p1": {
+   "file": "v3/VII_northwoods_memo_lemnitzer_19620313_p1.jpg",
+   "kind": "still",
+   "tag": "JUSTIFICATION FOR US MILITARY INTERVENTION IN CUBA (OPERATION NORTHWOODS) · JCS MEMO · 13 MARCH 1962 · PD",
+   "source_page": "https://archive.org/details/operation-northwoods-justification-for-u.-s.-military-intervention-in-cuba",
+   "licence": "Public Domain Mark 1.0 (archive.org licenseurl); a Joint Chiefs of Staff document (US government work)",
+   "sha256": "850eee0fd6ae8496a7ce231c6eaa8d2ea11db7419be3564bdd2c0a8f1df861da",
+   "focus": [
+    0.45,
+    0.4
+   ]
+  },
+  "VII_northwoods_appendix_enclosure_a_1962": {
+   "file": "v3/VII_northwoods_appendix_enclosure_a_1962.jpg",
+   "kind": "still",
+   "tag": "APPENDIX TO ENCLOSURE A: 'A LOGICAL BUILD-UP OF INCIDENTS' · JCS · MARCH 1962 · PD",
+   "source_page": "https://archive.org/details/operation-northwoods-justification-for-u.-s.-military-intervention-in-cuba",
+   "licence": "Public Domain Mark 1.0 (archive.org licenseurl); a Joint Chiefs of Staff document (US government work)",
+   "sha256": "d357d4a54dbe42a8c76b6cdcf60a4ca534956a5cdadb1dfdef0f00340551f664",
+   "focus": [
+    0.5,
+    0.5
+   ]
+  },
+  "VII_ukusa_revision_uscib_19541206_p1": {
+   "file": "v3/VII_ukusa_revision_uscib_19541206_p1.jpg",
+   "kind": "still",
+   "tag": "REVISION OF THE UKUSA AGREEMENT · USCIB MEMORANDUM · 6 DECEMBER 1954 · NSA RELEASE · CC0",
+   "source_page": "https://archive.org/details/41723799076306",
+   "licence": "CC0 1.0 (archive.org licenseurl); NSA release from the William F. Friedman collection",
+   "sha256": "84e18784a065a18ad0e702570a3fe4f2bdf85133056319ffebb3cc6f467b8a4b",
+   "focus": [
+    0.45,
+    0.35
+   ]
+  },
+  "VII_ukusa_revision_nsa_1954_p2": {
+   "file": "v3/VII_ukusa_revision_nsa_1954_p2.jpg",
+   "kind": "still",
+   "tag": "'REVISION OF UKUSA AGREEMENT' · TOP SECRET FROTH · NSA RELEASE · CC0",
+   "source_page": "https://archive.org/details/41723799076306",
+   "licence": "CC0 1.0 (archive.org licenseurl); NSA release from the William F. Friedman collection",
+   "sha256": "9c627c82ed3d1f352b6f13a3ad89e145ed5a29ac7905dcdb1261509a3534498d",
+   "focus": [
+    0.4,
+    0.3
+   ]
+  },
+  "VIII_oval_office_desk_empty_1964": {
+   "file": "v3/VIII_oval_office_desk_empty_1964.jpg",
+   "kind": "still",
+   "tag": "THE PRESIDENT'S DESK, EMPTY · MARION S. TRIKOSKO · 4 NOVEMBER 1964 · LIBRARY OF CONGRESS · LOC · NO KNOWN RESTRICTIONS",
+   "source_page": "https://www.loc.gov/item/2014645527/",
+   "licence": "No known restrictions on publication (LoC; U.S. News & World Report collection)",
+   "sha256": "a07ed4a587e26bcee810e2a40621eaf16a1bc89cdf7d54bc83e4dce55e4f5bb3",
+   "focus": [
+    0.5,
+    0.55
+   ]
+  },
+  "VIII_oval_office_wide_empty_1964": {
+   "file": "v3/VIII_oval_office_wide_empty_1964.jpg",
+   "kind": "still",
+   "tag": "THE OVAL OFFICE, EMPTY · MARION S. TRIKOSKO · 4 NOVEMBER 1964 · LIBRARY OF CONGRESS · LOC · NO KNOWN RESTRICTIONS",
+   "source_page": "https://www.loc.gov/item/2014645536/",
+   "licence": "No known restrictions on publication (LoC; U.S. News & World Report collection)",
+   "sha256": "f6034417bd6c1f1b86650639871b790d8ed166588af548a7e9eca55b385a5838",
+   "focus": [
+    0.45,
+    0.6
+   ]
+  },
+  "I_delhi_durbar_1911_jharokha": {
+   "file": "v3/I_delhi_durbar_1911_jharokha.jpg",
+   "kind": "still",
+   "tag": "GEORGE V AND QUEEN MARY AT THE JHAROKHA OF THE RED FORT · DELHI DURBAR · 1911 · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Delhi_Durbar_1911_Jharokhan_Darshan.jpg",
+   "licence": "Public domain (Commons LicenseShortName)",
+   "sha256": "5a71e6b09ad5193d3da5c6162595fd67297b9f732efab060cf5f6a3287d4c14c",
+   "focus": [
+    0.5,
+    0.45
+   ]
+  },
+  "III_mount_weather_fema_2007": {
+   "file": "v3/III_mount_weather_fema_2007.jpg",
+   "kind": "still",
+   "tag": "MOUNT WEATHER EMERGENCY OPERATIONS CENTER, VIRGINIA, FROM THE AIR · FEMA / KAREN NUTINI · 2007 · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:FEMA_-_35049_-_VA_MWEOC.jpg",
+   "licence": "Public domain (Commons LicenseShortName)",
+   "sha256": "608eda0136a7b554478d7b02da74cd728ee496ef74a152fa1dea1ff93a77fd48",
+   "focus": [
+    0.45,
+    0.45
+   ]
+  },
+  "III_cheyenne_mountain_norad_entrance_1968": {
+   "file": "v3/III_cheyenne_mountain_norad_entrance_1968.jpg",
+   "kind": "still",
+   "tag": "CHEYENNE MOUNTAIN: THE NORAD TUNNEL PORTAL · 1968 · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Cheyenne_Mountain_NORAD_entrance_1968.jpg",
+   "licence": "Public domain (Commons LicenseShortName)",
+   "sha256": "4efe53df9524576559360bdcb682b76e284a3c3b9fd3f585e8b1a6f551b69a29",
+   "focus": [
+    0.62,
+    0.7
+   ]
+  },
+  "III_cheyenne_mountain_construction_tunnel": {
+   "file": "v3/III_cheyenne_mountain_construction_tunnel.jpg",
+   "kind": "still",
+   "tag": "BUILDING THE CHEYENNE MOUNTAIN COMPLEX: STEEL FRAME INSIDE A ROCK CHAMBER · 1960S · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Cheyenne_Mountain_Const_-_Crane_in_tunnel.jpg",
+   "licence": "Public domain (Commons LicenseShortName)",
+   "sha256": "b9b76c1bf6ba915f851caf17262b66548c69c483e1366293b534ba4d9a5aed66",
+   "focus": [
+    0.45,
+    0.6
+   ]
+  },
+  "III_greenbrier_highsmith_2015": {
+   "file": "v3/III_greenbrier_highsmith_2015.jpg",
+   "kind": "still",
+   "tag": "THE GREENBRIER, WHITE SULPHUR SPRINGS, WEST VIRGINIA · CAROL M. HIGHSMITH · 2015 · LIBRARY OF CONGRESS · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:The_Greenbrier_Historic_Resort_Hotel,_built_in_1858_just_outside_White_Sulphur_Springs,_West_Virginia_LCCN2015634494.tif",
+   "licence": "Public domain (Commons LicenseShortName)",
+   "sha256": "73a676f8a5827dfc315f203ff7620297f7ad273cbd8d5952eb2082cd6f9845f9",
+   "focus": [
+    0.5,
+    0.55
+   ]
+  },
+  "V_eccles_building_1937": {
+   "file": "v3/V_eccles_building_1937.jpg",
+   "kind": "still",
+   "tag": "THE FEDERAL RESERVE BOARD BUILDING, NEW · 20 OCTOBER 1937 · FEDERAL RESERVE · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:US_Federal_Reserve_Eccles_Building_1937.jpg",
+   "licence": "Public domain (Commons LicenseShortName)",
+   "sha256": "b211f1745e5586a0ee4c88083f14b7ee9aa7e6e854e355e72436a24d66d4c728",
+   "focus": [
+    0.55,
+    0.45
+   ]
+  },
+  "V_eccles_building_fed_2011": {
+   "file": "v3/V_eccles_building_fed_2011.jpg",
+   "kind": "still",
+   "tag": "MARRINER S. ECCLES FEDERAL RESERVE BOARD BUILDING · FEDERAL RESERVE · 2011 · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Eccles_Building_(26088200676).jpg",
+   "licence": "Public domain (Commons LicenseShortName)",
+   "sha256": "79ecb485fd82bd352445767ec5869847739a337ce13da0d148e9d17bd4a2837c",
+   "focus": [
+    0.5,
+    0.5
+   ]
+  },
+  "VI_kelly_johnson_skunk_works_1950s": {
+   "file": "v3/VI_kelly_johnson_skunk_works_1950s.jpg",
+   "kind": "still",
+   "tag": "CLARENCE 'KELLY' JOHNSON WITH U-2 N803X · US AIR FORCE PHOTO · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Clarence_L._%E2%80%9CKelly%E2%80%9D_Johnson,_chief_designer_at_Lockheed%E2%80%99s_secret_%E2%80%9CSkunk_Works%E2%80%9D_facility.JPG",
+   "licence": "Public domain (Commons LicenseShortName)",
+   "sha256": "904be6d7f023acd67327d2b8051f1cfe50a8557a1575b17d4e468aa9197ae08f",
+   "focus": [
+    0.8,
+    0.45
+   ]
+  },
+  "VI_kelly_johnson_a3_sketch_cia_1958": {
+   "file": "v3/VI_kelly_johnson_a3_sketch_cia_1958.jpg",
+   "kind": "still",
+   "tag": "'DESIGN OF A-3': KELLY JOHNSON'S NOTEBOOK PAGE, LOCKHEED AIRCRAFT CORP. · 29 SEPT 1958 · CIA · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:SketchJohnsonLockheedA-3.jpg",
+   "licence": "Public domain (Commons LicenseShortName)",
+   "sha256": "9dfeca36682cc4588b5eee3657c29edc655105437d9b9baeba5feebcb43b0d2f",
+   "focus": [
+    0.5,
+    0.4
+   ]
+  },
+  "VI_a12_oxcart_in_flight_1960s": {
+   "file": "v3/VI_a12_oxcart_in_flight_1960s.jpg",
+   "kind": "still",
+   "tag": "LOCKHEED A-12, SERIAL 06932, IN FLIGHT · US AIR FORCE · 1960S · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:A12-flying.jpg",
+   "licence": "Public domain (Commons LicenseShortName)",
+   "sha256": "9beb7fd6d0fb763b975b05291139659153750840f33341fe055fe7fc2e6ce766",
+   "focus": [
+    0.4,
+    0.5
+   ]
+  },
+  "VI_a12_oxcart_cia_hq_2011": {
+   "file": "v3/VI_a12_oxcart_cia_hq_2011.jpg",
+   "kind": "still",
+   "tag": "A-12 OXCART NOSE CONE · CIA PHOTOGRAPH · 2011 · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:A-12_Oxcart_-_Flickr_-_The_Central_Intelligence_Agency_(1).jpg",
+   "licence": "Public domain (Commons LicenseShortName)",
+   "sha256": "c8c487ba35455b852d001a336280265a4bfcc5ee6902367ce504636cacede05e",
+   "focus": [
+    0.55,
+    0.3
+   ]
+  },
+  "VI_a12_oxcart_helmet_cia_2008": {
+   "file": "v3/VI_a12_oxcart_helmet_cia_2008.jpg",
+   "kind": "still",
+   "tag": "A-12 OXCART PILOT'S HELMET · CIA MUSEUM · 2008 · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:A-12_OXCART_Helmet_-_Flickr_-_The_Central_Intelligence_Agency.jpg",
+   "licence": "Public domain (Commons LicenseShortName)",
+   "sha256": "557273df7aee8d9f184c7c4d891fa0bd73a1f6a3102e013fb2768cc5cb0fd129",
+   "focus": [
+    0.7,
+    0.45
+   ]
+  },
+  "VI_u2_article347_camera_ports_nasm": {
+   "file": "v3/VI_u2_article347_camera_ports_nasm.jpg",
+   "kind": "still",
+   "tag": "THE CAMERA-BAY WINDOWS OF U-2 'ARTICLE 347' · SMITHSONIAN NASM · CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Lockheed_U-2C_-_DPLA_-_8536faff4b6046ed281c6231058bcaf9_(page_2).jpg",
+   "licence": "CC0 (Commons: 'Creative Commons Zero, Public Domain Dedication'; via DPLA)",
+   "sha256": "0011b20b7661b4a1502e9eef212cda00e8fb8f4e321b5d9ee8d7530552b23ac0",
+   "focus": [
+    0.5,
+    0.45
+   ]
+  },
+  "VI_u2_article347_cockpit_nasm": {
+   "file": "v3/VI_u2_article347_cockpit_nasm.jpg",
+   "kind": "still",
+   "tag": "COCKPIT OF U-2 'ARTICLE 347', CANOPY OPEN · SMITHSONIAN NASM · CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Lockheed_U-2C_-_DPLA_-_8536faff4b6046ed281c6231058bcaf9_(page_9).jpg",
+   "licence": "CC0 (Commons; via DPLA)",
+   "sha256": "e5a12a90ba3829e8313a8b3a4b2367c333601246cedbe428b492530be5197e7c",
+   "focus": [
+    0.55,
+    0.5
+   ]
+  },
+  "VI_u2_article347_sextant_dome_nasm": {
+   "file": "v3/VI_u2_article347_sextant_dome_nasm.jpg",
+   "kind": "still",
+   "tag": "INSTRUMENT DOME ON U-2 'ARTICLE 347' · SMITHSONIAN NASM · CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Lockheed_U-2C_-_DPLA_-_8536faff4b6046ed281c6231058bcaf9_(page_16).jpg",
+   "licence": "CC0 (Commons; via DPLA)",
+   "sha256": "19a40361219223dbc97cd2aa2c24709169bda371c8781642b359087589e09e5e",
+   "focus": [
+    0.55,
+    0.5
+   ]
+  },
+  "VI_f35_heritage_flight_2018": {
+   "file": "v3/VI_f35_heritage_flight_2018.jpg",
+   "kind": "still",
+   "tag": "F-35A IN A VERTICAL CLIMB, VAPOUR CONE · US AIR FORCE · 2018 · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:F-35_Heritage_Flight_Team_performs_in_Bell_Fort_Worth_Alliance_AirShow.jpg",
+   "licence": "Public domain (Commons LicenseShortName)",
+   "sha256": "eb3ad1769928050a62f6e1d0afb42e7d1ba3f0afdd3886e00ce09a8134eb3a8f",
+   "focus": [
+    0.62,
+    0.45
+   ]
+  },
+  "VII_church_committee_book2_title_1976": {
+   "file": "v3/VII_church_committee_book2_title_1976.jpg",
+   "kind": "still",
+   "tag": "INTELLIGENCE ACTIVITIES AND THE RIGHTS OF AMERICANS, BOOK II · CHURCH COMMITTEE FINAL REPORT · 26 APRIL 1976 · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Church_Committee_report_(Book_II).pdf",
+   "licence": "Public domain (Commons LicenseShortName)",
+   "sha256": "ae37e118c94d06052e5ccae5b4932371b020302ab8e1ee32ad07781fa4acc621",
+   "focus": [
+    0.5,
+    0.35
+   ]
+  },
+  "V_eisenhower_farewell_reading_copy_p14": {
+   "file": "v3/V_eisenhower_farewell_reading_copy_p14.jpg",
+   "kind": "still",
+   "tag": "FAREWELL ADDRESS, READING COPY, P. 14: 'THIS CONJUNCTION OF AN IMMENSE MILITARY ESTABLISHMENT AND A LARGE ARMS INDUSTRY IS NEW…' · 1961 · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Eisenhower_Farewell_Address_reading_copy.djvu",
+   "licence": "Public domain (Commons LicenseShortName)",
+   "sha256": "96af8b79246269fd23ae318759c21209292568cc9d765c50b21757e9e030edef",
+   "focus": [
+    0.5,
+    0.35
+   ]
+  },
+  "V_eisenhower_farewell_reading_copy_p15": {
+   "file": "v3/V_eisenhower_farewell_reading_copy_p15.jpg",
+   "kind": "still",
+   "tag": "'…BY THE MILITARY-INDUSTRIAL COMPLEX.' READING COPY, P. 15 · 17 JANUARY 1961 · EISENHOWER LIBRARY · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Eisenhower_Farewell_Address_reading_copy.djvu",
+   "licence": "Public domain (Commons LicenseShortName)",
+   "sha256": "3e89fb786619e8b29323a8efbb45a5ff92c3cd43042305c27a0ef0c3cb68dc5a",
+   "focus": [
+    0.5,
+    0.3
+   ]
+  },
+  "VIII_oval_office_empty_19810422": {
+   "file": "v3/VIII_oval_office_empty_19810422.jpg",
+   "kind": "still",
+   "tag": "THE OVAL OFFICE, EMPTY · WHITE HOUSE PHOTO · 22 APRIL 1981 · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Empty_Oval_Office_in_The_White_House_-_DPLA_-_a210b70429be57def74b3c6c603b6d89.jpg",
+   "licence": "Public domain (Commons LicenseShortName)",
+   "sha256": "90ffa543b3201d30d7b3524c544f52fe8d6626f0a0e37beb53b54108842947ea",
+   "focus": [
+    0.5,
+    0.55
+   ]
+  },
+  "VIII_fomc_board_room_entrance_2007": {
+   "file": "v3/VIII_fomc_board_room_entrance_2007.jpg",
+   "kind": "still",
+   "tag": "THE ENTRANCE TO THE BOARD ROOM, ECCLES BUILDING · FEDERAL RESERVE · 2007 · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:The_Entrance_to_the_FOMC_Board_Room.jpg",
+   "licence": "Public domain (Commons LicenseShortName)",
+   "sha256": "6cc1091b92bba8181bb083695fdaa52c0820541d944261bfba9f2d104d4469d0",
+   "focus": [
+    0.5,
+    0.35
+   ]
+  },
+  "VIII_fed_board_room_coat_of_arms_2014": {
+   "file": "v3/VIII_fed_board_room_coat_of_arms_2014.jpg",
+   "kind": "still",
+   "tag": "THE U.S. COAT OF ARMS ABOVE THE BOARD ROOM MANTEL · FEDERAL RESERVE · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:US_Coat_of_Arms_Board_Room.jpg",
+   "licence": "Public domain (Commons LicenseShortName)",
+   "sha256": "42c02b29e6b2403ce94429b54d2b0d5fca20cff70a14a03f5a8b584dab02db03",
+   "focus": [
+    0.47,
+    0.4
+   ]
+  },
+  "VIII_fed_board_room_1940": {
+   "file": "v3/VIII_fed_board_room_1940.jpg",
+   "kind": "still",
+   "tag": "THE FEDERAL RESERVE BOARD ROOM, EMPTY · HARRIS & EWING · 1940 · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:US_Federal_Reserve_Board_room_1940.jpg",
+   "licence": "Public domain (Commons LicenseShortName)",
+   "sha256": "1878729adf9d68222f35d3a8df10e5c1934c1c671a92b543e096ab2999172b1c",
+   "focus": [
+    0.4,
+    0.6
+   ]
+  },
+  "VIII_unsc_chamber_empty_2024_forrester": {
+   "file": "v3/VIII_unsc_chamber_empty_2024_forrester.jpg",
+   "kind": "still",
+   "tag": "THE UN SECURITY COUNCIL CHAMBER, EMPTY · JDFORRESTER · 2024 · CC BY 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:United_Nations_Headquarters_-_Security_Council_chamber,_straight-on_view.jpg",
+   "licence": "CC BY 4.0",
+   "sha256": "f05f5219c1d2b18d191d040be31c053ebcf3d3e9eeb9c28b00d15061ecda3b23",
+   "focus": [
+    0.5,
+    0.5
+   ]
+  },
+  "VIII_unsc_chamber_angled_2024_forrester": {
+   "file": "v3/VIII_unsc_chamber_angled_2024_forrester.jpg",
+   "kind": "still",
+   "tag": "THE UN SECURITY COUNCIL CHAMBER, ANGLED · JDFORRESTER · 2024 · CC BY 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:United_Nations_Headquarters_-_Security_Council_chamber,_angled_view_(cropped).jpg",
+   "licence": "CC BY 4.0",
+   "sha256": "ce10b12d72ac1de5a82cb7c7126f346038ea127ea7c4a936c8e571080c4a6fce",
+   "focus": [
+    0.5,
+    0.5
+   ]
+  },
+  "IV_proclamation_7463_federal_register_20010918": {
+   "file": "v3/IV_proclamation_7463_federal_register_20010918.jpg",
+   "kind": "still",
+   "tag": "PROCLAMATION 7463: DECLARATION OF NATIONAL EMERGENCY BY REASON OF CERTAIN TERRORIST ATTACKS · 66 FR 48199 · 18 SEPT 2001 · PD",
+   "source_page": "https://archive.org/details/sim_federal-register-find_2001-09-18_66_181",
+   "licence": "Public domain (US government work, 17 U.S.C. 105; archive.org item carries no licenseurl; Commons mirror tagged Public domain)",
+   "sha256": "7369f8129eb3022e8c42f6fcde79758194be832140ec5de4d03f504a19b3c8e9",
+   "focus": [
+    0.65,
+    0.3
+   ]
+  },
+  "IV_aumf_public_law_107-40_p1": {
+   "file": "v3/IV_aumf_public_law_107-40_p1.jpg",
+   "kind": "still",
+   "tag": "PUBLIC LAW 107-40, AUTHORIZATION FOR USE OF MILITARY FORCE · 115 STAT. 224 · 18 SEPT 2001 · GPO · PD",
+   "source_page": "https://www.govinfo.gov/app/details/PLAW-107publ40",
+   "licence": "Public domain (US government work, 17 U.S.C. 105; GPO authenticated PDF)",
+   "sha256": "8a60d71c6d5901009ddc8d1b2fa46fc18a2bc06e5e08207b21bc120d215e9b2a",
+   "focus": [
+    0.35,
+    0.55
+   ]
+  },
+  "III_eisenhower_official_1959": {
+   "file": "v2/III_eisenhower_official_1959.jpg",
+   "kind": "still",
+   "tag": "DWIGHT D. EISENHOWER · OFFICIAL PORTRAIT · 29 MAY 1959 · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Dwight_D._Eisenhower,_official_photo_portrait,_May_29,_1959.jpg",
+   "direct_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Dwight_D._Eisenhower%2C_official_photo_portrait%2C_May_29%2C_1959.jpg/1920px-Dwight_D._Eisenhower%2C_official_photo_portrait%2C_May_29%2C_1959.jpg",
+   "licence": "Public domain (template PD-USGov-POTUS)",
+   "licence_url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-POTUS",
+   "credit": "White House (source: Eisenhower Presidential Library)",
+   "date": "1959-05-29",
+   "sha256": "dc4979657797160192c994985e0edbb398dfbaaccf0085714b0c051b5406004e",
+   "focus": [
+    0.5,
+    0.3
+   ]
+  },
+  "I_nara_wnrc_stacks": {
+   "file": "v2/I_nara_wnrc_stacks.jpg",
+   "kind": "still",
+   "tag": "WASHINGTON NATIONAL RECORDS CENTER · STACK AREA · UNDATED · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Washington_National_Records_Center_Stack_Area_with_Employee_Servicing_Records.tif",
+   "direct_url": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Washington_National_Records_Center_Stack_Area_with_Employee_Servicing_Records.tif?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "licence": "Public domain",
+   "licence_url": null,
+   "credit": "Unknown authorUnknown author or not provided | Credit: U.S. National Archives and Records Administration",
+   "date": "undated (NARA gives no date)",
+   "sha256": "c6b99e1b09499dcb2dc2d3ef0f972be3cc619fc7270974f5a71418318912d806"
+  },
+  "II_nsa_hq_fort_meade": {
+   "file": "v2/II_nsa_hq_fort_meade.jpg",
+   "kind": "still",
+   "tag": "NSA HEADQUARTERS, FORT MEADE, MARYLAND · NSA PHOTO · UNDATED · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:National_Security_Agency_headquarters,_Fort_Meade,_Maryland.jpg",
+   "direct_url": "https://upload.wikimedia.org/wikipedia/commons/8/84/National_Security_Agency_headquarters%2C_Fort_Meade%2C_Maryland.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "licence": "Public domain",
+   "licence_url": null,
+   "credit": "National Security Agency | Credit: https://www.nsa.gov/resources/everyone/digital-media-center/image-galleries/places/",
+   "date": "undated (metadata: Unknown)",
+   "sha256": "1c63bb7142874a55448132a593001d543c5196292c6d8007c2fbad0c1cbb863e"
+  },
+  "IV_corona_beijing_1967": {
+   "file": "v2/IV_corona_beijing_1967.jpg",
+   "kind": "still",
+   "tag": "CORONA SATELLITE IMAGE OF BEIJING · 20 SEPT 1967 · CIA/NRO/USGS · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Beijing_Subway_in_Construction_-_satellite_image_(1967-09-20).jpg",
+   "direct_url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Beijing_Subway_in_Construction_-_satellite_image_%281967-09-20%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "licence": "Public domain",
+   "licence_url": null,
+   "credit": "CIA/NRO/USGS | Credit: http://earthexplorer.usgs.gov/metadata/1051/DS1101-1069DA103/",
+   "date": "1967-09-20",
+   "sha256": "7219892517ec9fb21dc858fc61ac35738cba3dd79d0d4903d5969edc9821c5b9"
+  },
+  "VII_church_1961_portrait": {
+   "file": "v2/VII_church_1961_portrait.png",
+   "kind": "still",
+   "tag": "SEN. FRANK CHURCH · CONGRESSIONAL PORTRAIT · 1961 · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Frank_Church_1961_Congressional_Portrait.png",
+   "direct_url": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Frank_Church_1961_Congressional_Portrait.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "licence": "Public domain",
+   "licence_url": null,
+   "credit": "The United States of America | Credit: https://babel.hathitrust.org/cgi/pt?id=msu.31293012373852&seq=1",
+   "date": "1961",
+   "sha256": "84409f0a6e4ac9b705e353ce80a2b6cc17be3e2233ce9f90aae84e1bba4b41d9",
+   "focus": [
+    0.5,
+    0.3
+   ]
+  },
+  "III_nsa_utah_data_center_2014_eff": {
+   "file": "v2/III_nsa_utah_data_center_2014_eff.jpg",
+   "kind": "still",
+   "tag": "NSA UTAH DATA CENTER, BLUFFDALE · FROM AN EFF AIRSHIP · 27 JUN 2014 · CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:EFF_photograph_of_NSA%27s_Utah_Data_Center.jpg",
+   "direct_url": "https://upload.wikimedia.org/wikipedia/commons/e/ed/EFF_photograph_of_NSA%27s_Utah_Data_Center.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "licence": "CC0",
+   "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "credit": "User:ParkerHiggins (Electronic Frontier Foundation) | Credit: Own work; https://www.eff.org/deeplinks/2014/07/releasing-public-domain-image-nsas-utah-data-center",
+   "date": "2014-06-27",
+   "sha256": "3f5aa7b1b36e96c2c9eb9749630f68160fcaf500dc35d59fc47b9eb3c33b7732"
+  },
+  "erc_YlMeyAAWhwE": {
+   "file": "erc/YlMeyAAWhwE.jpg",
+   "kind": "still",
+   "tag": "ERC-1155 · TENSOR · 2024 · THE AUTHOR'S OWN FILM",
+   "source_page": "https://www.youtube.com/watch?v=YlMeyAAWhwE",
+   "licence": "the author's own work, used at his direction",
+   "sha256": "653092d5a8bfc4616cedeed34a0a2e1391c279ae03f8c412b370cd47dcb61401"
+  },
+  "erc_E9IuNSX3FAE": {
+   "file": "erc/E9IuNSX3FAE.jpg",
+   "kind": "still",
+   "tag": "ERC-1155 · FROGWIZARD · 2023 · THE AUTHOR'S OWN FILM",
+   "source_page": "https://www.youtube.com/watch?v=E9IuNSX3FAE",
+   "licence": "the author's own work, used at his direction",
+   "sha256": "29478de310bec88323fd05e51ea885e7e69687d24344fdaa557932ca19e53830"
+  },
+  "erc_vCeDEZtRY9s": {
+   "file": "erc/vCeDEZtRY9s.jpg",
+   "kind": "still",
+   "tag": "ERC-1155 · T A R L AN · 2023 · THE AUTHOR'S OWN FILM",
+   "source_page": "https://www.youtube.com/watch?v=vCeDEZtRY9s",
+   "licence": "the author's own work, used at his direction",
+   "sha256": "a8fc3de09fc8fc3989bff41f19882e674f8dba70ae2e699c01f923c836b7422b"
+  },
+  "erc_OiYL9z3bXEI": {
+   "file": "erc/OiYL9z3bXEI.jpg",
+   "kind": "still",
+   "tag": "ERC-1155 · WATER BUFFALO · 2023 · THE AUTHOR'S OWN FILM",
+   "source_page": "https://www.youtube.com/watch?v=OiYL9z3bXEI",
+   "licence": "the author's own work, used at his direction",
+   "sha256": "3c6abe0e5813d29f8ff9e85155ec7220b7b5e743c5d8e79c5a57949b32d8078e"
+  },
+  "erc_fs_0-rRKsy4": {
+   "file": "erc/fs_0-rRKsy4.jpg",
+   "kind": "still",
+   "tag": "ERC-1155 · MAP · 2023 · THE AUTHOR'S OWN FILM",
+   "source_page": "https://www.youtube.com/watch?v=fs_0-rRKsy4",
+   "licence": "the author's own work, used at his direction",
+   "sha256": "4a153caaaa8a30e6427b2692876629525f5fcf51929dabf24c265572b99db9c1"
+  },
+  "erc_8VbssmVYakg": {
+   "file": "erc/8VbssmVYakg.jpg",
+   "kind": "still",
+   "tag": "ERC-1155 · STREAM · 2023 · THE AUTHOR'S OWN FILM",
+   "source_page": "https://www.youtube.com/watch?v=8VbssmVYakg",
+   "licence": "the author's own work, used at his direction",
+   "sha256": "690c08e5a0824b4e6371aca7fbc5fcb04a9b366cacdc05d7de583d78451ac8e6"
+  },
+  "erc_AmTnNRJtrqE": {
+   "file": "erc/AmTnNRJtrqE.jpg",
+   "kind": "still",
+   "tag": "ERC-1155 · THESQUID · 2024 · THE AUTHOR'S OWN FILM",
+   "source_page": "https://www.youtube.com/watch?v=AmTnNRJtrqE",
+   "licence": "the author's own work, used at his direction",
+   "sha256": "5e2e91eea93e702df503999909b1f0651dbea514f788ff56a26c72722ce557f1"
+  },
+  "erc_VP2iLdUcI1c": {
+   "file": "erc/VP2iLdUcI1c.jpg",
+   "kind": "still",
+   "tag": "ERC-1155 · CHAPTER 18 SILENT TALK · 2023 · THE AUTHOR'S OWN FILM",
+   "source_page": "https://www.youtube.com/watch?v=VP2iLdUcI1c",
+   "licence": "the author's own work, used at his direction",
+   "sha256": "9ba1dcd78b1b8ed7857d3d245c9a02fe0667a95aa4a3efd6498683e904057f59"
+  }
+ }
+}
