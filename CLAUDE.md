@@ -181,7 +181,7 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
-**A SECOND FILM, "CONTINUITY", AT `/continuity` — 23 Sept 2026. The intro is untouched.** Author: *"make another
+**A SECOND FILM, "CONTINUITY", AT `/continuity` — 23 Sept 2026, live. The intro is untouched.** **3:30, 75 shots, 69 media; 13.7 MB MP4 / 15.3 MB WebM / 22.7 MB subtitled download; render ~25 min.** Verified: full playback 254 subtitle samples, 0 mismatches, browser never spoke; intro re-run 179/0; four clean live reads; seo-selftest 49/50 (the old concordance title). Author: *"make another
 video - this one about continuity of power, the elites, and pattern points that correlate"*, then *"keep the first one,
 just make another one"*. **Same engine, own spec:** `python3 scripts/build-intro-collage.py --spec
 scripts/film-continuity.json` writes `site/continuity-reel.{mp4,webm,js}`, `site/continuity-poster.jpg` and the
