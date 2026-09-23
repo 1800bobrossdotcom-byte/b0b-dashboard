@@ -212,7 +212,11 @@
     // Baked: the build wrote when each line is spoken, so the words on screen are exact.
     if (BAKED) {
       var ls = CH[i].lines;
-      for (var j = 0; j < ls.length; j++) if (ls[j].at != null && t >= ls[j].at - 0.05 && t < ls[j].end + 0.35) return j;
+      for (var j = 0; j < ls.length; j++) if (ls[j].at != null && t >= ls[j].at - 0.05 && t < ls[j].end + 0.35) {
+        // the closing card prints its own words; a caption over it would collide with the wordmark
+        if (i === CH.length - 1 && j === ls.length - 1) return -1;
+        return j;
+      }
       return -1;
     }
     var c = CH[i], lead = 0.6, span = Math.max(1, chEnd(i) - c.at - lead - 0.4);

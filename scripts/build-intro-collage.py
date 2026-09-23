@@ -538,6 +538,8 @@ class Film:
     def subtitle(self, arr, t):
         """Burn the line being spoken into a copy of the frame (download edition)."""
         txt = None
+        if self.greek_at is not None and t >= self.greek_at - 0.4:
+            return arr   # the closing card carries its own words
         for a, b, x in self.subs:
             if a - 0.05 <= t < b + 0.35:
                 txt = fill(x, self.total)
@@ -766,6 +768,7 @@ def main():
     ap.add_argument('--still', type=float)
     ap.add_argument('--sheet', action='store_true', help='contact sheet: one frame per shot')
     ap.add_argument('--out')
+    ap.add_argument('--download-only', action='store_true', help='rebuild only the subtitled download file')
     args = ap.parse_args()
     spec = json.load(open(SPEC, encoding='utf-8'))
     media_dir = os.path.expanduser(os.environ.get('B0B_MEDIA_DIR', spec['media_dir']))
@@ -815,7 +818,8 @@ def main():
     def encoder(path):
         return subprocess.Popen([FF, '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', '%dx%d' % (W, H),
                                  '-r', str(fps), '-i', '-', '-c:v', 'ffv1', '-level', '3', path], stdin=subprocess.PIPE)
-    enc, enc_dl = encoder(master), encoder(master_dl)
+    enc = None if args.download_only else encoder(master)
+    enc_dl = encoder(master_dl)
     total = 0
     for sh in film.timeline:
         film.prepare(sh)
@@ -823,26 +827,29 @@ def main():
         n = max(1, int(round((sh['at'] + sh['dur']) * fps)) - int(round(sh['at'] * fps)))
         for fi in range(n):
             arr = np.ascontiguousarray(film.frame(sh, fi))
-            enc.stdin.write(arr.tobytes())
+            if enc:
+                enc.stdin.write(arr.tobytes())
             enc_dl.stdin.write(np.ascontiguousarray(film.subtitle(arr, sh['at'] + fi / fps)).tobytes())
         total += n
         film.release(sh)
         sys.stdout.write('\r  %d frames (%.0f%%)' % (total, 100 * total / (film.dur * fps)))
         sys.stdout.flush()
     for e in (enc, enc_dl):
-        e.stdin.close(); e.wait()
+        if e:
+            e.stdin.close(); e.wait()
     print()
     a = spec['audio']
-    subprocess.run([FF, '-v', 'error', '-y', '-i', master, '-i', wav,
-                    '-c:v', 'libx264', '-preset', 'slow', '-crf', str(spec['crf_mp4']), '-pix_fmt', 'yuv420p',
-                    '-profile:v', 'high', '-movflags', '+faststart',
-                    '-af', 'loudnorm=' + a['loudnorm'], '-c:a', 'aac', '-b:a', a['bitrate_mp4'], '-ac', '1',
-                    '-shortest', out_mp4], check=True)
-    subprocess.run([FF, '-v', 'error', '-y', '-i', master, '-i', wav,
-                    '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', str(spec['crf_webm']), '-row-mt', '1', '-deadline', 'good',
-                    '-cpu-used', '4', '-pix_fmt', 'yuv420p',
-                    '-af', 'loudnorm=' + a['loudnorm'], '-c:a', 'libopus', '-b:a', a['bitrate_webm'], '-ac', '1',
-                    '-shortest', out_webm], check=True)
+    if not args.download_only:
+      subprocess.run([FF, '-v', 'error', '-y', '-i', master, '-i', wav,
+                      '-c:v', 'libx264', '-preset', 'slow', '-crf', str(spec['crf_mp4']), '-pix_fmt', 'yuv420p',
+                      '-profile:v', 'high', '-movflags', '+faststart',
+                      '-af', 'loudnorm=' + a['loudnorm'], '-c:a', 'aac', '-b:a', a['bitrate_mp4'], '-ac', '1',
+                      '-shortest', out_mp4], check=True)
+      subprocess.run([FF, '-v', 'error', '-y', '-i', master, '-i', wav,
+                      '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', str(spec['crf_webm']), '-row-mt', '1', '-deadline', 'good',
+                      '-cpu-used', '4', '-pix_fmt', 'yuv420p',
+                      '-af', 'loudnorm=' + a['loudnorm'], '-c:a', 'libopus', '-b:a', a['bitrate_webm'], '-ac', '1',
+                      '-shortest', out_webm], check=True)
     out_dl = os.path.join(ROOT, spec['download'])
     subprocess.run([FF, '-v', 'error', '-y', '-i', master_dl, '-i', wav,
                     '-c:v', 'libx264', '-preset', 'slow', '-crf', str(spec.get('crf_download', 26)), '-pix_fmt', 'yuv420p',
@@ -850,6 +857,9 @@ def main():
                     '-af', 'loudnorm=' + a['loudnorm'], '-c:a', 'aac', '-b:a', '96k', '-ac', '1',
                     '-metadata', 'title=b0b.dev - the intro film', '-metadata', 'comment=Every panel cites its source. Full list: https://www.b0b.dev/intro',
                     '-shortest', out_dl], check=True)
+    if args.download_only:
+        print('  %-40s %8.1f KB' % (os.path.relpath(out_dl, ROOT), os.path.getsize(out_dl) / 1024))
+        return
     poster = os.path.join(ROOT, spec['poster'])
     subprocess.run([FF, '-v', 'error', '-y', '-ss', str(spec.get('poster_at', 3)), '-i', master, '-frames:v', '1',
                     '-q:v', '4', poster], check=True)
