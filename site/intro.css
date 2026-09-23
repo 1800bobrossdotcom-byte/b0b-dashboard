@@ -109,6 +109,11 @@ html.b0b-intro-lock{overflow:hidden}
 #b0b-intro .bi-btn.bi-ghost:hover{color:#050505;background:#ffcc00}
 #b0b-intro button:focus-visible,#b0b-intro a:focus-visible{outline:2px solid #00ccff;outline-offset:3px}
 #b0b-intro .bi-note{font-size:11px;letter-spacing:.2em;color:#6f7a7c;text-transform:uppercase}
+#b0b-intro .bi-note a{color:#9fd8e6;text-decoration:underline;text-underline-offset:3px}
+#b0b-intro .bi-note a:hover{color:#00ccff}
+#b0b-intro a.bi-btn{display:inline-block;text-decoration:none}
+#b0b-intro .bi-dl{font-size:12px;padding:10px 16px;border-color:#2c3a3e;color:#cfe7ee}
+#b0b-intro .bi-dl:hover{border-color:#00ccff;color:#050505;background:#00ccff}
 #b0b-intro .bi-count{position:absolute;left:0;right:0;bottom:0;height:2px;background:rgba(255,255,255,.06)}
 #b0b-intro .bi-count i{display:block;height:100%;background:#00ccff;opacity:.7;transform-origin:0 50%;transform:scaleX(1)}
 #b0b-intro[data-mode="page"] .bi-count{display:none}

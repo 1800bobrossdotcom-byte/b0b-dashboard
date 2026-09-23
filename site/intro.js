@@ -53,6 +53,7 @@
   var MAP_TEXT = 24;          // seconds the closing part runs when nothing is speaking
   var FADE = 600;
   var VOL_UP = 0.55, VOL_DUCK = 0.1;
+  if (window.B0B_INTRO_BAKED) VOL_UP = 1;
 
   var REEL = window.B0B_INTRO_REEL || [];
   var CH = window.B0B_INTRO_CHAPTERS || [];
@@ -62,15 +63,19 @@
 
   var reduced = false;
   try { reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
-  var synth = ('speechSynthesis' in window) ? window.speechSynthesis : null;
+  // Since 23 Sept 2026 the narration is in the file (B0B_INTRO_BAKED): the browser
+  // no longer speaks, so every viewer hears the same voice and the film downloads whole.
+  var BAKED = !!window.B0B_INTRO_BAKED;
+  var synth = (!BAKED && 'speechSynthesis' in window) ? window.speechSynthesis : null;
+  var DOWNLOAD = '/b0b-intro-film.mp4?v=1';
 
   // ---- markup: one source of truth for report.html and intro.html ----------
   el.innerHTML =
     '<div class="bi-stage">' +
       '<div class="bi-plate">' +
-        '<video playsinline muted preload="metadata" poster="/intro-poster.jpg?v=3" aria-hidden="true">' +
-          '<source src="/intro-reel.webm?v=3" type="video/webm">' +
-          '<source src="/intro-reel.mp4?v=3" type="video/mp4">' +
+        '<video playsinline muted preload="metadata" poster="/intro-poster.jpg?v=4" aria-hidden="true">' +
+          '<source src="/intro-reel.webm?v=4" type="video/webm">' +
+          '<source src="/intro-reel.mp4?v=4" type="video/mp4">' +
         '</video>' +
         '<canvas aria-hidden="true"></canvas>' +
         '<div class="bi-scan" aria-hidden="true"></div>' +
@@ -88,7 +93,7 @@
         '<button type="button" class="bi-btn bi-play">&#9654;&nbsp; WATCH THE FILM</button>' +
         '<button type="button" class="bi-btn bi-ghost bi-enter">ENTER THE REPORT &rarr;</button>' +
       '</div>' +
-      '<div class="bi-note">narrated &middot; sound on</div>' +
+      '<div class="bi-note">narrated &middot; sound on &middot; <a class="bi-dl-link" href="' + DOWNLOAD + '" download="b0b-dev-intro-film.mp4">download the film</a></div>' +
       '<div class="bi-count" aria-hidden="true"><i></i></div>' +
     '</div>' +
     '<div class="bi-card bi-end" hidden>' +
@@ -98,6 +103,7 @@
         '<button type="button" class="bi-btn bi-ghost bi-replay">&#8635;&nbsp; WATCH AGAIN</button>' +
         '<button type="button" class="bi-btn bi-enter">ENTER THE REPORT &rarr;</button>' +
       '</div>' +
+      '<a class="bi-btn bi-ghost bi-dl" href="' + DOWNLOAD + '" download="b0b-dev-intro-film.mp4">&#8595;&nbsp; DOWNLOAD THE FILM &middot; MP4</a>' +
       '<div class="bi-share" role="group" aria-label="Share the film">' +
         '<span class="bi-share-l">share the film</span>' +
         '<a data-net="x" target="_blank" rel="noopener noreferrer">X</a>' +
@@ -109,7 +115,7 @@
         '<button type="button" data-net="copy">Copy link</button>' +
         '<button type="button" data-net="native" hidden>Share&hellip;</button>' +
       '</div>' +
-      '<div class="bi-credit">Archive footage: Universal Newsreel, NARA, US DOE, CIA/NRO via NARA (public domain, CC0). Contemporary: NASA, US Government, Wikimedia Commons contributors (public domain, CC0, CC BY - credited on screen). ERC-1155 frames: the author&rsquo;s own films. Full list at <a href="/intro">b0b.dev/intro</a>.</div>' +
+      '<div class="bi-credit">Archive footage: Universal Newsreel, NARA, US DOE, CIA/NRO via NARA (public domain, CC0). Contemporary: NASA, US Government, Wikimedia Commons contributors (public domain, CC0, CC BY - credited on screen). ERC-1155 frames: the author&rsquo;s own films. Narration: Piper &ldquo;cori&rdquo; voice, trained on public-domain LibriVox recordings. Full list at <a href="/intro">b0b.dev/intro</a>.</div>' +
     '</div>' +
     '<div class="bi-ctl">' +
       '<button type="button" class="bi-mute" aria-pressed="false">SOUND ON</button>' +
@@ -199,10 +205,16 @@
   function chapterAt(t) { for (var i = CH.length - 1; i >= 0; i--) if (t >= CH[i].at) return i; return 0; }
   function shotAt(t) { for (var i = REEL.length - 1; i >= 0; i--) if (t >= REEL[i].at) return i; return 0; }
   function chEnd(i) { return CH[i].end != null ? CH[i].end : CH[i].at + MAP_TEXT; }
-  function totalLen() { return REEL_DUR + MAP_TEXT; }
+  function totalLen() { return BAKED ? REEL_DUR : REEL_DUR + MAP_TEXT; }
   // Which line of part i is on screen at time t when nothing is speaking:
   // lines are laid across the part in proportion to their length.
   function lineAt(i, t) {
+    // Baked: the build wrote when each line is spoken, so the words on screen are exact.
+    if (BAKED) {
+      var ls = CH[i].lines;
+      for (var j = 0; j < ls.length; j++) if (ls[j].at != null && t >= ls[j].at - 0.05 && t < ls[j].end + 0.35) return j;
+      return -1;
+    }
     var c = CH[i], lead = 0.6, span = Math.max(1, chEnd(i) - c.at - lead - 0.4);
     var ws = c.lines.map(words), tot = ws.reduce(function (a, b) { return a + b; }, 0);
     var x = (t - c.at - lead) / span * tot;
@@ -477,7 +489,7 @@
     el.classList.add('bi-reel-off');
   }
   if (video) {
-    video.addEventListener('ended', function () { if (state === 'film') goMap(); });
+    video.addEventListener('ended', function () { if (state === 'film') { if (BAKED) showEnd(); else goMap(); } });
     video.addEventListener('playing', function () { if (state === 'film' && gated) { gated = false; clearTimeout(gateT); } });
     video.addEventListener('error', function () { if (state === 'film') noVideo(); }, true);
   }

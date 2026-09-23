@@ -18,10 +18,14 @@
     "synthesised in the build script (drone, a tick per cut, a low hit per card).",
     "Nothing licensed from anyone is laid under the narration.",
     "",
-    "THE NARRATION is spoken live by the reader's browser (site/intro.js) and is on",
-    "screen as text. Each line was checked against the record: CORONA first",
-    "recovery Aug 1960, declassified Feb 1995; Stevenson (1962) and Powell (2003)",
-    "both presented to the UN Security Council; no stockpiles were found in Iraq."
+    "THE NARRATION IS BAKED INTO THE FILE: Piper en_GB \"cori\" (trained on LibriVox,",
+    "public domain per its model card), one utterance per line, cached by hash. Each",
+    "part is sized to her reading. Lines were checked against the record: CORONA first",
+    "recovery Aug 1960, declassified Feb 1995; Stevenson (1962) and Powell (2003) both",
+    "before the UN Security Council; no stockpiles were found in Iraq. Years are given",
+    "to the voice as words (\"say\"), because the phonemiser reads 1945 as",
+    "\"nineteen hundred and forty-five\". The closing word is given as phonemes.",
+    "A second, subtitled master is written in the same pass: site/b0b-intro-film.mp4."
   ],
   "media_dir": "/home/user/.b0b-intro-sources",
   "output": "site/intro-reel.mp4",
@@ -36,7 +40,7 @@
   "audio": {
     "bitrate_mp4": "64k",
     "bitrate_webm": "48k",
-    "loudnorm": "I=-20:TP=-2:LRA=11"
+    "loudnorm": "I=-16:TP=-1.5:LRA=11"
   },
   "parts": [
     {
@@ -48,7 +52,8 @@
       ],
       "lines": [
         {
-          "text": "Nuremberg, 1945. The prosecution argued from documents, not rumour."
+          "text": "Nuremberg, 1945. The prosecution argued from documents, not rumour.",
+          "say": "Nuremberg, nineteen forty-five. The prosecution argued from documents, not rumour."
         },
         {
           "text": "The record keeps arriving the same way: the Pentagon Papers, the 9/11 Commission, the Senate’s torture report.",
@@ -183,7 +188,8 @@
       ],
       "lines": [
         {
-          "text": "Washington, 1947. A committee of Congress turned the cameras on citizens."
+          "text": "Washington, 1947. A committee of Congress turned the cameras on citizens.",
+          "say": "Washington, nineteen forty-seven. A committee of Congress turned the cameras on citizens."
         },
         {
           "text": "Now the cameras sit on poles and rooftops, and nobody has to call a hearing."
@@ -323,7 +329,8 @@
       ],
       "lines": [
         {
-          "text": "Enewetak, 1952. The capability arrives before the argument about what it is for."
+          "text": "Enewetak, 1952. The capability arrives before the argument about what it is for.",
+          "say": "Enewetak, nineteen fifty-two. The capability arrives before the argument about what it is for."
         },
         {
           "text": "So does the data centre, the drone and the supercomputer."
@@ -598,10 +605,12 @@
       ],
       "lines": [
         {
-          "text": "October 1962. A reconnaissance photograph became evidence when somebody labelled it, and the missiles were there."
+          "text": "October 1962. A reconnaissance photograph became evidence when somebody labelled it, and the missiles were there.",
+          "say": "October, nineteen sixty-two. A reconnaissance photograph became evidence when somebody labelled it, and the missiles were there."
         },
         {
-          "text": "February 2003, the same Council: labelled slides again. This time the weapons were not."
+          "text": "February 2003, the same Council: labelled slides again. This time the weapons were not.",
+          "say": "February, two thousand and three, the same Council: labelled slides again. This time, the weapons were not."
         },
         {
           "text": "The label is the claim. Check it, including every caption in this film."
@@ -1056,8 +1065,15 @@
       },
       {
         "text": "τετέλεσται — it has been completed, and remains so.",
-        "say": "Teh-teh-less-tie. It has been completed, and it remains so."
+        "say": [
+          "[[ tɛtɛlˈɛstaɪ ]]",
+          "It has been completed, and it remains so."
+        ]
       }
+    ],
+    "years": [
+      "1945",
+      "2026"
     ]
   },
   "media": {
@@ -1937,5 +1953,15 @@
       "licence": "the author's own work, used at his direction",
       "sha256": "9ba1dcd78b1b8ed7857d3d245c9a02fe0667a95aa4a3efd6498683e904057f59"
     }
-  }
+  },
+  "voice": {
+    "model": "voice/en_GB-cori-high.onnx",
+    "config": "voice/en_GB-cori-high.onnx.json",
+    "sha256": "470b4dd634c98f8a4850d7626ffc3dfc90774628eeef6605a6dd8f88f30a5903",
+    "length_scale": 0.97,
+    "source": "https://huggingface.co/rhasspy/piper-voices/tree/main/en/en_GB/cori/high",
+    "licence": "Piper voice en_GB cori (high); training data LibriVox, public domain per the model card"
+  },
+  "download": "site/b0b-intro-film.mp4",
+  "crf_download": 26
 }

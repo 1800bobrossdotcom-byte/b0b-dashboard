@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Build the b0b.dev intro film, collage cut (v3), from scripts/intro-collage.json.
 
+The narration is baked in (Piper, en_GB cori, public-domain training data) and a
+second, subtitled master is written in the same pass for the downloadable file.
+
 Every frame is composed here, in numpy and Pillow, and piped to ffmpeg: split
 screens (then | now), face grids, pushes on stills, the part cards, the source
 tag burned into every panel. Picture and source line cannot drift apart because
@@ -199,6 +202,141 @@ def glitch(arr, k, rng):
     return out
 
 
+
+# ------------------------------------------------------------ narration ----
+# Baked into the file since 23 Sept 2026: the author asked for the narration
+# in the video, so the film is the same everywhere and can be downloaded whole.
+# The voice is Piper's en_GB "cori" model, trained on LibriVox recordings
+# (public domain, per its model card). Lines are cached by content hash.
+LEAD, GAP, TAIL = 0.35, 0.45, 0.7
+GREEK_FONT = '/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf'
+
+_ONES = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven',
+         'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen']
+_TENS = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety']
+
+
+def number_words(n):
+    """British reading of an integer below a million: 1174 -> one thousand, one hundred and seventy-four."""
+    def under100(x):
+        return _ONES[x] if x < 20 else _TENS[x // 10] + ('' if x % 10 == 0 else '-' + _ONES[x % 10])
+
+    def under1000(x):
+        h, r = divmod(x, 100)
+        if not h:
+            return under100(r)
+        return _ONES[h] + ' hundred' + (' and ' + under100(r) if r else '')
+    th, r = divmod(n, 1000)
+    if not th:
+        return under1000(r)
+    out = under1000(th) + ' thousand'
+    if r:
+        out += (', ' if r >= 100 else ' and ') + under1000(r)
+    return out
+
+
+def fill(text, total):
+    return (text.replace('{TOTAL}', '{:,}'.format(total))
+                .replace('{TOTALWORDS}', number_words(total)[0].upper() + number_words(total)[1:]))
+
+
+def read_total():
+    s = open(os.path.join(ROOT, 'site', 'intro-points.js'), encoding='utf-8').read()
+    import re
+    return int(re.search(r'B0B_INTRO_TOTAL=(\d+)', s).group(1))
+
+
+def read_points():
+    s = open(os.path.join(ROOT, 'site', 'intro-points.js'), encoding='utf-8').read()
+    import re
+    return json.loads(re.search(r'B0B_INTRO_POINTS=(\[.*?\]);', s, re.S).group(1))
+
+
+class Narrator:
+    def __init__(self, spec, media_dir):
+        v = spec['voice']
+        self.model = os.path.join(media_dir, v['model'])
+        self.ls = v.get('length_scale', 1.0)
+        self.cache = os.path.join(media_dir, 'voice', 'cache')
+        os.makedirs(self.cache, exist_ok=True)
+        self.voice = None
+        want = v.get('sha256')
+        if want and hashlib.sha256(open(self.model, 'rb').read()).hexdigest() != want:
+            sys.exit('voice model sha256 mismatch: ' + self.model)
+        self.key = (want or '') + str(self.ls)
+
+    def _synth(self, seg):
+        if self.voice is None:
+            from piper import PiperVoice
+            self.voice = PiperVoice.load(self.model)
+        from piper import SynthesisConfig
+        chunks = self.voice.synthesize(seg, syn_config=SynthesisConfig(length_scale=self.ls))
+        a = np.concatenate([np.frombuffer(c.audio_int16_bytes, dtype=np.int16) for c in chunks]).astype(np.float32) / 32768
+        sr = self.voice.config.sample_rate
+        on = np.where(np.abs(a) > 0.008)[0]
+        if len(on):
+            pad = int(0.04 * sr)
+            a = a[max(0, on[0] - pad): on[-1] + pad]
+        # to 48 kHz through ffmpeg's resampler, not linear interpolation
+        r = subprocess.run([FF, '-v', 'error', '-f', 'f32le', '-ar', str(sr), '-ac', '1', '-i', '-',
+                            '-ar', str(SR), '-f', 'f32le', '-'], input=a.tobytes(), capture_output=True, check=True)
+        return np.frombuffer(r.stdout, dtype=np.float32).copy()
+
+    def line(self, say):
+        segs = say if isinstance(say, list) else [say]
+        h = hashlib.sha1((self.key + '\x00' + '\x01'.join(segs)).encode('utf-8')).hexdigest()
+        p = os.path.join(self.cache, h + '.npy')
+        if os.path.exists(p):
+            return np.load(p)
+        parts = []
+        for i, seg in enumerate(segs):
+            if i:
+                parts.append(np.zeros(int(0.5 * SR), dtype=np.float32))
+            parts.append(self._synth(seg))
+        a = np.concatenate(parts)
+        rms = float(np.sqrt(np.mean(a ** 2))) or 1.0
+        a = (a / rms * 0.11).astype(np.float32)
+        np.save(p, a)
+        return a
+
+
+def layout(spec, media_dir):
+    """Synthesise every line, then size each part to its reading: a part whose
+    narration runs longer than its picture has its shots stretched evenly (the
+    flashes keep their length). Returns the spec with the finale appended."""
+    total = read_total()
+    nar = Narrator(spec, media_dir)
+    parts = [dict(p, shots=[dict(s) for s in p['shots']]) for p in spec['parts']]
+    fin = spec['finale']
+    parts.append({'id': fin['id'], 'title': fin['title'], 'years': fin.get('years', ['1945', fin['year']]),
+                  'lines': fin['lines'], 'card': 1.4, 'finale': True,
+                  'shots': [{'type': 'finale', 'dur': 1.0, 'sound': False}]})
+    for p in parts:
+        p['_audio'] = []
+        for L in p['lines']:
+            say = L.get('say') or L['text']
+            say = [fill(x, total) for x in say] if isinstance(say, list) else fill(say, total)
+            p['_audio'].append(nar.line(say))
+        durs = [len(a) / SR for a in p['_audio']]
+        read = sum(durs) + GAP * (len(durs) - 1)
+        card = p.get('card', 1.4)
+        if p.get('finale'):
+            p['shots'][0]['dur'] = round(0.5 + read + 3.2, 3)
+            continue
+        need = LEAD + read + TAIL
+        pic = card + sum(s['dur'] for s in p['shots'])
+        if need > pic:
+            flashes = sum(s['dur'] for s in p['shots'] if s['type'] == 'flash')
+            body = sum(s['dur'] for s in p['shots'] if s['type'] != 'flash')
+            k = (need - card - flashes) / body
+            for s in p['shots']:
+                if s['type'] != 'flash':
+                    s['dur'] = round(s['dur'] * k, 3)
+    out = dict(spec, parts=parts)
+    out['_total'] = total
+    return out
+
+
 # --------------------------------------------------------------- the cut ----
 class Film:
     def __init__(self, spec, media_dir):
@@ -208,6 +346,7 @@ class Film:
         self.P = Painter(self.W, self.H)
         self.rng = random.Random(1945)
         self._strips = {}
+        self.narr = []
         # flatten parts into a timeline
         self.timeline = []
         t = 0.0
@@ -221,9 +360,23 @@ class Film:
                 sh['part'] = part
                 self.timeline.append(sh)
                 t += sh['dur']
+            # narration: absolute time of every line
+            lt = start + (part.get('card', 1.4) + 0.5 if part.get('finale') else LEAD)
+            lines = []
+            for L, a in zip(part['lines'], part.get('_audio', [])):
+                d = len(a) / SR
+                lines.append(dict(L, at=round(lt, 3), end=round(lt + d, 3)))
+                self.narr.append((lt, a))
+                lt += d + GAP
             self.parts.append({'id': part['id'], 'title': part['title'], 'years': part['years'],
-                               'at': round(start, 3), 'end': round(t, 3), 'lines': part['lines']})
+                               'at': round(start, 3), 'end': round(t, 3), 'lines': lines or part['lines'],
+                               'finale': part.get('finale', False)})
         self.dur = t
+        self.subs = [(L['at'], L['end'], L['text']) for p in self.parts for L in p['lines'] if 'at' in L]
+        self.total = spec.get('_total', 0)
+        self.pts = read_points()
+        fin = [p for p in self.parts if p.get('finale')]
+        self.greek_at = fin[0]['lines'][-1]['at'] if fin and 'at' in fin[0]['lines'][-1] else None
 
     # --- per-shot frame source, cached across the frames of one shot
     def prepare(self, sh):
@@ -272,6 +425,8 @@ class Film:
         if ty == 'card':
             img = self.card(sh['part'], p, sh['dur'])
             return np.asarray(img)
+        if ty == 'finale':
+            return np.asarray(self.finale(sh, fi))
         if ty in ('full', 'flash'):
             canvas[:] = self.panel(sh, 0, p, fi)
             tags.append((16, H - 16, self.media[sh['media'][0]].tag, 'ls'))
@@ -337,6 +492,85 @@ class Film:
         if g:
             arr = glitch(arr, g, self.rng)
         return arr
+
+
+    def finale(self, sh, fi):
+        """The ledger: the map's own markers arrive, then the closing word."""
+        W, H, P = self.W, self.H, self.P
+        tl = fi / self.fps
+        ta = sh['at'] + tl
+        img = Image.new('RGB', (W, H), INK)
+        d = ImageDraw.Draw(img)
+        sweep = 2.6
+        prog = min(1.0, tl / sweep)
+        n = len(self.pts)
+        upto = int((1 - (1 - prog) ** 2) * n)
+        s = min(W * 0.92 / 1024, H * 0.86 / 512)
+        ox, oy = (W - 1024 * s) / 2, (H - 512 * s) / 2 + 10
+        for i in range(upto):
+            x, y = ox + self.pts[i][0] * s, oy + self.pts[i][1] * s
+            age = (upto - i) / max(1, n * 0.06)
+            flare = max(0.0, 1 - age) if prog < 1 else 0.0
+            r = 1.8 + flare * 2.6
+            col = (255, 246, 213) if flare > 0.25 else AMBER
+            d.ellipse((x - r, y - r, x + r, y + r), fill=col)
+        if prog < 1 and upto:
+            lx = ox + self.pts[min(upto, n - 1)][0] * s
+            d.rectangle((lx, oy, lx + 1, oy + 512 * s), fill=(0, 140, 180))
+        if prog >= 1:
+            k = min(1.0, (tl - sweep) / 0.8)
+            col = tuple(int(c * k) for c in AMBER)
+            d.text((34, 40), '{:,} DOCUMENTED SITES'.format(self.total), font=P.f_small, fill=col, anchor='lt')
+            d.text((34, 40 + int(H * 0.06)), 'TWENTY-FIVE SECTIONS', font=P.f_small, fill=tuple(int(c * k) for c in (150, 160, 162)), anchor='lt')
+        P.tag(img, 16, H - 16, 'B0B.DEV/MAP · THE SITE’S OWN {:,} MARKERS'.format(self.total), 'ls')
+        # the closing word, cross-faded in as she says it
+        if self.greek_at is not None and ta >= self.greek_at - 0.4:
+            k = min(1.0, (ta - (self.greek_at - 0.4)) / 0.6)
+            card = Image.new('RGB', (W, H), INK)
+            c = ImageDraw.Draw(card)
+            gf = ImageFont.truetype(GREEK_FONT, int(H / 6.5))
+            c.text((W // 2, int(H * 0.44)), 'τετέλεσται', font=gf, fill=(244, 240, 230), anchor='mm')
+            c.text((W // 2, int(H * 0.60)), 'IT HAS BEEN COMPLETED, AND REMAINS SO', font=P.f_small, fill=AMBER, anchor='mm')
+            c.text((W // 2, H - 40), 'b0b.dev', font=P.f_title, fill=(255, 255, 255), anchor='ms')
+            img = Image.blend(img, card, k)
+        return img
+
+    def subtitle(self, arr, t):
+        """Burn the line being spoken into a copy of the frame (download edition)."""
+        txt = None
+        for a, b, x in self.subs:
+            if a - 0.05 <= t < b + 0.35:
+                txt = fill(x, self.total)
+                break
+        if not txt:
+            return arr
+        W, H = self.W, self.H
+        img = Image.fromarray(arr)
+        greek = any('Ͱ' <= ch <= 'Ͽ' for ch in txt)
+        f = ImageFont.truetype(GREEK_FONT, H // 27) if greek else font('ibm-plex-serif-latin-400-normal.woff2', H // 25)
+        d = ImageDraw.Draw(img)
+        words, lines, cur = txt.split(), [], ''
+        for w in words:
+            trial = (cur + ' ' + w).strip()
+            if d.textlength(trial, font=f) > W * 0.74 and cur:
+                lines.append(cur); cur = w
+            else:
+                cur = trial
+        lines.append(cur)
+        lh = int(H / 25 * 1.45)
+        y1 = H - int(H * 0.085)
+        ov = Image.new('RGBA', img.size, (0, 0, 0, 0))
+        od = ImageDraw.Draw(ov)
+        for i, ln in enumerate(lines):
+            y = y1 - (len(lines) - 1 - i) * lh
+            tw = d.textlength(ln, font=f)
+            od.rectangle((W / 2 - tw / 2 - 12, y - lh + 6, W / 2 + tw / 2 + 12, y + 8), fill=(5, 5, 5, 175))
+        img = Image.alpha_composite(img.convert('RGBA'), ov).convert('RGB')
+        d = ImageDraw.Draw(img)
+        for i, ln in enumerate(lines):
+            y = y1 - (len(lines) - 1 - i) * lh
+            d.text((W / 2, y), ln, font=f, fill=(244, 240, 230), anchor='ms')
+        return np.asarray(img)
 
     def years(self, sh, p):
         out = []
@@ -479,8 +713,19 @@ class Film:
                         a[:f] *= np.linspace(0, 1, f); a[-f:] *= np.linspace(1, 0, f)
                     mix[i0:i0 + len(a)] += a[: n - i0]
                     break
-        mix = np.tanh(mix * 1.1) * 0.8
-        return mix[: int(self.dur * SR)]
+        bed = np.tanh(mix * 1.1) * 0.8
+        # the voice on top; everything else steps back while she speaks
+        voice = np.zeros(n, dtype=np.float32)
+        pres = np.zeros(n, dtype=np.float32)
+        for at, a in self.narr:
+            i0 = int(at * SR)
+            m = min(len(a), n - i0)
+            voice[i0:i0 + m] += a[:m]
+            pres[max(0, i0 - int(0.12 * SR)):i0 + m + int(0.2 * SR)] = 1
+        k = int(0.15 * SR)
+        pres = np.convolve(pres, np.ones(k) / k, mode='same')
+        mix = bed * (1 - 0.72 * pres) + voice * 1.6
+        return np.clip(mix, -1, 1)[: int(self.dur * SR)]
 
 
 def write_wav(path, a):
@@ -494,18 +739,19 @@ def write_js(film, spec, path):
     for sh in film.timeline:
         if sh['type'] == 'card':
             cap = '%s. %s' % (sh['part']['id'], sh['part']['title'])
+        elif sh['type'] == 'finale':
+            cap = '{:,} markers \u00b7 b0b.dev/map'.format(film.total)
         else:
             cap = ' | '.join(film.media[k].tag for k in sh.get('media', []))
         reel.append({'at': round(sh['at'], 3), 'dur': round(sh['dur'], 3), 'cap': cap})
     chapters = []
     for p in film.parts:
+        lines = [{k: v for k, v in L.items() if k in ('text', 'at', 'end')} for L in p['lines']]
         chapters.append({'id': p['id'], 'title': p['title'], 'year': p['years'][1], 'at': p['at'],
-                         'end': p['end'], 'map': False, 'lines': p['lines']})
-    fin = spec['finale']
-    chapters.append({'id': fin['id'], 'title': fin['title'], 'year': fin['year'], 'at': round(film.dur, 3),
-                     'end': None, 'map': True, 'lines': fin['lines']})
+                         'end': p['end'], 'map': False, 'lines': lines})
     js = ('/* generated by scripts/build-intro-collage.py from scripts/intro-collage.json - edit there */\n'
           'window.B0B_INTRO_STYLE="collage";\n'
+          'window.B0B_INTRO_BAKED=true;\n'
           'window.B0B_INTRO_REEL=%s;\n'
           'window.B0B_INTRO_CHAPTERS=%s;\n'
           'window.B0B_INTRO_REEL_DUR=%s;\n'
@@ -523,6 +769,7 @@ def main():
     args = ap.parse_args()
     spec = json.load(open(SPEC, encoding='utf-8'))
     media_dir = os.path.expanduser(os.environ.get('B0B_MEDIA_DIR', spec['media_dir']))
+    spec = layout(spec, media_dir)
     film = Film(spec, media_dir)
     for m in film.media.values():
         m.check()
@@ -563,19 +810,27 @@ def main():
     wav = os.path.join(tmp, 'mix.wav')
     write_wav(wav, film.audio())
     master = os.path.join(tmp, 'master.mkv')
-    enc = subprocess.Popen([FF, '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', '%dx%d' % (W, H),
-                            '-r', str(fps), '-i', '-', '-c:v', 'ffv1', '-level', '3', master], stdin=subprocess.PIPE)
+    master_dl = os.path.join(tmp, 'master-subtitled.mkv')
+
+    def encoder(path):
+        return subprocess.Popen([FF, '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', '%dx%d' % (W, H),
+                                 '-r', str(fps), '-i', '-', '-c:v', 'ffv1', '-level', '3', path], stdin=subprocess.PIPE)
+    enc, enc_dl = encoder(master), encoder(master_dl)
     total = 0
     for sh in film.timeline:
         film.prepare(sh)
-        n = max(1, int(round(sh['dur'] * fps)))
+        # frame count from the running clock, so rounding never drifts the cut off the voice
+        n = max(1, int(round((sh['at'] + sh['dur']) * fps)) - int(round(sh['at'] * fps)))
         for fi in range(n):
-            enc.stdin.write(np.ascontiguousarray(film.frame(sh, fi)).tobytes())
+            arr = np.ascontiguousarray(film.frame(sh, fi))
+            enc.stdin.write(arr.tobytes())
+            enc_dl.stdin.write(np.ascontiguousarray(film.subtitle(arr, sh['at'] + fi / fps)).tobytes())
         total += n
         film.release(sh)
         sys.stdout.write('\r  %d frames (%.0f%%)' % (total, 100 * total / (film.dur * fps)))
         sys.stdout.flush()
-    enc.stdin.close(); enc.wait()
+    for e in (enc, enc_dl):
+        e.stdin.close(); e.wait()
     print()
     a = spec['audio']
     subprocess.run([FF, '-v', 'error', '-y', '-i', master, '-i', wav,
@@ -588,10 +843,17 @@ def main():
                     '-cpu-used', '4', '-pix_fmt', 'yuv420p',
                     '-af', 'loudnorm=' + a['loudnorm'], '-c:a', 'libopus', '-b:a', a['bitrate_webm'], '-ac', '1',
                     '-shortest', out_webm], check=True)
+    out_dl = os.path.join(ROOT, spec['download'])
+    subprocess.run([FF, '-v', 'error', '-y', '-i', master_dl, '-i', wav,
+                    '-c:v', 'libx264', '-preset', 'slow', '-crf', str(spec.get('crf_download', 26)), '-pix_fmt', 'yuv420p',
+                    '-profile:v', 'high', '-movflags', '+faststart',
+                    '-af', 'loudnorm=' + a['loudnorm'], '-c:a', 'aac', '-b:a', '96k', '-ac', '1',
+                    '-metadata', 'title=b0b.dev - the intro film', '-metadata', 'comment=Every panel cites its source. Full list: https://www.b0b.dev/intro',
+                    '-shortest', out_dl], check=True)
     poster = os.path.join(ROOT, spec['poster'])
     subprocess.run([FF, '-v', 'error', '-y', '-ss', str(spec.get('poster_at', 3)), '-i', master, '-frames:v', '1',
                     '-q:v', '4', poster], check=True)
-    for f in (out_mp4, out_webm, poster):
+    for f in (out_mp4, out_webm, out_dl, poster):
         print('  %-40s %8.1f KB' % (os.path.relpath(f, ROOT), os.path.getsize(f) / 1024))
     write_js(film, spec, js_path)
 

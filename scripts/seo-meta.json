@@ -40,8 +40,8 @@
       "jsonldType": "VideoObject",
       "headline": "b0b.dev - the intro film: the record, the instrument, the capability, the overhead, the annotation, the public, the inquiry, the ledger",
       "ogImage": "/img/intro-card.jpg",
-      "contentPath": "/intro-reel.mp4",
-      "duration": "PT2M25S",
+      "contentPath": "/b0b-intro-film.mp4",
+      "duration": "PT2M38S",
       "topics": [
         "archive film",
         "public domain newsreel",

@@ -181,8 +181,28 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**THE NARRATION IS BAKED INTO THE FILM, AND THE FILM DOWNLOADS — 23 Sept 2026, live.** Author: *"can we make the
+video downloadable"*, then *"can you bake in narration"*. The first alone would have shipped a file with no voice,
+no words and no ending — the narration was the browser's, the subtitles were page overlays, the map finale was a
+canvas. **Now all three are in the file.** Voice: **Piper `en_GB-cori-high`** (UK English female; model card:
+trained on **LibriVox, public domain**; alba is CC BY, southern_english_female CC BY-SA, jenny's licence unclear —
+cori was the clean choice). Model (114 MB, sha256 `470b4dd6…0a5903`) lives in `/home/user/.b0b-intro-sources/voice/`,
+lines cached by hash in `voice/cache/`. `build-intro-collage.py` now: synthesises every line (silence-trimmed,
+resampled to 48 kHz by ffmpeg), **sizes each part to her reading** (shots stretched evenly, flashes untouched),
+ducks bed and archive sound to 28% under her, **renders the finale into the video** (the site's own markers drawn
+as the world, then τετέλεσται in DejaVu Serif — Plex has no Greek), and writes **two masters in one pass**: the
+web cut (subtitles stay HTML, so phones can read them below the picture) and **`site/b0b-intro-film.mp4`,
+subtitles burned in**, for download. Film **2:38**. `intro-reel.js` carries `B0B_INTRO_BAKED` and the **exact time
+of every line**; in baked mode `intro.js` never touches `speechSynthesis`, plays at volume 1, shows each line by
+its timestamp, and goes to the end card on `ended`. Download: a button on the end card, a link on the start card,
+one on `/intro`; `VideoObject.contentUrl` points at the download. **TRAPS:** the phonemiser reads **"1945" as
+"nineteen hundred and forty-five"** — every year goes to the voice as words (`say`); **raw phonemes work in
+`[[ … ]]`** and are how the closing word is said (`tɛtɛlˈɛstaɪ`, stress on the third syllable), but a phoneme
+block swallows the pause after it, so `say` may be a **list of segments** joined with 0.5 s of silence. Speech-only
+rate ~2.7 words/s at length_scale 0.97; a naive duration including leading/trailing silence reads ~1.6 and is wrong.
+
 **THE INTRO IS NOW A COLLAGE CUT, THEN AGAINST NOW — 23 Sept 2026, live. Supersedes the 22 Sept three-minute
-cut below (its sync/voice/card/share machinery is unchanged and still described there).** Author: *"make the intro a
+cut below (its card/share machinery is unchanged; its live-speech voice was replaced the same day by the baked narration above).** Author: *"make the intro a
 slide show video / photo collage - make the editing faster paced with more contemporary footage and faces mixed in
 with old footage. do motion graphics stylings if needed"*, then *"you can use my videos on youtube.com/@erc-1155 as
 well as source files if needed … in conjunction with your finds"*. **`scripts/build-intro-collage.py` composes every
