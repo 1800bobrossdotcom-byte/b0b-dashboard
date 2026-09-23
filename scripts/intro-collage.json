@@ -1,0 +1,1941 @@
+{
+  "_comment": [
+    "The b0b.dev intro film, collage cut, built by scripts/build-intro-collage.py.",
+    "",
+    "EVERY PANEL CARRIES ITS SOURCE, BURNED INTO THE FRAME. Each media entry names its",
+    "source page, licence and sha256. Archive footage is public domain or CC0; the",
+    "contemporary stills are public domain, CC0 or CC BY, and every CC BY tag carries",
+    "the author credit on screen, as the licence requires. The ERC-1155 frames are",
+    "the author's own films, used at his direction and labelled as such.",
+    "",
+    "LIVING-PERSON FLOOR APPLIED TO SELECTION, not only to words: in a montage,",
+    "juxtaposition is implication. Faces are of the dead, in documented public acts,",
+    "or crowds in which no individual is the subject. Refused for that reason: the",
+    "2003 photograph of Bush and Rumsfeld watching Powell's address, and a 2012",
+    "hearing still with identifiable living witnesses.",
+    "",
+    "SOUND: the archive films' own sound where a film is on screen, under a bed",
+    "synthesised in the build script (drone, a tick per cut, a low hit per card).",
+    "Nothing licensed from anyone is laid under the narration.",
+    "",
+    "THE NARRATION is spoken live by the reader's browser (site/intro.js) and is on",
+    "screen as text. Each line was checked against the record: CORONA first",
+    "recovery Aug 1960, declassified Feb 1995; Stevenson (1962) and Powell (2003)",
+    "both presented to the UN Security Council; no stockpiles were found in Iraq."
+  ],
+  "media_dir": "/home/user/.b0b-intro-sources",
+  "output": "site/intro-reel.mp4",
+  "poster": "site/intro-poster.jpg",
+  "poster_at": 5.2,
+  "js": "site/intro-reel.js",
+  "width": 1280,
+  "height": 720,
+  "fps": 24,
+  "crf_mp4": 30,
+  "crf_webm": 40,
+  "audio": {
+    "bitrate_mp4": "64k",
+    "bitrate_webm": "48k",
+    "loudnorm": "I=-20:TP=-2:LRA=11"
+  },
+  "parts": [
+    {
+      "id": "I",
+      "title": "The record",
+      "years": [
+        "1945",
+        "2011"
+      ],
+      "lines": [
+        {
+          "text": "Nuremberg, 1945. The prosecution argued from documents, not rumour."
+        },
+        {
+          "text": "The record keeps arriving the same way: the Pentagon Papers, the 9/11 Commission, the Senate’s torture report.",
+          "say": "The record keeps arriving the same way. The Pentagon Papers. The nine eleven Commission. The Senate’s torture report."
+        },
+        {
+          "text": "Show the record. Say where it came from. Let the reader test it."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 1.96,
+          "media": [
+            "nuremberg"
+          ],
+          "motion": "push",
+          "t": [
+            40.0
+          ],
+          "glitch": true,
+          "years": [
+            "1945"
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 1.1,
+          "media": [
+            "I_jackson_nuremberg_1945"
+          ],
+          "motion": "slam"
+        },
+        {
+          "type": "full",
+          "dur": 1.23,
+          "media": [
+            "nuremberg"
+          ],
+          "motion": "push",
+          "t": [
+            17.5
+          ]
+        },
+        {
+          "type": "split",
+          "dur": 2.7,
+          "media": [
+            "nuremberg",
+            "I_pentagon_papers_chart_interlocking"
+          ],
+          "t": [
+            48.5,
+            null
+          ],
+          "motion": "push",
+          "glitch": true,
+          "years": [
+            "1945",
+            "2011"
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 1.23,
+          "media": [
+            "I_nara_wnrc_stacks"
+          ],
+          "motion": "push"
+        },
+        {
+          "type": "full",
+          "dur": 1.1,
+          "media": [
+            "I_pentagon_papers_p99_diagram"
+          ],
+          "motion": "pan-l"
+        },
+        {
+          "type": "full",
+          "dur": 1.23,
+          "media": [
+            "I_911_commission_report_cover_2004"
+          ],
+          "motion": "pull",
+          "years": [
+            "2004"
+          ]
+        },
+        {
+          "type": "grid",
+          "dur": 2.45,
+          "media": [
+            "I_jackson_nuremberg_1945",
+            "I_feinstein_2004_senate",
+            "I_swartz_2011_jasonscott"
+          ],
+          "cols": 3,
+          "rows": 1,
+          "motion": "push",
+          "stagger": 0.6
+        },
+        {
+          "type": "flash",
+          "dur": 0.33,
+          "media": [
+            "erc_YlMeyAAWhwE"
+          ],
+          "motion": "slam",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 1.96,
+          "media": [
+            "nuremberg"
+          ],
+          "motion": "push",
+          "t": [
+            62.5
+          ]
+        }
+      ],
+      "card": 1.4
+    },
+    {
+      "id": "II",
+      "title": "The instrument",
+      "years": [
+        "1947",
+        "2025"
+      ],
+      "lines": [
+        {
+          "text": "Washington, 1947. A committee of Congress turned the cameras on citizens."
+        },
+        {
+          "text": "Now the cameras sit on poles and rooftops, and nobody has to call a hearing."
+        },
+        {
+          "text": "An inquiry and a hunt look the same from outside. The test: could the finding have come out the other way?"
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 2.19,
+          "media": [
+            "huac"
+          ],
+          "motion": "push",
+          "t": [
+            5.5
+          ],
+          "glitch": true,
+          "years": [
+            "1947"
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 1.37,
+          "media": [
+            "II_hoover_newsreel_1937"
+          ],
+          "motion": "push",
+          "t": [
+            15.0
+          ]
+        },
+        {
+          "type": "split",
+          "dur": 3.01,
+          "media": [
+            "huac",
+            "II_cctv_mumbai_2018_cc0"
+          ],
+          "t": [
+            24.0,
+            null
+          ],
+          "motion": "push",
+          "glitch": true,
+          "years": [
+            "1947",
+            "2018"
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 1.92,
+          "media": [
+            "II_huac_pumpkin_papers_1948"
+          ],
+          "motion": "push",
+          "t": [
+            48.0
+          ],
+          "years": [
+            "1948"
+          ]
+        },
+        {
+          "type": "grid",
+          "dur": 2.74,
+          "media": [
+            "II_hoover_1961_trikosko",
+            "II_mccarthy_1954_up",
+            "II_mccarthy_cohn_19540312"
+          ],
+          "cols": 3,
+          "rows": 1,
+          "motion": "push",
+          "stagger": 0.6
+        },
+        {
+          "type": "full",
+          "dur": 1.37,
+          "media": [
+            "II_cctv_roof_2025_cc0"
+          ],
+          "motion": "pan-l",
+          "years": [
+            "2025"
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 1.23,
+          "media": [
+            "II_cctv_pole_saarbruecken_2020"
+          ],
+          "motion": "slam"
+        },
+        {
+          "type": "flash",
+          "dur": 0.33,
+          "media": [
+            "erc_E9IuNSX3FAE"
+          ],
+          "motion": "slam",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 1.64,
+          "media": [
+            "II_nsa_hq_fort_meade"
+          ],
+          "motion": "push"
+        },
+        {
+          "type": "full",
+          "dur": 2.19,
+          "media": [
+            "huac"
+          ],
+          "motion": "push",
+          "t": [
+            57.0
+          ]
+        }
+      ],
+      "card": 1.4
+    },
+    {
+      "id": "III",
+      "title": "The capability",
+      "years": [
+        "1952",
+        "2015"
+      ],
+      "lines": [
+        {
+          "text": "Enewetak, 1952. The capability arrives before the argument about what it is for."
+        },
+        {
+          "text": "So does the data centre, the drone and the supercomputer."
+        },
+        {
+          "text": "A document can establish a capability. It does not establish a use. Secrecy is evidence of nothing about what is hidden."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 2.58,
+          "media": [
+            "ivy"
+          ],
+          "motion": "push",
+          "t": [
+            3413.0
+          ],
+          "glitch": true,
+          "years": [
+            "1952"
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 1.16,
+          "media": [
+            "III_oppenheimer_1944"
+          ],
+          "motion": "slam"
+        },
+        {
+          "type": "split",
+          "dur": 2.83,
+          "media": [
+            "ivy",
+            "III_nasa_pleiades_supercomputer_2015"
+          ],
+          "t": [
+            600.0,
+            null
+          ],
+          "motion": "push",
+          "glitch": true,
+          "years": [
+            "1952",
+            "2015"
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 1.55,
+          "media": [
+            "III_nsa_utah_data_center_2014_eff"
+          ],
+          "motion": "push",
+          "years": [
+            "2014"
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 1.29,
+          "media": [
+            "III_mq9_reaper_afghanistan_2008"
+          ],
+          "motion": "pan-r"
+        },
+        {
+          "type": "full",
+          "dur": 1.16,
+          "media": [
+            "III_nasa_global_hawk_2015"
+          ],
+          "motion": "push"
+        },
+        {
+          "type": "grid",
+          "dur": 2.32,
+          "media": [
+            "III_eisenhower_official_1959",
+            "III_nsa_aerial_2013_paglen"
+          ],
+          "cols": 2,
+          "rows": 1,
+          "motion": "push",
+          "stagger": 0.6
+        },
+        {
+          "type": "flash",
+          "dur": 0.33,
+          "media": [
+            "erc_vCeDEZtRY9s"
+          ],
+          "motion": "slam",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 2.06,
+          "media": [
+            "ivy"
+          ],
+          "motion": "push",
+          "t": [
+            3345.0
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 1.55,
+          "media": [
+            "III_nasa_pleiades_2008"
+          ],
+          "motion": "pan-l"
+        }
+      ],
+      "card": 1.4
+    },
+    {
+      "id": "IV",
+      "title": "The overhead",
+      "years": [
+        "1958",
+        "2021"
+      ],
+      "lines": [
+        {
+          "text": "1958. The first American satellite carried a cosmic-ray counter, not a camera.",
+          "say": "Nineteen fifty-eight. The first American satellite carried a cosmic-ray counter, not a camera."
+        },
+        {
+          "text": "The cameras came in 1960, as CORONA, and stayed classified for thirty-five years.",
+          "say": "The cameras came in nineteen sixty, as Corona, and stayed classified for thirty-five years."
+        },
+        {
+          "text": "Now the night side of the planet is a public photograph."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 1.76,
+          "media": [
+            "explorer"
+          ],
+          "motion": "push",
+          "t": [
+            70.0
+          ],
+          "glitch": true,
+          "years": [
+            "1958"
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 1.32,
+          "media": [
+            "IV_corona_story_recovery_x1640-1700"
+          ],
+          "motion": "push",
+          "t": [
+            3.0
+          ],
+          "years": [
+            "1960"
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 1.54,
+          "media": [
+            "IV_corona_story_recovery_x1640-1700"
+          ],
+          "motion": "push",
+          "t": [
+            45.0
+          ]
+        },
+        {
+          "type": "split",
+          "dur": 2.42,
+          "media": [
+            "IV_corona_story_camera_imagery_x2970-3030",
+            "IV_nasa_black_marble_americas_2012"
+          ],
+          "t": [
+            42.0,
+            null
+          ],
+          "motion": "push",
+          "glitch": true,
+          "years": [
+            "CORONA",
+            "2012"
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 1.54,
+          "media": [
+            "IV_corona_beijing_1967"
+          ],
+          "motion": "pan-r",
+          "years": [
+            "1967"
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 0.99,
+          "media": [
+            "IV_dulles_portrait"
+          ],
+          "motion": "slam"
+        },
+        {
+          "type": "full",
+          "dur": 1.1,
+          "media": [
+            "IV_landsat9_liftoff_20210927"
+          ],
+          "motion": "push",
+          "years": [
+            "2021"
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 1.1,
+          "media": [
+            "IV_starlink_tuebingen_2020_cc0"
+          ],
+          "motion": "push"
+        },
+        {
+          "type": "flash",
+          "dur": 0.33,
+          "media": [
+            "erc_OiYL9z3bXEI"
+          ],
+          "motion": "slam",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 1.32,
+          "media": [
+            "IV_iss_night_california_2014"
+          ],
+          "motion": "pan-l"
+        },
+        {
+          "type": "full",
+          "dur": 1.1,
+          "media": [
+            "IV_starlink_ctio_2019"
+          ],
+          "motion": "push"
+        }
+      ],
+      "card": 1.4
+    },
+    {
+      "id": "V",
+      "title": "The annotation",
+      "years": [
+        "1962",
+        "2003"
+      ],
+      "lines": [
+        {
+          "text": "October 1962. A reconnaissance photograph became evidence when somebody labelled it, and the missiles were there."
+        },
+        {
+          "text": "February 2003, the same Council: labelled slides again. This time the weapons were not."
+        },
+        {
+          "text": "The label is the claim. Check it, including every caption in this film."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 2.15,
+          "media": [
+            "cuba"
+          ],
+          "motion": "push",
+          "t": [
+            163.8
+          ],
+          "glitch": true,
+          "years": [
+            "1962"
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 1.61,
+          "media": [
+            "V_stevenson_un_1962"
+          ],
+          "motion": "push"
+        },
+        {
+          "type": "split",
+          "dur": 3.49,
+          "media": [
+            "V_cuban_missiles_19621101",
+            "V_powell_slide_mobile"
+          ],
+          "t": [
+            null,
+            null
+          ],
+          "motion": "push",
+          "glitch": true,
+          "years": [
+            "1962",
+            "2003"
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 1.34,
+          "media": [
+            "V_jfk_reading_copy_19621022_p2"
+          ],
+          "motion": "push"
+        },
+        {
+          "type": "grid",
+          "dur": 2.42,
+          "media": [
+            "V_jfk_portrait_1963",
+            "V_powell_official_2001"
+          ],
+          "cols": 2,
+          "rows": 1,
+          "motion": "push",
+          "stagger": 0.6
+        },
+        {
+          "type": "full",
+          "dur": 1.34,
+          "media": [
+            "V_powell_slide_tube"
+          ],
+          "motion": "slam",
+          "years": [
+            "2003"
+          ]
+        },
+        {
+          "type": "flash",
+          "dur": 0.33,
+          "media": [
+            "erc_fs_0-rRKsy4"
+          ],
+          "motion": "slam",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 2.15,
+          "media": [
+            "cuba"
+          ],
+          "motion": "push",
+          "t": [
+            179.0
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 1.61,
+          "media": [
+            "cuba"
+          ],
+          "motion": "push",
+          "t": [
+            6.0
+          ]
+        }
+      ],
+      "card": 1.4
+    },
+    {
+      "id": "VI",
+      "title": "The public",
+      "years": [
+        "1963",
+        "2020"
+      ],
+      "lines": [
+        {
+          "text": "1963. 1967. 2003. 2011. 2020. The placards change; the shape of the crowd does not.",
+          "say": "Nineteen sixty-three. Sixty-seven. Two thousand and three. Twenty eleven. Twenty twenty. The placards change; the shape of the crowd does not."
+        },
+        {
+          "text": "A crowd is testimony: evidence of an experience, never, by itself, evidence of a cause."
+        },
+        {
+          "text": "The newsreel filmed the counter-demonstrators too."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 1.61,
+          "media": [
+            "peacemarch"
+          ],
+          "motion": "push",
+          "t": [
+            17.0
+          ],
+          "glitch": true,
+          "years": [
+            "1967"
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 1.38,
+          "media": [
+            "VI_march_on_washington_1963_crowd_x70-130"
+          ],
+          "motion": "push",
+          "t": [
+            5.0
+          ],
+          "years": [
+            "1963"
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 1.38,
+          "media": [
+            "VI_march_on_washington_1963_mlk_x1100-1150"
+          ],
+          "motion": "push",
+          "t": [
+            3.0
+          ]
+        },
+        {
+          "type": "split",
+          "dur": 2.52,
+          "media": [
+            "peacemarch",
+            "VI_occupy_wsq_20111008_x12-72"
+          ],
+          "t": [
+            4.5,
+            41.0
+          ],
+          "motion": "push",
+          "glitch": true,
+          "years": [
+            "1967",
+            "2011"
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 1.15,
+          "media": [
+            "VI_london_iraq_protest_20030927_cc0"
+          ],
+          "motion": "push",
+          "years": [
+            "2003"
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 1.15,
+          "media": [
+            "VI_womens_march_dc_20170121_voa"
+          ],
+          "motion": "pan-r",
+          "years": [
+            "2017"
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 1.15,
+          "media": [
+            "VI_minneapolis_20200526_fibonacciblue"
+          ],
+          "motion": "push",
+          "years": [
+            "2020"
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 1.03,
+          "media": [
+            "VI_occupy_zuccotti_20110917_shankbone"
+          ],
+          "motion": "push"
+        },
+        {
+          "type": "full",
+          "dur": 1.61,
+          "media": [
+            "peacemarch"
+          ],
+          "motion": "push",
+          "t": [
+            52.0
+          ],
+          "years": [
+            "1967"
+          ]
+        },
+        {
+          "type": "flash",
+          "dur": 0.33,
+          "media": [
+            "erc_8VbssmVYakg"
+          ],
+          "motion": "slam",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 1.38,
+          "media": [
+            "VI_airship_protest_utah_2014"
+          ],
+          "motion": "push"
+        },
+        {
+          "type": "full",
+          "dur": 1.38,
+          "media": [
+            "VI_march_on_washington_aerial_1963"
+          ],
+          "motion": "pull"
+        }
+      ],
+      "card": 1.4
+    },
+    {
+      "id": "VII",
+      "title": "The inquiry",
+      "years": [
+        "1974",
+        "2012"
+      ],
+      "lines": [
+        {
+          "text": "The transcripts, 1974. The Church Committee, 1975. Iran-Contra, 1987.",
+          "say": "The transcripts, nineteen seventy-four. The Church Committee, seventy-five. Iran-Contra, eighty-seven."
+        },
+        {
+          "text": "The inquiry always comes afterwards."
+        },
+        {
+          "text": "Everything in this report arrived the same way: late, in public, and on the record."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 1.6,
+          "media": [
+            "VII_nixon_transcripts_address_1974_x163-223"
+          ],
+          "motion": "push",
+          "t": [
+            2.0
+          ],
+          "glitch": true,
+          "years": [
+            "1974"
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 1.0,
+          "media": [
+            "VII_watergate_committee_1973"
+          ],
+          "motion": "push",
+          "years": [
+            "1973"
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 1.0,
+          "media": [
+            "VII_nixon_resignation_letter_1974"
+          ],
+          "motion": "push"
+        },
+        {
+          "type": "full",
+          "dur": 1.0,
+          "media": [
+            "VII_nixon_army_one_1974"
+          ],
+          "motion": "push"
+        },
+        {
+          "type": "grid",
+          "dur": 1.8,
+          "media": [
+            "VII_church_1961_portrait",
+            "VII_carter_church_1977"
+          ],
+          "cols": 2,
+          "rows": 1,
+          "motion": "push",
+          "stagger": 0.6
+        },
+        {
+          "type": "split",
+          "dur": 2.4,
+          "media": [
+            "irancontra",
+            "VII_hpsci_hearing_wide_20060526_x0-13"
+          ],
+          "t": [
+            180.5,
+            1.0
+          ],
+          "motion": "push",
+          "glitch": true,
+          "years": [
+            "1987",
+            "2006"
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 1.2,
+          "media": [
+            "VII_reagan_tower_report_1987"
+          ],
+          "motion": "push",
+          "years": [
+            "1987"
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 1.0,
+          "media": [
+            "VII_ssci_gavel_20120130"
+          ],
+          "motion": "push",
+          "years": [
+            "2012"
+          ]
+        },
+        {
+          "type": "flash",
+          "dur": 0.33,
+          "media": [
+            "erc_AmTnNRJtrqE"
+          ],
+          "motion": "slam",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 1.2,
+          "media": [
+            "irancontra"
+          ],
+          "motion": "push",
+          "t": [
+            55.0
+          ]
+        },
+        {
+          "type": "flash",
+          "dur": 0.3,
+          "media": [
+            "erc_VP2iLdUcI1c"
+          ],
+          "motion": "slam",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 1.6,
+          "media": [
+            "VII_nixon_transcripts_address_1974_x163-223"
+          ],
+          "motion": "push",
+          "t": [
+            27.0
+          ]
+        }
+      ],
+      "card": 1.4
+    }
+  ],
+  "finale": {
+    "id": "VIII",
+    "title": "The ledger",
+    "year": "2026",
+    "lines": [
+      {
+        "text": "{TOTAL} documented sites. Twenty-five sections.",
+        "say": "{TOTALWORDS} documented sites. Twenty-five sections."
+      },
+      {
+        "text": "Every source named. Every tier stated."
+      },
+      {
+        "text": "The specimens it could not prove, killed on its own page."
+      },
+      {
+        "text": "The authority of a document does not come from what it alleges."
+      },
+      {
+        "text": "It comes from what it refuses to allege."
+      },
+      {
+        "text": "τετέλεσται — it has been completed, and remains so.",
+        "say": "Teh-teh-less-tie. It has been completed, and it remains so."
+      }
+    ]
+  },
+  "media": {
+    "nuremberg": {
+      "file": "nuremberg.mp4",
+      "kind": "video",
+      "tag": "UNIVERSAL NEWSREEL · NUREMBERG · 1945 · NARA · PD",
+      "source_page": "https://archive.org/details/1945-12-06_Nazis_Face_War_Crime_Evidence",
+      "licence_url": "http://creativecommons.org/licenses/publicdomain/",
+      "sha256": "dea24b902670564ef4e5db7df06b9c285b8b2a494957adcc161a6f0fa7286723"
+    },
+    "huac": {
+      "file": "huac.mp4",
+      "kind": "video",
+      "tag": "UNIVERSAL NEWSREEL · HUAC · 1947 · NARA · PD",
+      "source_page": "https://archive.org/details/1947-10-20_Hollywood_Red_Probe_Begins",
+      "licence_url": "http://creativecommons.org/licenses/publicdomain/",
+      "sha256": "bdfb628f5de7dba3cbef0328bb33464d78b685f5a653b0e82d4f506bcaad4037"
+    },
+    "ivy": {
+      "file": "ivy.mp4",
+      "kind": "video",
+      "tag": "OPERATION IVY · 1952 · US DOE FILM 0800012 · CC0",
+      "source_page": "https://archive.org/details/gov.doe.0800012",
+      "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "sha256": "24bf9cb1dc0dad75197fad2f2164ceb2f447f4eef2c1e5b4d0f551e6edbf88f5"
+    },
+    "explorer": {
+      "file": "explorer.mp4",
+      "kind": "video",
+      "tag": "UNIVERSAL NEWSREEL · EXPLORER 1 · 1958 · NARA · PD",
+      "source_page": "https://archive.org/details/1958-02-03_First_US_Satellite_Launched",
+      "licence_url": "http://creativecommons.org/licenses/publicdomain/",
+      "sha256": "1c126923a2309e80d8c8e7d7f2f58fad9e3cbf290fc9f3297e5158ba1dab8e8d"
+    },
+    "cuba": {
+      "file": "cuba.mp4",
+      "kind": "video",
+      "tag": "UNIVERSAL NEWSREEL · CUBAN CRISIS · 1962 · NARA · PD",
+      "source_page": "https://archive.org/details/1962-10-25_The_Cuban_Crisis",
+      "licence_url": "http://creativecommons.org/licenses/publicdomain/",
+      "sha256": "4ea69d1cb10eb89b2cdcb9453926edd45c6e641149f360274cc2e43ad6d6485e"
+    },
+    "peacemarch": {
+      "file": "peacemarch.mp4",
+      "kind": "video",
+      "tag": "UNIVERSAL NEWSREEL · PEACE MARCH · 1967 · NARA · PD",
+      "source_page": "https://archive.org/details/1967-04-18_Peace_March",
+      "licence_url": "http://creativecommons.org/licenses/publicdomain/",
+      "sha256": "f1264c2c0fca3946b282b344826b4b0a3364c4986af6b4ad5a160826d1e17446"
+    },
+    "irancontra": {
+      "file": "irancontra.mp4",
+      "kind": "video",
+      "tag": "IRAN-CONTRA HEARINGS · 1987 · NARA ARC 11161 · CC0",
+      "source_page": "https://archive.org/details/gov.archives.arc.11161",
+      "licence_url": "http://creativecommons.org/licenses/publicdomain/zero/1.0/",
+      "sha256": "4af624ac91bab4063c63c0114f43a7b3478618b010974cb369dd0cb68d90d472"
+    },
+    "I_911_commission_report_cover_2004": {
+      "file": "v2/I_911_commission_report_cover_2004.png",
+      "kind": "still",
+      "tag": "THE 9/11 COMMISSION REPORT · COVER · PUBLISHED 22 JULY 2004 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:911report_cover_HIGHRES.png",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/2/2b/911report_cover_HIGHRES.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "Public domain",
+      "licence_url": null,
+      "credit": "Cleanup by Andrew_pmk (talk · contribs); straightened and cropped by Holek (talk · contribs) | Credit: http://www.9-11commission.gov/press/911report_cover_HIGHRES.jpg",
+      "date": "2004-07-22 (publication date per metadata)",
+      "sha256": "30d5668efa561666d23cccaf4681de88fa70a8df48c7d62acba4b50501852734",
+      "focus": [
+        0.5,
+        0.35
+      ]
+    },
+    "I_feinstein_2004_senate": {
+      "file": "v2/I_feinstein_2004_senate.jpg",
+      "kind": "still",
+      "tag": "SEN. DIANNE FEINSTEIN · OFFICIAL SENATE PHOTO · 15 NOV 2004 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Dianne_Feinstein,_official_Senate_photo_2.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Dianne_Feinstein%2C_official_Senate_photo_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "Public domain",
+      "licence_url": null,
+      "credit": "United States Congress, US Senate Photo/Becky Hammel | Credit: http://www.feinstein.senate.gov/public/index.cfm/official-photo",
+      "date": "2004-11-15",
+      "sha256": "3cb3d19803856c9e0a5f117019510a1cddaa6dc558c45b2cc6b0214f539a4ef5",
+      "focus": [
+        0.5,
+        0.3
+      ]
+    },
+    "I_jackson_nuremberg_1945": {
+      "file": "v2/I_jackson_nuremberg_1945.jpg",
+      "kind": "still",
+      "tag": "ROBERT H. JACKSON OPENS FOR THE PROSECUTION, NUREMBERG · 21 NOV 1945 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Prosecutor_Robert_Jackson_at_Nuremberg_Trials.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/7/7f/Prosecutor_Robert_Jackson_at_Nuremberg_Trials.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "Public domain",
+      "licence_url": null,
+      "credit": "Charles W. Alexander | Credit: https://collections.ushmm.org/search/catalog/pa1043449",
+      "date": "1945-11-21",
+      "sha256": "c21c5f48b66145c413a93b90135457e307990b4beb743773051dea1c27d918d7"
+    },
+    "I_nara_wnrc_stacks": {
+      "file": "v2/I_nara_wnrc_stacks.jpg",
+      "kind": "still",
+      "tag": "WASHINGTON NATIONAL RECORDS CENTER · STACK AREA · UNDATED · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Washington_National_Records_Center_Stack_Area_with_Employee_Servicing_Records.tif",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Washington_National_Records_Center_Stack_Area_with_Employee_Servicing_Records.tif?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "Public domain",
+      "licence_url": null,
+      "credit": "Unknown authorUnknown author or not provided | Credit: U.S. National Archives and Records Administration",
+      "date": "undated (NARA gives no date)",
+      "sha256": "c6b99e1b09499dcb2dc2d3ef0f972be3cc619fc7270974f5a71418318912d806"
+    },
+    "I_pentagon_papers_chart_interlocking": {
+      "file": "v2/I_pentagon_papers_chart_interlocking.png",
+      "kind": "still",
+      "tag": "PENTAGON PAPERS CHART · INTERLOCKING LEADERSHIP POSTS, NORTH VIETNAM · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Pentagon-Papers-Part_IV_-_Interlocking_of_top_leadership_positions_in_North_Vietnam.png",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/1/15/Pentagon-Papers-Part_IV_-_Interlocking_of_top_leadership_positions_in_North_Vietnam.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "Public domain",
+      "licence_url": null,
+      "credit": "The Pentagon | Credit: https://en.wikisource.org/wiki/Page%3APentagon-Papers-Part_IV._A._5.djvu/189",
+      "date": "2011 (release date per metadata; study compiled 1967-69)",
+      "sha256": "73da5af44976e7b997bd25ce8a28fabc30413bbde9c9ffcbf3a37fd58f509659",
+      "focus": [
+        0.5,
+        0.3
+      ]
+    },
+    "I_pentagon_papers_p99_diagram": {
+      "file": "v2/I_pentagon_papers_p99_diagram.jpg",
+      "kind": "still",
+      "tag": "PENTAGON PAPERS · PART IV.A.5, P.99 · MAP OF ETHNIC GROUPS · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Pentagon-Papers-Part_IV._A._5_-_Page_99.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/4/40/Pentagon-Papers-Part_IV._A._5_-_Page_99.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "Public domain",
+      "licence_url": null,
+      "credit": "Pentagon-Department of Defense | Credit: This image has been extracted from another file",
+      "date": "1968-01-15 (document date per metadata; full release 2011)",
+      "sha256": "1a5b4fa4ee0b7fd9631bc9bfd81da4b9f20845e9015a5fba77b8861ccf2b03c5",
+      "focus": [
+        0.5,
+        0.4
+      ]
+    },
+    "I_swartz_2011_jasonscott": {
+      "file": "v2/I_swartz_2011_jasonscott.jpg",
+      "kind": "still",
+      "tag": "AARON SWARTZ · PHOTO JASON SCOTT · 27 OCT 2011 · JASON SCOTT · CC BY 2.0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Aaron_Swartz_in_2011.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Aaron_Swartz_in_2011.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "CC BY 2.0",
+      "licence_url": "https://creativecommons.org/licenses/by/2.0",
+      "credit": "Jason Scott | Credit: https://www.flickr.com/photos/textfiles/6301463398/",
+      "date": "2011-10-27",
+      "sha256": "e83d152ec51bc7142f0ed6fbc8757890ccc58b7c01ece2442f526415ca14eed2",
+      "focus": [
+        0.5,
+        0.3
+      ]
+    },
+    "II_cctv_mumbai_2018_cc0": {
+      "file": "v2/II_cctv_mumbai_2018_cc0.jpg",
+      "kind": "still",
+      "tag": "CCTV CAMERAS, MATUNGA (W), MUMBAI CITY NETWORK · 3 MAR 2018 · CC0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:CCTV_cameras_in_Mumbai.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/3/33/CCTV_cameras_in_Mumbai.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "CC0",
+      "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "credit": "Punit Rajpal | Credit: Own work",
+      "date": "2018-03-03",
+      "sha256": "c698bbcc16c1a3896bff85122893ff75ae026851423f60b405728f2765847ebb"
+    },
+    "II_cctv_pole_saarbruecken_2020": {
+      "file": "v2/II_cctv_pole_saarbruecken_2020.jpg",
+      "kind": "still",
+      "tag": "POLE WITH SURVEILLANCE CAMERAS, SAARBRÜCKEN MAIN STATION · APR 2020 · ΜKÖFF · CC BY 4.0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:2020-04-05_17.18.01_Pole_with_surveillance_cameras_in_Saarbr%C3%BCcken.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/2/27/2020-04-05_17.18.01_Pole_with_surveillance_cameras_in_Saarbr%C3%BCcken.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "CC BY 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by/4.0",
+      "credit": "µKöff | Credit: Own work",
+      "date": "2020-04-05",
+      "sha256": "8c11eba6bf942df0ecfbf9d5c81440c1d39be5092420260726fe93c8c762be64"
+    },
+    "II_cctv_roof_2025_cc0": {
+      "file": "v2/II_cctv_roof_2025_cc0.jpg",
+      "kind": "still",
+      "tag": "CCTV CAMERAS ON A ROOF EDGE · 20 MAY 2025 · CC0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Closed-circuit_television_(CCTV)_cameras.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Closed-circuit_television_%28CCTV%29_cameras.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "CC0",
+      "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "credit": "Fourhazzy | Credit: Own work",
+      "date": "2025-05-20",
+      "sha256": "3c4d4132d6ae7c0adf4fa66db48bab7e2f56da7d801b18b7292dcd19ce7e392a"
+    },
+    "II_hoover_1961_trikosko": {
+      "file": "v2/II_hoover_1961_trikosko.jpg",
+      "kind": "still",
+      "tag": "J. EDGAR HOOVER, FBI DIRECTOR · PHOTO M. S. TRIKOSKO · 28 SEPT 1961 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Hoover-JEdgar-LOC.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Hoover-JEdgar-LOC.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "Public domain",
+      "licence_url": null,
+      "credit": "Marion S. Trikosko | Credit: This image is available from the United States Library of Congress's Prints and Photographs division under the digital ID ppmsc.03262.This tag does not indicate the copyright status of the attached work. A normal copyright tag is still required. See Commons:Licensing.",
+      "date": "1961-09-28",
+      "sha256": "06879e7d7379e17d9041438c8a48aef5c76f6bd57e3f206f17348ab97db3d934",
+      "focus": [
+        0.5,
+        0.3
+      ]
+    },
+    "II_hoover_newsreel_1937": {
+      "file": "v2/II_hoover_newsreel_1937.mp4",
+      "kind": "video",
+      "tag": "UNIVERSAL NEWSREEL · J. EDGAR HOOVER, FBI CHIEF · 4 OCT 1937 · PD",
+      "source_page": "https://archive.org/details/1937-10-04_Hoover_Blasts_Parole_Boards",
+      "direct_url": "https://archive.org/download/1937-10-04_Hoover_Blasts_Parole_Boards/1937-10-04_Hoover_Blasts_Parole_Boards.mp4",
+      "licence": "Public domain",
+      "licence_url": "http://creativecommons.org/licenses/publicdomain/",
+      "credit": "Universal Newsreel (universal_newsreels collection, archive.org)",
+      "date": "1937-10-04 (newsreel release)",
+      "sha256": "823d4a465526c1221277c160659d6ce1163a9f509c21fb985badbd6d68edd87e"
+    },
+    "II_huac_pumpkin_papers_1948": {
+      "file": "v2/II_huac_pumpkin_papers_1948.mp4",
+      "kind": "video",
+      "tag": "UNIVERSAL NEWSREEL · NIXON AND HUAC EXAMINE CHAMBERS MICROFILM · 1948 · PD",
+      "source_page": "https://archive.org/details/1948-12-06_Red_Spy_Films",
+      "direct_url": "https://archive.org/download/1948-12-06_Red_Spy_Films/1948-12-06_Red_Spy_Films.mp4",
+      "licence": "Public domain",
+      "licence_url": "http://creativecommons.org/licenses/publicdomain/",
+      "credit": "Universal-International News (universal_newsreels collection, archive.org); voice Ed Herlihy",
+      "date": "1948-12-06 (newsreel release)",
+      "sha256": "b5676cc985763666fad06fffa177ee636af470e5a98a7d10167a6e55b81241fd"
+    },
+    "II_mccarthy_1954_up": {
+      "file": "v2/II_mccarthy_1954_up.jpg",
+      "kind": "still",
+      "tag": "SEN. JOSEPH MCCARTHY · UNITED PRESS PHOTO · 1954 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Joseph_McCarthy.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Joseph_McCarthy.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "Public domain",
+      "licence_url": null,
+      "credit": "United Press | Credit: Library of Congress",
+      "date": "1954",
+      "sha256": "4bec20bcc6f1c5f526491b88806f6d532e703149d9e452fe5406f3f526e56370"
+    },
+    "II_mccarthy_cohn_19540312": {
+      "file": "v2/II_mccarthy_cohn_19540312.jpg",
+      "kind": "still",
+      "tag": "MCCARTHY AND ROY COHN AT THE ARMY-MCCARTHY HEARINGS · 12 MAR 1954 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Joseph_McCarthy_and_Roy_Cohn,_March_12,_1954.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Joseph_McCarthy_and_Roy_Cohn%2C_March_12%2C_1954.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "Public domain",
+      "licence_url": null,
+      "credit": "Associated Press wirephoto | Credit: Scan via Alamy",
+      "date": "1954-03-12",
+      "sha256": "fed09cf9291e142308b7509707b6efd18fd6df9e006248c0bf3940b7e7fd83e6"
+    },
+    "II_nsa_hq_fort_meade": {
+      "file": "v2/II_nsa_hq_fort_meade.jpg",
+      "kind": "still",
+      "tag": "NSA HEADQUARTERS, FORT MEADE, MARYLAND · NSA PHOTO · UNDATED · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:National_Security_Agency_headquarters,_Fort_Meade,_Maryland.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/8/84/National_Security_Agency_headquarters%2C_Fort_Meade%2C_Maryland.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "Public domain",
+      "licence_url": null,
+      "credit": "National Security Agency | Credit: https://www.nsa.gov/resources/everyone/digital-media-center/image-galleries/places/",
+      "date": "undated (metadata: Unknown)",
+      "sha256": "1c63bb7142874a55448132a593001d543c5196292c6d8007c2fbad0c1cbb863e"
+    },
+    "III_eisenhower_official_1959": {
+      "file": "v2/III_eisenhower_official_1959.jpg",
+      "kind": "still",
+      "tag": "DWIGHT D. EISENHOWER · OFFICIAL PORTRAIT · 29 MAY 1959 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Dwight_D._Eisenhower,_official_photo_portrait,_May_29,_1959.jpg",
+      "direct_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Dwight_D._Eisenhower%2C_official_photo_portrait%2C_May_29%2C_1959.jpg/1920px-Dwight_D._Eisenhower%2C_official_photo_portrait%2C_May_29%2C_1959.jpg",
+      "licence": "Public domain (template PD-USGov-POTUS)",
+      "licence_url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-POTUS",
+      "credit": "White House (source: Eisenhower Presidential Library)",
+      "date": "1959-05-29",
+      "sha256": "dc4979657797160192c994985e0edbb398dfbaaccf0085714b0c051b5406004e",
+      "focus": [
+        0.5,
+        0.3
+      ]
+    },
+    "III_mq9_reaper_afghanistan_2008": {
+      "file": "v2/III_mq9_reaper_afghanistan_2008.jpg",
+      "kind": "still",
+      "tag": "MQ-9 REAPER OVER SOUTHERN AFGHANISTAN · USAF · 29 NOV 2008 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:MQ-9_Reaper_UAV.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/8/89/MQ-9_Reaper_UAV.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "Public domain",
+      "licence_url": null,
+      "credit": "U.S. Air Force Photo / Lt. Col. Leslie Pratt | Credit: USAF Photographic Archives http://www.afrc.af.mil/shared/media/photodb/photos/090127-F-7383P-002.JPG",
+      "date": "2008-11-29",
+      "sha256": "adb17dbaafcb364b3f0a54e11b336de000d897fd90124bed791677c830d75d32"
+    },
+    "III_nasa_global_hawk_2015": {
+      "file": "v2/III_nasa_global_hawk_2015.jpg",
+      "kind": "still",
+      "tag": "NASA GLOBAL HAWK, REMOTELY PILOTED · EL NIÑO RESEARCH FLIGHT · 2015 · PD",
+      "source_page": "https://images.nasa.gov/details/ED15-0249-24",
+      "direct_url": "https://images-assets.nasa.gov/image/ED15-0249-24/ED15-0249-24~orig.jpg",
+      "licence": "Public domain (NASA work)",
+      "licence_url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "credit": "NASA/Carla Thomas",
+      "date": "2015 (description: flight in February 2015; file dated 2015-08-13)",
+      "sha256": "1c4418e6a9870f8ccde94290101c18fc2b6df51728decb650fcbc9ea55be8063"
+    },
+    "III_nasa_pleiades_2008": {
+      "file": "v2/III_nasa_pleiades_2008.jpg",
+      "kind": "still",
+      "tag": "PLEIADES SUPERCOMPUTER RACKS · NASA AMES, BUILDING N-258 · 2 DEC 2008 · PD",
+      "source_page": "https://images.nasa.gov/details/ARC-2008-ACD08-0272-005",
+      "direct_url": "https://images-assets.nasa.gov/image/ARC-2008-ACD08-0272-005/ARC-2008-ACD08-0272-005~orig.jpg",
+      "licence": "Public domain (NASA work)",
+      "licence_url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "credit": "NASA Ames / Dominic Hart",
+      "date": "2008-12-02",
+      "sha256": "ef3ee63ad21f03ffcabcb455996e76585b9fb24218615e8b7fea85b9f6872e40"
+    },
+    "III_nasa_pleiades_supercomputer_2015": {
+      "file": "v2/III_nasa_pleiades_supercomputer_2015.jpg",
+      "kind": "still",
+      "tag": "PLEIADES SUPERCOMPUTER · NASA AMES NAS FACILITY · 10 APR 2015 · PD",
+      "source_page": "https://images.nasa.gov/details/ACD15-0062-004",
+      "direct_url": "https://images-assets.nasa.gov/image/ACD15-0062-004/ACD15-0062-004~orig.jpg",
+      "licence": "Public domain (NASA work)",
+      "licence_url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "credit": "NASA Ames / Dominic Hart",
+      "date": "2015-04-10",
+      "sha256": "4fe0d79d340df773086b4558fb234a073a297a5eae595b0315ec9b85b9d85327"
+    },
+    "III_nsa_aerial_2013_paglen": {
+      "file": "v2/III_nsa_aerial_2013_paglen.jpg",
+      "kind": "still",
+      "tag": "NATIONAL SECURITY AGENCY AT NIGHT, AERIAL · TREVOR PAGLEN · 2013 · CC0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:National_Security_Agency,_2013.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/8/8c/National_Security_Agency%2C_2013.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "CC0",
+      "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "credit": "Trevor Paglen | Credit: Own work / Creative Time Reports https://creativetimereports.org/2014/02/10/overhead-new-photos-of-the-nsa-and-other-top-intelligence-agencies-revealed-trevor-paglen/",
+      "date": "2013-11-14",
+      "sha256": "83c56c39255cdfe505c632a235af5c649381c4ba8f0d8283454298711dda515c"
+    },
+    "III_nsa_utah_data_center_2014_eff": {
+      "file": "v2/III_nsa_utah_data_center_2014_eff.jpg",
+      "kind": "still",
+      "tag": "NSA UTAH DATA CENTER, BLUFFDALE · FROM AN EFF AIRSHIP · 27 JUN 2014 · CC0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:EFF_photograph_of_NSA%27s_Utah_Data_Center.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/e/ed/EFF_photograph_of_NSA%27s_Utah_Data_Center.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "CC0",
+      "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "credit": "User:ParkerHiggins (Electronic Frontier Foundation) | Credit: Own work; https://www.eff.org/deeplinks/2014/07/releasing-public-domain-image-nsas-utah-data-center",
+      "date": "2014-06-27",
+      "sha256": "3f5aa7b1b36e96c2c9eb9749630f68160fcaf500dc35d59fc47b9eb3c33b7732"
+    },
+    "III_oppenheimer_1944": {
+      "file": "v2/III_oppenheimer_1944.jpg",
+      "kind": "still",
+      "tag": "J. ROBERT OPPENHEIMER · 1944 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Oppenheimer_(cropped).jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/8/85/Oppenheimer_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "Public domain",
+      "licence_url": null,
+      "credit": "Unknown authorUnknown author | Credit: https://catalog.archives.gov/id/558579",
+      "date": "1944",
+      "sha256": "2a78835b97649c06449095a985487d0b1afa87ad39c57cdd805ccf9b7499f833",
+      "focus": [
+        0.5,
+        0.3
+      ]
+    },
+    "IV_corona_beijing_1967": {
+      "file": "v2/IV_corona_beijing_1967.jpg",
+      "kind": "still",
+      "tag": "CORONA SATELLITE IMAGE OF BEIJING · 20 SEPT 1967 · CIA/NRO/USGS · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Beijing_Subway_in_Construction_-_satellite_image_(1967-09-20).jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Beijing_Subway_in_Construction_-_satellite_image_%281967-09-20%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "Public domain",
+      "licence_url": null,
+      "credit": "CIA/NRO/USGS | Credit: http://earthexplorer.usgs.gov/metadata/1051/DS1101-1069DA103/",
+      "date": "1967-09-20",
+      "sha256": "7219892517ec9fb21dc858fc61ac35738cba3dd79d0d4903d5969edc9821c5b9"
+    },
+    "IV_corona_story_camera_imagery_x2970-3030": {
+      "file": "v2/IV_corona_story_camera_imagery_x2970-3030.mp4",
+      "kind": "video",
+      "tag": "CIA FILM · THE CORONA STORY (1995) · CAMERA AND IMAGERY · NARA · CC0",
+      "source_page": "https://archive.org/details/gov.archives.arc.1678526",
+      "direct_url": "https://archive.org/download/gov.archives.arc.1678526/gov.archives.arc.1678526.mpeg",
+      "licence": "CC0 / public domain (NARA; CIA production)",
+      "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "credit": "National Archives and Records Administration - ARC Identifier 1678526 / Local Identifier 263.3213 - A Point in Time: The Corona Story - Central Intelligence Agency",
+      "date": "film premiered May 1995 (per NARA description); footage within is c.1959-1972, individual shots undated",
+      "sha256": "5701a10b02271e495bf2d89f2a87981aa5cbd13d1f55503ae89b1bb7ff16e177"
+    },
+    "IV_corona_story_recovery_x1640-1700": {
+      "file": "v2/IV_corona_story_recovery_x1640-1700.mp4",
+      "kind": "video",
+      "tag": "CIA FILM · A POINT IN TIME: THE CORONA STORY (1995) · NARA · CC0",
+      "source_page": "https://archive.org/details/gov.archives.arc.1678526",
+      "direct_url": "https://archive.org/download/gov.archives.arc.1678526/gov.archives.arc.1678526.mpeg",
+      "licence": "CC0 / public domain (NARA; CIA production)",
+      "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "credit": "National Archives and Records Administration - ARC Identifier 1678526 / Local Identifier 263.3213 - A Point in Time: The Corona Story - Central Intelligence Agency",
+      "date": "film premiered May 1995 (per NARA description); footage within is c.1959-1972, individual shots undated",
+      "sha256": "9808105553c0c355d2729c6ced9f6d211b318b6856194d6a472c5e730e4d4e16"
+    },
+    "IV_dulles_portrait": {
+      "file": "v2/IV_dulles_portrait.jpg",
+      "kind": "still",
+      "tag": "ALLEN DULLES · US GOVERNMENT PORTRAIT · DATE NOT RECORDED · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Allen_w_dulles.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/6/64/Allen_w_dulles.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "Public domain",
+      "licence_url": null,
+      "credit": "US Government | Credit: Prologue Magazine, spring 2002 (NARA, 306-PS-59-17740)",
+      "date": "undated (metadata gives no date)",
+      "sha256": "db008ed4185e4b56fc887ff111eb6696867042d467827748ac7eb53578056a5a",
+      "focus": [
+        0.5,
+        0.3
+      ]
+    },
+    "IV_iss_night_california_2014": {
+      "file": "v2/IV_iss_night_california_2014.jpg",
+      "kind": "still",
+      "tag": "ISS EXPEDITION 40 · CALIFORNIA CITY LIGHTS AT NIGHT · 10 AUG 2014 · PD",
+      "source_page": "https://images.nasa.gov/details/iss040e091208",
+      "direct_url": "https://images-assets.nasa.gov/image/iss040e091208/iss040e091208~orig.jpg",
+      "licence": "Public domain (NASA work)",
+      "licence_url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "credit": "NASA / Reid Wiseman (Expedition 40 crew, ISS)",
+      "date": "2014-08-10",
+      "sha256": "47ebe1cff6d32be3697c57403d2add2fb1e47ebc024e13b31f864b948263f667"
+    },
+    "IV_landsat9_liftoff_20210927": {
+      "file": "v2/IV_landsat9_liftoff_20210927.jpg",
+      "kind": "still",
+      "tag": "LANDSAT 9 LIFTS OFF · VANDENBERG SFS, CALIFORNIA · 27 SEPT 2021 · PD",
+      "source_page": "https://images.nasa.gov/details/KSC-20210927-PH-KLS03_0018",
+      "direct_url": "https://images-assets.nasa.gov/image/KSC-20210927-PH-KLS03_0018/KSC-20210927-PH-KLS03_0018~orig.JPG",
+      "licence": "Public domain (NASA work)",
+      "licence_url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "credit": "NASA/Kim Shiflett",
+      "date": "2021-09-27",
+      "sha256": "76353c836427e9ceacfd0ecd6c6613d281d3008e77d7c130547cdfcfee0edd73"
+    },
+    "IV_nasa_black_marble_americas_2012": {
+      "file": "v2/IV_nasa_black_marble_americas_2012.jpg",
+      "kind": "still",
+      "tag": "NASA BLACK MARBLE · THE AMERICAS AT NIGHT · SUOMI NPP, 2012 · PD",
+      "source_page": "https://images.nasa.gov/details/GSFC_20171208_Archive_e001587",
+      "direct_url": "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001587/GSFC_20171208_Archive_e001587~orig.jpg",
+      "licence": "Public domain (NASA work; metadata AVAIL:Copyright None)",
+      "licence_url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "credit": "NASA Goddard",
+      "date": "data acquired April and October 2012 (Suomi NPP)",
+      "sha256": "8799d97fb9fd655838fd1b04a90a36504c6302fc1058429c37a79a2b35cbf552"
+    },
+    "IV_starlink_ctio_2019": {
+      "file": "v2/IV_starlink_ctio_2019.jpg",
+      "kind": "still",
+      "tag": "STARLINK TRAILS ACROSS A BLANCO 4-M TELESCOPE EXPOSURE, CTIO · 2019 · NOIRLAB/CTIO/AURA/DELVE · CC BY 4.0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Starlink_Satellites_Imaged_from_CTIO.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Starlink_Satellites_Imaged_from_CTIO.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "CC BY 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by/4.0",
+      "credit": "NSF’s National Optical-Infrared Astronomy Research Laboratory/CTIO/AURA/DELVE | Credit: https://noirlab.edu/public/images/iotw1946a/",
+      "date": "2019-11-20",
+      "sha256": "50cb2b61ac547a9cb7088a1113dc9a10aa8b02daba71452bb880307db4dbecdd"
+    },
+    "IV_starlink_tuebingen_2020_cc0": {
+      "file": "v2/IV_starlink_tuebingen_2020_cc0.jpg",
+      "kind": "still",
+      "tag": "STARLINK SATELLITES OVER TÜBINGEN TOWN HALL · 24 APR 2020 · CC0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Starlink_%C3%BCber_dem_Rathaus_in_T%C3%BCbingen.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Starlink_%C3%BCber_dem_Rathaus_in_T%C3%BCbingen.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "CC0",
+      "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "credit": "Dktue | Credit: Own work",
+      "date": "2020-04-24",
+      "sha256": "4bd5abf36430a90df50f74381b017a1cca1625ff28cb546c2407ed81e927b870"
+    },
+    "V_cuban_missiles_19621101": {
+      "file": "v2/V_cuban_missiles_19621101.jpg",
+      "kind": "still",
+      "tag": "MRBM LAUNCH SITE 2, SAN CRISTOBAL · ANNOTATED RECON PHOTO · 1 NOV 1962 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Cuban_missiles.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/5/57/Cuban_missiles.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "Public domain",
+      "licence_url": null,
+      "credit": "see above | Credit: National Archives.gov",
+      "date": "1962-11-01",
+      "sha256": "e6691e8b8b4537ccc6d061c83289c1f01465028c5b8ae50d7ccb8d03b009bc75"
+    },
+    "V_jfk_portrait_1963": {
+      "file": "v2/V_jfk_portrait_1963.jpg",
+      "kind": "still",
+      "tag": "JOHN F. KENNEDY · OVAL OFFICE · PHOTO CECIL STOUGHTON · 11 JULY 1963 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:John_F._Kennedy,_White_House_color_photo_portrait.jpg",
+      "direct_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c3/John_F._Kennedy%2C_White_House_color_photo_portrait.jpg/1920px-John_F._Kennedy%2C_White_House_color_photo_portrait.jpg",
+      "licence": "Public domain (templates PD-USGov-POTUS, PD-old-auto)",
+      "licence_url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-POTUS",
+      "credit": "Cecil Stoughton (White House); NARA 194255 / JFK Library JFKWHP-ST-C237-1-63",
+      "date": "1963-07-11",
+      "sha256": "6fdd49f3036736121ddb0bbd40fa9d6fee7445aa306aa29a54734429cc2ec0e9",
+      "focus": [
+        0.5,
+        0.3
+      ]
+    },
+    "V_jfk_reading_copy_19621022_p2": {
+      "file": "v2/V_jfk_reading_copy_19621022_p2.jpg",
+      "kind": "still",
+      "tag": "JFK READING COPY, CUBA ADDRESS, P.2, HAND-CORRECTED · 22 OCT 1962 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Reading_copy_of_the_radio_and_television_report_to_the_American_people_on_the_Soviet_arms_build-up_in_Cuba,_22_October_1962_-_DPLA_-_3d844daad0849364a59f749051226267_(page_2).jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Reading_copy_of_the_radio_and_television_report_to_the_American_people_on_the_Soviet_arms_build-up_in_Cuba%2C_22_October_1962_-_DPLA_-_3d844daad0849364a59f749051226267_%28page_2%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "Public domain",
+      "licence_url": null,
+      "credit": "President (1961-1963 : Kennedy). Office of the Personal Secretary. 1961-1963 | Credit: File URL Catalog record",
+      "date": "1962-10-22",
+      "sha256": "35b5c0bdc182c54b9572f160e1a04e014df2b649bdb09a3ce937bebb2b00e2e7",
+      "focus": [
+        0.5,
+        0.3
+      ]
+    },
+    "V_powell_official_2001": {
+      "file": "v2/V_powell_official_2001.jpg",
+      "kind": "still",
+      "tag": "COLIN POWELL · OFFICIAL SECRETARY OF STATE PORTRAIT · JAN 2001 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Colin_Powell_official_Secretary_of_State_photo.jpg",
+      "direct_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/22/Colin_Powell_official_Secretary_of_State_photo.jpg/1920px-Colin_Powell_official_Secretary_of_State_photo.jpg",
+      "licence": "Public domain (template PD-USGov-DOS)",
+      "licence_url": "https://commons.wikimedia.org/wiki/Template:PD-USGov-DOS",
+      "credit": "Department of State of the United States of America",
+      "date": "2001-01",
+      "sha256": "b52d389f2346c21998c47c062bbcd7e448243f2341e38dcc77a9ffa532f83633",
+      "focus": [
+        0.5,
+        0.28
+      ]
+    },
+    "V_powell_slide_mobile": {
+      "file": "v2/V_powell_slide_mobile.jpg",
+      "kind": "still",
+      "tag": "POWELL UN SLIDE: ALLEGED MOBILE BIO-WEAPONS FACILITIES · 5 FEB 2003 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Powell_UN_Iraq_presentation,_alleged_Mobile_Production_Facilities.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Powell_UN_Iraq_presentation%2C_alleged_Mobile_Production_Facilities.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "Public domain",
+      "licence_url": null,
+      "credit": "The original uploader was Rwendland at English Wikipedia. | Credit: Transferred from en.wikipedia to Commons. Original source: http://www.state.gov/cms_images/Slide21_600.jpg Context: https://2001-2009.state.gov/secretary/former/powell/remarks/2003/17300.htm (Powell UN presentation) https://2001-2009.state.gov/documents/organization/17434.pdf (Powell supporting PowerPoint presentation)",
+      "date": "2003-02-05 (presentation date; file is the State Dept slide)",
+      "sha256": "3d1733fca64903952a628081c9a37b32f19eb95544a925420a7c0166314bf0e8"
+    },
+    "V_powell_slide_tube": {
+      "file": "v2/V_powell_slide_tube.jpg",
+      "kind": "still",
+      "tag": "POWELL UN SLIDE: ALLEGED ALUMINIUM TUBE FOR ENRICHMENT · 5 FEB 2003 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Powell_UN_Iraq_presentation,_alleged_Aluminum_Tube_for_Uranium_Enrichment.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Powell_UN_Iraq_presentation%2C_alleged_Aluminum_Tube_for_Uranium_Enrichment.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "Public domain",
+      "licence_url": null,
+      "credit": "U.S. Department of State | Credit: https://2001-2009.state.gov/secretary/former/powell/photos/2003/17339.htm archived at: https://web.archive.org/web/20061227221853/http://www.state.gov/secretary/former/powell/photos/2003/17339.htm Context: https://2001-2009.state.gov/secretary/former/powell/remarks/2003/17300.htm (Powell UN presentation) https://2001-2009.state.gov/documents/organization/17434.pdf (Powell UN supporting PowerPoint presentation)",
+      "date": "2003-02-05 (presentation date per metadata)",
+      "sha256": "ae47ed0792970c8611a13685efa0c1088a6398f587d089bb9ab427fd449e64d7"
+    },
+    "V_stevenson_un_1962": {
+      "file": "v2/V_stevenson_un_1962.jpg",
+      "kind": "still",
+      "tag": "ADLAI STEVENSON SHOWS AERIAL PHOTOS TO THE UN SECURITY COUNCIL, 1962 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Adlai_Stevenson_shows_missiles_to_UN_Security_Council_with_David_Parker_standing.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Adlai_Stevenson_shows_missiles_to_UN_Security_Council_with_David_Parker_standing.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "Public domain",
+      "licence_url": null,
+      "credit": "US Government, Unknown photographer | Credit: LE283L5A.jpg; original Wikipedia uploader was Signaleer at en.wikipedia; transferred from en.wikipedia to Commons by User:Nobunaga24 using CommonsHelper.",
+      "date": "1962-10-25",
+      "sha256": "409c9423591ed3fa8e28f151fdb4c57cf75346f15ad3d6aa9cbe736f848d0f1a"
+    },
+    "VI_airship_protest_utah_2014": {
+      "file": "v2/VI_airship_protest_utah_2014.jpg",
+      "kind": "still",
+      "tag": "PROTEST AIRSHIP OVER THE NSA UTAH DATA CENTER · 27 JUN 2014 · GREENPEACE · CC BY 3.0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Airship_flying_over_the_Utah_Data_Center_03.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Airship_flying_over_the_Utah_Data_Center_03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "CC BY 3.0",
+      "licence_url": "https://creativecommons.org/licenses/by/3.0",
+      "credit": "Greenpeace | Credit: https://www.eff.org/press/releases/diverse-groups-fly-airship-over-nsas-utah-data-center-protest-illegal-internet-spying",
+      "date": "2014-06-27",
+      "sha256": "35c25ccc4ed7d00f2b88999e3afd111af573757e2e896a1abe52e3e18851727f"
+    },
+    "VI_london_iraq_protest_20030927_cc0": {
+      "file": "v2/VI_london_iraq_protest_20030927_cc0.jpg",
+      "kind": "still",
+      "tag": "PROTEST AGAINST THE IRAQ WAR, LONDON · 27 SEPT 2003 · CC0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:20030927_London_protests_against_the_Iraq_War_002.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/d/dc/20030927_London_protests_against_the_Iraq_War_002.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "CC0",
+      "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "credit": "Jeff5102 | Credit: Own work",
+      "date": "2003-09-27",
+      "sha256": "189e331935dfea9c242f312a8eb421a747334e603e88425a90c68e1b9d5180f2"
+    },
+    "VI_march_on_washington_1963_crowd_x70-130": {
+      "file": "v2/VI_march_on_washington_1963_crowd_x70-130.mp4",
+      "kind": "video",
+      "tag": "USIA FILM · THE MARCH ON WASHINGTON · AUG 1963 · NARA · PD",
+      "source_page": "https://archive.org/details/306-3394_HD_2Mbps",
+      "direct_url": "https://archive.org/download/306-3394_HD_2Mbps/306-3394_HD_2Mbps.mp4",
+      "licence": "Public domain (US federal work, USIA; NARA)",
+      "licence_url": "http://creativecommons.org/licenses/publicdomain/",
+      "credit": "National Archives and Records Administration; U.S. Information Agency. ARC Identifier 49737 / Local Identifier 306.3394",
+      "date": "August 1963 (per NARA description)",
+      "sha256": "f6f6110711b90d8304c0c96735c6805e1b27fe846049a5264057c8737f9f4620"
+    },
+    "VI_march_on_washington_1963_mlk_x1100-1150": {
+      "file": "v2/VI_march_on_washington_1963_mlk_x1100-1150.mp4",
+      "kind": "video",
+      "tag": "MARTIN LUTHER KING JR. · MARCH ON WASHINGTON · AUG 1963 · USIA/NARA · PD",
+      "source_page": "https://archive.org/details/306-3394_HD_2Mbps",
+      "direct_url": "https://archive.org/download/306-3394_HD_2Mbps/306-3394_HD_2Mbps.mp4",
+      "licence": "Public domain (US federal work, USIA; NARA)",
+      "licence_url": "http://creativecommons.org/licenses/publicdomain/",
+      "credit": "National Archives and Records Administration; U.S. Information Agency. ARC Identifier 49737 / Local Identifier 306.3394",
+      "date": "August 1963 (per NARA description)",
+      "sha256": "05db237f8db1e2c84395b4f927ea1c7447c9e8b8af2441330099c6c3919aec27"
+    },
+    "VI_march_on_washington_aerial_1963": {
+      "file": "v2/VI_march_on_washington_aerial_1963.jpg",
+      "kind": "still",
+      "tag": "MARCH ON WASHINGTON, AERIAL VIEW OF CROWD AND STAGE · 28 AUG 1963 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Aerial_view_crowd_stage_march_on_washington_37248u.tif",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/8/81/Aerial_view_crowd_stage_march_on_washington_37248u.tif?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "Public domain",
+      "licence_url": null,
+      "credit": "Trikosko, Marion S., photographer | Credit: This image is available from the United States Library of Congress's Prints and Photographs division under the digital ID ppmsca.37229.This tag does not indicate the copyright status of the attached work. A normal copyright tag is still required. See Commons:Licensing.",
+      "date": "1963-08-28",
+      "sha256": "c14805cb12256c196b5a82c65b0fa6757fe3e16dfae4378e6ef470ce454d270d"
+    },
+    "VI_minneapolis_20200526_fibonacciblue": {
+      "file": "v2/VI_minneapolis_20200526_fibonacciblue.jpg",
+      "kind": "still",
+      "tag": "PROTEST AGAINST POLICE VIOLENCE, MINNEAPOLIS · 26 MAY 2020 · FIBONACCI BLUE · CC BY 2.0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Protest_against_police_violence_-_Justice_for_George_Floyd,_May_26,_2020_26.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Protest_against_police_violence_-_Justice_for_George_Floyd%2C_May_26%2C_2020_26.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "CC BY 2.0",
+      "licence_url": "https://creativecommons.org/licenses/by/2.0",
+      "credit": "Fibonacci Blue | Credit: https://www.flickr.com/photos/fibonacciblue/49940525757/",
+      "date": "2020-05-26",
+      "sha256": "2a23bb8eedf90bc7fd9956d73d3ece235fbc57f7db8c3c68dfdf604129461af9"
+    },
+    "VI_occupy_wsq_20111008_x12-72": {
+      "file": "v2/VI_occupy_wsq_20111008_x12-72.mp4",
+      "kind": "video",
+      "tag": "OCCUPY WALL STREET MARCH TO WASHINGTON SQUARE, NYC · 8 OCT 2011 · OCCUPYTVNY (YOUTUBE PYO_NVXPQXG, MIRRORED IN ARCHIVE.ORG OWS-YOUTUBE COLLECTION) · CC BY 3.0",
+      "source_page": "https://archive.org/details/youtube-ows-OccupyWallStreetDailyThousandsmarchandas-pyo_nvxpqXg",
+      "direct_url": "https://archive.org/download/youtube-ows-OccupyWallStreetDailyThousandsmarchandas-pyo_nvxpqXg/Occupy_Wall_Street_Daily_Thousands_march_and_assemble_in_Wasington_Square.mp4",
+      "licence": "CC BY 3.0",
+      "licence_url": "http://creativecommons.org/licenses/by/3.0/",
+      "credit": "OccupyTVNY (YouTube pyo_nvxpqXg, mirrored in archive.org ows-youtube collection)",
+      "date": "2011-10-08 (event, per description: Day 2 ... October 8th); uploaded 2011-10-11",
+      "sha256": "f05187c929cec8a65e2a94bdb1420aaabde3206a2269787b513b8fabfe633397"
+    },
+    "VI_occupy_zuccotti_20110917_shankbone": {
+      "file": "v2/VI_occupy_zuccotti_20110917_shankbone.jpg",
+      "kind": "still",
+      "tag": "OCCUPY WALL STREET, ZUCCOTTI PARK · D. SHANKBONE · 17 SEPT 2011 · DAVID SHANKBONE · CC BY 3.0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Occupy_Wall_Street_Crowd_Size_2011_Shankbone.JPG",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/4/49/Occupy_Wall_Street_Crowd_Size_2011_Shankbone.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "CC BY 3.0",
+      "licence_url": "https://creativecommons.org/licenses/by/3.0",
+      "credit": "David Shankbone | Credit: Own work",
+      "date": "2011-09-17",
+      "sha256": "9641a21582137b3bd11a4f17fd33544f7bacde6e9f086cfc2676dee916f22c8c"
+    },
+    "VI_womens_march_dc_20170121_voa": {
+      "file": "v2/VI_womens_march_dc_20170121_voa.jpg",
+      "kind": "still",
+      "tag": "WOMEN'S MARCH ON WASHINGTON FROM THE VOA ROOF · 21 JAN 2017 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Women%27s_March_2017-01_(12).jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Women%27s_March_2017-01_%2812%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "Public domain",
+      "licence_url": null,
+      "credit": "VOA | Credit: Марш женщин - в Вашингтоне и за его пределами",
+      "date": "2017-01-21",
+      "sha256": "b027c535132818f1bf5a7ab23fd32e1b3e68f4675aad765875d2a1eadbb3156c"
+    },
+    "VII_carter_church_1977": {
+      "file": "v2/VII_carter_church_1977.jpg",
+      "kind": "still",
+      "tag": "PRESIDENT CARTER WITH SEN. FRANK CHURCH · 12 AUG 1977 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Jimmy_Carter_with_Senator_Frank_Church_-_NARA_-_175897.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/9/94/Jimmy_Carter_with_Senator_Frank_Church_-_NARA_-_175897.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "Public domain",
+      "licence_url": null,
+      "credit": "Unknown authorUnknown author or not provided | Credit: U.S. National Archives and Records Administration",
+      "date": "1977-08-12",
+      "sha256": "81ee0c751c5b4d6b596b326a3420e7109bbea6e87730ad6ef4e87691f8b20e18"
+    },
+    "VII_church_1961_portrait": {
+      "file": "v2/VII_church_1961_portrait.png",
+      "kind": "still",
+      "tag": "SEN. FRANK CHURCH · CONGRESSIONAL PORTRAIT · 1961 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Frank_Church_1961_Congressional_Portrait.png",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Frank_Church_1961_Congressional_Portrait.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "Public domain",
+      "licence_url": null,
+      "credit": "The United States of America | Credit: https://babel.hathitrust.org/cgi/pt?id=msu.31293012373852&seq=1",
+      "date": "1961",
+      "sha256": "84409f0a6e4ac9b705e353ce80a2b6cc17be3e2233ce9f90aae84e1bba4b41d9",
+      "focus": [
+        0.5,
+        0.3
+      ]
+    },
+    "VII_hpsci_hearing_wide_20060526_x0-13": {
+      "file": "v2/VII_hpsci_hearing_wide_20060526_x0-13.mp4",
+      "kind": "video",
+      "tag": "HOUSE INTELLIGENCE COMMITTEE HEARING, RAYBURN 2118 · 26 MAY 2006 · CC0",
+      "source_page": "https://archive.org/details/gov.house.hbs.hrs06INT_2118_060526",
+      "direct_url": "https://archive.org/download/gov.house.hbs.hrs06INT_2118_060526/hrs06INT_2118_060526.mpeg",
+      "licence": "CC0 (US House of Representatives video)",
+      "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "credit": "Permanent Select Committee on Intelligence - mars-6:hrs06INT_2118_060526 - Rayburn 2118 - Media Role in Intelligence Leaks. Video provided by U.S. House of Representatives.",
+      "date": "2006-05-26",
+      "sha256": "af916edb09864955cc712bb2acac7f47457d476f159a5c7cf290fc60ecf7c595"
+    },
+    "VII_nixon_army_one_1974": {
+      "file": "v2/VII_nixon_army_one_1974.png",
+      "kind": "still",
+      "tag": "NIXON BOARDS ARMY ONE AFTER RESIGNING · PHOTO O. ATKINS · 9 AUG 1974 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Richard_Nixon_boards_Army_One_in_1974.png",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/a/ae/Richard_Nixon_boards_Army_One_in_1974.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "Public domain",
+      "licence_url": null,
+      "credit": "Ollie Atkins | Credit: http://sca.gmu.edu/exhibit/atkins_1.htm#nixon",
+      "date": "1974-08-09",
+      "sha256": "25443ecd5c7a5d216d95b553184e9796ad345bfc1fef65fe13148f082a194c59",
+      "focus": [
+        0.5,
+        0.35
+      ]
+    },
+    "VII_nixon_resignation_letter_1974": {
+      "file": "v2/VII_nixon_resignation_letter_1974.jpg",
+      "kind": "still",
+      "tag": "NIXON RESIGNATION LETTER TO SECRETARY KISSINGER · 9 AUG 1974 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Letter_of_Resignation_of_Richard_M._Nixon,_1974.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Letter_of_Resignation_of_Richard_M._Nixon%2C_1974.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "Public domain",
+      "licence_url": null,
+      "credit": "Former U.S. President Richard M. Nixon, officially a work of the U.S. government | Credit: U.S. National Archives: https://www.archives.gov/historical-docs/todays-doc/index.html?dod-date=809",
+      "date": "1974-08-09",
+      "sha256": "d3f6e46e9ffaf2228ddfc006d0cbb827e6c81f76dd908abbc62872c4db64852c",
+      "focus": [
+        0.5,
+        0.25
+      ]
+    },
+    "VII_nixon_transcripts_address_1974_x163-223": {
+      "file": "v2/VII_nixon_transcripts_address_1974_x163-223.mp4",
+      "kind": "video",
+      "tag": "NIXON ON WATERGATE · TRANSCRIPT BINDERS DATED 30 APR 1974 · NARA · PD",
+      "source_page": "https://archive.org/details/gov.archives.arc.48156",
+      "direct_url": "https://archive.org/download/gov.archives.arc.48156/gov.archives.arc.48156.mpeg",
+      "licence": "Public domain",
+      "licence_url": "http://creativecommons.org/licenses/publicdomain/",
+      "credit": "National Archives and Records Administration; U.S. Information Agency. ARC Identifier 48156 / Local Identifier 306.1572",
+      "date": "April 1974 (binders on screen dated April 30, 1974; NARA record undated)",
+      "sha256": "5da28e72a9f1a575f8acda38caf08acdf44d3cd6462a0f1f80e6a0ef05377357"
+    },
+    "VII_reagan_tower_report_1987": {
+      "file": "v2/VII_reagan_tower_report_1987.jpg",
+      "kind": "still",
+      "tag": "REAGAN RECEIVES THE TOWER COMMISSION REPORT · 26 FEB 1987 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:President_Ronald_Reagan_Receives_The_Tower_Commission_Report_in_The_Cabinet_Room_with_John_Tower_and_Edmund_Muskie_-_DPLA_-_626fd7fb1f0270f016bf4298893ee4dd.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/3/35/President_Ronald_Reagan_Receives_The_Tower_Commission_Report_in_The_Cabinet_Room_with_John_Tower_and_Edmund_Muskie_-_DPLA_-_626fd7fb1f0270f016bf4298893ee4dd.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "Public domain",
+      "licence_url": null,
+      "credit": "President (1981-1989 : Reagan). White House Photographic Office. 1981-1989 | Credit: File URL Catalog record",
+      "date": "1987-02-26",
+      "sha256": "8222041e1febcf003ee837162b73e9d984f967e7002ca731cc0d600a64c86b07"
+    },
+    "VII_ssci_gavel_20120130": {
+      "file": "v2/VII_ssci_gavel_20120130.jpg",
+      "kind": "still",
+      "tag": "CHAIR'S GAVEL AND NAMEPLATE, SENATE INTELLIGENCE HEARING · 30 JAN 2012 · MEDILL DC · CC BY 2.0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Senate_Intelligence_Hearing_on_Worldwide_Threats_(6797221797).jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Senate_Intelligence_Hearing_on_Worldwide_Threats_%286797221797%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "CC BY 2.0",
+      "licence_url": "https://creativecommons.org/licenses/by/2.0",
+      "credit": "Medill DC | Credit: IMG_0211",
+      "date": "2012-01-30",
+      "sha256": "fe83bd8554aec04ecb4d3c43a3f769193b4672cb8a8696829f5b369783c91c71"
+    },
+    "VII_watergate_committee_1973": {
+      "file": "v2/VII_watergate_committee_1973.jpg",
+      "kind": "still",
+      "tag": "SENATE WATERGATE COMMITTEE HEARINGS · THOMPSON, BAKER, ERVIN · 1973 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:ThompsonFred_BakerHoward.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/ThompsonFred_BakerHoward.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "licence": "Public domain",
+      "licence_url": null,
+      "credit": "U.S. Senate Historical Office | Credit: https://www.senate.gov/artandhistory/history/resources/graphic/xlarge/ThompsonFred_BakerHoward.jpg",
+      "date": "1973",
+      "sha256": "9bb0bf398b51a1f8e2861262af6652f8142829f59a6a04cc4372dc7bbbfb5ed9"
+    },
+    "erc_YlMeyAAWhwE": {
+      "file": "erc/YlMeyAAWhwE.jpg",
+      "kind": "still",
+      "tag": "ERC-1155 · TENSOR · 2024 · THE AUTHOR'S OWN FILM",
+      "source_page": "https://www.youtube.com/watch?v=YlMeyAAWhwE",
+      "licence": "the author's own work, used at his direction",
+      "sha256": "653092d5a8bfc4616cedeed34a0a2e1391c279ae03f8c412b370cd47dcb61401"
+    },
+    "erc_E9IuNSX3FAE": {
+      "file": "erc/E9IuNSX3FAE.jpg",
+      "kind": "still",
+      "tag": "ERC-1155 · FROGWIZARD · 2023 · THE AUTHOR'S OWN FILM",
+      "source_page": "https://www.youtube.com/watch?v=E9IuNSX3FAE",
+      "licence": "the author's own work, used at his direction",
+      "sha256": "29478de310bec88323fd05e51ea885e7e69687d24344fdaa557932ca19e53830"
+    },
+    "erc_vCeDEZtRY9s": {
+      "file": "erc/vCeDEZtRY9s.jpg",
+      "kind": "still",
+      "tag": "ERC-1155 · T A R L AN · 2023 · THE AUTHOR'S OWN FILM",
+      "source_page": "https://www.youtube.com/watch?v=vCeDEZtRY9s",
+      "licence": "the author's own work, used at his direction",
+      "sha256": "a8fc3de09fc8fc3989bff41f19882e674f8dba70ae2e699c01f923c836b7422b"
+    },
+    "erc_OiYL9z3bXEI": {
+      "file": "erc/OiYL9z3bXEI.jpg",
+      "kind": "still",
+      "tag": "ERC-1155 · WATER BUFFALO · 2023 · THE AUTHOR'S OWN FILM",
+      "source_page": "https://www.youtube.com/watch?v=OiYL9z3bXEI",
+      "licence": "the author's own work, used at his direction",
+      "sha256": "3c6abe0e5813d29f8ff9e85155ec7220b7b5e743c5d8e79c5a57949b32d8078e"
+    },
+    "erc_fs_0-rRKsy4": {
+      "file": "erc/fs_0-rRKsy4.jpg",
+      "kind": "still",
+      "tag": "ERC-1155 · MAP · 2023 · THE AUTHOR'S OWN FILM",
+      "source_page": "https://www.youtube.com/watch?v=fs_0-rRKsy4",
+      "licence": "the author's own work, used at his direction",
+      "sha256": "4a153caaaa8a30e6427b2692876629525f5fcf51929dabf24c265572b99db9c1"
+    },
+    "erc_8VbssmVYakg": {
+      "file": "erc/8VbssmVYakg.jpg",
+      "kind": "still",
+      "tag": "ERC-1155 · STREAM · 2023 · THE AUTHOR'S OWN FILM",
+      "source_page": "https://www.youtube.com/watch?v=8VbssmVYakg",
+      "licence": "the author's own work, used at his direction",
+      "sha256": "690c08e5a0824b4e6371aca7fbc5fcb04a9b366cacdc05d7de583d78451ac8e6"
+    },
+    "erc_AmTnNRJtrqE": {
+      "file": "erc/AmTnNRJtrqE.jpg",
+      "kind": "still",
+      "tag": "ERC-1155 · THESQUID · 2024 · THE AUTHOR'S OWN FILM",
+      "source_page": "https://www.youtube.com/watch?v=AmTnNRJtrqE",
+      "licence": "the author's own work, used at his direction",
+      "sha256": "5e2e91eea93e702df503999909b1f0651dbea514f788ff56a26c72722ce557f1"
+    },
+    "erc_VP2iLdUcI1c": {
+      "file": "erc/VP2iLdUcI1c.jpg",
+      "kind": "still",
+      "tag": "ERC-1155 · CHAPTER 18 SILENT TALK · 2023 · THE AUTHOR'S OWN FILM",
+      "source_page": "https://www.youtube.com/watch?v=VP2iLdUcI1c",
+      "licence": "the author's own work, used at his direction",
+      "sha256": "9ba1dcd78b1b8ed7857d3d245c9a02fe0667a95aa4a3efd6498683e904057f59"
+    }
+  }
+}

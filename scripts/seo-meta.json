@@ -35,16 +35,17 @@
     {
       "file": "intro.html",
       "title": "b0b.dev - the intro film",
-      "metaDescription": "A three-minute film in eight parts from public-domain archive footage - Nuremberg, HUAC, Ivy Mike, Explorer 1, Cuba, 1967, Iran-Contra - with every shot's source on screen.",
-      "ogDescription": "Nuremberg to Iran-Contra in three minutes, cut from public-domain newsreel and government film and narrated. Every shot's source is printed on screen while it plays.",
+      "metaDescription": "A short film in eight parts cutting archive footage against the present: Nuremberg to 9/11, the U-2 photos to Powell's slides. Every panel's source on screen.",
+      "ogDescription": "Then and now, cut together: newsreels from 1945 to 1987 against the cameras, data centres and hearings of today. Narrated; every panel's source is printed on screen.",
       "jsonldType": "VideoObject",
       "headline": "b0b.dev - the intro film: the record, the instrument, the capability, the overhead, the annotation, the public, the inquiry, the ledger",
       "ogImage": "/img/intro-card.jpg",
       "contentPath": "/intro-reel.mp4",
-      "duration": "PT3M20S",
+      "duration": "PT2M25S",
       "topics": [
         "archive film",
         "public domain newsreel",
+        "collage",
         "OSINT method",
         "provenance"
       ]

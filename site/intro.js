@@ -109,7 +109,7 @@
         '<button type="button" data-net="copy">Copy link</button>' +
         '<button type="button" data-net="native" hidden>Share&hellip;</button>' +
       '</div>' +
-      '<div class="bi-credit">Footage: Universal Newsreel via NARA (public domain); US DOE film 0800012 and NARA ARC 11161 (CC0). Sources listed in the page’s shot list.</div>' +
+      '<div class="bi-credit">Archive footage: Universal Newsreel, NARA, US DOE, CIA/NRO via NARA (public domain, CC0). Contemporary: NASA, US Government, Wikimedia Commons contributors (public domain, CC0, CC BY - credited on screen). ERC-1155 frames: the author&rsquo;s own films. Full list at <a href="/intro">b0b.dev/intro</a>.</div>' +
     '</div>' +
     '<div class="bi-ctl">' +
       '<button type="button" class="bi-mute" aria-pressed="false">SOUND ON</button>' +

@@ -123,10 +123,10 @@ class Painter:
     def __init__(self, W, H):
         self.W, self.H = W, H
         self.f_tag = font('ibm-plex-mono-latin-500-normal.woff2', max(11, H // 52))
-        self.f_year = font('ibm-plex-mono-latin-600-normal.woff2', H // 9)
+        self.f_year = font('ibm-plex-mono-latin-600-normal.woff2', H // 12)
         self.f_roman = font('ibm-plex-mono-latin-600-normal.woff2', H // 4)
-        self.f_title = font('ibm-plex-mono-latin-500-normal.woff2', H // 20)
-        self.f_small = font('ibm-plex-mono-latin-400-normal.woff2', H // 36)
+        self.f_title = font('ibm-plex-mono-latin-500-normal.woff2', H // 13)
+        self.f_small = font('ibm-plex-mono-latin-500-normal.woff2', H // 22)
         self.f_word = font('ibm-plex-serif-latin-600-normal.woff2', H // 7)
 
     def tag(self, img, x, y, text, anchor='ls'):
@@ -152,7 +152,11 @@ class Painter:
 
     def year(self, img, x, y, text, color=AMBER, anchor='lt'):
         d = ImageDraw.Draw(img)
-        d.text((x + 2, y + 2), text, font=self.f_year, fill=(0, 0, 0), anchor=anchor)
+        bb = d.textbbox((x, y), text, font=self.f_year, anchor=anchor)
+        ov = Image.new('RGBA', img.size, (0, 0, 0, 0))
+        ImageDraw.Draw(ov).rectangle((bb[0] - 10, bb[1] - 8, bb[2] + 10, bb[3] + 8), fill=(5, 5, 5, 185))
+        img.paste(Image.alpha_composite(img.convert('RGBA'), ov).convert('RGB'))
+        d = ImageDraw.Draw(img)
         d.text((x, y), text, font=self.f_year, fill=color, anchor=anchor)
 
 
@@ -203,6 +207,7 @@ class Film:
         self.media = {k: Media(k, v, media_dir) for k, v in spec['media'].items()}
         self.P = Painter(self.W, self.H)
         self.rng = random.Random(1945)
+        self._strips = {}
         # flatten parts into a timeline
         self.timeline = []
         t = 0.0
@@ -340,29 +345,72 @@ class Film:
         if not ys:
             return out
         if sh['type'] == 'split':
-            out.append((ys[0], (22, 18, 'lt')))
+            out.append((ys[0], (30, 28, 'lt')))
             if len(ys) > 1 and p > 0.18:
-                out.append((ys[1], (W // 2 + 22, 18, 'lt')))
+                out.append((ys[1], (W // 2 + 30, 28, 'lt')))
         else:
-            out.append((ys[0], (22, 18, 'lt')))
+            out.append((ys[0], (30, 28, 'lt')))
         return out
+
+    def strip(self, part):
+        """Thumbnails of the part's own footage, for the filmstrip on its card."""
+        key = part['id']
+        if key in self._strips:
+            return self._strips[key]
+        tw, th = self.W // 7, self.H // 7
+        thumbs = []
+        for sh in part['shots']:
+            for k in sh.get('media', [])[:1]:
+                med = self.media[k]
+                if med.kind == 'video':
+                    t0 = sh['t'][0] if isinstance(sh.get('t'), list) and sh['t'][0] is not None else med.m.get('in', 0)
+                    fr = video_frames(med, t0 + sh['dur'] / 2, 0.05, tw, th, self.fps)[0]
+                    im = Image.fromarray(fr)
+                else:
+                    src = med.image()
+                    im = src.resize((tw, th), Image.BILINEAR, box=cover_box(src.width, src.height, tw, th))
+                thumbs.append(im.convert('L').convert('RGB'))
+        self._strips[key] = thumbs
+        return thumbs
 
     def card(self, part, p, dur):
         W, H = self.W, self.H
         img = Image.new('RGB', (W, H), INK)
-        d = ImageDraw.Draw(img)
         P = self.P
-        # a scan bar sweeps once; the numeral lands, the title types, the years tick
+        # the part's footage runs past underneath, dimmed, as a filmstrip
+        thumbs = self.strip(part)
+        if thumbs:
+            tw, th = thumbs[0].size
+            gap = 8
+            y = int(H * 0.68)
+            x0 = int(W * 0.05 - p * (tw + gap) * 2.2)
+            k = 0
+            x = x0
+            while x < W:
+                im = thumbs[k % len(thumbs)]
+                img.paste(Image.eval(im, lambda v: int(v * 0.42)), (x, y))
+                x += tw + gap
+                k += 1
+            d = ImageDraw.Draw(img)
+            for xx in range(0, W, 18):
+                d.rectangle((xx, y - 14, xx + 8, y - 8), fill=(26, 26, 26))
+                d.rectangle((xx, y + th + 8, xx + 8, y + th + 14), fill=(26, 26, 26))
+        d = ImageDraw.Draw(img)
+        # a scan bar sweeps once; the numeral lands, the rule draws, the title types, the years tick
         sweep = ease(min(1, p * 1.6))
         d.rectangle((0, int(H * sweep) - 2, W, int(H * sweep)), fill=(0, 60, 76))
         land = ease(min(1, p * 4))
-        rx = int(W * 0.08)
-        ry = int(H * 0.30 + (1 - land) * 30)
+        rx = int(W * 0.07)
+        ry = int(H * 0.44 + (1 - land) * 30)
         col = tuple(int(c * land) for c in AMBER)
         d.text((rx, ry), part['id'], font=P.f_roman, fill=col, anchor='ls')
+        rb = d.textbbox((rx, ry), part['id'], font=P.f_roman, anchor='ls')
+        tx = rb[2] + int(W * 0.03)
+        rule = ease(min(1, max(0, p - 0.05) * 3))
+        d.rectangle((tx, ry - int(H * 0.115), tx + int(W * 0.5 * rule), ry - int(H * 0.115) + 2), fill=AMBER)
         title = part['title'].upper()
         n = int(len(title) * ease(min(1, max(0, p - 0.12) * 3)))
-        d.text((rx + 4, ry + int(H * 0.06)), title[:n], font=P.f_title, fill=(255, 255, 255), anchor='lt')
+        d.text((tx, ry - int(H * 0.10)), title[:n], font=P.f_title, fill=(255, 255, 255), anchor='lt')
         y0, y1 = part['years']
         tick = ease(min(1, max(0, p - 0.3) * 2.2))
         try:
@@ -370,9 +418,14 @@ class Film:
             yr = str(int(round(a + (b - a) * tick)))
         except ValueError:
             yr = y1 if tick > 0.5 else y0
-        d.text((rx + 4, ry + int(H * 0.16)), '%s  →  ' % y0, font=P.f_small, fill=(150, 160, 162), anchor='lt')
-        bb = d.textbbox((rx + 4, ry + int(H * 0.16)), '%s  →  ' % y0, font=P.f_small, anchor='lt')
-        d.text((bb[2], ry + int(H * 0.16)), yr, font=P.f_small, fill=CYAN, anchor='lt')
+        yy = ry + int(H * 0.035)
+        d.text((tx, yy), y0, font=P.f_small, fill=(150, 160, 162), anchor='ls')
+        bb = d.textbbox((tx, yy), y0, font=P.f_small, anchor='ls')
+        # an arrow, drawn: the face has no arrow glyph
+        ax0, ax1, ay = bb[2] + 18, bb[2] + 64, (bb[1] + bb[3]) // 2
+        d.line((ax0, ay, ax1, ay), fill=(150, 160, 162), width=2)
+        d.polygon([(ax1, ay), (ax1 - 9, ay - 6), (ax1 - 9, ay + 6)], fill=(150, 160, 162))
+        d.text((ax1 + 18, yy), yr, font=P.f_small, fill=CYAN, anchor='ls')
         # registration corners
         L = 18
         for (x, y, sx, sy) in ((14, 14, 1, 1), (W - 14, 14, -1, 1), (14, H - 14, 1, -1), (W - 14, H - 14, -1, -1)):
@@ -469,7 +522,7 @@ def main():
     ap.add_argument('--out')
     args = ap.parse_args()
     spec = json.load(open(SPEC, encoding='utf-8'))
-    media_dir = os.path.expanduser(spec['media_dir'])
+    media_dir = os.path.expanduser(os.environ.get('B0B_MEDIA_DIR', spec['media_dir']))
     film = Film(spec, media_dir)
     for m in film.media.values():
         m.check()

@@ -181,6 +181,39 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**THE INTRO IS NOW A COLLAGE CUT, THEN AGAINST NOW — 23 Sept 2026, live. Supersedes the 22 Sept three-minute
+cut below (its sync/voice/card/share machinery is unchanged and still described there).** Author: *"make the intro a
+slide show video / photo collage - make the editing faster paced with more contemporary footage and faces mixed in
+with old footage. do motion graphics stylings if needed"*, then *"you can use my videos on youtube.com/@erc-1155 as
+well as source files if needed … in conjunction with your finds"*. **`scripts/build-intro-collage.py` composes every
+frame itself** (numpy + Pillow → ffv1 master → H.264 + VP9): split screens (then | now, amber seam, year plates), face
+grids, pushes/pans/slams on stills, glitch cuts, part cards (numeral, drawn rule, typed title, year ticker old → new,
+a filmstrip of the part's own footage), and **the source tag burned into every panel** — so in collage mode intro.js
+adds `bi-collage` and the HTML source line and chapter card stand down during the film (they return for the map).
+Spec: **`scripts/intro-collage.json`, generated** (the generator lives in the session scratchpad; edit the JSON by
+hand now). 16:9 1280×720, 81 shots, **121 s of film + the map = 2:25**, 12.1 MB MP4 / 13.6 MB WebM, render ~7 min.
+`--sheet` makes a one-frame-per-shot contact sheet; `--still T` one frame; `--js-only` rewrites intro-reel.js.
+**Media (73):** the seven v1 archive masters, 50 of 61 items from a licence-checked sourcing pass (PD, CC0, CC BY only;
+licence read from the source's own metadata; **every CC BY tag carries the author credit on screen**), and 8 frames
+from the author's ERC-1155 films, tagged *"THE AUTHOR'S OWN FILM"*. Masters live in `/home/user/.b0b-intro-sources/`
+(`v2/`, `erc/`) with sha256 in the spec; `B0B_MEDIA_DIR` overrides. **Living-person floor applied to picture
+selection — in a montage, juxtaposition is implication:** faces are the dead in documented public acts (Jackson,
+Hoover, McCarthy, Cohn, Oppenheimer, Eisenhower, Dulles, JFK, Stevenson, Powell, Feinstein, Swartz, Nixon, Church,
+Carter, Reagan, MLK…) or crowds. **Refused:** Bush and Rumsfeld watching Powell's address (reads as a claim about
+what Bush knew) and a 2012 SSCI still with identifiable living witnesses. **Sound:** archive films' own sound where a
+film is on screen, over a bed synthesised in the script (drone, cut tick, card hit); nothing licensed. **Narration
+tightened to ~40 words a part** and re-checked: CORONA first recovery Aug 1960, declassified Feb 1995; Stevenson
+(1962) and Powell (2003) both before the UN Security Council; no Iraqi stockpiles found. Part durations are sized to
+her reading (2.6 words/s at rate 0.96), so **in the full-length test the picture never had to hold**: every part's
+first line began within 0.02 s of its cut, with the video response held 3.5 s. **TRAPS:** (1) **YouTube returns 403 to
+this environment even via yt-dlp and Vimeo refuses it** — only `i.ytimg.com` thumbnails come through; real footage
+from the author's films needs his source files. Refusal recorded, not worked around. (2) **The Plex latin subset has
+no arrow glyph** — "→" rendered as tofu on the cards; the arrow is drawn. (3) Wikimedia rate-limited the sourcing
+agent (429) partway; several stills are Commons *thumbnails* (960–3840 px), noted per entry. (4) Run as root,
+`~` is `/root` — media_dir is absolute. `/intro` lists all 73 sources with links; share card regenerated from the
+new cut; `VideoObject` duration PT2M25S. **Do not run the old `scripts/build-intro-reel.py`** — it writes the same
+output files and would silently put the 4:3 cut back under a 16:9 player.
+
 **THE OFF-TRACK RESTRUCTURE — 23 Sept 2026, live. NEW SECTION XXIV "TEST CASES"; THE SIGNAL IS NOW XXV.**
 Author: *"look for removal of sections like this that go off track"* → every candidate read in full, then *"find
 out where these DO go if at all"*, *"keep asset relocation as that is a real thing"*, and the choices **"New XXIV,
