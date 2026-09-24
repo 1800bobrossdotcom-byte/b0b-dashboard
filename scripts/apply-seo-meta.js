@@ -29,6 +29,7 @@ const URLS = {
   'report.html': '/report',
   'intro.html': '/intro',
   'continuity.html': '/continuity',
+  'epstein-maxwell.html': '/epstein-maxwell',
   'map.html': '/map',
   'countermeasures.html': '/countermeasures',
   'artifact.html': '/artifact',

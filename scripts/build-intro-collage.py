@@ -137,9 +137,38 @@ class Painter:
         self.f_small = font('ibm-plex-mono-latin-500-normal.woff2', H // 22)
         self.f_word = font('ibm-plex-serif-latin-600-normal.woff2', H // 7)
 
-    def tag(self, img, x, y, text, anchor='ls'):
+    def tag(self, img, x, y, text, anchor='ls', maxw=None):
         d = ImageDraw.Draw(img)
         text = text.upper()
+        if maxw and d.textlength(text, font=self.f_tag) + 40 > maxw:
+            # a narrow panel: wrap on the tag's own separators and stack upward,
+            # so a credit the licence requires is never cut off
+            parts, lines, cur = text.split(' · '), [], ''
+            for part in parts:
+                trial = (cur + ' · ' + part) if cur else part
+                if cur and d.textlength(trial, font=self.f_tag) + 40 > maxw:
+                    lines.append(cur); cur = part
+                else:
+                    cur = trial
+            lines.append(cur)
+            fit = []
+            for ln in lines:
+                if d.textlength(ln, font=self.f_tag) + 40 <= maxw:
+                    fit.append(ln); continue
+                cur = ''
+                for w in ln.split(' '):
+                    trial = (cur + ' ' + w) if cur else w
+                    if cur and d.textlength(trial, font=self.f_tag) + 40 > maxw:
+                        fit.append(cur); cur = w
+                    else:
+                        cur = trial
+                fit.append(cur)
+            lines = fit
+            bb = d.textbbox((0, 0), 'A', font=self.f_tag)
+            step = (bb[3] - bb[1]) + 14
+            for i, ln in enumerate(reversed(lines)):
+                self.tag(img, x, y - i * step, ln, anchor)
+            return
         bb = d.textbbox((0, 0), text, font=self.f_tag)
         tw, th = bb[2] - bb[0], bb[3] - bb[1]
         pad = 5
@@ -502,7 +531,7 @@ class Film:
                 appear = i / (k + 1) * sh.get('stagger', 0.7)
                 if p >= appear + 0.05:
                     x, y = (i % c) * pw, (i // c) * ph
-                    tags.append((x + 10, y + ph - 10, self.media[sh['media'][i]].tag, 'ls'))
+                    tags.append((x + 10, y + ph - 10, self.media[sh['media'][i]].tag, 'ls', pw - 20))
         elif ty == 'inset':
             canvas[:] = self.panel(sh, 0, p, fi)
             iw, ih = self.panel_size(sh, 1)
@@ -520,8 +549,8 @@ class Film:
                 tags.append((x + iw, y + ih + 26, self.media[sh['media'][1]].tag, 'rs'))
             tags.append((16, H - 16, self.media[sh['media'][0]].tag, 'ls'))
         img = Image.fromarray(canvas)
-        for (x, y, t, a) in tags:
-            self.P.tag(img, x, y, t, a)
+        for tg in tags:
+            self.P.tag(img, *tg)
         for (txt, pos) in self.years(sh, p):
             self.P.year(img, pos[0], pos[1], txt, anchor=pos[2])
         return self.post(sh, fi, np.asarray(img))

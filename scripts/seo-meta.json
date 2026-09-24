@@ -69,6 +69,24 @@
       ]
     },
     {
+      "file": "epstein-maxwell.html",
+      "title": "b0b.dev - The Epstein-Maxwell Record",
+      "metaDescription": "A short film on the Epstein-Maxwell record: the power of attorney, the 2007 deal, the bank, the cell, the conviction - each held at its tier. Every panel cited.",
+      "ogDescription": "The documents, the rulings and the dates, each held at its tier - then the report's conclusion stated as one, and rung five claimed for no one. Narrated; every panel's source on screen.",
+      "jsonldType": "VideoObject",
+      "headline": "The Epstein-Maxwell Record - a b0b.dev film: the father, the year, the complaint, the deal, the pipe, the cell, the survivor, the question, the dates on paper",
+      "ogImage": "/img/epstein-maxwell-card.jpg",
+      "contentPath": "/b0b-epstein-maxwell-film.mp4",
+      "duration": "PT4M13S",
+      "topics": [
+        "Epstein",
+        "Maxwell",
+        "non-prosecution agreement",
+        "DOJ Inspector General",
+        "OSINT method"
+      ]
+    },
+    {
       "file": "map.html",
       "title": "OSINT world map: surveillance sites & Epstein network — b0b.dev",
       "metaDescription": "interactive OSINT map of 1,174 sites: surveillance infrastructure, black sites, the Epstein-Maxwell network, ALPR cameras, live aircraft and quake feeds.",

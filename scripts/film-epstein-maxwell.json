@@ -1,0 +1,1566 @@
+{
+ "_comment": [
+  "THE EPSTEIN-MAXWELL RECORD - the third b0b.dev film, built by scripts/build-intro-collage.py --spec scripts/film-epstein-maxwell.json.",
+  "",
+  "Its argument is Section II's and V's, at their tiers: the documented record (the 1991 power of attorney, the 1996 FBI",
+  "complaint record, the 2007 NPA and the OPR finding, the bank, the OIG failure stack, the conviction, the files), then the",
+  "report's conclusion stated as such (rung 4, both principals), the sponsor named only as the author's hypothesis",
+  "(Mossad directing, US and UK services witting by liaison, argued from structure not from the files), rung 5 claimed",
+  "for no one. Author's calls, 24 Sept 2026: both tiers in; people named only for acts on paper (Wexner's power of",
+  "attorney; Acosta in the OPR finding).",
+  "",
+  "HARD RULES, applied to picture and word (also: no ERC-1155 frame with a face - three were swapped out; the House hearing-room clip was cut because its 2011 members are identifiable): no survivor named or shown; no image of any living uncharged person; nothing",
+  "from the EFTA releases, court exhibits or evidence opened or used; no residence shown; the NPA is quoted from the OPR",
+  "summary, which counts the named co-conspirators without naming them. Faces: Robert Maxwell (d. 1991) at a 1989 public",
+  "panel (Anefo, CC0); Epstein (d. 2019) only in the 2006 Palm Beach County Sheriff booking photograph (PD, Florida).",
+  "",
+  "Fact-checked 24 Sept 2026 (scratchpad film3-facts.md): Maxwell \"vanished\", not \"went overboard\"; >GBP 400m from the",
+  "pension funds (GBP 426m of GBP 526m); Ghislaine's 1991 move month unsupported; the 1996 FBI record documented, the",
+  "NYPD report her account; OPR \"poor judgment\" quoted; the CVRA ruling \"failing to advise\"; JPMorgan ~$1.3bn reported",
+  "only after the 2019 arrest; OIG \"did not uncover evidence contradicting the FBI's determination regarding the absence",
+  "of criminality\"; Baden retained by the family; the body \"claimed\", not identified; \"in the United States\" only two",
+  "charged (Brunel was charged in France)."
+ ],
+ "media_dir": "/home/user/.b0b-intro-sources",
+ "build_name": "epstein-maxwell",
+ "output": "site/epstein-maxwell-reel.mp4",
+ "poster": "site/epstein-maxwell-poster.jpg",
+ "poster_at": 3.0,
+ "js": "site/epstein-maxwell-reel.js",
+ "download": "site/b0b-epstein-maxwell-film.mp4",
+ "meta_title": "b0b.dev - The Epstein-Maxwell Record",
+ "meta_url": "https://www.b0b.dev/epstein-maxwell",
+ "width": 1280,
+ "height": 720,
+ "fps": 24,
+ "crf_mp4": 30,
+ "crf_webm": 40,
+ "crf_download": 26,
+ "audio": {
+  "bitrate_mp4": "64k",
+  "bitrate_webm": "48k",
+  "loudnorm": "I=-16:TP=-1.5:LRA=11"
+ },
+ "voice": {
+  "model": "voice/en_GB-cori-high.onnx",
+  "config": "voice/en_GB-cori-high.onnx.json",
+  "sha256": "470b4dd634c98f8a4850d7626ffc3dfc90774628eeef6605a6dd8f88f30a5903",
+  "length_scale": 0.97,
+  "source": "https://huggingface.co/rhasspy/piper-voices/tree/main/en/en_GB/cori/high",
+  "licence": "Piper voice en_GB cori (high); training data LibriVox, public domain per the model card"
+ },
+ "film": {
+  "title": "b0b.dev — The Epstein–Maxwell Record",
+  "page": "/epstein-maxwell",
+  "share": "https://www.b0b.dev/epstein-maxwell",
+  "shareText": "The Epstein–Maxwell record — a short film: the documents, the rulings and the dates, each held at its tier. Every shot cited.",
+  "webm": "/epstein-maxwell-reel.webm?v=1",
+  "mp4": "/epstein-maxwell-reel.mp4?v=1",
+  "poster": "/epstein-maxwell-poster.jpg?v=1",
+  "download": "/b0b-epstein-maxwell-film.mp4?v=1",
+  "downloadName": "b0b-dev-epstein-maxwell-record.mp4",
+  "kicker": [
+   "the epstein–maxwell record · a short film in nine parts",
+   "documents, rulings, dates · every shot cited"
+  ],
+  "endLine": "The trafficking is adjudicated. The rest is held at its tier.",
+  "lastLineOnCard": false,
+  "credit": "Stills: Library of Congress, Nationaal Archief (Anefo), NASA, FBI records, US Government, Wikimedia Commons contributors (public domain, CC0, CC BY - credited on screen). House hearing-room video: US House of Representatives (CC0). ERC-1155 frames: the author’s own films. Narration: Piper “cori” voice, trained on public-domain LibriVox recordings."
+ },
+ "parts": [
+  {
+   "id": "I",
+   "title": "The father",
+   "years": [
+    "1945",
+    "1991"
+   ],
+   "card": 1.4,
+   "lines": [
+    {
+     "text": "Robert Maxwell. A Military Cross in 1945; from 1951, Pergamon Press - scientific publishing that crossed the Iron Curtain.",
+     "say": "Robert Maxwell. A Military Cross in nineteen forty-five; from nineteen fifty-one, Pergamon Press: scientific publishing that crossed the Iron Curtain."
+    },
+    {
+     "text": "In 1971 government inspectors wrote that he was not a person who could be relied on to exercise proper stewardship of a publicly quoted company.",
+     "say": "In nineteen seventy-one, government inspectors wrote that he was not a person who could be relied on to exercise proper stewardship of a publicly quoted company."
+    },
+    {
+     "text": "On 5 November 1991 he vanished from his yacht off the Canary Islands. Within weeks, more than four hundred million pounds was found missing from his companies’ pension funds.",
+     "say": "On the fifth of November, nineteen ninety-one, he vanished from his yacht off the Canary Islands. Within weeks, more than four hundred million pounds was found missing from his companies’ pension funds."
+    },
+    {
+     "text": "He was buried on the Mount of Olives. The President of Israel gave the eulogy."
+    }
+   ],
+   "shots": [
+    {
+     "type": "full",
+     "dur": 2.0,
+     "media": [
+      "I_robert_maxwell_amsterdam_1989"
+     ],
+     "motion": "push",
+     "years": [
+      "1989"
+     ],
+     "glitch": true
+    },
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "I_headington_hill_hall_2008"
+     ],
+     "motion": "pan-r"
+    },
+    {
+     "type": "doc",
+     "dur": 3.6,
+     "head": "Department of Trade inspectors · Pergamon Press · 1971",
+     "tag": "DTI INSPECTORS’ REPORT ON PERGAMON PRESS, 1971 · AS QUOTED IN THE PUBLIC RECORD",
+     "sound": false,
+     "style": "quote",
+     "text": "he is not in our opinion a person who can be relied on to exercise proper stewardship of a publicly quoted company."
+    },
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "I_canary_islands_from_orbit_1991"
+     ],
+     "motion": "push",
+     "years": [
+      "1991"
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 1.4,
+     "media": [
+      "I_tenerife_from_orbit_1991"
+     ],
+     "motion": "slam"
+    },
+    {
+     "type": "flash",
+     "dur": 0.33,
+     "media": [
+      "erc_YlMeyAAWhwE"
+     ],
+     "motion": "slam",
+     "sound": false
+    },
+    {
+     "type": "full",
+     "dur": 2.0,
+     "media": [
+      "I_mount_of_olives_view_1941"
+     ],
+     "motion": "pan-l"
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "I_mount_of_olives_kidron_1940s"
+     ],
+     "motion": "push"
+    }
+   ]
+  },
+  {
+   "id": "II",
+   "title": "The year",
+   "years": [
+    "1991",
+    "1991"
+   ],
+   "card": 1.4,
+   "lines": [
+    {
+     "text": "In July 1991 Leslie Wexner gave Epstein power of attorney: to sign cheques, hire, and buy and sell property in his name.",
+     "say": "In July nineteen ninety-one, Leslie Wexner gave Epstein power of attorney: to sign cheques, hire, and buy and sell property in his name."
+    },
+    {
+     "text": "1991 is when Epstein became useful. It is no evidence of when, or whether, anyone recruited him.",
+     "say": "Nineteen ninety-one is when Epstein became useful. It is no evidence of when, or whether, anyone recruited him."
+    }
+   ],
+   "shots": [
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "II_daily_news_building_abbott_1935"
+     ],
+     "motion": "push",
+     "glitch": true
+    },
+    {
+     "type": "doc",
+     "dur": 4.2,
+     "head": "1991 · one year, on paper",
+     "tag": "UPI (MAR, NOV 1991) · FRANKLIN COUNTY POWER OF ATTORNEY, AS REPORTED · SECTIONS II AND V",
+     "sound": false,
+     "style": "ledger",
+     "gutter": 0.14,
+     "rows": [
+      [
+       "MAR 1991",
+       "ROBERT MAXWELL BUYS THE NEW YORK DAILY NEWS"
+      ],
+      [
+       "1991",
+       "GHISLAINE MAXWELL MOVES TO NEW YORK"
+      ],
+      [
+       "JUL 1991",
+       "LESLIE WEXNER GRANTS EPSTEIN POWER OF ATTORNEY"
+      ],
+      [
+       "5 NOV 1991",
+       "ROBERT MAXWELL VANISHES AT SEA"
+      ],
+      [
+       "10 NOV 1991",
+       "BURIED ON THE MOUNT OF OLIVES"
+      ]
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "II_columbus_ohio_skyline_2016"
+     ],
+     "motion": "pan-r"
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "II_queensboro_bridge_upper_east_side_2018"
+     ],
+     "motion": "pan-l"
+    },
+    {
+     "type": "flash",
+     "dur": 0.33,
+     "media": [
+      "erc_vCeDEZtRY9s"
+     ],
+     "motion": "slam",
+     "sound": false
+    },
+    {
+     "type": "full",
+     "dur": 1.4,
+     "media": [
+      "II_daily_news_building_entrance_2008"
+     ],
+     "motion": "slam"
+    }
+   ]
+  },
+  {
+   "id": "III",
+   "title": "The complaint",
+   "years": [
+    "1996",
+    "2025"
+   ],
+   "card": 1.4,
+   "lines": [
+    {
+     "text": "In September 1996 the FBI logged a complaint about Epstein. It stayed out of public view until the Justice Department released it in December 2025.",
+     "say": "In September nineteen ninety-six, the F B I logged a complaint about Epstein. It stayed out of public view until the Justice Department released it in December twenty twenty-five."
+    },
+    {
+     "text": "Nothing followed for nine years."
+    }
+   ],
+   "shots": [
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "III_fbi_headquarters_2012"
+     ],
+     "motion": "push",
+     "glitch": true
+    },
+    {
+     "type": "doc",
+     "dur": 2.8,
+     "head": "The first record",
+     "tag": "FBI COMPLAINT RECORD, STAMPED 3 SEPT 1996 · RELEASED DEC 2025 (BOSTON GLOBE; HOUSE OVERSIGHT)",
+     "sound": false,
+     "style": "ledger",
+     "gutter": 0.16,
+     "rows": [
+      [
+       "3 SEP 1996",
+       "COMPLAINT LOGGED BY THE FBI"
+      ],
+      [
+       "2005",
+       "NEXT INVESTIGATION OPENS, PALM BEACH"
+      ],
+      [
+       "DEC 2025",
+       "THE 1996 RECORD IS MADE PUBLIC"
+      ]
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "I_nara_wnrc_stacks"
+     ],
+     "motion": "pan-l"
+    },
+    {
+     "type": "flash",
+     "dur": 0.33,
+     "media": [
+      "erc_VP2iLdUcI1c"
+     ],
+     "motion": "slam",
+     "sound": false
+    }
+   ]
+  },
+  {
+   "id": "IV",
+   "title": "The deal",
+   "years": [
+    "2005",
+    "2020"
+   ],
+   "card": 1.4,
+   "lines": [
+    {
+     "text": "Palm Beach, 2005: police open a case. In September 2007 federal prosecutors agree to end their investigation, and to forgo prosecuting him, four named co-conspirators, and any potential co-conspirators.",
+     "say": "Palm Beach, two thousand and five: police open a case. In September two thousand and seven, federal prosecutors agree to end their investigation, and to forgo prosecuting him, four named co-conspirators, and any potential co-conspirators."
+    },
+    {
+     "text": "In 2008 he pleads guilty to two state charges, and serves less than thirteen months, much of it on work release.",
+     "say": "In two thousand and eight he pleads guilty to two state charges, and serves less than thirteen months, much of it on work release."
+    },
+    {
+     "text": "In 2019 a federal judge rules that prosecutors violated the victims’ rights law by failing to tell them of the deal. In 2020 the Justice Department’s own review found that the US Attorney, Alexander Acosta, had shown poor judgment.",
+     "say": "In twenty nineteen, a federal judge rules that prosecutors violated the victims’ rights law by failing to tell them of the deal. In twenty twenty, the Justice Department’s own review found that the U S Attorney, Alexander Acosta, had shown poor judgment."
+    }
+   ],
+   "shots": [
+    {
+     "type": "grid",
+     "dur": 2.6,
+     "media": [
+      "IV_epstein_booking_photo_pbso_2006",
+      "IV_palm_beach_bridge_lake_worth_2020",
+      "IV_lake_worth_lagoon_2020"
+     ],
+     "cols": 3,
+     "rows": 1,
+     "motion": "push",
+     "stagger": 0.5,
+     "glitch": true
+    },
+    {
+     "type": "doc",
+     "dur": 4.2,
+     "head": "DOJ Office of Professional Responsibility · Nov 2020",
+     "tag": "DOJ OPR REPORT, EXECUTIVE SUMMARY (NOV 2020) · PD",
+     "sound": false,
+     "style": "quote",
+     "scale": 19,
+     "text": "the USAO agreed to end its investigation of Epstein and to forgo federal prosecution in the Southern District of Florida of him, four named co-conspirators, and “any potential co-conspirators.”"
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "IV_palm_beach_memorial_fountain_2020"
+     ],
+     "motion": "pan-r"
+    },
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "IV_main_justice_rfk_building_2025"
+     ],
+     "motion": "push"
+    },
+    {
+     "type": "doc",
+     "dur": 3.0,
+     "head": "The finding",
+     "tag": "DOJ OPR REPORT, EXECUTIVE SUMMARY (NOV 2020) · PD",
+     "sound": false,
+     "style": "quote",
+     "text": "Acosta’s decision to resolve the federal investigation through the NPA constitutes poor judgment."
+    },
+    {
+     "type": "flash",
+     "dur": 0.33,
+     "media": [
+      "erc_YlMeyAAWhwE"
+     ],
+     "motion": "slam",
+     "sound": false
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "IV_lake_worth_lagoon_2020"
+     ],
+     "motion": "pan-l"
+    }
+   ]
+  },
+  {
+   "id": "V",
+   "title": "The pipe",
+   "years": [
+    "1998",
+    "2023"
+   ],
+   "card": 1.4,
+   "lines": [
+    {
+     "text": "JPMorgan banked him for fifteen years, and kept him through two waves of red flags.",
+     "say": "J P Morgan banked him for fifteen years, and kept him through two waves of red flags."
+    },
+    {
+     "text": "Only after his arrest in 2019 did it file reports flagging about one point three billion dollars in transfers.",
+     "say": "Only after his arrest, in twenty nineteen, did it file reports flagging about one point three billion dollars in transfers."
+    },
+    {
+     "text": "It settled with his victims for two hundred and ninety million dollars, and with the Virgin Islands for seventy-five, admitting no liability."
+    }
+   ],
+   "shots": [
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "V_park_avenue_midtown"
+     ],
+     "motion": "push",
+     "glitch": true
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "V_wall_street_nyse"
+     ],
+     "motion": "pan-r"
+    },
+    {
+     "type": "doc",
+     "dur": 4.0,
+     "head": "The bank · the record",
+     "tag": "USVI v. JPMORGAN, JANE DOE 1 v. JPMORGAN (SDNY) · SENATE FINANCE (NOV 2025) · JPM 10-Q Q3 2023",
+     "sound": false,
+     "style": "ledger",
+     "gutter": 0.1,
+     "rows": [
+      [
+       "1998",
+       "EPSTEIN BECOMES A CLIENT"
+      ],
+      [
+       "2006",
+       "FIRST ACCUSATIONS · RETAINED"
+      ],
+      [
+       "2008",
+       "CONVICTION · RETAINED"
+      ],
+      [
+       "2013",
+       "THE BANK EXITS HIM"
+      ],
+      [
+       "2019",
+       "AFTER HIS ARREST: ~$1.3BN IN TRANSFERS REPORTED"
+      ],
+      [
+       "2023",
+       "$290M TO VICTIMS · $75M TO USVI · NO ADMISSION"
+      ]
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "V_charlotte_amalie_harbor_1941"
+     ],
+     "motion": "pan-l",
+     "years": [
+      "1941"
+     ]
+    },
+    {
+     "type": "flash",
+     "dur": 0.33,
+     "media": [
+      "erc_AmTnNRJtrqE"
+     ],
+     "motion": "slam",
+     "sound": false
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "V_charlotte_amalie_harbor_c1915"
+     ],
+     "motion": "push"
+    }
+   ]
+  },
+  {
+   "id": "VI",
+   "title": "The cell",
+   "years": [
+    "2019",
+    "2025"
+   ],
+   "card": 1.4,
+   "lines": [
+    {
+     "text": "July 2019: arrested again, on federal sex-trafficking charges. On 10 August he was found dead in his cell.",
+     "say": "July, twenty nineteen: arrested again, on federal sex-trafficking charges. On the tenth of August he was found dead in his cell."
+    },
+    {
+     "text": "The Inspector General found: a written direction to give him a cellmate ignored; half the cameras not recording; no rounds for hours; records falsified."
+    },
+    {
+     "text": "The medical examiner ruled suicide. A pathologist retained by the family disputes it. The ruling stands; the dissent is recorded."
+    },
+    {
+     "text": "States can move a person and give him a new name; that is on the record. What this record holds instead is an autopsy observed by the family’s own pathologist, and a family arguing murder, not survival."
+    },
+    {
+     "text": "In 2025 the Justice Department released raw footage of that night. It had been assembled from at least two clips. The editing is documented; what it hides, if anything, is not.",
+     "say": "In twenty twenty-five, the Justice Department released raw footage of that night. It had been assembled from at least two clips. The editing is documented; what it hides, if anything, is not."
+    }
+   ],
+   "shots": [
+    {
+     "type": "full",
+     "dur": 2.0,
+     "media": [
+      "VI_metropolitan_correctional_center_2010"
+     ],
+     "motion": "push",
+     "years": [
+      "2010"
+     ],
+     "glitch": true
+    },
+    {
+     "type": "doc",
+     "dur": 4.2,
+     "head": "DOJ Inspector General · Report 23-085 · June 2023",
+     "tag": "DOJ OIG REPORT 23-085 (JUNE 2023) · PD",
+     "sound": false,
+     "style": "ledger",
+     "gutter": 0.13,
+     "scale": 31,
+     "rows": [
+      [
+       "29 JUL 2019",
+       "RECORDING SYSTEM FAILS · ABOUT HALF THE CAMERAS DARK"
+      ],
+      [
+       "30 JUL",
+       "WRITTEN DIRECTION: ASSIGN HIM A CELLMATE"
+      ],
+      [
+       "9 AUG",
+       "CELLMATE TRANSFERRED · NOT REPLACED"
+      ],
+      [
+       "9-10 AUG",
+       "NO ROUNDS AFTER ~10:40 PM · COUNTS MISSED"
+      ],
+      [
+       "10 AUG",
+       "RECORDS FALSIFIED"
+      ],
+      [
+       "[OIG]",
+       "FOUND NOTHING CONTRADICTING THE FBI’S NO-CRIMINALITY FINDING"
+      ]
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "VI_thurgood_marshall_courthouse_foley_square_2019"
+     ],
+     "motion": "pan-r"
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "VI_ocme_hirsch_center_2021"
+     ],
+     "motion": "push"
+    },
+    {
+     "type": "flash",
+     "dur": 0.33,
+     "media": [
+      "erc_AmTnNRJtrqE"
+     ],
+     "motion": "slam",
+     "sound": false
+    },
+    {
+     "type": "full",
+     "dur": 2.0,
+     "media": [
+      "VI_lower_manhattan_from_brooklyn_2018"
+     ],
+     "motion": "pan-l"
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "VI_metropolitan_correctional_center_2010"
+     ],
+     "motion": "hold"
+    }
+   ]
+  },
+  {
+   "id": "VII",
+   "title": "The survivor",
+   "years": [
+    "2020",
+    "2026"
+   ],
+   "card": 1.4,
+   "lines": [
+    {
+     "text": "Ghislaine Maxwell was convicted in December 2021 on five counts, including sex trafficking of a minor, and sentenced to twenty years.",
+     "say": "Ghislaine Maxwell was convicted in December twenty twenty-one on five counts, including sex trafficking of a minor, and sentenced to twenty years."
+    },
+    {
+     "text": "In July 2025 the Deputy Attorney General interviewed her for two days under limited immunity. A week later she was moved to a minimum-security prison camp.",
+     "say": "In July twenty twenty-five, the Deputy Attorney General interviewed her for two days under limited immunity. A week later she was moved to a minimum-security prison camp."
+    },
+    {
+     "text": "In November 2025 Congress ordered the files released. The Department has published nearly three and a half million pages.",
+     "say": "In November twenty twenty-five, Congress ordered the files released. The Department has published nearly three and a half million pages."
+    },
+    {
+     "text": "In the United States, only two people have ever been charged over the abuse. One of them is dead."
+    }
+   ],
+   "shots": [
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "VII_thurgood_marshall_courthouse_portico_2019"
+     ],
+     "motion": "push",
+     "years": [
+      "2021"
+     ],
+     "glitch": true
+    },
+    {
+     "type": "full",
+     "dur": 1.4,
+     "media": [
+      "VII_thurgood_marshall_courthouse_tower_2019"
+     ],
+     "motion": "pull"
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "VII_fci_tallahassee"
+     ],
+     "motion": "pan-r"
+    },
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "VII_fpc_bryan_texas"
+     ],
+     "motion": "push",
+     "years": [
+      "2025"
+     ]
+    },
+    {
+     "type": "doc",
+     "dur": 3.2,
+     "head": "The files",
+     "tag": "PUB. L. 119-38 · DOJ, 30 JAN 2026 · PD",
+     "sound": false,
+     "style": "ledger",
+     "gutter": 0.16,
+     "rows": [
+      [
+       "19 NOV 2025",
+       "EPSTEIN FILES TRANSPARENCY ACT SIGNED"
+      ],
+      [
+       "19 DEC 2025",
+       "FIRST RELEASE"
+      ],
+      [
+       "30 JAN 2026",
+       "NEARLY 3.5 MILLION PAGES PUBLISHED"
+      ]
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "VII_us_capitol_dome"
+     ],
+     "motion": "pan-l"
+    },
+    {
+     "type": "flash",
+     "dur": 0.33,
+     "media": [
+      "erc_VP2iLdUcI1c"
+     ],
+     "motion": "slam",
+     "sound": false
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "VII_rayburn_spirit_of_justice_2010"
+     ],
+     "motion": "slam"
+    }
+   ]
+  },
+  {
+   "id": "VIII",
+   "title": "The question",
+   "years": [
+    "1954",
+    "2026"
+   ],
+   "card": 1.4,
+   "lines": [
+    {
+     "text": "The records that would settle what else this was are service files, and they are withheld from everyone. A silence that is certain to occur proves nothing either way."
+    },
+    {
+     "text": "This report’s conclusion: both functioned as deniable assets. Rung four."
+    },
+    {
+     "text": "It names a sponsor only as a hypothesis: Mossad directing, with American and British services witting by liaison - argued from documented structure, not from the files."
+    },
+    {
+     "text": "Rung five, tasked and run, is claimed for no one."
+    }
+   ],
+   "shots": [
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "I_fbi_maxwell_file_cover"
+     ],
+     "motion": "push",
+     "glitch": true
+    },
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "VIII_fbi_maxwell_airtel_1954_redacted"
+     ],
+     "motion": "pan-r",
+     "years": [
+      "1954"
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "VIII_fbi_maxwell_heidelberg_1954_redacted"
+     ],
+     "motion": "push"
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "VIII_national_archives_pediment"
+     ],
+     "motion": "pan-l"
+    },
+    {
+     "type": "doc",
+     "dur": 5.0,
+     "head": "The ladder",
+     "tag": "SECTION II · ANALYTICAL FRAMEWORK - THE DENIABLE-ASSET SPECTRUM",
+     "sound": false,
+     "style": "ledger",
+     "gutter": 0.12,
+     "rows": [
+      [
+       "RUNG 1",
+       "UNWITTING CONTACT"
+      ],
+      [
+       "RUNG 2",
+       "WITTING ASSOCIATE"
+      ],
+      [
+       "RUNG 3",
+       "FACILITATOR / CUT-OUT"
+      ],
+      [
+       "RUNG 4",
+       "DENIABLE ASSET  [CONCLUSION: EPSTEIN, MAXWELL]"
+      ],
+      [
+       "RUNG 5",
+       "TASKED AND RUN  [CLAIMED FOR NO ONE]"
+      ]
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 2.0,
+     "media": [
+      "VIII_cia_headquarters_entrance"
+     ],
+     "motion": "pan-r"
+    },
+    {
+     "type": "flash",
+     "dur": 0.33,
+     "media": [
+      "erc_E9IuNSX3FAE"
+     ],
+     "motion": "slam",
+     "sound": false
+    },
+    {
+     "type": "full",
+     "dur": 1.6,
+     "media": [
+      "VIII_cia_lobby_seal"
+     ],
+     "motion": "slam"
+    }
+   ]
+  }
+ ],
+ "finale": {
+  "id": "IX",
+  "title": "The dates on paper",
+  "years": [
+   "1945",
+   "2026"
+  ],
+  "style": "timeline",
+  "card": 1.4,
+  "lead": 3.6,
+  "hold": 4.0,
+  "sweep": 3.2,
+  "arc_line": 0,
+  "cut_line": 1,
+  "axis": [
+   [
+    1945,
+    0.0
+   ],
+   [
+    1990,
+    0.2
+   ],
+   [
+    2028,
+    1.0
+   ]
+  ],
+  "ticks": [
+   1950,
+   1970,
+   1990,
+   2000,
+   2010,
+   2020
+  ],
+  "tag": "EVERY DATE ON THIS LINE IS IN THE FILM ABOVE, AND IN THE REPORT",
+  "points": [
+   {
+    "year": 1945,
+    "label": "Military Cross",
+    "side": "up",
+    "tier": 0
+   },
+   {
+    "year": 1951,
+    "label": "Pergamon Press",
+    "side": "down",
+    "tier": 0
+   },
+   {
+    "year": 1971,
+    "label": "DTI inspectors",
+    "side": "up",
+    "tier": 1
+   },
+   {
+    "year": 1991.5,
+    "show": "JUL 1991",
+    "label": "Power of attorney",
+    "side": "down",
+    "tier": 1
+   },
+   {
+    "year": 1991.85,
+    "show": "NOV 1991",
+    "label": "Maxwell lost at sea",
+    "side": "up",
+    "tier": 2
+   },
+   {
+    "year": 1996.7,
+    "show": "SEP 1996",
+    "label": "FBI complaint",
+    "side": "down",
+    "tier": 0
+   },
+   {
+    "year": 2005,
+    "label": "Palm Beach case",
+    "side": "up",
+    "tier": 0
+   },
+   {
+    "year": 2007.7,
+    "show": "SEP 2007",
+    "label": "Non-prosecution",
+    "side": "down",
+    "tier": 2
+   },
+   {
+    "year": 2013,
+    "label": "Bank exits",
+    "side": "up",
+    "tier": 1
+   },
+   {
+    "year": 2019.13,
+    "show": "FEB 2019",
+    "label": "CVRA ruling",
+    "side": "down",
+    "tier": 1
+   },
+   {
+    "year": 2019.6,
+    "show": "AUG 2019",
+    "label": "Death in custody",
+    "side": "up",
+    "tier": 2
+   },
+   {
+    "year": 2020.85,
+    "show": "NOV 2020",
+    "label": "OPR review",
+    "side": "down",
+    "tier": 0
+   },
+   {
+    "year": 2021.99,
+    "show": "DEC 2021",
+    "label": "Maxwell convicted",
+    "side": "up",
+    "tier": 0
+   },
+   {
+    "year": 2023.45,
+    "show": "2023",
+    "label": "OIG · settlements",
+    "side": "down",
+    "tier": 2
+   },
+   {
+    "year": 2025.88,
+    "show": "NOV 2025",
+    "label": "Files Act",
+    "side": "up",
+    "tier": 1
+   },
+   {
+    "year": 2026.08,
+    "show": "JAN 2026",
+    "label": "3.5M pages",
+    "side": "down",
+    "tier": 1
+   }
+  ],
+  "lines": [
+   {
+    "text": "These are the dates on paper."
+   },
+   {
+    "text": "The trafficking is adjudicated. The rest is held at its tier."
+   }
+  ],
+  "close": {
+   "after_line": true,
+   "big": "The trafficking is adjudicated. The rest is held at its tier.",
+   "sub": "rung five is claimed for no one",
+   "scale": 13
+  }
+ },
+ "media": {
+  "I_robert_maxwell_amsterdam_1989": {
+   "file": "v4/I_robert_maxwell_amsterdam_1989.jpg",
+   "kind": "still",
+   "tag": "ROBERT MAXWELL AT THE GLOBAL ECONOMIC PANEL, AMSTERDAM · 11 APRIL 1989 · ANEFO / NATIONAAL ARCHIEF · CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:RobertMaxwell1989.jpg",
+   "licence": "CC0 (Nationaal Archief / Anefo; Commons LicenseShortName: CC0)",
+   "sha256": "96ba2ed9bdfa1992eab75d2c695a15f364d3ba20954fb409b2102c1e09dc8466",
+   "focus": [
+    0.48,
+    0.42
+   ]
+  },
+  "I_fbi_maxwell_file_cover": {
+   "file": "v4/I_fbi_maxwell_file_cover.jpg",
+   "kind": "still",
+   "tag": "FBI FILE 105-25063 · SUBJECT: ROBERT MAXWELL · FOIPA COVER SHEET · PAGE 1 OF SECTION 1 · PD",
+   "source_page": "https://archive.org/details/robert-maxwell-fbi-files",
+   "licence": "Public domain (FBI records, US government work; archive.org item carries the Public Domain Mark 1.0)",
+   "sha256": "36497dc1690be13975dc881b0b97d5ece183bb35d0d8956f5fb80de7f100aca0",
+   "focus": [
+    0.5,
+    0.45
+   ]
+  },
+  "I_headington_hill_hall_2008": {
+   "file": "v4/I_headington_hill_hall_2008.jpg",
+   "kind": "still",
+   "tag": "HEADINGTON HILL HALL, OXFORD (PERGAMON PRESS HEADQUARTERS UNDER MAXWELL; NOW OXFORD BROOKES UNIVERSITY) · 2008 · DONEGALSCOTT, CC BY 1.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Oxford_brookes_headington_hill.JPG",
+   "licence": "CC BY 1.0 (Commons LicenseShortName)",
+   "sha256": "92c01d2ece949db714054771c2dd3db56c4113dde62d14d168199d4e154ab330",
+   "focus": [
+    0.6,
+    0.45
+   ]
+  },
+  "I_tenerife_from_orbit_1991": {
+   "file": "v4/I_tenerife_from_orbit_1991.jpg",
+   "kind": "still",
+   "tag": "TENERIFE FROM SPACE SHUTTLE ATLANTIS (STS-43) · AUGUST 1991 · NASA · PD",
+   "source_page": "https://images.nasa.gov/details/s43-79-097",
+   "licence": "Public domain (NASA imagery, not copyrighted; NASA media usage guidelines)",
+   "sha256": "e97099a4cc91d09c02afe2b6ee350ebac3a9fa217717af46efa398c492134c81",
+   "focus": [
+    0.45,
+    0.5
+   ]
+  },
+  "I_canary_islands_from_orbit_1991": {
+   "file": "v4/I_canary_islands_from_orbit_1991.jpg",
+   "kind": "still",
+   "tag": "THE CANARY ISLANDS AND THE ATLANTIC FROM SPACE SHUTTLE COLUMBIA (STS-40) · JUNE 1991 · NASA · PD",
+   "source_page": "https://images.nasa.gov/details/s40-75-003",
+   "licence": "Public domain (NASA imagery, not copyrighted; NASA media usage guidelines)",
+   "sha256": "42157aa4858ea98c60df42c0f372219cdfe44962df8056b6721819f1045353de",
+   "focus": [
+    0.55,
+    0.62
+   ]
+  },
+  "I_mount_of_olives_kidron_1940s": {
+   "file": "v4/I_mount_of_olives_kidron_1940s.jpg",
+   "kind": "still",
+   "tag": "MOUNT OF OLIVES: THE JEWISH CEMETERY ABOVE THE KIDRON TOMBS · 1940S · MATSON PHOTO SERVICE · PD",
+   "source_page": "https://www.loc.gov/item/2019703840/",
+   "licence": "Public domain (LoC Matson Collection: 'No known restrictions on publication')",
+   "sha256": "3f6850341f61a1550062fbf6430377644ebf6f337102bf74a43410ca941efcaa",
+   "focus": [
+    0.55,
+    0.35
+   ]
+  },
+  "I_mount_of_olives_view_1941": {
+   "file": "v4/I_mount_of_olives_view_1941.jpg",
+   "kind": "still",
+   "tag": "JERUSALEM FROM THE SOUTHERN SLOPE OF THE MOUNT OF OLIVES, GRAVES IN THE FOREGROUND · 6 MARCH 1941 · MATSON PHOTO SERVICE · PD",
+   "source_page": "https://www.loc.gov/item/2019704735/",
+   "licence": "Public domain (LoC Matson Collection: 'No known restrictions on publication')",
+   "sha256": "ba9f7fa2fd07df4cd4bf878a67c2727ba65d5780b42146dd6d9a8af347fa1e42",
+   "focus": [
+    0.5,
+    0.55
+   ]
+  },
+  "II_columbus_ohio_skyline_2016": {
+   "file": "v4/II_columbus_ohio_skyline_2016.jpg",
+   "kind": "still",
+   "tag": "COLUMBUS, OHIO, FROM THE SCIOTO · 2016 · CAROL M. HIGHSMITH / LOC · PD",
+   "source_page": "https://www.loc.gov/item/2016632286/",
+   "licence": "Public domain (Carol M. Highsmith Archive, LoC: 'No known restrictions on publication'; Highsmith dedicated the archive to the public)",
+   "sha256": "0bcdb4616b58cbfc4f45498bd75d056dbc1ad621a203cbdfcee02ec3e197d423",
+   "focus": [
+    0.3,
+    0.4
+   ]
+  },
+  "II_queensboro_bridge_upper_east_side_2018": {
+   "file": "v4/II_queensboro_bridge_upper_east_side_2018.jpg",
+   "kind": "still",
+   "tag": "QUEENSBORO BRIDGE AND THE EAST SIDE OF MANHATTAN AT DUSK · 2018 · CAROL M. HIGHSMITH / LOC · PD",
+   "source_page": "https://www.loc.gov/item/2018701213/",
+   "licence": "Public domain (Carol M. Highsmith Archive, LoC: 'No known restrictions on publication'; Highsmith dedicated the archive to the public)",
+   "sha256": "52e192fe8e54c0f28555563cd9222296b7ad7cefc6e54b5be6963d917f22ac89",
+   "focus": [
+    0.35,
+    0.4
+   ]
+  },
+  "II_daily_news_building_abbott_1935": {
+   "file": "v4/II_daily_news_building_abbott_1935.jpg",
+   "kind": "still",
+   "tag": "THE DAILY NEWS BUILDING, EAST 42ND STREET, FROM ABOVE · 21 NOV 1935 · BERENICE ABBOTT / NYPL · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Daily_News_Building,_42nd_Street_between_Second_and_Third_Avenues,_Manhattan_(NYPL_b13668355-482560).jpg",
+   "licence": "Public domain (Commons: 'PD US WPA'; Federal Art Project work; NYPL item 510d47d9-4f3f-a3d9-e040-e00a18064a99)",
+   "sha256": "828f5ff38d314887ebb046429b86177725edda185130943750bcf2acc91457f4",
+   "focus": [
+    0.4,
+    0.45
+   ]
+  },
+  "II_daily_news_building_entrance_2008": {
+   "file": "v4/II_daily_news_building_entrance_2008.jpg",
+   "kind": "still",
+   "tag": "'THE NEWS' RELIEF OVER THE DAILY NEWS BUILDING ENTRANCE, 220 EAST 42ND STREET · 2008 · JIM HENDERSON (PD)",
+   "source_page": "https://commons.wikimedia.org/wiki/File:NY_Daily_News_door_jeh.JPG",
+   "licence": "Public domain (Commons: PD-self, released by the author)",
+   "sha256": "55c32d392efce82f0674de1016d080cce5f3dd2fb18d3abd328615f9688444b1",
+   "focus": [
+    0.45,
+    0.4
+   ]
+  },
+  "III_fbi_headquarters_2012": {
+   "file": "v4/III_fbi_headquarters_2012.jpg",
+   "kind": "still",
+   "tag": "FBI HEADQUARTERS, J. EDGAR HOOVER BUILDING, PENNSYLVANIA AVENUE, WASHINGTON · MARCH 2012 · CAROL M. HIGHSMITH / LOC · PD",
+   "source_page": "https://www.loc.gov/item/2013634628/",
+   "licence": "Public domain (Carol M. Highsmith Archive, LoC: 'No known restrictions on publication'; Highsmith dedicated the archive to the public)",
+   "sha256": "3ad06871fab75c2c001f9023f6743618f7449ba739290d2a46722d81c51fc703",
+   "focus": [
+    0.45,
+    0.5
+   ]
+  },
+  "IV_epstein_booking_photo_pbso_2006": {
+   "file": "v4/IV_epstein_booking_photo_pbso_2006.jpg",
+   "kind": "still",
+   "tag": "JEFFREY EPSTEIN · PALM BEACH COUNTY SHERIFF'S BOOKING PHOTOGRAPH · JULY 2006 · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Jeffrey_Epstein_mug_shot.jpg",
+   "licence": "Public domain (Commons LicenseShortName: 'Public domain'; category 'PD Florida' — Florida government record)",
+   "sha256": "6319b857cdf51654d5f6c61448236470a65935dc65d8e6bfb05690df6b74c1fe",
+   "focus": [
+    0.5,
+    0.42
+   ]
+  },
+  "IV_palm_beach_memorial_fountain_2020": {
+   "file": "v4/IV_palm_beach_memorial_fountain_2020.jpg",
+   "kind": "still",
+   "tag": "MEMORIAL FOUNTAIN, TOWN OF PALM BEACH, FLORIDA · 2020 · CAROL M. HIGHSMITH / LOC · PD",
+   "source_page": "https://www.loc.gov/item/2020720928/",
+   "licence": "Public domain (Carol M. Highsmith Archive, LoC: 'No known restrictions on publication'; Highsmith dedicated the archive to the public)",
+   "sha256": "557b708c098960b72b3c37a852cde449c551c784561e36c087d9529b45c38c4f",
+   "focus": [
+    0.55,
+    0.3
+   ]
+  },
+  "IV_palm_beach_bridge_lake_worth_2020": {
+   "file": "v4/IV_palm_beach_bridge_lake_worth_2020.jpg",
+   "kind": "still",
+   "tag": "BRIDGE FROM PALM BEACH OVER THE LAKE WORTH LAGOON TO THE MAINLAND · 2020 · CAROL M. HIGHSMITH / LOC · PD",
+   "source_page": "https://www.loc.gov/item/2020720954/",
+   "licence": "Public domain (Carol M. Highsmith Archive, LoC: 'No known restrictions on publication'; Highsmith dedicated the archive to the public)",
+   "sha256": "088fb2ca34a82ee25419b526d06c8cbc887f32146865c4c388008a3db59a1e7e",
+   "focus": [
+    0.35,
+    0.4
+   ]
+  },
+  "IV_lake_worth_lagoon_2020": {
+   "file": "v4/IV_lake_worth_lagoon_2020.jpg",
+   "kind": "still",
+   "tag": "ACROSS THE LAKE WORTH LAGOON FROM PALM BEACH TO WEST PALM BEACH · 2020 · CAROL M. HIGHSMITH / LOC · PD",
+   "source_page": "https://www.loc.gov/item/2020720956/",
+   "licence": "Public domain (Carol M. Highsmith Archive, LoC: 'No known restrictions on publication'; Highsmith dedicated the archive to the public)",
+   "sha256": "5883ee24197a2acbdf5d9f8a31cc5f2772c62a7cb2339841466549ea64c1804a",
+   "focus": [
+    0.75,
+    0.45
+   ]
+  },
+  "IV_main_justice_rfk_building_2025": {
+   "file": "v4/IV_main_justice_rfk_building_2025.jpg",
+   "kind": "still",
+   "tag": "ROBERT F. KENNEDY DEPARTMENT OF JUSTICE BUILDING (MAIN JUSTICE), WASHINGTON · APRIL 2025 · CAROL M. HIGHSMITH / LOC · PD",
+   "source_page": "https://www.loc.gov/item/2025716653/",
+   "licence": "Public domain (Carol M. Highsmith Archive, LoC: 'No known restrictions on publication'; Highsmith dedicated the archive to the public)",
+   "sha256": "43822b2fbf3a5f984879ce68b2b6e2e2cd72d8f2829c64e4f5a71fe12f79c900",
+   "focus": [
+    0.4,
+    0.45
+   ]
+  },
+  "V_park_avenue_midtown": {
+   "file": "v4/V_park_avenue_midtown.jpg",
+   "kind": "still",
+   "tag": "PARK AVENUE AT EAST 54TH STREET, LOOKING SOUTH · 1980-2006 · CAROL M. HIGHSMITH / LOC · PD",
+   "source_page": "https://www.loc.gov/item/2011631201/",
+   "licence": "Public domain (Carol M. Highsmith Archive, LoC: 'No known restrictions on publication'; Highsmith dedicated the archive to the public)",
+   "sha256": "9c220baa7515b85dc823e63d0c32b14eead30df56d2d453c8fbd790402183afd",
+   "focus": [
+    0.6,
+    0.35
+   ]
+  },
+  "V_wall_street_nyse": {
+   "file": "v4/V_wall_street_nyse.jpg",
+   "kind": "still",
+   "tag": "WALL STREET AND THE NEW YORK STOCK EXCHANGE · 1980-2006 · CAROL M. HIGHSMITH / LOC · PD",
+   "source_page": "https://www.loc.gov/item/2011630646/",
+   "licence": "Public domain (Carol M. Highsmith Archive, LoC: 'No known restrictions on publication'; Highsmith dedicated the archive to the public)",
+   "sha256": "d25808e09b954bb70fd8f33c3095523126c89743dc7b24650574efd4f64c8318",
+   "focus": [
+    0.55,
+    0.3
+   ]
+  },
+  "V_charlotte_amalie_harbor_1941": {
+   "file": "v4/V_charlotte_amalie_harbor_1941.jpg",
+   "kind": "still",
+   "tag": "CHARLOTTE AMALIE HARBOR, ST. THOMAS, US VIRGIN ISLANDS · DECEMBER 1941 · JACK DELANO, FSA/OWI · PD",
+   "source_page": "https://www.loc.gov/item/2017797571/",
+   "licence": "Public domain (LoC FSA/OWI: 'No known restrictions'; US government work)",
+   "sha256": "165e707539550a0821f6dafcedc20dd04c7ca468b53f10c7cc4d1d3b1c75b798",
+   "focus": [
+    0.5,
+    0.45
+   ]
+  },
+  "V_charlotte_amalie_harbor_c1915": {
+   "file": "v4/V_charlotte_amalie_harbor_c1915.jpg",
+   "kind": "still",
+   "tag": "ST. THOMAS: CHARLOTTE AMALIE AND HARBOR · C. 1915-1920 · BAIN NEWS SERVICE · PD",
+   "source_page": "https://www.loc.gov/item/2014702253/",
+   "licence": "Public domain (LoC Bain Collection: 'No known restrictions on publication')",
+   "sha256": "33489a80f2990258a2ea935314db01b36d8ff1c3c0943b5045de317d3f3a95bb",
+   "focus": [
+    0.5,
+    0.5
+   ]
+  },
+  "VI_thurgood_marshall_courthouse_foley_square_2019": {
+   "file": "v4/VI_thurgood_marshall_courthouse_foley_square_2019.jpg",
+   "kind": "still",
+   "tag": "THURGOOD MARSHALL U.S. COURTHOUSE, 40 FOLEY SQUARE, NEW YORK · FEBRUARY 2019 · CAROL M. HIGHSMITH / LOC · PD",
+   "source_page": "https://www.loc.gov/item/2019631182/",
+   "licence": "Public domain (Carol M. Highsmith Archive, LoC: 'No known restrictions on publication'; Highsmith dedicated the archive to the public)",
+   "sha256": "a622aff1ba15ee3fd3ad7b000f161d2ee506a1ae6f84ceab077d6eb9bfe2516a",
+   "focus": [
+    0.45,
+    0.35
+   ]
+  },
+  "VI_metropolitan_correctional_center_2010": {
+   "file": "v4/VI_metropolitan_correctional_center_2010.jpg",
+   "kind": "still",
+   "tag": "METROPOLITAN CORRECTIONAL CENTER, 150 PARK ROW, NEW YORK · MARCH 2010 · JIM HENDERSON, CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:MCC_New_York_jeh.JPG",
+   "licence": "CC0 (Commons LicenseShortName: CC0)",
+   "sha256": "885ad6de635d4177dc6661c812143433609b25cc359aaa5d4abaf8916fbbc8fa",
+   "focus": [
+    0.55,
+    0.45
+   ]
+  },
+  "VI_ocme_hirsch_center_2021": {
+   "file": "v4/VI_ocme_hirsch_center_2021.jpg",
+   "kind": "still",
+   "tag": "OFFICE OF CHIEF MEDICAL EXAMINER, CHARLES S. HIRSCH CENTER FOR FORENSIC SCIENCES, 421 EAST 26TH STREET · 2021 · AJAY SURESH, CC BY 2.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Office_of_Chief_Medical_Examiner_of_the_City_of_New_York_(OCME)_(51709672338).jpg",
+   "licence": "CC BY 2.0 (Commons LicenseShortName; Flickr, FlickreviewR-verified)",
+   "sha256": "7de3103287ec8196e784d38f90ae5605dc18fcb111ed6422ab1f2b2629fd621e",
+   "focus": [
+    0.45,
+    0.5
+   ]
+  },
+  "VI_charles_norris_ocme_file_cabinet_1920s": {
+   "file": "v4/VI_charles_norris_ocme_file_cabinet_1920s.jpg",
+   "kind": "still",
+   "tag": "DR. CHARLES NORRIS, NEW YORK CITY'S FIRST CHIEF MEDICAL EXAMINER, AT HIS FILE CABINET · C. 1920 · LIBRARY OF CONGRESS · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Dr._Charles_Norris,_New_York_City%27s_first_chief_medical_examiner,_looking_in_file_cabinet_LCCN2013650280.jpg",
+   "licence": "Public domain (Commons: PD-old-70-expired, CC-PD-Mark; LoC 'Miscellaneous Items in High Demand')",
+   "sha256": "36e9f9e95423cdb9978eff2ac11c4b1fc0adc91300e3f5f6fd3c5966085c2d83",
+   "focus": [
+    0.62,
+    0.3
+   ]
+  },
+  "VI_lower_manhattan_from_brooklyn_2018": {
+   "file": "v4/VI_lower_manhattan_from_brooklyn_2018.jpg",
+   "kind": "still",
+   "tag": "LOWER MANHATTAN AND THE BROOKLYN BRIDGE FROM BROOKLYN · 2018 · CAROL M. HIGHSMITH / LOC · PD",
+   "source_page": "https://www.loc.gov/item/2018701297/",
+   "licence": "Public domain (Carol M. Highsmith Archive, LoC: 'No known restrictions on publication'; Highsmith dedicated the archive to the public)",
+   "sha256": "ae48713315f53ae8d75bbc559a634ae205905b32c0589f5f505454964b3357c8",
+   "focus": [
+    0.7,
+    0.5
+   ]
+  },
+  "VII_thurgood_marshall_courthouse_portico_2019": {
+   "file": "v4/VII_thurgood_marshall_courthouse_portico_2019.jpg",
+   "kind": "still",
+   "tag": "THURGOOD MARSHALL U.S. COURTHOUSE PORTICO, FOLEY SQUARE · 2019 · CAROL M. HIGHSMITH / LOC · PD",
+   "source_page": "https://www.loc.gov/item/2019631192/",
+   "licence": "Public domain (Carol M. Highsmith Archive, LoC: 'No known restrictions on publication'; Highsmith dedicated the archive to the public)",
+   "sha256": "f4d227435bcbfc2733cccb8c4cf73ddec6fe183f6f0d6a18d2f6bde74d86e01a",
+   "focus": [
+    0.5,
+    0.45
+   ]
+  },
+  "VII_thurgood_marshall_courthouse_tower_2019": {
+   "file": "v4/VII_thurgood_marshall_courthouse_tower_2019.jpg",
+   "kind": "still",
+   "tag": "THURGOOD MARSHALL U.S. COURTHOUSE TOWER · 2019 · CAROL M. HIGHSMITH / LOC · PD",
+   "source_page": "https://www.loc.gov/item/2019631193/",
+   "licence": "Public domain (Carol M. Highsmith Archive, LoC: 'No known restrictions on publication'; Highsmith dedicated the archive to the public)",
+   "sha256": "263304b6b61bb011b7bc7076c9902d42c79c0f67ab807ed630825ae0eb251a65",
+   "focus": [
+    0.5,
+    0.3
+   ]
+  },
+  "VII_fpc_bryan_texas": {
+   "file": "v4/VII_fpc_bryan_texas.jpg",
+   "kind": "still",
+   "tag": "FEDERAL PRISON CAMP BRYAN, 1100 URSULINE AVENUE, BRYAN, TEXAS · FEDERAL BUREAU OF PRISONS · PD",
+   "source_page": "https://www.bop.gov/locations/institutions/bry/",
+   "licence": "Public domain (work of the US Federal Bureau of Prisons, 17 U.S.C. §105; bop.gov carries no copyright notice or licence metadata)",
+   "sha256": "367e8c97a18a3fe7d68cde1e1878998853844f402b7482bb712ff9aa3581f025",
+   "focus": [
+    0.3,
+    0.5
+   ]
+  },
+  "VII_fci_tallahassee": {
+   "file": "v4/VII_fci_tallahassee.jpg",
+   "kind": "still",
+   "tag": "FEDERAL CORRECTIONAL INSTITUTION TALLAHASSEE, 501 CAPITAL CIRCLE NE, FLORIDA · FEDERAL BUREAU OF PRISONS · PD",
+   "source_page": "https://www.bop.gov/locations/institutions/tal/",
+   "licence": "Public domain (work of the US Federal Bureau of Prisons, 17 U.S.C. §105; bop.gov carries no copyright notice or licence metadata)",
+   "sha256": "2d29d8abda78a2209f6700a5a57bf088e4c383c339b89ec32cd766d62aabb005",
+   "focus": [
+    0.5,
+    0.45
+   ]
+  },
+  "VII_us_capitol_dome": {
+   "file": "v4/VII_us_capitol_dome.jpg",
+   "kind": "still",
+   "tag": "U.S. CAPITOL DOME, WASHINGTON · 1980-2006 · CAROL M. HIGHSMITH / LOC · PD",
+   "source_page": "https://www.loc.gov/item/2011630697/",
+   "licence": "Public domain (Carol M. Highsmith Archive, LoC: 'No known restrictions on publication'; Highsmith dedicated the archive to the public)",
+   "sha256": "c5ff8f5c011825f42727cb975528635278479efc52f69c6094de8f4b731b6bf3",
+   "focus": [
+    0.45,
+    0.4
+   ]
+  },
+  "VII_rayburn_spirit_of_justice_2010": {
+   "file": "v4/VII_rayburn_spirit_of_justice_2010.jpg",
+   "kind": "still",
+   "tag": "'SPIRIT OF JUSTICE' OUTSIDE THE RAYBURN HOUSE OFFICE BUILDING · 2010 · CAROL M. HIGHSMITH / LOC · PD",
+   "source_page": "https://www.loc.gov/item/2010641916/",
+   "licence": "Public domain (Carol M. Highsmith Archive, LoC: 'No known restrictions on publication'; Highsmith dedicated the archive to the public)",
+   "sha256": "97d2d44ccecc7ba0f66520eecedf85cb0aa9c965a2264d9c1198ddb05f560fbc",
+   "focus": [
+    0.5,
+    0.35
+   ]
+  },
+  "VII_house_oversight_room2154_wide_2011": {
+   "file": "v4/VII_house_oversight_room2154_wide_2011.mp4",
+   "kind": "video",
+   "tag": "HOUSE OVERSIGHT COMMITTEE HEARING ROOM, 2154 RAYBURN · 17 NOV 2011 · HOUSE RECORDING STUDIO · CC0",
+   "source_page": "https://archive.org/details/gov.house.ogr.20111117.1",
+   "licence": "CC0 (archive.org licenseurl; 'Video provided by U.S. House of Representatives')",
+   "sha256": "00bf5400044091722ff742dc1ad352e9375525d46955aafdb305b767f107df0f",
+   "focus": [
+    0.5,
+    0.4
+   ],
+   "in": 0
+  },
+  "VIII_fbi_maxwell_airtel_1954_redacted": {
+   "file": "v4/VIII_fbi_maxwell_airtel_1954_redacted.jpg",
+   "kind": "still",
+   "tag": "FBI AIRTEL TO SAC NEW YORK RE 'IAN ROBERT MAXWELL', 2 FEB 1954, B1 REDACTIONS · FBI FILE 105-25063 · PD",
+   "source_page": "https://archive.org/details/robert-maxwell-fbi-files",
+   "licence": "Public domain (FBI records, US government work; archive.org item carries the Public Domain Mark 1.0)",
+   "sha256": "eb4cf7dc087cb8dbc8baeda5a19567f9bd8663a44f876d9ecc353420f990530c",
+   "focus": [
+    0.45,
+    0.45
+   ]
+  },
+  "VIII_fbi_maxwell_heidelberg_1954_redacted": {
+   "file": "v4/VIII_fbi_maxwell_heidelberg_1954_redacted.jpg",
+   "kind": "still",
+   "tag": "FBI LIAISON REPRESENTATIVE, HEIDELBERG, TO DIRECTOR RE 'IAN ROBERT MAXWELL', 15 JAN 1954, 'VIA ARMY COURIER', B1 REDACTIONS · PD",
+   "source_page": "https://archive.org/details/robert-maxwell-fbi-files",
+   "licence": "Public domain (FBI records, US government work; archive.org item carries the Public Domain Mark 1.0)",
+   "sha256": "0658085328a8c9d3efcffb96e8bf5b0de8155012461f7837eaf7f78e5f947ef2",
+   "focus": [
+    0.5,
+    0.45
+   ]
+  },
+  "VIII_national_archives_pediment": {
+   "file": "v4/VIII_national_archives_pediment.jpg",
+   "kind": "still",
+   "tag": "'ARCHIVES OF THE UNITED STATES OF AMERICA', NATIONAL ARCHIVES BUILDING, WASHINGTON · CAROL M. HIGHSMITH / LOC · PD",
+   "source_page": "https://www.loc.gov/item/2011630755/",
+   "licence": "Public domain (Carol M. Highsmith Archive, LoC: 'No known restrictions on publication'; Highsmith dedicated the archive to the public)",
+   "sha256": "d60eba31604a7bdb35328b203e318de65fab014a0ba02ec665db543fd747bed3",
+   "focus": [
+    0.5,
+    0.55
+   ]
+  },
+  "VIII_cia_headquarters_entrance": {
+   "file": "v4/VIII_cia_headquarters_entrance.jpg",
+   "kind": "still",
+   "tag": "CIA HEADQUARTERS, NEW HEADQUARTERS BUILDING ENTRANCE, LANGLEY, VIRGINIA · CIA · PD",
+   "source_page": "https://www.cia.gov/legacy/headquarters/",
+   "licence": "Public domain (cia.gov Site Policies: 'Unless a copyright is indicated, information on our website is in the public domain'; credit CIA requested)",
+   "sha256": "dfa9af1e3eb4f00e9db4f5edbad32a0c2cb8f03a81e4d1eb19be9b4e797ddc88",
+   "focus": [
+    0.4,
+    0.5
+   ]
+  },
+  "VIII_cia_lobby_john_8_32": {
+   "file": "v4/VIII_cia_lobby_john_8_32.jpg",
+   "kind": "still",
+   "tag": "'AND YE SHALL KNOW THE TRUTH AND THE TRUTH SHALL MAKE YOU FREE' (JOHN 8:32), ORIGINAL HEADQUARTERS LOBBY · CIA · PD",
+   "source_page": "https://www.cia.gov/legacy/headquarters/",
+   "licence": "Public domain (cia.gov Site Policies: 'Unless a copyright is indicated, information on our website is in the public domain'; credit CIA requested)",
+   "sha256": "5929014a3d3682502651f79e188eef60f2b8cd7742aef9de2fb57de8c57abf38",
+   "focus": [
+    0.5,
+    0.25
+   ]
+  },
+  "VIII_cia_lobby_seal": {
+   "file": "v4/VIII_cia_lobby_seal.jpg",
+   "kind": "still",
+   "tag": "CIA SEAL IN THE ORIGINAL HEADQUARTERS LOBBY FLOOR · CIA · PD",
+   "source_page": "https://www.cia.gov/legacy/headquarters/",
+   "licence": "Public domain (cia.gov Site Policies: 'Unless a copyright is indicated, information on our website is in the public domain'; credit CIA requested)",
+   "sha256": "b849af119d605a8a49ece5f8be614de5c70e69195c5d0802fdbaaa7be4de5737",
+   "focus": [
+    0.5,
+    0.5
+   ]
+  },
+  "I_nara_wnrc_stacks": {
+   "file": "v2/I_nara_wnrc_stacks.jpg",
+   "kind": "still",
+   "tag": "WASHINGTON NATIONAL RECORDS CENTER · STACK AREA · UNDATED · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Washington_National_Records_Center_Stack_Area_with_Employee_Servicing_Records.tif",
+   "direct_url": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Washington_National_Records_Center_Stack_Area_with_Employee_Servicing_Records.tif?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "licence": "Public domain",
+   "licence_url": null,
+   "credit": "Unknown authorUnknown author or not provided | Credit: U.S. National Archives and Records Administration",
+   "date": "undated (NARA gives no date)",
+   "sha256": "c6b99e1b09499dcb2dc2d3ef0f972be3cc619fc7270974f5a71418318912d806"
+  },
+  "erc_YlMeyAAWhwE": {
+   "file": "erc/YlMeyAAWhwE.jpg",
+   "kind": "still",
+   "tag": "ERC-1155 · TENSOR · 2024 · THE AUTHOR'S OWN FILM",
+   "source_page": "https://www.youtube.com/watch?v=YlMeyAAWhwE",
+   "licence": "the author's own work, used at his direction",
+   "sha256": "653092d5a8bfc4616cedeed34a0a2e1391c279ae03f8c412b370cd47dcb61401"
+  },
+  "erc_E9IuNSX3FAE": {
+   "file": "erc/E9IuNSX3FAE.jpg",
+   "kind": "still",
+   "tag": "ERC-1155 · FROGWIZARD · 2023 · THE AUTHOR'S OWN FILM",
+   "source_page": "https://www.youtube.com/watch?v=E9IuNSX3FAE",
+   "licence": "the author's own work, used at his direction",
+   "sha256": "29478de310bec88323fd05e51ea885e7e69687d24344fdaa557932ca19e53830"
+  },
+  "erc_vCeDEZtRY9s": {
+   "file": "erc/vCeDEZtRY9s.jpg",
+   "kind": "still",
+   "tag": "ERC-1155 · T A R L AN · 2023 · THE AUTHOR'S OWN FILM",
+   "source_page": "https://www.youtube.com/watch?v=vCeDEZtRY9s",
+   "licence": "the author's own work, used at his direction",
+   "sha256": "a8fc3de09fc8fc3989bff41f19882e674f8dba70ae2e699c01f923c836b7422b"
+  },
+  "erc_AmTnNRJtrqE": {
+   "file": "erc/AmTnNRJtrqE.jpg",
+   "kind": "still",
+   "tag": "ERC-1155 · THESQUID · 2024 · THE AUTHOR'S OWN FILM",
+   "source_page": "https://www.youtube.com/watch?v=AmTnNRJtrqE",
+   "licence": "the author's own work, used at his direction",
+   "sha256": "5e2e91eea93e702df503999909b1f0651dbea514f788ff56a26c72722ce557f1"
+  },
+  "erc_VP2iLdUcI1c": {
+   "file": "erc/VP2iLdUcI1c.jpg",
+   "kind": "still",
+   "tag": "ERC-1155 · CHAPTER 18 SILENT TALK · 2023 · THE AUTHOR'S OWN FILM",
+   "source_page": "https://www.youtube.com/watch?v=VP2iLdUcI1c",
+   "licence": "the author's own work, used at his direction",
+   "sha256": "9ba1dcd78b1b8ed7857d3d245c9a02fe0667a95aa4a3efd6498683e904057f59"
+  }
+ }
+}

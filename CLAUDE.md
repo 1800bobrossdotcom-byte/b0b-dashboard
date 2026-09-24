@@ -181,6 +181,36 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**A THIRD FILM, "THE EPSTEIN–MAXWELL RECORD", AT `/epstein-maxwell` — 24 Sept 2026.** Author: *"lets make the
+epstein maxwell video"*. **Author's two calls, asked before any script (this is defamation-adjacent, so they were his):
+the conclusion AND the sponsor hypothesis go in at their tiers ("Both, at their tiers"), and people are named only for
+acts on paper ("Names where on paper").** Spec `scripts/film-epstein-maxwell.json` (generator in scratchpad
+`make-em-spec.py`); outputs `site/epstein-maxwell-reel.{mp4,webm,js}`, `site/b0b-epstein-maxwell-film.mp4`; 4:13, nine
+parts: the father, the year (1991), the complaint (1996), the deal, the pipe, the cell, the survivor, the question, the
+dates on paper (timeline). **Hard rules in picture and word:** no survivor named or shown; no living uncharged face
+(the 2011 House hearing-room clip was CUT because its members are identifiable; three ERC-1155 flash frames with faces,
+one a young woman's, were swapped out — a face flashed inside a trafficking film reads as implication whatever the
+intent); nothing from EFTA/exhibits/evidence opened; no residences; the NPA quoted from the **OPR summary**, which counts
+"four named co-conspirators" without naming them. Faces: Robert Maxwell (1989 Anefo, CC0) and Epstein (2006 PBSO
+booking photo, PD-Florida) only. **Fact-check (scratchpad `film3-facts.md`) reworded 12 of 20 claims** and found two
+errors ON THE PAGE, fixed: **"the body was identified by his brother" is not established** (one outlet: he *claimed*
+it) and **Baden was retained by the family (AP)** — the survival paragraph now rests on the autopsy observed by the
+family's pathologist. Other corrections that travel: Ghislaine's move to New York is "1991", no month (so the "eleven
+months" framing is not used in the film); **the 1996 FBI complaint record (stamped 3 Sept 1996, released Dec 2025) is
+documented, the NYPD Sixth Precinct report is her account** — the page still calls the NYPD complaint the "earliest hard
+anchor"; **put to the author, unanswered**; JPMorgan's ~$1.3bn was reported only after the 2019 arrest (Wyden's $1.1bn is a
+different count); "in the United States" only Epstein and Maxwell charged (Brunel was charged in France); OIG quoted as
+"did not uncover evidence contradicting the FBI's determination regarding the absence of criminality". **Also on the page,
+at the author's instruction ("note that tactical and sophisticated exfiltration methods exist"):** exfiltration is
+documented state practice (Tehran 1980, CIA, declassified 1997; Gordievsky 1985, MI6; WITSEC ~19,000 since 1971) —
+**capability is not use**, and the symmetry rule was run both ways: unlike the Maxwell inquest, an exfiltration does not
+produce an autopsy observed by the family's own pathologist and a family arguing murder, so survival stays possible, not
+supported. **And a stale Section II framework sentence was fixed:** it still said only Epstein was placed at rung 4 and
+"no sponsoring service is named anywhere in this document" — now both principals at rung 4, sponsor at hypothesis tier.
+**Engine:** grid tags now wrap within their cell (separator, then word) so a CC BY credit is never cut; intro JS still
+byte-identical. **Spider:** `decoy_markers` (body-prefix match) added for justice.gov's Akamai `bm-verify` interstitial
+(200, ~2.5 KB, blank title, size varies) — registered, never solved.
+
 **A SECOND FILM, "CONTINUITY", AT `/continuity` — 23 Sept 2026, live. The intro is untouched.** **3:30, 75 shots, 69 media; 13.7 MB MP4 / 15.3 MB WebM / 22.7 MB subtitled download; render ~25 min.** Verified: full playback 254 subtitle samples, 0 mismatches, browser never spoke; intro re-run 179/0; four clean live reads; seo-selftest 49/50 (the old concordance title). Author: *"make another
 video - this one about continuity of power, the elites, and pattern points that correlate"*, then *"keep the first one,
 just make another one"*. **Same engine, own spec:** `python3 scripts/build-intro-collage.py --spec
