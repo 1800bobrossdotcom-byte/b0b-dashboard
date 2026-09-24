@@ -181,7 +181,7 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
-**A THIRD FILM, "THE EPSTEIN–MAXWELL RECORD", AT `/epstein-maxwell` — 24 Sept 2026.** Author: *"lets make the
+**A THIRD FILM, "THE EPSTEIN–MAXWELL RECORD", AT `/epstein-maxwell` — 24 Sept 2026, live.** 4:13, 64 shots; 11.8 MB MP4 / 12.7 MB WebM / 20.2 MB download. Verified: 312 subtitle samples, 0 mismatches, browser never spoke; four clean live reads; scale line 277 / 1,083 / 135. **A Spirit of Justice statue (woman with a child figure) was cut after the first render — it sat under the line about the abuse.** `build-transmissions.py` 404 again 24 Sept (worked 23 Sept: flaky, not broken). Author: *"lets make the
 epstein maxwell video"*. **Author's two calls, asked before any script (this is defamation-adjacent, so they were his):
 the conclusion AND the sponsor hypothesis go in at their tiers ("Both, at their tiers"), and people are named only for
 acts on paper ("Names where on paper").** Spec `scripts/film-epstein-maxwell.json` (generator in scratchpad
