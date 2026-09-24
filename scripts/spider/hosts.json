@@ -7,11 +7,15 @@
     "It is not worked around from this file."
   ],
   "justice.gov": {
-    "why": "The site sets an age-verification cookie on its own interstitial before serving documents. This is the same cookie a browser would carry after clicking through.",
+    "why": "The site sets an age-verification cookie on its own interstitial before serving documents. This is the same cookie a browser would carry after clicking through. Some pages (seen on usao-ma and usao-sdny press releases, 21 and 24 Sept 2026) answer with an Akamai bot-challenge interstitial - HTTP 200, ~2.5 KB, blank title, a bm-verify meta refresh. That is a refusal, not a document: it is matched by marker and recorded as a null. It is never solved. The archive path justice.gov/archive/usao/... often serves the real page.",
     "cookies": {
       "justiceGovAgeVerified": "true"
     },
-    "delay": 6.0
+    "delay": 6.0,
+    "decoy_markers": [
+      "bm-verify=",
+      "doj-interstitial.html"
+    ]
   },
   "efts.sec.gov": {
     "why": "EDGAR full-text search asks automated clients to identify themselves and to stay under 10 requests a second. The identification is the standing user agent; the pace is set here well below the limit.",

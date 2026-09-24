@@ -309,6 +309,10 @@ def fetch(url, session, note=None, conditional=True, quiet=False):
             decoy = 'title'
         elif len(body) in set(prof.get('decoy_bytes', [])):
             decoy = 'bytes'
+        elif any(m.encode() in body[:8192] for m in prof.get('decoy_markers', [])):
+            # a challenge page whose size and (blank) title vary: match a fixed
+            # marker in its opening bytes. Recorded, never solved.
+            decoy = 'marker'
         if decoy:
             rec.update(reason='decoy_200', ok=False, sha256=digest, bytes=len(body),
                        content_type=ctype, decoy_match=decoy, title=t)
