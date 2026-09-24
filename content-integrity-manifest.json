@@ -1,13 +1,13 @@
 {
-  "generated": "2026-09-23T23:45:22.332Z",
+  "generated": "2026-09-24T03:12:07.776Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "58f0c0e1596b281fa9b6943223f7f6e7a9e0264e4f66e5fa0a8b4eb3f44d05b8",
+  "fullFileHash": "caf5665a8bcc5f928269547a6f8d8804f3915b44eb94eb62e746ad764deca2e6",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "09f2ccbbf18a20a06907f12785a6cab6e5f5dca8717026ba85bbb74b279733c2",
+      "hash": "b0a8603aacef309322a1823f06affa48bc145cd5950e3898d9ace4353df833ad",
       "length": 40298
     },
     {
@@ -57,8 +57,8 @@
     },
     {
       "id": "ii-the-death-record-what-is-documented-what-stays",
-      "hash": "967e0a4fe9bc57cbd8ebfae7589456f5b3ec7c21005dc837cecd5497b6c6a0a1",
-      "length": 21882
+      "hash": "5dc9a40f142b85764f37954f5176de819251e375fb1c57e30fc2ebb4c7165b33",
+      "length": 23300
     },
     {
       "id": "ii-the-authors-hypothesis-third-form-lineage-onboarding-and-why-there-is-no-file",
@@ -157,8 +157,8 @@
     },
     {
       "id": "ii-the-fork-the-operation-or-the-withholding-and",
-      "hash": "6f65350569495bc9d795cc402fd48009ed1ba16a577b7a8132c2552777e0fb54",
-      "length": 39388
+      "hash": "6084d8f99b884fc799290d7ff02ff270d8fb2102930eece1e5fcf36fc225515d",
+      "length": 39542
     },
     {
       "id": "ii-the-on-boarding-read-what-the-hub-metric-is",
@@ -1926,9 +1926,9 @@
     },
     {
       "index": 67,
-      "hash": "61f895d961eb99d654103f5959b791242303e419c740737ae4c02024618cc654",
+      "hash": "c83b1978285cd5958ffe9a7a2f2b806e3112e3312c248093f37b4fe72fce9de2",
       "preview": "The ruling and the dissent. Found hanged at MCC New York ~6:30 a.m., 10 Aug 2019...",
-      "length": 904
+      "length": 894
     },
     {
       "index": 68,
@@ -1962,9 +1962,9 @@
     },
     {
       "index": 73,
-      "hash": "e7cee26afbbd712b851c1e1767ee2dc50e686c069b87afb704965493971066af",
+      "hash": "5a1b0b3e648586d256d8f8b83d8d862966634f5d2dcfd29b6765012ecab84a2b",
       "preview": "He is dead. Start there, because the rest of this passage is about how, not whet...",
-      "length": 732
+      "length": 2160
     },
     {
       "index": 74,
