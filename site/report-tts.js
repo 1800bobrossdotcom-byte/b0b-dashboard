@@ -332,27 +332,61 @@
       u.onend = function () {
         // Ignore events from a cancelled/superseded utterance (see speakSeq).
         if (mySeq !== speakSeq || !playing) return;
-        chunkIdx++;
-        if (chunkIdx >= blocks[idx].chunks.length) {
-          clearHighlight(blocks[idx].el);
-          idx++; chunkIdx = 0;
-        }
-        if (idx >= blocks.length) { finish(); return; }
-        speakCurrent();
+        advance();
       };
       u.onerror = function (ev) {
         setDiag('⚠ ERROR: ' + ((ev && ev.error) || 'unknown') + ' · voice=' + (chosenVoice ? chosenVoice.name : 'default'));
         if (mySeq !== speakSeq || !playing) return;
-        // "interrupted"/"canceled" are our own cancels — never treat as a fault.
-        if (ev && (ev.error === 'interrupted' || ev.error === 'canceled')) return;
+        if (ev && (ev.error === 'interrupted' || ev.error === 'canceled')) {
+          // Our own cancels bump speakSeq first, so they never reach here. An interruption of the
+          // CURRENT line came from outside - another page's audio, the OS taking the audio focus -
+          // and used to leave the narrator "playing" in silence. Say the line again, twice at most.
+          if (retries < 2) { retries++; setTimeout(function () { if (mySeq === speakSeq && playing) speakCurrent(); }, 400); return; }
+        }
         // Skip a genuinely problematic chunk rather than stalling.
+        retries = 0;
         chunkIdx++;
         if (chunkIdx >= blocks[idx].chunks.length) { idx++; chunkIdx = 0; }
         if (idx >= blocks.length) { finish(); return; }
         setTimeout(speakCurrent, 60);
       };
+      u.onboundary = (function (f) { return function (ev) { lastSign = Date.now(); f(ev); }; })(u.onboundary);
+      var st = u.onstart;
+      u.onstart = function (ev) { lastSign = Date.now(); stalls = 0; st(ev); };
+      // Chromium drops onend for an utterance that has been garbage-collected, and the narration
+      // then stops dead after some line. Holding the object keeps its events alive.
+      current = u; lastSign = Date.now(); spokenAt = Date.now();
       window.speechSynthesis.speak(u);
     }
+    function advance() {
+      retries = 0;
+      chunkIdx++;
+      if (chunkIdx >= blocks[idx].chunks.length) {
+        clearHighlight(blocks[idx].el);
+        idx++; chunkIdx = 0;
+      }
+      if (idx >= blocks.length) { finish(); return; }
+      speakCurrent();
+    }
+    var current = null, retries = 0, lastSign = 0, spokenAt = 0, watchdog = null, stalls = 0;
+    // If the engine goes quiet without ending the line (a lost onend, a silent interruption), carry on:
+    // not speaking, nothing pending, still "playing", and nothing heard from the line for a while.
+    function startWatchdog() {
+      stopWatchdog();
+      watchdog = setInterval(function () {
+        var sp = window.speechSynthesis;
+        if (!playing || !current || sp.paused) return;
+        var quiet = Date.now() - Math.max(lastSign, spokenAt);
+        if (!sp.speaking && !sp.pending && quiet > 2500) {
+          // three lines in a row that never started means the engine itself has stopped (a mobile
+          // browser that refuses speech outside a tap): pause and say so, rather than skip through silently
+          if (++stalls >= 3) { stalls = 0; pause(); setStatus('The speech engine stopped - press play to continue'); return; }
+          setDiag('watchdog: engine went quiet - continuing');
+          advance();
+        }
+      }, 1000);
+    }
+    function stopWatchdog() { if (watchdog) { clearInterval(watchdog); watchdog = null; } }
 
     // Chromium silently halts speechSynthesis after ~15s of continuous output,
     // even across a queue. A periodic pause()+resume() nudge keeps it running.
@@ -380,13 +414,14 @@
       // speech on mobile Safari.
       try { window.speechSynthesis.resume(); } catch (e) {}
       startKeepAlive();
+      startWatchdog();
       emit('state', { playing: true });
       speakCurrent();
     }
     function pause() {
       playing = false;
       elPlay.textContent = '▶';
-      stopKeepAlive();
+      stopKeepAlive(); stopWatchdog();
       ++speakSeq;                    // invalidate the in-flight utterance's callbacks
       window.speechSynthesis.cancel();
       setStatus('Paused — ' + shortLabel());
@@ -396,7 +431,7 @@
     function stop() {
       playing = false;
       elPlay.textContent = '▶';
-      stopKeepAlive();
+      stopKeepAlive(); stopWatchdog();
       ++speakSeq;
       window.speechSynthesis.cancel();
       if (blocks[idx]) clearHighlight(blocks[idx].el);
@@ -433,7 +468,7 @@
     function finish() {
       playing = false;
       elPlay.textContent = '▶';
-      stopKeepAlive();
+      stopKeepAlive(); stopWatchdog();
       if (blocks[blocks.length - 1]) clearHighlight(blocks[blocks.length - 1].el);
       idx = 0; chunkIdx = 0;
       setStatus('Finished — end of report');

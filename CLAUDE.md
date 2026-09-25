@@ -182,11 +182,11 @@ than once.
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
 **LISTEN MODE — rebuilt 25 Sept 2026 after "not using the correct images … lingers far too long … should have video …
-think pacing, cuts, edits, and correct information"; live.** The narrator (`report-tts.js?v=7`) emits `b0b-tts` events
+think pacing, cuts, edits, and correct information"; live.** The narrator (`report-tts.js?v=8`) emits `b0b-tts` events
 (`chunk`, `boundary`, `state`, `ready`) and exposes `window.__b0bTTS`; its player and voice picker sit at
 `--b0b-signal-h + 48px` (above the countermeasures drawer), every device voice is listed (English auto-pick),
 diagnostics only with `?ttsdebug=1`. **The editor is `site/listen-plan.js`** (browser + Node): each spoken line → a cut
-list anchored to character positions; `site/report-listen.js?v=3` plays it against the voice (word boundaries when the
+list anchored to character positions; `site/report-listen.js?v=4` plays it against the voice (word boundaries when the
 engine sends them, otherwise a speaking rate measured line by line). **Rules, in code:** (1) **no filler pool** — a
 picture or clip appears only when the line names its subject, via hand-curated triggers in
 `scripts/listen-media-keys.json`; the first version drew "ambient" pictures and matched loose words (Bank → BIS tower
@@ -216,7 +216,20 @@ their stated licence: GCHQ aerial (OGL v1.0), Area 51 / Dimona (US government, s
 `scripts/build-listen-places.py` → `site/listen-places.js` (mass-shooting markers excluded). **TRAPS:** the dev server
 rate-limits at 60/min — route `/img/listen/` from disk in Playwright; satellite tiles through the sandbox browser proxy
 take ~6 s each (curl 0.25 s) — route them via `execFile('curl')` in tests; a canvas fly-in that draws the next zoom
-level at 1/8 scale "to warm it" fetched 5,850 tiles — prefetch the 3×5 around the pin instead. **Flagged, not changed:
+level at 1/8 scale "to warm it" fetched 5,850 tiles — prefetch the 3×5 around the pin instead. **AUDIO FAULTS FIXED 25 Sept ("music player starts
+playing or the narration cuts out outright"):** (1) `soundtrack.js?v=3` ducked by polling `speechSynthesis.speaking`,
+which reads the gap between two lines as "done" and restarted the music; it now follows the narrator's `b0b-tts`
+state events (music back only 1.5 s after a pause/finish) and listen mode holds it via `__b0bSoundtrackHold`;
+(2) the YouTube IFrame API arrives seconds after load and `adopt()` started the music whenever autoplay had been
+attempted — mid-narration; it now adopts silently while narrating/held and pauses the player if it starts anyway;
+(3) `report-tts.js?v=8`: a browser-side `interrupted` on the current line (another audio source, OS focus) was
+treated as our own cancel and left the narrator "playing" in silence — now retried twice; the utterance object is
+held (Chromium drops `onend` for a garbage-collected utterance); a 1 s watchdog continues after 2.5 s of an engine
+that went quiet, and after three lines that never started it pauses with "The speech engine stopped - press play".
+**Proven both ways** with scratchpad `audiotest.js` (mock engine with foreign interrupt / lost onend / dead engine,
+stub IFrame API loading 6 s late): old code stops after 2-4 lines and starts YouTube twice mid-narration; new code
+reads on with zero plays. *Trap:* Playwright routes — the LAST registered wins; a catch-all registered after a
+specific stub silently swallows it, and the test "passes" against both versions. **Flagged, not changed:
 the live map carries residence house numbers** ("9 East 71st Street Townhouse", "358 El Brillo Way", "22 Avenue Foch")
 against §2's streets-only rule — the author's call. **The XXIV favorite-nation entry is still HELD** in
 `research/drafts/xxiv-favorite-nation.html`. Scale line 277 / 1,083 / 135.

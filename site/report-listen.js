@@ -728,6 +728,8 @@
       syncVoices();
       root.hidden = false; open = true;
       document.documentElement.style.overflow = 'hidden';
+      // the slideshow has the floor: the site soundtrack stops and stays stopped until it closes
+      if (typeof window.__b0bSoundtrackHold === 'function') window.__b0bSoundtrackHold(true);
       lastSec = -1; prevChunk = null; curShot = null; lastCut = 0;
       clearInterval(ticker); ticker = setInterval(tick, 60);
       var st = TTS.state();
@@ -742,6 +744,7 @@
     if (!root) return;
     root.hidden = true; open = false;
     document.documentElement.style.overflow = '';
+    if (typeof window.__b0bSoundtrackHold === 'function') window.__b0bSoundtrackHold(false);
     clearInterval(ticker);
     stage.querySelectorAll('.bl-shot').forEach(function (n) { n.parentNode.removeChild(n); });
     curEl = null; curShot = null; cur = null;

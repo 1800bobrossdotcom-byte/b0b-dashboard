@@ -172,7 +172,7 @@
   // will allow unmuted audio - so the loader doubles as the permission slip.
   // It respects a previous stop: a reader who silenced this stays silenced.
   window.__b0bSoundtrackStart = function () {
-    if (held || offByChoice() || playing) return;
+    if (held || narrating || offByChoice() || playing) return;
     play(true);
   };
 
@@ -196,13 +196,31 @@
     if (bar.parentNode) bar.parentNode.removeChild(bar);
   });
 
-  // Duck for the report narrator rather than talking over it. report-tts.js
-  // drives window.speechSynthesis, so polling `speaking` needs no edit there.
+  // Duck for the report narrator rather than talking over it. The narrator
+  // (report-tts.js) announces play and pause as 'b0b-tts' state events, and the
+  // music follows those: stopped while the narrator is playing, back only once it
+  // has been paused or has finished for a moment. Polling speechSynthesis.speaking
+  // instead (the previous version) read the gap between two spoken lines as
+  // "finished", restarted the music on almost every line, and on phones the
+  // restarted player could take the audio from the voice and cut it off.
+  var narrating = false, resumeTimer = 0;
+  document.addEventListener('b0b-tts', function (e) {
+    var d = e.detail || {};
+    if (d.kind !== 'state') return;
+    narrating = !!d.playing;
+    clearTimeout(resumeTimer);
+    if (narrating) { if (playing) { duckedByNarrator = true; stop(); } return; }
+    if (duckedByNarrator && !held && !offByChoice()) {
+      resumeTimer = setTimeout(function () {
+        if (!narrating && !held && duckedByNarrator && !offByChoice()) { duckedByNarrator = false; play(true); }
+      }, 1500);
+    }
+  });
+  // Belt and braces for any other speech on the page: stop, never restart, from the poll.
   setInterval(function () {
     var sp = window.speechSynthesis;
     if (!sp || held) return;
     if (sp.speaking && playing) { duckedByNarrator = true; stop(); }
-    else if (duckedByNarrator && !sp.speaking && !offByChoice()) { duckedByNarrator = false; play(true); }
   }, 700);
 
   // ---- mount now, network or no network ------------------------------------
@@ -230,7 +248,12 @@
   function adopt() {
     if (apiReady || !window.YT || !window.YT.Player) return;
     apiReady = true;
-    var wasPlaying = playing || attempted;
+    // The API can arrive seconds after the page - by then the narrator or a film may have the floor.
+    // Starting the music then was the "music comes on mid-narration" fault, and on phones it can take
+    // the audio from the voice. Adopt silently in that case; the narrator's pause brings it back.
+    var busy = held || narrating;
+    if (busy && (playing || attempted)) duckedByNarrator = !held;
+    var wasPlaying = (playing || attempted) && !busy;
     iframeDriver.stop();
     var holder = document.createElement('div');
     holder.id = 'b0b-snd-frame';
@@ -246,7 +269,12 @@
           onReady: function () { driver = apiDriver; if (wasPlaying) apiDriver.play(); },
           // 1 = playing. This is the only thing that sets `playing` true
           // without a user gesture, which is what keeps the label honest.
-          onStateChange: function (e) { playing = (e.data === 1); setLabel(); }
+          onStateChange: function (e) {
+            playing = (e.data === 1);
+            // never talk over the narrator or a film, whatever started the player
+            if (playing && (held || narrating)) { try { player.pauseVideo(); } catch (x) {} playing = false; if (!held) duckedByNarrator = true; }
+            setLabel();
+          }
         }
       });
     } catch (e) {
