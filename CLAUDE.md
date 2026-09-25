@@ -181,30 +181,38 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
-**LISTEN MODE: THE NARRATOR NOW HAS A SLIDESHOW, AND THE VOICE PICKER WORKS — 25 Sept 2026, live.** Author: *"do a long
-slide show for when playing the audio reading … slides supply with subtitles and then visuals … fix the audio language
-module as well - I can't see or select different voices"*, then *"also include new images - graphics, animations, like you
-do in the short films"*. **Voice picker:** the player's second row sat behind the signal bar and the countermeasures drawer.
-The player and ▶ button now sit at `--b0b-signal-h + 48px` (the drawer bar is 36 px). Voices are grouped British / American /
-other English / **other languages**, with a count. Every device voice is now listed; the automatic pick stays English. The
-diagnostic row shows only with `?ttsdebug=1`. `report-tts.js?v=7` emits `b0b-tts` events (`chunk`, `boundary`, `state`,
-`ready`) and exposes `window.__b0bTTS`. **Slideshow:** `site/report-listen.js?v=1`, opened from **▣ SLIDES** in the player
-or **▣ LISTEN + SLIDES** in the sidebar. It follows the narration: section cards (numeral, typed title, filmstrip), subsection
-cards, typed quotes, count-up money figures, dated ledgers, map pins, the report's own figures and the films' licensed
-stills with their burned-in source tags. Subtitles light each word (engine boundaries, else timed). Data files are generated:
-`scripts/build-listen-places.py` → `site/listen-places.js` (1,109 keys from map markers; **mass-shooting markers excluded**
-while that question is open), and `scripts/build-listen-media.py` → `site/listen-media.js` + `site/img/listen/` (145 JPEGs,
-13.6 MB; needs the session's sourcing manifests via `B0B_LISTEN_MANIFESTS`). **The picture rules are enforced in code and
-data, because a slideshow that picks its own pictures is a montage, and in a montage juxtaposition is implication.** A face is
-shown only when its subject is named in the line being read. A bare surname counts only if it is not preceded by a
-different given name and not followed by a capitalised word: the test caught **Jeffrey Epstein's booking photo on the line
-about Mark Epstein**; "Hoover Institution" and "Herbert Hoover" do not trigger J. Edgar Hoover. The three FBI files on Robert
-Maxwell and Headington Hill are name-triggered too, never filler. Three ERC-1155 frames with identifiable people are excluded
-from the section-change flash, as they were from the Epstein–Maxwell film. Verified with Playwright and a mocked engine (8
-voices, word boundaries), at 1440 px and 390 px. **The XXIV favorite-nation entry is still HELD:** it moved out of
-`report.html` into `research/drafts/xxiv-favorite-nation.html` (insertion point in its header), so branch and main now carry
-the same page. The Section X Egypt FMF mechanism correction (FRBNY early payment FY2001–11 under P.L. 106-280, ended from
-FY2012; cash-flow financing ended from FY2018) went live with this deploy. Scale line unchanged at 277 / 1,083 / 135.
+**LISTEN MODE — rebuilt 25 Sept 2026 after "not using the correct images … lingers far too long … should have video …
+think pacing, cuts, edits, and correct information"; live.** The narrator (`report-tts.js?v=7`) emits `b0b-tts` events
+(`chunk`, `boundary`, `state`, `ready`) and exposes `window.__b0bTTS`; its player and voice picker sit at
+`--b0b-signal-h + 48px` (above the countermeasures drawer), every device voice is listed (English auto-pick),
+diagnostics only with `?ttsdebug=1`. **The editor is `site/listen-plan.js`** (browser + Node): each spoken line → a cut
+list anchored to character positions; `site/report-listen.js?v=2` plays it against the voice (word boundaries when the
+engine sends them, otherwise a speaking rate measured line by line). **Rules, in code:** (1) **no filler pool** — a
+picture or clip appears only when the line names its subject, via hand-curated triggers in
+`scripts/listen-media-keys.json`; the first version drew "ambient" pictures and matched loose words (Bank → BIS tower
+×67, Washington → 1963 march ×37, Article, Reading), which is the wrong-images defect; (2) otherwise the shot is built
+from the line itself: its phrase set as type (verbatim, context phrase above), figures counted up and **labelled with the
+clause they sit in**, dates/timelines labelled with **the clause each date belongs to** (a bracketed date belongs to the
+words before it — the v1 card read "1973 → Camp David Accords"), quotations with their verbatim lead-in, the report's
+own arrow chains, lists lit item by item, **tier stamps only for verdicts** ("is documented", "NOT ESTABLISHED",
+"(attributed)", never the adjective); (3) places fly in on **Esri World Imagery** (same tiles and credit as /map; CSP
+already admits them) — **residences, private islands, enclaves get zoom 0 (dot map only)**, house numbers and people's
+names stripped from pin labels, "Place - topic" qualifiers (Egypt, Qatar, Burbank, Cambridge) no longer pin one topical
+marker, and a line that flies to a site doesn't cut away to a generic institution photo; (4) faces only for the named
+dead; a bare surname is guarded ("Mark Epstein" ≠ Jeffrey; "JFK" airport ≠ Kennedy; "NSA" as National Security Advisor
+≠ the agency); per-portrait cooldowns (Epstein booking photo 240 s). **Audit before shipping a trigger:**
+`node scripts/listen-storyboard.js <chunks.json> <outdir>` runs the planner over all 14,245 chunks (~22 h of speech) and
+writes `storyboard.txt`, `stats.txt` and **`triggers.txt` (every line that brings each picture on screen — read it)**;
+the chunks dump comes from a Playwright pass over `__b0bTTS.blocks` (scratchpad `dumpchunks.js`). Current: median shot
+2.3 s, p99 5.3 s, ~23 cuts/min. Media: `scripts/build-listen-media.py` (film specs + curated keys + optional
+`listen-media-sourcing.json`) → `site/img/listen/` incl. **muted 640×360 clips cut at the films' own in-points**;
+`scripts/build-listen-places.py` → `site/listen-places.js` (mass-shooting markers excluded). **TRAPS:** the dev server
+rate-limits at 60/min — route `/img/listen/` from disk in Playwright; satellite tiles through the sandbox browser proxy
+take ~6 s each (curl 0.25 s) — route them via `execFile('curl')` in tests; a canvas fly-in that draws the next zoom
+level at 1/8 scale "to warm it" fetched 5,850 tiles — prefetch the 3×5 around the pin instead. **Flagged, not changed:
+the live map carries residence house numbers** ("9 East 71st Street Townhouse", "358 El Brillo Way", "22 Avenue Foch")
+against §2's streets-only rule — the author's call. **The XXIV favorite-nation entry is still HELD** in
+`research/drafts/xxiv-favorite-nation.html`. Scale line 277 / 1,083 / 135.
 
 **A THIRD FILM, "THE EPSTEIN–MAXWELL RECORD", AT `/epstein-maxwell` — 24 Sept 2026, live.** 4:13, 64 shots; 11.8 MB MP4 / 12.7 MB WebM / 20.2 MB download. Verified: 312 subtitle samples, 0 mismatches, browser never spoke; four clean live reads; scale line 277 / 1,083 / 135. **A Spirit of Justice statue (woman with a child figure) was cut after the first render — it sat under the line about the abuse.** `build-transmissions.py` 404 again 24 Sept (worked 23 Sept: flaky, not broken). Author: *"lets make the
 epstein maxwell video"*. **Author's two calls, asked before any script (this is defamation-adjacent, so they were his):
