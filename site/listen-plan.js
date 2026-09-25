@@ -352,8 +352,15 @@
 
     // a line that flies to a specific site does not cut away to a generic institution's building
     // ("the largest NSA station outside the United States" is Menwith Hill, not Fort Meade)
-    if (ev.some(function (e) { return e.kind === 'map'; })) {
-      ev = ev.filter(function (e) { return !((e.kind === 'photo' || e.kind === 'clip') && e.pri === 8); });
+    var pinned = ev.filter(function (e) { return e.kind === 'map'; })[0];
+    if (pinned) {
+      // ...but a picture of that very site stays ("Menwith Hill" names both the pin and the radomes)
+      ev = ev.filter(function (e) {
+        if (!(e.kind === 'photo' || e.kind === 'clip') || e.pri !== 8) return true;
+        var same = pinned.word.indexOf(e.why) >= 0 || e.why.indexOf(pinned.word) >= 0;
+        if (same && Math.abs(e.at - pinned.at) < 40) e.at = pinned.at + 40;     // fly in first, then the picture of it
+        return same && e.at < L - 10;
+      });
     }
     // ---- choose: keep the stronger of two cuts that would land too close ---------------
     ev.sort(function (a, b) { return a.at - b.at || b.pri - a.pri; });

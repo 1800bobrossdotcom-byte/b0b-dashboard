@@ -186,7 +186,7 @@ think pacing, cuts, edits, and correct information"; live.** The narrator (`repo
 (`chunk`, `boundary`, `state`, `ready`) and exposes `window.__b0bTTS`; its player and voice picker sit at
 `--b0b-signal-h + 48px` (above the countermeasures drawer), every device voice is listed (English auto-pick),
 diagnostics only with `?ttsdebug=1`. **The editor is `site/listen-plan.js`** (browser + Node): each spoken line → a cut
-list anchored to character positions; `site/report-listen.js?v=2` plays it against the voice (word boundaries when the
+list anchored to character positions; `site/report-listen.js?v=3` plays it against the voice (word boundaries when the
 engine sends them, otherwise a speaking rate measured line by line). **Rules, in code:** (1) **no filler pool** — a
 picture or clip appears only when the line names its subject, via hand-curated triggers in
 `scripts/listen-media-keys.json`; the first version drew "ambient" pictures and matched loose words (Bank → BIS tower
@@ -204,8 +204,15 @@ dead; a bare surname is guarded ("Mark Epstein" ≠ Jeffrey; "JFK" airport ≠ K
 `node scripts/listen-storyboard.js <chunks.json> <outdir>` runs the planner over all 14,245 chunks (~22 h of speech) and
 writes `storyboard.txt`, `stats.txt` and **`triggers.txt` (every line that brings each picture on screen — read it)**;
 the chunks dump comes from a Playwright pass over `__b0bTTS.blocks` (scratchpad `dumpchunks.js`). Current: median shot
-2.3 s, p99 5.3 s, ~23 cuts/min. Media: `scripts/build-listen-media.py` (film specs + curated keys + optional
-`listen-media-sourcing.json`) → `site/img/listen/` incl. **muted 640×360 clips cut at the films' own in-points**;
+2.3 s, p99 5.3 s, ~23 cuts/min. Media (191 items, 55 clips, 24 MB): `scripts/build-listen-media.py` (film specs + curated keys + the
+listen sourcing manifest, scratchpad `listen-media-sourcing.json`, masters in `/home/user/.b0b-intro-sources/listen/`)
+→ `site/img/listen/` incl. **muted 640×360 clips, never longer than the vetted window** (a film's own shot, or the
+sourcing pass's face-checked in-point; frame-capped — `-t` alone let one source run 0.5 s long into unchecked footage).
+**Every clip's first/middle/last frame was reviewed; dropped:** ivy_1 (two unnamed crewmen full-face), the Nevada
+observers, a Suez profile, a 1920 travelogue intertitle, and the Iran-Contra hearing wide, Occupy 2011 and the 1967
+peace march (identifiable, possibly living). **Excluded on licence/provenance:** the NordGen seed-vault photo
+("Attribution", not CC), a Laurel Lodge photo sourced to CNN, a 1944 Navy St Peter's film (licence unread). Kept at
+their stated licence: GCHQ aerial (OGL v1.0), Area 51 / Dimona (US government, second-hand copies noted);
 `scripts/build-listen-places.py` → `site/listen-places.js` (mass-shooting markers excluded). **TRAPS:** the dev server
 rate-limits at 60/min — route `/img/listen/` from disk in Playwright; satellite tiles through the sandbox browser proxy
 take ~6 s each (curl 0.25 s) — route them via `execFile('curl')` in tests; a canvas fly-in that draws the next zoom

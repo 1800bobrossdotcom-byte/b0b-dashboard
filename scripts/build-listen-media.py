@@ -51,6 +51,10 @@ ERC_WITH_FACES = {'erc_fs_0-rRKsy4', 'erc_8VbssmVYakg', 'erc_OiYL9z3bXEI',
                   # identifiable people in the frame (a cinema audience, an actor, a man on a street)
                   'erc_YlMeyAAWhwE', 'erc_vCeDEZtRY9s', 'erc_VP2iLdUcI1c'}
 MAX_CLIPS = 3
+# clips dropped on review of their frames: unnamed people close to camera (ivy_1, the Nevada observers at the
+# end of nevada_0, a profile in suez_2) and a travelogue intertitle that reads as commentary (bank_of_england_0)
+SKIP_CLIPS = {'ivy_1', 'L_nevada_test_site_ranger_busterjangle_doe_1951_0', 'L_suez_canal_universal_1956_2',
+              'L_bank_of_england_seeing_london_c1920_0'}
 CLIP_LEN = 3.6
 
 
@@ -75,13 +79,14 @@ def cut_clip(src, at, dur, base):
     """Two muted 640x360 encodes of one moment; skipped if both already exist."""
     vf = 'scale=640:360:force_original_aspect_ratio=increase,crop=640:360,fps=25,format=yuv420p'
     webm, mp4 = base + '.webm', base + '.mp4'
+    frames = str(int(dur * 25))                 # an exact frame cap: -t alone let one source run 0.5 s long
     if not os.path.exists(webm):
         subprocess.run([FF, '-v', 'error', '-y', '-ss', '%.2f' % at, '-t', '%.2f' % dur, '-i', src, '-an', '-vf', vf,
-                        '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '42', '-row-mt', '1', '-deadline', 'good',
+                        '-frames:v', frames, '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '42', '-row-mt', '1', '-deadline', 'good',
                         '-cpu-used', '4', webm], check=True)
     if not os.path.exists(mp4):
         subprocess.run([FF, '-v', 'error', '-y', '-ss', '%.2f' % at, '-t', '%.2f' % dur, '-i', src, '-an', '-vf', vf,
-                        '-c:v', 'libx264', '-preset', 'slow', '-crf', '30', '-profile:v', 'main',
+                        '-frames:v', frames, '-c:v', 'libx264', '-preset', 'slow', '-crf', '30', '-profile:v', 'main',
                         '-movflags', '+faststart', mp4], check=True)
     return webm, mp4
 
@@ -114,10 +119,18 @@ def main():
         if kind == 'video' and uses and not no_clips:
             clips = []
             for n, (t, dur) in enumerate(uses[:MAX_CLIPS]):
+                # never longer than the vetted window: a film's own shot, or the sourcing pass's
+                # face-checked in-point. Running past it reaches footage nobody checked.
+                length = min(CLIP_LEN, dur - 0.1)
+                if length < 1.2:
+                    continue
+                if '%s_%d' % (out_name, n) in SKIP_CLIPS:
+                    continue
                 base = os.path.join(CLIP_DIR, '%s_%d' % (out_name, n))
-                webm, mp4 = cut_clip(src_path, max(0, t + 0.2), CLIP_LEN, base)
+                webm, mp4 = cut_clip(src_path, t, length, base)
                 clips.append({'webm': rel(webm), 'mp4': rel(mp4)})
-            e['clips'] = clips
+            if clips:
+                e['clips'] = clips
         entries.append(e)
         sys.stdout.write('\r  %d items' % len(entries)); sys.stdout.flush()
 

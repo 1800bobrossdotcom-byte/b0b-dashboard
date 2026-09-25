@@ -211,7 +211,7 @@
   }
   var dataReady = null;
   function ensureData() {
-    if (!dataReady) dataReady = Promise.all([load('/listen-plan.js?v=1'), load('/listen-media.js?v=2'), load('/listen-places.js?v=2')])
+    if (!dataReady) dataReady = Promise.all([load('/listen-plan.js?v=2'), load('/listen-media.js?v=3'), load('/listen-places.js?v=3')])
       .then(function () { P = window.B0BListenPlan; });
     return dataReady;
   }
@@ -554,9 +554,12 @@
   // fetch a pin's tiles as soon as its line starts, so the fly-in has imagery when it is reached
   function prefetchPin(pin) {
     if (!(pin[8] > 0)) return;
-    flyLevels(pin).forEach(function (zl) {
+    var lv = flyLevels(pin);
+    lv.forEach(function (zl, li) {
       var c = project(pin[6], pin[7], zl), cx = Math.floor(c[0] / 256), cy = Math.floor(c[1] / 256);
-      var dim = canvasDims(), rx = Math.ceil(dim[0] / 512), ry = Math.ceil(dim[1] / 512);
+      // the first and last levels are seen whole; the ones between are only ever seen zoomed, near the pin
+      var dim = canvasDims(), edge = li === 0 || li === lv.length - 1 ? 0 : 1;
+      var rx = Math.max(1, Math.ceil(dim[0] / 512) - edge), ry = Math.max(1, Math.ceil(dim[1] / 512) - edge);
       for (var dy = -ry; dy <= ry; dy++) for (var dx = -rx; dx <= rx; dx++) tile(zl, cx + dx, cy + dy);
     });
   }

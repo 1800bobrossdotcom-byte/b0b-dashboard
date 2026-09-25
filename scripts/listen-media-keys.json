@@ -1,5 +1,5 @@
 {
- "_about": "Curated triggers for listen mode. A picture or clip is shown only when one of its `match` phrases (case-sensitive, whole words; a string starting with ^ is a regex) or `names` occurs in the line being read, and none of its `not` patterns occurs in that line. `names` are people: a bare surname in `names` counts only when it is not preceded by a different given name and not followed by a capitalised word. Items absent from this file are never shown. Every phrase here was counted against the narrated text before it went in; a loose word (Bank, Washington, Article, Reading, East) is what put wrong pictures on screen in the first version.",
+ "_about": "Curated triggers for listen mode. A picture or clip is shown only when one of its `match` phrases (case-sensitive, whole words; a string starting with ^ is a regex) or `names` occurs in the line being read, and none of its `not` patterns occurs in that line. `names` are people: a bare surname in `names` counts only when it is not preceded by a different given name and not followed by a capitalised word. Items absent from this file are never shown. Every phrase here was counted against the narrated text before it went in; a loose word (Bank, Washington, Article, Reading, East) is what put wrong pictures on screen in the first version. Items prefixed L_ were sourced for listen mode itself (manifest listen-media-sourcing.json); excluded on licence or provenance: the NordGen seed-vault photo (\"Attribution\", not CC), a Camp David Laurel Lodge photo whose source traces to CNN, and a 1944 Navy St Peter's film whose licence could not be read.",
  "nuremberg": {
   "match": [
    "Nuremberg",
@@ -28,26 +28,11 @@
    "missile crisis"
   ]
  },
- "irancontra": {
-  "match": [
-   "Iran-Contra",
-   "Iran–Contra",
-   "Iran/Contra"
-  ]
- },
  "huac": {
   "match": [
    "HUAC",
    "House Un-American Activities",
    "Hollywood Ten"
-  ]
- },
- "peacemarch": {
-  "match": [
-   "anti-war march",
-   "peace march",
-   "antiwar movement",
-   "anti-war movement"
   ]
  },
  "I_911_commission_report_cover_2004": {
@@ -433,18 +418,6 @@
   "match": [
    "March on Washington",
    "civil rights movement"
-  ]
- },
- "VI_occupy_wsq_20111008_x12-72": {
-  "match": [
-   "Occupy Wall Street",
-   "Occupy movement"
-  ]
- },
- "VI_occupy_zuccotti_20110917_shankbone": {
-  "match": [
-   "Occupy Wall Street",
-   "Zuccotti"
   ]
  },
  "VI_minneapolis_20200526_fibonacciblue": {
@@ -1252,6 +1225,456 @@
   ],
   "not": [
    "CIA World Factbook"
+  ]
+ },
+ "L_white_house_south_portico_highsmith_2008": {
+  "match": [
+   "the White House PEOC",
+   "White House press release",
+   "White House spokeswoman",
+   "south from the White House",
+   "direct links to the White House",
+   "White House fact sheet",
+   "White House"
+  ],
+  "not": [
+   "White House Counsel",
+   "Obama White House",
+   "Clinton White House",
+   "Trump White House",
+   "White House role"
+  ]
+ },
+ "L_us_treasury_building_highsmith": {
+  "match": [
+   "US Treasury",
+   "U.S. Treasury",
+   "Treasury Department"
+  ],
+  "not": [
+   "Treasury Secretary",
+   "ex-Treasury",
+   "Treasury yields",
+   "Treasury bills"
+  ]
+ },
+ "L_yale_sterling_library_highsmith_2011": {
+  "match": [
+   "Yale secret society",
+   "Yale"
+  ],
+  "not": [
+   "Yale Law Journal"
+  ]
+ },
+ "L_kodak_tower_rochester_highsmith_2018": {
+  "match": [
+   "Eastman Kodak",
+   "Kodak’s Hawkeye Works",
+   "Kodak’s CORONA",
+   "Kodak"
+  ]
+ },
+ "L_blackfriars_bridge_london_bain_c1910": {
+  "match": [
+   "Blackfriars Bridge"
+  ]
+ },
+ "L_st_peters_square_obelisk_photochrom_c1890": {
+  "match": [
+   "Vatican City",
+   "Vatican obelisk",
+   "the Vatican",
+   "Vatican",
+   "St. Peter’s Square",
+   "St. Peter's Square",
+   "St Peter’s Square"
+  ],
+  "not": [
+   "Vatican Bank",
+   "Vatican funds",
+   "Vatican money"
+  ]
+ },
+ "L_jekyll_island_club_margolies_1985": {
+  "match": [
+   "Jekyll Island Club",
+   "Jekyll Island - The Secret Meeting",
+   "From Jekyll Island",
+   "Jekyll Island"
+  ]
+ },
+ "L_washington_monument_highsmith_2007": {
+  "match": [
+   "Washington Monument"
+  ]
+ },
+ "L_bank_of_england_threadneedle_c1901": {
+  "match": [
+   "Bank of England",
+   "City of London Corporation",
+   "Square Mile"
+  ],
+  "not": [
+   "City of London Police",
+   "Traffic and Environmental Zone"
+  ]
+ },
+ "L_great_pyramid_khufu_keystone_1926": {
+  "match": [
+   "Great Pyramid",
+   "Khufu’s outer casing",
+   "Giza",
+   "Khufu"
+  ]
+ },
+ "L_harvard_yard_vanderbilt_1939": {
+  "match": [
+   "Harvard OGC report",
+   "Harvard Law School",
+   "Harvard Kennedy School",
+   "→ Harvard →",
+   "Harvard’s own May 2020 report",
+   "Harvard"
+  ],
+  "not": [
+   "Harvard Five",
+   "Harvard BA",
+   "Harvard International Human Rights Clinic",
+   "Harvard Crimson"
+  ]
+ },
+ "L_v2_rocket_white_sands_universal_1946": {
+  "match": [
+   "Operation Paperclip",
+   "V-2 rocket scientists",
+   "Paperclip"
+  ]
+ },
+ "L_diego_garcia_aerial_usnavy_2013": {
+  "match": [
+   "Diego Garcia"
+  ],
+  "not": [
+   "Diego Garcias"
+  ]
+ },
+ "L_dubai_palm_islands_iss_2025": {
+  "match": [
+   "gold goes to Dubai",
+   "transported to Dubai",
+   "flown to Dubai to be refined",
+   "Dubai gold trade",
+   "transported it to Dubai"
+  ],
+  "not": [
+   "Dubai’s DP World",
+   "Dubai state-owned logistics",
+   "flown to Dubai on an Emirates plane"
+  ]
+ },
+ "L_epstein_files_transparency_act_pl119-38_p2": {
+  "match": [
+   "Epstein Files Transparency Act"
+  ],
+  "not": [
+   "second Epstein Files Transparency Act"
+  ]
+ },
+ "L_usa_patriot_act_pl107-56_p2": {
+  "match": [
+   "PATRIOT Act"
+  ],
+  "not": [
+   "PATRIOT Act co-author",
+   "co-authored the PATRIOT Act"
+  ]
+ },
+ "L_gulf_of_tonkin_resolution_pl88-408": {
+  "match": [
+   "Gulf of Tonkin Resolution",
+   "Gulf of Tonkin"
+  ]
+ },
+ "L_national_security_act_1947_61stat495": {
+  "match": [
+   "National Security Act"
+  ]
+ },
+ "L_cia_act_1949_sec10b_certificate_63stat213": {
+  "match": [
+   "certificate of the Director",
+   "Central Intelligence Agency Act",
+   "§3510"
+  ]
+ },
+ "L_trinity_test_doe_1945_seg": {
+  "match": [
+   "Manhattan Project"
+  ]
+ },
+ "L_thule_operation_blue_jay_bigpicture_1951": {
+  "match": [
+   "Thule Air Base",
+   "Pituffik Space Base",
+   "1951 US–Denmark defence pact"
+  ]
+ },
+ "L_cleopatras_needle_seeing_london_c1920": {
+  "match": [
+   "Cleopatra's Needle"
+  ]
+ },
+ "L_bank_of_england_seeing_london_c1920": {
+  "match": [
+   "Bank of England",
+   "Square Mile"
+  ]
+ },
+ "L_menwith_hill_radomes_2005": {
+  "match": [
+   "Menwith Hill"
+  ]
+ },
+ "L_gchq_doughnut_cheltenham_pingstone_2017": {
+  "match": [
+   "Doughnut",
+   "Cheltenham",
+   "GCHQ"
+  ],
+  "not": [
+   "GCHQ Bude"
+  ]
+ },
+ "L_gchq_doughnut_mod_ogl_2004": {
+  "match": [
+   "Doughnut",
+   "Cheltenham",
+   "GCHQ"
+  ],
+  "not": [
+   "GCHQ Bude"
+  ]
+ },
+ "L_hotel_de_bilderberg_oosterbeek_anefo_1954": {
+  "match": [
+   "Hotel de Bilderberg",
+   "Oosterbeek",
+   "Bilderberg Meeting",
+   "Bilderberg"
+  ]
+ },
+ "L_us_supreme_court_building_highsmith": {
+  "match": [
+   "Supreme Court denied",
+   "Supreme Court upheld",
+   "Supreme Court",
+   "U.S. Supreme Court",
+   "US Supreme Court"
+  ],
+  "not": [
+   "Israeli Supreme Court",
+   "Supreme Court of Israel",
+   "UK Supreme Court",
+   "Supreme Court of the United Kingdom",
+   "Supreme Court of Canada",
+   "Indian Supreme Court",
+   "Supreme Court of India"
+  ]
+ },
+ "L_memphis_alabaster_sphinx_matson": {
+  "match": [
+   "Memphis was the ancient capital"
+  ],
+  "not": [
+   "proposed \"Memphis\"",
+   "Proposed \"Memphis\"",
+   "Memphis National Defense"
+  ]
+ },
+ "L_sr71_blackbird_usaf_air_space_power": {
+  "match": [
+   "SR-71",
+   "Blackbird"
+  ]
+ },
+ "L_nevada_test_site_ranger_busterjangle_doe_1951": {
+  "match": [
+   "Nevada Test Site"
+  ]
+ },
+ "L_yf12a_a11_reveal_universal_1964": {
+  "match": [
+   "Skunk Works"
+  ]
+ },
+ "L_white_house_south_ford_c1921": {
+  "match": [
+   "the White House PEOC",
+   "White House press release",
+   "White House spokeswoman",
+   "south from the White House",
+   "direct links to the White House",
+   "White House fact sheet",
+   "White House"
+  ],
+  "not": [
+   "White House Counsel",
+   "Obama White House",
+   "Clinton White House",
+   "Trump White House",
+   "White House role"
+  ]
+ },
+ "L_us_treasury_building_ford_c1921": {
+  "match": [
+   "US Treasury",
+   "U.S. Treasury",
+   "Treasury Department"
+  ],
+  "not": [
+   "Treasury Secretary",
+   "ex-Treasury",
+   "Treasury yields",
+   "Treasury bills"
+  ]
+ },
+ "L_suez_canal_universal_1956": {
+  "match": [
+   "Suez Canal"
+  ]
+ },
+ "L_unfinished_obelisk_aswan_gabbert_2006": {
+  "match": [
+   "Unfinished Obelisk",
+   "quarries at Aswan"
+  ]
+ },
+ "L_cleopatras_needle_central_park_crane_1895": {
+  "match": [
+   "true companion stands in New York",
+   "New York (1881)"
+  ],
+  "not": [
+   "Central Park walk"
+  ]
+ },
+ "L_camp_lemonnier_flightline_usmc_2024": {
+  "match": [
+   "Camp Lemonnier"
+  ]
+ },
+ "L_area51_groom_lake_usgs_aerial_1968": {
+  "match": [
+   "Area 51"
+  ]
+ },
+ "L_groom_lake_papoose_lake_searls_2010": {
+  "match": [
+   "Groom Lake",
+   "Area 51"
+  ]
+ },
+ "L_place_de_la_concorde_obelisk_baldus_1860s": {
+  "match": [
+   "Place de la Concorde",
+   "Paris (erected 1836)"
+  ]
+ },
+ "L_federal_reserve_bank_new_york_abbott_1936": {
+  "match": [
+   "Federal Reserve Bank of New York",
+   "New York Fed"
+  ]
+ },
+ "L_federal_reserve_bank_new_york_kidfly182_2025": {
+  "match": [
+   "Federal Reserve Bank of New York",
+   "New York Fed"
+  ]
+ },
+ "L_federal_reserve_act_1913_38stat251": {
+  "match": [
+   "Federal Reserve Act"
+  ]
+ },
+ "L_arms_export_control_act_pl94-329_p1": {
+  "match": [
+   "Arms Export Control Act",
+   "22 U.S.C. §2753"
+  ],
+  "not": [
+   "AECA"
+  ]
+ },
+ "L_gao-22-105988_cover_2022": {
+  "match": [
+   "GAO-22-105988"
+  ]
+ },
+ "L_computer_fraud_and_abuse_act_pl99-474_p1": {
+  "match": [
+   "Computer Fraud and Abuse Act"
+  ]
+ },
+ "L_aarons_law_hr2454_2013_p1": {
+  "match": [
+   "Aaron’s Law"
+  ]
+ },
+ "L_foreign_corrupt_practices_act_pl95-213_p1": {
+  "match": [
+   "Foreign Corrupt Practices Act",
+   "FCPA"
+  ]
+ },
+ "L_bank_secrecy_act_pl91-508_p1": {
+  "match": [
+   "Bank Secrecy Act"
+  ]
+ },
+ "L_privacy_act_1974_pl93-579_p1": {
+  "match": [
+   "The Privacy Act protects living individuals",
+   "operation of the Privacy Act",
+   "Privacy Act, 5 U.S.C. 552a"
+  ],
+  "not": [
+   "Privacy Act request"
+  ]
+ },
+ "L_freedom_of_information_act_1966_pl89-487_p1": {
+  "match": [
+   "The Freedom of Information Act (FOIA, 1966)",
+   "FOIA",
+   "Freedom of Information Act"
+  ],
+  "not": [
+   "Freedom of Information Act 2000",
+   "Freedom of Information Act 1982",
+   "CIA Freedom of Information Act request",
+   "FOIA 2000",
+   "UK Freedom of Information"
+  ]
+ },
+ "L_dimona_negev_nuclear_research_center_corona_1968": {
+  "match": [
+   "Negev Nuclear Research Center",
+   "Dimona"
+  ]
+ },
+ "L_begin_carter_sadat_camp_david_1978": {
+  "match": [
+   "Camp David Accords",
+   "Camp David table"
+  ],
+  "cooldown": 120
+ },
+ "L_goldman_sachs_200_west_street_2024": {
+  "match": [
+   "Goldman Sachs → Treasury",
+   "Goldman Sachs / Wall Street",
+   "Goldman Sachs"
   ]
  }
 }
