@@ -1,13 +1,13 @@
 {
-  "generated": "2026-09-24T03:12:07.776Z",
+  "generated": "2026-09-25T02:23:48.977Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "caf5665a8bcc5f928269547a6f8d8804f3915b44eb94eb62e746ad764deca2e6",
+  "fullFileHash": "d186a9d5054bdc4b1b9ddccdf9b7b96454914a46e27d36e327787c0f3dbddf26",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "b0a8603aacef309322a1823f06affa48bc145cd5950e3898d9ace4353df833ad",
+      "hash": "27f60d13c3d6cfdbe90564c0f6bdaf616eae405ad51a01f1add07719673221f3",
       "length": 40298
     },
     {
@@ -692,8 +692,8 @@
     },
     {
       "id": "x-the-octagon-state-strategic-command-center",
-      "hash": "086b05b44ac37bc58047f79cf69040b954538fb47a10cb8ba89b2b2a22b20388",
-      "length": 5816
+      "hash": "91aac7f4309c94ceeaa968511d0044ee20c418e6d14c3ebeffb8a76c29e70f4f",
+      "length": 6025
     },
     {
       "id": "x-tura-masara-quarries-the-galleries-to-the-west",
@@ -5226,9 +5226,9 @@
     },
     {
       "index": 617,
-      "hash": "128f9eb7f18dc31a88baaba594319f19f1c720ed26e0ef384bbf5a443695fb7b",
+      "hash": "b20740f9db6c40922b314e4c0deb821e3b5c621b1a7accfb980671d33363a91c",
       "preview": "United States - documented aid, and a mechanism that forecloses it. Egypt has re...",
-      "length": 910
+      "length": 1119
     },
     {
       "index": 618,

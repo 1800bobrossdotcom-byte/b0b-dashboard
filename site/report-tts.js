@@ -35,7 +35,7 @@
     st.textContent = [
       '.tts-reading{background:linear-gradient(90deg,rgba(0,255,65,.14),rgba(0,255,65,.03));',
       'box-shadow:inset 3px 0 0 #00ff41;border-radius:3px;transition:background .25s;}',
-      '#ttsPlayer{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:100000;',
+      '#ttsPlayer{position:fixed;left:50%;bottom:calc(var(--b0b-signal-h,46px) + 48px);transform:translateX(-50%);z-index:2147483002;',
       'display:flex;flex-direction:column;gap:8px;max-width:min(680px,calc(100vw - 24px));',
       'background:rgba(10,10,10,.96);border:1px solid #1f3a24;border-radius:12px;',
       'padding:10px 14px;box-shadow:0 8px 30px rgba(0,0,0,.6);',
@@ -51,15 +51,15 @@
       '#ttsPlayer .tts-close{border-color:#553;color:#c99;}',
       '#ttsPlayer select,#ttsPlayer input[type=range]{background:#111;border:1px solid #333;',
       'color:#cfcfcf;border-radius:6px;font-family:inherit;font-size:.7rem;padding:3px 4px;}',
-      '#ttsPlayer select{max-width:190px;}',
+      '#ttsPlayer select{max-width:260px;}','#ttsPlayer .tts-diag{display:none;}#ttsPlayer.tts-debug .tts-diag{display:flex;}','#ttsPlayer .tts-vcount{font-size:.62rem;color:#6a7a6a;}',
       '#ttsPlayer label{font-size:.66rem;color:#8a8a8a;display:flex;align-items:center;gap:5px;}',
-      '#ttsFab{position:fixed;right:16px;bottom:18px;z-index:100000;background:#0a0a0a;',
+      '#ttsFab{position:fixed;right:16px;bottom:calc(var(--b0b-signal-h,46px) + 48px);z-index:100000;background:#0a0a0a;',
       'border:1px solid #2a4a30;color:#00ff41;border-radius:50%;width:52px;height:52px;cursor:pointer;',
       'font-size:1.4rem;box-shadow:0 6px 20px rgba(0,0,0,.55);transition:.15s;}',
       '#ttsFab:hover{background:#00ff41;color:#000;}',
       '#ttsFab.hidden{display:none;}',
       '@media (max-width:600px){#ttsPlayer .tts-status{flex-basis:100%;}',
-      '#ttsPlayer select{max-width:130px;}}'
+      '#ttsPlayer select{max-width:200px;}}'
     ].join('');
     document.head.appendChild(st);
 
@@ -136,15 +136,23 @@
         '<button class="tts-close" id="ttsClose" title="Hide player" aria-label="Hide">✕</button>' +
       '</div>' +
       '<div class="tts-row">' +
-        '<label>Voice <select id="ttsVoice"></select></label>' +
+        '<label>Voice <select id="ttsVoice" aria-label="Narrator voice"><option>loading voices…</option></select></label>' +
+        '<span class="tts-vcount" id="ttsVCount"></span>' +
         '<label>Speed <input type="range" id="ttsRate" min="0.6" max="1.6" step="0.05" value="' + rate + '"></label>' +
         '<span id="ttsRateVal" style="font-size:.66rem;color:#8a8a8a;">' + rate.toFixed(2) + '×</span>' +
       '</div>' +
-      '<div class="tts-row"><span id="ttsDiag" style="font-size:.6rem;color:#6a7a6a;flex:1 1 100%;' +
+      '<div class="tts-row tts-diag"><span id="ttsDiag" style="font-size:.6rem;color:#6a7a6a;flex:1 1 100%;' +
         'white-space:normal;word-break:break-word;">diag…</span></div>';
     document.body.appendChild(player);
+    // The diagnostic line is for debugging on a device (?ttsdebug=1), not for readers.
+    if (/[?&]ttsdebug=1/.test(location.search)) player.classList.add('tts-debug');
     var elDiag = player.querySelector('#ttsDiag');
     function setDiag(s) { if (elDiag) elDiag.textContent = 'diag: ' + s; }
+    // Listen mode (report-listen.js) follows the narration through these events.
+    function emit(kind, detail) {
+      detail = detail || {}; detail.kind = kind;
+      try { document.dispatchEvent(new CustomEvent('b0b-tts', { detail: detail })); } catch (e) {}
+    }
 
     var fab = document.createElement('button');
     fab.id = 'ttsFab';
@@ -164,6 +172,7 @@
     var elVoice = player.querySelector('#ttsVoice');
     var elRate = player.querySelector('#ttsRate');
     var elRateVal = player.querySelector('#ttsRateVal');
+    var elVCount = player.querySelector('#ttsVCount');
 
     // ---- sidebar LISTEN button --------------------------------------------
     if (sidebarButtons) {
@@ -181,7 +190,9 @@
     function loadVoices() {
       var all = window.speechSynthesis.getVoices();
       var en = all.filter(function (v) { return /^en(-|_|$)/i.test(v.lang); });
-      voices = en.length ? en : all;
+      // Every voice the device has is listed (other languages last); the
+      // automatic pick stays English, because the report is written in English.
+      voices = all;
       if (!voices.length) return;
 
       // Don't let a spurious voiceschanged re-run the auto-selector over a
@@ -189,7 +200,7 @@
       if (!voiceLocked) {
         var savedName = localStorage.getItem(LS_VOICE);
         var saved = voices.filter(function (v) { return v.name === savedName; })[0];
-        chosenVoice = saved || bestVoice(voices);
+        chosenVoice = saved || bestVoice(en.length ? en : voices);
         if (saved) voiceLocked = true; // a prior explicit choice stays put
       }
 
@@ -200,13 +211,29 @@
       if (document.activeElement === elVoice) return;
       voicesSig = sig;
       elVoice.innerHTML = '';
-      voices.slice().sort(function (a, b) { return score(b) - score(a); }).forEach(function (v) {
-        var o = document.createElement('option');
-        o.value = v.name;
-        o.textContent = v.name + (v.lang ? ' (' + v.lang + ')' : '');
-        if (chosenVoice && v.name === chosenVoice.name) o.selected = true;
-        elVoice.appendChild(o);
+      // Grouped by accent so the list is navigable on devices that expose dozens.
+      var groups = [['British', /^en-gb/], ['American', /^en-us/], ['Irish, Australian, other English', /^en/], ['Other languages', /./]];
+      var sorted = voices.slice().sort(function (a, b) { return score(b) - score(a); });
+      var used = {};
+      groups.forEach(function (g) {
+        var members = sorted.filter(function (v) {
+          var l = (v.lang || '').toLowerCase().replace(/_/g, '-');
+          return !used[v.name] && g[1].test(l);
+        });
+        if (!members.length) return;
+        var og = document.createElement('optgroup');
+        og.label = g[0] + ' (' + members.length + ')';
+        members.forEach(function (v) {
+          used[v.name] = 1;
+          var o = document.createElement('option');
+          o.value = v.name;
+          o.textContent = v.name.replace(/^Microsoft |^Google /, '') + (v.localService === false ? ' · online' : '');
+          if (chosenVoice && v.name === chosenVoice.name) o.selected = true;
+          og.appendChild(o);
+        });
+        elVoice.appendChild(og);
       });
+      if (elVCount) elVCount.textContent = voices.length + ' voice' + (voices.length === 1 ? '' : 's');
       if (typeof setDiag === 'function') {
         setDiag('voices=' + voices.length + ' · pick=' + (chosenVoice ? chosenVoice.name + '/' + chosenVoice.lang : 'none') +
           ' · iOS=' + isIOS + ' · api=' + ('speechSynthesis' in window));
@@ -232,6 +259,16 @@
     // Voices load asynchronously in most browsers.
     loadVoices();
     window.speechSynthesis.onvoiceschanged = loadVoices;
+    // Some engines only populate on a later tick; poll briefly, then say so plainly.
+    var vTries = 0;
+    (function pollVoices() {
+      if (voices.length) return;
+      loadVoices();
+      if (voices.length) return;
+      if (++vTries < 20) return void setTimeout(pollVoices, 250);
+      elVoice.innerHTML = '<option>device default</option>';
+      if (elVCount) elVCount.textContent = 'this browser lists no voices - the default one will read';
+    })();
 
     function score(v) {
       var s = 0, n = (v.name || '').toLowerCase();
@@ -283,12 +320,15 @@
       updateStatus();
 
       var u = new SpeechSynthesisUtterance(b.chunks[chunkIdx]);
+      emit('chunk', { block: idx, chunk: chunkIdx, chunks: b.chunks.length, text: b.chunks[chunkIdx], el: b.el,
+        total: blocks.length, rate: rate });
+      u.onboundary = function (ev) { if (mySeq === speakSeq) emit('boundary', { charIndex: ev.charIndex, name: ev.name }); };
       if (chosenVoice) u.voice = chosenVoice;
       u.rate = rate;
       u.pitch = 1.0;   // natural pitch; a warmer, less clipped read than a lowered robot tone
       u.lang = (chosenVoice && chosenVoice.lang) || 'en-GB';
       setDiag('speak → ' + (chosenVoice ? chosenVoice.name : 'default') + ' /' + u.lang + ' · waiting…');
-      u.onstart = function () { if (mySeq === speakSeq) setDiag('AUDIO PLAYING · ' + (chosenVoice ? chosenVoice.name : 'default')); };
+      u.onstart = function () { if (mySeq === speakSeq) { setDiag('AUDIO PLAYING · ' + (chosenVoice ? chosenVoice.name : 'default')); emit('start', { block: idx, chunk: chunkIdx }); } };
       u.onend = function () {
         // Ignore events from a cancelled/superseded utterance (see speakSeq).
         if (mySeq !== speakSeq || !playing) return;
@@ -340,6 +380,7 @@
       // speech on mobile Safari.
       try { window.speechSynthesis.resume(); } catch (e) {}
       startKeepAlive();
+      emit('state', { playing: true });
       speakCurrent();
     }
     function pause() {
@@ -349,6 +390,7 @@
       ++speakSeq;                    // invalidate the in-flight utterance's callbacks
       window.speechSynthesis.cancel();
       setStatus('Paused — ' + shortLabel());
+      emit('state', { playing: false });
     }
     function toggle() { playing ? pause() : play(); }
     function stop() {
@@ -385,7 +427,8 @@
     function restartIfPlaying() {
       if (blocks[idx]) reveal(blocks[idx].el);
       if (playing) speakCurrent();
-      else { highlight(blocks[idx].el); scrollTo(blocks[idx].el); updateStatus(); }
+      else { highlight(blocks[idx].el); scrollTo(blocks[idx].el); updateStatus();
+        emit('chunk', { block: idx, chunk: 0, chunks: blocks[idx].chunks.length, text: blocks[idx].chunks[0], el: blocks[idx].el, total: blocks.length, rate: rate, preview: true }); }
     }
     function finish() {
       playing = false;
@@ -394,6 +437,7 @@
       if (blocks[blocks.length - 1]) clearHighlight(blocks[blocks.length - 1].el);
       idx = 0; chunkIdx = 0;
       setStatus('Finished — end of report');
+      emit('state', { playing: false, finished: true });
     }
 
     // ---- highlight / scroll / reveal --------------------------------------
@@ -544,6 +588,20 @@
     } catch (e) { /* MutationObserver unavailable — buttons still work, just no self-heal */ }
     window.addEventListener('message', function () { setTimeout(addListenButtons, 60); });
     window.addEventListener('load', addListenButtons);
+
+    // The listen-mode slideshow drives the narrator through this, and reads
+    // the block list to lay out its section ladder.
+    window.__b0bTTS = {
+      blocks: blocks,
+      play: function () { showPlayer(); if (!playing) play(); },
+      pause: function () { if (playing) pause(); },
+      toggle: function () { showPlayer(); toggle(); },
+      next: nextBlock, prev: prevBlock,
+      sectionNext: function () { sectionStep(1); }, sectionPrev: function () { sectionStep(-1); },
+      startAt: startAt,
+      state: function () { return { playing: playing, block: idx, chunk: chunkIdx, total: blocks.length, voice: chosenVoice ? chosenVoice.name : null, rate: rate }; }
+    };
+    emit('ready', { total: blocks.length });
 
     // Reveal the FAB now that everything is wired.
     fab.classList.remove('hidden');

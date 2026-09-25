@@ -181,6 +181,31 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**LISTEN MODE: THE NARRATOR NOW HAS A SLIDESHOW, AND THE VOICE PICKER WORKS — 25 Sept 2026, live.** Author: *"do a long
+slide show for when playing the audio reading … slides supply with subtitles and then visuals … fix the audio language
+module as well - I can't see or select different voices"*, then *"also include new images - graphics, animations, like you
+do in the short films"*. **Voice picker:** the player's second row sat behind the signal bar and the countermeasures drawer.
+The player and ▶ button now sit at `--b0b-signal-h + 48px` (the drawer bar is 36 px). Voices are grouped British / American /
+other English / **other languages**, with a count. Every device voice is now listed; the automatic pick stays English. The
+diagnostic row shows only with `?ttsdebug=1`. `report-tts.js?v=7` emits `b0b-tts` events (`chunk`, `boundary`, `state`,
+`ready`) and exposes `window.__b0bTTS`. **Slideshow:** `site/report-listen.js?v=1`, opened from **▣ SLIDES** in the player
+or **▣ LISTEN + SLIDES** in the sidebar. It follows the narration: section cards (numeral, typed title, filmstrip), subsection
+cards, typed quotes, count-up money figures, dated ledgers, map pins, the report's own figures and the films' licensed
+stills with their burned-in source tags. Subtitles light each word (engine boundaries, else timed). Data files are generated:
+`scripts/build-listen-places.py` → `site/listen-places.js` (1,109 keys from map markers; **mass-shooting markers excluded**
+while that question is open), and `scripts/build-listen-media.py` → `site/listen-media.js` + `site/img/listen/` (145 JPEGs,
+13.6 MB; needs the session's sourcing manifests via `B0B_LISTEN_MANIFESTS`). **The picture rules are enforced in code and
+data, because a slideshow that picks its own pictures is a montage, and in a montage juxtaposition is implication.** A face is
+shown only when its subject is named in the line being read. A bare surname counts only if it is not preceded by a
+different given name and not followed by a capitalised word: the test caught **Jeffrey Epstein's booking photo on the line
+about Mark Epstein**; "Hoover Institution" and "Herbert Hoover" do not trigger J. Edgar Hoover. The three FBI files on Robert
+Maxwell and Headington Hill are name-triggered too, never filler. Three ERC-1155 frames with identifiable people are excluded
+from the section-change flash, as they were from the Epstein–Maxwell film. Verified with Playwright and a mocked engine (8
+voices, word boundaries), at 1440 px and 390 px. **The XXIV favorite-nation entry is still HELD:** it moved out of
+`report.html` into `research/drafts/xxiv-favorite-nation.html` (insertion point in its header), so branch and main now carry
+the same page. The Section X Egypt FMF mechanism correction (FRBNY early payment FY2001–11 under P.L. 106-280, ended from
+FY2012; cash-flow financing ended from FY2018) went live with this deploy. Scale line unchanged at 277 / 1,083 / 135.
+
 **A THIRD FILM, "THE EPSTEIN–MAXWELL RECORD", AT `/epstein-maxwell` — 24 Sept 2026, live.** 4:13, 64 shots; 11.8 MB MP4 / 12.7 MB WebM / 20.2 MB download. Verified: 312 subtitle samples, 0 mismatches, browser never spoke; four clean live reads; scale line 277 / 1,083 / 135. **A Spirit of Justice statue (woman with a child figure) was cut after the first render — it sat under the line about the abuse.** `build-transmissions.py` 404 again 24 Sept (worked 23 Sept: flaky, not broken). Author: *"lets make the
 epstein maxwell video"*. **Author's two calls, asked before any script (this is defamation-adjacent, so they were his):
 the conclusion AND the sponsor hypothesis go in at their tiers ("Both, at their tiers"), and people are named only for
