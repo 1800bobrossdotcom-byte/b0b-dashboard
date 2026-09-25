@@ -1,0 +1,1257 @@
+{
+ "_about": "Curated triggers for listen mode. A picture or clip is shown only when one of its `match` phrases (case-sensitive, whole words; a string starting with ^ is a regex) or `names` occurs in the line being read, and none of its `not` patterns occurs in that line. `names` are people: a bare surname in `names` counts only when it is not preceded by a different given name and not followed by a capitalised word. Items absent from this file are never shown. Every phrase here was counted against the narrated text before it went in; a loose word (Bank, Washington, Article, Reading, East) is what put wrong pictures on screen in the first version.",
+ "nuremberg": {
+  "match": [
+   "Nuremberg",
+   "International Military Tribunal",
+   "war crimes tribunal"
+  ]
+ },
+ "ivy": {
+  "match": [
+   "hydrogen bomb",
+   "thermonuclear",
+   "Ivy Mike",
+   "Operation Ivy"
+  ]
+ },
+ "explorer": {
+  "match": [
+   "Explorer 1",
+   "Explorer I"
+  ]
+ },
+ "cuba": {
+  "match": [
+   "Cuban Missile Crisis",
+   "Cuban missile crisis",
+   "missile crisis"
+  ]
+ },
+ "irancontra": {
+  "match": [
+   "Iran-Contra",
+   "Iran–Contra",
+   "Iran/Contra"
+  ]
+ },
+ "huac": {
+  "match": [
+   "HUAC",
+   "House Un-American Activities",
+   "Hollywood Ten"
+  ]
+ },
+ "peacemarch": {
+  "match": [
+   "anti-war march",
+   "peace march",
+   "antiwar movement",
+   "anti-war movement"
+  ]
+ },
+ "I_911_commission_report_cover_2004": {
+  "match": [
+   "9/11 Commission",
+   "9-11 Commission",
+   "National Commission on Terrorist Attacks"
+  ]
+ },
+ "I_feinstein_2004_senate": {
+  "names": [
+   "Dianne Feinstein",
+   "Feinstein"
+  ],
+  "cooldown": 120
+ },
+ "I_jackson_nuremberg_1945": {
+  "names": [
+   "Robert H. Jackson",
+   "Robert Jackson"
+  ],
+  "match": [
+   "Justice Jackson"
+  ],
+  "cooldown": 120
+ },
+ "I_nara_wnrc_stacks": {
+  "match": [
+   "Washington National Records Center",
+   "records center",
+   "Records Center"
+  ]
+ },
+ "I_pentagon_papers_chart_interlocking": {
+  "match": [
+   "Pentagon Papers"
+  ]
+ },
+ "I_pentagon_papers_p99_diagram": {
+  "match": [
+   "Pentagon Papers"
+  ]
+ },
+ "I_swartz_2011_jasonscott": {
+  "names": [
+   "Aaron Swartz",
+   "Swartz"
+  ],
+  "cooldown": 120
+ },
+ "II_cctv_mumbai_2018_cc0": {
+  "match": [
+   "CCTV",
+   "surveillance cameras",
+   "surveillance camera",
+   "camera network",
+   "facial recognition",
+   "facial-recognition"
+  ]
+ },
+ "II_cctv_pole_saarbruecken_2020": {
+  "match": [
+   "CCTV",
+   "surveillance cameras",
+   "surveillance camera",
+   "camera network",
+   "facial recognition",
+   "facial-recognition"
+  ]
+ },
+ "II_cctv_roof_2025_cc0": {
+  "match": [
+   "CCTV",
+   "surveillance cameras",
+   "surveillance camera",
+   "camera network",
+   "facial recognition",
+   "facial-recognition",
+   "ALPR",
+   "licence-plate reader",
+   "license plate reader",
+   "license-plate reader"
+  ]
+ },
+ "II_hoover_1961_trikosko": {
+  "names": [
+   "J. Edgar Hoover",
+   "Edgar Hoover",
+   "Hoover"
+  ],
+  "not": [
+   "Hoover Institution",
+   "Hoover Dam",
+   "Herbert Hoover",
+   "Hoover Tower",
+   "Hoover Building"
+  ],
+  "cooldown": 120
+ },
+ "II_hoover_newsreel_1937": {
+  "names": [
+   "J. Edgar Hoover",
+   "Edgar Hoover",
+   "Hoover"
+  ],
+  "not": [
+   "Hoover Institution",
+   "Hoover Dam",
+   "Herbert Hoover",
+   "Hoover Tower",
+   "Hoover Building"
+  ],
+  "cooldown": 120
+ },
+ "II_huac_pumpkin_papers_1948": {
+  "names": [
+   "Whittaker Chambers"
+  ],
+  "match": [
+   "Pumpkin Papers",
+   "pumpkin papers"
+  ],
+  "cooldown": 120
+ },
+ "II_mccarthy_1954_up": {
+  "names": [
+   "Joseph McCarthy",
+   "Joe McCarthy",
+   "McCarthy"
+  ],
+  "match": [
+   "McCarthyism",
+   "McCarthy era"
+  ],
+  "not": [
+   "Kevin McCarthy"
+  ],
+  "cooldown": 120
+ },
+ "II_mccarthy_cohn_19540312": {
+  "names": [
+   "Roy Cohn"
+  ],
+  "match": [
+   "Army-McCarthy",
+   "Army–McCarthy"
+  ],
+  "cooldown": 120
+ },
+ "II_nsa_hq_fort_meade": {
+  "match": [
+   "NSA",
+   "National Security Agency",
+   "Fort Meade"
+  ],
+  "not": [
+   "^NSA (Utah|data cent)",
+   "^\\(NSA\\b",
+   "Deputy NSA",
+   "National Security Advis",
+   "NSA, then"
+  ]
+ },
+ "III_eisenhower_official_1959": {
+  "names": [
+   "Dwight D. Eisenhower",
+   "Dwight Eisenhower",
+   "Eisenhower"
+  ],
+  "not": [
+   "Eisenhower Executive Office",
+   "Eisenhower Library",
+   "Eisenhower Matrix"
+  ],
+  "cooldown": 120
+ },
+ "III_mq9_reaper_afghanistan_2008": {
+  "match": [
+   "MQ-9",
+   "Reaper drone",
+   "Reaper drones",
+   "Predator drone",
+   "Predator drones",
+   "drone strike",
+   "drone strikes",
+   "armed drone",
+   "armed drones"
+  ]
+ },
+ "III_nasa_global_hawk_2015": {
+  "match": [
+   "Global Hawk"
+  ]
+ },
+ "III_nasa_pleiades_supercomputer_2015": {
+  "match": [
+   "supercomputer",
+   "supercomputers"
+  ]
+ },
+ "III_nsa_aerial_2013_paglen": {
+  "match": [
+   "National Security Agency",
+   "Fort Meade"
+  ]
+ },
+ "III_nsa_utah_data_center_2014_eff": {
+  "match": [
+   "Utah Data Center",
+   "Bluffdale"
+  ]
+ },
+ "III_oppenheimer_1944": {
+  "names": [
+   "J. Robert Oppenheimer",
+   "Robert Oppenheimer",
+   "Oppenheimer"
+  ],
+  "match": [
+   "Manhattan Project"
+  ],
+  "cooldown": 120
+ },
+ "IV_corona_beijing_1967": {
+  "match": [
+   "CORONA",
+   "spy satellite",
+   "spy satellites",
+   "reconnaissance satellite",
+   "reconnaissance satellites",
+   "satellite imagery",
+   "satellite image"
+  ]
+ },
+ "IV_corona_story_camera_imagery_x2970-3030": {
+  "match": [
+   "CORONA",
+   "reconnaissance satellite",
+   "reconnaissance satellites",
+   "spy satellite",
+   "spy satellites",
+   "National Reconnaissance Office",
+   "NRO"
+  ]
+ },
+ "IV_corona_story_recovery_x1640-1700": {
+  "match": [
+   "CORONA",
+   "Discoverer",
+   "National Reconnaissance Office"
+  ]
+ },
+ "IV_dulles_portrait": {
+  "names": [
+   "Allen Dulles",
+   "Allen W. Dulles",
+   "Dulles"
+  ],
+  "not": [
+   "Dulles Airport",
+   "Dulles International",
+   "John Foster Dulles",
+   "Foster Dulles"
+  ],
+  "cooldown": 120
+ },
+ "IV_landsat9_liftoff_20210927": {
+  "match": [
+   "rocket launch",
+   "launch vehicle",
+   "Vandenberg",
+   "Landsat"
+  ]
+ },
+ "IV_nasa_black_marble_americas_2012": {
+  "match": [
+   "from orbit",
+   "night lights",
+   "the Americas at night"
+  ]
+ },
+ "IV_starlink_ctio_2019": {
+  "match": [
+   "Starlink",
+   "satellite constellation",
+   "megaconstellation"
+  ]
+ },
+ "IV_starlink_tuebingen_2020_cc0": {
+  "match": [
+   "Starlink",
+   "satellite constellation",
+   "megaconstellation"
+  ]
+ },
+ "V_cuban_missiles_19621101": {
+  "match": [
+   "Cuban Missile Crisis",
+   "Cuban missile crisis",
+   "missile crisis",
+   "U-2 photograph",
+   "U-2 photographs",
+   "reconnaissance photograph"
+  ]
+ },
+ "V_jfk_portrait_1963": {
+  "names": [
+   "John F. Kennedy",
+   "John Kennedy",
+   "President Kennedy",
+   "John Fitzgerald Kennedy"
+  ],
+  "cooldown": 120
+ },
+ "V_jfk_reading_copy_19621022_p2": {
+  "match": [
+   "Cuban Missile Crisis",
+   "Cuban missile crisis",
+   "missile crisis"
+  ]
+ },
+ "V_powell_official_2001": {
+  "names": [
+   "Colin Powell"
+  ],
+  "match": [
+   "Secretary Powell"
+  ],
+  "cooldown": 120
+ },
+ "V_powell_slide_mobile": {
+  "match": [
+   "mobile biological",
+   "mobile bio",
+   "mobile weapons laboratories",
+   "Powell's presentation",
+   "Powell's UN",
+   "Powell presentation",
+   "weapons of mass destruction",
+   "WMD"
+  ]
+ },
+ "V_powell_slide_tube": {
+  "match": [
+   "aluminum tubes",
+   "aluminium tubes",
+   "Powell's presentation",
+   "Powell's UN",
+   "Powell presentation",
+   "weapons of mass destruction",
+   "WMD"
+  ]
+ },
+ "V_stevenson_un_1962": {
+  "names": [
+   "Adlai Stevenson"
+  ],
+  "cooldown": 120
+ },
+ "VI_airship_protest_utah_2014": {
+  "match": [
+   "Utah Data Center",
+   "Bluffdale"
+  ]
+ },
+ "VI_march_on_washington_1963_crowd_x70-130": {
+  "match": [
+   "March on Washington"
+  ]
+ },
+ "VI_march_on_washington_1963_mlk_x1100-1150": {
+  "names": [
+   "Martin Luther King Jr.",
+   "Martin Luther King",
+   "Dr. King"
+  ],
+  "match": [
+   "March on Washington"
+  ],
+  "cooldown": 120
+ },
+ "VI_march_on_washington_aerial_1963": {
+  "match": [
+   "March on Washington",
+   "civil rights movement"
+  ]
+ },
+ "VI_occupy_wsq_20111008_x12-72": {
+  "match": [
+   "Occupy Wall Street",
+   "Occupy movement"
+  ]
+ },
+ "VI_occupy_zuccotti_20110917_shankbone": {
+  "match": [
+   "Occupy Wall Street",
+   "Zuccotti"
+  ]
+ },
+ "VI_minneapolis_20200526_fibonacciblue": {
+  "match": [
+   "George Floyd",
+   "Minneapolis"
+  ]
+ },
+ "VII_carter_church_1977": {
+  "names": [
+   "Frank Church"
+  ],
+  "cooldown": 120
+ },
+ "VII_church_1961_portrait": {
+  "names": [
+   "Frank Church",
+   "Senator Church",
+   "Sen. Church"
+  ],
+  "match": [
+   "Church Committee"
+  ],
+  "cooldown": 120
+ },
+ "VII_church_committee_book2_title_1976": {
+  "match": [
+   "Church Committee",
+   "Rights of Americans",
+   "Book II"
+  ]
+ },
+ "VII_nixon_army_one_1974": {
+  "names": [
+   "Richard Nixon",
+   "Richard M. Nixon",
+   "President Nixon",
+   "Nixon"
+  ],
+  "not": [
+   "Nixon Library",
+   "Nixon administration's"
+  ],
+  "cooldown": 120
+ },
+ "VII_nixon_resignation_letter_1974": {
+  "match": [
+   "Nixon resigned",
+   "Nixon's resignation",
+   "resignation of Richard Nixon",
+   "Watergate"
+  ]
+ },
+ "VII_nixon_transcripts_address_1974_x163-223": {
+  "match": [
+   "Watergate",
+   "Watergate tapes",
+   "White House tapes"
+  ]
+ },
+ "VII_reagan_tower_report_1987": {
+  "match": [
+   "Tower Commission",
+   "Tower Board",
+   "Tower Report",
+   "Iran-Contra"
+  ]
+ },
+ "VII_ssci_gavel_20120130": {
+  "match": [
+   "Senate Intelligence Committee",
+   "Senate Select Committee on Intelligence",
+   "SSCI",
+   "Senate Intelligence"
+  ]
+ },
+ "VII_watergate_committee_1973": {
+  "match": [
+   "Senate Watergate Committee",
+   "Ervin Committee",
+   "Watergate hearings"
+  ]
+ },
+ "I_elizabeth_i_de_passe_1592": {
+  "names": [
+   "Elizabeth I",
+   "Queen Elizabeth I"
+  ],
+  "match": [
+   "East India Company charter"
+  ],
+  "cooldown": 120
+ },
+ "I_elizabeth_in_parliament_1682": {
+  "names": [
+   "Elizabeth I",
+   "Queen Elizabeth I",
+   "Francis Walsingham",
+   "Walsingham"
+  ],
+  "cooldown": 120
+ },
+ "I_shah_alam_diwani_clive_west_1818": {
+  "names": [
+   "Robert Clive",
+   "Lord Clive",
+   "Shah Alam"
+  ],
+  "match": [
+   "diwani",
+   "Diwani"
+  ],
+  "cooldown": 120
+ },
+ "I_east_india_house_leadenhall_1800_rijks": {
+  "match": [
+   "East India Company",
+   "East India House",
+   "Leadenhall"
+  ]
+ },
+ "I_east_indiaman_atlas_huggins_1822": {
+  "match": [
+   "East India Company",
+   "East Indiaman",
+   "East Indiamen"
+  ]
+ },
+ "I_east_indiaman_warley_salmon_1804": {
+  "match": [
+   "East India Company",
+   "East Indiaman",
+   "East Indiamen"
+  ]
+ },
+ "I_delhi_durbar_1877_imperial_assemblage": {
+  "match": [
+   "Imperial Assemblage",
+   "Delhi Durbar",
+   "Empress of India"
+  ]
+ },
+ "I_delhi_durbar_1911_jharokha": {
+  "names": [
+   "George V"
+  ],
+  "match": [
+   "Delhi Durbar"
+  ],
+  "cooldown": 120
+ },
+ "II_bretton_woods_united_news_1944_x171-241": {
+  "match": [
+   "Bretton Woods"
+  ]
+ },
+ "II_bretton_woods_meeting_room_highsmith": {
+  "match": [
+   "Bretton Woods",
+   "Mount Washington Hotel"
+  ]
+ },
+ "II_bis_tower_basel_2015_romero": {
+  "match": [
+   "Bank for International Settlements",
+   "BIS",
+   "Basel"
+  ],
+  "not": [
+   "Basel III",
+   "Basel Committee",
+   "Basel Accords",
+   "Bureau of Industry and Security",
+   "BIS Entity List",
+   "BIS export",
+   "Commerce Department's BIS",
+   "Commerce BIS"
+  ]
+ },
+ "III_operation_alert_1956_x96-166": {
+  "match": [
+   "Operation Alert",
+   "civil defense",
+   "civil defence",
+   "Civil Defense"
+  ]
+ },
+ "IV_capitol_dome_highsmith": {
+  "match": [
+   "U.S. Capitol",
+   "the Capitol",
+   "Capitol Hill",
+   "Capitol building",
+   "Capitol Building"
+  ],
+  "not": [
+   "Capitol Records"
+  ]
+ },
+ "VII_us_capitol_dome": {
+  "match": [
+   "U.S. Capitol",
+   "the Capitol",
+   "Capitol Hill",
+   "Capitol building",
+   "Capitol Building"
+  ],
+  "not": [
+   "Capitol Records"
+  ]
+ },
+ "V_volcker_senate_banking_1983": {
+  "names": [
+   "Paul Volcker",
+   "Paul A. Volcker",
+   "Volcker"
+  ],
+  "not": [
+   "Volcker Rule",
+   "Volcker Alliance"
+  ],
+  "cooldown": 120
+ },
+ "V_treasury_building_highsmith": {
+  "match": [
+   "Treasury Department",
+   "Department of the Treasury",
+   "U.S. Treasury",
+   "US Treasury",
+   "the Treasury",
+   "Treasury Secretary",
+   "Secretary of the Treasury",
+   "OFAC"
+  ],
+  "not": [
+   "Treasury bond",
+   "Treasury bonds",
+   "Treasury bill",
+   "Treasury bills",
+   "Treasuries",
+   "Treasury yields",
+   "HM Treasury",
+   "Treasury market",
+   "Treasury securities"
+  ]
+ },
+ "V_pentagon_aerial_highsmith": {
+  "match": [
+   "Pentagon",
+   "Department of Defense",
+   "Defense Department",
+   "DoD",
+   "Department of War"
+  ],
+  "not": [
+   "Pentagon Papers"
+  ]
+ },
+ "VI_lockheed_p38_assembly_line_1942": {
+  "match": [
+   "Lockheed Burbank",
+   "Lockheed",
+   "Lockheed Aircraft",
+   "Burbank plant"
+  ],
+  "not": [
+   "Spirit of Burbank",
+   "Lockheed Martin"
+  ]
+ },
+ "VI_u2_spy_story_1960_x0-58": {
+  "match": [
+   "Francis Gary Powers",
+   "Gary Powers",
+   "U-2 incident",
+   "U-2 was shot down",
+   "shot down the U-2"
+  ],
+  "names": [
+   "Khrushchev",
+   "Nikita Khrushchev"
+  ],
+  "cooldown": 120
+ },
+ "VI_look_to_lockheed_plant_1940_x500-560": {
+  "match": [
+   "Lockheed Burbank",
+   "Lockheed",
+   "Lockheed Aircraft",
+   "Burbank plant"
+  ],
+  "not": [
+   "Spirit of Burbank",
+   "Lockheed Martin"
+  ]
+ },
+ "VI_look_to_lockheed_hudsons_1940_x696-756": {
+  "match": [
+   "Lockheed",
+   "Lockheed Hudson",
+   "Hudson bomber"
+  ],
+  "not": [
+   "Spirit of Burbank",
+   "Lockheed Martin"
+  ]
+ },
+ "VII_mkultra_subproject8_19530609": {
+  "match": [
+   "MKUltra",
+   "MK-Ultra",
+   "MKULTRA",
+   "MK Ultra",
+   "Subproject"
+  ]
+ },
+ "VII_northwoods_memo_lemnitzer_19620313_p1": {
+  "match": [
+   "Northwoods",
+   "Operation Northwoods"
+  ]
+ },
+ "VII_ukusa_revision_uscib_19541206_p1": {
+  "match": [
+   "UKUSA",
+   "Five Eyes",
+   "USCIB"
+  ]
+ },
+ "VIII_oval_office_desk_empty_1964": {
+  "match": [
+   "Resolute desk",
+   "the President's desk",
+   "Oval Office"
+  ]
+ },
+ "III_mount_weather_fema_2007": {
+  "match": [
+   "Mount Weather"
+  ]
+ },
+ "III_cheyenne_mountain_norad_entrance_1968": {
+  "match": [
+   "Cheyenne Mountain",
+   "NORAD"
+  ]
+ },
+ "III_cheyenne_mountain_construction_tunnel": {
+  "match": [
+   "Cheyenne Mountain"
+  ]
+ },
+ "III_greenbrier_highsmith_2015": {
+  "match": [
+   "Greenbrier",
+   "White Sulphur Springs",
+   "Project Greek Island"
+  ]
+ },
+ "V_eccles_building_1937": {
+  "match": [
+   "Federal Reserve",
+   "the Fed",
+   "Federal Reserve Board",
+   "Eccles Building",
+   "FOMC",
+   "Federal Open Market Committee"
+  ],
+  "not": [
+   "Federal Reserve Bank of New York",
+   "New York Fed",
+   "FRBNY"
+  ]
+ },
+ "V_eccles_building_fed_2011": {
+  "match": [
+   "Federal Reserve",
+   "the Fed",
+   "Federal Reserve Board",
+   "Eccles Building",
+   "FOMC",
+   "Federal Open Market Committee"
+  ],
+  "not": [
+   "Federal Reserve Bank of New York",
+   "New York Fed",
+   "FRBNY"
+  ]
+ },
+ "VI_kelly_johnson_skunk_works_1950s": {
+  "names": [
+   "Kelly Johnson",
+   "Clarence \"Kelly\" Johnson",
+   "Clarence L. Johnson"
+  ],
+  "match": [
+   "Skunk Works"
+  ],
+  "cooldown": 120
+ },
+ "VI_a12_oxcart_in_flight_1960s": {
+  "match": [
+   "A-12",
+   "OXCART",
+   "Oxcart",
+   "SR-71",
+   "Blackbird"
+  ]
+ },
+ "VI_u2_article347_camera_ports_nasm": {
+  "match": [
+   "U-2",
+   "AQUATONE",
+   "Aquatone"
+  ],
+  "not": [
+   "U-2 incident"
+  ]
+ },
+ "VI_f35_heritage_flight_2018": {
+  "match": [
+   "F-35",
+   "F-35A",
+   "F-35I",
+   "Joint Strike Fighter",
+   "Lockheed Martin"
+  ]
+ },
+ "V_eisenhower_farewell_reading_copy_p15": {
+  "match": [
+   "military-industrial complex",
+   "military industrial complex",
+   "farewell address",
+   "Farewell Address"
+  ],
+  "not": [
+   "Washington's Farewell",
+   "Farewell Address, 1796"
+  ]
+ },
+ "VIII_oval_office_empty_19810422": {
+  "match": [
+   "Oval Office"
+  ]
+ },
+ "VIII_fomc_board_room_entrance_2007": {
+  "match": [
+   "FOMC",
+   "Federal Open Market Committee",
+   "Board of Governors"
+  ]
+ },
+ "VIII_fed_board_room_coat_of_arms_2014": {
+  "match": [
+   "FOMC",
+   "Federal Open Market Committee",
+   "Board of Governors"
+  ]
+ },
+ "VIII_fed_board_room_1940": {
+  "match": [
+   "Federal Reserve Board",
+   "Board of Governors",
+   "FOMC"
+  ]
+ },
+ "VIII_unsc_chamber_empty_2024_forrester": {
+  "match": [
+   "Security Council",
+   "UN Security Council",
+   "UNSC"
+  ]
+ },
+ "IV_proclamation_7463_federal_register_20010918": {
+  "match": [
+   "Proclamation 7463",
+   "national emergency",
+   "National Emergencies Act"
+  ]
+ },
+ "IV_aumf_public_law_107-40_p1": {
+  "match": [
+   "AUMF",
+   "Authorization for Use of Military Force",
+   "Public Law 107-40",
+   "P.L. 107-40"
+  ]
+ },
+ "I_robert_maxwell_amsterdam_1989": {
+  "names": [
+   "Robert Maxwell",
+   "Ian Robert Maxwell",
+   "Captain Bob"
+  ],
+  "cooldown": 120
+ },
+ "I_fbi_maxwell_file_cover": {
+  "match": [
+   "Maxwell file",
+   "FBI file on Maxwell",
+   "FBI's Maxwell",
+   "105-25063"
+  ],
+  "names": [
+   "Ian Robert Maxwell"
+  ],
+  "cooldown": 120
+ },
+ "VIII_fbi_maxwell_airtel_1954_redacted": {
+  "match": [
+   "Maxwell file",
+   "FBI file on Maxwell",
+   "FBI's Maxwell",
+   "105-25063"
+  ],
+  "names": [
+   "Ian Robert Maxwell"
+  ],
+  "cooldown": 120
+ },
+ "VIII_fbi_maxwell_heidelberg_1954_redacted": {
+  "match": [
+   "Maxwell file",
+   "FBI file on Maxwell",
+   "FBI's Maxwell",
+   "105-25063"
+  ],
+  "names": [
+   "Ian Robert Maxwell"
+  ],
+  "cooldown": 120
+ },
+ "I_headington_hill_hall_2008": {
+  "match": [
+   "Headington Hill",
+   "Pergamon"
+  ]
+ },
+ "I_tenerife_from_orbit_1991": {
+  "match": [
+   "Tenerife",
+   "Lady Ghislaine",
+   "Canary Islands"
+  ]
+ },
+ "I_canary_islands_from_orbit_1991": {
+  "match": [
+   "Canary Islands",
+   "Lady Ghislaine",
+   "Gran Canaria"
+  ]
+ },
+ "I_mount_of_olives_kidron_1940s": {
+  "match": [
+   "Mount of Olives"
+  ]
+ },
+ "I_mount_of_olives_view_1941": {
+  "match": [
+   "Mount of Olives"
+  ]
+ },
+ "II_columbus_ohio_skyline_2016": {
+  "match": [
+   "Columbus, Ohio",
+   "Columbus"
+  ],
+  "not": [
+   "Christopher Columbus",
+   "Columbus Day",
+   "Knights of Columbus"
+  ]
+ },
+ "II_daily_news_building_abbott_1935": {
+  "match": [
+   "Daily News Building",
+   "New York Daily News",
+   "Daily News"
+  ],
+  "not": [
+   "Philadelphia Daily News",
+   "Daily News Egypt"
+  ]
+ },
+ "II_daily_news_building_entrance_2008": {
+  "match": [
+   "Daily News Building",
+   "New York Daily News",
+   "Daily News"
+  ],
+  "not": [
+   "Philadelphia Daily News",
+   "Daily News Egypt"
+  ]
+ },
+ "III_fbi_headquarters_2012": {
+  "match": [
+   "FBI",
+   "Federal Bureau of Investigation",
+   "J. Edgar Hoover Building"
+  ],
+  "not": [
+   "FBI Most Wanted",
+   "the Bureau of Prisons",
+   "Bureau of Prisons"
+  ]
+ },
+ "IV_epstein_booking_photo_pbso_2006": {
+  "names": [
+   "Jeffrey Epstein",
+   "Jeffrey E. Epstein",
+   "Epstein"
+  ],
+  "not": [
+   "Epstein Files Transparency Act",
+   "Mark Epstein"
+  ],
+  "cooldown": 240
+ },
+ "IV_palm_beach_memorial_fountain_2020": {
+  "match": [
+   "Palm Beach"
+  ],
+  "not": [
+   "Palm Beach County Sheriff",
+   "West Palm Beach"
+  ]
+ },
+ "IV_palm_beach_bridge_lake_worth_2020": {
+  "match": [
+   "Palm Beach",
+   "West Palm Beach",
+   "Lake Worth"
+  ]
+ },
+ "IV_lake_worth_lagoon_2020": {
+  "match": [
+   "Palm Beach",
+   "West Palm Beach",
+   "Lake Worth"
+  ]
+ },
+ "IV_main_justice_rfk_building_2025": {
+  "match": [
+   "Department of Justice",
+   "Justice Department",
+   "DOJ",
+   "Main Justice",
+   "Attorney General"
+  ],
+  "not": [
+   "DOJ EFTA",
+   "EFTA",
+   "DataSet"
+  ]
+ },
+ "V_park_avenue_midtown": {
+  "match": [
+   "Park Avenue",
+   "Park Ave"
+  ]
+ },
+ "V_wall_street_nyse": {
+  "match": [
+   "Wall Street",
+   "New York Stock Exchange",
+   "NYSE"
+  ],
+  "not": [
+   "Wall Street Journal"
+  ]
+ },
+ "V_charlotte_amalie_harbor_1941": {
+  "match": [
+   "Virgin Islands",
+   "USVI",
+   "St. Thomas",
+   "Saint Thomas",
+   "Charlotte Amalie"
+  ],
+  "not": [
+   "Little Saint James",
+   "Little St. James",
+   "Great St. James"
+  ]
+ },
+ "V_charlotte_amalie_harbor_c1915": {
+  "match": [
+   "Virgin Islands",
+   "USVI",
+   "St. Thomas",
+   "Saint Thomas",
+   "Charlotte Amalie"
+  ],
+  "not": [
+   "Little Saint James",
+   "Little St. James",
+   "Great St. James"
+  ]
+ },
+ "VI_thurgood_marshall_courthouse_foley_square_2019": {
+  "match": [
+   "Southern District of New York",
+   "SDNY",
+   "S.D.N.Y.",
+   "Foley Square"
+  ]
+ },
+ "VI_metropolitan_correctional_center_2010": {
+  "match": [
+   "Metropolitan Correctional Center",
+   "MCC",
+   "MCC New York",
+   "MCC Manhattan"
+  ]
+ },
+ "VI_ocme_hirsch_center_2021": {
+  "match": [
+   "Office of Chief Medical Examiner",
+   "Chief Medical Examiner",
+   "medical examiner",
+   "OCME"
+  ]
+ },
+ "VI_lower_manhattan_from_brooklyn_2018": {
+  "match": [
+   "Lower Manhattan",
+   "Manhattan"
+  ],
+  "not": [
+   "Manhattan Project",
+   "Chase Manhattan",
+   "Manhattan District Attorney"
+  ]
+ },
+ "II_queensboro_bridge_upper_east_side_2018": {
+  "match": [
+   "Upper East Side",
+   "East Side of Manhattan",
+   "Manhattan"
+  ],
+  "not": [
+   "Manhattan Project",
+   "Chase Manhattan",
+   "Manhattan District Attorney",
+   "Lower Manhattan"
+  ]
+ },
+ "VII_thurgood_marshall_courthouse_portico_2019": {
+  "match": [
+   "Southern District of New York",
+   "SDNY",
+   "S.D.N.Y.",
+   "Foley Square"
+  ]
+ },
+ "VII_thurgood_marshall_courthouse_tower_2019": {
+  "match": [
+   "Southern District of New York",
+   "SDNY",
+   "S.D.N.Y."
+  ]
+ },
+ "VII_fpc_bryan_texas": {
+  "match": [
+   "FPC Bryan",
+   "Federal Prison Camp Bryan",
+   "Bryan, Texas",
+   "prison camp in Bryan"
+  ]
+ },
+ "VII_fci_tallahassee": {
+  "match": [
+   "FCI Tallahassee",
+   "Tallahassee"
+  ]
+ },
+ "VIII_national_archives_pediment": {
+  "match": [
+   "National Archives",
+   "NARA",
+   "Archivist of the United States"
+  ]
+ },
+ "VIII_cia_headquarters_entrance": {
+  "match": [
+   "CIA",
+   "Central Intelligence Agency",
+   "Langley"
+  ],
+  "not": [
+   "CIA Director",
+   "CIA director",
+   "director of the CIA",
+   "CIA World Factbook"
+  ]
+ },
+ "VIII_cia_lobby_seal": {
+  "match": [
+   "CIA",
+   "Central Intelligence Agency",
+   "Langley",
+   "CIA Director",
+   "CIA director"
+  ],
+  "not": [
+   "CIA World Factbook"
+  ]
+ }
+}
