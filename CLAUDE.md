@@ -181,6 +181,37 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**CURRENT EVENTS SCAN, 22–26 SEPT 2026 — live 26 Sept.** Author: *"do current events scan"*. Two agents (world; US
+institutions/cyber), day pages + named outlets, every quote re-read by me in the spider cache before it went on the
+page. **The scan's biggest finding was our own 22 Sept update:** it said every item was "confirmed against named
+outlets" and was not — **the Iran Fact-Finding Mission paragraph printed only the finding against the US and omitted
+the same report's crimes-against-humanity finding against Iran's government** (≥221 children, ≥29 executions after
+summary trials; Iran's own toll 3,038) — the symmetry rule failing our way; Lamerd is 22 civilians (not 20/100),
+Minab "more than 150, about 120 children" (the 157/26/95 figures had no source), CENTCOM's denial is "into the city of
+Lamerd", not "near"; Colombia withdrew from the ICJ case on **18 Sept** (22nd = the Court's release); EU renewal sealed
+22 Sept, 36 months, list 2,600–3,000 (Euronews/BBC); Greenland **signed 22 Sept**, Narsarsuaq + Mestersvig, non-NATO
+bar "unless the signatories agree otherwise", unsourced "permanent basing rights" removed. All fixed in place, no
+edit narration; heading now "UN findings against both governments". **New: XV
+`xv-status-update-26-september-2026`** (Iran talks → seven-day Hormuz plan → "I reject their proposal"; Senate
+rejected H.Con.Res. 89 49–50, roll call 244; the US blockade — page had "blockade" 0 — 115 vessels redirected per
+CENTCOM; *Cape Dao* attacker not named; UAE suspended Iranian flights by compliance; France to Yanbu, kept distinct
+from UK refuelling; Burhan visa; first Quad–Quintet meeting with the UAE in the room; Pakistan's ten strikes and the
+unclaimed DI Khan bombing; Usmanov delisting/Azerbaijan pardon at its tier; UNCTAD Gaza; Palantir $48.1M / TITAN
+$127M + Anduril $65M / Anduril $20bn — Anduril was 0; **FISA §702 lapsed 12 June**, collection continuing on
+certifications to ~Mar 2027 — 702 was 0). **Ethiopia–Tigray added to the conflict list.** Updated lines: II *Phang v.
+Blanche* (16 Sept order, appeal 26-5334, stay denied 21 Sept, **DOJ Answer ¶29: "no files were withheld or redacted
+on that basis" — national defense/foreign policy**), II discharge petition (216 formal, 218 committed, House out to
+~9 Nov), IV estate settlement (prelim. approval 3 Mar 2026, final hearing 2 Dec 2026), Nord Stream (trial 14 Oct;
+second extradition approved 18 Sept), **ShinyHunters status: FBI "point of breach is still undetermined"; Mandiant ties
+the wave to the known CVE-2026-35273 via a WAF bypass; deadline ~29 Sept — record the outcome.** **HELD, in
+`research/NEWS-2026-09-26-HELD.md`:** the reported federal investigation of the estate's co-executors (anonymous
+sourcing, living and uncharged), a new co-executor class action, BlackCore (Citizen Lab; belongs with the held XXIV
+draft, private firm ≠ state), the OpenAI/Medicare item, the DOJ §2 "politically exposed persons" list (never a
+roster), the Krušik discrepancy, and the draft's war-powers count (likely 17 → 18). **Aggregator errors caught:**
+Wikipedia attributed the DI Khan bombing (no claim), dated Trump's rejection a day early, and invented "21 ENDF
+airstrikes". Nulls: Reuters (robots), AP/Sudan Tribune/OHCHR/CNBC/Forbes/The Hill/Cybernews (403). **Scale line
+278 / 1,094 / 137.**
+
 **LISTEN MODE — rebuilt 25 Sept 2026 after "not using the correct images … lingers far too long … should have video …
 think pacing, cuts, edits, and correct information"; live.** The narrator (`report-tts.js?v=8`) emits `b0b-tts` events
 (`chunk`, `boundary`, `state`, `ready`) and exposes `window.__b0bTTS`; its player and voice picker sit at
