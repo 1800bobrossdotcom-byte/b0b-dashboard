@@ -58,5 +58,11 @@
     "decoy_titles": [
       "Page Not Found | GovInfo"
     ]
+  },
+  "ohchr.org": {
+    "decoy_titles": [
+      "UN Human Rights Office"
+    ],
+    "why": "A PDF path that no longer resolves (seen on the apex host, ohchr.org) 302s to www.ohchr.org/en/ohchr_homepage and serves the homepage, ~138 KB, title 'UN Human Rights Office', with HTTP 200. Real OHCHR PDFs return 200 with no HTML title; the www article pages refuse this crawler with 403. Registered so the homepage is a null, not the document (seen 1 Oct 2026 on A/HRC/63/61)."
   }
 }
