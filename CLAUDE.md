@@ -181,6 +181,28 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**PHONE NARRATION FIXED — 1 Oct 2026, live (`report-tts.js?v=9`, `report-listen.js?v=5`).** Author: *"Narration breaks
+on phone same with slides"*. **Three causes, two of them my own 25 Sept code:** (1) **slides on iPhone never spoke** —
+`openListen()` called `TTS.play()` inside `ensureData().then()`, after three script loads, so iOS no longer counted the
+tap and refused speech; three refusals tripped the stall guard ("speech engine stopped"). Speech now starts
+synchronously in the tap, before the loads. (2) **The 25 Sept watchdog judged a line by `speechSynthesis.speaking`** —
+Android reports `false` mid-line and sends no boundaries, so every line was cut or talked over after 2.5 s. Now: a line
+that never started is *said again* (three misses → pause with the message); on phones a started line is given up only
+when overdue (`len/(11·rate)`·1.6 + 4 s) or when its boundaries stop with the engine idle; desktop keeps the 2.5 s
+idle path (its `speaking` is truthful); hard cap ×3 + 10 s everywhere. (3) **The 10 s `pause()/resume()` keepalive ran
+on Android, where `pause()` cancels the line** → 'interrupted' → retried → repeats and breaks. Keepalive is now
+desktop-only (`isMobile` = iOS or `/Android|Mobi/`). Also: a natural advance never calls `cancel()` (Android can still
+report speaking inside `onend`); a speak after a cancel waits 150 ms (Android drops a same-tick speak); Android's
+`en_GB` lang normalised to `en-GB`; returning to the tab re-says the line if it should have ended while hidden; the
+chunker's regex **lookbehind removed** (Safari < 16.4 rejects it at parse time and the whole narrator is lost).
+**Proven both ways** with scratchpad `mobiletest.js` (Android mock: speaking false, no boundaries, `pause()` kills;
+iOS mock: speech refused unless the first `speak()` runs inside a trusted tap; `OLD=1` serves the deployed files from
+`scratchpad/old/`): old iOS slides 0 lines/3 refused/stopped, old Android 1 line then stopped (or 6 mid-line cuts in
+30 s with `SPEAKS=1`); new 0 cuts, 0 refusals, 0 repeats in all four. Desktop `audiotest.js` still clean (lost onend
+recovers, foreign interrupt retried, dead engine pauses). *Untested on hardware — mocks encode the documented engine
+behaviour, not a real phone.* *Pipeline note:* the film pages' `VideoObject.uploadDate` appears to follow the transmissions
+feed's last `fetched_at` on every build — churn, not a content change; flagged, unchanged.
+
 **CURRENT EVENTS SCAN, 22–26 SEPT 2026 — live 26 Sept.** Author: *"do current events scan"*. Two agents (world; US
 institutions/cyber), day pages + named outlets, every quote re-read by me in the spider cache before it went on the
 page. **The scan's biggest finding was our own 22 Sept update:** it said every item was "confirmed against named

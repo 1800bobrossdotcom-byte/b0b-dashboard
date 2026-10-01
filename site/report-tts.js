@@ -115,6 +115,9 @@
     var isIOS = /iP(hone|ad|od)/.test(navigator.userAgent) ||
       (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
     var isSafari = /^((?!chrome|android|crios|fxios).)*safari/i.test(navigator.userAgent);
+    // Android Chrome's pause() behaves as a cancel on many builds, and its engine reports
+    // speaking=false and sends no word boundaries mid-line - neither can be trusted there.
+    var isMobile = isIOS || /Android|Mobi/i.test(navigator.userAgent);
 
     var rate = parseFloat(localStorage.getItem(LS_RATE));
     if (!(rate >= 0.5 && rate <= 2)) rate = 0.92; // measured audiobook pace — less rushed reads less robotic
@@ -297,14 +300,16 @@
     }
 
     // ---- core: speak the current chunk ------------------------------------
-    function speakCurrent() {
+    function speakCurrent(natural) {
       // Only cancel when something is actually in flight (an interruption:
       // next/prev/jump/rate change). On the normal chunk→chunk advance the
       // previous utterance has already ended, so we DON'T cancel — cancel()
       // immediately followed by speak() outside a user gesture is what breaks
-      // iOS Safari mid-narration.
-      if (window.speechSynthesis.speaking || window.speechSynthesis.pending) {
-        window.speechSynthesis.cancel();
+      // iOS Safari mid-narration. Android can still report speaking=true inside
+      // onend, so a natural advance never cancels at all.
+      var cancelled = false;
+      if (!natural && (window.speechSynthesis.speaking || window.speechSynthesis.pending)) {
+        window.speechSynthesis.cancel(); cancelled = true;
       }
       var mySeq = ++speakSeq; // this call now owns the queue; older callbacks go stale
       if (idx >= blocks.length) { finish(); return; }
@@ -326,7 +331,7 @@
       if (chosenVoice) u.voice = chosenVoice;
       u.rate = rate;
       u.pitch = 1.0;   // natural pitch; a warmer, less clipped read than a lowered robot tone
-      u.lang = (chosenVoice && chosenVoice.lang) || 'en-GB';
+      u.lang = ((chosenVoice && chosenVoice.lang) || 'en-GB').replace(/_/g, '-'); // Android lists en_GB
       setDiag('speak → ' + (chosenVoice ? chosenVoice.name : 'default') + ' /' + u.lang + ' · waiting…');
       u.onstart = function () { if (mySeq === speakSeq) { setDiag('AUDIO PLAYING · ' + (chosenVoice ? chosenVoice.name : 'default')); emit('start', { block: idx, chunk: chunkIdx }); } };
       u.onend = function () {
@@ -350,13 +355,18 @@
         if (idx >= blocks.length) { finish(); return; }
         setTimeout(speakCurrent, 60);
       };
-      u.onboundary = (function (f) { return function (ev) { lastSign = Date.now(); f(ev); }; })(u.onboundary);
+      u.onboundary = (function (f) { return function (ev) { lastSign = Date.now(); gotBoundary = true; started = started || Date.now(); f(ev); }; })(u.onboundary);
       var st = u.onstart;
-      u.onstart = function (ev) { lastSign = Date.now(); stalls = 0; st(ev); };
+      u.onstart = function (ev) { if (mySeq === speakSeq) { lastSign = Date.now(); started = started || Date.now(); stalls = 0; } st(ev); };
       // Chromium drops onend for an utterance that has been garbage-collected, and the narration
       // then stops dead after some line. Holding the object keeps its events alive.
-      current = u; lastSign = Date.now(); spokenAt = Date.now();
-      window.speechSynthesis.speak(u);
+      current = u; lastSign = Date.now(); spokenAt = Date.now(); started = 0; gotBoundary = false;
+      if (cancelled) {
+        // Android Chrome silently drops a speak() issued in the same tick as cancel(); let the engine settle.
+        setTimeout(function () { if (mySeq === speakSeq && playing) { spokenAt = Date.now(); window.speechSynthesis.speak(u); } }, 150);
+      } else {
+        window.speechSynthesis.speak(u);
+      }
     }
     function advance() {
       retries = 0;
@@ -366,26 +376,59 @@
         idx++; chunkIdx = 0;
       }
       if (idx >= blocks.length) { finish(); return; }
-      speakCurrent();
+      speakCurrent(true);
     }
     var current = null, retries = 0, lastSign = 0, spokenAt = 0, watchdog = null, stalls = 0;
-    // If the engine goes quiet without ending the line (a lost onend, a silent interruption), carry on:
-    // not speaking, nothing pending, still "playing", and nothing heard from the line for a while.
+    var started = 0, gotBoundary = false;
+    // A lost onend (or a silent interruption) used to be judged by speechSynthesis.speaking. Phones
+    // report speaking=false in the middle of a line and send no word boundaries, so that cut every
+    // line after 2.5 s. Now: a line that never started is said again; on a phone a started line is
+    // only given up on when it has run well past the time it can take, or when its word boundaries
+    // stop and the engine says it is idle. Desktop engines report speaking truthfully: idle for
+    // 2.5 s there still means the line ended without telling us.
     function startWatchdog() {
       stopWatchdog();
       watchdog = setInterval(function () {
         var sp = window.speechSynthesis;
         if (!playing || !current || sp.paused) return;
-        var quiet = Date.now() - Math.max(lastSign, spokenAt);
-        if (!sp.speaking && !sp.pending && quiet > 2500) {
-          // three lines in a row that never started means the engine itself has stopped (a mobile
-          // browser that refuses speech outside a tap): pause and say so, rather than skip through silently
+        var now = Date.now();
+        if (!started && sp.speaking && !isMobile) started = now;
+        if (!started) {
+          if (now - spokenAt < 4000) return;
+          // three tries that never started means the engine itself has stopped (a mobile browser
+          // that refuses speech outside a tap, a screen that went dark): pause and say so
           if (++stalls >= 3) { stalls = 0; pause(); setStatus('The speech engine stopped - press play to continue'); return; }
-          setDiag('watchdog: engine went quiet - continuing');
-          advance();
+          setDiag('watchdog: line never started - saying it again');
+          speakCurrent();
+          return;
+        }
+        var expect = current.text.length / (11 * rate) * 1000;   // a slow voice, in ms
+        var idle = !sp.speaking && !sp.pending;
+        var overdue = now - started > expect * 1.6 + 4000;
+        var hardCap = now - started > expect * 3 + 10000;
+        var quietIdle = idle && now - lastSign > 2500;
+        if ((quietIdle && (gotBoundary || !isMobile)) || (overdue && (idle || isMobile)) || hardCap) {
+          setDiag('watchdog: line never ended - continuing');
+          stalls = 0;
+          advanceInterrupting();
         }
       }, 1000);
     }
+    // like advance(), but the engine may still hold the line, so cancel it first
+    function advanceInterrupting() {
+      retries = 0;
+      chunkIdx++;
+      if (chunkIdx >= blocks[idx].chunks.length) { clearHighlight(blocks[idx].el); idx++; chunkIdx = 0; }
+      if (idx >= blocks.length) { finish(); return; }
+      speakCurrent();
+    }
+    // Phones stop speech when the screen sleeps or the tab is hidden, without an onend. On return,
+    // say the current line again rather than sit "playing" in silence.
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden || !playing || !current) return;
+      var expect = current.text.length / (11 * rate) * 1000;
+      if (Date.now() - (started || spokenAt) > expect + 2000) { stalls = 0; speakCurrent(); }
+    });
     function stopWatchdog() { if (watchdog) { clearInterval(watchdog); watchdog = null; } }
 
     // Chromium silently halts speechSynthesis after ~15s of continuous output,
@@ -394,7 +437,9 @@
     // keep-alive is desktop-Chromium-only.
     function startKeepAlive() {
       stopKeepAlive();
-      if (isIOS || isSafari) return; // would break narration on Apple browsers
+      // Apple browsers go silent under the nudge; Android's pause() cancels the line, which then
+      // came back as an 'interrupted' error and was said again - the repeating, breaking narration.
+      if (isIOS || isSafari || isMobile) return;
       keepAlive = setInterval(function () {
         if (playing && window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
           window.speechSynthesis.pause();
@@ -676,7 +721,8 @@
       if (!s) return;
       if (s.length <= 160) { out.push(s); return; }
       var buf = '';
-      s.split(/(?<=[,;:—])\s+/).forEach(function (part) {
+      // no regex lookbehind: Safari before 16.4 rejects it at parse time and the whole narrator is lost
+      s.replace(/([,;:—])\s+/g, '$1\u0000').split('\u0000').forEach(function (part) {
         if ((buf + ' ' + part).trim().length > 160 && buf) { pushWrapped(buf.trim()); buf = part; }
         else { buf = (buf ? buf + ' ' : '') + part; }
       });

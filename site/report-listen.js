@@ -722,6 +722,9 @@
   // ---- open / close ------------------------------------------------------------------
   function openListen() {
     if (!TTS) return;
+    // Speech starts here, inside the tap. iOS Safari only lets a page speak from the gesture itself;
+    // after the three script loads below the gesture is gone and the narrator was refused outright.
+    if (!TTS.state().playing) TTS.play();
     ensureData().then(function () {
       if (!P) return;
       if (!root) build();
@@ -734,9 +737,9 @@
       clearInterval(ticker); ticker = setInterval(tick, 60);
       var st = TTS.state();
       setPlay(st.playing);
-      var b = blocks[st.block] || blocks[0];
-      onChunk({ block: st.block, chunk: 0, text: b.chunks[0], rate: st.rate });
-      if (!st.playing) TTS.play();          // the click that opened this is the gesture speech needs
+      var b = blocks[st.block] || blocks[0], ci = Math.min(st.chunk || 0, b.chunks.length - 1);
+      onChunk({ block: st.block, chunk: ci, text: b.chunks[ci], rate: st.rate });
+      if (!st.playing) TTS.play();
       try { root.querySelector('.bl-play').focus({ preventScroll: true }); } catch (e) {}
     });
   }
