@@ -181,6 +181,30 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**SHINYHUNTERS OUTCOME + CURRENT EVENTS SWEEP 26 SEPT–1 OCT 2026 — live 1 Oct.** Author: *"check shinyhunters
+outcome and update"*, *"Do current events sweep"*. Same method as 26 Sept (two agents, day pages → named outlets via the
+spider, **every quote re-checked by me in the spider cache** with scratchpad `vq.py` — strips zero-width characters, which
+syndicated Reuters copies embed and which make a real quote "miss"). **ShinyHunters (XVI entry, now in XXIV):** deadline
+lapsed 29 Sept; **IC3 PSA unchanged** (diffed — *ic3.gov serves a per-request CSP nonce, so every re-fetch hashes as
+CHANGED; diff the body*); nothing published; group: "a marketing campaign" … "We stand corrected" (NBC), goals accomplished
+(Reuters); site offline 30 Sept, cause unknown; FBI: "the cyber incident involving FBIJobs.gov"; Dutch police hold a
+24-year-old arrested **15 Sept** (a week before the claim), unnamed, disowned by the group, not tied to the claim by the
+FBI → anti-map. **Closing line: the claim was abandoned, not proved or disproved; non-publication is a guaranteed null.**
+**Corrections in place to the 26 Sept update:** "economic D-Day" was the 24 Aug campaign name (Treasury sb0637), not a
+threat; "the UAE in the room" → attendance not established; DI Khan 11–16 dead / 30–36 wounded + the ambulance attack,
+"no claim established"; Azerbaijan's "categorically unfounded" denial added; CNN added as the "I reject their proposal"
+source (**the cited Al Jazeera page was rewritten after 26 Sept and no longer carries the quote**); 22 Sept Greenland:
+signed ≠ in force (Art. XII). II Phang: 25 Sept motion to dismiss 26-5334 (captioned with 26-5299). **New XV
+`xv-status-update-1-october-2026`**: US answer via Qatar; "I offered them NOTHING"; ~9,000 troops/third carrier (AP);
+CENTCOM 125 vessels vs Kpler <80%; three tankers 29 Sept, no attacker; **Treasury sb0637 network across Pakistan/Saudi/
+Türkiye + the Mecca Joint Defence Agreement (7 Aug) — page had it 0 — overlap of states printed as not a chain**;
+Fairford (attribution + Iran's denial, no names); Iraq withdrawal 30 Sept ("intelligence support" continues); Taiz counts;
+Sudan visa now on UN News, UAE's nationwide-embargo call vs A3/China/Pakistan/Russia, regime expires **9 Oct — record**;
+Malawi ex-army chief charged (by office only); Af–Pak, Tigray, Ukraine telecoms, Gaza, ICJ null; S.Res. 852 / §502B(c)
+47–51; DDF v. DOJ expedited FOIA; War Dept election memo ("foreign" limiter); Norway hearing. **HELD:**
+`research/NEWS-2026-10-01-HELD.md`. **Spider:** `hosts.json` gained `ohchr.org` (dead PDF path → homepage, 200, title "UN
+Human Rights Office") — so the FFM Iran report is still unread. Scale line **279 / 1,112 / 139.**
+
 **PHONE NARRATION FIXED — 1 Oct 2026, live (`report-tts.js?v=9`, `report-listen.js?v=5`).** Author: *"Narration breaks
 on phone same with slides"*. **Three causes, two of them my own 25 Sept code:** (1) **slides on iPhone never spoke** —
 `openListen()` called `TTS.play()` inside `ensureData().then()`, after three script loads, so iOS no longer counted the
