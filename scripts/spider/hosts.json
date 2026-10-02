@@ -64,5 +64,14 @@
       "UN Human Rights Office"
     ],
     "why": "A PDF path that no longer resolves (seen on the apex host, ohchr.org) 302s to www.ohchr.org/en/ohchr_homepage and serves the homepage, ~138 KB, title 'UN Human Rights Office', with HTTP 200. Real OHCHR PDFs return 200 with no HTML title; the www article pages refuse this crawler with 403. Registered so the homepage is a null, not the document (seen 1 Oct 2026 on A/HRC/63/61)."
+  },
+  "media.cadc.uscourts.gov": {
+    "decoy_bytes": [
+      158
+    ],
+    "decoy_markers": [
+      "Could not find the specified document"
+    ],
+    "why": "A document path that does not exist returns HTTP 200 with a 158-byte body reading 'Could not find the specified document' instead of a 404, so a mistyped opinion number enters the ledger as a success. Real opinions are PDFs of tens of kilobytes or more. Registered so the stub is a null (seen 2 Oct 2026 on 21-7135, Doe v. Apple)."
   }
 }
