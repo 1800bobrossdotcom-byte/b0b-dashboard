@@ -89,10 +89,10 @@
     {
       "file": "map.html",
       "title": "OSINT world map: surveillance sites & Epstein network — b0b.dev",
-      "metaDescription": "interactive OSINT map of 1,174 sites: surveillance infrastructure, black sites, the Epstein-Maxwell network, ALPR cameras, live aircraft and quake feeds.",
-      "ogDescription": "1,174 mapped locations: surveillance infrastructure, black sites, the Epstein-Maxwell network, Flock ALPR cameras — with live ADS-B aircraft, AIS vessels and USGS quakes. signal, plotted.",
+      "metaDescription": "interactive OSINT map of 1,172 sites: surveillance infrastructure, black sites, the Epstein-Maxwell network, ALPR cameras, live aircraft and quake feeds.",
+      "ogDescription": "1,172 mapped locations: surveillance infrastructure, black sites, the Epstein-Maxwell network, Flock ALPR cameras — with live ADS-B aircraft, AIS vessels and USGS quakes. signal, plotted.",
       "jsonldType": "WebApplication",
-      "headline": "OSINT world map: 1,174 documented sites, surveillance infrastructure, and the Epstein-Maxwell network",
+      "headline": "OSINT world map: 1,172 documented sites, surveillance infrastructure, and the Epstein-Maxwell network",
       "topics": [
         "OSINT map",
         "surveillance infrastructure",

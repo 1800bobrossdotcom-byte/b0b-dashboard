@@ -1,13 +1,13 @@
 {
-  "generated": "2026-10-02T16:39:04.673Z",
+  "generated": "2026-10-02T17:56:32.664Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "8c4358e72271753f85c9717b0ad196f63689cfc1bf7e9d01b74d03261b4e6994",
+  "fullFileHash": "fc0e474fe4b24aaef45be2e453991e7ed7cb7b772e62200ef50105634df0b450",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "0f850fb5b949db4faedb9b9ab4af7301845dffe412b092b4572d9b6d9655dc85",
+      "hash": "4cef2aafb82c9da857b97b68152111f331558e0562e62977ebedcee05cfee4c2",
       "length": 40298
     },
     {
@@ -927,8 +927,8 @@
     },
     {
       "id": "xiv-forced-labor-the-ilo-data",
-      "hash": "cc92dbf4002594dac19bb34cdc866d5c560838ea3ac76ccad23112c3948934b9",
-      "length": 1958
+      "hash": "3ff620ea853f1086b0510aeceee35dbde1444e59a10c84025afe4440782f2c1d",
+      "length": 2255
     },
     {
       "id": "xiv-prison-labor-the-13th-amendment-exception",
@@ -977,8 +977,8 @@
     },
     {
       "id": "xv-active-conflict-zones-20242026",
-      "hash": "08d50cabe651f15f4510a52c065e3b6776794f20d66a0e1cb8148b93adc0a3c0",
-      "length": 2491
+      "hash": "4584828d5b4bd77774e66f3e3eea98292e8de101d735e9855a4b439917a3b7b9",
+      "length": 2638
     },
     {
       "id": "xv-who-arms-sudan-the-documented-layer-the-attributed-layer-and-the-gold",
@@ -997,8 +997,8 @@
     },
     {
       "id": "xv-the-structural-pattern",
-      "hash": "3b135bb9916b8dddf05165c36b3475f082383412feaa1d405974d812fb5fb859",
-      "length": 3004
+      "hash": "661a1f38d2cba2f38877c0eed46da63258536c0e193b8edd6ebaf8e587d7d542",
+      "length": 3011
     },
     {
       "id": "XVI",
@@ -1197,8 +1197,8 @@
     },
     {
       "id": "xref-labour",
-      "hash": "2d03573c4d4cfee1681090c219fc1e281b5c04d2c20726537f21b41b551394ce",
-      "length": 537
+      "hash": "df9a02fb57be4956f3ad22f8d5ff63d0f31715c88feedb7950bfa073b546b32f",
+      "length": 510
     },
     {
       "id": "xref-culture",
