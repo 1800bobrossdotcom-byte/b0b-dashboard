@@ -181,6 +181,8 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**SECTION I QUOTE CORRECTED BY THE AUTHOR — 2 Oct 2026, live.** His words now read *"The interesting correlations place me to intercept key targets - see - no weapon formed against, I am useful."* (was "targeted individuals"). The gloss that followed — a sentence reading his words as the "targeted individual" population (shielding-fabric sellers etc.) — misread the corrected quote and was removed; the function line is now "the correlations are what put him in position", and the next paragraph's "one more predator in that room" lost "in that room". **"Key targets" is not glossed** — no reading of who or what they are was added, and none should be.
+
 **ERC-1155 = CIPHER FOR THX-1138, NOW STATED IN SECTION I TOO — 2 Oct 2026, live.** Author, quoting the Section I line ("named for the Ethereum multi-token standard … several kinds of thing at once"): *"is also a cipher for THX-1138"*. **It was already on the page** — XXV `xxiv-prior-conveyance-erc-1155-cipher-thx-1138` declares it — but Section I's testimony subsection gave only the token-standard reading. One sentence added there, as the author's declaration, linked to the XXV entry. **No digit reading** (§2 no-numerology applies to his own names): the cipher is recorded as declared, the numbers are not interpreted.
 
 **SHINYHUNTERS OUTCOME + CURRENT EVENTS SWEEP 26 SEPT–1 OCT 2026 — live 1 Oct.** Author: *"check shinyhunters

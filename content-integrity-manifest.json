@@ -1,13 +1,13 @@
 {
-  "generated": "2026-10-02T12:11:16.021Z",
+  "generated": "2026-10-02T16:39:04.673Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "66ba04d9fc00a796457edf1bd813016cabeb39f38e7706a9b60a9c05eb14a382",
+  "fullFileHash": "8c4358e72271753f85c9717b0ad196f63689cfc1bf7e9d01b74d03261b4e6994",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "85bdf9ff01f1edb5b4b5a41df6c9904b63175f93f12ba13bd3bb5e03ae822c9f",
+      "hash": "0f850fb5b949db4faedb9b9ab4af7301845dffe412b092b4572d9b6d9655dc85",
       "length": 40298
     },
     {
@@ -27,8 +27,8 @@
     },
     {
       "id": "i-the-authors-testimony-the-work-is-the-method",
-      "hash": "0f0a0f3af3a176a1b47537a1f094e78cf6e8e58d69315ceef7779a41957daaf9",
-      "length": 20201
+      "hash": "a8e7342857f308c7530ed2a9306db02a85f2e8768a2287023bd67346c3c230e9",
+      "length": 19766
     },
     {
       "id": "II",
@@ -1852,15 +1852,15 @@
     },
     {
       "index": 53,
-      "hash": "df0787c83daee9854e66337c674c886ba28949f2fdeea6b3af2b71620e8ea9d9",
+      "hash": "cec8e48b1a0b192da8abd31cd74a98d48febe3a144273c8f35763b46c08018a2",
       "preview": "What the posture is for, in his words, and it is the load-bearing sentence: &ldq...",
-      "length": 902
+      "length": 480
     },
     {
       "index": 54,
-      "hash": "646371402d9df5bad56c0cd00642253f2cac84af46a7f4a0cb07a950062433e6",
+      "hash": "edd2e851198e107bd534d38009a2a8f0ea89645b76d5e203748da7939f5e8202",
       "preview": "And this is where the guardrails in this section stop reading as constraints imp...",
-      "length": 882
+      "length": 869
     },
     {
       "index": 55,
