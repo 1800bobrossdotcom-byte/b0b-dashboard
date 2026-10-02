@@ -1,13 +1,13 @@
 {
-  "generated": "2026-10-01T20:56:24.185Z",
+  "generated": "2026-10-02T12:11:16.021Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "859e9802c73c05996e505ec7d80885f9471ab41929e97f68e9e2e9c2ba8b13a3",
+  "fullFileHash": "66ba04d9fc00a796457edf1bd813016cabeb39f38e7706a9b60a9c05eb14a382",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "354e3e89146fe43b63b2930bd33432dd7d6a272dd12ddd748179e1a3dab9a259",
+      "hash": "85bdf9ff01f1edb5b4b5a41df6c9904b63175f93f12ba13bd3bb5e03ae822c9f",
       "length": 40298
     },
     {
@@ -27,8 +27,8 @@
     },
     {
       "id": "i-the-authors-testimony-the-work-is-the-method",
-      "hash": "020129b7cd8ef4c2ef99b127c46409d0bdef29e348d14a75e4a4b0aaaa55b79a",
-      "length": 19883
+      "hash": "0f0a0f3af3a176a1b47537a1f094e78cf6e8e58d69315ceef7779a41957daaf9",
+      "length": 20201
     },
     {
       "id": "II",
@@ -1804,9 +1804,9 @@
     },
     {
       "index": 45,
-      "hash": "cd94a1bb3a47f2ff54c558ff17b68aca5deebd3264144154aaf420da62c7fae6",
+      "hash": "f08853f1f5bbff032bd13c040b9836b407b24598887cc782180451817f624f7f",
       "preview": "The strongest evidence of the practice is not a statement. It is four products, ...",
-      "length": 1203
+      "length": 1521
     },
     {
       "index": 46,
