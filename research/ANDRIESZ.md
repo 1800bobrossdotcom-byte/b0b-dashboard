@@ -86,3 +86,53 @@ was re-checked in the cache with `vq.py`.
 - X (robots): the Nadolny post.
 - Law360 was not fetched (paywall).
 - The Banker News item was not located.
+
+## 5. The official record (4 Oct 2026, author: "what is the official report")
+
+- **No official report on the death has been found.** There is no police statement and no coroner's inquest
+  opening. The date and place of death have not been published, nor whether the treatment centre was in
+  England and Wales (which decides the coroner's jurisdiction).
+- **Named outlet.** Law360 (Adele Redmond, 1 Oct 2026, lede only; the body is paywalled): the FCA "has promised
+  to review its engagement with a prolific whistleblower who died shortly after losing an employment tribunal
+  claim against his former Wall Street employer". The death is now reported by a named outlet. Its manner is
+  still attributed only to those close to him.
+- **The one official document:** Employment Tribunal, *Mr Simon Andriesz v (1) BGC Partners LP, (2) Mr Howard
+  Lutnick, (3) Mr Jean-Pierre Aubin*, case 3200408/2025, East London (CVP), Employment Judge B Beyzade. Heard
+  16 Mar and 13 May 2026; written reasons dated **11 Aug 2026** (gov.uk PDF, sha256 `7fce47db…`).
+  - **The strike-out.** The entire claim was struck out under Rule 38(1)(a): out of time (dismissal 31 Jan 2017;
+    delay "approaching nine years"), with no reasonable prospect of success.
+  - **The alternative ground.** It would otherwise have been struck out as an abuse of process
+    (*Henderson v Henderson*), because the same matrix was litigated in the US.
+  - **Medical evidence.** It "does not establish" that a timely claim was impracticable.
+  - **Costs.** The respondents' **application for costs, and for a "totally without merit" finding, was listed
+    for 24 Nov 2026**, with submissions due 23 Oct.
+- **US case.** *Andriesz v. BGC Financial, L.P.*, S.D.N.Y. 1:24-cv-07004, Doc. 37 (2025). Justia returned 403
+  (null), so its outcome was not read.
+
+## 6. The elimination thesis, tested (the author asked for it to be worked)
+
+The test is run as a hypothesis with a stated way to fail. It names no beneficiary, because the
+living-person floor forbids implying that any living person had a motive to kill.
+
+- **What would elimination buy?** The value of silencing a witness is the evidence that dies with him. His
+  evidence was already out:
+  - the FBI interviews of 2020–21, which are inside DOJ's own Epstein release;
+  - the HWL emails, likewise in the DOJ release;
+  - House Oversight, before May 2026;
+  - the BBC broadcast of 14 July 2026;
+  - the TTF event of 21 July 2026.
+  **Nothing documented died with him.** His death instead produced attention: Massie posted on 4 Oct, and the
+  FCA promised a review. On its own terms the thesis predicts the opposite of what the record shows.
+- **What would rescue it?** Only pending *live* testimony that his death ends: a scheduled deposition, a subpoena,
+  or an undisclosed cache of evidence. **None was found.** The only listed proceeding is the 24 Nov costs hearing,
+  and that is a claim *against* him, not his testimony. Finding such a proceeding is the specific discovery that
+  would move the hypothesis.
+- **What the record also holds (symmetry).** His own written account of persistent suicidal thoughts (TTF,
+  July). PTSD, and a two-month treatment admission. A collapse in his finances. A claim struck out on 11 Aug.
+  A costs application pending against him. This is documented adversity, and it is consistent with the
+  reported manner. A discount applied to it must also be applied to the thesis.
+- **The guaranteed-null trap.** "They made it look like suicide" scores a suicide finding as confirmation and
+  a homicide finding as confirmation alike. A test that cannot fail is not a test, so it is refused.
+- **What would actually decide manner.** An inquest's findings (in England and Wales, the Coroners and Justice
+  Act 2009), toxicology, and the centre's records and scene evidence. Until one exists, the manner stays at
+  "reported by people close to him", and the hypothesis stays at *not reached*.
