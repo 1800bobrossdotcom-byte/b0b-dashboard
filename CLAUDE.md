@@ -181,6 +181,31 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**OUTSIDE REVIEW ACTED ON, ITEMS 1-5 — 4 Oct 2026.** The author pasted a third-party review and said *"please do 1-5"*. Every point was checked against the page before acting (§5).
+- **(1) Report.**
+  - The rung-4 conclusion now rests on the positive record. Section I says its service-file silence is "counted neither as an acquittal nor as a confirmation".
+  - II's "deniable asset is the category defined by the absence of one: the deniability *is* the missing paperwork" broke our own guaranteed-null rule. It is rewritten: the absence weighs nothing either way, and the pattern of institutional non-action is what counts.
+  - **New competing-hypotheses block** in II `ii-the-conclusion-in-one-place-…`:
+    - A, deniable asset;
+    - B, wealth and legal leverage alone (the 2020 OPR "poor judgment" finding printed in its favour);
+    - C, several protections with no single design — **stated as the rival the conclusion has most trouble excluding**;
+    - D, selection.
+    It also gives falsifiers (2007 immunity traced to ordinary negotiation in the contemporaneous files; Black's payments explained by scale; a complete service-file release showing nothing) and says the conclusion **rises only on a document**.
+  - **Found on the way:** "a fortune with no identifiable clients" ×2 and "clientless fortune" ×2 contradicted the page's own Wexner/Black ($158-170M) record. Now "two documented clients … on a scale nobody has explained".
+  - **Do not re-add the missing-paperwork argument or the clientless wording.**
+- **(2) Map edge tiers.** Every line is tiered 0 analogy / 1 correlation / 2 contact / 3 material / 4 coordination / 5 causation. Rendering: dotted 0-1, dashed 2, solid 3+. A tooltip prefix "T3 material · …" and a "Line tier" filter were added; untiered lines count as 0. The audit is by 8 agents, brief in scratchpad `edges/BRIEF.md`, applied by `edges/apply.py`.
+- **(3) `/start` "Read this first"**:
+  - what we know / think / don't know / what would change our minds;
+  - the rules;
+  - the edge scale;
+  - downloads: `/data/map-data.json` (markers + edges + tiers) and `/data/sources-ledger.json`. The ledger **withholds DOJ Epstein-library and jmail rows** (stop-rule documents) and says so in the file.
+- **(4) `/retractions`.** 20 dated corrections plus "tested and not adopted". **Living-person map fixes are summarised, not itemised.** **PROMIS is NOT on the refused list, because the page still holds it as labeled.**
+- **Generator.** Both pages and both data files come from **`scripts/build-start-pages.py`**. Re-run it after map or ledger changes, then `apply-seo-meta.js`. Routes are wired in `server.js` PAGES + CANONICAL_PATHS, `apply-seo-meta.js` URLS and `seo-meta.json`. Links are in the report sidebar, report top nav and home nav.
+- **(5) AI report.** A tier box was added: documented (outputs, defects, outage) / testimony (the author's experience) / hypothesis (background process — not established). It names the competing explanation, including that CLAUDE.md §5.3 records "linguistic phreaking" as the model's own failure mode. Five overclaims were re-tiered ("this document proves it", "designed to be self-concealing", "not random error", "directional manipulation", "the precision of the gate is itself the pattern"). **Its title still says "fifteen documented AI attack vectors" — the author's naming, left as is.**
+- **Also, at the author's request mid-task:** BASTION (`bastion.quest`, an open-source local sensor that runs alongside Microsoft Defender) and FARADAY (`faraday.cam`, E2E anonymous calls) were added as tools in the report sidebar, report top nav and home nav.
+
+Scale line **280 / 1,117 / 140.**
+
 **SIR AARON BUSHNELL — AL JAZEERA REPORT LINKED, NOT REHOSTED — 3 Oct 2026, live.** Author asked to download Al Jazeera's 1:50 NewsFeed clip (26 Feb 2024, Brightcove id 6347679575112) as an MP4, and to place it in the report. **Not downloaded and not rehosted.** It is Al Jazeera's copyrighted work, and the site rehosts nothing it has no licence for. Embedding Brightcove would also need a CSP edit. The clip was never opened (stop rule a: Wikipedia records the act as livestreamed). Instead, Section I's Bushnell record links the report at its source. The same edit fixed "died … outside the Israeli Embassy": he was declared dead in hospital that evening (Wikipedia; Al Jazeera "died in hospital from his injuries"). **Open for the author:** a click-to-play Brightcove embed is possible with `players.brightcove.net` added to `frameSrc`; whether death footage is embedded in the report is his call.
 
 **AUTOWARCOM AND PROJECT MERIDIAN — X `x-the-study-and-the-sellers-autonomous-warfare-command-and-project-meridian`, 2 Oct 2026, live (X toc 25 → 26).** Author dropped `x.com/DoWCTO/status/2106050812464021930` as "current news". **X refuses the spider by robots, and so does `publish.twitter.com/oembed`. Recorded as nulls; the post was never read.** Its snowflake id decodes to 2 Oct 2026 15:56 UTC. The CTO-account quote on the page ("From under the earth to beyond the moon…") is a different, earlier post, quoted by Snopes on 1 Oct. **Do not present it as the post the author linked.** The subject is the 30 Sept Quantico "State of the Force" address, which our 1 Oct sweep missed entirely (AUTOWARCOM 0, Meridian 0, Luckey 0, Gingrich 0).

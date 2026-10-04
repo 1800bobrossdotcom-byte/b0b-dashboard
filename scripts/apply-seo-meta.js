@@ -42,6 +42,8 @@ const URLS = {
   'tones-shield-guide.html': '/tones/shield/guide',
   'ai-attack-vector-analysis.html': '/ai-attack-vector-analysis',
   'darpa-cia-lockheed.html': '/darpa-cia-lockheed',
+  'start.html': '/start',
+  'retractions.html': '/retractions',
 };
 
 // The one honest timestamp on Vercel (see server.js siteUpdatedString).
