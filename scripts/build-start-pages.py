@@ -160,7 +160,7 @@ footer{max-width:72ch;margin:56px auto 0;font:13px/1.6 var(--mono);color:var(--d
 '''
 
 NAV = '''<div class="top"><div class="nav">
-  <a href="/"><b>b0b.dev</b></a><a href="/report">THE REPORT</a><a href="/retractions">CORRECTIONS</a>
+  <a href="/report">&larr; THE REPORT</a><a href="/start">READ THIS FIRST</a><a href="/retractions">CORRECTIONS</a>
   <a href="/map">OSINT MAP</a><a href="/map/list">MAP AS TEXT</a><a href="/about">ABOUT &amp; METHOD</a><a href="/home">FILMS</a>
 </div></div>'''
 
@@ -283,8 +283,8 @@ def build_start(n_markers, n_edges):
        ''.join('<div class="rule"><b>%s</b>%s</div>' % r for r in rules), scale,
        format(n_markers, ','), n_edges)
     body += '<footer>b0b.dev &middot; written to be attacked: send corrections through the report&rsquo;s researcher&rsquo;s guide. Last built from the live report and map.</footer>'
-    # The homepage since 4 Oct 2026: Search Console's verifier fetches '/', so the
-    # ownership tag rides on this page (outside the seo: block apply-seo-meta owns).
+    # Search Console's ownership tag, kept here as well as on the report (which '/'
+    # serves): outside the seo: block apply-seo-meta owns, and harmless on a second page.
     return page('Read this first', body, head_extra='\n  <meta name="google-site-verification" content="TsPEDsaL88qvOxa0dWejCZFKVU37Y7Vk5v5HKcp5kL0">')
 
 

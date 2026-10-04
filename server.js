@@ -370,10 +370,10 @@ app.get('/robots.txt', (req, res) => {
 // canonical. lastmod comes from the integrity manifest, the one timestamp
 // that is real on Vercel (file mtimes are normalized at deploy).
 const CANONICAL_PATHS = [
-  '/', '/home', '/report', '/intro', '/continuity', '/epstein-maxwell', '/map', '/countermeasures', '/artifact', '/spectra',
+  '/home', '/report', '/intro', '/continuity', '/epstein-maxwell', '/map', '/countermeasures', '/artifact', '/spectra',
   '/tones/healing', '/tones/protective', '/tones/instrument', '/tones/shield',
   '/tones/multipack', '/tones/shield/guide', '/ai-attack-vector-analysis',
-  '/darpa-cia-lockheed', '/retractions', '/about', '/map/list',
+  '/darpa-cia-lockheed', '/start', '/retractions', '/about', '/map/list',
 ];
 
 app.get('/sitemap.xml', (req, res) => {
@@ -396,11 +396,11 @@ app.get('/sitemap.xml', (req, res) => {
 
 // ── Static routes (only for authenticated visitors) ──
 const PAGES = {
-  // 4 Oct 2026, author's instruction: the site opens on the briefing ("Read
-  // this first"), served at '/' and canonical there; /start 301s to it. The
-  // report stays at /report. (19 Sept to 4 Oct, '/' served the report.)
-  // The landing page with the film reel is at /home.
-  '/':              'start.html',
+  // The site opens on the report, served at '/' directly (its canonical stays
+  // /report, so search sees one page) - author's instruction 19 Sept 2026,
+  // reaffirmed 4 Oct ("just land here") after '/' briefly served the briefing.
+  // The briefing is /start; the film-reel landing page is /home.
+  '/':              'report.html',
   '/home':          'index.html',
   '/report':        'report.html',
   '/intro':         'intro.html',     // the intro film, shareable on its own
@@ -424,6 +424,7 @@ const PAGES = {
   '/tones/multipack':'tones-multipack.html',
   '/ai-attack-vector-analysis':  'ai-attack-vector-analysis.html',
   '/darpa-cia-lockheed': 'darpa-cia-lockheed.html',
+  '/start':         'start.html',
   // 4 Oct 2026: the first-contact layer - read this first, and the retraction ledger.
   '/retractions':   'retractions.html',
   '/about':         'about.html',
@@ -446,7 +447,6 @@ const REDIRECTS = {
   '/tones/guide':        '/tones/shield/guide',
   '/ai-attack-vector-analysis.html': '/ai-attack-vector-analysis',
   '/darpa-cia-lockheed.html': '/darpa-cia-lockheed',
-  '/start':            '/',   // the briefing moved to the root, 4 Oct 2026
 };
 
 // Serve static assets (js, css, manifests, icons, i18n) for authenticated users
