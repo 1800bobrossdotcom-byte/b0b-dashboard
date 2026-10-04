@@ -2,7 +2,7 @@
   "pages": [
     {
       "file": "index.html",
-      "title": "b0b.dev — signal over noise: OSINT research & countermeasures",
+      "title": "b0b.dev - independent OSINT research: report, map, open data",
       "metaDescription": "index for b0b's OSINT research: a report documenting the Epstein-Maxwell network and surveillance infrastructure, and an interactive map of its connections.",
       "ogDescription": "b0b — independent OSINT research. the report and the map: surveillance infrastructure and the Epstein-Maxwell network, documented. signal over noise. status: active.",
       "jsonldType": "WebSite",
@@ -17,8 +17,8 @@
     },
     {
       "file": "report.html",
-      "title": "PROJECT ANGLERFISH: the architecture of control — b0b.dev",
-      "metaDescription": "25-section OSINT report on the architecture of control: power transfer, surveillance systems, underground construction, the Epstein-Maxwell record. all tiered.",
+      "title": "b0b.dev - Project Anglerfish: a tiered, sourced OSINT report",
+      "metaDescription": "Independent OSINT report by b0b.dev: 25 sections, every claim tiered and sourced, rival explanations scored, falsifiers stated, corrections public, data downloadable.",
       "ogDescription": "25 sections of tiered OSINT on structures of control: institutional capture, surveillance cities, underground infrastructure, the Epstein-Maxwell record. documented fact vs labeled hypothesis.",
       "jsonldType": "Article",
       "headline": "PROJECT ANGLERFISH: CASSOWARY ORCA AGILITY — the architecture of control, tiered and sourced",
@@ -88,7 +88,7 @@
     },
     {
       "file": "map.html",
-      "title": "OSINT world map: surveillance sites & Epstein network — b0b.dev",
+      "title": "b0b.dev - OSINT map: 1,172 sites, every connection tiered",
       "metaDescription": "interactive OSINT map of 1,172 sites: surveillance infrastructure, black sites, the Epstein-Maxwell network, ALPR cameras, live aircraft and quake feeds.",
       "ogDescription": "1,172 mapped locations: surveillance infrastructure, black sites, the Epstein-Maxwell network, Flock ALPR cameras — with live ADS-B aircraft, AIS vessels and USGS quakes. signal, plotted.",
       "jsonldType": "WebApplication",
@@ -263,7 +263,7 @@
     },
     {
       "file": "darpa-cia-lockheed.html",
-      "title": "Burbank, Langley, Arlington: DARPA, CIA & Lockheed in the OSINT report — b0b.dev",
+      "title": "Burbank, Langley, Arlington: DARPA, CIA & Lockheed - b0b.dev",
       "metaDescription": "A term concordance over the 25-section OSINT report: every DARPA, CIA and Lockheed passage counted, plotted by section, and deep-linked. 238 occurrences across 15 sections.",
       "ogDescription": "CIA is diffuse (194 across 15 sections). Lockheed is concentrated (34, most in one subsection). DARPA is sparse and points at a record that does not exist yet. Counts derived from the report itself.",
       "jsonldType": "Article",
@@ -285,7 +285,7 @@
     },
     {
       "file": "start.html",
-      "title": "Read this first - b0b.dev",
+      "title": "b0b.dev - read this first: the OSINT report in one page",
       "metaDescription": "The short version of the OSINT report: what it documents, what it concludes and at what tier, what it does not know, and what would change its mind. With the data.",
       "ogDescription": "What we know, what we think, what we don't know, and what would change our minds - with the map data and the source ledger to download.",
       "jsonldType": "Article",
@@ -300,16 +300,44 @@
     },
     {
       "file": "retractions.html",
-      "title": "Retractions - b0b.dev",
+      "title": "b0b.dev - corrections & retractions ledger",
       "metaDescription": "Every claim the OSINT report lowered, removed or corrected: what the page said, what replaced it, and how the error was found. Plus claims tested and refused.",
       "ogDescription": "What the report got wrong, how it was found, and what replaced it. A correction that lowers a tier is worth more than a confirmation.",
       "jsonldType": "Article",
-      "headline": "Retractions: the corrections ledger of the b0b.dev OSINT report",
+      "headline": "Corrections & retractions: the public ledger of the b0b.dev OSINT report",
       "topics": [
         "corrections",
         "OSINT method",
         "evidence tiers",
         "retraction ledger"
+      ]
+    },
+    {
+      "file": "about.html",
+      "title": "b0b.dev - about, method & governance",
+      "metaDescription": "Who keeps b0b.dev, how its OSINT research is done, the analytic practices and standing rules it applies, how corrections are decided, and how AI assistance is used.",
+      "ogDescription": "Independent OSINT research: one identified crawler, refusals logged as findings, tiered claims, scored rival hypotheses, public corrections, AI assistance disclosed.",
+      "jsonldType": "Article",
+      "headline": "About b0b.dev: method, governance and corrections",
+      "topics": [
+        "OSINT method",
+        "research governance",
+        "corrections policy",
+        "AI disclosure"
+      ]
+    },
+    {
+      "file": "map-list.html",
+      "title": "b0b.dev - the OSINT map as text: every site and connection",
+      "metaDescription": "Every location and every connection line on the b0b.dev OSINT map as a readable list, with coordinates, dates, context and the evidence tier of each connection.",
+      "ogDescription": "The whole OSINT map without the map: 1,172 locations and every connection line, listed with dates, context and relationship tiers.",
+      "jsonldType": "Dataset",
+      "headline": "The b0b.dev OSINT map as text",
+      "topics": [
+        "OSINT map",
+        "open data",
+        "accessibility",
+        "evidence tiers"
       ]
     }
   ],

@@ -373,7 +373,7 @@ const CANONICAL_PATHS = [
   '/home', '/report', '/intro', '/continuity', '/epstein-maxwell', '/map', '/countermeasures', '/artifact', '/spectra',
   '/tones/healing', '/tones/protective', '/tones/instrument', '/tones/shield',
   '/tones/multipack', '/tones/shield/guide', '/ai-attack-vector-analysis',
-  '/darpa-cia-lockheed', '/start', '/retractions',
+  '/darpa-cia-lockheed', '/start', '/retractions', '/about', '/map/list',
 ];
 
 app.get('/sitemap.xml', (req, res) => {
@@ -426,6 +426,8 @@ const PAGES = {
   // 4 Oct 2026: the first-contact layer - read this first, and the retraction ledger.
   '/start':         'start.html',
   '/retractions':   'retractions.html',
+  '/about':         'about.html',
+  '/map/list':      'map-list.html',
 };
 
 // Alias -> canonical, as 301s. These used to be duplicate 200s (both forms in

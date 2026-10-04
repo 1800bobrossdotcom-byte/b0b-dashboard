@@ -44,6 +44,8 @@ const URLS = {
   'darpa-cia-lockheed.html': '/darpa-cia-lockheed',
   'start.html': '/start',
   'retractions.html': '/retractions',
+  'about.html': '/about',
+  'map-list.html': '/map/list',
 };
 
 // The one honest timestamp on Vercel (see server.js siteUpdatedString).

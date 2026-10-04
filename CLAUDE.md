@@ -181,6 +181,24 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**OUTSIDE REVIEW #2 — items a–e done, 4 Oct 2026.** Author: *"make updates and push"*, after a second third-party review. Only the items needing no new decisions from him were done:
+- **(a)** The ledger is renamed "Corrections & Retractions" (the URL stays `/retractions`); nav labels read CORRECTIONS.
+- **(b)** Titles lead with "b0b.dev", and descriptions sell the method. **Cyan Worlds' cancelled Myst prototype "Project Anglerfish" (revealed 26 July 2026) now owns that search phrase.** The concordance title was shortened to 60 chars, so **seo-selftest is 55/55 for the first time.**
+- **(c)** The report's "built to the standard of intelligence analysis" now names the practices it applies. "Every edge … traceable to a source document" is now true by construction: every line carries a tier.
+- **(d)** **`/map/list`** (`site/map-list.html`) lists every marker by section and every edge, strongest tier first. It is linked from the map header (☰ TEXT), `/start` and the nav.
+- **(e)** **`/about`** covers method and governance: who keeps it, the crawler rules, AI assistance disclosed, the practices, the standing rules and how a correction is decided.
+- Both new pages come from `scripts/build-start-pages.py`, with routes in server.js, apply-seo-meta URLS and seo-meta.json.
+
+**NOT done — the author's decisions:**
+- making `/` the briefing (it reverses his 19 Sept instruction);
+- moving tools/X/ETH out of the primary nav (it reverses "as tools in menu");
+- a plain line above the masthead;
+- a Funding & Independence page (facts needed);
+- domain email (needs mail setup);
+- rewording "the facts speak for themselves" and the call to action (his voice).
+
+**FLAGGED, not edited:** the report says in three places (X conflict box, XXV) that Claude-assisted drafting continues "through" 1 Sept 2026 and then moves to open-source models. **It has continued past that date** (all of this session). The text is his declaration, so it is held for his wording. `/about` states the October 2026 position factually.
+
 **CURRENT-EVENTS SOURCE REGISTRY — 4 Oct 2026.** Author: *"add to current events source pulls: https://www.osint613.com/"*, then *"https://x.com/Osint613"*. **Read `research/sources/CURRENT-EVENTS-SOURCES.md` before every sweep.**
 - **osint613.com is a lead only.** It is a live headline feed, weighted to Israel, Iran and the Gulf, and it carries **no source links per item**. Each headline must be found at a named outlet before use, and paired with coverage from the other parties (symmetry).
 - **x.com/Osint613 is refused by robots** and is a recorded null. It reaches the page only if the author pastes a post.

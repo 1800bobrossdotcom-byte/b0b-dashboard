@@ -90,7 +90,7 @@ def build_data():
                    'withheld_reason': 'DOJ Epstein-library and corpus-search fetches - some were stopped under the report\'s stop rules; EFTA ids are cited in place in the report',
                    'rows': rows}, f, ensure_ascii=False, separators=(',', ':'))
     tiered = sum(1 for e in edges if e['tier'] is not None)
-    return len(locs), len(edges), tiered, len(rows), withheld
+    return len(locs), len(edges), tiered, len(rows), withheld, locs, edges
 
 
 # --------------------------------------------------------------------------- shell
@@ -121,7 +121,7 @@ h1{font:600 clamp(26px,5vw,38px)/1.15 var(--mono);letter-spacing:-.01em;margin:4
 h2{font:600 15px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;margin:44px 0 12px;padding-top:14px;border-top:1px solid var(--rule)}
 h2 .tag{font-weight:400;color:var(--dim);letter-spacing:.04em;text-transform:none}
 ul.items{list-style:none;padding:0;margin:0;display:grid;gap:14px}
-ul.items li{padding-left:14px;border-left:2px solid var(--rule)}
+ul.items li{padding-left:14px;border-left:2px solid var(--rule);overflow-wrap:anywhere}
 .k-doc ul.items li{border-left-color:var(--doc)}
 .k-hyp ul.items li{border-left-color:var(--hyp)}
 .k-null ul.items li{border-left-color:var(--null)}
@@ -154,8 +154,8 @@ footer{max-width:72ch;margin:56px auto 0;font:13px/1.6 var(--mono);color:var(--d
 '''
 
 NAV = '''<div class="top"><div class="nav">
-  <a href="/report">&larr; THE REPORT</a><a href="/start">READ THIS FIRST</a><a href="/retractions">RETRACTIONS</a>
-  <a href="/map">OSINT MAP</a><a href="/home">FILMS</a>
+  <a href="/report">&larr; THE REPORT</a><a href="/start">READ THIS FIRST</a><a href="/retractions">CORRECTIONS</a>
+  <a href="/map">OSINT MAP</a><a href="/map/list">MAP AS TEXT</a><a href="/about">ABOUT &amp; METHOD</a><a href="/home">FILMS</a>
 </div></div>'''
 
 
@@ -227,7 +227,7 @@ def build_start(n_markers, n_edges):
     change = [
         item('test', 'The deniable-asset conclusion drops to a rival on any of: the 2007 immunity traced to ordinary negotiation in the prosecutors&rsquo; contemporaneous files; an explanation of Black&rsquo;s payments that accounts for their scale; or a complete release of the relevant service files showing no relationship. It rises only on a document - never on accumulation.'),
         item('test', 'Any primary document that contradicts a documented entry lowers it. A correction that lowers a tier is worth more to this report than a confirmation, and the ones made so far are listed in full.',
-             '<a href="/retractions">The retraction ledger</a>'),
+             '<a href="/retractions">Corrections &amp; retractions</a>'),
         item('test', 'Dated forward tests, written before the outcome: the Pentagon&rsquo;s Project Meridian report is due 28 January 2027, and its recommendations can be scored against its co-leads&rsquo; product lines.',
              '<a href="%sx-the-study-and-the-sellers-autonomous-warfare-command-and-project-meridian">Section X</a>' % R),
     ]
@@ -259,6 +259,7 @@ def build_start(n_markers, n_edges):
 <h2>Download the data</h2>
 <div class="dl">
   <a href="/data/map-data.json" download><b>map-data.json</b><span>All %s markers and %s connection lines, with coordinates, context, dates and edge tiers. JSON.</span></a>
+  <a href="/map/list"><b>The map as text</b><span>Every location and every connection line, with its tier, as a plain readable list - no map needed.</span></a>
   <a href="/map.kml" download><b>map.kml</b><span>The markers for Google Earth, with dates that drive its time slider.</span></a>
   <a href="/data/sources-ledger.json" download><b>sources-ledger.json</b><span>Every source fetch the report&rsquo;s spider made: URL, time, status, SHA-256 - and every refusal, recorded as a null.</span></a>
 </div>
@@ -266,7 +267,8 @@ def build_start(n_markers, n_edges):
 <h2>View the record</h2>
 <div class="dl">
   <a href="/report"><b>The report</b><span>All twenty-five sections, tiered and sourced, with the researcher&rsquo;s guide.</span></a>
-  <a href="/retractions"><b>The retraction ledger</b><span>What the report got wrong, how it was found, and what replaced it.</span></a>
+  <a href="/retractions"><b>Corrections &amp; retractions</b><span>What the report got wrong, how it was found, and what replaced it.</span></a>
+  <a href="/about"><b>About &amp; method</b><span>Who maintains this, how a correction is decided, the rules, and the tools - AI included.</span></a>
   <a href="/ai-attack-vector-analysis"><b>The AI-safety report</b><span>A separate document on the AI tools used to build this site, now tiered the same way.</span></a>
 </div>
 ''' % (''.join(know), ''.join(think), ''.join(dont), ''.join(change),
@@ -345,7 +347,7 @@ def build_retractions():
         % (d, w, was, now, how) for d, w, was, now, how in RETRACTIONS)
     tested = ''.join('<li><b>%s.</b> %s</li>' % t for t in TESTED)
     body = '''<div class="wide">
-<h1>Retractions</h1>
+<h1>Corrections &amp; retractions</h1>
 <p class="lede" style="max-width:72ch">What this report said that was wrong, overstated or one-sided, what replaced it, and how it was found. The report fixes claims in place and does not narrate its own drafts; this ledger is where the corrections are kept, so that a reader can judge the method by its failures as well as its findings. A correction that lowers a tier is worth more than a confirmation.</p>
 <div class="wrap"><table class="ledger">
 <thead><tr><th>Date</th><th>Where</th><th>What the page said</th><th>What replaced it</th><th>How it was found</th></tr></thead>
@@ -355,14 +357,111 @@ def build_retractions():
 <p>Each test is kept in the report&rsquo;s research files with its sources and nulls.</p></section>
 </div>''' % (rows, tested)
     body += '<footer>Corrections are welcome and are credited by substance, not by name. See the researcher&rsquo;s guide at the end of <a href="/report">the report</a>.</footer>'
-    return page('Retractions', body)
+    return page('Corrections & Retractions', body)
+
+
+# --------------------------------------------------------------------------- /about
+def build_about(n_markers, n_edges):
+    body = """
+<h1>About &amp; method</h1>
+<p class="lede">What this site is, who keeps it, how it decides what goes on the page, and how a mistake gets corrected.</p>
+
+<h2>What this is</h2>
+<p><b>b0b.dev</b> is independent open-source intelligence (OSINT) research. Its core is one long report - <a href="/report">Project Anglerfish</a>, twenty-five sections - on the Epstein-Maxwell record and the wider architecture of surveillance, finance and institutional power, with a companion <a href="/map">map</a> of %s locations and %s connection lines. Every claim carries a tier; every map line carries the tier of the relationship it shows. It is also a long-running work of art in which the method is part of the work: the tiers, the published nulls and the claims killed on the page are the point, not decoration.</p>
+
+<h2>Who keeps it</h2>
+<p>The author and director is <b>Gianni Arone</b>. He sets scope and makes every contested editorial call. No institutional affiliation is claimed by this page; the work is presented as independent research and should be judged on its sources, not on a credential.</p>
+
+<h2>How the research is done</h2>
+<ul class="items">
+<li><b>Sources are fetched by one identified crawler.</b> It obeys robots.txt, never disguises itself, never solves a challenge and never retries a refusal under another name - because a document obtained by defeating an access control has contaminated provenance. Every fetch, and every refusal, is logged with its time, status and SHA-256 hash in the <a href="/data/sources-ledger.json">source ledger</a>.</li>
+<li><b>A refusal is a finding.</b> Sites that block the crawler are recorded as nulls, not worked around; a claim that rests on a source the crawler could not read is held at a lower tier.</li>
+<li><b>Quotes and figures are read at the source.</b> A search result or a summary - human or machine - never carries a quote onto the page; it is re-read in the fetched copy first.</li>
+<li><b>AI assistance is used and disclosed.</b> Research, drafting, verification and deployment have been carried out with Claude, an AI model made by Anthropic, working under the author&rsquo;s direction - including the work behind this page (October 2026). Anthropic also appears in the report as a subject; that conflict is disclosed where it arises (Sections X and XXV). The AI&rsquo;s own recorded failure modes - drifting toward agreement, loaded word choices, overstatement - are among the things the method is built to catch.</li>
+</ul>
+
+<h2>The practices it applies</h2>
+<p>The report applies the working practices of intelligence analysis rather than claiming an institutional standard:</p>
+<ul class="items">
+<li><b>Tiered claims</b> - documented, attributed, labeled, contested, unsupported - with nothing promoted by repetition.</li>
+<li><b>Named sources and provenance</b> - the claimant named for every attributed claim; the fetch ledger for every source.</li>
+<li><b>Alternative hypotheses, scored</b> - the central conclusion is set against its rivals on the same record, and the rival it has most trouble excluding is named (<a href="/report#ii-the-conclusion-in-one-place-two-principals-a-sponsor-question-and-a-price">Section II</a>).</li>
+<li><b>Stated falsifiers</b> - what would lower each major conclusion is written down before the evidence arrives (<a href="/start">Read this first</a>).</li>
+<li><b>Chronology and the anti-map rule</b> - a shared timeline is not a chain; map lines are tiered so proximity cannot pass as proof.</li>
+<li><b>Symmetry</b> - any discount applied to evidence against a hypothesis is applied to evidence for it.</li>
+<li><b>Published corrections</b> - errors are fixed in place and listed in the <a href="/retractions">corrections ledger</a>.</li>
+</ul>
+
+<h2>Standing rules</h2>
+<ul class="items">
+<li><b>Living-person floor.</b> No living person who has not been charged is asserted or implied to be a criminal or an intelligence asset. Documented affiliation is never presented as an operational tie.</li>
+<li><b>No de-anonymising.</b> Redactions protecting living people are never reversed; residences carry street names only.</li>
+<li><b>Stop rules.</b> Victim interviews, protective-order material and imagery-heavy documents are not read past identification.</li>
+<li><b>No numerology.</b> Dates and numbers are recorded as facts and never read for meaning.</li>
+</ul>
+
+<h2>How a correction is decided</h2>
+<ul class="items">
+<li>A claim that a primary source contradicts is lowered or removed, whoever raised the problem - including the author&rsquo;s own claims and the AI&rsquo;s.</li>
+<li>Corrections are made in place, without narration in the text, and entered in the <a href="/retractions">ledger</a> with the date, what changed and how the error was found.</li>
+<li>Contested and defamation-adjacent material is held for the author&rsquo;s decision rather than published automatically.</li>
+<li>To send a correction, use the researcher&rsquo;s guide at the end of <a href="/report#XXV">the report</a>: the claim, the passage, and the source that contradicts it.</li>
+</ul>
+
+<h2>The data</h2>
+<p>The map and the source ledger are published as data so that the interpretation can be thrown away and the record kept: <a href="/data/map-data.json">map-data.json</a>, <a href="/map.kml">map.kml</a>, <a href="/map/list">the map as text</a> and <a href="/data/sources-ledger.json">sources-ledger.json</a>.</p>
+""" % (format(n_markers, ','), n_edges)
+    body += '<footer>b0b.dev &middot; the record is published so the interpretation can be challenged.</footer>'
+    return page('About & Method', body)
+
+
+# --------------------------------------------------------------------------- /map/list
+def build_map_list(locs, edges):
+    from collections import OrderedDict
+    secs = OrderedDict()
+    order = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV',
+             'XVI', 'XVII', 'XVIII', 'XIX', 'XX', 'XXI', 'XXII', 'XXIII', 'XXIV', 'XXV']
+    for l in sorted(locs, key=lambda l: (order.index(l['section']) if l['section'] in order else 99, l['section'], l['name'])):
+        secs.setdefault(l['section'], []).append(l)
+    names = {'MS': 'Mass shootings', 'ANIMAL': 'Animal research', 'SPORTS': 'Sport and gambling'}
+    parts = []
+    toc = []
+    for sec, items in secs.items():
+        label = names.get(sec, 'Section ' + sec)
+        sid = 'sec-' + sec.lower()
+        toc.append('<a href="#%s">%s (%d)</a>' % (sid, html.escape(label), len(items)))
+        rows = ''.join('<li><b>%s</b> <span class="src">%s%s &middot; %.4f, %.4f</span><span>%s</span></li>'
+                       % (html.escape(l['name']), html.escape(l['type']),
+                          (' &middot; ' + html.escape(l['date'])) if l.get('date') else '',
+                          l['lat'], l['lng'], html.escape(l['ctx'])) for l in items)
+        parts.append('<section><h2 id="%s">%s <span class="tag">- %d locations</span></h2><ul class="items">%s</ul></section>'
+                     % (sid, html.escape(label), len(items), rows))
+    def tier_txt(t):
+        if t is None:
+            return '<span class="tier t-null">untiered</span>'
+        names_ = ['analogy', 'correlation', 'contact', 'material', 'coordination', 'causation']
+        cls = 't-null' if t <= 1 else ('t-att' if t == 2 else 't-doc')
+        return '<span class="tier %s">T%d %s</span>' % (cls, t, names_[t])
+    erows = ''.join('<li>%s%s <span class="src">%s</span></li>'
+                    % (tier_txt(e.get('tier')), html.escape(e['label']), html.escape(e['kind']))
+                    for e in sorted(edges, key=lambda e: (-(e.get('tier') if e.get('tier') is not None else -1), e['label'])))
+    body = """<div class="wide">
+<h1>The map as text</h1>
+<p class="lede" style="max-width:72ch">Every location and every connection line on <a href="/map">the OSINT map</a>, as a plain list - for screen readers, for search, and for anyone who would rather read than pan. The same data downloads as <a href="/data/map-data.json">JSON</a> and <a href="/map.kml">KML</a>. Lines are listed strongest first, by the tier of the relationship they show (<a href="/start">how the tiers work</a>).</p>
+<p style="font:13px/1.8 var(--mono)">%s &middot; <a href="#connections">Connections (%d)</a></p>
+%s
+<section><h2 id="connections">Connections <span class="tag">- %d lines, strongest first</span></h2><ul class="items">%s</ul></section>
+</div>""" % (' &middot; '.join(toc), len(edges), ''.join(parts), len(edges), erows)
+    return page('The Map as Text', body)
 
 
 def main():
-    n_markers, n_edges, tiered, n_rows, withheld = build_data()
+    n_markers, n_edges, tiered, n_rows, withheld, locs, edges = build_data()
     open(os.path.join(SITE, 'start.html'), 'w', encoding='utf-8').write(build_start(n_markers, n_edges))
     open(os.path.join(SITE, 'retractions.html'), 'w', encoding='utf-8').write(build_retractions())
-    print('start.html, retractions.html; map-data: %d markers, %d edges (%d tiered); ledger: %d rows, %d withheld'
+    open(os.path.join(SITE, 'about.html'), 'w', encoding='utf-8').write(build_about(n_markers, n_edges))
+    open(os.path.join(SITE, 'map-list.html'), 'w', encoding='utf-8').write(build_map_list(locs, edges))
+    print('start, retractions, about, map-list; map-data: %d markers, %d edges (%d tiered); ledger: %d rows, %d withheld'
           % (n_markers, n_edges, tiered, n_rows, withheld))
 
 
