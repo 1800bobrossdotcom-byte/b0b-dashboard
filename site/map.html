@@ -545,6 +545,9 @@
   <div class="filter-section-body" id="dataBody">
   <div class="filter-grid">
   <div class="filter-item"><label><input type="checkbox" id="toggleConnections" onchange="toggleDataLayer('connections')"> Connection Lines</label></div>
+  <div class="filter-item" style="grid-column:1/-1"><label for="edgeTierMin">Line tier</label> <select id="edgeTierMin" onchange="applyEdgeTier(this.value)" style="background:#111;color:#ccc;border:1px solid #333;font:inherit">
+    <option value="0">all lines (0 analogy and up)</option><option value="2">2+ documented contact</option><option value="3">3+ material relationship</option><option value="4">4+ coordination</option></select>
+    <div style="font-size:10px;color:#888;margin-top:3px;line-height:1.4">A line is tiered by the record of the relationship between its ends: 0 analogy &middot; 1 correlation &middot; 2 contact &middot; 3 material &middot; 4 coordination &middot; 5 causation. Dotted = 0&ndash;1, dashed = 2, solid = 3+. <a href="/start" style="color:#00ccff">How it works</a></div></div>
   <div class="filter-item"><label><input type="checkbox" id="toggleTunnels" onchange="toggleDataLayer('tunnels')"> Tunnel Paths</label></div>
   <div class="filter-item"><label><input type="checkbox" id="toggleIndigenous" onchange="toggleDataLayer('indigenous')"> 🏔️ Indigenous Territories</label></div>
   <div class="filter-item"><label><input type="checkbox" id="toggleEarthquakes" onchange="toggleDataLayer('earthquakes')"> 🌍 USGS Quakes</label></div>
@@ -3290,18 +3293,31 @@ var connectionLines = [
   [[40.7716,-73.9663],[40.7642,-73.9720],'#ff1744','Epstein-linked foundations supplied ~74% of Edge Foundation income 2001-2017 ($638K of $857K) — documented funding'],
 ];
 
+var EDGE_TIER_NAMES = ['analogy','correlation','contact','material','coordination','causation'];
+function edgeStyle(tier) {
+  if (tier === undefined || tier === null) return { weight: 1, opacity: 0.35, dashArray: '6,4' };
+  if (tier <= 1) return { weight: 1, opacity: 0.28, dashArray: '1,6' };
+  if (tier === 2) return { weight: 1.2, opacity: 0.45, dashArray: '6,4' };
+  return { weight: 1.6, opacity: 0.6, dashArray: null };
+}
+function edgeTip(label, tier) {
+  if (tier === undefined || tier === null) return label;
+  return '<b>T' + tier + ' ' + EDGE_TIER_NAMES[tier] + '</b> &middot; ' + label;
+}
 var lineLayer = L.layerGroup(); // starts hidden in Terra Nullius mode
 var glowLayer = L.layerGroup(); // starts hidden in Terra Nullius mode
 var allConnectionLines = [];
 connectionLines.forEach(function(conn) {
+  var tier = conn[4];
+  var st = edgeStyle(tier);
   var line = L.polyline([conn[0], conn[1]], {
     color: conn[2],
-    weight: 1,
-    opacity: 0.35,
-    dashArray: '6,4'
+    weight: st.weight,
+    opacity: st.opacity,
+    dashArray: st.dashArray
   });
-  line._connData = { from: conn[0], to: conn[1], color: conn[2], label: conn[3] };
-  line.bindTooltip(conn[3], {sticky: true, className: 'line-tooltip'});
+  line._connData = { from: conn[0], to: conn[1], color: conn[2], label: conn[3], tier: tier };
+  line.bindTooltip(edgeTip(conn[3], tier), {sticky: true, className: 'line-tooltip'});
   line.addTo(lineLayer);
   allConnectionLines.push(line);
 });
@@ -3475,14 +3491,17 @@ var tunnelPaths = [
 ];
 
 var tunnelLayer = L.layerGroup(); // starts hidden in Terra Nullius mode
+var allTunnelLines = [];
 tunnelPaths.forEach(function(t) {
   var line = L.polyline(t.path, {
     color: t.color,
     weight: 3,
-    opacity: 0.55,
-    dashArray: '8,6'
+    opacity: (t.tier !== undefined && t.tier <= 1) ? 0.3 : 0.55,
+    dashArray: (t.tier !== undefined && t.tier <= 1) ? '2,8' : '8,6'
   });
-  line.bindTooltip(t.label, {sticky: true, className: 'line-tooltip'});
+  line._connData = { tier: t.tier };
+  line.bindTooltip(edgeTip(t.label, t.tier), {sticky: true, className: 'line-tooltip'});
+  allTunnelLines.push(line);
   line.addTo(tunnelLayer);
 });
 
@@ -3530,11 +3549,30 @@ animalNetPaths.forEach(function(t) {
     opacity: 0.6,
     dashArray: '4,6'
   });
-  line._connData = { from: t.path[0], to: t.path[1], color: t.color || '#d500f9', label: t.label };
-  line.bindTooltip(t.label, {sticky: true, className: 'line-tooltip'});
+  line._connData = { from: t.path[0], to: t.path[1], color: t.color || '#d500f9', label: t.label, tier: t.tier };
+  line.bindTooltip(edgeTip(t.label, t.tier), {sticky: true, className: 'line-tooltip'});
   line.addTo(lineLayer);
   allConnectionLines.push(line);
 });
+
+// Edge-tier filter: hides lines whose documented relationship is below the
+// chosen tier. Untiered lines count as tier 0, so a filter never shows a line
+// it cannot vouch for.
+function applyEdgeTier(min) {
+  min = parseInt(min, 10) || 0;
+  allConnectionLines.forEach(function(line) {
+    var t = line._connData && line._connData.tier;
+    var show = (t === undefined || t === null ? 0 : t) >= min;
+    if (show && !lineLayer.hasLayer(line)) lineLayer.addLayer(line);
+    if (!show && lineLayer.hasLayer(line)) lineLayer.removeLayer(line);
+  });
+  allTunnelLines.forEach(function(line) {
+    var t = line._connData && line._connData.tier;
+    var show = (t === undefined || t === null ? 0 : t) >= min;
+    if (show && !tunnelLayer.hasLayer(line)) tunnelLayer.addLayer(line);
+    if (!show && tunnelLayer.hasLayer(line)) tunnelLayer.removeLayer(line);
+  });
+}
 
 function toggleDataLayer(layer) {
   if (layer === 'connections') {
