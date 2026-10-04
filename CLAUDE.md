@@ -181,6 +181,10 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**CURRENT-EVENTS SOURCE REGISTRY — 4 Oct 2026.** Author: *"add to current events source pulls: https://www.osint613.com/"*, then *"https://x.com/Osint613"*. **Read `research/sources/CURRENT-EVENTS-SOURCES.md` before every sweep.**
+- **osint613.com is a lead only.** It is a live headline feed, weighted to Israel, Iran and the Gulf, and it carries **no source links per item**. Each headline must be found at a named outlet before use, and paired with coverage from the other parties (symmetry).
+- **x.com/Osint613 is refused by robots** and is a recorded null. It reaches the page only if the author pastes a post.
+
 **OUTSIDE REVIEW ACTED ON, ITEMS 1-5 — 4 Oct 2026.** The author pasted a third-party review and said *"please do 1-5"*. Every point was checked against the page before acting (§5).
 - **(1) Report.**
   - The rung-4 conclusion now rests on the positive record. Section I says its service-file silence is "counted neither as an acquittal nor as a confirmation".
