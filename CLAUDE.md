@@ -181,6 +181,12 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**MAP EDGE TIERS APPLIED — 4 Oct 2026, live. `research/edge-tiers/` (brief, 8 verdict files, `apply.py`).** All **481 lines** (401 connection / 61 tunnel / 19 animal-network) were graded by 8 agents; 6 had to be relaunched after the first run died at the session reconnect. **Result: 19 deleted, 440 relabelled, 462 tiered** — T0 103, T1 134, T2 37, T3 178, T4 8, T5 2. The rendered connection layer is now **402**: 85/111/37/159/8/2 by tier; "3+" shows 169.
+- **Deletes:** the three Vivex/Taylor lines (their marker went on 2 Oct); Epstein Island→Indian Creek, Peter Island "DeVos", Buck Island→Page, the Prince→McLean "corridor", Kroenke→CFR and Dolan→Blazer (all living-person floor); the Tulsa Fed/Standard Oil/Kuhn Loeb chains; Calabasas→Donaghy; De Beers→British Museum; Paris Catacombs↔Channel Tunnel.
+- **T5 (2) and T4 (8), all checked by me:** Jekyll→Fed Act (the Fed's own history); CIA→Tehran 1953 (the CIA's own history); Gelli→Ambrosiano and Gelli→Bologna (court findings; Gelli is dead); six standing military command relationships.
+- **NOT done, recorded for the next pass:** endpoint coordinate errors the agents found are flagged, not moved (CIA lines starting at NDU rather than Langley, MC2 lines pointing at Paris, Channel Tunnel UK end mid-Channel, Gotthard ~8 km off, the Foxconn pin ~30 km off, Kaymakli, the Trafalgar/MoD end, a Pacific cable landing on Long Island).
+- **Author's calls:** the four MKUltra-hospital lines (Creedmoor, Riverview, Ionia, Topeka) stay at low tiers pending his decision on those markers; t1 White House↔Capitol is relabelled as rumour (deletable); c13 Indian Creek→Google HQ is T0 (deletable).
+
 **OUTSIDE REVIEW #2 — items a–e done, 4 Oct 2026.** Author: *"make updates and push"*, after a second third-party review. Only the items needing no new decisions from him were done:
 - **(a)** The ledger is renamed "Corrections & Retractions" (the URL stays `/retractions`); nav labels read CORRECTIONS.
 - **(b)** Titles lead with "b0b.dev", and descriptions sell the method. **Cyan Worlds' cancelled Myst prototype "Project Anglerfish" (revealed 26 July 2026) now owns that search phrase.** The concordance title was shortened to 60 chars, so **seo-selftest is 55/55 for the first time.**
