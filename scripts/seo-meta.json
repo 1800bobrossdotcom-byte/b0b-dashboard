@@ -88,11 +88,11 @@
     },
     {
       "file": "map.html",
-      "title": "b0b.dev - OSINT map: 1,172 sites, every connection tiered",
-      "metaDescription": "interactive OSINT map of 1,172 sites: surveillance infrastructure, black sites, the Epstein-Maxwell network, ALPR cameras, live aircraft and quake feeds.",
-      "ogDescription": "1,172 mapped locations: surveillance infrastructure, black sites, the Epstein-Maxwell network, Flock ALPR cameras — with live ADS-B aircraft, AIS vessels and USGS quakes. signal, plotted.",
+      "title": "b0b.dev - OSINT map: 1,166 sites, every connection tiered",
+      "metaDescription": "interactive OSINT map of 1,166 sites: surveillance infrastructure, black sites, the Epstein-Maxwell network, ALPR cameras, live aircraft and quake feeds.",
+      "ogDescription": "1,166 mapped locations: surveillance infrastructure, black sites, the Epstein-Maxwell network, Flock ALPR cameras — with live ADS-B aircraft, AIS vessels and USGS quakes. signal, plotted.",
       "jsonldType": "WebApplication",
-      "headline": "OSINT world map: 1,172 documented sites, surveillance infrastructure, and the Epstein-Maxwell network",
+      "headline": "OSINT world map: 1,166 documented sites, surveillance infrastructure, and the Epstein-Maxwell network",
       "topics": [
         "OSINT map",
         "surveillance infrastructure",
@@ -330,7 +330,7 @@
       "file": "map-list.html",
       "title": "b0b.dev - the OSINT map as text: every site and connection",
       "metaDescription": "Every location and every connection line on the b0b.dev OSINT map as a readable list, with coordinates, dates, context and the evidence tier of each connection.",
-      "ogDescription": "The whole OSINT map without the map: 1,172 locations and every connection line, listed with dates, context and relationship tiers.",
+      "ogDescription": "The whole OSINT map without the map: 1,166 locations and every connection line, listed with dates, context and relationship tiers.",
       "jsonldType": "Dataset",
       "headline": "The b0b.dev OSINT map as text",
       "topics": [

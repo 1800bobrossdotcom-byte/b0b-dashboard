@@ -118,6 +118,12 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--phos);outline-offse
 main{max-width:72ch;margin:0 auto}
 h1{font:600 clamp(26px,5vw,38px)/1.15 var(--mono);letter-spacing:-.01em;margin:42px 0 8px;text-wrap:balance}
 .lede{color:var(--ink-2);margin:0 0 28px}
+.kicker{font:600 12px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--phos);margin:42px 0 0}
+.kicker+h1{margin-top:10px}
+.door{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 8px}
+.door a{font:600 14px/1.2 var(--mono);letter-spacing:.04em;text-decoration:none;padding:12px 16px;border:1px solid var(--rule);background:var(--panel);color:var(--ink)}
+.door a.go{border-color:var(--phos);color:var(--phos)}
+.door a:hover{border-color:var(--phos)}
 h2{font:600 15px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;margin:44px 0 12px;padding-top:14px;border-top:1px solid var(--rule)}
 h2 .tag{font-weight:400;color:var(--dim);letter-spacing:.04em;text-transform:none}
 ul.items{list-style:none;padding:0;margin:0;display:grid;gap:14px}
@@ -154,12 +160,12 @@ footer{max-width:72ch;margin:56px auto 0;font:13px/1.6 var(--mono);color:var(--d
 '''
 
 NAV = '''<div class="top"><div class="nav">
-  <a href="/report">&larr; THE REPORT</a><a href="/start">READ THIS FIRST</a><a href="/retractions">CORRECTIONS</a>
+  <a href="/"><b>b0b.dev</b></a><a href="/report">THE REPORT</a><a href="/retractions">CORRECTIONS</a>
   <a href="/map">OSINT MAP</a><a href="/map/list">MAP AS TEXT</a><a href="/about">ABOUT &amp; METHOD</a><a href="/home">FILMS</a>
 </div></div>'''
 
 
-def page(title, body, main_class=''):
+def page(title, body, main_class='', head_extra=''):
     return '''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -167,7 +173,7 @@ def page(title, body, main_class=''):
   <script>(function(){try{var t=localStorage.getItem("b0b_theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/favicon.png" type="image/png">
-  <title>%s</title>
+  <title>%s</title>%s
   <style>
 %s
 %s
@@ -181,7 +187,7 @@ def page(title, body, main_class=''):
 <script src="/theme.js" defer></script>
 </body>
 </html>
-''' % (html.escape(title), FONTS, CSS, NAV, (' class="%s"' % main_class) if main_class else '', body)
+''' % (html.escape(title), head_extra, FONTS, CSS, NAV, (' class="%s"' % main_class) if main_class else '', body)
 
 
 def item(tier, text, src=''):
@@ -241,8 +247,10 @@ def build_start(n_markers, n_edges):
     ]
     scale = ''.join('<tr><td><b>%s</b></td><td>%s</td><td>%s</td></tr>' % (k, n, m) for k, n, m in EDGE_TIERS)
     body = '''
+<p class="kicker">b0b.dev &middot; Project Anglerfish &middot; independent OSINT</p>
 <h1>Read this first</h1>
 <p class="lede">The report is long by design: twenty-five sections, every claim tiered and sourced. This page is the short version - what it knows, what it thinks, what it does not know, and what would change its mind - with the data underneath it, so you can throw the interpretation away and keep the record.</p>
+<nav class="door" aria-label="Start here"><a class="go" href="/report">ENTER THE REPORT &rarr;</a><a href="/map">OPEN THE MAP</a><a href="/home">WATCH THE FILMS</a></nav>
 
 <section class="k-doc"><h2>What we know <span class="tag">- documented</span></h2><ul class="items">%s</ul></section>
 <section class="k-hyp"><h2>What we think <span class="tag">- conclusion and hypothesis, labeled as such</span></h2><ul class="items">%s</ul></section>
@@ -275,7 +283,9 @@ def build_start(n_markers, n_edges):
        ''.join('<div class="rule"><b>%s</b>%s</div>' % r for r in rules), scale,
        format(n_markers, ','), n_edges)
     body += '<footer>b0b.dev &middot; written to be attacked: send corrections through the report&rsquo;s researcher&rsquo;s guide. Last built from the live report and map.</footer>'
-    return page('Read this first', body)
+    # The homepage since 4 Oct 2026: Search Console's verifier fetches '/', so the
+    # ownership tag rides on this page (outside the seo: block apply-seo-meta owns).
+    return page('Read this first', body, head_extra='\n  <meta name="google-site-verification" content="TsPEDsaL88qvOxa0dWejCZFKVU37Y7Vk5v5HKcp5kL0">')
 
 
 # --------------------------------------------------------------------------- /retractions
@@ -331,6 +341,9 @@ RETRACTIONS = [
     ('2026-10-04', 'Map lines', 'Connection lines drawn as arrows between places that share only a time, a city or a theme; tunnels labelled as documented with no document; and lines carrying false facts - a 1936 Olympics "awarded to Nazi Germany" (it was 1931), a 2018 World Cup awarded "during Crimea" (2010), BlackRock and Vanguard in "circular ownership", a White House-Capitol tunnel called documented.',
      'Every one of the 481 lines graded 0 (analogy) to 5 (causation) by what the record shows, 440 labels rewritten to state the actual relationship, 19 lines removed - false links, chains with no document, and lines that put living people beside a crime or an agency by placement alone. Arrows survive only where a document carries the direction.',
      'The edge-tier audit, prompted by an outside review.'),
+    ('2026-10-04', 'Map', 'Five psychiatric-hospital markers presented as MKUltra sites (Ionia, Creedmoor, Riverview, Topeka) or as a political-commitment black site (Kasr El Aini), and a villa marker on the wrong street; line ends sitting on the wrong places - CIA lines starting at the National Defense University, Brunel&rsquo;s MC2 lines ending on the Place de la Concorde obelisk, a trans-Pacific cable landing on Long Island, the Channel Tunnel&rsquo;s English end in mid-Channel, a Lutnick contact line ending at the World Trade Center site, the Foxconn pin 30 km from the plant.',
+     'The six markers and their lines removed: their claims had no source the audit could read, or the source said otherwise (Harold Blauer died at the New York State Psychiatric Institute, which stays on the map). 31 line ends and two pins moved onto the places their labels name. Three more lines removed: an undocumented White House&ndash;Capitol tunnel, a Google&ndash;Indian Creek line, and a duplicate Derinkuyu&ndash;Kaymakli tunnel drawn short of Kaymakli.',
+     'The marker and edge audits; the author&rsquo;s decision on the held items.'),
     ('2026-10-04', 'AI report', 'Stated that the document &ldquo;proves&rdquo; AI output channels are manipulated by a background process, and counted a self-concealing pattern as evidence.',
      'Tiered. The outputs and defects are documented; the background process is a hypothesis; the competing explanation - ordinary model error and bias - is stated.',
      'The same review.'),

@@ -25,7 +25,7 @@ const COPY = JSON.parse(fs.readFileSync(process.argv[2] || path.join(__dirname, 
 
 // Canonical URL per file - single source of truth kept in sync with server.js
 const URLS = {
-  'index.html': '/home',   // '/' has redirected to /report since 19 Sept 2026
+  'index.html': '/home',   // '/' serves the briefing (start.html) since 4 Oct 2026
   'report.html': '/report',
   'intro.html': '/intro',
   'continuity.html': '/continuity',
@@ -42,7 +42,7 @@ const URLS = {
   'tones-shield-guide.html': '/tones/shield/guide',
   'ai-attack-vector-analysis.html': '/ai-attack-vector-analysis',
   'darpa-cia-lockheed.html': '/darpa-cia-lockheed',
-  'start.html': '/start',
+  'start.html': '/',
   'retractions.html': '/retractions',
   'about.html': '/about',
   'map-list.html': '/map/list',
