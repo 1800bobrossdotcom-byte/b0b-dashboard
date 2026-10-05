@@ -233,18 +233,18 @@
     },
     {
       "file": "tones-shield-guide.html",
-      "title": "ARC Shield field guide: LRAD countermeasure manual — b0b.dev",
-      "metaDescription": "field manual for the ARC Shield acoustic countermeasure: LRAD detection, phase cancellation, old phone conversion, amplification, deployment, FOIA research.",
-      "ogDescription": "how to turn any phone into an acoustic countermeasure. LRAD detection, 180-degree phase cancellation, old phone conversion, perimeter and mesh deployment. no app store, no server, no tracking.",
+      "title": "ARC Shield field guide: acoustic safety and evidence manual — b0b.dev",
+      "metaDescription": "How to use ARC Shield and protect your hearing around acoustic hailing devices: what the tool detects, what it cannot do, LRAD facts from datasheets and courts, and how to keep evidence that holds up.",
+      "ogDescription": "Protect first, identify later: LRAD figures from the manufacturer and the courts, hearing-protection limits from NIOSH, and how to record SHA-256-verified acoustic evidence on a phone.",
       "jsonldType": "Article",
-      "headline": "ARC Shield field guide: a citizen defense manual for the acoustic resonance countermeasure",
+      "headline": "ARC Shield field guide: acoustic safety, LRAD facts and evidence that holds up",
       "topics": [
         "LRAD",
-        "acoustic weapons",
-        "phase cancellation",
-        "acoustic countermeasures",
-        "FOIA research",
-        "Web Audio API"
+        "acoustic hailing device",
+        "hearing protection",
+        "NIOSH noise limits",
+        "audio evidence",
+        "Edrei v. Maguire"
       ]
     },
     {
