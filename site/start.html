@@ -21,7 +21,7 @@
   <meta name="twitter:title" content="b0b.dev - read this first: the OSINT report in one page">
   <meta name="twitter:description" content="What we know, what we think, what we don't know, and what would change our minds - with the map data and the source ledger to download.">
   <meta name="twitter:image" content="https://www.b0b.dev/img/og-card.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"Read this first: the OSINT report in one page, tiered, with its falsifiers and its data","url":"https://www.b0b.dev/start","description":"The short version of the OSINT report: what it documents, what it concludes and at what tier, what it does not know, and what would change its mind. With the data.","image":"https://www.b0b.dev/img/og-card.png","isPartOf":{"@type":"WebSite","name":"b0b.dev","url":"https://www.b0b.dev/"},"headline":"Read this first: the OSINT report in one page, tiered, with its falsifiers and its data","author":{"@type":"Person","name":"b0b"},"publisher":{"@type":"Organization","name":"b0b.dev","url":"https://www.b0b.dev/"},"mainEntityOfPage":"https://www.b0b.dev/start","dateModified":"2026-10-04T20:45:27.485Z"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"Read this first: the OSINT report in one page, tiered, with its falsifiers and its data","url":"https://www.b0b.dev/start","description":"The short version of the OSINT report: what it documents, what it concludes and at what tier, what it does not know, and what would change its mind. With the data.","image":"https://www.b0b.dev/img/og-card.png","isPartOf":{"@type":"WebSite","name":"b0b.dev","url":"https://www.b0b.dev/"},"headline":"Read this first: the OSINT report in one page, tiered, with its falsifiers and its data","author":{"@type":"Person","name":"b0b"},"publisher":{"@type":"Organization","name":"b0b.dev","url":"https://www.b0b.dev/"},"mainEntityOfPage":"https://www.b0b.dev/start","dateModified":"2026-10-04T21:17:23.398Z"}</script>
   <!-- seo:end -->
   <meta name="google-site-verification" content="TsPEDsaL88qvOxa0dWejCZFKVU37Y7Vk5v5HKcp5kL0">
   <style>
@@ -119,6 +119,7 @@ footer{max-width:72ch;margin:56px auto 0;font:13px/1.6 var(--mono);color:var(--d
   <a href="/data/map-data.json" download><b>map-data.json</b><span>All 1,166 markers and 455 connection lines, with coordinates, context, dates and edge tiers. JSON.</span></a>
   <a href="/map/list"><b>The map as text</b><span>Every location and every connection line, with its tier, as a plain readable list - no map needed.</span></a>
   <a href="/map.kml" download><b>map.kml</b><span>The markers for Google Earth, with dates that drive its time slider.</span></a>
+  <a href="/data/retractions.json" download><b>retractions.json</b><span>The corrections ledger as data: date, place, what the page said, what replaced it, how it was found.</span></a>
   <a href="/data/sources-ledger.json" download><b>sources-ledger.json</b><span>Every source fetch the report&rsquo;s spider made: URL, time, status, SHA-256 - and every refusal, recorded as a null.</span></a>
 </div>
 
@@ -129,7 +130,7 @@ footer{max-width:72ch;margin:56px auto 0;font:13px/1.6 var(--mono);color:var(--d
   <a href="/about"><b>About &amp; method</b><span>Who maintains this, how a correction is decided, the rules, and the tools - AI included.</span></a>
   <a href="/ai-attack-vector-analysis"><b>The AI-safety report</b><span>A separate document on the AI tools used to build this site, now tiered the same way.</span></a>
 </div>
-<footer>b0b.dev &middot; written to be attacked: send corrections through the report&rsquo;s researcher&rsquo;s guide. Last built from the live report and map.</footer>
+<footer>b0b.dev &middot; written to be attacked: send corrections through the report&rsquo;s researcher&rsquo;s guide. Last built from the live report and map. Every count on this site is checked against one record before each deploy: <a href="/data/build.json">build.json</a> (counts, build stamp, content hashes).</footer>
 </main>
 <script src="/theme.js" defer></script>
 </body>

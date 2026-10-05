@@ -1,0 +1,200 @@
+{
+ "source": "https://www.b0b.dev/retractions",
+ "note": "Corrections and retractions, newest last. The report fixes claims in place; this file and /retractions are where the changes are kept.",
+ "entries": [
+  {
+   "id": "C-2026-09-12-1",
+   "date": "2026-09-12",
+   "where": "VII",
+   "page_said": "Closed the Federal Reserve material by saying the banking dynasties that created it still operate it.",
+   "replaced_by": "Removed. The succession printed directly above the sentence contains no banking dynasty; Paul Warburg was vice-governor 1916–18 and never chairman. The documented revolving door stays.",
+   "found_by": "It failed against the report’s own list."
+  },
+  {
+   "id": "C-2026-09-12-2",
+   "date": "2026-09-12",
+   "where": "XX",
+   "page_said": "Told the reader to “note the Warburg name” in Warburg Pincus.",
+   "replaced_by": "Removed. The firm has been a private partnership since 1966.",
+   "found_by": "Corporate history."
+  },
+  {
+   "id": "C-2026-09-12-3",
+   "date": "2026-09-12",
+   "where": "VI",
+   "page_said": "Cross-referenced a “Rothschild banking network documented in Section VII”.",
+   "replaced_by": "Replaced with the actual five-house record, including Vienna seized after the March 1938 Anschluss. Section VII had carried one sentence, about an 1825 loan.",
+   "found_by": "The cross-reference pointed at something that was not there."
+  },
+  {
+   "id": "C-2026-09-12-4",
+   "date": "2026-09-12",
+   "where": "II",
+   "page_said": "Read the 1994 Mirror Group settlement as Maxwell’s company conceding the allegation.",
+   "replaced_by": "Corrected. The apology was for the October 1991 articles attacking two journalists; settling a libel action is not an admission.",
+   "found_by": "Symmetry rule - a discount that only ran one way."
+  },
+  {
+   "id": "C-2026-09-12-5",
+   "date": "2026-09-12",
+   "where": "II",
+   "page_said": "Called a 2014 contact “the CIA Director who met with Epstein”, in three places.",
+   "replaced_by": "Corrected. In 2014 he was Deputy Secretary of State; his CIA tenure was 2021–25.",
+   "found_by": "A naming error of our own."
+  },
+  {
+   "id": "C-2026-09-12-6",
+   "date": "2026-09-12",
+   "where": "XVI",
+   "page_said": "Cited an FBI Urban Moving serial of 24 September 2001 marked “Pending”.",
+   "replaced_by": "Replaced with the closing memorandum (case closed 10 July 2003), which records the counter-intelligence concern and kills the foreknowledge specimen on physical evidence.",
+   "found_by": "An eleven-day-old serial was standing in for a two-year case."
+  },
+  {
+   "id": "C-2026-09-12-7",
+   "date": "2026-09-12",
+   "where": "Report-wide",
+   "page_said": "33 notes narrating the report’s own revisions, and an “editorial correction” box.",
+   "replaced_by": "Removed at the author’s instruction. Claims are now fixed in place; this page is where the corrections are listed.",
+   "found_by": "Readability."
+  },
+  {
+   "id": "C-2026-09-18-1",
+   "date": "2026-09-18",
+   "where": "X",
+   "page_said": "Said Hikvision cameras watch Egypt’s New Administrative Capital.",
+   "replaced_by": "Corrected. Honeywell (US) signed in 2019 to integrate 6,000+ cameras; an IDS study names Egypt as the exception where “Honeywell takes the place of Huawei”.",
+   "found_by": "Unsourced; the primary said the opposite."
+  },
+  {
+   "id": "C-2026-09-19-1",
+   "date": "2026-09-19",
+   "where": "Map",
+   "page_said": "All 161 mass-shooting markers were dated 1982 - the start of a data set’s coverage, not the shooting.",
+   "replaced_by": "Re-dated from each marker’s own text by a rule-based extractor; 273 dates changed.",
+   "found_by": "Our own date extractor took the earliest year on the line."
+  },
+  {
+   "id": "C-2026-09-21-1",
+   "date": "2026-09-21",
+   "where": "XIII",
+   "page_said": "A subsection reading symbols, crosses and words as evidence (the “naming error” set piece).",
+   "replaced_by": "Removed whole. The rule survives where it is defined, in Section I.",
+   "found_by": "The author: it was off the report’s subject."
+  },
+  {
+   "id": "C-2026-09-23-1",
+   "date": "2026-09-23",
+   "where": "VII",
+   "page_said": "Said the Svalbard seed vault was funded by Monsanto, Syngenta and DuPont for confiscation.",
+   "replaced_by": "Rewritten. Norway established and fully funded the vault and owns it; only a depositing gene bank can ask for its seeds back. What survives is the seed-patent record.",
+   "found_by": "The operator’s own site."
+  },
+  {
+   "id": "C-2026-09-23-2",
+   "date": "2026-09-23",
+   "where": "XIII, XVI",
+   "page_said": "Point Nemo (a coincidence chain), a Netherlands courtroom passage that called “families who own the central banks” documented, and a directed-energy claim resting on one anonymous account.",
+   "replaced_by": "Removed whole. The courtroom passage restated a trope the report had already killed.",
+   "found_by": "Off-track audit."
+  },
+  {
+   "id": "C-2026-09-24-1",
+   "date": "2026-09-24",
+   "where": "II",
+   "page_said": "Said Epstein’s body was identified by his brother.",
+   "replaced_by": "Removed - not established; one outlet reported only that he said so. The pathologist observing the autopsy is now stated as retained by the family.",
+   "found_by": "Fact-check for the Epstein–Maxwell film."
+  },
+  {
+   "id": "C-2026-09-26-1",
+   "date": "2026-09-26",
+   "where": "XV",
+   "page_said": "Our 22 September update printed the UN Iran mission’s finding against the US and omitted the same report’s crimes-against-humanity finding against Iran’s government; some casualty figures had no source.",
+   "replaced_by": "Both findings now printed; counts replaced with the sourced ones.",
+   "found_by": "The next current-events scan - the symmetry rule failing our way."
+  },
+  {
+   "id": "C-2026-10-01-1",
+   "date": "2026-10-01",
+   "where": "XV",
+   "page_said": "Called “economic D-Day” a threat, and placed the UAE in a meeting.",
+   "replaced_by": "Corrected. It was a campaign name; attendance is not established.",
+   "found_by": "Re-reading the sources quote by quote."
+  },
+  {
+   "id": "C-2026-10-02-1",
+   "date": "2026-10-02",
+   "where": "XIV, XV",
+   "page_said": "Placed the cobalt belt in Eastern Congo, and cited children “as young as six” and an old Labor Department count.",
+   "replaced_by": "Corrected. The cobalt is in the southern Copperbelt (Lualaba and Haut-Katanga); Amnesty’s figure is seven; the 2024 list is 204 goods from 82 countries. Eastern Congo’s documented minerals are tin, tantalum, tungsten and gold.",
+   "found_by": "The map audit."
+  },
+  {
+   "id": "C-2026-10-02-2",
+   "date": "2026-10-02",
+   "where": "Map",
+   "page_said": "Markers showed living people’s cases without their outcomes - acquittals, dismissals, settlements - plus misquotes, chains implied by shared timing, residence house numbers and pins up to 400 km off.",
+   "replaced_by": "839 corrections, 176 pins moved, 2 markers removed under the living-person floor. Details are kept in the audit file, not repeated here.",
+   "found_by": "VERITAS: every marker checked against a source."
+  },
+  {
+   "id": "C-2026-10-03-1",
+   "date": "2026-10-03",
+   "where": "I",
+   "page_said": "Said Sir Aaron Bushnell died outside the Israeli Embassy.",
+   "replaced_by": "Corrected: he died in hospital that evening, after his protest outside the embassy.",
+   "found_by": "Adding Al Jazeera’s report as a source."
+  },
+  {
+   "id": "C-2026-10-04-1",
+   "date": "2026-10-04",
+   "where": "I, II",
+   "page_said": "Argued that a deniable asset is “defined by the absence” of a file - so that the missing paperwork counted for the conclusion - and described Epstein’s fortune as having “no identifiable clients”.",
+   "replaced_by": "Corrected. The missing file now counts in neither direction; the conclusion rests on the positive record and is scored against four rivals. The fortune has two documented clients, and the page already said so.",
+   "found_by": "An outside review, checked against the page."
+  },
+  {
+   "id": "C-2026-10-04-2",
+   "date": "2026-10-04",
+   "where": "Map lines",
+   "page_said": "Connection lines drawn as arrows between places that share only a time, a city or a theme; tunnels labelled as documented with no document; and lines carrying false facts - a 1936 Olympics \"awarded to Nazi Germany\" (it was 1931), a 2018 World Cup awarded \"during Crimea\" (2010), BlackRock and Vanguard in \"circular ownership\", a White House-Capitol tunnel called documented.",
+   "replaced_by": "Every one of the 481 lines graded 0 (analogy) to 5 (causation) by what the record shows, 440 labels rewritten to state the actual relationship, 19 lines removed - false links, chains with no document, and lines that put living people beside a crime or an agency by placement alone. Arrows survive only where a document carries the direction.",
+   "found_by": "The edge-tier audit, prompted by an outside review."
+  },
+  {
+   "id": "C-2026-10-04-3",
+   "date": "2026-10-04",
+   "where": "Map",
+   "page_said": "Five psychiatric-hospital markers presented as MKUltra sites (Ionia, Creedmoor, Riverview, Topeka) or as a political-commitment black site (Kasr El Aini), and a villa marker on the wrong street; line ends sitting on the wrong places - CIA lines starting at the National Defense University, Brunel’s MC2 lines ending on the Place de la Concorde obelisk, a trans-Pacific cable landing on Long Island, the Channel Tunnel’s English end in mid-Channel, a Lutnick contact line ending at the World Trade Center site, the Foxconn pin 30 km from the plant.",
+   "replaced_by": "The six markers and their lines removed: their claims had no source the audit could read, or the source said otherwise (Harold Blauer died at the New York State Psychiatric Institute, which stays on the map). 31 line ends and two pins moved onto the places their labels name. Three more lines removed: an undocumented White House–Capitol tunnel, a Google–Indian Creek line, and a duplicate Derinkuyu–Kaymakli tunnel drawn short of Kaymakli.",
+   "found_by": "The marker and edge audits; the author’s decision on the held items."
+  },
+  {
+   "id": "C-2026-10-04-4",
+   "date": "2026-10-04",
+   "where": "AI report",
+   "page_said": "Stated that the document “proves” AI output channels are manipulated by a background process, and counted a self-concealing pattern as evidence.",
+   "replaced_by": "Tiered. The outputs and defects are documented; the background process is a hypothesis; the competing explanation - ordinary model error and bias - is stated.",
+   "found_by": "The same review."
+  }
+ ],
+ "tested_not_adopted": [
+  {
+   "claim": "That Epstein signed for the move of a CIA airline to Ohio",
+   "why": "The CIA had sold the airline in 1973; “signatory” has no document."
+  },
+  {
+   "claim": "That Israeli “military-grade” radio equipment was installed at Zorro Ranch",
+   "why": "The document is a 2014 quote for rural phone and internet backhaul, never built."
+  },
+  {
+   "claim": "That DARPA “solved recursive self-improvement” a decade ago",
+   "why": "No program on the list claims it; what is real is the PAL→CALO→Siri lineage, which is published."
+  },
+  {
+   "claim": "That a hacking group’s claimed breach of the FBI was real",
+   "why": "The claim was abandoned before its deadline; nothing was published or confirmed."
+  }
+ ]
+}

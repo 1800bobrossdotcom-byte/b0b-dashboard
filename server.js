@@ -528,6 +528,16 @@ function siteUpdatedString() {
   }
 }
 
+// The report's "Last updated" line carries a static fallback that JS replaces
+// after load. Readers without JS - crawlers, text extractors, outside models -
+// saw that fallback (it read August 2026 into October), so the served HTML is
+// stamped with the same value /api/updated returns.
+function stampUpdated(html) {
+  const u = siteUpdatedString();
+  if (!u.text) return html;
+  return html.replace(/(<span id="siteUpdated">)[^<]*(<\/span>)/, `$1${u.text}$2`);
+}
+
 app.get('/api/updated', (req, res) => {
   if (!hasAccess(req)) return res.status(204).end();
   res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
@@ -827,7 +837,7 @@ app.get('*', (req, res) => {
     if (!page) return res.status(404).end();
     const file = path.join(PUB, page);
     if (!fs.existsSync(file)) return res.status(404).end();
-    const html = fs.readFileSync(file, 'utf8').replace(/<script>/g, `<script nonce="${nonce}">`);
+    const html = stampUpdated(fs.readFileSync(file, 'utf8')).replace(/<script>/g, `<script nonce="${nonce}">`);
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
     return res.send(html);
@@ -849,7 +859,7 @@ app.get('*', (req, res) => {
       // 'nonce-...' source in siteCSP. Only the bare <script> form is inline in
       // these pages; anything with a src= is external and covered by 'self'.
       // Pages are served no-store, so a nonce is never replayed from a cache.
-      const html = fs.readFileSync(file, 'utf8').replace(/<script>/g, `<script nonce="${nonce}">`);
+      const html = stampUpdated(fs.readFileSync(file, 'utf8')).replace(/<script>/g, `<script nonce="${nonce}">`);
       bump('views');
       res.setHeader('Content-Type', 'text/html; charset=utf-8');
       res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');

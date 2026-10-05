@@ -269,6 +269,7 @@ def build_start(n_markers, n_edges):
   <a href="/data/map-data.json" download><b>map-data.json</b><span>All %s markers and %s connection lines, with coordinates, context, dates and edge tiers. JSON.</span></a>
   <a href="/map/list"><b>The map as text</b><span>Every location and every connection line, with its tier, as a plain readable list - no map needed.</span></a>
   <a href="/map.kml" download><b>map.kml</b><span>The markers for Google Earth, with dates that drive its time slider.</span></a>
+  <a href="/data/retractions.json" download><b>retractions.json</b><span>The corrections ledger as data: date, place, what the page said, what replaced it, how it was found.</span></a>
   <a href="/data/sources-ledger.json" download><b>sources-ledger.json</b><span>Every source fetch the report&rsquo;s spider made: URL, time, status, SHA-256 - and every refusal, recorded as a null.</span></a>
 </div>
 
@@ -282,7 +283,7 @@ def build_start(n_markers, n_edges):
 ''' % (''.join(know), ''.join(think), ''.join(dont), ''.join(change),
        ''.join('<div class="rule"><b>%s</b>%s</div>' % r for r in rules), scale,
        format(n_markers, ','), n_edges)
-    body += '<footer>b0b.dev &middot; written to be attacked: send corrections through the report&rsquo;s researcher&rsquo;s guide. Last built from the live report and map.</footer>'
+    body += '<footer>b0b.dev &middot; written to be attacked: send corrections through the report&rsquo;s researcher&rsquo;s guide. Last built from the live report and map. Every count on this site is checked against one record before each deploy: <a href="/data/build.json">build.json</a> (counts, build stamp, content hashes).</footer>'
     # Search Console's ownership tag, kept here as well as on the report (which '/'
     # serves): outside the seo: block apply-seo-meta owns, and harmless on a second page.
     return page('Read this first', body, head_extra='\n  <meta name="google-site-verification" content="TsPEDsaL88qvOxa0dWejCZFKVU37Y7Vk5v5HKcp5kL0">')
@@ -357,7 +358,28 @@ TESTED = [
 ]
 
 
+def write_retractions_json():
+    """The ledger as data: one entry per correction, ids stable by date order."""
+    import re as _re
+    def plain(t):
+        return html.unescape(_re.sub(r'<[^>]+>', '', t))
+    entries = []
+    seq = {}
+    for d, w, was, now, how in RETRACTIONS:
+        seq[d] = seq.get(d, 0) + 1
+        entries.append({'id': 'C-%s-%d' % (d, seq[d]), 'date': d, 'where': plain(w),
+                        'page_said': plain(was), 'replaced_by': plain(now), 'found_by': plain(how)})
+    out = {'source': 'https://www.b0b.dev/retractions',
+           'note': 'Corrections and retractions, newest last. The report fixes claims in place; this file and /retractions are where the changes are kept.',
+           'entries': entries,
+           'tested_not_adopted': [{'claim': plain(c), 'why': plain(y)} for c, y in TESTED]}
+    with open(os.path.join(SITE, 'data', 'retractions.json'), 'w', encoding='utf-8') as f:
+        json.dump(out, f, ensure_ascii=False, indent=1)
+        f.write('\n')
+
+
 def build_retractions():
+    write_retractions_json()
     rows = ''.join(
         '<tr><td class="d">%s</td><td class="d">%s</td><td data-l="The page said"><span class="was">%s</span></td><td data-l="Replaced by">%s</td><td data-l="Found by">%s</td></tr>'
         % (d, w, was, now, how) for d, w, was, now, how in RETRACTIONS)
@@ -372,7 +394,7 @@ def build_retractions():
 <ul class="items">%s</ul>
 <p>Each test is kept in the report&rsquo;s research files with its sources and nulls.</p></section>
 </div>''' % (rows, tested)
-    body += '<footer>Corrections are welcome and are credited by substance, not by name. See the researcher&rsquo;s guide at the end of <a href="/report">the report</a>.</footer>'
+    body += '<footer>Corrections are welcome and are credited by substance, not by name. See the researcher&rsquo;s guide at the end of <a href="/report">the report</a>. This ledger as data: <a href="/data/retractions.json">retractions.json</a>.</footer>'
     return page('Corrections & Retractions', body)
 
 
