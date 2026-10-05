@@ -279,8 +279,15 @@ app.use((req, res, next) => {
   })(req, res, () => {
     res.removeHeader('X-Powered-By');
     // Restrict powerful features to nothing the site needs; delegate autoplay to the YouTube embed only.
+    // ARC Shield (/tones/shield) is the one page that needs the microphone and,
+    // when the user asks, location; it gets them for its own origin only. Every
+    // other page keeps both off. (Without this, browsers that enforce the header
+    // refuse getUserMedia silently, with no prompt - the failure the AI report's
+    // section 5.9 records.)
+    const shield = req.path === '/tones/shield' || req.path === '/tones-shield';
     res.setHeader('Permissions-Policy',
-      'camera=(), microphone=(), geolocation=(), usb=(), payment=(), magnetometer=(), gyroscope=(), accelerometer=(), interest-cohort=(), autoplay=(self "https://www.youtube.com" "https://www.youtube-nocookie.com")');
+      'camera=(), microphone=' + (shield ? '(self)' : '()') + ', geolocation=' + (shield ? '(self)' : '()') +
+      ', usb=(), payment=(), magnetometer=(), gyroscope=(), accelerometer=(), interest-cohort=(), autoplay=(self "https://www.youtube.com" "https://www.youtube-nocookie.com")');
     next();
   });
 });

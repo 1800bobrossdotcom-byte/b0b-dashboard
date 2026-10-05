@@ -200,17 +200,19 @@
     },
     {
       "file": "tones-shield.html",
-      "title": "ARC Shield: LRAD detection & phase cancellation — b0b.dev",
-      "metaDescription": "mic spectrogram scans for LRAD, ultrasonic and infrasonic signatures; anti-phase cancellation tones, protective frequencies, and evidence logging with GPS.",
-      "ogDescription": "detect and counter acoustic devices in the browser: live spectrogram flags LRAD, ultrasonic and infrasonic signatures; ARC generates anti-phase cancellation; evidence log captures audio and GPS.",
+      "title": "ARC Shield: acoustic monitor, hearing guard, evidence recorder — b0b.dev",
+      "metaDescription": "A phone microphone tool that says CLEAR when the room is clear: flags loud sustained 1–5 kHz tones and near-ultrasound, tracks your hearing dose, and records hash-verified evidence.",
+      "ogDescription": "Detects loud sustained tones and near-ultrasound with benign explanations first, measures A-weighted level and NIOSH hearing dose, and saves lossless audio with SHA-256 fingerprints. Runs on the device; nothing uploaded.",
       "jsonldType": "WebApplication",
-      "headline": "ARC Shield: acoustic resonance countermeasure — LRAD detection, phase cancellation, evidence capture",
+      "headline": "ARC Shield: acoustic monitor, hearing guard and evidence recorder",
       "topics": [
-        "LRAD detection",
-        "acoustic phase cancellation",
-        "protective frequencies",
-        "audio spectrogram",
-        "evidence capture"
+        "acoustic hailing device",
+        "LRAD",
+        "hearing protection",
+        "noise dose",
+        "sound level meter",
+        "audio evidence",
+        "near-ultrasound beacons"
       ]
     },
     {

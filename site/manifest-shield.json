@@ -1,7 +1,7 @@
 {
   "name": "b0b ARC Shield",
   "short_name": "ARC Shield",
-  "description": "Acoustic Resonance Countermeasure - LRAD detection and defense",
+  "description": "Acoustic monitor, hearing guard and evidence recorder",
   "start_url": "/tones/shield",
   "display": "standalone",
   "background_color": "#0a0a0a",
