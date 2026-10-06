@@ -348,6 +348,9 @@ RETRACTIONS = [
     ('2026-10-04', 'AI report', 'Stated that the document &ldquo;proves&rdquo; AI output channels are manipulated by a background process, and counted a self-concealing pattern as evidence.',
      'Tiered. The outputs and defects are documented; the background process is a hypothesis; the competing explanation - ordinary model error and bias - is stated.',
      'The same review.'),
+    ('2026-10-06', 'XXIV', 'Put the words &ldquo;sensitive aerospace program&rdquo; in Tom DeLonge&rsquo;s 2016 email about Gen. McCasland (they are not in it); read his wife&rsquo;s public statement as &ldquo;an unusual preemption&rdquo; about intelligence connections (it answered speculation already circulating and rejected it); said he walked into the Sandia foothills and took a gun; and counted his case as &ldquo;total institutional silence&rdquo;.',
+     'Corrected from the email itself, the sheriff&rsquo;s releases and the published 911 call: direction of travel unknown; a revolver, wallet and backpack unaccounted for; his wife&rsquo;s account of a deliberate departure printed beside the pattern; Podesta&rsquo;s 1 Oct 2026 account of the call set against Grusch&rsquo;s.',
+     'A Daily Mail lead (6 Oct 2026), checked against its sources.'),
 ]
 
 TESTED = [

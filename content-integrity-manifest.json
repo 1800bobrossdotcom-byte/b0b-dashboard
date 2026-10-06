@@ -1,13 +1,13 @@
 {
-  "generated": "2026-10-05T23:05:17.271Z",
+  "generated": "2026-10-06T21:34:32.495Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "36e9c3e9735ab1882493568faa74dc076fd7521ee70f7a088444a029afc20f67",
+  "fullFileHash": "c96734b126694eeb18e2ae1124ec1737422ead8b139fcda9a884ffdc42e4e774",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "df973cea06737dcfd4e288d16f473b50e1f172ab37cf867d1e68ec1a5e83812e",
+      "hash": "1348d3286af1958a08e94b5326653e9d760be44dc2061c0b6ab35d12d5305006",
       "length": 40977
     },
     {
@@ -1432,13 +1432,13 @@
     },
     {
       "id": "xvi-the-severed-chain-strategic-personnel",
-      "hash": "5ba26bafcf257a811a84d8a3343bd4a6e11ab479378f34eff284adbdece794ea",
-      "length": 3795
+      "hash": "82a7a54a98cb9c77130daef52ce831a6c51f5f2d422c6d9579000d159d2f8b6e",
+      "length": 4726
     },
     {
       "id": "xvi-the-institutional-silence",
-      "hash": "09b7e1e0bafae6684b285f82a63008d34b87e7d22337b468167189009af20cf1",
-      "length": 3070
+      "hash": "53ac94ddd0feeb41ab2d676cce946d3efdc494cd5f26729fa346cfcd4da9cf6b",
+      "length": 4352
     },
     {
       "id": "XXV",
@@ -7580,9 +7580,9 @@
     },
     {
       "index": 1006,
-      "hash": "ef772753655a5e453337f9f4863105984e4ee567d38789dd92cb9a1bccd3b6fb",
-      "preview": "McCasland was referenced in Tom DeLonge's emails to John Podesta (WikiLeaks Pode...",
-      "length": 1078
+      "hash": "a2f11fb8873fa39041e38e47f752f330ac71305742c901e65af6c9964d7b005e",
+      "preview": "McCasland is named in Tom DeLonge's email to John Podesta of 25 January 2016, su...",
+      "length": 2360
     },
     {
       "index": 1007,
