@@ -17,7 +17,9 @@ const DPI = 300;
 const TYPES = { '.html': 'text/html; charset=utf-8', '.ttf': 'font/ttf', '.svg': 'image/svg+xml', '.png': 'image/png' };
 
 function serve() {
-  const qr = fs.readFileSync(path.join(ROOT, 'generated', 'qr-styled.svg'), 'utf8');
+  // <!--QRLOGO--> is the large level-H code with the mark; <!--QR--> the small level-Q tile.
+  const qrLogo = fs.readFileSync(path.join(ROOT, 'generated', 'qr-styled.svg'), 'utf8');
+  const qrSmall = fs.readFileSync(path.join(ROOT, 'generated', 'qr-small.svg'), 'utf8');
   return http.createServer((req, res) => {
     const rel = decodeURIComponent(req.url.split('?')[0]).replace(/^\/+/, '');
     const file = path.resolve(ROOT, rel);
@@ -26,7 +28,9 @@ function serve() {
     }
     const type = TYPES[path.extname(file)] || 'application/octet-stream';
     res.writeHead(200, { 'content-type': type });
-    if (path.basename(file) === 'stickers.html') return res.end(fs.readFileSync(file, 'utf8').replace('<!--QR-->', qr));
+    if (path.basename(file) === 'stickers.html') {
+      return res.end(fs.readFileSync(file, 'utf8').split('<!--QRLOGO-->').join(qrLogo).split('<!--QR-->').join(qrSmall));
+    }
     fs.createReadStream(file).pipe(res);
   });
 }

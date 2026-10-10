@@ -2,8 +2,9 @@
 """Checks the sticker set before anything ships. Exit 1 on any failure.
 
   - every print file is 300 dpi and transparent at its corners (so a cutter can trace it)
-  - the QR decodes to https://www.b0b.dev from the sticker, the plain PNG, and down to the
-    size a phone sees from arm's length; the barcode decodes to B0B.DEV
+  - every sticker's QR decodes to https://www.b0b.dev at print size and scaled down; the QR
+    sticker and the plain PNG down to the size a phone sees from arm's length; the barcode
+    decodes to B0B.DEV
   - every attractor is 3-5 words
   - every font in fonts/ declares an open licence (OFL or Apache) in its own name table
 """
@@ -73,9 +74,15 @@ for name, text in ATTRACTORS.items():
     n = len(text.replace(',', ' ').split())
     check(3 <= n <= 5, '"%s" is %d words' % (text, n))
 
+# every sticker carries a QR; each must decode to the site, at print size and scaled down
+for p in prints:
+    name = os.path.basename(p)[:-4]
+    im = flat(Image.open(p))
+    for s, w, ok in decodes(im, URL, (1.0, 0.5, 0.33)):
+        check(ok, '%s: QR decodes to %s at %d px wide' % (name, URL, w))
 qr_sticker = flat(Image.open(os.path.join(HERE, 'out', 'print', 's04-read-the-record-yourself-qr.png')))
-for s, w, ok in decodes(qr_sticker, URL, (1.0, 0.5, 0.25, 0.15)):
-    check(ok, 'QR sticker decodes to %s at %d px wide' % (URL, w))
+for s, w, ok in decodes(qr_sticker, URL, (0.15,)):
+    check(ok, 'QR sticker decodes at %d px wide' % w)
 for s, w, ok in decodes(flat(qr_sticker, (10, 10, 10)), URL, (0.25,)):
     check(ok, 'QR sticker decodes on a dark surface at %d px wide' % w)
 for f in ('b0b-dev-qr.png',):

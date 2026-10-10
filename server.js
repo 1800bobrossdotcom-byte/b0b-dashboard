@@ -380,7 +380,7 @@ const CANONICAL_PATHS = [
   '/home', '/report', '/intro', '/continuity', '/epstein-maxwell', '/map', '/countermeasures', '/artifact', '/spectra',
   '/tones/healing', '/tones/protective', '/tones/instrument', '/tones/shield',
   '/tones/multipack', '/tones/shield/guide', '/ai-attack-vector-analysis',
-  '/darpa-cia-lockheed', '/start', '/retractions', '/about', '/map/list',
+  '/darpa-cia-lockheed', '/start', '/retractions', '/about', '/map/list', '/stickers',
 ];
 
 app.get('/sitemap.xml', (req, res) => {
@@ -436,6 +436,7 @@ const PAGES = {
   '/retractions':   'retractions.html',
   '/about':         'about.html',
   '/map/list':      'map-list.html',
+  '/stickers':      'stickers.html', // 10 Oct 2026: the sticker set and its print files
 };
 
 // Alias -> canonical, as 301s. These used to be duplicate 200s (both forms in
@@ -460,14 +461,18 @@ const REDIRECTS = {
 app.use((req, res, next) => {
   if (!canView(req)) return next();
   // only serve known static extensions
-  if (/\.(js|css|json|png|svg|ico|jpg|jpeg|webp|mp3|mp4|webm|woff2?|kml)$/i.test(req.path)) {
+  if (/\.(js|css|json|png|svg|ico|jpg|jpeg|webp|mp3|mp4|webm|woff2?|kml|zip)$/i.test(req.path)) {
     // KML is set explicitly rather than left to the mime table, so the Google
     // Earth export downloads as Earth data instead of as a generic XML blob.
+    // ZIP is here for one file: /stickers/b0b-dev-stickers.zip, the print bundle.
     return express.static(PUB, {
       maxAge: '1h',
       setHeaders: (res, filePath) => {
         if (filePath.endsWith('.kml')) {
           res.setHeader('Content-Type', 'application/vnd.google-earth.kml+xml');
+        }
+        if (filePath.endsWith('.zip')) {
+          res.setHeader('Content-Type', 'application/zip');
         }
       },
     })(req, res, next);

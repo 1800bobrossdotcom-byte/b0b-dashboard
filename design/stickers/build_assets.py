@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Generated parts for the b0b.dev sticker set.
 
-  generated/qr-styled.svg    the sticker QR: soft modules, rounded finders, "b0b" in the centre
+  generated/qr-styled.svg    the large QR (stickers 04, 10): level H, "b0b" in the centre
+  generated/qr-small.svg     the QR tile on every other sticker: level Q, version 2, no mark
+                             (both take their colours from CSS: --qr-ink, --qr-paper)
   generated/markers.svg      the map's own markers as a dot field (equirectangular), no labels
   out/qr/b0b-dev-qr.svg      plain QR, black on white, 4-module quiet zone - for anything
   out/qr/b0b-dev-qr.png      the same at 2,000 px
@@ -21,13 +23,13 @@ URL = 'https://www.b0b.dev'
 INK = '#0a0a0a'
 
 
-def qr_matrix():
-    qr = segno.make(URL, error='h', micro=False, boost_error=False)
+def qr_matrix(error='h'):
+    qr = segno.make(URL, error=error, micro=False, boost_error=False)
     rows = [list(r) for r in qr.matrix_iter(scale=1, border=0, verbose=False)]
     return qr, [[1 if v else 0 for v in r] for r in rows]
 
 
-def styled_qr_svg(qr, m, logo_modules=7):
+def styled_qr_svg(qr, m, logo_modules=7, logo=True):
     n = len(m)
     q = 4  # quiet zone, in modules
     size = n + 2 * q
@@ -36,8 +38,8 @@ def styled_qr_svg(qr, m, logo_modules=7):
     def in_finder(x, y):
         return any(fx <= x < fx + 7 and fy <= y < fy + 7 for fx, fy in finders)
 
-    lo = (n - logo_modules) // 2
-    hi = lo + logo_modules
+    lo = (n - logo_modules) // 2 if logo else -1
+    hi = lo + logo_modules if logo else -1
 
     def in_logo(x, y):
         return lo <= x < hi and lo <= y < hi
@@ -50,17 +52,19 @@ def styled_qr_svg(qr, m, logo_modules=7):
     for fx, fy in finders:
         X, Y = fx + q, fy + q
         parts.append('<rect x="%d" y="%d" width="7" height="7" rx="1.9"/>' % (X, Y))
-        parts.append('<rect x="%d" y="%d" width="5" height="5" rx="1.25" fill="#fff"/>' % (X + 1, Y + 1))
+        parts.append('<rect x="%d" y="%d" width="5" height="5" rx="1.25" style="fill:var(--qr-paper,#fff)"/>' % (X + 1, Y + 1))
         parts.append('<rect x="%d" y="%d" width="3" height="3" rx="0.8"/>' % (X + 2, Y + 2))
-    c = q + lo
-    logo = (
-        '<rect x="{x}" y="{x}" width="{w}" height="{w}" rx="1.6" fill="{ink}"/>'
-        '<text x="{mid}" y="{ty}" text-anchor="middle" font-family="IBM Plex Mono" font-weight="700" '
-        'font-size="2.55" letter-spacing="0.05" fill="#00ff41">b0b</text>'
-    ).format(x=c + 0.5, w=logo_modules - 1, ink=INK, mid=size / 2, ty=size / 2 + 0.9)
-    return ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {s} {s}" shape-rendering="geometricPrecision">'
-            '<rect width="{s}" height="{s}" fill="#fff"/><g fill="{ink}">{body}</g>{logo}</svg>').format(
-        s=size, ink=INK, body=''.join(parts), logo=logo)
+    mark = ''
+    if logo:
+        c = q + lo
+        mark = (
+            '<rect x="{x}" y="{x}" width="{w}" height="{w}" rx="1.6" fill="{ink}"/>'
+            '<text x="{mid}" y="{ty}" text-anchor="middle" font-family="IBM Plex Mono" font-weight="700" '
+            'font-size="2.55" letter-spacing="0.05" fill="#00ff41" style="font-feature-settings:\'zero\' 1">b0b</text>'
+        ).format(x=c + 0.5, w=logo_modules - 1, ink=INK, mid=size / 2, ty=size / 2 + 0.9)
+    return ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {s} {s}" shape-rendering="geometricPrecision" aria-hidden="true">'
+            '<rect width="{s}" height="{s}" style="fill:var(--qr-paper,#fff)"/><g style="fill:var(--qr-ink,{ink})">{body}</g>{mark}</svg>').format(
+        s=size, ink=INK, body=''.join(parts), mark=mark)
 
 
 def markers_svg():
@@ -85,8 +89,13 @@ def markers_svg():
 def main():
     os.makedirs(os.path.join(HERE, 'generated'), exist_ok=True)
     os.makedirs(os.path.join(HERE, 'out', 'qr'), exist_ok=True)
-    qr, m = qr_matrix()
+    qr, m = qr_matrix('h')
     open(os.path.join(HERE, 'generated', 'qr-styled.svg'), 'w').write(styled_qr_svg(qr, m))
+    # the small tiles on every other sticker: level Q (25% recovery) fits the URL in version 2,
+    # which gives bigger modules at the same printed size than version 3 - easier to scan small
+    qs, ms = qr_matrix('q')
+    open(os.path.join(HERE, 'generated', 'qr-small.svg'), 'w').write(styled_qr_svg(qs, ms, logo=False))
+    print('small QR: version %s, error %s, %dx%d modules' % (qs.version, qs.error, len(ms), len(ms)))
     qr.save(os.path.join(HERE, 'out', 'qr', 'b0b-dev-qr.svg'), scale=10, border=4, dark='#000', light='#fff', xmldecl=False)
     qr.save(os.path.join(HERE, 'out', 'qr', 'b0b-dev-qr.png'), scale=int(2000 / (len(m) + 8)), border=4, dark='#000', light='#fff')
     svg, n, unique = markers_svg()

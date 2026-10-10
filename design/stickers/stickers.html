@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <title>b0b.dev sticker set - source</title>
 <style>
-/* Every face is OFL 1.1 except Special Elite (Apache 2.0). Licences in fonts/licenses/. */
+/* Every face is OFL 1.1 except Special Elite (Apache 2.0). Licences in fonts/licenses/.
+   IBM Plex Mono is IBM's complete build, which carries the designed slashed zero ("zero"). */
 @font-face{font-family:"VT323";src:url(fonts/VT323-Regular.ttf);font-display:block}
 @font-face{font-family:"Special Elite";src:url(fonts/SpecialElite-Regular.ttf);font-display:block}
 @font-face{font-family:"Big Shoulders Stencil";font-weight:800;src:url(fonts/BigShouldersStencil-ExtraBold.ttf);font-display:block}
@@ -27,50 +28,70 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:transparent}
 body{display:flex;flex-wrap:wrap;gap:.6in;padding:.6in;width:17in;align-items:flex-start;
-  -webkit-font-smoothing:antialiased;text-rendering:geometricPrecision}
+  -webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;
+  font-feature-settings:"zero" 1}                 /* Plex Mono's slashed zero, everywhere it appears */
 .stk{position:relative;overflow:hidden;flex:none;isolation:isolate}
 .url{font-family:"IBM Plex Mono";font-weight:700;letter-spacing:.16em}
 
+/* The address: www.b0b.dev, its zero slashed and in the sticker's accent colour. Plex Mono
+   slashes it by font feature; faces without one get .z, a slash drawn to the glyph. */
+.www{white-space:nowrap}
+.www .o{color:var(--zero,currentColor)}
+.z{position:relative;display:inline-block}
+.z::after{content:"";position:absolute;left:50%;top:var(--zt,24%);height:var(--zh,56%);width:var(--zw,.09em);
+  margin-left:calc(var(--zw,.09em) / -2);background:currentColor;transform:rotate(var(--zr,30deg));border-radius:.02em}
+
+/* QR tiles: dark modules on a light panel, tinted per sticker, never inverted. */
+.qr{position:absolute;overflow:hidden;line-height:0;border-radius:.07in;background:var(--qr-paper,#fff)}
+.qr.in{position:relative}
+.qr svg{display:block;width:100%;height:100%}
+
 /* 01 - terminal. VT323. */
-.s-term{width:3.5in;height:2.15in;border-radius:.2in;background:#031006;color:var(--green);font-family:"VT323"}
-.s-term .crt{position:absolute;inset:0;padding:.19in .25in;
-  background:radial-gradient(110% 95% at 45% 40%,rgba(0,255,65,.13),rgba(0,255,65,0) 62%)}
+.s-term{width:4.1in;height:2.2in;border-radius:.2in;background:#031006;color:var(--green);font-family:"VT323"}
+.s-term .crt{position:absolute;inset:0;padding:.2in .25in;
+  background:radial-gradient(110% 95% at 35% 40%,rgba(0,255,65,.13),rgba(0,255,65,0) 62%)}
 .s-term::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
   background:repeating-linear-gradient(to bottom,rgba(0,0,0,.30) 0 1px,rgba(0,0,0,0) 1px 3px)}
 .s-term::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;border-radius:inherit;
   background:radial-gradient(120% 120% at 50% 50%,rgba(0,0,0,0) 58%,rgba(0,0,0,.55) 100%);
   box-shadow:inset 0 0 0 .03in rgba(0,255,65,.18)}
-.s-term .cmd{font-size:15pt;color:#48a35e;letter-spacing:.02em}
-.s-term .big{font-size:35pt;line-height:.9;margin-top:.1in;letter-spacing:.01em;
+.s-term .cmd{font-size:14pt;color:#48a35e;letter-spacing:.02em}
+.s-term .big{font-size:29pt;line-height:.92;margin-top:.13in;letter-spacing:.01em;
   text-shadow:0 0 .025in rgba(0,255,65,.85),0 0 .11in rgba(0,255,65,.4)}
-.s-term .cur{display:inline-block;width:.13in;height:.25in;margin-left:.05in;vertical-align:-.015in;
+.s-term .cur{display:inline-block;width:.11in;height:.2in;margin-left:.05in;vertical-align:-.01in;
   background:var(--green);box-shadow:0 0 .07in rgba(0,255,65,.8)}
-.s-term .foot{position:absolute;left:.25in;right:.25in;bottom:.15in;display:flex;justify-content:space-between;
-  align-items:baseline;font-size:22pt;text-shadow:0 0 .05in rgba(0,255,65,.6)}
-.s-term .foot .dim{font-size:13pt;color:#48a35e;text-shadow:none}
+.s-term .foot{position:absolute;left:.25in;bottom:.17in;font-size:22pt;color:#eafff0;letter-spacing:.02em;
+  text-shadow:0 0 .05in rgba(0,255,65,.65);--zero:var(--green);--zt:24%;--zh:54%;--zw:.075em;--zr:32deg}
+.s-term .qr{right:.25in;top:.56in;width:1.08in;height:1.08in;z-index:4;--qr-paper:#d9ffe3;--qr-ink:#021a08;
+  box-shadow:0 0 0 .02in rgba(0,255,65,.55),0 0 .12in rgba(0,255,65,.35)}
 
 /* 02 - the memo. Special Elite + Black Ops One. */
-.s-memo{width:2.75in;height:3.45in;border-radius:.07in;background:#efe8d6;color:#1a1714;font-family:"Special Elite"}
-.s-memo .tex{position:absolute;inset:0;z-index:0;opacity:.55;filter:url(#paper)}
-.s-memo .fold{position:absolute;left:0;right:0;top:46%;height:1px;background:rgba(80,60,30,.16);
+.s-memo{width:3in;height:3.75in;border-radius:.07in;background:#efe8d6;color:#1a1714;font-family:"Special Elite"}
+.s-memo .tex{position:absolute;inset:0;z-index:0;opacity:.55;filter:url(#paper);background:#efe8d6}
+.s-memo .fold{position:absolute;left:0;right:0;top:44%;height:1px;background:rgba(80,60,30,.16);
   box-shadow:0 1px 0 rgba(255,255,255,.55)}
-.s-memo .doc{position:relative;z-index:1;padding:.24in .22in}
+.s-memo .doc{position:relative;z-index:1;padding:.24in .23in}
 .s-memo .hdr{font-size:9.5pt;letter-spacing:.06em;border-bottom:1.2px solid #1a1714;padding-bottom:.05in}
 .s-memo .sub{font-size:9pt;margin-top:.07in;letter-spacing:.03em}
-.s-memo .body{margin-top:.15in;font-size:17pt;line-height:1.42}
+.s-memo .body{margin-top:.15in;font-size:16pt;line-height:1.4}
 .s-memo .r{background:#141210;color:transparent;border-radius:1.5px;padding:0 .01in;
   -webkit-box-decoration-break:clone;box-decoration-break:clone}
 .s-memo .sub .r{padding:0}
 .s-memo b{font-weight:400;color:#0d0b09}
-.s-memo .stamp{position:absolute;z-index:2;right:.2in;bottom:.2in;transform:rotate(-7deg);
-  border:.038in solid #c0172f;border-radius:.06in;padding:.05in .12in .06in;color:#c0172f;text-align:center;
+.s-memo .att{position:absolute;z-index:2;left:.22in;bottom:.2in;width:1in;transform:rotate(-2.5deg)}
+.s-memo .att small{display:block;font-size:7.5pt;letter-spacing:.08em;margin-bottom:.035in}
+.s-memo .att .qr{width:1in;height:1in;border-radius:.02in;--qr-paper:#fffdf6;--qr-ink:#141210;
+  box-shadow:0 .015in .05in rgba(40,30,10,.3)}
+.s-memo .stamp{position:absolute;z-index:2;right:.18in;bottom:.34in;transform:rotate(-7deg);
+  border:.036in solid #c0172f;border-radius:.06in;padding:.05in .1in .07in;color:#c0172f;text-align:center;
   filter:url(#distress)}
-.s-memo .stamp small{display:block;font-family:"IBM Plex Mono";font-weight:700;font-size:7.6pt;letter-spacing:.26em;padding-left:.26em;
-  border-bottom:1.5px solid #c0172f;padding-bottom:.02in;margin-bottom:.02in}
-.s-memo .stamp span{font-family:"Black Ops One";font-size:22pt;letter-spacing:.02em;line-height:1}
+.s-memo .stamp small{display:block;font-family:"IBM Plex Mono";font-weight:700;font-size:7.2pt;letter-spacing:.24em;padding-left:.24em;
+  border-bottom:1.5px solid #c0172f;padding-bottom:.025in;margin-bottom:.03in}
+.s-memo .stamp .www{font-family:"Black Ops One";font-size:12.5pt;letter-spacing:.02em;line-height:1;
+  --zt:22%;--zh:58%;--zw:.1em;--zr:34deg}
 
 /* 03 - the tier ladder. Big Shoulders Stencil. */
-.s-tier{width:3.25in;height:3.1in;border-radius:.18in;background:#0b0b0b;color:#d4d4d4}
+.s-tier{width:3.25in;height:3.85in;border-radius:.18in;background:#0b0b0b;color:#d4d4d4}
 .s-tier::after{content:"";position:absolute;inset:.08in;border:1px solid #2a2a2a;border-radius:.12in;pointer-events:none}
 .s-tier .lbl{position:absolute;left:.26in;top:.22in;font-family:"IBM Plex Mono";font-weight:500;font-size:7pt;
   letter-spacing:.32em;color:#777}
@@ -81,10 +102,12 @@ body{display:flex;flex-wrap:wrap;gap:.6in;padding:.6in;width:17in;align-items:fl
 .s-tier li i{display:block;width:.12in;height:.25in;margin-left:.045in;border-radius:.025in;
   border:1.6px solid color-mix(in srgb,var(--c) 45%,#0b0b0b)}
 .s-tier li i.on{background:var(--c);border-color:var(--c);box-shadow:0 0 .06in color-mix(in srgb,var(--c) 55%,transparent)}
-.s-tier .foot{position:absolute;left:.26in;right:.26in;bottom:.22in;display:flex;justify-content:space-between;
-  align-items:baseline;border-top:1px solid #2a2a2a;padding-top:.08in}
-.s-tier .foot .url{font-size:13pt;color:var(--green);letter-spacing:.22em}
-.s-tier .foot small{font-family:"IBM Plex Mono";font-weight:500;font-size:6.5pt;color:#777;letter-spacing:.2em}
+.s-tier .foot{position:absolute;left:.26in;right:.26in;bottom:.24in;display:flex;justify-content:space-between;
+  align-items:flex-end;border-top:1px solid #2a2a2a;padding-top:.13in}
+.s-tier .foot .url{display:block;font-size:12pt;color:var(--green);letter-spacing:.1em;--zero:#fff}
+.s-tier .foot small{display:block;margin-top:.06in;font-family:"IBM Plex Mono";font-weight:500;font-size:6.5pt;
+  color:#777;letter-spacing:.24em}
+.s-tier .qr{width:.98in;height:.98in;--qr-paper:#f1f1ee;--qr-ink:#0b0b0b}
 
 /* 04 - the QR. IBM Plex Mono, the house face. */
 .s-qr{width:2.45in;height:3.55in;border-radius:.18in;background:var(--ink);color:#fff;text-align:center}
@@ -92,28 +115,29 @@ body{display:flex;flex-wrap:wrap;gap:.6in;padding:.6in;width:17in;align-items:fl
   line-height:1.12;letter-spacing:.04em}
 .s-qr .top em{font-style:normal;color:var(--green)}
 .s-qr .panel{position:absolute;left:.2in;right:.2in;top:.8in;aspect-ratio:1;background:#fff;border-radius:.12in;
-  overflow:hidden;padding:0}
+  overflow:hidden;line-height:0}
 .s-qr .panel svg{display:block;width:100%;height:100%}
-.s-qr .url{position:absolute;left:0;right:0;top:3.1in;font-size:16pt;color:var(--green);letter-spacing:.24em;
-  padding-left:.24em}
 .s-qr .scan{position:absolute;left:0;right:0;top:2.94in;font-family:"IBM Plex Mono";font-weight:500;font-size:6pt;
   letter-spacing:.34em;color:#777;padding-left:.34em}
+.s-qr .url{position:absolute;left:0;right:0;top:3.1in;font-size:15pt;color:var(--green);letter-spacing:.1em;
+  padding-left:.1em;--zero:#fff}
 
 /* 05 - tetelestai. GFS Didot over the map's own markers. */
-.s-greek{width:3.75in;height:2.2in;border-radius:50%;
+.s-greek{width:4.3in;height:2.75in;border-radius:50%;
   background:radial-gradient(80% 90% at 50% 45%,#101a33 0%,#070b16 60%,#04060c 100%)}
 .s-greek .field{position:absolute;inset:-.05in -.15in;background:url(generated/markers.svg) center/100% 100% no-repeat;
   opacity:.34;filter:drop-shadow(0 0 .02in rgba(0,204,255,.9))}
 .s-greek .ring{position:absolute;inset:.085in;border-radius:50%;border:1.3px solid rgba(255,204,102,.55)}
-.s-greek .word{position:absolute;left:0;right:0;top:.58in;text-align:center;font-family:"GFS Didot";font-size:43pt;
+.s-greek .word{position:absolute;left:0;right:0;top:.5in;text-align:center;font-family:"GFS Didot";font-size:44pt;
   line-height:1;color:#f4ecd8;letter-spacing:.005em;text-shadow:0 0 .12in rgba(4,6,12,.95),0 0 .04in rgba(4,6,12,.9)}
-.s-greek .gloss{position:absolute;left:0;right:0;top:1.34in;text-align:center;font-family:"IBM Plex Mono";font-weight:500;
+.s-greek .gloss{position:absolute;left:0;right:0;top:1.24in;text-align:center;font-family:"IBM Plex Mono";font-weight:500;
   font-size:7.6pt;letter-spacing:.36em;padding-left:.36em;color:var(--amber-3);text-shadow:0 0 .05in rgba(4,6,12,1)}
-.s-greek .url{position:absolute;left:0;right:0;bottom:.27in;text-align:center;font-size:8pt;color:#c9ced6;
-  letter-spacing:.3em;padding-left:.3em;text-shadow:0 0 .05in rgba(4,6,12,1)}
+.s-greek .row{position:absolute;left:0;right:0;top:1.5in;display:flex;justify-content:center;align-items:center;gap:.17in}
+.s-greek .qr{width:.86in;height:.86in;border-radius:.05in;--qr-paper:#f4ecd8;--qr-ink:#05070d}
+.s-greek .row .url{font-size:9pt;color:#e8e2d2;letter-spacing:.18em;--zero:var(--amber-3);text-shadow:0 0 .05in rgba(4,6,12,1)}
 
 /* 06 - the LED board. Doto. */
-.s-led{width:4.45in;height:1.6in;border-radius:.14in;background:#080808;display:flex}
+.s-led{width:4.6in;height:1.6in;border-radius:.14in;background:#080808;display:flex}
 .s-led .board{flex:1;position:relative;padding:.2in .22in;
   background:radial-gradient(circle at 50% 50%,#1b1b1b 0 38%,rgba(0,0,0,0) 44%) 0 0/2.4px 2.4px,#060606}
 .s-led .row{font-family:"Doto";font-weight:900;font-size:22pt;line-height:1.08;color:var(--amber-2);letter-spacing:.03em;
@@ -121,93 +145,103 @@ body{display:flex;flex-wrap:wrap;gap:.6in;padding:.6in;width:17in;align-items:fl
 .s-led .row .b{display:inline-block;width:.15in;height:.26in;margin-left:.06in;vertical-align:-.03in;
   background:radial-gradient(circle,var(--amber-2) 0 38%,rgba(0,0,0,0) 44%) 0 0/4.8px 4.8px;
   filter:drop-shadow(0 0 .04in rgba(255,160,0,.9))}
-.s-led .side{width:1.22in;border-left:2px solid #1e1e1e;display:flex;flex-direction:column;justify-content:center;
-  align-items:center;gap:.12in;background:#0c0c0c}
-.s-led .onair{display:flex;align-items:center;gap:.06in;font-family:"IBM Plex Mono";font-weight:700;font-size:7pt;
-  letter-spacing:.24em;color:#ff5a4a}
-.s-led .onair i{width:.085in;height:.085in;border-radius:50%;background:#ff3b30;box-shadow:0 0 .07in #ff3b30}
-.s-led .side .url{font-family:"Doto";font-weight:900;font-size:13.5pt;letter-spacing:.02em;color:var(--green);
-  text-shadow:0 0 .06in rgba(0,255,65,.7)}
+.s-led .onair{position:absolute;right:.16in;top:.14in;display:flex;align-items:center;gap:.06in;font-family:"IBM Plex Mono";
+  font-weight:700;font-size:6.6pt;letter-spacing:.24em;color:#ff5a4a}
+.s-led .onair i{width:.08in;height:.08in;border-radius:50%;background:#ff3b30;box-shadow:0 0 .07in #ff3b30}
+.s-led .side{width:1.3in;border-left:2px solid #1e1e1e;display:flex;flex-direction:column;justify-content:center;
+  align-items:center;gap:.08in;background:#0c0c0c}
+.s-led .side .qr{width:1.02in;height:1.02in;border-radius:.05in;--qr-paper:#fff4d6;--qr-ink:#0a0703}
+.s-led .side .url{font-size:7.4pt;color:var(--amber-2);letter-spacing:.12em;--zero:var(--green)}
 
 /* 07 - the refusal. Rubik Glitch. */
-.s-glitch{width:3.5in;height:1.95in;background:#0a0a0a;color:#fff;
+.s-glitch{width:4.15in;height:2in;background:#0a0a0a;color:#fff;
   clip-path:polygon(0 .15in,.62in .15in,.62in 0,100% 0,100% .74in,calc(100% - .13in) .74in,calc(100% - .13in) 1.14in,100% 1.14in,
-    100% calc(100% - .12in),2.3in calc(100% - .14in),2.3in 100%,0 100%,0 1.36in,.13in 1.36in,.13in .98in,0 .98in)}
-.s-glitch .code{position:absolute;left:.26in;top:.27in;font-family:"IBM Plex Mono";font-weight:700;font-size:7.4pt;
+    100% calc(100% - .14in),2.3in calc(100% - .14in),2.3in 100%,0 100%,0 1.36in,.13in 1.36in,.13in .98in,0 .98in)}
+.s-glitch .code{position:absolute;left:.26in;top:.28in;font-family:"IBM Plex Mono";font-weight:700;font-size:7.4pt;
   letter-spacing:.2em;color:var(--cyan)}
-.s-glitch .g{position:absolute;left:.26in;font-family:"Rubik Glitch";font-size:30pt;line-height:1;letter-spacing:.01em}
-.s-glitch .g1{top:.5in}.s-glitch .g2{top:.95in}
+.s-glitch .g{position:absolute;left:.26in;font-family:"Rubik Glitch";font-size:24.5pt;line-height:1;letter-spacing:.01em}
+.s-glitch .g1{top:.52in}.s-glitch .g2{top:.92in}
 .s-glitch .g::before,.s-glitch .g::after{content:attr(data-t);position:absolute;left:0;top:0;mix-blend-mode:screen}
 .s-glitch .g::before{color:#00ccff;transform:translate(-.022in,.008in);clip-path:inset(0 0 48% 0)}
 .s-glitch .g::after{color:#ff2bd6;transform:translate(.024in,-.006in);clip-path:inset(40% 0 0 0)}
-.s-glitch .url{position:absolute;right:.24in;bottom:.28in;font-size:10pt;color:#0a0a0a;background:var(--cyan);
-  padding:.03in .07in .03in .09in;letter-spacing:.18em}
-.s-glitch .scan{position:absolute;left:0;right:0;top:1.13in;height:.035in;background:rgba(0,204,255,.55);mix-blend-mode:screen}
+.s-glitch .scan{position:absolute;left:0;right:1.55in;top:1.12in;height:.035in;background:rgba(0,204,255,.55);mix-blend-mode:screen}
+.s-glitch .url{position:absolute;left:.26in;bottom:.3in;font-size:10pt;color:#0a0a0a;background:var(--cyan);
+  padding:.035in .08in .035in .1in;letter-spacing:.14em;--zero:#b0006f}
+.s-glitch .qrwrap{position:absolute;right:.28in;top:.44in;width:1.06in;height:1.06in}
+.s-glitch .qrwrap i{position:absolute;inset:0;border-radius:.06in;mix-blend-mode:screen}
+.s-glitch .qrwrap .c1{background:#00ccff;transform:translate(-.045in,.035in)}
+.s-glitch .qrwrap .c2{background:#ff2bd6;transform:translate(.045in,-.035in)}
+.s-glitch .qrwrap .qr{inset:0;width:100%;height:100%;border-radius:.06in;--qr-paper:#ffffff;--qr-ink:#0a0a0a}
 
 /* 08 - pixel blackletter. Jacquard 24. */
-.s-arch{width:2.65in;height:3.3in;border-radius:1.325in 1.325in .14in .14in;
+.s-arch{width:2.75in;height:3.6in;border-radius:1.375in 1.375in .14in .14in;
   background:radial-gradient(90% 70% at 50% 30%,#3a0d10 0%,#1d0507 65%,#120304 100%);color:#efe6d2;text-align:center}
-.s-arch .frame{position:absolute;inset:.1in;border-radius:1.225in 1.225in .08in .08in;border:1.3px solid rgba(239,230,210,.38)}
-.s-arch .bl{position:absolute;left:0;right:0;top:1.02in;font-family:"Jacquard 24";font-size:30pt;line-height:1.02}
+.s-arch .frame{position:absolute;inset:.1in;border-radius:1.275in 1.275in .08in .08in;border:1.3px solid rgba(239,230,210,.38)}
+.s-arch .star{position:absolute;left:50%;top:.4in;width:.3in;height:.3in;margin-left:-.15in}
+.s-arch .bl{position:absolute;left:0;right:0;top:.86in;font-family:"Jacquard 24";font-size:30pt;line-height:1.02}
 .s-arch .bl .cap{color:var(--red);font-size:48pt;line-height:0;vertical-align:-.07in;margin-right:.02in;
   text-shadow:0 0 .06in rgba(255,68,68,.45)}
-.s-arch .star{position:absolute;left:50%;top:.46in;width:.3in;height:.3in;margin-left:-.15in}
-.s-arch .rule{position:absolute;left:.62in;right:.62in;top:2.38in;height:1px;background:rgba(239,230,210,.4)}
-.s-arch .ref{position:absolute;left:0;right:0;top:2.48in;font-family:"IBM Plex Mono";font-weight:500;font-size:6.5pt;
+.s-arch .rule{position:absolute;left:.62in;right:.62in;top:1.83in;height:1px;background:rgba(239,230,210,.4)}
+.s-arch .ref{position:absolute;left:0;right:0;top:1.9in;font-family:"IBM Plex Mono";font-weight:500;font-size:6.5pt;
   letter-spacing:.34em;padding-left:.34em;color:rgba(239,230,210,.62)}
-.s-arch .url{position:absolute;left:0;right:0;bottom:.27in;font-size:11pt;color:#efe6d2;letter-spacing:.22em;padding-left:.22em}
+.s-arch .qr{left:50%;top:2.13in;width:.94in;height:.94in;margin-left:-.47in;border-radius:.05in;--qr-paper:#efe6d2;--qr-ink:#160406}
+.s-arch .url{position:absolute;left:0;right:0;top:3.15in;font-size:10pt;color:#efe6d2;letter-spacing:.14em;padding-left:.14em;
+  --zero:var(--red)}
 
 /* 09 - neon. Monoton. */
-.s-neon{width:3.75in;height:2.05in;border-radius:.2in;
-  background:radial-gradient(90% 80% at 50% 40%,#151026 0%,#09070f 70%,#050408 100%);text-align:center}
+.s-neon{width:4.4in;height:2.2in;border-radius:.2in;
+  background:radial-gradient(90% 80% at 40% 40%,#151026 0%,#09070f 70%,#050408 100%)}
 .s-neon .tube{position:absolute;inset:.15in;border-radius:.13in;border:2px solid #ffd7fb;
   box-shadow:0 0 .03in #ff3df2,0 0 .09in #ff3df2,inset 0 0 .03in #ff3df2,inset 0 0 .09in rgba(255,61,242,.6)}
-.s-neon .sign{position:absolute;left:0;right:0;top:.5in;font-family:"Monoton";font-size:40pt;line-height:1;color:#f2fdff;
-  letter-spacing:.02em;
+.s-neon .sign{position:absolute;left:.4in;top:.4in;font-family:"Monoton";line-height:1;color:#f2fdff;
   text-shadow:0 0 .015in #fff,0 0 .05in #00ccff,0 0 .12in #00ccff,0 0 .26in rgba(0,204,255,.7)}
-.s-neon .sign .z{position:relative;display:inline-block}
-.s-neon .sign .z::after{content:"";position:absolute;left:50%;top:14%;height:72%;width:.028in;margin-left:-.014in;background:#f2fdff;
-  transform:rotate(32deg);box-shadow:0 0 .03in #00ccff,0 0 .09in #00ccff;border-radius:.02in}
-.s-neon .tag{position:absolute;left:0;right:0;bottom:.38in;font-family:"IBM Plex Mono";font-weight:700;font-size:9.6pt;
-  letter-spacing:.22em;padding-left:.22em;color:#fff4c2;
-  text-shadow:0 0 .015in #fff,0 0 .05in var(--amber),0 0 .13in rgba(255,204,0,.75)}
+.s-neon .sign .w3{display:block;font-size:15pt;letter-spacing:.06em;margin-bottom:.07in}
+.s-neon .sign .main{display:block;font-size:29.5pt;letter-spacing:.015em}
+.s-neon .sign .o{color:#ffe3fd;text-shadow:0 0 .015in #fff,0 0 .05in #ff3df2,0 0 .12in #ff3df2,0 0 .24in rgba(255,61,242,.7);
+  --zt:15%;--zh:70%;--zw:.03in;--zr:32deg}
+.s-neon .sign .o.z::after{box-shadow:0 0 .03in #ff3df2,0 0 .09in #ff3df2}
+.s-neon .tag{position:absolute;left:.4in;top:1.47in;font-family:"IBM Plex Mono";font-weight:700;font-size:8.2pt;
+  letter-spacing:.16em;color:#fff4c2;text-shadow:0 0 .015in #fff,0 0 .05in var(--amber),0 0 .13in rgba(255,204,0,.75)}
+.s-neon .qr{right:.36in;top:.56in;width:1.08in;height:1.08in;border-radius:.06in;--qr-paper:#fdfbff;--qr-ink:#0b0612;
+  box-shadow:0 0 0 .025in #ffd7fb,0 0 .08in #ff3df2,0 0 .18in rgba(255,61,242,.55)}
 
-/* 10 - the seal. Unbounded (SVG, text on a circle). */
+/* 10 - the seal. Unbounded (SVG, text on a circle), the large QR in the middle. */
 .s-seal{width:3in;height:3in;border-radius:50%}
-.s-seal svg{display:block;width:100%;height:100%}
-.s-seal .mark{position:absolute;left:0;right:0;top:1.06in;text-align:center;font-family:"Unbounded";font-weight:900;
-  font-size:37pt;line-height:1;letter-spacing:-.01em;color:var(--green)}
-.s-seal .mark .z{position:relative;display:inline-block}
-.s-seal .mark .z::after{content:"";position:absolute;left:50%;top:22%;height:66%;width:.055in;margin-left:-.0275in;
-  background:var(--ink);transform:rotate(30deg);border-radius:.01in}
-.s-seal .tld{position:absolute;left:0;right:0;top:1.72in;text-align:center;font-family:"IBM Plex Mono";font-weight:700;
-  font-size:12.5pt;letter-spacing:.42em;padding-left:.42em;color:#fff}
+.s-seal svg.ring{display:block;width:100%;height:100%}
+.s-seal .qr{left:50%;top:.84in;width:1.02in;height:1.02in;margin-left:-.51in;border-radius:.08in}
+.s-seal .url{position:absolute;left:0;right:0;top:1.95in;text-align:center;font-size:8.6pt;color:#fff;letter-spacing:.14em;
+  padding-left:.14em;--zero:var(--green)}
 
 /* 11 - hazard. Anton. */
-.s-haz{width:3.55in;height:2.15in;border-radius:.16in;background:var(--amber);color:var(--ink)}
+.s-haz{width:3.8in;height:2.25in;border-radius:.16in;background:var(--amber);color:var(--ink)}
 .s-haz .stripes{position:absolute;left:0;right:0;top:0;height:.3in;
   background:repeating-linear-gradient(-45deg,var(--ink) 0 .13in,var(--amber) .13in .26in)}
-.s-haz .mid{position:absolute;left:.24in;right:.2in;top:.3in;bottom:.36in;display:flex;align-items:center;gap:.15in}
-.s-haz .mid svg{width:.66in;height:.6in;flex:none}
-.s-haz .txt{font-family:"Anton";font-size:30pt;line-height:.95;letter-spacing:.005em;text-transform:uppercase}
-.s-haz .bot{position:absolute;left:0;right:0;bottom:0;height:.36in;background:var(--ink);display:flex;align-items:center;
+.s-haz .mid{position:absolute;left:.24in;right:.18in;top:.3in;bottom:.38in;display:flex;align-items:center;gap:.18in}
+.s-haz .qr{width:1.04in;height:1.04in;flex:none;border-radius:.05in;--qr-paper:#ffffff;--qr-ink:#0a0a0a;
+  box-shadow:0 0 0 .035in var(--ink)}
+.s-haz .txt{font-family:"Anton";font-size:27.5pt;line-height:.95;letter-spacing:.005em;text-transform:uppercase}
+.s-haz .bot{position:absolute;left:0;right:0;bottom:0;height:.38in;background:var(--ink);display:flex;align-items:center;
   justify-content:space-between;padding:0 .24in}
-.s-haz .bot .url{font-size:12.5pt;color:var(--amber);letter-spacing:.24em}
-.s-haz .bot small{font-family:"IBM Plex Mono";font-weight:500;font-size:6.2pt;letter-spacing:.26em;color:#bfa040}
+.s-haz .bot .url{display:flex;align-items:center;gap:.08in;font-size:11.5pt;color:var(--amber);letter-spacing:.1em;--zero:#fff}
+.s-haz .bot .url svg{width:.2in;height:.18in}
+.s-haz .bot small{font-family:"IBM Plex Mono";font-weight:500;font-size:5.8pt;letter-spacing:.18em;color:#bfa040}
 
 /* 12 - the exhibit tag. Libre Barcode 39 Text + Black Ops One. */
-.s-tag{width:3.75in;height:1.9in;background:linear-gradient(180deg,#ecdcb2,#e2cc98);color:#1a1510;
+.s-tag{width:4.1in;height:1.95in;background:linear-gradient(180deg,#ecdcb2,#e2cc98);color:#1a1510;
   clip-path:polygon(.36in 0,100% 0,100% 100%,.36in 100%,0 calc(100% - .36in),0 .36in)}
 .s-tag .hole{position:absolute;left:.17in;top:50%;width:.3in;height:.3in;margin-top:-.15in;border-radius:50%;
   background:#2b2620;box-shadow:0 0 0 .06in #c9b07a,0 0 0 .075in rgba(26,21,16,.35)}
-.s-tag .head{position:absolute;left:.66in;right:.2in;top:.17in;display:flex;justify-content:space-between;align-items:baseline;
+.s-tag .head{position:absolute;left:.66in;right:.22in;top:.17in;display:flex;justify-content:space-between;align-items:baseline;
   border-bottom:2px solid #b3122c;padding-bottom:.03in}
 .s-tag .head span{font-family:"Black Ops One";font-size:17pt;letter-spacing:.06em;color:#b3122c;line-height:1}
 .s-tag .head small{font-family:"IBM Plex Mono";font-weight:700;font-size:7pt;letter-spacing:.2em;color:#b3122c}
-.s-tag .bar{position:absolute;left:.66in;right:.2in;top:.55in;text-align:center;font-family:"Libre Barcode 39 Text";
-  font-size:34pt;line-height:1;color:#0f0c08;background:#fbf4e2;padding:.08in 0 .03in;border-radius:.03in}
-.s-tag .cap{position:absolute;left:.66in;right:.2in;bottom:.17in;text-align:center;font-family:"IBM Plex Mono";
-  font-weight:700;font-size:8.6pt;letter-spacing:.19em;padding-left:.19em}
+.s-tag .bar{position:absolute;left:.66in;width:2.12in;top:.56in;text-align:center;font-family:"Libre Barcode 39 Text";
+  font-size:29pt;line-height:1;color:#0f0c08;background:#fbf4e2;padding:.08in 0 .03in;border-radius:.03in}
+.s-tag .cap{position:absolute;left:.66in;width:2.12in;bottom:.2in;text-align:center;font-family:"IBM Plex Mono";
+  font-weight:700;font-size:7.8pt;letter-spacing:.08em}
+.s-tag .qr{right:.22in;top:.52in;width:1in;height:1in;border-radius:.04in;--qr-paper:#fbf4e2;--qr-ink:#0f0c08}
+.s-tag .url{position:absolute;right:.22in;width:1in;top:1.58in;text-align:center;font-size:6.8pt;letter-spacing:.06em;
+  color:#1a1510;--zero:#b3122c}
 </style>
 </head>
 <body>
@@ -230,13 +264,14 @@ body{display:flex;flex-wrap:wrap;gap:.6in;padding:.6in;width:17in;align-items:fl
   <div class="crt">
     <div class="cmd">$ ./verify --claim</div>
     <div class="big">SOURCES OR IT<br>DIDN'T HAPPEN<span class="cur"></span></div>
-    <div class="foot"><span>b0b.dev</span><span class="dim">exit 0</span></div>
+    <div class="foot www">www.b<span class="o z">0</span>b.dev</div>
   </div>
+  <div class="qr"><!--QR--></div>
 </section>
 
 <!-- 02 -->
 <section class="stk s-memo" id="s02-secrecy-is-evidence-of-nothing">
-  <div class="tex" style="background:#efe8d6"></div>
+  <div class="tex"></div>
   <div class="fold"></div>
   <div class="doc">
     <div class="hdr">MEMORANDUM FOR THE RECORD</div>
@@ -249,7 +284,8 @@ body{display:flex;flex-wrap:wrap;gap:.6in;padding:.6in;width:17in;align-items:fl
       <b>NOTHING.</b> <span class="r">xxxx</span>
     </div>
   </div>
-  <div class="stamp"><small>READ IN FULL</small><span>b0b.dev</span></div>
+  <div class="att"><small>ATTACHMENT A</small><div class="qr in"><!--QR--></div></div>
+  <div class="stamp"><small>READ IN FULL</small><span class="www">www.b<span class="o z">0</span>b.dev</span></div>
 </section>
 
 <!-- 03 -->
@@ -262,15 +298,18 @@ body{display:flex;flex-wrap:wrap;gap:.6in;padding:.6in;width:17in;align-items:fl
     <li style="--c:#ff6600"><span>CONTESTED</span><i class="on"></i><i class="on"></i><i></i><i></i><i></i></li>
     <li style="--c:#ff4444"><span>UNSUPPORTED</span><i class="on"></i><i></i><i></i><i></i><i></i></li>
   </ul>
-  <div class="foot"><span class="url">b0b.dev</span></div>
+  <div class="foot">
+    <div><span class="url www">www.b<span class="o">0</span>b.dev</span><small>SCAN &middot; READ &middot; CHECK</small></div>
+    <div class="qr in"><!--QR--></div>
+  </div>
 </section>
 
 <!-- 04 -->
 <section class="stk s-qr" id="s04-read-the-record-yourself-qr">
   <div class="top">READ THE RECORD<br><em>YOURSELF</em></div>
-  <div class="panel"><!--QR--></div>
+  <div class="panel"><!--QRLOGO--></div>
   <div class="scan">SCAN &middot; READ &middot; CHECK</div>
-  <div class="url">b0b.dev</div>
+  <div class="url www">www.b<span class="o">0</span>b.dev</div>
 </section>
 
 <!-- 05 -->
@@ -279,17 +318,18 @@ body{display:flex;flex-wrap:wrap;gap:.6in;padding:.6in;width:17in;align-items:fl
   <div class="ring"></div>
   <div class="word">τετέλεσται</div>
   <div class="gloss">IT HAS BEEN COMPLETED</div>
-  <div class="url">b0b.dev</div>
+  <div class="row"><div class="qr in"><!--QR--></div><div class="url www">www.b<span class="o">0</span>b.dev</div></div>
 </section>
 
 <!-- 06 -->
 <section class="stk s-led" id="s06-beings-observing-this-frequency">
   <div class="board">
+    <div class="onair"><i></i>ON AIR</div>
     <div class="row">ATTN: BEINGS</div>
     <div class="row">OBSERVING THIS</div>
     <div class="row">FREQUENCY<span class="b"></span></div>
   </div>
-  <div class="side"><div class="onair"><i></i>ON AIR</div><div class="url">b0b.dev</div></div>
+  <div class="side"><div class="qr in"><!--QR--></div><div class="url www">www.b<span class="o">0</span>b.dev</div></div>
 </section>
 
 <!-- 07 -->
@@ -298,7 +338,8 @@ body{display:flex;flex-wrap:wrap;gap:.6in;padding:.6in;width:17in;align-items:fl
   <div class="g g1" data-t="A REFUSAL">A REFUSAL</div>
   <div class="g g2" data-t="IS A FINDING">IS A FINDING</div>
   <div class="scan"></div>
-  <div class="url">b0b.dev</div>
+  <div class="url www">www.b<span class="o">0</span>b.dev</div>
+  <div class="qrwrap"><i class="c1"></i><i class="c2"></i><div class="qr"><!--QR--></div></div>
 </section>
 
 <!-- 08 -->
@@ -308,19 +349,21 @@ body{display:flex;flex-wrap:wrap;gap:.6in;padding:.6in;width:17in;align-items:fl
   <div class="bl"><span class="cap">N</span>o weapon<br>formed against</div>
   <div class="rule"></div>
   <div class="ref">ISAIAH 54:17</div>
-  <div class="url">b0b.dev</div>
+  <div class="qr"><!--QR--></div>
+  <div class="url www">www.b<span class="o">0</span>b.dev</div>
 </section>
 
 <!-- 09 -->
 <section class="stk s-neon" id="s09-timelines-are-not-chains">
   <div class="tube"></div>
-  <div class="sign">b<span class="z">0</span>b.dev</div>
+  <div class="sign"><span class="w3">WWW.</span><span class="main">B<span class="o z">0</span>B.DEV</span></div>
   <div class="tag">TIMELINES ARE NOT CHAINS</div>
+  <div class="qr"><!--QR--></div>
 </section>
 
 <!-- 10 -->
 <section class="stk s-seal" id="s10-tiered-sourced-checkable">
-  <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <svg class="ring" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <path id="arc-top" d="M42,150 A108,108 0 0,1 258,150"/>
       <path id="arc-bot" d="M23,150 A127,127 0 0,0 277,150"/>
@@ -338,18 +381,18 @@ body{display:flex;flex-wrap:wrap;gap:.6in;padding:.6in;width:17in;align-items:fl
     <circle cx="33" cy="150" r="5" fill="#0a0a0a"/>
     <circle cx="267" cy="150" r="5" fill="#0a0a0a"/>
   </svg>
-  <div class="mark">b<span class="z">0</span>b</div>
-  <div class="tld">.dev</div>
+  <div class="qr"><!--QRLOGO--></div>
+  <div class="url www">www.b<span class="o">0</span>b.dev</div>
 </section>
 
 <!-- 11 -->
 <section class="stk s-haz" id="s11-no-document-no-claim">
   <div class="stripes"></div>
   <div class="mid">
-    <svg viewBox="0 0 100 90" aria-hidden="true"><path d="M50 6 L95 84 Q96 87 92 87 H8 Q4 87 5 84 Z" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="6" stroke-linejoin="round"/><rect x="45" y="30" width="10" height="32" rx="4" fill="#ffcc00"/><circle cx="50" cy="73" r="6" fill="#ffcc00"/></svg>
+    <div class="qr in"><!--QR--></div>
     <div class="txt">No document,<br>no claim.</div>
   </div>
-  <div class="bot"><span class="url">b0b.dev</span><small>PROMOTED ONLY BY PAPER</small></div>
+  <div class="bot"><span class="url"><svg viewBox="0 0 100 90" aria-hidden="true"><path d="M50 6 L95 84 Q96 87 92 87 H8 Q4 87 5 84 Z" fill="#ffcc00" stroke="#ffcc00" stroke-width="6" stroke-linejoin="round"/><rect x="45" y="30" width="10" height="32" rx="4" fill="#0a0a0a"/><circle cx="50" cy="73" r="6" fill="#0a0a0a"/></svg><span class="www">www.b<span class="o">0</span>b.dev</span></span><small>PROMOTED ONLY BY PAPER</small></div>
 </section>
 
 <!-- 12 -->
@@ -358,6 +401,8 @@ body{display:flex;flex-wrap:wrap;gap:.6in;padding:.6in;width:17in;align-items:fl
   <div class="head"><span>EXHIBIT</span><small>CHAIN OF CUSTODY</small></div>
   <div class="bar">*B0B.DEV*</div>
   <div class="cap">EVERY CLAIM CARRIES A TIER</div>
+  <div class="qr"><!--QR--></div>
+  <div class="url www">www.b<span class="o">0</span>b.dev</div>
 </section>
 
 </body>
