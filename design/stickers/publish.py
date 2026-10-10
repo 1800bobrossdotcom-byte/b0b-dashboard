@@ -29,32 +29,32 @@ spec = importlib.util.spec_from_file_location('startpages', os.path.join(ROOT, '
 sp = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(sp)
 
-# id -> (attractor, face, where the line comes from, link)
+# id -> (line, face, where in the report it comes from, link)
 SET = [
-    ('s01-sources-or-it-didnt-happen', "SOURCES OR IT DIDN'T HAPPEN", 'VT323',
-     'the method in one line', '/about'),
-    ('s02-secrecy-is-evidence-of-nothing', 'SECRECY IS EVIDENCE OF NOTHING', 'Special Elite + Black Ops One',
-     'the guaranteed-null rule', '/start'),
-    ('s03-the-tier-ladder', 'DOCUMENTED · ATTRIBUTED · LABELED · CONTESTED · UNSUPPORTED', 'Big Shoulders Stencil',
-     'the tier ladder', '/start'),
-    ('s04-read-the-record-yourself-qr', 'READ THE RECORD YOURSELF', 'IBM Plex Mono',
-     'the invitation the whole site makes', '/report'),
+    ('s01-no-hands-of-its-own', 'NO HANDS OF ITS OWN', 'VT323',
+     'the address "To those inside": nothing documented in the report has hands of its own', '/report#to-those-inside'),
+    ('s02-the-record-is-deliberately-dark', 'THE RECORD IS DELIBERATELY DARK', 'Special Elite + Black Ops One',
+     'the masthead, on the record the report works from', '/report'),
+    ('s03-slavery-did-not-end', 'SLAVERY DID NOT END. IT CHANGED FORM.', 'Big Shoulders Stencil',
+     'the opening of Section XIV', '/report#XIV'),
+    ('s04-where-no-sunlight-reaches-qr', 'WHERE NO SUNLIGHT REACHES', 'IBM Plex Mono',
+     'the masthead: the anglerfish, and the light it carries', '/report'),
     ('s05-tetelestai', 'τετέλεσται · IT HAS BEEN COMPLETED', 'GFS Didot',
      "the report's reading of the word, over the map's own markers", '/report#xxiv-endgame'),
-    ('s06-beings-observing-this-frequency', 'ATTN: BEINGS OBSERVING THIS FREQUENCY', 'Doto',
-     'the opening of Section XXV', '/report#XXV'),
-    ('s07-a-refusal-is-a-finding', 'A REFUSAL IS A FINDING', 'Rubik Glitch',
-     "the crawler's rule: refusals are logged, never worked around", '/about'),
+    ('s06-in-court-the-silence-held', 'IN COURT, THE SILENCE HELD', 'Doto',
+     'Section II: a non-disclosure agreement tested in court', '/report#ii-the-compellability-fight-status-5-september-2026'),
+    ('s07-the-map-beneath-the-map', 'THE MAP BENEATH THE MAP', 'Rubik Glitch',
+     'the title of Section XV, the active conflicts', '/report#XV'),
     ('s08-no-weapon-formed-against', 'NO WEAPON FORMED AGAINST', 'Jacquard 24',
      "the author's own line in Section I (Isaiah 54:17)", '/report#i-the-authors-testimony-the-work-is-the-method'),
-    ('s09-timelines-are-not-chains', 'TIMELINES ARE NOT CHAINS', 'Monoton',
-     'the anti-map rule: a shared timeline is not a chain', '/start'),
-    ('s10-tiered-sourced-checkable', 'TIERED · SOURCED · CHECKABLE', 'Unbounded',
-     'what every claim on the page is', '/about'),
-    ('s11-no-document-no-claim', 'NO DOCUMENT, NO CLAIM', 'Anton',
-     'testimony is promoted only by a document', '/start'),
-    ('s12-every-claim-carries-a-tier', 'EVERY CLAIM CARRIES A TIER', 'Libre Barcode 39 Text',
-     'the barcode scans as B0B.DEV', '/start'),
+    ('s09-weighed-and-found-wanting', 'WEIGHED AND FOUND WANTING', 'Monoton',
+     'Daniel 5:27, as Section IV reads it', '/report#iv-what-he-said-about-god-the-soul-and-being-measured'),
+    ('s10-not-one-sparrow-is-forgotten', 'NOT ONE SPARROW IS FORGOTTEN', 'Unbounded',
+     "Luke 12:6, as the report's close reads it", '/report#xxiv-endgame'),
+    ('s11-the-emergency-did-not-end', 'THE EMERGENCY DID NOT END', 'Anton',
+     'Proclamation 7463, in Section XXIV', '/report#xvi-9-11-vector-3-the-emergency-that-did-not-end'),
+    ('s12-the-ledger-is-already-kept', 'THE LEDGER IS ALREADY KEPT', 'Libre Barcode 39 Text',
+     "the report's close, on the author's reading (the barcode scans as B0B.DEV)", '/report#xxiv-endgame'),
 ]
 
 CSS = '''
@@ -145,7 +145,7 @@ def build_page(rows, zip_size):
 <div class="stk-head">
 <p class="kicker">Stickers</p>
 <h1>b0b.dev stickers</h1>
-<p class="lede">Twelve die-cut designs, each in its own typeface, each carrying one line from the method this site runs on, and each with a QR code that opens www.b0b.dev. Free to download and print.</p>
+<p class="lede">Twelve die-cut designs, each in its own typeface, each carrying one line from the report, and each with a QR code that opens www.b0b.dev. Every line is the report&rsquo;s own sentence or a cut of it, and each card links to where it stands. Free to download and print.</p>
 <div class="stk-dl">
   <a class="go" href="/stickers/b0b-dev-stickers.zip" download>DOWNLOAD ALL<small>ZIP &middot; %s</small></a>
   <a href="/stickers/b0b-dev-qr.svg" download>QR CODE<small>SVG</small></a>

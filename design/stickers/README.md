@@ -1,8 +1,8 @@
 # b0b.dev stickers
 
 Twelve die-cut stickers, each with its own QR code to **www.b0b.dev**. Each pairs one display face
-with a 3–5 word attractor taken from the site's own method. No sticker names a person or makes a
-claim the page does not.
+with a line of 3–5 words taken from the report itself: its own sentence, or a cut of one. No sticker
+names a person or says anything the page does not.
 
 **The address on every sticker is `www.b0b.dev`, and its zero is made unmistakable** - slashed, and
 in the sticker's accent colour. IBM Plex Mono uses its own designed slashed zero (OpenType `zero`,
@@ -13,31 +13,37 @@ The site hosts the set at **https://www.b0b.dev/stickers** (built by `publish.py
 
 `out/b0b-dev-stickers-preview.png` shows the whole set. Print from `out/print/`.
 
-| # | File | Attractor | Face | Size with border |
-|---|------|-----------|------|------------------|
-| 01 | `s01-sources-or-it-didnt-happen.png` | SOURCES OR IT DIDN'T HAPPEN | VT323 (terminal) | 4.29 × 2.39 in |
-| 02 | `s02-secrecy-is-evidence-of-nothing.png` | SECRECY IS EVIDENCE OF NOTHING | Special Elite (typewriter) + Black Ops One (stamp) | 3.19 × 3.94 in |
-| 03 | `s03-the-tier-ladder.png` | DOCUMENTED · ATTRIBUTED · LABELED · CONTESTED · UNSUPPORTED | Big Shoulders Stencil | 3.44 × 4.04 in |
-| 04 | `s04-read-the-record-yourself-qr.png` | READ THE RECORD YOURSELF (the large QR) | IBM Plex Mono (the house face) | 2.65 × 3.74 in |
+| # | File | Line | Face | Size with border |
+|---|------|------|------|------------------|
+| 01 | `s01-no-hands-of-its-own.png` | NO HANDS OF ITS OWN (under `$ whoami`) | VT323 (terminal) | 4.29 × 2.39 in |
+| 02 | `s02-the-record-is-deliberately-dark.png` | THE RECORD IS DELIBERATELY DARK, between redaction bars | Special Elite (typewriter) + Black Ops One (stamp) | 3.19 × 3.94 in |
+| 03 | `s03-slavery-did-not-end.png` | SLAVERY DID NOT END. IT CHANGED FORM. | Big Shoulders Stencil (crate stencil) | 3.44 × 4.29 in |
+| 04 | `s04-where-no-sunlight-reaches-qr.png` | WHERE NO SUNLIGHT REACHES (the large QR is the light) | IBM Plex Mono (the house face) | 2.65 × 3.74 in |
 | 05 | `s05-tetelestai.png` | τετέλεσται · IT HAS BEEN COMPLETED | GFS Didot, over the map's own markers | 4.49 × 2.94 in |
-| 06 | `s06-beings-observing-this-frequency.png` | ATTN: BEINGS OBSERVING THIS FREQUENCY | Doto (LED dot matrix) | 4.79 × 1.79 in |
-| 07 | `s07-a-refusal-is-a-finding.png` | A REFUSAL IS A FINDING | Rubik Glitch | 4.34 × 2.19 in |
+| 06 | `s06-in-court-the-silence-held.png` | IN COURT, THE SILENCE HELD (on an ON AIR board) | Doto (LED dot matrix) | 4.79 × 1.79 in |
+| 07 | `s07-the-map-beneath-the-map.png` | THE MAP BENEATH THE MAP | Rubik Glitch (the second layer shows through) | 4.34 × 2.44 in |
 | 08 | `s08-no-weapon-formed-against.png` | NO WEAPON FORMED AGAINST | Jacquard 24 (pixel blackletter) | 2.94 × 3.78 in |
-| 09 | `s09-timelines-are-not-chains.png` | TIMELINES ARE NOT CHAINS | Monoton (neon) | 4.59 × 2.39 in |
-| 10 | `s10-tiered-sourced-checkable.png` | TIERED · SOURCED · CHECKABLE | Unbounded (seal, QR in the centre) | 3.19 × 3.19 in |
-| 11 | `s11-no-document-no-claim.png` | NO DOCUMENT, NO CLAIM | Anton (hazard label) | 3.99 × 2.44 in |
-| 12 | `s12-every-claim-carries-a-tier.png` | EVERY CLAIM CARRIES A TIER + barcode | Libre Barcode 39 Text (evidence tag) | 4.29 × 2.14 in |
+| 09 | `s09-weighed-and-found-wanting.png` | WEIGHED AND FOUND WANTING | Monoton (neon: the writing on the wall) | 4.59 × 2.39 in |
+| 10 | `s10-not-one-sparrow-is-forgotten.png` | NOT ONE SPARROW IS FORGOTTEN | Unbounded (seal, QR in the centre) | 3.19 × 3.19 in |
+| 11 | `s11-the-emergency-did-not-end.png` | THE EMERGENCY DID NOT END. | Anton (hazard label) | 4.19 × 2.44 in |
+| 12 | `s12-the-ledger-is-already-kept.png` | THE LEDGER IS ALREADY KEPT. + barcode | Libre Barcode 39 Text (evidence tag) | 4.28 × 2.14 in |
 
-**Where each line comes from.**
-- 02: the guaranteed-null rule ("secrecy is evidence of nothing about what is hidden").
-- 09: the anti-map guardrail ("a shared timeline is not a chain").
-- 03: the tier ladder.
-- 11: the document rule ("promoted only by a document", `/start`).
-- 07: the crawler rule ("refusals logged as findings", `/about`).
-- 06: the opening of Section XXV.
-- 08: the author's own Section I line, from Isaiah 54:17.
-- 05: the report's reading of τετέλεσται.
-- 01, 04, 10 and 12: describe the method.
+**Where each line comes from** - the sentence on the page, quoted:
+- **01**, the address "To those inside": "Nothing documented in the sections below has hands of its own. Every capability here is a capability because trained people operate it."
+- **02**, the masthead: "The record it works from is deliberately dark - a review declared closed, some 200,000 pages withheld or redacted, sealed special-master reports, a state told to stand down and never answered."
+- **03**, Section XIV, its opening: "Slavery did not end. It changed form."
+- **04**, the masthead: "The anglerfish lives where no sunlight reaches."
+- **05**, the close: "Not 'it ended' but it has been completed and remains so."
+- **06**, Section II, the compellability fight: "When the instrument of silence was tested in court, the silence held."
+- **07**, the title of Section XV: "Active Global Conflicts - The Map Beneath the Map".
+- **08**, Section I, the author's own line: "no weapon formed against, I am useful" (Isaiah 54:17).
+- **09**, Section IV: "TEKEL, Daniel 5:27: you have been weighed in the balances and found wanting".
+- **10**, the close: "Luke 12:6–7 runs: not one sparrow is forgotten before God… the hairs of your head are all numbered. And then: 'Fear not.'"
+- **11**, Section XXIV: "Proclamation 7463 … was signed on 14 September 2001. It has been continued every year since by every President."
+- **12**, the close: "a document written as though the ledger were already kept - which, on the author's reading, it is."
+
+`verify.py` checks that each sticker carries its line word for word, so this list and the art cannot
+drift apart.
 
 ## Printing
 
@@ -47,7 +53,7 @@ The site hosts the set at **https://www.b0b.dev/stickers** (built by `publish.py
   transparency automatically. If yours asks for its own border, choose "no border" or "none".
 - **Sizes:** the table above is the finished size, border included. All twelve scale cleanly to
   about 80–130% of that. Below 80%, the smallest lines (6–7 pt) start to soften.
-- **Colour:** the art is RGB. The neon green, cyan and magenta glows (01, 03, 06, 09, 10) are
+- **Colour:** the art is RGB. The neon green, cyan and magenta glows (01, 06, 07, 09, 10) are
   outside what CMYK inks can print and will come out duller. Ask the printer for a proof of those
   five before a full run.
 - **Stock:** matte or gloss vinyl both work. Gloss suits the dark neon and terminal ones, matte

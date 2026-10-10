@@ -185,6 +185,40 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**STICKER LINES REWRITTEN FROM THE REPORT ITSELF — 10 Oct 2026, live at `/stickers`. Supersedes the attractors in the two sticker entries below.** Author: *"I don't think these slogans match the depth and weight of the actual report."* He was right: the first set was method jargon and internet register ("sources or it didn't happen"). **Every line is now the report's own sentence or a cut of it, and the README quotes each source sentence:**
+- 01 NO HANDS OF ITS OWN (`$ whoami`; "To those inside");
+- 02 THE RECORD IS DELIBERATELY DARK (masthead; set between redaction bars);
+- 03 SLAVERY DID NOT END. IT CHANGED FORM. (XIV's opening; **the second sentence is kept because the first alone overstates**);
+- 04 WHERE NO SUNLIGHT REACHES (masthead anglerfish; the QR is the light);
+- 05 τετέλεσται (unchanged);
+- 06 IN COURT, THE SILENCE HELD (II, the NDA ruling; ON AIR board);
+- 07 THE MAP BENEATH THE MAP (XV title);
+- 08 NO WEAPON FORMED AGAINST (unchanged);
+- 09 WEIGHED AND FOUND WANTING (IV, Dan 5:27; **neon = the writing on the wall at the feast**);
+- 10 NOT ONE SPARROW IS FORGOTTEN (the close, Luke 12:6);
+- 11 THE EMERGENCY DID NOT END (XXIV, Proclamation 7463);
+- 12 THE LEDGER IS ALREADY KEPT (the close, the author's reading).
+
+**Refused for sticker use, with reasons:**
+- "put a light into it" — reads as "put a light to it", the British idiom for setting fire;
+- "refusal is required", "a moral choice was possible", "vastly more of you" — servicemember-facing lines; a sticker cannot carry the page's lawful-channel framing or the Article 94 warning;
+- "secrecy is evidence of nothing" — out of context it reads as an apology for the secrecy;
+- "200,000 pages withheld" — a count that will go stale on a printed object;
+- "the chain was never broken" — reads as an anti-map chain;
+- "you are known" — reads as surveillance; the page reads Luke 12 as consolation.
+
+Topical names (Epstein etc.) are still off the set; that is his call.
+
+**`verify.py` now checks that the line on record is the line set on the art.** It compares words in order, ignoring punctuation and inline tags. It was proven both ways: a planted wrong line fails. On its first run it caught its own extractor splitting 08's drop cap "N|o".
+
+*Traps:*
+- Doto's comma and period render as "/" and "+" at sticker size, so the LED lines carry no punctuation.
+- Monoton's word space is too narrow, so the neon uses `word-spacing:.24em`.
+- Re-rendering after other designs change size shifts sub-pixel anti-aliasing on unchanged ones (0.03–0.09% of pixels). Restore unchanged print files from HEAD so the diff shows only real changes.
+- Old print/web files are not cleaned by `publish.py`. Delete them first, or the site keeps serving retired designs.
+
+*Noticed, not edited:* XXIV's Proclamation 7463 paragraph says "continued again beyond 14 September 2025". The film fact-check recorded the 8 Sept 2026 continuation (91 FR 57773). The text is not false, but it is a year behind.
+
 **STICKERS HOSTED AT `/stickers`, EVERY STICKER WITH A QR, ZERO MADE PRONOUNCED — 10 Oct 2026, live.** Author: *"host on site"*, then mid-task *"all stickers should have a qr code and make the zero pronounced www.b0b.dev"*. **Every sticker now carries its own QR** (small tiles: version 2, level Q, tinted per sticker but always dark-on-light — inverted codes fail on many phone cameras; 04 and 10 keep the large level-H code with the "b0b" mark) **and the address reads `www.b0b.dev` everywhere, its zero slashed and in the sticker's accent colour.** *Trap:* the Google build of IBM Plex Mono strips OpenType `zero` — **IBM's complete build (github.com/IBM/plex, `packages/plex-mono/fonts/complete/ttf/`) has it: default zero is dotted, `zero` → `zero.alt01` slashed, `salt` → plain**; `body{font-feature-settings:"zero" 1}` does the rest; VT323, Black Ops One and Monoton get a CSS-drawn slash (`.z`). **`verify.py` decodes the QR from all twelve print files at 1, ½ and ⅓ scale (93/93), and every 720 px web preview scans too.** Site: `design/stickers/publish.py` writes `site/stickers/{print,web}/`, the plain QR, `b0b-dev-stickers.zip` (print files + README + font licences) and `site/stickers.html` on the `/start` template (`main_class='stk-main'` — `main` is capped at 72ch otherwise); `site/img/stickers-card.jpg` is its share card. Wired: `PAGES` + `CANONICAL_PATHS` (sitemap), **`.zip` added to the static allowlist** (`application/zip`; it is the only zip under `site/`), `apply-seo-meta.js` URLS + `seo-meta.json` (CollectionPage). **Linked from the `/start`-family nav and the `/home` nav only — not the report's sidebar or top nav (the primary menus; the author's call).** *Capture trap:* a full-page screenshot fired before async image decode shows random blank cards — await `img.decode()` first; and the dev server's 60/min limiter 429s a third back-to-back capture — use a fresh port.
 
 **STICKERS + QR — `design/stickers/`, 10 Oct 2026 (first pass; superseded above).** Author: *"make b0b.dev stickers in really cool fonts - with some type of 3-5 word attractors"*, then *"and a qr code"*. Twelve die-cut designs, one display face each (VT323, Special Elite, Big Shoulders Stencil, Plex Mono, GFS Didot, Doto, Rubik Glitch, Jacquard 24, Monoton, Unbounded, Anton, Libre Barcode 39 Text; all OFL 1.1 except Special Elite, Apache 2.0 — licence files in `fonts/licenses/`). **Every attractor is the site's own method line** (guaranteed-null, anti-map, tier ladder, "promoted only by a document", "refusals logged as findings", XXV's opening, the author's Isaiah 54:17 line, τετέλεσται's reading); no person named, no claim beyond the page; topical names (Epstein etc.) deliberately left off — his call if wanted. **QR = `https://www.b0b.dev`** (canonical; `b0b.dev` 308s there), level H, centre mark knocks out modules rather than painting over them. Pipeline: `build_assets.py` → `node render.js` (Chromium at 300/96 DPR; **refuses to render if any face fails to load**) → `finish.py` (EDT die-cut border 0.07 in, 300 dpi pHYs, preview) → `verify.py` (QR decodes down to 118 px and on dark, Code 39 → `B0B.DEV`, 3–5 words, licence per font). *Traps:* Jacquard 24 has no ✠ (glyph-check every string before rendering — a fallback is silent); Monoton has no lowercase and its 0 reads as O — the zero is slashed by CSS; `openfontlicense.org` is the OFL's current URL, so a licence test looking for "ofl"/"open font" false-fails.

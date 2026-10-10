@@ -5,11 +5,13 @@
   - every sticker's QR decodes to https://www.b0b.dev at print size and scaled down; the QR
     sticker and the plain PNG down to the size a phone sees from arm's length; the barcode
     decodes to B0B.DEV
-  - every attractor is 3-5 words
+  - every attractor is 3-5 words, and is the line actually set on its sticker in stickers.html
   - every font in fonts/ declares an open licence (OFL or Apache) in its own name table
 """
 import glob
+import html
 import os
+import re
 import sys
 
 import zxingcpp
@@ -19,20 +21,25 @@ from PIL import Image
 HERE = os.path.dirname(os.path.abspath(__file__))
 URL = 'https://www.b0b.dev'
 
+# The headline each sticker carries. Every one is the report's own sentence or a cut of it;
+# README.md quotes the sentence it comes from. 03 also carries the sentence the page puts
+# after it ("It changed form."), and 05 the Greek word its gloss translates.
 ATTRACTORS = {
-    's01-sources-or-it-didnt-happen': "SOURCES OR IT DIDN'T HAPPEN",
-    's02-secrecy-is-evidence-of-nothing': 'SECRECY IS EVIDENCE OF NOTHING',
-    's03-the-tier-ladder': 'DOCUMENTED ATTRIBUTED LABELED CONTESTED UNSUPPORTED',
-    's04-read-the-record-yourself-qr': 'READ THE RECORD YOURSELF',
+    's01-no-hands-of-its-own': 'NO HANDS OF ITS OWN',
+    's02-the-record-is-deliberately-dark': 'THE RECORD IS DELIBERATELY DARK',
+    's03-slavery-did-not-end': 'SLAVERY DID NOT END',
+    's04-where-no-sunlight-reaches-qr': 'WHERE NO SUNLIGHT REACHES',
     's05-tetelestai': 'IT HAS BEEN COMPLETED',
-    's06-beings-observing-this-frequency': 'ATTN: BEINGS OBSERVING THIS FREQUENCY',
-    's07-a-refusal-is-a-finding': 'A REFUSAL IS A FINDING',
+    's06-in-court-the-silence-held': 'IN COURT, THE SILENCE HELD',
+    's07-the-map-beneath-the-map': 'THE MAP BENEATH THE MAP',
     's08-no-weapon-formed-against': 'NO WEAPON FORMED AGAINST',
-    's09-timelines-are-not-chains': 'TIMELINES ARE NOT CHAINS',
-    's10-tiered-sourced-checkable': 'TIERED SOURCED CHECKABLE',
-    's11-no-document-no-claim': 'NO DOCUMENT, NO CLAIM',
-    's12-every-claim-carries-a-tier': 'EVERY CLAIM CARRIES A TIER',
+    's09-weighed-and-found-wanting': 'WEIGHED AND FOUND WANTING',
+    's10-not-one-sparrow-is-forgotten': 'NOT ONE SPARROW IS FORGOTTEN',
+    's11-the-emergency-did-not-end': 'THE EMERGENCY DID NOT END',
+    's12-the-ledger-is-already-kept': 'THE LEDGER IS ALREADY KEPT',
 }
+QR_STICKER = next(k for k in ATTRACTORS if k.startswith('s04-'))
+TAG_STICKER = next(k for k in ATTRACTORS if k.startswith('s12-'))
 
 fails = []
 
@@ -74,13 +81,32 @@ for name, text in ATTRACTORS.items():
     n = len(text.replace(',', ' ').split())
     check(3 <= n <= 5, '"%s" is %d words' % (text, n))
 
+
+def words(s):
+    return re.sub(r'[^A-Z0-9]+', ' ', s.upper()).split()
+
+
+# the line on record must be the line on the sticker, word for word and in order (line breaks
+# and punctuation aside), so this file, the README and the site cannot drift from the art
+src = open(os.path.join(HERE, 'stickers.html'), encoding='utf-8').read()
+INLINE = r'</?(?:span|b|i|em|strong|small|a)\b[^>]*>'   # a drop cap or a coloured zero sits inside its word
+for name, text in ATTRACTORS.items():
+    m = re.search(r'<section[^>]*\bid="%s"[^>]*>(.*?)</section>' % re.escape(name), src, re.S)
+    body = re.sub(r'<[^>]+>', ' ', re.sub(INLINE, '', m.group(1))) if m else ''
+    art = words(html.unescape(body))
+    want, i = words(text), 0
+    for w in art:
+        if i < len(want) and w == want[i]:
+            i += 1
+    check(bool(m) and i == len(want), '%s: the sticker carries "%s"' % (name, text))
+
 # every sticker carries a QR; each must decode to the site, at print size and scaled down
 for p in prints:
     name = os.path.basename(p)[:-4]
     im = flat(Image.open(p))
     for s, w, ok in decodes(im, URL, (1.0, 0.5, 0.33)):
         check(ok, '%s: QR decodes to %s at %d px wide' % (name, URL, w))
-qr_sticker = flat(Image.open(os.path.join(HERE, 'out', 'print', 's04-read-the-record-yourself-qr.png')))
+qr_sticker = flat(Image.open(os.path.join(HERE, 'out', 'print', QR_STICKER + '.png')))
 for s, w, ok in decodes(qr_sticker, URL, (0.15,)):
     check(ok, 'QR sticker decodes at %d px wide' % w)
 for s, w, ok in decodes(flat(qr_sticker, (10, 10, 10)), URL, (0.25,)):
@@ -88,7 +114,7 @@ for s, w, ok in decodes(flat(qr_sticker, (10, 10, 10)), URL, (0.25,)):
 for f in ('b0b-dev-qr.png',):
     for s, w, ok in decodes(flat(Image.open(os.path.join(HERE, 'out', 'qr', f))), URL, (1.0, 0.1)):
         check(ok, '%s decodes at %d px wide' % (f, w))
-bar = flat(Image.open(os.path.join(HERE, 'out', 'print', 's12-every-claim-carries-a-tier.png')))
+bar = flat(Image.open(os.path.join(HERE, 'out', 'print', TAG_STICKER + '.png')))
 for s, w, ok in decodes(bar, 'B0B.DEV', (1.0, 0.5)):
     check(ok, 'barcode decodes to B0B.DEV at %d px wide' % w)
 

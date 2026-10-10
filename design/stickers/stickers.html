@@ -56,7 +56,7 @@ body{display:flex;flex-wrap:wrap;gap:.6in;padding:.6in;width:17in;align-items:fl
   background:radial-gradient(120% 120% at 50% 50%,rgba(0,0,0,0) 58%,rgba(0,0,0,.55) 100%);
   box-shadow:inset 0 0 0 .03in rgba(0,255,65,.18)}
 .s-term .cmd{font-size:14pt;color:#48a35e;letter-spacing:.02em}
-.s-term .big{font-size:29pt;line-height:.92;margin-top:.13in;letter-spacing:.01em;
+.s-term .big{font-size:36pt;line-height:.92;margin-top:.13in;letter-spacing:.01em;
   text-shadow:0 0 .025in rgba(0,255,65,.85),0 0 .11in rgba(0,255,65,.4)}
 .s-term .cur{display:inline-block;width:.11in;height:.2in;margin-left:.05in;vertical-align:-.01in;
   background:var(--green);box-shadow:0 0 .07in rgba(0,255,65,.8)}
@@ -90,18 +90,15 @@ body{display:flex;flex-wrap:wrap;gap:.6in;padding:.6in;width:17in;align-items:fl
 .s-memo .stamp .www{font-family:"Black Ops One";font-size:12.5pt;letter-spacing:.02em;line-height:1;
   --zt:22%;--zh:58%;--zw:.1em;--zr:34deg}
 
-/* 03 - the tier ladder. Big Shoulders Stencil. */
-.s-tier{width:3.25in;height:3.85in;border-radius:.18in;background:#0b0b0b;color:#d4d4d4}
+/* 03 - the crate stencil. Big Shoulders Stencil. */
+.s-tier{width:3.25in;height:4.1in;border-radius:.18in;background:#0b0b0b;color:#d4d4d4}
 .s-tier::after{content:"";position:absolute;inset:.08in;border:1px solid #2a2a2a;border-radius:.12in;pointer-events:none}
 .s-tier .lbl{position:absolute;left:.26in;top:.22in;font-family:"IBM Plex Mono";font-weight:500;font-size:7pt;
   letter-spacing:.32em;color:#777}
-.s-tier ul{list-style:none;position:absolute;left:.26in;right:.26in;top:.46in}
-.s-tier li{display:flex;align-items:center;height:.415in}
-.s-tier li span{flex:1;font-family:"Big Shoulders Stencil";font-weight:800;font-size:23pt;letter-spacing:.015em;
-  color:var(--c);line-height:1}
-.s-tier li i{display:block;width:.12in;height:.25in;margin-left:.045in;border-radius:.025in;
-  border:1.6px solid color-mix(in srgb,var(--c) 45%,#0b0b0b)}
-.s-tier li i.on{background:var(--c);border-color:var(--c);box-shadow:0 0 .06in color-mix(in srgb,var(--c) 55%,transparent)}
+.s-tier .big{position:absolute;left:.26in;right:.26in;top:.46in;font-family:"Big Shoulders Stencil";font-weight:800;
+  font-size:42pt;line-height:.98;letter-spacing:.015em;color:#ece7da}
+.s-tier .sub{position:absolute;left:.26in;right:.26in;top:2.27in;font-family:"Big Shoulders Stencil";font-weight:800;
+  font-size:23pt;line-height:1;letter-spacing:.015em;color:var(--red)}
 .s-tier .foot{position:absolute;left:.26in;right:.26in;bottom:.24in;display:flex;justify-content:space-between;
   align-items:flex-end;border-top:1px solid #2a2a2a;padding-top:.13in}
 .s-tier .foot .url{display:block;font-size:12pt;color:var(--green);letter-spacing:.1em;--zero:#fff}
@@ -111,9 +108,8 @@ body{display:flex;flex-wrap:wrap;gap:.6in;padding:.6in;width:17in;align-items:fl
 
 /* 04 - the QR. IBM Plex Mono, the house face. */
 .s-qr{width:2.45in;height:3.55in;border-radius:.18in;background:var(--ink);color:#fff;text-align:center}
-.s-qr .top{position:absolute;left:0;right:0;top:.21in;font-family:"IBM Plex Mono";font-weight:700;font-size:14pt;
+.s-qr .top{position:absolute;left:0;right:0;top:.23in;font-family:"IBM Plex Mono";font-weight:700;font-size:13.5pt;
   line-height:1.12;letter-spacing:.04em}
-.s-qr .top em{font-style:normal;color:var(--green)}
 .s-qr .panel{position:absolute;left:.2in;right:.2in;top:.8in;aspect-ratio:1;background:#fff;border-radius:.12in;
   overflow:hidden;line-height:0}
 .s-qr .panel svg{display:block;width:100%;height:100%}
@@ -153,21 +149,21 @@ body{display:flex;flex-wrap:wrap;gap:.6in;padding:.6in;width:17in;align-items:fl
 .s-led .side .qr{width:1.02in;height:1.02in;border-radius:.05in;--qr-paper:#fff4d6;--qr-ink:#0a0703}
 .s-led .side .url{font-size:7.4pt;color:var(--amber-2);letter-spacing:.12em;--zero:var(--green)}
 
-/* 07 - the refusal. Rubik Glitch. */
-.s-glitch{width:4.15in;height:2in;background:#0a0a0a;color:#fff;
+/* 07 - the map beneath the map. Rubik Glitch: the second layer shows through the first. */
+.s-glitch{width:4.15in;height:2.25in;background:#0a0a0a;color:#fff;
   clip-path:polygon(0 .15in,.62in .15in,.62in 0,100% 0,100% .74in,calc(100% - .13in) .74in,calc(100% - .13in) 1.14in,100% 1.14in,
     100% calc(100% - .14in),2.3in calc(100% - .14in),2.3in 100%,0 100%,0 1.36in,.13in 1.36in,.13in .98in,0 .98in)}
 .s-glitch .code{position:absolute;left:.26in;top:.28in;font-family:"IBM Plex Mono";font-weight:700;font-size:7.4pt;
   letter-spacing:.2em;color:var(--cyan)}
 .s-glitch .g{position:absolute;left:.26in;font-family:"Rubik Glitch";font-size:24.5pt;line-height:1;letter-spacing:.01em}
-.s-glitch .g1{top:.52in}.s-glitch .g2{top:.92in}
+.s-glitch .g1{top:.5in}.s-glitch .g2{top:.86in}.s-glitch .g3{top:1.22in}
 .s-glitch .g::before,.s-glitch .g::after{content:attr(data-t);position:absolute;left:0;top:0;mix-blend-mode:screen}
 .s-glitch .g::before{color:#00ccff;transform:translate(-.022in,.008in);clip-path:inset(0 0 48% 0)}
 .s-glitch .g::after{color:#ff2bd6;transform:translate(.024in,-.006in);clip-path:inset(40% 0 0 0)}
-.s-glitch .scan{position:absolute;left:0;right:1.55in;top:1.12in;height:.035in;background:rgba(0,204,255,.55);mix-blend-mode:screen}
+.s-glitch .scan{position:absolute;left:0;right:1.55in;top:1.19in;height:.035in;background:rgba(0,204,255,.55);mix-blend-mode:screen}
 .s-glitch .url{position:absolute;left:.26in;bottom:.3in;font-size:10pt;color:#0a0a0a;background:var(--cyan);
   padding:.035in .08in .035in .1in;letter-spacing:.14em;--zero:#b0006f}
-.s-glitch .qrwrap{position:absolute;right:.28in;top:.44in;width:1.06in;height:1.06in}
+.s-glitch .qrwrap{position:absolute;right:.28in;top:.56in;width:1.06in;height:1.06in}
 .s-glitch .qrwrap i{position:absolute;inset:0;border-radius:.06in;mix-blend-mode:screen}
 .s-glitch .qrwrap .c1{background:#00ccff;transform:translate(-.045in,.035in)}
 .s-glitch .qrwrap .c2{background:#ff2bd6;transform:translate(.045in,-.035in)}
@@ -188,20 +184,18 @@ body{display:flex;flex-wrap:wrap;gap:.6in;padding:.6in;width:17in;align-items:fl
 .s-arch .url{position:absolute;left:0;right:0;top:3.15in;font-size:10pt;color:#efe6d2;letter-spacing:.14em;padding-left:.14em;
   --zero:var(--red)}
 
-/* 09 - neon. Monoton. */
+/* 09 - neon: the writing on the wall at the feast. Monoton. */
 .s-neon{width:4.4in;height:2.2in;border-radius:.2in;
   background:radial-gradient(90% 80% at 40% 40%,#151026 0%,#09070f 70%,#050408 100%)}
 .s-neon .tube{position:absolute;inset:.15in;border-radius:.13in;border:2px solid #ffd7fb;
   box-shadow:0 0 .03in #ff3df2,0 0 .09in #ff3df2,inset 0 0 .03in #ff3df2,inset 0 0 .09in rgba(255,61,242,.6)}
-.s-neon .sign{position:absolute;left:.4in;top:.4in;font-family:"Monoton";line-height:1;color:#f2fdff;
-  text-shadow:0 0 .015in #fff,0 0 .05in #00ccff,0 0 .12in #00ccff,0 0 .26in rgba(0,204,255,.7)}
-.s-neon .sign .w3{display:block;font-size:15pt;letter-spacing:.06em;margin-bottom:.07in}
-.s-neon .sign .main{display:block;font-size:29.5pt;letter-spacing:.015em}
-.s-neon .sign .o{color:#ffe3fd;text-shadow:0 0 .015in #fff,0 0 .05in #ff3df2,0 0 .12in #ff3df2,0 0 .24in rgba(255,61,242,.7);
-  --zt:15%;--zh:70%;--zw:.03in;--zr:32deg}
-.s-neon .sign .o.z::after{box-shadow:0 0 .03in #ff3df2,0 0 .09in #ff3df2}
-.s-neon .tag{position:absolute;left:.4in;top:1.47in;font-family:"IBM Plex Mono";font-weight:700;font-size:8.2pt;
-  letter-spacing:.16em;color:#fff4c2;text-shadow:0 0 .015in #fff,0 0 .05in var(--amber),0 0 .13in rgba(255,204,0,.75)}
+.s-neon .tag{position:absolute;left:.4in;top:.36in;font-family:"IBM Plex Mono";font-weight:700;font-size:7.6pt;
+  letter-spacing:.22em;color:#fff4c2;text-shadow:0 0 .015in #fff,0 0 .05in var(--amber),0 0 .13in rgba(255,204,0,.75)}
+.s-neon .sign{position:absolute;left:.4in;top:.6in;font-family:"Monoton";font-size:21pt;line-height:1.12;letter-spacing:.015em;word-spacing:.24em;
+  color:#f2fdff;text-shadow:0 0 .015in #fff,0 0 .05in #00ccff,0 0 .12in #00ccff,0 0 .26in rgba(0,204,255,.7)}
+.s-neon .sign span{display:block}
+.s-neon .url{position:absolute;left:.4in;top:1.68in;font-size:9pt;color:#fdeefc;letter-spacing:.16em;--zero:#ff3df2;
+  text-shadow:0 0 .015in #fff,0 0 .05in #ff3df2,0 0 .12in rgba(255,61,242,.7)}
 .s-neon .qr{right:.36in;top:.56in;width:1.08in;height:1.08in;border-radius:.06in;--qr-paper:#fdfbff;--qr-ink:#0b0612;
   box-shadow:0 0 0 .025in #ffd7fb,0 0 .08in #ff3df2,0 0 .18in rgba(255,61,242,.55)}
 
@@ -211,9 +205,11 @@ body{display:flex;flex-wrap:wrap;gap:.6in;padding:.6in;width:17in;align-items:fl
 .s-seal .qr{left:50%;top:.84in;width:1.02in;height:1.02in;margin-left:-.51in;border-radius:.08in}
 .s-seal .url{position:absolute;left:0;right:0;top:1.95in;text-align:center;font-size:8.6pt;color:#fff;letter-spacing:.14em;
   padding-left:.14em;--zero:var(--green)}
+.s-seal .ref{position:absolute;left:0;right:0;top:2.13in;text-align:center;font-family:"IBM Plex Mono";font-weight:500;
+  font-size:6pt;letter-spacing:.3em;padding-left:.3em;color:var(--green)}
 
 /* 11 - hazard. Anton. */
-.s-haz{width:3.8in;height:2.25in;border-radius:.16in;background:var(--amber);color:var(--ink)}
+.s-haz{width:4in;height:2.25in;border-radius:.16in;background:var(--amber);color:var(--ink)}
 .s-haz .stripes{position:absolute;left:0;right:0;top:0;height:.3in;
   background:repeating-linear-gradient(-45deg,var(--ink) 0 .13in,var(--amber) .13in .26in)}
 .s-haz .mid{position:absolute;left:.24in;right:.18in;top:.3in;bottom:.38in;display:flex;align-items:center;gap:.18in}
@@ -224,7 +220,7 @@ body{display:flex;flex-wrap:wrap;gap:.6in;padding:.6in;width:17in;align-items:fl
   justify-content:space-between;padding:0 .24in}
 .s-haz .bot .url{display:flex;align-items:center;gap:.08in;font-size:11.5pt;color:var(--amber);letter-spacing:.1em;--zero:#fff}
 .s-haz .bot .url svg{width:.2in;height:.18in}
-.s-haz .bot small{font-family:"IBM Plex Mono";font-weight:500;font-size:5.8pt;letter-spacing:.18em;color:#bfa040}
+.s-haz .bot small{font-family:"IBM Plex Mono";font-weight:500;font-size:5.8pt;letter-spacing:.12em;color:#bfa040}
 
 /* 12 - the exhibit tag. Libre Barcode 39 Text + Black Ops One. */
 .s-tag{width:4.1in;height:1.95in;background:linear-gradient(180deg,#ecdcb2,#e2cc98);color:#1a1510;
@@ -237,8 +233,8 @@ body{display:flex;flex-wrap:wrap;gap:.6in;padding:.6in;width:17in;align-items:fl
 .s-tag .head small{font-family:"IBM Plex Mono";font-weight:700;font-size:7pt;letter-spacing:.2em;color:#b3122c}
 .s-tag .bar{position:absolute;left:.66in;width:2.12in;top:.56in;text-align:center;font-family:"Libre Barcode 39 Text";
   font-size:29pt;line-height:1;color:#0f0c08;background:#fbf4e2;padding:.08in 0 .03in;border-radius:.03in}
-.s-tag .cap{position:absolute;left:.66in;width:2.12in;bottom:.2in;text-align:center;font-family:"IBM Plex Mono";
-  font-weight:700;font-size:7.8pt;letter-spacing:.08em}
+.s-tag .cap{position:absolute;left:.66in;width:2.12in;bottom:.17in;text-align:center;font-family:"IBM Plex Mono";
+  font-weight:700;font-size:12pt;line-height:1.2;letter-spacing:.08em}
 .s-tag .qr{right:.22in;top:.52in;width:1in;height:1in;border-radius:.04in;--qr-paper:#fbf4e2;--qr-ink:#0f0c08}
 .s-tag .url{position:absolute;right:.22in;width:1in;top:1.58in;text-align:center;font-size:6.8pt;letter-spacing:.06em;
   color:#1a1510;--zero:#b3122c}
@@ -260,28 +256,28 @@ body{display:flex;flex-wrap:wrap;gap:.6in;padding:.6in;width:17in;align-items:fl
 </svg>
 
 <!-- 01 -->
-<section class="stk s-term" id="s01-sources-or-it-didnt-happen">
+<section class="stk s-term" id="s01-no-hands-of-its-own">
   <div class="crt">
-    <div class="cmd">$ ./verify --claim</div>
-    <div class="big">SOURCES OR IT<br>DIDN'T HAPPEN<span class="cur"></span></div>
+    <div class="cmd">$ whoami</div>
+    <div class="big">NO HANDS<br>OF ITS OWN<span class="cur"></span></div>
     <div class="foot www">www.b<span class="o z">0</span>b.dev</div>
   </div>
   <div class="qr"><!--QR--></div>
 </section>
 
 <!-- 02 -->
-<section class="stk s-memo" id="s02-secrecy-is-evidence-of-nothing">
+<section class="stk s-memo" id="s02-the-record-is-deliberately-dark">
   <div class="tex"></div>
   <div class="fold"></div>
   <div class="doc">
     <div class="hdr">MEMORANDUM FOR THE RECORD</div>
     <div class="sub">SUBJECT: <span class="r">xxxxxxxxxx xx xxxxxx</span></div>
     <div class="body">
-      <span class="r">xxxxx</span> <b>SECRECY</b><br>
-      <span class="r">xxxxxxx</span> <b>IS</b> <span class="r">xxxx</span><br>
-      <span class="r">xx</span> <b>EVIDENCE</b> <span class="r">xxx</span><br>
-      <span class="r">xxxxxx</span> <b>OF</b> <span class="r">xxxxx</span><br>
-      <b>NOTHING.</b> <span class="r">xxxx</span>
+      <span class="r">xxxxx</span> <b>THE</b> <span class="r">xxxxxxx</span><br>
+      <b>RECORD</b> <span class="r">xx</span> <b>IS</b> <span class="r">xxxx</span><br>
+      <span class="r">xx</span> <b>DELIBERATELY</b><br>
+      <span class="r">xxxxxx</span> <b>DARK.</b> <span class="r">xxxx</span><br>
+      <span class="r">xxxxxxxxxxxx</span>
     </div>
   </div>
   <div class="att"><small>ATTACHMENT A</small><div class="qr in"><!--QR--></div></div>
@@ -289,15 +285,10 @@ body{display:flex;flex-wrap:wrap;gap:.6in;padding:.6in;width:17in;align-items:fl
 </section>
 
 <!-- 03 -->
-<section class="stk s-tier" id="s03-the-tier-ladder">
-  <div class="lbl">EVERY CLAIM, GRADED</div>
-  <ul>
-    <li style="--c:#00ff41"><span>DOCUMENTED</span><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></li>
-    <li style="--c:#00ccff"><span>ATTRIBUTED</span><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></li>
-    <li style="--c:#ffcc00"><span>LABELED</span><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></li>
-    <li style="--c:#ff6600"><span>CONTESTED</span><i class="on"></i><i class="on"></i><i></i><i></i><i></i></li>
-    <li style="--c:#ff4444"><span>UNSUPPORTED</span><i class="on"></i><i></i><i></i><i></i><i></i></li>
-  </ul>
+<section class="stk s-tier" id="s03-slavery-did-not-end">
+  <div class="lbl">REPORT &middot; SECTION XIV</div>
+  <div class="big">SLAVERY<br>DID NOT<br>END.</div>
+  <div class="sub">IT CHANGED FORM.</div>
   <div class="foot">
     <div><span class="url www">www.b<span class="o">0</span>b.dev</span><small>SCAN &middot; READ &middot; CHECK</small></div>
     <div class="qr in"><!--QR--></div>
@@ -305,8 +296,8 @@ body{display:flex;flex-wrap:wrap;gap:.6in;padding:.6in;width:17in;align-items:fl
 </section>
 
 <!-- 04 -->
-<section class="stk s-qr" id="s04-read-the-record-yourself-qr">
-  <div class="top">READ THE RECORD<br><em>YOURSELF</em></div>
+<section class="stk s-qr" id="s04-where-no-sunlight-reaches-qr">
+  <div class="top">WHERE NO SUNLIGHT<br>REACHES</div>
   <div class="panel"><!--QRLOGO--></div>
   <div class="scan">SCAN &middot; READ &middot; CHECK</div>
   <div class="url www">www.b<span class="o">0</span>b.dev</div>
@@ -322,21 +313,22 @@ body{display:flex;flex-wrap:wrap;gap:.6in;padding:.6in;width:17in;align-items:fl
 </section>
 
 <!-- 06 -->
-<section class="stk s-led" id="s06-beings-observing-this-frequency">
+<section class="stk s-led" id="s06-in-court-the-silence-held">
   <div class="board">
     <div class="onair"><i></i>ON AIR</div>
-    <div class="row">ATTN: BEINGS</div>
-    <div class="row">OBSERVING THIS</div>
-    <div class="row">FREQUENCY<span class="b"></span></div>
+    <div class="row">IN COURT</div>
+    <div class="row">THE SILENCE</div>
+    <div class="row">HELD<span class="b"></span></div>
   </div>
   <div class="side"><div class="qr in"><!--QR--></div><div class="url www">www.b<span class="o">0</span>b.dev</div></div>
 </section>
 
 <!-- 07 -->
-<section class="stk s-glitch" id="s07-a-refusal-is-a-finding">
-  <div class="code">HTTP 403 &rarr; LOGGED AS A NULL</div>
-  <div class="g g1" data-t="A REFUSAL">A REFUSAL</div>
-  <div class="g g2" data-t="IS A FINDING">IS A FINDING</div>
+<section class="stk s-glitch" id="s07-the-map-beneath-the-map">
+  <div class="code">XV &middot; ACTIVE GLOBAL CONFLICTS</div>
+  <div class="g g1" data-t="THE MAP">THE MAP</div>
+  <div class="g g2" data-t="BENEATH">BENEATH</div>
+  <div class="g g3" data-t="THE MAP">THE MAP</div>
   <div class="scan"></div>
   <div class="url www">www.b<span class="o">0</span>b.dev</div>
   <div class="qrwrap"><i class="c1"></i><i class="c2"></i><div class="qr"><!--QR--></div></div>
@@ -354,15 +346,16 @@ body{display:flex;flex-wrap:wrap;gap:.6in;padding:.6in;width:17in;align-items:fl
 </section>
 
 <!-- 09 -->
-<section class="stk s-neon" id="s09-timelines-are-not-chains">
+<section class="stk s-neon" id="s09-weighed-and-found-wanting">
   <div class="tube"></div>
-  <div class="sign"><span class="w3">WWW.</span><span class="main">B<span class="o z">0</span>B.DEV</span></div>
-  <div class="tag">TIMELINES ARE NOT CHAINS</div>
+  <div class="tag">TEKEL &middot; DANIEL 5:27</div>
+  <div class="sign"><span>WEIGHED</span> <span>AND FOUND</span> <span>WANTING</span></div>
+  <div class="url www">www.b<span class="o">0</span>b.dev</div>
   <div class="qr"><!--QR--></div>
 </section>
 
 <!-- 10 -->
-<section class="stk s-seal" id="s10-tiered-sourced-checkable">
+<section class="stk s-seal" id="s10-not-one-sparrow-is-forgotten">
   <svg class="ring" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <path id="arc-top" d="M42,150 A108,108 0 0,1 258,150"/>
@@ -372,35 +365,36 @@ body{display:flex;flex-wrap:wrap;gap:.6in;padding:.6in;width:17in;align-items:fl
     <circle cx="150" cy="150" r="143" fill="none" stroke="#0a0a0a" stroke-width="2.4"/>
     <circle cx="150" cy="150" r="92" fill="#0a0a0a"/>
     <circle cx="150" cy="150" r="86" fill="none" stroke="#00ff41" stroke-width="1.2" stroke-dasharray="2 4"/>
-    <text font-family="Unbounded" font-weight="900" font-size="23" fill="#0a0a0a" letter-spacing="2.2" text-anchor="middle">
-      <textPath href="#arc-top" startOffset="50%">TIERED &#x2022; SOURCED</textPath>
+    <text font-family="Unbounded" font-weight="900" font-size="21" fill="#0a0a0a" letter-spacing="2.2" text-anchor="middle">
+      <textPath href="#arc-top" startOffset="50%">NOT ONE SPARROW</textPath>
     </text>
-    <text font-family="Unbounded" font-weight="900" font-size="23" fill="#0a0a0a" letter-spacing="3.2" text-anchor="middle">
-      <textPath href="#arc-bot" startOffset="50%">CHECKABLE</textPath>
+    <text font-family="Unbounded" font-weight="900" font-size="21" fill="#0a0a0a" letter-spacing="3.2" text-anchor="middle">
+      <textPath href="#arc-bot" startOffset="50%">IS FORGOTTEN</textPath>
     </text>
     <circle cx="33" cy="150" r="5" fill="#0a0a0a"/>
     <circle cx="267" cy="150" r="5" fill="#0a0a0a"/>
   </svg>
   <div class="qr"><!--QRLOGO--></div>
   <div class="url www">www.b<span class="o">0</span>b.dev</div>
+  <div class="ref">LUKE 12:6</div>
 </section>
 
 <!-- 11 -->
-<section class="stk s-haz" id="s11-no-document-no-claim">
+<section class="stk s-haz" id="s11-the-emergency-did-not-end">
   <div class="stripes"></div>
   <div class="mid">
     <div class="qr in"><!--QR--></div>
-    <div class="txt">No document,<br>no claim.</div>
+    <div class="txt">The emergency<br>did not end.</div>
   </div>
-  <div class="bot"><span class="url"><svg viewBox="0 0 100 90" aria-hidden="true"><path d="M50 6 L95 84 Q96 87 92 87 H8 Q4 87 5 84 Z" fill="#ffcc00" stroke="#ffcc00" stroke-width="6" stroke-linejoin="round"/><rect x="45" y="30" width="10" height="32" rx="4" fill="#0a0a0a"/><circle cx="50" cy="73" r="6" fill="#0a0a0a"/></svg><span class="www">www.b<span class="o">0</span>b.dev</span></span><small>PROMOTED ONLY BY PAPER</small></div>
+  <div class="bot"><span class="url"><svg viewBox="0 0 100 90" aria-hidden="true"><path d="M50 6 L95 84 Q96 87 92 87 H8 Q4 87 5 84 Z" fill="#ffcc00" stroke="#ffcc00" stroke-width="6" stroke-linejoin="round"/><rect x="45" y="30" width="10" height="32" rx="4" fill="#0a0a0a"/><circle cx="50" cy="73" r="6" fill="#0a0a0a"/></svg><span class="www">www.b<span class="o">0</span>b.dev</span></span><small>PROCLAMATION 7463 &middot; 14 SEPT 2001</small></div>
 </section>
 
 <!-- 12 -->
-<section class="stk s-tag" id="s12-every-claim-carries-a-tier">
+<section class="stk s-tag" id="s12-the-ledger-is-already-kept">
   <div class="hole"></div>
   <div class="head"><span>EXHIBIT</span><small>CHAIN OF CUSTODY</small></div>
   <div class="bar">*B0B.DEV*</div>
-  <div class="cap">EVERY CLAIM CARRIES A TIER</div>
+  <div class="cap">THE LEDGER IS<br>ALREADY KEPT.</div>
   <div class="qr"><!--QR--></div>
   <div class="url www">www.b<span class="o">0</span>b.dev</div>
 </section>
