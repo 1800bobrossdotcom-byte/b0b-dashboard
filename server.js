@@ -381,6 +381,7 @@ const CANONICAL_PATHS = [
   '/tones/healing', '/tones/protective', '/tones/instrument', '/tones/shield',
   '/tones/multipack', '/tones/shield/guide', '/ai-attack-vector-analysis',
   '/darpa-cia-lockheed', '/start', '/retractions', '/about', '/map/list', '/stickers',
+  '/announcement',
 ];
 
 app.get('/sitemap.xml', (req, res) => {
@@ -437,6 +438,7 @@ const PAGES = {
   '/about':         'about.html',
   '/map/list':      'map-list.html',
   '/stickers':      'stickers.html', // 10 Oct 2026: the sticker set and its print files
+  '/announcement':  'announcement.html', // 11 Oct 2026: the public announcement and its audio
 };
 
 // Alias -> canonical, as 301s. These used to be duplicate 200s (both forms in

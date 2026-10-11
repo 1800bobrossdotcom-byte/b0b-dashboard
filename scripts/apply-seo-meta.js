@@ -47,6 +47,7 @@ const URLS = {
   'about.html': '/about',
   'map-list.html': '/map/list',
   'stickers.html': '/stickers',
+  'announcement.html': '/announcement',
 };
 
 // The one honest timestamp on Vercel (see server.js siteUpdatedString).

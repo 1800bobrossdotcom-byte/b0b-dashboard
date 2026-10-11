@@ -1,0 +1,11 @@
+.venv/
+voice
+voice/
+ffmpeg
+ffprobe
+ffmpeg-dl/
+work
+work/
+out
+out/
+__pycache__/

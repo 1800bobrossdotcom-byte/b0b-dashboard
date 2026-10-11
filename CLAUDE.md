@@ -185,6 +185,38 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**PUBLIC ANNOUNCEMENT AT `/announcement` — 11 Oct 2026, live. `design/announcement/` (README has everything).**
+
+*How the brief evolved:*
+- Opened as *"hanoi hannah style audio clip … to play outside when protesting"*.
+- Then *"a public service protest announcement [rather] than disparaging and humiliation"*.
+- Then *"needs to be clear and direct"*, playable alone.
+- He chose *"Own page, /announcement"*.
+- Then *"more talking about what the report is about and reaching out more effectively"*.
+
+**What is live:**
+- **A 4:09 spoken pass in Piper `en_GB-cori-high`**, the films' narrator (LibriVox, public domain). It covers: who it is from (a private citizen, not government, not police); what the report is; the five grades; **the conclusion at its tier, in the masthead's wording** (functioned as deniable assets; a judgment, not a document; no claim either was run by a handler; the film carries the same, by his "Both, at their tiers"); the record is deliberately dark; what you can do (read, choose one claim, send corrections, tell one person); a short address to anyone who serves; and the address `b0b.dev` three times.
+- **The files:** a loop MP3 (3.8 MB) and a 62-minute MP3 (28.4 MB).
+- **The page:** player, downloads, the words, and how it was made.
+- **Links:** the `/start`-family nav and `/home` only, as with the stickers.
+
+**Keep in any edit:** "This message does not ask you to disobey legal orders… desert, sabotage, obstruct, or leak." 18 U.S.C. § 2387 makes urging insubordination or refusal of duty in the armed forces a crime. The page also tells listeners to check local amplified-sound rules.
+
+**Tested by machine listener** (`check_clarity.py`: Whisper `base.en`; clean plus four street recordings at 6 and 3 dB SNR; loop context). **It caught a reversal on the most sensitive line:** "The report *never* claims…" was heard as "*now* claims", every time. "Nothing here asks…" lost "Nothing". Fixes and the check that came from them:
+- Negations now sit mid-sentence ("makes no claim", "does not ask").
+- The test fails any critical sentence heard without its negation, and was proven both ways.
+- In the final run no negation was lost, and about 96% of words were right in noise.
+
+*Traps:*
+- "lawful" was heard as "law for", so the lines say "legal".
+- **espeak says "GHIS-layn"**; the voice gets `[[ɡiːlˈeɪn]]` via `PRONOUNCE`.
+- **Every Piper synthesis is a random take.** The cache is keyed by text, so the closing address reuses a verified line.
+- A soft final *v* was trimmed (fixed with a 120 ms tail).
+- Whisper invents words over trailing digital silence, so the test runs in loop context.
+- **SendUserFile caps at 30 MiB**, so the hour file is 64 kbps.
+
+The toolchain is not in the repo (venv, the 114 MB model, static ffmpeg); the README has the setup. **Not in the report's menus: his call.**
+
 **STICKER LINES REWRITTEN FROM THE REPORT ITSELF — 10 Oct 2026, live at `/stickers`. Supersedes the attractors in the two sticker entries below.** Author: *"I don't think these slogans match the depth and weight of the actual report."* He was right: the first set was method jargon and internet register ("sources or it didn't happen"). **Every line is now the report's own sentence or a cut of it, and the README quotes each source sentence:**
 - 01 NO HANDS OF ITS OWN (`$ whoami`; "To those inside");
 - 02 THE RECORD IS DELIBERATELY DARK (masthead; set between redaction bars);
