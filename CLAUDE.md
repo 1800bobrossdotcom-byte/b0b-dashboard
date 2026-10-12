@@ -185,6 +185,17 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**JFK / KHRUSHCHEV / "UFO FILES" / MJ-12 NOTE — tested 12 Oct 2026, NOT PUBLISHED. `research/JFK-NSAM271-UFO-MEMO.md`.** The author pasted a viral post with no instruction. The page had none of it before (NSAM 271, Khrushchev, Lancer, burned memo: 0).
+- **Documented:** NSAM 271, 12 Nov 1963 (FRUS 1961–63 XXV, doc. 410, read in full). JFK orders NASA to *develop proposals* "with a view to their possible discussion with the Soviet Union". **It records no agreement and says nothing about UFOs.** Also documented: the 20 Sept 1963 UN offer of a joint Moon expedition.
+- **Attributed:**
+  - Sergei Khrushchev (1997): his father had decided to accept. A son's recollection, with no Soviet document.
+  - The JFK→CIA "UFO files" memo. It comes from one author's book; he says he got it by FOIA. The JFK Library found "no evidence of this memo or anything like it".
+- **Unsupported:** "Angleton has MJ-12 directive". Its only trail is the anonymous 1999 "burned memo" package (Cooper / "Source-1"; undated, unsigned).
+- **Anti-map:** the post says "Not a theory. A timeline." and then asserts cause.
+- **Nulls:** JFK Library 403; FBI Vault 403; CIA reading room decoy.
+
+Offered to him as a XXIV test case; his call.
+
 **PUBLIC ANNOUNCEMENT AT `/announcement` — 11 Oct 2026, live. `design/announcement/` (README has everything).**
 
 *How the brief evolved:*
