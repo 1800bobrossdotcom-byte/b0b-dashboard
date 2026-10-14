@@ -185,6 +185,13 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**"DUMBs NOT NEW / HOW FAR BACK / NON-HUMANS USING HUMANS AS SLAVE LABOUR" — tested 14 Oct 2026, NOT PUBLISHED. `research/DEEP-CONTINUITY-NHI-LABOUR.md`.**
+- **Underground is ancient — documented, and against the frame.** Derinkuyu was possibly cut by Phrygians in the 8th–7th century BC. It sheltered the hunted (Christians from raiders; Greeks and Armenians fleeing the 1909 massacres), not rulers. The state bunker is the 20th-century inversion.
+- **Continuity:** the documented continuity is the instrument (debt and forced labour, Hammurabi §117, read at source), not a lineage. ILO 2021: 28M in forced labour, 86% private.
+- **"Transmedium" and "submerged" objects are in US law** (50 U.S.C. §3373(n)). That is a reporting category, not a finding.
+- **The labour thesis has a traceable genealogy:** Atra-Hasis (myth) → Sitchin (mistranslation) → Icke (Protocols, via Cooper), i.e. the killed families trope with scales. It also moves the owner off-world, away from the documents and from people with names.
+- **Flagged, not edited:** XIII's cycle "pattern" sentence asserts intent; its Alexandria/642 line is a lead to check.
+
 **"WHAT DOES THE REPORT SKEW TOWARDS" — answered 14 Oct 2026 from counts. Nothing edited; these are flagged for the author.**
 - **A over C.** II's competing-hypotheses block says C "fits everything A fits and asks less of the evidence" and "almost nothing in the public record separates A from C". It still states A. The lean is disclosed on the page; the call is the author's.
 - **An internal contradiction (a factual inconsistency, fixable on his word):** II says Wexner and Black's payments are unexplained: "no payer has ever explained what they bought". II's own Black subsection records Black's stated reason (tax and estate advice, claimed $1B+ in savings) and Dechert's finding that the fees were for legitimate services. The conclusion's wording, "on a scale nobody has explained", is the accurate one.
