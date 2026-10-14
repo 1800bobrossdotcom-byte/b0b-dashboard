@@ -185,6 +185,23 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**"WHAT DOES THE REPORT SKEW TOWARDS" — answered 14 Oct 2026 from counts. Nothing edited; these are flagged for the author.**
+- **A over C.** II's competing-hypotheses block says C "fits everything A fits and asks less of the evidence" and "almost nothing in the public record separates A from C". It still states A. The lean is disclosed on the page; the call is the author's.
+- **An internal contradiction (a factual inconsistency, fixable on his word):** II says Wexner and Black's payments are unexplained: "no payer has ever explained what they bought". II's own Black subsection records Black's stated reason (tax and estate advice, claimed $1B+ in savings) and Dechert's finding that the fees were for legitimate services. The conclusion's wording, "on a scale nobody has explained", is the accurate one.
+- **XIV's title, "The Unbroken Chain"**, is the anti-map phrasing the sticker set refused ("the chain was never broken").
+- Several section titles assert design at full strength where their bodies grade it lower (VII, X, XII, XIII "Evidence of…", IX "D.U.M.B.").
+- **The map:** 188 of 378 connection lines are T0/T1 (analogy or correlation); 153 are T3+.
+- **Clubs over money, still:** CFR 125, Trilateral 63, Bilderberg 42 against In-Q-Tel 6, Booz Allen 3, BlackRock 6, Vanguard 2.
+- **Mentions:** Trump 151, with his own II subsection. Against that: Clinton 29 with no subsection (his flights are tiered in XX), Obama 40, Bush 38, Biden 21. Mostly corpus volume and calendar. XX carries talking points from both sides.
+- **Intelligence services:** Mossad 52 / Israel 83 against KGB 7, FSB 6, GRU 4. The Soviet sponsor *was* scored in II and loses on a date.
+
+**JAY STRATTON "I HAVE SEEN NON-HUMAN BEINGS" (Fox News, book *Out of the Shadows*) — tested 14 Oct 2026, NOT PUBLISHED. `research/STRATTON-NHI.md`.** Page: Stratton 0.
+- **The claim is XVI Branch A, unchanged.** It is testimony tier: the statement is documented, the object is not. No document or material was presented.
+- **What differs from Grusch:** Grusch was secondhand by his own account; Stratton claims first-hand sight. That is stronger testimony of experience, but the tier is the same.
+- **It is not new.** He made the same claim in *The Age of Disclosure* (2025), and repetition on a book tour is accumulation.
+- **The "hidden hand" official is unnamed;** keep it that way.
+- **Null:** the Fox segment itself was not read.
+
 **JFK / KHRUSHCHEV / "UFO FILES" / MJ-12 NOTE — tested 12 Oct 2026, NOT PUBLISHED. `research/JFK-NSAM271-UFO-MEMO.md`.** The author pasted a viral post with no instruction. The page had none of it before (NSAM 271, Khrushchev, Lancer, burned memo: 0).
 - **Documented:** NSAM 271, 12 Nov 1963 (FRUS 1961–63 XXV, doc. 410, read in full). JFK orders NASA to *develop proposals* "with a view to their possible discussion with the Soviet Union". **It records no agreement and says nothing about UFOs.** Also documented: the 20 Sept 1963 UN offer of a joint Moon expedition.
 - **Attributed:**
