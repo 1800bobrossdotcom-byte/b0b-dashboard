@@ -258,7 +258,7 @@ Offered to him as a XXIV test case; his call.
 - Whisper invents words over trailing digital silence, so the test runs in loop context.
 - **SendUserFile caps at 30 MiB**, so the hour file is 64 kbps.
 
-The toolchain is not in the repo (venv, the 114 MB model, static ffmpeg); the README has the setup. **Not in the report's menus: his call.**
+The toolchain is not in the repo (venv, the 114 MB model, static ffmpeg); the README has the setup. **In the report's menus since 18 Oct 2026, at his instruction ("put that on homepage too / menu i mean"): a cyan ANNOUNCEMENT link after ABOUT in the top nav, and "▶ ANNOUNCEMENT" after the films in the sidebar.** The stickers are still not in the report's menus.
 
 **STICKER LINES REWRITTEN FROM THE REPORT ITSELF — 10 Oct 2026, live at `/stickers`. Supersedes the attractors in the two sticker entries below.** Author: *"I don't think these slogans match the depth and weight of the actual report."* He was right: the first set was method jargon and internet register ("sources or it didn't happen"). **Every line is now the report's own sentence or a cut of it, and the README quotes each source sentence:**
 - 01 NO HANDS OF ITS OWN (`$ whoami`; "To those inside");
