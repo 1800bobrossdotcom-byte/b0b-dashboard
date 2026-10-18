@@ -185,27 +185,24 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
-**ANNOUNCEMENT REWRITTEN HARDER — 18 Oct 2026, live at `/announcement`. Supersedes the "4:09 calm pass" in the PUBLIC ANNOUNCEMENT entry below.** Author: *"I want the annoucement more intense, it is too ...passive...very annoying to be honest. this needs impact"*. README has the detail.
-- **It opens on the record, not on a description of a report.** All in the report's own wording (II pattern five; the conclusion block):
-  - 1996: a woman (unnamed, like every survivor) reported both principals to the police and was sent on to the FBI; "nothing happened for a decade";
-  - 2007: the deal's immunity for co-conspirators "the government had not even named";
-  - a decade of access after the conviction;
-  - died in federal custody, 2019, awaiting trial — fact, not manner;
-  - Maxwell's twenty years;
-  - "deliberately dark", with the masthead's 200,000 pages. **That count will go stale; rebuild when it does.**
-- **What follows:** the conclusion at its tier, unchanged in substance; the grades; "What you do now" in imperatives; the servicemember block with its safety lines verbatim; and a close that quotes John 12:43 (the report's opening line) with no gloss.
-- **Sound:**
-  - normal pace (`LENGTH_SCALE` 1.0), tighter gaps;
-  - a low A-minor sting replaces the bell;
-  - a 72 bpm pulse at 110–330 Hz sits 21 dB under the voice;
-  - harder compression, about -13 LUFS, LRA 2.
-  - **Refused by design:** alert tones, sirens, and anything with a gunshot or blast transient (it plays in crowds).
-- **Pass 3:55.** Master: 29/29 key phrases in all five conditions, WER 4.1–5.4%. Published MP3: the same, except 27/29 at 3 dB noise with draw 2 (spellings only; meaning and negations intact).
-- *Traps:*
-  - the scorer stripped digits, so "1996" read as missing — years are now in `NUM`;
-  - at the faster pace base.en spells the name five ways, so any `gil-/guil-` spelling before "maxwell" is accepted, and `gis-` (the wrong sound) still fails;
-  - weak takes are re-rolled by deleting their `work/cache` entries.
-- **Not done:** another voice. Cori is the only clean-licence British female voice; a male voice (e.g. `en_US-ryan`) needs its licence read first.
+**ANNOUNCEMENT IS NOW SPOKEN WORD OVER A BEAT — 18 Oct 2026, live at `/announcement`. Third cut; supersedes the two below.**
+- **Why:** the author rejected the calm cut ("too passive") and then the harder rewrite: *"this reads like a boring advertisment for the report. people are not going to listen to this"*.
+- **Lesson: explaining the report (grades, "what the report is") is the advert. Tell the record and speak to the listener; name the site once, at the end.** README has the full map.
+- **Structure:**
+  - It opens cold on 1996: a young woman (unnamed) reports both principals to the police and is sent on to the FBI; "nothing happens. For ten years, nothing happens."
+  - Then 2007 ("cut a deal… grants immunity to people the government has not even named", OPR's "poor judgment", thirteen months on work release).
+  - Then the open door: the patronage line; JPMorgan "flags him, and keeps him" to 2013.
+  - Then 2019 (charged; dead in federal custody five weeks later, before any trial).
+  - Then the dark: 200,000 pages; New Mexico's stand-down, said as the state's claim.
+  - Then John 12:42 paraphrased and 12:43 quoted.
+  - Then the address to those inside, **safety lines verbatim**.
+  - Then the close, with the private-citizen line, ending "Nineteen ninety-six. Nothing happened. / Not this time." and looping back into the cold open.
+- **Left out on purpose:** the deniable-assets conclusion (it cannot be said at tier without three hedges), and the grades.
+- **Sound:** `music()` is an 84 bpm minor beat, synthesised. It drops out for the cold open, for four lines and under the address, and comes back on a low hit. Highpass 45 Hz, about -13 LUFS. No alert tones, sirens or lone cracks.
+- **3:30.**
+- **Listening test on the published MP3:** clean 30/32; street 32/32 and 32/32; loud 32/32 and 31/32. WER 2.2–3.7%, no negation lost. The misses are transcriber quirks on phrases heard elsewhere.
+- *Scorer traps fixed:* it deleted unknown numbers (`words()` now voices years); "onto" vs "on to"; the letter B written "be". **Whisper base.en skips repeated short phrases (the second address) in noise; that is the transcriber, not the audio.**
+- **Not done:** another voice (a male voice needs its licence read first).
 
 **NHI / SPACE FORCES AND TARTARIA / ANCIENT — two research passes, 18 Oct 2026, NOT PUBLISHED. `research/NEWS-2026-10-NHI-SPACE-AGENT-A.md`, `research/NEWS-2026-10-TARTARIA-ANCIENT-AGENT-B.md`.** Author: *"heavy disclosure reports of non-human intelligence and beings, possible connections to Tartaria (russia evidently releasing files?) underground cities, old advanced civilizations … newly forming space special forces groups"*.
 - **NHI, documented:**

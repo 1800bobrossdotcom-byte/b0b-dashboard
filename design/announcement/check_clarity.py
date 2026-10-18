@@ -32,15 +32,36 @@ SR = 16000
 NUM = {'0': 'zero', '4': 'four', '10': 'ten', '19': 'nineteen', '1034': 'ten thirty four', 'iv': 'four',
        '20': 'twenty', '1996': 'nineteen ninety six', '2007': 'two thousand and seven',
        '2019': 'two thousand and nineteen', '200000': 'two hundred thousand'}
-KEY = ['public announcement', 'private citizen', 'not from the police', 'still being kept dark',
-       'reported jeffrey epstein and ghislaine maxwell', 'nothing happened for a decade', 'immunity to co conspirators',
-       'died in federal custody', 'serving twenty years', 'deliberately dark', 'every line of it can be checked',
-       'its conclusion is this', 'functioned as deniable assets', 'it is not a document',
-       'makes no claim that either of them was run by a handler', 'every claim in the report carries a grade',
-       'choose one claim', 'send the correction', 'tell one person', 'obey legal orders',
-       'does not ask you to disobey legal orders', 'not ask you to desert', 'inspector general',
-       'section ten thirty four', 'do not send classified material', 'praise of men more than the praise of god',
-       'read honestly', 'b as in bravo zero the number b as in bravo', 'the report is online b zero b dot dev']
+KEY = ['nineteen ninety six', 'reports jeffrey epstein and ghislaine maxwell', 'sent on to the fbi',
+       'nothing happens', 'federal prosecutors cut a deal', 'grants immunity', 'has not even named', 'poor judgment',
+       'work release', 'registered sex offender', 'keep the door open', 'door stays open',
+       'charged with sex trafficking of minors', 'in federal custody', 'no cross examination',
+       'twenty years', 'withheld or redacted', 'stand down', 'praise of men more than the praise of god',
+       'no hands of its own', 'obey legal orders', 'does not ask you to disobey legal orders',
+       'not ask you to desert', 'inspector general', 'section ten thirty four', 'do not send classified material',
+       'say it out loud', 'b as in bravo zero the number b as in bravo', 'the report is on',
+       'private citizen', 'not from the police', 'not this time']
+
+
+ONES = 'zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen ' \
+       'seventeen eighteen nineteen'.split()
+TENS = 'zero ten twenty thirty forty fifty sixty seventy eighty ninety'.split()
+
+
+def words(d):
+    """Digits as the voice says them: years the British way, everything else plainly. The scorer used to
+    delete any number it had no entry for, so "until 2013" read as a missing phrase."""
+    if d in NUM:
+        return NUM[d]
+    n = int(d)
+    two = lambda k: ONES[k] if k < 20 else TENS[k // 10] + ('' if k % 10 == 0 else ' ' + ONES[k % 10])
+    if 1900 <= n <= 1999:
+        return 'nineteen ' + two(n % 100) if n % 100 else 'nineteen hundred'
+    if 2000 <= n <= 2099:
+        return 'two thousand' + ('' if n == 2000 else ' and ' + two(n % 100))
+    if n < 100:
+        return two(n)
+    return d
 
 
 def norm(s):
@@ -55,7 +76,7 @@ def norm(s):
     s = re.sub(r'\bgu?ill?[a-z]{0,6}\b(?= maxwell)', 'ghislaine', s)
     s = s.replace('.dev', ' dot dev ')
     s = re.sub(r'(\d),(\d)', r'\1\2', s)                             # 200,000 -> 200000
-    s = re.sub(r'(\d+)', lambda m: ' %s ' % NUM.get(m.group(1), m.group(1)), s)
+    s = re.sub(r'(\d+)', lambda m: ' %s ' % words(m.group(1)), s)
     s = re.sub(r'\bdouble[- ]?you\b|\bw\b', 'double u', s)
     s = s.replace('-', ' ')
     s = re.sub(r'\bd\W*e\W*v\b', 'dev', s)
@@ -64,13 +85,16 @@ def norm(s):
     s = re.sub(r'\bbe zero be\b', 'b zero b', s)    # the letter B, written as heard (after punctuation is gone)
     s = re.sub(r'\bdot deve\b', 'dot dev', s)
     s = re.sub(r'\bon ?line ?b\b', 'online b', s)
+    s = re.sub(r'\bg(h|u)?(ee|i)ll?[a-z]{0,6} maxwell\b', 'ghislaine maxwell', s)   # again, after punctuation is gone
+    s = re.sub(r'\bb(e)? has in bravo\b|\bbe as in bravo\b', 'b as in bravo', s)   # the letter, spelled as heard
+    s = s.replace('sent onto', 'sent on to')
     return s.replace('any one', 'anyone')
 
 
 # Lines where a lost negation would invert the meaning. Each must be heard with a negation in the few words
 # before it, every time it is heard at all.
 # Windows are tight on purpose, so a "no" from the sentence before ("...is no defence.") cannot stand in.
-NEGATED = [('either of them was run by a handler', 4), ('ask you to disobey legal orders', 2),
+NEGATED = [('ask you to disobey legal orders', 2),
            ('ask you to desert', 2), ('send classified material', 2), ('from the police', 3)]
 NEG = {'not', 'no', 'never', 'nothing', 'dont', 'doesnt', 'isnt'}
 
@@ -143,12 +167,12 @@ def main():
     for name, audio in conds:
         segs, _ = model.transcribe(audio, language='en', beam_size=5, condition_on_previous_text=False)
         hyp = norm(' '.join(s.text for s in segs))
-        cut = hyp.rfind(' this is a public announcement')          # the next pass begins: score this pass only
+        cut = hyp.rfind(' nineteen ninety six a young woman')     # the next pass begins: score this pass only
         scored = hyp[:cut] if cut > len(hyp) * 0.8 else hyp
         missing = [k for k in KEY if k not in hyp]
         missing += negations_lost(hyp)
-        if hyp.count('b zero b dot dev') < 3:
-            missing.append('the address heard three times (heard %d)' % hyp.count('b zero b dot dev'))
+        if hyp.count('b zero b dot dev') < 2:
+            missing.append('the address heard twice (heard %d)' % hyp.count('b zero b dot dev'))
         fails += len(missing)
         print('%-6s  word error rate %4.1f%%   key phrases heard %d/%d%s' % (
             name, 100 * wer(ref, scored), len(KEY) - len(missing), len(KEY),

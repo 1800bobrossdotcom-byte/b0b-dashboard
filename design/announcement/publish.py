@@ -71,9 +71,9 @@ def main():
 
     body = '''<p class="kicker">Public announcement</p>
 <h1>Public announcement</h1>
-<p class="lede">A four-minute announcement, hard and direct, built to cut through a street. It opens on the record itself, then says what the report is, what it concludes, how it grades every claim, and what you do now. Free to download and play.</p>
+<p class="lede">Three and a half minutes of spoken word over a beat. It opens cold on 1996 and runs the record to the files still withheld, speaks to anyone working inside the institutions, and ends where it began. Free to download and play on repeat.</p>
 <div class="psa-player"><audio controls preload="none" src="/announcement/%s"></audio>
-<div class="cap">One pass &middot; %s &middot; a low sting opens each section</div></div>
+<div class="cap">One pass &middot; %s &middot; the beat drops out on the hard lines; the last line runs into the first</div></div>
 <div class="door">
 %s
 </div>
@@ -81,15 +81,15 @@ def main():
 <ul class="items">
 <li><b>Set the loop to repeat,</b> or play the hour file straight through. Each pass is complete on its own, so anyone walking past hears all of it within a few minutes.</li>
 <li><b>Check the local rules on amplified sound</b> before playing it in public. Many cities limit volume and hours, or require a permit.</li>
-<li><b>If you adapt the words, keep &ldquo;What this is not.&rdquo;</b> Federal law, 18 U.S.C. &sect; 2387, makes it a crime to urge members of the armed forces toward insubordination or refusal of duty. That section is what keeps the announcement clear of it.</li>
+<li><b>If you adapt the words, keep the lines to those inside:</b> &ldquo;This message does not ask you to disobey legal orders. It does not ask you to desert, to sabotage, to obstruct, or to leak.&rdquo; Federal law, 18 U.S.C. &sect; 2387, makes it a crime to urge members of the armed forces toward insubordination or refusal of duty. Those lines are what keep the announcement clear of it.</li>
 </ul>
 <h2>The words</h2>
 <div class="words">
 %s
 </div>
 <h2>How it was made</h2>
-<p>The voice is synthetic: Piper&rsquo;s <code>en_GB-cori-high</code>, a model trained on public-domain LibriVox recordings. The sting between sections and the low pulse under the voice are synthesised; nothing is sampled, and neither sounds like an alert tone, a siren or a blast. The address to anyone who serves is adapted from the report&rsquo;s own, <a href="/report#to-those-inside">To those inside</a>.</p>
-<p>Before publishing, a speech-recognition model transcribed one pass as rendered and through four simulated street recordings: a small speaker at a distance, with traffic noise six, then three, decibels below the voice. In noise it got about 95%% of the words right, and every sentence whose meaning rests on a negation (&ldquo;makes no claim&rdquo;, &ldquo;does not ask you to disobey legal orders&rdquo;, &ldquo;do not send classified material&rdquo;) was heard with the negation intact, every time.</p>''' % (meta[0][0], loop_dur, door, '\n'.join(words))
+<p>The voice is synthetic: Piper&rsquo;s <code>en_GB-cori-high</code>, a model trained on public-domain LibriVox recordings. The beat (kick, brushed snare, hats, bass and pad) is synthesised in the build script; nothing is sampled, and nothing in it is an alert tone, a siren or a lone sharp crack. Every fact in it is the report&rsquo;s own, and no survivor is named. The address to anyone who serves is adapted from the report&rsquo;s own, <a href="/report#to-those-inside">To those inside</a>.</p>
+<p>Before publishing, a speech-recognition model transcribed one pass as rendered and through four simulated street recordings: a small speaker at a distance, with traffic noise six, then three, decibels below the voice. In noise it got about 97%% of the words right, and every sentence whose meaning rests on a negation (&ldquo;does not ask you to disobey legal orders&rdquo;, &ldquo;do not send classified material&rdquo;, &ldquo;not from the police&rdquo;) was heard with the negation intact, every time.</p>''' % (meta[0][0], loop_dur, door, '\n'.join(words))
     body += ('\n<footer>b0b.dev &middot; read the record yourself: <a href="/report">the report</a> &middot; '
              '<a href="/start">read this first</a> &middot; <a href="/map">the map</a>.</footer>')
     out = sp.page('b0b.dev public announcement', body).replace('  </style>', CSS + '  </style>', 1)
