@@ -189,18 +189,23 @@ than once.
 - **Why:** the author rejected the calm cut ("too passive") and then the harder rewrite: *"this reads like a boring advertisment for the report. people are not going to listen to this"*.
 - **Lesson: explaining the report (grades, "what the report is") is the advert. Tell the record and speak to the listener; name the site once, at the end.** README has the full map.
 - **Structure:**
-  - It opens cold on 1996: a young woman (unnamed) reports both principals to the police and is sent on to the FBI; "nothing happens. For ten years, nothing happens."
+  - **It opens cold in 1976, not 1996** — the author's correction: *"1996 is inaccurate - our report charts epstein and maxwell to the 80s"*. He was right: 1996 is only the first police report.
+    - 1976: Bear Stearns' Fidelifacts check (documented). This is the refrain "Written down. Filed. And nothing changed.", from the report's "commissioned, written down, filed, and did not change the decision".
+    - 1985: London, his brother's email (documented).
+    - Late 1980s: Ghislaine Maxwell's circle, "a television investigation says" (attributed). Never "documentary", which misheard as "document" would upgrade the tier.
+    - 1996: the police report and the FBI referral, then ten years of nothing.
   - Then 2007 ("cut a deal… grants immunity to people the government has not even named", OPR's "poor judgment", thirteen months on work release).
   - Then the open door: the patronage line; JPMorgan "flags him, and keeps him" to 2013.
   - Then 2019 (charged; dead in federal custody five weeks later, before any trial).
   - Then the dark: 200,000 pages; New Mexico's stand-down, said as the state's claim.
   - Then John 12:42 paraphrased and 12:43 quoted.
   - Then the address to those inside, **safety lines verbatim**.
-  - Then the close, with the private-citizen line, ending "Nineteen ninety-six. Nothing happened. / Not this time." and looping back into the cold open.
+  - Then the close, with the private-citizen line, ending "Nineteen seventy-six. Nineteen ninety-six. Two thousand and seven. Written down. Filed. Nothing changed. / Not this time." and looping back into 1976.
 - **Left out on purpose:** the deniable-assets conclusion (it cannot be said at tier without three hedges), and the grades.
 - **Sound:** `music()` is an 84 bpm minor beat, synthesised. It drops out for the cold open, for four lines and under the address, and comes back on a low hit. Highpass 45 Hz, about -13 LUFS. No alert tones, sirens or lone cracks.
-- **3:30.**
-- **Listening test on the published MP3:** clean 30/32; street 32/32 and 32/32; loud 32/32 and 31/32. WER 2.2–3.7%, no negation lost. The misses are transcriber quirks on phrases heard elsewhere.
+- **4:13.**
+- **Listening test on the published MP3:** 43/43 in four conditions and 42/43 in one; WER 1.8–3.3%, no negation lost.
+- **Pronunciation fixes:** espeak says "steerns", so the firm is spelled "Bear Sterns" with commas for the voice.
 - *Scorer traps fixed:* it deleted unknown numbers (`words()` now voices years); "onto" vs "on to"; the letter B written "be". **Whisper base.en skips repeated short phrases (the second address) in noise; that is the transcriber, not the audio.**
 - **Not done:** another voice (a male voice needs its licence read first).
 

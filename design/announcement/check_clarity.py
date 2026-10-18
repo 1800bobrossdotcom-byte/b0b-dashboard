@@ -32,8 +32,10 @@ SR = 16000
 NUM = {'0': 'zero', '4': 'four', '10': 'ten', '19': 'nineteen', '1034': 'ten thirty four', 'iv': 'four',
        '20': 'twenty', '1996': 'nineteen ninety six', '2007': 'two thousand and seven',
        '2019': 'two thousand and nineteen', '200000': 'two hundred thousand'}
-KEY = ['nineteen ninety six', 'reports jeffrey epstein and ghislaine maxwell', 'sent on to the fbi',
-       'nothing happens', 'federal prosecutors cut a deal', 'grants immunity', 'has not even named', 'poor judgment',
+KEY = ['nineteen seventy six', 'bear stearns', 'no record of it', 'limited partner', 'written down filed',
+       'nineteen eighty five', 'television investigation', 'late eighties', 'ghislaine maxwells circle', 'media empire',
+       'nineteen ninety six', 'reports jeffrey epstein and ghislaine maxwell', 'sent on to the fbi',
+       'nothing happens', 'nothing changed', 'federal prosecutors cut a deal', 'grants immunity', 'has not even named', 'poor judgment',
        'work release', 'registered sex offender', 'keep the door open', 'door stays open',
        'charged with sex trafficking of minors', 'in federal custody', 'no cross examination',
        'twenty years', 'withheld or redacted', 'stand down', 'praise of men more than the praise of god',
@@ -76,6 +78,8 @@ def norm(s):
     s = re.sub(r'\bgu?ill?[a-z]{0,6}\b(?= maxwell)', 'ghislaine', s)
     s = s.replace('.dev', ' dot dev ')
     s = re.sub(r'(\d),(\d)', r'\1\2', s)                             # 200,000 -> 200000
+    s = re.sub(r"\b1980'?s\b", ' nineteen eighties ', s)
+    s = re.sub(r"\b80'?s\b", ' eighties ', s)
     s = re.sub(r'(\d+)', lambda m: ' %s ' % words(m.group(1)), s)
     s = re.sub(r'\bdouble[- ]?you\b|\bw\b', 'double u', s)
     s = s.replace('-', ' ')
@@ -85,9 +89,9 @@ def norm(s):
     s = re.sub(r'\bbe zero be\b', 'b zero b', s)    # the letter B, written as heard (after punctuation is gone)
     s = re.sub(r'\bdot deve\b', 'dot dev', s)
     s = re.sub(r'\bon ?line ?b\b', 'online b', s)
-    s = re.sub(r'\bg(h|u)?(ee|i)ll?[a-z]{0,6} maxwell\b', 'ghislaine maxwell', s)   # again, after punctuation is gone
+    s = re.sub(r'\bg(h|u)?(ee|i)ll?[a-z]{0,6} maxwell', 'ghislaine maxwell', s)   # again, after punctuation is gone
     s = re.sub(r'\bb(e)? has in bravo\b|\bbe as in bravo\b', 'b as in bravo', s)   # the letter, spelled as heard
-    s = s.replace('sent onto', 'sent on to')
+    s = s.replace('sent onto', 'sent on to').replace('bear stearns', 'bear stearns').replace('bear sterns', 'bear stearns')
     return s.replace('any one', 'anyone')
 
 
@@ -167,7 +171,7 @@ def main():
     for name, audio in conds:
         segs, _ = model.transcribe(audio, language='en', beam_size=5, condition_on_previous_text=False)
         hyp = norm(' '.join(s.text for s in segs))
-        cut = hyp.rfind(' nineteen ninety six a young woman')     # the next pass begins: score this pass only
+        cut = hyp.rfind(' nineteen seventy six')                  # the next pass begins: score this pass only
         scored = hyp[:cut] if cut > len(hyp) * 0.8 else hyp
         missing = [k for k in KEY if k not in hyp]
         missing += negations_lost(hyp)

@@ -49,15 +49,29 @@ SITE_SPELLED = ('Spelled out. B as in bravo. Zero, the number. B as in bravo.',
 # "To those inside", the close). Keep "This message does not ask you to..." in any edit: see README.
 # Put every safety-critical negation mid-sentence: at the start of a sentence it is the first thing
 # noise erases ("never claims" was heard as "now claims"; "Nothing here asks" lost "Nothing").
-# Spoken word, not an advert. It opens cold on the record, a beat comes in, and the beat drops out for the
+# Spoken word, not an advert. It opens cold on the record from 1976 (the report's chronology starts there,
+# not at the 1996 police report, which is only the first time the conduct reached an institution), a beat comes in, and the beat drops out for the
 # lines that have to land. Every fact is the report's own (II, pattern five and the conclusion block; II on
 # JPMorgan; the New Mexico suit, attributed to the state as the report does). No survivor is named.
 SECTIONS = [
-    ('Nineteen ninety-six', [
+    ('Written down, filed', [
+        'Nineteen seventy-six.',
+        ('The Wall Street firm Bear Stearns checks his job application. He has written down a lecturing post at '
+         'Berkeley. Its investigators find no record of it.',
+         # spelled for the voice, with commas: espeak says "steerns", and "Bear Stearns" alone runs into "best earns"
+         'The Wall Street firm, Bear Sterns, checks his job application. He has written down a lecturing post at '
+         'Berkeley. Its investigators find no record of it.'),
+        'The firm keeps him, and makes him a limited partner.',
+        'Written down. Filed. And nothing changed.',
+        'The nineteen eighties. London. His own brother puts him there, in nineteen eighty-five.',
+        # attributed, as the report holds it (Epstein's Shadow, 2021). Not "documentary": misheard as "document"
+        # it would upgrade the tier
+        "A television investigation says that by the late eighties, he is in Ghislaine Maxwell's circle, while "
+        'her father runs a media empire.',
         'Nineteen ninety-six.',
         'A young woman goes to the police in New York. She reports Jeffrey Epstein and Ghislaine Maxwell.',
         'She is sent on to the FBI.',
-        'And nothing happens. For ten years, nothing happens.',
+        'Written down. Filed. And for ten years, nothing happens.',
     ]),
     ('The deal', [
         'Two thousand and seven.',
@@ -108,12 +122,12 @@ SECTIONS = [
         SITE,  # the same line as above, reused from the cache: that take is verified, a fresh one may not be
         'This has been a public announcement, from a private citizen. It is not from the government, and it '
         'is not from the police.',
-        'Nineteen ninety-six. Nothing happened.',
+        'Nineteen seventy-six. Nineteen ninety-six. Two thousand and seven. Written down. Filed. Nothing changed.',
         'Not this time.',
     ]),
 ]
 
-COLD = {'Nineteen ninety-six'}          # sections with no music under them
+COLD = {'Written down, filed'}          # sections with no music under them
 DROP = {'The door stays open.', 'No trial. No testimony. No cross-examination.',
         'They loved the praise of men more than the praise of God.', 'Not this time.'}  # the beat cuts out
 QUIET = {SITE[0], SITE_SPELLED[0]}   # the beat stops under the address too (no hit): single letters are fragile

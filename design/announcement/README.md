@@ -1,7 +1,7 @@
 # Public announcement
 
 Spoken word over a synthesised beat, built to stand on its own and to stop people in a street. One pass is
-three and a half minutes, and its last line runs into its first. It is published at
+just over four minutes, and its last line runs into its first. It is published at
 **https://www.b0b.dev/announcement** as a loop for repeat play and as a file a little over an hour
 long.
 
@@ -28,8 +28,18 @@ Every fact is the report's own:
 
 No survivor is named, and the woman of 1996 is "a young woman".
 
-1. **Nineteen ninety-six** (cold, no music): reported to the police, sent on to the FBI, "nothing happens.
-   For ten years, nothing happens."
+1. **Written down, filed** (cold, no music). It opens in **1976, not 1996**: the author's correction, *"1996
+   is inaccurate - our report charts epstein and maxwell to the 80s"*. 1996 is only the first time the conduct
+   reached an institution.
+   - 1976, Bear Stearns' Fidelifacts check: no record of the Berkeley lectureship on his application, and he
+     was kept and made a limited partner. Documented. This is the refrain's source: "commissioned, written
+     down, filed, and did not change the decision". The firm name is spelled "Sterns" with commas for the
+     voice, which otherwise says "steerns" or runs it into "best earns".
+   - 1985, London, on his brother's own words. Documented.
+   - Late 1980s, Ghislaine Maxwell's circle, "a television investigation says". Attributed. The word
+     "documentary" is avoided on purpose: misheard as "document", it would upgrade the tier.
+   - 1996: the police report, sent on to the FBI, then "Written down. Filed. And for ten years, nothing
+     happens."
 2. **The deal:** 2007, "cut a deal… grants immunity to people the government has not even named"; OPR's
    "poor judgment"; thirteen months on work release.
 3. **The open door:** ten years on the registry; the door kept open; JPMorgan flags him and keeps him.
@@ -120,17 +130,11 @@ faults. These were real, and changed the script:
   sentence works. A soft final *v* was being trimmed, so line ends keep a 120 ms tail.
 - Short words after a pause vanish in noise ("Pick" → gone), so it says "Choose one claim".
 
-Result on the third cut's published MP3 (18 Oct):
-
-| Condition | Key phrases |
-|---|---|
-| Clean | 30/32 |
-| Street, both noise draws | 32/32 each |
-| Loud, first draw | 32/32 |
-| Loud, second draw | 31/32 |
-
-Word error was 2.2–3.7%, and no negation was lost. Every miss was a phrase heard correctly in the other
-conditions: "onto" for "on to" (now normalised), a skipped repeat of the address, and "Title X, Section 34".
+Result on the published MP3 after the 1976 opening (18 Oct):
+- 43/43 key phrases in four of the five conditions, and 42/43 in the fifth (street), which dropped "loud"
+  from "say it out loud".
+- Word error 1.8–3.3%.
+- No negation lost.
 
 The scorer was also fixed on this cut. It deleted any number it had no entry for, so "until 2013" read as a
 missing phrase. `words()` now says years the British way. At the faster pace base.en spells the name five

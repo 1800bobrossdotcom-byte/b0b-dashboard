@@ -71,7 +71,7 @@ def main():
 
     body = '''<p class="kicker">Public announcement</p>
 <h1>Public announcement</h1>
-<p class="lede">Three and a half minutes of spoken word over a beat. It opens cold on 1996 and runs the record to the files still withheld, speaks to anyone working inside the institutions, and ends where it began. Free to download and play on repeat.</p>
+<p class="lede">Four minutes of spoken word over a beat. It opens cold in 1976 and runs the record to the files still withheld, speaks to anyone working inside the institutions, and ends where it began. Free to download and play on repeat.</p>
 <div class="psa-player"><audio controls preload="none" src="/announcement/%s"></audio>
 <div class="cap">One pass &middot; %s &middot; the beat drops out on the hard lines; the last line runs into the first</div></div>
 <div class="door">
