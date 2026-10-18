@@ -29,14 +29,18 @@ SRC = sys.argv[1] if len(sys.argv) > 1 else os.path.join(b.OUT, 'psa-master.wav'
 WORK = os.path.join(HERE, 'work')
 SR = 16000
 
-NUM = {'0': 'zero', '4': 'four', '10': 'ten', '19': 'nineteen', '1034': 'ten thirty four', 'iv': 'four'}
-KEY = ['public announcement', 'private citizen', 'not from the police', 'every line of it can be checked',
-       'documented record of how institutions failed', 'epstein and ghislaine maxwell',
-       'every claim in the report carries a grade', 'its conclusion is this', 'functioned as deniable assets', 'it is not a document',
-       'makes no claim that either of them was run by a handler', 'deliberately dark', 'choose one claim', 'send the correction',
-       'tell one person', 'obey legal orders', 'does not ask you to disobey legal orders', 'not ask you to desert',
-       'inspector general', 'section ten thirty four', 'do not send classified material', 'read honestly',
-       'b as in bravo zero the number b as in bravo', 'the report is online b zero b dot dev']
+NUM = {'0': 'zero', '4': 'four', '10': 'ten', '19': 'nineteen', '1034': 'ten thirty four', 'iv': 'four',
+       '20': 'twenty', '1996': 'nineteen ninety six', '2007': 'two thousand and seven',
+       '2019': 'two thousand and nineteen', '200000': 'two hundred thousand'}
+KEY = ['public announcement', 'private citizen', 'not from the police', 'still being kept dark',
+       'reported jeffrey epstein and ghislaine maxwell', 'nothing happened for a decade', 'immunity to co conspirators',
+       'died in federal custody', 'serving twenty years', 'deliberately dark', 'every line of it can be checked',
+       'its conclusion is this', 'functioned as deniable assets', 'it is not a document',
+       'makes no claim that either of them was run by a handler', 'every claim in the report carries a grade',
+       'choose one claim', 'send the correction', 'tell one person', 'obey legal orders',
+       'does not ask you to disobey legal orders', 'not ask you to desert', 'inspector general',
+       'section ten thirty four', 'do not send classified material', 'praise of men more than the praise of god',
+       'read honestly', 'b as in bravo zero the number b as in bravo', 'the report is online b zero b dot dev']
 
 
 def norm(s):
@@ -46,7 +50,11 @@ def norm(s):
     s = re.sub(r'\b(jeffery|geoffrey)\b', 'jeffrey', s)
     # ghee-LAYN written phonetically counts; the wrong sound ("gisley", "gisling") does not
     s = re.sub(r'\bg(h)?(ee|i)ll?(e|a|ei|ea|ai|ey|ay)?(a|i)?(n|ne)?\b(?= maxwell)', 'ghislaine', s)
+    # at the faster pace base.en spells the same sound five ways (guilleen, guillain, gileigh, guillelle...);
+    # any gil-/guil- spelling before maxwell is the right sound, the gis- spellings are the wrong one
+    s = re.sub(r'\bgu?ill?[a-z]{0,6}\b(?= maxwell)', 'ghislaine', s)
     s = s.replace('.dev', ' dot dev ')
+    s = re.sub(r'(\d),(\d)', r'\1\2', s)                             # 200,000 -> 200000
     s = re.sub(r'(\d+)', lambda m: ' %s ' % NUM.get(m.group(1), m.group(1)), s)
     s = re.sub(r'\bdouble[- ]?you\b|\bw\b', 'double u', s)
     s = s.replace('-', ' ')

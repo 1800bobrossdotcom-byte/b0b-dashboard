@@ -361,10 +361,10 @@
     {
       "file": "announcement.html",
       "title": "b0b.dev - public announcement",
-      "metaDescription": "A free public announcement on what the b0b.dev report is and what it found: one calm voice, made to play outdoors. A four-minute loop and an hour-long file.",
-      "ogDescription": "What the report is, how it grades every claim, what it concludes and what you can do - in one calm voice that carries outdoors. Free: a loop for repeat play and an hour-long file.",
+      "metaDescription": "A free public announcement on what the b0b.dev report documents and concludes, in one hard, direct voice made for the street. A four-minute loop and an hour file.",
+      "ogDescription": "The documented record, what the report concludes, how it grades every claim and what you do now - in one hard, direct voice built for the street. Free: a loop and an hour-long file.",
       "jsonldType": "WebPage",
-      "headline": "b0b.dev public announcement: one voice, clear and direct, built to play outdoors on repeat",
+      "headline": "b0b.dev public announcement: one voice, hard and direct, built to cut through a street on repeat",
       "topics": [
         "public announcement",
         "audio",

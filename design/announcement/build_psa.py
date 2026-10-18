@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
-"""Public announcement, looped. One calm voice, clear and direct, built to stand on its own.
+"""Public announcement, looped. One voice, hard and direct, built to stand on its own and to cut through a street.
 
   python3 build_psa.py            synthesise, master, and write out/
 Outputs:
-  out/psa-loop.mp3     one full pass (~4-5 min) - set any player to repeat
+  out/psa-loop.mp3     one full pass (~3 min) - set any player to repeat
   out/psa-60min.mp3    the same pass repeated to a little over an hour
   out/psa-master.wav   the mastered pass, lossless
   script.txt           the words, exactly as spoken
 
 Voice: Piper en_GB-cori-high (UK English, female). Its model card: trained on LibriVox
 recordings, public domain - so the audio carries no voice licence.
-The chime between sections is synthesised here; nothing is sampled.
+The sting between sections and the pulse under the voice are synthesised here; nothing is sampled.
+Neither is an alert tone, a siren, or anything that could be mistaken for a gunshot or a blast in a crowd.
 """
 import hashlib
 import json
@@ -28,12 +29,13 @@ MODEL = os.path.join(HERE, 'voice', 'en_GB-cori-high.onnx')
 OUT = os.path.join(HERE, 'out')
 WORK = os.path.join(HERE, 'work')
 
-LENGTH_SCALE = 1.12       # slower than default: deliberate, carries outdoors
-GAP_SENTENCE = 0.45       # between sentences inside one line
-GAP_LINE = 0.85           # between lines
-GAP_BEFORE_CHIME = 0.55
-GAP_AFTER_CHIME = 0.55
-TAIL = 3.5                # silence at the end of a pass, before it repeats
+LENGTH_SCALE = 1.0        # normal pace: urgent, still clear outdoors (the listening test decides)
+GAP_SENTENCE = 0.28       # between sentences inside one line
+GAP_LINE = 0.5            # between lines
+GAP_BEFORE_CHIME = 0.3
+GAP_AFTER_CHIME = 0.2
+TAIL = 2.0                # silence at the end of a pass, before it repeats
+BED_DB = -21              # the pulse under the voice, relative to the voice's speech level
 
 SITE = ('The report is online. b0b.dev.', 'The report is online. b, zero, b, dot dev.')
 SITE_SPELLED = ('Spelled out. B as in bravo. Zero, the number. B as in bravo.',
@@ -47,27 +49,26 @@ SITE_SPELLED = ('Spelled out. B as in bravo. Zero, the number. B as in bravo.',
 SECTIONS = [
     ('Who this is from', [
         'This is a public announcement.',
-        'It comes from a private citizen. It is not from any government, and it is not from the police.',
-        'It is about a report. The report is free, it is public, and every line of it can be checked.',
-        ('You can read it online. b0b.dev.', 'You can read it online. b, zero, b, dot dev.'),
+        'It comes from a private citizen. It is not from the government, and it is not from the police.',
+        'It is about crimes that institutions were told about, and a record that is still being kept dark.',
+    ]),
+    ('The record', [
+        'In nineteen ninety-six, a woman reported Jeffrey Epstein and Ghislaine Maxwell to the police, and was '
+        'sent on to the FBI. Nothing happened for a decade.',
+        'In two thousand and seven, federal prosecutors signed a deal. It gave immunity to co-conspirators the '
+        'government had not even named.',
+        'After a sex-offence conviction, he kept his access to the powerful for another ten years.',
+        'In two thousand and nineteen, he died in federal custody, awaiting trial.',
+        'Ghislaine Maxwell was convicted. She is serving twenty years.',
+        'And the record is deliberately dark. A review declared closed. Some two hundred thousand pages '
+        'withheld or redacted. Reports kept under seal.',
     ]),
     ('What the report is', [
-        'The report is a documented record of how institutions failed.',
-        'It begins with the network around Jeffrey Epstein and Ghislaine Maxwell, and with the institutions '
-        'that failed to stop it.',
-        'Then it asks a larger question: whether the pattern is older than any single government, company, '
-        'or family line.',
-        'It follows that question through surveillance, finance, forced labour, active wars, and what '
-        'declassified files reveal.',
-        'And it comes with a map of the places it documents.',
-    ]),
-    ('How it works', [
-        'Every claim in the report carries a grade.',
-        'Documented means it is on the record. Attributed means the person making the claim is named. '
-        'Labeled means it is a pattern or a hypothesis, and the report says so.',
-        'Where the record is disputed, it says contested. Where a claim has no support, it says unsupported.',
-        'Where the facts end, the report marks the boundary. It prints what it could not prove, and its '
-        'corrections are listed in public.',
+        'There is a report that puts that record in one place, with its sources named.',
+        'It is free. It is public. And every line of it can be checked.',
+        ('Read it online. b0b.dev.', 'Read it online. b, zero, b, dot dev.'),
+        'It starts with Epstein and Maxwell. Then it follows the money, the surveillance, the forced labour, '
+        'the wars, and the files that are still withheld.',
     ]),
     ('What it concludes', [
         'On one question, the report commits.',
@@ -76,36 +77,37 @@ SECTIONS = [
          # the comma keeps "functioned as" from being heard as "function does"
          'Its conclusion is this. Jeffrey Epstein and Ghislaine Maxwell functioned, as deniable assets: an '
          'intelligence-useful role, under civilian cover.'),
-        'That is a judgment on the balance of the documented record. It is not a document, and the report '
-        'says so.',
-        'The report makes no claim that either of them was run by a handler. And it shows you what would '
-        'lower its conclusion.',
+        'That is a judgment on the documented record. It is not a document, and the report says so.',
+        'It makes no claim that either of them was run by a handler. And it tells you what would bring its '
+        'conclusion down.',
     ]),
-    ('The record', [
-        'The record is deliberately dark.',
-        'A review declared closed. Pages withheld and redacted. Reports kept under seal.',
+    ('How it works', [
+        'Every claim in the report carries a grade. Documented. Attributed. Labeled. Contested. Unsupported.',
+        'It prints what it could not prove. It publishes its own corrections.',
+        'It asks you to check it, not to trust it.',
     ]),
-    ('What you can do', [
-        'Here is what you can do.',
-        'Read it. Choose one claim, and check its source.',
-        'If it is wrong, send the correction. That is the first thing the report asks for. Corrections are '
-        'worth more to it than agreement.',
-        'If it holds, tell one person.',
+    ('What you do now', [
+        'So here is what you do.',
+        'Read it. Choose one claim. Check its source.',
+        'If it is wrong, prove it, and send the correction.',
+        'If it holds, say so. Tell one person. Today.',
     ]),
     ('To anyone who serves', [
         'To anyone who serves. In uniform. In an agency. In law enforcement.',
         'What the report documents has no hands of its own. Every capability runs because trained people '
-        'operate it.',
+        'operate it. People like you.',
         'Your duty is to obey legal orders. Under military law, obeying a clearly illegal order is no defence.',
         'This message does not ask you to disobey legal orders. It does not ask you to desert, to sabotage, '
         'to obstruct, or to leak.',
-        'If you see wrongdoing, use the lawful channels: go to an Inspector General, or to a Member of Congress.',
+        'If you see wrongdoing, use the lawful channels: an Inspector General, or a Member of Congress.',
         'For service members, federal law forbids reprisal for that. Title ten of the United States Code, '
         'section ten thirty-four.',
         'Wherever you serve, there is an oversight route. Use it. And do not send classified material to anyone.',
     ]),
     ('Close', [
-        'The record already exists. The only open question is whether it is read honestly.',
+        'The report opens with a line from the Gospel of John. For they loved the praise of men more than the '
+        'praise of God.',
+        'The record already exists. The only question left is whether it is read honestly.',
         'This has been a public announcement, from a private citizen.',
         SITE,
         SITE_SPELLED,
@@ -145,19 +147,34 @@ def silence(sec, sr):
 
 
 def chime(sr):
-    """Two soft bell notes a fourth apart (E5 then A5). Original; not an alert tone, not a station mark."""
-    dur = 1.35
+    """The section sting: a low A-minor stab, fast attack, short decay, with a soft high tick on top.
+    Tonal on purpose - a documentary hit, not an alert tone (no 853/960 Hz pair, no sweep), and nothing
+    with the noise burst of a gunshot or a blast, which has no place in a crowd."""
+    dur = 1.1
     t = np.arange(int(dur * sr)) / sr
+    env = (1 - np.exp(-t / 0.006)) * np.exp(-t / 0.32)
     out = np.zeros_like(t)
-    for f0, start in ((659.25, 0.0), (880.0, 0.20)):
-        tt = t - start
-        on = tt >= 0
-        env = np.where(on, (1 - np.exp(-np.maximum(tt, 0) / 0.004)) * np.exp(-np.maximum(tt, 0) / 0.38), 0)
-        tone = (np.sin(2 * np.pi * f0 * tt) + 0.28 * np.sin(2 * np.pi * 2 * f0 * tt)
-                + 0.08 * np.sin(2 * np.pi * 3.01 * f0 * tt))
-        out += np.where(on, tone, 0) * env
+    for f0, amp in ((110.0, 1.0), (164.81, 0.55), (220.0, 0.7), (261.63, 0.35), (329.63, 0.25)):
+        out += amp * (np.sin(2 * np.pi * f0 * t) + 0.3 * np.sin(2 * np.pi * 2 * f0 * t))
+    out *= env
+    tick_env = np.exp(-t / 0.012)
+    out += 0.35 * np.sin(2 * np.pi * 1760.0 * t) * tick_env
     out /= np.max(np.abs(out))
-    return (out * 0.42).astype(np.float32)
+    return (out * 0.55).astype(np.float32)
+
+
+def bed(n, sr):
+    """A low pulse under the whole pass: an A2 tone shaped like a heartbeat at 72 per minute.
+    It sits at 110-330 Hz, under the speech band, and it is mixed well below the voice."""
+    t = np.arange(n) / sr
+    period = 60.0 / 72
+    ph = np.mod(t, period)
+    beat = np.exp(-ph / 0.09) + 0.6 * np.exp(-np.maximum(ph - 0.24, 0) / 0.09) * (ph >= 0.24)
+    tone = (np.sin(2 * np.pi * 110.0 * t) + 0.45 * np.sin(2 * np.pi * 220.0 * t)
+            + 0.15 * np.sin(2 * np.pi * 330.0 * t))
+    drone = 0.25 * (np.sin(2 * np.pi * 110.0 * t) + 0.5 * np.sin(2 * np.pi * 164.81 * t))
+    x = tone * beat + drone * (0.6 + 0.4 * np.sin(2 * np.pi * t / 7.0))
+    return (x / np.max(np.abs(x))).astype(np.float32)
 
 
 def synth_line(voice, text, cfg, sr_expect):
@@ -215,18 +232,24 @@ def main():
                 timeline.append(silence(GAP_LINE, sr))
             timeline.append(synth_line(voice, spoken(line), cfg, sr))
     timeline.append(silence(TAIL, sr))
-    raw = np.concatenate(timeline)
+    voice_track = np.concatenate(timeline)
+    frame = int(0.1 * sr)
+    rms = np.sqrt(np.mean(voice_track[:len(voice_track) // frame * frame].reshape(-1, frame) ** 2, axis=1))
+    speech = np.sqrt(np.mean(rms[rms > np.max(rms) * 0.1] ** 2))
+    pulse = bed(len(voice_track), sr)
+    pulse *= speech * 10 ** (BED_DB / 20) / np.sqrt(np.mean(pulse ** 2))
+    raw = voice_track + pulse
     raw_path = os.path.join(WORK, 'pass-raw.wav')
     write_wav(raw_path, raw / max(1e-9, np.max(np.abs(raw))) * 0.9, sr)
 
     # Mastering for a speaker outdoors: cut rumble and mud, lift presence, steady the level,
-    # then two-pass loudness normalisation to -14 LUFS with a -1.5 dBTP ceiling.
+    # then two-pass loudness normalisation to -12 LUFS with a -1.5 dBTP ceiling.
     shape = ('aresample=44100:resampler=soxr,highpass=f=110,'
-             'equalizer=f=250:t=q:w=1.0:g=-2,equalizer=f=3200:t=q:w=1.2:g=3,'
-             'acompressor=threshold=-22dB:ratio=3:attack=6:release=160:makeup=3')
-    meas = run(['-i', raw_path, '-af', shape + ',loudnorm=I=-14:TP=-1.5:LRA=7:print_format=json', '-f', 'null', '-'])
+             'equalizer=f=250:t=q:w=1.0:g=-2,equalizer=f=3200:t=q:w=1.2:g=4,'
+             'acompressor=threshold=-24dB:ratio=4:attack=4:release=120:makeup=4')
+    meas = run(['-i', raw_path, '-af', shape + ',loudnorm=I=-12:TP=-1.5:LRA=6:print_format=json', '-f', 'null', '-'])
     m = json.loads(meas[meas.rindex('{'):meas.rindex('}') + 1])
-    norm = ('loudnorm=I=-14:TP=-1.5:LRA=7:linear=true:measured_I=%s:measured_TP=%s:measured_LRA=%s:'
+    norm = ('loudnorm=I=-12:TP=-1.5:LRA=6:linear=true:measured_I=%s:measured_TP=%s:measured_LRA=%s:'
             'measured_thresh=%s:offset=%s' % (m['input_i'], m['input_tp'], m['input_lra'],
                                               m['input_thresh'], m['target_offset']))
     master = os.path.join(OUT, 'psa-master.wav')
@@ -242,7 +265,7 @@ def main():
         + [os.path.join(OUT, 'psa-60min.mp3')])
 
     with open(os.path.join(HERE, 'script.txt'), 'w', encoding='utf-8') as f:
-        f.write('PUBLIC ANNOUNCEMENT - the words, exactly as spoken (a chime opens each section)\n\n')
+        f.write('PUBLIC ANNOUNCEMENT - the words, exactly as spoken (a low sting opens each section)\n\n')
         for title, lines in SECTIONS:
             f.write('[%s]\n' % title.upper())
             for line in lines:
