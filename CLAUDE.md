@@ -185,6 +185,56 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**ANNOUNCEMENT REWRITTEN HARDER — 18 Oct 2026, live at `/announcement`. Supersedes the "4:09 calm pass" in the PUBLIC ANNOUNCEMENT entry below.** Author: *"I want the annoucement more intense, it is too ...passive...very annoying to be honest. this needs impact"*. README has the detail.
+- **It opens on the record, not on a description of a report.** All in the report's own wording (II pattern five; the conclusion block):
+  - 1996: a woman (unnamed, like every survivor) reported both principals to the police and was sent on to the FBI; "nothing happened for a decade";
+  - 2007: the deal's immunity for co-conspirators "the government had not even named";
+  - a decade of access after the conviction;
+  - died in federal custody, 2019, awaiting trial — fact, not manner;
+  - Maxwell's twenty years;
+  - "deliberately dark", with the masthead's 200,000 pages. **That count will go stale; rebuild when it does.**
+- **What follows:** the conclusion at its tier, unchanged in substance; the grades; "What you do now" in imperatives; the servicemember block with its safety lines verbatim; and a close that quotes John 12:43 (the report's opening line) with no gloss.
+- **Sound:**
+  - normal pace (`LENGTH_SCALE` 1.0), tighter gaps;
+  - a low A-minor sting replaces the bell;
+  - a 72 bpm pulse at 110–330 Hz sits 21 dB under the voice;
+  - harder compression, about -13 LUFS, LRA 2.
+  - **Refused by design:** alert tones, sirens, and anything with a gunshot or blast transient (it plays in crowds).
+- **Pass 3:55.** Master: 29/29 key phrases in all five conditions, WER 4.1–5.4%. Published MP3: the same, except 27/29 at 3 dB noise with draw 2 (spellings only; meaning and negations intact).
+- *Traps:*
+  - the scorer stripped digits, so "1996" read as missing — years are now in `NUM`;
+  - at the faster pace base.en spells the name five ways, so any `gil-/guil-` spelling before "maxwell" is accepted, and `gis-` (the wrong sound) still fails;
+  - weak takes are re-rolled by deleting their `work/cache` entries.
+- **Not done:** another voice. Cori is the only clean-licence British female voice; a male voice (e.g. `en_US-ryan`) needs its licence read first.
+
+**NHI / SPACE FORCES AND TARTARIA / ANCIENT — two research passes, 18 Oct 2026, NOT PUBLISHED. `research/NEWS-2026-10-NHI-SPACE-AGENT-A.md`, `research/NEWS-2026-10-TARTARIA-ANCIENT-AGENT-B.md`.** Author: *"heavy disclosure reports of non-human intelligence and beings, possible connections to Tartaria (russia evidently releasing files?) underground cities, old advanced civilizations … newly forming space special forces groups"*.
+- **NHI, documented:**
+  - DoW's 14 Sept waiver of NDA/SAPIA civil and administrative penalties, **for disclosures to PURSUE only** — not public disclosure, and the quoted text does not reach criminal law;
+  - the UAP Disclosure Act was adopted by the House only (Senate cloture failed 50–46 on 14 July);
+  - no seventh PURSUE release as of 18 Oct.
+- **NHI, testimony and attributed:**
+  - Stratton's Roswell "living beings" is secondhand from an unnamed insider (keep unnamed);
+  - "21 agencies reviewed the book" is his representative's claim, and review ≠ endorsement;
+  - Grusch on Rogan (30 Sept) is hearsay by his own account;
+  - no new official response to either.
+- **Space:**
+  - **SPACEFOR-SOC activated 7 Oct** (memo 29 Sept, ceremony 2 Nov). It is a component HQ, not "space special forces" — naming error. Its FY2026 funding block is unresolved.
+  - Army Space Operations Branch established, 600+ soldiers reclassified.
+  - UK No. III Space Effects Squadron announced 23 Sept ("disrupt, degrade and deny"), capabilities undisclosed.
+  - Japan's ASDF rename takes effect by Mar 2027.
+- **Tartaria — Russia released NOTHING:**
+  - "Putin declassified the Tartaria archives" names no archive, document or date. Earliest copies: a ~12 Oct 2025 Facebook post (Maldita) and an 18 Mar 2026 Substack note. The "Julian Assange" attribution is unsupported, and the text carries the bloodline/Rothschild trope — recorded as such.
+  - What Russia did: a 2017 Blaeu map gift to Shaimiev; Medinsky's "with humour"; the RGO in 2020 calling Tartaria "a mythologized land" and naming Levashov and Fomenko.
+  - **Britannica 1771 kills "erased from later editions"**: 77 words in 1771; 5,643 words in 1797. Russian and Chinese Tartary are named in the same edition.
+- **Ancient, new:**
+  - Remote Sensing retracted the Biondi–Malanga Great Pyramid radar paper on 10 Aug 2026; the Khafre "city" was never peer-reviewed.
+  - Karahantepe human-on-leopard sculpture, 25 Aug 2026.
+  - Hawara dig started May 2026; no results.
+- **THREE ERRORS ON OUR PAGE, flagged, NOT edited (fixable on his word):**
+  - (1) XIII says Göbekli Tepe was "deliberately buried … Why bury what you built?" The DAI excavators revised this in 2020 to slope slides (Clare, *e-Forschungsberichte* 2020/2), and the "astronomical alignments" are contested (DAI 2017).
+  - (2) XIII says the geological record "confirms" the Younger Dryas impact. It is contested: 2026 volcanic osmium; a platinum spike 45 years late; two PLOS One retractions in Feb 2026 and the Tall el-Hammam retraction in 2025.
+  - (3) XVI's Tremonton update prints Blue Book vs NPIC as the disagreement and omits the released file's own later seabird assessment (and the 1953 Robertson Panel). That is symmetry failing toward the anomalous reading; NPIC's "1954" date is also unverified.
+
 **THE REPORT LEADS WITH THREE VERSES — 18 Oct 2026, live.** Author: *"Lead with the report of John 12:43 and John 19:30, Along with Holy Holy Holy Is The Lord God Almighty, Who Was, And Is, And Is To Come - as the paper ends on this in many a way."*
 - **What is on the page:** `.report-epigraph`, directly under the title block and above the summary. It holds three `<blockquote>`s with no gloss: John 12:43; John 19:30, with τετέλεσται, its citation linking to `#xxiv-endgame` (the close); and Revelation 4:8.
 - **Text source:** KJV verbatim from the ledgered Gutenberg #10 via `scripts/kjv-verse.py`. That copy prints "LORD God Almighty" and "which was", so the page does too, not "Who was".
