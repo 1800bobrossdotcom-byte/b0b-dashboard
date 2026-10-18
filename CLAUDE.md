@@ -185,6 +185,14 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**THE REPORT LEADS WITH THREE VERSES — 18 Oct 2026, live.** Author: *"Lead with the report of John 12:43 and John 19:30, Along with Holy Holy Holy Is The Lord God Almighty, Who Was, And Is, And Is To Come - as the paper ends on this in many a way."*
+- **What is on the page:** `.report-epigraph`, directly under the title block and above the summary. It holds three `<blockquote>`s with no gloss: John 12:43; John 19:30, with τετέλεσται, its citation linking to `#xxiv-endgame` (the close); and Revelation 4:8.
+- **Text source:** KJV verbatim from the ledgered Gutenberg #10 via `scripts/kjv-verse.py`. That copy prints "LORD God Almighty" and "which was", so the page does too, not "Who was".
+- **Do not add exegesis.** It is his epigraph.
+- **Mechanics:** the blockquotes are read by the narrator (right after the title) and by search. No `<p>`, so the scale line is unchanged.
+- **Matthew 4:19 stays in the summary**, untouched.
+- *Trap:* in a fresh container the KJV cache is cold, and `kjv-verse.py` dies with FileNotFoundError until the spider re-fetches `pg10.txt`.
+
 **"DUMBs NOT NEW / HOW FAR BACK / NON-HUMANS USING HUMANS AS SLAVE LABOUR" — tested 14 Oct 2026, NOT PUBLISHED. `research/DEEP-CONTINUITY-NHI-LABOUR.md`.**
 - **Underground is ancient — documented, and against the frame.** Derinkuyu was possibly cut by Phrygians in the 8th–7th century BC. It sheltered the hunted (Christians from raiders; Greeks and Armenians fleeing the 1909 massacres), not rulers. The state bunker is the 20th-century inversion.
 - **Continuity:** the documented continuity is the instrument (debt and forced labour, Hammurabi §117, read at source), not a lineage. ILO 2021: 28M in forced labour, 86% private.
