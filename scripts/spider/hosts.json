@@ -73,5 +73,23 @@
       "Could not find the specified document"
     ],
     "why": "A document path that does not exist returns HTTP 200 with a 158-byte body reading 'Could not find the specified document' instead of a 404, so a mistyped opinion number enters the ledger as a success. Real opinions are PDFs of tens of kilobytes or more. Registered so the stub is a null (seen 2 Oct 2026 on 21-7135, Doe v. Apple)."
+  },
+  "2021-2025.state.gov": {
+    "decoy_titles": [
+      "Technical Difficulties"
+    ],
+    "why": "The archived State Department site answers document paths (seen on the May 2024 NSM-20 report PDF) with a 188,865-byte HTML page titled 'Technical Difficulties' and HTTP 200, so a missing document enters the ledger as a success. Registered so that page is a null (seen 19 Oct 2026). The current state.gov copy of the same PDF refused this crawler with 403."
+  },
+  "uscode.house.gov": {
+    "decoy_titles": [
+      "Page Not Found - US Code"
+    ],
+    "why": "A section path the site cannot resolve returns a 'Page Not Found - US Code' page with HTTP 200 instead of a 404. Real section pages carry the section number in the title ('22 USC 2776: ...'). Registered so the not-found page is a null (seen 19 Oct 2026). Cornell LII serves the same text."
+  },
+  "icc-cpi.int": {
+    "decoy_titles": [
+      "Gcore"
+    ],
+    "why": "Court-record HTML paths sometimes answer with the CDN's security-check page, title 'Gcore', HTTP 200, instead of the filing. That is a refusal, not a document, and it is never solved. The CourtRecords PDFs (sites/default/files/CourtRecords/...) serve directly. Registered so the check page is a null (seen 19 Oct 2026)."
   }
 }
