@@ -185,6 +185,64 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**THE LANDING NOW OPENS ON AN ANIMATED b0b.dev MARK, THEN THE AUTHOR'S FILM "OM COMMA" — 19 Oct 2026.**
+- **The author's instructions, in order:**
+  1. *"pull this video from my profile OMCOMMA and place this as the video on the website landing page - intro in with b0b.dev animated, and then have this video: x.com/omcomma/status/2110615223845499258"*
+  2. *"video is fine -art collage"*
+  3. *"you have to add video I cant"*
+  4. *"raw file on other computer"*
+  5. *"keep the video exactly as it is"*
+- **What a reader now sees on arrival at `/`:**
+  - `site/b0b-wordmark.js` plays the mark (~3.4 s):
+    - a cursor;
+    - "b0b.dev" typed in Plex Mono, green;
+    - the zero's slash drawn in cyan, as on the stickers;
+    - one scan sweep with a brief signal split;
+    - a CRT collapse to a point of light.
+  - `site/landing-intro.js` then plays **OM COMMA #1 then #2**, the post's two videos in its order, full screen.
+    - It starts **muted** with a "TAP FOR SOUND" control; tapping the picture also turns sound on.
+    - The label reads "OM COMMA · 1 / 2".
+    - **ENTER THE REPORT / Escape work from the first frame.** When the last video ends, the reader is in the report.
+- **Same loader rules as the intro film:**
+  - the bootstrap shows it once per session (`b0b:intro:seen`) and never on a deep link;
+  - fail-open at 8 s if the script never claims it;
+  - with reduced motion, the mark is still and the film waits on a PLAY button;
+  - missing videos fall straight through to the report.
+- **The old intro film is untouched.** It plays from the sidebar's ▶ INTRO FILM button and at `/intro`.
+- **Wiring:**
+  - `#b0b-landing` carries `data-videos="/omcomma-1,/omcomma-2"`. The bootstrap opens it instead of `#b0b-intro` whenever that attribute is present, so **removing the attribute restores the old arrival**.
+  - `landing-intro.js` sets `window.__b0bSoundtrackHeld`, which `soundtrack.js?v=4` reads at load, so the site music does not start under the film. Releasing on ENTER restores the old intro's behaviour.
+- **Source, recorded plainly:**
+  - X refuses the spider by robots on both the post and its oEmbed (ledgered nulls, as always).
+  - The author could not send the file: his raw file is on another computer.
+  - So **one user-directed download of his own post was made with yt-dlp at his instruction**. This was not the spider: no login, no cookies, no proxy. It is his media, not a cited source, and the source rule is unchanged.
+  - The two videos:
+    - #1: 4:15.85, sha256 `32bc48d1…`;
+    - #2: 2:51.53, sha256 `ea93315f…`;
+    - both 960×540, H.264/AAC (X's re-encode).
+  - `scripts/build-landing-film.py SRC1 SRC2` writes `site/omcomma-N.{mp4,webm}`:
+    - the MP4 is a stream copy with `+faststart`, **proven bit-identical by decoded-stream MD5**;
+    - the WebM is VP9/Opus, CQ capped at 650 kbps (uncapped VP9 came out larger than the source).
+  - **When the raw file arrives, re-run the script on it.** Nothing else changes.
+- **Content, reviewed frame by frame before shipping and adjudicated by the author:**
+  - **#1:**
+    - a mirrored DARPA logo is stamped over almost every shot of Trump;
+    - it includes the 1992 Mar-a-Lago footage with Epstein ("She's hot", 2:48), unidentified young women at parties (0:00, 0:36, 1:18, 1:42), his grandchildren (3:12), the IAC 2019 summit (2:12) and "DEEP STATE" (3:18);
+    - it ends on the Amharic "ተፈጽሟል ስራው ተጠናቀቀ", which I read as "it is finished; the work is completed" (my reading, not dictionary-checked; it echoes τετέλεσται).
+  - **#2:** a Trump collage with no Epstein footage and no DARPA mark; the grandchildren at 0:38; 11 s of black at the end.
+  - **Both** are mostly third-party news footage.
+  - **I flagged:**
+    - the films' own rule ("in a montage, juxtaposition is implication") on page one;
+    - the children's faces;
+    - rehosting third-party footage.
+  - I offered #2 with blurs, both with blurs, or a page of their own. **He chose: "keep the video exactly as it is."**
+  - Published unedited, with **no disclaimer on the page** (§2).
+  - *Correction to my own position, recorded:* I had said I would not ship the children unblurred "under any option". On a closer look they are his grandchildren in widely broadcast White House-lawn footage, nowhere near the party footage. The statement overreached, and his call stands.
+- *Traps:*
+  - **A `for p in /proc/*` kill loop that matches on command text also matches the shell running it** (exit 144). It is the pkill trap in another form: match the exact ffmpeg pid, or kill by pid you printed first.
+  - A Playwright route that fulfils media from disk sends no Range, so `seekable` is `[0,0]` and seeks silently fail. Route `/omcomma-*` to the real Express server in tests.
+  - A fresh container has no ffmpeg: `pip install imageio-ffmpeg` (has libx264/libvpx-vp9/libopus), and `pip install yt-dlp` only if the author again asks for his own media.
+
 **ISRAEL AND THE US SINCE 1960 — DRILL-DOWN, 19 Oct 2026, HELD for the author. `research/ISRAEL-US-DRILLDOWN.md` (synthesis) + four line files `ISRAEL-US-{A-CURRENT,B-1960-1989,C-1990-2026,D-LAW-SYMMETRY}.md`; publishable text in `research/drafts/xxiv-favorite-nation-v2.html` (three XXIV entries; supersedes the 25 Sept draft).** Author, with a screenshot of an X post: *"Run this data … how America is infiltrated by Israel - and not heeding the warning of influence of foreign powers … full drill down … going back to 1960 at least with the bombing of our ship. Trump just endorsed war criminal Netanyahu"*.
 - **The post ("Patel has formally agreed to work with Moskowitz to reform Section 230, which critics say will target Americans … who post 'conspiracy theories' about Israel"):** it is the 17 Sept 2025 House Judiciary exchange (Serial 119-35, read in full), recirculated with "formally" added.
   - Moskowitz named "Israel assassinated him" as one Kirk conspiracy theory; Patel: "I will work with you on 230 any day."

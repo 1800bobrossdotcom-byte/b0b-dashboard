@@ -181,7 +181,8 @@
   // without this the narrator-ducking below would restart the music in every
   // pause between her sentences. Releasing the hold does not restart anything
   // by itself; the film calls __b0bSoundtrackStart when the reader leaves it.
-  var held = false;
+  // landing-intro.js loads first and sets this while the author's film has the floor.
+  var held = !!window.__b0bSoundtrackHeld;
   window.__b0bSoundtrackHold = function (on) {
     held = !!on;
     if (held) { duckedByNarrator = false; if (playing) stop(); }

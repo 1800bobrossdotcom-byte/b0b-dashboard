@@ -481,7 +481,7 @@
   </style>
 <!-- intro film (site/intro.css, site/intro.js). The two inline rules paint the
      overlay's ground before the stylesheet lands. -->
-<style>#b0b-intro[hidden]{display:none!important}#b0b-intro{position:fixed;inset:0;z-index:2147483600;background:#050505}html.b0b-intro-lock{overflow:hidden}</style>
+<style>#b0b-intro[hidden],#b0b-landing[hidden]{display:none!important}#b0b-intro,#b0b-landing{position:fixed;inset:0;z-index:2147483600;background:#050505}html.b0b-intro-lock{overflow:hidden}</style>
 <link rel="stylesheet" href="/intro.css?v=4">
 </head>
 <body>
@@ -492,9 +492,15 @@
 <!-- The intro film. intro.js builds everything inside this element; the
      bootstrap below only decides whether it opens on arrival. -->
 <div id="b0b-intro" hidden data-mode="overlay" role="dialog" aria-modal="true" aria-label="b0b.dev intro film"><div class="bi-boot">b0b.dev</div></div>
+<!-- What opens on arrival since 19 Oct 2026 (site/landing-intro.js): the animated b0b.dev mark, then
+     the author's film OM COMMA #1 and #2, as posted. The intro film above still plays on request. -->
+<div id="b0b-landing" hidden data-videos="/omcomma-1,/omcomma-2" data-title="OM COMMA" role="dialog" aria-modal="true" aria-label="b0b.dev"></div>
 <script>
 (function(){
   var el=document.getElementById('b0b-intro'); if(!el) return;
+  // Arrival opens the landing film when there is one; the intro film stays for the replay button.
+  var land=document.getElementById('b0b-landing');
+  if(land && land.getAttribute('data-videos')) el=land;
   var show=true;
   // Once per session. A reader who has seen it is not shown it again - the
   // sidebar's INTRO FILM button replays it on request.
@@ -506,10 +512,11 @@
   try{ sessionStorage.setItem('b0b:intro:seen','1'); }catch(e){}
   el.hidden=false;
   document.documentElement.classList.add('b0b-intro-lock');
-  // FAIL OPEN. If intro.js has not taken the overlay over within 8 s - it did
-  // not load, or the page is so slow the reader should simply be reading -
-  // take the overlay away. Once intro.js has claimed it, it owns dismissal,
-  // so this can never cut off a film that is playing.
+  // FAIL OPEN. If its script (intro.js, or landing-intro.js for the landing
+  // film) has not taken the overlay over within 8 s - it did not load, or the
+  // page is so slow the reader should simply be reading - take the overlay
+  // away. Once claimed, the script owns dismissal, so this can never cut off a
+  // film that is playing.
   setTimeout(function(){
     if(el.dataset.claimed==='1') return;
     el.hidden=true;
@@ -6546,6 +6553,8 @@
 <script src="/intro-points.js?v=1" defer></script>
 <script src="/intro-reel.js?v=4" defer></script>
 <script src="/intro.js?v=8" defer></script>
+<script src="/b0b-wordmark.js?v=1" defer></script>
+<script src="/landing-intro.js?v=1" defer></script>
 <!-- Site soundtrack: Restless Leg Syndrome, "Represent The Fucking Planet" (Totem, 2021),
      played from the label's YouTube upload through youtube-nocookie; nothing is rehosted.
      The control mounts unconditionally and plays through a plain iframe, so it still works
@@ -6553,7 +6562,7 @@
      report true playback state. Autoplay is attempted, never promised - the browser's
      media-engagement policy has the last word on unmuted audio. Ducks for the narrator and
      remembers a stop. Discussed on the page as the ninth signal in Section XXV. -->
-<script src="/soundtrack.js?v=3" defer></script>
+<script src="/soundtrack.js?v=4" defer></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
