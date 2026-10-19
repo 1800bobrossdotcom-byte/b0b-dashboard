@@ -31,7 +31,7 @@ The following are named, because they are dead or because the record carries a c
 | 6 | Krytrons (Smyth/MILCO) | — | **Attributed only.** 1985 indictment (~800–810 units per press), 2001 plea (one AECA count + false statement; UPI: a 1982 shipment of 50), 40 months in 2002. Israel's "conventional research" position is attributed |
 | 7 | Kadish 1980–85 | DOJ: pleaded 30 Dec 2008 to **conspiracy to act as an unregistered agent of the Government of Israel**; fined **$50,000** on 29 May 2009 | — |
 | 8 | Iran-Contra 1985 | Walsh: **"Israel sent U.S.-supplied weapons to Iran on three occasions in 1985 … with U.S. approval, and, in one instance, with U.S. participation"**; 96 + 408 TOWs; 18 of 80 HAWKs | This is joint conduct the President approved. The legal violations Walsh found were by US officials |
-| 9 | Lavon affair, 1954 (pre-1960 context) | — | **Attributed.** An Israeli military-intelligence cell bombed "the American libraries in Cairo and Alexandria" (JVL); Israel decorated surviving members in 2005 |
+| 9 | Lavon affair, 1954 (pre-1960 context) | — | **Attributed.** An Israeli military-intelligence cell bombed "the American libraries in Cairo and Alexandria" (JVL); in 2005 the IDF gave surviving members military ranks "in recognition of their service to Israel" |
 
 ---
 
@@ -467,7 +467,7 @@ https://irp.fas.org/offdocs/walsh/part_i.htm
 - **The operation.** An Israeli military-intelligence cell of Egyptian Jews "first blew up some post offices and a few days later, the American libraries in Cairo and Alexandria" (July 1954).
 - **Intent.** Per JVL, the aim was to show that Egypt's rulers were "unworthy of being counted upon as a dependable ally".
 - **Aftermath:**
-  - two members were executed in Cairo on 31 Jan 1955;
+  - two operatives were executed and two died by suicide (Wikipedia infobox). The 31 Jan 1955 execution date comes from a search snippet and was not read in a ledgered source;
   - Lavon resigned on 2 Jan 1955;
   - a December 1960 commission cleared him of authorising the operation;
   - in March 2005 the surviving members "were given military ranks in the IDF in recognition of their service to Israel".
