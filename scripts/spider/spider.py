@@ -228,7 +228,11 @@ def fetch(url, session, note=None, conditional=True, quiet=False):
         rec['profile_reason'] = prof['why']
 
     prior = latest_by_url().get(url) if conditional else None
-    if prior and prior.get('ok'):
+    # The cache is not committed, so in a fresh container the ledger points at bodies that are not
+    # on disk. A conditional request then earns a 304 and records a path nothing can read: only ask
+    # "has it changed?" when we still hold what it would be compared against.
+    held = bool(prior and prior.get('cache') and os.path.exists(os.path.join(ROOT, prior['cache'])))
+    if prior and prior.get('ok') and held:
         if prior.get('etag'):
             headers['If-None-Match'] = prior['etag']
         elif prior.get('last_modified'):

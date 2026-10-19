@@ -185,6 +185,61 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**ISRAEL AND THE US SINCE 1960 — DRILL-DOWN, 19 Oct 2026, HELD for the author. `research/ISRAEL-US-DRILLDOWN.md` (synthesis) + four line files `ISRAEL-US-{A-CURRENT,B-1960-1989,C-1990-2026,D-LAW-SYMMETRY}.md`; publishable text in `research/drafts/xxiv-favorite-nation-v2.html` (three XXIV entries; supersedes the 25 Sept draft).** Author, with a screenshot of an X post: *"Run this data … how America is infiltrated by Israel - and not heeding the warning of influence of foreign powers … full drill down … going back to 1960 at least with the bombing of our ship. Trump just endorsed war criminal Netanyahu"*.
+- **The post ("Patel has formally agreed to work with Moskowitz to reform Section 230, which critics say will target Americans … who post 'conspiracy theories' about Israel"):** it is the 17 Sept 2025 House Judiciary exchange (Serial 119-35, read in full), recirculated with "formally" added.
+  - Moskowitz named "Israel assassinated him" as one Kirk conspiracy theory; Patel: "I will work with you on 230 any day."
+  - No letter, MOU or bill exists. The 230 bills (S.3546, H.R.10332) are flat repeals that name no subject.
+  - The nearest text is the nonbinding H.Res. 1239 (Moskowitz cosponsors).
+  - Where speech about Israel actually met state power was visas, not §230: *AAUP v. Rubio* (viewpoint-discriminatory, on appeal).
+- **Endorsement:** real, 18 Oct 2026. It is attributed because Truth Social refused the spider ("Complete and Total Endorsement … If Israel has the wrong Leader … America will have to do this work ourselves"). Israel votes on 27 Oct. Printed as **US intervention in a foreign election**: attachment from the American side, not evidence of Israeli control.
+- **"War criminal" at tier:**
+  - The ICC warrant is in force; the PTC twice declined to withdraw it in 2025. Israel's remanded jurisdiction challenge is undecided. There has been no trial.
+  - The prosecutor was removed for misconduct on 24 July 2026. That touches the conduct finding, not the warrant.
+  - **OFAC designated the ICC itself on 9 Oct 2026**, after all three issuing judges.
+- **The record, graded:**
+  - **Liberty:** attack, 34 dead and $12.9M compensation are documented.
+    - **Both governments' official verdicts say not premeditated:** Clifford's "flagrant act of gross negligence"; the CIA's "by mistake"; Israel's "innocent mistake".
+    - The dissent is inside the US record: Tordella, "A nice whitewash"; Boston's 2004 sworn declaration (testimony); Moorer 2003 (attributed).
+    - Deliberate intent is **not established**.
+  - **Dimona:** access limits documented; the concealment is the NSArchive historians' finding (attributed).
+  - **AZC 1962:** DOJ told it in writing it was a foreign agent; it never registered (documented).
+  - **NUMEC:** losses documented; diversion not established. Brzezinski 1977: "no evidence — despite an intensive search for some".
+  - **Pollard:** the handler also tasked "any information that would identify Israeli officials who were providing information to the United States" (DCI damage assessment).
+  - **Kadish and Franklin:** documented. The **government itself moved to dismiss Rosen/Weissman**.
+  - **NSO:** Entity List; WhatsApp judgment; FBI licence Dec 2018.
+  - **STOIC 2024.**
+  - **Clock Tower X (FARA #7649), Israel MFA via Havas:** "Deployment of websites and content to deliver GPT framing results on GPT conversations"; $15M received to Mar 2026; sites carry the FARA footer.
+- **Symmetry:**
+  - The comparator prosecutions (Saudi, Egypt, Qatar, China, Russia; UAE acquitted) put Israel inside the range.
+  - FARA receipts, H2 2024, **re-summed by me from DOJ's report:** Saudi $31.6M … Israel $11.1M.
+  - ODNI ATAs 2024–26 do not name Israel as an espionage or influence threat; that is a finding about the documents (guaranteed null).
+  - The 1995 DIS memo's "strong ethnic ties" line was **repudiated by SecDef Perry**. It is the guardrail's own example.
+  - **Killed:**
+    - "formally";
+    - "§230 to target posts about Israel";
+    - "infiltrated" read as control (unsupported, as in the held draft; rung 5 for no one);
+    - krytrons: attributed only, unused.
+- **Page errors found, flagged, NOT edited (fix on publication):**
+  - (1) XVI reading-room Liberty line says intent is "disputed between the two governments' official accounts". It is not: both say not premeditated.
+  - (2) XV ICC paragraph is stale. It omits the 24 Apr 2025 reversal, the pending challenge, the sanctions and the prosecutor's removal.
+  - (3) II Pollard "apologised and disbanded the unit … Peres": not in any primary read.
+  - (4) "Dimona – false walls" (II/IX): unsourced; attribute it or reword it.
+  - (5) XV network line ties AIPAC to Netanyahu's four Congress addresses; congressional leaders invited him.
+- **The 25 Sept draft had stale or imprecise lines, fixed in v2:**
+  - Egypt "the same amount since 1987": not in current CRS. FY2026 is $1.375bn.
+  - War-powers "seventeen … concurrent resolutions": per CRS, one concurrent resolution passed both chambers.
+  - FBI Pegasus licence: Dec 2018, not 2019.
+- **SPIDER FIXES (`scripts/spider/`):**
+  - **Cold-cache bug.** The cache is gitignored, so in a fresh container the ledger points at bodies that are not on disk. The spider still sent `If-None-Match`, got a 304, and recorded an unreadable path as "unchanged". It now sends conditional headers only when the cached body exists.
+    - Proven both ways: cold → full fetch; warm → 304.
+    - Change detection still compares against the ledger hash.
+  - **Three decoy-200 hosts registered** in `hosts.json`, by title: `2021-2025.state.gov` "Technical Difficulties", `uscode.house.gov` "Page Not Found - US Code", `icc-cpi.int` "Gcore". Proven both ways.
+- *Traps:*
+  - Scratchpad `vq.py` was rebuilt this session (pypdf with the `cryptography` stub; `pdftotext` is not installed).
+  - Unquoted heredocs expand `$1` in "$174 billion".
+  - Many NSArchive scans have OCR layers that break exact matching ("le av i ng", "eviCi~~n.ee"), so check them by hand.
+  - **Naming traps:** "Mega" 1997 codename ≠ Mega Group; the Psy-Group employee "Epstein" ≠ Jeffrey; the Havas "Esther Project" ≠ Heritage's "Project Esther".
+
 **SITE TRANSLATION FIXED — 19 Oct 2026, live.** Author: *"Site language translation is not working"*.
 - **Why it was broken:**
   - The report's body loader listened only for `postMessage` from a parent or child frame. The report has been served at `/` directly since 19 Sept, so a menu choice never reached it.
