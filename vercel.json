@@ -2,7 +2,8 @@
   "outputDirectory": "public",
   "functions": {
     "api/index.js": {
-      "includeFiles": "site/**"
+      "includeFiles": "site/**",
+      "excludeFiles": "public/**"
     }
   },
   "rewrites": [
