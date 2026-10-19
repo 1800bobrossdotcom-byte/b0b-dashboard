@@ -43,6 +43,7 @@ function safeRedirectHost(req) {
 // what enforces the gate, so the asset dir must have a non-special name.
 const PIXEL = fs.readFileSync(path.join(__dirname, 'site', 'pixel.html'), 'utf8');
 const PUB = path.join(__dirname, 'site');
+const STATIC_OUT = path.join(__dirname, 'public');
 
 if (!process.env.B0B_COOKIE_SECRET) {
   // Ephemeral fallback keeps local dev zero-config. On serverless (Vercel),
@@ -467,7 +468,7 @@ app.use((req, res, next) => {
     // KML is set explicitly rather than left to the mime table, so the Google
     // Earth export downloads as Earth data instead of as a generic XML blob.
     // ZIP is here for one file: /stickers/b0b-dev-stickers.zip, the print bundle.
-    return express.static(PUB, {
+    const opts = {
       maxAge: '1h',
       setHeaders: (res, filePath) => {
         if (filePath.endsWith('.kml')) {
@@ -477,7 +478,12 @@ app.use((req, res, next) => {
           res.setHeader('Content-Type', 'application/zip');
         }
       },
-    })(req, res, next);
+    };
+    // public/ is Vercel's static output (vercel.json outputDirectory). On Vercel its files are
+    // served by the CDN before the catch-all rewrite reaches this function, which keeps large
+    // media out of the function bundle (250 MB cap). Here it is the fallback, so local dev
+    // serves the same paths.
+    return express.static(PUB, opts)(req, res, () => express.static(STATIC_OUT, opts)(req, res, next));
   }
   next();
 });

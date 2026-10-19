@@ -3,7 +3,7 @@
 
     python3 scripts/build-landing-film.py SRC1.mp4 [SRC2.mp4 ...]
 
-Writes site/omcomma-N.mp4 and site/omcomma-N.webm for each source, in order, which is what
+Writes public/omcomma-N.mp4 and public/omcomma-N.webm for each source, in order, which is what
 report.html's #b0b-landing (data-videos="/omcomma-1,/omcomma-2") plays after the animated mark.
 
 The MP4 is a stream copy with the index moved to the front (+faststart): the picture and sound are
@@ -21,7 +21,7 @@ import subprocess
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SITE = os.path.join(ROOT, 'site')
+SITE = os.path.join(ROOT, 'public')   # Vercel's static output (vercel.json), outside the 250 MB function bundle
 
 
 def ffmpeg():

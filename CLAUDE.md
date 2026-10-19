@@ -185,6 +185,13 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**VERCEL WAS SERVING THE WHOLE REPO AS STATIC FILES, AND THE FUNCTION HIT ITS SIZE CAP — 19 Oct 2026, fixed.**
+- **Found while deploying the landing film.** The deploy of `f3dd0fb` (the two MP4s) and `9da987d` FAILED on Vercel; production stayed on the 00:48 build. Cause: `vercel.json` bundles `site/**` into the one serverless function (`api/index.js` → `server.js`), Vercel caps a function at **250 MB**, and `site/` went from 241.9 MB (last good deploy) to 316 MB.
+- **And worse, found on the way: with no `public/` and no output directory set, Vercel served the REPOSITORY ROOT as static files, ahead of the catch-all rewrite.** Live, cache-busted: `/CLAUDE.md` (which names the banker §2 forbids publishing), `/server.js`, `/research/**` including every HELD draft and `NEWS-*-HELD.md`, `/research/sources/ledger.jsonl` (with the DOJ Epstein-library rows the public `/data` ledger withholds), `/design/**`, `/scripts/**` - all 200. Only `package.json`, `vercel.json` and dotfiles were hidden (Vercel's own exclusions). Express never served any of it; it was Vercel's static layer.
+- **Fix:** `vercel.json` now sets `"outputDirectory": "public"`. Only `public/` is static now, and it holds only the landing film (`omcomma-1/2.{mp4,webm}`, moved out of `site/`). Everything else goes through the function as before. `server.js` serves `public/` as a fallback after `site/`, so local dev serves the same paths. **`site/` is back to 241.9 MB, the size that last deployed** - the headroom under 250 MB is thin; the next large media (films are ~150 MB of `site/`) should go to `public/`, and their build scripts pointed there.
+- **NOT fixable from here, the author's:** (1) **the GitHub repo is public**, so CLAUDE.md, the held research and the ledger are public there anyway - making it private is a GitHub setting, and Vercel deploys from private repos; (2) **old Vercel deployments keep their own URLs**, which still serve the exposed files until deleted or protected in the Vercel dashboard (Deployment Protection).
+- *Trap:* a live check that only compares the report's manifest stamp (`check-live.js`) says "deploy did not fire" for a deploy that FAILED. **Read the Vercel status GitHub keeps** (`gh api repos/<repo>/commits/<sha>/status`) - it says success/failure and names the deployment.
+
 **THE LANDING NOW OPENS ON AN ANIMATED b0b.dev MARK, THEN THE AUTHOR'S FILM "OM COMMA" — 19 Oct 2026.**
 - **The author's instructions, in order:**
   1. *"pull this video from my profile OMCOMMA and place this as the video on the website landing page - intro in with b0b.dev animated, and then have this video: x.com/omcomma/status/2110615223845499258"*
@@ -220,7 +227,7 @@ than once.
     - #1: 4:15.85, sha256 `32bc48d1…`;
     - #2: 2:51.53, sha256 `ea93315f…`;
     - both 960×540, H.264/AAC (X's re-encode).
-  - `scripts/build-landing-film.py SRC1 SRC2` writes `site/omcomma-N.{mp4,webm}`:
+  - `scripts/build-landing-film.py SRC1 SRC2` writes `public/omcomma-N.{mp4,webm}` (Vercel's static output; see the entry above):
     - the MP4 is a stream copy with `+faststart`, **proven bit-identical by decoded-stream MD5**;
     - the WebM is VP9/Opus, CQ capped at 650 kbps (uncapped VP9 came out larger than the source).
   - **When the raw file arrives, re-run the script on it.** Nothing else changes.
