@@ -185,11 +185,33 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**OUTSIDE AUDIT #4 (19 Oct 2026, pasted by the author without an instruction) — checked; the bugs fixed, the rest held.** A product/SEO/security review scoring the site 7.7/10.
+- **Checked, and false or already done:**
+  - "couldn't retrieve robots.txt / sitemap.xml": both are live (sitemap 23 URLs).
+  - The "1,166 vs a different count" discrepancy: every page says 1,166 (report, map, map list, briefing), and `check-consistency.py` reports 0 mismatches. Like audit #3's, this was an indexed snapshot.
+  - "Publish unified dataset metadata": `/data/build.json` has existed since audit #3 (build stamp, counts, sha256s), and every deploy checks against it.
+  - "Test ARC Shield against known signals": `scripts/arc-selftest.js` does (16 checks, both directions). Reference-instrument validation has NOT been done, and the guide should keep saying so.
+- **Its security point found real problems the same day:**
+  - (1) Vercel was serving the repo root (entry above, fixed).
+  - (2) **CI's "Dependency audit" was failing:** `proxy-addr` had a **critical** IP-spoofing advisory via IPv4-mapped IPv6 trust subnets. That matters because `trust proxy` is set and the rate limiter keys on `req.ip`. `qs` had moderate DoS advisories. `npm audit fix --omit=dev` took patch releases only (express 4.22.2→4.22.3, proxy-addr 2.0.7→2.0.8, qs, body-parser, ip-address), changing the lockfile alone. Result: **0 vulnerabilities**; security 33/33 and seo 57/57.
+  - CI's **"CSP browser check" also fails**, and did before this work. It has not been investigated.
+- **Held, because each reverses the author or is editorial or structural:**
+  - "make the homepage a true gateway": reverses the settled `/` decision, and `/` now opens on his film;
+  - "a temporal model / timeline scrubber" for the map: he had the period bar removed on 19 Sept. Dates still exist (`date`/`dprec`, the KML time slider);
+  - workspaces for map layers: audit #3's `/lab` split, still his call;
+  - three reading modes (documented / full / critical);
+  - separate source reliability, factual certainty and inferential strength;
+  - a per-edge evidence panel;
+  - standalone SEO topic pages;
+  - external review;
+  - signed release manifests.
+- **Cheap, and not done without his word:** a `Dataset` JSON-LD entry for `/data/map-data.json` and `/data/sources-ledger.json`. Only Article, WebSite and WebApplication exist today.
+
 **VERCEL WAS SERVING THE WHOLE REPO AS STATIC FILES, AND THE FUNCTION HIT ITS SIZE CAP — 19 Oct 2026, fixed.**
 - **Found while deploying the landing film.** The deploy of `f3dd0fb` (the two MP4s) and `9da987d` FAILED on Vercel; production stayed on the 00:48 build. Cause: `vercel.json` bundles `site/**` into the one serverless function (`api/index.js` → `server.js`), Vercel caps a function at **250 MB**, and `site/` went from 241.9 MB (last good deploy) to 316 MB.
 - **And worse, found on the way: with no `public/` and no output directory set, Vercel served the REPOSITORY ROOT as static files, ahead of the catch-all rewrite.** Live, cache-busted: `/CLAUDE.md` (which names the banker §2 forbids publishing), `/server.js`, `/research/**` including every HELD draft and `NEWS-*-HELD.md`, `/research/sources/ledger.jsonl` (with the DOJ Epstein-library rows the public `/data` ledger withholds), `/design/**`, `/scripts/**` - all 200. Only `package.json`, `vercel.json` and dotfiles were hidden (Vercel's own exclusions). Express never served any of it; it was Vercel's static layer.
 - **Fix:** `vercel.json` now sets `"outputDirectory": "public"`. Only `public/` is static now, and it holds only the landing film (`omcomma-1/2.{mp4,webm}`, moved out of `site/`). Everything else goes through the function as before. `server.js` serves `public/` as a fallback after `site/`, so local dev serves the same paths. **`site/` is back to 241.9 MB, the size that last deployed** - the headroom under 250 MB is thin; the next large media (films are ~150 MB of `site/`) should go to `public/`, and their build scripts pointed there.
-- **NOT fixable from here, the author's:** (1) **the GitHub repo is public**, so CLAUDE.md, the held research and the ledger are public there anyway - making it private is a GitHub setting, and Vercel deploys from private repos; (2) **old Vercel deployments keep their own URLs**, which still serve the exposed files until deleted or protected in the Vercel dashboard (Deployment Protection).
+- **NOT fixable from here, the author's:** (1) **the GitHub repo is public**, so CLAUDE.md, the held research and the ledger are public there anyway - making it private is a GitHub setting, and Vercel deploys from private repos; (2) old Vercel deployments keep their own URLs, **but they sit behind Vercel Authentication** (checked: a failed deployment's URL answers "Protected by Vercel Authentication"), so they are not publicly readable.
 - *Trap:* a live check that only compares the report's manifest stamp (`check-live.js`) says "deploy did not fire" for a deploy that FAILED. **Read the Vercel status GitHub keeps** (`gh api repos/<repo>/commits/<sha>/status`) - it says success/failure and names the deployment.
 
 **THE LANDING NOW OPENS ON AN ANIMATED b0b.dev MARK, THEN THE AUTHOR'S FILM "OM COMMA" — 19 Oct 2026.**
