@@ -37,7 +37,7 @@
   <meta name="twitter:title" content="b0b.dev - Project Anglerfish: a tiered, sourced OSINT report">
   <meta name="twitter:description" content="25 sections of tiered OSINT on structures of control: institutional capture, surveillance cities, underground infrastructure, the Epstein-Maxwell record. documented fact vs labeled hypothesis.">
   <meta name="twitter:image" content="https://www.b0b.dev/img/og-card.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"PROJECT ANGLERFISH: CASSOWARY ORCA AGILITY — the architecture of control, tiered and sourced","url":"https://www.b0b.dev/report","description":"Independent OSINT report by b0b.dev: 25 sections, every claim tiered and sourced, rival explanations scored, falsifiers stated, corrections public, data downloadable.","image":"https://www.b0b.dev/img/og-card.png","isPartOf":{"@type":"WebSite","name":"b0b.dev","url":"https://www.b0b.dev/"},"headline":"PROJECT ANGLERFISH: CASSOWARY ORCA AGILITY — the architecture of control, tiered and sourced","author":{"@type":"Person","name":"b0b"},"publisher":{"@type":"Organization","name":"b0b.dev","url":"https://www.b0b.dev/"},"mainEntityOfPage":"https://www.b0b.dev/report","dateModified":"2026-10-18T23:11:52.468Z"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"PROJECT ANGLERFISH: CASSOWARY ORCA AGILITY — the architecture of control, tiered and sourced","url":"https://www.b0b.dev/report","description":"Independent OSINT report by b0b.dev: 25 sections, every claim tiered and sourced, rival explanations scored, falsifiers stated, corrections public, data downloadable.","image":"https://www.b0b.dev/img/og-card.png","isPartOf":{"@type":"WebSite","name":"b0b.dev","url":"https://www.b0b.dev/"},"headline":"PROJECT ANGLERFISH: CASSOWARY ORCA AGILITY — the architecture of control, tiered and sourced","author":{"@type":"Person","name":"b0b"},"publisher":{"@type":"Organization","name":"b0b.dev","url":"https://www.b0b.dev/"},"mainEntityOfPage":"https://www.b0b.dev/report","dateModified":"2026-10-18T23:24:12.376Z"}</script>
   <!-- seo:end -->
   <!-- Search Console ownership. The site opens on this page (/ serves the
        report), so the verifier's fetch of the homepage ends up on this
@@ -6431,71 +6431,8 @@
   onScroll();
 })();
 </script>
-<script src="/i18n.js"></script>
-<script>
-// ===================== REPORT BODY TRANSLATION LOADER =====================
-(function(){
-  var origEN = {}; // cache original English HTML per section
-  var currentLang = 'en';
-  var loading = false;
-
-  // Store original English content on load
-  document.querySelectorAll('.sect-body[data-sect]').forEach(function(div) {
-    origEN[div.dataset.sect] = div.innerHTML;
-  });
-
-  function applyLang(lang) {
-    if (lang === currentLang || loading) return;
-    loading = true;
-    currentLang = lang;
-
-    if (lang === 'en') {
-      // Restore English originals
-      document.querySelectorAll('.sect-body[data-sect]').forEach(function(div) {
-        if (origEN[div.dataset.sect]) div.innerHTML = origEN[div.dataset.sect];
-      });
-      loading = false;
-      return;
-    }
-
-    var sects = document.querySelectorAll('.sect-body[data-sect]');
-    var pending = sects.length;
-
-    sects.forEach(function(div) {
-      var sid = div.dataset.sect;
-      fetch('/i18n/' + lang + '/report-' + sid + '.html')
-        .then(function(r) {
-          if (!r.ok) throw new Error(r.status);
-          return r.text();
-        })
-        .then(function(html) {
-          div.innerHTML = html;
-        })
-        .catch(function() {
-          // Keep English if translation file missing
-          if (origEN[sid]) div.innerHTML = origEN[sid];
-        })
-        .finally(function() {
-          pending--;
-          if (pending <= 0) loading = false;
-        });
-    });
-  }
-
-  // Listen for language changes from parent shell
-  window.addEventListener('message', function(e) {
-    if (e.origin === location.origin && e.data && e.data.b0bLang) {
-      applyLang(e.data.b0bLang);
-    }
-  });
-
-  // Also check on load if a non-English language is already set
-  var stored = localStorage.getItem('b0b-lang');
-  if (stored && stored !== 'en') {
-    setTimeout(function() { applyLang(stored); }, 100);
-  }
-})();
-</script>
+<script src="/i18n.js?v=2"></script>
+<script src="/page-translate.js?v=1" data-root=".main-content" defer></script>
 <script>
 (function(){if(window.parent!==window){document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var h=a.getAttribute('href');if(!h)return;if(h==='/logout'){e.preventDefault();window.top.location.href='/logout'}else if(h==='/'||h==='/report'||h==='/map'){e.preventDefault();window.parent.postMessage({navigate:h},location.origin)}})}})();
 </script>

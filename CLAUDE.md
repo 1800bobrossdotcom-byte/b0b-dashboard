@@ -185,6 +185,23 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**SITE TRANSLATION FIXED — 19 Oct 2026, live.** Author: *"Site language translation is not working"*.
+- **Why it was broken:**
+  - The report's body loader listened only for `postMessage` from a parent or child frame. The report has been served at `/` directly since 19 Sept, so a menu choice never reached it.
+  - Its files (`/i18n/<lang>/report-*.html`) 404'd anyway: `.html` is not on the static allowlist.
+  - Countermeasures had the menu and **zero** `data-i18n` elements, so a choice there did nothing.
+- **The stored translations were stale and carried killed passages.** For example, es: *"Las familias no."* (the §7 families trope) and *"Cámaras Hikvision en NAC"* in es/de/fr. **`site/i18n/` (11 languages) is deleted. Do not restore stored translations of the report;** they cannot keep up with corrections.
+- **Now:**
+  - `i18n.js?v=2` dispatches a same-window `b0b-lang` event (`detail {lang, gesture}`), and the dictionary still does menus and h2s instantly.
+  - **`site/page-translate.js`** translates the *current English* text node by node, lazily near the viewport, via the browser's on-device **Translator API** (desktop Chrome 138+). Markup, links and the Greek `lang="grc"` are untouched, and Show English restores the exact HTML.
+  - Its bar says *"machine translation of the English text, made on this device. The English is the record."*
+  - A model that needs downloading waits for a click; there is no auto-download on load.
+  - Everywhere else the bar offers a Google Translate link, labelled as sending the page address to Google.
+  - Loaded on the report (`data-root=".main-content"`), `/home` (`.wrap`) and countermeasures (`body`).
+  - **Not on the map**: its DOM watchdog flags any change to header/nav text as an integrity mismatch, so the map stays dictionary-only.
+- *Trap:* **Chromium 141 headless exposes `Translator` but `availability()` never settles.** Every step now has a deadline (3.5 s availability, 8 s create of a ready model) and falls back to the Google bar. Without the deadline the reader got nothing.
+- Tested with real Chromium plus mocks (available / downloadable / home / countermeasures / map).
+
 **ANNOUNCEMENT IS NOW SPOKEN WORD OVER A BEAT — 18 Oct 2026, live at `/announcement`. Third cut; supersedes the two below.**
 - **Why:** the author rejected the calm cut ("too passive") and then the harder rewrite: *"this reads like a boring advertisment for the report. people are not going to listen to this"*.
 - **Lesson: explaining the report (grades, "what the report is") is the advert. Tell the record and speak to the listener; name the site once, at the end.** README has the full map.

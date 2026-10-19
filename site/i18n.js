@@ -777,6 +777,10 @@ function setLang(l){
   });
   // RTL for Arabic
   document.documentElement.dir=l==='ar'?'rtl':'ltr';
+  // Same-window listeners (the report's full-text translator). The postMessage above only reaches a
+  // parent or child frame; since the report is served at / directly there is neither, so without this
+  // event a choice in the menu never reached the body.
+  try{window.dispatchEvent(new CustomEvent('b0b-lang',{detail:{lang:l,gesture:true}}));}catch(e){}
 }
 
 function apply(){
@@ -856,6 +860,7 @@ window.addEventListener('message',function(e){
     document.documentElement.dir=lang==='ar'?'rtl':'ltr';
     var cur=document.getElementById('b0bLangCur');
     if(cur)cur.textContent=LANGS[lang]||lang;
+    try{window.dispatchEvent(new CustomEvent('b0b-lang',{detail:{lang:lang,gesture:false}}));}catch(e){}
   }
 });
 
