@@ -52,6 +52,18 @@ His details, sent after:
 - It uses his unit and his wording, so it confirms his figures but does not check them independently.
 - If it is the roommate's, her duration, colour and whether it moved are still to come.
 
+**Next message, sender not stated:**
+
+> 30 SECCONDS BRIGHT WHITE GLARE NO MOVING FROME WHERE IT WAS STATIONED
+
+It agrees on all three remaining points:
+- the duration, 30 s;
+- the colour, bright white;
+- no movement.
+
+So both accounts now agree on all five points: the direction, the height, the duration, the colour and no movement.
+**The limit stands:** the accounts were given together and in shared wording. They show agreement, not independence.
+
 ## His photo of the sky ("This is how clear the sky was")
 
 - **EXIF:**
