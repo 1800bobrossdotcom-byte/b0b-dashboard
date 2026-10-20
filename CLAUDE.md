@@ -185,6 +185,61 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**CURRENT EVENTS SWEEP 2–20 OCT 2026 — live 20 Oct. XV `xv-status-update-20-october-2026` (14 paragraphs, ~3,900 words). HELD: `research/NEWS-2026-10-20-HELD.md`.** Author: *"Continue - current events sweep"*.
+- **Method:**
+  - Three agents: Middle East, rest of world, US institutions. Scratchpad `news4-{mideast,world,us}.md`; ledger notes are prefixed `news4`.
+  - 180 agent quotes were re-checked with `vq.py`.
+  - **New tool, scratchpad `vqdraft.py DRAFT.html --since DATE`:** it pulls every `&ldquo;…&rdquo;` out of a draft and finds the cached body that holds it, printing the hosts so attribution can be checked by eye. The final subsection showed 124 of 124 matched, and the in-place edits all matched.
+- **Carried:**
+  - **Yemen–Saudi:**
+    - the Mecca pact invoked for the first time (5 Oct; size and role unstated; Ankara silent);
+    - Riyadh airport, 12 dead by the Saudi count, 13 per India;
+    - the UN envoy's "slid back into full-scale war";
+    - Shabwa camp, 53–58 dead.
+  - **Iran–US:**
+    - the no-attack-before-3-Nov pledge;
+    - the SNSC's "insufficient";
+    - CENTCOM's 138 redirected vessels;
+    - Kpler's two measures (all-Gulf exports vs Hormuz transits; neither refutes the other);
+    - *Cape Dao* sank 14 Oct. No attacker of any ship is named.
+  - **Fairford:** seven men on bail, none charged; the UK attributes the plot to the IRGC and Iran answers "clumsy false flag".
+  - **Gaza, West Bank, Lebanon:** each with its counts' sources; the ICJ docket null again.
+  - **The 18 Oct endorsement (attributed) and OFAC designating the ICC itself on 9 Oct (documented), with EO 14203's stated ground** (the warrants).
+    - Both went in as dated news at tier.
+    - **The Israel drill-down's three XXIV entries and its five page errors stay HELD.**
+  - **Sudan:**
+    - res. 2830 is a two-month rollover to 11 Dec;
+    - the US was penholder and dropped its nationwide draft (the UAE had urged the same publicly; the 1 Oct line holds);
+    - three strikes, each with whose count it is.
+  - **Ethiopia–Eritrea:** Article 51 letters S/2026/797 and /798.
+  - **Ukraine:** Starlink outages and missing warnings (Ukraine's account against the US denials); GL 135 Russian diesel; the Graham-act waiver.
+  - **Nord Stream:** the trial opened 14 Oct.
+  - **Greenland:** first reading closed 12 Oct.
+  - **Citizen Lab:** AdFection/Candiru at Al Jazeera; Serbia now at 16 targets. No operator is named in either.
+  - **Epstein instruments:** discharge petition still at 216; DDF read at source; documented nulls on the Black referral, the MLATs, the Library and the D.C. Cir.
+  - **Washington:**
+    - the 9/11 plea-deal cert denied 19 Oct;
+    - DOGE FOIA cert granted 13 Oct;
+    - the DMDC breach confirmed (2.76M living + 294,000 deceased);
+    - no Senate roll call 1–20 Oct;
+    - the CR runs to 11 Dec and the NDAA is stalled;
+    - FISA §702 runs to 17 Mar 2027 (Brennan's "jam" claim is attributed);
+    - AUTOWARCOM: few details.
+- **Our errors, fixed in place (no narration):**
+  - **(1) 22 Sept Greenland.** "a re-established base at Narsarsuaq … a second at Mestersvig" overstated the text. Art. IV only allows *"an additional Defense Area at Narsarsuaq and Mestersvig in accordance with modalities and technical details to be mutually agreed"*.
+  - **(2) 1 Oct carriers.** It printed AP's "three carriers … end of October" alone. The same-day WSJ/The National account (arrival by end of November, relieving the Washington; two on station) now sits beside it.
+  - Also updated:
+    - the Nord Stream tiering box (the trial is open; the asylum bid; "the trial has not reached" a verdict);
+    - II's Andrew line (the High Court quashed the search warrants 8 Oct; the investigation continues);
+    - II's *Phang* line (DOJ's 1 Oct no-right-of-action motion; the 9 Oct order; DOJ lodged notes 16 Oct with a pre-emptive stay ask; no D.C. Cir. ruling in RECAP);
+    - XXIV ShinyHunters gained a 9 Oct status: an FBI arrest of an unnamed co-conspirator, and the "third-party vendor" platform.
+  - **Correction to my own brief:** in *Phang* the 25 Sept motion to dismiss was the plaintiff's. The page already had it right.
+- **Held:** a former BND president arrested for espionage (6 Oct). The office identifies him, and the allegation is foreign-intelligence work, so it is the author's call. Also held: the $281M no-bid contract and every name; the full list is in the HELD file.
+- **Scale line:** 282 / 1,137 / 142. `build-transmissions.py` 404'd again (flaky; the reel is untouched).
+- **Traps:**
+  - **`sed` treats `&` in the replacement as "the whole match"**, so `&rdquo;` in a replacement silently pasted the matched text back in. Edit HTML entities with Python string replace only.
+  - **The scratchpad `pipecheck.py` TOC audit stopped at any `<h2`**, and the researchers' guide has an id-less `<h2>` inside XXV. That produced a false "label 19 / li 19 / h3 13". It now stops only at `<h2 … id=`, and was re-proven with a planted missing `<li>`.
+
 **OUTSIDE AUDIT #4 (19 Oct 2026, pasted by the author without an instruction) — checked; the bugs fixed, the rest held.** A product/SEO/security review scoring the site 7.7/10.
 - **Checked, and false or already done:**
   - "couldn't retrieve robots.txt / sitemap.xml": both are live (sitemap 23 URLs).
