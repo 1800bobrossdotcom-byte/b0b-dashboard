@@ -64,6 +64,21 @@ It agrees on all three remaining points:
 So both accounts now agree on all five points: the direction, the height, the duration, the colour and no movement.
 **The limit stands:** the accounts were given together and in shared wording. They show agreement, not independence.
 
+**Follow-up, the same evening.** He was asked whether a reflection in the window glass could explain it, and was given
+a test: was the window open, and did the light hold against the skyline when they moved their heads? His answer:
+
+> The window was open. When I was outside in east Aurora same thing. The sunlight makes no sense for rhe 4am enpcuntwr
+
+- **Reflection in glass: ruled out** for the third (the window was open) and for the first (he was outside).
+- **He is right about East Aurora.** At ~4 AM the sun is far below the horizon, ~14° even in June. To catch sunlight
+  an object would need to be ~140 km up, which is satellite height, and satellites move. A balloon or aircraft
+  catching the sun cannot explain it.
+- **If one cause explains all three,** it cannot need sunlight. That leaves a drone with a light, or something
+  unidentified.
+- **If the causes differ,** a high sunlit object stays a candidate for the third only.
+- **The drone test:** sound. A drone close enough to look that bright at 4 AM in a quiet yard would probably be heard.
+  Asked whether he heard anything either time.
+
 ## His photo of the sky ("This is how clear the sky was")
 
 - **EXIF:**
