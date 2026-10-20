@@ -79,6 +79,27 @@ a test: was the window open, and did the light hold against the skyline when the
 - **The drone test:** sound. A drone close enough to look that bright at 4 AM in a quiet yard would probably be heard.
   Asked whether he heard anything either time.
 
+**His answer on sound:**
+
+> no this is high in the atmosphere it feels like it is literally coming from deep space , no sound no movement. Its
+> light is not normal resonant light it is otherworldly
+
+- **No sound and no movement:** a drone is unlikely, and least likely at 4 AM in a quiet yard.
+- **For East Aurora, every ordinary explanation reached here is now ruled out:** a reflection, sunlight, a drone, an
+  aircraft or satellite (they move).
+- **For the third:** a high sunlit object stays possible on its own, but not as one cause for both encounters.
+- **Tier:** testimony. Every reachable explanation is ruled out, but no cause is established. Unexplained is not the
+  same as explained by whatever hypothesis is left (the guaranteed-null rule).
+- **"High in the atmosphere / deep space" and "otherworldly":** recorded as his perception. The eye cannot judge the
+  distance of a fixed point of light: at that range there is no depth cue.
+- **Two tests that would check his specific claims:**
+  1. **Distance, by parallax.** Two cameras recording at the same time a few km apart (a phone call, two phones). A
+     deep-space source sits at the same place among the stars from both. A nearby one does not.
+  2. **The light itself, by spectrum.** A diffraction-grating film over a phone lens (a few dollars):
+     - reflected sunlight shows the solar spectrum with its dark lines;
+     - an LED shows a blue spike and a broad hump;
+     - anything else would be a document about the light, not a description of it.
+
 ## His photo of the sky ("This is how clear the sky was")
 
 - **EXIF:**
