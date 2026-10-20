@@ -26,6 +26,24 @@ His details, sent after:
 - **Height:** "6 hands" is about 50–60° up, taking a hand at arm's length as 8–10°.
 - **Duration:** 30 s, with no movement.
 
+## The roommate's statement, verbatim (received ~22:51 UTC, 6:51 PM EDT)
+
+> STAR WISPERER S THEN STAR DISAPPEAR IM A ROOMMATE
+
+**My reading, labelled as mine:** a star-like point; he called to it; then it disappeared.
+
+- **Where it agrees with his account:**
+  - one point of light;
+  - his attempt to call it;
+  - it vanished.
+- **The limit:** it was typed in the same session, after the two of them had talked. So it is a second voice, but not an independent account.
+- **Still to get, in her own words:**
+  - the direction;
+  - the height;
+  - how long she watched it;
+  - the colour;
+  - whether it moved before it went.
+
 ## What is the same and what is new
 
 - **The same signature as East Aurora:**
