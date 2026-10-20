@@ -44,6 +44,23 @@ His details, sent after:
   - the colour;
   - whether it moved before it went.
 
+## His photo of the sky ("This is how clear the sky was")
+
+- **EXIF:**
+  - Samsung Galaxy XCover7 Pro;
+  - DateTimeOriginal 2026:10:20 18:52:41, offset −04:00, i.e. 22:52:41 UTC;
+  - **30 minutes after the sighting**, with the sun 6.7° below the horizon (the end of civil twilight).
+- **What it shows:**
+  - a cloudless sky over the sunset glow, from his window;
+  - no light in frame.
+- **What it does not show:** the object. It documents the conditions, not the event.
+- **The faint round patch near the top left** is soft-edged and translucent. It looks like a reflection or mark on the
+  window glass, like the streaks lower in the frame.
+- **NOT stored in the repo, and its location is not recorded here:**
+  - the repo is public;
+  - the skyline places his window;
+  - the file carries GPS data, which was not read.
+
 ## What is the same and what is new
 
 - **The same signature as East Aurora:**
