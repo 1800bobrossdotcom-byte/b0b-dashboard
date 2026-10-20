@@ -44,6 +44,14 @@ His details, sent after:
   - the colour;
   - whether it moved before it went.
 
+**Next message, received ~23:00 UTC; the sender is not stated** (it came after the roommate's statement):
+
+> SIX HANDS INTO THE SKY SUN SETTING LOOKING WEST
+
+- It agrees with his direction (west, toward the sunset) and his height (six hands).
+- It uses his unit and his wording, so it confirms his figures but does not check them independently.
+- If it is the roommate's, her duration, colour and whether it moved are still to come.
+
 ## His photo of the sky ("This is how clear the sky was")
 
 - **EXIF:**
