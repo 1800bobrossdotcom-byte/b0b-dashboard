@@ -30,6 +30,7 @@ const URLS = {
   'intro.html': '/intro',
   'continuity.html': '/continuity',
   'epstein-maxwell.html': '/epstein-maxwell',
+  'endgame.html': '/endgame',
   'map.html': '/map',
   'countermeasures.html': '/countermeasures',
   'artifact.html': '/artifact',

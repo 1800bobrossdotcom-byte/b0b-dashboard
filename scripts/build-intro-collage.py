@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Build a b0b.dev film, collage cut, from a spec (default scripts/intro-collage.json).
 
-Two films share this engine: the intro (scripts/intro-collage.json) and
-"Continuity" (scripts/film-continuity.json, --spec). Each spec names its own
-outputs, so building one never touches the other's files.
+Four films share this engine: the intro (scripts/intro-collage.json),
+"Continuity" (scripts/film-continuity.json), "The Epstein-Maxwell Record"
+(scripts/film-epstein-maxwell.json) and "Endgame" (scripts/film-endgame.json),
+the last three via --spec. Each spec names its own outputs, so building one
+never touches the others' files.
 
 The narration is baked in (Piper, en_GB cori, public-domain training data) and a
 second, subtitled master is written in the same pass for the downloadable file.
@@ -244,6 +246,16 @@ def glitch(arr, k, rng):
 # (public domain, per its model card). Lines are cached by content hash.
 LEAD, GAP, TAIL = 0.35, 0.45, 0.7
 GREEK_FONT = '/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf'
+HEBREW_FONT = '/usr/share/fonts/truetype/freefont/FreeSerif.ttf'   # with raqm, which shapes and orders it right to left
+
+
+def script_font(text, size):
+    """Plex has neither Greek nor Hebrew: pick a face that has the word's script."""
+    if any('֐' <= ch <= '׿' for ch in text):
+        return ImageFont.truetype(HEBREW_FONT, size)
+    if any('Ͱ' <= ch <= 'Ͽ' or 'ἀ' <= ch <= '῿' for ch in text):
+        return ImageFont.truetype(GREEK_FONT, size)
+    return font('ibm-plex-serif-latin-400-normal.woff2', size)
 
 _ONES = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven',
          'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen']
@@ -495,6 +507,8 @@ class Film:
         if ty == 'finale':
             if self.style == 'timeline':
                 return np.asarray(self.finale_timeline(sh, fi))
+            if self.style == 'words':
+                return np.asarray(self.finale_words(sh, fi))
             return np.asarray(self.finale(sh, fi))
         if ty == 'doc':
             return self.post(sh, fi, np.asarray(self.doc(sh, p, fi)))
@@ -645,7 +659,8 @@ class Film:
         blink = (fi // 6) % 2 == 0
         if style == 'quote':
             f = font('ibm-plex-serif-latin-400-normal.woff2', int(H / sh.get('scale', 17)))
-            text = '“' + sh['text'] + '”'
+            # 'bare': a statement given in its author's own words, which carry their own quotation marks
+            text = sh['text'] if sh.get('bare') else '“' + sh['text'] + '”'
             lines = self.wrap(d, text, f, W * 0.8)
             lh = int(f.size * 1.42)
             n = int(len(text) * ease(min(1, max(0, p - 0.04) / sh.get('type_by', 0.55))))
@@ -662,6 +677,23 @@ class Film:
             if cur and (n < len(text) or blink):
                 d.rectangle((cur[0], cur[1] - f.size * 0.8, cur[0] + f.size * 0.45, cur[1] + 4), fill=AMBER)
             d.rectangle((rule_x, y0 - int(H * 0.02), rule_x + 2, y - lh + 12), fill=AMBER)
+        elif style == 'word':
+            # one word in its own script, large, then how it is said and what it means
+            k = ease(min(1, max(0, p - 0.03) / 0.22))
+            fw = script_font(sh['word'], int(H / sh.get('scale', 5.2)))
+            yw = int(H * 0.47) + int((1 - k) * H * 0.03)
+            d.text((W // 2, yw), sh['word'], font=fw, fill=tuple(int(c * k) for c in (244, 240, 230)), anchor='mm')
+            y = yw + int(fw.size * 0.78)
+            if sh.get('translit'):
+                k2 = ease(min(1, max(0, p - 0.22) / 0.18))
+                ft = font('ibm-plex-serif-latin-400-italic.woff2', int(H / 17))
+                d.text((W // 2, y), sh['translit'], font=ft, fill=tuple(int(c * k2) for c in CYAN), anchor='mm')
+                y += int(H * 0.085)
+            if sh.get('gloss'):
+                k3 = ease(min(1, max(0, p - 0.36) / 0.18))
+                for ln in self.wrap(d, sh['gloss'].upper(), P.f_small, W * 0.8):
+                    d.text((W // 2, y), ln, font=P.f_small, fill=tuple(int(c * k3) for c in AMBER), anchor='mm')
+                    y += int(P.f_small.size * 1.5)
         else:
             rows = sh['rows']
             cols = sh.get('cols', 1)
@@ -689,6 +721,58 @@ class Film:
             d.rectangle((rule_x, y0 - int(H * 0.02), rule_x + 2, ylast + 10), fill=AMBER)
         if sh.get('tag'):
             P.tag(img, 16, H - 16, sh['tag'], 'ls')
+        return img
+
+    def finale_words(self, sh, fi):
+        """Three words, each arriving as she says it: the word in its own script,
+        how it is said, what it means. Then the closing card."""
+        W, H, P, fin = self.W, self.H, self.P, self.fin
+        tl = fi / self.fps
+        ta = sh['at'] + tl
+        img = Image.new('RGB', (W, H), (9, 10, 11))
+        d = ImageDraw.Draw(img)
+        for x in range(0, W, 40):
+            d.line((x, 0, x, H), fill=(15, 17, 18))
+        for y in range(0, H, 40):
+            d.line((0, y, W, y), fill=(15, 17, 18))
+        hk = ease(min(1, tl / 0.6))
+        d.text((int(W * 0.085), int(H * 0.15)), fin.get('head', '').upper(), font=P.f_tag,
+               fill=tuple(int(c * hk) for c in AMBER), anchor='ls')
+        lines = [p for p in self.parts if p.get('finale')][0]['lines']
+        fw = int(H / fin.get('scale', 9.5))
+        ft = font('ibm-plex-serif-latin-400-italic.woff2', int(H / 22))
+        x0, xg = int(W * 0.085), int(W * fin.get('gloss_x', 0.55))
+        ylast = None
+        for i, w in enumerate(fin['words']):
+            at = lines[w['line']].get('at')
+            if at is None or ta < at:
+                continue
+            k = ease(min(1, (ta - at) / 0.5))
+            y = int(H * (0.31 + 0.22 * i))
+            d.text((x0, y + int((1 - k) * 12)), w['word'], font=script_font(w['word'], fw),
+                   fill=tuple(int(c * k) for c in (244, 240, 230)), anchor='lm')
+            d.text((xg, y - int(H * 0.02)), w['translit'], font=ft, fill=tuple(int(c * k) for c in CYAN), anchor='ls')
+            d.text((xg, y + int(H * 0.035)), w['gloss'].upper(), font=P.f_small, fill=tuple(int(c * k) for c in AMBER), anchor='ls')
+            ylast = y
+        if ylast is not None:
+            d.rectangle((int(W * 0.06), int(H * 0.15) - int(H * 0.02), int(W * 0.06) + 2, ylast + int(H * 0.06)), fill=AMBER)
+        P.tag(img, 16, H - 16, fin.get('tag', ''), 'ls')
+        cl = fin.get('close', {})
+        if self.close_from is not None and ta >= self.close_from:
+            k = min(1.0, (ta - self.close_from) / 0.7)
+            card = Image.new('RGB', (W, H), INK)
+            c = ImageDraw.Draw(card)
+            fb = font('ibm-plex-serif-latin-600-normal.woff2', int(H / cl.get('scale', 11)))
+            rows = self.wrap(c, cl['big'], fb, W * 0.8)
+            lh = int(fb.size * 1.2)
+            y = int(H * 0.46) - (len(rows) - 1) * lh // 2
+            for r_ in rows:
+                c.text((W // 2, y), r_, font=fb, fill=(244, 240, 230), anchor='mm')
+                y += lh
+            if cl.get('sub'):
+                c.text((W // 2, y + int(H * 0.03)), cl['sub'].upper(), font=P.f_small, fill=AMBER, anchor='mm')
+            c.text((W // 2, H - 40), 'b0b.dev', font=P.f_title, fill=(255, 255, 255), anchor='ms')
+            img = Image.blend(img, card, k)
         return img
 
     def tl_x(self, year):
