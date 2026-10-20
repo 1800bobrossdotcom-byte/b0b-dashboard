@@ -492,9 +492,11 @@
 <!-- The intro film. intro.js builds everything inside this element; the
      bootstrap below only decides whether it opens on arrival. -->
 <div id="b0b-intro" hidden data-mode="overlay" role="dialog" aria-modal="true" aria-label="b0b.dev intro film"><div class="bi-boot">b0b.dev</div></div>
-<!-- What opens on arrival since 19 Oct 2026 (site/landing-intro.js): the animated b0b.dev mark, then
-     the author's film OM COMMA #1 and #2, as posted. The intro film above still plays on request. -->
-<div id="b0b-landing" hidden data-videos="/omcomma-1,/omcomma-2" data-title="OM COMMA" role="dialog" aria-modal="true" aria-label="b0b.dev"></div>
+<!-- What opens on arrival (site/landing-intro.js): the animated b0b.dev mark, then a film. Since 20 Oct
+     2026 it is Endgame, subtitled cut (the author: "Replace one featured on site with this"); from 19 Oct
+     it was his OM COMMA #1 and #2 - data-videos="/omcomma-1,/omcomma-2" data-title="OM COMMA" restores
+     them (the files stay in public/). The intro film above still plays on request. -->
+<div id="b0b-landing" hidden data-videos="/b0b-endgame-film" data-title="ENDGAME" role="dialog" aria-modal="true" aria-label="b0b.dev"></div>
 <script>
 (function(){
   var el=document.getElementById('b0b-intro'); if(!el) return;
@@ -6219,6 +6221,7 @@
       '<button id="playIntroFilm" type="button" style="border-color:#00ccff;color:#00ccff">&#9654; INTRO FILM</button>' +
       '<a href="/continuity" style="border-color:#00ccff;color:#00ccff">&#9654; CONTINUITY</a>' +
       '<a href="/epstein-maxwell" style="border-color:#00ccff;color:#00ccff">&#9654; EPSTEIN&ndash;MAXWELL</a>' +
+      '<a href="/endgame" style="border-color:#00ccff;color:#00ccff">&#9654; ENDGAME</a>' +
       '<a href="/announcement" style="border-color:#00ccff;color:#00ccff">&#9654; ANNOUNCEMENT</a>' +
       '<a href="/stickers" style="border-color:#00ccff;color:#00ccff">STICKERS</a>' +
     '</div>' +

@@ -1,0 +1,1697 @@
+{
+ "_comment": [
+  "ENDGAME - the fourth b0b.dev film, built by scripts/build-intro-collage.py --spec scripts/film-endgame.json.",
+  "",
+  "The report's close (Section XXV, #xxiv-endgame) at its tiers: the standard, the author's statement typed in his own",
+  "words and not voiced (Part II), the three completed things - tetelestai (the \"paid in full\" gloss killed on its dates),",
+  "erithmentai (Luke 12:6-7, KJV), lo yitslach (Isaiah 54:17, KJV and the Hebrew) - Zermelo and Lovelace, and the",
+  "sovereignty list with its one checkable negative (no founding instrument located). Addressed, at the author's",
+  "instruction of 20 Oct 2026 (\"issue warnings to all nation states and peoples ... this is more cosmic warnings for",
+  "earth\"), to all nation states and peoples as a warning for Earth: that address is his, and labelled his.",
+  "",
+  "HARD RULES: no living person's face (the 1925 championship and the portraits are of the long dead); ERC-1155 frames",
+  "only the three without a visible face; Berlin scale bars and the Turin label cropped out; the bomb-loading",
+  "clip was cut (over-exposed; it shows loading, not forming); the chess film is held inside 6.5-15.5 s (fixed, never",
+  "stretched); no claim beyond the page.",
+  "Scripture is KJV verbatim (Gutenberg #10 via scripts/kjv-verse.py); Lovelace verbatim from the fourmilab text."
+ ],
+ "media_dir": "/home/user/.b0b-intro-sources",
+ "build_name": "endgame",
+ "output": "public/endgame-reel.mp4",
+ "poster": "site/endgame-poster.jpg",
+ "poster_at": 6.0,
+ "js": "site/endgame-reel.js",
+ "download": "public/b0b-endgame-film.mp4",
+ "meta_title": "b0b.dev - Endgame",
+ "meta_url": "https://www.b0b.dev/endgame",
+ "width": 1280,
+ "height": 720,
+ "fps": 24,
+ "crf_mp4": 30,
+ "crf_webm": 40,
+ "crf_download": 26,
+ "audio": {
+  "bitrate_mp4": "64k",
+  "bitrate_webm": "48k",
+  "loudnorm": "I=-16:TP=-1.5:LRA=11"
+ },
+ "voice": {
+  "model": "voice/en_GB-cori-high.onnx",
+  "config": "voice/en_GB-cori-high.onnx.json",
+  "sha256": "470b4dd634c98f8a4850d7626ffc3dfc90774628eeef6605a6dd8f88f30a5903",
+  "length_scale": 0.97,
+  "source": "https://huggingface.co/rhasspy/piper-voices/tree/main/en/en_GB/cori/high",
+  "licence": "Piper voice en_GB cori (high); training data LibriVox, public domain per the model card"
+ },
+ "film": {
+  "title": "b0b.dev — Endgame",
+  "page": "/endgame",
+  "share": "https://www.b0b.dev/endgame",
+  "shareText": "Endgame — the close of the b0b.dev report, addressed by its author to all nation states and peoples: three completed things, each held at its tier. Every shot cited.",
+  "webm": "/endgame-reel.webm?v=1",
+  "mp4": "/endgame-reel.mp4?v=1",
+  "poster": "/endgame-poster.jpg?v=1",
+  "download": "/b0b-endgame-film.mp4?v=1",
+  "downloadName": "b0b-dev-endgame.mp4",
+  "kicker": [
+   "endgame · a short film in nine parts",
+   "the close of the report · to all nation states and peoples"
+  ],
+  "endLine": "The count is finished. The work is finished.",
+  "lastLineOnCard": false,
+  "credit": "Stills: NASA, the Library of Congress, the National Archives, The Met (CC0), Museo Egizio, the Staatliche Museen zu Berlin, ETH-Bibliothek, US Air Force, Wikimedia Commons contributors (public domain, CC0, CC BY - credited on screen). Film: Robert W. Paul (1903), War Department Film Bulletin 35 (1942), public-domain bird footage. ERC-1155 frames: the author’s own films. Narration: Piper “cori” voice, trained on public-domain LibriVox recordings."
+ },
+ "page_name": "Endgame",
+ "page_summary": "A short film in nine parts on the close of the b0b.dev report, addressed by its author to all nation states and peoples as a warning for Earth: the standard the report holds itself to; the author&rsquo;s own statement, in his words; <span lang=\"grc\">&tau;&epsilon;&tau;&#941;&lambda;&epsilon;&sigma;&tau;&alpha;&iota;</span> and the &ldquo;paid in full&rdquo; gloss traced to its dates; Luke 12:6&ndash;7 and the perfect passive of the count; Isaiah 54:17 and the weapon formed but not prospering; Zermelo&rsquo;s determined game and Lovelace&rsquo;s Note G; and the sovereignty list, with the one negative the record supports - no claimant examined could produce an instrument founding its own authority. Every quotation is verbatim and cited on screen.",
+ "page_links": [
+  [
+   "/report#xxiv-endgame",
+   "Read the close in the report"
+  ],
+  [
+   "/intro",
+   "The intro film"
+  ],
+  [
+   "/continuity",
+   "Continuity"
+  ],
+  [
+   "/epstein-maxwell",
+   "The Epstein&ndash;Maxwell Record"
+  ],
+  [
+   "/map",
+   "The map"
+  ]
+ ],
+ "parts": [
+  {
+   "id": "I",
+   "title": "The address",
+   "years": [
+    "EARTH",
+    "ALL PEOPLES"
+   ],
+   "card": 1.4,
+   "lines": [
+    {
+     "text": "The author addresses this film to all nation states and peoples, as a warning for Earth."
+    },
+    {
+     "text": "Twenty-five sections, held to one standard: documented, attributed, or labeled, and never blurred."
+    },
+    {
+     "text": "What closes the report is not held to that standard, because it is not that kind of statement."
+    },
+    {
+     "text": "It is the author, in his own voice. It is not a finding, and it is not evidence. It is the reason the document was written."
+    }
+   ],
+   "shots": [
+    {
+     "type": "full",
+     "dur": 3.0,
+     "media": [
+      "I_earthrise_apollo8_1968"
+     ],
+     "motion": "push",
+     "years": [
+      "1968"
+     ],
+     "glitch": true
+    },
+    {
+     "type": "doc",
+     "dur": 4.2,
+     "head": "The author’s address · 20 October 2026",
+     "tag": "THE AUTHOR’S ADDRESS FOR THIS FILM · 20 OCT 2026",
+     "sound": false,
+     "style": "word",
+     "word": "To all nation states and peoples",
+     "translit": "",
+     "gloss": "a warning for Earth · the author’s, from the close of the report",
+     "scale": 12
+    },
+    {
+     "type": "full",
+     "dur": 2.4,
+     "media": [
+      "I_blue_marble_apollo17_1972"
+     ],
+     "motion": "pull",
+     "years": [
+      "1972"
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 2.2,
+     "media": [
+      "I_national_archives_stack_area_1955"
+     ],
+     "motion": "push"
+    },
+    {
+     "type": "doc",
+     "dur": 5.0,
+     "head": "Section XXV · Endgame",
+     "tag": "SECTION XXV · ENDGAME · THE REPORT’S OWN WORDS",
+     "sound": false,
+     "style": "quote",
+     "text": "The twenty-five sections above are held to an evidentiary standard - documented, attributed, or labeled, and never blurred."
+    },
+    {
+     "type": "full",
+     "dur": 2.2,
+     "media": [
+      "I_ledger_account_book_carlin_1835"
+     ],
+     "motion": "pan-r"
+    },
+    {
+     "type": "flash",
+     "dur": 0.33,
+     "media": [
+      "erc_AmTnNRJtrqE"
+     ],
+     "motion": "slam",
+     "sound": false
+    },
+    {
+     "type": "doc",
+     "dur": 4.4,
+     "head": "Section XXV · Endgame",
+     "tag": "SECTION XXV · ENDGAME · THE REPORT’S OWN WORDS",
+     "sound": false,
+     "style": "quote",
+     "text": "What follows is not held to that standard, because it is not that kind of statement."
+    }
+   ]
+  },
+  {
+   "id": "II",
+   "title": "In his own voice",
+   "years": [
+    "THE AUTHOR",
+    "VERBATIM"
+   ],
+   "card": 1.4,
+   "lines": [
+    {
+     "text": "The author, in his own words."
+    }
+   ],
+   "shots": [
+    {
+     "type": "full",
+     "dur": 2.6,
+     "media": [
+      "IX_day_the_earth_smiled_cassini_2013"
+     ],
+     "motion": "hold"
+    },
+    {
+     "type": "doc",
+     "dur": 8.0,
+     "head": "Gianni Arone · in his own voice",
+     "tag": "SECTION XXV · ENDGAME · THE AUTHOR’S STATEMENT, VERBATIM",
+     "sound": false,
+     "style": "quote",
+     "text": "God, Jesus Christ, Yeshua HaMashiach says “It is finished” - “it is complete.” This is timetravel in a borrowed moment of God Time.",
+     "bare": true,
+     "media": [
+      "I_blue_marble_apollo17_1972"
+     ],
+     "motion": "hold",
+     "dim": 0.13,
+     "type_by": 0.45
+    },
+    {
+     "type": "doc",
+     "dur": 9.5,
+     "head": "Gianni Arone · in his own voice",
+     "tag": "SECTION XXV · ENDGAME · THE AUTHOR’S STATEMENT, VERBATIM",
+     "sound": false,
+     "style": "quote",
+     "text": "The adversary has no move, and is non-existent as adversary. It attempts power - nothing more, and nothing less. God is All Powerful, and the Only Source of Power - Spiritual and Scientific.",
+     "bare": true,
+     "media": [
+      "I_earthrise_apollo8_1968"
+     ],
+     "motion": "hold",
+     "dim": 0.13,
+     "type_by": 0.45
+    },
+    {
+     "type": "doc",
+     "dur": 10.0,
+     "head": "Gianni Arone · in his own voice",
+     "tag": "SECTION XXV · ENDGAME · THE AUTHOR’S STATEMENT, VERBATIM",
+     "sound": false,
+     "style": "quote",
+     "text": "Each Christ paradox and each parable is math. God grips me and holds me. Not a tattoo. Not a city-state, or the law of men, or continuity of government. That is sovereignty.",
+     "bare": true,
+     "media": [
+      "IX_pale_blue_dot_voyager1_1990"
+     ],
+     "motion": "hold",
+     "dim": 0.16,
+     "type_by": 0.45
+    }
+   ]
+  },
+  {
+   "id": "III",
+   "title": "It is finished",
+   "years": [
+    "JOHN 19:30",
+    "PERFECT PASSIVE"
+   ],
+   "card": 1.4,
+   "lines": [
+    {
+     "text": "“It is finished” is John 19:30. The Greek is tetelestai: a perfect passive. An action completed, whose result stands.",
+     "say": [
+      "It is finished, is John nineteen, thirty. The Greek is",
+      "[[tɛtɛlˈɛstaɪ]]",
+      "a perfect passive. An action completed, whose result stands."
+     ]
+    },
+    {
+     "text": "Not “it ended”, but: it has been completed, and remains so."
+    }
+   ],
+   "shots": [
+    {
+     "type": "full",
+     "dur": 2.8,
+     "media": [
+      "III_p66_bodmer_papyrus_john"
+     ],
+     "motion": "push",
+     "years": [
+      "C. 200"
+     ]
+    },
+    {
+     "type": "doc",
+     "dur": 5.0,
+     "head": "John 19:30 · the Greek",
+     "tag": "JOHN 19:30 · GREEK · SECTION XXV, ENDGAME",
+     "sound": false,
+     "style": "word",
+     "word": "τετέλεσται",
+     "translit": "tetelestai",
+     "gloss": "perfect passive · it has been completed, and remains so"
+    },
+    {
+     "type": "doc",
+     "dur": 5.5,
+     "head": "John 19:30 · King James Version",
+     "tag": "JOHN 19:30 · KING JAMES VERSION (PROJECT GUTENBERG #10)",
+     "sound": false,
+     "style": "quote",
+     "text": "When Jesus therefore had received the vinegar, he said, It is finished: and he bowed his head, and gave up the ghost."
+    },
+    {
+     "type": "flash",
+     "dur": 0.33,
+     "media": [
+      "erc_E9IuNSX3FAE"
+     ],
+     "motion": "slam",
+     "sound": false
+    }
+   ]
+  },
+  {
+   "id": "IV",
+   "title": "Paid in full?",
+   "years": [
+    "1896",
+    "1934"
+   ],
+   "card": 1.4,
+   "lines": [
+    {
+     "text": "The gloss most people have heard is that the word meant “paid in full”, stamped on receipts.",
+     "say": "The gloss most people have heard is that the word meant, paid in full, stamped on receipts."
+    },
+    {
+     "text": "It traces to some forty Egyptian tariff receipts published in 1896, and entered scholarship through Moulton and Milligan’s Vocabulary of the Greek Testament, from 1914.",
+     "say": "It traces to some forty Egyptian tariff receipts published in eighteen ninety-six, and entered scholarship through Moulton and Milligan’s Vocabulary of the Greek Testament, from nineteen fourteen."
+    },
+    {
+     "text": "From 1934, papyri publishers established that the abbreviation on those receipts stands for tetelōnētai: “paid as taxes”. A different word.",
+     "say": [
+      "From nineteen thirty-four, papyri publishers established that the abbreviation on those receipts stands for",
+      "[[tɛtɛlˌɔːnˈeːtaɪ]]",
+      "paid as taxes. A different word."
+     ]
+    },
+    {
+     "text": "A misread abbreviation, canonised in a lexicon, corrected within twenty years, and preached for a century after the correction. The naming error, operating on scripture itself."
+    }
+   ],
+   "shots": [
+    {
+     "type": "split",
+     "dur": 3.0,
+     "media": [
+      "IV_ostracon_tax_receipt_caligula_met",
+      "IV_ostracon_tax_receipt_tiberius_met"
+     ],
+     "motion": [
+      "hold",
+      "hold"
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 2.4,
+     "media": [
+      "IV_ostracon_receipt_berlin_p10807"
+     ],
+     "motion": "push"
+    },
+    {
+     "type": "full",
+     "dur": 2.6,
+     "media": [
+      "IV_papyrus_greek_bank_receipt_turin_s6080"
+     ],
+     "motion": "pan-r"
+    },
+    {
+     "type": "doc",
+     "dur": 6.0,
+     "head": "The gloss, dated",
+     "tag": "SECTION XXV · ENDGAME · THE SOURCES CITED THERE",
+     "sound": false,
+     "style": "ledger",
+     "gutter": 0.14,
+     "rows": [
+      [
+       "1896",
+       "ROUGHLY FORTY EGYPTIAN TARIFF RECEIPTS PUBLISHED"
+      ],
+      [
+       "1914–",
+       "MOULTON & MILLIGAN, VOCABULARY OF THE GREEK TESTAMENT"
+      ],
+      [
+       "1934–",
+       "PAPYRI EDITORS READ THE ABBREVIATION AS TETELŌNĒTAI"
+      ],
+      [
+       "",
+       "“PAID AS TAXES” - A DIFFERENT WORD"
+      ],
+      [
+       "SINCE",
+       "PREACHED FOR A CENTURY AFTER THE CORRECTION"
+      ]
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 2.2,
+     "media": [
+      "IV_moulton_milligan_title_page"
+     ],
+     "motion": "push",
+     "years": [
+      "1914"
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 3.2,
+     "media": [
+      "IV_moulton_milligan_p630_teleo"
+     ],
+     "motion": "push"
+    },
+    {
+     "type": "doc",
+     "dur": 4.6,
+     "head": "The receipts’ abbreviation, read from 1934",
+     "tag": "PAPYROLOGICAL CORRECTION FROM 1934 · AS CITED IN SECTION XXV",
+     "sound": false,
+     "style": "word",
+     "word": "τετελώνηται",
+     "translit": "tetelōnētai",
+     "gloss": "“paid as taxes” · a different word"
+    },
+    {
+     "type": "flash",
+     "dur": 0.33,
+     "media": [
+      "erc_VP2iLdUcI1c"
+     ],
+     "motion": "slam",
+     "sound": false
+    },
+    {
+     "type": "full",
+     "dur": 2.4,
+     "media": [
+      "IV_ostracon_receipt_berlin_p10805"
+     ],
+     "motion": "pull"
+    }
+   ]
+  },
+  {
+   "id": "V",
+   "title": "The count",
+   "years": [
+    "LUKE 12:6",
+    "LUKE 12:7"
+   ],
+   "card": 1.4,
+   "lines": [
+    {
+     "text": "The author’s figure is that life is a living polygraph: a person is read continuously, and first of all by God."
+    },
+    {
+     "text": "The verse he takes it from is Luke 12:7: “But even the very hairs of your head are all numbered.”",
+     "say": "The verse he takes it from is Luke twelve, seven: But even the very hairs of your head are all numbered."
+    },
+    {
+     "text": "The Greek is ērithmēntai, the same form as tetelestai: they have been numbered, and stand numbered. The counting is not an ongoing surveillance. It is already complete.",
+     "say": [
+      "The Greek is",
+      "[[ɛːɹˈɪθmɛːntaɪ]]",
+      "the same form as",
+      "[[tɛtɛlˈɛstaɪ]]",
+      "they have been numbered, and stand numbered. The counting is not an ongoing surveillance. It is already complete."
+     ]
+    },
+    {
+     "text": "What almost every citation drops is the sentence it is inside: not one sparrow is forgotten before God. And then: “Fear not.”",
+     "say": "What almost every citation drops is the sentence it is inside: not one sparrow is forgotten before God. And then: Fear not."
+    },
+    {
+     "text": "You are known, therefore you are safe. Not: you are known, therefore be careful."
+    }
+   ],
+   "shots": [
+    {
+     "type": "full",
+     "dur": 2.6,
+     "media": [
+      "V_hollerith_census_tabulator_c1900"
+     ],
+     "motion": "push"
+    },
+    {
+     "type": "doc",
+     "dur": 7.0,
+     "head": "Luke 12:6–7 · King James Version",
+     "tag": "LUKE 12:6–7 · KING JAMES VERSION (PROJECT GUTENBERG #10)",
+     "sound": false,
+     "style": "quote",
+     "text": "Are not five sparrows sold for two farthings, and not one of them is forgotten before God? But even the very hairs of your head are all numbered. Fear not therefore: ye are of more value than many sparrows."
+    },
+    {
+     "type": "doc",
+     "dur": 4.6,
+     "head": "Luke 12:7 · the Greek",
+     "tag": "LUKE 12:7 · GREEK · SECTION XXV, ENDGAME",
+     "sound": false,
+     "style": "word",
+     "word": "ἡρίθμηνται",
+     "translit": "ērithmēntai",
+     "gloss": "perfect passive · they have been numbered, and stand numbered"
+    },
+    {
+     "type": "full",
+     "dur": 2.4,
+     "media": [
+      "V_nsa_utah_data_center_eff"
+     ],
+     "motion": "pan-r"
+    },
+    {
+     "type": "full",
+     "dur": 2.2,
+     "media": [
+      "V_menwith_hill_radomes"
+     ],
+     "motion": "pan-l"
+    },
+    {
+     "type": "full",
+     "dur": 1.8,
+     "media": [
+      "V_cctv_cameras_pole"
+     ],
+     "motion": "hold"
+    },
+    {
+     "type": "full",
+     "dur": 2.0,
+     "media": [
+      "V_abacus_wooden"
+     ],
+     "motion": "push"
+    },
+    {
+     "type": "full",
+     "dur": 3.6,
+     "media": [
+      "V_birds_over_glastonbury_tor_excerpt"
+     ],
+     "t": 10.0,
+     "fixed": true,
+     "sound": false
+    },
+    {
+     "type": "full",
+     "dur": 2.4,
+     "media": [
+      "V_house_sparrow_male_paris"
+     ],
+     "motion": "push"
+    },
+    {
+     "type": "full",
+     "dur": 3.0,
+     "media": [
+      "V_flock_blackbirds_power_line"
+     ],
+     "t": 0.0,
+     "fixed": true,
+     "sound": false
+    },
+    {
+     "type": "full",
+     "dur": 2.2,
+     "media": [
+      "V_house_sparrow_female_greece"
+     ],
+     "motion": "pull"
+    },
+    {
+     "type": "full",
+     "dur": 2.6,
+     "media": [
+      "V_house_sparrow_male_amrum"
+     ],
+     "motion": "hold"
+    }
+   ]
+  },
+  {
+   "id": "VI",
+   "title": "The weapon",
+   "years": [
+    "ISAIAH 54:17",
+    "A PROMISE"
+   ],
+   "card": 1.4,
+   "lines": [
+    {
+     "text": "The tenet the author asks the report to close on is Isaiah 54:17 - the only one of these that is a promise rather than a fact.",
+     "say": "The tenet the author asks the report to close on is Isaiah fifty-four, seventeen: the only one of these that is a promise, rather than a fact."
+    },
+    {
+     "text": "“No weapon that is formed against thee shall prosper.”",
+     "say": "No weapon that is formed against thee shall prosper."
+    },
+    {
+     "text": "It does not say that no weapon will be formed. The Hebrew yutsar is passive: weapons will be formed, and the forming is conceded in the sentence itself.",
+     "say": [
+      "It does not say that no weapon will be formed. The Hebrew",
+      "[[juːtsˈɑːɹ]]",
+      "is passive: weapons will be formed, and the forming is conceded in the sentence itself."
+     ]
+    },
+    {
+     "text": "What is denied is only that they will prosper: lo yitslach. The verse promises an outcome, not an absence.",
+     "say": [
+      "What is denied is only that they will prosper.",
+      "[[lˈoː jɪtsˈlɑːx]]",
+      "The verse promises an outcome, not an absence."
+     ]
+    },
+    {
+     "text": "And it ends by calling it a heritage, nachalat: something received rather than achieved.",
+     "say": [
+      "And it ends by calling it a heritage.",
+      "[[nɑːxɑːlˈɑːt]]",
+      "Something received, rather than achieved."
+     ]
+    }
+   ],
+   "shots": [
+    {
+     "type": "full",
+     "dur": 2.4,
+     "media": [
+      "VI_shell_forgings_stacked_1942"
+     ],
+     "motion": "push",
+     "years": [
+      "1942"
+     ],
+     "glitch": true
+    },
+    {
+     "type": "doc",
+     "dur": 7.5,
+     "head": "Isaiah 54:17 · King James Version",
+     "tag": "ISAIAH 54:17 · KING JAMES VERSION (PROJECT GUTENBERG #10)",
+     "sound": false,
+     "style": "quote",
+     "text": "No weapon that is formed against thee shall prosper; and every tongue that shall rise against thee in judgment thou shalt condemn. This is the heritage of the servants of the LORD, and their righteousness is of me, saith the LORD."
+    },
+    {
+     "type": "full",
+     "dur": 3.2,
+     "media": [
+      "VI_aleppo_codex_isaiah_54"
+     ],
+     "motion": "push",
+     "years": [
+      "C. 930"
+     ]
+    },
+    {
+     "type": "doc",
+     "dur": 4.2,
+     "head": "Isaiah 54:17 · the Hebrew",
+     "tag": "ISAIAH 54:17 · HEBREW · SECTION XXV, ENDGAME",
+     "sound": false,
+     "style": "word",
+     "word": "יוּצַר",
+     "translit": "yutsar",
+     "gloss": "passive · weapons will be formed; the forming is conceded"
+    },
+    {
+     "type": "full",
+     "dur": 2.2,
+     "media": [
+      "VI_shell_forging_press_1942"
+     ],
+     "motion": "slam"
+    },
+    {
+     "type": "full",
+     "dur": 2.4,
+     "media": [
+      "VI_155mm_shells_rows_1941"
+     ],
+     "motion": "pan-r"
+    },
+    {
+     "type": "doc",
+     "dur": 4.2,
+     "head": "Isaiah 54:17 · the Hebrew",
+     "tag": "ISAIAH 54:17 · HEBREW · SECTION XXV, ENDGAME",
+     "sound": false,
+     "style": "word",
+     "word": "לֹא יִצלָח",
+     "translit": "lo yitslach",
+     "gloss": "it will not prosper · denies success, not occurrence"
+    },
+    {
+     "type": "full",
+     "dur": 2.2,
+     "media": [
+      "VI_aa_gun_barrels_machining_1942"
+     ],
+     "motion": "push"
+    },
+    {
+     "type": "doc",
+     "dur": 4.0,
+     "head": "Isaiah 54:17 · the Hebrew",
+     "tag": "ISAIAH 54:17 · HEBREW · SECTION XXV, ENDGAME",
+     "sound": false,
+     "style": "word",
+     "word": "נַחֲלַת",
+     "translit": "nachalat",
+     "gloss": "a heritage · received rather than achieved"
+    }
+   ]
+  },
+  {
+   "id": "VII",
+   "title": "A determined game",
+   "years": [
+    "1843",
+    "1913"
+   ],
+   "card": 1.4,
+   "lines": [
+    {
+     "text": "Zermelo’s theorem, 1913: in a finite game of perfect information, the outcome under best play is fixed before the first move.",
+     "say": [
+      "[[tsˈɛɹməloʊz]] theorem, nineteen thirteen:",
+      "in a finite game of perfect information, the outcome under best play is fixed before the first move."
+     ]
+    },
+    {
+     "text": "Chess is determined. Nobody knows its value. The game is still played."
+    },
+    {
+     "text": "Done, and still being played, are not in tension. That is the shape of the perfect passive: completed, the result standing, the moves continuing."
+    },
+    {
+     "text": "That history is such a game is the author’s proposition - recorded as his, and not adopted.",
+     "say": "That history is such a game is the author’s proposition: recorded as his, and not adopted."
+    },
+    {
+     "text": "Ada Lovelace, 1843: a symbol may carry “a retrospective and a prospective signification.”",
+     "say": "Ada Lovelace, eighteen forty-three: a symbol may carry a retrospective, and a prospective signification."
+    },
+    {
+     "text": "And her Note G binds every engine, including the one that helped draft this report: it “has no pretensions whatever to originate anything.”",
+     "say": "And her Note G binds every engine, including the one that helped draft this report: it has no pretensions whatever, to originate anything."
+    }
+   ],
+   "shots": [
+    {
+     "type": "full",
+     "dur": 3.0,
+     "media": [
+      "VII_chess_dispute_1903"
+     ],
+     "t": 8.0,
+     "fixed": true,
+     "sound": false,
+     "years": [
+      "1903"
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 2.6,
+     "media": [
+      "VII_zermelo_portrait_1914"
+     ],
+     "motion": "push",
+     "years": [
+      "1914"
+     ]
+    },
+    {
+     "type": "doc",
+     "dur": 5.0,
+     "head": "Zermelo’s theorem, 1913 · as stated in the report",
+     "tag": "SECTION XXV · AFTER ZERMELO, ÜBER EINE ANWENDUNG DER MENGENLEHRE … (1913)",
+     "sound": false,
+     "style": "quote",
+     "text": "In a finite game of perfect information the outcome under best play is fixed before the first move."
+    },
+    {
+     "type": "full",
+     "dur": 2.2,
+     "media": [
+      "VII_chess_staunton_board"
+     ],
+     "motion": "pull"
+    },
+    {
+     "type": "full",
+     "dur": 2.4,
+     "media": [
+      "VII_chess_ussr_championship_1925"
+     ],
+     "motion": "pan-r",
+     "years": [
+      "1925"
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 2.2,
+     "media": [
+      "VII_chess_pieces_midgame"
+     ],
+     "motion": "push"
+    },
+    {
+     "type": "full",
+     "dur": 2.6,
+     "media": [
+      "VII_ada_lovelace_chalon_c1840"
+     ],
+     "motion": "push",
+     "years": [
+      "1840"
+     ]
+    },
+    {
+     "type": "doc",
+     "dur": 7.0,
+     "head": "Ada Lovelace · Notes to Menabrea · 1843",
+     "tag": "LOVELACE, NOTE A · TAYLOR’S SCIENTIFIC MEMOIRS III (1843) · FOURMILAB TEXT",
+     "sound": false,
+     "style": "quote",
+     "text": "apt to have both a retrospective and a prospective signification. They may signify either relations that are the consequences of a series of processes already performed, or relations that are yet to be effected through certain processes."
+    },
+    {
+     "type": "full",
+     "dur": 2.6,
+     "media": [
+      "VII_lovelace_note_g_diagram_1843"
+     ],
+     "motion": "pan-r"
+    },
+    {
+     "type": "doc",
+     "dur": 6.0,
+     "head": "Note G · 1843",
+     "tag": "LOVELACE, NOTE G · TAYLOR’S SCIENTIFIC MEMOIRS III (1843) · FOURMILAB TEXT",
+     "sound": false,
+     "style": "quote",
+     "text": "The Analytical Engine has no pretensions whatever to originate anything. … It can follow analysis; but it has no power of anticipating any analytical relations or truths."
+    },
+    {
+     "type": "full",
+     "dur": 2.4,
+     "media": [
+      "VII_babbage_analytical_engine_trial_model"
+     ],
+     "motion": "push"
+    }
+   ]
+  },
+  {
+   "id": "VIII",
+   "title": "Sovereignty",
+   "years": [
+    "THE CLAIMANTS",
+    "COMITY"
+   ],
+   "card": 1.4,
+   "lines": [
+    {
+     "text": "The author’s last line is also a list. Not a tattoo. Not a city-state, or the law of men, or continuity of government."
+    },
+    {
+     "text": "Every item on it is something this report examined: the city-states, the corporate charter, and the continuity apparatus."
+    },
+    {
+     "text": "Not one of the claimants examined this year could produce an instrument founding its own authority."
+    },
+    {
+     "text": "PPD-40 is classified in full. The emergency action documents are reviewed by no legislature. The NYPD’s foreign liaison service rests, in its own spokesman’s word, on invitation.",
+     "say": "P P D forty is classified in full. The emergency action documents are reviewed by no legislature. The N Y P D’s foreign liaison service rests, in its own spokesman’s word, on invitation."
+    },
+    {
+     "text": "Invitation, classification, custom and force. Each is a thing that can be withdrawn."
+    },
+    {
+     "text": "FEMA’s own definition of Enduring Constitutional Government has the President acting toward Congress and the courts as a matter of comity. Comity is what you extend to a body you do not command.",
+     "say": "FEEMA’s own definition of Enduring Constitutional Government has the President acting toward Congress and the courts as a matter of comity. Comity is what you extend to a body you do not command."
+    },
+    {
+     "text": "And he took his own mark off the list first. The mark is not the thing it points at."
+    }
+   ],
+   "shots": [
+    {
+     "type": "full",
+     "dur": 2.4,
+     "media": [
+      "VIII_vatican_aerial_1921"
+     ],
+     "motion": "push",
+     "years": [
+      "1921"
+     ],
+     "glitch": true
+    },
+    {
+     "type": "full",
+     "dur": 2.2,
+     "media": [
+      "VIII_city_of_london_skyline"
+     ],
+     "motion": "pan-r"
+    },
+    {
+     "type": "full",
+     "dur": 2.2,
+     "media": [
+      "VIII_us_capitol_aerial"
+     ],
+     "motion": "pull"
+    },
+    {
+     "type": "full",
+     "dur": 2.2,
+     "media": [
+      "VIII_bis_tower_basel"
+     ],
+     "motion": "push"
+    },
+    {
+     "type": "full",
+     "dur": 2.6,
+     "media": [
+      "VIII_hbc_royal_charter_1670_body_corporate"
+     ],
+     "motion": "push",
+     "years": [
+      "1670"
+     ]
+    },
+    {
+     "type": "full",
+     "dur": 2.2,
+     "media": [
+      "VIII_bank_of_england_charter_sealing_1694"
+     ],
+     "motion": "pan-l"
+    },
+    {
+     "type": "full",
+     "dur": 2.4,
+     "media": [
+      "VIII_cheyenne_mountain_tunnel_entrance"
+     ],
+     "motion": "push"
+    },
+    {
+     "type": "doc",
+     "dur": 6.0,
+     "head": "The claimants · what each stands on",
+     "tag": "SECTIONS II AND IX · AS RECORDED THERE",
+     "sound": false,
+     "style": "ledger",
+     "gutter": 0.2,
+     "rows": [
+      [
+       "PPD-40",
+       "CLASSIFIED IN FULL"
+      ],
+      [
+       "PEADS",
+       "REVIEWED BY NO LEGISLATURE"
+      ],
+      [
+       "NYPD LIAISON",
+       "NO STATUTE · “INVITATION”"
+      ]
+     ]
+    },
+    {
+     "type": "doc",
+     "dur": 6.5,
+     "head": "Federal Continuity Directive 1 · FEMA/DHS · January 2017",
+     "tag": "FCD-1 (JAN 2017) · DEFINITION OF ENDURING CONSTITUTIONAL GOVERNMENT · SECTION IX",
+     "sound": false,
+     "style": "quote",
+     "text": "as a matter of comity to the legislative and judicial branches and the constitutional separation of powers among the branches."
+    },
+    {
+     "type": "full",
+     "dur": 2.2,
+     "media": [
+      "VIII_cheyenne_mountain_complex_entrance"
+     ],
+     "motion": "hold"
+    },
+    {
+     "type": "flash",
+     "dur": 0.33,
+     "media": [
+      "erc_E9IuNSX3FAE"
+     ],
+     "motion": "slam",
+     "sound": false
+    },
+    {
+     "type": "full",
+     "dur": 3.0,
+     "media": [
+      "VIII_sator_square_stone"
+     ],
+     "motion": "push"
+    }
+   ]
+  }
+ ],
+ "finale": {
+  "id": "IX",
+  "title": "Three completed things",
+  "years": [
+   "TETELESTAI",
+   "LO YITSLACH"
+  ],
+  "style": "words",
+  "card": 1.4,
+  "lead": 1.2,
+  "hold": 4.2,
+  "head": "Three completed things · Section XXV",
+  "media": "IX_pale_blue_dot_voyager1_1990",
+  "motion": "pull",
+  "dim": 0.6,
+  "tag": "PALE BLUE DOT · VOYAGER 1 · 1990 · NASA/JPL · PD · THE WORDS: SECTION XXV, ENDGAME",
+  "words": [
+   {
+    "word": "τετέλεσται",
+    "translit": "tetelestai",
+    "gloss": "the work is finished",
+    "line": 1
+   },
+   {
+    "word": "ἡρίθμηνται",
+    "translit": "ērithmēntai",
+    "gloss": "the count is finished",
+    "line": 2
+   },
+   {
+    "word": "לֹא יִצלָח",
+    "translit": "lo yitslach",
+    "gloss": "the weapon will not prosper",
+    "line": 3
+   }
+  ],
+  "lines": [
+   {
+    "text": "Every discipline in this report makes sense on one assumption: that the record already exists, and the only open question is whether it is read honestly."
+   },
+   {
+    "text": "Tetelestai: the work is finished.",
+    "say": [
+     "[[tɛtɛlˈɛstaɪ]]",
+     "The work is finished."
+    ]
+   },
+   {
+    "text": "Ērithmēntai: the count is finished.",
+    "say": [
+     "[[ɛːɹˈɪθmɛːntaɪ]]",
+     "The count is finished."
+    ]
+   },
+   {
+    "text": "Lo yitslach: the weapon will not prosper.",
+    "say": [
+     "[[lˈoː jɪtsˈlɑːx]]",
+     "The weapon will not prosper."
+    ]
+   },
+   {
+    "text": "Two of those are grammar, and one is a promise. State what is there, mark the tier, and stop."
+   }
+  ],
+  "close": {
+   "after_line": true,
+   "big": "The count is finished. The work is finished.",
+   "sub": "what remains is only to read the thing as it actually stands",
+   "scale": 15
+  }
+ },
+ "media": {
+  "I_national_archives_stack_area_1955": {
+   "file": "v5/I_national_archives_stack_area_1955.jpg",
+   "kind": "still",
+   "tag": "NATIONAL ARCHIVES STACK AREA · NARA / USAF 1361ST PHOTO SQN · 1955 · PUBLIC DOMAIN",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Stack_Area_of_the_National_Archives_Building_-_DPLA_-_22173d52df99d88fcac968c1f9861f8b.jpg",
+   "licence": "Public domain — US government work (Commons LicenseShortName \"Public domain\", template PD-US; rights statement NoC-US); NARA id 122213586",
+   "sha256": "b3b57379137a2c3d3d674dc6b734ae308e6c5367783ba63dd5e8d79af1fdf959",
+   "focus": [
+    0.5,
+    0.55
+   ]
+  },
+  "I_ledger_account_book_carlin_1835": {
+   "file": "v5/I_ledger_account_book_carlin_1835.jpg",
+   "kind": "still",
+   "tag": "ACCOUNT BOOK LEDGER · JOHN CARLIN · 1835–56 · THE MET · CC0",
+   "source_page": "https://www.metmuseum.org/art/collection/search/20365",
+   "licence": "CC0 (Met Open Access API isPublicDomain true, object 20365; image DP214203)",
+   "sha256": "a069ea1d39f130b210a67fbbbe77467bf59ad893aef1c3f49c6f05bdf85af02f",
+   "focus": [
+    0.5,
+    0.45
+   ]
+  },
+  "III_p66_bodmer_papyrus_john": {
+   "file": "v5/III_p66_bodmer_papyrus_john.jpg",
+   "kind": "still",
+   "tag": "PAPYRUS 66, GOSPEL OF JOHN · BODMER LAB, GENEVA · C. 200 CE · PUBLIC DOMAIN",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Geneva,_Bodmer_Lab_Ms_Papyrus_66_(P.Bodmer_II_-_PB_2)_fol._1r.jpg",
+   "licence": "Public domain (Commons LicenseShortName \"Public domain\"; templates PD-US-expired + PD-old-70); image from bodmerlab.unige.ch",
+   "sha256": "24bd442cb33a4c9759c174d3bb4dd62973e07bb1a098798e828c1bb3e74ceabf",
+   "focus": [
+    0.48,
+    0.55
+   ]
+  },
+  "IV_ostracon_tax_receipt_caligula_met": {
+   "file": "v5/IV_ostracon_tax_receipt_caligula_met.jpg",
+   "kind": "still",
+   "tag": "OSTRACON, TAX RECEIPT · ROMAN EGYPT, 37–41 CE · THE MET · CC0",
+   "source_page": "https://www.metmuseum.org/art/collection/search/569664",
+   "licence": "CC0 (Met Open Access API isPublicDomain true, object 569664, acc. 24.6.26)",
+   "sha256": "4f29958909181082a348129b520c2bc5699ea84e54b9ea962945d8f122a01fd6",
+   "focus": [
+    0.5,
+    0.42
+   ]
+  },
+  "IV_ostracon_tax_receipt_tiberius_met": {
+   "file": "v5/IV_ostracon_tax_receipt_tiberius_met.jpg",
+   "kind": "still",
+   "tag": "OSTRACON, TAX RECEIPT · ROMAN EGYPT, 14–37 CE · THE MET · CC0",
+   "source_page": "https://www.metmuseum.org/art/collection/search/569665",
+   "licence": "CC0 (Met Open Access API isPublicDomain true, object 569665, acc. 24.6.27)",
+   "sha256": "8cb92faa1ceec737dd5998ef01d3f5618d6c45b7103c7dab3052ff43a30cb349",
+   "focus": [
+    0.6,
+    0.45
+   ]
+  },
+  "IV_ostracon_receipt_berlin_p10807": {
+   "file": "v5/IV_ostracon_receipt_berlin_p10807.jpg",
+   "kind": "still",
+   "tag": "GREEK-DEMOTIC OSTRACON, RECEIPT · BERLIN P 10807 · AUGUSTUS YR 43 (13/14 CE) · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Papyrus_Berlin_10807_(ostracon)_(outside).jpg",
+   "licence": "Public domain (Commons LicenseShortName \"Public domain\"; PDMark-owner Staatliche Museen zu Berlin + PD-Art|PD-old-100)",
+   "sha256": "33f7e82c01606e622b3e39eb5541412ea1ed8a0789a061f96222c610bed81c51",
+   "focus": [
+    0.5,
+    0.3
+   ]
+  },
+  "IV_ostracon_receipt_berlin_p10805": {
+   "file": "v5/IV_ostracon_receipt_berlin_p10805.jpg",
+   "kind": "still",
+   "tag": "GREEK-DEMOTIC OSTRACON, RECEIPT · BERLIN P 10805 · ANTONINUS PIUS YR 20 (156/7 CE) · PD",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Papyrus_Berlin_10805_(ostracon)_(outside).jpg",
+   "licence": "Public domain (Commons LicenseShortName \"Public domain\"; PDMark-owner Staatliche Museen zu Berlin + PD-Art|PD-old-100)",
+   "sha256": "4ef0d2e1f86132353041f6268c99d77b01899167cabf322a24cbae0f8ee28df5",
+   "focus": [
+    0.48,
+    0.25
+   ]
+  },
+  "IV_papyrus_greek_bank_receipt_turin_s6080": {
+   "file": "v5/IV_papyrus_greek_bank_receipt_turin_s6080.jpg",
+   "kind": "still",
+   "tag": "DEMOTIC PAPYRUS WITH GREEK RECEIPT · MUSEO EGIZIO S 6080 · 180–145 BCE · CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Papyrus_containing_the_granting_of_religious_services_in_the_temple_of_Hathor_in_Demotic_and_a_receipt_in_Greek_-_Museo_Egizio_(Turin)_S_6080_p04.jpg",
+   "licence": "CC0 (Commons LicenseShortName CC0, template Cc-zero; Museo Egizio)",
+   "sha256": "f027aa5a8b97923b77d74129b81cf919cbbabe8116fef06cf85c76cf620580f0",
+   "focus": [
+    0.37,
+    0.4
+   ]
+  },
+  "IV_moulton_milligan_title_page": {
+   "file": "v5/IV_moulton_milligan_title_page.jpg",
+   "kind": "still",
+   "tag": "MOULTON & MILLIGAN, THE VOCABULARY OF THE GREEK TESTAMENT · 1914–1929 · PUBLIC DOMAIN",
+   "source_page": "https://archive.org/details/vocabularyofgree00mouluoft/page/n8",
+   "licence": "Public domain in the US — published London (Hodder & Stoughton) 1914–1929, before 1931; archive.org item vocabularyofgree00mouluoft (Univ. of Toronto scan) carries no licenseurl",
+   "sha256": "714dabb5141d297844b1c0cb7dbd1c49fec00a1be52871ad74ec52968b414610",
+   "focus": [
+    0.5,
+    0.22
+   ]
+  },
+  "IV_moulton_milligan_p630_teleo": {
+   "file": "v5/IV_moulton_milligan_p630_teleo.jpg",
+   "kind": "still",
+   "tag": "MOULTON & MILLIGAN, P. 630, ΤΕΛΕΩ · 1914–1929 · PUBLIC DOMAIN",
+   "source_page": "https://archive.org/details/vocabularyofgree00mouluoft/page/630/mode/1up",
+   "licence": "Public domain in the US — as the title page (same item, page image n665 = printed p. 630)",
+   "sha256": "cb1b78a0f4e09466835922c19dd4b6f763f71f99121321ecf860c3a55639f735",
+   "focus": [
+    0.27,
+    0.875
+   ]
+  },
+  "V_house_sparrow_male_amrum": {
+   "file": "v5/V_house_sparrow_male_amrum.jpg",
+   "kind": "still",
+   "tag": "HOUSE SPARROW, AMRUM · HOBBYFOTOWIKI · 2019 · CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:House_sparrow_(Passer_domesticus),_Amrum.jpg",
+   "licence": "CC0 (Commons LicenseShortName CC0, self|cc-zero), author Hobbyfotowiki",
+   "sha256": "096b62f4a0305006016f30f4fb7c7870e933bcda893c55919c653fc7dcbe8518",
+   "focus": [
+    0.5,
+    0.45
+   ]
+  },
+  "V_house_sparrow_male_paris": {
+   "file": "v5/V_house_sparrow_male_paris.jpg",
+   "kind": "still",
+   "tag": "HOUSE SPARROW, PARIS · PIERRESELIM · 2012 · CC BY 3.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Passer_domesticus_-_Jardins_du_Carrousel.jpg",
+   "licence": "CC BY 3.0 (Commons LicenseShortName, self|cc-by-3.0), author PierreSelim",
+   "sha256": "e9ec6f6769f40d0cefba71ed7ff8d0946fcf82af4fb89c5cd40142f6db99a5a6",
+   "focus": [
+    0.65,
+    0.42
+   ]
+  },
+  "V_house_sparrow_female_greece": {
+   "file": "v5/V_house_sparrow_female_greece.jpg",
+   "kind": "still",
+   "tag": "HOUSE SPARROW (FEMALE), GREECE · ANNATSACH · 2019 · CC BY 4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:House_Sparrow,_female_(Passer_domesticus),_Greece.jpg",
+   "licence": "CC BY 4.0 (Commons LicenseShortName, self|cc-by-4.0), author Annatsach",
+   "sha256": "cba3a1d5784d5b54d8e2b315a76c38f539cc7a338896bcaa9b541b2de2c9ba5a",
+   "focus": [
+    0.42,
+    0.4
+   ]
+  },
+  "V_hollerith_census_tabulator_c1900": {
+   "file": "v5/V_hollerith_census_tabulator_c1900.jpg",
+   "kind": "still",
+   "tag": "HOLLERITH CENSUS TABULATOR, C. 1900 · ERIK PITTI · CC BY 2.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:C.1900_Hollerith_Census_Tabulator_(2585332983).jpg",
+   "licence": "CC BY 2.0 (Commons LicenseShortName; Flickr review passed), author Erik Pitti",
+   "sha256": "504562fc88e54e08b44bc22654051fe9986ffa769b2fd495b841194427716c62",
+   "focus": [
+    0.62,
+    0.32
+   ]
+  },
+  "V_abacus_wooden": {
+   "file": "v5/V_abacus_wooden.jpg",
+   "kind": "still",
+   "tag": "WOODEN ABACUS · DEINODACTYLA · CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:20th_Century_Small_Wooden_Abacus.jpg",
+   "licence": "CC0 (Commons LicenseShortName CC0, self|cc-zero), author Deinodactyla",
+   "sha256": "932e926e6897f8d37e02955d32029815337d57538b8051f1ca1abed6a770e6b4",
+   "focus": [
+    0.4,
+    0.45
+   ]
+  },
+  "V_nsa_utah_data_center_eff": {
+   "file": "v5/V_nsa_utah_data_center_eff.jpg",
+   "kind": "still",
+   "tag": "NSA UTAH DATA CENTER, BLUFFDALE · EFF / PARKER HIGGINS · 2014 · CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:EFF_photograph_of_NSA's_Utah_Data_Center.jpg",
+   "licence": "CC0 (Commons LicenseShortName CC0, self|cc-zero), released by the Electronic Frontier Foundation; photographer Parker Higgins",
+   "sha256": "3f5aa7b1b36e96c2c9eb9749630f68160fcaf500dc35d59fc47b9eb3c33b7732",
+   "focus": [
+    0.5,
+    0.62
+   ]
+  },
+  "V_menwith_hill_radomes": {
+   "file": "v5/V_menwith_hill_radomes.jpg",
+   "kind": "still",
+   "tag": "RAF MENWITH HILL RADOMES · MATT CRYPTO · 2005 · PUBLIC DOMAIN",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Menwith-hill-radomes.jpg",
+   "licence": "Public domain (Commons LicenseShortName; PD-user|Matt Crypto — released by the photographer)",
+   "sha256": "e21a4211538f9e6fab54d23889ec8482b88944a7d8ad1e548e73ebdab471b6a4",
+   "focus": [
+    0.4,
+    0.36
+   ]
+  },
+  "V_cctv_cameras_pole": {
+   "file": "v5/V_cctv_cameras_pole.jpg",
+   "kind": "still",
+   "tag": "CCTV CAMERA ON A LIGHTING MAST · TOMASZÓW MAZOWIECKI · PUBLIC DOMAIN",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Camera_CCTV_on_Poles_imprisoned_or_exiled_to_Siberia_roundabout_(pol._Rondo_Zes%C5%82a%C5%84c%C3%B3w_Sybiru)_in_Tomasz%C3%B3w_Mazowiecki.jpg",
+   "licence": "Public domain (Commons LicenseShortName; PD-user|WrS.tm.pl — released by the photographer)",
+   "sha256": "fdd614c0edf545fea8256c2edfbd0f7b448686f5303141118164048488896306",
+   "focus": [
+    0.51,
+    0.62
+   ]
+  },
+  "VI_shell_forgings_stacked_1942": {
+   "file": "v5/VI_shell_forgings_stacked_1942.jpg",
+   "kind": "still",
+   "tag": "75 MM SHELL FORGINGS · ALFRED T. PALMER / OEM · 1942 · LOC FSA/OWI · PUBLIC DOMAIN",
+   "source_page": "https://www.loc.gov/item/2017692160/",
+   "licence": "Public domain — LoC FSA/OWI Black-and-White Negatives (\"in the public domain and free to use and reuse\", item JSON rights field); credit Library of Congress, Prints & Photographs Division, FSA/OWI; photographer Alfred T. Palmer for the Office for Emergency Management; resource fsa.8b03159",
+   "sha256": "58a73ea6d1e0697522ac55f3e9fe4798914bbc3c987da6c7cd4435b56d4d9261",
+   "focus": [
+    0.5,
+    0.5
+   ]
+  },
+  "VI_shell_forging_press_1942": {
+   "file": "v5/VI_shell_forging_press_1942.jpg",
+   "kind": "still",
+   "tag": "PRESS FORGING 75 MM SHELLS · ALFRED T. PALMER / OEM · 1942 · LOC FSA/OWI · PUBLIC DOMAIN",
+   "source_page": "https://www.loc.gov/item/2017692147/",
+   "licence": "Public domain — LoC FSA/OWI Black-and-White Negatives (\"in the public domain and free to use and reuse\", item JSON rights field); credit Library of Congress, Prints & Photographs Division, FSA/OWI; photographer Alfred T. Palmer for the Office for Emergency Management; resource fsa.8b03146",
+   "sha256": "a15f4bae1d3b5ff04237c52468a2e3b80e7bc2758979c1dd44aa4a003ed9f6bf",
+   "focus": [
+    0.5,
+    0.45
+   ]
+  },
+  "VI_155mm_shells_rows_1941": {
+   "file": "v5/VI_155mm_shells_rows_1941.jpg",
+   "kind": "still",
+   "tag": "155 MM SHELL BODIES · ALFRED T. PALMER / OWI · 1941 · LOC FSA/OWI · PUBLIC DOMAIN",
+   "source_page": "https://www.loc.gov/item/2017693626/",
+   "licence": "Public domain — LoC FSA/OWI Black-and-White Negatives (\"in the public domain and free to use and reuse\", item JSON rights field); credit Library of Congress, Prints & Photographs Division, FSA/OWI; photographer Alfred T. Palmer for the Office of War Information; resource fsa.8b04178",
+   "sha256": "ba666b8649d3864869509d859b8207ec5cd3a2b1bce8e0cd8571146d5f9bacc4",
+   "focus": [
+    0.5,
+    0.5
+   ]
+  },
+  "VI_aa_gun_barrels_machining_1942": {
+   "file": "v5/VI_aa_gun_barrels_machining_1942.jpg",
+   "kind": "still",
+   "tag": "40 MM AA GUN BARRELS · ALFRED T. PALMER / OWI · 1942 · LOC FSA/OWI · PUBLIC DOMAIN",
+   "source_page": "https://www.loc.gov/item/2017692792/",
+   "licence": "Public domain — LoC FSA/OWI Black-and-White Negatives (\"in the public domain and free to use and reuse\", item JSON rights field); credit Library of Congress, Prints & Photographs Division, FSA/OWI; photographer Alfred T. Palmer for the Office of War Information; resource fsa.8e11023",
+   "sha256": "a5c17665a299b7ad6ae2f92912650af154002920541a66ddf5ae047c7e2d6021",
+   "focus": [
+    0.45,
+    0.45
+   ]
+  },
+  "VI_aleppo_codex_isaiah_54": {
+   "file": "v5/VI_aleppo_codex_isaiah_54.jpg",
+   "kind": "still",
+   "tag": "ALEPPO CODEX, ISAIAH 54–55 · BEN ASHER MANUSCRIPT, C. 930 CE · PUBLIC DOMAIN",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Aleppo-HighRes2-Neviim5-Isaiah.pdf",
+   "licence": "Public domain (Commons LicenseShortName \"Public domain\"; PD-Scan|PD-old-auto-expired); page 44 of the PDF rendered by Commons at 1920 px",
+   "sha256": "73d54f1290f90943677ba1c4767784b0cf662e0580e29d9c0033ebb8aa15f9f9",
+   "focus": [
+    0.83,
+    0.315
+   ]
+  },
+  "VII_chess_staunton_board": {
+   "file": "v5/VII_chess_staunton_board.jpg",
+   "kind": "still",
+   "tag": "STAUNTON CHESS SET · WILFREDOR · 2024 · CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Chess_game_Staunton_No._6_perfil_view_8.jpg",
+   "licence": "CC0 (Commons LicenseShortName CC0, self|cc-zero), author Wilfredor",
+   "sha256": "9a644174f475121aacf0ca11591757e1b54ec4d9bfdf98611b19d8cfcbbd4545",
+   "focus": [
+    0.55,
+    0.45
+   ]
+  },
+  "VII_chess_ussr_championship_1925": {
+   "file": "v5/VII_chess_ussr_championship_1925.jpg",
+   "kind": "still",
+   "tag": "4TH USSR CHESS CHAMPIONSHIP · «64» MAGAZINE · 1925 · PUBLIC DOMAIN",
+   "source_page": "https://commons.wikimedia.org/wiki/File:4th_ussr_chess_championship_1925.JPG",
+   "licence": "Public domain (Commons LicenseShortName; PD-old + PD-Art) — from the magazine \"Shakhmaty i shashki v rabochem klube «64»\", 1925, no. 17–18, p. 3",
+   "sha256": "34c5cb1998e9084e9bc484ac45ee64f79e414de993fdcab8e0ce3fa5551baeec",
+   "focus": [
+    0.45,
+    0.62
+   ]
+  },
+  "VII_zermelo_portrait_1914": {
+   "file": "v5/VII_zermelo_portrait_1914.jpg",
+   "kind": "still",
+   "tag": "ERNST ZERMELO · FRANZ SCHMELHAUS, ZÜRICH · 1914 · UZH ARCHIVE · PUBLIC DOMAIN",
+   "source_page": "https://commons.wikimedia.org/wiki/File:(UAZ)_AB.1.1165_Zermelo.tif",
+   "licence": "Public domain (Commons LicenseShortName; PD-old-70), University of Zurich Archive UAZ DOK.005.522",
+   "sha256": "3d9352d697c5d4c741a33e7564f8692b55918e8eb053dde52ec5323b014d9cf8",
+   "focus": [
+    0.6,
+    0.32
+   ]
+  },
+  "VII_ada_lovelace_chalon_c1840": {
+   "file": "v5/VII_ada_lovelace_chalon_c1840.jpg",
+   "kind": "still",
+   "tag": "ADA LOVELACE · ALFRED EDWARD CHALON · C. 1840 · SCIENCE MUSEUM GROUP · PUBLIC DOMAIN",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Ada_Lovelace_portrait.jpg",
+   "licence": "Public domain (Commons LicenseShortName; PD-Art|PD-old-auto-expired, Chalon d. 1860); credit Science Museum Group",
+   "sha256": "3423f73fc94961f5c0e09f53eb9bbff2fd02f9e540ca7260b9ad038227f44297",
+   "focus": [
+    0.5,
+    0.25
+   ]
+  },
+  "VII_lovelace_note_g_diagram_1843": {
+   "file": "v5/VII_lovelace_note_g_diagram_1843.jpg",
+   "kind": "still",
+   "tag": "NOTE G: DIAGRAM FOR BERNOULLI NUMBERS · ADA LOVELACE · 1843 · PUBLIC DOMAIN",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Diagram_for_the_computation_of_Bernoulli_numbers.jpg",
+   "licence": "Public domain (Commons LicenseShortName; PD-old-100)",
+   "sha256": "40ceefe85b9c9e338deb6b1b5db727a7f51fe71f5beb4277d1adeffb8cc56fca",
+   "focus": [
+    0.45,
+    0.35
+   ]
+  },
+  "VII_babbage_analytical_engine_trial_model": {
+   "file": "v5/VII_babbage_analytical_engine_trial_model.jpg",
+   "kind": "still",
+   "tag": "ANALYTICAL ENGINE TRIAL MODEL · BABBAGE · SCIENCE MUSEUM, LONDON · DADEROT · CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Analytical_engine_trial_model,_Charles_Babbage,_1834-1871_-_Science_Museum,_London_-_DSC05565.jpg",
+   "licence": "CC0 (Commons LicenseShortName CC0, self|cc-zero), author Daderot",
+   "sha256": "0136e278a1bdf8a51a2c96ec95f9f6705fbe51f8096eb5eb2b541d773a99e4eb",
+   "focus": [
+    0.5,
+    0.5
+   ]
+  },
+  "VIII_vatican_aerial_1921": {
+   "file": "v5/VIII_vatican_aerial_1921.jpg",
+   "kind": "still",
+   "tag": "ST PETER'S AND THE VATICAN, AERIAL · KEYSTONE VIEW CO. · 1921 · PUBLIC DOMAIN",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Collier's_1921_Vol_9_Frontispiece_--_Vatican.jpg",
+   "licence": "Public domain (Commons LicenseShortName; pd-1923 — published 1921, Collier's New Encyclopedia frontispiece)",
+   "sha256": "a5287c663502ecce59aec6924bd9740d74b3b9fb9a9967692b18a27249b467d2",
+   "focus": [
+    0.35,
+    0.5
+   ]
+  },
+  "VIII_city_of_london_skyline": {
+   "file": "v5/VIII_city_of_london_skyline.jpg",
+   "kind": "still",
+   "tag": "CITY OF LONDON FROM DAWSON HEIGHTS, DULWICH · FHL2 · 2015 · CC0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:City_of_London_skyline_from_Dawson_Heights,_Dulwich_(1).jpg",
+   "licence": "CC0 (Commons LicenseShortName CC0, self|cc-zero), author FHL2",
+   "sha256": "51d79edf4f5eaef76c0b6c62bff08fde4be2850b43a4be90360e5ad12adba5a9",
+   "focus": [
+    0.78,
+    0.45
+   ]
+  },
+  "VIII_us_capitol_aerial": {
+   "file": "v5/VIII_us_capitol_aerial.jpg",
+   "kind": "still",
+   "tag": "US CAPITOL, AERIAL · CAROL M. HIGHSMITH · 2007 · LOC · PUBLIC DOMAIN",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Aerial_view,_United_States_Capitol_building,_Washington,_D.C_LCCN2010630477.jpg",
+   "licence": "Public domain (Commons LicenseShortName; PD-Highsmith — dedicated to the public via the Library of Congress, LCCN 2010630477)",
+   "sha256": "3c3f4e2657910d4761ad92c53dc6edbf9aa629a0c1780683b05ba2326219c7ce",
+   "focus": [
+    0.52,
+    0.5
+   ]
+  },
+  "VIII_bis_tower_basel": {
+   "file": "v5/VIII_bis_tower_basel.jpg",
+   "kind": "still",
+   "tag": "BIS TOWER, BASEL · FRED ROMERO · CC BY 2.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Basel_-_Bank_f%C3%BCr_Internationalen_Zahlungsausgleich-Tower_Building_(27527280652).jpg",
+   "licence": "CC BY 2.0 (Commons LicenseShortName; Flickr review passed), author Fred Romero",
+   "sha256": "eb4b1be3ea0b41cd1d033b03c7d6453748332abd5f4b3e9a1ee629d890416799",
+   "focus": [
+    0.75,
+    0.4
+   ]
+  },
+  "VIII_bank_of_england_charter_sealing_1694": {
+   "file": "v5/VIII_bank_of_england_charter_sealing_1694.jpg",
+   "kind": "still",
+   "tag": "SEALING OF THE BANK OF ENGLAND CHARTER, 1694 · LADY JANE LINDSAY · 1905 · PUBLIC DOMAIN",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Bank_of_England_Charter_sealing_1694.jpg",
+   "licence": "Public domain (Commons LicenseShortName; PD-Art|PD-old-70-1923) — from A. A. Houblon, The Houblon Family, vol. 1, 1907",
+   "sha256": "7d4524e0f8df85382a82595da0b4e2251dff50b8b9deb9110e7fa4f7d5136845",
+   "focus": [
+    0.5,
+    0.45
+   ]
+  },
+  "VIII_hbc_royal_charter_1670_body_corporate": {
+   "file": "v5/VIII_hbc_royal_charter_1670_body_corporate.jpg",
+   "kind": "still",
+   "tag": "HUDSON'S BAY COMPANY CHARTER, 1670 · PRINTED LONDON 1865 · PUBLIC DOMAIN",
+   "source_page": "https://archive.org/details/royalcharterfori00huds/page/6",
+   "licence": "Public domain — as the title page (same item, page image n5 = printed p. 6)",
+   "sha256": "d0f3722165d1fd9222143da5b336d4b40a713a3b9e3f1e3b76792188205aa02a",
+   "focus": [
+    0.5,
+    0.78
+   ]
+  },
+  "VIII_cheyenne_mountain_tunnel_entrance": {
+   "file": "v5/VIII_cheyenne_mountain_tunnel_entrance.jpg",
+   "kind": "still",
+   "tag": "CHEYENNE MOUNTAIN COMPLEX, TUNNEL ENTRANCE · USAF / BOB SIMONS · 1984 · PUBLIC DOMAIN",
+   "source_page": "https://commons.wikimedia.org/wiki/File:NORADTunnelEntrance1.jpg",
+   "licence": "Public domain — US Air Force work (Commons LicenseShortName; PD-USGov), via catalog.archives.gov",
+   "sha256": "403fcb30d2dddbb8027e50601c9d56543c452fd40e20de6e1d1bf1584001dcd2",
+   "focus": [
+    0.5,
+    0.55
+   ]
+  },
+  "VIII_cheyenne_mountain_complex_entrance": {
+   "file": "v5/VIII_cheyenne_mountain_complex_entrance.jpg",
+   "kind": "still",
+   "tag": "CHEYENNE MOUNTAIN, NORTH PORTAL IN SNOW · USAF · PUBLIC DOMAIN",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Cheyenne_Mountain_Complex_entrance.jpg",
+   "licence": "Public domain — US Air Force work (Commons LicenseShortName; PD-USAF), from cheyennemountain.af.mil (date not given)",
+   "sha256": "7baaa9764353aa048201e8c75c21114d1b781883094f1dcc5bfdb0b7232f6482",
+   "focus": [
+    0.48,
+    0.5
+   ]
+  },
+  "VIII_sator_square_stone": {
+   "file": "v5/VIII_sator_square_stone.jpg",
+   "kind": "still",
+   "tag": "SATOR SQUARE ON A DOOR-JAMB STONE · DEUTSCHES FEUERWEHRMUSEUM FULDA · PUBLIC DOMAIN",
+   "source_page": "https://commons.wikimedia.org/wiki/File:SATOR-AREPO-TENET-OPERA-ROTAS.JPG",
+   "licence": "Public domain (Commons LicenseShortName; PD-User|Mattes — released by the photographer)",
+   "sha256": "c38c293451623e41410d76157f609766fbff333b586d977b2461f7e0f5ddd57f",
+   "focus": [
+    0.5,
+    0.5
+   ]
+  },
+  "V_flock_blackbirds_power_line": {
+   "file": "v5/V_flock_blackbirds_power_line.mp4",
+   "kind": "video",
+   "tag": "FLOCK OF BLACKBIRDS · C. E. PRICE · 2007 · PUBLIC DOMAIN",
+   "source_page": "https://archive.org/details/CEP429",
+   "licence": "Public domain (archive.org licenseurl http://creativecommons.org/licenses/publicdomain/; creator C. E. Price)",
+   "sha256": "f864f36ff77fce596dddc3a4f369d5a7238460c6b8d0a3df93e9565cd7d5d006",
+   "focus": [
+    0.3,
+    0.2
+   ],
+   "in": 0.0,
+   "sound": false
+  },
+  "V_birds_over_glastonbury_tor_excerpt": {
+   "file": "v5/V_birds_over_glastonbury_tor_excerpt.mp4",
+   "kind": "video",
+   "tag": "BIRDS OVER GLASTONBURY TOR · STOCK FOOTAGE · CC0",
+   "source_page": "https://archive.org/details/Birds_20130621",
+   "licence": "CC0 (archive.org licenseurl http://creativecommons.org/publicdomain/zero/1.0/)",
+   "sha256": "553c1bf2c49229f7f5a4ca87eb2281c81aa724890a74e81961654d62d785e631",
+   "focus": [
+    0.6,
+    0.35
+   ],
+   "in": 9.5,
+   "sound": false
+  },
+  "VII_chess_dispute_1903": {
+   "file": "v5/VII_chess_dispute_1903.mp4",
+   "kind": "video",
+   "tag": "A CHESS DISPUTE · ROBERT W. PAUL · 1903 · PUBLIC DOMAIN",
+   "source_page": "https://archive.org/details/silent-a-chess-dispute",
+   "licence": "Public domain in the US — published 1903 (pre-1929); archive.org item carries no licenseurl",
+   "sha256": "98d6312f1167a10704f68cf53df7cca95846bd0f0cd054486270375961aecd5f",
+   "focus": [
+    0.5,
+    0.55
+   ],
+   "in": 11.0,
+   "sound": false
+  },
+  "VII_chess_pieces_midgame": {
+   "file": "v5/VII_chess_pieces_midgame.jpg",
+   "kind": "still",
+   "tag": "CHESS PIECES ON THE BOARD · SHIXART1985 · 2020 · CC BY 2.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Chess_pieces_on_the_board.jpg",
+   "licence": "CC BY 2.0 (Commons LicenseShortName; self + Cc-by-2.0), author Shixart1985",
+   "sha256": "4eea9a3c95962f7b937930b9784a8d33886666c1c5ce4bd3f202f4a9d081888f",
+   "focus": [
+    0.4,
+    0.62
+   ]
+  },
+  "I_earthrise_apollo8_1968": {
+   "file": "v5/I_earthrise_apollo8_1968.jpg",
+   "kind": "still",
+   "tag": "EARTHRISE · APOLLO 8 · 24 DEC 1968 · NASA (AS08-14-2383) · PUBLIC DOMAIN",
+   "source_page": "https://images.nasa.gov/details/as08-14-2383",
+   "licence": "US Government work (NASA), public domain; record read via images-api.nasa.gov",
+   "sha256": "3263385f29f5f511a4b9cb081d9fbf73e4dbf708ca2d99c823247b675e223ae9",
+   "focus": [
+    0.5,
+    0.42
+   ]
+  },
+  "I_blue_marble_apollo17_1972": {
+   "file": "v5/I_blue_marble_apollo17_1972.jpg",
+   "kind": "still",
+   "tag": "THE BLUE MARBLE · APOLLO 17 · 7 DEC 1972 · NASA (AS17-148-22727) · PUBLIC DOMAIN",
+   "source_page": "https://images.nasa.gov/details/as17-148-22727",
+   "licence": "US Government work (NASA), public domain; record read via images-api.nasa.gov",
+   "sha256": "36dad3314b64319ea75465c4293719eb131d943566eb462e8bac3281e02c3bd4",
+   "focus": [
+    0.5,
+    0.5
+   ]
+  },
+  "IX_pale_blue_dot_voyager1_1990": {
+   "file": "v5/IX_pale_blue_dot_voyager1_1990.jpg",
+   "kind": "still",
+   "tag": "PALE BLUE DOT · VOYAGER 1 · 14 FEB 1990 · NASA/JPL (PIA00452) · PUBLIC DOMAIN",
+   "source_page": "https://images.nasa.gov/details/PIA00452",
+   "licence": "US Government work (NASA), public domain; record read via images-api.nasa.gov",
+   "sha256": "b42e6a362b0fbc526b22a159c98fcdc5e2f7a7d6bfc99568ced886f8e79530b9",
+   "focus": [
+    0.5,
+    0.5
+   ]
+  },
+  "IX_day_the_earth_smiled_cassini_2013": {
+   "file": "v5/IX_day_the_earth_smiled_cassini_2013.jpg",
+   "kind": "still",
+   "tag": "EARTH BENEATH SATURN’S RINGS · CASSINI · 19 JULY 2013 · NASA/JPL-CALTECH/SSI · PD",
+   "source_page": "https://images.nasa.gov/details/PIA17171",
+   "licence": "US Government work (NASA), public domain; record read via images-api.nasa.gov",
+   "sha256": "ad000e91763deaea2419c6f2127949181b7ed459d8b1ee61eadbe9f6775e8ffa",
+   "focus": [
+    0.5,
+    0.6
+   ]
+  },
+  "erc_AmTnNRJtrqE": {
+   "file": "erc/AmTnNRJtrqE.jpg",
+   "kind": "still",
+   "tag": "ERC-1155 · THESQUID · 2024 · THE AUTHOR'S OWN FILM",
+   "source_page": "https://www.youtube.com/watch?v=AmTnNRJtrqE",
+   "licence": "the author's own work, used at his direction",
+   "sha256": "5e2e91eea93e702df503999909b1f0651dbea514f788ff56a26c72722ce557f1"
+  },
+  "erc_E9IuNSX3FAE": {
+   "file": "erc/E9IuNSX3FAE.jpg",
+   "kind": "still",
+   "tag": "ERC-1155 · FROGWIZARD · 2023 · THE AUTHOR'S OWN FILM",
+   "source_page": "https://www.youtube.com/watch?v=E9IuNSX3FAE",
+   "licence": "the author's own work, used at his direction",
+   "sha256": "29478de310bec88323fd05e51ea885e7e69687d24344fdaa557932ca19e53830"
+  },
+  "erc_VP2iLdUcI1c": {
+   "file": "erc/VP2iLdUcI1c.jpg",
+   "kind": "still",
+   "tag": "ERC-1155 · CHAPTER 18 SILENT TALK · 2023 · THE AUTHOR'S OWN FILM",
+   "source_page": "https://www.youtube.com/watch?v=VP2iLdUcI1c",
+   "licence": "the author's own work, used at his direction",
+   "sha256": "9ba1dcd78b1b8ed7857d3d245c9a02fe0667a95aa4a3efd6498683e904057f59"
+  }
+ }
+}

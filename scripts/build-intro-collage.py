@@ -729,12 +729,19 @@ class Film:
         W, H, P, fin = self.W, self.H, self.P, self.fin
         tl = fi / self.fps
         ta = sh['at'] + tl
-        img = Image.new('RGB', (W, H), (9, 10, 11))
+        if fin.get('media'):
+            # a still behind the words, dimmed, drifting the length of the finale
+            med = self.media[fin['media']]
+            bg = still_panel(med, W, H, tl / max(1e-6, sh['dur']), fin.get('motion', 'pull'))
+            img = Image.fromarray((bg.astype(np.float32) * fin.get('dim', 0.3)).astype(np.uint8))
+        else:
+            img = Image.new('RGB', (W, H), (9, 10, 11))
+            g = ImageDraw.Draw(img)
+            for x in range(0, W, 40):
+                g.line((x, 0, x, H), fill=(15, 17, 18))
+            for y in range(0, H, 40):
+                g.line((0, y, W, y), fill=(15, 17, 18))
         d = ImageDraw.Draw(img)
-        for x in range(0, W, 40):
-            d.line((x, 0, x, H), fill=(15, 17, 18))
-        for y in range(0, H, 40):
-            d.line((0, y, W, y), fill=(15, 17, 18))
         hk = ease(min(1, tl / 0.6))
         d.text((int(W * 0.085), int(H * 0.15)), fin.get('head', '').upper(), font=P.f_tag,
                fill=tuple(int(c * hk) for c in AMBER), anchor='ls')

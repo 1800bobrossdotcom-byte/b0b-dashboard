@@ -87,6 +87,24 @@
       ]
     },
     {
+      "file": "endgame.html",
+      "title": "b0b.dev - Endgame",
+      "metaDescription": "Endgame, a short film on the close of the b0b.dev report, addressed by its author to all nation states and peoples: three completed things, each held at its tier.",
+      "ogDescription": "The report's close as a film: the author's statement in his own words, tetelestai and the 'paid in full' gloss traced to its dates, Luke 12:7, Isaiah 54:17, Zermelo and Lovelace, and the sovereignty list. Narrated; every panel's source on screen.",
+      "jsonldType": "VideoObject",
+      "headline": "Endgame - a b0b.dev film: the address, in his own voice, it is finished, paid in full?, the count, the weapon, a determined game, sovereignty, three completed things",
+      "ogImage": "/img/endgame-card.jpg",
+      "contentPath": "/b0b-endgame-film.mp4",
+      "duration": "PT5M20S",
+      "topics": [
+        "tetelestai",
+        "Isaiah 54:17",
+        "Luke 12:7",
+        "sovereignty",
+        "OSINT method"
+      ]
+    },
+    {
       "file": "map.html",
       "title": "b0b.dev - OSINT map: 1,166 sites, every connection tiered",
       "metaDescription": "interactive OSINT map of 1,166 sites: surveillance infrastructure, black sites, the Epstein-Maxwell network, ALPR cameras, live aircraft and quake feeds.",

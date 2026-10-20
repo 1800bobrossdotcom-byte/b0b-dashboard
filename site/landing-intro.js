@@ -1,8 +1,8 @@
 /* landing-intro.js - what a reader sees on arriving at b0b.dev.
  *
- * The animated b0b.dev mark (b0b-wordmark.js), then the author's film, OM COMMA #1 and #2, as he
- * posted them, full screen and unedited. It replaced the intro film on arrival on 19 Oct 2026, at
- * his instruction; that film still plays from the sidebar's INTRO FILM button and at /intro.
+ * The animated b0b.dev mark (b0b-wordmark.js), then the film(s) #b0b-landing names in data-videos,
+ * full screen: the author's OM COMMA #1 and #2 from 19 Oct 2026, Endgame (subtitled cut) from 20 Oct,
+ * both at his instruction. The intro film still plays from the sidebar's INTRO FILM button and at /intro.
  *
  * SAME RULES AS THE LOADER IT REPLACED (see intro.js). It is not a gate:
  *   - report.html's bootstrap shows it at most once per session and never on a deep link,
