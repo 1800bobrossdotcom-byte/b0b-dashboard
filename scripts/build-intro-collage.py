@@ -683,7 +683,7 @@ class Film:
             fw = script_font(sh['word'], int(H / sh.get('scale', 5.2)))
             yw = int(H * 0.47) + int((1 - k) * H * 0.03)
             d.text((W // 2, yw), sh['word'], font=fw, fill=tuple(int(c * k) for c in (244, 240, 230)), anchor='mm')
-            y = yw + int(fw.size * 0.78)
+            y = yw + max(int(fw.size * 0.78), int(H * 0.1))
             if sh.get('translit'):
                 k2 = ease(min(1, max(0, p - 0.22) / 0.18))
                 ft = font('ibm-plex-serif-latin-400-italic.woff2', int(H / 17))
@@ -691,7 +691,7 @@ class Film:
                 y += int(H * 0.085)
             if sh.get('gloss'):
                 k3 = ease(min(1, max(0, p - 0.36) / 0.18))
-                for ln in self.wrap(d, sh['gloss'].upper(), P.f_small, W * 0.8):
+                for ln in self.wrap(d, sh['gloss'].upper(), P.f_small, W * 0.92):
                     d.text((W // 2, y), ln, font=P.f_small, fill=tuple(int(c * k3) for c in AMBER), anchor='mm')
                     y += int(P.f_small.size * 1.5)
         else:
