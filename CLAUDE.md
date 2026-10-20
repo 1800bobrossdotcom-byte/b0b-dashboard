@@ -199,6 +199,12 @@ than once.
   - Section I's craft passage now reads "three encounters", with the third and the same-evening check after the loft.
   - The closing line is now "For the first two it rules none out; for the third it has excluded the ordinary explanations it could reach."
   - There is no map marker, because it would be a residence.
+- **Same evening, at his "Yes": the East Aurora line was updated.** He was outdoors there; at the Rochester sighting the window was open; there was no sound and no movement either time. The page now rules out four explanations for East Aurora:
+  - a reflection;
+  - sunlight (at 4 AM, satellite height only, and satellites move);
+  - a drone (nothing was heard);
+  - aircraft.
+  For the loft it still "rules none out". The parallax and spectrum tests are in the research file, not on the page.
 - **Not on the page:** his "significant now due to time and frequency consistency". By the page's own rule, testimony is promoted by a document, not by accumulation.
 
 **"JULIAN ASSANGE 10/20" / THE EVENT / GESARA TEXT — tested 20 Oct 2026, HELD, unfit for the page. `research/THE-EVENT-GESARA-ASSANGE.md` (11 quotes, vq OK).** Pasted by the author with no instruction.

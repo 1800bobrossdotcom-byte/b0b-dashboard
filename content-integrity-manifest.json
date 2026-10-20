@@ -1,13 +1,13 @@
 {
-  "generated": "2026-10-20T22:58:27.521Z",
+  "generated": "2026-10-20T23:09:01.659Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "1242d2ffecadd72ce2138f5c6eb6dc93040dee1978c5fc8a90b5128bd7f1b8b9",
+  "fullFileHash": "9885a3f3d04f8c2e0a9a0256fa808174fd6fa974f30b4740834323cd0afa89e6",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "f29a7b8c788f96e2d78e2f6fa71d7725ac1fa0414be2b8bdaaef5552105aa0e8",
+      "hash": "e5f141c1d711c1837df5c85c696b5c46b0c195430a8417e7e821aa10b688faff",
       "length": 42211
     },
     {
@@ -27,8 +27,8 @@
     },
     {
       "id": "i-the-authors-testimony-the-work-is-the-method",
-      "hash": "2b51fa0c675c1ddaded7c24458834275fc8e886a37ec96278768cbd278e71b29",
-      "length": 21048
+      "hash": "c44af00c787adeaf8f7ae88a69744b0a44655f9969fbb4ded3be109625db7239",
+      "length": 21408
     },
     {
       "id": "II",
@@ -1843,9 +1843,9 @@
     },
     {
       "index": 49,
-      "hash": "8d0b0beb0fcc6270eca9a004aa16969ecf38851cec8c7c03ddda790fadcb1091",
+      "hash": "b8f79eec2a2a6db7cd9525b5fe1114803f7a959bc65bf3ab02d938aca74e342a",
       "preview": "Two accounts are recorded at his direction, and both are testimony rather than f...",
-      "length": 2102
+      "length": 2462
     },
     {
       "index": 50,
