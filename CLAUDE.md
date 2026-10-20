@@ -185,6 +185,22 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**THE AUTHOR'S THIRD CRAFT ENCOUNTER — Rochester, 20 Oct 2026, ~6:22 PM EDT — ADDED TO SECTION I at his "YES", live. Record: `research/SIGHTING-2026-10-20-ROCHESTER.md`.**
+- **His account** (verbatim in the file): a pure pearly-white light, very bright at its peaks, six hands up in the west over the setting sun. It held for ~30 s, fixed in x and y, and faded out where it stood like a dimmer. He had tried to call it over. It is the same signature as East Aurora.
+- **New: a second witness, his roommate.** Her statements are recorded verbatim. They were given together and in his wording, so they show **agreement, not independence**.
+- **Checked the same evening:**
+  - the clock: Rochester is on EDT on 20 Oct, so the sighting was at 22:22 UTC; sunset was 22:19:27;
+  - planets: Venus, Jupiter and Mars were below the horizon, and nothing bright stood at 50–60° in the west;
+  - weather: KROC METAR 10SM FEW180;
+  - aircraft: the adsb.lol snapshot was dead-reckoned back, because the traces were refused (403, ledgered). UAL1828 crossed that sky at ~22:17 and the B744 NCR520 at ~22:27, and both were moving fast;
+  - the check does not cover untracked aircraft, drones or balloons.
+- **His photo** (EXIF 18:52:41 EDT) shows a clear sky 30 min later, not the light. **It is NOT in the repo, and his location is recorded nowhere:** the repo is public, the skyline places his window, and the file carries GPS data.
+- **The page:**
+  - Section I's craft passage now reads "three encounters", with the third and the same-evening check after the loft.
+  - The closing line is now "For the first two it rules none out; for the third it has excluded the ordinary explanations it could reach."
+  - There is no map marker, because it would be a residence.
+- **Not on the page:** his "significant now due to time and frequency consistency". By the page's own rule, testimony is promoted by a document, not by accumulation.
+
 **"JULIAN ASSANGE 10/20" / THE EVENT / GESARA TEXT — tested 20 Oct 2026, HELD, unfit for the page. `research/THE-EVENT-GESARA-ASSANGE.md` (11 quotes, vq OK).** Pasted by the author with no instruction.
 - **Dating:** it is a January 2021 QAnon text recirculated. The evidence: Türksat 5A launched 8 Jan 2021; "inaugurations" and "overturning election results"; the alias CodeMonkeyZ; the Pakistan blackout of 9 Jan 2021 (an engineering fault). The Assange attribution is false: he was in Belmarsh from 2019 to 2024 (the same false label as the Tartaria text).
 - **Every January event it forecast failed** (Deut 18:22). "It's all just for show" makes it a guaranteed null.

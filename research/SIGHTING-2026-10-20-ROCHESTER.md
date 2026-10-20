@@ -1,6 +1,6 @@
 # THE THIRD ENCOUNTER — ROCHESTER, 20 OCT 2026, ~6:22 PM EDT
 
-**Internal research. HELD. Author's testimony, recorded as he gave it, the same evening. Not on the page.**
+**Internal research. Author's testimony, recorded as he gave it, the same evening. PUBLISHED 20 Oct 2026 at his "YES" as the third encounter in Section I `i-the-authors-testimony-the-work-is-the-method`; the photo and his location stay out.**
 The first two encounters are on the page, in I `i-the-authors-testimony-the-work-is-the-method`. Those were East
 Aurora, about two years earlier, and Rochester (the loft). This one goes there only at his direction.
 
