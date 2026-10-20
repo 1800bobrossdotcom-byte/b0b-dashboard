@@ -1,0 +1,91 @@
+# THE THIRD ENCOUNTER — ROCHESTER, 20 OCT 2026, ~6:22 PM EDT
+
+**Internal research. HELD. Author's testimony, recorded as he gave it, the same evening. Not on the page.**
+The first two encounters are on the page, in I `i-the-authors-testimony-the-work-is-the-method`. Those were East
+Aurora, about two years earlier, and Rochester (the loft). This one goes there only at his direction.
+
+## His account, verbatim (sent 6:32 PM EDT, 22:32 UTC)
+
+> it is 6:32 PM ESt in rochester. 10 minutes ago I was at my window with my roomate. I saw the same type resonant very
+> very very bright and modulating in zed space fixed in x and y - brightness in the sky that I knew in my bones was the
+> same ufo type that I had previously been visited by. I told my roomate - look it is one of the psychic ships. she
+> saw it as well. I attempted to call it over and then the object did the same effect, of getting brighter and then
+> like on a dimmer switch, disasppearing from the sky completely without moving in left / right/ up down - just going
+> away.
+
+Then: *"this was not aircraft"* and *"3rd visitation by psionic craft exhibiting the same type of behaviour"*.
+
+## What is the same and what is new
+
+- **The same signature as East Aurora:**
+  - fixed in x and y;
+  - it brightens along z;
+  - it leaves on a dimmer switch from the same point it arrived at.
+- **New: a second witness.** His roommate saw it. Neither earlier encounter on the page has one.
+
+## The sky at 22:22 UTC, checked
+
+**Clock:** Rochester is on EDT on 20 Oct (DST ends 1 Nov), so 6:22 PM is 22:22 UTC.
+
+**Sun:** sunset was 22:19:27 UTC. The sighting came about 3 minutes later, with the sun 1.3° below the horizon.
+
+**Planets and bright stars** (PyEphem, from central Rochester):
+
+| Object | Position | Brightness | Verdict |
+|---|---|---|---|
+| Venus | 5° below the horizon | | ruled out |
+| Jupiter | 23° below the horizon | | ruled out |
+| Mars | 23° below the horizon | | ruled out |
+| Sirius | 63° below the horizon | | ruled out |
+| Mercury | 5.5° up, WSW (az 235) | mag 0.4 | low and faint in bright twilight |
+| Saturn | 6° up, E (az 94) | mag 0.4 | low and faint in bright twilight |
+| Arcturus | 25° up, W (az 273) | mag −0.1 | barely visible 3 min after sunset |
+
+None of the visible ones can be "very very very bright".
+
+**Moon:** 22° up in the SSE (az 140), 71% lit.
+
+**Weather, KROC METAR 21:54Z:**
+
+> 03005KT 10SM FEW180
+
+That is 10 miles visibility and a few clouds at 18,000 ft.
+
+**Aircraft** (ADS-B):
+- **Data and method:**
+  - The snapshot is from adsb.lol at 22:36:48 UTC: 228 aircraft within 150 nm, 45 of them with no altitude or position.
+  - Each was dead-reckoned 14.8 min back along its track.
+  - The per-aircraft traces at `globe.adsb.lol` returned 403. That is ledgered as a null and not worked around, so these positions are estimates.
+- **Estimated above 8° at 22:22:**
+  - **PTR2949 (DH8D):** ~18° up, NW (az 324), 13 nm out, ~26,000 ft, heading 101°. It was crossing the line of sight, about 0.5°/s across the sky, so it would visibly move.
+  - **UAL1440 (A319):** ~12° up, SW (az 225), 25 nm out, ~34,000 ft, heading 271°. It was moving away to the west.
+- **Neither one sits still** in one spot for the length of a sighting.
+- **Limits of the check:** it does not show aircraft without transponders, military aircraft that turn ADS-B off, drones or balloons. Light aircraft circling the city cannot be rebuilt by straight-line projection.
+
+## Where this leaves it
+
+- **Within what can be checked from here, nothing explains a very bright point fixed in place.** That rules out:
+  - the planets and stars;
+  - cloud;
+  - the tracked airliners.
+- **Tier:** testimony, now with two witnesses. The page's own line for the first two stands: "The report offers no
+  explanation and rules none out."
+
+## What would add to it
+
+1. **The roommate's own account, written separately and before they compare notes.** It should cover:
+   - the time;
+   - the direction;
+   - the height above the horizon;
+   - the colour;
+   - the duration;
+   - how it left.
+2. **From him:**
+   - the compass direction the window faces;
+   - the elevation, in fists at arm's length (about 10° each);
+   - the duration;
+   - the colour;
+   - any sound.
+   With the direction, the ADS-B table can be read against the right patch of sky.
+3. **Any photo or video from either phone.** A timestamped file is a document.
+4. **An independent report** from someone not in the room, e.g. NUFORC's Rochester listings for 20 Oct, once they post.
