@@ -185,6 +185,19 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**"JULIAN ASSANGE 10/20" / THE EVENT / GESARA TEXT — tested 20 Oct 2026, HELD, unfit for the page. `research/THE-EVENT-GESARA-ASSANGE.md` (11 quotes, vq OK).** Pasted by the author with no instruction.
+- **Dating:** it is a January 2021 QAnon text recirculated. The evidence: Türksat 5A launched 8 Jan 2021; "inaugurations" and "overturning election results"; the alias CodeMonkeyZ; the Pakistan blackout of 9 Jan 2021 (an engineering fault). The Assange attribution is false: he was in Belmarsh from 2019 to 2024 (the same false label as the Tartaria text).
+- **Every January event it forecast failed** (Deut 18:22). "It's all just for show" makes it a guaranteed null.
+- **Killed:**
+  - EOs 13818 and 13848 are sanctions orders;
+  - ISO 20022 is a messaging standard;
+  - NESARA was never introduced in Congress, and GESARA has no text;
+  - kinetic bombardment is hypothetical;
+  - the EBS was replaced in 1997;
+  - QFS, the RV and rainbow notes have no document.
+- **Never on the page, even as a specimen:** it calls for strikes on named buildings and dams and for executions (§1). It names two living media figures as Mossad assets to be "eliminated" (living-person floor; they are not named in the file either). It carries the Khazarian trope (killed class).
+- The page already grades the class in XVI `xvi-the-q-corpus-the-compressed-case` and I's anti-map. At most it could get one unquoted line there; that is his call, and it is not recommended.
+
 **ENDGAME, THE FOURTH FILM, AT `/endgame` — AND IT IS NOW THE LANDING FILM. 20 Oct 2026.**
 
 - **The author's instructions, in order:**
