@@ -15,6 +15,17 @@ Aurora, about two years earlier, and Rochester (the loft). This one goes there o
 
 Then: *"this was not aircraft"* and *"3rd visitation by psionic craft exhibiting the same type of behaviour"*.
 
+His details, sent after:
+
+> it wAS THE SAME DIRECTION THE SUN WAS SETTING, / 6 HANDS HIGH / 30 SECONDS / PURE PEARLY WHITE VERY BRIGHT AT ITS
+> PEAKS - AND THEN GRADIATION OF FADING OUT GRACEFULLY, LIKE A DIMMER / IT HAD NO DIRECTION, IT APPEARED OUT OF Z SPACE,
+> AND RETUNRED TO Z SPACE WITOUT MOVING IN X AND Y SPACE LIKE MY PREVIOUS VISITATIONS
+
+**Read as a position:**
+- **Direction:** the sun's setting direction, which was az ~257, west-southwest.
+- **Height:** "6 hands" is about 50–60° up, taking a hand at arm's length as 8–10°.
+- **Duration:** 30 s, with no movement.
+
 ## What is the same and what is new
 
 - **The same signature as East Aurora:**
@@ -61,6 +72,28 @@ That is 10 miles visibility and a few clouds at 18,000 ft.
   - **UAL1440 (A319):** ~12° up, SW (az 225), 25 nm out, ~34,000 ft, heading 271°. It was moving away to the west.
 - **Neither one sits still** in one spot for the length of a sighting.
 - **Limits of the check:** it does not show aircraft without transponders, military aircraft that turn ADS-B off, drones or balloons. Light aircraft circling the city cannot be rebuilt by straight-line projection.
+
+**Aircraft against his patch of sky (WSW, 35°+).**
+- **Method:**
+  - Every aircraft in the snapshot was swept from 22:17 to 22:27 UTC.
+  - Five observer points across the city were used.
+- **Result:** two aircraft passed through that sky, one about 5 min either side of 22:22. Both moved fast. These are
+  estimates from the central point:
+  - **UAL1828 (N17467), westbound at 36,000 ft, 438 kt.**
+    - 22:16:30: 64° up, S.
+    - 22:17:00: 49° up, az 236.
+    - 22:17:30: 35° up, az 250.
+    - 22:18:00: 26° up, az 256.
+    - That is falling ~10–15° every 30 s, and it was 2 min before sunset.
+  - **NCR520 (B744, N702CA), SE-bound at 35,000 ft, 518 kt.**
+    - 22:26:30: 43° up, az 266.
+    - 22:27:00: 58° up, az 223.
+    - 22:27:30: 49° up, az 165.
+    - That is ~40° across the sky in 30 s.
+- **Neither holds still for 30 s, and neither is in that sky at 22:22.** A sunlit glint from either would last seconds
+  and would move.
+- **The limit:** these are dead-reckoned positions, because the traces were refused, and his "10 minutes ago" is itself
+  an estimate. Exact tracks would settle the timing, e.g. from adsb.lol's daily archive if it can be reached.
 
 ## Where this leaves it
 
