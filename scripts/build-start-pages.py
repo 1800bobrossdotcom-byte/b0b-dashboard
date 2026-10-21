@@ -8,7 +8,7 @@ Added 4 Oct 2026 at the author's instruction, after an outside review asked for:
     report's interpretation and keep the record.
 
 Writes:
-  site/start.html                 what we know / think / don't know / what would change it
+  site/start.html                 the Briefing: the institution, after design/INSTITUTION.md, and its method
   site/retractions.html           claims the page lowered, removed or corrected
   site/data/map-data.json         every marker and every connection line, with its edge tier
   site/data/sources-ledger.json   the spider's fetch ledger, successes and refusals
@@ -128,24 +128,33 @@ h2{font:600 15px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;m
 h2 .tag{font-weight:400;color:var(--dim);letter-spacing:.04em;text-transform:none}
 ul.items{list-style:none;padding:0;margin:0;display:grid;gap:14px}
 ul.items li{padding-left:14px;border-left:2px solid var(--rule);overflow-wrap:anywhere}
-.k-doc ul.items li{border-left-color:var(--doc)}
-.k-hyp ul.items li{border-left-color:var(--hyp)}
 .k-null ul.items li{border-left-color:var(--null)}
-.k-test ul.items li{border-left-color:var(--att)}
 .tier{font:600 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:2px 6px;border:1px solid currentColor;border-radius:2px;margin-right:6px;white-space:nowrap}
 .t-doc{color:var(--doc)}.t-att{color:var(--att)}.t-hyp{color:var(--hyp)}.t-null{color:var(--null)}
 .src{display:block;font:13px/1.5 var(--mono);color:var(--dim);margin-top:2px}
-.rules{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
-.rule{background:var(--panel);border:1px solid var(--rule);padding:12px 14px}
-.rule b{font:600 13px/1.4 var(--mono);display:block;margin-bottom:4px}
 .scale{width:100%;border-collapse:collapse;font:14px/1.5 var(--mono)}
 .scale td,.scale th{border-top:1px solid var(--rule);padding:8px 8px 8px 0;text-align:left;vertical-align:top}
 .scale th{color:var(--dim);font-weight:400}
+.head{display:flex;gap:22px;align-items:center;margin:36px 0 0}
+.head .kicker{margin:0}
+.head h1{margin:8px 0 0}
+.insignia{width:132px;height:132px;flex:none}
+.thesis{font:400 clamp(21px,3.4vw,26px)/1.4 var(--serif);color:var(--ink);margin:28px 0 10px}
+.levels{display:grid;grid-template-columns:max-content 1fr;gap:8px 18px;align-items:baseline;margin:0 0 16px}
+.levels dt{font:600 12px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--phos)}
+.levels dd{margin:0}
+.pull{font:italic 400 20px/1.5 var(--serif);color:var(--ink);margin:20px 0;padding-left:16px;border-left:2px solid var(--phos)}
+.coda{margin:60px 0 0;padding-top:22px;border-top:1px solid var(--rule);font:400 19px/1.65 var(--serif);color:var(--ink-2)}
+.coda p{margin:0}
+.coda .la{margin-top:12px;color:var(--ink);font-style:italic}
+@media (max-width:520px){.head{flex-direction:column;align-items:flex-start;gap:14px}.insignia{width:104px;height:104px}
+  .levels{grid-template-columns:1fr;gap:2px}.levels dd{margin-bottom:10px}}
 .wrap{overflow-x:auto}
 .dl{display:grid;gap:10px}
 .dl a{display:block;background:var(--panel);border:1px solid var(--rule);padding:12px 14px;text-decoration:none;color:var(--ink)}
 .dl a b{font:600 14px/1.4 var(--mono);color:var(--link)}
 .dl a span{display:block;font-size:15px;color:var(--ink-2)}
+.dl.two{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
 table.ledger{width:100%;border-collapse:collapse;font-size:15px;line-height:1.5}
 table.ledger th{font:600 12px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--dim);text-align:left;padding:8px 10px 8px 0;border-bottom:1px solid var(--rule)}
 table.ledger td{padding:10px 10px 10px 0;border-bottom:1px solid var(--rule);vertical-align:top}
@@ -190,111 +199,89 @@ def page(title, body, main_class='', head_extra=''):
 ''' % (html.escape(title), head_extra, FONTS, CSS, NAV, (' class="%s"' % main_class) if main_class else '', body)
 
 
-def item(tier, text, src=''):
-    cls = {'documented': 't-doc', 'attributed': 't-att', 'conclusion': 't-hyp', 'hypothesis': 't-hyp',
-           'not established': 't-null', 'null': 't-null', 'test': 't-att'}[tier]
-    s = '<li><span class="tier %s">%s</span>%s' % (cls, tier, text)
-    if src:
-        s += '<span class="src">%s</span>' % src
-    return s + '</li>'
-
-
 # --------------------------------------------------------------------------- /start
+# Since 21 Oct 2026 the Briefing presents the institution, after the author's framework
+# (design/INSTITUTION.md), and no longer summarises the report: "briefing is repeating
+# what is already stated in report". The maxim's provenance and the jacket's story stay
+# in the report's front matter and are not repeated here.
 def build_start(n_markers, n_edges):
-    R = '/report#'
-    know = [
-        item('documented', 'Jeffrey Epstein pleaded guilty in Florida in 2008 under a 2007 federal non-prosecution agreement that immunised co-conspirators the government had not named. DOJ&rsquo;s Office of Professional Responsibility (2020) attributed the agreement to the prosecutors&rsquo; &ldquo;poor judgment&rdquo;.',
-             '<a href="%sII">Section II</a>' % R),
-        item('documented', 'Ghislaine Maxwell was convicted of sex trafficking and is serving twenty years. The trafficking is adjudicated; it is not this report&rsquo;s hypothesis.',
-             '<a href="%sV">Section V</a>' % R),
-        item('documented', 'Epstein&rsquo;s fortune has two documented clients: Leslie Wexner, by a 1991 power of attorney, and Leon Black, about $158&ndash;170M between 2012 and 2017 (the Dechert review found tax and estate work). JPMorgan banked him for about fifteen years. Nobody has explained the scale of what was paid.',
-             '<a href="%sII">Section II</a>' % R),
-        item('documented', 'CIA money is &ldquo;accounted for solely on the certificate of the Director&rdquo; (50 U.S.C. &sect;3510(b)); Congress publishes only the intelligence budget&rsquo;s total.',
-             '<a href="%sxvi-the-intelligence-funding-documents-the-certificate-is-the-voucher">Section XVI</a>' % R),
-        item('documented', 'On 14 September 2026 the Secretary of the Air Force acknowledged US weapons in orbit - the first public confirmation - naming no system. On 30 September the Pentagon announced an Autonomous Warfare Command and a future-of-warfare study co-led by people whose companies hold defence contracts.',
-             '<a href="%sx-two-acknowledgments-in-one-month-a-weapon-in-orbit-and-a-spyware-wave-with-named-devices">Section X</a> &middot; <a href="%sx-the-study-and-the-sellers-autonomous-warfare-command-and-project-meridian">the study and the sellers</a>' % (R, R)),
-        item('documented', 'Every one of the map&rsquo;s %s markers was audited against a source on 2 October 2026 (839 corrections). Every connection line now carries an edge tier, 0 to 5.' % format(n_markers, ','),
-             '<a href="/map">the map</a> &middot; <a href="/retractions">what the audit changed</a>'),
-    ]
-    think = [
-        item('conclusion', 'Epstein and Maxwell functioned as <em>deniable assets</em> - an intelligence-useful role under civilian cover. This is a judgment on the balance of the documented record, not a document, and it is scored against four rivals. The rival it has most trouble excluding is <em>several protections at once with no single design</em>: money, social capital and institutional self-interest, with services using him opportunistically.',
-             '<a href="%sii-the-conclusion-in-one-place-two-principals-a-sponsor-question-and-a-price">The conclusion against its rivals</a>' % R),
-        item('hypothesis', 'The sponsor question: Mossad primary, with US and British services witting by liaison. This is the author&rsquo;s labeled hypothesis, argued from liaison structure and the Maxwell lineage, not from the corpus, and the report prints two of its own findings that weigh against it.',
-             '<a href="%sII">Section II</a>' % R),
-        item('hypothesis', 'That the institutions in this record behave as one architecture of control. Recurrence is printed as recurrence; a shared timeline is not a chain, and the report says where a pattern is only a pattern.',
-             '<a href="%sI">Section I</a>' % R),
-    ]
-    dont = [
-        item('not established', 'That anyone ran either principal - a handler, taskings, a chain of command. That is rung 5, and the report claims it for no one.'),
-        item('not established', 'Which service, if any, sponsored them. The files that would settle it are withheld from everyone; their silence counts in neither direction.'),
-        item('not established', 'What the redacted and withheld Epstein material contains. The fight over the Justice Department&rsquo;s redactions is in federal court (<em>Phang v. Blanche</em>), and mutual legal assistance requests from Norway, Poland, Latvia and the UK were reported unfulfilled in September 2026.',
-             '<a href="%sII">Section II</a>' % R),
-    ]
-    change = [
-        item('test', 'The deniable-asset conclusion drops to a rival on any of: the 2007 immunity traced to ordinary negotiation in the prosecutors&rsquo; contemporaneous files; an explanation of Black&rsquo;s payments that accounts for their scale; or a complete release of the relevant service files showing no relationship. It rises only on a document - never on accumulation.'),
-        item('test', 'Any primary document that contradicts a documented entry lowers it. A correction that lowers a tier is worth more to this report than a confirmation, and the ones made so far are listed in full.',
-             '<a href="/retractions">Corrections &amp; retractions</a>'),
-        item('test', 'Dated forward tests, written before the outcome: the Pentagon&rsquo;s Project Meridian report is due 28 January 2027, and its recommendations can be scored against its co-leads&rsquo; product lines.',
-             '<a href="%sx-the-study-and-the-sellers-autonomous-warfare-command-and-project-meridian">Section X</a>' % R),
-    ]
-    rules = [
-        ('Tiers', 'documented &middot; attributed &middot; labeled &middot; contested &middot; unsupported. Nothing moves up a tier by repetition.'),
-        ('Guaranteed-null rule', 'A claim confirmed by every possible outcome is confirmed by none. Secrecy is evidence of nothing about what is hidden.'),
-        ('Anti-map guardrail', 'A shared timeline is not a chain. Two points on a map are not a relationship until a document connects them.'),
-        ('Symmetry rule', 'A discount applied to a fact that hurts a hypothesis must be applied to one that helps it.'),
-        ('Testimony tier', 'Evidence of an experience, never evidence of a cause. Promoted only by a document.'),
-        ('Living-person floor', 'No living, uncharged person is asserted or implied to be a criminal or an intelligence asset.'),
-        ('No de-anonymising', 'Redactions protecting living people are never reversed; residences carry street names only.'),
-        ('Stop rules', 'Victim interviews, protective-order material and imagery-heavy documents are not read past identification.'),
-        ('No numerology', 'Dates and numbers are recorded as facts and never read for meaning.'),
-    ]
-    scale = ''.join('<tr><td><b>%s</b></td><td>%s</td><td>%s</td></tr>' % (k, n, m) for k, n, m in EDGE_TIERS)
     body = '''
-<p class="kicker">b0b.dev &middot; Project Anglerfish &middot; independent OSINT</p>
-<h1>Briefing</h1>
-<p class="lede">The report is long by design: twenty-five sections, every claim tiered and sourced. This page is the short version - what it knows, what it thinks, what it does not know, and what would change its mind - with the data underneath it, so you can throw the interpretation away and keep the record.</p>
+<header class="head">
+<img class="insignia" src="/img/insignia.png" width="132" height="132" alt="The insignia: ARS EST CELARE ARTEM around a figure in a trench coat and fedora carrying a case, with lightning bolts and six stars.">
+<div><p class="kicker">b0b.dev &middot; Project Anglerfish &middot; independent intelligence research</p>
+<h1>Briefing</h1></div>
+</header>
+<p class="thesis">The intelligence agency is the artwork.<br>The intelligence work is real.</p>
+<p class="lede">An independent intelligence research operation. Its institutional identity is the work; its research is sourced, tiered and correctable, and stands outside the fiction.</p>
 <nav class="door" aria-label="Start here"><a class="go" href="/report">ENTER THE REPORT &rarr;</a><a href="/map">OPEN THE MAP</a><a href="/home">WATCH THE FILMS</a></nav>
 
-<section class="k-doc"><h2>What we know <span class="tag">- documented</span></h2><ul class="items">%s</ul></section>
-<section class="k-hyp"><h2>What we think <span class="tag">- conclusion and hypothesis, labeled as such</span></h2><ul class="items">%s</ul></section>
-<section class="k-null"><h2>What we don&rsquo;t know <span class="tag">- not established</span></h2><ul class="items">%s</ul></section>
-<section class="k-test"><h2>What would change our minds <span class="tag">- the falsifiers</span></h2><ul class="items">%s</ul></section>
+<h2 lang="la">Ars est celare artem</h2>
+<p>The art is to conceal the art. The institution works on three levels at once.</p>
+<dl class="levels">
+<dt>Artistic</dt><dd>The institution is the artwork, and it does not need to announce itself as one.</dd>
+<dt>Operational</dt><dd>The research, the tools, the dossiers, the map and the method are real, and in use.</dd>
+<dt>Recursive</dt><dd>It investigates secrecy, concealment, surveillance and power, and keeps an ambiguity of its own.</dd>
+</dl>
+<p>The audience becomes an investigator of the investigating institution. The maxim&rsquo;s provenance is set out at the head of <a href="/report">the report</a>.</p>
 
-<h2>The rules the report runs on</h2>
-<div class="rules">%s</div>
+<h2>The institution</h2>
+<p>It stands between independent intelligence research and conceptual art; between open-source intelligence, operational fiction and institutional critique; between espionage mythology and the archive. It has the appearance of an obscure intelligence organisation. It claims no government affiliation, and it fabricates no credential, endorsement or provenance.</p>
+<p class="pull">The institution may be ambiguous. The evidence must not be.</p>
+
+<h2>The insignia</h2>
+<p>A round seal on a navy field jacket: the motto across the top, six five-pointed stars below, lightning radiating from the centre, and at the centre a figure in a trench coat and fedora, carrying a case. The seal carries the authority of military and intelligence insignia; the figure at its centre is close to a cartoon. Both are meant.</p>
+<p>The jacket is not merchandise. It is an institutional artifact, and its existence suggests an organisation with members, a history, a culture of its own and a purpose. The seal on this page is digitised from it: the figure and the bolts traced from the thread, the motto and the stars set again.</p>
+
+<h2>Precedents</h2>
+<p>Marcel Broodthaers opened a museum in his Brussels house in 1968, the Mus&eacute;e d&rsquo;Art Moderne, D&eacute;partement des Aigles, with eagles in glass cases and signs saying this was not a work of art. Walid Raad&rsquo;s Atlas Group, a fictional foundation, keeps an archive of Lebanon&rsquo;s civil wars whose documents carry two dates and are attributed to sources Raad invented. The Yes Men pose as spokespeople for real institutions - the WTO, Dow Chemical - and speak in their name.</p>
+<p>b0b.dev differs from all three in one respect: the intelligence work is real. The investigations, the map and the research infrastructure function outside the fiction. And unlike the Yes Men, it wears no real institution&rsquo;s name.</p>
+
+<h2>The paradox</h2>
+<p>An institution usually establishes its authority through its identity and asks the public to trust its findings. This one turns that round: its identity is deliberately ambiguous, and its findings are open to anyone who checks them.</p>
+<p class="pull">Don&rsquo;t trust the institution. Examine the evidence.</p>
+
+<h2>Holdings</h2>
+<p>The website is the operational interface. The dossiers are research outputs and institutional artifacts at once. The jacket is the organisation made physical; the insignia is its identity; the motto, its framework.</p>
+<div class="dl two">
+  <a href="/report"><b>The report</b><span>The dossier: twenty-five sections and a researcher&rsquo;s guide, every claim tiered and sourced.</span></a>
+  <a href="/map"><b>The map</b><span>%s sites. Every line between them carries the tier of what the record shows.</span></a>
+  <a href="/home"><b>The films</b><span>Endgame, The Epstein&ndash;Maxwell Record, Continuity and the intro film, with the author&rsquo;s transmissions.</span></a>
+  <a href="/announcement"><b>The announcement</b><span>Spoken word over a beat, made to be played outdoors.</span></a>
+  <a href="/stickers"><b>The stickers</b><span>Twelve lines from the report, each with its own QR code.</span></a>
+  <a href="/retractions"><b>The corrections</b><span>What the institution got wrong, how it was found, and what replaced it.</span></a>
+</div>
+
+<h2>What it is not</h2>
+<p>Not a CIA-themed website. Not an OSINT dashboard with artistic branding. Not an espionage role-play, and not a fictional agency producing fictional research. Not a portfolio, and not a satire of intelligence agencies.</p>
 
 <h2 id="method">Method</h2>
 <ul class="items">
-<li><b>Kept by Gianni Arone</b>, who sets scope and makes every contested call. No institutional affiliation is claimed: judge the work on its sources, not on a credential.</li>
+<li><b>Kept by Gianni Arone</b>, who sets scope and makes every contested call.</li>
+<li><b>Every claim carries its tier and its source</b>: documented, attributed, labeled, contested or unsupported. Nothing moves up a tier by repetition. The guaranteed null, the anti-map and the symmetry rule are set out in <a href="/report#I">Section I</a>.</li>
+<li><b>Standing rules.</b> No living, uncharged person is presented as a criminal or an intelligence asset. Redactions protecting living people are never reversed, and residences carry street names only. Victim interviews, protective-order material and imagery-heavy documents are not read past identification. Dates and numbers are recorded as facts, never read for meaning.</li>
 <li><b>One identified crawler.</b> It obeys robots.txt, never disguises itself, solves no challenge and never retries a refusal under another name - a document taken past an access control has contaminated provenance. A refusal is recorded as a null, and a claim resting on a source it could not read stays at a lower tier. Every fetch and every refusal is in the <a href="/data/sources-ledger.json">source ledger</a> with its SHA-256.</li>
 <li><b>Quotes and figures are read at the source.</b> No search result or summary, human or machine, carries a quote onto the page.</li>
 <li><b>AI assistance, disclosed.</b> Research, drafting, verification and deployment are done with Claude, an AI model made by Anthropic, under the author&rsquo;s direction. Anthropic is also a subject of the report; the conflict is disclosed where it arises (Sections X and XXV).</li>
 <li><b>Corrections.</b> A claim a primary source contradicts is lowered or removed, whoever raised it - the author and the AI included. It is fixed in place and entered in the <a href="/retractions">ledger</a>; contested and defamation-adjacent material waits for the author. To send one, use the researcher&rsquo;s guide at the end of <a href="/report#XXV">the report</a>: the claim, the passage, and the source that contradicts it.</li>
 </ul>
 
-<h2>How the map&rsquo;s lines are tiered</h2>
-<p>Every connection on the map carries the tier of the <em>relationship</em> between its two ends, not of either end. A line is not evidence that two places are connected; its tier says how much the record shows.</p>
-<div class="wrap"><table class="scale"><thead><tr><th>Tier</th><th>Name</th><th>What it takes</th></tr></thead><tbody>%s</tbody></table></div>
-
-<h2>Download the data</h2>
+<h2>The data</h2>
 <div class="dl">
   <a href="/data/map-data.json" download><b>map-data.json</b><span>All %s markers and %s connection lines, with coordinates, context, dates and edge tiers. JSON.</span></a>
-  <a href="/map/list"><b>The map as text</b><span>Every location and every connection line, with its tier, as a plain readable list - no map needed.</span></a>
+  <a href="/map/list"><b>The map as text</b><span>Every location and every connection line, with its tier and how the tiers work, as a plain readable list.</span></a>
   <a href="/map.kml" download><b>map.kml</b><span>The markers for Google Earth, with dates that drive its time slider.</span></a>
   <a href="/data/retractions.json" download><b>retractions.json</b><span>The corrections ledger as data: date, place, what the page said, what replaced it, how it was found.</span></a>
-  <a href="/data/sources-ledger.json" download><b>sources-ledger.json</b><span>Every source fetch the report&rsquo;s spider made: URL, time, status, SHA-256 - and every refusal, recorded as a null.</span></a>
+  <a href="/data/sources-ledger.json" download><b>sources-ledger.json</b><span>Every source fetch the spider made: URL, time, status, SHA-256 - and every refusal, recorded as a null.</span></a>
 </div>
 
-<h2>View the record</h2>
-<div class="dl">
-  <a href="/report"><b>The report</b><span>All twenty-five sections, tiered and sourced, with the researcher&rsquo;s guide.</span></a>
-  <a href="/retractions"><b>Corrections &amp; retractions</b><span>What the report got wrong, how it was found, and what replaced it.</span></a>
-  <a href="/ai-attack-vector-analysis"><b>The AI-safety report</b><span>A separate document on the AI tools used to build this site, now tiered the same way.</span></a>
+<div class="coda">
+<p>The artwork is the institution.</p>
+<p>The institution investigates concealment.</p>
+<p>The artwork conceals itself within the institution.</p>
+<p class="la" lang="la">Ars est celare artem.</p>
 </div>
-''' % (''.join(know), ''.join(think), ''.join(dont), ''.join(change),
-       ''.join('<div class="rule"><b>%s</b>%s</div>' % r for r in rules), scale,
-       format(n_markers, ','), n_edges)
-    body += '<footer>b0b.dev &middot; written to be attacked: send corrections through the report&rsquo;s researcher&rsquo;s guide. Last built from the live report and map. Every count on this site is checked against one record before each deploy: <a href="/data/build.json">build.json</a> (counts, build stamp, content hashes).</footer>'
+''' % (format(n_markers, ','), format(n_markers, ','), n_edges)
+    body += '<footer>b0b.dev &middot; written to be attacked: send corrections through the report&rsquo;s researcher&rsquo;s guide. Every count on this site is checked against one record before each deploy: <a href="/data/build.json">build.json</a> (counts, build stamp, content hashes).</footer>'
     # Search Console's ownership tag, kept here as well as on the report (which '/'
     # serves): outside the seo: block apply-seo-meta owns, and harmless on a second page.
     return page('Briefing', body, head_extra='\n  <meta name="google-site-verification" content="TsPEDsaL88qvOxa0dWejCZFKVU37Y7Vk5v5HKcp5kL0">')
@@ -442,13 +429,17 @@ def build_map_list(locs, edges):
     erows = ''.join('<li>%s%s <span class="src">%s</span></li>'
                     % (tier_txt(e.get('tier')), html.escape(e['label']), html.escape(e['kind']))
                     for e in sorted(edges, key=lambda e: (-(e.get('tier') if e.get('tier') is not None else -1), e['label'])))
+    scale = ''.join('<tr><td><b>%s</b></td><td>%s</td><td>%s</td></tr>' % (k, n, m) for k, n, m in EDGE_TIERS)
     body = """<div class="wide">
 <h1>The map as text</h1>
-<p class="lede" style="max-width:72ch">Every location and every connection line on <a href="/map">the OSINT map</a>, as a plain list - for screen readers, for search, and for anyone who would rather read than pan. The same data downloads as <a href="/data/map-data.json">JSON</a> and <a href="/map.kml">KML</a>. Lines are listed strongest first, by the tier of the relationship they show (<a href="/start">how the tiers work</a>).</p>
-<p style="font:13px/1.8 var(--mono)">%s &middot; <a href="#connections">Connections (%d)</a></p>
+<p class="lede" style="max-width:72ch">Every location and every connection line on <a href="/map">the OSINT map</a>, as a plain list - for screen readers, for search, and for anyone who would rather read than pan. The same data downloads as <a href="/data/map-data.json">JSON</a> and <a href="/map.kml">KML</a>. Lines are listed strongest first, by the tier of the relationship they show (<a href="#tiers">how the tiers work</a>).</p>
+<p style="font:13px/1.8 var(--mono)"><a href="#tiers">How the lines are tiered</a> &middot; %s &middot; <a href="#connections">Connections (%d)</a></p>
+<section><h2 id="tiers">How the lines are tiered</h2>
+<p style="max-width:72ch">Every connection carries the tier of the <em>relationship</em> between its two ends, not of either end. A line is not evidence that two places are connected; its tier says how much the record shows.</p>
+<div class="wrap"><table class="scale"><thead><tr><th>Tier</th><th>Name</th><th>What it takes</th></tr></thead><tbody>%s</tbody></table></div></section>
 %s
 <section><h2 id="connections">Connections <span class="tag">- %d lines, strongest first</span></h2><ul class="items">%s</ul></section>
-</div>""" % (' &middot; '.join(toc), len(edges), ''.join(parts), len(edges), erows)
+</div>""" % (' &middot; '.join(toc), len(edges), scale, ''.join(parts), len(edges), erows)
     return page('The Map as Text', body)
 
 

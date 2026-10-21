@@ -305,17 +305,17 @@
     },
     {
       "file": "start.html",
-      "title": "b0b.dev - Briefing: the OSINT report in one page",
-      "metaDescription": "The short version of the OSINT report: what it documents, what it concludes and at what tier, what it does not know, and what would change its mind. With the data.",
-      "ogDescription": "What we know, what we think, what we don't know, and what would change our minds - with the map data and the source ledger to download.",
+      "title": "b0b.dev - Briefing: ars est celare artem",
+      "metaDescription": "The intelligence agency is the artwork. The intelligence work is real. The institution behind the OSINT report: its maxim, its insignia, its method and its data.",
+      "ogDescription": "The institution may be ambiguous. The evidence must not be. Don't trust the institution. Examine the evidence.",
       "jsonldType": "Article",
-      "headline": "Briefing: the OSINT report in one page, tiered, with its falsifiers and its data",
+      "headline": "Briefing: the institution behind the OSINT report - its maxim, its insignia and its method",
       "topics": [
+        "institutional art",
+        "ars est celare artem",
         "OSINT method",
         "evidence tiers",
-        "falsifiability",
-        "open data",
-        "Epstein-Maxwell network"
+        "open data"
       ]
     },
     {

@@ -1,14 +1,14 @@
 {
-  "generated": "2026-10-21T19:32:06.348Z",
+  "generated": "2026-10-21T20:02:43.484Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "aa22079fdb874a7a00aa7ac83edbd47c9639ae6492f562d0005faa9cd564d9f8",
+  "fullFileHash": "2308d29aeb3632d151b1864d28a98058ee33297c1073d87b25025450d97db493",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "558d185db2cf8aeff04ae5a48e06f06a2edb1870ca13110fcf727c3f5251eb8a",
-      "length": 42098
+      "hash": "6f0dbbabcb7f667908e7fb0d819ff17a585d91170aeb4a6f4454bd1432b13776",
+      "length": 42108
     },
     {
       "id": "to-those-inside",
@@ -1537,8 +1537,8 @@
     },
     {
       "id": "xxiv-for-journalists-legal-researchers",
-      "hash": "7825b72b6972253b2ba16465325dcb513ea74f301e5fc55926408450e6671a3c",
-      "length": 1053
+      "hash": "3bf6049f2ee86b10a141d8cf8b78c5fc53b12f9cf68cf244dd58388de5dfbb1a",
+      "length": 844
     },
     {
       "id": "xxiv-endgame",

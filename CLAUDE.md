@@ -199,6 +199,42 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**THE BRIEFING NOW PRESENTS THE INSTITUTION, NOT THE REPORT — 21 Oct 2026, live.** Author: *"briefing is repeating what is already stated in report. this is what briefing should touch on:"* followed by the full `design/INSTITUTION.md` text.
+- **Removed from `/start`:**
+  - what we know / think / don't know / what would change our minds;
+  - the rules grid;
+  - "View the record".
+  - The falsifiers live in II's conclusion block, which the masthead's "Intelligence standards" line now links to directly.
+- **Now on `/start`, in this order** (`build_start` in `build-start-pages.py`):
+  1. **The seal** (`site/img/insignia.png`, 360 px, 22 KB, rendered from `design/projection/seal.py` on a navy disc), the kicker and the h1.
+  2. **His thesis** as the lede, and the door.
+  3. *Ars est celare artem* with the three levels.
+  4. The institution, with the pull line "The institution may be ambiguous. The evidence must not be."
+  5. The insignia.
+  6. Precedents.
+  7. The paradox, with the pull line "Don't trust the institution. Examine the evidence."
+  8. Holdings: report, map, films, announcement, stickers, corrections.
+  9. What it is not.
+  10. `Method` (still `id="method"`, still the `/about` target), with the standing rules condensed into one item.
+  11. The data.
+  12. A coda: his final thesis.
+  - About 1,070 words.
+- **Not repeated from the report:** the maxim's Ovid provenance, the jacket's vendor story and "Covert Communications Group". They stay in the masthead, and the Briefing points there.
+- **Left out on purpose:** his "Guidance for Claude" and the seven design principles, which are internal. Only principle 7 is stated, as a fact: the institution claims no government affiliation and fabricates no credential, endorsement or provenance.
+- **The art statement is back on the page, now that he has made that call.** I had cut "It is also a long-running work of art" from `/about` on principle 2.
+- **Precedents checked at source**, via spider fetches of Wikipedia, ledgered:
+  - Broodthaers's *Musée d'Art Moderne, Département des Aigles*: Brussels house, 1968; eagles in glass cases; "This is not a work of art".
+  - Raad's Atlas Group: a fictional foundation from the late 1990s; documents carry two dates and are attributed to invented sources.
+  - The Yes Men: posed as spokespeople for the WTO and Dow.
+  - The Broodthaers museum's own Wikipedia page 404'd (a null).
+- **The edge-tier table moved to `/map/list#tiers`.** The map's "How it works" link and map-list's own link now point there.
+- **seo-meta, `start.html`:**
+  - title "b0b.dev - Briefing: ars est celare artem";
+  - description and og rewritten from his lines;
+  - topics now lead with institutional art.
+- **Also fixed on the way:** XXV carried a banned edit note, "An audit of this report found that subsection had no inbound link … That is fixed here and in Section IX." It is cut.
+- *Not acted on:* the page keeps the site's green-on-black palette. A jacket-world restyle (navy and thread) is still his call (see the creative-direction entry below).
+
 **@NSACyber POST, 21 Oct 2026 — the PHP "php2shell" alert; we are not exposed.** The author linked `x.com/NSACyber/status/2112903220209098897` and then wrote *"re: PHP"*.
 - **The post:** its id decodes to 21 Oct 13:45:58 UTC. X and the oEmbed refused by robots (nulls).
 - **What it points to:** CISA's alert the same day (read at source): CVE-2026-109618/-109619, unauthenticated RCE in every PHP install serving web requests.

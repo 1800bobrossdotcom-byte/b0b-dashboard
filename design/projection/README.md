@@ -102,4 +102,5 @@ still and loop in the jacket's world:
   - the motto, in Liberation Serif on the measured arc: 196° across the top, with word gaps as on the patch;
   - the six stars, 25° apart and centred at the bottom, a point toward the centre.
 - **Why the motto is set rather than traced:** the traced letters broke up ("ARS" read as "AKS").
+- **On the site:** `site/img/insignia.png` is this seal in thread on a navy disc, 360 px and quantized to 24 colours (22 KB). It heads the Briefing at `/start`.
 - **The insignia's status:** it is the masthead's "insignia of a unit that does not exist", of unknown manufacture. The page records it as artistic appropriation, and it claims no real unit (INSTITUTION.md principle 7).
