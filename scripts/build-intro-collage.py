@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Build a b0b.dev film, collage cut, from a spec (default scripts/intro-collage.json).
 
-Four films share this engine: the intro (scripts/intro-collage.json),
+Five films share this engine: the intro (scripts/intro-collage.json),
 "Continuity" (scripts/film-continuity.json), "The Epstein-Maxwell Record"
-(scripts/film-epstein-maxwell.json) and "Endgame" (scripts/film-endgame.json),
-the last three via --spec. Each spec names its own outputs, so building one
+(scripts/film-epstein-maxwell.json), "Endgame" (scripts/film-endgame.json) and
+"Briefing" (scripts/film-briefing.json), the last four via --spec. Each spec names its own outputs, so building one
 never touches the others' files.
 
 The narration is baked in (Piper, en_GB cori, public-domain training data) and a

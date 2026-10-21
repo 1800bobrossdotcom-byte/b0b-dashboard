@@ -144,6 +144,11 @@ ul.items li{padding-left:14px;border-left:2px solid var(--rule);overflow-wrap:an
 .levels dt{font:600 12px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--phos)}
 .levels dd{margin:0}
 .pull{font:italic 400 20px/1.5 var(--serif);color:var(--ink);margin:20px 0;padding-left:16px;border-left:2px solid var(--phos)}
+.film{margin:22px 0 0}
+.film video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#000;border:1px solid var(--rule)}
+.film-cap{font:13px/1.6 var(--mono);color:var(--dim);margin:8px 0 0}
+.film details{margin:6px 0 0;font-size:15px}.film summary{font:600 13px/1.6 var(--mono);letter-spacing:.04em;cursor:pointer;color:var(--ink-2)}
+.film .script,.film .sources{padding-left:20px;display:grid;gap:6px;color:var(--ink-2)}.film .sources{font:13px/1.5 var(--mono)}
 .coda{margin:60px 0 0;padding-top:22px;border-top:1px solid var(--rule);font:400 19px/1.65 var(--serif);color:var(--ink-2)}
 .coda p{margin:0}
 .coda .la{color:var(--ink);font-style:italic}
@@ -199,6 +204,69 @@ def page(title, body, main_class='', head_extra=''):
 ''' % (html.escape(title), head_extra, FONTS, CSS, NAV, (' class="%s"' % main_class) if main_class else '', body)
 
 
+# --------------------------------------------------------------------------- the briefing film
+FILM_SPEC = os.path.join(ROOT, 'scripts', 'film-briefing.json')
+FILM_MP4 = os.path.join(ROOT, 'public', 'b0b-briefing-film.mp4')
+
+
+def film_duration(path):
+    """Seconds, read from ffmpeg's banner; None if the file or ffmpeg is missing."""
+    import re, subprocess
+    try:
+        import imageio_ffmpeg
+        ff = imageio_ffmpeg.get_ffmpeg_exe()
+    except Exception:
+        ff = 'ffmpeg'
+    try:
+        err = subprocess.run([ff, '-i', path], capture_output=True, text=True).stderr
+    except OSError:
+        return None
+    m = re.search(r'Duration: (\d+):(\d+):(\d+\.\d+)', err)
+    return int(m.group(1)) * 3600 + int(m.group(2)) * 60 + float(m.group(3)) if m else None
+
+
+def build_film_block():
+    """The Briefing film on its own page: the player, the download, and the script and every source,
+    generated from the same spec the film is cut from (scripts/film-briefing.json)."""
+    if not os.path.exists(FILM_MP4):
+        return ''
+    spec = json.load(open(FILM_SPEC, encoding='utf-8'))
+    dur = film_duration(FILM_MP4)
+    mb = os.path.getsize(FILM_MP4) / 1e6
+    length = ('%d min %02d s, ' % divmod(int(dur), 60)) if dur else ''   # floored, as players show it
+    e = lambda s: html.escape(s, quote=True)
+    script = ''.join('<li><b>%s. %s</b> &mdash; %s</li>' % (e(p['id']), e(p['title']), e(' '.join(L['text'] for L in p['lines'])))
+                     for p in spec['parts'] + [spec['finale']])
+    script = script.replace('{TOTAL}', format(json.load(open(os.path.join(SITE, 'data', 'map-data.json'), encoding='utf-8'))['marker_count'], ','))
+    seen, src = set(), []
+    for p in spec['parts']:
+        for s in p['shots']:
+            if s['type'] == 'doc':
+                src.append('<li>Document card &middot; %s &middot; %s</li>' % (e(s.get('head') or s.get('word', '')), e(s.get('tag', ''))))
+                continue
+            for k in s.get('media', []):
+                if k in seen:
+                    continue
+                seen.add(k)
+                m = spec['media'][k]
+                src.append('<li>%s &middot; <a href="%s">source</a></li>' % (e(m['tag']).replace(' \u00b7 ', ' &middot; '), e(m['source_page'])))
+    fm = spec['media'][spec['finale']['media']] if spec['finale'].get('media') else None
+    if fm and spec['finale']['media'] not in seen:
+        src.append('<li>%s &middot; <a href="%s">source</a></li>' % (e(fm['tag']), e(fm['source_page'])))
+    return '''
+<section id="film" class="film" aria-label="The briefing, as a film">
+<video controls preload="none" playsinline poster="/img/briefing-poster.jpg" width="1280" height="720">
+  <source src="/b0b-briefing-film.webm" type="video/webm"><source src="/b0b-briefing-film.mp4" type="video/mp4">
+</video>
+<p class="film-cap">The briefing, as a film: %snarrated, the words on screen. Every shot carries its source. <a href="/b0b-briefing-film.mp4" download>Download (MP4, %.0f MB)</a></p>
+<details><summary>Script and sources</summary>
+<ol class="script">%s</ol>
+<ul class="sources">%s</ul>
+<p>Voice: Piper, en_GB &ldquo;cori&rdquo;, trained on LibriVox recordings in the public domain. Sound: synthesised for the film. No face appears in it.</p>
+</details>
+</section>''' % (length, mb, script, ''.join(src))
+
+
 # --------------------------------------------------------------------------- /start
 # Since 21 Oct 2026 the Briefing presents the institution, after the author's framework
 # (design/INSTITUTION.md), and no longer summarises the report: "briefing is repeating
@@ -214,6 +282,7 @@ def build_start(n_markers, n_edges):
 <p class="thesis">The intelligence agency is the artwork.<br>The intelligence work is real.</p>
 <p class="lede">An independent intelligence research operation. Its identity is the work; its research is sourced, tiered and correctable, and stands outside the fiction.</p>
 <nav class="door" aria-label="Start here"><a class="go" href="/report">ENTER THE REPORT &rarr;</a><a href="/map">OPEN THE MAP</a><a href="/home">WATCH THE FILMS</a></nav>
+%s
 
 <h2 lang="la">Ars est celare artem</h2>
 <p>The art is to conceal the art. b0b.dev works on three levels at once.</p>
@@ -277,7 +346,7 @@ def build_start(n_markers, n_edges):
 <div class="coda">
 <p class="la" lang="la">Ars est celare artem.</p>
 </div>
-''' % (format(n_markers, ','), format(n_markers, ','), n_edges)
+''' % (build_film_block(), format(n_markers, ','), format(n_markers, ','), n_edges)
     body += '<footer>b0b.dev &middot; written to be attacked: send corrections through the report&rsquo;s researcher&rsquo;s guide. Every count on this site is checked against one record before each deploy: <a href="/data/build.json">build.json</a> (counts, build stamp, content hashes).</footer>'
     # Search Console's ownership tag, kept here as well as on the report (which '/'
     # serves): outside the seo: block apply-seo-meta owns, and harmless on a second page.
