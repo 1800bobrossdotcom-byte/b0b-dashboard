@@ -161,7 +161,7 @@ footer{max-width:72ch;margin:56px auto 0;font:13px/1.6 var(--mono);color:var(--d
 
 NAV = '''<div class="top"><div class="nav">
   <a href="/report">&larr; THE REPORT</a><a href="/start">BRIEFING</a><a href="/retractions">CORRECTIONS</a>
-  <a href="/map">OSINT MAP</a><a href="/map/list">MAP AS TEXT</a><a href="/about">ABOUT &amp; METHOD</a><a href="/home">FILMS</a><a href="/stickers">STICKERS</a><a href="/announcement">ANNOUNCEMENT</a>
+  <a href="/map">OSINT MAP</a><a href="/map/list">MAP AS TEXT</a><a href="/home">FILMS</a><a href="/stickers">STICKERS</a><a href="/announcement">ANNOUNCEMENT</a>
 </div></div>'''
 
 
@@ -244,6 +244,9 @@ def build_start(n_markers, n_edges):
         ('Symmetry rule', 'A discount applied to a fact that hurts a hypothesis must be applied to one that helps it.'),
         ('Testimony tier', 'Evidence of an experience, never evidence of a cause. Promoted only by a document.'),
         ('Living-person floor', 'No living, uncharged person is asserted or implied to be a criminal or an intelligence asset.'),
+        ('No de-anonymising', 'Redactions protecting living people are never reversed; residences carry street names only.'),
+        ('Stop rules', 'Victim interviews, protective-order material and imagery-heavy documents are not read past identification.'),
+        ('No numerology', 'Dates and numbers are recorded as facts and never read for meaning.'),
     ]
     scale = ''.join('<tr><td><b>%s</b></td><td>%s</td><td>%s</td></tr>' % (k, n, m) for k, n, m in EDGE_TIERS)
     body = '''
@@ -259,6 +262,15 @@ def build_start(n_markers, n_edges):
 
 <h2>The rules the report runs on</h2>
 <div class="rules">%s</div>
+
+<h2 id="method">Method</h2>
+<ul class="items">
+<li><b>Kept by Gianni Arone</b>, who sets scope and makes every contested call. No institutional affiliation is claimed: judge the work on its sources, not on a credential.</li>
+<li><b>One identified crawler.</b> It obeys robots.txt, never disguises itself, solves no challenge and never retries a refusal under another name - a document taken past an access control has contaminated provenance. A refusal is recorded as a null, and a claim resting on a source it could not read stays at a lower tier. Every fetch and every refusal is in the <a href="/data/sources-ledger.json">source ledger</a> with its SHA-256.</li>
+<li><b>Quotes and figures are read at the source.</b> No search result or summary, human or machine, carries a quote onto the page.</li>
+<li><b>AI assistance, disclosed.</b> Research, drafting, verification and deployment are done with Claude, an AI model made by Anthropic, under the author&rsquo;s direction. Anthropic is also a subject of the report; the conflict is disclosed where it arises (Sections X and XXV).</li>
+<li><b>Corrections.</b> A claim a primary source contradicts is lowered or removed, whoever raised it - the author and the AI included. It is fixed in place and entered in the <a href="/retractions">ledger</a>; contested and defamation-adjacent material waits for the author. To send one, use the researcher&rsquo;s guide at the end of <a href="/report#XXV">the report</a>: the claim, the passage, and the source that contradicts it.</li>
+</ul>
 
 <h2>How the map&rsquo;s lines are tiered</h2>
 <p>Every connection on the map carries the tier of the <em>relationship</em> between its two ends, not of either end. A line is not evidence that two places are connected; its tier says how much the record shows.</p>
@@ -277,7 +289,6 @@ def build_start(n_markers, n_edges):
 <div class="dl">
   <a href="/report"><b>The report</b><span>All twenty-five sections, tiered and sourced, with the researcher&rsquo;s guide.</span></a>
   <a href="/retractions"><b>Corrections &amp; retractions</b><span>What the report got wrong, how it was found, and what replaced it.</span></a>
-  <a href="/about"><b>About &amp; method</b><span>Who maintains this, how a correction is decided, the rules, and the tools - AI included.</span></a>
   <a href="/ai-attack-vector-analysis"><b>The AI-safety report</b><span>A separate document on the AI tools used to build this site, now tiered the same way.</span></a>
 </div>
 ''' % (''.join(know), ''.join(think), ''.join(dont), ''.join(change),
@@ -401,61 +412,6 @@ def build_retractions():
     return page('Corrections & Retractions', body)
 
 
-# --------------------------------------------------------------------------- /about
-def build_about(n_markers, n_edges):
-    body = """
-<h1>About &amp; method</h1>
-<p class="lede">What this site is, who keeps it, how it decides what goes on the page, and how a mistake gets corrected.</p>
-
-<h2>What this is</h2>
-<p><b>b0b.dev</b> is independent open-source intelligence (OSINT) research. Its core is one long report - <a href="/report">Project Anglerfish</a>, twenty-five sections - on the Epstein-Maxwell record and the wider architecture of surveillance, finance and institutional power, with a companion <a href="/map">map</a> of %s locations and %s connection lines. Every claim carries a tier; every map line carries the tier of the relationship it shows. It is also a long-running work of art in which the method is part of the work: the tiers, the published nulls and the claims killed on the page are the point, not decoration.</p>
-
-<h2>Who keeps it</h2>
-<p>The author and director is <b>Gianni Arone</b>. He sets scope and makes every contested editorial call. No institutional affiliation is claimed by this page; the work is presented as independent research and should be judged on its sources, not on a credential.</p>
-
-<h2>How the research is done</h2>
-<ul class="items">
-<li><b>Sources are fetched by one identified crawler.</b> It obeys robots.txt, never disguises itself, never solves a challenge and never retries a refusal under another name - because a document obtained by defeating an access control has contaminated provenance. Every fetch, and every refusal, is logged with its time, status and SHA-256 hash in the <a href="/data/sources-ledger.json">source ledger</a>.</li>
-<li><b>A refusal is a finding.</b> Sites that block the crawler are recorded as nulls, not worked around; a claim that rests on a source the crawler could not read is held at a lower tier.</li>
-<li><b>Quotes and figures are read at the source.</b> A search result or a summary - human or machine - never carries a quote onto the page; it is re-read in the fetched copy first.</li>
-<li><b>AI assistance is used and disclosed.</b> Research, drafting, verification and deployment have been carried out with Claude, an AI model made by Anthropic, working under the author&rsquo;s direction - including the work behind this page (October 2026). Anthropic also appears in the report as a subject; that conflict is disclosed where it arises (Sections X and XXV). The AI&rsquo;s own recorded failure modes - drifting toward agreement, loaded word choices, overstatement - are among the things the method is built to catch.</li>
-</ul>
-
-<h2>The practices it applies</h2>
-<p>The report applies the working practices of intelligence analysis rather than claiming an institutional standard:</p>
-<ul class="items">
-<li><b>Tiered claims</b> - documented, attributed, labeled, contested, unsupported - with nothing promoted by repetition.</li>
-<li><b>Named sources and provenance</b> - the claimant named for every attributed claim; the fetch ledger for every source.</li>
-<li><b>Alternative hypotheses, scored</b> - the central conclusion is set against its rivals on the same record, and the rival it has most trouble excluding is named (<a href="/report#ii-the-conclusion-in-one-place-two-principals-a-sponsor-question-and-a-price">Section II</a>).</li>
-<li><b>Stated falsifiers</b> - what would lower each major conclusion is written down before the evidence arrives (<a href="/start">the briefing</a>).</li>
-<li><b>Chronology and the anti-map rule</b> - a shared timeline is not a chain; map lines are tiered so proximity cannot pass as proof.</li>
-<li><b>Symmetry</b> - any discount applied to evidence against a hypothesis is applied to evidence for it.</li>
-<li><b>Published corrections</b> - errors are fixed in place and listed in the <a href="/retractions">corrections ledger</a>.</li>
-</ul>
-
-<h2>Standing rules</h2>
-<ul class="items">
-<li><b>Living-person floor.</b> No living person who has not been charged is asserted or implied to be a criminal or an intelligence asset. Documented affiliation is never presented as an operational tie.</li>
-<li><b>No de-anonymising.</b> Redactions protecting living people are never reversed; residences carry street names only.</li>
-<li><b>Stop rules.</b> Victim interviews, protective-order material and imagery-heavy documents are not read past identification.</li>
-<li><b>No numerology.</b> Dates and numbers are recorded as facts and never read for meaning.</li>
-</ul>
-
-<h2>How a correction is decided</h2>
-<ul class="items">
-<li>A claim that a primary source contradicts is lowered or removed, whoever raised the problem - including the author&rsquo;s own claims and the AI&rsquo;s.</li>
-<li>Corrections are made in place, without narration in the text, and entered in the <a href="/retractions">ledger</a> with the date, what changed and how the error was found.</li>
-<li>Contested and defamation-adjacent material is held for the author&rsquo;s decision rather than published automatically.</li>
-<li>To send a correction, use the researcher&rsquo;s guide at the end of <a href="/report#XXV">the report</a>: the claim, the passage, and the source that contradicts it.</li>
-</ul>
-
-<h2>The data</h2>
-<p>The map and the source ledger are published as data so that the interpretation can be thrown away and the record kept: <a href="/data/map-data.json">map-data.json</a>, <a href="/map.kml">map.kml</a>, <a href="/map/list">the map as text</a> and <a href="/data/sources-ledger.json">sources-ledger.json</a>.</p>
-""" % (format(n_markers, ','), n_edges)
-    body += '<footer>b0b.dev &middot; the record is published so the interpretation can be challenged.</footer>'
-    return page('About & Method', body)
-
-
 # --------------------------------------------------------------------------- /map/list
 def build_map_list(locs, edges):
     from collections import OrderedDict
@@ -500,9 +456,8 @@ def main():
     n_markers, n_edges, tiered, n_rows, withheld, locs, edges = build_data()
     open(os.path.join(SITE, 'start.html'), 'w', encoding='utf-8').write(build_start(n_markers, n_edges))
     open(os.path.join(SITE, 'retractions.html'), 'w', encoding='utf-8').write(build_retractions())
-    open(os.path.join(SITE, 'about.html'), 'w', encoding='utf-8').write(build_about(n_markers, n_edges))
     open(os.path.join(SITE, 'map-list.html'), 'w', encoding='utf-8').write(build_map_list(locs, edges))
-    print('start, retractions, about, map-list; map-data: %d markers, %d edges (%d tiered); ledger: %d rows, %d withheld'
+    print('start, retractions, map-list; map-data: %d markers, %d edges (%d tiered); ledger: %d rows, %d withheld'
           % (n_markers, n_edges, tiered, n_rows, withheld))
 
 

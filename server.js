@@ -381,7 +381,7 @@ const CANONICAL_PATHS = [
   '/home', '/report', '/intro', '/continuity', '/epstein-maxwell', '/endgame', '/map', '/countermeasures', '/artifact', '/spectra',
   '/tones/healing', '/tones/protective', '/tones/instrument', '/tones/shield',
   '/tones/multipack', '/tones/shield/guide', '/ai-attack-vector-analysis',
-  '/darpa-cia-lockheed', '/start', '/retractions', '/about', '/map/list', '/stickers',
+  '/darpa-cia-lockheed', '/start', '/retractions', '/map/list', '/stickers',
   '/announcement',
 ];
 
@@ -437,7 +437,6 @@ const PAGES = {
   '/start':         'start.html',
   // 4 Oct 2026: the first-contact layer - read this first, and the retraction ledger.
   '/retractions':   'retractions.html',
-  '/about':         'about.html',
   '/map/list':      'map-list.html',
   '/stickers':      'stickers.html', // 10 Oct 2026: the sticker set and its print files
   '/announcement':  'announcement.html', // 11 Oct 2026: the public announcement and its audio
@@ -459,6 +458,7 @@ const REDIRECTS = {
   '/tones/guide':        '/tones/shield/guide',
   '/ai-attack-vector-analysis.html': '/ai-attack-vector-analysis',
   '/darpa-cia-lockheed.html': '/darpa-cia-lockheed',
+  '/about':             '/start#method',   // folded into the briefing, 21 Oct 2026
 };
 
 // Serve static assets (js, css, manifests, icons, i18n) for authenticated users

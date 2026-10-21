@@ -199,6 +199,21 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**ABOUT & METHOD FOLDED INTO THE BRIEFING; `/about` RETIRED — 21 Oct 2026, live.** Author: *"Briefing and about and method can be condensed or one can be removed"*.
+- **Kept and moved onto `/start`:**
+  - `/about`'s unique content, condensed into a `Method` section (`<h2 id="method">`): who keeps it, the one identified crawler with refusals as nulls, quotes read at source, the AI disclosure, and how a correction is decided.
+  - Its three missing standing rules, added to the Briefing's rules list: no de-anonymising, stop rules, no numerology.
+- **Dropped as duplicates:**
+  - the "practices" list (tiers, falsifiers, symmetry and anti-map are already on the Briefing);
+  - its data links;
+  - its "what this is" paragraph, including "It is also a long-running work of art", the overt self-explanation `design/INSTITUTION.md` principle 2 argues against. Its return is his call.
+- **Size:** two pages of 1,925 words became one of 1,419.
+- **Wiring:**
+  - `/about` now **301s to `/start#method`** (`REDIRECTS` in `server.js`) and has left `PAGES`, `CANONICAL_PATHS`, the sitemap (23 URLs), `apply-seo-meta.js` and `seo-meta.json`.
+  - `site/about.html` and `build_about()` are deleted.
+  - Links removed: ABOUT from the report's top nav, sidebar and `/home`; ABOUT & METHOD from the `/start`-family nav. The masthead's "(About & method)" now points to `/start#method`.
+  - `check-consistency.py --selftest` now plants into 5 surfaces (`about.html` is gone); seo-selftest 57/57.
+
 **"BRIEFING" + THE JACKET'S PATCH — 21 Oct 2026, live.** The author sent a photo of the patch and the single word *"Briefing"*.
 - **The rename, my reading of "Briefing":** his call on the held "rename READ THIS FIRST to Briefing".
   - **I had filed that rename as flattening, and that was wrong.** "Briefing" is the institution's own vocabulary, not an explanation.

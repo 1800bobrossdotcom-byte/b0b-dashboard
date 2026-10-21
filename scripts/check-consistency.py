@@ -81,7 +81,7 @@ def surfaces():
     out.append(('report.html scale line', scale.group(0) if scale else ''))
     m = read(os.path.join(SITE, 'map.html'))
     out.append(('map.html (outside the data)', m[:m.index('var locations = [')]))
-    for name in ('start.html', 'about.html', 'retractions.html'):
+    for name in ('start.html', 'retractions.html'):
         p = os.path.join(SITE, name)
         if os.path.exists(p):
             out.append((name, read(p)))

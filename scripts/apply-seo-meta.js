@@ -45,7 +45,6 @@ const URLS = {
   'darpa-cia-lockheed.html': '/darpa-cia-lockheed',
   'start.html': '/start',
   'retractions.html': '/retractions',
-  'about.html': '/about',
   'map-list.html': '/map/list',
   'stickers.html': '/stickers',
   'announcement.html': '/announcement',

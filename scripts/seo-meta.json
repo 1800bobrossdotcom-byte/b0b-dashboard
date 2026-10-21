@@ -333,20 +333,6 @@
       ]
     },
     {
-      "file": "about.html",
-      "title": "b0b.dev - about, method & governance",
-      "metaDescription": "Who keeps b0b.dev, how its OSINT research is done, the analytic practices and standing rules it applies, how corrections are decided, and how AI assistance is used.",
-      "ogDescription": "Independent OSINT research: one identified crawler, refusals logged as findings, tiered claims, scored rival hypotheses, public corrections, AI assistance disclosed.",
-      "jsonldType": "Article",
-      "headline": "About b0b.dev: method, governance and corrections",
-      "topics": [
-        "OSINT method",
-        "research governance",
-        "corrections policy",
-        "AI disclosure"
-      ]
-    },
-    {
       "file": "map-list.html",
       "title": "b0b.dev - the OSINT map as text: every site and connection",
       "metaDescription": "Every location and every connection line on the b0b.dev OSINT map as a readable list, with coordinates, dates, context and the evidence tier of each connection.",
