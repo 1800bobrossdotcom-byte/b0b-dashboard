@@ -2,7 +2,7 @@
 """Build the first-contact layer: /start, /retractions, and the public data files.
 
 Added 4 Oct 2026 at the author's instruction, after an outside review asked for:
-  - a "read this first" page between the home page and the report;
+  - a "read this first" page between the home page and the report (titled Briefing since 21 Oct 2026);
   - a ledger of what the report got wrong and lowered;
   - the map and the sources as downloadable data, so a reader can throw away the
     report's interpretation and keep the record.
@@ -160,7 +160,7 @@ footer{max-width:72ch;margin:56px auto 0;font:13px/1.6 var(--mono);color:var(--d
 '''
 
 NAV = '''<div class="top"><div class="nav">
-  <a href="/report">&larr; THE REPORT</a><a href="/start">READ THIS FIRST</a><a href="/retractions">CORRECTIONS</a>
+  <a href="/report">&larr; THE REPORT</a><a href="/start">BRIEFING</a><a href="/retractions">CORRECTIONS</a>
   <a href="/map">OSINT MAP</a><a href="/map/list">MAP AS TEXT</a><a href="/about">ABOUT &amp; METHOD</a><a href="/home">FILMS</a><a href="/stickers">STICKERS</a><a href="/announcement">ANNOUNCEMENT</a>
 </div></div>'''
 
@@ -248,7 +248,7 @@ def build_start(n_markers, n_edges):
     scale = ''.join('<tr><td><b>%s</b></td><td>%s</td><td>%s</td></tr>' % (k, n, m) for k, n, m in EDGE_TIERS)
     body = '''
 <p class="kicker">b0b.dev &middot; Project Anglerfish &middot; independent OSINT</p>
-<h1>Read this first</h1>
+<h1>Briefing</h1>
 <p class="lede">The report is long by design: twenty-five sections, every claim tiered and sourced. This page is the short version - what it knows, what it thinks, what it does not know, and what would change its mind - with the data underneath it, so you can throw the interpretation away and keep the record.</p>
 <nav class="door" aria-label="Start here"><a class="go" href="/report">ENTER THE REPORT &rarr;</a><a href="/map">OPEN THE MAP</a><a href="/home">WATCH THE FILMS</a></nav>
 
@@ -286,7 +286,7 @@ def build_start(n_markers, n_edges):
     body += '<footer>b0b.dev &middot; written to be attacked: send corrections through the report&rsquo;s researcher&rsquo;s guide. Last built from the live report and map. Every count on this site is checked against one record before each deploy: <a href="/data/build.json">build.json</a> (counts, build stamp, content hashes).</footer>'
     # Search Console's ownership tag, kept here as well as on the report (which '/'
     # serves): outside the seo: block apply-seo-meta owns, and harmless on a second page.
-    return page('Read this first', body, head_extra='\n  <meta name="google-site-verification" content="TsPEDsaL88qvOxa0dWejCZFKVU37Y7Vk5v5HKcp5kL0">')
+    return page('Briefing', body, head_extra='\n  <meta name="google-site-verification" content="TsPEDsaL88qvOxa0dWejCZFKVU37Y7Vk5v5HKcp5kL0">')
 
 
 # --------------------------------------------------------------------------- /retractions
@@ -427,7 +427,7 @@ def build_about(n_markers, n_edges):
 <li><b>Tiered claims</b> - documented, attributed, labeled, contested, unsupported - with nothing promoted by repetition.</li>
 <li><b>Named sources and provenance</b> - the claimant named for every attributed claim; the fetch ledger for every source.</li>
 <li><b>Alternative hypotheses, scored</b> - the central conclusion is set against its rivals on the same record, and the rival it has most trouble excluding is named (<a href="/report#ii-the-conclusion-in-one-place-two-principals-a-sponsor-question-and-a-price">Section II</a>).</li>
-<li><b>Stated falsifiers</b> - what would lower each major conclusion is written down before the evidence arrives (<a href="/start">Read this first</a>).</li>
+<li><b>Stated falsifiers</b> - what would lower each major conclusion is written down before the evidence arrives (<a href="/start">the briefing</a>).</li>
 <li><b>Chronology and the anti-map rule</b> - a shared timeline is not a chain; map lines are tiered so proximity cannot pass as proof.</li>
 <li><b>Symmetry</b> - any discount applied to evidence against a hypothesis is applied to evidence for it.</li>
 <li><b>Published corrections</b> - errors are fixed in place and listed in the <a href="/retractions">corrections ledger</a>.</li>

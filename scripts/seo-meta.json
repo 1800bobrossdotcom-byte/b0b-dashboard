@@ -305,11 +305,11 @@
     },
     {
       "file": "start.html",
-      "title": "b0b.dev - read this first: the OSINT report in one page",
+      "title": "b0b.dev - Briefing: the OSINT report in one page",
       "metaDescription": "The short version of the OSINT report: what it documents, what it concludes and at what tier, what it does not know, and what would change its mind. With the data.",
       "ogDescription": "What we know, what we think, what we don't know, and what would change our minds - with the map data and the source ledger to download.",
       "jsonldType": "Article",
-      "headline": "Read this first: the OSINT report in one page, tiered, with its falsifiers and its data",
+      "headline": "Briefing: the OSINT report in one page, tiered, with its falsifiers and its data",
       "topics": [
         "OSINT method",
         "evidence tiers",

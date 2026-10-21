@@ -91,7 +91,7 @@ def main():
 <p>The voice is synthetic: Piper&rsquo;s <code>en_GB-cori-high</code>, a model trained on public-domain LibriVox recordings. The beat (kick, brushed snare, hats, bass and pad) is synthesised in the build script; nothing is sampled, and nothing in it is an alert tone, a siren or a lone sharp crack. Every fact in it is the report&rsquo;s own, and no survivor is named. The address to anyone who serves is adapted from the report&rsquo;s own, <a href="/report#to-those-inside">To those inside</a>.</p>
 <p>Before publishing, a speech-recognition model transcribed one pass as rendered and through four simulated street recordings: a small speaker at a distance, with traffic noise six, then three, decibels below the voice. In noise it got about 97%% of the words right, and every sentence whose meaning rests on a negation (&ldquo;does not ask you to disobey legal orders&rdquo;, &ldquo;do not send classified material&rdquo;, &ldquo;not from the police&rdquo;) was heard with the negation intact, every time.</p>''' % (meta[0][0], loop_dur, door, '\n'.join(words))
     body += ('\n<footer>b0b.dev &middot; read the record yourself: <a href="/report">the report</a> &middot; '
-             '<a href="/start">read this first</a> &middot; <a href="/map">the map</a>.</footer>')
+             '<a href="/start">the briefing</a> &middot; <a href="/map">the map</a>.</footer>')
     out = sp.page('b0b.dev public announcement', body).replace('  </style>', CSS + '  </style>', 1)
     open(os.path.join(SITE, 'announcement.html'), 'w', encoding='utf-8').write(out)
     print('published: %s' % '; '.join('%s %s %s' % (m[0], m[3], m[4]) for m in meta))

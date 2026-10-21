@@ -199,13 +199,29 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**"BRIEFING" + THE JACKET'S PATCH — 21 Oct 2026, live.** The author sent a photo of the patch and the single word *"Briefing"*.
+- **The rename, my reading of "Briefing":** his call on the held "rename READ THIS FIRST to Briefing".
+  - **I had filed that rename as flattening, and that was wrong.** "Briefing" is the institution's own vocabulary, not an explanation.
+  - It is now "BRIEFING" in the report's top nav and sidebar, `/home`, and the `/start` family nav (via `build-start-pages.py`).
+  - `/start`'s h1 is "Briefing". Its title is "b0b.dev - Briefing: the OSINT report in one page" (`seo-meta.json`).
+  - The `/stickers` and `/announcement` footers now read "the briefing", and their publishers were edited too.
+  - The URL stays `/start`.
+- **The seal:** `design/projection/seal.py` digitises the patch from his photo.
+  - The figure and the dotted bolts are traced from the thread.
+  - The rings, the motto (Liberation Serif, on the measured 196° arc) and the six stars are set.
+  - The photo is cropped to `src/patch-crop.png`, with no EXIF.
+- **The jacket-style projection, `build.py --jacket`:**
+  - navy ripstop, thread-white type and the seal above the address;
+  - the QR is navy on a thread tile and decodes at full and half size;
+  - the loop is the same 30 face-free report images.
+
 **CREATIVE DIRECTION RECEIVED — 21 Oct 2026.** The author pasted "b0b.dev — The Intelligence Agency as Conceptual Art" with no instruction. It is saved verbatim at `design/INSTITUTION.md` and summarised in §1.
 - **Fixed, live:** the masthead's *ars est celare artem* passage still carried a banned edit note: "and earlier versions of this line were wrong to hedge it as though it were one". It is cut. The sentence now ends "not an evidentiary claim."
 - **HELD for his word:** three more surviving edit notes. They carry argument in a contested section, so they were not rewritten in passing.
   - II `ii-primary-and-liaison-…`: "The objection this report raised last time does not survive the correction … The earlier version argued…" and "the Pollard case has to be re-graded … The earlier version offered it…". The Pollard paragraph also carries the "Israel apologised and disbanded the unit … Peres" line, which is not in any primary read (the Israel drill-down's page error 3). Fix both together.
   - XXV close: "the receipt gloss corrected above".
 - **Held items the framework bears on.** These are my reading; every decision is his:
-  - These would flatten the ambiguity: "a plain line above the masthead", "make `/` a gateway", "rename READ THIS FIRST to Briefing", "a Funding & Independence page", "external review".
+  - These would flatten the ambiguity: "a plain line above the masthead", "make `/` a gateway", "a Funding & Independence page", "external review". "Rename READ THIS FIRST to Briefing" was on this list wrongly; the author chose it, and it is done (entry above).
   - These are research integrity, and the framework keeps them: the `Dataset` JSON-LD, the per-edge evidence panel, separate confidence axes.
 - **A tension worth his eye, not acted on:** principle 4 (subtle institutional design over espionage cliché) and principle 5 (physical–digital continuity) sit against the site's neon-green CRT look (`#00ff41`, the "Matrix green" terminal trope). The stickers and the 21 Oct projection use it too. The jacket's language is navy, embroidery and a seal.
 

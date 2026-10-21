@@ -27,11 +27,16 @@ OUT = os.path.join(HERE, 'out')
 FONTS = os.path.join(ROOT, 'design', 'stickers', 'fonts')
 URL = 'https://www.b0b.dev'
 
+JACKET = '--jacket' in sys.argv   # the jacket's world: navy ripstop, thread-white, the seal
+
 BG = (5, 5, 5)
 GREEN = (0, 255, 65)       # the wordmark's green
 CYAN = (0, 204, 255)       # the wordmark's slash
 LIGHT = (216, 255, 228)
 DIM = (150, 182, 162)
+NAVY = (20, 29, 51)        # the jacket's fabric, darkened from the photo's lit navy
+THREAD = (226, 232, 236)   # the embroidery
+THREAD_DIM = (150, 164, 182)
 
 FPS = 25
 HOLD = 5.0                 # seconds each image is on screen, crossfade included
@@ -118,12 +123,12 @@ def qr_tile(px):
     q = segno.make(URL, error='q', micro=False, boost_error=False)
     m = q.matrix
     n = len(m) + 8                      # 4-module quiet zone each side
-    tile = Image.new('RGB', (n, n), (236, 255, 242))
+    tile = Image.new('RGB', (n, n), THREAD if JACKET else (236, 255, 242))
     d = ImageDraw.Draw(tile)
     for r, row in enumerate(m):
         for c, v in enumerate(row):
             if v:
-                d.point((c + 4, r + 4), fill=(5, 20, 12))
+                d.point((c + 4, r + 4), fill=NAVY if JACKET else (5, 20, 12))
     return tile.resize((px, px), Image.NEAREST)
 
 
@@ -136,8 +141,80 @@ def scanlines(im, step=4, k=0.9):
     return Image.composite(im, Image.new('RGB', im.size, (0, 0, 0)), over)
 
 
+def ripstop(im, s=1):
+    """The jacket fabric's ripstop grid, barely there."""
+    d = ImageDraw.Draw(im)
+    step, c = 13 * s, tuple(v + 7 for v in NAVY)
+    for x in range(0, im.width, step):
+        d.line([(x, 0), (x, im.height)], fill=c, width=s)
+    for y in range(0, im.height, step):
+        d.line([(0, y), (im.width, y)], fill=c, width=s)
+    return im
+
+
+_SEAL = {}
+
+
+def seal_img(px):
+    """The seal digitised from the jacket (seal.py), thread-white on transparent, px square."""
+    if 'full' not in _SEAL:
+        sys.path.insert(0, HERE)
+        import seal as sealmod
+        _SEAL['full'] = sealmod.thread(sealmod.seal(2000), THREAD)
+    return _SEAL['full'].resize((px, px), Image.LANCZOS)
+
+
+def address_jacket(draw, xy, size, anchor='ms'):
+    """www.b0b.dev in thread-white, the zero the font's own slashed glyph."""
+    f = font('IBMPlexMono-Medium.ttf', size)
+    draw.text(xy, 'www.b0b.dev', font=f, fill=THREAD, anchor=anchor, features=['zero'])
+
+
+def spelled_jacket(draw, xy, size, anchor='ms'):
+    f = font('IBMPlexMono-Medium.ttf', size)
+    parts = [('b ', THREAD_DIM), ('zero', THREAD), (' b', THREAD_DIM)]
+    total = sum(f.getlength(t) for t, _ in parts)
+    x, y = xy
+    if anchor[0] == 'm':
+        x -= total / 2
+    for t, c in parts:
+        draw.text((x, y), t, font=f, fill=c, anchor='l' + anchor[1])
+        x += f.getlength(t)
+
+
+def card_jacket(s=1):
+    """The address card in the jacket's world: the seal above the address, as on a seal and title."""
+    W, H = 1920 * s, 1080 * s
+    im = ripstop(Image.new('RGB', (W, H), NAVY), s)
+    sp = 560 * s
+    im.paste(seal_img(sp), ((W - sp) // 2, 64 * s), seal_img(sp))
+    d = ImageDraw.Draw(im)
+    address_jacket(d, (W / 2, 810 * s), 128 * s)
+    spelled_jacket(d, (W / 2, 950 * s), 58 * s)
+    q = qr_tile(170 * s)
+    im.paste(q, (W - 170 * s - 56 * s, H - 170 * s - 56 * s))
+    return im
+
+
+def band_jacket():
+    ov = Image.new('RGBA', (1920, 1080), (0, 0, 0, 0))
+    strip = ripstop(Image.new('RGB', (1920, 150), NAVY)).convert('RGBA')
+    ov.alpha_composite(strip, (0, 930))
+    d = ImageDraw.Draw(ov)
+    d.line([(0, 930), (1920, 930)], fill=THREAD_DIM + (255,), width=1)
+    sl = seal_img(124)
+    ov.alpha_composite(sl, (40, 943))
+    address_jacket(d, (190, 1003), 70, anchor='ls')
+    spelled_jacket(d, (192, 1052), 30, anchor='ls')
+    q = qr_tile(124).convert('RGBA')
+    ov.alpha_composite(q, (1920 - 124 - 40, 943))
+    return ov
+
+
 def card(s=1):
     """The address card, at scale s (1 = 1920x1080)."""
+    if JACKET:
+        return card_jacket(s)
     W, H = 1920 * s, 1080 * s
     im = Image.new('RGB', (W, H), BG)
     d = ImageDraw.Draw(im)
@@ -152,6 +229,8 @@ def card(s=1):
 
 def band():
     """The address held at the bottom of every image frame (RGBA overlay, 1920x1080)."""
+    if JACKET:
+        return band_jacket()
     ov = Image.new('RGBA', (1920, 1080), (0, 0, 0, 0))
     d = ImageDraw.Draw(ov)
     d.rectangle([0, 930, 1920, 1080], fill=BG + (255,))
@@ -188,7 +267,7 @@ class Shot:
         bg = src.resize((int(src.width * sc) + 2, int(src.height * sc) + 2), Image.BILINEAR)
         bg = bg.crop(((bg.width - W) // 2, (bg.height - H) // 2, (bg.width - W) // 2 + W, (bg.height - H) // 2 + H))
         bg = bg.filter(ImageFilter.GaussianBlur(28))
-        self.bg = Image.blend(Image.new('RGB', (W, H), BG), bg, 0.28)
+        self.bg = Image.blend(Image.new('RGB', (W, H), NAVY if JACKET else BG), bg, 0.24 if JACKET else 0.28)
         bw, bh, top = self.BOX
         fit = min(bw / src.width, bh / src.height)
         self.fw, self.fh = int(src.width * fit), int(src.height * fit)
@@ -200,7 +279,7 @@ class Shot:
         cd = ImageDraw.Draw(self.cap)
         y = self.fy + self.fh + 30
         for line in wrap(self.tag, f, 1700)[:2]:
-            cd.text((W / 2, y), line, font=f, fill=DIM + (255,), anchor='mt')
+            cd.text((W / 2, y), line, font=f, fill=(THREAD_DIM if JACKET else DIM) + (255,), anchor='mt')
             y += 30
 
     def frame(self, t, band_ov):
@@ -212,7 +291,7 @@ class Shot:
         im = self.bg.copy()
         im.paste(fg, (self.fx, self.fy))
         d = ImageDraw.Draw(im)
-        d.rectangle([self.fx - 1, self.fy - 1, self.fx + self.fw, self.fy + self.fh], outline=(28, 52, 40))
+        d.rectangle([self.fx - 1, self.fy - 1, self.fx + self.fw, self.fy + self.fh], outline=(58, 70, 96) if JACKET else (28, 52, 40))
         im = im.convert('RGBA')
         im.alpha_composite(self.cap)
         im.alpha_composite(band_ov)
@@ -253,7 +332,8 @@ def verify_qr(im, label):
 def build_still():
     os.makedirs(OUT, exist_ok=True)
     ok = True
-    for s, name in ((1, 'b0b-dev-projection-1080p.png'), (2, 'b0b-dev-projection-4k.png')):
+    tag = '-jacket' if JACKET else ''
+    for s, name in ((1, 'b0b-dev-projection%s-1080p.png' % tag), (2, 'b0b-dev-projection%s-4k.png' % tag)):
         im = card(s)
         im.save(os.path.join(OUT, name), optimize=True)
         print('wrote', name, im.size)
@@ -275,14 +355,15 @@ def build_loop(sheet=False):
         sh = Image.new('RGB', (cols * tw, rows * th), (20, 20, 20))
         for i, t in enumerate(thumbs):
             sh.paste(t.resize((tw, th), Image.LANCZOS), ((i % cols) * tw, (i // cols) * th))
-        sh.save(os.path.join(OUT, 'contact-sheet.jpg'), quality=88)
+        sh.save(os.path.join(OUT, 'contact-sheet%s.jpg' % ('-jacket' if JACKET else '')), quality=88)
         print('wrote contact-sheet.jpg', len(thumbs), 'frames')
         verify_qr(shots[0].frame(0.5, ov), 'image frame (bottom band)')
         return
     total = sum(d for _, d in seq)
     nfr = int(round(total * FPS))
-    tmp = os.path.join(OUT, 'b0b-dev-projection-loop.part.mp4')
-    final = os.path.join(OUT, 'b0b-dev-projection-loop.mp4')
+    tag = '-jacket' if JACKET else ''
+    tmp = os.path.join(OUT, 'b0b-dev-projection%s-loop.part.mp4' % tag)
+    final = os.path.join(OUT, 'b0b-dev-projection%s-loop.mp4' % tag)
     p = subprocess.Popen([ff, '-y', '-loglevel', 'error', '-f', 'rawvideo', '-pix_fmt', 'rgb24',
                           '-s', '1920x1080', '-r', str(FPS), '-i', '-',
                           '-c:v', 'libx264', '-preset', 'slow', '-crf', '27', '-tune', 'stillimage', '-pix_fmt', 'yuv420p',

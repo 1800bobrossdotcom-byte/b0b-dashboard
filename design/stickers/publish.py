@@ -169,7 +169,7 @@ def build_page(rows, zip_size):
 <p>VT323, Special Elite, Black Ops One, Big Shoulders Stencil, IBM Plex Mono, GFS Didot, Doto, Rubik Glitch, Jacquard 24, Monoton, Unbounded, Anton and Libre Barcode 39 Text. All are under the SIL Open Font License 1.1 except Special Elite (Apache 2.0); both licences allow printing anything made with them. The licence texts are in the zip.</p>
 </section>
 </div>''' % (zip_size, '\n'.join(cards))
-    body += '<footer>b0b.dev &middot; read the record yourself: <a href="/report">the report</a> &middot; <a href="/start">read this first</a> &middot; <a href="/map">the map</a>.</footer>'
+    body += '<footer>b0b.dev &middot; read the record yourself: <a href="/report">the report</a> &middot; <a href="/start">the briefing</a> &middot; <a href="/map">the map</a>.</footer>'
     out = sp.page('b0b.dev stickers', body, main_class='stk-main').replace('  </style>', CSS + '  </style>', 1)
     open(os.path.join(SITE, 'stickers.html'), 'w', encoding='utf-8').write(out)
 

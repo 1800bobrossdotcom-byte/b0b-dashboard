@@ -76,3 +76,30 @@ Other modes:
 ## Fonts
 
 IBM Plex Mono (Bold, Medium) from `design/stickers/fonts/`, under the OFL (`design/stickers/fonts/licenses/`).
+
+## The jacket version — `--jacket`, 21 Oct 2026
+
+The author sent a photograph of the jacket's patch in answer to the CLAUDE.md §1 tension: the site's
+green terminal look against principles 4 and 5 of `design/INSTITUTION.md`. `--jacket` builds the same
+still and loop in the jacket's world:
+- the ground is navy with the fabric's ripstop grid, barely there;
+- the type is thread-white, with the font's own slashed zero, and no neon;
+- the QR is navy on a thread-coloured tile.
+
+`python3 design/projection/build.py --jacket` writes:
+- `b0b-dev-projection-jacket-1080p.png`;
+- `b0b-dev-projection-jacket-4k.png`;
+- `b0b-dev-projection-jacket-loop.mp4`.
+
+**The seal, `seal.py`:** it writes `out/seal-thread-2000.png` (transparent) and `out/seal-mask-2000.png`.
+- **The source** is `src/patch-crop.png`, a crop of the author's photo. It carries no EXIF; the original had none.
+- **Traced from the thread:** the figure and the dotted running-stitch bolts.
+  - The trace uses a local-contrast threshold.
+  - It is warped from the sleeve's ellipse (rx 218.8, ry 233.4) to a circle and turned 5° upright.
+  - The photo's specks and the fabric stain under the feet are removed.
+- **Set:**
+  - the two rings, as true circles;
+  - the motto, in Liberation Serif on the measured arc: 196° across the top, with word gaps as on the patch;
+  - the six stars, 25° apart and centred at the bottom, a point toward the centre.
+- **Why the motto is set rather than traced:** the traced letters broke up ("ARS" read as "AKS").
+- **The insignia's status:** it is the masthead's "insignia of a unit that does not exist", of unknown manufacture. The page records it as artistic appropriation, and it claims no real unit (INSTITUTION.md principle 7).
