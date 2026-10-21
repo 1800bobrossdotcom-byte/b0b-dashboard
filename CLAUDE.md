@@ -29,6 +29,20 @@ silently." The author had the revision-history notes stripped — see §7. **Cor
 made and material ones are still disclosed; what is gone is the narration about the report's own
 drafts.** Do not re-add "an earlier version of this passage said X" prose.*
 
+**CREATIVE DIRECTION — the author's framework, 21 Oct 2026. Full text, verbatim: `design/INSTITUTION.md`. Read it before any design, writing or structural work.**
+- **The thesis:** "The intelligence agency is the artwork. The intelligence work is real." The institution is the medium. Its governing maxim, *ars est celare artem*, is already on the page in the masthead, with the jacket and "the insignia of a unit that does not exist".
+- **The distinction that carries everything:** "The institution may be ambiguous. The evidence must not be." Also: "Don't trust the institution. Examine the evidence." The masthead says the same: in art the craft is concealed, in analysis every seam is shown.
+- **His seven principles:**
+  1. institutional credibility;
+  2. artistic ambiguity (no excessive explanation that flattens the work);
+  3. research integrity (citations, confidence, corrections);
+  4. aesthetic restraint (subtle institutional design over espionage cliché);
+  5. physical–digital continuity (jacket, insignia, documents and interfaces are one world);
+  6. conceptual coherence;
+  7. **no false official affiliation** (no fabricated credentials, endorsements or provenance).
+- **His instruction to the assistant:** do not reflexively recommend startup branding, overt artistic explanations or generic corporate-transparency language. Outside reviews keep proposing exactly these; weigh them against this framework before passing them on.
+- **Nothing here loosens §2.** The ambiguity is the institution's. The research stays sourced, tiered and correctable, and no real agency's identity is borrowed. The Yes Men's method of impersonating real institutions is the one parallel that principle 7 rules out.
+
 **Real operators read this. Some may act on it.** That is the reason for the discipline,
 not a reason to soften it. Accuracy is the safety mechanism. Anything that would get a
 reader prosecuted, discredited, or killed does not go on the page — which is why the
@@ -184,6 +198,16 @@ than once.
 ---
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
+
+**CREATIVE DIRECTION RECEIVED — 21 Oct 2026.** The author pasted "b0b.dev — The Intelligence Agency as Conceptual Art" with no instruction. It is saved verbatim at `design/INSTITUTION.md` and summarised in §1.
+- **Fixed, live:** the masthead's *ars est celare artem* passage still carried a banned edit note: "and earlier versions of this line were wrong to hedge it as though it were one". It is cut. The sentence now ends "not an evidentiary claim."
+- **HELD for his word:** three more surviving edit notes. They carry argument in a contested section, so they were not rewritten in passing.
+  - II `ii-primary-and-liaison-…`: "The objection this report raised last time does not survive the correction … The earlier version argued…" and "the Pollard case has to be re-graded … The earlier version offered it…". The Pollard paragraph also carries the "Israel apologised and disbanded the unit … Peres" line, which is not in any primary read (the Israel drill-down's page error 3). Fix both together.
+  - XXV close: "the receipt gloss corrected above".
+- **Held items the framework bears on.** These are my reading; every decision is his:
+  - These would flatten the ambiguity: "a plain line above the masthead", "make `/` a gateway", "rename READ THIS FIRST to Briefing", "a Funding & Independence page", "external review".
+  - These are research integrity, and the framework keeps them: the `Dataset` JSON-LD, the per-edge evidence panel, separate confidence axes.
+- **A tension worth his eye, not acted on:** principle 4 (subtle institutional design over espionage cliché) and principle 5 (physical–digital continuity) sit against the site's neon-green CRT look (`#00ff41`, the "Matrix green" terminal trope). The stickers and the 21 Oct projection use it too. The jacket's language is navy, embroidery and a seal.
 
 **THE AUTHOR'S THIRD CRAFT ENCOUNTER — Rochester, 20 Oct 2026, ~6:22 PM EDT — ADDED TO SECTION I at his "YES", live. Record: `research/SIGHTING-2026-10-20-ROCHESTER.md`.**
 - **His account** (verbatim in the file): a pure pearly-white light, very bright at its peaks, six hands up in the west over the setting sun. It held for ~30 s, fixed in x and y, and faded out where it stood like a dimmer. He had tried to call it over. It is the same signature as East Aurora.
