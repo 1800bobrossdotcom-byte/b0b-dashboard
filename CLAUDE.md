@@ -199,6 +199,20 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**@NSACyber POST, 21 Oct 2026 — the PHP "php2shell" alert; we are not exposed.** The author linked `x.com/NSACyber/status/2112903220209098897` and then wrote *"re: PHP"*.
+- **The post:** its id decodes to 21 Oct 13:45:58 UTC. X and the oEmbed refused by robots (nulls).
+- **What it points to:** CISA's alert the same day (read at source): CVE-2026-109618/-109619, unauthenticated RCE in every PHP install serving web requests.
+  - Fixed in 8.5.12 / 8.4.27 / 8.3.36 / 8.2.35.
+  - 8.1 and older are to be taken offline.
+  - No exploitation observed at publication.
+  - nsa.gov's press pages refused (403).
+- **Our exposure, checked:**
+  - this repo and `cbay` hold no PHP;
+  - `vercel.json` sets no PHP runtime;
+  - b0b.dev, bastion.quest and faraday.cam all answer `server: Vercel`, with no `X-Powered-By: PHP` and no PHPSESSID.
+  - Headers alone cannot prove the last two; their repos are not in this session.
+- **Not on the page.** Note it in the next current-events sweep only if exploitation is reported.
+
 **ABOUT & METHOD FOLDED INTO THE BRIEFING; `/about` RETIRED — 21 Oct 2026, live.** Author: *"Briefing and about and method can be condensed or one can be removed"*.
 - **Kept and moved onto `/start`:**
   - `/about`'s unique content, condensed into a `Method` section (`<h2 id="method">`): who keeps it, the one identified crawler with refusals as nulls, quotes read at source, the AI disclosure, and how a correction is decided.
