@@ -146,7 +146,7 @@ ul.items li{padding-left:14px;border-left:2px solid var(--rule);overflow-wrap:an
 .pull{font:italic 400 20px/1.5 var(--serif);color:var(--ink);margin:20px 0;padding-left:16px;border-left:2px solid var(--phos)}
 .coda{margin:60px 0 0;padding-top:22px;border-top:1px solid var(--rule);font:400 19px/1.65 var(--serif);color:var(--ink-2)}
 .coda p{margin:0}
-.coda .la{margin-top:12px;color:var(--ink);font-style:italic}
+.coda .la{color:var(--ink);font-style:italic}
 @media (max-width:520px){.head{flex-direction:column;align-items:flex-start;gap:14px}.insignia{width:104px;height:104px}
   .levels{grid-template-columns:1fr;gap:2px}.levels dd{margin-bottom:10px}}
 .wrap{overflow-x:auto}
@@ -212,43 +212,43 @@ def build_start(n_markers, n_edges):
 <h1>Briefing</h1></div>
 </header>
 <p class="thesis">The intelligence agency is the artwork.<br>The intelligence work is real.</p>
-<p class="lede">An independent intelligence research operation. Its institutional identity is the work; its research is sourced, tiered and correctable, and stands outside the fiction.</p>
+<p class="lede">An independent intelligence research operation. Its identity is the work; its research is sourced, tiered and correctable, and stands outside the fiction.</p>
 <nav class="door" aria-label="Start here"><a class="go" href="/report">ENTER THE REPORT &rarr;</a><a href="/map">OPEN THE MAP</a><a href="/home">WATCH THE FILMS</a></nav>
 
 <h2 lang="la">Ars est celare artem</h2>
-<p>The art is to conceal the art. The institution works on three levels at once.</p>
+<p>The art is to conceal the art. b0b.dev works on three levels at once.</p>
 <dl class="levels">
-<dt>Artistic</dt><dd>The institution is the artwork, and it does not need to announce itself as one.</dd>
+<dt>Artistic</dt><dd>b0b.dev is the artwork, and it does not need to announce itself as one.</dd>
 <dt>Operational</dt><dd>The research, the tools, the dossiers, the map and the method are real, and in use.</dd>
 <dt>Recursive</dt><dd>It investigates secrecy, concealment, surveillance and power, and keeps an ambiguity of its own.</dd>
 </dl>
-<p>The audience becomes an investigator of the investigating institution. The maxim&rsquo;s provenance is set out at the head of <a href="/report">the report</a>.</p>
+<p>The audience becomes an investigator of the investigator. The maxim&rsquo;s provenance is set out at the head of <a href="/report">the report</a>.</p>
 
-<h2>The institution</h2>
-<p>It stands between independent intelligence research and conceptual art; between open-source intelligence, operational fiction and institutional critique; between espionage mythology and the archive. It has the appearance of an obscure intelligence organisation. It claims no government affiliation, and it fabricates no credential, endorsement or provenance.</p>
-<p class="pull">The institution may be ambiguous. The evidence must not be.</p>
+<h2>Identity</h2>
+<p>It stands between independent intelligence research and conceptual art; between open-source intelligence, operational fiction and the critique of power; between espionage mythology and the archive. It has the appearance of an obscure intelligence organisation. It claims no government affiliation, and it fabricates no credential, endorsement or provenance.</p>
+<p class="pull">The identity may be ambiguous. The evidence must not be.</p>
 
 <h2>The insignia</h2>
 <p>A round seal on a navy field jacket: the motto across the top, six five-pointed stars below, lightning radiating from the centre, and at the centre a figure in a trench coat and fedora, carrying a case. The seal carries the authority of military and intelligence insignia; the figure at its centre is close to a cartoon. Both are meant.</p>
-<p>The jacket is not merchandise. It is an institutional artifact, and its existence suggests an organisation with members, a history, a culture of its own and a purpose. The seal on this page is digitised from it: the figure and the bolts traced from the thread, the motto and the stars set again.</p>
+<p>The jacket is not merchandise. It is an artifact, and its existence suggests an organisation with members, a history, a culture of its own and a purpose. The seal on this page is digitised from it: the figure and the bolts traced from the thread, the motto and the stars set again.</p>
 
 <h2>Precedents</h2>
-<p>Marcel Broodthaers opened a museum in his Brussels house in 1968, the Mus&eacute;e d&rsquo;Art Moderne, D&eacute;partement des Aigles, with eagles in glass cases and signs saying this was not a work of art. Walid Raad&rsquo;s Atlas Group, a fictional foundation, keeps an archive of Lebanon&rsquo;s civil wars whose documents carry two dates and are attributed to sources Raad invented. The Yes Men pose as spokespeople for real institutions - the WTO, Dow Chemical - and speak in their name.</p>
-<p>b0b.dev differs from all three in one respect: the intelligence work is real. The investigations, the map and the research infrastructure function outside the fiction. And unlike the Yes Men, it wears no real institution&rsquo;s name.</p>
+<p>Marcel Broodthaers opened a museum in his Brussels house in 1968, the Mus&eacute;e d&rsquo;Art Moderne, D&eacute;partement des Aigles, with eagles in glass cases and signs saying this was not a work of art. Walid Raad&rsquo;s Atlas Group, a fictional foundation, keeps an archive of Lebanon&rsquo;s civil wars whose documents carry two dates and are attributed to sources Raad invented. The Yes Men pose as spokespeople for real organisations - the WTO, Dow Chemical - and speak in their name.</p>
+<p>b0b.dev differs from all three in one respect: the intelligence work is real. The investigations, the map and the research infrastructure function outside the fiction. And unlike the Yes Men, it wears no real organisation&rsquo;s name.</p>
 
 <h2>The paradox</h2>
-<p>An institution usually establishes its authority through its identity and asks the public to trust its findings. This one turns that round: its identity is deliberately ambiguous, and its findings are open to anyone who checks them.</p>
-<p class="pull">Don&rsquo;t trust the institution. Examine the evidence.</p>
+<p>An official body usually establishes its authority through its identity and asks the public to trust its findings. b0b.dev turns that round: its identity is deliberately ambiguous, and its findings are open to anyone who checks them.</p>
+<p class="pull">Don&rsquo;t trust b0b.dev. Examine the evidence.</p>
 
 <h2>Holdings</h2>
-<p>The website is the operational interface. The dossiers are research outputs and institutional artifacts at once. The jacket is the organisation made physical; the insignia is its identity; the motto, its framework.</p>
+<p>The website is the operational interface. The dossiers are research outputs and artifacts at once. The jacket is the organisation made physical; the insignia is its identity; the motto, its framework.</p>
 <div class="dl two">
   <a href="/report"><b>The report</b><span>The dossier: twenty-five sections and a researcher&rsquo;s guide, every claim tiered and sourced.</span></a>
   <a href="/map"><b>The map</b><span>%s sites. Every line between them carries the tier of what the record shows.</span></a>
   <a href="/home"><b>The films</b><span>Endgame, The Epstein&ndash;Maxwell Record, Continuity and the intro film, with the author&rsquo;s transmissions.</span></a>
   <a href="/announcement"><b>The announcement</b><span>Spoken word over a beat, made to be played outdoors.</span></a>
   <a href="/stickers"><b>The stickers</b><span>Twelve lines from the report, each with its own QR code.</span></a>
-  <a href="/retractions"><b>The corrections</b><span>What the institution got wrong, how it was found, and what replaced it.</span></a>
+  <a href="/retractions"><b>The corrections</b><span>What b0b.dev got wrong, how it was found, and what replaced it.</span></a>
 </div>
 
 <h2>What it is not</h2>
@@ -275,9 +275,6 @@ def build_start(n_markers, n_edges):
 </div>
 
 <div class="coda">
-<p>The artwork is the institution.</p>
-<p>The institution investigates concealment.</p>
-<p>The artwork conceals itself within the institution.</p>
 <p class="la" lang="la">Ars est celare artem.</p>
 </div>
 ''' % (format(n_markers, ','), format(n_markers, ','), n_edges)

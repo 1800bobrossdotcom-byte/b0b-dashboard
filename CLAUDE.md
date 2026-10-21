@@ -67,6 +67,12 @@ what is a crime regardless of motive.
   strangers' — a rule that only bites strangers is not a rule.
 - **"Crown" is never used for the top of a man-made structure.** Not pyramid, capstone,
   obelisk or institution. Surviving instances are names only.
+- **b0b.dev is never called "the Institution" (or "the Institute").** Author, 21 Oct 2026:
+  *"Do Not call it the Institution … Fucking mossad is literally called the Institute."*
+  HaMossad means "the Institute", and the report names Mossad in its sponsor hypothesis, so
+  the word reads as an association. The word came from his framework text
+  (`design/INSTITUTION.md`, kept verbatim as his document), and I had made it the Briefing's
+  name for the site. On the page and in the films, call it **b0b.dev** or "it".
 - **Stop rules when reading documents:** (a) substantially imagery → stop, delete, do not
   view; (b) FD-302 / victim interview / protective-order stamp → stop at identification, do
   not read on, do not retain; (c) a hex32 id is a research lead, never a citation.
@@ -198,6 +204,14 @@ than once.
 ---
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
+
+**"THE INSTITUTION" TAKEN OFF THE BRIEFING — 21 Oct 2026, live.** The author objected the same evening (see §2's new rule).
+- Every use naming b0b.dev "the institution" is replaced with "b0b.dev", "it" or "identity".
+  - The pull lines now read "The identity may be ambiguous. The evidence must not be." and "Don't trust b0b.dev. Examine the evidence."
+  - The h2 is now "Identity".
+- The coda's three thesis lines ("The artwork is the institution…") are cut; the coda is *Ars est celare artem.* alone.
+- seo-meta was changed to match, and the topic "institutional art" is now "conceptual art".
+- The entry below describes the page before this fix.
 
 **THE BRIEFING NOW PRESENTS THE INSTITUTION, NOT THE REPORT — 21 Oct 2026, live.** Author: *"briefing is repeating what is already stated in report. this is what briefing should touch on:"* followed by the full `design/INSTITUTION.md` text.
 - **Removed from `/start`:**

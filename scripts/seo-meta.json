@@ -306,12 +306,12 @@
     {
       "file": "start.html",
       "title": "b0b.dev - Briefing: ars est celare artem",
-      "metaDescription": "The intelligence agency is the artwork. The intelligence work is real. The institution behind the OSINT report: its maxim, its insignia, its method and its data.",
-      "ogDescription": "The institution may be ambiguous. The evidence must not be. Don't trust the institution. Examine the evidence.",
+      "metaDescription": "The intelligence agency is the artwork. The intelligence work is real. b0b.dev, the OSINT report's keeper: its maxim, its insignia, its method and its data.",
+      "ogDescription": "The identity may be ambiguous. The evidence must not be. Don't trust b0b.dev. Examine the evidence.",
       "jsonldType": "Article",
-      "headline": "Briefing: the institution behind the OSINT report - its maxim, its insignia and its method",
+      "headline": "Briefing: b0b.dev behind the OSINT report - its maxim, its insignia and its method",
       "topics": [
-        "institutional art",
+        "conceptual art",
         "ars est celare artem",
         "OSINT method",
         "evidence tiers",
