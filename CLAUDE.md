@@ -217,6 +217,32 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**`/stats`, THE COUNTS DASHBOARD — 22 Oct 2026, live (`6d85eaf`, `ff5424e`). Unlisted: `noindex`, not in the sitemap or any menu, and not itself counted.** Author: *"Can you make an analytics dashboard for the site"*. Asked where it should live and what it should count, he picked "Unlisted page on b0b.dev" and left the data question open. I took the recommended option: daily per-page counts, aggregate only, with no referring sites.
+- **What the site counted before:** two all-time totals in KV. **`views`** is every page served to any client, crawlers included. **`visits`** is a POST to `/api/gate`. No page has called that since the gate went off on 19 Sept, but it still rises (1,686 → 1,692 during the deploy reads), because outside clients still post to it, `check-live.js` among them. **So "visits" no longer measures readers, and the signal bar still shows it publicly as "· N visits".** Flagged for him, not changed: switching the bar to arrivals is his call.
+- **Vercel Web Analytics also runs** (`/_vercel/insights/script.js` on the report, `/home` and the GL map). Its data is in his Vercel account, not reachable from here. The counter's own comment says "no third-party analytics script"; Vercel's script is served first-party but reports to Vercel. Noted, not acted on.
+- **Server (`server.js` `countView`, `viewClass`, `/api/stats`):**
+  - one hash per UTC day, `b0b:d:YYYY-MM-DD` (TTL 400 days), with fields:
+    - `b` browser navigations (`Sec-Fetch-Mode: navigate`, no `Sec-Purpose`/`Purpose` prefetch);
+    - `c` known crawlers (`CRAWLER_RE`);
+    - `o` everything else;
+    - `a` browser arrivals (`Sec-Fetch-Site` is not same-origin or same-site; **Referer is useless here because the site sends `no-referrer`**);
+    - `p:<path>` browser loads per page. The classic map is keyed `/map?engine=classic`.
+  - Sent as one Upstash `/pipeline` POST per page served. `b0b:daily_since` is SETNX'd once per instance.
+  - The headers decide the class and are dropped. No IP, user agent, cookie or per-reader record.
+  - The file and memory backends keep the same shape in `.data/visitors.json` and process memory.
+  - `/api/stats?days=1..90`: same access rule as `/api/visitors`, cached 60 s per instance, `Cache-Control: no-store`.
+- **Page (`site/stats.html`, `site/stats.js?v=2`, classic script, no library):**
+  - Readers: 7/30/90-day toggle; four tiles (browser loads, arrivals, crawlers, other); daily stacked bars with hover and a table view, days before `daily_since` shaded "not recorded"; pages read in browsers.
+  - The record: `build.json` sizes, map lines by tier, the last three corrections.
+  - Sources: the public ledger's reads, refusals (403/401/429/robots/decoy), not found and per-week fetches; hosts that refused most.
+  - Chart colours validated with the dataviz validator against both grounds: categorical green, blue and amber; the tier ramp is one green hue.
+- **Tested:**
+  - Locally against a mock Upstash (scratchpad `stats/mockkv.js`), every class landed correctly, `/stats` and 404s were not counted, and the file backend worked.
+  - Playwright at 1280 dark and light and 390 phone: no errors, no horizontal scroll.
+  - security 35/35, seo 58/58: both now check that `/api/stats` stays cookie-only under the gate and closed to crawlers.
+  - Live, four reads: KV backend, `daily_since` 2026-10-22, counts moving, not in the sitemap.
+- **History starts 22 Oct 2026 (UTC); nothing earlier can be recovered.**
+
 **TEST CASES ARE NO LONGER THE END OF THE REPORT — 22 Oct 2026, live. XXIII = Test Cases, XXIV = Spiritual Reclamation.** Author: *"Also i asked for the test cases to not be the end of the report"*.
 - **My misreading, now corrected:** his 05:29 line *"These extra case studies should not be the ending"* meant **Section XXIV, Test Cases**, which sat directly before the Signal. I read it as the sovereignty passage inside XXV's close (cut that morning; that cut stands).
 - **The order is now** XXII Connective Tissue → **XXIII Test Cases** → **XXIV Spiritual Reclamation** → XXV Signal → the close → the researcher's guide. The report closes on the counter-architecture, the Signal and "three completed things". Only these two sections were renumbered. Moving Test Cases higher (e.g. after XVI) would renumber seven sections; that is his call if he wants it.
