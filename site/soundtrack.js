@@ -1,8 +1,11 @@
 /* soundtrack.js — site soundtrack, mounted on the report.
  *
- * Track: Restless Leg Syndrome — "Represent The Fucking Planet" (Totem, 2021),
- * played from the label's YouTube upload through youtube-nocookie, so the
- * platform handles licensing and nothing is rehosted here.
+ * Tracks, in order: TOOL — "7empest" (Fear Inoculum, 2019; the official audio
+ * upload), then Restless Leg Syndrome — "Represent The Fucking Planet" (Totem,
+ * 2021; the label's upload), on loop. Both are played from YouTube
+ * through youtube-nocookie, so the platform handles licensing and nothing is
+ * rehosted here. Both are discussed on the page (Section XXV, the sixth and
+ * ninth signals).
  *
  * DESIGN RULE, learned the hard way: THE CONTROL NEVER DEPENDS ON THE NETWORK.
  * The first version built the bar inside the YouTube IFrame API's ready
@@ -35,10 +38,18 @@
   if (window.__b0bSoundtrack) return;
   window.__b0bSoundtrack = true;
 
-  var VIDEO_ID = '7eNqNfURcxw';
-  var TITLE = 'Represent The Fucking Planet';
-  var ARTIST = 'Restless Leg Syndrome';
-  var CREDIT_URL = 'https://restlesslegsyndrome.bandcamp.com/track/represent-the-fucking-planet-2';
+  // The first track is the embed's own video and plays first; the rest are its `playlist`, which
+  // YouTube plays after it. Whether loop=1 then returns to the lead or repeats only the playlist is
+  // the player's call; either way the lead is TOOL. (Putting the lead in `playlist` too risks
+  // YouTube playing it twice in a row - fifteen minutes, twice.)
+  var TRACKS = [
+    { id: '9D2R69gVyZ0', artist: 'TOOL', title: '7empest',
+      credit: '#xxiv-sixth-signal-tool-7empest' },
+    { id: '7eNqNfURcxw', artist: 'Restless Leg Syndrome', title: 'Represent The Fucking Planet',
+      credit: 'https://restlesslegsyndrome.bandcamp.com/track/represent-the-fucking-planet-2' }
+  ];
+  var VIDEO_ID = TRACKS[0].id;
+  var PLAYLIST = TRACKS.slice(1).map(function (t) { return t.id; }).join(',');
   var KEY = 'b0b:soundtrack:off';
   var HOST = 'https://www.youtube-nocookie.com';
 
@@ -82,11 +93,18 @@
   var meta = document.createElement('span');
   meta.className = 'b0b-snd-meta';
   var link = document.createElement('a');
-  link.href = CREDIT_URL;
-  link.target = '_blank';
-  link.rel = 'noopener noreferrer';
-  link.textContent = ARTIST + ' — ' + TITLE;
   meta.appendChild(link);
+  // The label names the track that is playing when the API can say which one it is;
+  // with the plain iframe it names the track the playlist leads with.
+  function showTrack(id) {
+    var t = TRACKS[0];
+    for (var i = 0; i < TRACKS.length; i++) if (TRACKS[i].id === id) t = TRACKS[i];
+    link.href = t.credit;
+    if (t.credit.charAt(0) === '#') { link.removeAttribute('target'); link.removeAttribute('rel'); }
+    else { link.target = '_blank'; link.rel = 'noopener noreferrer'; }
+    link.textContent = t.artist + ' — ' + t.title;
+  }
+  showTrack(VIDEO_ID);
 
   var dismiss = document.createElement('button');
   dismiss.type = 'button';
@@ -128,13 +146,13 @@
       this.stop();
       var f = document.createElement('iframe');
       f.id = 'b0b-snd-frame';
-      f.title = ARTIST + ' — ' + TITLE;
+      f.title = 'Site soundtrack: ' + TRACKS.map(function (t) { return t.artist + ' — ' + t.title; }).join(', then ');
       // allow="autoplay" is required for a cross-origin frame to receive the
       // autoplay permission the Permissions-Policy header delegates.
       f.setAttribute('allow', 'autoplay; encrypted-media');
       f.setAttribute('frameborder', '0');
       f.width = '320'; f.height = '180';
-      f.src = HOST + '/embed/' + VIDEO_ID + '?autoplay=1&loop=1&playlist=' + VIDEO_ID +
+      f.src = HOST + '/embed/' + VIDEO_ID + '?autoplay=1&loop=1&playlist=' + PLAYLIST +
               '&controls=0&disablekb=1&playsinline=1&rel=0&modestbranding=1';
       stage().appendChild(f);
     },
@@ -264,7 +282,7 @@
         videoId: VIDEO_ID,
         host: HOST,
         width: 320, height: 180,
-        playerVars: { autoplay: wasPlaying ? 1 : 0, loop: 1, playlist: VIDEO_ID,
+        playerVars: { autoplay: wasPlaying ? 1 : 0, loop: 1, playlist: PLAYLIST,
                       controls: 0, disablekb: 1, playsinline: 1, rel: 0 },
         events: {
           onReady: function () { driver = apiDriver; if (wasPlaying) apiDriver.play(); },
@@ -272,6 +290,7 @@
           // without a user gesture, which is what keeps the label honest.
           onStateChange: function (e) {
             playing = (e.data === 1);
+            if (playing) { try { showTrack(player.getVideoData().video_id); } catch (x) {} }
             // never talk over the narrator or a film, whatever started the player
             if (playing && (held || narrating)) { try { player.pauseVideo(); } catch (x) {} playing = false; if (!held) duckedByNarrator = true; }
             setLabel();

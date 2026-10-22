@@ -205,6 +205,18 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**THE SOUNDTRACK LEADS WITH TOOL — 22 Oct 2026, live.** Author: *"Lead sound track with tool song"*. The TOOL song on the page is "7empest", XXV's sixth signal, played from its official audio upload (`9D2R69gVyZ0`).
+- **`site/soundtrack.js?v=5`:** a `TRACKS` list. TOOL "7empest" is the embed's own video and plays first; Restless Leg Syndrome follows as its `playlist`; `loop=1`. Both drivers (plain iframe and IFrame API) do this.
+  - **The lead is deliberately NOT repeated in `playlist`:** YouTube may play it twice in a row (31 min). Whether the loop then returns to TOOL or repeats RLS alone is YouTube's behaviour and unverified here (YouTube refuses this environment). The lead is TOOL either way.
+  - **The label names the track actually playing** when the API is up (`getVideoData().video_id` on state 1). With the plain iframe it names TOOL.
+  - TOOL's credit links to the sixth-signal entry on the page; RLS keeps its Bandcamp link.
+- **Report:**
+  - The sixth signal gained "It is also the track that plays first when this page opens."
+  - The ninth signal's "the track that plays when this page opens" is now "on this page's soundtrack, after TOOL's '7empest'".
+  - The script comment was updated to match.
+- **Tested** on an isolated page with YouTube stubbed: the iframe src is `embed/9D2R69gVyZ0?…&loop=1&playlist=7eNqNfURcxw`; the API config has the same video and playlist; the label switches to RLS when RLS plays and back to TOOL.
+- Unchanged: the carousel still holds the music while a film plays, and the narrator still ducks it.
+
 **ENDGAME IS TETELESTAI, AND NOTHING ELSE — 22 Oct 2026, live. Supersedes the nine-part film described in the 20 Oct entry.** Author: *"Endgame is just Tetelestai.. What ye do / Tetelestai is endgame video. Very simple"*.
 - **The film is 0:24** (`scripts/film-endgame.json`; the nine-part spec is kept only in the session scratchpad):
   - Part I, "It is finished": Papyrus 66 (c. 200), then John 19:30 in the KJV, typed on screen and read.

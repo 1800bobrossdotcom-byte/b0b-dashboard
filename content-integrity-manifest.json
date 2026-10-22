@@ -1,13 +1,13 @@
 {
-  "generated": "2026-10-22T05:43:44.066Z",
+  "generated": "2026-10-22T05:47:48.940Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "1fbf1dbcc3792bea5406cc513a64b26f19da2c5d02bdd946a6144ab0f513598d",
+  "fullFileHash": "c2a1608425252b86a977f6feb59b98b5b1b8f4b4131068c0f0a40862958157a6",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "ffa3268daaa3ea2ec21af102bce7b5d75df9721099c0fff4e1733274158eecfc",
+      "hash": "dd50e991776e45e0d96503fc58b4b2f6a61f49107d87f5c6c8e9d63e3ae09aa0",
       "length": 43004
     },
     {
@@ -1492,8 +1492,8 @@
     },
     {
       "id": "xxiv-sixth-signal-tool-7empest",
-      "hash": "2277c4df25e4c4b908a95592546d0d5cb5584dad65fc85a035287915252e7840",
-      "length": 1007
+      "hash": "7303ff9cb00f9f2b5492b4bc59b5a6cd5fb66298d7c57605a81fe278343e965e",
+      "length": 1067
     },
     {
       "id": "xxiv-seventh-signal-the-smiths-bigmouth-strikes",
@@ -1507,8 +1507,8 @@
     },
     {
       "id": "xxiv-ninth-signal-restless-leg-syndrome-represent-the-fucking-planet",
-      "hash": "5b3ba6fd24d18e4f5d09eaf6e1611c0974186ebc6893d03c24a8368422a07637",
-      "length": 2388
+      "hash": "ff9370e6c72c6ce5b807885ac46b594eaad03ebf88663b461891cec884258b08",
+      "length": 2420
     },
     {
       "id": "xxiv-trust",
@@ -7891,9 +7891,9 @@
     },
     {
       "index": 1057,
-      "hash": "802bd16d850daf774431f82bd7bb47a2d89421a6e45473114a1386f08f9eb658",
+      "hash": "2da4a2dbf8e18c837399b185fcdf1a4d8fc43711f6c3081f415a753eeb170a31",
       "preview": "What is documented. &ldquo;7empest&rdquo; closes Fear Inoculum (2019) and runs 1...",
-      "length": 351
+      "length": 411
     },
     {
       "index": 1058,
@@ -7927,9 +7927,9 @@
     },
     {
       "index": 1063,
-      "hash": "46ed0fe92d6ca8289dd915eb061edfd6e559e8cf65f06dd295fa5b07d4b95153",
+      "hash": "ac8a952dd179b02bb2e631ccc05900028a4de753f4ae41929c5e3708d363ced8",
       "preview": "What is documented. Restless Leg Syndrome are a Vienna group - the producer d.b....",
-      "length": 492
+      "length": 524
     },
     {
       "index": 1064,
