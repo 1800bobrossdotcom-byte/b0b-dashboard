@@ -205,6 +205,30 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**MAP UPGRADE — ASKED 22 OCT 2026, PLAN GIVEN, NOTHING BUILT YET.** The author sent a screenshot of "OSINT GLOBE · Middle East dashboard" (by MaximVL, geobrowser.io) and asked *"How do we upgrade map experience"*.
+- **What the screenshot does:**
+  - a WebGL globe with 2D/3D/relief views and dark or satellite basemaps;
+  - a grouped, collapsible legend (Signals / Network / Power grid / Oil & gas) with counts;
+  - dense infrastructure layers (cables, landing points, IXPs, data centres, grid, pipelines, wells, refineries, LNG, flaring);
+  - live FIRMS fires, aircraft and GNSS interference, with a 24h/72h playback.
+- **Our map already has nine live layers:** USGS quakes, EONET, FIRMS (VIIRS 24 h, WFS), adsb.lol aircraft and military air, Finnish AIS vessels, ISS, GDACS, ALPR. **The gap is rendering, organisation and the first view, not data.**
+- **Measured on live `/map`, 22 Oct (Playwright via the proxy):**
+  - **The tiered connection lines are OFF on first load** (`#toggleConnections` unchecked). The title promises "every connection tiered", but a new reader sees no lines.
+  - **Desktop: the stats box covers the zoom-in button and the left half of the search field.**
+  - **Phone (390 px):** the header and stats box are truncated, RESET/KML/TEXT crowd together, and two bottom bars take ~80 px.
+  - **Every marker is its own HTML `divIcon` with a glow shadow:** 1,162 elements and ~3,000 DOM nodes. Pans at ~41 fps in headless desktop Chromium with no GPU. Screenshot-density layers are not possible on this renderer.
+- **Plan put to him:**
+  1. **Defects:** first view shows T3+ lines; the stats box is moved off the controls; a phone layout.
+  2. **MapLibre GL JS 5** (BSD, self-hosted, globe + terrain + GPU), built behind `?engine=gl` until compared. This is the renderer swap recorded on 12 Sept as "a separate decision". The CSP already allows `worker-src blob:`.
+  3. **A grouped legend:** Evidence / Connections / Context / Live. Context layers come from open datasets, with each licence read at source first.
+     - Context is drawn subordinate and **never as an edge** (anti-map).
+     - **FIRMS hotspots are labelled as satellite-detected heat, not strikes.** Gas flares over the Gulf fields read as "fires".
+     - GNSS interference shows where, not who.
+- **His calls:**
+  - a 24h/72h playback, which replays sensor feeds and is not the period bar he removed on 19 Sept, but is still a time control;
+  - the glow look against principle 4 (our markers glow too);
+  - grouping vs the held `/lab` split.
+
 **CURRENT EVENTS SWEEP 20–22 OCT 2026 — live 22 Oct. XV `xv-status-update-22-october-2026` (14 paragraphs, ~3,100 words), after the 20 Oct update. HELD: `research/NEWS-2026-10-22-HELD.md`.** Author: *"lets do a current events sweep"*.
 - **Method:** the same as 20 Oct.
   - Three agents: Middle East, rest of world, US. Scratchpad `news5-{BRIEF,mideast,world,us}.md`; ledger notes are prefixed `news5`.
