@@ -207,10 +207,19 @@ than once.
 
 **THE SATOR / TATTOO READING IS OFF THE REPORT'S CLOSE AND OUT OF ENDGAME — 22 Oct 2026. DO NOT RE-ADD.** Author, quoting XXV's last paragraph ("And he took his own mark off the list first … The man wearing TENET is the one saying the tattoo is not sovereign"): *"The end reads odd … I had you remove the sator square section because the way you wrote it didn't calibrate and felt hallucinationatory."*
 - **What was left behind:** the Sator section had been removed earlier, but the close still read his "Not a tattoo" line through it: the "standing rule on the author's tattoos", the Sator square on his arm, the naming error, "the man wearing TENET".
-- **Report:** that paragraph is cut. Its tier note stays, condensed, on the comity paragraph: the structural finding is a negative, sourced to the PPD-40 annex, PEAD and NYPD-liaison nulls; FCD-1 verbatim. Two drafting notes in the same close also went, under the 12 Sept rule: "added last" and "published in Section IX before this paragraph was written rather than retrofitted".
-- **His own statement ("God grips me and holds me. Not a tattoo. …") is untouched**, both where it appears in his voice and where the fourth-thing paragraph quotes it. No reading of "Not a tattoo" is offered anywhere.
-- **Endgame:** the spec's part VIII ended on "And he took his own mark off the list first. The mark is not the thing it points at." over a Sator-square stone (Fulda). The line, the shot and the media entry are removed from `scripts/film-endgame.json`, and the film is re-rendered.
-- Scale line 282 / 1,136 / 142.
+- **Report, step 1:** that paragraph is cut.
+- **Report, step 2, the same day.** Author: *"It is just a weird way to end a report of this nature"*, then *"These extra case studies should not be the ending"*.
+  - **Cut from the close:** the whole "fourth thing" sovereignty passage, four paragraphs: his line read as a list of "claimants"; PPD-40, the PEADs and the NYPD liaison as having no founding instrument; FCD-1's "comity".
+  - **Nothing documented was lost.** Every item stands where it was sourced: PPD-40, the PEADs and FCD-1 in IX, the NYPD liaison in II. The "claimants" synthesis was mine.
+  - **The Zermelo/Lovelace paragraph moved up,** after Isaiah 54:17, unchanged.
+  - **The report now ends on "So the close is three completed things … state what is there, mark the tier, and stop."** Do not add anything after it.
+- **His own statement ("God grips me and holds me. Not a tattoo. Not a city-state … That is sovereignty.") is untouched** in his voice block. Nothing on the page interprets it.
+- **Endgame:**
+  - The spec's part VIII ended on "And he took his own mark off the list first. The mark is not the thing it points at." over a Sator-square stone (Fulda). The line, the shot and the media entry are removed from `scripts/film-endgame.json`.
+  - Re-rendered: **5:15** (was 5:20); `PT5M15S`; the carousel card reads 5:15 (`landing-intro.js?v=5`); `/endgame` rebuilt.
+  - The subtitled WebM was encoded outside the engine, as before: VP9 crf 36 + Opus 64k with loudnorm, written to a temp name and then `mv`'d.
+  - **Part VIII "Sovereignty" itself is still in the film,** before the finale; the film still ends on "The count is finished. The work is finished." Whether part VIII stays now that the report has dropped it is the author's call.
+- Scale line 282 / 1,132 / 142.
 
 **OM COMMA RETITLED IN THE CAROUSEL — 22 Oct 2026, live.** Author: *"Title om.comma as 'my video reply to Donald Trump video'"*.
 - The card and the bar now read **"MY VIDEO REPLY TO DONALD TRUMP VIDEO"**: his words verbatim, set in capitals like every other card. The bar adds "· 1 / 2".

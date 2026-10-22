@@ -1,13 +1,13 @@
 {
-  "generated": "2026-10-22T04:58:21.183Z",
+  "generated": "2026-10-22T05:30:57.185Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "0a41c9a855f69ae5a2a7864980c9109cb8edb6a025687dbb4e9a7a9ebcff3234",
+  "fullFileHash": "0fd0279b3ecc72b8d284a008bbab87baf02097ee9512310d4bb66d8860f97f8f",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "04a4664d272e3ce3b5d8be01e4fd36108c9625ebbbe0d39d5c3e405aeda5487e",
+      "hash": "2fd73b843c37fc8d4fce01c89a1fe67d7492bad47caaf3ab7a4702b7610ca503",
       "length": 43004
     },
     {
@@ -1542,8 +1542,8 @@
     },
     {
       "id": "xxiv-endgame",
-      "hash": "8988388cff631335f70203f2be9b65f4d183ac9b824778f8359db8508ca92084",
-      "length": 19068
+      "hash": "20b50669af941a5e1f5da83da825efa8b16d4609acceed647d50722257d58476",
+      "length": 15438
     }
   ],
   "paragraphHashes": [
@@ -8083,41 +8083,17 @@
     },
     {
       "index": 1089,
-      "hash": "05418fc0198fc706a37fc76db7510297acd0df94ac46a1c972cfd1f9ee1dcd16",
-      "preview": "So the close is three completed things, and the report claims none of them as it...",
-      "length": 864
-    },
-    {
-      "index": 1090,
       "hash": "a9f4c1751e4f8d2bd36bd3166ff3b7deba016210ec0e9e7e129a173febf65838",
       "preview": "And the finished thing has a shape in mathematics, which the author&rsquo;s own ...",
       "length": 2003
     },
     {
-      "index": 1091,
-      "hash": "c2b04361b052e074f4aa3b03de8a988af3c46b9584848d769c11108fd8a809ef",
-      "preview": "And there is a fourth thing, which is the only line in this document that sorts ...",
-      "length": 720
-    },
-    {
-      "index": 1092,
-      "hash": "ec835702f3be228050840033b79c92ab86b13b81598e83643a6f827c3b4a3a89",
-      "preview": "What he is naming are claimants. The report catalogues bodies that assert sovere...",
-      "length": 781
-    },
-    {
-      "index": 1093,
-      "hash": "c6b35dc69e851a4761932ea156912d8cfbbe0c05e21ce14f5473661dc25a300e",
-      "preview": "The finding, stated as a negative and sourced entirely to work already in this d...",
-      "length": 1130
-    },
-    {
-      "index": 1094,
-      "hash": "b3c7dba25154fa08a494c3595396c5dad592f5b5533fcf0b8f620137a4d0258f",
-      "preview": "The most striking version of it is the continuity apparatus conceding the point ...",
-      "length": 995
+      "index": 1090,
+      "hash": "05418fc0198fc706a37fc76db7510297acd0df94ac46a1c972cfd1f9ee1dcd16",
+      "preview": "So the close is three completed things, and the report claims none of them as it...",
+      "length": 864
     }
   ],
   "totalSections": 308,
-  "totalParagraphs": 1095
+  "totalParagraphs": 1091
 }

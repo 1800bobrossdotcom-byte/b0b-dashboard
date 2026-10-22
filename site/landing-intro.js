@@ -34,7 +34,7 @@
       parts: [src('/omcomma-1'), src('/omcomma-2')] },
     { id: 'briefing', title: 'BRIEFING', len: '3:43', thumb: '/img/films/briefing.jpg', page: '/start#film',
       parts: [src('/b0b-briefing-film')] },
-    { id: 'endgame', title: 'ENDGAME', len: '5:19', thumb: '/img/films/endgame.jpg', page: '/endgame',
+    { id: 'endgame', title: 'ENDGAME', len: '5:15', thumb: '/img/films/endgame.jpg', page: '/endgame',
       parts: [src('/b0b-endgame-film')] },
     { id: 'epstein-maxwell', title: 'THE EPSTEIN–MAXWELL RECORD', len: '4:13', thumb: '/img/films/epstein-maxwell.jpg',
       page: '/epstein-maxwell', parts: [[['/b0b-epstein-maxwell-film.mp4', 'video/mp4'], ['/epstein-maxwell-reel.webm', 'video/webm']]] },
