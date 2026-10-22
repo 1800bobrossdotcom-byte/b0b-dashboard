@@ -205,6 +205,35 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**CURRENT EVENTS SWEEP 20–22 OCT 2026 — live 22 Oct. XV `xv-status-update-22-october-2026` (14 paragraphs, ~3,100 words), after the 20 Oct update. HELD: `research/NEWS-2026-10-22-HELD.md`.** Author: *"lets do a current events sweep"*.
+- **Method:** the same as 20 Oct.
+  - Three agents: Middle East, rest of world, US. Scratchpad `news5-{BRIEF,mideast,world,us}.md`; ledger notes are prefixed `news5`.
+  - Every agent quote was re-checked with `vq.py` (203 + 104 + 89, 0 not OK). The published subsection was checked with `vqdraft.py` (108 quotes, 0 failing).
+  - *Fix to scratchpad `qlines.py`:* its regex missed indented `Q |` lines (81 of 89 lost). It now reads `^\s*Q \|`.
+- **Carried:**
+  - **Iran–US:** the pre-midterm no-attack pledge restated; "Not a single gram" (the SNSC secretary); "nothing new" (the parliament speaker); Trump's "we're not negotiating".
+  - **Hormuz:** CENTCOM calls the mine claims "false"; Iran claims seven tankers struck (unverified); a missile on a vessel off Faw (UKMTO, no attacker).
+  - **US posture:** ordered departure from Saudi Arabia only, State calling wider reports "inaccurate", against Reuters' four officials and AFP's diplomatic source. The Roosevelt group due by the end of November per two officials to Fox: a third carrier for a time, or a rotation replacement (K24). The lead-in says "another carrier group", not "third".
+  - **The Mecca pact:** the full text (The National) says it comes into force on the last ratification, **so the 5 Oct invocation came before the pact bound its parties.** Türkiye's ratification does not deploy troops. The Qatar–Türkiye–Pakistan–Indonesia memorandum of 21 Oct is industrial, not a defence pledge.
+  - **The UK MoD's own words on the refuelling** this section recorded on 22 Sept: "to degrade Houthi military targets in Yemen", extended 90 days (BBC). Typhoons are "defensive role".
+  - **Saudi Arabia and Yemen:** Dammam and Eastern Province deaths by Saudi count; the Houthi denial and then the Houthi claims; Yemen tolls by whose ministry (1,574 is the government's per BBC, the WHO's per AJ).
+  - **Israel**, five days before its election: Eisenkot's answer to the endorsement; Vance's "not getting involved".
+  - **Gaza:** 1,538 (MoH). **West Bank:** Nahalin olive-picker detentions.
+  - **Fairford:** two re-arrests under NSA s.3; police "highly likely … Iranian state involvement"; "No one has yet been charged"; Iran's denial.
+  - **The ICC's Sakharov Prize;** OFAC and the ICJ docket both re-read, with no new entry.
+  - **Sudan:** Abyei 73 → 153 (one outlet 220) and the army's anonymous account to AP; the Al-Dabbab counts by each side; Geneva (no joint statement found).
+  - **Ukraine:** talks "after 10 November"; the Kyiv toll as it moved through the day; **Starlink: who ordered the slowdown is contested** (Rubio "private commercial contract", Trump "I was not involved", the owner "decided by the US military and ultimately POTUS", Reuters' officials "the White House"); the Lukoil International licence; the EU draft package.
+  - **Briefly:** the German arrest (prosecutors' allegation; Moscow denies); NATO in the Black Sea (no attribution); Greenland; Korean loudspeakers; the Taiwan indictment (prosecutors' allegation, no state body); the Niger hostages freed.
+  - **Washington:** the AUTOWARCOM letter ("Congress must pass legislation"); the State cable renaming AI as "SI"; discharge petition still 216; no *Phang* ruling; no Senate roll call 1–22 Oct.
+- **Our error, fixed in place (no narration):** the 20 Oct Greenland line said the agreement went to a second debate "without first referring it to committee" (*Arctic Today*). **Inatsisartut's own agenda list shows it referred to the foreign and security policy committee**, with the second debate on 3 Nov. Primary over press.
+- **Flagged, not edited:** the 20 Oct Blue Nile strike (41 displaced killed) is dated 10 Oct by SCR. Al Jazeera's "Friday" (written Mon 19 Oct) is 16 Oct, and AJ names the RSF as Emergency Lawyers' claim. Either two strikes or one misdated; unresolved.
+- **HELD for his call** (detail in the file):
+  - **New Mexico v. the Epstein estate, the 1953 Trust and both co-executors** (D.N.M. 1:26-cv-03543, 21 Oct). The State's wording about living, uncharged people is defamation-adjacent, and the complaint was not opened (stop rule b).
+  - **PHP2Shell, now that Amazon reports broad exploitation attempts** against CISA's none observed. The Anthropic disclosure applies: the PHP Foundation scanned with Anthropic's model.
+  - ***Anthropic v. Department of War*** (rehearing sought 13 Oct, amici 20–21 Oct). The Anthropic disclosure applies.
+  - Also held: the ProPublica CISA voting-machine report (19 Oct, anonymous); Amnesty on Morocco; eMudhra; the France riots and the Alliance4Europe finding; the Kampala killing; the New Arab "exclusives".
+- **Scale line 283 / 1,146 / 143.** `build-transmissions.py` succeeded this time.
+
 **NO MUSIC UNDER THE CAROUSEL; ONE MUSIC AT A TIME — 22 Oct 2026, live.** Author: *"Why is tempest playing on carousel at all"*.
 - **Two causes, both real, proven with old vs new code on the real report** (scratchpad `floortest.js`: YouTube API stubbed so every play/pause is logged, plus an `appendChild` hook that catches YouTube iframes):
   1. **`soundtrack.js` (mine):**
