@@ -217,6 +217,25 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**THE "TRUMP FAMILY TREE" POST — graded 22 Oct 2026, HELD. `research/TRUMP-FAMILY-POST.md` (34-row table) + three beat files `TRUMP-FAMILY-POST-{A-FAMILY,B-COHN-KUSHNER-WORDS,C-2021-2026}.md` + `-BRIEF.md` (the post verbatim); 379 quotes, all vq OK.** Author: *"Parse the truth lines from this Twitter post"*.
+- **Finding:** the skeleton is mostly documented and the adjectives mostly are not.
+- **Holds:** the 1905 expulsion; the 1927 arrest and discharge (membership unsupported); the 1954 FHA testimony; the 1973 DOJ suit and its no-admission 1975 consent order; the $10 synagogue deed (1955); John G. Trump's 1943 Tesla review; Cohn's record and death; the Kushner plea, pardon and ambassadorship; the Ivanka, Epstein and "chosen one" quotes, each with its frame; the Cyrus coin; the Bible and its royalties; the heaven remarks; the Ohel visit; the crypto overlap.
+- **Chronology errors:** Bavaria → Klondike runs backwards; the Bible came before the Ohel, not after.
+- **Naming errors:**
+  - "physicist", and "had Tesla" for examining his papers;
+  - "teen" pageants (the Stern remark was about adult pageants);
+  - "Kabbalah string" (unsupported in the vaccine post);
+  - "God's chosen vessel" as the evangelicals' own phrase;
+  - a Brooklyn synagogue read as Israel.
+- **Overstated:** "48 years" of funding (the synagogue's phrase for a friendship); "six bankruptcies" (company filings); "entire federal government"; "for bankrolling Israel".
+- **Unsupported:** "lover of Israel"; Klan membership; "settled over tea with Xi".
+- **Refused:** "One family" (anti-map) and "three generations kneeling to Israel" (the dual-loyalty shape).
+- **Post-cutoff items, read at source:**
+  - Trump TV, a White House YouTube stream launched 21 Sept 2026, three days after CNN, MS NOW and Politico lost their passes on 18 Sept; the passes were restored by court order;
+  - tea with Xi at Zhongnanhai on 15 May 2026, and the Sept 2026 AI-incident channel with "no AI agreement".
+- **The page already carries** the Epstein quote (II), Stargate's private funders (VII/X) and the $TRUMP disclosure (X), all at tier. **Not recommended for the page**; his call.
+- **Spider:** `senate.gov/artandhistory/.../Have_you_no_sense_of_decency.htm` is a decoy-200 candidate (title "404 Error Page"), not yet registered.
+
 **`/stats`, THE COUNTS DASHBOARD — 22 Oct 2026, live and PUBLIC. It is not itself counted.** Author: *"Can you make an analytics dashboard for the site"*. Asked where it should live and what it should count, he picked "Unlisted page on b0b.dev" and left the data question open. I took the recommended option: daily per-page counts, aggregate only, with no referring sites. The same evening: *"Stats can be public why not"*.
 - **Now public:**
   - in the sitemap (24 URLs) and `CANONICAL_PATHS`, with a generated SEO block (`seo-meta.json` WebPage entry, `apply-seo-meta.js` URL map);
