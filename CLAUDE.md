@@ -217,7 +217,12 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
-**`/stats`, THE COUNTS DASHBOARD — 22 Oct 2026, live (`6d85eaf`, `ff5424e`). Unlisted: `noindex`, not in the sitemap or any menu, and not itself counted.** Author: *"Can you make an analytics dashboard for the site"*. Asked where it should live and what it should count, he picked "Unlisted page on b0b.dev" and left the data question open. I took the recommended option: daily per-page counts, aggregate only, with no referring sites.
+**`/stats`, THE COUNTS DASHBOARD — 22 Oct 2026, live and PUBLIC. It is not itself counted.** Author: *"Can you make an analytics dashboard for the site"*. Asked where it should live and what it should count, he picked "Unlisted page on b0b.dev" and left the data question open. I took the recommended option: daily per-page counts, aggregate only, with no referring sites. The same evening: *"Stats can be public why not"*.
+- **Now public:**
+  - in the sitemap (24 URLs) and `CANONICAL_PATHS`, with a generated SEO block (`seo-meta.json` WebPage entry, `apply-seo-meta.js` URL map);
+  - **STATS** after STICKERS/ANNOUNCEMENT in the report's top nav and sidebar, `/home`, and the `/start`-family nav (`build-start-pages.py` and its five pages);
+  - the lede now scopes its claim to *these counts*. It also states that Vercel runs its own page analytics on several pages and that those figures are not shown, so a public analytics page does not imply the site runs nothing else;
+  - seo-selftest 59/59.
 - **What the site counted before:** two all-time totals in KV. **`views`** is every page served to any client, crawlers included. **`visits`** is a POST to `/api/gate`. No page has called that since the gate went off on 19 Sept, but it still rises (1,686 → 1,692 during the deploy reads), because outside clients still post to it, `check-live.js` among them. **So "visits" no longer measures readers, and the signal bar still shows it publicly as "· N visits".** Flagged for him, not changed: switching the bar to arrivals is his call.
 - **Vercel Web Analytics also runs** (`/_vercel/insights/script.js` on the report, `/home` and the GL map). Its data is in his Vercel account, not reachable from here. The counter's own comment says "no third-party analytics script"; Vercel's script is served first-party but reports to Vercel. Noted, not acted on.
 - **Server (`server.js` `countView`, `viewClass`, `/api/stats`):**
