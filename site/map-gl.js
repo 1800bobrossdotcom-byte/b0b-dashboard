@@ -719,6 +719,8 @@ function viewRadiusNm() {
   const d = haversine({ lat: c.lat, lng: c.lng }, { lat: b.getNorth(), lng: b.getEast() }) * 1000;
   return Math.max(5, Math.min(250, Math.round(d / 1852)));
 }
+// DO-260B NACp: estimated position uncertainty (95%) the aircraft reports for itself.
+const NACP_EPU = ['10 NM or more, or not known', 'under 10 NM', 'under 4 NM', 'under 2 NM', 'under 1 NM', 'under 0.5 NM', 'under 0.3 NM', 'under 0.1 NM (185 m)', 'under 93 m', 'under 30 m', 'under 10 m', 'under 3 m'];
 function isMil(a) { return !!(a.dbFlags & 1) || /^(RCH|DUKE|EVAC|NAVY|RRR|TOPG|VIPER|COBRA|SENTRY|JAKE|BART)/.test((a.flight || '').trim()); }
 function aircraftFC(list) {
   return FC(list.filter((a) => a.lat != null && a.lon != null).map((a) => {
@@ -762,7 +764,7 @@ const FEEDS = [
       const n = d.in_view || feats.length;
       return { fc: FC(feats), status: fmt(n) + ' hotspots in view' + (n > feats.length ? ' (the strongest ' + fmt(feats.length) + ' drawn)' : '') + ' · ' + timeNow() };
     } },
-  { id: 'aircraft', label: 'Aircraft near the map centre (ADS-B)', src: 'adsb.lol, community ADS-B; OpenSky if it is down', every: 15000, viewport: true, plane: true,
+  { id: 'aircraft', label: 'Aircraft near the map centre (ADS-B)', src: 'adsb.lol, community ADS-B (ODbL); OpenSky if it is down', every: 15000, viewport: true, plane: true,
     layers: [planeLayer],
     async load() {
       const c = map.getCenter(), r = viewRadiusNm();
@@ -780,6 +782,18 @@ const FEEDS = [
         const fc = aircraftFC(list);
         return { fc, status: fc.features.length + ' in view · OpenSky fallback ' + timeNow() };
       }
+    } },
+  { id: 'navacc', label: 'Low reported position accuracy (ADS-B)', src: 'adsb.lol (ODbL). Aircraft near the map centre whose own accuracy report (NACp) is below 8. Where, not who: interference is one cause among several, and one aircraft is not a measurement.', every: 30000, viewport: true,
+    layers: [{ type: 'circle', paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 2, 4, 8, 9], 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': ['step', ['get', 'nacp'], '#ff5a3c', 4, '#ffb000'], 'circle-stroke-width': 1.6, 'circle-stroke-opacity': 0.9, 'circle-pitch-alignment': 'map' } }],
+    async load() {
+      const c = map.getCenter(), r = viewRadiusNm();
+      const res = await fetch(ADSB + '/lat/' + c.lat.toFixed(3) + '/lon/' + c.lng.toFixed(3) + '/dist/' + r);
+      if (!res.ok) throw new Error(res.status);
+      const ac = ((await res.json()).ac || []).filter((a) => a.lat != null && a.lon != null && a.nac_p != null && a.alt_baro !== 'ground');
+      const low = ac.filter((a) => a.nac_p < 8);
+      const fc = FC(low.map((a) => pt(a.lon, a.lat, { k: 'navacc', nacp: a.nac_p, call: ((a.flight || '').trim() || a.r || a.hex || 'NO CALLSIGN'), alt: a.alt_baro != null ? a.alt_baro + ' ft' : 'unknown', hex: a.hex || '' })));
+      if (!ac.length) return { fc, status: 'No aircraft reporting within ' + r + ' nm. That is a gap in the receiver network, not an empty sky. · ' + timeNow() };
+      return { fc, status: low.length + ' of ' + ac.length + ' airborne aircraft reporting accuracy within ' + r + ' nm are below NACp 8 · ' + timeNow() };
     } },
   { id: 'milair', label: 'Military aircraft, worldwide (ADS-B)', src: 'adsb.lol; "military" is the source\'s flag', every: 30000, plane: true,
     layers: [planeLayer],
@@ -929,6 +943,7 @@ function liveTip(f) {
     case 'eonet': return p.cat + ' · ' + p.title;
     case 'firms': return 'Heat hotspot · ' + Number(p.frp).toFixed(1) + ' MW';
     case 'aircraft': return p.call + (p.mil ? ' · military (source flag)' : '') + ' · ' + p.alt;
+    case 'navacc': return p.call + ' · reports NACp ' + p.nacp;
     case 'vessel': return (p.name || 'MMSI ' + p.mmsi);
     case 'iss': return 'International Space Station';
     case 'gdacs': return 'GDACS ' + p.typ + ' · ' + p.name;
@@ -948,6 +963,7 @@ function liveCard(f) {
     case 'eonet': h = p.cat + ': ' + p.title; kv = p.date ? '<dt>Date</dt><dd>' + esc(new Date(p.date).toLocaleDateString()) + '</dd>' : ''; note = 'NASA EONET' + (p.url ? ' · <a href="' + esc(p.url) + '" target="_blank" rel="noopener">source</a>' : ''); break;
     case 'firms': h = 'Heat hotspot'; kv = '<dt>Fire radiative power</dt><dd>' + Number(p.frp).toFixed(1) + ' MW</dd><dt>Brightness</dt><dd>' + Math.round(p.bright) + ' K</dd>' + (p.conf ? '<dt>Confidence</dt><dd>' + esc(p.conf) + '</dd>' : '') + '<dt>Observed</dt><dd>' + esc(p.date + ' ' + p.time) + ' UTC</dd>'; note = 'NASA FIRMS (VIIRS, 375 m). Heat detected by satellite. Wildfires, gas flares, industrial plants and volcanoes all register; the sensor does not say which.'; break;
     case 'aircraft': h = p.call; kv = (p.type ? '<dt>Type</dt><dd>' + esc(p.type) + '</dd>' : '') + (p.reg ? '<dt>Reg</dt><dd>' + esc(p.reg) + '</dd>' : '') + '<dt>Altitude</dt><dd>' + esc(p.alt) + '</dd>' + (p.gs !== '' ? '<dt>Speed</dt><dd>' + p.gs + ' kt</dd>' : '') + '<dt>Track</dt><dd>' + Math.round(p.track) + '&deg;</dd>' + (p.sq ? '<dt>Squawk</dt><dd>' + esc(p.sq) + '</dd>' : ''); note = 'ADS-B via adsb.lol · hex ' + esc(p.hex) + (p.mil ? '. "Military" is the source\'s registration flag or a callsign pattern, not a finding here.' : ''); break;
+    case 'navacc': h = p.call + ': low reported position accuracy'; kv = '<dt>NACp</dt><dd>' + p.nacp + '</dd><dt>Its stated uncertainty</dt><dd>' + esc(NACP_EPU[p.nacp] || 'unknown') + '</dd><dt>Altitude</dt><dd>' + esc(p.alt) + '</dd>'; note = 'The aircraft\'s own ADS-B accuracy report (NACp), via adsb.lol (ODbL) · hex ' + esc(p.hex) + '. Aircraft with working GNSS usually report 8 to 11. A low value can come from interference, from old or faulty equipment, or from a receiver fault, and 0 also means "not known". This layer shows where; it does not say why or who.'; break;
     case 'vessel': h = p.name || 'MMSI ' + p.mmsi; kv = '<dt>MMSI</dt><dd>' + esc(p.mmsi) + '</dd>' + (p.dest ? '<dt>Destination</dt><dd>' + esc(p.dest) + '</dd>' : '') + '<dt>Speed</dt><dd>' + esc(p.sog) + ' kt</dd>'; note = 'AIS via digitraffic (Finnish Transport Infrastructure Agency), CC BY 4.0. Finnish waters only.'; break;
     case 'iss': h = 'International Space Station'; kv = '<dt>Altitude</dt><dd>' + Number(p.alt).toFixed(1) + ' km</dd><dt>Velocity</dt><dd>' + Math.round(p.vel) + ' km/h</dd><dt>Visibility</dt><dd>' + esc(p.vis) + '</dd>'; note = 'wheretheiss.at. The dashed ring is a 2,200 km footprint.'; break;
     case 'gdacs': h = 'GDACS ' + p.typ + ': ' + p.name; kv = '<dt>Alert</dt><dd>' + esc(p.alert) + '</dd>' + (p.sev ? '<dt>Severity</dt><dd>' + esc(p.sev) + '</dd>' : ''); note = 'Global Disaster Alert and Coordination System' + (p.url ? ' · <a href="' + esc(p.url) + '" target="_blank" rel="noopener">report</a>' : ''); break;
@@ -970,9 +986,20 @@ function addPlaneIcon() {
 }
 
 // ------------------------------------------------------------------ context layers (step 3)
-// Each entry: { id, label, file, geom: 'line'|'point', color, src, licence }.
-// Files live in /data-context/ (Vercel static output). Drawn under the evidence.
-const CONTEXT = W.B0B_CONTEXT_LAYERS || [];
+// Each entry: { id, label, file, geom: 'line'|'point', color, src, licence, attribution,
+// fields (property -> card label), radius (optional circle-radius expression) }.
+// Files are built by scripts/build-context-layers.py into /data-context/ (Vercel
+// static output). Drawn under the evidence, in one muted colour, never as edges.
+const CONTEXT = W.B0B_CONTEXT_LAYERS || [
+  {
+    id: 'power', label: 'Power plants (2021)', file: '/data-context/power-plants.json?v=1', geom: 'point', color: '#a8a08a',
+    src: 'WRI Global Power Plant Database v1.3.0: plants of 1 MW and over, as of June 2021; WRI stopped maintaining it in 2022',
+    licence: 'CC BY 4.0, simplified by b0b.dev',
+    attribution: 'Power plants: <a href="https://datasets.wri.org/datasets/global-power-plant-database">WRI Global Power Plant Database v1.3.0</a> (CC BY 4.0)',
+    fields: { name: 'Plant', fuel: 'Fuel', mw: 'Capacity (MW)', country: 'Country', year: 'Commissioned', src: 'Source', id: 'Database id' },
+    radius: ['interpolate', ['linear'], ['zoom'], 0, ['interpolate', ['linear'], ['sqrt', ['get', 'mw']], 1, 0.8, 70, 3.2], 8, ['interpolate', ['linear'], ['sqrt', ['get', 'mw']], 1, 2.2, 70, 9]],
+  },
+];
 
 function buildContextDOM() {
   const box = $('#contextList');
@@ -991,9 +1018,9 @@ async function setContext(c, on) {
     $('#cs-' + c.id).textContent = 'Loading...';
     try {
       const d = await (await fetch(c.file)).json();
-      map.addSource('ctx-' + c.id, { type: 'geojson', data: d });
+      map.addSource('ctx-' + c.id, { type: 'geojson', data: d, attribution: c.attribution || '' });
       if (c.geom === 'line') map.addLayer({ id: ids[0], type: 'line', source: 'ctx-' + c.id, layout: { 'line-join': 'round' }, paint: { 'line-color': c.color, 'line-width': ['interpolate', ['linear'], ['zoom'], 0, 0.6, 6, 1.2, 10, 2], 'line-opacity': 0.55 } }, 'ctx-top');
-      else map.addLayer({ id: ids[0], type: 'circle', source: 'ctx-' + c.id, paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 0, 1.4, 6, 2.6, 10, 4], 'circle-color': c.color, 'circle-opacity': 0.6, 'circle-stroke-width': 0.5, 'circle-stroke-color': '#000', 'circle-pitch-alignment': 'map' } }, 'ctx-top');
+      else map.addLayer({ id: ids[0], type: 'circle', source: 'ctx-' + c.id, paint: { 'circle-radius': c.radius || ['interpolate', ['linear'], ['zoom'], 0, 1.4, 6, 2.6, 10, 4], 'circle-color': c.color, 'circle-opacity': 0.45, 'circle-stroke-width': 0.5, 'circle-stroke-color': 'rgba(0,0,0,0.6)', 'circle-pitch-alignment': 'map' } }, 'ctx-top');
       ctxHit = ctxHit.concat(ids);
       $('#cs-' + c.id).textContent = fmt((d.features || []).length) + ' features';
     } catch (e) {
@@ -1017,7 +1044,7 @@ function ctxCard(f) {
   const c = ctxLayer(f);
   if (!c) return;
   const p = f.properties || {};
-  const rows = Object.keys(p).filter((k) => p[k] !== '' && p[k] != null && k !== 'k').map((k) => '<dt>' + esc((c.fields && c.fields[k]) || k) + '</dt><dd>' + esc(p[k]) + '</dd>').join('');
+  const rows = Object.keys(p).filter((k) => p[k] !== '' && p[k] != null && k !== 'k' && k !== 'name').map((k) => '<dt>' + esc((c.fields && c.fields[k]) || k) + '</dt><dd>' + esc(p[k]) + '</dd>').join('');
   S.sel = { kind: 'feature' };
   openCard('<div class="mg-meta"><span><i class="mg-dot" style="background:' + esc(c.color) + '"></i>CONTEXT · ' + esc(c.label) + '</span></div><h2>' + esc(p.name || p.n || c.label) + '</h2><dl class="mg-kv">' + rows + '</dl><p class="mg-small">' + esc(c.src) + '. ' + esc(c.licence) + '. Context, not evidence: nothing on this map is connected to it by being near it.</p>');
 }

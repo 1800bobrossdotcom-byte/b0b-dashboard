@@ -130,6 +130,9 @@ Learn these; they are invoked by name on the page.
    the map arrays and the scale figures from the report, checks every page and `seo-meta.json` that
    states a count, and writes `site/data/build.json` (counts, build stamp, sha256s). Runs **after**
    step 7 so the build stamp is the new manifest's. `--selftest` plants a wrong count and must catch it.
+   **It also fails if `site/map-gl.html` is stale.** After ANY change to `map.html`'s data arrays run
+   `python3 scripts/build-map-gl.py` (copies the arrays and the timeline verbatim into the GL page);
+   the selftest plants a marker edit the GL page does not carry and must catch it.
 8. Push branch **and** `HEAD:main`.
 9. `node scripts/check-live.js --wait` — **it compares only the manifest's `generated` stamp,
    which moves only when `report.html` changes.** A deploy touching just `index.html`,
@@ -152,6 +155,9 @@ Learn these; they are invoked by name on the page.
   **When verifying that something is gated, always add a cache-buster query string** — a
   warm URL will lie to you. Not treated as a defect: `security.txt` already says the gate
   is a threshold, not a credential. Flagged for the author, unchanged.
+- **A tile provider can refuse with a 200.** Since Sept 2026 CARTO's keyless basemaps return an
+  "API KEY REQUIRED" watermark image (`etag: "wm-…"`) with HTTP 200, so the classic map's
+  `tileerror` failover never fired. Look at a tile, not its status code. CARTO is no longer used.
 - **The static route serves a fixed extension allowlist** in `server.js`. A new asset type
   404s live while looking perfectly fine in the repo — `.kml` did exactly that.
 - **Section I has no static sect-toc** (JS-generated). Sections II, IX, XIII and others do.
@@ -205,29 +211,42 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
-**MAP UPGRADE — ASKED 22 OCT 2026, PLAN GIVEN, NOTHING BUILT YET.** The author sent a screenshot of "OSINT GLOBE · Middle East dashboard" (by MaximVL, geobrowser.io) and asked *"How do we upgrade map experience"*.
-- **What the screenshot does:**
-  - a WebGL globe with 2D/3D/relief views and dark or satellite basemaps;
-  - a grouped, collapsible legend (Signals / Network / Power grid / Oil & gas) with counts;
-  - dense infrastructure layers (cables, landing points, IXPs, data centres, grid, pipelines, wells, refineries, LNG, flaring);
-  - live FIRMS fires, aircraft and GNSS interference, with a 24h/72h playback.
-- **Our map already has nine live layers:** USGS quakes, EONET, FIRMS (VIIRS 24 h, WFS), adsb.lol aircraft and military air, Finnish AIS vessels, ISS, GDACS, ALPR. **The gap is rendering, organisation and the first view, not data.**
-- **Measured on live `/map`, 22 Oct (Playwright via the proxy):**
-  - **The tiered connection lines are OFF on first load** (`#toggleConnections` unchecked). The title promises "every connection tiered", but a new reader sees no lines.
-  - **Desktop: the stats box covers the zoom-in button and the left half of the search field.**
-  - **Phone (390 px):** the header and stats box are truncated, RESET/KML/TEXT crowd together, and two bottom bars take ~80 px.
-  - **Every marker is its own HTML `divIcon` with a glow shadow:** 1,162 elements and ~3,000 DOM nodes. Pans at ~41 fps in headless desktop Chromium with no GPU. Screenshot-density layers are not possible on this renderer.
-- **Plan put to him:**
-  1. **Defects:** first view shows T3+ lines; the stats box is moved off the controls; a phone layout.
-  2. **MapLibre GL JS 5** (BSD, self-hosted, globe + terrain + GPU), built behind `?engine=gl` until compared. This is the renderer swap recorded on 12 Sept as "a separate decision". The CSP already allows `worker-src blob:`.
-  3. **A grouped legend:** Evidence / Connections / Context / Live. Context layers come from open datasets, with each licence read at source first.
-     - Context is drawn subordinate and **never as an edge** (anti-map).
-     - **FIRMS hotspots are labelled as satellite-detected heat, not strikes.** Gas flares over the Gulf fields read as "fires".
-     - GNSS interference shows where, not who.
-- **His calls:**
-  - a 24h/72h playback, which replays sensor feeds and is not the period bar he removed on 19 Sept, but is still a time control;
-  - the glow look against principle 4 (our markers glow too);
+**MAP UPGRADE — STEPS 1–3 BUILT, 22 OCT 2026. Classic `/map` fixed (live); the GL engine is a PREVIEW at `/map?engine=gl` (noindex, canonical `/map`), not the default.** The author sent a screenshot of "OSINT GLOBE · Middle East dashboard" (MaximVL, geobrowser.io) with *"How do we upgrade map experience"*, was given a three-step plan, and answered *"And yes to map gameplan"*.
+- **What we measured first (live, Playwright):** connection lines OFF on first load; the stats box over the zoom button and search; a cramped phone header; 1,162 HTML `divIcon` markers with glow (~41 fps panning, no room for dense layers). The gap was rendering, organisation and the first view, not data.
+- **Step 1, classic map (`7894473`):**
+  - first view shows T3+ lines (the tier select starts at 3, connections checked);
+  - the stats bar is bottom-centre on desktop, full width under the header on phones;
+  - a ☰ menu at ≤600 px; header padding clears the language button; the phone search and its KML/TEXT links moved into Researcher Tools;
+  - XXIV gets its section checkbox; `resetFilters()` re-applies the filters; SPORTS popups lose a report link that went nowhere;
+  - FIRMS is labelled "heat hotspot" with the sensor note;
+  - `[data-dynamic]` on live status text so the integrity watchdog stops reading feed updates (and a language switch) as tampering.
+- **Found on the way, fixed on both engines (`1be555b`):**
+  - **FIRMS withdrew the keyless WFS** the map used ("Invalid service.", so the layer was dead live). `server.js` `/api/firms` now reads the public NOAA-20 VIIRS 24 h CSV, caches it 10 min, and returns GeoJSON for a bbox, strongest first (`max` 1–5000).
+  - **CARTO now watermarks keyless tiles with a 200** (§4 trap). DARK and FIRST PEOPLES use Esri's Dark Gray Canvas (base + reference labels; FIRST PEOPLES base only). A free CARTO key exists for non-commercial use (5M requests/month), but a person must request it by email: **his call if he wants CARTO back.**
+- **Step 2, the GL engine (`1be555b`):**
+  - **MapLibre GL JS 6.13.0** (BSD-3-Clause), self-hosted in `public/vendor/maplibre-gl-6.13.0/`; npm integrity checked. `site/map-gl.{html,js,css}`; route in `server.js` (`/map` with `engine=gl`); the CSP gained the OSM tile and AWS terrain hosts.
+  - **The data is copied, never re-typed:** `scripts/build-map-gl.py` copies `map.html`'s arrays and correlation timeline verbatim between `map-data` / `map-timeline` comment markers, plus section/type labels and the tier table from `site/data/map-data.json`. `check-consistency.py` fails if the copy is stale (§4 7b).
+  - **Features:** globe/flat, terrain relief (AWS Terrain Tiles, full attribution in MAP SOURCES), six bases; the grouped legend Evidence / Connections / Context / Live with counts; markers and tiered lines drawn by the GPU (dotted 0–1, dashed 2, solid 3+); a click on a site opens its record, its lines and their tiers, co-located sites and actions (report, only this type/section/its links, copy link); a click on a line shows its tier and meaning; search, pattern, proximity, the timeline, deep links (`/map?engine=gl&…`, the classic parameters); all ten live feeds; the integrity lock, watchdog, content signature and canary carried over. Phones get bottom sheets.
+  - **Tested locally:** every interaction, all feeds, deep links, the lock (`gltest2.js`); phone 390 px: no horizontal scroll, the sheet, the card, the menu (`glphone.js`). The open sheet's top sits at 243 px of 844, which is by design.
+- **Step 3, context and live layers (this deploy):**
+  - **One context layer passed the licence check: power plants**, WRI Global Power Plant Database v1.3.0, CC BY 4.0, 34,936 plants. It is frozen at June 2021 and unmaintained, and the card, the attribution and the source line all say so. Built by `scripts/build-context-layers.py` from the ledgered CSV (refuses a body whose sha256 differs) into `public/data-context/power-plants.json` (8.1 MB, 1.1 MB gzipped, loaded only when switched on). It is drawn in one muted colour under the lines and sites, never as an edge, and every card says "Context, not evidence".
+  - **Live: "Low reported position accuracy (ADS-B)"**, aircraft near the centre whose own NACp is below 8. **Where, not who:** the card states the aircraft's own uncertainty, that interference is one cause among several (old equipment, receiver faults; 0 also means "not known"), and that one aircraft is not a measurement. adsb.lol has **no coverage over Israel** (0 aircraft), and the status line then says the gap is in the receiver network, not the sky.
+  - **Held, his calls (full findings `research/MAP-CONTEXT-SOURCES.md`, 58 quote lines):**
+    - gas flaring: the World Bank per-flare file (27,365 sites) states no licence of its own and its VIIRS Nightfire upstream is licence-gated; confirm with data@worldbank.org first;
+    - oil and gas: GEM trackers (form with an email) and OGIM v3.0 (3.4 GB) are CC BY 4.0, but he has to download them;
+    - data centres: Epoch AI (CC BY) is 95 AI sites by street address, and it names Anthropic as a user (the Anthropic disclosure applies);
+    - submarine cables, landing points and IXPs: no open source (TeleGeography sells its data; PeeringDB and IXPDB bar bulk redistribution; PCH is non-commercial). A permission request to TeleGeography is possible.
+    - a daily GNSS hex layer built from adsb.lol would need a scheduled job, and ODbL share-alike on the derived file.
+- **Spider fix (`scripts/spider/spider.py`):** robots.txt is now matched per RFC 9309 (longest rule wins, allow wins a tie). `urllib.robotparser` takes the first rule in file order, so "Allow: /" above "Disallow: /wwwdata" let the research agent send one request to eogdata.mines.edu's disallowed `/wwwdata` (it redirected to a login; nothing retrieved). Proven both ways on 10 cases; crawl-delay still comes from the stdlib.
+- **Still his calls:**
+  - make GL the default `/map` (the classic stays at a link either way);
+  - a 24h/72h playback (a time control; not the period bar he removed on 19 Sept);
+  - the glow look against principle 4;
   - grouping vs the held `/lab` split.
+- *Traps:*
+  - Playwright here needs `--use-angle=swiftshader --enable-unsafe-swiftshader --ignore-gpu-blocklist` for WebGL. Launch local tests with no proxy (localhost through the proxy gives 405).
+  - Route external hosts through `curl --compressed`; digitraffic answers 406 without gzip.
+  - MapLibre 6 is ESM only: `import * as mlgl` and `setWorkerUrl` pointing at the self-hosted worker.
 
 **CURRENT EVENTS SWEEP 20–22 OCT 2026 — live 22 Oct. XV `xv-status-update-22-october-2026` (14 paragraphs, ~3,100 words), after the 20 Oct update. HELD: `research/NEWS-2026-10-22-HELD.md`.** Author: *"lets do a current events sweep"*.
 - **Method:** the same as 20 Oct.

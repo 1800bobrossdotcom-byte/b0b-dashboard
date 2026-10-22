@@ -118,6 +118,55 @@ def profile(url):
     return {}
 
 
+class Robots:
+    """robots.txt matched as RFC 9309 says: the group for our product token
+    (else '*'), and of its rules the LONGEST matching path wins, with allow
+    winning a tie. urllib.robotparser takes the first rule in file order, so
+    "Allow: /" above "Disallow: /wwwdata" let /wwwdata through (22 Oct 2026)."""
+
+    def __init__(self, text):
+        groups, agents, rules, in_rules = [], [], [], False
+        for raw in text.splitlines():
+            line = raw.split('#', 1)[0].strip()
+            if ':' not in line:
+                continue
+            key, val = (s.strip() for s in line.split(':', 1))
+            key = key.lower()
+            if key == 'user-agent':
+                if in_rules:
+                    groups.append((agents, rules))
+                    agents, rules, in_rules = [], [], False
+                agents.append(val.lower())
+            elif key in ('allow', 'disallow'):
+                in_rules = True
+                if val:
+                    rules.append((key == 'allow', val))
+        if agents:
+            groups.append((agents, rules))
+        token = UA.split('/', 1)[0].lower()
+        mine = [r for a, r in groups if any(x != '*' and x in token for x in a)]
+        star = [r for a, r in groups if '*' in a]
+        self.rules = [x for r in (mine or star) for x in r]
+
+    @staticmethod
+    def _match(pattern, path):
+        rx = re.escape(pattern).replace(r'\*', '.*')
+        if rx.endswith(r'\$'):
+            rx = rx[:-2] + '$'
+        return re.match(rx, path) is not None
+
+    def can_fetch(self, _ua, url):
+        p = urllib.parse.urlparse(url)
+        path = (p.path or '/') + ('?' + p.query if p.query else '')
+        best = None
+        for allow, pat in self.rules:
+            if self._match(pat, path):
+                key = (len(pat), allow)
+                if best is None or key > best:
+                    best = key
+        return True if best is None else best[1]
+
+
 def robots_for(url, session):
     """Fetch and cache robots.txt. A host that will not serve robots.txt is
     treated as permissive - absence of a rule is not a rule - but a robots.txt
@@ -126,15 +175,18 @@ def robots_for(url, session):
     host = p.netloc.lower()
     if host in _robots:
         return _robots[host]
-    rp = urllib.robotparser.RobotFileParser()
+    rp = None
     delay = None
     try:
         r = session.get('%s://%s/robots.txt' % (p.scheme, host),
                         headers={'User-Agent': UA}, timeout=20)
         if r.status_code == 200:
-            rp.parse(r.text.splitlines())
+            rp = Robots(r.text)
+            # crawl-delay is not in RFC 9309; the stdlib parser still reads it.
+            std = urllib.robotparser.RobotFileParser()
+            std.parse(r.text.splitlines())
             try:
-                delay = rp.crawl_delay(UA)
+                delay = std.crawl_delay(UA)
             except Exception:
                 delay = None
         else:
