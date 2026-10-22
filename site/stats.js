@@ -215,7 +215,7 @@
     }
 
     $('r-alltime').textContent = fmt(d.totals.views) + ' pages have been served in all, by every kind of client, since the counter began. ' +
-      'The separate "visits" figure (' + fmt(d.totals.gate_entries) + ') counted entries through the click-gate; the gate has been off since 19 September 2026, so it no longer moves. ' +
+      'The separate "visits" figure (' + fmt(d.totals.gate_entries) + ') counts posts to the old click-gate address. No page on the site has called it since the gate was switched off on 19 September 2026; it still rises because some clients still post to it (the site\u2019s own deploy check is one), so it no longer measures readers. ' +
       d.method;
   }
 
