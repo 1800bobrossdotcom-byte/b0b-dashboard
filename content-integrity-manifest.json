@@ -1,13 +1,13 @@
 {
-  "generated": "2026-10-22T04:45:16.938Z",
+  "generated": "2026-10-22T04:58:21.183Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "838f2b333c795cbfb72680697c2219df8d81ea34878144f9c0e1c6107447a36d",
+  "fullFileHash": "0a41c9a855f69ae5a2a7864980c9109cb8edb6a025687dbb4e9a7a9ebcff3234",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "d9fd7b398578785e5cd8492ac17ec1d97c1bfe0a6c9ada928a8c518f379e6e66",
+      "hash": "04a4664d272e3ce3b5d8be01e4fd36108c9625ebbbe0d39d5c3e405aeda5487e",
       "length": 43004
     },
     {
@@ -1542,8 +1542,8 @@
     },
     {
       "id": "xxiv-endgame",
-      "hash": "3f1f1e33f79f6cb2c7d3a5c338eca54e8bf7506078d68df161a137eb09daeef2",
-      "length": 20143
+      "hash": "8988388cff631335f70203f2be9b65f4d183ac9b824778f8359db8508ca92084",
+      "length": 19068
     }
   ],
   "paragraphHashes": [
@@ -8095,9 +8095,9 @@
     },
     {
       "index": 1091,
-      "hash": "c11dd5d1176a07afdeaee9e79ffc95fbe514f6f0fff70f8abad67e77e0df9ce2",
-      "preview": "And there is a fourth thing, added last, which is the only line in this document...",
-      "length": 732
+      "hash": "c2b04361b052e074f4aa3b03de8a988af3c46b9584848d769c11108fd8a809ef",
+      "preview": "And there is a fourth thing, which is the only line in this document that sorts ...",
+      "length": 720
     },
     {
       "index": 1092,
@@ -8113,17 +8113,11 @@
     },
     {
       "index": 1094,
-      "hash": "4ab0b456b1525b40d5ef3a69f415c43faff10d3630819f976f8ebdbda57ddff9",
+      "hash": "b3c7dba25154fa08a494c3595396c5dad592f5b5533fcf0b8f620137a4d0258f",
       "preview": "The most striking version of it is the continuity apparatus conceding the point ...",
-      "length": 669
-    },
-    {
-      "index": 1095,
-      "hash": "6a117b02297f22867514576bf1c08f5dbef49a96f534f013ce7d6b1617a66d4a",
-      "preview": "And he took his own mark off the list first, which is the part that costs him so...",
-      "length": 1388
+      "length": 995
     }
   ],
   "totalSections": 308,
-  "totalParagraphs": 1096
+  "totalParagraphs": 1095
 }
