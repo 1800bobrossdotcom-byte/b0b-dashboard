@@ -234,7 +234,8 @@ than once.
 - **Playback (24 h / 72 h), LIVE group, GL map.** It replays NASA FIRMS heat, USGS earthquakes and NASA EONET events up to the hour on a slider, faded by age; ▶ runs the window in about 24 s.
   - The live copies of those three feeds are hidden while it runs. Aircraft, vessels and the station are live only, and the panel says so.
   - `?play=24|72` deep-links it, and "COPY A LINK" carries it.
-  - **Server:** `/api/firms?hours=24|48|72`; 72 h is the 7-day file (41.5 MB) cut at acquisition time, cached 10 min per file; `max` is now up to 8000; each feature carries `t` (epoch ms).
+  - **Server:** `/api/firms?hours=24|48|72`; 72 h is the 7-day file (41.5 MB). **Every window is cut at its own length on the server** (`cae399d`): NASA's "24h" file actually ran ~45 h on 22 Oct, so the label's "strongest N of M" had compared two windows. Cached 10 min per file; `max` is now up to 8000; each feature carries `t` (epoch ms).
+  - *Trap seen on that deploy:* reads made right after Vercel reported "success" still came from the previous build for about a minute. Poll for the new behaviour; do not trust the first reads.
   - It replays sensor feeds. **It is not the evidence period bar removed on 19 Sept.**
 - **`/lab` (same engine; `map-gl.js` reads the path; `PAGES['/lab']`, canonical `/map`, not in the sitemap). `/map` is now research only.** On `/lab` only:
   - the 16 purple deep-route lines, tier 0–1 (the 1978 "Inner-Earth" private map, the Four Corners map, analogy lines). The rule is `isLabRoute`: colour `#cc00ff` and tier ≤ 1. Derinkuyu↔Kaymakli (purple, tier 3) stays on `/map`;
