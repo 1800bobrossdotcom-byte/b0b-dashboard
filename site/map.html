@@ -440,7 +440,7 @@
 
 <div class="header">
   <h1>b0b.dev - OSINT MAP</h1>
-  <span id="b0b-masthead-visitors" style="color:#3f5a4c;font-size:0.7rem;white-space:nowrap;margin-left:10px;overflow:hidden;text-overflow:ellipsis"></span>
+  <span id="b0b-masthead-visitors" data-dynamic style="color:#3f5a4c;font-size:0.7rem;white-space:nowrap;margin-left:10px;overflow:hidden;text-overflow:ellipsis"></span>
   <button class="nav-toggle" type="button" aria-label="Menu" aria-controls="mapNav" aria-expanded="false" onclick="var h=this.parentNode;var o=h.classList.toggle('nav-open');this.setAttribute('aria-expanded',o)">&#9776;</button>
   <nav id="mapNav">
     <a href="/" data-i18n="nav.home">HOME</a>
@@ -4659,13 +4659,28 @@ function fetchGDACS() {
   var langAt = 0;
   window.addEventListener('b0b-lang', function() { langAt = Date.now(); });
 
+  // The page's own moving parts are left out of the comparison: anything marked
+  // data-dynamic (visitor count, live-feed status) and the theme button, which
+  // theme.js adds to the nav and relabels LIGHT/DARK. Without this a phone that
+  // was still loading theme.js two seconds in reported the nav as tampered.
+  function wText(el) {
+    var c = el.cloneNode(true);
+    c.querySelectorAll('[data-dynamic], .b0b-theme-btn').forEach(function(n) { n.remove(); });
+    return c.textContent;
+  }
+  // Snapshot only after the deferred scripts (theme.js, signal-bar.js) have run.
+  function afterReady(fn, ms) {
+    var go = function() { setTimeout(fn, ms); };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
+  }
+
   // Take initial snapshots after a brief delay (let filters/stats populate)
-  setTimeout(function() {
+  afterReady(function() {
     watchTargets.forEach(function(t) {
       var el = document.querySelector(t.sel);
       if (el) {
         snapshots[t.sel] = {
-          text: el.textContent,
+          text: wText(el),
           html: el.innerHTML,
           label: t.label,
           dynamic: t.dynamic || false
@@ -4695,7 +4710,7 @@ function fetchGDACS() {
         var el = document.querySelector(matchedSel);
         if (!el) return;
 
-        var newText = el.textContent;
+        var newText = wText(el);
 
         // Skip dynamic elements that change legitimately (stats bar updates from filter changes)
         if (snap.dynamic) {
@@ -4830,8 +4845,9 @@ function fetchGDACS() {
     { sel: '.filter-panel', attr: 'data-sig' }
   ];
 
-  // Compute and embed signatures on first load
-  setTimeout(function() {
+  // Compute and embed signatures once the deferred scripts have run
+  var afterReady = function(fn, ms) { var go = function() { setTimeout(fn, ms); }; if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go(); };
+  afterReady(function() {
     sigTargets.forEach(function(t) {
       var el = document.querySelector(t.sel);
       if (!el) return;
@@ -4862,7 +4878,7 @@ function fetchGDACS() {
     // left out; without that, switching on any live feed reported the panel as tampered.
     function sigText(el) {
       var c = el.cloneNode(true);
-      c.querySelectorAll('[data-dynamic]').forEach(function(n) { n.remove(); });
+      c.querySelectorAll('[data-dynamic], .b0b-theme-btn').forEach(function(n) { n.remove(); });
       return c.textContent;
     }
     var textSnapshots = {};

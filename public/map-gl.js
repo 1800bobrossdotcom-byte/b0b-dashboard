@@ -1144,6 +1144,12 @@ function guard() {
   const snaps = {}, log = [];
   let fired = false, langAt = 0;
   W.addEventListener('b0b-lang', () => { langAt = Date.now(); setTimeout(snapSig, 0); });
+  // The page's own moving parts are left out: data-dynamic (visitor count, feed
+  // status) and theme.js's LIGHT/DARK button, which it adds to the nav. A phone
+  // still loading theme.js two seconds in reported the nav as tampered (22 Oct 2026).
+  const sigText = (el) => { const c = el.cloneNode(true); c.querySelectorAll('[data-dynamic], .b0b-theme-btn').forEach((n) => n.remove()); return c.textContent; };
+  // Snapshots wait for the deferred scripts (theme.js, signal-bar.js) to have run.
+  const afterReady = (fn, ms) => { const go = () => setTimeout(fn, ms); if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go(); };
   const alarm = (label) => {
     if (fired) return; fired = true;
     const a = document.createElement('div');
@@ -1152,13 +1158,13 @@ function guard() {
     document.body.appendChild(a);
     setTimeout(() => { a.style.opacity = '0'; }, 8000); setTimeout(() => a.remove(), 10000);
   };
-  setTimeout(() => {
-    watch.forEach((t) => { const el = $(t.sel); if (el) snaps[t.sel] = { text: el.textContent, t }; });
+  afterReady(() => {
+    watch.forEach((t) => { const el = $(t.sel); if (el) snaps[t.sel] = { text: sigText(el), t }; });
     new MutationObserver((ms) => ms.forEach((m) => {
       Object.keys(snaps).forEach((sel) => {
         const el = $(sel);
         if (!el || !(el === m.target || el.contains(m.target))) return;
-        const s = snaps[sel], now = el.textContent;
+        const s = snaps[sel], now = sigText(el);
         if (s.t.dynamic && s.t.dynamic.test(now)) { s.text = now; return; }
         if (Date.now() - langAt < 3000) { s.text = now; return; }
         if (now !== s.text) { log.push({ element: s.t.label, expected: s.text.slice(0, 100), found: now.slice(0, 100), time: new Date().toISOString() }); console.warn('[DOM WATCHDOG] unauthorized mutation', s.t.label); alarm(s.t.label); }
@@ -1176,7 +1182,6 @@ function guard() {
 
   // Content signature: text of the header and the panel, without data-dynamic parts.
   const sigEls = ['.header', '.mg-panel'];
-  const sigText = (el) => { const c = el.cloneNode(true); c.querySelectorAll('[data-dynamic]').forEach((n) => n.remove()); return c.textContent; };
   const sig = {};
   function snapSig() { sigEls.forEach((s) => { const el = $(s); if (el) sig[s] = sigText(el); }); }
   const h1 = $('.header h1');
@@ -1184,7 +1189,7 @@ function guard() {
   lock.id = 'integrityLock'; lock.textContent = '🔒'; lock.title = 'Content integrity OK';
   lock.style.cssText = 'margin-left:8px;font-size:0.7rem;cursor:help;color:var(--green)';
   if (h1) h1.after(lock);
-  setTimeout(() => {
+  afterReady(() => {
     snapSig();
     setInterval(() => {
       const bad = sigEls.filter((s) => { const el = $(s); return el && sig[s] !== undefined && sigText(el) !== sig[s]; });

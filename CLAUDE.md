@@ -255,6 +255,11 @@ than once.
     - data centres: Epoch AI (CC BY) is 95 AI sites by street address, and it names Anthropic as a user (the Anthropic disclosure applies);
     - submarine cables, landing points and IXPs: no open source (TeleGeography sells its data; PeeringDB and IXPDB bar bulk redistribution; PCH is non-commercial). A permission request to TeleGeography is possible.
     - a daily GNSS hex layer built from adsb.lol would need a scheduled job, and ODbL share-alike on the derived file.
+- **Integrity watchdog false alarm on phones, fixed (both engines).** The author's phone screenshot showed "DOM INTEGRITY VIOLATION — NAV LINKS" on `/map`.
+  - **Cause:** `theme.js` (deferred, at the end of an 830 KB page) appends its LIGHT/DARK button to `.header nav`. The watchdog snapshotted the nav 2 s after its inline script ran, so a phone still loading flagged the button as tampering. Pressing LIGHT, or the visitor count arriving, also turned the content-signature lock 🔓.
+  - **Fix:** the watchdog and the signature compare text without `[data-dynamic]` and `.b0b-theme-btn` (the visitor spans are now `data-dynamic`), and both snapshot only after `DOMContentLoaded`.
+  - **Proven both ways** (scratchpad `wdtest.js`: iPhone viewport, `theme.js` held back 5 s, menu opened, LIGHT pressed, 36 s wait). The old code logged NAV LINKS mutations on both engines and ended 🔓; the new code logged nothing and stayed 🔒.
+  - *Trap:* a fast local load never shows this. **Test integrity code with the deferred scripts delayed.**
 - **Spider fix (`scripts/spider/spider.py`):** robots.txt is now matched per RFC 9309 (longest rule wins, allow wins a tie). `urllib.robotparser` takes the first rule in file order, so "Allow: /" above "Disallow: /wwwdata" let the research agent send one request to eogdata.mines.edu's disallowed `/wwwdata` (it redirected to a login; nothing retrieved). Proven both ways on 10 cases; crawl-delay still comes from the stdlib.
 - **Still his calls:**
   - make GL the default `/map` (the classic stays at a link either way);
