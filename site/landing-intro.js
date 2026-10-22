@@ -9,10 +9,10 @@
  * #b0b-landing's data-main names the film that plays first (an id in FILMS below).
  *
  * IT IS NOT A GATE:
- *   - report.html's bootstrap opens it on the bare homepage only, never on a deep link or on /report,
+ *   - report.html's bootstrap opens it on every load of the bare homepage (the author: "always load"),
+ *     never on a deep link or on /report, and loads this file at once rather than after the report,
  *   - ENTER THE REPORT and Escape always go straight to the report, from the first frame,
- *     and the address becomes /report, so a reload stays in the report,
- *   - and the bootstrap removes the overlay if this file never claims it.
+ *   - and the bootstrap removes the overlay if this file cannot load or never claims it.
  * Browsers will not start sound without a gesture, so the main film starts muted with a SOUND control;
  * a tap on the picture or on a card turns the sound on.
  */
@@ -198,8 +198,6 @@
     if (mark) mark.skip();
     try { video.pause(); } catch (e) {}
     el.classList.add('bl-out');
-    // The reader is in the report now: give the page the report's own address, so a reload stays there.
-    try { if (location.pathname === '/' && !location.hash) history.replaceState(history.state, '', '/report' + location.search); } catch (e) {}
     setTimeout(function () {
       el.hidden = true;
       el.classList.remove('bl-out');

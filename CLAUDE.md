@@ -205,7 +205,19 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
-**THE HOMEPAGE IS A CAROUSEL OF ALL THE FILMS; OM COMMA IS THE MAIN FILM — 22 Oct 2026.** Author: *"push the intro film section into a carousel of all the films. Main film is the om comma one we had up with darpa theme. Make sense? Have the homepage be this"*.
+**THE CAROUSEL ALWAYS LOADS — 22 Oct 2026, live.** Author, after the carousel went up: *"Have the homepage be this and always load"*.
+- **The defect, mine:** `b0b-wordmark.js` and `landing-intro.js` were `defer` tags at the END of the 1.66 MB `report.html`, so they ran only after the whole report had downloaded. The bootstrap's 8 s fail-open timer hid the overlay first on a slow phone.
+  - **Proven both ways** (CDP throttle: 150 KB/s, 150 ms latency, 390 px phone): the old code went `OPEN unclaimed` → `HIDDEN` at 8.9 s and never played; the new code was claimed at 1.7 s and still playing at 28 s.
+- **The fix, in the bootstrap (`report.html`):**
+  - when the carousel is shown, it injects both scripts at once (`async=false`, so they run in order) instead of waiting for the parse;
+  - the overlay comes down immediately on the script's `onerror`, otherwise after **20 s** unclaimed;
+  - the intro-film path keeps its 8 s;
+  - the two deferred tags at the end are gone, so `/report` and deep links no longer download the carousel's scripts at all;
+  - `landing-intro.js?v=3`.
+- **ENTER no longer rewrites the address to `/report`.** That `replaceState` made a reload skip the carousel, which "always load" rules out. The bare `/` now opens the carousel on every load, reloads included; `/report` and `#` deep links never do.
+- **Checked:** the service worker is not a factor. `site/sw.js` is a kill switch (clears caches, no fetch handler), and `/` is served `no-cache, no-store`.
+
+**THE HOMEPAGE IS A CAROUSEL OF ALL THE FILMS; OM COMMA IS THE MAIN FILM — 22 Oct 2026.** *(ENTER's change of address to /report, described below, was removed the same day; see above.)* Author: *"push the intro film section into a carousel of all the films. Main film is the om comma one we had up with darpa theme. Make sense? Have the homepage be this"*.
 - **My reading:**
   - the arrival overlay over the report (`#b0b-landing`) becomes the carousel;
   - `/` keeps serving `report.html`, so the 4 Oct "/ opens on the report" structure, the canonical and Search Console are unchanged;

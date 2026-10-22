@@ -37,7 +37,7 @@
   <meta name="twitter:title" content="b0b.dev - Project Anglerfish: a tiered, sourced OSINT report">
   <meta name="twitter:description" content="25 sections of tiered OSINT on structures of control: institutional capture, surveillance cities, underground infrastructure, the Epstein-Maxwell record. documented fact vs labeled hypothesis.">
   <meta name="twitter:image" content="https://www.b0b.dev/img/og-card.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"PROJECT ANGLERFISH: CASSOWARY ORCA AGILITY — the architecture of control, tiered and sourced","url":"https://www.b0b.dev/report","description":"Independent OSINT report by b0b.dev: 25 sections, every claim tiered and sourced, rival explanations scored, falsifiers stated, corrections public, data downloadable.","image":"https://www.b0b.dev/img/og-card.png","isPartOf":{"@type":"WebSite","name":"b0b.dev","url":"https://www.b0b.dev/"},"headline":"PROJECT ANGLERFISH: CASSOWARY ORCA AGILITY — the architecture of control, tiered and sourced","author":{"@type":"Person","name":"b0b"},"publisher":{"@type":"Organization","name":"b0b.dev","url":"https://www.b0b.dev/"},"mainEntityOfPage":"https://www.b0b.dev/report","dateModified":"2026-10-21T23:14:44.627Z"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"PROJECT ANGLERFISH: CASSOWARY ORCA AGILITY — the architecture of control, tiered and sourced","url":"https://www.b0b.dev/report","description":"Independent OSINT report by b0b.dev: 25 sections, every claim tiered and sourced, rival explanations scored, falsifiers stated, corrections public, data downloadable.","image":"https://www.b0b.dev/img/og-card.png","isPartOf":{"@type":"WebSite","name":"b0b.dev","url":"https://www.b0b.dev/"},"headline":"PROJECT ANGLERFISH: CASSOWARY ORCA AGILITY — the architecture of control, tiered and sourced","author":{"@type":"Person","name":"b0b"},"publisher":{"@type":"Organization","name":"b0b.dev","url":"https://www.b0b.dev/"},"mainEntityOfPage":"https://www.b0b.dev/report","dateModified":"2026-10-22T04:31:41.563Z"}</script>
   <!-- seo:end -->
   <!-- Search Console ownership. The site opens on this page (/ serves the
        report), so the verifier's fetch of the homepage ends up on this
@@ -507,8 +507,8 @@
   if(carousel) el=land;
   var show=true;
   if(carousel){
-    // The carousel IS the homepage (the author, 22 Oct 2026): it opens on every visit to the bare
-    // address, and never on /report, which is where ENTER THE REPORT leaves the reader.
+    // The carousel IS the homepage (the author, 22 Oct 2026: "Have the homepage be this and always load"):
+    // it opens on every load of the bare address, reloads included. /report is the report itself.
     if(location.pathname!=='/') show=false;
   } else {
     // Once per session. A reader who has seen it is not shown it again - the
@@ -522,16 +522,27 @@
   try{ sessionStorage.setItem('b0b:intro:seen','1'); }catch(e){}
   el.hidden=false;
   document.documentElement.classList.add('b0b-intro-lock');
-  // FAIL OPEN. If its script (intro.js, or landing-intro.js for the landing
-  // film) has not taken the overlay over within 8 s - it did not load, or the
-  // page is so slow the reader should simply be reading - take the overlay
-  // away. Once claimed, the script owns dismissal, so this can never cut off a
-  // film that is playing.
-  setTimeout(function(){
+  // FAIL OPEN. If its script (intro.js, or landing-intro.js for the carousel)
+  // has not taken the overlay over, take the overlay away: a decoration never
+  // holds the document hostage. Once claimed, the script owns dismissal, so this
+  // can never cut off a film that is playing.
+  var failOpen=function(){
     if(el.dataset.claimed==='1') return;
     el.hidden=true;
     try{document.documentElement.classList.remove('b0b-intro-lock');}catch(e){}
-  },8000);
+  };
+  if(carousel){
+    // The carousel's scripts load NOW, in order, instead of as deferred tags at the end of this
+    // 1.6 MB page: deferred scripts wait for the whole report to arrive, and on a slow phone that
+    // took longer than the old 8 s fail-open, so the homepage could vanish before it began.
+    // The overlay comes down at once if the carousel cannot load, else after 20 s unclaimed.
+    var add=function(u,onerr){var s=document.createElement('script');s.src=u;s.async=false;if(onerr)s.onerror=onerr;document.head.appendChild(s);};
+    add('/b0b-wordmark.js?v=1');
+    add('/landing-intro.js?v=3',failOpen);
+    setTimeout(failOpen,20000);
+  } else {
+    setTimeout(failOpen,8000);
+  }
 })();
 </script>
 
@@ -6583,8 +6594,6 @@
 <script src="/intro-points.js?v=1" defer></script>
 <script src="/intro-reel.js?v=4" defer></script>
 <script src="/intro.js?v=8" defer></script>
-<script src="/b0b-wordmark.js?v=1" defer></script>
-<script src="/landing-intro.js?v=2" defer></script>
 <!-- Site soundtrack: Restless Leg Syndrome, "Represent The Fucking Planet" (Totem, 2021),
      played from the label's YouTube upload through youtube-nocookie; nothing is rehosted.
      The control mounts unconditionally and plays through a plain iframe, so it still works
