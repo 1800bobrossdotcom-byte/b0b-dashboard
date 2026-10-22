@@ -46,7 +46,7 @@ drafts.** Do not re-add "an earlier version of this passage said X" prose.*
 **Real operators read this. Some may act on it.** That is the reason for the discipline,
 not a reason to soften it. Accuracy is the safety mechanism. Anything that would get a
 reader prosecuted, discredited, or killed does not go on the page — which is why the
-servicemember section (Section XXIII) leads with the lawful channels and states plainly
+servicemember section (Section XXIV) leads with the lawful channels and states plainly
 what is a crime regardless of motive.
 
 ---
@@ -216,6 +216,19 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**TEST CASES ARE NO LONGER THE END OF THE REPORT — 22 Oct 2026, live. XXIII = Test Cases, XXIV = Spiritual Reclamation.** Author: *"Also i asked for the test cases to not be the end of the report"*.
+- **My misreading, now corrected:** his 05:29 line *"These extra case studies should not be the ending"* meant **Section XXIV, Test Cases**, which sat directly before the Signal. I read it as the sovereignty passage inside XXV's close (cut that morning; that cut stands).
+- **The order is now** XXII Connective Tissue → **XXIII Test Cases** → **XXIV Spiritual Reclamation** → XXV Signal → the close → the researcher's guide. The report closes on the counter-architecture, the Signal and "three completed things". Only these two sections were renumbered. Moving Test Cases higher (e.g. after XVI) would renumber seven sections; that is his call if he wants it.
+- **What moved with it:**
+  - the h2 ids (`#XXIII` is now Test Cases, `#XXIV` Spiritual Reclamation);
+  - all 40 numerals in the report, each read in context; the masthead's section list, the static contents and the sidebar label map, reordered;
+  - i18n in all 12 languages (key and title swapped together);
+  - the four Mondaloy markers (`section:"XXIII"`), the map checkbox, KML, `map-gl.html`, map-list, map-data, the corrections ledger row of 6 Oct, the concordance (Calabasas/ALIAS), sticker 11's source line (`design/stickers/publish.py`, README, `stickers.html`);
+  - §1 above ("Section XXIV" for servicemembers).
+  - **h3 ids were not renamed** (`xxiii-for-servicemembers-…`, `xvi-9-11-…`, `xx-…` keep their old prefixes), so every old deep link to a subsection still lands. Entries in this file before 22 Oct use the old numbers.
+- **Fixed on the way:** XIX's 9/11 pointer said the probe "points into … IV (blowback and the Saudi suit) … X (STELLAR WIND, PATRIOT, TIA), XIII (the anthrax naming error) and XXIII (the AUMF under the orders)". It was written while the topology lived in XVI, and it is false now: the probe links only into II and IX, and the AUMF, STELLAR WIND, PATRIOT, PNAC and anthrax material is inside the probe itself. It now says that.
+- **Flagged, not edited:** the classic map has a filter checkbox "XXII - Spiritual Exit" that no marker uses (the report's XXII is Connective Tissue). It does nothing.
+
 **MAP UPGRADE — STEPS 1–3 BUILT, 22 OCT 2026. Classic `/map` fixed (live); the GL engine is a PREVIEW at `/map?engine=gl` (noindex, canonical `/map`), not the default.** The author sent a screenshot of "OSINT GLOBE · Middle East dashboard" (MaximVL, geobrowser.io) with *"How do we upgrade map experience"*, was given a three-step plan, and answered *"And yes to map gameplan"*.
 - **What we measured first (live, Playwright):** connection lines OFF on first load; the stats box over the zoom button and search; a cramped phone header; 1,162 HTML `divIcon` markers with glow (~41 fps panning, no room for dense layers). The gap was rendering, organisation and the first view, not data.
 - **Step 1, classic map (`7894473`):**
@@ -336,7 +349,7 @@ than once.
 **THE SATOR / TATTOO READING IS OFF THE REPORT'S CLOSE AND OUT OF ENDGAME — 22 Oct 2026. DO NOT RE-ADD.** Author, quoting XXV's last paragraph ("And he took his own mark off the list first … The man wearing TENET is the one saying the tattoo is not sovereign"): *"The end reads odd … I had you remove the sator square section because the way you wrote it didn't calibrate and felt hallucinationatory."*
 - **What was left behind:** the Sator section had been removed earlier, but the close still read his "Not a tattoo" line through it: the "standing rule on the author's tattoos", the Sator square on his arm, the naming error, "the man wearing TENET".
 - **Report, step 1:** that paragraph is cut.
-- **Report, step 2, the same day.** Author: *"It is just a weird way to end a report of this nature"*, then *"These extra case studies should not be the ending"*.
+- **Report, step 2, the same day.** Author: *"It is just a weird way to end a report of this nature"*, then *"These extra case studies should not be the ending"*. *(He meant Section XXIV, Test Cases; it moved to XXIII the same evening, see the entry above. The cut below was my reading, and it stands.)*
   - **Cut from the close:** the whole "fourth thing" sovereignty passage, four paragraphs: his line read as a list of "claimants"; PPD-40, the PEADs and the NYPD liaison as having no founding instrument; FCD-1's "comity".
   - **Nothing documented was lost.** Every item stands where it was sourced: PPD-40, the PEADs and FCD-1 in IX, the NYPD liaison in II. The "claimants" synthesis was mine.
   - **The Zermelo/Lovelace paragraph moved up,** after Isaiah 54:17, unchanged.

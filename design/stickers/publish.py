@@ -52,7 +52,7 @@ SET = [
     ('s10-not-one-sparrow-is-forgotten', 'NOT ONE SPARROW IS FORGOTTEN', 'Unbounded',
      "Luke 12:6, as the report's close reads it", '/report#xxiv-endgame'),
     ('s11-the-emergency-did-not-end', 'THE EMERGENCY DID NOT END', 'Anton',
-     'Proclamation 7463, in Section XXIV', '/report#xvi-9-11-vector-3-the-emergency-that-did-not-end'),
+     'Proclamation 7463, in Section XXIII', '/report#xvi-9-11-vector-3-the-emergency-that-did-not-end'),
     ('s12-the-ledger-is-already-kept', 'THE LEDGER IS ALREADY KEPT', 'Libre Barcode 39 Text',
      "the report's close, on the author's reading (the barcode scans as B0B.DEV)", '/report#xxiv-endgame'),
 ]

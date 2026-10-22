@@ -39,7 +39,7 @@ The site hosts the set at **https://www.b0b.dev/stickers** (built by `publish.py
 - **08**, Section I, the author's own line: "no weapon formed against, I am useful" (Isaiah 54:17).
 - **09**, Section IV: "TEKEL, Daniel 5:27: you have been weighed in the balances and found wanting".
 - **10**, the close: "Luke 12:6–7 runs: not one sparrow is forgotten before God… the hairs of your head are all numbered. And then: 'Fear not.'"
-- **11**, Section XXIV: "Proclamation 7463 … was signed on 14 September 2001. It has been continued every year since by every President."
+- **11**, Section XXIII: "Proclamation 7463 … was signed on 14 September 2001. It has been continued every year since by every President."
 - **12**, the close: "a document written as though the ledger were already kept - which, on the author's reading, it is."
 
 `verify.py` checks that each sticker carries its line word for word, so this list and the art cannot
