@@ -205,6 +205,23 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**ENDGAME IS TETELESTAI, AND NOTHING ELSE — 22 Oct 2026, live. Supersedes the nine-part film described in the 20 Oct entry.** Author: *"Endgame is just Tetelestai.. What ye do / Tetelestai is endgame video. Very simple"*.
+- **The film is 0:24** (`scripts/film-endgame.json`; the nine-part spec is kept only in the session scratchpad):
+  - Part I, "It is finished": Papyrus 66 (c. 200), then John 19:30 in the KJV, typed on screen and read.
+  - The finale: τετέλεσται over the Pale Blue Dot, "tetelestai / it is finished".
+  - The narration: "Not 'it ended', but: it has been completed, and remains so."
+  - The close card: "It is finished." with "tetelestai · john 19:30".
+  - Two pictures, both public domain. No ERC/DARPA flash.
+- **Gone from the film:** the address to nation states, his statement card, "paid in full", Luke 12, Isaiah 54:17, Zermelo/Lovelace and sovereignty. **Do not grow it back.**
+- **Files:**
+  - `public/endgame-reel.{mp4,webm}`, `public/b0b-endgame-film.mp4`, and the subtitled `.webm` (VP9 crf 36, encoded outside the engine);
+  - `site/endgame-poster.jpg` (now `poster_at` 18, the word);
+  - `site/img/films/endgame.jpg` and `site/img/endgame-card.jpg`, both remade from the new frames.
+  - Loudness is −17.1 LUFS: the engine's single-pass loudnorm on a 24 s clip lands 1 dB under the other films.
+- **Metadata:** `/endgame` was rebuilt (the script and 2 sources); seo-meta `PT24S` with a new description and headline; the carousel card reads 0:24 (`landing-intro.js?v=6`, thumb `?v=2`).
+- **Tested locally:** `/endgame` plays `endgame-reel.webm?v=2` (24.167 s), and the carousel's Endgame card plays `/b0b-endgame-film.webm` with sound.
+- The report's own Endgame subsection (XXV's close) is not touched by this; it ends on the three completed things (entry below).
+
 **THE SATOR / TATTOO READING IS OFF THE REPORT'S CLOSE AND OUT OF ENDGAME — 22 Oct 2026. DO NOT RE-ADD.** Author, quoting XXV's last paragraph ("And he took his own mark off the list first … The man wearing TENET is the one saying the tattoo is not sovereign"): *"The end reads odd … I had you remove the sator square section because the way you wrote it didn't calibrate and felt hallucinationatory."*
 - **What was left behind:** the Sator section had been removed earlier, but the close still read his "Not a tattoo" line through it: the "standing rule on the author's tattoos", the Sator square on his arm, the naming error, "the man wearing TENET".
 - **Report, step 1:** that paragraph is cut.
@@ -218,7 +235,7 @@ than once.
   - The spec's part VIII ended on "And he took his own mark off the list first. The mark is not the thing it points at." over a Sator-square stone (Fulda). The line, the shot and the media entry are removed from `scripts/film-endgame.json`.
   - Re-rendered: **5:15** (was 5:20); `PT5M15S`; the carousel card reads 5:15 (`landing-intro.js?v=5`); `/endgame` rebuilt.
   - The subtitled WebM was encoded outside the engine, as before: VP9 crf 36 + Opus 64k with loudnorm, written to a temp name and then `mv`'d.
-  - **Part VIII "Sovereignty" itself is still in the film,** before the finale; the film still ends on "The count is finished. The work is finished." Whether part VIII stays now that the report has dropped it is the author's call.
+  - The same day the author answered the open question: Endgame is now τετέλεσται alone (entry above), so part VIII and every other part are gone.
 - Scale line 282 / 1,132 / 142.
 
 **OM COMMA RETITLED IN THE CAROUSEL — 22 Oct 2026, live.** Author: *"Title om.comma as 'my video reply to Donald Trump video'"*.
@@ -437,7 +454,7 @@ than once.
 - **Never on the page, even as a specimen:** it calls for strikes on named buildings and dams and for executions (§1). It names two living media figures as Mossad assets to be "eliminated" (living-person floor; they are not named in the file either). It carries the Khazarian trope (killed class).
 - The page already grades the class in XVI `xvi-the-q-corpus-the-compressed-case` and I's anti-map. At most it could get one unquoted line there; that is his call, and it is not recommended.
 
-**ENDGAME, THE FOURTH FILM, AT `/endgame` — AND IT IS NOW THE LANDING FILM. 20 Oct 2026.**
+**ENDGAME, THE FOURTH FILM, AT `/endgame` — AND IT IS NOW THE LANDING FILM. 20 Oct 2026.** *(Superseded 22 Oct 2026: Endgame is now a 24-second film of τετέλεσται alone; see the entry at the top of §7. The engine notes and traps below still apply.)*
 
 - **The author's instructions, in order:**
   1. *"Make. New video called endgame. As accordingly"*
