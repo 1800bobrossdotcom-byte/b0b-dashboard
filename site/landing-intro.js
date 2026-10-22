@@ -29,7 +29,8 @@
   // because the carousel starts muted and the words must be on screen.
   function src(base) { return [[base + '.webm', 'video/webm'], [base + '.mp4', 'video/mp4']]; }
   var FILMS = [
-    { id: 'omcomma', title: 'OM COMMA', len: '7:07', thumb: '/img/films/omcomma.jpg', page: '',
+    // Titled by the author, 22 Oct 2026: "Title om.comma as 'my video reply to Donald Trump video'".
+    { id: 'omcomma', title: 'MY VIDEO REPLY TO DONALD TRUMP VIDEO', len: '7:07', thumb: '/img/films/omcomma.jpg', page: '',
       parts: [src('/omcomma-1'), src('/omcomma-2')] },
     { id: 'briefing', title: 'BRIEFING', len: '3:43', thumb: '/img/films/briefing.jpg', page: '/start#film',
       parts: [src('/b0b-briefing-film')] },
@@ -66,8 +67,9 @@
     '#b0b-landing .bl-card{flex:none;width:168px;scroll-snap-align:start;text-align:left;padding:0;background:#0b0d0e;' +
       'border:1px solid #1d2a2f;color:#b3bab7;text-decoration:none;cursor:pointer;display:block;letter-spacing:0}' +
     '#b0b-landing .bl-card img{display:block;width:100%;height:auto;max-width:none;aspect-ratio:16/9;object-fit:cover;background:#111}' +
-    '#b0b-landing .bl-card .t{display:block;font:600 11px/1.3 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.06em;' +
-      'padding:6px 8px 0;color:#d3d8d5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
+    '#b0b-landing .bl-card .t{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;' +
+      'font:600 11px/1.3 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.06em;min-height:2.6em;' +
+      'padding:6px 8px 0;color:#d3d8d5;overflow:hidden}' +
     '#b0b-landing .bl-card .m{display:block;font:400 10px/1.3 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.08em;' +
       'padding:2px 8px 7px;color:#6b7774}' +
     '#b0b-landing .bl-card[aria-current="true"]{border-color:#00ff41}' +

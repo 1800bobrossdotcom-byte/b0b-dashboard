@@ -205,6 +205,12 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**OM COMMA RETITLED IN THE CAROUSEL — 22 Oct 2026, live.** Author: *"Title om.comma as 'my video reply to Donald Trump video'"*.
+- The card and the bar now read **"MY VIDEO REPLY TO DONALD TRUMP VIDEO"**: his words verbatim, set in capitals like every other card. The bar adds "· 1 / 2".
+- The film's id stays `omcomma` (`data-main`).
+- Card titles now wrap to two lines instead of being cut off, which also fixed "THE EPSTEIN–MAXWEL…".
+- `landing-intro.js?v=4`.
+
 **THE CAROUSEL ALWAYS LOADS — 22 Oct 2026, live.** Author, after the carousel went up: *"Have the homepage be this and always load"*.
 - **The defect, mine:** `b0b-wordmark.js` and `landing-intro.js` were `defer` tags at the END of the 1.66 MB `report.html`, so they ran only after the whole report had downloaded. The bootstrap's 8 s fail-open timer hid the overlay first on a slow phone.
   - **Proven both ways** (CDP throttle: 150 KB/s, 150 ms latency, 390 px phone): the old code went `OPEN unclaimed` → `HIDDEN` at 8.9 s and never played; the new code was claimed at 1.7 s and still playing at 28 s.
