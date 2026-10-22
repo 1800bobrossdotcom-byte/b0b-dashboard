@@ -419,7 +419,7 @@ const PAGES = {
   '/continuity':    'continuity.html', // the second film, on the same player
   '/epstein-maxwell':'epstein-maxwell.html', // the third film
   '/endgame':       'endgame.html',   // the fourth film: the report's close
-  '/map':           'map.html',
+  '/map':           'map-gl.html',
   '/countermeasures':'countermeasures.html',
   '/artifact':      'artifact.html',
   '/spectra':       'spectra.html',
@@ -932,9 +932,10 @@ app.get('*', (req, res) => {
     return res.send(PIXEL.replace(/<script>/g, `<script nonce="${nonce}">`));
   }
 
-  // Has access → serve pages. /map?engine=gl is the MapLibre GL map, previewed
-  // beside the classic page until the author has compared them (22 Oct 2026).
-  const page = (req.path === '/map' && req.query.engine === 'gl') ? 'map-gl.html' : PAGES[req.path];
+  // Has access → serve pages. /map is the MapLibre GL map (the author's call,
+  // 22 Oct 2026); the Leaflet map stays at /map?engine=classic, and a browser
+  // that cannot run the GL map is sent there by the page itself.
+  const page = req.path === '/map' ? ([].concat(req.query.engine).includes('classic') ? 'map.html' : 'map-gl.html') : PAGES[req.path];
   if (page) {
     const file = path.join(PUB, page);
     if (fs.existsSync(file)) {

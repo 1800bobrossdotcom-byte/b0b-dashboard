@@ -31,7 +31,7 @@ const URLS = {
   'continuity.html': '/continuity',
   'epstein-maxwell.html': '/epstein-maxwell',
   'endgame.html': '/endgame',
-  'map.html': '/map',
+  'map-gl.html': '/map',
   'countermeasures.html': '/countermeasures',
   'artifact.html': '/artifact',
   'spectra.html': '/spectra',

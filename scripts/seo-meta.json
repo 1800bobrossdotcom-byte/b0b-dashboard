@@ -102,7 +102,7 @@
       ]
     },
     {
-      "file": "map.html",
+      "file": "map-gl.html",
       "title": "b0b.dev - OSINT map: 1,166 sites, every connection tiered",
       "metaDescription": "interactive OSINT map of 1,166 sites: surveillance infrastructure, black sites, the Epstein-Maxwell network, ALPR cameras, live aircraft and quake feeds.",
       "ogDescription": "1,166 mapped locations: surveillance infrastructure, black sites, the Epstein-Maxwell network, Flock ALPR cameras — with live ADS-B aircraft, AIS vessels and USGS quakes. signal, plotted.",

@@ -1,5 +1,5 @@
 // b0b.dev OSINT map - the GL engine. MapLibre GL JS 6.13.0 (BSD-3-Clause),
-// served from /vendor. Previewed at /map?engine=gl beside the classic map.
+// served from /vendor. It is the map at /map; the Leaflet map stays at /map?engine=classic.
 //
 // This file lives in public/ (Vercel's static output), NOT site/: Vercel bundles
 // site/** into the serverless function and transpiles an ES module there to
@@ -278,6 +278,9 @@ try {
 } catch (e) {
   console.error('[map-gl] could not start', e);
   $('#glFail').hidden = false;
+  // No WebGL: the Leaflet map draws the same data. Keep the reader's parameters.
+  const q = new URLSearchParams(location.search); q.delete('engine'); q.set('engine', 'classic');
+  location.replace('/map?' + q.toString() + location.hash);
 }
 W.__b0bGL = map;   // for inspection from the console and tests
 
@@ -1056,7 +1059,6 @@ function ctxCard(f) {
 // ------------------------------------------------------------------ links
 function viewParams(markerName) {
   const p = new URLSearchParams();
-  p.set('engine', 'gl');
   const q = $('#searchInput').value.trim();
   if (q) p.set('search', q);
   if (S.sections.size !== SECTIONS.length) p.set('section', Array.from(S.sections).join(','));

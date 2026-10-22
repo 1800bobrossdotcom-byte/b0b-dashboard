@@ -142,8 +142,8 @@ Learn these; they are invoked by name on the page.
 10. Gated curl on actual content — **four consecutive clean reads**.
 
 **Traps that have bitten:**
-- **The meta blocks in `report.html` and `map.html` are GENERATED from
-  `scripts/seo-meta.json`.** Editing the HTML directly looks like it worked and does not
+- **The meta blocks in `report.html` and `map-gl.html` (the page `/map` serves since 22 Oct 2026)
+  are GENERATED from `scripts/seo-meta.json`.** Editing the HTML directly looks like it worked and does not
   survive the next build. Only the live check catches it.
 - **The gate intercepts static assets too.** Un-cookied fetches of `/signal-bar.js` return
   the 8,607-byte pixel gate as `text/html`. Gate cookie:
@@ -229,7 +229,15 @@ than once.
 - **Fixed on the way:** XIX's 9/11 pointer said the probe "points into … IV (blowback and the Saudi suit) … X (STELLAR WIND, PATRIOT, TIA), XIII (the anthrax naming error) and XXIII (the AUMF under the orders)". It was written while the topology lived in XVI, and it is false now: the probe links only into II and IX, and the AUMF, STELLAR WIND, PATRIOT, PNAC and anthrax material is inside the probe itself. It now says that.
 - **Flagged, not edited:** the classic map has a filter checkbox "XXII - Spiritual Exit" that no marker uses (the report's XXII is Connective Tissue). It does nothing.
 
-**MAP UPGRADE — STEPS 1–3 BUILT, 22 OCT 2026. Classic `/map` fixed (live); the GL engine is a PREVIEW at `/map?engine=gl` (noindex, canonical `/map`), not the default.** The author sent a screenshot of "OSINT GLOBE · Middle East dashboard" (MaximVL, geobrowser.io) with *"How do we upgrade map experience"*, was given a three-step plan, and answered *"And yes to map gameplan"*.
+**THE GL ENGINE IS THE MAP — 22 Oct 2026, live.** Author: *"Yes new engine is our default map"*.
+- **`/map` serves `site/map-gl.html`.** The Leaflet page stays at **`/map?engine=classic`** (`noindex`, canonical `/map`, title "OSINT map (classic)"); `?engine=gl` still works. `PAGES['/map']` is `map-gl.html`, so crawlers get it too.
+- **`map.html` is still the source of the data**: edit the arrays there, then run `build-map-gl.py` (§4 7b fails otherwise). `/api` map export, KML and map-list still parse `map.html`.
+- **The SEO block moved:** `seo-meta.json`'s map entry and `apply-seo-meta.js` now target `map-gl.html`. `check-consistency.py` reads both map pages as count surfaces (the selftest catches 6) and hashes both.
+- **Links:** "COPY A LINK" no longer adds `engine=gl`; the GL tools list and its no-WebGL panel link `/map?engine=classic`; the classic page links back ("THE CURRENT MAP").
+- **A browser that cannot run it is handed over, not stranded:** MapLibre 6 throws "WebGL2 is required" from its constructor, and the catch now `location.replace`s to `/map?engine=classic` with the reader's parameters and hash (any `engine` value dropped first; the server also treats a repeated `engine` containing `classic` as classic). A browser without ES modules is caught by a bare inline script in the head (bare, because only bare `<script>` tags get the CSP nonce; never write a literal script tag inside an HTML comment, since the nonce stamping and the inline-JS check both read it as a real one).
+- **Tested** (scratchpad `mapdefault.js`, `nowebgl2.js`): `/map` starts GL with 1,166; a copied link carries no `engine`; `?search=epstein island` filters to 4; the classic page loads and links back; with WebGL disabled, `/map?search=pentagon&engine=gl#x` lands on `…?search=pentagon&engine=classic#x` with the search applied. security 33/33, seo 57/57. *Two misses in between were the dev server's 60/min limiter after back-to-back runs; a fresh port passed.*
+
+**MAP UPGRADE — STEPS 1–3 BUILT, 22 OCT 2026. Classic `/map` fixed (live); the GL engine was a preview at `/map?engine=gl` until the entry above.** The author sent a screenshot of "OSINT GLOBE · Middle East dashboard" (MaximVL, geobrowser.io) with *"How do we upgrade map experience"*, was given a three-step plan, and answered *"And yes to map gameplan"*.
 - **What we measured first (live, Playwright):** connection lines OFF on first load; the stats box over the zoom button and search; a cramped phone header; 1,162 HTML `divIcon` markers with glow (~41 fps panning, no room for dense layers). The gap was rendering, organisation and the first view, not data.
 - **Step 1, classic map (`7894473`):**
   - first view shows T3+ lines (the tier select starts at 3, connections checked);
@@ -262,7 +270,7 @@ than once.
   - *Trap:* a fast local load never shows this. **Test integrity code with the deferred scripts delayed.**
 - **Spider fix (`scripts/spider/spider.py`):** robots.txt is now matched per RFC 9309 (longest rule wins, allow wins a tie). `urllib.robotparser` takes the first rule in file order, so "Allow: /" above "Disallow: /wwwdata" let the research agent send one request to eogdata.mines.edu's disallowed `/wwwdata` (it redirected to a login; nothing retrieved). Proven both ways on 10 cases; crawl-delay still comes from the stdlib.
 - **Still his calls:**
-  - make GL the default `/map` (the classic stays at a link either way);
+  - ~~make GL the default `/map`~~ done (entry above);
   - a 24h/72h playback (a time control; not the period bar he removed on 19 Sept);
   - the glow look against principle 4;
   - grouping vs the held `/lab` split.

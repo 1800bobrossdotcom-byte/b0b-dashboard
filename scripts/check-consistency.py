@@ -84,6 +84,8 @@ def surfaces():
     out.append(('report.html scale line', scale.group(0) if scale else ''))
     m = read(os.path.join(SITE, 'map.html'))
     out.append(('map.html (outside the data)', m[:m.index('var locations = [')]))
+    g = read(os.path.join(SITE, 'map-gl.html'))   # /map since 22 Oct 2026; carries the map's metadata
+    out.append(('map-gl.html (outside the data)', g[:g.index('<!-- map-data:begin')] + g[g.index('<!-- map-timeline:end -->'):]))
     for name in ('start.html', 'retractions.html'):
         p = os.path.join(SITE, name)
         if os.path.exists(p):
@@ -146,7 +148,7 @@ def main():
         'note': 'The one record of the site\'s size and state. Every count on every page is checked against it before a deploy.',
         **t,
         'corrections_listed': len(json.load(open(retr, encoding='utf-8'))['entries']) if os.path.exists(retr) else None,
-        'sha256': {f: sha(os.path.join(SITE, f)) for f in ('report.html', 'map.html', 'start.html', 'retractions.html')},
+        'sha256': {f: sha(os.path.join(SITE, f)) for f in ('report.html', 'map-gl.html', 'map.html', 'start.html', 'retractions.html')},
         'data': ['/data/map-data.json', '/data/sources-ledger.json', '/data/retractions.json'],
     }
     with open(os.path.join(SITE, 'data', 'build.json'), 'w', encoding='utf-8') as f:

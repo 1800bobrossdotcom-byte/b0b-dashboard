@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Copy the map's data into the GL map page.
 
-site/map-gl.html (the MapLibre GL engine, previewed at /map?engine=gl) carries
+site/map-gl.html (the MapLibre GL engine, served at /map since 22 Oct 2026) carries
 the same data as site/map.html: the marker, line, tunnel and animal-network
 arrays, the type colours, the embedded First Peoples territories and the
 correlation timeline, copied VERBATIM between marker comments. Every tool that
