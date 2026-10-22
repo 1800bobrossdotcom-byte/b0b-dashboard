@@ -1,0 +1,727 @@
+{
+ "AWS Berwick": {
+  "lat": 41.05472,
+  "lng": -76.23361,
+  "named_in": "address (no street match)",
+  "place": "Berwick, Pennsylvania",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Berwick%2C_Pennsylvania"
+ },
+ "AWS New Albany": {
+  "lat": 40.08278,
+  "lng": -82.80889,
+  "named_in": "name, with Ohio from the sources it cites",
+  "place": "New Albany, Ohio",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/New_Albany%2C_Ohio"
+ },
+ "Alibaba Zhangbei": {
+  "lat": 41.16667,
+  "lng": 114.75,
+  "named_in": "address",
+  "place": "Zhangbei County",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Zhangbei_County"
+ },
+ "Amazon Madison Mega Site": {
+  "lat": 32.61194,
+  "lng": -90.02333,
+  "named_in": "address",
+  "place": "Canton, Mississippi",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Canton%2C_Mississippi"
+ },
+ "Amazon Ridgeland": {
+  "lat": 32.39954,
+  "lng": -90.12049,
+  "place": "1626 E COUNTY LINE RD, RIDGELAND, MS, 39157",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "Anthropic Barber Lake": {
+  "lat": 32.39611,
+  "lng": -100.86222,
+  "named_in": "Cipher Mining's SEC 8-K exhibit (Nov 2025)",
+  "place": "Colorado City, Texas",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Colorado_City%2C_Texas"
+ },
+ "Anthropic Lake Mariner": {
+  "lat": 43.34894,
+  "lng": -78.60336,
+  "place": "7725 LAKE RD, BARKER, NY, 14012",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "Anthropic-Amazon New Carlisle": {
+  "lat": 41.69377,
+  "lng": -86.46052,
+  "place": "55001 LARRISON DR, NEW CARLISLE, IN, 46552",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "Bridge Data Centres MY06": {
+  "lat": 1.66667,
+  "lng": 103.6,
+  "named_in": "address (Sedenak Tech Park, Kulai district)",
+  "place": "Kulai",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Kulai"
+ },
+ "Colossus 1": {
+  "lat": 35.14611,
+  "lng": -90.05194,
+  "named_in": "address (no street match)",
+  "place": "Memphis, Tennessee",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Memphis%2C_Tennessee"
+ },
+ "Colossus 2": {
+  "lat": 34.99949,
+  "lng": -90.04298,
+  "place": "5420 TULANE RD, MEMPHIS, TN, 38109",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "Core42 Lake Mariner": {
+  "lat": 43.34894,
+  "lng": -78.60336,
+  "place": "7725 LAKE RD, BARKER, NY, 14012",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "CoreWeave Chester VA": {
+  "lat": 37.36175,
+  "lng": -77.32526,
+  "place": "1401 MEADOWVILLE TECHNOLOGY PKWY, CHESTER, VA, 23836",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "CoreWeave Dalton 1 & 2": {
+  "lat": 34.71351,
+  "lng": -84.95218,
+  "place": "2205 INDUSTRIAL SOUTH RD, DALTON, GA, 30721",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "CoreWeave Denton TX": {
+  "lat": 33.21639,
+  "lng": -97.12917,
+  "named_in": "address (no street match)",
+  "place": "Denton, Texas",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Denton%2C_Texas"
+ },
+ "CoreWeave Ellendale ND": {
+  "lat": 46.00614,
+  "lng": -98.56874,
+  "place": "9685 87TH AVE SE, ELLENDALE, ND, 58436",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "CoreWeave Lancaster Greenfield site": {
+  "lat": 40.04869,
+  "lng": -76.25609,
+  "place": "216 GREENFIELD RD, LANCASTER, PA, 17601",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "CoreWeave Marble NC": {
+  "lat": 35.18499,
+  "lng": -83.91409,
+  "place": "155 PALMER LN, MARBLE, NC, 28905",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "CoreWeave Muskogee OK": {
+  "lat": 35.74333,
+  "lng": -95.35667,
+  "named_in": "address (no street match)",
+  "place": "Muskogee, Oklahoma",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Muskogee%2C_Oklahoma"
+ },
+ "CoreWeave Norway": {
+  "lat": 58.29147,
+  "lng": 7.77846,
+  "named_in": "address",
+  "place": "Øvrebø",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/%C3%98vreb%C3%B8"
+ },
+ "Coreweave Helios": {
+  "lat": 33.78064,
+  "lng": -100.8671,
+  "place": "984 CO RD 112, AFTON, TX, 79220",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "Crusoe Abilene Expansion": {
+  "lat": 32.45,
+  "lng": -99.75,
+  "named_in": "address (no street match)",
+  "place": "Abilene, Texas",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Abilene%2C_Texas"
+ },
+ "DayOne Kempas": {
+  "lat": 1.45556,
+  "lng": 103.76111,
+  "named_in": "address",
+  "place": "Johor Bahru",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Johor_Bahru"
+ },
+ "DayOne Nusajaya": {
+  "lat": 1.42222,
+  "lng": 103.65,
+  "named_in": "name (Nusajaya is its former name)",
+  "place": "Iskandar Puteri",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Iskandar_Puteri"
+ },
+ "EcoDataCenter 2": {
+  "lat": 60.48556,
+  "lng": 15.43639,
+  "named_in": "address",
+  "place": "Borlänge",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Borl%C3%A4nge"
+ },
+ "Envision Galaxy Ulanqab": {
+  "lat": 40.994,
+  "lng": 113.132,
+  "named_in": "name",
+  "place": "Ulanqab",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Ulanqab"
+ },
+ "Goodnight": {
+  "lat": 35.1075,
+  "lng": -101.36278,
+  "named_in": "address (no street match)",
+  "place": "Claude, Texas",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Claude%2C_Texas"
+ },
+ "Google Arcola": {
+  "lat": 39.00611,
+  "lng": -77.42861,
+  "named_in": "address (no street match)",
+  "place": "Sterling, Virginia",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Sterling%2C_Virginia"
+ },
+ "Google Bristow": {
+  "lat": 38.78254,
+  "lng": -77.57972,
+  "place": "13001 ROLLINS FORD RD, BRISTOW, VA, 20136",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "Google Cedar Rapids": {
+  "lat": 41.92195,
+  "lng": -91.71563,
+  "place": "5800 EDGEWOOD RD SW, CEDAR RAPIDS, IA, 52404",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "Google Columbus": {
+  "lat": 39.96222,
+  "lng": -83.00056,
+  "named_in": "address (no street match)",
+  "place": "Columbus, Ohio",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Columbus%2C_Ohio"
+ },
+ "Google Council Bluffs (East)": {
+  "lat": 41.16742,
+  "lng": -95.79311,
+  "place": "10410 BUNGE AVE, COUNCIL BLUFFS, IA, 51503",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "Google Fort Wayne": {
+  "lat": 41.03117,
+  "lng": -85.05777,
+  "place": "6015 ADAMS CENTER RD, FORT WAYNE, IN, 46816",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "Google Kansas City East": {
+  "lat": 39.09972,
+  "lng": -94.57833,
+  "named_in": "name",
+  "place": "Kansas City, Missouri",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Kansas_City%2C_Missouri"
+ },
+ "Google Lancaster": {
+  "lat": 39.72703,
+  "lng": -82.68311,
+  "place": "105 WHILEY RD, LANCASTER, OH, 43130",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "Google Lincoln": {
+  "lat": 40.81028,
+  "lng": -96.67472,
+  "named_in": "address (no street match)",
+  "place": "Lincoln, Nebraska",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Lincoln%2C_Nebraska"
+ },
+ "Google Mesa": {
+  "lat": 33.42222,
+  "lng": -111.82278,
+  "named_in": "name",
+  "place": "Mesa, Arizona",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Mesa%2C_Arizona"
+ },
+ "Google Midlothian": {
+  "lat": 32.50694,
+  "lng": -97.00694,
+  "named_in": "address (no street match)",
+  "place": "Midlothian, Texas",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Midlothian%2C_Texas"
+ },
+ "Google New Albany": {
+  "lat": 40.08278,
+  "lng": -82.80889,
+  "named_in": "address (no street match)",
+  "place": "New Albany, Ohio",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/New_Albany%2C_Ohio"
+ },
+ "Google Omaha": {
+  "lat": 41.33573,
+  "lng": -96.08847,
+  "place": "11110 STATE ST, OMAHA, NE, 68142",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "Google Papillion": {
+  "lat": 41.157,
+  "lng": -96.043,
+  "named_in": "address",
+  "place": "Papillion, Nebraska",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Papillion%2C_Nebraska"
+ },
+ "Google Pryor (North)": {
+  "lat": 36.29167,
+  "lng": -95.31806,
+  "named_in": "address (no street match)",
+  "place": "Pryor, Oklahoma",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Pryor%2C_Oklahoma"
+ },
+ "Google Red Oak": {
+  "lat": 32.52998,
+  "lng": -96.79979,
+  "place": "330 AUSTIN BLVD, RED OAK, TX, 75154",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "Google Storey County": {
+  "lat": 39.45,
+  "lng": -119.53,
+  "named_in": "name",
+  "place": "Storey County, Nevada",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Storey_County%2C_Nevada"
+ },
+ "Google The Dalles": {
+  "lat": 45.60167,
+  "lng": -121.18472,
+  "named_in": "address (no street match)",
+  "place": "The Dalles, Oregon",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/The_Dalles%2C_Oregon"
+ },
+ "Google Waltham Cross": {
+  "lat": 51.70222,
+  "lng": -0.03472,
+  "named_in": "address",
+  "place": "Cheshunt",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Cheshunt"
+ },
+ "Huawei Horinger": {
+  "lat": 40.379,
+  "lng": 111.828,
+  "named_in": "address",
+  "place": "Horinger County",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Horinger_County"
+ },
+ "Huawei Wuhu": {
+  "lat": 31.3526,
+  "lng": 118.4331,
+  "named_in": "address",
+  "place": "Wuhu",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Wuhu"
+ },
+ "Meta Aiken": {
+  "lat": 33.73972,
+  "lng": -81.84028,
+  "named_in": "address (no street match)",
+  "place": "Trenton, South Carolina",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Trenton%2C_South_Carolina"
+ },
+ "Meta Bowling Green": {
+  "lat": 41.45827,
+  "lng": -83.63622,
+  "place": "12356 MIDDLETON PIKE, BOWLING GREEN, OH, 43402",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "Meta Cheyenne": {
+  "lat": 41.12111,
+  "lng": -104.78972,
+  "named_in": "address",
+  "place": "Cheyenne, Wyoming",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Cheyenne%2C_Wyoming"
+ },
+ "Meta Eagle Mountain": {
+  "lat": 40.31444,
+  "lng": -112.04306,
+  "named_in": "address (no street match)",
+  "place": "Eagle Mountain, Utah",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Eagle_Mountain%2C_Utah"
+ },
+ "Meta Gallatin": {
+  "lat": 36.38838,
+  "lng": -86.44666,
+  "named_in": "address (no street match)",
+  "place": "Gallatin, Tennessee",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Gallatin%2C_Tennessee"
+ },
+ "Meta Huntsville": {
+  "lat": 34.89806,
+  "lng": -86.73361,
+  "named_in": "address (no street match)",
+  "place": "Toney, Alabama",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Toney%2C_Alabama"
+ },
+ "Meta Hyperion": {
+  "lat": 32.46778,
+  "lng": -91.62667,
+  "named_in": "address",
+  "place": "Holly Ridge, Louisiana",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Holly_Ridge%2C_Louisiana"
+ },
+ "Meta Jeffersonville": {
+  "lat": 38.27912,
+  "lng": -85.7391,
+  "place": "500 E 8TH ST, JEFFERSONVILLE, IN, 47130",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "Meta Kuna": {
+  "lat": 43.45923,
+  "lng": -116.42108,
+  "place": "601 KUNA MORA RD, KUNA, ID, 83634",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "Meta Los Lunas": {
+  "lat": 34.80944,
+  "lng": -106.73528,
+  "named_in": "address (no street match)",
+  "place": "Los Lunas, New Mexico",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Los_Lunas%2C_New_Mexico"
+ },
+ "Meta Montgomery": {
+  "lat": 32.265,
+  "lng": -86.36351,
+  "place": "42 COUNTY CT, MONTGOMERY, AL, 36105",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "Meta Prometheus": {
+  "lat": 40.08278,
+  "lng": -82.80889,
+  "named_in": "address (no street match)",
+  "place": "New Albany, Ohio",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/New_Albany%2C_Ohio"
+ },
+ "Meta Rosemount": {
+  "lat": 44.73882,
+  "lng": -93.057,
+  "place": "2396 145TH ST E, ROSEMOUNT, MN, 55068",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "Meta Sarpy": {
+  "lat": 41.10357,
+  "lng": -96.14791,
+  "place": "14998 FAIRVIEW RD, SPRINGFIELD, NE, 68059",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "Meta Temple": {
+  "lat": 31.09667,
+  "lng": -97.34111,
+  "named_in": "address (no street match)",
+  "place": "Temple, Texas",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Temple%2C_Texas"
+ },
+ "Meta-QTS Hillsboro 2": {
+  "lat": 45.55695,
+  "lng": -122.93194,
+  "place": "4755 NE HUFFMAN ST, HILLSBORO, OR, 97124",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "Microsoft Fairwater Atlanta": {
+  "lat": 33.44534,
+  "lng": -84.52545,
+  "place": "1435 STATE RTE 54, FAYETTEVILLE, GA, 30214",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "Microsoft Fairwater Wisconsin": {
+  "lat": 42.67489,
+  "lng": -87.89485,
+  "place": "4800 90TH ST, MOUNT PLEASANT, WI, 53403",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "Microsoft Goodyear": {
+  "lat": 33.25403,
+  "lng": -112.36647,
+  "named_in": "address (no street match)",
+  "place": "Goodyear, Arizona",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Goodyear%2C_Arizona"
+ },
+ "Microsoft Narvik Norway": {
+  "lat": 68.42056,
+  "lng": 17.56,
+  "named_in": "name",
+  "place": "Narvik",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Narvik"
+ },
+ "Microsoft Project Osmium": {
+  "lat": 41.49306,
+  "lng": -93.74278,
+  "named_in": "address (no street match)",
+  "place": "Cumming, Iowa",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Cumming%2C_Iowa"
+ },
+ "Microsoft SAT14": {
+  "lat": 29.47318,
+  "lng": -98.68151,
+  "place": "3545 WISEMAN BLVD, SAN ANTONIO, TX, 78251",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "Microsoft SAT40": {
+  "lat": 29.425,
+  "lng": -98.4939,
+  "named_in": "address (no street match)",
+  "place": "San Antonio, Texas",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/San_Antonio%2C_Texas"
+ },
+ "Microsoft-Nebius New Jersey": {
+  "lat": 39.42819,
+  "lng": -75.01846,
+  "place": "3963 S LINCOLN AVE, VINELAND, NJ, 08361",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "Nebius Mantsala": {
+  "lat": 60.63611,
+  "lng": 25.31944,
+  "named_in": "name (the English article carries no coordinates)",
+  "place": "fi:Mäntsälä",
+  "precision": "locality",
+  "source": "https://fi.wikipedia.org/wiki/M%C3%A4nts%C3%A4l%C3%A4"
+ },
+ "Nscale Keflavik": {
+  "lat": 64.01667,
+  "lng": -22.56667,
+  "named_in": "name (the Reykjanesbær article carries no coordinates)",
+  "place": "Keflavík",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Keflav%C3%ADk"
+ },
+ "OpenAI Stargate Abilene": {
+  "lat": 32.45,
+  "lng": -99.75,
+  "named_in": "address (no street match)",
+  "place": "Abilene, Texas",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Abilene%2C_Texas"
+ },
+ "OpenAI Stargate Lordstown": {
+  "lat": 41.14372,
+  "lng": -80.88329,
+  "place": "2300 HALLOCK YOUNG RD, WARREN, OH, 44481",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "OpenAI Stargate Michigan": {
+  "lat": 42.11667,
+  "lng": -83.81667,
+  "named_in": "Related Digital's site page",
+  "place": "Saline Township, Washtenaw County, Michigan",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Saline_Township%2C_Washtenaw_County%2C_Michigan"
+ },
+ "OpenAI Stargate Milam": {
+  "lat": 30.79,
+  "lng": -96.98,
+  "named_in": "name",
+  "place": "Milam County, Texas",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Milam_County%2C_Texas"
+ },
+ "OpenAI Stargate New Mexico": {
+  "lat": 32.31222,
+  "lng": -106.77833,
+  "named_in": "the Project Jupiter site",
+  "place": "Doña Ana County, New Mexico",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Do%C3%B1a_Ana_County%2C_New_Mexico"
+ },
+ "OpenAI Stargate Shackelford": {
+  "lat": 32.45,
+  "lng": -99.75,
+  "named_in": "address (no street match)",
+  "place": "Abilene, Texas",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Abilene%2C_Texas"
+ },
+ "OpenAI Stargate UAE": {
+  "lat": 23.65,
+  "lng": 53.7,
+  "named_in": "address",
+  "place": "Al Dhafra Region",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Al_Dhafra_Region"
+ },
+ "OpenAI Stargate Wisconsin": {
+  "lat": 43.39333,
+  "lng": -87.88111,
+  "named_in": "the operator's location page URL",
+  "place": "Port Washington, Wisconsin",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Port_Washington%2C_Wisconsin"
+ },
+ "Oracle Batam": {
+  "lat": 1.13,
+  "lng": 104.05306,
+  "named_in": "name",
+  "place": "Batam",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Batam"
+ },
+ "QTS Cedar Rapids": {
+  "lat": 41.90559,
+  "lng": -91.75108,
+  "place": "6200 76TH AVE SW, FAIRFAX, IA, 52228",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "QTS Eagle Mountain": {
+  "lat": 40.31444,
+  "lng": -112.04306,
+  "named_in": "address (no street match)",
+  "place": "Eagle Mountain, Utah",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Eagle_Mountain%2C_Utah"
+ },
+ "QTS Richmond 1": {
+  "lat": 37.52361,
+  "lng": -77.31583,
+  "named_in": "address (no street match)",
+  "place": "Sandston, Virginia",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Sandston%2C_Virginia"
+ },
+ "QTS Richmond 2": {
+  "lat": 37.52361,
+  "lng": -77.31583,
+  "named_in": "address (no street match)",
+  "place": "Sandston, Virginia",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Sandston%2C_Virginia"
+ },
+ "QTS Richmond 3": {
+  "lat": 37.52361,
+  "lng": -77.31583,
+  "named_in": "address (no street match)",
+  "place": "Sandston, Virginia",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Sandston%2C_Virginia"
+ },
+ "STACK Infrastructure NVA02": {
+  "lat": 38.74982,
+  "lng": -77.53585,
+  "place": "9590 HORNBAKER RD, MANASSAS, VA, 20109",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "Southgate Melbourne": {
+  "lat": -37.81417,
+  "lng": 144.96306,
+  "named_in": "name",
+  "place": "Melbourne",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Melbourne"
+ },
+ "Start Campus Sines Data Campus": {
+  "lat": 37.95472,
+  "lng": -8.86444,
+  "named_in": "address",
+  "place": "Sines",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Sines"
+ },
+ "Stream Phoenix": {
+  "lat": 33.47928,
+  "lng": -112.35933,
+  "place": "2950 LITCHFIELD RD BYP, GOODYEAR, AZ, 85395",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "VNET Bayin Ulanqab": {
+  "lat": 40.994,
+  "lng": 113.132,
+  "named_in": "address",
+  "place": "Ulanqab",
+  "precision": "locality",
+  "source": "https://en.wikipedia.org/wiki/Ulanqab"
+ },
+ "Vantage TX1": {
+  "lat": 29.41668,
+  "lng": -98.78856,
+  "place": "14720 OMICRON DR, SAN ANTONIO, TX, 78245",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ },
+ "xAI QTS Atlanta": {
+  "lat": 33.77566,
+  "lng": -84.42258,
+  "place": "1025 JEFFERSON ST NW, ATLANTA, GA, 30318",
+  "precision": "address",
+  "source": "US Census Bureau geocoder"
+ }
+}

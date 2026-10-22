@@ -27,6 +27,16 @@ mlgl.setWorkerUrl('/vendor/maplibre-gl-6.13.0/maplibre-gl-worker.js');
 
 const W = window;
 const $ = (s, r = document) => r.querySelector(s);
+
+// /map is the research map. /lab is the same engine plus the laboratory: the
+// deep routes drawn from private maps with no document behind them (purple,
+// tier 0-1), the tone instruments, the site's colour reading and the
+// countermeasures drawer. Outside audit #3's split, made on the author's word
+// (22 Oct 2026): nothing on /map sits beside the evidence without being evidence
+// or labelled context.
+const LAB = /^\/lab\/?$/.test(location.pathname);
+const isLabRoute = (t) => (t.color || '').toLowerCase() === '#cc00ff' && (t.tier == null || t.tier <= 1);
+if (LAB) document.documentElement.classList.add('mg-lab');
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const fmt = (n) => Number(n).toLocaleString('en-US');
@@ -69,7 +79,11 @@ const LINES = [];
 (W.connectionLines || []).forEach((c) => LINES.push({ kind: 'connection', path: [c[0], c[1]], color: c[2], label: c[3], tier: c.length > 4 ? c[4] : null }));
 (W.animalNetPaths || []).forEach((a) => LINES.push({ kind: 'animal-network', path: a.path, color: a.color || '#d500f9', label: a.label, tier: a.tier == null ? null : a.tier }));
 const NCONN = LINES.length;
-(W.tunnelPaths || []).forEach((t) => LINES.push({ kind: 'tunnel', path: t.path, color: t.color || '#ff6600', label: t.label, tier: t.tier == null ? null : t.tier }));
+(W.tunnelPaths || []).forEach((t) => {
+  const deep = isLabRoute(t);
+  if (deep && !LAB) return;          // the research map does not carry them
+  LINES.push({ kind: deep ? 'deep' : 'tunnel', path: t.path, color: t.color || '#ff6600', label: t.label, tier: t.tier == null ? null : t.tier });
+});
 LINES.forEach((l, i) => { l.i = i; l.t = l.tier == null ? 0 : l.tier; });
 
 // Which site(s) each line end belongs to: the nearest within 0.02 degrees;
@@ -103,6 +117,7 @@ function lngLatPath(path) {
   return out;
 }
 const LINE_STYLE = (l) => {
+  if (l.kind === 'deep') return { w: 1.8, o: 0.55 };
   if (l.kind === 'tunnel') return l.t <= 1 ? { w: 2.2, o: 0.45 } : { w: 2.6, o: 0.7 };
   if (l.tier == null) return { w: 1.1, o: 0.5 };
   return [{ w: 1.1, o: 0.45 }, { w: 1.1, o: 0.45 }, { w: 1.3, o: 0.6 }, { w: 1.7, o: 0.8 }, { w: 2.2, o: 0.9 }, { w: 2.6, o: 0.95 }][l.t];
@@ -113,7 +128,8 @@ function lineFeature(l) {
 }
 const FC = (features) => ({ type: 'FeatureCollection', features });
 const SITES_FC = FC(SITES.map((s) => ({ type: 'Feature', id: s.i, properties: { i: s.i, c: s.color }, geometry: { type: 'Point', coordinates: [s.lng, s.lat] } })));
-const CONN_FC = FC(LINES.filter((l) => l.kind !== 'tunnel').map(lineFeature));
+const CONN_FC = FC(LINES.filter((l) => l.kind === 'connection' || l.kind === 'animal-network').map(lineFeature));
+const DEEP_FC = FC(LINES.filter((l) => l.kind === 'deep').map(lineFeature));
 const TUN_FC = FC(LINES.filter((l) => l.kind === 'tunnel').map(lineFeature));
 
 // ------------------------------------------------------------------ state
@@ -127,7 +143,7 @@ SITES.forEach((s) => { if (TYPES.indexOf(s.type) === -1) TYPES.push(s.type); });
 const S = {
   sections: new Set(SECTIONS), types: new Set(TYPES), query: [],
   mode: null,                         // { label, set:Set } from pattern / proximity / links
-  tierMin: 3, conn: true, tunnels: false,
+  tierMin: 3, conn: true, tunnels: false, deep: true,
   proj: 'globe', relief: false, base: 'earth',
   sel: null,                          // { kind:'site'|'line'|'feature', ... }
   visible: SITES.map(() => true), shown: TOTAL,
@@ -190,6 +206,7 @@ function raster(tiles, attribution, maxzoom) { return { type: 'raster', tiles, t
 
 const LINE_LAYERS = ['ln-dot', 'ln-dash', 'ln-solid'];
 const TUN_LAYERS = ['tn-dot', 'tn-dash'];
+const DEEP_LAYERS = LAB ? ['dp-line'] : [];
 
 function style() {
   const vis = (on) => ({ visibility: on ? 'visible' : 'none' });
@@ -215,6 +232,7 @@ function style() {
       sites: { type: 'geojson', data: SITES_FC },
       conn: { type: 'geojson', data: CONN_FC },
       tun: { type: 'geojson', data: TUN_FC },
+      ...(LAB ? { deep: { type: 'geojson', data: DEEP_FC } } : {}),
     },
     layers: [
       { id: 'bg', type: 'background', paint: { 'background-color': '#05070a' } },
@@ -229,6 +247,7 @@ function style() {
       { id: 'ctx-top', type: 'background', layout: vis(false), paint: { 'background-opacity': 0 } },
       lineLayer('tn-dot', 'tun', ['all', ['<=', ['get', 't'], 1], ['>=', ['get', 't'], 3]], [0.1, 3], 'round'),
       lineLayer('tn-dash', 'tun', ['all', ['>=', ['get', 't'], 2], ['>=', ['get', 't'], 3]], [3, 2], 'butt'),
+      ...(LAB ? [lineLayer('dp-line', 'deep', ['has', 't'], [1.5, 2.5], 'butt')] : []),
       lineLayer('ln-dot', 'conn', ['all', ['<=', ['get', 't'], 1], ['>=', ['get', 't'], 3]], [0.1, 2.6], 'round'),
       lineLayer('ln-dash', 'conn', ['all', ['==', ['get', 't'], 2], ['>=', ['get', 't'], 3]], [3, 2.2], 'butt'),
       lineLayer('ln-solid', 'conn', ['>=', ['get', 't'], 3], [1, 0], 'butt'),
@@ -324,6 +343,7 @@ function tierFilters() {
   map.setFilter('tn-dash', ['all', ['>=', ['get', 't'], 2], min]);
   LINE_LAYERS.forEach((id) => map.setLayoutProperty(id, 'visibility', S.conn ? 'visible' : 'none'));
   TUN_LAYERS.forEach((id) => map.setLayoutProperty(id, 'visibility', S.tunnels ? 'visible' : 'none'));
+  DEEP_LAYERS.forEach((id) => map.setLayoutProperty(id, 'visibility', S.deep ? 'visible' : 'none'));   // not tier-filtered: every one is tier 0-1
   renderTierUI();
   renderStats();
 }
@@ -331,6 +351,7 @@ function tierFilters() {
 function linesShown() {
   let n = 0;
   for (const l of LINES) {
+    if (l.kind === 'deep') { if (S.deep) n++; continue; }
     if (l.t < S.tierMin) continue;
     if (l.kind === 'tunnel' ? S.tunnels : S.conn) n++;
   }
@@ -455,7 +476,7 @@ function applyFocus() {
   const op = has ? ['case', ['in', ['get', 'i'], ids], 1, ['*', ['get', 'o'], 0.22]] : ['get', 'o'];
   const lw = ['interpolate', ['linear'], ['zoom'], 0, ['*', ['get', 'w'], 0.75], 5, ['get', 'w'], 10, ['*', ['get', 'w'], 1.6]];
   const wd = has ? ['case', ['in', ['get', 'i'], ids], ['*', lw, 1.9], lw] : lw;
-  LINE_LAYERS.concat(TUN_LAYERS).forEach((id) => { map.setPaintProperty(id, 'line-opacity', op); map.setPaintProperty(id, 'line-width', wd); });
+  LINE_LAYERS.concat(TUN_LAYERS, DEEP_LAYERS).forEach((id) => { map.setPaintProperty(id, 'line-opacity', op); map.setPaintProperty(id, 'line-width', wd); });
 }
 
 function siteLinesSorted(i) {
@@ -499,8 +520,8 @@ function selectSite(i, fly) {
   const items = ls.map((l) => {
     const o = otherEnd(l, i);
     const to = o.sites.length ? o.sites.map(siteLink).join(' / ') : '<span class="mg-small">' + ptText(o.pt) + '</span>';
-    const hidden = l.t < S.tierMin || (l.kind === 'tunnel' ? !S.tunnels : !S.conn);
-    return '<li' + (hidden ? ' class="below" title="Not drawn with the current line settings"' : '') + '>' + tierBadge(l) + esc(TIER_NAME(l.t)) + (l.kind === 'tunnel' ? ' · tunnel path' : '') + '<br>' + esc(l.label) + '<br>&rarr; ' + to + '</li>';
+    const hidden = l.kind === 'deep' ? !S.deep : (l.t < S.tierMin || (l.kind === 'tunnel' ? !S.tunnels : !S.conn));
+    return '<li' + (hidden ? ' class="below" title="Not drawn with the current line settings"' : '') + '>' + tierBadge(l) + esc(TIER_NAME(l.t)) + (l.kind === 'tunnel' ? ' · tunnel path' : l.kind === 'deep' ? ' · alleged route (lab)' : '') + '<br>' + esc(l.label) + '<br>&rarr; ' + to + '</li>';
   }).join('');
   openCard(
     '<h2>' + esc(s.name) + '</h2>' +
@@ -534,7 +555,7 @@ function selectLine(li) {
     '<h2>' + esc(l.label) + '</h2>' +
     '<dl class="mg-kv"><dt>From</dt><dd>' + end(l.a, l.path[0]) + '</dd><dt>To</dt><dd>' + end(l.b, l.path[l.path.length - 1]) + '</dd>' +
     (t ? '<dt>Tier ' + l.t + '</dt><dd>' + esc(t.meaning) + '</dd>' : '') + '</dl>' +
-    '<p class="mg-small">' + (l.kind === 'tunnel' ? 'The path is the one claimed; its tier is the record behind the claim.' : 'The line joins two sites; its course across the map carries no meaning.') + ' <a href="/map/list#tiers">How the tiers work</a></p>'
+    '<p class="mg-small">' + (l.kind === 'deep' ? 'A route drawn on a private map (the 1978 "Inner-Earth" map and its kind). No document stands behind it, so it is kept here in the lab and off the research map.' : l.kind === 'tunnel' ? 'The path is the one claimed; its tier is the record behind the claim.' : 'The line joins two sites; its course across the map carries no meaning.') + ' <a href="/map/list#tiers">How the tiers work</a></p>'
   );
 }
 
@@ -621,7 +642,7 @@ function fitTo(idx) {
 
 // ------------------------------------------------------------------ hover and click
 const HIT_SITES = ['sites'];
-const HIT_LINES = TUN_LAYERS.concat(LINE_LAYERS);
+const HIT_LINES = TUN_LAYERS.concat(DEEP_LAYERS, LINE_LAYERS);
 let liveHit = [];      // live-feed layer ids, filled as feeds are added
 let ctxHit = [];       // context layer ids
 
@@ -739,6 +760,8 @@ function aircraftFC(list) {
 }
 const planeLayer = (id, source) => ({ id, type: 'symbol', source, layout: { 'icon-image': 'b0b-plane', 'icon-size': ['case', ['==', ['get', 'mil'], 1], 0.85, 0.65], 'icon-rotate': ['get', 'track'], 'icon-rotation-alignment': 'map', 'icon-allow-overlap': true, 'icon-ignore-placement': true }, paint: { 'icon-color': ['get', 'col'] } });
 
+const EONET_CAT = { wildfires: ['#ff4400', 'WILDFIRE'], volcanoes: ['#ff0000', 'VOLCANO'], severeStorms: ['#00ccff', 'SEVERE STORM'], floods: ['#0066ff', 'FLOOD'], landslides: ['#996633', 'LANDSLIDE'], seaLakeIce: ['#aaddff', 'SEA/LAKE ICE'], earthquakes: ['#ff6644', 'EARTHQUAKE'], dustHaze: ['#ccaa66', 'DUST/HAZE'], tempExtremes: ['#ff8800', 'TEMP EXTREME'] };
+
 const FEEDS = [
   { id: 'quakes', label: 'USGS earthquakes (24 h)', src: 'U.S. Geological Survey', every: 300000,
     layers: [{ type: 'circle', paint: { 'circle-radius': ['interpolate', ['linear'], ['get', 'mag'], 0, 2.5, 3, 4.5, 5, 8, 7, 15], 'circle-color': ['step', ['get', 'mag'], '#ffaa44', 3, '#ff6644', 5, '#ff2200'], 'circle-opacity': 0.7, 'circle-stroke-color': '#ff8866', 'circle-stroke-width': 1, 'circle-pitch-alignment': 'map' } }],
@@ -751,7 +774,7 @@ const FEEDS = [
     layers: [{ type: 'circle', paint: { 'circle-radius': 6, 'circle-color': ['get', 'col'], 'circle-opacity': 0.75, 'circle-stroke-color': '#000', 'circle-stroke-width': 1, 'circle-pitch-alignment': 'map' } }],
     async load() {
       const d = await (await fetch('https://eonet.gsfc.nasa.gov/api/v3/events?status=open&limit=200')).json();
-      const C = { wildfires: ['#ff4400', 'WILDFIRE'], volcanoes: ['#ff0000', 'VOLCANO'], severeStorms: ['#00ccff', 'SEVERE STORM'], floods: ['#0066ff', 'FLOOD'], landslides: ['#996633', 'LANDSLIDE'], seaLakeIce: ['#aaddff', 'SEA/LAKE ICE'], earthquakes: ['#ff6644', 'EARTHQUAKE'], dustHaze: ['#ccaa66', 'DUST/HAZE'], tempExtremes: ['#ff8800', 'TEMP EXTREME'] };
+      const C = EONET_CAT;
       const feats = [];
       (d.events || []).forEach((ev) => {
         const cat = ev.categories && ev.categories[0] ? ev.categories[0].id : 'other';
@@ -920,7 +943,7 @@ function setFeed(f, on) {
   if (cb) cb.checked = on;
   if (on) {
     addFeedLayers(f);
-    feedLayerIds(f).forEach((id) => map.setLayoutProperty(id, 'visibility', 'visible'));
+    feedLayerIds(f).forEach((id) => map.setLayoutProperty(id, 'visibility', PB.hours && PB_FEEDS.indexOf(f.id) !== -1 ? 'none' : 'visible'));
     if (!(f.once && f.loaded)) { feedStatus(f, 'Loading...'); runFeed(f).then((ok) => { f.loaded = ok; }); }
     if (f.every) f.timer = setInterval(() => runFeed(f), f.every);
   } else {
@@ -1006,7 +1029,186 @@ const CONTEXT = W.B0B_CONTEXT_LAYERS || [
     fields: { name: 'Plant', fuel: 'Fuel', mw: 'Capacity (MW)', country: 'Country', year: 'Commissioned', src: 'Source', id: 'Database id' },
     radius: ['interpolate', ['linear'], ['zoom'], 0, ['interpolate', ['linear'], ['sqrt', ['get', 'mw']], 1, 0.8, 70, 3.2], 8, ['interpolate', ['linear'], ['sqrt', ['get', 'mw']], 1, 2.2, 70, 9]],
   },
+  {
+    id: 'oilgas', label: 'Oil and gas facilities', file: '/data-context/oil-gas.json?v=1', geom: 'point', color: '#9c90b4',
+    src: 'OGIM v3.0 (EDF / MethaneSAT): refineries, LNG facilities, offshore platforms and petroleum terminals, compiled from public sources of varying date',
+    licence: 'CC BY 4.0, simplified by b0b.dev',
+    attribution: 'Oil and gas: <a href="https://doi.org/10.5194/essd-15-3761-2023">OGIM v3.0, EDF / MethaneSAT</a> (CC BY 4.0)',
+    fields: { kind: 'Kind', type: 'Type', status: 'Status', operator: 'Operator', capacity: 'Capacity', country: 'Country', srcdate: 'Source dated', id: 'OGIM id' },
+    radius: ['interpolate', ['linear'], ['zoom'], 0, 1.2, 6, 2.6, 10, 4.5],
+  },
+  {
+    id: 'flares', label: 'Gas flares (annual, to 2025)', file: '/data-context/flares.json?v=1', geom: 'point', color: '#c08a5e',
+    src: 'World Bank GFMR flare volumes by flare, 2012 to 2025 (NOAA; Payne Institute, Colorado School of Mines): yearly estimates from satellite-detected heat, not live detections',
+    licence: 'World Bank dataset terms (CC BY 4.0); the World Bank does not endorse this map',
+    attribution: 'Flares: <a href="https://www.worldbank.org/en/programs/gasflaringreduction/global-flaring-data">The World Bank, GFMR</a> (CC BY 4.0)',
+    fields: { country: 'Country', v2025: '2025 volume (million m³)', peak: 'Peak year (million m³)', years: 'Years with a volume', field: 'Field type', where: 'Location', operator: 'Operator', id: 'Flare id' },
+    note: 'An annual volume estimated from the heat a satellite sees; it says how much was flared, not who decided to flare it.',
+    radius: ['interpolate', ['linear'], ['zoom'], 0, ['interpolate', ['linear'], ['sqrt', ['get', 'v2025']], 0, 0.6, 50, 3.4], 8, ['interpolate', ['linear'], ['sqrt', ['get', 'v2025']], 0, 1.6, 50, 10]],
+  },
+  {
+    id: 'dc', label: 'AI data centres (95 largest)', file: '/data-context/data-centres.json?v=1', geom: 'point', color: '#86a7bd',
+    src: 'Epoch AI, "AI data centers" (updated 20 Oct 2026): about 95 of the largest AI sites, selected by compute, not a register',
+    licence: 'CC BY, placed by b0b.dev',
+    attribution: 'AI data centres: <a href="https://epoch.ai/data/data-centers-documentation">Epoch AI</a> (CC BY)',
+    fields: { owner: 'Owner (Epoch tag)', users: 'Users (Epoch tag)', mw: 'Power now (MW)', h100e: 'H100 equivalents now', project: 'Project', country: 'Country', placed: 'Placed', disclosure: 'Disclosure' },
+    note: 'The owner and user tags (#confident, #likely, #speculative) are Epoch AI\'s own grades.',
+    radius: ['interpolate', ['linear'], ['zoom'], 0, ['interpolate', ['linear'], ['sqrt', ['coalesce', ['get', 'mw'], 50]], 5, 2.4, 33, 5], 8, ['interpolate', ['linear'], ['sqrt', ['coalesce', ['get', 'mw'], 50]], 5, 5, 33, 12]],
+  },
 ];
+
+// ------------------------------------------------------------------ playback (24 h / 72 h)
+// Replays what three sensors recorded - NASA FIRMS heat, USGS earthquakes, NASA
+// EONET events - drawn up to the hour on the slider and faded by age. It replays
+// sensor feeds; it is not the period bar removed on 19 Sept, which filtered the
+// evidence by date. Aircraft, vessels and the station have no history here.
+const PB = { hours: 0, start: 0, end: 0, t: 0, timer: null, data: null, failed: [] };
+const PB_LAYERS = ['pb-firms', 'pb-quakes', 'pb-eonet'];
+const PB_FEEDS = ['firms', 'quakes', 'eonet'];
+const utcText = (t) => { const d = new Date(t); return d.getUTCDate() + ' ' + MONTHS[d.getUTCMonth()] + ' ' + String(d.getUTCHours()).padStart(2, '0') + ':' + String(d.getUTCMinutes()).padStart(2, '0') + ' UTC'; };
+
+function buildPlaybackDOM() {
+  const live = $('#liveList');
+  const box = document.createElement('div');
+  box.className = 'mg-sub mg-pb';
+  box.innerHTML =
+    '<div class="mg-subhead"><span>PLAYBACK</span></div>' +
+    '<div class="mg-seg" id="pbSeg" role="group" aria-label="Playback window">' +
+      [0, 24, 72].map((h) => '<button type="button" data-h="' + h + '">' + (h ? h + ' H' : 'OFF') + '</button>').join('') + '</div>' +
+    '<div id="pbCtl" hidden><div class="mg-row mg-pbrow"><button type="button" id="pbPlay" aria-label="Play">&#9654;</button>' +
+      '<input type="range" id="pbRange" min="0" max="1000" value="1000" aria-label="Playback time"></div>' +
+      '<div class="mg-fs" id="pbTime" data-dynamic></div></div>' +
+    '<p class="mg-note">Replays what NASA FIRMS (satellite heat), USGS (earthquakes) and NASA EONET (natural events) recorded, up to the hour on the slider, fading with age. Heat arrives in bursts as the satellite passes. Aircraft, vessels and the station are live only.</p>';
+  live.parentNode.insertBefore(box, live);
+  $$('#pbSeg button').forEach((b) => b.addEventListener('click', () => setPlayback(+b.dataset.h)));
+  $('#pbRange').addEventListener('input', (e) => { pbStop(); pbSet(PB.start + (PB.end - PB.start) * (+e.target.value / 1000)); });
+  $('#pbPlay').addEventListener('click', () => (PB.timer ? pbStop() : pbPlay()));
+  renderPbSeg();
+}
+function renderPbSeg() { $$('#pbSeg button').forEach((b) => b.setAttribute('aria-pressed', String(+b.dataset.h === PB.hours))); }
+
+function liveLayersFor(ids, on) {
+  FEEDS.filter((f) => ids.indexOf(f.id) !== -1 && map.getSource('live-' + f.id)).forEach((f) =>
+    feedLayerIds(f).forEach((id) => map.setLayoutProperty(id, 'visibility', on && f.on ? 'visible' : 'none')));
+}
+
+async function pbLoad(h) {
+  const b = viewBBox(), since = Date.now() - h * 3600e3;
+  const get = (u) => fetch(u).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });
+  const [fr, qk, eo] = await Promise.allSettled([
+    get('/api/firms?hours=' + h + '&max=8000&bbox=' + [b.w, b.s, b.e, b.n].map((x) => x.toFixed(2)).join(',')),
+    get('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson'),
+    get('https://eonet.gsfc.nasa.gov/api/v3/events?status=all&days=' + Math.ceil(h / 24)),
+  ]);
+  const firms = fr.status === 'fulfilled' ? (fr.value.features || []).filter((f) => f.properties.t >= since).map((f) => { const p = f.properties; return pt(f.geometry.coordinates[0], f.geometry.coordinates[1], { k: 'firms', t: p.t, frp: +p.frp || 0, bright: +p.bright_ti4 || 300, conf: p.confidence || '', date: p.acq_date || '', time: p.acq_time || '' }); }) : [];
+  const quakes = qk.status === 'fulfilled' ? (qk.value.features || []).filter((f) => f.properties.time >= since).map((f) => pt(f.geometry.coordinates[0], f.geometry.coordinates[1], { k: 'quake', t: f.properties.time, mag: f.properties.mag || 0, place: f.properties.place || '', time: f.properties.time, depth: f.geometry.coordinates[2] || 0, url: f.properties.url || '' })) : [];
+  const eonet = [];
+  if (eo.status === 'fulfilled') (eo.value.events || []).forEach((ev) => {
+    const cat = ev.categories && ev.categories[0] ? ev.categories[0].id : 'other';
+    const info = EONET_CAT[cat] || ['#cccccc', String(cat).toUpperCase()];
+    (ev.geometry || []).forEach((g) => { const t = Date.parse(g.date); if (g.type === 'Point' && g.coordinates && t >= since) eonet.push(pt(g.coordinates[0], g.coordinates[1], { k: 'eonet', t, col: info[0], cat: info[1], title: ev.title || '', date: g.date || '', url: ev.sources && ev.sources[0] ? ev.sources[0].url : '' })); });
+  });
+  const failed = [['FIRMS', fr], ['USGS', qk], ['EONET', eo]].filter((x) => x[1].status !== 'fulfilled').map((x) => x[0]);
+  return { firms: FC(firms), quakes: FC(quakes), eonet: FC(eonet), failed, firmsInView: fr.status === 'fulfilled' ? fr.value.in_view : 0 };
+}
+
+function pbLayers() {
+  const add = (id, data, paint) => {
+    if (map.getSource(id)) map.getSource(id).setData(data);
+    else { map.addSource(id, { type: 'geojson', data }); map.addLayer({ id, type: 'circle', source: id, paint }, 'live-top'); }
+    map.setLayoutProperty(id, 'visibility', 'visible');
+  };
+  add('pb-firms', PB.data.firms, { 'circle-radius': ['step', ['get', 'frp'], 2.5, 10, 3.5, 50, 5, 200, 7], 'circle-color': ['step', ['get', 'bright'], '#ffaa00', 350, '#ff6600', 400, '#ff2200'], 'circle-pitch-alignment': 'map' });
+  add('pb-quakes', PB.data.quakes, { 'circle-radius': ['interpolate', ['linear'], ['get', 'mag'], 0, 2.5, 3, 4.5, 5, 8, 7, 15], 'circle-color': ['step', ['get', 'mag'], '#ffaa44', 3, '#ff6644', 5, '#ff2200'], 'circle-stroke-color': '#ff8866', 'circle-stroke-width': 1, 'circle-pitch-alignment': 'map' });
+  add('pb-eonet', PB.data.eonet, { 'circle-radius': 6, 'circle-color': ['get', 'col'], 'circle-stroke-color': '#000000', 'circle-stroke-width': 1, 'circle-pitch-alignment': 'map' });
+  PB_LAYERS.forEach((id) => { if (liveHit.indexOf(id) === -1) liveHit.push(id); });
+}
+
+function pbSet(T) {
+  if (!PB.data) return;
+  PB.t = Math.max(PB.start, Math.min(PB.end, T));
+  const span = PB.end - PB.start;
+  const fade = ['interpolate', ['linear'], ['-', PB.t, ['get', 't']], 0, 0.95, span * 0.25, 0.45, span, 0.12];
+  PB_LAYERS.forEach((id) => {
+    if (!map.getLayer(id)) return;
+    map.setFilter(id, ['<=', ['get', 't'], PB.t]);
+    map.setPaintProperty(id, 'circle-opacity', fade);
+    if (id !== 'pb-firms') map.setPaintProperty(id, 'circle-stroke-opacity', fade);
+  });
+  $('#pbRange').value = String(Math.round((PB.t - PB.start) / span * 1000));
+  const n = (fc) => fc.features.reduce((k, f) => k + (f.properties.t <= PB.t ? 1 : 0), 0);
+  const back = Math.round((PB.end - PB.t) / 3600e3);
+  $('#pbTime').textContent = utcText(PB.t) + (back ? ' · ' + back + ' h ago' : ' · now') + ' · ' + fmt(n(PB.data.firms)) + ' hotspots in view, ' + n(PB.data.quakes) + ' earthquakes, ' + n(PB.data.eonet) + ' events' +
+    (PB.data.firmsInView > PB.data.firms.features.length ? ' (the strongest ' + fmt(PB.data.firms.features.length) + ' of ' + fmt(PB.data.firmsInView) + ' hotspots)' : '') +
+    (PB.data.failed.length ? ' · unavailable: ' + PB.data.failed.join(', ') : '');
+}
+function pbStop() { clearInterval(PB.timer); PB.timer = null; const b = $('#pbPlay'); if (b) { b.innerHTML = '&#9654;'; b.setAttribute('aria-label', 'Play'); } }
+function pbPlay() {
+  if (!PB.data) return;
+  if (PB.t >= PB.end) pbSet(PB.start);
+  const step = (PB.end - PB.start) / 300;   // about 24 s for the whole window
+  PB.timer = setInterval(() => { pbSet(PB.t + step); if (PB.t >= PB.end) pbStop(); }, 80);
+  $('#pbPlay').innerHTML = '&#10073;&#10073;'; $('#pbPlay').setAttribute('aria-label', 'Pause');
+}
+async function setPlayback(h) {
+  pbStop();
+  PB.hours = h;
+  renderPbSeg();
+  if (!READY) return;
+  if (!h) {
+    PB_LAYERS.forEach((id) => { if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', 'none'); });
+    liveLayersFor(PB_FEEDS, true);
+    $('#pbCtl').hidden = true; PB.data = null;
+    return;
+  }
+  $('#pbCtl').hidden = false;
+  $('#pbTime').textContent = 'Loading the last ' + h + ' hours...';
+  liveLayersFor(PB_FEEDS, false);      // the live copies would draw the same points twice
+  PB.end = Date.now(); PB.start = PB.end - h * 3600e3;
+  let data;
+  try { data = await pbLoad(h); } catch (e) { $('#pbTime').textContent = 'Unavailable (' + (e.message || 'error') + ')'; return; }
+  if (PB.hours !== h) return;
+  PB.data = data;
+  pbLayers();
+  pbSet(PB.start);
+  pbPlay();
+}
+
+// ------------------------------------------------------------------ the lab (/lab only)
+function buildLab() {
+  const box = $('#labGroup');
+  if (!LAB) { if (box) box.remove(); return; }
+  document.title = 'b0b.dev - map lab';
+  const ll = $('#labLink'); if (ll) ll.remove();
+  const h1 = $('.header h1');
+  if (h1) h1.textContent = 'b0b.dev - MAP LAB';
+  const n = LINES.filter((l) => l.kind === 'deep').length;
+  box.hidden = false;
+  $('#labBody').innerHTML =
+    '<p class="mg-note">The lab sits apart from the research map at <a href="/map">/map</a>. What is here is not evidence: routes no document supports, instruments, and a reading of colour.</p>' +
+    '<div class="mg-sub"><label class="mg-check"><input type="checkbox" id="toggleDeep" autocomplete="off" checked> <i class="mg-dot" style="background:#cc00ff"></i> Alleged deep routes (' + n + ')</label>' +
+    '<div class="mg-src">Drawn from private maps (the 1978 "Inner-Earth" map and its kind) and from analogy between sites. Tier 0-1: no document behind any route.</div></div>' +
+    '<h4 class="mg-h4">INSTRUMENTS</h4><div class="mg-sub mg-links">' +
+      '<a href="/tones/shield">ARC SHIELD: SOUND MONITOR AND EVIDENCE RECORDER</a>' +
+      '<a href="/tones/instrument">TONE LAB: STACKABLE TONES</a>' +
+      '<a href="/tones/multipack">MULTIPACK</a>' +
+      '<a href="/tones/healing">HEALING TONES</a>' +
+      '<a href="/countermeasures">COUNTERMEASURES</a></div>' +
+    '<h4 class="mg-h4">A READING OF COLOUR</h4>' +
+    '<p class="mg-note">The site\'s own reading of building colour, carried from the classic map. It is not a finding.</p>' +
+    '<ul class="mg-colours">' +
+      '<li><i class="mg-dot" style="background:#ffffff"></i>White: wealth (costly pigments: lead white, titanium dioxide)</li>' +
+      '<li><i class="mg-dot" style="background:#808080"></i>Grey: stone and masonry, the material of power</li>' +
+      '<li><i class="mg-dot" style="background:#cc4444"></i>Red: cheap (ferric oxide, Falu red, imitation brick)</li>' +
+      '<li><i class="mg-dot" style="background:#4488ff"></i>Blue: authority (government, military, institutions)</li>' +
+      '<li><i class="mg-dot" style="background:linear-gradient(90deg,#f00,#f90,#ff0,#0f0,#09f,#90f)"></i>Rainbow: ideological signalling</li>' +
+    '</ul>';
+  $('#toggleDeep').addEventListener('change', (e) => { S.deep = e.target.checked; tierFilters(); });
+  // The countermeasures drawer lives in the lab.
+  const cm = document.createElement('script');
+  cm.src = '/countermeasures.js?v=1';
+  document.body.appendChild(cm);
+}
 
 function buildContextDOM() {
   const box = $('#contextList');
@@ -1053,7 +1255,7 @@ function ctxCard(f) {
   const p = f.properties || {};
   const rows = Object.keys(p).filter((k) => p[k] !== '' && p[k] != null && k !== 'k' && k !== 'name').map((k) => '<dt>' + esc((c.fields && c.fields[k]) || k) + '</dt><dd>' + esc(p[k]) + '</dd>').join('');
   S.sel = { kind: 'feature' };
-  openCard('<div class="mg-meta"><span><i class="mg-dot" style="background:' + esc(c.color) + '"></i>CONTEXT · ' + esc(c.label) + '</span></div><h2>' + esc(p.name || p.n || c.label) + '</h2><dl class="mg-kv">' + rows + '</dl><p class="mg-small">' + esc(c.src) + '. ' + esc(c.licence) + '. Context, not evidence: nothing on this map is connected to it by being near it.</p>');
+  openCard('<div class="mg-meta"><span><i class="mg-dot" style="background:' + esc(c.color) + '"></i>CONTEXT · ' + esc(c.label) + '</span></div><h2>' + esc(p.name || p.n || c.label) + '</h2><dl class="mg-kv">' + rows + '</dl><p class="mg-small">' + (c.note ? esc(c.note) + ' ' : '') + esc(c.src) + '. ' + esc(c.licence) + '. Context, not evidence: nothing on this map is connected to it by being near it.</p>');
 }
 
 // ------------------------------------------------------------------ links
@@ -1067,9 +1269,10 @@ function viewParams(markerName) {
   if (S.proj !== 'globe') p.set('view', 'flat');
   if (S.relief) p.set('relief', '1');
   if (S.base !== 'earth') p.set('base', S.base);
+  if (PB.hours) p.set('play', String(PB.hours));
   if (markerName) p.set('marker', markerName);
   else if (map) { const c = map.getCenter(); p.set('lat', c.lat.toFixed(4)); p.set('lng', c.lng.toFixed(4)); p.set('zoom', String(Math.round(map.getZoom() + 1))); }
-  return location.origin + '/map?' + p.toString();
+  return location.origin + (LAB ? '/lab?' : '/map?') + p.toString();
 }
 function copyLink(btn, markerName) {
   const link = viewParams(markerName);
@@ -1105,6 +1308,8 @@ function applyViewParams() {
     if (s) { map.jumpTo({ center: [s.lng, s.lat], zoom: Math.max(0, (parseInt(params.get('zoom'), 10) || 14) - 1) }); selectSite(s.i, false); }
   }
   if (params.get('relief') === '1') setRelief(true);
+  const play = +params.get('play');
+  if (play === 24 || play === 72) { $('#liveGroup').open = true; setPlayback(play); }
 }
 
 // ------------------------------------------------------------------ boot
@@ -1124,7 +1329,9 @@ function onLoad() {
 
 buildLists();
 buildFeedsDOM();
+buildPlaybackDOM();
 buildContextDOM();
+buildLab();
 bindPanel();
 readParams();
 renderTierUI();

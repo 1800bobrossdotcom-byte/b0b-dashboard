@@ -163,6 +163,7 @@ Learn these; they are invoked by name on the page.
   browser then died on "require is not defined" while local Express served the file untouched and every
   local test passed (22 Oct 2026). **A browser ES module goes in `public/`.** Compare a live file's
   sha256 with the repo's when the live page and the local page disagree.
+- **Nominatim's robots.txt disallows `/search` and `/reverse`** (read 22 Oct 2026), and Photon's disallows everything. Earlier passes (19 Sept reverse-geocode check, 4 Oct pin moves) used Nominatim under its usage policy; the spider's rule is robots, so **do not use it again.** For US addresses use the Census Bureau geocoder; elsewhere use the coordinates of the place's Wikipedia article read through the spider (`scripts/geocode-context.py` does both).
 - **The static route serves a fixed extension allowlist** in `server.js`. A new asset type
   404s live while looking perfectly fine in the repo — `.kml` did exactly that.
 - **Section I has no static sect-toc** (JS-generated). Sections II, IX, XIII and others do.
@@ -229,6 +230,47 @@ than once.
 - **Fixed on the way:** XIX's 9/11 pointer said the probe "points into … IV (blowback and the Saudi suit) … X (STELLAR WIND, PATRIOT, TIA), XIII (the anthrax naming error) and XXIII (the AUMF under the orders)". It was written while the topology lived in XVI, and it is false now: the probe links only into II and IX, and the AUMF, STELLAR WIND, PATRIOT, PNAC and anthrax material is inside the probe itself. It now says that.
 - **Flagged, not edited:** the classic map has a filter checkbox "XXII - Spiritual Exit" that no marker uses (the report's XXII is Connective Tissue). It does nothing.
 
+**MAP: PLAYBACK, `/lab`, NO GLOW, FOUR CONTEXT LAYERS — 22 Oct 2026, live.** Author, to "the playback, the glow, the `/lab` split, the held layers, a CARTO key": *"All except carto key"*.
+- **Playback (24 h / 72 h), LIVE group, GL map.** It replays NASA FIRMS heat, USGS earthquakes and NASA EONET events up to the hour on a slider, faded by age; ▶ runs the window in about 24 s.
+  - The live copies of those three feeds are hidden while it runs. Aircraft, vessels and the station are live only, and the panel says so.
+  - `?play=24|72` deep-links it, and "COPY A LINK" carries it.
+  - **Server:** `/api/firms?hours=24|48|72`; 72 h is the 7-day file (41.5 MB) cut at acquisition time, cached 10 min per file; `max` is now up to 8000; each feature carries `t` (epoch ms).
+  - It replays sensor feeds. **It is not the evidence period bar removed on 19 Sept.**
+- **`/lab` (same engine; `map-gl.js` reads the path; `PAGES['/lab']`, canonical `/map`, not in the sitemap). `/map` is now research only.** On `/lab` only:
+  - the 16 purple deep-route lines, tier 0–1 (the 1978 "Inner-Earth" private map, the Four Corners map, analogy lines). The rule is `isLabRoute`: colour `#cc00ff` and tier ≤ 1. Derinkuyu↔Kaymakli (purple, tier 3) stays on `/map`;
+  - the tone instruments (ARC Shield, Tone Lab, Multipack, healing, countermeasures);
+  - the classic map's "colour reading" (white = wealth …), labelled the site's own reading, not a finding;
+  - the countermeasures drawer: `countermeasures.js` is injected on `/lab` only. On `/map`, `--mg-bottom` drops the drawer's 36 px.
+  - Title "b0b.dev - map lab", heading "b0b.dev - MAP LAB". `/map`'s TOOLS links to it.
+- **Glow, principle 4.** GL markers were already flat. On the classic page, the marker `box-shadow` glow, the pulsing drop-shadow line highlight and the glow trail are gone; a selected line is drawn heavier and its end markers get a plain white ring.
+- **Context layers, now four** (`scripts/build-context-layers.py` → `public/data-context/`; each file carries a provenance block; every card says "context, not evidence"):
+  - power plants: WRI, 34,936;
+  - **oil and gas facilities:** OGIM v3.0, CC BY 4.0, 8,803 (refineries 692, LNG 547, offshore platforms 3,903, petroleum terminals 3,661).
+    - The 3.4 GB GeoPackage lives at `/home/user/.b0b-sources/ogim/` (outside the repo; sha256 `d324540f…` ledgered; robots allowed `/records/…/files/`, `/api` is disallowed). The build refuses a file that hashes differently.
+    - **Not used:** its flaring layer (EOG's permission was to EDF only) and its 1.86 million pipeline segments;
+  - **gas flares:** World Bank GFMR per-flare volumes 2012–2025, 27,364 flares.
+    - Each carries its 2025 volume, peak year and years with a volume.
+    - Used under the World Bank dataset terms (CC BY 4.0 unless labelled otherwise; the file is not), and the card and credits say the World Bank does not endorse the map.
+    - **The licence question raised in research was not put to data@worldbank.org; his "All" was taken as the call.**
+    - The card says it is an annual estimate from satellite heat, "not who decided to flare it";
+  - **AI data centres:** Epoch AI, CC BY, 95 sites.
+    - **8 name Anthropic as a user and carry the disclosure** ("Anthropic … makes the AI model that helps draft this site"), also in MAP SOURCES.
+    - Owner and user tags are Epoch's own (#confident / #likely / #speculative).
+- **Placing the data centres (`scripts/geocode-context.py` → `scripts/context-geocodes.json`, committed):**
+  - 35 by the **US Census Bureau geocoder** (street address; public domain; it serves no robots.txt);
+  - 60 at the town their record names, using that town's Wikipedia coordinates read through the spider.
+    - **The place had to be in the dataset:** its address, its name, or a source it cites read at source. Colorado City TX came from Cipher's 8-K exhibit, Saline Township MI from Related Digital, Doña Ana County NM from Project Jupiter, Ohio from AWS New Albany's own sources.
+    - The en articles for Mäntsälä and Reykjanesbær carry no coordinates ("infobox settlement with no coordinates"), so they used fi:Mäntsälä and Keflavík.
+  - None unplaced. The card says how each was placed.
+- **Still not built, no open source:** submarine cables, landing points and IXPs (a TeleGeography permission request is the only route); pipelines (GEM's tracker is behind a form needing his email, so it was not submitted for him); a daily GNSS hex layer (needs storage and a scheduled job; ODbL share-alike).
+- **Tested** (scratchpad `labtest.js`, MODE=map|lab|play, one fresh port each because of the 60/min limiter):
+  - `/map` has no LAB group, no deep routes and no drawer, and only the tier-3 purple tunnel remains with every tier shown;
+  - the four context layers load with their counts; the flare card carries its caveats; 8 disclosures;
+  - `/lab` title, heading, 16 routes drawn and toggling, drawer mounted;
+  - `?play=72` loads, advances, the slider's middle reads ~36 h ago, it draws hotspots and OFF hides them;
+  - no page errors or integrity alarms in any run; security 33/33, seo 57/57.
+- *Trap:* MapLibre 6 changed `GeoJSONSource` internals (`_data` is no longer the FeatureCollection). Tests read `source.serialize().data`.
+
 **THE GL ENGINE IS THE MAP — 22 Oct 2026, live.** Author: *"Yes new engine is our default map"*.
 - **`/map` serves `site/map-gl.html`.** The Leaflet page stays at **`/map?engine=classic`** (`noindex`, canonical `/map`, title "OSINT map (classic)"); `?engine=gl` still works. `PAGES['/map']` is `map-gl.html`, so crawlers get it too.
 - **`map.html` is still the source of the data**: edit the arrays there, then run `build-map-gl.py` (§4 7b fails otherwise). `/api` map export, KML and map-list still parse `map.html`.
@@ -257,7 +299,7 @@ than once.
 - **Step 3, context and live layers (this deploy):**
   - **One context layer passed the licence check: power plants**, WRI Global Power Plant Database v1.3.0, CC BY 4.0, 34,936 plants. It is frozen at June 2021 and unmaintained, and the card, the attribution and the source line all say so. Built by `scripts/build-context-layers.py` from the ledgered CSV (refuses a body whose sha256 differs) into `public/data-context/power-plants.json` (8.1 MB, 1.1 MB gzipped, loaded only when switched on). It is drawn in one muted colour under the lines and sites, never as an edge, and every card says "Context, not evidence".
   - **Live: "Low reported position accuracy (ADS-B)"**, aircraft near the centre whose own NACp is below 8. **Where, not who:** the card states the aircraft's own uncertainty, that interference is one cause among several (old equipment, receiver faults; 0 also means "not known"), and that one aircraft is not a measurement. adsb.lol has **no coverage over Israel** (0 aircraft), and the status line then says the gap is in the receiver network, not the sky.
-  - **Held, his calls (full findings `research/MAP-CONTEXT-SOURCES.md`, 58 quote lines):**
+  - **Held at the time, built later the same evening (entry at the top of §7); findings in `research/MAP-CONTEXT-SOURCES.md`, 58 quote lines:**
     - gas flaring: the World Bank per-flare file (27,365 sites) states no licence of its own and its VIIRS Nightfire upstream is licence-gated; confirm with data@worldbank.org first;
     - oil and gas: GEM trackers (form with an email) and OGIM v3.0 (3.4 GB) are CC BY 4.0, but he has to download them;
     - data centres: Epoch AI (CC BY) is 95 AI sites by street address, and it names Anthropic as a user (the Anthropic disclosure applies);
@@ -269,11 +311,7 @@ than once.
   - **Proven both ways** (scratchpad `wdtest.js`: iPhone viewport, `theme.js` held back 5 s, menu opened, LIGHT pressed, 36 s wait). The old code logged NAV LINKS mutations on both engines and ended 🔓; the new code logged nothing and stayed 🔒.
   - *Trap:* a fast local load never shows this. **Test integrity code with the deferred scripts delayed.**
 - **Spider fix (`scripts/spider/spider.py`):** robots.txt is now matched per RFC 9309 (longest rule wins, allow wins a tie). `urllib.robotparser` takes the first rule in file order, so "Allow: /" above "Disallow: /wwwdata" let the research agent send one request to eogdata.mines.edu's disallowed `/wwwdata` (it redirected to a login; nothing retrieved). Proven both ways on 10 cases; crawl-delay still comes from the stdlib.
-- **Still his calls:**
-  - ~~make GL the default `/map`~~ done (entry above);
-  - a 24h/72h playback (a time control; not the period bar he removed on 19 Sept);
-  - the glow look against principle 4;
-  - grouping vs the held `/lab` split.
+- **His calls, all answered 22 Oct:** GL is the default `/map`; the playback, the glow and the `/lab` split are done (entries above); **no CARTO key** (his "All except carto key").
 - *Traps:*
   - Playwright here needs `--use-angle=swiftshader --enable-unsafe-swiftshader --ignore-gpu-blocklist` for WebGL. Launch local tests with no proxy (localhost through the proxy gives 405).
   - Route external hosts through `curl --compressed`; digitraffic answers 406 without gzip.

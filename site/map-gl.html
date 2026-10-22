@@ -29,7 +29,7 @@
        (A script tag with no attributes, because only those receive the CSP nonce.) -->
   <script>if (!('noModule' in HTMLScriptElement.prototype)) { var q = location.search.replace(/^\?/, '').split('&').filter(function (x) { return x && x.indexOf('engine=') !== 0; }).join('&'); location.replace('/map?engine=classic' + (q ? '&' + q : '') + location.hash); }</script>
   <link rel="stylesheet" href="/vendor/maplibre-gl-6.13.0/maplibre-gl.css">
-  <link rel="stylesheet" href="/map-gl.css?v=1">
+  <link rel="stylesheet" href="/map-gl.css?v=2">
 </head>
 <body>
 
@@ -106,7 +106,7 @@
 
       <details class="mg-group" id="contextGroup">
         <summary><span class="mg-gt">CONTEXT</span><span class="mg-gn" data-dynamic id="gContextN"></span></summary>
-        <p class="mg-note">Infrastructure drawn for orientation. It is not evidence: a site near a power plant is not connected to it by being near it.</p>
+        <p class="mg-note">Infrastructure drawn for orientation. It is not evidence: a site near a plant, a flare, a terminal or a data centre is not connected to it by being near it.</p>
         <div id="contextList"></div>
       </details>
 
@@ -114,6 +114,11 @@
         <summary><span class="mg-gt">LIVE</span><span class="mg-gn" data-dynamic id="gLiveN"></span></summary>
         <p class="mg-note">Public feeds, fetched by your browser from their publishers. Each shows what its sensor reports, not why.</p>
         <div id="liveList"></div>
+      </details>
+
+      <details class="mg-group" id="labGroup" open hidden>
+        <summary><span class="mg-gt">LAB</span></summary>
+        <div id="labBody"></div>
       </details>
 
       <details class="mg-group">
@@ -137,6 +142,7 @@
           <a href="/map/list">EVERY SITE AND LINE AS TEXT</a>
           <a href="/data/map-data.json" download>THE DATA (JSON)</a>
           <a href="/report#methodology">SOURCE METHODOLOGY</a>
+          <a href="/lab" id="labLink">THE LAB: INSTRUMENTS AND ALLEGED ROUTES</a>
           <a href="/map?engine=classic">CLASSIC MAP (LEAFLET)</a>
         </div>
       </details>
@@ -149,6 +155,9 @@
           <p>Elevation (relief): Mapzen / AWS Terrain Tiles. ArcticDEM terrain data DEM(s) were created from DigitalGlobe, Inc., imagery and funded under National Science Foundation awards 1043681, 1559691, and 1542736; Australia terrain data &copy; Commonwealth of Australia (Geoscience Australia) 2017; Austria terrain data &copy; offene Daten &Ouml;sterreichs &ndash; Digitales Gel&auml;ndemodell (DGM) &Ouml;sterreich; Canada terrain data contains information licensed under the Open Government Licence &ndash; Canada; Europe terrain data produced using Copernicus data and information funded by the European Union - EU-DEM layers; Global ETOPO1 terrain data U.S. National Oceanic and Atmospheric Administration; Mexico terrain data source: INEGI, Continental relief, 2016; New Zealand terrain data Copyright 2011 Crown copyright (c) Land Information New Zealand and the New Zealand Government (All rights reserved); Norway terrain data &copy; Kartverket; United Kingdom terrain data &copy; Environment Agency copyright and/or database right 2015. All rights reserved; United States 3DEP (formerly NED) and global GMTED2010 and SRTM terrain data courtesy of the U.S. Geological Survey.</p>
           <p>First Peoples territories: Native Land Digital where its service answers, otherwise approximate outlines carried by this site.</p>
           <p>Power plants (context): Global Energy Observatory, Google, KTH Royal Institute of Technology in Stockholm, Enipedia, World Resources Institute. 2021. Global Power Plant Database version 1.3.0. Accessed through datasets.wri.org on 22 October 2026. CC BY 4.0; fields reduced and coordinates rounded by b0b.dev. Frozen at June 2021.</p>
+          <p>Oil and gas facilities (context): Omara et al. 2023, Earth System Science Data 15, 3761, doi:10.5194/essd-15-3761-2023; OGIM v3.0, Environmental Defense Fund / MethaneSAT, Zenodo record 22835235. CC BY 4.0; four point layers, fields reduced by b0b.dev.</p>
+          <p>Gas flares (context): The World Bank: 2012 - 2025 Flare Volume Estimates by Individual Flare Location: NOAA, the Payne Institute at the Colorado School of Mines, World Bank/GFMR. Used under the World Bank dataset terms (CC BY 4.0); reduced to one point per flare by b0b.dev. The World Bank does not endorse this map.</p>
+          <p>AI data centres (context): Epoch AI, 'AI data centers', epoch.ai, accessed 22 October 2026. CC BY. Placed by b0b.dev: US street addresses by the US Census Bureau geocoder, other sites at the town their record names (Wikipedia coordinates). Anthropic, named as a user of eight sites, makes the AI model that helps draft this site.</p>
         </div>
       </details>
     </div>
@@ -2334,7 +2343,7 @@ var B0B_EDGE_TIERS = [{"tier": 0, "name": "analogy", "meaning": "a structural or
 </script>
 <!-- map-data:end -->
 
-<script type="module" src="/map-gl.js?v=4"></script>
+<script type="module" src="/map-gl.js?v=5"></script>
 
 <!-- map-timeline:begin (copied from site/map.html by scripts/build-map-gl.py) -->
 <script>
@@ -2595,7 +2604,7 @@ var B0B_EDGE_TIERS = [{"tier": 0, "name": "analogy", "meaning": "a structural or
 <script src="/i18n.js?v=3"></script>
 <!-- signal-bar.js also writes the visitor line in the header. -->
 <script src="/signal-bar.js?v=11" defer></script>
-<script src="/countermeasures.js?v=1" defer></script>
+<!-- countermeasures.js is loaded by map-gl.js on /lab only -->
 <script src="/theme.js" defer></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>

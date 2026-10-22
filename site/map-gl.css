@@ -14,6 +14,8 @@
 @media (max-width: 768px) {
   :root { --mg-head: 40px; --mg-bottom: calc(var(--b0b-signal-h, 46px) + 32px); --mg-gap: 8px; }
 }
+/* The countermeasures drawer is on /lab only; /map keeps just the signal bar's room. */
+html:not(.mg-lab) { --mg-bottom: calc(var(--b0b-signal-h, 46px) + 4px); }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; overflow: hidden; }
@@ -251,3 +253,13 @@ button, input, select { font: inherit; color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .mg-group > summary::before { transition: none; }
 }
+
+/* ---------------------------------------------------------------- the lab group (/lab) */
+.mg-h4 { margin: 12px 0 4px; font: 600 0.62rem/1.2 var(--mono); letter-spacing: 0.12em; color: var(--mg-dim); }
+.mg-colours { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 4px; font-size: 0.66rem; color: var(--mg-dim); }
+.mg-colours li { display: flex; align-items: center; gap: 6px; }
+
+/* ---------------------------------------------------------------- playback */
+.mg-pb .mg-seg { margin: 4px 0 6px; }
+.mg-pbrow input[type="range"] { padding: 0; border: 0; background: none; accent-color: var(--green); }
+.mg-pbrow button { flex: 0 0 auto; min-width: 34px; }

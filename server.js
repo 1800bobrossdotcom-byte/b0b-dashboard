@@ -420,6 +420,7 @@ const PAGES = {
   '/epstein-maxwell':'epstein-maxwell.html', // the third film
   '/endgame':       'endgame.html',   // the fourth film: the report's close
   '/map':           'map-gl.html',
+  '/lab':           'map-gl.html',   // the same engine in lab mode (map-gl.js reads the path); canonical /map, not in the sitemap
   '/countermeasures':'countermeasures.html',
   '/artifact':      'artifact.html',
   '/spectra':       'spectra.html',
@@ -714,32 +715,38 @@ app.get('/download', async (req, res) => {
 // browser cannot read it. It is read here, kept ten minutes per instance, and
 // served as the GeoJSON the layer already expected: NOAA-20 VIIRS, 375 m,
 // strongest first so a capped answer keeps the largest hotspots.
-const FIRMS_URL = 'https://firms.modaps.eosdis.nasa.gov/data/active_fire/noaa-20-viirs-c2/csv/J1_VIIRS_C2_Global_24h.csv';
-let firms = { at: 0, rows: null, pending: null };
-function firmsRows() {
-  if (firms.rows && Date.now() - firms.at < 600_000) return Promise.resolve(firms.rows);
-  if (firms.pending) return firms.pending;
-  firms.pending = (async () => {
-    const r = await fetch(FIRMS_URL, { headers: { 'User-Agent': 'b0b.dev map (https://www.b0b.dev/map)' } });
+// ?hours=24 (default), 48 or 72 serves the map's playback: 72 hours come from
+// the 7-day file, cut at the acquisition time (UTC).
+const FIRMS_BASE = 'https://firms.modaps.eosdis.nasa.gov/data/active_fire/noaa-20-viirs-c2/csv/J1_VIIRS_C2_Global_';
+const FIRMS_FILE = { 24: '24h', 48: '48h', 72: '7d' };
+const firmsCache = {};
+function firmsRows(file) {
+  const c = firmsCache[file] || (firmsCache[file] = { at: 0, rows: null, pending: null });
+  if (c.rows && Date.now() - c.at < 600_000) return Promise.resolve(c);
+  if (c.pending) return c.pending;
+  c.pending = (async () => {
+    const r = await fetch(FIRMS_BASE + file + '.csv', { headers: { 'User-Agent': 'b0b.dev map (https://www.b0b.dev/map)' } });
     if (!r.ok) throw new Error('FIRMS ' + r.status);
     const lines = (await r.text()).split('\n');
     const head = lines[0].trim().split(',');
     const at = (n) => head.indexOf(n);
     const iLat = at('latitude'), iLng = at('longitude'), iB = at('bright_ti4'), iD = at('acq_date'), iT = at('acq_time'), iC = at('confidence'), iF = at('frp');
-    if (iLat < 0 || iLng < 0 || iF < 0) throw new Error('FIRMS header changed');
+    if (iLat < 0 || iLng < 0 || iF < 0 || iD < 0 || iT < 0) throw new Error('FIRMS header changed');
     const rows = [];
     for (let k = 1; k < lines.length; k++) {
-      const c = lines[k].split(',');
-      if (c.length < head.length) continue;
-      const lat = +c[iLat], lng = +c[iLng];
+      const v = lines[k].split(',');
+      if (v.length < head.length) continue;
+      const lat = +v[iLat], lng = +v[iLng];
       if (!Number.isFinite(lat) || !Number.isFinite(lng)) continue;
-      rows.push([lat, lng, +c[iB] || 0, +c[iF] || 0, c[iC] || '', c[iD] || '', c[iT] || '']);
+      const hhmm = String(v[iT] || '').padStart(4, '0');
+      const t = Date.parse(v[iD] + 'T' + hhmm.slice(0, 2) + ':' + hhmm.slice(2) + ':00Z');
+      rows.push([lat, lng, +v[iB] || 0, +v[iF] || 0, v[iC] || '', v[iD] || '', v[iT] || '', Number.isFinite(t) ? t : 0]);
     }
     rows.sort((a, b) => b[3] - a[3]);
-    firms = { at: Date.now(), rows, pending: null };
-    return rows;
-  })().catch((e) => { firms.pending = null; throw e; });
-  return firms.pending;
+    Object.assign(c, { at: Date.now(), rows, pending: null });
+    return c;
+  })().catch((e) => { c.pending = null; throw e; });
+  return c.pending;
 }
 app.get('/api/firms', async (req, res) => {
   if (!hasAccess(req)) return res.status(404).end();
@@ -749,18 +756,21 @@ app.get('/api/firms', async (req, res) => {
   const world = e - w >= 360;
   w = Math.max(-180, Math.min(180, w)); e = Math.max(-180, Math.min(180, e));
   const inLng = (lng) => world || (w <= e ? lng >= w && lng <= e : lng >= w || lng <= e);
-  const max = Math.min(Math.max(parseInt(req.query.max, 10) || 2000, 1), 5000);
+  const max = Math.min(Math.max(parseInt(req.query.max, 10) || 2000, 1), 8000);
+  const hours = [24, 48, 72].includes(+req.query.hours) ? +req.query.hours : 24;
   try {
-    const rows = await firmsRows();
+    const c = await firmsRows(FIRMS_FILE[hours]);
+    const since = hours === 72 ? Date.now() - 72 * 3600_000 : 0;
     const features = [];
     let inView = 0;
-    for (const r of rows) {
+    for (const r of c.rows) {
+      if (r[7] < since) continue;
       if (r[0] < s || r[0] > n || !inLng(r[1])) continue;
       inView++;
-      if (features.length < max) features.push({ type: 'Feature', geometry: { type: 'Point', coordinates: [r[1], r[0]] }, properties: { bright_ti4: r[2], frp: r[3], confidence: r[4], acq_date: r[5], acq_time: r[6] } });
+      if (features.length < max) features.push({ type: 'Feature', geometry: { type: 'Point', coordinates: [r[1], r[0]] }, properties: { bright_ti4: r[2], frp: r[3], confidence: r[4], acq_date: r[5], acq_time: r[6], t: r[7] } });
     }
     res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=600');
-    return res.json({ type: 'FeatureCollection', source: 'NASA FIRMS, NOAA-20 VIIRS 375 m, last 24 hours', fetched: new Date(firms.at).toISOString(), in_view: inView, features });
+    return res.json({ type: 'FeatureCollection', source: 'NASA FIRMS, NOAA-20 VIIRS 375 m, last ' + hours + ' hours', hours, fetched: new Date(c.at).toISOString(), in_view: inView, features });
   } catch (err) {
     return res.status(502).json({ error: 'FIRMS unavailable' });
   }

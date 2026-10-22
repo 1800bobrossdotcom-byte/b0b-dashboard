@@ -177,17 +177,14 @@
       0%, 100% { opacity: 1; transform: scale(1); }
       50% { opacity: 0.7; transform: scale(1.2); }
     }
+    /* Selected lines are drawn heavier, without glow or pulse (principle 4,
+       aesthetic restraint; the author's call, 22 Oct 2026). */
     .leaflet-overlay-pane svg path.connection-glow {
-      stroke-width: 4 !important;
-      stroke-opacity: 0.9 !important;
-      filter: drop-shadow(0 0 6px currentColor) drop-shadow(0 0 12px currentColor);
-      animation: lineGlow 1.5s ease-in-out infinite;
+      stroke-width: 3.5 !important;
+      stroke-opacity: 1 !important;
     }
     .leaflet-overlay-pane svg path.connection-glow-trail {
-      stroke-width: 8 !important;
-      stroke-opacity: 0.15 !important;
-      stroke-dasharray: none !important;
-      filter: drop-shadow(0 0 10px currentColor);
+      display: none;
     }
     .search-box {
       position: absolute;
@@ -1064,7 +1061,7 @@ function makeIcon(color, size) {
   size = size || 8;
   return L.divIcon({
     className: '',
-    html: '<div style="width:'+size+'px;height:'+size+'px;border-radius:50%;background:'+color+';border:1.5px solid rgba(255,255,255,0.5);box-shadow:0 0 6px '+color+';"></div>',
+    html: '<div style="width:'+size+'px;height:'+size+'px;border-radius:50%;background:'+color+';border:1px solid rgba(5,7,10,0.85);"></div>',
     iconSize: [size, size],
     iconAnchor: [size/2, size/2]
   });
@@ -3337,22 +3334,22 @@ function highlightConnections(lat, lng) {
       connectedEndpoints.push(fromMatch ? d.to : d.from);
     }
   });
-  // Pulse connected marker icons
+  // Mark the markers at the other ends with a plain white ring, not a glow.
   allMarkers.forEach(function(m) {
     var d = m._locData;
     var isEndpoint = connectedEndpoints.some(function(c) {
       return Math.abs(d.lat - c[0]) < threshold && Math.abs(d.lng - c[1]) < threshold;
     });
     if (isEndpoint && m._icon) {
-      m._icon.style.transition = 'filter 0.3s';
-      m._icon.style.filter = 'drop-shadow(0 0 6px #00ff41) drop-shadow(0 0 12px #00ff41)';
+      m._icon.style.outline = '1.5px solid #ffffff';
+      m._icon.style.borderRadius = '50%';
     }
   });
 }
 
 function clearMarkerGlow() {
   allMarkers.forEach(function(m) {
-    if (m._icon) m._icon.style.filter = '';
+    if (m._icon) { m._icon.style.filter = ''; m._icon.style.outline = ''; }
   });
 }
 

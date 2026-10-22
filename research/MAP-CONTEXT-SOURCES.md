@@ -250,3 +250,11 @@ Q | https://osmfoundation.org/wiki/Licence/Attribution_Guidelines | You must inc
 | Oil and gas (pipelines, LNG, refineries, platforms) | **USE WITH CONDITIONS** | GEM trackers (CC BY 4.0) for pipelines and LNG; OGIM v3.0 (CC BY 4.0) for refineries and platforms | Both openly licensed but neither fetched here (form; 3.4 GB). OGIM's upstream licences are not listed. GOIT currency unclear. Author must download once. |
 | Gas flaring sites | **USE WITH CONDITIONS** | World Bank GFMR per-flare xlsx | 27,365 sites fetched; CC BY by World Bank dataset terms but the file page states no licence and the upstream VNF is now licensed: confirm with data@worldbank.org. Do not use EOG VNF or OGIM's flare layer. |
 | GNSS interference | **USE WITH CONDITIONS** | Own hex layer from adsb.lol (ODbL) | `nac_p` present in the feed the map already uses; ODbL attribution and share-alike on the derived file; coverage gaps. Stanford RFI is CC BY-NC; gpsjam has no licence (do not use). |
+
+---
+
+## Decisions, 22 Oct 2026 (the author: "All except carto key")
+
+- **Built:** power plants (WRI GPPD), oil and gas facilities (OGIM v3.0, four point layers; not its flaring layer, not its pipelines), gas flares (World Bank GFMR, under the World Bank dataset terms, with the no-endorsement line on the card and in the credits; the licence question was not put to data@worldbank.org), AI data centres (Epoch AI, placed by `scripts/geocode-context.py`; 8 rows naming Anthropic carry the disclosure).
+- **Not built:** cables, landing points, IXPs (no open source); GEM pipelines and LNG (form requires the author's email); a daily GNSS hex layer (storage and a scheduled job).
+- **Geocoding:** Nominatim (`/search`, `/reverse`) and Photon are disallowed by robots.txt and were not used. US street addresses: US Census Bureau geocoder. Elsewhere: the coordinates of the Wikipedia article for the place the record names.
