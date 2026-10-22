@@ -760,7 +760,7 @@ app.get('/api/firms', async (req, res) => {
   const hours = [24, 48, 72].includes(+req.query.hours) ? +req.query.hours : 24;
   try {
     const c = await firmsRows(FIRMS_FILE[hours]);
-    const since = hours === 72 ? Date.now() - 72 * 3600_000 : 0;
+    const since = Date.now() - hours * 3600_000;   // the files run a little past their names; count only the window asked for
     const features = [];
     let inView = 0;
     for (const r of c.rows) {
