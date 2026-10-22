@@ -909,9 +909,6 @@
     {
      "text": "FEMA’s own definition of Enduring Constitutional Government has the President acting toward Congress and the courts as a matter of comity. Comity is what you extend to a body you do not command.",
      "say": "FEEMA’s own definition of Enduring Constitutional Government has the President acting toward Congress and the courts as a matter of comity. Comity is what you extend to a body you do not command."
-    },
-    {
-     "text": "And he took his own mark off the list first. The mark is not the thing it points at."
     }
    ],
    "shots": [
@@ -1026,14 +1023,6 @@
      ],
      "motion": "slam",
      "sound": false
-    },
-    {
-     "type": "full",
-     "dur": 3.0,
-     "media": [
-      "VIII_sator_square_stone"
-     ],
-     "motion": "push"
     }
    ]
   }
@@ -1552,18 +1541,6 @@
    "sha256": "7baaa9764353aa048201e8c75c21114d1b781883094f1dcc5bfdb0b7232f6482",
    "focus": [
     0.48,
-    0.5
-   ]
-  },
-  "VIII_sator_square_stone": {
-   "file": "v5/VIII_sator_square_stone.jpg",
-   "kind": "still",
-   "tag": "SATOR SQUARE ON A DOOR-JAMB STONE · DEUTSCHES FEUERWEHRMUSEUM FULDA · PUBLIC DOMAIN",
-   "source_page": "https://commons.wikimedia.org/wiki/File:SATOR-AREPO-TENET-OPERA-ROTAS.JPG",
-   "licence": "Public domain (Commons LicenseShortName; PD-User|Mattes — released by the photographer)",
-   "sha256": "c38c293451623e41410d76157f609766fbff333b586d977b2461f7e0f5ddd57f",
-   "focus": [
-    0.5,
     0.5
    ]
   },
