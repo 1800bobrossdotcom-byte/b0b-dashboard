@@ -1,6 +1,10 @@
 // b0b.dev OSINT map - the GL engine. MapLibre GL JS 6.13.0 (BSD-3-Clause),
 // served from /vendor. Previewed at /map?engine=gl beside the classic map.
 //
+// This file lives in public/ (Vercel's static output), NOT site/: Vercel bundles
+// site/** into the serverless function and transpiles an ES module there to
+// CommonJS, which a browser cannot run ("require is not defined", 22 Oct 2026).
+//
 // The data are the classic map's own arrays (locations, connectionLines,
 // tunnelPaths, animalNetPaths, colorMap, worldTerritories), copied into
 // map-gl.html by scripts/build-map-gl.py. Edit them in map.html, never here.

@@ -158,6 +158,11 @@ Learn these; they are invoked by name on the page.
 - **A tile provider can refuse with a 200.** Since Sept 2026 CARTO's keyless basemaps return an
   "API KEY REQUIRED" watermark image (`etag: "wm-…"`) with HTTP 200, so the classic map's
   `tileerror` failover never fired. Look at a tile, not its status code. CARTO is no longer used.
+- **Vercel transpiles ES modules under `site/` to CommonJS.** `site/**` is bundled into the function, and
+  Vercel's Node builder rewrote `import * as mlgl from …` in `site/map-gl.js` as `require(…)`; every
+  browser then died on "require is not defined" while local Express served the file untouched and every
+  local test passed (22 Oct 2026). **A browser ES module goes in `public/`.** Compare a live file's
+  sha256 with the repo's when the live page and the local page disagree.
 - **The static route serves a fixed extension allowlist** in `server.js`. A new asset type
   404s live while looking perfectly fine in the repo — `.kml` did exactly that.
 - **Section I has no static sect-toc** (JS-generated). Sections II, IX, XIII and others do.
@@ -224,7 +229,7 @@ than once.
   - **FIRMS withdrew the keyless WFS** the map used ("Invalid service.", so the layer was dead live). `server.js` `/api/firms` now reads the public NOAA-20 VIIRS 24 h CSV, caches it 10 min, and returns GeoJSON for a bbox, strongest first (`max` 1–5000).
   - **CARTO now watermarks keyless tiles with a 200** (§4 trap). DARK and FIRST PEOPLES use Esri's Dark Gray Canvas (base + reference labels; FIRST PEOPLES base only). A free CARTO key exists for non-commercial use (5M requests/month), but a person must request it by email: **his call if he wants CARTO back.**
 - **Step 2, the GL engine (`1be555b`):**
-  - **MapLibre GL JS 6.13.0** (BSD-3-Clause), self-hosted in `public/vendor/maplibre-gl-6.13.0/`; npm integrity checked. `site/map-gl.{html,js,css}`; route in `server.js` (`/map` with `engine=gl`); the CSP gained the OSM tile and AWS terrain hosts.
+  - **MapLibre GL JS 6.13.0** (BSD-3-Clause), self-hosted in `public/vendor/maplibre-gl-6.13.0/`; npm integrity checked. `site/map-gl.{html,css}` and **`public/map-gl.js`** (an ES module; see the §4 trap); route in `server.js` (`/map` with `engine=gl`); the CSP gained the OSM tile and AWS terrain hosts.
   - **The data is copied, never re-typed:** `scripts/build-map-gl.py` copies `map.html`'s arrays and correlation timeline verbatim between `map-data` / `map-timeline` comment markers, plus section/type labels and the tier table from `site/data/map-data.json`. `check-consistency.py` fails if the copy is stale (§4 7b).
   - **Features:** globe/flat, terrain relief (AWS Terrain Tiles, full attribution in MAP SOURCES), six bases; the grouped legend Evidence / Connections / Context / Live with counts; markers and tiered lines drawn by the GPU (dotted 0–1, dashed 2, solid 3+); a click on a site opens its record, its lines and their tiers, co-located sites and actions (report, only this type/section/its links, copy link); a click on a line shows its tier and meaning; search, pattern, proximity, the timeline, deep links (`/map?engine=gl&…`, the classic parameters); all ten live feeds; the integrity lock, watchdog, content signature and canary carried over. Phones get bottom sheets.
   - **Tested locally:** every interaction, all feeds, deep links, the lock (`gltest2.js`); phone 390 px: no horizontal scroll, the sheet, the card, the menu (`glphone.js`). The open sheet's top sits at 243 px of 844, which is by design.
