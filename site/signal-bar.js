@@ -49,6 +49,26 @@
   var LS_KEY = 'b0b_signal_v10';  // bump on every reorder: a stored index points into the old list
   var SAVE_MS = 1000;
   var player = null, ready = false, dur = 0, saveTimer = null, errCount = 0;
+  // The films have the floor while the homepage carousel is open (landing-intro.js sets the flag
+  // and announces open and close as 'b0b-floor'). A listener who left the bar playing is resumed
+  // when the carousel closes; nothing is saved as paused on their behalf.
+  var resumeOnRelease = false, pausedForFloor = false;
+  function floorHeld() { return !!window.__b0bSoundtrackHeld; }
+  // One music at a time. The bar plays only because a listener pressed play, so the site soundtrack's
+  // automatic starts yield to it (soundtrack.js asks here); a press of play on either player silences
+  // the other, announced as 'b0b-music'.
+  window.__b0bSignalOn = function () { return !!loadState().playing; };
+  document.addEventListener('b0b-music', function (e) {
+    if (e.detail && e.detail.who !== 'signal' && isPlaying()) { player.pauseVideo(); saveState({ playing: false }); }
+  });
+  document.addEventListener('b0b-floor', function (e) {
+    if (e.detail && e.detail.held) {
+      if (isPlaying()) { pausedForFloor = true; resumeOnRelease = true; player.pauseVideo(); }
+    } else if (resumeOnRelease && ready && player) {
+      resumeOnRelease = false;
+      try { player.playVideo(); } catch (err) { /* autoplay may be blocked */ }
+    }
+  });
 
   function loadState() {
     try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; }
@@ -189,7 +209,10 @@
     playBtn.addEventListener('click', function () {
       if (!ready) return;
       if (isPlaying()) { player.pauseVideo(); saveState({ playing: false }); }
-      else { player.playVideo(); saveState({ playing: true }); }
+      else {
+        player.playVideo(); saveState({ playing: true });
+        try { document.dispatchEvent(new CustomEvent('b0b-music', { detail: { who: 'signal' } })); } catch (e) {}
+      }
     });
     muteBtn.addEventListener('click', function () {
       if (!ready) return;
@@ -230,17 +253,25 @@
           if (st.muted) { player.mute(); if (muteBtn) muteBtn.innerHTML = '&#128263;'; }
           var start = Number(st.t) || 0;
           if (start > 1) player.seekTo(start, true);
-          if (st.playing) { try { player.playVideo(); } catch (e) { /* autoplay may be blocked */ } }
+          if (st.playing) {
+            if (floorHeld()) resumeOnRelease = true;
+            else { try { player.playVideo(); } catch (e) { /* autoplay may be blocked */ } }
+          }
           setPlayIcon();
           if (!saveTimer) saveTimer = setInterval(function () { saveState(); }, SAVE_MS);
         },
         onStateChange: function (e) {
-          if (e.data === 1) { errCount = 0; saveState({ playing: true }); }
-          else if (e.data === 2) saveState({ playing: false });
+          if (e.data === 1 && floorHeld()) {   // started under a film, however it started: stand down
+            pausedForFloor = true; resumeOnRelease = true;
+            try { player.pauseVideo(); } catch (err) {}
+          }
+          else if (e.data === 1) { errCount = 0; saveState({ playing: true }); }
+          else if (e.data === 2) { if (pausedForFloor) pausedForFloor = false; else saveState({ playing: false }); }
           else if (e.data === 0) {           // ended - roll on to the next signal
             saveState({ playing: true, t: 0 });
             goTrack(1);
-            if (player && player.playVideo) { try { player.playVideo(); } catch (err) { /* autoplay may be blocked */ } }
+            if (floorHeld()) resumeOnRelease = true;
+            else if (player && player.playVideo) { try { player.playVideo(); } catch (err) { /* autoplay may be blocked */ } }
           }
           setPlayIcon();
         },

@@ -205,6 +205,28 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**NO MUSIC UNDER THE CAROUSEL; ONE MUSIC AT A TIME — 22 Oct 2026, live.** Author: *"Why is tempest playing on carousel at all"*.
+- **Two causes, both real, proven with old vs new code on the real report** (scratchpad `floortest.js`: YouTube API stubbed so every play/pause is logged, plus an `appendChild` hook that catches YouTube iframes):
+  1. **`soundtrack.js` (mine):**
+     - `mount()` called `play(false)` without checking the carousel's hold, so its plain-iframe driver inserted a 7empest `autoplay=1` frame under the carousel. In a browser that already lets b0b.dev autoplay, that sounds; the hold only took effect once the YT API was adopted, and never if the API was blocked.
+     - Also, `__b0bSoundtrackHold(true)` stopped the music only if `playing`, which an unconfirmed iframe autoplay never sets.
+  2. **`signal-bar.js`, the bottom strip that plays XXV's whole signal playlist (7empest is its 11th track, 15:43):**
+     - It resumes on every page load for a listener who left it playing (`b0b_signal_v10.playing`), and it had **no hold at all**. Old code under the carousel: `signal PLAYING 9D2R69gVyZ0`.
+     - **The carousel (z-index 2147483600) covers the bar (2147483000)**, so a listener could not even pause it.
+- **Fix:**
+  - `soundtrack.js?v=6`: mount never plays under a hold or the narrator, and a hold stops an attempted autoplay too.
+  - `signal-bar.js?v=11`: reads `__b0bSoundtrackHeld` on ready, on every state change and when a track ends, and pauses itself under a film without saving "paused" over the listener's choice. It resumes when the carousel closes.
+  - `landing-intro.js?v=7`: dispatches `b0b-floor` `{held}` on open and close.
+- **The test found a second defect, also fixed:** after ENTER, both players started 7empest at once (the bar resuming, the soundtrack starting on the gesture). This had existed since the soundtrack was added; it was only audible now. **Rule: one music at a time.**
+  - The bar plays only because a listener pressed play, so the soundtrack's automatic starts (mount, `__b0bSoundtrackStart`, the narrator resume) yield when `__b0bSignalOn()` (stored `playing`) is true.
+  - A press of PLAY on either player dispatches `b0b-music` `{who}`, and the other stops.
+- **Results:**
+  - **A**, signal left playing: old = 7empest under the carousel, then two copies after ENTER; new = silence, then the bar alone.
+  - **B**, fresh visitor: old = an autoplay frame `underCarousel: true`; new = none, and the soundtrack starts on ENTER.
+  - **C**, `/report`: autoplay attempted as before.
+  - **D**: pressing the bar's play pauses the soundtrack.
+- **Not covered:** `intro.js` (the old intro film path) and listen mode hold `soundtrack.js` but not the signal bar. Neither is the arrival path now.
+
 **THE SOUNDTRACK LEADS WITH TOOL — 22 Oct 2026, live.** Author: *"Lead sound track with tool song"*. The TOOL song on the page is "7empest", XXV's sixth signal, played from its official audio upload (`9D2R69gVyZ0`).
 - **`site/soundtrack.js?v=5`:** a `TRACKS` list. TOOL "7empest" is the embed's own video and plays first; Restless Leg Syndrome follows as its `playlist`; `loop=1`. Both drivers (plain iframe and IFrame API) do this.
   - **The lead is deliberately NOT repeated in `playlist`:** YouTube may play it twice in a row (31 min). Whether the loop then returns to TOOL or repeats RLS alone is YouTube's behaviour and unverified here (YouTube refuses this environment). The lead is TOOL either way.
@@ -215,7 +237,7 @@ than once.
   - The ninth signal's "the track that plays when this page opens" is now "on this page's soundtrack, after TOOL's '7empest'".
   - The script comment was updated to match.
 - **Tested** on an isolated page with YouTube stubbed: the iframe src is `embed/9D2R69gVyZ0?…&loop=1&playlist=7eNqNfURcxw`; the API config has the same video and playlist; the label switches to RLS when RLS plays and back to TOOL.
-- Unchanged: the carousel still holds the music while a film plays, and the narrator still ducks it.
+- The narrator still ducks it. *The claim made here at first, "the carousel still holds the music", was false; see the entry above.*
 
 **ENDGAME IS TETELESTAI, AND NOTHING ELSE — 22 Oct 2026, live. Supersedes the nine-part film described in the 20 Oct entry.** Author: *"Endgame is just Tetelestai.. What ye do / Tetelestai is endgame video. Very simple"*.
 - **The film is 0:24** (`scripts/film-endgame.json`; the nine-part spec is kept only in the session scratchpad):

@@ -171,6 +171,15 @@
 
   var driver = iframeDriver;
 
+  // One music at a time: the signal bar's playlist is the listener's own choice, so the automatic
+  // starts below give way to it. A press of this PLAY silences the bar instead (see the toggle).
+  function signalOn() {
+    try { return typeof window.__b0bSignalOn === 'function' && window.__b0bSignalOn(); } catch (e) { return false; }
+  }
+  document.addEventListener('b0b-music', function (e) {
+    if (e.detail && e.detail.who !== 'soundtrack' && (playing || attempted)) stop();
+  });
+
   function play(fromGesture) {
     attempted = true;
     driver.play();
@@ -190,7 +199,7 @@
   // will allow unmuted audio - so the loader doubles as the permission slip.
   // It respects a previous stop: a reader who silenced this stays silenced.
   window.__b0bSoundtrackStart = function () {
-    if (held || narrating || offByChoice() || playing) return;
+    if (held || narrating || offByChoice() || playing || signalOn()) return;
     play(true);
   };
 
@@ -203,12 +212,17 @@
   var held = !!window.__b0bSoundtrackHeld;
   window.__b0bSoundtrackHold = function (on) {
     held = !!on;
-    if (held) { duckedByNarrator = false; if (playing) stop(); }
+    // `attempted` as well as `playing`: an iframe autoplay the browser allowed is sounding even
+    // though nothing has confirmed it, and only removing the frame silences it.
+    if (held) { duckedByNarrator = false; if (playing || attempted) stop(); }
   };
 
   toggle.addEventListener('click', function () {
     if (playing) { stop(); remember(true); }
-    else { remember(false); play(true); }
+    else {
+      remember(false); play(true);
+      try { document.dispatchEvent(new CustomEvent('b0b-music', { detail: { who: 'soundtrack' } })); } catch (e) {}
+    }
   });
   dismiss.addEventListener('click', function () {
     stop(); remember(true);
@@ -231,7 +245,7 @@
     if (narrating) { if (playing) { duckedByNarrator = true; stop(); } return; }
     if (duckedByNarrator && !held && !offByChoice()) {
       resumeTimer = setTimeout(function () {
-        if (!narrating && !held && duckedByNarrator && !offByChoice()) { duckedByNarrator = false; play(true); }
+        if (!narrating && !held && duckedByNarrator && !offByChoice() && !signalOn()) { duckedByNarrator = false; play(true); }
       }, 1500);
     }
   });
@@ -246,7 +260,9 @@
   function mount() {
     document.body.appendChild(bar);
     setLabel();
-    if (!offByChoice()) play(false);
+    // Not under a film or the narrator: the carousel sets the hold before this file runs, and a
+    // browser that already allows this site to autoplay would otherwise start the music under it.
+    if (!offByChoice() && !held && !narrating && !signalOn()) play(false);
     loadApi();
   }
 

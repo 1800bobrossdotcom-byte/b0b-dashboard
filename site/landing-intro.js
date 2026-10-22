@@ -24,6 +24,7 @@
   // soundtrack.js loads after this file and reads the flag before it tries to play.
   window.__b0bSoundtrackHeld = true;
   soundtrack('__b0bSoundtrackHold', true);
+  floor(true);
 
   // Every film the site hosts. Each part lists its files in order of preference: the subtitled cut first,
   // because the carousel starts muted and the words must be on screen.
@@ -51,6 +52,8 @@
   try { reduced = matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
 
   function soundtrack(fn, arg) { try { var f = window[fn]; if (typeof f === 'function') f(arg); } catch (e) {} }
+  // The signal bar's playlist listens for this; it loads after this file, so it also reads the flag.
+  function floor(held) { try { document.dispatchEvent(new CustomEvent('b0b-floor', { detail: { held: held } })); } catch (e) {} }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
   var CSS =
@@ -208,6 +211,7 @@
       try { document.documentElement.classList.remove('b0b-intro-lock'); } catch (e) {}
       window.__b0bSoundtrackHeld = false;
       soundtrack('__b0bSoundtrackHold', false);
+      floor(false);
       if (byGesture) soundtrack('__b0bSoundtrackStart');
       if (lastFocus && lastFocus.focus) { try { lastFocus.focus({ preventScroll: true }); } catch (e) {} }
     }, FADE);
