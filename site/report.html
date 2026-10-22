@@ -37,7 +37,7 @@
   <meta name="twitter:title" content="b0b.dev - Project Anglerfish: a tiered, sourced OSINT report">
   <meta name="twitter:description" content="25 sections of tiered OSINT on structures of control: institutional capture, surveillance cities, underground infrastructure, the Epstein-Maxwell record. documented fact vs labeled hypothesis.">
   <meta name="twitter:image" content="https://www.b0b.dev/img/og-card.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"PROJECT ANGLERFISH: CASSOWARY ORCA AGILITY — the architecture of control, tiered and sourced","url":"https://www.b0b.dev/report","description":"Independent OSINT report by b0b.dev: 25 sections, every claim tiered and sourced, rival explanations scored, falsifiers stated, corrections public, data downloadable.","image":"https://www.b0b.dev/img/og-card.png","isPartOf":{"@type":"WebSite","name":"b0b.dev","url":"https://www.b0b.dev/"},"headline":"PROJECT ANGLERFISH: CASSOWARY ORCA AGILITY — the architecture of control, tiered and sourced","author":{"@type":"Person","name":"b0b"},"publisher":{"@type":"Organization","name":"b0b.dev","url":"https://www.b0b.dev/"},"mainEntityOfPage":"https://www.b0b.dev/report","dateModified":"2026-10-21T22:39:38.365Z"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"PROJECT ANGLERFISH: CASSOWARY ORCA AGILITY — the architecture of control, tiered and sourced","url":"https://www.b0b.dev/report","description":"Independent OSINT report by b0b.dev: 25 sections, every claim tiered and sourced, rival explanations scored, falsifiers stated, corrections public, data downloadable.","image":"https://www.b0b.dev/img/og-card.png","isPartOf":{"@type":"WebSite","name":"b0b.dev","url":"https://www.b0b.dev/"},"headline":"PROJECT ANGLERFISH: CASSOWARY ORCA AGILITY — the architecture of control, tiered and sourced","author":{"@type":"Person","name":"b0b"},"publisher":{"@type":"Organization","name":"b0b.dev","url":"https://www.b0b.dev/"},"mainEntityOfPage":"https://www.b0b.dev/report","dateModified":"2026-10-21T23:14:44.627Z"}</script>
   <!-- seo:end -->
   <!-- Search Console ownership. The site opens on this page (/ serves the
        report), so the verifier's fetch of the homepage ends up on this
@@ -492,23 +492,29 @@
 <!-- The intro film. intro.js builds everything inside this element; the
      bootstrap below only decides whether it opens on arrival. -->
 <div id="b0b-intro" hidden data-mode="overlay" role="dialog" aria-modal="true" aria-label="b0b.dev intro film"><div class="bi-boot">b0b.dev</div></div>
-<!-- What opens on arrival (site/landing-intro.js): the animated b0b.dev mark, then a film. Since 21 Oct
-     2026 it is the Briefing film, subtitled cut (the author: "Make a video for briefing and have that be what
-     replaces endgame as the starting video. Keep endgame as a video."). Before it: Endgame from 20 Oct -
-     data-videos="/b0b-endgame-film" data-title="ENDGAME" restores it - and his OM COMMA #1 and #2 from 19 Oct,
-     data-videos="/omcomma-1,/omcomma-2" data-title="OM COMMA". All the files stay in public/. The intro film
-     above still plays on request. -->
-<div id="b0b-landing" hidden data-videos="/b0b-briefing-film" data-title="BRIEFING" role="dialog" aria-modal="true" aria-label="b0b.dev"></div>
+<!-- The homepage (site/landing-intro.js): the animated b0b.dev mark, then a carousel of every film the
+     site hosts, the main film playing first. Since 22 Oct 2026, at the author's instruction ("push the intro
+     film section into a carousel of all the films. Main film is the om comma one we had up with darpa theme
+     ... Have the homepage be this"). data-main names the film that plays first: omcomma, briefing, endgame,
+     epstein-maxwell, continuity or intro. The intro film above still plays on request. -->
+<div id="b0b-landing" hidden data-main="omcomma" role="dialog" aria-modal="true" aria-label="b0b.dev - the films"></div>
 <script>
 (function(){
   var el=document.getElementById('b0b-intro'); if(!el) return;
-  // Arrival opens the landing film when there is one; the intro film stays for the replay button.
+  // Arrival opens the films carousel when there is one; the intro film stays for the replay button.
   var land=document.getElementById('b0b-landing');
-  if(land && land.getAttribute('data-videos')) el=land;
+  var carousel=!!(land && land.hasAttribute('data-main'));
+  if(carousel) el=land;
   var show=true;
-  // Once per session. A reader who has seen it is not shown it again - the
-  // sidebar's INTRO FILM button replays it on request.
-  try{ if(sessionStorage.getItem('b0b:intro:seen')==='1') show=false; }catch(e){}
+  if(carousel){
+    // The carousel IS the homepage (the author, 22 Oct 2026): it opens on every visit to the bare
+    // address, and never on /report, which is where ENTER THE REPORT leaves the reader.
+    if(location.pathname!=='/') show=false;
+  } else {
+    // Once per session. A reader who has seen it is not shown it again - the
+    // sidebar's INTRO FILM button replays it on request.
+    try{ if(sessionStorage.getItem('b0b:intro:seen')==='1') show=false; }catch(e){}
+  }
   // A deep link means someone is going somewhere specific. Do not stand in
   // the way of a citation.
   if(location.hash) show=false;
@@ -6578,7 +6584,7 @@
 <script src="/intro-reel.js?v=4" defer></script>
 <script src="/intro.js?v=8" defer></script>
 <script src="/b0b-wordmark.js?v=1" defer></script>
-<script src="/landing-intro.js?v=1" defer></script>
+<script src="/landing-intro.js?v=2" defer></script>
 <!-- Site soundtrack: Restless Leg Syndrome, "Represent The Fucking Planet" (Totem, 2021),
      played from the label's YouTube upload through youtube-nocookie; nothing is rehosted.
      The control mounts unconditionally and plays through a plain iframe, so it still works
