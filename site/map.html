@@ -43,6 +43,9 @@
       height: 44px;
       position: relative;
       z-index: 1003;
+      /* i18n.js pins its language button at top:8px right:8px over the page; keep the
+         nav out from under it (it was covering the X link and, on phones, the menu). */
+      padding-right: 124px;
     }
     .header h1 { color: var(--green); font-size: 1.1rem; letter-spacing: 2px; white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
     .header nav { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
@@ -55,6 +58,7 @@
       transition: all 0.3s;
     }
     .header nav a:hover { background: var(--cyan); color: var(--on-accent); }
+    .nav-toggle { display: none; background: none; border: 1px solid var(--cyan); color: var(--cyan); font: inherit; font-size: 0.9rem; line-height: 1; padding: 0.2rem 0.5rem; cursor: pointer; }
     .legend {
       position: absolute;
       bottom: calc(var(--b0b-signal-h, 46px) + 50px);
@@ -144,10 +148,14 @@
     .tk-badge.ext { border-color: var(--cyan); color: var(--cyan); }
     .tk-badge.live { border-color: var(--green); color: var(--green); }
     .tk-badge.tool { border-color: var(--orange-3); color: var(--orange-3); }
+    /* The stats line sits at the bottom centre, on the legend's baseline: at the
+       top left it covered the zoom-in button and, under ~1,470 px, the search box. */
     .stats-bar {
       position: absolute;
-      top: 54px;
-      left: 10px;
+      bottom: calc(var(--b0b-signal-h, 46px) + 50px);
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
       z-index: 1000;
       background: var(--panel-d);
       border: 1px solid var(--border);
@@ -323,15 +331,16 @@
 
     /* ===================== MOBILE RESPONSIVE ===================== */
     @media (max-width: 768px) {
-      .header { height: 40px; padding: 0 0.6rem; }
+      .header { height: 40px; padding: 0 116px 0 0.6rem; }
       .header h1 { font-size: 0.8rem; letter-spacing: 1px; }
       .header nav a { font-size: 0.65rem; padding: 0.15rem 0.4rem; }
       .header nav { gap: 4px; }
       #map { height: calc(100vh - 40px); }
 
-      .stats-bar { top: 48px; font-size: 0.65rem; padding: 4px 8px; }
-      .search-box { top: 48px; }
-      .search-box input { width: calc(100vw - 120px); max-width: 220px; font-size: 16px; padding: 5px 10px; }
+      .stats-bar { top: 82px; bottom: auto; left: 8px; right: 8px; transform: none; text-align: center; overflow: hidden; text-overflow: ellipsis; font-size: 0.6rem; padding: 3px 8px; }
+      .search-box { top: 48px; left: 8px; transform: none; }
+      .search-box input { width: calc(100vw - 170px); max-width: none; font-size: 16px; padding: 5px 10px; }
+      .search-box a, .search-hint { display: none; }
       .filter-toggle { top: 48px; font-size: 0.6rem; padding: 4px 8px; }
 
       .filter-panel { width: 92vw; max-width: 440px; top: 40px; height: calc(100vh - 40px); height: calc(100dvh - 40px); }
@@ -360,10 +369,18 @@
       body .leaflet-bottom { bottom: calc(var(--b0b-signal-h, 46px) + 36px) !important; }
     }
 
+    /* Phones: the four nav links go behind a menu button instead of shrinking to 8 px type. */
+    @media (max-width: 600px) {
+      #b0b-masthead-visitors { display: none; }
+      .nav-toggle { display: block; }
+      .header nav { display: none; position: absolute; top: 40px; right: 0; flex-direction: column; align-items: stretch; gap: 6px; padding: 10px; background: var(--bg); border: 1px solid var(--border); border-top: none; }
+      .header.nav-open nav { display: flex; }
+      .header nav a { font-size: 0.8rem !important; padding: 0.5rem 0.8rem !important; text-align: center; }
+    }
+
     @media (max-width: 400px) {
       .header h1 { font-size: 0.65rem; letter-spacing: 0.5px; }
-      .header nav { display: flex; flex-wrap: nowrap; gap: 2px; }
-      .header nav a { font-size: 0.5rem; padding: 0.1rem 0.3rem; white-space: nowrap; }
+
       .search-box input { max-width: 160px; }
       .filter-panel { width: 100vw; max-width: none; }
       .filter-grid { grid-template-columns: 1fr 1fr; }
@@ -424,7 +441,8 @@
 <div class="header">
   <h1>b0b.dev - OSINT MAP</h1>
   <span id="b0b-masthead-visitors" style="color:#3f5a4c;font-size:0.7rem;white-space:nowrap;margin-left:10px;overflow:hidden;text-overflow:ellipsis"></span>
-  <nav>
+  <button class="nav-toggle" type="button" aria-label="Menu" aria-controls="mapNav" aria-expanded="false" onclick="var h=this.parentNode;var o=h.classList.toggle('nav-open');this.setAttribute('aria-expanded',o)">&#9776;</button>
+  <nav id="mapNav">
     <a href="/" data-i18n="nav.home">HOME</a>
     <a href="/report" data-i18n="nav.report">REPORT</a>
     <a href="https://www.youtube.com/@ERC-1155" target="_blank" rel="noopener noreferrer" style="color:#e6c200;border-color:#e6c200">ERC-1155</a>
@@ -480,6 +498,7 @@
   <div class="filter-item"><label><input type="checkbox" data-section="XVI"> XVI - FOIA</label></div>
   <div class="filter-item"><label><input type="checkbox" data-section="XVII"> XVII - Organized Crime</label></div>
   <div class="filter-item"><label><input type="checkbox" data-section="XXII"> XXII - Spiritual Exit</label></div>
+  <div class="filter-item"><label><input type="checkbox" data-section="XXIV"> XXIV - Test Cases</label></div>
   <div class="filter-item"><label><input type="checkbox" data-section="SPORTS"> Sports/Gambling</label></div>
   <div class="filter-item"><label><input type="checkbox" data-section="ANIMAL"> Animal Testing</label></div>
   <div class="filter-item"><label><input type="checkbox" data-section="XX"> XX - Data Centers</label></div>
@@ -544,15 +563,15 @@
   </div>
   <div class="filter-section-body" id="dataBody">
   <div class="filter-grid">
-  <div class="filter-item"><label><input type="checkbox" id="toggleConnections" onchange="toggleDataLayer('connections')"> Connection Lines</label></div>
-  <div class="filter-item" style="grid-column:1/-1"><label for="edgeTierMin">Line tier</label> <select id="edgeTierMin" onchange="applyEdgeTier(this.value)" style="background:#111;color:#ccc;border:1px solid #333;font:inherit">
+  <div class="filter-item"><label><input type="checkbox" id="toggleConnections" autocomplete="off" onchange="toggleDataLayer('connections')"> Connection Lines</label></div>
+  <div class="filter-item" style="grid-column:1/-1"><label for="edgeTierMin">Line tier</label> <select id="edgeTierMin" autocomplete="off" onchange="applyEdgeTier(this.value)" style="background:#111;color:#ccc;border:1px solid #333;font:inherit">
     <option value="0">all lines (0 analogy and up)</option><option value="2">2+ documented contact</option><option value="3">3+ material relationship</option><option value="4">4+ coordination</option></select>
     <div style="font-size:10px;color:#888;margin-top:3px;line-height:1.4">A line is tiered by the record of the relationship between its ends: 0 analogy &middot; 1 correlation &middot; 2 contact &middot; 3 material &middot; 4 coordination &middot; 5 causation. Dotted = 0&ndash;1, dashed = 2, solid = 3+. <a href="/map/list#tiers" style="color:#00ccff">How it works</a></div></div>
   <div class="filter-item"><label><input type="checkbox" id="toggleTunnels" onchange="toggleDataLayer('tunnels')"> Tunnel Paths</label></div>
   <div class="filter-item"><label><input type="checkbox" id="toggleIndigenous" onchange="toggleDataLayer('indigenous')"> 🏔️ Indigenous Territories</label></div>
   <div class="filter-item"><label><input type="checkbox" id="toggleEarthquakes" onchange="toggleDataLayer('earthquakes')"> 🌍 USGS Quakes</label></div>
   <div class="filter-item"><label><input type="checkbox" id="toggleEONET" onchange="toggleDataLayer('eonet')"> 🔥 NASA Events</label></div>
-  <div class="filter-item"><label><input type="checkbox" id="toggleFIRMS" onchange="toggleDataLayer('firms')"> 🔥 NASA Fire Hotspots</label></div>
+  <div class="filter-item"><label><input type="checkbox" id="toggleFIRMS" onchange="toggleDataLayer('firms')"> 🔥 NASA FIRMS Heat Hotspots</label></div>
   <div class="filter-item"><label><input type="checkbox" id="toggleOpenSky" onchange="toggleDataLayer('opensky')"> ✈️ Live Aircraft (ADS-B)</label></div>
   <div class="filter-item"><label><input type="checkbox" id="toggleMilAir" onchange="toggleDataLayer('milair')"> 🛩️ Military Aircraft (global)</label></div>
   <div class="filter-item"><label><input type="checkbox" id="toggleVessels" onchange="toggleDataLayer('vessels')"> 🚢 Live Vessels (AIS)</label></div>
@@ -560,7 +579,7 @@
   <div class="filter-item"><label><input type="checkbox" id="toggleGDACS" onchange="toggleDataLayer('gdacs')"> ⚠️ GDACS Disasters</label></div>
   <div class="filter-item"><label><input type="checkbox" id="toggleALPR" onchange="toggleDataLayer('alpr')"> 📸 ALPR / Flock Cameras</label></div>
   </div>
-  <div class="filter-item" id="liveFeedStatus" style="display:none;color:#888;font-size:0.6rem;padding-left:4px"></div>
+  <div class="filter-item" id="liveFeedStatus" data-dynamic style="display:none;color:#888;font-size:0.6rem;padding-left:4px"></div>
   <div class="filter-item"><label><input type="checkbox" id="toggleTimeline" onchange="toggleTimelinePanel()"> Correlation Timeline</label></div>
   </div>
   <!-- SEARCH -->
@@ -657,6 +676,8 @@
   <div class="filter-item"><a href="/api/data" target="_blank" style="color:#00ff41;text-decoration:none;font-size:0.7rem">⬇ EXPORT JSON DATA</a></div>
   <div class="filter-item" style="margin-top:2px"><a href="/download" style="color:#ff4444;text-decoration:none;font-size:0.7rem">📦 DOWNLOAD OFFLINE BACKUP (ZIP)</a></div>
   <div class="filter-item" style="margin-top:2px"><a href="/report#methodology" target="_blank" style="color:#00ccff;text-decoration:none;font-size:0.7rem">📋 SOURCE METHODOLOGY</a></div>
+  <div class="filter-item" style="margin-top:2px"><a href="/map.kml" download style="color:#00ff41;text-decoration:none;font-size:0.7rem">⤓ KML FOR GOOGLE EARTH</a></div>
+  <div class="filter-item" style="margin-top:2px"><a href="/map/list" style="color:#00ff41;text-decoration:none;font-size:0.7rem">☰ EVERY SITE AND LINE AS TEXT</a></div>
   <div class="filter-item" style="margin-top:2px;color:#888;font-size:0.6rem">Deep Links: /map?type=X&section=Y&marker=Z</div>
   </div>
   </div>
@@ -2446,7 +2467,7 @@ locations.forEach(function(loc) {
     '<div class="popup-section">' + sectionLabel + '</div>' +
     '<div class="popup-type">' + typeLabel + '</div>' +
     '<div style="margin:6px 0;display:flex;gap:8px;align-items:center;flex-wrap:wrap">' +
-    '<a class="popup-link" href="/report#' + (({ANIMAL:'XIV',MS:'X'})[loc.section]||loc.section) + '" target="_blank" style="font-weight:bold">→ View in Report</a>' +
+    (loc.section === 'SPORTS' ? '' : '<a class="popup-link" href="/report#' + (({ANIMAL:'XIV',MS:'X'})[loc.section]||loc.section) + '" target="_blank" style="font-weight:bold">→ View in Report</a>') +
     '<a class="popup-link" href="#" onclick="isolateType(\'' + loc.type + '\');return false" style="font-size:0.65rem">⊕ ' + typeLabel + '</a>' +
     '<a class="popup-link" href="#" onclick="isolateSection(\'' + loc.section + '\');return false" style="font-size:0.65rem">⊕ Section ' + loc.section + '</a>' +
     '<a class="popup-link" href="#" onclick="showConnected(' + loc.lat + ',' + loc.lng + ');return false" style="font-size:0.65rem">⊕ Connected</a>' +
@@ -2759,6 +2780,7 @@ function resetFilters() {
   document.getElementById('searchInput').value = '';
   document.getElementById('patternInput').value = '';
   document.getElementById('proximityType').value = '';
+  applyFilters();
 }
 
 function sectionCount() {
@@ -3544,8 +3566,9 @@ function applyEdgeTier(min) {
 
 function toggleDataLayer(layer) {
   if (layer === 'connections') {
-    if (map.hasLayer(lineLayer)) map.removeLayer(lineLayer);
-    else map.addLayer(lineLayer);
+    var on = document.getElementById('toggleConnections').checked;
+    if (on && !map.hasLayer(lineLayer)) map.addLayer(lineLayer);
+    if (!on && map.hasLayer(lineLayer)) map.removeLayer(lineLayer);
   } else if (layer === 'tunnels') {
     if (map.hasLayer(tunnelLayer)) map.removeLayer(tunnelLayer);
     else map.addLayer(tunnelLayer);
@@ -3639,6 +3662,15 @@ function toggleDataLayer(layer) {
     }
   }
 }
+
+// First view: the lines a document vouches for (tier 3, material relationship,
+// and up) are on. The weaker tiers are one change of the selector away.
+(function() {
+  document.getElementById('edgeTierMin').value = '3';
+  applyEdgeTier(3);
+  document.getElementById('toggleConnections').checked = true;
+  toggleDataLayer('connections');
+})();
 
 // ===================== LIVE DATA LAYERS =====================
 var earthquakeLayer = L.layerGroup();
@@ -3928,10 +3960,11 @@ function fetchFIRMS() {
         });
         circle.bindPopup(
           '<div style="font-family:Courier New,monospace;font-size:0.75rem;color:#ddd;background:#111;padding:8px;border:1px solid #333;min-width:180px">' +
-          '<div style="color:#ff4400;font-weight:bold;margin-bottom:4px">🔥 ACTIVE FIRE</div>' +
+          '<div style="color:#ff4400;font-weight:bold;margin-bottom:4px">🔥 HEAT HOTSPOT</div>' +
           '<div style="color:#aaa;margin-bottom:2px">FRP: ' + frp.toFixed(1) + ' MW</div>' +
           '<div style="color:#aaa;margin-bottom:2px">Brightness: ' + brightness.toFixed(0) + 'K</div>' +
           '<div style="color:#888">' + (conf ? 'Confidence: ' + conf + '<br>' : '') + acqDate + ' ' + acqTime + '</div>' +
+          '<div style="color:#666;margin-top:4px;font-size:0.65rem">Heat detected by satellite (VIIRS, 375 m). Wildfires, gas flares, industrial plants and volcanoes all register; the sensor does not say which.</div>' +
           '</div>',
           {className: 'dark-popup'}
         );
@@ -4616,6 +4649,10 @@ function fetchGDACS() {
   var snapshots = {};
   var mutationLog = [];
   var watchdogFired = false;
+  // A language switch (i18n.js) rewrites the nav and headings on purpose and
+  // announces it with b0b-lang in the same task, before this observer runs.
+  var langAt = 0;
+  window.addEventListener('b0b-lang', function() { langAt = Date.now(); });
 
   // Take initial snapshots after a brief delay (let filters/stats populate)
   setTimeout(function() {
@@ -4663,6 +4700,8 @@ function fetchGDACS() {
             return;
           }
         }
+
+        if (Date.now() - langAt < 3000) { snap.text = newText; return; }
 
         // Check if text actually changed from snapshot
         if (newText !== snap.text) {
@@ -4813,19 +4852,30 @@ function fetchGDACS() {
       });
     }, 30000);
 
-    // Simpler approach: snapshot the text content (no attributes) and compare periodically
+    // Simpler approach: snapshot the text content (no attributes) and compare periodically.
+    // Children marked data-dynamic (the live-feed status line) change by design and are
+    // left out; without that, switching on any live feed reported the panel as tampered.
+    function sigText(el) {
+      var c = el.cloneNode(true);
+      c.querySelectorAll('[data-dynamic]').forEach(function(n) { n.remove(); });
+      return c.textContent;
+    }
     var textSnapshots = {};
-    sigTargets.forEach(function(t) {
-      var el = document.querySelector(t.sel);
-      if (el) textSnapshots[t.sel] = el.textContent;
-    });
+    function snapAll() {
+      sigTargets.forEach(function(t) {
+        var el = document.querySelector(t.sel);
+        if (el) textSnapshots[t.sel] = sigText(el);
+      });
+    }
+    snapAll();
+    window.addEventListener('b0b-lang', function() { setTimeout(snapAll, 0); });
 
     setInterval(function() {
       var violations = [];
       sigTargets.forEach(function(t) {
         var el = document.querySelector(t.sel);
         if (!el || !textSnapshots[t.sel]) return;
-        if (el.textContent !== textSnapshots[t.sel]) {
+        if (sigText(el) !== textSnapshots[t.sel]) {
           violations.push(t.sel);
           console.warn('[CONTENT SIG] ⚠ INTEGRITY MISMATCH: ' + t.sel);
         }
