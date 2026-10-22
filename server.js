@@ -444,6 +444,7 @@ const PAGES = {
   '/map/list':      'map-list.html',
   '/stickers':      'stickers.html', // 10 Oct 2026: the sticker set and its print files
   '/announcement':  'announcement.html', // 11 Oct 2026: the public announcement and its audio
+  '/stats':         'stats.html', // 22 Oct 2026: the counts dashboard; unlisted - noindex, not in the sitemap or menus
 };
 
 // Alias -> canonical, as 301s. These used to be duplicate 200s (both forms in
@@ -864,6 +865,74 @@ function kv(cmd) {
     .catch(() => null);
 }
 
+function kvPipeline(cmds) {
+  return fetch(KV_URL + '/pipeline', {
+    method: 'POST',
+    headers: { Authorization: 'Bearer ' + KV_TOKEN, 'Content-Type': 'application/json' },
+    body: JSON.stringify(cmds)
+  }).then(r => r.ok ? r.json() : null).catch(() => null);
+}
+
+// Daily counts, added 22 Oct 2026 for /stats. One hash per UTC day, b0b:d:YYYY-MM-DD:
+//   b  a page served to a browser navigation   c  to a known crawler (CRAWLER_RE)
+//   o  to any other client (scripts, unknown bots, prefetches, old browsers)
+//   a  browser arrivals: navigations that did not follow a link from b0b.dev itself
+//   p:<path>  browser views of that page
+// The request's headers decide the class at the moment of counting and are then
+// dropped; nothing about the reader is stored. Sec-Fetch-Site, not Referer, tells an
+// arrival from a click inside the site, because this site sends no referrer.
+const DAY_TTL = 400 * 86400;
+const memDays = {};
+let sinceMarked = false;
+
+function dayKey(d) { return (d || new Date()).toISOString().slice(0, 10); }
+
+function viewClass(req) {
+  if (isCrawler(req)) return 'c';
+  const h = req.headers;
+  if (h['sec-fetch-mode'] === 'navigate' && !h['sec-purpose'] && !h['purpose']) return 'b';
+  return 'o';
+}
+
+function addDay(days, day, fields) {
+  const d = days[day] || (days[day] = {});
+  for (const k of Object.keys(fields)) d[k] = (d[k] || 0) + fields[k];
+}
+
+function countView(req, page) {
+  try {
+    const cls = viewClass(req);
+    const fields = { [cls]: 1 };
+    if (cls === 'b') {
+      if (!/^same-(origin|site)$/.test(req.headers['sec-fetch-site'] || '')) fields.a = 1;
+      fields['p:' + page] = 1;
+    }
+    const day = dayKey();
+    if (countBackend === 'kv') {
+      const key = 'b0b:d:' + day;
+      const cmds = [['INCR', 'b0b:views']];
+      for (const f of Object.keys(fields)) cmds.push(['HINCRBY', key, f, 1]);
+      cmds.push(['EXPIRE', key, DAY_TTL]);
+      if (!sinceMarked) { cmds.push(['SETNX', 'b0b:daily_since', day]); sinceMarked = true; }
+      kvPipeline(cmds);
+      return;
+    }
+    if (countBackend === 'file') {
+      const c = readFileCounts();
+      c.views = (c.views || 0) + 1;
+      if (!c.since) c.since = new Date().toISOString();
+      c.days = c.days || {};
+      addDay(c.days, day, fields);
+      const cutoff = dayKey(new Date(Date.now() - DAY_TTL * 1000));
+      for (const k of Object.keys(c.days)) if (k < cutoff) delete c.days[k];
+      fs.writeFileSync(COUNT_FILE, JSON.stringify(c));
+      return;
+    }
+    memCounts.views++;
+    addDay(memDays, day, fields);
+  } catch (e) { /* never let counting break a response */ }
+}
+
 // Fire-and-forget: a counter must never delay or break a page render.
 function bump(kind) {
   try {
@@ -912,6 +981,62 @@ app.get('/api/visitors', (req, res) => {
   return respond(memCounts.visits, memCounts.views, null);
 });
 
+// /stats reads this. Same access rule as /api/visitors. Cached a minute per
+// instance so a reload of the dashboard costs the store nothing.
+const statsCache = new Map();
+app.get('/api/stats', (req, res) => {
+  if (!hasAccess(req)) return res.status(404).end();
+  res.setHeader('Cache-Control', 'no-store');
+  const n = Math.max(1, Math.min(90, parseInt(req.query.days, 10) || 30));
+  const hit = statsCache.get(n);
+  if (hit && Date.now() - hit.t < 60_000) return res.json(hit.body);
+  const dates = [];
+  for (let i = n - 1; i >= 0; i--) dates.push(dayKey(new Date(Date.now() - i * 86400000)));
+
+  const send = (raw, views, visits, since) => {
+    const days = dates.map((date) => {
+      const f = raw[date] || {};
+      const pages = {};
+      for (const k of Object.keys(f)) if (k.startsWith('p:')) pages[k.slice(2)] = Number(f[k]) || 0;
+      return { date, browser: Number(f.b) || 0, crawler: Number(f.c) || 0, other: Number(f.o) || 0,
+        arrivals: Number(f.a) || 0, pages };
+    });
+    const body = {
+      generated: new Date().toISOString(),
+      backend: countBackend,
+      daily_since: since || null,
+      days,
+      totals: { views: views, gate_entries: visits },
+      method: 'Aggregate counts only. Each page served is counted once, by day and by the kind of client ' +
+        'that asked for it; the request is then forgotten. No IP, user agent, cookie or per-reader record is ' +
+        'kept, so these are page loads, not people.'
+    };
+    statsCache.set(n, { t: Date.now(), body });
+    res.json(body);
+  };
+
+  if (countBackend === 'kv') {
+    const cmds = [['GET', 'b0b:views'], ['GET', 'b0b:visits'], ['GET', 'b0b:daily_since']]
+      .concat(dates.map((d) => ['HGETALL', 'b0b:d:' + d]));
+    return kvPipeline(cmds).then((out) => {
+      if (!Array.isArray(out)) return res.status(503).json({ error: 'count store unreachable' });
+      const raw = {};
+      dates.forEach((d, i) => {
+        const flat = (out[3 + i] && out[3 + i].result) || [];
+        const f = {};
+        for (let j = 0; j + 1 < flat.length; j += 2) f[flat[j]] = flat[j + 1];
+        raw[d] = f;
+      });
+      const val = (i) => Number((out[i] && out[i].result) || 0);
+      send(raw, val(0), val(1), (out[2] && out[2].result) || null);
+    });
+  }
+  const src = countBackend === 'file' ? readFileCounts() : { views: memCounts.views, visits: memCounts.visits, days: memDays };
+  const days = src.days || {};
+  const keys = Object.keys(days).sort();
+  send(days, src.views || 0, src.visits || 0, keys[0] || null);
+});
+
 // Page routes
 app.get('*', (req, res) => {
   const nonce = res.locals.nonce;
@@ -954,7 +1079,8 @@ app.get('*', (req, res) => {
       // these pages; anything with a src= is external and covered by 'self'.
       // Pages are served no-store, so a nonce is never replayed from a cache.
       const html = stampUpdated(fs.readFileSync(file, 'utf8')).replace(/<script>/g, `<script nonce="${nonce}">`);
-      bump('views');
+      // /stats is not counted, so reading the numbers does not move them.
+      if (req.path !== '/stats') countView(req, req.path + (page === 'map.html' && req.path === '/map' ? '?engine=classic' : ''));
       res.setHeader('Content-Type', 'text/html; charset=utf-8');
       res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
       return res.send(html);

@@ -110,7 +110,7 @@ async function main() {
     check('a search crawler gets the real report, not the pixel gate',
       r.status === 200 && r.body.includes('rel="canonical"') && !r.body.includes('id="gate"'), `HTTP ${r.status}`);
   }
-  for (const p of ['/download', '/api/data', '/api/visitors']) {
+  for (const p of ['/download', '/api/data', '/api/visitors', '/api/stats']) {
     const r = await request(server, { path: p, headers: asBot() });
     check(`crawler bypass does NOT extend to ${p}`, r.status === 404, `HTTP ${r.status}`);
   }

@@ -85,7 +85,7 @@ async function main() {
     check('/report without a cookie serves the pixel gate, not the report',
       r.status === 200 && r.body.includes('id="gate"') && !r.body.includes('sect-body'), `status ${r.status}, ${r.body.length} bytes`);
   }
-  for (const path of ['/api/data', '/api/visitors', '/download']) {
+  for (const path of ['/api/data', '/api/visitors', '/api/stats', '/download']) {
     const r = await request(server, { path, headers: HTTPS });
     check(`${path} without a cookie is 404`, r.status === 404, `status ${r.status}`);
   }
@@ -103,7 +103,7 @@ async function main() {
     const page = await request(server, { path: '/report', headers: bot });
     check('a Googlebot UA is served the report without a cookie',
       page.status === 200 && !page.body.includes('id="gate"'), `status ${page.status}`);
-    for (const p of ['/download', '/api/data', '/api/visitors']) {
+    for (const p of ['/download', '/api/data', '/api/visitors', '/api/stats']) {
       const r = await request(server, { path: p, headers: bot });
       check(`crawler UA still cannot reach ${p}`, r.status === 404, `status ${r.status}`);
     }
