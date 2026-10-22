@@ -819,10 +819,15 @@ var map = L.map('map', {
 
 var tileProviders = {
   dark: {
-    primary: L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
-      subdomains: 'abcd', maxZoom: 19
-    }),
+    // Esri Dark Gray Canvas, base + labels. CARTO's keyless dark tiles became an
+    // "API KEY REQUIRED" watermark served with HTTP 200 (Sept 2026), which no
+    // failover can detect, so CARTO is not used.
+    primary: L.featureGroup([
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+        attribution: '&copy; Esri, HERE, Garmin, &copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors', maxZoom: 19, maxNativeZoom: 16
+      }),
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19, maxNativeZoom: 16 })
+    ]),
     fallback: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> (dark-filtered)',
       className: 'dark-osm-tiles', maxZoom: 19
@@ -853,16 +858,15 @@ var tileProviders = {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>',
       maxZoom: 19
     }),
-    fallback: L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
-      subdomains: 'abcd', maxZoom: 19
+    fallback: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+      attribution: '&copy; Esri, HERE, Garmin, &copy; OSM contributors', maxZoom: 19
     }),
     label: 'STREET'
   },
   firstpeoples: {
-    primary: L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a> | Indigenous territories: <a href="https://native-land.ca/">Native Land Digital</a>',
-      subdomains: 'abcd', maxZoom: 19
+    primary: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+      attribution: '&copy; Esri, HERE, Garmin, &copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors | Indigenous territories: <a href="https://native-land.ca/">Native Land Digital</a>',
+      maxZoom: 19, maxNativeZoom: 16
     }),
     fallback: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
       attribution: '&copy; Esri | Indigenous territories: <a href="https://native-land.ca/">Native Land Digital</a>',
@@ -875,9 +879,8 @@ var tileProviders = {
       attribution: '&copy; Esri, Maxar, Earthstar Geographics',
       maxZoom: 19
     }),
-    fallback: L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
-      subdomains: 'abcd', maxZoom: 19
+    fallback: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+      attribution: '&copy; Esri, HERE, Garmin, &copy; OSM contributors', maxZoom: 19, maxNativeZoom: 16
     }),
     label: 'EARTH'
   }
@@ -938,7 +941,7 @@ function showTileFailoverNotice(label) {
 (function probeTileHealth() {
   var probeZoom = 3, probeX = 4, probeY = 2; // center-ish tile at zoom 3
   var probeTargets = {
-    dark: 'https://a.basemaps.cartocdn.com/dark_all/' + probeZoom + '/' + probeX + '/' + probeY + '.png',
+    dark: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/' + probeZoom + '/' + probeY + '/' + probeX,
     satellite: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/' + probeZoom + '/' + probeY + '/' + probeX,
     terrain: 'https://a.tile.opentopomap.org/' + probeZoom + '/' + probeX + '/' + probeY + '.png',
     street: 'https://a.tile.openstreetmap.org/' + probeZoom + '/' + probeX + '/' + probeY + '.png'
@@ -988,7 +991,7 @@ function showTileFailoverNotice(label) {
     dark: 'https://a.tile.openstreetmap.org/3/4/2.png',
     satellite: 'https://a.tile.openstreetmap.org/3/4/2.png',
     terrain: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/3/2/4',
-    street: 'https://a.basemaps.cartocdn.com/light_all/3/4/2.png'
+    street: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/3/2/4'
   };
   Object.keys(fallbackProbes).forEach(function(style) {
     var img = new Image();
@@ -3927,7 +3930,9 @@ function fetchFIRMS() {
   updateLiveFeedStatus('Fetching NASA FIRMS fire data...');
   var bounds = map.getBounds();
   var bbox = bounds.getWest().toFixed(2) + ',' + bounds.getSouth().toFixed(2) + ',' + bounds.getEast().toFixed(2) + ',' + bounds.getNorth().toFixed(2);
-  var url = 'https://firms.modaps.eosdis.nasa.gov/mapserver/wfs/SuomiNPP_VIIRS_C2/?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAME=fires_snpp_24hrs&STARTINDEX=0&COUNT=2000&SRSNAME=urn:ogc:def:crs:EPSG::4326&BBOX=' + bbox + '&outputformat=geojson';
+  // FIRMS withdrew its keyless WFS ("Invalid service."); /api/firms reads the
+  // global 24-hour NOAA-20 VIIRS file for us and answers in the same GeoJSON.
+  var url = '/api/firms?max=2000&bbox=' + bbox;
   fetch(url)
     .then(function(r) { return r.json(); })
     .then(function(data) {

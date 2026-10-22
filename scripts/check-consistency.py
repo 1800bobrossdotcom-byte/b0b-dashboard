@@ -30,6 +30,9 @@ SITE = os.path.join(ROOT, 'site')
 spec = importlib.util.spec_from_file_location('kml', os.path.join(ROOT, 'scripts', 'build-kml.py'))
 kml = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(kml)
+spec = importlib.util.spec_from_file_location('mapgl', os.path.join(ROOT, 'scripts', 'build-map-gl.py'))
+mapgl = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(mapgl)
 
 NUM = r'(\d{1,3}(?:,\d{3})+|\d+)'
 # Phrases that state the size of the map. Each must equal the marker count.
@@ -126,8 +129,14 @@ def main():
         planted = [(l, s.replace(format(t['marker_count'], ','), format(t['marker_count'] + 6, ','), 1)) for l, s in surf]
         caught = check(t, planted)
         print('selftest: planted a wrong marker count in every surface; caught %d' % len(caught))
-        sys.exit(0 if caught else 1)
+        m = read(os.path.join(SITE, 'map.html'))
+        i = m.index('var locations = [')
+        gl_caught = not mapgl.check(m[:i] + m[i:].replace('{name:"', '{name:"X', 1))
+        print('selftest: planted a marker edit the GL page does not carry; caught %s' % gl_caught)
+        sys.exit(0 if caught and gl_caught else 1)
     problems = check(t, surf)
+    if not mapgl.check():
+        problems.append('map-gl.html: its data differs from map.html (run python3 scripts/build-map-gl.py)')
     for p in problems:
         print('MISMATCH ' + p)
     gen = json.load(open(os.path.join(ROOT, 'content-integrity-manifest.json'), encoding='utf-8')).get('generated')

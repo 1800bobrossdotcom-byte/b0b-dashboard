@@ -248,14 +248,17 @@ function siteCSP(nonce) {
     styleSrc: ["'self'", "'unsafe-inline'"],
     // i.ytimg.com and i.vimeocdn.com: poster frames for the home-page transmissions
     // carousel. The players themselves are frame-src below and load only on click.
-    imgSrc: ["'self'", 'data:', 'blob:', 'https://*.tile.openstreetmap.org', 'https://*.basemaps.cartocdn.com', 'https://server.arcgisonline.com', 'https://*.tile.opentopomap.org', 'https://unpkg.com', 'https://tiles.stadiamaps.com', 'https://cdn.star.nesdis.noaa.gov', 'https://i.ytimg.com', 'https://i.vimeocdn.com'],
+    imgSrc: ["'self'", 'data:', 'blob:', 'https://*.tile.openstreetmap.org', 'https://*.basemaps.cartocdn.com', 'https://server.arcgisonline.com', 'https://*.tile.opentopomap.org', 'https://unpkg.com', 'https://tiles.stadiamaps.com', 'https://cdn.star.nesdis.noaa.gov', 'https://i.ytimg.com', 'https://i.vimeocdn.com', 'https://tile.openstreetmap.org', 'https://elevation-tiles-prod.s3.amazonaws.com'],
     fontSrc: ["'self'", 'https://cdnjs.cloudflare.com'],
     objectSrc: ["'none'"],
     frameSrc: ["'self'", 'https://www.youtube.com', 'https://www.youtube-nocookie.com', 'https://player.vimeo.com'],
     frameAncestors: ["'self'"],
     formAction: ["'self'"],
     baseUri: ["'self'"],
-    connectSrc: ["'self'", 'https://*.basemaps.cartocdn.com', 'https://server.arcgisonline.com', 'https://*.tile.openstreetmap.org', 'https://*.tile.opentopomap.org', 'https://earthquake.usgs.gov', 'https://eonet.gsfc.nasa.gov', 'https://firms.modaps.eosdis.nasa.gov', 'https://opensky-network.org', 'https://www.gdacs.org', 'https://api.wheretheiss.at', 'https://native-land.ca', 'https://overpass.openstreetmap.fr', 'https://api.adsb.lol', 'https://meri.digitraffic.fi'],
+    connectSrc: ["'self'", 'https://*.basemaps.cartocdn.com', 'https://server.arcgisonline.com', 'https://*.tile.openstreetmap.org', 'https://*.tile.opentopomap.org', 'https://earthquake.usgs.gov', 'https://eonet.gsfc.nasa.gov', 'https://firms.modaps.eosdis.nasa.gov', 'https://opensky-network.org', 'https://www.gdacs.org', 'https://api.wheretheiss.at', 'https://native-land.ca', 'https://overpass.openstreetmap.fr', 'https://api.adsb.lol', 'https://meri.digitraffic.fi',
+      // The GL map (/map?engine=gl) fetches its tiles rather than loading them as
+      // images: the unprefixed OSM tile host and the open elevation tiles.
+      'https://tile.openstreetmap.org', 'https://elevation-tiles-prod.s3.amazonaws.com'],
     mediaSrc: ["'self'", 'blob:'],
     workerSrc: ["'self'", 'blob:'],
     childSrc: ["'self'", 'blob:', 'https://www.youtube.com', 'https://www.youtube-nocookie.com', 'https://player.vimeo.com'],
@@ -705,6 +708,64 @@ app.get('/download', async (req, res) => {
   }
 });
 
+// NASA FIRMS heat hotspots for the map's FIRMS layer (both engines). FIRMS
+// withdrew its keyless WFS (it now answers "Invalid service."), and the global
+// 24-hour file it still publishes without a key carries no CORS header, so a
+// browser cannot read it. It is read here, kept ten minutes per instance, and
+// served as the GeoJSON the layer already expected: NOAA-20 VIIRS, 375 m,
+// strongest first so a capped answer keeps the largest hotspots.
+const FIRMS_URL = 'https://firms.modaps.eosdis.nasa.gov/data/active_fire/noaa-20-viirs-c2/csv/J1_VIIRS_C2_Global_24h.csv';
+let firms = { at: 0, rows: null, pending: null };
+function firmsRows() {
+  if (firms.rows && Date.now() - firms.at < 600_000) return Promise.resolve(firms.rows);
+  if (firms.pending) return firms.pending;
+  firms.pending = (async () => {
+    const r = await fetch(FIRMS_URL, { headers: { 'User-Agent': 'b0b.dev map (https://www.b0b.dev/map)' } });
+    if (!r.ok) throw new Error('FIRMS ' + r.status);
+    const lines = (await r.text()).split('\n');
+    const head = lines[0].trim().split(',');
+    const at = (n) => head.indexOf(n);
+    const iLat = at('latitude'), iLng = at('longitude'), iB = at('bright_ti4'), iD = at('acq_date'), iT = at('acq_time'), iC = at('confidence'), iF = at('frp');
+    if (iLat < 0 || iLng < 0 || iF < 0) throw new Error('FIRMS header changed');
+    const rows = [];
+    for (let k = 1; k < lines.length; k++) {
+      const c = lines[k].split(',');
+      if (c.length < head.length) continue;
+      const lat = +c[iLat], lng = +c[iLng];
+      if (!Number.isFinite(lat) || !Number.isFinite(lng)) continue;
+      rows.push([lat, lng, +c[iB] || 0, +c[iF] || 0, c[iC] || '', c[iD] || '', c[iT] || '']);
+    }
+    rows.sort((a, b) => b[3] - a[3]);
+    firms = { at: Date.now(), rows, pending: null };
+    return rows;
+  })().catch((e) => { firms.pending = null; throw e; });
+  return firms.pending;
+}
+app.get('/api/firms', async (req, res) => {
+  if (!hasAccess(req)) return res.status(404).end();
+  const bb = String(req.query.bbox || '-180,-90,180,90').split(',').map(Number);
+  if (bb.length !== 4 || bb.some((x) => !Number.isFinite(x))) return res.status(400).end();
+  let [w, s, e, n] = bb;
+  const world = e - w >= 360;
+  w = Math.max(-180, Math.min(180, w)); e = Math.max(-180, Math.min(180, e));
+  const inLng = (lng) => world || (w <= e ? lng >= w && lng <= e : lng >= w || lng <= e);
+  const max = Math.min(Math.max(parseInt(req.query.max, 10) || 2000, 1), 5000);
+  try {
+    const rows = await firmsRows();
+    const features = [];
+    let inView = 0;
+    for (const r of rows) {
+      if (r[0] < s || r[0] > n || !inLng(r[1])) continue;
+      inView++;
+      if (features.length < max) features.push({ type: 'Feature', geometry: { type: 'Point', coordinates: [r[1], r[0]] }, properties: { bright_ti4: r[2], frp: r[3], confidence: r[4], acq_date: r[5], acq_time: r[6] } });
+    }
+    res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=600');
+    return res.json({ type: 'FeatureCollection', source: 'NASA FIRMS, NOAA-20 VIIRS 375 m, last 24 hours', fetched: new Date(firms.at).toISOString(), in_view: inView, features });
+  } catch (err) {
+    return res.status(502).json({ error: 'FIRMS unavailable' });
+  }
+});
+
 // Machine-readable map export. Parsed out of map.html at runtime and cached,
 // so it cannot drift out of sync with what the map actually shows.
 let mapExport = null;
@@ -871,8 +932,9 @@ app.get('*', (req, res) => {
     return res.send(PIXEL.replace(/<script>/g, `<script nonce="${nonce}">`));
   }
 
-  // Has access → serve pages
-  const page = PAGES[req.path];
+  // Has access → serve pages. /map?engine=gl is the MapLibre GL map, previewed
+  // beside the classic page until the author has compared them (22 Oct 2026).
+  const page = (req.path === '/map' && req.query.engine === 'gl') ? 'map-gl.html' : PAGES[req.path];
   if (page) {
     const file = path.join(PUB, page);
     if (fs.existsSync(file)) {
