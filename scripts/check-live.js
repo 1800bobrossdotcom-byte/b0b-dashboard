@@ -30,7 +30,8 @@ const POLL_MS = 20 * 1000;
 // really there turns this monitor into a false-alarm generator).
 const PAGES = [
   { path: '/report', needles: ['sect-body', 'siteUpdated'] },
-  { path: '/map', needles: ['epstein-network', 'markerLayer'] }
+  { path: '/map', needles: ['epstein-network', 'map-gl.js'] },
+  { path: '/map?engine=classic', needles: ['epstein-network', 'markerLayer'] }
 ];
 
 function expected() {
