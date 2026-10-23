@@ -1,13 +1,13 @@
 {
-  "generated": "2026-10-23T15:03:49.654Z",
+  "generated": "2026-10-23T17:09:21.003Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "4f5db7bc175d3277a6d098703b5fa7fce5a9447e628c41b0abb9a15fda77b8a1",
+  "fullFileHash": "37517569c89fa2fa50ad41a69a9b11d5a462473afb3e47ca3862a1307e93ecf7",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "997264a6561cecf50da096c87f2faeb7efb1675a206da6b57263bf42d2400be3",
+      "hash": "24695efa9e881bba8cc3b1670dd1674eda347e8375d0bbc198ee6581f50d9064",
       "length": 43024
     },
     {
@@ -737,8 +737,8 @@
     },
     {
       "id": "x-project-maven-ai-military-convergence",
-      "hash": "4c228f40ba3c934aa56182058fd4f71d3f68e8759a23c046c0dc8df14a581184",
-      "length": 12951
+      "hash": "c54822e6de888c3f0cdc19d6418b3f938e9bcc104d09c82b92f99e8cef50fe66",
+      "length": 12908
     },
     {
       "id": "x-merlin-and-nspm-7-a-claim-checked-in-both-directions",
@@ -5411,9 +5411,9 @@
     },
     {
       "index": 642,
-      "hash": "b4e834526c4dc1217fd4bd79c7d495596f2f9a1d2f2a760788c0ead1e6aadaa0",
+      "hash": "13a1b70c452dec55e4063f743ae2d4868c026e28e94dd9e9f3e5265c6ba62744",
       "preview": "But the parallel has an absolute boundary. When the AI described this incident, ...",
-      "length": 1345
+      "length": 1302
     },
     {
       "index": 643,

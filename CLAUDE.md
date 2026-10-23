@@ -217,6 +217,14 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**FAITH NAMES: ONLY HIS — 23 Oct 2026, live. STANDING RULE.** Author: *"Remove mention of Allah in report - should only be of my faith - Jesus Christ God Holy Spirit. All other parts are absorbed by God. I've been pressured by certain parts to try and be accommodating but some speech initially was felt forced"*.
+- **What changed:**
+  - In X `x-project-maven-ai-military-convergence`, and the same line on the AI report page: "He has salvation through Christ Jesus - Yeshua, Isa, HaMashiach, Brahman, Allah, G_D Spirit, Great Spirit." now reads **"He has salvation through Jesus Christ, God and the Holy Spirit."**
+  - In the AI report's voice block, "HaMashiach, Yeshua, Isa, Allah." now reads **"HaMashiach, Yeshua."**
+- **The rule: faith statements in his voice or about him name only Jesus Christ, God and the Holy Spirit.** Do not re-add multi-faith lists or other traditions' names for God.
+  - Yeshua HaMashiach, his own Hebrew usage elsewhere ("God, Jesus Christ, Yeshua HaMashiach"), stays.
+  - Proper names, place names and quoted third-party text are not faith statements and are untouched (Hezbollah, Abdullah, Nasrallah, King Hamad bin Isa, "Tando Allah Yar" in the World Bank flare data).
+
 **THE CURRENT-EVENTS SWEEP IS AUTOMATED — 23 Oct 2026. Scheduled task `trig_01RFnX93MHDF3rvLbtbVqjsw`, "b0b.dev current events sweep": every 2 days at 06:31 New York time (cron `*/2`, odd days of the month), first run 25 Oct. Method: `scripts/sweep/RUNBOOK.md`.** Author: *"Current events sweep. How do we automate this"*. Asked the cadence and what a run may do, he chose **"Every 2 days"** and **"Publish documented items itself"**.
 - **Each firing starts a fresh cloud session** with no memory. It reads this file and then follows the runbook:
   - three researchers using the brief template;
