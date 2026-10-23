@@ -960,8 +960,11 @@ app.get('/api/visitors', (req, res) => {
     UPSTASH_REDIS_REST_TOKEN: !!process.env.UPSTASH_REDIS_REST_TOKEN,
     REDIS_URL: !!process.env.REDIS_URL
   };
-  const respond = (visits, views, since) => res.json({
-    visits: visits, views: views, since: since || null, backend: countBackend, env: envSeen,
+  const respond = (visits, views, since, gate, arrivals) => res.json({
+    visits: visits, views: views, gate_entries: gate || 0, arrivals: arrivals || 0,
+    since: since || null, backend: countBackend, env: envSeen,
+    basis: 'visits = gate entries to 19 Sept 2026 + browser arrivals since daily counting began (22 Oct 2026). ' +
+      '19 Sept - 21 Oct 2026 was not counted. views = every page served, crawlers included.',
     // Stated in the payload so the number can never be quoted without its caveat.
     note: countBackend === 'memory'
       ? 'In-process counter: resets on restart and is per-instance. Not a real total. Set KV_REST_API_URL and KV_REST_API_TOKEN for a durable shared count.'
@@ -969,17 +972,55 @@ app.get('/api/visitors', (req, res) => {
           ? 'Counts persisted to disk on this host. Accurate for a single always-on server; not shared across serverless instances.'
           : 'Durable shared counter (KV). Aggregate only - no IP, user agent or per-visitor record is stored.')
   });
+  // `visits` was the gate's count of entries (POSTs to /api/gate). The gate went off
+  // on 19 Sept 2026, so that number stopped moving at its last value. Since 22 Oct the
+  // daily hashes count browser arrivals (field `a`), one per visit from outside the
+  // site, which is the nearest like-for-like measure. The public figure is the two
+  // added: gate entries to 19 Sept, plus arrivals from 22 Oct. 19 Sept - 21 Oct was not
+  // counted and cannot be recovered. Arrivals are summed from the daily hashes, which
+  // carry a 400-day TTL, and cached a minute per instance.
   if (countBackend === 'kv') {
-    return Promise.all([kv('get/b0b:visits'), kv('get/b0b:views')])
-      .then(([a, b]) => respond(Number((a && a.result) || 0), Number((b && b.result) || 0), null))
-      .catch(() => respond(0, 0, null));
+    const hit = visitorsCache;
+    if (hit && Date.now() - hit.t < 60_000) return respond(hit.gate + hit.arrivals, hit.views, hit.since, hit.gate, hit.arrivals);
+    return kvPipeline([['GET', 'b0b:visits'], ['GET', 'b0b:views'], ['GET', 'b0b:daily_since']]).then((out) => {
+      if (!Array.isArray(out)) return respond(0, 0, null, 0, 0);
+      const val = (i) => (out[i] && out[i].result) || null;
+      const gate = Number(val(0) || 0), views = Number(val(1) || 0), since = val(2);
+      const dates = datesSince(since);
+      const send = (arrivals) => {
+        visitorsCache = { t: Date.now(), gate, views, since, arrivals };
+        respond(gate + arrivals, views, since, gate, arrivals);
+      };
+      if (!dates.length) return send(0);
+      return kvPipeline(dates.map((d) => ['HGET', 'b0b:d:' + d, 'a'])).then((rows) => {
+        if (!Array.isArray(rows)) return respond(gate, views, since, gate, 0);
+        send(rows.reduce((n, r) => n + (Number(r && r.result) || 0), 0));
+      });
+    }).catch(() => respond(0, 0, null, 0, 0));
   }
+  const sumArrivals = (days) => Object.keys(days || {}).reduce((n, k) => n + (Number(days[k].a) || 0), 0);
   if (countBackend === 'file') {
     const c = readFileCounts();
-    return respond(c.visits || 0, c.views || 0, c.since);
+    const arrivals = sumArrivals(c.days);
+    return respond((c.visits || 0) + arrivals, c.views || 0, Object.keys(c.days || {}).sort()[0] || null, c.visits || 0, arrivals);
   }
-  return respond(memCounts.visits, memCounts.views, null);
+  const arrivals = sumArrivals(memDays);
+  return respond(memCounts.visits + arrivals, memCounts.views, null, memCounts.visits, arrivals);
 });
+
+let visitorsCache = null;
+// Every UTC day from `since` (YYYY-MM-DD) to today, oldest first, at most 400.
+function datesSince(since) {
+  if (!since || !/^\d{4}-\d{2}-\d{2}$/.test(since)) return [];
+  const out = [];
+  const end = dayKey();
+  for (let t = Date.parse(since + 'T00:00:00Z'); out.length < 400; t += 86400000) {
+    const d = dayKey(new Date(t));
+    if (d > end) break;
+    out.push(d);
+  }
+  return out;
+}
 
 // /stats reads this. Same access rule as /api/visitors. Cached a minute per
 // instance so a reload of the dashboard costs the store nothing.

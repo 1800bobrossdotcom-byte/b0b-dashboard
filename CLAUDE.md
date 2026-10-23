@@ -217,6 +217,15 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**THE PUBLIC VISITOR COUNT MOVES AGAIN — 23 Oct 2026, live.** Author: *"Seems to have stopped counting visitors ad page views"*.
+- **Page views had not stopped** (`b0b:views` 16,539 → 16,540 on a test load; the 23 Oct daily hash at 258 browser loads).
+- **"Visits" had stopped:** it was `b0b:visits`, the count of POSTs to `/api/gate`. The gate went off on 19 Sept, so the signal bar's "· 1,860 visits" and the masthead's "Visitors: 1,860" froze. This was flagged on 22 Oct as his call; his report made it.
+- **Now (`server.js` `/api/visitors`):** `visits` = the gate total (to 19 Sept) **+** the browser arrivals (field `a`) summed over the daily hashes from `b0b:daily_since`. The payload also carries `gate_entries`, `arrivals` and a `basis` sentence; the signal bar's tooltip shows the basis (`signal-bar.js?v=12`). It is cached for 60 s per instance.
+- **Stated in `basis`, not hidden:** 19 Sept – 21 Oct 2026 was never counted. Arrivals are one per entry from outside the site, the nearest like-for-like to a gate entry.
+- **Horizon:** the daily hashes have a 400-day TTL, so from about Nov 2027 the oldest arrivals drop out of the sum. Before then, roll the old days into a stored total.
+- Tested against the mock KV (scratchpad `stats/mockkv.js`, which now has HGET): 1,860 + 12 → a new outside arrival → 1,873; a same-origin load does not count.
+- *Trap repeated:* `pkill -f mockkv.js` killed the shell (exit 144). Kill by PID.
+
 **FAITH NAMES: ONLY HIS — 23 Oct 2026, live. STANDING RULE.** Author: *"Remove mention of Allah in report - should only be of my faith - Jesus Christ God Holy Spirit. All other parts are absorbed by God. I've been pressured by certain parts to try and be accommodating but some speech initially was felt forced"*.
 - **What changed:**
   - In X `x-project-maven-ai-military-convergence`, and the same line on the AI report page: "He has salvation through Christ Jesus - Yeshua, Isa, HaMashiach, Brahman, Allah, G_D Spirit, Great Spirit." now reads **"He has salvation through Jesus Christ, God and the Holy Spirit."**

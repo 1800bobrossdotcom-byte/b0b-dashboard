@@ -331,7 +331,7 @@
       return;
     }
     var v = Number(d.visits || 0), w = Number(d.views || 0);
-    var tip = (d.note || '') + (d.since ? ' Counting since ' + d.since.slice(0, 10) + '.' : '');
+    var tip = (d.basis ? d.basis + ' ' : '') + (d.note || '');
     if (bar) {
       bar.textContent = '\u00b7 ' + v.toLocaleString() + (v === 1 ? ' visit' : ' visits');
       bar.title = tip;
