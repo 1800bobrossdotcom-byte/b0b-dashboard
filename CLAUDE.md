@@ -217,6 +217,27 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**THE "DUTCH SPIES HACKED KUSHNER'S IPHONE" POST — graded 23 Oct 2026, HELD. `research/KUSHNER-VF-POST.md` (11-row table) + `-A-EXCERPT.md`, `-B-IRAN.md`, `-BRIEF.md` (the post verbatim); 168 quotes, all vq OK.** Pasted by the author with no instruction.
+- **Source:** Matthew Cole, *Vanity Fair*, 22 Oct 2026, an excerpt from *Princes and Thieves* (Atria, published 27 Oct), **read in full at source**. All of it is attributed to Cole's anonymous sources: no document, account record or official confirmation, in the excerpt or anywhere found. The excerpt prints five denials; the post prints none.
+- **The post's changes to the excerpt:**
+  - drops that Russia's GRU was in the phone first (the Dutch service is the MIVD, via a turned GRU operative);
+  - turns "Netanyahu required Kushner to inform him" into "dual-key approval";
+  - turns "fizzled … instead" into "narrowed";
+  - applies "redraw the map" to all the money (the excerpt says the ~$1bn Israel account was "for Kushner's personal benefit");
+  - splices two quotes and changes "Jared" to "He".
+- **Naming trap:** the excerpt's "at least $2 billion" is **not** Saudi PIF's documented $2bn into Affinity Partners (June 2021, after office); the excerpt never mentions Affinity.
+- **Iran's "$9 billion":**
+  - one anonymous official to Drop Site, 15 July 2026, three months old;
+  - the figure is Drop Site's sentence about "individuals close to President Trump", narrowed onto Kushner and Witkoff by later retellings, and "pocketing" came last;
+  - suspicious trading before Iran announcements is documented (CFTC letters, Reuters' data), with **unidentified traders** in every source;
+  - Vance: "completely bogus".
+- **Kushner's Iran role is documented** (every round Feb–Sept); his title is contested.
+- **Flagged, not edited — page errors:**
+  - the PIF commitment is dated "July 2021" on the page; the Wyden letters say **June 2021**;
+  - Affinity is "$3B" (×3) and "~$4.8B AUM" (×1) on the page; the March 2026 Form ADV says **$6.16bn** AUM.
+- **Spider:** `senate.gov` ("404 Error Page") and `boi.org.il` ("Radware Page") registered as decoy-200 hosts (`7a989c7`), senate.gov proven both ways live.
+- **Not recommended for the page.** At most a dated XV line on the book at attributed tier with the denials; his call.
+
 **THE "TRUMP FAMILY TREE" POST — graded 22 Oct 2026, HELD. `research/TRUMP-FAMILY-POST.md` (34-row table) + three beat files `TRUMP-FAMILY-POST-{A-FAMILY,B-COHN-KUSHNER-WORDS,C-2021-2026}.md` + `-BRIEF.md` (the post verbatim); 379 quotes, all vq OK.** Author: *"Parse the truth lines from this Twitter post"*.
 - **Finding:** the skeleton is mostly documented and the adjectives mostly are not.
 - **Holds:** the 1905 expulsion; the 1927 arrest and discharge (membership unsupported); the 1954 FHA testimony; the 1973 DOJ suit and its no-admission 1975 consent order; the $10 synagogue deed (1955); John G. Trump's 1943 Tesla review; Cohn's record and death; the Kushner plea, pardon and ambassadorship; the Ivanka, Epstein and "chosen one" quotes, each with its frame; the Cyrus coin; the Bible and its royalties; the heaven remarks; the Ohel visit; the crypto overlap.
