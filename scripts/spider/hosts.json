@@ -91,5 +91,17 @@
       "Gcore"
     ],
     "why": "Court-record HTML paths sometimes answer with the CDN's security-check page, title 'Gcore', HTTP 200, instead of the filing. That is a refusal, not a document, and it is never solved. The CourtRecords PDFs (sites/default/files/CourtRecords/...) serve directly. Registered so the check page is a null (seen 19 Oct 2026)."
+  },
+  "senate.gov": {
+    "decoy_titles": [
+      "404 Error Page"
+    ],
+    "why": "An article path the site cannot resolve redirects to /pagelayout/general/one_item_and_teasers/file_not_found.htm and serves it with HTTP 200, title 'U.S. Senate: 404 Error Page'. Real pages carry their subject in the title. Registered so the not-found page is a null (seen 22 Oct 2026 on an Art & History 'Have you no sense of decency' path)."
+  },
+  "boi.org.il": {
+    "decoy_titles": [
+      "Radware Page"
+    ],
+    "why": "The Bank of Israel's site answers this crawler with Radware's browser-verification page, title 'Radware Page', ~118 KB, HTTP 200, instead of the press releases. That is a refusal, not a document, and it is never solved. Registered so the challenge page is a null (seen 23 Oct 2026)."
   }
 }
