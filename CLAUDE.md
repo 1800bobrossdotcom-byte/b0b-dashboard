@@ -217,6 +217,24 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**SECTION I TESTIMONY CONTINUED — TWO MORE ACCOUNTS, 23 Oct 2026, live.** The author gave further testimony across several messages, then: *"I just want to put this, at least this testimony here, continued."* A draft was shown to him first and added as he asked.
+- **Added** to `i-the-authors-testimony-the-work-is-the-method`, before the method statement:
+  - **"Fourth, the earliest":** the Burbank image at about seven (c. 1989; he is 44). It is in his words, with both of his readings ("abducted or … a false memory"). Around it, the record: GATE at Walt Disney Elementary (XX), and Skunk Works still in Burbank that year (moved to Palmdale after 1989; X: HQ 1992, closed by 1994). No source read places underground facilities at the Burbank plant.
+  - **"Fifth, the book":** the East Hollywood night and the book of life, "far too heavy to hold". It carries his own candour (the amphetamine period, "not that night", sober for decades) and his both-ways line. The one correlate is John 16:12 KJV, as a reading only.
+- **Renumbered and fixed:**
+  - the intro now says "Five accounts … all five are testimony";
+  - the method statement is "Sixth … organises the five above it";
+  - scale line 283 / 1,148 / 143.
+- **Kept OFF the page and out of the repo by default** (the repo is public). His own account is in session scratch only.
+  - His residence details: number, cross street, the building opposite.
+  - An act at a federal facility, under the §1 prosecution rule.
+  - The tattoos, under the 22 Oct instruction; the artist's family (living people).
+  - Further personal health history.
+  - His surveillance and programme beliefs: testimony, not added; he was told plainly what the record does and does not support.
+  - **Any of these goes in only on his explicit word.**
+- **Wellbeing:** he disclosed past crises. Support (988) was offered once, plainly, without labelling him. Keep that tone. Never use what he discloses in confidence against the testimony, and never add it unasked.
+- *Page inconsistency noticed, not edited:* XX dates Skunk Works in Burbank "1943–1989" while X gives HQ to Palmdale 1992 and the Burbank closure 1994. Wikipedia: "After 1989 … relocated".
+
 **THE "DUTCH SPIES HACKED KUSHNER'S IPHONE" POST — graded 23 Oct 2026, HELD. `research/KUSHNER-VF-POST.md` (11-row table) + `-A-EXCERPT.md`, `-B-IRAN.md`, `-BRIEF.md` (the post verbatim); 168 quotes, all vq OK.** Pasted by the author with no instruction.
 - **Source:** Matthew Cole, *Vanity Fair*, 22 Oct 2026, an excerpt from *Princes and Thieves* (Atria, published 27 Oct), **read in full at source**. All of it is attributed to Cole's anonymous sources: no document, account record or official confirmation, in the excerpt or anywhere found. The excerpt prints five denials; the post prints none.
 - **The post's changes to the excerpt:**
