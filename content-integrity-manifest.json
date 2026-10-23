@@ -1,13 +1,13 @@
 {
-  "generated": "2026-10-23T06:11:41.135Z",
+  "generated": "2026-10-23T13:13:00.167Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "0ba521a3226f94b4d98639f455756f3e4e23e04ca2b8abda38ef19fecd3a8a53",
+  "fullFileHash": "35e390816b85fbe3e68f726a608e3ce202bd3e598cd5131701738b23fdebb56b",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "5e4da571482e7d03b064418b3346513537fb269101a54831cefc5a0a7a558b90",
+      "hash": "8d1c0c0fa00554415c2156ef77c63589e642b58049dbd0953c101c5860dad4cb",
       "length": 43024
     },
     {
@@ -1429,11 +1429,6 @@
       "id": "XXIV",
       "hash": "0fdb06dd6b366bc922c53ad61349a25c6b9986bef3383916eb335feed9f98029",
       "length": 3398
-    },
-    {
-      "id": "xxiv-two-timelines-the-worst-case-and-the-best-case",
-      "hash": "3ccaae2f44819e4723b38bf0b127d15714eb9f2d7e7ab481673fed3cb4276bbc",
-      "length": 7765
     },
     {
       "id": "xxiii-practices-of-reclamation",
@@ -7727,563 +7722,479 @@
     },
     {
       "index": 1028,
-      "hash": "4691d3a967f22463433517c8f728392412561b9191ced659d456000d50f71143",
-      "preview": "Two timelines run from the same documented present: scenarios, not forecasts. Th...",
-      "length": 498
-    },
-    {
-      "index": 1029,
-      "hash": "02fcfd52d76f243ee32351117e4ffc54a2242f2a01769f08187ef4e6c68a87c8",
-      "preview": "One uncertainty separates them: whether what is documented below meets a check o...",
-      "length": 256
-    },
-    {
-      "index": 1030,
-      "hash": "ac6baa835036858b7ef3fddde22b2a3580533770ffc569661688150f22d34fbe",
-      "preview": "&ldquo;I call heaven and earth to record this day against you, that I have set b...",
-      "length": 220
-    },
-    {
-      "index": 1031,
-      "hash": "56e0b6a1b69dfc4a5b3f210bfc968c112c63d804912ee6a02b5fc1b3ed8a6de7",
-      "preview": "Read for its form only: two outcomes, set down on the record before either comes...",
-      "length": 267
-    },
-    {
-      "index": 1032,
-      "hash": "e042816ecc9552e1bebb1c6b5062a1161ef8db064a72f310d0cb0553e6841ea0",
-      "preview": "The fixed points. Each date is documented unless marked; what happens on it is n...",
-      "length": 83
-    },
-    {
-      "index": 1033,
-      "hash": "c30a4ea16d1f729ee98ab857e8dd6a87e775ac02160b34c161dd9e2c6ff0ac37",
-      "preview": "Not fixed: the Autonomous Warfare Command&rsquo;s 1 October 2027 date is a targe...",
-      "length": 508
-    },
-    {
-      "index": 1034,
-      "hash": "e50a852ff301af88fc901c396e456a748944871b34ef1510ab6c36c3d53d5b97",
-      "preview": "The worst case (scenario). It needs no catastrophe, only each date passing:",
-      "length": 75
-    },
-    {
-      "index": 1035,
-      "hash": "8704aaa1a99da80684ee44058a495a94ec7005284a1e635b81d84eb9e0a54f70",
-      "preview": "Nothing meets a check; the record grows by notices and certifications rather tha...",
-      "length": 145
-    },
-    {
-      "index": 1036,
-      "hash": "b72788f1bd9974080a919a675f31638710f3633371add9f72f06349ced1563dc",
-      "preview": "&ldquo;And judgment is turned away backward, and justice standeth afar off: for ...",
-      "length": 162
-    },
-    {
-      "index": 1037,
-      "hash": "a6bbdfdb561e6cd6fd449010ca9b8841ffd632a8a04502b3789b3ee7019202a1",
-      "preview": "The best case (scenario). It needs no breakthrough, only each date met, whicheve...",
-      "length": 97
-    },
-    {
-      "index": 1038,
-      "hash": "62c557417ddf910a8c1869f16a64d0e434a06cc734566d42ed0652355c0b95cf",
-      "preview": "Each meets a check; the record grows by votes, statutes and findings, some again...",
-      "length": 112
-    },
-    {
-      "index": 1039,
-      "hash": "eef5850f153912d776ef5c509d5f5bc6f01673b25f09e26c36cf026b07294663",
-      "preview": "&ldquo;But let judgment run down as waters, and righteousness as a mighty stream...",
-      "length": 105
-    },
-    {
-      "index": 1040,
-      "hash": "2b7cc59b3de6c63b7b3eda798e3709b4b12be10db146aebe3cb0a9ebfcf694f3",
-      "preview": "Signposts. Each signpost named above counts toward one branch or the other; each...",
-      "length": 602
-    },
-    {
-      "index": 1041,
-      "hash": "5a5b9a0df2eba89760e720a8ad42533dc1cba3d4590a75233b254c02efd44734",
-      "preview": "What happens on these dates is decided elsewhere. A 2009 US government tradecraf...",
-      "length": 1006
-    },
-    {
-      "index": 1042,
       "hash": "dc12c99d47e5aa0f43dfdc624a2a27d289837bf435473e831d06d780c236ac48",
       "preview": "Grow food. Collect water. Know your neighbors by name. Learn to sit in silence. ...",
       "length": 351
     },
     {
-      "index": 1043,
+      "index": 1029,
       "hash": "97ed830fa853527035cd86d1fd203bde279e0476c598eb1d5eeafb0aace4394b",
       "preview": "The practices above are not abstractions. They require tools, knowledge, and com...",
       "length": 355
     },
     {
-      "index": 1044,
+      "index": 1030,
       "hash": "fe96d2f90db597fa6875945b274caea2cb7ad76692990fb6f133f176329cb86c",
       "preview": "Every resource listed above shares one structural feature: they reduce dependenc...",
       "length": 726
     },
     {
-      "index": 1045,
+      "index": 1031,
       "hash": "cbbbb7b4075aff9d3bd6e97c0a6b9abd6494fb2f4d39d492686f375ecd729555",
       "preview": "This subsection exists at the author&rsquo;s direction and for one reason: a per...",
       "length": 522
     },
     {
-      "index": 1046,
+      "index": 1032,
       "hash": "5298fede12458e00dc323fb234c323045619edce47064f3ffc516e1da87ec4d0",
       "preview": "Start with the part most often got wrong, because getting it wrong is what ends ...",
       "length": 791
     },
     {
-      "index": 1047,
+      "index": 1033,
       "hash": "642b42e63d6f303e8fa7d4571e42bea59cd544dca629005a44ba64e0d42195e0",
       "preview": "Communication with Congress and with an Inspector General is statutorily protect...",
       "length": 1035
     },
     {
-      "index": 1048,
+      "index": 1034,
       "hash": "ec11739af69caf3b97520f67f6fdddad378181697cc213b9e8d4355a20985fa3",
       "preview": "Article 138, UCMJ (10 U.S.C. &sect; 938) - the complaint of wrongs - is the inte...",
       "length": 521
     },
     {
-      "index": 1049,
+      "index": 1035,
       "hash": "257488d7ea0b1e37638320787f34ce4b7f79ed420aefcc2e2386faf1162d61cc",
       "preview": "Conscientious objection is a real administrative process with a real standard, a...",
       "length": 606
     },
     {
-      "index": 1050,
+      "index": 1036,
       "hash": "ae1b5b657270ff622cc737728602f2d0aafcdd179eabf519de4922c87c07d396",
       "preview": "And the hard half, stated as plainly as the rest, because omitting it would be t...",
       "length": 906
     },
     {
-      "index": 1051,
+      "index": 1037,
       "hash": "7684da707543c29a67c87481bff23b81ee7f864b4a820674473cebd19c3a4543",
       "preview": "Where to get help, all free and none of it requiring anyone&rsquo;s approval. Mi...",
       "length": 842
     },
     {
-      "index": 1052,
+      "index": 1038,
       "hash": "324ae2e3f6384acb43c7cb6606aded753a9b25cd4f7ea0541614b52b4f41a05d",
       "preview": "Why this sits inside this report rather than in a pamphlet. The document spends ...",
       "length": 1326
     },
     {
-      "index": 1053,
+      "index": 1039,
       "hash": "88a95ed8603db6929b634f573a3be1237596c10deb81477904c70be2e3f4580d",
       "preview": "This signal is sent from a place of clarity, not fear. The situation on this pla...",
       "length": 147
     },
     {
-      "index": 1054,
+      "index": 1040,
       "hash": "8b46db44919821ff75866499084fda17d9e6a6098c914938b36486fe16c9dd13",
       "preview": "Maximum assistance, aligned with the sovereignty and free will of all beings - h...",
       "length": 108
     },
     {
-      "index": 1055,
+      "index": 1041,
       "hash": "ce9d05580fce2b9c479dd7329dfab0f6a164a303f1ab28274278344db7963ae8",
       "preview": "We are not requesting rescue. We are requesting amplification - of the truth tha...",
       "length": 215
     },
     {
-      "index": 1056,
+      "index": 1042,
       "hash": "715bbf2b21b6bb5ba3dd716cf64760174b7d8584c38d22ff7c0e994b1cb6b220",
       "preview": "What is useful to send. Corrections first - a claim in this report that is wrong...",
       "length": 453
     },
     {
-      "index": 1057,
+      "index": 1043,
       "hash": "086eee4bd127c95a60af6dbf21b7051bdf8ba0873e7d3b1881882387bd37b037",
       "preview": "1. This is an ordinary email address, not a secure drop. It offers no confidenti...",
       "length": 480
     },
     {
-      "index": 1058,
+      "index": 1044,
       "hash": "2ba29096c210ef1d622cba6e899217578dca13948847d629828215a7cc898d6d",
       "preview": "2. Do not send anything you are not lawfully free to send. Classified, privilege...",
       "length": 397
     },
     {
-      "index": 1059,
+      "index": 1045,
       "hash": "10da1e6725fb32dab3f3c07b8c36678533f177af97d0053bde3ac5eb34b6b5f2",
       "preview": "If you hold a clearance, or serve, this paragraph is the one that matters. The p...",
       "length": 589
     },
     {
-      "index": 1060,
+      "index": 1046,
       "hash": "3ad9a6ff36c6bb2032ac66fa8a30b9b9e90911d84c81212040dcc262c3f61cbc",
       "preview": "What to expect. One person reads this, not a desk. Replies are not guaranteed an...",
       "length": 287
     },
     {
-      "index": 1061,
+      "index": 1047,
       "hash": "c1682ea4a5c5285e684b0d435aa0c2d946a82cbc936e3cffd2c1b23c8f5515f4",
       "preview": "The signal is not electromagnetic. It is not encoded. It is the coherence of int...",
       "length": 87
     },
     {
-      "index": 1062,
+      "index": 1048,
       "hash": "1c0536ca8789d94ed9c33ab5d5a5f1ec023b38b4d31350bfc2347a58e8fb244f",
       "preview": "The control architecture operates through complexity, opacity, and scale. The co...",
       "length": 295
     },
     {
-      "index": 1063,
+      "index": 1049,
       "hash": "12dfba1b24b69cb9545db2a406f5afd25579f0861df99b68d8b3c045b0e0f759",
       "preview": "This report is not the first transmission, and the record should say so in the r...",
       "length": 491
     },
     {
-      "index": 1064,
+      "index": 1050,
       "hash": "210f26b6a8f319b4cd6c6d2cab9369fc2e224458b6b4487689dee363e4f62ca5",
       "preview": "What anyone can check without taking the author&rsquo;s word for anything. The c...",
       "length": 673
     },
     {
-      "index": 1065,
+      "index": 1051,
       "hash": "2bbd8d9bf07c02f619896c1227bb3c541074b6f4f8c5ba866f7ca8b0d0475e53",
       "preview": "Two continuities matter, and both are checkable rather than asserted.",
       "length": 69
     },
     {
-      "index": 1066,
+      "index": 1052,
       "hash": "01c8c8dbfe3c22117b5ad5f0b4c53a4f58263d90f8b0225f353bbfdbe7610919",
       "preview": "The same description also links a DARPA FOIA production held by EPIC and the lit...",
       "length": 266
     },
     {
-      "index": 1067,
+      "index": 1053,
       "hash": "7d4cef5965f3b86d53b81174568ea6fb1a6ab8bc3cad3e589f076d4eb821e798",
       "preview": "Documented: the channel exists at that address, its description says what is quo...",
       "length": 204
     },
     {
-      "index": 1068,
+      "index": 1054,
       "hash": "ea9565d6c9b2e230d4d33e8b738f3fa09642d8439f80e67be3678e78bf19469f",
       "preview": "Declared, not independently verified here: that the author of this report is the...",
       "length": 392
     },
     {
-      "index": 1069,
+      "index": 1055,
       "hash": "a0d84fc8335a01e748dfd6fb17b468631f2b70c50cc3f7bf444ddcede408ba86",
       "preview": "What turns on it: nothing. No finding in this report depends on the link, and no...",
       "length": 288
     },
     {
-      "index": 1070,
+      "index": 1056,
       "hash": "c7d86bc01ab887a889edada797cbaef8889fed6e047634d0c227d480280d18b5",
       "preview": "Eight tracks are written up here deliberately, as signal rather than decoration,...",
       "length": 861
     },
     {
-      "index": 1071,
+      "index": 1057,
       "hash": "d9e3ddb7f1cd098befdd6b54b8207fc83272a9d8055ffa568f620b6f637abd43",
       "preview": "What the title is doing. &ldquo;Veridis Quo&rdquo; is wordplay on the Latin &ldq...",
       "length": 547
     },
     {
-      "index": 1072,
+      "index": 1058,
       "hash": "36adbf6d87f434756b0ee405199acc4f281da168d751c7052bb42731d2ece641",
       "preview": "The video is a document scene. Every track on Discovery is a sequence of Interst...",
       "length": 761
     },
     {
-      "index": 1073,
+      "index": 1059,
       "hash": "e1428f2358099548da3aefc868ab8c4adc9cb33609d4d2eb89d3897acc59b6ff",
       "preview": "Why it opens rather than closes. Every section of this document puts one questio...",
       "length": 819
     },
     {
-      "index": 1074,
+      "index": 1060,
       "hash": "ea0485cf091bac93e1611e1d25632efa1ab921bf79cc225fcfe7347150413247",
       "preview": "The answer to the track before it, and the one the author grew up with. &ldquo;V...",
       "length": 490
     },
     {
-      "index": 1075,
+      "index": 1061,
       "hash": "afac4caa5ed9182adceec28769885f103009ebbbeeb823c66cb6e027b5ad4956",
       "preview": "What is documented. &ldquo;Talkin&rsquo; Bout a Revolution&rdquo; is from Tracy ...",
       "length": 627
     },
     {
-      "index": 1076,
+      "index": 1062,
       "hash": "267c23b73a97541de10236b34aad150f08a8af7ab24f9db3cd57b12c74ffafdc",
       "preview": "The moment it stopped being a record and became an event. On 11 June 1988 Chapma...",
       "length": 808
     },
     {
-      "index": 1077,
+      "index": 1063,
       "hash": "b88210ed6ae5259ff0ab8fe8b31d6c8a2bcaf70f5dd94068b9f4c0abe2cc18b1",
       "preview": "Why it leads here, stated at tier. The lyric is not a call to arms; it is an obs...",
       "length": 866
     },
     {
-      "index": 1078,
+      "index": 1064,
       "hash": "98dc592b91a5bdb9844c2b2eb49fcd2bbd0db64899c38413fd87e54cd27f60b0",
       "preview": "What is documented. &ldquo;Graceland&rdquo; is the title track of the 1986 album...",
       "length": 520
     },
     {
-      "index": 1079,
+      "index": 1065,
       "hash": "45e33f92828ce26fb0a27cf7bbdf258f923904eded809af0e269b6d9716689ec",
       "preview": "The tension, named rather than skipped. This track is placed second, immediately...",
       "length": 816
     },
     {
-      "index": 1080,
+      "index": 1066,
       "hash": "3e1df2474e0eda4705760005c479b966bce0051f9629b842f2c3748df6eee6a7",
       "preview": "What complicates it, and why the fork stays open. The verdict that mattered most...",
       "length": 689
     },
     {
-      "index": 1081,
+      "index": 1067,
       "hash": "1d0b9050e2eee9ce7aa5447c49b0b35fec55291d5fa4cea3b4d775c27811fde0",
       "preview": "Why it stays on the playlist anyway. Because this is exactly the shape of thing ...",
       "length": 578
     },
     {
-      "index": 1082,
+      "index": 1068,
       "hash": "4e158f3d68865db0e9139cbdf401db7962976da2ea9f456691932f42106ed818",
       "preview": "The fourth track on the bar, placed on the same terms. &ldquo;Slippery People&rd...",
       "length": 513
     },
     {
-      "index": 1083,
+      "index": 1069,
       "hash": "87c62e430c9c016cfbaaf03b5bb5f9a7181840704fd6dbe3df17e94356621426",
       "preview": "The documented lineage is the part worth knowing. The borrowing did not stay bor...",
       "length": 578
     },
     {
-      "index": 1084,
+      "index": 1070,
       "hash": "501813baf4f00113b37f991e25d0d61451fb0c50e09fdebc9221f161b34a62ec",
       "preview": "Why it is on this site, stated as a reading and not as a claim. The report&rsquo...",
       "length": 827
     },
     {
-      "index": 1085,
+      "index": 1071,
       "hash": "f4ea1491a55fcd33dadd0571d95f237d0b64c46eeab4444ab5d22c80f143a23f",
       "preview": "Choosing this embed reproduced, in miniature, the problem the whole document is ...",
       "length": 879
     },
     {
-      "index": 1086,
+      "index": 1072,
       "hash": "293404c868321dde863d73f429715cc021467e4acb4283be9f26aa19651a0368",
       "preview": "Richard Patrick wrote Filter&rsquo;s 1995 &ldquo;Hey Man Nice Shot&rdquo; about ...",
       "length": 759
     },
     {
-      "index": 1087,
+      "index": 1073,
       "hash": "2da4a2dbf8e18c837399b185fcdf1a4d8fc43711f6c3081f415a753eeb170a31",
       "preview": "What is documented. &ldquo;7empest&rdquo; closes Fear Inoculum (2019) and runs 1...",
       "length": 411
     },
     {
-      "index": 1088,
+      "index": 1074,
       "hash": "968b43450f3b76ea8e41bd80368cc925ebd3ebd8f82a207abf0e1f2f7ee88af0",
       "preview": "Why it is here, stated as a reading. The song&rsquo;s subject is not the storm. ...",
       "length": 655
     },
     {
-      "index": 1089,
+      "index": 1075,
       "hash": "469f6c8cf00b87c1d8870563633ff36b74dce58da8e2f7c8fb8266dd2c26eca6",
       "preview": "What is documented. Written by Morrissey and Marr, released as a single on 19 Ma...",
       "length": 256
     },
     {
-      "index": 1090,
+      "index": 1076,
       "hash": "e9f969b85255d8e62f1453d3e664904aadb0c628297756076ba1172c47fff9e6",
       "preview": "Why it is here. The address in the introduction of this report asks people insid...",
       "length": 737
     },
     {
-      "index": 1091,
+      "index": 1077,
       "hash": "eb93b70d58a9e579622a8ed49964f03e454e30580c6a3d774811269c95f666b9",
       "preview": "What is documented, and it is unusually clean. Written by John Fogerty, carried ...",
       "length": 321
     },
     {
-      "index": 1092,
+      "index": 1078,
       "hash": "68792bd2410a20400b712624e93aae7225ce275365fb9881988845665520b700",
       "preview": "Why this one closes the set, and it is a point about method rather than music. A...",
       "length": 777
     },
     {
-      "index": 1093,
+      "index": 1079,
       "hash": "ac8a952dd179b02bb2e631ccc05900028a4de753f4ae41929c5e3708d363ced8",
       "preview": "What is documented. Restless Leg Syndrome are a Vienna group - the producer d.b....",
       "length": 524
     },
     {
-      "index": 1094,
+      "index": 1080,
       "hash": "f6bc1bed3d70217ab32671d188967ccc4fce291747551bc41e8aabeea2764e8d",
       "preview": "Why it is on the bar, and the first half is method rather than mood. A turntabli...",
       "length": 878
     },
     {
-      "index": 1095,
+      "index": 1081,
       "hash": "bd47c18fad027d66133c352e57418b9c5fc4266bb2a01e5fb4eb22f9df014328",
       "preview": "The title, taken as a reading and labeled as one. Almost every faction this repo...",
       "length": 1016
     },
     {
-      "index": 1096,
+      "index": 1082,
       "hash": "9383a39e463b6cb2d8e8cfb2d6f0f8edf9e4c882ac17f80df67e574385c20ce4",
       "preview": "This report was compiled with the assistance of Claude, built by Anthropic. The ...",
       "length": 401
     },
     {
-      "index": 1097,
+      "index": 1083,
       "hash": "c060b9f2c7aa7c225438bd93a1da17d1228cfa82df72d2caae6cab2925ae3814",
       "preview": "The full picture requires stating what Section X documents: in March 2026, Anthr...",
       "length": 666
     },
     {
-      "index": 1098,
+      "index": 1084,
       "hash": "b85c240bb9759990855dc6d0a19e17dbb1332f764f0e1d4af18dcabc9c9a1147",
       "preview": "For that reason the author has withdrawn: his Claude subscription is canceled, e...",
       "length": 547
     },
     {
-      "index": 1099,
+      "index": 1085,
       "hash": "4a4e7610b2c3de1fd523fef1920e4040c152e45b374f15d90f0e7962c1befbac",
       "preview": "This report is built on publicly available information - declassified documents,...",
       "length": 240
     },
     {
-      "index": 1100,
+      "index": 1086,
       "hash": "2c4cc3ff6965ed4a675107e57198c329a92c47c7c8a691a60d7026067fb2cc3d",
       "preview": "The patterns in this report emerge from cross-referencing, not from any single s...",
       "length": 98
     },
     {
-      "index": 1101,
+      "index": 1087,
       "hash": "90492cc8942cef3b3b4f9b10bbdff4169abae7e8783e152e296bc443bd5f49b7",
       "preview": "The interactive map at /map contains all geolocated data points. For researchers...",
       "length": 103
     },
     {
-      "index": 1102,
+      "index": 1088,
       "hash": "a7c97d1a90b658bb707610dc235705800e943fc668fca66e38ec656a2f1c2175",
       "preview": "This report distinguishes between:",
       "length": 34
     },
     {
-      "index": 1103,
+      "index": 1089,
       "hash": "9de53f5cdc42549c586df6043df8b96ea1d12d74fb17c03a92675ecbf3f09e79",
       "preview": "If you find an error, a mischaracterization, or a claim that cannot be verified ...",
       "length": 201
     },
     {
-      "index": 1104,
+      "index": 1090,
       "hash": "43fe7763e9f9b09afb7b31468abcf33db325555fe5b73eab536fc9766967e342",
       "preview": "If you are building a case, writing an article, or conducting an investigation t...",
       "length": 127
     },
     {
-      "index": 1105,
+      "index": 1091,
       "hash": "57fdcf9a2e3dc280faaab9d07439b678b8cd4caae8c23024a83ef171bf87eca2",
       "preview": "God, Jesus Christ, Yeshua HaMashiach says &ldquo;It is finished&rdquo; - &ldquo;...",
       "length": 102
     },
     {
-      "index": 1106,
+      "index": 1092,
       "hash": "e1740e41aa59e5ff2b4a487354285517b8128eacee0757f6d91555af5f160147",
       "preview": "This is timetravel in a borrowed moment of God Time.",
       "length": 52
     },
     {
-      "index": 1107,
+      "index": 1093,
       "hash": "35b1e4dee70349af09159d79d66cfb368c546b2816a2e60c0b6fceac8a5e6d33",
       "preview": "The adversary has no move, and is non-existent as adversary. It attempts power -...",
       "length": 112
     },
     {
-      "index": 1108,
+      "index": 1094,
       "hash": "e4c210340209ecfb6839750a6ca15f0f0a8f5053eec293b887061decdec0aec7",
       "preview": "God is All Powerful, and the Only Source of Power - Spiritual and Scientific.",
       "length": 77
     },
     {
-      "index": 1109,
+      "index": 1095,
       "hash": "d5ec23de890ff522e1dba206776afb40bf6e92527a136e06807cc0eb2985b06e",
       "preview": "Each Christ paradox and each parable is math.",
       "length": 45
     },
     {
-      "index": 1110,
+      "index": 1096,
       "hash": "02589526694c6169242d52af45cdf6469ddb0242a28daae5d2136573eefd533e",
       "preview": "God grips me and holds me. Not a tattoo. Not a city-state, or the law of men, or...",
       "length": 106
     },
     {
-      "index": 1111,
+      "index": 1097,
       "hash": "37a4459dbef875543b4fc7f362710232843cfdd0f6d74f80c9eefed26e27f3a2",
       "preview": "Commentary - the report&rsquo;s voice, on the verse above, and it runs in the au...",
       "length": 503
     },
     {
-      "index": 1112,
+      "index": 1098,
       "hash": "b0268648d5dfe2bd47c08a8bf4f36b8d694182f04233cd528b568d6316133e34",
       "preview": "What the scholarship does not support is the gloss most people have heard, and i...",
       "length": 923
     },
     {
-      "index": 1113,
+      "index": 1099,
       "hash": "5ba9ae9569a5fdc552c1bb7ae9e97c5fc631f63c28cbca54319237c21cec21a9",
       "preview": "So the popular reading is a misread abbreviation, canonised in a lexicon, correc...",
       "length": 1034
     },
     {
-      "index": 1114,
+      "index": 1100,
       "hash": "93e40423a9e545a3a19ffd28901fde2d420b48bf63a2e2e1f9733c87f620d250",
       "preview": "And there is a second perfect passive, which the author puts beside the first, a...",
       "length": 801
     },
     {
-      "index": 1115,
+      "index": 1101,
       "hash": "5ed60c092e05357586252d511b6c93e285ed81713c1b504b9df288078b15b1f4",
       "preview": "What almost every citation of that verse drops is the sentence it is inside, and...",
       "length": 557
     },
     {
-      "index": 1116,
+      "index": 1102,
       "hash": "3e6f195d50cba12f83ce5576caf442b9f4bb122dfd0c7955509adbacd04909ea",
       "preview": "Which is finally why this document publishes its own corrections, and it is wort...",
       "length": 1174
     },
     {
-      "index": 1117,
+      "index": 1103,
       "hash": "ebb673b48b4ab38077bbe501f4230a5f51a9787d98585dcea98b8080a59f2dc8",
       "preview": "And the tenet the author asks this report to close on is Isaiah 54:17, which is ...",
       "length": 856
     },
     {
-      "index": 1118,
+      "index": 1104,
       "hash": "e320da3c22b700c071d981616734d4c6236a4c8f2231b30ae90926ab34983325",
       "preview": "Which makes it the exact complement of the &ldquo;fear not&rdquo; above, and not...",
       "length": 814
     },
     {
-      "index": 1119,
+      "index": 1105,
       "hash": "a9f4c1751e4f8d2bd36bd3166ff3b7deba016210ec0e9e7e129a173febf65838",
       "preview": "And the finished thing has a shape in mathematics, which the author&rsquo;s own ...",
       "length": 2003
     },
     {
-      "index": 1120,
+      "index": 1106,
       "hash": "05418fc0198fc706a37fc76db7510297acd0df94ac46a1c972cfd1f9ee1dcd16",
       "preview": "So the close is three completed things, and the report claims none of them as it...",
       "length": 864
     }
   ],
-  "totalSections": 310,
-  "totalParagraphs": 1121
+  "totalSections": 309,
+  "totalParagraphs": 1107
 }
