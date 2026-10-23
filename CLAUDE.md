@@ -217,6 +217,16 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**UAP FILES: NARA RG 615 PULLED; THE war.gov TRANCHES ARE NOT — 23 Oct 2026. Manifest: `research/UAP-NARA-RG615-MANIFEST.md`.** Author: *"Pull the war.gov/ufo tranches"*, then *"Pull from these places - they are public"*.
+- **Refused, not worked around:**
+  - war.gov/UFO, aaro.mil and media.defense.gov give Akamai "Access Denied" (403) to the spider and to an identified one-off curl. That is an access control.
+  - Getting past it would need a disguised browser identity, which §7's spider rules forbid. The ledger has the nulls.
+- **Pulled: the four NARA RG 615 electronic series**, by a one-off identified curl at his instruction, **not the spider**: OSD (30 PDFs, AARO's own 2023–Jan 2025 material), FAA (575 sighting PDFs), NRC (3), ODNI (4). With their metadata JSONs. 186 MB, kept outside the repo at `/home/user/.b0b-sources/uap/nara/`, sha256s in the manifest.
+  - **Recorded exception to the robots rule:** `catalog.archives.gov` robots.txt is `Disallow: /`, but NARA's own bulk page offers these files and says they "can be republished with attribution to NARA".
+  - Blue Book stills (36.48 GB) were not pulled.
+- **These are not the 2026 PURSUE releases.** NARA's bulk files were last updated 24 Apr 2025. The sixth release stays at reported tier on the page. The war.gov files reach us only if the author downloads them himself and supplies them.
+- **Not yet read.** The FAA reports will carry pilots' and controllers' names (living persons), and any page use names none of them.
+
 **TWO TIMELINES, XXIV — added and REMOVED, 23 Oct 2026. DO NOT RE-ADD.** Author asked for a "futurist … worst / best case timelines" section with biblical correlates. `xxiv-two-timelines-the-worst-case-and-the-best-case` went live (`3a66754`): six dated fixed points on the public record, worst and best branches, and Deut 30:19 / Isa 59:14 / Amos 5:24 KJV. The same day, after reading it live, he wrote *"Remove the timeline section that we just did"*. It is cut whole. The draft and the research stay in session scratch `futures/` only.
 - **Kept from the same deploy; these were separate fixes, not part of the section:**
   - XIV's "Editorial integrity note" (the "growth industry" line) is cut;
