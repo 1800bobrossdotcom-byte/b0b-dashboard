@@ -217,6 +217,30 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**TWO TIMELINES, XXIV — 23 Oct 2026, live. `xxiv-two-timelines-the-worst-case-and-the-best-case`, after the Psalm 91 block and before Practices of Reclamation (~1,200 words).** Author: *"have a section that is futurist - with biblical correlates"* (his X link, `Skoorbkaz/status/2113392757548941441`, was never read: X and its oEmbed refuse by robots, nulls; the video was not downloaded, third-party media), then *"futurist worst / best case timelines"*.
+- **Shape:** scenarios, not forecasts. It opens on GT2040's Kent line ("Intelligence does not claim infallibility for its prophecies"); GT2040 writes five futures, so the best/worst pairing is labelled the report's. **One axis:** whether each documented instrument meets a check on the record (a vote, a statute, a published finding) as its date passes. Best and worst are measured for the record, not for a thesis; the best case includes findings against the report's own readings.
+- **Six fixed points:**
+  - 11 Dec 2026: the res. 2830 extension runs out; signpost is whether the Panel's report is published first;
+  - by noon 3 Jan 2027: the discharge petition dies at sine die (CRS 97-552; noon 3 Jan is only the outer limit);
+  - 28 Jan 2027 (as reported): Meridian findings due to the Secretary; the unclassified report has no publication date;
+  - ~17 Mar 2027 (attributed): the §702 certifications;
+  - 14 Sept 2027: Proclamation 7463 (§1622(d) notice window from 16 June; §1622(b) six-monthly vote);
+  - 31 Jan 2028 (as reported): Norway's commission.
+  - **Not fixed:** AUTOWARCOM's 1 Oct 2027 target (the Department's own letter says Congress must legislate); XVI's 2033–2040 window.
+- **Readings, KJV verbatim:** Deut 30:19 (the form), Isa 59:14 (worst), Amos 5:24 (best). Rev 13:16–17 is named and refused (guaranteed null). **Eccl 8:11 and Deut 18:22 were kept out because they were rows in the XIII table removed on 22 Sept.**
+- **The page now commits to scoring:** "Each fixed point will be scored here as it passes, the outcome recorded either way." **Score each as a dated outcome line in this subsection, never as revision narration.** Meridian's publication has no date, so its worst-case branch can only be scored at a revisit date the author sets.
+- **Method:** workflow `wf_6e5654c1-059` (four research passes, three drafts, three judges, synthesis, a four-lens verify with 2 blockers and 28 fixes, then revision). Files in session scratch `futures/`. My own pass: 12 quotes (11 against their sources with `vqdraft.py`, 1 against the page's own address to those inside), 3 verses with `kjv-verse.py`, 10 anchors.
+- **Fixed on the way, no narration:**
+  - XIV's "Editorial integrity note" (the "growth industry" line) is cut;
+  - XXIII vector 3 now says continued beyond 14 Sept 2026 by the notice signed 8 Sept (91 FR 57773, read via the Federal Register API: published 10 Sept). The "a year behind" note in the stickers entry is resolved;
+  - XV 1 Oct's Euronews quote is verbatim again ("31 January 2028"; the page had changed the date format inside the quotation marks).
+- **His calls, open:**
+  - "therefore choose life" can read as a US slogan; it is kept whole and verbatim;
+  - the word "futurist" is not on the page;
+  - Sudanese gold and the onshore-refining rules were dropped (no shared date);
+  - the NIV wording of the Galatians and Psalm 91 blocks is still unlabelled.
+- Scale line 284 / 1,162 / 144. `build-transmissions.py` 404'd again; the reel is untouched.
+
 **SECTION I TESTIMONY CONTINUED — TWO MORE ACCOUNTS, 23 Oct 2026, live.** The author gave further testimony across several messages, then: *"I just want to put this, at least this testimony here, continued."* A draft was shown to him first and added as he asked.
 - **Added** to `i-the-authors-testimony-the-work-is-the-method`, before the method statement:
   - **"Fourth, the earliest":** the Burbank image at about seven (c. 1989; he is 44). It is in his words, with both of his readings ("abducted or … a false memory"). Around it, the record: GATE at Walt Disney Elementary (XX), and Skunk Works still in Burbank that year (moved to Palmdale after 1989; X: HQ 1992, closed by 1994). No source read places underground facilities at the Burbank plant.
