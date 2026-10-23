@@ -217,6 +217,50 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**THE CURRENT-EVENTS SWEEP IS AUTOMATED — 23 Oct 2026. Scheduled task `trig_01RFnX93MHDF3rvLbtbVqjsw`, "b0b.dev current events sweep": every 2 days at 06:31 New York time (cron `*/2`, odd days of the month), first run 25 Oct. Method: `scripts/sweep/RUNBOOK.md`.** Author: *"Current events sweep. How do we automate this"*. Asked the cadence and what a run may do, he chose **"Every 2 days"** and **"Publish documented items itself"**.
+- **Each firing starts a fresh cloud session** with no memory. It reads this file and then follows the runbook:
+  - three researchers using the brief template;
+  - every quote through `vq.py`;
+  - sort each item into PUBLISH or HOLD;
+  - draft the next XV `xv-status-update-…`;
+  - run the full §4 pipeline, push the branch and `HEAD:main`, and do the live reads;
+  - write `research/NEWS-<date>-HELD.md` and a §7 entry;
+  - send push and email notices to the author.
+- **What a run may publish on its own** (runbook §4): only items where every sentence is a named party's on-record act or statement, every quote passed `vq.py`, each side is printed, and no living person is named in an accusation.
+- **What a run must hold:**
+  - anything defamation-adjacent;
+  - anything resting only on anonymous sources;
+  - anything involving Anthropic;
+  - anything needing an editorial call (new subsections, argument sections, map changes);
+  - corrections outside the XV status updates;
+  - suits against named living people.
+  - It may still fix our own dated status lines in place, with no narration, once the primary has been read.
+- **Off switch:** create `scripts/sweep/PAUSE` and the next run stops. To change the schedule or prompt, use the scheduled task (`update_trigger`). It stores no connectors and the sweep needs none.
+- **Tools now in the repo, `scripts/sweep/`** (until now they lived only in session scratch): `vq.py`, `vqdraft.py`, `qlines.py`, `pipecheck.py`, `pdftext.py`, the new `scale.py` (`--write` updates the scale line), `BRIEF-TEMPLATE.md` and `RUNBOOK.md`.
+
+**CURRENT EVENTS SWEEP 22–23 OCT 2026 — live 23 Oct. XV `xv-status-update-23-october-2026` (10 paragraphs). HELD: `research/NEWS-2026-10-23-HELD.md` (17 items).** Author: *"Current events sweep"*. It is the same method as 22 Oct and the first run of the runbook's PUBLISH/HOLD sort.
+- **Quote checks:** three notes (`news6-*`), 223 quotes, 0 failing in `vq.py`. The draft had 88 quotes, 0 failing in `vqdraft.py`.
+- **Carried:**
+  - the Hebron checkpoint attack and the West Bank lockdown, with each side's counts;
+  - Iran–US: "a little bit further", the IRGC threat to US bases, one party's tanker claim, "another chance", the UN letter;
+  - the Istanbul E3 + Italy / "R4" meeting;
+  - Yemen: the warning withdrawn as "wrong and unacceptable", the European Parliament's Houthi listing call, the 1,574 figure now carrying three attributions;
+  - Lebanon, Gaza, Iraq, and the Russia bot accusation with Russia's denial;
+  - Sudan's denial of the Abyei strike against the army's own anonymous account, the Blue Nile claim, Amnesty on El Fasher, the UAE's Secretary-General nominee with its denial;
+  - the Kremlin's "first half of November in Abu Dhabi", Starshield still disputed three ways, the Oleshky ceasefire announced by the White House only, the 270-for-270 swap;
+  - the *Khoryv* sunk off Constanța, attributed by Romania as reported;
+  - the Koreas, Taiwan, Moyale;
+  - the seventh PURSUE UAP release (files unread, war.gov 403), the betting memo (attributed), the DMDC class action, the petition still at 216.
+- **Our errors, fixed in place (no narration):**
+  - **22 Oct Fairford:** "carry no release on the re-arrests" was wrong. CTP's release existed under an old URL slug, and our own 22 Oct copy of the listing showed it. The page now quotes the release and the detention warrant to 27 Oct.
+  - **22 Oct Abyei:** "one outlet reports 220" now names the same Abyei office as the source of both figures.
+- **Held, among them:** the Virginia indictment (off-thread), the IC election-threat description (one party), the 12 Oct search of a congresswoman's home, the co-executors' denial (the suit stays held), PHP2Shell (Anthropic), the AFP photographer inquiry, and anonymous-only items.
+- **Nulls this run:**
+  - CourtListener 429 on every query, so *Phang*, the D.C. Cir. appeals, the New Mexico suits and *Anthropic v. DoW* are unread;
+  - the Senate roll-call list 403;
+  - war.gov/UFO and aaro.mil 403. **The war.gov news-release RSS feed answers under robots** with titles only.
+- Scale line 284 / 1,160 / 144. `build-transmissions.py` worked.
+
 **UAP FILES: NARA RG 615 PULLED; THE war.gov TRANCHES ARE NOT — 23 Oct 2026. Manifest: `research/UAP-NARA-RG615-MANIFEST.md`.** Author: *"Pull the war.gov/ufo tranches"*, then *"Pull from these places - they are public"*.
 - **Refused, not worked around:**
   - war.gov/UFO, aaro.mil and media.defense.gov give Akamai "Access Denied" (403) to the spider and to an identified one-off curl. That is an access control.
