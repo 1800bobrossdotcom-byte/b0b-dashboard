@@ -343,7 +343,7 @@
   }
 
   function loadVisitors() {
-    fetch('/api/visitors', { credentials: 'same-origin' })
+    fetch('/api/visitors', { credentials: 'same-origin', cache: 'no-store' })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(paintVisitors)
       .catch(function () { /* a counter must never be load-bearing */ });

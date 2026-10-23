@@ -214,9 +214,18 @@
       trr.appendChild(el('td', { class: 'r' }, fmt(rest))); trr.appendChild(el('td')); pb.appendChild(trr);
     }
 
-    $('r-alltime').textContent = fmt(d.totals.views) + ' pages have been served in all, by every kind of client, since the counter began. ' +
-      'The separate "visits" figure (' + fmt(d.totals.gate_entries) + ') counts posts to the old click-gate address. No page on the site has called it since the gate was switched off on 19 September 2026; it still rises because some clients still post to it (the site\u2019s own deploy check is one), so it no longer measures readers. ' +
-      d.method;
+    var allTime = function (v) {
+      $('r-alltime').textContent = fmt(d.totals.views) + ' pages have been served in all, by every kind of client, since the counter began. ' +
+        (v ? 'Visitors: ' + fmt(v.visits) + ', the figure shown across the site. It is ' + fmt(v.gate_entries) +
+          ' entries through the old click-gate, which was switched off on 19 September 2026, plus ' + fmt(v.arrivals) +
+          ' browser arrivals from outside the site since daily counting began on 22 October 2026. The days between were not counted. ' : '') +
+        d.method;
+    };
+    allTime(null);
+    fetch('/api/visitors', { credentials: 'same-origin', cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (v) { if (v && v.backend !== 'memory') allTime(v); })
+      .catch(function () {});
   }
 
   function loadReaders(days) {

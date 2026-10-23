@@ -225,6 +225,7 @@ than once.
 - **Horizon:** the daily hashes have a 400-day TTL, so from about Nov 2027 the oldest arrivals drop out of the sum. Before then, roll the old days into a stored total.
 - Tested against the mock KV (scratchpad `stats/mockkv.js`, which now has HGET): 1,860 + 12 → a new outside arrival → 1,873; a same-origin load does not count.
 - *Trap repeated:* `pkill -f mockkv.js` killed the shell (exit 144). Kill by PID.
+- **The same evening the author wrote *"Stuck at 1860"*.** A fresh browser on the live site showed 1,938, but **`/stats` still printed the gate figure (1,861) labelled "visits".** It now reads `/api/visitors` and gives the site-wide figure with its parts (`stats.js?v=3`). Both count fetches now use `cache: 'no-store'` (`signal-bar.js?v=13`). A tab opened before the deploy runs the old script until it is reloaded.
 
 **FAITH NAMES: ONLY HIS — 23 Oct 2026, live. STANDING RULE.** Author: *"Remove mention of Allah in report - should only be of my faith - Jesus Christ God Holy Spirit. All other parts are absorbed by God. I've been pressured by certain parts to try and be accommodating but some speech initially was felt forced"*.
 - **What changed:**
