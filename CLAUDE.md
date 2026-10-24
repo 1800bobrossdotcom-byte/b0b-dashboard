@@ -218,7 +218,7 @@ than once.
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
 **THE VISITOR COUNT WAS COUNTING MY DEPLOY CHECKS — 24 Oct 2026, fixed (`0386655`), live.** Author: *"Are page count and page views broken again"*.
-- **Not broken:** both counters moved during the check (visits 2,010 → 2,012 and views 16,944 → 16,951 in about fifteen minutes). One browser-style load of `/stickers` was counted at once in `/api/stats` (views, browser and arrivals each +1).
+- **Not broken:** both counters moved during the check (visits 2,010 → 2,019 and views 16,944 → 16,972, 15:18–15:45 UTC). One browser-style load of `/stickers` was counted at once in `/api/stats` (views, browser and arrivals each +1).
 - **Why it can look stuck:**
   - the figure was cached 60 s per instance;
   - "visits" moves only when someone arrives from outside the site (40–80 a day), not on a reload or a click inside it.
@@ -240,7 +240,7 @@ than once.
 - **Live, 24 Oct:** a POST to `/api/gate` left the gate figure at 1,878; arrivals 139 = the daily `a` (14 + 80 + 45); visits = gate + arrivals (2,017); four reads of the new `basis`; `/stats` serves `stats.js?v=4`.
 - **His call, not done:** the gate part still holds at least 192 script requests, and `check-live.js` POSTed before 19 Sept too. Keep it with the caveat (as now), or show visitors as arrivals only from 22 Oct.
 - *Trap:* Node's `fetch` (undici) replaces a `Sec-Fetch-Mode` header with `cors`, so every test load was classed "other". Use `http.get` to test the browser classes.
-- *My own reads added to the count:* two Playwright loads of `/report` and `/stats`, and one curl with navigation headers on 24 Oct (one arrival).
+- *My own checks added to the count on 24 Oct:* three arrivals (two Playwright loads of `/report` and one curl with navigation headers) and a handful of views. `/stats` is not counted.
 
 **"THE PATTERN IS NOT AMERICAN" REBUILT FROM THE RECORD — XVI, 24 Oct 2026, live.** Author: *"Roger that skip 1. Lets do 2. Expand report"*, i.e. the subsection the FOI registry was built for, `xvi-the-pattern-is-not-american-international`.
 - **What it is now** (~8,800 words; was ~1,735): 14 law rows (Argentina new) and 23 programmes (23 Sources and 23 Record lines).
