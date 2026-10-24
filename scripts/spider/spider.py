@@ -299,6 +299,12 @@ def fetch(url, session, note=None, conditional=True, quiet=False):
     rec = {'url': url, 'fetched_at': now(), 'ua': UA}
     if note:
         rec['note'] = note
+    # The ledger is committed and the repository is public: a key in a URL would be published.
+    # Keys travel only as headers, from the environment (see api_key_env in hosts.json).
+    secret = re.search(r'[?&](api_key|apikey|access_token|token)=([^&#]*)', url, re.I)
+    if secret and secret.group(2) not in ('DEMO_KEY', 'DEMO'):      # api.data.gov's public demo keys
+        sys.exit('spider: refusing a URL that carries a key or token in its query string - '
+                 'the ledger is public. Put the key in the environment and let hosts.json send it as a header.')
 
     rp, crawl_delay = robots_for(url, session)
     rec['robots'] = 'absent' if rp is None else 'present'
@@ -316,6 +322,16 @@ def fetch(url, session, note=None, conditional=True, quiet=False):
     cookies = dict(prof.get('cookies', {}))
     if prof.get('why'):
         rec['profile_reason'] = prof['why']
+    if prof.get('api_key_env'):
+        # A key the service issues to anyone who asks (api.data.gov). It is the author's, it identifies
+        # us rather than disguising us, and its value is never written anywhere: only whether it was sent.
+        hname = prof.get('api_key_header', 'X-Api-Key')
+        key = os.environ.get(prof['api_key_env'], '').strip()
+        if key:
+            headers[hname] = key
+            rec['auth'] = '%s header from $%s' % (hname, prof['api_key_env'])
+        else:
+            rec['auth'] = 'none ($%s unset)' % prof['api_key_env']
 
     prior = latest_by_url().get(url) if conditional else None
     # The cache is not committed, so in a fresh container the ledger points at bodies that are not
@@ -597,6 +613,8 @@ def cmd_foi(args, session):
         for e in rows:
             pr = e.get('probe') or {}
             flag = 'X' if e.get('optout') else ('S' if '{q}' in (e.get('search') or e.get('api') or '') else ' ')
+            if e.get('key_env'):
+                flag += 'K' if os.environ.get(e['key_env']) else 'k'
             print('%-3s %-16s %s %-9s %s' % (e.get('cc', '?'), e.get('kind', '?'), flag,
                                              pr.get('result', '-'), e['id']))
             print('      %s' % e['url'])
@@ -604,7 +622,8 @@ def cmd_foi(args, session):
         for e in rows:
             by.setdefault(e.get('cc', '?'), 0)
             by[e.get('cc', '?')] += 1
-        print('\n%d sources, %d jurisdictions (S = searchable with {q}; X = opted out of AI-run crawling)' % (len(rows), len(by)))
+        print('\n%d sources, %d jurisdictions (S = searchable with {q}; X = opted out of AI-run crawling; '
+              'K/k = needs the api.data.gov key, set/unset)' % (len(rows), len(by)))
         return
     if args.mode == 'probe':
         stamp = now()[:10]
@@ -636,6 +655,9 @@ def cmd_foi(args, session):
     for e in rows:
         if e.get('optout') and not args.include_optout:
             print('%-9s %-5s %-28s %s' % ('optout', '-', e['id'][:28], e['optout'][:90]))
+            continue
+        if e.get('key_env') and not os.environ.get(e['key_env']):
+            print('%-9s %-5s %-28s %s' % ('no key', '-', e['id'][:28], 'set $%s (the author\'s api.data.gov key)' % e['key_env']))
             continue
         tmpl = e.get('search') or e.get('api')
         if args.mode == 'find' and (e.get('probe') or {}).get('result') in ('robots', 'decoy'):

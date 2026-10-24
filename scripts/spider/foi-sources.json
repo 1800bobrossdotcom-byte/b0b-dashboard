@@ -95,6 +95,29 @@
    "limits": "Results are user uploads; licence must be read per item. robots Disallow /control/ and /report/ only. Template note: same"
   },
   {
+   "id": "us-congress-api",
+   "cc": "US",
+   "kind": "archive-api",
+   "name": "Congress.gov API (Library of Congress), v3",
+   "url": "https://api.congress.gov/v3/bill?format=json",
+   "search": null,
+   "api": "https://api.congress.gov/v3/bill/{congress}/{type}/{number}?format=json",
+   "format": "json",
+   "terms": "US government work",
+   "key_required": true,
+   "key_env": "API_DATA_GOV_KEY",
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://api.congress.gov/v3/bill?format=json&limit=2",
+    "note": "Tested 24 Oct 2026 with api.data.gov's public DEMO_KEY sent as the X-Api-Key header; with the author's key set as $API_DATA_GOV_KEY the same path applies."
+   },
+   "use": "Bills, resolutions, actions, texts, committee reports and House roll-call votes as JSON: the discharge-petition and war-powers threads the sweep follows.",
+   "limits": "No free-text search; look up by congress, type and number. Senate roll calls are not in it."
+  },
+  {
    "id": "us-govinfo-api",
    "cc": "US",
    "kind": "archive-api",
@@ -110,12 +133,14 @@
    ],
    "probe": {
     "date": "2026-10-24",
-    "status": 401,
+    "status": 429,
     "result": "refused",
-    "sample": "https://api.govinfo.gov/collections"
+    "sample": "https://api.govinfo.gov/collections",
+    "note": "Tested 24 Oct 2026 with api.data.gov's public DEMO_KEY sent as the X-Api-Key header; with the author's key set as $API_DATA_GOV_KEY the same path applies."
    },
-   "use": "Docs page is a shell; the API returns 401 without a key. Use www.govinfo.gov PDF links instead (the existing route).",
-   "limits": "Key required. /app/collection/chrg is a 1.7 KB JS shell."
+   "use": "GovInfo's collections and package lookups (congressional reports, hearings, the Federal Register, court opinions) as JSON.",
+   "limits": "Search is a POST endpoint, which the spider does not send; GET lookups by collection, date and package id work. Without a key: 401. The shared DEMO_KEY answered 429 (rate-limited per IP) on 24 Oct.",
+   "key_env": "API_DATA_GOV_KEY"
   },
   {
    "id": "us-nara-catalog-api",
@@ -372,6 +397,29 @@
    "limits": "ODNI only; /dlm_uploads/ is disallowed so some release PDFs may be unreachable."
   },
   {
+   "id": "us-regulations-api",
+   "cc": "US",
+   "kind": "disclosure-log",
+   "name": "Regulations.gov API v4",
+   "url": "https://api.regulations.gov/v4/documents",
+   "search": "https://api.regulations.gov/v4/documents?filter%5BsearchTerm%5D={q}&page%5Bsize%5D=20",
+   "api": null,
+   "format": "json",
+   "terms": "US government work",
+   "key_required": true,
+   "key_env": "API_DATA_GOV_KEY",
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://api.regulations.gov/v4/documents?filter%5BsearchTerm%5D=Porton%20Down&page%5Bsize%5D=5",
+    "note": "Tested 24 Oct 2026 with api.data.gov's public DEMO_KEY sent as the X-Api-Key header; with the author's key set as $API_DATA_GOV_KEY the same path applies."
+   },
+   "use": "Every federal rulemaking docket, its documents and public comments, searchable by term.",
+   "limits": "Rulemaking records, not agency files; a search term matches document text and titles."
+  },
+  {
    "id": "us-foia-statute",
    "cc": "US",
    "kind": "law",
@@ -399,21 +447,23 @@
    "cc": "US",
    "kind": "portal",
    "name": "FOIA.gov API (agency components, annual-report XML)",
-   "url": "https://www.foia.gov/developer/",
+   "url": "https://api.foia.gov/api/agency_components",
    "search": null,
-   "api": "https://api.foia.gov/api/agency_components",
+   "api": "https://api.foia.gov/api/agency_components?page%5Bsize%5D=50",
    "format": "json",
    "terms": "api.data.gov key",
    "key_required": true,
    "programs": [],
    "probe": {
     "date": "2026-10-24",
-    "status": 403,
-    "result": "refused",
-    "sample": "https://api.foia.gov/api/agency_components?api_key=DEMO"
+    "status": 200,
+    "result": "ok",
+    "sample": "https://api.foia.gov/api/agency_components?page%5Bsize%5D=2",
+    "note": "Tested 24 Oct 2026 with api.data.gov's public DEMO_KEY sent as the X-Api-Key header; with the author's key set as $API_DATA_GOV_KEY the same path applies."
    },
-   "use": "Documentation page is readable (33 KB). Agency list and annual-report XML (/api/annual-report-xml/DOJ/2021) are reachable only with a key.",
-   "limits": "Key required (we do not register). api.foia.gov root is 404; the probe with a placeholder key was 403. The foia.gov/search.html page is a JS shell (see decoys)."
+   "use": "FOIA.gov's agency directory (every federal FOIA office, its contacts and request routing) as JSON:API.",
+   "limits": "The agency annual-report statistics are published separately on foia.gov's data page. Without a key the API refuses.",
+   "key_env": "API_DATA_GOV_KEY"
   },
   {
    "id": "us-nara-iwg-japanese-war-crimes",

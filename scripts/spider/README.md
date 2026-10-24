@@ -82,3 +82,11 @@ QUERY` runs every searchable source that last answered; `foi probe --write` re-t
 Sources that have opted out of AI-run crawling carry `optout` and are skipped unless `--include-optout` is passed
 — the author's call, not the crawler's. The research and the quotes behind each entry are in
 `research/sources/FOI-SOURCES.md` and `research/sources/foi/`.
+
+## Keys
+
+A key the service issues to anyone (api.data.gov) is sent only as a header, read from the environment
+(`api_key_env` / `api_key_header` in `hosts.json`; `API_DATA_GOV_KEY`). Its value is never written to the
+ledger, which records only `auth: X-Api-Key header from $API_DATA_GOV_KEY` or `none`. A URL that carries a key or
+token in its query string is refused before any request is made: the ledger is public. The one exception is
+api.data.gov's published `DEMO_KEY`.

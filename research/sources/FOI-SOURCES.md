@@ -8,7 +8,7 @@ and the FBI Vault answers 403.
 
 ## Where it lives
 
-- **`scripts/spider/foi-sources.json`:** 133 sources across 15 jurisdictions: the US, the 13 in XVI's table, and the
+- **`scripts/spider/foi-sources.json`:** 135 sources across 15 jurisdictions: the US, the 13 in XVI's table, and the
   EU. Every entry was probed through the spider and ledgered, and each carries its probe result.
 - **`scripts/spider/spider.py foi`:**
   - `list [--cc GB] [--kind archive-api] [--program "FCO 141"]` shows what is in the registry and how each probe
@@ -29,7 +29,7 @@ and the FBI Vault answers 403.
 
 | Jurisdiction | Sources | Answered | Searchable now (`find` uses these) |
 |---|---|---|---|
-| United States | 19 | 13 | `us-archive-org-search` |
+| United States | 21 | 15 | `us-archive-org-search`; with the key also `us-regulations-api` |
 | United Kingdom | 8 | 6 | `gb-tna-discovery-api`, `gb-govuk-foi-releases`, `gb-porton-down` |
 | Australia | 6 | 3 | - |
 | Canada | 6 | 5 | `ca-open-ckan` |
@@ -99,8 +99,8 @@ CADA search answered once and then refused 403 to both test queries, so it is ma
 
 - **US:** NSA, State, DoD, DIA, the FBI Vault, MuckRock and DocumentCloud (403). The NARA catalog API is
   robots-disallowed.
-- **Keyed APIs:** FOIA.gov and govinfo both need an api.data.gov key. We do not register for keys; a free key is the
-  author's call.
+- **Keyed APIs:** FOIA.gov, govinfo, Congress.gov and Regulations.gov need the api.data.gov key. It is wired, and
+  waits on the author's key (see the section below).
 - **UK:** WhatDoTheyKnow (403 everywhere).
 - **Australia:** NAA RecordSearch (403); AustLII (403).
 - **Canada and Germany:** LAC's search is robots-disallowed; Bundesarchiv invenio (403).
@@ -117,7 +117,45 @@ CADA search answered once and then refused 403 to both test queries, so it is ma
 **A refusal is a finding.** `spider.py ledger --nulls` groups them by host, and that list is the input to a records
 request or a direct approach.
 
-## Opted out of AI-run crawling: the author's call
+## The api.data.gov key (the author's decision, 24 Oct 2026: "Lets do 2")
+
+The api.data.gov signup page runs reCAPTCHA, so the key is the author's to request, and the crawler never solves a
+challenge. Once he has it, it lives in the cloud environment's settings, never in the repository or the chat:
+- as a Network secret where that section is offered,
+- or otherwise as the environment variable **`API_DATA_GOV_KEY`**.
+
+New sessions, the scheduled sweep included, pick it up.
+
+**How the spider uses it:**
+- `hosts.json` marks `api.govinfo.gov`, `api.foia.gov`, `api.congress.gov`, `api.regulations.gov` and
+  `api.open.fec.gov` with `api_key_env`.
+- The key is sent as the `X-Api-Key` header, which api.data.gov accepts in place of the `api_key` URL parameter.
+- The ledger records only whether a key was sent (`auth`), never its value.
+- **A URL carrying a key or token is refused outright**, because the ledger is public. api.data.gov's own public
+  `DEMO_KEY` is the one exception.
+- Without the variable, `foi search` and `foi find` skip these sources with a "no key" line instead of spending
+  minutes on the 401 backoff ladder.
+
+**Tested 24 Oct with `DEMO_KEY` as the header:**
+
+| Source | Result |
+|---|---|
+| Regulations.gov search | 200 |
+| Congress.gov bills | 200 |
+| FOIA.gov agency directory | 200 |
+| govinfo | 429: DEMO_KEY is rate-limited per IP |
+
+**What the key opens:**
+- **Congress.gov:** bills, actions, texts and House roll calls; the discharge-petition and war-powers threads the sweep
+  follows.
+- **Regulations.gov:** every rulemaking docket, searchable.
+- **GovInfo:** hearings, committee reports, the Federal Register and court opinions, by package.
+- **FOIA.gov:** the agency directory.
+
+**Not opened by it:** NARA's catalog API. It takes a separate key from NARA, and catalog.archives.gov's robots.txt
+disallows it anyway.
+
+## Opted out of AI-run crawling: the author's call (FragDenStaat: stays skipped, his "skip 1", 24 Oct)
 
 - **FragDenStaat** (`fragdenstaat.de/robots.txt`: `User-agent: ClaudeBot` / `Disallow: /`, and the same for GPTBot).
   - Our crawler runs under its own name, so robots lets it in.

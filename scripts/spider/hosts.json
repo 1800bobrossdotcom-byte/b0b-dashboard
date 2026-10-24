@@ -261,5 +261,35 @@
     "decoy_titles": [
       "政府信息公开平台_中国政府网"
     ]
+  },
+  "api.govinfo.gov": {
+    "why": "api.data.gov issues free keys to anyone who signs up; the author holds one (24 Oct 2026). The key is read from $API_DATA_GOV_KEY and sent as the X-Api-Key header, which api.data.gov accepts in place of the api_key query parameter, so it never appears in a URL or in the public ledger. Without the variable nothing is sent and the service's refusal is recorded as a null. DEMO_KEY (api.data.gov's public demo key, 30 requests an hour) works for a test.",
+    "api_key_env": "API_DATA_GOV_KEY",
+    "api_key_header": "X-Api-Key",
+    "delay": 1.0
+  },
+  "api.foia.gov": {
+    "why": "api.data.gov issues free keys to anyone who signs up; the author holds one (24 Oct 2026). The key is read from $API_DATA_GOV_KEY and sent as the X-Api-Key header, which api.data.gov accepts in place of the api_key query parameter, so it never appears in a URL or in the public ledger. Without the variable nothing is sent and the service's refusal is recorded as a null. DEMO_KEY (api.data.gov's public demo key, 30 requests an hour) works for a test.",
+    "api_key_env": "API_DATA_GOV_KEY",
+    "api_key_header": "X-Api-Key",
+    "delay": 1.0
+  },
+  "api.congress.gov": {
+    "why": "api.data.gov issues free keys to anyone who signs up; the author holds one (24 Oct 2026). The key is read from $API_DATA_GOV_KEY and sent as the X-Api-Key header, which api.data.gov accepts in place of the api_key query parameter, so it never appears in a URL or in the public ledger. Without the variable nothing is sent and the service's refusal is recorded as a null. DEMO_KEY (api.data.gov's public demo key, 30 requests an hour) works for a test.",
+    "api_key_env": "API_DATA_GOV_KEY",
+    "api_key_header": "X-Api-Key",
+    "delay": 1.0
+  },
+  "api.regulations.gov": {
+    "why": "api.data.gov issues free keys to anyone who signs up; the author holds one (24 Oct 2026). The key is read from $API_DATA_GOV_KEY and sent as the X-Api-Key header, which api.data.gov accepts in place of the api_key query parameter, so it never appears in a URL or in the public ledger. Without the variable nothing is sent and the service's refusal is recorded as a null. DEMO_KEY (api.data.gov's public demo key, 30 requests an hour) works for a test.",
+    "api_key_env": "API_DATA_GOV_KEY",
+    "api_key_header": "X-Api-Key",
+    "delay": 1.0
+  },
+  "api.open.fec.gov": {
+    "why": "api.data.gov issues free keys to anyone who signs up; the author holds one (24 Oct 2026). The key is read from $API_DATA_GOV_KEY and sent as the X-Api-Key header, which api.data.gov accepts in place of the api_key query parameter, so it never appears in a URL or in the public ledger. Without the variable nothing is sent and the service's refusal is recorded as a null. DEMO_KEY (api.data.gov's public demo key, 30 requests an hour) works for a test.",
+    "api_key_env": "API_DATA_GOV_KEY",
+    "api_key_header": "X-Api-Key",
+    "delay": 1.0
   }
 }
