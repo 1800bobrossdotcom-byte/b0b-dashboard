@@ -217,6 +217,31 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**THE CRAWLER HAS AN FOI REGISTRY: 133 SOURCES, 15 JURISDICTIONS — 24 Oct 2026. `scripts/spider/foi-sources.json`; guide `research/sources/FOI-SOURCES.md`; beat notes `research/sources/foi/` (229 quotes, all vq OK).** Author: *"Greatly expand our crawler foia data uses to all"*, pointing at XVI `xvi-the-pattern-is-not-american-international`.
+- **Scope:** the US, the 13 in XVI's table, and the EU. Each source is a statute, portal, disclosure log, appeals body, civil-society log, archive/API or programme archive. **Every one was probed through the ledger**: 91 answered; the rest are refused, robots, decoy or unreachable, each recorded.
+- **`spider.py foi list|probe|search|find`.** `find QUERY` runs every searchable source that last answered (13, each proven to filter with two queries). It files nothing, registers for no key, and never retries a refusal.
+- **Best paths:**
+  - TNA Discovery API (FCO 141: 21,388 items; Porton Down);
+  - Canada's ATI-summaries datastore (205,063 rows);
+  - e-Gov API, JACAR (`kw0`, not `keyword=`) and NAJ (Unit 731);
+  - TRC CBW transcripts and SAHA AL2922 (Project Coast);
+  - CADA open data, SHD and the AN nuclear-test inquiry (France);
+  - Cellar SPARQL and EP open data (EU);
+  - NARA JFK, the NSArchive and archive.org (US).
+- **Opted out, his call:** FragDenStaat's robots names ClaudeBot/GPTBot (`Disallow: /`). It was queried on 24 Oct before that was noticed, and is now `optout` and skipped unless `--include-optout`. LawLibrary ZA declares `ai-input=no`.
+- **Keys:** FOIA.gov and govinfo need an api.data.gov key; not registered, his call.
+- **Spider fixes:**
+  - `decode_body()` reads the declared charset (Shift_JIS pages were mojibake; `vq.py` shares it);
+  - `decoy_match()` gained `decoy_redirect_paths`;
+  - **~30 decoy rules added to `hosts.json`, proven both ways on cached bodies and live**: CIA reading room → `/system-maintenance/`, 508,740 B, with two such rows already ledgered `ok` and **not to be cited**; Imperva shells (NZ, AU PM&C); uhk-bnd.de, now a betting site; the stasi-unterlagen-archiv.de alias; the Knesset geo-block; e-Gov, Informa.BR, Fala.BR, CIC and gov.cn shells; the F5 challenge at SIAN.
+- **Page lines contradicted, flagged, NOT edited (XVI's table):**
+  - Japan "60-year" (it is 30, extendable);
+  - India "RAW and IB exempt" (the s.24 proviso);
+  - China "no declassification mechanism" (State Secrets Law Art. 24 self-declassification);
+  - Russia "no FOIA equivalent" (8-FZ, 2009);
+  - Project Coast "mostly burned" (not in the TRC passage read);
+  - Unit 731 "not Japanese disclosure" (JACAR and NAJ hold entries, unopened).
+
 **DUPONT, TEFLON AND PFOA — researched 24 Oct 2026, HELD. `research/DUPONT-PFOA.md` (synthesis) + `DUPONT-PFOA-A-CORPORATE.md` + `DUPONT-PFOA-B-SCIENCE.md`; 263 quotes, all vq OK.** Author: *"Look into Dupont and Teflon poisoning and Teflon attaching to DNA and children being born with Teflon in their systems"*. Page had DuPont/Teflon/PFOA/PFAS 0.
 - **Naming error first:** Teflon is PTFE, the polymer. PFOA (C8) was the processing aid. Every blood and water measurement is of PFOA/PFAS, never PTFE.
 - **Documented:**

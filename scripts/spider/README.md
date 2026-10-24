@@ -10,6 +10,7 @@ python3 scripts/spider/spider.py crawl SEED --depth 2 --max 50
 python3 scripts/spider/spider.py verify [URL ...]
 python3 scripts/spider/spider.py ledger [--nulls] [--latest] [--host H]
 python3 scripts/spider/spider.py text URL
+python3 scripts/spider/spider.py foi list|probe|search|find [QUERY] [--cc GB] [--kind ..] [--id ..]
 ```
 
 `research/sources/ledger.jsonl` is committed. `research/sources/cache/` is not —
@@ -47,7 +48,9 @@ both HTTP 200, both `text/html`:
 - b0b.dev's own gate answers every path, static assets included, with an 8,607-byte
   pixel page.
 
-`hosts.json` registers known decoys by title, byte length or sha256. A match is
+`hosts.json` registers known decoys by title, byte length, sha256, a body marker, or the path a
+document URL is redirected to (`decoy_redirect_paths`: the CIA reading room now lands every document on
+`/system-maintenance/`). A match is
 demoted to `reason: decoy_200, ok: false` and never recorded as a source.
 
 ## hosts.json
@@ -69,3 +72,13 @@ and the loader exits if an entry tries.**
 - `text` refuses to flatten a PDF. Extract PDFs locally and read the numbers
   yourself; a model summary of a filing has already invented figures on this project
   once, and must never reach the page.
+
+## The FOI registry (`foi-sources.json`)
+
+133 freedom-of-information and declassified-archive sources across 15 jurisdictions, each probed through the
+ledger: statutes, request portals (recorded, never used), disclosure logs, appeal decisions, civil-society request
+logs, national archives and their APIs, and the archives of the programmes named in the report's XVI. `foi find
+QUERY` runs every searchable source that last answered; `foi probe --write` re-tests and stores the result.
+Sources that have opted out of AI-run crawling carry `optout` and are skipped unless `--include-optout` is passed
+— the author's call, not the crawler's. The research and the quotes behind each entry are in
+`research/sources/FOI-SOURCES.md` and `research/sources/foi/`.

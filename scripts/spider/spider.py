@@ -271,6 +271,25 @@ def title_of(body, ctype):
     return re.sub(r'\s+', ' ', html.unescape(m.group(1))).strip()[:300] if m else None
 
 
+def decoy_match(prof, body, digest, t, final_url=None):
+    """Which registered decoy rule, if any, a 200 body matches."""
+    if final_url and any(urllib.parse.urlparse(final_url).path.startswith(p)
+                         for p in prof.get('decoy_redirect_paths', [])):
+        # a document URL that lands on a site-wide page (maintenance, login, home)
+        return 'redirect'
+    if digest in set(prof.get('decoy_sha256', [])):
+        return 'sha256'
+    if t and any(s.lower() in t.lower() for s in prof.get('decoy_titles', [])):
+        return 'title'
+    if len(body) in set(prof.get('decoy_bytes', [])):
+        return 'bytes'
+    # a challenge page whose size and (blank) title vary: match a fixed
+    # marker in its opening bytes. Recorded, never solved.
+    if any(m.encode() in body[:8192] for m in prof.get('decoy_markers', [])):
+        return 'marker'
+    return None
+
+
 def fetch(url, session, note=None, conditional=True, quiet=False):
     """Fetch one URL and write exactly one ledger row. Returns the row.
 
@@ -377,17 +396,7 @@ def fetch(url, session, note=None, conditional=True, quiet=False):
         # document id; b0b.dev's own gate serves an 8,607-byte pixel page on every
         # path. Both are HTTP 200. Known decoys are demoted to nulls here so the
         # ledger never carries a block page as evidence.
-        decoy = None
-        if digest in set(prof.get('decoy_sha256', [])):
-            decoy = 'sha256'
-        elif t and any(s.lower() in t.lower() for s in prof.get('decoy_titles', [])):
-            decoy = 'title'
-        elif len(body) in set(prof.get('decoy_bytes', [])):
-            decoy = 'bytes'
-        elif any(m.encode() in body[:8192] for m in prof.get('decoy_markers', [])):
-            # a challenge page whose size and (blank) title vary: match a fixed
-            # marker in its opening bytes. Recorded, never solved.
-            decoy = 'marker'
+        decoy = decoy_match(prof, body, digest, t, r.url)
         if decoy:
             rec.update(reason='decoy_200', ok=False, sha256=digest, bytes=len(body),
                        content_type=ctype, decoy_match=decoy, title=t)
@@ -587,7 +596,7 @@ def cmd_foi(args, session):
     if args.mode == 'list':
         for e in rows:
             pr = e.get('probe') or {}
-            flag = 'S' if (e.get('search') or e.get('api')) else ' '
+            flag = 'X' if e.get('optout') else ('S' if '{q}' in (e.get('search') or e.get('api') or '') else ' ')
             print('%-3s %-16s %s %-9s %s' % (e.get('cc', '?'), e.get('kind', '?'), flag,
                                              pr.get('result', '-'), e['id']))
             print('      %s' % e['url'])
@@ -595,7 +604,7 @@ def cmd_foi(args, session):
         for e in rows:
             by.setdefault(e.get('cc', '?'), 0)
             by[e.get('cc', '?')] += 1
-        print('\n%d sources, %d jurisdictions (S = has a search or API template)' % (len(rows), len(by)))
+        print('\n%d sources, %d jurisdictions (S = searchable with {q}; X = opted out of AI-run crawling)' % (len(rows), len(by)))
         return
     if args.mode == 'probe':
         stamp = now()[:10]
@@ -625,7 +634,12 @@ def cmd_foi(args, session):
         sys.exit('spider: foi search takes exactly one --id')
     hits = 0
     for e in rows:
+        if e.get('optout') and not args.include_optout:
+            print('%-9s %-5s %-28s %s' % ('optout', '-', e['id'][:28], e['optout'][:90]))
+            continue
         tmpl = e.get('search') or e.get('api')
+        if args.mode == 'find' and (e.get('probe') or {}).get('result') in ('robots', 'decoy'):
+            continue        # known not to answer with records; probe again to reinstate
         if not tmpl or '{q}' not in tmpl:
             if args.mode == 'search':
                 sys.exit('spider: %s has no search or API template' % e['id'])
@@ -682,6 +696,8 @@ def main():
     g.add_argument('--id', action='append')
     g.add_argument('--program', help='only sources holding a named programme (substring)')
     g.add_argument('--write', action='store_true', help='probe: store results in foi-sources.json')
+    g.add_argument('--include-optout', action='store_true',
+                   help='search/find: also query sources that have opted out of AI-run crawling (the author\'s call)')
     g.set_defaults(fn=cmd_foi)
 
     args = ap.parse_args()

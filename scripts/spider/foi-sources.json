@@ -1,0 +1,3025 @@
+{
+ "_comment": [
+  "Freedom-of-information and declassified-archive sources the spider can read, by jurisdiction.",
+  "Built 24 Oct 2026 from three research passes; every entry was probed through the spider and ledgered.",
+  "probe.result: ok | refused (401/403/429) | robots (disallowed) | decoy (a 200 that is a refusal, a JS shell or a homepage-for-every-id) | not_found | unreachable.",
+  "A refused, robots or decoy source is recorded so the gap is visible; it is never worked around. Nothing here files a request, registers for a key, or uses a browser.",
+  "search/api templates take {q}. Run: python3 scripts/spider/spider.py foi list|probe|search|find --help",
+  "Human notes and the quotes behind each entry: research/sources/FOI-SOURCES.md and research/sources/foi/*.md."
+ ],
+ "jurisdictions": {
+  "US": "United States",
+  "GB": "United Kingdom",
+  "AU": "Australia",
+  "CA": "Canada",
+  "NZ": "New Zealand",
+  "FR": "France",
+  "DE": "Germany",
+  "IL": "Israel",
+  "RU": "Russia",
+  "EU": "European Union",
+  "JP": "Japan",
+  "IN": "India",
+  "ZA": "South Africa",
+  "BR": "Brazil",
+  "CN": "China"
+ },
+ "sources": [
+  {
+   "id": "us-doe-opennet",
+   "cc": "US",
+   "kind": "archive",
+   "name": "DOE OpenNet (declassified nuclear documents)",
+   "url": "https://www.osti.gov/opennet/",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "-",
+   "key_required": false,
+   "programs": [
+    "nuclear testing documents"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "decoy",
+    "sample": "https://www.osti.gov/opennet/ (21 KB JS shell)"
+   },
+   "use": "None by plain GET.",
+   "limits": "Page says it needs JavaScript; robots disallows /opennet/document and /opennet/search-results (for the groups listed, incl. Googlebot); /opennet/search.jsp 404."
+  },
+  {
+   "id": "us-frus",
+   "cc": "US",
+   "kind": "archive",
+   "name": "Foreign Relations of the United States (history.state.gov)",
+   "url": "https://history.state.gov/historicaldocuments",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "US government work",
+   "key_required": false,
+   "programs": [
+    "FRUS volumes (NSAM 271 etc.)"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://history.state.gov/historicaldocuments (34 KB)"
+   },
+   "use": "FRUS volume and document pages.",
+   "limits": "robots: Crawl-delay 20, Disallow /search and /*pg_."
+  },
+  {
+   "id": "us-archive-org-search",
+   "cc": "US",
+   "kind": "archive-api",
+   "name": "Internet Archive advanced search (cross-jurisdiction mirror finder)",
+   "url": "https://archive.org/advancedsearch.php",
+   "search": "https://archive.org/advancedsearch.php?q={q}&fl%5B%5D=identifier&rows=20&output=json",
+   "api": null,
+   "format": "json",
+   "terms": "per item",
+   "key_required": false,
+   "programs": [
+    "FOIA mirrors of CIA, FBI, Stasi etc."
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "q=mkultra returned numFound 7910"
+   },
+   "use": "Keyless JSON; finds items, then /metadata/<id> carries the licence (as the intro-film work already does). Useful for the other beats' mirrors.",
+   "limits": "Results are user uploads; licence must be read per item. robots Disallow /control/ and /report/ only. Template note: same"
+  },
+  {
+   "id": "us-govinfo-api",
+   "cc": "US",
+   "kind": "archive-api",
+   "name": "GovInfo API",
+   "url": "https://api.govinfo.gov/docs/",
+   "search": null,
+   "api": "https://api.govinfo.gov/collections",
+   "format": "json",
+   "terms": "api.data.gov key",
+   "key_required": true,
+   "programs": [
+    "hearings, CFR, FR PDFs"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 401,
+    "result": "refused",
+    "sample": "https://api.govinfo.gov/collections"
+   },
+   "use": "Docs page is a shell; the API returns 401 without a key. Use www.govinfo.gov PDF links instead (the existing route).",
+   "limits": "Key required. /app/collection/chrg is a 1.7 KB JS shell."
+  },
+  {
+   "id": "us-nara-catalog-api",
+   "cc": "US",
+   "kind": "archive-api",
+   "name": "NARA Catalog API v2",
+   "url": "https://catalog.archives.gov/",
+   "search": null,
+   "api": "https://catalog.archives.gov/api/v2/records/search?q={q}",
+   "format": "json",
+   "terms": "NARA states bulk files can be republished with attribution (see CLAUDE.md UAP entry)",
+   "key_required": "unknown (not reached)",
+   "programs": [
+    "JFK",
+    "RG 615 UAP",
+    "Unit 731 (RG 263, RG 153 series)",
+    "all NARA holdings"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": null,
+    "result": "robots",
+    "sample": "https://catalog.archives.gov/api/v2/records/search?q=mkultra"
+   },
+   "use": "Nothing, as the crawler: the spider refuses both /robots.txt-governed URLs.",
+   "limits": "robots Disallow / on the host. A one-off identified curl at the author's instruction is the recorded exception (CLAUDE.md section 7, UAP). Do not route around."
+  },
+  {
+   "id": "us-blackvault",
+   "cc": "US",
+   "kind": "civil-log",
+   "name": "The Black Vault document archive",
+   "url": "https://www.theblackvault.com/documentarchive/",
+   "search": null,
+   "api": null,
+   "format": "html+pdf",
+   "terms": "not stated",
+   "key_required": false,
+   "programs": [
+    "FBI files",
+    "UAP / government releases"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.theblackvault.com/documentarchive/category/government/ (127 KB; 368 category links); .../government-accountability-i-g-reports/ (130 KB)"
+   },
+   "use": "Browse by category pages; the site's own FOIA-release index.",
+   "limits": "robots Disallow /*? kills every query-string search (spider reported 'robots disallow' for /?s=); crawl categories only. Site is an aggregator, so each document needs its agency source."
+  },
+  {
+   "id": "us-governmentattic",
+   "cc": "US",
+   "kind": "civil-log",
+   "name": "GovernmentAttic.org",
+   "url": "https://www.governmentattic.org/Frame-2.html",
+   "search": null,
+   "api": null,
+   "format": "html+pdf",
+   "terms": "not stated",
+   "key_required": false,
+   "programs": [
+    "IG reports",
+    "ODNI/State/USCIS FOIA releases"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.governmentattic.org/62docs/ODNIbicSOCM2016-035C2016.pdf (505 KB PDF, 200)"
+   },
+   "use": "The home page is a frameset; the content is Frame-2.html (30 KB, 76 links, newest documents as /62docs/*.pdf).",
+   "limits": "documents.html and DocumentsIndex.html are 404. robots: Crawl-delay 5. The older document pages are not indexed on the frame (not found)."
+  },
+  {
+   "id": "us-muckrock",
+   "cc": "US",
+   "kind": "civil-log",
+   "name": "MuckRock",
+   "url": "https://www.muckrock.com/foi/",
+   "search": null,
+   "api": "https://www.muckrock.com/api_v2/",
+   "format": "json",
+   "terms": "-",
+   "key_required": "unknown",
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 403,
+    "result": "refused",
+    "sample": "https://muckrock.com/robots.txt (403, the robots file itself)"
+   },
+   "use": "None.",
+   "limits": "403 on robots.txt, /foi/ and /api_v2/. Recorded null."
+  },
+  {
+   "id": "us-nsarchive",
+   "cc": "US",
+   "kind": "civil-log",
+   "name": "National Security Archive (GWU): postings, briefing books, projects",
+   "url": "https://nsarchive.gwu.edu/",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "not stated in the pages read",
+   "key_required": false,
+   "programs": [
+    "JFK / CIA Mexico City station (briefing book 2026-10-01)",
+    "Chile, China, Genocide documentation projects"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://nsarchive.gwu.edu/postings/all (57 KB, 20 briefing-book links); https://nsarchive.gwu.edu/briefing-book/intelligence-mexico/2026-10-01/cia-station-mexico-last-jfk-assassination-records (97 KB)"
+   },
+   "use": "Posting lists and briefing books with document links; crawl by /postings/all and /project/*. nsarchive2.gwu.edu/NSAEBB/ (older electronic briefing books, 248 KB) also answers 200.",
+   "limits": "/search/ is disallowed by robots; the /search?search_api_fulltext= form is not caught by that rule but returned '0 results(s) found' for 'mkultra', so it is not a working data path. /documents answered 403."
+  },
+  {
+   "id": "us-agency-nulls",
+   "cc": "US",
+   "kind": "disclosure-log",
+   "name": "NSA, State, DoD/OSD, DIA, FBI Vault, CIA reading room, MuckRock, DocumentCloud, Mary Ferrell",
+   "url": "(see list)",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "-",
+   "key_required": false,
+   "programs": [
+    "NSA FOIA",
+    "State virtual reading room",
+    "OSD/JS FOIA",
+    "FBI Vault",
+    "CREST",
+    "MuckRock"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": "403/robots",
+    "result": "refused",
+    "sample": "see Nulls"
+   },
+   "use": "Nothing from these hosts; their documents arrive via mirrors (NSArchive, GovernmentAttic, Black Vault, archive.org, govinfo, NARA).",
+   "limits": "All listed in Nulls with exact statuses."
+  },
+  {
+   "id": "us-dhs-foia-library",
+   "cc": "US",
+   "kind": "disclosure-log",
+   "name": "DHS FOIA Library",
+   "url": "https://www.dhs.gov/foia-library",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "US government work",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.dhs.gov/foia-library (140 KB)"
+   },
+   "use": "DHS proactive releases index.",
+   "limits": "Index page only was read."
+  },
+  {
+   "id": "us-doj-oip-foia-library",
+   "cc": "US",
+   "kind": "disclosure-log",
+   "name": "DOJ Office of Information Policy: FOIA Library and OIP home",
+   "url": "https://www.justice.gov/oip/foia-library",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "US government work",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.justice.gov/oip (110 KB) and /oip/foia-library (94 KB)"
+   },
+   "use": "DOJ FOIA guidance, annual reports, library index; the age-gate cookie is already in hosts.json.",
+   "limits": "usao press pages still serve the bm-verify interstitial (registered)."
+  },
+  {
+   "id": "us-foia-gov-dataset",
+   "cc": "US",
+   "kind": "disclosure-log",
+   "name": "FOIA.gov annual-report data downloads",
+   "url": "https://www.foia.gov/foia-dataset-download.html",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "not stated",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.foia.gov/foia-dataset-download.html"
+   },
+   "use": "Page loads; heading 'Annual data'. It is where agency FOIA annual-report data is offered.",
+   "limits": "Download links are not in the static HTML (only the Agency API Spec link is), so the files themselves were not reached; stats, not released records."
+  },
+  {
+   "id": "us-nara-foia-reading-room",
+   "cc": "US",
+   "kind": "disclosure-log",
+   "name": "NARA Electronic Reading Room / FOIA Library",
+   "url": "https://www.archives.gov/foia/electronic-reading-room",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "US government work",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.archives.gov/foia/electronic-reading-room"
+   },
+   "use": "NARA's own FOIA releases index (50 KB).",
+   "limits": "archives.gov robots asks Crawl-delay 10 (spider obeys); index of NARA's own FOIA, not the other agencies'."
+  },
+  {
+   "id": "us-odni-foia-reading-room",
+   "cc": "US",
+   "kind": "disclosure-log",
+   "name": "ODNI FOIA Reading Room",
+   "url": "https://www.dni.gov/index.php/foia/foia-reading-room",
+   "search": null,
+   "api": null,
+   "format": "html+pdf",
+   "terms": "US government work",
+   "key_required": false,
+   "programs": [
+    "IC declassifications (e.g. DF- numbered releases)"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.dni.gov/index.php/foia/foia-reading-room (317 KB)"
+   },
+   "use": "Lists ODNI declassification releases by year ('FOIA Reading Room 2025 (04-24-26)') with PDF links; robots allows all but /wp-admin/ and /dlm_uploads/; crawl-delay 10 for non-SearchGov agents.",
+   "limits": "ODNI only; /dlm_uploads/ is disallowed so some release PDFs may be unreachable."
+  },
+  {
+   "id": "us-foia-statute",
+   "cc": "US",
+   "kind": "law",
+   "name": "5 U.S.C. 552 as posted on FOIA.gov",
+   "url": "https://www.foia.gov/foia-statute.html",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "US government work; not stated on page",
+   "key_required": false,
+   "programs": [
+    "Glomar / (b)(1) national defense exemption"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.foia.gov/foia-statute.html"
+   },
+   "use": "Official statute text incl. exemption (b)(1) and the (c)(3) FBI exclusion; 88 KB.",
+   "limits": "Statute only; says nothing about what agencies actually released."
+  },
+  {
+   "id": "us-foia-gov-api",
+   "cc": "US",
+   "kind": "portal",
+   "name": "FOIA.gov API (agency components, annual-report XML)",
+   "url": "https://www.foia.gov/developer/",
+   "search": null,
+   "api": "https://api.foia.gov/api/agency_components",
+   "format": "json",
+   "terms": "api.data.gov key",
+   "key_required": true,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 403,
+    "result": "refused",
+    "sample": "https://api.foia.gov/api/agency_components?api_key=DEMO"
+   },
+   "use": "Documentation page is readable (33 KB). Agency list and annual-report XML (/api/annual-report-xml/DOJ/2021) are reachable only with a key.",
+   "limits": "Key required (we do not register). api.foia.gov root is 404; the probe with a placeholder key was 403. The foia.gov/search.html page is a JS shell (see decoys)."
+  },
+  {
+   "id": "us-nara-iwg-japanese-war-crimes",
+   "cc": "US",
+   "kind": "program",
+   "name": "NARA IWG, Researching Japanese War Crimes (Japanese Imperial Government Disclosure Act), finding aids and selected documents on Japanese biological warfare",
+   "url": "https://www.archives.gov/iwg/japanese-war-crimes",
+   "search": null,
+   "api": null,
+   "format": "html+pdf",
+   "terms": "US federal website; reuse terms not stated on the probed page",
+   "key_required": false,
+   "programs": [
+    "Unit 731"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.archives.gov/files/iwg/japanese-war-crimes/select-documents.pdf (24.3 MB, 170 pages)"
+   },
+   "use": "Introductory essays PDF, Greg Bradsher's 1,700-page guide (zip), and the 'Select Documents on Japanese War Crimes and Japanese Biological Warfare, 1934-2006' compilation; its first page states the statute (P.L. 106-657) behind it. This is the American-side proof for the report's 'surfaced through U.S. records' line.",
+   "limits": "Compilation and guide, not the record groups themselves; the NARA Catalog (the item-level index) is robots-disallowed (below). Compilation not read beyond its front matter; no person is named here."
+  },
+  {
+   "id": "us-nara-jfk",
+   "cc": "US",
+   "kind": "program",
+   "name": "President John F. Kennedy Assassination Records Collection, release pages 2017-2025",
+   "url": "https://www.archives.gov/research/jfk",
+   "search": null,
+   "api": null,
+   "format": "html+pdf",
+   "terms": "US government work",
+   "key_required": false,
+   "programs": [
+    "JFK records / EO 14176"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.archives.gov/files/research/jfk/releases/2025/0318/104-10130-10026.PDF (75,725 B PDF, 200)"
+   },
+   "use": "The 2025 release page (500 KB) lists 2,709 links, direct PDFs under /files/research/jfk/releases/2025/0318/; earlier releases at /research/jfk/release2023, release2022, release2021, release (2017-2018). PDFs fetch; extract text locally.",
+   "limits": "Release pages only; the catalog.archives.gov API and search are robots-disallowed. Stop rules apply to any PDF that is imagery or a protected interview."
+  },
+  {
+   "id": "gb-ico-decisions",
+   "cc": "GB",
+   "kind": "appeals",
+   "name": "ICO decision notices",
+   "url": "https://ico.org.uk/action-weve-taken/decision-notices/",
+   "search": "https://ico.org.uk/action-weve-taken/decision-notices/?q={q}",
+   "api": null,
+   "format": "html",
+   "terms": "not stated",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "decoy",
+    "sample": "367 KB page, but the static HTML holds no notice rows (no FS5 references); the ?q=porton page is the same shell"
+   },
+   "use": "Nothing yet. The list is rendered client-side.",
+   "limits": "robots Crawl-delay 6. Individual notice PDFs are reachable only if their URLs are known (no index found). Needs a different route (ICO sitemap /sitemap/ is advertised, not read)."
+  },
+  {
+   "id": "gb-tna-discovery-api",
+   "cc": "GB",
+   "kind": "archive-api",
+   "name": "The National Archives Discovery API",
+   "url": "https://discovery.nationalarchives.gov.uk/API/",
+   "search": "https://discovery.nationalarchives.gov.uk/API/search/records?sps.searchQuery={q}&sps.resultsPageSize=20",
+   "api": "https://discovery.nationalarchives.gov.uk/API/records/v1/details/{id}",
+   "format": "json",
+   "terms": "Open Government Licence; guideline 3,000 calls/day, no faster than 1 request/second; asks to be told of use",
+   "key_required": false,
+   "programs": [
+    "Operation Legacy / Migrated Archives (FCO 141)",
+    "Porton Down"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "API/search/records?sps.searchQuery=FCO%20141 (count 21,763); API/search/records?sps.searchQuery=*&sps.recordSeries=FCO%20141 (count 21,388); API/records/v1/details/C12269323 (series record 'FCO 141', 1835-2012); API/search/records?sps.searchQuery=Porton%20Down (count 429)"
+   },
+   "use": "Keyless JSON. sps.recordSeries=FCO%20141 restricts to the series (exact), plain 'FCO 141' is free text and over-matches. Each record carries reference, covering dates, closureStatus, openingDate, adminHistory.",
+   "limits": "The HTML results pages (/results/r) and /browse/ are robots-disallowed; use only /API/. Catalogue metadata only; image/order access for FCO 141 was reported withdrawn in 2022 (secondary sources, see program entry)."
+  },
+  {
+   "id": "gb-wdtk",
+   "cc": "GB",
+   "kind": "civil-log",
+   "name": "WhatDoTheyKnow",
+   "url": "https://www.whatdotheyknow.com/",
+   "search": "https://www.whatdotheyknow.com/search/{q}",
+   "api": "https://www.whatdotheyknow.com/help/api",
+   "format": "html|json|atom",
+   "terms": "-",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 403,
+    "result": "refused",
+    "sample": "https://www.whatdotheyknow.com/robots.txt (403, the robots file itself); /help/api, /body/mi5, /search/porton%20down, /feed/search/porton%20down all 403"
+   },
+   "use": "None.",
+   "limits": "Every path 403 to the identified crawler. Recorded null."
+  },
+  {
+   "id": "gb-govuk-foi-releases",
+   "cc": "GB",
+   "kind": "disclosure-log",
+   "name": "GOV.UK FOI releases (document type foi_release)",
+   "url": "https://www.gov.uk/search/transparency-and-freedom-of-information-releases",
+   "search": "https://www.gov.uk/api/search.json?filter_content_store_document_type=foi_release&q={q}&count=20",
+   "api": null,
+   "format": "json",
+   "terms": "Open Government Licence v3.0 (gov.uk content)",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "q=porton returned total 16 (MOD weekly FOI release pages, 'Gassing badgers'); the HTML page is 776 KB"
+   },
+   "use": "Keyless JSON over all departments' published FOI responses; each hit gives title, link, public_timestamp.",
+   "limits": "robots disallows /search/all* only, so /api/search.json is allowed. The '(freedom of information)' text query without the filter returns ordinary publications, so keep the filter. Release pages link attachments; those were not read. Template note: same"
+  },
+  {
+   "id": "gb-foia-2000",
+   "cc": "GB",
+   "kind": "law",
+   "name": "Freedom of Information Act 2000, incl. s.23 and s.24",
+   "url": "https://www.legislation.gov.uk/ukpga/2000/36/contents",
+   "search": null,
+   "api": "https://www.legislation.gov.uk/ukpga/2000/36/section/23/data.xml",
+   "format": "html|xml",
+   "terms": "Open Government Licence v3.0",
+   "key_required": false,
+   "programs": [
+    "security-body exemption"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.legislation.gov.uk/ukpga/2000/36/section/23 (49 KB), /section/24 (33 KB), /section/23/data.xml (24 KB)"
+   },
+   "use": "Official text with per-section XML. s.23 is the absolute exemption for security bodies; s.24 is national security.",
+   "limits": "robots Crawl-delay 5; Disallow */data.pdf and */data.docx (XML and HTML are allowed)."
+  },
+  {
+   "id": "gb-fco-141",
+   "cc": "GB",
+   "kind": "program",
+   "name": "FCO 141: Records of Former Colonial Administrations: Migrated Archives",
+   "url": "https://discovery.nationalarchives.gov.uk/API/records/v1/details/C12269323",
+   "search": "https://discovery.nationalarchives.gov.uk/API/search/records?sps.searchQuery=*&sps.recordSeries=FCO%20141&sps.resultsPageSize=20",
+   "api": null,
+   "format": "json",
+   "terms": "Open Government Licence",
+   "key_required": false,
+   "programs": [
+    "Operation Legacy",
+    "Hanslope Park Migrated Archive",
+    "Mutua v FCO"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "FCO 141/6924 (Kenya: revised Land Settlement Scheme), id C13299344, openingDate 30/11/2012"
+   },
+   "use": "The series description records the 1961 guidance on which papers successor governments should not receive and says many were destroyed. Item-level titles are searchable (Kenya, Malta and others appear).",
+   "limits": "Catalogue text only. Secondary sources (search results, not read) say TNA withdrew public access to the series in 2022 over insecticide treatment; each record's adminHistory carries an insecticide note. Current access status is not confirmed here. Template note: same"
+  },
+  {
+   "id": "gb-porton-down",
+   "cc": "GB",
+   "kind": "program",
+   "name": "Porton Down records in the TNA catalogue",
+   "url": "https://discovery.nationalarchives.gov.uk/API/search/records?sps.searchQuery=Porton%20Down&sps.resultsPageSize=20",
+   "search": "https://discovery.nationalarchives.gov.uk/API/search/records?sps.searchQuery={q}&sps.resultsPageSize=20",
+   "api": null,
+   "format": "json",
+   "terms": "Open Government Licence",
+   "key_required": false,
+   "programs": [
+    "Porton Down human experiments",
+    "Maddison inquest"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "count 429; top hits are the Chemical Defence Experimental Establishment 'Porton Down Notes' committee series 1920-1945"
+   },
+   "use": "Finds catalogue entries and series. Post-1945 human-trial files are not in the first page; refine with date or department filters.",
+   "limits": "Free-text search; hits are catalogue descriptions, not the documents. Template note: same, vary sps.searchQuery Template note: same"
+  },
+  {
+   "id": "gb-saville-report",
+   "cc": "GB",
+   "kind": "program",
+   "name": "Report of the Bloody Sunday Inquiry (HC 29), Volume X on assets.publishing.service.gov.uk; CAIN summary",
+   "url": "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/279160/0029_x.pdf",
+   "search": null,
+   "api": null,
+   "format": "pdf",
+   "terms": "Crown copyright (per search result; not read in the PDF text)",
+   "key_required": false,
+   "programs": [
+    "Bloody Sunday / Saville Inquiry"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "Volume X (appendices, rulings, bibliography), 2.9 MB PDF; also .../file/279167/0030.pdf found by search, not fetched"
+   },
+   "use": "Volume X text extracts locally. CAIN (cain.ulster.ac.uk/events/bsunday/, 14 KB) is the Ulster University secondary index with 'Reading', 'Chronology' and 'Dead' pages.",
+   "limits": "The gov.uk landing page for the report is 404 (guessed slug); the 2010 inquiry website on webarchive.nationalarchives.gov.uk is robots-disallowed. Volumes I-IX not yet fetched (find their file numbers on assets.publishing.service.gov.uk)."
+  },
+  {
+   "id": "au-oaic-decisions",
+   "cc": "AU",
+   "kind": "appeals",
+   "name": "OAIC FOI IC review decisions via AustLII (AICmr)",
+   "url": "https://www.austlii.edu.au/au/cases/cth/AICmr/",
+   "search": "https://www.austlii.edu.au/cgi-bin/sinosrch.cgi",
+   "api": null,
+   "format": "html",
+   "terms": "AustLII robots: Content-Signal search=yes, ai-train=no, use=reference",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 403,
+    "result": "refused",
+    "sample": "AICmr index 403; classic.austlii.edu.au 403; cgi-bin/viewdb 403"
+   },
+   "use": "None from AustLII.",
+   "limits": "robots allows all, but every case path is 403 to us. oaic.gov.au robots.txt is readable (Disallow /*?* ; query strings forbidden); /freedom-of-information/foi-decisions is 404 and no OAIC decision list URL was found."
+  },
+  {
+   "id": "au-naa-recordsearch",
+   "cc": "AU",
+   "kind": "archive",
+   "name": "National Archives of Australia RecordSearch",
+   "url": "https://recordsearch.naa.gov.au/",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "-",
+   "key_required": "no public API found",
+   "programs": [
+    "Maralinga",
+    "ASIO files"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 403,
+    "result": "refused",
+    "sample": "https://recordsearch.naa.gov.au/"
+   },
+   "use": "None.",
+   "limits": "403 on the root. www.naa.gov.au (robots, home, help pages) never connected: the container proxy dropped every try (egress). No NAA route exists for the crawler."
+  },
+  {
+   "id": "au-righttoknow",
+   "cc": "AU",
+   "kind": "civil-log",
+   "name": "Right to Know (Alaveteli)",
+   "url": "https://www.righttoknow.org.au/help/api",
+   "search": null,
+   "api": "https://www.righttoknow.org.au/body/{url_name}.json",
+   "format": "json|atom",
+   "terms": "robots Content-Signal: search=yes, ai-train=no, use=reference",
+   "key_required": false,
+   "programs": [
+    "ASIO (not subject to FOI), Defence"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "/body/asio.json (941 B: 31 requests, 2 successful, 25 'visible classified'); /body/defence.json (941 B)"
+   },
+   "use": "Authority JSON with request counts and the site's own note that ASIO 'is not technically subject to Freedom of Information'.",
+   "limits": "/search/maralinga is 403, /body/list/all is 403. /feed/search/maralinga returned 200 but its first item (a health-minister response) does not match the query, so treat the feed as unreliable. Request pages not probed."
+  },
+  {
+   "id": "au-agency-disclosure-logs",
+   "cc": "AU",
+   "kind": "disclosure-log",
+   "name": "Home Affairs, PM&C, Defence, DFAT disclosure logs",
+   "url": "(see Nulls)",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "-",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": "403/212 B/egress",
+    "result": "refused",
+    "sample": "homeaffairs.gov.au 403; pmc.gov.au 212 B Incapsula page; defence.gov.au, asio.gov.au, directory.gov.au never connected; dfat.gov.au still retrying at write time"
+   },
+   "use": "None reached.",
+   "limits": "Each host is a separate null. data.gov.au CKAN API path is robots-disallowed."
+  },
+  {
+   "id": "au-foi-act",
+   "cc": "AU",
+   "kind": "law",
+   "name": "Freedom of Information Act 1982 (Federal Register of Legislation)",
+   "url": "https://www.legislation.gov.au/C2004A02562/latest/text",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "not stated in text read",
+   "key_required": false,
+   "programs": [
+    "agencies exempt (ASIO, ASIS etc.) in Schedule 2"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.legislation.gov.au/C2004A02562/latest/text (203 KB)"
+   },
+   "use": "Compiled text; the table of contents shows 'Schedule 2 Part I - Exempt agencies'.",
+   "limits": "The agencies themselves are listed inside the Schedule, not extracted here."
+  },
+  {
+   "id": "au-maralinga-rc",
+   "cc": "AU",
+   "kind": "program",
+   "name": "Royal Commission into British Nuclear Tests in Australia (McClelland, 1984-85)",
+   "url": "https://legislation.gov.au/C2004Q00993/asmade/1984-07-16/text/original/pdf",
+   "search": null,
+   "api": null,
+   "format": "pdf",
+   "terms": "-",
+   "key_required": false,
+   "programs": [
+    "Maralinga",
+    "Emu Field",
+    "Monte Bello"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "Letters Patent of 16 July 1984 (236 KB PDF) naming the three commissioners"
+   },
+   "use": "The Letters Patent (primary, terms of reference). Separately a UK MoD-released copy of Royal Commission proceedings is on assets.publishing.service.gov.uk/media/6617b05a3fe61a4f683ea825/0300186-No_redact_Public_domain.pdf (1.7 MB; page 2 is a Commonwealth Reporting Service transcript of the Royal Commission).",
+   "limits": "The 1985 report itself was not reached: NLA's digitised copy (nla.gov.au/nla.obj-2150995582) is behind an Anubis proof-of-work page (decoy 200); the Wayback copy of the ret.gov.au PDF found by search never connected; Trove API is robots-disallowed; aph.gov.au is 403."
+  },
+  {
+   "id": "ca-oic",
+   "cc": "CA",
+   "kind": "appeals",
+   "name": "Office of the Information Commissioner",
+   "url": "https://www.oic-ci.gc.ca/en",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "-",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.oic-ci.gc.ca/en (79 KB)"
+   },
+   "use": "Home page with 'Investigations' and 'Court cases' menus; robots permits (Disallow only /core/, /profiles/).",
+   "limits": "The guessed findings URL is 404; the findings list URL was not found."
+  },
+  {
+   "id": "ca-lac",
+   "cc": "CA",
+   "kind": "archive",
+   "name": "Library and Archives Canada Collection Search",
+   "url": "https://recherche-collection-search.bac-lac.gc.ca/",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "-",
+   "key_required": false,
+   "programs": [
+    "Allan Memorial / MKUltra records"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": null,
+    "result": "robots",
+    "sample": "https://recherche-collection-search.bac-lac.gc.ca/eng/Home/Result?q=Allan%20Memorial"
+   },
+   "use": "None.",
+   "limits": "Spider reports robots-disallow on the whole collection-search host; www.bac-lac.gc.ca never connected (egress). CSIS (csis-scrs.gc.ca) answered 502 at CONNECT (egress)."
+  },
+  {
+   "id": "ca-open-ckan",
+   "cc": "CA",
+   "kind": "archive-api",
+   "name": "Open Government Portal CKAN API",
+   "url": "https://open.canada.ca/data/api/action/package_search",
+   "search": "https://open.canada.ca/data/api/action/package_search?q={q}&rows=10",
+   "api": null,
+   "format": "json",
+   "terms": "Open Government Licence - Canada (per dataset)",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "q=access to information completed requests returned 924 packages"
+   },
+   "use": "Finds datasets (also proactive disclosures); package_show gives resource URLs and sizes.",
+   "limits": "Crawl-delay 20. Template note: same"
+  },
+  {
+   "id": "ca-ati-completed-summaries",
+   "cc": "CA",
+   "kind": "disclosure-log",
+   "name": "Completed Access to Information Request Summaries dataset",
+   "url": "https://open.canada.ca/data/en/dataset/0797e893-751e-4695-8229-a5066e4fe43c",
+   "search": "https://open.canada.ca/data/api/action/datastore_search?resource_id=19383ca2-b01a-487d-88f7-e1ffbc7d39c2&limit=100&filters={\"owner_org\":\"{org}\"}",
+   "api": "https://open.canada.ca/data/api/action/datastore_search?resource_id=19383ca2-b01a-487d-88f7-e1ffbc7d39c2",
+   "format": "csv|json",
+   "terms": "Open Government Licence - Canada",
+   "key_required": false,
+   "programs": [
+    "CSIS, CSE, DND, RCMP completed requests"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "datastore_search ...&limit=2 returned total 205,063 rows; filters={\"owner_org\":\"csis-scrs\"} also 200; ati-all.csv is 116,697,500 B (not fetched); ati-nil.csv 665,847 B"
+   },
+   "use": "Keyless CKAN datastore. Fields: year, month, request_number, summary_en/fr, disposition, pages, comments_en/fr, umd_number, owner_org, owner_org_title. Filter by owner_org instead of downloading the 117 MB CSV.",
+   "limits": "q= full-text parameter returns HTTP 409, so search must be done by filter or by walking offset. Only summaries of completed requests; personal-information requests are excluded by the dataset. The open.canada.ca /en/search/ati page is robots-disallowed. Crawl-delay 20 s."
+  },
+  {
+   "id": "ca-cse-transparency",
+   "cc": "CA",
+   "kind": "disclosure-log",
+   "name": "CSE transparency: ATIP and proactive disclosure",
+   "url": "https://www.cse-cst.gc.ca/en/accountability/transparency",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "-",
+   "key_required": false,
+   "programs": [
+    "CSE bulk metadata"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "37 KB"
+   },
+   "use": "Entry to CSE ATIP file/search and reports to Parliament.",
+   "limits": "Not followed further."
+  },
+  {
+   "id": "ca-ati-act",
+   "cc": "CA",
+   "kind": "law",
+   "name": "Access to Information Act (R.S.C. 1985, c. A-1), Justice Laws site",
+   "url": "https://laws-lois.justice.gc.ca/eng/acts/a-1/",
+   "search": null,
+   "api": null,
+   "format": "html|xml|pdf",
+   "terms": "not stated in text read",
+   "key_required": false,
+   "programs": [
+    "s.15 international affairs and defence"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "act page (26 KB), /page-2.html (56 KB, s.15), /page-3.html (54 KB, s.18-s.19)"
+   },
+   "use": "Current text ('current to 2026-09-30 and last amended on 2026-06-14') with the national security exemption s.15.",
+   "limits": "The enactment year (1983) is not stated on the pages read; take it from the report's table or the Act's history note."
+  },
+  {
+   "id": "nz-institution-nulls",
+   "cc": "NZ",
+   "kind": "archive",
+   "name": "Archives NZ Collections, GCSB, NZSIS, National Library, Ombudsman, Legislation, DPMC",
+   "url": "(see Nulls)",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "-",
+   "key_required": false,
+   "programs": [
+    "GCSB proactive releases",
+    "Official Information Act 1982"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": "200 (212 B) / 202 / 403",
+    "result": "decoy",
+    "sample": "see Decoy candidates and Nulls"
+   },
+   "use": "Inspector-General of Intelligence and Security (www.igis.govt.nz, 27 KB, 200) is the only NZ intelligence-oversight site that answers; publications page guessed wrongly (404).",
+   "limits": "OIA text is unreachable (legislation.govt.nz answers 202)."
+  },
+  {
+   "id": "nz-digitalnz-api",
+   "cc": "NZ",
+   "kind": "archive-api",
+   "name": "DigitalNZ records API (National Library, Turnbull Library etc.)",
+   "url": "https://api.digitalnz.org/records.json",
+   "search": "https://api.digitalnz.org/records.json?text={q}&per_page=20",
+   "api": null,
+   "format": "json",
+   "terms": "per item (rights field; CC BY 4.0 on several Turnbull items); API terms page unreadable (HTTP 202)",
+   "key_required": false,
+   "programs": [
+    "Waihopai (photographs)"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "text=waihopai returned result_count 15,960 (photographs, Alexander Turnbull Library); text=GCSB filtered to Archives New Zealand returned 0"
+   },
+   "use": "Keyless item metadata with rights statements and landing_url.",
+   "limits": "Archives NZ is not a content partner under the name tried, so no Archives NZ holdings through here. api.digitalnz.org/terms-of-use and digitalnz.org/robots.txt answer 202 (challenge): terms unread, rate limits unknown. Template note: same"
+  },
+  {
+   "id": "nz-fyi",
+   "cc": "NZ",
+   "kind": "civil-log",
+   "name": "FYI.org.nz",
+   "url": "https://fyi.org.nz/body/gcsb",
+   "search": null,
+   "api": "https://fyi.org.nz/help/api",
+   "format": "html",
+   "terms": "-",
+   "key_required": false,
+   "programs": [
+    "GCSB / Waihopai",
+    "Five Eyes UAP holdings"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "/body/gcsb (35 KB, 100 requests); /body/list/all (53 KB); /request/34791-gcsb-five-eyes-uap-intelligence-holdings-and-war-gov-pursue-consultation (27 KB)"
+   },
+   "use": "Body pages and request pages are readable. The GCSB UAP request shows the agency refusing under section 18(g)(i) as information not held.",
+   "limits": "robots Disallow */search/, */feed/, */track/ and *.json.j*: no search, no Atom, no JSON. Navigate body -> request only. Requester usernames appear on pages; do not carry them."
+  },
+  {
+   "id": "fr-cada-datagouv-opinions",
+   "cc": "FR",
+   "kind": "appeals",
+   "name": "CADA opinions and advice (avis et conseils) - data.gouv.fr open dataset, monthly CSV",
+   "url": "https://www.data.gouv.fr/datasets/avis-et-conseils-de-la-cada",
+   "search": null,
+   "api": "https://www.data.gouv.fr/api/1/datasets/53698f37a3a729239d2036a0/",
+   "format": "json (catalogue) + csv (data)",
+   "terms": "Licence Ouverte (data.gouv.fr licence id fr-lo; the dataset page itself timed out, the API metadata states it)",
+   "key_required": false,
+   "programs": [
+    "Algerian War / Maurice Audin (search the CSV for the administration)",
+    "French nuclear tests / Loi Morin",
+    "any FOI refusal by a French administration"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://static.data.gouv.fr/resources/avis-et-conseils-de-la-cada/20260814-171306/export-reutilisation-avril-2024.csv"
+   },
+   "use": "Read the dataset's metadata and resource list from the API, then fetch the per-period CSVs from static.data.gouv.fr (April 2024 file: 406 rows, columns Numéro de dossier, Administration, Type, Année, Séance, Objet, Thème, Mots clés, Sens et motivation, Partie, Avis); the full-text of each opinion is in the Avis column.",
+   "limits": "Coverage ends 2024-04-30 although the dataset was last updated 2026-08-14 (the CADA site already shows a séance of 12/12/2024); data.gouv.fr's own /datasets/r/ redirect URLs are robots-disallowed so use the static.data.gouv.fr URLs from the API; the HTML dataset pages reset or timed out."
+  },
+  {
+   "id": "fr-cada-datagouv-search-api",
+   "cc": "FR",
+   "kind": "appeals",
+   "name": "CADA opinions search API (cada.data.gouv.fr/api), listed as a resource of the dataset above",
+   "url": "http://cada.data.gouv.fr/api/",
+   "search": null,
+   "api": "http://cada.data.gouv.fr/api/",
+   "format": "json",
+   "terms": "not read (host unreachable)",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": null,
+    "result": "unreachable",
+    "sample": "https://cada.data.gouv.fr/ - connection reset by peer"
+   },
+   "use": "Would give a search endpoint over the same opinions; not usable from here.",
+   "limits": "Connection reset by peer on the host root; the dataset lists it as http (not https). Treat as dead until a later probe succeeds."
+  },
+  {
+   "id": "fr-cada-site",
+   "cc": "FR",
+   "kind": "appeals",
+   "name": "CADA website - opinion pages by reference number (cada.fr/<year><number>)",
+   "url": "https://www.cada.fr/",
+   "search": "https://www.cada.fr/resultats-rechercher-un-avis?body_value={q}",
+   "api": null,
+   "format": "html",
+   "terms": "not stated on the pages read",
+   "key_required": false,
+   "programs": [
+    "any FOI refusal by a French administration"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 403,
+    "result": "refused",
+    "sample": "https://www.cada.fr/20246468 (avis 202406468, séance 12/12/2024); the search URL answered 403 twice"
+   },
+   "use": "Individual opinions are plain HTML at /<reference> (the reference drops the zero after the year); each carries the administration, séance date, keywords and the opinion text.",
+   "limits": "The results page (resultats-rechercher-un-avis?body_value=...) refused the crawler with 403 on two attempts (the second after correcting an unencoded accent in the first); so there is no full-text search here, only known-reference fetches and the CSVs. On the 24 Oct filter test the search answered 403 to both queries after an earlier ok."
+  },
+  {
+   "id": "fr-archives-nationales",
+   "cc": "FR",
+   "kind": "archive",
+   "name": "Archives nationales (landing, research aid); Salle des inventaires virtuelle (SIV) and ANOM",
+   "url": "https://www.archives-nationales.culture.gouv.fr/",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "n/a",
+   "key_required": false,
+   "programs": [
+    "Algerian War / Maurice Audin",
+    "2021 arrêté archives"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.archives-nationales.culture.gouv.fr/aide-la-recherche (landing and aid pages ok; SIV robots-disallowed; ANOM connection reset)"
+   },
+   "use": "Landing and research-aid pages only.",
+   "limits": "The online inventories (www.siv.archives-nationales.culture.gouv.fr) are robots-disallowed for this crawler; anom.archivesnationales.culture.gouv.fr (overseas archives, where Algerian-war files sit) reset the connection twice."
+  },
+  {
+   "id": "fr-francearchives",
+   "cc": "FR",
+   "kind": "archive",
+   "name": "FranceArchives portal (national archives aggregator)",
+   "url": "https://francearchives.gouv.fr/",
+   "search": "https://francearchives.gouv.fr/fr/search?q={q}",
+   "api": null,
+   "format": "html",
+   "terms": "n/a",
+   "key_required": false,
+   "programs": [
+    "Algerian War / Maurice Audin"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "decoy",
+    "sample": "https://francearchives.gouv.fr/fr/search?q=Maurice+Audin - 247 bytes, 'This website requires JS enabled and cookies'"
+   },
+   "use": "Nothing from a plain client: the two pages tried and one /file/ PDF all return the JS/cookie wall with HTTP 200.",
+   "limits": "A 200 that is a refusal. Not solved, not worked around. Register as a decoy."
+  },
+  {
+   "id": "fr-shd",
+   "cc": "FR",
+   "kind": "archive",
+   "name": "Service historique de la Défense - online inventories search",
+   "url": "https://www.servicehistorique.sga.defense.gouv.fr/",
+   "search": "https://www.servicehistorique.sga.defense.gouv.fr/resultats-recherche?cles={q}",
+   "api": null,
+   "format": "html",
+   "terms": "not read",
+   "key_required": false,
+   "programs": [
+    "Algerian War",
+    "2021 arrêté archives (ministry of the armed forces holdings)"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.servicehistorique.sga.defense.gouv.fr/resultats-recherche?cles=Audin (21 results)"
+   },
+   "use": "GET search over SHD inventories and archive notices; the result list carries notice type, site and cote. Personnel dossiers appear in results: use them as counts, never name the individuals.",
+   "limits": "Other fields of the form (thematiques, lieu, debut, fin, cote) not tried; Mémoire des hommes (memoiredeshommes.sga.defense.gouv.fr) failed with an expired TLS certificate and was not worked around."
+  },
+  {
+   "id": "fr-dila-opendata",
+   "cc": "FR",
+   "kind": "archive-api",
+   "name": "DILA open data - LEGI (consolidated codes, laws, decrees), JORF (Journal officiel), JADE (administrative case law), CNIL, CONSTIT, CASS",
+   "url": "https://echanges.dila.gouv.fr/OPENDATA/",
+   "search": null,
+   "api": "https://echanges.dila.gouv.fr/OPENDATA/LEGI/",
+   "format": "xml in tar.gz",
+   "terms": "Licence Ouverte v2.0 (attribution: DILA, long download URL, file name and date)",
+   "key_required": false,
+   "programs": [
+    "CRPA access articles",
+    "Loi Morin (2010-2)",
+    "Arrêté of 22 Dec 2021 (Algerian War archives) in JORF",
+    "Conseil d'État secret-défense access cases (JADE)"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://echanges.dila.gouv.fr/OPENDATA/LEGI/ (directory listing; DILA_LEGI_Presentation_20170824.pdf read)"
+   },
+   "use": "Apache-style directory listings of daily increments (a few MB each) plus a yearly 'Freemium' stock; the texts are XML, so a statute or arrêté can be pulled out of a daily file without touching Légifrance.",
+   "limits": "Stocks are 1.1-1.6 GB (LEGI/JORF/JADE) - not for casual fetching; no site search; the host serves no robots.txt (404), so it is open by absence."
+  },
+  {
+   "id": "fr-madada",
+   "cc": "FR",
+   "kind": "civil-log",
+   "name": "Ma Dada - French Alaveteli (requests for administrative documents, with CADA referral status)",
+   "url": "https://madada.fr/",
+   "search": null,
+   "api": "https://madada.fr/body/{body}.json",
+   "format": "html + json",
+   "terms": "not read",
+   "key_required": false,
+   "programs": [
+    "any FOI refusal by a French administration"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://madada.fr/request/demande_de_communication_de_docu_145.json"
+   },
+   "use": "Body lists (51,926 authorities), per-body pages and .json for bodies and requests; request state values include saisine_cada.",
+   "limits": "robots.txt disallows */search/*, */feed/*, */request/*/response/* and */request/*/download*, so there is no search and no message bodies; only request metadata and body pages. Help page says there is no full API. Template note: and https://madada.fr/request/{slug}.json"
+  },
+  {
+   "id": "fr-legifrance",
+   "cc": "FR",
+   "kind": "law",
+   "name": "Légifrance - CRPA (Code des relations entre le public et l'administration, Livre III) and other texts",
+   "url": "https://www.legifrance.gouv.fr/",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "n/a",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 403,
+    "result": "refused",
+    "sample": "https://www.legifrance.gouv.fr/ and /robots.txt and the CRPA section URL all 403"
+   },
+   "use": "Nothing: refused. The same texts are reachable lawfully through the DILA open-data dumps (next entry).",
+   "limits": "Not worked around; no API route was tried."
+  },
+  {
+   "id": "fr-1000autres",
+   "cc": "FR",
+   "kind": "program",
+   "name": "1000autres.org - Algiers 1957 disappeared persons, built by an association from archive files",
+   "url": "https://1000autres.org/",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "not read",
+   "key_required": false,
+   "programs": [
+    "Algerian War / Maurice Audin"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://1000autres.org/"
+   },
+   "use": "A civil-society project on the people taken in Algiers in 1957 (footer: Association histoire coloniale et postcoloniale); useful as a pointer to archive series, not as a primary.",
+   "limits": "Advocacy source, not an archive; only the landing page was read. If its database names individuals, the crawler should extract series references only."
+  },
+  {
+   "id": "fr-algeria-2021-arrete",
+   "cc": "FR",
+   "kind": "program",
+   "name": "Arrêté du 22 décembre 2021 portant ouverture d'archives relatives à la guerre d'Algérie (JORF 23 Dec 2021) - secondary copy",
+   "url": "https://histoirecoloniale.net/wp-content/uploads/2021/12/arrete_paru_au_journal_officiel_du_23_decembre_2021.pdf",
+   "search": null,
+   "api": null,
+   "format": "pdf",
+   "terms": "a copy of an official text hosted by a history website (histoirecoloniale.net); the official host is refused",
+   "key_required": false,
+   "programs": [
+    "Algerian War torture programme (1954-1962)"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "same URL"
+   },
+   "use": "The text of the derogation: judicial files and judicial-police investigations on acts connected with the war, 1 Nov 1954 - 31 Dec 1966, freely communicable before the ordinary Code du patrimoine L.213-2 deadlines; minors, intelligence-agent safety and sexual-privacy documents stay under the ordinary rule (Art. 1 II).",
+   "limits": "It is a copy, not the Journal officiel; the same text should be in the DILA JORF dump for 2021-12-23 (not downloaded). The 9 Sept 2019 arrêté on the Audin disappearance was not retrieved at all (only secondary reports seen)."
+  },
+  {
+   "id": "fr-civen",
+   "cc": "FR",
+   "kind": "program",
+   "name": "CIVEN (nuclear-test victims compensation committee) - site and annual report 2025",
+   "url": "https://www.civen.fr/",
+   "search": null,
+   "api": null,
+   "format": "html + pdf",
+   "terms": "not read",
+   "key_required": false,
+   "programs": [
+    "French nuclear tests / Loi Morin"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.civen.fr/sites/civen/files/documents/rapport-d-activite-2025-mn_1.pdf (4.0 MB)"
+   },
+   "use": "Annual activity reports with case counts since 2010; a /ressources page exists (fetched, not read); the 2024 and 2025 reports are announced as news items.",
+   "limits": "Statistics in aggregate only. A Polynesian state report (polynesie-francaise.pref.gouv.fr, file named 'Rapport d'activité CIVEN 2022-2023') is in fact the High Commission's 'mission de suivi' report, not the CIVEN's."
+  },
+  {
+   "id": "fr-nuclear-tests-an-inquiry",
+   "cc": "FR",
+   "kind": "program",
+   "name": "Assemblée nationale commission d'enquête on French nuclear testing (2025): hearing on archives (28 Jan 2025) and report volume II",
+   "url": "https://www.assemblee-nationale.fr/dyn/17/comptes-rendus/ceesnuc/l17ceesnuc2425005_compte-rendu.pdf",
+   "search": null,
+   "api": null,
+   "format": "pdf",
+   "terms": "not read (Assemblée robots.txt is 1,286 bytes, read as allowing the path)",
+   "key_required": false,
+   "programs": [
+    "French nuclear tests (Algeria, Polynesia) / Loi Morin"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.assemblee-nationale.fr/dyn/17/rapports/ceesnuc/l17b1558-tii_rapport-enquete.pdf (5.8 MB; 2.3 MB of text)"
+   },
+   "use": "An official, citable account of the declassification waves and the opening committee; the report's hearings volume (n° 1558, tome II, filed 10 June 2025) carries the CIVEN, Polynesian and journalist testimony.",
+   "limits": "Parliamentary record, not the archive itself; the 233 declassified documents are not fetched here."
+  },
+  {
+   "id": "de-bfdi-ifg",
+   "cc": "DE",
+   "kind": "appeals",
+   "name": "BfDI (Federal Commissioner for Data Protection and Freedom of Information) - IFG reports, via Bundestag Drucksache 19/19910",
+   "url": "https://dserver.bundestag.de/btd/19/199/1919910.pdf",
+   "search": null,
+   "api": null,
+   "format": "pdf",
+   "terms": "not read",
+   "key_required": false,
+   "programs": [
+    "BND exemption (Bereichsausnahme)"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://dserver.bundestag.de/btd/19/199/1919910.pdf (7th Tätigkeitsbericht zur Informationsfreiheit 2018/2019; 1.7 MB)"
+   },
+   "use": "The biennial IFG report as a Bundestag paper; contains appeal counts by ministry and the Bereichsausnahme sentence for the intelligence services.",
+   "limits": "The BfDI's own archive page of Tätigkeitsberichte is robots-disallowed (/DE/Service/Publikationen/...) and robots.txt sets Crawl-delay 30; the IFG landing page was fetched but no decision series was found on it. Read reports through dserver.bundestag.de."
+  },
+  {
+   "id": "de-bundesarchiv-invenio",
+   "cc": "DE",
+   "kind": "archive",
+   "name": "Bundesarchiv invenio (online finding aids, incl. Stasi records finding aids)",
+   "url": "https://invenio.bundesarchiv.de/",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "n/a",
+   "key_required": false,
+   "programs": [
+    "Stasi files",
+    "BND records"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 403,
+    "result": "refused",
+    "sample": "https://invenio.bundesarchiv.de/"
+   },
+   "use": "Nothing: refused.",
+   "limits": "Not worked around; the bundesarchiv.de website (below) is the readable surface."
+  },
+  {
+   "id": "de-digitaler-lesesaal",
+   "cc": "DE",
+   "kind": "archive",
+   "name": "Bundesarchiv Digitaler Lesesaal (digitised records)",
+   "url": "https://digitaler-lesesaal.bundesarchiv.de/",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "n/a",
+   "key_required": false,
+   "programs": [
+    "Stasi files",
+    "digitised holdings"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "decoy",
+    "sample": "https://digitaler-lesesaal.bundesarchiv.de/ - 21,570 bytes, 'Bitte haben Sie einen Moment Geduld.'"
+   },
+   "use": "Nothing: an interstitial wait page with HTTP 200.",
+   "limits": "Not solved; register as a decoy."
+  },
+  {
+   "id": "de-stasi-domain-homepage-decoy",
+   "cc": "DE",
+   "kind": "archive",
+   "name": "stasi-unterlagen-archiv.de (alias domain) - deep paths",
+   "url": "https://www.stasi-unterlagen-archiv.de/",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "n/a",
+   "key_required": false,
+   "programs": [
+    "Stasi files"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "decoy",
+    "sample": "https://www.stasi-unterlagen-archiv.de/stasi-unterlagen-archiv/rechtsgrundlagen/ - 235,395 bytes, the homepage again"
+   },
+   "use": "Nothing beyond the homepage.",
+   "limits": "Every deep path returns the homepage (title 'Stasi-Unterlagen-Archiv - Bundesarchiv', 235,394-235,395 bytes) with HTTP 200; use www.bundesarchiv.de/stasi-unterlagen-archiv/... instead."
+  },
+  {
+   "id": "de-ddb-archivportal",
+   "cc": "DE",
+   "kind": "archive-api",
+   "name": "Deutsche Digitale Bibliothek / Archivportal-D",
+   "url": "https://www.archivportal-d.de/",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "not read",
+   "key_required": null,
+   "programs": [
+    "Stasi/BND records finding aids held by German archives"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.archivportal-d.de/ and https://www.deutsche-digitale-bibliothek.de/ (landing pages only)"
+   },
+   "use": "Item pages may be fetchable; the aggregated finding aids from many German archives sit here.",
+   "limits": "robots.txt disallows the search-result paths (DDB: /search, /searchresults; Archivportal-D: /objekte, /personen, /organisationen, /struktur). Whether an API exists and what key it needs was not read here; we would not request one. No record call was made."
+  },
+  {
+   "id": "de-fragdenstaat-api-requests",
+   "cc": "DE",
+   "kind": "civil-log",
+   "name": "FragDenStaat API - requests, public bodies, laws (Alaveteli-class civil FOI log, Germany)",
+   "url": "https://fragdenstaat.de/api/",
+   "search": "https://fragdenstaat.de/api/v1/request/search/?q={q}",
+   "api": "https://fragdenstaat.de/api/v1/",
+   "format": "json (tastypie-style paging) + OpenAPI schema at /api/v1/schema",
+   "terms": "User-submitted content is released CC0 by the Nutzungsbedingungen (s.5); government replies are third-party material. No rate limit or scraping clause found by keyword search of the terms (scrap, crawl, automatisiert, API, Bot); OAuth exists but read access needs none.",
+   "key_required": false,
+   "programs": [
+    "BND personnel files (public body id 98)",
+    "Stasi/BStU records requests"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://fragdenstaat.de/api/v1/request/?format=json&public_body=98&limit=3 (165 requests to the Bundesnachrichtendienst)"
+   },
+   "use": "Unauthenticated JSON: 290,545 requests; filter by public body with ?public_body=<id> (BND = 98, found via /api/v1/publicbody/?q=Bundesnachrichtendienst); status, dates, refusal_reason, costs, law.",
+   "limits": "The ?q= parameter on /request/ is ignored (returned the full 290,545); requests name private individuals, so extract counts and subjects, not names. robots.txt names ClaudeBot, GPTBot, anthropic-ai and others as Disallow: / (b0bSourceBot is not named and falls under User-agent: *), which signals the operator's attitude to AI crawlers: flag for the author. Disallowed for everyone: /anfrage/*/pdf/, /anfrage/*/download/, /account/*.",
+   "optout": "fragdenstaat.de/robots.txt names ClaudeBot and GPTBot with Disallow: /. Our crawler is not named, so robots lets it in, but the site's intent toward AI-run crawling is plain. Skipped unless the author decides otherwise (--include-optout)."
+  },
+  {
+   "id": "de-fragdenstaat-api-documents",
+   "cc": "DE",
+   "kind": "disclosure-log",
+   "name": "FragDenStaat documents - released government PDFs and their page text (API)",
+   "url": "https://fragdenstaat.de/api/v1/document/",
+   "search": null,
+   "api": "https://fragdenstaat.de/api/v1/document/?format=json",
+   "format": "json; files on media.frag-den-staat.de",
+   "terms": "as the entry above",
+   "key_required": false,
+   "programs": [
+    "BND personnel files"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://fragdenstaat.de/api/v1/document/?format=json&limit=2 (259,835 documents)"
+   },
+   "use": "Each record has file_url, num_pages, public/listed flags and a site_url; the /page/ resource carries extracted text.",
+   "limits": "media.frag-den-staat.de not probed; per-document content is released government material of mixed provenance - check each record's own rights and stop rules before reading.",
+   "optout": "fragdenstaat.de/robots.txt names ClaudeBot and GPTBot with Disallow: /. Our crawler is not named, so robots lets it in, but the site's intent toward AI-run crawling is plain. Skipped unless the author decides otherwise (--include-optout)."
+  },
+  {
+   "id": "de-ifg-text",
+   "cc": "DE",
+   "kind": "law",
+   "name": "Informationsfreiheitsgesetz (IFG) of 5 Sept 2005 - official consolidated text, gesetze-im-internet.de",
+   "url": "https://www.gesetze-im-internet.de/ifg/BJNR272200005.html",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "not read (gesetze-im-internet.de robots.txt is 'Disallow:' empty)",
+   "key_required": false,
+   "programs": [
+    "BND personnel files",
+    "Stasi records (separate statute)"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.gesetze-im-internet.de/ifg/BJNR272200005.html"
+   },
+   "use": "Full IFG text. Intelligence exemption is s.3 no. 8 (Nachrichtendienste and security-clearance bodies); s.12 gives anyone the right to appeal to the Federal Commissioner.",
+   "limits": "Text as amended to 19 June 2020 (the page's Stand line); IFG covers federal bodies only - the Länder have their own laws."
+  },
+  {
+   "id": "de-bundesarchiv-stasi",
+   "cc": "DE",
+   "kind": "program",
+   "name": "Stasi-Unterlagen-Archiv inside the Bundesarchiv - figures, legal basis, finding-aid overview (bundesarchiv.de)",
+   "url": "https://www.bundesarchiv.de/stasi-unterlagen-archiv/das-stasi-unterlagen-archiv-in-zahlen/",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "not read",
+   "key_required": false,
+   "programs": [
+    "Stasi domestic surveillance (exposed 1991)"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.bundesarchiv.de/stasi-unterlagen-archiv/rechtsgrundlagen/ and /findmittel/"
+   },
+   "use": "Current figures (over 111 km of records), the legal basis (StUG with the Bundesarchivgesetz), and the Bestandsübersichten.",
+   "limits": "robots.txt: Crawl-delay 30, Disallow /*? and /suche/ - no query-string pages and no site search. The same paths on stasi-unterlagen-archiv.de return the homepage (see decoys)."
+  },
+  {
+   "id": "de-uhk-bnd",
+   "cc": "DE",
+   "kind": "program",
+   "name": "Unabhängige Historikerkommission zur Erforschung der Geschichte des BND 1945-1968 (UHK) - series, redaction dispute; website lost to a squatter",
+   "url": "https://www.aufbau-verlage.de/ch-links-verlag/das-sozialprofil-des-bundesnachrichtendienstes/978-3-86153-920-9",
+   "search": null,
+   "api": null,
+   "format": "html + pdf (Bundestag papers)",
+   "terms": "publisher pages are catalogue entries; no full text of any volume was seen",
+   "key_required": false,
+   "programs": [
+    "BND Nazi personnel (exposed 2011-2017)"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://dserver.bundestag.de/btd/20/021/2002192.pdf (Antwort 20/2192 on redactions in the Henke volume)"
+   },
+   "use": "Publisher catalogue pages for each volume (Ch. Links Verlag) and two Bundestag papers: Drucksache 19/29966 (a parliamentary question: commission appointed 15 Feb 2011, funding, internal dispute) and 20/2192 (the government's answer on redactions in the Henke volume).",
+   "limits": "The commission's website http://www.uhk-bnd.de/ (cited in Drucksache 19/29966) is now a sports-betting site, so the commission's own pages are not readable at that address. The dispute and redaction facts come from a parliamentary question and a government answer, i.e. attributed, not from BND records."
+  },
+  {
+   "id": "il-mevaker-foi-local",
+   "cc": "IL",
+   "kind": "appeals",
+   "name": "State Comptroller digital library - 'Freedom of information in local authorities' (2024)",
+   "url": "https://library.mevaker.gov.il/sites/DigitalLibrary/Pages/Reports/7771-2.aspx",
+   "search": null,
+   "api": null,
+   "format": "html + pdf",
+   "terms": "not read",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://library.mevaker.gov.il/sites/DigitalLibrary/Pages/Reports/7771-2.aspx"
+   },
+   "use": "Audit report on FOI compliance (full report and summary PDFs linked from the page).",
+   "limits": "The PDF itself was not fetched; robots.txt is 404."
+  },
+  {
+   "id": "il-akevot",
+   "cc": "IL",
+   "kind": "archive",
+   "name": "Akevot Institute - access-to-archives data sheet (Jan 2026) and the ISA classified-catalogue search tool",
+   "url": "https://www.akevot.org.il/en/",
+   "search": null,
+   "api": null,
+   "format": "html + pdf",
+   "terms": "not read (robots.txt: empty Disallow)",
+   "key_required": false,
+   "programs": [
+    "Israel State Archives",
+    "IDF archives"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.akevot.org.il/wp-content/uploads/2026/01/Akevot-Institute-Access-to-Israeli-Government-Archives-Data-Sheet-Jan-2026.pdf"
+   },
+   "use": "Counts of files registered versus accessible, built from the archives' own FOI replies (ISA via the Prime Minister's Office, 20 Dec 2025); a news item describing the Hebrew search tool over the ISA's classified-records catalogue.",
+   "limits": "An NGO's tabulation; the figures are attributed to FOI replies, not independently audited here. The search tool itself was not probed."
+  },
+  {
+   "id": "il-idf-archives",
+   "cc": "IL",
+   "kind": "archive",
+   "name": "IDF and Defense Establishment Archives (archives.mod.gov.il)",
+   "url": "https://archives.mod.gov.il:443/sites/English/Pages/SearchCatalog.aspx",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "terms-of-use page fetched, not read",
+   "key_required": false,
+   "programs": [
+    "IDF records",
+    "Dimona"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://archives.mod.gov.il:443/sites/English/Pages/SearchCatalog.aspx (a form page; no result call made)"
+   },
+   "use": "Declassification rules and criteria, laws and regulations, terms of use and a catalogue search form (the catalogue is Hebrew-based).",
+   "limits": "Search is a form; no GET record URL was found, so no record call was made. robots.txt (141 bytes) disallows only /_layouts/, /_vti_bin/, /_catalogs/."
+  },
+  {
+   "id": "il-isa",
+   "cc": "IL",
+   "kind": "archive",
+   "name": "Israel State Archives (archives.gov.il) - online catalogue",
+   "url": "https://www.archives.gov.il/",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "n/a",
+   "key_required": false,
+   "programs": [
+    "Dimona",
+    "all state records"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 403,
+    "result": "refused",
+    "sample": "https://www.archives.gov.il/ , /en and /robots.txt all 403"
+   },
+   "use": "Nothing: refused.",
+   "limits": "Not worked around. Third-party routes seen: Akevot's tool over the classified catalogue, and the MFOI category page on the State Archives."
+  },
+  {
+   "id": "il-datagov",
+   "cc": "IL",
+   "kind": "disclosure-log",
+   "name": "data.gov.il (national open-data portal, CKAN)",
+   "url": "https://data.gov.il/",
+   "search": null,
+   "api": "https://data.gov.il/api/",
+   "format": "n/a",
+   "terms": "n/a",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 403,
+    "result": "refused",
+    "sample": "https://data.gov.il/he/datasets 403; robots.txt Disallow: /api/"
+   },
+   "use": "Nothing.",
+   "limits": "Pages 403 and the CKAN API is disallowed by robots.txt. Template note: (robots-disallowed)"
+  },
+  {
+   "id": "il-mfoi",
+   "cc": "IL",
+   "kind": "disclosure-log",
+   "name": "Movement for Freedom of Information (meida.org.il) - 'information we obtained' by authority, precedents, litigation",
+   "url": "https://www.meida.org.il/",
+   "search": "https://www.meida.org.il/?s={q}",
+   "api": null,
+   "format": "html (Hebrew)",
+   "terms": "not read",
+   "key_required": false,
+   "programs": [
+    "Israel State Archives",
+    "military censor"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.meida.org.il/?s=%D7%A6%D7%A0%D7%96%D7%95%D7%A8 (search for 'censor')"
+   },
+   "use": "WordPress site: category pages per authority (including the State Archives), a precedents category, and a working GET search. A disclosure log of FOI answers obtained by the NGO.",
+   "limits": "robots.txt disallows only /wp-json/ and /?rest_route=, so use HTML categories and search, not the WP REST API. Hebrew."
+  },
+  {
+   "id": "il-foi-law-cyrilla",
+   "cc": "IL",
+   "kind": "law",
+   "name": "Freedom of Information Law, 5758-1998 - Cyrilla English text (page 1 of 7 readable)",
+   "url": "https://cyrilla.org/en/entity/9k2ywjxyk8d",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "Cyrilla (not read)",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://cyrilla.org/en/entity/9k2ywjxyk8d"
+   },
+   "use": "Clean English of sections 1-2 (right of citizens and residents; definition of 'public authority').",
+   "limits": "Only the first page of the paged viewer is in the HTML; s.14 is not on it - use the WIPO copy."
+  },
+  {
+   "id": "il-foi-law-wipo",
+   "cc": "IL",
+   "kind": "law",
+   "name": "Freedom of Information Law, 5758-1998 - WIPO Lex English translation (2014; Hebrew controls)",
+   "url": "https://www.wipo.int/wipolex/en/text/346739",
+   "search": null,
+   "api": null,
+   "format": "html (docx text, letter-spaced extraction)",
+   "terms": "WIPO Lex; not read",
+   "key_required": false,
+   "programs": [
+    "Dimona / nuclear programme records",
+    "military censor"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.wipo.int/wipolex/en/text/346739"
+   },
+   "use": "Section 14(a) lists the bodies the law does not apply to: IDF intelligence agencies, the General Security Agency, the Institute for Intelligence and Special Tasks, the Atomic Energy Commission and its nuclear research centres, and other named units.",
+   "limits": "The extracted text is letter-spaced (quotes below are reproduced as extracted); a translation of the 1998 text as at 2014 - amendments after 2014 are not reflected; the Hebrew text on nevo.co.il is robots-disallowed and the Knesset site geo-blocks (see decoys)."
+  },
+  {
+   "id": "il-official-law-texts",
+   "cc": "IL",
+   "kind": "law",
+   "name": "Official Hebrew texts: Nevo (nevo.co.il) and the Knesset site",
+   "url": "https://www.nevo.co.il/",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "n/a",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": null,
+    "result": "robots",
+    "sample": "nevo.co.il robots-disallowed; knesset.gov.il answers 200 'Unavailable' (geo-block)"
+   },
+   "use": "Nothing.",
+   "limits": "Nevo: robots disallow. Knesset: an HTTP 200 page titled 'Unavailable' for /robots.txt and /Odata/ParliamentInfo.svc/."
+  },
+  {
+   "id": "il-gov-foi-unit",
+   "cc": "IL",
+   "kind": "portal",
+   "name": "Government FOI Unit (Ministry of Justice) on gov.il - procedures PDF (Dec 2025)",
+   "url": "https://www.gov.il/en/departments/units/foi_unit",
+   "search": null,
+   "api": null,
+   "format": "pdf",
+   "terms": "not read",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.gov.il/BlobFolder/policy/regulation-2-2/he/freedom_of_information_procedure_foi_commissioner_report_dec2025.pdf (the unit's pages themselves: 403)"
+   },
+   "use": "Procedure 2.4 (updated 1 Dec 2025) fixes the uniform template in which each ministry's FOI officer must publish an annual report and send the data to the Government FOI Unit by 1 February. The unit's annual national report is presumably the consolidated source (not retrieved).",
+   "limits": "gov.il HTML pages answer 403, and gov.il/robots.txt is an 8,605-byte HTML app shell, not a robots file. Only a /BlobFolder/ PDF found by web search was fetchable; the unit's annual FOI report itself was not located."
+  },
+  {
+   "id": "il-censor-data",
+   "cc": "IL",
+   "kind": "program",
+   "name": "Military censor annual figures (2011-2025) - published by the Movement for Freedom of Information from the censor's FOI replies",
+   "url": "https://www.meida.org.il/18046",
+   "search": null,
+   "api": null,
+   "format": "html (Hebrew)",
+   "terms": "not read",
+   "key_required": false,
+   "programs": [
+    "IDF Censor pre-clearance"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.meida.org.il/16717 (2024), /15865 (2023), /18046 (2025), /6513 (2011-2016)"
+   },
+   "use": "Year-by-year counts of items banned and items partly redacted; the series is found through the MFOI search for 'censor' (annual articles from 2011-2016 to 2025, mixed with unrelated hits).",
+   "limits": "MFOI articles are the NGO's presentation of figures the censor supplied; the censor's own replies are not linked in the text read. +972 Magazine's English articles on the same figures refused the crawler (403)."
+  },
+  {
+   "id": "ru-rosarkhiv-order-38",
+   "cc": "RU",
+   "kind": "appeals",
+   "name": "Rosarkhiv order no. 38 of 20 March 2025 (restricted official information list) - press reports",
+   "url": "https://meduza.io/news/2025/10/06/rosarhiv-ogranichil-issledovatelyam-dostup-k-delam-zhertv-politicheskih-repressiy",
+   "search": null,
+   "api": null,
+   "format": "html (Russian)",
+   "terms": "news reports",
+   "key_required": false,
+   "programs": [
+    "access to files of the politically repressed"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://novayagazeta.ru/articles/2025/10/01/pod-grifom-snova-sekretno"
+   },
+   "use": "Two Russian outlets report that an agency order lets archives add documents to a 'restricted official information' list; read as attributed reporting on current practice.",
+   "limits": "Secondary: the order itself was not retrieved. Both outlets are carried as reported."
+  },
+  {
+   "id": "ru-rti-rating",
+   "cc": "RU",
+   "kind": "appeals",
+   "name": "RTI Rating (Centre for Law and Democracy / Access Info) - Russia assessment",
+   "url": "https://www.rti-rating.org/country-data/Russia/",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "not read",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.rti-rating.org/country-data/Russia/"
+   },
+   "use": "Scored article-by-article assessment (98 of 150) of the 2009 law, with the exceptions regime criticised.",
+   "limits": "An NGO's rating of the statute, not a record of practice."
+  },
+  {
+   "id": "ru-rusarchives",
+   "cc": "RU",
+   "kind": "archive",
+   "name": "Federal Archival Agency (Rosarkhiv) and archives.ru / GARF",
+   "url": "https://rusarchives.ru/",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "n/a",
+   "key_required": false,
+   "programs": [
+    "KGB archive access"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": null,
+    "result": "unreachable",
+    "sample": "https://rusarchives.ru/ (twice) and /robots.txt (once): connection reset by peer"
+   },
+   "use": "Nothing reached.",
+   "limits": "rusarchives.ru and archives.ru: the TCP connection is reset (not a documented refusal; do not read it as proof of a geo-block). garf.su (State Archive of the Russian Federation) answered 403, a refusal recorded as a null."
+  },
+  {
+   "id": "ru-wilson-digital-archive",
+   "cc": "RU",
+   "kind": "archive",
+   "name": "Wilson Center Digital Archive (digitalarchive.wilsoncenter.org)",
+   "url": "https://digitalarchive.wilsoncenter.org/",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "n/a",
+   "key_required": false,
+   "programs": [
+    "Cold War documents from Russian/Soviet archives"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": null,
+    "result": "unreachable",
+    "sample": "proxy tunnel returned 502 Bad Gateway for digitalarchive.wilsoncenter.org (robots.txt and root)"
+   },
+   "use": "Nothing reached.",
+   "limits": "Failure is at the agent proxy for this host (502 on the tunnel), not a documented refusal by the Wilson Center. https://www.wilsoncenter.org/digital-archive loads (200) but is a stub that only points to the unreachable host."
+  },
+  {
+   "id": "ru-8fz-law-cyrilla",
+   "cc": "RU",
+   "kind": "law",
+   "name": "Federal Law No. 8-FZ of 9 Feb 2009 'On Providing Access to Information on the Activities of Government Bodies and Bodies of Local Self-Government' - English text on Cyrilla",
+   "url": "https://cyrilla.org/en/entity/v77kx9jefx8",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "Cyrilla (not read)",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://cyrilla.org/en/entity/v77kx9jefx8"
+   },
+   "use": "English text of the law as amended to 2013; page 1 of 17 of the paged viewer is readable.",
+   "limits": "A translation, third-party; it is a law on information about the activities of state bodies, not a general right to documents, and state-secrets law prevails (see the rating below). The official texts failed: pravo.gov.ru returned 503, the Rosstat-hosted PDF failed TLS verification (certificate not trusted by the system store; not bypassed)."
+  },
+  {
+   "id": "ru-bukovsky",
+   "cc": "RU",
+   "kind": "program",
+   "name": "Bukovsky Archive - copies made in 1992 from the CPSU Central Committee archive",
+   "url": "https://bukovsky-archive.com/2018/09/07/concerning-these-archives/",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "not read",
+   "key_required": false,
+   "programs": [
+    "Yeltsin-era access to Central Committee documents (1992)"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "same URL"
+   },
+   "use": "The archive's own account of how the copies were made.",
+   "limits": "Provenance statement from the archive holder; a different TLD (.net) failed at the proxy."
+  },
+  {
+   "id": "ru-churchill-mitrokhin",
+   "cc": "RU",
+   "kind": "program",
+   "name": "Mitrokhin Archive (MITN) - Churchill Archives Centre, Cambridge",
+   "url": "https://archives.chu.cam.ac.uk/?p=2965",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "not read",
+   "key_required": false,
+   "programs": [
+    "KGB foreign-intelligence archive notes (Mitrokhin)"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://archives.chu.cam.ac.uk/?p=2965 (finding aid in ArchiveSearch: https://archivesearch.lib.cam.ac.uk/ - 403)"
+   },
+   "use": "Collection description and access statement; the item-level catalogue is the University's ArchiveSearch.",
+   "limits": "archivesearch.lib.cam.ac.uk answered 403 on robots.txt and on two record pages, so item-level access conditions could not be read here."
+  },
+  {
+   "id": "ru-hoover-fond89",
+   "cc": "RU",
+   "kind": "program",
+   "name": "Hoover Institution - Archives of the Soviet Communist Party and Soviet State (microfilm), incl. Fond 89 from the 1992 Constitutional Court trial of the CPSU",
+   "url": "https://www.hoover.org/library-archives/collections/archives-soviet-communist-party-and-soviet-state-microfilm-collection",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "not read",
+   "key_required": false,
+   "programs": [
+    "Yeltsin-era releases of party and KGB-related documents"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "same URL (digitalcollections.hoover.org: 403)"
+   },
+   "use": "Collection page with finding-aid description of Fond 89 (three thousand documents, 10,000 pages).",
+   "limits": "Hoover's digital-collections host refused the crawler (403). A catalogue of KGB file releases as such was not found; Fond 89 is the nearest."
+  },
+  {
+   "id": "eu-curia-and-parliament-sites",
+   "cc": "EU",
+   "kind": "appeals",
+   "name": "Court of Justice (curia.europa.eu) and europarl.europa.eu main site",
+   "url": "https://curia.europa.eu/",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "n/a",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 403,
+    "result": "refused",
+    "sample": "robots.txt 403 on both hosts"
+   },
+   "use": "Nothing.",
+   "limits": "Case law on Reg. 1049/2001 is reachable only through the Cellar graph above."
+  },
+  {
+   "id": "eu-ombudsman",
+   "cc": "EU",
+   "kind": "appeals",
+   "name": "European Ombudsman - decisions on access-to-documents complaints",
+   "url": "https://www.ombudsman.europa.eu/en/decisions",
+   "search": null,
+   "api": null,
+   "format": "html (JS app)",
+   "terms": "not read; robots.txt carries a Content-Signal",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "decoy",
+    "sample": "3,196 bytes, text 'European Ombudsman Loading . . .'"
+   },
+   "use": "Nothing from a plain client.",
+   "limits": "JS shell; no server-rendered decisions."
+  },
+  {
+   "id": "eu-cellar-sparql",
+   "cc": "EU",
+   "kind": "archive-api",
+   "name": "Publications Office Cellar SPARQL endpoint",
+   "url": "https://publications.europa.eu/webapi/rdf/sparql",
+   "search": null,
+   "api": "https://publications.europa.eu/webapi/rdf/sparql?query={sparql}&format=application%2Fsparql-results%2Bjson",
+   "format": "json",
+   "terms": "not read",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "a SELECT ... LIMIT 1 query returned one binding"
+   },
+   "use": "Lets the crawler list the cases and acts that cite Reg. 1049/2001 without downloading the 73 MB notice.",
+   "limits": "Ontology not explored; robots.txt for the host was not read separately."
+  },
+  {
+   "id": "eu-data-europa-sparql",
+   "cc": "EU",
+   "kind": "archive-api",
+   "name": "data.europa.eu SPARQL (OpenLink Virtuoso editor)",
+   "url": "https://data.europa.eu/sparql",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "n/a",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": null,
+    "result": "robots",
+    "sample": "a GET with ?query= is disallowed by robots.txt (Disallow: /*?query=*); the editor page itself loads"
+   },
+   "use": "Nothing by GET; use the Cellar endpoint.",
+   "limits": "Robots disallow on query strings."
+  },
+  {
+   "id": "eu-ep-open-data",
+   "cc": "EU",
+   "kind": "archive-api",
+   "name": "European Parliament Open Data API v2 (documents, adopted texts, questions, committee documents)",
+   "url": "https://data.europarl.europa.eu/api/v2/",
+   "search": null,
+   "api": "https://data.europarl.europa.eu/api/v2/{resource}?limit=1&format=application%2Fld%2Bjson",
+   "format": "json-ld",
+   "terms": "CC BY 4.0 (stated in the OpenAPI document); 500 requests per 5 minutes",
+   "key_required": false,
+   "programs": [
+    "Parliament documents released under Reg. 1049/2001"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://data.europarl.europa.eu/api/v2/adopted-texts?limit=1&format=application%2Fld%2Bjson"
+   },
+   "use": "Documented, keyless, licensed API; about twenty resource families including /documents, /external-documents and /parliamentary-questions.",
+   "limits": "It exposes Parliament's published documents, not its access-to-documents register; robots.txt asks for Crawl-delay: 2."
+  },
+  {
+   "id": "eu-asktheeu",
+   "cc": "EU",
+   "kind": "civil-log",
+   "name": "AsktheEU.org (Alaveteli) - requests under Regulation 1049/2001",
+   "url": "https://www.asktheeu.org/",
+   "search": null,
+   "api": "https://www.asktheeu.org/request/{slug}.json",
+   "format": "html + json",
+   "terms": "site content CC BY-SA (footer); request text and replies not read",
+   "key_required": false,
+   "programs": [
+    "EU access-to-documents requests (Council, Commission, Parliament, agencies)"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.asktheeu.org/request/dg_trade_contacts_with_industry.json"
+   },
+   "use": "159 public authorities listed; request and body pages with .json versions.",
+   "limits": "robots.txt disallows */search/*, */feed/*, */request/*/response/* (individual replies) and */request/*/download*, so no search and no reply bodies; the help page says it has no full API. Template note: and /body/{body}.json"
+  },
+  {
+   "id": "eu-commission-register",
+   "cc": "EU",
+   "kind": "disclosure-log",
+   "name": "European Commission register of documents (ec.europa.eu/transparency/documents-register)",
+   "url": "https://ec.europa.eu/transparency/documents-register/",
+   "search": null,
+   "api": null,
+   "format": "html (JS app)",
+   "terms": "n/a",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "decoy",
+    "sample": "55,040 bytes; the only text is the title 'Register of Commission Documents'; /api/ answered 503"
+   },
+   "use": "Nothing from a plain client.",
+   "limits": "robots.txt allows the path, but the register is a script application with no server-rendered records."
+  },
+  {
+   "id": "eu-council-register",
+   "cc": "EU",
+   "kind": "disclosure-log",
+   "name": "Council of the EU public register",
+   "url": "https://www.consilium.europa.eu/en/documents-publications/public-register/",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "n/a",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 403,
+    "result": "refused",
+    "sample": "page and robots.txt both 403"
+   },
+   "use": "Nothing: refused.",
+   "limits": "Not worked around."
+  },
+  {
+   "id": "eu-reg1049-text",
+   "cc": "EU",
+   "kind": "law",
+   "name": "Regulation (EC) No 1049/2001 - official text",
+   "url": "https://eur-lex.europa.eu/eli/reg/2001/1049/oj",
+   "search": null,
+   "api": "https://publications.europa.eu/resource/celex/32001R1049",
+   "format": "html (EUR-Lex) / rdf+xml (Cellar)",
+   "terms": "not read",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 202,
+    "result": "refused",
+    "sample": "EUR-Lex (3 URLs) and data.europa.eu/eli answer HTTP 202, an access challenge, not content; Cellar resource URL answered 200"
+   },
+   "use": "The Cellar 'celex' resource for 32001R1049 returns a 73,222,182-byte RDF/XML notice: the regulation's own identifiers (ELI sameAs links) plus about 92,000 work_cited_by_work annotations and some 5,700 distinct case-law CELEX numbers (sector 6) in citation relations with it. A lawful machine-readable map of the case law on Reg. 1049/2001.",
+   "limits": "No article text; EUR-Lex itself is walled. The Cellar response values sit in XML attributes, so they cannot be quoted through the text layer; verify by sha256 in the ledger. Fetch once and cache."
+  },
+  {
+   "id": "jp-soumu-review-board-answers",
+   "cc": "JP",
+   "kind": "appeals",
+   "name": "情報公開・個人情報保護審査会 答申 (Review Board reports), Ministry of Internal Affairs page and answer PDFs",
+   "url": "https://www.soumu.go.jp/main_sosiki/singi/jyouhou/toushin.html",
+   "search": "http://koukai-hogo-db.soumu.go.jp/",
+   "api": null,
+   "format": "html+pdf",
+   "terms": "not stated on the probed page",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.soumu.go.jp/main_content/000978211.pdf"
+   },
+   "use": "The answers index page (Shift_JIS) and individual answer PDFs under /main_content/ fetch fine; the Cabinet Office's English one-pager (https://www.cao.go.jp/en/pmf/pmf_24.pdf) describes the Board (15 members).",
+   "limits": "The searchable database koukai-hogo-db.soumu.go.jp answered 403 on the page and on /robots.txt (refusal, recorded, not worked around), so decisions on, e.g., a security-ground refusal cannot be searched by the crawler; the sample PDF is about a private individual's own data and is not used here. Template note: (the search database; REFUSED, see limits)"
+  },
+  {
+   "id": "jp-jacar-search",
+   "cc": "JP",
+   "kind": "archive",
+   "name": "JACAR 国立公文書館 アジア歴史資料センター, search",
+   "url": "https://www.jacar.archives.go.jp/",
+   "search": "https://www.jacar.archives.go.jp/aj/search?kl0=AND&ks0=kw_all&kw0={q}&rows=20",
+   "api": null,
+   "format": "html",
+   "terms": "personal download and print are free; citation conventions at https://www.jacar.archives.go.jp/aj/www/doc/ (image terms page, read in Japanese)",
+   "key_required": false,
+   "programs": [
+    "Unit 731 (records of the Ishii unit, 石井部隊)"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.jacar.archives.go.jp/aj/search?kl0=AND&ks0=kw_all&kw0=%E7%9F%B3%E4%BA%95%E9%83%A8%E9%9A%8A&rows=20  -> 検索結果数 183 件"
+   },
+   "use": "Server-rendered catalogue results (reference codes, creator, holding institution) for the National Archives, the Diplomatic Archives and the Defense Ministry's military history centre, 1868 to about 1945; the Ishii unit keyword returns 183 catalogue entries (the first three carry reference codes A03023865100, B08060755400 and C01003508400, from the National Archives, the Diplomatic Archives and the Defense Ministry's military history centre respectively; only their catalogue lines were read).",
+   "limits": "TRAP: the obvious parameter `keyword=` is ignored and the page reports the whole corpus (検索結果数 2481992 件), a 200 that answers a different question; the working parameters are kl0/ks0/kw0, found in /bundles/apps-aj/js/search-cond.js. Image files are under /contentDownload/, which robots.txt disallows (and Crawl-delay 30); the crawler reads catalogue records, not page images. Template note: (English UI: /aj/search-en?kl0=AND&ks0=kw_all&kw0={q}&rows=20)"
+  },
+  {
+   "id": "jp-naj-digital-archive",
+   "cc": "JP",
+   "kind": "archive",
+   "name": "国立公文書館デジタルアーカイブ (National Archives of Japan digital archive), catalogue search",
+   "url": "https://www.digital.archives.go.jp/",
+   "search": "https://www.digital.archives.go.jp/search?kw={q}",
+   "api": null,
+   "format": "html",
+   "terms": "https://www.digital.archives.go.jp/secondary-use : digital content 'may be used freely' (任意にご利用いただけます), user bears responsibility; a request about AI-processed use follows",
+   "key_required": false,
+   "programs": [
+    "Unit 731 (防疫給水部 = epidemic prevention and water purification units)"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.digital.archives.go.jp/search?kw=%E9%98%B2%E7%96%AB%E7%B5%A6%E6%B0%B4%E9%83%A8  -> 検索結果数 155 件"
+   },
+   "use": "Catalogue search of the national archive's own holdings; the keyword 防疫給水部 returns 155 entries, i.e. Japanese-held records under that unit name are catalogued and searchable, which bears on the report's line that Unit 731 records 'surfaced through U.S. FOIA, not Japanese disclosure'.",
+   "limits": "Catalogue entries only were read; whether any listed file is a personnel roster, an order or an unrelated item was not examined. robots.txt: Crawl-delay 30 and Disallow /contentDownload/* (bulk downloads are closed to the crawler). No API found."
+  },
+  {
+   "id": "jp-egov-api-designated-secrets-act",
+   "cc": "JP",
+   "kind": "law",
+   "name": "特定秘密の保護に関する法律 (Act on the Protection of Specially Designated Secrets, 2013)",
+   "url": "https://laws.e-gov.go.jp/api/2/law_data/425AC0000000108",
+   "search": "https://laws.e-gov.go.jp/api/2/laws?law_title=%E7%89%B9%E5%AE%9A%E7%A7%98%E5%AF%86",
+   "api": "https://laws.e-gov.go.jp/api/2/law_data/425AC0000000108",
+   "format": "json",
+   "terms": "not stated",
+   "key_required": false,
+   "programs": [
+    "Unit 731 / Japanese classification regime"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://laws.e-gov.go.jp/api/2/law_data/425AC0000000108"
+   },
+   "use": "Gives the classification periods the report's Japan row paraphrases as 'allows 60-year classification'.",
+   "limits": "Statute only; it does not list what has been designated."
+  },
+  {
+   "id": "jp-egov-api-info-disclosure-act",
+   "cc": "JP",
+   "kind": "law",
+   "name": "行政機関の保有する情報の公開に関する法律 (Act No. 42 of 1999), Japanese text, e-Gov Law API v2",
+   "url": "https://laws.e-gov.go.jp/api/2/law_data/411AC0000000042",
+   "search": "https://laws.e-gov.go.jp/api/2/laws?law_title={q}",
+   "api": "https://laws.e-gov.go.jp/api/2/law_data/{law_id}",
+   "format": "json",
+   "terms": "not stated in the probed JSON; e-Gov's terms page was not read",
+   "key_required": false,
+   "programs": [
+    "Unit 731 (what the Japanese statute lets the state withhold)"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://laws.e-gov.go.jp/api/2/law_data/411AC0000000042"
+   },
+   "use": "Current Japanese statute text as JSON (revision 2026-07-17), including the national-security non-disclosure ground in Art. 5(iii); law ids are discoverable by title search.",
+   "limits": "The human page https://laws.e-gov.go.jp/law/411AC0000000042 is an 800-byte JavaScript shell (title 'e-Gov 法令検索') with no law text, and so is /robots.txt on that host: use the API, never the page. Template note: (title search, JSON; probed with 特定秘密)"
+  },
+  {
+   "id": "jp-egov-api-public-records-act",
+   "cc": "JP",
+   "kind": "law",
+   "name": "公文書等の管理に関する法律 (Public Records and Archives Management Act, 2009)",
+   "url": "https://laws.e-gov.go.jp/api/2/law_data/421AC0000000066",
+   "search": null,
+   "api": "https://laws.e-gov.go.jp/api/2/law_data/421AC0000000066",
+   "format": "json",
+   "terms": "not stated",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://laws.e-gov.go.jp/api/2/law_data/421AC0000000066"
+   },
+   "use": "The statute that governs transfer of records to the National Archives of Japan (the pipeline that feeds the digital archive below).",
+   "limits": "Not read beyond the title and promulgation date (2009-07-01); no article is cited."
+  },
+  {
+   "id": "jp-jlt-info-disclosure-act-en",
+   "cc": "JP",
+   "kind": "law",
+   "name": "Act on Access to Information Held by Administrative Organs (Act No. 42 of 1999), English, Japanese Law Translation database",
+   "url": "https://www.japaneselawtranslation.go.jp/en/laws/view/3765/en",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "not stated on the probed page",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.japaneselawtranslation.go.jp/en/laws/view/3765/en"
+   },
+   "use": "English text of the Act, including Art. 5 item (iii), the closest thing Japan has to an intelligence/security exemption (there is no clause naming a service).",
+   "limits": "The translation is stale: the page says 'Last Version： Act No. 84 of 2004', whereas e-Gov's Japanese text is at a 2026 revision. Cite the Japanese text for the current law."
+  },
+  {
+   "id": "in-cic-decision-search",
+   "cc": "IN",
+   "kind": "appeals",
+   "name": "CIC decisions search (new: dss.cic.gov.in; legacy: dsscic.nic.in cause-list-report-web)",
+   "url": "https://dss.cic.gov.in/citizen-service?tab=decision",
+   "search": "http://dsscic.nic.in/cause-list-report-web/view-decision/1",
+   "api": null,
+   "format": "html",
+   "terms": "n/a",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "decoy",
+    "sample": "https://dss.cic.gov.in/citizen-service?tab=decision (200, 2,127 bytes) and https://dss.cic.gov.in/robots.txt (200, the same 2,127 bytes); http://dsscic.nic.in/cause-list-report-web/view-decision/1 (503 after back-off); https://dsscic.nic.in/robots.txt (transport error)"
+   },
+   "use": "None by plain HTTP. The 'new' app is a JavaScript single-page shell (meta description 'CIC Application', scripts under /assets/) that returns identical bytes for any path, including robots.txt; the legacy app answered 503.",
+   "limits": "Individual CIC decisions cannot be searched or listed by the crawler; only the landmark-decisions PDF and annual reports (above) are readable. A decision PDF's direct URL, if one is supplied by an author, can still be fetched; none was probed. Template note: (legacy, decisions from 11 Sep 2016)"
+  },
+  {
+   "id": "in-cic-site",
+   "cc": "IN",
+   "kind": "appeals",
+   "name": "Central Information Commission (India), site: decisions index, landmark decisions, s.4 disclosure, annual reports",
+   "url": "https://cic.gov.in/",
+   "search": "https://cic.gov.in/decision",
+   "api": null,
+   "format": "html+pdf",
+   "terms": "not read (Copy Right Policy page not fetched)",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://cic.gov.in/decision ; https://cic.gov.in/cic_landmark (a 74 MB PDF of landmark decisions is linked) ; https://cic.gov.in/circular-reports-conventions (annual reports) ; https://cic.gov.in/rti-disclosoures (the CIC's own s.4(1)(b) disclosure)"
+   },
+   "use": "Static pages that fetch: the Act and Rules PDFs (/rti_act), landmark decisions, annual reports, study reports, and the s.4 compliance material (/transparency_audit_of_disclosures).",
+   "limits": "robots.txt (Drupal default) bars /search/ and /index.php/search/, so the CIC's own site search is closed to the crawler. The decision databases are on other hosts (next entry). Template note: (links out to the decision search apps, below)"
+  },
+  {
+   "id": "in-abhilekh-patal",
+   "cc": "IN",
+   "kind": "archive",
+   "name": "Abhilekh Patal, Portal for Access to Archives and Learning (National Archives of India)",
+   "url": "https://www.abhilekh-patal.in/",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "n/a",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 202,
+    "result": "decoy",
+    "sample": "https://www.abhilekh-patal.in/ (HTTP 202, empty body) and https://www.abhilekh-patal.in/robots.txt (HTTP 202, empty body)"
+   },
+   "use": "None. Both URLs answer 202 Accepted with no body to the identified crawler, which is a bot challenge in everything but name; the spider records 202 as not ok.",
+   "limits": "Not retried under another identity and not opened in a browser. NAI holdings can be sought through the site below or by a request to the archive."
+  },
+  {
+   "id": "in-nai-site",
+   "cc": "IN",
+   "kind": "archive",
+   "name": "National Archives of India, official website",
+   "url": "https://nationalarchives.nic.in/",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "not read",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://nationalarchives.nic.in/ (187 KB, Hindi/English); https://nationalarchives.nic.in/robots.txt -> 404"
+   },
+   "use": "Carries the access rules for public records and the SoP for supplying non-digitised records, and points to the Abhilekh Patal search. Pages beyond the landing were not read.",
+   "limits": "No catalogue on this host. No Indian declassification register was found."
+  },
+  {
+   "id": "in-cic-rti-act-english-pdf",
+   "cc": "IN",
+   "kind": "law",
+   "name": "The Right to Information Act, 2005 (Act No. 22 of 2005), English PDF hosted by the Central Information Commission",
+   "url": "https://cic.gov.in/sites/default/files/RTI_English.pdf",
+   "search": null,
+   "api": null,
+   "format": "pdf",
+   "terms": "CIC site; its 'Copy Right Policy' and 'Terms and Conditions' pages were not read",
+   "key_required": false,
+   "programs": [
+    "RTI exemption for RAW and IB"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://cic.gov.in/sites/default/files/RTI_English.pdf (25 pages, 355 KB)"
+   },
+   "use": "Act text with the Second Schedule. s.24(1) takes the Schedule's intelligence and security organisations (Intelligence Bureau; Research and Analysis Wing including the Aviation Research Centre; Directorate of Revenue Intelligence; and others) out of the Act, with a proviso that information on allegations of corruption and human-rights violations is not excluded.",
+   "limits": "The report's row says RAW and IB are 'exempt'; the text is narrower, and the row does not mention the proviso or the second proviso (human-rights information from these bodies is provided only after the Central Information Commission's approval, within 45 days). The official copies refused or failed: rti.gov.in/rti-act.pdf (connection reset by the host), indiacode.nic.in (403)."
+  },
+  {
+   "id": "in-official-rti-act-hosts",
+   "cc": "IN",
+   "kind": "law",
+   "name": "rti.gov.in (RTI Act PDF) and IndiaCode (India Code, RTI Act handle)",
+   "url": "https://rti.gov.in/rti-act.pdf",
+   "search": null,
+   "api": null,
+   "format": "pdf",
+   "terms": "n/a",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": null,
+    "result": "refused",
+    "sample": "https://rti.gov.in/rti-act.pdf: transport error 'Connection reset by peer' after the spider's whole back-off ladder (ledger row 02:42 UTC); https://www.indiacode.nic.in/handle/123456789/2065 and /robots.txt: 403"
+   },
+   "use": "None. Use the CIC copy above.",
+   "limits": "Recorded as nulls; the crawler did not change identity or route. A connectivity-only check with curl (no content kept) to rti.gov.in also returned no response, so the failure is at the host or on the path to it, not in the spider's headers."
+  },
+  {
+   "id": "in-rtionline-portal",
+   "cc": "IN",
+   "kind": "portal",
+   "name": "RTI Online (DoPT) - where central-government RTI applications and first appeals are filed",
+   "url": "https://rtionline.gov.in/",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "n/a",
+   "key_required": "login required to file; nothing was submitted",
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://rtionline.gov.in/ (landing only); https://rtionline.gov.in/robots.txt -> 404"
+   },
+   "use": "Recorded as the filing point. The landing text says the portal is for central public authorities, not State governments, and that CIC's second-appeal portal is integrated with it.",
+   "limits": "A filing portal, not a disclosure log: no released responses are published here."
+  },
+  {
+   "id": "za-inforegulator-paia",
+   "cc": "ZA",
+   "kind": "appeals",
+   "name": "Information Regulator (South Africa), PAIA annual-report portal and PAIA assessment report",
+   "url": "https://inforegulator.org.za/paia-annual-report/",
+   "search": null,
+   "api": null,
+   "format": "html+pdf",
+   "terms": "not stated on the probed pages",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://inforegulator.org.za/wp-content/uploads/2026/03/PAIA_2024-25_-_Final_Annual_Assessment_Report.docx.pdf (53 pages)"
+   },
+   "use": "The Regulator's page explains the s.32 annual-report duty (portal opens 1 April, deadline 30 June); the 2024/25 assessment report lists, by body, who did and did not file (a compliance map; Part F summary and a 'Bodies which did not submit' list).",
+   "limits": "No searchable database of PAIA complaint outcomes or enforcement notices was found on the pages probed. The e-services portal itself (eservices.inforegulator.org.za) was not probed (account-gated filing). robots.txt only bars /wp-admin/."
+  },
+  {
+   "id": "za-trc-amnesty",
+   "cc": "ZA",
+   "kind": "appeals",
+   "name": "TRC Amnesty Hearings and Decisions (transcripts 1996-2001)",
+   "url": "https://justice.gov.za/trc/amntrans/index.htm",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "not stated on the probed page",
+   "key_required": false,
+   "programs": [
+    "TRC"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://justice.gov.za/trc/amntrans/index.htm; sibling https://justice.gov.za/trc/hrvtrans/index.htm (Human Rights Violations hearings)"
+   },
+   "use": "Year indexes of amnesty hearing transcripts (1996-2000) and decision transcripts (1996-2001), with a status table as at 1 Nov 2000.",
+   "limits": "Index only was read; a guessed path (/trc/amntrans/1998/index.htm) was a 404, so follow the page's own links. The page warns that the 'result' field should not be used for statistics and that names are often misspelt."
+  },
+  {
+   "id": "za-saha-foip-al2878",
+   "cc": "ZA",
+   "kind": "disclosure-log",
+   "name": "South African History Archive, Freedom of Information Programme Collection (AL2878)",
+   "url": "https://www.saha.org.za/collections/the_freedom_of_information_project.htm",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "'This collection is open for research. Use Restrictions: User restrictions may apply. See SAHA copyright statement.'",
+   "key_required": false,
+   "programs": [
+    "Project Coast",
+    "apartheid security records"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.saha.org.za/collections/AL2878/b.htm (B, Non Special Projects: B01 public bodies, B02 private bodies)"
+   },
+   "use": "Catalogue (static HTML tree: /collections/AL2878/a.htm, b.htm and below) of what PAIA requests by SAHA released, apartheid security-establishment records among them. This is South Africa's civil-society request log.",
+   "limits": "The collection is largely paper held in Johannesburg (23.9 linear metres); only the finding-aid tree is online. SAHA serves its homepage at /robots.txt with HTTP 200 (no robots file; treated as 'no rules', title 'SAHA - South African History Archive - Home'); the crawler still keeps its own pacing."
+  },
+  {
+   "id": "za-govza-paia-act",
+   "cc": "ZA",
+   "kind": "law",
+   "name": "Promotion of Access to Information Act 2 of 2000, South African Government document page and Government Gazette PDF",
+   "url": "https://www.gov.za/documents/promotion-access-information-act",
+   "search": null,
+   "api": null,
+   "format": "html+pdf",
+   "terms": "official government publication; reuse terms not stated on the probed page",
+   "key_required": false,
+   "programs": [
+    "Project Coast"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.gov.za/sites/default/files/gcis_document/201409/a2-000.pdf (45 pages, Gazette No. 20852 of 3 Feb 2000)"
+   },
+   "use": "Original Act text; s.41 lets a public body refuse a record whose disclosure could reasonably be expected to prejudice the defence or security of the Republic, and the definitions treat 'a foreign or hostile intelligence operation' as a threat.",
+   "limits": "Unamended 2000 text: the gov.za page itself lists amendments only to Act 31 of 2019. The consolidated versions (lawlibrary.org.za, SAFLII) refused the crawler (below)."
+  },
+  {
+   "id": "za-lawlibrary-paia",
+   "cc": "ZA",
+   "kind": "law",
+   "name": "PAIA consolidated text on lawlibrary.org.za (and SAFLII mirror)",
+   "url": "https://lawlibrary.org.za/akn/za/act/2000/2/eng@2021-06-30",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "robots.txt carries a Content-Signal: ai-train=no, search=yes, ai-input=no, and says these are express reservations of rights under EU Directive 2019/790 Art. 4",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 403,
+    "result": "refused",
+    "sample": "https://lawlibrary.org.za/akn/za/act/2000/2/eng@2021-06-30 (403); https://www.saflii.org/za/legis/consol_act/poatia2000366/index.html (403); https://www.saflii.org/robots.txt (403)"
+   },
+   "use": "None for the crawler. Recorded so the next sweep does not retry. The gov.za original (above) is the readable text.",
+   "limits": "Two refusals and a stated reservation against AI input; the crawler does not work around either.",
+   "optout": "The site's robots.txt declares Content-Signal ai-input=no. Skipped unless the author decides otherwise."
+  },
+  {
+   "id": "za-saha-cbw-al2922",
+   "cc": "ZA",
+   "kind": "program",
+   "name": "SAHA, The Chemical and Biological Warfare (CBW) Project Collection (AL2922), including 'Project Coast Records'",
+   "url": "https://www.saha.org.za/collections/AL2922/a.htm",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "see SAHA copyright statement (not read)",
+   "key_required": false,
+   "programs": [
+    "Project Coast"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.saha.org.za/collections/AL2922/a.htm"
+   },
+   "use": "Finding aid with four series: A1 correspondence regarding TRC documents 1999-2000, A2 the TRC hearing into CBW, A3 Project Coast records, A4 press clippings.",
+   "limits": "The page lists series titles only; the listing itself ('View the listing for this collection') was not opened, and the records are held in Johannesburg."
+  },
+  {
+   "id": "za-trc-cbw-hearings",
+   "cc": "ZA",
+   "kind": "program",
+   "name": "TRC Special Hearing: Chemical and Biological Warfare, Cape Town, 8 June-31 July 1998 (transcripts)",
+   "url": "https://justice.gov.za/trc/special/index.htm",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "not stated on the probed pages",
+   "key_required": false,
+   "programs": [
+    "Project Coast"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://justice.gov.za/trc/special/cbw/cbw18.htm (8 July 1998, Day 2, 207 KB)"
+   },
+   "use": "Day files cbw1.htm to cbw22.htm are plain-HTML transcripts; a second copy with metadata is on the SAHA-run mirror sabctrc.saha.org.za (export/hearinghtml.php?id=NNNNN, original path /originals/special/cbw/cbwN.htm).",
+   "limits": "Transcripts are testimony, taken under oath, of persons some of whom are living; no name is carried into this registry. The hearings' own record of destroyed documents is in Chapter 6 (below), not re-derived here. sabctrc.saha.org.za has no robots.txt (the URL returns its homepage)."
+  },
+  {
+   "id": "za-trc-final-report",
+   "cc": "ZA",
+   "kind": "program",
+   "name": "Truth and Reconciliation Commission of South Africa, Final Report (justice.gov.za)",
+   "url": "https://justice.gov.za/trc/report/index.htm",
+   "search": null,
+   "api": null,
+   "format": "html+pdf",
+   "terms": "not stated on the probed page",
+   "key_required": false,
+   "programs": [
+    "Project Coast",
+    "TRC"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://justice.gov.za/trc/report/finalreport/Volume%202.pdf (1.7 MB, 200 application/pdf)"
+   },
+   "use": "Direct PDFs of Volumes 1-7 (index lists Volume 1 through 5, Volume 6 sections 1-6, Volume 7 parts 1-5). Volume 2, Chapter 6 is the 'Special Investigation into Project Coast'.",
+   "limits": "Volume 2's PDF was fetched but its text was not extracted; the Chapter 6 quotes below come from the sabctrc.saha.org.za HTML mirror and the nuke.fas.org copy. robots.txt bars /search/ on justice.gov.za, so the site's own search is closed to the crawler; browse by link instead."
+  },
+  {
+   "id": "za-trc-vol2-ch6-project-coast",
+   "cc": "ZA",
+   "kind": "program",
+   "name": "TRC Final Report Vol. 2, Ch. 6 'Special Investigation into Project Coast' (HTML mirrors)",
+   "url": "https://sabctrc.saha.org.za/reports/volume2/chapter6/part3/subsection1.htm",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "not stated on the probed pages",
+   "key_required": false,
+   "programs": [
+    "Project Coast"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://nuke.fas.org/guide/rsa/cbw/2chap6c.htm (38 KB, a second HTML copy)"
+   },
+   "use": "The Commission's findings on the programme as HTML. This is where the report's line 'most documents destroyed' can be checked against the Commission's own wording.",
+   "limits": "polity.org.za's copy answered 403 (refusal). The destruction-of-documents passages were located but the full Chapter 6 was not read here, so the report's 'burned by [the programme head's] handlers' wording is NOT confirmed or refuted by this probe."
+  },
+  {
+   "id": "br-arquivo-nacional-sian",
+   "cc": "BR",
+   "kind": "archive",
+   "name": "Arquivo Nacional, bases de dados (SIAN) and remote service (consulta.an.gov.br)",
+   "url": "https://www.gov.br/arquivonacional/pt-br/servicos/bases-de-dados",
+   "search": "https://sian.an.gov.br/",
+   "api": null,
+   "format": "html",
+   "terms": "not read",
+   "key_required": false,
+   "programs": [
+    "SNI and other dictatorship-era holdings"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "decoy",
+    "sample": "https://www.gov.br/arquivonacional/pt-br/servicos/bases-de-dados (200, lists 'Sian', 'Outras bases de dados', 'Tutoriais'); https://sian.an.gov.br/ (200, 50,614 bytes) and https://consulta.an.gov.br/ (200, 45,429 bytes) both return a human-verification page"
+   },
+   "use": "The gov.br pages (bases de dados, 'Bases de dados e instrumentos de pesquisa', 'Dados abertos') describe the databases and link out; the catalogue itself is not reachable.",
+   "limits": "SIAN and consulta.an.gov.br each answer HTTP 200 with a page that says 'Please enable JavaScript to view the page content. Your support ID is: …' and asks 'What code is in the image?' - a bot challenge presented as a document. It is not solved and not worked around."
+  },
+  {
+   "id": "br-memorias-reveladas",
+   "cc": "BR",
+   "kind": "archive",
+   "name": "Memórias Reveladas (Centro de Referência das Lutas Políticas no Brasil, 1964-1985), Arquivo Nacional",
+   "url": "https://www.gov.br/memoriasreveladas/pt-br",
+   "search": "https://www.gov.br/memoriasreveladas/pt-br/faca-uma-pesquisa-em-nossa-base-de-dados",
+   "api": null,
+   "format": "html",
+   "terms": "gov.br footer: 'Todo o conteúdo deste site está publicado sob a licença Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada'",
+   "key_required": false,
+   "programs": [
+    "SNI and dictatorship-era holdings",
+    "Comissão Nacional da Verdade"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 401,
+    "result": "refused",
+    "sample": "https://www.gov.br/memoriasreveladas/pt-br -> 200 (238 KB, title 'Português (Brasil)', thin: services widgets and footer only); .../faca-uma-pesquisa-em-nossa-base-de-dados -> 401; .../assuntos/comissao-nacional-da-verdade -> 404; https://memoriasreveladas.arquivonacional.gov.br/ -> transport error (unreachable)"
+   },
+   "use": "The landing is reachable (it is a client-rendered React app, hence thin) and carries the licence; the database page that the Arquivo Nacional's own pages call 'Banco de Dados Memórias Reveladas' refused the crawler.",
+   "limits": "No SNI catalogue or document could be read. Whether SNI archives are 'incomplete' because of transition-era destruction (the report's claim) is not addressed by anything fetched here."
+  },
+  {
+   "id": "br-buscalai-informa-br",
+   "cc": "BR",
+   "kind": "disclosure-log",
+   "name": "Busca LAI (answers to federal LAI requests), now 'Informa.BR: Plataforma de Transparência e Acesso à Informação'; and Fala.BR (request platform)",
+   "url": "https://buscalai.cgu.gov.br/",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "n/a",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "decoy",
+    "sample": "https://buscalai.cgu.gov.br/ and https://buscalai.cgu.gov.br/robots.txt: both 200, both the identical 2,844-byte shell; https://falabr.cgu.gov.br/ redirects to /web/home, and /web/home and /web/dadosabertoslai are the identical 1,405-byte shell (title 'Fala.BR - Plataforma Integrada de Ouvidoria e Acesso à Informação')"
+   },
+   "use": "None by plain HTTP. These are JavaScript applications: the Busca LAI shell says 'Essa página requer javascript para funcionar corretamente.' and answers every path, robots.txt included, with the same bytes.",
+   "limits": "The published answers to individual requests, and the Fala.BR open-data download tab the CGU page points to, cannot be listed by the crawler. Fala.BR /robots.txt is a 404. The CSV/ZIP files that these tabs serve were not located (see dados.gov.br)."
+  },
+  {
+   "id": "br-cgu-dados-abertos",
+   "cc": "BR",
+   "kind": "disclosure-log",
+   "name": "CGU Dados Abertos page (gov.br) listing the Fala.BR module data and Portal da Transparência downloads",
+   "url": "https://www.gov.br/cgu/pt-br/acesso-a-informacao/dados-abertos",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "not read",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.gov.br/cgu/pt-br/acesso-a-informacao/dados-abertos (150 KB); https://dadosabertos.cgu.gov.br/ -> transport error (unreachable)"
+   },
+   "use": "The index of CGU datasets, with 'Fala.BR - Módulo Acesso' and 'Estatísticas LAI' among the entries, and download links under portaltransparencia.gov.br/download-de-dados/ for sanction lists.",
+   "limits": "The Fala.BR data link leads to the JavaScript shell above. The download links for the sanction lists (CEIS, CNEP, CEAF) were not fetched and are not part of the LAI question."
+  },
+  {
+   "id": "br-dados-gov-br",
+   "cc": "BR",
+   "kind": "disclosure-log",
+   "name": "Portal Brasileiro de Dados Abertos (dados.gov.br), CGU datasets: e-SIC / LAI requests, QualiLAI",
+   "url": "https://dados.gov.br/",
+   "search": "https://dados.gov.br/dataset?q={q}",
+   "api": null,
+   "format": "html",
+   "terms": "not read",
+   "key_required": "API use appears to need a key (not probed; not registered)",
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 401,
+    "result": "refused",
+    "sample": "https://dados.gov.br/ -> 200 ('Portal de Dados Abertos', 9,632 bytes, a JavaScript page); https://dados.gov.br/robots.txt -> 401; https://dados.gov.br/dataset/dados-referentes-ao-e-sic -> 401 (after the back-off ladder); https://dados.gov.br/dataset?organization=ministerio-da-transparencia-e-controladoria-geral-da-uniao-cgu -> 401; https://dados.gov.br/dataset/relatorios-quali-lai -> 401"
+   },
+   "use": "None for the crawler today. Dataset pages for the CGU's LAI request data (found by search, not by fetch: 'e-SIC', 'Relatórios QualiLAI') answer 401.",
+   "limits": "Refusal recorded; not retried under another identity. The CGU's LAI request exports therefore remain unlocated as machine-readable files; a person with a key or a browser could fetch them. Template note: (probed with the CGU organisation filter)"
+  },
+  {
+   "id": "br-camara-lai-consolidated",
+   "cc": "BR",
+   "kind": "law",
+   "name": "Lei nº 12.527, de 18 de novembro de 2011 (Lei de Acesso à Informação), texto atualizado, Câmara dos Deputados",
+   "url": "https://www2.camara.leg.br/legin/fed/lei/2011/lei-12527-18-novembro-2011-611802-normaatualizada-pl.html",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "official legislative database; reuse terms not read. robots.txt disallows search/form paths and individual deputies' pages, not /legin/",
+   "key_required": false,
+   "programs": [
+    "dictatorship files (1964-1985)"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www2.camara.leg.br/legin/fed/lei/2011/lei-12527-18-novembro-2011-611802-normaatualizada-pl.html (110 KB); original-publication copy .../lei-12527-18-novembro-2011-611802-publicacaooriginal-134287-pl.html (200)"
+   },
+   "use": "Full current text. Art. 21 (sole paragraph): information on human-rights violations by public agents or on their orders 'cannot be the object of access restriction'; Art. 24: maximum classification periods 25 (ultra-secret), 15 (secret), 5 (reserved) years; Art. 35 creates the Joint Commission for Reassessment of Information (CMRI), which reviews secret and ultra-secret classifications.",
+   "limits": "Planalto's own copy (https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12527.htm) could not be reached from this session (transport error 'ProxyError', ledger row 02:44 UTC), so this is the Câmara's copy. The law names no intelligence service; the exemption is by classification, not by agency. Art. 31 limits personal information to 100 years regardless of classification."
+  },
+  {
+   "id": "br-planalto-lai",
+   "cc": "BR",
+   "kind": "law",
+   "name": "planalto.gov.br, Lei 12.527 and Decreto 7.724/2012",
+   "url": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12527.htm",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "n/a",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": null,
+    "result": "unreachable",
+    "sample": "transport error: ProxyError 'Unable to connect to proxy' (the session's egress), ledger row 02:44 UTC; a connectivity-only curl to https://www.planalto.gov.br/ also returned nothing"
+   },
+   "use": "None from this session.",
+   "limits": "Not a refusal by Planalto; the session's egress path does not reach the host. Not worked around."
+  },
+  {
+   "id": "br-gov-acessoainformacao",
+   "cc": "BR",
+   "kind": "portal",
+   "name": "Acesso à Informação (gov.br), federal LAI portal and CGU monitoring reports",
+   "url": "https://www.gov.br/acessoainformacao/pt-br",
+   "search": null,
+   "api": null,
+   "format": "html+pdf",
+   "terms": "gov.br pages state a Creative Commons licence in the footer (the Memórias Reveladas page reads 'Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada'; this page's footer was not separately read)",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.gov.br/acessoainformacao/pt-br (66 KB); https://www.gov.br/robots.txt (200)"
+   },
+   "use": "Landing for LAI guidance; CGU's per-ministry transparência passiva monitoring PDFs sit under /acessoainformacao/pt-br/lai-para-sic/ (one search hit, not fetched).",
+   "limits": "Landing only; no request data here."
+  },
+  {
+   "id": "br-cnv-final-report",
+   "cc": "BR",
+   "kind": "program",
+   "name": "Comissão Nacional da Verdade, Relatório Final (3 volumes, Dec 2014)",
+   "url": "http://cnv.memoriasreveladas.gov.br/images/pdf/relatorio/volume_1_digital.pdf",
+   "search": null,
+   "api": null,
+   "format": "pdf",
+   "terms": "n/a",
+   "key_required": false,
+   "programs": [
+    "Comissão Nacional da Verdade",
+    "dictatorship files"
+   ],
+   "probe": {
+    "date": "2026-10-24",
+    "status": null,
+    "result": "unreachable",
+    "sample": "http://cnv.memoriasreveladas.gov.br/ and the Volume 1 PDF path (the path was given by a USP repository citation found by search, not by a CNV page): transport errors, ledger rows 02:50 and 02:54 UTC"
+   },
+   "use": "None from this session. The host did not answer the spider; the URL is recorded for a later try, and a gov.br-hosted copy was not found (the gov.br CNV subject page was a 404).",
+   "limits": "Unreachable, not refused. Volume contents and page counts are unread; nothing in this file characterises the report."
+  },
+  {
+   "id": "cn-mfa-bureau-of-archives",
+   "cc": "CN",
+   "kind": "archive",
+   "name": "Ministry of Foreign Affairs of the P.R.C., Bureau of Archives (档案馆)",
+   "url": "https://www.mfa.gov.cn/eng/wjb/zzjg_663340/dag_665324/",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "n/a",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.mfa.gov.cn/wjb_673085/zzjg_673183/dag_674733/ (Chinese page, 200)"
+   },
+   "use": "Confirms who holds the diplomatic records; lists a telephone contact.",
+   "limits": "The page gives no online catalogue, no finding aid and no declassification listing. https://www.mfa.gov.cn/robots.txt returns a '系统维护' (system maintenance) HTML page with HTTP 200, i.e. there is no robots file to read."
+  },
+  {
+   "id": "int-wilson-digital-archive",
+   "cc": "CN",
+   "kind": "archive",
+   "name": "Wilson Center Digital Archive (International History Declassified), Chinese-sourced collections",
+   "url": "https://digitalarchive.wilsoncenter.org/",
+   "search": "https://digitalarchive.wilsoncenter.org/search?q={q}",
+   "api": null,
+   "format": "html",
+   "terms": "not read",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": null,
+    "result": "unreachable",
+    "sample": "https://digitalarchive.wilsoncenter.org/ and /robots.txt: transport error 'ProxyError: Unable to connect to proxy' (ledger rows 02:40, 02:44 and 02:49 UTC)"
+   },
+   "use": "Could not be probed. The parent site is reachable: https://www.wilsoncenter.org/program/history-and-public-policy-program answered 200 and its robots.txt answered (304, from an earlier fetch of the same file).",
+   "limits": "This is a refusal at the session's egress proxy, not a refusal by the Wilson Center; it is recorded as a null and not worked around. Whether the archive's robots.txt would admit the crawler is unknown. Until it is reachable, nothing in this registry supplies Chinese-origin primary documents."
+  },
+  {
+   "id": "cn-ogi-annual-report-format-2021",
+   "cc": "CN",
+   "kind": "disclosure-log",
+   "name": "OGI annual-report format (State Council General Office OGI Office, 国办公开办函〔2021〕30号) and an agency's 2024 annual report",
+   "url": "https://www.gov.cn/zhengce/content/2021-09/29/content_5639620.htm",
+   "search": null,
+   "api": null,
+   "format": "html+pdf",
+   "terms": "official publications; reuse terms not stated",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.spt.gov.cn/xxgk/zfxxgknb/2024/dwzfpcjgjqzfgzbmzssydwzfxxgkgzndbg/202501/P020250123393917367030.pdf (248 KB application/pdf)"
+   },
+   "use": "Every administrative organ publishes its own annual OGI report on its own site, each following this format (totals of applications received, granted, refused, plus reconsideration and litigation counts); these are the only 'disclosure statistics' China offers, one PDF per organ per year.",
+   "limits": "No consolidated national report was found (a search for the State Council General Office's own report returned only agency and local reports; the 'national' OGI platform https://www.gov.cn/zhengce/xxgk/ is a JavaScript search shell that prints '抱歉，没有找到相关结果' with no query run; https://www.gov.cn/zhengce/zhengceku/ answered 403; xxgk.www.gov.cn was refused at the proxy). The sample report was not parsed for numbers."
+  },
+  {
+   "id": "cn-12371-state-secrets-law-2024",
+   "cc": "CN",
+   "kind": "law",
+   "name": "中华人民共和国保守国家秘密法 (revised 27 Feb 2024, in force 1 May 2024), full text on 12371.cn",
+   "url": "https://www.12371.cn/2024/02/27/ARTI1709036758179382.shtml",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "Communist Party members' website reprint; robots.txt disallows only /download_busy/",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.12371.cn/2024/02/27/ARTI1709036758179382.shtml"
+   },
+   "use": "Art. 20 sets maximum secrecy periods; Art. 24 says a secret whose period has expired 'declassifies by itself' and requires annual review: the statutory basis for the correction above.",
+   "limits": "A reprint, not the official database: the National Laws and Regulations Database (flk.npc.gov.cn) answered 403 on the page and on /robots.txt (refusal, recorded). The statute describes the rule; it says nothing about what has in fact been released."
+  },
+  {
+   "id": "cn-cecc-ogi-2007",
+   "cc": "CN",
+   "kind": "law",
+   "name": "Regulations on Open Government Information, 2007 text (Yale China Law Center translation, hosted by the US Congressional-Executive Commission on China)",
+   "url": "https://www.cecc.gov/resources/legal-provisions/regulations-of-the-peoples-republic-of-china-on-open-government",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "US-government-hosted page; the translation is credited to Yale Law School's China Law Center",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.cecc.gov/resources/legal-provisions/regulations-of-the-peoples-republic-of-china-on-open-government"
+   },
+   "use": "The original regime (adopted 5 April 2007; in force 1 May 2008) with Chinese and English; lets the crawler date what the 2019 revision changed.",
+   "limits": "Superseded by the 2019 revision."
+  },
+  {
+   "id": "cn-chinalawtranslate-ogi-2019",
+   "cc": "CN",
+   "kind": "law",
+   "name": "Open Government Information Regulations of the P.R.C. (2019), China Law Translate (crowdsourced)",
+   "url": "https://www.chinalawtranslate.com/en/ogi2019/",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "crowdsourced translation project; reuse terms not read; robots.txt has per-bot content rules (the identified crawler was served)",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.chinalawtranslate.com/en/ogi2019/ -> redirected to /en/open-government-information-regulations-of-the-p-r-c-2019/"
+   },
+   "use": "English text for readers; Article 14 and Article 51 are in the first screens.",
+   "limits": "Not an official translation (the site describes itself as a crowdsourced project). Cite the Chinese text for anything that matters."
+  },
+  {
+   "id": "cn-flk-npc",
+   "cc": "CN",
+   "kind": "law",
+   "name": "国家法律法规数据库 (National Laws and Regulations Database), flk.npc.gov.cn",
+   "url": "https://flk.npc.gov.cn/",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "n/a",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 403,
+    "result": "refused",
+    "sample": "https://flk.npc.gov.cn/ (403) and https://flk.npc.gov.cn/robots.txt (403)"
+   },
+   "use": "None for the crawler.",
+   "limits": "Refusal recorded; not retried."
+  },
+  {
+   "id": "cn-gov-ogi-regulations-2019",
+   "cc": "CN",
+   "kind": "law",
+   "name": "中华人民共和国政府信息公开条例 (State Council Order No. 711, 15 Apr 2019, in force 15 May 2019)",
+   "url": "https://www.gov.cn/zhengce/content/2019-04/15/content_5382991.htm",
+   "search": null,
+   "api": null,
+   "format": "html",
+   "terms": "official State Council text; reuse terms not stated on the probed page",
+   "key_required": false,
+   "programs": [],
+   "probe": {
+    "date": "2026-10-24",
+    "status": 200,
+    "result": "ok",
+    "sample": "https://www.gov.cn/zhengce/content/2019-04/15/content_5382991.htm"
+   },
+   "use": "Official Chinese text. Art. 14: state secrets, information whose disclosure laws and regulations forbid, and information whose release could endanger national security, public safety, economic security or social stability are 'not to be disclosed'. Art. 51: complaint to the superior organ, administrative reconsideration or suit.",
+   "limits": "Chinese only on the official site. No intelligence-service schedule and no independent commissioner in the text. gov.cn robots.txt carries a list of Disallow lines for old '2016' site sections and 'Allow: /1'; the crawler fetched this page without a robots block."
+  }
+ ]
+}

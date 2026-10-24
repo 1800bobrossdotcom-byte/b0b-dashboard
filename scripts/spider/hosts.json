@@ -34,10 +34,14 @@
     "delay": 5.0
   },
   "www.cia.gov": {
-    "why": "The reading room is a JavaScript application: node/ and print/ document ids return the homepage to any plain HTTP client, ours included. That is a rendering limit, not a block, and no amount of header work changes it. Documents from here are attributed, not primary, until pulled from a mirror that serves HTML. Registered as a decoy title so those 200s are demoted to nulls instead of entering the ledger as sources.",
+    "why": "The reading room is a JavaScript application: node/ and print/ document ids return the homepage to any plain HTTP client, ours included. That is a rendering limit, not a block, and no amount of header work changes it. Documents from here are attributed, not primary, until pulled from a mirror that serves HTML. Registered as a decoy title so those 200s are demoted to nulls instead of entering the ledger as sources. Registered 24 Oct 2026 from the FOI source survey (research/sources/FOI-SOURCES.md). Reading-room PDF and document URLs now redirect to a site-wide maintenance page, HTTP 200, 508,740 B.",
     "delay": 8.0,
     "decoy_titles": [
-      "Freedom of Information Act Electronic Reading Room"
+      "Freedom of Information Act Electronic Reading Room",
+      "System Maintenance - CIA"
+    ],
+    "decoy_redirect_paths": [
+      "/system-maintenance"
     ]
   },
   "www.b0b.dev": {
@@ -103,5 +107,159 @@
       "Radware Page"
     ],
     "why": "The Bank of Israel's site answers this crawler with Radware's browser-verification page, title 'Radware Page', ~118 KB, HTTP 200, instead of the press releases. That is a refusal, not a document, and it is never solved. Registered so the challenge page is a null (seen 23 Oct 2026)."
+  },
+  "collections.archives.govt.nz": {
+    "why": "Registered 24 Oct 2026 from the FOI source survey (research/sources/FOI-SOURCES.md). Imperva challenge shell: HTTP 200, 212 B, a script tag pointing at _Incapsula_Resource. Recorded, never solved.",
+    "decoy_markers": [
+      "_Incapsula_Resource"
+    ]
+  },
+  "www.archives.govt.nz": {
+    "why": "Registered 24 Oct 2026 from the FOI source survey (research/sources/FOI-SOURCES.md). Imperva challenge shell: HTTP 200, 212 B, a script tag pointing at _Incapsula_Resource. Recorded, never solved.",
+    "decoy_markers": [
+      "_Incapsula_Resource"
+    ]
+  },
+  "www.gcsb.govt.nz": {
+    "why": "Registered 24 Oct 2026 from the FOI source survey (research/sources/FOI-SOURCES.md). Imperva challenge shell: HTTP 200, 212 B, a script tag pointing at _Incapsula_Resource. Recorded, never solved.",
+    "decoy_markers": [
+      "_Incapsula_Resource"
+    ]
+  },
+  "www.nzsis.govt.nz": {
+    "why": "Registered 24 Oct 2026 from the FOI source survey (research/sources/FOI-SOURCES.md). Imperva challenge shell: HTTP 200, 212 B, a script tag pointing at _Incapsula_Resource. Recorded, never solved.",
+    "decoy_markers": [
+      "_Incapsula_Resource"
+    ]
+  },
+  "natlib.govt.nz": {
+    "why": "Registered 24 Oct 2026 from the FOI source survey (research/sources/FOI-SOURCES.md). Imperva challenge shell: HTTP 200, 212 B, a script tag pointing at _Incapsula_Resource. Recorded, never solved.",
+    "decoy_markers": [
+      "_Incapsula_Resource"
+    ]
+  },
+  "www.pmc.gov.au": {
+    "why": "Registered 24 Oct 2026 from the FOI source survey (research/sources/FOI-SOURCES.md). Imperva challenge shell: HTTP 200, 212 B, a script tag pointing at _Incapsula_Resource. Recorded, never solved.",
+    "decoy_markers": [
+      "_Incapsula_Resource"
+    ]
+  },
+  "nla.gov.au": {
+    "why": "Registered 24 Oct 2026 from the FOI source survey (research/sources/FOI-SOURCES.md). Anubis proof-of-work challenge served with HTTP 200 for digitised objects. Never solved.",
+    "decoy_titles": [
+      "Making sure you're not a bot"
+    ]
+  },
+  "www.foia.gov": {
+    "why": "Registered 24 Oct 2026 from the FOI source survey (research/sources/FOI-SOURCES.md). The search page is a client-side shell over a keyed API; the page itself holds no results.",
+    "decoy_titles": [
+      "FOIA.gov - Freedom of Information Act: Search Government Websites"
+    ]
+  },
+  "www.osti.gov": {
+    "why": "Registered 24 Oct 2026 from the FOI source survey (research/sources/FOI-SOURCES.md). OpenNet is a JavaScript application; plain HTTP gets the \"must have javascript\" shell.",
+    "decoy_markers": [
+      "You must have javascript to run this site"
+    ]
+  },
+  "francearchives.gouv.fr": {
+    "why": "Registered 24 Oct 2026 from the FOI source survey (research/sources/FOI-SOURCES.md). Every page and file answers with a JS/cookie wall of ~225-355 B.",
+    "decoy_markers": [
+      "This website requires JS enabled and cookies"
+    ]
+  },
+  "www.vie-publique.fr": {
+    "why": "Registered 24 Oct 2026 from the FOI source survey (research/sources/FOI-SOURCES.md). PDF paths answer with the same JS/cookie wall as FranceArchives (267 B).",
+    "decoy_markers": [
+      "This website requires JS enabled and cookies"
+    ]
+  },
+  "www.uhk-bnd.de": {
+    "why": "Registered 24 Oct 2026 from the FOI source survey (research/sources/FOI-SOURCES.md). The BND historians' commission domain now serves a sports-betting site. Nothing from it is a source.",
+    "decoy_titles": [
+      "Sportwetten"
+    ]
+  },
+  "www.stasi-unterlagen-archiv.de": {
+    "why": "Registered 24 Oct 2026 from the FOI source survey (research/sources/FOI-SOURCES.md). This alias domain returns the archive homepage (235,394-235,395 B) for every path; the same paths on www.bundesarchiv.de are the real pages.",
+    "decoy_titles": [
+      "Stasi-Unterlagen-Archiv - Bundesarchiv"
+    ]
+  },
+  "digitaler-lesesaal.bundesarchiv.de": {
+    "why": "Registered 24 Oct 2026 from the FOI source survey (research/sources/FOI-SOURCES.md). A \"please wait\" interstitial, not the digitised reading room.",
+    "decoy_titles": [
+      "Bitte haben Sie einen Moment Geduld"
+    ]
+  },
+  "knesset.gov.il": {
+    "why": "Registered 24 Oct 2026 from the FOI source survey (research/sources/FOI-SOURCES.md). A geo-block served as an ordinary 200 page (\"temporarily inaccessible from your location\"), robots.txt included.",
+    "decoy_titles": [
+      "Unavailable"
+    ],
+    "decoy_markers": [
+      "inaccessible from your location"
+    ]
+  },
+  "www.ombudsman.europa.eu": {
+    "why": "Registered 24 Oct 2026 from the FOI source survey (research/sources/FOI-SOURCES.md). Decisions are rendered client-side; plain HTTP gets a \"Loading\" shell.",
+    "decoy_markers": [
+      "Loading&nbsp;<span class=\"d\">"
+    ]
+  },
+  "ec.europa.eu": {
+    "why": "Registered 24 Oct 2026 from the FOI source survey (research/sources/FOI-SOURCES.md). The Commission documents register is a script application; the served page carries no records.",
+    "decoy_titles": [
+      "Register of Commission Documents"
+    ]
+  },
+  "laws.e-gov.go.jp": {
+    "why": "Registered 24 Oct 2026 from the FOI source survey (research/sources/FOI-SOURCES.md). Outside /api/ every path is an 800 B JavaScript shell. The /api/2/ JSON is the working path and has no title, so it is not matched.",
+    "decoy_titles": [
+      "e-Gov法令検索",
+      "e-Gov 法令検索"
+    ]
+  },
+  "sian.an.gov.br": {
+    "why": "Registered 24 Oct 2026 from the FOI source survey (research/sources/FOI-SOURCES.md). F5-style human-verification page served with HTTP 200. Never solved.",
+    "decoy_markers": [
+      "Your support ID is"
+    ]
+  },
+  "consulta.an.gov.br": {
+    "why": "Registered 24 Oct 2026 from the FOI source survey (research/sources/FOI-SOURCES.md). F5-style human-verification page served with HTTP 200. Never solved.",
+    "decoy_markers": [
+      "Your support ID is"
+    ]
+  },
+  "buscalai.cgu.gov.br": {
+    "why": "Registered 24 Oct 2026 from the FOI source survey (research/sources/FOI-SOURCES.md). The same 2,844 B JavaScript shell for every path, robots.txt included.",
+    "decoy_titles": [
+      "Informa.BR"
+    ]
+  },
+  "falabr.cgu.gov.br": {
+    "why": "Registered 24 Oct 2026 from the FOI source survey (research/sources/FOI-SOURCES.md). The same 1,405 B JavaScript shell for every path, the \"open data\" tab included.",
+    "decoy_titles": [
+      "Fala.BR"
+    ]
+  },
+  "dss.cic.gov.in": {
+    "why": "Registered 24 Oct 2026 from the FOI source survey (research/sources/FOI-SOURCES.md). The CIC decision search is a React shell (2,127 B) for every path, robots.txt included.",
+    "decoy_markers": [
+      "content=\"CIC Application\""
+    ]
+  },
+  "www.mfa.gov.cn": {
+    "why": "Registered 24 Oct 2026 from the FOI source survey (research/sources/FOI-SOURCES.md). robots.txt redirects to a 54 KB maintenance page.",
+    "decoy_titles": [
+      "系统维护"
+    ]
+  },
+  "www.gov.cn": {
+    "why": "Registered 24 Oct 2026 from the FOI source survey (research/sources/FOI-SOURCES.md). The OGI search platform is a client-side shell that prints \"no results\" before any query.",
+    "decoy_titles": [
+      "政府信息公开平台_中国政府网"
+    ]
   }
 }
