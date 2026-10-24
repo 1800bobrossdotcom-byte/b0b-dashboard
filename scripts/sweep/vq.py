@@ -50,7 +50,9 @@ def text_of(rec):
         s = '\n'.join((p.extract_text() or '') for p in pypdf.PdfReader(path).pages)
         s = re.sub(r'-\n\s*', '', s)            # rejoin hyphenated line breaks
     else:
-        s = body.decode('utf-8', 'replace')
+        sys.path.insert(0, os.path.join(ROOT, 'scripts', 'spider'))
+        from spider import decode_body          # the page's declared charset, e.g. Shift_JIS
+        s = decode_body(body)
         s = re.sub(r'<(script|style)\b.*?</\1>', ' ', s, flags=re.S | re.I)
         s = re.sub(r'<[^>]+>', ' ', s)
         s = html.unescape(s)

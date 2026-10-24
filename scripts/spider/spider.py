@@ -241,11 +241,30 @@ def latest_by_url():
     return seen
 
 
+CHARSET_RE = re.compile(rb'charset=["\']?([A-Za-z0-9_.:-]+)', re.I)
+
+
+def decode_body(body):
+    """Bytes to text in the page's own encoding. UTF-8 first; otherwise the charset the
+    page declares (Japanese government pages are often Shift_JIS); latin-1 never fails."""
+    try:
+        return body.decode('utf-8')
+    except UnicodeDecodeError:
+        pass
+    m = CHARSET_RE.search(body[:4096])
+    if m:
+        try:
+            return body.decode(m.group(1).decode('ascii').lower().replace('shift_jis', 'cp932'))
+        except (LookupError, UnicodeDecodeError):
+            pass
+    return body.decode('utf-8', 'replace')
+
+
 def title_of(body, ctype):
     if 'html' not in (ctype or ''):
         return None
     try:
-        text = body[:200000].decode('utf-8', 'replace')
+        text = decode_body(body[:200000])
     except Exception:
         return None
     m = re.search(r'<title[^>]*>(.*?)</title>', text, re.S | re.I)
@@ -501,7 +520,7 @@ def cmd_text(args, _session):
     if 'pdf' in ctype or body[:5] == b'%PDF-':
         sys.exit('spider: %s is a PDF. Extract it locally with a PDF tool and read '
                  'the numbers yourself - never from a model summary.' % args.url)
-    s = body.decode('utf-8', 'replace')
+    s = decode_body(body)
     s = re.sub(r'<(script|style)\b.*?</\1>', ' ', s, flags=re.S | re.I)
     s = re.sub(r'<[^>]+>', ' ', s)
     sys.stdout.write(re.sub(r'[ \t]+', ' ', html.unescape(s)).strip() + '\n')
