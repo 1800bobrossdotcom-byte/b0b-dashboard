@@ -217,6 +217,21 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**DUPONT, TEFLON AND PFOA — researched 24 Oct 2026, HELD. `research/DUPONT-PFOA.md` (synthesis) + `DUPONT-PFOA-A-CORPORATE.md` + `DUPONT-PFOA-B-SCIENCE.md`; 263 quotes, all vq OK.** Author: *"Look into Dupont and Teflon poisoning and Teflon attaching to DNA and children being born with Teflon in their systems"*. Page had DuPont/Teflon/PFOA/PFAS 0.
+- **Naming error first:** Teflon is PTFE, the polymer. PFOA (C8) was the processing aid. Every blood and water measurement is of PFOA/PFAS, never PTFE.
+- **Documented:**
+  - the 1981 DuPont table of eight pregnant workers (normal/defect column, cord-blood C8), not reported to EPA until a plaintiffs' attorney sent it in 2001;
+  - the 2005 TSCA settlement, $10.25m + $6.25m, "neither admits nor denies";
+  - Leach and the C8 Panel's six probable links ("more likely than not", a settlement standard), with its nulls: **no probable link to birth defects**, miscarriage, preterm birth or low birth weight, ADHD;
+  - MDL $670.7m (2017); water systems $1.185bn; NJ $875m (Aug 2026);
+  - the federal Chemours decree, announced 24 June 2026, entry unconfirmed;
+  - Chemours's disclosed FDCA criminal inquiry, no charge.
+- **The 1981 defect count ("two of the seven") is attributed** to NY AG's 9 July 2026 complaint only. "3M placental-transfer finding" is unsupported (a rat-eye note, walked back).
+- **"Attaching to DNA": unsupported.** EPA: PFOA "lacks the ability to react with and modify DNA". It binds albumin. IARC 2023 Group 1 rests on animal evidence plus epigenetic/immunosuppression mechanisms in people; human cancer evidence is "limited".
+- **"Born with Teflon": documented for PFOA** (100% of Baltimore 2004–05 cord sera; placenta and milk); the name is wrong. US serum PFOA is ~73% lower since 1999–2000.
+- **EPA 4 ppt rule:** the 20 May 2026 proposals (exemption to 2031; rescind the other four PFAS) are not final as of 24 Oct.
+- **Recommended, his call:** a XXIII Test Case grading the three phrases.
+
 **THE PUBLIC VISITOR COUNT MOVES AGAIN — 23 Oct 2026, live.** Author: *"Seems to have stopped counting visitors ad page views"*.
 - **Page views had not stopped** (`b0b:views` 16,539 → 16,540 on a test load; the 23 Oct daily hash at 258 browser loads).
 - **"Visits" had stopped:** it was `b0b:visits`, the count of POSTs to `/api/gate`. The gate went off on 19 Sept, so the signal bar's "· 1,860 visits" and the masthead's "Visitors: 1,860" froze. This was flagged on 22 Oct as his call; his report made it.
