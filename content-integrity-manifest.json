@@ -1,14 +1,14 @@
 {
-  "generated": "2026-10-24T05:04:09.559Z",
+  "generated": "2026-10-24T06:32:22.138Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "506716d10ec03c1972d76cad50a48fe9410f15d96d83c674affe0488129093c8",
+  "fullFileHash": "fdded09090e83c52a02e7b9892250f90e72dfe8c4589c13ad78443be77ab98d0",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "b69aded39c477f3797c78febfe115530a7f523ad2151e8c251cd194416f2cdfc",
-      "length": 43063
+      "hash": "eb554b587f821684a013c14290f2eb05c24e940b131ed8bfab16b131473ed58f",
+      "length": 43698
     },
     {
       "id": "to-those-inside",
@@ -512,8 +512,8 @@
     },
     {
       "id": "vii-the-intelligence-arm-task-force-orange-isa",
-      "hash": "859e963a6abfd7ad77d30fbaa62099f65cd5ada5f0c9c746b77615a369cff155",
-      "length": 14620
+      "hash": "6e1f0c8e0166aedeee8f335463a7e639f187ce1045d2ed3c7ee0790c2618bc0f",
+      "length": 14722
     },
     {
       "id": "vii-the-chance-figure-manufactured-leaders-as",
@@ -1047,8 +1047,8 @@
     },
     {
       "id": "xvi-the-pattern-is-not-american-international",
-      "hash": "259255a10c64765cb700b66d1e8eaa00d24448ee2a7ab854da55fc82d1dc0bb9",
-      "length": 13051
+      "hash": "5e2ecb53b417a35bde0350372b36f34c6066d7c9089fb13db49cd3d751ab3267",
+      "length": 58533
     },
     {
       "id": "xvi-uap-at-nuclear-sites-the-one-branch-with-a",
@@ -6671,21 +6671,21 @@
     },
     {
       "index": 852,
-      "hash": "84b8bb8d14a892dbf7836e4734f63ffff86598e0cd4afded5364ddfd52517e51",
+      "hash": "ae925d8acc47429f20d5fa31dde2e9b93d460ac0256736f866b3ef4f2ecfcbab",
       "preview": "The FOIA pattern documented above uses U.S. programs because the U.S. has the mo...",
-      "length": 315
+      "length": 346
     },
     {
       "index": 853,
-      "hash": "e3ff1bd1036db29cdf5880f5beba619f6bbff7ec8120c5dd5a74142b03d623d3",
-      "preview": "The U.S. FOIA record is the best documented. It is not unique. Every major power...",
-      "length": 255
+      "hash": "19c6d69206f737c2f2c45042441817ced57602ad344d407dc052f79af3b430c1",
+      "preview": "The U.S. FOIA record is the best documented. It is not unique. Each entry below ...",
+      "length": 220
     },
     {
       "index": 854,
-      "hash": "79c71a7f883ee5253f18950c8c050f896219b09de3e30b51c56620317ca34910",
-      "preview": "THE INTERNATIONAL PATTERN: The concealment arithmetic is a structural feature of...",
-      "length": 758
+      "hash": "2da41689a65dedfb7f24b3c911359ca1e43bdb01147a7dce037aaca7a64e090e",
+      "preview": "THE INTERNATIONAL PATTERN: The multi-decade arithmetic derived from U.S. program...",
+      "length": 2515
     },
     {
       "index": 855,

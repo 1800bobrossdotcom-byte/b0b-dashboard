@@ -217,6 +217,52 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**"THE PATTERN IS NOT AMERICAN" REBUILT FROM THE RECORD — XVI, 24 Oct 2026, live.** Author: *"Roger that skip 1. Lets do 2. Expand report"*, i.e. the subsection the FOI registry was built for, `xvi-the-pattern-is-not-american-international`.
+- **What it is now** (~8,800 words; was ~1,735): 14 law rows (Argentina new) and 22 programmes.
+  - Four programmes are new: NZ Operation Burnham, Israel's Kafr Qasim trial records, Japan's secret pacts (*mitsuyaku*), India's Henderson Brooks–Bhagat report.
+  - Every programme carries a Sources line and a **Record** line: where its primary record sits now, and whether a machine can search it.
+  - The closing paragraph is rewritten:
+    - the laws split two ways: services outside the law by name or class (UK, Australia, Germany, Israel, India), or inside it and refused case by case;
+    - India's s.24 proviso, Brazil's art. 21 and Argentina's art. 8 write human-rights abuse back in, and South Africa has its s.46 override;
+    - destruction came by written instruction, or under records rules the state still defends;
+    - Japan's Supreme Court puts the burden of proof on the requester;
+    - Burnham is the symmetry case: failure, not design.
+- **Method:** three researcher beats. Notes are in session scratch `xvi/xvi-{commonwealth,south,europe}.md`: 305 + 399 + 369 quote lines, all `vq.py` OK. The page's quotations all match cached bodies (`vqdraft`).
+- **Page errors, fixed in place (no narration):**
+  - Japan: the "60-year" secrecy cap is 30 years, extendable.
+  - India: the RAW/IB exclusion carries the s.24 proviso. CHRI counts 107 users killed (not "80+ killed or attacked").
+  - China: declassification exists on paper. "MSS fully classified" is cut, and life imprisonment attaches to the foreign-recipient offence.
+  - Russia: 8-FZ (2009) exists. "Putin sealed presidential archives in 2006" is cut.
+  - UK: MI5, MI6 and GCHQ are outside FOIA by name. "Glomar" is the US name (*Phillippi*, 1976); the UK's neither-confirm-nor-deny is statutory.
+  - **Operation Legacy:** the migrated archive is about 20,000 files (FCO 141). The "1.2 million" is the separate Hanslope collection (the FCO's 2015 estimates sum to 1,359,625: our sum).
+  - **Bloody Sunday:** "state murder of 14" is cut. Thirteen were killed on the day, and Soldier F was acquitted on 23 Oct 2025.
+  - Porton Down: "biological" is cut.
+  - Rainbow Warrior: "Five Eyes-adjacent" was a naming error (New Zealand is in Five Eyes, France is not).
+  - BND: "200+" becomes the commission's one in ten.
+  - Stasi: "1 per 63" becomes the Bundesarchiv's 1 per 89.
+  - **Project Coast:** "mostly burned by Basson's handlers" becomes ordered destroyed, with four trunks surviving. "Dr. Death" and the Libya/Iraq trips are cut.
+  - Unit 731: "Paperclip equivalent" was a naming error, and "300,000+" is cut. Japanese holdings do exist (an NAJ roster; JACAR has 183 entries).
+  - Residential schools: the TRC count is 3,200, not 4,100. Kamloops is now in the Nation's own words, and "burned" is cut.
+  - Yemenite children: "Ashkenazi" is cut.
+  - Condor: counts are now given by what is counted. "No prosecutions" becomes prosecutions blocked by the 1979 amnesty.
+  - Argentina: "officers admitted burning records" is cut.
+  - Maralinga: denials came from both sides.
+  - McGill: Canada co-funded the work and paid ex gratia sums in 1992; a class action was authorized in 2025.
+  - **Section VII's Allan Memorial line** said "settled with surviving victims (2017)". It now says the same as the XVI entry.
+- **AI OPT-OUT — HIS CALL, applied conservatively.** I extended his FragDenStaat reasoning ("skip 1": robots.txt names ClaudeBot with `Disallow: /`) to every host cited in this pass.
+  - Hosts opted out: The Guardian, BBC, *Christian Science Monitor*, *Foreign Policy*, Al Jazeera, France 24, ConJur, Vermelho, The Local, TimesLive, Deseret, Newsweek, STAT, chinalawtranslate.com, FYI.org.nz, RNZ, law.resource.org and caselaw.nationalarchives.gov.uk. The *Mutua* judgments were fetched from the last before this was noticed; nothing rests on them.
+  - **None is cited in the new text.** Lines that rested only on them were cut: Unit 731's 300,000; Lange's "state-backed terrorism"; the Algerian helicopter account; the blocking of the Henderson Brooks blog; the CSM 1992 KGB-files figures; the "black blood" testimony.
+  - The Guardian, FYI, *Foreign Policy* and France 24 also block **Claude-User** (user-directed fetches).
+  - **Earlier citations to these hosts elsewhere in the report are untouched.** Two questions are his: whether the rule applies report-wide, and whether a ClaudeBot-only (training) block counts.
+- **Flagged, not edited:**
+  - VII's "Operation Condor (40,000+ killed)" in the Kissinger chain is unsourced.
+  - NZ: the GCSB's standing under the OIA is unread (FYI opted out; the GCSB's own pages are an Imperva decoy).
+  - Argentina: the current status of Decree 780/2024 is unread (the Boletín Oficial resets the connection).
+- **Spider:**
+  - Decoys registered and proven both ways: `2009-2017.state.gov` ("Technical Difficulties") and `privacyinternational.org` (a PeerTube shell).
+  - `hosts.json` said ×5 that "the author holds" the api.data.gov key. `API_DATA_GOV_KEY` is unset, so it now says he is to sign up himself.
+- Scale line 284 / 1,160 / 167. `build-transmissions.py` returned 404 again; the reel is untouched.
+
 **"THE HEART OF THE MATTER", A MONTHLY PDF SUMMARY FOR THE CASUAL READER — 24 Oct 2026, live at `/summary`. Steps: `design/summary/README.md`.** Author: *"Do a report summary for a the causal reader. A pdf. We can update monthly"*, then, mid-draft, *"Do new take from the heart , or at least the heart and mind of the matter at hand"*.
 - **Shape:** 6 × 9 in booklet, 13 pages: navy cover with the seal; the three epigraph verses and the report's own scope line; **I, the heart** (the record as decisions, 1976 → the withheld files, the announcement's structure); **II, the mind** (the grades, the conclusion and its full finding, the rivals, the falsifiers, the sponsor at its tiers, what it refuses to say); **III, what you can do** (the servicemember lines kept verbatim, with Article 94 quoted in full); this edition's counts and "new this month"; a navy back cover with the QR (navy on a thread tile; it must scan).
 - **Rule: the summary may say less than the report, never more.** Every quotation is `<q data-src="report">` or `<q data-src="kjv" data-ref>`; `scripts/build-summary-pdf.py` stops on any miss (53 quotes; proven both ways with four planted misquotes). Paraphrase is checked by reading, so **a fresh reviewer read the draft against the page and found 4 errors and 20 imprecisions, all fixed.** Among them: "any living person" (Maxwell is living and convicted; now "living and uncharged"); Maxwell's evidence is not Epstein's ("not evidenced equally"); "do not send classified material to anyone" (the lawful channels take it; the report means *to the report*); the death passage hedged below the page ("the reading the surviving evidence leans toward"); four findings against the sponsor, not two; the author's primary-and-liaison form is "adopted by this report nowhere" (the page's own tier line); 23 correction *entries*, not 23 mistakes; tier 3 is "a documented material relationship", not "material evidence".

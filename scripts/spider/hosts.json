@@ -263,33 +263,45 @@
     ]
   },
   "api.govinfo.gov": {
-    "why": "api.data.gov issues free keys to anyone who signs up; the author holds one (24 Oct 2026). The key is read from $API_DATA_GOV_KEY and sent as the X-Api-Key header, which api.data.gov accepts in place of the api_key query parameter, so it never appears in a URL or in the public ledger. Without the variable nothing is sent and the service's refusal is recorded as a null. DEMO_KEY (api.data.gov's public demo key, 30 requests an hour) works for a test.",
+    "why": "api.data.gov issues free keys to anyone who signs up; the author is to sign up for one himself (24 Oct 2026; not held at this writing). The key is read from $API_DATA_GOV_KEY and sent as the X-Api-Key header, which api.data.gov accepts in place of the api_key query parameter, so it never appears in a URL or in the public ledger. Without the variable nothing is sent and the service's refusal is recorded as a null. DEMO_KEY (api.data.gov's public demo key, 30 requests an hour) works for a test.",
     "api_key_env": "API_DATA_GOV_KEY",
     "api_key_header": "X-Api-Key",
     "delay": 1.0
   },
   "api.foia.gov": {
-    "why": "api.data.gov issues free keys to anyone who signs up; the author holds one (24 Oct 2026). The key is read from $API_DATA_GOV_KEY and sent as the X-Api-Key header, which api.data.gov accepts in place of the api_key query parameter, so it never appears in a URL or in the public ledger. Without the variable nothing is sent and the service's refusal is recorded as a null. DEMO_KEY (api.data.gov's public demo key, 30 requests an hour) works for a test.",
+    "why": "api.data.gov issues free keys to anyone who signs up; the author is to sign up for one himself (24 Oct 2026; not held at this writing). The key is read from $API_DATA_GOV_KEY and sent as the X-Api-Key header, which api.data.gov accepts in place of the api_key query parameter, so it never appears in a URL or in the public ledger. Without the variable nothing is sent and the service's refusal is recorded as a null. DEMO_KEY (api.data.gov's public demo key, 30 requests an hour) works for a test.",
     "api_key_env": "API_DATA_GOV_KEY",
     "api_key_header": "X-Api-Key",
     "delay": 1.0
   },
   "api.congress.gov": {
-    "why": "api.data.gov issues free keys to anyone who signs up; the author holds one (24 Oct 2026). The key is read from $API_DATA_GOV_KEY and sent as the X-Api-Key header, which api.data.gov accepts in place of the api_key query parameter, so it never appears in a URL or in the public ledger. Without the variable nothing is sent and the service's refusal is recorded as a null. DEMO_KEY (api.data.gov's public demo key, 30 requests an hour) works for a test.",
+    "why": "api.data.gov issues free keys to anyone who signs up; the author is to sign up for one himself (24 Oct 2026; not held at this writing). The key is read from $API_DATA_GOV_KEY and sent as the X-Api-Key header, which api.data.gov accepts in place of the api_key query parameter, so it never appears in a URL or in the public ledger. Without the variable nothing is sent and the service's refusal is recorded as a null. DEMO_KEY (api.data.gov's public demo key, 30 requests an hour) works for a test.",
     "api_key_env": "API_DATA_GOV_KEY",
     "api_key_header": "X-Api-Key",
     "delay": 1.0
   },
   "api.regulations.gov": {
-    "why": "api.data.gov issues free keys to anyone who signs up; the author holds one (24 Oct 2026). The key is read from $API_DATA_GOV_KEY and sent as the X-Api-Key header, which api.data.gov accepts in place of the api_key query parameter, so it never appears in a URL or in the public ledger. Without the variable nothing is sent and the service's refusal is recorded as a null. DEMO_KEY (api.data.gov's public demo key, 30 requests an hour) works for a test.",
+    "why": "api.data.gov issues free keys to anyone who signs up; the author is to sign up for one himself (24 Oct 2026; not held at this writing). The key is read from $API_DATA_GOV_KEY and sent as the X-Api-Key header, which api.data.gov accepts in place of the api_key query parameter, so it never appears in a URL or in the public ledger. Without the variable nothing is sent and the service's refusal is recorded as a null. DEMO_KEY (api.data.gov's public demo key, 30 requests an hour) works for a test.",
     "api_key_env": "API_DATA_GOV_KEY",
     "api_key_header": "X-Api-Key",
     "delay": 1.0
   },
   "api.open.fec.gov": {
-    "why": "api.data.gov issues free keys to anyone who signs up; the author holds one (24 Oct 2026). The key is read from $API_DATA_GOV_KEY and sent as the X-Api-Key header, which api.data.gov accepts in place of the api_key query parameter, so it never appears in a URL or in the public ledger. Without the variable nothing is sent and the service's refusal is recorded as a null. DEMO_KEY (api.data.gov's public demo key, 30 requests an hour) works for a test.",
+    "why": "api.data.gov issues free keys to anyone who signs up; the author is to sign up for one himself (24 Oct 2026; not held at this writing). The key is read from $API_DATA_GOV_KEY and sent as the X-Api-Key header, which api.data.gov accepts in place of the api_key query parameter, so it never appears in a URL or in the public ledger. Without the variable nothing is sent and the service's refusal is recorded as a null. DEMO_KEY (api.data.gov's public demo key, 30 requests an hour) works for a test.",
     "api_key_env": "API_DATA_GOV_KEY",
     "api_key_header": "X-Api-Key",
     "delay": 1.0
+  },
+  "2009-2017.state.gov": {
+    "decoy_titles": [
+      "Technical Difficulties"
+    ],
+    "why": "The 2009-2017 archive of the State Department site answers some document paths with a 'Technical Difficulties ... Exception: forbidden' page and HTTP 200, the same shape already registered for 2021-2025.state.gov. Registered so that page is a null (seen 24 Oct 2026, XVI international verification)."
+  },
+  "privacyinternational.org": {
+    "decoy_titles": [
+      "Privacy International's Media Service"
+    ],
+    "why": "Filing PDFs under /sites/default/files/ redirect to media.privacyinternational.org, a PeerTube JavaScript shell (about 835 characters of text) titled 'Privacy International's Media Service', with HTTP 200, so a missing document entered the ledger as a success. Registered so that shell is a null (seen 24 Oct 2026, XVI international verification)."
   }
 }
