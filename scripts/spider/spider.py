@@ -507,6 +507,118 @@ def cmd_text(args, _session):
     sys.stdout.write(re.sub(r'[ \t]+', ' ', html.unescape(s)).strip() + '\n')
 
 
+FOI_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'foi-sources.json')
+
+
+def foi_load():
+    if not os.path.exists(FOI_FILE):
+        sys.exit('spider: no FOI registry at %s' % os.path.relpath(FOI_FILE, ROOT))
+    with open(FOI_FILE, encoding='utf-8') as fh:
+        return json.load(fh)
+
+
+def foi_pick(reg, args):
+    out = []
+    for e in reg['sources']:
+        if args.cc and e.get('cc', '').upper() not in {c.upper() for c in args.cc}:
+            continue
+        if args.kind and e.get('kind') not in args.kind:
+            continue
+        if getattr(args, 'id', None) and e['id'] not in args.id:
+            continue
+        if getattr(args, 'program', None):
+            hay = ' '.join(e.get('programs') or []).lower()
+            if args.program.lower() not in hay:
+                continue
+        out.append(e)
+    return out
+
+
+def foi_result(rec):
+    """Collapse a ledger row to the registry's probe vocabulary."""
+    why = rec.get('reason') or ''
+    if rec.get('ok'):
+        return 'ok'
+    if why == 'robots_disallow':
+        return 'robots'
+    if why == 'decoy_200':
+        return 'decoy'
+    if why == 'http_404' or why == 'http_410':
+        return 'not_found'
+    if why.startswith('http_'):
+        return 'refused'
+    return why or 'error'
+
+
+def foi_fill(template, query):
+    return template.replace('{q}', urllib.parse.quote(query))
+
+
+def cmd_foi(args, session):
+    """The freedom-of-information source registry (foi-sources.json).
+
+    list   - what the crawler can read, by country and kind
+    probe  - fetch each source (and its sample record) through the ledger; --write stores the result
+    search - run one source's own search or API with a query
+    find   - run every searchable source (optionally one country) with the same query
+    Nothing here files a request, signs up for a key, or retries a refusal.
+    """
+    reg = foi_load()
+    rows = foi_pick(reg, args)
+    if args.mode == 'list':
+        for e in rows:
+            pr = e.get('probe') or {}
+            flag = 'S' if (e.get('search') or e.get('api')) else ' '
+            print('%-3s %-16s %s %-9s %s' % (e.get('cc', '?'), e.get('kind', '?'), flag,
+                                             pr.get('result', '-'), e['id']))
+            print('      %s' % e['url'])
+        by = {}
+        for e in rows:
+            by.setdefault(e.get('cc', '?'), 0)
+            by[e.get('cc', '?')] += 1
+        print('\n%d sources, %d jurisdictions (S = has a search or API template)' % (len(rows), len(by)))
+        return
+    if args.mode == 'probe':
+        stamp = now()[:10]
+        changed = 0
+        for e in rows:
+            targets = [e['url']] + [u for u in [(e.get('probe') or {}).get('sample')] if u and u != e['url']]
+            results = []
+            for u in targets:
+                rec = fetch(u, session, note='foi probe %s' % e['id'], quiet=True)
+                results.append((u, foi_result(rec), rec.get('status')))
+                print('%-9s %-5s %-28s %s' % (results[-1][1], rec.get('status') or '-', e['id'][:28], u))
+            if args.write:
+                last = results[-1]
+                e['probe'] = {'date': stamp, 'status': last[2], 'result': last[1],
+                              'sample': last[0] if len(results) > 1 else (e.get('probe') or {}).get('sample'),
+                              'landing': results[0][1]}
+                changed += 1
+        if args.write and changed:
+            with open(FOI_FILE, 'w', encoding='utf-8') as fh:
+                json.dump(reg, fh, indent=1, ensure_ascii=False)
+                fh.write('\n')
+            print('\nwrote %d probe results to %s' % (changed, os.path.relpath(FOI_FILE, ROOT)))
+        return
+    if not args.query:
+        sys.exit('spider: foi %s needs a query' % args.mode)
+    if args.mode == 'search' and len(rows) != 1:
+        sys.exit('spider: foi search takes exactly one --id')
+    hits = 0
+    for e in rows:
+        tmpl = e.get('search') or e.get('api')
+        if not tmpl or '{q}' not in tmpl:
+            if args.mode == 'search':
+                sys.exit('spider: %s has no search or API template' % e['id'])
+            continue
+        url = foi_fill(tmpl, args.query)
+        rec = fetch(url, session, note='foi %s %s: %s' % (args.mode, e['id'], args.query), quiet=True)
+        res = foi_result(rec)
+        hits += res == 'ok'
+        print('%-9s %-5s %-28s %s' % (res, rec.get('status') or '-', e['id'][:28], url))
+    print('\n%d answered. Read one with: spider.py text "<url>"' % hits)
+
+
 def cmd_fetch(args, session):
     for url in args.urls:
         fetch(url, session, note=args.note)
@@ -542,6 +654,16 @@ def main():
     t = sub.add_parser('text', help='cached bytes to text on stdout')
     t.add_argument('url')
     t.set_defaults(fn=cmd_text)
+
+    g = sub.add_parser('foi', help='freedom-of-information source registry: list, probe, search, find')
+    g.add_argument('mode', choices=['list', 'probe', 'search', 'find'])
+    g.add_argument('query', nargs='?')
+    g.add_argument('--cc', action='append', help='country code, repeatable (GB, US, ...)')
+    g.add_argument('--kind', action='append', help='law, portal, disclosure-log, appeals, civil-log, archive, archive-api, program')
+    g.add_argument('--id', action='append')
+    g.add_argument('--program', help='only sources holding a named programme (substring)')
+    g.add_argument('--write', action='store_true', help='probe: store results in foi-sources.json')
+    g.set_defaults(fn=cmd_foi)
 
     args = ap.parse_args()
     os.makedirs(CACHE_DIR, exist_ok=True)
