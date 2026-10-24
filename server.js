@@ -466,14 +466,22 @@ const REDIRECTS = {
   '/about':             '/start#method',   // folded into the briefing, 21 Oct 2026
 };
 
+// Temporary (302) redirects: the target changes over time, so no client may cache the hop.
+// /summary is the casual reader's summary, one PDF a month (scripts/build-summary-pdf.py writes
+// public/b0b-dev-summary.pdf as the latest and keeps every edition under public/summaries/).
+const MOVING = {
+  '/summary': '/b0b-dev-summary.pdf',
+};
+
 // Serve static assets (js, css, manifests, icons, i18n) for authenticated users
 app.use((req, res, next) => {
   if (!canView(req)) return next();
   // only serve known static extensions
-  if (/\.(js|css|json|png|svg|ico|jpg|jpeg|webp|mp3|mp4|webm|woff2?|kml|zip)$/i.test(req.path)) {
+  if (/\.(js|css|json|png|svg|ico|jpg|jpeg|webp|mp3|mp4|webm|woff2?|kml|zip|pdf)$/i.test(req.path)) {
     // KML is set explicitly rather than left to the mime table, so the Google
     // Earth export downloads as Earth data instead of as a generic XML blob.
     // ZIP is here for one file: /stickers/b0b-dev-stickers.zip, the print bundle.
+    // PDF is the monthly summary (public/b0b-dev-summary.pdf and public/summaries/).
     const opts = {
       maxAge: '1h',
       setHeaders: (res, filePath) => {
@@ -1086,6 +1094,7 @@ app.get('*', (req, res) => {
   // humans land on the canonical URL before they ever see the gate.
   const target = REDIRECTS[req.path];
   if (target) return res.redirect(301, target);
+  if (MOVING[req.path]) return res.redirect(302, MOVING[req.path]);
 
   // A crawler gets the real page - see the crawler-access note above. Unknown
   // paths get a genuine 404 rather than the pixel page: a catch-all 200 turns

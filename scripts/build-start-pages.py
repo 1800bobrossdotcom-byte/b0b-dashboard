@@ -174,7 +174,7 @@ footer{max-width:72ch;margin:56px auto 0;font:13px/1.6 var(--mono);color:var(--d
 '''
 
 NAV = '''<div class="top"><div class="nav">
-  <a href="/report">&larr; THE REPORT</a><a href="/start">BRIEFING</a><a href="/retractions">CORRECTIONS</a>
+  <a href="/report">&larr; THE REPORT</a><a href="/start">BRIEFING</a><a href="/summary">SUMMARY (PDF)</a><a href="/retractions">CORRECTIONS</a>
   <a href="/map">OSINT MAP</a><a href="/map/list">MAP AS TEXT</a><a href="/home">FILMS</a><a href="/stickers">STICKERS</a><a href="/announcement">ANNOUNCEMENT</a><a href="/stats">STATS</a>
 </div></div>'''
 
@@ -313,6 +313,7 @@ def build_start(n_markers, n_edges):
 <p>The website is the operational interface. The dossiers are research outputs and artifacts at once. The jacket is the organisation made physical; the insignia is its identity; the motto, its framework.</p>
 <div class="dl two">
   <a href="/report"><b>The report</b><span>The dossier: twenty-five sections and a researcher&rsquo;s guide, every claim tiered and sourced.</span></a>
+  <a href="/summary"><b>The summary</b><span>The report for the casual reader: what happened, how sure it is, and what you can do. A new edition each month, as a PDF.</span></a>
   <a href="/map"><b>The map</b><span>%s sites. Every line between them carries the tier of what the record shows.</span></a>
   <a href="/home"><b>The films</b><span>Endgame, The Epstein&ndash;Maxwell Record, Continuity and the intro film, with the author&rsquo;s transmissions.</span></a>
   <a href="/announcement"><b>The announcement</b><span>Spoken word over a beat, made to be played outdoors.</span></a>

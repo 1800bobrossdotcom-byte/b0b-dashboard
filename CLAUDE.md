@@ -228,8 +228,11 @@ than once.
   - CADA open data, SHD and the AN nuclear-test inquiry (France);
   - Cellar SPARQL and EP open data (EU);
   - NARA JFK, the NSArchive and archive.org (US).
-- **Opted out, his call:** FragDenStaat's robots names ClaudeBot/GPTBot (`Disallow: /`). It was queried on 24 Oct before that was noticed, and is now `optout` and skipped unless `--include-optout`. LawLibrary ZA declares `ai-input=no`.
-- **Keys:** FOIA.gov and govinfo need an api.data.gov key; not registered, his call.
+- **Opted out, and he has decided it stays out:** FragDenStaat's robots names ClaudeBot/GPTBot (`Disallow: /`). It was queried on 24 Oct before that was noticed, and is now `optout` and skipped unless `--include-optout`. Asked whether to write to them for permission, he answered *"Roger that skip 1"*: no request, no use. LawLibrary ZA declares `ai-input=no`.
+- **Keys: wired, not yet held** (`db62269`). His *"Lets do 2"*: govinfo, FOIA.gov, Congress.gov, Regulations.gov and OpenFEC (`hosts.json` `api_key_env`) take one api.data.gov key from the environment variable **`API_DATA_GOV_KEY`**, sent as the `X-Api-Key` header. The ledger records only `auth: "X-Api-Key header from $API_DATA_GOV_KEY"`, or `none (… unset)`.
+  - **The spider refuses any URL carrying `api_key=`, `apikey=`, `access_token=` or `token=`** (DEMO_KEY excepted), because the ledger and the repo are public. `foi search/find` skip key-gated sources while the variable is unset.
+  - **He signs up himself** at api.data.gov/signup: the form has a reCAPTCHA, which is not solved for anyone. The key then goes into the cloud environment's settings (environment variable or Network secret), **never into the chat, the repo or a URL**. A new session picks it up.
+  - Until then the shared `DEMO_KEY` answers govinfo with 429 (one rate limit per IP).
 - **Spider fixes:**
   - `decode_body()` reads the declared charset (Shift_JIS pages were mojibake; `vq.py` shares it);
   - `decoy_match()` gained `decoy_redirect_paths`;

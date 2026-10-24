@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Heart of the Matter · b0b.dev · {{LABEL}}</title>
+<style>
+@font-face { font-family: "Plex Serif"; src: url("{{FONTS}}/ibm-plex-serif-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "Plex Serif"; src: url("{{FONTS}}/ibm-plex-serif-latin-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; }
+@font-face { font-family: "Plex Serif"; src: url("{{FONTS}}/ibm-plex-serif-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-style: normal; }
+@font-face { font-family: "Plex Mono"; src: url("{{FONTS}}/ibm-plex-mono-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+@font-face { font-family: "Plex Mono"; src: url("{{FONTS}}/ibm-plex-mono-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+@font-face { font-family: "Plex Mono"; src: url("{{FONTS}}/ibm-plex-mono-latin-600-normal.woff2") format("woff2"); font-weight: 600; }
+
+:root {
+  --navy: #131c32;      /* the patch's own field, read from the seal art */
+  --thread: #e2e8ec;    /* the patch's thread */
+  --ink: #1b2029;
+  --ink-soft: #4d5567;
+  --rule: #c9ced8;
+  --wash: #eef1f5;
+  --serif: "Plex Serif", "DejaVu Serif", Georgia, serif;   /* DejaVu carries the Greek */
+  --mono: "Plex Mono", "DejaVu Sans Mono", monospace;
+}
+/* A 6 x 9 in booklet: a 60-character line in print, and a page a phone can show at a readable size. */
+@page {
+  size: 6in 9in;
+  margin: 0.68in 0.7in 0.84in 0.7in;
+  @bottom-left { content: "b0b.dev \00B7  The Heart of the Matter \00B7  {{LABEL}}"; font-family: "Plex Mono", monospace;
+                 font-size: 6.2pt; letter-spacing: 0.06em; color: #6b7385; vertical-align: top; padding-top: 0.24in; }
+  @bottom-right { content: counter(page); font-family: "Plex Mono", monospace; font-size: 7pt; color: #6b7385;
+                  vertical-align: top; padding-top: 0.24in; }
+}
+@page :first { margin: 0; @bottom-left { content: none; } @bottom-right { content: none; } }
+@page back { margin: 0; @bottom-left { content: none; } @bottom-right { content: none; } }
+html, body { margin: 0; padding: 0; background: #fff; }
+body { font-family: var(--serif); color: var(--ink); font-size: 10.2pt; line-height: 1.48;
+       font-kerning: normal; hyphens: manual; }
+
+/* ---------- cover: the first page, full bleed ---------- */
+.cover { width: 6in; height: 9in; background: var(--navy); color: var(--thread); position: relative; overflow: hidden;
+         box-sizing: border-box; padding: 0.72in 0.62in 0.58in; display: flex; flex-direction: column; break-after: page; }
+.cover .kicker { font-family: var(--mono); font-size: 7.2pt; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.85; }
+.cover h1 { font-family: var(--serif); font-weight: 400; font-size: 34pt; line-height: 1.04; margin: 0.36in 0 0.12in;
+            letter-spacing: -0.01em; }
+.cover .sub { font-size: 11.5pt; font-style: italic; opacity: 0.9; margin: 0; }
+.cover .seal { width: 2.55in; height: 2.55in; margin: 0.5in auto 0; display: block; }
+.cover .foot { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; gap: 0.2in;
+               font-family: var(--mono); font-size: 6.8pt; letter-spacing: 0.12em; text-transform: uppercase; }
+.cover .foot .line { font-family: var(--serif); font-size: 10.5pt; letter-spacing: 0; text-transform: none; font-style: italic; }
+.cover .rule { height: 1px; background: var(--thread); opacity: 0.35; margin: 0 0 0.16in; }
+
+/* ---------- body ---------- */
+.part { break-before: page; }
+.part-head { font-family: var(--mono); font-size: 7.2pt; letter-spacing: 0.2em; text-transform: uppercase;
+             color: var(--navy); border-top: 1.6pt solid var(--navy); padding-top: 5pt; margin: 0 0 3pt; }
+h2 { font-family: var(--serif); font-weight: 400; font-size: 19pt; line-height: 1.14; color: var(--navy);
+     margin: 0 0 11pt; letter-spacing: -0.005em; text-wrap: balance; break-after: avoid; }
+h3 { font-family: var(--mono); font-weight: 600; font-size: 7.4pt; letter-spacing: 0.14em; text-transform: uppercase;
+     color: var(--navy); margin: 15pt 0 4pt; break-after: avoid; }
+p { margin: 0 0 7pt; text-wrap: pretty; widows: 2; orphans: 2; }
+.lede { font-size: 11pt; line-height: 1.46; }
+.refrain { font-size: 12.4pt; font-style: italic; line-height: 1.32; color: var(--navy); margin: 10pt 0;
+           border-left: 1.6pt solid var(--navy); padding-left: 10pt; break-inside: avoid; }
+blockquote { margin: 8pt 0 10pt; padding: 0 0 0 11pt; border-left: 1.2pt solid var(--rule); font-style: italic;
+             font-size: 9.8pt; break-inside: avoid; }
+blockquote .ref { display: block; font-style: normal; font-family: var(--mono); font-size: 6.8pt; letter-spacing: 0.08em;
+                  color: var(--ink-soft); margin-top: 3pt; }
+q { quotes: "\201C" "\201D" "\2018" "\2019"; }
+.grades { width: 100%; border-collapse: collapse; margin: 4pt 0 9pt; break-inside: avoid; font-size: 9.6pt; }
+.grades td { padding: 4pt 6pt 4pt 0; vertical-align: top; border-top: 0.6pt solid var(--rule); line-height: 1.4; }
+.grades td:first-child { font-family: var(--mono); font-size: 6.9pt; letter-spacing: 0.08em; text-transform: uppercase;
+                         color: var(--navy); white-space: nowrap; width: 1.02in; padding-top: 5.5pt; }
+.grades tr:last-child td { border-bottom: 0.6pt solid var(--rule); }
+ul.plain { list-style: none; margin: 3pt 0 9pt; padding: 0; }
+ul.plain li { position: relative; padding-left: 12pt; margin: 0 0 5pt; break-inside: avoid; }
+ul.plain li::before { content: ""; position: absolute; left: 0; top: 0.66em; width: 5pt; height: 1pt; background: var(--navy); }
+.rival { margin: 0 0 6pt; break-inside: avoid; }
+.rival b { font-family: var(--mono); font-weight: 600; font-size: 7.2pt; letter-spacing: 0.08em; text-transform: uppercase;
+           color: var(--navy); margin-right: 3pt; }
+.box { background: var(--wash); padding: 9pt 10pt 3pt; margin: 9pt 0 10pt; break-inside: avoid; }
+.box h3 { margin-top: 0; }
+.small { font-size: 8.6pt; color: var(--ink-soft); }
+.mono { font-family: var(--mono); font-size: 8pt; }
+a { color: var(--navy); text-decoration: none; border-bottom: 0.5pt solid var(--rule); }
+.greek { font-family: "DejaVu Serif", serif; font-style: normal; font-size: 0.94em; }
+.contents { margin: 12pt 0 0; padding: 0; list-style: none; font-family: var(--mono); font-size: 7.6pt; letter-spacing: 0.05em; }
+.contents li { display: flex; justify-content: space-between; gap: 10pt; border-top: 0.6pt solid var(--rule); padding: 4pt 0; }
+.contents li span:last-child { color: var(--ink-soft); text-align: right; }
+.contents li:last-child { border-bottom: 0.6pt solid var(--rule); }
+.epigraph { margin: 0.12in 0 0.26in; }
+.epigraph .label { font-family: var(--mono); font-size: 7pt; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 9pt; }
+.epigraph blockquote { border-left: 0; padding-left: 0; font-size: 11pt; margin: 0 0 10pt; }
+.figures { display: grid; grid-template-columns: repeat(3, 1fr); margin: 6pt 0 10pt; break-inside: avoid;
+           border-top: 0.6pt solid var(--rule); border-bottom: 0.6pt solid var(--rule); }
+.figures div { padding: 6pt 6pt 5pt 0; }
+.figures .n { font-size: 15pt; color: var(--navy); font-variant-numeric: lining-nums tabular-nums; line-height: 1.1; }
+.figures .l { font-family: var(--mono); font-size: 6.4pt; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+/* ---------- back cover: the last page, full bleed ---------- */
+.backcover { page: back; break-before: page; width: 6in; height: 9in; background: var(--navy); color: var(--thread);
+             box-sizing: border-box; padding: 0.72in 0.62in 0.58in; display: flex; flex-direction: column; overflow: hidden; }
+.backcover .kicker { font-family: var(--mono); font-size: 7.2pt; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.85; }
+.backcover .tile { width: 1.9in; height: 1.9in; margin: 0.62in 0 0.2in; background: var(--thread); }
+.backcover .tile img { width: 100%; height: 100%; display: block; }
+.backcover .addr { font-family: var(--mono); font-size: 12pt; letter-spacing: 0.04em; margin: 0 0 0.3in; }
+.backcover ul { list-style: none; margin: 0; padding: 0; font-family: var(--mono); font-size: 8pt; letter-spacing: 0.04em; }
+.backcover li { display: flex; gap: 10pt; padding: 4.5pt 0; border-top: 0.6pt solid rgba(226, 232, 236, 0.28); }
+.backcover li:last-child { border-bottom: 0.6pt solid rgba(226, 232, 236, 0.28); }
+.backcover li span:first-child { width: 1.7in; flex: none; }
+.backcover a { color: var(--thread); border-bottom: 0; }
+.backcover li span:last-child { opacity: 0.75; }
+.backcover .colophon { margin-top: auto; font-size: 7.4pt; line-height: 1.5; opacity: 0.8; }
+</style>
+</head>
+<body>
+
+<section class="cover">
+  <div class="kicker">b0b.dev &middot; Project Anglerfish</div>
+  <h1>The Heart<br>of the Matter</h1>
+  <p class="sub">The report, for the casual reader</p>
+  <img class="seal" src="{{SEAL}}" alt="The b0b.dev seal, digitised from the jacket's patch">
+  <div class="foot">
+    <div>
+      <div class="rule"></div>
+      <div class="line">Don&rsquo;t trust b0b.dev. Examine the evidence.</div>
+    </div>
+    <div style="text-align:right;white-space:nowrap">Edition {{NUMBER}}<br>{{LABEL}}</div>
+  </div>
+</section>
+
+<main>
+
+<section class="part">
+  <div class="part-head">Before you begin</div>
+  <div class="epigraph">
+    <div class="label">The report opens with three verses</div>
+    <blockquote><q data-src="kjv" data-ref="John 12:43">For they loved the praise of men more than the praise of God.</q><span class="ref">John 12:43</span></blockquote>
+    <blockquote><q data-src="kjv" data-ref="John 19:30">It is finished</q> <span class="greek">τετέλεσται</span><span class="ref">John 19:30</span></blockquote>
+    <blockquote><q data-src="kjv" data-ref="Revelation 4:8">Holy, holy, holy, LORD God Almighty, which was, and is, and is to come.</q><span class="ref">Revelation 4:8</span></blockquote>
+  </div>
+  <p class="lede">This is a short guide to a long document: the open-source report at <a href="https://www.b0b.dev/report">b0b.dev/report</a>, {{SECTIONS}} sections deep. It keeps to what the report says and how sure the report is of it. Where the two ever differ, the report is the record.</p>
+  <ol class="contents">
+    <li><span>I. The heart of it</span><span>what happened, and what it asks</span></li>
+    <li><span>II. The mind of it</span><span>how it knows, and how sure it is</span></li>
+    <li><span>III. What you can do</span><span>one line, one person</span></li>
+    <li><span>This edition</span><span>{{LABEL}}</span></li>
+  </ol>
+</section>
+
+<section class="part">
+  <div class="part-head">I &middot; The heart of it</div>
+  <h2>Written down. Filed. And nothing changed.</h2>
+
+  <p class="lede">In 1976 a young man applied to the Wall Street firm Bear Stearns, and the firm had his background checked. On his application he claimed a lectureship at Berkeley. The investigators found no record of it. The firm read the finding, kept him, and in 1981 made him a limited partner.</p>
+  <p>His name was Jeffrey Epstein. That first small entry has the shape of everything after it, in the report&rsquo;s own words: the discovery was <q data-src="report">commissioned, written down, filed, and did not change the decision</q>.</p>
+
+  <p>On 29 August 1996 a woman reported Epstein and Ghislaine Maxwell to the New York police. She was referred to the FBI, which did not act.</p>
+
+  <p>In 2007 federal prosecutors in Florida agreed not to prosecute him, in a deal that also gave immunity to co-conspirators the government had not named. The Justice Department&rsquo;s own review later called the decision <q data-src="report">poor judgment</q>. He pleaded guilty to state charges and served thirteen months in a county jail, on work release.</p>
+
+  <p>For the next ten years he was a registered sex offender: a fact of public record, every single day. And <q data-src="report">heads of state, Nobel laureates, serving cabinet officers, university presidents and the largest banks in the country kept the relationship open rather than closing it</q>. JPMorgan banked him for roughly fifteen years.</p>
+
+  <p>In July 2019 he was charged with sex trafficking of minors. On the morning of 10 August he was found hanged in federal custody in New York, and the charge was never tested. The city&rsquo;s medical examiner ruled it suicide. The pathologist retained for the family, who observed the autopsy, called the fracture pattern <q data-src="report">extremely unusual in suicidal hangings</q>; the examining medical examiner disagreed. The Justice Department&rsquo;s inspector general documented what failed around him: a written directive that he must have a cellmate, broken when the cellmate was transferred and never replaced; no rounds after about 10:40 p.m.; more than seventy-five falsified round entries. Of those failures the report says: <q data-src="report">Each has an innocent account. The simultaneity does not.</q> It holds that reading open, and marks it unproven.</p>
+
+  <p>In December 2021 Ghislaine Maxwell was convicted of sex trafficking a minor and sentenced to twenty years. Her appeals are exhausted. In February 2026, deposed by Congress from prison, she <q data-src="report">invoked the Fifth Amendment more than a dozen times and answered nothing</q>. The same day her lawyer said she <q data-src="report">is prepared to speak fully and honestly if granted clemency by President Trump</q>.</p>
+
+  <p>And the record: some 200,000 pages are still withheld or redacted, and the court-appointed special master&rsquo;s reports on his estate are sealed. New Mexico says federal prosecutors asked it to stand down in July 2019; it handed over its entire file, and its ten later requests were ignored or denied.</p>
+
+  <div class="refrain">Every one of those decisions had a person behind it. A signature. A desk.</div>
+
+  <p>The report is, before anything else, a record of those decisions: who knew what, when, and what they did with it. Two thousand years ago it was written of men in high places who believed, and would not say so:</p>
+  <blockquote><q data-src="kjv" data-ref="John 12:42-43">Nevertheless among the chief rulers also many believed on him; but because of the Pharisees they did not confess him, lest they should be put out of the synagogue: For they loved the praise of men more than the praise of God.</q><span class="ref">John 12:42&ndash;43</span></blockquote>
+  <p>The report opens on the second of those verses.</p>
+
+  <h3>The people who were harmed</h3>
+  <p>The trafficking is not a theory. It was proved in court. This summary names none of the people who were harmed. They are the reason the record matters.</p>
+
+  <h3>Why the record is dark, and why it is lit</h3>
+  <p>The report&rsquo;s designation is Project Anglerfish. The anglerfish lives where no sunlight reaches; in water that deep there is nothing to see by, so the fish carries its own light. In the report&rsquo;s words: <q data-src="report">The record it works from is deliberately dark</q>. <q data-src="report">You cannot gather anyone in that dark by pointing at it. You have to put a light into it. The document is the lit organ, and what it is fishing for is good people who will act on what it shows.</q></p>
+</section>
+
+<section class="part">
+  <div class="part-head">II &middot; The mind of it</div>
+  <h2>Every claim carries its grade.</h2>
+
+  <p class="lede">A record this serious can be ruined by one overstatement, so the report grades everything it says:</p>
+  <table class="grades">
+    <tr><td>Documented</td><td>On the record: a court ruling, an official report, a filing, a released document.</td></tr>
+    <tr><td>Attributed</td><td>A claim, with the person or outlet that makes it named.</td></tr>
+    <tr><td>Labeled</td><td>A pattern or a hypothesis, marked as one and not asserted as fact.</td></tr>
+    <tr><td>Contested</td><td>The record argues with itself, and both sides are printed.</td></tr>
+    <tr><td>Unsupported</td><td>No support found. The passage is kept and marked, not quietly deleted.</td></tr>
+  </table>
+  <p>The test it sets itself: <q data-src="report">A reader who strips out everything but the documented layer should still be left with a usable document</q>.</p>
+
+  <h3>What it concludes, and how sure it is</h3>
+  <p>On one question the report commits. Its conclusion is that Epstein and Maxwell <q data-src="report">functioned as deniable assets - an intelligence-useful role under civilian cover, structured so a sponsor - one service or several - could disavow it</q>.</p>
+  <p>That is a judgment, not a document, and the report says so. It rests on what is on the record: credentials a firm checked, found false and kept anyway; a fortune whose two documented clients, Leslie Wexner and Leon Black, paid on a scale nobody has explained; a surveillance company financed through a vehicle whose ownership Epstein concealed; immunity for co-conspirators the government had not named; and a decade of elite access after a sex-offence conviction. A 2021 law-firm review found Black&rsquo;s fees, about $158&ndash;170 million, were for legitimate services; what the report says nobody has explained is their scale. And the conclusion does not travel to anyone else: <q data-src="report">no third party acquires a tier by having been in the room</q>.</p>
+  <p>The intelligence services&rsquo; own files, which could settle it, are withheld from everyone. The report counts that silence as nothing: <q data-src="report">neither as an acquittal nor as a confirmation</q>.</p>
+
+  <h3>What it scores against itself</h3>
+  <p>The conclusion is set beside the other explanations for the same record:</p>
+  <div class="rival"><b>Money and lawyers.</b> A rich defendant gets a lenient deal; a bank keeps a lucrative client. The Justice Department&rsquo;s own finding of <q data-src="report">poor judgment</q> sits on this side.</div>
+  <div class="rival"><b>Many protections.</b> Money, connections and institutions protecting themselves, with an intelligence service perhaps using him as a source. The report calls this <q data-src="report">the rival the conclusion has the most trouble excluding</q>.</div>
+  <div class="rival"><b>Looking hard.</b> A large document built to find a pattern will find one. The answer is to print what weighs against it.</div>
+  <p>What would lower the conclusion: the 2007 immunity traced to ordinary negotiation in the prosecutors&rsquo; own files from the time; an explanation of Black&rsquo;s payments that accounts for their scale; or the service files released, complete, showing no relationship. What would raise it: <q data-src="report">It rises only on a document - a tasking, a payment, an instruction - and never on accumulation.</q></p>
+
+  <h3>The sponsor question</h3>
+  <p>The report names a sponsor, one tier below its conclusion: <q data-src="report">The report&rsquo;s labeled hypothesis for a sponsor is Mossad. It is a hypothesis and not a finding</q>. In the author&rsquo;s fuller form, Mossad was the directing service, with the CIA and the British services witting through their standing liaison relationships rather than taking part. It is argued from the documented liaison structure and the Maxwell lineage, not from Epstein&rsquo;s own correspondence, and it is printed with two of the report&rsquo;s own findings against it: the Israeli-linked pieces of the record look like <q data-src="report">parallel elements sharing Epstein as their hub</q> rather than one network, and the often-cited Unit 8200 detail carries almost no signal.</p>
+  <p>And there is a line it will not cross: it does not claim either of them was run, with a handler and taskings: <q data-src="report">functioning as and being run by are different sentences, and only the first is carried here</q>.</p>
+
+  <h3>What it refuses to say</h3>
+  <ul class="plain">
+    <li>That secrecy proves anything. A silence that was always going to happen weighs nothing, in either direction.</li>
+    <li>That things which happened at the same time are connected. <q data-src="report">a shared timeline is not a chain</q>.</li>
+    <li>That any living person is a proven criminal or intelligence asset. It <q data-src="report">separates documented contact from operational tie throughout</q>.</li>
+    <li>That it gets everything right. Its mistakes are listed in public, {{CORRECTIONS}} of them so far, beside the claims it tested and threw out: that Epstein signed for the move of a CIA airline to Ohio, for one. The CIA had sold that airline in 1973.</li>
+  </ul>
+
+  <h3>The same shape, beyond one case</h3>
+  <p>The other sections hold the same discipline across intelligence budgets, surveillance contracts, wars, underground infrastructure and the declassified record. One sentence from them carries the argument about who gets mercy: <q data-src="report">The same Department of Justice that, in the non-prosecution agreement of 2007 documented in Section II, declined federal charges against Epstein and immunised co-conspirators it had not named, brought thirteen felony counts against a 26-year-old for downloading journal articles.</q> His name was Aaron Swartz.</p>
+</section>
+
+<section class="part">
+  <div class="part-head">III &middot; What you can do</div>
+  <h2>Check one line. Tell one person.</h2>
+  <ul class="plain">
+    <li><b>Read one section.</b> Start with Section I, then the Cross-Reference Index in Section XIX: <q data-src="report">the index is where the method either holds up or does not</q>.</li>
+    <li><b>Check one claim.</b> Read the tier under it before the claim itself, then its sources. Open the source. If it says less than the report does, that is a correction.</li>
+    <li><b>Send it.</b> The report says <q data-src="report">corrections are more use to it than agreement</q>. The address is at the head of Section XXV.</li>
+    <li><b>Tell one person,</b> and let them check it for themselves.</li>
+  </ul>
+
+  <div class="box">
+    <h3>If you serve</h3>
+    <p>In a uniform, an agency, a police force or the civil service, the report&rsquo;s address to you asks one question, the one underneath &ldquo;is this order lawful&rdquo;: <q data-src="report">what is this capability for, who benefits when it is used, and would I still say yes if the whole of it were published?</q></p>
+    <p><q data-src="report">This is not a call to disobey lawful orders.</q> <q data-src="report">It is not a call to sabotage, to desert, to obstruct, or to leak.</q> Use the lawful channels, which exist on purpose: an Inspector General, or a Member of Congress. In the US, 10 U.S.C. &sect; 1034 prohibits reprisal for a protected disclosure, and PPD-19 extends protection to the intelligence community. Do not send classified material to anyone. And do not organise a refusal with others: under military law, refusing to obey <q data-src="report">in concert with any other person</q> is mutiny (UCMJ Article 94).</p>
+    <p>The report also lists the Veterans and Military Crisis Line: in the US, 988, then press 1.</p>
+  </div>
+
+  <h3>Fear not</h3>
+  <p>The report ends on three completed things, and claims none of them as its own finding. The first is the word on the cross, <span class="greek">τετέλεσται</span>, <q data-src="kjv" data-ref="John 19:30">It is finished</q>: in the report&rsquo;s reading, not &ldquo;it ended&rdquo; but <q data-src="report">it has been completed and remains so</q>. The second is the count, from Luke:</p>
+  <blockquote><q data-src="kjv" data-ref="Luke 12:6-7">Are not five sparrows sold for two farthings, and not one of them is forgotten before God? But even the very hairs of your head are all numbered. Fear not therefore: ye are of more value than many sparrows.</q><span class="ref">Luke 12:6&ndash;7</span></blockquote>
+  <p>A report about being watched reads it this way: <q data-src="report">you are known, therefore you are safe - not you are known, therefore be careful</q>. The third is Isaiah&rsquo;s: <q data-src="kjv" data-ref="Isaiah 54:17">No weapon that is formed against thee shall prosper</q>. In the Hebrew the forming is conceded; what is denied is that it will succeed.</p>
+  <p>And then the report does what it has done with every document in it: <q data-src="report">state what is there, mark the tier, and stop</q>.</p>
+</section>
+
+<section class="part">
+  <div class="part-head">This edition &middot; {{LABEL}}</div>
+  <h2>The report, as of this edition</h2>
+  <div class="figures">
+    <div><div class="n">{{SECTIONS}}</div><div class="l">numbered sections</div></div>
+    <div><div class="n">{{SUBSECTIONS}}</div><div class="l">subsections</div></div>
+    <div><div class="n">{{SOURCING}}</div><div class="l">sourcing blocks</div></div>
+    <div><div class="n">{{MARKERS}}</div><div class="l">sites on the map</div></div>
+    <div><div class="n">{{EDGES}}</div><div class="l">lines between them</div></div>
+    <div><div class="n">{{CORRECTIONS}}</div><div class="l">corrections, listed</div></div>
+  </div>
+  <p>Every line on the map carries its own grade, from analogy to causation, and the map says which are weak: {{WEAK}} of its {{EDGES}} lines are analogy or correlation, and {{STRONG}} show material evidence or stronger.</p>
+
+  <h3>New this month</h3>
+  <ul class="plain">
+{{THIS_MONTH}}
+  </ul>
+
+</section>
+
+</main>
+
+<section class="backcover">
+  <div class="kicker">b0b.dev</div>
+  <div class="tile"><img src="{{QR}}" alt="QR code for www.b0b.dev"></div>
+  <div class="addr">www.b0b.dev</div>
+  <ul>
+    <li><span><a href="https://www.b0b.dev/report">b0b.dev/report</a></span><span>the report</span></li>
+    <li><span><a href="https://www.b0b.dev/map">b0b.dev/map</a></span><span>the map</span></li>
+    <li><span><a href="https://www.b0b.dev/start">b0b.dev/start</a></span><span>the briefing</span></li>
+    <li><span><a href="https://www.b0b.dev/retractions">b0b.dev/retractions</a></span><span>corrections</span></li>
+    <li><span><a href="https://www.b0b.dev/summary">b0b.dev/summary</a></span><span>the latest edition of this summary</span></li>
+  </ul>
+  <p class="colophon">Edition {{NUMBER}}, {{LABEL}}. Built from the report as of {{BUILD}}; the figures come from the report&rsquo;s own build record. Next edition: {{NEXT}}. Made by b0b.dev, with the AI assistance disclosed in the report. Set in IBM Plex Serif and Plex Mono (SIL Open Font License). Share it freely.</p>
+</section>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+ "_comment": "One edition a month. Edit this file and summary.html, then run: python3 scripts/build-summary-pdf.py. The counts come from site/data/build.json; every quoted line is checked against site/report.html (or the KJV) before anything is written.",
+ "edition": "2026-10",
+ "label": "October 2026",
+ "number": 1,
+ "next": "November 2026",
+ "this_month": [
+  "The current-events log in Section XV carries dated updates through 23 October: each item read at a named outlet or in a primary document, each side's account printed, and every figure with whose count it is.",
+  "The test cases (Section XXIII) now sit before the close, so the report ends where it means to: the counter-architecture, the signal, and three completed things.",
+  "The map draws every line by its grade: dotted for analogy or correlation, dashed for contact, solid for material evidence or stronger.",
+  "Section I gained two more accounts of the author's own testimony, given in his words and graded as testimony."
+ ]
+}
