@@ -1,14 +1,14 @@
 {
-  "generated": "2026-10-23T23:40:20.367Z",
+  "generated": "2026-10-24T05:04:09.559Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "7a7c610293103ed0e9497acf66d604736139d61a5b14564848c2688b3c01dbf7",
+  "fullFileHash": "506716d10ec03c1972d76cad50a48fe9410f15d96d83c674affe0488129093c8",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "dbdf199263834815a99e7052fffecf93340f4e379fd35b4b38a3a1f4f0cd82d8",
-      "length": 43024
+      "hash": "b69aded39c477f3797c78febfe115530a7f523ad2151e8c251cd194416f2cdfc",
+      "length": 43063
     },
     {
       "id": "to-those-inside",
@@ -57,8 +57,8 @@
     },
     {
       "id": "ii-the-death-record-what-is-documented-what-stays",
-      "hash": "5dc9a40f142b85764f37954f5176de819251e375fb1c57e30fc2ebb4c7165b33",
-      "length": 23300
+      "hash": "a4c4dfca8000a3e9af09e0ce3ebbb5bae8c4e44246ac3fd663e062ecc789d263",
+      "length": 23234
     },
     {
       "id": "ii-the-authors-hypothesis-third-form-lineage-onboarding-and-why-there-is-no-file",
@@ -87,8 +87,8 @@
     },
     {
       "id": "ii-primary-and-liaison-mossad-directing-with-cia-and-british-services-witting",
-      "hash": "8d61ad166d4904cf44034f05eb74d19d2cb25a14fb872ae87023c60e658cf0df",
-      "length": 7559
+      "hash": "b6095282b1cfbf84b5e555df761edbed49b8ebaf0933bf6c9ca1fa730147073e",
+      "length": 7558
     },
     {
       "id": "ii-testing-ordinary-rather-than-exotic-the-nypd-runs-its-own-foreign-liaison-service",
@@ -122,8 +122,8 @@
     },
     {
       "id": "ii-the-late-period-stream-in-full-leon-black-and",
-      "hash": "aa80bac06e6ded49122e729b26fe696addbc976e91a032ea6d9ee8656ad10c2f",
-      "length": 8045
+      "hash": "1d241ac47b9bb0613141e673887e82ade6ea413c495919f4538db2b8557239fd",
+      "length": 8007
     },
     {
       "id": "ii-the-compellability-fight-status-5-september-2026",
@@ -132,8 +132,8 @@
     },
     {
       "id": "ii-the-pipe-jpmorgan-and-the-fifteen-year-banking",
-      "hash": "e47844476d8fb1820a757abc633d07de8d95c485a39ec7f08ec4e246b28a15af",
-      "length": 5048
+      "hash": "1628edbfcd9f4021d06cad3288d36dded9cb0a654219c3c1a08da64d907159d3",
+      "length": 5010
     },
     {
       "id": "ii-the-conduit-jpmorgan-and-the-banker-with-the",
@@ -152,13 +152,13 @@
     },
     {
       "id": "ii-the-trump-node-documented-proximity-labeled",
-      "hash": "eec5985a6d2bc098f20450f76a83caaee26320bf1fc9d3f139de35bfe582889a",
+      "hash": "afccee05ffd626d2477bc7222143679c0e3ba2e6f09e41d20e7e941dced9c977",
       "length": 23885
     },
     {
       "id": "ii-the-fork-the-operation-or-the-withholding-and",
-      "hash": "0d2c10e2cd8f0a34ee9c8d1d83b4f734c3909eb6fba1e85bf37c1d27db2df8b4",
-      "length": 39563
+      "hash": "ee57e76420b00ab9d953bc06bf5904f9e76d1e8b9ccb2c008d201a6aadcc187e",
+      "length": 39628
     },
     {
       "id": "ii-the-on-boarding-read-what-the-hub-metric-is",
@@ -297,7 +297,7 @@
     },
     {
       "id": "iv-alan-dershowitz-the-legal-shield-architecture",
-      "hash": "e5e78e928aeac148b002f65542bad7a6bb75c81a17330282d05f3e89ad33a5aa",
+      "hash": "34c4850b4694fd47520077923c77d4942c3358214ab4a366f3b4691ab3fa79df",
       "length": 9466
     },
     {
@@ -1317,7 +1317,7 @@
     },
     {
       "id": "xvi-united-states-v-swartz-the-ruling-recorded-the-prosecution-documented",
-      "hash": "51f1e6f9116e7ac2a47ecb59d821a300d81af39f412f53abb38b78d1817760db",
+      "hash": "8181803f134d7abaebe9b49d0548b99a1d6bec0f0fe0bbb9484f13e6edd297ad",
       "length": 7180
     },
     {
@@ -2033,9 +2033,9 @@
     },
     {
       "index": 79,
-      "hash": "e5c3b90fd179d99bd35dc7f91a1fa7f0997e0c100f5b59ac333bbaa5747fe9a0",
-      "preview": "So the honest position is firmer than the one previously printed. A contested re...",
-      "length": 542
+      "hash": "a395a32625f4fa013dd9a04082369503eb6e203e9e15b22cfcf0275da44125fa",
+      "preview": "A contested record is still not a withheld one, and the report will not overturn...",
+      "length": 476
     },
     {
       "index": 80,
@@ -2111,7 +2111,7 @@
     },
     {
       "index": 92,
-      "hash": "5ae83fcfa239c38c8f095bd314fe2f16628c67126c6e687549a68f40fc637530",
+      "hash": "68c998ee14dbd0d5d78bb209ffe011afc5319408d674db0cdb859982222928d6",
       "preview": "Still silent - stated precisely. The email corpus does not contain the origin st...",
       "length": 503
     },
@@ -2597,9 +2597,9 @@
     },
     {
       "index": 173,
-      "hash": "38f07ec822dbab4388f91df44e7608a90bdcec7f56b43d13f99bb712389ff91b",
+      "hash": "24a6a78fb116faad3e42cbacf683b23f7a0982a84eeaef6499b149879e202335",
       "preview": "Tier, stated exactly. Author&rsquo;s hypothesis - unproven, and adopted by this ...",
-      "length": 1330
+      "length": 1329
     },
     {
       "index": 174,
@@ -2867,9 +2867,9 @@
     },
     {
       "index": 218,
-      "hash": "5cc60cf9b75f9f32cbcb854cd8b09244c9980f718c9c386abf7b73befe0dcb5e",
+      "hash": "8022eb9c49fa5beadc6417bec57513fdfa48b8c17a3db9d1c9c14ec17b31e55f",
       "preview": "The bookend to Wexner, and the same discipline applies. If Wexner is the documen...",
-      "length": 657
+      "length": 619
     },
     {
       "index": 219,
@@ -3077,8 +3077,8 @@
     },
     {
       "index": 253,
-      "hash": "0000bc071a299cd2b70955a892c3830f04c2a1a43dca5a238f90d0d9ef714628",
-      "preview": "Alexander Acosta, who cut Epstein&rsquo;s 2008 non-prosecution deal, was Trump&r...",
+      "hash": "b947f92e69cf06bd53c2a1c1ab10f89b0897de10394a08778b6617930f89e73f",
+      "preview": "Alexander Acosta, who cut Epstein&rsquo;s 2007 non-prosecution deal, was Trump&r...",
       "length": 1227
     },
     {
@@ -3203,9 +3203,9 @@
     },
     {
       "index": 274,
-      "hash": "82a9833aae3bcc5dfaa743773c88dc924bf62b1cb43d2665e2a94cc728a66bdd",
+      "hash": "02998b7b1171110eb951d2ab22d444bb08044027e21844f553f0ab9a8b6ae30a",
       "preview": "Branch A - the operation (this report&rsquo;s conclusion; the sponsor is named o...",
-      "length": 1329
+      "length": 1368
     },
     {
       "index": 275,
@@ -7313,7 +7313,7 @@
     },
     {
       "index": 959,
-      "hash": "7319443c10a184ad2ea43e8813a477b4392dd7bc493e097c9ebf2184aad3d8cf",
+      "hash": "c9e3e52ce4ee15b0304b9824d6315b49e25ea045cc287047f6c488718f0b5f98",
       "preview": "Why it is in this report. The same Department of Justice that, in the non-prosec...",
       "length": 1298
     },
