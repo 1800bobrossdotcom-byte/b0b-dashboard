@@ -217,6 +217,13 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**3TEETH "PUMPED UP KICKS" LEADS THE SIGNAL PLAYLIST — 24 Oct 2026, live (`a803e5e`).** Author: *"place this song on playlist as first. 3teeth - pumped up kicks"*. "Playlist" read as the signal bar (the bottom-strip player of XXV's signals), as on 22 Sept.
+- Its official video from the band's own channel (`lYIsZr9L_rM`, @3T33TH, identified by YouTube oEmbed; found embedded in Loudwire's 2019 article). It is the 2019 single from *Metawar* (Century Media).
+- `LS_KEY` is now `b0b_signal_v11`, because a stored index points into the old order. `signal-bar.js?v=14` on report, home and both maps.
+- **Not touched:** XXV's written signals (no essay was added and none renumbered) and the site soundtrack, which TOOL still leads. Either is his call if that is what he meant.
+- Live: `check-live` OK; four reads of the report and `/home` carry `?v=14`, with this track first.
+- *Deploy trap:* the branch carries the unreviewed summary commit, so this went to `main` from a branch reset to `origin/main`, with the summary commit cherry-picked back on top. A `$VAR` set inside an `&&` chain came back empty; use the literal sha.
+
 **THE VISITOR COUNT WAS COUNTING MY DEPLOY CHECKS — 24 Oct 2026, fixed (`0386655`), live.** Author: *"Are page count and page views broken again"*.
 - **Not broken:** both counters moved during the check (visits 2,010 → 2,019 and views 16,944 → 16,972, 15:18–15:45 UTC). One browser-style load of `/stickers` was counted at once in `/api/stats` (views, browser and arrivals each +1).
 - **Why it can look stuck:**
