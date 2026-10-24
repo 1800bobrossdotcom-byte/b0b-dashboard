@@ -217,8 +217,33 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**THE VISITOR COUNT WAS COUNTING MY DEPLOY CHECKS — 24 Oct 2026, fixed (`0386655`), live.** Author: *"Are page count and page views broken again"*.
+- **Not broken:** both counters moved during the check (visits 2,010 → 2,012 and views 16,944 → 16,951 in about fifteen minutes). One browser-style load of `/stickers` was counted at once in `/api/stats` (views, browser and arrivals each +1).
+- **Why it can look stuck:**
+  - the figure was cached 60 s per instance;
+  - "visits" moves only when someone arrives from outside the site (40–80 a day), not on a reload or a click inside it.
+- **Found on the way, all three fixed:**
+  - **`/api/gate` still counted a visit on every POST, although the gate has been off since 19 Sept.** With the gate off no page calls it (`/pixel.html` is a 404), so every increment since then was a script. `check-live.js` POSTs once per 20 s poll.
+    - The gate part rose from 1,686 (22 Oct, the `/stats` entry below) to 1,878 when the fix went live (24 Oct). So the public "Visitors" figure carries **at least 192 script requests**, plus an unknown number from 19 Sept to 22 Oct. My deploy checks are among them.
+    - The `basis` line said "gate entries to 19 Sept 2026". That was false.
+  - Each read summed one KV lookup per day since 22 Oct, so its cost grew by one command a day (~370 per read after a year).
+  - A failed KV read printed "Visitors: 0 · 0 page views"; a failed second step printed the gate figure alone.
+- **The fix (`server.js`; `stats.js?v=4`):**
+  - `/api/gate` counts only while `B0B_GATE=on`. It still sets the cookie, so `check-live.js` and the proxy keep working. The gate figure is now fixed at 1,878.
+  - `/api/visitors` reads in one pipeline: MGET plus yesterday's and today's `a`, three commands. **Complete days are summed once into `b0b:arr_roll` `{through, sum}`**: the days from `daily_since` up to, not including, `through`. Any instance rolls it forward, and it is written as one value from days that no longer change, so two writers agree. This also ends the 400-day TTL horizon in the 23 Oct entry.
+  - The cache is 15 s (was 60 s). A failed read serves the last good figure or a 503, which leaves the bar empty. It never prints 0.
+  - The `basis` line and `/stats` now say the gate counter ran until 24 Oct, counting only scripts after 19 Sept, so the gate part overstates readers.
+- **Tested** (scratchpad `counters/test-counters.js` against `mockkv2.js`, a fresh server per read so the cache never hides a store read):
+  - the new code passes 16/16;
+  - HEAD fails the seven defect checks and passes the same page-counting checks;
+  - security 35/35, seo 59/59; `/stats` renders the new sentence with no page errors.
+- **Live, 24 Oct:** a POST to `/api/gate` left the gate figure at 1,878; arrivals 139 = the daily `a` (14 + 80 + 45); visits = gate + arrivals (2,017); four reads of the new `basis`; `/stats` serves `stats.js?v=4`.
+- **His call, not done:** the gate part still holds at least 192 script requests, and `check-live.js` POSTed before 19 Sept too. Keep it with the caveat (as now), or show visitors as arrivals only from 22 Oct.
+- *Trap:* Node's `fetch` (undici) replaces a `Sec-Fetch-Mode` header with `cors`, so every test load was classed "other". Use `http.get` to test the browser classes.
+- *My own reads added to the count:* two Playwright loads of `/report` and `/stats`, and one curl with navigation headers on 24 Oct (one arrival).
+
 **"THE PATTERN IS NOT AMERICAN" REBUILT FROM THE RECORD — XVI, 24 Oct 2026, live.** Author: *"Roger that skip 1. Lets do 2. Expand report"*, i.e. the subsection the FOI registry was built for, `xvi-the-pattern-is-not-american-international`.
-- **What it is now** (~8,800 words; was ~1,735): 14 law rows (Argentina new) and 22 programmes.
+- **What it is now** (~8,800 words; was ~1,735): 14 law rows (Argentina new) and 23 programmes (23 Sources and 23 Record lines).
   - Four programmes are new: NZ Operation Burnham, Israel's Kafr Qasim trial records, Japan's secret pacts (*mitsuyaku*), India's Henderson Brooks–Bhagat report.
   - Every programme carries a Sources line and a **Record** line: where its primary record sits now, and whether a machine can search it.
   - The closing paragraph is rewritten:
@@ -328,7 +353,7 @@ than once.
 - **"Visits" had stopped:** it was `b0b:visits`, the count of POSTs to `/api/gate`. The gate went off on 19 Sept, so the signal bar's "· 1,860 visits" and the masthead's "Visitors: 1,860" froze. This was flagged on 22 Oct as his call; his report made it.
 - **Now (`server.js` `/api/visitors`):** `visits` = the gate total (to 19 Sept) **+** the browser arrivals (field `a`) summed over the daily hashes from `b0b:daily_since`. The payload also carries `gate_entries`, `arrivals` and a `basis` sentence; the signal bar's tooltip shows the basis (`signal-bar.js?v=12`). It is cached for 60 s per instance.
 - **Stated in `basis`, not hidden:** 19 Sept – 21 Oct 2026 was never counted. Arrivals are one per entry from outside the site, the nearest like-for-like to a gate entry.
-- **Horizon:** the daily hashes have a 400-day TTL, so from about Nov 2027 the oldest arrivals drop out of the sum. Before then, roll the old days into a stored total.
+- **Horizon:** the daily hashes have a 400-day TTL, so from about Nov 2027 the oldest arrivals drop out of the sum. **Done 24 Oct (`b0b:arr_roll`, entry at the top of §7).**
 - Tested against the mock KV (scratchpad `stats/mockkv.js`, which now has HGET): 1,860 + 12 → a new outside arrival → 1,873; a same-origin load does not count.
 - *Trap repeated:* `pkill -f mockkv.js` killed the shell (exit 144). Kill by PID.
 - **The same evening the author wrote *"Stuck at 1860"*.** A fresh browser on the live site showed 1,938, but **`/stats` still printed the gate figure (1,861) labelled "visits".** It now reads `/api/visitors` and gives the site-wide figure with its parts (`stats.js?v=3`). Both count fetches now use `cache: 'no-store'` (`signal-bar.js?v=13`). A tab opened before the deploy runs the old script until it is reloaded.
