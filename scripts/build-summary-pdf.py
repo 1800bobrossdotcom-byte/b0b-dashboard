@@ -13,6 +13,10 @@ Every <q data-src="report"> must be found in site/report.html, and every
 after typographic normalisation (curly quotes, dashes, case, spacing). One miss
 stops the build: the summary may say less than the report, never more.
 
+Part III walks every numbered section of the report once, in order, one
+<h3 class="sec"> entry each. A section the report gains, loses or renumbers
+stops the build until the summary follows: it covers the whole document.
+
 Writes public/summaries/b0b-dev-summary-<edition>.pdf (the archive copy),
 public/b0b-dev-summary.pdf (the latest, which /summary redirects to) and
 public/summaries/editions.json. Renders with scripts/render-pdf.js (Chromium).
@@ -33,7 +37,7 @@ OUT_DIR = os.path.join(ROOT, 'public', 'summaries')
 LATEST = os.path.join(ROOT, 'public', 'b0b-dev-summary.pdf')
 FONT_OK = ('IBMPlexSerif', 'IBMPlexMono', 'DejaVuSerif')   # anything else in the PDF is a silent fallback
 QR_WANT = 'https://www.b0b.dev'
-PAGES_OK = range(8, 17)                                     # a 6 x 9 in booklet of 8 to 16 pages
+PAGES_OK = range(8, 25)                                     # a 6 x 9 in booklet of 8 to 24 pages
 
 BLOCK = r'p|div|li|ul|ol|h[1-6]|br|td|th|tr|table|blockquote|section|article|nav|header|footer|main|aside|figure|figcaption|details|summary|dt|dd'
 
@@ -119,6 +123,13 @@ def check_quotes(template):
     body = re.sub(r'<q\b.*?</q>', ' ', template, flags=re.S)
     loose = [html.unescape(x) for x in re.findall(r'&ldquo;(.*?)&rdquo;', body, flags=re.S)]
     return rows, misses, [(x, found_in(x, report)) for x in loose]
+
+
+def tour_gaps(template, report_html):
+    """The report's numbered sections in page order, and the entries Part III gives them."""
+    want = re.findall(r'<h2\b[^>]*\bid="([IVXL]+)"', report_html)
+    have = re.findall(r'<h3 class="sec"><span class="num">([IVXL]+) &middot;</span>', template)
+    return want, have
 
 
 def section_count(report_html):
@@ -234,6 +245,11 @@ def main():
     print('quotes: %d checked, %d missing' % (len(rows), misses))
     if misses:
         sys.exit('build-summary-pdf: stopped - a quotation does not match its source')
+    want, have = tour_gaps(template, open(REPORT, encoding='utf-8').read())
+    print('tour: %d entries for %d sections' % (len(have), len(want)))
+    if have != want:
+        sys.exit('build-summary-pdf: stopped - Part III must walk every section once, in order.\n'
+                 '  report:  %s\n  summary: %s' % (' '.join(want), ' '.join(have)))
     if check_only:
         return
 
