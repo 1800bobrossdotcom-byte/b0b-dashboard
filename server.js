@@ -528,7 +528,10 @@ app.post('/api/gate', gateLimiter, (req, res) => {
     'Set-Cookie',
     `${ACCESS_COOKIE}=${token}; Path=/; HttpOnly; Max-Age=${ACCESS_TTL_SECONDS}; SameSite=Lax${secure}`
   );
-  bump('visits');
+  // An entry is counted only while the gate is on. With it off no page calls this,
+  // so every POST is a script: check-live.js posts once per 20 s poll. Until 24 Oct
+  // 2026 those were counted as visits.
+  if (GATE_ON) bump('visits');
   return res.status(204).end();
 });
 
@@ -971,8 +974,10 @@ app.get('/api/visitors', (req, res) => {
   const respond = (visits, views, since, gate, arrivals) => res.json({
     visits: visits, views: views, gate_entries: gate || 0, arrivals: arrivals || 0,
     since: since || null, backend: countBackend, env: envSeen,
-    basis: 'visits = gate entries to 19 Sept 2026 + browser arrivals since daily counting began (22 Oct 2026). ' +
-      '19 Sept - 21 Oct 2026 was not counted. views = every page served, crawlers included.',
+    basis: 'visits = entries through the old click-gate + browser arrivals from outside the site since daily ' +
+      'counting began (22 Oct 2026). The gate was switched off on 19 Sept 2026, but its counter ran until 24 Oct 2026 ' +
+      'and in that time counted only scripts, this site\'s own deploy checks among them, so the gate part overstates ' +
+      'readers. Readers between 19 Sept and 21 Oct 2026 were not counted. views = every page served, crawlers included.',
     // Stated in the payload so the number can never be quoted without its caveat.
     note: countBackend === 'memory'
       ? 'In-process counter: resets on restart and is per-instance. Not a real total. Set KV_REST_API_URL and KV_REST_API_TOKEN for a durable shared count.'
@@ -981,30 +986,52 @@ app.get('/api/visitors', (req, res) => {
           : 'Durable shared counter (KV). Aggregate only - no IP, user agent or per-visitor record is stored.')
   });
   // `visits` was the gate's count of entries (POSTs to /api/gate). The gate went off
-  // on 19 Sept 2026, so that number stopped moving at its last value. Since 22 Oct the
-  // daily hashes count browser arrivals (field `a`), one per visit from outside the
-  // site, which is the nearest like-for-like measure. The public figure is the two
-  // added: gate entries to 19 Sept, plus arrivals from 22 Oct. 19 Sept - 21 Oct was not
-  // counted and cannot be recovered. Arrivals are summed from the daily hashes, which
-  // carry a 400-day TTL, and cached a minute per instance.
+  // on 19 Sept 2026; the count ran on, scripts only, until 24 Oct (see /api/gate).
+  // Since 22 Oct the daily hashes count browser arrivals (field `a`), one per visit
+  // from outside the site, which is the nearest like-for-like measure. The public
+  // figure is the two added. 19 Sept - 21 Oct was not counted and cannot be recovered.
+  //
+  // Arrivals: days before yesterday are complete and never written again, so their sum
+  // is kept in b0b:arr_roll as {through, sum}, every day from daily_since up to but not
+  // including `through`, and only yesterday and today are read live. A read is three
+  // commands however long counting has run, and the daily hashes' 400-day TTL no longer
+  // erodes the total. Any instance may roll the sum forward; it is computed from days
+  // that no longer change and written as one value, so two writers agree.
   if (countBackend === 'kv') {
     const hit = visitorsCache;
-    if (hit && Date.now() - hit.t < 60_000) return respond(hit.gate + hit.arrivals, hit.views, hit.since, hit.gate, hit.arrivals);
-    return kvPipeline([['GET', 'b0b:visits'], ['GET', 'b0b:views'], ['GET', 'b0b:daily_since']]).then((out) => {
-      if (!Array.isArray(out)) return respond(0, 0, null, 0, 0);
-      const val = (i) => (out[i] && out[i].result) || null;
-      const gate = Number(val(0) || 0), views = Number(val(1) || 0), since = val(2);
-      const dates = datesSince(since);
+    const cached = () => respond(hit.gate + hit.arrivals, hit.views, hit.since, hit.gate, hit.arrivals);
+    if (hit && Date.now() - hit.t < 15_000) return cached();
+    // A failed read must never print a wrong number: the last good one, or none.
+    const fail = () => hit ? cached() : res.status(503).json({ error: 'count store unreachable', backend: countBackend });
+    const ok = (rows) => Array.isArray(rows) && rows.every((r) => r && !r.error);
+    const today = dayKey(), yday = dayKey(new Date(Date.now() - 86400000));
+    return kvPipeline([['MGET', 'b0b:visits', 'b0b:views', 'b0b:daily_since', 'b0b:arr_roll'],
+      ['HGET', 'b0b:d:' + yday, 'a'], ['HGET', 'b0b:d:' + today, 'a']]).then((out) => {
+      if (!ok(out) || !Array.isArray(out[0].result)) return fail();
+      const [g, v, since, rolled] = out[0].result;
+      const gate = Number(g) || 0, views = Number(v) || 0;
+      let roll = null;
+      try { roll = JSON.parse(rolled); } catch (e) { /* not rolled yet */ }
+      if (!roll || !DAY_RE.test(roll.through) || roll.through > today || !Number.isFinite(roll.sum)) roll = null;
+      const from = roll ? roll.through : since;
+      // Yesterday is live unless the roll already holds it (a writer just past midnight).
+      const live = (Number(out[2].result) || 0) + (!from || from <= yday ? Number(out[1].result) || 0 : 0);
       const send = (arrivals) => {
         visitorsCache = { t: Date.now(), gate, views, since, arrivals };
         respond(gate + arrivals, views, since, gate, arrivals);
       };
-      if (!dates.length) return send(0);
-      return kvPipeline(dates.map((d) => ['HGET', 'b0b:d:' + d, 'a'])).then((rows) => {
-        if (!Array.isArray(rows)) return respond(gate, views, since, gate, 0);
-        send(rows.reduce((n, r) => n + (Number(r && r.result) || 0), 0));
+      const pending = datesBetween(from, yday);
+      if (!pending.length) return send((roll ? roll.sum : 0) + live);
+      return kvPipeline(pending.map((d) => ['HGET', 'b0b:d:' + d, 'a'])).then((rows) => {
+        if (!ok(rows)) return fail();
+        const sum = rows.reduce((n, r) => n + (Number(r.result) || 0), roll ? roll.sum : 0);
+        // More than ROLL_MAX days behind: roll as far as was read and answer on a later read.
+        const done = pending.length < ROLL_MAX;
+        const through = done ? yday : dayKey(new Date(Date.parse(pending[pending.length - 1] + 'T00:00:00Z') + 86400000));
+        kvPipeline([['SET', 'b0b:arr_roll', JSON.stringify({ through, sum })]]);
+        return done ? send(sum + live) : fail();
       });
-    }).catch(() => respond(0, 0, null, 0, 0));
+    }).catch(fail);
   }
   const sumArrivals = (days) => Object.keys(days || {}).reduce((n, k) => n + (Number(days[k].a) || 0), 0);
   if (countBackend === 'file') {
@@ -1017,14 +1044,16 @@ app.get('/api/visitors', (req, res) => {
 });
 
 let visitorsCache = null;
-// Every UTC day from `since` (YYYY-MM-DD) to today, oldest first, at most 400.
-function datesSince(since) {
-  if (!since || !/^\d{4}-\d{2}-\d{2}$/.test(since)) return [];
+const DAY_RE = /^\d{4}-\d{2}-\d{2}$/;
+const ROLL_MAX = 400;
+// Every UTC day from `from` up to but not including `until` (YYYY-MM-DD), oldest
+// first, at most ROLL_MAX.
+function datesBetween(from, until) {
+  if (!DAY_RE.test(from || '') || !DAY_RE.test(until || '')) return [];
   const out = [];
-  const end = dayKey();
-  for (let t = Date.parse(since + 'T00:00:00Z'); out.length < 400; t += 86400000) {
+  for (let t = Date.parse(from + 'T00:00:00Z'); out.length < ROLL_MAX; t += 86400000) {
     const d = dayKey(new Date(t));
-    if (d > end) break;
+    if (d >= until) break;
     out.push(d);
   }
   return out;

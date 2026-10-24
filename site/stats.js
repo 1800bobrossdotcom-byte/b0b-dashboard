@@ -217,8 +217,11 @@
     var allTime = function (v) {
       $('r-alltime').textContent = fmt(d.totals.views) + ' pages have been served in all, by every kind of client, since the counter began. ' +
         (v ? 'Visitors: ' + fmt(v.visits) + ', the figure shown across the site. It is ' + fmt(v.gate_entries) +
-          ' entries through the old click-gate, which was switched off on 19 September 2026, plus ' + fmt(v.arrivals) +
-          ' browser arrivals from outside the site since daily counting began on 22 October 2026. The days between were not counted. ' : '') +
+          ' entries through the old click-gate plus ' + fmt(v.arrivals) +
+          ' browser arrivals from outside the site since daily counting began on 22 October 2026. The gate was switched off on' +
+          ' 19 September 2026, but its counter ran until 24 October and in that time counted only scripts, this site’s own' +
+          ' deploy checks among them, so the gate part overstates readers. Readers between 19 September and 21 October were' +
+          ' not counted. ' : '') +
         d.method;
     };
     allTime(null);
