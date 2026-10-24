@@ -5,11 +5,11 @@
       "number": 1,
       "label": "October 2026",
       "file": "/summaries/b0b-dev-summary-2026-10.pdf",
-      "pages": 13,
-      "bytes": 424859,
-      "sha256": "d888996df5c7f2c6b0c1c4402b518776480ad044468d271fb4275831cf400f78",
-      "report_build": "2026-10-24T05:04:09.559Z",
-      "built": "2026-10-24T05:04:17Z"
+      "pages": 24,
+      "bytes": 514315,
+      "sha256": "334252a87d9a962a4f1d21a7285ca8f31051a339e01ae0bc1c6d19aa4d29b834",
+      "report_build": "2026-10-24T15:50:32.099Z",
+      "built": "2026-10-24T15:58:34Z"
     }
   ],
   "note": "The summary for the casual reader, one edition a month. The latest is at /summary; every edition stays at its own address.",

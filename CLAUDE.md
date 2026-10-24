@@ -217,6 +217,40 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**THE SUMMARY NOW COVERS THE WHOLE REPORT — 24 Oct 2026, live at `/summary`.** Author: *"The report brief needs to cover the entire document not just epstein and Maxwell"*. Read as the monthly PDF.
+- **Shape:** 24 pages (the build now allows 8–24):
+  - the lede names the whole scope;
+  - Part I adds "Beyond one case": six records from XVII, XXIII, XV and IX, kept apart and offered as no chain;
+  - Part II adds "The rules it uses by name";
+  - **new Part III, "Every section, in order"**: one entry for each of the 25 sections plus the researcher's guide, in the masthead's own groups;
+  - "What you can do" is now Part IV.
+- **Build:** `tour_gaps()` stops it unless there is one Part III entry per `<h2 id>` section, proven both ways. 108 quotes checked, 0 missing.
+- **Method:**
+  - five readers digested the sections (scratch `summary2/digest-*.md`);
+  - three fresh reviewers read the draft against the page (`review-1/2/3.md`; two were stopped by a usage limit and resumed);
+  - findings: 3 errors, 2 overstatements, 1 omission and about 20 imprecisions, all fixed.
+- **Errors fixed:**
+  - "Before 11 September 2001 … neither was watchlisted" became the reporting from January and March 2000, "watchlisted then". Both men were put forward for watchlisting on 21–23 Aug 2001 (Wikipedia, read once, not ledgered).
+  - XXV "ends in the author's own voice" is wrong: the close is the report's tiered commentary after his statement.
+  - XV's killed specimen, "a capture that never happened", is cut (see the flag below).
+- **Overstatements and other fixes:**
+  - XV's method is now "since October" only. The 3 Sept update rests on Wikipedia's portal and prints counts with no owner.
+  - "Every toll above…" is attached to Sudan's strikes.
+  - The XVI line: the laws were read in their own texts, the programmes were not.
+  - IV's third bin is "unsupported", not "false".
+  - X: the unknown financer is the Octagon's, not the cameras' command centre.
+  - XII: the network verdict survives.
+- **Page errors the reviews found, NOT edited (his call / next pass):**
+  - **XV 3 Sept box: the Maduro capture "is not true"** — reviewer: US forces captured Maduro and Cilia Flores in Caracas on 3 Jan 2026, arraigned in New York 5 Jan (Wikipedia, PBS, NPR via search only, not read at source). The box checked only Aug–Sept 2026. **Read at source before editing; if confirmed it is a correction.**
+  - Two §2 shielding lines survive: II's "Leslie Wexner has never been charged with a crime." and VI's "No living figure named is accused of wrongdoing". There are also "no charge has followed" / "none a criminal charge" in II's late-period stream.
+  - Banned edit notes survive in II (the FOIA subsection "The first version of this subsection said no…"; "when this passage was first written") and in V (the Ben-Menashe "Correction, made in the open"; two h3 titles narrating drafts).
+  - IX/XXIII: "neither was watchlisted" carries no date.
+  - XXV's first signal still says "Eight tracks", and there are nine.
+  - The masthead puts the guide "at the foot", but it sits before the close.
+  - X: "CIA-funded Palantir" survives; XIII has a dangling "see the tiering note below".
+  - The digests' wider flags (house numbers in III/IV, VI's breeding subsection, numerology in II's 1953 block) are in `digest-*.md`.
+- *Deploy note:* the summary sat on the branch only (`07efe66`) while `main` took the counter and signal deploys; built PDFs were not committed until reviewed.
+
 **3TEETH "PUMPED UP KICKS" LEADS THE SIGNAL PLAYLIST — 24 Oct 2026, live (`a803e5e`).** Author: *"place this song on playlist as first. 3teeth - pumped up kicks"*. "Playlist" read as the signal bar (the bottom-strip player of XXV's signals), as on 22 Sept.
 - Its official video from the band's own channel (`lYIsZr9L_rM`, @3T33TH, identified by YouTube oEmbed; found embedded in Loudwire's 2019 article). It is the 2019 single from *Metawar* (Century Media).
 - `LS_KEY` is now `b0b_signal_v11`, because a stored index points into the old order. `signal-bar.js?v=14` on report, home and both maps.
@@ -296,10 +330,10 @@ than once.
 - Scale line 284 / 1,160 / 167. `build-transmissions.py` returned 404 again; the reel is untouched.
 
 **"THE HEART OF THE MATTER", A MONTHLY PDF SUMMARY FOR THE CASUAL READER — 24 Oct 2026, live at `/summary`. Steps: `design/summary/README.md`.** Author: *"Do a report summary for a the causal reader. A pdf. We can update monthly"*, then, mid-draft, *"Do new take from the heart , or at least the heart and mind of the matter at hand"*.
-- **Shape:** 6 × 9 in booklet, 13 pages: navy cover with the seal; the three epigraph verses and the report's own scope line; **I, the heart** (the record as decisions, 1976 → the withheld files, the announcement's structure); **II, the mind** (the grades, the conclusion and its full finding, the rivals, the falsifiers, the sponsor at its tiers, what it refuses to say); **III, what you can do** (the servicemember lines kept verbatim, with Article 94 quoted in full); this edition's counts and "new this month"; a navy back cover with the QR (navy on a thread tile; it must scan).
+- **Shape (first build; superseded 24 Oct by the whole-report edition, entry above):** 6 × 9 in booklet, 13 pages: navy cover with the seal; the three epigraph verses and the report's own scope line; **I, the heart** (the record as decisions, 1976 → the withheld files, the announcement's structure); **II, the mind** (the grades, the conclusion and its full finding, the rivals, the falsifiers, the sponsor at its tiers, what it refuses to say); **III, what you can do** (the servicemember lines kept verbatim, with Article 94 quoted in full); this edition's counts and "new this month"; a navy back cover with the QR (navy on a thread tile; it must scan).
 - **Rule: the summary may say less than the report, never more.** Every quotation is `<q data-src="report">` or `<q data-src="kjv" data-ref>`; `scripts/build-summary-pdf.py` stops on any miss (53 quotes; proven both ways with four planted misquotes). Paraphrase is checked by reading, so **a fresh reviewer read the draft against the page and found 4 errors and 20 imprecisions, all fixed.** Among them: "any living person" (Maxwell is living and convicted; now "living and uncharged"); Maxwell's evidence is not Epstein's ("not evidenced equally"); "do not send classified material to anyone" (the lawful channels take it; the report means *to the report*); the death passage hedged below the page ("the reading the surviving evidence leans toward"); four findings against the sponsor, not two; the author's primary-and-liaison form is "adopted by this report nowhere" (the page's own tier line); 23 correction *entries*, not 23 mistakes; tier 3 is "a documented material relationship", not "material evidence".
 - **My draft's own error, recorded:** the first sponsor paragraph under-stated the page, then my fix over-corrected; the page's tier lines decide it, read in full.
-- **Build:** `python3 scripts/build-summary-pdf.py` (`--check` for quotes only) fills `design/summary/summary.html` from `edition.json` and `site/data/build.json`, renders in Chromium (`scripts/render-pdf.js`; Playwright global, so `NODE_PATH=$(npm root -g)`), re-titles the bookmarks (Chromium joins wrapped heading lines with no space), sets the metadata, and refuses to write on a stray font, a lost tag tree or outline, a page count outside 8–16, or a QR that does not decode at 150 and 72 dpi. Writes `public/b0b-dev-summary.pdf` (latest), `public/summaries/b0b-dev-summary-YYYY-MM.pdf` and `public/summaries/editions.json` (sha256 per edition). Run it **after** `check-consistency.py`.
+- **Build:** `python3 scripts/build-summary-pdf.py` (`--check` for quotes only) fills `design/summary/summary.html` from `edition.json` and `site/data/build.json`, renders in Chromium (`scripts/render-pdf.js`; Playwright global, so `NODE_PATH=$(npm root -g)`), re-titles the bookmarks (Chromium joins wrapped heading lines with no space), sets the metadata, and refuses to write on a stray font, a lost tag tree or outline, a page count outside 8–24 (was 8–16), or a QR that does not decode at 150 and 72 dpi. Writes `public/b0b-dev-summary.pdf` (latest), `public/summaries/b0b-dev-summary-YYYY-MM.pdf` and `public/summaries/editions.json` (sha256 per edition). Run it **after** `check-consistency.py`.
 - **Wiring:** `/summary` is a **302** (`MOVING` in `server.js`; the target changes monthly) to `/b0b-dev-summary.pdf`; `pdf` joined the static allowlist. SUMMARY (PDF) in the report's top nav and sidebar, `/home`, the `/start`-family nav, and the Briefing's Holdings.
 - **Monthly:** edit `edition.json` (edition, label, number, next, this_month) after the month's last report deploy, change `summary.html` only where the page changed, build, look at every page, deploy. Not scheduled; offered.
 - **Page errors the review surfaced, fixed in place (no narration):**
