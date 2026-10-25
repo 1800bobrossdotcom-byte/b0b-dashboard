@@ -229,6 +229,7 @@ than once.
 - `LS_KEY` is now `b0b_signal_v12`, and `signal-bar.js?v=15` is on the report, home and both maps.
 - **Not touched: XXV's written "Third signal - Paul Simon, 'Graceland'"** (`xxiv-third-signal-paul-simon-graceland`), with its embed and contents row. Whether it goes too is his call.
 - The sweep session made the same change (`89d8a58`) and could not push it. This is a separate commit, so do not apply `89d8a58` on top.
+- **Same evening, GHOSTEMANE "AI" added last** (author: *"lets add ai by ghostmane to playlist"*). It is `N3XbZvD3lRo`, the official video on the artist's channel @ghostemane (YouTube oEmbed; the oEmbed also confirms it can be embedded). The bar now has 14 tracks. The track was appended, not reordered, so `LS_KEY` stays at `b0b_signal_v12`; the tag is now `signal-bar.js?v=16`. **No XXV essay was written for it.**
 
 **THE SUMMARY NOW COVERS THE WHOLE REPORT — 24 Oct 2026, live at `/summary`.** Author: *"The report brief needs to cover the entire document not just epstein and Maxwell"*. Read as the monthly PDF.
 - **Shape:** 24 pages (the build now allows 8–24):

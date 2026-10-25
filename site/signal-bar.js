@@ -44,7 +44,8 @@
     { id: 'qMDxrXFQwU8', label: 'Filter &mdash; Hey Man Nice Shot' },                      // Filter - Topic (licensed)
     { id: '9D2R69gVyZ0', label: 'TOOL &mdash; 7empest' },                                   // TOOLVEVO (official). 15:43 - much longer than the rest.
     { id: 'PtzhvJh9NRY', label: 'The Smiths &mdash; Bigmouth Strikes Again' },             // The Smiths (artist channel, official audio)
-    { id: 'JKES3yfnD9U', label: 'Creedence Clearwater Revival &mdash; Have You Ever Seen the Rain' } // CCR (artist channel, official audio)
+    { id: 'JKES3yfnD9U', label: 'Creedence Clearwater Revival &mdash; Have You Ever Seen the Rain' }, // CCR (artist channel, official audio)
+    { id: 'N3XbZvD3lRo', label: 'GHOSTEMANE &mdash; AI' }                                  // GHOSTEMANE (artist channel @ghostemane, official video; oEmbed). Added 25 Oct 2026, author's instruction.
   ];
   var LS_KEY = 'b0b_signal_v12';  // bump on every reorder: a stored index points into the old list
   var SAVE_MS = 1000;
