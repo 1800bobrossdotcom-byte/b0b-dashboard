@@ -217,6 +217,19 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**THE AUTOMATED SWEEP RAN BUT COULD NOT PUBLISH — 25 Oct 2026, its first run. NOT FIXED FOR FUTURE RUNS until the author acts.** Author: *"check to make sure our automated sweeps are publishing"*.
+- The scheduled task (`trig_01RFnX93MHDF3rvLbtbVqjsw`) fired at 10:31 UTC into session `cse_01VhEq7nhx4WQCKxAAFE3hPo` and did the whole sweep. That included the 25 Oct XV update (`xv-status-update-25-october-2026`), the HELD file and a §7 entry, all in commit `f2669f2`.
+- **The push was refused** with the git proxy's 403: "not in this session's authorized repository set". The fired session had the repo cloned over public HTTPS but **not attached as a source**, and it had no `add_repo` tool. The task reads "succeeded" because the session ended cleanly. **Nothing went live.**
+- The run's work exists only in that container and in the bundle and patches it sent the author (`sweep-2026-10-25.bundle`, `0001-XV-status-update-25-October-2026-…patch`). That session will not hand them to another session without his word, and it has no tool to do so anyway. **To publish it, the author uploads the bundle or the patch to a session with the repo attached.**
+- **Fix for future runs, his to make:** a session's repositories are chosen when it starts, and `create_trigger` stores none. Add the repo under Repositories in the cloud environment's settings, so every fired session gets it. Or have the task fire into a standing session that has it.
+- **`RUNBOOK.md` §0 now proves push access first** (`git push --dry-run origin HEAD:refs/heads/claude/sweep-access-check`). A run without a credential stops before any research and says so, instead of stranding a day's work.
+
+**DAFT PUNK LEADS THE SIGNAL PLAYLIST; GRACELAND IS OFF THE BAR — 25 Oct 2026, live.** Author: *"Can you have the daft punk song play first now. remove paul simon graceland"*. "Playlist" read as the signal bar, as on 22 Sept and 24 Oct.
+- "Veridis Quo" (`HhZaHf8RP6g`) is first and 3TEETH is second. "Graceland" (`GP6a-7MP91g`) is removed, leaving 13 tracks.
+- `LS_KEY` is now `b0b_signal_v12`, and `signal-bar.js?v=15` is on the report, home and both maps.
+- **Not touched: XXV's written "Third signal - Paul Simon, 'Graceland'"** (`xxiv-third-signal-paul-simon-graceland`), with its embed and contents row. Whether it goes too is his call.
+- The sweep session made the same change (`89d8a58`) and could not push it. This is a separate commit, so do not apply `89d8a58` on top.
+
 **THE SUMMARY NOW COVERS THE WHOLE REPORT — 24 Oct 2026, live at `/summary`.** Author: *"The report brief needs to cover the entire document not just epstein and Maxwell"*. Read as the monthly PDF.
 - **Shape:** 24 pages (the build now allows 8–24):
   - the lede names the whole scope;

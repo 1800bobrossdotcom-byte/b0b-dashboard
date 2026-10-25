@@ -32,14 +32,13 @@
 
   // Order is deliberate: the bar opens on the lead track.
   var TRACKS = [
-    { id: 'lYIsZr9L_rM', label: '3TEETH &mdash; Pumped Up Kicks' },                        // 3TEETH (artist channel @3T33TH, official video). Lead track, author's instruction 24 Oct 2026.
+    { id: 'HhZaHf8RP6g', label: 'Daft Punk &mdash; Veridis Quo' },                        // Daft Punk (artist channel). Lead track, author's instruction 25 Oct 2026.
+    { id: 'lYIsZr9L_rM', label: '3TEETH &mdash; Pumped Up Kicks' },                        // 3TEETH (artist channel @3T33TH, official video). Led the bar 24-25 Oct 2026.
     { id: 'SYaIakuWg-g', label: 'Hooverphonic &mdash; Barabas' },                          // Hooverphonic - Topic (licensed).
     { id: 'hFUEGRwhYcU', label: 'Blackalicious &mdash; Ego Sonic War Drums (unofficial upload)' }, // 'Hi-Def' — NOT a rights-holder channel (see header). Licensed copy V6Ds1JbKfj8 exists but is not embeddable.
     { id: 'iU6nkE-g3BM', label: 'Overseer &mdash; Heligoland' },                           // FATLANTIC — NOT a rights-holder channel (see header). ~26min: long tail after the song.
     { id: 'sP3V7PxjdQo', label: 'Iron &amp; Wine &mdash; Evening on the Ground (Lilith&rsquo;s Song)' }, // Sub Pop (Iron & Wine's label, official)
-    { id: 'HhZaHf8RP6g', label: 'Daft Punk &mdash; Veridis Quo' },                        // Daft Punk (artist channel)
     { id: 'Xv8FBjo1Y8I', label: 'Tracy Chapman &mdash; Talkin&rsquo; Bout a Revolution' }, // Tracy Chapman (artist channel)
-    { id: 'GP6a-7MP91g', label: 'Paul Simon &mdash; Graceland' },                          // PaulSimonVEVO (official audio)
     { id: '30cS-8s5wXs', label: 'billy woods &mdash; Spider Hole (clean edit)' },          // 'relly rel' — NOT rights-holder, and a censored cut (see header)
     { id: 'rx2_iHftARo', label: 'Talking Heads &mdash; Slippery People' },                 // Talking Heads - Topic (licensed)
     { id: 'qMDxrXFQwU8', label: 'Filter &mdash; Hey Man Nice Shot' },                      // Filter - Topic (licensed)
@@ -47,7 +46,7 @@
     { id: 'PtzhvJh9NRY', label: 'The Smiths &mdash; Bigmouth Strikes Again' },             // The Smiths (artist channel, official audio)
     { id: 'JKES3yfnD9U', label: 'Creedence Clearwater Revival &mdash; Have You Ever Seen the Rain' } // CCR (artist channel, official audio)
   ];
-  var LS_KEY = 'b0b_signal_v11';  // bump on every reorder: a stored index points into the old list
+  var LS_KEY = 'b0b_signal_v12';  // bump on every reorder: a stored index points into the old list
   var SAVE_MS = 1000;
   var player = null, ready = false, dur = 0, saveTimer = null, errCount = 0;
   // The films have the floor while the homepage carousel is open (landing-intro.js sets the flag

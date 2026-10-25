@@ -12,6 +12,10 @@ Set up 23 Oct 2026 at the author's instruction: *"Current events sweep. How do w
   rebased on `origin/main`.
 - **Stop if `scripts/sweep/PAUSE` exists.** That file is the author's off switch. Report that the sweep is paused,
   and do nothing else.
+- **Prove you can push before any research:** `git push --dry-run origin HEAD:refs/heads/claude/sweep-access-check`.
+  If it fails (the git proxy answers 403 "not in this session's authorized repository set" when the repo was not
+  attached to the session), stop at once and report that this run cannot publish. The 25 Oct 2026 run did a full
+  sweep, then found at the push that it had no credential, and its work sat stranded in a container.
 - `npm install` if `node_modules` is missing (the self-tests need express).
 - Set `SCRATCH` to the session's scratchpad directory, or `/tmp/sweep` if there is none.
 
