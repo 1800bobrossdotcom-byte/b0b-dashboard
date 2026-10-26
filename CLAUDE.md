@@ -218,6 +218,17 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**KUSHNER TEST CASE IN XXIII — 26 Oct 2026, live. `test-case-jared-kushner-how-a-private-citizen-brokers-state-deals` (XXIII toc 23 → 24, placed after ShinyHunters, before the 9/11 topology).** Author: *"Yes add all three"*: the UNSC 2334 lobbying, the mechanism of his civilian power, and Charles Kushner as a naming guard.
+- **What it says:**
+  - **the acts:** the Putin session (Interfax), the Board of Peace board, the spoken "Envoy of Peace", the White House's "volunteer basis", and his own "just a volunteer";
+  - **the mechanism:** the 2017 OLC opinion's two routes; nothing written exists for 2025–26; EO 14311 / Witkoff's appointment as the contrast; why the ethics, SGE, §2651a and Logan Act rules do not reach the arrangement; OLC's 1977 test as the counterweight, marked as the report's analysis;
+  - **the challenge:** *CREW v. Kushner* as allegations, with the answers (Mizelle "without merit", the White House "unserious, Trump-deranged organization", his "never taken a diplomatic action to benefit Affinity");
+  - **2334:** the act documented (Mueller Vol. I), the Israeli request attributed;
+  - **the naming guard:** Charles's 2004 plea, 2005 sentence, 2020 pardon and 2025 ambassadorship;
+  - **the grade:** a documented gap in accountability, now in court, and **not evidence of a hidden sponsor**, because the role is avowed. What would move it: a ruling, a written instrument, or an ethics/IG finding.
+- **Not on the page, deliberately:** the "Mossad asset" grading, Wiles, the 2020 FBI informant document, the Logan Act read against 2334. The calibration entry (XX) gained a one-clause guard linking the test case.
+- vqdraft: 30 quotes, 0 failing. Scale line 285 / 1,167 / 168.
+
 **KUSHNER AS "MOSSAD DENIABLE ASSET", HIS CIVILIAN POWER, THE EPSTEIN PATTERN — researched 26 Oct 2026, HELD. `research/KUSHNER-ASSET-POWER.md` (synthesis) + `KUSHNER-{E-ASSET,F-POWER,G-CONTINUANCE}.md`; 169 quotes, all vq OK.** Author: *"look into kushner as a mossad deniable asset.  why does he have so much power as a civilian brokering state level deals.  epstein-esque continuance, re: power structures"*.
 - **Asset: unsupported.** He reaches rung 2 with the Israeli government and rung 3 with private Israeli firms; no intelligence service appears anywhere. The phrase traces to Rick Wiles (2019, the dual-loyalty trope) and to a 2020 FBI informant report in DOJ's Jan 2026 release (hearsay; read via outlets, not opened). New and documented: he "led the effort for the Transition Team" against UNSC 2334 (Dec 2016, Mueller Vol. I), which was open policy. The documented foreign state money is Saudi, Qatari and Emirati.
 - **Power:** the President's foreign-affairs power lent to him. There is no written appointment, oath, SGE designation or disclosure for 2025–26, and the title "Special Envoy for Peace" exists only orally. The 2017 OLC opinion offers both the formal route and an "unofficial, ad hoc basis". The Logan Act, §2651a(j) and the ethics statutes do not reach him as he is used. The constraint is *CREW v. Kushner* (four counts). Witkoff has the office and files disclosures; Kushner does neither.
