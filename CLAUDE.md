@@ -218,6 +218,10 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**THE AUTHOR'S WEBSITE IS LINKED — 26 Oct 2026, live.** Author: *"Add my website gianniarone.com"*.
+- Placed with his own links: the report's top nav and sidebar (white GIANNIARONE.COM, just before ERC-1155), and in `/home` (nav after FARADAY, an "Author" row in the side index, footer). Link `https://www.gianniarone.com/` (the apex 308s there), new tab, `noopener noreferrer`.
+- **Not touched:** the `/start`-family nav, the map headers, and the JSON-LD (no `sameAs`). Any of these is his call.
+
 **JARED KUSHNER — researched 26 Oct 2026, HELD. `research/KUSHNER.md` (synthesis) + `KUSHNER-{A-MONEY,B-GOVERNMENT,C-PAGE-AUDIT,D-PHONE-HACK}.md`; 282 quotes, all vq OK.** Author: *"Lets look at Jared Kushner"*, *"Why is his … not on the list of high connectivity nodes"*, *"Research his news story of phone hack"*.
 - **Hub list:** it ranks map locations by drawn lines. There is no Kushner or Affinity marker, and the PIF marker has 0 lines, so he cannot appear. The figure is also stale (1,000 / 396 against 1,166 / 455). Adding an Affinity marker with a tier-3 PIF line is his call.
 - **Phone hack since 22 Oct:** nothing confirmed by anyone.
