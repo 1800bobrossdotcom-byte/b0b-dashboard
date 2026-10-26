@@ -298,6 +298,12 @@
     ],
     "why": "The 2009-2017 archive of the State Department site answers some document paths with a 'Technical Difficulties ... Exception: forbidden' page and HTTP 200, the same shape already registered for 2021-2025.state.gov. Registered so that page is a null (seen 24 Oct 2026, XVI international verification)."
   },
+  "2017-2021.state.gov": {
+    "decoy_titles": [
+      "Technical Difficulties"
+    ],
+    "why": "The 2017-2021 archive of the State Department site answers document paths (e.g. /the-abraham-accords/) with the same 'Technical Difficulties' page and HTTP 200 as the 2009-2017 and 2021-2025 archives. Registered so that page is a null (seen 26 Oct 2026, Kushner pass; two earlier rows for that path sit in the ledger as ok and are not to be cited)."
+  },
   "privacyinternational.org": {
     "decoy_titles": [
       "Privacy International's Media Service"

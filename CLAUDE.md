@@ -218,6 +218,25 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**JARED KUSHNER — researched 26 Oct 2026, HELD. `research/KUSHNER.md` (synthesis) + `KUSHNER-{A-MONEY,B-GOVERNMENT,C-PAGE-AUDIT,D-PHONE-HACK}.md`; 282 quotes, all vq OK.** Author: *"Lets look at Jared Kushner"*, *"Why is his … not on the list of high connectivity nodes"*, *"Research his news story of phone hack"*.
+- **Hub list:** it ranks map locations by drawn lines. There is no Kushner or Affinity marker, and the PIF marker has 0 lines, so he cannot appear. The figure is also stale (1,000 / 396 against 1,166 / 455). Adding an Affinity marker with a tier-3 PIF line is his call.
+- **Phone hack since 22 Oct:** nothing confirmed by anyone.
+  - Denials: Kushner, Trump ("totally false story … fake news", 23 Oct gaggle) and Cheung ("complete fiction").
+  - Demand letter to Condé Nast, 23 Oct; no suit filed.
+  - The Dutch MIVD and ministry decline to comment.
+  - The JPost pulled its write-up.
+  - The Bank of Israel "not aware" (one relay).
+  - No congressional action.
+- **Page errors found, NOT edited (12, listed in `KUSHNER.md` §5):**
+  - PIF July → June 2021;
+  - Affinity $3B / ~$4.8B → $6.16bn;
+  - "PR risks" unsourced;
+  - Indian Creek council seat stale (gone by Sept 2026), and "multiple administrations" wrong;
+  - the NEOM chain;
+  - **XX's asset-relocation line naming Kushner/Affinity: no document, the most serious.**
+- **His 2025–26 status is contested** (son-in-law → "Special Envoy for Peace" in the presidential documents; "private citizen" per the White House). **CREW v. Kushner**, D.D.C. 1:26-cv-03580, was filed 14 Oct 2026.
+- **Spider:** `2017-2021.state.gov` is registered as a decoy ("Technical Difficulties"), proven both ways. Its two earlier `/the-abraham-accords/` rows are not to be cited.
+
 **MEYER "MICKY" MALKA — researched 25–26 Oct 2026, HELD. `research/MALKA.md` (synthesis) + `MALKA-A-RECORD.md`, `MALKA-B-APOLLO-BLACK.md`, `MALKA-C-NETWORK.md`; 139 quotes, all vq OK.** Author: *"Research the investments of meyer malka, he was appointed to the board of Apollo Global Wealth leon black and runs node foundation.  6 degree node spread"*. The page had Malka, Ribbit, Robinhood and Nubank 0.
 - **The Apollo claim:** Apollo Global Management, Inc. appointed him an independent director on 20 Oct 2026, **effective 1 Jan 2027**. "Apollo Global Wealth" is a naming error: it is a business unit and has no board.
 - **Black:** left the board 21 Mar 2021, so they never sat together. He is still a 6.6% holder with an unused nomination right. No document ties the two men.
