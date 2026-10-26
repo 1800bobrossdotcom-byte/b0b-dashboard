@@ -169,6 +169,7 @@ Learn these; they are invoked by name on the page.
 - **Section I has no static sect-toc** (JS-generated). Sections II, IX, XIII and others do.
 - **DOJ fetch:** `Cookie: justiceGovAgeVerified=true` + browser UA. Akamai rate-limits with
   **HTTP 401, not 429** — use `--fail`, back off 5/15/35/60/90s.
+- **jmail.world's robots.txt disallows `/api/` (and `/person/`) for every agent, with `Crawl-delay: 10`** (read 26 Oct 2026; its header says "AI bots welcome, just be polite about rate"). The corpus method below uses `/api/emails/search`. **Whether to keep using it is the author's call; until he decides, do not run new API queries.** It is the same situation as Nominatim on 22 Oct. The search also returns only ~500 characters of each body, so re-filtering on `content_markdown` under-counts. Sort on the API's highlighted passage, and treat earlier re-filtered counts as floors.
 - **jmail API** 307-redirects www→apex; `curl -sL` required. Its `total` field is
   unreliable (returns 1000 for unrelated queries) — never cite it. Quote the phrase for
   exact-phrase search and re-filter results in-script.
@@ -216,6 +217,16 @@ than once.
 ---
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
+
+**MEYER "MICKY" MALKA — researched 25–26 Oct 2026, HELD. `research/MALKA.md` (synthesis) + `MALKA-A-RECORD.md`, `MALKA-B-APOLLO-BLACK.md`, `MALKA-C-NETWORK.md`; 139 quotes, all vq OK.** Author: *"Research the investments of meyer malka, he was appointed to the board of Apollo Global Wealth leon black and runs node foundation.  6 degree node spread"*. The page had Malka, Ribbit, Robinhood and Nubank 0.
+- **The Apollo claim:** Apollo Global Management, Inc. appointed him an independent director on 20 Oct 2026, **effective 1 Jan 2027**. "Apollo Global Wealth" is a naming error: it is a business unit and has no board.
+- **Black:** left the board 21 Mar 2021, so they never sat together. He is still a 6.6% holder with an unused nomination right. No document ties the two men.
+- **NODE:** the Infinite Node Foundation (digital art, Palo Alto). Malka is Secretary and director; the President/CEO is someone else. So "runs" is overstated.
+- **Ribbit:** $20.8bn regulatory AUM (Form ADV, Mar 2026); stakes in Robinhood, Coinbase, Root, Wealthfront and Figure from filings.
+- **Boards:** MercadoLibre 2013–21, Nu (Form Ds 2018–21), Ribbit LEAP, Robinhood since 2022. **Never Coinbase.**
+- **Epstein:** no documented edge. In the corpus he is one line on a 2012 conference roster, never a correspondent. The documented paths (3 hops) run through hubs (Apollo, JPMorgan), which is the guaranteed null.
+- **Flagged, not edited:** the page's network node "Apollo/Black" merges a firm and a man.
+- **Two corpus-method problems found; both his call (§4 trap):** jmail's robots.txt disallows `/api/`, and its search returns truncated text, so earlier re-filtered counts are floors.
 
 **THE AUTOMATED SWEEP RAN BUT COULD NOT PUBLISH — 25 Oct 2026, its first run. NOT FIXED FOR FUTURE RUNS until the author acts.** Author: *"check to make sure our automated sweeps are publishing"*.
 - The scheduled task (`trig_01RFnX93MHDF3rvLbtbVqjsw`) fired at 10:31 UTC into session `cse_01VhEq7nhx4WQCKxAAFE3hPo` and did the whole sweep. That included the 25 Oct XV update (`xv-status-update-25-october-2026`), the HELD file and a §7 entry, all in commit `f2669f2`.
