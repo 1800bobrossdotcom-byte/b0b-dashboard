@@ -218,6 +218,13 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**KUSHNER AS "MOSSAD DENIABLE ASSET", HIS CIVILIAN POWER, THE EPSTEIN PATTERN — researched 26 Oct 2026, HELD. `research/KUSHNER-ASSET-POWER.md` (synthesis) + `KUSHNER-{E-ASSET,F-POWER,G-CONTINUANCE}.md`; 169 quotes, all vq OK.** Author: *"look into kushner as a mossad deniable asset.  why does he have so much power as a civilian brokering state level deals.  epstein-esque continuance, re: power structures"*.
+- **Asset: unsupported.** He reaches rung 2 with the Israeli government and rung 3 with private Israeli firms; no intelligence service appears anywhere. The phrase traces to Rick Wiles (2019, the dual-loyalty trope) and to a 2020 FBI informant report in DOJ's Jan 2026 release (hearsay; read via outlets, not opened). New and documented: he "led the effort for the Transition Team" against UNSC 2334 (Dec 2016, Mueller Vol. I), which was open policy. The documented foreign state money is Saudi, Qatari and Emirati.
+- **Power:** the President's foreign-affairs power lent to him. There is no written appointment, oath, SGE designation or disclosure for 2025–26, and the title "Special Envoy for Peace" exists only orally. The 2017 OLC opinion offers both the formal route and an "unofficial, ad hoc basis". The Logan Act, §2651a(j) and the ethics statutes do not reach him as he is used. The constraint is *CREW v. Kushner* (four counts). Witkoff has the office and files disclosures; Kushner does neither.
+- **Epstein pattern: fails.** His role is avowed, not deniable. There was no immunity and he has no conviction. Rival B (open wealth plus family power) explains it. Kushner ↔ Epstein: one 2013 Observer gala invitation (attributed), below rung 1. The estate set was not text-searched and jmail was not used.
+- **Withheld from the public repo:** the informant document's crime allegations against the family, and its named third parties. One Q line was removed from the committed copy of G for this. **Opening EFTA00090314 is his call.**
+- **For the page, his call:** the 2334 lobbying, the mechanism (as XV or XXIII), and Charles's plea, pardon and ambassadorship as a naming guard. Asset framing is not recommended.
+
 **KUSHNER PAGE FIXES AND AN AFFINITY MARKER — 26 Oct 2026, live.** Author: *"yes"* to both offers: fix the 12 Kushner page errors in `research/KUSHNER.md` §5, and add Affinity to the map with a line to PIF.
 - **Report, fixed in place (no narration):**
   - **XX asset relocation:** "Kushner/Affinity Partners" removed from the resources list; it is now "sovereign wealth (Saudi Arabia's PIF among others)".
