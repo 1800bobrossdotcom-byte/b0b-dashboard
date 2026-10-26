@@ -1,13 +1,13 @@
 {
-  "generated": "2026-10-26T12:50:14.985Z",
+  "generated": "2026-10-26T19:27:31.242Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "23fcbd77756ebdc91fa854ff23b929e9aad98684788c5dd57125fb27637d2f6b",
+  "fullFileHash": "661288efc24fdbcefc0d2ddb5a85dbdc8a541d33b7044ce5465bcdd4b72114f4",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "c7decefc9b8bd83578b0bb14f0518818295faebfb8d2ca1b04d404b6f1bd6fa4",
+      "hash": "9a7ea6e2dc20421906a17bbe0b7f48b638af268de044d88ce733aedfd1fa565c",
       "length": 43691
     },
     {
@@ -272,8 +272,8 @@
     },
     {
       "id": "iv-documented-edges-into-the-current-power",
-      "hash": "e0794ab7537a4c56135cae7d9f35259cb243dfd913b19c1461a0d53738d6a952",
-      "length": 3735
+      "hash": "5b76f99aaec1efec02deb8b97c623d74664e268e50bd4aff9e19d7e82ee14859",
+      "length": 4066
     },
     {
       "id": "iv-the-recordings-epstein-on-tape-and-the-file",
@@ -532,13 +532,13 @@
     },
     {
       "id": "vii-the-apex-question-how-far-up-and-why-it-goes",
-      "hash": "b671329225071de5cfe518096388393dc6651158373708b466ed89dbf7392af4",
-      "length": 5761
+      "hash": "56fdd411c3d2013b5c88ffcedd7a72026a2869836198716226ebab593339041a",
+      "length": 5865
     },
     {
       "id": "vii-the-sovereign-wealth-hub-where-the",
-      "hash": "2b750b371295f39ff828eed22d6b2434b8347b3cfabdb1cb12640320f046c196",
-      "length": 8095
+      "hash": "8730cc9c5913d274887c476a9c177b4ddba6509f5c9a05c124788df0980b4752",
+      "length": 8484
     },
     {
       "id": "xiv-seed-sovereignty-the-svalbard-confiscation",
@@ -852,8 +852,8 @@
     },
     {
       "id": "xii-indian-creek-florida-billionaire-bunker",
-      "hash": "55da3fc26c0948497a22739d6c2db148bc1bcc4c81941f4d8e851c725c37ffd9",
-      "length": 2298
+      "hash": "eec9d3bd32d60707f2caf43267b05797f21a995a66867ff196a430a73f356728",
+      "length": 2259
     },
     {
       "id": "xii-fisher-island-florida-america-s-richest-zip",
@@ -882,8 +882,8 @@
     },
     {
       "id": "xii-layer-2-documented-coordination-real-but",
-      "hash": "208dfc267f699d0be7e4dd5bbe961ed25d1a8e4d5e32f7e341e307e9f0c22e5c",
-      "length": 1313
+      "hash": "d8bde42dab53a04b5e03ef786cc6f465ea19b3a6bd9a2df9bbe9cd60b0a191b7",
+      "length": 1465
     },
     {
       "id": "xii-layer-3-the-epstein-node-and-where-the-overlap",
@@ -1197,8 +1197,8 @@
     },
     {
       "id": "xref-epstein",
-      "hash": "1353c4b0d761d17bbf087c0b2a67535e42594c19c458341fb950e7996a2b3828",
-      "length": 658
+      "hash": "4527c5711a99d22940479e29a82a4291f5cd34011fd70bcf9f94e2576e07ff9a",
+      "length": 673
     },
     {
       "id": "xref-surveillance",
@@ -1242,8 +1242,8 @@
     },
     {
       "id": "XX",
-      "hash": "34026b39c904a32930ca0b09eceabb4d43375642e545128f5be716db55529826",
-      "length": 35963
+      "hash": "f292c685a3cdf221aa33b9e3e59fe0fe567b3b3de141806225b9cec1a08006ff",
+      "length": 36229
     },
     {
       "id": "xx-pattern-analysis-what-the-calibration-reveals",
@@ -1257,8 +1257,8 @@
     },
     {
       "id": "xx-operational-note-asset-relocation-hypothesis",
-      "hash": "08d73c6e96d2659ead2c6a251a276a3fd98054e0b9e9a4036f276f0db7a86fda",
-      "length": 5882
+      "hash": "6aea183f7d88a3217943e78243bf79684dc826f0e29f2f0b6bd6585d53e6129d",
+      "length": 5871
     },
     {
       "id": "xx-pattern-notes-geographic-and-programmatic",
@@ -3695,9 +3695,9 @@
     },
     {
       "index": 356,
-      "hash": "095c6d217b4b17551fd2dad5c6299037e0e79f14037f542532bd6047ea7b49f9",
+      "hash": "63e5e5e67ac4deb6573cd7a00997b9300eacd6d44efa71efab34a23fb135bb6c",
       "preview": "Why the edges do not make a chain. Try to draw these into a line and it eats its...",
-      "length": 982
+      "length": 1017
     },
     {
       "index": 357,

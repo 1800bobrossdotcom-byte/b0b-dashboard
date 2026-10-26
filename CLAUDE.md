@@ -218,6 +218,20 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**KUSHNER PAGE FIXES AND AN AFFINITY MARKER — 26 Oct 2026, live.** Author: *"yes"* to both offers: fix the 12 Kushner page errors in `research/KUSHNER.md` §5, and add Affinity to the map with a line to PIF.
+- **Report, fixed in place (no narration):**
+  - **XX asset relocation:** "Kushner/Affinity Partners" removed from the resources list; it is now "sovereign wealth (Saudi Arabia's PIF among others)".
+  - **The NEOM chain is cut** from the xref list (now "Kushner → Affinity Partners ← Saudi PIF", VII · XII) and from the Trump and Kushner calibration entries.
+  - **VII:** PIF's $2B is June 2021 (Senate Finance); "PR risks" is gone; the screening panel and MBS's override are attributed to the NYT via House Oversight letters (also in the VII apex line and XII layer 2); $6.16B (Form ADV, Mar 2026) replaces $3B / ~$4.8B; CREW v. Kushner added.
+  - **XII Indian Creek:** on the council 2024 to mid-2026; the convergence line now states its limit and points to the section's own verdict; "13 officers" becomes the directory's 11; "private government", "designed for 500+" and the arrow chain are cut; the village's "a private, residential municipality" is quoted.
+  - **IV:** no title on 2 Dec 2025 (TASS: "US businessman"); Mueller's Gorkov dispute and "cannot rule out"; the Josh line is now an identity guard with no count.
+  - **XII layer 2 Bilderberg:** Montreux, Pompeo joined him (AP, RSI).
+  - Calibration entry: 3 nodes are Senior Advisor 2017–21, Affinity, and the contested envoy title.
+- **Map:** new marker "Affinity Partners (A Fin Management LLC), Sunny Isles Beach" (VII, financial), placed by the Census geocoder at the Form ADV principal office (the ADV's private-residence box is unchecked; street only in the ctx). New line PIF → Affinity, tier 3. Indian Creek marker ctx updated. **Map 1,167 / 456**; seo-meta, KML, map-list, map-data, listen-places rebuilt.
+- Corrections ledger entry `C-2026-10-26-1` on `/retractions`.
+- **Not done:** the Section III graph figures ("1,000 plotted locations … 396 documented ties", the townhouse ranked second, 71% within six hops) are stale against 1,167 / 456 and were not recomputed; Affinity has one line, so he does not rise into any most-connected ranking. **Also flagged, same passage as the Kushner cut:** XX's relocation line still lists "cryptocurrency reserves (Lutnick/Cantor Fitzgerald/Tether)", the same living-person defect.
+- **Research started the same turn:** *"look into kushner as a mossad deniable asset … why does he have so much power as a civilian brokering state level deals … epstein-esque continuance"*. Three beats (asset, power, continuance) in session scratch `kushner2/`.
+
 **HIS X ACCOUNT IS OFF THE SITE — 26 Oct 2026, live.** Author: *"Remove my x account"*. Every `x.com/_lovebeing_` link is gone: the report's top nav and sidebar, `/home` (nav, the "Signal" row, the footer "X"), and both map headers (with the GL page's `.nav-x` style). **Do not re-add it.** The report's own citations of other X posts are untouched; they are sources, not his account. Same evening he wrote *"Push kushner info to main as well"*. The research files were already on `main` (`e247882`). Nothing about Kushner was put on the page.
 
 **THE AUTHOR'S WEBSITE IS LINKED — 26 Oct 2026, live.** Author: *"Add my website gianniarone.com"*.
