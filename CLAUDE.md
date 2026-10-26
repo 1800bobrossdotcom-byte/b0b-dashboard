@@ -218,6 +218,8 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**HIS X ACCOUNT IS OFF THE SITE — 26 Oct 2026, live.** Author: *"Remove my x account"*. Every `x.com/_lovebeing_` link is gone: the report's top nav and sidebar, `/home` (nav, the "Signal" row, the footer "X"), and both map headers (with the GL page's `.nav-x` style). **Do not re-add it.** The report's own citations of other X posts are untouched; they are sources, not his account. Same evening he wrote *"Push kushner info to main as well"*. The research files were already on `main` (`e247882`). Nothing about Kushner was put on the page.
+
 **THE AUTHOR'S WEBSITE IS LINKED — 26 Oct 2026, live.** Author: *"Add my website gianniarone.com"*.
 - Placed with his own links: the report's top nav and sidebar (white GIANNIARONE.COM, just before ERC-1155), and in `/home` (nav after FARADAY, an "Author" row in the side index, footer). Link `https://www.gianniarone.com/` (the apex 308s there), new tab, `noopener noreferrer`.
 - **Not touched:** the `/start`-family nav, the map headers, and the JSON-LD (no `sameAs`). Any of these is his call.
