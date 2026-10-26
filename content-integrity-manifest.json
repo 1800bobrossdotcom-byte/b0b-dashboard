@@ -1,13 +1,13 @@
 {
-  "generated": "2026-10-26T22:33:58.252Z",
+  "generated": "2026-10-26T22:41:16.827Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "f8a45ee6232ba2a68f3a0cb37efa3bde944e0c4517f4944e36bf1c357036733d",
+  "fullFileHash": "5043c937abe9499405250c1d4ad21acf912989e2e689c30062248b99fe482b4e",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "75ae696901411e4d3a1c473c896972c9048d4cbe4ed5ea19fafb4eaf29ca2b85",
+      "hash": "5f5dcde79914c034f732fc9d2652593f352f066c4d579e3f58ccb6c3557cdd39",
       "length": 43691
     },
     {
@@ -322,13 +322,13 @@
     },
     {
       "id": "v-the-death-and-the-funeral",
-      "hash": "490cbb6ae809af3da33bafa33727e33db5924f3350bce3d9b5dfe862faec7aa3",
-      "length": 1853
+      "hash": "3e739e84f3bd3163e1d7471f6f7e01b8938b6afa1882d4f84d1c98625de5e360",
+      "length": 2033
     },
     {
       "id": "v-the-hand-off-and-its-honest-limits",
-      "hash": "8fbbf19624acfd72551b5a0a032d3650cfac1d45339936ca7cb16a25358564ea",
-      "length": 2121
+      "hash": "d68b93ebb890538da94ea18b830add72656afb6a74ca40a1c7b3e2392d7394b1",
+      "length": 2311
     },
     {
       "id": "v-eleven-months-in-1991-the-hinge-the-report-had-never-put-on-one-line",
@@ -672,8 +672,8 @@
     },
     {
       "id": "ix-negev-nuclear-research-center-the-underground",
-      "hash": "ddc22498ae506566c3d1c0b9ea9eed1637711535e63e6eb7972e71e181a3d8d5",
-      "length": 2319
+      "hash": "9037c1765ddf3fa0139a30bd58ff76b1b2a9742cbb12cfa8c908d18bf9f9428a",
+      "length": 2496
     },
     {
       "id": "ix-little-saint-james-the-private-island",
@@ -747,8 +747,8 @@
     },
     {
       "id": "x-minerva-initiative-the-pentagon-s-social",
-      "hash": "bc552c079f646f71e58ccdef2074126e3d5c3e2240d2858be3de62db78e9f284",
-      "length": 2424
+      "hash": "385f0506459b1ab8e23b288f527f6223d9d6199b679892d8ddd9344de6eae08a",
+      "length": 2607
     },
     {
       "id": "x-project-nimbus-google-amazon-build-israel-s-ai",
@@ -767,8 +767,8 @@
     },
     {
       "id": "x-ancillary-module-the-two-ended-camera-burbank",
-      "hash": "e54bf2f5258bd9bbcc90f74e02c5ecb8f58f1e274cc660e3ea983b92f34cd8c9",
-      "length": 1749
+      "hash": "c49964b4e8da5ee6476d46b1b7b41f8b0fa34c9734535313636fded073272cd1",
+      "length": 1868
     },
     {
       "id": "x-the-divergence-same-pairing-opposite",
@@ -782,8 +782,8 @@
     },
     {
       "id": "x-what-stayed-behind-in-both-cities",
-      "hash": "745bb6582cbbb1d9a05403b3a1237669e2dc0bd34e927acc2063f85a8eaa5987",
-      "length": 1687
+      "hash": "1b6e5166da5d9d105c950b7fe871baf4613e46416dd9e6fb8ee12f1629965b3c",
+      "length": 1887
     },
     {
       "id": "x-why-it-matters-beyond-two-cities",
@@ -892,8 +892,8 @@
     },
     {
       "id": "xii-the-verdict-it-is-a-network-but-name-the-right",
-      "hash": "b3156ffb8c1186a40e917ce92baf03f44d166ab50e13ce04b17d70239195a3da",
-      "length": 1426
+      "hash": "e65dcf1cda5169a0b7bb81efe8c13f8092154b70b1465f62eeba5a01f54e6396",
+      "length": 1577
     },
     {
       "id": "XIII",
@@ -952,8 +952,8 @@
     },
     {
       "id": "xiv-animal-systems-the-parallel-operation",
-      "hash": "1b8575b02d2f5212f2fc30c00f72ac2cd88936f149e916b4f570ec76b0736430",
-      "length": 2038
+      "hash": "360d807bf75a84099ce442bc2313f9ce202af9a6b9acf32f4d0379ef9b4b6e6e",
+      "length": 2203
     },
     {
       "id": "XV",
@@ -982,8 +982,8 @@
     },
     {
       "id": "xv-status-update-20-october-2026",
-      "hash": "5163e03fec78a1db4bfa84c034dc13e8743a4e01cdb9915e27a00b2539805cb3",
-      "length": 25848
+      "hash": "04aac8ce0f6cfe3ce7540a63f8721660b8da85899514beb006bd726393be6404",
+      "length": 25955
     },
     {
       "id": "xv-status-update-22-october-2026",
@@ -1002,13 +1002,13 @@
     },
     {
       "id": "xv-who-arms-sudan-the-documented-layer-the-attributed-layer-and-the-gold",
-      "hash": "08019ca3579f08c66e642f8dbf474c50a202555039b791e2721d8d736622f6d6",
-      "length": 7625
+      "hash": "575285fa51adf8e2f56380ed2aa1b8c30fbb7e3670acf8c18d335104a0d6b3cd",
+      "length": 7819
     },
     {
       "id": "xv-whose-weapons-are-in-these-wars-the-us-and-israeli-lines-through-the-uae",
-      "hash": "8d3db047f6977288d87ca2349cd16845c7f3aabfd45631da56cd6e0d43aed729",
-      "length": 9114
+      "hash": "89a8680104ed302b5710d924b693e86d7d22d6333b99dd8f7bbd7f68262a0b6c",
+      "length": 9264
     },
     {
       "id": "xv-gaza-what-the-courts-have-said-and-an-archive-that-grades-its-own-footage",
@@ -1032,13 +1032,13 @@
     },
     {
       "id": "xvi-the-foia-pattern",
-      "hash": "945a962c401b08b7e8971e77052f05982e11b14f63ae66bd30c812bd3f1b9494",
-      "length": 1361
+      "hash": "dc91b53d32cce9cabc5183aea13b7122bc2a5ddde268e2ea874227652d136e14",
+      "length": 1515
     },
     {
       "id": "xvi-the-derivation-why-2013-and-why-2040",
-      "hash": "f01f083129d7b10a39ac448d88642536087a09767b7492acd1edd82d013bab26",
-      "length": 4126
+      "hash": "987b827bb30e3fd3865156f4ab7daa735a7184050d73ddc3d4d45df6af41ecbf",
+      "length": 4364
     },
     {
       "id": "xvi-cia-black-site-rendition-network-54-countries",
@@ -1072,18 +1072,18 @@
     },
     {
       "id": "xvi-reading-room-harvest-what-the-agency-foia",
-      "hash": "b37a56f9e7748ece73480ef5483d3bcc6a900145210657a950a88c98cd77287a",
-      "length": 8094
+      "hash": "8e61d2f1f1f1c71ecd756257828372179579faeeebabd93dabf44e1779d48766",
+      "length": 8241
     },
     {
       "id": "xvi-the-intelligence-funding-documents-the-certificate-is-the-voucher",
-      "hash": "f1530bb3e407a6d4fc7fed5e527e71ade858d1e7817442998fad3a5d8f58869f",
-      "length": 3432
+      "hash": "2f570966b426d065c13a3bba31492487b4951835edd8b800d6b7cc75ad65bfa4",
+      "length": 3653
     },
     {
       "id": "xvi-the-ground-zero-air-quality-records-released-8-september-2026",
-      "hash": "afce7b721011a11e27025077596634c0325fe2f88c6ec05a47f83f87cb3cb7c6",
-      "length": 2592
+      "hash": "6e4481e53c076bd7823aadaa085fa825ddeca22381a3d09df639a59eae72021f",
+      "length": 2716
     },
     {
       "id": "XVII",
@@ -1092,8 +1092,8 @@
     },
     {
       "id": "xvii-cia-contra-cocaine-trafficking-the-government",
-      "hash": "c1547aca4d34802c7f82c95c43f7d261b700a66eb8b801b2b8eed204bb4c5851",
-      "length": 3102
+      "hash": "396008248ad4994668ac9784ec2a00e34830fbeec6791be7934923156bd53172",
+      "length": 3314
     },
     {
       "id": "xvii-sinaloa-cartel-the-protected-franchise",
@@ -1172,8 +1172,8 @@
     },
     {
       "id": "xviii-obelisks-cubes-and-hyperstition-the-geometry",
-      "hash": "ec672b8664eb2ea9330eb7b52e56f2197cf4d0e4929d71004b90f149e41f206c",
-      "length": 4670
+      "hash": "8f551b80037ebd0c056432dd3834a1fbcb1ae71b49d5fe416878778bd4936bfd",
+      "length": 4793
     },
     {
       "id": "xviii-symbolism-and-ritual-engaged-at-its-strongest",
@@ -1182,8 +1182,8 @@
     },
     {
       "id": "XIX",
-      "hash": "621a4e89fbb5f065310f1ec5da39606221fd539ff62ff6c111920adcf0df4ec5",
-      "length": 1409
+      "hash": "03030f5ec8629c88f3815ef0a75c8392328260bc7fe27a4a5fd39d60f8ccce19",
+      "length": 1558
     },
     {
       "id": "xref-governance",
@@ -1317,8 +1317,8 @@
     },
     {
       "id": "xvi-united-states-v-swartz-the-ruling-recorded-the-prosecution-documented",
-      "hash": "8181803f134d7abaebe9b49d0548b99a1d6bec0f0fe0bbb9484f13e6edd297ad",
-      "length": 7180
+      "hash": "eaa4161f92722ec8ae2a36b563c8467e6baaeb8603de4a0532691a3e01aa11ff",
+      "length": 7366
     },
     {
       "id": "test-case-nikolai-mushegian-a-post-at-dawn-and-a-finding-of-no-criminal-hand",
@@ -1327,8 +1327,8 @@
     },
     {
       "id": "xvi-why-a-name-is-not-on-a-wanted-list-the-instrument-measures-warrants-not-danger",
-      "hash": "1a8a1f2c32a7e7f20ab0570422cbcfb7922ac8898c06568217b149456c8c157d",
-      "length": 6687
+      "hash": "140717c32010e2de575a9af9f472ae370dbeeddbfe153705b0efa3d3064f98d1",
+      "length": 6845
     },
     {
       "id": "xvi-a-claim-against-the-bureau-and-a-ransom-demanded-in-retractions",
@@ -1337,13 +1337,13 @@
     },
     {
       "id": "test-case-jared-kushner-how-a-private-citizen-brokers-state-deals",
-      "hash": "6fb66328b83ce0b75c95711a11dfdc92cc538f527475a62c2df010459fe2df3a",
-      "length": 8979
+      "hash": "8627f2489b5bcbfe406b845d896a9ef6cdd9551277501db5c6403b560c2efe1b",
+      "length": 9093
     },
     {
       "id": "xvi-the-9-11-topology-every-vector-in-this-document-run-against-the-record",
-      "hash": "7a891e74e8b885627b120198cc8fb9697b48237d1cd53cefb752b27095f3a74a",
-      "length": 915
+      "hash": "c0e6582e60430ac422ecec1a9aa81d432f58229f8f4d6e0ae44716228ebc2ff9",
+      "length": 1055
     },
     {
       "id": "xvi-9-11-vector-1-cantor-fitzgerald-and-the-two-pools-of-money",
@@ -1352,8 +1352,8 @@
     },
     {
       "id": "xvi-9-11-vector-2-continuity-of-government-the-first-activation",
-      "hash": "547d81101b45308d5423cf3de78c61a9f8848fcb010245a1603abe24c307f368",
-      "length": 902
+      "hash": "9fa7b31c3415c09f4796c3e78e5145b5a1c803d11b737b3ff7dc0bcfedd05645",
+      "length": 1022
     },
     {
       "id": "xvi-9-11-vector-3-the-emergency-that-did-not-end",

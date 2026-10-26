@@ -218,6 +218,15 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**24 PICTURES ADDED ACROSS THE REPORT — 26 Oct 2026, live.** Author: *"Add more pictures throughout report"*.
+- **The source is the listen-mode library only** (`site/img/listen/`, `site/listen-media.js`): each image is already licence-checked (PD, CC0 or CC BY) and face-checked. Nothing new was sourced.
+- **Placement:** a script matched each item's curated trigger phrases (`scripts/listen-media-keys.json`) against the `<p>` text of image-poor sections (II, VII and XX skipped). It kept only items whose subject appears in the first ~220 characters of the paragraph, with no faces, one per subsection and one use per item, capped by section size. Every pick was then read in context and every image viewed on a contact sheet.
+- **Cut on reading:** the BIS tower (a "dualism" paragraph), MQ-9 for an RSF drone strike (wrong force), the US National Security Act page beside the UK NSA arrests (naming error), a rooftop CCTV for "What an ALPR is", the Queensboro Bridge for New Amsterdam, CIA/FBI shots in Section I, and all of Section I (his testimony is not illustrated).
+- **The one face kept:** Reagan receiving the Tower report (Reagan, Tower and Muskie, all dead).
+- **Where they went:** V ×2, IX, X ×3, XII, XIV, XV ×3, XVI ×5, XVII, XVIII, XIX, XXIII ×5.
+- **Captions:** plain description plus credit and licence, linked to the source page where a film spec records one. They make no claims.
+- **Still without pictures:** I, VI, VIII, XI, XIII, XXII, XXIV, XXV.
+
 **KUSHNER TEST CASE IN XXIII — 26 Oct 2026, live. `test-case-jared-kushner-how-a-private-citizen-brokers-state-deals` (XXIII toc 23 → 24, placed after ShinyHunters, before the 9/11 topology).** Author: *"Yes add all three"*: the UNSC 2334 lobbying, the mechanism of his civilian power, and Charles Kushner as a naming guard.
 - **What it says:**
   - **the acts:** the Putin session (Interfax), the Board of Peace board, the spoken "Envoy of Peace", the White House's "volunteer basis", and his own "just a volunteer";
