@@ -116,6 +116,7 @@
   }
 
   function set(on) {
+    try { window.dispatchEvent(new CustomEvent('b0b-skin', { detail: { on: !!on } })); } catch (e) {}
     if (on) {
       document.documentElement.setAttribute('data-skin', ON);
       store(ON);
@@ -132,6 +133,9 @@
       paint();
     }
   }
+
+  // The cards (card.js) carry the same switch; they call this so the report follows them.
+  window.__b0bSkinSet = function (on) { if (on !== isOn()) set(on); };
 
   function make() {
     var b = el('button', 'b0b-skin-btn');

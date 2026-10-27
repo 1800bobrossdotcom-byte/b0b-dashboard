@@ -9,6 +9,10 @@
  *   data-link-base="/report"       where the subsection links point ("" on the report itself)
  *   data-url-sync                  keep ?c=<id> in the address bar (the /card page)
  *
+ * SPECULATIVE: the same switch as the report's third skin (localStorage b0b_skin). When it is
+ * on, revealing a card's line also shows its section's reach from /data/speculative.json, under
+ * the documented line and labelled as speculative. The card's own line is never changed.
+ *
  * The day's card is the same for every reader: the UTC day number times a prime,
  * modulo the pool, which walks the whole pool before any card comes round again.
  * Nothing is sent anywhere and nothing about the reader is stored.
@@ -23,6 +27,26 @@
   var FILTERS = [['', 'All'], ['fact', 'Facts'], ['method', 'Methods'], ['question', 'Questions'], ['connection', 'Connections']];
   var STEP = 7919;
   var HOST = 'https://www.b0b.dev';
+  var SKIN_KEY = 'b0b_skin';
+  var onReport = !!document.querySelector('.main-content h2[id]');
+  var reaches = null, reachLoad = null;
+  function specOn() { try { return localStorage.getItem(SKIN_KEY) === 'speculative'; } catch (e) { return false; } }
+  function setSpec(on) {
+    if (typeof window.__b0bSkinSet === 'function') { window.__b0bSkinSet(on); return; }
+    try { if (on) localStorage.setItem(SKIN_KEY, 'speculative'); else localStorage.removeItem(SKIN_KEY); } catch (e) {}
+    try { window.dispatchEvent(new CustomEvent('b0b-skin', { detail: { on: on } })); } catch (e) {}
+  }
+  // ?skin=speculative on a link turns it on here too, as it does on the report.
+  if (/[?&]skin=speculative\b/.test(location.search) && !onReport) setSpec(true);
+  function loadReaches() {
+    if (reaches) return Promise.resolve(reaches);
+    if (!reachLoad) {
+      reachLoad = fetch('/data/speculative.json', { cache: 'no-cache' })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(function (d) { reaches = {}; (d.reaches || []).forEach(function (x) { reaches[x.id] = x; }); return reaches; });
+    }
+    return reachLoad;
+  }
 
   function el(tag, cls, text) {
     var e = document.createElement(tag);
@@ -82,6 +106,15 @@
     meta.appendChild(tier); meta.appendChild(src);
     answer.appendChild(quote); answer.appendChild(meta);
 
+    var reach = el('div', 'bc-reach');
+    reach.hidden = true;
+    var rKick = el('p', 'bc-r-kicker');
+    var rHead = el('p', 'bc-r-head');
+    var rKill = el('p', 'bc-r-kill');
+    var rLink = el('a', 'bc-r-link', 'Read the reach →');
+    reach.appendChild(rKick); reach.appendChild(rHead); reach.appendChild(rKill); reach.appendChild(rLink);
+    answer.appendChild(reach);
+
     var actions = el('div', 'bc-actions');
     var reveal = el('button', 'bc-reveal', 'Show the line');
     reveal.type = 'button';
@@ -107,7 +140,10 @@
       });
       kinds.appendChild(b);
     });
-    actions.appendChild(reveal); actions.appendChild(another); actions.appendChild(copy); actions.appendChild(kinds);
+    var spec = el('button', 'bc-spec');
+    spec.type = 'button';
+    spec.addEventListener('click', function () { setSpec(!specOn()); });
+    actions.appendChild(reveal); actions.appendChild(another); actions.appendChild(copy); actions.appendChild(spec); actions.appendChild(kinds);
 
     var note = el('p', 'bc-note');
     note.appendChild(document.createTextNode('Every line is quoted from the report and checked against it at each build. '));
@@ -118,6 +154,33 @@
     box.appendChild(head); box.appendChild(prompt); box.appendChild(between);
     box.appendChild(answer); box.appendChild(actions); box.appendChild(note);
     root.appendChild(box);
+
+    function paintSpec() {
+      var on = specOn();
+      box.classList.toggle('bc-is-spec', on);
+      spec.setAttribute('aria-pressed', on ? 'true' : 'false');
+      spec.textContent = on ? '◆ Speculative on' : '◇ Speculative';
+      spec.title = on ? 'Turn off the speculative skin' : 'Speculative: after the line, show how far its section reaches past the documents';
+      fillReach();
+    }
+
+    // The reach belongs to the card's section; it is shown only once the documented line is.
+    function fillReach() {
+      if (!specOn() || !current || answer.hidden) { reach.hidden = true; return; }
+      var c = current;
+      loadReaches().then(function (all) {
+        var r = all[c.section];
+        if (!r || current !== c || !specOn() || answer.hidden) { reach.hidden = true; return; }
+        rKick.textContent = 'Speculative · the reach · Section ' + r.id;
+        rHead.textContent = r.headline;
+        rKill.textContent = '';
+        rKill.appendChild(el('b', '', 'Would kill it: '));
+        rKill.appendChild(document.createTextNode(r.kill));
+        rLink.href = onReport && base === '' ? '#' + r.id : '/report?skin=speculative#' + r.id;
+        reach.hidden = false;
+      }).catch(function () { reach.hidden = true; });
+    }
+    window.addEventListener('b0b-skin', function () { setTimeout(paintSpec, 0); });
 
     function show(c, label) {
       current = c;
@@ -133,6 +196,7 @@
       src.textContent = 'Section ' + c.section + (c.subsection ? ' · ' + c.subsection : '') + ' →';
       src.href = base + '#' + c.anchor;
       answer.hidden = true;
+      reach.hidden = true;
       reveal.hidden = false;
       reveal.setAttribute('aria-expanded', 'false');
       if (sync && history.replaceState) {
@@ -156,6 +220,7 @@
       answer.hidden = false;
       reveal.hidden = true;
       reveal.setAttribute('aria-expanded', 'true');
+      fillReach();
       src.focus({ preventScroll: true });
     });
     another.addEventListener('click', next);
@@ -169,5 +234,6 @@
 
     if (asked) show(asked);
     else show(daily, "Today's card · " + dayLabel(today));
+    paintSpec();
   }
 })();

@@ -146,8 +146,8 @@ def build_page(built):
                             '<span class="tier %s">%s</span>' % (cls, e(c['tier'])),
                             e(c['quote']), c['anchor'], e(where)))
         parts.append('</ul>')
-    parts.append('<script src="/card.js?v=2" defer></script>')
-    head = '\n  <link rel="stylesheet" href="/card.css?v=2">'
+    parts.append('<script src="/card.js?v=3" defer></script>')
+    head = '\n  <link rel="stylesheet" href="/card.css?v=3">'
     return sp.page('b0b.dev - one card from the record', '\n'.join(parts), head_extra=head)
 
 
