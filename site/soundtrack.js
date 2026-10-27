@@ -62,7 +62,7 @@
 
   var style = document.createElement('style');
   style.textContent = [
-    '#b0b-snd{position:fixed;left:16px;bottom:calc(var(--b0b-signal-h,46px) + 18px);z-index:100000;',
+    '#b0b-snd{position:fixed;left:16px;bottom:calc(var(--b0b-dock-h,var(--b0b-signal-h,46px)) + 12px);z-index:100000;',
     'display:flex;align-items:center;gap:8px;max-width:min(330px,calc(100vw - 32px));',
     'background:#0a0a0a;border:1px solid #333;border-radius:4px;padding:6px 9px;',
     'font-family:var(--mono,ui-monospace,SFMono-Regular,Menlo,monospace);font-size:11px;line-height:1.3;color:#bbb;',
@@ -77,6 +77,8 @@
     '#b0b-snd .b0b-snd-x{color:#888;border-color:#333}',
     '#b0b-snd-stage{position:fixed;left:-10000px;top:0;width:320px;height:180px;border:0;opacity:.01;pointer-events:none}',
     '@media (max-width:520px){#b0b-snd .b0b-snd-meta{display:none}}',
+    // On the report's desktop layout the fixed 260px sidebar owns the left edge; sit beside it, not on it.
+    '@media (min-width:861px) and (hover:hover){body:has(.sidebar) #b0b-snd{left:276px}}',
     '@media print{#b0b-snd{display:none}}'
   ].join('');
   document.head.appendChild(style);

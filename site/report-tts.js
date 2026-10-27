@@ -35,7 +35,7 @@
     st.textContent = [
       '.tts-reading{background:linear-gradient(90deg,rgba(0,255,65,.14),rgba(0,255,65,.03));',
       'box-shadow:inset 3px 0 0 #00ff41;border-radius:3px;transition:background .25s;}',
-      '#ttsPlayer{position:fixed;left:50%;bottom:calc(var(--b0b-signal-h,46px) + 48px);transform:translateX(-50%);z-index:2147483002;',
+      '#ttsPlayer{position:fixed;left:50%;bottom:calc(var(--b0b-dock-h,var(--b0b-signal-h,46px)) + 12px);transform:translateX(-50%);z-index:2147483002;',
       'display:flex;flex-direction:column;gap:8px;max-width:min(680px,calc(100vw - 24px));',
       'background:rgba(10,10,10,.96);border:1px solid #1f3a24;border-radius:12px;',
       'padding:10px 14px;box-shadow:0 8px 30px rgba(0,0,0,.6);',
@@ -53,12 +53,13 @@
       'color:#cfcfcf;border-radius:6px;font-family:inherit;font-size:.7rem;padding:3px 4px;}',
       '#ttsPlayer select{max-width:260px;}','#ttsPlayer .tts-diag{display:none;}#ttsPlayer.tts-debug .tts-diag{display:flex;}','#ttsPlayer .tts-vcount{font-size:.62rem;color:#6a7a6a;}',
       '#ttsPlayer label{font-size:.66rem;color:#8a8a8a;display:flex;align-items:center;gap:5px;}',
-      '#ttsFab{position:fixed;right:16px;bottom:calc(var(--b0b-signal-h,46px) + 48px);z-index:100000;background:#0a0a0a;',
+      '#ttsFab{position:fixed;right:16px;bottom:calc(var(--b0b-dock-h,var(--b0b-signal-h,46px)) + 66px);z-index:100000;background:#0a0a0a;',
       'border:1px solid #2a4a30;color:#00ff41;border-radius:50%;width:52px;height:52px;cursor:pointer;',
       'font-size:1.4rem;box-shadow:0 6px 20px rgba(0,0,0,.55);transition:.15s;}',
       '#ttsFab:hover{background:#00ff41;color:#000;}',
       '#ttsFab.hidden{display:none;}',
       '@media (max-width:600px){#ttsPlayer .tts-status{flex-basis:100%;}',
+      '#ttsFab{width:44px;height:44px;font-size:1.15rem;}',
       '#ttsPlayer select{max-width:200px;}}'
     ].join('');
     document.head.appendChild(st);

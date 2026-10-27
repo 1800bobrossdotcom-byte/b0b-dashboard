@@ -19,7 +19,7 @@
     body { background: var(--bg); color: var(--text); font-family: 'Courier New', monospace; }
     #map { width: 100%; height: calc(100vh - 44px); }
     #map.firstpeoples-mode .leaflet-tile-pane { filter: sepia(0.35) saturate(0.8) brightness(0.9); }
-    body .leaflet-bottom { bottom: calc(var(--b0b-signal-h, 46px) + 40px) !important; }
+    body .leaflet-bottom { bottom: calc(var(--b0b-signal-h, 46px) + var(--b0b-cm-h, 36px) + 4px) !important; }
     .header {
       background: var(--bg);
       border-bottom: 1px solid var(--border);
@@ -5285,11 +5285,11 @@ function loadEmbeddedIndigenousTerritories() {
 })();
 </script>
 
-<script src="/signal-bar.js?v=20" defer></script>
+<script src="/signal-bar.js?v=21" defer></script>
 <!-- Countermeasures drawer, double-stacked directly above the signal bar. Loads
      after signal-bar.js so --b0b-signal-h is already published when it measures.
      Shared with /report; this page used to carry its own inline copy. -->
-<script src="/countermeasures.js?v=1" defer></script>
+<script src="/countermeasures.js?v=2" defer></script>
 <script src="/theme.js" defer></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>

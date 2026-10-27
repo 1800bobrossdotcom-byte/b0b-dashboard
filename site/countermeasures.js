@@ -36,6 +36,19 @@
   /* ===================== STYLE ===================== */
 
   var CSS = `
+/* Height of the collapsed bar, published for anything that stacks above it
+   (signal-bar.js lines the floating buttons up on it). 0 on phones, where the
+   collapsed bar is folded into the signal bar as a shield button. */
+:root { --b0b-cm-h: 36px; }
+@media (max-width: 768px) { :root { --b0b-cm-h: 32px; } }
+@media (max-width: 600px) {
+  :root { --b0b-cm-h: 0px; }
+  body .cm-drawer:not(.expanded) { display: none; }
+}
+#b0b-signal-cm { border-color: #a33 !important; color: #ff4444 !important; display: none !important; }
+#b0b-signal-cm:hover, #b0b-signal-cm.on { background: #ff4444 !important; color: #000 !important; }
+#b0b-signal-cm .cm-n { font-size: 9px; margin-left: 1px; }
+@media (max-width: 600px) { #b0b-signal-cm { display: flex !important; } }
 body .cm-drawer {
   position: fixed;
   bottom: var(--b0b-signal-h, 46px); left: 0; right: 0;
@@ -203,10 +216,44 @@ body .cm-drawer {
 `;
 
   // The collapsed bar's height, which the host page has to clear at the bottom of
-  // its scroll. Matches the .cm-drawer-bar rules above.
+  // its scroll. Matches the .cm-drawer-bar rules above (0 on phones: folded into the signal bar).
   function barHeight() {
-    return window.innerWidth <= 768 ? 32 : 36;
+    return window.innerWidth <= 600 ? 0 : window.innerWidth <= 768 ? 32 : 36;
   }
+
+  // On phones the collapsed bar takes a second strip of the screen for a label and five dots.
+  // There it is a shield button inside the signal bar instead, showing how many are on; a tap
+  // opens the same drawer above the bar. The signal bar is injected by its own deferred script,
+  // so wait for it briefly; with no signal bar the drawer keeps its own bar at every width.
+  function mountShield(tries) {
+    var sb = document.getElementById('b0b-signal-bar');
+    if (!sb) {
+      if (tries > 0) setTimeout(function () { mountShield(tries - 1); }, 250);
+      else { var st = document.getElementById('b0b-cm-style'); if (st) st.textContent += '@media (max-width:600px){body .cm-drawer:not(.expanded){display:block}:root{--b0b-cm-h:32px}}'; }
+      return;
+    }
+    if (document.getElementById('b0b-signal-cm')) return;
+    var b = document.createElement('button');
+    b.id = 'b0b-signal-cm';
+    b.type = 'button';
+    b.title = 'Countermeasures';
+    b.setAttribute('aria-label', 'Countermeasures');
+    b.setAttribute('aria-controls', 'cmDrawer');
+    b.innerHTML = '&#128737;<span class="cm-n"></span>';
+    b.addEventListener('click', function (e) { e.stopPropagation(); toggleCmDrawer(); });
+    var mute = document.getElementById('b0b-signal-mute');
+    sb.insertBefore(b, mute || null);
+    var paint = function () {
+      var d = document.getElementById('cmDrawer');
+      var on = d ? d.querySelectorAll('.cm-dot.active').length : 0;
+      b.querySelector('.cm-n').textContent = on ? String(on) : '';
+      b.classList.toggle('on', !!(d && d.classList.contains('expanded')));
+      b.setAttribute('aria-expanded', d && d.classList.contains('expanded') ? 'true' : 'false');
+    };
+    paint();
+    setInterval(paint, 500);
+  }
+  mountShield(40);
 
   // Injected immediately, before the engine below evaluates — see the note on boot().
   var host = document.createElement('div');

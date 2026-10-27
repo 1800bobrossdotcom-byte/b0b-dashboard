@@ -46,11 +46,16 @@
     { id: 'N3XbZvD3lRo', label: 'GHOSTEMANE &mdash; AI' },                                 // GHOSTEMANE (artist channel @ghostemane, official video; oEmbed). Added 25 Oct 2026, author's instruction.
     { id: 'Q3dvbM6Pias', label: 'Rage Against the Machine &mdash; Testify' },              // RATMVEVO (official video; oEmbed; id from the song's Wikipedia page). Added 27 Oct 2026, author's instruction.
     { id: 'qphWnknZeaw', label: 'Hemlock Ernst &amp; Kenny Segal &mdash; Down' },           // Samuel T. Herring - Topic (licensed; oEmbed). Back at the House, Ruby Yacht 2019. Added 27 Oct 2026, author's instruction.
-    { id: '_sDy333YoMM', label: 'Naked Eyes &mdash; Promises, Promises' }                    // Naked Eyes - Topic (licensed; oEmbed). Added 27 Oct 2026, author's instruction.
+    { id: 'O2KpEva4As4', label: 'Faith No More &mdash; We Care a Lot' },                    // Faith No More - Topic (Rhino/London-Sire; the 1987 Introduce Yourself recording; oEmbed). Added 27 Oct 2026, author's instruction.
+    { id: 'SqT1y5Qi6l0', label: 'Carl Carlton &mdash; Everlasting Love' }                   // Carl Carlton - Topic (Universal; oEmbed). The 1974 hit; author chose it over Robert Knight / Love Affair / Howard Jones. Added 27 Oct 2026.
   ];
-  var LS_KEY = 'b0b_signal_v13';  // bump on every reorder: a stored index points into the old list
+  var LS_KEY = 'b0b_signal_v14';  // bump on every reorder: a stored index points into the old list
   var SAVE_MS = 1000;
   var player = null, ready = false, dur = 0, saveTimer = null, errCount = 0;
+  // Listener's playback modes, kept with the rest of the bar's state. shuffle picks the next track
+  // at random (never the same one twice running); repeat is 'all' (wrap the list) or 'one'.
+  // hist is the shuffle history, so PREVIOUS goes back to what actually played.
+  var hist = [];
   // The films have the floor while the homepage carousel is open (landing-intro.js sets the flag
   // and announces open and close as 'b0b-floor'). A listener who left the bar playing is resumed
   // when the carousel closes; nothing is saved as paused on their behalf.
@@ -121,11 +126,40 @@
     // loads this file WILL be covered otherwise - that is how the /map
     // countermeasures drawer got buried.
     ':root{--b0b-signal-h:calc(46px + env(safe-area-inset-bottom,0px))}',
-    '.back-to-top{bottom:calc(var(--b0b-signal-h,46px) + 18px) !important}',
+    // Floating buttons sit on one line above the dock: the dock is this bar plus, where a page
+    // has one, the countermeasures bar (countermeasures.js publishes --b0b-cm-h; 0 on phones,
+    // where it folds into this bar). Back-to-top takes the right edge; the narrator's button
+    // stacks above it; the soundtrack chip takes the left edge.
+    ':root{--b0b-dock-h:calc(var(--b0b-signal-h,46px) + var(--b0b-cm-h,0px))}',
+    '.back-to-top{bottom:calc(var(--b0b-dock-h) + 12px) !important;right:16px !important}',
+    '#b0b-signal-bar button.on{background:#00ff41;color:#000}',
+    '#b0b-signal-bar .sb-mode{font-size:12px}',
+    '#b0b-signal-vol{width:72px;accent-color:#00ff41;cursor:pointer;flex:0 0 auto}',
+    '#b0b-signal-queue{position:fixed;right:12px;bottom:calc(var(--b0b-signal-h,46px) + 8px);z-index:2147483001;',
+    'width:min(420px,calc(100vw - 24px));max-height:min(60vh,520px);overflow-y:auto;overscroll-behavior:contain;',
+    'background:#070707;border:1px solid #1c4;border-radius:4px;box-shadow:0 10px 30px rgba(0,0,0,.6);',
+    "font-family:ui-monospace,'SF Mono','Cascadia Code','Roboto Mono',Menlo,Consolas,monospace;font-size:12px;color:#8fb8a0}",
+    '#b0b-signal-queue[hidden]{display:none}',
+    '#b0b-signal-queue header{position:sticky;top:0;display:flex;align-items:center;gap:8px;padding:8px 10px;',
+    'background:#070707;border-bottom:1px solid #143;color:#00ff41;letter-spacing:1px}',
+    '#b0b-signal-queue header span{margin-left:auto;color:#5a7a68;letter-spacing:0}',
+    '#b0b-signal-queue header button{background:transparent;border:1px solid #1c4;color:#00ff41;border-radius:3px;cursor:pointer;',
+    'font:inherit;font-size:11px;padding:3px 7px;letter-spacing:0}',
+    '#b0b-signal-queue header button.on{background:#00ff41;color:#000}',
+    '#b0b-signal-queue ol{list-style:none;margin:0;padding:4px 0}',
+    '#b0b-signal-queue li button{all:unset;box-sizing:border-box;display:flex;gap:10px;width:100%;padding:7px 10px;cursor:pointer;line-height:1.35}',
+    '#b0b-signal-queue li button:hover,#b0b-signal-queue li button:focus-visible{background:#0d1f14;color:#baf5cb}',
+    '#b0b-signal-queue li .n{color:#3f5a4c;min-width:2ch;text-align:right;font-variant-numeric:tabular-nums}',
+    '#b0b-signal-queue li.cur button{color:#00ff41}',
+    '#b0b-signal-queue li.cur .n{color:#00ff41}',
     // Pages with their own bottom stack (see /map) override this with a
     // higher-specificity rule; this is the default for pages without one.
     '.leaflet-bottom{bottom:calc(var(--b0b-signal-h,46px) + 2px) !important}',
+    '@media(max-width:900px){#b0b-signal-vol{display:none}}',
     '@media(max-width:600px){#b0b-signal-title{max-width:30vw}#b0b-signal-upd{display:none}#b0b-signal-visitors{display:none}#b0b-signal-time{display:none}',
+    '#b0b-signal-bar #b0b-signal-shuffle,#b0b-signal-bar #b0b-signal-repeat{display:none}#b0b-signal-queue{left:8px;right:8px;width:auto}',
+    '#b0b-signal-title{flex:1 1 auto;max-width:none}#b0b-signal-title .sb-k{display:none}#b0b-signal-title small{color:#8fb8a0}',
+    '#b0b-signal-seek{flex:0 1 56px;min-width:28px}',
     '#b0b-signal-bar{gap:6px}#b0b-signal-bar button{width:27px;height:27px;min-width:27px;font-size:12px}}',
     '@media(max-width:380px){#b0b-signal-title small{display:none}#b0b-signal-bar{gap:4px}',
     '#b0b-signal-bar button{width:25px;height:25px;min-width:25px}}'
@@ -141,12 +175,28 @@
     '<button id="b0b-signal-prev" aria-label="Previous signal" title="Previous track">&#9198;</button>' +
     '<button id="b0b-signal-play" aria-label="Play signal" title="Play / pause">&#9654;</button>' +
     '<button id="b0b-signal-next" aria-label="Next signal" title="Next track">&#9197;</button>' +
-    '<span id="b0b-signal-title">SIGNAL <small>&middot; ' + TRACKS[idx].label + '</small></span>' +
+    '<span id="b0b-signal-title"><span class="sb-k">SIGNAL </span><small>&middot; ' + TRACKS[idx].label + '</small></span>' +
     '<div id="b0b-signal-seek" aria-label="Seek"><div id="b0b-signal-fill"></div></div>' +
     '<span id="b0b-signal-time">0:00</span>' +
+    '<button id="b0b-signal-shuffle" class="sb-mode" aria-pressed="false" aria-label="Shuffle" title="Shuffle">&#8644;</button>' +
+    '<button id="b0b-signal-repeat" class="sb-mode" aria-label="Repeat: all" title="Repeat: all">&#8635;</button>' +
+    '<button id="b0b-signal-list" aria-expanded="false" aria-controls="b0b-signal-queue" aria-label="Track list" title="Track list">&#9776;</button>' +
+    '<input id="b0b-signal-vol" type="range" min="0" max="100" step="1" value="100" aria-label="Volume" title="Volume">' +
     '<button id="b0b-signal-mute" aria-label="Mute" title="Mute / unmute">&#128266;</button>' +
     '<span id="b0b-signal-upd"></span>' +
     '<span id="b0b-signal-visitors" style="color:#3f5a4c;white-space:nowrap;font-size:10px"></span>';
+  // The track list opens above the bar. Built once; the current track is re-marked on every change.
+  var queue = document.createElement('div');
+  queue.id = 'b0b-signal-queue';
+  queue.hidden = true;
+  queue.setAttribute('role', 'dialog');
+  queue.setAttribute('aria-label', 'Signal track list');
+  queue.innerHTML = '<header>SIGNAL <span>' + TRACKS.length + ' tracks</span>' +
+    '<button type="button" class="q-shuf" aria-pressed="false">&#8644; SHUFFLE</button>' +
+    '<button type="button" class="q-rep">&#8635; ALL</button></header><ol>' +
+    TRACKS.map(function (t, i) {
+      return '<li data-i="' + i + '"><button type="button"><span class="n">' + (i + 1) + '</span><span>' + t.label + '</span></button></li>';
+    }).join('') + '</ol>';
   var host = document.createElement('div');
   host.id = 'b0b-signal-yt';
   var mount = document.createElement('div');
@@ -154,6 +204,7 @@
 
   function attach() {
     document.body.appendChild(bar);
+    document.body.appendChild(queue);
     document.body.appendChild(host);
     // Keep page content clear of the fixed bar.
     var pad = 52 + 'px';
@@ -164,7 +215,7 @@
   else document.addEventListener('DOMContentLoaded', attach);
 
   /* ---------- controls ---------- */
-  var playBtn, muteBtn, prevBtn, nextBtn, titleEl, fill, timeEl, seekEl;
+  var playBtn, muteBtn, prevBtn, nextBtn, titleEl, fill, timeEl, seekEl, shufBtn, repBtn, listBtn, volEl;
   function els() {
     playBtn = document.getElementById('b0b-signal-play');
     muteBtn = document.getElementById('b0b-signal-mute');
@@ -174,10 +225,47 @@
     fill = document.getElementById('b0b-signal-fill');
     timeEl = document.getElementById('b0b-signal-time');
     seekEl = document.getElementById('b0b-signal-seek');
+    shufBtn = document.getElementById('b0b-signal-shuffle');
+    repBtn = document.getElementById('b0b-signal-repeat');
+    listBtn = document.getElementById('b0b-signal-list');
+    volEl = document.getElementById('b0b-signal-vol');
+  }
+  function paintModes() {
+    var s = loadState();
+    if (shufBtn) { shufBtn.classList.toggle('on', !!s.shuffle); shufBtn.setAttribute('aria-pressed', s.shuffle ? 'true' : 'false'); }
+    if (repBtn) {
+      var one = s.repeat === 'one';
+      repBtn.classList.toggle('on', one);
+      repBtn.innerHTML = one ? '&#8635;<small style="font-size:9px">1</small>' : '&#8635;';
+      repBtn.title = one ? 'Repeat: this track' : 'Repeat: all';
+      repBtn.setAttribute('aria-label', repBtn.title);
+    }
+    var qs = queue.querySelector('.q-shuf'), qr = queue.querySelector('.q-rep');
+    if (qs) { qs.classList.toggle('on', !!s.shuffle); qs.setAttribute('aria-pressed', s.shuffle ? 'true' : 'false'); }
+    if (qr) { qr.classList.toggle('on', s.repeat === 'one'); qr.innerHTML = s.repeat === 'one' ? '&#8635; ONE' : '&#8635; ALL'; }
+    var items = queue.querySelectorAll('li');
+    for (var i = 0; i < items.length; i++) {
+      var cur = i === idx;
+      items[i].classList.toggle('cur', cur);
+      if (cur) items[i].firstChild.setAttribute('aria-current', 'true');
+      else items[i].firstChild.removeAttribute('aria-current');
+    }
+  }
+  // Which track follows this one. Shuffle never repeats the track just played.
+  function nextIndex() {
+    if (!loadState().shuffle || TRACKS.length < 2) return (idx + 1) % TRACKS.length;
+    var j = idx;
+    while (j === idx) j = Math.floor(Math.random() * TRACKS.length);
+    return j;
+  }
+  function jumpTo(j, play) {
+    if (j === idx) return;
+    hist.push(idx); if (hist.length > 50) hist.shift();
+    goTrack(j - idx, play);
   }
 
   function paintTitle() {
-    if (titleEl) titleEl.innerHTML = 'SIGNAL <small>&middot; ' + TRACKS[idx].label + '</small>';
+    if (titleEl) titleEl.innerHTML = '<span class="sb-k">SIGNAL </span><small>&middot; ' + TRACKS[idx].label + '</small>';
   }
 
   // Move n tracks along the list, wrapping. Time resets: a saved position
@@ -191,6 +279,7 @@
     dur = 0;
     if (fill) fill.style.width = '0%';
     paintTitle();
+    paintModes();
     saveState({ i: idx, t: 0 });
     if (!ready || !player) return;
     var wasPlaying = play || isPlaying();
@@ -224,8 +313,49 @@
       if (player.isMuted()) { player.unMute(); muteBtn.innerHTML = '&#128266;'; saveState({ muted: false }); }
       else { player.mute(); muteBtn.innerHTML = '&#128263;'; saveState({ muted: true }); }
     });
-    prevBtn.addEventListener('click', function () { goTrack(-1); });
-    nextBtn.addEventListener('click', function () { goTrack(1); });
+    // PREVIOUS restarts the track when it is more than a few seconds in, as players do;
+    // under shuffle it steps back through what actually played.
+    prevBtn.addEventListener('click', function () {
+      if (ready && player.getCurrentTime && player.getCurrentTime() > 4) { player.seekTo(0, true); return; }
+      if (loadState().shuffle && hist.length) { var b = hist.pop(); goTrack(b - idx); return; }
+      goTrack(-1);
+    });
+    nextBtn.addEventListener('click', function () { jumpTo(nextIndex()); });
+    shufBtn.addEventListener('click', function () { saveState({ shuffle: !loadState().shuffle }); paintModes(); });
+    repBtn.addEventListener('click', function () {
+      saveState({ repeat: loadState().repeat === 'one' ? 'all' : 'one' }); paintModes();
+    });
+    function openList(open) {
+      queue.hidden = !open;
+      listBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      listBtn.classList.toggle('on', open);
+      if (open) {
+        var cur = queue.querySelector('li.cur');
+        if (cur && cur.scrollIntoView) cur.scrollIntoView({ block: 'nearest' });
+      }
+    }
+    listBtn.addEventListener('click', function () { openList(queue.hidden); });
+    queue.addEventListener('click', function (e) {
+      if (e.target.closest && e.target.closest('.q-shuf')) { shufBtn.click(); return; }
+      if (e.target.closest && e.target.closest('.q-rep')) { repBtn.click(); return; }
+      var li = e.target.closest && e.target.closest('li');
+      if (!li) return;
+      var j = Number(li.getAttribute('data-i'));
+      if (j === idx) { if (ready && !isPlaying()) player.playVideo(); }
+      else jumpTo(j, true);
+      saveState({ playing: true });
+      try { document.dispatchEvent(new CustomEvent('b0b-music', { detail: { who: 'signal' } })); } catch (err) {}
+    });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !queue.hidden) openList(false); });
+    document.addEventListener('click', function (e) {
+      if (!queue.hidden && !queue.contains(e.target) && e.target !== listBtn && !listBtn.contains(e.target)) openList(false);
+    });
+    volEl.value = String(loadState().vol == null ? 100 : loadState().vol);
+    volEl.addEventListener('input', function () {
+      var v = Number(volEl.value);
+      saveState({ vol: v });
+      if (ready && player.setVolume) player.setVolume(v);
+    });
     seekEl.addEventListener('click', function (e) {
       if (!ready || !dur) return;
       var rect = seekEl.getBoundingClientRect();
@@ -256,6 +386,7 @@
         onReady: function () {
           ready = true;
           if (st.muted) { player.mute(); if (muteBtn) muteBtn.innerHTML = '&#128263;'; }
+          if (st.vol != null && player.setVolume) player.setVolume(Number(st.vol));
           var start = Number(st.t) || 0;
           if (start > 1) player.seekTo(start, true);
           if (st.playing) {
@@ -274,8 +405,12 @@
           else if (e.data === 2) { if (pausedForFloor) pausedForFloor = false; else saveState({ playing: false }); }
           else if (e.data === 0) {           // ended - roll on to the next signal
             saveState({ playing: true, t: 0 });
-            if (floorHeld()) { goTrack(1); resumeOnRelease = true; }
-            else goTrack(1, true);
+            if (loadState().repeat === 'one') {
+              player.seekTo(0, true);
+              if (floorHeld()) resumeOnRelease = true; else player.playVideo();
+            }
+            else if (floorHeld()) { jumpTo(nextIndex()); resumeOnRelease = true; }
+            else jumpTo(nextIndex(), true);
           }
           setPlayIcon();
         },
@@ -397,6 +532,7 @@
     desktopModeWarn();
     bindUI();
     paintTitle();
+    paintModes();
     loadAPI();
     loadUpdated();
     loadVisitors();

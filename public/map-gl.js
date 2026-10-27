@@ -1206,7 +1206,7 @@ function buildLab() {
   $('#toggleDeep').addEventListener('change', (e) => { S.deep = e.target.checked; tierFilters(); });
   // The countermeasures drawer lives in the lab.
   const cm = document.createElement('script');
-  cm.src = '/countermeasures.js?v=1';
+  cm.src = '/countermeasures.js?v=2';
   document.body.appendChild(cm);
 }
 
