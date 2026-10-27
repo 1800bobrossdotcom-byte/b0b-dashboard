@@ -1,13 +1,13 @@
 {
-  "generated": "2026-10-27T22:47:09.632Z",
+  "generated": "2026-10-27T23:11:08.892Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "99063b61680ca8f357c91841759878b1f067975edfe8e81d3e119a9bc71e8506",
+  "fullFileHash": "5117989369069b5b2af76b63df36abea0b288e5eb1afe5b1e2b3fde4022ce857",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "d012fc5278542ce338c97752eee94ff7af23108fdca834ce830cc1c9264d7fd6",
+      "hash": "a45a87eeb85580e0fb0c8e5d6b9331df98b3c03c9124071a911796400632ed36",
       "length": 43915
     },
     {
@@ -27,8 +27,8 @@
     },
     {
       "id": "i-the-authors-testimony-the-work-is-the-method",
-      "hash": "f2d85157dd1a138164bd7c2cec112467ee0b9f8742a20d10ef657dcde7d81de0",
-      "length": 23908
+      "hash": "4d153c16f8a1f01e0deb01d8ac58da62db02437bbb2d38176162fd0a07551387",
+      "length": 23965
     },
     {
       "id": "II",
@@ -1876,9 +1876,9 @@
     },
     {
       "index": 52,
-      "hash": "79327b4f086144ee9ee774d9c93aff0172a82d8af890be5a84459751c3ab3a5d",
+      "hash": "df82c618acfd63f65b9686dd1375421c1952c2d851393ea3f326f8e976c31df7",
       "preview": "Fourth, the earliest. At about seven - in about 1989 - awake, at his father&rsqu...",
-      "length": 1009
+      "length": 1066
     },
     {
       "index": 53,
