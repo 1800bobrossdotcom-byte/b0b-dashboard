@@ -4,14 +4,12 @@
    The site hosts no recording; YouTube's licensed player serves the audio.
    Tracks are taken from the rights-holder's own channel wherever one exists —
    the auto-generated "- Topic" channels the labels supply, not a re-upload.
-   THREE EXCEPTIONS, recorded here rather than left implicit. Overseer's
-   "Heligoland" and billy woods' "Spider Hole" have no locatable rights-holder
-   upload (Backwoodz keeps much of its catalogue off the mainstream platforms),
-   so both entries point at private-account copies. The Spider Hole copy is
-   additionally a CENSORED edit - that is stated in its visible label, not just
-   here, because listeners should not be handed an altered cut silently. Both
-   added deliberately, not by oversight; swap the ids if better sources appear.
-   The third is Blackalicious' "Ego Sonic War Drums". Here a rights-holder copy
+   TWO EXCEPTIONS, recorded here rather than left implicit. Overseer's
+   "Heligoland" has no locatable rights-holder upload, so its entry points at a
+   private-account copy, added deliberately; swap the id if a better source appears.
+   (billy woods' "Spider Hole" was the third, a censored edit on a private account;
+   it was replaced on 27 Oct 2026 by "Year Zero", from the artist's own channel.)
+   The second is Blackalicious' "Ego Sonic War Drums". Here a rights-holder copy
    DOES exist - V6Ds1JbKfj8, on the label-supplied "Blackalicious - Topic"
    channel, provided to YouTube by Epitaph for ANTI- - and it was used first and
    would not play: the IFrame player rejected it as not embeddable. There is no
@@ -20,7 +18,7 @@
    cut could NOT be verified against the 3:46 album version - no duration is
    exposed by any endpoint reachable from here - so the visible label says only
    "unofficial upload" and claims nothing about whether the audio is complete.
-   If it turns out to be edited, say so in the label the way Spider Hole does.
+   If it turns out to be edited, say so in its visible label.
    Note for whoever edits this next: several high-view uploads of these songs
    carry the word "Official" in the title while belonging to private accounts.
    Check the channel, not the title. */
@@ -39,7 +37,7 @@
     { id: 'iU6nkE-g3BM', label: 'Overseer &mdash; Heligoland' },                           // FATLANTIC — NOT a rights-holder channel (see header). ~26min: long tail after the song.
     { id: 'sP3V7PxjdQo', label: 'Iron &amp; Wine &mdash; Evening on the Ground (Lilith&rsquo;s Song)' }, // Sub Pop (Iron & Wine's label, official)
     { id: 'Xv8FBjo1Y8I', label: 'Tracy Chapman &mdash; Talkin&rsquo; Bout a Revolution' }, // Tracy Chapman (artist channel)
-    { id: '30cS-8s5wXs', label: 'billy woods &mdash; Spider Hole (clean edit)' },          // 'relly rel' — NOT rights-holder, and a censored cut (see header)
+    { id: '2oDSwJmm-g0', label: 'billy woods &amp; Kenny Segal &mdash; Year Zero (feat. Danny Brown)' }, // billy woods (artist channel @billywoods_backwoodz, official visualizer; oEmbed). Replaced Spider Hole 27 Oct 2026, author's instruction.
     { id: 'rx2_iHftARo', label: 'Talking Heads &mdash; Slippery People' },                 // Talking Heads - Topic (licensed)
     { id: 'qMDxrXFQwU8', label: 'Filter &mdash; Hey Man Nice Shot' },                      // Filter - Topic (licensed)
     { id: '9D2R69gVyZ0', label: 'TOOL &mdash; 7empest' },                                   // TOOLVEVO (official). 15:43 - much longer than the rest.
@@ -47,7 +45,7 @@
     { id: 'JKES3yfnD9U', label: 'Creedence Clearwater Revival &mdash; Have You Ever Seen the Rain' }, // CCR (artist channel, official audio)
     { id: 'N3XbZvD3lRo', label: 'GHOSTEMANE &mdash; AI' }                                  // GHOSTEMANE (artist channel @ghostemane, official video; oEmbed). Added 25 Oct 2026, author's instruction.
   ];
-  var LS_KEY = 'b0b_signal_v12';  // bump on every reorder: a stored index points into the old list
+  var LS_KEY = 'b0b_signal_v13';  // bump on every reorder: a stored index points into the old list
   var SAVE_MS = 1000;
   var player = null, ready = false, dur = 0, saveTimer = null, errCount = 0;
   // The films have the floor while the homepage carousel is open (landing-intro.js sets the flag
