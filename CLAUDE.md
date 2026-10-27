@@ -1038,7 +1038,7 @@ than once.
   - weather: KROC METAR 10SM FEW180;
   - aircraft: the adsb.lol snapshot was dead-reckoned back, because the traces were refused (403, ledgered). UAL1828 crossed that sky at ~22:17 and the B744 NCR520 at ~22:27, and both were moving fast;
   - the check does not cover untracked aircraft, drones or balloons.
-- **His photo** (EXIF 18:52:41 EDT) shows a clear sky 30 min later, not the light. **It is NOT in the repo, and his location is recorded nowhere:** the repo is public, the skyline places his window, and the file carries GPS data.
+- **His photo** (EXIF 18:52:41 EDT) was sent as a sky reference for scale, so the sighting could be checked. It is not evidence, and it is not to be cited or used as an example of evidence (his correction, 27 Oct 2026). **Personal photos of his go on the page only when he sends them for that purpose.** **It is NOT in the repo, and his location is recorded nowhere:** the repo is public, the skyline places his window, and the file carries GPS data.
 - **The page:**
   - Section I's craft passage now reads "three encounters", with the third and the same-evening check after the loft.
   - The closing line is now "For the first two it rules none out; for the third it has excluded the ordinary explanations it could reach."
