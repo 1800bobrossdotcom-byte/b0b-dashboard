@@ -35,7 +35,7 @@
     { id: 'SYaIakuWg-g', label: 'Hooverphonic &mdash; Barabas' },                          // Hooverphonic - Topic (licensed).
     { id: 'hFUEGRwhYcU', label: 'Blackalicious &mdash; Ego Sonic War Drums (unofficial upload)' }, // 'Hi-Def' — NOT a rights-holder channel (see header). Licensed copy V6Ds1JbKfj8 exists but is not embeddable.
     { id: 'iU6nkE-g3BM', label: 'Overseer &mdash; Heligoland' },                           // FATLANTIC — NOT a rights-holder channel (see header). ~26min: long tail after the song.
-    { id: 'sP3V7PxjdQo', label: 'Iron &amp; Wine &mdash; Evening on the Ground (Lilith&rsquo;s Song)' }, // Sub Pop (Iron & Wine's label, official)
+    { id: 'brxOrz5pqv4', label: 'L.A. Mass Choir &mdash; That&rsquo;s When You Bless Me' }, // L.A. Mass Choir - Topic (licensed; oEmbed). Replaced Iron & Wine 'Evening on the Ground (Lilith's Song)' 27 Oct 2026, author's instruction.
     { id: 'Xv8FBjo1Y8I', label: 'Tracy Chapman &mdash; Talkin&rsquo; Bout a Revolution' }, // Tracy Chapman (artist channel)
     { id: '2oDSwJmm-g0', label: 'billy woods &amp; Kenny Segal &mdash; Year Zero (feat. Danny Brown)' }, // billy woods (artist channel @billywoods_backwoodz, official visualizer; oEmbed). Replaced Spider Hole 27 Oct 2026, author's instruction.
     { id: 'rx2_iHftARo', label: 'Talking Heads &mdash; Slippery People' },                 // Talking Heads - Topic (licensed)
@@ -49,7 +49,7 @@
     { id: 'O2KpEva4As4', label: 'Faith No More &mdash; We Care a Lot' },                    // Faith No More - Topic (Rhino/London-Sire; the 1987 Introduce Yourself recording; oEmbed). Added 27 Oct 2026, author's instruction.
     { id: 'SqT1y5Qi6l0', label: 'Carl Carlton &mdash; Everlasting Love' }                   // Carl Carlton - Topic (Universal; oEmbed). The 1974 hit; author chose it over Robert Knight / Love Affair / Howard Jones. Added 27 Oct 2026.
   ];
-  var LS_KEY = 'b0b_signal_v14';  // bump on every reorder: a stored index points into the old list
+  var LS_KEY = 'b0b_signal_v15';  // bump on every reorder: a stored index points into the old list
   var SAVE_MS = 1000;
   var player = null, ready = false, dur = 0, saveTimer = null, errCount = 0;
   // Listener's playback modes, kept with the rest of the bar's state. shuffle picks the next track
