@@ -218,6 +218,8 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**THE SIGNAL BAR ROLLS ON TO THE NEXT TRACK — 27 Oct 2026, live (`signal-bar.js?v=17`).** Author: *"The audio player should autoplay to next track"*. On a track's end the bar called `goTrack(1)`, which saw the player as "ended", not "playing", so it only **cued** the next track and then sent `playVideo()`. A play sent while a cue is still loading can be dropped, and the bar stopped. `goTrack(n, play)` now loads and starts the next track in one `loadVideoById` call, both on a track's end and after a dead track's error. Under a film the next track is still only cued and resumes when the carousel closes. Proven both ways against a stub player (scratchpad `sigtest/t.js`): old code ends on a cued, stopped track; new code is playing the next one. **Not tested against live YouTube** (it refuses this environment). Background tabs on phones can still stop playback; that is the browser.
+
 **@omcomma IS LINKED — 27 Oct 2026, live.** Author: *"Add @omcomma twitter"*. `https://x.com/omcomma` (the account whose post supplied the OM COMMA film), in the slots @_lovebeing_ held: the report's top nav and sidebar (white, after ERC-1155), `/home` (nav, a "Signal" row after Author, footer "X"), and both map headers (`map-gl.css?v=3` restores `.nav-x`). **This does not lift the 26 Oct rule: @_lovebeing_ stays off.** JSON-LD `sameAs` not touched.
 
 **24 PICTURES ADDED ACROSS THE REPORT — 26 Oct 2026, live.** Author: *"Add more pictures throughout report"*.

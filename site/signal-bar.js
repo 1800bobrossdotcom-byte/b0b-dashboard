@@ -181,7 +181,10 @@
 
   // Move n tracks along the list, wrapping. Time resets: a saved position
   // belongs to the track it was saved from, not to the next one.
-  function goTrack(n) {
+  // play=true loads and starts the next track in one call. Used when a track ends or fails:
+  // the player then reads "ended", not "playing", so the wasPlaying test below would only cue it,
+  // and a playVideo sent straight after a cue can be dropped, which left the bar stopped.
+  function goTrack(n, play) {
     if (!TRACKS.length) return;
     idx = ((idx + n) % TRACKS.length + TRACKS.length) % TRACKS.length;
     dur = 0;
@@ -189,7 +192,7 @@
     paintTitle();
     saveState({ i: idx, t: 0 });
     if (!ready || !player) return;
-    var wasPlaying = isPlaying();
+    var wasPlaying = play || isPlaying();
     if (wasPlaying && player.loadVideoById) player.loadVideoById(TRACKS[idx].id);
     else if (player.cueVideoById) player.cueVideoById(TRACKS[idx].id);
     setPlayIcon();
@@ -270,9 +273,8 @@
           else if (e.data === 2) { if (pausedForFloor) pausedForFloor = false; else saveState({ playing: false }); }
           else if (e.data === 0) {           // ended - roll on to the next signal
             saveState({ playing: true, t: 0 });
-            goTrack(1);
-            if (floorHeld()) resumeOnRelease = true;
-            else if (player && player.playVideo) { try { player.playVideo(); } catch (err) { /* autoplay may be blocked */ } }
+            if (floorHeld()) { goTrack(1); resumeOnRelease = true; }
+            else goTrack(1, true);
           }
           setPlayIcon();
         },
@@ -297,8 +299,7 @@
           } catch (err) { /* logging must never break playback */ }
           errCount++;
           if (errCount >= TRACKS.length) { saveState({ playing: false }); setPlayIcon(); return; }
-          goTrack(1);
-          if (player && player.playVideo) { try { player.playVideo(); } catch (err) { /* autoplay may be blocked */ } }
+          goTrack(1, true);
         }
       }
     });
