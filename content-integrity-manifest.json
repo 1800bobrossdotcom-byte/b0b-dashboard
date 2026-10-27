@@ -1,13 +1,13 @@
 {
-  "generated": "2026-10-27T21:28:19.379Z",
+  "generated": "2026-10-27T21:42:54.963Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "c1e8b3616f46386721de546b2e5b6345455784befa11e283285214f9e40d9e9d",
+  "fullFileHash": "f07d1ff6f690df6f2bbf9e753c4c0ad88c1f95348f32d01db60d52689273c2aa",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "8a57a7cf88a842921c4eaa816802095766cf67fae08fe1b5fc22a37a74a15a15",
+      "hash": "a9eb09302d2bd3611fbf5d8057b71355844c27ebd1f0c696d5e6989a4c667813",
       "length": 43741
     },
     {
@@ -737,8 +737,8 @@
     },
     {
       "id": "x-project-maven-ai-military-convergence",
-      "hash": "c54822e6de888c3f0cdc19d6418b3f938e9bcc104d09c82b92f99e8cef50fe66",
-      "length": 12908
+      "hash": "badfa2fe64bbf3a92bce9f09205d32ca979a2978a7019016643b2b1d6c410318",
+      "length": 12848
     },
     {
       "id": "x-merlin-and-nspm-7-a-claim-checked-in-both-directions",
@@ -752,8 +752,8 @@
     },
     {
       "id": "x-project-nimbus-google-amazon-build-israel-s-ai",
-      "hash": "8e7ea641a356f949ad2769b81ef6b337eaec516225bf7f4e4d4067d2d5cd910a",
-      "length": 9126
+      "hash": "1dff45677fd607a4ff1cb9af6b05cdca0bee0e7296157df6215a30dc8f25184c",
+      "length": 9102
     },
     {
       "id": "x-ancillary-module-two-new-mapped-layers-the",
@@ -1527,8 +1527,8 @@
     },
     {
       "id": "xxiv-trust",
-      "hash": "0969ee5ff914e26c2a40ba212b8751da503ebb4bf0aaf9994cd729e3e450ec5a",
-      "length": 1912
+      "hash": "7008ddbbb3ee84cf36c1b11863f5d176bc84e4777a72925f8ca70b51aa6bcd19",
+      "length": 1999
     },
     {
       "id": "xxiv-primary-source-databases",
@@ -5362,15 +5362,15 @@
     },
     {
       "index": 633,
-      "hash": "17d33f6acaf707799f31ba672a2d19a464bce2ced6814887b0c5731b8251b48e",
+      "hash": "edcbc2ed9f7e1d79a9e245fa6360d9f826f52562390d825dc1fa5419f714ef40",
       "preview": "ANTHROPIC - THE SUPPLY CHAIN REALITY: In March 2026, Anthropic - the company tha...",
-      "length": 897
+      "length": 881
     },
     {
       "index": 634,
-      "hash": "e5f1c766865256a7a4978267c039da36acb2bf265ee9c75de0dbf4377af0debb",
+      "hash": "77978d0beeb6c4337491a2e8a44ec0955014ee4446f64810c393cae67241cffc",
       "preview": "This is stated not as accusation but as structural fact. The user of this report...",
-      "length": 745
+      "length": 701
     },
     {
       "index": 635,
@@ -8176,9 +8176,9 @@
     },
     {
       "index": 1102,
-      "hash": "b85c240bb9759990855dc6d0a19e17dbb1332f764f0e1d4af18dcabc9c9a1147",
-      "preview": "For that reason the author has withdrawn: his Claude subscription is canceled, e...",
-      "length": 547
+      "hash": "4f83cfb731e41f9e7c3ea7d0170c796c04e825e1158176208958435e75bb7420",
+      "preview": "The author takes issue with both Anthropic and OpenAI, the maker of ChatGPT: bot...",
+      "length": 634
     },
     {
       "index": 1103,

@@ -209,6 +209,14 @@
    "page_said": "The 3 September update printed the US capture of Nicolás Maduro as a killed specimen, “It is not true”; it happened on 3 January 2026. XIII said Göbekli Tepe was “deliberately buried” and that the geological record “confirms” a Younger Dryas impact. XVI said the two governments’ official accounts of the USS Liberty dispute premeditation. II said Israel apologised for Pollard and disbanded the unit, delivered by Shimon Peres, and that no payer had explained what the Epstein money bought. X called Palantir “CIA-funded”. XXIII said neither 9/11 hijacker was watchlisted, with no date. XXV gave the player as twelve tracks and eight written entries.",
    "replaced_by": "Corrected: Maduro and Cilia Flores captured 3 Jan 2026, indicted in New York, pleading not guilty. Göbekli Tepe’s excavators now attribute the fill to slope slides; the impact hypothesis is contested. Neither government’s official account found premeditation, and the dissent is inside the US record. Israel called Pollard a “rogue operation”, then in 1998 acknowledged him as a Lekam agent; no apology or disbandment was found. Black’s and Dechert’s explanations are on the record, and what is unexplained is the scale. In-Q-Tel is a documented early Palantir shareholder. Not put forward for a watchlist until 21–23 August 2001. Eighteen tracks on the player and nine written entries.",
    "found_by": "The page errors on file, and an outside review."
+  },
+  {
+   "id": "C-2026-10-27-3",
+   "date": "2026-10-27",
+   "where": "X, XXV, Briefing",
+   "page_said": "The report said the author’s Claude subscription was cancelled effective 1 September 2026 and that the work would then move to open-source AI models; the Briefing said the work is done with Claude alone.",
+   "replaced_by": "Corrected in his words: he takes issue with both Anthropic and OpenAI, and continues to use multiple AI sources to audit and compose the report, each use disclosed.",
+   "found_by": "The author."
   }
  ],
  "tested_not_adopted": [
