@@ -123,6 +123,10 @@ Learn these; they are invoked by name on the page.
    and spec work that is not this site's subject. On any fetch failure it leaves the reel
    untouched and exits non-zero; `--offline` rebuilds from the cached `entries`. Owns only what
    sits between `<!-- transmissions:begin/end -->` in `site/index.html`.
+6c. `python3 scripts/build-cards.py` then `node scripts/apply-seo-meta.js` — rebuilds `/data/cards.json` and `/card`
+   from `scripts/cards/cards.json`. **It stops if any card's quote no longer appears, word for word, in the subsection
+   it links to.** When it stops, fix or drop the card; never edit the page to fit a card. `--selftest` plants three
+   faults and must catch all three.
 7. `node linguistic-integrity.js generate && verify` → must print **STATUS: PASS**.
    **Order matters:** the concordance re-stamps `dateModified`, so the manifest is
    regenerated *after* the concordance build.
@@ -217,6 +221,14 @@ than once.
 ---
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
+
+**ONE CARD FROM THE RECORD — 27 Oct 2026, live at `/card`, under the report's epigraph and on `/home`.** The author pasted an outside proposal for a "Fact of the Day / flashcard" system ("B0B / INTELLIGENCE BRIEF NO. 001"). Asked placement and types, he chose **"Report masthead too"** and all four types.
+- **What it is:** one question, then (on "Show the line") the report's own sentence that answers it, its tier stamp, and a link to the exact subsection. "Today's card" is the same for every reader (UTC day × 7919 mod the pool, so the whole pool runs before a repeat); "Another card" draws without repeats; filters for The record / Methods / Questions / Connections; "Copy link" gives `https://www.b0b.dev/card?c=<id>`. `/card` also lists every card as plain text for readers without script and for search. Nothing is sent and nothing about the reader is stored.
+- **The rule: a card may say less than the report, never more.** `scripts/build-cards.py` reuses the summary's text matcher and requires each quote inside the subsection its anchor names (ellipsis cuts allowed, in order); section and subsection titles are read from the page, not typed. Connection cards must be tier `documented` and both parties must appear in the quote. §2's never-publish names are refused. The prompt is the only text we write, so it claims nothing.
+- **102 cards:** 49 record (killed specimens among them show "Claim tested" with an UNSUPPORTED / NOT ESTABLISHED stamp, the prompt being the claim), 23 methods, 18 open questions, 12 connections (institutions, companies, the dead or convicted only). Drafted by four agents against a brief (scratch `cards/BRIEF.md`), every card read by me. **v1 has no living, uncharged person as a card's subject.** Cut on review: the Bitcoin "first regulator" card, the NSPM-7 indicia list (a list without the page's reading), the 2025 judge clause in the 9/11 symmetry card (the page grades it a motion-to-dismiss ruling), the Carbyne concealment line (beside a living chairman), "a secular Jew" in the Little Saint James card, the abolition-debt-to-2015 sentence (its refinancing caveat would not fit).
+- **Changed from the proposal:** no "Intelligence Brief" header or issue number (principle 7; and §2 bars "the institution", which its closing line used); no per-reader measurement (`/stats` is aggregate-only) — counting card views and click-throughs per day is possible and his call.
+- **Files:** `site/card.js?v=2`, `site/card.css?v=2` (works on both the theme.css pages and the `/start` family's palette, light and dark), `site/card.html` (owned by build-cards.py), `scripts/cards/cards.json` (edit here). ONE CARD in the report's top nav and sidebar, `/home`, and the `/start`-family nav. Route, sitemap and seo-meta wired; seo 60/60, security 35/35.
+- **Tested** (scratch `cards/t.js`, one fresh port per scenario because of the 60/min limiter): report desktop and phone, `/home`, `/card?c=` on a phone, `/card` light — no page errors, no horizontal scroll, reveal works, links land on real anchors, 30 "another" clicks under Methods gave 22 distinct of 23.
 
 **IRON & WINE OFF THE BAR; L.A. MASS CHOIR "THAT'S WHEN YOU BLESS ME" IN ITS SLOT — 27 Oct 2026, live.** Author: *"Remove Lilith song and replace with "that's when you bless me" LA choir"*. Iron & Wine "Evening on the Ground (Lilith's Song)" (`sP3V7PxjdQo`) is out. In its place (6th of 18): L.A. Mass Choir, "That's When You Bless Me" (`brxOrz5pqv4`, L.A. Mass Choir - Topic, checked with YouTube oEmbed). **Two Topic uploads exist** (`brxOrz5pqv4`, `Vu16cpQwzcc`): one carries the 1999 Light Records issue (*The Mass Hits!*), the other a 2009 Smith & Co. compilation. Which is which could not be read (YouTube refuses this environment); both are licensed label uploads. The song first appeared on *Can't Hold Back* (Light, 1989). `LS_KEY` `b0b_signal_v15`; `signal-bar.js?v=22`. XXV's list of tracks without an entry now names it in place of *Evening on the Ground*.
 

@@ -18,7 +18,8 @@
   var mounts = document.querySelectorAll('[data-b0b-card]');
   if (!mounts.length || !window.fetch) return;
 
-  var KIND = { fact: 'Documented', method: 'Method', question: 'Open question', connection: 'Connection' };
+  var KIND = { fact: 'The record', method: 'Method', question: 'Open question', connection: 'Connection' };
+  var KILLED = { unsupported: 1, 'not established': 1 };
   var FILTERS = [['', 'All'], ['fact', 'Facts'], ['method', 'Methods'], ['question', 'Questions'], ['connection', 'Connections']];
   var STEP = 7919;
   var HOST = 'https://www.b0b.dev';
@@ -121,12 +122,12 @@
     function show(c, label) {
       current = c;
       if (seen.indexOf(c.id) < 0) seen.push(c.id);
-      kicker.textContent = KIND[c.type] || c.type;
+      kicker.textContent = c.type === 'fact' && KILLED[c.tier] ? 'Claim tested' : (KIND[c.type] || c.type);
       stamp.textContent = label || ('Card ' + c._n + ' of ' + cards.length);
       prompt.textContent = c.prompt;
       if (c.between && c.between.length) { between.textContent = c.between.join('  ↔  '); between.hidden = false; }
       else { between.textContent = ''; between.hidden = true; }
-      quote.textContent = '“' + c.quote + '”';
+      quote.textContent = c.quote;   // the left rule marks it as quoted; added marks doubled the page's own
       tier.textContent = c.tier;
       tier.className = 'bc-tier t-' + c.tier.replace(/\s+/g, '-');
       src.textContent = 'Section ' + c.section + (c.subsection ? ' · ' + c.subsection : '') + ' →';

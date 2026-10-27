@@ -16,7 +16,7 @@ page, not typed. Nothing is written unless every card passes.
                                               connection name missing from its quote;
                                               all three must be caught
 """
-import hashlib, html, importlib.util, json, re, sys
+import html, importlib.util, json, re, sys
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -112,7 +112,7 @@ def build(cards, idx):
     return out
 
 
-KIND_H = [('fact', 'Documented'), ('connection', 'Connections'), ('method', 'Method'), ('question', 'Open questions')]
+KIND_H = [('fact', 'The record, and claims tested against it'), ('connection', 'Connections'), ('method', 'Method'), ('question', 'Open questions')]
 TIER_CLS = {'documented': 't-doc', 'attributed': 't-att', 'testimony': 't-att', 'contested': 't-hyp', 'open': 't-hyp',
             'unsupported': 't-null', 'not established': 't-null', 'rule': ''}
 
@@ -140,14 +140,14 @@ def build_page(built):
         for c in group:
             cls = TIER_CLS.get(c['tier'], '')
             where = 'Section %s%s' % (c['section'], (' · ' + c['subsection']) if c['subsection'] else '')
-            parts.append('<li id="c-%s"><a href="/card?c=%s"><b>%s</b></a><br>%s&ldquo;%s&rdquo;'
+            parts.append('<li id="c-%s"><a href="/card?c=%s"><b>%s</b></a><br>%s%s'
                          '<a class="src" href="/report#%s">%s &rarr;</a></li>'
                          % (c['id'], c['id'], e(c['prompt']),
                             '<span class="tier %s">%s</span>' % (cls, e(c['tier'])),
                             e(c['quote']), c['anchor'], e(where)))
         parts.append('</ul>')
-    parts.append('<script src="/card.js?v=1" defer></script>')
-    head = '\n  <link rel="stylesheet" href="/card.css?v=1">'
+    parts.append('<script src="/card.js?v=2" defer></script>')
+    head = '\n  <link rel="stylesheet" href="/card.css?v=2">'
     return sp.page('b0b.dev - one card from the record', '\n'.join(parts), head_extra=head)
 
 
@@ -193,7 +193,6 @@ def main():
     for c in built:
         by[c['type']] = by.get(c['type'], 0) + 1
     payload = {'generated': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
-               'report_sha256': hashlib.sha256(report.encode('utf-8')).hexdigest(),
                'count': len(built), 'by_type': by, 'cards': built}
     OUT.write_text(json.dumps(payload, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
     PAGE.write_text(build_page(built), encoding='utf-8')
