@@ -20,7 +20,7 @@
   var BLOCKS = 'p, li, h3, h4, h5, h6, td, th, blockquote, pre, figcaption, .warning-title';
   /* Never indexed: chrome, the contents list (would echo every section title), and the
      companion modal, which is a separate report with its own page. */
-  var EXCLUDE = '.sidebar, .toc, .modal-overlay, #b0b-signal-bar, script, style, noscript';
+  var EXCLUDE = '.sidebar, .toc, .modal-overlay, #b0b-signal-bar, [data-spec], script, style, noscript';
 
   var index = null, matches = [], current = -1, timer = null, lastQuery = '';
   var input, results, count, navWrap, sidebarNav, sidebar;

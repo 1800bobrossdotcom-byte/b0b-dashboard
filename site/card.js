@@ -30,10 +30,16 @@
   var SKIN_KEY = 'b0b_skin';
   var onReport = !!document.querySelector('.main-content h2[id]');
   var reaches = null, reachLoad = null;
-  function specOn() { try { return localStorage.getItem(SKIN_KEY) === 'speculative'; } catch (e) { return false; } }
+  // On the report the skin is on unless the reader turned it off ('off'); elsewhere it is off
+  // unless they turned it on.
+  function specOn() {
+    var s = null;
+    try { s = localStorage.getItem(SKIN_KEY); } catch (e) {}
+    return s === 'speculative' ? true : s === 'off' ? false : onReport && document.documentElement.getAttribute('data-skin') === 'speculative';
+  }
   function setSpec(on) {
     if (typeof window.__b0bSkinSet === 'function') { window.__b0bSkinSet(on); return; }
-    try { if (on) localStorage.setItem(SKIN_KEY, 'speculative'); else localStorage.removeItem(SKIN_KEY); } catch (e) {}
+    try { localStorage.setItem(SKIN_KEY, on ? 'speculative' : 'off'); } catch (e) {}
     try { window.dispatchEvent(new CustomEvent('b0b-skin', { detail: { on: on } })); } catch (e) {}
   }
   // ?skin=speculative on a link turns it on here too, as it does on the report.

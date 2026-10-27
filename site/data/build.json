@@ -1,5 +1,5 @@
 {
-  "build": "2026-10-27T23:11:08.892Z",
+  "build": "2026-10-27T23:28:54.904Z",
   "note": "The one record of the site's size and state. Every count on every page is checked against it before a deploy.",
   "marker_count": 1167,
   "edge_count": 456,
@@ -21,11 +21,11 @@
   "report_sourcing_blocks": 168,
   "corrections_listed": 27,
   "sha256": {
-    "report.html": "5117989369069b5b2af76b63df36abea0b288e5eb1afe5b1e2b3fde4022ce857",
+    "report.html": "abf3da770e99c942c96d891f999f697eeca1f0c00f17e53bb4bc1a46850b0b43",
     "map-gl.html": "c6c88a666036749f8197ec0745d56f5f743b6cbd4b9ca60710dfcf4c59f3784e",
     "map.html": "bda48bdc4845dd05d50d5c82e61231f309ae395e3468fe4d19058d1dbbb0b7e6",
-    "start.html": "1073331524090aaf0e28a8c334c0bde72bc361a4eeb4c750e340c8e3f9d746ca",
-    "retractions.html": "c88bd1e351fce4715ba1c74e2ee06df98d70f285b2c9f5b27b841d2a90fd7e2a"
+    "start.html": "23deee1076bbecdf02519188075d2076accbc346675c6f9ce69e4449baa1d2d0",
+    "retractions.html": "71a7d715f9c665dd36fd909d1b90928949a58c9daf3c9dbca7c90252ef93bae7"
   },
   "data": [
     "/data/map-data.json",

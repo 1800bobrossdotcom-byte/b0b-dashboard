@@ -1,29 +1,16 @@
 ID: I
-HEADLINE: Raised on a classified supply line, remembering a possible abduction at seven, he is placed, in his words, to intercept.
+HEADLINE: Raised on a classified supply line, known to the CIA's portal by his childhood address, placed, in his words, to intercept.
 BODY:
 <p>Raised in Burbank, beside where Lockheed built the U-2, he lives in Rochester, where Kodak's Hawkeye Works processed its film and afterwards the film from CORONA. Both ends of one classified supply line, in sequence, as a biography. When he filed with the CIA in August 2026, its portal would accept only his childhood address. The system holding his file knows him as the child in Burbank. An edge is a fact.</p>
-<p>That child, at about seven, awake, came to a memory of a possible abduction - and he could tell a dream from a memory, then as now: an underground base of concrete walls and long octagonal windows onto observation rooms; a smock, a shaved head; military officers and doctors who treated him as a leader. Where it was, he does not know. Three times since, a light has come up like a dimmer switch, fixed in x and y; the first told him he was here to help remove malevolence from this plane, and the third had a second witness. In East Hollywood a voice he names as God's - Jesus - showed him the book of life, "far too heavy to hold."</p>
-<p>His instruments are counter-moves: Faraday destroys the caller's face and voice before a byte leaves the browser. He performs for the surveillance, on terms he authors. "The interesting correlations place me to intercept key targets - see - no weapon formed against, I am useful."</p>
-PROVE: A record released on his August 2026 CIA Privacy Act request, or any document that places the room he remembers.
-KILL: A document or photograph that places the room he remembers somewhere ordinary: a hospital, a school, a studio set.
+<p>His instruments are counter-moves: Faraday is anonymous encrypted video calling, and it destroys the caller's face and voice before a byte leaves the browser. He does not hide from the watching; he performs for the surveillance, on terms he authors. "The interesting correlations place me to intercept key targets - see - no weapon formed against, I am useful."</p>
+PROVE: A record released on his August 2026 CIA Privacy Act request showing a file on him older than the request itself.
+KILL: A showing that the portal checks every requester against the oldest address on commercial records, so the childhood address says nothing about him.
 DRAWS_ON: i-the-authors-testimony-the-work-is-the-method, i-the-anti-map-what-this-reports-graph-is-not
-LIVING_NAMES: the author (not named; "he") - his own accounts and practice, as he gave them; his roommate (not named; "a second witness") - the second witness to the third light, as the section records
+LIVING_NAMES: the author (not named; "he") - his own accounts and practice, as he gave them
 FACT_CHECK:
 - Lockheed Burbank built the U-2
 - the two ends of the same classified supply line, in sequence, as a biography
 - When he filed his Privacy Act request with the CIA in August 2026, the portal’s identity verification would not authenticate him against his current address at all. It would only accept the childhood one.
-- At about seven - in about 1989
-- He does not know where the place was
-- he could tell a dream from a memory, then as now
-- a child of the same age in a smock, head shaved, walking through an underground base of concrete walls with long, horizontal octagonal windows onto observation rooms, among people he took for military officers and doctors, who, he says, treated him as a leader
-- “I don’t know if I was abducted or if it’s a false memory.”
-- He describes three encounters
-- a light that came up like a dimmer switch - fixed in x and y
-- a communication that he was here to help remove malevolence from this plane
-- is the first with a second witness, his roommate
-- in the East Hollywood area
-- a voice he believes to be God’s - Jesus - say it would show him the book of life
-- “far too heavy to hold”
 - a WebGL2 shader destroys the caller’s face and on-device DSP destroys the voice before a byte leaves the browser
 - performing for it deliberately, at a volume and on terms you author
 - “The interesting correlations place me to intercept key targets - see - no weapon formed against, I am useful.”

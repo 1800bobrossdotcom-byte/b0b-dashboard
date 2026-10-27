@@ -5,13 +5,17 @@
  * points at. The reaches come from /data/speculative.json, which scripts/build-speculative.py
  * writes from scripts/speculative/reach-*.md after checking them. They are never part of the
  * report's own HTML, so search engines, the narrator, the cards and the summary read only the
- * documented report. Off is the default; the choice is remembered per browser, and
- * ?skin=speculative turns it on for a shared link. Nothing is sent anywhere.
+ * documented report. On is the default for readers (author, 27 Oct 2026: "collapsed +
+ * speculative for each"): with every section closed, each heading shows its reach as the preview.
+ * Turning it off is remembered per browser ('off'); ?skin=off and ?skin=speculative set it for a
+ * link. Crawlers get the documented report only, and the narrator and search skip the reaches
+ * (data-tts-skip, [data-spec]). Nothing is sent anywhere.
  */
 (function () {
   'use strict';
   var KEY = 'b0b_skin';
-  var ON = 'speculative';
+  var ON = 'speculative', OFF = 'off';
+  var BOT = /bot\b|crawl|spider|slurp|lighthouse|inspectiontool|facebookexternalhit|embedly/i;
   var data = null, loading = null;
 
   function isOn() { return document.documentElement.getAttribute('data-skin') === ON; }
@@ -54,6 +58,7 @@
   function block(r) {
     var a = el('aside', 'spec-reach');
     a.setAttribute('data-spec', r.id);
+    a.setAttribute('data-tts-skip', '');
     a.setAttribute('aria-label', 'Speculative reach, Section ' + r.id);
     a.appendChild(el('p', 'sr-kicker', 'Speculative · the reach · Section ' + r.id));
     a.appendChild(el('p', 'sr-head', r.headline));
@@ -82,6 +87,7 @@
   function banner() {
     var b = el('div', 'spec-banner');
     b.setAttribute('data-spec', 'banner');
+    b.setAttribute('data-tts-skip', '');
     b.appendChild(el('strong', '', 'SPECULATIVE SKIN. '));
     b.appendChild(document.createTextNode((data && data.banner) ||
       'Each section now opens with a reach: its leads taken past the documents, to the conclusion they point at. The documented report below is unchanged. '));
@@ -115,20 +121,19 @@
     });
   }
 
-  function set(on) {
+  function set(on, auto) {
     try { window.dispatchEvent(new CustomEvent('b0b-skin', { detail: { on: !!on } })); } catch (e) {}
     if (on) {
       document.documentElement.setAttribute('data-skin', ON);
-      store(ON);
+      if (!auto) store(ON);
       paint();
       load().then(inject).catch(function () {
         document.documentElement.removeAttribute('data-skin');
-        store(null);
         paint();
       });
     } else {
       document.documentElement.removeAttribute('data-skin');
-      store(null);
+      store(OFF);
       clear();
       paint();
     }
@@ -160,7 +165,10 @@
       if (document.querySelector('.sidebar-buttons .b0b-skin-btn') || ++tries > 60) clearInterval(iv);
       else mount();
     }, 50);
-    if (/[?&]skin=speculative\b/.test(location.search) || stored() === ON) set(true);
+    var q = location.search, s = stored();
+    if (/[?&]skin=off\b/.test(q)) { store(OFF); paint(); return; }
+    if (/[?&]skin=speculative\b/.test(q) || s === ON) { set(true); return; }
+    if (s !== OFF && !BOT.test(navigator.userAgent || '')) set(true, true);  // the default: not stored, so /card and /home keep theirs
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
