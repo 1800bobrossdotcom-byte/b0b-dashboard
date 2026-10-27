@@ -28,28 +28,28 @@
   if (window.top !== window.self) return;
   if (document.getElementById('b0b-signal-bar')) return;
 
-  // Order is deliberate: the bar opens on the lead track.
+  // Order is deliberate: the bar opens on the lead track. Reordered 27 Oct 2026 at the author's
+  // instruction (Overseer first, Faith No More last); The Smiths removed (its XXV essay stays).
   var TRACKS = [
-    { id: 'HhZaHf8RP6g', label: 'Daft Punk &mdash; Veridis Quo' },                        // Daft Punk (artist channel). Lead track, author's instruction 25 Oct 2026.
-    { id: 'lYIsZr9L_rM', label: '3TEETH &mdash; Pumped Up Kicks' },                        // 3TEETH (artist channel @3T33TH, official video). Led the bar 24-25 Oct 2026.
-    { id: 'SYaIakuWg-g', label: 'Hooverphonic &mdash; Barabas' },                          // Hooverphonic - Topic (licensed).
-    { id: 'hFUEGRwhYcU', label: 'Blackalicious &mdash; Ego Sonic War Drums (unofficial upload)' }, // 'Hi-Def' — NOT a rights-holder channel (see header). Licensed copy V6Ds1JbKfj8 exists but is not embeddable.
     { id: 'iU6nkE-g3BM', label: 'Overseer &mdash; Heligoland' },                           // FATLANTIC — NOT a rights-holder channel (see header). ~26min: long tail after the song.
     { id: 'brxOrz5pqv4', label: 'L.A. Mass Choir &mdash; That&rsquo;s When You Bless Me' }, // L.A. Mass Choir - Topic (licensed; oEmbed). Replaced Iron & Wine 'Evening on the Ground (Lilith's Song)' 27 Oct 2026, author's instruction.
+    { id: 'SYaIakuWg-g', label: 'Hooverphonic &mdash; Barabas' },                          // Hooverphonic - Topic (licensed).
+    { id: 'hFUEGRwhYcU', label: 'Blackalicious &mdash; Ego Sonic War Drums (unofficial upload)' }, // 'Hi-Def' — NOT a rights-holder channel (see header). Licensed copy V6Ds1JbKfj8 exists but is not embeddable.
+    { id: 'lYIsZr9L_rM', label: '3TEETH &mdash; Pumped Up Kicks' },                        // 3TEETH (artist channel @3T33TH, official video). Led the bar 24-25 Oct 2026.
     { id: 'Xv8FBjo1Y8I', label: 'Tracy Chapman &mdash; Talkin&rsquo; Bout a Revolution' }, // Tracy Chapman (artist channel)
     { id: '2oDSwJmm-g0', label: 'billy woods &amp; Kenny Segal &mdash; Year Zero (feat. Danny Brown)' }, // billy woods (artist channel @billywoods_backwoodz, official visualizer; oEmbed). Replaced Spider Hole 27 Oct 2026, author's instruction.
     { id: 'rx2_iHftARo', label: 'Talking Heads &mdash; Slippery People' },                 // Talking Heads - Topic (licensed)
     { id: 'qMDxrXFQwU8', label: 'Filter &mdash; Hey Man Nice Shot' },                      // Filter - Topic (licensed)
+    { id: 'HhZaHf8RP6g', label: 'Daft Punk &mdash; Veridis Quo' },                        // Daft Punk (artist channel). Led the bar 25-27 Oct 2026.
     { id: '9D2R69gVyZ0', label: 'TOOL &mdash; 7empest' },                                   // TOOLVEVO (official). 15:43 - much longer than the rest.
-    { id: 'PtzhvJh9NRY', label: 'The Smiths &mdash; Bigmouth Strikes Again' },             // The Smiths (artist channel, official audio)
     { id: 'JKES3yfnD9U', label: 'Creedence Clearwater Revival &mdash; Have You Ever Seen the Rain' }, // CCR (artist channel, official audio)
     { id: 'N3XbZvD3lRo', label: 'GHOSTEMANE &mdash; AI' },                                 // GHOSTEMANE (artist channel @ghostemane, official video; oEmbed). Added 25 Oct 2026, author's instruction.
     { id: 'Q3dvbM6Pias', label: 'Rage Against the Machine &mdash; Testify' },              // RATMVEVO (official video; oEmbed; id from the song's Wikipedia page). Added 27 Oct 2026, author's instruction.
     { id: 'qphWnknZeaw', label: 'Hemlock Ernst &amp; Kenny Segal &mdash; Down' },           // Samuel T. Herring - Topic (licensed; oEmbed). Back at the House, Ruby Yacht 2019. Added 27 Oct 2026, author's instruction.
-    { id: 'O2KpEva4As4', label: 'Faith No More &mdash; We Care a Lot' },                    // Faith No More - Topic (Rhino/London-Sire; the 1987 Introduce Yourself recording; oEmbed). Added 27 Oct 2026, author's instruction.
-    { id: 'SqT1y5Qi6l0', label: 'Carl Carlton &mdash; Everlasting Love' }                   // Carl Carlton - Topic (Universal; oEmbed). The 1974 hit; author chose it over Robert Knight / Love Affair / Howard Jones. Added 27 Oct 2026.
+    { id: 'SqT1y5Qi6l0', label: 'Carl Carlton &mdash; Everlasting Love' },                   // Carl Carlton - Topic (Universal; oEmbed). The 1974 hit; author chose it over Robert Knight / Love Affair / Howard Jones. Added 27 Oct 2026.
+    { id: 'O2KpEva4As4', label: 'Faith No More &mdash; We Care a Lot' }                    // Faith No More - Topic (Rhino/London-Sire; the 1987 Introduce Yourself recording; oEmbed). Added 27 Oct 2026, author's instruction.
   ];
-  var LS_KEY = 'b0b_signal_v15';  // bump on every reorder: a stored index points into the old list
+  var LS_KEY = 'b0b_signal_v16';  // bump on every reorder: a stored index points into the old list
   var SAVE_MS = 1000;
   var player = null, ready = false, dur = 0, saveTimer = null, errCount = 0;
   // Listener's playback modes, kept with the rest of the bar's state. shuffle picks the next track

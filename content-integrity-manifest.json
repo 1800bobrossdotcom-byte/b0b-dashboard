@@ -1,14 +1,14 @@
 {
-  "generated": "2026-10-27T23:28:54.904Z",
+  "generated": "2026-10-27T23:44:38.127Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "abf3da770e99c942c96d891f999f697eeca1f0c00f17e53bb4bc1a46850b0b43",
+  "fullFileHash": "76101552dffad38a603070afcb34bcae959ce5d9628b00b67353ad7decdb0078",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "7f9fbf3bfcf5fd0320b1a7694bf927cc7a1e950db6d5e6afd455e60d85ee7fca",
-      "length": 43915
+      "hash": "b666ceccb8788fbc48e6a8679e1e4e41d309bccd57a04db89e2b35e7879e2fd4",
+      "length": 44978
     },
     {
       "id": "to-those-inside",
@@ -1482,8 +1482,8 @@
     },
     {
       "id": "xxiv-the-signal-track-daft-punk-veridis-quo",
-      "hash": "82ecc4da119ff3c00c26d87cf4d241edcdfc2602c815f39074ce5630f2749ea6",
-      "length": 3351
+      "hash": "cb1952aae48cc8ad727f93cef1892f1803bc761ba70ce9865da113bdb00d69d5",
+      "length": 3348
     },
     {
       "id": "xxiv-second-signal-tracy-chapman-talkin-bout-a",
@@ -1507,8 +1507,8 @@
     },
     {
       "id": "xxiv-sixth-signal-tool-7empest",
-      "hash": "7303ff9cb00f9f2b5492b4bc59b5a6cd5fb66298d7c57605a81fe278343e965e",
-      "length": 1067
+      "hash": "2277c4df25e4c4b908a95592546d0d5cb5584dad65fc85a035287915252e7840",
+      "length": 1007
     },
     {
       "id": "xxiv-seventh-signal-the-smiths-bigmouth-strikes",
@@ -1522,8 +1522,8 @@
     },
     {
       "id": "xxiv-ninth-signal-restless-leg-syndrome-represent-the-fucking-planet",
-      "hash": "ff9370e6c72c6ce5b807885ac46b594eaad03ebf88663b461891cec884258b08",
-      "length": 2420
+      "hash": "d051913a77c0b54bf96a9fac7b863f2c072bb2fbd71f8ff8459cceb1ca75324c",
+      "length": 2268
     },
     {
       "id": "xxiv-trust",
@@ -8008,9 +8008,9 @@
     },
     {
       "index": 1074,
-      "hash": "97118dd8af19a35c8e50136eaf41aa4d282e173a3eb5602fa0b91ccd05924d6d",
+      "hash": "7e0597a80744dcdea0d198284a7580d24be058fe381a3313df5199737736fafd",
       "preview": "Nine tracks are written up here deliberately, as signal rather than decoration, ...",
-      "length": 1221
+      "length": 1218
     },
     {
       "index": 1075,
@@ -8110,9 +8110,9 @@
     },
     {
       "index": 1091,
-      "hash": "2da4a2dbf8e18c837399b185fcdf1a4d8fc43711f6c3081f415a753eeb170a31",
+      "hash": "802bd16d850daf774431f82bd7bb47a2d89421a6e45473114a1386f08f9eb658",
       "preview": "What is documented. &ldquo;7empest&rdquo; closes Fear Inoculum (2019) and runs 1...",
-      "length": 411
+      "length": 351
     },
     {
       "index": 1092,
@@ -8146,9 +8146,9 @@
     },
     {
       "index": 1097,
-      "hash": "ac8a952dd179b02bb2e631ccc05900028a4de753f4ae41929c5e3708d363ced8",
+      "hash": "d8ed476aa0d924ec93c93e7dd44264c58bb546649f1ec0f752addacecf55c72a",
       "preview": "What is documented. Restless Leg Syndrome are a Vienna group - the producer d.b....",
-      "length": 524
+      "length": 372
     },
     {
       "index": 1098,

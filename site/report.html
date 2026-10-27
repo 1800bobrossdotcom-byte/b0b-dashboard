@@ -5,7 +5,9 @@
   <link rel="stylesheet" href="/theme.css">
   <link rel="stylesheet" href="/card.css?v=3">
   <link rel="stylesheet" href="/speculative.css?v=2">
+  <link rel="stylesheet" href="/veritas.css?v=1">
   <script>(function(){try{var t=localStorage.getItem("b0b_theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
+  <script>(function(){var d=null;try{d=localStorage.getItem("b0b_design");}catch(e){}var q=location.search;if(/[?&]design=classic\b/.test(q))d="classic";else if(/[?&]design=veritas\b/.test(q))d="veritas";if(d!=="classic")document.documentElement.setAttribute("data-design","veritas");})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>
     /* Self-heal mobile staleness: kill any stale service worker + caches so this page
@@ -39,7 +41,7 @@
   <meta name="twitter:title" content="b0b.dev - Project Anglerfish: a tiered, sourced OSINT report">
   <meta name="twitter:description" content="25 sections of tiered OSINT on structures of control: institutional capture, surveillance cities, underground infrastructure, the Epstein-Maxwell record. documented fact vs labeled hypothesis.">
   <meta name="twitter:image" content="https://www.b0b.dev/img/og-card.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"PROJECT ANGLERFISH: CASSOWARY ORCA AGILITY — the architecture of control, tiered and sourced","url":"https://www.b0b.dev/report","description":"Independent OSINT report by b0b.dev: 25 sections, every claim tiered and sourced, rival explanations scored, falsifiers stated, corrections public, data downloadable.","image":"https://www.b0b.dev/img/og-card.png","isPartOf":{"@type":"WebSite","name":"b0b.dev","url":"https://www.b0b.dev/"},"headline":"PROJECT ANGLERFISH: CASSOWARY ORCA AGILITY — the architecture of control, tiered and sourced","author":{"@type":"Person","name":"b0b"},"publisher":{"@type":"Organization","name":"b0b.dev","url":"https://www.b0b.dev/"},"mainEntityOfPage":"https://www.b0b.dev/report","dateModified":"2026-10-27T23:11:08.892Z"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"PROJECT ANGLERFISH: CASSOWARY ORCA AGILITY — the architecture of control, tiered and sourced","url":"https://www.b0b.dev/report","description":"Independent OSINT report by b0b.dev: 25 sections, every claim tiered and sourced, rival explanations scored, falsifiers stated, corrections public, data downloadable.","image":"https://www.b0b.dev/img/og-card.png","isPartOf":{"@type":"WebSite","name":"b0b.dev","url":"https://www.b0b.dev/"},"headline":"PROJECT ANGLERFISH: CASSOWARY ORCA AGILITY — the architecture of control, tiered and sourced","author":{"@type":"Person","name":"b0b"},"publisher":{"@type":"Organization","name":"b0b.dev","url":"https://www.b0b.dev/"},"mainEntityOfPage":"https://www.b0b.dev/report","dateModified":"2026-10-27T23:28:54.904Z"}</script>
   <!-- seo:end -->
   <!-- Search Console ownership. The site opens on this page (/ serves the
        report), so the verifier's fetch of the homepage ends up on this
@@ -276,6 +278,19 @@
     .section-body.collapsed { display: none; }
     /* closed, the headings read as the contents; open, a section keeps its full spacing */
     .main-content h2.collapsible.collapsed { margin-top: 1.6rem; margin-bottom: 0.6rem; }
+    /* the cue under each closed section: after its reach when the speculative skin is on */
+    .sect-open {
+      display: inline-flex; align-items: center; gap: 0.55em; margin: 0.15rem 0 0.5rem;
+      padding: 0.32rem 0.7rem 0.3rem; background: transparent; cursor: pointer;
+      border: 1px solid var(--muted-4); border-left: 2px solid var(--green);
+      font-family: var(--mono); font-size: 0.64rem; font-weight: 500; line-height: 1;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-soft);
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .sect-open:hover, .sect-open:focus-visible { color: var(--green); border-color: var(--green); outline: none; }
+    .sect-open .so-arrow { color: var(--green); letter-spacing: 0; }
+    .sect-open .so-meta { opacity: 0.6; }
+    .sect-open.is-open { display: none; }
 
     /* ===================== BACK TO TOP ===================== */
     .back-to-top {
@@ -6012,7 +6027,7 @@
 
 <h3 id="xxiv-the-signal-track-daft-punk-veridis-quo">The signal track - Daft Punk, &ldquo;Veridis Quo&rdquo;</h3>
 
-<p><strong>Nine tracks are written up here deliberately, as signal rather than decoration, and this one opens the written sequence.</strong> It opens it because it is the only one with no words in it, and it also opens the player in the bar at the bottom of the screen. The player carries <strong>eighteen</strong> tracks. Seven of the nine written up below are among them: Paul Simon&rsquo;s <em>Graceland</em> is no longer on it, and Restless Leg Syndrome plays on the page&rsquo;s soundtrack instead. Eleven are carried without an entry below - 3TEETH&rsquo;s <em>Pumped Up Kicks</em>, Hooverphonic&rsquo;s <em>Barabas</em>, Blackalicious&rsquo; <em>Ego Sonic War Drums</em>, Overseer&rsquo;s <em>Heligoland</em>, the L.A. Mass Choir&rsquo;s <em>That&rsquo;s When You Bless Me</em>, billy woods&rsquo; <em>Year Zero</em>, GHOSTEMANE&rsquo;s <em>AI</em>, Rage Against the Machine&rsquo;s <em>Testify</em>, Hemlock Ernst and Kenny Segal&rsquo;s <em>Down</em>, Faith No More&rsquo;s <em>We Care a Lot</em> and Carl Carlton&rsquo;s <em>Everlasting Love</em> - because the reason a track is placed is the author&rsquo;s to give and has not been given for those. They are named here so the gap is visible rather than silent; an unexplained inclusion is not the same as a concealed one. An overture should ask rather than assert, and this one is a question in its title.</p>
+<p><strong>Nine tracks are written up here deliberately, as signal rather than decoration, and this one opens the written sequence.</strong> It opens it because it is the only one with no words in it. The player in the bar at the bottom of the screen carries <strong>seventeen</strong> tracks. Six of the nine written up below are among them: Paul Simon&rsquo;s <em>Graceland</em>, The Smiths&rsquo; <em>Bigmouth Strikes Again</em> and Restless Leg Syndrome&rsquo;s <em>Represent The Fucking Planet</em> are not on it. Eleven are carried without an entry below - 3TEETH&rsquo;s <em>Pumped Up Kicks</em>, Hooverphonic&rsquo;s <em>Barabas</em>, Blackalicious&rsquo; <em>Ego Sonic War Drums</em>, Overseer&rsquo;s <em>Heligoland</em>, the L.A. Mass Choir&rsquo;s <em>That&rsquo;s When You Bless Me</em>, billy woods&rsquo; <em>Year Zero</em>, GHOSTEMANE&rsquo;s <em>AI</em>, Rage Against the Machine&rsquo;s <em>Testify</em>, Hemlock Ernst and Kenny Segal&rsquo;s <em>Down</em>, Faith No More&rsquo;s <em>We Care a Lot</em> and Carl Carlton&rsquo;s <em>Everlasting Love</em> - because the reason a track is placed is the author&rsquo;s to give and has not been given for those. They are named here so the gap is visible rather than silent; an unexplained inclusion is not the same as a concealed one. An overture should ask rather than assert, and this one is a question in its title.</p>
 
 <p><strong>What the title is doing.</strong> &ldquo;Veridis Quo&rdquo; is wordplay on the Latin <em>&ldquo;Quo vadis?&rdquo;</em> - <em>whither goest thou</em>, where are you going - and the fuller sense of that phrase is the harder one: <strong>to what end are you doing this?</strong> Read the other way round, the same syllables give <em>&ldquo;very disco,&rdquo;</em> which gives <em>Discovery</em>, the 2001 album it closes out at track eleven. A title that means <em>where are you going</em> and <em>discovery</em> at the same time, depending which direction you read it, is an unusually exact epigraph for a document like this one.</p>
 
@@ -6107,7 +6122,7 @@
 </div>
 
 <h3 id="xxiv-sixth-signal-tool-7empest">Sixth signal - TOOL, &ldquo;7empest&rdquo;</h3>
-<p><strong>What is documented.</strong> &ldquo;7empest&rdquo; closes <em>Fear Inoculum</em> (2019) and runs <strong>15:44</strong> - the longest track on the record, and, when it took <strong>Best Metal Performance at the 62nd Grammy Awards</strong> in January 2020, the longest song ever to win in that category. The title is the word <em>tempest</em> carrying a seven, in keeping with an album built throughout on sevens. <strong>It is also the track that plays first when this page opens.</strong></p>
+<p><strong>What is documented.</strong> &ldquo;7empest&rdquo; closes <em>Fear Inoculum</em> (2019) and runs <strong>15:44</strong> - the longest track on the record, and, when it took <strong>Best Metal Performance at the 62nd Grammy Awards</strong> in January 2020, the longest song ever to win in that category. The title is the word <em>tempest</em> carrying a seven, in keeping with an album built throughout on sevens.</p>
 <p><strong>Why it is here, stated as a reading.</strong> The song&rsquo;s subject is not the storm. It is <strong>the insistence that there isn&rsquo;t one</strong> - calm asserted, repeatedly and with authority, by the same party generating the weather. That is the shape this report keeps meeting in its documentary sections: not concealment of an event so much as the maintained assurance that nothing requiring explanation is occurring. The reading is the author&rsquo;s; the record above it is not. <span style="color:#888">(Official audio, licensed and served by YouTube&rsquo;s player - this site hosts no recording. Fair warning: at nearly sixteen minutes it is by some distance the longest thing on the bar.)</span></p>
 <div style="max-width:640px;margin:1.3rem auto;">
   <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border:1px solid #333;background:#000;">
@@ -6152,7 +6167,7 @@
 
 
 <h3 id="xxiv-ninth-signal-restless-leg-syndrome-represent-the-fucking-planet">Ninth signal - Restless Leg Syndrome, &ldquo;Represent The Fucking Planet&rdquo;</h3>
-<p><strong>What is documented.</strong> <strong>Restless Leg Syndrome</strong> are a Vienna group - the producer <strong>d.b.h</strong> with the turntablists <strong>Chrisfader</strong> and <strong>Testa</strong>. <em>&ldquo;Represent The Fucking Planet&rdquo;</em> is the sixth track on <em>Totem</em>, released <strong>6 August 2021</strong> on the Viennese label <strong>Duzz Down San</strong> as a double LP, and issued again in <strong>December 2022</strong> as a 7-inch backed with <em>&ldquo;Spirit&rdquo;</em> on Little Beat More. <strong>It is also on this page&rsquo;s soundtrack, after TOOL&rsquo;s &ldquo;7empest&rdquo;</strong>, which is the reason it is described here rather than simply used.</p>
+<p><strong>What is documented.</strong> <strong>Restless Leg Syndrome</strong> are a Vienna group - the producer <strong>d.b.h</strong> with the turntablists <strong>Chrisfader</strong> and <strong>Testa</strong>. <em>&ldquo;Represent The Fucking Planet&rdquo;</em> is the sixth track on <em>Totem</em>, released <strong>6 August 2021</strong> on the Viennese label <strong>Duzz Down San</strong> as a double LP, and issued again in <strong>December 2022</strong> as a 7-inch backed with <em>&ldquo;Spirit&rdquo;</em> on Little Beat More.</p>
 <p><strong>Why it is on the bar, and the first half is method rather than mood.</strong> A turntablist record is <em>assembled out of other people&rsquo;s records</em>. The instrument is somebody else&rsquo;s material, the skill is in the selection and the cut, and the honest version of the form has always been the one that lets you hear the seam - that does not pretend the sound originated with the person playing it. <strong>This report is built the same way and is subject to the same test.</strong> It is almost entirely assembled from other people&rsquo;s documents: court filings, designations, advisories, released tranches, the occasional photograph. <em>Nothing here is original material, and the only thing that separates the method from theft is that every splice is marked and every source is named.</em> A record that samples without credit and a document that asserts without citation fail in precisely the same way.</p>
 <p><strong>The title, taken as a reading and labeled as one.</strong> Almost every faction this report documents claims to represent something narrower than the planet - a service, a state, a firm, a bloodline, a movement - and the machinery it describes is what gets built when a small constituency captures an instrument meant for a larger one. <em>&ldquo;Represent the fucking planet&rdquo; is the opposite instruction, and it is the one this document tries to sit inside</em>: no side is being carried here, and where a finding cuts against the reading the author would prefer, it is printed anyway. <strong>That is a reading of a title, offered as the site&rsquo;s own and not as a statement of what three musicians in Vienna meant by it.</strong> No interview is cited because none was found, and the artists have not been asked to lend this document anything. <span style="color:#888">(Audio served through YouTube&rsquo;s player from the label&rsquo;s upload; nothing is rehosted here. Sources: <em>Totem</em> release record, Duzz Down San, 6 Aug 2021; Little Beat More 7-inch, Dec 2022.)</span></p>
 <div style="max-width:640px;margin:1.3rem auto;">
@@ -6484,6 +6499,22 @@
       h2.classList.toggle('collapsed');
       wrapper.classList.toggle('collapsed');
     });
+
+    // "click to expand report": sits just above the body, so a reach inserted after the h2
+    // comes first. It follows the body's state, whoever opens or closes it.
+    var parts = wrapper.querySelectorAll('h3[id]').length;
+    var cue = document.createElement('button');
+    cue.type = 'button';
+    cue.className = 'sect-open';
+    cue.setAttribute('data-tts-skip', '');
+    cue.setAttribute('aria-label', 'Expand section ' + h2.id);
+    cue.innerHTML = '<span class="so-arrow">&#9656;</span><span>Click to expand report</span>' +
+      '<span class="so-meta">// Sec ' + h2.id + (parts ? ' &middot; ' + parts + (parts === 1 ? ' part' : ' parts') : '') + '</span>';
+    cue.addEventListener('click', function() { expandSection(h2); });
+    wrapper.parentNode.insertBefore(cue, wrapper);
+    var sync = function() { cue.classList.toggle('is-open', !wrapper.classList.contains('collapsed')); };
+    if (window.MutationObserver) new MutationObserver(sync).observe(wrapper, { attributes: true, attributeFilter: ['class'] });
+    sync();
   });
 
   // ===================== OPEN WHAT A LINK POINTS INTO =====================
@@ -6733,24 +6764,16 @@
 
 <script src="/report-search.js?v=4" defer></script>
 <script src="/card.js?v=4" defer></script>
-<script src="/signal-bar.js?v=22" defer></script>
+<script src="/signal-bar.js?v=23" defer></script>
 <!-- Countermeasures drawer, double-stacked directly above the signal bar. Loads
      after signal-bar.js so --b0b-signal-h is already published when it measures. -->
 <script src="/countermeasures.js?v=3" defer></script>
 <script src="/theme.js" defer></script>
 <script src="/speculative.js?v=3" defer></script>
+<script src="/design.js?v=1" defer></script>
 <script src="/intro-points.js?v=1" defer></script>
 <script src="/intro-reel.js?v=4" defer></script>
 <script src="/intro.js?v=8" defer></script>
-<!-- Site soundtrack: TOOL, "7empest" (Fear Inoculum, 2019) leads, then Restless Leg Syndrome,
-     "Represent The Fucking Planet" (Totem, 2021); both from YouTube through youtube-nocookie
-     (the official audio and the label's upload); nothing is rehosted.
-     The control mounts unconditionally and plays through a plain iframe, so it still works
-     when YouTube's IFrame API is blocked or slow; the API is adopted only if it loads, to
-     report true playback state. Autoplay is attempted, never promised - the browser's
-     media-engagement policy has the last word on unmuted audio. Ducks for the narrator and
-     remembers a stop. Discussed on the page as the sixth and ninth signals in Section XXV. -->
-<script src="/soundtrack.js?v=7" defer></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

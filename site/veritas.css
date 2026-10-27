@@ -1,0 +1,200 @@
+/* VERITAS - the default design (the original green terminal look is CLASSIC).
+   A spare, monochrome, defence-contractor register: black ground, white type, hairlines,
+   a grotesk sans, small uppercase labels. It borrows a register, not a mark: the
+   wordmark is VERITAS, no other company's name, logo or copy is used.
+   Everything is scoped to html[data-design="veritas"], which an inline script in the
+   page head sets before first paint unless the reader chose CLASSIC (localStorage
+   b0b_design = "classic", or ?design=classic). design.js mounts the switch.
+   Inter, self-hosted under the OFL (site/fonts/LICENSE-OFL-Inter.txt). */
+@font-face{font-family:"Inter";src:url("/fonts/inter-latin-300-normal.woff2") format("woff2");font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:"Inter";src:url("/fonts/inter-latin-400-normal.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Inter";src:url("/fonts/inter-latin-500-normal.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Inter";src:url("/fonts/inter-latin-600-normal.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
+
+/* ---------- tokens: dark (default) ---------- */
+html[data-design="veritas"]{
+  --vx-sans:"Inter","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --mono:var(--vx-sans);
+  --serif:var(--vx-sans);
+  --read-font:var(--vx-sans);
+  --bg:#000;
+  --surface:#000;
+  --surface-2:#0a0a0a;
+  --surface-3:#161616;
+  --surface-4:#1c1c1c;
+  --surface-5:#262626;
+  --border:#2b2b2b;
+  --text:#c8c8c8;
+  --text-hi:#ffffff;
+  --text-bright:#ececec;
+  --text-bright2:#e2e2e2;
+  --text-soft:#bdbdbd;
+  --text-dim:#a3a3a3;
+  --muted:#8c8c8c;
+  --muted-2:#878787;
+  --muted-3:#737373;
+  --muted-4:#4a4a4a;
+  --muted-5:#8f8f8f;
+  --muted-6:#7d7d7d;
+  --muted-7:#6e6e6e;
+  --muted-blue:#a9b1b9;
+  --green:#ffffff;
+  --green-60:rgba(255,255,255,0.6);
+  --green-dim:#8c8c8c;
+  --green-mid:#5c5c5c;
+  --green-line:#262626;
+  --cyan:#ffffff;
+  --red:#e5484d;
+  --orange:#d9822b;
+  --purple:#b8a8d8;
+  --tint-green:#080808;
+  --tint-red:#100606;
+  --tint-blue:#080808;
+  --tint-red-2:#0c0505;
+  --tint-navy:#080808;
+  --on-accent:#000;
+  --hairline:rgba(255,255,255,0.18);
+  --vx-rule:#262626;
+  --vx-label:#8c8c8c;
+}
+/* ---------- tokens: light ---------- */
+html[data-design="veritas"][data-theme="light"]{
+  --bg:#ffffff;
+  --surface:#ffffff;
+  --surface-2:#f5f5f5;
+  --surface-3:#e9e9e9;
+  --surface-4:#e0e0e0;
+  --surface-5:#d6d6d6;
+  --border:#d4d4d4;
+  --text:#2b2b2b;
+  --text-hi:#000000;
+  --text-bright:#111;
+  --text-bright2:#161616;
+  --text-soft:#3a3a3a;
+  --text-dim:#4a4a4a;
+  --muted:#5a5a5a;
+  --muted-2:#5e5e5e;
+  --muted-3:#666;
+  --muted-4:#9a9a9a;
+  --muted-5:#5a5a5a;
+  --muted-6:#606060;
+  --muted-7:#6a6a6a;
+  --muted-blue:#4c545c;
+  --green:#000000;
+  --green-60:rgba(0,0,0,0.6);
+  --green-dim:#5a5a5a;
+  --green-mid:#8a8a8a;
+  --green-line:#e0e0e0;
+  --cyan:#000000;
+  --red:#b42318;
+  --tint-green:#fafafa;
+  --tint-red:#fdf3f2;
+  --tint-blue:#fafafa;
+  --tint-red-2:#fdf3f2;
+  --tint-navy:#fafafa;
+  --on-accent:#fff;
+  --hairline:rgba(0,0,0,0.16);
+  --vx-rule:#e2e2e2;
+  --vx-label:#666;
+}
+
+/* Inline style="" literals cannot read variables; remap the two accent greens/cyans. */
+html[data-design="veritas"] [style*=";color:#00ff41"],html[data-design="veritas"] [style^="color:#00ff41"],
+html[data-design="veritas"] [style*=";color: #00ff41"],html[data-design="veritas"] [style^="color: #00ff41"],
+html[data-design="veritas"] [style*=";color:#00ccff"],html[data-design="veritas"] [style^="color:#00ccff"],
+html[data-design="veritas"] [style*=";color: #00ccff"],html[data-design="veritas"] [style^="color: #00ccff"],
+html[data-design="veritas"] [style*=";color:#ffffff"],html[data-design="veritas"] [style^="color:#ffffff"]{color:var(--text-hi)!important}
+html[data-design="veritas"] [style*="border-color:#00ff41"],html[data-design="veritas"] [style*="border-color: #00ff41"],html[data-design="veritas"] [style*="solid #00ff41"],
+html[data-design="veritas"] [style*="border-color:#00ccff"],html[data-design="veritas"] [style*="border-color: #00ccff"],html[data-design="veritas"] [style*="solid #00ccff"]{border-color:var(--border)!important}
+
+/* ---------- type ---------- */
+html[data-design="veritas"] body{font-family:var(--vx-sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-feature-settings:"cv11" 1,"ss01" 1}
+html[data-design="veritas"] .main-content p,html[data-design="veritas"] .main-content li,
+html[data-design="veritas"] .main-content dd,html[data-design="veritas"] .main-content td,
+html[data-design="veritas"] .main-content blockquote{font-size:1rem;line-height:1.72;letter-spacing:-0.003em}
+html[data-design="veritas"] strong{color:var(--text-hi);font-weight:600}
+html[data-design="veritas"] em{color:inherit}
+html[data-design="veritas"] a{color:var(--text-hi);text-decoration-color:var(--muted-4)}
+html[data-design="veritas"] a:hover{text-decoration-color:var(--text-hi)}
+html[data-design="veritas"] h1{font-weight:300;font-size:2.6rem;letter-spacing:-0.025em;line-height:1.08;color:var(--text-hi);
+  border-bottom:1px solid var(--vx-rule);padding-bottom:1.4rem;margin-bottom:1.6rem}
+html[data-design="veritas"] .h1-codewords{font-weight:500;font-size:0.3em;letter-spacing:0.28em;color:var(--vx-label);margin-top:1rem}
+html[data-design="veritas"] h2{font-weight:400;font-size:1.6rem;letter-spacing:-0.015em;line-height:1.22;color:var(--text-hi);
+  border-left:0;padding-left:0;border-top:1px solid var(--vx-rule);padding-top:1.5rem;margin-top:3.4rem}
+html[data-design="veritas"] .main-content h2.collapsible.collapsed{margin-top:0;margin-bottom:0.7rem;padding-top:1.4rem}
+html[data-design="veritas"] h2.collapsible::after{color:var(--muted-3);top:calc(50% + 0.7rem)}
+html[data-design="veritas"] h2.collapsible:hover{color:var(--text-hi);opacity:0.8}
+html[data-design="veritas"] h3{font-weight:500;font-size:1.22rem;letter-spacing:-0.01em;color:var(--text-hi)}
+html[data-design="veritas"] h4{font-weight:600;font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-bright)}
+html[data-design="veritas"] .section-label,html[data-design="veritas"] th,html[data-design="veritas"] figcaption,
+html[data-design="veritas"] .warning-title,html[data-design="veritas"] .discovery-title,html[data-design="veritas"] .cross-ref-title,
+html[data-design="veritas"] .spiritual-title,html[data-design="veritas"] .digest-title{
+  font-weight:500;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase}
+html[data-design="veritas"] .section-label,html[data-design="veritas"] .cross-ref-title,html[data-design="veritas"] .discovery-title,
+html[data-design="veritas"] .spiritual-title,html[data-design="veritas"] .report-digest>.digest-title{color:var(--vx-label)}
+html[data-design="veritas"] figcaption{text-transform:none;letter-spacing:0;font-weight:400;font-size:0.8rem}
+html[data-design="veritas"] hr{border-top-color:var(--vx-rule)}
+
+/* ---------- panels: hairline boxes, one white rule on the left ---------- */
+html[data-design="veritas"] .cross-ref,html[data-design="veritas"] .discovery,html[data-design="veritas"] .spiritual,
+html[data-design="veritas"] .report-digest{background:var(--surface-2);border:1px solid var(--vx-rule);border-left:1px solid var(--text-hi);border-radius:0}
+html[data-design="veritas"] .warning{background:var(--tint-red);border:1px solid var(--vx-rule);border-left:1px solid var(--red);border-radius:0}
+html[data-design="veritas"] .sect-toc{border-color:var(--vx-rule);border-radius:0;background:transparent}
+html[data-design="veritas"] figure img,html[data-design="veritas"] figure svg{border-radius:0;border-color:var(--vx-rule)}
+html[data-design="veritas"] .report-epigraph{border-left-color:var(--vx-rule)}
+html[data-design="veritas"] .report-epigraph cite{color:var(--vx-label);letter-spacing:0.2em}
+
+/* ---------- sidebar ---------- */
+html[data-design="veritas"] .sidebar{background:var(--bg);border-right:1px solid var(--vx-rule);scrollbar-color:var(--border) var(--bg)}
+html[data-design="veritas"] .sidebar-header{padding:1.5rem 1.3rem 1.2rem;border-bottom:1px solid var(--vx-rule)}
+html[data-design="veritas"] .sidebar-buttons{padding:0.9rem 1.3rem;border-bottom:1px solid var(--vx-rule);gap:0.35rem}
+html[data-design="veritas"] .sidebar-buttons button,html[data-design="veritas"] .sidebar-buttons a{
+  border:1px solid var(--border)!important;color:var(--text-soft)!important;background:transparent!important;
+  font-family:var(--vx-sans);font-size:0.6rem;font-weight:500;letter-spacing:0.14em;padding:0.32rem 0.55rem;border-radius:0}
+html[data-design="veritas"] .sidebar-buttons button:hover,html[data-design="veritas"] .sidebar-buttons a:hover{
+  border-color:var(--text-hi)!important;color:var(--text-hi)!important}
+html[data-design="veritas"] .sidebar-buttons .b0b-skin-btn[aria-pressed="true"]{border-color:var(--amber)!important;color:var(--amber)!important}
+html[data-design="veritas"] .sidebar-link{color:var(--muted);font-size:0.78rem;letter-spacing:0}
+html[data-design="veritas"] .sidebar-link:hover{color:var(--text-hi);background:transparent}
+html[data-design="veritas"] .sidebar-link.active{color:var(--text-hi);border-left-color:var(--text-hi);background:transparent}
+html[data-design="veritas"] .sidebar-sublink{color:var(--muted-3)}
+html[data-design="veritas"] .sidebar-sublink:hover{color:var(--text-hi);background:transparent}
+html[data-design="veritas"] .sub-toggle{color:var(--muted-3)}
+html[data-design="veritas"] .sidebar input{border-radius:0}
+
+/* ---------- the wordmark ---------- */
+.vx-brand{display:none}
+html[data-design="veritas"] .sidebar-header > a:not(.vx-brand){display:none}
+html[data-design="veritas"] .vx-brand{display:flex;flex-direction:column;gap:0.45rem;text-decoration:none;color:var(--text-hi)}
+html[data-design="veritas"] .vx-brand:hover{text-shadow:none;opacity:0.85}
+.vx-word{font-family:"Inter","Helvetica Neue",Arial,sans-serif;font-weight:600;font-size:1.05rem;letter-spacing:0.42em;line-height:1;
+  display:flex;align-items:center;gap:0.6rem}
+.vx-word::before{content:"";width:0.62rem;height:0.62rem;border:1.5px solid currentColor;flex:0 0 auto;transform:rotate(45deg)}
+.vx-sub{font-family:"Inter","Helvetica Neue",Arial,sans-serif;font-weight:400;font-size:0.6rem;letter-spacing:0.08em;color:var(--vx-label);line-height:1.35}
+/* phones: the sidebar is behind the menu button, so the wordmark also heads the page */
+html[data-design="veritas"] .vx-brand.vx-top{display:none}
+@media (max-width:860px),(hover:none) and (pointer:coarse) and (max-width:1100px){
+  html[data-design="veritas"] .vx-brand.vx-top{display:flex;margin:0 0 1.6rem;padding:0 0 1rem;border-bottom:1px solid var(--vx-rule)}
+}
+
+/* ---------- the expand cue ---------- */
+html[data-design="veritas"] .sect-open{font-family:var(--vx-sans);font-size:0.6rem;letter-spacing:0.2em;border:1px solid var(--border);
+  border-left:1px solid var(--text-hi);color:var(--text-soft);padding:0.42rem 0.8rem}
+html[data-design="veritas"] .sect-open:hover,html[data-design="veritas"] .sect-open:focus-visible{border-color:var(--text-hi);color:var(--text-hi)}
+html[data-design="veritas"] .sect-open .so-arrow{color:var(--text-hi)}
+
+/* ---------- chrome around the page ---------- */
+html[data-design="veritas"] #b0b-signal-bar{background:var(--bg)!important;border-top:1px solid var(--vx-rule)!important;font-family:var(--vx-sans)!important;color:var(--text-soft)!important}
+html[data-design="veritas"] #b0b-signal-bar *{font-family:var(--vx-sans)!important}
+html[data-design="veritas"] #b0b-signal-bar button{color:var(--text-soft)!important;border-color:var(--border)!important;background:transparent!important;border-radius:0!important}
+html[data-design="veritas"] #b0b-signal-bar button:hover,html[data-design="veritas"] #b0b-signal-bar button.on{color:var(--on-accent)!important;background:var(--text-hi)!important;border-color:var(--text-hi)!important}
+html[data-design="veritas"] #b0b-signal-title{color:var(--text-hi)!important}
+html[data-design="veritas"] #b0b-signal-fill{background:var(--text-hi)!important}
+html[data-design="veritas"] #b0b-signal-bar input[type=range]{accent-color:var(--text-hi)}
+html[data-design="veritas"] .back-to-top{border-color:var(--border);color:var(--text-hi);background:var(--bg);border-radius:0}
+html[data-design="veritas"] .progress-fill{background:var(--text-hi)!important;box-shadow:none!important}
+html[data-design="veritas"] .b0b-design-btn[aria-pressed="true"]{border-color:var(--text-hi)!important;color:var(--text-hi)!important}
+html[data-design="veritas"] #b0b-signal-seek{background:var(--surface-5)!important;border-radius:0!important}
+html[data-design="veritas"] .cm-drawer h3{font-family:var(--vx-sans);font-size:0.68rem!important;font-weight:600;letter-spacing:0.2em;color:var(--text-hi)}
+html[data-design="veritas"] .cm-drawer{background:var(--bg)}
+html[data-design="veritas"] [style^="color:#5a7a68"],html[data-design="veritas"] [style*=";color:#5a7a68"]{color:var(--muted)!important}
