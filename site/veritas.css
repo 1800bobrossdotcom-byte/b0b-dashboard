@@ -165,11 +165,13 @@ html[data-design="veritas"] .sidebar input{border-radius:0}
 /* ---------- the wordmark ---------- */
 .vx-brand{display:none}
 html[data-design="veritas"] .sidebar-header > a:not(.vx-brand){display:none}
-html[data-design="veritas"] .vx-brand{display:flex;flex-direction:column;gap:0.45rem;text-decoration:none;color:var(--text-hi)}
+html[data-design="veritas"] .vx-brand{display:flex;flex-direction:row;align-items:center;gap:0.75rem;text-decoration:none;color:var(--text-hi)}
+/* the mark: the trench-coated figure from the jacket seal (design/projection/agent.py), as a mask so it takes the text colour */
+.vx-mark{flex:0 0 auto;width:2.5rem;height:3.25rem;background:currentColor;-webkit-mask:url("/img/vx-agent.png") center/contain no-repeat;mask:url("/img/vx-agent.png") center/contain no-repeat}
+.vx-text{display:flex;flex-direction:column;gap:0.42rem;min-width:0}
 html[data-design="veritas"] .vx-brand:hover{text-shadow:none;opacity:0.85}
 .vx-word{font-family:"Inter","Helvetica Neue",Arial,sans-serif;font-weight:600;font-size:1.05rem;letter-spacing:0.42em;line-height:1;
   display:flex;align-items:center;gap:0.6rem}
-.vx-word::before{content:"";width:0.62rem;height:0.62rem;border:1.5px solid currentColor;flex:0 0 auto;transform:rotate(45deg)}
 .vx-sub{font-family:"Inter","Helvetica Neue",Arial,sans-serif;font-weight:400;font-size:0.6rem;letter-spacing:0.08em;color:var(--vx-label);line-height:1.35}
 /* phones: the sidebar is behind the menu button, so the wordmark also heads the page */
 html[data-design="veritas"] .vx-brand.vx-top{display:none}

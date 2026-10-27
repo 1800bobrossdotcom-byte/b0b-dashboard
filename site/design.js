@@ -30,7 +30,8 @@
     a.className = 'vx-brand' + (cls ? ' ' + cls : '');
     a.href = '/';
     a.setAttribute('aria-label', 'VERITAS, the truth engine that powers b0b.dev');
-    a.innerHTML = '<span class="vx-word">VERITAS</span><span class="vx-sub">The truth engine that powers b0b.dev</span>';
+    a.innerHTML = '<span class="vx-mark" aria-hidden="true"></span>' +
+      '<span class="vx-text"><span class="vx-word">VERITAS</span><span class="vx-sub">The truth engine that powers b0b.dev</span></span>';
     return a;
   }
 
