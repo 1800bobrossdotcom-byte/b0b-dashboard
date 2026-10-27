@@ -57,7 +57,12 @@ BANNED = [
     (r'—', 'em dash; use " - "'),
 ]
 HOUSE_NO = re.compile(r'\b\d{1,5}\s+[A-Z][a-z]+(?:\s[A-Z][a-z]+)?\s(?:Street|St|Avenue|Ave|Road|Rd|Way|Drive|Dr|Lane|Boulevard|Blvd|Place)\b')
-QUOTE = re.compile(r'[“"]([^”"]{12,})[”"]')
+def quotes(text):
+    """Quoted spans, paired in order. Curly quotes pair by shape; straight quotes alternate."""
+    out = re.findall(r'“([^”]+)”', text)
+    straight = re.sub(r'“[^”]*”', ' ', text).split('"')
+    out += [straight[i] for i in range(1, len(straight) - 1, 2)]
+    return [q.strip() for q in out if q.strip()]
 
 
 def parse(text):
@@ -115,16 +120,19 @@ def check(reaches, report, partial=False):
                 errs.append(f'{where}: {why}: /{pat}/')
         if HOUSE_NO.search(plain):
             errs.append(f'{where}: looks like a house number: {HOUSE_NO.search(plain).group(0)!r}')
-        for q in QUOTE.findall(plain):
-            if not bsp.found_in(q, sec_text):
-                errs.append(f'{where}: quotation not found in Section {rid}: "{q[:70]}"')
+        for field in (head, body, r.get('PROVE', ''), r.get('KILL', '')):
+            for q in quotes(bc.strip_tags(field)):
+                if len(q) >= 12 and not bsp.found_in(q, sec_text):
+                    errs.append(f'{where}: quotation not found in Section {rid}: "{q[:70]}"')
         for line in r.get('FACT_CHECK', '').splitlines():
             line = line.strip()
             if not line.startswith('- '):
                 continue
-            phrase = line[2:].strip().strip('"“”')
-            if phrase and not bsp.found_in(phrase, sec_text):
-                errs.append(f'{where}: FACT_CHECK phrase not in Section {rid}: "{phrase[:70]}"')
+            # A fact line may carry several quoted phrases ("a" / "b"; "c"): each must be in the
+            # section. A line with no quotation marks is a note, checked by reading, not here.
+            for phrase in quotes(line[2:]):
+                if len(phrase) >= 8 and not bsp.found_in(phrase, sec_text):
+                    errs.append(f'{where}: FACT_CHECK phrase not in Section {rid}: "{phrase[:70]}"')
         for a in [x.strip() for x in r.get('DRAWS_ON', '').split(',') if x.strip()]:
             if a not in idx or idx[a][0] != rid or a == rid:
                 errs.append(f'{where}: "{a}" is not a subsection of Section {rid}')

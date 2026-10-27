@@ -1,7 +1,8 @@
 /* The SPECULATIVE skin (site/speculative.js). Theme tokens from theme.css, so it reads in light and dark. */
 .b0b-skin-btn { font: inherit; cursor: pointer; background: transparent; color: var(--amber, #ffcc00);
   border: 1px solid var(--amber, #ffcc00); }
-.b0b-skin-btn[aria-pressed="true"] { background: var(--amber, #ffcc00); color: var(--on-accent, #000); }
+html .sidebar-buttons .b0b-skin-btn, html .b0b-skin-btn { color: var(--amber, #ffcc00); border-color: var(--amber, #ffcc00); }
+html .sidebar-buttons .b0b-skin-btn[aria-pressed="true"], html .b0b-skin-btn[aria-pressed="true"] { background: var(--amber, #ffcc00); color: #000; }
 .main-content .nav .b0b-skin-btn { font-size: inherit; padding: 0 .4em; margin-left: .6em; }
 
 html[data-skin="speculative"] .main-content h2[id] { border-left: 4px solid var(--amber, #ffcc00); padding-left: .6rem; }
