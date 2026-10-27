@@ -902,7 +902,10 @@ function dayKey(d) { return (d || new Date()).toISOString().slice(0, 10); }
 function viewClass(req) {
   if (isCrawler(req)) return 'c';
   const h = req.headers;
-  if (h['sec-fetch-mode'] === 'navigate' && !h['sec-purpose'] && !h['purpose']) return 'b';
+  // a frame inside a page is not a page someone opened: only top-level documents count as reads
+  const dest = h['sec-fetch-dest'];
+  if (h['sec-fetch-mode'] === 'navigate' && !h['sec-purpose'] && !h['purpose'] &&
+      (!dest || dest === 'document')) return 'b';
   return 'o';
 }
 
@@ -1088,7 +1091,9 @@ app.get('/api/stats', (req, res) => {
       totals: { views: views, gate_entries: visits },
       method: 'Aggregate counts only. Each page served is counted once, by day and by the kind of client ' +
         'that asked for it; the request is then forgotten. No IP, user agent, cookie or per-reader record is ' +
-        'kept, so these are page loads, not people.'
+        'kept, so these are page loads, not people. Until 27 Oct 2026 the report loaded the AI attack-vector ' +
+        'page in a hidden frame and each of those loads was counted as a browser load of that page, so its ' +
+        'figure and the browser totals for 22-27 Oct are overstated.'
     };
     statsCache.set(n, { t: Date.now(), body });
     res.json(body);
