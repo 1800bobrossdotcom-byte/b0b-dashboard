@@ -207,6 +207,13 @@ Recorded so they are caught earlier next time. Each has happened.
 7. **Destructive edits while doing something else** — deleted `AECA` from the masthead while
    asked only to *add* the Donovan line, breaking two live cross-references for hours.
 
+8. **Grading his titles down to the weakest line under them.** 27 Oct 2026: six section titles were
+   retitled to what every claim in the section could carry, and he reversed it the same evening
+   ("going soft on what is really going on … almost like you are siding with these elites"). The
+   tiering lives in the section bodies; a title is his voice and is measured against the strongest
+   documented finding, not the weakest. Outside reviews pushed the same way; weigh them against
+   `design/INSTITUTION.md` before turning them into a plan.
+
 **Standing instruction to the assistant: when the author pushes back, check the record
 before defending. He has been right materially more often than not.**
 
@@ -221,6 +228,8 @@ than once.
 ---
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
+
+**ZERO BREACH TOOLKIT LINKED AS A TOOL — 27 Oct 2026, live.** Author: *"add this as a tool: https://github.com/interplains/Zero-Breach-Toolkit"*. ZERO BREACH after FARADAY in the report's top nav and sidebar and in `/home`'s nav (green, new tab, `noopener noreferrer`). **What it is (README read at source via raw.githubusercontent.com; github.com refused the spider, 403, ledgered):** a free, open-source, read-only check for traces of known mercenary spyware (Pegasus, Predator, Graphite, Candiru) on Windows/macOS/Linux, AndroidQF collections and iPhone backups; ~12,400 published indicators (Amnesty Security Lab, MVT, Citizen Lab); no network during a scan; points the targeted to Access Now's helpline and Amnesty's Security Lab first. **Anonymous, "Made by archivegenocide"** (the archive XV cites as a method specimen), with reproducible builds and GPG-signed releases. Its code was not audited here. Not added to the map headers or the `/start`-family nav.
 
 **THE SIX RETITLES ARE REVERSED — 27 Oct 2026, live. DO NOT RE-PROPOSE THEM.** Author, same evening: *"all these renamings are too technical - especially structures of long lead dominion. these are going soft on what is really going on in the world that this report deduces - almost like you are siding with these elites. which is bullshit."* All six h2 titles, XIV's h3 "Historical Slavery - The Unbroken Line", the sidebar label "IX. Underground / D.U.M.B." and the eleven languages' translations (`i18n.js` restored from `d1dfb4f~1`, `?v=6`) are back as he wrote them. Ledger entry `C-2026-10-27-3` withdrawn. **Section titles are his voice: the tiering lives in the section bodies, and a title is not graded down to the weakest line under it.** The @omcomma removal and the counter fix below stand.
 
