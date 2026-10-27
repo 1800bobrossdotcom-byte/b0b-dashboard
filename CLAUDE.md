@@ -234,6 +234,24 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**SUBSECTIONS REORDERED SO EACH SECTION READS IN ONE LINE — 27 Oct 2026, live.** Author: *"Why does it go from 9/11 / to untimely deaths of high profile individuals"*, *"Im noticing many sections just abruptly hop to some other topic and its very chaotic"*, then *"Fix them all"*. The hops came from blocks appended in the order they were written or moved in (XXIII was assembled on 23 Sept).
+- **Moved, not rewritten. Every h3 id is unchanged, so every deep link still lands.** No new prose except six pointers that the new order made false ("above"/"below", one section number). Before-copy in session scratch `report-pre-reorder.html`.
+- **Per section (new order):**
+  - II: the conclusion leads the section, then the tiers. The hypothesis chain keeps its order. Dershowitz moved here from IV (he is a II figure), before the fork.
+  - V: the exit-pattern module sits beside the death and funeral.
+  - VII: the three city-states join the multi-century structures; seed sovereignty sits after Lockheed.
+  - VIII: Bitcoin governance first, then Nash & Finney.
+  - IX: Russia's military-science belt beside the closed cities; Dimona and Little Saint James close on the underground before "Connection to Smart Cities". IV's two underground boxes moved here.
+  - X: cities, then the stack and IBM; then signals (Five Eyes, ECHELON, Snowden, orbit); then the two-city camera module; then military AI (Minerva, PAL/CALO, Maven, Nimbus, NSPM-7, AUTOWARCOM).
+  - XIV: historical slavery first, then prison labour, the Gulag, the ILO data, debt and wages.
+  - XV: the analysis first, then the dated status updates. The Nord Stream tiering box sits after The Structural Pattern.
+  - XVI: the FOIA reading-room items follow the derivation; then the international programmes.
+  - XXIII: Swartz and Mushegian, then the deaths ladder and Severed Chain; then the wanted list, ShinyHunters, Kushner; then the 9/11 topology in one run; then the Institutional Silence.
+  - XXV: Trust follows Contact.
+- **Structure bugs fixed on the way:** IV's sect-body never closed (V-IX were nested inside it until an extra `</div>` at IX's end). VII, VIII, X and XVI had their wrapper closing mid-section, which left later subsections outside it. Every section is now div-balanced on its own.
+- **Kept in the old order on purpose:** IV and XVIII (their cross-pointers), and II's hypothesis chain.
+- Reach IV now says "the one convicted principal" (the five-of-six line left IV with Dershowitz). Card `c-nord-stream-who` still answers from `#xv-the-structural-pattern`.
+
 **AI DISCLOSURE CORRECTED: SEVERAL AI SOURCES, NOT A MOVE TO OPEN-SOURCE — 27 Oct 2026, live. Ledger `C-2026-10-27-3`.** Author: *"correct that while I take issue with both anthropic and chat gpt as stated before - I am continuing to use multiple ai sources to audit and compose this report"*. The page said (X supply-chain box, X conflict disclosure, XXV "Trust") that his Claude subscription was cancelled effective 1 Sept 2026 and the work would move to open-source models; the Briefing's Method said Claude alone. Now: he takes issue with both Anthropic and OpenAI (maker of ChatGPT; both took the July 2025 DoD awards X documents) and uses multiple AI sources to audit and compose the report, Claude among them, each use disclosed; no model is a source. **This resolves the FLAGGED "through 1 Sept" item in the outside-review-#2 entry.** Do not name other vendors as tools he uses unless he does.
 
 **THE SPECULATIVE SKIN IS LIVE — 27 Oct 2026.** Author: *"go hard across the entire report. have a third skin that writes the report in a mode that is more 'fringe' - and reaches for conclusions ... speculative"*; asked, he chose **a reach per section** and the label **SPECULATIVE** (a later "nix the third section" he told me to disregard).
