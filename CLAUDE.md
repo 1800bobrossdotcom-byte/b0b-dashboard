@@ -234,6 +234,8 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**LOCKHEED BURBANK UNDERGROUND — researched 27 Oct 2026, nothing on the page changed. `research/BURBANK-UNDERGROUND.md`.** Author: *"To be clear i am not sure where the abduction facility would have been. It forms as a memory. Discerned as I had the memory while awake. Does Lockheed Burbank have any underground"*. **He does not place the Section I "Fourth, the earliest" memory at Lockheed.** Found: WWII camouflage canopy over the plant (documented, secondary); "an elaborate system of underground walkways" in 1942 (attributed: CSUN/Burbank Historical Society photo caption, no plan, fate after the war unknown); underground storage tanks and the groundwater plume (Superfund Area 1; EPA's PDFs refuse by robots). No base, bunker, lab or observation rooms in any source read. **Offered, his call:** a line in Section I in his words that he does not know where the place was, and whether the walkway caption goes beside it.
+
 **THE REPORT OPENS WITH EVERY SECTION CLOSED — 27 Oct 2026, live.** Author: *"Have the report start as collapsed. Leave speculative as is in current collapse mode"*.
 - **What a reader sees:** the masthead, the epigraph and the card, then the 25 section headings, each closed (▸). A heading click, EXPAND ALL or the sidebar opens a section. Closed headings sit tighter (1.6rem above, not 3.6rem). COLLAPSE ALL / EXPAND ALL are unchanged.
 - **Speculative, as he asked, unchanged:** each reach is inserted right after its h2 and outside the section's wrapper, so with the skin on, every closed section still shows its reach. Turning the skin on or off does not open anything.
