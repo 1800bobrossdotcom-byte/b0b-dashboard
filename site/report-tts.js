@@ -539,6 +539,7 @@
     }
     // Expand a collapsed section body so the highlighted line is visible.
     function reveal(el) {
+      if (window.__b0bReveal) { window.__b0bReveal(el); return; }
       var body = el.closest('.section-body');
       if (body && body.classList.contains('collapsed')) {
         body.classList.remove('collapsed');

@@ -198,8 +198,11 @@
 
     var target = markRange(m.el, m.start, m.len) || m.el;
     if (isDrawer() && sidebar) sidebar.classList.remove('open');
-    try { target.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
-    catch (e) { target.scrollIntoView(); }
+    if (window.__b0bLand) window.__b0bLand(target, 'center');
+    else {
+      try { target.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
+      catch (e) { target.scrollIntoView(); }
+    }
 
     Array.prototype.forEach.call(results.children, function (c, ci) {
       c.classList.toggle('current', ci === current);

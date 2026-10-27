@@ -1,5 +1,5 @@
 """Deploy checks on report.html against a pre-edit copy: tag balance, duplicate ids, dangling anchors,
-sect-toc label/li/h3 counts, inline JS (node --check) and JSON-LD.
+sect-toc label/li/h3 counts, inline JS (node --check), JSON-LD, and no section nested inside a box.
 
   pipecheck.py NEW.html OLD.html
 """
@@ -44,3 +44,17 @@ for m in re.finditer(r'<script(?![^>]*\bsrc=)([^>]*)>(.*?)</script>',new,re.S):
     r=subprocess.run(['node','--check',f.name],capture_output=True,text=True); os.unlink(f.name)
     if r.returncode: fails+=1; print('JS fail',r.stderr[:300])
 print('inline js checked',n,'fails',fails)
+# Every <h2 id> section must sit at the top level. Balanced totals can hide a box left open in one
+# section and closed in a later one, which nests every section after it (27 Oct 2026: VIII-XXV
+# sat inside a VII tiering box, and the sections could not collapse).
+from html.parser import HTMLParser
+class _Nest(HTMLParser):
+    def __init__(self): super().__init__(); self.stack=[]; self.bad=[]
+    def handle_starttag(self,t,a):
+        a=dict(a)
+        if t=='h2' and a.get('id') and self.stack: self.bad.append((a['id'],self.getpos()[0],self.stack[-1]))
+        if t=='div': self.stack.append(a.get('class') or '')
+    def handle_endtag(self,t):
+        if t=='div' and self.stack: self.stack.pop()
+_n=_Nest(); _n.feed(new)
+print('sections nested inside a box:',len(_n.bad),_n.bad[:5])
