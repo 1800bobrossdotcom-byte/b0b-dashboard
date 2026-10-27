@@ -39,6 +39,7 @@ button, input, select { font: inherit; color: inherit; }
 .header nav a { color: var(--cyan); text-decoration: none; font-size: 0.78rem; border: 1px solid var(--cyan); padding: 0.2rem 0.6rem; white-space: nowrap; }
 .header nav a:hover { background: var(--cyan); color: var(--on-accent); }
 .header nav a.nav-erc { color: #e6c200; border-color: #e6c200; }
+.header nav a.nav-x { color: var(--text-hi); border-color: var(--text-hi); }
 .nav-toggle { display: none; background: none; border: 1px solid var(--cyan); color: var(--cyan); font-size: 0.9rem; line-height: 1; padding: 0.2rem 0.5rem; cursor: pointer; }
 @media (max-width: 768px) {
   .header { padding: 0 116px 0 0.6rem; }

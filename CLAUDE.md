@@ -218,6 +218,8 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**@omcomma IS LINKED — 27 Oct 2026, live.** Author: *"Add @omcomma twitter"*. `https://x.com/omcomma` (the account whose post supplied the OM COMMA film), in the slots @_lovebeing_ held: the report's top nav and sidebar (white, after ERC-1155), `/home` (nav, a "Signal" row after Author, footer "X"), and both map headers (`map-gl.css?v=3` restores `.nav-x`). **This does not lift the 26 Oct rule: @_lovebeing_ stays off.** JSON-LD `sameAs` not touched.
+
 **24 PICTURES ADDED ACROSS THE REPORT — 26 Oct 2026, live.** Author: *"Add more pictures throughout report"*.
 - **The source is the listen-mode library only** (`site/img/listen/`, `site/listen-media.js`): each image is already licence-checked (PD, CC0 or CC BY) and face-checked. Nothing new was sourced.
 - **Placement:** a script matched each item's curated trigger phrases (`scripts/listen-media-keys.json`) against the `<p>` text of image-poor sections (II, VII and XX skipped). It kept only items whose subject appears in the first ~220 characters of the paragraph, with no faces, one per subsection and one use per item, capped by section size. Every pick was then read in context and every image viewed on a contact sheet.
