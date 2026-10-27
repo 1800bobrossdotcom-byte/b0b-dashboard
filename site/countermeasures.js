@@ -119,7 +119,7 @@ body .cm-drawer {
 .cm-status { font-size: 0.6rem; color: var(--muted-4); margin-top: 4px; }
 .cm-status.active { color: var(--green); }
 .cm-info { font-size: 0.55rem; color: var(--muted-3); margin-top: 4px; line-height: 1.4; }
-/* ===================== HEALING TONES ===================== */
+/* ===================== SOLFEGGIO TONES ===================== */
 .ht-freq-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; margin-top: 6px; }
 @media (max-width: 400px) { .ht-freq-grid { grid-template-columns: repeat(3, 1fr); } .pt-freq-grid { grid-template-columns: repeat(3, 1fr); } }
 .ht-freq-btn { padding: 4px 2px; font-size: 0.55rem; font-family: 'Courier New', monospace; background: var(--fill-mid); border: 1px solid var(--border); color: var(--muted); cursor: pointer; text-align: center; transition: all 0.2s; }
@@ -127,7 +127,7 @@ body .cm-drawer {
 .ht-freq-btn.active { border-color: var(--green); color: var(--green); background: rgba(0,255,65,0.08); box-shadow: 0 0 6px rgba(0,255,65,0.15); }
 .ht-volume { width: 100%; height: 4px; margin-top: 6px; accent-color: var(--green); cursor: pointer; }
 .ht-now-playing { font-size: 0.55rem; color: var(--green); margin-top: 4px; font-style: italic; }
-/* ===================== PROTECTIVE TONES ===================== */
+/* ===================== BINAURAL & NOISE ===================== */
 .pt-freq-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; margin-top: 6px; }
 .pt-freq-btn { padding: 4px 2px; font-size: 0.55rem; font-family: 'Courier New', monospace; background: var(--fill-mid); border: 1px solid var(--border); color: var(--muted); cursor: pointer; text-align: center; transition: all 0.2s; }
 .pt-freq-btn:hover { border-color: var(--cyan); color: var(--cyan); }
@@ -147,69 +147,69 @@ body .cm-drawer {
   <div class="cm-drawer-bar" onclick="toggleCmDrawer()">
     <h3>🛡️ COUNTERMEASURES</h3>
     <div class="cm-status-dots">
-      <span class="cm-dot" id="cmDotUltrasonic" title="Ultrasonic Shield"></span>
+      <span class="cm-dot" id="cmDotUltrasonic" title="Ultrasonic Sweep"></span>
       <span class="cm-dot-label" id="cmDotLabelUltrasonic">SHIELD</span>
       <span class="cm-dot active" id="cmDotWebrtc" title="WebRTC Block"></span>
       <span class="cm-dot-label active" id="cmDotLabelWebrtc">WEBRTC</span>
       <span class="cm-dot active" id="cmDotCanvas" title="Canvas Guard"></span>
       <span class="cm-dot-label active" id="cmDotLabelCanvas">CANVAS</span>
-      <span class="cm-dot" id="cmDotHealing" title="Healing Tones"></span>
+      <span class="cm-dot" id="cmDotHealing" title="Solfeggio Tones"></span>
       <span class="cm-dot-label" id="cmDotLabelHealing">TONES</span>
-      <span class="cm-dot" id="cmDotProtective" title="Protective Tones"></span>
+      <span class="cm-dot" id="cmDotProtective" title="Binaural & Noise"></span>
       <span class="cm-dot-label active" id="cmDotLabelProtective">PROTECT</span>
     </div>
     <span class="cm-drawer-chevron">▲</span>
   </div>
   <div class="cm-drawer-content" id="cmDrawerContent">
   <div class="cm-panel">
-    <label class="cm-toggle"><input type="checkbox" id="cmUltrasonic" onchange="toggleUltrasonicCM(this.checked)"><span class="cm-label">ULTRASONIC SHIELD</span></label>
+    <label class="cm-toggle"><input type="checkbox" id="cmUltrasonic" onchange="toggleUltrasonicCM(this.checked)"><span class="cm-label">ULTRASONIC SWEEP</span></label>
     <div class="cm-status" id="cmStatus">INACTIVE</div>
-    <div class="cm-info">🌊 WATER PLANET OPTIMIZED - Humidity-adaptive frequency sweep across 20–22kHz. Atmospheric water vapor attenuates ultrasound non-uniformly; our sweep ensures full-band coverage through variable moisture. Jams cross-device tracking beacons &amp; acoustic data exfiltration. 🐾 ANIMAL-SAFE: above 20kHz at -60dB, safe for all pets.</div>
+    <div class="cm-info">A band of noise from 20 to 22 kHz, swept back and forth every four seconds. Most phone and laptop speakers cannot play it, and nothing here has tested whether it disrupts tracking beacons. Dogs and cats hear in this range.</div>
   </div>
   <div class="cm-panel">
     <label class="cm-toggle"><input type="checkbox" id="cmWebrtc" onchange="toggleWebRTCBlock(this.checked)" checked><span class="cm-label">WebRTC LEAK BLOCK</span></label>
-    <div class="cm-status active" id="cmWebrtcStatus">ACTIVE - local IP masked</div>
-    <div class="cm-info">Prevents WebRTC from exposing your real local/public IP addresses through STUN/TURN requests. Blocks a common browser fingerprinting and de-anonymization vector.</div>
+    <div class="cm-status active" id="cmWebrtcStatus">ACTIVE on this site</div>
+    <div class="cm-info">Turns WebRTC off on this site's pages, so a page here cannot read your device's IP addresses through it. It does not reach other sites; your browser's own settings or an extension do that.</div>
   </div>
   <div class="cm-panel">
     <label class="cm-toggle"><input type="checkbox" id="cmCanvas" onchange="toggleCanvasGuard(this.checked)" checked><span class="cm-label">CANVAS FINGERPRINT GUARD</span></label>
     <div class="cm-status active" id="cmCanvasStatus">ACTIVE - noise injected</div>
-    <div class="cm-info">Injects imperceptible noise into canvas readback operations, defeating canvas fingerprinting - a technique that uniquely identifies browsers by rendering differences.</div>
+    <div class="cm-info">Adds faint noise to canvas reads on this site's pages, so a canvas fingerprint taken here will not match one taken elsewhere. It does not reach other sites.</div>
   </div>
   <div class="cm-panel" style="border-color:#00ff41">
-    <label class="cm-toggle"><input type="checkbox" id="cmHealing" onchange="toggleHealingTones(this.checked)"><span class="cm-label" style="color:#00ff41">🎵 HEALING TONES</span></label>
+    <label class="cm-toggle"><input type="checkbox" id="cmHealing" onchange="toggleHealingTones(this.checked)"><span class="cm-label" style="color:#00ff41">🎵 SOLFEGGIO TONES</span></label>
     <div class="cm-status" id="cmHealingStatus">INACTIVE</div>
     <div class="ht-freq-grid" id="htFreqGrid">
-      <button class="ht-freq-btn" data-freq="174" data-name="Pain Relief" onclick="selectHealingFreq(this)">174 Hz</button>
-      <button class="ht-freq-btn" data-freq="285" data-name="Tissue Healing" onclick="selectHealingFreq(this)">285 Hz</button>
-      <button class="ht-freq-btn active" data-freq="396" data-name="Liberation" onclick="selectHealingFreq(this)">396 Hz</button>
-      <button class="ht-freq-btn" data-freq="417" data-name="Change" onclick="selectHealingFreq(this)">417 Hz</button>
-      <button class="ht-freq-btn" data-freq="432" data-name="Natural Calm" onclick="selectHealingFreq(this)">432 Hz</button>
-      <button class="ht-freq-btn" data-freq="528" data-name="Love / DNA Repair" onclick="selectHealingFreq(this)">528 Hz</button>
-      <button class="ht-freq-btn" data-freq="639" data-name="Connection" onclick="selectHealingFreq(this)">639 Hz</button>
-      <button class="ht-freq-btn" data-freq="741" data-name="Intuition" onclick="selectHealingFreq(this)">741 Hz</button>
-      <button class="ht-freq-btn" data-freq="852" data-name="Spiritual" onclick="selectHealingFreq(this)">852 Hz</button>
-      <button class="ht-freq-btn" data-freq="963" data-name="Higher Self" onclick="selectHealingFreq(this)">963 Hz</button>
+      <button class="ht-freq-btn" data-freq="174" data-name="Solfeggio" onclick="selectHealingFreq(this)">174 Hz</button>
+      <button class="ht-freq-btn" data-freq="285" data-name="Solfeggio" onclick="selectHealingFreq(this)">285 Hz</button>
+      <button class="ht-freq-btn active" data-freq="396" data-name="Solfeggio" onclick="selectHealingFreq(this)">396 Hz</button>
+      <button class="ht-freq-btn" data-freq="417" data-name="Solfeggio" onclick="selectHealingFreq(this)">417 Hz</button>
+      <button class="ht-freq-btn" data-freq="432" data-name="A = 432 Hz" onclick="selectHealingFreq(this)">432 Hz</button>
+      <button class="ht-freq-btn" data-freq="528" data-name="Solfeggio" onclick="selectHealingFreq(this)">528 Hz</button>
+      <button class="ht-freq-btn" data-freq="639" data-name="Solfeggio" onclick="selectHealingFreq(this)">639 Hz</button>
+      <button class="ht-freq-btn" data-freq="741" data-name="Solfeggio" onclick="selectHealingFreq(this)">741 Hz</button>
+      <button class="ht-freq-btn" data-freq="852" data-name="Solfeggio" onclick="selectHealingFreq(this)">852 Hz</button>
+      <button class="ht-freq-btn" data-freq="963" data-name="Solfeggio" onclick="selectHealingFreq(this)">963 Hz</button>
     </div>
     <input type="range" class="ht-volume" id="htVolume" min="0" max="100" value="25" oninput="setHealingVolume(this.value)" title="Volume">
     <div class="ht-now-playing" id="htNowPlaying"></div>
-    <div class="cm-info">🌊 WATER PLANET OPTIMIZED - Solfeggio frequencies with sub-harmonic body-water resonance. Your body is ~60% water - each tone is paired with its sub-octave to create deeper cymatics patterns that resonate with the water you carry and swim through. 🐾 ANIMAL-SAFE: 174–963 Hz at gentle volume, safe for all pets.</div>
+    <div class="cm-info">Sine tones from 174 to 963 Hz (the set known as the solfeggio frequencies, plus 432 Hz), each layered with the tone an octave below.</div>
   </div>
   <div class="cm-panel" style="border-color:#00ccff">
-    <label class="cm-toggle"><input type="checkbox" id="cmProtective" onchange="toggleProtectiveTones(this.checked)"><span class="cm-label" style="color:#00ccff">🛡️ PROTECTIVE TONES</span></label>
+    <label class="cm-toggle"><input type="checkbox" id="cmProtective" onchange="toggleProtectiveTones(this.checked)"><span class="cm-label" style="color:#00ccff">🛡️ BINAURAL & NOISE</span></label>
     <div class="cm-status" id="cmProtectiveStatus">INACTIVE</div>
     <div class="pt-freq-grid" id="ptFreqGrid">
       <button class="pt-freq-btn active" data-freq="7.83" data-name="Schumann Resonance" data-type="binaural" onclick="selectProtectiveFreq(this)">7.83 Hz</button>
-      <button class="pt-freq-btn" data-freq="10" data-name="Alpha - Calm Alert" data-type="binaural" onclick="selectProtectiveFreq(this)">10 Hz</button>
-      <button class="pt-freq-btn" data-freq="14" data-name="Beta - Focus" data-type="binaural" onclick="selectProtectiveFreq(this)">14 Hz</button>
-      <button class="pt-freq-btn" data-freq="40" data-name="Gamma - Perception" data-type="binaural" onclick="selectProtectiveFreq(this)">40 Hz</button>
-      <button class="pt-freq-btn" data-freq="0" data-name="Pink Noise - Masking" data-type="pink" onclick="selectProtectiveFreq(this)">PINK</button>
-      <button class="pt-freq-btn" data-freq="0" data-name="Brown Noise - Deep Cover" data-type="brown" onclick="selectProtectiveFreq(this)">BROWN</button>
-      <button class="pt-freq-btn" data-freq="0" data-name="Ocean Waves - Planet Sound" data-type="ocean" onclick="selectProtectiveFreq(this)">🌊 OCEAN</button>
+      <button class="pt-freq-btn" data-freq="10" data-name="Alpha band" data-type="binaural" onclick="selectProtectiveFreq(this)">10 Hz</button>
+      <button class="pt-freq-btn" data-freq="14" data-name="Beta band" data-type="binaural" onclick="selectProtectiveFreq(this)">14 Hz</button>
+      <button class="pt-freq-btn" data-freq="40" data-name="Gamma band" data-type="binaural" onclick="selectProtectiveFreq(this)">40 Hz</button>
+      <button class="pt-freq-btn" data-freq="0" data-name="Pink noise" data-type="pink" onclick="selectProtectiveFreq(this)">PINK</button>
+      <button class="pt-freq-btn" data-freq="0" data-name="Brown noise" data-type="brown" onclick="selectProtectiveFreq(this)">BROWN</button>
+      <button class="pt-freq-btn" data-freq="0" data-name="Ocean waves" data-type="ocean" onclick="selectProtectiveFreq(this)">🌊 OCEAN</button>
     </div>
     <input type="range" class="pt-volume" id="ptVolume" min="0" max="100" value="30" oninput="setProtectiveVolume(this.value)" title="Volume">
     <div class="pt-now-playing" id="ptNowPlaying"></div>
-    <div class="cm-info">🌊 WATER PLANET OPTIMIZED - 7.83 Hz Schumann is Earth's own electromagnetic heartbeat through our water-enriched atmosphere. Pink noise includes humidity compensation for true 1/f masking through moisture-laden air. Ocean mode is the sound of our planet's water. Use headphones for binaural entrainment. 🐾 ANIMAL-SAFE: gentle volume, safe for all pets.</div>
+    <div class="cm-info">Binaural beats: two sine tones a few hertz apart, one in each ear, so use headphones. 7.83 Hz is the frequency of the Schumann resonance, the lowest electromagnetic resonance between Earth's surface and the ionosphere; here it is only the gap between two tones. Pink, brown and ocean are noise.</div>
   </div>
   </div>
 </div>
@@ -305,9 +305,9 @@ body .cm-drawer {
 
   // ===================== COUNTERMEASURE ENGINE =====================
 
-  // --- ULTRASONIC SHIELD (ANIMAL-SAFE) ---
+  // --- ULTRASONIC SWEEP (20-22 kHz) ---
   // Generates broadband noise in the 20–22kHz range
-  // ANIMAL SAFETY: Shifted above 20kHz to avoid the 17-20kHz range where dogs
+  // NOTE: Shifted above 20kHz to avoid the 17-20kHz range where dogs
   // and cats have peak sensitivity. Gain reduced to -60dB (0.001).
   // Most consumer speakers naturally roll off above 20kHz, providing additional
   // safety margin. At -60dB through typical phone/laptop speakers, actual
@@ -315,8 +315,7 @@ body .cm-drawer {
   // Dogs hear up to ~65kHz but sensitivity drops sharply above 20kHz.
   // Cats hear up to ~79kHz but sensitivity drops sharply above 20kHz.
   // Birds: most species hear below 12kHz - no overlap.
-  // Jams: ultrasonic cross-device tracking beacons, acoustic data exfiltration,
-  // covert mic capture quality degradation
+  // Nothing here has tested it against tracking beacons or microphones.
   var cmAudioCtx = null;
   var cmNoiseNode = null;
   var cmGainNode = null;
@@ -353,7 +352,7 @@ body .cm-drawer {
       cmNoiseNode.buffer = noiseBuffer;
       cmNoiseNode.loop = true;
 
-      // Bandpass filter: 20000–22000 Hz (animal-safe ultrasonic)
+      // Bandpass filter: 20000–22000 Hz 
       // Center: 21000 Hz, narrow band above human and pet sensitivity peaks
       cmFilterNode = cmAudioCtx.createBiquadFilter();
       cmFilterNode.type = 'bandpass';
@@ -369,9 +368,9 @@ body .cm-drawer {
 
       // Gain: extremely low - -60dB (0.001)
       // At this amplitude through consumer speakers, radiated SPL at 20kHz+
-      // is near ambient noise floor - safe for all animals
+      // is near ambient noise floor
       cmGainNode = cmAudioCtx.createGain();
-      cmGainNode.gain.value = 0.001; // -60dB - animal-safe amplitude
+      cmGainNode.gain.value = 0.001; // -60dB
 
       // Connect: noise → bandpass → safety highpass → gain → speakers
       cmNoiseNode.connect(cmFilterNode);
@@ -379,9 +378,7 @@ body .cm-drawer {
       cmSafetyFilter.connect(cmGainNode);
       cmGainNode.connect(cmAudioCtx.destination);
 
-      // Water-planet humidity-adaptive frequency sweep
-      // Atmospheric water vapor attenuates ultrasound non-uniformly
-      // Triangle sweep ensures full-band coverage through variable moisture
+      // Fixed triangle sweep, 20-22 kHz every 4 s (nothing reads humidity)
       cmSweepLfo = cmAudioCtx.createOscillator();
       cmSweepLfo.type = 'triangle';
       cmSweepLfo.frequency.value = 0.25; // full sweep every 4 seconds
@@ -394,12 +391,12 @@ body .cm-drawer {
       cmNoiseNode.start();
       cmUltrasonicActive = true;
 
-      document.getElementById('cmStatus').textContent = 'ACTIVE - 20–22kHz sweep (humidity-adaptive, animal-safe)';
+      document.getElementById('cmStatus').textContent = 'ACTIVE - 20–22kHz sweep';
       document.getElementById('cmStatus').className = 'cm-status active';
-      console.log('[COUNTERMEASURE] Ultrasonic shield ACTIVE - 20–22kHz animal-safe noise floor engaged (-60dB)');
+      console.log('[COUNTERMEASURE] Ultrasonic sweep ACTIVE - 20–22kHz noise sweep at -60dB');
     } catch (e) {
       document.getElementById('cmStatus').textContent = 'ERROR - ' + e.message;
-      console.log('[COUNTERMEASURE] Ultrasonic shield failed: ' + e.message);
+      console.log('[COUNTERMEASURE] Ultrasonic sweep failed: ' + e.message);
     }
   }
 
@@ -413,7 +410,7 @@ body .cm-drawer {
       cmUltrasonicActive = false;
       document.getElementById('cmStatus').textContent = 'INACTIVE';
       document.getElementById('cmStatus').className = 'cm-status';
-      console.log('[COUNTERMEASURE] Ultrasonic shield DEACTIVATED');
+      console.log('[COUNTERMEASURE] Ultrasonic sweep DEACTIVATED');
     } catch (e) {}
   }
 
@@ -428,7 +425,7 @@ body .cm-drawer {
       window.webkitRTCPeerConnection = window.RTCPeerConnection;
       window.mozRTCPeerConnection = window.RTCPeerConnection;
       cmRTCBlocked = true;
-      document.getElementById('cmWebrtcStatus').textContent = 'ACTIVE - local IP masked';
+      document.getElementById('cmWebrtcStatus').textContent = 'ACTIVE on this site';
       document.getElementById('cmWebrtcStatus').className = 'cm-status active';
       console.log('[COUNTERMEASURE] WebRTC leak block ACTIVE');
     } else {
@@ -498,16 +495,16 @@ body .cm-drawer {
     }
   });
 
-  // --- HEALING TONES ENGINE ---
+  // --- SOLFEGGIO TONES ENGINE ---
   // Solfeggio frequencies - pure sine wave tones for sound therapy
-  // All frequencies (174–963 Hz) are in normal audible range - completely safe for all animals
+  // All frequencies (174–963 Hz) are in normal audible range
   var htAudioCtx = null;
   var htOscillator = null;
   var htSubOsc = null;
   var htGainNode = null;
   var htActive = false;
   var htCurrentFreq = 396;
-  var htCurrentName = 'Liberation';
+  var htCurrentName = 'Solfeggio';
   var htVolume = 0.06; // gentle default (~25%)
 
   function toggleHealingTones(enabled) {
@@ -560,10 +557,10 @@ body .cm-drawer {
       document.getElementById('cmHealingStatus').textContent = 'ACTIVE - ' + htCurrentFreq + ' Hz';
       document.getElementById('cmHealingStatus').className = 'cm-status active';
       document.getElementById('htNowPlaying').textContent = '♫ ' + htCurrentFreq + ' Hz - ' + htCurrentName;
-      console.log('[HEALING TONES] ' + htCurrentFreq + ' Hz (' + htCurrentName + ') - ACTIVE');
+      console.log('[SOLFEGGIO TONES] ' + htCurrentFreq + ' Hz (' + htCurrentName + ') - ACTIVE');
     } catch (e) {
       document.getElementById('cmHealingStatus').textContent = 'ERROR - ' + e.message;
-      console.log('[HEALING TONES] Failed: ' + e.message);
+      console.log('[SOLFEGGIO TONES] Failed: ' + e.message);
     }
   }
 
@@ -584,7 +581,7 @@ body .cm-drawer {
       document.getElementById('cmHealingStatus').textContent = 'INACTIVE';
       document.getElementById('cmHealingStatus').className = 'cm-status';
       document.getElementById('htNowPlaying').textContent = '';
-      console.log('[HEALING TONES] DEACTIVATED');
+      console.log('[SOLFEGGIO TONES] DEACTIVATED');
     } catch (e) {}
   }
 
@@ -603,7 +600,7 @@ body .cm-drawer {
       if (htSubOsc) htSubOsc.frequency.linearRampToValueAtTime(htCurrentFreq / 2, htAudioCtx.currentTime + 0.3);
       document.getElementById('cmHealingStatus').textContent = 'ACTIVE - ' + htCurrentFreq + ' Hz';
       document.getElementById('htNowPlaying').textContent = '♫ ' + htCurrentFreq + ' Hz - ' + htCurrentName;
-      console.log('[HEALING TONES] Switched to ' + htCurrentFreq + ' Hz (' + htCurrentName + ')');
+      console.log('[SOLFEGGIO TONES] Switched to ' + htCurrentFreq + ' Hz (' + htCurrentName + ')');
     }
   }
 
@@ -614,13 +611,13 @@ body .cm-drawer {
     }
   }
 
-  // --- PROTECTIVE TONES ENGINE ---
+  // --- BINAURAL & NOISE ENGINE ---
   // Binaural beats + acoustic masking for mental shielding and privacy
   // Binaural: plays two sine waves at slightly different frequencies in L/R channels
   // The perceived "beat" frequency = difference between L and R
   // Use headphones for binaural effect
   // Pink/Brown noise: acoustic masking for conversation privacy
-  // All tones at gentle volume - safe for all animals
+  // All tones at gentle volume
   var ptAudioCtx = null;
   var ptOscL = null;
   var ptOscR = null;
@@ -686,10 +683,9 @@ body .cm-drawer {
         ptNoiseNode = ptAudioCtx.createBufferSource();
         ptNoiseNode.buffer = buf;
         ptNoiseNode.loop = true;
-        // Water-planet humidity compensation: high-shelf boost
+        // +2.5 dB high shelf above 4 kHz
         // Atmospheric moisture absorbs frequencies above 4kHz
-        // +2.5dB shelf restores true 1/f spectrum through humid air
-        var humidShelf = ptAudioCtx.createBiquadFilter();
+                var humidShelf = ptAudioCtx.createBiquadFilter();
         humidShelf.type = 'highshelf';
         humidShelf.frequency.value = 4000;
         humidShelf.gain.value = 2.5;
@@ -755,10 +751,10 @@ body .cm-drawer {
       document.getElementById('cmProtectiveStatus').textContent = 'ACTIVE - ' + label;
       document.getElementById('cmProtectiveStatus').className = 'cm-status active';
       document.getElementById('ptNowPlaying').textContent = '◆ ' + ptCurrentName;
-      console.log('[PROTECTIVE TONES] ' + ptCurrentName + ' - ACTIVE');
+      console.log('[BINAURAL & NOISE] ' + ptCurrentName + ' - ACTIVE');
     } catch (e) {
       document.getElementById('cmProtectiveStatus').textContent = 'ERROR - ' + e.message;
-      console.log('[PROTECTIVE TONES] Failed: ' + e.message);
+      console.log('[BINAURAL & NOISE] Failed: ' + e.message);
     }
   }
 
@@ -782,7 +778,7 @@ body .cm-drawer {
       document.getElementById('cmProtectiveStatus').textContent = 'INACTIVE';
       document.getElementById('cmProtectiveStatus').className = 'cm-status';
       document.getElementById('ptNowPlaying').textContent = '';
-      console.log('[PROTECTIVE TONES] DEACTIVATED');
+      console.log('[BINAURAL & NOISE] DEACTIVATED');
     } catch (e) {}
   }
 

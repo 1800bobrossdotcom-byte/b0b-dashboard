@@ -1192,7 +1192,7 @@ function buildLab() {
       '<a href="/tones/shield">ARC SHIELD: SOUND MONITOR AND EVIDENCE RECORDER</a>' +
       '<a href="/tones/instrument">TONE LAB: STACKABLE TONES</a>' +
       '<a href="/tones/multipack">MULTIPACK</a>' +
-      '<a href="/tones/healing">HEALING TONES</a>' +
+      '<a href="/tones/healing">SOLFEGGIO TONES</a>' +
       '<a href="/countermeasures">COUNTERMEASURES</a></div>' +
     '<h4 class="mg-h4">A READING OF COLOUR</h4>' +
     '<p class="mg-note">The site\'s own reading of building colour, carried from the classic map. It is not a finding.</p>' +
@@ -1206,7 +1206,7 @@ function buildLab() {
   $('#toggleDeep').addEventListener('change', (e) => { S.deep = e.target.checked; tierFilters(); });
   // The countermeasures drawer lives in the lab.
   const cm = document.createElement('script');
-  cm.src = '/countermeasures.js?v=2';
+  cm.src = '/countermeasures.js?v=3';
   document.body.appendChild(cm);
 }
 

@@ -1,7 +1,7 @@
 {
   "name": "b0b Tone Lab",
   "short_name": "Tone Lab",
-  "description": "Stackable healing tone instrument with touch pads, rhythms, harmonics, and analog feel",
+  "description": "Stackable tone instrument with touch pads, rhythms, harmonics, and analog feel",
   "start_url": "/tones/instrument",
   "scope": "/tones/",
   "display": "standalone",

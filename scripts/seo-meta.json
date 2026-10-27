@@ -119,15 +119,15 @@
     },
     {
       "file": "countermeasures.html",
-      "title": "countermeasures: privacy tools & healing tones — b0b.dev",
-      "metaDescription": "ultrasonic beacon jammer, webrtc leak block, canvas fingerprint guard, solfeggio healing tones and binaural beats. browser-based privacy tools, no tracking.",
-      "ogDescription": "jam ultrasonic tracking beacons, block webrtc leaks, defeat canvas fingerprinting. plus solfeggio healing tones, binaural beats, noise masking. zero dependencies, no tracking, works offline.",
+      "title": "countermeasures: privacy tools & tone generators — b0b.dev",
+      "metaDescription": "webrtc and canvas fingerprint guards for this site's pages, a 20-22 kHz noise sweep, solfeggio tones, binaural beats and noise beds. each says what it is.",
+      "ogDescription": "privacy guards for this site's own pages and four tone generators: a 20-22 kHz noise sweep, solfeggio tones, binaural beats and noise beds. zero dependencies, no tracking scripts.",
       "jsonldType": "WebApplication",
-      "headline": "privacy countermeasures & tone generators: ultrasonic shield, fingerprint guard, healing & protective tones",
+      "headline": "privacy tools & tone generators: webrtc and canvas guards, ultrasonic sweep, solfeggio, binaural and noise",
       "topics": [
         "browser fingerprinting",
-        "webrtc leak blocking",
-        "ultrasonic tracking beacons",
+        "webrtc",
+        "ultrasonic noise",
         "solfeggio frequencies",
         "binaural beats",
         "noise masking"
@@ -167,14 +167,14 @@
     },
     {
       "file": "tones-healing.html",
-      "title": "healing tones: solfeggio frequency generator — b0b.dev",
+      "title": "solfeggio tones: browser frequency generator — b0b.dev",
       "metaDescription": "solfeggio tone generator in the browser: ten sine frequencies from 174 to 963 Hz — 396, 432, 528 and more — with sub-octave layer and volume control.",
-      "ogDescription": "ten solfeggio frequencies, one toggle. 174-963 Hz sine tones with a sub-octave layer, volume slider, home-screen install. zero dependencies. filed under countermeasures.",
+      "ogDescription": "ten solfeggio frequencies, one toggle. 174-963 Hz sine tones with a sub-octave layer, volume slider and home-screen install. zero dependencies, works offline once loaded.",
       "jsonldType": "WebApplication",
-      "headline": "healing tones: a browser solfeggio frequency generator, 174 to 963 Hz",
+      "headline": "solfeggio tones: a browser sine-tone generator, 174 to 963 Hz",
       "topics": [
         "solfeggio frequencies",
-        "healing tones",
+        "sine tones",
         "tone generator",
         "528 Hz",
         "432 Hz",
@@ -183,27 +183,27 @@
     },
     {
       "file": "tones-protective.html",
-      "title": "protective tones: Schumann binaurals, noise, ocean — b0b.dev",
+      "title": "binaural & noise tones: Schumann, alpha, ocean — b0b.dev",
       "metaDescription": "standalone browser tone generator: 7.83 Hz Schumann resonance, alpha/beta/gamma binaural beats, pink and brown noise, ocean waves. installs to your home screen.",
-      "ogDescription": "countermeasures for your ears: 7.83 Hz Schumann resonance and alpha/beta/gamma binaural beats, pink/brown noise, ocean waves. zero dependencies, animal-safe. use headphones for entrainment.",
+      "ogDescription": "binaural beats at 7.83, 10, 14 and 40 Hz (two sine tones a few hertz apart, one in each ear), pink and brown noise, ocean waves. zero dependencies. use headphones.",
       "jsonldType": "WebApplication",
-      "headline": "protective tones: Schumann resonance binaurals, pink and brown noise, ocean waves in the browser",
+      "headline": "binaural & noise tones: Schumann-rate binaural beats, pink and brown noise, ocean waves in the browser",
       "topics": [
         "binaural beats",
         "Schumann resonance",
         "pink noise",
         "brown noise",
         "ocean waves",
-        "brainwave entrainment"
+        "web audio"
       ]
     },
     {
       "file": "tones-instrument.html",
-      "title": "tone lab v2: sacred frequency instrument — b0b.dev",
+      "title": "tone lab v2: frequency instrument — b0b.dev",
       "metaDescription": "tone lab v2: browser instrument with solfeggio pads (174-963 Hz), monk chant synthesis, binaural beats, a 32-step sequencer, MIDI input, and WAV recording.",
-      "ogDescription": "a sacred frequency instrument in the browser. solfeggio pads, tibetan and gregorian chant synthesis, binaural beats, noise beds, 32-step sequencer, MIDI in, WAV out. touch pads to begin.",
+      "ogDescription": "a frequency instrument in the browser. solfeggio pads, tibetan and gregorian chant synthesis, binaural beats, noise beds, 32-step sequencer, MIDI in, WAV out. touch pads to begin.",
       "jsonldType": "WebApplication",
-      "headline": "tone lab v2: a sacred frequency instrument with chant synthesis, sequencer and MIDI",
+      "headline": "tone lab v2: a frequency instrument with chant synthesis, sequencer and MIDI",
       "topics": [
         "solfeggio frequencies",
         "binaural beats",
@@ -233,15 +233,15 @@
     {
       "file": "tones-multipack.html",
       "title": "tone multipack: solfeggio, binaural & ultrasonic — b0b.dev",
-      "metaDescription": "three layerable tone engines: solfeggio frequencies 174-963 Hz, Schumann-carrier binaurals, noise beds, and a 20-22 kHz ultrasonic sweep against tracking beacons.",
-      "ogDescription": "three engines, one page: solfeggio tones, Schumann binaural beats, noise beds, and a 20-22 kHz ultrasonic shield against cross-device tracking beacons. layer them like an instrument.",
+      "metaDescription": "three layerable tone engines: solfeggio frequencies 174-963 Hz, Schumann-rate binaurals, noise beds, and a 20-22 kHz noise sweep, all on one page.",
+      "ogDescription": "three engines, one page: solfeggio tones, Schumann-rate binaural beats, noise beds, and a 20-22 kHz noise sweep that most speakers cannot play. layer them like an instrument.",
       "jsonldType": "WebApplication",
-      "headline": "tone multipack: layered solfeggio, binaural beats and ultrasonic shield",
+      "headline": "tone multipack: layered solfeggio, binaural beats and ultrasonic sweep",
       "topics": [
         "solfeggio frequencies",
         "binaural beats",
         "Schumann resonance",
-        "ultrasonic shield",
+        "ultrasonic sweep",
         "pink noise",
         "tone generator"
       ]

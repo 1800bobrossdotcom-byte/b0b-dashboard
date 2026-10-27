@@ -1,6 +1,6 @@
 // ===================== b0b COUNTERMEASURES ENGINE =====================
 // Persistent audio engine for the b0b shell - runs in parent frame
-// Provides: Ultrasonic Shield, WebRTC Block, Canvas Guard, Healing Tones, Protective Tones
+// Provides: Ultrasonic Sweep, WebRTC Block, Canvas Guard, Solfeggio Tones, Binaural & Noise
 // Persists across page navigation (iframe navigates, tones continue)
 
 (function() {
@@ -51,7 +51,7 @@ function updateCmDots() {
 }
 setInterval(updateCmDots, 500);
 
-// ===================== ULTRASONIC SHIELD =====================
+// ===================== ULTRASONIC SWEEP =====================
 var cmAudioCtx = null;
 var cmNoiseNode = null;
 var cmGainNode = null;
@@ -129,7 +129,7 @@ window.toggleWebRTCBlock = function(enabled) {
     window.webkitRTCPeerConnection = window.RTCPeerConnection;
     window.mozRTCPeerConnection = window.RTCPeerConnection;
     cmRTCBlocked = true;
-    document.getElementById('cmWebrtcStatus').textContent = 'ACTIVE - local IP masked';
+    document.getElementById('cmWebrtcStatus').textContent = 'ACTIVE on this site';
     document.getElementById('cmWebrtcStatus').className = 'cm-status active';
   } else {
     if (cmOriginalRTC) {
@@ -177,14 +177,14 @@ window.toggleCanvasGuard = function(enabled) {
   }
 };
 
-// ===================== HEALING TONES ENGINE =====================
+// ===================== SOLFEGGIO TONES ENGINE =====================
 var htAudioCtx = null;
 var htOscillator = null;
 var htSubOsc = null;
 var htGainNode = null;
 var htActive = false;
 var htCurrentFreq = 396;
-var htCurrentName = 'Liberation';
+var htCurrentName = 'Solfeggio';
 var htVolume = 0.06;
 
 window.toggleHealingTones = function(enabled) {
@@ -263,7 +263,7 @@ window.setHealingVolume = function(val) {
   }
 };
 
-// ===================== PROTECTIVE TONES ENGINE =====================
+// ===================== BINAURAL & NOISE ENGINE =====================
 var ptAudioCtx = null;
 var ptOscL = null;
 var ptOscR = null;
@@ -755,23 +755,23 @@ window.downloadToneApp = function(type) {
   html += '</style></head><body><div class="app">';
 
   if (type === 'healing') {
-    html += '<h1>\�\� b0b HEALING TONES</h1>';
+    html += '<h1>\�\� b0b SOLFEGGIO TONES</h1>';
     html += '<label class="toggle"><input type="checkbox" id="tog" onchange="toggle(this.checked)"><span>ACTIVATE</span></label>';
     html += '<div class="status" id="st">INACTIVE</div>';
     html += '<div id="grid">';
-    var freqs = [[174,'Pain Relief'],[285,'Tissue Healing'],[396,'Liberation'],[417,'Change'],[432,'Natural Calm'],[528,'Love / DNA Repair'],[639,'Connection'],[741,'Intuition'],[852,'Spiritual'],[963,'Higher Self']];
+    var freqs = [[174,'Solfeggio'],[285,'Solfeggio'],[396,'Solfeggio'],[417,'Solfeggio'],[432,'A = 432 Hz'],[528,'Solfeggio'],[639,'Solfeggio'],[741,'Solfeggio'],[852,'Solfeggio'],[963,'Solfeggio']];
     for (var i = 0; i < freqs.length; i++) {
       html += '<button class="btn' + (freqs[i][0] === 396 ? ' active' : '') + '" data-f="' + freqs[i][0] + '" data-n="' + freqs[i][1] + '" onclick="sel(this)">' + freqs[i][0] + ' Hz</button>';
     }
     html += '</div><input type="range" min="0" max="100" value="25" oninput="vol(this.value)">';
     html += '<script>';
-    html += 'var ctx,osc,sub,gain,on=false,freq=396,name="Liberation",v=0.06;';
+    html += 'var ctx,osc,sub,gain,on=false,freq=396,name="Solfeggio",v=0.06;';
     html += 'function toggle(e){if(e){if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();if(ctx.state==="suspended")ctx.resume();if(osc){try{osc.stop();osc.disconnect()}catch(x){}}if(sub){try{sub.stop();sub.disconnect()}catch(x){}}osc=ctx.createOscillator();osc.type="sine";osc.frequency.value=freq;gain=ctx.createGain();gain.gain.setValueAtTime(0,ctx.currentTime);gain.gain.linearRampToValueAtTime(v,ctx.currentTime+0.5);osc.connect(gain);sub=ctx.createOscillator();sub.type="sine";sub.frequency.value=freq/2;var sg=ctx.createGain();sg.gain.value=0.15;sub.connect(sg);sg.connect(gain);gain.connect(ctx.destination);osc.start();sub.start();on=true;document.getElementById("st").textContent="ACTIVE - "+freq+" Hz";document.getElementById("st").style.color="#00ff41"}else{if(gain&&ctx){gain.gain.linearRampToValueAtTime(0,ctx.currentTime+0.3);setTimeout(function(){try{if(osc){osc.stop();osc.disconnect();osc=null}if(sub){sub.stop();sub.disconnect();sub=null}if(gain){gain.disconnect();gain=null}}catch(x){}},350)}on=false;document.getElementById("st").textContent="INACTIVE";document.getElementById("st").style.color="#555"}}';
     html += 'function sel(b){document.querySelectorAll(".btn").forEach(function(x){x.classList.remove("active")});b.classList.add("active");freq=parseInt(b.dataset.f);name=b.dataset.n;if(on&&osc&&ctx){osc.frequency.linearRampToValueAtTime(freq,ctx.currentTime+0.3);if(sub)sub.frequency.linearRampToValueAtTime(freq/2,ctx.currentTime+0.3);document.getElementById("st").textContent="ACTIVE - "+freq+" Hz"}}';
     html += 'function vol(val){v=(val/100)*0.25;if(on&&gain&&ctx)gain.gain.linearRampToValueAtTime(v,ctx.currentTime+0.1)}';
     html += '<\/script>';
   } else {
-    html += '<h1>\�\�\️ b0b PROTECTIVE TONES</h1>';
+    html += '<h1>\�\�\️ b0b BINAURAL & NOISE</h1>';
     html += '<label class="toggle"><input type="checkbox" id="tog" onchange="toggle(this.checked)"><span>ACTIVATE</span></label>';
     html += '<div class="status" id="st">INACTIVE</div>';
     html += '<div id="grid">';

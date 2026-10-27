@@ -1,7 +1,7 @@
 {
-  "name": "b0b Healing Tones",
-  "short_name": "Healing Tones",
-  "description": "Solfeggio healing frequency generator",
+  "name": "b0b Solfeggio Tones",
+  "short_name": "Solfeggio Tones",
+  "description": "Solfeggio frequency tone generator",
   "start_url": "/tones/healing",
   "display": "standalone",
   "background_color": "#0a0a0a",

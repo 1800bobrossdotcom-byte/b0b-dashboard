@@ -193,6 +193,14 @@
    "page_said": "Listed Jared Kushner’s firm, Affinity Partners, among the resources for moving people underground; carried a Kushner → Saudi PIF → NEOM chain; dated PIF’s $2B to July 2021; gave Affinity as $3B and ~$4.8B; quoted “PR risks” from PIF’s screening panel; stated MBS’s override as fact; kept him on the Indian Creek council “in multiple White House administrations”; called the Moscow session “accredited envoy diplomacy” and Mueller’s review “exhaustive”.",
    "replaced_by": "Removed from the relocation passage (no document ties the firm to it) and the NEOM chain cut (no source ties Kushner or Affinity to NEOM). Corrected: June 2021 (Senate Finance); $6.16B under management (Form ADV, March 2026); the panel’s objections and the override attributed to the New York Times via House Oversight letters; on the village council from 2024 to mid-2026; no title on 2 Dec 2025; Mueller left the Gorkov meeting’s purpose disputed. The Indian Creek block no longer reads its residents as a working group.",
    "found_by": "A graded look at Kushner’s record, at the author’s request."
+  },
+  {
+   "id": "C-2026-10-27-1",
+   "date": "2026-10-27",
+   "where": "Tone tools",
+   "page_said": "The tone pages and the countermeasures drawer said a 20–22 kHz sweep “jams cross-device tracking beacons & acoustic data exfiltration” and was “humidity-adaptive” (nothing in the code reads humidity); labelled tones “Pain Relief”, “Tissue Healing” and “Love / DNA Repair”; claimed “sub-harmonic body-water resonance”; called every tone “ANIMAL-SAFE”; and said the WebRTC and canvas guards protect the reader, when they act only on this site’s own pages.",
+   "replaced_by": "Each tool now says what it is and nothing about what it does: a fixed 20–22 kHz noise sweep, untested against any beacon and above what most speakers play; sine tones by frequency; binaural beats as two tones one per ear; guards that act on this site only. The names that claimed an effect (healing, protective, shield, sacred) were changed; the addresses were not.",
+   "found_by": "An outside review, checked against the pages."
   }
  ],
  "tested_not_adopted": [
