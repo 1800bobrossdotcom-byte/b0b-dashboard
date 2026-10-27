@@ -43,7 +43,8 @@
     { id: '9D2R69gVyZ0', label: 'TOOL &mdash; 7empest' },                                   // TOOLVEVO (official). 15:43 - much longer than the rest.
     { id: 'PtzhvJh9NRY', label: 'The Smiths &mdash; Bigmouth Strikes Again' },             // The Smiths (artist channel, official audio)
     { id: 'JKES3yfnD9U', label: 'Creedence Clearwater Revival &mdash; Have You Ever Seen the Rain' }, // CCR (artist channel, official audio)
-    { id: 'N3XbZvD3lRo', label: 'GHOSTEMANE &mdash; AI' }                                  // GHOSTEMANE (artist channel @ghostemane, official video; oEmbed). Added 25 Oct 2026, author's instruction.
+    { id: 'N3XbZvD3lRo', label: 'GHOSTEMANE &mdash; AI' },                                 // GHOSTEMANE (artist channel @ghostemane, official video; oEmbed). Added 25 Oct 2026, author's instruction.
+    { id: 'Q3dvbM6Pias', label: 'Rage Against the Machine &mdash; Testify' }               // RATMVEVO (official video; oEmbed; id from the song's Wikipedia page). Added 27 Oct 2026, author's instruction.
   ];
   var LS_KEY = 'b0b_signal_v13';  // bump on every reorder: a stored index points into the old list
   var SAVE_MS = 1000;
