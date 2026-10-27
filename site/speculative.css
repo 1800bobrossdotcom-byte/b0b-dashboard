@@ -1,0 +1,34 @@
+/* The SPECULATIVE skin (site/speculative.js). Theme tokens from theme.css, so it reads in light and dark. */
+.b0b-skin-btn { font: inherit; cursor: pointer; background: transparent; color: var(--amber, #ffcc00);
+  border: 1px solid var(--amber, #ffcc00); }
+.b0b-skin-btn[aria-pressed="true"] { background: var(--amber, #ffcc00); color: var(--on-accent, #000); }
+.main-content .nav .b0b-skin-btn { font-size: inherit; padding: 0 .4em; margin-left: .6em; }
+
+html[data-skin="speculative"] .main-content h2[id] { border-left: 4px solid var(--amber, #ffcc00); padding-left: .6rem; }
+
+.spec-banner { margin: 0 0 1.5rem; padding: .7rem 1rem; border: 1px dashed var(--amber, #ffcc00);
+  font-family: var(--mono, monospace); font-size: .78rem; line-height: 1.55; letter-spacing: .03em;
+  color: var(--text, #d4d4d4); background: var(--surface, #0d0d0d); }
+.spec-banner strong { color: var(--amber, #ffcc00); letter-spacing: .14em; }
+.spec-banner button { font: inherit; background: none; border: 0; padding: 0; color: var(--cyan, #00ccff);
+  text-decoration: underline; cursor: pointer; }
+
+.spec-reach { margin: .4rem 0 1.6rem; padding: 1rem 1.15rem .9rem; max-width: 46rem;
+  border: 1px solid var(--amber, #ffcc00); border-left-width: 4px;
+  background: repeating-linear-gradient(135deg, transparent 0 14px, rgba(255, 204, 0, .035) 14px 15px), var(--surface, #0d0d0d); }
+.spec-reach .sr-kicker { font-family: var(--mono, monospace); font-size: .66rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--amber, #ffcc00); margin: 0 0 .5rem; }
+.spec-reach .sr-head { font-family: var(--serif, Georgia, serif); font-size: 1.25rem; line-height: 1.38; font-weight: 600;
+  color: var(--text-hi, #fff); margin: 0 0 .7rem; }
+.spec-reach .sr-body p { font-family: var(--serif, Georgia, serif); font-size: 1rem; line-height: 1.64; margin: 0 0 .7rem;
+  color: var(--text, #d4d4d4); }
+.spec-reach .sr-test { font-family: var(--mono, monospace); font-size: .76rem; line-height: 1.55; margin: .4rem 0 0;
+  color: var(--text-soft, #ccc); }
+.spec-reach .sr-test b { color: var(--amber, #ffcc00); font-weight: 600; letter-spacing: .1em; }
+.spec-reach .sr-draws { font-family: var(--mono, monospace); font-size: .7rem; margin: .6rem 0 0; color: var(--muted, #888); }
+.spec-reach .sr-draws a { color: var(--cyan, #00ccff); }
+@media (max-width: 600px) {
+  .spec-reach { padding: .85rem .8rem .8rem; }
+  .spec-reach .sr-head { font-size: 1.1rem; }
+}
+@media print { .spec-reach, .spec-banner { display: none; } }
