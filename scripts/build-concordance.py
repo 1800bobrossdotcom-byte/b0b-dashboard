@@ -212,8 +212,8 @@ PAGE = """<!DOCTYPE html>
       }} catch(e){{}}
     }})();
   </script>
-  <link rel="icon" href="/favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="/favicon.png">
+  <link rel="icon" href="/favicon.png?v=2" type="image/png">
+  <link rel="apple-touch-icon" href="/favicon.png?v=2">
   <title>Burbank, Langley, Arlington &mdash; b0b.dev</title>
   <style>
 /* IBM Plex, self-hosted. The site CSP allows styles and fonts from 'self' only,

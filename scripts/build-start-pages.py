@@ -186,7 +186,7 @@ def page(title, body, main_class='', head_extra=''):
   <meta charset="UTF-8">
   <script>(function(){try{var t=localStorage.getItem("b0b_theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="/favicon.png" type="image/png">
+  <link rel="icon" href="/favicon.png?v=2" type="image/png">
   <title>%s</title>%s
   <style>
 %s
