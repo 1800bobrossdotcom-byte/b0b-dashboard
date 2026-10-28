@@ -7,6 +7,27 @@
     }
   },
   "rewrites": [
-    { "source": "/(.*)", "destination": "/api/index" }
+    {
+      "source": "/(.*)",
+      "destination": "/api/index"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/:file([a-z0-9-]+\\.mp4)",
+      "has": [
+        {
+          "type": "query",
+          "key": "dl",
+          "value": "1"
+        }
+      ],
+      "headers": [
+        {
+          "key": "Content-Disposition",
+          "value": "attachment"
+        }
+      ]
+    }
   ]
 }

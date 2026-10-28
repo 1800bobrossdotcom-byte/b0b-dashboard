@@ -94,7 +94,7 @@
     '#b0b-landing .bl-left{display:flex;align-items:center;gap:12px;min-width:0;flex-wrap:wrap}' +
     '#b0b-landing .bl-label{font-size:11px;letter-spacing:.14em;color:#5a7a68;white-space:nowrap;overflow:hidden;' +
       'text-overflow:ellipsis}' +
-    '#b0b-landing .bl-page{font-size:11px;letter-spacing:.1em;color:#00ccff;text-decoration:none}' +
+    '#b0b-landing .bl-page{font-size:11px;margin-left:12px;letter-spacing:.1em;color:#00ccff;text-decoration:none}' +
     '#b0b-landing .bl-page:hover,#b0b-landing .bl-page:focus-visible{text-decoration:underline}' +
     '#b0b-landing .bl-sound[hidden],#b0b-landing .bl-play[hidden],#b0b-landing .bl-page[hidden]{display:none}' +
     '#b0b-landing .bl-play{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);font-size:15px;' +
@@ -129,14 +129,15 @@
       '<div class="bl-bar"><div class="bl-left">' +
         '<button type="button" class="bl-sound" aria-pressed="false" hidden>&#9654; TAP FOR SOUND</button>' +
         '<span class="bl-label" aria-live="polite"></span>' +
-        '<a class="bl-page" hidden>SCRIPT &amp; SOURCES &rarr;</a></div>' +
+        '<a class="bl-page" hidden>SCRIPT &amp; SOURCES &rarr;</a>' +
+        '<a class="bl-page bl-dl" hidden download>DOWNLOAD MP4 &darr;</a></div>' +
         '<button type="button" class="bl-enter">ENTER THE REPORT &rarr;</button></div>' +
     '</div>';
 
   var stage = el.querySelector('.bl-stage'), video = el.querySelector('.bl-video');
   var soundBtn = el.querySelector('.bl-sound'), playBtn = el.querySelector('.bl-play');
   var enterBtn = el.querySelector('.bl-enter'), label = el.querySelector('.bl-label');
-  var pageLink = el.querySelector('.bl-page'), strip = el.querySelector('.bl-strip');
+  var pageLink = el.querySelector('.bl-page:not(.bl-dl)'), dlLink = el.querySelector('.bl-dl'), strip = el.querySelector('.bl-strip');
   var cardEls = el.querySelectorAll('.bl-card[data-i]'), dock = el.querySelector('.bl-dock');
   var film = 0, part = 0, failures = 0, filming = false, closed = false, mark = null, introOver = false, lastFocus = document.activeElement;
 
@@ -145,6 +146,10 @@
     label.textContent = f.title + (f.parts.length > 1 ? ' · ' + (part + 1) + ' / ' + f.parts.length : '');
     pageLink.hidden = !f.page;
     if (f.page) pageLink.href = f.page;
+    // the MP4 of the part on screen, marked ?dl=1 so the server sends it as a download
+    var mp4 = f.parts[part].filter(function (x) { return x[1] === 'video/mp4'; })[0];
+    dlLink.hidden = !mp4;
+    if (mp4) dlLink.href = mp4[0] + (mp4[0].indexOf('?') < 0 ? '?' : '&') + 'dl=1';
     for (var i = 0; i < cardEls.length; i++) cardEls[i].setAttribute('aria-current', i === film ? 'true' : 'false');
   }
   function load(fi, pi) {

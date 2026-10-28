@@ -486,6 +486,11 @@ app.use((req, res, next) => {
     const opts = {
       maxAge: '1h',
       setHeaders: (res, filePath) => {
+        // ?dl=1 on a film saves it instead of playing it (the carousel's DOWNLOAD MP4 link).
+        // vercel.json carries the same rule for the films in public/, which the CDN serves.
+        if (filePath.endsWith('.mp4') && req.query.dl === '1') {
+          res.setHeader('Content-Disposition', 'attachment; filename="' + path.basename(filePath) + '"');
+        }
         if (filePath.endsWith('.kml')) {
           res.setHeader('Content-Type', 'application/vnd.google-earth.kml+xml');
         }
