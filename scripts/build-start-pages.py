@@ -235,7 +235,8 @@ def build_film_block():
     mb = os.path.getsize(FILM_MP4) / 1e6
     length = ('%d min %02d s, ' % divmod(int(dur), 60)) if dur else ''   # floored, as players show it
     e = lambda s: html.escape(s, quote=True)
-    script = ''.join('<li><b>%s. %s</b> &mdash; %s</li>' % (e(p['id']), e(p['title']), e(' '.join(L['text'] for L in p['lines'])))
+    head = lambda p: ('<b>%s. %s</b> &mdash; ' % (e(p['id']), e(p['title']))) if p['id'].strip() else ''
+    script = ''.join('<li>%s%s</li>' % (head(p), e(' '.join(L['text'] for L in p['lines'])))
                      for p in spec['parts'] + [spec['finale']])
     script = script.replace('{TOTAL}', format(json.load(open(os.path.join(SITE, 'data', 'map-data.json'), encoding='utf-8'))['marker_count'], ','))
     seen, src = set(), []
@@ -255,10 +256,10 @@ def build_film_block():
         src.append('<li>%s &middot; <a href="%s">source</a></li>' % (e(fm['tag']), e(fm['source_page'])))
     return '''
 <section id="film" class="film" aria-label="The briefing, as a film">
-<video controls preload="none" playsinline poster="/img/briefing-poster.jpg" width="1280" height="720">
-  <source src="/b0b-briefing-film.webm" type="video/webm"><source src="/b0b-briefing-film.mp4" type="video/mp4">
+<video controls preload="none" playsinline poster="/img/briefing-poster.jpg?v=2" width="1280" height="720">
+  <source src="/b0b-briefing-film.webm?v=2" type="video/webm"><source src="/b0b-briefing-film.mp4?v=2" type="video/mp4">
 </video>
-<p class="film-cap">The briefing, as a film: %snarrated, the words on screen. Every shot carries its source. <a href="/b0b-briefing-film.mp4" download>Download (MP4, %.0f MB)</a></p>
+<p class="film-cap">The briefing, as a film, in the speculative reading: each section&rsquo;s reach from the SPECULATIVE skin, its leads taken past the documents. The documented report is the record. %snarrated, the words on screen. Every shot carries its source. <a href="/b0b-briefing-film.mp4?v=2" download>Download (MP4, %.0f MB)</a></p>
 <details><summary>Script and sources</summary>
 <ol class="script">%s</ol>
 <ul class="sources">%s</ul>
