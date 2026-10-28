@@ -1,5 +1,5 @@
 {
-  "_comment": "The Briefing, speculative cut (27-28 Oct 2026, the author: \"Have b0b.dev open with a speculative video - and the ars est celare artem as the lead in (animated) and close\"; \"do not have the would kill it\"). One part per section, each voicing that section’s reach headline from /data/speculative.json (the SPECULATIVE skin; vetted for the living-person floor), over two face-free, licence-checked pictures from the listen library. The seal animation is design/projection/seal_anim.py. The identity Briefing it replaced is scripts/film-briefing-identity.json.",
+  "_comment": "The Briefing, speculative cut (27-28 Oct 2026, the author: \"Have b0b.dev open with a speculative video - and the ars est celare artem as the lead in (animated) and close\"; \"do not have the would kill it\"). One part per section, each voicing that section’s reach headline and one sentence of its body from /data/speculative.json (the SPECULATIVE skin; vetted for the living-person floor), over two face-free, licence-checked pictures from the listen library. The seal animation is design/projection/seal_anim.py. The identity Briefing it replaced is scripts/film-briefing-identity.json.",
   "media_dir": "/home/user/.b0b-intro-sources",
   "build_name": "briefing",
   "output": "/home/user/.b0b-intro-sources/_build/briefing/briefing-reel.mp4",
@@ -74,6 +74,9 @@
         {
           "text": "Raised on a classified supply line, known to the CIA's portal by his childhood address, placed, in his words, to intercept.",
           "say": "Raised on a classified supply line, known to the C.I.A.'s portal by his childhood address, placed, in his words, to intercept."
+        },
+        {
+          "text": "He does not hide from the watching; he performs for the surveillance, on terms he authors."
         }
       ],
       "shots": [
@@ -109,6 +112,9 @@
         {
           "text": "Epstein was a Mossad asset, the CIA and British services witting, and his death sealed the file.",
           "say": "Epstein was a Mossad asset, the C.I.A. and British services witting, and his death sealed the file."
+        },
+        {
+          "text": "The gates did not fail. Institutions holding the file opened them."
         }
       ],
       "shots": [
@@ -143,6 +149,9 @@
       "lines": [
         {
           "text": "Epstein's inbox was a leverage ledger, the real business ran off the page, and it still runs."
+        },
+        {
+          "text": "He was the node whose removal disconnects the map. Nobody becomes that by accident."
         }
       ],
       "shots": [
@@ -177,6 +186,9 @@
       "lines": [
         {
           "text": "The network did not die in a cell; its Israeli-pedigreed surveillance capability was sold into American policing."
+        },
+        {
+          "text": "The tool moved onto the American emergency line."
         }
       ],
       "shots": [
@@ -211,6 +223,9 @@
       "lines": [
         {
           "text": "Robert Maxwell was Mossad's asset, and 1991 was the handover from his apparatus to Epstein."
+        },
+        {
+          "text": "The asset stops existing at the moment it could talk."
         }
       ],
       "shots": [
@@ -246,6 +261,9 @@
         {
           "text": "The science cover was an access program, and Harvard and MIT sold the seat after the conviction.",
           "say": "The science cover was an access program, and Harvard and M.I.T. sold the seat after the conviction."
+        },
+        {
+          "text": "This is the science leg of a collection operation."
         }
       ],
       "shots": [
@@ -280,6 +298,9 @@
       "lines": [
         {
           "text": "The parties are interfaces; one ownerless architecture staffs every government and sovereign wealth signs its orders."
+        },
+        {
+          "text": "Elections choose the desk, never the room."
         }
       ],
       "shots": [
@@ -314,6 +335,9 @@
       "lines": [
         {
           "text": "Every exit from control is taken at its chokepoint, and Bitcoin's was taken in its infancy."
+        },
+        {
+          "text": "The decentralized network has centralized operationally."
         }
       ],
       "shots": [
@@ -348,6 +372,10 @@
       "lines": [
         {
           "text": "A second government waits underground, its plan sealed from Congress and its emergency orders already written."
+        },
+        {
+          "text": "The operative policy, PPD-40, has never been published.",
+          "say": "The operative policy, P.P.D. forty, has never been published."
         }
       ],
       "shots": [
@@ -382,6 +410,9 @@
       "lines": [
         {
           "text": "The smart city, the stack and the kill chain are one machine for indexing and targeting populations."
+        },
+        {
+          "text": "Underneath, the alliance does what each member's own law forbids."
         }
       ],
       "shots": [
@@ -416,6 +447,9 @@
       "lines": [
         {
           "text": "Every \"New\" is a transplanted control system, and New Albany is the one still running."
+        },
+        {
+          "text": "The machinery did not change hands; only the sign over it did."
         }
       ],
       "shots": [
@@ -450,6 +484,9 @@
       "lines": [
         {
           "text": "The class that owns the cloud and the satellites is building private jurisdictions with its own police."
+        },
+        {
+          "text": "The enclave is not a neighbourhood."
         }
       ],
       "shots": [
@@ -484,6 +521,9 @@
       "lines": [
         {
           "text": "Power burns the record, keeps the knowledge, builds bunkers, and throws the Games on the graves."
+        },
+        {
+          "text": "The class that holds the asymmetry does not lose the knowledge. It keeps it and fences off the rest."
         }
       ],
       "shots": [
@@ -518,6 +558,9 @@
       "lines": [
         {
           "text": "Slavery was never abolished; each abolition rewrote it into law, and the extraction now runs on debt."
+        },
+        {
+          "text": "The chain was not broken. It was converted into statute."
         }
       ],
       "shots": [
@@ -552,6 +595,9 @@
       "lines": [
         {
           "text": "War is a product, Dubai refines its gold, and the export laws are designed never to bite."
+        },
+        {
+          "text": "At full strength these are not separate wars. They are one market with several fronts."
         }
       ],
       "shots": [
@@ -586,6 +632,9 @@
       "lines": [
         {
           "text": "Declassification is the state releasing what can no longer cost it, while the same architecture keeps running."
+        },
+        {
+          "text": "What survives, survives by accident."
         }
       ],
       "shots": [
@@ -620,6 +669,9 @@
       "lines": [
         {
           "text": "Organized crime is the state's off-books department, financed by intelligence, cleaned by banks, used to sell security."
+        },
+        {
+          "text": "The banks make the money usable."
         }
       ],
       "shots": [
@@ -654,6 +706,9 @@
       "lines": [
         {
           "text": "Art is the vault and the costume - capital hides in it, and intelligence wears it."
+        },
+        {
+          "text": "This is not a market that leaks money. It is a vault for what cannot sit in a bank, built that way in public."
         }
       ],
       "shots": [
@@ -688,6 +743,9 @@
       "lines": [
         {
           "text": "The index is the schematic of one machine; every thread runs back to the same few desks."
+        },
+        {
+          "text": "Follow any thread far enough and it reaches the same seams."
         }
       ],
       "shots": [
@@ -722,6 +780,9 @@
       "lines": [
         {
           "text": "The index is the org chart of one room, and that room holds custody of its own record."
+        },
+        {
+          "text": "Count the chairs, not the people."
         }
       ],
       "shots": [
@@ -756,6 +817,9 @@
       "lines": [
         {
           "text": "Compute is the control layer, held by two capital regions and moving offshore beyond the reach of law."
+        },
+        {
+          "text": "The move offshore is the point, not the side effect."
         }
       ],
       "shots": [
@@ -790,6 +854,9 @@
       "lines": [
         {
           "text": "Every documented line ends at a chokepoint, and every chokepoint answers to a state."
+        },
+        {
+          "text": "Read the lines as one drawing. Then look at who buys."
         }
       ],
       "shots": [
@@ -824,6 +891,9 @@
       "lines": [
         {
           "text": "Discretion is the weapon - who is charged, who is spared, and which emergency never ends."
+        },
+        {
+          "text": "The attack threw the switch on machinery already built."
         }
       ],
       "shots": [
@@ -858,6 +928,9 @@
       "lines": [
         {
           "text": "The control architecture is a dependency machine, and every seed, filter and library card starves it."
+        },
+        {
+          "text": "So the answer is replacement, not reform."
         }
       ],
       "shots": [
@@ -892,6 +965,9 @@
       "lines": [
         {
           "text": "The architecture runs on maintained calm; the record is already kept, and its weapon will not prosper."
+        },
+        {
+          "text": "Complexity requires maintenance; simplicity does not."
         }
       ],
       "shots": [
