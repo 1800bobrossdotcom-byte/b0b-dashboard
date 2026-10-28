@@ -2,7 +2,9 @@
  *
  * Since 22 Oct 2026, at the author's instruction ("push the intro film section into a carousel of all the
  * films. Main film is the om comma one we had up with darpa theme ... Have the homepage be this"):
- * the animated b0b.dev mark (b0b-wordmark.js), then the main film, full screen, with every film in a strip
+ * the animated b0b.dev mark (b0b-wordmark.js), then the seal assembling (b0b-seal.js; added 28 Oct 2026: "take
+ * the animated logo and place after the b0b.dev animation - as a second one before going to video card page"),
+ * then the main film, full screen, with every film in a strip
  * beneath it. Tap a card to watch that one; when a film ends the next one starts. Before this the landing
  * played one film: OM COMMA from 19 Oct, Endgame from 20 Oct, the Briefing film from 21 Oct.
  *
@@ -135,7 +137,7 @@
   var enterBtn = el.querySelector('.bl-enter'), label = el.querySelector('.bl-label');
   var pageLink = el.querySelector('.bl-page'), strip = el.querySelector('.bl-strip');
   var cardEls = el.querySelectorAll('.bl-card[data-i]'), dock = el.querySelector('.bl-dock');
-  var film = 0, part = 0, failures = 0, filming = false, closed = false, mark = null, lastFocus = document.activeElement;
+  var film = 0, part = 0, failures = 0, filming = false, closed = false, mark = null, introOver = false, lastFocus = document.activeElement;
 
   function setLabel() {
     var f = FILMS[film];
@@ -188,7 +190,7 @@
   // A reader's choice: that film, from its start, with sound (the click is the gesture browsers ask for).
   function choose(fi) {
     failures = 0;
-    if (!filming) { if (mark) mark.skip(); filming = true; el.classList.add('bl-film'); soundBtn.hidden = false; fitDock(); }
+    if (!filming) { skipIntro(); filming = true; el.classList.add('bl-film'); soundBtn.hidden = false; fitDock(); }
     load(fi, 0); reveal(fi); setSound(true); play();
   }
   // The film or part ended: the next part, else the next film; the carousel runs on until the reader leaves.
@@ -200,7 +202,7 @@
   function close(byGesture) {
     if (closed) return;
     closed = true;
-    if (mark) mark.skip();
+    skipIntro();
     try { video.pause(); } catch (e) {}
     el.classList.add('bl-out');
     setTimeout(function () {
@@ -231,6 +233,8 @@
     if (video.paused) play();
   });
   video.addEventListener('click', function () {
+    // A tap on the picture while the wordmark or the seal is on: straight to the films, with sound.
+    if (!filming) { choose(film); return; }
     if (video.muted) setSound(true);
     if (video.paused) play();
   });
@@ -252,9 +256,28 @@
   load(0, 0);                               // the main film buffers while the mark plays
   setSound(false);
 
+  // The arrival steps, in order: the wordmark, then the seal, then the films. A reader who chooses a film or
+  // leaves ends them all at once (skipIntro), so a skipped step never starts the next one over the film.
+  function skipIntro() {
+    if (introOver) return;
+    introOver = true;
+    var m = mark; mark = null;
+    if (m) m.skip();
+    if (seal) { var sl = seal; seal = null; sl.skip(); }
+  }
+  var seal = null;
   function begin() {
-    if (window.B0BWordmark && window.B0BWordmark.play) mark = window.B0BWordmark.play(stage, { onDone: startFilm });
-    else startFilm();
+    // the seal starts buffering while the wordmark plays
+    try { if (window.B0BSeal && window.B0BSeal.prepare) seal = window.B0BSeal.prepare(stage); } catch (e) { seal = null; }
+    var toFilm = function () { if (introOver) return; introOver = true; mark = null; startFilm(); };
+    var toSeal = function () {
+      if (introOver) return;
+      if (!seal) { toFilm(); return; }
+      mark = seal; seal = null;
+      mark.start(toFilm);
+    };
+    if (window.B0BWordmark && window.B0BWordmark.play) mark = window.B0BWordmark.play(stage, { onDone: toSeal });
+    else toSeal();
   }
   // A tab opened in the background: start when it is looked at, not before.
   if (document.hidden) {

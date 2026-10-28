@@ -103,4 +103,5 @@ still and loop in the jacket's world:
   - the six stars, 25° apart and centred at the bottom, a point toward the centre.
 - **Why the motto is set rather than traced:** the traced letters broke up ("ARS" read as "AKS").
 - **On the site:** `site/img/insignia.png` is this seal in thread on a navy disc, 360 px and quantized to 24 colours (22 KB). It heads the Briefing at `/start`.
+- **Animated, `seal_anim.py`:** the seal assembling (rings, motto, stars, then the figure), 1280×720, silent. Since 28 Oct 2026 it is also the homepage's second arrival step, after the b0b.dev wordmark and before the films (`site/b0b-seal.js`): `sh design/projection/build_seal_intro.sh` renders it with `--speed 1.5 --hold 1.2` (4.8 s), cuts the centre 720×720 square and writes `public/seal-intro.{webm,mp4,png}`.
 - **The insignia's status:** it is the masthead's "insignia of a unit that does not exist", of unknown manufacture. The page records it as artistic appropriation, and it claims no real unit (INSTITUTION.md principle 7).
