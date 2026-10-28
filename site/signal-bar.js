@@ -32,6 +32,7 @@
   // instruction (Overseer first, Faith No More last); The Smiths removed (its XXV essay stays).
   var TRACKS = [
     { id: 'iU6nkE-g3BM', label: 'Overseer &mdash; Heligoland' },                           // FATLANTIC — NOT a rights-holder channel (see header). ~26min: long tail after the song.
+    { id: 'roPiy2JydwA', label: 'Imogen Heap &mdash; Headlock' },                         // ImogenHeapVEVO (official video; oEmbed; id from the song's Wikipedia page). Song two, author's instruction 28 Oct 2026.
     { id: 'brxOrz5pqv4', label: 'L.A. Mass Choir &mdash; That&rsquo;s When You Bless Me' }, // L.A. Mass Choir - Topic (licensed; oEmbed). Replaced Iron & Wine 'Evening on the Ground (Lilith's Song)' 27 Oct 2026, author's instruction.
     { id: 'SYaIakuWg-g', label: 'Hooverphonic &mdash; Barabas' },                          // Hooverphonic - Topic (licensed).
     { id: 'hFUEGRwhYcU', label: 'Blackalicious &mdash; Ego Sonic War Drums (unofficial upload)' }, // 'Hi-Def' — NOT a rights-holder channel (see header). Licensed copy V6Ds1JbKfj8 exists but is not embeddable.
@@ -49,7 +50,7 @@
     { id: 'SqT1y5Qi6l0', label: 'Carl Carlton &mdash; Everlasting Love' },                   // Carl Carlton - Topic (Universal; oEmbed). The 1974 hit; author chose it over Robert Knight / Love Affair / Howard Jones. Added 27 Oct 2026.
     { id: 'O2KpEva4As4', label: 'Faith No More &mdash; We Care a Lot' }                    // Faith No More - Topic (Rhino/London-Sire; the 1987 Introduce Yourself recording; oEmbed). Added 27 Oct 2026, author's instruction.
   ];
-  var LS_KEY = 'b0b_signal_v16';  // bump on every reorder: a stored index points into the old list
+  var LS_KEY = 'b0b_signal_v17';  // bump on every reorder: a stored index points into the old list
   var SAVE_MS = 1000;
   var player = null, ready = false, dur = 0, saveTimer = null, errCount = 0;
   // Listener's playback modes, kept with the rest of the bar's state. shuffle picks the next track
