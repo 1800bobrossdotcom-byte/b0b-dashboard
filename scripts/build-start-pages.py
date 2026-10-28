@@ -256,10 +256,10 @@ def build_film_block():
         src.append('<li>%s &middot; <a href="%s">source</a></li>' % (e(fm['tag']), e(fm['source_page'])))
     return '''
 <section id="film" class="film" aria-label="The briefing, as a film">
-<video controls preload="none" playsinline poster="/img/briefing-poster.jpg?v=2" width="1280" height="720">
-  <source src="/b0b-briefing-film.webm?v=2" type="video/webm"><source src="/b0b-briefing-film.mp4?v=2" type="video/mp4">
+<video controls preload="none" playsinline poster="/img/briefing-poster.jpg?v=3" width="1280" height="720">
+  <source src="/b0b-briefing-film.webm?v=3" type="video/webm"><source src="/b0b-briefing-film.mp4?v=3" type="video/mp4">
 </video>
-<p class="film-cap">The briefing, as a film, in the speculative reading: each section&rsquo;s reach from the SPECULATIVE skin, its leads taken past the documents. The documented report is the record. %snarrated, the words on screen. Every shot carries its source. <a href="/b0b-briefing-film.mp4?v=2" download>Download (MP4, %.0f MB)</a></p>
+<p class="film-cap">The briefing, as a film, in the speculative reading: each section&rsquo;s reach from the SPECULATIVE skin, its leads taken past the documents. The documented report is the record. %snarrated, the words on screen. Every shot carries its source. <a href="/b0b-briefing-film.mp4?v=3" download>Download (MP4, %.0f MB)</a></p>
 <details><summary>Script and sources</summary>
 <ol class="script">%s</ol>
 <ul class="sources">%s</ul>
