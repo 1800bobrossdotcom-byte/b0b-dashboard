@@ -1,0 +1,974 @@
+{
+  "_comment": [
+    "BRIEFING - the fifth b0b.dev film, built by scripts/build-intro-collage.py --spec scripts/film-briefing.json.",
+    "Made 21 Oct 2026 at the author’s instruction: \"Make a video for briefing and have that be what replaces endgame as the starting video.\"",
+    "It follows the Briefing at /start: the thesis, the maxim, identity, the insignia, precedents, the paradox, holdings, method.",
+    "b0b.dev is never called \"the institution\" (CLAUDE.md section 2). Faces: none. Precedents are named, never shown.",
+    "Pictures: the site’s own (seal, jacket, map, stickers, page screenshots; scripts/film-briefing-media.py) and licensed",
+    "masters reused from the Endgame spec with their licences. The reel and its js go to the build dir; the site serves only the",
+    "subtitled file, public/b0b-briefing-film.{mp4,webm}, on the landing and on /start."
+  ],
+  "media_dir": "/home/user/.b0b-intro-sources",
+  "build_name": "briefing",
+  "output": "/home/user/.b0b-intro-sources/_build/briefing/briefing-reel.mp4",
+  "poster": "site/img/briefing-poster.jpg",
+  "poster_at": 2.4,
+  "js": "/home/user/.b0b-intro-sources/_build/briefing/briefing-reel.js",
+  "download": "public/b0b-briefing-film.mp4",
+  "meta_title": "b0b.dev - Briefing",
+  "meta_url": "https://www.b0b.dev/start",
+  "width": 1280,
+  "height": 720,
+  "fps": 24,
+  "crf_mp4": 30,
+  "crf_webm": 40,
+  "crf_download": 26,
+  "audio": {
+    "bitrate_mp4": "64k",
+    "bitrate_webm": "48k",
+    "loudnorm": "I=-16:TP=-1.5:LRA=11"
+  },
+  "voice": {
+    "model": "voice/en_GB-cori-high.onnx",
+    "config": "voice/en_GB-cori-high.onnx.json",
+    "sha256": "470b4dd634c98f8a4850d7626ffc3dfc90774628eeef6605a6dd8f88f30a5903",
+    "length_scale": 0.97,
+    "source": "https://huggingface.co/rhasspy/piper-voices/tree/main/en/en_GB/cori/high",
+    "licence": "Piper voice en_GB cori (high); training data LibriVox, public domain per the model card"
+  },
+  "parts": [
+    {
+      "id": "I",
+      "title": "The thesis",
+      "years": [
+        "THE AGENCY",
+        "THE ARTWORK"
+      ],
+      "card": 1.4,
+      "lines": [
+        {
+          "text": "The intelligence agency is the artwork. The intelligence work is real."
+        },
+        {
+          "text": "b0b.dev is an independent intelligence research operation. Its identity is the work; its research is sourced, tiered and correctable.",
+          "say": "B zero B dot dev is an independent intelligence research operation. Its identity is the work; its research is sourced, tiered, and correctable."
+        },
+        {
+          "text": "It is not a themed website, a role-play or a satire. It is not a fictional agency producing fictional research."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "seal_navy"
+          ],
+          "motion": "push",
+          "glitch": true
+        },
+        {
+          "type": "doc",
+          "dur": 4.6,
+          "head": "b0b.dev · the thesis",
+          "tag": "B0B.DEV · THE AUTHOR’S FRAMEWORK · 21 OCT 2026",
+          "sound": false,
+          "style": "quote",
+          "text": "The intelligence agency is the artwork. The intelligence work is real.",
+          "bare": true,
+          "scale": 13
+        },
+        {
+          "type": "full",
+          "dur": 3.0,
+          "media": [
+            "jacket"
+          ],
+          "motion": "push"
+        },
+        {
+          "type": "full",
+          "dur": 2.6,
+          "media": [
+            "briefing"
+          ],
+          "motion": "hold"
+        },
+        {
+          "type": "doc",
+          "dur": 5.0,
+          "head": "What it is not",
+          "tag": "B0B.DEV · THE AUTHOR’S FRAMEWORK · 21 OCT 2026",
+          "sound": false,
+          "style": "ledger",
+          "rows": [
+            [
+              "NOT",
+              "a CIA-themed website"
+            ],
+            [
+              "NOT",
+              "an OSINT dashboard with artistic branding"
+            ],
+            [
+              "NOT",
+              "an espionage role-play"
+            ],
+            [
+              "NOT",
+              "a fictional agency producing fictional research"
+            ],
+            [
+              "NOT",
+              "a satire of intelligence agencies"
+            ]
+          ],
+          "gutter": 0.1,
+          "scale": 27
+        }
+      ]
+    },
+    {
+      "id": "II",
+      "title": "The maxim",
+      "years": [
+        "ARS",
+        "ARTEM"
+      ],
+      "card": 1.4,
+      "lines": [
+        {
+          "text": "Its maxim is ars est celare artem: the art is to conceal the art. It works on three levels at once.",
+          "say": [
+            "Its maxim is",
+            "[[ˈɑːz ɛst kɛlˈɑːɹeɪ ˈɑːtɛm]]",
+            "the art is to conceal the art. It works on three levels at once."
+          ]
+        },
+        {
+          "text": "Artistic: b0b.dev is the artwork, and need not announce itself as one.",
+          "say": "Artistic. B zero B dot dev is the artwork, and need not announce itself as one."
+        },
+        {
+          "text": "Operational: the research, the tools and the map are real, and in use.",
+          "say": "Operational. The research, the tools, and the map are real, and in use."
+        },
+        {
+          "text": "Recursive: it investigates secrecy, surveillance and power, and keeps an ambiguity of its own.",
+          "say": "Recursive. It investigates secrecy, surveillance, and power, and keeps an ambiguity of its own."
+        },
+        {
+          "text": "The audience becomes an investigator of the investigator."
+        }
+      ],
+      "shots": [
+        {
+          "type": "doc",
+          "dur": 4.4,
+          "head": "The maxim · on the insignia and the masthead",
+          "tag": "ARS EST CELARE ARTEM · THE MASTHEAD · B0B.DEV/REPORT",
+          "sound": false,
+          "style": "word",
+          "word": "Ars est celare artem",
+          "translit": "the art is to conceal the art",
+          "gloss": "the maxim",
+          "scale": 9
+        },
+        {
+          "type": "full",
+          "dur": 3.0,
+          "media": [
+            "seal_motto"
+          ],
+          "motion": "pan-r"
+        },
+        {
+          "type": "doc",
+          "dur": 4.6,
+          "head": "Three levels",
+          "tag": "B0B.DEV · THE AUTHOR’S FRAMEWORK · 21 OCT 2026",
+          "sound": false,
+          "style": "ledger",
+          "rows": [
+            [
+              "ARTISTIC",
+              "b0b.dev is the artwork"
+            ],
+            [
+              "OPERATIONAL",
+              "the research is real, and in use"
+            ],
+            [
+              "RECURSIVE",
+              "it investigates secrecy, and keeps an ambiguity of its own"
+            ]
+          ],
+          "gutter": 0.2,
+          "scale": 27
+        },
+        {
+          "type": "full",
+          "dur": 2.6,
+          "media": [
+            "report"
+          ],
+          "motion": "push"
+        },
+        {
+          "type": "full",
+          "dur": 2.4,
+          "media": [
+            "V_menwith_hill_radomes"
+          ],
+          "motion": "pan-l"
+        },
+        {
+          "type": "full",
+          "dur": 2.4,
+          "media": [
+            "V_nsa_utah_data_center_eff"
+          ],
+          "motion": "push"
+        },
+        {
+          "type": "full",
+          "dur": 2.0,
+          "media": [
+            "V_cctv_cameras_pole"
+          ],
+          "motion": "hold"
+        },
+        {
+          "type": "full",
+          "dur": 2.8,
+          "media": [
+            "I_national_archives_stack_area_1955"
+          ],
+          "motion": "push"
+        }
+      ]
+    },
+    {
+      "id": "III",
+      "title": "Identity",
+      "years": [
+        "THE APPEARANCE",
+        "NO AFFILIATION"
+      ],
+      "card": 1.4,
+      "lines": [
+        {
+          "text": "It stands between intelligence research and conceptual art, between open-source intelligence and operational fiction, between espionage mythology and the archive."
+        },
+        {
+          "text": "It has the appearance of an obscure intelligence organisation, and claims no government affiliation, credential or endorsement."
+        },
+        {
+          "text": "The identity may be ambiguous. The evidence must not be."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.0,
+          "media": [
+            "I_ledger_account_book_carlin_1835"
+          ],
+          "motion": "pan-r"
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "seal_figure"
+          ],
+          "motion": "push"
+        },
+        {
+          "type": "full",
+          "dur": 2.4,
+          "media": [
+            "report"
+          ],
+          "motion": "hold"
+        },
+        {
+          "type": "full",
+          "dur": 2.6,
+          "media": [
+            "seal_navy"
+          ],
+          "motion": "pull"
+        },
+        {
+          "type": "doc",
+          "dur": 4.4,
+          "head": "The distinction · b0b.dev",
+          "tag": "B0B.DEV · THE AUTHOR’S FRAMEWORK · 21 OCT 2026",
+          "sound": false,
+          "style": "quote",
+          "text": "The identity may be ambiguous. The evidence must not be.",
+          "bare": true,
+          "scale": 13
+        }
+      ]
+    },
+    {
+      "id": "IV",
+      "title": "The insignia",
+      "years": [
+        "THE JACKET",
+        "THE SEAL"
+      ],
+      "card": 1.4,
+      "lines": [
+        {
+          "text": "Its insignia is embroidered on a navy field jacket."
+        },
+        {
+          "text": "The motto across the top, six stars below, lightning from the centre, and a figure in a trench coat and fedora, carrying a case."
+        },
+        {
+          "text": "The seal carries the authority of military insignia; the figure is close to a cartoon. Both are meant."
+        },
+        {
+          "text": "The jacket is not merchandise. It is an artifact: the organisation, made physical."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.0,
+          "media": [
+            "jacket"
+          ],
+          "motion": "push"
+        },
+        {
+          "type": "split",
+          "dur": 3.4,
+          "media": [
+            "jacket",
+            "seal_navy"
+          ],
+          "motion": [
+            "hold",
+            "push"
+          ],
+          "years": [
+            "THREAD",
+            "DIGITISED"
+          ]
+        },
+        {
+          "type": "full",
+          "dur": 2.2,
+          "media": [
+            "seal_motto"
+          ],
+          "motion": "pan-l"
+        },
+        {
+          "type": "full",
+          "dur": 2.2,
+          "media": [
+            "seal_stars"
+          ],
+          "motion": "pan-r"
+        },
+        {
+          "type": "full",
+          "dur": 3.0,
+          "media": [
+            "seal_figure"
+          ],
+          "motion": "slam"
+        },
+        {
+          "type": "full",
+          "dur": 2.6,
+          "media": [
+            "jacket"
+          ],
+          "motion": "pull"
+        }
+      ]
+    },
+    {
+      "id": "V",
+      "title": "Precedents",
+      "years": [
+        "1968",
+        "2026"
+      ],
+      "card": 1.4,
+      "lines": [
+        {
+          "text": "In 1968 Marcel Broodthaers opened a museum in his house in Brussels: eagles in glass cases, and signs saying this was not a work of art.",
+          "say": [
+            "In nineteen sixty-eight, Marcel",
+            "[[bɹˈəʊtɑːz]]",
+            "opened a museum in his house in Brussels: eagles in glass cases, and signs saying this was not a work of art."
+          ]
+        },
+        {
+          "text": "Walid Raad’s Atlas Group, a fictional foundation, archives Lebanon’s civil wars in documents attributed to sources he invented.",
+          "say": "Walid Rahd’s Atlas Group, a fictional foundation, archives Lebanon’s civil wars in documents attributed to sources he invented."
+        },
+        {
+          "text": "The Yes Men pose as spokespeople for real organisations, and speak in their name."
+        },
+        {
+          "text": "b0b.dev differs from all three in one respect: the intelligence work is real. And it wears no real organisation’s name.",
+          "say": "B zero B dot dev differs from all three in one respect: the intelligence work is real. And it wears no real organisation’s name."
+        }
+      ],
+      "shots": [
+        {
+          "type": "doc",
+          "dur": 7.0,
+          "head": "Precedents",
+          "tag": "PRECEDENTS · READ AT WIKIPEDIA, 21 OCT 2026 · NO WORK OF THEIRS IS SHOWN",
+          "sound": false,
+          "style": "ledger",
+          "rows": [
+            [
+              "1968",
+              "Musée d’Art Moderne, Département des Aigles"
+            ],
+            [
+              "",
+              "[Marcel Broodthaers · his house, Brussels]"
+            ],
+            [
+              "ATLAS GROUP",
+              "a fictional foundation · Walid Raad"
+            ],
+            [
+              "",
+              "[an archive of Lebanon’s civil wars]"
+            ],
+            [
+              "THE YES MEN",
+              "spokespeople for real organisations"
+            ]
+          ],
+          "gutter": 0.2,
+          "scale": 27
+        },
+        {
+          "type": "full",
+          "dur": 2.6,
+          "media": [
+            "report"
+          ],
+          "motion": "push"
+        },
+        {
+          "type": "full",
+          "dur": 2.6,
+          "media": [
+            "map_dots"
+          ],
+          "motion": "pull"
+        },
+        {
+          "type": "doc",
+          "dur": 4.0,
+          "head": "The difference",
+          "tag": "B0B.DEV · THE AUTHOR’S FRAMEWORK · 21 OCT 2026",
+          "sound": false,
+          "style": "ledger",
+          "rows": [
+            [
+              "B0B.DEV",
+              "the intelligence work is real"
+            ],
+            [
+              "",
+              "it wears no real organisation’s name"
+            ]
+          ],
+          "gutter": 0.2,
+          "scale": 27
+        }
+      ]
+    },
+    {
+      "id": "VI",
+      "title": "The paradox",
+      "years": [
+        "TRUST",
+        "EXAMINE"
+      ],
+      "card": 1.4,
+      "lines": [
+        {
+          "text": "An official body usually establishes its authority through its identity, and asks the public to trust its findings."
+        },
+        {
+          "text": "b0b.dev turns that round. Its identity is deliberately ambiguous; its findings are open to anyone who checks them.",
+          "say": "B zero B dot dev turns that round. Its identity is deliberately ambiguous; its findings are open to anyone who checks them."
+        },
+        {
+          "text": "Don’t trust b0b.dev. Examine the evidence.",
+          "say": "Don’t trust B zero B dot dev. Examine the evidence."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.0,
+          "media": [
+            "VIII_us_capitol_aerial"
+          ],
+          "motion": "pull"
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "retractions"
+          ],
+          "motion": "push"
+        },
+        {
+          "type": "full",
+          "dur": 2.2,
+          "media": [
+            "seal_navy"
+          ],
+          "motion": "hold"
+        },
+        {
+          "type": "doc",
+          "dur": 4.0,
+          "head": "The paradox · b0b.dev",
+          "tag": "B0B.DEV · THE AUTHOR’S FRAMEWORK · 21 OCT 2026",
+          "sound": false,
+          "style": "quote",
+          "text": "Don’t trust b0b.dev. Examine the evidence.",
+          "bare": true,
+          "scale": 12
+        }
+      ]
+    },
+    {
+      "id": "VII",
+      "title": "Holdings",
+      "years": [
+        "DIGITAL",
+        "PHYSICAL"
+      ],
+      "card": 1.4,
+      "lines": [
+        {
+          "text": "The website is the operational interface. The report is the dossier: twenty-five sections, every claim tiered and sourced."
+        },
+        {
+          "text": "The map holds {TOTAL} sites, and every line between them carries the tier of what the record shows.",
+          "say": "The map holds {TOTALWORDS} sites, and every line between them carries the tier of what the record shows."
+        },
+        {
+          "text": "The films, an announcement made to be played outdoors, twelve stickers, and a public ledger of what it got wrong."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "report"
+          ],
+          "motion": "push"
+        },
+        {
+          "type": "full",
+          "dur": 3.4,
+          "media": [
+            "map_dots"
+          ],
+          "motion": "pull"
+        },
+        {
+          "type": "full",
+          "dur": 2.6,
+          "media": [
+            "tiers"
+          ],
+          "motion": "hold"
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "stickers"
+          ],
+          "motion": "push"
+        },
+        {
+          "type": "full",
+          "dur": 2.4,
+          "media": [
+            "retractions"
+          ],
+          "motion": "pan-r"
+        },
+        {
+          "type": "full",
+          "dur": 2.4,
+          "media": [
+            "jacket"
+          ],
+          "motion": "pull"
+        }
+      ]
+    },
+    {
+      "id": "VIII",
+      "title": "Method",
+      "years": [
+        "DOCUMENTED",
+        "UNSUPPORTED"
+      ],
+      "card": 1.4,
+      "lines": [
+        {
+          "text": "Every claim carries its tier and its source: documented, attributed, labeled, contested or unsupported. Nothing moves up a tier by repetition."
+        },
+        {
+          "text": "One identified crawler: it obeys robots.txt, never disguises itself, and records every refusal as a null.",
+          "say": "One identified crawler. It obeys robots dot T X T, never disguises itself, and records every refusal as a null."
+        },
+        {
+          "text": "Quotes and figures are read at the source, and the AI assistance is disclosed."
+        },
+        {
+          "text": "A claim a primary source contradicts is lowered or removed, whoever raised it."
+        }
+      ],
+      "shots": [
+        {
+          "type": "doc",
+          "dur": 6.0,
+          "head": "The tiers",
+          "tag": "THE TIERS · THE REPORT’S MASTHEAD · B0B.DEV/REPORT",
+          "sound": false,
+          "style": "ledger",
+          "rows": [
+            [
+              "DOCUMENTED",
+              "a fact on the record"
+            ],
+            [
+              "ATTRIBUTED",
+              "a claim, with its claimant named"
+            ],
+            [
+              "LABELED",
+              "a pattern or hypothesis, marked as such"
+            ],
+            [
+              "CONTESTED",
+              "where the record is disputed"
+            ],
+            [
+              "UNSUPPORTED",
+              "where it has no support - and the passage is kept"
+            ]
+          ],
+          "gutter": 0.2,
+          "scale": 27
+        },
+        {
+          "type": "full",
+          "dur": 2.6,
+          "media": [
+            "V_hollerith_census_tabulator_c1900"
+          ],
+          "motion": "push"
+        },
+        {
+          "type": "full",
+          "dur": 2.6,
+          "media": [
+            "I_national_archives_stack_area_1955"
+          ],
+          "motion": "pan-l"
+        },
+        {
+          "type": "full",
+          "dur": 2.4,
+          "media": [
+            "I_ledger_account_book_carlin_1835"
+          ],
+          "motion": "push"
+        },
+        {
+          "type": "full",
+          "dur": 3.0,
+          "media": [
+            "retractions"
+          ],
+          "motion": "pull"
+        }
+      ]
+    }
+  ],
+  "finale": {
+    "id": "IX",
+    "title": "Examine the evidence",
+    "years": [
+      "EVERY SHOT",
+      "ITS SOURCE"
+    ],
+    "style": "words",
+    "card": 1.4,
+    "lead": 1.0,
+    "hold": 4.6,
+    "head": "b0b.dev · the briefing",
+    "scale": 13,
+    "gloss_x": 0.62,
+    "media": "I_national_archives_stack_area_1955",
+    "motion": "pull",
+    "dim": 0.28,
+    "tag": "NATIONAL ARCHIVES STACK AREA · NARA / USAF 1361ST PHOTO SQN · 1955 · PUBLIC DOMAIN",
+    "words": [
+      {
+        "word": "Every shot, its source.",
+        "translit": "",
+        "gloss": "",
+        "line": 0
+      },
+      {
+        "word": "Every claim, its tier.",
+        "translit": "",
+        "gloss": "",
+        "line": 1
+      },
+      {
+        "word": "Examine the evidence.",
+        "translit": "",
+        "gloss": "",
+        "line": 2
+      }
+    ],
+    "lines": [
+      {
+        "text": "Every shot in this film carries its source."
+      },
+      {
+        "text": "Every claim in the report carries its tier."
+      },
+      {
+        "text": "Examine the evidence."
+      },
+      {
+        "text": "Ars est celare artem. The art is to conceal the art.",
+        "say": [
+          "[[ˈɑːz ɛst kɛlˈɑːɹeɪ ˈɑːtɛm]]",
+          "The art is to conceal the art."
+        ]
+      }
+    ],
+    "close": {
+      "big": "Ars est celare artem.",
+      "sub": "the art is to conceal the art",
+      "scale": 10
+    }
+  },
+  "media": {
+    "seal_navy": {
+      "file": "briefing/seal_navy.png",
+      "kind": "still",
+      "tag": "THE INSIGNIA · DIGITISED FROM THE JACKET’S PATCH · B0B.DEV",
+      "source_page": "https://www.b0b.dev/start",
+      "licence": "b0b.dev’s own material (the site, the seal, the author’s photograph)",
+      "sha256": "b6ec34f63a871fadaf8829fed9cb4bc8a9c6a9fd6a9bc0e3042923b52d440acd"
+    },
+    "seal_motto": {
+      "file": "briefing/seal_motto.png",
+      "kind": "still",
+      "tag": "THE INSIGNIA · THE MOTTO · DIGITISED FROM THE PATCH",
+      "source_page": "https://www.b0b.dev/start",
+      "licence": "b0b.dev’s own material (the site, the seal, the author’s photograph)",
+      "sha256": "895e27ec64a3e8e18105a63d34d79e74cb7dc91418ddb89099a9ac0cb727cae7"
+    },
+    "seal_figure": {
+      "file": "briefing/seal_figure.png",
+      "kind": "still",
+      "tag": "THE INSIGNIA · THE FIGURE AND THE BOLTS · TRACED FROM THE THREAD",
+      "source_page": "https://www.b0b.dev/start",
+      "licence": "b0b.dev’s own material (the site, the seal, the author’s photograph)",
+      "sha256": "fc7cc41850240763ae0ef1c3f0471a0a8a96ddb0888b8a746f9dc09c1a4573fe"
+    },
+    "seal_stars": {
+      "file": "briefing/seal_stars.png",
+      "kind": "still",
+      "tag": "THE INSIGNIA · SIX STARS · DIGITISED FROM THE PATCH",
+      "source_page": "https://www.b0b.dev/start",
+      "licence": "b0b.dev’s own material (the site, the seal, the author’s photograph)",
+      "sha256": "7dab58efc4b861e877ca6428aa01d2446604b3363b54dd982911659639d92b61"
+    },
+    "jacket": {
+      "file": "briefing/jacket.jpg",
+      "kind": "still",
+      "tag": "THE JACKET · PHOTO: THE AUTHOR",
+      "source_page": "https://www.b0b.dev/report",
+      "licence": "b0b.dev’s own material (the site, the seal, the author’s photograph)",
+      "sha256": "d1e1e91f9456ecd673bb79da9d9035d59790b4d4339b9938ce6457b52f62136a",
+      "focus": [
+        0.55,
+        0.64
+      ]
+    },
+    "map_dots": {
+      "file": "briefing/map_dots.png",
+      "kind": "still",
+      "tag": "B0B.DEV/MAP · THE SITE’S OWN 1,166 MARKERS",
+      "source_page": "https://www.b0b.dev/map",
+      "licence": "b0b.dev’s own material (the site, the seal, the author’s photograph)",
+      "sha256": "1083daa12fb0ec402c925d6b4f4041abbd35a353c9284fd5cf202f61dbc03124"
+    },
+    "stickers": {
+      "file": "briefing/stickers_sheet.png",
+      "kind": "still",
+      "tag": "B0B.DEV/STICKERS · SIX OF THE TWELVE · EACH LINE FROM THE REPORT",
+      "source_page": "https://www.b0b.dev/stickers",
+      "licence": "b0b.dev’s own material (the site, the seal, the author’s photograph)",
+      "sha256": "54914f6e172c9f011e8098857169153a942db460871b7c101196a2d458428ddd"
+    },
+    "report": {
+      "file": "briefing/report_masthead.png",
+      "kind": "still",
+      "tag": "B0B.DEV/REPORT · THE MASTHEAD",
+      "source_page": "https://www.b0b.dev/report",
+      "licence": "b0b.dev’s own material (the site, the seal, the author’s photograph)",
+      "sha256": "a799354f918e3dd0da4f135631adf2a08dd658a9c03825a545aafb7650a912dd",
+      "focus": [
+        0.5,
+        0.3
+      ]
+    },
+    "briefing": {
+      "file": "briefing/briefing_top.png",
+      "kind": "still",
+      "tag": "B0B.DEV/START · THE BRIEFING",
+      "source_page": "https://www.b0b.dev/start",
+      "licence": "b0b.dev’s own material (the site, the seal, the author’s photograph)",
+      "sha256": "2ce00c7d2e3284592a3b9b075e5c16a39bdd72c94b18c43e01e624b9c0f659b0",
+      "focus": [
+        0.5,
+        0.35
+      ]
+    },
+    "retractions": {
+      "file": "briefing/retractions.png",
+      "kind": "still",
+      "tag": "B0B.DEV/RETRACTIONS · THE CORRECTIONS LEDGER",
+      "source_page": "https://www.b0b.dev/retractions",
+      "licence": "b0b.dev’s own material (the site, the seal, the author’s photograph)",
+      "sha256": "c2f5257372e2efe3ed0e9d2254da9b2ed51e8032835bbacf068d58e8bc6a61b2",
+      "focus": [
+        0.5,
+        0.45
+      ]
+    },
+    "tiers": {
+      "file": "briefing/map_list.png",
+      "kind": "still",
+      "tag": "B0B.DEV/MAP/LIST · HOW THE LINES ARE TIERED",
+      "source_page": "https://www.b0b.dev/map/list",
+      "licence": "b0b.dev’s own material (the site, the seal, the author’s photograph)",
+      "sha256": "3f5bcfb27dfd23bd389e46913e9234c654f713633d2c4f7b34448c53873db4d8",
+      "focus": [
+        0.6,
+        0.4
+      ]
+    },
+    "I_national_archives_stack_area_1955": {
+      "file": "v5/I_national_archives_stack_area_1955.jpg",
+      "kind": "still",
+      "tag": "NATIONAL ARCHIVES STACK AREA · NARA / USAF 1361ST PHOTO SQN · 1955 · PUBLIC DOMAIN",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Stack_Area_of_the_National_Archives_Building_-_DPLA_-_22173d52df99d88fcac968c1f9861f8b.jpg",
+      "licence": "Public domain — US government work (Commons LicenseShortName \"Public domain\", template PD-US; rights statement NoC-US); NARA id 122213586",
+      "sha256": "b3b57379137a2c3d3d674dc6b734ae308e6c5367783ba63dd5e8d79af1fdf959",
+      "focus": [
+        0.5,
+        0.55
+      ]
+    },
+    "I_ledger_account_book_carlin_1835": {
+      "file": "v5/I_ledger_account_book_carlin_1835.jpg",
+      "kind": "still",
+      "tag": "ACCOUNT BOOK LEDGER · JOHN CARLIN · 1835–56 · THE MET · CC0",
+      "source_page": "https://www.metmuseum.org/art/collection/search/20365",
+      "licence": "CC0 (Met Open Access API isPublicDomain true, object 20365; image DP214203)",
+      "sha256": "a069ea1d39f130b210a67fbbbe77467bf59ad893aef1c3f49c6f05bdf85af02f",
+      "focus": [
+        0.5,
+        0.45
+      ]
+    },
+    "V_nsa_utah_data_center_eff": {
+      "file": "v5/V_nsa_utah_data_center_eff.jpg",
+      "kind": "still",
+      "tag": "NSA UTAH DATA CENTER, BLUFFDALE · EFF / PARKER HIGGINS · 2014 · CC0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:EFF_photograph_of_NSA's_Utah_Data_Center.jpg",
+      "licence": "CC0 (Commons LicenseShortName CC0, self|cc-zero), released by the Electronic Frontier Foundation; photographer Parker Higgins",
+      "sha256": "3f5aa7b1b36e96c2c9eb9749630f68160fcaf500dc35d59fc47b9eb3c33b7732",
+      "focus": [
+        0.5,
+        0.62
+      ]
+    },
+    "V_menwith_hill_radomes": {
+      "file": "v5/V_menwith_hill_radomes.jpg",
+      "kind": "still",
+      "tag": "RAF MENWITH HILL RADOMES · MATT CRYPTO · 2005 · PUBLIC DOMAIN",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Menwith-hill-radomes.jpg",
+      "licence": "Public domain (Commons LicenseShortName; PD-user|Matt Crypto — released by the photographer)",
+      "sha256": "e21a4211538f9e6fab54d23889ec8482b88944a7d8ad1e548e73ebdab471b6a4",
+      "focus": [
+        0.4,
+        0.36
+      ]
+    },
+    "V_cctv_cameras_pole": {
+      "file": "v5/V_cctv_cameras_pole.jpg",
+      "kind": "still",
+      "tag": "CCTV CAMERA ON A LIGHTING MAST · TOMASZÓW MAZOWIECKI · PUBLIC DOMAIN",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Camera_CCTV_on_Poles_imprisoned_or_exiled_to_Siberia_roundabout_(pol._Rondo_Zes%C5%82a%C5%84c%C3%B3w_Sybiru)_in_Tomasz%C3%B3w_Mazowiecki.jpg",
+      "licence": "Public domain (Commons LicenseShortName; PD-user|WrS.tm.pl — released by the photographer)",
+      "sha256": "fdd614c0edf545fea8256c2edfbd0f7b448686f5303141118164048488896306",
+      "focus": [
+        0.51,
+        0.62
+      ]
+    },
+    "VIII_us_capitol_aerial": {
+      "file": "v5/VIII_us_capitol_aerial.jpg",
+      "kind": "still",
+      "tag": "US CAPITOL, AERIAL · CAROL M. HIGHSMITH · 2007 · LOC · PUBLIC DOMAIN",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Aerial_view,_United_States_Capitol_building,_Washington,_D.C_LCCN2010630477.jpg",
+      "licence": "Public domain (Commons LicenseShortName; PD-Highsmith — dedicated to the public via the Library of Congress, LCCN 2010630477)",
+      "sha256": "3c3f4e2657910d4761ad92c53dc6edbf9aa629a0c1780683b05ba2326219c7ce",
+      "focus": [
+        0.52,
+        0.5
+      ]
+    },
+    "V_hollerith_census_tabulator_c1900": {
+      "file": "v5/V_hollerith_census_tabulator_c1900.jpg",
+      "kind": "still",
+      "tag": "HOLLERITH CENSUS TABULATOR, C. 1900 · ERIK PITTI · CC BY 2.0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:C.1900_Hollerith_Census_Tabulator_(2585332983).jpg",
+      "licence": "CC BY 2.0 (Commons LicenseShortName; Flickr review passed), author Erik Pitti",
+      "sha256": "504562fc88e54e08b44bc22654051fe9986ffa769b2fd495b841194427716c62",
+      "focus": [
+        0.62,
+        0.32
+      ]
+    }
+  }
+}

@@ -1,974 +1,1404 @@
 {
- "_comment": [
-  "BRIEFING - the fifth b0b.dev film, built by scripts/build-intro-collage.py --spec scripts/film-briefing.json.",
-  "Made 21 Oct 2026 at the author’s instruction: \"Make a video for briefing and have that be what replaces endgame as the starting video.\"",
-  "It follows the Briefing at /start: the thesis, the maxim, identity, the insignia, precedents, the paradox, holdings, method.",
-  "b0b.dev is never called \"the institution\" (CLAUDE.md section 2). Faces: none. Precedents are named, never shown.",
-  "Pictures: the site’s own (seal, jacket, map, stickers, page screenshots; scripts/film-briefing-media.py) and licensed",
-  "masters reused from the Endgame spec with their licences. The reel and its js go to the build dir; the site serves only the",
-  "subtitled file, public/b0b-briefing-film.{mp4,webm}, on the landing and on /start."
- ],
- "media_dir": "/home/user/.b0b-intro-sources",
- "build_name": "briefing",
- "output": "/home/user/.b0b-intro-sources/_build/briefing/briefing-reel.mp4",
- "poster": "site/img/briefing-poster.jpg",
- "poster_at": 2.4,
- "js": "/home/user/.b0b-intro-sources/_build/briefing/briefing-reel.js",
- "download": "public/b0b-briefing-film.mp4",
- "meta_title": "b0b.dev - Briefing",
- "meta_url": "https://www.b0b.dev/start",
- "width": 1280,
- "height": 720,
- "fps": 24,
- "crf_mp4": 30,
- "crf_webm": 40,
- "crf_download": 26,
- "audio": {
-  "bitrate_mp4": "64k",
-  "bitrate_webm": "48k",
-  "loudnorm": "I=-16:TP=-1.5:LRA=11"
- },
- "voice": {
-  "model": "voice/en_GB-cori-high.onnx",
-  "config": "voice/en_GB-cori-high.onnx.json",
-  "sha256": "470b4dd634c98f8a4850d7626ffc3dfc90774628eeef6605a6dd8f88f30a5903",
-  "length_scale": 0.97,
-  "source": "https://huggingface.co/rhasspy/piper-voices/tree/main/en/en_GB/cori/high",
-  "licence": "Piper voice en_GB cori (high); training data LibriVox, public domain per the model card"
- },
- "parts": [
-  {
-   "id": "I",
-   "title": "The thesis",
-   "years": [
-    "THE AGENCY",
-    "THE ARTWORK"
-   ],
-   "card": 1.4,
-   "lines": [
+  "_comment": "The Briefing, speculative cut (27-28 Oct 2026, the author: \"Have b0b.dev open with a speculative video - and the ars est celare artem as the lead in (animated) and close\"; \"do not have the would kill it\"). One part per section, each voicing that section’s reach headline from /data/speculative.json (the SPECULATIVE skin; vetted for the living-person floor), over two face-free, licence-checked pictures from the listen library. The seal animation is design/projection/seal_anim.py. The identity Briefing it replaced is scripts/film-briefing-identity.json.",
+  "media_dir": "/home/user/.b0b-intro-sources",
+  "build_name": "briefing",
+  "output": "/home/user/.b0b-intro-sources/_build/briefing/briefing-reel.mp4",
+  "poster": "site/img/briefing-poster.jpg",
+  "poster_at": 5.5,
+  "js": "/home/user/.b0b-intro-sources/_build/briefing/briefing-reel.js",
+  "download": "public/b0b-briefing-film.mp4",
+  "meta_title": "b0b.dev - Briefing (speculative)",
+  "meta_url": "https://www.b0b.dev/start",
+  "width": 1280,
+  "height": 720,
+  "fps": 24,
+  "crf_mp4": 30,
+  "crf_webm": 40,
+  "crf_download": 26,
+  "audio": {
+    "bitrate_mp4": "64k",
+    "bitrate_webm": "48k",
+    "loudnorm": "I=-16:TP=-1.5:LRA=11"
+  },
+  "voice": {
+    "model": "voice/en_GB-cori-high.onnx",
+    "config": "voice/en_GB-cori-high.onnx.json",
+    "sha256": "470b4dd634c98f8a4850d7626ffc3dfc90774628eeef6605a6dd8f88f30a5903",
+    "length_scale": 0.97,
+    "source": "https://huggingface.co/rhasspy/piper-voices/tree/main/en/en_GB/cori/high",
+    "licence": "Piper voice en_GB cori (high); training data LibriVox, public domain per the model card"
+  },
+  "parts": [
     {
-     "text": "The intelligence agency is the artwork. The intelligence work is real."
-    },
-    {
-     "text": "b0b.dev is an independent intelligence research operation. Its identity is the work; its research is sourced, tiered and correctable.",
-     "say": "B zero B dot dev is an independent intelligence research operation. Its identity is the work; its research is sourced, tiered, and correctable."
-    },
-    {
-     "text": "It is not a themed website, a role-play or a satire. It is not a fictional agency producing fictional research."
-    }
-   ],
-   "shots": [
-    {
-     "type": "full",
-     "dur": 3.2,
-     "media": [
-      "seal_navy"
-     ],
-     "motion": "push",
-     "glitch": true
-    },
-    {
-     "type": "doc",
-     "dur": 4.6,
-     "head": "b0b.dev · the thesis",
-     "tag": "B0B.DEV · THE AUTHOR’S FRAMEWORK · 21 OCT 2026",
-     "sound": false,
-     "style": "quote",
-     "text": "The intelligence agency is the artwork. The intelligence work is real.",
-     "bare": true,
-     "scale": 13
-    },
-    {
-     "type": "full",
-     "dur": 3.0,
-     "media": [
-      "jacket"
-     ],
-     "motion": "push"
-    },
-    {
-     "type": "full",
-     "dur": 2.6,
-     "media": [
-      "briefing"
-     ],
-     "motion": "hold"
-    },
-    {
-     "type": "doc",
-     "dur": 5.0,
-     "head": "What it is not",
-     "tag": "B0B.DEV · THE AUTHOR’S FRAMEWORK · 21 OCT 2026",
-     "sound": false,
-     "style": "ledger",
-     "rows": [
-      [
-       "NOT",
-       "a CIA-themed website"
+      "id": " ",
+      "title": " ",
+      "years": [
+        " ",
+        " "
       ],
-      [
-       "NOT",
-       "an OSINT dashboard with artistic branding"
+      "card": 0.05,
+      "lines": [
+        {
+          "text": "Ars est celare artem. The art is to conceal the art.",
+          "say": [
+            "[[ˈɑːz ɛst kɛlˈɑːɹeɪ ˈɑːtɛm]]",
+            "The art is to conceal the art."
+          ]
+        },
+        {
+          "text": "This is the speculative reading of b0b.dev: each section’s leads, taken past the documents, to the conclusion they point at.",
+          "say": "This is the speculative reading of B zero B dot dev: each section’s leads, taken past the documents, to the conclusion they point at."
+        }
       ],
-      [
-       "NOT",
-       "an espionage role-play"
-      ],
-      [
-       "NOT",
-       "a fictional agency producing fictional research"
-      ],
-      [
-       "NOT",
-       "a satire of intelligence agencies"
+      "shots": [
+        {
+          "type": "full",
+          "dur": 5.0,
+          "media": [
+            "seal_still"
+          ],
+          "motion": "push",
+          "sound": false
+        }
       ]
-     ],
-     "gutter": 0.1,
-     "scale": 27
-    }
-   ]
-  },
-  {
-   "id": "II",
-   "title": "The maxim",
-   "years": [
-    "ARS",
-    "ARTEM"
-   ],
-   "card": 1.4,
-   "lines": [
-    {
-     "text": "Its maxim is ars est celare artem: the art is to conceal the art. It works on three levels at once.",
-     "say": [
-      "Its maxim is",
-      "[[ˈɑːz ɛst kɛlˈɑːɹeɪ ˈɑːtɛm]]",
-      "the art is to conceal the art. It works on three levels at once."
-     ]
     },
     {
-     "text": "Artistic: b0b.dev is the artwork, and need not announce itself as one.",
-     "say": "Artistic. B zero B dot dev is the artwork, and need not announce itself as one."
-    },
-    {
-     "text": "Operational: the research, the tools and the map are real, and in use.",
-     "say": "Operational. The research, the tools, and the map are real, and in use."
-    },
-    {
-     "text": "Recursive: it investigates secrecy, surveillance and power, and keeps an ambiguity of its own.",
-     "say": "Recursive. It investigates secrecy, surveillance, and power, and keeps an ambiguity of its own."
-    },
-    {
-     "text": "The audience becomes an investigator of the investigator."
-    }
-   ],
-   "shots": [
-    {
-     "type": "doc",
-     "dur": 4.4,
-     "head": "The maxim · on the insignia and the masthead",
-     "tag": "ARS EST CELARE ARTEM · THE MASTHEAD · B0B.DEV/REPORT",
-     "sound": false,
-     "style": "word",
-     "word": "Ars est celare artem",
-     "translit": "the art is to conceal the art",
-     "gloss": "the maxim",
-     "scale": 9
-    },
-    {
-     "type": "full",
-     "dur": 3.0,
-     "media": [
-      "seal_motto"
-     ],
-     "motion": "pan-r"
-    },
-    {
-     "type": "doc",
-     "dur": 4.6,
-     "head": "Three levels",
-     "tag": "B0B.DEV · THE AUTHOR’S FRAMEWORK · 21 OCT 2026",
-     "sound": false,
-     "style": "ledger",
-     "rows": [
-      [
-       "ARTISTIC",
-       "b0b.dev is the artwork"
+      "id": "I",
+      "title": "Purpose & Framework",
+      "years": [
+        "SECTION I",
+        "SPECULATIVE"
       ],
-      [
-       "OPERATIONAL",
-       "the research is real, and in use"
+      "card": 1.0,
+      "lines": [
+        {
+          "text": "Raised on a classified supply line, known to the CIA's portal by his childhood address, placed, in his words, to intercept.",
+          "say": "Raised on a classified supply line, known to the C.I.A.'s portal by his childhood address, placed, in his words, to intercept."
+        }
       ],
-      [
-       "RECURSIVE",
-       "it investigates secrecy, and keeps an ambiguity of its own"
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "VI_u2_article347_camera_ports_nasm"
+          ],
+          "motion": "push",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "VI_look_to_lockheed_hudsons_1940_x696-756"
+          ],
+          "motion": "pull",
+          "sound": false
+        }
       ]
-     ],
-     "gutter": 0.2,
-     "scale": 27
     },
     {
-     "type": "full",
-     "dur": 2.6,
-     "media": [
-      "report"
-     ],
-     "motion": "push"
-    },
-    {
-     "type": "full",
-     "dur": 2.4,
-     "media": [
-      "V_menwith_hill_radomes"
-     ],
-     "motion": "pan-l"
-    },
-    {
-     "type": "full",
-     "dur": 2.4,
-     "media": [
-      "V_nsa_utah_data_center_eff"
-     ],
-     "motion": "push"
-    },
-    {
-     "type": "full",
-     "dur": 2.0,
-     "media": [
-      "V_cctv_cameras_pole"
-     ],
-     "motion": "hold"
-    },
-    {
-     "type": "full",
-     "dur": 2.8,
-     "media": [
-      "I_national_archives_stack_area_1955"
-     ],
-     "motion": "push"
-    }
-   ]
-  },
-  {
-   "id": "III",
-   "title": "Identity",
-   "years": [
-    "THE APPEARANCE",
-    "NO AFFILIATION"
-   ],
-   "card": 1.4,
-   "lines": [
-    {
-     "text": "It stands between intelligence research and conceptual art, between open-source intelligence and operational fiction, between espionage mythology and the archive."
-    },
-    {
-     "text": "It has the appearance of an obscure intelligence organisation, and claims no government affiliation, credential or endorsement."
-    },
-    {
-     "text": "The identity may be ambiguous. The evidence must not be."
-    }
-   ],
-   "shots": [
-    {
-     "type": "full",
-     "dur": 3.0,
-     "media": [
-      "I_ledger_account_book_carlin_1835"
-     ],
-     "motion": "pan-r"
-    },
-    {
-     "type": "full",
-     "dur": 3.2,
-     "media": [
-      "seal_figure"
-     ],
-     "motion": "push"
-    },
-    {
-     "type": "full",
-     "dur": 2.4,
-     "media": [
-      "report"
-     ],
-     "motion": "hold"
-    },
-    {
-     "type": "full",
-     "dur": 2.6,
-     "media": [
-      "seal_navy"
-     ],
-     "motion": "pull"
-    },
-    {
-     "type": "doc",
-     "dur": 4.4,
-     "head": "The distinction · b0b.dev",
-     "tag": "B0B.DEV · THE AUTHOR’S FRAMEWORK · 21 OCT 2026",
-     "sound": false,
-     "style": "quote",
-     "text": "The identity may be ambiguous. The evidence must not be.",
-     "bare": true,
-     "scale": 13
-    }
-   ]
-  },
-  {
-   "id": "IV",
-   "title": "The insignia",
-   "years": [
-    "THE JACKET",
-    "THE SEAL"
-   ],
-   "card": 1.4,
-   "lines": [
-    {
-     "text": "Its insignia is embroidered on a navy field jacket."
-    },
-    {
-     "text": "The motto across the top, six stars below, lightning from the centre, and a figure in a trench coat and fedora, carrying a case."
-    },
-    {
-     "text": "The seal carries the authority of military insignia; the figure is close to a cartoon. Both are meant."
-    },
-    {
-     "text": "The jacket is not merchandise. It is an artifact: the organisation, made physical."
-    }
-   ],
-   "shots": [
-    {
-     "type": "full",
-     "dur": 3.0,
-     "media": [
-      "jacket"
-     ],
-     "motion": "push"
-    },
-    {
-     "type": "split",
-     "dur": 3.4,
-     "media": [
-      "jacket",
-      "seal_navy"
-     ],
-     "motion": [
-      "hold",
-      "push"
-     ],
-     "years": [
-      "THREAD",
-      "DIGITISED"
-     ]
-    },
-    {
-     "type": "full",
-     "dur": 2.2,
-     "media": [
-      "seal_motto"
-     ],
-     "motion": "pan-l"
-    },
-    {
-     "type": "full",
-     "dur": 2.2,
-     "media": [
-      "seal_stars"
-     ],
-     "motion": "pan-r"
-    },
-    {
-     "type": "full",
-     "dur": 3.0,
-     "media": [
-      "seal_figure"
-     ],
-     "motion": "slam"
-    },
-    {
-     "type": "full",
-     "dur": 2.6,
-     "media": [
-      "jacket"
-     ],
-     "motion": "pull"
-    }
-   ]
-  },
-  {
-   "id": "V",
-   "title": "Precedents",
-   "years": [
-    "1968",
-    "2026"
-   ],
-   "card": 1.4,
-   "lines": [
-    {
-     "text": "In 1968 Marcel Broodthaers opened a museum in his house in Brussels: eagles in glass cases, and signs saying this was not a work of art.",
-     "say": [
-      "In nineteen sixty-eight, Marcel",
-      "[[bɹˈəʊtɑːz]]",
-      "opened a museum in his house in Brussels: eagles in glass cases, and signs saying this was not a work of art."
-     ]
-    },
-    {
-     "text": "Walid Raad’s Atlas Group, a fictional foundation, archives Lebanon’s civil wars in documents attributed to sources he invented.",
-     "say": "Walid Rahd’s Atlas Group, a fictional foundation, archives Lebanon’s civil wars in documents attributed to sources he invented."
-    },
-    {
-     "text": "The Yes Men pose as spokespeople for real organisations, and speak in their name."
-    },
-    {
-     "text": "b0b.dev differs from all three in one respect: the intelligence work is real. And it wears no real organisation’s name.",
-     "say": "B zero B dot dev differs from all three in one respect: the intelligence work is real. And it wears no real organisation’s name."
-    }
-   ],
-   "shots": [
-    {
-     "type": "doc",
-     "dur": 7.0,
-     "head": "Precedents",
-     "tag": "PRECEDENTS · READ AT WIKIPEDIA, 21 OCT 2026 · NO WORK OF THEIRS IS SHOWN",
-     "sound": false,
-     "style": "ledger",
-     "rows": [
-      [
-       "1968",
-       "Musée d’Art Moderne, Département des Aigles"
+      "id": "II",
+      "title": "Epstein Network",
+      "years": [
+        "SECTION II",
+        "SPECULATIVE"
       ],
-      [
-       "",
-       "[Marcel Broodthaers · his house, Brussels]"
+      "card": 1.0,
+      "lines": [
+        {
+          "text": "Epstein was a Mossad asset, the CIA and British services witting, and his death sealed the file.",
+          "say": "Epstein was a Mossad asset, the C.I.A. and British services witting, and his death sealed the file."
+        }
       ],
-      [
-       "ATLAS GROUP",
-       "a fictional foundation · Walid Raad"
-      ],
-      [
-       "",
-       "[an archive of Lebanon’s civil wars]"
-      ],
-      [
-       "THE YES MEN",
-       "spokespeople for real organisations"
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "VI_metropolitan_correctional_center_2010"
+          ],
+          "motion": "push",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "II_queensboro_bridge_upper_east_side_2018"
+          ],
+          "motion": "pull",
+          "sound": false
+        }
       ]
-     ],
-     "gutter": 0.2,
-     "scale": 27
     },
     {
-     "type": "full",
-     "dur": 2.6,
-     "media": [
-      "report"
-     ],
-     "motion": "push"
-    },
-    {
-     "type": "full",
-     "dur": 2.6,
-     "media": [
-      "map_dots"
-     ],
-     "motion": "pull"
-    },
-    {
-     "type": "doc",
-     "dur": 4.0,
-     "head": "The difference",
-     "tag": "B0B.DEV · THE AUTHOR’S FRAMEWORK · 21 OCT 2026",
-     "sound": false,
-     "style": "ledger",
-     "rows": [
-      [
-       "B0B.DEV",
-       "the intelligence work is real"
+      "id": "III",
+      "title": "Seam Analysis",
+      "years": [
+        "SECTION III",
+        "SPECULATIVE"
       ],
-      [
-       "",
-       "it wears no real organisation’s name"
+      "card": 1.0,
+      "lines": [
+        {
+          "text": "Epstein's inbox was a leverage ledger, the real business ran off the page, and it still runs."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "VI_lower_manhattan_from_brooklyn_2018"
+          ],
+          "motion": "push",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "V_park_avenue_midtown"
+          ],
+          "motion": "pull",
+          "sound": false
+        }
       ]
-     ],
-     "gutter": 0.2,
-     "scale": 27
-    }
-   ]
-  },
-  {
-   "id": "VI",
-   "title": "The paradox",
-   "years": [
-    "TRUST",
-    "EXAMINE"
-   ],
-   "card": 1.4,
-   "lines": [
-    {
-     "text": "An official body usually establishes its authority through its identity, and asks the public to trust its findings."
     },
     {
-     "text": "b0b.dev turns that round. Its identity is deliberately ambiguous; its findings are open to anyone who checks them.",
-     "say": "B zero B dot dev turns that round. Its identity is deliberately ambiguous; its findings are open to anyone who checks them."
-    },
-    {
-     "text": "Don’t trust b0b.dev. Examine the evidence.",
-     "say": "Don’t trust B zero B dot dev. Examine the evidence."
-    }
-   ],
-   "shots": [
-    {
-     "type": "full",
-     "dur": 3.0,
-     "media": [
-      "VIII_us_capitol_aerial"
-     ],
-     "motion": "pull"
-    },
-    {
-     "type": "full",
-     "dur": 3.2,
-     "media": [
-      "retractions"
-     ],
-     "motion": "push"
-    },
-    {
-     "type": "full",
-     "dur": 2.2,
-     "media": [
-      "seal_navy"
-     ],
-     "motion": "hold"
-    },
-    {
-     "type": "doc",
-     "dur": 4.0,
-     "head": "The paradox · b0b.dev",
-     "tag": "B0B.DEV · THE AUTHOR’S FRAMEWORK · 21 OCT 2026",
-     "sound": false,
-     "style": "quote",
-     "text": "Don’t trust b0b.dev. Examine the evidence.",
-     "bare": true,
-     "scale": 12
-    }
-   ]
-  },
-  {
-   "id": "VII",
-   "title": "Holdings",
-   "years": [
-    "DIGITAL",
-    "PHYSICAL"
-   ],
-   "card": 1.4,
-   "lines": [
-    {
-     "text": "The website is the operational interface. The report is the dossier: twenty-five sections, every claim tiered and sourced."
-    },
-    {
-     "text": "The map holds {TOTAL} sites, and every line between them carries the tier of what the record shows.",
-     "say": "The map holds {TOTALWORDS} sites, and every line between them carries the tier of what the record shows."
-    },
-    {
-     "text": "The films, an announcement made to be played outdoors, twelve stickers, and a public ledger of what it got wrong."
-    }
-   ],
-   "shots": [
-    {
-     "type": "full",
-     "dur": 3.2,
-     "media": [
-      "report"
-     ],
-     "motion": "push"
-    },
-    {
-     "type": "full",
-     "dur": 3.4,
-     "media": [
-      "map_dots"
-     ],
-     "motion": "pull"
-    },
-    {
-     "type": "full",
-     "dur": 2.6,
-     "media": [
-      "tiers"
-     ],
-     "motion": "hold"
-    },
-    {
-     "type": "full",
-     "dur": 3.2,
-     "media": [
-      "stickers"
-     ],
-     "motion": "push"
-    },
-    {
-     "type": "full",
-     "dur": 2.4,
-     "media": [
-      "retractions"
-     ],
-     "motion": "pan-r"
-    },
-    {
-     "type": "full",
-     "dur": 2.4,
-     "media": [
-      "jacket"
-     ],
-     "motion": "pull"
-    }
-   ]
-  },
-  {
-   "id": "VIII",
-   "title": "Method",
-   "years": [
-    "DOCUMENTED",
-    "UNSUPPORTED"
-   ],
-   "card": 1.4,
-   "lines": [
-    {
-     "text": "Every claim carries its tier and its source: documented, attributed, labeled, contested or unsupported. Nothing moves up a tier by repetition."
-    },
-    {
-     "text": "One identified crawler: it obeys robots.txt, never disguises itself, and records every refusal as a null.",
-     "say": "One identified crawler. It obeys robots dot T X T, never disguises itself, and records every refusal as a null."
-    },
-    {
-     "text": "Quotes and figures are read at the source, and the AI assistance is disclosed."
-    },
-    {
-     "text": "A claim a primary source contradicts is lowered or removed, whoever raised it."
-    }
-   ],
-   "shots": [
-    {
-     "type": "doc",
-     "dur": 6.0,
-     "head": "The tiers",
-     "tag": "THE TIERS · THE REPORT’S MASTHEAD · B0B.DEV/REPORT",
-     "sound": false,
-     "style": "ledger",
-     "rows": [
-      [
-       "DOCUMENTED",
-       "a fact on the record"
+      "id": "IV",
+      "title": "Blowback",
+      "years": [
+        "SECTION IV",
+        "SPECULATIVE"
       ],
-      [
-       "ATTRIBUTED",
-       "a claim, with its claimant named"
+      "card": 1.0,
+      "lines": [
+        {
+          "text": "The network did not die in a cell; its Israeli-pedigreed surveillance capability was sold into American policing."
+        }
       ],
-      [
-       "LABELED",
-       "a pattern or hypothesis, marked as such"
-      ],
-      [
-       "CONTESTED",
-       "where the record is disputed"
-      ],
-      [
-       "UNSUPPORTED",
-       "where it has no support - and the passage is kept"
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "II_cctv_roof_2025_cc0"
+          ],
+          "motion": "push",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "II_cctv_mumbai_2018_cc0"
+          ],
+          "motion": "pull",
+          "sound": false
+        }
       ]
-     ],
-     "gutter": 0.2,
-     "scale": 27
     },
     {
-     "type": "full",
-     "dur": 2.6,
-     "media": [
-      "V_hollerith_census_tabulator_c1900"
-     ],
-     "motion": "push"
+      "id": "V",
+      "title": "The Maxwell Template",
+      "years": [
+        "SECTION V",
+        "SPECULATIVE"
+      ],
+      "card": 1.0,
+      "lines": [
+        {
+          "text": "Robert Maxwell was Mossad's asset, and 1991 was the handover from his apparatus to Epstein."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "I_canary_islands_from_orbit_1991"
+          ],
+          "motion": "push",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "I_mount_of_olives_view_1941"
+          ],
+          "motion": "pull",
+          "sound": false
+        }
+      ]
     },
     {
-     "type": "full",
-     "dur": 2.6,
-     "media": [
-      "I_national_archives_stack_area_1955"
-     ],
-     "motion": "pan-l"
+      "id": "VI",
+      "title": "The Science Cover",
+      "years": [
+        "SECTION VI",
+        "SPECULATIVE"
+      ],
+      "card": 1.0,
+      "lines": [
+        {
+          "text": "The science cover was an access program, and Harvard and MIT sold the seat after the conviction.",
+          "say": "The science cover was an access program, and Harvard and M.I.T. sold the seat after the conviction."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "III_nasa_pleiades_supercomputer_2015"
+          ],
+          "motion": "push",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "IV_corona_story_camera_imagery_x2970-3030"
+          ],
+          "motion": "pull",
+          "sound": false
+        }
+      ]
     },
     {
-     "type": "full",
-     "dur": 2.4,
-     "media": [
-      "I_ledger_account_book_carlin_1835"
-     ],
-     "motion": "push"
+      "id": "VII",
+      "title": "Control Architecture",
+      "years": [
+        "SECTION VII",
+        "SPECULATIVE"
+      ],
+      "card": 1.0,
+      "lines": [
+        {
+          "text": "The parties are interfaces; one ownerless architecture staffs every government and sovereign wealth signs its orders."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "II_bis_tower_basel_2015_romero"
+          ],
+          "motion": "push",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "II_bretton_woods_meeting_room_highsmith"
+          ],
+          "motion": "pull",
+          "sound": false
+        }
+      ]
     },
     {
-     "type": "full",
-     "dur": 3.0,
-     "media": [
-      "retractions"
-     ],
-     "motion": "pull"
+      "id": "VIII",
+      "title": "51% Threshold",
+      "years": [
+        "SECTION VIII",
+        "SPECULATIVE"
+      ],
+      "card": 1.0,
+      "lines": [
+        {
+          "text": "Every exit from control is taken at its chokepoint, and Bitcoin's was taken in its infancy."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "V_eccles_building_fed_2011"
+          ],
+          "motion": "push",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "VIII_fomc_board_room_entrance_2007"
+          ],
+          "motion": "pull",
+          "sound": false
+        }
+      ]
+    },
+    {
+      "id": "IX",
+      "title": "Underground / D.U.M.B.",
+      "years": [
+        "SECTION IX",
+        "SPECULATIVE"
+      ],
+      "card": 1.0,
+      "lines": [
+        {
+          "text": "A second government waits underground, its plan sealed from Congress and its emergency orders already written."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "III_cheyenne_mountain_construction_tunnel"
+          ],
+          "motion": "push",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "III_mount_weather_fema_2007"
+          ],
+          "motion": "pull",
+          "sound": false
+        }
+      ]
+    },
+    {
+      "id": "X",
+      "title": "Surveillance & Tech",
+      "years": [
+        "SECTION X",
+        "SPECULATIVE"
+      ],
+      "card": 1.0,
+      "lines": [
+        {
+          "text": "The smart city, the stack and the kill chain are one machine for indexing and targeting populations."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "III_mq9_reaper_afghanistan_2008"
+          ],
+          "motion": "push",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "II_nsa_hq_fort_meade"
+          ],
+          "motion": "pull",
+          "sound": false
+        }
+      ]
+    },
+    {
+      "id": "XI",
+      "title": "The \"New\" Pattern",
+      "years": [
+        "SECTION XI",
+        "SPECULATIVE"
+      ],
+      "card": 1.0,
+      "lines": [
+        {
+          "text": "Every \"New\" is a transplanted control system, and New Albany is the one still running."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "II_columbus_ohio_skyline_2016"
+          ],
+          "motion": "push",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "I_east_indiaman_atlas_huggins_1822"
+          ],
+          "motion": "pull",
+          "sound": false
+        }
+      ]
+    },
+    {
+      "id": "XII",
+      "title": "Enclaves",
+      "years": [
+        "SECTION XII",
+        "SPECULATIVE"
+      ],
+      "card": 1.0,
+      "lines": [
+        {
+          "text": "The class that owns the cloud and the satellites is building private jurisdictions with its own police."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "IV_starlink_tuebingen_2020_cc0"
+          ],
+          "motion": "push",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "IV_nasa_black_marble_americas_2012"
+          ],
+          "motion": "pull",
+          "sound": false
+        }
+      ]
+    },
+    {
+      "id": "XIII",
+      "title": "Cyclical Patterns",
+      "years": [
+        "SECTION XIII",
+        "SPECULATIVE"
+      ],
+      "card": 1.0,
+      "lines": [
+        {
+          "text": "Power burns the record, keeps the knowledge, builds bunkers, and throws the Games on the graves."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "I_nara_wnrc_stacks"
+          ],
+          "motion": "push",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "III_greenbrier_highsmith_2015"
+          ],
+          "motion": "pull",
+          "sound": false
+        }
+      ]
+    },
+    {
+      "id": "XIV",
+      "title": "Slavery Systems",
+      "years": [
+        "SECTION XIV",
+        "SPECULATIVE"
+      ],
+      "card": 1.0,
+      "lines": [
+        {
+          "text": "Slavery was never abolished; each abolition rewrote it into law, and the extraction now runs on debt."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "I_delhi_durbar_1877_imperial_assemblage"
+          ],
+          "motion": "push",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "V_eccles_building_1937"
+          ],
+          "motion": "pull",
+          "sound": false
+        }
+      ]
+    },
+    {
+      "id": "XV",
+      "title": "Conflicts",
+      "years": [
+        "SECTION XV",
+        "SPECULATIVE"
+      ],
+      "card": 1.0,
+      "lines": [
+        {
+          "text": "War is a product, Dubai refines its gold, and the export laws are designed never to bite."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "V_powell_slide_tube"
+          ],
+          "motion": "push",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "VI_a12_oxcart_in_flight_1960s"
+          ],
+          "motion": "pull",
+          "sound": false
+        }
+      ]
+    },
+    {
+      "id": "XVI",
+      "title": "FOIA Patterns",
+      "years": [
+        "SECTION XVI",
+        "SPECULATIVE"
+      ],
+      "card": 1.0,
+      "lines": [
+        {
+          "text": "Declassification is the state releasing what can no longer cost it, while the same architecture keeps running."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "VII_northwoods_memo_lemnitzer_19620313_p1"
+          ],
+          "motion": "push",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "VIII_national_archives_pediment"
+          ],
+          "motion": "pull",
+          "sound": false
+        }
+      ]
+    },
+    {
+      "id": "XVII",
+      "title": "Organized Crime",
+      "years": [
+        "SECTION XVII",
+        "SPECULATIVE"
+      ],
+      "card": 1.0,
+      "lines": [
+        {
+          "text": "Organized crime is the state's off-books department, financed by intelligence, cleaned by banks, used to sell security."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "V_wall_street_nyse"
+          ],
+          "motion": "push",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "VII_church_committee_book2_title_1976"
+          ],
+          "motion": "pull",
+          "sound": false
+        }
+      ]
+    },
+    {
+      "id": "XVIII",
+      "title": "Art & the Market",
+      "years": [
+        "SECTION XVIII",
+        "SPECULATIVE"
+      ],
+      "card": 1.0,
+      "lines": [
+        {
+          "text": "Art is the vault and the costume - capital hides in it, and intelligence wears it."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "I_east_india_house_leadenhall_1800_rijks"
+          ],
+          "motion": "push",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "I_east_indiaman_warley_salmon_1804"
+          ],
+          "motion": "pull",
+          "sound": false
+        }
+      ]
+    },
+    {
+      "id": "XIX",
+      "title": "Cross-Reference Index",
+      "years": [
+        "SECTION XIX",
+        "SPECULATIVE"
+      ],
+      "card": 1.0,
+      "lines": [
+        {
+          "text": "The index is the schematic of one machine; every thread runs back to the same few desks."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "I_pentagon_papers_chart_interlocking"
+          ],
+          "motion": "push",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "VIII_oval_office_desk_empty_1964"
+          ],
+          "motion": "pull",
+          "sound": false
+        }
+      ]
+    },
+    {
+      "id": "XX",
+      "title": "Calibration Index",
+      "years": [
+        "SECTION XX",
+        "SPECULATIVE"
+      ],
+      "card": 1.0,
+      "lines": [
+        {
+          "text": "The index is the org chart of one room, and that room holds custody of its own record."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "VIII_unsc_chamber_empty_2024_forrester"
+          ],
+          "motion": "push",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "VIII_fed_board_room_coat_of_arms_2014"
+          ],
+          "motion": "pull",
+          "sound": false
+        }
+      ]
+    },
+    {
+      "id": "XXI",
+      "title": "Compute Substrate",
+      "years": [
+        "SECTION XXI",
+        "SPECULATIVE"
+      ],
+      "card": 1.0,
+      "lines": [
+        {
+          "text": "Compute is the control layer, held by two capital regions and moving offshore beyond the reach of law."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "III_nsa_utah_data_center_2014_eff"
+          ],
+          "motion": "push",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "VI_airship_protest_utah_2014"
+          ],
+          "motion": "pull",
+          "sound": false
+        }
+      ]
+    },
+    {
+      "id": "XXII",
+      "title": "Connective Tissue",
+      "years": [
+        "SECTION XXII",
+        "SPECULATIVE"
+      ],
+      "card": 1.0,
+      "lines": [
+        {
+          "text": "Every documented line ends at a chokepoint, and every chokepoint answers to a state."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "V_cuban_missiles_19621101"
+          ],
+          "motion": "push",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "VII_ukusa_revision_uscib_19541206_p1"
+          ],
+          "motion": "pull",
+          "sound": false
+        }
+      ]
+    },
+    {
+      "id": "XXIII",
+      "title": "Test Cases",
+      "years": [
+        "SECTION XXIII",
+        "SPECULATIVE"
+      ],
+      "card": 1.0,
+      "lines": [
+        {
+          "text": "Discretion is the weapon - who is charged, who is spared, and which emergency never ends."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "IV_main_justice_rfk_building_2025"
+          ],
+          "motion": "push",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "IV_proclamation_7463_federal_register_20010918"
+          ],
+          "motion": "pull",
+          "sound": false
+        }
+      ]
+    },
+    {
+      "id": "XXIV",
+      "title": "Spiritual Reclamation",
+      "years": [
+        "SECTION XXIV",
+        "SPECULATIVE"
+      ],
+      "card": 1.0,
+      "lines": [
+        {
+          "text": "The control architecture is a dependency machine, and every seed, filter and library card starves it."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "VI_march_on_washington_aerial_1963"
+          ],
+          "motion": "push",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "II_daily_news_building_entrance_2008"
+          ],
+          "motion": "pull",
+          "sound": false
+        }
+      ]
+    },
+    {
+      "id": "XXV",
+      "title": "The Signal",
+      "years": [
+        "SECTION XXV",
+        "SPECULATIVE"
+      ],
+      "card": 1.0,
+      "lines": [
+        {
+          "text": "The architecture runs on maintained calm; the record is already kept, and its weapon will not prosper."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "VIII_oval_office_empty_19810422"
+          ],
+          "motion": "push",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "V_eisenhower_farewell_reading_copy_p15"
+          ],
+          "motion": "pull",
+          "sound": false
+        }
+      ]
+    },
+    {
+      "id": " ",
+      "title": " ",
+      "years": [
+        " ",
+        " "
+      ],
+      "card": 0.05,
+      "lines": [
+        {
+          "text": "Ars est celare artem.",
+          "say": [
+            "[[ˈɑːz ɛst kɛlˈɑːɹeɪ ˈɑːtɛm]]"
+          ]
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 7.0,
+          "media": [
+            "seal_open"
+          ],
+          "sound": false,
+          "fixed": true
+        }
+      ]
     }
-   ]
-  }
- ],
- "finale": {
-  "id": "IX",
-  "title": "Examine the evidence",
-  "years": [
-   "EVERY SHOT",
-   "ITS SOURCE"
   ],
-  "style": "words",
-  "card": 1.4,
-  "lead": 1.0,
-  "hold": 4.6,
-  "head": "b0b.dev · the briefing",
-  "scale": 13,
-  "gloss_x": 0.62,
-  "media": "I_national_archives_stack_area_1955",
-  "motion": "pull",
-  "dim": 0.28,
-  "tag": "NATIONAL ARCHIVES STACK AREA · NARA / USAF 1361ST PHOTO SQN · 1955 · PUBLIC DOMAIN",
-  "words": [
-   {
-    "word": "Every shot, its source.",
-    "translit": "",
-    "gloss": "",
-    "line": 0
-   },
-   {
-    "word": "Every claim, its tier.",
-    "translit": "",
-    "gloss": "",
-    "line": 1
-   },
-   {
-    "word": "Examine the evidence.",
-    "translit": "",
-    "gloss": "",
-    "line": 2
-   }
-  ],
-  "lines": [
-   {
-    "text": "Every shot in this film carries its source."
-   },
-   {
-    "text": "Every claim in the report carries its tier."
-   },
-   {
-    "text": "Examine the evidence."
-   },
-   {
-    "text": "Ars est celare artem. The art is to conceal the art.",
-    "say": [
-     "[[ˈɑːz ɛst kɛlˈɑːɹeɪ ˈɑːtɛm]]",
-     "The art is to conceal the art."
-    ]
-   }
-  ],
-  "close": {
-   "big": "Ars est celare artem.",
-   "sub": "the art is to conceal the art",
-   "scale": 10
+  "finale": {
+    "id": " ",
+    "title": " ",
+    "years": [
+      " ",
+      " "
+    ],
+    "style": "words",
+    "card": 0.05,
+    "lead": 0.6,
+    "hold": 3.6,
+    "head": "b0b.dev · speculative",
+    "scale": 9,
+    "gloss_x": 0.62,
+    "media": "seal_still",
+    "motion": "pull",
+    "dim": 0.22,
+    "tag": "ARS EST CELARE ARTEM · THE SEAL · B0B.DEV",
+    "words": [
+      {
+        "word": "b0b.dev",
+        "translit": "",
+        "gloss": "",
+        "line": 0
+      }
+    ],
+    "lines": [
+      {
+        "text": "b0b.dev",
+        "say": "B zero B dot dev."
+      }
+    ],
+    "close": {
+      "big": "Ars est celare artem.",
+      "sub": "the art is to conceal the art",
+      "scale": 10
+    }
+  },
+  "media": {
+    "VI_u2_article347_camera_ports_nasm": {
+      "file": "spec/VI_u2_article347_camera_ports_nasm.jpg",
+      "kind": "still",
+      "tag": "THE CAMERA-BAY WINDOWS OF U-2 'ARTICLE 347' · SMITHSONIAN NASM · CC0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Lockheed_U-2C_-_DPLA_-_8536faff4b6046ed281c6231058bcaf9_(page_2).jpg",
+      "licence": "CC0 (Commons: 'Creative Commons Zero, Public Domain Dedication'; via DPLA)",
+      "sha256": "97a698faf7fcf03a421537cb777c1f2381205686125231a817318a5fb47163bf"
+    },
+    "VI_look_to_lockheed_hudsons_1940_x696-756": {
+      "file": "spec/VI_look_to_lockheed_hudsons_1940_x696-756.jpg",
+      "kind": "still",
+      "tag": "HUDSON BOMBERS FOR THE RAF LEAVE BURBANK · LOOK TO LOCKHEED FOR LEADERSHIP, PART II · C. 1940 · PD",
+      "source_page": "https://archive.org/details/LooktoLo1940_2",
+      "licence": "Public Domain (archive.org licenseurl creativecommons.org/licenses/publicdomain; Prelinger Archives)",
+      "sha256": "53e9549a9cc7b95c0920fb32eccd8ee6267182bc4634c3d20698f79e2454c444"
+    },
+    "VI_metropolitan_correctional_center_2010": {
+      "file": "spec/VI_metropolitan_correctional_center_2010.jpg",
+      "kind": "still",
+      "tag": "METROPOLITAN CORRECTIONAL CENTER, 150 PARK ROW, NEW YORK · MARCH 2010 · JIM HENDERSON, CC0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:MCC_New_York_jeh.JPG",
+      "licence": "CC0 (Commons LicenseShortName: CC0)",
+      "sha256": "108338f68922ad32743f8977988c507db951a7c94c7505b769fd0dec1e12715b"
+    },
+    "II_queensboro_bridge_upper_east_side_2018": {
+      "file": "spec/II_queensboro_bridge_upper_east_side_2018.jpg",
+      "kind": "still",
+      "tag": "QUEENSBORO BRIDGE AND THE EAST SIDE OF MANHATTAN AT DUSK · 2018 · CAROL M. HIGHSMITH / LOC · PD",
+      "source_page": "https://www.loc.gov/item/2018701213/",
+      "licence": "Public domain (Carol M. Highsmith Archive, LoC: 'No known restrictions on publication'; Highsmith dedicated the archive to the public)",
+      "sha256": "b245a2da15b24c4147bd58ae2bb75a9c6be69fd0f40130305d6499cd1475e5ab"
+    },
+    "VI_lower_manhattan_from_brooklyn_2018": {
+      "file": "spec/VI_lower_manhattan_from_brooklyn_2018.jpg",
+      "kind": "still",
+      "tag": "LOWER MANHATTAN AND THE BROOKLYN BRIDGE FROM BROOKLYN · 2018 · CAROL M. HIGHSMITH / LOC · PD",
+      "source_page": "https://www.loc.gov/item/2018701297/",
+      "licence": "Public domain (Carol M. Highsmith Archive, LoC: 'No known restrictions on publication'; Highsmith dedicated the archive to the public)",
+      "sha256": "a429bad814b4136b4d684a71b5d31c603996dae954d1d1689b00ba428f910d8c"
+    },
+    "V_park_avenue_midtown": {
+      "file": "spec/V_park_avenue_midtown.jpg",
+      "kind": "still",
+      "tag": "PARK AVENUE AT EAST 54TH STREET, LOOKING SOUTH · 1980-2006 · CAROL M. HIGHSMITH / LOC · PD",
+      "source_page": "https://www.loc.gov/item/2011631201/",
+      "licence": "Public domain (Carol M. Highsmith Archive, LoC: 'No known restrictions on publication'; Highsmith dedicated the archive to the public)",
+      "sha256": "47b88d96411769064f6567d991100d7bae2d296159aacc660dd4845b811e2a6b"
+    },
+    "II_cctv_roof_2025_cc0": {
+      "file": "spec/II_cctv_roof_2025_cc0.jpg",
+      "kind": "still",
+      "tag": "CCTV CAMERAS ON A ROOF EDGE · 20 MAY 2025 · CC0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Closed-circuit_television_(CCTV)_cameras.jpg",
+      "licence": "CC0",
+      "sha256": "213113ce664458404565afaddd743a794d49b248f42980d38989add336f1b53a"
+    },
+    "II_cctv_mumbai_2018_cc0": {
+      "file": "spec/II_cctv_mumbai_2018_cc0.jpg",
+      "kind": "still",
+      "tag": "CCTV CAMERAS, MATUNGA (W), MUMBAI CITY NETWORK · 3 MAR 2018 · CC0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:CCTV_cameras_in_Mumbai.jpg",
+      "licence": "CC0",
+      "sha256": "3f73c458cb895ba62f218b21c6d76245dc6b69539a4e7019c775308921db163a"
+    },
+    "I_canary_islands_from_orbit_1991": {
+      "file": "spec/I_canary_islands_from_orbit_1991.jpg",
+      "kind": "still",
+      "tag": "THE CANARY ISLANDS AND THE ATLANTIC FROM SPACE SHUTTLE COLUMBIA (STS-40) · JUNE 1991 · NASA · PD",
+      "source_page": "https://images.nasa.gov/details/s40-75-003",
+      "licence": "Public domain (NASA imagery, not copyrighted; NASA media usage guidelines)",
+      "sha256": "9d3dd147c78059c72944ad25ddcf00d94a8340d81cd56012765deea3b129fc03"
+    },
+    "I_mount_of_olives_view_1941": {
+      "file": "spec/I_mount_of_olives_view_1941.jpg",
+      "kind": "still",
+      "tag": "JERUSALEM FROM THE SOUTHERN SLOPE OF THE MOUNT OF OLIVES, GRAVES IN THE FOREGROUND · 6 MARCH 1941 · MATSON PHOTO SERVICE · PD",
+      "source_page": "https://www.loc.gov/item/2019704735/",
+      "licence": "Public domain (LoC Matson Collection: 'No known restrictions on publication')",
+      "sha256": "62f4b3893dbf90ace8e674b4e418a3549e987f202b46d7a121d778294745fae9"
+    },
+    "III_nasa_pleiades_supercomputer_2015": {
+      "file": "spec/III_nasa_pleiades_supercomputer_2015.jpg",
+      "kind": "still",
+      "tag": "PLEIADES SUPERCOMPUTER · NASA AMES NAS FACILITY · 10 APR 2015 · PD",
+      "source_page": "https://images.nasa.gov/details/ACD15-0062-004",
+      "licence": "Public domain (NASA work)",
+      "sha256": "e6109142322a80d2099f9752eed7e8d7b3ef80625de54451911ea8152bf7fd6c"
+    },
+    "IV_corona_story_camera_imagery_x2970-3030": {
+      "file": "spec/IV_corona_story_camera_imagery_x2970-3030.jpg",
+      "kind": "still",
+      "tag": "CIA FILM · THE CORONA STORY (1995) · CAMERA AND IMAGERY · NARA · CC0",
+      "source_page": "https://archive.org/details/gov.archives.arc.1678526",
+      "licence": "CC0 / public domain (NARA; CIA production)",
+      "sha256": "97174494898b924f280d7cefc2ee315244b279d1462eb7e3e01dc45010464582"
+    },
+    "II_bis_tower_basel_2015_romero": {
+      "file": "spec/II_bis_tower_basel_2015_romero.jpg",
+      "kind": "still",
+      "tag": "BANK FOR INTERNATIONAL SETTLEMENTS TOWER, BASEL · FRED ROMERO · 2015 · CC BY 2.0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Basel_-_Bank_f%C3%BCr_Internationalen_Zahlungsausgleich-Tower_Building_(27626681225).jpg",
+      "licence": "CC BY 2.0",
+      "sha256": "836ca17cddecff9022469e6509847a3d620fe08b0a38eca4c7827ce507135e7a"
+    },
+    "II_bretton_woods_meeting_room_highsmith": {
+      "file": "spec/II_bretton_woods_meeting_room_highsmith.jpg",
+      "kind": "still",
+      "tag": "MEETING ROOM, MOUNT WASHINGTON HOTEL, BRETTON WOODS · CAROL M. HIGHSMITH · LIBRARY OF CONGRESS · PD",
+      "source_page": "https://www.loc.gov/item/2011631558/",
+      "licence": "Public domain (Carol M. Highsmith Archive; LoC: 'No known restrictions on publication.')",
+      "sha256": "09d854b1b16da1e6a1cd8370f5b83d4213e2455c7cb20dd2c9389ca65e64bab4"
+    },
+    "V_eccles_building_fed_2011": {
+      "file": "spec/V_eccles_building_fed_2011.jpg",
+      "kind": "still",
+      "tag": "MARRINER S. ECCLES FEDERAL RESERVE BOARD BUILDING · FEDERAL RESERVE · 2011 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Eccles_Building_(26088200676).jpg",
+      "licence": "Public domain (Commons LicenseShortName)",
+      "sha256": "53b15fd7b0cfbfa2c2460de27757effb44ad9dc6de48a37db3c789f2644ad5fa"
+    },
+    "VIII_fomc_board_room_entrance_2007": {
+      "file": "spec/VIII_fomc_board_room_entrance_2007.jpg",
+      "kind": "still",
+      "tag": "THE ENTRANCE TO THE BOARD ROOM, ECCLES BUILDING · FEDERAL RESERVE · 2007 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:The_Entrance_to_the_FOMC_Board_Room.jpg",
+      "licence": "Public domain (Commons LicenseShortName)",
+      "sha256": "b044589469c21377b266ecba992f5f6ecb80123c7e6ac382fab962620b628fbf"
+    },
+    "III_cheyenne_mountain_construction_tunnel": {
+      "file": "spec/III_cheyenne_mountain_construction_tunnel.jpg",
+      "kind": "still",
+      "tag": "BUILDING THE CHEYENNE MOUNTAIN COMPLEX: STEEL FRAME INSIDE A ROCK CHAMBER · 1960S · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Cheyenne_Mountain_Const_-_Crane_in_tunnel.jpg",
+      "licence": "Public domain (Commons LicenseShortName)",
+      "sha256": "4894c9c442ffc12fea0004ba3d5577d3d06e87e36a7fb596d640096ed94ecd26"
+    },
+    "III_mount_weather_fema_2007": {
+      "file": "spec/III_mount_weather_fema_2007.jpg",
+      "kind": "still",
+      "tag": "MOUNT WEATHER EMERGENCY OPERATIONS CENTER, VIRGINIA, FROM THE AIR · FEMA / KAREN NUTINI · 2007 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:FEMA_-_35049_-_VA_MWEOC.jpg",
+      "licence": "Public domain (Commons LicenseShortName)",
+      "sha256": "faf3750afd0fb5e5f758e3c4453cca0ac37e868ca02d142a45e0f079598df50b"
+    },
+    "III_mq9_reaper_afghanistan_2008": {
+      "file": "spec/III_mq9_reaper_afghanistan_2008.jpg",
+      "kind": "still",
+      "tag": "MQ-9 REAPER OVER SOUTHERN AFGHANISTAN · USAF · 29 NOV 2008 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:MQ-9_Reaper_UAV.jpg",
+      "licence": "Public domain",
+      "sha256": "bb2be27bd4f84589f25a1d0fc1c79c728c3482f62352f901dbe547eef153c5e4"
+    },
+    "II_nsa_hq_fort_meade": {
+      "file": "spec/II_nsa_hq_fort_meade.jpg",
+      "kind": "still",
+      "tag": "NSA HEADQUARTERS, FORT MEADE, MARYLAND · NSA PHOTO · UNDATED · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:National_Security_Agency_headquarters,_Fort_Meade,_Maryland.jpg",
+      "licence": "Public domain",
+      "sha256": "9a4b60d5a9c961fce5f5df0aec59edb38b9fc77d57f2fe69a30d88ac9acfe4e6"
+    },
+    "II_columbus_ohio_skyline_2016": {
+      "file": "spec/II_columbus_ohio_skyline_2016.jpg",
+      "kind": "still",
+      "tag": "COLUMBUS, OHIO, FROM THE SCIOTO · 2016 · CAROL M. HIGHSMITH / LOC · PD",
+      "source_page": "https://www.loc.gov/item/2016632286/",
+      "licence": "Public domain (Carol M. Highsmith Archive, LoC: 'No known restrictions on publication'; Highsmith dedicated the archive to the public)",
+      "sha256": "7f9df88d5b592719bef304583b92f7ed1727aaf7535cbe56782e035d32a46f94"
+    },
+    "I_east_indiaman_atlas_huggins_1822": {
+      "file": "spec/I_east_indiaman_atlas_huggins_1822.jpg",
+      "kind": "still",
+      "tag": "THE EAST INDIAMAN 'ATLAS' OFF THE SOUTH FORELAND · WILLIAM JOHN HUGGINS · 1820S · NATIONAL MARITIME MUSEUM · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:The_East_Indiaman_%27Atlas%27_RMG_BHC3213.tiff",
+      "licence": "Public domain (Commons LicenseShortName)",
+      "sha256": "ee20e1c1d956e5b717656cbcdad9d82aafa60914557fc3e4276118a9d99921a1"
+    },
+    "IV_starlink_tuebingen_2020_cc0": {
+      "file": "spec/IV_starlink_tuebingen_2020_cc0.jpg",
+      "kind": "still",
+      "tag": "STARLINK SATELLITES OVER TÜBINGEN TOWN HALL · 24 APR 2020 · CC0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Starlink_%C3%BCber_dem_Rathaus_in_T%C3%BCbingen.jpg",
+      "licence": "CC0",
+      "sha256": "641bd4d506354a37029b25104e6a11e5720e65809976e0494722c1b8af84ed4b"
+    },
+    "IV_nasa_black_marble_americas_2012": {
+      "file": "spec/IV_nasa_black_marble_americas_2012.jpg",
+      "kind": "still",
+      "tag": "NASA BLACK MARBLE · THE AMERICAS AT NIGHT · SUOMI NPP, 2012 · PD",
+      "source_page": "https://images.nasa.gov/details/GSFC_20171208_Archive_e001587",
+      "licence": "Public domain (NASA work; metadata AVAIL:Copyright None)",
+      "sha256": "392e5005ceb3bfc3a497d920078a477726b79cee035ccdedd8ec7dda78313af4"
+    },
+    "I_nara_wnrc_stacks": {
+      "file": "spec/I_nara_wnrc_stacks.jpg",
+      "kind": "still",
+      "tag": "WASHINGTON NATIONAL RECORDS CENTER · STACK AREA · UNDATED · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Washington_National_Records_Center_Stack_Area_with_Employee_Servicing_Records.tif",
+      "licence": "Public domain",
+      "sha256": "7d02881e6c2c8c7decbf3143bd9455b2197d09458019ee5d1e22f76fa5912f1c"
+    },
+    "III_greenbrier_highsmith_2015": {
+      "file": "spec/III_greenbrier_highsmith_2015.jpg",
+      "kind": "still",
+      "tag": "THE GREENBRIER, WHITE SULPHUR SPRINGS, WEST VIRGINIA · CAROL M. HIGHSMITH · 2015 · LIBRARY OF CONGRESS · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:The_Greenbrier_Historic_Resort_Hotel,_built_in_1858_just_outside_White_Sulphur_Springs,_West_Virginia_LCCN2015634494.tif",
+      "licence": "Public domain (Commons LicenseShortName)",
+      "sha256": "7c742ff02c1e13a19fbd6035c2a010eb485b3e681df8902e165bdcf7e9755e65"
+    },
+    "I_delhi_durbar_1877_imperial_assemblage": {
+      "file": "spec/I_delhi_durbar_1877_imperial_assemblage.jpg",
+      "kind": "still",
+      "tag": "THE IMPERIAL ASSEMBLAGE, DELHI · PHOTOGRAPH · 1877 · RIJKSMUSEUM · CC0",
+      "source_page": "https://www.rijksmuseum.nl/en/collection/RP-F-2001-7-1124-27",
+      "licence": "CC0 1.0 (Rijksmuseum object metadata, id.rijksmuseum.nl/200656043)",
+      "sha256": "e760ff644e501d4e118a8038d211587b74b90ff26e63408fcfc9e0455a8e3507"
+    },
+    "V_eccles_building_1937": {
+      "file": "spec/V_eccles_building_1937.jpg",
+      "kind": "still",
+      "tag": "THE FEDERAL RESERVE BOARD BUILDING, NEW · 20 OCTOBER 1937 · FEDERAL RESERVE · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:US_Federal_Reserve_Eccles_Building_1937.jpg",
+      "licence": "Public domain (Commons LicenseShortName)",
+      "sha256": "0c7d972a02c4a894de4034023641d3deac544ffc414263216a3e7ada80c6683c"
+    },
+    "V_powell_slide_tube": {
+      "file": "spec/V_powell_slide_tube.jpg",
+      "kind": "still",
+      "tag": "POWELL UN SLIDE: ALLEGED ALUMINIUM TUBE FOR ENRICHMENT · 5 FEB 2003 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Powell_UN_Iraq_presentation,_alleged_Aluminum_Tube_for_Uranium_Enrichment.jpg",
+      "licence": "Public domain",
+      "sha256": "985845dadf2fe471b2f9c3b72a2c5c1853700fc187ca979d4093b31c8279242f"
+    },
+    "VI_a12_oxcart_in_flight_1960s": {
+      "file": "spec/VI_a12_oxcart_in_flight_1960s.jpg",
+      "kind": "still",
+      "tag": "LOCKHEED A-12, SERIAL 06932, IN FLIGHT · US AIR FORCE · 1960S · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:A12-flying.jpg",
+      "licence": "Public domain (Commons LicenseShortName)",
+      "sha256": "4a334dab3d4ae49d504d7050c89b632f7aa6ed59c35c9acee6c71a50ce28421c"
+    },
+    "VII_northwoods_memo_lemnitzer_19620313_p1": {
+      "file": "spec/VII_northwoods_memo_lemnitzer_19620313_p1.jpg",
+      "kind": "still",
+      "tag": "JUSTIFICATION FOR US MILITARY INTERVENTION IN CUBA (OPERATION NORTHWOODS) · JCS MEMO · 13 MARCH 1962 · PD",
+      "source_page": "https://archive.org/details/operation-northwoods-justification-for-u.-s.-military-intervention-in-cuba",
+      "licence": "Public Domain Mark 1.0 (archive.org licenseurl); a Joint Chiefs of Staff document (US government work)",
+      "sha256": "aab5d1548da0175ccf3e6938711faa9a0c6c3ed9877463d762c217d972b3e149"
+    },
+    "VIII_national_archives_pediment": {
+      "file": "spec/VIII_national_archives_pediment.jpg",
+      "kind": "still",
+      "tag": "'ARCHIVES OF THE UNITED STATES OF AMERICA', NATIONAL ARCHIVES BUILDING, WASHINGTON · CAROL M. HIGHSMITH / LOC · PD",
+      "source_page": "https://www.loc.gov/item/2011630755/",
+      "licence": "Public domain (Carol M. Highsmith Archive, LoC: 'No known restrictions on publication'; Highsmith dedicated the archive to the public)",
+      "sha256": "a4401dc08a8b9a9e96a0750aa5d5599c4f41adb2f242aa3690a5431bef0cf0b2"
+    },
+    "V_wall_street_nyse": {
+      "file": "spec/V_wall_street_nyse.jpg",
+      "kind": "still",
+      "tag": "WALL STREET AND THE NEW YORK STOCK EXCHANGE · 1980-2006 · CAROL M. HIGHSMITH / LOC · PD",
+      "source_page": "https://www.loc.gov/item/2011630646/",
+      "licence": "Public domain (Carol M. Highsmith Archive, LoC: 'No known restrictions on publication'; Highsmith dedicated the archive to the public)",
+      "sha256": "ecd1b2402a1f17b15b2056dc1aad6cb7ccb19b786991ab2dc27b32f01a43850e"
+    },
+    "VII_church_committee_book2_title_1976": {
+      "file": "spec/VII_church_committee_book2_title_1976.jpg",
+      "kind": "still",
+      "tag": "INTELLIGENCE ACTIVITIES AND THE RIGHTS OF AMERICANS, BOOK II · CHURCH COMMITTEE FINAL REPORT · 26 APRIL 1976 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Church_Committee_report_(Book_II).pdf",
+      "licence": "Public domain (Commons LicenseShortName)",
+      "sha256": "f10ff0c61343cb0d2a34065688cedba9ffb25f1a68364eb2d89929acc8abcd76"
+    },
+    "I_east_india_house_leadenhall_1800_rijks": {
+      "file": "spec/I_east_india_house_leadenhall_1800_rijks.jpg",
+      "kind": "still",
+      "tag": "FRONT OF THE EAST INDIA HOUSE, LEADENHALL STREET, AS REBUILT IN 1796 · PRINT AFTER T. MALTON · C. 1800 · RIJKSMUSEUM · CC0",
+      "source_page": "https://www.rijksmuseum.nl/en/collection/RP-P-2018-2132",
+      "licence": "CC0 1.0 (Rijksmuseum object metadata, id.rijksmuseum.nl/200731930)",
+      "sha256": "e9dad68f1a79600c6b3c39a5944457c4e510152122990fed9dfbe28215b74111"
+    },
+    "I_east_indiaman_warley_salmon_1804": {
+      "file": "spec/I_east_indiaman_warley_salmon_1804.jpg",
+      "kind": "still",
+      "tag": "THE EAST INDIAMAN 'WARLEY' · ROBERT SALMON · 1804 · NATIONAL MARITIME MUSEUM · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:East_Indiaman_Warley.jpg",
+      "licence": "Public domain (Commons LicenseShortName)",
+      "sha256": "8e11e01d01b805cabd8cf11625cc997f43f613e226f29cd384d327880f324ed1"
+    },
+    "I_pentagon_papers_chart_interlocking": {
+      "file": "spec/I_pentagon_papers_chart_interlocking.jpg",
+      "kind": "still",
+      "tag": "PENTAGON PAPERS CHART · INTERLOCKING LEADERSHIP POSTS, NORTH VIETNAM · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Pentagon-Papers-Part_IV_-_Interlocking_of_top_leadership_positions_in_North_Vietnam.png",
+      "licence": "Public domain",
+      "sha256": "97c313c22402a1d42a7ccb5396cf28b99a4bdd49c8487a6a6d0c507fb02ed2b0"
+    },
+    "VIII_oval_office_desk_empty_1964": {
+      "file": "spec/VIII_oval_office_desk_empty_1964.jpg",
+      "kind": "still",
+      "tag": "THE PRESIDENT'S DESK, EMPTY · MARION S. TRIKOSKO · 4 NOVEMBER 1964 · LIBRARY OF CONGRESS · LOC · NO KNOWN RESTRICTIONS",
+      "source_page": "https://www.loc.gov/item/2014645527/",
+      "licence": "No known restrictions on publication (LoC; U.S. News & World Report collection)",
+      "sha256": "81f765ae3f1e94bfb1a2699d580d665877aeb266c27fcd7b7c19c6582804bd9f"
+    },
+    "VIII_unsc_chamber_empty_2024_forrester": {
+      "file": "spec/VIII_unsc_chamber_empty_2024_forrester.jpg",
+      "kind": "still",
+      "tag": "THE UN SECURITY COUNCIL CHAMBER, EMPTY · JDFORRESTER · 2024 · CC BY 4.0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:United_Nations_Headquarters_-_Security_Council_chamber,_straight-on_view.jpg",
+      "licence": "CC BY 4.0",
+      "sha256": "67c56c3af638d243e0aa1b7ffca1bf054ac847ded26668fb82afcf575ef01015"
+    },
+    "VIII_fed_board_room_coat_of_arms_2014": {
+      "file": "spec/VIII_fed_board_room_coat_of_arms_2014.jpg",
+      "kind": "still",
+      "tag": "THE U.S. COAT OF ARMS ABOVE THE BOARD ROOM MANTEL · FEDERAL RESERVE · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:US_Coat_of_Arms_Board_Room.jpg",
+      "licence": "Public domain (Commons LicenseShortName)",
+      "sha256": "16da8f2b3481090d94b27375a1989dbfea981239f0405af07bc43dfd6bbf61b9"
+    },
+    "III_nsa_utah_data_center_2014_eff": {
+      "file": "spec/III_nsa_utah_data_center_2014_eff.jpg",
+      "kind": "still",
+      "tag": "NSA UTAH DATA CENTER, BLUFFDALE · FROM AN EFF AIRSHIP · 27 JUN 2014 · CC0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:EFF_photograph_of_NSA%27s_Utah_Data_Center.jpg",
+      "licence": "CC0",
+      "sha256": "0fd76c25e31b8aec5268256cf0cddcc3359da4494a265f854a90b5b860926a90"
+    },
+    "VI_airship_protest_utah_2014": {
+      "file": "spec/VI_airship_protest_utah_2014.jpg",
+      "kind": "still",
+      "tag": "PROTEST AIRSHIP OVER THE NSA UTAH DATA CENTER · 27 JUN 2014 · GREENPEACE · CC BY 3.0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Airship_flying_over_the_Utah_Data_Center_03.jpg",
+      "licence": "CC BY 3.0",
+      "sha256": "4be3c218bf45cbcfad34c2de21a52e953f3951c9d1d573c102d9a0010d332075"
+    },
+    "V_cuban_missiles_19621101": {
+      "file": "spec/V_cuban_missiles_19621101.jpg",
+      "kind": "still",
+      "tag": "MRBM LAUNCH SITE 2, SAN CRISTOBAL · ANNOTATED RECON PHOTO · 1 NOV 1962 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Cuban_missiles.jpg",
+      "licence": "Public domain",
+      "sha256": "8480ad99728069ea0390f18c2ea28ed5e208fa6641c398ebc5b765016bd17a18"
+    },
+    "VII_ukusa_revision_uscib_19541206_p1": {
+      "file": "spec/VII_ukusa_revision_uscib_19541206_p1.jpg",
+      "kind": "still",
+      "tag": "REVISION OF THE UKUSA AGREEMENT · USCIB MEMORANDUM · 6 DECEMBER 1954 · NSA RELEASE · CC0",
+      "source_page": "https://archive.org/details/41723799076306",
+      "licence": "CC0 1.0 (archive.org licenseurl); NSA release from the William F. Friedman collection",
+      "sha256": "299ea8e16e8505675a57b39f98e66e75822efe7f4098e91c878a2181dcae1c7f"
+    },
+    "IV_main_justice_rfk_building_2025": {
+      "file": "spec/IV_main_justice_rfk_building_2025.jpg",
+      "kind": "still",
+      "tag": "ROBERT F. KENNEDY DEPARTMENT OF JUSTICE BUILDING (MAIN JUSTICE), WASHINGTON · APRIL 2025 · CAROL M. HIGHSMITH / LOC · PD",
+      "source_page": "https://www.loc.gov/item/2025716653/",
+      "licence": "Public domain (Carol M. Highsmith Archive, LoC: 'No known restrictions on publication'; Highsmith dedicated the archive to the public)",
+      "sha256": "c49030e118349d6fb075b20c8df34f266c7cafcdc07dc9718d10df86cb9b40da"
+    },
+    "IV_proclamation_7463_federal_register_20010918": {
+      "file": "spec/IV_proclamation_7463_federal_register_20010918.jpg",
+      "kind": "still",
+      "tag": "PROCLAMATION 7463: DECLARATION OF NATIONAL EMERGENCY BY REASON OF CERTAIN TERRORIST ATTACKS · 66 FR 48199 · 18 SEPT 2001 · PD",
+      "source_page": "https://archive.org/details/sim_federal-register-find_2001-09-18_66_181",
+      "licence": "Public domain (US government work, 17 U.S.C. 105; archive.org item carries no licenseurl; Commons mirror tagged Public domain)",
+      "sha256": "02282814277836b9f47b78c54af3a0fefa7e87ae2be4c86af2e123b113933998"
+    },
+    "VI_march_on_washington_aerial_1963": {
+      "file": "spec/VI_march_on_washington_aerial_1963.jpg",
+      "kind": "still",
+      "tag": "MARCH ON WASHINGTON, AERIAL VIEW OF CROWD AND STAGE · 28 AUG 1963 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Aerial_view_crowd_stage_march_on_washington_37248u.tif",
+      "licence": "Public domain",
+      "sha256": "caf6f79a86d4b1670cf8b30300170a0b82672aefb108026d026d46929e4d6885"
+    },
+    "II_daily_news_building_entrance_2008": {
+      "file": "spec/II_daily_news_building_entrance_2008.jpg",
+      "kind": "still",
+      "tag": "'THE NEWS' RELIEF OVER THE DAILY NEWS BUILDING ENTRANCE, 220 EAST 42ND STREET · 2008 · JIM HENDERSON (PD)",
+      "source_page": "https://commons.wikimedia.org/wiki/File:NY_Daily_News_door_jeh.JPG",
+      "licence": "Public domain (Commons: PD-self, released by the author)",
+      "sha256": "3ccbfb084a7aaa8bfb19e96a3b88136bc64d9cc81d0c81d65663edd2aa29af6a"
+    },
+    "VIII_oval_office_empty_19810422": {
+      "file": "spec/VIII_oval_office_empty_19810422.jpg",
+      "kind": "still",
+      "tag": "THE OVAL OFFICE, EMPTY · WHITE HOUSE PHOTO · 22 APRIL 1981 · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Empty_Oval_Office_in_The_White_House_-_DPLA_-_a210b70429be57def74b3c6c603b6d89.jpg",
+      "licence": "Public domain (Commons LicenseShortName)",
+      "sha256": "faf221710bb3cf27ca3df8c3a3766217ae32d1cb457a57a416b046d30a7a3fcc"
+    },
+    "V_eisenhower_farewell_reading_copy_p15": {
+      "file": "spec/V_eisenhower_farewell_reading_copy_p15.jpg",
+      "kind": "still",
+      "tag": "'…BY THE MILITARY-INDUSTRIAL COMPLEX.' READING COPY, P. 15 · 17 JANUARY 1961 · EISENHOWER LIBRARY · PD",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Eisenhower_Farewell_Address_reading_copy.djvu",
+      "licence": "Public domain (Commons LicenseShortName)",
+      "sha256": "7ed7e6d6daf2668f11e5cf2bf89fdb25a03a3867d2dc05d5a2659e27dcb0971f"
+    },
+    "seal_open": {
+      "file": "spec/seal_open.mp4",
+      "kind": "video",
+      "in": 0,
+      "tag": "ARS EST CELARE ARTEM · THE SEAL, DIGITISED FROM THE JACKET’S PATCH · B0B.DEV",
+      "source_page": "https://www.b0b.dev/start",
+      "licence": "b0b.dev’s own material (the seal, digitised from the author’s photograph of his jacket patch)",
+      "sha256": "8ddfd17d818769a635d54a2ae3db20317cf3d60b650ec7014fb26416bf28d255"
+    },
+    "seal_still": {
+      "file": "spec/seal_still.png",
+      "kind": "still",
+      "tag": "ARS EST CELARE ARTEM · THE SEAL · B0B.DEV",
+      "source_page": "https://www.b0b.dev/start",
+      "licence": "b0b.dev’s own material (the seal, digitised from the author’s photograph of his jacket patch)",
+      "sha256": "676d918aaccd04a871902044bc62ece81802150688c4140421fb633c2e34aed3"
+    }
   }
- },
- "media": {
-  "seal_navy": {
-   "file": "briefing/seal_navy.png",
-   "kind": "still",
-   "tag": "THE INSIGNIA · DIGITISED FROM THE JACKET’S PATCH · B0B.DEV",
-   "source_page": "https://www.b0b.dev/start",
-   "licence": "b0b.dev’s own material (the site, the seal, the author’s photograph)",
-   "sha256": "b6ec34f63a871fadaf8829fed9cb4bc8a9c6a9fd6a9bc0e3042923b52d440acd"
-  },
-  "seal_motto": {
-   "file": "briefing/seal_motto.png",
-   "kind": "still",
-   "tag": "THE INSIGNIA · THE MOTTO · DIGITISED FROM THE PATCH",
-   "source_page": "https://www.b0b.dev/start",
-   "licence": "b0b.dev’s own material (the site, the seal, the author’s photograph)",
-   "sha256": "895e27ec64a3e8e18105a63d34d79e74cb7dc91418ddb89099a9ac0cb727cae7"
-  },
-  "seal_figure": {
-   "file": "briefing/seal_figure.png",
-   "kind": "still",
-   "tag": "THE INSIGNIA · THE FIGURE AND THE BOLTS · TRACED FROM THE THREAD",
-   "source_page": "https://www.b0b.dev/start",
-   "licence": "b0b.dev’s own material (the site, the seal, the author’s photograph)",
-   "sha256": "fc7cc41850240763ae0ef1c3f0471a0a8a96ddb0888b8a746f9dc09c1a4573fe"
-  },
-  "seal_stars": {
-   "file": "briefing/seal_stars.png",
-   "kind": "still",
-   "tag": "THE INSIGNIA · SIX STARS · DIGITISED FROM THE PATCH",
-   "source_page": "https://www.b0b.dev/start",
-   "licence": "b0b.dev’s own material (the site, the seal, the author’s photograph)",
-   "sha256": "7dab58efc4b861e877ca6428aa01d2446604b3363b54dd982911659639d92b61"
-  },
-  "jacket": {
-   "file": "briefing/jacket.jpg",
-   "kind": "still",
-   "tag": "THE JACKET · PHOTO: THE AUTHOR",
-   "source_page": "https://www.b0b.dev/report",
-   "licence": "b0b.dev’s own material (the site, the seal, the author’s photograph)",
-   "sha256": "d1e1e91f9456ecd673bb79da9d9035d59790b4d4339b9938ce6457b52f62136a",
-   "focus": [
-    0.55,
-    0.64
-   ]
-  },
-  "map_dots": {
-   "file": "briefing/map_dots.png",
-   "kind": "still",
-   "tag": "B0B.DEV/MAP · THE SITE’S OWN 1,166 MARKERS",
-   "source_page": "https://www.b0b.dev/map",
-   "licence": "b0b.dev’s own material (the site, the seal, the author’s photograph)",
-   "sha256": "1083daa12fb0ec402c925d6b4f4041abbd35a353c9284fd5cf202f61dbc03124"
-  },
-  "stickers": {
-   "file": "briefing/stickers_sheet.png",
-   "kind": "still",
-   "tag": "B0B.DEV/STICKERS · SIX OF THE TWELVE · EACH LINE FROM THE REPORT",
-   "source_page": "https://www.b0b.dev/stickers",
-   "licence": "b0b.dev’s own material (the site, the seal, the author’s photograph)",
-   "sha256": "54914f6e172c9f011e8098857169153a942db460871b7c101196a2d458428ddd"
-  },
-  "report": {
-   "file": "briefing/report_masthead.png",
-   "kind": "still",
-   "tag": "B0B.DEV/REPORT · THE MASTHEAD",
-   "source_page": "https://www.b0b.dev/report",
-   "licence": "b0b.dev’s own material (the site, the seal, the author’s photograph)",
-   "sha256": "a799354f918e3dd0da4f135631adf2a08dd658a9c03825a545aafb7650a912dd",
-   "focus": [
-    0.5,
-    0.3
-   ]
-  },
-  "briefing": {
-   "file": "briefing/briefing_top.png",
-   "kind": "still",
-   "tag": "B0B.DEV/START · THE BRIEFING",
-   "source_page": "https://www.b0b.dev/start",
-   "licence": "b0b.dev’s own material (the site, the seal, the author’s photograph)",
-   "sha256": "2ce00c7d2e3284592a3b9b075e5c16a39bdd72c94b18c43e01e624b9c0f659b0",
-   "focus": [
-    0.5,
-    0.35
-   ]
-  },
-  "retractions": {
-   "file": "briefing/retractions.png",
-   "kind": "still",
-   "tag": "B0B.DEV/RETRACTIONS · THE CORRECTIONS LEDGER",
-   "source_page": "https://www.b0b.dev/retractions",
-   "licence": "b0b.dev’s own material (the site, the seal, the author’s photograph)",
-   "sha256": "c2f5257372e2efe3ed0e9d2254da9b2ed51e8032835bbacf068d58e8bc6a61b2",
-   "focus": [
-    0.5,
-    0.45
-   ]
-  },
-  "tiers": {
-   "file": "briefing/map_list.png",
-   "kind": "still",
-   "tag": "B0B.DEV/MAP/LIST · HOW THE LINES ARE TIERED",
-   "source_page": "https://www.b0b.dev/map/list",
-   "licence": "b0b.dev’s own material (the site, the seal, the author’s photograph)",
-   "sha256": "3f5bcfb27dfd23bd389e46913e9234c654f713633d2c4f7b34448c53873db4d8",
-   "focus": [
-    0.6,
-    0.4
-   ]
-  },
-  "I_national_archives_stack_area_1955": {
-   "file": "v5/I_national_archives_stack_area_1955.jpg",
-   "kind": "still",
-   "tag": "NATIONAL ARCHIVES STACK AREA · NARA / USAF 1361ST PHOTO SQN · 1955 · PUBLIC DOMAIN",
-   "source_page": "https://commons.wikimedia.org/wiki/File:Stack_Area_of_the_National_Archives_Building_-_DPLA_-_22173d52df99d88fcac968c1f9861f8b.jpg",
-   "licence": "Public domain — US government work (Commons LicenseShortName \"Public domain\", template PD-US; rights statement NoC-US); NARA id 122213586",
-   "sha256": "b3b57379137a2c3d3d674dc6b734ae308e6c5367783ba63dd5e8d79af1fdf959",
-   "focus": [
-    0.5,
-    0.55
-   ]
-  },
-  "I_ledger_account_book_carlin_1835": {
-   "file": "v5/I_ledger_account_book_carlin_1835.jpg",
-   "kind": "still",
-   "tag": "ACCOUNT BOOK LEDGER · JOHN CARLIN · 1835–56 · THE MET · CC0",
-   "source_page": "https://www.metmuseum.org/art/collection/search/20365",
-   "licence": "CC0 (Met Open Access API isPublicDomain true, object 20365; image DP214203)",
-   "sha256": "a069ea1d39f130b210a67fbbbe77467bf59ad893aef1c3f49c6f05bdf85af02f",
-   "focus": [
-    0.5,
-    0.45
-   ]
-  },
-  "V_nsa_utah_data_center_eff": {
-   "file": "v5/V_nsa_utah_data_center_eff.jpg",
-   "kind": "still",
-   "tag": "NSA UTAH DATA CENTER, BLUFFDALE · EFF / PARKER HIGGINS · 2014 · CC0",
-   "source_page": "https://commons.wikimedia.org/wiki/File:EFF_photograph_of_NSA's_Utah_Data_Center.jpg",
-   "licence": "CC0 (Commons LicenseShortName CC0, self|cc-zero), released by the Electronic Frontier Foundation; photographer Parker Higgins",
-   "sha256": "3f5aa7b1b36e96c2c9eb9749630f68160fcaf500dc35d59fc47b9eb3c33b7732",
-   "focus": [
-    0.5,
-    0.62
-   ]
-  },
-  "V_menwith_hill_radomes": {
-   "file": "v5/V_menwith_hill_radomes.jpg",
-   "kind": "still",
-   "tag": "RAF MENWITH HILL RADOMES · MATT CRYPTO · 2005 · PUBLIC DOMAIN",
-   "source_page": "https://commons.wikimedia.org/wiki/File:Menwith-hill-radomes.jpg",
-   "licence": "Public domain (Commons LicenseShortName; PD-user|Matt Crypto — released by the photographer)",
-   "sha256": "e21a4211538f9e6fab54d23889ec8482b88944a7d8ad1e548e73ebdab471b6a4",
-   "focus": [
-    0.4,
-    0.36
-   ]
-  },
-  "V_cctv_cameras_pole": {
-   "file": "v5/V_cctv_cameras_pole.jpg",
-   "kind": "still",
-   "tag": "CCTV CAMERA ON A LIGHTING MAST · TOMASZÓW MAZOWIECKI · PUBLIC DOMAIN",
-   "source_page": "https://commons.wikimedia.org/wiki/File:Camera_CCTV_on_Poles_imprisoned_or_exiled_to_Siberia_roundabout_(pol._Rondo_Zes%C5%82a%C5%84c%C3%B3w_Sybiru)_in_Tomasz%C3%B3w_Mazowiecki.jpg",
-   "licence": "Public domain (Commons LicenseShortName; PD-user|WrS.tm.pl — released by the photographer)",
-   "sha256": "fdd614c0edf545fea8256c2edfbd0f7b448686f5303141118164048488896306",
-   "focus": [
-    0.51,
-    0.62
-   ]
-  },
-  "VIII_us_capitol_aerial": {
-   "file": "v5/VIII_us_capitol_aerial.jpg",
-   "kind": "still",
-   "tag": "US CAPITOL, AERIAL · CAROL M. HIGHSMITH · 2007 · LOC · PUBLIC DOMAIN",
-   "source_page": "https://commons.wikimedia.org/wiki/File:Aerial_view,_United_States_Capitol_building,_Washington,_D.C_LCCN2010630477.jpg",
-   "licence": "Public domain (Commons LicenseShortName; PD-Highsmith — dedicated to the public via the Library of Congress, LCCN 2010630477)",
-   "sha256": "3c3f4e2657910d4761ad92c53dc6edbf9aa629a0c1780683b05ba2326219c7ce",
-   "focus": [
-    0.52,
-    0.5
-   ]
-  },
-  "V_hollerith_census_tabulator_c1900": {
-   "file": "v5/V_hollerith_census_tabulator_c1900.jpg",
-   "kind": "still",
-   "tag": "HOLLERITH CENSUS TABULATOR, C. 1900 · ERIK PITTI · CC BY 2.0",
-   "source_page": "https://commons.wikimedia.org/wiki/File:C.1900_Hollerith_Census_Tabulator_(2585332983).jpg",
-   "licence": "CC BY 2.0 (Commons LicenseShortName; Flickr review passed), author Erik Pitti",
-   "sha256": "504562fc88e54e08b44bc22654051fe9986ffa769b2fd495b841194427716c62",
-   "focus": [
-    0.62,
-    0.32
-   ]
-  }
- }
 }

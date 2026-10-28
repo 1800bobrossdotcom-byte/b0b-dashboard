@@ -14,3 +14,6 @@ Thumbs.db
 # the bodies are not - they are reproducible from it and some are large.
 research/sources/cache/
 __pycache__/
+
+# Subagent worktrees (local only)
+.claude/worktrees/
