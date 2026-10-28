@@ -1,5 +1,5 @@
 {
-  "_comment": "The Briefing, speculative cut (27-28 Oct 2026, the author: \"Have b0b.dev open with a speculative video - and the ars est celare artem as the lead in (animated) and close\"; \"do not have the would kill it\"). One part per section, each voicing that section’s reach headline and one sentence of its body from /data/speculative.json (the SPECULATIVE skin; vetted for the living-person floor), over two face-free, licence-checked pictures from the listen library. The seal animation is design/projection/seal_anim.py. The identity Briefing it replaced is scripts/film-briefing-identity.json.",
+  "_comment": "The Briefing, speculative cut (27-28 Oct 2026, the author: \"Have b0b.dev open with a speculative video - and the ars est celare artem as the lead in (animated) and close\"; \"do not have the would kill it\"). One part per section, each voicing that section’s reach headline and one sentence of its body from /data/speculative.json (the SPECULATIVE skin; vetted for the living-person floor), over two face-free, licence-checked pictures from the listen library. The seal animation is design/projection/seal_anim.py. The identity Briefing it replaced is scripts/film-briefing-identity.json. Section I opens on \"Section one is the author’s own testimony.\" (28 Oct 2026, the author: \"The opening video doesn't make clear that section one is about me\").",
   "media_dir": "/home/user/.b0b-intro-sources",
   "build_name": "briefing",
   "output": "/home/user/.b0b-intro-sources/_build/briefing/briefing-reel.mp4",
@@ -67,10 +67,13 @@
       "title": "Purpose & Framework",
       "years": [
         "SECTION I",
-        "SPECULATIVE"
+        "THE AUTHOR"
       ],
       "card": 1.0,
       "lines": [
+        {
+          "text": "Section one is the author’s own testimony."
+        },
         {
           "text": "Raised on a classified supply line, known to the CIA's portal by his childhood address, placed, in his words, to intercept.",
           "say": "Raised on a classified supply line, known to the C.I.A.'s portal by his childhood address, placed, in his words, to intercept."
