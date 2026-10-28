@@ -520,7 +520,7 @@
 <!-- The intro film. intro.js builds everything inside this element; the
      bootstrap below only decides whether it opens on arrival. -->
 <div id="b0b-intro" hidden data-mode="overlay" role="dialog" aria-modal="true" aria-label="b0b.dev intro film"><div class="bi-boot">b0b.dev</div></div>
-<!-- The homepage (site/landing-intro.js): the animated b0b.dev mark, then a carousel of every film the
+<!-- The homepage (site/landing-intro.js): the animated b0b.dev mark, the seal assembling (b0b-seal.js), then a carousel of every film the
      site hosts, the main film playing first. Since 22 Oct 2026, at the author's instruction ("push the intro
      film section into a carousel of all the films. Main film is the om comma one we had up with darpa theme
      ... Have the homepage be this"). data-main names the film that plays first: omcomma, briefing, endgame,
@@ -566,7 +566,8 @@
     // The overlay comes down at once if the carousel cannot load, else after 20 s unclaimed.
     var add=function(u,onerr){var s=document.createElement('script');s.src=u;s.async=false;if(onerr)s.onerror=onerr;document.head.appendChild(s);};
     add('/b0b-wordmark.js?v=1');
-    add('/landing-intro.js?v=7',failOpen);
+    add('/b0b-seal.js?v=1');
+    add('/landing-intro.js?v=8',failOpen);
     setTimeout(failOpen,20000);
   } else {
     setTimeout(failOpen,8000);

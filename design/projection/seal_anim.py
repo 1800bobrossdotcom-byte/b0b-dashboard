@@ -2,6 +2,10 @@
 """The seal assembling: the lead-in and the close of the speculative Briefing film.
 
   python3 design/projection/seal_anim.py OUT.mp4      (1280 x 720, 24 fps, about 7 s, silent)
+  python3 design/projection/seal_anim.py OUT.mp4 --speed 1.5 --hold 1.2
+      the same build, played 1.5x faster, then the finished seal held 1.2 s (4.8 s in all). This is the
+      homepage's second arrival step (site/b0b-seal.js); the web files are cut from it by
+      design/projection/build_seal_intro.sh.
 
 Everything is the seal's own drawing (seal.py): the two rings draw on clockwise from the top,
 ARS EST CELARE ARTEM arrives letter by letter along its arc, the six stars land, then the traced
@@ -56,7 +60,12 @@ def letters(R):
     return out
 
 
-def main(out):
+BUILT = 5.4                              # the figure has fully opened out by here (unscaled seconds)
+
+
+def main(out, speed=1.0, hold=None):
+    """speed scales the build; hold (seconds) replaces the default length with build + hold."""
+    total = DUR if hold is None else BUILT / speed + hold
     R = D / 2 / 1.02
     interior = Image.fromarray((seal.traced_interior(D, R) * 255).astype('uint8'))
     yy, xx = np.mgrid[0:D, 0:D]
@@ -83,10 +92,10 @@ def main(out):
     enc = subprocess.Popen([ff, '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', '%dx%d' % (W, H),
                             '-r', str(FPS), '-i', '-', '-c:v', 'libx264', '-crf', '14', '-preset', 'slow',
                             '-pix_fmt', 'yuv420p', out], stdin=subprocess.PIPE)
-    n = int(DUR * FPS)
+    n = int(round(total * FPS))
     ox, oy = (W - D) // 2, (H - D) // 2
     for fi in range(n):
-        t = fi / FPS
+        t = fi / FPS * speed
         a = np.zeros((D, D), dtype=np.float32)
         # 0.0-1.4 s: the rings draw on, clockwise from the top
         sweep = ease(t / 1.4) * 360
@@ -109,7 +118,7 @@ def main(out):
             edge = np.clip((reach - radius) / 0.06, 0, 1)
             a = np.maximum(a, inter * edge)
         # a slow push across the whole clip
-        z = 1.0 + 0.035 * ease(t / DUR)
+        z = 1.0 + 0.035 * ease(fi / FPS / total)
         img = Image.fromarray(np.clip(a, 0, 255).astype('uint8'))
         if z != 1.0:
             zd = int(round(D * z))
@@ -123,4 +132,11 @@ def main(out):
 
 
 if __name__ == '__main__':
-    main(sys.argv[1])
+    a = sys.argv[1:]
+    opt = {}
+    for k in ('--speed', '--hold'):
+        if k in a:
+            i = a.index(k)
+            opt[k[2:]] = float(a[i + 1])
+            del a[i:i + 2]
+    main(a[0], **opt)
