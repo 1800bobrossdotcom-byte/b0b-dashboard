@@ -35,8 +35,9 @@
     // Titled by the author, 22 Oct 2026: "Title om.comma as 'my video reply to Donald Trump video'".
     { id: 'omcomma', title: 'MY VIDEO REPLY TO DONALD TRUMP VIDEO', len: '7:07', thumb: '/img/films/omcomma.jpg', page: '',
       parts: [src('/omcomma-1'), src('/omcomma-2')] },
-    { id: 'briefing', title: 'BRIEFING', len: '3:43', thumb: '/img/films/briefing.jpg', page: '/start#film',
-      parts: [src('/b0b-briefing-film')] },
+    // The speculative Briefing, 28 Oct 2026 (the author: "Have b0b.dev open with a speculative video"): every section's reach.
+    { id: 'briefing', title: 'BRIEFING · SPECULATIVE', len: '4:55', thumb: '/img/films/briefing.jpg?v=2', page: '/start#film',
+      parts: [[['/b0b-briefing-film.webm?v=2', 'video/webm'], ['/b0b-briefing-film.mp4?v=2', 'video/mp4']]] },
     { id: 'endgame', title: 'ENDGAME', len: '0:24', thumb: '/img/films/endgame.jpg?v=2', page: '/endgame',
       parts: [src('/b0b-endgame-film')] },
     { id: 'epstein-maxwell', title: 'THE EPSTEIN–MAXWELL RECORD', len: '4:13', thumb: '/img/films/epstein-maxwell.jpg',

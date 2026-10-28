@@ -523,9 +523,10 @@
 <!-- The homepage (site/landing-intro.js): the animated b0b.dev mark, the seal assembling (b0b-seal.js), then a carousel of every film the
      site hosts, the main film playing first. Since 22 Oct 2026, at the author's instruction ("push the intro
      film section into a carousel of all the films. Main film is the om comma one we had up with darpa theme
-     ... Have the homepage be this"). data-main names the film that plays first: omcomma, briefing, endgame,
+     ... Have the homepage be this"). Since 28 Oct 2026 the main film is the speculative Briefing ("Have b0b.dev open with
+     a speculative video"); OM COMMA stays as a card. data-main names the film that plays first: omcomma, briefing, endgame,
      epstein-maxwell, continuity or intro. The intro film above still plays on request. -->
-<div id="b0b-landing" hidden data-main="omcomma" role="dialog" aria-modal="true" aria-label="b0b.dev - the films"></div>
+<div id="b0b-landing" hidden data-main="briefing" role="dialog" aria-modal="true" aria-label="b0b.dev - the films"></div>
 <script>
 (function(){
   var el=document.getElementById('b0b-intro'); if(!el) return;
@@ -567,7 +568,7 @@
     var add=function(u,onerr){var s=document.createElement('script');s.src=u;s.async=false;if(onerr)s.onerror=onerr;document.head.appendChild(s);};
     add('/b0b-wordmark.js?v=1');
     add('/b0b-seal.js?v=1');
-    add('/landing-intro.js?v=8',failOpen);
+    add('/landing-intro.js?v=9',failOpen);
     setTimeout(failOpen,20000);
   } else {
     setTimeout(failOpen,8000);
