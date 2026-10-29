@@ -234,6 +234,11 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**THE FLYING STARS OF BROOKLYN, NY, "MY GOD HAS A TELEPHONE", ON THE SIGNAL BAR — 29 Oct 2026, live.** Author: *"Add my God Has A Telephone by the flying stars of brooklyn"*.
+- The track is `iEBw7tq4RfY`, on Colemine Records, the label's own channel (identified by YouTube oEmbed; the id comes from Flea Market Funk's 2017 post). It is Aaron Frazer's gospel 45 under that name.
+- **Placed 18th of 19, just before Faith No More, so the bar still ends on "We Care a Lot"** as he set it on 27 Oct. Moving FNM's slot means `LS_KEY` is now `b0b_signal_v18`, and `signal-bar.js?v=25` is on report, home and both maps.
+- The same session, his *"Add to Playlist: how to listen to this album - by stereoclip"* was withdrawn (*"Nix that"*) before any upload was found; nothing was added.
+
 **IMOGEN HEAP "HEADLOCK" IS SONG TWO ON THE SIGNAL BAR — 28 Oct 2026, live.** Author: *"Place Imogen heap - headlock as song two"*.
 - It is the official video on ImogenHeapVEVO (`roPiy2JydwA`), identified by YouTube oEmbed; the id is from the song's Wikipedia page. imvdb's id `eKZsZkH_MJc` gives no oEmbed answer, so it was not used.
 - It sits after Overseer's "Heligoland", which leads the bar on `main` (the order was changed by other sessions, 25–27 Oct). `LS_KEY` is now `b0b_signal_v17`, and `signal-bar.js?v=24` is on report, home and both maps.
