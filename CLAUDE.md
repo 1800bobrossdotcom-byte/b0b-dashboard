@@ -234,7 +234,7 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
-**NEW SECTION III, "THE CABINETS"; SECTIONS III–XXV ARE NOW IV–XXVI — 29 Oct 2026.** Author: *"Push on Trump and all cabinents epstein and robert maxwell were involved in and make a separate trump cabinet section that has the other cabinets"*; asked placement, he chose **"New III, right after II"**. **Every reference to a section number before this date uses the old numbering** (add one from III up). h3 ids are unchanged, so old subsection deep links still land; `#III` now means the Cabinets.
+**NEW SECTION III, "THE CABINETS"; SECTIONS III–XXV ARE NOW IV–XXVI — 29 Oct 2026, live (main `c105c28`; four clean reads; the browser shows 26 sections and reach III after its h2).** Author: *"Push on Trump and all cabinents epstein and robert maxwell were involved in and make a separate trump cabinet section that has the other cabinets"*; asked placement, he chose **"New III, right after II"**. **Every reference to a section number before this date uses the old numbering** (add one from III up). h3 ids are unchanged, so old subsection deep links still land; `#III` now means the Cabinets.
 - **Research, held in full:** `research/CABINETS-{A-TRUMP,B-US-OTHER,C-FOREIGN}.md`, 487 quotes, all vq OK. On the page: 8 subsections (`cab-*` ids), 182 quotations, vqdraft 0 failing.
 - **What it says:**
   - **Method.** Contact is kept apart from official acts. The DOJ §3 list (14 Feb 2026) is read as an instrument with a known gap: Barrack, "mentioned hundreds of times", is not on it. It is never read as a roster, and every contact is a floor because the DOJ library cannot be searched from here.
@@ -254,7 +254,7 @@ than once.
   - **Not renumbered:** CLAUDE.md's dated entries, which keep the numbering of their day. The corrections ledger's rows were shifted to current numbers, as on 22 Oct.
 - **Reach III** reads the cabinets as Epstein "working the doors" and the consequences falling abroad because "abroad the prosecutor is not the custodian of the archive". It asserts no act by any living person; LIVING_NAMES records how each appears.
 - **The briefing film gained part III** (Treasury building and the empty 1981 Oval Office; reach III's headline and one sentence).
-  - Its `spec/` masters were missing in this container. 50 of 52 matched `site/img/listen/` byte for byte and were copied. The seal clip and still were re-rendered from `seal_anim.py`, and their sha256s updated. The Treasury picture is the listen copy (its own sha256).
+  - Its `spec/` masters were missing in this container. 50 of 52 matched `site/img/listen/` byte for byte and were copied. The seal clip and still were re-rendered from `seal_anim.py`, and their sha256s updated. The Treasury picture is the listen copy (its own sha256). Film 5:08 (−16.2 LUFS), served `?v=4`; the carousel card reads 5:09; `landing-intro.js?v=12`.
 - **Search** was made multi-word the same day (entry below), on `main` separately.
 - **Spider:** `www.tribunal-de-paris.justice.fr` registered as a decoy-200 ("Site en cours de maintenance | Justice.fr", 15,891 bytes), proven both ways.
 - Scale line 293 / 1,220 / 177. `build-transmissions.py` 404'd again; the reel is untouched.
