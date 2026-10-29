@@ -213,10 +213,18 @@
   {
    "id": "C-2026-10-27-3",
    "date": "2026-10-27",
-   "where": "X, XXV, Briefing",
+   "where": "XI, XXVI, Briefing",
    "page_said": "The report said the author’s Claude subscription was cancelled effective 1 September 2026 and that the work would then move to open-source AI models; the Briefing said the work is done with Claude alone.",
    "replaced_by": "Corrected in his words: he takes issue with both Anthropic and OpenAI, and continues to use multiple AI sources to audit and compose the report, each use disclosed.",
    "found_by": "The author."
+  },
+  {
+   "id": "C-2026-10-29-1",
+   "date": "2026-10-29",
+   "where": "VIII, XXI",
+   "page_said": "The cabinet map said Epstein “contributed to” a 2018 Lutnick dinner; the calibration index said Burns had “three Epstein meetings” documented, and that Clinton’s “Secret Service dismissals are public record”.",
+   "replaced_by": "Corrected from the documents: the dinner was on 11 Dec 2017, and the solicitation read shows Epstein declining the table (“no, tell lutnik he can fill them”); Burns had three meetings scheduled in Epstein’s calendar, two acknowledged by his spokesperson; for Clinton, the logs list no agent on some legs, and the flight count differs by source (four trips by his office, at least 26 legs by FAA logs).",
+   "found_by": "The cabinets research for the new Section III."
   }
  ],
  "tested_not_adopted": [

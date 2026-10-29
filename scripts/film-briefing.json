@@ -142,6 +142,43 @@
       ]
     },
     {
+      "id": "III",
+      "title": "The Cabinets",
+      "years": [
+        "SECTION III",
+        "SPECULATIVE"
+      ],
+      "card": 1.0,
+      "lines": [
+        {
+          "text": "Epstein worked the doors of three continents' cabinets, before office and after, and only the foreign governments have answered for it."
+        },
+        {
+          "text": "A man who works the door does not need the office-holder's act."
+        }
+      ],
+      "shots": [
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "V_treasury_building_highsmith"
+          ],
+          "motion": "push",
+          "sound": false
+        },
+        {
+          "type": "full",
+          "dur": 3.2,
+          "media": [
+            "VIII_oval_office_empty_19810422"
+          ],
+          "motion": "pull",
+          "sound": false
+        }
+      ]
+    },
+    {
       "id": "IV",
       "title": "Seam Analysis",
       "years": [
@@ -1469,7 +1506,7 @@
       "tag": "ARS EST CELARE ARTEM · THE SEAL, DIGITISED FROM THE JACKET’S PATCH · B0B.DEV",
       "source_page": "https://www.b0b.dev/start",
       "licence": "b0b.dev’s own material (the seal, digitised from the author’s photograph of his jacket patch)",
-      "sha256": "8ddfd17d818769a635d54a2ae3db20317cf3d60b650ec7014fb26416bf28d255"
+      "sha256": "1da5a649c2d7abdfbf718e30678f8b4cf563aa8f24ba76d8dee0103d3a117d75"
     },
     "seal_still": {
       "file": "spec/seal_still.png",
@@ -1477,7 +1514,19 @@
       "tag": "ARS EST CELARE ARTEM · THE SEAL · B0B.DEV",
       "source_page": "https://www.b0b.dev/start",
       "licence": "b0b.dev’s own material (the seal, digitised from the author’s photograph of his jacket patch)",
-      "sha256": "676d918aaccd04a871902044bc62ece81802150688c4140421fb633c2e34aed3"
+      "sha256": "71a9d466ec2bf6f3cf0db0b885426e0a4249083567bba0bdf1c4fafd1e712b22"
+    },
+    "V_treasury_building_highsmith": {
+      "file": "spec/V_treasury_building_highsmith.jpg",
+      "kind": "still",
+      "tag": "U.S. TREASURY BUILDING, WASHINGTON · CAROL M. HIGHSMITH · LIBRARY OF CONGRESS · PD",
+      "source_page": "https://www.loc.gov/item/2011631001/",
+      "licence": "Public domain (Carol M. Highsmith Archive; LoC: 'No known restrictions on publication.')",
+      "sha256": "629406d3a5b867cf0e1bf66625eb1b854d8e81368e043e4485ba016cd5b4ad77",
+      "focus": [
+        0.5,
+        0.5
+      ]
     }
   }
 }
