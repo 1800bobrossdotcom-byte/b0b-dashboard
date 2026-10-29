@@ -234,6 +234,31 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**NEW SECTION III, "THE CABINETS"; SECTIONS III–XXV ARE NOW IV–XXVI — 29 Oct 2026.** Author: *"Push on Trump and all cabinents epstein and robert maxwell were involved in and make a separate trump cabinet section that has the other cabinets"*; asked placement, he chose **"New III, right after II"**. **Every reference to a section number before this date uses the old numbering** (add one from III up). h3 ids are unchanged, so old subsection deep links still land; `#III` now means the Cabinets.
+- **Research, held in full:** `research/CABINETS-{A-TRUMP,B-US-OTHER,C-FOREIGN}.md`, 487 quotes, all vq OK. On the page: 8 subsections (`cab-*` ids), 182 quotations, vqdraft 0 failing.
+- **What it says:**
+  - **Method.** Contact is kept apart from official acts. The DOJ §3 list (14 Feb 2026) is read as an instrument with a known gap: Barrack, "mentioned hundreds of times", is not on it. It is never read as a roster, and every contact is a floor because the DOJ library cannot be searched from here.
+  - **Trump 1:** Acosta (the act, plus Epstein's tracking emails EFTA02656036 and EFTA01014138); Barr ("Not to my knowledge"; "do you know bill barr. CIA ."; the Dalton father link printed as contested); Bannon (2018–19 texts, EFTA00027290); Mnuchin, Pompeo and Mattis only as subjects of the Bannon–Epstein exchange.
+  - **Trump 2:** Lutnick's documents against his two accounts; Barrack (CBS, attributed); RFK Jr.'s travel; Bondi, Blanche, Bongino and Patel as acts only; Feinberg, Phelan and Oz at NBC's strength.
+  - **Other US cabinets:** the Reagan Library "Maxwell, Robert" folder (correspondence, a declined dinner, no secretary named); Tower (attributed, unproved); Clinton (1993 reception documented; flight counts 4/26/27 not reconciled; island contested, no document); Summers (1998 flight as Deputy Treasury Secretary); Richardson (new to the page: nine meetings after 2008, clemency approach to Crist, Crist denies); Gonzales and the DAG's 2008 "would not intervene"; Ruemmler, Burns, Holder, Garland.
+  - **Foreign:** Mandelson (withdrawn, arrested, bailed); Blair (Cabinet Office note plus the Rycroft memo as reported; PREM 49/3326 unread); Jagland (Økokrim suspect, immunity lifted); Brende; Lang; Lajčák; Barak (Lavrov email, Netanyahu's attack); Waheed; Tusk (his "recorded and filmed" claim unsupported). Killed: Macron, and Rubio's "love ya".
+  - **Robert Maxwell:** PREM 19/3492 (title only), Shamir at the funeral, Pergamon's Eastern-bloc leaders.
+  - **The Lavrov timeline** (Barak 2015, Jagland 2018, Lajčák 2018) is printed as a shared counterpart, not a chain.
+  - **Close:** most contact falls outside office; the consequences fell abroad; at home the acts were institutional; no document places a cabinet member in the crimes or acting at Epstein's request.
+- **Not named on purpose:** the eleven Norwegian ministers heard by the Storting; no survivor; the person a redacted "love ya" email points to. No subject-shielding lines (the CBS "no evidence Barrack participated" line and similar were left out).
+- **Corrected in place, ledger 2026-10-29:** VIII's cabinet map "Epstein contributed to Lutnick dinner 2018" (the dinner was 11 Dec 2017, and Epstein declined the table, EFTA02229607); XXI Burns "three meetings" (three scheduled, two acknowledged); XXI Clinton "Secret Service dismissals are public record" (the logs list no agent on some legs).
+- **The Cabinet Penetration Map (club and board layer) stays in VIII.** Section III links to it. Whether to fold it in is his call, and it still carries the unchecked Bondi "$25,000 … before she declined" line.
+- **Renumbering:**
+  - Done with the scratch tool `renum/rn.py`: placeholder tokens, so each numeral moves exactly once. Each surface was diff-reviewed.
+  - Surfaces: the report (h2s, anchors, contents, sidebar map, masthead groups, prose, xref-secs), i18n `report.h.*` and `report.sect.*` (`?v=7`), map sections (the 36 data-centre markers were tagged XX, the Calibration Index, and are now XXII, the Compute Substrate), corrections ledger rows, the concordance, stickers, the summary tour (26 entries), the reaches (renamed, plus a new reach III), the briefing film, and the cards.
+  - **Not renumbered:** CLAUDE.md's dated entries, which keep the numbering of their day. The corrections ledger's rows were shifted to current numbers, as on 22 Oct.
+- **Reach III** reads the cabinets as Epstein "working the doors" and the consequences falling abroad because "abroad the prosecutor is not the custodian of the archive". It asserts no act by any living person; LIVING_NAMES records how each appears.
+- **The briefing film gained part III** (Treasury building and the empty 1981 Oval Office; reach III's headline and one sentence).
+  - Its `spec/` masters were missing in this container. 50 of 52 matched `site/img/listen/` byte for byte and were copied. The seal clip and still were re-rendered from `seal_anim.py`, and their sha256s updated. The Treasury picture is the listen copy (its own sha256).
+- **Search** was made multi-word the same day (entry below), on `main` separately.
+- **Spider:** `www.tribunal-de-paris.justice.fr` registered as a decoy-200 ("Site en cours de maintenance | Justice.fr", 15,891 bytes), proven both ways.
+- Scale line 293 / 1,220 / 177. `build-transmissions.py` 404'd again; the reel is untouched.
+
 **REPORT SEARCH FINDS SEVERAL WORDS AT ONCE — 29 Oct 2026, live (`report-search.js?v=5`, main `560c5cc`).** Author: *"I want to be able to search multiple items at once - so Trump Nicolas ribis should come up in the same query"*.
 - **Before:** every word had to be in the same paragraph (AND), so "trump nicolas ribis" found nothing. No paragraph names all three, and the page spells him "Nicholas"/"Nick".
 - **Now:** any word matches (OR). Paragraphs holding every word come first, then fewer, under amber bands ("All 3 words", "2 of 3 words"…). The count line gives per-word paragraph counts.

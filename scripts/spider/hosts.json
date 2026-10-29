@@ -309,5 +309,11 @@
       "Privacy International's Media Service"
     ],
     "why": "Filing PDFs under /sites/default/files/ redirect to media.privacyinternational.org, a PeerTube JavaScript shell (about 835 characters of text) titled 'Privacy International's Media Service', with HTTP 200, so a missing document entered the ledger as a success. Registered so that shell is a null (seen 24 Oct 2026, XVI international verification)."
+  },
+  "www.tribunal-de-paris.justice.fr": {
+    "why": "The Paris court's site answers document paths (seen on the financial prosecutor's 16 Feb 2026 release, a PDF) and its own robots.txt with a 15,891-byte 'Site en cours de maintenance | Justice.fr' page and HTTP 200; the ledger had recorded it ok. Registered so the maintenance page is a null, not the document (seen 29 Oct 2026, cabinets research beat C).",
+    "decoy_titles": [
+      "Site en cours de maintenance | Justice.fr"
+    ]
   }
 }
