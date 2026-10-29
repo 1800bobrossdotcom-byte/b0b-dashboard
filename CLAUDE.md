@@ -234,6 +234,18 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**THE HOUSE JUDICIARY MINORITY REPORT IS IN II's TRUMP NODE; TRUMP/ZAMPOLLI DIG HELD — 29 Oct 2026, live. `research/ZAMPOLLI.md` + `ZAMPOLLI-{A-STAFF-REPORT,B-RECORD,C-TRUMP-RECORD}.md` (245 quotes, all vq OK).** Author: *"Yes place report and dig further on Trump and Zampolli with a speculative full court press in doc search and findings"*.
+- **On the page:** a new h4 after "the named accounts", **"Labeled/contested - the House Judiciary minority staff report (26 Oct 2026)"**. Its 20 quotes all pass vq.
+  - The report is documented; every accusation in it is attributed, and it is not a finding of the committee or any court.
+  - **The count is read against the report's own text:** three of the 11 "have not come forward as survivors"; one makes no claim of Trump misconduct; one is a tip the committee "has not been able to independently verify"; the only new account rests on staff discussions alone.
+  - **The DOJ transcript context it omits:** Blanche raised the witness himself; the steering came while Maxwell was disputing that witness's testimony about Epstein, not Trump; on day one Maxwell said "The President was never inappropriate with anybody". Her Oversight deposition was held 9 Feb 2026, where she took the Fifth.
+  - **Set beside it:** Giuffre's 2016 deposition line, "Donald Trump never flirted with me", and Epstein's 2011 emails, "zampoli is trouble . Lots" and "He sells stories to the press" (EFTA01836539, EFTA02535652).
+  - **The answers:** the White House, a DOJ spokesperson (second-hand) and Zampolli. His envoy status was "terminated" on 15 Oct.
+  - Also fixed: the stale "now Acting Attorney General" line (Blanche was confirmed in July).
+- **Survivors:** no survivor is named in the new block beyond the three the node already named.
+- **"Speculative":** run as research leads with prove/kill tests (table in `ZAMPOLLI.md`); none is above contested. **Reach II is unchanged.** Whether it carries these as questions is his call; it cannot assert guilt (living-person floor).
+- **Still on file, not edited:** 11 Trump-node page errors in `ZAMPOLLI-C-TRUMP-RECORD.md` §5. Among them: 3.5M pages unattributed; the date of the "in violation" concession; WSJ "refiled" was an amended complaint; the "dog" quote cut short; Johnson's filing history; ≥4 of the flights had Maxwell aboard.
+
 **SCREENSHOT OF THREE X POSTS — graded 29 Oct 2026, HELD. `research/SCREENSHOT-2026-10-29-HELD.md` (7 quotes, vq OK).** Pasted with no instruction.
 - **(1) "11 survivors … 5 named Trump":** this matches the **House Judiciary Democrats' staff report of 26 Oct 2026**, "'We Have Certain Things in Common, Jeffrey'…".
   - It covers 11 women, five of whom accuse Trump of rape or sexual assault in Epstein's company or presence. It says Trump and Paolo Zampolli "may have been co-conspirators" and asks for a special counsel.
