@@ -1,13 +1,13 @@
 {
-  "generated": "2026-10-29T20:37:47.536Z",
+  "generated": "2026-10-29T21:04:42.613Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "e266aec565d43002b3ab90fd104d7a4da90314a021708cecd0778f318600ee88",
+  "fullFileHash": "a25e05b9324055404bb2ff323d743e5c0b2ddfb22cd42b805ab6247fbea90afb",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "b91fb9513e50cf1c3d41a05c8402e636381075c8b4a3d842b471fa5558120a3b",
+      "hash": "5a85cda3a711a06f0bb48f7742fea430b96c9f5a1ed2ae28bdd07418905deb80",
       "length": 45004
     },
     {
@@ -152,8 +152,8 @@
     },
     {
       "id": "ii-the-trump-node-documented-proximity-labeled",
-      "hash": "a3c87dd3e41d9cfca14db02482e3e82305fe3eeb260dd3ca62e45b8273624442",
-      "length": 29216
+      "hash": "79cf1d1c78e2567ed0a054cf4ca473207e91d343f156d9f39da1a0e22cffe113",
+      "length": 31081
     },
     {
       "id": "iv-alan-dershowitz-the-legal-shield-architecture",
@@ -3094,9 +3094,9 @@
     },
     {
       "index": 255,
-      "hash": "ec696abd3b994dde4018f3547c8bbffeb490ac591643aa807f18783b8f286b82",
+      "hash": "d67c8169ede701b19d92beaede6ccffac9cb69a1abdcc46e938de60229677730",
       "preview": "The WSJ (Jul 2025) reported a typewritten note bearing Trump&rsquo;s name inside...",
-      "length": 363
+      "length": 588
     },
     {
       "index": 256,
@@ -3106,9 +3106,9 @@
     },
     {
       "index": 257,
-      "hash": "b947f92e69cf06bd53c2a1c1ab10f89b0897de10394a08778b6617930f89e73f",
+      "hash": "b52991cc52af68aae29b7fbe3b028b793536c990de7e52638948bacb2ffa8250",
       "preview": "Alexander Acosta, who cut Epstein&rsquo;s 2007 non-prosecution deal, was Trump&r...",
-      "length": 1227
+      "length": 1516
     },
     {
       "index": 258,
@@ -3118,21 +3118,21 @@
     },
     {
       "index": 259,
-      "hash": "756488c11858d7221ee948ed91052524cf69b79933b4260540a6f97bd236fd83",
+      "hash": "2ec32f717d6fc154e6830a4b9203b9a3972ff6817692c718b9d79983219cb32e",
       "preview": "Bondi has since been removed as Attorney General amid the files fight, with Todd...",
-      "length": 3289
+      "length": 3566
     },
     {
       "index": 260,
-      "hash": "0e8b64116e227b8990c637a5a9873e28305559a7f96934928b94ac5858e3f1e2",
+      "hash": "a17ccfdd1f21f4ec0f7b9dfde8ddbed8c9b9072aa1616f594873773cfa099e35",
       "preview": "The honest verdict. The record establishes a close 15-year friendship, documente...",
-      "length": 569
+      "length": 601
     },
     {
       "index": 261,
-      "hash": "f6d2b62a82a50bb1049ed3987d95d212b753017c63b5e8a781866319f0a4b916",
+      "hash": "f6c412f03791eb1717726bf649f067afb0f6aacaa0769e9375f2337060ba73a7",
       "preview": "What the record contains, in the principal&rsquo;s own hand. The correspondence ...",
-      "length": 993
+      "length": 1076
     },
     {
       "index": 262,
@@ -3202,15 +3202,15 @@
     },
     {
       "index": 273,
-      "hash": "c6ef338ec7d9e2263f76fdc07edfa2a9aeb228efa12de25736cb65cc7f78cef6",
+      "hash": "56dcc2c0f76a94ffa45d0f9986221d797e1cc7344488d37e2202c1d4417040de",
       "preview": "The structure, as of August 2026 - the switch is no longer merely held. A confli...",
-      "length": 571
+      "length": 604
     },
     {
       "index": 274,
-      "hash": "b9419cbac6b4713569a5ceb24b7d140515c20f20d1cb8dd94d627de04b103f57",
+      "hash": "7fd1371e9c2878f77ae0b60b36cddd88b36610ccf3b3c1c9340afb859481ba03",
       "preview": "None of that requires a single allegation about anyone&rsquo;s personal conduct....",
-      "length": 900
+      "length": 1166
     },
     {
       "index": 275,

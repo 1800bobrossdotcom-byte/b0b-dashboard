@@ -244,7 +244,17 @@ than once.
   - Also fixed: the stale "now Acting Attorney General" line (Blanche was confirmed in July).
 - **Survivors:** no survivor is named in the new block beyond the three the node already named.
 - **"Speculative":** run as research leads with prove/kill tests (table in `ZAMPOLLI.md`); none is above contested. **Reach II is unchanged.** Whether it carries these as questions is his call; it cannot assert guilt (living-person floor).
-- **Still on file, not edited:** 11 Trump-node page errors in `ZAMPOLLI-C-TRUMP-RECORD.md` §5. Among them: 3.5M pages unattributed; the date of the "in violation" concession; WSJ "refiled" was an amended complaint; the "dog" quote cut short; Johnson's filing history; ≥4 of the flights had Maxwell aboard.
+- **Follow-up the same evening, live** (author: *"Continue"*, to my two offers). Nine new quotes, all vq OK.
+  - **Trump-node errors fixed in place** (from `ZAMPOLLI-C-TRUMP-RECORD.md` §5):
+    - the flights line now quotes the SDNY prosecutor's 2020 email, "at least four flights on which Maxwell was also present" (EFTA00028716);
+    - the 2011 "dog" email now carries its tail, "police chief. etc. im 75 % there" (EFTA00654425);
+    - "Katie Johnson" now has the full 2016 filing history and the promoter, Lubow ("does not disprove that Johnson is a real person");
+    - WSJ is now an amended complaint, with the 10 June motion to dismiss with prejudice and the 5 Aug discovery stay;
+    - the page count is "more than 3 million pages" (Blanche), about 3.5M after March;
+    - "in violation" is now the 25 June opinion recording the AG's concession by non-response, not a merits finding (×3);
+    - the 28 Oct D.C. Cir. stay denial is attributed to Raw Story.
+  - **Reach II gained a paragraph of questions:** the flights email against "the review over", the withheld pages, "Let's not talk about individuals", and the minority's "cover-up" against the White House's denial. It asserts no act; LIVING_NAMES records how Trump and the interviewing official appear. The body is 338 words (limit 340).
+  - **Not done:** the Giuffre deposition line stays in the new block rather than in caveat (1); the S.Res. and "torture video" items were not re-verified.
 
 **SCREENSHOT OF THREE X POSTS — graded 29 Oct 2026, HELD. `research/SCREENSHOT-2026-10-29-HELD.md` (7 quotes, vq OK).** Pasted with no instruction.
 - **(1) "11 survivors … 5 named Trump":** this matches the **House Judiciary Democrats' staff report of 26 Oct 2026**, "'We Have Certain Things in Common, Jeffrey'…".
