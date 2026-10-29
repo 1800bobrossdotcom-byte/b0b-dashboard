@@ -53,6 +53,8 @@
     'display:block;margin-bottom:0.2rem;opacity:0.75;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}',
     '.b0b-hit-text{color:var(--muted-2);font-size:0.68rem;line-height:1.45;display:block}',
     '.b0b-hit-text mark{background:rgba(255,204,0,0.25);color:var(--amber);padding:0 1px}',
+    '.b0b-search-group{padding:0.45rem 1.2rem 0.25rem;color:var(--amber);font-size:0.58rem;letter-spacing:0.6px;',
+    'text-transform:uppercase;border-bottom:1px solid var(--surface-3)}',
     '.b0b-search-none{padding:0.8rem 1.2rem;color:var(--muted-3);font-size:0.68rem}',
     /* the live highlight dropped into the document itself */
     'mark.b0b-search-mark{background:var(--amber);color:var(--on-accent);padding:0 2px;border-radius:2px}',
@@ -62,14 +64,17 @@
   document.head.appendChild(css);
 
   /* ---------- query ----------
-     More than one word. Every term has to match the same block (AND), because a
-     query that widens as you add words cannot narrow anything in a document this
-     long. Quoted phrases match as one string; a leading minus excludes the block.
-       epstein island        both words, same paragraph
-       "little st. james"    one string
-       maxwell -ghislaine    excludes
-     Positive terms shorter than MIN_CHARS are ignored rather than matching
-     everything, so `epstein i` behaves as `epstein` until the second word lands. */
+     More than one word finds every one of them at once (OR). Paragraphs that hold
+     all the words are listed first, then those holding fewer, so
+       trump nicholas ribis   every paragraph naming any of the three, the ones
+                              naming all three on top
+       "little st. james"     one string
+       maxwell -ghislaine     excludes any paragraph containing the second
+     A word found nowhere in the report is retried against the report's own
+     vocabulary at one letter's difference (nicolas -> nicholas), and the count
+     line says so. Positive terms shorter than MIN_CHARS are ignored rather than
+     matching everything, so `epstein i` behaves as `epstein` until the next
+     letter lands. */
   function parseQuery(raw) {
     var s = (raw || '').toLowerCase();
     var terms = [];
@@ -130,6 +135,41 @@
       var s = sectionOf(el);
       out.push({ el: el, text: text, lower: text.toLowerCase(), sect: s.title, h2: s.h2 });
     });
+    return out;
+  }
+
+  /* ---------- near spellings ----------
+     Only for a single word that occurs nowhere: its alternates are words in the
+     report one insertion, deletion or substitution away, with the same first
+     letter. Built once per index. */
+  var vocab = null;
+  function buildVocab() {
+    var v = {};
+    for (var i = 0; i < index.length; i++) {
+      var w = index[i].lower.match(/[a-z\u00c0-\u024f]{4,}/g);
+      if (w) for (var k = 0; k < w.length; k++) v[w[k]] = 1;
+    }
+    return Object.keys(v);
+  }
+  function oneEdit(a, b) {
+    var la = a.length, lb = b.length;
+    if (Math.abs(la - lb) > 1 || a === b) return false;
+    var i = 0, j = 0, diff = 0;
+    while (i < la && j < lb) {
+      if (a.charAt(i) === b.charAt(j)) { i++; j++; continue; }
+      if (++diff > 1) return false;
+      if (la > lb) i++; else if (lb > la) j++; else { i++; j++; }
+    }
+    return diff + (la - i) + (lb - j) <= 1;
+  }
+  function nearWords(term) {
+    if (term.length < 4 || /[^a-z\u00c0-\u024f]/.test(term)) return [];
+    if (!vocab) vocab = buildVocab();
+    var out = [];
+    for (var i = 0; i < vocab.length && out.length < 4; i++) {
+      var w = vocab[i];
+      if (w.charAt(0) === term.charAt(0) && oneEdit(term, w)) out.push(w);
+    }
     return out;
   }
 
@@ -204,7 +244,7 @@
       catch (e) { target.scrollIntoView(); }
     }
 
-    Array.prototype.forEach.call(results.children, function (c, ci) {
+    Array.prototype.forEach.call(results.querySelectorAll('.b0b-hit'), function (c, ci) {
       c.classList.toggle('current', ci === current);
     });
     paintCount();
@@ -226,8 +266,9 @@
     return span;
   }
 
+  var termNote = '';
   function paintCount() {
-    if (!matches.length) { count.textContent = ''; return; }
+    if (!matches.length) { count.textContent = termNote; return; }
     var sects = {};
     matches.forEach(function (m) { sects[m.sect] = 1; });
     var nSect = Object.keys(sects).length;
@@ -235,11 +276,18 @@
               ' in ' + nSect + (nSect === 1 ? ' section' : ' sections');
     if (current >= 0) txt = (current + 1) + ' of ' + txt;
     if (matches.length > MAX_RESULTS) txt += ' · first ' + MAX_RESULTS + ' listed';
-    count.textContent = txt;
+    count.textContent = txt + (termNote ? ' · ' + termNote : '');
+  }
+
+  function groupLabel(n, of) {
+    var d = document.createElement('div');
+    d.className = 'b0b-search-group';
+    d.textContent = n === of ? (of === 2 ? 'Both words' : 'All ' + of + ' words') : n + ' of ' + of + ' words';
+    return d;
   }
 
   function run(q) {
-    matches = []; current = -1;
+    matches = []; current = -1; termNote = '';
     results.innerHTML = '';
     clearMark();
 
@@ -252,31 +300,58 @@
       count.textContent = '';
       return;
     }
-    if (!index) index = build();
+    if (!index) { index = build(); vocab = null; }
 
+    // each term carries the strings that count for it: itself, or its near spellings
+    var groups = t.pos.map(function (term) { return { term: term, alts: [term], n: 0 }; });
+    groups.forEach(function (g) {
+      for (var i = 0; i < index.length; i++) if (index[i].lower.indexOf(g.term) !== -1) return;
+      var near = nearWords(g.term);
+      if (near.length) g.alts = near;
+    });
+
+    var blocks = [];
     for (var i = 0; i < index.length; i++) {
       var it = index[i], k, ok = true;
-      for (k = 0; k < t.pos.length && ok; k++) if (it.lower.indexOf(t.pos[k]) === -1) ok = false;
       for (k = 0; k < t.neg.length && ok; k++) if (it.lower.indexOf(t.neg[k]) !== -1) ok = false;
       if (!ok) continue;
-      // Every occurrence of every term, in reading order, so the ▲▼ buttons
-      // still step hit by hit through a block that satisfied the whole query.
-      var hits = [];
-      for (k = 0; k < t.pos.length; k++) {
-        var term = t.pos[k], from = 0, at;
-        while ((at = it.lower.indexOf(term, from)) !== -1) {
-          hits.push({ start: at, len: term.length });
-          from = at + term.length;
+      var hits = [], score = 0;
+      for (k = 0; k < groups.length; k++) {
+        var found = false;
+        for (var a = 0; a < groups[k].alts.length; a++) {
+          var term = groups[k].alts[a], from = 0, at;
+          while ((at = it.lower.indexOf(term, from)) !== -1) {
+            hits.push({ start: at, len: term.length });
+            from = at + term.length;
+            found = true;
+          }
         }
+        if (found) { score++; groups[k].n++; }
       }
+      if (!score) continue;
       hits.sort(function (a, b) { return a.start - b.start || b.len - a.len; });
-      for (k = 0; k < hits.length; k++) {
-        // overlapping terms can land on the same run; report it once
-        if (k && hits[k].start === hits[k - 1].start && hits[k].len === hits[k - 1].len) continue;
-        matches.push({ el: it.el, h2: it.h2, sect: it.sect, text: it.text,
-                       start: hits[k].start, len: hits[k].len });
-      }
+      blocks.push({ it: it, hits: hits, score: score, order: i });
     }
+    // most words matched first; reading order within each band
+    blocks.sort(function (a, b) { return b.score - a.score || a.order - b.order; });
+
+    if (groups.length > 1 || groups[0].alts[0] !== groups[0].term) {
+      termNote = groups.map(function (g) {
+        var name = g.alts[0] === g.term ? g.term : g.term + ' → ' + g.alts.join('/');
+        return name + ' ' + g.n;
+      }).join(' · ');
+    }
+
+    var bandStart = [];
+    blocks.forEach(function (b) {
+      bandStart.push({ at: matches.length, score: b.score });
+      for (var k = 0; k < b.hits.length; k++) {
+        // overlapping terms can land on the same run; report it once
+        if (k && b.hits[k].start === b.hits[k - 1].start && b.hits[k].len === b.hits[k - 1].len) continue;
+        matches.push({ el: b.it.el, h2: b.it.h2, sect: b.it.sect, text: b.it.text,
+                       start: b.hits[k].start, len: b.hits[k].len, score: b.score });
+      }
+    });
 
     results.classList.add('active');
     if (sidebarNav) sidebarNav.style.display = 'none';
@@ -284,15 +359,18 @@
     if (!matches.length) {
       var none = document.createElement('div');
       none.className = 'b0b-search-none';
-      none.textContent = t.pos.length > 1
-        ? 'No block contains all of: ' + t.pos.join(', ')
-        : 'No match for “' + q + '”';
+      none.textContent = 'No match for “' + q + '”';
       results.appendChild(none);
-      count.textContent = '';
+      count.textContent = termNote;
       return;
     }
 
+    var lastScore = -1;
     matches.slice(0, MAX_RESULTS).forEach(function (m, mi) {
+      if (groups.length > 1 && m.score !== lastScore) {
+        results.appendChild(groupLabel(m.score, groups.length));
+        lastScore = m.score;
+      }
       var row = document.createElement('div');
       row.className = 'b0b-hit';
       var s = document.createElement('span');
@@ -329,12 +407,12 @@
       '<div id="b0b-search-row">' +
         '<input id="b0b-search-input" type="search" autocomplete="off" spellcheck="false" ' +
                'placeholder="Search the report  /" aria-label="Search the report" ' +
-               'title="Multiple words: every one must appear in the same paragraph. ' +
+               'title="Several words find all of them at once; paragraphs holding every word come first. ' +
                '&quot;quoted phrase&quot; matches as one string. -word excludes.">' +
         '<button id="b0b-search-prev" title="Previous match" aria-label="Previous match">&#9650;</button>' +
         '<button id="b0b-search-next" title="Next match" aria-label="Next match">&#9660;</button>' +
       '</div><div id="b0b-search-count" aria-live="polite"></div>' +
-      '<div id="b0b-search-hint">all words must match<br>"phrase" · -exclude</div>';
+      '<div id="b0b-search-hint">several words: any of them, all-words first<br>"phrase" · -exclude</div>';
 
     if (buttons && buttons.parentNode) buttons.parentNode.insertBefore(wrap, buttons.nextSibling);
     else sidebar.insertBefore(wrap, sidebar.firstChild);
