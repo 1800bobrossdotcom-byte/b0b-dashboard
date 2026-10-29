@@ -234,6 +234,19 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**EPSTEIN IN OTHER NATIONS' FOI AND RECORDS SYSTEMS — swept 29 Oct 2026, HELD. `research/FOI-EPSTEIN-FOREIGN.md` (18 quotes, all vq OK).** Author: *"Look across other nation state foia databases for epstein mentions"*. Method: `foi find` across the registry, then targeted queries.
+- **UK:** the richest record, and almost all of it refusals or missing records. In 88 written questions, the Home Office **neither confirms nor denies** a request for legal assistance to the US (24 June, 23 Oct 2026). The page relays the Washington Post's claim that Britain's request was "outstanding and unanswered"; set the government's answer beside it if that line is touched. On MI5 and Russia: "not to comment". The NPCC has a national coordination group. No public inquiry is "being actively considered".
+- **UK records not kept:** No 10/No 11 visits and Treasury visits "not retained"; Stansted passenger data kept ≤10 years; DBT's search found no records.
+- **UK, lead:** two Blair-era No 10 files are open at TNA, **PREM 49/3326** (digitised; "Meetings and correspondence with businessmen", 2002–03) and **PREM 49/2771**. Neither catalogue entry names Epstein, so a name search returns 0. **The 11 Mar 2026 Humble Address return** (the Mandelson papers, 147 pp.) carries a Cabinet Office note of records "which relate to a Tony Blair meeting with Epstein that was facilitated by Mandelson". The meeting is attributed to that note until the file is read. Both men are living, and police investigations are live per government answers.
+- **Canada:** two access-to-information requests.
+  - CBSA A-2026-06709 asked for records of Epstein's "visit to Vancouver, Canada, in 2014"; all exempted. The page has no Vancouver visit, and it is not established.
+  - Justice Canada X-A-2026-00002 (documents containing "Jeffrey Epstein"/"JEE", 2010–2026) was disclosed in part. Asking informally for a copy is his call.
+- **Nulls and refusals:**
+  - no results: Israel's FOI movement, Japan, French military archives;
+  - refused or robots: AU Right to Know (403), AskTheEU, Madada, Archivportal-D, **Norway's eInnsyn**.
+  - NZ hits are all RNZ news, which has opted out, so nothing from them is cited.
+- **Not on the page.** His calls: read PREM 49/3326, the Canada request, and Norway via the Storting API.
+
 **THE FLYING STARS OF BROOKLYN, NY, "MY GOD HAS A TELEPHONE", ON THE SIGNAL BAR — 29 Oct 2026, live.** Author: *"Add my God Has A Telephone by the flying stars of brooklyn"*.
 - The track is `iEBw7tq4RfY`, on Colemine Records, the label's own channel (identified by YouTube oEmbed; the id comes from Flea Market Funk's 2017 post). It is Aaron Frazer's gospel 45 under that name.
 - First placed 18th of 19 (before Faith No More). Then the author wrote *"Add as second song"*, so it is **now song two**, after Overseer's "Heligoland" and before Imogen Heap's "Headlock" (third). The bar still ends on Faith No More. `LS_KEY` is `b0b_signal_v19`, and `signal-bar.js?v=26` is on report, home and both maps.
