@@ -234,6 +234,17 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**SCREENSHOT OF THREE X POSTS — graded 29 Oct 2026, HELD. `research/SCREENSHOT-2026-10-29-HELD.md` (7 quotes, vq OK).** Pasted with no instruction.
+- **(1) "11 survivors … 5 named Trump":** this matches the **House Judiciary Democrats' staff report of 26 Oct 2026**, "'We Have Certain Things in Common, Jeffrey'…".
+  - It covers 11 women, five of whom accuse Trump of rape or sexual assault in Epstein's company or presence. It says Trump and Paolo Zampolli "may have been co-conspirators" and asks for a special counsel.
+  - These are the minority staff's conclusions: not the committee's, not a court's, and no one is charged.
+  - The White House: "None of these allegations are true."
+  - The report PDF was identified, not opened (stop rule b). No survivor is named in the file.
+  - At most it could go on the page as a dated act of the minority with the denial beside it. That is his call (living-person floor).
+  - The Blanche/Maxwell-interview point is a lead: read the transcript first.
+- **(2) Operation Dragon Covenant:** documented (army.mil, 26 Oct). Phase II was a test of large-scale battlefield temporary burial at Fort Bragg, 20–21 Oct, with simulated remains. It is the first such exercise at scale since the Korean War; Phase III comes next spring. It shows a capability, not intent about any particular war. On the page 0 times.
+- **(3) WIRED/America PAC:** not read (null).
+
 **EPSTEIN IN OTHER NATIONS' FOI AND RECORDS SYSTEMS — swept 29 Oct 2026, HELD. `research/FOI-EPSTEIN-FOREIGN.md` (18 quotes, all vq OK).** Author: *"Look across other nation state foia databases for epstein mentions"*. Method: `foi find` across the registry, then targeted queries.
 - **UK:** the richest record, and almost all of it refusals or missing records. In 88 written questions, the Home Office **neither confirms nor denies** a request for legal assistance to the US (24 June, 23 Oct 2026). The page relays the Washington Post's claim that Britain's request was "outstanding and unanswered"; set the government's answer beside it if that line is touched. On MI5 and Russia: "not to comment". The NPCC has a national coordination group. No public inquiry is "being actively considered".
 - **UK records not kept:** No 10/No 11 visits and Treasury visits "not retained"; Stansted passenger data kept ≤10 years; DBT's search found no records.
