@@ -234,6 +234,14 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**REPORT SEARCH FINDS SEVERAL WORDS AT ONCE — 29 Oct 2026, live (`report-search.js?v=5`, main `560c5cc`).** Author: *"I want to be able to search multiple items at once - so Trump Nicolas ribis should come up in the same query"*.
+- **Before:** every word had to be in the same paragraph (AND), so "trump nicolas ribis" found nothing. No paragraph names all three, and the page spells him "Nicholas"/"Nick".
+- **Now:** any word matches (OR). Paragraphs holding every word come first, then fewer, under amber bands ("All 3 words", "2 of 3 words"…). The count line gives per-word paragraph counts.
+- **Near spellings:** a word found nowhere is retried against the report's own vocabulary at one edit with the same first letter, and the count line shows it (`nicolas → nicholas/nicolás 3`). Quoted phrases and `-exclude` are unchanged.
+- **Deployed alone, from a worktree on `origin/main`.** The branch carries the unfinished III→XXVI renumbering (`c6bba9e`), which must not go live before Section III exists.
+- **The map's search is still AND** (`map.html`/`map-gl.js`); whether it should match is his call.
+- *Trap repeated:* `pkill -f "PORT=8941"` killed the shell (exit 144). Kill by PID.
+
 **THE HOUSE JUDICIARY MINORITY REPORT IS IN II's TRUMP NODE; TRUMP/ZAMPOLLI DIG HELD — 29 Oct 2026, live. `research/ZAMPOLLI.md` + `ZAMPOLLI-{A-STAFF-REPORT,B-RECORD,C-TRUMP-RECORD}.md` (245 quotes, all vq OK).** Author: *"Yes place report and dig further on Trump and Zampolli with a speculative full court press in doc search and findings"*.
 - **On the page:** a new h4 after "the named accounts", **"Labeled/contested - the House Judiciary minority staff report (26 Oct 2026)"**. Its 20 quotes all pass vq.
   - The report is documented; every accusation in it is attributed, and it is not a finding of the committee or any court.
