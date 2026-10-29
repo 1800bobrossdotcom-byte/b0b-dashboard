@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-29T21:04:41Z",
+ "generated": "2026-10-29T22:29:14Z",
  "count": 102,
  "by_type": {
   "method": 23,
@@ -70,8 +70,8 @@
    "quote": "So a phone number in a directory becomes, one join later, a typed edge asserting that a named person is significant to Jeffrey Epstein’s book - with no court, no filing, no allegation and no human being having to repeat the claim for it to spread. … The label travels and the definition stays behind.",
    "tier": "rule",
    "anchor": "iii-the-black-book-as-a-machine-readable-claim-the-naming-error-at-database-scale",
-   "section": "III",
-   "section_title": "III. Seam Analysis, Network Topology & Linguistic Forensics",
+   "section": "IV",
+   "section_title": "IV. Seam Analysis, Network Topology & Linguistic Forensics",
    "subsection": "The black book as a machine-readable claim - the naming error at database scale"
   },
   {
@@ -158,8 +158,8 @@
    "quote": "Its title field reads je_1st_session, and its description reads “This video is about je_1st_session.” Its clock says it was created 30 April 2019 at 12:29:50 and last written at 14:39:48 - one sitting, two hours and ten minutes, sixty-seven days before Epstein was arrested. DOJ released session one.",
    "tier": "documented",
    "anchor": "iv-the-recordings-epstein-on-tape-and-the-file",
-   "section": "IV",
-   "section_title": "IV. Blowback - Where the Surviving Networks Are Now",
+   "section": "V",
+   "section_title": "V. Blowback - Where the Surviving Networks Are Now",
    "subsection": "The recordings - Epstein on tape, and the file that names itself session one"
   },
   {
@@ -169,8 +169,8 @@
    "quote": "Documented suspicion, 1949. British Foreign Office files recorded Maxwell as \"a thoroughly bad character and almost certainly financed by Russia\" - suspicion of double- or triple-agent activity, from the start of his business career. … no government has ever confirmed recruitment.",
    "tier": "documented",
    "anchor": "v-the-intelligence-question-what-the-record",
-   "section": "V",
-   "section_title": "V. The Maxwell Template - Father, Daughter, and the Surviving Node",
+   "section": "VI",
+   "section_title": "VI. The Maxwell Template - Father, Daughter, and the Surviving Node",
    "subsection": "The intelligence question - what the record actually holds"
   },
   {
@@ -191,8 +191,8 @@
    "quote": "This is the third time in this report that an institution runs a check on Jeffrey Epstein and gets a clear result - and the only time one of them acts. … A retail DNA vendor enforced a rule that a Wall Street broker and several of the largest banks in the country did not.",
    "tier": "documented",
    "anchor": "vi-the-dna-kits-bought-in-bulk-under-an-alias",
-   "section": "VI",
-   "section_title": "VI. The Science Cover - Patronage, Eugenics, and the Seeding Ideology",
+   "section": "VII",
+   "section_title": "VII. The Science Cover - Patronage, Eugenics, and the Seeding Ideology",
    "subsection": "The DNA kits - bought in bulk, under an alias, and given away"
   },
   {
@@ -202,8 +202,8 @@
    "quote": "Nothing in the released record shows Epstein receiving, accessing, or controlling a single genetic result. Buying someone a testing kit does not hand you their genome - the sample goes to the laboratory and the data goes to the recipient’s own account - and no document places him inside those accounts. Sample acquisition is documented. Data acquisition is not.",
    "tier": "not established",
    "anchor": "vi-the-dna-kits-bought-in-bulk-under-an-alias",
-   "section": "VI",
-   "section_title": "VI. The Science Cover - Patronage, Eugenics, and the Seeding Ideology",
+   "section": "VII",
+   "section_title": "VII. The Science Cover - Patronage, Eugenics, and the Seeding Ideology",
    "subsection": "The DNA kits - bought in bulk, under an alias, and given away"
   },
   {
@@ -224,8 +224,8 @@
    "quote": "The famous Shamir line - \"He has done more for Israel than can today be told\" - cannot be verified verbatim: two wordings circulate, none traced to a primary transcript; the contemporaneous JTA funeral dispatch contains no such quote.",
    "tier": "not established",
    "anchor": "v-the-death-and-the-funeral",
-   "section": "V",
-   "section_title": "V. The Maxwell Template - Father, Daughter, and the Surviving Node",
+   "section": "VI",
+   "section_title": "VI. The Maxwell Template - Father, Daughter, and the Surviving Node",
    "subsection": "The death and the funeral"
   },
   {
@@ -235,8 +235,8 @@
    "quote": "There was no cloning lab, no genetics lab, no “baby farm,” no breeding facility, no hidden children - at Zorro Ranch or anywhere. Fact-checkers found no forensic basis; the Times itself said the scheme was never acted on.",
    "tier": "unsupported",
    "anchor": "vi-the-honest-limit-what-did-not-exist",
-   "section": "VI",
-   "section_title": "VI. The Science Cover - Patronage, Eugenics, and the Seeding Ideology",
+   "section": "VII",
+   "section_title": "VII. The Science Cover - Patronage, Eugenics, and the Seeding Ideology",
    "subsection": "The honest limit - what did NOT exist"
   },
   {
@@ -257,8 +257,8 @@
    "quote": "What would close the gap for both: declassified service files naming a handler and taskings. For Maxwell as for Epstein (Section II), that document is not public. Pattern documented; recruitment unproven; the report holds that line.",
    "tier": "open",
    "anchor": "v-why-the-template-matters",
-   "section": "V",
-   "section_title": "V. The Maxwell Template - Father, Daughter, and the Surviving Node",
+   "section": "VI",
+   "section_title": "VI. The Maxwell Template - Father, Daughter, and the Surviving Node",
    "subsection": "Why the template matters"
   },
   {
@@ -276,11 +276,11 @@
    "id": "a-maxwell-conduit",
    "type": "question",
    "prompt": "Did Ghislaine Maxwell carry her father's world into Epstein's operation?",
-   "quote": "The labeled hypothesis: that she carried her father's world - the relationship map, the tradecraft-adjacent habits, the multi-service social terrain - into Epstein's operation, making Epstein the second generation of the same architecture. The endpoints are documented; the conduit mechanism is not. This is the single most consequential unproven claim in Sections II-V, and it stays labeled.",
+   "quote": "The labeled hypothesis: that she carried her father's world - the relationship map, the tradecraft-adjacent habits, the multi-service social terrain - into Epstein's operation, making Epstein the second generation of the same architecture. The endpoints are documented; the conduit mechanism is not. This is the single most consequential unproven claim in Sections II-VI, and it stays labeled.",
    "tier": "open",
    "anchor": "v-the-hand-off-and-its-honest-limits",
-   "section": "V",
-   "section_title": "V. The Maxwell Template - Father, Daughter, and the Surviving Node",
+   "section": "VI",
+   "section_title": "VI. The Maxwell Template - Father, Daughter, and the Surviving Node",
    "subsection": "The hand-off - and its honest limits"
   },
   {
@@ -290,8 +290,8 @@
    "quote": "… It is not proof of the offline layer's contents - handlers, tasking, blackmail product - which remain the labeled hypothesis. The evidence establishes the machine and its discipline; it does not, and from email alone cannot, establish the mission.",
    "tier": "open",
    "anchor": "iii-convergence",
-   "section": "III",
-   "section_title": "III. Seam Analysis, Network Topology & Linguistic Forensics",
+   "section": "IV",
+   "section_title": "IV. Seam Analysis, Network Topology & Linguistic Forensics",
    "subsection": "Convergence"
   },
   {
@@ -305,8 +305,8 @@
     "Southern Trust Company",
     "Carbyne"
    ],
-   "section": "IV",
-   "section_title": "IV. Blowback - Where the Surviving Networks Are Now",
+   "section": "V",
+   "section_title": "V. Blowback - Where the Surviving Networks Are Now",
    "subsection": "The Carbyne channel - the money, documented in primary email (Branch A, upgraded)"
   },
   {
@@ -346,8 +346,8 @@
    "quote": "In March 1939, the BIS transferred 23 tons of gold from Czechoslovakia's national reserves to Nazi Germany - after the German occupation of Czechoslovakia. The BIS's own historians call this \"the most controversial action ever taken by the BIS.\"",
    "tier": "documented",
    "anchor": "vii-the-bank-for-international-settlements-bis-the",
-   "section": "VII",
-   "section_title": "VII. The Control Architecture - Structures of Long-Lead Dominion",
+   "section": "VIII",
+   "section_title": "VIII. The Control Architecture - Structures of Long-Lead Dominion",
    "subsection": "The Bank for International Settlements (BIS) - The Central Bank of Central Banks"
   },
   {
@@ -361,8 +361,8 @@
     "CIA",
     "Lockheed"
    ],
-   "section": "VII",
-   "section_title": "VII. The Control Architecture - Structures of Long-Lead Dominion",
+   "section": "VIII",
+   "section_title": "VIII. The Control Architecture - Structures of Long-Lead Dominion",
    "subsection": "Lockheed - the private firm older than the secret state, that built its air force"
   },
   {
@@ -372,8 +372,8 @@
    "quote": "The other half of the record is the Lockheed bribery scandals (exposed by the Church Subcommittee on Multinational Corporations, 1975–76): at least ~$22M in bribes to foreign officials across Indonesia, Italy, Japan, the Netherlands, Saudi Arabia, and West Germany to sell aircraft. … The scandal was consequential enough to write a statute: the Foreign Corrupt Practices Act (signed Dec 19 1977) is directly traceable to this SEC/Church exposure.",
    "tier": "documented",
    "anchor": "vii-lockheed-the-private-firm-older-than-the",
-   "section": "VII",
-   "section_title": "VII. The Control Architecture - Structures of Long-Lead Dominion",
+   "section": "VIII",
+   "section_title": "VIII. The Control Architecture - Structures of Long-Lead Dominion",
    "subsection": "Lockheed - the private firm older than the secret state, that built its air force"
   },
   {
@@ -383,8 +383,8 @@
    "quote": "In Epstein’s own files Lockheed is a ticker in a defence-sector options idea he turned down - not an intelligence edge, not a relationship, not a contact.",
    "tier": "documented",
    "anchor": "vii-lockheed-the-private-firm-older-than-the",
-   "section": "VII",
-   "section_title": "VII. The Control Architecture - Structures of Long-Lead Dominion",
+   "section": "VIII",
+   "section_title": "VIII. The Control Architecture - Structures of Long-Lead Dominion",
    "subsection": "Lockheed - the private firm older than the secret state, that built its air force"
   },
   {
@@ -394,8 +394,8 @@
    "quote": "“The Government of Norway established and fully funded the Svalbard Global Seed Vault.” … Deposits are held under “black box” conditions: boxes are not opened, the seeds are “indisputably owned by the depositing gene bank, and only that gene bank can request return.” That is the opposite of confiscation",
    "tier": "unsupported",
    "anchor": "xiv-seed-sovereignty-the-svalbard-confiscation",
-   "section": "VII",
-   "section_title": "VII. The Control Architecture - Structures of Long-Lead Dominion",
+   "section": "VIII",
+   "section_title": "VIII. The Control Architecture - Structures of Long-Lead Dominion",
    "subsection": "Seed Sovereignty - The Vault Is the Backup; the Patent Is the Lever"
   },
   {
@@ -405,8 +405,8 @@
    "quote": "This moves from “structural apex” to “directed apex” the moment the record shows one of two things: minutes of a body that actually allocates across money-issuance and the asset managers and the sovereign funds and the enclaves at once; or a person or family with documented control - not membership, not attendance, not a shareholding - spanning those layers. Neither exists.",
    "tier": "open",
    "anchor": "vii-the-apex-question-how-far-up-and-why-it-goes",
-   "section": "VII",
-   "section_title": "VII. The Control Architecture - Structures of Long-Lead Dominion",
+   "section": "VIII",
+   "section_title": "VIII. The Control Architecture - Structures of Long-Lead Dominion",
    "subsection": "The apex question - how far up, and why it goes vacant"
   },
   {
@@ -416,8 +416,8 @@
    "quote": "The government’s own controlling text describes the President’s role over the other two branches as one exercised as a matter of comity and in deference to the constitutional separation of powers - language that concedes he has no command authority over Congress or the courts and is coordinating, not directing.",
    "tier": "documented",
    "anchor": "ix-the-governance-layer-continuity-of-government-as-written",
-   "section": "IX",
-   "section_title": "IX. Underground Infrastructure - D.U.M.B. Sites & Parallel Geography",
+   "section": "X",
+   "section_title": "X. Underground Infrastructure - D.U.M.B. Sites & Parallel Geography",
    "subsection": "The Governance Layer - Continuity of Government as it is actually written"
   },
   {
@@ -427,8 +427,8 @@
    "quote": "… a cleared member of the committee holding jurisdiction over the subject asked the executive for the operative plan and was told no. That is not an inference about hidden architecture - it is a documented failure of the one mechanism the system provides for checking it.",
    "tier": "documented",
    "anchor": "ix-what-is-classified-and-who-was-not-allowed-to-read-it",
-   "section": "IX",
-   "section_title": "IX. Underground Infrastructure - D.U.M.B. Sites & Parallel Geography",
+   "section": "X",
+   "section_title": "X. Underground Infrastructure - D.U.M.B. Sites & Parallel Geography",
    "subsection": "What is classified, and who was not allowed to read it"
   },
   {
@@ -438,8 +438,8 @@
    "quote": "The report’s own guaranteed-null rule applies with full force and cuts against the reader’s instinct: a benign PEAD and a lawless one are classified identically. The secrecy is therefore evidence of nothing about the content - it discriminates between no hypotheses, and any argument that treats the withholding as proof of what is withheld is the unfalsifiable machine running in the reader’s preferred direction.",
    "tier": "rule",
    "anchor": "ix-what-is-classified-and-who-was-not-allowed-to-read-it",
-   "section": "IX",
-   "section_title": "IX. Underground Infrastructure - D.U.M.B. Sites & Parallel Geography",
+   "section": "X",
+   "section_title": "X. Underground Infrastructure - D.U.M.B. Sites & Parallel Geography",
    "subsection": "What is classified, and who was not allowed to read it"
   },
   {
@@ -449,8 +449,8 @@
    "quote": "Not one currently effective PEAD has ever been seen by anyone outside the executive branch. … Nothing in the public record establishes their contents, and this report does not pretend otherwise.",
    "tier": "open",
    "anchor": "ix-what-is-classified-and-who-was-not-allowed-to-read-it",
-   "section": "IX",
-   "section_title": "IX. Underground Infrastructure - D.U.M.B. Sites & Parallel Geography",
+   "section": "X",
+   "section_title": "X. Underground Infrastructure - D.U.M.B. Sites & Parallel Geography",
    "subsection": "What is classified, and who was not allowed to read it"
   },
   {
@@ -460,8 +460,8 @@
    "quote": "Four names, one building, and the popular one generated the most inference: observers called it a temple, Epstein … called it a mosque in his own correspondence, the permit application called it a music room, and architecturally it is a copy of a named Syrian bathhouse. This is the naming error (Section I) operating on this report’s own subject: the label observers chose did the evidentiary work the building never did.",
    "tier": "rule",
    "anchor": "ix-little-saint-james-the-private-island",
-   "section": "IX",
-   "section_title": "IX. Underground Infrastructure - D.U.M.B. Sites & Parallel Geography",
+   "section": "X",
+   "section_title": "X. Underground Infrastructure - D.U.M.B. Sites & Parallel Geography",
    "subsection": "Little Saint James - The Private Island Underground"
   },
   {
@@ -471,8 +471,8 @@
    "quote": "Palantir is not launching Merlin, and no public source states a satellite count. Satellogic is building and launching it. Satellogic’s own announcement and the trade coverage of it do not state how many satellites the constellation will contain - so “hundreds” is not the company’s figure and this report could not source it anywhere.",
    "tier": "unsupported",
    "anchor": "x-merlin-and-nspm-7-a-claim-checked-in-both-directions",
-   "section": "X",
-   "section_title": "X. Technology as Control - Surveillance Cities & Population Management",
+   "section": "XI",
+   "section_title": "XI. Technology as Control - Surveillance Cities & Population Management",
    "subsection": "Merlin and NSPM-7 - a circulating claim, checked in both directions"
   },
   {
@@ -482,8 +482,8 @@
    "quote": "The dollars do not leave the American financial system, and they cannot buy Egyptian concrete. What US aid does is underwrite the Egyptian military’s US-origin equipment, which may free Egyptian money for other purposes - but that is a fungibility inference, and an inference is not a funding record.",
    "tier": "documented",
    "anchor": "x-the-octagon-state-strategic-command-center",
-   "section": "X",
-   "section_title": "X. Technology as Control - Surveillance Cities & Population Management",
+   "section": "XI",
+   "section_title": "XI. Technology as Control - Surveillance Cities & Population Management",
    "subsection": "The Octagon - State Strategic Command Center, and the funding question answered three ways"
   },
   {
@@ -493,8 +493,8 @@
    "quote": "Israel is present in this record as an audience worried about the building, not as a funder of it. Reading those hits as a financing tie is the naming error in its purest form - the sign mistaken for the thing named - and it is worth printing precisely because the search results look, at a glance, exactly like corroboration.",
    "tier": "rule",
    "anchor": "x-the-octagon-state-strategic-command-center",
-   "section": "X",
-   "section_title": "X. Technology as Control - Surveillance Cities & Population Management",
+   "section": "XI",
+   "section_title": "XI. Technology as Control - Surveillance Cities & Population Management",
    "subsection": "The Octagon - State Strategic Command Center, and the funding question answered three ways"
   },
   {
@@ -508,8 +508,8 @@
     "Honeywell",
     "ACUD"
    ],
-   "section": "X",
-   "section_title": "X. Technology as Control - Surveillance Cities & Population Management",
+   "section": "XI",
+   "section_title": "XI. Technology as Control - Surveillance Cities & Population Management",
    "subsection": "The Octagon - State Strategic Command Center, and the funding question answered three ways"
   },
   {
@@ -519,8 +519,8 @@
    "quote": "Pharaonic casing stone, hardened wartime storage, multinational cement: three tenancies in one hole in the ground. … It is not a chain. Continuity of use is not continuity of purpose, and valuable rock changing hands across four thousand years is what valuable rock does - the anti-map guardrail applies here exactly as it applies to material this report finds less congenial.",
    "tier": "rule",
    "anchor": "x-tura-masara-quarries-the-galleries-to-the-west",
-   "section": "X",
-   "section_title": "X. Technology as Control - Surveillance Cities & Population Management",
+   "section": "XI",
+   "section_title": "XI. Technology as Control - Surveillance Cities & Population Management",
    "subsection": "Tura-Masara - the galleries to the west, and what continuity does not prove"
   },
   {
@@ -534,8 +534,8 @@
     "DARPA",
     "SRI International"
    ],
-   "section": "X",
-   "section_title": "X. Technology as Control - Surveillance Cities & Population Management",
+   "section": "XI",
+   "section_title": "XI. Technology as Control - Surveillance Cities & Population Management",
    "subsection": "The soldier’s servant - PAL, CALO, Siri, and the neuromorphic line"
   },
   {
@@ -545,8 +545,8 @@
    "quote": "No program on the list, and no DARPA program found, claims recursive self-improvement; the documented outputs are a scheduling assistant and a pattern-recognition chip.",
    "tier": "unsupported",
    "anchor": "x-the-soldier-s-servant-pal-calo-siri-and-the-neuromorphic-line",
-   "section": "X",
-   "section_title": "X. Technology as Control - Surveillance Cities & Population Management",
+   "section": "XI",
+   "section_title": "XI. Technology as Control - Surveillance Cities & Population Management",
    "subsection": "The soldier’s servant - PAL, CALO, Siri, and the neuromorphic line"
   },
   {
@@ -556,8 +556,8 @@
    "quote": "An acknowledged capability is not evidence of a particular use, and a confirmed infection is not a confirmed operator. … Citizen Lab and SHARE identified implants on devices; identifying the customer who ran them is a separate evidentiary step that the forensics alone do not take",
    "tier": "rule",
    "anchor": "x-two-acknowledgments-in-one-month-a-weapon-in-orbit-and-a-spyware-wave-with-named-devices",
-   "section": "X",
-   "section_title": "X. Technology as Control - Surveillance Cities & Population Management",
+   "section": "XI",
+   "section_title": "XI. Technology as Control - Surveillance Cities & Population Management",
    "subsection": "Two acknowledgments in one month - a weapon in orbit, and a spyware wave with named devices"
   },
   {
@@ -567,8 +567,8 @@
    "quote": "What would move this from placement to finding is specific and obtainable, and until someone has it the two layers stay adjacent rather than connected: procurement records tying a named jurisdiction’s ALPR contract, by date and dollar figure, to a specific incident in the event layer; or grant instruments that condition surveillance funding on a class of event; or vendor marketing that names an incident to a named buyer.",
    "tier": "open",
    "anchor": "x-the-honest-gap-between-the-two-layers",
-   "section": "X",
-   "section_title": "X. Technology as Control - Surveillance Cities & Population Management",
+   "section": "XI",
+   "section_title": "XI. Technology as Control - Surveillance Cities & Population Management",
    "subsection": "The honest gap between the two layers"
   },
   {
@@ -578,8 +578,8 @@
    "quote": "Strip the century and the shape is one sentence: the registration capability goes to whoever is registering, and the question of responsibility for what the register is then used for has never once been answered by a court. Twice it was asked - 2001, and 2002 through 2016 - and twice it ended on withdrawal or on a refusal to hear, not on evidence.",
    "tier": "open",
    "anchor": "x-what-the-pattern-actually-shows",
-   "section": "X",
-   "section_title": "X. Technology as Control - Surveillance Cities & Population Management",
+   "section": "XI",
+   "section_title": "XI. Technology as Control - Surveillance Cities & Population Management",
    "subsection": "What the pattern actually shows"
   },
   {
@@ -589,8 +589,8 @@
    "quote": "The charter-city projects are real, and the honest detail is that most are stalling, not sweeping the world: Próspera (Roatán) survives but Honduras repealed the ZEDE law in 2022 and the two are locked in a multibillion-dollar ICSID arbitration; … California Forever pulled its 2024 Solano County ballot measure; Telosa and Praxis remain concept/PR-stage with no ground broken.",
    "tier": "documented",
    "anchor": "xi-the-pattern-summary",
-   "section": "XI",
-   "section_title": "XI. The “New” Pattern - Global Sites of Replication & Replacement",
+   "section": "XII",
+   "section_title": "XII. The “New” Pattern - Global Sites of Replication & Replacement",
    "subsection": "The Pattern Summary"
   },
   {
@@ -600,8 +600,8 @@
    "quote": "What does not survive is the claim that enclave co-location itself is coordination: … independent market purchases, best explained as an aligned-interest class converging on the same goods - security, privacy, land, water, redundant power, orbital bandwidth - because they face the same incentives and can afford the same solutions.",
    "tier": "unsupported",
    "anchor": "xii-the-verdict-it-is-a-network-but-name-the-right",
-   "section": "XII",
-   "section_title": "XII. Billionaire Enclaves - Hardened Islands of Extraction",
+   "section": "XIII",
+   "section_title": "XIII. Billionaire Enclaves - Hardened Islands of Extraction",
    "subsection": "The verdict - it is a network, but name the right one"
   },
   {
@@ -611,8 +611,8 @@
    "quote": "In Sudan v. United Arab Emirates the International Court of Justice on 5 May 2025 rejected provisional measures and removed the case from its list for manifest lack of jurisdiction - the UAE holds a reservation to Article IX of the Genocide Convention. That is not a finding on the merits in either direction. “The ICJ cleared the UAE” and “the ICJ heard the evidence” are both false, and both circulate.",
    "tier": "unsupported",
    "anchor": "xv-who-arms-sudan-the-documented-layer-the-attributed-layer-and-the-gold",
-   "section": "XV",
-   "section_title": "XV. Active Global Conflicts - The Map Beneath the Map",
+   "section": "XVI",
+   "section_title": "XVI. Active Global Conflicts - The Map Beneath the Map",
    "subsection": "Who arms Sudan - the documented layer, the attributed layer, and the gold"
   },
   {
@@ -622,8 +622,8 @@
    "quote": "GAO-22-105988 (June 2022): the Defense Department administered “at least $54.6 billion of military support to Saudi Arabia and the United Arab Emirates from fiscal years 2015 through 2021” - and “despite several reports that airstrikes and other attacks by Saudi Arabia and UAE have caused extensive civilian harm in Yemen, DOD has not reported and State could not provide evidence that it investigated any incidents of potential unauthorized use.”",
    "tier": "documented",
    "anchor": "xv-whose-weapons-are-in-these-wars-the-us-and-israeli-lines-through-the-uae",
-   "section": "XV",
-   "section_title": "XV. Active Global Conflicts - The Map Beneath the Map",
+   "section": "XVI",
+   "section_title": "XVI. Active Global Conflicts - The Map Beneath the Map",
    "subsection": "Whose weapons are in these wars - the US and Israeli lines through the UAE"
   },
   {
@@ -633,8 +633,8 @@
    "quote": "They “may be expended without regard to the provisions of law and regulations relating to the expenditure of Government funds; and for objects of a confidential, extraordinary, or emergency nature, such expenditures to be accounted for solely on the certificate of the Director and every such certificate shall be deemed a sufficient voucher for the amount therein certified.”",
    "tier": "documented",
    "anchor": "xvi-the-intelligence-funding-documents-the-certificate-is-the-voucher",
-   "section": "XVI",
-   "section_title": "XVI. FOIA Patterns - What the Declassified Record Reveals",
+   "section": "XVII",
+   "section_title": "XVII. FOIA Patterns - What the Declassified Record Reveals",
    "subsection": "The intelligence funding documents - the certificate is the voucher"
   },
   {
@@ -644,8 +644,8 @@
    "quote": "Moscow’s Burdenko commission announced in January 1944 that the Germans had shot the prisoners in autumn 1941. That version stood until 13 April 1990, when Gorbachev handed Poland’s president the documents. In 1959 the KGB chairman had proposed to “destroy all the records concerning the persons shot in 1940”; the decision that ordered the killings survived in a sealed packet only the party leader could open.",
    "tier": "documented",
    "anchor": "xvi-the-pattern-is-not-american-international",
-   "section": "XVI",
-   "section_title": "XVI. FOIA Patterns - What the Declassified Record Reveals",
+   "section": "XVII",
+   "section_title": "XVII. FOIA Patterns - What the Declassified Record Reveals",
    "subsection": "The Pattern Is Not American - International Concealment Programs"
   },
   {
@@ -655,8 +655,8 @@
    "quote": "A district court ordered disclosure in 2010; the High Court reversed in 2011, and on 14 July 2014 the Supreme Court upheld the reversal: the person asking must prove the ministry still held the file when it refused, and proof that the papers were once made is not enough. Whether they were destroyed is not established.",
    "tier": "documented",
    "anchor": "xvi-the-pattern-is-not-american-international",
-   "section": "XVI",
-   "section_title": "XVI. FOIA Patterns - What the Declassified Record Reveals",
+   "section": "XVII",
+   "section_title": "XVII. FOIA Patterns - What the Declassified Record Reveals",
    "subsection": "The Pattern Is Not American - International Concealment Programs"
   },
   {
@@ -666,8 +666,8 @@
    "quote": "The commission the BND appointed in 2011 found that in the mid-1950s about one employee in ten had been a Nazi perpetrator in the narrow sense … Gehlen’s own lists to the Chancellery put the incriminated at about one per cent (the historian Gerhard Sälter’s account).",
    "tier": "documented",
    "anchor": "xvi-the-pattern-is-not-american-international",
-   "section": "XVI",
-   "section_title": "XVI. FOIA Patterns - What the Declassified Record Reveals",
+   "section": "XVII",
+   "section_title": "XVII. FOIA Patterns - What the Declassified Record Reveals",
    "subsection": "The Pattern Is Not American - International Concealment Programs"
   },
   {
@@ -677,8 +677,8 @@
    "quote": "The substantive finding belongs to NSA historian Robert J. Hanyok … concludes that the 2 August attack occurred, the 4 August attack did not, and that the SIGINT which appeared to confirm it was assembled from 4 August intercepts concerning recovery of the P-4s damaged on 2 August, re-dated, re-translated and selectively excerpted. … this is an NSA historian’s finding, not an institutional NSA position",
    "tier": "documented",
    "anchor": "xvi-reading-room-harvest-what-the-agency-foia",
-   "section": "XVI",
-   "section_title": "XVI. FOIA Patterns - What the Declassified Record Reveals",
+   "section": "XVII",
+   "section_title": "XVII. FOIA Patterns - What the Declassified Record Reveals",
    "subsection": "Reading-room harvest - what the agency FOIA rooms yielded, read directly (18 August 2026)"
   },
   {
@@ -688,8 +688,8 @@
    "quote": "What the documents establish is that the Defense Intelligence Agency paid a Las Vegas aerospace contractor to produce a library of speculative-physics literature reviews, rated the work highly, and sought $12 million more. What they do not establish - anywhere in the released text - is that anyone recovered anything. … A government that funds a warp-drive literature review has funded a literature review.",
    "tier": "documented",
    "anchor": "xvi-reading-room-harvest-what-the-agency-foia",
-   "section": "XVI",
-   "section_title": "XVI. FOIA Patterns - What the Declassified Record Reveals",
+   "section": "XVII",
+   "section_title": "XVII. FOIA Patterns - What the Declassified Record Reveals",
    "subsection": "Reading-room harvest - what the agency FOIA rooms yielded, read directly (18 August 2026)"
   },
   {
@@ -699,8 +699,8 @@
    "quote": "The Philadelphia Experiment is the case where the open record kills the story: it originates with Carl Allen’s 1955-56 letters to Morris Jessup, and USS Eldridge’s own deck logs place it nowhere near Philadelphia on the alleged date",
    "tier": "unsupported",
    "anchor": "xvi-how-to-read-a-whistleblower-claim-the-tell-is",
-   "section": "XVI",
-   "section_title": "XVI. FOIA Patterns - What the Declassified Record Reveals",
+   "section": "XVII",
+   "section_title": "XVII. FOIA Patterns - What the Declassified Record Reveals",
    "subsection": "How to read a whistleblower claim - the tell is the trail"
   },
   {
@@ -710,8 +710,8 @@
    "quote": "When Britain abolished slavery, the government paid £20 million (equivalent to ~£17 billion today, or 40% of the national budget) - to the slaveholders. Not to the enslaved. The Slavery Abolition Act compensated owners for their \"loss of property.\" … The enslaved received nothing.",
    "tier": "documented",
    "anchor": "xiv-historical-slavery-the-unbroken-line",
-   "section": "XIV",
-   "section_title": "XIV. Animal & Human Slavery Systems - The Unbroken Chain",
+   "section": "XV",
+   "section_title": "XV. Animal & Human Slavery Systems - The Unbroken Chain",
    "subsection": "Historical Slavery - The Unbroken Line"
   },
   {
@@ -721,8 +721,8 @@
    "quote": "The Kerry Committee (1989): Senator John Kerry's Senate Foreign Relations Subcommittee on Terrorism, Narcotics, and International Operations concluded that \"it is clear that individuals who provided support for the Contras were involved in drug trafficking, the supply network of the Contras was used by drug trafficking organizations, and elements of the Contras themselves knowingly received financial and material assistance from drug traffickers.\"",
    "tier": "documented",
    "anchor": "xvii-cia-contra-cocaine-trafficking-the-government",
-   "section": "XVII",
-   "section_title": "XVII. Organized Crime as Infrastructure - The Cartel-Intelligence-Banking Nexus",
+   "section": "XVIII",
+   "section_title": "XVIII. Organized Crime as Infrastructure - The Cartel-Intelligence-Banking Nexus",
    "subsection": "CIA-Contra Cocaine Trafficking - The Government's Drug Pipeline"
   },
   {
@@ -732,8 +732,8 @@
    "quote": "The US Senate Permanent Subcommittee on Investigations reported on 28 July 2020, after a two-year investigation, that the art industry is “the largest legal, unregulated market in the United States.” That is the subcommittee’s own phrase, not a characterisation.",
    "tier": "documented",
    "anchor": "xviii-the-mechanism-documented-primary-and-larger",
-   "section": "XVIII",
-   "section_title": "XVIII. Art, Power & the Unregulated Market - Laundering, Symbol, Ritual",
+   "section": "XIX",
+   "section_title": "XIX. Art, Power & the Unregulated Market - Laundering, Symbol, Ritual",
    "subsection": "The mechanism - documented, primary, and larger than any single collector"
   },
   {
@@ -743,8 +743,8 @@
    "quote": "… the withholding proves the secrecy and the custody, not the content. … Absence of released proof is not proof of a hidden craft.",
    "tier": "rule",
    "anchor": "xvi-uap-at-nuclear-sites-the-one-branch-with-a",
-   "section": "XVI",
-   "section_title": "XVI. FOIA Patterns - What the Declassified Record Reveals",
+   "section": "XVII",
+   "section_title": "XVII. FOIA Patterns - What the Declassified Record Reveals",
    "subsection": "UAP at nuclear sites - the one branch with a documentary spine (Branch A / Branch B, applied)"
   },
   {
@@ -754,8 +754,8 @@
    "quote": "Two further dated facts, carried without a mechanism attached to either: the US Treasury lifted sanctions on Eritrea’s ruling party on 19 September, Eritrea being in the attributed SAF column above; and on 10 September Algeria severed diplomatic relations with the United Arab Emirates without stating a reason. Neither is joined here to the Sudan war. The anti-map guardrail is the reason: a shared month is not a chain.",
    "tier": "rule",
    "anchor": "xv-who-arms-sudan-the-documented-layer-the-attributed-layer-and-the-gold",
-   "section": "XV",
-   "section_title": "XV. Active Global Conflicts - The Map Beneath the Map",
+   "section": "XVI",
+   "section_title": "XVI. Active Global Conflicts - The Map Beneath the Map",
    "subsection": "Who arms Sudan - the documented layer, the attributed layer, and the gold"
   },
   {
@@ -765,8 +765,8 @@
    "quote": "The drops explicitly state “disinformation is real… disinformation is necessary” - a built-in escape hatch that converts every failed prediction into strategy. By this report’s own rule (Section II: a claim that can never be wrong is not intelligence analysis), the corpus is disqualified from the evidentiary tiers by design - it wrote its own unfalsifiability into the text.",
    "tier": "rule",
    "anchor": "xvi-the-q-corpus-the-compressed-case",
-   "section": "XVI",
-   "section_title": "XVI. FOIA Patterns - What the Declassified Record Reveals",
+   "section": "XVII",
+   "section_title": "XVII. FOIA Patterns - What the Declassified Record Reveals",
    "subsection": "The Q corpus - the compressed case"
   },
   {
@@ -776,8 +776,8 @@
    "quote": "Aesthetic is an instrument; it is not an act. It documents a sensibility and it shapes a room, and it documents no crime. … A painting on a wall is evidence of a purchase, and of the effect it has on whoever stands in front of it. It is evidence of nothing else",
    "tier": "rule",
    "anchor": "xviii-symbolism-and-ritual-engaged-at-its-strongest",
-   "section": "XVIII",
-   "section_title": "XVIII. Art, Power & the Unregulated Market - Laundering, Symbol, Ritual",
+   "section": "XIX",
+   "section_title": "XIX. Art, Power & the Unregulated Market - Laundering, Symbol, Ritual",
    "subsection": "Symbolism and ritual - engaged at its strongest form, then tiered"
   },
   {
@@ -787,8 +787,8 @@
    "quote": "On 30 April 2025 Emirati authorities said they had intercepted millions of rounds at a UAE airport bound for the SAF; the SAF denied it. It is the one adverse claim in the Emirati direction and it is printed.",
    "tier": "rule",
    "anchor": "xv-who-arms-sudan-the-documented-layer-the-attributed-layer-and-the-gold",
-   "section": "XV",
-   "section_title": "XV. Active Global Conflicts - The Map Beneath the Map",
+   "section": "XVI",
+   "section_title": "XVI. Active Global Conflicts - The Map Beneath the Map",
    "subsection": "Who arms Sudan - the documented layer, the attributed layer, and the gold"
   },
   {
@@ -798,8 +798,8 @@
    "quote": "No merits judgment exists, and a provisional-measures order is not a finding that genocide occurred. … What would move the question up a tier: a merits judgment at the ICJ, or charges confirmed at the ICC. Neither exists.",
    "tier": "open",
    "anchor": "xv-gaza-what-the-courts-have-said-and-an-archive-that-grades-its-own-footage",
-   "section": "XV",
-   "section_title": "XV. Active Global Conflicts - The Map Beneath the Map",
+   "section": "XVI",
+   "section_title": "XVI. Active Global Conflicts - The Map Beneath the Map",
    "subsection": "Gaza - what the courts have said, and an archive that grades its own footage"
   },
   {
@@ -809,8 +809,8 @@
    "quote": "Not established here: the contents. This report has not read the 170,000 pages, and the finding that officials misled the public is, at this moment, the city’s own account of its own documents plus the reporting of it - which is a strong source for that claim and still not the same thing as the documents being read.",
    "tier": "open",
    "anchor": "xvi-the-ground-zero-air-quality-records-released-8-september-2026",
-   "section": "XVI",
-   "section_title": "XVI. FOIA Patterns - What the Declassified Record Reveals",
+   "section": "XVII",
+   "section_title": "XVII. FOIA Patterns - What the Declassified Record Reveals",
    "subsection": "The Ground Zero air-quality records - 170,000 pages, twenty-five years late, released under litigation"
   },
   {
@@ -820,8 +820,8 @@
    "quote": "The constitutional question was declined, not decided. Article I, section 9, clause 7 requires that “a regular Statement and Account of the Receipts and Expenditures of all public Money shall be published from time to time.” In United States v. Richardson, 418 U.S. 166 (1974), a taxpayer asked whether §8 of the CIA Act violates it. The Court held he lacked standing to ask. No court has reached the question since.",
    "tier": "open",
    "anchor": "xvi-the-intelligence-funding-documents-the-certificate-is-the-voucher",
-   "section": "XVI",
-   "section_title": "XVI. FOIA Patterns - What the Declassified Record Reveals",
+   "section": "XVII",
+   "section_title": "XVII. FOIA Patterns - What the Declassified Record Reveals",
    "subsection": "The intelligence funding documents - the certificate is the voucher"
   },
   {
@@ -831,8 +831,8 @@
    "quote": "So: the sabotage is fact; who ordered it is unproven, and the report holds all three attributions as contested.",
    "tier": "open",
    "anchor": "xv-the-structural-pattern",
-   "section": "XV",
-   "section_title": "XV. Active Global Conflicts - The Map Beneath the Map",
+   "section": "XVI",
+   "section_title": "XVI. Active Global Conflicts - The Map Beneath the Map",
    "subsection": "The Structural Pattern"
   },
   {
@@ -842,8 +842,8 @@
    "quote": "CONADEP said in 1984 that a meticulous record of every disappearance had existed, and that removing or destroying it was a crime. … Pattern: a record was kept of every disappearance, and it has not been produced.",
    "tier": "open",
    "anchor": "xvi-the-pattern-is-not-american-international",
-   "section": "XVI",
-   "section_title": "XVI. FOIA Patterns - What the Declassified Record Reveals",
+   "section": "XVII",
+   "section_title": "XVII. FOIA Patterns - What the Declassified Record Reveals",
    "subsection": "The Pattern Is Not American - International Concealment Programs"
   },
   {
@@ -857,8 +857,8 @@
     "Capital Tap Holding",
     "RSF"
    ],
-   "section": "XV",
-   "section_title": "XV. Active Global Conflicts - The Map Beneath the Map",
+   "section": "XVI",
+   "section_title": "XVI. Active Global Conflicts - The Map Beneath the Map",
    "subsection": "Who arms Sudan - the documented layer, the attributed layer, and the gold"
   },
   {
@@ -872,8 +872,8 @@
     "CIA",
     "Gehlen"
    ],
-   "section": "XVI",
-   "section_title": "XVI. FOIA Patterns - What the Declassified Record Reveals",
+   "section": "XVII",
+   "section_title": "XVII. FOIA Patterns - What the Declassified Record Reveals",
    "subsection": "The Pattern Is Not American - International Concealment Programs"
   },
   {
@@ -887,8 +887,8 @@
     "CIA",
     "Ewen Cameron"
    ],
-   "section": "XVI",
-   "section_title": "XVI. FOIA Patterns - What the Declassified Record Reveals",
+   "section": "XVII",
+   "section_title": "XVII. FOIA Patterns - What the Declassified Record Reveals",
    "subsection": "The Pattern Is Not American - International Concealment Programs"
   },
   {
@@ -898,8 +898,8 @@
    "quote": "On 25 January a hard drive holding an 87-gigabyte packet capture of the downloads was handed to the Secret Service; the network-flow, DHCP and registration logs had gone the same way. The first grand jury subpoena arrived on 27 January. MIT’s panel found the pre-subpoena production lawful; the fact of it is not in dispute.",
    "tier": "documented",
    "anchor": "xvi-united-states-v-swartz-the-ruling-recorded-the-prosecution-documented",
-   "section": "XXIII",
-   "section_title": "XXIII. Test Cases - Live Claims Graded Against the Record",
+   "section": "XXIV",
+   "section_title": "XXIV. Test Cases - Live Claims Graded Against the Record",
    "subsection": "United States v. Swartz - the ruling recorded, the prosecution documented"
   },
   {
@@ -909,19 +909,19 @@
    "quote": "JSTOR, in its own statement on the day of the indictment: “It was the government’s decision whether to prosecute, not JSTOR’s … we had no interest in this becoming an ongoing legal matter.” … It had settled with Swartz on 3 June 2011 and filed no civil claim.",
    "tier": "documented",
    "anchor": "xvi-united-states-v-swartz-the-ruling-recorded-the-prosecution-documented",
-   "section": "XXIII",
-   "section_title": "XXIII. Test Cases - Live Claims Graded Against the Record",
+   "section": "XXIV",
+   "section_title": "XXIV. Test Cases - Live Claims Graded Against the Record",
    "subsection": "United States v. Swartz - the ruling recorded, the prosecution documented"
   },
   {
    "id": "d-cog-first-activation",
    "type": "fact",
    "prompt": "When was Continuity of Government first activated, and how did the public learn of it?",
-   "quote": "11 September 2001 was the first activation of Continuity of Government in its history - the machinery this report set out in Section IX from NSC 5521 onward had never before been run. … On 1 March 2002 the Washington Post reported that the President had dispatched a shadow government of roughly one hundred senior civilian managers to live and work secretly outside Washington - the first public confirmation, six months after the fact, that the plan had been executed.",
+   "quote": "11 September 2001 was the first activation of Continuity of Government in its history - the machinery this report set out in Section X from NSC 5521 onward had never before been run. … On 1 March 2002 the Washington Post reported that the President had dispatched a shadow government of roughly one hundred senior civilian managers to live and work secretly outside Washington - the first public confirmation, six months after the fact, that the plan had been executed.",
    "tier": "documented",
    "anchor": "xvi-9-11-vector-2-continuity-of-government-the-first-activation",
-   "section": "XXIII",
-   "section_title": "XXIII. Test Cases - Live Claims Graded Against the Record",
+   "section": "XXIV",
+   "section_title": "XXIV. Test Cases - Live Claims Graded Against the Record",
    "subsection": "9/11 vector 2 - Continuity of Government: the first activation in its history"
   },
   {
@@ -931,8 +931,8 @@
    "quote": "Proclamation 7463, Declaration of National Emergency by Reason of Certain Terrorist Attacks, was signed on 14 September 2001. It has been continued every year since by every President, and was continued again beyond 14 September 2026, by a notice signed on 8 September 2026 (91 FR 57773).",
    "tier": "documented",
    "anchor": "xvi-9-11-vector-3-the-emergency-that-did-not-end",
-   "section": "XXIII",
-   "section_title": "XXIII. Test Cases - Live Claims Graded Against the Record",
+   "section": "XXIV",
+   "section_title": "XXIV. Test Cases - Live Claims Graded Against the Record",
    "subsection": "9/11 vector 3 - The emergency that did not end: Proclamation 7463 and the 2001 AUMF"
   },
   {
@@ -942,8 +942,8 @@
    "quote": "4 October 2001 - twenty-three days after the attack - the President authorised the programme later code-named STELLAR WIND: warrantless collection on communications touching US persons, the first such presidential authorisation since the Vietnam era.",
    "tier": "documented",
    "anchor": "xvi-9-11-vector-4-the-surveillance-state-dated-to-the-day",
-   "section": "XXIII",
-   "section_title": "XXIII. Test Cases - Live Claims Graded Against the Record",
+   "section": "XXIV",
+   "section_title": "XXIV. Test Cases - Live Claims Graded Against the Record",
    "subsection": "9/11 vector 4 - The surveillance state, dated to the day"
   },
   {
@@ -953,8 +953,8 @@
    "quote": "And the Commission that was meant to settle the record said, in its own chairs’ words, that it was “set up to fail” - Kean and Hamilton, Without Precedent, 2006. … That is not a theory about the Commission. It is the Commission’s own account of itself.",
    "tier": "documented",
    "anchor": "xvi-9-11-vector-5-the-failure-record-in-the-governments-own-words",
-   "section": "XXIII",
-   "section_title": "XXIII. Test Cases - Live Claims Graded Against the Record",
+   "section": "XXIV",
+   "section_title": "XXIV. Test Cases - Live Claims Graded Against the Record",
    "subsection": "9/11 vector 5 - The failure record, in the government’s own words"
   },
   {
@@ -964,8 +964,8 @@
    "quote": "“A single U.S.-based institutional investor with no conceivable ties to al Qaeda purchased 95 percent of the UAL puts on September 6” as part of a strategy that also bought the stock; the SEC developed no evidence that anyone with foreknowledge traded on it. Specimen killed.",
    "tier": "unsupported",
    "anchor": "xvi-9-11-vector-7-three-financial-specimens-killed-and-published",
-   "section": "XXIII",
-   "section_title": "XXIII. Test Cases - Live Claims Graded Against the Record",
+   "section": "XXIV",
+   "section_title": "XXIV. Test Cases - Live Claims Graded Against the Record",
    "subsection": "9/11 vector 7 - Three financial specimens, killed and published"
   },
   {
@@ -975,8 +975,8 @@
    "quote": "Verdict at tier: UNSUPPORTED. Not “disproven” - an absence of recordings cannot be disproven from - but unsupported, which in this report means it earns no weight and changes no other finding. … the honest position is the boring one: nine people died because a helicopter flew into fog.",
    "tier": "unsupported",
    "anchor": "xx-case-the-calabasas-crash-26-january-2020",
-   "section": "XXIII",
-   "section_title": "XXIII. Test Cases - Live Claims Graded Against the Record",
+   "section": "XXIV",
+   "section_title": "XXIV. Test Cases - Live Claims Graded Against the Record",
    "subsection": "Case: the Calabasas crash - 26 January 2020"
   },
   {
@@ -986,8 +986,8 @@
    "quote": "An Army biological-weapons scientist at Fort Detrick fell from a 13th-floor window of the Statler Hotel in New York nine days after being dosed with LSD without his knowledge by the CIA. … Tier: the covert dosing is documented and compensated; homicide is argued, unresolved, and now legally time-barred rather than refuted.",
    "tier": "documented",
    "anchor": "xx-the-ladder-four-tiers-sorted-by-what-the",
-   "section": "XXIII",
-   "section_title": "XXIII. Test Cases - Live Claims Graded Against the Record",
+   "section": "XXIV",
+   "section_title": "XXIV. Test Cases - Live Claims Graded Against the Record",
    "subsection": "The ladder - four tiers, sorted by what the record actually holds"
   },
   {
@@ -997,8 +997,8 @@
    "quote": "An INTERPOL Red Notice requires an arrest warrant or court order already issued by the judicial authorities of a member country, requested through that country’s National Central Bureau; INTERPOL issues none on its own initiative and cannot compel any police force to arrest anyone. … No warrant, no listing - however the person is regarded.",
    "tier": "documented",
    "anchor": "xvi-why-a-name-is-not-on-a-wanted-list-the-instrument-measures-warrants-not-danger",
-   "section": "XXIII",
-   "section_title": "XXIII. Test Cases - Live Claims Graded Against the Record",
+   "section": "XXIV",
+   "section_title": "XXIV. Test Cases - Live Claims Graded Against the Record",
    "subsection": "Why a name is not on a wanted list - the instrument measures warrants, not danger"
   },
   {
@@ -1008,8 +1008,8 @@
    "quote": "10 U.S.C. § 1034, the Military Whistleblower Protection Act, prohibits any person from taking, withholding or threatening a personnel action as reprisal for a protected communication. … You do not need your chain of command’s permission to write to Congress, and retaliation for doing so is itself the violation.",
    "tier": "documented",
    "anchor": "xxiii-for-servicemembers-the-lawful-channels",
-   "section": "XXIV",
-   "section_title": "XXIV. Spiritual Reclamation - The Counter-Architecture",
+   "section": "XXV",
+   "section_title": "XXV. Spiritual Reclamation - The Counter-Architecture",
    "subsection": "For servicemembers - the documented channels, stated accurately because people act on this"
   },
   {
@@ -1019,8 +1019,8 @@
    "quote": "The “paid in full” sense for tetelestai is attested in no other ancient Greek source … So the popular reading is a misread abbreviation, canonised in a lexicon, corrected within twenty years, and preached for a century after the correction - which is the naming error of Section I operating on scripture itself",
    "tier": "rule",
    "anchor": "xxiv-endgame",
-   "section": "XXV",
-   "section_title": "XXV. Sending the Signal - Contact & Maximum Assistance",
+   "section": "XXVI",
+   "section_title": "XXVI. Sending the Signal - Contact & Maximum Assistance",
    "subsection": "Endgame"
   },
   {
@@ -1030,8 +1030,8 @@
    "quote": "Non-publication is a guaranteed null: it is what a group does with data never held, data held and withheld, and data held and sold, so it is evidence of nothing about the data.",
    "tier": "rule",
    "anchor": "xvi-a-claim-against-the-bureau-and-a-ransom-demanded-in-retractions",
-   "section": "XXIII",
-   "section_title": "XXIII. Test Cases - Live Claims Graded Against the Record",
+   "section": "XXIV",
+   "section_title": "XXIV. Test Cases - Live Claims Graded Against the Record",
    "subsection": "A claim against the Bureau - and a ransom demanded in retractions, not money"
   },
   {
@@ -1041,8 +1041,8 @@
    "quote": "His post names the same service, the same kind of operation and the same Caribbean geography that the Epstein record and Section II’s sponsor hypothesis turn on. That is exactly why it cannot be counted toward them. A shared subject is not a chain (the anti-map guardrail); a frightened man’s post is testimony, not a document; and a hypothesis that recruits every death that echoes it has become the unfalsifiable machine.",
    "tier": "rule",
    "anchor": "test-case-nikolai-mushegian-a-post-at-dawn-and-a-finding-of-no-criminal-hand",
-   "section": "XXIII",
-   "section_title": "XXIII. Test Cases - Live Claims Graded Against the Record",
+   "section": "XXIV",
+   "section_title": "XXIV. Test Cases - Live Claims Graded Against the Record",
    "subsection": "Nikolai Mushegian - a post at dawn, and a finding of no criminal hand"
   },
   {
@@ -1052,8 +1052,8 @@
    "quote": "The symmetry rule runs both ways, and it kills the “nothing to see” version with the same instrument: fifty officers, a quarter-century emergency, a Commission that called itself set up to fail … Those are not nothing. They are the record.",
    "tier": "rule",
    "anchor": "xvi-9-11-what-the-topology-shows",
-   "section": "XXIII",
-   "section_title": "XXIII. Test Cases - Live Claims Graded Against the Record",
+   "section": "XXIV",
+   "section_title": "XXIV. Test Cases - Live Claims Graded Against the Record",
    "subsection": "9/11 - What the topology shows, and what it refuses"
   },
   {
@@ -1063,8 +1063,8 @@
    "quote": "This is the anti-map guardrail’s hardest case in the whole document: a stated wish preceding an event is not evidence the wish produced it, and the report says so plainly.",
    "tier": "rule",
    "anchor": "xvi-9-11-vector-9-the-next-war-pnac-and-the-anthrax-naming-error",
-   "section": "XXIII",
-   "section_title": "XXIII. Test Cases - Live Claims Graded Against the Record",
+   "section": "XXIV",
+   "section_title": "XXIV. Test Cases - Live Claims Graded Against the Record",
    "subsection": "9/11 vector 9 - The next war: PNAC’s sentence and the anthrax naming error"
   },
   {
@@ -1074,8 +1074,8 @@
    "quote": "A case moves from Tier 3 to Tier 2 on a documented state interest in the person that predates the death - a surveillance file, an investigation, an operational contact, obtainable by FOIA or discovery, not inferred from fame. … Nothing moves on volume of coincidence, on the emotional weight of the death, on the refusal of an institution to discuss it, or on the confidence of the person asserting it.",
    "tier": "rule",
    "anchor": "xx-what-would-move-any-case-up-a-tier-the",
-   "section": "XXIII",
-   "section_title": "XXIII. Test Cases - Live Claims Graded Against the Record",
+   "section": "XXIV",
+   "section_title": "XXIV. Test Cases - Live Claims Graded Against the Record",
    "subsection": "What would move any case up a tier - the standing test"
   },
   {
@@ -1085,8 +1085,8 @@
    "quote": "What would move this case: the Department of Justice determination itself, the autopsy report of Puerto Rico’s Instituto de Ciencias Forenses, and the police incident report - each obtainable, if at all, by a public-records request in Puerto Rico, which this report has not yet made.",
    "tier": "open",
    "anchor": "test-case-nikolai-mushegian-a-post-at-dawn-and-a-finding-of-no-criminal-hand",
-   "section": "XXIII",
-   "section_title": "XXIII. Test Cases - Live Claims Graded Against the Record",
+   "section": "XXIV",
+   "section_title": "XXIV. Test Cases - Live Claims Graded Against the Record",
    "subsection": "Nikolai Mushegian - a post at dawn, and a finding of no criminal hand"
   },
   {
@@ -1096,8 +1096,8 @@
    "quote": "Van Buren v. United States (3 June 2021) held that “exceeds authorized access” means entering areas of a computer that are off-limits, not breaking a use policy - and its footnote 8 expressly declined to say whether the limit is technological or contractual, which is the one sentence Aaron’s Law would have written.",
    "tier": "open",
    "anchor": "xvi-united-states-v-swartz-the-ruling-recorded-the-prosecution-documented",
-   "section": "XXIII",
-   "section_title": "XXIII. Test Cases - Live Claims Graded Against the Record",
+   "section": "XXIV",
+   "section_title": "XXIV. Test Cases - Live Claims Graded Against the Record",
    "subsection": "United States v. Swartz - the ruling recorded, the prosecution documented"
   },
   {
@@ -1107,8 +1107,8 @@
    "quote": "Found dead in her Manhattan townhouse; the medical examiner returned “acute ethanol and barbiturate intoxication - circumstances undetermined.” … Tier: the ME’s own finding is “undetermined” - that is the official record, not a theory about it. Cause of the undetermined circumstances: unestablished.",
    "tier": "open",
    "anchor": "xx-the-ladder-four-tiers-sorted-by-what-the",
-   "section": "XXIII",
-   "section_title": "XXIII. Test Cases - Live Claims Graded Against the Record",
+   "section": "XXIV",
+   "section_title": "XXIV. Test Cases - Live Claims Graded Against the Record",
    "subsection": "The ladder - four tiers, sorted by what the record actually holds"
   },
   {
@@ -1118,8 +1118,8 @@
    "quote": "A Defense Intelligence Agency and Special Operations Command data-mining effort; … Tier: contested. The programme existed and is documented; what it found is disputed between an inspector general and its own witnesses, and the report adopts neither.",
    "tier": "open",
    "anchor": "xvi-9-11-vector-10-able-danger-and-the-bin-laden-flights",
-   "section": "XXIII",
-   "section_title": "XXIII. Test Cases - Live Claims Graded Against the Record",
+   "section": "XXIV",
+   "section_title": "XXIV. Test Cases - Live Claims Graded Against the Record",
    "subsection": "9/11 vector 10 - Able Danger, and the bin Laden flights"
   },
   {
@@ -1129,8 +1129,8 @@
    "quote": "Two things are documented and do not conflict: the FBI ran a sustained COINTELPRO campaign against King … and a Memphis civil jury in 1999 (King family v. Loyd Jowers) returned a verdict finding that Jowers and “others, including government agencies” participated in a conspiracy, with $100 in nominal damages at the family’s request. … The DOJ’s 2000 review rejected that verdict, finding the trial evidence insufficient … This report records both and closes neither.",
    "tier": "open",
    "anchor": "xx-the-ladder-four-tiers-sorted-by-what-the",
-   "section": "XXIII",
-   "section_title": "XXIII. Test Cases - Live Claims Graded Against the Record",
+   "section": "XXIV",
+   "section_title": "XXIV. Test Cases - Live Claims Graded Against the Record",
    "subsection": "The ladder - four tiers, sorted by what the record actually holds"
   },
   {
@@ -1144,8 +1144,8 @@
     "FBI",
     "William O’Neal"
    ],
-   "section": "XXIII",
-   "section_title": "XXIII. Test Cases - Live Claims Graded Against the Record",
+   "section": "XXIV",
+   "section_title": "XXIV. Test Cases - Live Claims Graded Against the Record",
    "subsection": "The ladder - four tiers, sorted by what the record actually holds"
   },
   {
@@ -1159,8 +1159,8 @@
     "National Reconnaissance Office",
     "Maxar"
    ],
-   "section": "XXII",
-   "section_title": "XXII. Connective Tissue - Documented Cross-Category Links",
+   "section": "XXIII",
+   "section_title": "XXIII. Connective Tissue - Documented Cross-Category Links",
    "subsection": "Customers (gold lines)"
   },
   {
@@ -1174,8 +1174,8 @@
     "ASML",
     "TSMC"
    ],
-   "section": "XXII",
-   "section_title": "XXII. Connective Tissue - Documented Cross-Category Links",
+   "section": "XXIII",
+   "section_title": "XXIII. Connective Tissue - Documented Cross-Category Links",
    "subsection": "Supply chains (orange lines)"
   }
  ]

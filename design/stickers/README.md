@@ -31,15 +31,15 @@ The site hosts the set at **https://www.b0b.dev/stickers** (built by `publish.py
 **Where each line comes from** - the sentence on the page, quoted:
 - **01**, the address "To those inside": "Nothing documented in the sections below has hands of its own. Every capability here is a capability because trained people operate it."
 - **02**, the masthead: "The record it works from is deliberately dark - a review declared closed, some 200,000 pages withheld or redacted, sealed special-master reports, a state told to stand down and never answered."
-- **03**, Section XIV, its opening: "Slavery did not end. It changed form."
+- **03**, Section XV, its opening: "Slavery did not end. It changed form."
 - **04**, the masthead: "The anglerfish lives where no sunlight reaches."
 - **05**, the close: "Not 'it ended' but it has been completed and remains so."
 - **06**, Section II, the compellability fight: "When the instrument of silence was tested in court, the silence held."
-- **07**, the title of Section XV: "Active Global Conflicts - The Map Beneath the Map".
+- **07**, the title of Section XVI: "Active Global Conflicts - The Map Beneath the Map".
 - **08**, Section I, the author's own line: "no weapon formed against, I am useful" (Isaiah 54:17).
-- **09**, Section IV: "TEKEL, Daniel 5:27: you have been weighed in the balances and found wanting".
+- **09**, Section V: "TEKEL, Daniel 5:27: you have been weighed in the balances and found wanting".
 - **10**, the close: "Luke 12:6–7 runs: not one sparrow is forgotten before God… the hairs of your head are all numbered. And then: 'Fear not.'"
-- **11**, Section XXIII: "Proclamation 7463 … was signed on 14 September 2001. It has been continued every year since by every President."
+- **11**, Section XXIV: "Proclamation 7463 … was signed on 14 September 2001. It has been continued every year since by every President."
 - **12**, the close: "a document written as though the ledger were already kept - which, on the author's reading, it is."
 
 `verify.py` checks that each sticker carries its line word for word, so this list and the art cannot

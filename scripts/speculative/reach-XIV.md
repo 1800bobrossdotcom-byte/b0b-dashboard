@@ -1,29 +1,29 @@
 ID: XIV
-HEADLINE: Slavery was never abolished; each abolition rewrote it into law, and the extraction now runs on debt.
+HEADLINE: Power burns the record, keeps the knowledge, builds bunkers, and throws the Games on the graves.
 BODY:
-<p>Abolition was a renaming. Britain abolished slavery in 1833 and paid £20 million to the slaveholders, not the enslaved, and the public was still paying that debt down in the 21st century. The 13th Amendment ended slavery "except as a punishment for crime", the Black Codes filled the exception immediately, and convict leasing ran from 1865 to 1928. The exception now pays $0.13 to $0.52 an hour, and nothing at all in six states, while UNICOR took in $531 million in FY2022. The chain was not broken. It was converted into statute.</p>
-<p>The free population sits inside the same machine under a softer collar. A 30-year mortgage at 7% costs the buyer about 2.4 times the price, in Lagos, Berlin or Nashville. Student debt prices the credential employment demands; medical debt makes the body collateral. Productivity rose 64.7% while pay rose 14.8%, and CEO pay went from 21 times a worker's to 344. The surplus does not vanish. It flows up into the structures of Section VII. "The credential is the collar. The debt is the chain."</p>
-<p>Below the citizen is the open market in people: 27.6 million in forced labour, $236 billion a year in profit. The cobalt for phone and vehicle batteries comes from a mining belt where children as young as seven were found digging. The Gulag closed; Norilsk's mines still produce. The camps ended and the extraction did not. The same program runs on animals - "confine, extract, discard" - through the same financial structures. One system, one logic, applied to whichever population is cheapest to hold.</p>
-PROVE: A state corrections or UNICOR planning document that sets sentencing or incarceration targets against contracted labour demand.
-KILL: Accounts showing that UNICOR's revenue and the states' unpaid prison labour cost the public more than they returned, so the 13th Amendment exception produces no surplus for anyone.
-DRAWS_ON: xiv-historical-slavery-the-unbroken-line, xiv-prison-labor-the-13th-amendment-exception, xiv-debt-bondage-the-universal-chain, xiv-wage-compression-productivity-without-pay, xiv-forced-labor-the-ilo-data, ix-the-gulag-geography-forced-labor
+<p>The libraries were not lost. They were taken down on purpose, by power, each time power changed hands. Alexandria was destroyed in four stages across 700 years. Baghdad's House of Wisdom went into the Tigris in 1258. Nalanda burned in 1193. Bishop Diego de Landa ordered the Maya manuscripts burned in 1562 and four codices survive. Qin Shi Huang burned the books and buried 460 scholars alive. The mechanism is the one the section names: "The knowledge asymmetry is the control mechanism." A population that cannot read the last cycle cannot see the pattern running on it.</p>
+<p>The class that holds the asymmetry does not lose the knowledge. It keeps it and fences off the rest. Findings that stretch the human timeline are resisted - Monte Verde for decades - because what they imply destabilises the accepted story. And the same class builds for the reset. The section says it plainly: "The general population gets flood myths. The controlling class gets bunkers." The underground sites of Section X are not paranoia. They are preparation by people who expect the surface to be wiped.</p>
+<p>The Olympics are the same template run in public. The host is set down on the ground of the atrocity and the spectacle covers it: Sochi built on the coast from which the Circassians were expelled, Mexico City opening ten days after troops fired on students at Tlatelolco, Berlin's Games legitimising a regime IBM's tabulating machines served. The city keeps the debt, the venues rust, the contractors are paid, and the IOC departs with billions, immune in Lausanne. The celebration is the erasure. "The Games are the pattern: spectacle as cover."</p>
+PROVE: A continuity-of-government planning record naming a recurring surface reset, not any single war or disaster, as the design case for the underground sites the cycle template points to.
+KILL: The underground sites' own planning records naming a design case that is not a civilisational reset, set beside the five library purges traced to unrelated powers with unrelated aims.
+DRAWS_ON: xiii-indicators-of-cyclical-reset, xiii-the-cycle-template, xiii-the-olympic-pattern-celebration-on-contested
 LIVING_NAMES: none
 FACT_CHECK:
-- "British abolition compensation (1833): When Britain abolished slavery, the government paid £20 million ... to the slaveholders. Not to the enslaved."
-- "the public was still paying down slaveholder-compensation debt into the 21st century"
-- "Neither slavery nor involuntary servitude, except as a punishment for crime whereof the party shall have been duly convicted"
-- "Immediately after the 13th Amendment was ratified, Southern states passed "Black Codes""
-- "Convict leasing (1865–1928)"
-- "Average prison wages range from $0.13 to $0.52 per hour. Some states (Alabama, Arkansas, Georgia, Mississippi, South Carolina, Texas) pay nothing"
-- "Federal Prison Industries (UNICOR) generated $531 million in revenue in FY2022. The 13th Amendment exception is a revenue stream"
-- "The chain was never broken. Each link was replaced with a legal mechanism that preserved the extraction while changing the name."
-- "A 30-year mortgage at 7% interest means the buyer pays approximately 2.4x the purchase price of the home"; "$60,000 in Lagos ... $300,000 in Berlin"; "A family in Nairobi and a family in Nashville are inside the same mechanism"
-- "The system requires credentials to access employment, prices those credentials using debt"; "The body itself becomes the collateral"
-- "Between 1979 and 2024, net productivity rose 64.7% while hourly compensation rose 14.8%"
-- "In 1965, CEO pay was 21:1 relative to typical worker pay. By 2023, it was 344:1"
-- "The surplus labor value ... flows upward through the same corporate-financial structures documented in Section VII"
-- "The credential is the collar. The debt is the chain"
-- "27.6 million in forced labor"; "$236 billion in annual profits generated by forced labor globally (ILO 2024 update)"
-- "Amnesty International (2016) found children as young as seven in its artisanal mines"; "The cobalt goes into the batteries; the batteries go into phones and vehicles"; "in the southern Copperbelt - Lualaba and Haut-Katanga"
-- "Norilsk's mines still produce"; "The camps closed. The extraction continued."
-- "The devaluation of animal life and the devaluation of human labor are the same program applied to different populations. The logic is identical: confine, extract, discard"; "connected to the same financial structures identified in Section VII"
+- "Library of Alexandria - destroyed in stages (48 BC fire, 270 AD, 391 AD, 642 AD). Not one destruction but four"; "destroyed repeatedly, by different powers, across 700 years"
+- "House of Wisdom (Baghdad, 1258)"; "the Tigris running black with ink from the manuscripts thrown into the river"
+- "Nalanda University (Bihar, India, 1193) ... Burned by Bakhtiyar Khilji's forces"
+- "Bishop Diego de Landa ordered the burning of thousands of Maya manuscripts in 1562. Only four codices survive."
+- "Qin Shi Huang ordered the burning of all books outside the imperial library, and the burial alive of 460 scholars"
+- "When a cycle ends, the knowledge of the previous cycle is destroyed to prevent the next population from understanding the pattern. Every empire destroys the library of the one before it"
+- "Each cycle begins with the controlling class retaining knowledge the general population does not have. The knowledge asymmetry is the control mechanism."
+- "Pre-Clovis sites (Monte Verde, Chile - 18,500 years old) were resisted by the archaeological establishment for decades before acceptance"
+- "findings that extend the timeline of human civilization are resisted, not because the evidence is weak, but because the implications are destabilizing to the accepted narrative"
+- "The general population gets flood myths. The controlling class gets bunkers."
+- "D.U.M.B. sites are not paranoia - they are preparation by entities that retain knowledge of previous cycles"; "unless you know the surface is periodically reset"; "The underground infrastructure documented in Section X"
+- "host cities chosen not despite their contested histories but on top of them"
+- "Built on the coast of historical Circassia ... Sochi was the port from which they were expelled"
+- "Tlatelolco Massacre: October 2, 1968 - 10 days before Opening Ceremony. Mexican army and CIA-trained Olympia Battalion fired on student protesters"
+- "IBM provided tabulating machines for the regime. The Olympics as international legitimization of a fascist state"
+- "massive public debt, displaced populations, abandoned venues, enriched contractors, and the IOC departing with billions"; "Most venues now abandoned, rusting"
+- "The IOC operates as a tax-exempt body with diplomatic immunity from Lausanne, Switzerland"
+- "The Games are the pattern: spectacle as cover."

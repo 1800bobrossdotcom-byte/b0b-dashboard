@@ -46,7 +46,7 @@ drafts.** Do not re-add "an earlier version of this passage said X" prose.*
 **Real operators read this. Some may act on it.** That is the reason for the discipline,
 not a reason to soften it. Accuracy is the safety mechanism. Anything that would get a
 reader prosecuted, discredited, or killed does not go on the page — which is why the
-servicemember section (Section XXIV) leads with the lawful channels and states plainly
+servicemember section (Section XXV) leads with the lawful channels and states plainly
 what is a crime regardless of motive.
 
 ---

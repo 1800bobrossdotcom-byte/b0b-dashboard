@@ -313,7 +313,7 @@ def build_start(n_markers, n_edges):
 <h2>Holdings</h2>
 <p>The website is the operational interface. The dossiers are research outputs and artifacts at once. The jacket is the organisation made physical; the insignia is its identity; the motto, its framework.</p>
 <div class="dl two">
-  <a href="/report"><b>The report</b><span>The dossier: twenty-five sections and a researcher&rsquo;s guide, every claim tiered and sourced.</span></a>
+  <a href="/report"><b>The report</b><span>The dossier: twenty-six sections and a researcher&rsquo;s guide, every claim tiered and sourced.</span></a>
   <a href="/summary"><b>The summary</b><span>The report for the casual reader: what happened, how sure it is, and what you can do. A new edition each month, as a PDF.</span></a>
   <a href="/map"><b>The map</b><span>%s sites. Every line between them carries the tier of what the record shows.</span></a>
   <a href="/home"><b>The films</b><span>Endgame, The Epstein&ndash;Maxwell Record, Continuity and the intro film, with the author&rsquo;s transmissions.</span></a>
@@ -332,8 +332,8 @@ def build_start(n_markers, n_edges):
 <li><b>Standing rules.</b> No living, uncharged person is presented as a criminal or an intelligence asset. Redactions protecting living people are never reversed, and residences carry street names only. Victim interviews, protective-order material and imagery-heavy documents are not read past identification. Dates and numbers are recorded as facts, never read for meaning.</li>
 <li><b>One identified crawler.</b> It obeys robots.txt, never disguises itself, solves no challenge and never retries a refusal under another name - a document taken past an access control has contaminated provenance. A refusal is recorded as a null, and a claim resting on a source it could not read stays at a lower tier. Every fetch and every refusal is in the <a href="/data/sources-ledger.json">source ledger</a> with its SHA-256.</li>
 <li><b>Quotes and figures are read at the source.</b> No search result or summary, human or machine, carries a quote onto the page.</li>
-<li><b>AI assistance, disclosed.</b> Research, drafting, verification and deployment are done with AI models from more than one company, Claude (Anthropic) among them, under the author&rsquo;s direction; the author takes issue with both Anthropic and OpenAI. Anthropic is also a subject of the report; the conflict is disclosed where it arises (Sections X and XXV).</li>
-<li><b>Corrections.</b> A claim a primary source contradicts is lowered or removed, whoever raised it - the author and the AI included. It is fixed in place and entered in the <a href="/retractions">ledger</a>; contested and defamation-adjacent material waits for the author. To send one, use the researcher&rsquo;s guide at the end of <a href="/report#XXV">the report</a>: the claim, the passage, and the source that contradicts it.</li>
+<li><b>AI assistance, disclosed.</b> Research, drafting, verification and deployment are done with AI models from more than one company, Claude (Anthropic) among them, under the author&rsquo;s direction; the author takes issue with both Anthropic and OpenAI. Anthropic is also a subject of the report; the conflict is disclosed where it arises (Sections XI and XXVI).</li>
+<li><b>Corrections.</b> A claim a primary source contradicts is lowered or removed, whoever raised it - the author and the AI included. It is fixed in place and entered in the <a href="/retractions">ledger</a>; contested and defamation-adjacent material waits for the author. To send one, use the researcher&rsquo;s guide at the end of <a href="/report#XXVI">the report</a>: the claim, the passage, and the source that contradicts it.</li>
 </ul>
 
 <h2>The data</h2>
@@ -358,44 +358,44 @@ def build_start(n_markers, n_edges):
 # --------------------------------------------------------------------------- /retractions
 # (date, where, what the page said or did, what replaced it, how it was found)
 RETRACTIONS = [
-    ('2026-09-12', 'VII', 'Closed the Federal Reserve material by saying the banking dynasties that created it still operate it.',
+    ('2026-09-12', 'VIII', 'Closed the Federal Reserve material by saying the banking dynasties that created it still operate it.',
      'Removed. The succession printed directly above the sentence contains no banking dynasty; Paul Warburg was vice-governor 1916&ndash;18 and never chairman. The documented revolving door stays.',
      'It failed against the report&rsquo;s own list.'),
-    ('2026-09-12', 'XX', 'Told the reader to &ldquo;note the Warburg name&rdquo; in Warburg Pincus.',
+    ('2026-09-12', 'XXI', 'Told the reader to &ldquo;note the Warburg name&rdquo; in Warburg Pincus.',
      'Removed. The firm has been a private partnership since 1966.', 'Corporate history.'),
-    ('2026-09-12', 'VI', 'Cross-referenced a &ldquo;Rothschild banking network documented in Section VII&rdquo;.',
-     'Replaced with the actual five-house record, including Vienna seized after the March 1938 Anschluss. Section VII had carried one sentence, about an 1825 loan.',
+    ('2026-09-12', 'VII', 'Cross-referenced a &ldquo;Rothschild banking network documented in Section VIII&rdquo;.',
+     'Replaced with the actual five-house record, including Vienna seized after the March 1938 Anschluss. Section VIII had carried one sentence, about an 1825 loan.',
      'The cross-reference pointed at something that was not there.'),
     ('2026-09-12', 'II', 'Read the 1994 Mirror Group settlement as Maxwell&rsquo;s company conceding the allegation.',
      'Corrected. The apology was for the October 1991 articles attacking two journalists; settling a libel action is not an admission.',
      'Symmetry rule - a discount that only ran one way.'),
     ('2026-09-12', 'II', 'Called a 2014 contact &ldquo;the CIA Director who met with Epstein&rdquo;, in three places.',
      'Corrected. In 2014 he was Deputy Secretary of State; his CIA tenure was 2021&ndash;25.', 'A naming error of our own.'),
-    ('2026-09-12', 'XVI', 'Cited an FBI Urban Moving serial of 24 September 2001 marked &ldquo;Pending&rdquo;.',
+    ('2026-09-12', 'XVII', 'Cited an FBI Urban Moving serial of 24 September 2001 marked &ldquo;Pending&rdquo;.',
      'Replaced with the closing memorandum (case closed 10 July 2003), which records the counter-intelligence concern and kills the foreknowledge specimen on physical evidence.',
      'An eleven-day-old serial was standing in for a two-year case.'),
     ('2026-09-12', 'Report-wide', '33 notes narrating the report&rsquo;s own revisions, and an &ldquo;editorial correction&rdquo; box.',
      'Removed at the author&rsquo;s instruction. Claims are now fixed in place; this page is where the corrections are listed.', 'Readability.'),
-    ('2026-09-18', 'X', 'Said Hikvision cameras watch Egypt&rsquo;s New Administrative Capital.',
+    ('2026-09-18', 'XI', 'Said Hikvision cameras watch Egypt&rsquo;s New Administrative Capital.',
      'Corrected. Honeywell (US) signed in 2019 to integrate 6,000+ cameras; an IDS study names Egypt as the exception where &ldquo;Honeywell takes the place of Huawei&rdquo;.',
      'Unsourced; the primary said the opposite.'),
     ('2026-09-19', 'Map', 'All 161 mass-shooting markers were dated 1982 - the start of a data set&rsquo;s coverage, not the shooting.',
      'Re-dated from each marker&rsquo;s own text by a rule-based extractor; 273 dates changed.', 'Our own date extractor took the earliest year on the line.'),
-    ('2026-09-21', 'XIII', 'A subsection reading symbols, crosses and words as evidence (the &ldquo;naming error&rdquo; set piece).',
+    ('2026-09-21', 'XIV', 'A subsection reading symbols, crosses and words as evidence (the &ldquo;naming error&rdquo; set piece).',
      'Removed whole. The rule survives where it is defined, in Section I.', 'The author: it was off the report&rsquo;s subject.'),
-    ('2026-09-23', 'VII', 'Said the Svalbard seed vault was funded by Monsanto, Syngenta and DuPont for confiscation.',
+    ('2026-09-23', 'VIII', 'Said the Svalbard seed vault was funded by Monsanto, Syngenta and DuPont for confiscation.',
      'Rewritten. Norway established and fully funded the vault and owns it; only a depositing gene bank can ask for its seeds back. What survives is the seed-patent record.',
      'The operator&rsquo;s own site.'),
-    ('2026-09-23', 'XIII, XVI', 'Point Nemo (a coincidence chain), a Netherlands courtroom passage that called &ldquo;families who own the central banks&rdquo; documented, and a directed-energy claim resting on one anonymous account.',
+    ('2026-09-23', 'XIV, XVII', 'Point Nemo (a coincidence chain), a Netherlands courtroom passage that called &ldquo;families who own the central banks&rdquo; documented, and a directed-energy claim resting on one anonymous account.',
      'Removed whole. The courtroom passage restated a trope the report had already killed.', 'Off-track audit.'),
     ('2026-09-24', 'II', 'Said Epstein&rsquo;s body was identified by his brother.',
      'Removed - not established; one outlet reported only that he said so. The pathologist observing the autopsy is now stated as retained by the family.',
      'Fact-check for the Epstein&ndash;Maxwell film.'),
-    ('2026-09-26', 'XV', 'Our 22 September update printed the UN Iran mission&rsquo;s finding against the US and omitted the same report&rsquo;s crimes-against-humanity finding against Iran&rsquo;s government; some casualty figures had no source.',
+    ('2026-09-26', 'XVI', 'Our 22 September update printed the UN Iran mission&rsquo;s finding against the US and omitted the same report&rsquo;s crimes-against-humanity finding against Iran&rsquo;s government; some casualty figures had no source.',
      'Both findings now printed; counts replaced with the sourced ones.', 'The next current-events scan - the symmetry rule failing our way.'),
-    ('2026-10-01', 'XV', 'Called &ldquo;economic D-Day&rdquo; a threat, and placed the UAE in a meeting.',
+    ('2026-10-01', 'XVI', 'Called &ldquo;economic D-Day&rdquo; a threat, and placed the UAE in a meeting.',
      'Corrected. It was a campaign name; attendance is not established.', 'Re-reading the sources quote by quote.'),
-    ('2026-10-02', 'XIV, XV', 'Placed the cobalt belt in Eastern Congo, and cited children &ldquo;as young as six&rdquo; and an old Labor Department count.',
+    ('2026-10-02', 'XV, XVI', 'Placed the cobalt belt in Eastern Congo, and cited children &ldquo;as young as six&rdquo; and an old Labor Department count.',
      'Corrected. The cobalt is in the southern Copperbelt (Lualaba and Haut-Katanga); Amnesty&rsquo;s figure is seven; the 2024 list is 204 goods from 82 countries. Eastern Congo&rsquo;s documented minerals are tin, tantalum, tungsten and gold.',
      'The map audit.'),
     ('2026-10-02', 'Map', 'Markers showed living people&rsquo;s cases without their outcomes - acquittals, dismissals, settlements - plus misquotes, chains implied by shared timing, residence house numbers and pins up to 400 km off.',
@@ -414,16 +414,16 @@ RETRACTIONS = [
     ('2026-10-04', 'AI report', 'Stated that the document &ldquo;proves&rdquo; AI output channels are manipulated by a background process, and counted a self-concealing pattern as evidence.',
      'Tiered. The outputs and defects are documented; the background process is a hypothesis; the competing explanation - ordinary model error and bias - is stated.',
      'The same review.'),
-    ('2026-10-06', 'XXIII', 'Put the words &ldquo;sensitive aerospace program&rdquo; in Tom DeLonge&rsquo;s 2016 email about Gen. McCasland (they are not in it); read his wife&rsquo;s public statement as &ldquo;an unusual preemption&rdquo; about intelligence connections (it answered speculation already circulating and rejected it); said he walked into the Sandia foothills and took a gun; and counted his case as &ldquo;total institutional silence&rdquo;.',
+    ('2026-10-06', 'XXIV', 'Put the words &ldquo;sensitive aerospace program&rdquo; in Tom DeLonge&rsquo;s 2016 email about Gen. McCasland (they are not in it); read his wife&rsquo;s public statement as &ldquo;an unusual preemption&rdquo; about intelligence connections (it answered speculation already circulating and rejected it); said he walked into the Sandia foothills and took a gun; and counted his case as &ldquo;total institutional silence&rdquo;.',
      'Corrected from the email itself, the sheriff&rsquo;s releases and the published 911 call: direction of travel unknown; a revolver, wallet and backpack unaccounted for; his wife&rsquo;s account of a deliberate departure printed beside the pattern; Podesta&rsquo;s 1 Oct 2026 account of the call set against Grusch&rsquo;s.',
      'A Daily Mail lead (6 Oct 2026), checked against its sources.'),
-    ('2026-10-26', 'XX, VII, XII, IV', 'Listed Jared Kushner&rsquo;s firm, Affinity Partners, among the resources for moving people underground; carried a Kushner &rarr; Saudi PIF &rarr; NEOM chain; dated PIF&rsquo;s $2B to July 2021; gave Affinity as $3B and ~$4.8B; quoted &ldquo;PR risks&rdquo; from PIF&rsquo;s screening panel; stated MBS&rsquo;s override as fact; kept him on the Indian Creek council &ldquo;in multiple White House administrations&rdquo;; called the Moscow session &ldquo;accredited envoy diplomacy&rdquo; and Mueller&rsquo;s review &ldquo;exhaustive&rdquo;.',
+    ('2026-10-26', 'XXI, VIII, XIII, V', 'Listed Jared Kushner&rsquo;s firm, Affinity Partners, among the resources for moving people underground; carried a Kushner &rarr; Saudi PIF &rarr; NEOM chain; dated PIF&rsquo;s $2B to July 2021; gave Affinity as $3B and ~$4.8B; quoted &ldquo;PR risks&rdquo; from PIF&rsquo;s screening panel; stated MBS&rsquo;s override as fact; kept him on the Indian Creek council &ldquo;in multiple White House administrations&rdquo;; called the Moscow session &ldquo;accredited envoy diplomacy&rdquo; and Mueller&rsquo;s review &ldquo;exhaustive&rdquo;.',
      'Removed from the relocation passage (no document ties the firm to it) and the NEOM chain cut (no source ties Kushner or Affinity to NEOM). Corrected: June 2021 (Senate Finance); $6.16B under management (Form ADV, March 2026); the panel&rsquo;s objections and the override attributed to the New York Times via House Oversight letters; on the village council from 2024 to mid-2026; no title on 2 Dec 2025; Mueller left the Gorkov meeting&rsquo;s purpose disputed. The Indian Creek block no longer reads its residents as a working group.',
      'A graded look at Kushner&rsquo;s record, at the author&rsquo;s request.'),
     ('2026-10-27', 'Tone tools', 'The tone pages and the countermeasures drawer said a 20&ndash;22 kHz sweep &ldquo;jams cross-device tracking beacons &amp; acoustic data exfiltration&rdquo; and was &ldquo;humidity-adaptive&rdquo; (nothing in the code reads humidity); labelled tones &ldquo;Pain Relief&rdquo;, &ldquo;Tissue Healing&rdquo; and &ldquo;Love / DNA Repair&rdquo;; claimed &ldquo;sub-harmonic body-water resonance&rdquo;; called every tone &ldquo;ANIMAL-SAFE&rdquo;; and said the WebRTC and canvas guards protect the reader, when they act only on this site&rsquo;s own pages.',
      'Each tool now says what it is and nothing about what it does: a fixed 20&ndash;22 kHz noise sweep, untested against any beacon and above what most speakers play; sine tones by frequency; binaural beats as two tones one per ear; guards that act on this site only. The names that claimed an effect (healing, protective, shield, sacred) were changed; the addresses were not.',
      'An outside review, checked against the pages.'),
-    ('2026-10-27', 'XV, XIII, XVI, II, X, XXIII, XXV', 'The 3 September update printed the US capture of Nicol&aacute;s Maduro as a killed specimen, &ldquo;It is not true&rdquo;; it happened on 3 January 2026. XIII said G&ouml;bekli Tepe was &ldquo;deliberately buried&rdquo; and that the geological record &ldquo;confirms&rdquo; a Younger Dryas impact. XVI said the two governments&rsquo; official accounts of the USS <em>Liberty</em> dispute premeditation. II said Israel apologised for Pollard and disbanded the unit, delivered by Shimon Peres, and that no payer had explained what the Epstein money bought. X called Palantir &ldquo;CIA-funded&rdquo;. XXIII said neither 9/11 hijacker was watchlisted, with no date. XXV gave the player as twelve tracks and eight written entries.',
+    ('2026-10-27', 'XVI, XIV, XVII, II, XI, XXIV, XXVI', 'The 3 September update printed the US capture of Nicol&aacute;s Maduro as a killed specimen, &ldquo;It is not true&rdquo;; it happened on 3 January 2026. XIV said G&ouml;bekli Tepe was &ldquo;deliberately buried&rdquo; and that the geological record &ldquo;confirms&rdquo; a Younger Dryas impact. XVII said the two governments&rsquo; official accounts of the USS <em>Liberty</em> dispute premeditation. II said Israel apologised for Pollard and disbanded the unit, delivered by Shimon Peres, and that no payer had explained what the Epstein money bought. XI called Palantir &ldquo;CIA-funded&rdquo;. XXIV said neither 9/11 hijacker was watchlisted, with no date. XXVI gave the player as twelve tracks and eight written entries.',
      'Corrected: Maduro and Cilia Flores captured 3 Jan 2026, indicted in New York, pleading not guilty. G&ouml;bekli Tepe&rsquo;s excavators now attribute the fill to slope slides; the impact hypothesis is contested. Neither government&rsquo;s official account found premeditation, and the dissent is inside the US record. Israel called Pollard a &ldquo;rogue operation&rdquo;, then in 1998 acknowledged him as a Lekam agent; no apology or disbandment was found. Black&rsquo;s and Dechert&rsquo;s explanations are on the record, and what is unexplained is the scale. In-Q-Tel is a documented early Palantir shareholder. Not put forward for a watchlist until 21&ndash;23 August 2001. Eighteen tracks on the player and nine written entries.',
      'The page errors on file, and an outside review.'),
     ('2026-10-27', 'X, XXV, Briefing', 'The report said the author&rsquo;s Claude subscription was cancelled effective 1 September 2026 and that the work would then move to open-source AI models; the Briefing said the work is done with Claude alone.',
@@ -484,7 +484,7 @@ def build_map_list(locs, edges):
     from collections import OrderedDict
     secs = OrderedDict()
     order = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV',
-             'XVI', 'XVII', 'XVIII', 'XIX', 'XX', 'XXI', 'XXII', 'XXIII', 'XXIV', 'XXV']
+             'XVI', 'XVII', 'XVIII', 'XIX', 'XX', 'XXI', 'XXII', 'XXIII', 'XXIV', 'XXV', 'XXVI']
     for l in sorted(locs, key=lambda l: (order.index(l['section']) if l['section'] in order else 99, l['section'], l['name'])):
         secs.setdefault(l['section'], []).append(l)
     names = {'MS': 'Mass shootings', 'ANIMAL': 'Animal research', 'SPORTS': 'Sport and gambling'}

@@ -1,34 +1,28 @@
 ID: XXIV
-HEADLINE: The control architecture is a dependency machine, and every seed, filter and library card starves it.
+HEADLINE: Discretion is the weapon - who is charged, who is spared, and which emergency never ends.
 BODY:
-<p>The system does not run on force. It runs on participation. The debt requires a borrower. The surveillance requires a resident. The city-as-network requires nodes. Every patent, paywall and middleman in this report is one mechanism: take the ordinary thing - seed, water, knowledge, land - and sell access back to the people it came from. The ownership model is the extraction mechanism. The patent is the extraction; the plant is the original.</p>
-<p>So the answer is replacement, not reform. A seed that reproduces replaces the agricultural supply chain. A gravity filter replaces the municipal system, and when the grid goes offline, gravity continues to work. A community land trust takes land off the speculative market permanently. A FOIA request replaces the media narrative. A library card replaces the paywall. Bare feet on soil cannot be metered, taxed or surveilled. Internal states have no API. The free interventions are the ones nobody promotes, and they are free for a reason the system cannot afford.</p>
-<p>The shelter was built first. "Against such things there is no law." Against an architecture that surveils from above stands a refuge older than any empire, any program, any classified directive - not built by any government, any contractor or any classified program.</p>
-<p>For those inside the institutions, the architecture has already written the one route it must honour. Every failure this report documents had somebody inside who knew and had no route out they trusted. Communication to a Member of Congress or an Inspector General is protected by statute, and retaliation for it is itself the violation. The protected route is also the effective one.</p>
-PROVE: A documented case in which an operator named in Section VII changed its terms because a community withdrew from its market - seed, water or land - rather than because a regulator acted.
-KILL: Land-trust land returned to the speculative market, or open-pollinated seed lines enclosed by patent, showing extraction resumes wherever participation has been withdrawn.
-DRAWS_ON: xxiii-practices-of-reclamation, xxiii-the-practical-framework, xxiii-resource-guide-tools-for-reclamation, xxiii-for-servicemembers-the-lawful-channels
-LIVING_NAMES: none
+<p>The Department of Justice that signed the 2007 non-prosecution agreement for Epstein and immunised co-conspirators it never named brought thirteen felony counts against a 25-year-old for downloading journal articles. Both nominal victims said they did not want the case; the prosecution cited "general deterrence of others." That is not inconsistency. It is the instrument working: shield the network, make an example of the man who opened the archive.</p>
+<p>9/11 shows the method at full scale, and every documented node is institutional. Fifty to sixty CIA officers read that two known al-Qaeda operatives held US visas, and neither was put forward for a watchlist until 21-23 August 2001. A year earlier a think tank had written that transformation needed "a new Pearl Harbor"; the transformation it described followed. Continuity of Government ran for the first time in its history. Twenty-three days after the attack STELLAR WIND was authorised. The emergency proclaimed on 14 September 2001 has been continued every year since, and sixty words with no named enemy state and no expiry still carry operations in more than a hundred countries. The attack threw the switch on machinery already built.</p>
+<p>The exit ladder says the same thing in blood. Where the paperwork exists it does not show entertainers killed for what they knew. It shows the FBI's informant inside Fred Hampton's security handing over a floor plan, an NYPD undercover inside Malcolm X's own security while the state withheld evidence that would have cleared two men it imprisoned, the CIA dosing Frank Olson with LSD nine days before his fall, and a campaign urging Martin Luther King Jr. toward suicide. Organizers, scientists, reporters - and the admissions surfacing decades later.</p>
+PROVE: A released CIA or FBI document showing the reporting on al-Hazmi and al-Mihdhar was held back from the watchlist by instruction rather than lost by failure.
+KILL: The contemporaneous files showing the 2007 non-prosecution terms were reached by ordinary negotiation and the 2001 watchlist delay by ordinary error, with no instruction from above in either.
+DRAWS_ON: xvi-united-states-v-swartz-the-ruling-recorded-the-prosecution-documented, xvi-9-11-vector-5-the-failure-record-in-the-governments-own-words, xvi-9-11-vector-2-continuity-of-government-the-first-activation, xvi-9-11-vector-3-the-emergency-that-did-not-end, xvi-9-11-vector-4-the-surveillance-state-dated-to-the-day, xx-the-ladder-four-tiers-sorted-by-what-the
+LIVING_NAMES: none named. The unnamed prosecutor quoted ("general deterrence of others") appears only for his documented statement to MIT's counsel; the unnamed co-conspirators appear only as the NPA's documented immunity, unidentified. Named people are all dead: Jeffrey Epstein, Aaron Swartz (the "25-year-old", named in the section), Fred Hampton, Malcolm X, Frank Olson, Martin Luther King Jr., Nawaf al-Hazmi and Khalid al-Mihdhar (9/11 hijackers).
 FACT_CHECK:
-- Every control structure identified in this report depends on one thing: participation. The debt requires a borrower. The surveillance requires a resident. The city-as-network requires nodes.
-- The ownership model is the extraction mechanism.
-- The patent is the extraction. The plant is the original
-- The paywalls are the access control architecture applied to knowledge
-- The counter-architecture, by this analysis, is replacement
-- A seed replaces the agricultural supply chain. A water filter replaces the municipal system.
-- When the grid goes offline, gravity continues to work
-- removed from the speculative real estate market permanently
-- A FOIA request replaces the media narrative.
-- A library card replaces the paywall.
-- The simplest act of resistance is standing barefoot on soil. The system cannot meter, tax, or surveil this.
-- Internal states have no API.
-- It is not promoted because the intervention is free
-- Against such things there is no law.
-- The system that surveils, contaminates, and controls from above is met here by the shelter that has stood longer than any empire, any program, any classified directive.
-- it was not built by any government, any contractor, or any classified program
-- The shelter has already been built
-- The single consistent feature of every one of those failures is that somebody inside knew and had no route out that they trusted.
-- 10 U.S.C. § 1034, the Military Whistleblower Protection Act
-- A protected communication is any lawful communication to a Member of Congress or an IG
-- retaliation for doing so is itself the violation
-- The protected route is also the effective one
+- "The same Department of Justice that, in the non-prosecution agreement of 2007 documented in Section II, declined federal charges against Epstein and immunised co-conspirators it had not named, brought thirteen felony counts against a 25-year-old for downloading journal articles."
+- "Both nominal victims are on record as not wanting it."
+- "had to consider “general deterrence of others.”"
+- "Discretion is the instrument."
+- "Every vector this document tracks has a documented 9/11 node, and in every case the documented node is institutional."
+- "between fifty and sixty CIA officers had read intelligence reporting that two known al-Qaeda operatives, Nawaf al-Hazmi and Khalid al-Mihdhar, held US visas - from January and March 2000 - and that neither was put forward for a watchlist until 21–23 August 2001"
+- "Page 51 of the Project for the New American Century’s Rebuilding America’s Defenses, September 2000: “... absent some catastrophic and catalyzing event – like a new Pearl Harbor.”"; "that the transformation the sentence describes followed"
+- "11 September 2001 was the first activation of Continuity of Government in its history"
+- "4 October 2001 - twenty-three days after the attack - the President authorised the programme later code-named STELLAR WIND"
+- "Proclamation 7463 ... was signed on 14 September 2001. It has been continued every year since by every President"
+- "the 2001 Authorization for Use of Military Force - sixty words, no named enemy state, no geography, no expiry. It remains the legal basis on which US forces have conducted operations described as counter-terrorism in more than a hundred countries."
+- "this is the one recorded instance of the switch being thrown"
+- "Where the documentary record exists, it does not show entertainers being killed for what they might say; it shows organizers, scientists and reporters being surveilled, disrupted, and in four documented instances killed or dosed, with the paperwork surfacing decades later"
+- "informant William O’Neal, inside Hampton’s security, supplied the Bureau a floor plan of the apartment"
+- "an NYPD BOSSI undercover officer, Gene Roberts, served inside Malcolm X’s own security"; "the state withheld material that would have cleared two men it imprisoned for decades"
+- "fell from a 13th-floor window of the Statler Hotel in New York nine days after being dosed with LSD without his knowledge by the CIA"
+- "the 1964 anonymous package and letter urging him toward suicide"

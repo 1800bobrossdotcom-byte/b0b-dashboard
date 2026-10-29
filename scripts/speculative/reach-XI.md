@@ -1,31 +1,39 @@
 ID: XI
-HEADLINE: Every "New" is a transplanted control system, and New Albany is the one still running.
+HEADLINE: The smart city, the stack and the kill chain are one machine for indexing and targeting populations.
 BODY:
-<p>Start with the original. The Dutch West India Company had "its own military, its own courts, its own currency". It took Manhattan for 60 guilders of trade goods from people who did not control the land, held New Amsterdam's first slave auction in 1655, and built the wall that became Wall Street. In 1664 the English seized it and renamed it New York. The machinery did not change hands; only the sign over it did. Global capital still sits on a colonial fortification line.</p>
-<p>Egypt runs the same play in the present tense. The New Administrative Capital - $100+ billion, 700 km², 45 km east of Cairo - has already become "The New Capital" and is headed for "Memphis", the word "New" removed one step at a time. At its centre is the Octagon, the largest military HQ in the Middle East. It is not a city with a military district. It is a military-intelligence installation that issues street names, and the renaming is the concealment.</p>
-<p>New Albany is where the template closes. Population 414 in 1980, 10,825 in 2020, built out by a single billionaire's investment into a planned community. Jeffrey Epstein paid $3.5M for a home there in 1993; the convicted sex trafficker Ghislaine Maxwell told the deputy U.S. attorney general that Epstein "ran New Albany". The same town now carries a Facebook data center, a Google data center and an Intel fab on 926 annexed acres. The trafficking network's node and the plant that processes the world's data share one small Ohio town. By the section's own rule, a "New" that survives marks a replication still in progress.</p>
-PROVE: A governance instrument for the New Administrative Capital or New Albany setting a military or corporate authority above the civilian law that applies there, as the section's template predicts.
-KILL: Records showing both places governed by ordinary civilian authorities with no military or corporate layer above them, and the Octagon answerable to the city rather than the city to the Octagon.
-DRAWS_ON: xi-new-amsterdam-new-york-16241664, xi-new-cairo-egypt-s-nac-proposed-memphis, xi-new-albany-ohio-1837present, xi-the-pattern-summary
-LIVING_NAMES: Ghislaine Maxwell - as the convicted sex trafficker who made a documented statement to the deputy U.S. attorney general; no other role. The billionaire behind New Albany's build-out is referred to only as the section does, for his documented investment.
+<p>Hollerith built it for the 1890 census, and everything since is the same operation performed faster and without paper. In Egypt the Ministry of Defense owns 51% of the entity that owns the capital: no public squares, a mandatory app, 6,000+ cameras wired into one Integrated Command and Control Centre, built by an American company. NEOM is a 170km corridor with no exits on the sides. The civilian population uses the city. The military-intelligence apparatus owns it.</p>
+<p>Underneath, the alliance does what each member's own law forbids. Five Eyes outsources domestic surveillance to a partner. ECHELON was used for industrial espionage. PRISM reached the stack, MUSCULAR tapped Google's internal network without Google's knowledge or consent, and the NSA was collecting 5 billion cell phone location records a day. A private plate-reader grid nobody voted for writes movement histories, and the access flows outward to other states and federal agencies before anyone locally notices.</p>
+<p>Then the index becomes a target list. Maven turns the feeds into targeting recommendations. Nimbus binds Google and Amazon to serve every Israeli government entity, the military included; Lavender flagged ~37,000 Palestinians and Where's Daddy? finds them at home. In Washington a presidential memorandum names "anti-capitalism, and anti-Christianity" among the indicia of the movements it targets, while a constellation is "designed to remap the entire planet every day at one-meter resolution." The Department's study of what it should buy is co-led by two men whose companies sell it.</p>
+<p>The join between the orbital eye and the designation list is not missing. It is being assembled in public, one contract at a time.</p>
+PROVE: An NSPM-7 designation file, contract or tasking order showing orbital imagery or Maven targeting pointed at people designated under the memorandum's opinion indicia.
+KILL: NSPM-7 applied in practice only to conduct, with no group designated on its opinion indicia, and a 28 January 2027 Meridian report whose recommendations fall outside its co-leads' catalogues.
+DRAWS_ON: x-egypt-s-new-administrative-capital-nac-the-new, x-the-snowden-disclosures-what-five-eyes, x-project-nimbus-google-amazon-build-israel-s-ai, x-merlin-and-nspm-7-a-claim-checked-in-both-directions, x-ancillary-module-ibm-and-the-registration, x-the-study-and-the-sellers-autonomous-warfare-command-and-project-meridian
+LIVING_NAMES: none named. Identifiable by role, documented acts only, no intent asserted: the President who signed NSPM-7 (signing documented); the two Project Meridian co-leads whose companies hold defence contracts (appointment and contracts documented, per Stars and Stripes).
 FACT_CHECK:
-- "The Company had its own military, its own courts, its own currency."
-- "Manhattan "purchased" from the Canarsee people for 60 guilders of trade goods ... - an exchange negotiated with people who did not control the land"
-- "The first slave auction in New Amsterdam: 1655"
-- "Wall Street takes its name from the city wall built to defend the colony - the financial architecture of global capital literally sits on a colonial fortification line"
-- "In 1664, the English seized control and renamed it New York"
-- "The pattern: conquer, rename, continue extraction under new branding"
-- "Egypt's New Administrative Capital sits 45 km east of Cairo."
-- "first "New Administrative Capital," then "The New Capital" (Nov 2025), then the proposed "Memphis" (Feb 2026). Each renaming removes the word "new" further - obscuring the replication pattern."
-- "$100+ billion project, 700 km² planned area"
-- "The Octagon - largest military HQ in the Middle East - is the real center of power"
-- "The "new" capital is a military-intelligence installation disguised as urban planning"
-- "Renaming to obscure the replication once control is established"
-- "Population 414 in 1980; 10,825 in 2020 - a 2,500% increase driven by a single billionaire's investment"
-- "Paid $3.5M for a home in Wexner's planned community (1993)"
-- "Convicted sex trafficker Ghislaine Maxwell told the deputy U.S. attorney general that Epstein "ran New Albany""
-- "Facebook data center (opened 2020), Google data center (under construction), Intel semiconductor fabrication plant - "world's largest" - on 926 acres annexed into New Albany"
-- "New Albany is the convergence point of extraction, trafficking, and data infrastructure in a single geography."
-- "The town is designed"
-- "a surviving "New" marks an incomplete replication"
-- "Establishment of a corporate or military governance layer above civilian law"
+- "Herman Hollerith built tabulating machines for the 1890 US census"
+- "Everything else in Section XI - the smart-city camera, the plate reader, the biometric database - is that same operation performed faster and without paper."
+- (verified by reading) 51% held by Ministry of Defense / ACUD, the entity that owns the capital city itself (Section IX; X: 51% military ownership of the governing entity (ACUD))
+- "No public squares (by design - eliminates gathering points)"
+- "Mandatory mobile application for residents"
+- "6,000+ AI-powered surveillance cameras - Honeywell (US) with e& Egypt, into one Integrated Command and Control Centre"
+- "The 2019 camera contract is a document, and it is American."
+- "The city is a 170km corridor with no exits on the sides."
+- "The civilian population uses the city. The military-intelligence apparatus owns it"
+- "The alliance allows each participant to outsource domestic surveillance to a foreign partner."
+- "The system has been used for industrial espionage"
+- "PRISM: Access to user data ... of nine major internet companies"
+- "The NSA accessed Google's internal network without Google's knowledge or consent"
+- "The NSA was collecting 5 billion cell phone location records per day globally as of 2013"
+- "The unit of surveillance here is the population"
+- "a private movement-tracking grid that nobody voted for at national scale"
+- "the auditable record shows access flowing outward from those municipalities - to other states, and at least once to a federal agency ... before anyone locally noticed"
+- "automated analysis of drone surveillance footage for object detection, classification, and targeting recommendations"
+- "Google and Amazon are contractually forbidden from denying service to any Israeli government entity - including the military and intelligence services"
+- "Lavender said to have flagged ~37,000 Palestinians"
+- "locates designated individuals and marks them for strike when they are at their family residences"
+- (verified by reading) NSPM-7, Countering Domestic Terrorism and Organized Political Violence, signed 25 September 2025 / anti-Americanism, anti-capitalism, and anti-Christianity; ...
+- "a constellation “designed to remap the entire planet every day at one-meter resolution,”"
+- "The body that will identify which capabilities the military needs is co-led by two men whose companies sell those classes of capability to the same department."
+- "Findings are due no later than 28 January 2027"
+- "When the unclassified report appears, each capability it recommends can be set against the co-leads’ product lines and contract portfolios"
+- "It creates no new legal authority." / "a program that pointed orbital detection at people designated under NSPM-7 would, from the outside, look exactly like no such program"

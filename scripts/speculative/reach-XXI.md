@@ -1,25 +1,29 @@
 ID: XXI
-HEADLINE: Compute is the control layer, held by two capital regions and moving offshore beyond the reach of law.
+HEADLINE: The index is the org chart of one room, and that room holds custody of its own record.
 BODY:
-<p>Every layer this report documents runs on a building, and the section's own map says where the buildings are. Northern Virginia and Greater Beijing hold about 20% of world hyperscale capacity. Ashburn carries a large share of global internet traffic. The Ulanqab-Hohhot corridor is "the single largest concentration of hyperscale capacity on Earth" under Beijing's "East Data, West Computing" plan. The NSA Utah Data Center came online in 2014 as the intelligence community's mass-data node. That is not a market chasing cheap land. It is two states pulling the substrate of everything above it inside reach of their own capitals.</p>
-<p>Ownership follows the state line. Apple's China iCloud data is stored at Gui'an via GCBD, beside Tencent and Huawei. The Hainan subsea cluster is backed by four Chinese authorities. Stargate in Abilene - OpenAI, Oracle and SoftBank, about $500B - and the gigawatt campuses like it now outpace regional grids in power draw, so the grid bends to the campus, not the other way round. Whoever holds the substrate holds the surveillance cities, the financial coordination and the data flows that run on it.</p>
-<p>Then the sea. Natick proved subsea compute off Orkney, Hainan scaled it, Shanghai tied it to offshore wind, Nautilus floats a barge at Stockton, Keppel is building a floating park in Singapore. The section names the gain itself: water "sidesteps land, cooling, and (in some cases) regulatory constraints" and moves infrastructure "into contested or lightly-governed maritime space". The move offshore is the point, not the side effect. Compute that lives under water lives outside the jurisdictions that could reach it.</p>
-PROVE: A siting document, contract or ministry directive in which a state names security or jurisdiction, rather than cooling or power cost, as the reason a subsea or offshore cluster was placed where it is.
-KILL: Programme records showing the Hainan, Shanghai, Stockton and Singapore builds were sited for cooling and power cost alone and sit under the same national data law as the land campuses.
-DRAWS_ON: xxi-ocean-based-offshore-platforms-the-new, xxi-land-hyperscale-surveillance-nodes
-LIVING_NAMES: none
+<p>Count the chairs, not the people. The CFR appears in the calibration profile of every tier; it is the network's address book. Treasury is fed by one financial ecosystem across four administrations and both parties. Defense contractors feed the cabinet and the cabinet feeds the boards. Covington & Burling and Paul, Weiss carry officials across party lines; the pipeline does not have a party, it has clients. Coordination, money, force, intelligence and circulation are five faces of the same structure, and the occupants rotate between desks in one room. Henry Kissinger held Secretary of State and National Security Advisor at once and bridged the governance triad, RAND and the private intelligence sector for 50+ years. He is dead; the seat was recreated in 2025.</p>
+<p>Jeffrey Epstein scored like a member of the room because he was one - Trilateral Commission, Bear Stearns, documented connections to cabinet officials across administrations. Not an anomaly. Infrastructure.</p>
+<p>The offices that hold the Epstein record - the investigation, the Bureau of Prisons, the camera systems, the medical examiners, the transfer paperwork - sit inside the room the record describes. At MCC every safeguard failed at once for the one prisoner whose testimony could have implicated sitting officials. That is not a failure stack. That is the custody system producing the outcome the room needed. The same state ran 1,245 rendition flights and relocated 1,600+ scientists under new identities; it has never lacked the means to move a witness, in either direction. Ghislaine Maxwell, convicted and sentenced to 20 years, is held in a system controlled by the same government whose officials appear in the network. The room will hold the files, not open them.</p>
+PROVE: A Bureau of Prisons or Justice Department record showing the August 2019 safeguard failures at MCC were directed rather than coincident.
+KILL: A full release of the withheld Epstein production by the offices that hold it, with redactions on officials lifted, that implicates no one in the index.
+DRAWS_ON: xx-pattern-analysis-what-the-calibration-reveals, xx-the-connectivity-map-who-touches-whom, xx-operational-note-asset-relocation-hypothesis
+LIVING_NAMES: Ghislaine Maxwell - convicted (December 2021, 20-year sentence), as convicted; held in federal custody. No other living person named. Unnamed and not characterised: the official who recreated the dual-hat structure in 2025 (documented appointment only); the custodial staff at MCC (no individual named or identified).
 FACT_CHECK:
-- "Every layer documented above - surveillance cities (Section X), financial coordination (Section VII), organized data flows - runs on physical infrastructure: data centers."
-- "Northern Virginia + Greater Beijing ≈ 20% of world hyperscale capacity."
-- "a large share of global internet traffic transits here" (Ashburn)
-- "Ulanqab-Hohhot Corridor - Inner Mongolia, China. The single largest concentration of hyperscale capacity on Earth (>3,000 MW) under Beijing's "East Data, West Computing" plan."
-- "NSA Utah Data Center - Bluffdale, UT (Camp Williams). The intelligence community's mass-data storage/processing facility (~1M+ sq ft, online 2014)"
-- "the Gui'an Big Data Valley (Guizhou - where Apple's China iCloud data is stored via GCBD, alongside Tencent and Huawei)"
-- "Highlander Hainan Underwater Data Center ... backed by four Chinese authorities."
-- "Stargate (OpenAI/Oracle/SoftBank, ~$500B, announced Jan 2025)"; "Stargate AI Campus - Abilene, TX"
-- "Their power draw is now outpacing regional grids."
-- "Microsoft Project Natick - seabed data center deployed off Orkney, Scotland (2018)"; "The proof-of-concept for subsea compute."
-- "Shanghai Offshore Underwater Data Center (China) - announced 2025; ~24 MW, offshore-wind-powered"
-- "Nautilus Data Technologies - barge-mounted floating data center at the Port of Stockton, California"
-- "Keppel’s Singapore floating park (under construction)"
-- "Placing compute underwater or on water sidesteps land, cooling, and (in some cases) regulatory constraints. It also moves infrastructure into contested or lightly-governed maritime space."
+- "The CFR is the most penetrated node" / "The private organization appears in the calibration profile of every tier. The private organization serves as the network's address book."
+- "Four consecutive Treasury Secretaries connected to the same financial ecosystem across four administrations and both parties."
+- "Defense contractor → cabinet is structural, not incidental" / "Austin ... The general who commanded troops joined the board of the company that arms them" / "Panetta ... then joined the board of the database company"
+- "Law firms as bipartisan pipelines: Covington & Burling (Holder + Chertoff), Paul, Weiss (Johnson + Lynch)" / "The pipeline does not have a party. It has clients."
+- "These five surfaces are five faces of the same structure." / "They rotate between desks in one room."
+- governance coordination layer / monetary control layer / force projection layer / information control layer / circulation mechanism
+- "The only individual to hold both Secretary of State and NSA simultaneously - until Rubio recreated the structure in 2025"
+- "One man bridging the governance triad (CFR/Trilateral/Bilderberg), the military-academic complex (RAND), and the private intelligence sector - for 50+ years."
+- "advisory role across every subsequent administration until death (2023)"
+- "Jeffrey Epstein - 4 nodes: Trilateral Commission member | ... financial network (Bear Stearns, Wexner/L Brands, "1953 Trust") | documented connections to sitting cabinet officials across administrations ... Not an anomaly. Infrastructure."
+- "the investigated visibly staff the investigation's custody chain"
+- "also controls the Bureau of Prisons, the camera systems, the medical examiners, and the transfer paperwork"
+- "Every safeguard failed simultaneously, for the one prisoner whose testimony could have implicated sitting officials documented in this calibration index."
+- "Jeffrey Epstein's death (August 10, 2019, MCC New York)"
+- "The CIA rendition program (Section XVII) documented 1,245 flights"
+- "Operation Paperclip relocated 1,600+ Nazi scientists with new identities."
+- "Ghislaine Maxwell's post-conviction status: Convicted December 29, 2021. Sentenced to 20 years."
+- "is held in a system controlled by the same government whose officials appear in the network"

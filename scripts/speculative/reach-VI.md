@@ -1,29 +1,41 @@
 ID: VI
-HEADLINE: The science cover was an access program, and Harvard and MIT sold the seat after the conviction.
+HEADLINE: Robert Maxwell was Mossad's asset, and 1991 was the handover from his apparatus to Epstein.
 BODY:
-<p>Harvard gave him an office, a keycard and a passcode, and he likely visited 40+ times between 2010 and 2018 - after the 2008 conviction. Three MIT vice presidents kept his gifts "small and unpublicized," and internally he was "he who must not be named." Epstein-linked foundations supplied ~74% of the Edge Foundation's income. These were not lapses. The institutions knew what he was and priced his money at nothing, because the seat he was buying was worth more than the name they were laundering.</p>
-<p>Look at where the seat reached. Evolutionary dynamics, genetics, artificial intelligence, cryptography, consciousness, human germline engineering. He opened a 23andMe account under the alias "Sam Epstein" and moved consumer genetic kits through his address book in bulk. A costed proposal for the first designer baby, ~$9.5m to fund 5 years, sat in his inbox, followed by "References for tech diligence on embryo editing." His own hand asked a guest in 2011 whether "the cloning isssue" had given pause. Every frontier where a human being can be measured, engineered or copied had a door, and he held a key to each.</p>
-<p>This is the science leg of a collection operation. The patronage bought him proximity to the people who could make such things real, and proximity is what a collector needs. The eugenic talk was the cover story for the appetite, and the appetite was for samples, minds and data at the edge of what can be done to a human being.</p>
-<p>The only bodies that said no were a retail DNA vendor and a university ethics committee. The ones that said yes are the ones that hold the frontier.</p>
-PROVE: A record showing Epstein, or anyone acting for him, accessed the genetic results of kits he bought, or that his science correspondence was reported onward to a service.
-KILL: 23andMe's account records showing no access to any kit's results from an Epstein-linked account or alias, at any time.
-DRAWS_ON: vi-the-machine-documented-to-the-dollar, vi-the-dna-kits-bought-in-bulk-under-an-alias, vi-the-costed-proposal-a-designer-baby-company-pitched-to-him-with-a-budget, vi-the-cloning-thread-proposed-possible-and-the-distance
-LIVING_NAMES: none named. Unnamed and not characterised: MIT's three vice presidents (documented act only: kept the gifts small and unpublicized, per MIT's report); the sender of the designer-baby proposal (documented act only: sent it); the 2011 recipient (a DOJ redaction - not identified).
+<p>Strip the names and the template stands: a publisher whose business does not explain his money or his access, proximity to multiple services, protection that outruns scandal for decades, a death with three readings, honours that make no sense under the civilian story. The Foreign Office had him in 1949 as "almost certainly financed by Russia". Israel buried him on the Mount of Olives with near-state honours, President Herzog giving the eulogy, Shamir and Sharon in attendance. A state buries an asset with the same ceremony it gives a benefactor. This was an asset.</p>
+<p>Read 1991 in order. January: Ghislaine Maxwell moves to New York, before his death, not after it. July: the power of attorney gives Epstein authority to sign cheques and buy and sell property. October: The Samson Option runs Mossad ties through the Mirror, and Maxwell sues. 5 November: he goes overboard from the Lady Ghislaine, on the eve of the pension fraud. The exposed principal was closed out only after the successor had his instrument. The inquest returned heart attack and drowning, and killing that leaves no detectable cause is an attested attribute of a major intelligence service.</p>
+<p>The exit is the asset's last deniability. Maxwell at sea; Epstein in a cell with the cameras failed and the guards' records falsified; Brunel hanged in La Santé before trial. Three principals, three unwitnessed exits, each at the moment of maximum exposure, each foreclosing the one testimony that mattered. The asset stops existing at the moment it could talk.</p>
+<p>The exception is the one convicted. Nine immunized hours to the executive that can pardon her; the Fifth, a dozen times over, to the Congress that cannot. Every institution touching her behaves as if her silence has a price and her testimony a buyer.</p>
+PROVE: A declassified Israeli or British service file on Robert Maxwell naming a handler and taskings.
+KILL: Israeli and British service files on Robert Maxwell released in full and showing no recruitment and no tasking at any date.
+DRAWS_ON: v-the-intelligence-question-what-the-record, v-the-death-and-the-funeral, v-eleven-months-in-1991-the-hinge-the-report-had-never-put-on-one-line, v-why-the-template-matters, v-the-ancillary-module-the-exit-pattern-and-why, v-the-asset-question-stated-with-precision
+LIVING_NAMES: Ghislaine Maxwell - convicted 29 Dec 2021 of sex trafficking; named for her documented January 1991 move and her documented posture (the immunized interview, the Fifth before Congress), not as an asset; Seymour Hersh - not named, his book The Samson Option is named for its documented publication
 FACT_CHECK:
-- "he kept an office, keycard and passcode and likely visited 40+ times between 2010 and 2018"
-- (verified by reading) Harvard’s own May 2020 report found Epstein used PED to rehabilitate his image after the 2008 conviction
-- (verified by reading) (verified by reading) MIT’s Jan 2020 report found three VPs kept the gifts small and unpublicized and Epstein was internally called he who must not be named.
-- "Epstein-linked foundations supplied ~74% of Edge’s income 2001-2017"
-- "What is documented is a reputation-laundering machine wired into elite science."
-- (verified by reading) $6.5M established the Program for Evolutionary Dynamics
-- "George Church (genetics)" / "Marvin Minsky (AI pioneer, d. 2016)"
-- (verified by reading) Cryptography, consciousness, and human germline engineering - three fields with nothing in common except who was being asked for the money.
-- (verified by reading) He opened a 23andMe account in 2013 under the alias Sam Epstein,
-- (verified by reading) a man with a documented interest in engineering human beings acquiring consumer genetic services in bulk, under a false name, and distributing them through his address book
-- (verified by reading) the use of funds spreadsheet for the designer baby and human cloning company / (~$9.5m to fund 5 years, $6m for 3 years)
-- "subject References for embryo editing: “References for tech diligence on embryo editing… A long-form writeup of our concept”"
-- (verified by reading) November 2011 - and this is Epstein’s own hand. ... sorry, you can;t make it, . did the cloning isssue , give you pause?
-- (verified by reading) a machine that bought him proximity to the people who could make such things real
-- "a rich man voicing a transhumanist-eugenic fantasy to captive dinner guests"
-- (verified by reading) the two that acted were a consumer genomics company and a university ethics committee
-- "Sample acquisition is documented. Data acquisition is not."
+- a financier/publisher whose stated business does not fully explain his money or his access; documented proximity to multiple intelligence services; protection that outruns scandal for decades; a death surrounded by unresolvable readings; honors or immunities that make no sense under the civilian story
+- British Foreign Office files recorded Maxwell as "a thoroughly bad character and almost certainly financed by Russia"
+- Documented suspicion, 1949.
+- buried 10 November 1991 on the Mount of Olives, Jerusalem
+- PM Yitzhak Shamir, President Chaim Herzog (who gave the eulogy), Ariel Sharon
+- buried on the Mount of Olives with near-state honours
+- A state can bury a benefactor, an ally, or an asset with the same ceremony
+- That a death can be honestly read three ways
+- January 1991 — Ghislaine Maxwell moves to New York, representing her father’s interests at the Daily News. She arrives before his death, not after it.
+- July 1991 — Leslie Wexner executes the power of attorney, giving Epstein authority to sign cheques, borrow money, and buy and sell property.
+- Seymour Hersh's The Samson Option (October 1991) alleged Mossad ties running through Maxwell's Mirror. Maxwell sued for libel on 23-25 October 1991.
+- 5 November 1991 — Robert Maxwell goes overboard from the Lady Ghislaine off the Canary Islands.
+- he died on the eve of exposure
+- closing it only after the successor was in place
+- ruled a heart attack followed by accidental drowning
+- Capability to make a killing read as natural death is an attested attribute of a major intelligence service
+- means of killing designed to leave no detectable cause
+- the cameras outside the cell malfunctioned
+- both guards falsified records
+- was found hanged with bedsheets, alone, at about 1:30 a.m. on 19 February 2022, in his cell at La Santé prison, Paris, aged 76, before trial
+- three principals, three unwitnessed exits, each at the point of maximum exposure
+- each foreclosing the one testimony that could have converted a labeled hypothesis into a documented fact
+- an asset’s ultimate deniability is that the asset stops existing at the moment it could talk
+- Ghislaine Maxwell is the template’s exception
+- Convicted 29 Dec 2021 (SDNY) on five of six counts, including sex trafficking of a minor
+- nine immunized hours to the executive that can pardon her; the Fifth Amendment, a dozen times over, to the Congress that cannot
+- every institution touching her behaves as if her silence has a price and her testimony a buyer
+- It is the sharpest version of the Mossad hypothesis this report carries
+- declassified service files naming a handler and taskings

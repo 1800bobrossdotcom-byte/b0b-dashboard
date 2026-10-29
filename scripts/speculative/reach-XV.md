@@ -1,32 +1,29 @@
 ID: XV
-HEADLINE: War is a product, Dubai refines its gold, and the export laws are designed never to bite.
+HEADLINE: Slavery was never abolished; each abolition rewrote it into law, and the extraction now runs on debt.
 BODY:
-<p>At full strength these are not separate wars. They are one market with several fronts. The same producers arm both sides: China and Serbia supply both Sudanese armies by manufacture, Iran is reported supplying both, and Serbia's state producer Yugoimport sits in the Sudan supply record while it assembles Israeli drones with Elbit. "The conflict itself is the product". Displacement clears the ground, information control seals it, and the resource map underneath - gas off Gaza, gold in Sudan, coltan in eastern Congo - says what the ground is for.</p>
-<p>Every company the US Treasury named in the RSF's procurement network is UAE-based, and the gold goes to Dubai. War gold refined in a Gulf hub buys the guns, and the hub is what the record keeps circling: Emirati cargo flights through Amdjarass, Norinco guided bombs supplied through the UAE, an Israeli air-defence system the UAE bought and deployed in Libya. The licence is the cover document. The retransfer is the delivery route.</p>
-<p>The enforcement gap is not a failure. It is the design. The Arms Export Control Act cuts off any state that passes US weapons on, yet across "at least $54.6 billion" of support to Saudi Arabia and the UAE the government's own auditor found no evidence that anyone investigated a single incident of unauthorised use. Israel keeps no public end-use audit. Britain began refuelling the Saudi war again eight years after the United States stopped for cause. And when a court reached the top of a war, the sanctioning power turned on the court: on 9 October 2026 the Treasury designated the International Criminal Court itself. "War is one of its operating modes."</p>
-PROVE: The Dubai gold-trade ledger, matched to the Emirati cargo flights through Amdjarass, showing RSF gold paying for the weapons those flights delivered.
-KILL: A published US or Israeli end-use investigation that found a retransfer to the UAE's wars and cut deliveries off under §2753(c).
-DRAWS_ON: xv-who-arms-sudan-the-documented-layer-the-attributed-layer-and-the-gold, xv-whose-weapons-are-in-these-wars-the-us-and-israeli-lines-through-the-uae, xv-the-structural-pattern, xv-active-conflict-zones-20242026, xv-status-update-20-october-2026, xv-status-update-22-september-2026
+<p>Abolition was a renaming. Britain abolished slavery in 1833 and paid £20 million to the slaveholders, not the enslaved, and the public was still paying that debt down in the 21st century. The 13th Amendment ended slavery "except as a punishment for crime", the Black Codes filled the exception immediately, and convict leasing ran from 1865 to 1928. The exception now pays $0.13 to $0.52 an hour, and nothing at all in six states, while UNICOR took in $531 million in FY2022. The chain was not broken. It was converted into statute.</p>
+<p>The free population sits inside the same machine under a softer collar. A 30-year mortgage at 7% costs the buyer about 2.4 times the price, in Lagos, Berlin or Nashville. Student debt prices the credential employment demands; medical debt makes the body collateral. Productivity rose 64.7% while pay rose 14.8%, and CEO pay went from 21 times a worker's to 344. The surplus does not vanish. It flows up into the structures of Section VIII. "The credential is the collar. The debt is the chain."</p>
+<p>Below the citizen is the open market in people: 27.6 million in forced labour, $236 billion a year in profit. The cobalt for phone and vehicle batteries comes from a mining belt where children as young as seven were found digging. The Gulag closed; Norilsk's mines still produce. The camps ended and the extraction did not. The same program runs on animals - "confine, extract, discard" - through the same financial structures. One system, one logic, applied to whichever population is cheapest to hold.</p>
+PROVE: A state corrections or UNICOR planning document that sets sentencing or incarceration targets against contracted labour demand.
+KILL: Accounts showing that UNICOR's revenue and the states' unpaid prison labour cost the public more than they returned, so the 13th Amendment exception produces no surplus for anyone.
+DRAWS_ON: xiv-historical-slavery-the-unbroken-line, xiv-prison-labor-the-13th-amendment-exception, xiv-debt-bondage-the-universal-chain, xiv-wage-compression-productivity-without-pay, xiv-forced-labor-the-ilo-data, ix-the-gulag-geography-forced-labor
 LIVING_NAMES: none
 FACT_CHECK:
-- "China and Serbia appear by manufacture on both sides; the BBC has Iran supplying both."
-- "a joint undertaking of Serbia’s state arms producer Yugoimport SDPR and Elbit Systems"; "Yugoimport is the same state producer named in the subsection above as supplying, by manufacture, both belligerents in Sudan"
-- "Arms Supply Continuity: The same defense corporations supply multiple sides of multiple conflicts simultaneously - the conflict itself is the product"
-- "Displacement as Design: Mass displacement is not a side effect - it is a mechanism for clearing land"
-- "Information Control: Each conflict zone features documented restrictions on journalism, internet shutdowns, and narrative management"
-- "The conflict zone sits above confirmed natural gas reserves (Gaza Marine field, discovered 2000)"
-- "Sudan contains significant gold reserves, and the RSF has documented connections to gold extraction operations"
-- "Eastern Congo (ongoing): Decades of conflict in regions mining tin, tantalum (coltan), tungsten and gold"
-- "Every company Treasury names in the RSF’s procurement network is UAE-based, and the gold goes to Dubai."
-- "Sudanese gold is bought and flown to Dubai to be refined and sold"
-- "Emirati cargo flights through Amdjarass, Chad, under humanitarian cover from mid-2023"
-- "Chinese Norinco guided bombs and 155 mm howitzers assessed as supplied through the UAE"
-- "an Israeli-made air-defence system bought by the UAE and deployed through Haftar in April 2020 (attributed)"; Libya as the theatre ("Libya: an Israeli-made air-defence system")
-- "The licence is the document; the retransfer is the mechanism; the absence of enforcement is the finding."
-- (verified by reading) A country in substantial violation becomes ineligible for credits and no cash sales or deliveries pursuant to previous sales may be made (§2753(c))
-- "at least $54.6 billion of military support to Saudi Arabia and the United Arab Emirates from fiscal years 2015 through 2021"; "DOD has not reported and State could not provide evidence that it investigated any incidents of potential unauthorized use"; "documented in its own auditor’s voice. GAO-22-105988"
-- "For Israel no equivalent end-use audit exists in the public record found here"
-- "the coalition is again being refuelled by a Western air force, eight years after the last such arrangement was stopped for cause"; "the specific support the United States and the Saudi-led coalition ended in November 2018"
-- "On 9 October the Treasury added the International Criminal Court itself to the sanctions list under Executive Order 14203"
-- "War is not the failure of the control architecture. War is one of its operating modes."
-- "Here the ledger is the Dubai gold trade, and it is where a records request goes."
+- "British abolition compensation (1833): When Britain abolished slavery, the government paid £20 million ... to the slaveholders. Not to the enslaved."
+- "the public was still paying down slaveholder-compensation debt into the 21st century"
+- "Neither slavery nor involuntary servitude, except as a punishment for crime whereof the party shall have been duly convicted"
+- "Immediately after the 13th Amendment was ratified, Southern states passed "Black Codes""
+- "Convict leasing (1865–1928)"
+- "Average prison wages range from $0.13 to $0.52 per hour. Some states (Alabama, Arkansas, Georgia, Mississippi, South Carolina, Texas) pay nothing"
+- "Federal Prison Industries (UNICOR) generated $531 million in revenue in FY2022. The 13th Amendment exception is a revenue stream"
+- "The chain was never broken. Each link was replaced with a legal mechanism that preserved the extraction while changing the name."
+- "A 30-year mortgage at 7% interest means the buyer pays approximately 2.4x the purchase price of the home"; "$60,000 in Lagos ... $300,000 in Berlin"; "A family in Nairobi and a family in Nashville are inside the same mechanism"
+- "The system requires credentials to access employment, prices those credentials using debt"; "The body itself becomes the collateral"
+- "Between 1979 and 2024, net productivity rose 64.7% while hourly compensation rose 14.8%"
+- "In 1965, CEO pay was 21:1 relative to typical worker pay. By 2023, it was 344:1"
+- "The surplus labor value ... flows upward through the same corporate-financial structures documented in Section VIII"
+- "The credential is the collar. The debt is the chain"
+- "27.6 million in forced labor"; "$236 billion in annual profits generated by forced labor globally (ILO 2024 update)"
+- "Amnesty International (2016) found children as young as seven in its artisanal mines"; "The cobalt goes into the batteries; the batteries go into phones and vehicles"; "in the southern Copperbelt - Lualaba and Haut-Katanga"
+- "Norilsk's mines still produce"; "The camps closed. The extraction continued."
+- "The devaluation of animal life and the devaluation of human labor are the same program applied to different populations. The logic is identical: confine, extract, discard"; "connected to the same financial structures identified in Section VIII"

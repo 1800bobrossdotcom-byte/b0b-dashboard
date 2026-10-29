@@ -1,30 +1,32 @@
 ID: XVII
-HEADLINE: Organized crime is the state's off-books department, financed by intelligence, cleaned by banks, used to sell security.
+HEADLINE: Declassification is the state releasing what can no longer cost it, while the same architecture keeps running.
 BODY:
-<p>Start with Italy, because Italy wrote it down. A police raid on Licio Gelli's villa found 962 names: 44 members of parliament, the heads of all three intelligence services, 195 officers. Parliament called P2 "a secret criminal organization" inside the state. The lodge ran into Gladio, the stay-behind network the CIA and MI6 organised, and in 2000 Italy's commission concluded the United States had supported the strategy of tension - Piazza Fontana, Piazza della Loggia, the Italicus, Bologna. A convicted far-right terrorist gave the purpose: "to force the public to turn to the state to ask for greater security." Gelli, in 2003: "I am proud of that."</p>
-<p>The American line runs the same way. The Senate's Kerry Committee found the Contra supply network was used by drug trafficking organizations. A DEA agent who reported cocaine flights out of Ilopango was told to stop investigating. The ATF walked about 2,000 guns to the Sinaloa Cartel. BCCI banked for the CIA, the Medellín cartel, Saddam Hussein and Noriega. The reporter who traced the cocaine into Los Angeles was destroyed, then dead of two gunshot wounds to the head.</p>
-<p>The banks make the money usable. HSBC moved at least $881 million for the Sinaloa and Norte del Valle cartels, paid a fine worth about five weeks of profit, and no individual was charged. Wachovia processed $378.4 billion from casas de cambio and its liability dissolved into Wells Fargo. Danske ran $230 billion through one Estonian branch. The fine is a licence fee. Every loop closes the same way: the crime funds the covert war, the violence justifies the security budget, the bank keeps the float, and the agencies grow.</p>
-PROVE: A declassified CIA, NATO or SISMI operational document directing a stay-behind unit or a trafficking channel to act, rather than knowing and failing to act.
-KILL: The CIA's and SISMI's own stay-behind files, opened whole, showing no service directed, funded or shielded the strategy-of-tension bombings.
-DRAWS_ON: xvii-propaganda-due-p2-lodge-the-state-within-the, xvii-operation-gladio-nato-s-stay-behind-terror, xvii-cia-contra-cocaine-trafficking-the-government, xvii-sinaloa-cartel-the-protected-franchise, xvii-banking-as-laundering-infrastructure-the, xvii-the-convergence-where-crime-intelligence-and
-LIVING_NAMES: The convicted far-right terrorist (Vincenzo Vinciguerra, unnamed): his conviction is recorded in the section ("The convicted far-right terrorist stated"), quoted only for his documented statement. The DEA agent (Celerino Castillo III, unnamed): only for his documented report and being told to stop. Otherwise named: Licio Gelli (dead, 2015), Saddam Hussein (dead), Manuel Noriega (dead), and the reporter Gary Webb (dead, unnamed here).
+<p>Read the declassified record as one file and it stops being a run of scandals. It is an operating method. Programs start in secret, run for decades and surface only when exposure forces them: MKUltra after 24 years, Northwoods after 39, the Five Eyes founding text after 64. The paper is destroyed before anyone comes for it - the Colonial Office telegram of 1961, the KGB chairman's 1959 proposal to "destroy all the records concerning the persons shot in 1940", the CIA's MKUltra records in January 1973. What survives, survives by accident. MKUltra was confirmed because of a filing error.</p>
+<p>The law is built to do this. Britain, Australia, Germany, Israel and India put their intelligence services outside the access law by name or by class, so the act that grants the right to know is the act that withholds. In Washington the money leaves the books by statute: the Director's certificate "shall be deemed a sufficient voucher". The Director's signature is the receipt, and no court has reached the question since 1974.</p>
+<p>So the order that closed the black sites closed the named sites and left the architecture. Gehlen's organisation became the BND, and the CIA kept that relationship secret for fifty years. Unit 731's data was bought with non-prosecution. The same structures - DARPA, CIA, NSA, DoD - run what began around 2013. Project Maven is nine years old; MKUltra was eight in 1961. Whatever surfaces in the 2033-2040 window will be what by then costs nothing. Ground Zero is the template at city scale: officials understood the dangers while the public was told the air was safe, and the boxes came out twenty-five years later.</p>
+PROVE: A future release on Project Maven or another program begun around 2013 showing its scope was kept from the oversight committees and its records ordered destroyed, as MKUltra's were.
+KILL: Project Maven's full operational record produced now, while it runs, and matching what Congress and the public were told.
+DRAWS_ON: xvi-the-foia-pattern, xvi-the-derivation-why-2013-and-why-2040, xvi-the-pattern-is-not-american-international, xvi-the-intelligence-funding-documents-the-certificate-is-the-voucher, xvi-cia-black-site-rendition-network-54-countries, xvi-the-ground-zero-air-quality-records-released-8-september-2026
+LIVING_NAMES: none (Reinhard Gehlen, named for his organisation's documented passage into the BND, is dead)
 FACT_CHECK:
-- "In 1981, Italian police raided the villa of Licio Gelli in Arezzo, Tuscany, and discovered a membership list of 962 people."
-- "The list included 44 members of parliament, 3 cabinet ministers, the heads of all three Italian intelligence services (SISDE, SISMI, CESIS), 195 officers"
-- (verified by reading) P2 was a secret criminal organization that had infiltrated the state
-- "Licio Gelli's P2 Lodge was directly connected to the Gladio network."
-- "CIA and MI6 organized the stay-behind networks"
-- (verified by reading) The Italian parliamentary commission's 2000 report concluded that the United States had supported a strategy of tension in Italy
-- "The Piazza Fontana bombing ..., the Piazza della Loggia bombing ..., the Italicus Express bombing ..., and the Bologna massacre (1980 - 85 dead)"
-- "The convicted far-right terrorist stated: “... The reason was quite simple: to force the public to turn to the state to ask for greater security.”"
-- "In a 2003 interview, Gelli stated: “What I wrote in the P2 Plan is being realised little by little, piece by piece. I am proud of that.”"
-- "the supply network of the Contras was used by drug trafficking organizations"
-- "DEA informant Celerino Castillo III documented cocaine-laden aircraft departing hangars ... Castillo reported it to his superiors. They told him to stop investigating."
-- (verified by reading) allowed approximately 2,000 firearms to be illegally purchased and walked across the U.S.-Mexico border to Sinaloa Cartel operatives
-- "BCCI was used by the CIA to fund the Afghan mujahideen (Cold War), by the Medellín cartel for drug money laundering, by Saddam Hussein for arms procurement, and by Manuel Noriega for personal banking."
-- "Gary Webb documented the CIA-Contra cocaine pipeline into Los Angeles"; "His career was destroyed. He died of two gunshot wounds to the head in 2004"
-- "HSBC Holdings processed at least $881 million in drug trafficking proceeds from the Sinaloa Cartel and Colombia's Norte del Valle Cartel"; "approximately five weeks of HSBC's annual profit. No individual was criminally charged."
-- "Processed $378.4 billion - billion - in transactions from Mexican currency exchange houses (casas de cambio)"; "Wells Fargo absorbed Wachovia during the 2008 crisis. The criminal liability was dissolved in the acquisition."
-- "$230 billion in suspicious transactions flowed through its Estonian branch"
-- "absorbed as an operating cost that does not deter future laundering"
-- "The bank funds the covert war."; "The cartel violence justifies border militarization. The militarization justifies expanded homeland security budgets."; "The cycle is closed"
+- "Programs are initiated in secret, run for decades, and only acknowledged after exposure"
+- "Document destruction is ordered before disclosure - the surviving record is always a fraction"
+- (verified by reading) MKUltra 1953 1977 (FOIA) 24
+- (verified by reading) Operation Northwoods19622001 (JFK Records Act)39
+- (verified by reading) UKUSA/Five Eyes Agreement19462010 (text declassified)64
+- "the Colonial Office telegram of 1961"
+- "the KGB chairman’s proposal of 1959 to destroy the Katyn files"; "In 1959 the KGB chairman had proposed to “destroy all the records concerning the persons shot in 1940”"
+- "The CIA’s MKUltra records were destroyed in January 1973 on its director’s instruction."
+- "The program's existence was only confirmed because of a filing error."
+- "Britain, Australia, Germany, Israel and India put their intelligence services outside the access law by name or by class; for them the law that grants the right to know also grants the state the right to withhold"
+- "such expenditures to be accounted for solely on the certificate of the Director and every such certificate shall be deemed a sufficient voucher for the amount therein certified."
+- "That is the whole mechanism by which intelligence money leaves the ordinary accounting system: the Director’s signature is the receipt."
+- "In United States v. Richardson, 418 U.S. 166 (1974) ... The Court held he lacked standing to ask. No court has reached the question since."
+- "The executive order closed the named sites. It did not close the architecture"
+- "became the BND on 1 April 1956"; "the CIA acknowledged in a FOIA case “an intelligence relationship with Gehlen and his intelligence service that it had kept secret for fifty years.”"
+- "Pattern: non-prosecution traded for data, the evidence kept in intelligence channels." (Unit 731)
+- "Each involves the same institutional structures (DARPA, CIA, NSA, DoD, Five Eyes partners) that appear in every prior declassified program."; "What was initiated in and around 2013?"
+- "Project Maven ... has been operational since 2017 ... It is nine years old. MKUltra was eight years old in 1961."
+- "placing a plausible disclosure window at 2033–2040"
+- "records already reviewed show government leaders understood the dangers posed by the burning toxins at Ground Zero while the public assurance being given to residents and rescue workers was that the air was safe to breathe"
+- "The records had been sitting in 68 boxes in a city office"; "The interval here is twenty-five years"

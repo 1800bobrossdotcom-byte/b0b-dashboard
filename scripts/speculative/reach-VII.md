@@ -1,32 +1,29 @@
 ID: VII
-HEADLINE: The parties are interfaces; one ownerless architecture staffs every government and sovereign wealth signs its orders.
+HEADLINE: The science cover was an access program, and Harvard and MIT sold the seat after the conviction.
 BODY:
-<p>Read at full strength, this section describes a government, not a club circuit. The BIS outlived its founding mandate in 1932, survived a vote at Bretton Woods to liquidate it, and holds a charter that makes it immune "in time of peace and in time of war". The East India Company was dissolved on paper and its operating system ran India for another 73 years. Persistence is the purpose: an entity that is not a person, given powers no person has, built to outlive everyone who serves it.</p>
-<p>The CFR, the Trilateral Commission and Bilderberg are its personnel office. More than 500 CFR members have served in government since 1921 and four consecutive administrations of both parties drew their cabinets from the same pool of councils, banks, contractor boards and law firms. It is not a revolving door. It is "one room with multiple desks". Elections choose the desk, never the room. The leaders are the interface and the interface is disposable: Sadat, Begin and Carter were consumed within five years of Camp David, while Henry Kissinger worked the offscreen layer for fifty.</p>
-<p>The intelligence arm runs on the same law. The Intelligence Support Activity has worn more than twelve names, and the MKUltra programmes were "classified as discontinued". There is no throne at the top because none is needed. The orders are signed where state security and sovereign capital are one office, in Gulf funds chaired by rulers and security chiefs, buying into American finance, crypto and AI by dated instrument. Jeffrey Epstein sat on that seam a decade early, a conduit to "large sovereign wealth funds" for a layer that now signs in its own name.</p>
-PROVE: Minutes of a body that allocates across money issuance, the asset managers and the sovereign funds at once - the record the section itself names as the one that would make the apex directed.
-KILL: PIF's unpublished minutes showing that its screening panel's objection to the Affinity commitment was upheld, not overruled by the board MBS chairs.
-DRAWS_ON: vii-the-bank-for-international-settlements-bis-the, vii-the-revolving-door-the-pattern-across-all, vii-cabinet-penetration-map-four-administrations, vii-manufactured-leaders-the-handler-architecture, vii-the-intelligence-arm-task-force-orange-isa, vii-the-sovereign-wealth-hub-where-the
-LIVING_NAMES: Menachem Begin and Jimmy Carter (the section does not record either as dead, so treated as living) - named only as Camp David signatories consumed politically, as documented ("None of the three leaders who sat at the table at Camp David survived politically"); MBS - named only as chair of the PIF board, as documented ("overruled by the board MBS chairs"). Dead: Anwar Sadat (assassinated 1981), Henry Kissinger (died November 2023), Jeffrey Epstein.
+<p>Harvard gave him an office, a keycard and a passcode, and he likely visited 40+ times between 2010 and 2018 - after the 2008 conviction. Three MIT vice presidents kept his gifts "small and unpublicized," and internally he was "he who must not be named." Epstein-linked foundations supplied ~74% of the Edge Foundation's income. These were not lapses. The institutions knew what he was and priced his money at nothing, because the seat he was buying was worth more than the name they were laundering.</p>
+<p>Look at where the seat reached. Evolutionary dynamics, genetics, artificial intelligence, cryptography, consciousness, human germline engineering. He opened a 23andMe account under the alias "Sam Epstein" and moved consumer genetic kits through his address book in bulk. A costed proposal for the first designer baby, ~$9.5m to fund 5 years, sat in his inbox, followed by "References for tech diligence on embryo editing." His own hand asked a guest in 2011 whether "the cloning isssue" had given pause. Every frontier where a human being can be measured, engineered or copied had a door, and he held a key to each.</p>
+<p>This is the science leg of a collection operation. The patronage bought him proximity to the people who could make such things real, and proximity is what a collector needs. The eugenic talk was the cover story for the appetite, and the appetite was for samples, minds and data at the edge of what can be done to a human being.</p>
+<p>The only bodies that said no were a retail DNA vendor and a university ethics committee. The ones that said yes are the ones that hold the frontier.</p>
+PROVE: A record showing Epstein, or anyone acting for him, accessed the genetic results of kits he bought, or that his science correspondence was reported onward to a service.
+KILL: 23andMe's account records showing no access to any kit's results from an Epstein-linked account or alias, at any time.
+DRAWS_ON: vi-the-machine-documented-to-the-dollar, vi-the-dna-kits-bought-in-bulk-under-an-alias, vi-the-costed-proposal-a-designer-baby-company-pitched-to-him-with-a-budget, vi-the-cloning-thread-proposed-possible-and-the-distance
+LIVING_NAMES: none named. Unnamed and not characterised: MIT's three vice presidents (documented act only: kept the gifts small and unpublicized, per MIT's report); the sender of the designer-baby proposal (documented act only: sent it); the 2011 recipient (a DOJ redaction - not identified).
 FACT_CHECK:
-- "The founding mandate ended in 1932; the institution did not"
-- "The Allied nations voted at Bretton Woods to liquidate the BIS. President Truman reversed the decision in 1945."
-- "shall be immune in time of peace and in time of war from any measure such as expropriation"
-- "The company was dissolved on paper. Its structure became the British Raj - which governed India until 1947. The company died. Its operating system lived another 73 years"
-- "create an entity that is not a person, give it powers that exceed any person's, and ensure it survives any person's lifespan"
-- "Since its founding, more than 500 CFR members have served as U.S. government officials across every administration"
-- "the empirical record across four consecutive U.S. presidential administrations - Bush, Obama, Trump (first term), and Biden"
-- Treasury/Defense/State/DHS chiefs: Paulson, Geithner, Bessent, Yellen (Treasury); Rumsfeld, Gates, Panetta, Hagel, Carter, Austin (Defense); Powell, Rice, Clinton, Kerry, Rubio, Blinken (State); Chertoff, Ridge, Johnson, Mayorkas (DHS), with "Covington & Burling", "Paul, Weiss", "Goldman Sachs", "Lockheed Martin Board of Directors", "Raytheon Technologies Board of Directors"
-- "This is one room with multiple desks."
-- "The leaders are the interface. The interface is disposable."
-- "Anwar Sadat - assassinated 1981. Menachem Begin - resigned 1983 ... Jimmy Carter - presidency destroyed by Iran hostage blowback. The three men who sat at the Camp David table all exited the stage permanently within five years of the signing"
-- "Henry Kissinger - continued operating for 50 years after Camp David through Kissinger Associates"; "Died November 2023 at age 100"
-- "THE REBRANDING PATTERN - ONE UNIT, TWELVE+ NAMES"
-- "The programs were not discontinued. They were classified as discontinued."
-- "the pyramid is real as a distribution of power and a fiction as a chain of command"; "at the summit there is no throne, only the rules"
-- (verified by reading) these heads of state and ruling-family security chiefs personally chair them; Sheikh Tahnoon bin Zayed ... National Security Adviser ... simultaneously chairs ADIA ... State intelligence, sovereign money, and AI infrastructure are not three coordinated actors here; they are one office
-- "dated, dollar-denominated, signed instruments between named state actors and named US-elite entities"; deals: PIF → Affinity Partners; MGX $2B in Binance; Aryam Investment 1 bought 49% of World Liberty Financial; "the $500B Stargate AI project counts MGX among its four funders"
-- "a decade before these deals, Epstein was positioned on the same Gulf-sovereign seam - as a conduit, not a controller"
-- "your neighbour wants [you] to introduce this to large sovereign wealth funds"
-- "minutes of a body that actually allocates across money-issuance and the asset managers and the sovereign funds and the enclaves at once"
-- (verified by reading) PIF’s own screening panel objected (inexperience, excessive fees) and was overruled by the board MBS chairs; the fund’s minutes are unpublished
+- "he kept an office, keycard and passcode and likely visited 40+ times between 2010 and 2018"
+- (verified by reading) Harvard’s own May 2020 report found Epstein used PED to rehabilitate his image after the 2008 conviction
+- (verified by reading) (verified by reading) MIT’s Jan 2020 report found three VPs kept the gifts small and unpublicized and Epstein was internally called he who must not be named.
+- "Epstein-linked foundations supplied ~74% of Edge’s income 2001-2017"
+- "What is documented is a reputation-laundering machine wired into elite science."
+- (verified by reading) $6.5M established the Program for Evolutionary Dynamics
+- "George Church (genetics)" / "Marvin Minsky (AI pioneer, d. 2016)"
+- (verified by reading) Cryptography, consciousness, and human germline engineering - three fields with nothing in common except who was being asked for the money.
+- (verified by reading) He opened a 23andMe account in 2013 under the alias Sam Epstein,
+- (verified by reading) a man with a documented interest in engineering human beings acquiring consumer genetic services in bulk, under a false name, and distributing them through his address book
+- (verified by reading) the use of funds spreadsheet for the designer baby and human cloning company / (~$9.5m to fund 5 years, $6m for 3 years)
+- "subject References for embryo editing: “References for tech diligence on embryo editing… A long-form writeup of our concept”"
+- (verified by reading) November 2011 - and this is Epstein’s own hand. ... sorry, you can;t make it, . did the cloning isssue , give you pause?
+- (verified by reading) a machine that bought him proximity to the people who could make such things real
+- "a rich man voicing a transhumanist-eugenic fantasy to captive dinner guests"
+- (verified by reading) the two that acted were a consumer genomics company and a university ethics committee
+- "Sample acquisition is documented. Data acquisition is not."

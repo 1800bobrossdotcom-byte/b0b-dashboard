@@ -1,20 +1,25 @@
 ID: XXII
-HEADLINE: Every documented line ends at a chokepoint, and every chokepoint answers to a state.
+HEADLINE: Compute is the control layer, held by two capital regions and moving offshore beyond the reach of law.
 BODY:
-<p>Read the lines as one drawing. The Federal Reserve, the European Central Bank, the Bank of England and the People's Bank of China all sit as members of one house in Basel, the "central bank of central banks". One Dutch firm is the sole supplier of the EUV machines TSMC and Samsung depend on - "a single chokepoint under the entire advanced-chip industry". Saudi Aramco, a state oil company, operates the largest conventional oilfield on Earth. Glencore runs cobalt-copper at Kolwezi and became sole owner of Cerrejón in 2022. Money, chips, oil and metal each pass through one gate, and the gates are few enough to count on a page.</p>
-<p>Then look at who buys. The National Reconnaissance Office buys commercial satellite imagery from Maxar, BlackSky and Planet. Booz Allen is a core NSA contractor, wired to the Utah Data Center. The NYPD used Clearview's facial-recognition engine. Hikvision and Dahua supplied the Xinjiang mass-surveillance platform. Washington and Beijing run the same model: the state no longer builds its own eyes, it rents them, and the companies are the collection layer with the state as the customer of record. The surveillance capacity sits on private balance sheets, which is where it is hardest to see and hardest to vote against.</p>
-<p>And the drawing is smaller than the thing. Rio Tinto, BHP, De Beers and Freeport carry no marker, so their lines are left undrawn. The grid on the map is the part that has already surfaced in a filing. The rest of it runs through the same few gates.</p>
-PROVE: A contract or directive showing a state setting the terms on which one of these chokepoints sells - an instruction binding ASML's EUV deliveries, or an NRO term giving the agency first call on Maxar, BlackSky or Planet's collection.
-KILL: A second supplier of EUV machines to TSMC and Samsung, and NRO imagery contracts that leave Maxar, BlackSky and Planet selling to all buyers on equal terms, would show markets rather than a grid.
-DRAWS_ON: xxii-membership-central-banks-the-bis-white-lines, xxii-supply-chains-orange-lines, xxii-ownership-operation-magenta-cyan-lines, xxii-customers-gold-lines
+<p>Every layer this report documents runs on a building, and the section's own map says where the buildings are. Northern Virginia and Greater Beijing hold about 20% of world hyperscale capacity. Ashburn carries a large share of global internet traffic. The Ulanqab-Hohhot corridor is "the single largest concentration of hyperscale capacity on Earth" under Beijing's "East Data, West Computing" plan. The NSA Utah Data Center came online in 2014 as the intelligence community's mass-data node. That is not a market chasing cheap land. It is two states pulling the substrate of everything above it inside reach of their own capitals.</p>
+<p>Ownership follows the state line. Apple's China iCloud data is stored at Gui'an via GCBD, beside Tencent and Huawei. The Hainan subsea cluster is backed by four Chinese authorities. Stargate in Abilene - OpenAI, Oracle and SoftBank, about $500B - and the gigawatt campuses like it now outpace regional grids in power draw, so the grid bends to the campus, not the other way round. Whoever holds the substrate holds the surveillance cities, the financial coordination and the data flows that run on it.</p>
+<p>Then the sea. Natick proved subsea compute off Orkney, Hainan scaled it, Shanghai tied it to offshore wind, Nautilus floats a barge at Stockton, Keppel is building a floating park in Singapore. The section names the gain itself: water "sidesteps land, cooling, and (in some cases) regulatory constraints" and moves infrastructure "into contested or lightly-governed maritime space". The move offshore is the point, not the side effect. Compute that lives under water lives outside the jurisdictions that could reach it.</p>
+PROVE: A siting document, contract or ministry directive in which a state names security or jurisdiction, rather than cooling or power cost, as the reason a subsea or offshore cluster was placed where it is.
+KILL: Programme records showing the Hainan, Shanghai, Stockton and Singapore builds were sited for cooling and power cost alone and sit under the same national data law as the land campuses.
+DRAWS_ON: xxi-ocean-based-offshore-platforms-the-new, xxi-land-hyperscale-surveillance-nodes
 LIVING_NAMES: none
 FACT_CHECK:
-- "The US Federal Reserve, European Central Bank, Bank of England, and People's Bank of China are all member central banks of the Bank for International Settlements — the "central bank of central banks" in Basel."
-- "ASML → TSMC and ASML → Samsung: the Dutch firm is the sole supplier of the EUV lithography machines those fabs depend on — a single chokepoint under the entire advanced-chip industry."
-- "Saudi Aramco → Ghawar: the state oil company operates the largest conventional oilfield on Earth."
-- "the Baar-based trader operates KCC/Mutanda cobalt-copper and became sole owner of the Cerrejón coal mine in 2022" (Glencore → Kolwezi (DRC))
-- "NRO → Maxar, BlackSky, and Planet: the National Reconnaissance Office buys commercial satellite imagery from all three"
-- "Booz Allen Hamilton → NSA Utah Data Center: Booz Allen is a core NSA contractor"
-- "Clearview AI → NYPD: the department used Clearview's facial-recognition engine."
-- "Hikvision → IJOP and Dahua → IJOP: both Chinese camera makers supplied equipment tied to the Xinjiang mass-surveillance platform"
-- "Where an operator or owner had no marker of its own (Rio Tinto, BHP, De Beers, Freeport), the link was left undrawn rather than invented."
+- "Every layer documented above - surveillance cities (Section XI), financial coordination (Section VIII), organized data flows - runs on physical infrastructure: data centers."
+- "Northern Virginia + Greater Beijing ≈ 20% of world hyperscale capacity."
+- "a large share of global internet traffic transits here" (Ashburn)
+- "Ulanqab-Hohhot Corridor - Inner Mongolia, China. The single largest concentration of hyperscale capacity on Earth (>3,000 MW) under Beijing's "East Data, West Computing" plan."
+- "NSA Utah Data Center - Bluffdale, UT (Camp Williams). The intelligence community's mass-data storage/processing facility (~1M+ sq ft, online 2014)"
+- "the Gui'an Big Data Valley (Guizhou - where Apple's China iCloud data is stored via GCBD, alongside Tencent and Huawei)"
+- "Highlander Hainan Underwater Data Center ... backed by four Chinese authorities."
+- "Stargate (OpenAI/Oracle/SoftBank, ~$500B, announced Jan 2025)"; "Stargate AI Campus - Abilene, TX"
+- "Their power draw is now outpacing regional grids."
+- "Microsoft Project Natick - seabed data center deployed off Orkney, Scotland (2018)"; "The proof-of-concept for subsea compute."
+- "Shanghai Offshore Underwater Data Center (China) - announced 2025; ~24 MW, offshore-wind-powered"
+- "Nautilus Data Technologies - barge-mounted floating data center at the Port of Stockton, California"
+- "Keppel’s Singapore floating park (under construction)"
+- "Placing compute underwater or on water sidesteps land, cooling, and (in some cases) regulatory constraints. It also moves infrastructure into contested or lightly-governed maritime space."

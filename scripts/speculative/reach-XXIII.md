@@ -1,28 +1,20 @@
 ID: XXIII
-HEADLINE: Discretion is the weapon - who is charged, who is spared, and which emergency never ends.
+HEADLINE: Every documented line ends at a chokepoint, and every chokepoint answers to a state.
 BODY:
-<p>The Department of Justice that signed the 2007 non-prosecution agreement for Epstein and immunised co-conspirators it never named brought thirteen felony counts against a 25-year-old for downloading journal articles. Both nominal victims said they did not want the case; the prosecution cited "general deterrence of others." That is not inconsistency. It is the instrument working: shield the network, make an example of the man who opened the archive.</p>
-<p>9/11 shows the method at full scale, and every documented node is institutional. Fifty to sixty CIA officers read that two known al-Qaeda operatives held US visas, and neither was put forward for a watchlist until 21-23 August 2001. A year earlier a think tank had written that transformation needed "a new Pearl Harbor"; the transformation it described followed. Continuity of Government ran for the first time in its history. Twenty-three days after the attack STELLAR WIND was authorised. The emergency proclaimed on 14 September 2001 has been continued every year since, and sixty words with no named enemy state and no expiry still carry operations in more than a hundred countries. The attack threw the switch on machinery already built.</p>
-<p>The exit ladder says the same thing in blood. Where the paperwork exists it does not show entertainers killed for what they knew. It shows the FBI's informant inside Fred Hampton's security handing over a floor plan, an NYPD undercover inside Malcolm X's own security while the state withheld evidence that would have cleared two men it imprisoned, the CIA dosing Frank Olson with LSD nine days before his fall, and a campaign urging Martin Luther King Jr. toward suicide. Organizers, scientists, reporters - and the admissions surfacing decades later.</p>
-PROVE: A released CIA or FBI document showing the reporting on al-Hazmi and al-Mihdhar was held back from the watchlist by instruction rather than lost by failure.
-KILL: The contemporaneous files showing the 2007 non-prosecution terms were reached by ordinary negotiation and the 2001 watchlist delay by ordinary error, with no instruction from above in either.
-DRAWS_ON: xvi-united-states-v-swartz-the-ruling-recorded-the-prosecution-documented, xvi-9-11-vector-5-the-failure-record-in-the-governments-own-words, xvi-9-11-vector-2-continuity-of-government-the-first-activation, xvi-9-11-vector-3-the-emergency-that-did-not-end, xvi-9-11-vector-4-the-surveillance-state-dated-to-the-day, xx-the-ladder-four-tiers-sorted-by-what-the
-LIVING_NAMES: none named. The unnamed prosecutor quoted ("general deterrence of others") appears only for his documented statement to MIT's counsel; the unnamed co-conspirators appear only as the NPA's documented immunity, unidentified. Named people are all dead: Jeffrey Epstein, Aaron Swartz (the "25-year-old", named in the section), Fred Hampton, Malcolm X, Frank Olson, Martin Luther King Jr., Nawaf al-Hazmi and Khalid al-Mihdhar (9/11 hijackers).
+<p>Read the lines as one drawing. The Federal Reserve, the European Central Bank, the Bank of England and the People's Bank of China all sit as members of one house in Basel, the "central bank of central banks". One Dutch firm is the sole supplier of the EUV machines TSMC and Samsung depend on - "a single chokepoint under the entire advanced-chip industry". Saudi Aramco, a state oil company, operates the largest conventional oilfield on Earth. Glencore runs cobalt-copper at Kolwezi and became sole owner of Cerrejón in 2022. Money, chips, oil and metal each pass through one gate, and the gates are few enough to count on a page.</p>
+<p>Then look at who buys. The National Reconnaissance Office buys commercial satellite imagery from Maxar, BlackSky and Planet. Booz Allen is a core NSA contractor, wired to the Utah Data Center. The NYPD used Clearview's facial-recognition engine. Hikvision and Dahua supplied the Xinjiang mass-surveillance platform. Washington and Beijing run the same model: the state no longer builds its own eyes, it rents them, and the companies are the collection layer with the state as the customer of record. The surveillance capacity sits on private balance sheets, which is where it is hardest to see and hardest to vote against.</p>
+<p>And the drawing is smaller than the thing. Rio Tinto, BHP, De Beers and Freeport carry no marker, so their lines are left undrawn. The grid on the map is the part that has already surfaced in a filing. The rest of it runs through the same few gates.</p>
+PROVE: A contract or directive showing a state setting the terms on which one of these chokepoints sells - an instruction binding ASML's EUV deliveries, or an NRO term giving the agency first call on Maxar, BlackSky or Planet's collection.
+KILL: A second supplier of EUV machines to TSMC and Samsung, and NRO imagery contracts that leave Maxar, BlackSky and Planet selling to all buyers on equal terms, would show markets rather than a grid.
+DRAWS_ON: xxii-membership-central-banks-the-bis-white-lines, xxii-supply-chains-orange-lines, xxii-ownership-operation-magenta-cyan-lines, xxii-customers-gold-lines
+LIVING_NAMES: none
 FACT_CHECK:
-- "The same Department of Justice that, in the non-prosecution agreement of 2007 documented in Section II, declined federal charges against Epstein and immunised co-conspirators it had not named, brought thirteen felony counts against a 25-year-old for downloading journal articles."
-- "Both nominal victims are on record as not wanting it."
-- "had to consider “general deterrence of others.”"
-- "Discretion is the instrument."
-- "Every vector this document tracks has a documented 9/11 node, and in every case the documented node is institutional."
-- "between fifty and sixty CIA officers had read intelligence reporting that two known al-Qaeda operatives, Nawaf al-Hazmi and Khalid al-Mihdhar, held US visas - from January and March 2000 - and that neither was put forward for a watchlist until 21–23 August 2001"
-- "Page 51 of the Project for the New American Century’s Rebuilding America’s Defenses, September 2000: “... absent some catastrophic and catalyzing event – like a new Pearl Harbor.”"; "that the transformation the sentence describes followed"
-- "11 September 2001 was the first activation of Continuity of Government in its history"
-- "4 October 2001 - twenty-three days after the attack - the President authorised the programme later code-named STELLAR WIND"
-- "Proclamation 7463 ... was signed on 14 September 2001. It has been continued every year since by every President"
-- "the 2001 Authorization for Use of Military Force - sixty words, no named enemy state, no geography, no expiry. It remains the legal basis on which US forces have conducted operations described as counter-terrorism in more than a hundred countries."
-- "this is the one recorded instance of the switch being thrown"
-- "Where the documentary record exists, it does not show entertainers being killed for what they might say; it shows organizers, scientists and reporters being surveilled, disrupted, and in four documented instances killed or dosed, with the paperwork surfacing decades later"
-- "informant William O’Neal, inside Hampton’s security, supplied the Bureau a floor plan of the apartment"
-- "an NYPD BOSSI undercover officer, Gene Roberts, served inside Malcolm X’s own security"; "the state withheld material that would have cleared two men it imprisoned for decades"
-- "fell from a 13th-floor window of the Statler Hotel in New York nine days after being dosed with LSD without his knowledge by the CIA"
-- "the 1964 anonymous package and letter urging him toward suicide"
+- "The US Federal Reserve, European Central Bank, Bank of England, and People's Bank of China are all member central banks of the Bank for International Settlements — the "central bank of central banks" in Basel."
+- "ASML → TSMC and ASML → Samsung: the Dutch firm is the sole supplier of the EUV lithography machines those fabs depend on — a single chokepoint under the entire advanced-chip industry."
+- "Saudi Aramco → Ghawar: the state oil company operates the largest conventional oilfield on Earth."
+- "the Baar-based trader operates KCC/Mutanda cobalt-copper and became sole owner of the Cerrejón coal mine in 2022" (Glencore → Kolwezi (DRC))
+- "NRO → Maxar, BlackSky, and Planet: the National Reconnaissance Office buys commercial satellite imagery from all three"
+- "Booz Allen Hamilton → NSA Utah Data Center: Booz Allen is a core NSA contractor"
+- "Clearview AI → NYPD: the department used Clearview's facial-recognition engine."
+- "Hikvision → IJOP and Dahua → IJOP: both Chinese camera makers supplied equipment tied to the Xinjiang mass-surveillance platform"
+- "Where an operator or owner had no marker of its own (Rio Tinto, BHP, De Beers, Freeport), the link was left undrawn rather than invented."
