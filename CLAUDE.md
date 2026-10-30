@@ -234,6 +234,18 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**ELON MUSK AND EPSTEIN; HE MOVES FROM 3 TO 6 NODES — 30 Oct 2026, live (main `8291239`, four clean reads). `research/MUSK-EPSTEIN.md` (synthesis) + `MUSK-EPSTEIN-{A-EMAILS,B-STATEMENTS,C-NODES}.md`; 257 quotes, all vq OK (20 DOJ primaries read; the committed copies write "[former wife]" for a private person, so those Q lines no longer match).** Author, pasting an X post: *"lets look at elon musk epstein notes, as he seems to not be on our high connectivity node list … hunt the facts, run speculation direction, add to pertinent parts of report"*.
+- **The post, graded:** every exchange it cites is real (DOJ release 30 Jan 2026, data sets 9–11), but it omits the other direction. The 25 Dec 2012 email declines the island; Epstein cancelled Dec 2013. The SpaceX visit of 25 Feb 2013 is understated: lunch confirmed, Epstein thanked him "for the tour", Musk said in 2020 Epstein "never toured SpaceX". "Then-wife" is wrong for Nov 2012. No document records Musk on the island.
+- **On the page:**
+  - III `cab-trump-s-second-cabinet-2025` gains a Musk block: his Senior Adviser/SGE status, the correspondence in order, his accounts 2019–Feb 2026, the two read together, the June 2025 "Trump is in the Epstein files" post and its deletion, the DOJ list ("Musk, Elon"), the USVI 2023 subpoena, Garcia's call for testimony. Tier: contact documented (rung 2), island visit not established.
+  - XII layer 3: contact now documented (was "attributed/contested"). VI: the SpaceX tour, the 2014 schedule entry and both directions of the emails.
+  - XXII calibration: 3 → 6 nodes, moved from Tier 5 to Tier 2 after Trump (SpaceX/NRO/Space Force; Senior Adviser; Project Meridian; xAI DoD award with the Anthropic disclosure; >$290m on 2024; Epstein contact). Portrait badge moved and set to 6. "Genetic architect" went with the rewrite.
+  - Map: SpaceX Hawthorne ↔ East 71st St townhouse, tier 2 (**no line to the island: it would imply a visit**); SpaceX ↔ Pentagon and xAI Colossus ↔ Pentagon, tier 3; the Hawthorne marker no longer says "headquarters" (IPO filing: Starbase). Map 1,167 / 459.
+  - Reach III gained one paragraph of questions ("What did he know when he wrote it?"); LIVING_NAMES records Musk.
+  - Corrections ledger row 2026-10-30.
+- **Held, his call:** XII's opening "(none accused by any survivor; DOJ states …)" reads as a §2 reassurance line; VI/XI disagree on four vs five mothers; Musk's "Because they are guilty" (naming four living, uncharged people) and "you went multiple times" (to Hoffman) are recorded in beat B, not on the page; the Feb 2013 passports email and two photographs were not opened (stop rule a).
+- Scale line 293 / 1,230 / 179. `build-transmissions.py` worked this time.
+
 **LUTNICK'S NODES BEFORE, ON AND AFTER 11 SEPT 2001 — researched 30 Oct 2026; the research is HELD, and page errors were fixed live (main `507d42f`, four clean reads). Files: `research/LUTNICK-9-11.md` (synthesis) + `LUTNICK-9-11-{A-BEFORE,B-DAY,C-AFTER}.md`, 260 quotes, all vq OK.** Author: *"pattern dig his nodes on september 11th pre during and after"*. Same evening he noted the clock read 9:11 pm EST; nothing is read from that (§2, no numerology).
 - **Finding:** no document ties Lutnick or Cantor to foreknowledge, trading or concealment.
 - **Four nodes recur in all three periods on documents:**
