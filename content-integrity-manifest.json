@@ -1,13 +1,13 @@
 {
-  "generated": "2026-10-30T22:36:11.864Z",
+  "generated": "2026-10-30T22:40:07.399Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "1bfa8eeb02a24454e46363f3a688848d51fa74a6792142e9a58185536276a1d8",
+  "fullFileHash": "495e1aaec9955001c175cbf6fed6ff88bd0e1c9ff85493e46ac6f483ec34d5e4",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "3671df0239382ef0335d0b872a7c39cded5cdf90374a32155e80c43fbe44e9c6",
+      "hash": "a4fc7a8c14828402aeb9ade8188ca94a985e33bb79043bd37cd5e3574953edbd",
       "length": 45055
     },
     {
@@ -1527,8 +1527,8 @@
     },
     {
       "id": "xxiv-the-signal-track-daft-punk-veridis-quo",
-      "hash": "ff7bff746fb3fb1bda9b16920b51de0b3357c8ceff9e79d49101a613b002021a",
-      "length": 3520
+      "hash": "2b98803076af98afa1316cbd7ba61b6bfcfbecc0708b410488674ea495105721",
+      "length": 3554
     },
     {
       "id": "xxiv-second-signal-tracy-chapman-talkin-bout-a",
@@ -8437,9 +8437,9 @@
     },
     {
       "index": 1138,
-      "hash": "0881944a319e8801f845a9102990a4d2689e6744219fa5d5d9c8a3441d0a6dc3",
+      "hash": "3e7c89173f2e5aea42a9b864ffbe77b7c60f763f16b13eee6f3b0a1fdbbbd597",
       "preview": "Nine tracks are written up here deliberately, as signal rather than decoration, ...",
-      "length": 1390
+      "length": 1424
     },
     {
       "index": 1139,
