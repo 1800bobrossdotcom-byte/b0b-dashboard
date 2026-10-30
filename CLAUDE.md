@@ -234,6 +234,8 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**AMERICA "A HORSE WITH NO NAME" REPLACES CARL CARLTON "EVERLASTING LOVE" ON THE SIGNAL BAR — 30 Oct 2026, live.** Author: *"replace everlasting love with horse with no name song"*. `mSZXWdKSQNM`, America - Topic (licensed; YouTube oEmbed; the id is the "Licensed audio" link on the song's Wikipedia page, read through the spider). Same slot (18th of 19, before Faith No More). `LS_KEY` `b0b_signal_v20` (a slot changed tracks); `signal-bar.js?v=27` on report, home and both maps. XXV's list of tracks carried without an entry now names it in place of *Everlasting Love*.
+
 **ELON MUSK AND EPSTEIN; HE MOVES FROM 3 TO 6 NODES — 30 Oct 2026, live (main `8291239`, four clean reads). `research/MUSK-EPSTEIN.md` (synthesis) + `MUSK-EPSTEIN-{A-EMAILS,B-STATEMENTS,C-NODES}.md`; 257 quotes, all vq OK (20 DOJ primaries read; the committed copies write "[former wife]" for a private person, so those Q lines no longer match).** Author, pasting an X post: *"lets look at elon musk epstein notes, as he seems to not be on our high connectivity node list … hunt the facts, run speculation direction, add to pertinent parts of report"*.
 - **The post, graded:** every exchange it cites is real (DOJ release 30 Jan 2026, data sets 9–11), but it omits the other direction. The 25 Dec 2012 email declines the island; Epstein cancelled Dec 2013. The SpaceX visit of 25 Feb 2013 is understated: lunch confirmed, Epstein thanked him "for the tour", Musk said in 2020 Epstein "never toured SpaceX". "Then-wife" is wrong for Nov 2012. No document records Musk on the island.
 - **On the page:**
