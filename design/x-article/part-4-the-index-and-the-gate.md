@@ -24,7 +24,7 @@ Who paid for it is not in the public record, and the three candidates fail three
 
 Herman Hollerith built tabulating machines for the 1890 US census, and the firm became IBM. The report's line: every camera and plate reader since is "that same operation performed faster and without paper."
 
-Twice, over Nazi Germany and apartheid South Africa, the question of what a register was used for reached a US court; twice it ended with no ruling on the merits. In 2020 IBM's chief executive told Congress it would stop offering general-purpose facial recognition, opposing its use "for mass surveillance, racial profiling, violations of basic human rights and freedoms."
+Twice, over Nazi Germany and apartheid South Africa, the question of what a register was used for reached a US court; twice it ended with no ruling on the merits. In 2020 IBM's chief executive told Congress it would stop offering general-purpose facial recognition, and opposed any technology's use "for mass surveillance, racial profiling, violations of basic human rights and freedoms."
 
 "When the vendor and the critic agree about the risk, the risk has stopped being contested and only the history is."
 
@@ -32,7 +32,7 @@ Twice, over Nazi Germany and apartheid South Africa, the question of what a regi
 
 In 2013 the Snowden documents named the plumbing. MUSCULAR reached Google's internal network "without Google's knowledge or consent". The NSA was collecting 5 billion cell phone location records a day.
 
-Now the grid is municipal and private. In metro Atlanta, 90.0% of mapped licence-plate cameras are Flock Safety's. An Illinois state audit found Flock had let US Customs and Border Protection reach Illinois plate data, in a state whose law restricts exactly that. Out-of-state and federal agencies queried San Francisco's Flock data more than 1.6 million times in seven months.
+In metro Atlanta, 90.0% of mapped licence-plate cameras are Flock Safety's. An Illinois state audit found Flock had let US Customs and Border Protection reach Illinois plate data, in a state whose law restricts exactly that. Out-of-state and federal agencies queried San Francisco's Flock data more than 1.6 million times in seven months.
 
 None of it needs a conspiracy: "consent is collected town by town and access is exercised nationally."
 
@@ -42,7 +42,7 @@ Project Maven, 2017: machine learning on drone footage for targeting recommendat
 
 Two specimens die here on the page. "Funded by the CIA from its inception" is withdrawn: In-Q-Tel, the CIA's venture arm, is a documented early shareholder, "and it is enough." The repeated "1,000+ targets per day" figure is retired as unverified.
 
-Project Nimbus, April 2021: $1.2 billion for Google and Amazon to serve the Israeli government, the military included. Lavender's list of about 37,000 Palestinians is attributed to six-source reporting and disputed by the IDF.
+Project Nimbus, April 2021: $1.2 billion for Google and Amazon to serve the Israeli government, the military included. Lavender's list of about 37,000 Palestinians as potential targets is attributed to six-source reporting and disputed by the IDF.
 
 Disclosure, as the report makes it: Anthropic, maker of Claude, "one of the AI tools used to compile this report", sits in this supply chain. The reader is told "an AI that helps write this report exists within the same supply chain as the AI that processes kill lists."
 
@@ -68,7 +68,7 @@ The report's own limit on the word: "It is where to start looking, not what to c
 
 Indian Creek, Florida. 84 residents. One bridge with a police checkpoint. Eleven sworn officers in the staff directory. The village calls itself "a private, residential municipality". Starbase, Texas, took the same form in May 2025: its mayor and both commissioners are SpaceX employees.
 
-The killed specimen: the billionaire bunker as the Epstein network. The two residents who own the largest infrastructure layers appear in the released files only as document mentions, with no documented meeting, investment, island visit or relationship. Co-location is not coordination, and refusing the cabal version "is what makes the parts that are documented impossible to wave away."
+The killed specimen: the billionaire bunker as the Epstein network. The two residents who own the largest infrastructure layers appear in the released Epstein files only as document mentions, with no documented meeting, investment, island visit or relationship with him. Co-location is not coordination, and refusing the cabal version "is what makes the parts that are documented impossible to wave away."
 
 The documented coordination is narrower and signed. Saudi Arabia's PIF committed $2B to Affinity Partners in June 2021; that its own screening panel objected and was overruled is the New York Times's account, relayed by House Oversight.
 
@@ -80,17 +80,17 @@ The reaches read the three sections as one structure: "The smart city, the stack
 
 The join between the orbital eye and the designation list, in the reach's words, is "being assembled in public, one contract at a time." The page grades that join a guaranteed null: unreachable, not refuted. And a trafficking node beside a data plant in one small town is a shared address, not a chain.
 
-And the study of what the military should buy is co-led by sellers. Project Meridian's co-leads, named from the stage, are Elon Musk, Palmer Luckey and Newt Gingrich, and Stars and Stripes reports that Anduril and SpaceX "Both hold multibillion-dollar defense contracts with the U.S. government." A structure at the documented tier, not a finding about anyone's intent.
+And the study of what the military should buy is co-led by sellers. Project Meridian's co-leads, named from the stage, are Elon Musk, Palmer Luckey and Newt Gingrich, and Stars and Stripes reports that Anduril and SpaceX "Both hold multibillion-dollar defense contracts with the U.S. government." That is a structure at the documented tier, not a finding about anyone's intent.
 
 ## What would settle it
 
 **Would prove it:** an NSPM-7 designation file or tasking order pointing orbital imagery or Maven targeting at people designated on the memorandum's opinion indicia. A governance instrument setting military or corporate authority above civilian law in the New Capital or New Albany. A document showing a direct pipe from PIF's NEOM money into Affinity Partners.
 
-**Would kill it:** NSPM-7 applied only to conduct. Both towns governed by ordinary civilian authorities, the Octagon answerable to the city. Records of AWS, Palantir, Starlink, Oracle and the PIF and MGX deals showing no shared counterparty, seat or instruction beyond co-location. And a Meridian report, due 28 January 2027, whose recommendations fall outside its co-leads' catalogues.
+**Would kill it:** NSPM-7 applied only to conduct. Both towns governed by ordinary civilian authorities, the Octagon answerable to the city. The infrastructure owners' records and the sovereign deals showing no shared counterparty, seat or instruction beyond co-location. And a Meridian report, due 28 January 2027, whose recommendations fall outside its co-leads' catalogues.
 
 ## Why trust any of this
 
-You shouldn't, on trust. The camera contract, the Merlin corrections, the withdrawn CIA phrasing and the refused bunker story sit on the page beside the claims that survived. That is where its line is.
+You shouldn't, on trust. The camera contract, the Merlin corrections, the withdrawn CIA phrasing and the refused bunker story sit on the page beside the claims that survived.
 
 Don't trust b0b.dev. Examine the evidence.
 

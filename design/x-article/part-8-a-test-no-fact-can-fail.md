@@ -12,11 +12,11 @@ Then it ran it down. Chapter 5, note 130: "A single U.S.-based institutional inv
 
 The report prints the surge and the explanation together. The surge is real. The explanation is documented. The specimen is dead.
 
-That is the method this whole series has been running on, and the last part is where the report turns it on the claims people bring to it.
+That is the method. Here the report turns it on the claims people bring to it.
 
 ## The rules, by name
 
-**Guaranteed null.** A claim confirmed by every possible outcome is confirmed by none. Secrecy, silence and non-publication are evidence about the custodian, not about what is held.
+**Guaranteed null.** A claim confirmed by every possible outcome is confirmed by none. Silence is evidence about the custodian, not the content.
 
 **Anti-map.** A shared timeline is not a chain. The report's own line: "An edge is a fact; a chain is a claim."
 
@@ -24,19 +24,17 @@ That is the method this whole series has been running on, and the last part is w
 
 **Naming error.** A label read later as evidence for the thing it named.
 
-**Tiering.** Documented, attributed, labeled, contested, unsupported. Testimony is evidence of an experience, never of a cause, and it climbs only on a document.
+**Tiering.** Documented, attributed, labeled, contested, unsupported. Testimony is evidence of an experience, never of a cause.
 
 ## Killed, and published at full weight
 
-**The missing trillions.** On 10 September 2001 the Defense Secretary said: "According to some estimates, we cannot track $2.3 trillion in transactions." The figure came from an Inspector General report of February 2000 on untracked accounting entries. Public eighteen months earlier, about entries rather than vanished money, and unconnected to the next morning.
+**The missing trillions.** On 10 September 2001 the Defense Secretary said: "According to some estimates, we cannot track $2.3 trillion in transactions." The figure came from an Inspector General report of February 2000 on accounting entries without audit trails: public for eighteen months, about entries rather than vanished money, and unconnected to the next morning.
 
 **The bin Laden flights.** No such flight left before airspace reopened on 13 September; the family charter left Boston on the 19th; the FBI interviewed 22 of 26 passengers. The Commission found "no evidence of a political intervention."
 
-**The anthrax.** ABC reported bentonite in the spores, presented as a signature of Iraq's programme. None was ever detected, and ABC conceded it six years later. The FBI closed the case on a scientist at the US Army's own laboratory, who died before charges; the National Academy of Sciences found the Bureau's science insufficient to carry that conclusion alone. A label reading "Iraq" did its work before a war, and the retraction arrived after. That is the naming error at its most expensive.
+**The anthrax.** ABC reported bentonite in the spores, presented as a signature of Iraq's programme. None was ever detected; ABC conceded it six years later. The FBI closed the case on a scientist at the US Army's own laboratory; who sent the letters is still not established. A label reading "Iraq" did its work before a war, and the retraction came after: the naming error at its most expensive.
 
-**The Calabasas crash.** The assassination reading is graded UNSUPPORTED: no engine or control malfunction found, a textbook spatial-disorientation track, a pilot previously cited for the same error. The report's verdict: "nine people died because a helicopter flew into fog."
-
-**"Paid in full."** Even the report's own closing verse gets the treatment. The popular gloss of τετέλεσται as a receipt stamp traces to tariff receipts published in 1896 and a lexicon from 1914; from 1934 papyrologists showed the abbreviation was a different word. The report files it as the cleanest naming error it holds, with a date, a lexicon and a retraction.
+***Paid in full.*** Even the report's closing verse gets the treatment. The popular gloss of τετέλεσται as a receipt stamp traces to tariff receipts published in 1896 and a lexicon from 1914; from 1934 the abbreviation on them was shown to be a different word. The report files it as its cleanest naming error: a date, a lexicon, a retraction.
 
 The discard pile is named on purpose. "A test that no fact can fail is not a test."
 
@@ -44,7 +42,7 @@ The discard pile is named on purpose. "A test that no fact can fail is not a tes
 
 Run the same rules over untimely deaths of people with unusual access and the list collapses to four cases with documented state action.
 
-Fred Hampton: an FBI informant inside his security supplied a floor plan; the city, county and federal government settled for $1.85 million. Malcolm X: an NYPD undercover officer served inside his security detail, and in 2021 the Manhattan DA moved to vacate two men's convictions over withheld evidence. Frank Olson: dosed with LSD by the CIA nine days before his fall, concealed for 22 years. Martin Luther King Jr.: the FBI's anonymous letter urging him toward suicide.
+Fred Hampton: an FBI informant inside his security supplied a floor plan; Chicago, Cook County and the federal government settled for $1.85 million. Malcolm X: an NYPD undercover officer served inside his security detail, and in 2021 the Manhattan DA moved to vacate two men's convictions over withheld evidence. Frank Olson: dosed with LSD by the CIA nine days before his fall, concealed for 22 years. Martin Luther King Jr.: the FBI's anonymous letter urging him toward suicide.
 
 Not one is a celebrity dying in an accident. "The pattern is real. It is just not the pattern the culture tells."
 
@@ -56,25 +54,25 @@ The same Department of Justice signed the 2007 agreement that immunised Epstein'
 
 ## A power on the page
 
-The Jared Kushner test case asks how a man who calls himself "just a volunteer" sits across from heads of state. The answer is documented: a 2017 Office of Legal Counsel opinion said a President "would remain free to consult those relatives as private citizens", and no written appointment, oath or financial disclosure for his 2025–26 role has been produced. CREW's suit makes allegations; his lawyer calls it without merit. The grade is a gap in accountability now in court. "It is not evidence of a hidden sponsor": the role is avowed, which is the opposite of deniable.
+The Jared Kushner test case asks how a man who calls himself "just a volunteer" sits across from heads of state. The documented answer: a 2017 Office of Legal Counsel opinion said a President "would remain free to consult those relatives as private citizens", and no written appointment, oath or financial disclosure for his 2025–26 role has been produced. The grade is a gap in accountability, now before a court in *CREW v. Kushner*. "It is not evidence of a hidden sponsor": the role is avowed, which is the opposite of deniable.
 
 ## The day that tests everything
 
-9/11 is where the method costs most. The documented nodes are all institutional. Fifty to sixty CIA officers read that two known al-Qaeda operatives held US visas, and neither was put forward for a watchlist until 21–23 August 2001. The Commission's chairs wrote that it was "set up to fail." The emergency proclaimed on 14 September 2001 is still in force. The 2001 war authorisation, sixty words with no named enemy and no expiry, has never been repealed.
+9/11 is where the method costs most, and every documented node is institutional. Fifty to sixty CIA officers read that two known al-Qaeda operatives held US visas, and neither was put forward for a watchlist until 21–23 August 2001. The Commission's chairs wrote that it was "set up to fail." The emergency proclaimed on 14 September 2001 is still in force; the 2001 war authorisation, sixty words with no named enemy, has never been repealed.
 
-And: "What the documented record does not contain, at any tier above hypothesis, is a directing hand." The demolition literature is left out because a hostile reader would use it to discard the failure record. In the report's words, "the day this document only accumulates is the day it is worth nothing."
+And: "What the documented record does not contain, at any tier above hypothesis, is a directing hand." The demolition literature is left out, because a hostile reader would use it to discard the failure record: "the day this document only accumulates is the day it is worth nothing."
 
 ## What a reader can do
 
-The contact page asks for corrections first, then public record: anything with a document number a stranger could pull. "Do not send anything you are not lawfully free to send." The inbox is an ordinary email address, not a secure drop.
+The contact page asks for corrections first, then public record with a document number a stranger could pull. It is an ordinary inbox, not a secure drop. "Do not send anything you are not lawfully free to send."
 
 ## For anyone serving
 
 The report's address to those inside opens on this: "This is not a call to disobey lawful orders." Nor a call to sabotage, desert, obstruct or leak.
 
-"All military orders are presumed lawful, and the presumption is strong." The protected routes are a Member of Congress or an Inspector General under 10 U.S.C. § 1034, and, for the intelligence community, PPD-19 as implemented by ICD-120. Retaliation for using them is itself the violation. "And do not send classified or privileged material to this report."
+"All military orders are presumed lawful, and the presumption is strong." The protected routes are a Member of Congress or an Inspector General under 10 U.S.C. § 1034, and, for the intelligence community, PPD-19 as implemented by ICD-120. The law prohibits reprisal for a protected communication, and prohibits anyone restricting your communication with an Inspector General or a Member of Congress. "And do not send classified or privileged material to this report."
 
-The hardest line is printed in full. Under UCMJ Article 94, a person who, with intent to usurp or override lawful military authority, "refuses, in concert with any other person, to obey orders or otherwise do his duty" is guilty of mutiny, and the maximum punishment is death. "This report does not propose, suggest, encourage or want coordinated refusal of orders".
+Under UCMJ Article 94, a person who, with intent to usurp or override lawful military authority, "refuses, in concert with any other person, to obey orders or otherwise do his duty" is guilty of mutiny, and the maximum punishment is death. "This report does not propose, suggest, encourage or want coordinated refusal of orders".
 
 If you are struggling: the Military and Veterans Crisis Line is 988, then press 1. Military legal assistance is free and confidential.
 
@@ -82,11 +80,9 @@ If you are struggling: the Military and Veterans Crisis Line is 988, then press 
 
 Here the reading goes past the documents.
 
-The published reach for the test cases reads discretion as the weapon: shield the network, make an example of the man who opened the archive. On 9/11 it says "The attack threw the switch on machinery already built." That is a reading. The record above holds no directing hand, and rung 5, tasked and run, is claimed for no one.
+The published reach for the test cases reads discretion as the weapon: shield the network, make an example of the man who opened the archive. On 9/11: "The attack threw the switch on machinery already built." That is a reading. The record holds no directing hand, and rung 5, tasked and run, is claimed for no one.
 
-The reach for the counter-architecture reads the whole system as running on participation, so "the answer is replacement, not reform": a seed that reproduces, a gravity filter, a library card.
-
-The last reach names the signature: "the maintained assurance that nothing requiring explanation is occurring."
+The counter-architecture reach reads the system as running on participation, so "the answer is replacement, not reform": a seed that reproduces, a gravity filter, a library card. And the last reach names the system's signature: "the maintained assurance that nothing requiring explanation is occurring."
 
 ## What would settle it
 
@@ -96,7 +92,7 @@ The last reach names the signature: "the maintained assurance that nothing requi
 
 ## The close
 
-Every discipline in the report, the tiers, the published nulls, the specimens killed in public, makes sense on one assumption. It is "written as though the ledger were already kept." The only open question is whether it is read honestly.
+The tiers, the published nulls, the specimens killed in public: each makes sense on one assumption. The report is "written as though the ledger were already kept", and the only open question is whether it is read honestly.
 
 Don't trust b0b.dev. Examine the evidence.
 

@@ -44,7 +44,7 @@ In July, the power of attorney.
 
 On 5 November Robert Maxwell goes over the side of the *Lady Ghislaine*, the yacht he named for her, off the Canary Islands. The inquest returns heart attack and accidental drowning, after three pathologists could not agree. Within weeks the Mirror pension theft surfaces: some £426–460 million.
 
-He is buried on the Mount of Olives with near-state honours. Israel's president gives the eulogy. Six current and former chiefs of Israeli intelligence are reported in attendance.
+He is buried on the Mount of Olives with near-state honours. Israel's president gives the eulogy, and the prime minister is among the mourners.
 
 One year, one family. A shared year is not a chain, and the record does not join these events. But it is the year a college dropout acquired the means to become whatever he was afterwards, and the year the woman who would be convicted as his co-principal arrived in his city.
 
