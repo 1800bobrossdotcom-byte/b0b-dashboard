@@ -1,5 +1,7 @@
 # The Gates Did Not Fail
 
+**Part 1 of 8 · b0b.dev, the report in parts**
+
 *Fifty years of the Epstein–Maxwell record, read as one decision made over and over. Every fact below is documented. Where the reading goes past the documents, it says so.*
 
 ---
@@ -96,4 +98,6 @@ You shouldn't, on trust. Every fact here is in the report with its source and it
 
 Don't trust b0b.dev. Examine the evidence.
 
-**b0b.dev**
+Read it at the source: https://www.b0b.dev/report#II
+
+*Next, Part 2: what survived him.*
