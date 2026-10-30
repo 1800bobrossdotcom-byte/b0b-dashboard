@@ -32,6 +32,7 @@
   // instruction (Overseer first, Faith No More last); The Smiths removed (its XXV essay stays).
   var TRACKS = [
     { id: 'iU6nkE-g3BM', label: 'Overseer &mdash; Heligoland' },                           // FATLANTIC — NOT a rights-holder channel (see header). ~26min: long tail after the song.
+    { id: '_38SWIIKITE', label: 'Barry McGuire &mdash; Eve of Destruction' }, // Barry McGuire - Topic (licensed; YouTube oEmbed). Placed second 30 Oct 2026, author's instruction ("remove that - instead add second"), in place of Beethoven's Seventh.
     { id: 'iEBw7tq4RfY', label: 'The Flying Stars of Brooklyn, NY &mdash; My God Has a Telephone' },  // Colemine Records (the label's channel; oEmbed; id from Flea Market Funk's 2017 post). Added 29 Oct 2026; song two at his instruction the same day.
     { id: 'roPiy2JydwA', label: 'Imogen Heap &mdash; Headlock' },                         // ImogenHeapVEVO (official video; oEmbed; id from the song's Wikipedia page). Song two, author's instruction 28 Oct 2026.
     { id: 'brxOrz5pqv4', label: 'L.A. Mass Choir &mdash; That&rsquo;s When You Bless Me' }, // L.A. Mass Choir - Topic (licensed; oEmbed). Replaced Iron & Wine 'Evening on the Ground (Lilith's Song)' 27 Oct 2026, author's instruction.
@@ -51,10 +52,9 @@
     { id: 'mSZXWdKSQNM', label: 'America &mdash; A Horse with No Name' },                    // America - Topic (licensed; oEmbed; the id is the 'Licensed audio' link on the song's Wikipedia page). Replaced Carl Carlton 'Everlasting Love' 30 Oct 2026, author's instruction.
     { id: 'kA9uaBqvRtA', label: 'Christopher Cross &mdash; Ride Like the Wind' }, // official video on the artist's own channel @christophercrosshq (oEmbed), commissioned by Seeker Music, the catalogue's owner (Shore Fire release, 10 June 2025). Added 30 Oct 2026, author's instruction.
   { id: 'gkJNKFAG3kI', label: 'Latyrx &mdash; Storm Warning (unofficial upload)' }, // 'Nick Russian' (@TheNickRussian) — NOT a rights-holder channel (oEmbed); titled 'Quannum Spectrum' (Quannum, 1999). No Topic or label copy found (YouTube search via WebSearch; the Topic channel carries other Latyrx tracks). Added 30 Oct 2026, author's instruction.
-  { id: '-4788Tmz9Zo', label: 'Beethoven &mdash; Symphony No. 7 (Royal Concertgebouw Orchestra, Iv&aacute;n Fischer)' }, // the orchestra's own channel @Concertgebouworkest (oEmbed); a full performance. Added 30 Oct 2026, author's instruction ("add beethoven 7th symphony").
   { id: 'O2KpEva4As4', label: 'Faith No More &mdash; We Care a Lot' }                    // Faith No More - Topic (Rhino/London-Sire; the 1987 Introduce Yourself recording; oEmbed). Added 27 Oct 2026, author's instruction.
   ];
-  var LS_KEY = 'b0b_signal_v23';  // bump on every reorder: a stored index points into the old list
+  var LS_KEY = 'b0b_signal_v24';  // bump on every reorder: a stored index points into the old list
   var SAVE_MS = 1000;
   var player = null, ready = false, dur = 0, saveTimer = null, errCount = 0;
   // Listener's playback modes, kept with the rest of the bar's state. shuffle picks the next track
