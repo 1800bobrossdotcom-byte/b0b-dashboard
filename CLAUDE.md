@@ -234,6 +234,42 @@ than once.
 
 ## 7. OPEN AT LAST WRITE — 12 September 2026
 
+**LUTNICK'S NODES BEFORE, ON AND AFTER 11 SEPT 2001 — researched 30 Oct 2026; the research is HELD, and page errors were fixed live (main `507d42f`, four clean reads). Files: `research/LUTNICK-9-11.md` (synthesis) + `LUTNICK-9-11-{A-BEFORE,B-DAY,C-AFTER}.md`, 260 quotes, all vq OK.** Author: *"pattern dig his nodes on september 11th pre during and after"*. Same evening he noted the clock read 9:11 pm EST; nothing is read from that (§2, no numerology).
+- **Finding:** no document ties Lutnick or Cantor to foreknowledge, trading or concealment.
+- **Four nodes recur in all three periods on documents:**
+  - his control of the firm (the 1996 Delaware settlement through to the divestiture closing on 6 Oct 2025);
+  - One World Trade Center;
+  - the Rochelle Park and London data centres, named in eSpeed's 10-K of 6 Mar 2001;
+  - the Treasury market: inter-dealer broker in 2001, primary dealer only from 1 Aug 2006, and from 2021 custodian of "a portion" of Tether's Treasuries.
+  - These describe the firm, not 11 September; the Treasury node is a guaranteed null, because a Treasury dealer touches Treasuries in every period.
+- **Killed:**
+  - the RT presenter's claim that Cantor bought put options;
+  - a 2026 Substack's "note 130 names a CIA official" (a misquote);
+  - "absent, so he knew";
+  - "dead men tell no tales";
+  - "conveniently backed up";
+  - CNN's archive files its 2002 anniversary special as "Aired August 31, 2001", a trap for anyone hunting a "pre-9/11" transcript.
+- **Corrected in place** (ledger 2026-10-30; two TESTED rows added):
+  - VIII and XXI said "managed the majority of Tether's $80B+"; Cantor's own SEC filing says "a portion". Replaced with the filing, the convertible note he negotiated ("Yes. I participated in the negotiations."), his "no equity" line followed by "owns a convertible bond", Twenty One agreed 13 Dec 2024 while he was nominee, and the divestiture.
+  - VIII and XXI said "$2B Bitcoin lending facility with Trump family"; the announcement names no Trump-family party.
+  - **XXI's asset-relocation line no longer names Lutnick** (the living-person defect flagged since 26 Oct).
+  - XXIV vector 1:
+    - Gary, "trapped on 103", rang their sister (not Howard);
+    - "restated in 2024" is now the 29 Jan 2025 hearing;
+    - the pay stoppage is dated 15/30 Sept;
+    - the $25M is now Fox Business's "$15 million to $25 million", reported as speculation inside the firm;
+    - "two sections up" is now "in Section II".
+  - The map marker's Tether line and its 658 wording.
+- **Held for his call:**
+  - the account version by version (drift in detail only);
+  - the 25 percent retold: "profits" from 2001 to 2014, "salaries" to the Senate in 2025;
+  - eSpeed's $154M against the pay stoppage;
+  - the Relief Fund's 990 figures;
+  - his Memorial trusteeship;
+  - the naming guard between Kenneth Feinberg (VCF) and Stephen Feinberg (DepSecDef).
+- **Not checked:** VIII's "Tether implicated in Russian, Iranian, and DPRK sanctions evasion"; the date of the Epstein testimony, which appears three ways (VIII, III, II).
+- Scale line 293 / 1,224 / 178. `build-transmissions.py` 404'd again.
+
 **LUTNICK'S HOUSE, FROM THE CITY'S OWN REGISTER — 30 Oct 2026, live.** Author, pointing at `#cab-trump-s-second-cabinet-2025`: *"go harder on lutnick, epstein sold him the house for 10 dollars? neigbor for many years"*.
 - **The register (NYC Dept of Finance ACRIS open data, data.cityofnewyork.us datasets 8h5j-fqxa / bnx9-e6tj / 636b-3b5g; Manhattan block 1386, lot 12; spider-ledgered):**
   - 1988: deed Xandra Corporation N.V. → SAM Conversion Corp.
