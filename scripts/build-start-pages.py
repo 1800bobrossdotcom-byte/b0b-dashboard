@@ -432,6 +432,9 @@ RETRACTIONS = [
     ('2026-10-29', 'VIII, XXI', 'The cabinet map said Epstein &ldquo;contributed to&rdquo; a 2018 Lutnick dinner; the calibration index said Burns had &ldquo;three Epstein meetings&rdquo; documented, and that Clinton&rsquo;s &ldquo;Secret Service dismissals are public record&rdquo;.',
      'Corrected from the documents: the dinner was on 11 Dec 2017, and the solicitation read shows Epstein declining the table (&ldquo;no, tell lutnik he can fill them&rdquo;); Burns had three meetings scheduled in Epstein&rsquo;s calendar, two acknowledged by his spokesperson; for Clinton, the logs list no agent on some legs, and the flight count differs by source (four trips by his office, at least 26 legs by FAA logs).',
      'The cabinets research for the new Section III.'),
+    ('2026-10-29', 'II', 'Said, from secondary reporting, that the 1998 sale of the house next to Epstein&rsquo;s ran for nominal consideration plus assumption of a roughly $4M mortgage, and read it as property moving for &ldquo;consideration that is not a market price&rdquo;.',
+     'Replaced with the city&rsquo;s own land-record index: the chain from a trust with Epstein as trustee (1992) to Comet Trust (1996) to Lutnick (deed dated January 1998), and a new $4,000,000 mortgage to Chase recorded the same day. The price and any recited consideration were not read, and are stated as not established.',
+     'The author asked whether Epstein sold Lutnick the house for $10; the register was read to answer.'),
 ]
 
 TESTED = [
