@@ -435,9 +435,14 @@ RETRACTIONS = [
     ('2026-10-29', 'II', 'Said, from secondary reporting, that the 1998 sale of the house next to Epstein&rsquo;s ran for nominal consideration plus assumption of a roughly $4M mortgage, and read it as property moving for &ldquo;consideration that is not a market price&rdquo;.',
      'Replaced with the city&rsquo;s own land-record index: the chain from a trust with Epstein as trustee (1992) to Comet Trust (1996) to Lutnick (deed dated January 1998), and a new $4,000,000 mortgage to Chase recorded the same day. The price and any recited consideration were not read, and are stated as not established.',
      'The author asked whether Epstein sold Lutnick the house for $10; the register was read to answer.'),
+    ('2026-10-30', 'VIII, XXI, XXIV, map', 'Said Cantor &ldquo;managed the majority of Tether&rsquo;s $80B+&rdquo; reserves, that its $2B bitcoin lending business was a facility &ldquo;with Trump family&rdquo;, listed &ldquo;Lutnick/Cantor Fitzgerald/Tether&rdquo; among the reserves in the asset-relocation hypothesis, and said Gary Lutnick rang his brother to say goodbye.',
+     'Corrected from Cantor&rsquo;s own SEC filing and the Senate hearing record: from 2021 Cantor was custodian and trading partner for &ldquo;a portion&rdquo; of the Treasuries backing Tether, and a Cantor affiliate holds a convertible note he negotiated; the lending announcement names no Trump-family party; no document gives Lutnick control of Tether&rsquo;s reserves, and his divestiture of Cantor closed on 6 Oct 2025; by his 2001 account Gary rang their sister. Lutnick&rsquo;s share of the 2013 airline settlement is now the $15M&ndash;$25M Fox Business reported as speculation inside the firm.',
+     'The research on Lutnick&rsquo;s nodes before, on and after 11 September 2001.'),
 ]
 
 TESTED = [
+    ('That Cantor Fitzgerald kept foreknowledge of 11 September secret and bought put options', 'It names no trade or account; the Commission traced every profitable put to traders with no tie to al Qaeda.'),
+    ('That the 9/11 Commission&rsquo;s note 130 names a CIA official as the buyer of the United Airlines puts', 'The note names no one; it says the buyer had &ldquo;no conceivable ties to al Qaeda&rdquo;.'),
     ('That Epstein signed for the move of a CIA airline to Ohio', 'The CIA had sold the airline in 1973; &ldquo;signatory&rdquo; has no document.'),
     ('That Israeli &ldquo;military-grade&rdquo; radio equipment was installed at Zorro Ranch', 'The document is a 2014 quote for rural phone and internet backhaul, never built.'),
     ('That DARPA &ldquo;solved recursive self-improvement&rdquo; a decade ago', 'No program on the list claims it; what is real is the PAL&rarr;CALO&rarr;Siri lineage, which is published.'),

@@ -1,13 +1,13 @@
 {
-  "generated": "2026-10-30T01:02:24.384Z",
+  "generated": "2026-10-30T01:37:56.308Z",
   "version": "1.0.0",
   "tool": "Linguistic Integrity Verification (LIV)",
   "reportFile": "site/report.html",
-  "fullFileHash": "017b9a6b614cfe91bf18e0ca085723bece23e848dcac7ac219557d819cc0b427",
+  "fullFileHash": "d9072f7034e9ff8b831e6d62fd2f2d7cab18cb9a0f09d000d97c7a4e6225c72c",
   "sectionBlocks": [
     {
       "id": "_preamble",
-      "hash": "402b4884fd251c379a5ac3706fb1b8b8b4fbcb8ac542c8e7e09031220a2900fe",
+      "hash": "5ffbb7a73fb9920a030fea153927d90c6e47fdd1531d3c53126ae08210bdcb00",
       "length": 45055
     },
     {
@@ -532,8 +532,8 @@
     },
     {
       "id": "vii-cabinet-penetration-map-four-administrations",
-      "hash": "ff66f85f0ad5375babd4a63b1d56ab9c0a2b95b6b2359e4186e665e03e274cd3",
-      "length": 19221
+      "hash": "4d8ecfa4e1fe3810d395b9f177a3e1d6cd1a027d2088890a4ad3c1267778a1b3",
+      "length": 20052
     },
     {
       "id": "vii-jonathan-greenblatt-the-crown-connection",
@@ -597,8 +597,8 @@
     },
     {
       "id": "viii-the-epstein-bridge-into-bitcoin-governance",
-      "hash": "796167aff6f6a7885a319b6d77751cdca52923e463e202d6176d7412c7f164e4",
-      "length": 4439
+      "hash": "385c31ea0daff2c3f9dd4599cb9fc2d88d5aabf7dfacfd8b800d623686c6eb71",
+      "length": 4489
     },
     {
       "id": "viii-the-inversion-trump-holds-the-coin-and-governs",
@@ -1287,8 +1287,8 @@
     },
     {
       "id": "XXI",
-      "hash": "53a8aff4b6f2ffd3dfe4743b971d01cc1af0d8344c0aca460c5c3ea8deb7f498",
-      "length": 36465
+      "hash": "a04abc4dba081a0b80fd9804c066e5b06f4a89ce9c22fb1ca630b63933f2e6d9",
+      "length": 36561
     },
     {
       "id": "xx-pattern-analysis-what-the-calibration-reveals",
@@ -1302,8 +1302,8 @@
     },
     {
       "id": "xx-operational-note-asset-relocation-hypothesis",
-      "hash": "6479bba7755108bcd446e315f6fe7f3d6d80dfd7b8d69a51466a6657c81eac49",
-      "length": 5872
+      "hash": "8fc83b43f3fd9120c5f971dbb739e5c75f4880aa8d069e4444bcd89e666f856b",
+      "length": 5873
     },
     {
       "id": "xx-pattern-notes-geographic-and-programmatic",
@@ -1422,8 +1422,8 @@
     },
     {
       "id": "xvi-9-11-vector-1-cantor-fitzgerald-and-the-two-pools-of-money",
-      "hash": "902d3448abb9e840bb58e6c01f94fb57cf6dcd3d68d8cae55e39881adfb7d2bc",
-      "length": 1933
+      "hash": "5763fbd4607df532603060b478b2c4dcba33cdb6713cb2c6ec9ff2bbd2df84b8",
+      "length": 2163
     },
     {
       "id": "xvi-9-11-vector-2-continuity-of-government-the-first-activation",
@@ -8059,21 +8059,21 @@
     },
     {
       "index": 1075,
-      "hash": "ed13859427c819cf37d0462dadaef302f8c98e8212e81fcda01019f6b5f404c9",
+      "hash": "25e8becb052ebee2781cea2db71fe1c775f70aa9aba5a68c5b92ded01cec58af",
       "preview": "Where he was. Howard Lutnick was not in the North Tower on the morning of 11 Sep...",
-      "length": 545
+      "length": 674
     },
     {
       "index": 1076,
-      "hash": "64d01d61b18bd9e197cce4cc4fb6dff0aa3be97d691f5896b687e54fae5e3e0d",
-      "preview": "The paycheques. Within days of the attack the firm stopped paying the salaries o...",
-      "length": 463
+      "hash": "08f2e524c9531157ab80eb5e1a8d93f23fc0ee68eba9f6a5b079e523cf5b5251",
+      "preview": "The paycheques. The last paycheques for the missing went out on 15 September, co...",
+      "length": 508
     },
     {
       "index": 1077,
-      "hash": "aad8a7a6b489aef91e5fa2ca8b04645759d16e95d8bb3fd96a79f70b57e30f03",
+      "hash": "4faacd1a85ad19056d6dabe1e9554ace5eefd7dfe9923de7a552458c6841d62e",
       "preview": "The two pools of money, which is the finding. The $180 million to families came ...",
-      "length": 923
+      "length": 979
     },
     {
       "index": 1078,

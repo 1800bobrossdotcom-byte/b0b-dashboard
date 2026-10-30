@@ -233,9 +233,25 @@
    "page_said": "Said, from secondary reporting, that the 1998 sale of the house next to Epstein’s ran for nominal consideration plus assumption of a roughly $4M mortgage, and read it as property moving for “consideration that is not a market price”.",
    "replaced_by": "Replaced with the city’s own land-record index: the chain from a trust with Epstein as trustee (1992) to Comet Trust (1996) to Lutnick (deed dated January 1998), and a new $4,000,000 mortgage to Chase recorded the same day. The price and any recited consideration were not read, and are stated as not established.",
    "found_by": "The author asked whether Epstein sold Lutnick the house for $10; the register was read to answer."
+  },
+  {
+   "id": "C-2026-10-30-1",
+   "date": "2026-10-30",
+   "where": "VIII, XXI, XXIV, map",
+   "page_said": "Said Cantor “managed the majority of Tether’s $80B+” reserves, that its $2B bitcoin lending business was a facility “with Trump family”, listed “Lutnick/Cantor Fitzgerald/Tether” among the reserves in the asset-relocation hypothesis, and said Gary Lutnick rang his brother to say goodbye.",
+   "replaced_by": "Corrected from Cantor’s own SEC filing and the Senate hearing record: from 2021 Cantor was custodian and trading partner for “a portion” of the Treasuries backing Tether, and a Cantor affiliate holds a convertible note he negotiated; the lending announcement names no Trump-family party; no document gives Lutnick control of Tether’s reserves, and his divestiture of Cantor closed on 6 Oct 2025; by his 2001 account Gary rang their sister. Lutnick’s share of the 2013 airline settlement is now the $15M–$25M Fox Business reported as speculation inside the firm.",
+   "found_by": "The research on Lutnick’s nodes before, on and after 11 September 2001."
   }
  ],
  "tested_not_adopted": [
+  {
+   "claim": "That Cantor Fitzgerald kept foreknowledge of 11 September secret and bought put options",
+   "why": "It names no trade or account; the Commission traced every profitable put to traders with no tie to al Qaeda."
+  },
+  {
+   "claim": "That the 9/11 Commission’s note 130 names a CIA official as the buyer of the United Airlines puts",
+   "why": "The note names no one; it says the buyer had “no conceivable ties to al Qaeda”."
+  },
   {
    "claim": "That Epstein signed for the move of a CIA airline to Ohio",
    "why": "The CIA had sold the airline in 1973; “signatory” has no document."
